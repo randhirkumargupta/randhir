@@ -1,1 +1,1 @@
-# India Today CMS Repository (Drupal)
+# India Today CMS Codebase (Drupal)
