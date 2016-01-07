@@ -18,6 +18,7 @@ dependencies[] = field_permissions
 dependencies[] = field_ui
 dependencies[] = field_validation
 dependencies[] = module_filter
+dependencies[] = pathauto
 dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = views
