@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Provide structure for the Cancel Button.
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function cancel_button_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'user_register_form') {
+$destination = 'manage-users';
+
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), $destination),
+    '#weight' => 20,
+  );
+  }
+}
+
+
+
+
+
