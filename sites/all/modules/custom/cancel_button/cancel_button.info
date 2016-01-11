@@ -1,0 +1,10 @@
+name = Cancel Button
+description = "Provide Cancel Button in User profile."
+core = 7.x
+
+
+; Information added by Drupal.org packaging script on 2014-12-19
+version = "7.x-3.0"
+core = "7.x"
+project = "cancel_button"
+datestamp = "1419029284"
