@@ -22,6 +22,7 @@ dependencies[] = field_ui
 dependencies[] = field_validation
 dependencies[] = metatag
 dependencies[] = module_filter
+dependencies[] = pathauto
 dependencies[] = rules
 dependencies[] = rules_admin
 dependencies[] = rules_scheduler
