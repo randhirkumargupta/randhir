@@ -40,6 +40,12 @@ function user_management_user_default_roles() {
     'weight' => 7,
   );
 
+  // Exported role: Site Admin.
+  $roles['Site Admin'] = array(
+    'name' => 'Site Admin',
+    'weight' => 9,
+  );
+
   // Exported role: Subeditor/Sr.Sub.
   $roles['Subeditor/Sr.Sub'] = array(
     'name' => 'Subeditor/Sr.Sub',
