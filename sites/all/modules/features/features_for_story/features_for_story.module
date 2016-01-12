@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Features for story feature.
+ */
+
+include_once 'features_for_story.features.inc';

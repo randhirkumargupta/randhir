@@ -1,0 +1,84 @@
+<?php
+/**
+ * @file
+ * features_supplement_magazine.features.user_permission.inc
+ */
+
+/**
+ * Implements hook_user_default_permissions().
+ */
+function features_supplement_magazine_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: 'create magazine content'.
+  $permissions['create magazine content'] = array(
+    'name' => 'create magazine content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create supplement content'.
+  $permissions['create supplement content'] = array(
+    'name' => 'create supplement content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any magazine content'.
+  $permissions['delete any magazine content'] = array(
+    'name' => 'delete any magazine content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any supplement content'.
+  $permissions['delete any supplement content'] = array(
+    'name' => 'delete any supplement content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own magazine content'.
+  $permissions['delete own magazine content'] = array(
+    'name' => 'delete own magazine content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own supplement content'.
+  $permissions['delete own supplement content'] = array(
+    'name' => 'delete own supplement content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any magazine content'.
+  $permissions['edit any magazine content'] = array(
+    'name' => 'edit any magazine content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any supplement content'.
+  $permissions['edit any supplement content'] = array(
+    'name' => 'edit any supplement content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own magazine content'.
+  $permissions['edit own magazine content'] = array(
+    'name' => 'edit own magazine content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own supplement content'.
+  $permissions['edit own supplement content'] = array(
+    'name' => 'edit own supplement content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  return $permissions;
+}
