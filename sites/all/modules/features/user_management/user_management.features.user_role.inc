@@ -16,10 +16,40 @@ function user_management_user_default_roles() {
     'weight' => 3,
   );
 
+  // Exported role: Co-ordinator.
+  $roles['Co-ordinator'] = array(
+    'name' => 'Co-ordinator',
+    'weight' => 12,
+  );
+
+  // Exported role: Copy Desk.
+  $roles['Copy Desk'] = array(
+    'name' => 'Copy Desk',
+    'weight' => 16,
+  );
+
   // Exported role: Copy Editor.
   $roles['Copy Editor'] = array(
     'name' => 'Copy Editor',
     'weight' => 6,
+  );
+
+  // Exported role: Correspondent.
+  $roles['Correspondent'] = array(
+    'name' => 'Correspondent',
+    'weight' => 11,
+  );
+
+  // Exported role: Design Head.
+  $roles['Design Head'] = array(
+    'name' => 'Design Head',
+    'weight' => 15,
+  );
+
+  // Exported role: Designer.
+  $roles['Designer'] = array(
+    'name' => 'Designer',
+    'weight' => 17,
   );
 
   // Exported role: Editor.
@@ -34,9 +64,33 @@ function user_management_user_default_roles() {
     'weight' => 4,
   );
 
-  // Exported role: Section Editor.
-  $roles['Section Editor'] = array(
-    'name' => 'Section Editor',
+  // Exported role: Photo Coordinator.
+  $roles['Photo Coordinator'] = array(
+    'name' => 'Photo Coordinator',
+    'weight' => 13,
+  );
+
+  // Exported role: Photo Head.
+  $roles['Photo Head'] = array(
+    'name' => 'Photo Head',
+    'weight' => 14,
+  );
+
+  // Exported role: Photographer.
+  $roles['Photographer'] = array(
+    'name' => 'Photographer',
+    'weight' => 18,
+  );
+
+  // Exported role: SEO.
+  $roles['SEO'] = array(
+    'name' => 'SEO',
+    'weight' => 10,
+  );
+
+  // Exported role: Section Editor/Anchor.
+  $roles['Section Editor/Anchor'] = array(
+    'name' => 'Section Editor/Anchor',
     'weight' => 7,
   );
 

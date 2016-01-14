@@ -27,13 +27,17 @@ function user_management_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    5 => '5',
+    7 => '7',
+    9 => '9',
     8 => '8',
+    10 => '10',
     6 => '6',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
@@ -208,20 +212,19 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'users';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   /* Field: User: Cancel link */
   $handler->display->display_options['fields']['cancel_node']['id'] = 'cancel_node';
   $handler->display->display_options['fields']['cancel_node']['table'] = 'users';
   $handler->display->display_options['fields']['cancel_node']['field'] = 'cancel_node';
   $handler->display->display_options['fields']['cancel_node']['label'] = 'Cancel';
-  $handler->display->display_options['fields']['cancel_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['cancel_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['cancel_node']['alter']['text'] = 'Inactive';
+  $handler->display->display_options['fields']['cancel_node']['text'] = 'Inactive';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Action';
+  $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[edit_node] | [cancel_node]';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -251,6 +254,7 @@ function user_management_views_default_views() {
   $handler->display->display_options['filters']['mail']['id'] = 'mail';
   $handler->display->display_options['filters']['mail']['table'] = 'users';
   $handler->display->display_options['filters']['mail']['field'] = 'mail';
+  $handler->display->display_options['filters']['mail']['operator'] = 'contains';
   $handler->display->display_options['filters']['mail']['exposed'] = TRUE;
   $handler->display->display_options['filters']['mail']['expose']['operator_id'] = 'mail_op';
   $handler->display->display_options['filters']['mail']['expose']['label'] = 'E-mail';
@@ -267,11 +271,22 @@ function user_management_views_default_views() {
     7 => 0,
     8 => 0,
     9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+    18 => 0,
+    19 => 0,
   );
   /* Filter criterion: User: First Name (field_first_name) */
   $handler->display->display_options['filters']['field_first_name_value']['id'] = 'field_first_name_value';
   $handler->display->display_options['filters']['field_first_name_value']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['filters']['field_first_name_value']['field'] = 'field_first_name_value';
+  $handler->display->display_options['filters']['field_first_name_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_first_name_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_first_name_value']['expose']['operator_id'] = 'field_first_name_value_op';
   $handler->display->display_options['filters']['field_first_name_value']['expose']['label'] = 'First Name';
@@ -288,6 +303,77 @@ function user_management_views_default_views() {
     7 => 0,
     8 => 0,
     9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+    18 => 0,
+    19 => 0,
+  );
+  /* Filter criterion: User: Mobile Number (field_mobile_number) */
+  $handler->display->display_options['filters']['field_mobile_number_value']['id'] = 'field_mobile_number_value';
+  $handler->display->display_options['filters']['field_mobile_number_value']['table'] = 'field_data_field_mobile_number';
+  $handler->display->display_options['filters']['field_mobile_number_value']['field'] = 'field_mobile_number_value';
+  $handler->display->display_options['filters']['field_mobile_number_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_mobile_number_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_mobile_number_value']['expose']['operator_id'] = 'field_mobile_number_value_op';
+  $handler->display->display_options['filters']['field_mobile_number_value']['expose']['label'] = 'Mobile Number';
+  $handler->display->display_options['filters']['field_mobile_number_value']['expose']['operator'] = 'field_mobile_number_value_op';
+  $handler->display->display_options['filters']['field_mobile_number_value']['expose']['identifier'] = 'field_mobile_number_value';
+  $handler->display->display_options['filters']['field_mobile_number_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+    18 => 0,
+    19 => 0,
+  );
+  /* Filter criterion: User: Roles */
+  $handler->display->display_options['filters']['rid']['id'] = 'rid';
+  $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
+  $handler->display->display_options['filters']['rid']['field'] = 'rid';
+  $handler->display->display_options['filters']['rid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['rid']['expose']['operator_id'] = 'rid_op';
+  $handler->display->display_options['filters']['rid']['expose']['label'] = 'Roles';
+  $handler->display->display_options['filters']['rid']['expose']['operator'] = 'rid_op';
+  $handler->display->display_options['filters']['rid']['expose']['identifier'] = 'rid';
+  $handler->display->display_options['filters']['rid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+    18 => 0,
+    19 => 0,
   );
   $handler->display->display_options['path'] = 'manage-users';
   $export['manage_users'] = $view;
