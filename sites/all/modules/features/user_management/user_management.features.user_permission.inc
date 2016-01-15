@@ -23,6 +23,18 @@ function user_management_user_default_permissions() {
     'module' => 'views',
   );
 
+  // Exported permission: 'access content'.
+  $permissions['access content'] = array(
+    'name' => 'access content',
+    'roles' => array(
+      'SEO' => 'SEO',
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'administer users'.
   $permissions['administer users'] = array(
     'name' => 'administer users',
@@ -150,6 +162,17 @@ function user_management_user_default_permissions() {
   // Exported permission: 'edit own page content'.
   $permissions['edit own page content'] = array(
     'name' => 'edit own page content',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Intern' => 'Intern',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'view own unpublished content'.
+  $permissions['view own unpublished content'] = array(
+    'name' => 'view own unpublished content',
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Intern' => 'Intern',
