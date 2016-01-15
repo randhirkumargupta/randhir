@@ -91,10 +91,10 @@ function features_for_story_strongarm() {
           'weight' => '4',
         ),
         'metatags' => array(
-          'weight' => '34',
+          'weight' => '36',
         ),
         'path' => array(
-          'weight' => '33',
+          'weight' => '35',
         ),
       ),
       'display' => array(),
@@ -105,16 +105,16 @@ function features_for_story_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'metatag_enable_node__story';
-  $strongarm->value = TRUE;
-  $export['metatag_enable_node__story'] = $strongarm;
+  $strongarm->name = 'filter_fallback_format';
+  $strongarm->value = 'plain_text';
+  $export['filter_fallback_format'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'metatag_enable_taxonomy_term__byline';
+  $strongarm->name = 'metatag_enable_node__story';
   $strongarm->value = TRUE;
-  $export['metatag_enable_taxonomy_term__byline'] = $strongarm;
+  $export['metatag_enable_node__story'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
