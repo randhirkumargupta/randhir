@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * The ITG Common module.
+ *
+ * Provides common customizations and functions.
+ *
+ */
+
+/**
+ * Define user role constants.
+ */
+//define('ANONYMOUS', 1);
+//define('AUTHENTICATED', 2);
+//define('ADMINISTRATOR', 3);
+//define('CONTENTWRITER', 6);
+//define('SITEADMIN', 8);
+//define('APPROVELEVEL1', 4);
+//define('APPROVELEVEL2', 5);
+//define('PUBLISHER', 7);
+
+/**
+ * Function for debugging arrays and objects.
+ * @param $arg
+ *   array or object to be printed.
+ */
+function p($arg) {
+    print '<pre>';
+    print_r($arg);
+    die;
+}
+
+function pr($arg) {
+    print '<pre>';
+    print_r($arg);
+    print '</pre>';
+}

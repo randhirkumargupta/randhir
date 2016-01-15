@@ -10,11 +10,31 @@
 function features_for_story_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'administer ckeditor'.
+  $permissions['administer ckeditor'] = array(
+    'name' => 'administer ckeditor',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'ckeditor',
+  );
+
   // Exported permission: 'create story content'.
   $permissions['create story content'] = array(
     'name' => 'create story content',
-    'roles' => array(),
+    'roles' => array(
+      'Editor' => 'Editor',
+    ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'customize ckeditor'.
+  $permissions['customize ckeditor'] = array(
+    'name' => 'customize ckeditor',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'ckeditor',
   );
 
   // Exported permission: 'delete any story content'.
@@ -29,13 +49,6 @@ function features_for_story_user_default_permissions() {
     'name' => 'delete own story content',
     'roles' => array(),
     'module' => 'node',
-  );
-
-  // Exported permission: 'delete terms in byline'.
-  $permissions['delete terms in byline'] = array(
-    'name' => 'delete terms in byline',
-    'roles' => array(),
-    'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in city'.
@@ -57,13 +70,6 @@ function features_for_story_user_default_permissions() {
     'name' => 'edit own story content',
     'roles' => array(),
     'module' => 'node',
-  );
-
-  // Exported permission: 'edit terms in byline'.
-  $permissions['edit terms in byline'] = array(
-    'name' => 'edit terms in byline',
-    'roles' => array(),
-    'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in city'.

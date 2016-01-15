@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * ITG Story module.
+ *
+ */
+
+
+
+/**
+ * Implements hook_block_info().
+ */
+function itg_story_block_info() {
+    $blocks['story_tab_form_block'] = array(
+      'info' => t('Story Form Tab Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+    );    
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function itg_story_block_view($delta = '') {
+    global $user;
+    $block = array();
+    $data = '';
+    switch ($delta) {
+        case 'story_tab_form_block':                       
+            $block['content'] = theme('story_tab_form_display_block', array('data' => $data));
+            break;        
+    }
+    return $block;
+}
+
+
+
+/**
+ * Implements hook_theme().
+ */
+function itg_story_theme($existing, $type, $theme, $path) {
+    $themes = array(
+      'story_tab_form_display_block' => array(
+        'template' => 'story-form-tab-template',
+        'path' => drupal_get_path('module', 'itg_story') . '/templates',
+        'variables' => array('data' => NULL),
+      ),
+      'story_node_form' => array(
+        'arguments' => array('form' => NULL),
+        'template' => 'story-node-form',
+        'path' => drupal_get_path('module', 'itg_story') . '/templates',
+        'render element' => 'form',
+      ),
+    );
+    return $themes;
+}

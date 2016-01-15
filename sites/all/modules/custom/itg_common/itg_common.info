@@ -1,0 +1,6 @@
+name = ITG Common
+description = "Contains common customizations and functions."
+package = "ITG"
+core = 7.x
+
+files[] = itg_common.module
