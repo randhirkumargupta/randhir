@@ -1,0 +1,8 @@
+name = ITG Story
+description = "ITG Story Module"
+core = 7.x
+package = ITG
+
+files[] = itg_story.module
+
+
