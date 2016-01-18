@@ -17,7 +17,19 @@ function itg_story_menu() {
       'page callback' => '_itg_story_reporter_details',
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_story.inc',
-    );
+  );
+  $items['story-title-list/autocomplete'] = array(
+    'page callback' => '_get_story_title_in_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
+  $items['story-nid-list/autocomplete'] = array(
+    'page callback' => '_get_story_nid_in_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
   return $items;
 }
 
@@ -76,6 +88,7 @@ function itg_story_theme($existing, $type, $theme, $path) {
  * Implemets hook_form_alter().
  */
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
+ 
   global $user, $base_url;
   $settings = array();
   
@@ -84,7 +97,27 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       $settings['base_url'] = $base_url;
       drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
       drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'story-menegment'),
+        '#weight' => 20,
+      );
     break;
       
   }
+}
+
+
+/**
+ * Implements hook_form_FORMID_alter().  
+ */
+function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
+   if ($form['#id'] == 'views-exposed-form-strory-menegment-page'){
+     $form['title']['#autocomplete_path'] = 'story-title-list/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+     
+     $form['nid']['#autocomplete_path'] = 'story-nid-list/autocomplete';
+     $form['nid']['#attributes'] = array('placeholder' => t('Nid'));
+   }
+   
 }

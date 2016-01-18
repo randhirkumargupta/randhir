@@ -112,9 +112,32 @@ function features_for_story_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'menu_options_story';
+  $strongarm->value = array(
+    0 => 'main-menu',
+  );
+  $export['menu_options_story'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_parent_story';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_story'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__story';
   $strongarm->value = TRUE;
   $export['metatag_enable_node__story'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'metatag_enable_taxonomy_term__category_management';
+  $strongarm->value = TRUE;
+  $export['metatag_enable_taxonomy_term__category_management'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -153,6 +176,13 @@ function features_for_story_strongarm() {
   $strongarm->name = 'save_continue_story';
   $strongarm->value = 'Save and add fields';
   $export['save_continue_story'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_story';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_story'] = $strongarm;
 
   return $export;
 }
