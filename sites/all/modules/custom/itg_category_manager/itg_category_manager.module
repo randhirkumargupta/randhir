@@ -1,0 +1,290 @@
+<?php
+/**
+ * @file
+ * Module file for the ITG Taxonomy Manager module.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function itg_category_manager_help($path, $arg) {
+  if ($path == 'admin/help#itg_category_manager') {
+    $output = '<h3>' . t('About') . '</h3>';
+    $output .= '<p>' . t("The ITG Taxonomy Manage module prevents Drupal administrators from adding duplicate taxonomy vocabularies and/or terms.") . '</p>';
+    $output .= '<p>' . t("The module restricts to delete taxonomy terms, if it is using by any content.") . '</p>';
+    return $output;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function itg_category_manager_menu() {
+
+  $items = array();
+
+  $items['admin/config/itg_category_manager'] = array(
+    'title'            => 'ITG Category Manager',
+    'description'      => 'Configuration for ITG Category Manager module.',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('itg_category_manager_form'),
+    'access arguments' => array('administer taxonomy'),
+  );
+
+  return $items;
+}
+
+/**
+ * Form builder; creates and displays the ITG Category Manager
+ * configuration settings form.
+ */
+function itg_category_manager_form($form, &$form_state) {
+
+  // Checkboxes to choose what should be checked for dupes (vocab, terms, both)
+  $form['itg_category_manager_types'] = array(
+    '#type'          => 'checkboxes',
+    '#title'         => 'Check for duplicate',
+    '#default_value' => variable_get('itg_category_manager_types', array()),
+    '#options'       => array(
+      'vocab' => t('Vocabularies'),
+      'term'  => t('Terms (within a vocabulary)'),
+    ),
+  );
+
+  $vocabs = taxonomy_get_vocabularies();
+  $options = array();
+  foreach ($vocabs as $v) {
+    $options[$v->vid] = $v->name;
+  }
+  $form['itg_category_manager_vocabularies'] = array(
+    '#type'          => 'checkboxes',
+    '#title'         => 'Limit term check on specific vocabularies',
+    '#default_value' => variable_get('itg_category_manager_vocabularies', array()),
+    '#options'       => $options,
+    '#description'   => t('If no option is selected, all terms will be checked for duplicates.'),
+  );
+
+  // Checkbox to indicate whether the check should be case-sensitive
+  $form['itg_category_manager_case_sensitive'] = array(
+    '#type'  => 'checkbox',
+    '#title' => "Case-sensitive comparison (e.g. 'Foo' and 'foo' are not duplicates if checked).",
+    '#default_value' => variable_get('itg_category_manager_case_sensitive'),
+  );
+
+  return system_settings_form($form);
+
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
+ */
+function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
+  // Delete category functionality.
+  if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete')) {
+    $vid = $form_state['term']->vid;
+    $tid = $form_state['term']->tid;
+    $used_by_content = taxonomy_select_nodes($tid);
+    if(count($used_by_content) > 0){
+      form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
+      $node_url = $base_url.'/node/';
+      echo '<div> Your category is using by following contents:<br/>';
+      foreach ($used_by_content as $key => $value){
+        $node = $node = node_load($value);
+        echo '<a target="_blank" href="'.$node_url.$value.'">'.$node->title.'</a><br/>';
+      }
+      drupal_add_js('(function($) {$(document).ready(function() {
+       $("#taxonomy-form-term #edit-submit").hide();
+      });}(jQuery));', 'inline');
+    }
+  } else {
+    $types = variable_get('itg_category_manager_types', array());
+    if ($types['term']) {
+      $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
+      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
+        $form['#validate'][] = 'itg_category_manager_term_validate';
+      }
+    }
+     //Redirect to term listing page, after term has been added successfully.
+    if($form['#term']['vocabulary_machine_name'] == 'category_management'){
+      $form['#action'] = '?destination=admin/structure/taxonomy/category_management';
+      $form['name']['#title'] = t('Category Title');
+      unset($form['description']);
+      
+      //Relation treatment
+      $form['relations']['#title'] = '';
+      $form['relations']['parent']['#title'] = t('Select Parent Category');
+      $form['relations']['#collapsible'] = 0;
+      $form['relations']['parent']['#size'] = 10;
+      $form['relations']['parent']['#attributes'] = array('style'=> 'width:300px');
+      unset($form['relations']['weight']);
+      
+    }
+     
+  }
+}
+
+
+/**
+ * Implements _form_validate() for taxonomy_form_term().
+ */
+function itg_category_manager_term_validate($form, &$form_state) {
+  $term = $form_state['values']['name'];
+  $vid  = $form_state['values']['vid'];
+  $tid  = $form_state['values']['tid'];
+  if ($form_state['triggering_element']['#value'] != 'Delete') {
+    $current_parent_tid = $form_state['input']['parent'][0];
+    if(count(taxonomy_get_parents_all($current_parent_tid)) > 4){
+      form_set_error('name', t('Sorry! You can create only 4 levels of categories within a section.'));
+    }
+    if (itg_category_manager_is_dupe_term($term, $vid, $tid)) {
+      $tid_existing_term = itg_category_manager_get_term_from_name($term, $vid);
+      $parent_tid = taxonomy_get_parents_all($tid_existing_term);
+      if ($current_parent_tid == $parent_tid[1]->tid) {
+        form_set_error('name', t('Category name already exists.'));
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for taxonomy_form_vocabulary().
+ */
+function itg_category_manager_form_taxonomy_form_vocabulary_alter(&$form, &$form_state, $form_id) {
+  // Do not add the validator if Delete was hit.
+  if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete')) {
+    return;
+  }
+
+  // Get the types of taxonomy objects we will validate against
+  $types = variable_get('itg_category_manager_types', array());
+
+  // Add the validator if we're checking vocabularies for dupes.
+  if ($types['vocab']) {
+    $form['#validate'][] = 'itg_category_manager_vocabulary_validate';
+  }
+
+}
+
+/**
+ * Implements _form_validate() for taxonomy_form_vocabulary().
+ */
+function itg_category_manager_vocabulary_validate_vocabulary_validate($form, &$form_state) {
+  $vocab = $form_state['values']['name'];
+  $vid  = isset($form_state['values']['vid']) ? $form_state['values']['vid'] : 0;
+  if (itg_category_manager_is_dupe_vocabulary($vocab, $vid)) {
+    form_set_error('name', t('The vocabulary %term already exists.', array('%term' => check_plain($vocab))));
+  }
+}
+
+/**
+ * Checks whether a term is a duplicate, based on the module preferences.
+ */
+function itg_category_manager_is_dupe_term($term, $vid, $tid = 0) {
+
+  // Clean up the term to check
+  $term = trim($term);
+
+  // Get matching terms in the given vocabulary (case insensitive)
+  $query = new EntityFieldQuery;
+  $query = $query
+    ->entityCondition('entity_type', 'taxonomy_term')
+    ->propertyCondition('name', $term)
+    ->propertyCondition('vid', $vid);
+  if ($tid) {  // Ignore an existing term of the same name; this is needed on updates to an existing term.
+    $query = $query->entityCondition('entity_id', $tid, '<>');
+  }
+  $result = $query->execute();
+
+  // No results, term is unique
+  if (is_array($result) && !$result) {
+    return FALSE;
+  }
+
+  // We found a result
+  if (isset($result['taxonomy_term'])) {
+
+    // Do a case sensitive comparison if requested, but if not,
+    // just return that we found a match
+    if (variable_get('itg_category_manager_case_sensitive')) {
+
+      $is_dupe = FALSE;
+
+      // For each found result...
+      foreach ($result['taxonomy_term'] as $found_term) {
+        // Load the term data and see if it's a dupe
+        $term_data = taxonomy_term_load($found_term->tid);
+        if (!strcmp($term_data->name, $term)) {
+          $is_dupe = TRUE;
+          break;
+        }
+      }
+
+      return $is_dupe;
+
+    }
+    else { // Not case sensitive
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Checks whether a vocabulary is a duplicate, based on the module preferences.
+ */
+function itg_category_manager_is_dupe_vocabulary($vocab, $vid = 0) {
+
+  // Clean up the vocabulary to check
+  $vocab = trim($vocab);
+
+  // Get all vocabularies
+  $vocabs = taxonomy_get_vocabularies();
+
+  // Look for a vocabulary with the same name based on case-sensitivity preferences
+  $case_sensitive = variable_get('itg_category_manager_case_sensitive');
+  foreach ($vocabs as $found_vocab) {
+
+    // Skip the check if the current found vocabulary is the same one we're comparing.
+    // This will happen on updates to an existing vocabulary.
+    if ($vid == $found_vocab->vid) {
+      continue;
+    }
+
+    // Clean up the stored vocabulary. This helps for systems that
+    // don't trim their vocabulary names before entry.
+    $found_vocab_name = trim($found_vocab->name);
+
+    if (($case_sensitive && !strcmp($found_vocab_name, $vocab))
+      || (!$case_sensitive && !strcasecmp($found_vocab_name, $vocab))) {
+      return TRUE;
+    }
+
+  }
+
+  return FALSE;
+
+}
+
+//function itg_category_manager_js_alter(&$javascript) {
+//  if(arg(3) == 'category_management'){
+//    unset($javascript['misc/tabledrag.js']);
+//  }
+//}
+
+/**
+ * Get term id using term name and vocabulary id($vid)
+ * @param type $term_name
+ * @param type $vid
+ * @return boolean
+ */
+function itg_category_manager_get_term_from_name($term_name, $vid) {
+    $tree = taxonomy_get_tree($vid);
+    foreach ($tree as $term) {
+      if (strtolower($term->name) == strtolower($term_name)) {
+        return $term->tid;
+      }
+    }
+  return FALSE;
+}
