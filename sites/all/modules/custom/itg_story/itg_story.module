@@ -4,8 +4,22 @@
  * @file
  * ITG Story module.
  *
+ * Provides customizations and functions for Story.
+ *
  */
 
+/**
+ * Implements hook_menu().
+ */
+function itg_story_menu() {
+  $items['reporter-details'] = array(
+      'access callback' => TRUE,
+      'page callback' => '_itg_story_reporter_details',
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_story.inc',
+    );
+  return $items;
+}
 
 
 /**
@@ -54,4 +68,23 @@ function itg_story_theme($existing, $type, $theme, $path) {
       ),
     );
     return $themes;
+}
+
+
+
+/**
+ * Implemets hook_form_alter().
+ */
+function itg_story_form_alter(&$form, &$form_state, $form_id) {
+  global $user, $base_url;
+  $settings = array();
+  
+  switch ($form_id) {
+    case 'story_node_form':
+      $settings['base_url'] = $base_url;
+      drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
+      drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
+    break;
+      
+  }
 }
