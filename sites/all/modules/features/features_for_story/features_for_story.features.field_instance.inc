@@ -1399,8 +1399,9 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_short_headline',
-    'label' => 'Story Title',
+    'label' => 'Short headline',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1849,11 +1850,11 @@ function features_for_story_field_default_field_instances() {
   t('Select Guru Templates');
   t('Select Magazine');
   t('Select Supplement');
+  t('Short headline');
   t('Small Image');
   t('Social Media Integration');
   t('Story Body');
   t('Story Kicker Text');
-  t('Story Title');
   t('Templates Buzz');
   t('Templates Factoids');
   t('Templates Guru');

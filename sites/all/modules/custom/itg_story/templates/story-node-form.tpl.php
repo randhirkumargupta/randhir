@@ -23,6 +23,9 @@
   <?php print drupal_render($form['field_stroy_city']); ?>
   <?php print drupal_render($form['field_story_courtesy']); ?>
   <?php print drupal_render($form['field_story_reporter']); ?>
+  <div id="reporter-details">
+    
+  </div>
   <?php print drupal_render($form['field_story_expert_name']); ?>
   <?php print drupal_render($form['field_story_expert_image']); ?>
   <?php print drupal_render($form['field_story_expert_description']); ?>
