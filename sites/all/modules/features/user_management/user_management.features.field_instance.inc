@@ -30,6 +30,7 @@ function user_management_field_default_field_instances() {
     'label' => 'First Name',
     'required' => 1,
     'settings' => array(
+      'exclude_cv' => FALSE,
       'text_processing' => 0,
       'user_register_form' => 1,
     ),
@@ -64,6 +65,7 @@ function user_management_field_default_field_instances() {
     'label' => 'Last Name',
     'required' => 1,
     'settings' => array(
+      'exclude_cv' => FALSE,
       'text_processing' => 0,
       'user_register_form' => 1,
     ),
@@ -98,6 +100,7 @@ function user_management_field_default_field_instances() {
     'label' => 'Mobile Number',
     'required' => 0,
     'settings' => array(
+      'exclude_cv' => FALSE,
       'text_processing' => 0,
       'user_register_form' => 1,
     ),
