@@ -15,14 +15,14 @@ function features_for_story_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Story menegment';
+  $view->human_name = 'Story management';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Story menegment';
+  $handler->display->display_options['title'] = 'Story management';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -259,7 +259,7 @@ function features_for_story_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'story-menegment';
+  $handler->display->display_options['path'] = 'story-management';
   $export['strory_menegment'] = $view;
 
   return $export;
