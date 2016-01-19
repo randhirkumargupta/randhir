@@ -4,7 +4,7 @@
  * @file
  * The ITG Common module.
  *
- * Provides common customizations and functions.
+ * Provides common functionality and customizations.
  *
  */
 
@@ -26,3 +26,19 @@ function pr($arg) {
     print_r($arg);
     print '</pre>';
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function itg_common_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'user_register_form') {
+    
+    //Add cancel button to user edit form and redirects to user manage page on click of cancel button.
+    $destination = 'manage-users';
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination),
+        '#weight' => 20,
+    );
+  }
+}
+
