@@ -481,6 +481,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_magazine_story_issue',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -490,8 +493,7 @@ function features_for_story_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        1 => 'Magazine Story',
-        2 => 'Issue Story',
+        'magazine_issue_story' => '',
       ),
       'allowed_values_function' => '',
     ),

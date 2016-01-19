@@ -1001,6 +1001,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_magazine_story_issue',
     'label' => 'Magazine Story / Issue Story',
     'required' => 0,
