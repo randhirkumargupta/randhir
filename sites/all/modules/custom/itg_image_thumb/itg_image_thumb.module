@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * ITGCMS Image Thumb creation.
@@ -7,145 +8,156 @@
 /**
  * Implements hook_menu().
  */
-  function itg_image_thumb_menu() {
-    $items=array();
-    $items['itgimagethumb-ajax']=array(
-    'title'=>'Thumb callback menu',
-    'page callback'=>'itg_image_thumb_imgthumb',
+function itg_image_thumb_menu() {
+  $items = array();
+  $items['itgimagethumb-ajax'] = array(
+    'title' => 'Thumb callback menu',
+    'page callback' => 'itg_image_thumb_imgthumb',
     'access callback' => TRUE,
-    'type'=>  MENU_CALLBACK,
-    );
-    return $items;
-  }
+    'type' => MENU_CALLBACK,
+  );
 
+  return $items;
+}
 
-/** alter node
-*
-*/
-  function itg_image_thumb_form_alter(&$form, &$form_state, $form_id) {
-    if ($form_id == 'story_node_form') {
+/**
+ * 
+ * @global type $user
+ * @global type $base_url
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+function itg_image_thumb_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'story_node_form') {
     global $user, $base_url;
     $settings = array();
     $settings['base_url'] = $base_url;
     drupal_add_js(array('itg_image_thumb' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_image_thumb') . '/js/itg_image_thumb.js', array('weight' => 2));
+  }
+}
+
+/**
+ * 
+ * @param type $field_name
+ * @param type $target_folder
+ * @param type $file_name
+ * @param type $thumb
+ * @param type $thumb_folder
+ * @param type $thumb_width
+ * @param type $thumb_height
+ * @return type
+ */
+function itg_image_thumb_cwUpload($field_name = '', $target_folder = '', $file_name = '', $thumb = FALSE, $thumb_folder = '', $thumb_width = '', $thumb_height = '') {
+  // folder path setup
+  $target_path = $target_folder;
+  $thumb_path = $thumb_folder;
+  // file name setup
+  $filename_err = explode(".", $file_name);
+  $filename_err_count = count($filename_err);
+  $file_ext = $filename_err[$filename_err_count - 1];
+  
+  if ($file_name != '') {
+    $filename = $file_name;
+  }
+
+  $upload_image = $target_path . basename($filename);
+  // thumbnail creation
+  if ($thumb == TRUE) {
+    $thumbnail = $thumb_path . $filename;
+    list($width, $height) = getimagesize($upload_image);
+    $thumb_create = imagecreatetruecolor($thumb_width, $thumb_height);
+    switch ($file_ext) {
+      case 'jpg':
+        $source = imagecreatefromjpeg($upload_image);
+        break;
+      case 'jpeg':
+        $source = imagecreatefromjpeg($upload_image);
+        break;
+      case 'png':
+        $source = imagecreatefrompng($upload_image);
+        break;
+      case 'gif':
+        $source = imagecreatefromgif($upload_image);
+        break;
+      default:
+        $source = imagecreatefromjpeg($upload_image);
+    }
+    imagecopyresized($thumb_create, $source, 0, 0, 0, 0, $thumb_width, $thumb_height, $width, $height);
+    switch ($file_ext) {
+      case 'jpg' || 'jpeg':
+        imagejpeg($thumb_create, $thumbnail, 100);
+        break;
+      case 'png':
+        imagepng($thumb_create, $thumbnail, 100);
+        break;
+      case 'gif':
+        imagegif($thumb_create, $thumbnail, 100);
+        break;
+      default:
+        imagejpeg($thumb_create, $thumbnail, 100);
     }
   }
 
-  /**
- * Function to create image thumb
- */
- function cwUpload($field_name = '', $target_folder = '', $file_name = '', $thumb = FALSE, $thumb_folder = '', $thumb_width = '', $thumb_height = '') {
-//folder path setup
-	$target_path = $target_folder;
-	$thumb_path = $thumb_folder;
-	//file name setup
-	$filename_err = explode(".",$file_name);
-	$filename_err_count = count($filename_err);
-	$file_ext = $filename_err[$filename_err_count-1];
-  
-  if($file_name != '') {
-       $fileName = $file_name;
-    }
-	
-$upload_image = $target_path.basename($fileName);
-//thumbnail creation
-		if($thumb == TRUE) {
-			$thumbnail = $thumb_path.$fileName;
-			list($width,$height) = getimagesize($upload_image);
-			$thumb_create = imagecreatetruecolor($thumb_width,$thumb_height);
-			switch($file_ext) {
-				case 'jpg':
-					$source = imagecreatefromjpeg($upload_image);
-					break;
-				case 'jpeg':
-					$source = imagecreatefromjpeg($upload_image);
-					break;
-				case 'png':
-					$source = imagecreatefrompng($upload_image);
-					break;
-				case 'gif':
-					$source = imagecreatefromgif($upload_image);
-					break;
-				default:
-					$source = imagecreatefromjpeg($upload_image);
-			}
-			imagecopyresized($thumb_create,$source,0,0,0,0,$thumb_width,$thumb_height,$width,$height);
-			switch($file_ext) {
-				case 'jpg' || 'jpeg':
-					imagejpeg($thumb_create,$thumbnail,100);
-					break;
-				case 'png':
-					imagepng($thumb_create,$thumbnail,100);
-					break;
-				case 'gif':
-					imagegif($thumb_create,$thumbnail,100);
-					break;
-				default:
-					imagejpeg($thumb_create,$thumbnail,100);
-			}
-		}
-
-		return $fileName;
+  return $filename;
 }
 
 function itg_image_thumb_imgthumb() {
-  $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-  if (!$isAjax) {
+  $isajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+  if (!$isajax) {
     return '<strong class="common-Error">' . t('Access denied - not an AJAX request...') . '</strong>';
   }
-      //get fid of uplaod image
-    $fid=$_POST['fid'];
+  // get fid of uplaod image
+  $fid = $_POST['fid'];
 
-//fetch filename from db
+  // fetch filename from db
   $query = db_select('file_managed', 'ui')
-   ->fields('ui', array('filename'))
-   ->condition('fid', $fid ,'=')
-   ->execute();
+      ->fields('ui', array('filename'))
+      ->condition('fid', $fid, '=')
+      ->execute();
   $result = $query->fetchAssoc();
 
-//get filename in variable
- $fname=$result['filename']; 
-  if($fname != '') {
-    //create directory if not exist
-    $thumbDirectoryExists =  DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_20*20/';
-    $thumb2DirectoryExists =  DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_50*50/';
-    $thumb3DirectoryExists =  DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_100*100/';
+  // get filename in variable
+  $fname = $result['filename'];
+  if ($fname != '') {
+    // create directory if not exist
+    $thumbdirectoryexists = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_20*20/';
+    $thumb2directoryexists = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_50*50/';
+    $thumb3directoryexists = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_100*100/';
 
-    if (!is_dir($thumbDirectoryExists)) {
-     // If not  exists so do something with it.
-    $mydir = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_20*20/'; 
-    drupal_mkdir($mydir, 0755);
-    } 
-    
-    if (!is_dir($thumb2DirectoryExists)) {
-     // If not  exists so do something with it.
+    if (!is_dir($thumbdirectoryexists)) {
+      // If not  exists so do something with it.
+      $mydir = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_20*20/';
+      drupal_mkdir($mydir, 0755);
+    }
 
-    $mydir = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_50*50/'; 
-    drupal_mkdir($mydir, 0755);
-    } 
-    
-    if (!is_dir($thumb3DirectoryExists)) {
-     // If not  exists so do something with it.
-    $mydir = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_100*100/'; 
-    drupal_mkdir($mydir, 0755);
-    } 
-    //create directory code end here 
-    //main directory path
+    if (!is_dir($thumb2directoryexists)) {
+      // If not  exists so do something with it.
+
+      $mydir = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_50*50/';
+      drupal_mkdir($mydir, 0755);
+    }
+
+    if (!is_dir($thumb3directoryexists)) {
+      // If not  exists so do something with it.
+      $mydir = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_100*100/';
+      drupal_mkdir($mydir, 0755);
+    }
+    // create directory code end here 
+    // main directory path
     $upload_dir = DRUPAL_ROOT . '/sites/default/files/photogallery/';
     // All Thumb directory path
-    $thumb=DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_100*100/';
-    $thumb1=DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_50*50/';
-    $thumb2=DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_20*20/';
+    $thumb = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_100*100/';
+    $thumb1 = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_50*50/';
+    $thumb2 = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_20*20/';
 
-    //call Thumb function to create multiple thumb
-    $upload_img = cwUpload('image',$upload_dir,$fname,TRUE, $thumb,'100','100');
-    $upload_img = cwUpload('image',$upload_dir,$fname,TRUE, $thumb1,'50','50');
-    $upload_img = cwUpload('image',$upload_dir,$fname,TRUE, $thumb2,'20','20');
+    // call Thumb function to create multiple thumb
+    $upload_img = itg_image_thumb_cwUpload('image', $upload_dir, $fname, TRUE, $thumb, '100', '100');
+    $upload_img = itg_image_thumb_cwUpload('image', $upload_dir, $fname, TRUE, $thumb1, '50', '50');
+    $upload_img = itg_image_thumb_cwUpload('image', $upload_dir, $fname, TRUE, $thumb2, '20', '20');
   }
-  else
-  {
-
-  echo 'Please select file';
-  } 
+  else {
+    echo 'Please select file';
+  }
 }
