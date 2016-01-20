@@ -7,12 +7,12 @@
 /**
  * Reporter details callback
  */
-function _itg_story_reporter_details(){  
+function itg_story_reporter_details() {  
   $reporter = substr($_GET['reporter_id'], 0, -1);
   $reporter_array = explode(" (", $reporter);
   $content = '';
   
-  if(is_numeric($reporter_array[1])){
+  if (is_numeric($reporter_array[1])) {
     $node = node_load($reporter_array[1]);
     $email = $node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
     $twitter = $node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
@@ -26,9 +26,8 @@ function _itg_story_reporter_details(){
 *  
 */
 
-function _get_story_title_in_autocomplete($title) {
- 
-    if(strlen(trim($title)) > 0) {
+function itg_story_get_story_title($title) { 
+    if (strlen(trim($title)) > 0) {
       $title = strtolower(trim($title));
       $query = db_select('node', 'n');
       $query->fields('n', array('title'));
@@ -37,22 +36,20 @@ function _get_story_title_in_autocomplete($title) {
       $query->range(0, 20);
       
       $result = $query->execute(); 
-      while($record = $result->fetchAssoc()) {     
+      while ($record = $result->fetchAssoc()) {     
         $options[$record['title']] = $record['title'];
       }    
       drupal_json_output($options);    
-  }
-    
+  }    
  }
  
- /**
+/**
 * callback for all the story of nid
 *  
 */
 
-function _get_story_nid_in_autocomplete($nid) {
- 
-    if(strlen(trim($nid)) > 0) {
+function itg_story_get_story_nid($nid) { 
+    if (strlen(trim($nid)) > 0) {
       $nid = strtolower(trim($nid));
       $query = db_select('node', 'n');
       $query->fields('n', array('nid'));
@@ -61,10 +58,16 @@ function _get_story_nid_in_autocomplete($nid) {
       $query->range(0, 20);
       
       $result = $query->execute(); 
-      while($record = $result->fetchAssoc()) {     
+      while ($record = $result->fetchAssoc()) {     
         $options[$record['nid']] = $record['nid'];
       }    
       drupal_json_output($options);    
-  }
-    
+  }    
  }
+ 
+ /**
+ * supplement details callback
+ */
+function itg_story_supplement_details() {  
+  
+}
