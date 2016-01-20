@@ -13,6 +13,7 @@ scripts[] = js/rubik.js
 stylesheets[screen][] = css/core.css
 stylesheets[screen][] = css/icons.css
 stylesheets[screen][] = css/style.css
+stylesheets[screen][] = css/itg-admin.css
 stylesheets[screen][] = css/jquery.ui.theme.css
 stylesheets[print][] = css/print.css
 

@@ -375,6 +375,12 @@ function user_management_views_default_views() {
     18 => 0,
     19 => 0,
   );
+  /* Filter criterion: User: The user ID */
+  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
+  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
   $handler->display->display_options['path'] = 'manage-users';
   $export['manage_users'] = $view;
 
