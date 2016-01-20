@@ -18,6 +18,7 @@ function itg_story_reporter_details() {
     $twitter = $node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
     $content = '<div>'.$email.'</div><div>'.$twitter.'</div>';
   }
+  
   echo $content;
 }
 

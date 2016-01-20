@@ -13,7 +13,7 @@
 /**
  * Function for debugging arrays and objects.
  * @param $arg
- *   array or object to be printed.
+ *  array or object to be printed.
  */
 function p($arg) {
     print '<pre>';
@@ -31,9 +31,8 @@ function pr($arg) {
  * Implements hook_form_alter().
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'user_register_form') {
-    
-    //Add cancel button to user edit form and redirects to user manage page on click of cancel button.
+  if ($form_id == 'user_register_form') {    
+    // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
     $destination = 'manage-users';
     $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), $destination),
