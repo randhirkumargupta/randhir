@@ -1,0 +1,11 @@
+name = ITG Taxonomy Manager
+description = Managing administrating taxonomy terms.
+core = 7.x
+files[] = itg_category_manager.module
+files[] = itg_category_manager.install
+dependencies[] = taxonomy
+configure = admin/config/taxonomy/taxonomy_dupecheck
+version = "7.x-1.2"
+core = "7.x"
+project = "itg_category_manager"
+
