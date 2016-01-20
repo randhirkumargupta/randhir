@@ -130,3 +130,21 @@ function itg_preprocess_block(&$variables, $hook) {
   //}
 }
 // */
+
+/**
+   *Output customized node preview on node edit and add forms.
+   *
+   * @return
+   * This just outputs the Full node ignoring the teaser mode.
+   */
+//  function YOURTHEME_Node_preview($variables)
+//  {
+//      $node = $variables['node'];
+//      $elements = node_view($node, 'full');
+//      $full = drupal_render($elements);
+//      $output = '<div class="preview">';
+//      $output .= '<h3 class="post-preview" >' . t('Preview of your posting') . '</h3>';
+//      $output .= $full;
+//      $output .= "</div>\n";
+//      return $output;
+//  }
