@@ -1,0 +1,29 @@
+/*-----------------------------------------------------------*
+* ITG ADMIN CSS STARTS HERE
+*------------------------------------------------------------*/
+.block-superfish .sf-menu.sf-horizontal li{
+  float: left;
+}
+
+.view-manage-users > .view-header{
+  text-align: right;
+}
+.view-manage-users > .view-header p{
+  display: inline-block;
+  vertical-align: top;
+}
+.view-manage-users > .view-header p a{
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #7bc;
+  font-weight: bold;
+  text-shadow: #38a 0 1px 0;
+  display: block;
+}
+.view-manage-users .view-filters .views-exposed-form .views-exposed-widget .form-submit{
+  margin-top: 18px;
+}
+select option{
+  padding: 5px;
+}
