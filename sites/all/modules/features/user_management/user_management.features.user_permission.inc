@@ -35,6 +35,26 @@ function user_management_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'access user profiles'.
+  $permissions['access user profiles'] = array(
+    'name' => 'access user profiles',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'user',
+  );
+
+  // Exported permission: 'administer permissions'.
+  $permissions['administer permissions'] = array(
+    'name' => 'administer permissions',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'user',
+  );
+
   // Exported permission: 'administer users'.
   $permissions['administer users'] = array(
     'name' => 'administer users',
@@ -53,7 +73,6 @@ function user_management_user_default_permissions() {
   $permissions['assign Author/Guest role'] = array(
     'name' => 'assign Author/Guest role',
     'roles' => array(
-      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
@@ -65,7 +84,6 @@ function user_management_user_default_permissions() {
     'name' => 'assign Copy Editor role',
     'roles' => array(
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -75,7 +93,6 @@ function user_management_user_default_permissions() {
   $permissions['assign Editor role'] = array(
     'name' => 'assign Editor role',
     'roles' => array(
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -85,7 +102,6 @@ function user_management_user_default_permissions() {
   $permissions['assign Intern role'] = array(
     'name' => 'assign Intern role',
     'roles' => array(
-      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
@@ -97,7 +113,6 @@ function user_management_user_default_permissions() {
     'name' => 'assign SEO role',
     'roles' => array(
       'SEO' => 'SEO',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -108,7 +123,6 @@ function user_management_user_default_permissions() {
     'name' => 'assign Section Editor/Anchor role',
     'roles' => array(
       'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -128,7 +142,6 @@ function user_management_user_default_permissions() {
     'name' => 'assign Subeditor/Sr.Sub role',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -141,6 +154,15 @@ function user_management_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
+  );
+
+  // Exported permission: 'cancel account'.
+  $permissions['cancel account'] = array(
+    'name' => 'cancel account',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'user',
   );
 
   // Exported permission: 'change own username'.
@@ -181,6 +203,25 @@ function user_management_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any article content'.
+  $permissions['delete any article content'] = array(
+    'name' => 'delete any article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own article content'.
+  $permissions['delete own article content'] = array(
+    'name' => 'delete own article content',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -251,6 +292,7 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Intern' => 'Intern',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
