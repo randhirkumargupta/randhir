@@ -12,23 +12,29 @@
  * Implements hook_menu().
  */
 function itg_story_menu() {
-  $items['reporter-details'] = array(
+  $items['reporter-details-ajax'] = array(
       'access callback' => TRUE,
-      'page callback' => '_itg_story_reporter_details',
+      'page callback' => 'itg_story_reporter_details',
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_story.inc',
   );
   $items['story-title-list/autocomplete'] = array(
-    'page callback' => '_get_story_title_in_autocomplete',
+    'page callback' => 'itg_story_get_story_title',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
   $items['story-nid-list/autocomplete'] = array(
-    'page callback' => '_get_story_nid_in_autocomplete',
+    'page callback' => 'itg_story_get_story_nid',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
+  );
+  $items['supplement-list-ajax'] = array(
+      'access callback' => TRUE,
+      'page callback' => 'itg_story_supplement_details',
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_story.inc',
   );
   return $items;
 }
