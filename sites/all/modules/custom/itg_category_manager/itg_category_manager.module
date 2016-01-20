@@ -98,7 +98,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       });}(jQuery));', 'inline');
     }
   } else {
-    $types = variable_get('itg_category_manager_types', array());
+    $types = @variable_get('itg_category_manager_types', array());
     if ($types['term']) {
       $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
       if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
