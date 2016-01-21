@@ -23,7 +23,13 @@ function features_for_story_user_default_permissions() {
   $permissions['create story content'] = array(
     'name' => 'create story content',
     'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor' => 'Section Editor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
@@ -40,7 +46,9 @@ function features_for_story_user_default_permissions() {
   // Exported permission: 'delete any story content'.
   $permissions['delete any story content'] = array(
     'name' => 'delete any story content',
-    'roles' => array(),
+    'roles' => array(
+      'SEO' => 'SEO',
+    ),
     'module' => 'node',
   );
 
@@ -68,14 +76,27 @@ function features_for_story_user_default_permissions() {
   // Exported permission: 'edit any story content'.
   $permissions['edit any story content'] = array(
     'name' => 'edit any story content',
-    'roles' => array(),
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+      'Site Admin' => 'Site Admin',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own story content'.
   $permissions['edit own story content'] = array(
     'name' => 'edit own story content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor' => 'Section Editor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
     'module' => 'node',
   );
 
