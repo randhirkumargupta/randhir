@@ -55,6 +55,18 @@ function user_management_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'administer taxonomy'.
+  $permissions['administer taxonomy'] = array(
+    'name' => 'administer taxonomy',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'administer users'.
   $permissions['administer users'] = array(
     'name' => 'administer users',
@@ -73,6 +85,9 @@ function user_management_user_default_permissions() {
   $permissions['assign Author/Guest role'] = array(
     'name' => 'assign Author/Guest role',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
@@ -83,6 +98,7 @@ function user_management_user_default_permissions() {
   $permissions['assign Copy Editor role'] = array(
     'name' => 'assign Copy Editor role',
     'roles' => array(
+      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'administrator' => 'administrator',
     ),
@@ -102,6 +118,9 @@ function user_management_user_default_permissions() {
   $permissions['assign Intern role'] = array(
     'name' => 'assign Intern role',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
@@ -142,6 +161,8 @@ function user_management_user_default_permissions() {
     'name' => 'assign Subeditor/Sr.Sub role',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -284,6 +305,16 @@ function user_management_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'execute user_block_user_action'.
+  $permissions['execute user_block_user_action'] = array(
+    'name' => 'execute user_block_user_action',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'actions_permissions',
   );
 
   // Exported permission: 'view own unpublished content'.
