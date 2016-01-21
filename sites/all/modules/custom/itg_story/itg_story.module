@@ -110,10 +110,23 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => l(t('Cancel'), 'story-menegment'),
         '#weight' => 20,
       );
+      $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
     break;      
   }
 }
 
+/**
+ * Custom submit callback for redirecting story form.
+ */
+function itg_story_form_custom_callback($form, &$form_state) {  
+  if (isset($_SESSION ['messages'])) {
+    unset($_SESSION ['messages']);
+  }
+  
+  drupal_set_message('Story has been created successfully.');
+  
+  $form_state['redirect'] = 'story-management';  
+}
 
 /**
  * Implements hook_form_FORMID_alter().  
