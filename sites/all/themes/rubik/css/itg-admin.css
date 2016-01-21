@@ -27,3 +27,45 @@
 select option{
   padding: 5px;
 }
+.page-admin-people-create form{
+  max-width: 400px;
+  position: relative;
+  z-index: 9999;
+}
+div.password-confirm, div.password-confirm span{
+  float: right;
+  width: 200px;
+}
+div.password-confirm{
+  width: 200px;
+}
+span.error{
+  display: block;
+}
+.block-itg-story-list{
+  margin: 0 30px;
+}
+.block-itg-story-list span{
+  cursor: pointer;
+}
+.block-itg-story-list span.active{
+  color: #008eb1;
+}
+.block-itg-story.fixed{
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  top: 20px;
+  left: 0;
+  box-shadow: 0 2px 2px 0 #ddd;
+}
+.node-story-form .field-name-field-story-magazine-story-issue .form-type-checkboxes label{
+  display: inline;
+}
+.node-story-form .field-name-field-story-magazine-story-issue .form-checkboxes{
+  float: left;
+  margin-right: 5px;
+}
+input.form-autocomplete, input.form-text, input.form-file, textarea.form-textarea, select.form-select{
+  max-width: 400px !important;
+}
