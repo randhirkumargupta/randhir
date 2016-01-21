@@ -30,8 +30,10 @@
 
 <div id='page'><div id='main-content' class='limiter clearfix'>
   <?php if ($page['help']) print render($page['help']) ?>
-  <div id='content' class='page-content clearfix'>
+  <?php $cls=''; if (!empty($page['content'])): $cls="sidebar-second"; endif;?>
+  <div id='content' class='page-content clearfix <?php print $cls;?>'>
     <?php if (!empty($page['content'])) print render($page['content']) ?>
+    <?php if (!empty($page['sidebar_second'])) print render($page['sidebar_second']) ?>
   </div>
 </div></div>
 
