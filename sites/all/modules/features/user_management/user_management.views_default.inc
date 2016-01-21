@@ -50,6 +50,13 @@ function user_management_views_default_views() {
 
 ';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No User Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
