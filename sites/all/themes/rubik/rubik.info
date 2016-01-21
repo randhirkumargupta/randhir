@@ -8,6 +8,7 @@ regions[content] = Content
 regions[help] = Help
 regions[page_top] = Page top
 regions[page_bottom] = Page bottom
+regions[sidebar_second] = Sidebar second
 
 scripts[] = js/rubik.js
 stylesheets[screen][] = css/core.css
