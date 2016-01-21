@@ -1383,8 +1383,9 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_reporter',
-    'label' => 'Reporter',
+    'label' => 'By Line',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -2137,6 +2138,7 @@ function features_for_story_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Buzz Description');
+  t('By Line');
   t('Category');
   t('City');
   t('Comment');
@@ -2162,7 +2164,6 @@ function features_for_story_field_default_field_instances() {
   t('New Title');
   t('Redirection URL for new title');
   t('Redirection URL for story title');
-  t('Reporter');
   t('Resize Extra Large ');
   t('Schedule Date & Time');
   t('Select Guru Templates');
