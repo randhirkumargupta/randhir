@@ -5,15 +5,15 @@
   display: inline-block;
   width: 100%;
 }
-.region-sidebar-second, .region-content{
+.sidebar-second .region-sidebar-second, .sidebar-second .region-content{
   float: left;
   box-sizing: border-box;
 }
-.region-content{
+.sidebar-second .region-content{
   width: 78%;
   padding-right: 30px;
 }
-.region-sidebar-second{
+.sidebar-second .region-sidebar-second{
   width: 22%;
 }
 .block-superfish .sf-menu.sf-horizontal li{
