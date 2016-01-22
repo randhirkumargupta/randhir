@@ -125,6 +125,22 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
       }
     });
   }
+  
+  // scroll-to-top animate
+  $(window).scroll(function() {
+      if ($(this).scrollTop() > 90) {
+          $('.block-itg-story').addClass('fixed');
+      } else {
+          $('.block-itg-story').removeClass('fixed');
+      }
+    });
+  $('body').on('click', '.target-link', function(e) {
+    var offSet = 80;
+    var dti = $(this).attr('data-target-id');
+    var targetOffset = $('#' + dti).offset().top - offSet;
+    $(this).addClass('active').siblings('.target-link').removeClass('active');
+    $("body,html").animate({ scrollTop: targetOffset }, 1000);
+    });
 
 };
 })(jQuery);
