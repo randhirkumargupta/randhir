@@ -257,14 +257,7 @@ function features_for_story_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(
-        'shs' => array(
-          'create_new_levels' => 0,
-          'create_new_terms' => 0,
-          'force_deepest' => 0,
-          'node_count' => 0,
-        ),
-      ),
+      'settings' => array(),
       'type' => 'options_select',
       'weight' => 42,
     ),
