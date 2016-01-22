@@ -33,6 +33,8 @@ function itg_image_thumb_form_alter(&$form, &$form_state, $form_id) {
     global $user, $base_url;
     $settings = array();
     $settings['base_url'] = $base_url;
+    $settings['image_checkbox'] = 'edit-field-story-resize-extra-large-und-yes';
+    $settings['story_form_id'] = 'story-node-form';
     drupal_add_js(array('itg_image_thumb' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_image_thumb') . '/js/itg_image_thumb.js', array('weight' => 2));
   }
@@ -54,18 +56,18 @@ function itg_image_thumb_cwUpload($field_name = '', $target_folder = '', $file_n
   $target_path = $target_folder;
   $thumb_path = $thumb_folder;
   // file name setup
-  $filename_err = explode(".", $file_name);
-  $filename_err_count = count($filename_err);
-  $file_ext = $filename_err[$filename_err_count - 1];
-  
+
   if ($file_name != '') {
     $filename = $file_name;
   }
+  $path_parts = pathinfo($filename);
+  $file_ext = $path_parts['extension'];
+  
 
   $upload_image = $target_path . basename($filename);
   // thumbnail creation
   if ($thumb == TRUE) {
-    $thumbnail = $thumb_path . $filename;
+    $thumbnail = $thumb_path . $path_parts['filename'].$thumb_width.'_'.$thumb_height.'.'.$file_ext;
     list($width, $height) = getimagesize($upload_image);
     $thumb_create = imagecreatetruecolor($thumb_width, $thumb_height);
     switch ($file_ext) {
@@ -103,59 +105,43 @@ function itg_image_thumb_cwUpload($field_name = '', $target_folder = '', $file_n
   return $filename;
 }
 
-function itg_image_thumb_imgthumb() {
+function itg_image_thumb_imgthumb() {  
   $isajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
   if (!$isajax) {
     return '<strong class="common-Error">' . t('Access denied - not an AJAX request...') . '</strong>';
   }
+  
   // get fid of uplaod image
   $fid = $_POST['fid'];
-
+   
   // fetch filename from db
   $query = db_select('file_managed', 'ui')
-      ->fields('ui', array('filename'))
+      ->fields('ui', array('uri'))
       ->condition('fid', $fid, '=')
       ->execute();
   $result = $query->fetchAssoc();
-
+      
   // get filename in variable
-  $fname = $result['filename'];
-  if ($fname != '') {
-    // create directory if not exist
-    $thumbdirectoryexists = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_20*20/';
-    $thumb2directoryexists = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_50*50/';
-    $thumb3directoryexists = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_100*100/';
+  
+  
+  $path_parts = pathinfo($result['uri']);
+  $fname_array = explode('public://', $path_parts['dirname']);
+  if(!empty($fname_array[1])){
+    $dir = $fname_array[1].'/';
+  }
+  $fname = $path_parts['basename'];
 
-    if (!is_dir($thumbdirectoryexists)) {
-      // If not  exists so do something with it.
-      $mydir = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_20*20/';
-      drupal_mkdir($mydir, 0755);
-    }
-
-    if (!is_dir($thumb2directoryexists)) {
-      // If not  exists so do something with it.
-
-      $mydir = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_50*50/';
-      drupal_mkdir($mydir, 0755);
-    }
-
-    if (!is_dir($thumb3directoryexists)) {
-      // If not  exists so do something with it.
-      $mydir = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_100*100/';
-      drupal_mkdir($mydir, 0755);
-    }
-    // create directory code end here 
+  if ($fname != '') {    
+ 
     // main directory path
-    $upload_dir = DRUPAL_ROOT . '/sites/default/files/photogallery/';
-    // All Thumb directory path
-    $thumb = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_100*100/';
-    $thumb1 = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_50*50/';
-    $thumb2 = DRUPAL_ROOT . '/sites/default/files/photogallery/thumb_20*20/';
-
+    $upload_dir = DRUPAL_ROOT . '/sites/default/files/'.$dir;    
+    $thumb = $upload_dir;
+    
     // call Thumb function to create multiple thumb
     $upload_img = itg_image_thumb_cwUpload('image', $upload_dir, $fname, TRUE, $thumb, '100', '100');
-    $upload_img = itg_image_thumb_cwUpload('image', $upload_dir, $fname, TRUE, $thumb1, '50', '50');
-    $upload_img = itg_image_thumb_cwUpload('image', $upload_dir, $fname, TRUE, $thumb2, '20', '20');
+    $upload_img = itg_image_thumb_cwUpload('image', $upload_dir, $fname, TRUE, $thumb, '50', '50');
+    $upload_img = itg_image_thumb_cwUpload('image', $upload_dir, $fname, TRUE, $thumb, '20', '20');
+    echo $upload_dir;
   }
   else {
     echo 'Please select file';
