@@ -35,7 +35,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
     $destination = 'manage-users';
     $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination),
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
     );
   }
