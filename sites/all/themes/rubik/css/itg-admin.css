@@ -43,7 +43,7 @@ select option{
   padding: 5px;
 }
 .page-admin-people-create form{
-  max-width: 400px;
+  max-width: 800px;
   position: relative;
   z-index: 9999;
 }
