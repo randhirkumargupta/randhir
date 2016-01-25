@@ -1,25 +1,130 @@
-/**
- * @file
- * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
- *
- * When you turn on CSS aggregation at admin/config/development/performance, all
- * of these @include files will be combined into a single file.
- */
+/*---------------------------- ITG CSS -----------------------------------*/
 
-/* Import Sass mixins, variables, Compass modules, etc. */
-@import "init";
+/* Layout CSS */
 
-/* HTML element (SMACSS base) rules */
-@import "normalize";
+.mr-0{
+  margin: 0;
+}
+.mt-10{
+  margin-top: 10px;
+}
+.pd-0{
+  padding: 0;
+}
+.pd-10{
+  padding: 10px;
+}
+.pd-30{
+  padding: 30px;
+}
+.pdlr-30{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.pdtb-10{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.no-bullet{
+  list-style: none;
+}
+.no-underline{
+  text-decoration: none;
+}
+.db{
+  display: block;
+}
+.dib{
+  display: inline-block;
+}
+.vtop{
+  vertical-align: top;
+}
+.full{
+  width: 100%;
+}
+.fleft{
+  float: left;
+}
+.fright{
+  float: right;
+}
+.btn {
+    background-color: #337ab7;
+    border: 1px solid #2e6da4;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 6px 12px;
+    text-align: center;
+    white-space: nowrap;
+    @extend .dib;
+    @extend .vtop;
+    &:hover{
+    background-color: #286090;
+    border-color: #204d74;
+    color: #fff;
+    }
+}
 
-/* Layout rules */
-@import "layouts/responsive";
-
-/* Component (SMACSS module) rules */
-@import "components/misc";
-// Optionally, add your own components here.
-@import "print";
-
-/* SMACSS theme rules */
-/* @import "theme-A"; */
-/* @import "theme-B"; */
+input[type="text"], select, input[type="password"]{
+  border: 1px solid #ddd;
+  height: 32px;
+  line-height: 30px;
+  padding: 5px;
+}
+.form-required, .error{
+  color: red;
+}
+*{
+  @extend .mr-0;
+  @extend .pd-0;
+  box-sizing: border-box;
+}
+#page .section{
+  max-width: 1170px;
+  margin: 0 auto;
+}
+.header{
+  @extend .pdtb-10;
+  box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+}
+.tabs-primary{
+  @extend .no-bullet;
+  @extend .dib;
+  @extend .vtop;
+}
+.tabs-primary li{
+  @extend .fleft;
+  margin-right: 1px;
+}
+.tabs-primary a{
+  @extend .db;
+  @extend .pdtb-10;
+  @extend .pdlr-30;
+  @extend .no-underline;
+  background-color: #FF2B36;
+  font-weight: bold;
+  color: #fff;
+}
+.page-user label{
+  @extend .db;
+}
+.page-user form{
+  @extend .pd-30;
+  border: 1px solid #ddd;
+  background-color: #eee;
+}
+.form-submit{
+  @extend .btn;
+  @extend .mt-10;
+}
+.page-user .form-type-password{
+  @extend .mt-10;
+}
+.page-user #content{
+  max-width: 455px;
+  margin: 100px auto 0;
+}
