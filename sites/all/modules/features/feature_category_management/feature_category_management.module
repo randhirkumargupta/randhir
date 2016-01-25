@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Category Management feature.
+ */
+
+include_once 'feature_category_management.features.inc';
