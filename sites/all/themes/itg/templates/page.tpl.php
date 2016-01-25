@@ -54,7 +54,9 @@
 
     <div id="content" class="column" role="main">
       <?php print render($page['highlighted']); ?>
-      <?php print $breadcrumb; ?>
+      <?php if(arg(0)!= 'user'): print $breadcrumb; ?>
+      <?php endif; ?>
+     
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
