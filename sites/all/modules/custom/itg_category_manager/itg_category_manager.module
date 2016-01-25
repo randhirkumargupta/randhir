@@ -107,19 +107,26 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     }
     //Redirect to term listing page, after term has been added successfully.
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
+     // p($form);
       $form['#action'] = '?destination=admin/structure/taxonomy/category_management';
       $form['name']['#title'] = t('Category Title');
       unset($form['description']);
 
       //Relation treatment
-      $form['relations']['#title'] = '';
+//      $form['relations']['#title'] = '';
       $form['relations']['parent']['#title'] = t('Select Parent Category');
-      $form['relations']['#collapsible'] = 0;
-      $form['relations']['parent']['#size'] = 10;
-      $form['relations']['parent']['#attributes'] = array('style' => 'width:300px');
-      unset($form['relations']['weight']);
+      $form['#after_build'][] = 'itg_category_manager_after_build';
+//      $form['relations']['#collapsible'] = 0;
+//      $form['relations']['parent']['#size'] = 10;
+//      $form['relations']['parent']['#attributes'] = array('style' => 'width:300px');
+//      unset($form['relations']['weight']);
     }
   }
+}
+
+function itg_category_manager_after_build($form, &$form_state) {
+  //p($form);
+  return $form;
 }
 
 /**
