@@ -141,6 +141,11 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     $(this).addClass('active').siblings('.target-link').removeClass('active');
     $("body,html").animate({ scrollTop: targetOffset }, 1000);
     });
+    
+  // Jquery code to close preview popup
+  $(document).on('click', '.close-preview', function(){
+    $(this).parents('.preview-wrapper').hide();
+  });
 
 };
 })(jQuery);
