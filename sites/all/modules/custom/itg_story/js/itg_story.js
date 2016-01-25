@@ -21,8 +21,8 @@
                  });
                  
                  //code for Magazine and Supplement field hide and show
-                 $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function() {
-                     if ($(this).attr("checked")) {
+                 $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function() {                     
+                     if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(':checked')) {                         
                          $('#edit-field-story-select-magazine').show();
                          $('#edit-field-story-select-supplement').show();
                      }else{
