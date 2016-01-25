@@ -84,3 +84,80 @@ span.error{
 input.form-autocomplete, input.form-text, input.form-file, textarea.form-textarea, select.form-select{
   max-width: 400px !important;
 }
+.page-node-add-story .preview-wrapper{
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+.preview{
+  background-color: #fff;
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  width: 900px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.preview > h3{
+  font-size: 24px;
+  padding: 20px;
+}
+.close-preview{
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: url('../images/close.png') no-repeat;
+  width: 32px;
+  height: 32px;
+  text-indent: -9999px;
+}
+.column-main{
+  max-height: 500px;
+  overflow-y: auto;
+}
+.page-node-add-story .node-teaser, 
+.page-node-add-story .node-preview .column-side, 
+.page-node-add-story .node-title, 
+.page-node-add-story .preview > h3:first-child{
+  display: none;
+}
+.page-node-add-story div.node{
+  background: none;
+  border-top-color: #eee;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.page-node-add-story .field-collection-container{
+  border: none;
+  margin: 0;
+}
+.preview-wrapper .node-content .field, .page-node-add-story .column-main{
+  display: inline-block;
+  width: 100%;
+}
+.preview-wrapper .node-content h2{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: normal;
+  margin: 0 0 10px;
+  padding: 10px 15px;
+}
+.preview-wrapper .content-details{
+  padding: 0 15px 15px;
+}
+.preview-wrapper .node-content .field .field-label, .preview-wrapper .node-content .field .field-items{
+  float: left;
+}
+.preview-wrapper .node-content .field .field-items{
+  width: 70%;
+}
+.preview-wrapper .node-content .field .field-label{
+  width: 30%;
+}
