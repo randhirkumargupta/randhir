@@ -1,0 +1,75 @@
+<?php
+/**
+ * @file
+ * feature_category_management.strongarm.inc
+ */
+
+/**
+ * Implements hook_strongarm().
+ */
+function feature_category_management_strongarm() {
+  $export = array();
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_taxonomy_term__category_management';
+  $strongarm->value = array(
+    'view_modes' => array(),
+    'extra_fields' => array(
+      'form' => array(
+        'metatags' => array(
+          'weight' => '9',
+        ),
+        'path' => array(
+          'weight' => '4',
+        ),
+        'name' => array(
+          'weight' => '0',
+        ),
+        'description' => array(
+          'weight' => '1',
+        ),
+      ),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_taxonomy_term__category_management'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'itg_category_manager_case_sensitive';
+  $strongarm->value = 0;
+  $export['itg_category_manager_case_sensitive'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'itg_category_manager_types';
+  $strongarm->value = array(
+    'vocab' => 'vocab',
+    'term' => 'term',
+  );
+  $export['itg_category_manager_types'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'itg_category_manager_vocabularies';
+  $strongarm->value = array(
+    2 => '2',
+    3 => 0,
+    1 => 0,
+  );
+  $export['itg_category_manager_vocabularies'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'metatag_enable_taxonomy_term__category_management';
+  $strongarm->value = TRUE;
+  $export['metatag_enable_taxonomy_term__category_management'] = $strongarm;
+
+  return $export;
+}
