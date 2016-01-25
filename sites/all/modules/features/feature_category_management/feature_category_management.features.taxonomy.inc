@@ -1,18 +1,18 @@
 <?php
 /**
  * @file
- * features_for_story.features.taxonomy.inc
+ * feature_category_management.features.taxonomy.inc
  */
 
 /**
  * Implements hook_taxonomy_default_vocabularies().
  */
-function features_for_story_taxonomy_default_vocabularies() {
+function feature_category_management_taxonomy_default_vocabularies() {
   return array(
-    'city' => array(
-      'name' => 'city',
-      'machine_name' => 'city',
-      'description' => 'city',
+    'category_management' => array(
+      'name' => 'Category Management',
+      'machine_name' => 'category_management',
+      'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,

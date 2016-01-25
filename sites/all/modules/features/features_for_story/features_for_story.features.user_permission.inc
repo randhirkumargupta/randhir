@@ -59,13 +59,6 @@ function features_for_story_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete terms in category_management'.
-  $permissions['delete terms in category_management'] = array(
-    'name' => 'delete terms in category_management',
-    'roles' => array(),
-    'module' => 'taxonomy',
-  );
-
   // Exported permission: 'delete terms in city'.
   $permissions['delete terms in city'] = array(
     'name' => 'delete terms in city',
@@ -98,13 +91,6 @@ function features_for_story_user_default_permissions() {
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: 'edit terms in category_management'.
-  $permissions['edit terms in category_management'] = array(
-    'name' => 'edit terms in category_management',
-    'roles' => array(),
-    'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in city'.

@@ -97,7 +97,7 @@ function itg_story_theme($existing, $type, $theme, $path) {
 /**
  * Implemets hook_form_alter().
  */
-function itg_story_form_alter(&$form, &$form_state, $form_id) { 
+function itg_story_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   $settings = array();
   
