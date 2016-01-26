@@ -1,22 +1,151 @@
-/**
- * @file
- * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
- *
- * When you turn on CSS aggregation at admin/config/development/performance, all
- * of these @include files will be combined into a single file.
- */
+/*---------------------------- ITG CSS -----------------------------------*/
+/* Layout CSS */
+/* line 5, ../sass/styles.scss */
+.mr-0, * {
+  margin: 0;
+}
 
-/* HTML element (SMACSS base) rules */
-@import "normalize.css";
+/* line 8, ../sass/styles.scss */
+.mt-10, .form-submit, .page-user .form-type-password {
+  margin-top: 10px;
+}
 
-/* Layout rules */
-@import "layouts/responsive.css";
+/* line 11, ../sass/styles.scss */
+.pd-0, * {
+  padding: 0;
+}
 
-/* Component (SMACSS module) rules */
-@import "components/misc.css";
-/* Optionally, add your own components here. */
-@import "print.css";
+/* line 14, ../sass/styles.scss */
+.pd-10 {
+  padding: 10px;
+}
 
-/* SMACSS theme rules */
-/* @import "theme-A.css"; */
-/* @import "theme-B.css"; */
+/* line 17, ../sass/styles.scss */
+.pd-30, .page-user form {
+  padding: 30px;
+}
+
+/* line 20, ../sass/styles.scss */
+.pdlr-30, .tabs-primary a {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* line 24, ../sass/styles.scss */
+.pdtb-10, .header, .tabs-primary a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* line 28, ../sass/styles.scss */
+.no-bullet, .tabs-primary {
+  list-style: none;
+}
+
+/* line 31, ../sass/styles.scss */
+.no-underline, .tabs-primary a {
+  text-decoration: none;
+}
+
+/* line 34, ../sass/styles.scss */
+.db, .tabs-primary a, .page-user label {
+  display: block;
+}
+
+/* line 37, ../sass/styles.scss */
+.dib, .btn, .form-submit, .tabs-primary {
+  display: inline-block;
+}
+
+/* line 40, ../sass/styles.scss */
+.vtop, .btn, .form-submit, .tabs-primary {
+  vertical-align: top;
+}
+
+/* line 43, ../sass/styles.scss */
+.full {
+  width: 100%;
+}
+
+/* line 46, ../sass/styles.scss */
+.fleft, .tabs-primary li {
+  float: left;
+}
+
+/* line 49, ../sass/styles.scss */
+.fright {
+  float: right;
+}
+
+/* line 52, ../sass/styles.scss */
+.btn, .form-submit {
+  background-color: #337ab7;
+  border: 1px solid #2e6da4;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+/* line 65, ../sass/styles.scss */
+.btn:hover, .form-submit:hover {
+  background-color: #286090;
+  border-color: #204d74;
+  color: #fff;
+}
+
+/* line 72, ../sass/styles.scss */
+input[type="text"], select, input[type="password"] {
+  border: 1px solid #ddd;
+  height: 32px;
+  line-height: 30px;
+  padding: 5px;
+}
+
+/* line 78, ../sass/styles.scss */
+.form-required, .error {
+  color: red;
+}
+
+/* line 81, ../sass/styles.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 86, ../sass/styles.scss */
+#page .section {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+/* line 90, ../sass/styles.scss */
+.header {
+  box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* line 99, ../sass/styles.scss */
+.tabs-primary li {
+  margin-right: 1px;
+}
+
+/* line 103, ../sass/styles.scss */
+.tabs-primary a {
+  background-color: #FF2B36;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* line 115, ../sass/styles.scss */
+.page-user form {
+  border: 1px solid #ddd;
+  background-color: #eee;
+}
+
+/* line 127, ../sass/styles.scss */
+.page-user #content {
+  max-width: 455px;
+  margin: 100px auto 0;
+}

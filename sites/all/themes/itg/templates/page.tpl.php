@@ -11,7 +11,7 @@
 <div id="page">
 
   <header class="header" id="header" role="banner">
-
+    <section class="section">
     <?php if ($logo): ?>
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
     <?php endif; ?>
@@ -47,18 +47,20 @@
     <?php endif; ?>
 
     <?php print render($page['header']); ?>
-
+    </section>
   </header>
 
   <div id="main">
 
     <div id="content" class="column" role="main">
       <?php print render($page['highlighted']); ?>
-      <?php print $breadcrumb; ?>
+      <?php if(arg(0)!= 'user'): print $breadcrumb; ?>
+      <?php endif; ?>
+     
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
-        <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
+        <h1 class="page__title title" id="page-title"><?php //print $title; ?></h1>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
