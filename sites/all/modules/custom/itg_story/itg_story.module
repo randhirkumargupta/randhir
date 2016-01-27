@@ -107,22 +107,18 @@ function itg_story_theme($existing, $type, $theme, $path) {
  * Implemets hook_form_alter().
  */
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
-  global $user, $base_url;
-  $settings = array();
+  global $user, $base_url; 
   
   switch ($form_id) {
     case 'story_node_form':
-      $settings['base_url'] = $base_url;
-      $settings['uid'] = $user->uid;
       
-      drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
-      drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'story-menegment'),
         '#weight' => 20,
       );
       
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
+      $form['#after_build'][] = 'itg_story_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
     break;      
   }
@@ -206,4 +202,16 @@ function itg_story_node_validate($node, $form, &$form_state) {
       
     }
   }
+}
+
+// after build for story form
+function itg_story_after_build($form, &$form_state) {
+  global $user, $base_url;
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+
+  drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
+  return $form;
 }
