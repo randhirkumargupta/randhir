@@ -150,6 +150,43 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_cm_redirection_url'.
+  $field_instances['taxonomy_term-category_management-field_cm_redirection_url'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_redirection_url',
+    'label' => 'Redirection URL',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_cm_select_type'.
   $field_instances['taxonomy_term-category_management-field_cm_select_type'] = array(
     'bundle' => 'category_management',
@@ -168,8 +205,8 @@ function feature_category_management_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'exclude_cv' => 0,
     'field_name' => 'field_cm_select_type',
-    'label' => 'Select Type',
-    'required' => 0,
+    'label' => 'Content Type',
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -179,7 +216,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
@@ -219,11 +256,12 @@ function feature_category_management_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Content Type');
   t('Display Title');
   t('Hide Category form home');
   t('Hide Category from search');
   t('No Follow');
-  t('Select Type');
+  t('Redirection URL');
   t('Sponsored Category');
 
   return $field_instances;
