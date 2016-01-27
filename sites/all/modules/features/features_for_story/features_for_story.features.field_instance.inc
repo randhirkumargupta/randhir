@@ -182,7 +182,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Story Body',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -268,7 +268,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Client title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -310,7 +310,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Comment Question',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -327,6 +327,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_comment_question',
     'label' => 'Comment Question',
     'required' => 0,
@@ -390,7 +391,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Courtesy',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -407,6 +408,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_courtesy',
     'label' => 'Courtesy',
     'required' => 0,
@@ -431,7 +433,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Expert description',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -448,6 +450,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_expert_description',
     'label' => 'Expert description',
     'required' => 0,
@@ -548,7 +551,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Expert Name',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -565,6 +568,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_expert_name',
     'label' => 'Expert Name',
     'required' => 0,
@@ -635,7 +639,7 @@ function features_for_story_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
       'weight' => 15,
@@ -646,7 +650,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_extra_large_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (650 x 445)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -666,6 +670,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
     'label' => 'Extra Large Image',
     'required' => 0,
@@ -721,7 +726,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_extra_small_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -741,6 +746,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_extra_small_image',
     'label' => 'Extra Small Image',
     'required' => 0,
@@ -863,7 +869,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Facebook Narrative',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -880,6 +886,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_facebook_narrative',
     'label' => 'Facebook Narrative',
     'required' => 0,
@@ -904,7 +911,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Story Kicker Text',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -945,7 +952,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_large_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (300 x 225)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -965,6 +972,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_large_image',
     'label' => 'Large Image',
     'required' => 0,
@@ -1021,7 +1029,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Long headline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1063,7 +1071,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Magazine headline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1080,6 +1088,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_magazine_headline',
     'label' => 'Magazine headline',
     'required' => 0,
@@ -1104,7 +1113,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Magazine Kicker Text',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1121,6 +1130,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_magazine_kicker_text',
     'label' => 'Magazine Kicker Text',
     'required' => 1,
@@ -1183,7 +1193,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_medium_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (300 x 350)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1260,7 +1270,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'New Title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1277,6 +1287,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_new_title',
     'label' => 'New Title',
     'required' => 0,
@@ -1511,7 +1522,7 @@ function features_for_story_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
       'weight' => 14,
@@ -1603,7 +1614,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Short headline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1644,7 +1655,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_small_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (210 x 145)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1664,6 +1675,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_small_image',
     'label' => 'Small Image',
     'required' => 0,
@@ -1720,7 +1732,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Snap Post',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1800,7 +1812,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Templates Buzz',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1823,6 +1835,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_template_buzz',
     'label' => 'Templates Buzz',
     'required' => 0,
@@ -1844,7 +1857,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Templates Factoids',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1861,6 +1874,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_template_factoids',
     'label' => 'Templates Factoids',
     'required' => 0,
@@ -1885,7 +1899,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Templates Guru',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1902,6 +1916,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_template_guru',
     'label' => 'Templates Guru',
     'required' => 0,
@@ -1926,7 +1941,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Templates Quotes',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1943,6 +1958,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_template_quotes',
     'label' => 'Templates Quotes',
     'required' => 0,
@@ -2005,7 +2021,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Tweet',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2022,6 +2038,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_tweet',
     'label' => 'Tweet',
     'required' => 0,
@@ -2102,6 +2119,11 @@ function features_for_story_field_default_field_instances() {
   t('Facebook Narrative');
   t('HeadLine');
   t('Image');
+  t('Image Size (210 x 145)');
+  t('Image Size (300 x 225)');
+  t('Image Size (300 x 350)');
+  t('Image Size (650 x 445)');
+  t('Image Size (88 x 66)');
   t('Large Image');
   t('Long headline');
   t('Magazine Kicker Text');
