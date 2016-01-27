@@ -6,7 +6,7 @@
 }
 
 /* line 8, ../sass/styles.scss */
-.mt-10, .form-submit, .page-user .form-type-password {
+.mt-10, .page-user form .form-type-password, .page-user form .form-submit {
   margin-top: 10px;
 }
 
@@ -26,13 +26,13 @@
 }
 
 /* line 20, ../sass/styles.scss */
-.pdlr-30, .tabs-primary a {
+.pdlr-30, .tabs-primary li a {
   padding-left: 30px;
   padding-right: 30px;
 }
 
 /* line 24, ../sass/styles.scss */
-.pdtb-10, .header, .tabs-primary a {
+.pdtb-10, .header, .tabs-primary li a {
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -43,22 +43,22 @@
 }
 
 /* line 31, ../sass/styles.scss */
-.no-underline, .tabs-primary a {
+.no-underline, .tabs-primary li a {
   text-decoration: none;
 }
 
 /* line 34, ../sass/styles.scss */
-.db, .tabs-primary a, .page-user label {
+.db, .tabs-primary li a, .page-user form label {
   display: block;
 }
 
 /* line 37, ../sass/styles.scss */
-.dib, .btn, .form-submit, .tabs-primary {
+.dib, .btn, .page-user form .form-submit, .tabs-primary {
   display: inline-block;
 }
 
 /* line 40, ../sass/styles.scss */
-.vtop, .btn, .form-submit, .tabs-primary {
+.vtop, .btn, .page-user form .form-submit, .tabs-primary {
   vertical-align: top;
 }
 
@@ -78,7 +78,7 @@
 }
 
 /* line 52, ../sass/styles.scss */
-.btn, .form-submit {
+.btn, .page-user form .form-submit {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
   color: #fff;
@@ -91,7 +91,7 @@
   white-space: nowrap;
 }
 /* line 65, ../sass/styles.scss */
-.btn:hover, .form-submit:hover {
+.btn:hover, .page-user form .form-submit:hover {
   background-color: #286090;
   border-color: #204d74;
   color: #fff;
@@ -126,25 +126,33 @@ input[type="text"], select, input[type="password"] {
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* line 99, ../sass/styles.scss */
+/* line 98, ../sass/styles.scss */
 .tabs-primary li {
   margin-right: 1px;
 }
-
-/* line 103, ../sass/styles.scss */
-.tabs-primary a {
-  background-color: #FF2B36;
+/* line 101, ../sass/styles.scss */
+.tabs-primary li a {
+  background-color: #ddd;
   font-weight: bold;
+  color: #333;
+  transition: all 500ms;
+}
+/* line 110, ../sass/styles.scss */
+.tabs-primary li a:hover, .tabs-primary li a.active {
+  background-color: #FF2B36;
   color: #fff;
 }
 
-/* line 115, ../sass/styles.scss */
+/* line 118, ../sass/styles.scss */
 .page-user form {
   border: 1px solid #ddd;
   background-color: #eee;
 }
-
-/* line 127, ../sass/styles.scss */
+/* line 132, ../sass/styles.scss */
+.page-user form .form-text {
+  width: 100%;
+}
+/* line 134, ../sass/styles.scss */
 .page-user #content {
   max-width: 455px;
   margin: 100px auto 0;

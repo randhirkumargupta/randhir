@@ -18,23 +18,22 @@
 }
 .block-superfish .sf-menu.sf-horizontal li{
   float: left;
+  margin-right: 1px;
 }
 
-.view-manage-users > .view-header{
+.view > .attachment{
   text-align: right;
+  padding-bottom: 10px;
 }
-.view-manage-users > .view-header p{
-  display: inline-block;
-  vertical-align: top;
-}
-.view-manage-users > .view-header p a{
+.view > .attachment a{
   color: #fff;
   border-radius: 5px;
   padding: 5px 10px;
   background-color: #7bc;
   font-weight: bold;
   text-shadow: #38a 0 1px 0;
-  display: block;
+  display: inline-block;
+  vertical-align: top;
 }
 .view-manage-users .view-filters .views-exposed-form .views-exposed-widget .form-submit{
   margin-top: 18px;
@@ -57,23 +56,6 @@ div.password-confirm{
 span.error{
   display: block;
 }
-.block-itg-story-list{
-  margin: 0 30px;
-}
-.block-itg-story-list span{
-  cursor: pointer;
-}
-.block-itg-story-list span.active{
-  color: #008eb1;
-}
-.block-itg-story.fixed{
-  position: fixed;
-  width: 100%;
-  z-index: 9999;
-  top: 20px;
-  left: 0;
-  box-shadow: 0 2px 2px 0 #ddd;
-}
 .node-story-form .field-name-field-story-magazine-story-issue .form-type-checkboxes label{
   display: inline;
 }
@@ -84,6 +66,7 @@ span.error{
 input.form-autocomplete, input.form-text, input.form-file, textarea.form-textarea, select.form-select{
   max-width: 400px !important;
 }
+textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .preview-wrapper{
   background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
@@ -117,7 +100,7 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
   height: 32px;
   text-indent: -9999px;
 }
-.column-main{
+.preview .column-main{
   max-height: 500px;
   overflow-y: auto;
 }
@@ -160,4 +143,221 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 }
 .preview-wrapper .node-content .field .field-label{
   width: 30%;
+}
+.block-superfish{
+  border: none;
+}
+.block-superfish h2.block-title, .region-help{
+  display: none;
+}
+.block-superfish .block-content{
+  padding: 0;
+}
+.sf-menu.sf-style-light-blue{
+  width: 100%;
+  background-color: #d9ecff;
+}
+div.views-exposed-form div.views-submit-button{
+  margin-right: 0;
+}
+.block-superfish .sf-menu.sf-horizontal li.active-trail{
+  background-color: #b5d8fa;
+}
+.node-story-form .form-item{
+  border: none;
+  padding: 0;
+  margin: 0 0 10px;
+  display: inline-block;
+  width: 100%;
+}
+
+.node-story-form .form-item label{
+  font-size: 12px;
+  float: left;
+  width: 300px;
+}
+.node-story-form .form-item .error{
+  display: block;
+  color: red;
+  padding-left: 300px;
+}
+.node-story-form .form-type-checkboxes label,
+.node-story-form .form-type-radios label, 
+.node-story-form .field-name-field-story-magazine-story-issue .form-type-checkboxes label,
+.node-story-form .field-name-field-story-resize-extra-large .form-type-checkboxes label{
+  float: none;
+}
+.node-story-form .form-type-radios > label,
+.node-story-form .form-type-checkboxes > label{
+  float: left;
+}
+.node-story-form .form-type-checkboxes .form-checkboxes,
+.node-story-form .form-type-radios .form-radios, 
+.node-story-form .form-type-textarea .form-textarea-wrapper{
+  overflow: hidden;
+}
+.node-story-form .form-type-managed-file .form-managed-file{
+  overflow: hidden;
+}
+.node-story-form .form-item .form-type-checkbox{
+  display: inline-block;
+  margin-right: 20px;
+  width: auto;
+}
+.node-story-form .form-type-managed-file .form-managed-file .filefield-source .form-item{
+  float: left;
+} 
+.node-story-form .field-name-field-story-resize-extra-large .form-type-checkboxes .form-checkboxes{
+  float: left;
+  margin-right: 3px;
+}
+.node-story-form .field-name-field-story-resize-extra-large .form-type-checkboxes label{
+  display: inline-block;
+  vertical-align: top;
+}
+.node-story-form .date-combo{
+  border: none;
+}
+.node-story-form .date-combo .fieldset-title{
+  background: none;
+  padding: 0;
+}
+.node-story-form .date-combo legend{
+  width: 300px;
+}
+.node-story-form .date-combo .fieldset-content{
+  overflow: hidden;
+  padding: 0;
+}
+.node-story-form fieldset.date-combo .container-inline-date .date-padding{
+  padding: 0;
+}
+.node-story-form fieldset.date-combo .container-inline-date .date-padding .form-item{
+  width: 160px;
+  padding-right: 20px;
+}
+
+
+.page-content .node-story-form .form-item .description{
+  left: 300px;
+  margin-bottom: 10px;
+}
+.page-content .node-story-form .form-item td .description{
+  padding-left: 300px;
+}
+.node-story-form .ckeditor_links{
+  margin-left: 300px;
+}
+.node-story-form #Templates th.field-label label{
+  padding-left: 5px;
+}
+.node-story-form table.field-multiple-table td .button-remove{
+  margin-left: 300px;
+}
+.node-story-form .form-item .form-item{
+  margin: 0;
+}
+.story-title{
+  font-size: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+#block-itg-story-story-tab-form-block .block-content{
+  background-color: #666;
+  padding: 0;
+}
+.block-itg-story-list{
+  text-align: center;
+}
+.block-itg-story-list span{
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 30px;
+  color: #fff;
+  position: relative;
+  margin-left: -3px;
+}
+/*.block-itg-story-list span:after{
+  content: '|';
+  position: absolute;
+  left: -3px;
+  top: 0;
+  height: 40px;
+  line-height: 38px;
+  font-size: 20px;
+  
+}*/
+.block-itg-story-list span.active, .block-itg-story-list span:hover{
+  color: #666;
+  background-color: #fff;
+}
+.block-itg-story.fixed{
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 2px 0 #ddd;
+}
+#block-menu-menu-admin-left-menu{
+ border: none; 
+}
+#block-menu-menu-admin-left-menu h2.block-title{
+  display: none;
+}
+#block-menu-menu-admin-left-menu .block-content{
+  border: none;
+  padding: 0;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu{
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li{
+  float: left;
+  position: relative;
+  border: none;
+  padding: 0;
+  margin-right: 2px;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li > a{
+  padding: 8px 10px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu a{
+  color: #666;
+  font-size: 13px;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li:hover > a{
+  color: #008eb1;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu{
+  position: absolute;
+  left: 0;
+  top: 37px;
+  width: 100%;
+  background-color: #f9f9f9;
+  display: none;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li:hover > ul{
+  display: block;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li{
+  padding: 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li a{
+  color: #7c7c7c;
+  padding: 8px 10px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li a:hover{
+  color: #008eb1;
 }
