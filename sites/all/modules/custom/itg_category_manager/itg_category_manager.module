@@ -21,9 +21,8 @@ function itg_category_manager_help($path, $arg) {
  * Implements hook_menu().
  */
 function itg_category_manager_menu() {
-
+  
   $items = array();
-
   $items['admin/config/itg_category_manager'] = array(
       'title' => 'ITG Category Manager',
       'description' => 'Configuration for ITG Category Manager module.',
@@ -31,7 +30,6 @@ function itg_category_manager_menu() {
       'page arguments' => array('itg_category_manager_form'),
       'access arguments' => array('administer taxonomy'),
   );
-
   return $items;
 }
 
@@ -78,8 +76,10 @@ function itg_category_manager_form($form, &$form_state) {
 /**
  * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
  */
-function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) { //
+function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
+  
   global $base_url;
+  
   // Delete category functionality.
   if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete')) {
     //$vid = $form_state['term']->vid;
@@ -105,9 +105,9 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['#validate'][] = 'itg_category_manager_term_validate';
       }
     }
+    
     //Redirect to term listing page, after term has been added successfully.
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
-     // p($form);
       $form['#action'] = '?destination=admin/structure/taxonomy/category_management';
       $form['name']['#title'] = t('Category Title');
       $form['field_cm_select_type']['#attributes'] = array('style' => 'width:410px');
@@ -117,17 +117,16 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['#title'] = '';
       $form['relations']['#weight'] = 8;
       $form['relations']['parent']['#title'] = t('Select Section');
-      $form['#after_build'][] = 'itg_category_manager_after_build';
       $form['relations']['#collapsible'] = 0;
-      //$form['relations']['#attributes'] = array('style' => 'width:300px');
       unset($form['relations']['weight']);
+      
+      //Add cancel link to add and edit form of category add form
+      $form['actions']['cancel'] = array(
+         '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management'),
+         '#weight' => 20,
+     );
     }
   }
-}
-
-function itg_category_manager_after_build($form, &$form_state) {
-  //p($form);
-  return $form;
 }
 
 /**
@@ -137,15 +136,22 @@ function itg_category_manager_term_validate($form, &$form_state) {
   $term = $form_state['values']['name'];
   $vid = $form_state['values']['vid'];
   $tid = $form_state['values']['tid'];
+  $cat_arr = $form_state['input']['parent']['hierarchical_select']['selects'];
+  $num_cat_selected = count($cat_arr);
+  
   if ($form_state['triggering_element']['#value'] != 'Delete') {
-    $current_parent_tid = $form_state['input']['parent'][0];
-    if (count(taxonomy_get_parents_all($current_parent_tid)) > 4) {
-      form_set_error('name', t('Sorry! You can create only 4 levels of categories within a section.'));
+    if(($cat_arr[0] == 'label_0')){
+      form_set_error('parent', t('Section field is required.'));
     }
+    if ($num_cat_selected > 4) {
+      form_set_error('parent', t('Sorry! You can not create more than 4 levels of categories within a section.'));
+    }
+    //Check for duplicate category
     if (itg_category_manager_is_dupe_term($term, $vid, $tid)) {
       $tid_existing_term = itg_category_manager_get_term_from_name($term, $vid);
       $parent_tid = taxonomy_get_parents_all($tid_existing_term);
-      if ($current_parent_tid == $parent_tid[1]->tid) {
+      $tid_arr_key = $num_cat_selected-2;
+      if ($cat_arr[$tid_arr_key] == $parent_tid[1]->tid) {
         form_set_error('name', t('Category name already exists.'));
       }
     }
