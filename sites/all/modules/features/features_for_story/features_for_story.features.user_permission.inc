@@ -47,7 +47,7 @@ function features_for_story_user_default_permissions() {
   $permissions['delete any story content'] = array(
     'name' => 'delete any story content',
     'roles' => array(
-      'SEO' => 'SEO',
+      'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
   );

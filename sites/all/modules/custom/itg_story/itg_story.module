@@ -9,6 +9,15 @@
  */
 
 /**
+ * Implements hook_init().
+ */
+function itg_story_init() {
+
+
+}
+
+
+/**
  * Implements hook_menu().
  */
 function itg_story_menu() {
@@ -110,6 +119,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => l(t('Cancel'), 'story-menegment'),
         '#weight' => 20,
       );
+      unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
     break;      
   }
@@ -119,13 +129,13 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * Custom submit callback for redirecting story form.
  */
 function itg_story_form_custom_callback($form, &$form_state) {  
-  if (isset($_SESSION ['messages'])) {
-    unset($_SESSION ['messages']);
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
   }
   
   drupal_set_message('Story has been created successfully.');
-  
-  $form_state['redirect'] = 'story-management';  
+  $_GET['destination'] = 'story-management'; 
+   
 }
 
 /**
@@ -138,4 +148,59 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
      $form['nid']['#autocomplete_path'] = 'story-nid-list/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Nid'));
    }   
+}
+
+/**
+ * Implements hook_node_validate().  
+ */
+function itg_story_node_validate($node, $form, &$form_state) {
+  // Code for redirection url validation
+  if ($node->type == 'story') {
+    $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
+    
+    if (!empty($redirection_url)) { 
+      if (filter_var($redirection_url, FILTER_VALIDATE_URL) === false) {
+         form_set_error('field_story_redirection_url_titl', t("$redirection_url is not a valid URL"));
+      }
+    }
+    
+    // Code for configurations validation
+    if (isset($node->field_story_configurations[LANGUAGE_NONE])) {
+      foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+        if ($val['value'] == 'comment') {
+          // Code for comment question validation
+          if (empty($node->field_story_comment_question[LANGUAGE_NONE][0]['value'])) {
+            form_set_error('field_story_comment_question', t("Comment Question field is required."));
+          }
+        }
+        
+        // Code for client title validation
+        if ($val['value'] == 'syndication') {
+          if (empty($node->field_story_client_title[LANGUAGE_NONE][0]['value'])) {
+            form_set_error('field_story_client_title', t("Client title field is required."));
+          }
+        }
+      }      
+    }
+    
+    // Code for social media validation
+    if (isset($node->field_story_social_media_integ[LANGUAGE_NONE])) {
+      foreach ($node->field_story_social_media_integ[LANGUAGE_NONE] as $key_media => $val_media) {
+        // Code for facebook narrative validation
+        if ($val_media['value'] == 'facebook') {
+          if (empty($node->field_story_facebook_narrative[LANGUAGE_NONE][0]['value'])) {
+            form_set_error('field_story_facebook_narrative', t("Facebook Narrative field is required."));
+          }
+        }
+        
+        // Code for Twitter validation
+        if ($val_media['value'] == 'twitter') {
+          if (empty($node->field_story_tweet[LANGUAGE_NONE][0]['value'])) {
+            form_set_error('field_story_tweet', t("Twitter field is required."));
+          }
+        }
+      }
+      
+    }
+  }
 }

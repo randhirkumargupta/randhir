@@ -8,7 +8,7 @@
  * Reporter details callback
  */
 function itg_story_reporter_details() {  
-  $reporter = substr($_GET['reporter_id'], 0, -1);
+  $reporter = substr($_POST['reporter_id'], 0, -1);
   $reporter_array = explode(" (", $reporter);
   $content = '';
   

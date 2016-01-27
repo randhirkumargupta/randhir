@@ -208,6 +208,30 @@ function features_for_story_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
+  // Exported field_base: 'field_story_client_title'.
+  $field_bases['field_story_client_title'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_client_title',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_story_comment_question'.
   $field_bases['field_story_comment_question'] = array(
     'active' => 1,
@@ -236,6 +260,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_configurations',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -251,7 +278,6 @@ function features_for_story_field_default_field_bases() {
         'medium_style_comment' => 'Medium Style Comment',
         'display_lock' => 'Display Lock',
         'syndication' => 'Syndication',
-        'client_title' => 'Client title',
       ),
       'allowed_values_function' => '',
     ),
@@ -532,6 +558,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_long_head_line',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -692,27 +721,6 @@ function features_for_story_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
-  // Exported field_base: 'field_story_redirection_url'.
-  $field_bases['field_story_redirection_url'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_story_redirection_url',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
   // Exported field_base: 'field_story_redirection_url_titl'.
   $field_bases['field_story_redirection_url_titl'] = array(
     'active' => 1,
@@ -720,6 +728,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_redirection_url_titl',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
