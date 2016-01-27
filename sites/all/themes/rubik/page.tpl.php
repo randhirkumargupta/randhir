@@ -1,4 +1,17 @@
-<?php if (theme_get_setting('rubik_show_branding')): ?>
+<?php
+/**
+ * Rename "Add Term" to "Add Category"
+ * Remove primary local task link (Edit and manage fields links from right top side)
+ */
+global $base_url;
+if(!in_array('administrator', $user->roles)){
+  if(arg(3) == 'category_management'){
+      $action_links = '<li><a href="'.$base_url.'/admin/structure/taxonomy/category_management/add">Add Category</a></li>';
+      $primary_local_tasks = '';
+  }
+}
+
+if (theme_get_setting('rubik_show_branding')): ?>
 <div id='branding'><div class='limiter clearfix'>
   <div class='breadcrumb clearfix'><?php print $breadcrumb ?></div>
   <?php if (!$overlay && isset($secondary_menu)) : ?>

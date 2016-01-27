@@ -16,7 +16,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter display name, it will appear on the front end if user has entered display name for the category else category name will appear.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -53,7 +53,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you checked this option, category name will not appear on front end navigation.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -87,7 +87,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you checked this option, then this category would not be able to search in google search.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -121,7 +121,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you checked this option, "No Follow" link will be embedded in category URL. ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -155,7 +155,8 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter the redirection URL. Reader will be redirected to the respective URL by clicking on the category name.
+',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -192,7 +193,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select content type, this category will be associate to selected content types. You can associate one category with multiple content types.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -226,7 +227,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you checked this option, category will be marked as sponsored and will appear in the category listing page with special flag "Sponsored". ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -260,7 +261,15 @@ function feature_category_management_field_default_field_instances() {
   t('Display Title');
   t('Hide Category form home');
   t('Hide Category from search');
+  t('If you checked this option, "No Follow" link will be embedded in category URL. ');
+  t('If you checked this option, category name will not appear on front end navigation.');
+  t('If you checked this option, category will be marked as sponsored and will appear in the category listing page with special flag "Sponsored". ');
+  t('If you checked this option, then this category would not be able to search in google search.');
   t('No Follow');
+  t('Please enter display name, it will appear on the front end if user has entered display name for the category else category name will appear.');
+  t('Please enter the redirection URL. Reader will be redirected to the respective URL by clicking on the category name.
+');
+  t('Please select content type, this category will be associate to selected content types. You can associate one category with multiple content types.');
   t('Redirection URL');
   t('Sponsored Category');
 
