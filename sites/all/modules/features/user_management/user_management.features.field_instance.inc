@@ -15,7 +15,7 @@ function user_management_field_default_field_instances() {
     'bundle' => 'user',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter your first name.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -24,8 +24,16 @@ function user_management_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'user',
+    'exclude_cv' => 0,
     'field_name' => 'field_first_name',
     'label' => 'First Name',
     'required' => 1,
@@ -50,7 +58,7 @@ function user_management_field_default_field_instances() {
     'bundle' => 'user',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter your last name.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -59,11 +67,19 @@ function user_management_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
     ),
     'entity_type' => 'user',
+    'exclude_cv' => 0,
     'field_name' => 'field_last_name',
     'label' => 'Last Name',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -85,7 +101,7 @@ function user_management_field_default_field_instances() {
     'bundle' => 'user',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter your mobile number.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -94,8 +110,16 @@ function user_management_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 2,
       ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
     ),
     'entity_type' => 'user',
+    'exclude_cv' => 0,
     'field_name' => 'field_mobile_number',
     'label' => 'Mobile Number',
     'required' => 0,
@@ -111,7 +135,7 @@ function user_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -120,6 +144,9 @@ function user_management_field_default_field_instances() {
   t('First Name');
   t('Last Name');
   t('Mobile Number');
+  t('Please enter your first name.');
+  t('Please enter your last name.');
+  t('Please enter your mobile number.');
 
   return $field_instances;
 }
