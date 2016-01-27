@@ -110,7 +110,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
      // p($form);
       $form['#action'] = '?destination=admin/structure/taxonomy/category_management';
       $form['name']['#title'] = t('Category Title');
-      $form['field_cm_select_type']['#attributes'] = array('style' => 'width:300px');
+      $form['field_cm_select_type']['#attributes'] = array('style' => 'width:410px');
       unset($form['description']);
 
       //Relation treatment
