@@ -28,7 +28,7 @@ function features_for_story_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_default_mode_story';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['comment_default_mode_story'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -49,21 +49,21 @@ function features_for_story_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_story';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['comment_preview_story'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_story';
-  $strongarm->value = '2';
+  $strongarm->value = '1';
   $export['comment_story'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_subject_field_story';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['comment_subject_field_story'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -91,10 +91,10 @@ function features_for_story_strongarm() {
           'weight' => '4',
         ),
         'metatags' => array(
-          'weight' => '41',
+          'weight' => '42',
         ),
         'path' => array(
-          'weight' => '40',
+          'weight' => '41',
         ),
       ),
       'display' => array(),
@@ -144,9 +144,7 @@ function features_for_story_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_story';
   $strongarm->value = array(
-    0 => 'promote',
-    1 => 'moderation',
-    2 => 'revision',
+    0 => 'status',
   );
   $export['node_options_story'] = $strongarm;
 
@@ -175,7 +173,7 @@ function features_for_story_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_moderation_default_state_story';
-  $strongarm->value = 'draft';
+  $strongarm->value = 'published';
   $export['workbench_moderation_default_state_story'] = $strongarm;
 
   return $export;

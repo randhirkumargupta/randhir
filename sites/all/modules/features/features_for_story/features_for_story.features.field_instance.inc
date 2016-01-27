@@ -216,11 +216,11 @@ function features_for_story_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 15,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 21,
+      'weight' => 20,
     ),
   );
 
@@ -259,7 +259,49 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 42,
+      'weight' => 40,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_story_client_title'.
+  $field_instances['node-story-field_story_client_title'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 48,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_client_title',
+    'label' => 'Client title',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 23,
     ),
   );
 
@@ -326,6 +368,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_configurations',
     'label' => 'Configurations',
     'required' => 0,
@@ -338,7 +381,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 23,
+      'weight' => 22,
     ),
   );
 
@@ -379,7 +422,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -420,7 +463,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 20,
+      'weight' => 19,
     ),
   );
 
@@ -476,7 +519,7 @@ function features_for_story_field_default_field_instances() {
         'resolution' => '200x150',
       ),
       'type' => 'imagefield_crop_widget',
-      'weight' => 19,
+      'weight' => 18,
     ),
   );
 
@@ -517,7 +560,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 17,
     ),
   );
 
@@ -575,7 +618,7 @@ function features_for_story_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -874,7 +917,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 21,
     ),
   );
 
@@ -975,8 +1018,9 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_long_head_line',
-    'label' => 'Long head line',
+    'label' => 'Long headline',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1031,7 +1075,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -1072,7 +1116,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -1227,7 +1271,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -1266,48 +1310,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 17,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_story_redirection_url'.
-  $field_instances['node-story-field_story_redirection_url'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_story_redirection_url',
-    'label' => 'Redirection URL for story title',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 16,
     ),
   );
 
@@ -1316,7 +1319,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'https://www.w3schools.com',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1333,8 +1336,9 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_redirection_url_titl',
-    'label' => 'Redirection URL for new title',
+    'label' => 'Redirection URL',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1348,7 +1352,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -1393,7 +1397,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -1489,7 +1493,7 @@ function features_for_story_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -2053,7 +2057,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -2063,6 +2067,7 @@ function features_for_story_field_default_field_instances() {
   t('By Line');
   t('Category');
   t('City');
+  t('Client title');
   t('Comment');
   t('Comment Question');
   t('Configurations');
@@ -2077,14 +2082,13 @@ function features_for_story_field_default_field_instances() {
   t('HeadLine');
   t('Image');
   t('Large Image');
-  t('Long head line');
+  t('Long headline');
   t('Magazine Kicker Text');
   t('Magazine Story / Issue Story');
   t('Magazine headline');
   t('Medium Image');
   t('New Title');
-  t('Redirection URL for new title');
-  t('Redirection URL for story title');
+  t('Redirection URL');
   t('Resize Extra Large ');
   t('Schedule Date & Time');
   t('Select Guru Templates');
@@ -2103,6 +2107,7 @@ function features_for_story_field_default_field_instances() {
   t('Templates Guru');
   t('Templates Quotes');
   t('Tweet');
+  t('https://www.w3schools.com');
 
   return $field_instances;
 }
