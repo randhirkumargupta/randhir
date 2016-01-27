@@ -113,12 +113,15 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       $settings['base_url'] = $base_url;
+      $settings['uid'] = $user->uid;
+      
       drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
       drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'story-menegment'),
         '#weight' => 20,
       );
+      
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
     break;      

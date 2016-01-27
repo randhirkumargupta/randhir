@@ -6,17 +6,21 @@
 (function($) {
         Drupal.behaviors.itg_story = {
              attach: function(context, settings) {
-                   $('#edit-field-story-select-magazine').hide();
-                   $('#edit-field-story-select-supplement').hide();
-                   $('#edit-field-story-comment-question').hide();
-                   $('#edit-field-story-client-title').hide();
-                   $('#edit-field-story-facebook-narrative').hide();
-                   $('#edit-field-story-tweet').hide();
-                   $('.field-edit-link').hide();
-                   $('#edit-body-und-0-format').hide();
-                   $('.vertical-tabs-list').hide();
-                   $('#edit-metatags').show();
-                   $('#edit-metatags-und-advanced').hide();                   
+                   var uid = settings.itg_story.settings.uid;
+                   if (uid != 1) {
+                     $('#edit-field-story-select-magazine').hide();
+                     $('#edit-field-story-select-supplement').hide();
+                     $('#edit-field-story-comment-question').hide();
+                     $('#edit-field-story-client-title').hide();
+                     $('#edit-field-story-facebook-narrative').hide();
+                     $('#edit-field-story-tweet').hide();
+                     $('.field-edit-link').hide();
+                     $('#edit-body-und-0-format').hide();
+                     $('.vertical-tabs-list').hide();
+                     $('#edit-metatags').show();
+                     $('#edit-metatags-und-advanced').hide();
+                     $('.form-item-metatags-und-abstract-value').hide();
+                   }
                    $('#edit-field-story-reporter-und-0-target-id').blur(function() {
                        
                     var base_url = settings.itg_story.settings.base_url;
