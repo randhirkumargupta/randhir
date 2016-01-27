@@ -4,9 +4,9 @@
  * Theme implementation for story form in tab display.
  * 
  */
-
+//p($page);
 ?>
-<div class=""><?php print drupal_render($form['actions']); ?></div>
+<!--<div class=""><?php //print drupal_render($form['actions']); ?></div>-->
 
 <div id="BasicDetails">
   <?php print drupal_render($form['field_story_magazine_story_issue']); ?>
@@ -15,27 +15,32 @@
   <?php print drupal_render($form['field_story_long_head_line']); ?>
   <?php print drupal_render($form['title']); ?>
   <?php print drupal_render($form['field_story_short_headline']); ?>
-  <?php print drupal_render($form['field_story_redirection_url']); ?>
+  <?php print drupal_render($form['field_story_snap_post']); ?>  
   <?php print drupal_render($form['field_story_new_title']); ?>
   <?php print drupal_render($form['field_story_redirection_url_titl']); ?>
   <?php print drupal_render($form['field_story_magazine_headline']); ?>
   <?php print drupal_render($form['field_story_magazine_kicker_text']); ?>
   <?php print drupal_render($form['field_stroy_city']); ?>
-  <?php print drupal_render($form['field_story_courtesy']); ?>
+  <?php print drupal_render($form['field_story_courtesy']); ?>  
+  
+ 
+</div>
+<div id="StoryContent">
   <?php print drupal_render($form['field_story_reporter']); ?>
-  <div id="reporter-details">
-    
-  </div>
+  <div id="reporter-details"></div>
+  <?php print drupal_render($form['field_story_schedule_date_time']); ?>
+  <?php print drupal_render($form['field_story_expiry_date']); ?>
+  <?php print drupal_render($form['field_story_rating']); ?>  
   <?php print drupal_render($form['field_story_expert_name']); ?>
   <?php print drupal_render($form['field_story_expert_image']); ?>
   <?php print drupal_render($form['field_story_expert_description']); ?>
-</div>
-<div id="StoryContent">
+  <?php print drupal_render($form['field_story_kicker_text']); ?>  
   <?php print drupal_render($form['body']); ?>
 </div>
 <div id="Configuration">
   <?php print drupal_render($form['field_story_configurations']); ?>
   <?php print drupal_render($form['field_story_comment_question']); ?>
+  <?php print drupal_render($form['field_story_client_title']); ?>  
 </div>
 <div id="SocialMedia">
   <?php print drupal_render($form['field_story_social_media_integ']); ?>
@@ -58,12 +63,9 @@
   <?php print drupal_render($form['field_story_template_factoids']); ?>
   <?php print drupal_render($form['field_story_template_buzz']); ?>
 </div>
-<!--<div class=""><?php //print drupal_render($form['path']); ?></div>-->
-<!--<div class=""><?php print drupal_render($form['sss']); ?></div>
-<div class=""><?php print drupal_render($form['sss']); ?></div>-->
-
-
-<div class=""><?php print drupal_render($form['actions']); ?></div>
-
+<div id="category">
+  <?php print drupal_render($form['field_story_category']); ?>  
+</div>
 
  <?php print drupal_render_children($form); ?>
+<div><?php print drupal_render($form['actions']); ?></div>
