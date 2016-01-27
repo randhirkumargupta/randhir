@@ -39,7 +39,11 @@ function user_management_user_default_permissions() {
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'user',
@@ -49,7 +53,6 @@ function user_management_user_default_permissions() {
   $permissions['administer permissions'] = array(
     'name' => 'administer permissions',
     'roles' => array(
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'user',
@@ -88,6 +91,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
@@ -100,6 +104,7 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -109,6 +114,7 @@ function user_management_user_default_permissions() {
   $permissions['assign Editor role'] = array(
     'name' => 'assign Editor role',
     'roles' => array(
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -121,6 +127,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
@@ -142,6 +149,7 @@ function user_management_user_default_permissions() {
     'name' => 'assign Section Editor/Anchor role',
     'roles' => array(
       'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -163,6 +171,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'role_delegation',
@@ -311,6 +320,7 @@ function user_management_user_default_permissions() {
   $permissions['execute user_block_user_action'] = array(
     'name' => 'execute user_block_user_action',
     'roles' => array(
+      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -322,6 +332,7 @@ function user_management_user_default_permissions() {
     'name' => 'view own unpublished content',
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
+      'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',

@@ -16,7 +16,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter display name, it will appear on the front end if user has entered display name for the category else category name will appear.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -53,7 +53,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you checked this option, category name will not appear on front end navigation.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -87,7 +87,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you checked this option, then this category would not be able to search in google search.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -121,7 +121,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you checked this option, "No Follow" link will be embedded in category URL. ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -150,12 +150,50 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_cm_redirection_url'.
+  $field_instances['taxonomy_term-category_management-field_cm_redirection_url'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter the redirection URL. Reader will be redirected to the respective URL by clicking on the category name.
+',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_redirection_url',
+    'label' => 'Redirection URL',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_cm_select_type'.
   $field_instances['taxonomy_term-category_management-field_cm_select_type'] = array(
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select content type, this category will be associate to selected content types. You can associate one category with multiple content types.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -168,8 +206,8 @@ function feature_category_management_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'exclude_cv' => 0,
     'field_name' => 'field_cm_select_type',
-    'label' => 'Select Type',
-    'required' => 0,
+    'label' => 'Content Type',
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -179,7 +217,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
@@ -189,7 +227,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you checked this option, category will be marked as sponsored and will appear in the category listing page with special flag "Sponsored". ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -219,11 +257,20 @@ function feature_category_management_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Content Type');
   t('Display Title');
   t('Hide Category form home');
   t('Hide Category from search');
+  t('If you checked this option, "No Follow" link will be embedded in category URL. ');
+  t('If you checked this option, category name will not appear on front end navigation.');
+  t('If you checked this option, category will be marked as sponsored and will appear in the category listing page with special flag "Sponsored". ');
+  t('If you checked this option, then this category would not be able to search in google search.');
   t('No Follow');
-  t('Select Type');
+  t('Please enter display name, it will appear on the front end if user has entered display name for the category else category name will appear.');
+  t('Please enter the redirection URL. Reader will be redirected to the respective URL by clicking on the category name.
+');
+  t('Please select content type, this category will be associate to selected content types. You can associate one category with multiple content types.');
+  t('Redirection URL');
   t('Sponsored Category');
 
   return $field_instances;

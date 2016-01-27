@@ -31,13 +31,29 @@ function pr($arg) {
  * Implements hook_form_alter().
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'user_register_form') {    
+    if ($form_id == 'user_register_form') {
+    //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
+    $form['account']['notify']['#default_value'] = TRUE;    
     // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
     $destination = 'manage-users';
     $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
+        '#value'  => t('Cancel'),
     );
   }
 }
+
+function itg_common_views_pre_render(&$view) {
+    if ($view->name == "manage_users") {
+        global $user; // Get user information
+        $header_content = '';
+        //$roles = user_roles();
+        if(!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {
+            $header_content = '<a href ="./admin/people/create">Create User</a>';
+        }
+         $view->attachment_before = $header_content;
+    }
+}
+ 
 
