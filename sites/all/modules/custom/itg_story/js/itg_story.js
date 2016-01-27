@@ -20,6 +20,8 @@
                      $('#edit-metatags').show();
                      $('#edit-metatags-und-advanced').hide();
                      $('.form-item-metatags-und-abstract-value').hide();
+                     $('#edit-field-story-facebook-image').hide();
+                     
                    }
                    $('#edit-field-story-reporter-und-0-target-id').blur(function() {
                        
