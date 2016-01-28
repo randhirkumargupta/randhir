@@ -18,7 +18,7 @@ function user_management_field_default_field_instances() {
     'description' => 'Please enter your first name.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -61,7 +61,7 @@ function user_management_field_default_field_instances() {
     'description' => 'Please enter your last name.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -104,7 +104,7 @@ function user_management_field_default_field_instances() {
     'description' => 'Please enter your mobile number.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
