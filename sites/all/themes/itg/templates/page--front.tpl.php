@@ -15,7 +15,7 @@
       <?php if ($logo): ?>
         <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
       <?php endif; ?>
-
+        <div class="fright login"><a href="user">Login</a></div>
       <?php if ($site_name || $site_slogan): ?>
         <div class="header__name-and-slogan" id="name-and-slogan">
           <?php if ($site_name): ?>
