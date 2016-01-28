@@ -1,83 +1,89 @@
 /*---------------------------- ITG CSS -----------------------------------*/
-/* Layout CSS */
-/* line 5, ../sass/styles.scss */
+/* Global CSS */
+/* line 4, ../sass/styles.scss */
+body {
+  font: 400 14px/18px 'Roboto';
+  color: #333;
+}
+
+/* line 8, ../sass/styles.scss */
 .mr-0, * {
   margin: 0;
 }
 
-/* line 8, ../sass/styles.scss */
+/* line 11, ../sass/styles.scss */
 .mt-10, .page-user form .form-type-password, .page-user form .form-submit {
   margin-top: 10px;
 }
 
-/* line 11, ../sass/styles.scss */
+/* line 14, ../sass/styles.scss */
 .pd-0, * {
   padding: 0;
 }
 
-/* line 14, ../sass/styles.scss */
+/* line 17, ../sass/styles.scss */
 .pd-10 {
   padding: 10px;
 }
 
-/* line 17, ../sass/styles.scss */
+/* line 20, ../sass/styles.scss */
 .pd-30, .page-user form {
   padding: 30px;
 }
 
-/* line 20, ../sass/styles.scss */
+/* line 23, ../sass/styles.scss */
 .pdlr-30, .tabs-primary li a {
   padding-left: 30px;
   padding-right: 30px;
 }
 
-/* line 24, ../sass/styles.scss */
+/* line 27, ../sass/styles.scss */
 .pdtb-10, .header, .tabs-primary li a {
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-/* line 28, ../sass/styles.scss */
+/* line 31, ../sass/styles.scss */
 .no-bullet, .tabs-primary {
   list-style: none;
 }
 
-/* line 31, ../sass/styles.scss */
+/* line 34, ../sass/styles.scss */
 .no-underline, .tabs-primary li a {
   text-decoration: none;
 }
 
-/* line 34, ../sass/styles.scss */
+/* line 37, ../sass/styles.scss */
 .db, .tabs-primary li a, .page-user form label {
   display: block;
 }
 
-/* line 37, ../sass/styles.scss */
+/* line 40, ../sass/styles.scss */
 .dib, .btn, .page-user form .form-submit, .tabs-primary {
   display: inline-block;
 }
 
-/* line 40, ../sass/styles.scss */
+/* line 43, ../sass/styles.scss */
 .vtop, .btn, .page-user form .form-submit, .tabs-primary {
   vertical-align: top;
 }
 
-/* line 43, ../sass/styles.scss */
+/* line 46, ../sass/styles.scss */
 .full {
   width: 100%;
 }
 
-/* line 46, ../sass/styles.scss */
+/* line 49, ../sass/styles.scss */
 .fleft, .tabs-primary li {
   float: left;
 }
 
-/* line 49, ../sass/styles.scss */
+/* line 52, ../sass/styles.scss */
 .fright {
   float: right;
 }
 
-/* line 52, ../sass/styles.scss */
+/* line 55, ../sass/styles.scss */
 .btn, .page-user form .form-submit {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
@@ -90,14 +96,14 @@
   text-align: center;
   white-space: nowrap;
 }
-/* line 65, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .btn:hover, .page-user form .form-submit:hover {
   background-color: #286090;
   border-color: #204d74;
   color: #fff;
 }
 
-/* line 72, ../sass/styles.scss */
+/* line 75, ../sass/styles.scss */
 input[type="text"], select, input[type="password"] {
   border: 1px solid #ddd;
   height: 32px;
@@ -105,55 +111,84 @@ input[type="text"], select, input[type="password"] {
   padding: 5px;
 }
 
-/* line 78, ../sass/styles.scss */
+/* line 81, ../sass/styles.scss */
 .form-required, .error {
   color: red;
 }
 
-/* line 81, ../sass/styles.scss */
+/* line 84, ../sass/styles.scss */
 * {
   box-sizing: border-box;
 }
 
-/* line 86, ../sass/styles.scss */
+/* line 89, ../sass/styles.scss */
+#main {
+  padding-top: 30px;
+}
+
+/* line 92, ../sass/styles.scss */
 #page .section {
   max-width: 1170px;
   margin: 0 auto;
 }
 
-/* line 90, ../sass/styles.scss */
+/* line 96, ../sass/styles.scss */
 .header {
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* line 98, ../sass/styles.scss */
+/* line 104, ../sass/styles.scss */
 .tabs-primary li {
   margin-right: 1px;
 }
-/* line 101, ../sass/styles.scss */
+/* line 107, ../sass/styles.scss */
 .tabs-primary li a {
   background-color: #ddd;
   font-weight: bold;
   color: #333;
-  transition: all 500ms;
+  transition: all 300ms;
+  font-weight: 400;
 }
-/* line 110, ../sass/styles.scss */
+/* line 117, ../sass/styles.scss */
 .tabs-primary li a:hover, .tabs-primary li a.active {
   background-color: #FF2B36;
   color: #fff;
 }
 
-/* line 118, ../sass/styles.scss */
+/* line 125, ../sass/styles.scss */
 .page-user form {
   border: 1px solid #ddd;
   background-color: #eee;
 }
-/* line 132, ../sass/styles.scss */
+/* line 139, ../sass/styles.scss */
 .page-user form .form-text {
   width: 100%;
 }
-/* line 134, ../sass/styles.scss */
+/* line 141, ../sass/styles.scss */
 .page-user #content {
   max-width: 455px;
   margin: 100px auto 0;
+}
+
+/* line 146, ../sass/styles.scss */
+.login {
+  line-height: 58px;
+  font-size: 18px;
+}
+/* line 149, ../sass/styles.scss */
+.login a {
+  color: #333;
+  text-decoration: none;
+}
+/* line 152, ../sass/styles.scss */
+.login a:hover {
+  text-decoration: underline;
+}
+
+/* line 157, ../sass/styles.scss */
+#page-title {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }

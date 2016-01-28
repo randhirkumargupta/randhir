@@ -364,6 +364,7 @@ div.views-exposed-form div.views-submit-button{
   width: 100%;
   display: none;
   padding-top: 1px;
+  z-index: 9999;
 }
 #block-menu-menu-admin-left-menu .block-content > ul.menu > li:hover > ul{
   display: block;
