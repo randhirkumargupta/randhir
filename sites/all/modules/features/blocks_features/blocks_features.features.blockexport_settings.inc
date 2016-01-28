@@ -956,7 +956,7 @@ node/*/edit',
   'delta' => 'story_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -14,
+  'weight' => -13,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -1069,7 +1069,7 @@ node/*/edit',
   'delta' => 'main',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -13,
+  'weight' => -12,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2521,6 +2521,90 @@ node/*/edit',
   'title' => '',
   'cache' => -1,
 );
+  $export['block'][] = array(
+  'bid' => 180,
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 181,
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 182,
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -14,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 183,
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 184,
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 185,
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
@@ -2537,6 +2621,11 @@ node/*/edit',
   'rid' => 4,
 );
   $export['block_role'][] = array(
+  'module' => 'system',
+  'delta' => 'main',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 5,
@@ -2544,6 +2633,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
+  'module' => 'system',
+  'delta' => 'main',
   'rid' => 5,
 );
   $export['block_role'][] = array(
@@ -2554,6 +2648,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'system',
+  'delta' => 'main',
   'rid' => 6,
 );
   $export['block_role'][] = array(
@@ -2564,6 +2663,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
+  'rid' => 7,
+);
+  $export['block_role'][] = array(
+  'module' => 'system',
+  'delta' => 'main',
   'rid' => 7,
 );
   $export['block_role'][] = array(
@@ -2574,6 +2678,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
+  'rid' => 8,
+);
+  $export['block_role'][] = array(
+  'module' => 'system',
+  'delta' => 'main',
   'rid' => 8,
 );
   $export['block_role'][] = array(
@@ -2584,6 +2693,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
+  'rid' => 9,
+);
+  $export['block_role'][] = array(
+  'module' => 'system',
+  'delta' => 'main',
   'rid' => 9,
 );
   $export['block_role'][] = array(
@@ -2594,6 +2708,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'system',
+  'delta' => 'main',
   'rid' => 10,
 );
   $export['block_role'][] = array(
@@ -2604,6 +2723,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'system',
+  'delta' => 'main',
   'rid' => 20,
 );
 return $export;
