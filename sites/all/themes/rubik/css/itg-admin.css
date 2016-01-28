@@ -20,7 +20,6 @@
   float: left;
   margin-right: 1px;
 }
-
 .view > .attachment{
   text-align: right;
   padding-bottom: 10px;
@@ -176,10 +175,12 @@ div.views-exposed-form div.views-submit-button{
   float: left;
   width: 300px;
 }
-.node-story-form .form-item .error{
+.node-story-form .form-item label.error{
   display: block;
   color: red;
   padding-left: 300px;
+  width: auto;
+  float: none;
 }
 .node-story-form .form-type-checkboxes label,
 .node-story-form .form-type-radios label, 
@@ -245,8 +246,10 @@ div.views-exposed-form div.views-submit-button{
 .page-content .node-story-form .form-item td .description{
   padding-left: 300px;
 }
-.node-story-form .ckeditor_links{
-  margin-left: 300px;
+.node-story-form .ckeditor_links, 
+.node-story-form .text-format-wrapper .filter-wrapper, 
+.node-story-form .text-format-wrapper .description{
+  margin-left: 300px; 
 }
 .node-story-form #Templates th.field-label label{
   padding-left: 5px;
@@ -263,8 +266,11 @@ div.views-exposed-form div.views-submit-button{
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
 }
+#block-itg-story-story-tab-form-block{
+  border-left: none;
+  border-right: none;
+}
 #block-itg-story-story-tab-form-block .block-content{
-  background-color: #666;
   padding: 0;
 }
 .block-itg-story-list{
@@ -274,23 +280,25 @@ div.views-exposed-form div.views-submit-button{
   cursor: pointer;
   display: inline-block;
   padding: 10px 30px;
-  color: #fff;
+  color: #666;
   position: relative;
   margin-left: -3px;
+  font-size: 13px;
+  text-transform: uppercase;
 }
-/*.block-itg-story-list span:after{
-  content: '|';
-  position: absolute;
-  left: -3px;
-  top: 0;
-  height: 40px;
-  line-height: 38px;
-  font-size: 20px;
-  
-}*/
+
 .block-itg-story-list span.active, .block-itg-story-list span:hover{
-  color: #666;
+  color: #008eb1;
   background-color: #fff;
+}
+.block-itg-story-list span.active:after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 3px;
+  width: 100%;
+  background-color: #008eb1;
 }
 .block-itg-story.fixed{
   position: fixed;
@@ -313,51 +321,77 @@ div.views-exposed-form div.views-submit-button{
 #block-menu-menu-admin-left-menu .block-content > ul.menu{
   display: inline-block;
   width: 100%;
-  border-bottom: 1px solid #ddd;
   border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #666;
 }
 #block-menu-menu-admin-left-menu .block-content > ul.menu > li{
   float: left;
   position: relative;
   border: none;
   padding: 0;
-  margin-right: 2px;
+  margin-right: 1px;
 }
 #block-menu-menu-admin-left-menu .block-content > ul.menu > li > a{
-  padding: 8px 10px;
+  padding: 10px 20px;
   display: block;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 #block-menu-menu-admin-left-menu .block-content > ul.menu a{
-  color: #666;
-  font-size: 13px;
+  color: #fff;
+  font-size: 14px;
 }
 #block-menu-menu-admin-left-menu .block-content > ul.menu > li:hover > a{
-  color: #008eb1;
+  color: #666;
+  background-color: #fff;
 }
 #block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu{
   position: absolute;
   left: 0;
-  top: 37px;
+  top: 40px;
   width: 100%;
-  background-color: #f9f9f9;
   display: none;
+  padding-top: 1px;
 }
 #block-menu-menu-admin-left-menu .block-content > ul.menu > li:hover > ul{
   display: block;
 }
 #block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li{
   padding: 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid transparent;
+  background-color: #f9f9f9;
 }
 #block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li a{
-  color: #7c7c7c;
-  padding: 8px 10px;
+  color: #666;
+  padding: 10px 20px;
   display: block;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
-#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li a:hover{
-  color: #008eb1;
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li:hover a{
+  background-color: #666;
+  color: #fff;
+}
+.view-strory-menegment .view-header{
+  text-align: right;
+  padding-bottom: 10px;
+}
+.view-strory-menegment .view-header p{
+  display: inline-block;
+  vertical-align: top;
+}
+.view-strory-menegment .view-header p a{
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #7bc;
+  font-weight: bold;
+  text-shadow: #38a 0 1px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+.Templates-buzz .action-links{
+  display: none;
+}
+.basic-details .field-item a, .Story-details .field-item a{
+  pointer-events: none;
+  color: #333;
+  cursor: text;
 }
