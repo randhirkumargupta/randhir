@@ -146,6 +146,20 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $(document).on('click', '.close-preview', function(){
     $(this).parents('.preview-wrapper').hide();
   });
+  
+  // jQuery code to change text URL alias to Sef URL
+  var urlTxt = $('.form-item-path-alias label').text();
+  if(urlTxt == 'URL alias '){
+    $('.form-item-path-alias label').html('Sef URL');
+  }
+  $('.path-form #edit-path-pathauto').attr('checked', false);
+  if($('.path-form #edit-path-pathauto').is(':checked') == false){
+    $('.path-form #edit-path-alias').removeAttr('disabled');
+  }
+  $('.page-admin-structure-taxonomy-category-management .form-type-hierarchical-select').append('<div class="discription">Root is the section.</div>');
+  
+  
+  
 
 };
 })(jQuery);
