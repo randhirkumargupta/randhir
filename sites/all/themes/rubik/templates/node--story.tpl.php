@@ -1,4 +1,3 @@
-
 <a href="javascript:;" class="close-preview">&nbsp;</a>
 <?php if (!empty($pre_object)) print render($pre_object) ?>
 <div class='<?php print $classes ?> clearfix' <?php print ($attributes) ?>>
@@ -68,6 +67,7 @@
               <?php print render($content['field_story_reporter']); ?>
             </div>
           </div>
+             <?php if(!empty(render($content['field_story_expert_name']))):?>
           <div class="expert-details content-box">
             <h2>Expert Details</h2>
             <div class="content-details">
@@ -76,7 +76,7 @@
               <?php print render($content['field_story_expert_description']); ?>
             </div>  
           </div>
-
+             <?php endif; ?>
           <div class="story-content content-box">
             <h2>Story Content</u></h2>
             <div class="content-details"><?php print render($content['body']); ?></div>
@@ -86,16 +86,19 @@
             <h2>Configuration</h2>
             <div class="content-details"><?php print render($content['field_story_configurations']); ?></div>
           </div>
-          <div class="configuration content-box">
+            <?php if(!empty(render($content['field_story_comment_question']))):?>
+          <div class="comment content-box">
             <h2>Comment Question</h2>
             <div class="content-details"><?php print render($content['field_story_comment_question']); ?></div>
           </div>
-
+            <?php endif; ?>
+            <?php if(!empty(render($content['field_story_social_media_integ']))):?>
           <div class="SocialMedia content-box">
             <h2>Social Media</h2>
             <div class="content-details"><?php print render($content['field_story_social_media_integ']); ?></div>
           </div>
-
+            <?php endif;?>
+             <?php if(!empty(render($content['field_story_facebook_narrative']))):?>
           <div class="Facebook-narretive content-box">
             <h2>Facebook Narrative</h2>
             <div class="content-details">
@@ -103,12 +106,14 @@
               <?php print render($content['field_story_facebook_image']); ?>
             </div>
           </div>
-
+             <?php endif;?>
+            <?php if(!empty(render($content['field_story_tweet']))):?>
           <div class="Twitter content-box">
             <h2>Twitter</h2>
             <div class="content-details"><?php print render($content['field_story_tweet']); ?></div>
           </div>
-
+            <?php endif;?>
+            <?php if(!empty(render($content['field_story_extra_large_image']))):?>
           <div class="BrowseMedia">
             <h2>BrowseMedia</h2>
             <div class="content-details">
@@ -119,17 +124,21 @@
             <?php print render($content['field_story_extra_small_image']); ?>
             </div>
           </div>
-
+           <?php endif;?>
+           <?php if(!empty(render($content['field_story_templates']))):?>
           <div class="Templates">
             <h2>Templates</h2>
+            
             <div class="content-details">
+            <?php $vr=$content['field_story_templates']['#items']['0']['value'];  ?>    
             <?php print render($content['field_story_templates']); ?>
-            <?php print render($content['field_story_template_guru']); ?>
-            <?php print render($content['field_story_template_quotes']); ?>
+             <div class="<?php print $vr ;?>"><?php print render($content['field_story_template_guru']); ?></div>
+             <div class="<?php print $vr ;?>"><?php print render($content['field_story_template_quotes']); ?></div>
             <?php print render($content['field_story_template_factoids']); ?>
             </div>
           </div>
-          <div class="Templates-buzz">
+            <?php endif;?>
+            <div class="Templates-buzz">
             <h2>Templates Buzz</h2>
             <div class="content-details">
             <?php print render($content['field_story_template_buzz']); ?>
@@ -137,7 +146,7 @@
             <?php print render($content['field_buzz_description']); ?>
             </div>
           </div>
-          <div class="Story-details">
+            <div class="Story-details">
             <h2>Story Details</h2>
             <div class="content-details">
             <?php print render($content['field_story_expiry_date']); ?>
