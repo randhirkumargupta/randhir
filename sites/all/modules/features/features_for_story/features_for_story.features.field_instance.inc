@@ -135,6 +135,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
     'field_name' => 'field_buzz_image',
     'label' => 'Image',
     'required' => 0,
@@ -155,17 +156,26 @@ function features_for_story_field_default_field_instances() {
       'module' => 'image',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
         'imce_filefield_on' => 0,
