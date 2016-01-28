@@ -87,7 +87,7 @@
             <div class="content-details"><?php print render($content['field_story_configurations']); ?></div>
           </div>
             <?php if(!empty(render($content['field_story_comment_question']))):?>
-          <div class="comment content-box">
+          <div class="Comment content-box">
             <h2>Comment Question</h2>
             <div class="content-details"><?php print render($content['field_story_comment_question']); ?></div>
           </div>
@@ -130,11 +130,38 @@
             <h2>Templates</h2>
             
             <div class="content-details">
-            <?php $vr=$content['field_story_templates']['#items']['0']['value'];  ?>    
             <?php print render($content['field_story_templates']); ?>
-             <div class="<?php print $vr ;?>"><?php print render($content['field_story_template_guru']); ?></div>
-             <div class="<?php print $vr ;?>"><?php print render($content['field_story_template_quotes']); ?></div>
-            <?php print render($content['field_story_template_factoids']); ?>
+            <?php $vr=$content['field_story_templates']['#items']['0']['value'];  ?>    
+            <?php $fr= $node->field_story_template_guru[LANGUAGE_NONE]; ?>
+            <div class="field">
+              <div class="field-label">Templates Guru: </div>
+              <div class="field-items">
+            <?php if($vr == 'bullet_points') { ?>
+                <ul>
+            <?php
+            foreach($fr as $key => $val){ ?>
+                
+            <li><?php print $val['value']; ?></li>  
+            
+            <?php } } ?>
+                </ul>
+            
+            
+            <?php if($vr == 'number_list') {?>
+                <ol>
+           <?php foreach($fr as $key => $val){ 
+              
+              
+              ?>
+                
+                    <li><?php print $i.".".$val['value']; ?></li>
+            
+            <?php } }?>
+                </ol>
+              </div>
+            </div>
+             <div class="quotes"><?php print render($content['field_story_template_quotes']); ?></div>
+             <div class="factoids"><?php print render($content['field_story_template_factoids']); ?></div>
             </div>
           </div>
             <?php endif;?>
