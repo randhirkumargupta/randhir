@@ -400,7 +400,7 @@ div.views-exposed-form div.views-submit-button{
   display: inline-block;
   vertical-align: top;
 }
-.Templates-buzz .action-links{
+.Templates-buzz .action-links, .Templates-buzz .field-collection-view-links{
   display: none;
 }
 .basic-details .field-item a, .Story-details .field-item a{
@@ -427,18 +427,67 @@ div.views-exposed-form div.views-submit-button{
 }
 .preview-wrapper .node-content .field .field-items table td, 
 .preview-wrapper .node-content .field .field-items table th{border: 1px solid #ddd;}
-.preview-wrapper .node-content .Templates .bullet_points .field-item::before {
-    background-color: #e30b16;
-    border-radius: 50%;
-    content: "";
-    display: inline-block;
-    height: 6px;
-    margin-right: 5px;
-    margin-top: 9px;
-    vertical-align: top;
-    width: 6px;
-}
 .field-name-field-story-resize-extra-large,
 .field-name-field-story-magazine-story-issue{
   padding-left: 300px;
+}
+.preview-wrapper .node-content .field-name-field-story-resize-extra-large,
+.preview-wrapper .node-content .field-name-field-story-magazine-story-issue{padding-left: 0;}
+.tabledrag-hide, .tabledrag-handle, 
+.tabledrag-toggle-weight-wrapper, 
+.metatags-form .form-item-metatags-und-abstract-value,
+.metatags-form #edit-metatags-und-advanced{
+  display: none;
+}
+input[readonly="readonly"], input[disabled="disabled"], select[disabled="disabled"]{
+  background-color: #f5f5f5;
+}
+
+.preview-wrapper .node-content .field ul li,
+.preview-wrapper .node-content .field ol li{
+  padding-bottom: 10px;
+  padding-left: 12px;
+  position: relative;
+  word-wrap: break-word;
+}
+.preview-wrapper .node-content .field ol{list-style: decimal; padding-left: 15px;}
+.preview-wrapper .node-content .field ul li + li,
+.preview-wrapper .node-content .field ol li + li{
+  border-top: 1px dashed #ddd;
+  padding-top: 10px;
+}
+.preview-wrapper .node-content .field ol li{
+  padding-left: 0;
+}
+.preview-wrapper .node-content .field ul li:last-child,
+.preview-wrapper .node-content .field ol li:last-child{
+  padding-bottom: 0;
+}
+.preview-wrapper .node-content .field ul li:before{
+  background-color: #e30b16;
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  height: 5px;
+  margin-right: 5px;
+  top: 9px;
+  left: 0;
+  width: 5px;
+}
+.preview-wrapper .node-content .field ul li + li:before{
+  top: 19px;
+}
+.preview-wrapper .field-collection-view{
+  border: none;
+}
+.preview-wrapper .field-collection-description, 
+.path-form .form-item-path-pathauto,
+.path-form legend .summary, #edit-reset-alphabetical{
+  display: none;
+}
+.quotes .field-item:before{
+  content: '"';
+}
+.quotes .field-item:after{
+  content: '"';
 }
