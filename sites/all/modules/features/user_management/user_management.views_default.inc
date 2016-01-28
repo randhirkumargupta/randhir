@@ -192,6 +192,13 @@ function user_management_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
+    'rules_component::rules_unblock_user' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
   );
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';

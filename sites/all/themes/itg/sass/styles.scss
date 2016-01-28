@@ -95,36 +95,45 @@ input[type="text"], select, input[type="password"]{
   @extend .no-bullet;
   @extend .dib;
   @extend .vtop;
-}
-.tabs-primary li{
+  li{
   @extend .fleft;
   margin-right: 1px;
+    a{
+      @extend .db;
+      @extend .pdtb-10;
+      @extend .pdlr-30;
+      @extend .no-underline;
+      background-color: #ddd;
+      font-weight: bold;
+      color: #333;
+      transition: all 500ms;
+      &:hover, &.active{
+        background-color: #FF2B36;
+        color: #fff;
+      }
+    }
+  }
 }
-.tabs-primary a{
-  @extend .db;
-  @extend .pdtb-10;
-  @extend .pdlr-30;
-  @extend .no-underline;
-  background-color: #FF2B36;
-  font-weight: bold;
-  color: #fff;
-}
-.page-user label{
-  @extend .db;
-}
-.page-user form{
-  @extend .pd-30;
-  border: 1px solid #ddd;
-  background-color: #eee;
-}
-.form-submit{
-  @extend .btn;
-  @extend .mt-10;
-}
-.page-user .form-type-password{
-  @extend .mt-10;
-}
-.page-user #content{
-  max-width: 455px;
-  margin: 100px auto 0;
-}
+.page-user{
+  form{
+    @extend .pd-30;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    label{
+    @extend .db;
+    }
+    .form-type-password{
+      @extend .mt-10;
+    }
+    .form-submit{
+      @extend .btn;
+      @extend .mt-10;
+    }
+    .form-text{width: 100%;}
+  }
+  #content{
+    max-width: 455px;
+    margin: 100px auto 0;
+  }
+} 
+
