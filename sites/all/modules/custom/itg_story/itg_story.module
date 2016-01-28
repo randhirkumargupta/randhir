@@ -113,7 +113,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
     case 'story_node_form':
       
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'story-menegment'),
+        '#markup' => l(t('Cancel'), 'story-management'),
         '#weight' => 20,
       );
       
@@ -206,7 +206,11 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
 // after build for story form
 function itg_story_after_build($form, &$form_state) {
+  
   global $user, $base_url;
+  unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
+  unset($form['metatags']['intro_text']['#markup']);
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;

@@ -182,7 +182,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Story Body',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -235,7 +235,7 @@ function features_for_story_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 43,
       ),
       'teaser' => array(
@@ -2069,7 +2069,7 @@ function features_for_story_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 21,
       ),
       'teaser' => array(
