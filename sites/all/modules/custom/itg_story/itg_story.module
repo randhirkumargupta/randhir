@@ -113,7 +113,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
     case 'story_node_form':
       unset($form['actions']['preview_changes']);
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'story-management'),
+        '#markup' => l(t('Cancel'), 'story-management', array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
       );
       
