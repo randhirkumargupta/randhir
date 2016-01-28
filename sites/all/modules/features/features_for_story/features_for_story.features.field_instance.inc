@@ -182,7 +182,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Story Body',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -235,7 +235,7 @@ function features_for_story_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 43,
       ),
       'teaser' => array(
@@ -248,8 +248,8 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_category',
-    'label' => 'Category',
-    'required' => 0,
+    'label' => 'Section',
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -1502,7 +1502,7 @@ function features_for_story_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_schedule_date_time',
     'label' => 'Schedule Date & Time',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'default_value' => 'now',
       'default_value2' => 'same',
@@ -2040,7 +2040,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_tweet',
-    'label' => 'Tweet',
+    'label' => 'Twitter Narrative',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -2069,7 +2069,7 @@ function features_for_story_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 21,
       ),
       'teaser' => array(
@@ -2103,7 +2103,6 @@ function features_for_story_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Buzz Description');
   t('By Line');
-  t('Category');
   t('City');
   t('Client title');
   t('Comment');
@@ -2134,6 +2133,7 @@ function features_for_story_field_default_field_instances() {
   t('Redirection URL');
   t('Resize Extra Large ');
   t('Schedule Date & Time');
+  t('Section');
   t('Select Guru Templates');
   t('Select Magazine');
   t('Select Supplement');
@@ -2150,6 +2150,7 @@ function features_for_story_field_default_field_instances() {
   t('Templates Guru');
   t('Templates Quotes');
   t('Tweet');
+  t('Twitter Narrative');
   t('https://www.w3schools.com');
 
   return $field_instances;
