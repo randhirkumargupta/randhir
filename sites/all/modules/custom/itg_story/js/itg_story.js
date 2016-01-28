@@ -22,6 +22,32 @@
                      $('.form-item-metatags-und-abstract-value').hide();
                      $('#edit-field-story-facebook-image').hide();
                      
+                     // code for Magazine and Supplement field show on edit story form
+                     if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(':checked')) {                         
+                         $('#edit-field-story-select-magazine').show();
+                         $('#edit-field-story-select-supplement').show();
+                     }
+                     
+                     // code for Comment Question field show on edit story form
+                     if ($("#edit-field-story-configurations-und-comment").is(':checked')) {                         
+                         $('#edit-field-story-comment-question').show();                         
+                     }
+                     
+                     // code for client Title field show on edit story form
+                     if ($("#edit-field-story-configurations-und-syndication").is(':checked')) {                         
+                         $('#edit-field-story-client-title').show();                         
+                     }
+                     
+                     // code for facebook field show on edit story form
+                     if ($("#edit-field-story-social-media-integ-und-facebook").is(':checked')) {                         
+                         $('#edit-field-story-facebook-narrative').show();
+                         $('#edit-field-story-facebook-image').show();
+                     }
+                     
+                     // code for tweet field show on edit story form
+                     if ($("#edit-field-story-social-media-integ-und-twitter").is(':checked')) {                         
+                         $('#edit-field-story-tweet').show();                         
+                     }
                    }
                    $('#edit-field-story-reporter-und-0-target-id').blur(function() {
                        

@@ -31,15 +31,18 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
+    'nid' => 'nid',
     'title' => 'title',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
+    'field_story_category' => 'field_story_category',
     'nothing' => 'nothing',
     'changed' => 'changed',
     'edit_node' => 'nothing_1',
@@ -53,8 +56,15 @@ function features_for_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title' => array(
+    'nid' => array(
       'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -75,6 +85,11 @@ function features_for_story_views_default_views() {
     'field_last_name' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_category' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -131,7 +146,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
-  $handler->display->display_options['fields']['counter']['label'] = 'S.N';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Content: Title */
@@ -140,6 +155,10 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
@@ -157,6 +176,15 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_last_name']['exclude'] = TRUE;
+  /* Field: Content: Section */
+  $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
+  $handler->display->display_options['fields']['field_story_category']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
+  $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -180,6 +208,12 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = 'Status';
+  $handler->display->display_options['fields']['status']['not'] = 0;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -275,7 +309,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Category (field_story_category) */
+  /* Filter criterion: Content: Section (field_story_category) */
   $handler->display->display_options['filters']['field_story_category_tid']['id'] = 'field_story_category_tid';
   $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';

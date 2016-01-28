@@ -19,6 +19,17 @@ function features_for_story_user_default_permissions() {
     'module' => 'ckeditor',
   );
 
+  // Exported permission: 'administer url aliases'.
+  $permissions['administer url aliases'] = array(
+    'name' => 'administer url aliases',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'path',
+  );
+
   // Exported permission: 'create story content'.
   $permissions['create story content'] = array(
     'name' => 'create story content',
@@ -32,6 +43,17 @@ function features_for_story_user_default_permissions() {
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'create url aliases'.
+  $permissions['create url aliases'] = array(
+    'name' => 'create url aliases',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'path',
   );
 
   // Exported permission: 'customize ckeditor'.
