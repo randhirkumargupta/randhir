@@ -6,6 +6,13 @@
  */
 
 /**
+ * Implements hook_init
+ */
+function itg_category_manager_init(){
+  variable_set('taxonomy_terms_per_page_admin',9);
+}
+
+/**
  * Implements hook_help().
  */
 function itg_category_manager_help($path, $arg) {
@@ -117,20 +124,20 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['#title'] = '';
       $form['relations']['#weight'] = 8;
       $form['relations']['parent']['#title'] = t('Select Section');
+      $form['relations']['parent']['#suffix'] = "<div class='help'>Root is the section.</div>";
       $form['relations']['#collapsible'] = 0;
       unset($form['relations']['weight']);
       
       //Add cancel link to add and edit form of category add form
       $form['actions']['cancel'] = array(
-         '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management'),
+         '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management', array('attributes' => array('class' => 'button'))),
          '#weight' => 20,
       );
       
       //Make fields non-editable in edit mode
       if(arg(3) == 'edit'){
-        $form['name']['#attributes'] = array('style' =>'background-color:lightgrey', 'readonly' => 'readonly');
+        $form['name']['#attributes'] = array('readonly' => 'readonly');
         $form['field_cm_redirection_url']['#disabled'] = TRUE;
-        $form['field_cm_redirection_url']['#attributes']['class'][3] = 'readonly-redirection-url';
         $form['field_cm_select_type']['#disabled'] = TRUE;
         $form['field_cm_hide_cat_from_home']['#disabled'] = TRUE;
         $form['field_cm_hide_cat_from_search']['#disabled'] = TRUE;
@@ -299,13 +306,3 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
   }
   return FALSE;
 }
-
-/**
- * Remove drag drop form category listing page
- * @param type $javascript
- */
-//function itg_category_manager_js_alter(&$javascript) {
-//  if(arg(3) == 'category_management' && arg(4) == ''){
-//    unset($javascript['misc/tabledrag.js']);
-//  }
-//}
