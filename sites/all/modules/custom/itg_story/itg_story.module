@@ -21,27 +21,27 @@ function itg_story_init() {
  * Implements hook_menu().
  */
 function itg_story_menu() {
-  $items['reporter-details-ajax'] = array(
-      'access callback' => TRUE,
+  $items['reporter-details-ajax'] = array(      
       'page callback' => 'itg_story_reporter_details',
+      'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_story.inc',
   );
   $items['story-title-list/autocomplete'] = array(
     'page callback' => 'itg_story_get_story_title',
-    'access arguments' => array('access content'),
+    'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
   $items['story-nid-list/autocomplete'] = array(
     'page callback' => 'itg_story_get_story_nid',
-    'access arguments' => array('access content'),
+    'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
-  $items['supplement-list-ajax'] = array(
-      'access callback' => TRUE,
+  $items['supplement-list-ajax'] = array(      
       'page callback' => 'itg_story_supplement_details',
+      'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_story.inc',
   );
@@ -218,4 +218,16 @@ function itg_story_after_build($form, &$form_state) {
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
   return $form;
+}
+
+/**
+ * Implements hook_permission.
+ */
+function itg_story_permission() {
+  return array(
+    'access itg story' => array(
+      'title' => t('story permission'),
+      'description' => t('story permission.'),
+    ),    
+  );
 }

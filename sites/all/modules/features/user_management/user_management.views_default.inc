@@ -413,6 +413,29 @@ function user_management_views_default_views() {
   $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
   $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
   $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
+  /* Filter criterion: User: Roles */
+  $handler->display->display_options['filters']['rid_1']['id'] = 'rid_1';
+  $handler->display->display_options['filters']['rid_1']['table'] = 'users_roles';
+  $handler->display->display_options['filters']['rid_1']['field'] = 'rid';
+  $handler->display->display_options['filters']['rid_1']['value'] = array(
+    4 => '4',
+    7 => '7',
+    9 => '9',
+    5 => '5',
+    8 => '8',
+    20 => '20',
+    6 => '6',
+    10 => '10',
+    19 => '19',
+    13 => '13',
+    11 => '11',
+    16 => '16',
+    17 => '17',
+    14 => '14',
+    12 => '12',
+    15 => '15',
+    18 => '18',
+  );
   $handler->display->display_options['path'] = 'manage-users';
   $export['manage_users'] = $view;
 
