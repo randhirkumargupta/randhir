@@ -84,16 +84,24 @@
             <div class="content-details"><?php print render($content['body']); ?></div>
 
           </div>
+            <?php 
+              $configuration = render($content['field_story_configurations']); 
+              if(!empty($configuration)):?>
           <div class="configuration content-box">
             <h2>Configuration</h2>
-            <div class="content-details"><?php print render($content['field_story_configurations']); ?></div>
+            <div class="content-details"><?php print render($content['field_story_configurations']); ?>
+            <?php print render($content['field_story_rating']); ?>
+            <?php print render($content['field_story_client_title']); ?></div>
           </div>
+            
+             <?php endif; ?>
             <?php 
               $comment_question = render($content['field_story_configurations']);
               if(!empty($comment_question)):?>
           <div class="Comment content-box">
             <h2>Comment Question</h2>
-            <div class="content-details"><?php print render($content['field_story_comment_question']); ?></div>
+            <div class="content-details"><?php print render($content['field_story_comment_question']); ?>
+            </div>
           </div>
             <?php endif; ?>
             <?php 
@@ -186,7 +194,6 @@
             <h2>Story Details</h2>
             <div class="content-details">
             <?php print render($content['field_story_expiry_date']); ?>
-            <?php print render($content['field_story_rating']); ?>
             <?php print render($content['field_story_kicker_text']); ?>
             <?php print render($content['field_story_category']); ?>
             </div>
