@@ -86,7 +86,7 @@
             <h2>Configuration</h2>
             <div class="content-details"><?php print render($content['field_story_configurations']); ?></div>
           </div>
-            <?php if(!empty(render($content['field_story_comment_question']))):?>
+            <?php if(!empty(render($content['field_story_configurations']))):?>
           <div class="Comment content-box">
             <h2>Comment Question</h2>
             <div class="content-details"><?php print render($content['field_story_comment_question']); ?></div>
@@ -145,18 +145,13 @@
             
             <?php } } ?>
                 </ul>
-            
-            
+                
             <?php if($vr == 'number_list') {?>
                 <ol>
-           <?php foreach($fr as $key => $val){ 
-              
-              
-              ?>
-                
-                    <li><?php print $i.".".$val['value']; ?></li>
-            
-            <?php } }?>
+            <?php foreach($fr as $key => $val){ ?>
+                                    
+             <li><?php print $val['value']; ?></li> <?php } }?>
+                       
                 </ol>
               </div>
             </div>
