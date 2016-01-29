@@ -46,6 +46,7 @@
 
 <head profile="<?php print $grddl_profile; ?>">
   <?php print $head; ?>
+  <link rel="shortcut icon" href="<?php print base_path().  path_to_theme();?>/images/favicon.ico" type="image/vnd.microsoft.icon" />
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php print $scripts; ?>
