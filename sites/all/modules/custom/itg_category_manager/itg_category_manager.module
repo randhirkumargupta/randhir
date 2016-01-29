@@ -6,6 +6,13 @@
  */
 
 /**
+ * Implements hook_init
+ */
+function itg_category_manager_init(){
+  variable_set('taxonomy_terms_per_page_admin',20);
+}
+
+/**
  * Implements hook_help().
  */
 function itg_category_manager_help($path, $arg) {
@@ -108,26 +115,22 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     
     //Redirect to term listing page, after term has been added successfully.
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
+      
+      //Drupal fields treatment
       $form['#action'] = '?destination=admin/structure/taxonomy/category_management';
       $form['name']['#title'] = t('Category Title');
-      $form['field_cm_select_type']['#attributes'] = array('style' => 'width:410px');
+      $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
       unset($form['description']);
 
       //Relation treatment
-      $form['relations']['#title'] = '';
-      $form['relations']['#weight'] = 8;
+      $form['relations']['#title'] = 'Section and Categories';
+      $form['relations']['#weight'] = 3;
       $form['relations']['parent']['#title'] = t('Select Section');
-      $form['relations']['parent']['#suffix'] = "<div class='help'>Root is the section.</div>";
-      $form['relations']['#collapsible'] = 0;
+      $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
+      //$form['relations']['#collapsible'] = 0;
       unset($form['relations']['weight']);
       
-      //Add cancel link to add and edit form of category add form
-      $form['actions']['cancel'] = array(
-         '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management', array('attributes' => array('class' => 'button'))),
-         '#weight' => 20,
-      );
-      
-      //Make fields non-editable in edit mode
+      //Non-editable fields in edit mode
       if(arg(3) == 'edit'){
         $form['name']['#attributes'] = array('readonly' => 'readonly');
         $form['field_cm_redirection_url']['#disabled'] = TRUE;
@@ -136,7 +139,11 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['field_cm_hide_cat_from_search']['#disabled'] = TRUE;
         $form['field_cm_no_follow']['#disabled'] = TRUE;
         $form['field_cm_sponsored_category']['#disabled'] = TRUE;
+        $form['relations']['#attributes'] = array('disabled' => TRUE);
       }
+      
+      //Form after build  
+      $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
     }
   }
 }
@@ -168,6 +175,28 @@ function itg_category_manager_term_validate($form, &$form_state) {
       }
     }
   }
+}
+
+/**
+ * Category add form after build
+ * @param type $form
+ * @param type $form_state
+ * @return int
+ */
+function itg_category_manager_add_form_after_build($form, &$form_state){
+
+
+
+  //Add cancel link to add and edit form of category add form exit;
+  $form['actions']['cancel'] = array(
+      '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management', array('attributes' => array('class' => 'button'))),
+      '#weight' => 20,
+  );
+    
+  //Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+  return $form;
 }
 
 /**
