@@ -35,7 +35,7 @@ function user_management_field_default_field_instances() {
     'entity_type' => 'user',
     'exclude_cv' => 0,
     'field_name' => 'field_first_name',
-    'label' => 'First Name',
+    'label' => 'First name',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -49,7 +49,7 @@ function user_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
@@ -78,7 +78,7 @@ function user_management_field_default_field_instances() {
     'entity_type' => 'user',
     'exclude_cv' => 0,
     'field_name' => 'field_last_name',
-    'label' => 'Last Name',
+    'label' => 'Last name',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -92,7 +92,7 @@ function user_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -121,7 +121,7 @@ function user_management_field_default_field_instances() {
     'entity_type' => 'user',
     'exclude_cv' => 0,
     'field_name' => 'field_mobile_number',
-    'label' => 'Mobile Number',
+    'label' => 'Mobile number',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -135,15 +135,15 @@ function user_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('First Name');
-  t('Last Name');
-  t('Mobile Number');
+  t('First name');
+  t('Last name');
+  t('Mobile number');
   t('Please enter your first name.');
   t('Please enter your last name.');
   t('Please enter your mobile number.');
