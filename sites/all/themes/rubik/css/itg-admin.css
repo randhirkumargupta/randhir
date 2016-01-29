@@ -447,8 +447,9 @@ form .form-item .form-item{
 }
 .preview-wrapper .node-content .field-name-field-story-resize-extra-large,
 .preview-wrapper .node-content .field-name-field-story-magazine-story-issue{padding-left: 0;}
-.tabledrag-hide, .tabledrag-handle, 
-.tabledrag-toggle-weight-wrapper, 
+#taxonomy-overview-terms .tabledrag-hide, 
+#taxonomy-overview-terms .tabledrag-handle, 
+#taxonomy-overview-terms .tabledrag-toggle-weight-wrapper, 
 .metatags-form .form-item-metatags-und-abstract-value,
 .metatags-form #edit-metatags-und-advanced{
   display: none;
@@ -538,3 +539,4 @@ form .path-form.fieldset.titled > .fieldset-content{padding: 40px 9px 10px; floa
 .user-profile-div .user-details, .user-profile-div .field-items{overflow: hidden;}
 .user-profile-div .field-label{float: left; width: 150px;}
 .user-profile-div .field-items{padding-bottom: 10px;}
+.page-node-add-story form .path-form.fieldset.titled > .fieldset-content{padding: 10px 0 0;}
