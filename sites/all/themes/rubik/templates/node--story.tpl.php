@@ -145,18 +145,13 @@
             
             <?php } } ?>
                 </ul>
-            
-            
+                
             <?php if($vr == 'number_list') {?>
                 <ol>
-           <?php foreach($fr as $key => $val){ 
-              
-              
-              ?>
-                
-                    <li><?php print $val['value']; ?></li>
-            
-            <?php } }?>
+            <?php foreach($fr as $key => $val){ ?>
+                                    
+             <li><?php print $val['value']; ?></li> <?php } }?>
+                       
                 </ol>
               </div>
             </div>
