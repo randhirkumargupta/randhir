@@ -22,13 +22,13 @@ function feature_category_management_strongarm() {
           'weight' => '5',
         ),
         'path' => array(
-          'weight' => '7',
+          'weight' => '3',
         ),
         'name' => array(
           'weight' => '1',
         ),
         'description' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
       ),
       'display' => array(),
