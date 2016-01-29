@@ -123,11 +123,11 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       unset($form['description']);
 
       //Relation treatment
-      $form['relations']['#title'] = '';
-      $form['relations']['#weight'] = 8;
+      $form['relations']['#title'] = 'Section and Categories';
+      $form['relations']['#weight'] = 3;
       $form['relations']['parent']['#title'] = t('Select Section');
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
-      $form['relations']['#collapsible'] = 0;
+      //$form['relations']['#collapsible'] = 0;
       unset($form['relations']['weight']);
       
       //Non-editable fields in edit mode
