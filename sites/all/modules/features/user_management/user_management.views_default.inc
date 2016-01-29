@@ -205,11 +205,11 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = 'User Name';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  /* Field: User: First Name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
-  /* Field: User: Mobile Number */
+  /* Field: User: Mobile number */
   $handler->display->display_options['fields']['field_mobile_number']['id'] = 'field_mobile_number';
   $handler->display->display_options['fields']['field_mobile_number']['table'] = 'field_data_field_mobile_number';
   $handler->display->display_options['fields']['field_mobile_number']['field'] = 'field_mobile_number';
@@ -239,6 +239,9 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['status']['table'] = 'users';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['label'] = 'Status';
+  $handler->display->display_options['fields']['status']['type'] = 'custom';
+  $handler->display->display_options['fields']['status']['type_custom_true'] = 'Unblocked';
+  $handler->display->display_options['fields']['status']['type_custom_false'] = 'Blocked';
   $handler->display->display_options['fields']['status']['not'] = 0;
   /* Field: User: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
@@ -266,7 +269,7 @@ function user_management_views_default_views() {
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['status']['expose']['label'] = 'Active';
+  $handler->display->display_options['filters']['status']['expose']['label'] = 'Status';
   $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
   $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
   $handler->display->display_options['filters']['status']['expose']['remember_roles'] = array(
@@ -274,11 +277,21 @@ function user_management_views_default_views() {
     1 => 0,
     3 => 0,
     4 => 0,
-    5 => 0,
-    6 => 0,
     7 => 0,
-    8 => 0,
     9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    10 => 0,
+    19 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
   );
   /* Filter criterion: User: E-mail */
   $handler->display->display_options['filters']['mail']['id'] = 'mail';
@@ -312,7 +325,7 @@ function user_management_views_default_views() {
     18 => 0,
     19 => 0,
   );
-  /* Filter criterion: User: First Name (field_first_name) */
+  /* Filter criterion: User: First name (field_first_name) */
   $handler->display->display_options['filters']['field_first_name_value']['id'] = 'field_first_name_value';
   $handler->display->display_options['filters']['field_first_name_value']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['filters']['field_first_name_value']['field'] = 'field_first_name_value';
@@ -344,7 +357,7 @@ function user_management_views_default_views() {
     18 => 0,
     19 => 0,
   );
-  /* Filter criterion: User: Mobile Number (field_mobile_number) */
+  /* Filter criterion: User: Mobile number (field_mobile_number) */
   $handler->display->display_options['filters']['field_mobile_number_value']['id'] = 'field_mobile_number_value';
   $handler->display->display_options['filters']['field_mobile_number_value']['table'] = 'field_data_field_mobile_number';
   $handler->display->display_options['filters']['field_mobile_number_value']['field'] = 'field_mobile_number_value';

@@ -89,19 +89,27 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
   
   // Delete category functionality.
   if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete')) {
-    //$vid = $form_state['term']->vid;
     $tid = $form_state['term']->tid;
     $used_by_content = taxonomy_select_nodes($tid);
     if (count($used_by_content) > 0) {
       form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
       $node_url = $base_url . '/node/';
-      echo '<div> Your category is using by following contents:<br/>';
+      echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
+      $i = 0;
+      $count_used = count($used_by_content)-1;
       foreach ($used_by_content as $key => $value) {
         $node = $node = node_load($value);
-        echo '<a target="_blank" href="' . $node_url . $value . '">' . $node->title . '</a><br/>';
+        echo '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
+        if($i != $count_used){
+            echo ', ';
+        }
+        $i++;
       }
+       echo '</div>';
       drupal_add_js('(function($) {$(document).ready(function() {
        $("#taxonomy-form-term #edit-submit").hide();
+       $("#edit-description").html($("body").find(".contents-using-cat").html());
+       $(".contents-using-cat").hide();
       });}(jQuery));', 'inline');
     }
   } else {
@@ -119,16 +127,23 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       //Drupal fields treatment
       $form['#action'] = '?destination=admin/structure/taxonomy/category_management';
       $form['name']['#title'] = t('Category Title');
-      $form['field_cm_select_type']['#attributes'] = array('style' => 'width:410px');
+      $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
       unset($form['description']);
 
+      //Hide settings title levels
+      unset($form['field_cm_hide_cat_from_home'][LANGUAGE_NONE]['#title']);
+      unset($form['field_cm_hide_cat_from_search'][LANGUAGE_NONE]['#title']);
+      unset($form['field_cm_no_follow'][LANGUAGE_NONE]['#title']);
+      unset($form['field_cm_sponsored_category'][LANGUAGE_NONE]['#title']);
+      
       //Relation treatment
-      $form['relations']['#title'] = '';
-      $form['relations']['#weight'] = 8;
+      $form['relations']['#title'] = 'Section and Categories';
+      $form['relations']['#weight'] = 3;
       $form['relations']['parent']['#title'] = t('Select Section');
-      $form['relations']['#collapsible'] = 0;
+      $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
+      //$form['relations']['#collapsible'] = 0;
       unset($form['relations']['weight']);
-
+ 
       //Non-editable fields in edit mode
       if(arg(3) == 'edit'){
         $form['name']['#attributes'] = array('readonly' => 'readonly');
@@ -183,7 +198,10 @@ function itg_category_manager_term_validate($form, &$form_state) {
  * @return int
  */
 function itg_category_manager_add_form_after_build($form, &$form_state){
-  //Add cancel link to add and edit form of category add form
+
+
+
+  //Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,

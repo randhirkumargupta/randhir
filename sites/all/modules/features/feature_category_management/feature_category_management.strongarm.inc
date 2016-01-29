@@ -19,16 +19,16 @@ function feature_category_management_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '10',
+          'weight' => '4',
         ),
         'path' => array(
-          'weight' => '9',
+          'weight' => '3',
         ),
         'name' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'description' => array(
-          'weight' => '3',
+          'weight' => '5',
         ),
       ),
       'display' => array(),
@@ -58,8 +58,8 @@ function feature_category_management_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'itg_category_manager_vocabularies';
   $strongarm->value = array(
-    4 => '4',
-    2 => 0,
+    2 => '2',
+    3 => 0,
     1 => 0,
   );
   $export['itg_category_manager_vocabularies'] = $strongarm;
