@@ -43,7 +43,7 @@ select option{
 .page-admin-people-create form{
   max-width: 800px;
   position: relative;
-  z-index: 9999;
+  z-index: 9;
 }
 div.password-confirm, div.password-confirm span{
   float: right;
@@ -195,6 +195,7 @@ form .form-item label{
   color: red;
   width: auto;
   float: none;
+  padding-left: 300px;
 }
 .node-story-form .form-item span.error, 
 .page-admin-people-create form .form-item span.error{padding-left: 300px;}
@@ -206,7 +207,7 @@ form .form-type-checkboxes label,
 form .form-type-radios label, 
 form .field-name-field-story-magazine-story-issue .form-type-checkboxes label,
 form .field-name-field-story-resize-extra-large .form-type-checkboxes label, 
-.form-item-notify label{
+form .form-item-notify label{
   float: none;
 }
 form .form-type-radios > label,
@@ -250,7 +251,7 @@ form .date-combo .fieldset-title{
 form .date-combo legend{
   width: 300px;
 }
-form .fieldset.titled > .fieldset-content{
+.node-story-form .fieldset.titled > .fieldset-content{
   float: left;
   max-width: 600px;
   padding: 0;
@@ -521,9 +522,13 @@ form .field-add-more-submit{margin-left: 300px;}
 
 .page-admin-people-create .fieldset .fieldset-content{padding: 0;}
 .page-admin-people-create .fieldset legend{display: none;}
-.page-node-add-story .vertical-tabs{padding: 0; border: none;}
-.page-node-add-story form .vertical-tabs .fieldset.titled > .fieldset-content{float: none; max-width: none;}
-.page-node-add-story form .vertical-tabs .form-item{margin-bottom: 20px;}
+.page-node-add-story .vertical-tabs, page-admin-structure-taxonomy-category-management .vertical-tabs{padding: 0; border: none;}
+.page-node-add-story form .vertical-tabs .fieldset.titled > .fieldset-content, 
+.page-admin-structure-taxonomy-category-management .vertical-tabs .fieldset.titled > .fieldset-content{float: none; max-width: none;}
+.page-node-add-story form .vertical-tabs .form-item, 
+.page-admin-structure-taxonomy-category-management form .vertical-tabs .form-item{margin-bottom: 20px;}
 .text-format-wrapper .form-item{padding: 0; border: none;}
 form .form-textarea-wrapper .form-item span.error{padding-left: 0;}
 .node-story-form .date-no-float{width: 400px;}
+.page-admin-structure-taxonomy-category-management fieldset legend span.form-required{display: none;}
+form .path-form.fieldset.titled > .fieldset-content{padding: 40px 9px 10px; float: none; max-width: none;}
