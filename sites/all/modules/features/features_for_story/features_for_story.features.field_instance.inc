@@ -1434,7 +1434,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_reporter',
-    'label' => 'By line',
+    'label' => 'Byline',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1836,7 +1836,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Templates Buzz',
+    'description' => 'Buzz',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1861,7 +1861,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_template_buzz',
-    'label' => 'Templates buzz',
+    'label' => 'Buzz',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1900,7 +1900,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_template_factoids',
-    'label' => 'Templates factoids',
+    'label' => 'Factoids',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1923,7 +1923,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Templates Guru',
+    'description' => 'Guru',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1942,7 +1942,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_template_guru',
-    'label' => 'Templates guru',
+    'label' => 'Guru',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1965,7 +1965,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Templates Quotes',
+    'description' => 'Quotes',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1984,7 +1984,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_template_quotes',
-    'label' => 'Templates quotes',
+    'label' => 'Quotes',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -2005,7 +2005,11 @@ function features_for_story_field_default_field_instances() {
   // Exported field_instance: 'node-story-field_story_templates'.
   $field_instances['node-story-field_story_templates'] = array(
     'bundle' => 'story',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'bullet_points',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -2126,8 +2130,9 @@ function features_for_story_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Buzz');
   t('Buzz Description');
-  t('By line');
+  t('Byline');
   t('City');
   t('Client title');
   t('Comment');
@@ -2144,6 +2149,8 @@ function features_for_story_field_default_field_instances() {
   t('Facebook Narrative');
   t('Facebook image');
   t('Facebook narrative');
+  t('Factoids');
+  t('Guru');
   t('HeadLine');
   t('Image');
   t('Image Size (210 x 145)');
@@ -2160,6 +2167,7 @@ function features_for_story_field_default_field_instances() {
   t('Medium image');
   t('New Title');
   t('New title');
+  t('Quotes');
   t('Redirection URL');
   t('Resize extra large ');
   t('Schedule date & time');
@@ -2177,14 +2185,7 @@ function features_for_story_field_default_field_instances() {
   t('Story expiry date');
   t('Story kicker text');
   t('Story rating');
-  t('Templates Buzz');
   t('Templates Factoids');
-  t('Templates Guru');
-  t('Templates Quotes');
-  t('Templates buzz');
-  t('Templates factoids');
-  t('Templates guru');
-  t('Templates quotes');
   t('Tweet');
   t('Twitter narrative');
   t('https://www.w3schools.com');
