@@ -14,6 +14,6 @@
 <span class="target-link" data-target-id="BrowseMedia">Browse Media</span>
 <span class="target-link" data-target-id="Templates">Templates</span>
 <span class="target-link" data-target-id="category">Categorization</span>
-<span class="target-link" data-target-id="edit-metatags">Meta Details</span>
+<span class="target-link" data-target-id="title-metatags">Meta Details</span>
 <span class="target-link" data-target-id="edit-revision-information">Remarks</span>
 </div>
