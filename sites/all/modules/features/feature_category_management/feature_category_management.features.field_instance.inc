@@ -43,7 +43,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -77,7 +77,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -111,7 +111,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -145,7 +145,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -183,7 +183,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -193,7 +193,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please select content type, this category will be associate to selected content types. You can associate one category with multiple content types.',
+    'description' => 'Please select content type, this category will be associated to selected content types. You can associate one category with multiple content types.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -217,7 +217,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 6,
     ),
   );
 
@@ -251,7 +251,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -269,7 +269,7 @@ function feature_category_management_field_default_field_instances() {
   t('Please enter display title, it will appear on the front end if user has entered.');
   t('Please enter the redirection URL (http://example.com). Reader will be redirected to the respective URL by clicking on the category name.
 ');
-  t('Please select content type, this category will be associate to selected content types. You can associate one category with multiple content types.');
+  t('Please select content type, this category will be associated to selected content types. You can associate one category with multiple content types.');
   t('Redirection URL');
   t('Sponsored Category');
 
