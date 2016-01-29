@@ -12,6 +12,7 @@ dependencies[] = options
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text
+features[ctools][] = field_group:field_group:1
 features[ctools][] = field_validation:default_field_validation_rules:2
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
