@@ -55,7 +55,6 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
@@ -82,19 +81,9 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'user',
-  );
-
-  // Exported permission: 'cancel account'.
-  $permissions['cancel account'] = array(
-    'name' => 'cancel account',
-    'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'user',

@@ -49,22 +49,28 @@ function pr($arg) {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
+    if($form_id == 'user_profile_form') {
+        $form['account']['name']['#attributes']['disabled'] = TRUE;
+        $form['account']['mail']['#attributes']['disabled'] = TRUE;
+        $form['#action'] = '?destination=user/'.$user->uid;
+    }
   
     if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
       if($user->uid != 1){
         drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js', array('weight' => 1));
         
         $user_role = itg_common_role_delegation($form['account']['roles']['#options']);
-        
-        if($form['account']['roles']['#default_value'][1] != $user->uid){    
-          $form['selected'] = array(
-             '#type' => 'select',
-             '#title' => t('Select role'),
-             '#options' => $user_role,
-             '#default_value' => $form['account']['roles']['#default_value'][1],
+        if(isset($user_role)){
+           // p($form['#user']->uid);
+            if($form['#user']->uid != $user->uid){    
+              $form['selected'] = array(
+                 '#type' => 'select',
+                 '#title' => t('Select role'),
+                 '#options' => $user_role,
+                 '#default_value' => $form['account']['roles']['#default_value'][1],
 
-         );
+             );
+            }
         }
 
         //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
@@ -107,10 +113,7 @@ function itg_common_user_logout($account){
 
 function itg_common_role_delegation($role_array){
   global $user;
-  foreach($user->roles as $key => $val){
-    $key = $key;
-  }
-  
+    
   if (array_key_exists(EDITOR, $user->roles)) {
     $user_array = array(SECTION_EDITOR_ANCHOR=>'Section Editor/Anchor', COPY_EDITOR=>'Copy Editor', SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
   }else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
@@ -120,6 +123,9 @@ function itg_common_role_delegation($role_array){
   }else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
     $user_array = array(INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
   }else if(array_key_exists(SITE_ADMIN, $user->roles)) {
+    unset($role_array[3]);
+    $user_array = $role_array;
+  }else if(array_key_exists(ADMINISTRATOR, $user->roles)) {    
     $user_array = $role_array;
   }
   
@@ -133,10 +139,12 @@ function itg_common_role_delegation($role_array){
 function itg_common_views_query_alter(&$view, &$query) {  
   if ($view->name == 'manage_users') {
     global $user;
-   
+    
+    $count_condition = count($query->where[1]['conditions']) - 1;
+    
     if(!array_key_exists(SITE_ADMIN, $user->roles) && !array_key_exists(ADMINISTRATOR, $user->roles)) {
       $user_role = itg_common_role_delegation_uid();
-      $query->where[1]['conditions'][1]['value'] = $user_role;
+      $query->where[1]['conditions'][$count_condition]['value'] = $user_role;
     }        
   }
 }

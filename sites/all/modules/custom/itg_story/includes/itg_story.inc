@@ -16,7 +16,7 @@ function itg_story_reporter_details() {
     $node = node_load($reporter_array[1]);
     $email = $node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
     $twitter = $node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-    $content = '<div>By line’s  Email id: '.$email.'</div><div>By line’s Twitter Handle: '.$twitter.'</div>';
+    $content = '<div>Byline’s  Email id: '.$email.'</div><div>Byline’s Twitter Handle: '.$twitter.'</div>';
   }
   
   echo $content;

@@ -29,8 +29,7 @@
   <?php print drupal_render($form['field_story_reporter']); ?>
   <div id="reporter-details"></div>
   <?php print drupal_render($form['field_story_schedule_date_time']); ?>
-  <?php print drupal_render($form['field_story_expiry_date']); ?>
-  <?php print drupal_render($form['field_story_rating']); ?>  
+  <?php print drupal_render($form['field_story_expiry_date']); ?>    
   <?php print drupal_render($form['field_story_expert_name']); ?>
   <?php print drupal_render($form['field_story_expert_image']); ?>
   <?php print drupal_render($form['field_story_expert_description']); ?>
@@ -41,7 +40,8 @@
   <h2 class="story-title">Configuration</h2>
   <?php print drupal_render($form['field_story_configurations']); ?>
   <?php print drupal_render($form['field_story_comment_question']); ?>
-  <?php print drupal_render($form['field_story_client_title']); ?>  
+  <?php print drupal_render($form['field_story_client_title']); ?>
+  <?php print drupal_render($form['field_story_rating']); ?>
 </div>
 <div id="SocialMedia">
   <h2 class="story-title">Social Media</h2>
@@ -71,6 +71,6 @@
   <h2 class="story-title">Category</h2>
   <?php print drupal_render($form['field_story_category']); ?>  
 </div>
-
+<h2 id="title-metatags" class="story-title">Meta Tags</h2>
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
