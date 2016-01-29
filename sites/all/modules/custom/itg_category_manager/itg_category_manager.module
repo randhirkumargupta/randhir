@@ -119,16 +119,17 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       //Drupal fields treatment
       $form['#action'] = '?destination=admin/structure/taxonomy/category_management';
       $form['name']['#title'] = t('Category Title');
-      $form['field_cm_select_type']['#attributes'] = array('style' => 'width:410px');
+      $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
       unset($form['description']);
 
       //Relation treatment
       $form['relations']['#title'] = '';
       $form['relations']['#weight'] = 8;
       $form['relations']['parent']['#title'] = t('Select Section');
+      $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
       $form['relations']['#collapsible'] = 0;
       unset($form['relations']['weight']);
-
+      
       //Non-editable fields in edit mode
       if(arg(3) == 'edit'){
         $form['name']['#attributes'] = array('readonly' => 'readonly');
@@ -183,7 +184,10 @@ function itg_category_manager_term_validate($form, &$form_state) {
  * @return int
  */
 function itg_category_manager_add_form_after_build($form, &$form_state){
-  //Add cancel link to add and edit form of category add form
+
+
+
+  //Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,

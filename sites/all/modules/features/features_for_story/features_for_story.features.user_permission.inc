@@ -10,6 +10,15 @@
 function features_for_story_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access itg story'.
+  $permissions['access itg story'] = array(
+    'name' => 'access itg story',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'itg_story',
+  );
+
   // Exported permission: 'administer ckeditor'.
   $permissions['administer ckeditor'] = array(
     'name' => 'administer ckeditor',
