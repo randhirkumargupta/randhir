@@ -187,14 +187,15 @@ div.views-exposed-form div.views-submit-button{
   font-size: 12px;
   float: left;
   width: 300px;
+  font-weight: normal;
 }
-.node-story-form .form-item label.error{
+.node-story-form .form-item span.error{
   display: block;
   color: red;
-  padding-left: 300px;
   width: auto;
   float: none;
 }
+.node-story-form .form-item span.error{padding-left: 300px;}
 .node-story-form .form-type-checkboxes label,
 .node-story-form .form-type-radios label, 
 .node-story-form .field-name-field-story-magazine-story-issue .form-type-checkboxes label,
@@ -491,4 +492,10 @@ input[readonly="readonly"], input[disabled="disabled"], select[disabled="disable
 }
 .quotes .field-item:after{
   content: '"';
+}
+#reporter-details{
+  padding-left: 300px;
+  margin: -20px 0 20px;
+  position: relative;
+  
 }
