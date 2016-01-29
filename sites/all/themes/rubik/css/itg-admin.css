@@ -533,3 +533,8 @@ form .form-textarea-wrapper .form-item span.error{padding-left: 0;}
 .page-admin-structure-taxonomy-category-management fieldset legend span.form-required{display: none;}
 form .path-form.fieldset.titled > .fieldset-content{padding: 40px 9px 10px; float: none; max-width: none;}
 .view .view-filters form label, .view .view-filters form .form-item label{display: block; font-weight: normal; float: none; padding: 0; font-size: 13px; font-weight: normal; color: #333; width: auto;}
+.user-profile-div, .user-profile-div .field{display: inline-block; width: 100%; vertical-align: top;}
+.user-profile-div .user-picture{float: left; width: 200px; margin-right: 30px; border: 1px solid #ddd; height: 200px;}
+.user-profile-div .user-details, .user-profile-div .field-items{overflow: hidden;}
+.user-profile-div .field-label{float: left; width: 150px;}
+.user-profile-div .field-items{padding-bottom: 10px;}
