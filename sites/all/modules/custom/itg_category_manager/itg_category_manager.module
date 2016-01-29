@@ -9,7 +9,7 @@
  * Implements hook_init
  */
 function itg_category_manager_init(){
-  variable_set('taxonomy_terms_per_page_admin',9);
+  variable_set('taxonomy_terms_per_page_admin',20);
 }
 
 /**
@@ -138,6 +138,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['field_cm_hide_cat_from_search']['#disabled'] = TRUE;
         $form['field_cm_no_follow']['#disabled'] = TRUE;
         $form['field_cm_sponsored_category']['#disabled'] = TRUE;
+        $form['relations']['#attributes'] = array('disabled' => TRUE);
       }
       
       //Form after build  
@@ -182,13 +183,12 @@ function itg_category_manager_term_validate($form, &$form_state) {
  * @return int
  */
 function itg_category_manager_add_form_after_build($form, &$form_state){
-  
   //Add cancel link to add and edit form of category add form
   $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,
   );
-  
+    
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
