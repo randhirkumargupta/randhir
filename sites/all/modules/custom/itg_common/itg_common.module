@@ -139,10 +139,12 @@ function itg_common_role_delegation($role_array){
 function itg_common_views_query_alter(&$view, &$query) {  
   if ($view->name == 'manage_users') {
     global $user;
-   
+    
+    $count_condition = count($query->where[1]['conditions']) - 1;
+    
     if(!array_key_exists(SITE_ADMIN, $user->roles) && !array_key_exists(ADMINISTRATOR, $user->roles)) {
       $user_role = itg_common_role_delegation_uid();
-      $query->where[1]['conditions'][1]['value'] = $user_role;
+      $query->where[1]['conditions'][$count_condition]['value'] = $user_role;
     }        
   }
 }
