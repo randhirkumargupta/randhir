@@ -94,7 +94,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     if (count($used_by_content) > 0) {
       form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
       $node_url = $base_url . '/node/';
-      echo '<div class = "contents-using-cat"> This category is map with following contents:<br/>';
+      echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
       $i = 0;
       $count_used = count($used_by_content)-1;
       foreach ($used_by_content as $key => $value) {
