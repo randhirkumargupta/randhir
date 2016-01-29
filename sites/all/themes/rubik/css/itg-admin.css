@@ -450,6 +450,7 @@ form .form-item .form-item{
 #taxonomy-overview-terms .tabledrag-hide, 
 #taxonomy-overview-terms .tabledrag-handle, 
 #taxonomy-overview-terms .tabledrag-toggle-weight-wrapper, 
+.node-story-form .tabledrag-toggle-weight-wrapper, 
 .metatags-form .form-item-metatags-und-abstract-value,
 .metatags-form #edit-metatags-und-advanced{
   display: none;
@@ -523,10 +524,10 @@ form .field-add-more-submit{margin-left: 300px;}
 
 .page-admin-people-create .fieldset .fieldset-content{padding: 0;}
 .page-admin-people-create .fieldset legend{display: none;}
-.page-node-add-story .vertical-tabs, page-admin-structure-taxonomy-category-management .vertical-tabs{padding: 0; border: none;}
-.page-node-add-story form .vertical-tabs .fieldset.titled > .fieldset-content, 
+.node-story-form .vertical-tabs, page-admin-structure-taxonomy-category-management .vertical-tabs{padding: 0; border: none;}
+form.node-story-form .vertical-tabs .fieldset.titled > .fieldset-content, 
 .page-admin-structure-taxonomy-category-management .vertical-tabs .fieldset.titled > .fieldset-content{float: none; max-width: none;}
-.page-node-add-story form .vertical-tabs .form-item, 
+form.node-story-form .vertical-tabs .form-item, 
 .page-admin-structure-taxonomy-category-management form .vertical-tabs .form-item{margin-bottom: 20px;}
 .text-format-wrapper .form-item{padding: 0; border: none;}
 form .form-textarea-wrapper .form-item span.error{padding-left: 0;}
@@ -539,5 +540,5 @@ form .path-form.fieldset.titled > .fieldset-content{padding: 40px 9px 10px; floa
 .user-profile-div .user-details, .user-profile-div .field-items{overflow: hidden;}
 .user-profile-div .field-label{float: left; width: 150px;}
 .user-profile-div .field-items{padding-bottom: 10px;}
-.page-node-add-story form .path-form.fieldset.titled > .fieldset-content{padding: 10px 0 0;}
+form.node-story-form .path-form.fieldset.titled > .fieldset-content{padding: 10px 0 0;}
 .view-manage-users .vbo-views-form .fieldset-content .form-item{float: left; width: auto; margin-right: 10px;}
