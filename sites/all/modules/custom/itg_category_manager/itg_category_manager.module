@@ -108,6 +108,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
        echo '</div>';
       drupal_add_js('(function($) {$(document).ready(function() {
        $("#taxonomy-form-term #edit-submit").hide();
+       $("#edit-description").html($("body").find(".contents-using-cat").html());
+       $(".contents-using-cat").hide();
       });}(jQuery));', 'inline');
     }
   } else {
