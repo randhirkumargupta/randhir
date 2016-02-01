@@ -512,16 +512,19 @@ form .field-multiple-table thead{float: left; width: 300px;}
 form .field-multiple-table tbody{float: left; max-width: 600px;}
 form .field-multiple-table thead th, form .field-multiple-table tbody td{padding: 0; border: none; background: none;}
 form .field-multiple-table tbody td.field-multiple-drag{display: none;}
-form #field-story-template-buzz-values.field-multiple-table tbody{border: 1px solid #ddd; padding: 10px;}
+form #edit-field-story-template-buzz .field-multiple-table tbody{border: 1px solid #ddd; padding: 10px;}
 form .field-multiple-table tbody .form-item .form-text{width: 400px;}
-form #field-story-template-buzz-values.field-multiple-table tbody .form-item .form-text{width: 359px;}
-form #field-story-template-buzz-values.field-multiple-table tbody .form-item label{width: 120px;}
+form #edit-field-story-template-buzz .field-multiple-table tbody .form-item .form-text{width: 359px;}
+form #edit-field-story-template-buzz .field-multiple-table tbody .form-item label{width: 120px;}
 form .field-add-more-submit{margin-left: 300px;}
 #reporter-details{padding-left: 300px;margin: -20px 0 20px;position: relative;}
 .page-admin-people-create .fieldset{border: none;}
 .page-admin-people-create #edit-account .form-item{margin-bottom: 20px;}
 .page-admin-people-create #edit-account .form-type-password-confirm.form-item{margin-bottom: 0;}
-
+form #edit-field-story-template-buzz .field-multiple-table tbody tr td{padding: 10px 0;}
+form #edit-field-story-template-buzz .field-multiple-table tbody tr + tr td{border-top: 1px solid #ddd;}
+.form-type-managed-file .image-widget div.image-widget-data{width: 248px;}
+.node-story-form table.field-multiple-table td div.image-widget-data .button-remove{margin: 10px 0 0;}
 .page-admin-people-create .fieldset .fieldset-content{padding: 0;}
 .page-admin-people-create .fieldset legend{display: none;}
 .node-story-form .vertical-tabs, page-admin-structure-taxonomy-category-management .vertical-tabs{padding: 0; border: none;}
