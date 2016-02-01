@@ -437,11 +437,11 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
  */
 function itg_category_manager_get_mail_content($entity) {
   global $base_url;
-  $message = 'Hi SEO Team, <br/><br/> Category has been modified. Details are given below:<br/>';
+  $message = 'Hi SEO Team,'."\r\n".'Category has been modified. Details are given below:'."\r\n";
   $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
-  $display_name_txt = '<b> Display Title: </b>' . $display_name . '<br/>';
+  $display_name_txt = '<b> Display Title: </b>' . $display_name ."\r\n";
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
   $url = '<b>Category URL: </b><a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a>';
-  $message .= $display_name_txt . $url . '<br/></br>Thanks,<br/>India Today Team';
+  $message .= $display_name_txt . $url . "\r\n".'Thanks,'."\r\n".'India Today Team';
   return $message;
 }
