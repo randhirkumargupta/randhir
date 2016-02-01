@@ -518,8 +518,11 @@ form #edit-field-story-template-buzz .field-multiple-table tbody .form-item .for
 form #edit-field-story-template-buzz .field-multiple-table tbody .form-item label{width: 120px;}
 form .field-add-more-submit{margin-left: 300px;}
 #reporter-details{padding-left: 300px;margin: -20px 0 20px;position: relative;}
-.page-admin-people-create .fieldset{border: none;}
-.page-admin-people-create #edit-account .form-item{margin-bottom: 20px;}
+.page-admin-people-create .fieldset, .page-user-edit .fieldset{border: none;}
+.page-admin-people-create #edit-account .form-item, 
+.page-admin-people-create form .form-type-select, 
+.page-user-edit form .form-type-select,
+.page-user-edit #edit-account .form-item{margin-bottom: 20px;}
 .page-admin-people-create #edit-account .form-type-password-confirm.form-item{margin-bottom: 0;}
 form #edit-field-story-template-buzz .field-multiple-table tbody tr td{padding: 10px 0;}
 form #edit-field-story-template-buzz .field-multiple-table tbody tr + tr td{border-top: 1px solid #ddd;}
