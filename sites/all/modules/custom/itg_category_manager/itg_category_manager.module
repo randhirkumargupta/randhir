@@ -411,13 +411,13 @@ function mytestmail(){
  
  function itg_category_manager_entity_update($entity, $type){
    if ($type == 'taxonomy_term' && $entity->vocabulary_machine_name == 'category_management') {
-    $params = array(
-        'term_id' => $entity->tid,
-        'subject' => 'Category Management',
-        'headers' => 'simple',
-    );
+//    $params = array(
+//        'term_id' => $entity->tid,
+//        'subject' => 'Category Management',
+//        'headers' => 'simple',
+//    );
     $to = "haripalrao@gmail.com";
-    $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'India Today <indiatoday@indiatoday.com>', TRUE);
+    $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $entity, 'India Today <indiatoday@indiatoday.com>', TRUE);
     if ($mail['result']) {
       return TRUE;
     } else {
@@ -428,18 +428,20 @@ function mytestmail(){
    }
  }
 
- function itg_category_manager_seo_team_mail($key,&$message,$params) {
-  $term = taxonomy_term_load($params['term_id']);
+ function itg_category_manager_seo_team_mail($key, &$message, $entity) {
+  //$term = taxonomy_term_load($params['term_id']);
+  global $base_url;
   $message = 'Hi India Today, <br/><br/> Category has been modified. Details are given below:<br/>';
-  $display_name = $term->field_cm_display_title[LANGUAGE_NONE][0]['value'];
-  $display_name_txt = '<b> Display Name: </b>' . $display_name . '<br/>';
-  $link = 'http://google.com';
-  //$url = l($display_name, $link, array('attributes' => array('target' => '_blank')));
-  $message .= $display_name_txt . $link;
+  $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
+  $display_name_txt = '<b> Display Title: </b>' . $display_name . '<br/>';
+  $term_actual_url = $base_url.'/taxonomy/term/1';
+  $term_alias_url = $base_url.'/'.$entity->path['alias'];
+  $url = l($term_alias_url, $term_alias_url, array('attributes' => array('target' => '_blank')));
+  $message .= $display_name_txt . $url;
 
   switch ($key) {
     case 'send_mail_to_seo':
-      $message['subject'] = t($params['subject']);
+      $message['subject'] = t('India Today | Category Updated!');
       $message['body'][] = $message;
       $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
       break;
