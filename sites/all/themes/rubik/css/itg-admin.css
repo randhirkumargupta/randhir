@@ -535,7 +535,10 @@ form.node-story-form .vertical-tabs .form-item,
 .text-format-wrapper .form-item{padding: 0; border: none;}
 form .form-textarea-wrapper .form-item span.error{padding-left: 0;}
 .node-story-form .date-no-float{width: 400px;}
-.page-admin-structure-taxonomy-category-management fieldset legend span.form-required{display: none;}
+.page-admin-structure-taxonomy-category-management fieldset legend span.form-required, 
+.page-user-edit fieldset legend span.form-required, 
+.page-taxonomy-term-edit fieldset legend span.form-required,
+.page-admin-people fieldset legend span.form-required{display: none;}
 form .path-form.fieldset.titled > .fieldset-content{padding: 40px 9px 10px; float: none; max-width: none;}
 .view .view-filters form label, .view .view-filters form .form-item label{display: block; font-weight: normal; float: none; padding: 0; font-size: 13px; font-weight: normal; color: #333; width: auto;}
 .user-profile-div, .user-profile-div .field{display: inline-block; width: 100%; vertical-align: top;}
