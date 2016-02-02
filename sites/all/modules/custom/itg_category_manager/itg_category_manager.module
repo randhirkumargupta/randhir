@@ -391,7 +391,6 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
  function itg_category_manager_entity_update($entity, $type) {
   if ($type == 'taxonomy_term' && $entity->vocabulary_machine_name == 'category_management') {
     $mail_content = itg_category_manager_get_mail_content($entity);
-    echo $mail_content; exit;
      $params = array(
            'body' => $mail_content,
            'subject' => 'India Today | Category Updated!',
