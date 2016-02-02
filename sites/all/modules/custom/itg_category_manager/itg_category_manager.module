@@ -437,11 +437,18 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
  */
 function itg_category_manager_get_mail_content($entity) {
   global $base_url;
-  $message = 'Hi SEO Team,'."\r\n".'Category has been modified. Details are given below:'."\r\n";
   $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
-  $display_name_txt = '<b> Display Title: </b>' . $display_name ."\r\n";
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
-  $url = '<b>Category URL: </b><a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a>';
-  $message .= $display_name_txt . $url . "\r\n".'Thanks,'."\r\n".'India Today Team';
-  return nl2br($message);
+  $content = '<table>
+  <tr><td>Hi SEO Team,</td></tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr><td>Category has been modified. Details are given below:</td></tr>
+  <tr><td>Display Title: '.$display_name.'</td></tr>
+  <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr><td>Thanks,</td></tr>
+  <tr><td>India Today Team</td></tr>
+</table>';
+  return $content;
 }
