@@ -82,12 +82,6 @@ function user_management_user_default_roles() {
     'weight' => 18,
   );
 
-  // Exported role: SEO.
-  $roles['SEO'] = array(
-    'name' => 'SEO',
-    'weight' => 10,
-  );
-
   // Exported role: Section Editor/Anchor.
   $roles['Section Editor/Anchor'] = array(
     'name' => 'Section Editor/Anchor',
