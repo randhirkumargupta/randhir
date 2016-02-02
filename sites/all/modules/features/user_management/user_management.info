@@ -1,5 +1,5 @@
 name = User Management
-description = User Management for Bug resolve remove role delegation and work on ITG Common Module.
+description = User Management for ITG-147 Bug resolve
 core = 7.x
 package = Features
 version = 7.x-1.0-beta1
@@ -80,7 +80,6 @@ features[user_role][] = Intern
 features[user_role][] = Photo Coordinator
 features[user_role][] = Photo Head
 features[user_role][] = Photographer
-features[user_role][] = SEO
 features[user_role][] = Section Editor/Anchor
 features[user_role][] = Site Admin
 features[user_role][] = Subeditor/Sr.Sub
