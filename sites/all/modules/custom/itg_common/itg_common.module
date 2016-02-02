@@ -73,12 +73,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
                  '#required' => TRUE,
                   );
             }
-            
         }
-
         //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
         $form['account']['notify']['#default_value'] = TRUE;
-        
+     
         // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
         $destination = 'user';
         $form['actions']['cancel'] = array(
@@ -88,7 +86,6 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         );
       }
   }  
-  
 }
 
 function itg_common_views_pre_render(&$view) {
@@ -114,25 +111,24 @@ function itg_common_views_pre_render(&$view) {
 function itg_common_user_logout($account){  
   $_GET['destination'] = 'user';
 }
- 
 
 function itg_common_role_delegation($role_array){
   global $user;
     
-  if (array_key_exists(EDITOR, $user->roles)) {
-    $user_array = array(SECTION_EDITOR_ANCHOR=>'Section Editor/Anchor', COPY_EDITOR=>'Copy Editor', SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
-  }else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
-    $user_array = array(COPY_EDITOR=>'Copy Editor', SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
-  }else if (array_key_exists(COPY_EDITOR, $user->roles)) {
-    $user_array = array(SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
-  }else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-    $user_array = array(INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
-  }else if(array_key_exists(SITE_ADMIN, $user->roles)) {
-    unset($role_array[3]);
-    $user_array = $role_array;
-  }else if(array_key_exists(ADMINISTRATOR, $user->roles)) {    
-    $user_array = $role_array;
-  }
+    if (array_key_exists(EDITOR, $user->roles)) {
+      $user_array = array(SECTION_EDITOR_ANCHOR=>'Section Editor/Anchor', COPY_EDITOR=>'Copy Editor', SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
+    }else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
+      $user_array = array(COPY_EDITOR=>'Copy Editor', SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
+    }else if (array_key_exists(COPY_EDITOR, $user->roles)) {
+      $user_array = array(SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
+    }else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
+      $user_array = array(INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
+    }else if(array_key_exists(SITE_ADMIN, $user->roles)) {
+      unset($role_array[3]);
+      $user_array = $role_array;
+    }else if(array_key_exists(ADMINISTRATOR, $user->roles)) {    
+      $user_array = $role_array;
+    }
   
   return $user_array;
 }
@@ -141,15 +137,15 @@ function itg_common_role_delegation($role_array){
 function itg_common_role_delegation_uid() {  
   global $user;
   
-  if (array_key_exists(EDITOR, $user->roles)){
-    $user_array = array(SECTION_EDITOR_ANCHOR=>SECTION_EDITOR_ANCHOR, COPY_EDITOR=>COPY_EDITOR, SUBEDITOR_SR_SUB=>SUBEDITOR_SR_SUB, INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
-  }else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
-    $user_array = array(COPY_EDITOR=>COPY_EDITOR, SUBEDITOR_SR_SUB=>SUBEDITOR_SR_SUB, INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
-  }else if (array_key_exists(COPY_EDITOR, $user->roles)) {
-    $user_array = array(SUBEDITOR_SR_SUB=>SUBEDITOR_SR_SUB, INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
-  }else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-    $user_array = array(INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
-  }
+    if (array_key_exists(EDITOR, $user->roles)){
+      $user_array = array(SECTION_EDITOR_ANCHOR=>SECTION_EDITOR_ANCHOR, COPY_EDITOR=>COPY_EDITOR, SUBEDITOR_SR_SUB=>SUBEDITOR_SR_SUB, INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
+    }else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
+      $user_array = array(COPY_EDITOR=>COPY_EDITOR, SUBEDITOR_SR_SUB=>SUBEDITOR_SR_SUB, INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
+    }else if (array_key_exists(COPY_EDITOR, $user->roles)) {
+      $user_array = array(SUBEDITOR_SR_SUB=>SUBEDITOR_SR_SUB, INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
+    }else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
+      $user_array = array(INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
+    }
   
   return $user_array;
 }
