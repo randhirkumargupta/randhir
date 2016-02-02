@@ -167,9 +167,9 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
               $user_content_link[] = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
             }
           }
+          if($flag){
           $user_content_link_str = implode(", ", $user_content_link);
           echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>'.$user_content_link_str.'</div>';
-          if($flag){
           form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
            drupal_add_js('(function($) {$(document).ready(function() {
             $("#taxonomy-form-term #edit-submit").hide();
