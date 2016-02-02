@@ -35,7 +35,7 @@
 ?>
 <div class="user-profile-div">
   <?php if ($user_profile): ?>
-    <?php print render($user_profile['user_picture']); ?>
+    <?php print render($user_profile['field_user_picture']); ?>
   <?php endif; ?>
   <div class="user-details">
     <?php print render($user_profile['field_first_name']); ?>
