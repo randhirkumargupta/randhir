@@ -556,3 +556,12 @@ form.node-story-form .path-form.fieldset.titled > .fieldset-content{padding: 10p
 .view-manage-users .vbo-views-form .fieldset-content .form-item{float: left; width: auto; margin-right: 10px;}
 .user-profile-div .user-picture a{position: absolute; top: 0; left: 0; height: 100%; width: 100%;}
 .user-profile-div .user-picture img{vertical-align: top; position: absolute; top: 50%; transform: translateY(-50%);}
+.page-admin-people-create #edit-account .form-item.form-item-notify, 
+.page-admin-people-create #edit-account .form-item.form-item-status{margin-bottom: 0;}
+.page-admin-people-create #edit-account .form-item.form-item-notify{padding-left: 300px;}
+.page-admin-people-create .form-type-managed-file .image-widget div.image-widget-data, 
+.page-user-edit .form-type-managed-file .image-widget div.image-widget-data{width: auto;}
+.page-admin-people-create .form-type-managed-file .image-widget div.image-widget-data input[type="file"], 
+.page-user-edit .form-type-managed-file .image-widget div.image-widget-data input[type="file"]{float: left;}
+.page-admin-people-create .form-actions #edit-cancel,
+.page-user-edit .form-actions #edit-cancel{display: inline-block; float: none;}
