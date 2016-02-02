@@ -61,11 +61,11 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         }else{
          $form['#action'] = '?destination=user/'.$user->uid;
         }
-      if($user->uid != 1){
-        drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js', array('weight' => 1));
+      if ($user->uid != 1) {
+        $form['#after_build'][] = 'itg_user_after_build';        
         
         $user_role = itg_common_role_delegation($form['account']['roles']['#options']);
-        if(isset($user_role)){
+        if(isset($user_role)) {
            // p($form['#user']->uid);
             if($form['#user']->uid != $user->uid){    
               $form['selected'] = array(
@@ -160,4 +160,10 @@ function itg_common_role_delegation_uid() {
   return $user_array;
 }
 
+// after build for user management form
+function itg_user_after_build($form, &$form_state) {
+  
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js', array('weight' => 1));
+  return $form;
+}
 
