@@ -55,7 +55,8 @@ function user_management_field_group_info() {
       0 => 'field_first_name',
       1 => 'field_last_name',
       2 => 'field_mobile_number',
-      3 => 'picture',
+      3 => 'field_user_picture',
+      4 => 'picture',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

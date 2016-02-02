@@ -37,9 +37,52 @@ function itg_category_manager_menu() {
       'page arguments' => array('itg_category_manager_form'),
       'access arguments' => array('administer taxonomy'),
   );
+
   return $items;
 }
 
+/**
+ * Implements hook_menu_alter
+ * @param type $menu
+ */
+function itg_category_manager_menu_alter(&$menu) {
+  if (isset($menu['taxonomy/term/%taxonomy_term'])) {
+    $menu['taxonomy/term/%taxonomy_term']['page callback'] = 'itg_category_manager_taxonomy_view_page';
+    $menu['taxonomy/term/%taxonomy_term']['access callback'] = TRUE;
+    $menu['taxonomy/term/%taxonomy_term']['access arguments'] = array(2);
+  }
+}
+
+/**
+ * Functionality of taxonomy term view page
+ * @param type $term
+ * @return type
+ */
+function itg_category_manager_taxonomy_view_page($term){
+  $voc = taxonomy_vocabulary_load($term->vid);
+    switch ($voc->machine_name) {
+        case 'category_management':
+            $maped_with = '';
+            for($i = 0; $i< count($term->field_cm_select_type[LANGUAGE_NONE]); $i++){
+                $maped_with .= ucwords($term->field_cm_select_type[LANGUAGE_NONE][$i]['value']).', ';
+            }
+            $maped_with = rtrim($maped_with, ', ');
+            $build['content']['display_title']['#markup'] = t('<b>Display Title:</b> &nbsp; !display_title', array('!display_title' => @$term->field_cm_display_title[LANGUAGE_NONE][0]['value'])).'<br/>';
+            $build['content']['redirect_url']['#markup'] = t('<b>Redirect URL:</b> &nbsp; !redirect_url', array('!redirect_url' => l(@$term->field_cm_redirection_url[LANGUAGE_NONE][0]['value'],@$term->field_cm_redirection_url[LANGUAGE_NONE][0]['value'],array('attributes' => array('target' => '_blank'))))).'<br/>';
+            $build['content']['category_associated_with']['#markup'] = t('<b>Maped content type:</b> &nbsp;').$maped_with. '<br/>';
+            $build['content']['hide_form_home']['#markup'] = t('<b>Hide Category form Home:</b> &nbsp; !hide_form_home', array('!hide_form_home' => @$term->field_cm_hide_cat_from_home[LANGUAGE_NONE][0]['value']? 'Yes' : 'No')).'<br/>';
+            $build['content']['hide_form_search']['#markup'] = t('<b>Hide Category from Search:</b> &nbsp; !hide_form_search', array('!hide_form_search' => @$term->field_cm_hide_cat_from_search[LANGUAGE_NONE][0]['value']? 'Yes' : 'No')).'<br/>';
+            $build['content']['no_follow']['#markup'] = t('<b>No Follow:</b> &nbsp; !no_follow', array('!no_follow' => @$term->field_cm_no_follow[LANGUAGE_NONE][0]['value'] ? 'Yes' : 'No')).'<br/>';
+            $build['content']['sponsored_category']['#markup'] = t('<b>Sponsored Category:</b> &nbsp; !sponsored_category', array('!sponsored_category' => @$term->field_cm_sponsored_category[LANGUAGE_NONE][0]['value'] ? 'Yes' : 'No')).'<br/>';
+            return $build;
+
+        // If the term page is for an other vocabulary then use Drupal's default taxonomy page
+        default:
+            module_load_include('inc', 'taxonomy', 'taxonomy.pages');
+            $build = taxonomy_term_page($term);
+            return $build;
+    }
+}
 /**
  * Form builder; creates and displays the ITG Category Manager
  * configuration settings form.
@@ -121,11 +164,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       }
     }
     
-    //Redirect to term listing page, after term has been added successfully.
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
-      
-      //Drupal fields treatment
-      $form['#action'] = '?destination=admin/structure/taxonomy/category_management';
+      $form['#action'] = '?destination=admin/structure/taxonomy/category_management'; //Redirect to term listing page, after term has been added successfully.
       $form['name']['#title'] = t('Category Title');
       $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
       unset($form['description']);
@@ -143,7 +183,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
       //$form['relations']['#collapsible'] = 0;
       unset($form['relations']['weight']);
- 
+              
       //Non-editable fields in edit mode
       if(arg(3) == 'edit'){
         $form['name']['#attributes'] = array('readonly' => 'readonly');
@@ -198,10 +238,9 @@ function itg_category_manager_term_validate($form, &$form_state) {
  * @return int
  */
 function itg_category_manager_add_form_after_build($form, &$form_state){
+ // print_r($form); exit;
 
-
-
-  //Add cancel link to add and edit form of category add form exit;
+//Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,
@@ -341,4 +380,88 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
     }
   }
   return FALSE;
+}
+
+/**
+ * Implement hook_entity_update
+ * @param type $entity
+ * @param type $type
+ * @return boolean
+ */
+ function itg_category_manager_entity_update($entity, $type) {
+  if ($type == 'taxonomy_term' && $entity->vocabulary_machine_name == 'category_management') {
+    $mail_content = itg_category_manager_get_mail_content($entity);
+     $params = array(
+           'body' => $mail_content,
+           'subject' => 'India Today | Category Updated!',
+     );
+    $to = "haripal.rao@kelltontech.com"; // SEO team mail id
+    $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'India Today <indiatoday@indiatoday.com>', TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    } else {
+      $error_msg = 'Failed to send the email!';
+      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      return FALSE;
+    }
+  }
+}
+
+/**
+ * Send mail to SEO team, when category has been updated by india today team
+ * @global type $base_url
+ * @param type $key
+ * @param type $message
+ * @param type $entity
+ */
+ function itg_category_manager_seo_team_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'send_mail_to_seo':
+    $message['headers'] = array_merge(
+       $message['headers'],  
+       array(
+         'MIME-Version' => '1.0',
+         'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
+         'Content-Transfer-Encoding' => '8Bit',
+         'X-Mailer' => 'Drupal'
+       )
+     );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      break;
+  }
+}
+
+/**
+ * Get Mail content
+ * @global type $base_url
+ * @param type $entity
+ * @return string
+ */
+function itg_category_manager_get_mail_content($entity) {
+  global $base_url;
+  $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
+  $term_alias_url = $base_url . '/' . $entity->path['alias'];
+//  $content = '<table>
+//  <tr><td>Hi SEO Team,</td></tr>
+//  <tr><td>&nbsp;</td></tr>
+//  <tr><td>Category <b>'.$entity->name.'</b> has been modified. Details are given below:</td></tr>
+//  <tr><td>Display Title: '.$display_name.'</td></tr>
+//  <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
+//  <tr><td>&nbsp;</td></tr>
+//  <tr><td>&nbsp;</td></tr>
+//  <tr><td>Thanks,</td></tr>
+//  <tr><td>India Today Team</td></tr>
+//</table>';
+  
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title></title>
+</head>
+<body style="margin:0; padding:0;">
+      <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi SEO Team,</td></tr>
+      <tr><td style="font-weight: bold;">Category '.$entity->name.' has been modified. Details are given below:</td></tr></table>
+</body></html>';
+  return $content;
 }

@@ -9,6 +9,10 @@ if(!in_array('administrator', $user->roles)){
       $action_links = '<li><a href="'.$base_url.'/admin/structure/taxonomy/category_management/add">Add Category</a></li>';
       $primary_local_tasks = '';
   }
+  //Hide primary local task for others user(except )
+  if(arg(1) == 'people' && arg(2) == 'create'){
+     $primary_local_tasks = '';
+  }
 }
 
 if (theme_get_setting('rubik_show_branding')): ?>
