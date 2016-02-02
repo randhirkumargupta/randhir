@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default theme implementation to present all user profile data.
@@ -34,40 +33,29 @@
  * @ingroup themeable
  */
 ?>
-<div class="profile-image">
-    <?php if ($user_profile): ?>
-      <div class="user-picture">
-        <?php print render($user_profile['user_picture']); ?>
-      </div>
+<div class="user-profile-div">
+  <?php if ($user_profile): ?>
+    <?php print render($user_profile['user_picture']); ?>
+  <?php endif; ?>
+  <div class="user-details">
+    <?php print render($user_profile['field_first_name']); ?>
+    <?php print render($user_profile['field_last_name']); ?>
+    <?php print render($user_profile['field_mobile_number']); ?>
+    <div class="field">
+      <div class="field-label">User name:</div>
+      <div class="field-items"><?php print_r($user->name); ?></div>
+    </div> 
+    <div class="field">
+      <div class="field-label">Email:</div>
+      <div class="field-items"><?php print_r($user->mail); ?></div>
+    </div>
+    <div class="field">
+      <div class="field-label">Role:</div>
+      <div class="field-items"><?php print end($elements['#account']->roles); ?></div>
+    </div>
+    <div class="field">
+      <div class="field-label"><?php print_r($user_profile['summary']['member_for']['#title']); ?>:</div>
+      <div class="field-items"><?php print_r($user_profile['summary']['member_for']['#markup']); ?></div>
+    </div>
+  </div>
 </div>
-<div class="user-details">
-      <div class="user-first-name">
-        <?php print render($user_profile['field_first_name']); ?>
-      </div>
-      <div class="user-last-name">
-        <?php print render($user_profile['field_last_name']); ?>
-      </div>
-      <div class="user-mobile-name">
-        <?php print render($user_profile['field_mobile_number']); ?>
-      </div>
-      <div class="user-name">
-        <?php echo "<b>User name:</b> "; ?>  
-        <?php print_r($user->name); ?>
-      </div>
-      <div class="user-email">
-          <?php echo "<b>Email:</b> ";?>
-          <?php print_r($user->mail); ?>
-      </div>
-    
-      <div class="user-roles">
-        <?php echo "<b>Role:</b> "; 
-        print end($elements['#account']->roles); ?>
-      </div>
-    <?php endif; ?>
-<?php 
-print_r($user_profile['summary']['member_for']['#title']);
-print "<br>";
-print_r($user_profile['summary']['member_for']['#markup']); 
-?>    
-</div>
-  

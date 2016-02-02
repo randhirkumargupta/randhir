@@ -43,7 +43,7 @@ select option{
 .page-admin-people-create form{
   max-width: 800px;
   position: relative;
-  z-index: 9999;
+  z-index: 9;
 }
 div.password-confirm, div.password-confirm span{
   float: right;
@@ -55,7 +55,7 @@ div.password-confirm{
 span.error{
   display: block;
 }
-.node-story-form .field-name-field-story-magazine-story-issue .form-type-checkboxes label{
+.node-story-form .field-name-field-story-magazine-story-issue .form-type-checkboxes label, .form-item-notify label{
   display: inline;
 }
 .node-story-form .field-name-field-story-magazine-story-issue .form-checkboxes{
@@ -175,7 +175,7 @@ div.views-exposed-form div.views-submit-button{
 .block-superfish .sf-menu.sf-horizontal li.active-trail{
   background-color: #b5d8fa;
 }
-.node-story-form .form-item{
+form .form-item{
   border: none;
   padding: 0;
   margin: 0 0 10px;
@@ -183,43 +183,55 @@ div.views-exposed-form div.views-submit-button{
   width: 100%;
 }
 
-.node-story-form .form-item label{
+form .form-item label{
   font-size: 12px;
   float: left;
   width: 300px;
   font-weight: normal;
+  padding: 3px 0;
 }
-.node-story-form .form-item span.error{
+.form-item span.error{
   display: block;
   color: red;
   width: auto;
   float: none;
+  padding-left: 300px;
 }
-.node-story-form .form-item span.error{padding-left: 300px;}
-.node-story-form .form-type-checkboxes label,
+.node-story-form .form-item span.error, 
+.page-admin-people-create form .form-item span.error{padding-left: 300px;}
+.node-story-form .date-padding .form-item span.error {padding-left: 0;}
+/*.node-story-form .form-type-checkboxes label,
 .node-story-form .form-type-radios label, 
 .node-story-form .field-name-field-story-magazine-story-issue .form-type-checkboxes label,
-.node-story-form .field-name-field-story-resize-extra-large .form-type-checkboxes label{
+.node-story-form .field-name-field-story-resize-extra-large .form-type-checkboxes label,*/
+form .form-type-checkboxes label,
+form .form-type-radios label, 
+form .field-name-field-story-magazine-story-issue .form-type-checkboxes label,
+form .field-name-field-story-resize-extra-large .form-type-checkboxes label, 
+form .form-item-notify label{
   float: none;
 }
-.node-story-form .form-type-radios > label,
-.node-story-form .form-type-checkboxes > label{
+form .form-type-radios > label,
+form .form-type-checkboxes > label{
   float: left;
 }
-.node-story-form .form-type-checkboxes .form-checkboxes,
-.node-story-form .form-type-radios .form-radios, 
-.node-story-form .form-type-textarea .form-textarea-wrapper{
+form .form-type-checkboxes .form-checkboxes,
+form .form-type-radios .form-radios, 
+form .form-type-textarea .form-textarea-wrapper{
   overflow: hidden;
 }
-.node-story-form .form-type-managed-file .form-managed-file{
+form .form-type-radios .form-radios .form-type-radio{display: inline-block; vertical-align: top; width: auto; padding-right: 20px;}
+form .form-type-managed-file .form-managed-file{
   overflow: hidden;
 }
-.node-story-form .form-item .form-type-checkbox{
+form .form-item .form-type-checkbox{
   display: inline-block;
-  margin-right: 20px;
+  padding-right: 20px;
   width: auto;
 }
-.node-story-form .form-type-managed-file .form-managed-file .filefield-source .form-item{
+form .field-name-field-story-resize-extra-large .form-item .form-type-checkbox, 
+form .field-name-field-story-magazine-story-issue .form-item .form-type-checkbox{padding-right: 0;}
+form .form-type-managed-file .form-managed-file .filefield-source .form-item{
   float: left;
 } 
 .node-story-form .field-name-field-story-resize-extra-large .form-type-checkboxes .form-checkboxes{
@@ -230,24 +242,25 @@ div.views-exposed-form div.views-submit-button{
   display: inline-block;
   vertical-align: top;
 }
-.node-story-form .date-combo{
+form .date-combo{
   border: none;
 }
-.node-story-form .date-combo .fieldset-title{
+form .date-combo .fieldset-title{
   background: none;
   padding: 0;
 }
-.node-story-form .date-combo legend{
+form .date-combo legend{
   width: 300px;
 }
-.node-story-form .date-combo .fieldset-content{
-  overflow: hidden;
+.node-story-form .fieldset.titled > .fieldset-content{
+  float: left;
+  max-width: 600px;
   padding: 0;
 }
-.node-story-form fieldset.date-combo .container-inline-date .date-padding{
+form fieldset.date-combo .container-inline-date .date-padding{
   padding: 0;
 }
-.node-story-form fieldset.date-combo .container-inline-date .date-padding .form-item{
+form fieldset.date-combo .container-inline-date .date-padding .form-item{
   width: 160px;
   padding-right: 20px;
 }
@@ -258,7 +271,7 @@ div.views-exposed-form div.views-submit-button{
   margin-bottom: 10px;
 }
 .page-content .node-story-form .form-item td .description{
-  padding-left: 300px;
+  padding-left: 120px;
 }
 .node-story-form .ckeditor_links, 
 .node-story-form .text-format-wrapper .filter-wrapper, 
@@ -269,9 +282,9 @@ div.views-exposed-form div.views-submit-button{
   padding-left: 5px;
 }
 .node-story-form table.field-multiple-table td .button-remove{
-  margin-left: 300px;
+  margin-left: 120px;
 }
-.node-story-form .form-item .form-item{
+form .form-item .form-item{
   margin: 0;
 }
 .story-title{
@@ -293,7 +306,7 @@ div.views-exposed-form div.views-submit-button{
 .block-itg-story-list span{
   cursor: pointer;
   display: inline-block;
-  padding: 10px 30px;
+  padding: 10px 20px;
   color: #666;
   position: relative;
   margin-left: -3px;
@@ -354,7 +367,8 @@ div.views-exposed-form div.views-submit-button{
   color: #fff;
   font-size: 14px;
 }
-#block-menu-menu-admin-left-menu .block-content > ul.menu > li:hover > a{
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li:hover > a, 
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li.active-trail > a.active{
   color: #666;
   background-color: #fff;
 }
@@ -380,7 +394,8 @@ div.views-exposed-form div.views-submit-button{
   padding: 10px 20px;
   display: block;
 }
-#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li:hover a{
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li:hover a, 
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li.active-trail a.active{
   background-color: #c3535e;
   color: #fff;
 }
@@ -430,13 +445,15 @@ div.views-exposed-form div.views-submit-button{
 .preview-wrapper .node-content .field .field-items table td, 
 .preview-wrapper .node-content .field .field-items table th{border: 1px solid #ddd;}
 .field-name-field-story-resize-extra-large,
-.field-name-field-story-magazine-story-issue{
+.field-name-field-story-magazine-story-issue, .form-item-notify{
   padding-left: 300px;
 }
 .preview-wrapper .node-content .field-name-field-story-resize-extra-large,
 .preview-wrapper .node-content .field-name-field-story-magazine-story-issue{padding-left: 0;}
-.tabledrag-hide, .tabledrag-handle, 
-.tabledrag-toggle-weight-wrapper, 
+#taxonomy-overview-terms .tabledrag-hide, 
+#taxonomy-overview-terms .tabledrag-handle, 
+#taxonomy-overview-terms .tabledrag-toggle-weight-wrapper, 
+.node-story-form .tabledrag-toggle-weight-wrapper, 
 .metatags-form .form-item-metatags-und-abstract-value,
 .metatags-form #edit-metatags-und-advanced{
   display: none;
@@ -493,9 +510,49 @@ input[readonly="readonly"], input[disabled="disabled"], select[disabled="disable
 .quotes .field-item:after{
   content: '"';
 }
-#reporter-details{
-  padding-left: 300px;
-  margin: -20px 0 20px;
-  position: relative;
-  
-}
+form .field-multiple-table{border: none;}
+form .field-multiple-table thead{float: left; width: 300px;}
+form .field-multiple-table tbody{float: left; max-width: 600px;}
+form .field-multiple-table thead th, form .field-multiple-table tbody td{padding: 0; border: none; background: none;}
+form .field-multiple-table tbody td.field-multiple-drag{display: none;}
+form #edit-field-story-template-buzz .field-multiple-table tbody{border: 1px solid #ddd; padding: 10px;}
+form .field-multiple-table tbody .form-item .form-text{width: 400px;}
+form #edit-field-story-template-buzz .field-multiple-table tbody .form-item .form-text{width: 359px;}
+form #edit-field-story-template-buzz .field-multiple-table tbody .form-item label{width: 120px;}
+form .field-add-more-submit{margin-left: 300px;}
+#reporter-details{padding-left: 300px;margin: -20px 0 20px;position: relative;}
+.page-admin-people-create .fieldset, .page-user-edit .fieldset{border: none;}
+.page-admin-people-create #edit-account .form-item, 
+.page-admin-people-create form .form-type-select, 
+.page-user-edit form .form-type-select,
+.page-user-edit #edit-account .form-item{margin-bottom: 20px;}
+.page-admin-people-create #edit-account .form-type-password-confirm.form-item{margin-bottom: 0;}
+form #edit-field-story-template-buzz .field-multiple-table tbody tr td{padding: 10px 0;}
+form #edit-field-story-template-buzz .field-multiple-table tbody tr + tr td{border-top: 1px solid #ddd;}
+.form-type-managed-file .image-widget div.image-widget-data{width: 248px;}
+.node-story-form table.field-multiple-table td div.image-widget-data .button-remove{margin: 10px 0 0;}
+.page-admin-people-create .fieldset .fieldset-content{padding: 0;}
+.page-admin-people-create .fieldset legend{display: none;}
+.node-story-form .vertical-tabs, page-admin-structure-taxonomy-category-management .vertical-tabs{padding: 0; border: none;}
+form.node-story-form .vertical-tabs .fieldset.titled > .fieldset-content, 
+.page-admin-structure-taxonomy-category-management .vertical-tabs .fieldset.titled > .fieldset-content{float: none; max-width: none;}
+form.node-story-form .vertical-tabs .form-item, 
+.page-admin-structure-taxonomy-category-management form .vertical-tabs .form-item{margin-bottom: 20px;}
+.text-format-wrapper .form-item{padding: 0; border: none;}
+form .form-textarea-wrapper .form-item span.error{padding-left: 0;}
+.node-story-form .date-no-float{width: 400px;}
+.page-admin-structure-taxonomy-category-management fieldset legend span.form-required, 
+.page-user-edit fieldset legend span.form-required, 
+.page-taxonomy-term-edit fieldset legend span.form-required,
+.page-admin-people fieldset legend span.form-required{display: none;}
+form .path-form.fieldset.titled > .fieldset-content{padding: 40px 9px 10px; float: none; max-width: none;}
+.view .view-filters form label, .view .view-filters form .form-item label{display: block; font-weight: normal; float: none; padding: 0; font-size: 13px; font-weight: normal; color: #333; width: auto;}
+.user-profile-div, .user-profile-div .field{display: inline-block; width: 100%; vertical-align: top;}
+.user-profile-div .user-picture{float: left; width: 200px; margin-right: 30px; border: 1px solid #ddd; height: 200px; position: relative;}
+.user-profile-div .user-details, .user-profile-div .field-items{overflow: hidden;}
+.user-profile-div .field-label{float: left; width: 150px;}
+.user-profile-div .field-items{padding-bottom: 10px;}
+form.node-story-form .path-form.fieldset.titled > .fieldset-content{padding: 10px 0 0;}
+.view-manage-users .vbo-views-form .fieldset-content .form-item{float: left; width: auto; margin-right: 10px;}
+.user-profile-div .user-picture a{position: absolute; top: 0; left: 0; height: 100%; width: 100%;}
+.user-profile-div .user-picture img{vertical-align: top; position: absolute; top: 50%; transform: translateY(-50%);}

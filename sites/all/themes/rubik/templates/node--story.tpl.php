@@ -67,7 +67,9 @@
               <?php print render($content['field_story_reporter']); ?>
             </div>
           </div>
-             <?php if(!empty(render($content['field_story_expert_name']))):?>
+             <?php 
+              $expert = render($content['field_story_expert_name']); 
+              if(!empty($expert)):?>
           <div class="expert-details content-box">
             <h2>Expert Details</h2>
             <div class="content-details">
@@ -82,23 +84,37 @@
             <div class="content-details"><?php print render($content['body']); ?></div>
 
           </div>
+            <?php 
+              $configuration = render($content['field_story_configurations']); 
+              if(!empty($configuration)):?>
           <div class="configuration content-box">
             <h2>Configuration</h2>
-            <div class="content-details"><?php print render($content['field_story_configurations']); ?></div>
+            <div class="content-details"><?php print render($content['field_story_configurations']); ?>
+            <?php print render($content['field_story_rating']); ?>
+            <?php print render($content['field_story_client_title']); ?></div>
           </div>
-            <?php if(!empty(render($content['field_story_comment_question']))):?>
+            
+             <?php endif; ?>
+            <?php 
+              $comment_question = render($content['field_story_configurations']);
+              if(!empty($comment_question)):?>
           <div class="Comment content-box">
             <h2>Comment Question</h2>
-            <div class="content-details"><?php print render($content['field_story_comment_question']); ?></div>
+            <div class="content-details"><?php print render($content['field_story_comment_question']); ?>
+            </div>
           </div>
             <?php endif; ?>
-            <?php if(!empty(render($content['field_story_social_media_integ']))):?>
+            <?php 
+            $social_media = render($content['field_story_social_media_integ']);
+             if(!empty($social_media)):?>
           <div class="SocialMedia content-box">
             <h2>Social Media</h2>
             <div class="content-details"><?php print render($content['field_story_social_media_integ']); ?></div>
           </div>
             <?php endif;?>
-             <?php if(!empty(render($content['field_story_facebook_narrative']))):?>
+             <?php 
+              $facebook_narrative = render($content['field_story_facebook_narrative']);
+              if(!empty($facebook_narrative)):?>
           <div class="Facebook-narretive content-box">
             <h2>Facebook Narrative</h2>
             <div class="content-details">
@@ -107,13 +123,17 @@
             </div>
           </div>
              <?php endif;?>
-            <?php if(!empty(render($content['field_story_tweet']))):?>
+            <?php 
+              $twitter = render($content['field_story_tweet']);
+              if(!empty($twitter)):?>
           <div class="Twitter content-box">
             <h2>Twitter</h2>
             <div class="content-details"><?php print render($content['field_story_tweet']); ?></div>
           </div>
             <?php endif;?>
-            <?php if(!empty(render($content['field_story_extra_large_image']))):?>
+            <?php 
+            $browsemedia = render($content['field_story_extra_large_image']);  
+            if(!empty($browsemedia)):?>
           <div class="BrowseMedia">
             <h2>BrowseMedia</h2>
             <div class="content-details">
@@ -125,7 +145,9 @@
             </div>
           </div>
            <?php endif;?>
-           <?php if(!empty(render($content['field_story_templates']))):?>
+           <?php 
+           $templates = render($content['field_story_templates']);
+           if(!empty($templates)):?>
           <div class="Templates">
             <h2>Templates</h2>
             
@@ -145,18 +167,13 @@
             
             <?php } } ?>
                 </ul>
-            
-            
+                
             <?php if($vr == 'number_list') {?>
                 <ol>
-           <?php foreach($fr as $key => $val){ 
-              
-              
-              ?>
-                
-                    <li><?php print $i.".".$val['value']; ?></li>
-            
-            <?php } }?>
+            <?php foreach($fr as $key => $val){ ?>
+                                    
+             <li><?php print $val['value']; ?></li> <?php } }?>
+                       
                 </ol>
               </div>
             </div>
@@ -177,7 +194,6 @@
             <h2>Story Details</h2>
             <div class="content-details">
             <?php print render($content['field_story_expiry_date']); ?>
-            <?php print render($content['field_story_rating']); ?>
             <?php print render($content['field_story_kicker_text']); ?>
             <?php print render($content['field_story_category']); ?>
             </div>
