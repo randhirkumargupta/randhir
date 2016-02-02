@@ -391,6 +391,7 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
  function itg_category_manager_entity_update($entity, $type) {
   if ($type == 'taxonomy_term' && $entity->vocabulary_machine_name == 'category_management') {
     $mail_content = itg_category_manager_get_mail_content($entity);
+    echo $mail_content; exit;
      $params = array(
            'body' => $mail_content,
            'subject' => 'India Today | Category Updated!',
@@ -438,7 +439,7 @@ function itg_category_manager_get_mail_content($entity) {
   $content = '<table>
   <tr><td>Hi SEO Team,</td></tr>
   <tr><td>&nbsp;</td></tr>
-  <tr><td>Category has been modified. Details are given below:</td></tr>
+  <tr><td>Category <b>'.$entity->name.'</b> has been modified. Details are given below:</td></tr>
   <tr><td>Display Title: '.$display_name.'</td></tr>
   <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
   <tr><td>&nbsp;</td></tr>
