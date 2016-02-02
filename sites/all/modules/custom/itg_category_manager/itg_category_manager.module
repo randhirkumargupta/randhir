@@ -134,27 +134,51 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
   if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete')) {
     $tid = $form_state['term']->tid;
     $used_by_content = taxonomy_select_nodes($tid);
-    if (count($used_by_content) > 0) {
-      form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
-      $node_url = $base_url . '/node/';
-      echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
-      $i = 0;
-      $count_used = count($used_by_content)-1;
-      foreach ($used_by_content as $key => $value) {
-        $node = $node = node_load($value);
-        echo '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
-        if($i != $count_used){
-            echo ', ';
+      if (count($used_by_content) > 0) {
+        form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
+        $node_url = $base_url . '/node/';
+        echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
+        $count_used = count($used_by_content) - 1;
+        foreach ($used_by_content as $key => $value) {
+          $node = node_load($value);
+          $mapped_content_link = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>'.', ';
+          echo rtrim($mapped_content_link, ', ');
+          
         }
-        $i++;
+        echo '</div>';
+        drupal_add_js('(function($) {$(document).ready(function() {
+        $("#taxonomy-form-term #edit-submit").hide();
+        $("#edit-description").html($("body").find(".contents-using-cat").html());
+        $(".contents-using-cat").hide();
+       });}(jQuery));', 'inline');
+      } else {
+        $flag = FALSE;
+        $all_children = @taxonomy_get_children_all($tid, $form_state['term']->vid);
+        if (count($all_children) > 0) {
+          foreach ($all_children as $key => $val) {
+            $used_by_content = taxonomy_select_nodes($val);
+            if(count($used_by_content) > 0){
+              $flag = TRUE;
+            }
+            $node_url = $base_url . '/node/';
+            $count_used = count($used_by_content) - 1;
+            foreach ($used_by_content as $key => $value) {
+              $node = node_load($value);
+              $user_content_link[] = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
+            }
+          }
+          $user_content_link_str = implode(", ", $user_content_link);
+          echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>'.$user_content_link_str.'</div>';
+          if($flag){
+          form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
+           drupal_add_js('(function($) {$(document).ready(function() {
+            $("#taxonomy-form-term #edit-submit").hide();
+            $("#edit-description").html($("body").find(".contents-using-cat").html());
+            $(".contents-using-cat").hide();
+           });}(jQuery));', 'inline');
+          }
+         }  
       }
-       echo '</div>';
-      drupal_add_js('(function($) {$(document).ready(function() {
-       $("#taxonomy-form-term #edit-submit").hide();
-       $("#edit-description").html($("body").find(".contents-using-cat").html());
-       $(".contents-using-cat").hide();
-      });}(jQuery));', 'inline');
-    }
   } else {
     $types = @variable_get('itg_category_manager_types', array());
     if ($types['term']) {
@@ -200,6 +224,29 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
     }
   }
+}
+/**
+ * Get all categories under their parent category
+ * @param type $tid
+ * @param type $vid
+ * @param type $key
+ * @return type
+ */
+function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid'){
+    $c = taxonomy_get_children($tid, $vid, $key);
+    $result = array();
+    foreach ($c as $t => $d){
+        $result[$t] = $d;
+        $below = taxonomy_get_children_all($t, $vid, $key);
+        $all_children[] = $result[$t]->tid;
+        if (!empty($below)) {
+            foreach ($below as $nt => $nd){
+                $result[$nt] = $nd;
+                array_push($all_children, $nd);
+            }
+        }
+    }
+    return $all_children;
 }
 
 /**
@@ -395,8 +442,8 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
            'body' => $mail_content,
            'subject' => 'India Today | Category Updated!',
      );
-    $to = "haripal.rao@kelltontech.com"; // SEO team mail id
-    $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'India Today <indiatoday@indiatoday.com>', TRUE);
+    $to = "haripalrao@gmail.com"; // SEO team mail id
+    $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'haripal.rao@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
     } else {
@@ -417,17 +464,17 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
  function itg_category_manager_seo_team_mail($key, &$message, $params) {
   switch ($key) {
     case 'send_mail_to_seo':
-    $message['headers'] = array_merge(
-       $message['headers'],  
-       array(
-         'MIME-Version' => '1.0',
-         'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
-         'Content-Transfer-Encoding' => '8Bit',
-         'X-Mailer' => 'Drupal'
-       )
-     );
+    $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
       $message['subject'] = $params['subject'];
       $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+    }
       break;
   }
 }
