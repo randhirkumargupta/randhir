@@ -367,7 +367,8 @@ form .form-item .form-item{
   color: #fff;
   font-size: 14px;
 }
-#block-menu-menu-admin-left-menu .block-content > ul.menu > li:hover > a{
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li:hover > a, 
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li.active-trail > a.active{
   color: #666;
   background-color: #fff;
 }
@@ -393,7 +394,8 @@ form .form-item .form-item{
   padding: 10px 20px;
   display: block;
 }
-#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li:hover a{
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li:hover a, 
+#block-menu-menu-admin-left-menu .block-content > ul.menu > li ul.menu li.active-trail a.active{
   background-color: #c3535e;
   color: #fff;
 }
