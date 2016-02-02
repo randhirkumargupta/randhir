@@ -631,7 +631,21 @@ function _rubik_local_tasks(&$vars) {
   }
 }
 
+function rubik_menu_link(array $variables) {
+    $element = $variables['element'];
+    $sub_menu = '';
 
+    if ($element['#below']) {
+        $sub_menu = drupal_render($element['#below']);
+    }
+    $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+
+    // if link class is active, make li class as active too
+    if(strpos($output,"active")>0){
+        $element['#attributes']['class'][] = "active";
+    }
+    return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+}
 
 function rubik_node_preview($variables) {
   $node = $variables['node'];
