@@ -122,14 +122,14 @@
                  // code to estrict user to select previous date
                  $('#edit-field-story-schedule-date-time-und-0-value-datepicker-popup-0').datepicker({
                     changeYear: true,
-                    minDate: '-1',
+                    minDate: '0',
                     //maxDate: '+1M',
                  });
                 
                 // code to estrict user to select previous date
                  $('#edit-field-story-expiry-date-und-0-value-datepicker-popup-0').datepicker({
                     changeYear: true,
-                    minDate: '-1',
+                    minDate: '0',
                     //maxDate: '+1M',
                 });
                 

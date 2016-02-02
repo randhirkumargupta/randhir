@@ -388,6 +388,12 @@ function user_management_views_default_views() {
     18 => 0,
     19 => 0,
   );
+  /* Filter criterion: User: The user ID */
+  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
+  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
   /* Filter criterion: User: Roles */
   $handler->display->display_options['filters']['rid']['id'] = 'rid';
   $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
@@ -402,51 +408,27 @@ function user_management_views_default_views() {
     1 => 0,
     3 => 0,
     4 => 0,
-    5 => 0,
-    6 => 0,
     7 => 0,
-    8 => 0,
     9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
     10 => 0,
-    11 => 0,
-    12 => 0,
+    19 => 0,
     13 => 0,
-    14 => 0,
-    15 => 0,
+    11 => 0,
     16 => 0,
     17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
     18 => 0,
-    19 => 0,
   );
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
-  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
   /* Filter criterion: User: Roles */
   $handler->display->display_options['filters']['rid_1']['id'] = 'rid_1';
   $handler->display->display_options['filters']['rid_1']['table'] = 'users_roles';
   $handler->display->display_options['filters']['rid_1']['field'] = 'rid';
-  $handler->display->display_options['filters']['rid_1']['value'] = array(
-    4 => '4',
-    7 => '7',
-    9 => '9',
-    5 => '5',
-    8 => '8',
-    20 => '20',
-    6 => '6',
-    10 => '10',
-    19 => '19',
-    13 => '13',
-    11 => '11',
-    16 => '16',
-    17 => '17',
-    14 => '14',
-    12 => '12',
-    15 => '15',
-    18 => '18',
-  );
+  $handler->display->display_options['filters']['rid_1']['operator'] = 'not empty';
   $handler->display->display_options['path'] = 'manage-users';
   $export['manage_users'] = $view;
 

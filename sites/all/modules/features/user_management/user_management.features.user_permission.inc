@@ -14,8 +14,10 @@ function user_management_user_default_permissions() {
   $permissions['access all views'] = array(
     'name' => 'access all views',
     'roles' => array(
+      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
