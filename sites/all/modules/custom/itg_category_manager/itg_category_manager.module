@@ -62,15 +62,11 @@ function itg_category_manager_taxonomy_view_page($term){
   $voc = taxonomy_vocabulary_load($term->vid);
     switch ($voc->machine_name) {
         case 'category_management':
-          $maped_with = '';
+            $maped_with = '';
             for($i = 0; $i< count($term->field_cm_select_type[LANGUAGE_NONE]); $i++){
-              if($i == (count($term->field_cm_select_type[LANGUAGE_NONE])-2)){
-                $comma = ', ';
-              } else {
-                $comma = '';
-              }
-                $maped_with .= ucwords($term->field_cm_select_type[LANGUAGE_NONE][$i]['value']).$comma;
+                $maped_with .= ucwords($term->field_cm_select_type[LANGUAGE_NONE][$i]['value']).', ';
             }
+            $maped_with = rtrim($maped_with, ', ');
             $build['content']['display_title']['#markup'] = t('<b>Display Title:</b> &nbsp; !display_title', array('!display_title' => @$term->field_cm_display_title[LANGUAGE_NONE][0]['value'])).'<br/>';
             $build['content']['redirect_url']['#markup'] = t('<b>Redirect URL:</b> &nbsp; !redirect_url', array('!redirect_url' => l(@$term->field_cm_redirection_url[LANGUAGE_NONE][0]['value'],@$term->field_cm_redirection_url[LANGUAGE_NONE][0]['value'],array('attributes' => array('target' => '_blank'))))).'<br/>';
             $build['content']['category_associated_with']['#markup'] = t('<b>Maped content type:</b> &nbsp;').$maped_with. '<br/>';
