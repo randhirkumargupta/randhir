@@ -564,4 +564,6 @@ form.node-story-form .path-form.fieldset.titled > .fieldset-content{padding: 10p
 .page-admin-people-create .form-type-managed-file .image-widget div.image-widget-data input[type="file"], 
 .page-user-edit .form-type-managed-file .image-widget div.image-widget-data input[type="file"]{float: left;}
 .page-admin-people-create .form-actions #edit-cancel,
-.page-user-edit .form-actions #edit-cancel{display: inline-block; float: none;}
+.page-user-edit .field-type-image .button-remove{display: inline-block; float: none;}
+.page-user-edit div.image-widget-data{position: relative;}
+.page-user-edit div.image-widget-data .ajax-progress{position: absolute; left: 100%; top: 0;}

@@ -55,13 +55,12 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         $form['account']['mail']['#attributes']['disabled'] = TRUE;
    }
    
-    if(isset($_GET['destination'])) {
-        $_GET['destination'] = $_GET['destination'];
-    }else{
-         $form['#action'] = '?destination=user/'.$user->uid;
-    }
-    
     if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
+        if(isset($_GET['destination'])) {
+         $_GET['destination'] = $_GET['destination'];
+        }else{
+         $form['#action'] = '?destination=user/'.$user->uid;
+        }
       if($user->uid != 1){
         drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js', array('weight' => 1));
         
@@ -85,7 +84,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         if(isset($_GET['destination'])) {
             $destination = $_GET['destination'];
         }else{
-             $destination = 'user/'.$user->uid;
+            $destination = 'user/'.$user->uid;
         }
         $form['actions']['cancel'] = array(
             '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
@@ -103,9 +102,9 @@ function itg_common_views_pre_render(&$view) {
         //$roles = user_roles();
         $header_content = '';
         if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {
-            if (!isset($_GET['destination'])) {
-                $header_content = '<a href ="./admin/people/create">Create User</a>';
-            }
+            //if (!isset($_GET['destination'])) {
+                $header_content = '<a href ="./admin/people/create?destination=manage-users">Create User</a>';
+            //}
         }
         $view->attachment_before = $header_content;
     }
