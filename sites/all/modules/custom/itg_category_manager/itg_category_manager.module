@@ -62,15 +62,11 @@ function itg_category_manager_taxonomy_view_page($term){
   $voc = taxonomy_vocabulary_load($term->vid);
     switch ($voc->machine_name) {
         case 'category_management':
-          $maped_with = '';
+            $maped_with = '';
             for($i = 0; $i< count($term->field_cm_select_type[LANGUAGE_NONE]); $i++){
-              if($i == (count($term->field_cm_select_type[LANGUAGE_NONE])-2)){
-                $comma = ', ';
-              } else {
-                $comma = '';
-              }
-                $maped_with .= ucwords($term->field_cm_select_type[LANGUAGE_NONE][$i]['value']).$comma;
+                $maped_with .= ucwords($term->field_cm_select_type[LANGUAGE_NONE][$i]['value']).', ';
             }
+            $maped_with = rtrim($maped_with, ', ');
             $build['content']['display_title']['#markup'] = t('<b>Display Title:</b> &nbsp; !display_title', array('!display_title' => @$term->field_cm_display_title[LANGUAGE_NONE][0]['value'])).'<br/>';
             $build['content']['redirect_url']['#markup'] = t('<b>Redirect URL:</b> &nbsp; !redirect_url', array('!redirect_url' => l(@$term->field_cm_redirection_url[LANGUAGE_NONE][0]['value'],@$term->field_cm_redirection_url[LANGUAGE_NONE][0]['value'],array('attributes' => array('target' => '_blank'))))).'<br/>';
             $build['content']['category_associated_with']['#markup'] = t('<b>Maped content type:</b> &nbsp;').$maped_with. '<br/>';
@@ -398,9 +394,8 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
      $params = array(
            'body' => $mail_content,
            'subject' => 'India Today | Category Updated!',
-           'headers'=>'simple',
      );
-    $to = "haripalrao@gmail.com"; // SEO team mail id
+    $to = "haripal.rao@kelltontech.com"; // SEO team mail id
     $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'India Today <indiatoday@indiatoday.com>', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -422,9 +417,17 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
  function itg_category_manager_seo_team_mail($key, &$message, $params) {
   switch ($key) {
     case 'send_mail_to_seo':
+    $message['headers'] = array_merge(
+       $message['headers'],  
+       array(
+         'MIME-Version' => '1.0',
+         'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
+         'Content-Transfer-Encoding' => '8Bit',
+         'X-Mailer' => 'Drupal'
+       )
+     );
       $message['subject'] = $params['subject'];
       $message['body'][] = $params['body'];
-      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
       break;
   }
 }
@@ -439,16 +442,26 @@ function itg_category_manager_get_mail_content($entity) {
   global $base_url;
   $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
-  $content = '<table>
-  <tr><td>Hi SEO Team,</td></tr>
-  <tr><td>&nbsp;</td></tr>
-  <tr><td>Category has been modified. Details are given below:</td></tr>
-  <tr><td>Display Title: '.$display_name.'</td></tr>
-  <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
-  <tr><td>&nbsp;</td></tr>
-  <tr><td>&nbsp;</td></tr>
-  <tr><td>Thanks,</td></tr>
-  <tr><td>India Today Team</td></tr>
-</table>';
+//  $content = '<table>
+//  <tr><td>Hi SEO Team,</td></tr>
+//  <tr><td>&nbsp;</td></tr>
+//  <tr><td>Category <b>'.$entity->name.'</b> has been modified. Details are given below:</td></tr>
+//  <tr><td>Display Title: '.$display_name.'</td></tr>
+//  <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
+//  <tr><td>&nbsp;</td></tr>
+//  <tr><td>&nbsp;</td></tr>
+//  <tr><td>Thanks,</td></tr>
+//  <tr><td>India Today Team</td></tr>
+//</table>';
+  
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title></title>
+</head>
+<body style="margin:0; padding:0;">
+      <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi SEO Team,</td></tr>
+      <tr><td style="font-weight: bold;">Category '.$entity->name.' has been modified. Details are given below:</td></tr></table>
+</body></html>';
   return $content;
 }
