@@ -435,16 +435,26 @@ function itg_category_manager_get_mail_content($entity) {
   global $base_url;
   $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
-  $content = '<table>
-  <tr><td>Hi SEO Team,</td></tr>
-  <tr><td>&nbsp;</td></tr>
-  <tr><td>Category <b>'.$entity->name.'</b> has been modified. Details are given below:</td></tr>
-  <tr><td>Display Title: '.$display_name.'</td></tr>
-  <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
-  <tr><td>&nbsp;</td></tr>
-  <tr><td>&nbsp;</td></tr>
-  <tr><td>Thanks,</td></tr>
-  <tr><td>India Today Team</td></tr>
-</table>';
+//  $content = '<table>
+//  <tr><td>Hi SEO Team,</td></tr>
+//  <tr><td>&nbsp;</td></tr>
+//  <tr><td>Category <b>'.$entity->name.'</b> has been modified. Details are given below:</td></tr>
+//  <tr><td>Display Title: '.$display_name.'</td></tr>
+//  <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
+//  <tr><td>&nbsp;</td></tr>
+//  <tr><td>&nbsp;</td></tr>
+//  <tr><td>Thanks,</td></tr>
+//  <tr><td>India Today Team</td></tr>
+//</table>';
+  
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title></title>
+</head>
+<body style="margin:0; padding:0;">
+
+      <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>sasASAs</td></tr></table>
+</body></html>';
   return $content;
 }
