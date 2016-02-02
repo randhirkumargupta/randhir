@@ -396,7 +396,7 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
            'subject' => 'India Today | Category Updated!',
            'headers'=>'simple',
      );
-    $to = "haripalrao@gmail.com"; // SEO team mail id
+    $to = "haripal.rao@kelltontech.com"; // SEO team mail id
     $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'India Today <indiatoday@indiatoday.com>', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -453,9 +453,8 @@ function itg_category_manager_get_mail_content($entity) {
     <title></title>
 </head>
 <body style="margin:0; padding:0;">
-
       <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi SEO Team,</td></tr>
-      <tr><td style="font-weight: bold;">Category'.$entity->name.' has been modified. Details are given below:</td></tr></table>
+      <tr><td style="font-weight: bold;">Category '.$entity->name.' has been modified. Details are given below:</td></tr></table>
 </body></html>';
   return $content;
 }
