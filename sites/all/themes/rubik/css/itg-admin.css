@@ -569,3 +569,5 @@ form.node-story-form .path-form.fieldset.titled > .fieldset-content{padding: 10p
 .user-profile-div .field-name-field-user-picture .field-label{display: none;}
 form .path-form .form-item-path-pathauto{padding-left: 300px;}
 form .path-form .form-item-path-pathauto label{float: none;}
+table .edit-link{position: relative; width: 20px; height: 20px; vertical-align: middle; display: inline-block;}
+table .edit-link:after{content: '\f044';font: normal normal normal 24px/24px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0;}
