@@ -108,7 +108,7 @@ function itg_story_theme($existing, $type, $theme, $path) {
  */
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url; 
-  
+  $form['title']['#required']= FALSE;
   switch ($form_id) {
     case 'story_node_form':
       unset($form['actions']['preview_changes']);
