@@ -15,6 +15,7 @@
   <?php print drupal_render($form['field_story_select_supplement']); ?>
   <?php print drupal_render($form['field_story_long_head_line']); ?>
   <?php print drupal_render($form['title']); ?>
+  <div class="description">This title shows on the section page</div>
   <?php print drupal_render($form['field_story_short_headline']); ?>
   <?php print drupal_render($form['field_story_snap_post']); ?>  
   <?php print drupal_render($form['field_story_new_title']); ?>
@@ -29,6 +30,7 @@
   <?php print drupal_render($form['field_story_reporter']); ?>
   <div id="reporter-details"></div>
   <?php print drupal_render($form['field_story_schedule_date_time']); ?>
+  <?php print drupal_render($form['field_story_expires']); ?> 
   <?php print drupal_render($form['field_story_expiry_date']); ?>    
   <?php print drupal_render($form['field_story_expert_name']); ?>
   <?php print drupal_render($form['field_story_expert_image']); ?>
@@ -53,6 +55,7 @@
 <div id="BrowseMedia">
   <h2 class="story-title">Browse Media</h2>
   <?php print drupal_render($form['field_story_extra_large_image']); ?>
+  <span>This image will be resized by the system into pre-defined dimensions</span>
   <?php print drupal_render($form['field_story_resize_extra_large']); ?>
   <?php print drupal_render($form['field_story_large_image']); ?>
   <?php print drupal_render($form['field_story_medium_image']); ?>
