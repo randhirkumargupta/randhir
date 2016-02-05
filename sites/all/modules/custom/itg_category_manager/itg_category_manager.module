@@ -180,13 +180,13 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
          }  
       }
   } else {
-    $types = @variable_get('itg_category_manager_types', array());
-    if ($types['term']) {
-      $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
-      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
-        $form['#validate'][] = 'itg_category_manager_term_validate';
-      }
-    }
+//    $types = @variable_get('itg_category_manager_types', array());
+//    if ($types['term']) {
+//      $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
+//      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
+//        $form['#validate'][] = 'itg_category_manager_term_validate';
+//      }
+//    }
     
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
       $form['#action'] = '?destination=admin/structure/taxonomy/category_management'; //Redirect to term listing page, after term has been added successfully.
@@ -205,7 +205,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['#weight'] = 2;
       $form['relations']['parent']['#title'] = t('Select Section');
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
-      //$form['relations']['#collapsible'] = 0;
+      $form['relations']['#collapsible'] = 0;
       unset($form['relations']['weight']);
               
       //Non-editable fields in edit mode
@@ -220,8 +220,10 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['relations']['#attributes'] = array('disabled' => TRUE);
       }
       
-      //Form after build  
+      //Call valiadte and after build
+      $form['#validate'][] = 'itg_category_manager_term_validate';
       $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
+      
     }
   }
 }
