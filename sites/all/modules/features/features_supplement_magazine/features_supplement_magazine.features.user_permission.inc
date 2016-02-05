@@ -10,6 +10,17 @@
 function features_supplement_magazine_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access draggableviews'.
+  $permissions['access draggableviews'] = array(
+    'name' => 'access draggableviews',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'draggableviews',
+  );
+
   // Exported permission: 'create magazine content'.
   $permissions['create magazine content'] = array(
     'name' => 'create magazine content',
