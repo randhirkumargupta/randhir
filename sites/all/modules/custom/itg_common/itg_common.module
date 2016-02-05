@@ -53,7 +53,20 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         $form['account']['mail']['#attributes']['disabled'] = 'disabled';
         $form['account']['mail']['#weight'] = '-6';
     }
-
+    
+    if($form_id == 'magazine_node_form') {
+        $destination = 'manage-magazines';
+            if (isset($_GET['destination'])) {
+                $destination = $_GET['destination'];
+            } else {
+                $destination = 'manage-magazines';
+            }
+        $form['actions']['cancel'] = array(
+                '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+                '#weight' => 21,
+                '#value' => t('Cancel'),
+            );
+    }   
     if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
         if (isset($_GET['destination'])) {
             $_GET['destination'] = $_GET['destination'];
@@ -92,7 +105,6 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         }
     }
 }
-
 /**
  * Implements views header link 
  *
@@ -111,6 +123,10 @@ function itg_common_views_pre_render(&$view) {
         $header_contents = '<a href="./node/add/story">Create Story</a>';
         $view->attachment_before = $header_contents;
     }
+    if ($view->name == "manage_magazines") {
+        $header_content_magazine = '<a href="./node/add/magazine">Create Magazine</a>';
+        $view->attachment_before = $header_content_magazine;
+    }
 }
 
 /**
@@ -120,7 +136,9 @@ function itg_common_views_pre_render(&$view) {
 function itg_common_user_logout($account) {
     $_GET['destination'] = 'user';
 }
-
+/*
+ * 
+ */
 function itg_common_role_delegation($role_array) {
     global $user;
 
@@ -141,7 +159,9 @@ function itg_common_role_delegation($role_array) {
 
     return $user_array;
 }
-
+/*
+ * Function return desendent role at add user page 
+ */
 function itg_common_role_delegation_uid() {
     global $user;
 
@@ -163,4 +183,14 @@ function itg_user_after_build($form, &$form_state) {
 
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js', array('weight' => 1));
     return $form;
+}
+
+/*
+ * Blocked and unblocked option for status filter in manage user view
+ */
+function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+    if (($form['#id'] == 'views-exposed-form-manage-users-page')) {
+        $form['status']['#options'][1] = 'Unblocked';
+        $form['status']['#options'][0] = 'Blocked';
+    }
 }
