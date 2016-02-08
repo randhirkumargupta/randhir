@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * @file
+ * The ITG MSI module.
+ *
+ * Contains functionality related to magazine, supplement and issue.
+ *
+ */
