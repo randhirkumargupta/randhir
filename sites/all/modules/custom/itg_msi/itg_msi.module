@@ -9,6 +9,43 @@
  */
 
 /**
+ * Implement hook_form_alter
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+function itg_msi_form_alter(&$form, &$form_state, $form_id){
+  
+  //Add destination and cancel button in add magazine form page
+  if ($form_id == 'magazine_node_form') {
+    $destination = 'manage-magazines';
+    if (isset($_GET['destination'])) {
+      $destination = $_GET['destination'];
+    } else {
+      $destination = 'manage-magazines';
+    }
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+    );
+  }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param type $view
+ */
+function itg_msi_views_pre_render(&$view) {
+  
+  //Add "Create Magazine" on listing page of magazine
+  if ($view->name == "manage_magazines") {
+    $header_content_magazine = '<a href="./node/add/magazine">Create Magazine</a>';
+    $view->attachment_before = $header_content_magazine;
+  }
+}
+
+/**
  * Implement hook_node_insert
  * @param type $node
  */
