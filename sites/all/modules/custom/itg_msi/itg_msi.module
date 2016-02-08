@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * The ITG MSI module.
+ *
+ * Contains functionality related to magazine, supplement and issue.
+ *
+ */
+
+/**
+ * Implement hook_form_alter
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+function itg_msi_form_alter(&$form, &$form_state, $form_id){
+  
+  //Add destination and cancel button in add magazine form page
+  if ($form_id == 'magazine_node_form') {
+    $destination = 'manage-magazines';
+    if (isset($_GET['destination'])) {
+      $destination = $_GET['destination'];
+    } else {
+      $destination = 'manage-magazines';
+    }
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+    );
+  }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param type $view
+ */
+function itg_msi_views_pre_render(&$view) {
+  
+  //Add "Create Magazine" on listing page of magazine
+  if ($view->name == "manage_magazines") {
+    $header_content_magazine = '<a href="./node/add/magazine">Create Magazine</a>';
+    $view->attachment_before = $header_content_magazine;
+  }
+}
+
+/**
+ * Implement hook_node_insert
+ * @param type $node
+ */
+function itg_msi_node_insert($node){
+  if($node->type == 'page'){
+     $xml_file = file_load($node->field_test_upload_issuexml[LANGUAGE_NONE][0]['fid']);
+     $xml_file_path = str_replace('public://', 'sites/default/files/',$xml_file->uri);
+     _create_issue_using_xmlfile($xml_file_path);
+  }
+}
+
+/**
+ * Create issue using xml file
+ * @global type $user
+ * @param type $xml_file_path
+ */
+function _create_issue_using_xmlfile($xml_file_path) {
+  global $user;
+  $xml = simplexml_load_file($xml_file_path); // load xml file details using file path(returns in to array format)
+  
+  $node = new stdClass();
+  $node->title = $xml->title;
+  $node->type = "test";
+  node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+  
+  $node->language = LANGUAGE_NONE;
+  $node->body[$node->language][0]['value']   = $xml->storybody;;
+  $node->uid = $user->uid;
+  $node->status = 1; //(1 or 0): Published or not
+  $node->promote = 0; //(1 or 0): Promoted to front page
+  $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
+  
+  $node = node_submit($node); // Prepare node for saving
+  node_save($node);
+}
