@@ -21,7 +21,7 @@ function features_supplement_magazine_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_supplement';
-  $strongarm->value = 'edit-submission';
+  $strongarm->value = 'edit-comment';
   $export['additional_settings__active_tab_supplement'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -70,56 +70,56 @@ function features_supplement_magazine_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_form_location_magazine';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['comment_form_location_magazine'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_form_location_supplement';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['comment_form_location_supplement'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_magazine';
-  $strongarm->value = '2';
+  $strongarm->value = '0';
   $export['comment_magazine'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_magazine';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['comment_preview_magazine'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_supplement';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['comment_preview_supplement'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_subject_field_magazine';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['comment_subject_field_magazine'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_subject_field_supplement';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['comment_subject_field_supplement'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_supplement';
-  $strongarm->value = '2';
+  $strongarm->value = '0';
   $export['comment_supplement'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -153,13 +153,13 @@ function features_supplement_magazine_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '5',
         ),
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '1',
         ),
       ),
       'display' => array(),
@@ -176,13 +176,13 @@ function features_supplement_magazine_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '9',
         ),
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '8',
         ),
       ),
       'display' => array(),
@@ -242,7 +242,6 @@ function features_supplement_magazine_strongarm() {
   $strongarm->name = 'node_options_magazine';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_magazine'] = $strongarm;
 
@@ -252,7 +251,6 @@ function features_supplement_magazine_strongarm() {
   $strongarm->name = 'node_options_supplement';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_supplement'] = $strongarm;
 
@@ -274,14 +272,14 @@ function features_supplement_magazine_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_magazine';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_magazine'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_supplement';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_supplement'] = $strongarm;
 
   $strongarm = new stdClass();
