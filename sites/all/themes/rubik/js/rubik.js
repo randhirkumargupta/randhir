@@ -152,7 +152,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   if(urlTxt == 'URL alias '){
     $('.form-item-path-alias label').html('Sef URL');
   }
-  $('.path-form #edit-path-pathauto').attr('checked', false);
+//  $('.path-form #edit-path-pathauto').attr('checked', false);
   if($('.path-form #edit-path-pathauto').is(':checked') == false){
     $('.path-form #edit-path-alias').removeAttr('disabled');
   }

@@ -37,6 +37,11 @@ function itg_category_manager_menu() {
       'page arguments' => array('itg_category_manager_form'),
       'access arguments' => array('administer taxonomy'),
   );
+    $items['test'] = array(
+      'title' => 'ITG Category Manager',
+      'page callback' => 'notify_insert_statuspost',
+       'access callback' => TRUE
+  );
 
   return $items;
 }
@@ -180,13 +185,13 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
          }  
       }
   } else {
-    $types = @variable_get('itg_category_manager_types', array());
-    if ($types['term']) {
-      $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
-      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
-        $form['#validate'][] = 'itg_category_manager_term_validate';
-      }
-    }
+//    $types = @variable_get('itg_category_manager_types', array());
+//    if ($types['term']) {
+//      $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
+//      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
+//        $form['#validate'][] = 'itg_category_manager_term_validate';
+//      }
+//    }
     
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
       $form['#action'] = '?destination=admin/structure/taxonomy/category_management'; //Redirect to term listing page, after term has been added successfully.
@@ -205,7 +210,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['#weight'] = 2;
       $form['relations']['parent']['#title'] = t('Select Section');
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
-      //$form['relations']['#collapsible'] = 0;
+      $form['relations']['#collapsible'] = 0;
       unset($form['relations']['weight']);
               
       //Non-editable fields in edit mode
@@ -220,8 +225,10 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['relations']['#attributes'] = array('disabled' => TRUE);
       }
       
-      //Form after build  
+      //Call valiadte and after build
+      $form['#validate'][] = 'itg_category_manager_term_validate';
       $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
+      
     }
   }
 }
@@ -489,18 +496,7 @@ function itg_category_manager_get_mail_content($entity) {
   global $base_url;
   $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
-//  $content = '<table>
-//  <tr><td>Hi SEO Team,</td></tr>
-//  <tr><td>&nbsp;</td></tr>
-//  <tr><td>Category <b>'.$entity->name.'</b> has been modified. Details are given below:</td></tr>
-//  <tr><td>Display Title: '.$display_name.'</td></tr>
-//  <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
-//  <tr><td>&nbsp;</td></tr>
-//  <tr><td>&nbsp;</td></tr>
-//  <tr><td>Thanks,</td></tr>
-//  <tr><td>India Today Team</td></tr>
-//</table>';
-  
+ 
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -508,7 +504,12 @@ function itg_category_manager_get_mail_content($entity) {
 </head>
 <body style="margin:0; padding:0;">
       <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi SEO Team,</td></tr>
-      <tr><td style="font-weight: bold;">Category '.$entity->name.' has been modified. Details are given below:</td></tr></table>
+      <tr><td style="font-weight: bold;">Category '.$entity->name.' has been modified. Details are given below:</td></tr>
+        <tr><td>Display Title: '.$display_name.'</td></tr>
+          <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
+            <tr><td>Thanks,</td></tr>
+            <tr><td>India Today Team</td></tr></table>
 </body></html>';
+  
   return $content;
 }

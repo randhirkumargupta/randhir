@@ -21,6 +21,7 @@
                      $('#edit-metatags-und-advanced').hide();
                      $('.form-item-metatags-und-abstract-value').hide();
                      $('#edit-field-story-facebook-image').hide();
+                     $('#edit-field-story-expiry-date').hide();
                      
                      // code for Magazine and Supplement field show on edit story form
                      if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(':checked')) {                         
@@ -28,6 +29,7 @@
                          $('#edit-field-story-select-supplement').show();
                      }
                      
+                                          
                      // code for Comment Question field show on edit story form
                      if ($("#edit-field-story-configurations-und-comment").is(':checked')) {                         
                          $('#edit-field-story-comment-question').show();                         
@@ -43,7 +45,17 @@
                          $('#edit-field-story-facebook-narrative').show();
                          $('#edit-field-story-facebook-image').show();
                      }
+                     // code for expiry date field show on edit story form
+                     if ($("#edit-field-story-expires-und-yes").is(':checked')) {                         
+                         $('#edit-field-story-expiry-date').show();                         
+                     }
                      
+                     // code to copy story longheadline to story title
+                     $('#edit-field-story-long-head-line-und-0-value').keypress(function() {
+                     $('#edit-title').val($('#edit-field-story-long-head-line-und-0-value').val());
+                     });
+                     
+
                      // code for tweet field show on edit story form
                      if ($("#edit-field-story-social-media-integ-und-twitter").is(':checked')) {                         
                          $('#edit-field-story-tweet').show();                         
@@ -118,6 +130,17 @@
                        $('#edit-field-story-tweet').hide();                       
                      }                     
                  });
+                 
+                 // code for story expiry date field show and hide
+                 $('#edit-field-story-expires-und-yes').click(function() {                     
+                     if ($("#edit-field-story-expires-und-yes").is(':checked')) { 
+                       $('#edit-field-story-expiry-date').show();                         
+                     }else{
+                       $("#edit-field-story-expiry-date").val('');                       
+                       $('#edit-field-story-expiry-date').hide();                       
+                     }                     
+                 });
+                 
                  
                  // code to estrict user to select previous date
                  $('#edit-field-story-schedule-date-time-und-0-value-datepicker-popup-0').datepicker({
