@@ -40,7 +40,15 @@ function features_supplement_magazine_user_default_permissions() {
   // Exported permission: 'create supplement content'.
   $permissions['create supplement content'] = array(
     'name' => 'create supplement content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
     'module' => 'node',
   );
 
@@ -54,7 +62,15 @@ function features_supplement_magazine_user_default_permissions() {
   // Exported permission: 'delete any supplement content'.
   $permissions['delete any supplement content'] = array(
     'name' => 'delete any supplement content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
     'module' => 'node',
   );
 
@@ -68,7 +84,15 @@ function features_supplement_magazine_user_default_permissions() {
   // Exported permission: 'delete own supplement content'.
   $permissions['delete own supplement content'] = array(
     'name' => 'delete own supplement content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
     'module' => 'node',
   );
 
@@ -87,7 +111,15 @@ function features_supplement_magazine_user_default_permissions() {
   // Exported permission: 'edit any supplement content'.
   $permissions['edit any supplement content'] = array(
     'name' => 'edit any supplement content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
     'module' => 'node',
   );
 
@@ -110,7 +142,15 @@ function features_supplement_magazine_user_default_permissions() {
   // Exported permission: 'edit own supplement content'.
   $permissions['edit own supplement content'] = array(
     'name' => 'edit own supplement content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
     'module' => 'node',
   );
 
