@@ -48,14 +48,40 @@ function features_supplement_magazine_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'custom view unpublished content'.
+  $permissions['custom view unpublished content'] = array(
+    'name' => 'custom view unpublished content',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'itg_msi',
   );
 
   // Exported permission: 'delete any magazine content'.
   $permissions['delete any magazine content'] = array(
     'name' => 'delete any magazine content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -70,6 +96,7 @@ function features_supplement_magazine_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -77,7 +104,16 @@ function features_supplement_magazine_user_default_permissions() {
   // Exported permission: 'delete own magazine content'.
   $permissions['delete own magazine content'] = array(
     'name' => 'delete own magazine content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -92,6 +128,7 @@ function features_supplement_magazine_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -100,10 +137,14 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['edit any magazine content'] = array(
     'name' => 'edit any magazine content',
     'roles' => array(
+      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -119,6 +160,7 @@ function features_supplement_magazine_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -150,6 +192,7 @@ function features_supplement_magazine_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );

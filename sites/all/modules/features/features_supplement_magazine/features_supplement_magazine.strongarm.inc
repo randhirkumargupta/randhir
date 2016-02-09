@@ -14,14 +14,14 @@ function features_supplement_magazine_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_magazine';
-  $strongarm->value = 'edit-submission';
+  $strongarm->value = 'edit-diff';
   $export['additional_settings__active_tab_magazine'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_supplement';
-  $strongarm->value = 'edit-comment';
+  $strongarm->value = 'edit-diff';
   $export['additional_settings__active_tab_supplement'] = $strongarm;
 
   $strongarm = new stdClass();
