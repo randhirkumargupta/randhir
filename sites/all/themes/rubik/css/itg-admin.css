@@ -569,9 +569,11 @@ form.node-story-form .path-form.fieldset.titled > .fieldset-content{padding: 10p
 .user-profile-div .field-name-field-user-picture .field-label{display: none;}
 form .path-form .form-item-path-pathauto{padding-left: 300px;}
 form .path-form .form-item-path-pathauto label{float: none;}
-.edit-link, .view-link{position: relative; width: 20px; height: 20px; vertical-align: middle; display: inline-block; padding-left: 20px;}
+.edit-link, .view-link, .delete-link{position: relative; width: 20px; height: 20px; vertical-align: middle; display: inline-block; padding-left: 20px;}
 .edit-link:after, 
-.view-link:after{font: normal normal normal 18px/20px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0;}
+.view-link:after, 
+.delete-link:after{font: normal normal normal 18px/20px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0;}
 .edit-link:after{content: '\f044';}
 .view-link:after{content: '\f06e';}
+.delete-link:after{content: '\f1f8';}
 table.sticky-header{z-index: 99;}
