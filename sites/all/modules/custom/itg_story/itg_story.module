@@ -110,12 +110,12 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url; 
   
   switch ($form_id) {
-    case 'story_node_form':
+    case 'story_node_form':    
       unset($form['actions']['preview_changes']);
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'story-management', array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
-      );
+      );     
       
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['#after_build'][] = 'itg_story_after_build';
@@ -206,6 +206,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
 // after build for story form
 function itg_story_after_build($form, &$form_state) {
+  global $user;
   
   global $user, $base_url;
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
@@ -231,3 +232,4 @@ function itg_story_permission() {
     ),    
   );
 }
+

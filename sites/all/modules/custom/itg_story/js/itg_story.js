@@ -133,7 +133,7 @@
                     //maxDate: '+1M',
                 });
                 
-                 
+                                 
                  /*$('#edit-field-story-select-magazine-und').change(function() {
                      var base_url = settings.itg_story.settings.base_url;                     
                      $.ajax({
