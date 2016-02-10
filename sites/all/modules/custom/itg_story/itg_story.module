@@ -12,7 +12,8 @@
  * Implements hook_init().
  */
 function itg_story_init() {
-
+  global $user;
+  //p($user->roles);
 
 }
 

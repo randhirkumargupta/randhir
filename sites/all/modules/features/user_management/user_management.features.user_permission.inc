@@ -14,12 +14,6 @@ function user_management_user_default_permissions() {
   $permissions['access all views'] = array(
     'name' => 'access all views',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'views',
@@ -49,6 +43,15 @@ function user_management_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'access workbench'.
+  $permissions['access workbench'] = array(
+    'name' => 'access workbench',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench',
   );
 
   // Exported permission: 'administer permissions'.
@@ -89,6 +92,33 @@ function user_management_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'administer workbench'.
+  $permissions['administer workbench'] = array(
+    'name' => 'administer workbench',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench',
+  );
+
+  // Exported permission: 'administer workbench moderation'.
+  $permissions['administer workbench moderation'] = array(
+    'name' => 'administer workbench moderation',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'bypass workbench moderation'.
+  $permissions['bypass workbench moderation'] = array(
+    'name' => 'bypass workbench moderation',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench_moderation',
   );
 
   // Exported permission: 'change own username'.
@@ -221,6 +251,194 @@ function user_management_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'actions_permissions',
+  );
+
+  // Exported permission: 'moderate content from approved to published'.
+  $permissions['moderate content from approved to published'] = array(
+    'name' => 'moderate content from approved to published',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from draft to approved'.
+  $permissions['moderate content from draft to approved'] = array(
+    'name' => 'moderate content from draft to approved',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from draft to needs_review'.
+  $permissions['moderate content from draft to needs_review'] = array(
+    'name' => 'moderate content from draft to needs_review',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Intern' => 'Intern',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from draft to published'.
+  $permissions['moderate content from draft to published'] = array(
+    'name' => 'moderate content from draft to published',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from needs_modification to needs_review'.
+  $permissions['moderate content from needs_modification to needs_review'] = array(
+    'name' => 'moderate content from needs_modification to needs_review',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Intern' => 'Intern',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from needs_review to approved'.
+  $permissions['moderate content from needs_review to approved'] = array(
+    'name' => 'moderate content from needs_review to approved',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from needs_review to needs_modification'.
+  $permissions['moderate content from needs_review to needs_modification'] = array(
+    'name' => 'moderate content from needs_review to needs_modification',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from needs_review to published'.
+  $permissions['moderate content from needs_review to published'] = array(
+    'name' => 'moderate content from needs_review to published',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from needs_review to rejected'.
+  $permissions['moderate content from needs_review to rejected'] = array(
+    'name' => 'moderate content from needs_review to rejected',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from published to archive'.
+  $permissions['moderate content from published to archive'] = array(
+    'name' => 'moderate content from published to archive',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from published to un_published'.
+  $permissions['moderate content from published to un_published'] = array(
+    'name' => 'moderate content from published to un_published',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from un_published to published'.
+  $permissions['moderate content from un_published to published'] = array(
+    'name' => 'moderate content from un_published to published',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor' => 'Section Editor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'use workbench_moderation my drafts tab'.
+  $permissions['use workbench_moderation my drafts tab'] = array(
+    'name' => 'use workbench_moderation my drafts tab',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Intern' => 'Intern',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'use workbench_moderation needs review tab'.
+  $permissions['use workbench_moderation needs review tab'] = array(
+    'name' => 'use workbench_moderation needs review tab',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Intern' => 'Intern',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'view all unpublished content'.
+  $permissions['view all unpublished content'] = array(
+    'name' => 'view all unpublished content',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor' => 'Section Editor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'view moderation messages'.
+  $permissions['view moderation messages'] = array(
+    'name' => 'view moderation messages',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor' => 'Section Editor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'workbench_moderation',
   );
 
   // Exported permission: 'view own unpublished content'.
