@@ -72,11 +72,11 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
   
   //Set destination for issue form
   if ($form_id == 'issue_node_form') {
-    $destination = 'manage-issue';
+    $destination = 'manage-issues';
     if (isset($_GET['destination'])) {
       $destination = $_GET['destination'];
     } else {
-      $destination = 'manage-issue';
+      $destination = 'manage-issues';
     }
   }
   
@@ -94,11 +94,38 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
         '#value' => t('Cancel'),
     );
 
+    //Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
+    $form['actions']['submit']['#submit'][] ='_submit_handler_for_redirect';
+    
     //Call function after build
     $form['#after_build'][] = 'itg_msi_form_after_build';
     
     //Add JS for magazine, supplement and issue
     drupal_add_js(drupal_get_path('module', 'itg_msi') . '/js/itg_msi.js', array('weight' => 1));
+  }
+}
+
+/**
+ * Redirect node to their manage pages after node creation
+ * @param type $form
+ * @param type $form_state
+ */
+function _submit_handler_for_redirect($form, &$form_state) {
+  
+  unset($_GET['destination']); // Unset destination
+  
+  switch ($form['#form_id']) {
+    case 'magazine_node_form':
+      $form_state['redirect'] = 'manage-magazines';
+      break;
+
+    case 'supplement_node_form':
+      $form_state['redirect'] = 'manage-supplements';
+      break;
+
+    case 'issue_node_form':
+      $form_state['redirect'] = 'manage-issues';
+      break;
   }
 }
 
