@@ -44,6 +44,21 @@ function pr($arg) {
 }
 
 /**
+ * Implements hook_menu().
+ */
+function itg_common_menu() {
+  $items['cms-user-dashboard'] = array(      
+      'page callback' => 'itg_common_cms_user_dashboard',     
+      'access callback' => 'user_is_logged_in',  
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_common.inc',
+  ); 
+  
+  return $items;
+}
+
+
+/**
  * Implements hook_form_alter().
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
@@ -104,11 +119,7 @@ function itg_common_views_pre_render(&$view) {
             $header_content = '<a href ="./admin/people/create?destination=manage-users">Create User</a>';
         }
         $view->attachment_before = $header_content;
-    }
-    if ($view->name == "strory_menegment") {
-        $header_contents = '<a href="./node/add/story">Create Story</a>';
-        $view->attachment_before = $header_contents;
-    }
+    }    
 }
 
 /**
@@ -174,4 +185,19 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
         $form['status']['#options'][1] = 'Unblocked';
         $form['status']['#options'][0] = 'Blocked';
     }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function itg_common_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'cms_user_dashboard' => array(
+      'template' => 'cms-user-dashboard',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),    
+  );
+
+  return $themes;
 }
