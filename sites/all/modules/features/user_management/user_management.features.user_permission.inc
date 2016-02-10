@@ -126,6 +126,7 @@ function user_management_user_default_permissions() {
     'name' => 'change own username',
     'roles' => array(
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -247,33 +248,11 @@ function user_management_user_default_permissions() {
     'name' => 'execute user_block_user_action',
     'roles' => array(
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'actions_permissions',
-  );
-
-  // Exported permission: 'moderate content from approved to published'.
-  $permissions['moderate content from approved to published'] = array(
-    'name' => 'moderate content from approved to published',
-    'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from draft to approved'.
-  $permissions['moderate content from draft to approved'] = array(
-    'name' => 'moderate content from draft to approved',
-    'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
-    ),
-    'module' => 'workbench_moderation',
   );
 
   // Exported permission: 'moderate content from draft to needs_review'.
@@ -293,7 +272,7 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -309,24 +288,13 @@ function user_management_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from needs_review to approved'.
-  $permissions['moderate content from needs_review to approved'] = array(
-    'name' => 'moderate content from needs_review to approved',
-    'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from needs_review to needs_modification'.
   $permissions['moderate content from needs_review to needs_modification'] = array(
     'name' => 'moderate content from needs_review to needs_modification',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -337,7 +305,7 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -349,7 +317,7 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -360,7 +328,7 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -371,7 +339,7 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -382,7 +350,7 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -417,7 +385,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Intern' => 'Intern',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
@@ -433,7 +401,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Intern' => 'Intern',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
@@ -448,6 +416,7 @@ function user_management_user_default_permissions() {
       'Author/Guest' => 'Author/Guest',
       'Editor' => 'Editor',
       'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),

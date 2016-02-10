@@ -2615,14 +2615,15 @@ node/*/edit',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2636,14 +2637,15 @@ in-queue-story-list',
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2654,17 +2656,18 @@ in-queue-story-list',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2675,17 +2678,18 @@ in-queue-story-list',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2696,17 +2700,18 @@ in-queue-story-list',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2717,17 +2722,18 @@ in-queue-story-list',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
