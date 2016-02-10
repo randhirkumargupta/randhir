@@ -577,3 +577,16 @@ form .path-form .form-item-path-pathauto label{float: none;}
 .view-link:after{content: '\f06e';}
 .delete-link:after{content: '\f1f8';}
 table.sticky-header{z-index: 99;}
+.dashboard-tab{display: inline-block; width: 100%;}
+.dashboard-tab li{
+  width: 16.66%;
+  float: left;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.dashboard-tab li span{display: block; font-size: 16px;}
+.dashboard-tab li .fa{font-size: 42px; line-height: 80px;}
+.dashboard-tab li .dashboard-tab-item{display: block;border: 1px solid #aaa; padding: 5px; text-align: center; height: 125px; color: #8d8d8d;}
+.dashboard-tab li .dashboard-tab-item:hover{color: #008eb1; border-color: #008eb1;}
+#edit-field-print-magazine-issue-date .date-combo .fieldset-content{float: left; padding: 0; margin: 0; width: 400px;}
+#edit-field-magazine-publish, #edit-field-supp-publish{padding-left: 300px;}
