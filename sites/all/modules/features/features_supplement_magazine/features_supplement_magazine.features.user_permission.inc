@@ -21,6 +21,22 @@ function features_supplement_magazine_user_default_permissions() {
     'module' => 'draggableviews',
   );
 
+  // Exported permission: 'create issue content'.
+  $permissions['create issue content'] = array(
+    'name' => 'create issue content',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create magazine content'.
   $permissions['create magazine content'] = array(
     'name' => 'create magazine content',
@@ -69,17 +85,23 @@ function features_supplement_magazine_user_default_permissions() {
     'module' => 'itg_msi',
   );
 
+  // Exported permission: 'delete any issue content'.
+  $permissions['delete any issue content'] = array(
+    'name' => 'delete any issue content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any magazine content'.
   $permissions['delete any magazine content'] = array(
     'name' => 'delete any magazine content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -89,13 +111,19 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['delete any supplement content'] = array(
     'name' => 'delete any supplement content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own issue content'.
+  $permissions['delete own issue content'] = array(
+    'name' => 'delete own issue content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -105,13 +133,8 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['delete own magazine content'] = array(
     'name' => 'delete own magazine content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -121,13 +144,19 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['delete own supplement content'] = array(
     'name' => 'delete own supplement content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any issue content'.
+  $permissions['edit any issue content'] = array(
+    'name' => 'edit any issue content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -137,13 +166,8 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['edit any magazine content'] = array(
     'name' => 'edit any magazine content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -152,6 +176,17 @@ function features_supplement_magazine_user_default_permissions() {
   // Exported permission: 'edit any supplement content'.
   $permissions['edit any supplement content'] = array(
     'name' => 'edit any supplement content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own issue content'.
+  $permissions['edit own issue content'] = array(
+    'name' => 'edit own issue content',
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
