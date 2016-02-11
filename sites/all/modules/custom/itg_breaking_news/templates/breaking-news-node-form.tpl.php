@@ -27,7 +27,7 @@
 <div id="BrowseMedia">
   <h2 class="story-title">Browse Media</h2>
   <?php print drupal_render($form['field_story_extra_large_image']); ?>
-  <span>This image will be resized by the system into pre-defined dimensions</span>
+  <p class="pre-desc">This image will be resized by the system into pre-defined dimensions</p>
   <?php print drupal_render($form['field_story_large_image']); ?>
   <?php print drupal_render($form['field_story_medium_image']); ?>
   <?php print drupal_render($form['field_story_small_image']); ?>
