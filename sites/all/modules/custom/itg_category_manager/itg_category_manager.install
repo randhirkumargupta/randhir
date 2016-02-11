@@ -9,7 +9,7 @@
  */
 function itg_category_manager_uninstall() {
   variable_del('itg_category_manager_types');
-  variable_del('itg_category_manager_case_sensitive');
+  variable_del('itg_category_manager_case_sensitive');  
 }
 
 /**
@@ -17,4 +17,73 @@ function itg_category_manager_uninstall() {
  */
 function itg_category_manager_update_7001() {
   cache_clear_all(NULL, 'cache_menu');
+}
+
+function itg_category_manager_schema() {
+  $schema['itg_category_manager'] = array(
+    'description' => 'Table for itg_category_manager module settings.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a table.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'tid' => array(
+        'description' => 'Taxonomy term id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid' => array(
+        'description' => 'Auther or modifier id .',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'type' => 'int', 
+        'not null' => TRUE, 
+        'default' => 0
+      ),
+      'changed' => array(
+        'type' => 'int', 
+        'not null' => TRUE, 
+        'default' => 0
+      ),
+      'sef_url' => array(
+        'description' => 'Sef Url original.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'sef_url_modified' => array(
+        'description' => 'Sef Url modified.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1,
+        'size' => 'tiny',
+        'description' => 'Whether the term is active(1) or blocked(0).',
+      ),
+    ),
+    'indexes' => array(
+      'changed' => array('changed'),
+      'created' => array('created'),
+      'status' => array('status'),
+      'sef_url' => array('sef_url'),
+      'sef_url_modified' => array('sef_url_modified'),
+    ),
+    'primary key' => array('id'),
+  );
+  
+  return $schema;
 }
