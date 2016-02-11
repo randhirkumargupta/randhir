@@ -179,6 +179,33 @@ function features_for_story_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_story_archive'.
+  $field_bases['field_story_archive'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_archive',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'Yes' => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_story_category'.
   $field_bases['field_story_category'] = array(
     'active' => 1,
@@ -239,9 +266,6 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_comment_question',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -295,9 +319,6 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_courtesy',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -381,6 +402,33 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_story_expires'.
+  $field_bases['field_story_expires'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_expires',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'Yes' => '',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_story_expiry_date'.
@@ -472,9 +520,6 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_facebook_image',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -497,9 +542,6 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_facebook_narrative',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -594,9 +636,6 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_magazine_headline',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -618,9 +657,6 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_magazine_kicker_text',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -804,33 +840,6 @@ function features_for_story_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_story_resize_extra_large'.
-  $field_bases['field_story_resize_extra_large'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_story_resize_extra_large',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'yes' => '',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
-  );
-
   // Exported field_base: 'field_story_schedule_date_time'.
   $field_bases['field_story_schedule_date_time'] = array(
     'active' => 1,
@@ -883,11 +892,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'handler' => 'base',
       'handler_settings' => array(
-        'behaviors' => array(
-          'views-select-list' => array(
-            'status' => 0,
-          ),
-        ),
         'sort' => array(
           'type' => 'none',
         ),
@@ -921,11 +925,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'handler' => 'base',
       'handler_settings' => array(
-        'behaviors' => array(
-          'views-select-list' => array(
-            'status' => 0,
-          ),
-        ),
         'sort' => array(
           'type' => 'none',
         ),
@@ -1173,9 +1172,6 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_tweet',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',

@@ -26,7 +26,6 @@ define('DESIGNER', 15);
 define('PHOTOGRAPHER', 18);
 define('ADMINISTRATOR', 3);
 
-
 /**
  * Function for debugging arrays and objects.
  * @param $arg
@@ -45,114 +44,160 @@ function pr($arg) {
 }
 
 /**
+ * Implements hook_menu().
+ */
+function itg_common_menu() {
+  $items['cms-user-dashboard'] = array(      
+      'page callback' => 'itg_common_cms_user_dashboard',     
+      'access callback' => 'user_is_logged_in',  
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_common.inc',
+  ); 
+  
+  return $items;
+}
+
+
+/**
  * Implements hook_form_alter().
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  global $user;
-
-  
+    global $user;
+    if ($form_id == 'user_profile_form') {
+        $form['account']['name']['#attributes']['disabled'] = 'disabled';
+        $form['account']['mail']['#attributes']['disabled'] = 'disabled';
+        $form['account']['mail']['#weight'] = '-6';
+    }   
     if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
-      if($user->uid != 1){
-        drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js', array('weight' => 1));
-        
-        $user_role = itg_common_role_delegation($form['account']['roles']['#options']);
-        
-        if($form['account']['roles']['#default_value'][1] != $user->uid){    
-          $form['selected'] = array(
-             '#type' => 'select',
-             '#title' => t('Select role'),
-             '#options' => $user_role,
-             '#default_value' => $form['account']['roles']['#default_value'][1],
-
-         );
+        if (isset($_GET['destination'])) {
+            $_GET['destination'] = $_GET['destination'];
+        } else {
+            $form['#action'] = '?destination=user/' . $user->uid;
         }
+        if ($user->uid != 1) {
+            $form['#after_build'][] = 'itg_user_after_build';
 
-        //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
-        $form['account']['notify']['#default_value'] = TRUE;
-        
-        // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
-        $destination = 'manage-users';
-        $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-            '#weight' => 20,
-            '#value'  => t('Cancel'),
-        );
-      }
-  }  
-  
+            $user_role = itg_common_role_delegation($form['account']['roles']['#options']);
+            if (isset($user_role)) {
+                if ($form['#user']->uid != $user->uid) {
+                    $form['selected'] = array(
+                        '#type' => 'select',
+                        '#title' => t('Select role'),
+                        '#options' => $user_role,
+                        '#default_value' => $form['account']['roles']['#default_value'][1],
+                        '#required' => TRUE,
+                    );
+                }
+            }
+            //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
+            $form['account']['notify']['#default_value'] = TRUE;
+            // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
+            $destination = 'user';
+            if (isset($_GET['destination'])) {
+                $destination = $_GET['destination'];
+            } else {
+                $destination = 'user/' . $user->uid;
+            }
+            $form['actions']['cancel'] = array(
+                '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+                '#weight' => 20,
+                '#value' => t('Cancel'),
+            );
+        }
+    }
 }
-
+/**
+ * Implements views header link 
+ *
+ */
 function itg_common_views_pre_render(&$view) {
     if ($view->name == "manage_users") {
-      //p($view);
         global $user; // Get user information
-        $header_content = '';
         //$roles = user_roles();
-        if(!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {
-            $header_content = '<a href ="./admin/people/create">Create User</a>';
+        $header_content = '';
+        if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {
+            $header_content = '<a href ="./admin/people/create?destination=manage-users">Create User</a>';
         }
-         $view->attachment_before = $header_content;
+        $view->attachment_before = $header_content;
+    }    
+}
+
+/**
+ * Implements hook_user_logout
+ *
+ */
+function itg_common_user_logout($account) {
+    $_GET['destination'] = 'user';
+}
+/*
+ * 
+ */
+function itg_common_role_delegation($role_array) {
+    global $user;
+
+    if (array_key_exists(EDITOR, $user->roles)) {
+        $user_array = array(SECTION_EDITOR_ANCHOR => 'Section Editor/Anchor', COPY_EDITOR => 'Copy Editor', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub', INTERN => 'Intern', AUTHOR_GUEST => 'Author/Guest');
+    } else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
+        $user_array = array(COPY_EDITOR => 'Copy Editor', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub', INTERN => 'Intern', AUTHOR_GUEST => 'Author/Guest');
+    } else if (array_key_exists(COPY_EDITOR, $user->roles)) {
+        $user_array = array(SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub', INTERN => 'Intern', AUTHOR_GUEST => 'Author/Guest');
+    } else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
+        $user_array = array(INTERN => 'Intern', AUTHOR_GUEST => 'Author/Guest');
+    } else if (array_key_exists(SITE_ADMIN, $user->roles)) {
+        unset($role_array[3]);
+        $user_array = $role_array;
+    } else if (array_key_exists(ADMINISTRATOR, $user->roles)) {
+        $user_array = $role_array;
+    }
+
+    return $user_array;
+}
+/*
+ * Function return desendent role at add user page 
+ */
+function itg_common_role_delegation_uid() {
+    global $user;
+
+    if (array_key_exists(EDITOR, $user->roles)) {
+        $user_array = array(SECTION_EDITOR_ANCHOR => SECTION_EDITOR_ANCHOR, COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
+    } else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
+        $user_array = array(COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
+    } else if (array_key_exists(COPY_EDITOR, $user->roles)) {
+        $user_array = array(SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
+    } else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
+        $user_array = array(INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
+    }
+
+    return $user_array;
+}
+
+// after build for user management form
+function itg_user_after_build($form, &$form_state) {
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js', array('weight' => 1));
+    return $form;
+}
+
+/*
+ * Blocked and unblocked option for status filter in manage user view
+ */
+function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+    if (($form['#id'] == 'views-exposed-form-manage-users-page')) {
+        $form['status']['#options'][1] = 'Unblocked';
+        $form['status']['#options'][0] = 'Blocked';
     }
 }
 
 /**
-* Implements hook_user_logout
-*
-*/
-function itg_common_user_logout($account){  
-  $_GET['destination'] = 'user';
-}
- 
-
-
-function itg_common_role_delegation($role_array){
-  global $user;
-  foreach($user->roles as $key => $val){
-    $key = $key;
-  }
-  
-  if (array_key_exists(EDITOR, $user->roles)) {
-    $user_array = array(SECTION_EDITOR_ANCHOR=>'Section Editor/Anchor', COPY_EDITOR=>'Copy Editor', SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
-  }else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
-    $user_array = array(COPY_EDITOR=>'Copy Editor', SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
-  }else if (array_key_exists(COPY_EDITOR, $user->roles)) {
-    $user_array = array(SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
-  }else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-    $user_array = array(INTERN=>'Intern', AUTHOR_GUEST=>'Author/Guest');
-  }else if(array_key_exists(SITE_ADMIN, $user->roles)) {
-    $user_array = $role_array;
-  }
-  
-  return $user_array;
-}
-
-
-/**
- * Implements hook_views_query_alter.
+ * Implements hook_theme().
  */
-function itg_common_views_query_alter(&$view, &$query) {  
-  if ($view->name == 'manage_users') {
-    global $user;
-   
-    if(!array_key_exists(SITE_ADMIN, $user->roles) && !array_key_exists(ADMINISTRATOR, $user->roles)) {
-      $user_role = itg_common_role_delegation_uid();
-      $query->where[1]['conditions'][1]['value'] = $user_role;
-    }        
-  }
-}
+function itg_common_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'cms_user_dashboard' => array(
+      'template' => 'cms-user-dashboard',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),    
+  );
 
-function itg_common_role_delegation_uid() {  
-  global $user;
-  
-  if (array_key_exists(EDITOR, $user->roles)){
-    $user_array = array(SECTION_EDITOR_ANCHOR=>SECTION_EDITOR_ANCHOR, COPY_EDITOR=>COPY_EDITOR, SUBEDITOR_SR_SUB=>SUBEDITOR_SR_SUB, INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
-  }else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
-    $user_array = array(COPY_EDITOR=>COPY_EDITOR, SUBEDITOR_SR_SUB=>SUBEDITOR_SR_SUB, INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
-  }else if (array_key_exists(COPY_EDITOR, $user->roles)) {
-    $user_array = array(SUBEDITOR_SR_SUB=>SUBEDITOR_SR_SUB, INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
-  }else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-    $user_array = array(INTERN=>INTERN, AUTHOR_GUEST=>AUTHOR_GUEST);
-  }
-  
-  return $user_array;
+  return $themes;
 }

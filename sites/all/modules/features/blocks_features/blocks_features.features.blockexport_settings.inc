@@ -941,9 +941,9 @@ node/*/edit',
   'module' => 'comment',
   'delta' => 'recent',
   'theme' => 'rubik',
-  'status' => 1,
+  'status' => 0,
   'weight' => 0,
-  'region' => 'dashboard_inactive',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -998,9 +998,9 @@ node/*/edit',
   'module' => 'node',
   'delta' => 'recent',
   'theme' => 'rubik',
-  'status' => 1,
+  'status' => 0,
   'weight' => 0,
-  'region' => 'dashboard_inactive',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -1026,9 +1026,9 @@ node/*/edit',
   'module' => 'search',
   'delta' => 'form',
   'theme' => 'rubik',
-  'status' => 1,
+  'status' => 0,
   'weight' => -1,
-  'region' => 'dashboard_inactive',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -1166,9 +1166,9 @@ node/*/edit',
   'module' => 'user',
   'delta' => 'new',
   'theme' => 'rubik',
-  'status' => 1,
+  'status' => 0,
   'weight' => 0,
-  'region' => 'dashboard_inactive',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -1180,9 +1180,9 @@ node/*/edit',
   'module' => 'user',
   'delta' => 'online',
   'theme' => 'rubik',
-  'status' => 1,
+  'status' => 0,
   'weight' => 0,
-  'region' => 'dashboard_inactive',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -2555,7 +2555,7 @@ node/*/edit',
   'delta' => 'menu-admin-left-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -14,
+  'weight' => -15,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2605,6 +2605,138 @@ node/*/edit',
   'title' => '',
   'cache' => -1,
 );
+  $export['block'][] = array(
+  'bid' => 186,
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'my-unpublished-story
+published-story
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 187,
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -14,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'my-unpublished-story
+published-story
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 188,
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'my-unpublished-story
+published-story
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 189,
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'my-unpublished-story
+published-story
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 190,
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'my-unpublished-story
+published-story
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 191,
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'my-unpublished-story
+published-story
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
+  'title' => '<none>',
+  'cache' => -1,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
@@ -2616,6 +2748,16 @@ node/*/edit',
   'rid' => 4,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 4,
@@ -2631,6 +2773,16 @@ node/*/edit',
   'rid' => 5,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 5,
@@ -2646,6 +2798,16 @@ node/*/edit',
   'rid' => 6,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 6,
@@ -2661,6 +2823,16 @@ node/*/edit',
   'rid' => 7,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 7,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'rid' => 7,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 7,
@@ -2676,6 +2848,16 @@ node/*/edit',
   'rid' => 8,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 8,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'rid' => 8,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 8,
@@ -2691,6 +2873,16 @@ node/*/edit',
   'rid' => 9,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 9,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'rid' => 9,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 9,
@@ -2706,6 +2898,11 @@ node/*/edit',
   'rid' => 10,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 10,
@@ -2718,6 +2915,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
   'rid' => 20,
 );
   $export['block_role'][] = array(

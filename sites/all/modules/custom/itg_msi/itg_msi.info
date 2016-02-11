@@ -1,0 +1,6 @@
+name = ITG Magazine Supplement and Issue
+description = "Contains functionality related to magazine, supplement and issue."
+package = "ITG"
+core = 7.x
+
+files[] = itg_msi.module
