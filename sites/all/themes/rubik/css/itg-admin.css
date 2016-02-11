@@ -604,3 +604,4 @@ table.sticky-header{z-index: 99;}
 #edit-field-publish-time .container-inline-date .date-padding .form-type-textfield label{display: none;}
 .pre-desc{margin: -20px 0 10px; font-size: 12px; padding-left: 300px;}
 .attachment .count{display: inline-block; vertical-align: middle; padding: 5px 2px;}
+.workbench-moderation-moderate-form .form-type-select{display: inline-block; vertical-align: middle;}
