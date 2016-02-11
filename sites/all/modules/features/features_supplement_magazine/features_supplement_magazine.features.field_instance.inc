@@ -107,7 +107,7 @@ function features_supplement_magazine_field_default_field_instances() {
     'label' => 'Magazine Cover Photo',
     'required' => 1,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -115,7 +115,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -252,90 +252,6 @@ function features_supplement_magazine_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-supplement-field_supp_alt_tag'.
-  $field_instances['node-supplement-field_supp_alt_tag'] = array(
-    'bundle' => 'supplement',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter Alt tag, will be used to search images from repository.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_supp_alt_tag',
-    'label' => 'Alt Tag',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-supplement-field_supp_alt_text'.
-  $field_instances['node-supplement-field_supp_alt_text'] = array(
-    'bundle' => 'supplement',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter Alt text.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_supp_alt_text',
-    'label' => 'Alt Text',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 6,
-    ),
-  );
-
   // Exported field_instance: 'node-supplement-field_supp_import_xml'.
   $field_instances['node-supplement-field_supp_import_xml'] = array(
     'bundle' => 'supplement',
@@ -431,9 +347,9 @@ function features_supplement_magazine_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_supp_large_cover_image',
     'label' => 'Large Cover Image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -441,7 +357,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -587,9 +503,9 @@ function features_supplement_magazine_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_supp_small_cover_image',
     'label' => 'Small Cover Image ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -597,7 +513,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -638,8 +554,6 @@ function features_supplement_magazine_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Alt Tag');
-  t('Alt Text');
   t('Comment');
   t('Image Size (210 x 145)');
   t('Image Size (300 x 225)');
@@ -647,8 +561,6 @@ function features_supplement_magazine_field_default_field_instances() {
   t('Large Cover Image');
   t('Magazine Cover Photo');
   t('Please check to publish this content.');
-  t('Please enter Alt tag, will be used to search images from repository.');
-  t('Please enter Alt text.');
   t('Please import XML.');
   t('Please select magazine to map with supplement.');
   t('Please select the date using date picker.

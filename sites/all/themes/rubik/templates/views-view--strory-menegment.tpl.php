@@ -48,7 +48,7 @@
     </div>
   <?php endif; ?>
   <div>
-    </span><?php print $view->total_rows; ?></span>
+    </span><?php print 'Count ('.$view->total_rows.')'; ?></span>
     <span><?php print l('Create Story', 'node/add/story', array('attributes' => array('class' => 'button'), 'query' => array('destination' => arg(0)))); ?></span>
   </div>
   <?php if ($attachment_before): ?>

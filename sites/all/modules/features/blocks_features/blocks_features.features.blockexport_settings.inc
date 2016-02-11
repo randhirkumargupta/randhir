@@ -1069,7 +1069,7 @@ node/*/edit',
   'delta' => 'main',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -12,
+  'weight' => -11,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2615,14 +2615,15 @@ node/*/edit',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2636,14 +2637,15 @@ in-queue-story-list',
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2657,14 +2659,15 @@ in-queue-story-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2678,14 +2681,15 @@ in-queue-story-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2699,14 +2703,15 @@ in-queue-story-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2720,16 +2725,112 @@ in-queue-story-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'mydraft-story
-pending-review-story
-story-display-management
-story-list
-story-management
+  'pages' => 'my-unpublished-story
 published-story
-my-queue-story-list
-in-queue-story-list',
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story',
   'title' => '<none>',
   'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 192,
+  'module' => 'itg_breaking_news',
+  'delta' => 'breaking_news_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/breaking-news
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 193,
+  'module' => 'itg_breaking_news',
+  'delta' => 'breaking_news_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/breaking-news
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 194,
+  'module' => 'itg_breaking_news',
+  'delta' => 'breaking_news_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -12,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/breaking-news
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 195,
+  'module' => 'itg_breaking_news',
+  'delta' => 'breaking_news_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/breaking-news
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 196,
+  'module' => 'itg_breaking_news',
+  'delta' => 'breaking_news_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/breaking-news
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 197,
+  'module' => 'itg_breaking_news',
+  'delta' => 'breaking_news_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/breaking-news
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_breaking_news',
+  'delta' => 'breaking_news_tab_form_block',
+  'type' => 'breaking_news',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_story',

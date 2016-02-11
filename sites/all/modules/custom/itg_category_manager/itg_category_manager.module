@@ -10,6 +10,9 @@
  */
 function itg_category_manager_init(){
   variable_set('taxonomy_terms_per_page_admin',20);
+  global $base_url;
+  $settings['baseUrl'] = $base_url;
+  drupal_add_js(array('baseUrl' => $settings), 'setting');
 }
 
 /**
@@ -37,10 +40,10 @@ function itg_category_manager_menu() {
       'page arguments' => array('itg_category_manager_form'),
       'access arguments' => array('administer taxonomy'),
   );
-    $items['test'] = array(
-      'title' => 'ITG Category Manager',
-      'page callback' => 'notify_insert_statuspost',
-       'access callback' => TRUE
+  $items['test'] = array(
+    'title' => 'ITG Category Manager',
+    'page callback' => 'notify_insert_statuspost',
+    'access callback' => TRUE
   );
 
   return $items;
@@ -231,6 +234,15 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       
     }
   }
+  // Taxonomy active deactive login
+  $form['term_state'] = array(
+    '#prefix' => '<label>Term State</label>',
+    '#type' => 'checkbox',
+    '#title' => t('Active'),
+    '#weight' => 20,
+    '#default_value' => true,
+    '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
+  );
 }
 /**
  * Get all categories under their parent category
@@ -512,4 +524,207 @@ function itg_category_manager_get_mail_content($entity) {
 </body></html>';
   
   return $content;
+}
+
+/**
+ * Implement hook_taxonomy_term_insert().
+ * @param Object $term 
+ * Insert row to itg_category_manager at the time of term creation.
+ */
+function itg_category_manager_taxonomy_term_insert($term) {        
+  global $user;
+  $data = array(
+    'tid' => $term->tid,
+    'uid' => $user->uid,
+    'created' => time(),
+    'changed' => time(),
+    'state' => 1,
+  );
+  drupal_write_record('itg_category_manager', $data);  
+}
+
+/**
+ * Implements hook_taxonomy_term_presave($term).
+ * @param Object $term An object of type term.
+ * Update logs for Sef Url and modification time.
+ */
+function itg_category_manager_taxonomy_term_presave($term) {
+  if ($term->tid !== NULL) {
+    // Fetch old data from table
+    $itgQuery = db_select('itg_category_manager', 'itg');
+    $itgQuery->condition('tid', $term->tid);
+    $itgQuery->fields('itg', array('sef_url', 'sef_url_modified'));
+    $itgResult = $itgQuery->execute();
+    $itgResult = $itgResult->fetchObject();
+    // Prepare array for data insertion
+    global $user;
+    if ($itgResult->sef_url !== $term->path['alias'] && $itgResult->sef_url_modified == '') {
+      $data['sef_url_modified'] = $term->path['alias'];
+    }
+    else if ($itgResult->sef_url_modified != '' && $itgResult->sef_url_modified !== $term->path['alias']) {
+      $data['sef_url_modified'] = $term->path['alias'];
+      $data['sef_url'] = $itgResult->sef_url_modified;
+    }
+    $data['uid'] = $user->uid;
+    $data['changed'] = time();
+
+    // Query to update table
+    db_update('itg_category_manager')
+        ->fields($data)
+        ->condition('tid', $term->tid)
+        ->execute();
+  }
+}
+
+/**
+ * Implements hook_pathauto_alias_alter().
+ * Insert url aias to itg-category_manager table against specific term id.
+ */
+function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {    
+  db_update('itg_category_manager')
+    ->fields(array('sef_url' => $alias))
+    ->condition('tid', $context['data']['term']->tid)
+    ->execute();
+}
+
+/**
+ * Implements hook_views_api().
+ * registering api information for custom views handlers.
+ */
+function itg_category_manager_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+
+/**
+ * Implements hook_views_data()
+ * Register new views handler for displaying custom table data to views.
+ * @return araay of array
+ */
+function itg_category_manager_views_data() {
+  $data['itg_category_manager']['table']['group'] = t('Category Manager');
+  $data['itg_category_manager']['table']['base'] = array(
+    'field' => 'id',
+    'title' => t('Category Manager'),
+  ); 
+   
+  $data['itg_category_manager']['tid'] = array(
+    'title' => t('Category Manager Table'),
+    'help' => t('Log information about taxonomy term.'),    
+    'relationship' => array(
+      'base' => 'taxonomy_term_data', // The name of the table to join with.
+      'base field' => 'tid', // The name of the field on the joined table.      
+      'handler' => 'views_handler_relationship',
+      'label' => t('Category manager'),
+      'title' => t('ITG'),
+      'help' => t('Relate taxonomy to view.'),
+    ),
+  );
+  // Example timestamp field.
+  $data['itg_category_manager']['created'] = array(
+    'title' => t('created field'),
+    'help' => t('Term created date.'),
+    'field' => array(
+      'handler' => 'views_handler_field_date',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort_date',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_date',
+    ),
+  );
+  $data['itg_category_manager']['changed'] = array(
+    'title' => t('changed field'),
+    'help' => t('Term changed date.'),
+    'field' => array(
+      'handler' => 'views_handler_field_date',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort_date',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_date',
+    ),
+  );
+  $data['itg_category_manager']['status'] = array(
+    'title' => t('Status'),
+    'help' => t('Term status.'),
+    'field' => array(
+      'handler' => 'views_handler_field_boolean',
+      'click sortable' => TRUE,
+      'output formats' => array(
+        'active-inactive' => array(t('Active'), t('Inactive')),
+      )
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_boolean_operator',
+      'label' => t('Status'),
+      'type' => 'active-inactive',
+      'use equal' => TRUE,
+    ),    
+  );
+  
+  return $data;
+}
+
+/**
+ * Implements hook_form_alter()
+ * @param array $form array of form elements.
+ * @param array $form_state array contains submitted form values
+ * @param string $form_id name of the form id
+ */
+function itg_category_manager_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {    
+    $form['status']['#options'][1] = t('Active'); 
+    $form['status']['#options'][0] = t('Inactive');
+  }
+}
+
+/**
+ * Implements hook_block_info()
+ */
+function itg_category_manager_block_info() {
+  $blocks['sef_url_log'] = array(
+    'info' => t('Sef URL Log'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  ); 
+
+  return $blocks;  
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function itg_category_manager_block_view($delta = '') {
+  $block = array();
+  $data = '';
+  
+  //$data = itg_category_manager_sefurl_log($tid);
+  switch ($delta) {
+    case 'sef_url_log':      
+      $data = '<div class="audit-info">View Sef Url Log</div>';
+      $arg = arg();      
+      $block['content'] = theme('sef_url_log', array('data' => $data));
+      break;
+  }
+  
+  return $block;    
+}
+
+/**
+ * Implements hook_theme()
+ * Registring templates for different pages.
+ */
+function itg_category_manager_theme() {
+  return array(    
+    'sef_url_log' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'templates/sef_url_log',
+      'render element' => 'data',
+    ),
+  );
 }

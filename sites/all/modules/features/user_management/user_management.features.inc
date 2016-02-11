@@ -22,3 +22,27 @@ function user_management_ctools_plugin_api($module = NULL, $api = NULL) {
 function user_management_views_api($module = NULL, $api = NULL) {
   return array("api" => "3.0");
 }
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function user_management_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: user_picture.
+  $styles['user_picture'] = array(
+    'label' => 'user picture',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 200,
+          'height' => 200,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
