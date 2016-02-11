@@ -66,7 +66,16 @@ function itg_breaking_news_theme($existing, $type, $theme, $path) {
  * @param string $form_id
  */
 function itg_breaking_news_form_alter(&$form, &$form_state, $form_id){
+  // code to add taxonomy parent terms with no child
+  $vid = taxonomy_vocabulary_machine_name_load('category_management')->vid;
+  $tax=taxonomy_get_tree($vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
   
+  foreach($tax as $key => $val){
+        $op[$val->tid]=$val->name;
+      }
+  // assign array value to taxonomy field
+      $form['field_section']['und']['#options'] = $op;
+   
   //Add destination and cancel button in add Breaking News form page
   if ($form_id == 'breaking_news_node_form') {
       $form['field_publish_time'][LANGUAGE_NONE][0]['value']['date']['#disabled'] = TRUE;
@@ -113,7 +122,11 @@ function itg_breaking_news_views_pre_render(&$view) {
   }
 }
 
-// after build for breaking news form
+/**
+ * Implement hook_after_build
+ * @param Array $form
+ * @param Array $form_state
+ */
 function itg_breaking_news_after_build($form, &$form_state) {
   
   global $user, $base_url;

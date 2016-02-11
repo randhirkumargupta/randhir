@@ -30,7 +30,10 @@ function itg_mcs_menu() {
 
 
 /**
- * Implements hook_form_alter().
+ * Implement hook_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param string $form_id
  */
 function itg_mcs_form_alter(&$form, &$form_state, $form_id) {
   
@@ -151,7 +154,11 @@ function itg_mcs_form_alter(&$form, &$form_state, $form_id) {
 
 }
 
-// after build for mcs form
+/**
+ * Implement hook_after_build
+ * @param Array $form
+ * @param Array $form_state
+ */
 function itg_mcs_after_build($form, &$form_state) {
   
   global $user, $base_url;
