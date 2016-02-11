@@ -50,12 +50,17 @@
                     ?>
                     <?php endif; ?>
 
-                    <?php print render($content['field_publish_time']); ?>
+                    
                     <div class="field">
                         <div class="field-label">News Title 1:</div>
                         <div class="field-items"><?php print $title; ?></div>
                     </div>
-
+                    <?php
+                    $publishtime = render($content['field_publish_time']);
+                    if (!empty($publishtime)):
+                      print $publishtime;
+                    ?>
+                    <?php endif; ?>
                     <?php
                     $redirection_url = render($content['field_title_link']);
                     if (!empty($redirection_url)):
@@ -87,11 +92,12 @@
                 </div>
             </div>
 
+                    <?php $short_des = render($content['field_label']);
+                    $description = render($content['body']);?>
+                    <?php if (!empty($short_des) || !empty($description)): ?>
             <div class="description-details content-box">
                 <h2>Description</h2>
                     <?php
-                    $short_des = render($content['field_label']);
-                    $description = render($content['body']);
                     if (!empty($short_des)):
                     print render($content['field_label']);
                     ?>
@@ -100,7 +106,7 @@
                 <div class="field-label">Description</div><div class="breaking-content-details"><?php print render($content['body']); ?></div> 
                 <?php endif; ?>
             </div>
-
+                <?php endif; ?>
                     <?php
                     $notification = render($content['field_notification']);
                     if (!empty($notification)):
