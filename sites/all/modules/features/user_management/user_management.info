@@ -49,6 +49,7 @@ features[field_instance][] = user-user-field_user_picture
 features[field_validation_rule][] = mobile_number_validation
 features[field_validation_rule][] = mobile_number_zero
 features[field_validation_rule][] = mobiler_validation
+features[image][] = user_picture
 features[rules_config][] = rules_unblock_user
 features[rules_config][] = rules_user_logout_redirect
 features[rules_config][] = rules_user_save_redirect
