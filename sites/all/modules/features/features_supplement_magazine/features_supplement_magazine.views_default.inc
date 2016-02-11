@@ -43,23 +43,17 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title_1' => 'title_1',
-    'field_magazine_cover_photo' => 'field_magazine_cover_photo',
     'field_print_magazine_issue_date' => 'field_print_magazine_issue_date',
-    'delete_node' => 'nothing',
-    'edit_node' => 'nothing',
+    'changed' => 'changed',
+    'status' => 'status',
     'view_node' => 'nothing',
+    'edit_node' => 'nothing',
+    'delete_node' => 'nothing',
     'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'title_1' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_magazine_cover_photo' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -73,12 +67,16 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'delete_node' => array(
+    'changed' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'edit_node' => array(
+    'status' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -88,9 +86,19 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'delete_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'nothing' => array(
       'align' => '',
-      'separator' => ' | ',
+      'separator' => ' |  ',
       'empty_column' => 0,
     ),
   );
@@ -426,10 +434,10 @@ function features_supplement_magazine_views_default_views() {
     'title' => 'title',
     'field_supp_select_magazine' => 'field_supp_select_magazine',
     'changed' => 'changed',
-    'delete_node' => 'nothing',
-    'edit_node' => 'nothing',
+    'status' => 'status',
     'view_node' => 'nothing',
-    'field_supp_publish' => 'field_supp_publish',
+    'edit_node' => 'nothing',
+    'delete_node' => 'nothing',
     'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -455,12 +463,9 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'delete_node' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'edit_node' => array(
+    'status' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -470,14 +475,19 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_supp_publish' => array(
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'delete_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'nothing' => array(
       'align' => '',
-      'separator' => ' | ',
+      'separator' => ' |  ',
       'empty_column' => 0,
     ),
   );
@@ -584,6 +594,49 @@ function features_supplement_magazine_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'manage-supplements';
+
+  /* Display: Entity Reference */
+  $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'entityreference_style';
+  $handler->display->display_options['style_options']['search_fields'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'entityreference_fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'supplement' => 'supplement',
+  );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $export['manage_supplements'] = $view;
 
   return $export;
