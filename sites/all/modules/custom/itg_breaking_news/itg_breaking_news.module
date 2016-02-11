@@ -1,0 +1,166 @@
+<?php
+
+/**
+ * @file
+ * The ITG Breaking News module.
+ *
+ * Contains functionality related to Breaking News.
+ *
+ */
+/**
+ * Implements hook_block_info().
+ */
+function itg_breaking_news_block_info() {
+  $blocks['breaking_news_tab_form_block'] = array(
+    'info' => t('Breaking News Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function itg_breaking_news_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'breaking_news_tab_form_block':                       
+      $block['content'] = theme('breaking_news_tab_form_display_block', array('data' => $data));
+    break;        
+  }
+  
+  return $block;
+}
+
+
+
+/**
+ * Implements hook_theme().
+ */
+function itg_breaking_news_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'breaking_news_tab_form_display_block' => array(
+      'template' => 'breaking-news-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_breaking_news') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'breaking_news_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'breaking-news-node-form',
+      'path' => drupal_get_path('module', 'itg_breaking_news') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+
+  return $themes;
+}
+
+
+/**
+ * Implement hook_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param string $form_id
+ */
+function itg_breaking_news_form_alter(&$form, &$form_state, $form_id){
+  // code to add taxonomy parent terms with no child
+  $vid = taxonomy_vocabulary_machine_name_load('category_management')->vid;
+  $tax=taxonomy_get_tree($vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  
+  foreach($tax as $key => $val){
+        $op[$val->tid]=$val->name;
+      }
+  // assign array value to taxonomy field
+      $form['field_section']['und']['#options'] = $op;
+   
+  //Add destination and cancel button in add Breaking News form page
+  if ($form_id == 'breaking_news_node_form') {
+      $form['field_publish_time'][LANGUAGE_NONE][0]['value']['date']['#disabled'] = TRUE;
+      $destination = 'breaking-news';
+    if (isset($_GET['destination'])) {
+      $destination = $_GET['destination'];
+    } else {
+      $destination = 'breaking-news';
+    }
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+    );
+    
+   
+    $form['#after_build'][] = 'itg_breaking_news_after_build';
+    $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
+  }
+}
+
+/**
+ * Custom submit callback for redirecting breaking news form.
+ */
+function itg_breaking_news_form_custom_callback($form, &$form_state) {  
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+  
+  drupal_set_message('News has been created successfully.');
+  $_GET['destination'] = 'breaking-news'; 
+   
+}
+/**
+ * Implement hook_views_pre_render
+ * @param Array $view
+ */
+function itg_breaking_news_views_pre_render(&$view) {
+  
+  //Add "Create Breaking news" on listing page of Breaking news
+  if ($view->name == "breaking_news") {
+    $header_content_breaking = '<a href="./node/add/breaking-news">Create Breaking News</a>';
+    $view->attachment_before = $header_content_breaking;
+  }
+}
+
+/**
+ * Implement hook_after_build
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_breaking_news_after_build($form, &$form_state) {
+  
+  global $user, $base_url;
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  drupal_add_js(array('itg_breaking_news' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module','itg_breaking_news').'/js/itg_breaking_news.js');
+  return $form;
+}
+
+
+/**
+ * Implement hook node validate
+ * @param string $node
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_breaking_news_node_validate($node, $form, &$form_state) {
+
+  if ($node->type == 'breaking_news') {
+    $notify = $node->field_notification[LANGUAGE_NONE][0]['value'];
+
+    if (!empty($notify)) {
+      // get array value of mobile subscriber field
+      $mobile_subscriber = $node->field_mobile_subscribers[LANGUAGE_NONE];
+      // filter empty array
+      if($mobile_subscriber[0]['value'] == '') {
+        
+      form_set_error('field_mobile_subscribers', t("Select atleast one Mobile Subscriber!"));
+        
+      }
+      
+      
+    }
+  }
+}
