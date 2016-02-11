@@ -2,7 +2,7 @@
 
     Drupal.behaviors.itg_photogallery = {
         context: null,
-        attach: function(context, settings) {
+        attach: function(context) {
             var that = this,
             uploader = $('.plupload-element', context).pluploadQueue();
 

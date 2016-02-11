@@ -35,6 +35,11 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
       ),
     );
+    $form['field_p_client_title']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_syndication_[und][yes]"]' => array('checked' => TRUE),
+      ),
+    );
     $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'manage-photogallery', array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
@@ -64,7 +69,6 @@ function itg_photogallery_views_pre_render(&$view) {
  * @param type $langcode
  */
 function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
-  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
   $options = array('language' => field_valid_language($langcode));
   // Merge default options.
   $default_options = array(
@@ -86,6 +90,7 @@ function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$for
     //If we are looking at our field type and specific widget type, and we are multiple entries
     if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
       if ($field['bundles']['node'][0] == "photogallery") {
+        drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
         //Check just in case the button is here, and add another #submit function
         if (isset($form[$field['field_name']]['und']['add_more'])) {
           // add a simple select list, this defaults to numb 3

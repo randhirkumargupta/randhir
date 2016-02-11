@@ -128,7 +128,7 @@
                   endif;
                   ?>
                   <?php
-                  if (!empty($client_title)): print '<div class="field field-name-field-p-client-title field-type-list-text field-label-above"><div class="field-label">client title:&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
+                  if (!empty($client_title)): print render($content['field_p_client_title']);
                   endif;
                   ?>            
                 </div>  
@@ -150,10 +150,7 @@
                 </div>  
               </div>
             <?php endif; ?>
-            //individual gallery
-
             <?php
-            //    print drupal_render($content['field_gallery_image']);
             $items = field_get_items('node', $node, 'field_gallery_image');
 
             foreach ($items as $imagecollection) {
