@@ -274,6 +274,7 @@ form fieldset.date-combo .container-inline-date .date-padding .form-item{
   padding-left: 120px;
 }
 .node-story-form .ckeditor_links, 
+.node-breaking_news-form .ckeditor_links, 
 .node-story-form .text-format-wrapper .filter-wrapper, 
 .node-story-form .text-format-wrapper .description{
   margin-left: 300px; 
@@ -287,23 +288,27 @@ form fieldset.date-combo .container-inline-date .date-padding .form-item{
 form .form-item .form-item{
   margin: 0;
 }
-.story-title{
+.story-title, .breaking-title{
   font-size: 18px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
 }
-#block-itg-story-story-tab-form-block{
+#block-itg-story-story-tab-form-block, 
+#block-itg-breaking-news-breaking-news-tab-form-block, 
+#block-menu-menu-story-content-admin-menu{
   border-left: none;
   border-right: none;
 }
-#block-itg-story-story-tab-form-block .block-content{
+#block-itg-story-story-tab-form-block .block-content, 
+#block-itg-breaking-news-breaking-news-tab-form-block .block-content, 
+#block-menu-menu-story-content-admin-menu .block-content{
   padding: 0;
 }
-.block-itg-story-list{
+.block-itg-story-list, #block-menu-menu-story-content-admin-menu .block-content .ul{
   text-align: center;
 }
-.block-itg-story-list span{
+.block-itg-story-list span, #block-menu-menu-story-content-admin-menu .block-content ul li{
   cursor: pointer;
   display: inline-block;
   padding: 10px 20px;
@@ -312,13 +317,17 @@ form .form-item .form-item{
   margin-left: -3px;
   font-size: 13px;
   text-transform: uppercase;
+  border: none;
 }
-
-.block-itg-story-list span.active, .block-itg-story-list span:hover{
+#block-menu-menu-story-content-admin-menu .block-content ul li{padding: 0;}
+#block-menu-menu-story-content-admin-menu .block-content ul li a{padding: 10px 20px; display: block; color: #666; position: relative;}
+.block-itg-story-list span.active, .block-itg-story-list span:hover, 
+#block-menu-menu-story-content-admin-menu .block-content ul li a.active, #block-menu-menu-story-content-admin-menu .block-content ul li a:hover{
   color: #008eb1;
   background-color: #fff;
 }
-.block-itg-story-list span.active:after{
+.block-itg-story-list span.active:after, 
+#block-menu-menu-story-content-admin-menu .block-content ul li a.active:after{
   content: '';
   position: absolute;
   left: 0;
@@ -327,7 +336,8 @@ form .form-item .form-item{
   width: 100%;
   background-color: #008eb1;
 }
-.block-itg-story.fixed{
+.block-itg-story.fixed, 
+.block-itg-breaking-news.fixed{
   position: fixed;
   width: 100%;
   z-index: 9999;
@@ -588,5 +598,9 @@ table.sticky-header{z-index: 99;}
 .dashboard-tab li .fa{font-size: 42px; line-height: 80px;}
 .dashboard-tab li .dashboard-tab-item{display: block;border: 1px solid #aaa; padding: 5px; text-align: center; height: 125px; color: #8d8d8d;}
 .dashboard-tab li .dashboard-tab-item:hover{color: #008eb1; border-color: #008eb1;}
-#edit-field-print-magazine-issue-date .date-combo .fieldset-content{float: left; padding: 0; margin: 0; width: 400px;}
+#edit-field-print-magazine-issue-date .date-combo .fieldset-content, #edit-field-publish-time .date-combo .fieldset-content{float: left; padding: 0; margin: 0; width: 400px;}
 #edit-field-magazine-publish, #edit-field-supp-publish{padding-left: 300px;}
+#edit-field-publish-time .container-inline-date .date-padding .form-type-textfield:first-child, 
+#edit-field-publish-time .container-inline-date .date-padding .form-type-textfield label{display: none;}
+.pre-desc{margin: -20px 0 10px; font-size: 12px; padding-left: 300px;}
+.attachment .count{display: inline-block; vertical-align: middle; padding: 5px 2px;}
