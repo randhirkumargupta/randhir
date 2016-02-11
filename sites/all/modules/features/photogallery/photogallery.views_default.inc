@@ -107,13 +107,6 @@ function photogallery_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<a href="./node/add/photogallery">Create photogallery</a>
-';
-  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -355,7 +348,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = 'Modify on';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified on';
   $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y h:i';
@@ -371,11 +364,15 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Content: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
+  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">[delete_node]</span>';
   $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
