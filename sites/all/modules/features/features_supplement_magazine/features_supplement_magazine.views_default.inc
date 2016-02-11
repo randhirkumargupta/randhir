@@ -28,12 +28,12 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     4 => '4',
+    5 => '5',
+    6 => '6',
     7 => '7',
-    11 => '11',
-    12 => '12',
-    17 => '17',
-    18 => '18',
-    19 => '19',
+    20 => '20',
+    10 => '10',
+    9 => '9',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -172,12 +172,6 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_story_select_supplement']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Select Category */
-  $handler->display->display_options['fields']['field_select_category']['id'] = 'field_select_category';
-  $handler->display->display_options['fields']['field_select_category']['table'] = 'field_data_field_select_category';
-  $handler->display->display_options['fields']['field_select_category']['field'] = 'field_select_category';
-  $handler->display->display_options['fields']['field_select_category']['label'] = 'Category';
-  $handler->display->display_options['fields']['field_select_category']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
@@ -308,13 +302,14 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    3 => '3',
     4 => '4',
+    5 => '5',
+    6 => '6',
     7 => '7',
-    11 => '11',
-    12 => '12',
-    17 => '17',
-    18 => '18',
-    19 => '19',
+    20 => '20',
+    10 => '10',
+    9 => '9',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -697,13 +692,14 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    3 => '3',
     4 => '4',
+    5 => '5',
+    6 => '6',
     7 => '7',
-    11 => '11',
-    12 => '12',
-    17 => '17',
-    18 => '18',
-    19 => '19',
+    20 => '20',
+    10 => '10',
+    9 => '9',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
