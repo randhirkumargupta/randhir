@@ -38,14 +38,12 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'title' => 'title',
-    'field_display_name' => 'field_display_name',
-    'field_story_category' => 'field_story_category',
     'field_type' => 'field_type',
+    'field_section' => 'field_section',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'status' => 'status',
     'edit_node' => 'nothing_1',
     'delete_node' => 'nothing_1',
     'nothing_1' => 'nothing_1',
@@ -64,21 +62,14 @@ function feature_for_breaking_news_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_display_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_story_category' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_type' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_section' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -109,13 +100,6 @@ function feature_for_breaking_news_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'status' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'edit_node' => array(
       'align' => '',
       'separator' => '',
@@ -128,7 +112,7 @@ function feature_for_breaking_news_views_default_views() {
     ),
     'nothing_1' => array(
       'align' => '',
-      'separator' => '|',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
   );

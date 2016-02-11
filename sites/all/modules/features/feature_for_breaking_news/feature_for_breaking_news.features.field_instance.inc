@@ -450,7 +450,7 @@ function feature_for_breaking_news_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 23,
       ),
       'teaser' => array(
@@ -871,7 +871,7 @@ function feature_for_breaking_news_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 17,
       ),
       'teaser' => array(
