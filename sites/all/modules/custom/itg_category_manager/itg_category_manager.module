@@ -365,8 +365,9 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
 }
 
 /**
- * Implement hook_taxonomy_term_presave().
+ * Implement hook_taxonomy_term_insert().
  * @param Object $term 
+ * Insert row to itg_category_manager at the time of term creation.
  */
 function itg_category_manager_taxonomy_term_insert($term) {        
   global $user;
@@ -383,6 +384,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
 /**
  * Implements hook_taxonomy_term_presave($term).
  * @param Object $term An object of type term.
+ * Update logs for Sef Url and modification time.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
   if ($term->tid !== NULL) {
@@ -414,6 +416,7 @@ function itg_category_manager_taxonomy_term_presave($term) {
 
 /**
  * Implements hook_pathauto_alias_alter().
+ * Insert url aias to itg-category_manager table against specific term id.
  */
 function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {    
   db_update('itg_category_manager')
@@ -424,6 +427,7 @@ function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
 
 /**
  * Implements hook_views_api().
+ * registering api information for custom views handlers.
  */
 function itg_category_manager_views_api() {
   return array(
@@ -431,6 +435,11 @@ function itg_category_manager_views_api() {
   );
 }
 
+/**
+ * Implements hook_views_data()
+ * Register new views handler for displaying custom table data to views.
+ * @return araay of array
+ */
 function itg_category_manager_views_data() {
   $data['itg_category_manager']['table']['group'] = t('Category Manager');
   $data['itg_category_manager']['table']['base'] = array(
@@ -501,7 +510,10 @@ function itg_category_manager_views_data() {
 }
 
 /**
- * hook_form_alter
+ * Implements hook_form_alter()
+ * @param array $form array of form elements.
+ * @param array $form_state array contains submitted form values
+ * @param string $form_id name of the form id
  */
 function itg_category_manager_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {    
@@ -542,7 +554,8 @@ function itg_category_manager_block_view($delta = '') {
 }
 
 /**
- * 
+ * Implements hook_theme()
+ * Registring templates for different pages.
  */
 function itg_category_manager_theme() {
   return array(    

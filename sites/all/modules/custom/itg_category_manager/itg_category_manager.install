@@ -19,6 +19,11 @@ function itg_category_manager_update_7001() {
   cache_clear_all(NULL, 'cache_menu');
 }
 
+/**
+ * Implements hook_schema()
+ * Defining table structure for custom table to store log for SEF URL
+ * @return array
+ */
 function itg_category_manager_schema() {
   $schema['itg_category_manager'] = array(
     'description' => 'Table for itg_category_manager module settings.',
