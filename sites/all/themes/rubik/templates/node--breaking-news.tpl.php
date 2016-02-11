@@ -83,6 +83,7 @@
                      ?>    
                      <?php print render($content['field_stroy_city']); ?>
                     <?php endif; ?>
+                    
                 </div>
             </div>
 
@@ -90,11 +91,14 @@
                 <h2>Description</h2>
                     <?php
                     $short_des = render($content['field_label']);
+                    $description = render($content['body']);
                     if (!empty($short_des)):
                     print render($content['field_label']);
                     ?>
                     <?php endif; ?>
-                <div class="content-details"><?php print render($content['body']); ?></div>   
+                    <?php if (!empty($description)): ?>
+                <div class="field-label">Description</div><div class="breaking-content-details"><?php print render($content['body']); ?></div> 
+                <?php endif; ?>
             </div>
 
                     <?php

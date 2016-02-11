@@ -14,6 +14,9 @@
             // code to hide body text format filter 
             if (uid != 1) {
             $('#edit-body-und-0-format').hide();
+            $('.vertical-tabs-list').hide();
+            $('#edit-metatags').show();
+            $('#edit-metatags-und-advanced').hide();
             }
                         
             // code for disbale date field in breaking news      

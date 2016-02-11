@@ -72,7 +72,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'body',
     'label' => 'Description',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'display_summary' => 1,
       'exclude_cv' => FALSE,
