@@ -46,10 +46,16 @@ function features_supplement_magazine_views_default_views() {
     'title' => 'title',
     'field_story_select_magazine' => 'field_story_select_magazine',
     'field_story_select_supplement' => 'field_story_select_supplement',
-    'field_story_expiry_date' => 'field_story_expiry_date',
+    'field_select_category' => 'field_select_category',
+    'uid' => 'uid',
+    'changed' => 'changed',
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
+    'nid' => 'nid',
+    'field_first_name' => 'field_first_name',
+    'field_last_name' => 'field_last_name',
+    'nothing_1' => 'nothing_1',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -74,7 +80,19 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_expiry_date' => array(
+    'field_select_category' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'uid' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -96,13 +114,48 @@ function features_supplement_magazine_views_default_views() {
       'separator' => ' |  ',
       'empty_column' => 0,
     ),
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_first_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_last_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing_1' => array(
+      'align' => '',
+      'separator' => ' ',
+      'empty_column' => 0,
+    ),
   );
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Story ID';
   /* Field: Content: Select magazine */
   $handler->display->display_options['fields']['field_story_select_magazine']['id'] = 'field_story_select_magazine';
   $handler->display->display_options['fields']['field_story_select_magazine']['table'] = 'field_data_field_story_select_magazine';
@@ -125,19 +178,30 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_select_category']['field'] = 'field_select_category';
   $handler->display->display_options['fields']['field_select_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_select_category']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Content: Story expiry date */
-  $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
-  $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
-  $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
-  $handler->display->display_options['fields']['field_story_expiry_date']['label'] = 'Expiry Date';
-  $handler->display->display_options['fields']['field_story_expiry_date']['settings'] = array(
-    'format_type' => 'short',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
+  /* Field: Content: Author uid */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'node';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
+  /* Field: User: First name */
+  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
+  /* Field: User: Last name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['field_last_name']['exclude'] = TRUE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Posted By';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_first_name] [field_last_name]';
+  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
