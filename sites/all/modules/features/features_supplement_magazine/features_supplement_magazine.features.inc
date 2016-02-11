@@ -28,14 +28,6 @@ function features_supplement_magazine_views_api($module = NULL, $api = NULL) {
  */
 function features_supplement_magazine_node_info() {
   $items = array(
-    'issue' => array(
-      'name' => t('Issue'),
-      'base' => 'node_content',
-      'description' => t('Created for issues'),
-      'has_title' => '1',
-      'title_label' => t('Title'),
-      'help' => '',
-    ),
     'magazine' => array(
       'name' => t('Magazine'),
       'base' => 'node_content',
