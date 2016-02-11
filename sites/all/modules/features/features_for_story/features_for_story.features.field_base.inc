@@ -690,7 +690,7 @@ function features_for_story_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'magazine_issue_story' => '',
+        'magazine_issue_story' => 'Issue base story',
       ),
       'allowed_values_function' => '',
     ),
