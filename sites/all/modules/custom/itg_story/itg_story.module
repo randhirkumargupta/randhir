@@ -166,7 +166,8 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' 
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'
+           || $form['#id'] == 'views-exposed-form-manage-issues-page'
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
      $form['title']['#autocomplete_path'] = 'story-title-list/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
