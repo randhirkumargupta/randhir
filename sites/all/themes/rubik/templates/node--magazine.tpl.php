@@ -36,9 +36,9 @@
  */
 
 ?>
-<div>
-  <div>Magazine Title: <?php print $title; ?></div>
-  <div>Magazine Cover Image: <img src="<?php print image_style_url("thumbnail", $node->field_magazine_cover_photo[LANGUAGE_NONE][0]['uri']); ?>" /></div>
-  <div>Print Issue Date : <?php print $node->field_print_magazine_issue_date[LANGUAGE_NONE][0]['value']; ?></div>
-  <div>Status: <?php print $status ? 'Published' : 'Unpublished';?></div>
+<div class="cm-node-view">
+  <div class="field-div"><div class="field-label">Magazine Title: </div><div class="field-item"><?php print $title; ?></div></div>
+  <div class="field-div"><div class="field-label">Magazine Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_magazine_cover_photo[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
+  <div class="field-div"><div class="field-label">Print Issue Date : </div><div class="field-item"><?php print $node->field_print_magazine_issue_date[LANGUAGE_NONE][0]['value']; ?></div></div>
+  <div class="field-div"><div class="field-label">Status: </div><div class="field-item"><?php print $status ? 'Published' : 'Unpublished';?></div></div>
 </div>
