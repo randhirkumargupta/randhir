@@ -14,7 +14,7 @@ function features_for_story_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_story';
-  $strongarm->value = 'edit-display';
+  $strongarm->value = 'edit-submission';
   $export['additional_settings__active_tab_story'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -110,13 +110,13 @@ function features_for_story_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '4',
+          'weight' => '3',
         ),
         'metatags' => array(
-          'weight' => '42',
+          'weight' => '43',
         ),
         'path' => array(
-          'weight' => '41',
+          'weight' => '42',
         ),
       ),
       'display' => array(),
@@ -166,7 +166,8 @@ function features_for_story_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_story';
   $strongarm->value = array(
-    0 => 'status',
+    0 => 'moderation',
+    1 => 'revision',
   );
   $export['node_options_story'] = $strongarm;
 
@@ -195,7 +196,7 @@ function features_for_story_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_moderation_default_state_story';
-  $strongarm->value = 'published';
+  $strongarm->value = 'draft';
   $export['workbench_moderation_default_state_story'] = $strongarm;
 
   return $export;

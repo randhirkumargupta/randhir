@@ -32,7 +32,9 @@ function features_for_story_user_default_permissions() {
   $permissions['administer url aliases'] = array(
     'name' => 'administer url aliases',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -47,7 +49,7 @@ function features_for_story_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Intern' => 'Intern',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
@@ -58,7 +60,9 @@ function features_for_story_user_default_permissions() {
   $permissions['create url aliases'] = array(
     'name' => 'create url aliases',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -103,7 +107,7 @@ function features_for_story_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -117,7 +121,7 @@ function features_for_story_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Intern' => 'Intern',
-      'Section Editor' => 'Section Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),

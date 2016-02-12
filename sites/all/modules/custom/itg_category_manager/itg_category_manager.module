@@ -10,6 +10,9 @@
  */
 function itg_category_manager_init(){
   variable_set('taxonomy_terms_per_page_admin',20);
+  global $base_url;
+  $settings['baseUrl'] = $base_url;
+  drupal_add_js(array('baseUrl' => $settings), 'setting');
 }
 
 /**
@@ -36,6 +39,11 @@ function itg_category_manager_menu() {
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_category_manager_form'),
       'access arguments' => array('administer taxonomy'),
+  );
+  $items['test'] = array(
+    'title' => 'ITG Category Manager',
+    'page callback' => 'notify_insert_statuspost',
+    'access callback' => TRUE
   );
 
   return $items;
@@ -134,35 +142,59 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
   if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete')) {
     $tid = $form_state['term']->tid;
     $used_by_content = taxonomy_select_nodes($tid);
-    if (count($used_by_content) > 0) {
-      form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
-      $node_url = $base_url . '/node/';
-      echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
-      $i = 0;
-      $count_used = count($used_by_content)-1;
-      foreach ($used_by_content as $key => $value) {
-        $node = $node = node_load($value);
-        echo '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
-        if($i != $count_used){
-            echo ', ';
+      if (count($used_by_content) > 0) {
+        form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
+        $node_url = $base_url . '/node/';
+        echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
+        $count_used = count($used_by_content) - 1;
+        foreach ($used_by_content as $key => $value) {
+          $node = node_load($value);
+          $mapped_content_link = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>'.', ';
+          echo rtrim($mapped_content_link, ', ');
+          
         }
-        $i++;
+        echo '</div>';
+        drupal_add_js('(function($) {$(document).ready(function() {
+        $("#taxonomy-form-term #edit-submit").hide();
+        $("#edit-description").html($("body").find(".contents-using-cat").html());
+        $(".contents-using-cat").hide();
+       });}(jQuery));', 'inline');
+      } else {
+        $flag = FALSE;
+        $all_children = @taxonomy_get_children_all($tid, $form_state['term']->vid);
+        if (count($all_children) > 0) {
+          foreach ($all_children as $key => $val) {
+            $used_by_content = taxonomy_select_nodes($val);
+            if(count($used_by_content) > 0){
+              $flag = TRUE;
+            }
+            $node_url = $base_url . '/node/';
+            $count_used = count($used_by_content) - 1;
+            foreach ($used_by_content as $key => $value) {
+              $node = node_load($value);
+              $user_content_link[] = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
+            }
+          }
+          if($flag){
+          $user_content_link_str = implode(", ", $user_content_link);
+          echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>'.$user_content_link_str.'</div>';
+          form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
+           drupal_add_js('(function($) {$(document).ready(function() {
+            $("#taxonomy-form-term #edit-submit").hide();
+            $("#edit-description").html($("body").find(".contents-using-cat").html());
+            $(".contents-using-cat").hide();
+           });}(jQuery));', 'inline');
+          }
+         }  
       }
-       echo '</div>';
-      drupal_add_js('(function($) {$(document).ready(function() {
-       $("#taxonomy-form-term #edit-submit").hide();
-       $("#edit-description").html($("body").find(".contents-using-cat").html());
-       $(".contents-using-cat").hide();
-      });}(jQuery));', 'inline');
-    }
   } else {
-    $types = @variable_get('itg_category_manager_types', array());
-    if ($types['term']) {
-      $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
-      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
-        $form['#validate'][] = 'itg_category_manager_term_validate';
-      }
-    }
+//    $types = @variable_get('itg_category_manager_types', array());
+//    if ($types['term']) {
+//      $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
+//      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
+//        $form['#validate'][] = 'itg_category_manager_term_validate';
+//      }
+//    }
     
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
       $form['#action'] = '?destination=admin/structure/taxonomy/category_management'; //Redirect to term listing page, after term has been added successfully.
@@ -178,10 +210,10 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       
       //Relation treatment
       $form['relations']['#title'] = 'Section and Categories';
-      $form['relations']['#weight'] = 3;
+      $form['relations']['#weight'] = 2;
       $form['relations']['parent']['#title'] = t('Select Section');
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
-      //$form['relations']['#collapsible'] = 0;
+      $form['relations']['#collapsible'] = 0;
       unset($form['relations']['weight']);
               
       //Non-editable fields in edit mode
@@ -196,10 +228,44 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['relations']['#attributes'] = array('disabled' => TRUE);
       }
       
-      //Form after build  
+      //Call valiadte and after build
+      $form['#validate'][] = 'itg_category_manager_term_validate';
       $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
+      
     }
   }
+  // Taxonomy active deactive login
+  $form['term_state'] = array(
+    '#prefix' => '<label>Term State</label>',
+    '#type' => 'checkbox',
+    '#title' => t('Active'),
+    '#weight' => 20,
+    '#default_value' => true,
+    '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
+  );
+}
+/**
+ * Get all categories under their parent category
+ * @param type $tid
+ * @param type $vid
+ * @param type $key
+ * @return type
+ */
+function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid'){
+    $c = taxonomy_get_children($tid, $vid, $key);
+    $result = array();
+    foreach ($c as $t => $d){
+        $result[$t] = $d;
+        $below = taxonomy_get_children_all($t, $vid, $key);
+        $all_children[] = $result[$t]->tid;
+        if (!empty($below)) {
+            foreach ($below as $nt => $nd){
+                $result[$nt] = $nd;
+                array_push($all_children, $nd);
+            }
+        }
+    }
+    return $all_children;
 }
 
 /**
@@ -395,8 +461,8 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
            'body' => $mail_content,
            'subject' => 'India Today | Category Updated!',
      );
-    $to = "haripal.rao@kelltontech.com"; // SEO team mail id
-    $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'India Today <indiatoday@indiatoday.com>', TRUE);
+    $to = "haripalrao@gmail.com"; // SEO team mail id
+    $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'haripal.rao@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
     } else {
@@ -417,17 +483,17 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
  function itg_category_manager_seo_team_mail($key, &$message, $params) {
   switch ($key) {
     case 'send_mail_to_seo':
-    $message['headers'] = array_merge(
-       $message['headers'],  
-       array(
-         'MIME-Version' => '1.0',
-         'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
-         'Content-Transfer-Encoding' => '8Bit',
-         'X-Mailer' => 'Drupal'
-       )
-     );
+    $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
       $message['subject'] = $params['subject'];
       $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+    }
       break;
   }
 }
@@ -442,18 +508,7 @@ function itg_category_manager_get_mail_content($entity) {
   global $base_url;
   $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
-//  $content = '<table>
-//  <tr><td>Hi SEO Team,</td></tr>
-//  <tr><td>&nbsp;</td></tr>
-//  <tr><td>Category <b>'.$entity->name.'</b> has been modified. Details are given below:</td></tr>
-//  <tr><td>Display Title: '.$display_name.'</td></tr>
-//  <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
-//  <tr><td>&nbsp;</td></tr>
-//  <tr><td>&nbsp;</td></tr>
-//  <tr><td>Thanks,</td></tr>
-//  <tr><td>India Today Team</td></tr>
-//</table>';
-  
+ 
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -461,7 +516,215 @@ function itg_category_manager_get_mail_content($entity) {
 </head>
 <body style="margin:0; padding:0;">
       <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi SEO Team,</td></tr>
-      <tr><td style="font-weight: bold;">Category '.$entity->name.' has been modified. Details are given below:</td></tr></table>
+      <tr><td style="font-weight: bold;">Category '.$entity->name.' has been modified. Details are given below:</td></tr>
+        <tr><td>Display Title: '.$display_name.'</td></tr>
+          <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
+            <tr><td>Thanks,</td></tr>
+            <tr><td>India Today Team</td></tr></table>
 </body></html>';
+  
   return $content;
+}
+
+/**
+ * Implement hook_taxonomy_term_insert().
+ * @param Object $term 
+ * Insert row to itg_category_manager at the time of term creation.
+ */
+function itg_category_manager_taxonomy_term_insert($term) {        
+  global $user;
+  $data = array(
+    'tid' => $term->tid,
+    'uid' => $user->uid,
+    'created' => time(),
+    'changed' => time(),
+    'state' => 1,
+  );
+  drupal_write_record('itg_category_manager', $data);  
+}
+
+/**
+ * Implements hook_taxonomy_term_presave($term).
+ * @param Object $term An object of type term.
+ * Update logs for Sef Url and modification time.
+ */
+function itg_category_manager_taxonomy_term_presave($term) {
+  if ($term->tid !== NULL) {
+    // Fetch old data from table
+    $itgQuery = db_select('itg_category_manager', 'itg');
+    $itgQuery->condition('tid', $term->tid);
+    $itgQuery->fields('itg', array('sef_url', 'sef_url_modified'));
+    $itgResult = $itgQuery->execute();
+    $itgResult = $itgResult->fetchObject();
+    // Prepare array for data insertion
+    global $user;
+    if ($itgResult->sef_url !== $term->path['alias'] && $itgResult->sef_url_modified == '') {
+      $data['sef_url_modified'] = $term->path['alias'];
+    }
+    else if ($itgResult->sef_url_modified != '' && $itgResult->sef_url_modified !== $term->path['alias']) {
+      $data['sef_url_modified'] = $term->path['alias'];
+      $data['sef_url'] = $itgResult->sef_url_modified;
+    }
+    $data['uid'] = $user->uid;
+    $data['changed'] = time();
+
+    // Query to update table
+    db_update('itg_category_manager')
+        ->fields($data)
+        ->condition('tid', $term->tid)
+        ->execute();
+  }
+}
+
+/**
+ * Implements hook_pathauto_alias_alter().
+ * Insert url aias to itg-category_manager table against specific term id.
+ */
+function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {    
+  db_update('itg_category_manager')
+    ->fields(array('sef_url' => $alias))
+    ->condition('tid', $context['data']['term']->tid)
+    ->execute();
+}
+
+/**
+ * Implements hook_views_api().
+ * registering api information for custom views handlers.
+ */
+function itg_category_manager_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+
+/**
+ * Implements hook_views_data()
+ * Register new views handler for displaying custom table data to views.
+ * @return araay of array
+ */
+function itg_category_manager_views_data() {
+  $data['itg_category_manager']['table']['group'] = t('Category Manager');
+  $data['itg_category_manager']['table']['base'] = array(
+    'field' => 'id',
+    'title' => t('Category Manager'),
+  ); 
+   
+  $data['itg_category_manager']['tid'] = array(
+    'title' => t('Category Manager Table'),
+    'help' => t('Log information about taxonomy term.'),    
+    'relationship' => array(
+      'base' => 'taxonomy_term_data', // The name of the table to join with.
+      'base field' => 'tid', // The name of the field on the joined table.      
+      'handler' => 'views_handler_relationship',
+      'label' => t('Category manager'),
+      'title' => t('ITG'),
+      'help' => t('Relate taxonomy to view.'),
+    ),
+  );
+  // Example timestamp field.
+  $data['itg_category_manager']['created'] = array(
+    'title' => t('created field'),
+    'help' => t('Term created date.'),
+    'field' => array(
+      'handler' => 'views_handler_field_date',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort_date',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_date',
+    ),
+  );
+  $data['itg_category_manager']['changed'] = array(
+    'title' => t('changed field'),
+    'help' => t('Term changed date.'),
+    'field' => array(
+      'handler' => 'views_handler_field_date',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort_date',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_date',
+    ),
+  );
+  $data['itg_category_manager']['status'] = array(
+    'title' => t('Status'),
+    'help' => t('Term status.'),
+    'field' => array(
+      'handler' => 'views_handler_field_boolean',
+      'click sortable' => TRUE,
+      'output formats' => array(
+        'active-inactive' => array(t('Active'), t('Inactive')),
+      )
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_boolean_operator',
+      'label' => t('Status'),
+      'type' => 'active-inactive',
+      'use equal' => TRUE,
+    ),    
+  );
+  
+  return $data;
+}
+
+/**
+ * Implements hook_form_alter()
+ * @param array $form array of form elements.
+ * @param array $form_state array contains submitted form values
+ * @param string $form_id name of the form id
+ */
+function itg_category_manager_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {    
+    $form['status']['#options'][1] = t('Active'); 
+    $form['status']['#options'][0] = t('Inactive');
+  }
+}
+
+/**
+ * Implements hook_block_info()
+ */
+function itg_category_manager_block_info() {
+  $blocks['sef_url_log'] = array(
+    'info' => t('Sef URL Log'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  ); 
+
+  return $blocks;  
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function itg_category_manager_block_view($delta = '') {
+  $block = array();
+  $data = '';
+  
+  //$data = itg_category_manager_sefurl_log($tid);
+  switch ($delta) {
+    case 'sef_url_log':      
+      $data = '<div class="audit-info">View Sef Url Log</div>';
+      $arg = arg();      
+      $block['content'] = theme('sef_url_log', array('data' => $data));
+      break;
+  }
+  
+  return $block;    
+}
+
+/**
+ * Implements hook_theme()
+ * Registring templates for different pages.
+ */
+function itg_category_manager_theme() {
+  return array(    
+    'sef_url_log' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'templates/sef_url_log',
+      'render element' => 'data',
+    ),
+  );
 }

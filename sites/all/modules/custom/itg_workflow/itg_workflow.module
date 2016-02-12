@@ -1,0 +1,165 @@
+<?php
+
+/**
+ * @file
+ * ITG workflow module.
+ *
+ * Provides customizations and functions for workflow.
+ *
+ */
+
+
+
+/**
+ * Implemets hook_form_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
+  global $user, $base_url;
+  
+  switch ($form_id) {
+    case 'story_node_form':
+      $form['#after_build'][] = 'itg_workflow_after_build';      
+    break;
+    
+    case 'views_exposed_form':
+      $form['#after_build'][] = 'itg_workflow_views_exposed_form_after_build';      
+    break;
+  }
+}
+
+/**
+ * After build for story form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_workflow_after_build($form, &$form_state) {
+ global $user, $base_url;
+  
+ // hide workbench dropdown
+  drupal_add_js('jQuery(document).ready(function() {
+              jQuery(".form-item-workbench-moderation-state-new").hide();                    
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  
+  if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles)) {    
+    if (!isset($form['#node']->workbench_moderation['current'])) {
+      $state_class = ' published';
+      $submit_name = 'Publish';
+      $form['actions']['submit']['#value'] = 'Save as Draft';      
+    } else if (isset($form['#node']->workbench_moderation['current'])) {
+      if ($form['#node']->workbench_moderation['current']->state == 'draft') {
+        $state_class = ' published';
+        $submit_name = 'Publish';
+        $form['actions']['submit']['#value'] = 'Save as Draft';         
+      } else if ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
+            $submit_name = '';            
+            $state_class = ' published';
+            drupal_add_js('jQuery(document).ready(function() {
+             jQuery(".form-item-workbench-moderation-state-new").show();                    
+            });', array('type' => 'inline', 'scope' => 'footer'));
+          }      
+    }
+  } else if (array_key_exists(AUTHOR_GUEST, $user->roles) || array_key_exists(INTERN, $user->roles) || array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
+      if (!isset($form['#node']->workbench_moderation['current'])) {
+        $submit_name = 'Submit for Review';
+        $state_class = ' needs_review';
+        $form['actions']['submit']['#value'] = 'Save as Draft';        
+      } else if (isset($form['#node']->workbench_moderation['current']) && ($form['#node']->workbench_moderation['current']->state == 'draft' || $form['#node']->workbench_moderation['current']->state == 'needs_review' || $form['#node']->workbench_moderation['current']->state == 'needs_modification')) {
+          if ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
+            $submit_name = '';           
+          } else if ($form['#node']->workbench_moderation['current']->state == 'needs_modification') {
+            $submit_name = 'Submit for Review';
+            $state_class = ' needs_review';
+            $form['actions']['submit']['#value'] = 'Save as Draft';
+            drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-workbench-moderation-state-new").val("needs_modification");              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+          } else if ($form['#node']->workbench_moderation['current']->state == 'published') {
+              $submit_name = '';              
+          } else if ($form['#node']->workbench_moderation['current']->state == 'draft') {
+              $submit_name = 'Submit for Review';
+              $state_class = ' needs_review';
+              $form['actions']['submit']['#value'] = 'Save as Draft';              
+          } else {
+            
+          }          
+      }
+  }
+
+  if (!empty($submit_name)) {    
+    $form['actions']['submit_link'] = array(
+        // '#markup' => l(t($submit_name), 'javascript:void(0)', array('attributes' => array('class' => 'button'.$state_class, 'id' => 'story_submit_link'))),
+        '#markup' => '<a href="javascript:void(0)" id="story_submit_link" class="button'. $state_class .'">'.t($submit_name).'</a>',
+        '#weight' => 20,
+      );
+  } 
+    
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+
+  drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
+  return $form;
+}
+
+
+/**
+ * Implements hook_node_presave.
+ * @param type $node
+ */
+function itg_workflow_node_presave($node) {  
+  if ($node->type == 'story') {
+   if ($node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
+    $node->workbench_moderation_state_new = 'published';
+   }
+  }
+}
+
+/**
+ * After build for views exposed form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
+  global $user, $base_url;
+  
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6') {
+    $form['state']['#options'] = array('All' => '-All-', 'needs_review' => 'Submitted for Review', 'rejected' => 'Rejected', 'needs_modification' => 'Needs Modification' );
+  } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {     
+    $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => '-All-', '<' => 'Published', '>=' => 'Approved');    
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {     
+    $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => '-All-', '<' => 'Published', '>=' => 'Approved');    
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
+              jQuery("#edit-field-story-schedule-date-time-value-op").click(function() {                     
+                     jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();                     
+                 });
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
+  return $form;
+}
+
+/**
+ * Implementation of hook_views_query_alter
+ * @param type $view
+ * @param type $query 
+ */
+function itg_workflow_views_query_alter(&$view, &$query) {
+  
+  // < published
+  // >= approved
+  
+  if ((!isset($_REQUEST['field_story_schedule_date_time_value_1_op'])) && $view->current_display == 'page_5') {
+    unset($view->query->where[1]['conditions'][4]);
+  } else if ((!isset($_REQUEST['field_story_schedule_date_time_value_op'])) && $view->current_display == 'page_1') {
+    unset($view->query->where[1]['conditions'][4]);
+  }  
+  
+}

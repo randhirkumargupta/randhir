@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature For Breaking News feature.
+ */
+
+include_once 'feature_for_breaking_news.features.inc';

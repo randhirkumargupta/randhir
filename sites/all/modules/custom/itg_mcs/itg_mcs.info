@@ -1,0 +1,5 @@
+name = ITG Multiple Category Selection
+description = "Customization Simple select multiple to Multiple hierarchy selection."
+package = "ITG"
+core = 7.x
+

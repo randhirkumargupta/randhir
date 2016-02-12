@@ -129,9 +129,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story').addClass('fixed');
+          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').addClass('fixed');
       } else {
-          $('.block-itg-story').removeClass('fixed');
+          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
@@ -152,7 +152,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   if(urlTxt == 'URL alias '){
     $('.form-item-path-alias label').html('Sef URL');
   }
-  $('.path-form #edit-path-pathauto').attr('checked', false);
+//  $('.path-form #edit-path-pathauto').attr('checked', false);
   if($('.path-form #edit-path-pathauto').is(':checked') == false){
     $('.path-form #edit-path-alias').removeAttr('disabled');
   }

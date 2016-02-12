@@ -1,0 +1,315 @@
+<?php
+
+/**
+ * @file
+ * The ITG MSI module.
+ *
+ * Contains functionality related to magazine, supplement and issue.
+ *
+ */
+
+/**
+ * Implement hook_permission
+ * @return type
+ */
+function itg_msi_permission() {
+  return array(
+    'custom view unpublished content' => array(
+      'title' => t('Custom View Unpublished Content'),
+      'restrict access' => TRUE
+    )
+  );
+}
+
+/**
+ * Implement hook_menu
+ * @return string
+ */
+function itg_msi_menu(){
+  $items['check-duplicate-title/%'] = array(
+      'page callback' => 'itg_msi_check_duplicate_title',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implement hook_node_access
+ * @param Object $node
+ * @param String $op
+ * @param Array $account
+ * @return string
+ */
+function itg_msi_node_access($node, $op, $account) {
+  // We're only bothered about the 'view' operation at the moment
+  if ($op == 'view') {
+    // If the user has access to our new permission, let 'em at it
+    if (user_access('custom view unpublished content', $account)) {
+      return NODE_ACCESS_ALLOW;
+    }
+  }
+
+  // For everything else let the system decide.
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implement hook_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param String $form_id
+ */
+function itg_msi_form_alter(&$form, &$form_state, $form_id){
+  //Set destination for magazine form
+  if ($form_id == 'magazine_node_form') {
+    $destination = 'manage-magazines';
+    if (isset($_GET['destination'])) {
+      $destination = $_GET['destination'];
+    } else {
+      $destination = 'manage-magazines';
+    }
+  }
+
+  //Set destination for supplement form
+  if ($form_id == 'supplement_node_form') {
+    $destination = 'manage-supplements';
+    if (isset($_GET['destination'])) {
+      $destination = $_GET['destination'];
+    } else {
+      $destination = 'manage-supplements';
+    }
+    $form['title']['#description'] = '<p>' . t('Please enter supplement title.') . '</p>';
+  }
+  
+  //Set destination for issue form
+  if ($form_id == 'issue_node_form') {
+    unset($form['title']);
+    $destination = 'manage-issues';
+    if (isset($_GET['destination'])) {
+      $destination = $_GET['destination'];
+    } else {
+      $destination = 'manage-issues';
+    }
+  }
+  
+  //Add cancel button for magazine, supplement and issue
+  if($form_id == 'magazine_node_form' || $form_id == 'supplement_node_form' || $form_id == 'issue_node_form'){
+    
+    //Hide Publish label from magazine and supplement form
+    unset($form['field_magazine_publish'][LANGUAGE_NONE]['#title']);
+    unset($form['field_supp_publish'][LANGUAGE_NONE]['#title']);
+    
+    //Add cancel button to magazine, supplement and issue form
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+    );
+
+    //Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
+    $form['actions']['submit']['#submit'][] ='_submit_handler_for_redirect';
+    
+    //Call function after build
+    $form['#after_build'][] = 'itg_msi_form_after_build';
+    
+
+  }
+}
+
+/**
+ * Redirect node to their manage pages after node creation
+ * @param Array $form
+ * @param Array $form_state
+ */
+function _submit_handler_for_redirect($form, &$form_state) {
+  
+  unset($_GET['destination']); // Unset destination
+  
+  switch ($form['#form_id']) {
+    case 'magazine_node_form':
+      $form_state['redirect'] = 'manage-magazines';
+      break;
+
+    case 'supplement_node_form':
+      $form_state['redirect'] = 'manage-supplements';
+      break;
+
+    case 'issue_node_form':
+      $form_state['redirect'] = 'manage-issues';
+      break;
+  }
+}
+
+/**
+ * After build function for magazine, supplement and issue
+ * @param Array $form
+ * @param Array $form_state
+ * @return Array
+ */
+function itg_msi_form_after_build($form, &$form_state){
+  global $user, $base_url;
+  
+  //Array used in itg_msi.js
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  drupal_add_js(array('itg_msi' => array('settings' => $settings)), array('type' => 'setting'));
+  
+  //Add JS for magazine, supplement and issue
+   drupal_add_js(drupal_get_path('module', 'itg_msi') . '/js/itg_msi.js', array('weight' => 1));
+    
+  //Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+  return $form;
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_msi_views_pre_render(&$view) {
+  
+  //Add "Create Magazine" button on listing page of magazine
+  if ($view->name == "manage_magazines") {
+    $header_content_magazine = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_magazine .= '<a href="./node/add/magazine">Create Magazine</a>';
+    $view->attachment_before = $header_content_magazine;
+  }
+  
+  //Add "Create Supplement" button on listing page of supplement
+  if ($view->name == "manage_supplements") {
+    $header_content_supplement = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_supplement .= '<a href="./node/add/supplement">Create Supplement</a>';
+    $view->attachment_before = $header_content_supplement;
+  }
+  
+  //Add "Create Issue" button on listing page of issue
+  if ($view->name == "manage_issues") {
+    $header_content_issue = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
+    $view->attachment_before = $header_content_issue;
+  }
+}
+
+/**
+ * Implement hook_node_presave
+ * @param Object $node
+ */
+function itg_msi_node_presave($node){
+  
+  //Publish/Unpublish functionality for supplement
+  if ($node->type == 'supplement') {
+    if ($node->is_new == 1) {
+      $node->status = $node->field_supp_publish[LANGUAGE_NONE][0]['value'];
+    } else {
+      $publish = $node->field_supp_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+      $node->status = $publish;
+      field_attach_update('node', $node);
+    }
+  }
+  
+  //Publish/Unpublish functionality for magazine
+  if ($node->type == 'magazine') {
+    if ($node->is_new == 1) {
+      $node->status = $node->field_magazine_publish[LANGUAGE_NONE][0]['value'];
+    } else {
+      $publish = $node->field_magazine_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+      $node->status = $publish;
+      field_attach_update('node', $node);
+    }
+  }
+    //Publish/Unpublish functionality for magazine
+  if ($node->type == 'issue') {
+    $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
+  }
+}
+
+/**
+ * Implement hook_node_insert
+ * @param Object $node
+ */
+function itg_msi_node_insert($node){
+  
+  switch ($node->type) {
+    case 'page':
+      $xml_file = file_load($node->field_test_upload_issuexml[LANGUAGE_NONE][0]['fid']);
+      $xml_file_path = str_replace('public://', 'sites/default/files/', $xml_file->uri);
+      _create_issue_using_xmlfile($xml_file_path);
+      
+      break;
+    
+    default:
+      break;
+  }
+}
+
+/**
+ * Implement hook_node_validate
+ * @param Object $node
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_msi_node_validate($node, $form, &$form_state) {
+  
+  switch ($node->type) {
+    case 'magazine':
+      if (!isset($node->nid)) {
+        $title = $form_state['values']['title'];
+        $results = db_select('node')->fields('node', array('title'))->condition('title', $title, '=')->condition('type', 'magazine')->execute();
+        $matches = array();
+        foreach ($results as $result) {
+          $matches[$result->title] = check_plain($result->title);
+        }
+        if (isset($matches) && !empty($matches)) {
+          form_set_error('title', t('Magazine title must be unique.'));
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Functionality to check title is duplicate OR not
+ * Call through ajax function
+ */
+function itg_msi_check_duplicate_title() {
+    $type = arg(1);
+    $title = $_POST['title'];
+    $itgQuery = db_select('node', 'itg');
+    $itgQuery->fields('itg', array('title'))
+      ->condition('title', $title)
+      ->condition('type', $type);
+    $itgResult = $itgQuery->execute()->fetchObject();
+    if (isset($itgResult->title) && strcasecmp($title, $itgResult->title) == 0) {
+      echo drupal_json_encode(array('Code' => 1));
+    }    
+    else {
+      echo drupal_json_encode(array('Code' => 0));
+    }
+}
+
+/**
+ * Create issue using xml file
+ * @param String $xml_file_path
+ */
+function _create_issue_using_xmlfile($xml_file_path) {
+  global $user;
+  $xml = simplexml_load_file($xml_file_path); // load xml file details using file path(returns in to array format)
+  
+  $node = new stdClass();
+  $node->title = $xml->title;
+  $node->type = "test";
+  node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+  
+  $node->language = LANGUAGE_NONE;
+  $node->body[$node->language][0]['value']   = $xml->storybody;;
+  $node->uid = $user->uid;
+  $node->status = 1; //(1 or 0): Published or not
+  $node->promote = 0; //(1 or 0): Promoted to front page
+  $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
+  
+  $node = node_submit($node); // Prepare node for saving
+  node_save($node);
+}
