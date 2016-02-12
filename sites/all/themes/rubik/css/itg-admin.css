@@ -621,3 +621,9 @@ form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-pa
 .node-photogallery-form #edit-field-gallery-image .description{padding-left: 140px;}
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .description{padding-left: 0;}
 .vertical-tabs{background: none;}
+.node-issue-form .vertical-tabs, 
+.node-supplement-form .vertical-tabs, 
+.node-magazine-form .vertical-tabs{padding-left: 0;}
+.cm-node-view .field-div{display: inline-block; vertical-align: top; width: 100%; padding-bottom: 10px;}
+.cm-node-view .field-div .field-label{float: left; width: 240px;}
+.cm-node-view .field-div .field-item{float: left; width: 560px;}
