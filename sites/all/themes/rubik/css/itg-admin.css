@@ -620,3 +620,4 @@ form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-pa
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .form-item .form-text{max-width: 100% !important;}
 .node-photogallery-form #edit-field-gallery-image .description{padding-left: 140px;}
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .description{padding-left: 0;}
+.vertical-tabs{background: none;}
