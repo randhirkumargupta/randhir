@@ -9,6 +9,8 @@
 *  
 */
 
-function itg_common_cms_user_dashboard() { 
+function itg_common_cms_user_dashboard() {
+   $data = '';
+   
    return theme('cms_user_dashboard', array('data' => $data));   
  }

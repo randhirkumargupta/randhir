@@ -2623,7 +2623,8 @@ my-published-story
 my-queue-story
 in-queue-story
 my-expired-story
-expired-story',
+expired-story
+archive-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2645,7 +2646,8 @@ my-published-story
 my-queue-story
 in-queue-story
 my-expired-story
-expired-story',
+expired-story
+archive-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2667,7 +2669,8 @@ my-published-story
 my-queue-story
 in-queue-story
 my-expired-story
-expired-story',
+expired-story
+archive-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2689,7 +2692,8 @@ my-published-story
 my-queue-story
 in-queue-story
 my-expired-story
-expired-story',
+expired-story
+archive-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2711,7 +2715,8 @@ my-published-story
 my-queue-story
 in-queue-story
 my-expired-story
-expired-story',
+expired-story
+archive-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2733,7 +2738,8 @@ my-published-story
 my-queue-story
 in-queue-story
 my-expired-story
-expired-story',
+expired-story
+archive-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3125,6 +3131,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-admin-left-menu',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
   'rid' => 10,
 );
   $export['block_role'][] = array(
