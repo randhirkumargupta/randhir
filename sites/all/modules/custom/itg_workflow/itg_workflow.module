@@ -22,7 +22,11 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       $form['#after_build'][] = 'itg_workflow_after_build';      
-    break;      
+    break;
+    
+    case 'views_exposed_form':
+      $form['#after_build'][] = 'itg_workflow_views_exposed_form_after_build';      
+    break;
   }
 }
 
@@ -33,7 +37,7 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_workflow_after_build($form, &$form_state) {
  global $user, $base_url;
-  
+  p($form);
  // hide workbench dropdown
   drupal_add_js('jQuery(document).ready(function() {
               jQuery(".form-item-workbench-moderation-state-new").hide();                    
@@ -112,4 +116,27 @@ function itg_workflow_node_presave($node) {
     $node->workbench_moderation_state_new = 'published';
    }
   }
+}
+
+/**
+ * After build for views exposed form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
+  global $user, $base_url;
+  
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6') {
+    $form['state']['#options'] = array('All' => '-All-', 'needs_review' => 'Submitted for Review', 'rejected' => 'Rejected', 'needs_modification' => 'Needs Modification' );
+  } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {
+      // $form['field_story_schedule_date_time_value']['value']['#type'] = 'select';
+//    $form['selected'] = array(
+//                        '#type' => 'select',
+//                        //'#title' => t('Select role'),
+//                        '#options' => array('0' => 'select', '1' => 'published', '2' => 'approved'),
+//                        // '#default_value' => $form['account']['roles']['#default_value'][1],
+//                        '#weight' => 10,
+//                    );
+  }
+  return $form;
 }
