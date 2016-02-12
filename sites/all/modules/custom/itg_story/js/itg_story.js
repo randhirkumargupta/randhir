@@ -52,8 +52,8 @@
                      }
                      
                      // code to copy story longheadline to story title
-                     $('#edit-field-story-long-head-line-und-0-value').keypress(function() {
-                     $('#edit-title').val($('#edit-field-story-long-head-line-und-0-value').val());
+                     $('#edit-title').keypress(function() {
+                     $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
                      });
                      
 

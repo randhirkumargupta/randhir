@@ -39,7 +39,7 @@ function feature_for_breaking_news_views_default_views() {
     'counter' => 'counter',
     'title' => 'title',
     'field_type' => 'field_type',
-    'field_section' => 'field_section',
+    'field_display_on' => 'field_display_on',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'nothing' => 'nothing',
@@ -69,7 +69,9 @@ function feature_for_breaking_news_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_section' => array(
+    'field_display_on' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -248,12 +250,11 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_type']['table'] = 'field_data_field_type';
   $handler->display->display_options['fields']['field_type']['field'] = 'field_type';
   $handler->display->display_options['fields']['field_type']['element_label_colon'] = FALSE;
-  /* Field: Content: Section */
-  $handler->display->display_options['fields']['field_section']['id'] = 'field_section';
-  $handler->display->display_options['fields']['field_section']['table'] = 'field_data_field_section';
-  $handler->display->display_options['fields']['field_section']['field'] = 'field_section';
-  $handler->display->display_options['fields']['field_section']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_section']['delta_offset'] = '0';
+  /* Field: Content: Display on */
+  $handler->display->display_options['fields']['field_display_on']['id'] = 'field_display_on';
+  $handler->display->display_options['fields']['field_display_on']['table'] = 'field_data_field_display_on';
+  $handler->display->display_options['fields']['field_display_on']['field'] = 'field_display_on';
+  $handler->display->display_options['fields']['field_display_on']['element_label_colon'] = FALSE;
   /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';

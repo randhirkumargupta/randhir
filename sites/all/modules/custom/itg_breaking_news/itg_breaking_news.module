@@ -66,6 +66,11 @@ function itg_breaking_news_theme($existing, $type, $theme, $path) {
  * @param string $form_id
  */
 function itg_breaking_news_form_alter(&$form, &$form_state, $form_id){
+  global $user;
+  //code to hide source field
+  if($user->uid != '1') {
+   $form['field_source']['#access'] = FALSE;
+  }
   // code to add taxonomy parent terms with no child
   $vid = taxonomy_vocabulary_machine_name_load('category_management')->vid;
   $tax=taxonomy_get_tree($vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);

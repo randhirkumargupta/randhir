@@ -956,7 +956,7 @@ node/*/edit',
   'delta' => 'story_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -13,
+  'weight' => -14,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2555,7 +2555,7 @@ node/*/edit',
   'delta' => 'menu-admin-left-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -15,
+  'weight' => -16,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2633,7 +2633,7 @@ expired-story',
   'delta' => 'menu-story-content-admin-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -14,
+  'weight' => -15,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2744,7 +2744,7 @@ expired-story',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/breaking-news
@@ -2773,7 +2773,7 @@ node/*/edit',
   'delta' => 'breaking_news_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -12,
+  'weight' => -13,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2789,7 +2789,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/breaking-news
@@ -2804,7 +2804,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/breaking-news
@@ -2819,10 +2819,100 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/breaking-news
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 198,
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/photogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 199,
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/photogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 200,
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -12,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/photogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 201,
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/photogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 202,
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/photogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 203,
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/photogallery
 node/*/edit',
   'title' => '',
   'cache' => 8,
@@ -2833,11 +2923,21 @@ node/*/edit',
   'type' => 'breaking_news',
 );
   $export['block_node_type'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'type' => 'photogallery',
+);
+  $export['block_node_type'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'type' => 'story',
 );
   $export['block_role'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 4,
@@ -2861,6 +2961,11 @@ node/*/edit',
   'module' => 'system',
   'delta' => 'main',
   'rid' => 4,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'rid' => 5,
 );
   $export['block_role'][] = array(
   'module' => 'itg_story',
@@ -2888,6 +2993,11 @@ node/*/edit',
   'rid' => 5,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 6,
@@ -2913,6 +3023,11 @@ node/*/edit',
   'rid' => 6,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'rid' => 7,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 7,
@@ -2938,6 +3053,11 @@ node/*/edit',
   'rid' => 7,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'rid' => 8,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 8,
@@ -2963,6 +3083,11 @@ node/*/edit',
   'rid' => 8,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'rid' => 9,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 9,
@@ -2986,6 +3111,11 @@ node/*/edit',
   'module' => 'system',
   'delta' => 'main',
   'rid' => 9,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'rid' => 10,
 );
   $export['block_role'][] = array(
   'module' => 'itg_story',
@@ -3008,8 +3138,18 @@ node/*/edit',
   'rid' => 10,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
   'rid' => 20,
 );
   $export['block_role'][] = array(
