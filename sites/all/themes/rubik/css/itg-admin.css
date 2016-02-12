@@ -276,7 +276,8 @@ form fieldset.date-combo .container-inline-date .date-padding .form-item{
 .node-story-form .ckeditor_links, 
 .node-breaking_news-form .ckeditor_links, 
 .node-story-form .text-format-wrapper .filter-wrapper, 
-.node-story-form .text-format-wrapper .description{
+.node-story-form .text-format-wrapper .description, 
+.node-form .ckeditor_links{
   margin-left: 300px; 
 }
 .node-story-form #Templates th.field-label label{
@@ -296,13 +297,15 @@ form .form-item .form-item{
 }
 #block-itg-story-story-tab-form-block, 
 #block-itg-breaking-news-breaking-news-tab-form-block, 
-#block-menu-menu-story-content-admin-menu{
+#block-menu-menu-story-content-admin-menu, 
+#block-itg-photogallery-photogallery-tab-form-block{
   border-left: none;
   border-right: none;
 }
 #block-itg-story-story-tab-form-block .block-content, 
 #block-itg-breaking-news-breaking-news-tab-form-block .block-content, 
-#block-menu-menu-story-content-admin-menu .block-content{
+#block-menu-menu-story-content-admin-menu .block-content, 
+#block-itg-photogallery-photogallery-tab-form-block .block-content{
   padding: 0;
 }
 .block-itg-story-list, #block-menu-menu-story-content-admin-menu .block-content .ul{
@@ -337,7 +340,8 @@ form .form-item .form-item{
   background-color: #008eb1;
 }
 .block-itg-story.fixed, 
-.block-itg-breaking-news.fixed{
+.block-itg-breaking-news.fixed, 
+.block-itg-photogallery.fixed{
   position: fixed;
   width: 100%;
   z-index: 9999;
@@ -607,9 +611,12 @@ table.sticky-header{z-index: 99;}
 .pre-desc{margin: -20px 0 10px; font-size: 12px; padding-left: 300px;}
 .attachment .count{display: inline-block; vertical-align: middle; padding: 5px 2px;}
 .workbench-moderation-moderate-form .form-type-select{display: inline-block; vertical-align: middle;}
-#edit-field-issue-title .date-combo legend{display: none;}
 #edit-field-issue-title .date-combo .form-text{float: left;}
 form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-padding .form-item{width: 100%;}
-form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-padding label{padding-top: 5px;}
-#edit-field-issue-title .date-combo .fieldset-content{width: 100%;}
+form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-padding label{display: none;}
 #edit-field-issue-title .date-combo .fieldset-content .date-clear{clear: none;}
+.views-action-separator{color: #212121;}
+.node-photogallery-form #edit-field-gallery-image .form-item label{width: 140px;}
+.node-photogallery-form #edit-field-gallery-image .image-widget-data .form-item .form-text{max-width: 100% !important;}
+.node-photogallery-form #edit-field-gallery-image .description{padding-left: 140px;}
+.node-photogallery-form #edit-field-gallery-image .image-widget-data .description{padding-left: 0;}
