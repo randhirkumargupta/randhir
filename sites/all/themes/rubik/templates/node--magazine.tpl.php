@@ -34,8 +34,11 @@
  * 
  * @ingroup themeable
  */
+
 ?>
-<div>Magazine Title: <?php print $title; ?>
-<?php print render($content) ?>
-  Status: <?php print $status ? 'Published' : 'Unpublished'; ?>
+<div>
+  <div>Magazine Title: <?php print $title; ?></div>
+  <div>Magazine Cover Image: <img src="<?php print image_style_url("thumbnail", $node->field_magazine_cover_photo[LANGUAGE_NONE][0]['uri']); ?>" /></div>
+  <div>Print Issue Date : <?php print $node->field_print_magazine_issue_date[LANGUAGE_NONE][0]['value']; ?></div>
+  <div>Status: <?php print $status ? 'Published' : 'Unpublished';?></div>
 </div>

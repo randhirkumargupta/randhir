@@ -61,7 +61,6 @@ function itg_msi_node_access($node, $op, $account) {
  * @param String $form_id
  */
 function itg_msi_form_alter(&$form, &$form_state, $form_id){
-  
   //Set destination for magazine form
   if ($form_id == 'magazine_node_form') {
     $destination = 'manage-magazines';
@@ -149,12 +148,12 @@ function _submit_handler_for_redirect($form, &$form_state) {
  * @return Array
  */
 function itg_msi_form_after_build($form, &$form_state){
-  
-  global $base_url;
+  global $user, $base_url;
   
   //Array used in itg_msi.js
   $settings = array();
   $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_msi' => array('settings' => $settings)), array('type' => 'setting'));
   
   //Add JS for magazine, supplement and issue
@@ -174,19 +173,22 @@ function itg_msi_views_pre_render(&$view) {
   
   //Add "Create Magazine" button on listing page of magazine
   if ($view->name == "manage_magazines") {
-    $header_content_magazine = '<a href="./node/add/magazine">Create Magazine</a>';
+    $header_content_magazine = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_magazine .= '<a href="./node/add/magazine">Create Magazine</a>';
     $view->attachment_before = $header_content_magazine;
   }
   
   //Add "Create Supplement" button on listing page of supplement
   if ($view->name == "manage_supplements") {
-    $header_content_supplement = '<a href="./node/add/supplement">Create Supplement</a>';
+    $header_content_supplement = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_supplement .= '<a href="./node/add/supplement">Create Supplement</a>';
     $view->attachment_before = $header_content_supplement;
   }
   
   //Add "Create Issue" button on listing page of issue
   if ($view->name == "manage_issues") {
-    $header_content_issue = '<a href="./node/add/issue">Create Issue</a>';
+    $header_content_issue = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
     $view->attachment_before = $header_content_issue;
   }
 }
