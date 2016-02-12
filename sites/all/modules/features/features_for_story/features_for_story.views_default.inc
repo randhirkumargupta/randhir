@@ -31,6 +31,7 @@ function features_for_story_views_default_views() {
     6 => '6',
     8 => '8',
     20 => '20',
+    10 => '10',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -378,6 +379,24 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S. No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Bulk operations: Content */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::node_unpublish_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 1,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -618,6 +637,7 @@ function features_for_story_views_default_views() {
     6 => '6',
     8 => '8',
     20 => '20',
+    10 => '10',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
@@ -734,12 +754,19 @@ function features_for_story_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Workbench Moderation: State */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['label'] = 'Status';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Field: Content: Schedule date & time */
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['id'] = 'field_story_schedule_date_time_1';
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['table'] = 'field_data_field_story_schedule_date_time';
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['field'] = 'field_story_schedule_date_time';
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['label'] = 'Status';
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -880,6 +907,41 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['id'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['table'] = 'field_data_field_story_schedule_date_time';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['field'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['operator_id'] = 'field_story_schedule_date_time_value_op';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['label'] = 'Status';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['operator'] = 'field_story_schedule_date_time_value_op';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['identifier'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    8 => 0,
+    20 => 0,
+    6 => 0,
+    10 => 0,
+    19 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['granularity'] = 'minute';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'published-story';
 
   /* Display: My Un Published Story */
@@ -1164,6 +1226,7 @@ function features_for_story_views_default_views() {
     7 => '7',
     8 => '8',
     20 => '20',
+    10 => '10',
     9 => '9',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
@@ -1610,12 +1673,19 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Published */
-  $handler->display->display_options['fields']['status']['id'] = 'status';
-  $handler->display->display_options['fields']['status']['table'] = 'node';
-  $handler->display->display_options['fields']['status']['field'] = 'status';
-  $handler->display->display_options['fields']['status']['label'] = 'Status';
-  $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: Content: Schedule date & time */
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['id'] = 'field_story_schedule_date_time_1';
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['table'] = 'field_data_field_story_schedule_date_time';
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['field'] = 'field_story_schedule_date_time';
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['label'] = 'Status';
+  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1758,6 +1828,41 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['id'] = 'field_story_schedule_date_time_value_1';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['table'] = 'field_data_field_story_schedule_date_time';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['field'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['operator_id'] = 'field_story_schedule_date_time_value_1_op';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['label'] = 'Status';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['operator'] = 'field_story_schedule_date_time_value_1_op';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['identifier'] = 'field_story_schedule_date_time_value_1';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    8 => 0,
+    20 => 0,
+    6 => 0,
+    10 => 0,
+    19 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['granularity'] = 'minute';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'my-published-story';
 
   /* Display: My queue */
@@ -1767,7 +1872,9 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    4 => '4',
     7 => '7',
+    9 => '9',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
@@ -2774,6 +2881,7 @@ function features_for_story_views_default_views() {
     6 => '6',
     8 => '8',
     20 => '20',
+    10 => '10',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
@@ -3128,6 +3236,7 @@ function features_for_story_views_default_views() {
     6 => '6',
     8 => '8',
     20 => '20',
+    10 => '10',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */

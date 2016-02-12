@@ -273,6 +273,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -295,6 +296,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -306,6 +308,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -318,6 +321,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -329,6 +333,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -340,6 +345,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -351,6 +357,7 @@ function user_management_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
     ),
     'module' => 'workbench_moderation',
   );

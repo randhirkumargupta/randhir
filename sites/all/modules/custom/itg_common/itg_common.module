@@ -208,6 +208,8 @@ function itg_common_theme($existing, $type, $theme, $path) {
  * @param type $account
  */
 function itg_common_user_login(&$edit, $account) {
+  global $user;
+  
   if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
     $edit['redirect'] = 'cms-user-dashboard';
   }

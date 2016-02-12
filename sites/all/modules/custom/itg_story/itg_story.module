@@ -282,16 +282,3 @@ function itg_story_permission() {
   );
 }
 
-
-/**
- * Implementation of hook_views_query_alter
- * @param type $view
- * @param type $query 
- */
-function itg_story_views_query_alter(&$view, &$query) {
-
-  if ($view->name == 'strory_menegment') {
-
-    // p($view->query->where);
-  }
-}
