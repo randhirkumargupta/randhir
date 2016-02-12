@@ -96,7 +96,7 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id){
         '#value' => t('Cancel'),
     );
     
-   
+    
     $form['#after_build'][] = 'itg_breaking_news_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
   }
@@ -135,6 +135,10 @@ function itg_breaking_news_views_pre_render(&$view) {
 function itg_breaking_news_after_build($form, &$form_state) {
   
   global $user, $base_url;
+  
+  //Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
