@@ -1131,7 +1131,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Long headline',
+    'description' => 'Story title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1150,8 +1150,8 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_long_head_line',
-    'label' => 'Long headline',
-    'required' => 1,
+    'label' => 'Story title',
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -1164,7 +1164,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -2073,7 +2073,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_templates',
-    'label' => 'Select guru templates',
+    'label' => 'Select listicle templates',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -2205,7 +2205,6 @@ function features_for_story_field_default_field_instances() {
   t('Issue based story');
   t('Large image');
   t('Listicle');
-  t('Long headline');
   t('Magazine Kicker Text');
   t('Magazine headline');
   t('Magazine kicker text');
@@ -2215,7 +2214,7 @@ function features_for_story_field_default_field_instances() {
   t('Redirection URL');
   t('Schedule date & time');
   t('Section');
-  t('Select guru templates');
+  t('Select listicle templates');
   t('Select magazine');
   t('Select supplement');
   t('Short headline');
@@ -2229,6 +2228,7 @@ function features_for_story_field_default_field_instances() {
   t('Story expiry date');
   t('Story kicker text');
   t('Story rating');
+  t('Story title');
   t('Templates Factoids');
   t('This headline shows on the homepage');
   t('This is the redirection URL for the New Title added above (url format: https://www.w3schools.com)');

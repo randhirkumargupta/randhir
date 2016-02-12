@@ -14,7 +14,7 @@ function features_for_story_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_story';
-  $strongarm->value = 'edit-workflow';
+  $strongarm->value = 'edit-submission';
   $export['additional_settings__active_tab_story'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -110,7 +110,7 @@ function features_for_story_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '4',
+          'weight' => '3',
         ),
         'metatags' => array(
           'weight' => '43',
