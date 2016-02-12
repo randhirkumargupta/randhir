@@ -26,14 +26,13 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    3 => '3',
     4 => '4',
-    5 => '5',
-    6 => '6',
     7 => '7',
-    20 => '20',
-    10 => '10',
-    9 => '9',
+    11 => '11',
+    12 => '12',
+    17 => '17',
+    18 => '18',
+    19 => '19',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -141,6 +140,13 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Issues Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
@@ -151,6 +157,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -172,6 +179,13 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_story_select_supplement']['settings'] = array(
     'link' => 0,
   );
+  /* Field: Content: Section */
+  $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
+  $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
@@ -203,6 +217,13 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'short';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = 'Status';
+  $handler->display->display_options['fields']['status']['type'] = 'published-notpublished';
+  $handler->display->display_options['fields']['status']['not'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -215,6 +236,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
+  $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">[delete_node]</span>';
   /* Field: Global: Custom text */
@@ -256,7 +278,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Search Issue';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -280,6 +302,68 @@ function features_supplement_magazine_views_default_views() {
     10 => 0,
     15 => 0,
   );
+  /* Filter criterion: Content: Nid */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'node';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['label'] = 'Nid';
+  $handler->display->display_options['filters']['nid']['expose']['operator'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['identifier'] = 'nid';
+  $handler->display->display_options['filters']['nid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    12 => 0,
+    19 => 0,
+    7 => 0,
+    17 => 0,
+    11 => 0,
+    18 => 0,
+    16 => 0,
+    8 => 0,
+    5 => 0,
+    13 => 0,
+    14 => 0,
+    9 => 0,
+    6 => 0,
+    10 => 0,
+    15 => 0,
+  );
+  /* Filter criterion: Content: Section (field_story_category) */
+  $handler->display->display_options['filters']['field_story_category_tid']['id'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'Category';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator'] = 'field_story_category_tid_op';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['identifier'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    12 => 0,
+    19 => 0,
+    7 => 0,
+    17 => 0,
+    11 => 0,
+    18 => 0,
+    16 => 0,
+    8 => 0,
+    5 => 0,
+    13 => 0,
+    14 => 0,
+    9 => 0,
+    6 => 0,
+    10 => 0,
+    15 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -302,14 +386,13 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    3 => '3',
     4 => '4',
-    5 => '5',
-    6 => '6',
     7 => '7',
-    20 => '20',
-    10 => '10',
-    9 => '9',
+    11 => '11',
+    12 => '12',
+    17 => '17',
+    18 => '18',
+    19 => '19',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -379,6 +462,13 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Magazine Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
@@ -557,6 +647,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
+  $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">[delete_node]</span>';
   /* Field: Global: Custom text */
@@ -692,14 +783,13 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    3 => '3',
     4 => '4',
-    5 => '5',
-    6 => '6',
     7 => '7',
-    20 => '20',
-    10 => '10',
-    9 => '9',
+    11 => '11',
+    12 => '12',
+    17 => '17',
+    18 => '18',
+    19 => '19',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -769,6 +859,13 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Supplement Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -818,6 +915,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
+  $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">[delete_node]</span>';
   /* Field: Global: Custom text */
