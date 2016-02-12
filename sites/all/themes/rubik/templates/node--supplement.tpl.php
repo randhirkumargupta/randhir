@@ -35,7 +35,10 @@
  * @ingroup themeable
  */
 ?>
-<div>Supplement Title: <?php print $title; ?>
-<?php print render($content) ?>
-  Status: <?php print $status ? 'Published' : 'Unpublished'; ?>
+<div>
+  <div>Supplement Title: <?php print $title; ?></div>
+  <div>Magazine: <?php print $node->field_supp_select_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div>
+  <div>Supplement Large Cover Image: <img src="<?php print image_style_url("thumbnail", $node->field_supp_large_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div>
+  <div>Small Large Cover Image: <img src="<?php print image_style_url("thumbnail", $node->field_supp_small_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div>
+  <div>Status: <?php print $status ? 'Published' : 'Unpublished';?></div>
 </div>

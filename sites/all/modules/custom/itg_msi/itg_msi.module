@@ -61,7 +61,6 @@ function itg_msi_node_access($node, $op, $account) {
  * @param String $form_id
  */
 function itg_msi_form_alter(&$form, &$form_state, $form_id){
-  
   //Set destination for magazine form
   if ($form_id == 'magazine_node_form') {
     $destination = 'manage-magazines';
@@ -149,12 +148,12 @@ function _submit_handler_for_redirect($form, &$form_state) {
  * @return Array
  */
 function itg_msi_form_after_build($form, &$form_state){
-  
-  global $base_url;
+  global $user, $base_url;
   
   //Array used in itg_msi.js
   $settings = array();
   $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_msi' => array('settings' => $settings)), array('type' => 'setting'));
   
   //Add JS for magazine, supplement and issue

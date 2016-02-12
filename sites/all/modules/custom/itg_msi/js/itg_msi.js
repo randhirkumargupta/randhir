@@ -5,9 +5,16 @@
 (function($) {
   Drupal.behaviors.itg_msi = {
     attach: function(context, settings) {
+      //Hide left side vertical tabs in case of simple users
+      var uid = settings.itg_msi.settings.uid;
+       if (uid != 1) {
+        $('.field-edit-link').hide();
+        $('#edit-body-und-0-format').hide();
+        $('.vertical-tabs-list').hide();
+        $('#edit-metatags').show();
+       }
       
       var base_url = settings.itg_msi.settings.base_url;
-    
       //Restrict print issue date to select previous date in magazine form 
       $('#edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-0').datepicker({
         changeYear: true,
@@ -33,7 +40,7 @@
           dataType: "JSON",
           success: function(data) {
             if (data.Code === 1) {
-              $(".form-item-title").append($('<label class="title-exist-error error">' + type + ' title already exist.</label>'));
+              $(".form-item-title").append($('<span class="error">Magazine title '+trimmed_title+' already exist.</span>'));
               $("#edit-submit").hide();
             }
             else {
