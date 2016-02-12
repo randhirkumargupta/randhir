@@ -37,7 +37,7 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_workflow_after_build($form, &$form_state) {
  global $user, $base_url;
-  p($form);
+  //p($form);
  // hide workbench dropdown
   drupal_add_js('jQuery(document).ready(function() {
               jQuery(".form-item-workbench-moderation-state-new").hide();                    
