@@ -3149,6 +3149,11 @@ node/*/edit',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-story-content-admin-menu',
   'rid' => 20,
 );

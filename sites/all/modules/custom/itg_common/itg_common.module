@@ -201,3 +201,14 @@ function itg_common_theme($existing, $type, $theme, $path) {
 
   return $themes;
 }
+
+/**
+ * Implements hook_user_login.
+ * @param type $edit
+ * @param type $account
+ */
+function itg_common_user_login(&$edit, $account) {
+  if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+    $edit['redirect'] = 'cms-user-dashboard';
+  }
+}
