@@ -155,7 +155,7 @@ function itg_workflow_views_query_alter(&$view, &$query) {
   
   // < published
   // >= approved
-  
+  //p($view->query);
   if ((!isset($_REQUEST['field_story_schedule_date_time_value_1_op'])) && $view->current_display == 'page_5') {
     unset($view->query->where[1]['conditions'][4]);
   } else if ((!isset($_REQUEST['field_story_schedule_date_time_value_op'])) && $view->current_display == 'page_1') {
@@ -163,3 +163,4 @@ function itg_workflow_views_query_alter(&$view, &$query) {
   }  
   
 }
+
