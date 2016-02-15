@@ -26,14 +26,14 @@ function itg_story_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_story.inc',
   );
-  $items['story-title-list/autocomplete'] = array(
-    'page callback' => 'itg_story_get_story_title',
+  $items['content-title-list/%/autocomplete'] = array(
+    'page callback' => 'itg_story_get_content_title',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
-  $items['story-nid-list/autocomplete'] = array(
-    'page callback' => 'itg_story_get_story_nid',
+  $items['content-nid-list/%/autocomplete'] = array(
+    'page callback' => 'itg_story_get_content_nid',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
@@ -169,9 +169,9 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'
            || $form['#id'] == 'views-exposed-form-manage-issues-page'
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
-     $form['title']['#autocomplete_path'] = 'story-title-list/autocomplete';
+     $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
-     $form['nid']['#autocomplete_path'] = 'story-nid-list/autocomplete';
+     $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Nid'));
    }
    
@@ -260,7 +260,9 @@ function itg_story_after_build($form, &$form_state) {
   global $user, $base_url;
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
-  $form['metatags']['#prefix'] = '<div class="story-title">Meta Tags</div>';
+  //$form['metatags']['#prefix'] = '<div class="story-title">Meta Tags</div>';
+  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
+  $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';
   $form['revision_information']['log']['#title'] = 'Remarks';
   $settings = array();
   $settings['base_url'] = $base_url;
@@ -283,3 +285,42 @@ function itg_story_permission() {
   );
 }
 
+/**
+ * Abreaking news create after story create.
+ * @param type $story_node 
+ */
+function itg_story_create_breaking_news($story_node) {  
+  global $user; 
+ 
+  $node = new stdClass();
+  $node->title = $story_node->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
+  $node->type = "breaking_news";
+  
+  node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+  
+  $node->language = LANGUAGE_NONE;
+  $node->field_content_type[LANGUAGE_NONE][0]['value']  = 'Story';
+  $node->field_source[LANGUAGE_NONE][0]['value']  = 'Story';
+  $node->field_stroy_city[LANGUAGE_NONE][0]['tid']= $story_node->field_stroy_city[LANGUAGE_NONE][0]['tid'];
+  $node->uid = $user->uid;
+  $node->status = 1; //(1 or 0): Published or not
+  $node->promote = 0; //(1 or 0): Promoted to front page
+  $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
+  //$node = node_submit($node); // Prepare node for saving
+  node_save($node);
+  
+}
+
+/**
+ * Implements hook_permission.
+ * @param type $node
+ */
+function itg_story_node_insert($node) {
+ 
+  foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+    if ($val['value'] == 'breaking_news') {
+      itg_story_create_breaking_news($node);
+    }
+  }
+    
+}
