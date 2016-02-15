@@ -36,6 +36,8 @@
  */
 
 ?>
+<h3>Preview full version</h3>
+<a class="close-preview" href="javascript:;"> </a>
 <div class="cm-node-view">
   <div class="field-div"><div class="field-label">Magazine Title: </div><div class="field-item"><?php print $title; ?></div></div>
   <div class="field-div"><div class="field-label">Magazine Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_magazine_cover_photo[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
