@@ -58,6 +58,30 @@ function itg_breaking_news_theme($existing, $type, $theme, $path) {
   return $themes;
 }
 
+/**
+ * Implement node_delete_confirm_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param string $form_id
+ */
+function itg_breaking_news_form_node_delete_confirm_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($user->uid != '1') {
+    //Check if we have a node id and stop if not
+    if (empty($form['nid']['#value'])) {
+      return;
+    }
+    //Load the node from the form
+    $node = node_load($form['nid']['#value']);
+    // condition if node is publish and type is breaking news
+    if ($node->status == 1 && $node->type = 'breaking_news ') {
+      drupal_set_title('Published news cannot be deleted. Please unpublished the news first and try again.');
+      unset($form['description']);
+      unset($form['actions']['submit']);
+    }
+  }
+}
 
 /**
  * Implement hook_form_alter
@@ -67,6 +91,7 @@ function itg_breaking_news_theme($existing, $type, $theme, $path) {
  */
 function itg_breaking_news_form_alter(&$form, &$form_state, $form_id){
   global $user;
+  
   //code to hide source field
   if($user->uid != '1') {
    $form['field_source']['#access'] = FALSE;
@@ -125,6 +150,22 @@ function itg_breaking_news_views_pre_render(&$view) {
     $header_content_breaking = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
     $header_content_breaking .= '<a href="./node/add/breaking-news">Create Breaking News</a>';
     $view->attachment_before = $header_content_breaking;
+  }
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_breaking_news_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+//p($form);
+  //Get the Form Id
+  if ($form["#id"] == 'views-exposed-form-breaking-news-page') {
+    //$form['status']['#options']["All"] = '- All -';
+    $form['status']['#options'][1] = 'Published';
+    $form['status']['#options'][0] = 'Unpublished';
+      
   }
 }
 
