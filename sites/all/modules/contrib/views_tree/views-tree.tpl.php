@@ -1,7 +1,6 @@
 <?php if (!empty($title)) : ?>
     <h3><?php print $title; ?></h3>
-<?php endif; ?>
-
+<?php endif; ?>    
 <div class="tree-items">
 <?php $max = count($rows); $count = 0; ?>
 <?php foreach ($rows as $id => $row): $count++; ?>
