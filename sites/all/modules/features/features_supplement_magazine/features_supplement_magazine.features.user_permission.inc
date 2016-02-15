@@ -89,8 +89,6 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['delete any issue content'] = array(
     'name' => 'delete any issue content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -100,8 +98,6 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['delete any magazine content'] = array(
     'name' => 'delete any magazine content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -111,8 +107,6 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['delete any supplement content'] = array(
     'name' => 'delete any supplement content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -122,8 +116,6 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['delete own issue content'] = array(
     'name' => 'delete own issue content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -133,8 +125,6 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['delete own magazine content'] = array(
     'name' => 'delete own magazine content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -144,8 +134,6 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['delete own supplement content'] = array(
     'name' => 'delete own supplement content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',

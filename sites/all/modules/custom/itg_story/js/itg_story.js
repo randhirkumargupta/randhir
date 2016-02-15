@@ -23,6 +23,8 @@
                      $('#edit-field-story-facebook-image').hide();
                      $('#edit-field-story-expiry-date').hide();
                      $('#edit-field-story-archive').hide();
+                     $('#edit-path').show();
+                     
                      
                      // code for Magazine and Supplement field show on edit story form
                      if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(':checked')) {                         
