@@ -644,6 +644,12 @@ function features_for_story_views_default_views() {
     20 => '20',
     10 => '10',
   );
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -916,6 +922,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['id'] = 'field_story_schedule_date_time_value';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['table'] = 'field_data_field_story_schedule_date_time';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['field'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['operator_id'] = 'field_story_schedule_date_time_value_op';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['label'] = 'Status';
@@ -1852,6 +1859,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['id'] = 'field_story_schedule_date_time_value_1';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['table'] = 'field_data_field_story_schedule_date_time';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['field'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['operator_id'] = 'field_story_schedule_date_time_value_1_op';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['label'] = 'Status';
