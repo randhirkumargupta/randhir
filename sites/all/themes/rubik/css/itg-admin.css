@@ -66,7 +66,10 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
   max-width: 400px !important;
 }
 textarea.form-textarea{resize: none; height: 90px;}
-.page-node-add-story .preview-wrapper, .node-type-story .preview-wrapper{
+.page-node-add-story .preview-wrapper, 
+.page-node-add-magazine .preview-wrapper, 
+.node-type-magazine .preview-wrapper, 
+.node-type-story .preview-wrapper{
   background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
   left: 0;
@@ -75,7 +78,10 @@ textarea.form-textarea{resize: none; height: 90px;}
   width: 100%;
   z-index: 9999;
 }
-.page-node-add-story .preview, .node-type-story .preview{
+.page-node-add-story .preview, 
+.page-node-add-magazine .preview, 
+.node-type-story .preview,
+.node-type-magazine .preview{
   background-color: #fff;
   left: 0;
   margin: 0 auto;
@@ -87,7 +93,9 @@ textarea.form-textarea{resize: none; height: 90px;}
   overflow: hidden;
 }
 .page-node-add-story .preview > h3,
-.node-type-story .preview > h3{
+.node-type-story .preview > h3,
+.page-node-add-magazine .preview > h3,
+.node-type-magazine .preview > h3{
   font-size: 24px;
   padding: 20px;
 }
@@ -101,7 +109,10 @@ textarea.form-textarea{resize: none; height: 90px;}
   text-indent: -9999px;
   display: none;
 }
-.page-node-add-story .close-preview, .node-type-story .close-preview{
+.page-node-add-story .close-preview, 
+.node-type-story .close-preview, 
+.page-node-add-magazine .close-preview,
+.node-type-magazine .close-preview{
   display: block;
 }
 .preview .column-main{
@@ -631,3 +642,4 @@ form fieldset.date-combo .container-inline-date .date-padding .form-item span.er
 #edit-field-common-audio-file .form-type-managed-file .form-managed-file .form-file{float: left;}
 .form-type-managed-file .form-managed-file span.file, 
 .form-type-managed-file .form-managed-file span.file-size{float: left; padding-top: 5px;} 
+.cm-node-view{padding: 20px; border-top: 1px solid #eee;}
