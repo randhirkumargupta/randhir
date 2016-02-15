@@ -14,36 +14,38 @@
         $('#edit-metatags').show();
        }
       
+      //Collect values assigned in settings array 
       var base_url = settings.itg_msi.settings.base_url;
+      var type = settings.itg_msi.settings.type;
+      var nid = settings.itg_msi.settings.nid;
+
       //Restrict print issue date to select previous date in magazine form 
+      if(type === 'Magazine'){
       $('#edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-0').datepicker({
         changeYear: true,
         minDate: '0',
         readonly: true
       });
-
+      }
       //Check duplicacy on title for magazine
-      $('.page-node-add-magazine #edit-title').blur(function() {
-        
-        var pageUrl = window.location.href;
-        var type = pageUrl.split(/[/ ]+/).pop();
-
-        $(".form-item-title .title-exist-error").remove();
+      $('#magazine-node-form #edit-title, #supplement-node-form #edit-title').blur(function() {
+        $(".form-item-title .error").remove();
         var title = $('#edit-title').val();
         var trimmed_title = $.trim(title);
         
         //Call Ajax
         $.ajax({
-          url: base_url + "/check-duplicate-title/" + type,
+          url: base_url + "/check-duplicate-title/" + type + '/'+nid,
           type: 'post',
           data: {'title': trimmed_title},
           dataType: "JSON",
           success: function(data) {
             if (data.Code === 1) {
-              $(".form-item-title").append($('<span class="error">Magazine title '+trimmed_title+' already exist.</span>'));
+              $(".form-item-title").append($('<span class="error">'+type+' title '+trimmed_title+' already exist.</span>'));
               $("#edit-submit").hide();
             }
             else {
+              $(".form-item-title .error").remove();
               $("#edit-submit").show();
             }
           }
