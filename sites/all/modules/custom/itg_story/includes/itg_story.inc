@@ -27,14 +27,16 @@ function itg_story_reporter_details() {
 *  
 */
 
-function itg_story_get_story_title($title) { 
+function itg_story_get_content_title($title) {
+  
     if (strlen(trim($title)) > 0) {
+      $content_type = arg(1);
       $options = '';
       $title = strtolower(trim($title));
       $query = db_select('node', 'n');
       $query->fields('n', array('title'));
       $query->condition('title', '%'.$title.'%', 'LIKE');
-      $query->condition('n.type', 'story', '=');
+      $query->condition('n.type', $content_type, '=');
       $query->condition('n.status', 1, '=');
       $query->range(0, 20);
       
@@ -51,14 +53,15 @@ function itg_story_get_story_title($title) {
 *  
 */
 
-function itg_story_get_story_nid($nid) { 
+function itg_story_get_content_nid($nid) { 
     if (strlen(trim($nid)) > 0) {
+      $content_type = arg(1);
       $options = '';
       $nid = strtolower(trim($nid));
       $query = db_select('node', 'n');
       $query->fields('n', array('nid'));
       $query->condition('nid', '%'.$nid.'%', 'LIKE');
-      $query->condition('n.type', 'story', '=');
+      $query->condition('n.type', $content_type, '=');
       $query->condition('n.status', 1, '=');
       $query->range(0, 20);
       

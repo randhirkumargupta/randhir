@@ -578,8 +578,8 @@ form.node-story-form .path-form.fieldset.titled > .fieldset-content{padding: 10p
 .page-user-edit .form-type-managed-file .image-widget div.image-widget-data input[type="file"]{float: left;}
 .page-admin-people-create .form-actions #edit-cancel,
 .page-user-edit .field-type-image .button-remove{display: inline-block; float: none;}
-.page-user-edit div.image-widget-data{position: relative;}
-.page-user-edit div.image-widget-data .ajax-progress{position: absolute; left: 100%; top: 0;}
+div.image-widget-data{position: relative;}
+div.image-widget-data .ajax-progress{position: absolute; left: 100%; top: 0;}
 .user-profile-div .field-name-field-user-picture .field-label{display: none;}
 form .path-form .form-item-path-pathauto{padding-left: 300px;}
 form .path-form .form-item-path-pathauto label{float: none;}
@@ -627,3 +627,7 @@ form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-pa
 .cm-node-view .field-div{display: inline-block; vertical-align: top; width: 100%; padding-bottom: 10px;}
 .cm-node-view .field-div .field-label{float: left; width: 240px;}
 .cm-node-view .field-div .field-item{float: left; width: 560px;}
+form fieldset.date-combo .container-inline-date .date-padding .form-item span.error{padding-left: 0;}
+#edit-field-common-audio-file .form-type-managed-file .form-managed-file .form-file{float: left;}
+.form-type-managed-file .form-managed-file span.file, 
+.form-type-managed-file .form-managed-file span.file-size{float: left; padding-top: 5px;} 

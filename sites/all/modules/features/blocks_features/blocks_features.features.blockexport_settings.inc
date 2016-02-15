@@ -2624,7 +2624,8 @@ my-queue-story
 in-queue-story
 my-expired-story
 expired-story
-archive-story',
+archive-story
+my-rejected-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2647,7 +2648,8 @@ my-queue-story
 in-queue-story
 my-expired-story
 expired-story
-archive-story',
+archive-story
+my-rejected-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2670,7 +2672,8 @@ my-queue-story
 in-queue-story
 my-expired-story
 expired-story
-archive-story',
+archive-story
+my-rejected-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2693,7 +2696,8 @@ my-queue-story
 in-queue-story
 my-expired-story
 expired-story
-archive-story',
+archive-story
+my-rejected-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2716,7 +2720,8 @@ my-queue-story
 in-queue-story
 my-expired-story
 expired-story
-archive-story',
+archive-story
+my-rejected-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2739,7 +2744,8 @@ my-queue-story
 in-queue-story
 my-expired-story
 expired-story
-archive-story',
+archive-story
+my-rejected-story',
   'title' => '<none>',
   'cache' => -1,
 );
