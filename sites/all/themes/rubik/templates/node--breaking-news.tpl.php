@@ -96,17 +96,34 @@
                     $description = render($content['body']);?>
                     <?php if (!empty($short_des) || !empty($description)): ?>
             <div class="description-details content-box">
-                <h2>Description</h2>
-                    <?php
+                                    <?php
                     if (!empty($short_des)):
                     print render($content['field_label']);
                     ?>
                     <?php endif; ?>
                     <?php if (!empty($description)): ?>
-                <div class="field-label">Description</div><div class="breaking-content-details"><?php print render($content['body']); ?></div> 
+                <div class="breaking-content-details"><?php print render($content['body']); ?></div> 
                 <?php endif; ?>
             </div>
                 <?php endif; ?>
+        <?php 
+            $browsemediaextra = render($content['field_story_extra_large_image']);
+            $browsemedialarge = render($content['field_story_large_image']);
+            $browsemediamedium = render($content['field_story_medium_image']);
+            $browsemediasmall = render($content['field_story_small_image']);
+            $browsemediaextrasmall = render($content['field_story_extra_small_image']);
+            if(!empty($browsemedia) || !empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediaextrasmall)):?>
+          <div class="BrowseMedia">
+            <h2>BrowseMedia</h2>
+            <div class="content-details">
+            <?php print render($content['field_story_extra_large_image']); ?>
+            <?php print render($content['field_story_large_image']); ?>
+            <?php print render($content['field_story_medium_image']); ?>
+            <?php print render($content['field_story_small_image']); ?>
+            <?php print render($content['field_story_extra_small_image']); ?>
+            </div>
+          </div>
+           <?php endif;?>
                     <?php
                     $notification = render($content['field_notification']);
                     if (!empty($notification)):
@@ -121,7 +138,9 @@
                     if (!empty($display_on)):
                     ?>
               <div class="display content-box">
+                  <?php if($cnd != '') { ?>
                   <h2>Display on</h2>
+                  <?php } ?>
                     <?php
                     $cnd = $content['field_display_on']['#items']['0']['value'];
                     if ($cnd = 'Home Page') {
