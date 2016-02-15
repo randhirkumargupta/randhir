@@ -51,7 +51,7 @@ function feature_category_management_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Selection Details',
-    'weight' => '2',
+    'weight' => '3',
     'children' => array(
       0 => 'field_cm_select_type',
     ),
@@ -85,6 +85,7 @@ function feature_category_management_field_group_info() {
       1 => 'field_cm_hide_cat_from_search',
       2 => 'field_cm_no_follow',
       3 => 'field_cm_sponsored_category',
+      4 => 'field_publish_time',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
