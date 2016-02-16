@@ -45,6 +45,12 @@ function itg_category_manager_menu() {
     'page callback' => 'notify_insert_statuspost',
     'access callback' => TRUE
   );
+  // Menu for duplicate term checking
+  $items['unique-term-name/%'] = array(
+    'page callback' => 'itg_category_manager_noduplicate',
+    'page arguments' => array(1, 2),
+    'access callback' => TRUE,
+  );
 
   return $items;
 }
@@ -271,7 +277,15 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid'){
 /**
  * Implements _form_validate() for taxonomy_form_term().
  */
-function itg_category_manager_term_validate($form, &$form_state) {
+function itg_category_manager_term_validate($form, &$form_state) { 
+  // Ser published time same as parent term
+  $termParent = $form_state['values']['parent'][0];
+  if ($termParent) {
+    $pTerm = taxonomy_term_load($termParent);
+    $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];    
+  }
+  // Code end for publish time
+  
   $term = $form_state['values']['name'];
   $vid = $form_state['values']['vid'];
   $tid = $form_state['values']['tid'];
@@ -733,4 +747,34 @@ function itg_category_manager_theme() {
       'render element' => 'data',
     ),
   );
+}
+
+/**
+ * page callback for duplicate term name checking
+ * @param string $termName term name
+ * @param int $vid unique vocabulary id
+ */
+function itg_category_manager_noduplicate($termName, $vocabulary = NULL) {
+  $termName = str_replace('-', ' ', check_plain($termName));
+  $vocabulary = check_plain($vocabulary);    
+  $term = new stdClass();
+  $term = taxonomy_get_term_by_name($termName, 'category_management');    
+  //dpm($term);
+  $i = count($term);
+  if ($i) {
+    foreach ($term as $value) {
+      $allParents = taxonomy_get_parents_all($value->tid);
+      $j = count($allParents);
+      $superParent[] = $allParents[$j-1]->tid;      
+    }
+    print_r($superParent);
+  }
+  
+  if (isset($term->tid)) {
+    //echo drupal_json_encode(array('Code' => 1));
+  }
+  else {
+    //echo drupal_json_encode(array('Code' => 0));
+  }
+  //return 'Hello';
 }
