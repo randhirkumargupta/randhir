@@ -9,7 +9,7 @@
 <!--<div class=""><?php //print drupal_render($form['actions']);  ?></div>-->
 
 <div id="Element">
-  <h2 class="story-title">Element</h2>
+  <h2 class="story-title">Basic details</h2>
   <?php print drupal_render($form['title']); ?>
   <?php print drupal_render($form['field_gallery_kicer']); ?>
   <?php print drupal_render($form['field_headline']); ?>
