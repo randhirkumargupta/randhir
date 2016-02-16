@@ -50,6 +50,15 @@ function itg_category_manager_menu() {
     'page callback' => 'itg_category_manager_nodecount',    
     'access callback' => TRUE,
   );
+  // SEF Url log menu
+  $items['sef-log/%'] = array(
+    'title' => 'ITG Sef url Log',      
+    'page callback' => 'itg_category_manager_seflogpage',      
+    'access callback' => TRUE,
+    'page arguments' => array(1),
+    //'access arguments' => array('administer taxonomy'),
+    'type' => MENU_CALLBACK,
+  );
   
   return $items;
 }
@@ -727,6 +736,26 @@ function itg_category_manager_block_view($delta = '') {
     case 'sef_url_log':      
       $data = '<div class="audit-info">View Sef Url Log</div>';
       $arg = arg();      
+      $itgSefLog = itg_category_manager_seflog($arg[2], 5);      
+      if (count($itgSefLog)) {
+        $data .= '<div class="itg-log">';
+        $data .= '<div class="column-33">last URL</div>';
+        $data .= '<div class="column-33">Modified By</div>';
+        $data .= '<div class="column-33">Timestamp</div>';
+        $counter = 0;
+        foreach ($itgSefLog as $value) {          
+          $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
+          $data .= '<div class="column-33">'.$url.'</div>';
+          $data .= '<div class="column-33">'.$value->name.'</div>';
+          $data .= '<div class="column-33">'.format_date($value->changed, $type = 'medium', $format = '', $timezone = NULL, $langcode = NULL).'</div>';
+          ++$counter;
+        }
+        $data .= '<div class="more">'.l('more...', 'sef-log/'.$arg[2]).'</div>';
+        if ($counter > 5) {
+          $data .= '<div class="more">'.l('more...', 'sef-log/'.$arg[2]).'</div>';
+        }
+        $data .= '</div">';
+      }
       $assNode = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
       if (count($assNode)) {
         global $language;
@@ -764,4 +793,46 @@ function itg_category_manager_nodecount() {
   $inputs = $_POST;
   $tid = check_plain($inputs['tid']);
   echo count(taxonomy_select_nodes($tid));
+}
+
+/**
+ * fetch sef url log from database
+ * @param int $tid term id
+ * @param int $limit how many records should be return by function
+ */
+function itg_category_manager_seflog($tid, $limit = NULL) {
+  $itgResult = array();
+  $itgQuery = array();
+  $itgQuery = db_select('itg_category_manager', 'itg');
+  $itgQuery->join('users', 'u', 'itg.uid = u.uid');
+  $itgQuery->condition('tid', $tid)
+      ->fields('itg', array('sef_url', 'uid', 'created', 'changed'))
+      ->fields('u', array('name'));
+  if (isset($limit) && $limit != NULL) {
+    $itgQuery->range(0, $limit);        
+  }
+  $itgQuery->orderBy('changed', 'DESC');
+  $itgResult = $itgQuery->execute()->fetchAll();
+  
+  return $itgResult;
+}
+
+/**
+ * callback function for sef url page
+ */
+function itg_category_manager_seflogpage($tid) {
+  $data = itg_category_manager_seflog($tid);
+  $output = '';
+  $output .= '<div class="itg-log">';
+  $output .= '<div class="column-33">last URL</div>';
+  $output .= '<div class="column-33">Modified By</div>';
+  $output .= '<div class="column-33">Timestamp</div>';
+  foreach ($data as $value) {
+    $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
+    $output .= '<div class="column-33">' . $url . '</div>';
+    $output .= '<div class="column-33">' . $value->name . '</div>';
+    $output .= '<div class="column-33">' . format_date($value->changed, $type = 'medium', $format = '', $timezone = NULL, $langcode = NULL) . '</div>';   
+  }
+  
+  return $output;
 }
