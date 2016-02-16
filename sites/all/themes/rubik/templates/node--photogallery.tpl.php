@@ -179,6 +179,13 @@
                               </audio>';
                   }
                 }
+                if(isset($imagecollection['field_photo_byline']['und'])){
+                 // pr(itg_photogallery_byline_photoby('node', $imagecollection['field_photo_byline']['und'][0]['target_id']));
+                  $output .= '<div class="photo-byline">'.itg_photogallery_byline_photoby('node', $imagecollection['field_photo_byline']['und'][0]['target_id']).'</div>';
+                }
+                if(isset($imagecollection['field_photo_by']['und'][0])){
+                  $output .= '<div class="photo-by">'.itg_photogallery_byline_photoby('photoby', $imagecollection['field_photo_by']['und'][0]['target_id']).'</div>'; 
+                }
               }
               $output .= $imagecollection['field_title']['und'][0]['value'];
               if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {

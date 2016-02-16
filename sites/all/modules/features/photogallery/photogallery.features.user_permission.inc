@@ -18,7 +18,6 @@ function photogallery_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Intern' => 'Intern',
-      'Section Editor' => 'Section Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
@@ -40,13 +39,21 @@ function photogallery_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete terms in photo_by'.
+  $permissions['delete terms in photo_by'] = array(
+    'name' => 'delete terms in photo_by',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'edit any photogallery content'.
   $permissions['edit any photogallery content'] = array(
     'name' => 'edit any photogallery content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
@@ -62,6 +69,22 @@ function photogallery_user_default_permissions() {
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'edit terms in photo_by'.
+  $permissions['edit terms in photo_by'] = array(
+    'name' => 'edit terms in photo_by',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'taxonomy',
   );
 
   return $permissions;
