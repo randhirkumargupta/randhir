@@ -273,3 +273,22 @@ function _itg_photogallery_fid($fid) {
   $result = $query->execute()->fetchField();
   return $result;
 }
+
+/**
+ * Implements function for return byline and photoby
+ */
+function itg_photogallery_byline_photoby($type, $id){
+  $result = '';
+  if($type == "node"){
+    $query = db_select('node', 'n');
+    $field = $query->fields('n',array('title'));
+    $condition = $query->condition('nid', $id, '=');
+    $result = $query->execute()->fetchField();
+  }elseif($type == 'photoby'){
+    $query = db_select('taxonomy_term_data', 'td');
+    $field = $query->fields('td',array('name'));
+    $condition = $query->condition('tid', $id, '=');
+    $result = $query->execute()->fetchField();
+  }
+  return $result;
+}
