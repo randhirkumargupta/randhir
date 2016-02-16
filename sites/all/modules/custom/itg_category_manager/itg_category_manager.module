@@ -278,7 +278,7 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid'){
  * Implements _form_validate() for taxonomy_form_term().
  */
 function itg_category_manager_term_validate($form, &$form_state) { 
-  // Ser published time same as parent term
+  // Set published time same as parent term
   $termParent = $form_state['values']['parent'][0];
   if ($termParent) {
     $pTerm = taxonomy_term_load($termParent);
