@@ -150,10 +150,25 @@ function _submit_handler_for_redirect($form, &$form_state) {
 function itg_msi_form_after_build($form, &$form_state){
   global $user, $base_url;
   
+  //Extract type of node
+  if(arg(0) == 'node'){
+    if(arg(1) == 'add'){
+        $type = arg(2);
+        $nid = '';
+    } else {
+      $node = node_load(arg(1));
+      $type = $node->type;
+      $nid = arg(1);
+    }
+  }
+
   //Array used in itg_msi.js
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
+  $settings['type'] = ucfirst($type);
+  $settings['nid'] = $nid;
+  
   drupal_add_js(array('itg_msi' => array('settings' => $settings)), array('type' => 'setting'));
   
   //Add JS for magazine, supplement and issue
@@ -276,11 +291,21 @@ function itg_msi_node_validate($node, $form, &$form_state) {
  */
 function itg_msi_check_duplicate_title() {
     $type = arg(1);
+    $nid = arg(2);
     $title = $_POST['title'];
     $itgQuery = db_select('node', 'itg');
+    
+    if (empty($nid)) {
     $itgQuery->fields('itg', array('title'))
-      ->condition('title', $title)
-      ->condition('type', $type);
+            ->condition('title', $title, '=')
+            ->condition('type', $type, '=');
+    } else {
+      $itgQuery->fields('itg', array('title'))
+              ->condition('title', $title, '=')
+              ->condition('type', $type, '=')
+              ->condition('nid', $nid, '!=');
+    }
+
     $itgResult = $itgQuery->execute()->fetchObject();
     if (isset($itgResult->title) && strcasecmp($title, $itgResult->title) == 0) {
       echo drupal_json_encode(array('Code' => 1));
@@ -312,4 +337,26 @@ function _create_issue_using_xmlfile($xml_file_path) {
   
   $node = node_submit($node); // Prepare node for saving
   node_save($node);
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param String $form_id
+ */
+function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
+   if ($form['#id'] == 'views-exposed-form-manage-magazines-page' || $form['#id'] == 'views-exposed-form-manage-supplements-page') {
+     if($form_state['view']->name == 'manage_magazines'){
+       $type = 'magazine';
+     }
+     if($form_state['view']->name == 'manage_supplements'){
+       $type = 'supplement';
+     }
+     
+     //Call function autocomplete to show matching titles
+     $form['title']['#autocomplete_path'] = 'content-title-list/'.$type.'/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
+   }
 }

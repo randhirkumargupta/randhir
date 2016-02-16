@@ -635,6 +635,9 @@ function itg_category_manager_views_data() {
     'filter' => array(
       'handler' => 'views_handler_filter_date',
     ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_date'
+    ),
   );
   $data['itg_category_manager']['changed'] = array(
     'title' => t('changed field'),
@@ -648,6 +651,9 @@ function itg_category_manager_views_data() {
     ),
     'filter' => array(
       'handler' => 'views_handler_filter_date',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_date'
     ),
   );
   $data['itg_category_manager']['status'] = array(
