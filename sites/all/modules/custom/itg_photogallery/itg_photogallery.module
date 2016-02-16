@@ -39,11 +39,51 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
       'visible' => array(
         ':input[name="field_syndication_[und][yes]"]' => array('checked' => TRUE),
       ),
+      'required' => array(
+        ':input[name="field_syndication_[und][yes]"]' => array('checked' => TRUE),
+      ),
     );
     $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'manage-photogallery', array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
-      );  
+      );
+    
+    $form['#validate'][] = 'itg_photogallery_custom_validate';
+    $form['#after_build'][] = 'itg_photogallery_after_build';
+  }
+}
+
+/**
+ * After build for story form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_photogallery_after_build($form, &$form_state) {
+  //p();
+  global $user, $base_url;
+  unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
+  unset($form['metatags']['intro_text']['#markup']);
+  $form['metatags']['#prefix'] = '<div class="story-title">Meta Tags</div>';
+  $form['revision_information']['log']['#title'] = 'Remarks';
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  
+  drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 2));
+  return $form;
+}
+
+/**
+ * Implements custom validate for client title
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_photogallery_custom_validate(&$form, &$form_state){
+  if(isset($form_state['values']['field_syndication_']['und']) && $form_state['values']['field_syndication_']['und'][0]['value'] == 'yes'){
+    if(isset($form_state['values']['field_p_client_title']['und']) && (empty($form_state['values']['field_p_client_title']['und'][0]['value']))){
+    form_set_error('field_p_client_title', t('Client Title field is required.'));
+    }
   }
 }
 
@@ -231,5 +271,24 @@ function _itg_photogallery_fid($fid) {
   $query->fields('fm', array('uri'));
   $query->condition('fid', $fid, '=');
   $result = $query->execute()->fetchField();
+  return $result;
+}
+
+/**
+ * Implements function for return byline and photoby
+ */
+function itg_photogallery_byline_photoby($type, $id){
+  $result = '';
+  if($type == "node"){
+    $query = db_select('node', 'n');
+    $field = $query->fields('n',array('title'));
+    $condition = $query->condition('nid', $id, '=');
+    $result = $query->execute()->fetchField();
+  }elseif($type == 'photoby'){
+    $query = db_select('taxonomy_term_data', 'td');
+    $field = $query->fields('td',array('name'));
+    $condition = $query->condition('tid', $id, '=');
+    $result = $query->execute()->fetchField();
+  }
   return $result;
 }
