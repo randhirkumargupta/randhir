@@ -1,3 +1,4 @@
+<a href="javascript:;" class="close-preview">&nbsp;</a>
 <?php if (!empty($pre_object)) print render($pre_object) ?>
 
 <div class='<?php print $classes ?> clearfix' <?php print ($attributes) ?>>
@@ -88,7 +89,7 @@
                      ?>    
                      <?php print render($content['field_stroy_city']); ?>
                     <?php endif; ?>
-                    
+                     <?php print render($content['field_content_type']); ?>
                 </div>
             </div>
 
@@ -96,7 +97,7 @@
                     $description = render($content['body']);?>
                     <?php if (!empty($short_des) || !empty($description)): ?>
             <div class="description-details content-box">
-                                    <?php
+                    <?php
                     if (!empty($short_des)):
                     print render($content['field_label']);
                     ?>
@@ -158,7 +159,6 @@
               if (!empty($keywords)):
               ?>
               <div class="display content-box">
-                  <h2>Keywords</h2>
               <?php print render($content['field_keywords']); ?>
               </div>
               <?php endif; ?>

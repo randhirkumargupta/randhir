@@ -15,29 +15,39 @@ function feature_category_management_views_default_views() {
   $view->description = 'Category listing page';
   $view->tag = 'default';
   $view->base_table = 'itg_category_manager';
-  $view->human_name = 'Category manager-dev';
+  $view->human_name = 'Category Manager';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Category manager-dev';
+  $handler->display->display_options['title'] = 'Category Manager';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    10 => '10',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '15';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['type'] = 'date_views_pager';
+  $handler->display->display_options['pager']['options']['pager_position'] = 'bottom';
+  $handler->display->display_options['pager']['options']['skip_empty_pages'] = 0;
   $handler->display->display_options['style_plugin'] = 'tree';
   $handler->display->display_options['style_options']['main_field'] = 'tid';
   $handler->display->display_options['style_options']['parent_field'] = 'tid_1';
   $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<div class="itg-section">Section</div>
+      <div class="itg-category">Category</div>
+      <div class="itg-sub-category">Sub Category</div>
+      <div class="itg-sub-sub-category">Sub Sub Category</div>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* Relationship: Category Manager: ITG */
   $handler->display->display_options['relationships']['tid']['id'] = 'tid';
   $handler->display->display_options['relationships']['tid']['table'] = 'itg_category_manager';
@@ -53,13 +63,18 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'tid';
-  $handler->display->display_options['fields']['name']['element_type'] = 'div';
+  $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['element_class'] = 'term-name';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
   /* Field: Category Manager: created field */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'itg_category_manager';
   $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_type'] = 'div';
+  $handler->display->display_options['fields']['created']['element_class'] = 'created-date';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'd-m-Y';
@@ -68,10 +83,24 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'itg_category_manager';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['element_type'] = 'div';
+  $handler->display->display_options['fields']['changed']['element_class'] = 'changed-date';
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['changed']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd-m-Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Category Manager: Status */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'itg_category_manager';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = '';
+  $handler->display->display_options['fields']['status']['element_class'] = 'term-status';
+  $handler->display->display_options['fields']['status']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['status']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['status']['type'] = 'active-inactive';
+  $handler->display->display_options['fields']['status']['not'] = 0;
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
   $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
@@ -94,17 +123,24 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['fields']['edit_term']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['edit_term']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['edit_term']['text'] = 'Edit';
-  /* Field: Category Manager: Status */
-  $handler->display->display_options['fields']['status']['id'] = 'status';
-  $handler->display->display_options['fields']['status']['table'] = 'itg_category_manager';
-  $handler->display->display_options['fields']['status']['field'] = 'status';
-  $handler->display->display_options['fields']['status']['type'] = 'active-inactive';
-  $handler->display->display_options['fields']['status']['not'] = 0;
   /* Sort criterion: Category Manager: created field */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'itg_category_manager';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Field: Publish Time (field_publish_time) */
+  $handler->display->display_options['arguments']['field_publish_time_value']['id'] = 'field_publish_time_value';
+  $handler->display->display_options['arguments']['field_publish_time_value']['table'] = 'field_data_field_publish_time';
+  $handler->display->display_options['arguments']['field_publish_time_value']['field'] = 'field_publish_time_value';
+  $handler->display->display_options['arguments']['field_publish_time_value']['relationship'] = 'tid';
+  $handler->display->display_options['arguments']['field_publish_time_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_publish_time_value']['default_argument_type'] = 'date';
+  $handler->display->display_options['arguments']['field_publish_time_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_publish_time_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_publish_time_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_publish_time_value']['year_range'] = '2015:2030';
+  $handler->display->display_options['arguments']['field_publish_time_value']['granularity_reset'] = 0;
+  $handler->display->display_options['arguments']['field_publish_time_value']['use_fromto'] = 'no';
   /* Filter criterion: Taxonomy term: Name */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
@@ -214,7 +250,7 @@ function feature_category_management_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'category-manager-dev';
+  $handler->display->display_options['path'] = 'category-manager';
   $export['category_manager_dev'] = $view;
 
   return $export;

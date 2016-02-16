@@ -158,6 +158,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   }
   $('.page-admin-structure-taxonomy-category-management .form-type-hierarchical-select').append('<div class="discription">Root is the section.</div>');
   
+  $('.category-manager-details').on('click', '.cmd-heading', function(){
+    $(this).parents('li').find('> .item-list').show();
+  });
   
   
 
