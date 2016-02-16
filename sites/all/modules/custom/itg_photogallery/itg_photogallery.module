@@ -63,8 +63,9 @@ function itg_photogallery_after_build($form, &$form_state) {
   global $user, $base_url;
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
-  $form['metatags']['#prefix'] = '<div class="story-title">Meta Tags</div>';
-  $form['revision_information']['log']['#title'] = 'Remarks';
+  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
