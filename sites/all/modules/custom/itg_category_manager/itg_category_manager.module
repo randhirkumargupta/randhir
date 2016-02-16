@@ -44,14 +44,13 @@ function itg_category_manager_menu() {
     'title' => 'ITG Category Manager',
     'page callback' => 'notify_insert_statuspost',
     'access callback' => TRUE
-  );
-  // Menu for duplicate term checking
-  $items['unique-term-name/%'] = array(
-    'page callback' => 'itg_category_manager_noduplicate',
-    'page arguments' => array(1, 2),
+  );  
+  // Menu for associated content counting
+  $items['content-associated'] = array(
+    'page callback' => 'itg_category_manager_nodecount',    
     'access callback' => TRUE,
   );
-
+  
   return $items;
 }
 
@@ -475,7 +474,7 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
            'body' => $mail_content,
            'subject' => 'India Today | Category Updated!',
      );
-    $to = "haripalrao@gmail.com"; // SEO team mail id
+    $to = "itoday135@gmail.com"; // SEO team mail id
     $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'haripal.rao@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -531,10 +530,10 @@ function itg_category_manager_get_mail_content($entity) {
 <body style="margin:0; padding:0;">
       <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi SEO Team,</td></tr>
       <tr><td style="font-weight: bold;">Category '.$entity->name.' has been modified. Details are given below:</td></tr>
-        <tr><td>Display Title: '.$display_name.'</td></tr>
-          <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
-            <tr><td>Thanks,</td></tr>
-            <tr><td>India Today Team</td></tr></table>
+      <tr><td>Display Title: '.$display_name.'</td></tr>
+      <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
+      <tr><td>Thanks,</td></tr>
+      <tr><td>India Today Team</td></tr></table>
 </body></html>';
   
   return $content;
@@ -728,6 +727,15 @@ function itg_category_manager_block_view($delta = '') {
     case 'sef_url_log':      
       $data = '<div class="audit-info">View Sef Url Log</div>';
       $arg = arg();      
+      $assNode = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
+      if (count($assNode)) {
+        global $language;
+        $data .= '<div class="content-associated">';
+        $data .= '<div>Last created article: '.l('View', drupal_get_path_alias('node/'.$assNode[0], $language->language), array('attributes' => array('target'=>'_blank'))).'</div>';
+        $data .= '<div class="tid" style="display:none;">'.$arg[2].'</div>';
+        $data .= '<div id="show-content-count">Show counts<span class="count"></span></div>';
+        $data .= '</div>';
+      }      
       $block['content'] = theme('sef_url_log', array('data' => $data));
       break;
   }
@@ -750,31 +758,10 @@ function itg_category_manager_theme() {
 }
 
 /**
- * page callback for duplicate term name checking
- * @param string $termName term name
- * @param int $vid unique vocabulary id
+ * Callback function for node count
  */
-function itg_category_manager_noduplicate($termName, $vocabulary = NULL) {
-  $termName = str_replace('-', ' ', check_plain($termName));
-  $vocabulary = check_plain($vocabulary);    
-  $term = new stdClass();
-  $term = taxonomy_get_term_by_name($termName, 'category_management');    
-  //dpm($term);
-  $i = count($term);
-  if ($i) {
-    foreach ($term as $value) {
-      $allParents = taxonomy_get_parents_all($value->tid);
-      $j = count($allParents);
-      $superParent[] = $allParents[$j-1]->tid;      
-    }
-    print_r($superParent);
-  }
-  
-  if (isset($term->tid)) {
-    //echo drupal_json_encode(array('Code' => 1));
-  }
-  else {
-    //echo drupal_json_encode(array('Code' => 0));
-  }
-  //return 'Hello';
+function itg_category_manager_nodecount() {
+  $inputs = $_POST;
+  $tid = check_plain($inputs['tid']);
+  echo count(taxonomy_select_nodes($tid));
 }
