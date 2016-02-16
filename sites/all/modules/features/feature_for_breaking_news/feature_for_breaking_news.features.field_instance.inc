@@ -177,7 +177,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => array(
       0 => array(
-        'value' => 'Home Page ',
+        'value' => 'Home Page',
       ),
     ),
     'deleted' => 0,
