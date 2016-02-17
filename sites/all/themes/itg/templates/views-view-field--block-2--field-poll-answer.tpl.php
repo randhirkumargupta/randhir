@@ -1,8 +1,5 @@
 <?php
 
-// Report all errors except E_NOTICE
-//error_reporting(E_ALL & ~E_NOTICE);
-
 $flag=true;
 $finaltotal = 0;
 if(isset($view->result[0]->nid)) {
@@ -12,17 +9,11 @@ if(isset($view->result[0]->nid)) {
 
 }
 
-//echo "cc".$isCookies;
-//exit;
 if(isset($isCookies) && $isCookies == 'yes') {
 
 $optionArr = getPollResult($this_nid);
 $opttotal = getTotalPoll($this_nid);
 foreach ($view->result as $item) {
-
-//echo "<pre>";
-//print_r($item);
-//echo "</pre>";
 	foreach($item->_field_data['nid']['entity']->field_poll_answer['und'] as $row) {
 		$item_id[] = $row['value'];
 	}
@@ -41,7 +32,6 @@ foreach ( $temp_entities as $temp_ent_id => $temp_ents) {
 }
 
 $finaltotal = $finaltotal + $opttotal;
-//p($temp_entities);
 
 foreach ( $temp_entities as $temp_ent_id => $temp_ents) {
 $polls_answer_text   = isset($temp_ents->field_poll_answer_text[LANGUAGE_NONE]) ? $temp_ents->field_poll_answer_text[LANGUAGE_NONE][0]['value'] : '';

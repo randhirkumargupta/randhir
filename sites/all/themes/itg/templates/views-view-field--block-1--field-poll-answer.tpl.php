@@ -24,12 +24,6 @@
  * @ingroup views_templates
  */
 
-// Report all errors except E_NOTICE
-//error_reporting(E_ALL & ~E_NOTICE);
-
-
-
-
 $this_nid = $view->result[0]->nid;
 
 $isCookies = isCookies($this_nid);

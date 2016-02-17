@@ -1,4 +1,5 @@
-name = feature_for_itg_poll
+name = feature_for_poll
+description = feature for poll
 core = 7.x
 package = Features
 features[ctools][] = strongarm:strongarm:1
@@ -22,6 +23,7 @@ features_exclude[field_base][field_poll_answer_option] = field_poll_answer_optio
 features_exclude[field_base][field_poll_banner] = field_poll_banner
 features_exclude[field_base][field_poll_start_date] = field_poll_start_date
 features_exclude[field_base][field_associate_poll] = field_associate_poll
+features_exclude[field_base][field_display_result] = field_display_result
 features_exclude[field_base][field_poll_answer_text] = field_poll_answer_text
 features_exclude[field_base][field_poll_answer_image] = field_poll_answer_image
 features_exclude[field_base][field_poll_answe_default_value] = field_poll_answe_default_value
@@ -30,6 +32,7 @@ features_exclude[field_instance][field_collection_item-field_poll_answer-field_p
 features_exclude[field_instance][field_collection_item-field_poll_answer-field_poll_answer_text] = field_collection_item-field_poll_answer-field_poll_answer_text
 features_exclude[field_instance][node-poll-body] = node-poll-body
 features_exclude[field_instance][node-poll-field_associate_poll] = node-poll-field_associate_poll
+features_exclude[field_instance][node-poll-field_display_result] = node-poll-field_display_result
 features_exclude[field_instance][node-poll-field_poll_answer] = node-poll-field_poll_answer
 features_exclude[field_instance][node-poll-field_poll_answer_option] = node-poll-field_poll_answer_option
 features_exclude[field_instance][node-poll-field_poll_banner] = node-poll-field_poll_banner
