@@ -204,7 +204,14 @@
            <div class="expert-details content-box">
                 <h2>Gallery Individual Images</h2>
                 <div class="content-details">  
-            
+            <?php $field_photo_byline = render($content['field_photo_byline']); 
+            if (!empty($field_photo_byline)): ?>
+                  <div class="photobyline"><?php print render($content['field_photo_byline']); ?></div>
+            <?php endif; ?>  
+              <?php $field_photo_by = render($content['field_photo_by']); 
+            if (!empty($field_photo_by)): ?>
+                  <div class="photobyline"><?php print render($content['field_photo_by']); ?></div>
+            <?php endif; ?>      
            <?php  echo '<ul class="photogallery-list">' . $output . '</ul>'; ?>     
                 </div>
            </div>
