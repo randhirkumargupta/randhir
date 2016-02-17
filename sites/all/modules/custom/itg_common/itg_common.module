@@ -270,3 +270,4 @@ function itg_common_theme($existing, $type, $theme, $path) {
 
   return $themes;
 }
+

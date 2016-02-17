@@ -78,6 +78,74 @@ function features_supplement_magazine_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-issue-field_field_issue_import_xml'.
+  $field_instances['node-issue-field_field_issue_import_xml'] = array(
+    'bundle' => 'issue',
+    'deleted' => 0,
+    'description' => 'Please import xml to create issue.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_field_issue_import_xml',
+    'label' => 'Import Issue XML',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'xml',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 'plupload',
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'node-issue-field_issue_large_cover_image'.
   $field_instances['node-issue-field_issue_large_cover_image'] = array(
     'bundle' => 'issue',
@@ -150,7 +218,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -267,7 +335,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -586,7 +654,7 @@ function features_supplement_magazine_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 'imce',
-            'plupload' => 0,
+            'plupload' => 'plupload',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -849,6 +917,7 @@ function features_supplement_magazine_field_default_field_instances() {
   t('Comment');
   t('Image Size (210 x 145)');
   t('Image Size (300 x 225)');
+  t('Import Issue XML');
   t('Import XML');
   t('Large Cover Image');
   t('Magazine');
@@ -856,6 +925,7 @@ function features_supplement_magazine_field_default_field_instances() {
   t('Please check to publish this content.');
   t('Please enter issue title.');
   t('Please import XML.');
+  t('Please import xml to create issue.');
   t('Please select magazine to map with supplement.');
   t('Please select magazine.');
   t('Please select the date using date picker.
