@@ -70,13 +70,13 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#weight'] = '-6';
-    $form['#validate'][] = '_validate_user_profile_validate';
-    $form['#after_build'][] = '_gtyvalidate_user_profile_validate';
+    $form['#validate'][] = 'itg_common_validate_user_profile_validate';
+    $form['#after_build'][] = 'itg_common_after_user_profile_validate';
   }
   
   if ($form_id == 'user_register_form') {
-    $form['#validate'][] = '_validate_user_register_validate';
-    $form['#after_build'][] = '_gtyvalidate_user_register_validate';
+    $form['#validate'][] = 'itg_common_validate_user_register_validate';
+    $form['#after_build'][] = 'itg_common_after_user_register_validate';
   }
 
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
@@ -119,13 +119,12 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * 
+ * Password validation for adding user profile
  * @param array $form
  * @param array $form_state
- * Password validation for adding user profile
  */
 
-function _validate_user_register_validate(&$form, &$form_state) {
+function itg_common_validate_user_register_validate(&$form, &$form_state) {
   if ($form_state['values']['pass']) {
     if (!preg_match('/^[A-Za-z0-9]{8}$/', $form_state['values']['pass'])) {
       form_set_error('pass', t('Password must be 8 digit alphanumeric and without space.'));
@@ -134,13 +133,12 @@ function _validate_user_register_validate(&$form, &$form_state) {
 }
 
 /**
- * 
+ * Password validation for minimum or maximum 8 char 
  * @param array $form
  * @param array $form_state
- * Password validation for minimum or maximum 8 char 
  */
 
-function _gtyvalidate_user_register_validate(&$form, &$form_state) {
+function itg_common_after_user_register_validate(&$form, &$form_state) {
   $form['account']['pass']['#attached']['js'][1]['data']['password']['tooShort']='Make it at least 8 characters';
   $form['account']['pass']['pass1']['#maxlength'] = 8;
   $form['account']['pass']['pass2']['#maxlength'] = 8;
@@ -148,13 +146,13 @@ function _gtyvalidate_user_register_validate(&$form, &$form_state) {
 }
 
 /**
- * 
+ * Password validation for editing user profile
  * @param array $form
  * @param array $form_state
- * Password validation for editing user profile
+
  */
 
-function _validate_user_profile_validate(&$form, &$form_state) {
+function itg_common_validate_user_profile_validate(&$form, &$form_state) {
   if ($form_state['values']['pass']) {
     if (!preg_match('/^[A-Za-z0-9]{8}$/', $form_state['values']['pass'])) {
       form_set_error('pass', t('Password must be 8 digit alphanumeric and without space.'));
@@ -162,13 +160,12 @@ function _validate_user_profile_validate(&$form, &$form_state) {
   }
 }
 /**
- * 
- * @param array $form
- * @param array $form_state
  * Password validation for minimum or maximum 8 char 
+ * @param array $form
+ * @param array $form_state 
  */
 
-function _gtyvalidate_user_profile_validate(&$form, &$form_state) {
+function itg_common_after_user_profile_validate(&$form, &$form_state) {
   $form['account']['pass']['#attached']['js'][1]['data']['password']['tooShort']='Make it at least 8 characters';
   $form['account']['pass']['pass1']['#maxlength'] = 8;
   $form['account']['pass']['pass2']['#maxlength'] = 8;
