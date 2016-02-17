@@ -821,6 +821,45 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-recipe-field_recipe_section'.
+  $field_instances['node-recipe-field_recipe_section'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please select categories from the hierarchy.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 24,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_recipe_section',
+    'label' => 'Select Section',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 64,
+    ),
+  );
+
   // Exported field_instance: 'node-recipe-field_recipe_small_image'.
   $field_instances['node-recipe-field_recipe_small_image'] = array(
     'bundle' => 'recipe',
@@ -1303,6 +1342,7 @@ function feature_for_recipe_field_default_field_instances() {
   t('Please select Meal For (No. of people, e.g.1-2, 2-4 etc.)');
   t('Please select Meal Type (e.g. Breakfast, Snacks etc.)');
   t('Please select Syndication.');
+  t('Please select categories from the hierarchy.');
   t('Please select festivals (e.g. Holi, Christmas etc.) ');
   t('Please upload Large Image.');
   t('Please upload Medium image');
@@ -1310,6 +1350,7 @@ function feature_for_recipe_field_default_field_instances() {
   t('Please upload Small image.');
   t('Reporter Twitter Handle');
   t('Reporter\'s Email id');
+  t('Select Section');
   t('Small image');
   t('Strap headline (Short Headline)');
   t('Syndication');
