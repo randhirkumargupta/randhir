@@ -143,6 +143,7 @@ features[variable][] = node_submitted_story
 features[variable][] = save_continue_story
 features[variable][] = workbench_moderation_default_state_story
 features[views_view][] = strory_menegment
+features[views_view][] = view_moderation_history
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][entityreference] = entityreference
 features_exclude[dependencies][features] = features
