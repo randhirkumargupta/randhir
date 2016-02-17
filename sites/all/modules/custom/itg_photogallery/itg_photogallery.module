@@ -17,7 +17,7 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
       '#type' => 'plupload',
       '#weight' => 21,
       '#upload_validators' => array(
-        'file_validate_extensions' => array('jpg jpeg gif png'),
+        'file_validate_extensions' => array("jpg jpeg gif png"),
       ),
       '#states' => array(
         'visible' => array(
@@ -292,4 +292,19 @@ function itg_photogallery_byline_photoby($type, $id){
     $result = $query->execute()->fetchField();
   }
   return $result;
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
+  //Get the Form Id
+  if ($form["#id"] == 'views-exposed-form-manage-photogallery-page') {
+    //$form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
+    $form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
 }
