@@ -159,6 +159,33 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.page-admin-structure-taxonomy-category-management .form-type-hierarchical-select').append('<div class="discription">Root is the section.</div>');
   
   
+  //jQuery code for cotegory manager page
+  $('.view-category-manager-dev .view-content > div.item-list > ul > li').addClass('lavel-1');
+  $('.view-category-manager-dev .view-content > div.item-list > ul > li > div.item-list > ul > li').addClass('lavel-2');
+  $('.view-category-manager-dev .view-content > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li').addClass('lavel-3');
+  $('.view-category-manager-dev .view-content > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li').addClass('lavel-4');
+  $('.view-category-manager-dev .view-content > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li').addClass('lavel-5');
+  $('.lavel-1 > .category-manager-details > .cmd-heading').click(function(){
+    $(this).parents('.lavel-1').find('.item-list').slideUp();
+   $('.lavel-1 > .category-manager-details > .cmd-heading > .fa').toggleClass('fa-plus-square-o');
+    $(this).parent().next().stop().slideToggle();
+  });
+  $('.lavel-2 > .category-manager-details > .cmd-heading').click(function(){
+    $(this).parents('.lavel-2').find('.item-list').slideUp();
+    $('.lavel-2 > .category-manager-details > .cmd-heading > .fa').toggleClass('fa-plus-square-o');
+    $(this).parent().next().stop().slideToggle();
+  });
+  $('.lavel-3 > .category-manager-details > .cmd-heading').click(function(){
+    $(this).parents('.lavel-3').find('.item-list').slideUp();
+    $('.lavel-3 > .category-manager-details > .cmd-heading > .fa').toggleClass('fa-plus-square-o');
+    $(this).parent().next().stop().slideToggle();
+  });
+  $('.lavel-4 > .category-manager-details > .cmd-heading').click(function(){
+    $(this).parents('.lavel-4').find('.item-list').slideUp();
+    $('.lavel-4 > .category-manager-details > .cmd-heading > .fa').toggleClass('fa-plus-square-o');
+    $(this).parent().next().stop().slideToggle();
+  });
+  
   
 
 };

@@ -82,8 +82,8 @@ function feature_for_breaking_news_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'Home Page ' => ' Home Page',
-        'Section ' => ' Section',
+        'Home Page' => 'Home Page',
+        'Section' => 'Section',
       ),
       'allowed_values_function' => '',
     ),

@@ -47,7 +47,7 @@
           <?php if ($view_mode == 'full'): ?>
 
             <div class="basic-details content-box">
-              <h2>Element</h2>
+              <h2>Basic Gallery Details</h2>
               <div class="content-details">
                 <div class="field">
                   <div class="field-label">Gallery Title:</div>
@@ -60,14 +60,133 @@
                 endif;
                 ?>
                 <?php print render($content['	field_photogallery_description']); ?>
-                <?php
-                $isfeatured = render($content['field_featured']);
-                if (!empty($isfeatured)): print '<div class="field field-name-field-featured field-type-list-text field-label-above"><div class="field-label">Set As Featured:&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
-                endif;
-                ?>
               </div>
             </div>
 
+           <?php
+            $browsemedia = render($content['field_story_extra_large_image']);
+            if (!empty($browsemedia)):
+              ?>
+              <div class="BrowseMedia">
+                <h2>Gallery Image Upload </h2>
+                <div class="content-details">
+                  <?php print render($content['field_story_extra_large_image']); ?>
+                  <?php print render($content['field_story_large_image']); ?>
+                  <?php print render($content['field_story_medium_image']); ?>
+                  <?php print render($content['field_story_small_image']); ?>
+                  <?php print render($content['field_story_extra_small_image']); ?>
+                </div>
+              </div>
+            <?php endif; ?>
+          
+           <?php
+            $photocategory = render($content['field_story_category']);
+            if (!empty($photocategory)):
+              ?>
+              <div class="expert-details content-box">
+                <h2>Categorization</h2>
+                <div class="content-details">
+                  <?php
+                  if (!empty($photocategory)): print render($content['field_story_category']);
+                  endif;
+                  ?>
+
+                </div>  
+              </div>
+            <?php endif; ?>
+            <?php
+            $items = field_get_items('node', $node, 'field_gallery_image');
+            foreach ($items as $imagecollection) {
+              $imgfid = $imagecollection['field_images']['und'][0]['fid'];
+              $audfid = $imagecollection['field_audio']['und'][0]['fid'];
+         if ($imgfid != 0) {
+                $output .= '<li>';
+              if (module_exists('itg_photogallery')) {
+                if (!empty($imgfid)) {
+                  $imguri = _itg_photogallery_fid($imgfid);
+                  $style = 'thumbnail';
+                  $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
+                }
+              }
+              if (module_exists('itg_photogallery')) {
+                if (!empty($audfid)) {
+                  $audiouri = _itg_photogallery_fid($audfid);
+                  $output .= '<audio controls>
+                              <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
+                              Your browser does not support the audio element.
+                            </audio>';
+                }
+                elseif (isset($node->field_common_audio_file['und'])) {
+                  if (isset($node->field_common_audio['und']) && $node->field_common_audio['und'][0]['value'] == 1) {
+                    $audiouri = $node->field_common_audio_file['und'][0]['uri'];
+                    $output .= '<div class="audio-div"><audio controls>
+                                <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                              </audio></div>';
+                  }
+                }
+              }
+            
+            if (isset($imagecollection['field_title']['und']) && !empty($imagecollection['field_title']['und'][0]['value'])) {
+              $output .= '<div class="photo-title"><strong>' . $imagecollection['field_title']['und'][0]['value'] . '</strong></div>';
+            }
+
+            if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {
+              $output .= '<div class="photo-credit"><span>' . $imagecollection['field_credit']['und'][0]['value'] . '</span></div>';
+            }
+            elseif (isset($node->field_credit_name['und']) && $node->field_credit_to_all['und'][0]['value'] == 1) {
+              $output .= '<div class="photo-credit"><span>' . $node->field_credit_name['und'][0]['value'] . '</span></div>';
+            }
+
+            if (isset($imagecollection['field_image_description']['und']) && !empty($imagecollection['field_image_description']['und'][0]['value'])) {
+              $output .= '<div class="image-description"><span>' . $imagecollection['field_image_description']['und'][0]['value'] . '</span></div>';
+            }
+            $output .= '</li>';
+               }
+            }
+            if(isset($output) && !empty($output)): ?>
+           <div class="expert-details content-box">
+                <h2>Gallery Individual Images</h2>
+                <div class="content-details">  
+            <?php $field_photo_byline = render($content['field_photo_byline']); 
+            if (!empty($field_photo_byline)): ?>
+                  <div class="photobyline"><?php print render($content['field_photo_byline']); ?></div>
+            <?php endif; ?>  
+              <?php $field_photo_by = render($content['field_photo_by']); 
+            if (!empty($field_photo_by)): ?>
+                  <div class="photobyline"><?php print render($content['field_photo_by']); ?></div>
+            <?php endif; ?>      
+           <?php  echo '<ul class="photogallery-list">' . $output . '</ul>'; ?>     
+                </div>
+           </div>
+          <?php endif; ?> 
+          
+          <?php
+            $syndication = render($content['field_syndication_']);
+            $client_title = render($content['field_p_client_title']);
+            if (!empty($syndication) || !empty($client_title)):
+              ?>
+              <div class="expert-details content-box">
+                <h2>Configuration</h2>
+                <div class="content-details">
+                  <?php
+                  $isfeatured = render($content['field_featured']);
+                  if (!empty($isfeatured)): print '<div class="field field-name-field-featured field-type-list-text field-label-above"><div class="field-label">Set As Featured:&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
+                  endif;
+                  ?>
+                  <?php
+                  if (!empty($syndication)): print '<div class="field field-name-field-syndication- field-type-list-text field-label-above"><div class="field-label">Syndication :&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
+                  endif;
+                  ?>
+                  <?php
+                  if (!empty($client_title)): print render($content['field_p_client_title']);
+                  endif;
+                  ?>            
+                </div>  
+              </div>
+            <?php endif; ?>
+          
+          
             <?php
             $ppl_tag = render($content['field_people_tag']);
             $brand_tag = render($content['field_brand_tag']);
@@ -99,102 +218,10 @@
               </div>
             <?php endif; ?>
 
-            <?php
-            $browsemedia = render($content['field_story_extra_large_image']);
-            if (!empty($browsemedia)):
-              ?>
-              <div class="BrowseMedia">
-                <h2>Gallery Image Upload </h2>
-                <div class="content-details">
-                  <?php print render($content['field_story_extra_large_image']); ?>
-                  <?php print render($content['field_story_large_image']); ?>
-                  <?php print render($content['field_story_medium_image']); ?>
-                  <?php print render($content['field_story_small_image']); ?>
-                  <?php print render($content['field_story_extra_small_image']); ?>
-                </div>
-              </div>
-            <?php endif; ?>
-
-            <?php
-            $syndication = render($content['field_syndication_']);
-            $client_title = render($content['field_p_client_title']);
-            if (!empty($syndication) || !empty($client_title)):
-              ?>
-              <div class="expert-details content-box">
-                <h2>Add Syndication</h2>
-                <div class="content-details">
-                  <?php
-                  if (!empty($syndication)): print '<div class="field field-name-field-syndication- field-type-list-text field-label-above"><div class="field-label">Syndication :&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
-                  endif;
-                  ?>
-                  <?php
-                  if (!empty($client_title)): print render($content['field_p_client_title']);
-                  endif;
-                  ?>            
-                </div>  
-              </div>
-            <?php endif; ?>
-
-            <?php
-            $photocategory = render($content['field_story_category']);
-            if (!empty($photocategory)):
-              ?>
-              <div class="expert-details content-box">
-                <h2>Categorization</h2>
-                <div class="content-details">
-                  <?php
-                  if (!empty($photocategory)): print render($content['field_story_category']);
-                  endif;
-                  ?>
-
-                </div>  
-              </div>
-            <?php endif; ?>
-            <?php
-            $items = field_get_items('node', $node, 'field_gallery_image');
-
-            foreach ($items as $imagecollection) {
-              $output .= '<li>';
-              $imgfid = $imagecollection['field_images']['und'][0]['fid'];
-              $audfid = $imagecollection['field_audio']['und'][0]['fid'];
-              if (module_exists('itg_photogallery')) {
-                if (!empty($imgfid)) {
-                  $imguri = _itg_photogallery_fid($imgfid);
-                  $style = 'thumbnail';
-                  $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
-                }
-                if (!empty($audfid)) {
-                  $audiouri = _itg_photogallery_fid($audfid);
-                  $output .= '<audio controls>
-                              <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
-                              Your browser does not support the audio element.
-                            </audio>';
-                }
-                elseif (isset($node->field_common_audio_file['und'])) {
-                  if (isset($node->field_common_audio['und']) && $node->field_common_audio['und'][0]['value'] == 1) {
-                    $audiouri = $node->field_common_audio_file['und'][0]['uri'];
-                    $output .= '<audio controls>
-                                <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                              </audio>';
-                  }
-                }
-              }
-              $output .= $imagecollection['field_title']['und'][0]['value'];
-              if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {
-                $output .= $imagecollection['field_credit']['und'][0]['value'];
-              }
-              elseif (isset($node->field_credit_name['und']) && $node->field_credit_to_all['und'][0]['value'] == 1) {
-                $output .= $node->field_credit_name['und'][0]['value'];
-              }
-              $output .= $imagecollection['field_image_description']['und'][0]['value'];
-              $output .= '</li>';
-              // $a[] = $output; 
-            }
-            echo '<ul>' . $output . '</ul>';
-            ?>
           <?php endif; ?>
-        </div>
+          
+          
+         </div>
       <?php endif; ?>
 
       <?php if ($layout): ?>
