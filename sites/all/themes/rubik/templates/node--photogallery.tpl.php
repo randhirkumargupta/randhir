@@ -47,7 +47,7 @@
           <?php if ($view_mode == 'full'): ?>
 
             <div class="basic-details content-box">
-              <h2>Basic Details</h2>
+              <h2>Basic Gallery Details</h2>
               <div class="content-details">
                 <div class="field">
                   <div class="field-label">Gallery Title:</div>
@@ -60,46 +60,10 @@
                 endif;
                 ?>
                 <?php print render($content['	field_photogallery_description']); ?>
-                <?php
-                $isfeatured = render($content['field_featured']);
-                if (!empty($isfeatured)): print '<div class="field field-name-field-featured field-type-list-text field-label-above"><div class="field-label">Set As Featured:&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
-                endif;
-                ?>
               </div>
             </div>
 
-            <?php
-            $ppl_tag = render($content['field_people_tag']);
-            $brand_tag = render($content['field_brand_tag']);
-            $product_tag = render($content['field_product_tag']);
-            $content_tag = render($content['field_content_tag']);
-            if (!empty($ppl_tag) || !empty($brand_tag) || !empty($product_tag) || !empty($content_tag)):
-              ?>
-              <div class="expert-details content-box">
-                <h2>Tags to follow</h2>
-                <div class="content-details">
-                  <?php
-                  if (!empty($ppl_tag)): print render($content['field_people_tag']);
-                  endif;
-                  ?>
-                  <?php
-                  if (!empty($brand_tag)): print render($content['field_brand_tag']);
-                  endif;
-                  ?>
-                  <?php
-                  if (!empty($product_tag)): print render($content['field_product_tag']);
-                  endif;
-                  ?>
-                  <?php
-                  if (!empty($content_tag)): print render($content['field_content_tag']);
-                  endif;
-                  ?>
-
-                </div>  
-              </div>
-            <?php endif; ?>
-
-            <?php
+           <?php
             $browsemedia = render($content['field_story_extra_large_image']);
             if (!empty($browsemedia)):
               ?>
@@ -114,28 +78,8 @@
                 </div>
               </div>
             <?php endif; ?>
-
-            <?php
-            $syndication = render($content['field_syndication_']);
-            $client_title = render($content['field_p_client_title']);
-            if (!empty($syndication) || !empty($client_title)):
-              ?>
-              <div class="expert-details content-box">
-                <h2>Add Syndication</h2>
-                <div class="content-details">
-                  <?php
-                  if (!empty($syndication)): print '<div class="field field-name-field-syndication- field-type-list-text field-label-above"><div class="field-label">Syndication :&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
-                  endif;
-                  ?>
-                  <?php
-                  if (!empty($client_title)): print render($content['field_p_client_title']);
-                  endif;
-                  ?>            
-                </div>  
-              </div>
-            <?php endif; ?>
-
-            <?php
+          
+           <?php
             $photocategory = render($content['field_story_category']);
             if (!empty($photocategory)):
               ?>
@@ -215,9 +159,69 @@
            <?php  echo '<ul class="photogallery-list">' . $output . '</ul>'; ?>     
                 </div>
            </div>
-          <?php endif; ?>        
+          <?php endif; ?> 
+          
+          <?php
+            $syndication = render($content['field_syndication_']);
+            $client_title = render($content['field_p_client_title']);
+            if (!empty($syndication) || !empty($client_title)):
+              ?>
+              <div class="expert-details content-box">
+                <h2>Configuration</h2>
+                <div class="content-details">
+                  <?php
+                  $isfeatured = render($content['field_featured']);
+                  if (!empty($isfeatured)): print '<div class="field field-name-field-featured field-type-list-text field-label-above"><div class="field-label">Set As Featured:&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
+                  endif;
+                  ?>
+                  <?php
+                  if (!empty($syndication)): print '<div class="field field-name-field-syndication- field-type-list-text field-label-above"><div class="field-label">Syndication :&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
+                  endif;
+                  ?>
+                  <?php
+                  if (!empty($client_title)): print render($content['field_p_client_title']);
+                  endif;
+                  ?>            
+                </div>  
+              </div>
+            <?php endif; ?>
+          
+          
+            <?php
+            $ppl_tag = render($content['field_people_tag']);
+            $brand_tag = render($content['field_brand_tag']);
+            $product_tag = render($content['field_product_tag']);
+            $content_tag = render($content['field_content_tag']);
+            if (!empty($ppl_tag) || !empty($brand_tag) || !empty($product_tag) || !empty($content_tag)):
+              ?>
+              <div class="expert-details content-box">
+                <h2>Tags to follow</h2>
+                <div class="content-details">
+                  <?php
+                  if (!empty($ppl_tag)): print render($content['field_people_tag']);
+                  endif;
+                  ?>
+                  <?php
+                  if (!empty($brand_tag)): print render($content['field_brand_tag']);
+                  endif;
+                  ?>
+                  <?php
+                  if (!empty($product_tag)): print render($content['field_product_tag']);
+                  endif;
+                  ?>
+                  <?php
+                  if (!empty($content_tag)): print render($content['field_content_tag']);
+                  endif;
+                  ?>
+
+                </div>  
+              </div>
+            <?php endif; ?>
+
           <?php endif; ?>
-        </div>
+          
+          
+         </div>
       <?php endif; ?>
 
       <?php if ($layout): ?>
