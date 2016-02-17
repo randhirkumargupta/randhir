@@ -685,16 +685,22 @@ form fieldset.date-combo .container-inline-date .date-padding .form-item span.er
 .form-type-managed-file .form-managed-file span.file-size{float: left; padding-top: 5px;} 
 .cm-node-view{padding: 20px; border-top: 1px solid #eee;}
 .field-item{word-wrap: break-word;}
-.category-manager-details .cmd-heading{font-size: 16px;font-weight: bold;line-height: 30px;}
-.view-category-manager-dev .view-content ul li div.item-list{display: none;}
+.category-manager-details .cmd-heading{font-size: 16px;font-weight: bold;line-height: 30px; cursor: pointer;}
+.view-category-manager-dev .view-content{display: inline-block; vertical-align: top; width: 100%;}
+.view-category-manager-dev .view-content > .item-list > ul > li{padding: 10px; border: 1px solid #ddd; width: 32%; margin-right: 1%;}
+.view-category-manager-dev .view-content ul li.lavel-1{float: left;}
+.view-category-manager-dev .view-content ul li.lavel-1 .item-list{height: auto !important;}
 .node-photogallery-form .field-name-field-story-resize-extra-large {padding-left: 0;}
 .node-photogallery-form .field-name-field-story-resize-extra-large > .form-type-checkboxes > label{float: left;}
 .node-photogallery-form .vertical-tabs{border: none;}
 form .path-form.fieldset.titled > .fieldset-content,
 form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .vertical-tabs fieldset.titled.metatags-form .fieldset-content{padding: 0;}
 .node-photogallery-form a.token-dialog{display: none;}
-.photogallery-list{margin: 0 -10px;}
-.photogallery-list li{padding: 10px; max-width: 245px; display: inline-block; vertical-align: top; margin: 0 10px; border: 1px solid #ddd;}
+.photogallery-list{margin: 0 -10px; font-size: 0;}
+.photogallery-list li{padding: 10px; max-width: 245px; display: inline-block; vertical-align: top; margin: 10px; border: 1px solid #ddd; font-size: 13px;}
 .photogallery-list li audio{max-width: 100%;}
 .photogallery-list li img{width: 245px; height: 184px;}
 .node-photogallery-form .field-multiple-table tbody td fieldset.collapsible .cancel.button-remove.form-submit{margin-left: 140px;}
+.category-manager-details, 
+.view-category-manager-dev .view-content ul li.lavel-1 .item-list, 
+.view-category-manager-dev .view-content ul li{float: left; width: 100%;}

@@ -1,5 +1,5 @@
 name = User Management
-description = User Management for ITG-147 Bug resolved profic pic issue resolve
+description = User Management for ITG-147 Bug resolved intern/author can see User Management Listing Tab
 core = 7.x
 package = Features
 version = 7.x-1.0-beta1
