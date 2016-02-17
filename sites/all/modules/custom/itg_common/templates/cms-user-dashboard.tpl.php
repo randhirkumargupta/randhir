@@ -4,7 +4,7 @@
  * Theme implementation for story form in tab display.
  * 
  */
-
+//p($data);
 ?>
 <ul class="dashboard-tab">
   <li>

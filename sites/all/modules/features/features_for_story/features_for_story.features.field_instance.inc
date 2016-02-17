@@ -258,7 +258,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_archive',
-    'label' => 'Archive',
+    'label' => 'Are you sure you want to Archive?',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -2173,7 +2173,7 @@ function features_for_story_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Archive');
+  t('Are you sure you want to Archive?');
   t('Buzz');
   t('Buzz Description');
   t('Byline');
