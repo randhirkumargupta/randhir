@@ -223,6 +223,11 @@ function itg_msi_node_insert($node){
       _create_issue_using_xmlfile($node);
       break;
 
+    case 'issue':
+      module_load_include('inc', 'itg_msi', 'create_issue_xml');
+      _create_issue_using_xmlfile($node);
+      break;
+
     default:
       break;
   }

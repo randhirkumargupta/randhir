@@ -16,9 +16,9 @@ function _create_issue_using_xmlfile($node){
     $file = $node->field_supp_import_xml[LANGUAGE_NONE];
   }
   if ($node->type == 'issue') {
-    $magazine = $node->field_issue_select_magazine[LANGUAGE_NONE][0]['target_id'];
+    $magazine = $node->field_issue_magazine[LANGUAGE_NONE][0]['target_id'];
     $Supplement = $node->field_issue_supplement[LANGUAGE_NONE][0]['target_id'];
-    $file = $node->field_issue_import_xml[LANGUAGE_NONE];
+    $file = $node->field_field_issue_import_xml[LANGUAGE_NONE];
   }
   
   //Create multiple node
@@ -45,9 +45,9 @@ function _create_issue_using_xmlfile($node){
      
     $kicker = htmlentities(strip_tags(trim($xml_other['kicker']->p)));
     $byline = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');;
-    $headline = htmlentities($xml_other['headline']->p);
+    $headline = htmlentities(strip_tags(trim($xml_other['headline']->p)));
     $comment_question = htmlentities($node->field_story_comment_question[LANGUAGE_NONE][0]['value']);
-
+    
     //Prepare body
     foreach($xml_other['body']->p as $bodyTxt){
       $body .= '<p>'.htmlentities($bodyTxt).'</p>';
