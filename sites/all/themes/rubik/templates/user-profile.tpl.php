@@ -40,7 +40,7 @@
   <div class="field-name-field-user-picture">
   <div class="field-items">
   <?php
-    $file=$elements['#account']->field_user_picture['und'][0]['uri']; print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+    $file=$elements['#account']->field_user_picture[LANGUAGE_NONE][0]['uri']; print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
   ?>
   </div>
   </div>
