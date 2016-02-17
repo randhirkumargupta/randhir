@@ -676,7 +676,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -791,7 +791,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -832,7 +832,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
