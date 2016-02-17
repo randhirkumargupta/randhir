@@ -144,7 +144,6 @@ function itg_common_after_user_register_validate(&$form, &$form_state) {
   $form['account']['pass']['pass2']['#maxlength'] = 8;
   return $form;
 }
-
 /**
  * Password validation for editing user profile
  * @param array $form
