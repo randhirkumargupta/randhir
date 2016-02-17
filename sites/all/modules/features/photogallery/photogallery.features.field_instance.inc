@@ -1351,46 +1351,6 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'node-photogallery-field_story_resize_extra_large'.
-  $field_instances['node-photogallery-field_story_resize_extra_large'] = array(
-    'bundle' => 'photogallery',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Resize extra large',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_resize_extra_large',
-    'label' => 'Resize extra large ',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 10,
-    ),
-  );
-
   // Exported field_instance: 'node-photogallery-field_story_small_image'.
   $field_instances['node-photogallery-field_story_small_image'] = array(
     'bundle' => 'photogallery',
@@ -1537,8 +1497,6 @@ function photogallery_field_default_field_instances() {
   t('People Tag');
   t('Photo by');
   t('Product Tag');
-  t('Resize extra large');
-  t('Resize extra large ');
   t('Section');
   t('Set As Featured');
   t('Small image');

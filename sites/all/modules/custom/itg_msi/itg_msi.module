@@ -217,13 +217,17 @@ function itg_msi_node_access($node, $op, $account) {
  * @param Object $node
  */
 function itg_msi_node_insert($node){
-  //print_r($node); exit;
   switch ($node->type) {
-    case 'page':
-     //module_load_include('inc', 'itg_msi', 'create_issue_xml');
-      //_create_issue_using_xmlfile($node->field_basic_upload_xml[LANGUAGE_NONE]);
+    case 'supplement':
+      module_load_include('inc', 'itg_msi', 'create_issue_xml');
+      _create_issue_using_xmlfile($node);
       break;
-    
+
+    case 'issue':
+      module_load_include('inc', 'itg_msi', 'create_issue_xml');
+      _create_issue_using_xmlfile($node);
+      break;
+
     default:
       break;
   }
@@ -347,3 +351,38 @@ function itg_msi_check_duplicate_title() {
       echo drupal_json_encode(array('Code' => 0));
     }
 }
+
+/**
+ * Get tid using term name and vocubulary name
+ * @param String $term_name
+ * @param String $vocabulary_name
+ * @return boolean
+ */
+function itg_msi_get_term_from_name($term_name, $vocabulary_name) {
+  if ($vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary_name)) {
+    $tree = taxonomy_get_tree($vocabulary->vid);
+    foreach ($tree as $term) {
+      if ($term->name == $term_name) {
+        return $term->tid;
+      }
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Get nid of a node using title and type
+ * @param String $title
+ * @param String $type
+ * @return Int $nid
+ */
+function itg_msi_get_nid_using_title_type($title, $type){
+  $entity_arr = entity_load('node', array(), array('type' => $type, 'title' => $title));
+  foreach ($entity_arr as $key => $val) {
+    $nid = $entity_arr[$key]->nid;
+  }
+  return $nid;
+}
+ 
+
+
