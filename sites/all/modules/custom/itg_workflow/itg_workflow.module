@@ -18,7 +18,7 @@
  */
 function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
-  
+  //pr($form_id);
   switch ($form_id) {
     case 'story_node_form':
       $form['#after_build'][] = 'itg_workflow_after_build';      
@@ -141,6 +141,15 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
                      jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();                     
                  });
             });', array('type' => 'inline', 'scope' => 'footer'));
+  } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page') {     
+    
+      drupal_add_js('jQuery(document).ready(function() {
+               jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
+               var myInputBoxID = "edit-bundle-story-appendfield-story-archive";
+               jQuery("label[for=" + myInputBoxID + "]").hide();
+               jQuery("#edit-bundle-story-appendfield-story-archive").hide();
+               jQuery("#edit-tokens").hide();
+             });', array('type' => 'inline', 'scope' => 'footer'));
   }
   
   return $form;

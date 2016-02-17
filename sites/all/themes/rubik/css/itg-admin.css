@@ -69,6 +69,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .preview-wrapper, 
 .page-node-add-magazine .preview-wrapper, 
 .node-type-magazine .preview-wrapper, 
+.page-node-add-photogallery .preview-wrapper, 
+.node-type-photogallery .preview-wrapper, 
 .node-type-story .preview-wrapper, 
 .page-node-add-breaking-news .preview-wrapper,
 .node-type-breaking-news .preview-wrapper{
@@ -84,6 +86,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-magazine .preview, 
 .node-type-story .preview,
 .node-type-magazine .preview, 
+.page-node-add-photogallery .preview, 
+.node-type-photogallery .preview,
 .page-node-add-breaking-news .preview,
 .node-type-breaking-news .preview{
   background-color: #fff;
@@ -99,7 +103,9 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .preview > h3,
 .node-type-story .preview > h3,
 .page-node-add-magazine .preview > h3,
-.node-type-magazine .preview > h3, 
+.node-type-magazine .preview > h3,
+.page-node-add-photogallery .preview > h3, 
+.node-type-photogallery .preview > h3,
 .page-node-add-breaking-news .preview > h3,
 .node-type-breaking-news .preview > h3{
   font-size: 24px;
@@ -118,7 +124,9 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .close-preview, 
 .node-type-story .close-preview, 
 .page-node-add-magazine .close-preview,
-.node-type-magazine .close-preview, 
+.node-type-magazine .close-preview,
+.page-node-add-photogallery .close-preview, 
+.node-type-photogallery .close-preview,
 .page-node-add-breaking-news .close-preview,
 .node-type-breaking-news .close-preview{
   display: block;
@@ -135,6 +143,14 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-story .node-preview .column-side, 
 .node-type-story .node-title, 
 .node-type-story .preview > h3:first-child, 
+.page-node-add-photogallery .node-teaser, 
+.page-node-add-photogallery .node-preview .column-side, 
+.page-node-add-photogallery .node-title, 
+.page-node-add-photogallery .preview > h3:first-child,
+.node-type-photogallery .node-teaser, 
+.node-type-photogallery .node-preview .column-side, 
+.node-type-photogallery .node-title, 
+.node-type-photogallery .preview > h3:first-child, 
 .page-node-add-breaking-news .node-teaser, 
 .page-node-add-breaking-news .node-preview .column-side, 
 .page-node-add-breaking-news .node-title, 
@@ -147,6 +163,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 }
 .page-node-add-story div.node,
 .page-node-add-breaking-news div.node,
+.page-node-add-photogallery div.node, 
+.node-type-photogallery div.node,
 .node-type-breaking-news div.node,
 .node-type-story div.node{
   background: none;
@@ -163,6 +181,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .column-main,
 .page-node-add-breaking-news .column-main,
 .node-type-story .column-main,
+.page-node-add-photogallery .column-main, 
+.node-type-photogallery .column-main,
 .node-type-breaking-news .column-main{
   display: inline-block;
   width: 100%;
@@ -639,7 +659,7 @@ table.sticky-header{z-index: 99;}
 #edit-field-magazine-publish, #edit-field-supp-publish{padding-left: 300px;}
 #edit-field-publish-time .container-inline-date .date-padding .form-type-textfield:first-child, 
 #edit-field-publish-time .container-inline-date .date-padding .form-type-textfield label{display: none;}
-.pre-desc{margin: -20px 0 10px; font-size: 12px; padding-left: 300px;}
+.pre-desc{margin: -20px 0 10px; font-size: 11px; padding-left: 300px; color: #8d8d8d;}
 .attachment .count{display: inline-block; vertical-align: middle; padding: 5px 2px;}
 .workbench-moderation-moderate-form .form-type-select{display: inline-block; vertical-align: middle;}
 #edit-field-issue-title .date-combo .form-text{float: left;}
@@ -654,7 +674,8 @@ form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-pa
 .vertical-tabs{background: none;}
 .node-issue-form .vertical-tabs, 
 .node-supplement-form .vertical-tabs, 
-.node-magazine-form .vertical-tabs{padding-left: 0;}
+.node-magazine-form .vertical-tabs, 
+.node-photogallery-form .vertical-tabs{padding-left: 0;}
 .cm-node-view .field-div{display: inline-block; vertical-align: top; width: 100%; padding-bottom: 10px;}
 .cm-node-view .field-div .field-label{float: left; width: 240px;}
 .cm-node-view .field-div .field-item{float: left; width: 560px;}
@@ -664,3 +685,22 @@ form fieldset.date-combo .container-inline-date .date-padding .form-item span.er
 .form-type-managed-file .form-managed-file span.file-size{float: left; padding-top: 5px;} 
 .cm-node-view{padding: 20px; border-top: 1px solid #eee;}
 .field-item{word-wrap: break-word;}
+.category-manager-details .cmd-heading{font-size: 16px;font-weight: bold;line-height: 30px; cursor: pointer;}
+.view-category-manager-dev .view-content{display: inline-block; vertical-align: top; width: 100%;}
+.view-category-manager-dev .view-content > .item-list > ul > li{padding: 10px; border: 1px solid #ddd; width: 32%; margin-right: 1%;}
+.view-category-manager-dev .view-content ul li.lavel-1{float: left;}
+.view-category-manager-dev .view-content ul li.lavel-1 .item-list{height: auto !important;}
+.node-photogallery-form .field-name-field-story-resize-extra-large {padding-left: 0;}
+.node-photogallery-form .field-name-field-story-resize-extra-large > .form-type-checkboxes > label{float: left;}
+.node-photogallery-form .vertical-tabs{border: none;}
+form .path-form.fieldset.titled > .fieldset-content,
+form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .vertical-tabs fieldset.titled.metatags-form .fieldset-content{padding: 0;}
+.node-photogallery-form a.token-dialog{display: none;}
+.photogallery-list{margin: 0 -10px; font-size: 0;}
+.photogallery-list li{padding: 10px; max-width: 245px; display: inline-block; vertical-align: top; margin: 10px; border: 1px solid #ddd; font-size: 13px;}
+.photogallery-list li audio{max-width: 100%;}
+.photogallery-list li img{width: 245px; height: 184px;}
+.node-photogallery-form .field-multiple-table tbody td fieldset.collapsible .cancel.button-remove.form-submit{margin-left: 140px;}
+.category-manager-details, 
+.view-category-manager-dev .view-content ul li.lavel-1 .item-list, 
+.view-category-manager-dev .view-content ul li{float: left; width: 100%;}

@@ -47,7 +47,7 @@
           <?php if ($view_mode == 'full'): ?>
 
             <div class="basic-details content-box">
-              <h2>Element</h2>
+              <h2>Basic Details</h2>
               <div class="content-details">
                 <div class="field">
                   <div class="field-label">Gallery Title:</div>
@@ -152,17 +152,19 @@
             <?php endif; ?>
             <?php
             $items = field_get_items('node', $node, 'field_gallery_image');
-
             foreach ($items as $imagecollection) {
-              $output .= '<li>';
               $imgfid = $imagecollection['field_images']['und'][0]['fid'];
               $audfid = $imagecollection['field_audio']['und'][0]['fid'];
+         if ($imgfid != 0) {
+                $output .= '<li>';
               if (module_exists('itg_photogallery')) {
                 if (!empty($imgfid)) {
                   $imguri = _itg_photogallery_fid($imgfid);
                   $style = 'thumbnail';
                   $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
                 }
+              }
+              if (module_exists('itg_photogallery')) {
                 if (!empty($audfid)) {
                   $audiouri = _itg_photogallery_fid($audfid);
                   $output .= '<audio controls>
@@ -173,33 +175,40 @@
                 elseif (isset($node->field_common_audio_file['und'])) {
                   if (isset($node->field_common_audio['und']) && $node->field_common_audio['und'][0]['value'] == 1) {
                     $audiouri = $node->field_common_audio_file['und'][0]['uri'];
-                    $output .= '<audio controls>
+                    $output .= '<div class="audio-div"><audio controls>
                                 <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
                                 Your browser does not support the audio element.
-                              </audio>';
+                              </audio></div>';
                   }
                 }
-                if(isset($imagecollection['field_photo_byline']['und'])){
-                 // pr(itg_photogallery_byline_photoby('node', $imagecollection['field_photo_byline']['und'][0]['target_id']));
-                  $output .= '<div class="photo-byline">'.itg_photogallery_byline_photoby('node', $imagecollection['field_photo_byline']['und'][0]['target_id']).'</div>';
-                }
-                if(isset($imagecollection['field_photo_by']['und'][0])){
-                  $output .= '<div class="photo-by">'.itg_photogallery_byline_photoby('photoby', $imagecollection['field_photo_by']['und'][0]['target_id']).'</div>'; 
-                }
               }
-              $output .= $imagecollection['field_title']['und'][0]['value'];
-              if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {
-                $output .= $imagecollection['field_credit']['und'][0]['value'];
-              }
-              elseif (isset($node->field_credit_name['und']) && $node->field_credit_to_all['und'][0]['value'] == 1) {
-                $output .= $node->field_credit_name['und'][0]['value'];
-              }
-              $output .= $imagecollection['field_image_description']['und'][0]['value'];
-              $output .= '</li>';
-              // $a[] = $output; 
+            
+            if (isset($imagecollection['field_title']['und']) && !empty($imagecollection['field_title']['und'][0]['value'])) {
+              $output .= '<div class="photo-title"><strong>' . $imagecollection['field_title']['und'][0]['value'] . '</strong></div>';
             }
-            echo '<ul>' . $output . '</ul>';
-            ?>
+
+            if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {
+              $output .= '<div class="photo-credit"><span>' . $imagecollection['field_credit']['und'][0]['value'] . '</span></div>';
+            }
+            elseif (isset($node->field_credit_name['und']) && $node->field_credit_to_all['und'][0]['value'] == 1) {
+              $output .= '<div class="photo-credit"><span>' . $node->field_credit_name['und'][0]['value'] . '</span></div>';
+            }
+
+            if (isset($imagecollection['field_image_description']['und']) && !empty($imagecollection['field_image_description']['und'][0]['value'])) {
+              $output .= '<div class="image-description"><span>' . $imagecollection['field_image_description']['und'][0]['value'] . '</span></div>';
+            }
+            $output .= '</li>';
+               }
+            }
+            if(isset($output) && !empty($output)): ?>
+           <div class="expert-details content-box">
+                <h2>Gallery Individual Images</h2>
+                <div class="content-details">  
+            
+           <?php  echo '<ul class="photogallery-list">' . $output . '</ul>'; ?>     
+                </div>
+           </div>
+          <?php endif; ?>        
           <?php endif; ?>
         </div>
       <?php endif; ?>

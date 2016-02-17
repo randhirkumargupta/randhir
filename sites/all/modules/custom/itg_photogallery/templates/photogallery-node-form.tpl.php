@@ -45,13 +45,15 @@
 </div>
 <div id="GalleryIndividualImages">
   <h2 class="story-title">Gallery Individual Images</h2>
-
+  
   <?php print drupal_render($form['field_bulk_media_upload']); ?>
   <?php print drupal_render($form['upload']); ?>
   <?php print drupal_render($form['field_common_audio']); ?>
   <?php print drupal_render($form['field_common_audio_file']); ?>
   <?php print drupal_render($form['field_credit_to_all']); ?>
   <?php print drupal_render($form['field_credit_name']); ?>
+  <?php print drupal_render($form['field_photo_byline']);?>
+  <?php print drupal_render($form['field_photo_by']);?>
   <?php print drupal_render($form['field_gallery_image']); ?>
 
 </div>

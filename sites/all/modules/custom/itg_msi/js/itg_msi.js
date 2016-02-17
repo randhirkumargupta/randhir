@@ -27,6 +27,8 @@
         readonly: true
       });
       }
+    //$('#magazine-node-form').submit(function () { return false; });  
+      
       //Check duplicacy on title for magazine
       $('#magazine-node-form #edit-title, #supplement-node-form #edit-title').blur(function() {
         $(".form-item-title .error").remove();
@@ -42,16 +44,16 @@
           success: function(data) {
             if (data.Code === 1) {
               $(".form-item-title").append($('<span class="error">'+type+' title '+trimmed_title+' already exist.</span>'));
-              $("#edit-submit").hide();
+              //$('#magazine-node-form').submit(function () { return false; }); 
+              //$("#edit-submit").prop('disabled', true);
             }
             else {
               $(".form-item-title .error").remove();
-              $("#edit-submit").show();
+              //$("#edit-submit").prop('disabled', false);
             }
           }
         });
       });
-      
     }
  };
 })(jQuery, Drupal, this, this.document);
