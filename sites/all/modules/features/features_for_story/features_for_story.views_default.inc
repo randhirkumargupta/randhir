@@ -641,7 +641,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -972,7 +972,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['form_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -1250,7 +1250,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -1625,7 +1625,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -1924,7 +1924,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['form_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -2301,7 +2301,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -2644,7 +2644,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -2926,7 +2926,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '<';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -3291,7 +3291,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '<';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -3515,14 +3515,14 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['value'] = array(
     'Yes' => 'Yes',
   );
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value_1']['id'] = 'field_story_archive_value_1';
   $handler->display->display_options['filters']['field_story_archive_value_1']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value_1']['field'] = 'field_story_archive_value';
@@ -3886,7 +3886,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Archive (field_story_archive) */
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
@@ -4077,6 +4077,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['log']['id'] = 'log';
   $handler->display->display_options['fields']['log']['table'] = 'node_revision';
   $handler->display->display_options['fields']['log']['field'] = 'log';
+  $handler->display->display_options['fields']['log']['label'] = 'Remarks';
   /* Field: Workbench Moderation: From state */
   $handler->display->display_options['fields']['from_state']['id'] = 'from_state';
   $handler->display->display_options['fields']['from_state']['table'] = 'workbench_moderation_node_history';
@@ -4180,6 +4181,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['log']['id'] = 'log';
   $handler->display->display_options['fields']['log']['table'] = 'node_revision';
   $handler->display->display_options['fields']['log']['field'] = 'log';
+  $handler->display->display_options['fields']['log']['label'] = 'Remarks';
   $handler->display->display_options['fields']['log']['exclude'] = TRUE;
   /* Field: Content revision: Vid */
   $handler->display->display_options['fields']['vid']['id'] = 'vid';
@@ -4274,6 +4276,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['log']['id'] = 'log';
   $handler->display->display_options['fields']['log']['table'] = 'node_revision';
   $handler->display->display_options['fields']['log']['field'] = 'log';
+  $handler->display->display_options['fields']['log']['label'] = 'Remarks';
   /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -4294,16 +4297,16 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['timestamp']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['timestamp']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content revision: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node_revision';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['nid']['default_argument_options']['code'] = 'return arg(1);';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Contextual filter: Content revision: Vid */
+  $handler->display->display_options['arguments']['vid']['id'] = 'vid';
+  $handler->display->display_options['arguments']['vid']['table'] = 'node_revision';
+  $handler->display->display_options['arguments']['vid']['field'] = 'vid';
+  $handler->display->display_options['arguments']['vid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['vid']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['vid']['default_argument_options']['code'] = 'return arg(3);';
+  $handler->display->display_options['arguments']['vid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['vid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['vid']['summary_options']['items_per_page'] = '25';
   $export['view_moderation_history'] = $view;
 
   return $export;
