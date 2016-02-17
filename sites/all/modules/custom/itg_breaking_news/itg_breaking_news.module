@@ -97,8 +97,8 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id){
    $form['field_source']['#access'] = FALSE;
   }
   // code to add taxonomy parent terms with no child
-  $vid = taxonomy_vocabulary_machine_name_load('category_management')->vid;
-  $tax=taxonomy_get_tree($vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  //$vid = taxonomy_vocabulary_machine_name_load('category_management')->vid;
+  $tax=taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
   
   foreach($tax as $key => $val){
         $op[$val->tid]=$val->name;
