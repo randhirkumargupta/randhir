@@ -108,6 +108,20 @@
                   $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
                 }
               }
+              if (isset($imagecollection['field_title']['und']) && !empty($imagecollection['field_title']['und'][0]['value'])) {
+              $output .= '<div class="details-parent"><div class="photo-title"><strong>' . $imagecollection['field_title']['und'][0]['value'] . '</strong></div>';
+            }
+
+            if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {
+              $output .= '<div class="photo-credit"><span>' . $imagecollection['field_credit']['und'][0]['value'] . '</span></div>';
+            }
+            elseif (isset($node->field_credit_name['und']) && $node->field_credit_to_all['und'][0]['value'] == 1) {
+              $output .= '<div class="photo-credit"><span>' . $node->field_credit_name['und'][0]['value'] . '</span></div>';
+            }
+
+            if (isset($imagecollection['field_image_description']['und']) && !empty($imagecollection['field_image_description']['und'][0]['value'])) {
+              $output .= '<div class="image-description"><span>' . $imagecollection['field_image_description']['und'][0]['value'] . '</span></div></div>';
+            }
               if (module_exists('itg_photogallery')) {
                 if (!empty($audfid)) {
                   $audiouri = _itg_photogallery_fid($audfid);
@@ -127,20 +141,7 @@
                 }
               }
             
-            if (isset($imagecollection['field_title']['und']) && !empty($imagecollection['field_title']['und'][0]['value'])) {
-              $output .= '<div class="photo-title"><strong>' . $imagecollection['field_title']['und'][0]['value'] . '</strong></div>';
-            }
-
-            if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {
-              $output .= '<div class="photo-credit"><span>' . $imagecollection['field_credit']['und'][0]['value'] . '</span></div>';
-            }
-            elseif (isset($node->field_credit_name['und']) && $node->field_credit_to_all['und'][0]['value'] == 1) {
-              $output .= '<div class="photo-credit"><span>' . $node->field_credit_name['und'][0]['value'] . '</span></div>';
-            }
-
-            if (isset($imagecollection['field_image_description']['und']) && !empty($imagecollection['field_image_description']['und'][0]['value'])) {
-              $output .= '<div class="image-description"><span>' . $imagecollection['field_image_description']['und'][0]['value'] . '</span></div>';
-            }
+            
             $output .= '</li>';
                }
             }
@@ -156,7 +157,7 @@
             if (!empty($field_photo_by)): ?>
                   <div class="photobyline"><?php print render($content['field_photo_by']); ?></div>
             <?php endif; ?>      
-           <?php  echo '<ul class="photogallery-list">' . $output . '</ul>'; ?>     
+           <?php  echo '<div class="photogallery-list flexslider"><ul class="slides">' . $output . '</ul></div>'; ?>     
                 </div>
            </div>
           <?php endif; ?> 
