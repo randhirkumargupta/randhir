@@ -26,11 +26,19 @@ function itg_msi_permission() {
  * @return string
  */
 function itg_msi_menu(){
+  
   $items['check-duplicate-title/%'] = array(
       'page callback' => 'itg_msi_check_duplicate_title',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
   );
+  
+  $items['content/%/autocomplete'] = array(
+    'page callback' => 'itg_msi_autocomplete_content',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -183,12 +191,22 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
      if($form_state['view']->name == 'manage_supplements'){
        $type = 'supplement';
      }
-     
      //Call function autocomplete to show matching titles
      $form['title']['#autocomplete_path'] = 'content-title-list/'.$type.'/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
    }
+   
+   //Add aotocomplete on issue title
+   if ($form['#id'] == 'views-exposed-form-manage-issues-page'){
+      if($form_state['view']->name == 'manage_issues'){
+       $type = 'issue';
+     }
+     $form['title']['#autocomplete_path'] = 'content/'.$type.'/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title')); 
+   }
 }
+
+
 
 /*******************************Node Related hooks*****************************/
 
@@ -217,13 +235,17 @@ function itg_msi_node_access($node, $op, $account) {
  * @param Object $node
  */
 function itg_msi_node_insert($node){
-  //print_r($node); exit;
   switch ($node->type) {
-    case 'page':
-     //module_load_include('inc', 'itg_msi', 'create_issue_xml');
-      //_create_issue_using_xmlfile($node->field_basic_upload_xml[LANGUAGE_NONE]);
+    case 'supplement':
+      module_load_include('inc', 'itg_msi', 'create_issue_xml');
+      _create_issue_using_xmlfile($node);
       break;
-    
+
+    case 'issue':
+      module_load_include('inc', 'itg_msi', 'create_issue_xml');
+      _create_issue_using_xmlfile($node);
+      break;
+
     default:
       break;
   }
@@ -347,3 +369,62 @@ function itg_msi_check_duplicate_title() {
       echo drupal_json_encode(array('Code' => 0));
     }
 }
+
+/**
+ * Get tid using term name and vocubulary name
+ * @param String $term_name
+ * @param String $vocabulary_name
+ * @return boolean
+ */
+function itg_msi_get_term_from_name($term_name, $vocabulary_name) {
+  if ($vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary_name)) {
+    $tree = taxonomy_get_tree($vocabulary->vid);
+    foreach ($tree as $term) {
+      if ($term->name == $term_name) {
+        return $term->tid;
+      }
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Get nid of a node using title and type
+ * @param String $title
+ * @param String $type
+ * @return Int $nid
+ */
+function itg_msi_get_nid_using_title_type($title, $type){
+  $entity_arr = entity_load('node', array(), array('type' => $type, 'title' => $title));
+  foreach ($entity_arr as $key => $val) {
+    $nid = $entity_arr[$key]->nid;
+  }
+  return $nid;
+}
+
+/**
+ * Autocomplete on title(date field) of issue listing
+ * @param string $title
+ */
+function itg_msi_autocomplete_content($title) {
+  
+    if (strlen(trim($title)) > 0) {
+      $content_type = arg(1);
+      $options = '';
+      $title = strtolower(trim($title));
+      $query = db_select('field_data_field_issue_title', 'c');
+      $query->fields('c', array('field_issue_title_value'));
+      $query->condition('field_issue_title_value', '%'.$title.'%', 'LIKE');
+      $query->condition('c.bundle', $content_type, '=');
+      $query->range(0, 20);
+      
+      $result = $query->execute(); 
+      while ($record = $result->fetchAssoc()) {     
+        $options[$record['field_issue_title_value']] = $record['field_issue_title_value'];
+      }    
+      drupal_json_output($options);    
+  }    
+ }
+ 
+
+

@@ -159,31 +159,47 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.page-admin-structure-taxonomy-category-management .form-type-hierarchical-select').append('<div class="discription">Root is the section.</div>');
   
   
-  //jQuery code for cotegory manager page
-  $('.view-category-manager-dev .view-content > div.item-list > ul > li').addClass('lavel-1');
-  $('.view-category-manager-dev .view-content > div.item-list > ul > li > div.item-list > ul > li').addClass('lavel-2');
-  $('.view-category-manager-dev .view-content > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li').addClass('lavel-3');
-  $('.view-category-manager-dev .view-content > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li').addClass('lavel-4');
-  $('.view-category-manager-dev .view-content > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li > div.item-list > ul > li').addClass('lavel-5');
-  $('.lavel-1 > .category-manager-details > .cmd-heading').click(function(){
-    $(this).parents('.lavel-1').find('.item-list').slideUp();
-   $('.lavel-1 > .category-manager-details > .cmd-heading > .fa').toggleClass('fa-plus-square-o');
-    $(this).parent().next().stop().slideToggle();
+  // jQuery Code for category manager page
+  $('.item-list ul li:not(:has(".item-list"))').find('.cmd-heading .fa').remove();
+  $('.cmd-heading').click(function () {
+    $(this).toggleClass('active');
+    if ($(this).parent().next().is(':visible')) {
+      $(this).parent().next().addClass('hide').removeClass('show');
+      $(this).parent().next().find('.cmd-heading').addClass('active');
+    }
+    else {
+      $(this).parent().next().removeClass('hide').addClass('show');
+      $(this).parent().next().find('.item-list').addClass('hide');
+      $(this).parent().next().removeClass('hide');
+    }
   });
-  $('.lavel-2 > .category-manager-details > .cmd-heading').click(function(){
-    $(this).parents('.lavel-2').find('.item-list').slideUp();
-    $('.lavel-2 > .category-manager-details > .cmd-heading > .fa').toggleClass('fa-plus-square-o');
-    $(this).parent().next().stop().slideToggle();
+  
+  // jQuery code to filter category manager
+  $('.itg-section').click(function(e){
+    var el = $('.view-content > .item-list > ul > li > .category-manager-details > .cmd-heading');
+    el.not('.active').addClass('active').parent().next().addClass('hide').find('.cmd-heading').addClass('active');
   });
-  $('.lavel-3 > .category-manager-details > .cmd-heading').click(function(){
-    $(this).parents('.lavel-3').find('.item-list').slideUp();
-    $('.lavel-3 > .category-manager-details > .cmd-heading > .fa').toggleClass('fa-plus-square-o');
-    $(this).parent().next().stop().slideToggle();
+  $('.itg-category').click(function(e){
+    var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+    el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
+    el.parent().parent().parent().parent().prev().children('.cmd-heading').removeClass('active');
   });
-  $('.lavel-4 > .category-manager-details > .cmd-heading').click(function(){
-    $(this).parents('.lavel-4').find('.item-list').slideUp();
-    $('.lavel-4 > .category-manager-details > .cmd-heading > .fa').toggleClass('fa-plus-square-o');
-    $(this).parent().next().stop().slideToggle();
+  $('.itg-sub-category').click(function(e){
+    var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+    el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
+    el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
+  });
+  $('.itg-sub-sub-category').click(function(e){
+    var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li .item-list > ul > li > .category-manager-details > .cmd-heading');
+    el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
+    el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
+  });
+  
+  // jQuery code for flexslider
+  $('.photogallery-list').flexslider({
+    animation: "slide",
+    slideshowSpeed: 3000,
+    controlNav: false
   });
   
   

@@ -680,7 +680,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_gallery_kicer',
-    'label' => 'Gallery Caption (Kicer)',
+    'label' => 'Gallery Caption (Kicker)',
     'required' => 1,
     'settings' => array(
       'display_summary' => 0,
@@ -1019,7 +1019,7 @@ function photogallery_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 16,
       ),
       'teaser' => array(
@@ -1074,7 +1074,7 @@ function photogallery_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
     'label' => 'Extra large image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -1481,7 +1481,7 @@ function photogallery_field_default_field_instances() {
   t('Credit to all');
   t('Extra large image');
   t('Extra small image');
-  t('Gallery Caption (Kicer)');
+  t('Gallery Caption (Kicker)');
   t('Gallery Description');
   t('Gallery Headline');
   t('Gallery Image');

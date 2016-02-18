@@ -59,7 +59,7 @@
                 if (!empty($field_headline)): print render($content['field_headline']);
                 endif;
                 ?>
-                <?php print render($content['	field_photogallery_description']); ?>
+                <?php print render($content['field_photogallery_description']); ?>
               </div>
             </div>
 
@@ -68,7 +68,7 @@
             if (!empty($browsemedia)):
               ?>
               <div class="BrowseMedia">
-                <h2>Gallery Image Upload </h2>
+                <h2>Gallery Cover Image </h2>
                 <div class="content-details">
                   <?php print render($content['field_story_extra_large_image']); ?>
                   <?php print render($content['field_story_large_image']); ?>
@@ -104,31 +104,12 @@
               if (module_exists('itg_photogallery')) {
                 if (!empty($imgfid)) {
                   $imguri = _itg_photogallery_fid($imgfid);
-                  $style = 'thumbnail';
+                  $style = 'photogallery_preview815x300';
                   $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
                 }
               }
-              if (module_exists('itg_photogallery')) {
-                if (!empty($audfid)) {
-                  $audiouri = _itg_photogallery_fid($audfid);
-                  $output .= '<audio controls>
-                              <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
-                              Your browser does not support the audio element.
-                            </audio>';
-                }
-                elseif (isset($node->field_common_audio_file['und'])) {
-                  if (isset($node->field_common_audio['und']) && $node->field_common_audio['und'][0]['value'] == 1) {
-                    $audiouri = $node->field_common_audio_file['und'][0]['uri'];
-                    $output .= '<div class="audio-div"><audio controls>
-                                <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                              </audio></div>';
-                  }
-                }
-              }
-            
-            if (isset($imagecollection['field_title']['und']) && !empty($imagecollection['field_title']['und'][0]['value'])) {
-              $output .= '<div class="photo-title"><strong>' . $imagecollection['field_title']['und'][0]['value'] . '</strong></div>';
+              if (isset($imagecollection['field_title']['und']) && !empty($imagecollection['field_title']['und'][0]['value'])) {
+              $output .= '<div class="details-parent"><div class="photo-title"><strong>' . $imagecollection['field_title']['und'][0]['value'] . '</strong></div>';
             }
 
             if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {
@@ -139,14 +120,34 @@
             }
 
             if (isset($imagecollection['field_image_description']['und']) && !empty($imagecollection['field_image_description']['und'][0]['value'])) {
-              $output .= '<div class="image-description"><span>' . $imagecollection['field_image_description']['und'][0]['value'] . '</span></div>';
+              $output .= '<div class="image-description"><span>' . $imagecollection['field_image_description']['und'][0]['value'] . '</span></div></div>';
             }
+              if (module_exists('itg_photogallery')) {
+                if (!empty($audfid)) {
+                  $audiouri = _itg_photogallery_fid($audfid);
+                  $output .= '<audio controls>
+                              <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
+                              Your browser does not support the audio element.
+                            </audio>';
+                }
+                elseif (isset($node->field_common_audio_file['und']) && !empty($node->field_common_audio_file['und'][0]['uri'])) {
+                  if (isset($node->field_common_audio['und']) && $node->field_common_audio['und'][0]['value'] == 1) {
+                    $audiouri = $node->field_common_audio_file['und'][0]['uri'];
+                    $output .= '<div class="audio-div"><audio controls>
+                                <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                              </audio></div>';
+                  }
+                }
+              }
+            
+            
             $output .= '</li>';
                }
             }
             if(isset($output) && !empty($output)): ?>
            <div class="expert-details content-box">
-                <h2>Gallery Individual Images</h2>
+                <h2>Gallery Images Upload</h2>
                 <div class="content-details">  
             <?php $field_photo_byline = render($content['field_photo_byline']); 
             if (!empty($field_photo_byline)): ?>
@@ -156,7 +157,7 @@
             if (!empty($field_photo_by)): ?>
                   <div class="photobyline"><?php print render($content['field_photo_by']); ?></div>
             <?php endif; ?>      
-           <?php  echo '<ul class="photogallery-list">' . $output . '</ul>'; ?>     
+           <?php  echo '<div class="photogallery-list flexslider"><ul class="slides">' . $output . '</ul></div>'; ?>     
                 </div>
            </div>
           <?php endif; ?> 

@@ -241,22 +241,24 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['field_cm_sponsored_category']['#disabled'] = TRUE;
         $form['relations']['#attributes'] = array('disabled' => TRUE);
       }
-      
+      // Taxonomy active deactive logic
+      $form['term_state'] = array(
+        '#prefix' => '<label>Term State</label>',
+        '#type' => 'checkbox',
+        '#title' => t('Active'),
+        '#weight' => 20,
+        '#default_value' => true,
+        '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
+      );
+      // Hode publish time field.
+      $form['field_publish_time']['#prefix'] = '<div style="display:none;">';
+      $form['field_publish_time']['#suffix'] = '</div>';
       //Call valiadte and after build
       $form['#validate'][] = 'itg_category_manager_term_validate';
       $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
       
     }
-  }
-  // Taxonomy active deactive login
-  $form['term_state'] = array(
-    '#prefix' => '<label>Term State</label>',
-    '#type' => 'checkbox',
-    '#title' => t('Active'),
-    '#weight' => 20,
-    '#default_value' => true,
-    '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
-  );
+  }  
 }
 /**
  * Get all categories under their parent category
@@ -560,9 +562,16 @@ function itg_category_manager_taxonomy_term_insert($term) {
     'uid' => $user->uid,
     'created' => time(),
     'changed' => time(),
-    'state' => 1,
+    'status' => 1,
   );
-  drupal_write_record('itg_category_manager', $data);  
+  drupal_write_record('itg_category_manager', $data); 
+  $data = array();
+  $data = array(
+    'tid' => $term->tid,
+    'uid' => $user->uid,
+    'changed' => time(),
+  );
+   drupal_write_record('itg_sef_url', $data);  
 }
 
 /**
@@ -573,7 +582,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
 function itg_category_manager_taxonomy_term_presave($term) {
   if ($term->tid !== NULL) {
     // Fetch old data from table
-    $itgQuery = db_select('itg_category_manager', 'itg');
+    /* $itgQuery = db_select('itg_category_manager', 'itg');
     $itgQuery->condition('tid', $term->tid);
     $itgQuery->fields('itg', array('sef_url', 'sef_url_modified'));
     $itgResult = $itgQuery->execute();
@@ -589,10 +598,25 @@ function itg_category_manager_taxonomy_term_presave($term) {
     }
     $data['uid'] = $user->uid;
     $data['changed'] = time();
-
-    // Query to update table
     db_update('itg_category_manager')
         ->fields($data)
+        ->condition('tid', $term->tid)
+        ->execute();
+    */
+    // Insert sef url log on update    
+    global $user;      
+    $data = array();
+    $data = array(
+      'tid' => $term->tid,
+      'uid' => $user->uid,
+      'sef_url' => $term->path['alias'],
+      'changed'=> time(),
+    );
+    drupal_write_record('itg_sef_url', $data);  
+    
+    // Update modified date on itg_category_manager table
+    db_update('itg_category_manager')
+        ->fields(array('changed' => time()))
         ->condition('tid', $term->tid)
         ->execute();
   }
@@ -603,7 +627,7 @@ function itg_category_manager_taxonomy_term_presave($term) {
  * Insert url aias to itg-category_manager table against specific term id.
  */
 function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {    
-  db_update('itg_category_manager')
+  db_update('itg_sef_url')
     ->fields(array('sef_url' => $alias))
     ->condition('tid', $context['data']['term']->tid)
     ->execute();
@@ -627,7 +651,7 @@ function itg_category_manager_views_api() {
 function itg_category_manager_views_data() {
   $data['itg_category_manager']['table']['group'] = t('Category Manager');
   $data['itg_category_manager']['table']['base'] = array(
-    'field' => 'id',
+    'field' => 'sef_url',
     'title' => t('Category Manager'),
   ); 
    
@@ -734,25 +758,30 @@ function itg_category_manager_block_view($delta = '') {
   //$data = itg_category_manager_sefurl_log($tid);
   switch ($delta) {
     case 'sef_url_log':      
-      $data = '<div class="audit-info">View Sef Url Log</div>';
+      $data = '<div class="audit-info">Sef Url Logs</div>';
       $arg = arg();      
-      $itgSefLog = itg_category_manager_seflog($arg[2], 5);      
+      $itgSefLog = itg_category_manager_seflog($arg[2], 6);      
       if (count($itgSefLog)) {
         $data .= '<div class="itg-log">';
-        $data .= '<div class="column-33">last URL</div>';
-        $data .= '<div class="column-33">Modified By</div>';
-        $data .= '<div class="column-33">Timestamp</div>';
+        $data .= '<div class="col-25">Sr. No</div>';
+        $data .= '<div class="col-25">last URL</div>';
+        $data .= '<div class="col-25">Modified By</div>';
+        $data .= '<div class="col-25">Timestamp</div>';
         $counter = 0;
         foreach ($itgSefLog as $value) {          
-          $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
-          $data .= '<div class="column-33">'.$url.'</div>';
-          $data .= '<div class="column-33">'.$value->name.'</div>';
-          $data .= '<div class="column-33">'.format_date($value->changed, $type = 'medium', $format = '', $timezone = NULL, $langcode = NULL).'</div>';
           ++$counter;
-        }
-        $data .= '<div class="more">'.l('more...', 'sef-log/'.$arg[2]).'</div>';
+          if ($counter > 5) {
+            continue;
+          }
+          $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
+          $data .= '<div class="col-25">'.$counter.'</div>';
+          $data .= '<div class="col-25">'.$url.'</div>';
+          $data .= '<div class="col-25">'.$value->name.'</div>';
+          $data .= '<div class="col-25">'.format_date($value->changed, 'custom', 'm-d-Y').'</div>';
+          
+        }           
         if ($counter > 5) {
-          $data .= '<div class="more">'.l('more...', 'sef-log/'.$arg[2]).'</div>';
+          $data .= '<div class="more">'.l('more...', 'sef-log/'.$arg[2], array('attributes' => array('target'=>'_blank'))).'</div>';
         }
         $data .= '</div">';
       }
@@ -792,7 +821,13 @@ function itg_category_manager_theme() {
 function itg_category_manager_nodecount() {
   $inputs = $_POST;
   $tid = check_plain($inputs['tid']);
-  echo count(taxonomy_select_nodes($tid));
+  $count = count(taxonomy_select_nodes($tid));
+  if ($count) {
+    echo $count;
+  }
+  else {
+    echo 0;
+  }  
 }
 
 /**
@@ -803,14 +838,15 @@ function itg_category_manager_nodecount() {
 function itg_category_manager_seflog($tid, $limit = NULL) {
   $itgResult = array();
   $itgQuery = array();
-  $itgQuery = db_select('itg_category_manager', 'itg');
+  $itgQuery = db_select('itg_sef_url', 'itg');
   $itgQuery->join('users', 'u', 'itg.uid = u.uid');
   $itgQuery->condition('tid', $tid)
-      ->fields('itg', array('sef_url', 'uid', 'created', 'changed'))
+      ->fields('itg', array('sef_url', 'uid', 'changed'))
       ->fields('u', array('name'));
+      
   if (isset($limit) && $limit != NULL) {
     $itgQuery->range(0, $limit);        
-  }
+  }  
   $itgQuery->orderBy('changed', 'DESC');
   $itgResult = $itgQuery->execute()->fetchAll();
   
@@ -824,14 +860,16 @@ function itg_category_manager_seflogpage($tid) {
   $data = itg_category_manager_seflog($tid);
   $output = '';
   $output .= '<div class="itg-log">';
-  $output .= '<div class="column-33">last URL</div>';
-  $output .= '<div class="column-33">Modified By</div>';
-  $output .= '<div class="column-33">Timestamp</div>';
-  foreach ($data as $value) {
+  $output .= '<div class="col-25">Sr. No</div>';
+  $output .= '<div class="col-25">last URL</div>';
+  $output .= '<div class="col-25">Modified By</div>';
+  $output .= '<div class="col-25">Timestamp</div>';
+  foreach ($data as $key => $value) {
     $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
-    $output .= '<div class="column-33">' . $url . '</div>';
-    $output .= '<div class="column-33">' . $value->name . '</div>';
-    $output .= '<div class="column-33">' . format_date($value->changed, $type = 'medium', $format = '', $timezone = NULL, $langcode = NULL) . '</div>';   
+    $output .= '<div class="col-25">'. ($key + 1) .'</div>';
+    $output .= '<div class="col-25">' . $url . '</div>';
+    $output .= '<div class="col-25">' . $value->name . '</div>';
+    $output .= '<div class="col-25">' . format_date($value->changed, $type = 'medium', $format = '', $timezone = NULL, $langcode = NULL) . '</div>';   
   }
   
   return $output;
