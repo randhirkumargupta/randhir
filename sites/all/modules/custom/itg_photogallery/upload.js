@@ -5,9 +5,9 @@
         attach: function(context) {
             var that = this,
             uploader = $('.plupload-element', context).pluploadQueue();
-            $('.tabledrag-toggle-weight-wrapper a.tabledrag-toggle-weight').hide();
+            
             this.context = context;
-            $('.form-item-field-gallery-image-add-more-number').hide();
+            
             if (!uploader) {
                 return false;
             }
