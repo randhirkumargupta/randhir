@@ -10,6 +10,32 @@
 function features_supplement_magazine_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_field_issue_import_xml'.
+  $field_bases['field_field_issue_import_xml'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_field_issue_import_xml',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'file',
+    'settings' => array(
+      'display_default' => 0,
+      'display_field' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'file',
+  );
+
   // Exported field_base: 'field_issue_large_cover_image'.
   $field_bases['field_issue_large_cover_image'] = array(
     'active' => 1,
@@ -253,7 +279,7 @@ function features_supplement_magazine_field_default_field_bases() {
   // Exported field_base: 'field_supp_import_xml'.
   $field_bases['field_supp_import_xml'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_supp_import_xml',

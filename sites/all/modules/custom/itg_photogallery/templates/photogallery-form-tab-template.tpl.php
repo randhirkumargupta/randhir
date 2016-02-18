@@ -7,12 +7,10 @@
 
 ?>
 <div class="block-itg-story-list">
-<span class="target-link" data-target-id="Element">Element</span> 
-<span class="target-link" data-target-id="Tagstofollow">Tags to follow</span> 
+<span class="target-link" data-target-id="Element">Gallery Basic details</span> 
 <span class="target-link" data-target-id="BrowseMedia">Gallery Image Upload</span>
-<span class="target-link" data-target-id="AddSyndication">Add Syndication</span> 
+<span class="target-link" data-target-id="GalleryIndividualImages">Gallery Individual Upload</span>
+<span class="target-link" data-target-id="Configuration">Configuration</span>
 <span class="target-link" data-target-id="Categorization">Categorization</span>
-
-<span class="target-link" data-target-id="GalleryIndividualImages">Gallery Individual Images</span>
 <span class="target-link" data-target-id="title-metatags">Meta Details</span>
 </div>

@@ -522,10 +522,10 @@ function feature_for_breaking_news_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 'Section ',
+      'value_form' => 'Section',
       'value' => array(
         0 => array(
-          'value' => 'Section ',
+          'value' => 'Section',
         ),
       ),
       'values' => array(),

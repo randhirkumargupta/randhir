@@ -10,10 +10,13 @@ regions[page_top] = Page top
 regions[page_bottom] = Page bottom
 regions[sidebar_second] = Sidebar second
 
+scripts[] = js/jquery.flexslider.js
 scripts[] = js/rubik.js
+
 stylesheets[screen][] = css/core.css
 stylesheets[screen][] = css/icons.css
 stylesheets[screen][] = css/font-awesome.css
+stylesheets[screen][] = css/flexslider.css
 stylesheets[screen][] = css/style.css
 stylesheets[screen][] = css/itg-admin.css
 stylesheets[screen][] = css/jquery.ui.theme.css

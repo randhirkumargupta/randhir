@@ -5,7 +5,7 @@
         attach: function(context) {
             var that = this,
             uploader = $('.plupload-element', context).pluploadQueue();
-
+            $('.tabledrag-toggle-weight-wrapper a.tabledrag-toggle-weight').hide();
             this.context = context;
             $('.form-item-field-gallery-image-add-more-number').hide();
             if (!uploader) {
@@ -47,9 +47,12 @@
                 //uploader.init();
 
                 uploader.refresh();
+                
                 $('#edit-field-gallery-image-add-more-number').val(1);
 
             }, 500);
+            $('.plupload_filelist_footer .plupload_buttons').show();
+            $('.plupload_file_name span.plupload_upload_status').hide();
         }
     };
 
