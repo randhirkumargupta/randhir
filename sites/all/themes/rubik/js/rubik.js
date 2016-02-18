@@ -174,11 +174,19 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   
-  $('.view-category-manager-dev .view-header > div').click(function(){
-    if($(this).hasClass('itg-section')){
-      
-    }
-  });
+//  $('.view-category-manager-dev .view-header > div').click(function(){
+//    if($(this).hasClass('itg-section')){
+//      
+//    }
+//  });
+  
+//  $('.itg-section').click(function(e){
+//    var el = $('.view-content > .item-list > ul > li > .category-manager-details > .cmd-heading');
+//        if(el.not('.active')){
+//            el.trigger('click');
+//          }
+//        console.log(el);
+//  });
   
   // jQuery code for flexslider
   $('.photogallery-list').flexslider({
