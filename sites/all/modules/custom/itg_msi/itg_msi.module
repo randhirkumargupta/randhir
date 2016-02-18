@@ -26,34 +26,23 @@ function itg_msi_permission() {
  * @return string
  */
 function itg_msi_menu(){
+  
   $items['check-duplicate-title/%'] = array(
       'page callback' => 'itg_msi_check_duplicate_title',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
   );
+  
+  $items['content/%/autocomplete'] = array(
+    'page callback' => 'itg_msi_autocomplete_content',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
-/**
- * Implement hook_node_access
- * @param Object $node
- * @param String $op
- * @param Array $account
- * @return string
- */
-function itg_msi_node_access($node, $op, $account) {
-  // We're only bothered about the 'view' operation at the moment
-  if ($op == 'view') {
-    // If the user has access to our new permission, let 'em at it
-    if (user_access('custom view unpublished content', $account)) {
-      return NODE_ACCESS_ALLOW;
-    }
-  }
-
-  // For everything else let the system decide.
-  return NODE_ACCESS_IGNORE;
-}
-
+/***************************Form Related hooks*********************************/
 /**
  * Implement hook_form_alter
  * @param Array $form
@@ -118,30 +107,6 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
 }
 
 /**
- * Redirect node to their manage pages after node creation
- * @param Array $form
- * @param Array $form_state
- */
-function _submit_handler_for_redirect($form, &$form_state) {
-  
-  unset($_GET['destination']); // Unset destination
-  
-  switch ($form['#form_id']) {
-    case 'magazine_node_form':
-      $form_state['redirect'] = 'manage-magazines';
-      break;
-
-    case 'supplement_node_form':
-      $form_state['redirect'] = 'manage-supplements';
-      break;
-
-    case 'issue_node_form':
-      $form_state['redirect'] = 'manage-issues';
-      break;
-  }
-}
-
-/**
  * After build function for magazine, supplement and issue
  * @param Array $form
  * @param Array $form_state
@@ -180,6 +145,9 @@ function itg_msi_form_after_build($form, &$form_state){
   return $form;
 }
 
+
+/*******************************View Related hooks*****************************/
+
 /**
  * Implement hook_views_pre_render
  * @param Object $view
@@ -205,6 +173,81 @@ function itg_msi_views_pre_render(&$view) {
     $header_content_issue = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
     $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
     $view->attachment_before = $header_content_issue;
+  }
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param String $form_id
+ */
+function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
+   if ($form['#id'] == 'views-exposed-form-manage-magazines-page' || $form['#id'] == 'views-exposed-form-manage-supplements-page') {
+     if($form_state['view']->name == 'manage_magazines'){
+       $type = 'magazine';
+     }
+     if($form_state['view']->name == 'manage_supplements'){
+       $type = 'supplement';
+     }
+     //Call function autocomplete to show matching titles
+     $form['title']['#autocomplete_path'] = 'content-title-list/'.$type.'/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
+   }
+   
+   //Add aotocomplete on issue title
+   if ($form['#id'] == 'views-exposed-form-manage-issues-page'){
+      if($form_state['view']->name == 'manage_issues'){
+       $type = 'issue';
+     }
+     $form['title']['#autocomplete_path'] = 'content/'.$type.'/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title')); 
+   }
+}
+
+
+
+/*******************************Node Related hooks*****************************/
+
+/**
+ * Implement hook_node_access
+ * @param Object $node
+ * @param String $op
+ * @param Array $account
+ * @return string
+ */
+function itg_msi_node_access($node, $op, $account) {
+  // We're only bothered about the 'view' operation at the moment
+  if ($op == 'view') {
+    // If the user has access to our new permission, let 'em at it
+    if (user_access('custom view unpublished content', $account)) {
+      return NODE_ACCESS_ALLOW;
+    }
+  }
+
+  // For everything else let the system decide.
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implement hook_node_insert
+ * @param Object $node
+ */
+function itg_msi_node_insert($node){
+  switch ($node->type) {
+    case 'supplement':
+      module_load_include('inc', 'itg_msi', 'create_issue_xml');
+      _create_issue_using_xmlfile($node);
+      break;
+
+    case 'issue':
+      module_load_include('inc', 'itg_msi', 'create_issue_xml');
+      _create_issue_using_xmlfile($node);
+      break;
+
+    default:
+      break;
   }
 }
 
@@ -242,25 +285,6 @@ function itg_msi_node_presave($node){
 }
 
 /**
- * Implement hook_node_insert
- * @param Object $node
- */
-function itg_msi_node_insert($node){
-  
-  switch ($node->type) {
-    case 'page':
-      $xml_file = file_load($node->field_test_upload_issuexml[LANGUAGE_NONE][0]['fid']);
-      $xml_file_path = str_replace('public://', 'sites/default/files/', $xml_file->uri);
-      _create_issue_using_xmlfile($xml_file_path);
-      
-      break;
-    
-    default:
-      break;
-  }
-}
-
-/**
  * Implement hook_node_validate
  * @param Object $node
  * @param Array $form
@@ -268,19 +292,50 @@ function itg_msi_node_insert($node){
  */
 function itg_msi_node_validate($node, $form, &$form_state) {
   
-  switch ($node->type) {
-    case 'magazine':
-      if (!isset($node->nid)) {
-        $title = $form_state['values']['title'];
-        $results = db_select('node')->fields('node', array('title'))->condition('title', $title, '=')->condition('type', 'magazine')->execute();
-        $matches = array();
-        foreach ($results as $result) {
-          $matches[$result->title] = check_plain($result->title);
-        }
-        if (isset($matches) && !empty($matches)) {
-          form_set_error('title', t('Magazine title must be unique.'));
-        }
-      }
+  if ($node->type == 'magazine' || $node->type == 'supplement') { // Validate duplicacy on titles for magazine and supplement
+    //if (!isset($node->nid)) {
+    $title = $form_state['values']['title'];
+    if (isset($node->nid)) {
+      $results = db_select('node')->fields('node', array('title'))->condition('title', $title, '=')->condition('type', $node->type)->condition('nid', $node->nid, '!=')->execute();
+    } else {
+      $results = db_select('node')->fields('node', array('title'))->condition('title', $title, '=')->condition('type', $node->type)->execute();
+    }
+
+    $matches = array();
+    foreach ($results as $result) {
+      $matches[$result->title] = check_plain($result->title);
+    }
+
+    //Set error for duplicacy
+    if (isset($matches) && !empty($matches)) {
+      form_set_error('title', t(ucfirst($node->type) . ' title ' . $title . ' already exist.'));
+    }
+    
+  }
+}
+
+/**************************Common Functionality********************************/
+
+/**
+ * Redirect node to their manage pages after node creation
+ * @param Array $form
+ * @param Array $form_state
+ */
+function _submit_handler_for_redirect($form, &$form_state) {
+  
+  unset($_GET['destination']); // Unset destination
+  
+  switch ($form['#form_id']) {
+    case 'magazine_node_form':
+      $form_state['redirect'] = 'manage-magazines';
+      break;
+
+    case 'supplement_node_form':
+      $form_state['redirect'] = 'manage-supplements';
+      break;
+
+    case 'issue_node_form':
+      $form_state['redirect'] = 'manage-issues';
       break;
   }
 }
@@ -316,47 +371,60 @@ function itg_msi_check_duplicate_title() {
 }
 
 /**
- * Create issue using xml file
- * @param String $xml_file_path
+ * Get tid using term name and vocubulary name
+ * @param String $term_name
+ * @param String $vocabulary_name
+ * @return boolean
  */
-function _create_issue_using_xmlfile($xml_file_path) {
-  global $user;
-  $xml = simplexml_load_file($xml_file_path); // load xml file details using file path(returns in to array format)
-  
-  $node = new stdClass();
-  $node->title = $xml->title;
-  $node->type = "test";
-  node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
-  
-  $node->language = LANGUAGE_NONE;
-  $node->body[$node->language][0]['value']   = $xml->storybody;;
-  $node->uid = $user->uid;
-  $node->status = 1; //(1 or 0): Published or not
-  $node->promote = 0; //(1 or 0): Promoted to front page
-  $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-  
-  $node = node_submit($node); // Prepare node for saving
-  node_save($node);
+function itg_msi_get_term_from_name($term_name, $vocabulary_name) {
+  if ($vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary_name)) {
+    $tree = taxonomy_get_tree($vocabulary->vid);
+    foreach ($tree as $term) {
+      if ($term->name == $term_name) {
+        return $term->tid;
+      }
+    }
+  }
+  return FALSE;
 }
 
 /**
- * Implement hook_form_views_exposed_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * Get nid of a node using title and type
+ * @param String $title
+ * @param String $type
+ * @return Int $nid
  */
-function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  
-   if ($form['#id'] == 'views-exposed-form-manage-magazines-page' || $form['#id'] == 'views-exposed-form-manage-supplements-page') {
-     if($form_state['view']->name == 'manage_magazines'){
-       $type = 'magazine';
-     }
-     if($form_state['view']->name == 'manage_supplements'){
-       $type = 'supplement';
-     }
-     
-     //Call function autocomplete to show matching titles
-     $form['title']['#autocomplete_path'] = 'content-title-list/'.$type.'/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
-   }
+function itg_msi_get_nid_using_title_type($title, $type){
+  $entity_arr = entity_load('node', array(), array('type' => $type, 'title' => $title));
+  foreach ($entity_arr as $key => $val) {
+    $nid = $entity_arr[$key]->nid;
+  }
+  return $nid;
 }
+
+/**
+ * Autocomplete on title(date field) of issue listing
+ * @param string $title
+ */
+function itg_msi_autocomplete_content($title) {
+  
+    if (strlen(trim($title)) > 0) {
+      $content_type = arg(1);
+      $options = '';
+      $title = strtolower(trim($title));
+      $query = db_select('field_data_field_issue_title', 'c');
+      $query->fields('c', array('field_issue_title_value'));
+      $query->condition('field_issue_title_value', '%'.$title.'%', 'LIKE');
+      $query->condition('c.bundle', $content_type, '=');
+      $query->range(0, 20);
+      
+      $result = $query->execute(); 
+      while ($record = $result->fetchAssoc()) {     
+        $options[$record['field_issue_title_value']] = $record['field_issue_title_value'];
+      }    
+      drupal_json_output($options);    
+  }    
+ }
+ 
+
+

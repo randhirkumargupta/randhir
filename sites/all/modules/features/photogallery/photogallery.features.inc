@@ -21,6 +21,30 @@ function photogallery_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function photogallery_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: photogallery_preview184x245.
+  $styles['photogallery_preview184x245'] = array(
+    'label' => 'photogallery_preview815x300',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 815,
+          'height' => 300,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function photogallery_node_info() {

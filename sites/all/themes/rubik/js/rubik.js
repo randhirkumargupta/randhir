@@ -158,8 +158,32 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   }
   $('.page-admin-structure-taxonomy-category-management .form-type-hierarchical-select').append('<div class="discription">Root is the section.</div>');
   
-  $('.category-manager-details').on('click', '.cmd-heading', function(){
-    $(this).parents('li').find('> .item-list').show();
+  
+  // jQuery Code for category manager page
+  $('.item-list ul li:not(:has(".item-list"))').find('.cmd-heading .fa').remove();
+  $('.cmd-heading').click(function () {
+    $(this).toggleClass('active');
+    if ($(this).parent().next().is(':visible')) {
+      $(this).parent().next().addClass('hide').removeClass('show');
+      $(this).parent().next().find('.cmd-heading').addClass('active');
+    }
+    else {
+      $(this).parent().next().removeClass('hide').addClass('show');
+      $(this).parent().next().find('.item-list').addClass('hide');
+      $(this).parent().next().removeClass('hide');
+    }
+  });
+  
+  $('.view-category-manager-dev .view-header > div').click(function(){
+    if($(this).hasClass('itg-section')){
+      
+    }
+  });
+  
+  // jQuery code for flexslider
+  $('.photogallery-list').flexslider({
+    animation: "slide",
+    slideshowSpeed: 3000
   });
   
   
