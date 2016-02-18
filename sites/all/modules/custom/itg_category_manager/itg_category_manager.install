@@ -57,21 +57,7 @@ function itg_category_manager_schema() {
         'type' => 'int', 
         'not null' => TRUE, 
         'default' => 0
-      ),
-      'sef_url' => array(
-        'description' => 'Sef Url original.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ),
-      'sef_url_modified' => array(
-        'description' => 'Sef Url modified.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ),
+      ),      
       'status' => array(
         'type' => 'int',
         'not null' => TRUE,
@@ -84,10 +70,45 @@ function itg_category_manager_schema() {
       'changed' => array('changed'),
       'created' => array('created'),
       'status' => array('status'),
-      'sef_url' => array('sef_url'),
-      'sef_url_modified' => array('sef_url_modified'),
     ),
     'primary key' => array('id'),
+  );
+  $schema['itg_sef_url'] = array(
+    'description' => 'Table for Sef Url Log.',
+    'fields' => array(      
+      'tid' => array(
+        'description' => 'Taxonomy term id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'sef_url' => array(
+        'description' => 'Sef Url original.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'uid' => array(
+        'description' => 'Auther or modifier id .',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'type' => 'int', 
+        'not null' => TRUE, 
+        'default' => 0
+      ),
+    ),
+    'indexes' => array(
+      'tid' => array('tid'),
+      'sef_url' => array('sef_url'),
+      'uid' => array('uid'),
+      'changed' => array('changed'),
+    )
   );
   
   return $schema;
