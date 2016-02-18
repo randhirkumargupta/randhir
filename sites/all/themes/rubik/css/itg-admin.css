@@ -700,7 +700,7 @@ form fieldset.date-combo .container-inline-date .date-padding .form-item span.er
 form .path-form.fieldset.titled > .fieldset-content,
 form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .vertical-tabs fieldset.titled.metatags-form .fieldset-content{padding: 0;}
 .node-photogallery-form a.token-dialog{display: none;}
-.photogallery-list .slides > li{position: relative;}
+.photogallery-list .slides > li{position: relative; text-align: center;}
 .photogallery-list li audio{width: 100%;}
 
 .node-photogallery-form .field-multiple-table tbody td fieldset.collapsible .cancel.button-remove.form-submit{margin-left: 140px;}
@@ -713,11 +713,11 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .cmd-detail span:nth-child(3){left: 50%;}
 .cmd-detail a{left: 75%;}
 .cmd-detail span{border-right: 1px solid #ddd;}
-.details-parent{position: absolute; bottom: 33px; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box;}
+.details-parent{position: absolute; bottom: 33px; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
 .details-parent .photo-title{font-size: 16px;}
 .audio-div{position: relative;}
-.flexslider{border: none;}
-.flexslider.photogallery-list li img{width: 100%; height: 300px;}
+.flexslider{border: none; margin: 0;}
+.flexslider.photogallery-list li img{width: 100%; height: 300px; display: inline-block; vertical-align: top;}
 .flex-direction-nav a{font-size: 0;}
 .flex-direction-nav a::before{line-height: 42px;}
 .category-manager-details{border-bottom: 1px solid #ddd; position: relative;}
