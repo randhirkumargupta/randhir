@@ -64,58 +64,82 @@ function itg_common_menu() {
  * Implements hook_form_alter().
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-    global $user;
-    
+  global $user;
+
   if ($form_id == 'user_profile_form') {
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#weight'] = '-6';
     $form['#validate'][] = 'itg_common_validate_user_profile_validate';
     $form['#after_build'][] = 'itg_common_after_user_profile_validate';
+
+    if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
+      $user_array = array(COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
+      $user_id_log = $user->uid;
+      if (isset($user_array) && $user_id_log != arg(1)) {
+        unset($form['account']['pass']);
+      }
+    }
+    else if (array_key_exists(COPY_EDITOR, $user->roles)) {
+      $user_array = array(SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
+      $user_id_log = $user->uid;
+      if (isset($user_array) && $user_id_log != arg(1)) {
+        unset($form['account']['pass']);
+      }
+    }
+    else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
+      $user_array = array(INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
+      $user_id_log = $user->uid;
+      if (isset($user_array) && $user_id_log != arg(1)) {
+        unset($form['account']['pass']);
+      }
+    }
   }
-  
+
   if ($form_id == 'user_register_form') {
     $form['#validate'][] = 'itg_common_validate_user_register_validate';
     $form['#after_build'][] = 'itg_common_after_user_register_validate';
   }
 
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
-        if (isset($_GET['destination'])) {
-            $_GET['destination'] = $_GET['destination'];
-        } else {
-            $form['#action'] = '?destination=user/' . $user->uid;
-        }
-        if ($user->uid != 1) {
-            $form['#after_build'][] = 'itg_user_after_build';
-
-            $user_role = itg_common_role_delegation($form['account']['roles']['#options']);
-            if (isset($user_role)) {
-                if ($form['#user']->uid != $user->uid) {
-                    $form['selected'] = array(
-                        '#type' => 'select',
-                        '#title' => t('Select role'),
-                        '#options' => $user_role,
-                        '#default_value' => $form['account']['roles']['#default_value'][1],
-                        '#required' => TRUE,
-                    );
-                }
-            }
-            //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
-            $form['account']['notify']['#default_value'] = TRUE;
-            // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
-            $destination = 'user';
-            if (isset($_GET['destination'])) {
-                $destination = $_GET['destination'];
-            } else {
-                $destination = 'user/' . $user->uid;
-            }
-            $form['actions']['cancel'] = array(
-                '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-                '#weight' => 20,
-                '#value' => t('Cancel'),
-            );
-        }
+    if (isset($_GET['destination'])) {
+      $_GET['destination'] = $_GET['destination'];
     }
+    else {
+      $form['#action'] = '?destination=user/' . $user->uid;
+    }
+    if ($user->uid != 1) {
+      $form['#after_build'][] = 'itg_user_after_build';
+
+      $user_role = itg_common_role_delegation($form['account']['roles']['#options']);
+      if (isset($user_role)) {
+        if ($form['#user']->uid != $user->uid) {
+          $form['selected'] = array(
+            '#type' => 'select',
+            '#title' => t('Select role'),
+            '#options' => $user_role,
+            '#default_value' => $form['account']['roles']['#default_value'][1],
+            '#required' => TRUE,
+          );
+        }
+      }
+      //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
+      $form['account']['notify']['#default_value'] = TRUE;
+      // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
+      $destination = 'user';
+      if (isset($_GET['destination'])) {
+        $destination = $_GET['destination'];
+      }
+      else {
+        $destination = 'user/' . $user->uid;
+      }
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+        '#value' => t('Cancel'),
+      );
+    }
+  }
 }
 
 /**
