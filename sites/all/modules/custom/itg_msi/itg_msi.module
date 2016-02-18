@@ -26,11 +26,19 @@ function itg_msi_permission() {
  * @return string
  */
 function itg_msi_menu(){
+  
   $items['check-duplicate-title/%'] = array(
       'page callback' => 'itg_msi_check_duplicate_title',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
   );
+  
+  $items['content/%/autocomplete'] = array(
+    'page callback' => 'itg_msi_autocomplete_content',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -183,12 +191,22 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
      if($form_state['view']->name == 'manage_supplements'){
        $type = 'supplement';
      }
-     
      //Call function autocomplete to show matching titles
      $form['title']['#autocomplete_path'] = 'content-title-list/'.$type.'/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
    }
+   
+   //Add aotocomplete on issue title
+   if ($form['#id'] == 'views-exposed-form-manage-issues-page'){
+      if($form_state['view']->name == 'manage_issues'){
+       $type = 'issue';
+     }
+     $form['title']['#autocomplete_path'] = 'content/'.$type.'/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title')); 
+   }
 }
+
+
 
 /*******************************Node Related hooks*****************************/
 
@@ -383,6 +401,30 @@ function itg_msi_get_nid_using_title_type($title, $type){
   }
   return $nid;
 }
+
+/**
+ * Autocomplete on title(date field) of issue listing
+ * @param string $title
+ */
+function itg_msi_autocomplete_content($title) {
+  
+    if (strlen(trim($title)) > 0) {
+      $content_type = arg(1);
+      $options = '';
+      $title = strtolower(trim($title));
+      $query = db_select('field_data_field_issue_title', 'c');
+      $query->fields('c', array('field_issue_title_value'));
+      $query->condition('field_issue_title_value', '%'.$title.'%', 'LIKE');
+      $query->condition('c.bundle', $content_type, '=');
+      $query->range(0, 20);
+      
+      $result = $query->execute(); 
+      while ($record = $result->fetchAssoc()) {     
+        $options[$record['field_issue_title_value']] = $record['field_issue_title_value'];
+      }    
+      drupal_json_output($options);    
+  }    
+ }
  
 
 
