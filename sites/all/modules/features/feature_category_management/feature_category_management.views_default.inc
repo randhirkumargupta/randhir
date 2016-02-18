@@ -40,6 +40,13 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['style_options']['parent_field'] = 'tid_1';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Header: Global: Text area */
+  $handler->display->display_options['header']['area_1']['id'] = 'area_1';
+  $handler->display->display_options['header']['area_1']['table'] = 'views';
+  $handler->display->display_options['header']['area_1']['field'] = 'area';
+  $handler->display->display_options['header']['area_1']['empty'] = TRUE;
+  $handler->display->display_options['header']['area_1']['content'] = '<a href="./admin/structure/taxonomy/category_management/add">+ Add Category</a>';
+  $handler->display->display_options['header']['area_1']['format'] = 'full_html';
+  /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
@@ -64,6 +71,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'tid';
   $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_class'] = 'term-name';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
@@ -72,6 +80,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['fields']['created']['table'] = 'itg_category_manager';
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
   $handler->display->display_options['fields']['created']['element_type'] = 'div';
   $handler->display->display_options['fields']['created']['element_class'] = 'created-date';
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
@@ -84,6 +93,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'itg_category_manager';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['exclude'] = TRUE;
   $handler->display->display_options['fields']['changed']['element_type'] = 'div';
   $handler->display->display_options['fields']['changed']['element_class'] = 'changed-date';
   $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
@@ -96,6 +106,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['fields']['status']['table'] = 'itg_category_manager';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['label'] = '';
+  $handler->display->display_options['fields']['status']['exclude'] = TRUE;
   $handler->display->display_options['fields']['status']['element_class'] = 'term-status';
   $handler->display->display_options['fields']['status']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['status']['element_default_classes'] = FALSE;
@@ -120,9 +131,28 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['fields']['edit_term']['field'] = 'edit_term';
   $handler->display->display_options['fields']['edit_term']['relationship'] = 'tid';
   $handler->display->display_options['fields']['edit_term']['label'] = '';
+  $handler->display->display_options['fields']['edit_term']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_term']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['edit_term']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['edit_term']['text'] = 'Edit';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="category-manager-details">
+<div class="cmd-heading"><i class="fa fa-minus-square-o"></i><i class="fa fa-plus-square-o"></i> [name]</div>
+<div class="cmd-detail">
+<span>[created]</span>
+<span>[changed]</span>
+<span>[status]</span>
+[edit_term]
+</div>
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
   /* Sort criterion: Category Manager: created field */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'itg_category_manager';

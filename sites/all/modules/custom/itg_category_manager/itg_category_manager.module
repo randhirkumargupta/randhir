@@ -211,7 +211,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
 //    }
     
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
-      $form['#action'] = '?destination=admin/structure/taxonomy/category_management'; //Redirect to term listing page, after term has been added successfully.
+      $form['#action'] = '?destination=category-manager'; //Redirect to term listing page, after term has been added successfully.
       $form['name']['#title'] = t('Category Title');
       $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
       unset($form['description']);
