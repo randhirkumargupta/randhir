@@ -140,6 +140,7 @@ function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$for
             '#title' => t('Add more no.'),
             '#options' => drupal_map_assoc(range(0, 100)),
             '#default_value' => 1,
+            '#attributes' => array('style' => 'display:none;'),
           );
           $form[$field['field_name']]['und']['add_more']['#submit'][] = 'itg_photogallery_field_add_more_submit';
           $form[$field['field_name']]['und']['add_more']['#value'] = 'Add more rows';
