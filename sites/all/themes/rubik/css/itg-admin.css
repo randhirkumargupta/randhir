@@ -776,3 +776,4 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 #field-gallery-image-values td fieldset input.form-file{float: left; max-width: 280px !important;}
 #field-gallery-image-values .form-type-managed-file .form-managed-file span.file, 
 #field-gallery-image-values .form-type-managed-file .form-managed-file span.file-size{margin-right: 5px; max-width: 200px;}
+.details-parent div{text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
