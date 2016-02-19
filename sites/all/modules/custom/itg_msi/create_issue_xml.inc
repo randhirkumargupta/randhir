@@ -14,11 +14,15 @@ function _create_issue_using_xmlfile($node){
     $magazine = $node->field_supp_select_magazine[LANGUAGE_NONE][0]['target_id'];
     $Supplement = $node->nid;
     $file = $node->field_supp_import_xml[LANGUAGE_NONE];
+    $source_type = 'supplement';
+    $source_id = $node->nid;
   }
   if ($node->type == 'issue') {
     $magazine = $node->field_issue_magazine[LANGUAGE_NONE][0]['target_id'];
     $Supplement = $node->field_issue_supplement[LANGUAGE_NONE][0]['target_id'];
     $file = $node->field_field_issue_import_xml[LANGUAGE_NONE];
+    $source_type = 'issue';
+    $source_id = $node->nid;
   }
   
   //Create multiple node
@@ -61,7 +65,7 @@ function _create_issue_using_xmlfile($node){
 
     $node->language = LANGUAGE_NONE; //und
     $node->uid = $user->uid;
-    $node->status = 1; //(1 or 0): Published or not
+    $node->status = 0; //(1 or 0): Published or not
     $node->promote = 0; //(1 or 0): Promoted to front page
     $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
     
@@ -92,7 +96,15 @@ function _create_issue_using_xmlfile($node){
       $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $section; 
     }
             
+    //Set source variables in to story content type
+    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = $source_type; 
+    $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = $source_id;
+    //$node->revision = 1;
+    //$node->log = 'State Changed to published';
+    
     $node = node_submit($node); // Prepare node for saving
     node_save($node); // Finally save node
+    
+    //workbench_moderation_moderate($node, 'Published');
   }
 }

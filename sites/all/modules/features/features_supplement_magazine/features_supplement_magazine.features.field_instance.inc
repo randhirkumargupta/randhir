@@ -82,7 +82,7 @@ function features_supplement_magazine_field_default_field_instances() {
   $field_instances['node-issue-field_field_issue_import_xml'] = array(
     'bundle' => 'issue',
     'deleted' => 0,
-    'description' => 'Please import xml to create issue.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -142,7 +142,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -218,7 +218,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -335,7 +335,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 7,
     ),
   );
 
@@ -616,7 +616,7 @@ function features_supplement_magazine_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_magazine_cover_photo',
-    'label' => 'Magazine Cover Photo',
+    'label' => 'Upload Cover Photo',
     'required' => 1,
     'settings' => array(
       'alt_field' => 1,
@@ -662,7 +662,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -701,7 +701,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -760,7 +760,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -828,7 +828,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -886,7 +886,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -925,7 +925,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 4,
     ),
   );
 
@@ -966,7 +966,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -978,11 +978,9 @@ function features_supplement_magazine_field_default_field_instances() {
   t('Issue');
   t('Large Cover Image');
   t('Magazine');
-  t('Magazine Cover Photo');
   t('Please check to publish this content.');
   t('Please enter issue title.');
   t('Please import XML.');
-  t('Please import xml to create issue.');
   t('Please select magazine to map with supplement.');
   t('Please select magazine.');
   t('Please select the date using date picker.
@@ -996,6 +994,7 @@ function features_supplement_magazine_field_default_field_instances() {
   t('Small Cover Image');
   t('Supplement');
   t('Title');
+  t('Upload Cover Photo');
 
   return $field_instances;
 }

@@ -27,6 +27,7 @@
         readonly: true
       });
       }
+
     //$('#magazine-node-form').submit(function () { return false; });  
       
       //Check duplicacy on title for magazine
