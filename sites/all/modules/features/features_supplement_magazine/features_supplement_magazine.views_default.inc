@@ -42,17 +42,15 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'counter' => 'counter',
     'title' => 'title',
-    'nid' => 'nid',
-    'field_story_select_magazine' => 'field_story_select_magazine',
-    'field_story_select_supplement' => 'field_story_select_supplement',
-    'field_story_category' => 'field_story_category',
+    'field_issue_magazine' => 'field_issue_magazine',
+    'field_issue_supplement' => 'field_issue_supplement',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'nothing_1' => 'nothing_1',
     'changed' => 'changed',
-    'status' => 'status',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
@@ -60,6 +58,11 @@ function features_supplement_magazine_views_default_views() {
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -67,28 +70,16 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nid' => array(
+    'field_issue_magazine' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_select_magazine' => array(
+    'field_issue_supplement' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_story_select_supplement' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_story_category' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -118,13 +109,6 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
     'changed' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'status' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -325,13 +309,17 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['alter']['max_length'] = '30';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  $handler->display->display_options['fields']['field_issue_title']['id'] = 'field_issue_title';
+  $handler->display->display_options['fields']['field_issue_title']['table'] = 'field_data_field_issue_title';
+  $handler->display->display_options['fields']['field_issue_title']['field'] = 'field_issue_title';
+  $handler->display->display_options['fields']['field_issue_title']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Magazine */
   $handler->display->display_options['fields']['field_issue_magazine']['id'] = 'field_issue_magazine';
   $handler->display->display_options['fields']['field_issue_magazine']['table'] = 'field_data_field_issue_magazine';
