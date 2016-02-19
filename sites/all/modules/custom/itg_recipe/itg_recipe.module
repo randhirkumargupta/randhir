@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * ITG Recipe module.
+ *
+ * Provides customizations and functions for Recipe.
+ *
+ */
+
+/**
+ * Implemets hook_form_alter().
+ * @param Array $form
+ * @param Array $form_state
+ * @param string $form_id
+ */
+function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
+  global $user, $base_url;  
+  
+    switch ($form_id) {
+    case 'recipe_node_form':
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'recipe-management', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+      );     
+      $form['#after_build'][] = 'itg_recipe_after_build';
+    break;      
+  }
+}
+
+/**
+ * After build for Recipe form.
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_recipe_after_build($form, &$form_state) {
+  global $user;
+  
+  global $user, $base_url;
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+  
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+
+  drupal_add_js(array('itg_recipe' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_recipe') . '/js/itg_recipe.js', array('weight' => 1));
+  return $form;
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_recipe_views_pre_render(&$view) {
+  
+  //Add "Create recipe" button on listing page of recipe
+  if ($view->name == "recipe_management") {
+    $header_content_recipe = '<a href="./node/add/recipe">Create Recipe</a>';
+    $view->attachment_before = $header_content_recipe;
+  }
+}
+/**
+ * Implements hook_theme().
+ */
+function itg_recipe_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'recipe_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'recipe-node-form',
+      'path' => drupal_get_path('module', 'itg_recipe') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+
+  return $themes;
+}
