@@ -39,7 +39,8 @@
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
       <?php //print render($content) ?>
           <?php if ($view_mode == 'full'): ?>
-            <div class="basic-details content-box">
+      
+            <div class="content-node-view">
                 <h2>Basic Details</h2>
                 <div class="content-details">
                     <?php print render($content['field_type']); ?>
@@ -96,7 +97,7 @@
                     <?php $short_des = render($content['field_label']);
                     $description = render($content['body']);?>
                     <?php if (!empty($short_des) || !empty($description)): ?>
-            <div class="description-details content-box">
+            <div class="content-node-view">
                     <?php
                     if (!empty($short_des)):
                     print render($content['field_label']);
@@ -114,7 +115,7 @@
             $browsemediasmall = render($content['field_story_small_image']);
             $browsemediaextrasmall = render($content['field_story_extra_small_image']);
             if(!empty($browsemedia) || !empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediaextrasmall)):?>
-          <div class="BrowseMedia">
+          <div class="content-node-view">
             <h2>BrowseMedia</h2>
             <div class="content-details">
             <?php print render($content['field_story_extra_large_image']); ?>
@@ -129,7 +130,7 @@
                     $notification = render($content['field_notification']);
                     if (!empty($notification)):
                     ?>
-              <div class="configuration content-box">
+              <div class="content-node-view">
                   <h2>Configuration</h2>
                     <?php print render($content['field_mobile_subscribers']); ?>
               </div>
@@ -138,7 +139,7 @@
                     $display_on = render($content['field_display_on']);
                     if (!empty($display_on)):
                     ?>
-              <div class="display content-box">
+              <div class="content-node-view">
                   <?php if($cnd != '') { ?>
                   <h2>Display on</h2>
                   <?php } ?>
