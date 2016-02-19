@@ -773,3 +773,6 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .page-node-revision .column-side .field-content{font-size: 13px;}
 .node-issue-form fieldset legend .form-required{display: none;}
 .page-node-add-issue .vertical-tabs-panes{padding: 10px 10px 0;} 
+#field-gallery-image-values td fieldset input.form-file{float: left; max-width: 280px !important;}
+#field-gallery-image-values .form-type-managed-file .form-managed-file span.file, 
+#field-gallery-image-values .form-type-managed-file .form-managed-file span.file-size{margin-right: 5px; max-width: 200px;}
