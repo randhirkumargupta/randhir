@@ -165,8 +165,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'
-           || $form['#id'] == 'views-exposed-form-manage-issues-page'
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'           
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
@@ -219,11 +218,11 @@ function itg_story_node_validate($node, $form, &$form_state) {
 //        }
         
         // Code for client title validation
-        if ($val['value'] == 'syndication') {
-          if (empty($node->field_story_client_title[LANGUAGE_NONE][0]['value'])) {
-            form_set_error('field_story_client_title', t("Client title field is required."));
-          }
-        }
+//        if ($val['value'] == 'syndication') {
+//          if (empty($node->field_story_client_title[LANGUAGE_NONE][0]['value'])) {
+//            form_set_error('field_story_client_title', t("Client title field is required."));
+//          }
+//        }
       }      
     }
     
