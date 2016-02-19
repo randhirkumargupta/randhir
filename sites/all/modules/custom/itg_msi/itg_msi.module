@@ -50,6 +50,9 @@ function itg_msi_menu(){
  * @param String $form_id
  */
 function itg_msi_form_alter(&$form, &$form_state, $form_id){
+  
+  global $user;
+  
   //Set destination for magazine form
   if ($form_id == 'magazine_node_form') {
     $destination = 'manage-magazines';
@@ -102,8 +105,15 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
     //Call function after build
     $form['#after_build'][] = 'itg_msi_form_after_build';
     
-
   }
+
+  //Hide source type and source id from story add and edit form.
+  if ($form_id == 'story_node_form') {
+    if(!in_array('administrator', $user->roles)){ // Not applicable for super admin
+      unset($form['field_story_source_type']);
+      unset($form['field_story_source_id']);
+  }
+}
 }
 
 /**
@@ -142,6 +152,10 @@ function itg_msi_form_after_build($form, &$form_state){
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
+  
+  
+  unset($form['field_field_issue_import_xml'][LANGUAGE_NONE]['#file_upload_title']);
+ 
   return $form;
 }
 
@@ -314,8 +328,8 @@ function itg_msi_node_validate($node, $form, &$form_state) {
     //Case: Supplement creation (If issue is already exist, throw an error)
     if ($node->type == 'supplement') {
       $is_issue_exist = itg_msi_check_for_issue_existence($node, 'supplement');
-      if ($is_issue_exist) {
-        drupal_set_message(t('This issue is already exist.'), 'error');
+      if (!$is_issue_exist) {
+        form_set_error('field_supp_issue', t('This issue doesn\'t exist. Please select another issue to map supplement.'));
       }
     }
     
@@ -325,7 +339,7 @@ function itg_msi_node_validate($node, $form, &$form_state) {
   if ($node->type == 'issue'){
     $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue');
     if($is_issue_exist){
-      drupal_set_message(t('This issue is already exist.'), 'error');
+      form_set_error('field_supp_issue', t('This issue is already exist.'));
     }
   }
   
