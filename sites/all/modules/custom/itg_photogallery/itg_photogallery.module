@@ -16,14 +16,15 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
     $form['upload'] = array(
       '#type' => 'plupload',
       '#weight' => 21,
-      '#upload_validators' => array(
-        'file_validate_extensions' => array("jpg jpeg gif png"),
+      '#imgfilevalidate' => array(
+        'file_validate_extensions' => array("png gif jpg jpeg"),
       ),
       '#states' => array(
         'visible' => array(
           ':input[name="field_bulk_media_upload[und][1]"]' => array('checked' => TRUE),
         ),
       ),
+      '#description' => t('Allowed file types:<strong>png gif jpg jpeg</strong>'),
     );
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
