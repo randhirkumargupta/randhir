@@ -676,9 +676,9 @@ form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-pa
 .node-supplement-form .vertical-tabs, 
 .node-magazine-form .vertical-tabs, 
 .node-photogallery-form .vertical-tabs{padding-left: 0;}
-.cm-node-view .field-div{display: inline-block; vertical-align: top; width: 100%; padding-bottom: 10px;}
-.cm-node-view .field-div .field-label{float: left; width: 240px;}
-.cm-node-view .field-div .field-item{float: left; width: 560px;}
+.cm-node-view .field-div, .content-node-view .field{display: inline-block; vertical-align: top; width: 100%; padding-bottom: 10px;}
+.cm-node-view .field-div .field-label, .content-node-view .field-label{float: left; width: 240px;}
+.cm-node-view .field-div .field-item, .content-node-view .field-item{float: left; width: 560px;}
 form fieldset.date-combo .container-inline-date .date-padding .form-item span.error{padding-left: 0;}
 #edit-field-common-audio-file .form-type-managed-file .form-managed-file .form-file{float: left;}
 .form-type-managed-file .form-managed-file span.file, 
@@ -756,7 +756,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
   width: 60%;
 }
 .page-node-revisions .field{padding-bottom: 10px;}
-.page-node-revisions .content-box > h2 {
+.page-node-revisions .content-box > h2, .content-node-view h2 {
     border-bottom: 1px solid #ddd;
     font-size: 18px;
     margin-bottom: 5px;
