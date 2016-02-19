@@ -123,6 +123,56 @@ function features_supplement_magazine_field_default_field_bases() {
     'type' => 'image',
   );
 
+  // Exported field_base: 'field_issue_supp_large_image'.
+  $field_bases['field_issue_supp_large_image'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_issue_supp_large_image',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
+  // Exported field_base: 'field_issue_supp_small_image'.
+  $field_bases['field_issue_supp_small_image'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_issue_supp_small_image',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
   // Exported field_base: 'field_issue_supplement'.
   $field_bases['field_issue_supplement'] = array(
     'active' => 1,
@@ -302,29 +352,36 @@ function features_supplement_magazine_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_supp_large_cover_image'.
-  $field_bases['field_supp_large_cover_image'] = array(
+  // Exported field_base: 'field_supp_issue'.
+  $field_bases['field_supp_issue'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_supp_large_cover_image',
+    'field_name' => 'field_supp_issue',
     'field_permissions' => array(
       'type' => 0,
     ),
-    'indexes' => array(
-      'fid' => array(
-        0 => 'fid',
-      ),
-    ),
+    'indexes' => array(),
     'locked' => 0,
-    'module' => 'image',
+    'module' => 'date',
     'settings' => array(
-      'default_image' => 0,
-      'uri_scheme' => 'public',
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
     ),
     'translatable' => 0,
-    'type' => 'image',
+    'type' => 'datetime',
   );
 
   // Exported field_base: 'field_supp_publish'.
@@ -389,31 +446,6 @@ function features_supplement_magazine_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
-  );
-
-  // Exported field_base: 'field_supp_small_cover_image'.
-  $field_bases['field_supp_small_cover_image'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_supp_small_cover_image',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'fid' => array(
-        0 => 'fid',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'image',
-    'settings' => array(
-      'default_image' => 0,
-      'uri_scheme' => 'public',
-    ),
-    'translatable' => 0,
-    'type' => 'image',
   );
 
   return $field_bases;
