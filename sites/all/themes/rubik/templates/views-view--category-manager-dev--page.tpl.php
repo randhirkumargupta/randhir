@@ -44,7 +44,10 @@
       <?php print $exposed; ?>
     </div>
   <?php endif; ?>
-  <?php print l('+ Add Category', 'admin/structure/taxonomy/category_management/add'); ?>
+    <ul class="action-links">
+      <li><?php print l('Add Category', 'admin/structure/taxonomy/category_management/add'); ?></li>
+    </ul>
+  
   <ul>
       <li>Category Name</li>
       <li>Created Date</li>
