@@ -227,7 +227,7 @@ function itg_common_role_delegation($role_array) {
     } else if (array_key_exists(COPY_EDITOR, $user->roles)) {
         $user_array = array(AUTHOR_GUEST => 'Author/Guest', INTERN => 'Intern', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub' );
     } else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-        $user_array = array(AUTHOR_GUEST => 'Author/Guest',INTERN => 'Intern', );
+        $user_array = array(AUTHOR_GUEST => 'Author/Guest',INTERN => 'Intern' );
     } else if (array_key_exists(SITE_ADMIN, $user->roles)) {
         unset($role_array[3]);
         $user_array = $role_array;
