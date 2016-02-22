@@ -41,5 +41,5 @@ function _create_issue_using_xmlfile($node){
     $batch['operations'][] = array('itg_msi_create_issue_batch_process', array($result['fid'], $node_info));
   }
   batch_set($batch);
-  batch_process('admin/content');
+  batch_process('manage-'.$node->type.'s');
 }
