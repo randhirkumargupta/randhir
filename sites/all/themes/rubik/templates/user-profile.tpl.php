@@ -49,13 +49,15 @@
     <?php print render($user_profile['field_first_name']); ?>
     <?php print render($user_profile['field_last_name']); ?>
     <?php print render($user_profile['field_mobile_number']); ?>
+    <?php //echo "<pre>";?>
+    <?php //print_r ($elements['#account']->name); ?>
     <div class="field">
       <div class="field-label">User name:</div>
-      <div class="field-items"><?php print_r($user->name); ?></div>
+      <div class="field-items"><?php print_r($elements['#account']->name); ?></div>
     </div> 
     <div class="field">
       <div class="field-label">Email:</div>
-      <div class="field-items"><?php print_r($user->mail); ?></div>
+      <div class="field-items"><?php print_r($elements['#account']->mail); ?></div>
     </div>
     <div class="field">
       <div class="field-label">Role:</div>
