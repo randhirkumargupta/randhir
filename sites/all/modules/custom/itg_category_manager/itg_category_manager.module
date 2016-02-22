@@ -319,7 +319,7 @@ function itg_category_manager_add_form_after_build($form, &$form_state){
 
 //Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management', array('attributes' => array('class' => 'button'))),
+      '#markup' => l(t('Cancel'), 'category-manager', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,
   );
     
