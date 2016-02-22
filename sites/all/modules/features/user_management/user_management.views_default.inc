@@ -211,6 +211,10 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  /* Field: User: Last name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
   /* Field: User: Mobile number */
   $handler->display->display_options['fields']['field_mobile_number']['id'] = 'field_mobile_number';
   $handler->display->display_options['fields']['field_mobile_number']['table'] = 'field_data_field_mobile_number';
