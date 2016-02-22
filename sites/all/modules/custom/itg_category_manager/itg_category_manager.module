@@ -56,8 +56,13 @@ function itg_category_manager_menu() {
     'page callback' => 'itg_category_manager_seflogpage',      
     'access callback' => TRUE,
     'page arguments' => array(1),
-    //'access arguments' => array('administer taxonomy'),
+    'access arguments' => array('administer taxonomy'),
     'type' => MENU_CALLBACK,
+  );
+  $items['itg_category_manager_autocomplete'] = array(
+    'page callback' => 'itg_category_manager_autocomplete_name',
+    'access arguments' => array('administer taxonomy'),
+    'type' => MENU_CALLBACK
   );
   
   return $items;
@@ -158,16 +163,9 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     $used_by_content = taxonomy_select_nodes($tid);
       if (count($used_by_content) > 0) {
         form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
-        $node_url = $base_url . '/node/';
-        echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
-        $count_used = count($used_by_content) - 1;
-        foreach ($used_by_content as $key => $value) {
-          $node = node_load($value);
-          $mapped_content_link = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>'.', ';
-          echo rtrim($mapped_content_link, ', ');
-          
-        }
-        echo '</div>';
+
+        $count_used = count($used_by_content);
+        drupal_set_message('This category is mapped with '.$count_used.' contents.'.l(' Click here', 'category-remove-from-node/'.$tid, array('attributes' => array('target'=>'_blank'))), 'status');
         drupal_add_js('(function($) {$(document).ready(function() {
         $("#taxonomy-form-term #edit-submit").hide();
         $("#edit-description").html($("body").find(".contents-using-cat").html());
@@ -175,40 +173,20 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
        });}(jQuery));', 'inline');
       } else {
         $flag = FALSE;
-        $all_children = @taxonomy_get_children_all($tid, $form_state['term']->vid);
+        $all_children = @taxonomy_get_children_all($tid, $form_state['term']->vid);        
         if (count($all_children) > 0) {
-          foreach ($all_children as $key => $val) {
-            $used_by_content = taxonomy_select_nodes($val);
-            if(count($used_by_content) > 0){
-              $flag = TRUE;
-            }
-            $node_url = $base_url . '/node/';
-            $count_used = count($used_by_content) - 1;
-            foreach ($used_by_content as $key => $value) {
-              $node = node_load($value);
-              $user_content_link[] = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
-            }
-          }
-          if($flag){
-          $user_content_link_str = implode(", ", $user_content_link);
-          echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>'.$user_content_link_str.'</div>';
-          form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
+          form_set_error('name', t('Sorry! you cannot delete this category. This category has '.count($all_children).' child category'));
+          
            drupal_add_js('(function($) {$(document).ready(function() {
             $("#taxonomy-form-term #edit-submit").hide();
             $("#edit-description").html($("body").find(".contents-using-cat").html());
             $(".contents-using-cat").hide();
            });}(jQuery));', 'inline');
-          }
+          
          }  
       }
   } else {
-//    $types = @variable_get('itg_category_manager_types', array());
-//    if ($types['term']) {
-//      $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
-//      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
-//        $form['#validate'][] = 'itg_category_manager_term_validate';
-//      }
-//    }
+
     
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
       $form['#action'] = '?destination=category-manager'; //Redirect to term listing page, after term has been added successfully.
@@ -250,13 +228,22 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#default_value' => true,
         '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
       );
-      // Hode publish time field.
+      // Hide publish time field.
       $form['field_publish_time']['#prefix'] = '<div style="display:none;">';
       $form['field_publish_time']['#suffix'] = '</div>';
+      // Add id attribute to tid field
+      if (isset($form['actions']['delete'])) {
+        $form['term_tid'] = array(
+          '#type' => 'hidden',
+          '#value' => $form['tid']['#value'],
+          '#attributes' => array('class' => array('tid')),
+        );
+        $form['actions']['delete']['#suffix'] = '<span class="count"></span>';
+      }
+  
       //Call valiadte and after build
       $form['#validate'][] = 'itg_category_manager_term_validate';
-      $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
-      
+      $form['#after_build'][] = 'itg_category_manager_add_form_after_build';      
     }
   }  
 }
@@ -287,7 +274,7 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid'){
 /**
  * Implements _form_validate() for taxonomy_form_term().
  */
-function itg_category_manager_term_validate($form, &$form_state) { 
+function itg_category_manager_term_validate($form, &$form_state) {   
   // Set published time same as parent term
   $termParent = $form_state['values']['parent'][0];
   if ($termParent) {
@@ -332,7 +319,7 @@ function itg_category_manager_add_form_after_build($form, &$form_state){
 
 //Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), '/admin/structure/taxonomy/category_management', array('attributes' => array('class' => 'button'))),
+      '#markup' => l(t('Cancel'), 'category-manager', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,
   );
     
@@ -581,29 +568,6 @@ function itg_category_manager_taxonomy_term_insert($term) {
  */
 function itg_category_manager_taxonomy_term_presave($term) {
   if ($term->tid !== NULL) {
-    // Fetch old data from table
-    /* $itgQuery = db_select('itg_category_manager', 'itg');
-    $itgQuery->condition('tid', $term->tid);
-    $itgQuery->fields('itg', array('sef_url', 'sef_url_modified'));
-    $itgResult = $itgQuery->execute();
-    $itgResult = $itgResult->fetchObject();
-    // Prepare array for data insertion
-    global $user;
-    if ($itgResult->sef_url !== $term->path['alias'] && $itgResult->sef_url_modified == '') {
-      $data['sef_url_modified'] = $term->path['alias'];
-    }
-    else if ($itgResult->sef_url_modified != '' && $itgResult->sef_url_modified !== $term->path['alias']) {
-      $data['sef_url_modified'] = $term->path['alias'];
-      $data['sef_url'] = $itgResult->sef_url_modified;
-    }
-    $data['uid'] = $user->uid;
-    $data['changed'] = time();
-    db_update('itg_category_manager')
-        ->fields($data)
-        ->condition('tid', $term->tid)
-        ->execute();
-    */
-    // Insert sef url log on update    
     global $user;      
     $data = array();
     $data = array(
@@ -627,10 +591,10 @@ function itg_category_manager_taxonomy_term_presave($term) {
  * Insert url aias to itg-category_manager table against specific term id.
  */
 function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {    
-//  db_update('itg_sef_url')
-//    ->fields(array('sef_url' => $alias))
-//    ->condition('tid', $context['data']['term']->tid)
-//    ->execute();
+  db_update('itg_sef_url')
+    ->fields(array('sef_url' => $alias))
+    ->condition('tid', $context['data']['term']->tid)
+    ->execute();
 }
 
 /**
@@ -730,9 +694,11 @@ function itg_category_manager_views_data() {
  * @param string $form_id name of the form id
  */
 function itg_category_manager_form_alter(&$form, $form_state, $form_id) {
-  if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {    
+  if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {        
+    $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
     $form['status']['#options'][1] = t('Active'); 
-    $form['status']['#options'][0] = t('Inactive');
+    $form['status']['#options'][0] = t('Inactive');     
+    $form['field_cm_select_type_value']['#options']['All'] = t('All');
   }
 }
 
@@ -741,7 +707,7 @@ function itg_category_manager_form_alter(&$form, $form_state, $form_id) {
  */
 function itg_category_manager_block_info() {
   $blocks['sef_url_log'] = array(
-    'info' => t('Sef URL Log'),
+    'info' => t('SEF URL Log'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   ); 
 
@@ -777,7 +743,7 @@ function itg_category_manager_block_view($delta = '') {
           $data .= '<div class="col-25">'.$counter.'</div>';
           $data .= '<div class="col-25">'.$url.'</div>';
           $data .= '<div class="col-25">'.$value->name.'</div>';
-          $data .= '<div class="col-25">'.format_date($value->changed, 'custom', 'm-d-Y').'</div>';
+          $data .= '<div class="col-25">'.format_date($value->changed, 'custom', 'm-d-Y g:i:s a').'</div>';
           
         }           
         if ($counter > 5) {
@@ -873,4 +839,20 @@ function itg_category_manager_seflogpage($tid) {
   }
   
   return $output;
+}
+
+/**
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
+function itg_category_manager_autocomplete_name($string) {  
+  $itgQuery = db_select('taxonomy_term_data', 'itg');
+  $itgQuery->condition('name', '%' . $string . '%', 'LIKE')
+      ->fields('itg', array('name'));
+  $itgResult = $itgQuery->execute();
+  $result = array();
+  foreach ($itgResult as $value) {
+    $result[$value->name] = $value->name;
+  }
+  return drupal_json_output($result);
 }
