@@ -19,39 +19,22 @@ function feature_category_management_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '4',
+          'weight' => '5',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'name' => array(
           'weight' => '1',
         ),
         'description' => array(
-          'weight' => '5',
+          'weight' => '6',
         ),
       ),
       'display' => array(),
     ),
   );
   $export['field_bundle_settings_taxonomy_term__category_management'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'itg_category_manager_case_sensitive';
-  $strongarm->value = 0;
-  $export['itg_category_manager_case_sensitive'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'itg_category_manager_types';
-  $strongarm->value = array(
-    'vocab' => 'vocab',
-    'term' => 'term',
-  );
-  $export['itg_category_manager_types'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

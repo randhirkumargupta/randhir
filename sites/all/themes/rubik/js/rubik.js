@@ -129,9 +129,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story').addClass('fixed');
+          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').addClass('fixed');
       } else {
-          $('.block-itg-story').removeClass('fixed');
+          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
@@ -152,12 +152,55 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   if(urlTxt == 'URL alias '){
     $('.form-item-path-alias label').html('Sef URL');
   }
-  $('.path-form #edit-path-pathauto').attr('checked', false);
+//  $('.path-form #edit-path-pathauto').attr('checked', false);
   if($('.path-form #edit-path-pathauto').is(':checked') == false){
     $('.path-form #edit-path-alias').removeAttr('disabled');
   }
   $('.page-admin-structure-taxonomy-category-management .form-type-hierarchical-select').append('<div class="discription">Root is the section.</div>');
   
+  
+  // jQuery Code for category manager page
+  $('.item-list ul li:not(:has(".item-list"))').find('.cmd-heading .fa').remove();
+  $('.cmd-heading').click(function () {
+    $(this).toggleClass('active');
+    if ($(this).parent().next().is(':visible')) {
+      $(this).parent().next().addClass('hide').removeClass('show');
+      $(this).parent().next().find('.cmd-heading').addClass('active');
+    }
+    else {
+      $(this).parent().next().removeClass('hide').addClass('show');
+      $(this).parent().next().find('.item-list').addClass('hide');
+      $(this).parent().next().removeClass('hide');
+    }
+  });
+  
+  // jQuery code to filter category manager
+  $('.itg-section').click(function(e){
+    var el = $('.view-content > .item-list > ul > li > .category-manager-details > .cmd-heading');
+    el.not('.active').addClass('active').parent().next().addClass('hide').find('.cmd-heading').addClass('active');
+  });
+  $('.itg-category').click(function(e){
+    var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+    el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
+    el.parent().parent().parent().parent().prev().children('.cmd-heading').removeClass('active');
+  });
+  $('.itg-sub-category').click(function(e){
+    var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+    el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
+    el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
+  });
+  $('.itg-sub-sub-category').click(function(e){
+    var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li .item-list > ul > li > .category-manager-details > .cmd-heading');
+    el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
+    el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
+  });
+  
+  // jQuery code for flexslider
+  $('.photogallery-list').flexslider({
+    animation: "slide",
+    slideshowSpeed: 3000,
+    controlNav: false
+  });
   
   
 

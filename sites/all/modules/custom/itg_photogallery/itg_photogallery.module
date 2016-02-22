@@ -1,0 +1,311 @@
+<?php
+
+/**
+ * @file
+ * Module file for ITG Photo Gallery functionality.
+ */
+
+/**
+ * Implements hook_form_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'photogallery_node_form') {
+    $form['upload'] = array(
+      '#type' => 'plupload',
+      '#weight' => 21,
+      '#upload_validators' => array(
+        'file_validate_extensions' => array("jpg jpeg gif png"),
+      ),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="field_bulk_media_upload[und][1]"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+    $form['field_common_audio_file']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_common_audio[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
+    $form['field_credit_name']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
+    $form['field_p_client_title']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_syndication_[und][yes]"]' => array('checked' => TRUE),
+      ),
+      'required' => array(
+        ':input[name="field_syndication_[und][yes]"]' => array('checked' => TRUE),
+      ),
+    );
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'manage-photogallery', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+      );
+    
+    $form['#validate'][] = 'itg_photogallery_custom_validate';
+    $form['#after_build'][] = 'itg_photogallery_after_build';
+  }
+}
+
+/**
+ * After build for story form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_photogallery_after_build($form, &$form_state) {
+  //p();
+  global $user, $base_url;
+  unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
+  unset($form['metatags']['intro_text']['#markup']);
+  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  
+  drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 2));
+  return $form;
+}
+
+/**
+ * Implements custom validate for client title
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_photogallery_custom_validate(&$form, &$form_state){
+  if(isset($form_state['values']['field_syndication_']['und']) && $form_state['values']['field_syndication_']['und'][0]['value'] == 'yes'){
+    if(isset($form_state['values']['field_p_client_title']['und']) && (empty($form_state['values']['field_p_client_title']['und'][0]['value']))){
+    form_set_error('field_p_client_title', t('Client Title field is required.'));
+    }
+  }
+}
+
+/**
+ * Implements views header link 
+ *
+ */
+function itg_photogallery_views_pre_render(&$view) {
+    if ($view->name == "manage_photogallery") {
+        global $user; // Get user information
+        $photo_content = '';
+        $photo_content = '<a href ="./node/add/photogallery?destination=manage-photogallery">Create Photogallery</a>';
+        $view->attachment_before = $photo_content;
+    }    
+}
+
+/**
+ * Implements hook_field_attach_form().
+ * @param type $entity_type
+ * @param type $entity
+ * @param type $form
+ * @param type $form_state
+ * @param type $langcode
+ */
+function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
+  $options = array('language' => field_valid_language($langcode));
+  // Merge default options.
+  $default_options = array(
+    'default' => FALSE,
+    'deleted' => FALSE,
+    'language' => NULL,
+  );
+  $options += $default_options;
+  list(,, $bundle) = entity_extract_ids($entity_type, $entity);
+  $instances = _field_invoke_get_instances($entity_type, $bundle, $options);
+  // Iterate through the instances.
+  $return = array();
+  foreach ($instances as $instance) {
+    // field_info_field() is not available for deleted fields, so use
+    // field_info_field_by_id().
+    $field = field_info_field_by_id($instance['field_id']);
+    $field_name = $field['field_name'];
+
+    //If we are looking at our field type and specific widget type, and we are multiple entries
+    if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
+      if ($field['bundles']['node'][0] == "photogallery") {
+        drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
+        //Check just in case the button is here, and add another #submit function
+        if (isset($form[$field['field_name']]['und']['add_more'])) {
+          // add a simple select list, this defaults to numb 3
+          $form[$field['field_name']]['add_more_number'] = array(
+            '#type' => 'select',
+            '#title' => t('Add more no.'),
+            '#options' => drupal_map_assoc(range(0, 100)),
+            '#default_value' => 1,
+            '#attributes' => array('style' => 'display:none;'),
+          );
+          $form[$field['field_name']]['und']['add_more']['#submit'][] = 'itg_photogallery_field_add_more_submit';
+          $form[$field['field_name']]['und']['add_more']['#value'] = 'Add more rows';
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_submit().
+ * @global type $user
+ * @param type $form
+ * @param boolean $form_state
+ */
+function itg_photogallery_field_add_more_submit($form, &$form_state) {
+
+  $button = $form_state['triggering_element'];
+  // Go one level up in the form, to the widgets container.
+  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
+  $field_name = $element['#field_name'];
+  $langcode = $element['#language'];
+  $parents = $element['#field_parents'];
+
+  // Alter the number of widgets to show. items_count = 0 means 1.
+  $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
+  //get the number from the select
+  $numbtoadd = $form[$field_name]['add_more_number']['#value'];
+  if ($numbtoadd) {
+    $field_state['items_count'] += $numbtoadd - 1;
+    field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
+    $form_state['rebuild'] = TRUE;
+  }
+  $node = drupal_rebuild_form('photogallery_node_form', $form_state, $old_form = NULL);
+  $fids = array();
+  foreach ($node['upload']['#value'] as $img) {
+    // Save media file.
+    $scheme = variable_get('file_default_scheme', 'public') . '://';
+    $source = $img['tmppath'];
+
+    $directory = '';
+    $destination = file_stream_wrapper_uri_normalize($scheme . $directory . $img['name']);
+    $destination = file_unmanaged_move($source, $destination, FILE_EXISTS_RENAME);
+    global $user;
+    // Create the file object.
+    $uri = file_stream_wrapper_uri_normalize($destination);
+    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+    $file = new StdClass;
+    $file->uid = $user->uid;
+    $file->filename = basename($uri);
+    $file->uri = $uri;
+    $file->filemime = file_get_mimetype($uri);
+    $file->filesize = @filesize($uri);
+    $file->timestamp = REQUEST_TIME;
+    // $file->status = FILE_STATUS_PERMANENT;
+    $file->is_new = TRUE;
+    $file->status = FILE_STATUS_PERMANENT;
+    $fids[] = file_save($file);
+    file_usage_add($file, 'file', 'field_collection_item', '1');
+  }
+
+  foreach ($fids as $file_id) {
+    $file_ids[] = $file_id->fid;
+  }
+  $i = 0;
+  foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
+    if (!isset($filed_collection->field_images['und'])) {
+      //watchdog('Vedpareek', '<pre>'. print_r($filed_collection, TRUE) .'</pre>');
+      //$filed_collection->field_images['und'][0]['fid'] = $file_ids[$i];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i];
+      $i++;
+    }
+  }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function itg_photogallery_block_info() {
+  $blocks['photogallery_tab_form_block'] = array(
+    'info' => t('Photogallery Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function itg_photogallery_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'photogallery_tab_form_block':
+      $block['content'] = theme('photogallery_tab_form_display_block', array('data' => $data));
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function itg_photogallery_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'photogallery_tab_form_display_block' => array(
+      'template' => 'photogallery-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'photogallery_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'photogallery-node-form',
+      'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+
+  return $themes;
+}
+
+/**
+ * Implements function for get uri by fid
+ */
+function _itg_photogallery_fid($fid) {
+  $query = db_select('file_managed', 'fm');
+  $query->fields('fm', array('uri'));
+  $query->condition('fid', $fid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+/**
+ * Implements function for return byline and photoby
+ */
+function itg_photogallery_byline_photoby($type, $id){
+  $result = '';
+  if($type == "node"){
+    $query = db_select('node', 'n');
+    $field = $query->fields('n',array('title'));
+    $condition = $query->condition('nid', $id, '=');
+    $result = $query->execute()->fetchField();
+  }elseif($type == 'photoby'){
+    $query = db_select('taxonomy_term_data', 'td');
+    $field = $query->fields('td',array('name'));
+    $condition = $query->condition('tid', $id, '=');
+    $result = $query->execute()->fetchField();
+  }
+  return $result;
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
+  //Get the Form Id
+  if ($form["#id"] == 'views-exposed-form-manage-photogallery-page') {
+    //$form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
+    $form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+}

@@ -35,7 +35,15 @@
 ?>
 <div class="user-profile-div">
   <?php if ($user_profile): ?>
-    <?php print render($user_profile['field_user_picture']); ?>
+    <?php // print render($user_profile['field_user_picture']);
+    ?>
+  <div class="field-name-field-user-picture">
+  <div class="field-items">
+  <?php
+    $file=$elements['#account']->field_user_picture[LANGUAGE_NONE][0]['uri']; print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+  ?>
+  </div>
+  </div>
   <?php endif; ?>
   <div class="user-details">
     <?php print render($user_profile['field_first_name']); ?>

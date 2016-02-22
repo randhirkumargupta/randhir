@@ -1,0 +1,11 @@
+name =  ITG Photogallery Module
+description = This module use for custom photogallery on ITG.
+package = "Custom"
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2015-06-02
+version = "7.x-1.0"
+core = "7.x"
+project = "itg_photogallery"
+datestamp = "1433249582"
+

@@ -1,0 +1,255 @@
+<?php
+
+/**
+ * @file
+ * The ITG Multiple Category Selection module.
+ *
+ * Provides common functionality and customizations.
+ *
+ */
+
+define('CATEGORY_VID', 4);
+
+/**
+ * Implements hook_menu().
+ */
+
+function itg_mcs_menu() {
+  $items = array();
+
+  // Create menu item for JSON callbacks.
+  $items['itg-category'] = array(
+    'description' => 'Callbacks for Multiple hierarchical select',
+    'page callback' => 'itg_category_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implement hook_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param string $form_id
+ */
+function itg_mcs_form_alter(&$form, &$form_state, $form_id) {
+  
+   if ($form_id == 'story_node_form' || $form_id == 'photogallery_node_form') {
+     
+     $form['#after_build'][] = 'itg_mcs_after_build';
+      
+     
+      // Category Management Vocabulary
+      $vid = CATEGORY_VID;
+      
+      $select_category = '';
+
+      // Add Case
+      if (arg(1) == 'add') {
+ 
+        $parents = taxonomy_get_tree($vid, 0, 1);  
+
+        $category_options = '<option value="">- Select Category-</option>';
+        foreach ($parents as $parentTerms) {
+          $category_options .= '<option value="'.$parentTerms->tid.'">'.$parentTerms->name.'</option>';
+        }
+
+        $select_category = '<select id="itgcategory-0" class="itg-category" name="field_select_category" multiple="multiple">'.$category_options.'</select><div id ="category-wrapper-1"></div>';
+
+      }
+      else {
+         
+       // Edit Case
+       if (arg(2) == 'edit') {
+         $getID = array();
+         foreach ($form_state['build_info']['args'][0]->field_story_category['und'] as $val_tid) {
+            $getID[] = $val_tid['tid'];
+          }
+       }
+          
+        // Find term id by depth asc
+        $terms_data_byOrder = _get_term_depth_all($vid);
+	   
+        $select_category = '';
+          
+        // create select options
+        $term_unique_array = array_unique($terms_data_byOrder);
+	    
+        $depth = 1;
+        foreach ($term_unique_array as $arr_unique) {
+          
+          // Get category id by keys
+          $result = array_keys($terms_data_byOrder, $arr_unique);
+
+          $category_options ='';
+          $child_category_options = '<option value="">- Select Sub Category -</option>';
+	       
+          foreach ($result as $tid) {
+
+            // Find category name
+            $term = taxonomy_term_load($tid);
+            
+            // Check selected
+            if (in_array($tid, $getID)) {
+              $category_options .= '<option value="'.$tid.'" selected="selected">'.$term->name.'</option>';                 
+            }
+            else {
+              if ($depth == 1) {
+               $category_options .= '<option value="'.$tid.'">'.$term->name.'</option>';
+              }
+              else {
+                // Check is parent avaliable of current term
+                $is_parent = taxonomy_get_parents($tid);
+              
+                foreach ($is_parent as $parent_term) {
+                  // check parent term exist in pre selected array list
+                  if(in_array($parent_term->tid, $getID)) {
+                    $category_options .= '<option value="'.$tid.'">'.$term->name.'</option>';
+                  }
+                }
+              }
+            }
+          }// end of inner foreach
+	    
+          $wrapper_id = $depth-1;   
+          // Create category select list
+          
+          if ($depth == 1) {
+            // default options
+            $parent_category_default_option = '<option value="">- Select Category -</option>';
+            $parent_category_list = $parent_category_default_option.$category_options;
+
+            $select_category .= '<select id="itgcategory-'.$wrapper_id.'" class="itg-category" name="field_select_category" multiple="multiple">'.$parent_category_list.'</select>';
+          }
+          else {
+            // default options
+            if ($category_options != '') {
+              $child_category_options = '<option value="">- Select Sub Category -</option>'; 
+              $child_category_list = $child_category_options.$category_options;
+              
+              $select_category .= '<div id="category-wrapper-'.$wrapper_id.'"><select id="itgcategory-'.$wrapper_id.'" class="itg-category" name="field_select_category" multiple="multiple">'.$child_category_list.'</select></div>';
+            }
+          }
+          
+          $depth++;
+
+        }// end of outer foreach
+
+      }// end of edit case
+
+     // Alter markup field and set select multiple category
+  
+     $form['itg_category'] = array(
+       '#type' => 'item',
+       '#title'=> t('Category'),
+       '#markup' => $select_category,
+       '#weight' =>38,
+     );
+    return $form;
+  }
+  
+
+}
+
+/**
+ * Implement hook_after_build
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_mcs_after_build($form, &$form_state) {
+  
+  global $user, $base_url;
+  // Add behavior.
+  drupal_add_js(drupal_get_path('module', 'itg_mcs') . '/js/itg_mcs.js');
+  return $form;
+}
+
+
+/**
+ * Menu callback to get data
+ * Ajax request
+ */
+function itg_category_callback() {
+ 
+  $preSelected_term = $_POST['preSelectedValue'];
+  $currentSelected_category = $_POST['currentSelectedValue'];
+  $formIsEdit = $_POST['checkEdit'];
+ 
+  $count = count($currentSelected_category);
+  $child_list = '';
+  
+  $get_depth = '';
+ 
+  if ($count > 0) {
+
+      foreach ($currentSelected_category[0] as $tid) {
+
+        // Find depth of category
+        $get_depth = term_depth($tid);
+        
+        // Get children category
+        $child_terms = taxonomy_get_children($tid);
+
+        foreach ($child_terms as $child_data) {
+          
+           if (in_array($child_data->tid, $preSelected_term)) {
+             $child_options .= '<option value="'.$child_data->tid.'" selected="selected">'.$child_data->name.'</option>';
+           }
+           else {
+             $child_options .= '<option value="'.$child_data->tid.'">'.$child_data->name.'</option>';
+           }
+           
+        }
+   
+      }
+      
+        
+      if($child_options == '') {
+        $display = 'style="display:none"';
+      }
+      else {
+        $display = '';
+        
+        $child_default = '<option value="">- Select Sub Category -</option>';
+        $child_list = $child_default.$child_options;
+      }
+
+      print '<select id="itgcategory-'.$get_depth.'" class="itg-category" name="field_select_category" multiple="multiple" '.$display.'>'.$child_list.'</select>';
+  }
+ 
+}
+
+
+/**
+ * Find term depth for all terms
+ */
+function _get_term_depth_all($vid) {
+  
+  $terms = taxonomy_get_tree($vid);
+  $depth = array();
+  foreach ($terms as $term_data) {
+     $depth[$term_data->tid] = term_depth( $term_data->tid);     
+  }
+ 
+  return $depth;
+} 
+
+
+/**
+ * Find term depth using tid
+ */
+function term_depth($tid) {
+  
+  if (!empty($tid)) {
+    $parent = db_query("SELECT parent FROM {taxonomy_term_hierarchy} WHERE tid = :tid", array(':tid' => $tid))->fetchField();
+    if ($parent == 0) {
+      return 1;
+    }else  {
+      return 1+term_depth($parent);
+    }
+  }
+  
+}

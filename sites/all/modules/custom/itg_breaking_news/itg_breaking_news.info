@@ -1,0 +1,6 @@
+name = ITG Breaking News
+description = "Contains functionality related to Breaking News."
+package = "ITG"
+core = 7.x
+
+files[] = itg_breaking_news.module

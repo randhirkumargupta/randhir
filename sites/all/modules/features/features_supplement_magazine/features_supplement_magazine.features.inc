@@ -8,9 +8,19 @@
  * Implements hook_ctools_plugin_api().
  */
 function features_supplement_magazine_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "field_validation" && $api == "default_field_validation_rules") {
+    return array("version" => "2");
+  }
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function features_supplement_magazine_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
 }
 
 /**
@@ -18,6 +28,14 @@ function features_supplement_magazine_ctools_plugin_api($module = NULL, $api = N
  */
 function features_supplement_magazine_node_info() {
   $items = array(
+    'issue' => array(
+      'name' => t('Issue'),
+      'base' => 'node_content',
+      'description' => t('Created for issues'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'magazine' => array(
       'name' => t('Magazine'),
       'base' => 'node_content',

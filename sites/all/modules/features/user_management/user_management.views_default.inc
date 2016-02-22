@@ -27,8 +27,10 @@ function user_management_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    4 => '4',
     5 => '5',
     6 => '6',
+    7 => '7',
     20 => '20',
     10 => '10',
     9 => '9',
@@ -186,9 +188,9 @@ function user_management_views_default_views() {
     'action::user_block_user_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
+      'skip_confirmation' => 1,
+      'override_label' => 1,
+      'label' => 'Block user',
     ),
     'rules_component::rules_unblock_user' => array(
       'selected' => 1,
@@ -248,11 +250,15 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'users';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: User: Link */
   $handler->display->display_options['fields']['view_user']['id'] = 'view_user';
   $handler->display->display_options['fields']['view_user']['table'] = 'users';
   $handler->display->display_options['fields']['view_user']['field'] = 'view_user';
   $handler->display->display_options['fields']['view_user']['label'] = '';
+  $handler->display->display_options['fields']['view_user']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_user']['alter']['text'] = '<span class="view-link">[view_user]</span>';
   $handler->display->display_options['fields']['view_user']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
