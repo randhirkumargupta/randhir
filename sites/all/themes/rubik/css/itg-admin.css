@@ -676,7 +676,7 @@ form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-pa
 .node-supplement-form .vertical-tabs, 
 .node-magazine-form .vertical-tabs, 
 .node-photogallery-form .vertical-tabs{padding-left: 0;}
-.cm-node-view .field-div{display: inline-block; vertical-align: top; width: 100%; padding-bottom: 10px;}
+.cm-node-view .field-div, .content-node-view .field{display: inline-block; vertical-align: top; width: 100%; padding-bottom: 10px;}
 .cm-node-view .field-div .field-label{float: left; width: 240px;}
 .cm-node-view .field-div .field-item{float: left; width: 560px;}
 form fieldset.date-combo .container-inline-date .date-padding .form-item span.error{padding-left: 0;}
@@ -743,28 +743,42 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .view-category-manager-dev .view-header{text-align: right;}
 .view-category-manager-dev .view-header > div{ background-color: #7bc; border-radius: 5px; color: #fff; display: inline-block; font-weight: bold; padding: 5px 10px; text-shadow: 0 1px 0 #38a; vertical-align: top; cursor: pointer;}
 .view-category-manager-dev .view-header > div.active{background-color: #008eb1;}
-.page-node-revisions .views-label, .page-node-revisions .field .field-label{
+.page-node-revision .views-label, 
+.page-node-revision .field .field-label, 
+.content-node-view .field-label{
     display: inline-block;
     font-weight: bold;
     vertical-align: middle;
     width: 200px;
 }
-.page-node-revisions .field-items{
+.page-node-revision .field-items, .content-node-view .field-items{
   display: inline-block;
   font-weight: bold;
   vertical-align: middle;
   width: 60%;
 }
-.page-node-revisions .field{padding-bottom: 10px;}
-.page-node-revisions .content-box > h2 {
+.content-node-view .field-items .field-item{width: auto; padding-right: 10px;}
+.page-node-revision .field{padding-bottom: 10px;}
+.page-node-revision .content-box > h2, .content-node-view h2 {
     border-bottom: 1px solid #ddd;
     font-size: 18px;
     margin-bottom: 5px;
     padding-bottom: 10px;
 }
-.page-node-revisions .node-story .column-side{width: 30%;}
-.page-node-revisions .node-story .column-main{width: 70%;}
-.page-node-revisions .column-side .byline{font-size: 14px;}
-.page-node-revisions .column-side .views-field{padding: 10px;}
-.page-node-revisions .column-side .views-label, 
-.page-node-revisions .column-side .field-content{font-size: 13px;}
+.page-node-revision .node-story .column-side, .node-breaking-news .column-side{width: 30%;}
+.page-node-revision .node-story .column-main, .node-breaking-news .column-main{width: 70%;}
+.page-node-revision .column-side .byline{font-size: 14px;}
+.page-node-revision .column-side .views-field{padding: 10px;}
+.page-node-revision .column-side .views-label, 
+.page-node-revision .column-side .field-content{font-size: 13px;}
+.node-issue-form fieldset legend .form-required, 
+.node-supplement-form fieldset legend .form-required, 
+.node-magazine-form fieldset legend .form-required{display: none;}
+.page-node-add-issue .vertical-tabs-panes, 
+.node-supplement-form .vertical-tabs-panes, 
+.node-magazine-form .vertical-tabs-panes{padding: 10px 10px 0;} 
+#field-gallery-image-values td fieldset input.form-file{float: left; max-width: 280px !important;}
+#field-gallery-image-values .form-type-managed-file .form-managed-file span.file, 
+#field-gallery-image-values .form-type-managed-file .form-managed-file span.file-size{margin-right: 5px; max-width: 200px;}
+.details-parent div{text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+.node-magazine-form .date-padding .form-item label{display: none;}
