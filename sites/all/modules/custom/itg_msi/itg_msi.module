@@ -361,7 +361,7 @@ function itg_msi_node_presave($node){
       field_attach_update('node', $node);
     }
   }
-    //Publish/Unpublish functionality for magazine
+    //Set date in title
   if ($node->type == 'issue') {
     $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
   }
@@ -673,12 +673,12 @@ function itg_msi_create_issue_batch_process($fid, $node_info, &$context) {
     //Set source variables in to story content type
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = $node_info['source_type'];
     $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = $node_info['source_nid'];
-    //$node->revision = 1;
-    //$node->log = 'State Changed to published';
+    $node->revision = 1;
+    $node->log = 'State Changed to published';
 
     $node = node_submit($node); // Prepare node for saving
     node_save($node); // Finally save node
-    //workbench_moderation_moderate($node, 'Published');
+    workbench_moderation_moderate($node, 'published');
     $context['message'] = "Now processing...";
   }
 }
