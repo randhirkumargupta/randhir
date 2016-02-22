@@ -59,6 +59,11 @@ function itg_category_manager_menu() {
     //'access arguments' => array('administer taxonomy'),
     'type' => MENU_CALLBACK,
   );
+  $items['itg_category_manager_autocomplete'] = array(
+    'page callback' => 'itg_category_manager_autocomplete_name',
+    'access arguments' => array('administer taxonomy'),
+    'type' => MENU_CALLBACK
+  );
   
   return $items;
 }
@@ -298,7 +303,7 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid'){
 /**
  * Implements _form_validate() for taxonomy_form_term().
  */
-function itg_category_manager_term_validate($form, &$form_state) { 
+function itg_category_manager_term_validate($form, &$form_state) {   
   // Set published time same as parent term
   $termParent = $form_state['values']['parent'][0];
   if ($termParent) {
@@ -741,9 +746,10 @@ function itg_category_manager_views_data() {
  * @param string $form_id name of the form id
  */
 function itg_category_manager_form_alter(&$form, $form_state, $form_id) {
-  if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {    
+  if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {        
+    $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
     $form['status']['#options'][1] = t('Active'); 
-    $form['status']['#options'][0] = t('Inactive');
+    $form['status']['#options'][0] = t('Inactive');    
   }
 }
 
@@ -884,4 +890,17 @@ function itg_category_manager_seflogpage($tid) {
   }
   
   return $output;
+}
+
+// Autocomplete callback for category manager view
+function itg_category_manager_autocomplete_name($string) {  
+  $itgQuery = db_select('taxonomy_term_data', 'itg');
+  $itgQuery->condition('name', '%' . $string . '%', 'LIKE')
+      ->fields('itg', array('name'));
+  $itgResult = $itgQuery->execute();
+  $result = array();
+  foreach ($itgResult as $value) {
+    $result[$value->name] = $value->name;
+  }
+  return drupal_json_output($result);
 }
