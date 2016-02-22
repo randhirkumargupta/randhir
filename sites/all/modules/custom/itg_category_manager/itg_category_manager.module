@@ -752,7 +752,7 @@ function itg_category_manager_form_alter(&$form, $form_state, $form_id) {
  */
 function itg_category_manager_block_info() {
   $blocks['sef_url_log'] = array(
-    'info' => t('Sef URL Log'),
+    'info' => t('SEF URL Log'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   ); 
 
