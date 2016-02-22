@@ -56,5 +56,5 @@
   <?php print drupal_render($form['field_keywords']); ?>
 </div>
 <h2 id="title-metatags" class="story-title">Meta Tags</h2>
- <?php print drupal_render_children($form); ?>
+<?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
