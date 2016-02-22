@@ -158,16 +158,17 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     $used_by_content = taxonomy_select_nodes($tid);
       if (count($used_by_content) > 0) {
         form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
-        $node_url = $base_url . '/node/';
-        echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
-        $count_used = count($used_by_content) - 1;
-        foreach ($used_by_content as $key => $value) {
-          $node = node_load($value);
-          $mapped_content_link = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>'.', ';
-          echo rtrim($mapped_content_link, ', ');
-          
-        }
-        echo '</div>';
+        //$node_url = $base_url . '/node/';
+        //echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
+        $count_used = count($used_by_content);
+//        foreach ($used_by_content as $key => $value) {
+//          $node = node_load($value);
+//          $mapped_content_link = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>'.', ';
+//          echo rtrim($mapped_content_link, ', ');
+//          
+//        }
+        //echo '</div>';
+        drupal_set_message('This category is mapped with '.$count_used.' contents.'.l(' Click here', 'category-remove-from-node/'.$tid, array('attributes' => array('target'=>'_blank'))), 'status');
         drupal_add_js('(function($) {$(document).ready(function() {
         $("#taxonomy-form-term #edit-submit").hide();
         $("#edit-description").html($("body").find(".contents-using-cat").html());
@@ -175,30 +176,31 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
        });}(jQuery));', 'inline');
       } else {
         $flag = FALSE;
-        $all_children = @taxonomy_get_children_all($tid, $form_state['term']->vid);
+        $all_children = @taxonomy_get_children_all($tid, $form_state['term']->vid);        
         if (count($all_children) > 0) {
-          foreach ($all_children as $key => $val) {
-            $used_by_content = taxonomy_select_nodes($val);
-            if(count($used_by_content) > 0){
-              $flag = TRUE;
-            }
-            $node_url = $base_url . '/node/';
-            $count_used = count($used_by_content) - 1;
-            foreach ($used_by_content as $key => $value) {
-              $node = node_load($value);
-              $user_content_link[] = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
-            }
-          }
-          if($flag){
-          $user_content_link_str = implode(", ", $user_content_link);
-          echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>'.$user_content_link_str.'</div>';
-          form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
+//          foreach ($all_children as $key => $val) {
+//            $used_by_content = taxonomy_select_nodes($val);
+//            if(count($used_by_content) > 0){
+//              $flag = TRUE;
+//            }
+//            $node_url = $base_url . '/node/';
+//            $count_used = count($used_by_content) - 1;
+//            foreach ($used_by_content as $key => $value) {
+//              $node = node_load($value);
+//              $user_content_link[] = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
+//            }
+//          }
+          
+//          $user_content_link_str = implode(", ", $user_content_link);
+//          echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>'.$user_content_link_str.'</div>';
+          form_set_error('name', t('Sorry! you cannot delete this category. This category has '.count($all_children).' child category'));
+          
            drupal_add_js('(function($) {$(document).ready(function() {
             $("#taxonomy-form-term #edit-submit").hide();
             $("#edit-description").html($("body").find(".contents-using-cat").html());
             $(".contents-using-cat").hide();
            });}(jQuery));', 'inline');
-          }
+          
          }  
       }
   } else {
@@ -250,13 +252,22 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#default_value' => true,
         '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
       );
-      // Hode publish time field.
+      // Hide publish time field.
       $form['field_publish_time']['#prefix'] = '<div style="display:none;">';
       $form['field_publish_time']['#suffix'] = '</div>';
+      // Add id attribute to tid field
+      if (isset($form['actions']['delete'])) {
+        $form['term_tid'] = array(
+          '#type' => 'hidden',
+          '#value' => $form['tid']['#value'],
+          '#attributes' => array('class' => array('tid')),
+        );
+        $form['actions']['delete']['#suffix'] = '<span class="count"></span>';
+      }
+  
       //Call valiadte and after build
       $form['#validate'][] = 'itg_category_manager_term_validate';
-      $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
-      
+      $form['#after_build'][] = 'itg_category_manager_add_form_after_build';      
     }
   }  
 }
