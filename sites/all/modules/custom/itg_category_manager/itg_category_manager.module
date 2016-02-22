@@ -627,10 +627,10 @@ function itg_category_manager_taxonomy_term_presave($term) {
  * Insert url aias to itg-category_manager table against specific term id.
  */
 function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {    
-  db_update('itg_sef_url')
-    ->fields(array('sef_url' => $alias))
-    ->condition('tid', $context['data']['term']->tid)
-    ->execute();
+//  db_update('itg_sef_url')
+//    ->fields(array('sef_url' => $alias))
+//    ->condition('tid', $context['data']['term']->tid)
+//    ->execute();
 }
 
 /**
