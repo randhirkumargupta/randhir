@@ -56,7 +56,7 @@ function itg_category_manager_menu() {
     'page callback' => 'itg_category_manager_seflogpage',      
     'access callback' => TRUE,
     'page arguments' => array(1),
-    //'access arguments' => array('administer taxonomy'),
+    'access arguments' => array('administer taxonomy'),
     'type' => MENU_CALLBACK,
   );
   $items['itg_category_manager_autocomplete'] = array(
@@ -163,16 +163,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     $used_by_content = taxonomy_select_nodes($tid);
       if (count($used_by_content) > 0) {
         form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
-        //$node_url = $base_url . '/node/';
-        //echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>';
+
         $count_used = count($used_by_content);
-//        foreach ($used_by_content as $key => $value) {
-//          $node = node_load($value);
-//          $mapped_content_link = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>'.', ';
-//          echo rtrim($mapped_content_link, ', ');
-//          
-//        }
-        //echo '</div>';
         drupal_set_message('This category is mapped with '.$count_used.' contents.'.l(' Click here', 'category-remove-from-node/'.$tid, array('attributes' => array('target'=>'_blank'))), 'status');
         drupal_add_js('(function($) {$(document).ready(function() {
         $("#taxonomy-form-term #edit-submit").hide();
@@ -183,21 +175,6 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $flag = FALSE;
         $all_children = @taxonomy_get_children_all($tid, $form_state['term']->vid);        
         if (count($all_children) > 0) {
-//          foreach ($all_children as $key => $val) {
-//            $used_by_content = taxonomy_select_nodes($val);
-//            if(count($used_by_content) > 0){
-//              $flag = TRUE;
-//            }
-//            $node_url = $base_url . '/node/';
-//            $count_used = count($used_by_content) - 1;
-//            foreach ($used_by_content as $key => $value) {
-//              $node = node_load($value);
-//              $user_content_link[] = '<a target="_blank" href="' . $node_url . $value . '/edit">' . $node->title . '</a>';
-//            }
-//          }
-          
-//          $user_content_link_str = implode(", ", $user_content_link);
-//          echo '<div class = "contents-using-cat"> This category is mapped with following contents, kindly click below and update the category for each:<br/>'.$user_content_link_str.'</div>';
           form_set_error('name', t('Sorry! you cannot delete this category. This category has '.count($all_children).' child category'));
           
            drupal_add_js('(function($) {$(document).ready(function() {
@@ -209,13 +186,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
          }  
       }
   } else {
-//    $types = @variable_get('itg_category_manager_types', array());
-//    if ($types['term']) {
-//      $vids = array_filter(variable_get('itg_category_manager_vocabularies', array()));
-//      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
-//        $form['#validate'][] = 'itg_category_manager_term_validate';
-//      }
-//    }
+
     
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
       $form['#action'] = '?destination=category-manager'; //Redirect to term listing page, after term has been added successfully.
@@ -597,29 +568,6 @@ function itg_category_manager_taxonomy_term_insert($term) {
  */
 function itg_category_manager_taxonomy_term_presave($term) {
   if ($term->tid !== NULL) {
-    // Fetch old data from table
-    /* $itgQuery = db_select('itg_category_manager', 'itg');
-    $itgQuery->condition('tid', $term->tid);
-    $itgQuery->fields('itg', array('sef_url', 'sef_url_modified'));
-    $itgResult = $itgQuery->execute();
-    $itgResult = $itgResult->fetchObject();
-    // Prepare array for data insertion
-    global $user;
-    if ($itgResult->sef_url !== $term->path['alias'] && $itgResult->sef_url_modified == '') {
-      $data['sef_url_modified'] = $term->path['alias'];
-    }
-    else if ($itgResult->sef_url_modified != '' && $itgResult->sef_url_modified !== $term->path['alias']) {
-      $data['sef_url_modified'] = $term->path['alias'];
-      $data['sef_url'] = $itgResult->sef_url_modified;
-    }
-    $data['uid'] = $user->uid;
-    $data['changed'] = time();
-    db_update('itg_category_manager')
-        ->fields($data)
-        ->condition('tid', $term->tid)
-        ->execute();
-    */
-    // Insert sef url log on update    
     global $user;      
     $data = array();
     $data = array(
