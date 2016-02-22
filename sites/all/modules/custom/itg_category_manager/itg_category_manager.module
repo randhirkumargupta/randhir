@@ -697,10 +697,8 @@ function itg_category_manager_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {        
     $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
     $form['status']['#options'][1] = t('Active'); 
-    $form['status']['#options'][0] = t('Inactive'); 
-    dpm($form);
+    $form['status']['#options'][0] = t('Inactive');     
     $form['field_cm_select_type_value']['#options']['All'] = t('All');
-//$form[]
   }
 }
 
