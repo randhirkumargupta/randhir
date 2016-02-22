@@ -4,9 +4,9 @@
       // Place your code here.
       var setting = Drupal.settings.baseUrl;
       $('#edit-term-state').click(function () {
-        var state = $(this).is(':checked');        
+        var state = $(this).is(':checked');
       });
-      $('#show-content-count').on('click', function() {
+      $('#show-content-count').on('click', function () {
         var tid = $('.tid').text();
         //Call Ajax
         $.ajax({
@@ -14,13 +14,11 @@
           type: 'post',
           data: {'tid': tid},
           dataType: "JSON",
-          success: function(data) {
-            $('span.count').html(' : '+data);
+          success: function (data) {
+            $('span.count').html(' : ' + data);
           }
         });
-        
       });
-
     }
   };
 })(jQuery, Drupal, this, this.document);
