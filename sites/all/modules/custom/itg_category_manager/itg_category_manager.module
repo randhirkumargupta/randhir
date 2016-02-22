@@ -697,7 +697,10 @@ function itg_category_manager_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {        
     $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
     $form['status']['#options'][1] = t('Active'); 
-    $form['status']['#options'][0] = t('Inactive');    
+    $form['status']['#options'][0] = t('Inactive'); 
+    dpm($form);
+    $form['field_cm_select_type_value']['#options']['All'] = t('All');
+//$form[]
   }
 }
 
@@ -840,7 +843,10 @@ function itg_category_manager_seflogpage($tid) {
   return $output;
 }
 
-// Autocomplete callback for category manager view
+/**
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
 function itg_category_manager_autocomplete_name($string) {  
   $itgQuery = db_select('taxonomy_term_data', 'itg');
   $itgQuery->condition('name', '%' . $string . '%', 'LIKE')
