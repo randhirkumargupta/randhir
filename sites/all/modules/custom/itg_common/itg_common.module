@@ -139,8 +139,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         '#value' => t('Cancel'),
       );
     }
-  }
+  } 
+  
 }
+
 
 /**
  * Password validation for adding user profile
@@ -221,13 +223,13 @@ function itg_common_role_delegation($role_array) {
     global $user;
 
     if (array_key_exists(EDITOR, $user->roles)) {
-        $user_array = array(SECTION_EDITOR_ANCHOR => 'Section Editor/Anchor', COPY_EDITOR => 'Copy Editor', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub', INTERN => 'Intern', AUTHOR_GUEST => 'Author/Guest');
+        $user_array = array(AUTHOR_GUEST => 'Author/Guest', COPY_EDITOR => 'Copy Editor', INTERN => 'Intern', SECTION_EDITOR_ANCHOR => 'Section Editor/Anchor',  SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub' );
     } else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
-        $user_array = array(COPY_EDITOR => 'Copy Editor', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub', INTERN => 'Intern', AUTHOR_GUEST => 'Author/Guest');
+        $user_array = array(AUTHOR_GUEST => 'Author/Guest',COPY_EDITOR => 'Copy Editor', INTERN => 'Intern', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub');
     } else if (array_key_exists(COPY_EDITOR, $user->roles)) {
-        $user_array = array(SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub', INTERN => 'Intern', AUTHOR_GUEST => 'Author/Guest');
+        $user_array = array(AUTHOR_GUEST => 'Author/Guest', INTERN => 'Intern', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub' );
     } else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-        $user_array = array(INTERN => 'Intern', AUTHOR_GUEST => 'Author/Guest');
+        $user_array = array(AUTHOR_GUEST => 'Author/Guest',INTERN => 'Intern' );
     } else if (array_key_exists(SITE_ADMIN, $user->roles)) {
         unset($role_array[3]);
         $user_array = $role_array;
@@ -285,5 +287,46 @@ function itg_common_theme($existing, $type, $theme, $path) {
   );
 
   return $themes;
+}
+
+
+/**
+ * Helper function to populate the second dropdown.
+ * @param type $id
+ */
+function itg_common_dropdown_supplement($id = '') {
+ 
+  // Fetch query for supplements 
+  $data = '';
+  $query = db_select('field_data_field_supp_select_magazine', 'm');
+  $query->join('node', 'n', 'm.entity_id = n.nid');
+  $query->fields('m', array('entity_id'));
+  $query->fields('n', array('title'));
+  $query->condition('field_supp_select_magazine_target_id', $id, '=');
+  // $query->condition('n.type', $content_type, '=');  
+
+  $result = $query->execute(); 
+  while ($record = $result->fetchAssoc()) {
+    $data[$record['entity_id']] = $record['title'];
+  }
+  //p($data);
+  //If record found, then return array else return blank
+  if (empty($data)) {
+      $data = array('_none' => '-Select-');
+  }
+  
+  return $data;
+
+}
+
+/**
+ * Implement hook_user_login
+ * @param Array $edit
+ * @param Object $account
+ */
+function itg_common_user_login(&$edit, $account) {  
+  if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
+    $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
+  }
 }
 

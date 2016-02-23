@@ -1,0 +1,6 @@
+name = ITG Recipe
+description = "ITG Recipe Module for recipe content"
+core = 7.x
+package = ITG
+
+files[] = itg_recipe.module
