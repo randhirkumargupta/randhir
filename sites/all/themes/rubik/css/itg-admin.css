@@ -707,17 +707,18 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .node-photogallery-form a.token-dialog{display: none;}
 .photogallery-list .slides > li{position: relative; text-align: center;}
 .photogallery-list li audio{width: 100%;}
-.category-manager-thead{float: left; width: 100%; box-sizing: border-box; border: 1px solid #ddd; border-bottom: none; position: relative;}
+.category-manager-thead{float: left; width: 100.1%; box-sizing: border-box; border: 1px solid #ddd; border-bottom: none; position: relative; background-color: #ccc; font-weight: bold;}
 .category-manager-thead .cmt-title, 
-.category-manager-thead .cmt-details{float: left; width: 50%; box-sizing: border-box; line-height: 18px; height: 28px;}
-.category-manager-thead .cmt-title{padding: 5px 10px;}
+.category-manager-thead .cmt-details{float: left; width: 50.05%; box-sizing: border-box; line-height: 18px; height: 34px;}
+.category-manager-thead .cmt-title{padding: 8px 10px;}
 .category-manager-thead .cmt-details{text-align: center; position: absolute; left: 50%; height: 100%;}
-.cmt-details span{position: absolute; top: 0; height: 100%; padding: 5px 10px; width: 25%; box-sizing: border-box;}
+.cmt-details span{position: absolute; top: 0; height: 100%; padding: 8px 10px; width: 25%; box-sizing: border-box;}
 .cmt-details span:nth-child(1){left: 0;}
 .cmt-details span:nth-child(2){left: 25%;}
 .cmt-details span:nth-child(3){left: 50%;}
 .cmt-details span:nth-child(4){left: 75%;}
 .cmt-details span{border-right: 1px solid #ddd;}
+.cmt-details > span:last-child {border-right: medium none;}
 .node-photogallery-form .field-multiple-table tbody td fieldset.collapsible .cancel.button-remove.form-submit{margin-left: 140px;}
 .category-manager-details,
 .view-category-manager-dev .view-content ul li{float: left; width: 100%; box-sizing: border-box;}
