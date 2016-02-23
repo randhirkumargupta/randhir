@@ -52,7 +52,7 @@
       <div class="cmt-title">Category Name</div>
       <div class="cmt-details">
       <span>Created Date</span>
-      <span>Last Modified Date</span>
+      <span>Modified Date</span>
       <span>Status</span>
       <span>Action</span>
       </div>
