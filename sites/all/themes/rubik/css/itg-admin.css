@@ -824,3 +824,4 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 #taxonomy-form-term .form-item-term-state label.option{float: none;}
 .form-item div.password-confirm span.error{float: right; width: auto; padding: 0;}
 .view-strory-menegment .views-table th.views-field-counter{padding-left: 30px;}
+.node-breaking-news.node-preview .column-main{width: 100%;}
