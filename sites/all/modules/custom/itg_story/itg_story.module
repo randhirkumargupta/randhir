@@ -356,9 +356,10 @@ function itg_story_node_insert($node) {
  * @param type $form_state
  * @param type $form_id  
  */
-function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
+
+/*function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
-  
+    //p($form_state);
     $magazine_field = 'field_story_select_magazine';
     $supplement_field = 'field_story_select_supplement';
     
@@ -372,11 +373,13 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     // Setup field_event_1_role select
     $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="'.$supplement_field.'_replace">';
     $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+    
     if (function_exists('itg_common_dropdown_supplement')) {
       $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
     }
+    $form[$supplement_field][LANGUAGE_NONE]['#default_value'] = isset($form_state['values'][$supplement_field]) ? $form_state['values'][$supplement_field] : '';
   
-}
+}*/
 
 /**
 * Ajax callback for Event roles dropdown
