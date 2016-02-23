@@ -318,3 +318,15 @@ function itg_common_dropdown_supplement($id = '') {
   return $data;
 
 }
+
+/**
+ * Implement hook_user_login
+ * @param Array $edit
+ * @param Object $account
+ */
+function itg_common_user_login(&$edit, $account) {  
+  if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
+    $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
+  }
+}
+
