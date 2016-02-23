@@ -121,42 +121,7 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
     }
   }
 }
-
-/**
- * Implement hook_form_id_alter
- * @param Array $form
- * @param Array $form_state
- * @param Array $form_id
- */
-function itg_msi_form_issue_node_form_alter(&$form, &$form_state, $form_id) {
-
-    $magazine_field = 'field_issue_magazine';
-    $supplement_field = 'field_issue_supplement';
-
-    $magazine_id = $form_state['values'][$magazine_field][LANGUAGE_NONE][0];
-    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
-        'event' => 'change',
-        'callback' => 'itg_msi_magazine_ajax_callback',
-        'wrapper' => $supplement_field . '_replace',
-    );
-
-    // Setup field_event_1_role select
-    $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $supplement_field . '_replace">';
-    $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
-    if (function_exists('itg_common_dropdown_supplement')) {
-      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
-    }
-}
-
-/**
-* Ajax callback for Event roles dropdown
-* @param Array $form
-* @param Array $form_state
-*/
-function itg_msi_magazine_ajax_callback($form, $form_state) {
-    return $form['field_issue_supplement'];
-}
-    
+ 
 /**
  * After build function for magazine, supplement and issue
  * @param Array $form
