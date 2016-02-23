@@ -733,7 +733,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .details-parent .photo-title{font-size: 16px;}
 .audio-div{position: relative;}
 .flexslider{border: none; margin: 0;}
-.flexslider.photogallery-list li img{width: 100%; height: 300px; display: inline-block; vertical-align: top;}
+.flexslider.photogallery-list li img{display: inline-block; vertical-align: top; width: auto; height: auto;}
 .flex-direction-nav a{font-size: 0;}
 .flex-direction-nav a::before{line-height: 42px;}
 .category-manager-details{border-bottom: 1px solid #ddd; position: relative;}
@@ -824,3 +824,4 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 #taxonomy-form-term .form-item-term-state label.option{float: none;}
 .form-item div.password-confirm span.error{float: right; width: auto; padding: 0;}
 .view-strory-menegment .views-table th.views-field-counter{padding-left: 30px;}
+.node-breaking-news.node-preview .column-main{width: 100%;}
