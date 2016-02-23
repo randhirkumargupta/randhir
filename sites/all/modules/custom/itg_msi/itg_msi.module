@@ -89,26 +89,7 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
       } else {
         $destination = 'manage-issues';
       }
-
-      //Load all supplements created under a magazine
-      $options_step = $form['field_issue_supplement'][LANGUAGE_NONE]['#options'];
-      if ($form)
-        $form['field_issue_magazine'][LANGUAGE_NONE]['#ajax'] = array(
-            'event' => 'change',
-            'callback' => 'itg_msi_ajax_dependent_supplement_list',
-            'wrapper' => 'dropdown-supplement-replace',
-            'method' => 'replace',
-        );
-      
-      //Remove an illegal choice error
-      $form['field_issue_supplement'][LANGUAGE_NONE]['#validated'] = TRUE;
-      $form['#validated'] = TRUE;
-      
-      $form['field_issue_supplement'][LANGUAGE_NONE]['#prefix'] = '<div id ="dropdown-supplement-replace">';
-      $form['field_issue_supplement'][LANGUAGE_NONE]['#suffix'] = '</div>';
-      $form['field_issue_supplement'][LANGUAGE_NONE]['#options'] = $options_step;
     }
-  
   
   //Add cancel button for magazine, supplement and issue
   if($form_id == 'magazine_node_form' || $form_id == 'supplement_node_form' || $form_id == 'issue_node_form'){
@@ -137,10 +118,10 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
     if(!in_array('administrator', $user->roles)){ // Not applicable for super admin
       unset($form['field_story_source_type']);
       unset($form['field_story_source_id']);
+    }
   }
 }
-}
-
+ 
 /**
  * After build function for magazine, supplement and issue
  * @param Array $form
@@ -183,47 +164,6 @@ function itg_msi_form_after_build($form, &$form_state){
  
   return $form;
 }
-
-/**
- * 
- * @param Array $form
- * @param Array $form_state
- * @return Array
- */
-function itg_msi_ajax_dependent_supplement_list($form, $form_state) {
-    $process = $form['field_issue_magazine']['und']['#value'];
-    $form['field_issue_supplement']['und']['#options'] = itg_msi_get_supplement_list_under_magazine($process);
-    return $form['field_issue_supplement'];
-}
-
-/**
- * Fetch supplement list using magazine reference id
- * @param Integer $id
- * @return Array
- */
-function itg_msi_get_supplement_list_under_magazine($id) {
-
-  //Fetch query for supplements
-  $result = db_query('Select n.entity_id FROM {field_data_field_supp_select_magazine} n WHERE n.field_supp_select_magazine_target_id = :field_supp_select_magazine_target_id', array(':field_supp_select_magazine_target_id' => $id));
-  foreach ($result as $record) {
-    $entity_id[] = $record->entity_id;
-  }
-  
-  //If record found, then return array else return blank
-  if (count($entity_id) > 0) {
-    foreach ($entity_id as $id) {
-      $result2 = db_query('Select t.title,t.nid FROM {node} t WHERE t.nid = :nid', array(':nid' => $id));
-      foreach ($result2 as $record2) {
-        $title[$id] = $record2->title;
-      }
-    }
-  } else {
-    $title = array('_none' => '-No Record Found-');
-  }
-  
-  return $title;
-}
-
 
 /*******************************View Related hooks*****************************/
 
@@ -330,8 +270,6 @@ function itg_msi_node_insert($node){
   }
 }
 
-
-
 /**
  * Implement hook_node_presave
  * @param Object $node
@@ -359,7 +297,7 @@ function itg_msi_node_presave($node){
       field_attach_update('node', $node);
     }
   }
-    //Publish/Unpublish functionality for magazine
+    //Set date in title
   if ($node->type == 'issue') {
     $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
   }
@@ -411,8 +349,6 @@ function itg_msi_node_validate($node, $form, &$form_state) {
   }
   
 }
-
-
 
 /**************************Common Functionality********************************/
 
@@ -503,22 +439,22 @@ function itg_msi_get_nid_using_title_type($title, $type){
 function itg_msi_autocomplete_content($title) {
   
     if (strlen(trim($title)) > 0) {
-      $content_type = arg(1);
-      $options = '';
-      $title = strtolower(trim($title));
-      $query = db_select('field_data_field_issue_title', 'c');
-      $query->fields('c', array('field_issue_title_value'));
-      $query->condition('field_issue_title_value', '%'.$title.'%', 'LIKE');
-      $query->condition('c.bundle', $content_type, '=');
-      $query->range(0, 20);
-      
-      $result = $query->execute(); 
-      while ($record = $result->fetchAssoc()) {     
-        $options[date('Y-m-d',strtotime($record['field_issue_title_value']))] = date('m/d/Y',strtotime($record['field_issue_title_value']));
-      }    
-      drupal_json_output($options);    
-  }    
- }
+    $content_type = arg(1);
+    $options = '';
+    $title = strtolower(trim($title));
+    $query = db_select('field_data_field_issue_title', 'c');
+    $query->fields('c', array('field_issue_title_value'));
+    $query->condition('field_issue_title_value', '%' . $title . '%', 'LIKE');
+    $query->condition('c.bundle', $content_type, '=');
+    $query->range(0, 20);
+
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $options[date('Y-m-d', strtotime($record['field_issue_title_value']))] = date('m/d/Y', strtotime($record['field_issue_title_value']));
+    }
+    drupal_json_output($options);
+  }
+}
  
  /**
   * Check issue existence, if yes return TRUE else FALSE
@@ -575,7 +511,7 @@ function itg_msi_show_mapped_stories($row){
  * @param Array $node_info
  * @param string $context
  */
-function itg_msi_create_issue_batch_process($fid, $node_info, &$context) {
+function itg_msi_create_issue_batch_process($fid, $node_info) {
   global $user;
 
   $xml_file = file_load($fid);
@@ -585,20 +521,46 @@ function itg_msi_create_issue_batch_process($fid, $node_info, &$context) {
   $city = trim($xml->City);
   $city_tid = itg_msi_get_term_from_name($city, 'city');
 
-  if (!empty($city_tid) && $city != 'NA') {
-    $section = itg_msi_get_term_from_name(trim($xml->Section), 'category_management');
-    $sub_section = $xml->SubSection;
+  //Parent Category
+  $section = trim($xml->Section);
+  $section_tid = itg_msi_get_term_from_name($section, 'category_management');
+  
+  //Collect kicker, headline, byline and body from this array($xml_other)
+  foreach ($xml as $key => $value) {
+    $xml_other[strtolower($key)] = $value;
+  }
+  
+  $byline = trim($xml_other['byline']->p);
+  $byline_id = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');
+  $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));
+  $kicker = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['kicker']->p))));
+  
+  //Add check for required fields
+  if (empty($city)) {
+    drupal_set_message(t('No city found in the file' . $xml_file->filename . '. Please insert a city and try again.'), 'error');
+    
+  } else if(empty($city_tid) && !empty($city)) {
+    drupal_set_message(t('City <strong>'.$city.'</strong> in the file '.$xml_file->filename .' doesn\'t exist in our database. Please choose another city and try again.'), 'error');
+    
+  } else if(empty($section)) {
+    drupal_set_message(t('No section found in the file ' . $xml_file->filename . '. Please insert a section and try again.'), 'error');
+    
+  } else if(empty($section_tid) && !empty($section)) {
+    drupal_set_message(t('Section <strong>'.$section.'</strong> in the file '.$xml_file->filename .' doesn\'t exist in our database. Please choose another section and try again.'), 'error');
+
+  } else if(empty($byline)) {
+    drupal_set_message(t('No Author found in the file ' . $xml_file->filename . '. Please insert a Author name and try again.'), 'error');
+    
+  } else if(empty($byline_id) && !empty($byline)) {
+    drupal_set_message(t('Author <strong>'.$byline.'</strong> in the file '.$xml_file->filename.' doesn\'t exist in our database. Please choose another Author and try again.'), 'error');
+    
+  } else if(empty($headline) || $headline == 'NA') {
+    drupal_set_message(t('No story headline found in the file ' . $xml_file->filename . '. Please insert a story headline and try again.'), 'error');
+    
+  } else {
+    //Prepare date
     $issue_date_xml = str_replace('/', '-', trim($xml->IssueDate));
     $issue_date = date('Y-m-d h:i:s', strtotime($issue_date_xml));
-
-    //Collect kicker, headline, byline and body from this array($xml_other)
-    foreach ($xml as $key => $value) {
-      $xml_other[strtolower($key)] = $value;
-    }
-
-    $kicker = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['kicker']->p))));
-    $byline = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');
-    $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));
 
     //Prepare body
     foreach ($xml_other['body']->p as $bodyTxt) {
@@ -611,18 +573,17 @@ function itg_msi_create_issue_batch_process($fid, $node_info, &$context) {
     $node->type = "story";
     node_object_prepare($node);
 
-    $node->language = LANGUAGE_NONE; //und
+    $node->language = LANGUAGE_NONE;
     $node->uid = $user->uid;
-    $node->status = 0; //(1 or 0): Published or not
-    $node->promote = 0; //(1 or 0): Promoted to front page
-    $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-    //Headline, body issue date and city
+    $node->status = 1;
+    $node->promote = 0;
+    $node->comment = 0;
     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
     $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
     $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = $city_tid; // 58: New Delhi
     $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $issue_date ? $issue_date : date('Y-m-d h:i:s', time());
-
+    
     //Issue, magazine and supplement
     $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
     if ($node_info['magazine']) {
@@ -632,52 +593,25 @@ function itg_msi_create_issue_batch_process($fid, $node_info, &$context) {
       $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $node_info['supplement'];
     }
 
-    //Kicker and byline
+    //Insert Kicker
     $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
     $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
-    $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $byline ? $byline : 29; //29: Rajdeep Sardesai
-    //Section and sub-section
-    if ($section) {
-      $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $section;
-    }
+    
+    //Insert Author(Byline)
+    $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $byline_id;
+   
+    //Insert Section and sub-section
+    $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $section_tid;
+  
 
     //Set source variables in to story content type
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = $node_info['source_type'];
     $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = $node_info['source_nid'];
-    //$node->revision = 1;
-    //$node->log = 'State Changed to published';
+    $node->revision = 1;
+    $node->log = 'State Changed to published';
 
     $node = node_submit($node); // Prepare node for saving
     node_save($node); // Finally save node
-    //workbench_moderation_moderate($node, 'Published');
-    $context['message'] = "Now processing...";
-  } else {
-    drupal_set_message(t('City doesn\'t exist in ' . $xml_file->filename . ' file. Please insert city and try again.'), 'error');
+    workbench_moderation_moderate($node, 'published');
   }
 }
-
-/**
- * The batch finish handler.
- */
-
-/**
- * The batch finish handler for issue creation through XML file
- * @param String $success
- * @param String $results
- * @param Array $operations
- */
-function itg_msi_create_issue_batch_finished($success, $results, $operations) {
-  if ($success) {
-    drupal_set_message('Fix is complete!');
-  }
-  else {
-    $error_operation = reset($operations);
-    $message = t('An error occurred while processing %error_operation with arguments: @arguments', array(
-      '%error_operation' => $error_operation[0],
-      '@arguments' => print_r($error_operation[1], TRUE)
-    ));
-    drupal_set_message($message, 'error');
-  }
-  drupal_set_message(l('Run again', 'node/add/supplement'));
-}
-

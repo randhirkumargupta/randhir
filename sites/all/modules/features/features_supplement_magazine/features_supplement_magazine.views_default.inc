@@ -44,13 +44,14 @@ function features_supplement_magazine_views_default_views() {
     'counter' => 'counter',
     'title' => 'title',
     'nid' => 'nid',
+    'field_story_select_magazine' => 'field_story_select_magazine',
+    'field_story_select_supplement' => 'field_story_select_supplement',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
     'field_story_schedule_date_time_1' => 'field_story_schedule_date_time_1',
     'nothing_1' => 'nothing_1',
     'view_node' => 'nothing_1',
@@ -71,6 +72,20 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
     'nid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_select_magazine' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_select_supplement' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -108,13 +123,6 @@ function features_supplement_magazine_views_default_views() {
     ),
     'changed' => array(
       'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_story_schedule_date_time' => array(
-      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -444,6 +452,22 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  /* Field: Content: Select magazine */
+  $handler->display->display_options['fields']['field_story_select_magazine']['id'] = 'field_story_select_magazine';
+  $handler->display->display_options['fields']['field_story_select_magazine']['table'] = 'field_data_field_story_select_magazine';
+  $handler->display->display_options['fields']['field_story_select_magazine']['field'] = 'field_story_select_magazine';
+  $handler->display->display_options['fields']['field_story_select_magazine']['label'] = 'Magazine';
+  $handler->display->display_options['fields']['field_story_select_magazine']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Select supplement */
+  $handler->display->display_options['fields']['field_story_select_supplement']['id'] = 'field_story_select_supplement';
+  $handler->display->display_options['fields']['field_story_select_supplement']['table'] = 'field_data_field_story_select_supplement';
+  $handler->display->display_options['fields']['field_story_select_supplement']['field'] = 'field_story_select_supplement';
+  $handler->display->display_options['fields']['field_story_select_supplement']['label'] = 'Supplement';
+  $handler->display->display_options['fields']['field_story_select_supplement']['settings'] = array(
+    'link' => 0,
+  );
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
@@ -484,31 +508,6 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Schedule date & time */
-  $handler->display->display_options['fields']['field_story_schedule_date_time']['id'] = 'field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time']['table'] = 'field_data_field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time']['field'] = 'field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time']['settings'] = array(
-    'format_type' => 'short',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
-  /* Field: Content: Schedule date & time */
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['id'] = 'field_story_schedule_date_time_1';
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['table'] = 'field_data_field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['field'] = 'field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['label'] = 'Status';
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -642,58 +641,6 @@ function features_supplement_magazine_views_default_views() {
   );
   $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['field_story_category_tid']['error_message'] = FALSE;
-  /* Filter criterion: Content: Story expiry date (field_story_expiry_date) */
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['expose']['operator_id'] = 'field_story_expiry_date_value_op';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['expose']['label'] = 'Story expiry date (field_story_expiry_date)';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['expose']['operator'] = 'field_story_expiry_date_value_op';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['expose']['identifier'] = 'field_story_expiry_date_value';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['id'] = 'field_story_schedule_date_time_value';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['table'] = 'field_data_field_story_schedule_date_time';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['field'] = 'field_story_schedule_date_time_value';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['operator_id'] = 'field_story_schedule_date_time_value_op';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['label'] = 'Status';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['operator'] = 'field_story_schedule_date_time_value_op';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['identifier'] = 'field_story_schedule_date_time_value';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    8 => 0,
-    20 => 0,
-    6 => 0,
-    10 => 0,
-    19 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-  );
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['granularity'] = 'minute';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['form_type'] = 'date_popup';
-  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
-  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
-  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
   $handler->display->display_options['path'] = 'issue-listing';
   $export['issue_listing'] = $view;
 
@@ -730,7 +677,9 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
-    'title' => 'title',
+    'nid' => 'nid',
+    'type' => 'type',
+    'field_issue_title' => 'field_issue_title',
     'field_issue_magazine' => 'field_issue_magazine',
     'field_issue_supplement' => 'field_issue_supplement',
     'uid' => 'uid',
@@ -742,6 +691,8 @@ function features_supplement_magazine_views_default_views() {
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
+    'nothing_2' => 'nothing_2',
+    'php' => 'php',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -750,7 +701,21 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title' => array(
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_issue_title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -818,6 +783,16 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing_2' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1060,7 +1035,8 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
