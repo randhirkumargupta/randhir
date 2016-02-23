@@ -660,11 +660,10 @@ table.sticky-header{z-index: 99;}
 .dashboard-tab li .dashboard-tab-item{display: block;border: 1px solid #aaa; padding: 5px; text-align: center; height: 125px; color: #8d8d8d;}
 .dashboard-tab li .dashboard-tab-item:hover{color: #008eb1; border-color: #008eb1;}
 #edit-field-print-magazine-issue-date .date-combo .fieldset-content, 
-#edit-field-publish-time .date-combo .fieldset-content, 
+#edit-field-supp-issue .date-combo .fieldset-content, 
 #edit-field-issue-title .date-combo .fieldset-content{float: left; padding: 0; margin: 0; width: 400px;}
-#edit-field-magazine-publish, #edit-field-supp-publish{padding-left: 300px;}
-#edit-field-publish-time .container-inline-date .date-padding .form-type-textfield:first-child, 
-#edit-field-publish-time .container-inline-date .date-padding .form-type-textfield label{display: none;}
+#edit-field-magazine-publish, #edit-field-supp-publish{padding-left: 300px;} 
+#edit-field-supp-issue .container-inline-date .date-padding .form-type-textfield label{display: none;}
 .pre-desc{margin: -20px 0 10px; font-size: 11px; padding-left: 300px; color: #8d8d8d;}
 .attachment .count{display: inline-block; vertical-align: middle; padding: 5px 2px;}
 .workbench-moderation-moderate-form .form-type-select{display: inline-block; vertical-align: middle;}
@@ -824,3 +823,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .form-item div.password-confirm span.error{float: right; width: auto; padding: 0;}
 .view-strory-menegment .views-table th.views-field-counter{padding-left: 30px;}
 .node-breaking-news.node-preview .column-main{width: 100%;}
+.group-supp-import-xml fieldset legend{display: none !important;}
+.group-supp-import-xml fieldset{border: none; padding: 0;}
+.group-supp-import-xml fieldset .fieldset-content{border: none; padding: 0 !important;}
+.group-supp-import-xml fieldset .fieldset-content .description{padding-left: 300px !important;}
