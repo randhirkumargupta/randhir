@@ -3108,7 +3108,7 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
-  'title' => 'Category Logs',
+  'title' => 'Category Log',
   'cache' => 8,
 );
   $export['block'][] = array(
@@ -3164,7 +3164,7 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
-  'title' => 'Category Logs',
+  'title' => 'Category Log',
   'cache' => 1,
 );
   $export['block'][] = array(
@@ -3178,7 +3178,7 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
-  'title' => 'Category Logs',
+  'title' => 'Category Log',
   'cache' => 1,
 );
   $export['block'][] = array(
@@ -3192,7 +3192,7 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
-  'title' => 'Category Logs',
+  'title' => 'Category Log',
   'cache' => 1,
 );
   $export['block'][] = array(
@@ -3206,7 +3206,7 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
-  'title' => 'Category Logs',
+  'title' => 'Category Log',
   'cache' => 1,
 );
   $export['block'][] = array(
@@ -3220,7 +3220,7 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
-  'title' => 'Category Logs',
+  'title' => 'Category Log',
   'cache' => 1,
 );
   $export['block_node_type'][] = array(

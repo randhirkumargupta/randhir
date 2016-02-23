@@ -52,7 +52,7 @@ function itg_category_manager_menu() {
   );
   // SEF Url log menu
   $items['sef-log/%'] = array(
-    'title' => 'ITG Sef url Log',
+    'title' => 'SEF URL Log',
     'page callback' => 'itg_category_manager_seflogpage',
     'access callback' => TRUE,
     'page arguments' => array(1),
@@ -168,7 +168,7 @@ function itg_category_manager_form($form, &$form_state) {
  * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
  */
 function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
-
+  global $user;
   global $base_url;
 
   // Delete category functionality.
@@ -180,23 +180,26 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
 
       $count_used = count($used_by_content);
       drupal_set_message('This category is mapped with ' . $count_used . ' contents.' . l(' Click here', 'category-remove-from-node/' . $tid, array('attributes' => array('target' => '_blank'))), 'status');
-      drupal_add_js('(function($) {$(document).ready(function() {
+      if ($user->uid != 1) {
+        drupal_add_js('(function($) {$(document).ready(function() {
         $("#taxonomy-form-term #edit-submit").hide();
         $("#edit-description").html($("body").find(".contents-using-cat").html());
         $(".contents-using-cat").hide();
        });}(jQuery));', 'inline');
+      }      
     }
     else {
       $flag = FALSE;
       $all_children = @taxonomy_get_children_all($tid, $form_state['term']->vid);
       if (count($all_children) > 0) {
         form_set_error('name', t('Sorry! you cannot delete this category. This category has ' . count($all_children) . ' child category'));
-
+        if ($user->uid != 1) {
         drupal_add_js('(function($) {$(document).ready(function() {
             $("#taxonomy-form-term #edit-submit").hide();
             $("#edit-description").html($("body").find(".contents-using-cat").html());
             $(".contents-using-cat").hide();
            });}(jQuery));', 'inline');
+        }
       }
     }
   }
@@ -754,11 +757,21 @@ function itg_category_manager_block_view($delta = '') {
 
   //$data = itg_category_manager_sefurl_log($tid);
   switch ($delta) {
-    case 'sef_url_log':
-      $data = '<div class="audit-info">Sef Url Logs</div>';
+    case 'sef_url_log':      
       $arg = arg();
+      $assNode = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
+      if (count($assNode)) {
+        global $language;
+        $data .= '<div class="content-associated">';
+
+        $data .= '<div>Last created article: '.l('View', drupal_get_path_alias('node/'.$assNode[0], $language->language), array('attributes' => array('target'=>'_blank'))).'</div>';
+        $data .= '<div class="tid" style="display:none;">'.$arg[2].'</div>';
+        $data .= '<div id="show-content-count">Associated Contents: <button class="button">Show counts</button><span class="count"></span></div>';
+        $data .= '</div>';       
+      }
       $itgSefLog = itg_category_manager_seflog($arg[2], 6);
       if (count($itgSefLog)) {
+        $data .= '<div class="audit-info">SEF URL Log</div>';
         $data .= '<table class="itg-log"><thead><tr>';
         $data .= '<th class="th1">Sr. No</th>';
         $data .= '<th class="th2">last URL</th>';
@@ -777,22 +790,13 @@ function itg_category_manager_block_view($delta = '') {
           $data .= '<td class="th3">'.$value->name.'</td>';
           $data .= '<td class="th4">'.format_date($value->changed, 'custom', 'm-d-Y g:i:s a').'</td>';
           $data .= '</tr>';
-        }           
+        }
+        $data .= '</table>';
         if ($counter > 5) {
           $data .= '<div class="more">' . l('more...', 'sef-log/' . $arg[2], array('attributes' => array('target' => '_blank'))) . '</div>';
         }
         $data .= '</div">';
-      }
-      $assNode = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
-      if (count($assNode)) {
-        global $language;
-        $data .= '<div class="content-associated">';
-
-        $data .= '<div>Last created article: '.l('View', drupal_get_path_alias('node/'.$assNode[0], $language->language), array('attributes' => array('target'=>'_blank'))).'</div>';
-        $data .= '<div class="tid" style="display:none;">'.$arg[2].'</div>';
-        $data .= '<div id="show-content-count"><button class="button">Show counts</button><span class="count"></span></div>';
-        $data .= '</div>';
-      }
+      }      
       $block['content'] = theme('sef_url_log', array('data' => $data));
       break;
   }
@@ -858,19 +862,22 @@ function itg_category_manager_seflog($tid, $limit = NULL) {
 function itg_category_manager_seflogpage($tid) {
   $data = itg_category_manager_seflog($tid);
   $output = '';
-  $output .= '<div class="itg-log">';
-  $output .= '<div class="col-25">Sr. No</div>';
-  $output .= '<div class="col-25">last URL</div>';
-  $output .= '<div class="col-25">Modified By</div>';
-  $output .= '<div class="col-25">Timestamp</div>';
+  $output .= '<table class="itg-log"><thead><tr>';
+  $output .= '<th class="th1">Sr. No</th>';
+  $output .= '<th class="th2">last URL</th>';
+  $output .= '<th class="th3">Modified By</th>';
+  $output .= '<th class="th4">Timestamp</th><tr></thead>';  
   foreach ($data as $key => $value) {
     $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
-    $output .= '<div class="col-25">' . ($key + 1) . '</div>';
-    $output .= '<div class="col-25">' . $url . '</div>';
-    $output .= '<div class="col-25">' . $value->name . '</div>';
-    $output .= '<div class="col-25">' . format_date($value->changed, $type = 'medium', $format = '', $timezone = NULL, $langcode = NULL) . '</div>';
+    $output .= '<tr>'; 
+    $output .= '<td>' . ($key + 1) . '</td>';
+    $output .= '<td>' . $url . '</td>';
+    $output .= '<td>' . $value->name . '</td>';
+    $output .= '<td>' . format_date($value->changed, $type = 'medium', $format = '', $timezone = NULL, $langcode = NULL) . '</td>';
+    $output .= '</tr>';
   }
-
+  $output .= '</table>';
+  
   return $output;
 }
 
