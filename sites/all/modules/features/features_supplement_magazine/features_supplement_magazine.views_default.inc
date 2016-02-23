@@ -44,13 +44,14 @@ function features_supplement_magazine_views_default_views() {
     'counter' => 'counter',
     'title' => 'title',
     'nid' => 'nid',
+    'field_story_select_magazine' => 'field_story_select_magazine',
+    'field_story_select_supplement' => 'field_story_select_supplement',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
     'field_story_schedule_date_time_1' => 'field_story_schedule_date_time_1',
     'nothing_1' => 'nothing_1',
     'view_node' => 'nothing_1',
@@ -71,6 +72,20 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
     'nid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_select_magazine' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_select_supplement' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -108,13 +123,6 @@ function features_supplement_magazine_views_default_views() {
     ),
     'changed' => array(
       'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_story_schedule_date_time' => array(
-      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -500,19 +508,6 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Schedule date & time */
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['id'] = 'field_story_schedule_date_time_1';
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['table'] = 'field_data_field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['field'] = 'field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['label'] = 'Status';
-  $handler->display->display_options['fields']['field_story_schedule_date_time_1']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -682,7 +677,9 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
-    'title' => 'title',
+    'nid' => 'nid',
+    'type' => 'type',
+    'field_issue_title' => 'field_issue_title',
     'field_issue_magazine' => 'field_issue_magazine',
     'field_issue_supplement' => 'field_issue_supplement',
     'uid' => 'uid',
@@ -694,6 +691,8 @@ function features_supplement_magazine_views_default_views() {
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
+    'nothing_2' => 'nothing_2',
+    'php' => 'php',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -702,7 +701,21 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title' => array(
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_issue_title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -770,6 +783,16 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing_2' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
