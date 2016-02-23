@@ -759,8 +759,19 @@ function itg_category_manager_block_view($delta = '') {
   switch ($delta) {
     case 'sef_url_log':      
       $arg = arg();
+      $assNode = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
+      if (count($assNode)) {
+        global $language;
+        $data .= '<div class="content-associated">';
+
+        $data .= '<div>Last created article: '.l('View', drupal_get_path_alias('node/'.$assNode[0], $language->language), array('attributes' => array('target'=>'_blank'))).'</div>';
+        $data .= '<div class="tid" style="display:none;">'.$arg[2].'</div>';
+        $data .= '<div id="show-content-count">Associated Contents: <button class="button">Show counts</button><span class="count"></span></div>';
+        $data .= '</div>';       
+      }
       $itgSefLog = itg_category_manager_seflog($arg[2], 6);
       if (count($itgSefLog)) {
+        $data .= '<div class="audit-info">SEF URL Log</div>';
         $data .= '<table class="itg-log"><thead><tr>';
         $data .= '<th class="th1">Sr. No</th>';
         $data .= '<th class="th2">last URL</th>';
@@ -779,23 +790,13 @@ function itg_category_manager_block_view($delta = '') {
           $data .= '<td class="th3">'.$value->name.'</td>';
           $data .= '<td class="th4">'.format_date($value->changed, 'custom', 'm-d-Y g:i:s a').'</td>';
           $data .= '</tr>';
-        }           
+        }
+        $data .= '</table>';
         if ($counter > 5) {
           $data .= '<div class="more">' . l('more...', 'sef-log/' . $arg[2], array('attributes' => array('target' => '_blank'))) . '</div>';
         }
         $data .= '</div">';
-      }
-      $assNode = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
-      if (count($assNode)) {
-        global $language;
-        $data .= '<div class="content-associated">';
-
-        $data .= '<div>Last created article: '.l('View', drupal_get_path_alias('node/'.$assNode[0], $language->language), array('attributes' => array('target'=>'_blank'))).'</div>';
-        $data .= '<div class="tid" style="display:none;">'.$arg[2].'</div>';
-        $data .= '<div id="show-content-count">Associated Contents: <button class="button">Show counts</button><span class="count"></span></div>';
-        $data .= '</div>';
-        $data .= '<div class="audit-info">SEF URL Log</div>';
-      }
+      }      
       $block['content'] = theme('sef_url_log', array('data' => $data));
       break;
   }
@@ -861,19 +862,22 @@ function itg_category_manager_seflog($tid, $limit = NULL) {
 function itg_category_manager_seflogpage($tid) {
   $data = itg_category_manager_seflog($tid);
   $output = '';
-  $output .= '<div class="itg-log">';
-  $output .= '<div class="col-25">Sr. No</div>';
-  $output .= '<div class="col-25">last URL</div>';
-  $output .= '<div class="col-25">Modified By</div>';
-  $output .= '<div class="col-25">Timestamp</div>';
+  $output .= '<table class="itg-log"><thead><tr>';
+  $output .= '<th class="th1">Sr. No</th>';
+  $output .= '<th class="th2">last URL</th>';
+  $output .= '<th class="th3">Modified By</th>';
+  $output .= '<th class="th4">Timestamp</th><tr></thead>';  
   foreach ($data as $key => $value) {
     $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
-    $output .= '<div class="col-25">' . ($key + 1) . '</div>';
-    $output .= '<div class="col-25">' . $url . '</div>';
-    $output .= '<div class="col-25">' . $value->name . '</div>';
-    $output .= '<div class="col-25">' . format_date($value->changed, $type = 'medium', $format = '', $timezone = NULL, $langcode = NULL) . '</div>';
+    $output .= '<tr>'; 
+    $output .= '<td>' . ($key + 1) . '</td>';
+    $output .= '<td>' . $url . '</td>';
+    $output .= '<td>' . $value->name . '</td>';
+    $output .= '<td>' . format_date($value->changed, $type = 'medium', $format = '', $timezone = NULL, $langcode = NULL) . '</td>';
+    $output .= '</tr>';
   }
-
+  $output .= '</table>';
+  
   return $output;
 }
 
