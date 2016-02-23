@@ -754,8 +754,7 @@ function itg_category_manager_block_view($delta = '') {
 
   //$data = itg_category_manager_sefurl_log($tid);
   switch ($delta) {
-    case 'sef_url_log':
-      $data = '<div class="audit-info">Sef Url Logs</div>';
+    case 'sef_url_log':      
       $arg = arg();
       $itgSefLog = itg_category_manager_seflog($arg[2], 6);
       if (count($itgSefLog)) {
@@ -790,8 +789,9 @@ function itg_category_manager_block_view($delta = '') {
 
         $data .= '<div>Last created article: '.l('View', drupal_get_path_alias('node/'.$assNode[0], $language->language), array('attributes' => array('target'=>'_blank'))).'</div>';
         $data .= '<div class="tid" style="display:none;">'.$arg[2].'</div>';
-        $data .= '<div id="show-content-count"><button class="button">Show counts</button><span class="count"></span></div>';
+        $data .= '<div id="show-content-count">Associated Contents: <button class="button">Show counts</button><span class="count"></span></div>';
         $data .= '</div>';
+        $data .= '<div class="audit-info">SEF URL Log</div>';
       }
       $block['content'] = theme('sef_url_log', array('data' => $data));
       break;
