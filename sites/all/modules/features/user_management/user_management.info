@@ -1,5 +1,5 @@
 name = User Management
-description = User Management for ITG-326,  ITG-302, ITG-287,  ITG-305 Bug resolved logintoboggon module remove
+description = User Management for ITG-305 Bug resolved
 core = 7.x
 package = Features
 version = 7.x-1.0-beta2

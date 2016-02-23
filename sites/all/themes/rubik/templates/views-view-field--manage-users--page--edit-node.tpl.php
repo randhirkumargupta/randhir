@@ -23,7 +23,6 @@
  */
 ?>
 <?php
-
 global $user;
 if (array_key_exists(EDITOR, $user->roles)) {
     $user_array = array(AUTHOR_GUEST=>'Author/Guest', COPY_EDITOR=>'Copy Editor', INTERN=>'Intern', SECTION_EDITOR_ANCHOR=>'Section Editor/Anchor',  SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub' );

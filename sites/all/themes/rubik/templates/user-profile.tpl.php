@@ -61,7 +61,7 @@
     </div>
     <div class="field">
       <div class="field-label">Role:</div>
-      <div class="field-items"><?php print end($elements['#account']->roles); ?></div>
+      <div class="field-items"><?php print end($elements['#account']->roles); ?></div> 
     </div>
     <div class="field">
       <div class="field-label"><?php print_r($user_profile['summary']['member_for']['#title']); ?>:</div>

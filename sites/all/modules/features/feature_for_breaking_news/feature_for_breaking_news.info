@@ -49,6 +49,7 @@ features[field_instance][] = node-breaking_news-field_title_2
 features[field_instance][] = node-breaking_news-field_title_link
 features[field_instance][] = node-breaking_news-field_title_link_2
 features[field_instance][] = node-breaking_news-field_type
+features[image][] = photogallery_slider
 features[node][] = breaking_news
 features[user_permission][] = create breaking_news content
 features[user_permission][] = delete any breaking_news content
