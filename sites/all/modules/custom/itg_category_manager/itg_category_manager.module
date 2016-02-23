@@ -168,7 +168,7 @@ function itg_category_manager_form($form, &$form_state) {
  * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
  */
 function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
-
+  global $user;
   global $base_url;
 
   // Delete category functionality.
@@ -180,23 +180,26 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
 
       $count_used = count($used_by_content);
       drupal_set_message('This category is mapped with ' . $count_used . ' contents.' . l(' Click here', 'category-remove-from-node/' . $tid, array('attributes' => array('target' => '_blank'))), 'status');
-      drupal_add_js('(function($) {$(document).ready(function() {
+      if ($user->uid != 1) {
+        drupal_add_js('(function($) {$(document).ready(function() {
         $("#taxonomy-form-term #edit-submit").hide();
         $("#edit-description").html($("body").find(".contents-using-cat").html());
         $(".contents-using-cat").hide();
        });}(jQuery));', 'inline');
+      }      
     }
     else {
       $flag = FALSE;
       $all_children = @taxonomy_get_children_all($tid, $form_state['term']->vid);
       if (count($all_children) > 0) {
         form_set_error('name', t('Sorry! you cannot delete this category. This category has ' . count($all_children) . ' child category'));
-
+        if ($user->uid != 1) {
         drupal_add_js('(function($) {$(document).ready(function() {
             $("#taxonomy-form-term #edit-submit").hide();
             $("#edit-description").html($("body").find(".contents-using-cat").html());
             $(".contents-using-cat").hide();
            });}(jQuery));', 'inline');
+        }
       }
     }
   }
