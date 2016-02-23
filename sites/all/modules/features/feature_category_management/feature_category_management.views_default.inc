@@ -126,12 +126,12 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     6 => '6',
+    21 => '21',
     10 => '10',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'date_views_pager';
   $handler->display->display_options['pager']['options']['pager_position'] = 'bottom';
