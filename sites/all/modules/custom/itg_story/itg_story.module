@@ -349,3 +349,40 @@ function itg_story_node_insert($node) {
   }
     
 }
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
+  
+    $magazine_field = 'field_story_select_magazine';
+    $supplement_field = 'field_story_select_supplement';
+    
+    $magazine_id = $form_state['values'][$magazine_field][LANGUAGE_NONE][0];
+    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+                    'event' => 'change',
+                    'callback' => 'itg_story_magazine_ajax_callback',
+                    'wrapper' => $supplement_field.'_replace',
+            ); 
+    
+    // Setup field_event_1_role select
+    $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="'.$supplement_field.'_replace">';
+    $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+    if (function_exists('itg_common_dropdown_supplement')) {
+      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+    }
+  
+}
+
+/**
+* Ajax callback for Event roles dropdown
+* @param type $form
+* @param type $form_state
+*/
+function itg_story_magazine_ajax_callback($form, $form_state) {
+    return $form['field_story_select_supplement'];
+}
