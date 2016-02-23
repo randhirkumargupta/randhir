@@ -104,7 +104,7 @@
               if (module_exists('itg_photogallery')) {
                 if (!empty($imgfid)) {
                   $imguri = _itg_photogallery_fid($imgfid);
-                  $style = 'photogallery_slider';
+                  $style = 'large';
                   $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
                 }
               }
