@@ -773,11 +773,9 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .page-node-revisions .field-items, 
 .content-node-view .field-items{
   display: inline-block;
-  font-weight: bold;
   vertical-align: middle;
   width: 60%;
 }
-.content-node-view .field-items{font-weight: normal;}
 .content-node-view .field-items .field-item{width: auto; padding-right: 10px;}
 .page-node-revision .field, 
 .page-node-revisions .field{padding-bottom: 10px;}
