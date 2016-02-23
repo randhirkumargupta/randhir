@@ -136,6 +136,7 @@ textarea.form-textarea{resize: none; height: 90px;}
 .preview .column-main{
   max-height: 500px;
   overflow-y: auto;
+  min-height: 400px;
 }
 .page-node-add-story .node-teaser, 
 .page-node-add-story .node-preview .column-side, 
@@ -729,7 +730,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .cmd-detail span:nth-child(3){left: 50%;}
 .cmd-detail a{left: 75%;}
 .cmd-detail span{border-right: 1px solid #ddd;}
-.details-parent{position: absolute; bottom: 33px; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
+.details-parent{position: absolute; bottom: 0; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
 .details-parent .photo-title{font-size: 16px;}
 .audio-div{position: relative;}
 .flexslider{border: none; margin: 0;}
