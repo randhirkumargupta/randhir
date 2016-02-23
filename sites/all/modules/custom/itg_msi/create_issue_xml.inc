@@ -6,17 +6,18 @@
  */
 
 function _create_issue_using_xmlfile($node){
-  
+   //pathauto_node_update_alias($node, 'update');
+
   global $user;
 
-  $batch = array(
-      'operations' => array(),
-      'finished' => 'itg_msi_create_issue_batch_finished',
-      'title' => t('Batch fix'),
-      'init_message' => t('Process is starting...'),
-      'progress_message' => t('Processed @current out of @total.'),
-      'error_message' => t('Process has encountered an error.')
-  );
+//  $batch = array(
+//      'operations' => array(),
+//      'finished' => 'itg_msi_create_issue_batch_finished',
+//      'title' => t('Batch fix'),
+//      'init_message' => t('Process is starting...'),
+//      'progress_message' => t('Processed @current out of @total.'),
+//      'error_message' => t('Process has encountered an error.')
+//  );
 
   //Add check for supplement and issue
   if ($node->type == 'supplement') {
@@ -38,8 +39,10 @@ function _create_issue_using_xmlfile($node){
   );
 
   foreach ($file as $result) {
-    $batch['operations'][] = array('itg_msi_create_issue_batch_process', array($result['fid'], $node_info));
+    sleep(2);
+    itg_msi_create_issue_batch_process($result['fid'], $node_info);
+    //$batch['operations'][] = array('itg_msi_create_issue_batch_process', array($result['fid'], $node_info));
   }
-  batch_set($batch);
-  batch_process('manage-'.$node->type.'s');
+//  batch_set($batch);
+//  batch_process('manage-'.$node->type.'s');
 }
