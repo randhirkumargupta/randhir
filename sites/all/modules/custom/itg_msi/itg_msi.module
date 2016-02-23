@@ -89,6 +89,7 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
       } else {
         $destination = 'manage-issues';
       }
+      $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
     }
   
   //Add cancel button for magazine, supplement and issue
@@ -121,7 +122,19 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
     }
   }
 }
- 
+ /**
+ * Custom submit callback for redirecting breaking news form.
+ */
+function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+  $issue_title = date('m/d/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
+  drupal_set_message(t('Issue '.$issue_title.' has been created successfully.'));
+  $_GET['destination'] = 'breaking-news'; 
+   
+}
+
 /**
  * After build function for magazine, supplement and issue
  * @param Array $form

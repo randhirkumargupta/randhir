@@ -136,6 +136,7 @@ textarea.form-textarea{resize: none; height: 90px;}
 .preview .column-main{
   max-height: 500px;
   overflow-y: auto;
+  min-height: 400px;
 }
 .page-node-add-story .node-teaser, 
 .page-node-add-story .node-preview .column-side, 
@@ -659,11 +660,10 @@ table.sticky-header{z-index: 99;}
 .dashboard-tab li .dashboard-tab-item{display: block;border: 1px solid #aaa; padding: 5px; text-align: center; height: 125px; color: #8d8d8d;}
 .dashboard-tab li .dashboard-tab-item:hover{color: #008eb1; border-color: #008eb1;}
 #edit-field-print-magazine-issue-date .date-combo .fieldset-content, 
-#edit-field-publish-time .date-combo .fieldset-content, 
+#edit-field-supp-issue .date-combo .fieldset-content, 
 #edit-field-issue-title .date-combo .fieldset-content{float: left; padding: 0; margin: 0; width: 400px;}
-#edit-field-magazine-publish, #edit-field-supp-publish{padding-left: 300px;}
-#edit-field-publish-time .container-inline-date .date-padding .form-type-textfield:first-child, 
-#edit-field-publish-time .container-inline-date .date-padding .form-type-textfield label{display: none;}
+#edit-field-magazine-publish, #edit-field-supp-publish{padding-left: 300px;} 
+#edit-field-supp-issue .container-inline-date .date-padding .form-type-textfield label{display: none;}
 .pre-desc{margin: -20px 0 10px; font-size: 11px; padding-left: 300px; color: #8d8d8d;}
 .attachment .count{display: inline-block; vertical-align: middle; padding: 5px 2px;}
 .workbench-moderation-moderate-form .form-type-select{display: inline-block; vertical-align: middle;}
@@ -729,7 +729,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .cmd-detail span:nth-child(3){left: 50%;}
 .cmd-detail a{left: 75%;}
 .cmd-detail span{border-right: 1px solid #ddd;}
-.details-parent{position: absolute; bottom: 33px; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
+.details-parent{position: absolute; bottom: 0; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
 .details-parent .photo-title{font-size: 16px;}
 .audio-div{position: relative;}
 .flexslider{border: none; margin: 0;}
@@ -773,11 +773,9 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .page-node-revisions .field-items, 
 .content-node-view .field-items{
   display: inline-block;
-  font-weight: bold;
   vertical-align: middle;
   width: 60%;
 }
-.content-node-view .field-items{font-weight: normal;}
 .content-node-view .field-items .field-item{width: auto; padding-right: 10px;}
 .page-node-revision .field, 
 .page-node-revisions .field{padding-bottom: 10px;}
@@ -825,3 +823,12 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .form-item div.password-confirm span.error{float: right; width: auto; padding: 0;}
 .view-strory-menegment .views-table th.views-field-counter{padding-left: 30px;}
 .node-breaking-news.node-preview .column-main{width: 100%;}
+.group-supp-import-xml fieldset legend{display: none !important;}
+.group-supp-import-xml fieldset{border: none; padding: 0;}
+.group-supp-import-xml fieldset .fieldset-content{border: none; padding: 0 !important;}
+.group-supp-import-xml fieldset .fieldset-content .description{padding-left: 300px !important;}
+body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display: block;}
+#edit-actionnode-publish-action{margin-right: 5px;}
+#block-itg-category-manager-sef-url-log .content-associated{padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px;}
+#block-itg-category-manager-sef-url-log #show-content-count{padding-top: 5px;}
+#block-itg-category-manager-sef-url-log .more{text-align: right;}
