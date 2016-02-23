@@ -829,3 +829,6 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .group-supp-import-xml fieldset .fieldset-content .description{padding-left: 300px !important;}
 body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display: block;}
 #edit-actionnode-publish-action{margin-right: 5px;}
+#block-itg-category-manager-sef-url-log .content-associated{padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px;}
+#block-itg-category-manager-sef-url-log #show-content-count{padding-top: 5px;}
+#block-itg-category-manager-sef-url-log .more{text-align: right;}

@@ -135,7 +135,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'date_views_pager';
   $handler->display->display_options['pager']['options']['pager_position'] = 'bottom';
-  $handler->display->display_options['pager']['options']['skip_empty_pages'] = 0;
+  $handler->display->display_options['pager']['options']['skip_empty_pages'] = 1;
   $handler->display->display_options['style_plugin'] = 'tree';
   $handler->display->display_options['style_options']['main_field'] = 'tid';
   $handler->display->display_options['style_options']['parent_field'] = 'tid_1';
@@ -262,7 +262,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['arguments']['field_publish_time_value']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_publish_time_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_publish_time_value']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['field_publish_time_value']['year_range'] = '2015:2030';
+  $handler->display->display_options['arguments']['field_publish_time_value']['year_range'] = '2016:2016';
   $handler->display->display_options['arguments']['field_publish_time_value']['granularity_reset'] = 0;
   $handler->display->display_options['arguments']['field_publish_time_value']['use_fromto'] = 'no';
   /* Filter criterion: Taxonomy term: Name */
