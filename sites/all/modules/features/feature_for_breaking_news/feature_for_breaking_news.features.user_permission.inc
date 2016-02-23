@@ -54,7 +54,9 @@ function feature_for_breaking_news_user_default_permissions() {
   $permissions['edit any breaking_news content'] = array(
     'name' => 'edit any breaking_news content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',

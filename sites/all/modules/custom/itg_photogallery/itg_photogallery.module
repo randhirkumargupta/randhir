@@ -202,16 +202,20 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
     $fids[] = file_save($file);
     file_usage_add($file, 'file', 'field_collection_item', '1');
   }
-
+  $key_val = 0;
   foreach ($fids as $file_id) {
-    $file_ids[] = $file_id->fid;
+    $file_ids[$key_val]['fid'] = $file_id->fid;
+    $file_ids[$key_val]['filename'] = $file_id->filename;
+    $key_val++;
   }
+  watchdog('Vedpareek', '<pre>'. print_r($file_ids, TRUE) .'</pre>');
   $i = 0;
   foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
     if (!isset($filed_collection->field_images['und'])) {
-      //watchdog('Vedpareek', '<pre>'. print_r($filed_collection, TRUE) .'</pre>');
+      
       //$filed_collection->field_images['und'][0]['fid'] = $file_ids[$i];
-      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_title['und'][0]['value'] = $file_ids[$i]['filename'];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
       $i++;
     }
   }

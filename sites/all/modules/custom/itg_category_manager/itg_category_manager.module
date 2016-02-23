@@ -759,11 +759,11 @@ function itg_category_manager_block_view($delta = '') {
       $arg = arg();
       $itgSefLog = itg_category_manager_seflog($arg[2], 6);
       if (count($itgSefLog)) {
-        $data .= '<div class="itg-log">';
-        $data .= '<div class="col-25">Sr. No</div>';
-        $data .= '<div class="col-25">last URL</div>';
-        $data .= '<div class="col-25">Modified By</div>';
-        $data .= '<div class="col-25">Timestamp</div>';
+        $data .= '<table class="itg-log"><thead><tr>';
+        $data .= '<th class="th1">Sr. No</th>';
+        $data .= '<th class="th2">last URL</th>';
+        $data .= '<th class="th3">Modified By</th>';
+        $data .= '<th class="th4">Timestamp</th><tr></thead>';
         $counter = 0;
         foreach ($itgSefLog as $value) {
           ++$counter;
@@ -771,11 +771,13 @@ function itg_category_manager_block_view($delta = '') {
             continue;
           }
           $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
-          $data .= '<div class="col-25">' . $counter . '</div>';
-          $data .= '<div class="col-25">' . $url . '</div>';
-          $data .= '<div class="col-25">' . $value->name . '</div>';
-          $data .= '<div class="col-25">' . format_date($value->changed, 'custom', 'm-d-Y g:i:s a') . '</div>';
-        }
+          $data .= '<tr>';
+          $data .= '<td class="th1">'.$counter.'</td>';
+          $data .= '<td class="th2">'.$url.'</td>';
+          $data .= '<td class="th3">'.$value->name.'</td>';
+          $data .= '<td class="th4">'.format_date($value->changed, 'custom', 'm-d-Y g:i:s a').'</td>';
+          $data .= '</tr>';
+        }           
         if ($counter > 5) {
           $data .= '<div class="more">' . l('more...', 'sef-log/' . $arg[2], array('attributes' => array('target' => '_blank'))) . '</div>';
         }
@@ -785,9 +787,10 @@ function itg_category_manager_block_view($delta = '') {
       if (count($assNode)) {
         global $language;
         $data .= '<div class="content-associated">';
-        $data .= '<div>Last created article: ' . l('View', drupal_get_path_alias('node/' . $assNode[0], $language->language), array('attributes' => array('target' => '_blank'))) . '</div>';
-        $data .= '<div class="tid" style="display:none;">' . $arg[2] . '</div>';
-        $data .= '<div id="show-content-count">Show counts<span class="count"></span></div>';
+
+        $data .= '<div>Last created article: '.l('View', drupal_get_path_alias('node/'.$assNode[0], $language->language), array('attributes' => array('target'=>'_blank'))).'</div>';
+        $data .= '<div class="tid" style="display:none;">'.$arg[2].'</div>';
+        $data .= '<div id="show-content-count"><button class="button">Show counts</button><span class="count"></span></div>';
         $data .= '</div>';
       }
       $block['content'] = theme('sef_url_log', array('data' => $data));
