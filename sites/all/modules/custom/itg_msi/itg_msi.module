@@ -305,8 +305,6 @@ function itg_msi_node_insert($node){
   }
 }
 
-
-
 /**
  * Implement hook_node_presave
  * @param Object $node
@@ -386,8 +384,6 @@ function itg_msi_node_validate($node, $form, &$form_state) {
   }
   
 }
-
-
 
 /**************************Common Functionality********************************/
 
@@ -478,22 +474,22 @@ function itg_msi_get_nid_using_title_type($title, $type){
 function itg_msi_autocomplete_content($title) {
   
     if (strlen(trim($title)) > 0) {
-      $content_type = arg(1);
-      $options = '';
-      $title = strtolower(trim($title));
-      $query = db_select('field_data_field_issue_title', 'c');
-      $query->fields('c', array('field_issue_title_value'));
-      $query->condition('field_issue_title_value', '%'.$title.'%', 'LIKE');
-      $query->condition('c.bundle', $content_type, '=');
-      $query->range(0, 20);
-      
-      $result = $query->execute(); 
-      while ($record = $result->fetchAssoc()) {     
-        $options[date('Y-m-d',strtotime($record['field_issue_title_value']))] = date('m/d/Y',strtotime($record['field_issue_title_value']));
-      }    
-      drupal_json_output($options);    
-  }    
- }
+    $content_type = arg(1);
+    $options = '';
+    $title = strtolower(trim($title));
+    $query = db_select('field_data_field_issue_title', 'c');
+    $query->fields('c', array('field_issue_title_value'));
+    $query->condition('field_issue_title_value', '%' . $title . '%', 'LIKE');
+    $query->condition('c.bundle', $content_type, '=');
+    $query->range(0, 20);
+
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $options[date('Y-m-d', strtotime($record['field_issue_title_value']))] = date('m/d/Y', strtotime($record['field_issue_title_value']));
+    }
+    drupal_json_output($options);
+  }
+}
  
  /**
   * Check issue existence, if yes return TRUE else FALSE
@@ -652,32 +648,5 @@ function itg_msi_create_issue_batch_process($fid, $node_info) {
     $node = node_submit($node); // Prepare node for saving
     node_save($node); // Finally save node
     workbench_moderation_moderate($node, 'published');
-    //$context['message'] = "Now processing...";
   }
 }
-
-/**
- * The batch finish handler.
- */
-
-/**
- * The batch finish handler for issue creation through XML file
- * @param String $success
- * @param String $results
- * @param Array $operations
- */
-function itg_msi_create_issue_batch_finished($success, $results, $operations) {
-  if ($success) {
-    drupal_set_message('Record has been created successfully!');
-  }
-  else {
-    $error_operation = reset($operations);
-    $message = t('An error occurred while processing %error_operation with arguments: @arguments', array(
-      '%error_operation' => $error_operation[0],
-      '@arguments' => print_r($error_operation[1], TRUE)
-    ));
-    drupal_set_message($message, 'error');
-  }
-  //drupal_set_message(l('Run again', 'home'));
-}
-
