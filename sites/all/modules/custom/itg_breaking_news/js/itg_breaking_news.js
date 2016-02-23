@@ -17,10 +17,12 @@
             $('.vertical-tabs-list').hide();
             $('#edit-metatags').show();
             $('#edit-metatags-und-advanced').hide();
+            
             }
-                        
+           
+             
             // code for disbale date field in breaking news      
-            $("#edit-field-publish-time-und-0-value-datepicker-popup-0").datepicker({minDate: -1, maxDate: -2}).attr("disabled", 'disabled');
+            $("#edit-field-publish-time-und-0-value-datepicker-popup-0").datepicker({minDate: 0, maxDate: 0});
 
             // default check all checkbox when all is check 
             if ($("#edit-field-mobile-subscribers-und-all").is(':checked')) {
