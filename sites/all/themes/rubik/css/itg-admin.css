@@ -828,3 +828,4 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .group-supp-import-xml fieldset .fieldset-content{border: none; padding: 0 !important;}
 .group-supp-import-xml fieldset .fieldset-content .description{padding-left: 300px !important;}
 body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display: block;}
+#edit-actionnode-publish-action{margin-right: 5px;}
