@@ -52,7 +52,7 @@ function itg_category_manager_menu() {
   );
   // SEF Url log menu
   $items['sef-log/%'] = array(
-    'title' => 'ITG Sef url Log',
+    'title' => 'SEF URL Log',
     'page callback' => 'itg_category_manager_seflogpage',
     'access callback' => TRUE,
     'page arguments' => array(1),
