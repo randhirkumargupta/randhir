@@ -417,7 +417,7 @@ function features_supplement_magazine_views_default_views() {
   );
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -677,7 +677,9 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
-    'title' => 'title',
+    'nid' => 'nid',
+    'type' => 'type',
+    'field_issue_title' => 'field_issue_title',
     'field_issue_magazine' => 'field_issue_magazine',
     'field_issue_supplement' => 'field_issue_supplement',
     'uid' => 'uid',
@@ -689,6 +691,8 @@ function features_supplement_magazine_views_default_views() {
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
+    'nothing_2' => 'nothing_2',
+    'php' => 'php',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -697,7 +701,21 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title' => array(
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_issue_title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -765,6 +783,16 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing_2' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
