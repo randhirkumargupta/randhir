@@ -89,28 +89,7 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
       } else {
         $destination = 'manage-issues';
       }
-
-      //Load all supplements created under a magazine
-    /*
-      $options_step = $form['field_issue_supplement'][LANGUAGE_NONE]['#options'];
-      if ($form)
-        $form['field_issue_magazine'][LANGUAGE_NONE]['#ajax'] = array(
-            'event' => 'change',
-            'callback' => 'itg_msi_ajax_dependent_supplement_list',
-            'wrapper' => 'dropdown-supplement-replace',
-            'method' => 'replace',
-        );
-      
-      //Remove an illegal choice error
-      $form['field_issue_supplement'][LANGUAGE_NONE]['#validated'] = TRUE;
-      $form['#validated'] = TRUE;
-      
-      $form['field_issue_supplement'][LANGUAGE_NONE]['#prefix'] = '<div id ="dropdown-supplement-replace">';
-      $form['field_issue_supplement'][LANGUAGE_NONE]['#suffix'] = '</div>';
-      $form['field_issue_supplement'][LANGUAGE_NONE]['#options'] = $options_step;
-    */
     }
-  
   
   //Add cancel button for magazine, supplement and issue
   if($form_id == 'magazine_node_form' || $form_id == 'supplement_node_form' || $form_id == 'issue_node_form'){
@@ -143,6 +122,41 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
   }
 }
 
+/**
+ * Implement hook_form_id_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param Array $form_id
+ */
+function itg_msi_form_issue_node_form_alter(&$form, &$form_state, $form_id) {
+
+    $magazine_field = 'field_issue_magazine';
+    $supplement_field = 'field_issue_supplement';
+
+    $magazine_id = $form_state['values'][$magazine_field][LANGUAGE_NONE][0];
+    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+        'event' => 'change',
+        'callback' => 'itg_msi_magazine_ajax_callback',
+        'wrapper' => $supplement_field . '_replace',
+    );
+
+    // Setup field_event_1_role select
+    $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $supplement_field . '_replace">';
+    $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+    if (function_exists('itg_common_dropdown_supplement')) {
+      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+    }
+}
+
+/**
+* Ajax callback for Event roles dropdown
+* @param Array $form
+* @param Array $form_state
+*/
+function itg_msi_magazine_ajax_callback($form, $form_state) {
+    return $form['field_issue_supplement'];
+}
+    
 /**
  * After build function for magazine, supplement and issue
  * @param Array $form
@@ -185,47 +199,6 @@ function itg_msi_form_after_build($form, &$form_state){
  
   return $form;
 }
-
-/**
- * 
- * @param Array $form
- * @param Array $form_state
- * @return Array
- */
-function itg_msi_ajax_dependent_supplement_list($form, $form_state) {
-    $process = $form['field_issue_magazine']['und']['#value'];
-    $form['field_issue_supplement']['und']['#options'] = itg_msi_get_supplement_list_under_magazine($process);
-    return $form['field_issue_supplement'];
-}
-
-/**
- * Fetch supplement list using magazine reference id
- * @param Integer $id
- * @return Array
- */
-function itg_msi_get_supplement_list_under_magazine($id) {
-
-  //Fetch query for supplements
-  $result = db_query('Select n.entity_id FROM {field_data_field_supp_select_magazine} n WHERE n.field_supp_select_magazine_target_id = :field_supp_select_magazine_target_id', array(':field_supp_select_magazine_target_id' => $id));
-  foreach ($result as $record) {
-    $entity_id[] = $record->entity_id;
-  }
-  
-  //If record found, then return array else return blank
-  if (count($entity_id) > 0) {
-    foreach ($entity_id as $id) {
-      $result2 = db_query('Select t.title,t.nid FROM {node} t WHERE t.nid = :nid', array(':nid' => $id));
-      foreach ($result2 as $record2) {
-        $title[$id] = $record2->title;
-      }
-    }
-  } else {
-    $title = array('_none' => '-No Record Found-');
-  }
-  
-  return $title;
-}
-
 
 /*******************************View Related hooks*****************************/
 
@@ -332,8 +305,6 @@ function itg_msi_node_insert($node){
   }
 }
 
-
-
 /**
  * Implement hook_node_presave
  * @param Object $node
@@ -413,8 +384,6 @@ function itg_msi_node_validate($node, $form, &$form_state) {
   }
   
 }
-
-
 
 /**************************Common Functionality********************************/
 
@@ -505,22 +474,22 @@ function itg_msi_get_nid_using_title_type($title, $type){
 function itg_msi_autocomplete_content($title) {
   
     if (strlen(trim($title)) > 0) {
-      $content_type = arg(1);
-      $options = '';
-      $title = strtolower(trim($title));
-      $query = db_select('field_data_field_issue_title', 'c');
-      $query->fields('c', array('field_issue_title_value'));
-      $query->condition('field_issue_title_value', '%'.$title.'%', 'LIKE');
-      $query->condition('c.bundle', $content_type, '=');
-      $query->range(0, 20);
-      
-      $result = $query->execute(); 
-      while ($record = $result->fetchAssoc()) {     
-        $options[date('Y-m-d',strtotime($record['field_issue_title_value']))] = date('m/d/Y',strtotime($record['field_issue_title_value']));
-      }    
-      drupal_json_output($options);    
-  }    
- }
+    $content_type = arg(1);
+    $options = '';
+    $title = strtolower(trim($title));
+    $query = db_select('field_data_field_issue_title', 'c');
+    $query->fields('c', array('field_issue_title_value'));
+    $query->condition('field_issue_title_value', '%' . $title . '%', 'LIKE');
+    $query->condition('c.bundle', $content_type, '=');
+    $query->range(0, 20);
+
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $options[date('Y-m-d', strtotime($record['field_issue_title_value']))] = date('m/d/Y', strtotime($record['field_issue_title_value']));
+    }
+    drupal_json_output($options);
+  }
+}
  
  /**
   * Check issue existence, if yes return TRUE else FALSE
@@ -577,7 +546,7 @@ function itg_msi_show_mapped_stories($row){
  * @param Array $node_info
  * @param string $context
  */
-function itg_msi_create_issue_batch_process($fid, $node_info, &$context) {
+function itg_msi_create_issue_batch_process($fid, $node_info) {
   global $user;
 
   $xml_file = file_load($fid);
@@ -679,32 +648,5 @@ function itg_msi_create_issue_batch_process($fid, $node_info, &$context) {
     $node = node_submit($node); // Prepare node for saving
     node_save($node); // Finally save node
     workbench_moderation_moderate($node, 'published');
-    $context['message'] = "Now processing...";
   }
 }
-
-/**
- * The batch finish handler.
- */
-
-/**
- * The batch finish handler for issue creation through XML file
- * @param String $success
- * @param String $results
- * @param Array $operations
- */
-function itg_msi_create_issue_batch_finished($success, $results, $operations) {
-  if ($success) {
-    drupal_set_message('Record has been created successfully!');
-  }
-  else {
-    $error_operation = reset($operations);
-    $message = t('An error occurred while processing %error_operation with arguments: @arguments', array(
-      '%error_operation' => $error_operation[0],
-      '@arguments' => print_r($error_operation[1], TRUE)
-    ));
-    drupal_set_message($message, 'error');
-  }
-  //drupal_set_message(l('Run again', 'home'));
-}
-
