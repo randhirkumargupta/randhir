@@ -365,7 +365,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $magazine_id = $form_state['values'][$magazine_field][LANGUAGE_NONE][0];
     $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
                     'event' => 'change',
-                    'callback' => 'itg_common_magazine_ajax_callback',
+                    'callback' => 'itg_story_magazine_ajax_callback',
                     'wrapper' => $supplement_field.'_replace',
             ); 
     

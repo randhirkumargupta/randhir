@@ -309,8 +309,9 @@ function itg_common_dropdown_supplement($id = '') {
   while ($record = $result->fetchAssoc()) {
     $data[$record['entity_id']] = $record['title'];
   }
+  //p($data);
   //If record found, then return array else return blank
-  if (count($data) == 0) {
+  if (empty($data)) {
       $data = array('_none' => '-Select-');
   }
   
