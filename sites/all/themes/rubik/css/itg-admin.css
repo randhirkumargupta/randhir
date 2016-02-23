@@ -10,12 +10,14 @@
   box-sizing: border-box;
 }
 .sidebar-second .region-content{
-  width: 78%;
-  padding-right: 30px;
+  width: 70%;
+  padding-right: 20px;
 }
 .sidebar-second .region-sidebar-second{
-  width: 22%;
+  width: 30%;
 }
+.sidebar-second .column-main{width: 100%;}
+.column-main .column-wrapper{padding-right: 0;}
 .block-superfish .sf-menu.sf-horizontal li{
   float: left;
   margin-right: 1px;
@@ -782,3 +784,11 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 #field-gallery-image-values .form-type-managed-file .form-managed-file span.file-size{margin-right: 5px; max-width: 200px;}
 .details-parent div{text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
 .node-magazine-form .date-padding .form-item label{display: none;}
+#block-itg-category-manager-sef-url-log{border: none;}
+#block-itg-category-manager-sef-url-log > .block-content{padding: 0;}
+.itg-log .th4, .itg-log .th3{width: 70px;}
+.audit-info{font-size: 16px; padding-bottom: 5px;}
+.itg-log td, .itg-log th{border: 1px solid #ddd;}
+.form-layout-default{background: none;}
+#taxonomy-form-term .path-form .fieldset-content{padding: 0 10px;}
+#taxonomy-form-term .form-item-term-state label.option{float: none;}
