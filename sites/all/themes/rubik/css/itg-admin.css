@@ -821,7 +821,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 #taxonomy-form-term .path-form .fieldset-content{padding: 0 10px;}
 #taxonomy-form-term .form-item-term-state label.option{float: none;}
 .form-item div.password-confirm span.error{float: right; width: auto; padding: 0;}
-.view-strory-menegment .views-table th.views-field-counter{padding-left: 30px;}
+.view-strory-menegment.view-display-id-page_1 .views-table th.views-field-views-bulk-operations{padding-left: 35px;}
 .node-breaking-news.node-preview .column-main{width: 100%;}
 .group-supp-import-xml fieldset legend{display: none !important;}
 .group-supp-import-xml fieldset{border: none; padding: 0;}
@@ -829,3 +829,6 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .group-supp-import-xml fieldset .fieldset-content .description{padding-left: 300px !important;}
 body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display: block;}
 #edit-actionnode-publish-action{margin-right: 5px;}
+#block-itg-category-manager-sef-url-log .content-associated{padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px;}
+#block-itg-category-manager-sef-url-log #show-content-count{padding-top: 5px;}
+#block-itg-category-manager-sef-url-log .more{text-align: right;}

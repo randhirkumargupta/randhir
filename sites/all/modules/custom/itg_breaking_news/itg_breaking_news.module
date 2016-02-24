@@ -233,3 +233,18 @@ function itg_breaking_news_node_validate($node, $form, &$form_state) {
     }
   }
 }
+
+
+/**
+ * Implement hook_menu_breadcrumb_alter
+ * @param Array $active_trail
+ * @param Object $item
+ */
+
+function itg_breaking_news_menu_breadcrumb_alter(&$active_trail, $item) {
+  global $user, $base_url;
+  if ($user->uid) {
+    $active_trail[0]['title'] = 'Home';
+    $active_trail[0]['href'] = $base_url.'/cms-user-dashboard';
+  }
+}
