@@ -166,14 +166,14 @@ function feature_for_recipe_views_default_views() {
       'empty_column' => 0,
     ),
     'title' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'created' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -235,6 +235,12 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['created']['timezone'] = 'Asia/Kolkata';
+  /* Field: Content: Select Section */
+  $handler->display->display_options['fields']['field_recipe_section']['id'] = 'field_recipe_section';
+  $handler->display->display_options['fields']['field_recipe_section']['table'] = 'field_data_field_recipe_section';
+  $handler->display->display_options['fields']['field_recipe_section']['field'] = 'field_recipe_section';
+  $handler->display->display_options['fields']['field_recipe_section']['type'] = 'hs_taxonomy_term_reference_hierarchical_text';
+  $handler->display->display_options['fields']['field_recipe_section']['delta_offset'] = '0';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';

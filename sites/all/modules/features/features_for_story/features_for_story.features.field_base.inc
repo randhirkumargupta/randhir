@@ -172,6 +172,7 @@ function features_for_story_field_default_field_bases() {
         'magazine' => 'Magazine',
         'story' => 'Story',
         'supplement' => 'Supplement',
+        'photogallery' => 'Photo Gallery',
       ),
       'allowed_values_function' => '',
     ),
@@ -840,6 +841,33 @@ function features_for_story_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_story_resize_extra_large'.
+  $field_bases['field_story_resize_extra_large'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_resize_extra_large',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'yes' => '',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_story_schedule_date_time'.
   $field_bases['field_story_schedule_date_time'] = array(
     'active' => 1,
@@ -1038,6 +1066,48 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_story_source_id'.
+  $field_bases['field_story_source_id'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_source_id',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
+  // Exported field_base: 'field_story_source_type'.
+  $field_bases['field_story_source_type'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_source_type',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_story_template_buzz'.

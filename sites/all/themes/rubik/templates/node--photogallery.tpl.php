@@ -104,7 +104,7 @@
               if (module_exists('itg_photogallery')) {
                 if (!empty($imgfid)) {
                   $imguri = _itg_photogallery_fid($imgfid);
-                  $style = 'large';
+                  $style = 'photogallery_slide';
                   $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
                 }
               }
@@ -115,7 +115,7 @@
             if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {
               $output .= '<div class="photo-credit"><span>' . $imagecollection['field_credit']['und'][0]['value'] . '</span></div>';
             }
-            elseif (isset($node->field_credit_name['und']) && $node->field_credit_to_all['und'][0]['value'] == 1) {
+            elseif (isset($node->field_credit_name['und'][0]) && isset($node->field_credit_to_all['und'][0])) {
               $output .= '<div class="photo-credit"><span>' . $node->field_credit_name['und'][0]['value'] . '</span></div>';
             }
 

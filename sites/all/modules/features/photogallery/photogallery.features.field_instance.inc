@@ -680,7 +680,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_gallery_kicer',
-    'label' => 'Gallery Caption (Kicer)',
+    'label' => 'Gallery Caption (Kicker)',
     'required' => 1,
     'settings' => array(
       'display_summary' => 0,
@@ -1432,7 +1432,7 @@ function photogallery_field_default_field_instances() {
     'bundle' => 'photogallery',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Syndication ',
+    'description' => 'Enter client name, if this content needs to be syndicated for the specific client only',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1479,9 +1479,10 @@ function photogallery_field_default_field_instances() {
   t('Credit');
   t('Credit Name');
   t('Credit to all');
+  t('Enter client name, if this content needs to be syndicated for the specific client only');
   t('Extra large image');
   t('Extra small image');
-  t('Gallery Caption (Kicer)');
+  t('Gallery Caption (Kicker)');
   t('Gallery Description');
   t('Gallery Headline');
   t('Gallery Image');

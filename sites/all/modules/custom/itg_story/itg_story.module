@@ -165,8 +165,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'
-           || $form['#id'] == 'views-exposed-form-manage-issues-page'
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'           
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
@@ -219,11 +218,11 @@ function itg_story_node_validate($node, $form, &$form_state) {
 //        }
         
         // Code for client title validation
-        if ($val['value'] == 'syndication') {
-          if (empty($node->field_story_client_title[LANGUAGE_NONE][0]['value'])) {
-            form_set_error('field_story_client_title', t("Client title field is required."));
-          }
-        }
+//        if ($val['value'] == 'syndication') {
+//          if (empty($node->field_story_client_title[LANGUAGE_NONE][0]['value'])) {
+//            form_set_error('field_story_client_title', t("Client title field is required."));
+//          }
+//        }
       }      
     }
     
@@ -255,11 +254,14 @@ function itg_story_node_validate($node, $form, &$form_state) {
  * @param type $form_state
  */
 function itg_story_after_build($form, &$form_state) {
-  //p();
+  // p();
   global $user, $base_url;
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
   //$form['metatags']['#prefix'] = '<div class="story-title">Meta Tags</div>';
+  if ($form['#node']->nid) {
+  $form['field_story_configurations'][LANGUAGE_NONE]['breaking_news']['#attributes']['disabled'] = 'disabled';
+  }
   $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
   $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';
   $form['revision_information']['log']['#title'] = 'Remarks';
@@ -292,7 +294,7 @@ function itg_story_create_breaking_news($story_node) {
   global $user; 
  
   $node = new stdClass();
-  $node->title = $story_node->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
+  $node->title = $story_node->title;
   $node->type = "breaking_news";
   
   node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
@@ -301,6 +303,30 @@ function itg_story_create_breaking_news($story_node) {
   $node->field_content_type[LANGUAGE_NONE][0]['value']  = 'Story';
   $node->field_source[LANGUAGE_NONE][0]['value']  = 'Story';
   $node->field_stroy_city[LANGUAGE_NONE][0]['tid']= $story_node->field_stroy_city[LANGUAGE_NONE][0]['tid'];
+  $node->field_display_on[LANGUAGE_NONE][0]['value']  = 'Section';
+  
+  // get selected taxonomy of node
+  $story_taxonomy=$story_node->field_story_category[LANGUAGE_NONE];
+   
+  foreach ($story_taxonomy as $value1) {
+    $story_array[] = $value1['tid'];
+  }
+
+  //get all parent category
+  $taxonomy_parent=taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  foreach ($taxonomy_parent as $key => $value) {
+    $taxonomy_parent_array[] = $value->tid;
+  }
+  
+  // after intersect
+  $taxonomy_result=  array_intersect($taxonomy_parent_array, $story_array);
+  
+  
+  foreach ($taxonomy_result as $key1 => $tax_id) {
+
+    $node->field_section[LANGUAGE_NONE][]['tid'] = $tax_id;
+  }
+
   $node->uid = $user->uid;
   $node->status = 1; //(1 or 0): Published or not
   $node->promote = 0; //(1 or 0): Promoted to front page
@@ -322,4 +348,44 @@ function itg_story_node_insert($node) {
     }
   }
     
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+
+/*function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
+    //p($form_state);
+    $magazine_field = 'field_story_select_magazine';
+    $supplement_field = 'field_story_select_supplement';
+    
+    $magazine_id = $form_state['values'][$magazine_field][LANGUAGE_NONE][0];
+    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+                    'event' => 'change',
+                    'callback' => 'itg_story_magazine_ajax_callback',
+                    'wrapper' => $supplement_field.'_replace',
+            ); 
+    
+    // Setup field_event_1_role select
+    $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="'.$supplement_field.'_replace">';
+    $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+    
+    if (function_exists('itg_common_dropdown_supplement')) {
+      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+    }
+    $form[$supplement_field][LANGUAGE_NONE]['#default_value'] = isset($form_state['values'][$supplement_field]) ? $form_state['values'][$supplement_field] : '';
+  
+}*/
+
+/**
+* Ajax callback for Event roles dropdown
+* @param type $form
+* @param type $form_state
+*/
+function itg_story_magazine_ajax_callback($form, $form_state) {
+    return $form['field_story_select_supplement'];
 }

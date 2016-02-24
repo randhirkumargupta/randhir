@@ -265,6 +265,16 @@ function plupload_element_pre_render($element) {
       'extensions' => str_replace(' ', ',', $element['#upload_validators']['file_validate_extensions'][0]),
     );
   }
+  
+  // patch by ved for dragdrop validation
+     if (empty($settings['filters']) && isset($element['#imgfilevalidate']['file_validate_extensions'][0])) {
+     $settings['filters'] = array();
+    $settings['filters'][] = array(
+      'title' => t('Allowed files'),
+      'extensions' => str_replace(' ', ',', $element['#imgfilevalidate']['file_validate_extensions'][0]),
+    );
+  }
+  // End pathc 
   // Check for autoupload and autosubmit settings and add appropriate callback.
   if (!empty($element['#autoupload'])) {
     $settings['init']['FilesAdded'] = 'Drupal.plupload.filesAddedCallback';

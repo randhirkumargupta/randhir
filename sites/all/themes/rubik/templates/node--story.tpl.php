@@ -6,7 +6,7 @@
       <?php endif; ?>
 
       <?php if (!empty($submitted)): ?>
-        <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
+<!--        <div class='<?php print $hook ?>-submitted clearfix'><?php //print $submitted ?></div>-->
       <?php endif; ?>
         <?php
         //p($node);
