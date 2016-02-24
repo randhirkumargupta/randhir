@@ -129,8 +129,14 @@ function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
+  
+  if(arg(2) == 'edit'){
+    $op = 'updated';
+  } else {
+     $op = 'created';
+  }
   $issue_title = date('m/d/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
-  drupal_set_message(t('Issue '.$issue_title.' has been created successfully.'));
+  drupal_set_message(t('Issue '.$issue_title.' has been '.$op.' successfully.'));
   $_GET['destination'] = 'breaking-news'; 
    
 }
@@ -172,7 +178,7 @@ function itg_msi_form_after_build($form, &$form_state){
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
   
-  
+  unset($form['field_supp_import_xml'][LANGUAGE_NONE]['#file_upload_title']);
   unset($form['field_field_issue_import_xml'][LANGUAGE_NONE]['#file_upload_title']);
  
   return $form;
@@ -355,7 +361,12 @@ function itg_msi_node_validate($node, $form, &$form_state) {
   
   //Case: Issue creation (If issue is already exist, throw an error) 
   if ($node->type == 'issue'){
-    $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue');
+    if(arg(2) == 'edit'){
+      $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue', arg(1));
+    } else {
+      $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue', NULL);
+    }
+    
     if($is_issue_exist){
       form_set_error('field_supp_issue', t('This issue is already exist.'));
     }
@@ -474,20 +485,28 @@ function itg_msi_autocomplete_content($title) {
   * @param Object $node
   * @return boolean
   */
- function itg_msi_check_for_issue_existence($node, $type){
+ function itg_msi_check_for_issue_existence($node, $type, $nid = NULL){
    
    if($type == 'supplement'){
      $issue_title = $node->field_supp_issue[LANGUAGE_NONE][0]['value'];
    } else {
      $issue_title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
    }
-  
-  //Query to fetch record for this issue title
-  $result = db_select('field_data_field_issue_title', 'it')
+
+   if(!empty($nid)){
+      $result = db_select('field_data_field_issue_title', 'it')
+            ->fields('it', array('entity_id'))
+            ->condition('field_issue_title_value', db_like($issue_title) . '%', 'LIKE')
+            ->condition('entity_id', $nid, '!=')
+            ->execute()
+            ->fetchAssoc();
+   } else {
+           $result = db_select('field_data_field_issue_title', 'it')
             ->fields('it', array('entity_id'))
             ->condition('field_issue_title_value', db_like($issue_title) . '%', 'LIKE')
             ->execute()
             ->fetchAssoc();
+   }
     if ($result['entity_id']) {
       return TRUE; //Return TRUE if issue is already exist with same name
     } else {
