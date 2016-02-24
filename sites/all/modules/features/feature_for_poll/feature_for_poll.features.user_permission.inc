@@ -16,7 +16,6 @@ function feature_for_poll_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -28,7 +27,6 @@ function feature_for_poll_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -40,7 +38,6 @@ function feature_for_poll_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -52,7 +49,6 @@ function feature_for_poll_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -64,7 +60,6 @@ function feature_for_poll_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',

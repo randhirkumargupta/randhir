@@ -6,6 +6,12 @@
 jQuery(document).ready(function($){ 
       
        var optionVal;
+       // hide default answer value
+       $('.field-name-field-poll-answe-default-value').hide();
+       
+       // Disable Answer Select box 
+       $('#edit-field-poll-answer-option-und').prop('disabled', true);
+       
        $('#field-poll-answer-values').hide();
        $('.field-add-more-submit').hide();
        $('.field-name-field-poll-answer').hide();
@@ -19,7 +25,10 @@ jQuery(document).ready(function($){
        $('.field-name-field-poll-answer-video').hide();
        
     $("#edit-field-poll-question-und").change(function () {
-       // code for get select option value on poll form
+        // Enable Answer Select box 
+       $('#edit-field-poll-answer-option-und').prop('disabled', false);
+       
+        // code for get select option value on poll form
        optionVal = this.value; 
        // code for insert hidden field type on poll form
        $("<input type='hidden' name='custom_ques' id='custom_ques' value=''>").insertAfter(".form-item-field-poll-question-und");  
@@ -28,6 +37,7 @@ jQuery(document).ready(function($){
     });
     
     $('#edit-field-poll-answer-option-und').change(function(){
+        
         // code for get select option value on poll form
         optionVal = this.value;
         
@@ -144,6 +154,9 @@ jQuery(document).ready(function($){
 (function($) {
     $(document).ajaxComplete(function(e, xhr)
     {
+        // hide default answer value
+        $('.field-name-field-poll-answe-default-value').hide();
+        
         var field = jQuery('.field-name-field-poll-answer-text');
         var items = field.find('.form-item');
         var i=0;

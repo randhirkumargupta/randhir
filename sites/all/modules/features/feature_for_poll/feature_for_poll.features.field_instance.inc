@@ -29,7 +29,7 @@ function feature_for_poll_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_poll_answe_default_value',
-    'label' => 'Poll Answe default value',
+    'label' => 'Poll Answer default value',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -105,7 +105,7 @@ function feature_for_poll_field_default_field_instances() {
     'bundle' => 'field_poll_answer',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Poll Answer Text',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -221,7 +221,7 @@ function feature_for_poll_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 12,
+      'weight' => 16,
     ),
   );
 
@@ -260,7 +260,7 @@ function feature_for_poll_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 15,
     ),
   );
 
@@ -305,7 +305,7 @@ function feature_for_poll_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -344,7 +344,7 @@ function feature_for_poll_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -401,7 +401,64 @@ function feature_for_poll_field_default_field_instances() {
         'resolution' => '200x150',
       ),
       'type' => 'imagefield_crop_widget',
-      'weight' => 4,
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'node-poll-field_poll_call_to_action_image'.
+  $field_instances['node-poll-field_poll_call_to_action_image'] = array(
+    'bundle' => 'poll',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_poll_call_to_action_image',
+    'label' => 'Poll Call to Action Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'imagefield_crop',
+      'settings' => array(
+        'collapsible' => 2,
+        'croparea' => '500x500',
+        'enforce_minimum' => 1,
+        'enforce_ratio' => 1,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+        'resolution' => '200x150',
+      ),
+      'type' => 'imagefield_crop_widget',
+      'weight' => 12,
     ),
   );
 
@@ -440,7 +497,7 @@ function feature_for_poll_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -497,7 +554,7 @@ function feature_for_poll_field_default_field_instances() {
         'resolution' => '200x150',
       ),
       'type' => 'imagefield_crop_widget',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -539,7 +596,7 @@ function feature_for_poll_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -607,7 +664,7 @@ function feature_for_poll_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -665,7 +722,88 @@ function feature_for_poll_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 11,
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'node-poll-field_result_format'.
+  $field_instances['node-poll-field_result_format'] = array(
+    'bundle' => 'poll',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_result_format',
+    'label' => 'Result format',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-poll-field_story_url'.
+  $field_instances['node-poll-field_story_url'] = array(
+    'bundle' => 'poll',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_url',
+    'label' => 'Story url',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 10,
     ),
   );
 
@@ -674,17 +812,20 @@ function feature_for_poll_field_default_field_instances() {
   t('Associate poll');
   t('Body');
   t('Display Result');
-  t('Poll Answe default value');
   t('Poll Answer');
   t('Poll Answer Image');
   t('Poll Answer Text');
+  t('Poll Answer default value');
   t('Poll Banner');
+  t('Poll Call to Action Image');
   t('Poll Option');
   t('Poll Question');
   t('Poll Question Image');
   t('Poll Question Text');
   t('Poll Question Video');
+  t('Result format');
   t('Start Date');
+  t('Story url');
 
   return $field_instances;
 }
