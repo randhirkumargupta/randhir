@@ -7,6 +7,7 @@
 (function ($) {
     Drupal.behaviors.itg_recipe = {
         attach: function (context, settings) {
+            $('.tabledrag-toggle-weight-wrapper a.tabledrag-toggle-weight').hide();
             var uid = settings.itg_recipe.settings.uid;
             if (uid != 1) {
             $('#edit-field-recipe-description-und-0-format').hide();
