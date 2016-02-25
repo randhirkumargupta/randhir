@@ -115,3 +115,15 @@ function itg_recipe_block_view($delta = '') {
 
   return $block;
 }
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_recipe_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
+  if ($form["#id"] == 'views-exposed-form-recipe-management-page') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/recipe/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+}
