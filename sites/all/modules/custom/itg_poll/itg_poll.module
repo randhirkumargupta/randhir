@@ -41,7 +41,6 @@ function itg_poll_form_alter(&$form, &$form_state, $form_id) {
  */
 
 function poll_form_validate($form, &$form_state){
-    
     $field = $form_state['build_info']['args'][0];
     $field_input = $form_state['input'];
     $cnt = count($form_state['values']['field_poll_answer'][LANGUAGE_NONE]);
@@ -54,7 +53,7 @@ function poll_form_validate($form, &$form_state){
             if(empty($pollQuestionTextValue)) {
                 form_set_error('field_poll_question_text', t('Required Poll Question Text'));
             }
-            
+        
             // Code for answer type text validation
             validateAnswer($cnt, $form_state, '1', 'field_poll_answer_text', 'Required Poll Answer Text');
             
@@ -74,7 +73,7 @@ function poll_form_validate($form, &$form_state){
     } 
   // add custom js  
   drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_poll.js'); 
-
+    
 }
 
 
@@ -88,20 +87,24 @@ function poll_form_validate($form, &$form_state){
  */
 
 function validateAnswer($cnt, $form_state, $type, $field, $errMsg){
-    for($i=0; $i < ($cnt - 1); $i++ ) {
+    $count = ($cnt <= 2 ) ? $cnt : $cnt -1;
+    $errMsg = ($count == 2 ) ? 'Required Minimum Two Poll Answer' : $errMsg;
+    
+    for($i=0; $i < $count; $i++ ) {
         $poll_answer = isset($form_state['values']['field_poll_answer'][LANGUAGE_NONE]) ? $form_state['values']['field_poll_answer'][LANGUAGE_NONE][$i] : '';
         if(isset($type) && $type == 1){
             $poll_answer_value = isset($poll_answer[$field][LANGUAGE_NONE]) ? $poll_answer[$field][LANGUAGE_NONE][0]['value'] : '';
+            
         } else if($type == 2){
             $poll_answer_value = isset($poll_answer[$field][LANGUAGE_NONE]) ? $poll_answer[$field][LANGUAGE_NONE][0]['fid'] : '';
         }
-        
         
         if(empty($poll_answer_value)){
             form_set_error($field, t($errMsg));
         }
 
     }
+    
 }
 
 
@@ -293,12 +296,12 @@ function itg_poll_form_submit($form, &$form_state) {
          'uId' => $user->uid, 
          'created' => $created)) ->execute();
         
-        if($display_result == 1) { //Instant Result
+        //if($display_result == 1) { //Instant Result
 		// setcookie(name, value, expire, path, domain); 
 		$expire = time() + 60 * 60 * 24 * 30; // expires in one month
 		$value = 'yes_'.$nId;
 		setcookie('visitedPoll',$value,$expire,'/');
-         }
+         //}
         
         
         // you may not want to return the form at all.

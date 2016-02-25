@@ -19,9 +19,26 @@ jQuery(document).ready(function($){
        $('#field-poll-question-text-add-more-wrapper').hide();
        $('.field-name-field-poll-question-image').hide();
        $('.field-name-field-poll-question-video').hide();
-       // code for all answer field hide default on poll form 
-       $('.form-item-field-poll-answer-und-0-field-poll-answer-text-und-0-value').hide();
-       $('.form-item-field-poll-answer-und-0-field-poll-answer-image-und-0').hide();
+       // code for all answer field hide default on poll form
+       
+       var rowCount = $('#field-poll-answer-values tr').length;
+       //alert('rowCount '+rowCount);
+       //code for get selected value from answer option    
+        var getOptionAnswerVal = $( "#edit-field-poll-answer-option-und option:selected" ).val();
+        $('.form-item-field-poll-answer-und-0-field-poll-answer-text-und-0-value').hide();
+        $('.form-item-field-poll-answer-und-0-field-poll-answer-image-und-0').hide();
+       for(var i=1; i< (rowCount-1); i++) {
+           if(getOptionAnswerVal == 1) {
+               $('.form-item-field-poll-answer-und-'+i+'-field-poll-answer-image-und-0').hide();
+           }
+           else if(getOptionAnswerVal == 2) {
+               $('.form-item-field-poll-answer-und-'+i+'-field-poll-answer-text-und-0-value').hide();
+           }
+           
+           
+       }
+       
+      // $('.form-item-field-poll-answer-und-1-field-poll-answer-image-und-0').hide();
        $('.field-name-field-poll-answer-video').hide();
        
     $("#edit-field-poll-question-und").change(function () {
