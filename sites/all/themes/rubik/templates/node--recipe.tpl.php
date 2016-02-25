@@ -40,7 +40,7 @@
       <?php //print render($content)  ?>
       
       <?php if ($view_mode == 'full'): ?>
-      <div class="basic-details content-box">
+      <div class="content-node-view">
                 <h2>Basic Details</h2>
                 <div class="content-details">
                    <div class="field">
@@ -102,7 +102,7 @@
                 </div>
             </div>
 
-      <div class="basic-details content-box">
+      <div class="content-node-view">
                 <h2>Recipe Details</h2>
                 <div class="content-details">
                    <div class="field">
@@ -179,7 +179,7 @@
             $browsemediasmall = render($content['field_recipe_small_image']);
             $browsemediamobile = render($content['field_recipe_mobile_image']);
             if(!empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediamobile)):?>
-          <div class="BrowseMedia">
+          <div class="content-node-view">
             <h2>Recipe Images</h2>
             <div class="content-details">
             <?php print render($content['field_recipe_upload_large_image']); ?>
@@ -193,7 +193,7 @@
       <?php // end of view mode full condition
         endif;
       ?>
-      <div class="basic-details content-box">
+      <div class="content-node-view">
             <h2>Syndication</h2>
       <div class="content-details">      
       <?php
@@ -216,7 +216,7 @@
       </div>
        
       </div>
-      <div class="basic-details content-box">
+      <div class="content-node-view">
             <h2>Recipe Section</h2>
             <div class="content-details">
       <?php
