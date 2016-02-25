@@ -363,6 +363,7 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['filters']['field_recipe_section_tid']['id'] = 'field_recipe_section_tid';
   $handler->display->display_options['filters']['field_recipe_section_tid']['table'] = 'field_data_field_recipe_section';
   $handler->display->display_options['filters']['field_recipe_section_tid']['field'] = 'field_recipe_section_tid';
+  $handler->display->display_options['filters']['field_recipe_section_tid']['value'] = '';
   $handler->display->display_options['filters']['field_recipe_section_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_recipe_section_tid']['expose']['operator_id'] = 'field_recipe_section_tid_op';
   $handler->display->display_options['filters']['field_recipe_section_tid']['expose']['label'] = 'Section';
