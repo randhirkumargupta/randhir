@@ -16,7 +16,7 @@ function itg_story_reporter_details() {
     $node = node_load($reporter_array[1]);
     $email = $node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
     $twitter = $node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-    $content = '<div>By line’s  Email id: '.$email.'</div><div>By line’s Twitter Handle: '.$twitter.'</div>';
+    $content = '<div>Byline’s  Email id: '.$email.'</div><div>Byline’s Twitter Handle: '.$twitter.'</div>';
   }
   
   echo $content;
@@ -27,15 +27,17 @@ function itg_story_reporter_details() {
 *  
 */
 
-function itg_story_get_story_title($title) { 
+function itg_story_get_content_title($title) {
+  
     if (strlen(trim($title)) > 0) {
+      $content_type = arg(1);
       $options = '';
       $title = strtolower(trim($title));
       $query = db_select('node', 'n');
       $query->fields('n', array('title'));
       $query->condition('title', '%'.$title.'%', 'LIKE');
-      $query->condition('n.type', 'story', '=');
-      $query->condition('n.status', 1, '=');
+      $query->condition('n.type', $content_type, '=');
+      //$query->condition('n.status', 1, '=');
       $query->range(0, 20);
       
       $result = $query->execute(); 
@@ -51,15 +53,16 @@ function itg_story_get_story_title($title) {
 *  
 */
 
-function itg_story_get_story_nid($nid) { 
+function itg_story_get_content_nid($nid) { 
     if (strlen(trim($nid)) > 0) {
+      $content_type = arg(1);
       $options = '';
       $nid = strtolower(trim($nid));
       $query = db_select('node', 'n');
       $query->fields('n', array('nid'));
       $query->condition('nid', '%'.$nid.'%', 'LIKE');
-      $query->condition('n.type', 'story', '=');
-      $query->condition('n.status', 1, '=');
+      $query->condition('n.type', $content_type, '=');
+      //$query->condition('n.status', 1, '=');
       $query->range(0, 20);
       
       $result = $query->execute(); 

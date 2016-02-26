@@ -14,15 +14,10 @@ function user_management_workbench_moderation_export_transitions() {
       'to_name' => 'needs_review',
       'name' => 'Submit for Review',
     ),
-    'needs_review:draft' => array(
-      'from_name' => 'needs_review',
-      'to_name' => 'draft',
-      'name' => 'Reject',
-    ),
     'needs_review:published' => array(
       'from_name' => 'needs_review',
       'to_name' => 'published',
-      'name' => 'Publish',
+      'name' => 'Published',
     ),
   );
   return $items;

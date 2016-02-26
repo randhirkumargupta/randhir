@@ -35,7 +35,7 @@ function user_management_field_default_field_instances() {
     'entity_type' => 'user',
     'exclude_cv' => 0,
     'field_name' => 'field_first_name',
-    'label' => 'First Name',
+    'label' => 'First name',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -49,7 +49,7 @@ function user_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
@@ -78,7 +78,7 @@ function user_management_field_default_field_instances() {
     'entity_type' => 'user',
     'exclude_cv' => 0,
     'field_name' => 'field_last_name',
-    'label' => 'Last Name',
+    'label' => 'Last name',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -92,7 +92,7 @@ function user_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -121,7 +121,7 @@ function user_management_field_default_field_instances() {
     'entity_type' => 'user',
     'exclude_cv' => 0,
     'field_name' => 'field_mobile_number',
-    'label' => 'Mobile Number',
+    'label' => 'Mobile number',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -135,15 +135,86 @@ function user_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'user-user-field_user_picture'.
+  $field_instances['user-user-field_user_picture'] = array(
+    'bundle' => 'user',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 1,
+    'field_name' => 'field_user_picture',
+    'label' => 'Picture',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 4,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('First Name');
-  t('Last Name');
-  t('Mobile Number');
+  t('First name');
+  t('Last name');
+  t('Mobile number');
+  t('Picture');
   t('Please enter your first name.');
   t('Please enter your last name.');
   t('Please enter your mobile number.');

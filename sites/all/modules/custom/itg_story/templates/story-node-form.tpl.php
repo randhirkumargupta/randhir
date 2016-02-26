@@ -13,8 +13,10 @@
   <?php print drupal_render($form['field_story_magazine_story_issue']); ?>
   <?php print drupal_render($form['field_story_select_magazine']); ?>
   <?php print drupal_render($form['field_story_select_supplement']); ?>
-  <?php print drupal_render($form['field_story_long_head_line']); ?>
   <?php print drupal_render($form['title']); ?>
+  <?php print drupal_render($form['field_story_long_head_line']); ?>
+  
+  <div class="pre-desc">This title shows on the section page</div>
   <?php print drupal_render($form['field_story_short_headline']); ?>
   <?php print drupal_render($form['field_story_snap_post']); ?>  
   <?php print drupal_render($form['field_story_new_title']); ?>
@@ -29,8 +31,8 @@
   <?php print drupal_render($form['field_story_reporter']); ?>
   <div id="reporter-details"></div>
   <?php print drupal_render($form['field_story_schedule_date_time']); ?>
-  <?php print drupal_render($form['field_story_expiry_date']); ?>
-  <?php print drupal_render($form['field_story_rating']); ?>  
+  <?php print drupal_render($form['field_story_expires']); ?> 
+  <?php print drupal_render($form['field_story_expiry_date']); ?>    
   <?php print drupal_render($form['field_story_expert_name']); ?>
   <?php print drupal_render($form['field_story_expert_image']); ?>
   <?php print drupal_render($form['field_story_expert_description']); ?>
@@ -41,7 +43,8 @@
   <h2 class="story-title">Configuration</h2>
   <?php print drupal_render($form['field_story_configurations']); ?>
   <?php print drupal_render($form['field_story_comment_question']); ?>
-  <?php print drupal_render($form['field_story_client_title']); ?>  
+  <?php print drupal_render($form['field_story_client_title']); ?>
+  <?php print drupal_render($form['field_story_rating']); ?>
 </div>
 <div id="SocialMedia">
   <h2 class="story-title">Social Media</h2>
@@ -53,7 +56,8 @@
 <div id="BrowseMedia">
   <h2 class="story-title">Browse Media</h2>
   <?php print drupal_render($form['field_story_extra_large_image']); ?>
-  <?php print drupal_render($form['field_story_resize_extra_large']); ?>
+  <div class="pre-desc">This image will be resized by the system into pre-defined dimensions</div>
+  <?php //print drupal_render($form['field_story_resize_extra_large']); ?>
   <?php print drupal_render($form['field_story_large_image']); ?>
   <?php print drupal_render($form['field_story_medium_image']); ?>
   <?php print drupal_render($form['field_story_small_image']); ?>
@@ -71,6 +75,6 @@
   <h2 class="story-title">Category</h2>
   <?php print drupal_render($form['field_story_category']); ?>  
 </div>
-
+<h2 id="title-metatags" class="story-title">Remarks</h2>
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

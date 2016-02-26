@@ -12,8 +12,7 @@
  * Implements hook_init().
  */
 function itg_story_init() {
-
-
+ 
 }
 
 
@@ -27,14 +26,14 @@ function itg_story_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_story.inc',
   );
-  $items['story-title-list/autocomplete'] = array(
-    'page callback' => 'itg_story_get_story_title',
+  $items['content-title-list/%/autocomplete'] = array(
+    'page callback' => 'itg_story_get_content_title',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
-  $items['story-nid-list/autocomplete'] = array(
-    'page callback' => 'itg_story_get_story_nid',
+  $items['content-nid-list/%/autocomplete'] = array(
+    'page callback' => 'itg_story_get_content_nid',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
@@ -63,7 +62,8 @@ function itg_story_block_info() {
 }
 
 /**
- * Implements hook_block_view().
+ * Implements hook_block_view()
+ * @param type $delta
  */
 function itg_story_block_view($delta = '') {
   global $user;
@@ -82,6 +82,10 @@ function itg_story_block_view($delta = '') {
 
 /**
  * Implements hook_theme().
+ * @param type $existing
+ * @param type $type
+ * @param type $theme
+ * @param type $path
  */
 function itg_story_theme($existing, $type, $theme, $path) {
   $themes = array(
@@ -105,17 +109,21 @@ function itg_story_theme($existing, $type, $theme, $path) {
 
 /**
  * Implemets hook_form_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
  */
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
-  global $user, $base_url; 
-  
-  switch ($form_id) {
+  global $user, $base_url;  
+
+    switch ($form_id) {
     case 'story_node_form':
+      $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       unset($form['actions']['preview_changes']);
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'story-management', array('attributes' => array('class' => 'button'))),
+        '#markup' => l(t('Cancel'), $_REQUEST['destination'], array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
-      );
+      );     
       
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['#after_build'][] = 'itg_story_after_build';
@@ -126,31 +134,57 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Custom submit callback for redirecting story form.
+ * @param type $form
+ * @param type $form_state
  */
 function itg_story_form_custom_callback($form, &$form_state) {  
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
   
-  drupal_set_message('Story has been created successfully.');
-  $_GET['destination'] = 'story-management'; 
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'story') {
+    drupal_set_message('Story has been created successfully.');
+  } else {
+      drupal_set_message('Story has been updated successfully.');
+  }
    
 }
 
 /**
- * Implements hook_form_FORMID_alter().  
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
  */
-function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {  
-   if ($form['#id'] == 'views-exposed-form-strory-menegment-page') {
-     $form['title']['#autocomplete_path'] = 'story-title-list/autocomplete';
+function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) { 
+   if ($form['#id'] == 'views-exposed-form-strory-menegment-page' 
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' 
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' 
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' 
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' 
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' 
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' 
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' 
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'           
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
+     $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
-     $form['nid']['#autocomplete_path'] = 'story-nid-list/autocomplete';
+     $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Nid'));
-   }   
+   }
+   
+//   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
+//     drupal_add_js('jQuery(document).ready(function() {
+//              jQuery("#edit-actionnode-publish-action").hide();                    
+//            });', array('type' => 'inline', 'scope' => 'footer'));
+//   }
 }
 
 /**
- * Implements hook_node_validate().  
+ * Implements hook_node_validate().
+ * @param type $form
+ * @param type $form
+ * @param type $form   
  */
 function itg_story_node_validate($node, $form, &$form_state) {
   // Code for redirection url validation
@@ -163,22 +197,32 @@ function itg_story_node_validate($node, $form, &$form_state) {
       }
     }
     
+    // code for check expiry date is greater then schedule date
+    $schedule_date = $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'];
+    $schedule_date=strtotime($schedule_date);
+    $schedule_date=date('Y-m-d',$schedule_date);
+    $expiry_date = $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'];
+    
+    if (isset($expiry_date) && $schedule_date > $expiry_date) { 
+      form_set_error('field_story_expiry_date', t("Expiry date should be greater then schedule start date"));
+    }    
+    
     // Code for configurations validation
     if (isset($node->field_story_configurations[LANGUAGE_NONE])) {
       foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
-        if ($val['value'] == 'comment') {
-          // Code for comment question validation
-          if (empty($node->field_story_comment_question[LANGUAGE_NONE][0]['value'])) {
-            form_set_error('field_story_comment_question', t("Comment Question field is required."));
-          }
-        }
+//        if ($val['value'] == 'comment') {
+//          // Code for comment question validation
+//          if (empty($node->field_story_comment_question[LANGUAGE_NONE][0]['value'])) {
+//            form_set_error('field_story_comment_question', t("Comment Question field is required."));
+//          }
+//        }
         
         // Code for client title validation
-        if ($val['value'] == 'syndication') {
-          if (empty($node->field_story_client_title[LANGUAGE_NONE][0]['value'])) {
-            form_set_error('field_story_client_title', t("Client title field is required."));
-          }
-        }
+//        if ($val['value'] == 'syndication') {
+//          if (empty($node->field_story_client_title[LANGUAGE_NONE][0]['value'])) {
+//            form_set_error('field_story_client_title', t("Client title field is required."));
+//          }
+//        }
       }      
     }
     
@@ -204,17 +248,27 @@ function itg_story_node_validate($node, $form, &$form_state) {
   }
 }
 
-// after build for story form
+/**
+ * After build for story form.
+ * @param type $form
+ * @param type $form_state
+ */
 function itg_story_after_build($form, &$form_state) {
-  
+  // p();
   global $user, $base_url;
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
-  
+  //$form['metatags']['#prefix'] = '<div class="story-title">Meta Tags</div>';
+  if ($form['#node']->nid) {
+  $form['field_story_configurations'][LANGUAGE_NONE]['breaking_news']['#attributes']['disabled'] = 'disabled';
+  }
+  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
+  $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';
+  $form['revision_information']['log']['#title'] = 'Remarks';
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
-
+  
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
   return $form;
@@ -230,4 +284,108 @@ function itg_story_permission() {
       'description' => t('story permission.'),
     ),    
   );
+}
+
+/**
+ * Abreaking news create after story create.
+ * @param type $story_node 
+ */
+function itg_story_create_breaking_news($story_node) {  
+  global $user; 
+ 
+  $node = new stdClass();
+  $node->title = $story_node->title;
+  $node->type = "breaking_news";
+  
+  node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+  
+  $node->language = LANGUAGE_NONE;
+  $node->field_content_type[LANGUAGE_NONE][0]['value']  = 'Story';
+  $node->field_source[LANGUAGE_NONE][0]['value']  = 'Story';
+  $node->field_stroy_city[LANGUAGE_NONE][0]['tid']= $story_node->field_stroy_city[LANGUAGE_NONE][0]['tid'];
+  $node->field_display_on[LANGUAGE_NONE][0]['value']  = 'Section';
+  
+  // get selected taxonomy of node
+  $story_taxonomy=$story_node->field_story_category[LANGUAGE_NONE];
+   
+  foreach ($story_taxonomy as $value1) {
+    $story_array[] = $value1['tid'];
+  }
+
+  //get all parent category
+  $taxonomy_parent=taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  foreach ($taxonomy_parent as $key => $value) {
+    $taxonomy_parent_array[] = $value->tid;
+  }
+  
+  // after intersect
+  $taxonomy_result=  array_intersect($taxonomy_parent_array, $story_array);
+  
+  
+  foreach ($taxonomy_result as $key1 => $tax_id) {
+
+    $node->field_section[LANGUAGE_NONE][]['tid'] = $tax_id;
+  }
+
+  $node->uid = $user->uid;
+  $node->status = 1; //(1 or 0): Published or not
+  $node->promote = 0; //(1 or 0): Promoted to front page
+  $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
+  //$node = node_submit($node); // Prepare node for saving
+  node_save($node);
+  
+}
+
+/**
+ * Implements hook_permission.
+ * @param type $node
+ */
+function itg_story_node_insert($node) {
+ 
+  foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+    if ($val['value'] == 'breaking_news') {
+      itg_story_create_breaking_news($node);
+    }
+  }
+    
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+
+/*function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
+    //p($form_state);
+    $magazine_field = 'field_story_select_magazine';
+    $supplement_field = 'field_story_select_supplement';
+    
+    $magazine_id = $form_state['values'][$magazine_field][LANGUAGE_NONE][0];
+    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+                    'event' => 'change',
+                    'callback' => 'itg_story_magazine_ajax_callback',
+                    'wrapper' => $supplement_field.'_replace',
+            ); 
+    
+    // Setup field_event_1_role select
+    $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="'.$supplement_field.'_replace">';
+    $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+    
+    if (function_exists('itg_common_dropdown_supplement')) {
+      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+    }
+    $form[$supplement_field][LANGUAGE_NONE]['#default_value'] = isset($form_state['values'][$supplement_field]) ? $form_state['values'][$supplement_field] : '';
+  
+}*/
+
+/**
+* Ajax callback for Event roles dropdown
+* @param type $form
+* @param type $form_state
+*/
+function itg_story_magazine_ajax_callback($form, $form_state) {
+    return $form['field_story_select_supplement'];
 }
