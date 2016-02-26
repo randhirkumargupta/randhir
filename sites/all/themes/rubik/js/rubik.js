@@ -207,6 +207,12 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     controlNav: false
   });
   
+  // jQuery code to hide select option whenever user hover on ITGCMS navbar
+  $('#block-menu-menu-admin-left-menu').mouseover(function(){
+    $('select').blur();
+  });
+  
+  
   
 
 };
