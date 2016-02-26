@@ -55,7 +55,7 @@ function photogallery_node_info() {
       'base' => 'node_content',
       'description' => t('photogallery'),
       'has_title' => '1',
-      'title_label' => t('Gallery Title'),
+      'title_label' => t('Gallery Headline'),
       'help' => '',
     ),
   );
