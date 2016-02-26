@@ -700,7 +700,7 @@ function photogallery_field_default_field_instances() {
     'bundle' => 'photogallery',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'People Tag',
+    'description' => 'Tag',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -719,7 +719,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_people_tag',
-    'label' => 'People Tag',
+    'label' => 'Tag',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1230,12 +1230,12 @@ function photogallery_field_default_field_instances() {
   t('Image Size (88 x 66)');
   t('Large image');
   t('Medium image');
-  t('People Tag');
   t('Photo by');
   t('Section');
   t('Set As Featured');
   t('Small image');
   t('Syndication');
+  t('Tag');
 
   return $field_instances;
 }
