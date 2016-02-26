@@ -20,11 +20,12 @@
 function itg_poll_form_alter(&$form, &$form_state, $form_id) {
     switch ($form_id) {
     case 'poll_node_form':
-        if(arg(2) == 'edit') {
+        if (arg(2) == 'edit') {
             // write code
         }
+            
         $form['#validate'] = array('poll_form_validate');
-	// unset content body
+        // unset content body
         unset($form['body']);  
        drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_poll.js'); 
     break;    
@@ -40,34 +41,36 @@ function itg_poll_form_alter(&$form, &$form_state, $form_id) {
  * @param array reference $form_state
  */
 
-function poll_form_validate($form, &$form_state){
+function poll_form_validate($form, &$form_state) {
     $field = $form_state['build_info']['args'][0];
     $field_input = $form_state['input'];
     $cnt = count($form_state['values']['field_poll_answer'][LANGUAGE_NONE]);
     
-    $pollQuestionValue = $field->field_poll_question[LANGUAGE_NONE][0]['value'];
+    $poll_question_value = $field->field_poll_question[LANGUAGE_NONE][0]['value'];
     
-    if(isset($pollQuestionValue)) {
-        if($pollQuestionValue == 1) { // for text
-            $pollQuestionTextValue = isset($field_input['field_poll_question_text'][LANGUAGE_NONE]) ? $field_input['field_poll_question_text'][LANGUAGE_NONE][0]['value'] : '';
-            if(empty($pollQuestionTextValue)) {
+    if (isset($poll_question_value)) {
+        if ($poll_question_value == 1) { // for text
+            $poll_question_text_value = isset($field_input['field_poll_question_text'][LANGUAGE_NONE]) ? $field_input['field_poll_question_text'][LANGUAGE_NONE][0]['value'] : '';
+            if (empty($poll_question_text_value)) {
                 form_set_error('field_poll_question_text', t('Required Poll Question Text'));
             }
         
             // Code for answer type text validation
-            validateAnswer($cnt, $form_state, '1', 'field_poll_answer_text', 'Required Poll Answer Text');
+            validate_answer($cnt, $form_state, '1', 'field_poll_answer_text', 'Required Poll Answer Text');
             
-        } else if($pollQuestionValue == 2) { // for image
+        }
+        elseif ($poll_question_value == 2) { // for image
             
-            $pollQuestionImageValue = isset($field_input['field_poll_question_image'][LANGUAGE_NONE]) ? $field_input['field_poll_question_image'][LANGUAGE_NONE][0]['fid'] : '';
-            if(empty($pollQuestionImageValue)) {
+            $poll_question_image_value = isset($field_input['field_poll_question_image'][LANGUAGE_NONE]) ? $field_input['field_poll_question_image'][LANGUAGE_NONE][0]['fid'] : '';
+            if (empty($poll_question_image_value)) {
                 form_set_error('field_poll_answer_image', t('Required Poll Question Image'));
             }
             
             // Code for answer type image validation
-            validateAnswer($cnt, $form_state, '2' ,'field_poll_answer_image', 'Required Poll Answer Image');
+            validate_answer($cnt, $form_state, '2', 'field_poll_answer_image', 'Required Poll Answer Image');
             
-        } else if($pollQuestionValue == 3) { // for video
+        } 
+        elseif ($poll_question_value == 3) { // for video
             // code write
         }
     } 
@@ -83,24 +86,25 @@ function poll_form_validate($form, &$form_state){
  * @param array reference $form_state
  * @param int $type: 1=> text, 2=> image, 3=> video
  * @param string $field: validate fields
- * @param string $errMsg: show error message with fields
+ * @param string $err_msg: show error message with fields
  */
 
-function validateAnswer($cnt, $form_state, $type, $field, $errMsg){
+function validate_answer($cnt, $form_state, $type, $field, $err_msg) {    
     $count = ($cnt <= 2 ) ? $cnt : $cnt -1;
-    $errMsg = ($count == 2 ) ? 'Required Minimum Two Poll Answer' : $errMsg;
+    $err_msg = ($count == 2 ) ? 'Required Minimum Two Poll Answer' : $err_msg;
     
-    for($i=0; $i < $count; $i++ ) {
+    for ($i=0; $i < $count; $i++ ) {
         $poll_answer = isset($form_state['values']['field_poll_answer'][LANGUAGE_NONE]) ? $form_state['values']['field_poll_answer'][LANGUAGE_NONE][$i] : '';
-        if(isset($type) && $type == 1){
+        if (isset($type) && $type == 1) {
             $poll_answer_value = isset($poll_answer[$field][LANGUAGE_NONE]) ? $poll_answer[$field][LANGUAGE_NONE][0]['value'] : '';
             
-        } else if($type == 2){
+        } 
+        elseif ($type == 2) {
             $poll_answer_value = isset($poll_answer[$field][LANGUAGE_NONE]) ? $poll_answer[$field][LANGUAGE_NONE][0]['fid'] : '';
         }
         
-        if(empty($poll_answer_value)){
-            form_set_error($field, t($errMsg));
+        if (empty($poll_answer_value)) {
+            form_set_error($field, t($err_msg));
         }
 
     }
@@ -114,18 +118,18 @@ function validateAnswer($cnt, $form_state, $type, $field, $errMsg){
  * @return string
  */
 function isCookies($nid){
-    $isCookies = '';
+    $is_cookies = '';
     // get poll cookie
     if(isset($_COOKIE['visitedPoll'])) {
         
         $pollArr = explode('_',$_COOKIE['visitedPoll']);
 
         if($nid ===  $pollArr[1]) {
-                $isCookies = 'yes';
+                $is_cookies = 'yes';
         }
 
     }
-    return $isCookies;
+    return $is_cookies;
 }
 
 

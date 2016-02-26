@@ -16,6 +16,7 @@ function feature_for_poll_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -25,8 +26,6 @@ function feature_for_poll_user_default_permissions() {
   $permissions['delete any poll content'] = array(
     'name' => 'delete any poll content',
     'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -38,6 +37,7 @@ function feature_for_poll_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -47,8 +47,6 @@ function feature_for_poll_user_default_permissions() {
   $permissions['edit any poll content'] = array(
     'name' => 'edit any poll content',
     'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -60,6 +58,7 @@ function feature_for_poll_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
