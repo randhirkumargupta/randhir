@@ -93,7 +93,7 @@ function feature_for_breaking_news_strongarm() {
           'weight' => '17',
         ),
         'title' => array(
-          'weight' => '3',
+          'weight' => '5',
         ),
         'path' => array(
           'weight' => '16',
