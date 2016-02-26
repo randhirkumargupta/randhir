@@ -59,7 +59,40 @@
       var currentMonthPager = $(".date-heading h3").text();
       if (currentMonth === currentMonthPager) {        
         $(".date-next").css("display", "none");
-      }      
+      }
+      
+      // Check frequency and select range date.
+      // Hide date range field from display
+      $('#edit-field-astro-date-range').css('display', 'none'); 
+      // Weekly
+      $('#edit-field-astro-frequency-und-weekly').click(function() {        
+        var state = $(this).is(':checked');
+        if (state) {
+          var startDay = moment().day(0); // Sun
+          var endDay = moment().day(6); // Sat          
+          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay.format('L'));
+          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay.format('L'));
+        }
+      });
+      // Monthly
+      $('#edit-field-astro-frequency-und-monthly').click(function() {
+        var state = $(this).is(':checked');
+        if (state) {
+          var firstDay = moment().date(1);
+          var lastDay = moment().endOf('month');
+          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay.format('L'));
+          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(lastDay.format('L'));
+        }
+      });
+      // Yearly
+      $('#edit-field-astro-frequency-und-yearly').click(function() {
+        var state = $(this).is(':checked');
+        if (state) {
+          var firstDay = moment().dayOfYear(1).format('L');          
+          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay);
+          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val('12/31/'+moment().year());
+        }
+      });
     }
   };
 })(jQuery, Drupal, this, this.document);
