@@ -63,7 +63,8 @@
       
       // Check frequency and select range date.
       // Hide date range field from display
-      $('#edit-field-astro-date-range').css('display', 'none'); 
+      $('#edit-field-astro-date-range').css('display', 'none');
+      $('.field-name-field-astro-zodiac-sign-name').css('display', 'none');
       // Weekly
       $('#edit-field-astro-frequency-und-weekly').click(function() {        
         var state = $(this).is(':checked');
