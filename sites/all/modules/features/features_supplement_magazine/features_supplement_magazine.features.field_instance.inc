@@ -82,7 +82,7 @@ function features_supplement_magazine_field_default_field_instances() {
   $field_instances['node-issue-field_field_issue_import_xml'] = array(
     'bundle' => 'issue',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please import xml to create issue.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -218,7 +218,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -259,7 +259,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -335,159 +335,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance: 'node-issue-field_issue_supp_large_image'.
-  $field_instances['node-issue-field_issue_supp_large_image'] = array(
-    'bundle' => 'issue',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_issue_supp_large_image',
-    'label' => 'Large Cover Image',
-    'required' => 1,
-    'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'exclude_cv' => FALSE,
-      'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'image',
-      'settings' => array(
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 0,
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 1,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-            'search_all_fields' => 0,
-          ),
-        ),
-        'imce_filefield_on' => 0,
-        'preview_image_style' => 'thumbnail',
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'image_image',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance: 'node-issue-field_issue_supp_small_image'.
-  $field_instances['node-issue-field_issue_supp_small_image'] = array(
-    'bundle' => 'issue',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_issue_supp_small_image',
-    'label' => 'Small Cover Image',
-    'required' => 1,
-    'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'exclude_cv' => FALSE,
-      'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'image',
-      'settings' => array(
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 0,
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 1,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-            'search_all_fields' => 0,
-          ),
-        ),
-        'imce_filefield_on' => 0,
-        'preview_image_style' => 'thumbnail',
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'image_image',
-      'weight' => 8,
+      'weight' => 5,
     ),
   );
 
@@ -528,7 +376,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -586,52 +434,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-magazine-body'.
-  $field_instances['node-magazine-body'] = array(
-    'bundle' => 'magazine',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
-    'settings' => array(
-      'display_summary' => TRUE,
-      'exclude_cv' => FALSE,
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
-      ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => -4,
+      'weight' => 0,
     ),
   );
 
@@ -661,7 +464,7 @@ function features_supplement_magazine_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_magazine_cover_photo',
-    'label' => 'Upload Cover Photo',
+    'label' => 'Magazine Cover Photo',
     'required' => 1,
     'settings' => array(
       'alt_field' => 1,
@@ -707,7 +510,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -746,7 +549,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -805,136 +608,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-supplement-body'.
-  $field_instances['node-supplement-body'] = array(
-    'bundle' => 'supplement',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
-    'settings' => array(
-      'display_summary' => TRUE,
-      'exclude_cv' => FALSE,
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
-      ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => -4,
-    ),
-  );
-
-  // Exported field_instance: 'node-supplement-field_supp_alt_tag'.
-  $field_instances['node-supplement-field_supp_alt_tag'] = array(
-    'bundle' => 'supplement',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter Alt tag, will be used to search images from repository.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_supp_alt_tag',
-    'label' => 'Alt Tag',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-supplement-field_supp_alt_text'.
-  $field_instances['node-supplement-field_supp_alt_text'] = array(
-    'bundle' => 'supplement',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter Alt text.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_supp_alt_text',
-    'label' => 'Alt Text',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 3,
     ),
   );
 
@@ -1003,64 +677,6 @@ function features_supplement_magazine_field_default_field_instances() {
       ),
       'type' => 'file_generic',
       'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-supplement-field_supp_issue'.
-  $field_instances['node-supplement-field_supp_issue'] = array(
-    'bundle' => 'supplement',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_supp_issue',
-    'label' => 'Issue',
-    'required' => 1,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 3,
     ),
   );
 
@@ -1175,7 +791,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -1216,7 +832,7 @@ function features_supplement_magazine_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -1298,22 +914,18 @@ function features_supplement_magazine_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Alt Tag');
-  t('Alt Text');
-  t('Body');
   t('Comment');
   t('Image Size (210 x 145)');
   t('Image Size (300 x 225)');
   t('Import Issue XML');
   t('Import XML');
-  t('Issue');
   t('Large Cover Image');
   t('Magazine');
+  t('Magazine Cover Photo');
   t('Please check to publish this content.');
-  t('Please enter Alt tag, will be used to search images from repository.');
-  t('Please enter Alt text.');
   t('Please enter issue title.');
   t('Please import XML.');
+  t('Please import xml to create issue.');
   t('Please select magazine to map with supplement.');
   t('Please select magazine.');
   t('Please select the date using date picker.
@@ -1328,7 +940,6 @@ function features_supplement_magazine_field_default_field_instances() {
   t('Small Cover Image ');
   t('Supplement');
   t('Title');
-  t('Upload Cover Photo');
 
   return $field_instances;
 }

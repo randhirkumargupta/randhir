@@ -14,10 +14,7 @@ function features_supplement_magazine_user_default_permissions() {
   $permissions['access draggableviews'] = array(
     'name' => 'access draggableviews',
     'roles' => array(
-      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Section Editor' => 'Section Editor',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
