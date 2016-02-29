@@ -1,6 +1,7 @@
 /*-----------------------------------------------------------*
 * ITG ADMIN CSS STARTS HERE
 *------------------------------------------------------------*/
+div, p, span, a, ul, li{word-wrap: break-word;}
 #content{
   display: inline-block;
   width: 100%;
@@ -75,6 +76,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-photogallery .preview-wrapper, 
 .node-type-story .preview-wrapper, 
 .page-node-add-breaking-news .preview-wrapper,
+.node-type-issue .preview-wrapper, 
+.page-node-add-issue .preview-wrapper,
+.node-type-supplement .preview-wrapper, 
+.page-node-add-supplement .preview-wrapper,
 .node-type-breaking-news .preview-wrapper{
   background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
@@ -91,6 +96,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-photogallery .preview, 
 .node-type-photogallery .preview,
 .page-node-add-breaking-news .preview,
+.node-type-issue .preview,
+.page-node-add-issue .preview,
+.node-type-supplement .preview,
+.page-node-add-supplement .preview,
 .node-type-breaking-news .preview{
   background-color: #fff;
   left: 0;
@@ -109,6 +118,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-photogallery .preview > h3, 
 .node-type-photogallery .preview > h3,
 .page-node-add-breaking-news .preview > h3,
+.node-type-issue .preview > h3,
+.page-node-add-issue .preview > h3,
+.node-type-supplement .preview > h3,
+.page-node-add-supplement .preview > h3,
 .node-type-breaking-news .preview > h3{
   font-size: 24px;
   padding: 20px;
@@ -130,6 +143,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-photogallery .close-preview, 
 .node-type-photogallery .close-preview,
 .page-node-add-breaking-news .close-preview,
+.node-type-issue .close-preview,
+.page-node-add-issue .close-preview,
+.node-type-supplement .close-preview,
+.page-node-add-supplement .close-preview,
 .node-type-breaking-news .close-preview{
   display: block;
 }
@@ -832,3 +849,21 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 #block-itg-category-manager-sef-url-log .content-associated{padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px;}
 #block-itg-category-manager-sef-url-log #show-content-count{padding-top: 5px;}
 #block-itg-category-manager-sef-url-log .more{text-align: right;}
+.cm-node-view{max-height: 500px; overflow-y: auto;}
+#edit-field-publish-time .date-combo .fieldset-content{padding: 0; float: left; width: 400px;}
+#edit-field-field-issue-import-xml .tabledrag-toggle-weight-wrapper, 
+#edit-field-field-issue-import-xml .tabledrag-handle{display: none;}
+#edit-field-field-issue-import-xml .fieldset table{max-width: 935px;}
+#edit-field-field-issue-import-xml .form-managed-file span.file{position: relative; padding-left: 20px; float: left; max-width: 600px;}
+#edit-field-field-issue-import-xml .form-managed-file span.file img.file-icon{position: absolute; left: 0; top: 0;}
+#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .form-item label{max-width: 150px;}
+#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .filter-wrapper{display: none;}
+#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .ckeditor_links{margin-left: 150px;}
+#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .date-padding > div:first-child{display: none;}
+#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .date-combo legend{width: 150px;}
+#breaking-news-node-form .field-name-field-breaking-publish-time .fieldset.titled > .fieldset-content{padding: 0;}
+#breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content{float: left; width: 300px;}
+#breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item{margin: 0;}
+#breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item label{display: none;}
+#breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item .form-text{width: 100%;}
+#breaking-news-node-form .field-name-field-mobile-subscribers{display: none;}

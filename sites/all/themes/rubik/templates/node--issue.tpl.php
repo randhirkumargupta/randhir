@@ -41,16 +41,19 @@
   <div class="field-div"><div class="field-label">Title: </div><div class="field-item"><?php print date('m/d/Y', strtotime($title)); ?></div></div>
   <div class="field-div"><div class="field-label">Magazine: </div><div class="field-item"><?php print $node->field_issue_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
   <div class="field-div"><div class="field-label">Supplement: </div><div class="field-item"><?php print $node->field_issue_supplement[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
-  <div class="field-div"><div class="field-label"><strong>Issue Cover Images:</strong> </div><div class="field-item"></div>
+  <div class="field-div"><div class="field-label"><strong>Issue Cover Images:</strong> </div><div class="field-item"></div></div>
   <div class="field-div"><div class="field-label">Large Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_large_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
   <div class="field-div"><div class="field-label">Small Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_small_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
-  <div class="field-div"><div class="field-label"><strong>Supplement Cover Images:</strong> </div><div class="field-item"></div>
+  <div class="field-div"><div class="field-label"><strong>Supplement Cover Images:</strong> </div><div class="field-item"></div></div>
   <div class="field-div"><div class="field-label">Large Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_large_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
   <div class="field-div"><div class="field-label">Small Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_small_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
   <div class="field-div"><div class="field-label">Status: </div><div class="field-item"><?php print $status ? 'Published' : 'Unpublished';?></div></div>
   <div class="field-div"><div class="field-label"><strong>Attached XML Files:</strong> </div>
+    <div class="field-item">
     <?php foreach($node->field_issue_supplement[LANGUAGE_NONE][0]['entity']->field_supp_import_xml[LANGUAGE_NONE] as $file){
       print $file['filename'];
     }
     ?>
+    </div>
+</div>
 </div>
