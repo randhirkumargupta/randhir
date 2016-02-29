@@ -215,6 +215,18 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('#block-menu-menu-admin-left-menu').mouseover(function(){
     $('select').blur();
   });
+  $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').siblings().find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: true});
+  $('body').on('change', '.field-name-field-mark-as-breaking-band .form-checkbox', function () {
+    var el_check = $(this).is(':checked');
+    if(el_check == true){
+      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: true});
+      $(this).attr({checked: true, disabled: false});
+    }
+    else{
+      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: false});
+    }
+  });
+  
   
   
   
