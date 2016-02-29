@@ -230,7 +230,7 @@ function features_for_story_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 21,
+      'weight' => 20,
     ),
   );
 
@@ -269,7 +269,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 41,
+      'weight' => 42,
     ),
   );
 
@@ -306,9 +306,20 @@ function features_for_story_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'cascading_selection' => 0,
+        'filter_view' => '',
+        'leaves_only' => 0,
+        'max_depth' => '',
+        'multiple_select_size' => 5,
+        'parent_term_id' => '',
+        'select_parents' => 0,
+        'start_minimized' => 0,
+        'token_display' => '',
+        'track_list' => 0,
+      ),
       'type' => 'options_select',
-      'weight' => 40,
+      'weight' => 41,
     ),
   );
 
@@ -350,7 +361,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 24,
+      'weight' => 23,
     ),
   );
 
@@ -435,7 +446,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 23,
+      'weight' => 22,
     ),
   );
 
@@ -519,7 +530,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 20,
+      'weight' => 19,
     ),
   );
 
@@ -595,7 +606,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 19,
+      'weight' => 18,
     ),
   );
 
@@ -637,7 +648,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 17,
     ),
   );
 
@@ -810,7 +821,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 30,
+      'weight' => 31,
     ),
   );
 
@@ -886,7 +897,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 34,
+      'weight' => 35,
     ),
   );
 
@@ -962,7 +973,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 28,
+      'weight' => 29,
     ),
   );
 
@@ -1004,7 +1015,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 27,
+      'weight' => 28,
     ),
   );
 
@@ -1046,7 +1057,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 21,
     ),
   );
 
@@ -1122,7 +1133,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 31,
+      'weight' => 32,
     ),
   );
 
@@ -1291,6 +1302,45 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_media_files_syndicat'.
+  $field_instances['node-story-field_story_media_files_syndicat'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 53,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_media_files_syndicat',
+    'label' => 'Media Files',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 24,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_medium_image'.
   $field_instances['node-story-field_story_medium_image'] = array(
     'bundle' => 'story',
@@ -1363,7 +1413,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 32,
+      'weight' => 33,
     ),
   );
 
@@ -1421,7 +1471,7 @@ function features_for_story_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 47,
+        'weight' => 54,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1444,7 +1494,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 26,
     ),
   );
 
@@ -1828,7 +1878,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 33,
+      'weight' => 34,
     ),
   );
 
@@ -1909,7 +1959,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 26,
+      'weight' => 27,
     ),
   );
 
@@ -1957,7 +2007,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 45,
+      'weight' => 46,
     ),
   );
 
@@ -1999,7 +2049,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 44,
+      'weight' => 45,
     ),
   );
 
@@ -2044,7 +2094,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 39,
+      'weight' => 40,
     ),
   );
 
@@ -2086,7 +2136,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 38,
+      'weight' => 39,
     ),
   );
 
@@ -2128,7 +2178,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 36,
+      'weight' => 37,
     ),
   );
 
@@ -2170,7 +2220,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 37,
+      'weight' => 38,
     ),
   );
 
@@ -2213,7 +2263,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 35,
+      'weight' => 36,
     ),
   );
 
@@ -2255,7 +2305,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 29,
+      'weight' => 30,
     ),
   );
 
@@ -2337,6 +2387,7 @@ function features_for_story_field_default_field_instances() {
   t('Magazine Kicker Text');
   t('Magazine headline');
   t('Magazine kicker text');
+  t('Media Files');
   t('Medium image');
   t('New title');
   t('Quotes');
