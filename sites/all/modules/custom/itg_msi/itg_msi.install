@@ -1,0 +1,74 @@
+<?php
+/**
+ * @file
+ * Install functions for the magazine, issue and supplements.
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store file information associated with a node
+ * @return array
+ */
+function itg_msi_schema() {
+  $schema['itg_msi_node_xml'] = array(
+      'description' => 'Table for itg_msi module settings.',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The primary identifier for a table.',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'nid' => array(
+              'description' => 'Node id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'uid' => array(
+              'description' => 'User id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'xml_uid' => array(
+              'description' => 'XML Unique id.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'fid' => array(
+              'description' => 'File unique id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'filename' => array(
+              'description' => 'XML File Name.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'type' => array(
+              'description' => 'Node Type.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  return $schema;
+}
