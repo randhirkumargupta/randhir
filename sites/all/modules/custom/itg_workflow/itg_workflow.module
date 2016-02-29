@@ -57,7 +57,8 @@ function itg_workflow_after_build($form, &$form_state) {
             $submit_name = '';            
             $state_class = ' published';
             drupal_add_js('jQuery(document).ready(function() {
-             jQuery(".form-item-workbench-moderation-state-new").show();                    
+             jQuery(".form-item-workbench-moderation-state-new").show();
+             jQuery("#edit-log").val("");
             });', array('type' => 'inline', 'scope' => 'footer'));
           }      
     }
@@ -128,12 +129,12 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6') {
     $form['state']['#options'] = array('All' => '-All-', 'needs_review' => 'Submitted for Review', 'rejected' => 'Rejected', 'needs_modification' => 'Needs Modification' );
   } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {     
-    $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => '-All-', '<' => 'Published', '>=' => 'Approved');    
+    $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => '-All-', '<' => 'Published', '>=' => 'To Be Live');    
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
   } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {     
-    $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => '-All-', '<' => 'Published', '>=' => 'Approved');    
+    $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => '-All-', '<' => 'Published', '>=' => 'To Be Live');    
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
               jQuery("#edit-field-story-schedule-date-time-value-op").click(function() {                     
@@ -216,24 +217,25 @@ function itg_workflow_node_access($node, $op, $account) {
  * @param type $view_mode
  * @param type $langcode
  */
-function itg_workflow_node_view($node, $view_mode, $langcode) {
-  //p($node);
+function itg_workflow_node_view($node, $view_mode, $langcode) {  
   if ($node->type == 'story') {
     $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
   }
 }
 
 
-//function itg_workflow_views_pre_render(&$view) { 
-//  if ($view->name == 'view_moderation_history') {
-//    // p($view->display['block_1']->display_options['fields']);
-//    $mymsg = 'Low Reolution';
-//    $view->display['block_1']->display_options['fields']['download']['text'] = $mymsg;
-//  }
-//}
-
-
-//function itg_workflow_views_pre_execute(&$view) {
-//  //p($view->build_info);
-//}
+/**
+ * Implements hook_node_validate().
+ * @param type $form
+ * @param type $form
+ * @param type $form   
+ */
+function itg_workflow_node_validate($node, $form, &$form_state) {
+  // Code for check remarks field is empty or not
+  if ($node->type == 'story') {    
+    if (empty($node->log) && (($node->workbench_moderation_state_new == 'needs_modification') || ($node->workbench_moderation_state_new == 'rejected'))) {
+      form_set_error('log', t("Remarks field is required."));
+    }
+  }
+}
 
