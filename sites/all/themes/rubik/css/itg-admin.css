@@ -867,3 +867,4 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 #breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item label{display: none;}
 #breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item .form-text{width: 100%;}
 #breaking-news-node-form .field-name-field-mobile-subscribers{display: none;}
+.page-node .block-content > .close-preview{display: none;}
