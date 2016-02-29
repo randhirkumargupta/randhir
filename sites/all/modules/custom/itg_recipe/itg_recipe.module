@@ -28,6 +28,11 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
 }
+/**
+ * After submit recipe
+ * @param Array $form
+ * @param Array $form_state
+ */
 function itg_recipe_form_custom_callback($form, &$form_state) {
    if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
@@ -37,7 +42,7 @@ function itg_recipe_form_custom_callback($form, &$form_state) {
   } else {
      $op = 'created';
   } 
-  drupal_set_message('Recipe has been created successfully.');
+  drupal_set_message(t('Recipe has been '.$op.' successfully.'));
   $_GET['destination'] = 'recipe-management'; 
 }
 /**
