@@ -126,8 +126,8 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
  * Custom submit callback for redirecting breaking news form.
  */
 function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
-  if (isset($_SESSION['messages'])) {
-    unset($_SESSION['messages']);
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
   }
   
   if(arg(2) == 'edit'){
