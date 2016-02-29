@@ -5,6 +5,7 @@ package = Features
 version = 7.x-1.0
 dependencies[] = conditional_fields
 dependencies[] = feature_category_management
+dependencies[] = field_collection
 dependencies[] = field_collection_fieldset
 dependencies[] = image
 dependencies[] = node
