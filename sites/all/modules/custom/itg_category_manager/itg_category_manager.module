@@ -272,6 +272,18 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['#validate'][] = 'itg_category_manager_term_validate';
       $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
     }
+    // If vocabulary is tgs then add some fields
+    if ($form['#term']['vocabulary_machine_name'] == 'tags') {
+      // Taxonomy active deactive logic
+      $form['term_state'] = array(
+        '#prefix' => '<label>Term State</label>',
+        '#type' => 'checkbox',
+        '#title' => t('Active'),
+        '#weight' => 20,
+        '#default_value' => true,
+        '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
+      );
+    }    
   }
 }
 
