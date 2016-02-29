@@ -44,6 +44,7 @@
   <?php print drupal_render($form['field_story_configurations']); ?>
   <?php print drupal_render($form['field_story_comment_question']); ?>
   <?php print drupal_render($form['field_story_client_title']); ?>
+  <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
   <?php print drupal_render($form['field_story_rating']); ?>
 </div>
 <div id="SocialMedia">
