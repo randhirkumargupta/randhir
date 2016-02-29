@@ -85,7 +85,7 @@ function itg_category_manager_menu() {
  * Implements hook_menu_alter
  * @param type $menu
  */
-function itg_category_manager_menu_alter(&$menu) {
+function itg_category_manager_menu_alter(&$menu) {  
   if (isset($menu['taxonomy/term/%taxonomy_term'])) {
     $menu['taxonomy/term/%taxonomy_term']['page callback'] = 'itg_category_manager_taxonomy_view_page';
     $menu['taxonomy/term/%taxonomy_term']['access callback'] = TRUE;
@@ -730,78 +730,13 @@ function itg_category_manager_views_data() {
  * @param array $form_state array contains submitted form values
  * @param string $form_id name of the form id
  */
-function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'astro_node_form') {
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
-    ); 
-    $form['#validate'][] = 'itg_category_manager_check_count';
-  }
+function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {  
   if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
     $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
     $form['status']['#options'][1] = t('Active');
     $form['status']['#options'][0] = t('Inactive');
     $form['field_cm_select_type_value']['#options']['All'] = t('All');
   }
-}
-
-/**
- * Custom validation for mandotory 12 sunsign.
- * @param type $form
- * @param type $form_state
- */
-function itg_category_manager_check_count($form, &$form_state) {  
-  $count = count($form_state['values']['field_astro_zodiac']['und']);  
-  if (--$count < 12) {
-    form_set_error('field_astro_zodiac', 'Please insert remaining '. (12 - $count) .' sunsign');
-  }
-}
-
-/**
- * Implements hook_field_collection_item_presave().
- * @param FieldCollectionItemEntity $field_collection_item
- */
-function itg_category_manager_field_collection_item_presave(FieldCollectionItemEntity $field_collection_item) {  
-  static $count = 0;  
-  switch ($count) {
-    case 0:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'aries';
-      break;
-    case 1:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'taurus';
-      break;
-    case 2:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'gemini';
-      break;
-    case 3:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'cancer';
-      break;
-    case 4:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'leo';
-      break;
-    case 5:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'virgo';
-      break;
-    case 6:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'libra';
-      break;
-    case 7:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'scorpio';
-      break;
-    case 8:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'sagittarius';
-      break;
-    case 9:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'capricorn';
-      break;
-    case 10:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'aquarius';
-      break;
-    case 11:
-      $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = 'pisces';
-      break;    
-  }
-  ++$count;
 }
 
 /**
