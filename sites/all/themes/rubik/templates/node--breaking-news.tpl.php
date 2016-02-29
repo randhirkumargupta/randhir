@@ -52,21 +52,32 @@
                         <div class="field-items"><?php print $title; ?></div>
                     </div>
                     
-                </div>
-            </div>
+               
 
                     <?php $short_des = render($content['field_label']);
                     ?>
                     <?php if (!empty($short_des)): ?>
-            <div class="content-node-view">
+            <!--<div class="content-node-view">-->
                     <?php
                     if (!empty($short_des)):
                     print render($content['field_label']);
                     ?>
                     <?php endif; ?>
                     
-            </div>
+            <!--</div>-->
                 <?php endif; ?>
+            <div class="field">
+              <?php
+              $type=$node->field_type[LANGUAGE_NONE][0]['value'];
+              if($type == 'Live Blog') {
+             print '<div class="field-label">Section</div>';     
+ foreach ($node->field_section[LANGUAGE_NONE] as $value) {
+  print '<div class="field-item even">'.$value[taxonomy_term]->name.'</div>';
+}
+                 } ?>
+                 </div>
+             </div>
+            </div>
         
         <?php
                     $display_on = render($content['field_display_on']);
@@ -77,6 +88,7 @@
                   <?php if($cnd != '') { ?>
                   <h2>Display on</h2>
                   <?php } ?>
+                  <div class="content-details">
                     <?php
                   
                     if ($cnd == 'Home Page' ) {
@@ -88,17 +100,11 @@
               
                       
               ?>
+                  </div>
               </div>
               <?php endif; ?>
-        
-              <?php
-              $type=$node->field_type[LANGUAGE_NONE][0]['value'];
-              if($type == 'Live Blog') {
-             print '<strong>Section</strong>';     
- foreach ($node->field_section[LANGUAGE_NONE] as $value) {
-  print '<div class="field-item even">'.$value[taxonomy_term]->name.'</div>';
-}
-                 } 
+              
+                 <?php
               $keywords = render($content['field_keywords']);
   
                   if (!empty($keywords)):
