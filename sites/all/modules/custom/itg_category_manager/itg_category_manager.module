@@ -575,7 +575,7 @@ function itg_category_manager_get_mail_content($entity) {
  * Insert row to itg_category_manager at the time of term creation.
  */
 function itg_category_manager_taxonomy_term_insert($term) {
-  global $user;
+  global $user;  
   $data = array(
     'tid' => $term->tid,
     'uid' => $user->uid,
@@ -590,6 +590,9 @@ function itg_category_manager_taxonomy_term_insert($term) {
     'uid' => $user->uid,
     'changed' => time(),
   );
+  if ($term->path['alias'] != NULL) {
+    $data['sef_url'] = $term->path['alias'];
+  }
   drupal_write_record('itg_sef_url', $data);
 }
 
@@ -622,7 +625,7 @@ function itg_category_manager_taxonomy_term_presave($term) {
  * Implements hook_pathauto_alias_alter().
  * Insert url aias to itg-category_manager table against specific term id.
  */
-function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
+function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {  
   if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert') {
     db_update('itg_sef_url')
         ->fields(array('sef_url' => $alias))

@@ -54,7 +54,6 @@ function itg_recipe_after_build($form, &$form_state) {
  * @param Object $view
  */
 function itg_recipe_views_pre_render(&$view) {
-
   //Add "Create recipe" button on listing page of recipe
   if ($view->name == "recipe_management") {
     $header_content_recipe = '<a href="./node/add/recipe">Create Recipe</a>';
@@ -112,6 +111,17 @@ function itg_recipe_block_view($delta = '') {
       $block['content'] = theme('recipe_tab_form_display_block', array('data' => $data));
       break;
   }
-
   return $block;
+}
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_recipe_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
+  if ($form["#id"] == 'views-exposed-form-recipe-management-page') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/recipe/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
 }
