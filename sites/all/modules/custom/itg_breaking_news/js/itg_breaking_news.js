@@ -95,7 +95,7 @@
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: false});
     }
   });
-
+  $('#edit-field-section > .form-type-select > label').append('<span class="form-required">*</span>');
 
 
     }
