@@ -175,8 +175,7 @@ function feature_for_recipe_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_recipe';
   $strongarm->value = array(
-    0 => 'moderation',
-    1 => 'revision',
+    0 => 'status',
   );
   $export['node_options_recipe'] = $strongarm;
 
