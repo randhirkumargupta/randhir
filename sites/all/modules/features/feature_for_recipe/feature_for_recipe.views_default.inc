@@ -323,42 +323,6 @@ function feature_for_recipe_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Content type (field_recipe_content_type) */
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['id'] = 'field_recipe_content_type_value';
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['table'] = 'field_data_field_recipe_content_type';
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['field'] = 'field_recipe_content_type_value';
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['value'] = array(
-    'Text' => 'Text',
-    'Audio' => 'Audio',
-    'Video' => 'Video',
-  );
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['operator_id'] = 'field_recipe_content_type_value_op';
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['label'] = 'Content type';
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['operator'] = 'field_recipe_content_type_value_op';
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['identifier'] = 'field_recipe_content_type_value';
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['required'] = TRUE;
-  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    10 => 0,
-    19 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-  );
   /* Filter criterion: Content: Select Section (field_recipe_section) */
   $handler->display->display_options['filters']['field_recipe_section_tid']['id'] = 'field_recipe_section_tid';
   $handler->display->display_options['filters']['field_recipe_section_tid']['table'] = 'field_data_field_recipe_section';
@@ -392,6 +356,36 @@ function feature_for_recipe_views_default_views() {
   );
   $handler->display->display_options['filters']['field_recipe_section_tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['field_recipe_section_tid']['hierarchy'] = 1;
+  /* Filter criterion: Content: Content type (field_recipe_content_type) */
+  $handler->display->display_options['filters']['field_recipe_content_type_value']['id'] = 'field_recipe_content_type_value';
+  $handler->display->display_options['filters']['field_recipe_content_type_value']['table'] = 'field_data_field_recipe_content_type';
+  $handler->display->display_options['filters']['field_recipe_content_type_value']['field'] = 'field_recipe_content_type_value';
+  $handler->display->display_options['filters']['field_recipe_content_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['operator_id'] = 'field_recipe_content_type_value_op';
+  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['label'] = 'Content type';
+  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['operator'] = 'field_recipe_content_type_value_op';
+  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['identifier'] = 'field_recipe_content_type_value';
+  $handler->display->display_options['filters']['field_recipe_content_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    12 => 0,
+    5 => 0,
+    11 => 0,
+    13 => 0,
+    15 => 0,
+    14 => 0,
+    6 => 0,
+    7 => 0,
+    16 => 0,
+    17 => 0,
+    18 => 0,
+    20 => 0,
+    19 => 0,
+    10 => 0,
+    9 => 0,
+  );
   $handler->display->display_options['path'] = 'recipe-management';
   $export['recipe_management'] = $view;
 
