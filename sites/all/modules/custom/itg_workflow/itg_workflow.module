@@ -198,17 +198,19 @@ function itg_workflow_query_alter(QueryAlterableInterface $query) {
  * @param type $account
  */
 function itg_workflow_node_access($node, $op, $account) {
-    
-    if (isset($node->type) && $node->type == 'story' && $op == 'update'){
-      $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
-      $current_time = time();
-        if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected'))
-            return NODE_ACCESS_DENY;
-        else if ($story_expiry_date < $current_time)
-            return NODE_ACCESS_DENY;
-    }
-    
-    return NODE_ACCESS_IGNORE;
+  
+ $arr_source_type = array('issue', 'supplement');
+ 
+  if (isset($node->type) && $node->type == 'story' && $op == 'update' && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type)) {
+    $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+    $current_time = time();
+    if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected'))
+      return NODE_ACCESS_DENY;
+    else if (($story_expiry_date < $current_time) && (arg(0) != 'issue-listing'))
+      return NODE_ACCESS_DENY;
+  }
+
+  return NODE_ACCESS_IGNORE;
 }
 
 /**

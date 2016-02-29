@@ -26,11 +26,11 @@ function feature_for_breaking_news_views_api($module = NULL, $api = NULL) {
 function feature_for_breaking_news_node_info() {
   $items = array(
     'breaking_news' => array(
-      'name' => t('Breaking News'),
+      'name' => t('Breaking News Live Blog'),
       'base' => 'node_content',
-      'description' => t('Breaking News'),
+      'description' => t('Breaking News Live Blog'),
       'has_title' => '1',
-      'title_label' => t('News Title 1'),
+      'title_label' => t('Breaking Text'),
       'help' => '',
     ),
   );

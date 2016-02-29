@@ -12,8 +12,6 @@
   <h2 class="story-title">Gallery Basic details</h2>
   <?php print drupal_render($form['title']); ?>
   <?php print drupal_render($form['field_gallery_kicer']); ?>
-  <?php print drupal_render($form['field_headline']); ?>
-  <?php print drupal_render($form['field_photogallery_description']); ?>
   <!--<div class="description">This title shows on the section page</div> -->
 </div>
 <div id="BrowseMedia">
@@ -35,7 +33,6 @@
   <?php print drupal_render($form['field_common_audio_file']); ?>
   <?php print drupal_render($form['field_credit_to_all']); ?>
   <?php print drupal_render($form['field_credit_name']); ?>
-  <?php print drupal_render($form['field_photo_byline']);?>
   <?php print drupal_render($form['field_photo_by']);?>
   <?php print drupal_render($form['field_gallery_image']); ?>
 
@@ -43,7 +40,6 @@
 <div id="Configuration">
   <h2 class="story-title">Configuration</h2>
   <?php print drupal_render($form['field_featured']); ?>
-  <?php print drupal_render($form['field_syndication_']); ?>
   <?php print drupal_render($form['field_p_client_title']); ?>
 </div>
 <div id="Categorization">

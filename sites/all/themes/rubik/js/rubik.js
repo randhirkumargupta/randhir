@@ -150,7 +150,12 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // jQuery code to change text URL alias to Sef URL
   var urlTxt = $('.form-item-path-alias label').text();
   if(urlTxt == 'URL alias '){
-    $('.form-item-path-alias label').html('Sef URL');
+    $('.form-item-path-alias label').html('SEF URL');
+  }
+  
+  var urlTxt = $('.form-item-path-pathauto label').text();  
+  if(urlTxt == 'Generate automatic URL alias '){
+    $('.form-item-path-pathauto label').html('Generate automatic SEF URL');
   }
 //  $('.path-form #edit-path-pathauto').attr('checked', false);
   if($('.path-form #edit-path-pathauto').is(':checked') == false){
@@ -201,6 +206,12 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     slideshowSpeed: 3000,
     controlNav: false
   });
+  
+  // jQuery code to hide select option whenever user hover on ITGCMS navbar
+  $('#block-menu-menu-admin-left-menu').mouseover(function(){
+    $('select').blur();
+  });
+  
   
   
 

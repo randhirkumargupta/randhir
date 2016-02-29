@@ -35,10 +35,11 @@
  * @ingroup themeable
  */
 ?>
+<h3>Preview full version</h3>
+<a class="close-preview" href="javascript:;"> </a>
 <div class="cm-node-view">
   <div class="field-div"><div class="field-label">Supplement Title: </div><div class="field-item"><?php print $title; ?></div></div>
   <div class="field-div"><div class="field-label">Magazine: </div><div class="field-item"><?php print $node->field_supp_select_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
-  <div class="field-div"><div class="field-label">Supplement Large Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_supp_large_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
-  <div class="field-div"><div class="field-label">Supplement Small Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_supp_small_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
+  <div class="field-div"><div class="field-label">Issue: </div><div class="field-item"><?php print date('m/d/Y', strtotime($node->field_supp_issue[LANGUAGE_NONE][0]['value'])); ?></div></div>
   <div class="field-div"><div class="field-label">Status: </div><div class="field-item"><?php print $status ? 'Published' : 'Unpublished';?></div></div>
 </div>

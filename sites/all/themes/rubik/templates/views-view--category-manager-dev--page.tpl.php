@@ -44,17 +44,19 @@
       <?php print $exposed; ?>
     </div>
   <?php endif; ?>
-    <ul class="action-links">
-      <li><?php print l('Add Category', 'admin/structure/taxonomy/category_management/add'); ?></li>
-    </ul>
+    <div class="attachment attachment-before">
+      <?php print l('Add Category', 'admin/structure/taxonomy/category_management/add'); ?>
+    </div>
   
-  <ul>
-      <li>Category Name</li>
-      <li>Created Date</li>
-      <li>Last Modified Date</li>
-      <li>Status</li>
-      <li>Action</li>
-  </ul>
+  <div class="category-manager-thead">
+      <div class="cmt-title">Category Name</div>
+      <div class="cmt-details">
+      <span>Created Date</span>
+      <span>Modified Date</span>
+      <span>Status</span>
+      <span>Action</span>
+      </div>
+  </div>
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
       <?php print $attachment_before; ?>
