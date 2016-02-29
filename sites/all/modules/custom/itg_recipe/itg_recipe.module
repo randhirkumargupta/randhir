@@ -24,10 +24,27 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 20,
       );
       $form['#after_build'][] = 'itg_recipe_after_build';
+      $form['actions']['submit']['#submit'][] = 'itg_recipe_form_custom_callback';
       break;
   }
 }
-
+/**
+ * After submit recipe
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_recipe_form_custom_callback($form, &$form_state) {
+   if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+   if(arg(2) == 'edit'){
+    $op = 'updated';
+  } else {
+     $op = 'created';
+  } 
+  drupal_set_message(t('Recipe has been '.$op.' successfully.'));
+  $_GET['destination'] = 'recipe-management'; 
+}
 /**
  * After build for Recipe form.
  * @param Array $form

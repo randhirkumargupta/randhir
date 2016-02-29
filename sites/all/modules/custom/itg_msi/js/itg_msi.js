@@ -32,7 +32,7 @@
       
       //Check duplicacy on title for magazine
       $('#magazine-node-form #edit-title, #supplement-node-form #edit-title').blur(function() {
-        $(".form-item-title .error").remove();
+        $(".form-item-title .error").html('');
         var title = $('#edit-title').val();
         var trimmed_title = $.trim(title);
         
@@ -49,7 +49,7 @@
               //$("#edit-submit").prop('disabled', true);
             }
             else {
-              $(".form-item-title .error").remove();
+              $(".form-item-title .error").html('');
               //$("#edit-submit").prop('disabled', false);
             }
           }

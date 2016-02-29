@@ -302,6 +302,7 @@ function itg_common_theme($existing, $type, $theme, $path) {
 /**
  * Helper function to populate the second dropdown.
  * @param type $id
+ * @return $data
  */
 function itg_common_dropdown_supplement($id = '') {
  
@@ -318,7 +319,7 @@ function itg_common_dropdown_supplement($id = '') {
   while ($record = $result->fetchAssoc()) {
     $data[$record['entity_id']] = $record['title'];
   }
-  //p($data);
+  
   //If record found, then return array else return blank
   if (empty($data)) {
       $data = array('_none' => '-Select-');
@@ -327,6 +328,7 @@ function itg_common_dropdown_supplement($id = '') {
   return $data;
 
 }
+
 
 /**
  * Implement hook_user_login
@@ -338,6 +340,7 @@ function itg_common_user_login(&$edit, $account) {
     $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
   }
 }
+
 
 /**
  * after build function for altering field collection label.
