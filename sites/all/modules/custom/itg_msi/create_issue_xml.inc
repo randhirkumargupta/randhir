@@ -7,7 +7,7 @@
  */
 
 function _create_issue_using_xmlfile($node, $op) {
-
+  
   //Add check for supplement and issue
   if ($node->type == 'supplement') {
     $magazine = $node->field_supp_select_magazine[LANGUAGE_NONE][0]['target_id'];
@@ -172,7 +172,12 @@ function _create_issue_process($fid, $node_info) {
       
     } // Close else condition
   } else {
-    drupal_set_message(t($xml_file->filename . ' is a invalid XML file! Please edit issue <strong>' . $node_info['source_title'] . '</strong> and try with another XML file.'), 'error');
+    if($node_info['source_type'] == 'supplement'){
+      drupal_set_message(t($xml_file->filename . ' is a invalid XML file! Please edit supplement <strong>' . $node_info['source_title'] . '</strong> and try with another XML file.'), 'error');
+    } else {
+      drupal_set_message(t($xml_file->filename . ' is a invalid XML file! Please edit issue <strong>' . date('m/d/Y', strtotime($node_info['source_title'])) . '</strong> and try with another XML file.'), 'error');
+    }
+    
   }
 }
 
