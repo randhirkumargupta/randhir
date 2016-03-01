@@ -85,6 +85,7 @@
       
       
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').siblings().find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: true});
+      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').find('.collapsed .fieldset-legend a').css('background-color', '#bcf2fc');
   $('body').on('change', '.field-name-field-mark-as-breaking-band .form-checkbox', function () {
     var el_check = $(this).is(':checked');
     if(el_check == true){
@@ -95,7 +96,7 @@
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: false});
     }
   });
-  $('#edit-field-section > .form-type-select > label').append('<span class="form-required">*</span>');
+  $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
 
 
     }
