@@ -10,6 +10,43 @@
 function feature_for_recipe_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance:
+  // 'field_collection_item-field_recipe_ingredient-field_recipe_ingredients'.
+  $field_instances['field_collection_item-field_recipe_ingredient-field_recipe_ingredients'] = array(
+    'bundle' => 'field_recipe_ingredient',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_recipe_ingredients',
+    'label' => 'Ingredients',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'node-recipe-field_recipe_ailment'.
   $field_instances['node-recipe-field_recipe_ailment'] = array(
     'bundle' => 'recipe',
@@ -21,7 +58,7 @@ function feature_for_recipe_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 13,
       ),
       'teaser' => array(
@@ -45,7 +82,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 54,
+      'weight' => 17,
     ),
   );
 
@@ -133,7 +170,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 52,
+      'weight' => 15,
     ),
   );
 
@@ -148,7 +185,7 @@ function feature_for_recipe_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 10,
       ),
       'teaser' => array(
@@ -172,7 +209,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 51,
+      'weight' => 14,
     ),
   );
 
@@ -187,7 +224,7 @@ function feature_for_recipe_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 23,
       ),
       'teaser' => array(
@@ -256,7 +293,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 63,
+      'weight' => 26,
     ),
   );
 
@@ -356,7 +393,7 @@ function feature_for_recipe_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 8,
       ),
       'teaser' => array(
@@ -380,7 +417,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 49,
+      'weight' => 12,
     ),
   );
 
@@ -389,7 +426,7 @@ function feature_for_recipe_field_default_field_instances() {
     'bundle' => 'recipe',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter Description / Procedure.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -422,7 +459,7 @@ function feature_for_recipe_field_default_field_instances() {
         'rows' => 20,
       ),
       'type' => 'text_textarea',
-      'weight' => 48,
+      'weight' => 11,
     ),
   );
 
@@ -437,7 +474,7 @@ function feature_for_recipe_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 15,
       ),
       'teaser' => array(
@@ -461,22 +498,24 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 56,
+      'weight' => 19,
     ),
   );
 
-  // Exported field_instance: 'node-recipe-field_recipe_ingredients'.
-  $field_instances['node-recipe-field_recipe_ingredients'] = array(
+  // Exported field_instance: 'node-recipe-field_recipe_ingredient'.
+  $field_instances['node-recipe-field_recipe_ingredient'] = array(
     'bundle' => 'recipe',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add multiple ingredients one by one.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
         'weight' => 16,
       ),
       'teaser' => array(
@@ -488,22 +527,25 @@ function feature_for_recipe_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_recipe_ingredients',
+    'field_name' => 'field_recipe_ingredient',
     'label' => 'Ingredients',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'text',
+      'active' => 0,
+      'module' => 'field_collection',
       'settings' => array(
-        'size' => 60,
+        'collapsed' => FALSE,
+        'field_as_label' => array(),
+        'last_item_collapsed' => FALSE,
+        'new_item_open' => FALSE,
+        'replace_label' => FALSE,
       ),
-      'type' => 'text_textfield',
-      'weight' => 58,
+      'type' => 'field_collection_embed',
+      'weight' => 20,
     ),
   );
 
@@ -602,7 +644,7 @@ function feature_for_recipe_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 9,
       ),
       'teaser' => array(
@@ -626,7 +668,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 50,
+      'weight' => 13,
     ),
   );
 
@@ -641,7 +683,7 @@ function feature_for_recipe_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 14,
       ),
       'teaser' => array(
@@ -665,7 +707,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 55,
+      'weight' => 18,
     ),
   );
 
@@ -741,7 +783,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 59,
+      'weight' => 22,
     ),
   );
 
@@ -817,7 +859,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 61,
+      'weight' => 24,
     ),
   );
 
@@ -832,7 +874,7 @@ function feature_for_recipe_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 24,
       ),
       'teaser' => array(
@@ -856,7 +898,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 64,
+      'weight' => 27,
     ),
   );
 
@@ -932,7 +974,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 60,
+      'weight' => 23,
     ),
   );
 
@@ -1013,7 +1055,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 62,
+      'weight' => 25,
     ),
   );
 
@@ -1028,7 +1070,7 @@ function feature_for_recipe_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 12,
       ),
       'teaser' => array(
@@ -1052,7 +1094,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 53,
+      'weight' => 16,
     ),
   );
 
@@ -1128,7 +1170,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 58,
+      'weight' => 21,
     ),
   );
 
@@ -1322,13 +1364,11 @@ function feature_for_recipe_field_default_field_instances() {
   t('Meal type');
   t('Medium image');
   t('Mobile image');
-  t('Please add multiple ingredients one by one.');
   t('Please enter Byline.');
   t('Please enter Calorie Count, Numeric value will be entered.
 ');
   t('Please enter City');
   t('Please enter Courtesy');
-  t('Please enter Description / Procedure.');
   t('Please enter Kicker headline.');
   t('Please enter Long headline.');
   t('Please enter Strap headline (Short Headline).');

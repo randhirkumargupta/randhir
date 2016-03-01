@@ -29,20 +29,14 @@ function feature_for_recipe_user_default_permissions() {
   // Exported permission: 'delete any recipe content'.
   $permissions['delete any recipe content'] = array(
     'name' => 'delete any recipe content',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own recipe content'.
   $permissions['delete own recipe content'] = array(
     'name' => 'delete own recipe content',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
