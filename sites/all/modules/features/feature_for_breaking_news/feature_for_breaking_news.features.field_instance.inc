@@ -49,7 +49,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['field_collection_item-field_breaking_content_details-field_breaking_publish_time'] = array(
     'bundle' => 'field_breaking_content_details',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Publish time should be 24 hr format',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1023,6 +1023,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Mobile Subscribers');
   t('Notification ');
   t('Publish Time');
+  t('Publish time should be 24 hr format');
   t('Redirection url');
   t('Section');
   t('Short Description');
