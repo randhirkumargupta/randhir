@@ -13,7 +13,7 @@
   <?php print drupal_render($form['field_type']); ?>
    <?php print drupal_render($form['field_content_type']); ?>
   <?php print drupal_render($form['title']); ?>
-         </div>
+           </div>
 
 <div id="ContentDetails">
     <?php print drupal_render($form['field_breaking_content_details']); ?>
@@ -39,9 +39,8 @@
   <?php print drupal_render($form['field_story_extra_small_image']); ?>
 </div>
 
-<div id="Tags">
-  <?php print drupal_render($form['field_keywords']); ?>
-               </div>
+
 <h2 id="title-metatags" class="story-title">Meta Tags</h2>
+<?php print drupal_render($form['field_keywords']); ?>
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
