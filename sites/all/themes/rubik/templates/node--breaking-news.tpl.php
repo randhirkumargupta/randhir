@@ -70,10 +70,13 @@
               <?php
               $type=$node->field_type[LANGUAGE_NONE][0]['value'];
               if($type == 'Live Blog') {
-             print '<div class="field-label">Section</div>';     
+                 
+             print '<div class="field-label">Section</div>';  
+             print '<div class="field-items">';
  foreach ($node->field_section[LANGUAGE_NONE] as $value) {
-  print '<div class="field-item even">'.$value[taxonomy_term]->name.'</div>';
+ print '<div>'.$value[taxonomy_term]->name.'</div>';
 }
+print '</div>';
                  } ?>
                 <?php
               $keywords = render($content['field_keywords']);
