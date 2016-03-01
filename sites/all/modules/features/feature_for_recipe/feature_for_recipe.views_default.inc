@@ -153,12 +153,15 @@ function feature_for_recipe_views_default_views() {
     'counter' => 'counter',
     'title' => 'title',
     'created' => 'created',
+    'changed' => 'changed',
+    'field_recipe_content_type' => 'field_recipe_content_type',
+    'field_recipe_section' => 'field_recipe_section',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
   );
-  $handler->display->display_options['style_options']['default'] = 'created';
+  $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
     'counter' => array(
       'align' => '',
@@ -175,6 +178,25 @@ function feature_for_recipe_views_default_views() {
     'created' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_recipe_content_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_recipe_section' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -232,9 +254,23 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Created Date';
-  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['created']['timezone'] = 'Asia/Kolkata';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
+  /* Field: Content: Content type */
+  $handler->display->display_options['fields']['field_recipe_content_type']['id'] = 'field_recipe_content_type';
+  $handler->display->display_options['fields']['field_recipe_content_type']['table'] = 'field_data_field_recipe_content_type';
+  $handler->display->display_options['fields']['field_recipe_content_type']['field'] = 'field_recipe_content_type';
   /* Field: Content: Select Section */
   $handler->display->display_options['fields']['field_recipe_section']['id'] = 'field_recipe_section';
   $handler->display->display_options['fields']['field_recipe_section']['table'] = 'field_data_field_recipe_section';
