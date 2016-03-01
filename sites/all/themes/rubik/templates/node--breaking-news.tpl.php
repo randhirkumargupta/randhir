@@ -75,6 +75,15 @@
   print '<div class="field-item even">'.$value[taxonomy_term]->name.'</div>';
 }
                  } ?>
+                <?php
+              $keywords = render($content['field_keywords']);
+  
+                  if (!empty($keywords)):
+              ?>
+              <div class="display content-box">
+              <?php print render($content['field_keywords']); ?>
+              </div>
+              <?php endif; ?>
                  </div>
              </div>
             </div>
@@ -104,24 +113,12 @@
               </div>
               <?php endif; ?>
               
-                 <?php
-              $keywords = render($content['field_keywords']);
-  
-                  if (!empty($keywords)):
-              ?>
-              <div class="display content-box">
-              <?php print render($content['field_keywords']); ?>
-              </div>
-              <?php endif; ?>
+                 
         <?php 
-            $browsemediaextra = render($content['field_story_extra_large_image']);
-            $browsemedialarge = render($content['field_story_large_image']);
-            $browsemediamedium = render($content['field_story_medium_image']);
-            $browsemediasmall = render($content['field_story_small_image']);
-            $browsemediaextrasmall = render($content['field_story_extra_small_image']);
-            if(!empty($browsemedia) || !empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediaextrasmall)):?>
+            $browsemedia = render($content['field_story_extra_large_image']);  
+            if(!empty($browsemedia)):?>
           <div class="content-node-view">
-            <h2>Browse Media</h2>
+            <h2>BrowseMedia</h2>
             <div class="content-details">
             <?php print render($content['field_story_extra_large_image']); ?>
             <?php print render($content['field_story_large_image']); ?>

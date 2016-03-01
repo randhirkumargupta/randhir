@@ -11,9 +11,6 @@
 <span class="target-link" data-target-id="ContentDetails">Content Details</span>
 <span class="target-link" data-target-id="Shortdescriptions">Short description</span>
 <span class="target-link" data-target-id="DisplayOn">Display on</span>
-
 <span class="target-link" data-target-id="BrowseMedia">Browse Media</span>
-
-<span class="target-link" data-target-id="Tags">Tags</span>
 <span class="target-link" data-target-id="title-metatags">Meta Details</span>
 </div>
