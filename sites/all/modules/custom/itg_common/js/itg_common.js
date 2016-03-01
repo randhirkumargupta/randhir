@@ -62,12 +62,19 @@
       $("#edit-field-numerology-und-1").click(function() {
         $('#edit-field-astro-numerology-values').css('display', 'block');
         $('#edit-field-astro-frequency2').css('display', 'block');
+        $('#edit-field-astro-frequency2 label:first').html('Select Frequency<span class="form-required" title="This field is required."> *</span>');
       });
       $("#edit-field-numerology-und-0").click(function() {
         $('#edit-field-astro-numerology-values').css('display', 'none');
         $('#edit-field-astro-frequency2').css('display', 'none');
       });
-      
+      var num = $('input[name="field_numerology[und]"]:checked').val();
+      if (num == 1) {
+        $('#edit-field-astro-numerology-values').css('display', 'block');
+        $('#edit-field-astro-frequency2').css('display', 'block');
+        $('#edit-field-astro-frequency2 label:first').html('Select Frequency<span class="form-required" title="This field is required."> *</span>');
+      }
+       
       
 
     }
