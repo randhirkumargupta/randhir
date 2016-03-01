@@ -876,8 +876,13 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .page-node-add-breaking-news .field-collection-view-links,
 .node-type-breaking-news .field-collection-view-links,
 .node-type-breaking-news .action-links,
+.block-content > .node-breaking-news .field-name-field-breaking-content-details > .field-label,
 .node-type-breaking-news .tabledrag-toggle-weight-wrapper{display: none;}
 .node-recipe-form .vertical-tabs{padding: 10px 0 0 10px;}
 .field-name-field-recipe-description .form-item span.error, 
 .field-name-field-recipe-ingredients .form-item span.error{padding-left: 0;}
 .node-recipe-form div.description{left: 400px !important;}
+.field-name-field-breaking-tile .form-item span.error{padding-left: 0;}
+.form-item .description{left: 400px;}
+.field-name-field-breaking-content-details .field-collection-view{border-bottom: 1px dashed #ddd;margin: 0;} 
+.block-content > .node-breaking-news .content-node-view .field-name-field-breaking-content-details > .field-items{width: 100%;}
