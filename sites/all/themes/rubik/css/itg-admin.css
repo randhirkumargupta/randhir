@@ -864,12 +864,20 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-breaking_news-form .field-name-field-breaking-publish-time .fieldset.titled > .fieldset-content{padding: 0;}
 .node-breaking_news-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content{float: left; width: 300px;}
 .node-breaking_news-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item{margin: 0;}
-.node-breaking_news-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item label{display: none;}
 .node-breaking_news-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item .form-text{width: 100%;}
 .node-breaking_news-form .field-name-field-mobile-subscribers{display: none;}
-.page-node .block-content > .close-preview{display: none;}
+.page-node .block-content > .close-preview, 
+.preview-wrapper .node-content .field.field-name-field-breaking-content-details > .field-label,
+.field-name-field-recipe-ingredients td .form-item > label,
 .preview .action-links{display: none;}
-.preview-wrapper .node-content .field.field-name-field-breaking-content-details > .field-label{display: none;}
 .preview-wrapper .node-content .field.field-name-field-breaking-content-details > .field-items{width: 100%;}
 .page-node-add-breaking-news .tabledrag-toggle-weight-wrapper, 
+.node-breaking_news-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item label,
+.page-node-add-breaking-news .field-collection-view-links,
+.node-type-breaking-news .field-collection-view-links,
+.node-type-breaking-news .action-links,
 .node-type-breaking-news .tabledrag-toggle-weight-wrapper{display: none;}
+.node-recipe-form .vertical-tabs{padding: 10px 0 0 10px;}
+.field-name-field-recipe-description .form-item span.error, 
+.field-name-field-recipe-ingredients .form-item span.error{padding-left: 0;}
+.node-recipe-form div.description{left: 400px !important;}
