@@ -73,6 +73,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = 'itg_common_validate_astro';
     $form['#after_build'][] = 'itg_common_astro_after_build'; 
     unset($form['field_numerology']['und']['#options']['_none']);
+    unset($form['field_astro_frequency2']['und']['#options']['_none']);
   }
   if ($form_id == 'user_profile_form') {
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
@@ -404,8 +405,7 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
  * @param FieldCollectionItemEntity $field_collection_item
  */
 function itg_common_field_collection_item_presave(FieldCollectionItemEntity $field_collection_item) {    
-  static $count = 0;
-  dpm($field_collection_item);
+  static $count = 0;  
   if ($field_collection_item->field_name == 'field_astro_zodiac') {
     $name = itg_common_sunsign_name($count);
     $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = strtolower($name);    
@@ -424,5 +424,15 @@ function itg_common_validate_astro($form, &$form_state) {
       $name = itg_common_sunsign_name($i);
       form_set_error('field_astro_thumb_icon', $name.' Thumbnail Icon is required.');
     }
+  }
+  // check manadotory field  
+  if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_frequency2']['und'][0]['value'] == NULL) {
+    form_set_error('field_astro_frequency2', 'Please choose frequency.');
+  }
+  if ($form_state['values']['field_astro_numerology_values']['und'][0]['field_story_source_id']['und'][0]['value'] == '') {
+    form_set_error('field_story_source_id', 'Please enter number.');
+  }
+  if ($form_state['values']['field_astro_numerology_values']['und'][0]['field_buzz_description']['und'][0]['value'] == '') {
+    form_set_error('field_story_source_id', 'Please enter description.');
   }
 }
