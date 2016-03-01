@@ -59,6 +59,7 @@ features[variable][] = menu_parent_astro
 features[variable][] = node_options_astro
 features[variable][] = node_preview_astro
 features[variable][] = node_submitted_astro
+features[views_view][] = manage_astroo
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][date] = date
 features_exclude[dependencies][features] = features
