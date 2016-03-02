@@ -74,7 +74,54 @@
         $("#edit-field-astro-numerology-values-und-0-field-buzz-description label:first").html('Enter Text<span class="form-required" title="This field is required."> *</span>');
       }
        
-      
+  // jQuery code for user registeration form
+  var userSelect = $('select[name="selected"]');
+  function userRegisterEdit(v){
+    var value = $(v).val();
+    var markexpert = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
+    if(value == "22"){
+      $('.field-name-field-user-section').show();
+    } else if(value == "5" || value == "6" || value == "20"){
+      $('.field-name-field-mark-as-expert').show();
+      if(markexpert == true){
+        $('.field-name-field-user-section').show();
+      }
+      else{
+        $('.field-name-field-user-section').hide();
+      }
+    } 
+  }
+  userRegisterEdit(userSelect);
+  
+  $('#user-register-form, #user-profile-form').on('change', 'select[name="selected"]', function(){
+    var value = $(this).val();
+    $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
+    if(value == "22"){
+      $('.field-name-field-user-section').show();
+      $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
+      $('.field-name-field-mark-as-expert').hide();
+    } else if(value == "5" || value == "6" || value == "20"){
+      $('.field-name-field-user-section').hide();
+      $('.field-name-field-user-section').find('select').val("_none");
+      $('.field-name-field-mark-as-expert').show();
+    } else{
+      $('.field-name-field-user-section').find('select').val("_none");
+      $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
+      $('.field-name-field-user-section').hide();
+      $('.field-name-field-mark-as-expert').hide();
+    }
+  });
+  
+  $('.field-name-field-mark-as-expert').on('change', '.form-checkbox', function(){
+    var check = $(this).is(':checked');
+    if(check == true){
+      $('.field-name-field-user-section').show();
+    }
+    else{
+      $('.field-name-field-user-section').hide();
+      $('.field-name-field-user-section').find('select').val("_none");
+    }
+  });
 
     }
 

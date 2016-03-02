@@ -69,7 +69,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
       drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
-    ); 
+    );
     $form['#action'] = '?destination=manage-astro';
     $form['actions']['submit']['#submit'][] = 'itg_common_change_message';
     $form['#validate'][] = 'itg_common_validate_astro';
@@ -77,6 +77,14 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     unset($form['field_numerology']['und']['#options']['_none']);
     unset($form['field_astro_frequency2']['und']['#options']['_none']);
   }
+  
+  // condition for user register and profile form
+     if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
+      drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
+    );
+     }
   if ($form_id == 'user_profile_form') {
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#attributes']['disabled'] = 'disabled';
@@ -167,6 +175,29 @@ function itg_common_validate_user_register_validate(&$form, &$form_state) {
       form_set_error('pass', t('Password must be minimum 8 digit alphanumeric and without space.'));
     }
   }
+  
+  // get section value
+  $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
+  if ($form_state['values']['selected'] == '22') {
+    if (empty($section[0]['tid'])) {
+    form_set_error('field_user_section', t("Section Field is required!"));
+    }
+  }
+  
+  if ($form_state['values']['selected'] == '5' || $form_state['values']['selected'] == '20' || $form_state['values']['selected'] == '6') {
+     //pr($form);
+    
+    $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
+    
+    if (empty($mark_expert)) {
+    form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
+    }
+    if (!empty($mark_expert) && empty($section[0]['tid'])) {
+    form_set_error('field_user_section', t("Section Field is required!"));
+    }
+  }
+
+
 }
 
 /**
@@ -192,6 +223,27 @@ function itg_common_validate_user_profile_validate(&$form, &$form_state) {
       form_set_error('pass', t('Password must be minimum 8 digit alphanumeric and without space.'));
     }
   }
+  // get section value
+  $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
+  if ($form_state['values']['selected'] == '21') {
+    if (empty($section[0]['tid'])) {
+    form_set_error('field_user_section', t("Section Field is required!"));
+    }
+  }
+  
+  if ($form_state['values']['selected'] == '5' || $form_state['values']['selected'] == '20' || $form_state['values']['selected'] == '6') {
+     //pr($form);
+    
+    $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
+    
+    if (empty($mark_expert)) {
+    form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
+    }
+    if (!empty($mark_expert) && empty($section[0]['tid'])) {
+    form_set_error('field_user_section', t("Section Field is required!"));
+    }
+  }
+
 }
 /**
  * Password validation for minimum or maximum 8 char 
