@@ -33,7 +33,7 @@
   <?php print drupal_render($form['field_recipe_ailment']); ?>
   <?php print drupal_render($form['field_recipe_meal_type']); ?>
   <?php print drupal_render($form['field_recipe_festivals']); ?>
-  <?php print drupal_render($form['field_recipe_ingredients']); ?>
+  <?php print drupal_render($form['field_recipe_ingredient']); ?>
 </div>
 <div id="RecipeImages">
   <h2 class="story-title">Recipe Images</h2>
