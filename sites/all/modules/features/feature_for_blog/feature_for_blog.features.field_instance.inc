@@ -10,32 +10,27 @@
 function feature_for_blog_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-blog-field_blog_bloggers'.
-  $field_instances['node-blog-field_blog_bloggers'] = array(
-    'bundle' => 'blog',
+  // Exported field_instance:
+  // 'field_collection_item-field_blog_blogger-field_blog_bloggers'.
+  $field_instances['field_collection_item-field_blog_blogger-field_blog_bloggers'] = array(
+    'bundle' => 'field_blog_blogger',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter Bloggers name.',
+    'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_plain',
         'weight' => 0,
       ),
     ),
-    'entity_type' => 'node',
+    'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_blog_bloggers',
     'label' => 'Bloggers',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -48,7 +43,48 @@ function feature_for_blog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 45,
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-blog-field_blog_blogger'.
+  $field_instances['node-blog-field_blog_blogger'] = array(
+    'bundle' => 'blog',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_blog_blogger',
+    'label' => 'Bloggers',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 6,
     ),
   );
 
@@ -63,7 +99,7 @@ function feature_for_blog_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 5,
       ),
       'teaser' => array(
@@ -87,7 +123,7 @@ function feature_for_blog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 46,
+      'weight' => 7,
     ),
   );
 
@@ -163,7 +199,7 @@ function feature_for_blog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 42,
+      'weight' => 3,
     ),
   );
 
@@ -205,7 +241,7 @@ function feature_for_blog_field_default_field_instances() {
         'rows' => 20,
       ),
       'type' => 'text_textarea',
-      'weight' => 44,
+      'weight' => 5,
     ),
   );
 
@@ -247,7 +283,7 @@ function feature_for_blog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 43,
+      'weight' => 4,
     ),
   );
 
@@ -257,7 +293,6 @@ function feature_for_blog_field_default_field_instances() {
   t('Category Selection');
   t('Image');
   t('Long description');
-  t('Please enter Bloggers name.');
   t('Please enter Short description.');
   t('Please upload image.');
   t('Short description');

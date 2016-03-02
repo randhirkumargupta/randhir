@@ -77,9 +77,9 @@
                 <h2>Bloggers</h2>
                 <div class="content-details">
                   <?php
-                  $bloggers = render($content['field_blog_bloggers']);
+                  $bloggers = render($content['field_blog_blogger']);
                   if (!empty($bloggers)):
-                    print render($content['field_blog_bloggers']);
+                    print render($content['field_blog_blogger']);
                     ?>
                   </div>
                 </div>
