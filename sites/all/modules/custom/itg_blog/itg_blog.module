@@ -8,6 +8,15 @@
  *
  */
 /**
+* Implementation of hook_node_presave().
+* @param Array $node
+*/
+function itg_blog_node_presave($node) {
+  if ($node->type =='blog') {
+    $node->title = trim($node->title);
+  }
+}
+/**
  * Implemets hook_form_alter().
  * @param Array $form
  * @param Array $form_state
