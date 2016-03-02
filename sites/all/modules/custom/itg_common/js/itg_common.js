@@ -79,7 +79,7 @@
       function userRegisterEdit(v) {
         var value = $(v).val();
         var markexpert = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
-        if (value == "22") {
+        if (value == "21") {
           $('.field-name-field-user-section').show();
         } else if (value == "5" || value == "6" || value == "20") {
           $('.field-name-field-mark-as-expert').show();
@@ -96,7 +96,7 @@
       $('#user-register-form, #user-profile-form').on('change', 'select[name="selected"]', function () {
         var value = $(this).val();
         $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
-        if (value == "22") {
+        if (value == "21") {
           $('.field-name-field-user-section').show();
           $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
           $('.field-name-field-mark-as-expert').hide();
