@@ -49,13 +49,19 @@ function user_management_user_default_roles() {
   // Exported role: Designer.
   $roles['Designer'] = array(
     'name' => 'Designer',
-    'weight' => 17,
+    'weight' => 18,
   );
 
   // Exported role: Editor.
   $roles['Editor'] = array(
     'name' => 'Editor',
     'weight' => 8,
+  );
+
+  // Exported role: Expert.
+  $roles['Expert'] = array(
+    'name' => 'Expert',
+    'weight' => 9,
   );
 
   // Exported role: Intern.
@@ -79,7 +85,7 @@ function user_management_user_default_roles() {
   // Exported role: Photographer.
   $roles['Photographer'] = array(
     'name' => 'Photographer',
-    'weight' => 18,
+    'weight' => 19,
   );
 
   // Exported role: Section Editor/Anchor.
@@ -91,7 +97,7 @@ function user_management_user_default_roles() {
   // Exported role: Site Admin.
   $roles['Site Admin'] = array(
     'name' => 'Site Admin',
-    'weight' => 9,
+    'weight' => 10,
   );
 
   // Exported role: Subeditor/Sr.Sub.
