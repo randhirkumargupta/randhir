@@ -29,6 +29,7 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       }
       
       $form['#after_build'][] = 'itg_survey_form_after_build';
+      $form['title']['#title'] = 'Survey Title';
       $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
       $form['actions']['submit']['#submit'][] = 'itg_survey_form_custom_submit_callback';
     }
@@ -89,7 +90,7 @@ function itg_survey_form_after_build($form, &$form_state) {
   drupal_add_js(array('itg_survey' => array('settings' => $settings)), array('type' => 'setting'));
   
   //Add JS for survey
-   drupal_add_js(drupal_get_path('module', 'survey') . '/js/itg_survey.js', array('weight' => 1));
+   drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey.js', array('weight' => 1));
     
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
@@ -128,20 +129,4 @@ function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id
      $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
    }
-}
-
-/*******************************Node Related hooks*****************************/
-
-/**
- * Implement hook_node_validate
- * @param Object $node
- * @param Array $form
- * @param Array $form_state
- */
-function itg_survey_node_validate($node, $form, &$form_state) {
-  
-  //Add validation for survey form
-  if ($node->type == 'survey') {
-    
-  }
 }
