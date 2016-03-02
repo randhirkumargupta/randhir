@@ -905,7 +905,8 @@ table td, table th{max-width: 200px;}
 .field-name-field-astro-date-range .date-no-float{clear: none; float: left; width: 50%;}
 [id*="field-astro-zodiac-values"] .tabledrag-hide, 
 .field-name-field-astro-zodiac .tabledrag-toggle-weight-wrapper, 
-.field-name-field-astro-zodiac .sticky-header{display: none;}
+.field-name-field-astro-zodiac .sticky-header, 
+[id*="user-register-form"] .group-configuration > legend{display: none;}
 .node-astro-form .form-type-textarea .form-textarea-wrapper, 
 .node-astro-form .form-type-managed-file .form-managed-file{overflow: visible;}
 .node-astro-form .field-multiple-table tbody{width: 600px;}
