@@ -905,8 +905,11 @@ table td, table th{max-width: 200px;}
 .field-name-field-astro-date-range .date-no-float{clear: none; float: left; width: 50%;}
 [id*="field-astro-zodiac-values"] .tabledrag-hide, 
 .field-name-field-astro-zodiac .tabledrag-toggle-weight-wrapper, 
+#field-recipe-ingredient-values .tabledrag-toggle-weight-wrapper,
+#field-recipe-ingredient-values .tabledrag-hide,
 .field-name-field-astro-zodiac .sticky-header, 
-[id*="user-register-form"] .group-configuration > legend{display: none;}
+[id*="user-register-form"] .group-configuration > legend, 
+[class*="form-item-field-recipe-ingredient-und"] > label{display: none;}
 .node-astro-form .form-type-textarea .form-textarea-wrapper, 
 .node-astro-form .form-type-managed-file .form-managed-file{overflow: visible;}
 .node-astro-form .field-multiple-table tbody{width: 600px;}
@@ -920,3 +923,4 @@ table td, table th{max-width: 200px;}
 .field-name-field-astro-date-range .end-date-wrapper:before{content: 'To'; position: absolute; left: -20px; top: 0; z-index: 1; color: #666; line-height: 28px;}
 .node-astro-form .form-item-title .form-text, 
 .field-name-field-astro-date-range .date-no-float{pointer-events: none;}
+.field-name-field-recipe-ingredients span.error{padding-left: 300px;}
