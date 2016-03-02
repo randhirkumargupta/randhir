@@ -897,15 +897,16 @@ table td, table th{max-width: 200px;}
 .page-user-edit .fieldset .fieldset-content #edit-account .form-item.form-type-password-confirm.form-item-pass{margin: 0;}
 .page-admin-people-create .field-name-field-mark-as-expert, 
 .page-user-edit .field-name-field-mark-as-expert, 
-.page-admin-people-create .field-name-field-section,
-.page-user-edit .field-name-field-section{display: none;}
+.page-admin-people-create .field-name-field-user-section,
+.page-user-edit .field-name-field-user-section{display: none;}
 .node-astro-form .field-name-field-astro-date-range fieldset .fieldset-content{padding: 0; float: left;}
 .node-astro-form .field-name-field-astro-date-range fieldset .description{margin: 0;}
 [class*="form-item-field-astro-date-range-und-"] label{display: none !important;}
 .field-name-field-astro-date-range .date-no-float{clear: none; float: left; width: 50%;}
 [id*="field-astro-zodiac-values"] .tabledrag-hide, 
 .field-name-field-astro-zodiac .tabledrag-toggle-weight-wrapper, 
-.field-name-field-astro-zodiac .sticky-header{display: none;}
+.field-name-field-astro-zodiac .sticky-header, 
+[id*="user-register-form"] .group-configuration > legend{display: none;}
 .node-astro-form .form-type-textarea .form-textarea-wrapper, 
 .node-astro-form .form-type-managed-file .form-managed-file{overflow: visible;}
 .node-astro-form .field-multiple-table tbody{width: 600px;}
@@ -914,3 +915,8 @@ table td, table th{max-width: 200px;}
 [id*="field-astro-zodiac-values"] tbody .node-astro-form .form-type-managed-file .form-managed-file{width: 180px;}
 [id*="field-astro-zodiac-values"] td .form-item{width: 100%;display: inline-block; vertical-align: top;}
 [id*="field-astro-zodiac-values"] td .form-item > div{float: left; width: 300px;}
+[id*="field-astro-zodiac-values"] .form-item span.error{padding: 0;}
+.field-name-field-astro-date-range .end-date-wrapper{position: relative;}
+.field-name-field-astro-date-range .end-date-wrapper:before{content: 'To'; position: absolute; left: -20px; top: 0; z-index: 1; color: #666; line-height: 28px;}
+.node-astro-form .form-item-title .form-text, 
+.field-name-field-astro-date-range .date-no-float{pointer-events: none;}
