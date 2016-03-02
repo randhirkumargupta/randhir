@@ -165,10 +165,10 @@
                   <?php print render($content['field_recipe_festivals']); ?>
                 <?php endif; ?>
                 <?php
-                $ingredients = render($content['field_recipe_ingredients']);
+                $ingredients = render($content['field_recipe_ingredient']);
                 if (!empty($ingredients)):
                   ?>    
-                  <?php print render($content['field_recipe_ingredients']); ?>
+                  <?php print render($content['field_recipe_ingredient']); ?>
     <?php endif; ?>
 
               </div>

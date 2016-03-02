@@ -64,8 +64,27 @@ function itg_common_menu() {
  * Implements hook_form_alter().
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  global $user;
-
+  global $user;  
+  if ($form_id == 'astro_node_form') {
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
+      drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
+    );
+    $form['#action'] = '?destination=manage-astro';
+    $form['actions']['submit']['#submit'][] = 'itg_common_change_message';
+    $form['#validate'][] = 'itg_common_validate_astro';
+    $form['#after_build'][] = 'itg_common_astro_after_build'; 
+    unset($form['field_numerology']['und']['#options']['_none']);
+    unset($form['field_astro_frequency2']['und']['#options']['_none']);
+  }
+  
+  // condition for user register and profile form
+     if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
+      drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
+    );
+     }
   if ($form_id == 'user_profile_form') {
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#attributes']['disabled'] = 'disabled';
@@ -156,6 +175,29 @@ function itg_common_validate_user_register_validate(&$form, &$form_state) {
       form_set_error('pass', t('Password must be minimum 8 digit alphanumeric and without space.'));
     }
   }
+  
+  // get section value
+  $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
+  if ($form_state['values']['selected'] == '22') {
+    if (empty($section[0]['tid'])) {
+    form_set_error('field_user_section', t("Section Field is required!"));
+    }
+  }
+  
+  if ($form_state['values']['selected'] == '5' || $form_state['values']['selected'] == '20' || $form_state['values']['selected'] == '6') {
+     //pr($form);
+    
+    $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
+    
+    if (empty($mark_expert)) {
+    form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
+    }
+    if (!empty($mark_expert) && empty($section[0]['tid'])) {
+    form_set_error('field_user_section', t("Section Field is required!"));
+    }
+  }
+
+
 }
 
 /**
@@ -181,6 +223,27 @@ function itg_common_validate_user_profile_validate(&$form, &$form_state) {
       form_set_error('pass', t('Password must be minimum 8 digit alphanumeric and without space.'));
     }
   }
+  // get section value
+  $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
+  if ($form_state['values']['selected'] == '21') {
+    if (empty($section[0]['tid'])) {
+    form_set_error('field_user_section', t("Section Field is required!"));
+    }
+  }
+  
+  if ($form_state['values']['selected'] == '5' || $form_state['values']['selected'] == '20' || $form_state['values']['selected'] == '6') {
+     //pr($form);
+    
+    $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
+    
+    if (empty($mark_expert)) {
+    form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
+    }
+    if (!empty($mark_expert) && empty($section[0]['tid'])) {
+    form_set_error('field_user_section', t("Section Field is required!"));
+    }
+  }
+
 }
 /**
  * Password validation for minimum or maximum 8 char 
@@ -189,7 +252,8 @@ function itg_common_validate_user_profile_validate(&$form, &$form_state) {
  */
 
 function itg_common_after_user_profile_validate(&$form, &$form_state) {
-  $form['account']['pass']['#attached']['js'][1]['data']['password']['tooShort']='Make it at least 8 characters';
+  $form['account']['pass']['#attached']['js'][1]['data']['password']['tooShort']='Make it at least 8 characters';  
+  
   return $form;
 }
 
@@ -333,3 +397,118 @@ function itg_common_user_login(&$edit, $account) {
 }
 
 
+/**
+ * after build function for altering field collection label.
+ */
+function itg_common_astro_after_build($form, &$form_state) {
+ for($i = 0; $i <= 11; $i++) {    
+    $name = itg_common_sunsign_name($i);            
+    $form['field_astro_zodiac']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = $name;
+    $form['field_astro_zodiac']['und'][$i]['field_astro_thumb_icon']['und'][0]['#title'] = $name.' Thumbnail Icon'; 
+    $form['field_astro_zodiac']['und'][$i]['field_audio']['und'][0]['#title'] = $name.' Audio'; 
+    $form['field_astro_zodiac']['und'][$i]['field_astro_video']['und'][0]['#title'] = $name.' Video'; 
+  ;}
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'manage-astro', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );   
+  global $user;
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+
+  $settings = array();  
+  $settings['uid'] = $user->uid;
+
+  drupal_add_js(array('uid' => $settings), 'setting');
+  
+  return $form;
+}
+
+/**
+ * Function return name of the sunsign.
+ */
+function itg_common_sunsign_name($index) {
+  $name = array(
+    'Aries',
+    'Taurus',
+    'Gemini',
+    'Cancer',
+    'Leo',
+    'Virgo',
+    'Libra',
+    'Scorpio',
+    'Sagittarius',
+    'Capricorn',
+    'Aquarius',
+    'pisces',
+  );
+  if ($index <= 11) {
+    return $name[$index];
+  }
+  
+  return '';
+}
+
+/**
+ * Implements hook__form_field_ui_field_edit_form_alter
+ * @param array $form array of form elements
+ * @param arra $form_state array of submitted values
+ * @param string $$form_id id of the current form
+ */
+function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {  
+  if ($form_id == 'field_ui_field_edit_form') {
+    // Increase the max cardinality to 12
+    $range = drupal_map_assoc(range(1, 12));
+    $new_options =  array(FIELD_CARDINALITY_UNLIMITED => t('Unlimited')) + $range;
+
+    // Change the options
+    $form['field']['cardinality']['#options'] = $new_options;
+  }  
+}
+
+/**
+ * Implements hook_field_collection_item_presave().
+ * @param FieldCollectionItemEntity $field_collection_item
+ */
+function itg_common_field_collection_item_presave(FieldCollectionItemEntity $field_collection_item) {    
+  static $count = 0;  
+  if ($field_collection_item->field_name == 'field_astro_zodiac') {
+    $name = itg_common_sunsign_name($count);
+    $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = strtolower($name);    
+  }
+  ++$count;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_common_validate_astro($form, &$form_state) {  
+  for ($i = 0; $i <= 11; ++$i) {
+    if ($form_state['values']['field_astro_zodiac']['und'][$i]['field_astro_thumb_icon']['und'][0]['fid'] == 0) {
+      $name = itg_common_sunsign_name($i);
+      form_set_error('field_astro_thumb_icon', $name.' Thumbnail Icon is required.');
+    }
+  }
+  // check manadotory field  
+  if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_frequency2']['und'][0]['value'] == NULL) {
+    form_set_error('field_astro_frequency2', 'Please choose frequency.');
+  }
+  if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_numerology_values']['und'][0]['field_story_source_id']['und'][0]['value'] == '') {
+    form_set_error('field_story_source_id', 'Please enter number.');
+  }
+  if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_numerology_values']['und'][0]['field_buzz_description']['und'][0]['value'] == '') {
+    form_set_error('field_story_source_id', 'Please enter description.');
+  }
+}
+
+/**
+ * Custom submit callback function to change message after astro node save.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_common_change_message($form, &$form_state) {
+  $messages = drupal_get_messages('status');
+  drupal_set_message(t('Astro has been successfully filled.'));
+}
