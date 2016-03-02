@@ -605,7 +605,7 @@ form #edit-field-story-template-buzz .field-multiple-table tbody .form-item .for
 form #edit-field-story-template-buzz .field-multiple-table tbody .form-item label{width: 120px;}
 form .field-add-more-submit{margin-left: 300px;}
 #reporter-details{padding-left: 300px;margin: -20px 0 20px;position: relative;}
-.page-admin-people-create .fieldset, .page-user-edit .fieldset{border: none;}
+.page-admin-people-create .fieldset, .page-user-edit .fieldset{border: none; margin: 0; padding: 0;}
 .page-admin-people-create #edit-account .form-item, 
 .page-admin-people-create form .form-type-select, 
 .page-user-edit form .form-type-select,
@@ -844,6 +844,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .group-supp-import-xml fieldset{border: none; padding: 0;}
 .group-supp-import-xml fieldset .fieldset-content{border: none; padding: 0 !important;}
 .group-supp-import-xml fieldset .fieldset-content .description{padding-left: 300px !important;}
+.group-supp-import-xml fieldset .fieldset-content div.description{padding-left: 10px !important;}
 body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display: block;}
 #edit-actionnode-publish-action{margin-right: 5px;}
 #block-itg-category-manager-sef-url-log .content-associated{padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px;}
@@ -883,6 +884,18 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .field-name-field-recipe-ingredients .form-item span.error{padding-left: 0;}
 .node-recipe-form div.description{left: 400px !important;}
 .field-name-field-breaking-tile .form-item span.error{padding-left: 0;}
-.form-item .description{left: 400px;}
+.form-item .description{left: 500px;}
 .field-name-field-breaking-content-details .field-collection-view{border-bottom: 1px dashed #ddd;margin: 0;} 
 .block-content > .node-breaking-news .content-node-view .field-name-field-breaking-content-details > .field-items{width: 100%;}
+.page-content .form-item div.description{margin: 0;}
+table td, table th{max-width: 200px;}
+.page-admin-people-create .fieldset .fieldset-content, .page-user-edit .fieldset .fieldset-content{padding: 40px 0 0;}
+.page-admin-people-create .fieldset .fieldset-content #edit-account, .page-user-edit .fieldset .fieldset-content #edit-account{margin: 0;}
+.page-admin-people-create .fieldset .fieldset-content #edit-account .form-item.form-type-password-confirm.form-item-pass, 
+.page-admin-people-create .fieldset .fieldset-content #edit-account .form-item.form-type-radios.form-item-status, 
+.page-user-edit .fieldset .fieldset-content #edit-account .form-item.form-type-radios.form-item-status, 
+.page-user-edit .fieldset .fieldset-content #edit-account .form-item.form-type-password-confirm.form-item-pass{margin: 0;}
+.page-admin-people-create .field-name-field-mark-as-expert, 
+.page-user-edit .field-name-field-mark-as-expert, 
+.page-admin-people-create .field-name-field-section,
+.page-user-edit .field-name-field-section{display: none;}
