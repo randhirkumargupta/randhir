@@ -1,0 +1,6 @@
+name = ITG Survey
+description = "Contains functionality related to survey."
+package = "ITG"
+core = 7.x
+
+files[] = itg_survey.module
