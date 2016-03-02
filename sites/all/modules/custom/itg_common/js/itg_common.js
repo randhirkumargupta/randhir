@@ -19,6 +19,7 @@
       // Hide date range field from display      
       $('#edit-field-astro-numerology-values').css('display', 'none');
       $('#edit-field-astro-frequency2').css('display', 'none');
+      $("#edit-field-field-astro-date-range2").css('display', 'none');
       
       // Weekly
       $('#edit-field-astro-frequency2-und-weekly').click(function() {        
@@ -52,6 +53,7 @@
       // Show numerology values
       $("#edit-field-numerology-und-1").click(function() {
         $('#edit-field-astro-numerology-values').css('display', 'block');
+        $("#edit-field-field-astro-date-range2").css('display', 'block');
         $('#edit-field-astro-frequency2').css('display', 'block');
         $('#edit-field-astro-frequency2 label:first').html('Select Frequency<span class="form-required" title="This field is required."> *</span>');
         $("#edit-field-astro-numerology-values-und-0-field-story-source-id label:first").html('Enter Number<span class="form-required" title="This field is required."> *</span>');
@@ -60,9 +62,11 @@
       $("#edit-field-numerology-und-0").click(function() {
         $('#edit-field-astro-numerology-values').css('display', 'none');
         $('#edit-field-astro-frequency2').css('display', 'none');
+        $("#edit-field-field-astro-date-range2").css('display', 'none');
       });
       var num = $('input[name="field_numerology[und]"]:checked').val();
       if (num == 1) {
+        $("#edit-field-field-astro-date-range2").css('display', 'block');
         $('#edit-field-astro-numerology-values').css('display', 'block');
         $('#edit-field-astro-frequency2').css('display', 'block');
         $('#edit-field-astro-frequency2 label:first').html('Select Frequency<span class="form-required" title="This field is required."> *</span>');
