@@ -605,7 +605,7 @@ form #edit-field-story-template-buzz .field-multiple-table tbody .form-item .for
 form #edit-field-story-template-buzz .field-multiple-table tbody .form-item label{width: 120px;}
 form .field-add-more-submit{margin-left: 300px;}
 #reporter-details{padding-left: 300px;margin: -20px 0 20px;position: relative;}
-.page-admin-people-create .fieldset, .page-user-edit .fieldset{border: none;}
+.page-admin-people-create .fieldset, .page-user-edit .fieldset{border: none; margin: 0; padding: 0;}
 .page-admin-people-create #edit-account .form-item, 
 .page-admin-people-create form .form-type-select, 
 .page-user-edit form .form-type-select,
@@ -655,7 +655,7 @@ form.node-story-form .path-form.fieldset.titled > .fieldset-content{padding: 10p
 div.image-widget-data{position: relative;}
 div.image-widget-data .ajax-progress{position: absolute; left: 100%; top: 0;}
 .user-profile-div .field-name-field-user-picture .field-label{display: none;}
-form .path-form .form-item-path-pathauto{padding-left: 300px;}
+form .path-form .form-item-path-pathauto{padding-left: 300px; width: 100%; box-sizing: border-box;}
 form .path-form .form-item-path-pathauto label{float: none;}
 .edit-link, .view-link, .delete-link{position: relative; vertical-align: middle; display: inline-block; padding-left: 20px;}
 .edit-link:after, 
@@ -844,6 +844,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .group-supp-import-xml fieldset{border: none; padding: 0;}
 .group-supp-import-xml fieldset .fieldset-content{border: none; padding: 0 !important;}
 .group-supp-import-xml fieldset .fieldset-content .description{padding-left: 300px !important;}
+.group-supp-import-xml fieldset .fieldset-content div.description{padding-left: 10px !important;}
 body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display: block;}
 #edit-actionnode-publish-action{margin-right: 5px;}
 #block-itg-category-manager-sef-url-log .content-associated{padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px;}
@@ -856,14 +857,60 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 #edit-field-field-issue-import-xml .fieldset table{max-width: 935px;}
 #edit-field-field-issue-import-xml .form-managed-file span.file{position: relative; padding-left: 20px; float: left; max-width: 600px;}
 #edit-field-field-issue-import-xml .form-managed-file span.file img.file-icon{position: absolute; left: 0; top: 0;}
-#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .form-item label{max-width: 150px;}
-#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .filter-wrapper{display: none;}
-#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .ckeditor_links{margin-left: 150px;}
-#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .date-padding > div:first-child{display: none;}
-#breaking-news-node-form .field-name-field-breaking-content-details .field-multiple-table .date-combo legend{width: 150px;}
-#breaking-news-node-form .field-name-field-breaking-publish-time .fieldset.titled > .fieldset-content{padding: 0;}
-#breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content{float: left; width: 300px;}
-#breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item{margin: 0;}
-#breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item label{display: none;}
-#breaking-news-node-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item .form-text{width: 100%;}
-#breaking-news-node-form .field-name-field-mobile-subscribers{display: none;}
+.node-breaking_news-form .field-name-field-breaking-content-details .field-multiple-table .form-item label{max-width: 150px;}
+.node-breaking_news-form .field-name-field-breaking-content-details .field-multiple-table .filter-wrapper{display: none;}
+.node-breaking_news-form .field-name-field-breaking-content-details .field-multiple-table .ckeditor_links{margin-left: 150px;}
+.node-breaking_news-form .field-name-field-breaking-content-details .field-multiple-table .date-padding > div:first-child{display: none;}
+.node-breaking_news-form .field-name-field-breaking-content-details .field-multiple-table .date-combo legend{width: 150px;}
+.node-breaking_news-form .field-name-field-breaking-publish-time .fieldset.titled > .fieldset-content{padding: 0;}
+.node-breaking_news-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content{float: left; width: 300px;}
+.node-breaking_news-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item{margin: 0;}
+.node-breaking_news-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item .form-text{width: 100%;}
+.node-breaking_news-form .field-name-field-mobile-subscribers{display: none;}
+.page-node .block-content > .close-preview, 
+.preview-wrapper .node-content .field.field-name-field-breaking-content-details > .field-label,
+.field-name-field-recipe-ingredients td .form-item > label,
+.preview .action-links{display: none;}
+.preview-wrapper .node-content .field.field-name-field-breaking-content-details > .field-items{width: 100%;}
+.page-node-add-breaking-news .tabledrag-toggle-weight-wrapper, 
+.node-breaking_news-form .field-name-field-breaking-publish-time .date-combo > .fieldset-content .form-item label,
+.page-node-add-breaking-news .field-collection-view-links,
+.node-type-breaking-news .field-collection-view-links,
+.node-type-breaking-news .action-links,
+.block-content > .node-breaking-news .field-name-field-breaking-content-details > .field-label,
+.node-type-breaking-news .tabledrag-toggle-weight-wrapper{display: none;}
+.node-recipe-form .vertical-tabs{padding: 10px 0 0 10px;}
+.field-name-field-recipe-description .form-item span.error, 
+.field-name-field-recipe-ingredients .form-item span.error{padding-left: 0;}
+.node-recipe-form div.description{left: 400px !important;}
+.field-name-field-breaking-tile .form-item span.error{padding-left: 0;}
+.form-item .description{left: 500px;}
+.field-name-field-breaking-content-details .field-collection-view{border-bottom: 1px dashed #ddd;margin: 0;} 
+.block-content > .node-breaking-news .content-node-view .field-name-field-breaking-content-details > .field-items{width: 100%;}
+.page-content .form-item div.description{margin: 0;}
+table td, table th{max-width: 200px;}
+.page-admin-people-create .fieldset .fieldset-content, .page-user-edit .fieldset .fieldset-content{padding: 40px 0 0;}
+.page-admin-people-create .fieldset .fieldset-content #edit-account, .page-user-edit .fieldset .fieldset-content #edit-account{margin: 0;}
+.page-admin-people-create .fieldset .fieldset-content #edit-account .form-item.form-type-password-confirm.form-item-pass, 
+.page-admin-people-create .fieldset .fieldset-content #edit-account .form-item.form-type-radios.form-item-status, 
+.page-user-edit .fieldset .fieldset-content #edit-account .form-item.form-type-radios.form-item-status, 
+.page-user-edit .fieldset .fieldset-content #edit-account .form-item.form-type-password-confirm.form-item-pass{margin: 0;}
+.page-admin-people-create .field-name-field-mark-as-expert, 
+.page-user-edit .field-name-field-mark-as-expert, 
+.page-admin-people-create .field-name-field-section,
+.page-user-edit .field-name-field-section{display: none;}
+.node-astro-form .field-name-field-astro-date-range fieldset .fieldset-content{padding: 0; float: left;}
+.node-astro-form .field-name-field-astro-date-range fieldset .description{margin: 0;}
+[class*="form-item-field-astro-date-range-und-"] label{display: none !important;}
+.field-name-field-astro-date-range .date-no-float{clear: none; float: left; width: 50%;}
+[id*="field-astro-zodiac-values"] .tabledrag-hide, 
+.field-name-field-astro-zodiac .tabledrag-toggle-weight-wrapper, 
+.field-name-field-astro-zodiac .sticky-header{display: none;}
+.node-astro-form .form-type-textarea .form-textarea-wrapper, 
+.node-astro-form .form-type-managed-file .form-managed-file{overflow: visible;}
+.node-astro-form .field-multiple-table tbody{width: 600px;}
+[id*="field-astro-zodiac-values"] tbody .form-item label{width: 180px;}
+[id*="field-astro-zodiac-values"] td, [id*="field-astro-zodiac-values"] th{max-width: none;}
+[id*="field-astro-zodiac-values"] tbody .node-astro-form .form-type-managed-file .form-managed-file{width: 180px;}
+[id*="field-astro-zodiac-values"] td .form-item{width: 100%;display: inline-block; vertical-align: top;}
+[id*="field-astro-zodiac-values"] td .form-item > div{float: left; width: 300px;}

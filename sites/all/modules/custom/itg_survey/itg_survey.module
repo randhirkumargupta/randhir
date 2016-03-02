@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * @file
+ * The ITG Survey module.
+ *
+ * Contains functionality for survey.
+ *
+ */
+
+/***************************Form Related hooks*********************************/
+/**
+ * Implement hook_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param String $form_id
+ */
+function itg_survey_form_alter(&$form, &$form_state, $form_id) {
+  
+  global $user;
+  
+  //Set destination for survey form
+  if ($form_id == 'survey_node_form') {
+      $destination = 'manage-survey';
+      if (isset($_GET['destination'])) {
+        $destination = $_GET['destination'];
+      } else {
+        $destination = 'manage-survey';
+      }
+      
+      $form['#after_build'][] = 'itg_survey_form_after_build';
+      $form['title']['#title'] = 'Survey Title';
+      $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
+      $form['actions']['submit']['#submit'][] = 'itg_survey_form_custom_submit_callback';
+    }
+}
+
+/**
+ * Custom function on submit of survey form
+ * @param Array $form
+ * @param Array $form_state
+ */
+ function itg_survey_form_custom_submit_callback($form, &$form_state) {
+  
+  //Unset drupal redirection and add custom redirection URL
+  if (isset($_GET['destination'])) {
+    unset($_GET['destination']);
+  }
+  $form_state['redirect'] = 'manage-survey';
+
+  //Set custom message on creation and updation of survey form.
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+  if (arg(2) == 'edit') {
+    drupal_set_message(t('Survey has been updated.'));
+  } else {
+    drupal_set_message(t('Survey has been submitted for further review and approval.'));
+  }
+}
+
+/**
+ * After build function for survey
+ * @param Array $form
+ * @param Array $form_state
+ * @return Array
+ */
+function itg_survey_form_after_build($form, &$form_state) {
+  global $user, $base_url;
+  
+  //Extract type of node
+  if (arg(0) == 'node') {
+    if (arg(1) == 'add') {
+        $type = arg(2);
+        $nid = '';
+    } else {
+      $node = node_load(arg(1));
+      $type = $node->type;
+      $nid = arg(1);
+    }
+  }
+
+  //Array used in itg_survey.js
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  $settings['type'] = ucfirst($type);
+  $settings['nid'] = $nid;
+  
+  drupal_add_js(array('itg_survey' => array('settings' => $settings)), array('type' => 'setting'));
+  
+  //Add JS for survey
+   drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey.js', array('weight' => 1));
+    
+  //Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+ 
+  return $form;
+}
+
+/*******************************View Related hooks*****************************/
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_survey_views_pre_render(&$view) {
+  
+  //Add "Create Magazine" button on listing page of magazine
+  if ($view->name == "manage_survey") {
+    $header_content_magazine = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_magazine .= l(t('Create Survey'), 'node/add/survey');
+    $view->attachment_before = $header_content_magazine;
+  }
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param String $form_id
+ */
+function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
+   if ($form['#id'] == 'views-exposed-form-manage-survey-page') {
+     
+     //Call function autocomplete to show matching titles
+     $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
+   }
+}

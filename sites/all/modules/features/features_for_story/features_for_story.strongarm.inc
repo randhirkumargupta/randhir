@@ -113,10 +113,10 @@ function features_for_story_strongarm() {
           'weight' => '3',
         ),
         'metatags' => array(
-          'weight' => '43',
+          'weight' => '44',
         ),
         'path' => array(
-          'weight' => '42',
+          'weight' => '43',
         ),
       ),
       'display' => array(),

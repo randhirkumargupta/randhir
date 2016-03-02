@@ -11,7 +11,7 @@
     attach: function (context, settings) {
 
     // hide main select category list
-    $('#edit-field-story-category').hide();    
+    //$('#edit-field-story-category').hide();    
 
      var checkForm = 'add';
      // check for is edit   

@@ -69,11 +69,11 @@ function itg_breaking_news_form_node_delete_confirm_alter(&$form, &$form_state, 
   
   $node_type=$form['#node']->type;
   if ($user->uid != '1' && $node_type == 'breaking_news') {
-    //Check if we have a node id and stop if not
+    // Check if we have a node id and stop if not
     if (empty($form['nid']['#value'])) {
       return;
     }
-    //Load the node from the form
+    // Load the node from the form
     $node = node_load($form['nid']['#value']);
     // condition if node is publish and type is breaking news
     if ($node->status == 1 && $node->type = 'breaking_news ') {
@@ -92,13 +92,14 @@ function itg_breaking_news_form_node_delete_confirm_alter(&$form, &$form_state, 
  */
 function itg_breaking_news_form_alter(&$form, &$form_state, $form_id){
   global $user;
+  
   if ($form_id == 'breaking_news_node_form') {
   //code to hide source field
   if($user->uid != '1') {
    $form['field_source']['#access'] = FALSE;
   }
   
-  if ($form['#node']->nid) {
+  if (isset($form['#node']->nid)) {
   $form['field_type']['#disabled'] = TRUE;
   }
   // code to add taxonomy parent terms with no child
@@ -221,23 +222,27 @@ function itg_breaking_news_views_exposed_after_build($form, &$form_state) {
 function itg_breaking_news_node_validate($node, $form, &$form_state) {
 
   if ($node->type == 'breaking_news') {
-    $notify = $node->field_notification[LANGUAGE_NONE][0]['value'];
+    $section = $node->field_section[LANGUAGE_NONE];
+    $type = $node->field_type[LANGUAGE_NONE][0]['value'];
+    $display_on = $node->field_display_on[LANGUAGE_NONE][0]['value'];
 
-    if (!empty($notify)) {
-      // get array value of mobile subscriber field
-      $mobile_subscriber = $node->field_mobile_subscribers[LANGUAGE_NONE];
-      // filter empty array
-      if($mobile_subscriber[0]['value'] == '') {
-        
-      form_set_error('field_mobile_subscribers', t("Select atleast one Mobile Subscriber!"));
-        
+    if ($type == 'Live Blog') {
+
+      // filter empty array if type is live blog
+      if (empty($section[0]['tid'])) {
+
+        form_set_error('field_section', t("Section Field is required"));
       }
-      
-      
+    }
+    // check if section is selected and category not select
+    if ($type == 'Breaking News' && $display_on == 'Section') {
+
+      if (empty($section[0]['tid'])) {
+        form_set_error('field_section', t("Section Field is required!"));
+      }
     }
   }
 }
-
 
 /**
  * Implement hook_menu_breadcrumb_alter
@@ -251,4 +256,23 @@ function itg_breaking_news_menu_breadcrumb_alter(&$active_trail, $item) {
     $active_trail[0]['title'] = 'Home';
     $active_trail[0]['href'] = $base_url.'/cms-user-dashboard';
   }
+}
+
+/*
+ * Implement hook_node_presave
+ * @param Array $node
+ */
+
+function itg_breaking_news_node_presave($node) {
+  
+ if($node->type == 'breaking_news') {
+   
+   $type=$node->field_type[LANGUAGE_NONE][0]['value'];
+   
+   if($type == 'Live Blog') {
+   $node->field_display_on[LANGUAGE_NONE][0]['value']= 'Section';
+   
+   }
+    
+ }
 }

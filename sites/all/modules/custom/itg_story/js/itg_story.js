@@ -12,6 +12,7 @@
                      $('#edit-field-story-select-supplement').hide();
                      $('#edit-field-story-comment-question').hide();
                      $('#edit-field-story-client-title').hide();
+                     $('#edit-field-story-media-files-syndicat').hide();
                      $('#edit-field-story-facebook-narrative').hide();
                      $('#edit-field-story-tweet').hide();
                      $('.field-edit-link').hide();
@@ -40,7 +41,8 @@
                      
                      // code for client Title field show on edit story form
                      if ($("#edit-field-story-configurations-und-syndication").is(':checked')) {                         
-                         $('#edit-field-story-client-title').show();                         
+                         $('#edit-field-story-client-title').show();
+                         $('#edit-field-story-media-files-syndicat').show();                         
                      }
                      
                      // code for facebook field show on edit story form
@@ -105,10 +107,12 @@
                  // code for client Title field show and hide
                  $('#edit-field-story-configurations-und-syndication').click(function() {                     
                      if ($("#edit-field-story-configurations-und-syndication").is(':checked')) {                         
-                         $('#edit-field-story-client-title').show();                         
+                         $('#edit-field-story-client-title').show();
+                         $('#edit-field-story-media-files-syndicat').show();
                      }else{
                        $("#edit-field-story-client-title-und-0-value").val('');                       
-                       $('#edit-field-story-client-title').hide();                       
+                       $('#edit-field-story-client-title').hide(); 
+                       $('#edit-field-story-media-files-syndicat').hide();
                      }                     
                  });
                  

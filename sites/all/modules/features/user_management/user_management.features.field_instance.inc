@@ -96,6 +96,39 @@ function user_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_mark_as_expert'.
+  $field_instances['user-user-field_mark_as_expert'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mark_as_expert',
+    'label' => 'Mark as Expert',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_mobile_number'.
   $field_instances['user-user-field_mobile_number'] = array(
     'bundle' => 'user',
@@ -209,15 +242,50 @@ function user_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_user_section'.
+  $field_instances['user-user-field_user_section'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_user_section',
+    'label' => 'Section',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 3,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('First name');
   t('Last name');
+  t('Mark as Expert');
   t('Mobile number');
   t('Picture');
   t('Please enter your first name.');
   t('Please enter your last name.');
   t('Please enter your mobile number.');
+  t('Section');
 
   return $field_instances;
 }
