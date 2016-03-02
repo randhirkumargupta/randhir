@@ -411,7 +411,15 @@ function itg_common_astro_after_build($form, &$form_state) {
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'manage-astro', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
-  );    
+  );   
+  global $user;
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+
+  $settings = array();  
+  $settings['uid'] = $user->uid;
+
+  drupal_add_js(array('uid' => $settings), 'setting');
   
   return $form;
 }
