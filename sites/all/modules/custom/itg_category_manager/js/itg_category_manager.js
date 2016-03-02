@@ -52,9 +52,7 @@
       
       // Pager settings
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      var d = new Date();
-      //console.log(monthNames[d.getMonth()]);
-      //console.log(d.getFullYear());
+      var d = new Date();      
       var currentMonth = monthNames[d.getMonth()]+' '+d.getFullYear();
       var currentMonthPager = $(".date-heading h3").text();
       if (currentMonth === currentMonthPager) {        
@@ -62,8 +60,7 @@
       }
       
       // Check frequency and select range date.
-      // Hide date range field from display
-      $('#edit-field-astro-date-range').css('display', 'none');
+      // Hide date range field from display      
       $('.field-name-field-astro-zodiac-sign-name').css('display', 'none');
       // Weekly
       $('#edit-field-astro-frequency-und-weekly').click(function() {        
@@ -73,6 +70,8 @@
           var endDay = moment().day(6); // Sat          
           $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay.format('L'));
           $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay.format('L'));
+          var titleText = startDay.format('MMM Do YYYY')+" - "+endDay.format('MMM Do YYYY');          
+          $("#edit-title").val(titleText);
         }
       });
       // Monthly
@@ -83,6 +82,8 @@
           var lastDay = moment().endOf('month');
           $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay.format('L'));
           $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(lastDay.format('L'));
+          var titleText = firstDay.format('MMM Do YYYY')+" - "+lastDay.format('MMM Do YYYY');          
+          $("#edit-title").val(titleText);
         }
       });
       // Yearly
@@ -92,6 +93,9 @@
           var firstDay = moment().dayOfYear(1).format('L');          
           $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay);
           $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val('12/31/'+moment().year());
+          var startYear = moment().format('MMM Do YYYY');
+          var endyear = "Dec 31st "+moment().year();
+          $("#edit-title").val(startYear + " - " + endyear);
         }
       });
     }

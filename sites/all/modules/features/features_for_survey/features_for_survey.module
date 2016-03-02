@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Features for Survey feature.
+ */
+
+include_once 'features_for_survey.features.inc';

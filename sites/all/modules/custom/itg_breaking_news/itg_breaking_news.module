@@ -69,11 +69,11 @@ function itg_breaking_news_form_node_delete_confirm_alter(&$form, &$form_state, 
   
   $node_type=$form['#node']->type;
   if ($user->uid != '1' && $node_type == 'breaking_news') {
-    //Check if we have a node id and stop if not
+    // Check if we have a node id and stop if not
     if (empty($form['nid']['#value'])) {
       return;
     }
-    //Load the node from the form
+    // Load the node from the form
     $node = node_load($form['nid']['#value']);
     // condition if node is publish and type is breaking news
     if ($node->status == 1 && $node->type = 'breaking_news ') {
