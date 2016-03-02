@@ -23,6 +23,10 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
     case 'story_node_form':
       $form['#after_build'][] = 'itg_workflow_after_build';      
     break;
+  
+    case 'photogallery_node_form':
+      $form['#after_build'][] = 'itg_workflow_after_build';      
+    break;
     
     case 'views_exposed_form':
       $form['#after_build'][] = 'itg_workflow_views_exposed_form_after_build';      
@@ -125,8 +129,8 @@ function itg_workflow_node_presave($node) {
  */
 function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
   global $user, $base_url;
-  
-  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6') {
+  // p($form['#id']);
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6') {
     $form['state']['#options'] = array('All' => '-All-', 'needs_review' => 'Submitted for Review', 'rejected' => 'Rejected', 'needs_modification' => 'Needs Modification' );
   } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {     
     $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => '-All-', '<' => 'Published', '>=' => 'To Be Live');    
@@ -141,7 +145,7 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
                      jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();                     
                  });
             });', array('type' => 'inline', 'scope' => 'footer'));
-  } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page') {
+  } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page') {
       // Code for Bulk opration related work
       drupal_add_js('jQuery(document).ready(function() {
                jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
@@ -219,8 +223,9 @@ function itg_workflow_node_access($node, $op, $account) {
  * @param type $view_mode
  * @param type $langcode
  */
-function itg_workflow_node_view($node, $view_mode, $langcode) {  
-  if ($node->type == 'story') {
+function itg_workflow_node_view($node, $view_mode, $langcode) {
+  
+  if ($node->type == 'story' || $node->type == 'photogallery') {
     $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
   }
 }

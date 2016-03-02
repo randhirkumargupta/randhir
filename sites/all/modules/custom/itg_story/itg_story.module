@@ -44,7 +44,12 @@ function itg_story_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_story.inc',
   );
-  
+  $items['issue-date-check-ajax'] = array(      
+      'page callback' => 'itg_story_issue_date_checked',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_story.inc',
+  );
   return $items;
 }
 
@@ -245,6 +250,14 @@ function itg_story_node_validate($node, $form, &$form_state) {
       }
       
     }
+    
+    // Code for issue exit or not.
+    if (isset($node->field_story_issue_date[LANGUAGE_NONE])) {
+      $issue = itg_story_checked_issue($node->field_story_issue_date[LANGUAGE_NONE][0]['value']);
+      if (!$issue) {        
+        form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue dose not exit."));
+      }
+    }
   }
 }
 
@@ -410,4 +423,24 @@ function itg_story_library_alter(&$libraries, $module) {
     $library = drupal_get_path('module', 'itg_story') . '/js/autocomplete.limit.js';
     $libraries['drupal.autocomplete']['js'][$library] = array('group' => JS_DEFAULT);
   }
+}
+
+/**
+ * Implements function for issue exit or not
+ * @param $issue_date
+ * $return 
+ */
+function itg_story_checked_issue($issue_date){
+  $result = db_select('node', 'node')
+            ->fields('node', array('title'))
+            ->condition('title', $issue_date, '=')
+            ->condition('type', 'issue', '=')
+            ->execute()->fetchAssoc();
+  
+  if (empty($result['title'])) {
+    return false;
+  }
+  
+  return true;
+  
 }
