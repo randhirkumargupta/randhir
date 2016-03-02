@@ -15,28 +15,19 @@
         var checkboxId = 'edit-roles-' + $(this).val();
         $('#' + checkboxId).prop("checked", true);
       });
-      
-      // Change label of the field collection field
-      $("#edit-field-numerology-und-0").click(function() {         
-        //$("#edit-field-astro-frequency2").hide();        
-      });
-      $("#edit-field-numerology-und-1").click(function() {
-        //$("#edit-field-astro-frequency2").show();        
-      });
-      
-      // Hide date range field from display
-      $('#edit-field-field-astro-date-range2').css('display', 'none');
+      $('#edit-title').val(moment().format('L'));
+      // Hide date range field from display      
       $('#edit-field-astro-numerology-values').css('display', 'none');
       $('#edit-field-astro-frequency2').css('display', 'none');
       
       // Weekly
       $('#edit-field-astro-frequency2-und-weekly').click(function() {        
-        var state = $(this).is(':checked');
+        var state = $(this).is(':checked');        
         if (state) {
           var startDay = moment().day(0); // Sun
           var endDay = moment().day(6); // Sat          
           $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(startDay.format('L'));
-          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(endDay.format('L'));
+          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(endDay.format('L'));          
         }
       });
       // Monthly
@@ -63,6 +54,8 @@
         $('#edit-field-astro-numerology-values').css('display', 'block');
         $('#edit-field-astro-frequency2').css('display', 'block');
         $('#edit-field-astro-frequency2 label:first').html('Select Frequency<span class="form-required" title="This field is required."> *</span>');
+        $("#edit-field-astro-numerology-values-und-0-field-story-source-id label:first").html('Enter Number<span class="form-required" title="This field is required."> *</span>');
+        $("#edit-field-astro-numerology-values-und-0-field-buzz-description label:first").html('Enter Text<span class="form-required" title="This field is required."> *</span>');
       });
       $("#edit-field-numerology-und-0").click(function() {
         $('#edit-field-astro-numerology-values').css('display', 'none');
@@ -73,6 +66,8 @@
         $('#edit-field-astro-numerology-values').css('display', 'block');
         $('#edit-field-astro-frequency2').css('display', 'block');
         $('#edit-field-astro-frequency2 label:first').html('Select Frequency<span class="form-required" title="This field is required."> *</span>');
+        $("#edit-field-astro-numerology-values-und-0-field-story-source-id label:first").html('Enter Number<span class="form-required" title="This field is required."> *</span>');
+        $("#edit-field-astro-numerology-values-und-0-field-buzz-description label:first").html('Enter Text<span class="form-required" title="This field is required."> *</span>');
       }
        
       

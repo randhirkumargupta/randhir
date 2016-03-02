@@ -46,7 +46,7 @@
                     <?php print render($content['field_content_type']); ?>
                      <div class="field">
                         <div class="field-label">Breaking Text:</div>
-                        <div class="field-items"><?php print $title; ?></div>
+                        <div class="field-items"><h1><?php print $title; ?></h1></div>
                     </div>
                    
                     <?php $short_des = render($content['field_label']);

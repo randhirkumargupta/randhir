@@ -1,18 +1,18 @@
 <?php
 /**
  * @file
- * feature_for_recipe.features.user_permission.inc
+ * features_for_survey.features.user_permission.inc
  */
 
 /**
  * Implements hook_user_default_permissions().
  */
-function feature_for_recipe_user_default_permissions() {
+function features_for_survey_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'create recipe content'.
-  $permissions['create recipe content'] = array(
-    'name' => 'create recipe content',
+  // Exported permission: 'create survey content'.
+  $permissions['create survey content'] = array(
+    'name' => 'create survey content',
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
@@ -26,33 +26,38 @@ function feature_for_recipe_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any recipe content'.
-  $permissions['delete any recipe content'] = array(
-    'name' => 'delete any recipe content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own recipe content'.
-  $permissions['delete own recipe content'] = array(
-    'name' => 'delete own recipe content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit any recipe content'.
-  $permissions['edit any recipe content'] = array(
-    'name' => 'edit any recipe content',
+  // Exported permission: 'delete any survey content'.
+  $permissions['delete any survey content'] = array(
+    'name' => 'delete any survey content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
 
-  // Exported permission: 'edit own recipe content'.
-  $permissions['edit own recipe content'] = array(
-    'name' => 'edit own recipe content',
+  // Exported permission: 'delete own survey content'.
+  $permissions['delete own survey content'] = array(
+    'name' => 'delete own survey content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any survey content'.
+  $permissions['edit any survey content'] = array(
+    'name' => 'edit any survey content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own survey content'.
+  $permissions['edit own survey content'] = array(
+    'name' => 'edit own survey content',
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',

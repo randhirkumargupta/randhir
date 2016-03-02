@@ -69,7 +69,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
       drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
-    );    
+    ); 
+    $form['#action'] = '?destination=manage-astro';
     $form['#validate'][] = 'itg_common_validate_astro';
     $form['#after_build'][] = 'itg_common_astro_after_build'; 
     unset($form['field_numerology']['und']['#options']['_none']);
@@ -380,7 +381,7 @@ function itg_common_sunsign_name($index) {
     return $name[$index];
   }
   
-  return array();
+  return '';
 }
 
 /**
