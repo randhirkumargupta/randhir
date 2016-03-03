@@ -1030,17 +1030,17 @@ table td, table th{max-width: 200px;}
 .node-blog-form .tabledrag-hide, 
 .node-blog-form .tabledrag-toggle-weight-wrapper, 
 .field-name-field-survey-start-date .date-combo > .fieldset-content .form-item > label, 
-.field-name-field-survey-end-date .date-combo > .fieldset-content .form-item > label{display: none;}
-.node-survey-form .field-multiple-table tbody{width: 475px;}
-.node-survey-form .field-multiple-table tbody .form-item label{width: 150px;}
-[id*="field-survey-answer-option-more-values"] thead{width: 150px !important;}
-[id*="field-survey-answer-option-more-values"] tbody{float: left; width: 275px !important;}
+.field-name-field-survey-end-date .date-combo > .fieldset-content .form-item > label, 
+.node-survey-form .sticky-header{display: none;}
+.node-survey-form .field-multiple-table tbody{float: none;}
+/*[id*="field-survey-answer-option-more-values"] thead{width: 150px !important;}
+[id*="field-survey-answer-option-more-values"] tbody{float: left; width: 275px !important;}*/
 .node-survey-form .field-multiple-table tbody .form-item{display: inline-block; width: 100%;}
 .node-survey-form .field-multiple-table tbody .form-item .form-text{float: left; width: 275px;}
 .node-survey-form .field-multiple-table tbody div.description,
-.node-survey-form .field-multiple-table tbody .form-item span.error{padding-left: 150px; clear: both;}
-.node-survey-form .field-multiple-table tbody .button-remove{margin-left: 150px;}
-.node-survey-form .field-multiple-table tbody .field-add-more-submit{margin-left: 150px;}
+.node-survey-form .field-multiple-table tbody .form-item span.error{clear: both;}
+.node-survey-form .field-multiple-table tbody div.description{padding-left: 300px;}
+.node-survey-form .field-multiple-table tbody .button-remove{margin-left: 300px;}
 .node-survey-form table td, .node-survey-form table th{max-width: none;} 
 .field-name-field-survey-start-date .date-combo > .fieldset-content,
 .field-name-field-survey-end-date .date-combo > .fieldset-content{float: left; padding: 0;}
@@ -1050,7 +1050,7 @@ table td, table th{max-width: 200px;}
 .page-node-add-survey .preview-wrapper .node-content, 
 .node-type-survey .preview-wrapper .node-content{padding: 0 20px;}
 .node-type-survey .preview-wrapper .field-label{font-weight: normal;}
-
+.node-type-survey .block-content > .node-survey-form .column-main{width: 64%;}
 .node-type-survey .block-content > .node-content .field{display: inline-block; width: 100%; padding-bottom: 10px;}
 .node-type-survey .block-content > .node-content .field .field-label{float: left; width: 240px;}
 .node-type-survey .block-content > .node-content .field .field-items{float: left; width: 560px;}
@@ -1061,6 +1061,8 @@ table td, table th{max-width: 200px;}
 .node-type-survey .block-content > .node-content .field-collection-container .field-collection-view .field-collection-view-links,
 .node-type-survey .block-content > .node-content .field-collection-container .action-links{display: none;} 
 .field-collection-view{border-bottom: 1px dashed #d3d7d9;}
+.node-survey-form .field-multiple-table .field-multiple-table tbody{float: left;}
+.node-survey-form .field-add-more-submit{margin: 0;}
 
 
 /* Blog form css */
