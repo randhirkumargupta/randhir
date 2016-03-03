@@ -512,3 +512,20 @@ function itg_common_change_message($form, &$form_state) {
   $messages = drupal_get_messages('status');
   drupal_set_message(t('Astro has been successfully filled.'));
 }
+
+/**
+ * Get file name from fid
+ * @param type $audioFid
+ */
+function itg_common_file_name($audio_fid) {  
+  $itg_query = db_select('file_managed', 'f');
+  $itg_query->condition('fid', $audio_fid, '=')
+      ->fields('f', array('filename'));
+  
+  $itg_result = $itg_query->execute()->fetchField();  
+  if ($itg_result != '') {
+    return $itg_result;
+  }
+  
+  return '';
+}
