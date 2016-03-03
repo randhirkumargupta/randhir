@@ -18,7 +18,7 @@ if(!in_array('administrator', $user->roles)){
 if (theme_get_setting('rubik_show_branding')): ?>
 <div id='branding'><div class='limiter clearfix'>
   <div class='breadcrumb clearfix'><?php print $breadcrumb ?></div>
-<!--  <div>User role - <?php // echo end($user->roles);?></div>-->
+  <div>User role - <?php echo end($user->roles);?></div>
   <?php if (!$overlay && isset($secondary_menu)) : ?>
     <?php print theme('links', array('links' => $secondary_menu, 'attributes' => array('class' => 'links secondary-menu'))) ?>
   <?php endif; ?>
