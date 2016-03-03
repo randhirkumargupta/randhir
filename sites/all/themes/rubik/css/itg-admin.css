@@ -81,6 +81,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-supplement .preview-wrapper, 
 .page-node-add-astro .preview-wrapper,
 .node-type-astro .preview-wrapper, 
+.page-node-add-survey .preview-wrapper,
+.node-type-survey .preview-wrapper, 
 .page-node-add-supplement .preview-wrapper,
 .node-type-breaking-news .preview-wrapper{
   background-color: rgba(0, 0, 0, 0.7);
@@ -94,6 +96,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .preview, 
 .page-node-add-magazine .preview, 
 .node-type-story .preview,
+.page-node-add-survey .preview, 
+.node-type-survey .preview,
 .node-type-magazine .preview, 
 .page-node-add-photogallery .preview, 
 .node-type-photogallery .preview,
@@ -127,6 +131,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-issue .preview > h3,
 .page-node-add-issue .preview > h3,
 .node-type-supplement .preview > h3,
+.page-node-add-survey .preview > h3,
+.node-type-survey .preview > h3,
 .page-node-add-supplement .preview > h3,
 .node-type-breaking-news .preview > h3{
   font-size: 24px;
@@ -144,6 +150,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 }
 .page-node-add-story .close-preview, 
 .node-type-story .close-preview, 
+.page-node-add-survey .close-preview, 
+.node-type-survey .close-preview, 
 .page-node-add-magazine .close-preview,
 .node-type-magazine .close-preview,
 .page-node-add-photogallery .close-preview, 
@@ -191,6 +199,14 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-astro .node-preview .column-side, 
 .node-type-astro .node-title, 
 .node-type-astro .preview > h3:first-child,
+.node-type-survey .node-teaser, 
+.node-type-survey .node-preview .column-side, 
+.node-type-survey .node-title, 
+.node-type-survey .preview > h3:first-child,
+.page-node-add-survey .node-teaser, 
+.page-node-add-survey .node-preview .column-side, 
+.page-node-add-survey .node-title, 
+.page-node-add-survey .preview > h3:first-child,
 .node-type-breaking-news .node-teaser, 
 .node-type-breaking-news .node-preview .column-side, 
 .node-type-breaking-news .node-title, 
@@ -203,6 +219,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-photogallery div.node,
 .page-node-add-astro div.node, 
 .node-type-astro div.node,
+.page-node-add-survey div.node, 
+.node-type-survey div.node,
 .node-type-breaking-news div.node,
 .node-type-story div.node{
   background: none;
@@ -223,6 +241,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-photogallery .column-main,
 .page-node-add-astro .column-main, 
 .node-type-astro .column-main,
+.page-node-add-survey .column-main, 
+.node-type-survey .column-main,
 .node-type-breaking-news .column-main{
   display: inline-block;
   width: 100%;
@@ -960,3 +980,40 @@ table td, table th{max-width: 200px;}
 [class*="form-item-field-field-astro-date-range2"] label{display: none;}
 .node-astro-form .field-multiple-table tbody td .button-remove{margin-left: 150px;}
 .user-role{display: inline-block; vertical-align: top; padding: 5px; margin-left: 10px;}
+
+/* survey form css */
+.node-survey-form .tabledrag-hide, 
+.node-survey-form .tabledrag-toggle-weight-wrapper, 
+.field-name-field-survey-start-date .date-combo > .fieldset-content .form-item > label, 
+.field-name-field-survey-end-date .date-combo > .fieldset-content .form-item > label{display: none;}
+.node-survey-form .field-multiple-table tbody{width: 475px;}
+.node-survey-form .field-multiple-table tbody .form-item label{width: 150px;}
+[id*="field-survey-answer-option-more-values"] thead{width: 150px !important;}
+[id*="field-survey-answer-option-more-values"] tbody{float: left; width: 275px !important;}
+.node-survey-form .field-multiple-table tbody .form-item{display: inline-block; width: 100%;}
+.node-survey-form .field-multiple-table tbody .form-item .form-text{float: left; width: 275px;}
+.node-survey-form .field-multiple-table tbody div.description,
+.node-survey-form .field-multiple-table tbody .form-item span.error{padding-left: 150px; clear: both;}
+.node-survey-form .field-multiple-table tbody .button-remove{margin-left: 150px;}
+.node-survey-form .field-multiple-table tbody .field-add-more-submit{margin-left: 150px;}
+.node-survey-form table td, .node-survey-form table th{max-width: none;} 
+.field-name-field-survey-start-date .date-combo > .fieldset-content,
+.field-name-field-survey-end-date .date-combo > .fieldset-content{float: left; padding: 0;}
+.node-survey-form .vertical-tabs{padding: 10px 0 0 10px;}
+.preview-wrapper .field-collection-view-links{display: none;}
+.preview-wrapper .field-collection-container .field-collection-view{margin: 0; padding: 0;}
+.page-node-add-survey .preview-wrapper .node-content, 
+.node-type-survey .preview-wrapper .node-content{padding: 0 20px;}
+.node-type-survey .preview-wrapper .field-label{font-weight: normal;}
+
+.node-type-survey .block-content > .node-content .field{display: inline-block; width: 100%; padding-bottom: 10px;}
+.node-type-survey .block-content > .node-content .field .field-label{float: left; width: 240px;}
+.node-type-survey .block-content > .node-content .field .field-items{float: left; width: 560px;}
+.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view{margin: 0; padding: 0;}
+.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
+.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
+.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view .field .field-items{width: 400px;} 
+.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view .field-collection-view-links,
+.node-type-survey .block-content > .node-content .field-collection-container .action-links{display: none;} 
+.field-collection-view{border-bottom: 1px dashed #d3d7d9;}
+
