@@ -119,7 +119,7 @@ function rubik_theme() {
 /**
  * Preprocessor for theme('page').
  */
-function rubik_preprocess_page(&$vars) {
+function rubik_preprocess_page(&$vars) {  
   // Show a warning if base theme is not present.
   if (!function_exists('tao_theme') && user_access('administer site configuration')) {
     drupal_set_message(t('The Rubik theme requires the !tao base theme in order to work properly.', array('!tao' => l('Tao', 'http://drupal.org/project/tao'))), 'warning');
@@ -143,6 +143,12 @@ function rubik_preprocess_page(&$vars) {
 
   // Overlay is enabled.
   $vars['overlay'] = (module_exists('overlay') && overlay_get_mode() === 'child');
+  
+  // Change create category page title.
+  if (arg(2) == 'taxonomy' && arg(3) == 'category_management' && arg(4) == 'add') {
+    drupal_set_title('Create Category');
+  }
+  
 }
 
 /**

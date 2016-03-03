@@ -1,0 +1,6 @@
+name = ITG Ask an Expert
+description = "Contains functionality related to Ask an Expert."
+package = "ITG"
+core = 7.x
+
+files[] = itg_ask_expert.module
