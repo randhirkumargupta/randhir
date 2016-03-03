@@ -4558,14 +4558,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'story' => 'story',
-  );
   $handler->display->display_options['block_description'] = 'Last Moderation History';
 
   /* Display: Block 2 */
