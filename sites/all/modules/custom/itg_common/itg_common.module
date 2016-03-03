@@ -26,7 +26,7 @@ define('DESIGNER', 15);
 define('PHOTOGRAPHER', 18);
 define('ADMINISTRATOR', 3);
 define('CATEGORY_MANAGMENT', 4);
-define('Expert', 21);
+define('EXPERT', 21);
 
 
 /**
@@ -187,13 +187,13 @@ function itg_common_validate_user_register_validate(&$form, &$form_state) {
   
   // get section value
   $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
-  if ($form_state['values']['selected'] == Expert) {
+  if ($form_state['values']['selected'] == EXPERT) {
     if (empty($section[0]['tid'])) {
     form_set_error('field_user_section', t("Section Field is required!"));
     }
   }
   
-  if ($form_state['values']['selected'] == '5' || $form_state['values']['selected'] == '20' || $form_state['values']['selected'] == '6') {
+  if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR) {
      //pr($form);
     
     $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
@@ -234,7 +234,7 @@ function itg_common_validate_user_profile_validate(&$form, &$form_state) {
   }
   // get section value
   $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
-  if ($form_state['values']['selected'] == Expert) {
+  if ($form_state['values']['selected'] == EXPERT) {
     if (empty($section[0]['tid'])) {
     form_set_error('field_user_section', t("Section Field is required!"));
     }
