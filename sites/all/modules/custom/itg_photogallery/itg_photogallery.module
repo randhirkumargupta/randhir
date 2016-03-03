@@ -24,7 +24,7 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
           ':input[name="field_bulk_media_upload[und][1]"]' => array('checked' => TRUE),
         ),
       ),
-      '#description' => t('Allowed file types:<strong>png gif jpg jpeg</strong>, 88*66 smallest size of image.'),
+      '#description' => t('Allowed file types:<strong>png gif jpg jpeg</strong>, 88x66 smallest size of image.'),
     );
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
