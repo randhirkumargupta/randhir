@@ -38,6 +38,9 @@
 ?>
 <?php if (!empty($content)): ?>
   <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-    <?php print render($content) ?>
+    <?php if ($view_mode == 'full'):
+      print render($content);
+     endif; 
+     ?>
   </div>
 <?php endif; ?>

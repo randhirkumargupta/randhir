@@ -16,6 +16,8 @@
  * @param String $form_id
  */
 function itg_survey_form_alter(&$form, &$form_state, $form_id) {
+
+  
   
   global $user;
   
@@ -27,10 +29,19 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       } else {
         $destination = 'manage-survey';
       }
-      
-      $form['#after_build'][] = 'itg_survey_form_after_build';
+     
+      //Form fields treatment
       $form['title']['#title'] = 'Survey Title';
       $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+      );
+      $form['field_survey_add_questions'][LANGUAGE_NONE]['#title'] = '';
+      
+      //After build and custom summit callback
+      $form['#after_build'][] = 'itg_survey_form_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_survey_form_custom_submit_callback';
     }
 }
@@ -129,4 +140,22 @@ function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id
      $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
    }
+}
+
+/*******************************Node Related hooks*****************************/
+
+/**
+ * 
+ * @param Object $node
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_survey_node_validate($node, $form, &$form_state) {
+  
+  //Date validation for start date and end date
+  if($node->type == 'survey'){
+   if(strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
+      form_set_error('field_survey_end_date',t('Survey end date must be greater than start date.'));
+    }
+  }
 }
