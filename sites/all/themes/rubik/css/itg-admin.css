@@ -1062,7 +1062,7 @@ table td, table th{max-width: 200px;}
 .node-type-survey .block-content > .node-content .field-collection-container .action-links{display: none;} 
 .field-collection-view{border-bottom: 1px dashed #d3d7d9;}
 .node-survey-form .field-multiple-table .field-multiple-table tbody{float: left;}
-.node-survey-form .field-add-more-submit{margin: 0;}
+[id*="field-survey-add-questions-values"] + div .field-add-more-submit{margin: 0;}
 
 
 /* Blog form css */
