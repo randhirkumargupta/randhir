@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature_tag_management feature.
+ */
+
+include_once 'feature_tag_management.features.inc';

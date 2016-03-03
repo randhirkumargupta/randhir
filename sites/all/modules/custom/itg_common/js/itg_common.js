@@ -6,6 +6,12 @@
 (function ($) {
   Drupal.behaviors.itg_common = {
     attach: function (context) {
+        // Define role id
+         var EXPERT = '21';
+         var EDITOR = '6';
+         var SECTIONEDITORANCHOR = '20';
+         var COPYEDITOR = '5';
+      
       // code for Magazine and Supplement field hide and show
       $('.form-item-roles').hide();
       $('#edit-metatags').hide();
@@ -15,6 +21,19 @@
         var checkboxId = 'edit-roles-' + $(this).val();
         $('#' + checkboxId).prop("checked", true);
       });
+      
+      
+      $('#edit-field-mark-as-expert-und-1').click(function () {
+        var EXPERT_ID = 'edit-roles-' + EXPERT;
+        var MARK = $(this).is(':checked');
+                if (MARK) {
+                    $('#' + EXPERT_ID).prop("checked", true);
+                }
+                else
+                {
+                    $('#' + EXPERT_ID).prop("checked", false);
+                }
+       });
       $('#edit-title').val(moment().format('L'));
       // Hide date range field from display      
       $('#edit-field-astro-numerology-values').css('display', 'none');
@@ -89,10 +108,11 @@
       var userSelect = $('select[name="selected"]');
       function userRegisterEdit(v) {
         var value = $(v).val();
+        
         var markexpert = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
-        if (value == "21") {
+        if (value == EXPERT) {
           $('.field-name-field-user-section').show();
-        } else if (value == "5" || value == "6" || value == "20") {
+        } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR) {
           $('.field-name-field-mark-as-expert').show();
           if (markexpert == true) {
             $('.field-name-field-user-section').show();
@@ -107,11 +127,11 @@
       $('#user-register-form, #user-profile-form').on('change', 'select[name="selected"]', function () {
         var value = $(this).val();
         $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
-        if (value == "21") {
+        if (value == EXPERT) {
           $('.field-name-field-user-section').show();
           $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
           $('.field-name-field-mark-as-expert').hide();
-        } else if (value == "5" || value == "6" || value == "20") {
+        } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR) {
           $('.field-name-field-user-section').hide();
           $('.field-name-field-user-section').find('select').val("_none");
           $('.field-name-field-mark-as-expert').show();
