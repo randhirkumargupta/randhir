@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Mega Review & Critic Features feature.
+ */
+
+include_once 'mega_review_critic_features.features.inc';
