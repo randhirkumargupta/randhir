@@ -23,6 +23,22 @@ function itg_story_reporter_details() {
 }
 
 /**
+ * Reporter details callback
+ */
+function itg_story_issue_date_checked() {  
+  $date = $_GET['issue'];
+  
+  $date = strtotime($date);
+  $issue_date = date('Y-m-d H:i:s', $date);
+  
+  $issue = itg_story_checked_issue($issue_date);  
+  
+  if (!$issue) {
+    echo '<div id="idIssue">Issue dose not exit.</div>';
+  }
+}
+
+/**
 * callback for all the story of title
 *  
 */
@@ -79,3 +95,4 @@ function itg_story_get_content_nid($nid) {
 function itg_story_supplement_details() {  
   
 }
+
