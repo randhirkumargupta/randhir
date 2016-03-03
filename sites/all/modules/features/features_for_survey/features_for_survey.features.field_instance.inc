@@ -15,7 +15,7 @@ function features_for_survey_field_default_field_instances() {
   $field_instances['field_collection_item-field_survey_add_questions-field_survey_add_media'] = array(
     'bundle' => 'field_survey_add_questions',
     'deleted' => 0,
-    'description' => 'Please add media(Photo, Video OR Audio), it will be displayed with the question itself. ',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -79,7 +79,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'field_survey_add_questions',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add answer option-1.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -116,7 +116,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'field_survey_add_questions',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add answer option-2.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -190,7 +190,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'field_survey_add_questions',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please select answer type.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -336,7 +336,7 @@ function features_for_survey_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -370,7 +370,7 @@ function features_for_survey_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_survey_add_questions',
-    'label' => 'Add Questions',
+    'label' => 'Add Survey Question',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -387,7 +387,7 @@ function features_for_survey_field_default_field_instances() {
         'replace_label' => 0,
       ),
       'type' => 'field_collection_fieldset',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -484,7 +484,7 @@ function features_for_survey_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -585,25 +585,21 @@ function features_for_survey_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Add Media');
-  t('Add Questions');
+  t('Add Survey Question');
   t('Add more options for answer.');
   t('Answer Option 1');
   t('Answer Option 2');
   t('Answer Type');
   t('Category');
   t('More Answer Options');
-  t('Please add answer option-1.');
-  t('Please add answer option-2.');
-  t('Please add media(Photo, Video OR Audio), it will be displayed with the question itself. ');
   t('Please add survey question.');
-  t('Please select answer type.');
   t('Please select category.');
   t('Please select end date.');
   t('Please select the start date.');
