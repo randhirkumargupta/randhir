@@ -8,6 +8,10 @@
       <?php if (!empty($submitted)): ?>
         <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
       <?php endif; ?>
+        <?php
+        //p($node);
+        echo $node->moderation_history_block;
+        ?>
       <!-- add && !$teaser for hide comment link -->
       <?php if (!empty($links) && !$teaser): ?>
         <div class='<?php print $hook ?>-links clearfix'>
@@ -71,10 +75,10 @@
                 <h2>Gallery Cover Image </h2>
                 <div class="content-details">
                   <?php print render($content['field_story_extra_large_image']); ?>
-                  <?php print render($content['field_story_large_image']); ?>
-                  <?php print render($content['field_story_medium_image']); ?>
-                  <?php print render($content['field_story_small_image']); ?>
-                  <?php print render($content['field_story_extra_small_image']); ?>
+                  <?php //print render($content['field_story_large_image']); ?>
+                  <?php //print render($content['field_story_medium_image']); ?>
+                  <?php //print render($content['field_story_small_image']); ?>
+                  <?php //print render($content['field_story_extra_small_image']); ?>
                 </div>
               </div>
             <?php endif; ?>

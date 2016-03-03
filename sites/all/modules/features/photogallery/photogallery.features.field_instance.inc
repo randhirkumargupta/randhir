@@ -46,11 +46,11 @@ function photogallery_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 0,
+            'imce' => 'imce',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -58,7 +58,7 @@ function photogallery_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -253,6 +253,46 @@ function photogallery_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_gallery_image-field_photo_by'.
+  $field_instances['field_collection_item-field_gallery_image-field_photo_by'] = array(
+    'bundle' => 'field_gallery_image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_photo_by',
+    'label' => 'Photo by',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_gallery_image-field_photo_byline'.
   $field_instances['field_collection_item-field_gallery_image-field_photo_byline'] = array(
     'bundle' => 'field_gallery_image',
@@ -411,11 +451,11 @@ function photogallery_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 0,
+            'imce' => 'imce',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -423,7 +463,7 @@ function photogallery_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -700,7 +740,7 @@ function photogallery_field_default_field_instances() {
     'bundle' => 'photogallery',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'People Tag',
+    'description' => 'Tags',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -719,7 +759,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_people_tag',
-    'label' => 'People Tag',
+    'label' => 'Tags',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -784,6 +824,45 @@ function photogallery_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete_tags',
       'weight' => 27,
+    ),
+  );
+
+  // Exported field_instance: 'node-photogallery-field_story_archive'.
+  $field_instances['node-photogallery-field_story_archive'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 29,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_archive',
+    'label' => 'Are you sure you want to Archive?',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 35,
     ),
   );
 
@@ -1208,6 +1287,7 @@ function photogallery_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Are you sure you want to Archive?');
   t('Audio');
   t('Bulk media upload');
   t('Byline');
@@ -1230,12 +1310,12 @@ function photogallery_field_default_field_instances() {
   t('Image Size (88 x 66)');
   t('Large image');
   t('Medium image');
-  t('People Tag');
   t('Photo by');
   t('Section');
   t('Set As Featured');
   t('Small image');
   t('Syndication');
+  t('Tags');
 
   return $field_instances;
 }

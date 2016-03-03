@@ -10,6 +10,7 @@
                    if (uid != 1) {
                      $('#edit-field-story-select-magazine').hide();
                      $('#edit-field-story-select-supplement').hide();
+                     $('#edit-field-story-issue-date').hide();                     
                      $('#edit-field-story-comment-question').hide();
                      $('#edit-field-story-client-title').hide();
                      $('#edit-field-story-media-files-syndicat').hide();
@@ -31,6 +32,7 @@
                      if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(':checked')) {                         
                          $('#edit-field-story-select-magazine').show();
                          $('#edit-field-story-select-supplement').show();
+                         $('#edit-field-story-issue-date').show();
                      }
                      
                                           
@@ -85,11 +87,15 @@
                      if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(':checked')) {                         
                          $('#edit-field-story-select-magazine').show();
                          $('#edit-field-story-select-supplement').show();
+                         $('#edit-field-story-issue-date').show();
                      }else{
                        $("#edit-field-story-select-magazine-und").val('_none');
                        $('#edit-field-story-select-supplement-und').val('_none'); 
                        $('#edit-field-story-select-magazine').hide();
-                       $('#edit-field-story-select-supplement').hide();  
+                       $('#edit-field-story-select-supplement').hide();
+                       $('#edit-field-story-issue-date').hide();
+                       $("#edit-field-story-issue-date-und-0-value-datepicker-popup-0").val('');
+                       //
                      }
                      
                  });
@@ -165,6 +171,19 @@
                     //maxDate: '+1M',
                 });
                 
+                // code issue date exit or not.
+                $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').blur(function() {                       
+                    var base_url = settings.itg_story.settings.base_url;
+                    $.ajax({
+                          url: base_url + "/issue-date-check-ajax",
+                          method: 'post',
+                          data: {'issue': $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').val()},
+                          success: function(data) {
+                                $("#idIssue").remove();
+                                $(".form-item-field-story-issue-date-und-0-value-date").append(data);                               
+                          }
+                    });
+                 });
                                  
                  /*$('#edit-field-story-select-magazine-und').change(function() {
                      var base_url = settings.itg_story.settings.base_url;                     

@@ -26,6 +26,7 @@ define('DESIGNER', 15);
 define('PHOTOGRAPHER', 18);
 define('ADMINISTRATOR', 3);
 define('CATEGORY_MANAGMENT', 4);
+define('EXPERT', 21);
 
 
 /**
@@ -130,6 +131,14 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     if ($user->uid != 1) {
       $form['#after_build'][] = 'itg_user_after_build';
 
+  $tax=taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  
+  foreach($tax as $key => $val){
+        $op[$val->tid]=$val->name;
+      }
+  // assign array value to taxonomy field
+      $form['field_user_section']['und']['#options'] = $op;
+   
       $user_role = itg_common_role_delegation($form['account']['roles']['#options']);
       if (isset($user_role)) {
         if ($form['#user']->uid != $user->uid) {
@@ -178,13 +187,13 @@ function itg_common_validate_user_register_validate(&$form, &$form_state) {
   
   // get section value
   $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
-  if ($form_state['values']['selected'] == '22') {
+  if ($form_state['values']['selected'] == EXPERT) {
     if (empty($section[0]['tid'])) {
     form_set_error('field_user_section', t("Section Field is required!"));
     }
   }
   
-  if ($form_state['values']['selected'] == '5' || $form_state['values']['selected'] == '20' || $form_state['values']['selected'] == '6') {
+  if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR) {
      //pr($form);
     
     $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
@@ -225,13 +234,13 @@ function itg_common_validate_user_profile_validate(&$form, &$form_state) {
   }
   // get section value
   $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
-  if ($form_state['values']['selected'] == '21') {
+  if ($form_state['values']['selected'] == EXPERT) {
     if (empty($section[0]['tid'])) {
     form_set_error('field_user_section', t("Section Field is required!"));
     }
   }
   
-  if ($form_state['values']['selected'] == '5' || $form_state['values']['selected'] == '20' || $form_state['values']['selected'] == '6') {
+  if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR) {
      //pr($form);
     
     $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
@@ -511,4 +520,21 @@ function itg_common_validate_astro($form, &$form_state) {
 function itg_common_change_message($form, &$form_state) {
   $messages = drupal_get_messages('status');
   drupal_set_message(t('Astro has been successfully filled.'));
+}
+
+/**
+ * Get file name from fid
+ * @param type $audioFid
+ */
+function itg_common_file_name($audio_fid) {  
+  $itg_query = db_select('file_managed', 'f');
+  $itg_query->condition('fid', $audio_fid, '=')
+      ->fields('f', array('filename'));
+  
+  $itg_result = $itg_query->execute()->fetchField();  
+  if ($itg_result != '') {
+    return $itg_result;
+  }
+  
+  return '';
 }
