@@ -76,12 +76,18 @@
 
       // jQuery code for user registeration form
       var userSelect = $('select[name="selected"]');
+      var Expert = '21';
+      var Editor = '6';
+      var SectionEditorAnchor = '20';
+      var CopyEditor = '5';
+      
       function userRegisterEdit(v) {
         var value = $(v).val();
+        
         var markexpert = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
-        if (value == "21") {
+        if (value == Expert) {
           $('.field-name-field-user-section').show();
-        } else if (value == "5" || value == "6" || value == "20") {
+        } else if (value == CopyEditor || value == Editor || value == SectionEditorAnchor) {
           $('.field-name-field-mark-as-expert').show();
           if (markexpert == true) {
             $('.field-name-field-user-section').show();
@@ -96,11 +102,11 @@
       $('#user-register-form, #user-profile-form').on('change', 'select[name="selected"]', function () {
         var value = $(this).val();
         $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
-        if (value == "21") {
+        if (value == Expert) {
           $('.field-name-field-user-section').show();
           $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
           $('.field-name-field-mark-as-expert').hide();
-        } else if (value == "5" || value == "6" || value == "20") {
+        } else if (value == CopyEditor || value == Editor || value == SectionEditorAnchor) {
           $('.field-name-field-user-section').hide();
           $('.field-name-field-user-section').find('select').val("_none");
           $('.field-name-field-mark-as-expert').show();
