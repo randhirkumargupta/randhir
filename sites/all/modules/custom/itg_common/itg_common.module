@@ -139,9 +139,6 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   // assign array value to taxonomy field
       $form['field_user_section']['und']['#options'] = $op;
    
-      
-      
-      
       $user_role = itg_common_role_delegation($form['account']['roles']['#options']);
       if (isset($user_role)) {
         if ($form['#user']->uid != $user->uid) {
