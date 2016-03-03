@@ -216,6 +216,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     $('select').blur();
   });
   
+  $('.node-type-survey div.clearfix .field-add-more-submit, .page-node-add-survey div.clearfix .field-add-more-submit').val('Add another question');
+  $('.node-type-survey .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit, .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit').val('Add another answer');
+  
   
   
 
