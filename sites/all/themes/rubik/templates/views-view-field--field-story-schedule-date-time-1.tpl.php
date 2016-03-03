@@ -28,9 +28,9 @@
 $time = time();
 $sch_time = strtotime($row->field_field_story_schedule_date_time_1[0]['raw']['value']);
 if ($sch_time < $time) {
-  print 'Published';
+  print t('Published');
 } else if ($sch_time >= $time) {
-  print 'Approved';  
+  print t('To Be Live');  
 }
 //print $output; 
 

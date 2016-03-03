@@ -8,6 +8,10 @@
       <?php if (!empty($submitted)): ?>
         <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
       <?php endif; ?>
+        <?php
+        //p($node);
+        echo $node->moderation_history_block;
+        ?>
       <!-- add && !$teaser for hide comment link -->
       <?php if (!empty($links) && !$teaser): ?>
         <div class='<?php print $hook ?>-links clearfix'>
