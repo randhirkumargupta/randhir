@@ -39,7 +39,18 @@
       $('#edit-field-astro-numerology-values').css('display', 'none');
       $('#edit-field-astro-frequency2').css('display', 'none');
       $("#edit-field-field-astro-date-range2").css('display', 'none');
-
+      
+      // Daily 
+      $('#edit-field-astro-frequency-und-daily').click(function () {
+        var state = $(this).is(':checked');
+        if (state) {
+          var startDay = moment().format('L'); // Sun
+          var endDay = moment().format('L'); // Sat          
+          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay);
+          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay);
+          $('#edit-title').val(startDay);
+        }
+      });
       // Weekly
       $('#edit-field-astro-frequency2-und-weekly').click(function () {
         var state = $(this).is(':checked');
