@@ -1,10 +1,9 @@
 <?php
-
 /**
 * Implementation of hook_menu().
 */
 function itg_term_menu() {
-
+ $items = array();
  $items['texonomy/confirm/ajax/%'] = array(
   'title' => 'Texonomy Term', 
   'page callback' => 'drupal_get_form', 
@@ -12,38 +11,35 @@ function itg_term_menu() {
   'access arguments' => array('access content'), 
   'type' => MENU_NORMAL_ITEM
   );
-  
   return $items;
 }
-
-
 
 /**
  * Validate callback function. 
  * @param array $form 
  * @param array reference $form_state
+ * @return array $confirm_form
  */
-
 function texonomy_term_ajax_confirm($form, &$form_state) {
-   $tid = arg(3);
-   $term = taxonomy_term_load($tid);
- 
-  $form['tid'] = array(
+    $tid = arg(3);
+    $term = taxonomy_term_load($tid);
+
+    $form['tid'] = array(
     '#type' => 'value',
     '#value' => $tid,
-  );
-  $form['name'] = array(
+    );
+    $form['name'] = array(
     '#type' => 'value',
     '#value' => $term->name,
-  );
+    );
 
- return confirm_form($form,
-      t('Are you sure you want to delete this term %title?', array('%title' => $term->name)),
-      "tags-management",
-      t('This action cannot be undone.'),
-      t('Delete'),
-      t('Cancel'));
- 
+    $confirm_form = confirm_form($form,
+                  t('Are you sure you want to delete this term %title?', array('%title' => $term->name)),
+                  "tags-management",
+                  t('This action cannot be undone.'),
+                  t('Delete'),
+                  t('Cancel'));
+    return $confirm_form;
 }
 
 
@@ -52,13 +48,10 @@ function texonomy_term_ajax_confirm($form, &$form_state) {
  * @param array $form 
  * @param array reference $form_state
  */
-
 function texonomy_term_ajax_confirm_submit($form, &$form_state) {
   $form_values = $form_state['values'];
-
   if ($form_state['values']['confirm']) {
     $tid = $form_state['values']['tid'];
- 
     $term = taxonomy_term_load($tid);
     taxonomy_term_delete($tid);
     drupal_set_message(t('Delete %title.', array('%title' => $term->name)));
@@ -76,15 +69,16 @@ function texonomy_term_ajax_confirm_submit($form, &$form_state) {
  * @param type $form_id
  * @return array $form
  */
-
 function itg_term_form_alter(&$form, &$form_state, $form_id) {
-
+       
     switch ($form_id) {
         case 'taxonomy_form_term':
+          //Call valiadte and after build
+          $form['#validate'][] = 'itg_term_validate';
           // redirect path        
           $form['#submit'][] = 'term_redirect_handler';
-          
         break;
+
         case 'taxonomy_csv_export_form':
              $form['tab']['content']['#title'] = FALSE;
               $form['tab']['csv_format']['#access'] = FALSE;
@@ -95,10 +89,9 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
               $form['tab']['content']['export_vocabulary_id']['#access'] = FALSE;
               
               $form['export_default_values']['#access'] = FALSE;
+        break;
 
-        break; 
         case 'taxonomy_csv_import_form':   
-            
             $form['tab']['import_format']['#options']['#access'] = FALSE;   
             $form['tab']['import_format']['#options'] = array('fields' => 'Fields');
             $form['tab']['format']['#access'] = FALSE;   
@@ -131,16 +124,12 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
             $form['tab']['destination']['vocabulary_target']['#access'] = FALSE;
             $form['tab']['destination']['vocabulary_id']['#access'] = FALSE;
             $form['tab']['destination']['i18n_translation']['#title'] = FALSE;
-
-
             $form['actions']['import_default_values']['#access'] = FALSE;
             
             $form['#submit'][] = 'term_redirect_handler';
-            
-          
         break; 
-    return $form;
     }
+    return $form;
 }
 
 
@@ -149,15 +138,12 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
  * Implementation of hook_batch_alter().
  * @param array reference $batch
  */
-
 function itg_term_batch_alter(&$batch) {
-
   if ($batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_export_process') {
      // set message
       drupal_set_message(t('Terms are exported from Tags.'));
      // redirect path
     $batch['form_state']['redirect']['path'] = 'tags-management';
-    
   }
   elseif ($batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_import_process') {
       // set message
@@ -174,7 +160,6 @@ function itg_term_batch_alter(&$batch) {
  * @param type $form
  * @param array reference $form_state
  */
-
 function term_redirect_handler($form, &$form_state) {
   $form_state['redirect'] = 'tags-management';
 }
@@ -188,8 +173,6 @@ function itg_term_views_pre_render(&$view) {
   if ($view->name == "tags_management") {
     if (arg(0) == 'tags-management') {
         $message_arr = drupal_set_message();
-        
-       // p($message_arr);
         if ($message_arr['status'][0] == 'Terms are imported into existing vocabulary Tags.') {
           // To unset message
           unset($_SESSION['messages']);
@@ -197,9 +180,7 @@ function itg_term_views_pre_render(&$view) {
           drupal_set_message(t('Terms are imported into existing vocabulary Tags.'));
         }
         elseif ($message_arr['status'][0] == 'Terms are exported from Tags.') {
-                      
             $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>";
-
             if (preg_match_all("/$regexp/siU", $message_arr['status'][2], $matches, PREG_SET_ORDER)) {
             // Start the session
                session_start();
@@ -211,8 +192,9 @@ function itg_term_views_pre_render(&$view) {
     //Add "Create Tag" button on listing page of Tags Management
     $header_content_term = '<a href="./admin/structure/taxonomy/tags/add">Create Tag</a>&nbsp;<a href="./admin/structure/taxonomy/csv_import">CSV import</a>&nbsp;<a href="./admin/structure/taxonomy/csv_export">CSV export</a>';
     $view->attachment_before = $header_content_term;
+
           if (isset($_SESSION['csv_flag'])) {
-              //export_to_csv($_SESSION['csv_flag']);
+              export_to_csv($_SESSION['csv_flag']);
           }
   }
 }
@@ -221,16 +203,31 @@ function itg_term_views_pre_render(&$view) {
 * @param array $result   
 * Download taxonomy term
 */
-
 function export_to_csv($result) {
-  $file_href = $matches[0][2];
-  $file_name = $matches[0][3];
-  header('Content-Type: application/csv');
-  header("Content-Disposition: attachment; $file_name");
-  header('Pragma: no-cache');
-  readfile($file_href);
+  $path = $result[0][2];
+  $file_name = $result[0][3];
   unset($_SESSION['csv_flag']);
+}  
+
+/**
+ * Implements _form_validate() for taxonomy_form_term().
+ */
+function itg_term_validate($form, &$form_state) {
+  $term = $form_state['values']['name'];
+  $vid = $form_state['values']['vid'];
+  $tid = $form_state['values']['tid'];
+
+  if (itg_category_manager_is_dupe_term($term, $vid, $tid)) {
+      $tid_existing_term = itg_category_manager_get_term_from_name($term, $vid);
+      $parent_tid = taxonomy_get_parents_all($tid_existing_term);
+      $tid_arr_key = $num_cat_selected - 2;
+      if ($cat_arr[$tid_arr_key] == $parent_tid[1]->tid) {
+        form_set_error('name', t('Term name already exists.'));
+      }
+    }
 }
+
+   
 
     
 /*
@@ -239,7 +236,6 @@ function export_to_csv($result) {
 * @param array reference $form_state  
 * Hiding taxonomy term description field
 */
-
 function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
   unset($form['tags']);
   unset($form['#metatags']);
@@ -254,11 +250,8 @@ function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
 * @param array $form 
 * @param array reference $form_state   
 */  
-
 function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
-  
   if ($form['#id'] == 'views-exposed-form-tags-management-page') {
-  
     $form['status']['#options'] = array('All' => '- Any -', 1 => 'Published', '0' => 'Unpublished');
     $form['#info']['filter-created']['label'] = FALSE;
     unset($form['filter-created']['label']);
@@ -273,5 +266,4 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
         '#date_format' => 'Y-m-d',
       );  
   }
-
 }
