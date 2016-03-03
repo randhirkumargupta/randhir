@@ -129,9 +129,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').addClass('fixed');
+          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').removeClass('fixed');
+          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
