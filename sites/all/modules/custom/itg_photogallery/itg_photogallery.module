@@ -24,7 +24,7 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
           ':input[name="field_bulk_media_upload[und][1]"]' => array('checked' => TRUE),
         ),
       ),
-      '#description' => t('Allowed file types:<strong>png gif jpg jpeg</strong>'),
+      '#description' => t('Allowed file types:<strong>png gif jpg jpeg</strong>, 88x66 smallest size of image.'),
     );
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
@@ -36,22 +36,17 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
       ),
     );
-    $form['field_p_client_title']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_syndication_[und][yes]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="field_syndication_[und][yes]"]' => array('checked' => TRUE),
-      ),
-    );
     $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'manage-photogallery', array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
       );
-    
+      $form['field_story_extra_large_image']['#ajax'] = array(
+      'callback' => 'ajax_example_simplest_callback',
+      'wrapper' => 'replace_textfield_div',
+     );
     $form['#validate'][] = 'itg_photogallery_custom_validate';
     $form['#after_build'][] = 'itg_photogallery_after_build';
-  }
+  } 
 }
 
 /**
@@ -72,8 +67,16 @@ function itg_photogallery_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   
   drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 2));
-  return $form;
+  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 3));
+  if (arg(0) != 'unpublished-photogallery') {
+  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
+  }
+ $coverid = $form_state['values']['field_story_extra_large_image']['und'][0]['fid'];
+ $form_state['values']['field_story_large_image']['und'][0]['fid'] = $coverid;
+  $form_state['values']['field_story_medium_image']['und'][0]['fid'] = $coverid;
+  $form_state['values']['field_story_small_image']['und'][0]['fid'] = $coverid;
+  $form_state['values']['field_story_extra_small_image']['und'][0]['fid'] = $coverid;
+   return $form;
 }
 
 /**
@@ -82,11 +85,13 @@ function itg_photogallery_after_build($form, &$form_state) {
  * @param type $form_state
  */
 function itg_photogallery_custom_validate(&$form, &$form_state){
-  if(isset($form_state['values']['field_syndication_']['und']) && $form_state['values']['field_syndication_']['und'][0]['value'] == 'yes'){
-    if(isset($form_state['values']['field_p_client_title']['und']) && (empty($form_state['values']['field_p_client_title']['und'][0]['value']))){
-    form_set_error('field_p_client_title', t('Client Title field is required.'));
-    }
-  }
+  foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
+    $fids[] = $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'];
+   }
+ $newfid = array_filter($fids);
+ if(empty($newfid)){
+   form_set_error('field_images','Gallery image is required.');
+ }
 }
 
 /**
@@ -132,7 +137,7 @@ function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$for
     //If we are looking at our field type and specific widget type, and we are multiple entries
     if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
       if ($field['bundles']['node'][0] == "photogallery") {
-        drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
+      //  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
         //Check just in case the button is here, and add another #submit function
         if (isset($form[$field['field_name']]['und']['add_more'])) {
           // add a simple select list, this defaults to numb 3
@@ -208,14 +213,17 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
     $file_ids[$key_val]['filename'] = $file_id->filename;
     $key_val++;
   }
-  watchdog('Vedpareek', '<pre>'. print_r($file_ids, TRUE) .'</pre>');
+  //watchdog('Vedpareek', '<pre>'. print_r($file_ids, TRUE) .'</pre>');
   $i = 0;
   foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
     if (!isset($filed_collection->field_images['und'])) {
       
       //$filed_collection->field_images['und'][0]['fid'] = $file_ids[$i];
-      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_title['und'][0]['value'] = $file_ids[$i]['filename'];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_caption['und'][0]['value'] = $file_ids[$i]['filename'];
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['alt'] = $file_ids[$i]['filename'];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['title'] = $file_ids[$i]['filename'];
+     // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_gallery_small_image['und'][0]['fid'] = $file_ids[$i]['fid'];   
       $i++;
     }
   }
@@ -308,9 +316,25 @@ function itg_photogallery_byline_photoby($type, $id){
 function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
   //Get the Form Id
-  if ($form["#id"] == 'views-exposed-form-manage-photogallery-page') {
+  if ($form['#id'] == 'views-exposed-form-photo-gallery-menegment-page' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-3' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-8' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-6' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-5' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-2' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-9' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-7'           
+           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-1') {
     //$form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
     $form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+    $form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
+    $form['nid']['#attributes'] = array('placeholder' => t('Gallery ID'));
   }
+}
+
+
+function itg_photogallery_form_field_gallery_image_form_alter(&$form, &$form_state, $form_id) {
+  pr($form);
 }

@@ -1,0 +1,6 @@
+name = ITG Blog
+description = "Contains functionality related to Blogs."
+package = "ITG"
+core = 7.x
+
+files[] = itg_blog.module

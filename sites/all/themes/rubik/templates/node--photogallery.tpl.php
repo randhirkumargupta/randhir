@@ -8,6 +8,10 @@
       <?php if (!empty($submitted)): ?>
         <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
       <?php endif; ?>
+        <?php
+        //p($node);
+        echo $node->moderation_history_block;
+        ?>
       <!-- add && !$teaser for hide comment link -->
       <?php if (!empty($links) && !$teaser): ?>
         <div class='<?php print $hook ?>-links clearfix'>
@@ -108,8 +112,8 @@
                   $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
                 }
               }
-              if (isset($imagecollection['field_title']['und']) && !empty($imagecollection['field_title']['und'][0]['value'])) {
-              $output .= '<div class="details-parent"><div class="photo-title"><strong>' . $imagecollection['field_title']['und'][0]['value'] . '</strong></div>';
+              if (isset($imagecollection['field_image_caption']['und']) && !empty($imagecollection['field_image_caption']['und'][0]['value'])) {
+              $output .= '<div class="details-parent"><div class="photo-title"><strong>' . $imagecollection['field_image_caption']['und'][0]['value'] . '</strong></div>';
             }
 
             if (isset($imagecollection['field_credit']['und']) && !empty($imagecollection['field_credit']['und'][0]['value'])) {
@@ -118,9 +122,12 @@
             elseif (isset($node->field_credit_name['und'][0]) && isset($node->field_credit_to_all['und'][0])) {
               $output .= '<div class="photo-credit"><span>' . $node->field_credit_name['und'][0]['value'] . '</span></div>';
             }
-
-            if (isset($imagecollection['field_image_description']['und']) && !empty($imagecollection['field_image_description']['und'][0]['value'])) {
-              $output .= '<div class="image-description"><span>' . $imagecollection['field_image_description']['und'][0]['value'] . '</span></div></div>';
+            if (isset($imagecollection['field_photo_byline']['und']) && !empty($imagecollection['field_photo_byline']['und'][0]['target_id'])) {
+              if(module_exists('itg_photogallery')){
+                $res_id = $imagecollection['field_photo_byline']['und'][0]['target_id'];
+                $res_val = itg_photogallery_byline_photoby('node', $res_id);
+                $output .= '<div class="image-description"><span>' . $res_val . '</span></div></div>';
+              }
             }
               if (module_exists('itg_photogallery')) {
                 if (!empty($audfid)) {
@@ -149,11 +156,7 @@
            <div class="expert-details content-box">
                 <h2>Gallery Images Upload</h2>
                 <div class="content-details">  
-            <?php $field_photo_byline = render($content['field_photo_byline']); 
-            if (!empty($field_photo_byline)): ?>
-                  <div class="photobyline"><?php print render($content['field_photo_byline']); ?></div>
-            <?php endif; ?>  
-              <?php $field_photo_by = render($content['field_photo_by']); 
+           <?php $field_photo_by = render($content['field_photo_by']); 
             if (!empty($field_photo_by)): ?>
                   <div class="photobyline"><?php print render($content['field_photo_by']); ?></div>
             <?php endif; ?>      
@@ -175,10 +178,7 @@
                   if (!empty($isfeatured)): print '<div class="field field-name-field-featured field-type-list-text field-label-above"><div class="field-label">Set As Featured:&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
                   endif;
                   ?>
-                  <?php
-                  if (!empty($syndication)): print '<div class="field field-name-field-syndication- field-type-list-text field-label-above"><div class="field-label">Syndication :&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
-                  endif;
-                  ?>
+                  
                   <?php
                   if (!empty($client_title)): print render($content['field_p_client_title']);
                   endif;
@@ -190,10 +190,7 @@
           
             <?php
             $ppl_tag = render($content['field_people_tag']);
-            $brand_tag = render($content['field_brand_tag']);
-            $product_tag = render($content['field_product_tag']);
-            $content_tag = render($content['field_content_tag']);
-            if (!empty($ppl_tag) || !empty($brand_tag) || !empty($product_tag) || !empty($content_tag)):
+            if (!empty($ppl_tag)):
               ?>
               <div class="expert-details content-box">
                 <h2>Tags to follow</h2>
@@ -202,19 +199,6 @@
                   if (!empty($ppl_tag)): print render($content['field_people_tag']);
                   endif;
                   ?>
-                  <?php
-                  if (!empty($brand_tag)): print render($content['field_brand_tag']);
-                  endif;
-                  ?>
-                  <?php
-                  if (!empty($product_tag)): print render($content['field_product_tag']);
-                  endif;
-                  ?>
-                  <?php
-                  if (!empty($content_tag)): print render($content['field_content_tag']);
-                  endif;
-                  ?>
-
                 </div>  
               </div>
             <?php endif; ?>

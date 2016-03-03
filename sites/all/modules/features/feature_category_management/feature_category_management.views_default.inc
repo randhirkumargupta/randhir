@@ -120,13 +120,13 @@ function feature_category_management_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Category Manager';
+  $handler->display->display_options['title'] = 'Category Management';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     6 => '6',
-    21 => '21',
+    20 => '20',
     10 => '10',
   );
   $handler->display->display_options['cache']['type'] = 'none';
@@ -252,7 +252,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'itg_category_manager';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Field: Publish Time (field_publish_time) */
+  /* Contextual filter: Taxonomy term: Publish Time (field_publish_time) */
   $handler->display->display_options['arguments']['field_publish_time_value']['id'] = 'field_publish_time_value';
   $handler->display->display_options['arguments']['field_publish_time_value']['table'] = 'field_data_field_publish_time';
   $handler->display->display_options['arguments']['field_publish_time_value']['field'] = 'field_publish_time_value';

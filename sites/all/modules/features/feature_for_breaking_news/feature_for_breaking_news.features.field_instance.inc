@@ -44,9 +44,100 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-breaking_news-body'.
-  $field_instances['node-breaking_news-body'] = array(
-    'bundle' => 'breaking_news',
+  // Exported field_instance:
+  // 'field_collection_item-field_breaking_content_details-field_breaking_publish_time'.
+  $field_instances['field_collection_item-field_breaking_content_details-field_breaking_publish_time'] = array(
+    'bundle' => 'field_breaking_content_details',
+    'deleted' => 0,
+    'description' => 'Publish time should be 24 hr format',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_breaking_publish_time',
+    'label' => 'Publish Time',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 1,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_breaking_content_details-field_breaking_redirection_url'.
+  $field_instances['field_collection_item-field_breaking_content_details-field_breaking_redirection_url'] = array(
+    'bundle' => 'field_breaking_content_details',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_breaking_redirection_url',
+    'label' => 'Redirection url',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_breaking_content_details-field_breaking_tile'.
+  $field_instances['field_collection_item-field_breaking_content_details-field_breaking_tile'] = array(
+    'bundle' => 'field_breaking_content_details',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -58,23 +149,14 @@ function feature_for_breaking_news_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 0,
-      ),
     ),
-    'entity_type' => 'node',
+    'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
-    'field_name' => 'body',
-    'label' => 'Description',
-    'required' => 0,
+    'field_name' => 'field_breaking_tile',
+    'label' => 'Title',
+    'required' => 1,
     'settings' => array(
-      'display_summary' => 1,
+      'display_summary' => 0,
       'exclude_cv' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
@@ -83,18 +165,176 @@ function feature_for_breaking_news_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 10,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 9,
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_breaking_content_details-field_mark_as_breaking_band'.
+  $field_instances['field_collection_item-field_breaking_content_details-field_mark_as_breaking_band'] = array(
+    'bundle' => 'field_breaking_content_details',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mark_as_breaking_band',
+    'label' => 'Mark as Breaking band',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_breaking_content_details-field_mobile_subscribers'.
+  $field_instances['field_collection_item-field_breaking_content_details-field_mobile_subscribers'] = array(
+    'bundle' => 'field_breaking_content_details',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mobile_subscribers',
+    'label' => 'Mobile Subscribers',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_breaking_content_details-field_notification_'.
+  $field_instances['field_collection_item-field_breaking_content_details-field_notification_'] = array(
+    'bundle' => 'field_breaking_content_details',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_notification_',
+    'label' => 'Notification ',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-breaking_news-field_breaking_content_details'.
+  $field_instances['node-breaking_news-field_breaking_content_details'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 25,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_breaking_content_details',
+    'label' => 'Content details',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'field_collection_fieldset',
+      'settings' => array(
+        'collapsed' => 1,
+        'field_as_label' => '',
+        'last_item_collapsed' => 1,
+        'new_item_open' => 1,
+        'replace_label' => 0,
+      ),
+      'type' => 'field_collection_fieldset',
+      'weight' => 2,
     ),
   );
 
   // Exported field_instance: 'node-breaking_news-field_content_type'.
   $field_instances['node-breaking_news-field_content_type'] = array(
     'bundle' => 'breaking_news',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'Story',
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Content Type',
     'display' => array(
@@ -126,48 +366,6 @@ function feature_for_breaking_news_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_display_name'.
-  $field_instances['node-breaking_news-field_display_name'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Ex- News Flash, Dhoni/text etc.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_display_name',
-    'label' => 'Display name',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
       'weight' => 1,
     ),
   );
@@ -239,7 +437,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_keywords',
-    'label' => 'Keywords',
+    'label' => 'Tags',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -299,146 +497,6 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-breaking_news-field_mobile_subscribers'.
-  $field_instances['node-breaking_news-field_mobile_subscribers'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => array(
-      0 => array(
-        'value' => 'All',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => 'Mobile Subscribers',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 15,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_mobile_subscribers',
-    'label' => 'Mobile Subscribers',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 12,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_notification'.
-  $field_instances['node-breaking_news-field_notification'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 11,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_notification',
-    'label' => 'Notification',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 11,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_publish_time'.
-  $field_instances['node-breaking_news-field_publish_time'] = array(
-    'bundle' => 'breaking_news',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 16,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_publish_time',
-    'label' => 'Publish Time',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 1,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 2,
-    ),
-  );
-
   // Exported field_instance: 'node-breaking_news-field_section'.
   $field_instances['node-breaking_news-field_section'] = array(
     'bundle' => 'breaking_news',
@@ -464,7 +522,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_section',
     'label' => 'Section',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -902,174 +960,6 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-breaking_news-field_stroy_city'.
-  $field_instances['node-breaking_news-field_stroy_city'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'City',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 17,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_stroy_city',
-    'label' => 'City',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_title_2'.
-  $field_instances['node-breaking_news-field_title_2'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_title_2',
-    'label' => 'News Title 2',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_title_link'.
-  $field_instances['node-breaking_news-field_title_link'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Redirection url',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_title_link',
-    'label' => 'Redirection url',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_title_link_2'.
-  $field_instances['node-breaking_news-field_title_link_2'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Redirection url',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_title_link_2',
-    'label' => 'Redirection url',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 6,
-    ),
-  );
-
   // Exported field_instance: 'node-breaking_news-field_type'.
   $field_instances['node-breaking_news-field_type'] = array(
     'bundle' => 'breaking_news',
@@ -1115,13 +1005,10 @@ function feature_for_breaking_news_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('City');
   t('Comment');
   t('Content Type');
-  t('Description');
-  t('Display name');
+  t('Content details');
   t('Display on');
-  t('Ex- News Flash, Dhoni/text etc.');
   t('Extra large image');
   t('Extra small image');
   t('Image Size (210 x 145)');
@@ -1131,15 +1018,18 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Image Size (88 x 66)');
   t('Keywords');
   t('Large image');
+  t('Mark as Breaking band');
   t('Medium image');
   t('Mobile Subscribers');
-  t('News Title 2');
-  t('Notification');
+  t('Notification ');
   t('Publish Time');
+  t('Publish time should be 24 hr format');
   t('Redirection url');
   t('Section');
   t('Short Description');
   t('Small image');
+  t('Tags');
+  t('Title');
   t('Type');
   t('source');
 
