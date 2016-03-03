@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature For Ask an Expert feature.
+ */
+
+include_once 'feature_for_ask_an_expert.features.inc';

@@ -22,7 +22,7 @@ function feature_for_recipe_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Recipe Management';
+  $handler->display->display_options['title'] = 'Manage Recipes';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -379,19 +379,21 @@ function feature_for_recipe_views_default_views() {
     5 => 0,
     20 => 0,
     6 => 0,
+    21 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
-    19 => 0,
     17 => 0,
     14 => 0,
     12 => 0,
+    19 => 0,
     15 => 0,
     18 => 0,
   );
   $handler->display->display_options['filters']['field_recipe_section_tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['field_recipe_section_tid']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['field_recipe_section_tid']['error_message'] = FALSE;
   /* Filter criterion: Content: Content type (field_recipe_content_type) */
   $handler->display->display_options['filters']['field_recipe_content_type_value']['id'] = 'field_recipe_content_type_value';
   $handler->display->display_options['filters']['field_recipe_content_type_value']['table'] = 'field_data_field_recipe_content_type';

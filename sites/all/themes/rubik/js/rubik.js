@@ -129,9 +129,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').addClass('fixed');
+          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').removeClass('fixed');
+          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
@@ -215,6 +215,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('#block-menu-menu-admin-left-menu').mouseover(function(){
     $('select').blur();
   });
+  
+  $('.node-type-survey div.clearfix .field-add-more-submit, .page-node-add-survey div.clearfix .field-add-more-submit').val('Add another question');
+  $('.node-type-survey .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit, .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit').val('Add another answer');
   
   
   
