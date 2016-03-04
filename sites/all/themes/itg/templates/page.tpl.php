@@ -10,7 +10,7 @@
 
 <div id="page">
   <header class="header" id="header" role="banner">
-    <section class="section">
+    <section class="container">
     <?php if ($logo): ?>
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
     <?php endif; ?>
@@ -49,8 +49,7 @@
     </section>
   </header>
 
-  <main id="main" class="section">
-    <div class="full dib">
+  <main id="main" class="container">
     <div class="row">
     <section id="content" class="col-md-9" role="main">
       <?php print render($page['highlighted']); ?>
@@ -113,7 +112,6 @@
         <?php print $sidebar_second; ?>
       </aside>
     <?php endif; ?>
-    </div>
     </div>
   </main>
 

@@ -11,6 +11,9 @@ body{
 .mt-10{
   margin-top: 10px;
 }
+.ml-10{
+  margin-left: 10px;
+}
 .mb-10{
   margin-bottom: 10px;
 }
@@ -92,17 +95,11 @@ input[type="text"], select, input[type="password"]{
   @extend .pd-0;
   box-sizing: border-box;
 }
-#main{
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-#page .section{
-  max-width: 1170px;
-  margin: 0 auto;
-}
+#page{padding-bottom: 30px; @extend .full; @extend .dib;}
 .header{
   @extend .pdtb-10;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 .tabs-primary{
   @extend .no-bullet;
@@ -175,8 +172,14 @@ input[type="text"], select, input[type="password"]{
 
 #block-formblock-ask-an-expert{
   h2{@extend .pdb-10; border-bottom: 1px solid #ddd; @extend .mb-10;}
-  .form-item{@extend .mb-10;}
+  .form-item{
+    @extend .mb-10;
+    .form-item{@extend .mr-0;}
+  }
   .captcha{@extend .pd-10;}
   .form-text{@extend .full;}
   .form-submit{@extend .btn; @extend .mt-10;}
+  .form-field-name-field-disclose-your-identity{
+    .form-checkboxes{@extend .dib; @extend .vtop; @extend .ml-10;}
+  }
 }
