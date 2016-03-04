@@ -123,6 +123,9 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
     switch ($form_id) {
     case 'story_node_form':
+      if (!isset($_REQUEST['destination'])) {
+        $_REQUEST['destination'] = '';
+      }
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       unset($form['actions']['preview_changes']);
       $form['actions']['cancel'] = array(
@@ -279,8 +282,8 @@ function itg_story_after_build($form, &$form_state) {
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
   //$form['metatags']['#prefix'] = '<div class="story-title">Meta Tags</div>';
-  if ($form['#node']->nid) {
-  $form['field_story_configurations'][LANGUAGE_NONE]['breaking_news']['#attributes']['disabled'] = 'disabled';
+  if (isset($form['#node']->nid) && $form['#node']->nid) {
+    $form['field_story_configurations'][LANGUAGE_NONE]['breaking_news']['#attributes']['disabled'] = 'disabled';
   }
   $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
   $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';
