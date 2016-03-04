@@ -94,6 +94,8 @@
                        $('#edit-field-story-select-magazine').hide();
                        $('#edit-field-story-select-supplement').hide();
                        $('#edit-field-story-issue-date').hide();
+                       $("#edit-field-story-issue-date-und-0-value-datepicker-popup-0").val('');
+                       //
                      }
                      
                  });

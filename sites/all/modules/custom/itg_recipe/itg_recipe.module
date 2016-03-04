@@ -82,7 +82,7 @@ function itg_recipe_after_build($form, &$form_state) {
 function itg_recipe_views_pre_render(&$view) {
   //Add "Create recipe" button on listing page of recipe
   if ($view->name == "recipe_management") {
-    $header_content_recipe = '<a href="./node/add/recipe">Create Recipe</a>';
+    $header_content_recipe = l(t('Create Recipe'), 'node/add/recipe');
     $view->attachment_before = $header_content_recipe;
   }
 }

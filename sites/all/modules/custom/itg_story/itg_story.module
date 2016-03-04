@@ -252,7 +252,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
     }
     
     // Code for issue exit or not.
-    if (isset($node->field_story_issue_date[LANGUAGE_NONE])) {
+    if (!empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
       $issue = itg_story_checked_issue($node->field_story_issue_date[LANGUAGE_NONE][0]['value']);
       if (!$issue) {        
         form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue dose not exit."));
@@ -355,14 +355,14 @@ function itg_story_create_breaking_news($story_node) {
  * Implements hook_permission.
  * @param type $node
  */
-function itg_story_node_insert($node) {
- 
-  foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
-    if ($val['value'] == 'breaking_news') {
-      itg_story_create_breaking_news($node);
-    }
-  }
-    
+function itg_story_node_insert($node) { 
+  if ($node->workbench_moderation_state_new != 'draft') {
+   foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+     if ($val['value'] == 'breaking_news') {
+       itg_story_create_breaking_news($node);
+     }
+   }
+  }    
 }
 
 /**
