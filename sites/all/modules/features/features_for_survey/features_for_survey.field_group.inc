@@ -29,13 +29,14 @@ function features_for_survey_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Basic Settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-survey-basic-settings field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-survey-basic-settings field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_survey_basic_settings|node|survey|form'] = $field_group;
@@ -53,18 +54,19 @@ function features_for_survey_field_group_info() {
     'label' => 'Date Settings',
     'weight' => '3',
     'children' => array(
-      0 => 'field_survey_end_date',
-      1 => 'field_survey_start_date',
+      0 => 'field_survey_start_date',
+      1 => 'field_survey_end_date',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Date Settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-survey-date-settings field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-survey-date-settings field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_survey_date_settings|node|survey|form'] = $field_group;
@@ -86,13 +88,14 @@ function features_for_survey_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Section',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-survey-section field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-survey-section field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_survey_section|node|survey|form'] = $field_group;
