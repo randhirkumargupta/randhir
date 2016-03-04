@@ -1071,3 +1071,17 @@ table td, table th{max-width: 200px;}
 [id*="field-blog-blogger-values"] .ajax-new-content .form-item{margin-top: 10px;}
 [id*="field-blog-blogger-values"] .form-item span.error{padding: 0;}
 
+
+.page-node-add-story table td, 
+.node-type-story table td, 
+.page-node-add-story table th,
+.node-type-story table th{max-width: none;}
+.page-node-add-story .tabledrag-hide, .node-type-story .tabledrag-hide{display: none;}
+#category .hierarchical-select-wrapper table{border: none;}
+#category .hierarchical-select-wrapper .dropbox .dropbox-title{float: left; text-align: left; width: 300px;}
+#category .hierarchical-select-wrapper .dropbox tbody{float: left; width: 500px;}
+#category .hierarchical-select-wrapper .dropbox tr.dropbox-entry.first, 
+#category .hierarchical-select-wrapper .dropbox td{border: none; padding: 5px 0;}
+#category .hierarchical-select-wrapper .dropbox .dropbox-item{padding: 0 5px; display: inline-block; vertical-align: middle;}
+#category .hierarchical-select-wrapper .dropbox td.dropbox-remove{padding:5px;}
+
