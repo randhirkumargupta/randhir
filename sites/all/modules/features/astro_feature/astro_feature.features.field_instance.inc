@@ -692,7 +692,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_astro_video',
-    'label' => 'Collective Video for all zodiac signs.',
+    'label' => 'Collective Video for all zodiac signs',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -806,7 +806,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_buzz_description',
-    'label' => 'Collective Text for all zodiac signs.',
+    'label' => 'Collective Text for all zodiac signs',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -847,7 +847,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_common_audio_file',
-    'label' => 'Collective Audio for all zodiac signs.',
+    'label' => 'Collective Audio for all zodiac signs',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -1032,9 +1032,9 @@ function astro_feature_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Audio');
   t('Based on any selection(Daily, Weekly, Monthly and Yearly), system will automatically calculate the date range.');
-  t('Collective Audio for all zodiac signs.');
-  t('Collective Text for all zodiac signs.');
-  t('Collective Video for all zodiac signs.');
+  t('Collective Audio for all zodiac signs');
+  t('Collective Text for all zodiac signs');
+  t('Collective Video for all zodiac signs');
   t('Date Range');
   t('Enter Number');
   t('Enter Text');
