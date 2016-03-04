@@ -160,10 +160,6 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    5 => '5',
-    6 => '6',
-    22 => '22',
-    20 => '20',
     10 => '10',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
