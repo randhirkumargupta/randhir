@@ -1,7 +1,6 @@
 name = Mega Review & Critic Features
 core = 7.x
 package = Features
-dependencies[] = feature_for_recipe
 dependencies[] = field_collection_fieldset
 dependencies[] = metatag
 dependencies[] = node
@@ -71,3 +70,4 @@ features_exclude[dependencies][features] = features
 features_exclude[dependencies][field_collection] = field_collection
 features_exclude[dependencies][image] = image
 features_exclude[dependencies][strongarm] = strongarm
+features_exclude[dependencies][feature_for_recipe] = feature_for_recipe
