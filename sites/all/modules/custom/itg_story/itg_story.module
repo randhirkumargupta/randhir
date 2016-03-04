@@ -192,6 +192,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
  * @param type $form   
  */
 function itg_story_node_validate($node, $form, &$form_state) {
+ 
   // Code for redirection url validation
   if ($node->type == 'story') {
     $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
@@ -257,6 +258,11 @@ function itg_story_node_validate($node, $form, &$form_state) {
       if (!$issue) {        
         form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue dose not exit."));
       }
+    }
+   
+    // Code for category validation.
+    if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid'])) {             
+      form_set_error('edit-field-story-category-und-hierarchical-select-selects-0', t("Section field is required."));      
     }
   }
 }
@@ -377,8 +383,8 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $magazine_field = 'field_story_select_magazine';
     $supplement_field = 'field_story_select_supplement';
     // set magazine on edit and trigger action
-    if(isset($form[$magazine_field]['und']['#default_value'][0]) && !isset($form_state['triggering_element'])) {
-      $magazine_id = $form[$magazine_field]['und']['#default_value'][0];
+    if(isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
+      $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
     } else {
       $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
     }
