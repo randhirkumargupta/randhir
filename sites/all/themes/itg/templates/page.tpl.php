@@ -9,9 +9,8 @@
 ?>
 
 <div id="page">
-
   <header class="header" id="header" role="banner">
-    <section class="section">
+    <section class="container">
     <?php if ($logo): ?>
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
     <?php endif; ?>
@@ -50,9 +49,9 @@
     </section>
   </header>
 
-  <div id="main">
-
-    <div id="content" class="column" role="main">
+  <main id="main" class="container">
+    <div class="row">
+    <section id="content" class="col-md-9" role="main">
       <?php print render($page['highlighted']); ?>
       <?php if(arg(0)!= 'user'): print $breadcrumb; ?>
       <?php endif; ?>
@@ -71,8 +70,8 @@
       <?php endif; ?>
       <?php print render($page['content']); ?>
       <?php print $feed_icons; ?>
-    </div>
-
+    </section>
+    <?php if (false): ?>
     <div id="navigation">
 
       <?php if ($main_menu): ?>
@@ -99,6 +98,7 @@
       <?php print render($page['navigation']); ?>
 
     </div>
+    <?php endif; ?>
 
     <?php
       // Render the sidebars to see if there's anything in them.
@@ -107,13 +107,13 @@
     ?>
 
     <?php if ($sidebar_first || $sidebar_second): ?>
-      <aside class="sidebars">
+      <aside class="sidebars col-md-3">
         <?php print $sidebar_first; ?>
         <?php print $sidebar_second; ?>
       </aside>
     <?php endif; ?>
-
-  </div>
+    </div>
+  </main>
 
   <?php print render($page['footer']); ?>
 
