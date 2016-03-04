@@ -184,10 +184,9 @@ function itg_term_views_pre_render(&$view) {
                 unset($_SESSION['messages']);
                   $filepath = $matches[0][2];
                   $filename = $matches[0][3];
-                  $download_link = "<a href='".$filepath."'>".$filename."</a>";
+                  $download_link = "<a href='" . $filepath . "'>" . $filename . "</a>";
                 //To override message
-                 drupal_set_message(t('Click to this link. '.$download_link));
-
+                drupal_set_message(t('Click to this link to download CSV @csvfile'), array(@csvfile => $download_link));
             }
         } 
     }
@@ -201,34 +200,7 @@ function itg_term_views_pre_render(&$view) {
   }
 }
 
-/* 
-* @param array $result   
-* Download taxonomy term
-*/
-function export_to_csv($result) {
-   
-    //$filename = $result[0][2];
-    $filename = $result[0][3];
-    $filename = "public://".$filename;
-    $filename = str_replace(" ", "", $filename);
 
-    if (file_exists($filename)) {
-    $url = $filename;
-    $http_headers = array(
-        'Content-Type' => 'text/csv',
-        'Content-Disposition' => 'attachment; filename="' . 'new.csv' . '"',
-        'Content-Length' => filesize($url),
-      );
-    if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
-        $http_headers['Cache-Control'] = 'must-revalidate, post-check=0, pre-check=0';
-        $http_headers['Pragma'] = 'public';
-    } else {
-        $http_headers['Pragma'] = 'no-cache';
-    }
-      
-      file_transfer($url, $http_headers);
-    }
-}  
 
 /**
  * Implements _form_validate() for taxonomy_form_term().
