@@ -56,9 +56,7 @@ function texonomy_term_ajax_confirm_submit($form, &$form_state) {
     taxonomy_term_delete($tid);
     drupal_set_message(t('Delete %title.', array('%title' => $term->name)));
     }
-
   drupal_goto('tags-management'); // this is menu callback for 
-
 }
 
 
@@ -70,7 +68,6 @@ function texonomy_term_ajax_confirm_submit($form, &$form_state) {
  * @return array $form
  */
 function itg_term_form_alter(&$form, &$form_state, $form_id) {
-       
     switch ($form_id) {
         case 'taxonomy_form_term':
           //Call valiadte and after build
@@ -83,7 +80,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
              $form['tab']['content']['#title'] = FALSE;
               $form['tab']['csv_format']['#access'] = FALSE;
               $form['tab']['advanced_options']['#access'] = FALSE;
-              $form['tab']['content']['#title'] = 'Vocabularies to export for tags'; 
+              $form['tab']['content']['#title'] = t('Vocabularies to export for tags'); 
               
               $form['tab']['content']['export_format']['#access'] = FALSE;
               $form['tab']['content']['export_vocabulary_id']['#access'] = FALSE;
@@ -182,9 +179,15 @@ function itg_term_views_pre_render(&$view) {
         elseif ($message_arr['status'][0] == 'Terms are exported from Tags.') {
             $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>";
             if (preg_match_all("/$regexp/siU", $message_arr['status'][2], $matches, PREG_SET_ORDER)) {
-            // Start the session
-               session_start();
-               $_SESSION['csv_flag'] = $matches;
+                 
+                // To unset message
+                unset($_SESSION['messages']);
+                  $filepath = $matches[0][2];
+                  $filename = $matches[0][3];
+                  $download_link = "<a href='".$filepath."'>".$filename."</a>";
+                //To override message
+                 drupal_set_message(t('Click to this link. '.$download_link));
+
             }
         } 
     }
@@ -192,10 +195,9 @@ function itg_term_views_pre_render(&$view) {
     //Add "Create Tag" button on listing page of Tags Management
     $header_content_term = '<a href="./admin/structure/taxonomy/tags/add">Create Tag</a>&nbsp;<a href="./admin/structure/taxonomy/csv_import">CSV import</a>&nbsp;<a href="./admin/structure/taxonomy/csv_export">CSV export</a>';
     $view->attachment_before = $header_content_term;
+          
 
-          if (isset($_SESSION['csv_flag'])) {
-              export_to_csv($_SESSION['csv_flag']);
-          }
+
   }
 }
 
@@ -204,9 +206,28 @@ function itg_term_views_pre_render(&$view) {
 * Download taxonomy term
 */
 function export_to_csv($result) {
-  $path = $result[0][2];
-  $file_name = $result[0][3];
-  unset($_SESSION['csv_flag']);
+   
+    //$filename = $result[0][2];
+    $filename = $result[0][3];
+    $filename = "public://".$filename;
+    $filename = str_replace(" ", "", $filename);
+
+    if (file_exists($filename)) {
+    $url = $filename;
+    $http_headers = array(
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="' . 'new.csv' . '"',
+        'Content-Length' => filesize($url),
+      );
+    if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
+        $http_headers['Cache-Control'] = 'must-revalidate, post-check=0, pre-check=0';
+        $http_headers['Pragma'] = 'public';
+    } else {
+        $http_headers['Pragma'] = 'no-cache';
+    }
+      
+      file_transfer($url, $http_headers);
+    }
 }  
 
 /**
