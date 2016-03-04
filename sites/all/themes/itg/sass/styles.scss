@@ -155,10 +155,7 @@ input[type="text"], select, input[type="password"]{
       color: #8d8d8d;
     }
   }
-  #content{
-    max-width: 455px;
-    margin: 100px auto 0;
-  }
+  .login-wrapper{max-width: 440px; margin: 0 auto;}
 } 
 .login{
   line-height: 58px;
