@@ -64,7 +64,6 @@
   <main id="main" class="container">
     <div class="row">
     <section id="content" class="<?php echo $cls;?>" role="main">
-      <div class="login-wrapper"
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
         <a id="main-content"></a>
@@ -81,7 +80,6 @@
         <?php endif; ?>
         <?php print render($page['content']); ?>
         <?php print $feed_icons; ?>
-      </div>
     </section>
       
     <?php if(false){ ?> 
