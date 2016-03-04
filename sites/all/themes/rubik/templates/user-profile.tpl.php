@@ -32,6 +32,7 @@
  *
  * @ingroup themeable
  */
+
 ?>
 <div class="user-profile-div">
   <?php if ($user_profile): ?>
@@ -61,7 +62,15 @@
     </div>
     <div class="field">
       <div class="field-label">Role:</div>
-      <div class="field-items"><?php print end($elements['#account']->roles); ?></div> 
+      <div class="field-items"><?php 
+      // get role array
+      $role_display=$elements['#account']->roles;
+      // skip key for authenticated user
+      $role_display=array_slice($role_display,1);
+      // get value in comma seprated
+      $role_display = implode(',', $role_display);
+      
+      print $role_display;?></div> 
     </div>
     <div class="field">
       <div class="field-label"><?php print_r($user_profile['summary']['member_for']['#title']); ?>:</div>

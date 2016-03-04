@@ -118,6 +118,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
       drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
     );
+    $form['title']['#default_value'] = date('m/d/Y');
     $form['#action'] = '?destination=manage-astro';
     $form['actions']['submit']['#submit'][] = 'itg_common_change_message';
     $form['#validate'][] = 'itg_common_validate_astro';
@@ -233,7 +234,7 @@ function itg_common_validate_astro($form, &$form_state) {
   }
   if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_numerology_values']['und'][0]['field_buzz_description']['und'][0]['value'] == '') {
     form_set_error('field_story_source_id', 'Please enter description.');
-  }
+  }  
 }
 
 /**
@@ -246,3 +247,56 @@ function itg_common_change_message($form, &$form_state) {
   drupal_set_message(t('Astro has been successfully filled.'));
 }
 
+/**
+ * Implements hook_block_info().
+ */
+function itg_common_block_info() {
+  $blocks['astro_tab_form_block'] = array(
+    'info' => t('Astro Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_common_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'astro_tab_form_block':                       
+      $block['content'] = theme('astro_tab_form_display_block', array('data' => $data));
+    break;        
+  }
+  
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ * @param type $existing
+ * @param type $type
+ * @param type $theme
+ * @param type $path
+ */
+function itg_common_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'astro_tab_form_display_block' => array(
+      'template' => 'astro-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'astro_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'astro-node-form',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+
+  return $themes;
+}
