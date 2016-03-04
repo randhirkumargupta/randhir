@@ -233,7 +233,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['field_survey_start_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_survey_start_date']['type'] = 'date_plain';
   $handler->display->display_options['fields']['field_survey_start_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -269,7 +269,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['label'] = 'Ananymous User Survey';
+  $handler->display->display_options['fields']['php']['label'] = 'Anonymous User Survey';
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php echo \'0%\';?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -372,9 +372,8 @@ function features_for_survey_views_default_views() {
     5 => 0,
     20 => 0,
     6 => 0,
-    21 => 0,
-    19 => 0,
     10 => 0,
+    19 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -385,6 +384,7 @@ function features_for_survey_views_default_views() {
     18 => 0,
   );
   $handler->display->display_options['filters']['field_survey_category_tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['field_survey_category_tid']['error_message'] = FALSE;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
