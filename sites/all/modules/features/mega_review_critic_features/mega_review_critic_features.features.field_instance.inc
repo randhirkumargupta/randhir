@@ -161,6 +161,40 @@ function mega_review_critic_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'field_collection_item-field_mega_review_review-field_story_rating'.
+  $field_instances['field_collection_item-field_mega_review_review-field_story_rating'] = array(
+    'bundle' => 'field_mega_review_review',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_rating',
+    'label' => 'Rating',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'node-mega_review_critic-field_mega_review_cast'.
   $field_instances['node-mega_review_critic-field_mega_review_cast'] = array(
     'bundle' => 'mega_review_critic',
@@ -173,7 +207,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -186,7 +220,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_mega_review_cast',
     'label' => 'Cast',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -196,9 +230,9 @@ function mega_review_critic_features_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 3,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 1,
     ),
   );
@@ -229,7 +263,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_mega_review_director',
     'label' => 'Director',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -427,6 +461,74 @@ function mega_review_critic_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-mega_review_critic-field_mega_review_video'.
+  $field_instances['node-mega_review_critic-field_mega_review_video'] = array(
+    'bundle' => 'mega_review_critic',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mega_review_video',
+    'label' => 'Associate Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'txt',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 15,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-mega_review_critic-field_mega_review_youtube_url'.
   $field_instances['node-mega_review_critic-field_mega_review_youtube_url'] = array(
@@ -505,7 +607,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_recipe_small_image',
     'label' => 'Small image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -582,7 +684,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
     'label' => 'Extra large image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -659,7 +761,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_small_image',
     'label' => 'Extra small image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -735,7 +837,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_large_image',
     'label' => 'Large image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -812,7 +914,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_medium_image',
     'label' => 'Medium image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -864,6 +966,7 @@ function mega_review_critic_features_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Associate Photo Gallery');
+  t('Associate Video');
   t('By Line');
   t('Cast');
   t('Description');
@@ -874,6 +977,7 @@ function mega_review_critic_features_field_default_field_instances() {
   t('Large image');
   t('Medium image');
   t('Movie Plot');
+  t('Rating');
   t('Review');
   t('Review URL Link');
   t('Small image');
