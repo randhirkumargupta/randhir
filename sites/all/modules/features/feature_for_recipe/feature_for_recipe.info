@@ -1,5 +1,5 @@
 name = Feature for recipe
-description = Recipe Management Bug fixed 395, 394, 392, 390, 387
+description = Recipe Management Bug fixed 395, 394, 392, 390, 387, 454, 455, 456
 core = 7.x
 package = Features
 version = 7.x-1.0-beta2
