@@ -449,6 +449,7 @@ form .form-item .form-item{
 #block-itg-story-story-tab-form-block, 
 #block-itg-breaking-news-breaking-news-tab-form-block, 
 #block-menu-menu-story-content-admin-menu, 
+#block-menu-menu-photogallery-admin-menu, 
 #block-itg-photogallery-photogallery-tab-form-block, 
 #block-itg-recipe-recipe-tab-form-block{
   border-left: none;
@@ -458,13 +459,18 @@ form .form-item .form-item{
 #block-itg-recipe-recipe-tab-form-block .block-content, 
 #block-itg-breaking-news-breaking-news-tab-form-block .block-content, 
 #block-menu-menu-story-content-admin-menu .block-content, 
+#block-menu-menu-photogallery-admin-menu .block-content,
 #block-itg-photogallery-photogallery-tab-form-block .block-content{
   padding: 0;
 }
-.block-itg-story-list, #block-menu-menu-story-content-admin-menu .block-content .ul{
+.block-itg-story-list, 
+#block-menu-menu-story-content-admin-menu .block-content .ul, 
+#block-menu-menu-photogallery-admin-menu .block-content .ul{
   text-align: center;
 }
-.block-itg-story-list span, #block-menu-menu-story-content-admin-menu .block-content ul li{
+.block-itg-story-list span, 
+#block-menu-menu-story-content-admin-menu .block-content ul li,
+#block-menu-menu-photogallery-admin-menu .block-content ul li{
   cursor: pointer;
   display: inline-block;
   padding: 10px 20px;
@@ -475,15 +481,21 @@ form .form-item .form-item{
   text-transform: uppercase;
   border: none;
 }
-#block-menu-menu-story-content-admin-menu .block-content ul li{padding: 0;}
-#block-menu-menu-story-content-admin-menu .block-content ul li a{padding: 10px 20px; display: block; color: #666; position: relative;}
+#block-menu-menu-story-content-admin-menu .block-content ul li,
+#block-menu-menu-photogallery-admin-menu .block-content ul li{padding: 0;}
+#block-menu-menu-story-content-admin-menu .block-content ul li a,
+#block-menu-menu-photogallery-admin-menu .block-content ul li a{padding: 10px 20px; display: block; color: #666; position: relative;}
 .block-itg-story-list span.active, .block-itg-story-list span:hover, 
-#block-menu-menu-story-content-admin-menu .block-content ul li a.active, #block-menu-menu-story-content-admin-menu .block-content ul li a:hover{
+#block-menu-menu-story-content-admin-menu .block-content ul li a.active, 
+#block-menu-menu-photogallery-admin-menu .block-content ul li a.active, 
+#block-menu-menu-story-content-admin-menu .block-content ul li a:hover,
+#block-menu-menu-photogallery-admin-menu .block-content ul li a:hover{
   color: #008eb1;
   background-color: #fff;
 }
 .block-itg-story-list span.active:after, 
-#block-menu-menu-story-content-admin-menu .block-content ul li a.active:after{
+#block-menu-menu-story-content-admin-menu .block-content ul li a.active:after, 
+#block-menu-menu-photogallery-admin-menu .block-content ul li a.active:after{
   content: '';
   position: absolute;
   left: 0;
