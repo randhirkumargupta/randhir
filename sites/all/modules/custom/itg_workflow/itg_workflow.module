@@ -200,7 +200,7 @@ function itg_workflow_views_query_alter(&$view, &$query) {
  * @param type $query * 
  */
 function itg_workflow_query_alter(QueryAlterableInterface $query) {
-  if ($query->hasTag('views')) {
+  if (isset($query->hasTag) && $query->hasTag('views')) {
     static $count;
     $view =& $query->getMetaData('view');
     if ($view->name == 'view_moderation_history' || $view->current_display == 'block_1') {
@@ -220,7 +220,7 @@ function itg_workflow_node_access($node, $op, $account) {
   
  $arr_source_type = array('issue', 'supplement');
  
-  if (isset($node->type) && $node->type == 'story' && $op == 'update' && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type)) {
+  if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
     $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
     $current_time = time();
     if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected'))
