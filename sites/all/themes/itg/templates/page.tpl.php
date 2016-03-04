@@ -48,10 +48,20 @@
     <?php print render($page['header']); ?>
     </section>
   </header>
-
+    <?php
+      // Render the sidebars to see if there's anything in them.
+      $sidebar_first  = render($page['sidebar_first']);
+      $sidebar_second = render($page['sidebar_second']);
+    ?>
+    <?php 
+      $cls = 'col-md-12';
+      if ($sidebar_first || $sidebar_second):
+        $cls = 'col-md-9';
+    endif; ?>
+  
   <main id="main" class="container">
     <div class="row">
-    <section id="content" class="col-md-9" role="main">
+    <section id="content" class="<?php echo $cls;?>" role="main">
       <?php print render($page['highlighted']); ?>
       <?php if(arg(0)!= 'user'): print $breadcrumb; ?>
       <?php endif; ?>
@@ -99,13 +109,7 @@
 
     </div>
     <?php endif; ?>
-
-    <?php
-      // Render the sidebars to see if there's anything in them.
-      $sidebar_first  = render($page['sidebar_first']);
-      $sidebar_second = render($page['sidebar_second']);
-    ?>
-
+      
     <?php if ($sidebar_first || $sidebar_second): ?>
       <aside class="sidebars col-md-3">
         <?php print $sidebar_first; ?>
