@@ -40,17 +40,15 @@
    <div class="field field-name-field-user-name field-type-text field-label-inline clearfix"><div class="field-label">Question:&nbsp;</div><div class="field-items"><div class="field-item even"><?php print $title; ?></div></div></div>
    <?php
    $identity = $content['field_disclose_your_identity']['#items']['0']['value'];
-   print render($content['field_user_city']);
-   print render($content['field_user_state']);
-   print render($content['field_user_message']);
-   
    if(!empty($identity)) {
    print render($content['field_user_name']);
    print render($content['field_user_email']);
    }
-    
-  ?>
-
+   print render($content['field_user_city']);
+   print render($content['field_user_state']);
+   ?>
+  <?php print render($content['field_user_message']);?>
+   
   <?php print render($content['links']); ?>
 
   <?php print render($content['comments']); ?>

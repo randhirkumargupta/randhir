@@ -1047,19 +1047,19 @@ table td, table th{max-width: 200px;}
 .node-survey-form .vertical-tabs, .node-blog-form .vertical-tabs{padding: 10px 0 0 10px;}
 .preview-wrapper .field-collection-view-links{display: none;}
 .preview-wrapper .field-collection-container .field-collection-view{margin: 0; padding: 0;}
-.page-node-add-survey .preview-wrapper .node-content, 
-.node-type-survey .preview-wrapper .node-content{padding: 0 20px;}
 .node-type-survey .preview-wrapper .field-label{font-weight: normal;}
-.node-type-survey .block-content > .node-survey-form .column-main{width: 64%;}
-.node-type-survey .block-content > .node-content .field{display: inline-block; width: 100%; padding-bottom: 10px;}
-.node-type-survey .block-content > .node-content .field .field-label{float: left; width: 240px;}
-.node-type-survey .block-content > .node-content .field .field-items{float: left; width: 560px;}
-.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view{margin: 0; padding: 0;}
-.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
-.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
-.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view .field .field-items{width: 400px;} 
-.node-type-survey .block-content > .node-content .field-collection-container .field-collection-view .field-collection-view-links,
-.node-type-survey .block-content > .node-content .field-collection-container .action-links{display: none;} 
+.node-survey-form .column-main{width: 65%;}
+.node-type-survey .block-content > .node-survey > .column-main{float: left; width: 100%;}
+.node-type-survey .block-content > .node-survey > .column-side{display: none;}
+.node-type-survey .block-content > .node-survey > .column-main .field{display: inline-block; width: 100%; padding-bottom: 10px;}
+.node-type-survey .block-content > .node-survey > .column-main .field .field-label{float: left; width: 240px;}
+.node-type-survey .block-content > .node-survey > .column-main .field .field-items{float: left; width: 560px;}
+.node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view{margin: 0; padding: 0;}
+.node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
+.node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
+.node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field .field-items{width: 400px;} 
+.node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field-collection-view-links,
+.node-type-survey .block-content > .node-survey > .column-main .field-collection-container .action-links{display: none;} 
 .field-collection-view{border-bottom: 1px dashed #d3d7d9;}
 .node-survey-form .field-multiple-table .field-multiple-table tbody{float: left;}
 [id*="field-survey-add-questions-values"] + div .field-add-more-submit{margin: 0;}
@@ -1070,4 +1070,18 @@ table td, table th{max-width: 200px;}
 [id*="field-blog-blogger-values"] .form-item > label{display: none;}
 [id*="field-blog-blogger-values"] .ajax-new-content .form-item{margin-top: 10px;}
 [id*="field-blog-blogger-values"] .form-item span.error{padding: 0;}
+
+
+.page-node-add-story table td, 
+.node-type-story table td, 
+.page-node-add-story table th,
+.node-type-story table th{max-width: none;}
+.page-node-add-story .tabledrag-hide, .node-type-story .tabledrag-hide{display: none;}
+#category .hierarchical-select-wrapper table{border: none;}
+#category .hierarchical-select-wrapper .dropbox .dropbox-title{float: left; text-align: left; width: 300px;}
+#category .hierarchical-select-wrapper .dropbox tbody{float: left; width: 500px;}
+#category .hierarchical-select-wrapper .dropbox tr.dropbox-entry.first, 
+#category .hierarchical-select-wrapper .dropbox td{border: none; padding: 5px 0;}
+#category .hierarchical-select-wrapper .dropbox .dropbox-item{padding: 0 5px; display: inline-block; vertical-align: middle;}
+#category .hierarchical-select-wrapper .dropbox td.dropbox-remove{padding:5px;}
 

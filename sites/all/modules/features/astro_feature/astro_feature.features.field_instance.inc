@@ -224,7 +224,7 @@ function astro_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -295,7 +295,7 @@ function astro_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
@@ -359,7 +359,7 @@ function astro_feature_field_default_field_instances() {
     'description' => 'Please select zodiac sign name.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -392,7 +392,7 @@ function astro_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
@@ -456,7 +456,7 @@ function astro_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -545,7 +545,11 @@ function astro_feature_field_default_field_instances() {
   // Exported field_instance: 'node-astro-field_astro_frequency'.
   $field_instances['node-astro-field_astro_frequency'] = array(
     'bundle' => 'astro',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'daily',
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Based on any selection(Daily, Weekly, Monthly and Yearly), system will automatically calculate the date range.',
     'display' => array(
@@ -688,7 +692,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_astro_video',
-    'label' => 'Collective Video for all zodiac signs.',
+    'label' => 'Collective Video for all zodiac signs',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -802,7 +806,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_buzz_description',
-    'label' => 'Collective Text for all zodiac signs.',
+    'label' => 'Collective Text for all zodiac signs',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -843,7 +847,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_common_audio_file',
-    'label' => 'Collective Audio for all zodiac signs.',
+    'label' => 'Collective Audio for all zodiac signs',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -996,7 +1000,7 @@ function astro_feature_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 4,
       ),
       'teaser' => array(
@@ -1028,9 +1032,9 @@ function astro_feature_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Audio');
   t('Based on any selection(Daily, Weekly, Monthly and Yearly), system will automatically calculate the date range.');
-  t('Collective Audio for all zodiac signs.');
-  t('Collective Text for all zodiac signs.');
-  t('Collective Video for all zodiac signs.');
+  t('Collective Audio for all zodiac signs');
+  t('Collective Text for all zodiac signs');
+  t('Collective Video for all zodiac signs');
   t('Date Range');
   t('Enter Number');
   t('Enter Text');

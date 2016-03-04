@@ -47,323 +47,6 @@ function pr($arg) {
 }
 
 /**
- * Implements hook_menu().
- */
-function itg_common_menu() {
-  $items['cms-user-dashboard'] = array(      
-      'page callback' => 'itg_common_cms_user_dashboard',     
-      'access callback' => 'user_is_logged_in',  
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_common.inc',
-  ); 
-  
-  return $items;
-}
-
-
-/**
- * Implements hook_form_alter().
- */
-function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  global $user;  
-  if ($form_id == 'astro_node_form') {
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
-      drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
-    );
-    $form['#action'] = '?destination=manage-astro';
-    $form['actions']['submit']['#submit'][] = 'itg_common_change_message';
-    $form['#validate'][] = 'itg_common_validate_astro';
-    $form['#after_build'][] = 'itg_common_astro_after_build'; 
-    unset($form['field_numerology']['und']['#options']['_none']);
-    unset($form['field_astro_frequency2']['und']['#options']['_none']);
-  }
-  
-  // condition for user register and profile form
-     if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
-      drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
-    );
-     }
-  if ($form_id == 'user_profile_form') {
-    $form['account']['name']['#attributes']['disabled'] = 'disabled';
-    $form['account']['mail']['#attributes']['disabled'] = 'disabled';
-    $form['account']['mail']['#weight'] = '-6';
-    $form['#validate'][] = 'itg_common_validate_user_profile_validate';
-    $form['#after_build'][] = 'itg_common_after_user_profile_validate';
-
-    if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
-      $user_array = array(COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
-      $user_id_log = $user->uid;
-      if (isset($user_array) && $user_id_log != arg(1)) {
-        unset($form['account']['pass']);
-      }
-    }
-    else if (array_key_exists(COPY_EDITOR, $user->roles)) {
-      $user_array = array(SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
-      $user_id_log = $user->uid;
-      if (isset($user_array) && $user_id_log != arg(1)) {
-        unset($form['account']['pass']);
-      }
-    }
-    else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-      $user_array = array(INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
-      $user_id_log = $user->uid;
-      if (isset($user_array) && $user_id_log != arg(1)) {
-        unset($form['account']['pass']);
-      }
-    }
-  }
-
-  if ($form_id == 'user_register_form') {
-    $form['#validate'][] = 'itg_common_validate_user_register_validate';
-    $form['#after_build'][] = 'itg_common_after_user_register_validate';
-  }
-
-  if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
-    if (isset($_GET['destination'])) {
-      $_GET['destination'] = $_GET['destination'];
-    }
-    else {
-      $form['#action'] = '?destination=user/' . $user->uid;
-    }
-    if ($user->uid != 1) {
-      $form['#after_build'][] = 'itg_user_after_build';
-
-  $tax=taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  
-  foreach($tax as $key => $val){
-        $op[$val->tid]=$val->name;
-      }
-  // assign array value to taxonomy field
-      $form['field_user_section']['und']['#options'] = $op;
-   
-      $user_role = itg_common_role_delegation($form['account']['roles']['#options']);
-      if (isset($user_role)) {
-        if ($form['#user']->uid != $user->uid) {
-          $form['selected'] = array(
-            '#type' => 'select',
-            '#title' => t('Select role'),
-            '#options' => $user_role,
-            '#default_value' => $form['account']['roles']['#default_value'][1],
-            '#required' => TRUE,
-          );
-        }
-      }
-      //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
-      $form['account']['notify']['#default_value'] = TRUE;
-      // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
-      $destination = 'user';
-      if (isset($_GET['destination'])) {
-        $destination = $_GET['destination'];
-      }
-      else {
-        $destination = 'user/' . $user->uid;
-      }
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-        '#weight' => 20,
-        '#value' => t('Cancel'),
-      );
-    }
-  } 
-  
-}
-
-
-/**
- * Password validation for adding user profile
- * @param array $form
- * @param array $form_state
- */
-
-function itg_common_validate_user_register_validate(&$form, &$form_state) {
-  if ($form_state['values']['pass']) {
-    if (!preg_match('/^[A-Za-z0-9!@#$%]{8,}$/', $form_state['values']['pass'])) {
-      form_set_error('pass', t('Password must be minimum 8 digit alphanumeric and without space.'));
-    }
-  }
-  
-  // get section value
-  $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
-  if ($form_state['values']['selected'] == EXPERT) {
-    if (empty($section[0]['tid'])) {
-    form_set_error('field_user_section', t("Section Field is required!"));
-    }
-  }
-  
-  if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR) {
-     //pr($form);
-    
-    $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
-    
-    if (empty($mark_expert)) {
-    form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
-    }
-    if (!empty($mark_expert) && empty($section[0]['tid'])) {
-    form_set_error('field_user_section', t("Section Field is required!"));
-    }
-  }
-
-
-}
-
-/**
- * Password validation for minimum or maximum 8 char 
- * @param array $form
- * @param array $form_state
- */
-
-function itg_common_after_user_register_validate(&$form, &$form_state) {
-  $form['account']['pass']['#attached']['js'][1]['data']['password']['tooShort']='Make it at least 8 characters';
-  return $form;
-}
-/**
- * Password validation for editing user profile
- * @param array $form
- * @param array $form_state
-
- */
-
-function itg_common_validate_user_profile_validate(&$form, &$form_state) {
-  if ($form_state['values']['pass']) {
-    if (!preg_match('/^[A-Za-z0-9!@#$%]{8,}$/', $form_state['values']['pass'])) {
-      form_set_error('pass', t('Password must be minimum 8 digit alphanumeric and without space.'));
-    }
-  }
-  // get section value
-  $section = $form_state['values']['field_user_section'][LANGUAGE_NONE];
-  if ($form_state['values']['selected'] == EXPERT) {
-    if (empty($section[0]['tid'])) {
-    form_set_error('field_user_section', t("Section Field is required!"));
-    }
-  }
-  
-  if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR) {
-     //pr($form);
-    
-    $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
-    
-    if (empty($mark_expert)) {
-    form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
-    }
-    if (!empty($mark_expert) && empty($section[0]['tid'])) {
-    form_set_error('field_user_section', t("Section Field is required!"));
-    }
-  }
-
-}
-/**
- * Password validation for minimum or maximum 8 char 
- * @param array $form
- * @param array $form_state 
- */
-
-function itg_common_after_user_profile_validate(&$form, &$form_state) {
-  $form['account']['pass']['#attached']['js'][1]['data']['password']['tooShort']='Make it at least 8 characters';  
-  
-  return $form;
-}
-
-/**
- * Implements views header link 
- *
- */
-function itg_common_views_pre_render(&$view) {
-    if ($view->name == "manage_users") {
-        global $user; // Get user information
-        //$roles = user_roles();
-        $header_content = '';
-        if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {
-            $header_content = '<a href ="./admin/people/create?destination=manage-users">Create User</a>';
-        }
-        $view->attachment_before = $header_content;
-    }    
-}
-
-/**
- * Implements hook_user_logout
- *
- */
-function itg_common_user_logout($account) {
-    $_GET['destination'] = 'user';
-}
-/*
- * 
- */
-function itg_common_role_delegation($role_array) {
-    global $user;
-
-    if (array_key_exists(EDITOR, $user->roles)) {
-        $user_array = array(AUTHOR_GUEST => 'Author/Guest', COPY_EDITOR => 'Copy Editor', INTERN => 'Intern', SECTION_EDITOR_ANCHOR => 'Section Editor/Anchor',  SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub' );
-    } else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
-        $user_array = array(AUTHOR_GUEST => 'Author/Guest',COPY_EDITOR => 'Copy Editor', INTERN => 'Intern', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub');
-    } else if (array_key_exists(COPY_EDITOR, $user->roles)) {
-        $user_array = array(AUTHOR_GUEST => 'Author/Guest', INTERN => 'Intern', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub' );
-    } else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-        $user_array = array(AUTHOR_GUEST => 'Author/Guest',INTERN => 'Intern' );
-    } else if (array_key_exists(SITE_ADMIN, $user->roles)) {
-        unset($role_array[3]);
-        $user_array = $role_array;
-    } else if (array_key_exists(ADMINISTRATOR, $user->roles)) {
-        $user_array = $role_array;
-    }
-
-    return $user_array;
-}
-/*
- * Function return desendent role at add user page 
- */
-function itg_common_role_delegation_uid() {
-    global $user;
-
-    if (array_key_exists(EDITOR, $user->roles)) {
-        $user_array = array(SECTION_EDITOR_ANCHOR => SECTION_EDITOR_ANCHOR, COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
-    } else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
-        $user_array = array(COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
-    } else if (array_key_exists(COPY_EDITOR, $user->roles)) {
-        $user_array = array(SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
-    } else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-        $user_array = array(INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
-    }
-
-    return $user_array;
-}
-
-// after build for user management form
-function itg_user_after_build($form, &$form_state) {
-    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js', array('weight' => 1));
-    return $form;
-}
-
-/*
- * Blocked and unblocked option for status filter in manage user view
- */
-function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-    if (($form['#id'] == 'views-exposed-form-manage-users-page')) {
-        $form['status']['#options'][1] = 'Unblocked';
-        $form['status']['#options'][0] = 'Blocked';
-    }
-}
-
-/**
- * Implements hook_theme().
- */
-function itg_common_theme($existing, $type, $theme, $path) {
-  $themes = array(
-    'cms_user_dashboard' => array(
-      'template' => 'cms-user-dashboard',
-      'path' => drupal_get_path('module', 'itg_common') . '/templates',
-      'variables' => array('data' => NULL),
-    ),    
-  );
-
-  return $themes;
-}
-
-
-/**
  * Helper function to populate the second dropdown.
  * @param type $id
  * @return $data
@@ -393,17 +76,61 @@ function itg_common_dropdown_supplement($id = '') {
 
 }
 
+/**
+ * Implements views header link 
+ *
+ */
+function itg_common_views_pre_render(&$view) {
+  
+  if ($view->name == "movie_review_list") {
+    global $user; // Get user information
+    
+    $header_content = l('Create Reviews', 'node/add/mega-review-critic');
+    
+    $view->attachment_before = $header_content;
+  }    
+}
 
 /**
- * Implement hook_user_login
- * @param Array $edit
- * @param Object $account
+ * Get file name from fid
+ * @param type $audioFid
  */
-function itg_common_user_login(&$edit, $account) {  
-  if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
-    $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
+function itg_common_file_name($audio_fid) {  
+  $itg_query = db_select('file_managed', 'f');
+  $itg_query->condition('fid', $audio_fid, '=')
+      ->fields('f', array('filename'));
+  
+  $itg_result = $itg_query->execute()->fetchField();  
+  if ($itg_result != '') {
+    return $itg_result;
   }
+  
+  return '';
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function itg_common_form_alter(&$form, &$form_state, $form_id) {
+  global $user;  
+  if ($form_id == 'astro_node_form') {
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
+      drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
+    );    
+    if ($form['nid']['#value'] == NULL) {
+      $form['title']['#default_value'] = date('m/d/Y');
+    }    
+    $form['#action'] = '?destination=manage-astro';
+    $form['actions']['submit']['#submit'][] = 'itg_common_change_message';
+    $form['#validate'][] = 'itg_common_validate_astro';
+    $form['#after_build'][] = 'itg_common_astro_after_build'; 
+    unset($form['field_numerology']['und']['#options']['_none']);
+    unset($form['field_astro_frequency2']['und']['#options']['_none']);
+  }   
+  
+}
+
 
 
 /**
@@ -523,18 +250,55 @@ function itg_common_change_message($form, &$form_state) {
 }
 
 /**
- * Get file name from fid
- * @param type $audioFid
+ * Implements hook_block_info().
  */
-function itg_common_file_name($audio_fid) {  
-  $itg_query = db_select('file_managed', 'f');
-  $itg_query->condition('fid', $audio_fid, '=')
-      ->fields('f', array('filename'));
+function itg_common_block_info() {
+  $blocks['astro_tab_form_block'] = array(
+    'info' => t('Astro Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   
-  $itg_result = $itg_query->execute()->fetchField();  
-  if ($itg_result != '') {
-    return $itg_result;
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_common_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'astro_tab_form_block':                       
+      $block['content'] = theme('astro_tab_form_display_block', array('data' => $data));
+    break;        
   }
   
-  return '';
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ * @param type $existing
+ * @param type $type
+ * @param type $theme
+ * @param type $path
+ */
+function itg_common_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'astro_tab_form_display_block' => array(
+      'template' => 'astro-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'astro_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'astro-node-form',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+
+  return $themes;
 }

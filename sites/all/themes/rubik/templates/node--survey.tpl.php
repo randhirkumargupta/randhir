@@ -37,7 +37,16 @@
 
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-      <?php print render($content) ?>
+      <?php hide($content['body']); ?>
+      <div class="field">
+        <div class="field-label">Survey Title:</div>
+        <div class="field-items"><?php echo $title; ?></div>
+      </div>
+      <div class="field">
+        <div class="field-label">Survey Instruction:</div>
+        <div class="form-items"><?php echo $content['body']['#object']->body[LANGUAGE_NONE][0]['value']; ?></div>
+      </div>
+      <?php print render($content);?>
     </div>
   <?php endif; ?>
 

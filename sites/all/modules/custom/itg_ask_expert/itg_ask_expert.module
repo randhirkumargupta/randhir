@@ -47,7 +47,7 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
      $form['field_user_name'][LANGUAGE_NONE][0]['value']['#value'] = $user_fields->field_first_name['und']['0']['value'];
     }
     
-    if ($form['#node']->nid) {
+    if (!empty($form['nid']['#value'])) {
      $form['title']['#attributes']['disabled'] = TRUE;
      $form['field_user_name'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
      $form['field_user_email'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
@@ -100,7 +100,7 @@ function itg_ask_expert_form_custom_callback($form, &$form_state) {
     unset($_SESSION['messages']);
   }
   if (empty($form['nid']['#value'])) {
-    $_SESSION['ask_an_expert_message']= 'Your query has been successfully submitted, our expert will reply you back soon..';
+    $_SESSION['ask_an_expert_message']= 'Your query has been successfully submitted, our expert will reply you back soon.';
   } else {
       drupal_set_message('Message updated successfully.');
   }

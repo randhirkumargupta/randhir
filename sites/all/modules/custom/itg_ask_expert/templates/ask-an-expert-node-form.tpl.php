@@ -7,7 +7,7 @@
  
 ?>
 <?php if(isset($_SESSION['ask_an_expert_message'] )): ?>
- <div id='success'>
+ <div id='success' class="success-message">
 <?php print $_SESSION['ask_an_expert_message'];
  unset($_SESSION['ask_an_expert_message']);
 ?>
