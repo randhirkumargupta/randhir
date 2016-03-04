@@ -186,7 +186,8 @@ function itg_term_views_pre_render(&$view) {
                   $filename = $matches[0][3];
                   $download_link = "<a href='" . $filepath . "'>" . $filename . "</a>";
                 //To override message
-                drupal_set_message(t('Click to this link to download CSV @csvfile'), array(@csvfile => $download_link));
+               
+               drupal_set_message(check_plain(t('Click to this link to download CSV ')) . $download_link);
             }
         } 
     }
