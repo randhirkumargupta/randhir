@@ -84,6 +84,12 @@ body{
     }
 }
 
+.success-message{
+  color:#009c00;
+  font-size: 13px;
+  @extend .pdb-10;
+}
+
 input[type="text"], select, input[type="password"]{
   border: 1px solid #ddd;
   height: 32px;
