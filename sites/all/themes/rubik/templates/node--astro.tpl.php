@@ -61,7 +61,7 @@
                         
                         // Print sign name
                         $output .= '<div class="field-label">';
-                        $output .= ucfirst($node->field_astro_zodiac['und'][$i]['field_astro_zodiac_sign_name']['und'][0]['value']);
+                        $output .= itg_common_sunsign_name($i);
                         $output .= '</div>';
                         
                         // Print all field
