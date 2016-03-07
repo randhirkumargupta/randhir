@@ -1,5 +1,5 @@
 name = Feature for blog
-description = Blog management update
+description = Blog management issue update
 core = 7.x
 package = Features
 version = 7.x-1.0-beta1
