@@ -223,6 +223,18 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     var plaholderText = $(this).prev().text();
     $(this).attr('placeholder', plaholderText);
   });
+  $('.field-name-field-gallery-image').find('.form-textarea').each(function(){
+    var plaholderText = $(this).parent().prev().text();
+    $(this).attr('placeholder', plaholderText);
+  });
+  $('#edit-field-gallery-image .field-name-field-images').find('.image-widget-data .file-size').each(function(){
+    var txt = $(this).text();
+    $(this).prev().attr('title', txt);
+  });
+  $('#edit-field-gallery-image .field-name-field-audio').find('.file-widget .file-size').each(function(){
+    var txt = $(this).text();
+    $(this).prev().attr('title', txt);
+  });
   
   $('a.filefield-sources-imce-browse').hover(function(e){
     e.stopPropagation();
