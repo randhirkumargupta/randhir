@@ -111,13 +111,7 @@ function itg_astro_field_collection_item_presave(FieldCollectionItemEntity $fiel
  * @param type $form
  * @param type $form_state
  */
-function itg_astro_validate_astro($form, &$form_state) {  
-  for ($i = 0; $i <= 11; ++$i) {
-    if ($form_state['values']['field_astro_zodiac']['und'][$i]['field_astro_thumb_icon']['und'][0]['fid'] == 0) {
-      $name = itg_astro_sunsign_name($i);
-      form_set_error('field_astro_thumb_icon', $name.' Thumbnail Icon is required.');
-    }
-  }
+function itg_astro_validate_astro($form, &$form_state) {    
   // check manadotory field  
   if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_frequency2']['und'][0]['value'] == NULL) {
     form_set_error('field_astro_frequency2', 'Please choose frequency.');
