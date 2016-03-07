@@ -129,7 +129,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 function itg_common_astro_after_build($form, &$form_state) {
  for($i = 0; $i <= 11; $i++) {    
     $name = itg_common_sunsign_name($i);            
-    $form['field_astro_zodiac']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = $name;
+    $form['field_astro_zodiac']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = $name.' Text';
     $form['field_astro_zodiac']['und'][$i]['field_astro_thumb_icon']['und'][0]['#title'] = $name.' Thumbnail Icon'; 
     $form['field_astro_zodiac']['und'][$i]['field_audio']['und'][0]['#title'] = $name.' Audio'; 
     $form['field_astro_zodiac']['und'][$i]['field_astro_video']['und'][0]['#title'] = $name.' Video'; 

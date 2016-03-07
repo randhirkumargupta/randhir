@@ -38,6 +38,7 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '15';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -64,6 +65,7 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Posted By';
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -106,7 +108,7 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = 'Action';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[view_node] | [edit_node] | [delete_node]';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -126,6 +128,70 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'astro' => 'astro',
+  );
+  /* Filter criterion: Content: Section (field_story_category) */
+  $handler->display->display_options['filters']['field_story_category_tid']['id'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'Select Program';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator'] = 'field_story_category_tid_op';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['identifier'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
+  /* Filter criterion: Content: Select Frequency (field_astro_frequency) */
+  $handler->display->display_options['filters']['field_astro_frequency_value']['id'] = 'field_astro_frequency_value';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['table'] = 'field_data_field_astro_frequency';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['field'] = 'field_astro_frequency_value';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator_id'] = 'field_astro_frequency_value_op';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['label'] = 'Select Frequency';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator'] = 'field_astro_frequency_value_op';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['identifier'] = 'field_astro_frequency_value';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
   );
 
   /* Display: Page */
