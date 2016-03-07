@@ -1035,6 +1035,11 @@ table td, table th{max-width: 200px;}
 [class*="form-item-field-field-astro-date-range2"] label{display: none;}
 .node-astro-form .field-multiple-table tbody td .button-remove{margin-left: 150px;}
 .user-role{display: inline-block; vertical-align: top; padding: 5px; margin-left: 10px;}
+#astro-node-form .form-layout-default > .column-main{width: 65%;}
+.content-node-view .root-label .field-label{vertical-align: top;}
+.content-node-view .root-label .field-items{width: 75%; border-bottom: 1px dashed #ddd; margin-bottom: 7px;}
+.content-node-view .field-items .inner-label{display: inline-block; width: 20%; vertical-align: top; padding-bottom: 7px;}
+.content-node-view .field-items .inner-item{display: inline-block; width: 78%; vertical-align: top; padding-bottom: 7px;}
 
 /* survey form css */
 .node-survey-form .tabledrag-hide, 
