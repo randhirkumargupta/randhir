@@ -116,7 +116,7 @@ function itg_ask_expert_form_custom_callback($form, &$form_state) {
 function itg_ask_expert_views_pre_render(&$view) {
 
   // add link for in queue and history
-  if ($view->name == "ask_an_expert") {
+  if ($view->name == "ask_an_expert" && $view->current_display != 'page_1') {
     $header_content_ask_an_expert = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
     $view->attachment_before = $header_content_ask_an_expert;
   }
