@@ -123,15 +123,16 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
     switch ($form_id) {
     case 'story_node_form':
-      if (!isset($_REQUEST['destination'])) {
-        $_REQUEST['destination'] = '';
-      }
+//      if (!isset($_REQUEST['destination'])) {
+//        $_REQUEST['destination'] = '';
+//      }
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       unset($form['actions']['preview_changes']);
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $_REQUEST['destination'], array('attributes' => array('class' => 'button'))),
-        '#weight' => 20,
-      );     
+      
+//      $form['actions']['cancel'] = array(
+//        '#markup' => l(t('Cancel'), $_REQUEST['destination'], array('attributes' => array('class' => 'button'))),
+//        '#weight' => 20,
+//      );     
       
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['#after_build'][] = 'itg_story_after_build';
@@ -386,7 +387,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $magazine_field = 'field_story_select_magazine';
     $supplement_field = 'field_story_select_supplement';
     // set magazine on edit and trigger action
-    if(isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
+    if (isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
       $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
     } else {
       $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
