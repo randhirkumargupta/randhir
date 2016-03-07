@@ -12,7 +12,7 @@
 
       <?php if (!empty($links)): ?>
         <div class='<?php print $hook ?>-links clearfix'>
-          <?php print render($links) ?>
+          <?php //print render($links) ?>
         </div>
       <?php endif; ?>
 
@@ -29,7 +29,7 @@
       <?php if (!empty($title) && !$page): ?>
         <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
           <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-          <a href="<?php print $node_url ?>"><?php print $title ?></a>
+          <a href="<?php print $node_url ?>"><?php  print $title ?></a>
         </h2>
       <?php endif; ?>
 
@@ -81,9 +81,10 @@
                   if (!empty($bloggers)):
                     print render($content['field_blog_blogger']);
                     ?>
+                  <?php endif; ?>
                   </div>
                 </div>
-              <?php endif; ?>
+              
               <div class="content-node-view">
                 <h2>Sections</h2>
                 <div class="content-details">
