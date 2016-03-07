@@ -73,7 +73,7 @@ function feature_for_ask_an_expert_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_user_city',
-    'label' => 'city',
+    'label' => 'City',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -304,13 +304,13 @@ function feature_for_ask_an_expert_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('City');
   t('Disclose your identity');
   t('Email');
   t('Message');
   t('Name');
   t('Source term id');
   t('State');
-  t('city');
 
   return $field_instances;
 }
