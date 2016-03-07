@@ -30,7 +30,7 @@ function feature_for_blog_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_blog_bloggers',
     'label' => 'Bloggers',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -74,7 +74,7 @@ function feature_for_blog_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_blog_blogger',
     'label' => 'Bloggers',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
