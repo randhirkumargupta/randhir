@@ -219,8 +219,18 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.node-type-survey div.clearfix .field-add-more-submit, .page-node-add-survey div.clearfix .field-add-more-submit').val('Add another question');
   $('.node-type-survey .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit, .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit').val('Add another answer');
   
+  $('.field-name-field-gallery-image').find('.form-text').each(function(){
+    var plaholderText = $(this).prev().text();
+    $(this).attr('placeholder', plaholderText);
+  });
   
-  
+  $('a.filefield-sources-imce-browse').hover(function(e){
+    e.stopPropagation();
+    $(this).parents('.form-type-managed-file').addClass('no-image-selected');
+  }, function(e){
+    e.stopPropagation();
+    $(this).parents('.form-type-managed-file').removeClass('no-image-selected');
+  });
 
 };
 })(jQuery);
