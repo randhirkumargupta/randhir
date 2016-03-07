@@ -35,5 +35,19 @@ function feature_for_ask_an_expert_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'skip CAPTCHA'.
+  $permissions['skip CAPTCHA'] = array(
+    'name' => 'skip CAPTCHA',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Expert' => 'Expert',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'captcha',
+  );
+
   return $permissions;
 }
