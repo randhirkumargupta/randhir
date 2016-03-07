@@ -1,0 +1,8 @@
+name = ITG Poll
+description = "ITG Poll Module"
+core = 7.x
+package = ITG
+
+files[] = itg_poll.module
+
+
