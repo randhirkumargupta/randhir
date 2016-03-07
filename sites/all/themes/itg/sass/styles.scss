@@ -11,6 +11,12 @@ body{
 .mt-10{
   margin-top: 10px;
 }
+.ml-10{
+  margin-left: 10px;
+}
+.mb-10{
+  margin-bottom: 10px;
+}
 .pd-0{
   padding: 0;
 }
@@ -27,6 +33,12 @@ body{
 .pdtb-10{
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.pdb-10{
+  padding-bottom: 10px;
+}
+.pdr-10{
+  padding-right: 10px;
 }
 .no-bullet{
   list-style: none;
@@ -72,6 +84,12 @@ body{
     }
 }
 
+.success-message{
+  color:#009c00;
+  font-size: 13px;
+  @extend .pdb-10;
+}
+
 input[type="text"], select, input[type="password"]{
   border: 1px solid #ddd;
   height: 32px;
@@ -86,16 +104,11 @@ input[type="text"], select, input[type="password"]{
   @extend .pd-0;
   box-sizing: border-box;
 }
-#main{
-  padding-top: 30px;
-}
-#page .section{
-  max-width: 1170px;
-  margin: 0 auto;
-}
+#page{padding-bottom: 30px; @extend .full; @extend .dib;}
 .header{
   @extend .pdtb-10;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 .tabs-primary{
   @extend .no-bullet;
@@ -142,10 +155,7 @@ input[type="text"], select, input[type="password"]{
       color: #8d8d8d;
     }
   }
-  #content{
-    max-width: 455px;
-    margin: 100px auto 0;
-  }
+  .login-wrapper{max-width: 440px; margin: 0 auto;}
 } 
 .login{
   line-height: 58px;
@@ -165,3 +175,35 @@ input[type="text"], select, input[type="password"]{
   margin-bottom: 10px;
 }
 
+
+#block-formblock-ask-an-expert{
+  h2{@extend .pdb-10; border-bottom: 1px solid #ddd; @extend .mb-10;}
+  .form-item{
+    @extend .mb-10;
+    .form-item{@extend .mr-0;}
+  }
+  .captcha{@extend .pd-10;}
+  .form-text{@extend .full;}
+  .form-submit{@extend .btn; @extend .mt-10;}
+  .form-field-name-field-disclose-your-identity{
+    .form-checkboxes{@extend .dib; @extend .vtop; @extend .ml-10;}
+  }
+}
+
+.node-ask-an-expert{
+  .field{@extend .dib; @extend .full; @extend .vtop; padding-bottom: 5px;}
+  .field-label{@extend .fleft; width: 80px;}
+  .field-items{overflow: hidden; float: none;}
+}
+.view-ask-an-expert{
+  .views-row{
+    @extend .dib; @extend .full; @extend .vtop; @extend .pdtb-10; border-top: 1px solid #ddd;
+    &:first-child{border: none;}
+  }
+  .views-field{padding-bottom: 5px;}
+  .views-label{@extend .fleft; width: 80px; font-weight: 600;}
+  .field-content{
+    overflow: hidden; float: none; @extend .db;
+    a{color: #333;}
+  }
+}

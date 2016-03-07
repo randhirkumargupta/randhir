@@ -32,6 +32,7 @@
  *
  * @ingroup themeable
  */
+
 ?>
 <div class="user-profile-div">
   <?php if ($user_profile): ?>
@@ -40,7 +41,10 @@
   <div class="field-name-field-user-picture">
   <div class="field-items">
   <?php
-    $file=$elements['#account']->field_user_picture[LANGUAGE_NONE][0]['uri']; print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+    if (isset($elements['#account']->field_user_picture[LANGUAGE_NONE])) {
+      $file=$elements['#account']->field_user_picture[LANGUAGE_NONE][0]['uri']; 
+      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+    }
   ?>
   </div>
   </div>
@@ -61,7 +65,15 @@
     </div>
     <div class="field">
       <div class="field-label">Role:</div>
-      <div class="field-items"><?php print end($elements['#account']->roles); ?></div> 
+      <div class="field-items"><?php 
+      // get role array
+      $role_display=$elements['#account']->roles;
+      // skip key for authenticated user
+      $role_display=array_slice($role_display,1);
+      // get value in comma seprated
+      $role_display = implode(',', $role_display);
+      
+      print $role_display;?></div> 
     </div>
     <div class="field">
       <div class="field-label"><?php print_r($user_profile['summary']['member_for']['#title']); ?>:</div>

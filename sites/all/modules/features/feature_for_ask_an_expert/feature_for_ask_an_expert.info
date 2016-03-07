@@ -10,7 +10,6 @@ dependencies[] = node
 dependencies[] = strongarm
 dependencies[] = text
 dependencies[] = views
-features[captcha_points][] = ask_an_expert_node_form
 features[ctools][] = captcha:captcha:1
 features[ctools][] = field_validation:default_field_validation_rules:2
 features[ctools][] = strongarm:strongarm:1
