@@ -1,6 +1,6 @@
 /*
- * @file itg_story.js
- * Contains all functionality related to story
+ * @file itg_users.js
+ * Contains all functionality related to users
  */
 
 (function ($) {
