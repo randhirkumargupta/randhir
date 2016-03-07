@@ -588,7 +588,11 @@ function astro_feature_field_default_field_instances() {
   // Exported field_instance: 'node-astro-field_astro_frequency2'.
   $field_instances['node-astro-field_astro_frequency2'] = array(
     'bundle' => 'astro',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'daily',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
