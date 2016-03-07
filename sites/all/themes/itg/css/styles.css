@@ -48,13 +48,13 @@ body {
 }
 
 /* line 33, ../sass/styles.scss */
-.pdtb-10, .header, .tabs-primary li a {
+.pdtb-10, .header, .tabs-primary li a, .view-ask-an-expert .views-row {
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
 /* line 37, ../sass/styles.scss */
-.pdb-10, .success-message, #block-formblock-ask-an-expert h2, .view-ask-an-expert .views-row {
+.pdb-10, .success-message, #block-formblock-ask-an-expert h2 {
   padding-bottom: 10px;
 }
 
@@ -191,27 +191,27 @@ input[type="text"], select, input[type="password"] {
   color: #8d8d8d;
 }
 /* line 158, ../sass/styles.scss */
-.page-user #content {
-  max-width: 455px;
-  margin: 100px auto 0;
+.page-user .login-wrapper {
+  max-width: 440px;
+  margin: 0 auto;
 }
 
-/* line 163, ../sass/styles.scss */
+/* line 160, ../sass/styles.scss */
 .login {
   line-height: 58px;
   font-size: 18px;
 }
-/* line 166, ../sass/styles.scss */
+/* line 163, ../sass/styles.scss */
 .login a {
   color: #333;
   text-decoration: none;
 }
-/* line 169, ../sass/styles.scss */
+/* line 166, ../sass/styles.scss */
 .login a:hover {
   text-decoration: underline;
 }
 
-/* line 174, ../sass/styles.scss */
+/* line 171, ../sass/styles.scss */
 #page-title {
   font-size: 24px;
   line-height: 28px;
@@ -219,25 +219,33 @@ input[type="text"], select, input[type="password"] {
   margin-bottom: 10px;
 }
 
-/* line 183, ../sass/styles.scss */
+/* line 180, ../sass/styles.scss */
 #block-formblock-ask-an-expert h2 {
   border-bottom: 1px solid #ddd;
 }
 
-/* line 197, ../sass/styles.scss */
+/* line 194, ../sass/styles.scss */
 .node-ask-an-expert .field {
   padding-bottom: 5px;
 }
-/* line 198, ../sass/styles.scss */
+/* line 195, ../sass/styles.scss */
 .node-ask-an-expert .field-label {
   width: 80px;
 }
-/* line 199, ../sass/styles.scss */
+/* line 196, ../sass/styles.scss */
 .node-ask-an-expert .field-items {
   overflow: hidden;
   float: none;
 }
 
+/* line 199, ../sass/styles.scss */
+.view-ask-an-expert .views-row {
+  border-top: 1px solid #ddd;
+}
+/* line 201, ../sass/styles.scss */
+.view-ask-an-expert .views-row:first-child {
+  border: none;
+}
 /* line 203, ../sass/styles.scss */
 .view-ask-an-expert .views-field {
   padding-bottom: 5px;

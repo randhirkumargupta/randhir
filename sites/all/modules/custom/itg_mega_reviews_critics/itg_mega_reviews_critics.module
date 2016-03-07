@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * The ITG Mega Reviews & Critics module.
+ * Provides Mega Reviews & Critics functionality and customizations.
+ */
+
+/**
+ * Implements views header link 
+ * @param type $view Description
+ */
+function itg_mega_reviews_critics_views_pre_render(&$view) {
+  
+  if ($view->name == "movie_review_list") {
+    global $user; // Get user information
+    
+    $header_content = l('Create Reviews', 'node/add/mega-review-critic', array('query' => array('destination' => 'movie-review-list')));
+    
+    $view->attachment_before = $header_content;
+  }    
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form, &$form_state, $form_id) {
+  
+  $form['#after_build'][] = 'itg_mega_reviews_critics_form_after_build';
+}
+
+/**
+ * After build for mega_review_critic_node_form form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
+  
+  drupal_add_js(drupal_get_path('module', 'itg_mega_reviews_critics') . '/js/itg_mega_reviews_critics.js', array('weight' => 1));
+  return $form;
+  
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_mega_reviews_critics_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
+   if ($form['#id'] == 'views-exposed-form-movie-review-list-page') {
+     $form['title']['#autocomplete_path'] = 'content-title-list/mega_review_critic/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
+     $form['nid']['#autocomplete_path'] = 'content-nid-list/mega_review_critic/autocomplete';
+     $form['nid']['#attributes'] = array('placeholder' => t('Review ID'));
+   }
+
+}

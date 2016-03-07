@@ -155,10 +155,7 @@ input[type="text"], select, input[type="password"]{
       color: #8d8d8d;
     }
   }
-  #content{
-    max-width: 455px;
-    margin: 100px auto 0;
-  }
+  .login-wrapper{max-width: 440px; margin: 0 auto;}
 } 
 .login{
   line-height: 58px;
@@ -199,7 +196,10 @@ input[type="text"], select, input[type="password"]{
   .field-items{overflow: hidden; float: none;}
 }
 .view-ask-an-expert{
-  .views-row{@extend .dib; @extend .full; @extend .vtop; @extend .pdb-10;}
+  .views-row{
+    @extend .dib; @extend .full; @extend .vtop; @extend .pdtb-10; border-top: 1px solid #ddd;
+    &:first-child{border: none;}
+  }
   .views-field{padding-bottom: 5px;}
   .views-label{@extend .fleft; width: 80px; font-weight: 600;}
   .field-content{
