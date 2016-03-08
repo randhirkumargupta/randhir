@@ -28,22 +28,21 @@ define('ADMINISTRATOR', 3);
 define('CATEGORY_MANAGMENT', 4);
 define('EXPERT', 21);
 
-
 /**
  * Function for debugging arrays and objects.
  * @param $arg
  *  array or object to be printed.
  */
 function p($arg) {
-    print '<pre>';
-    print_r($arg);
-    die;
+  print '<pre>';
+  print_r($arg);
+  die;
 }
 
 function pr($arg) {
-    print '<pre>';
-    print_r($arg);
-    print '</pre>';
+  print '<pre>';
+  print_r($arg);
+  print '</pre>';
 }
 
 /**
@@ -52,7 +51,7 @@ function pr($arg) {
  * @return $data
  */
 function itg_common_dropdown_supplement($id = '') {
- 
+
   // Fetch query for supplements 
   $data = '';
   $query = db_select('field_data_field_supp_select_magazine', 'm');
@@ -62,117 +61,29 @@ function itg_common_dropdown_supplement($id = '') {
   $query->condition('field_supp_select_magazine_target_id', $id, '=');
   // $query->condition('n.type', $content_type, '=');  
 
-  $result = $query->execute(); 
+  $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
     $data[$record['entity_id']] = $record['title'];
   }
-  
+
   //If record found, then return array else return blank
   if (empty($data)) {
-      $data = array('_none' => '-Select-');
+    $data = array('_none' => '-Select-');
   }
-  
+
   return $data;
-
-}
-
-/**
- * Get file name from fid
- * @param type $audioFid
- */
-function itg_common_file_name($audio_fid) {  
-  $itg_query = db_select('file_managed', 'f');
-  $itg_query->condition('fid', $audio_fid, '=')
-      ->fields('f', array('filename'));
-  
-  $itg_result = $itg_query->execute()->fetchField();  
-  if ($itg_result != '') {
-    return $itg_result;
-  }
-  
-  return '';
 }
 
 /**
  * Implements hook_form_alter().
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  global $user;  
-  if ($form_id == 'astro_node_form') {
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'itg_common') . '/js/itg_common.js',
-      drupal_get_path('module', 'itg_category_manager') . '/js/moment.js',
-    );    
-    if ($form['nid']['#value'] == NULL) {
-      $form['title']['#default_value'] = date('m/d/Y');
-    }    
-    $form['#action'] = '?destination=manage-astro';
-    $form['actions']['submit']['#submit'][] = 'itg_common_change_message';
-    $form['#validate'][] = 'itg_common_validate_astro';
-    $form['#after_build'][] = 'itg_common_astro_after_build'; 
-    unset($form['field_numerology']['und']['#options']['_none']);
-    unset($form['field_astro_frequency2']['und']['#options']['_none']);
-  }
+  global $user;
   // P($form_id);
   // Extra meta tags element hide from form
-  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form') {   
-    $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';   
+  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form') {
+    $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
   }
-  
-}
-
-
-
-/**
- * after build function for altering field collection label.
- */
-function itg_common_astro_after_build($form, &$form_state) {
- for($i = 0; $i <= 11; $i++) {    
-    $name = itg_common_sunsign_name($i);            
-    $form['field_astro_zodiac']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = $name;
-    $form['field_astro_zodiac']['und'][$i]['field_astro_thumb_icon']['und'][0]['#title'] = $name.' Thumbnail Icon'; 
-    $form['field_astro_zodiac']['und'][$i]['field_audio']['und'][0]['#title'] = $name.' Audio'; 
-    $form['field_astro_zodiac']['und'][$i]['field_astro_video']['und'][0]['#title'] = $name.' Video'; 
-  ;}
-  $form['actions']['cancel'] = array(
-    '#markup' => l(t('Cancel'), 'manage-astro', array('attributes' => array('class' => 'button'))),
-    '#weight' => 20,
-  );   
-  global $user;
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
-
-  $settings = array();  
-  $settings['uid'] = $user->uid;
-
-  drupal_add_js(array('uid' => $settings), 'setting');
-  
-  return $form;
-}
-
-/**
- * Function return name of the sunsign.
- */
-function itg_common_sunsign_name($index) {
-  $name = array(
-    'Aries',
-    'Taurus',
-    'Gemini',
-    'Cancer',
-    'Leo',
-    'Virgo',
-    'Libra',
-    'Scorpio',
-    'Sagittarius',
-    'Capricorn',
-    'Aquarius',
-    'pisces',
-  );
-  if ($index <= 11) {
-    return $name[$index];
-  }
-  
-  return '';
 }
 
 /**
@@ -181,119 +92,16 @@ function itg_common_sunsign_name($index) {
  * @param arra $form_state array of submitted values
  * @param string $$form_id id of the current form
  */
-function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {  
+function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'field_ui_field_edit_form') {
     // Increase the max cardinality to 12
     $range = drupal_map_assoc(range(1, 12));
-    $new_options =  array(FIELD_CARDINALITY_UNLIMITED => t('Unlimited')) + $range;
+    $new_options = array(FIELD_CARDINALITY_UNLIMITED => t('Unlimited')) + $range;
 
     // Change the options
     $form['field']['cardinality']['#options'] = $new_options;
-  }  
-}
-
-/**
- * Implements hook_field_collection_item_presave().
- * @param FieldCollectionItemEntity $field_collection_item
- */
-function itg_common_field_collection_item_presave(FieldCollectionItemEntity $field_collection_item) {    
-  static $count = 0;  
-  if ($field_collection_item->field_name == 'field_astro_zodiac') {
-    $name = itg_common_sunsign_name($count);
-    $field_collection_item->field_astro_zodiac_sign_name['und'][0]['value'] = strtolower($name);    
-  }
-  ++$count;
-}
-
-/**
- * 
- * @param type $form
- * @param type $form_state
- */
-function itg_common_validate_astro($form, &$form_state) {  
-  for ($i = 0; $i <= 11; ++$i) {
-    if ($form_state['values']['field_astro_zodiac']['und'][$i]['field_astro_thumb_icon']['und'][0]['fid'] == 0) {
-      $name = itg_common_sunsign_name($i);
-      form_set_error('field_astro_thumb_icon', $name.' Thumbnail Icon is required.');
-    }
-  }
-  // check manadotory field  
-  if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_frequency2']['und'][0]['value'] == NULL) {
-    form_set_error('field_astro_frequency2', 'Please choose frequency.');
-  }
-  if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_numerology_values']['und'][0]['field_story_source_id']['und'][0]['value'] == '') {
-    form_set_error('field_story_source_id', 'Please enter number.');
-  }
-  if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_numerology_values']['und'][0]['field_buzz_description']['und'][0]['value'] == '') {
-    form_set_error('field_story_source_id', 'Please enter description.');
   }
 }
-
-/**
- * Custom submit callback function to change message after astro node save.
- * @param type $form
- * @param type $form_state
- */
-function itg_common_change_message($form, &$form_state) {
-  $messages = drupal_get_messages('status');
-  drupal_set_message(t('Astro has been successfully filled.'));
-}
-
-/**
- * Implements hook_block_info().
- */
-function itg_common_block_info() {
-  $blocks['astro_tab_form_block'] = array(
-    'info' => t('Astro Form Tab Block'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  
-  return $blocks;
-}
-
-/**
- * Implements hook_block_view()
- * @param type $delta
- */
-function itg_common_block_view($delta = '') {
-  global $user;
-  $block = array();
-  $data = '';
-  switch ($delta) {
-    case 'astro_tab_form_block':                       
-      $block['content'] = theme('astro_tab_form_display_block', array('data' => $data));
-    break;        
-  }
-  
-  return $block;
-}
-
-/**
- * Implements hook_theme().
- * @param type $existing
- * @param type $type
- * @param type $theme
- * @param type $path
- */
-function itg_common_theme($existing, $type, $theme, $path) {
-  $themes = array(
-    'astro_tab_form_display_block' => array(
-      'template' => 'astro-form-tab-template',
-      'path' => drupal_get_path('module', 'itg_common') . '/templates',
-      'variables' => array('data' => NULL),
-    ),
-    'astro_node_form' => array(
-      'arguments' => array('form' => NULL),
-      'template' => 'astro-node-form',
-      'path' => drupal_get_path('module', 'itg_common') . '/templates',
-      'render element' => 'form',
-    ),
-  );
-
-  return $themes;
-
-}
-
 
 /**
  * Extra meta tags element hide from form 
@@ -301,25 +109,24 @@ function itg_common_theme($existing, $type, $theme, $path) {
  * @param Array $form_state
  * @return 
  */
-
 function itg_meta_tags_extra_element_hide($form, &$form_state) {
   global $user, $base_url;
-   
-   if (!isset($_REQUEST['destination'])) {
-      $_REQUEST['destination'] = '';
-   }
-      
-   $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $_REQUEST['destination'], array('attributes' => array('class' => 'button'))),
-        '#weight' => 20,
-      ); 
-  
+
+  if (!isset($_REQUEST['destination'])) {
+    $_REQUEST['destination'] = '';
+  }
+
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), $_REQUEST['destination'], array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
-  
+
   $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
-  $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';  
- 
+  $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';
+
   drupal_add_js('jQuery(document).ready(function() {
              // hide some eliment of metatags
              jQuery(".vertical-tabs-list").hide();
@@ -327,8 +134,21 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
              jQuery("#edit-metatags-und-advanced").hide();
              jQuery(".form-item-metatags-und-abstract-value").hide();              
            });', array('type' => 'inline', 'scope' => 'footer'));
-  
-  return $form;
-  
 
+  return $form;
+}
+
+/**
+ * Implements views header link 
+ * @param type $view Description
+ */
+function itg_common_views_pre_render(&$view) {
+  
+  if ($view->name == "byline_list") {
+    global $user; // Get user information
+    
+    $header_content = l('Create Byline', 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
+    
+    $view->attachment_before = $header_content;
+  }    
 }

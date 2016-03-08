@@ -160,7 +160,6 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    10 => '10',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -172,6 +171,60 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No Record Found !';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Question';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Name */
+  $handler->display->display_options['fields']['field_user_name']['id'] = 'field_user_name';
+  $handler->display->display_options['fields']['field_user_name']['table'] = 'field_data_field_user_name';
+  $handler->display->display_options['fields']['field_user_name']['field'] = 'field_user_name';
+  $handler->display->display_options['fields']['field_user_name']['element_label_colon'] = FALSE;
+  /* Field: Content: Email */
+  $handler->display->display_options['fields']['field_user_email']['id'] = 'field_user_email';
+  $handler->display->display_options['fields']['field_user_email']['table'] = 'field_data_field_user_email';
+  $handler->display->display_options['fields']['field_user_email']['field'] = 'field_user_email';
+  $handler->display->display_options['fields']['field_user_email']['element_label_colon'] = FALSE;
+  /* Field: Content: Message */
+  $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['exclude'] = TRUE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'medium';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['edit_node']['text'] = 'Reply';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Action';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Source term id (field_user_source_term_id) */
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['id'] = 'field_user_source_term_id_value';
@@ -215,6 +268,11 @@ else
   $handler->display->display_options['filters']['type']['value'] = array(
     'ask_an_expert' => 'ask_an_expert',
   );
+  /* Filter criterion: Content: Message (field_user_message) */
+  $handler->display->display_options['filters']['field_user_message_value']['id'] = 'field_user_message_value';
+  $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
+  $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';
+  $handler->display->display_options['filters']['field_user_message_value']['operator'] = 'empty';
   $handler->display->display_options['path'] = 'ask-an-expert';
 
   /* Display: Ask an expert question answer */
@@ -268,6 +326,7 @@ else
   $handler->display->display_options['fields']['field_disclose_your_identity']['id'] = 'field_disclose_your_identity';
   $handler->display->display_options['fields']['field_disclose_your_identity']['table'] = 'field_data_field_disclose_your_identity';
   $handler->display->display_options['fields']['field_disclose_your_identity']['field'] = 'field_disclose_your_identity';
+  $handler->display->display_options['fields']['field_disclose_your_identity']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_disclose_your_identity']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_disclose_your_identity']['delta_offset'] = '0';
   /* Field: Content: Message */
@@ -277,6 +336,113 @@ else
   $handler->display->display_options['fields']['field_user_message']['hide_empty'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['path'] = 'ask-an-expert-question-answer';
+
+  /* Display: Ask an expert history */
+  $handler = $view->new_display('page', 'Ask an expert history', 'page_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Ask an expert history';
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Record Found !';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Question';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Name */
+  $handler->display->display_options['fields']['field_user_name']['id'] = 'field_user_name';
+  $handler->display->display_options['fields']['field_user_name']['table'] = 'field_data_field_user_name';
+  $handler->display->display_options['fields']['field_user_name']['field'] = 'field_user_name';
+  $handler->display->display_options['fields']['field_user_name']['element_label_colon'] = FALSE;
+  /* Field: Content: Email */
+  $handler->display->display_options['fields']['field_user_email']['id'] = 'field_user_email';
+  $handler->display->display_options['fields']['field_user_email']['table'] = 'field_data_field_user_email';
+  $handler->display->display_options['fields']['field_user_email']['field'] = 'field_user_email';
+  $handler->display->display_options['fields']['field_user_email']['element_label_colon'] = FALSE;
+  /* Field: Content: Message */
+  $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'medium';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Source term id (field_user_source_term_id) */
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['id'] = 'field_user_source_term_id_value';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['table'] = 'field_data_field_user_source_term_id';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['field'] = 'field_user_source_term_id_value';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['default_argument_options']['code'] = 'global $user;
+if($user->uid != \'1\') {
+  $user_uid = user_load($user->uid);
+  foreach ($user_uid->field_user_section[\'und\'] as $key => $val) {
+    if ($key > 0) {
+      $str = \'+\';
+    }  
+    $tid .= $str.$val[\'tid\'];
+  }
+  return $tid;
+}
+else
+{
+  return \'No Record Found\';
+}';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['limit'] = '0';
+  $handler->display->display_options['arguments']['field_user_source_term_id_value']['break_phrase'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'ask_an_expert' => 'ask_an_expert',
+  );
+  /* Filter criterion: Content: Message (field_user_message) */
+  $handler->display->display_options['filters']['field_user_message_value']['id'] = 'field_user_message_value';
+  $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
+  $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';
+  $handler->display->display_options['filters']['field_user_message_value']['operator'] = 'not empty';
+  $handler->display->display_options['path'] = 'ask-an-expert-history';
   $export['ask_an_expert'] = $view;
 
   return $export;
