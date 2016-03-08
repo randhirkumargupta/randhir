@@ -43,10 +43,17 @@
   <div class="field-div"><div class="field-label">Magazine: </div><div class="field-item"><?php print $node->field_supp_select_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
   <div class="field-div"><div class="field-label">Issue: </div><div class="field-item"><?php print date('m/d/Y', strtotime($node->field_supp_issue[LANGUAGE_NONE][0]['value'])); ?></div></div>
   <div class="field-div"><div class="field-label">Status: </div><div class="field-item"><?php print $status ? 'Published' : 'Unpublished'; ?></div></div>
-  <div class="field-div"><div class="field-label">Attached XML Files:</div></div>
-    <?php
-    foreach ($node->field_supp_import_xml[LANGUAGE_NONE] as $file) {
-      print '<div class="field-item">'.$file['filename'].'</div>';
+  <div class="field-div"><div class="field-label">Attached XML Files:</div>
+    <?php 
+    $count_file = count($node->field_supp_import_xml[LANGUAGE_NONE]);
+    $i = 1;
+    foreach($node->field_supp_import_xml[LANGUAGE_NONE] as $file){
+      print $file['filename'];
+      if($count_file > $i){
+        echo ', ';
+      }
+      $i++;
     }
-    ?>
+    
+    ?></div>
 </div>
