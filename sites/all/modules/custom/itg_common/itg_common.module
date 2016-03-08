@@ -137,3 +137,18 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
 
   return $form;
 }
+
+/**
+ * Implements views header link 
+ * @param type $view Description
+ */
+function itg_common_views_pre_render(&$view) {
+  
+  if ($view->name == "byline_list") {
+    global $user; // Get user information
+    
+    $header_content = l('Create Byline', 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
+    
+    $view->attachment_before = $header_content;
+  }    
+}
