@@ -117,7 +117,7 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param type $node
  */
 function itg_workflow_node_presave($node) {  
-  if ($node->type == 'story') {
+  if ($node->type == 'story' || $node->type == 'photogallery') {
    if ($node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
     $node->workbench_moderation_state_new = 'published';
    }

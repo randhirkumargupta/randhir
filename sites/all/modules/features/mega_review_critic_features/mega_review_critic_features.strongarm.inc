@@ -14,7 +14,7 @@ function mega_review_critic_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_mega_review_critic';
-  $strongarm->value = 'edit-menu';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_mega_review_critic'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -70,14 +70,14 @@ function mega_review_critic_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'diff_enable_revisions_page_node_mega_review_critic';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['diff_enable_revisions_page_node_mega_review_critic'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'diff_show_preview_changes_node_mega_review_critic';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['diff_show_preview_changes_node_mega_review_critic'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -96,13 +96,13 @@ function mega_review_critic_features_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '13',
+          'weight' => '14',
         ),
       ),
       'display' => array(),
