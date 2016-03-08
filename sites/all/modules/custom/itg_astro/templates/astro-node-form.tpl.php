@@ -11,6 +11,7 @@
     <?php print drupal_render($form['title']); ?>
     <?php print drupal_render($form['field_astro_frequency']); ?>
     <?php print drupal_render($form['field_astro_date_range']); ?>
+    <h2 class="story-title">Channel</h2>
     <?php print drupal_render($form['field_story_category']); ?>
 </div>
 <div id="StoryContent">

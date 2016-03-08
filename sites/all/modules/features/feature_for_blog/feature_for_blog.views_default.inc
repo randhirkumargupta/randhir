@@ -104,7 +104,7 @@ function feature_for_blog_views_default_views() {
       'empty_column' => 0,
     ),
     'title' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -169,7 +169,7 @@ function feature_for_blog_views_default_views() {
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
-  $handler->display->display_options['fields']['counter']['label'] = 'Sr. No.';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No.';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Content: Title */
@@ -197,6 +197,13 @@ function feature_for_blog_views_default_views() {
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
+  /* Field: Content: Category Selection */
+  $handler->display->display_options['fields']['field_blog_category_selection']['id'] = 'field_blog_category_selection';
+  $handler->display->display_options['fields']['field_blog_category_selection']['table'] = 'field_data_field_blog_category_selection';
+  $handler->display->display_options['fields']['field_blog_category_selection']['field'] = 'field_blog_category_selection';
+  $handler->display->display_options['fields']['field_blog_category_selection']['label'] = 'Category';
+  $handler->display->display_options['fields']['field_blog_category_selection']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_blog_category_selection']['delta_offset'] = '0';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -279,6 +286,40 @@ function feature_for_blog_views_default_views() {
     'blog' => 'blog',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Category Selection (field_blog_category_selection) */
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['id'] = 'field_blog_category_selection_tid';
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['table'] = 'field_data_field_blog_category_selection';
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['field'] = 'field_blog_category_selection_tid';
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['expose']['operator_id'] = 'field_blog_category_selection_tid_op';
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['expose']['label'] = 'Category';
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['expose']['operator'] = 'field_blog_category_selection_tid_op';
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['expose']['identifier'] = 'field_blog_category_selection_tid';
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    14 => 0,
+    6 => 0,
+    21 => 0,
+    7 => 0,
+    16 => 0,
+    18 => 0,
+    17 => 0,
+    20 => 0,
+    19 => 0,
+    10 => 0,
+    9 => 0,
+  );
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['field_blog_category_selection_tid']['error_message'] = FALSE;
   $handler->display->display_options['path'] = 'manage-blogs';
   $export['manage_blogs'] = $view;
 

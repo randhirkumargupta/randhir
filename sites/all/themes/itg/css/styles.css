@@ -48,13 +48,13 @@ body {
 }
 
 /* line 33, ../sass/styles.scss */
-.pdtb-10, .header, .tabs-primary li a {
+.pdtb-10, .header, .tabs-primary li a, .view-ask-an-expert .views-row {
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
 /* line 37, ../sass/styles.scss */
-.pdb-10, .success-message, #block-formblock-ask-an-expert h2, .view-ask-an-expert .views-row {
+.pdb-10, .success-message, #block-formblock-ask-an-expert h2 {
   padding-bottom: 10px;
 }
 
@@ -238,21 +238,29 @@ input[type="text"], select, input[type="password"] {
   float: none;
 }
 
-/* line 200, ../sass/styles.scss */
+/* line 199, ../sass/styles.scss */
+.view-ask-an-expert .views-row {
+  border-top: 1px solid #ddd;
+}
+/* line 201, ../sass/styles.scss */
+.view-ask-an-expert .views-row:first-child {
+  border: none;
+}
+/* line 203, ../sass/styles.scss */
 .view-ask-an-expert .views-field {
   padding-bottom: 5px;
 }
-/* line 201, ../sass/styles.scss */
+/* line 204, ../sass/styles.scss */
 .view-ask-an-expert .views-label {
   width: 80px;
   font-weight: 600;
 }
-/* line 202, ../sass/styles.scss */
+/* line 205, ../sass/styles.scss */
 .view-ask-an-expert .field-content {
   overflow: hidden;
   float: none;
 }
-/* line 204, ../sass/styles.scss */
+/* line 207, ../sass/styles.scss */
 .view-ask-an-expert .field-content a {
   color: #333;
 }

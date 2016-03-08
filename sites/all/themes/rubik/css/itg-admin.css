@@ -1035,6 +1035,11 @@ table td, table th{max-width: 200px;}
 [class*="form-item-field-field-astro-date-range2"] label{display: none;}
 .node-astro-form .field-multiple-table tbody td .button-remove{margin-left: 150px;}
 .user-role{display: inline-block; vertical-align: top; padding: 5px; margin-left: 10px;}
+#astro-node-form .form-layout-default > .column-main{width: 65%;}
+.content-node-view .root-label .field-label{vertical-align: top;}
+.content-node-view .root-label .field-items{width: 75%; border-bottom: 1px dashed #ddd; margin-bottom: 7px;}
+.content-node-view .field-items .inner-label{display: inline-block; width: 20%; vertical-align: top; padding-bottom: 7px;}
+.content-node-view .field-items .inner-item{display: inline-block; width: 78%; vertical-align: top; padding-bottom: 7px;}
 
 /* survey form css */
 .node-survey-form .tabledrag-hide, 
@@ -1097,3 +1102,48 @@ table td, table th{max-width: 200px;}
 #category .hierarchical-select-wrapper .dropbox .dropbox-item{padding: 0 5px; display: inline-block; vertical-align: middle;}
 #category .hierarchical-select-wrapper .dropbox td.dropbox-remove{padding:5px;}
 
+
+/* CSS for Photo Gallery */
+.node-photogallery-form #edit-field-gallery-image .description{padding-left: 0;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images a.filefield-sources-imce-browse, 
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio a.filefield-sources-imce-browse{display: inline-block; vertical-align: top; position: relative; padding: 0 5px 0 30px}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images a.filefield-sources-imce-browse:after{width: 20px; height: 20px; font: normal normal normal 18px/20px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 5px; top: 0; content: "\f03e";}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio a.filefield-sources-imce-browse:after{width: 20px; height: 20px; font: normal normal normal 18px/20px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 5px; top: 0; content: "\f001";}
+.field-name-field-gallery-image .field-name-field-images .form-type-managed-file label,
+.field-name-field-gallery-image .field-name-field-audio .form-type-managed-file label{display: none;}
+.node-photogallery-form #edit-field-gallery-image .field-multiple-table tbody .form-item .form-text{width: 100%;}
+.node-photogallery-form #edit-field-gallery-image .field-multiple-table tbody td label{display: none;}
+.node-photogallery-form #edit-field-gallery-image .form-type-managed-file div.description {
+    background: rgba(0, 0, 0, 0) url("../images/popup.png") no-repeat scroll 50% 100%;
+    border-top: 1px solid #d8e4e0;
+    bottom: 100%;
+    color: #687;
+    display: none;
+    padding: 9px 10px 20px;
+    position: absolute;
+    left:-6px;
+    right: 0;
+    margin: 0 auto;
+    width: 240px;
+    z-index: 5;
+}
+.node-photogallery-form #edit-field-gallery-image textarea.form-textarea{height: 30px;}
+.node-photogallery-form #edit-field-gallery-image .form-type-managed-file.no-image-selected{position: relative;}
+.node-photogallery-form #edit-field-gallery-image .form-type-managed-file.no-image-selected:hover div.description{
+  display: block;
+}
+.node-photogallery-form #edit-field-gallery-image table td{max-width: 268px;}
+.node-photogallery-form #edit-field-gallery-image table td > fieldset, 
+.node-photogallery-form #edit-field-gallery-image table td > .ajax-new-content > fieldset{width: 265px;}
+.node-photogallery-form #edit-field-gallery-image .field-multiple-table > tbody > tr{float: left;}
+.node-photogallery-form #edit-field-gallery-image .field-multiple-table > tbody > tr.even{margin-left: 10px;}
+[id*="field-gallery-image-values"] fieldset .fieldset-content{position: relative; background: transparent;}
+[id*="field-gallery-image-values"] fieldset .fieldset-content > .button-remove{position: absolute; top: -2px; right: 0; background: url('../images/close.png') no-repeat; width: 30px; height: 30px; border: none; box-shadow: none; font-size: 0;}
+.node-photogallery-form #edit-field-gallery-image .image-preview{height: 200px; padding: 0;}
+.node-photogallery-form #edit-field-gallery-image .image-preview img{height: 200px; width: 100%;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images .form-type-textfield, 
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images span.file-size,
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio span.file-size{display: none;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images span.file, 
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio span.file{width: 165px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove{margin-top: 5px;}

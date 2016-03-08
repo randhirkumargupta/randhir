@@ -196,7 +196,10 @@ input[type="text"], select, input[type="password"]{
   .field-items{overflow: hidden; float: none;}
 }
 .view-ask-an-expert{
-  .views-row{@extend .dib; @extend .full; @extend .vtop; @extend .pdb-10;}
+  .views-row{
+    @extend .dib; @extend .full; @extend .vtop; @extend .pdtb-10; border-top: 1px solid #ddd;
+    &:first-child{border: none;}
+  }
   .views-field{padding-bottom: 5px;}
   .views-label{@extend .fleft; width: 80px; font-weight: 600;}
   .field-content{

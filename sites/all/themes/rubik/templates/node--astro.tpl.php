@@ -42,11 +42,14 @@
         <?php global $base_url; ?>
           <div class="content-node-view">            
             <?php //print render($content); ?>
-              <div class="content-node-view">
+              <div class="content-node-view">               
                 <h2>Basic Details</h2>
                     <div class="content-view">
                         <?php print render($content['field_astro_frequency']); ?>
-                        <?php print render($content['field_astro_date_range']); ?>
+                        <?php print render($content['field_astro_date_range']); ?>                        
+                    </div>
+                    <h2>Channel</h2>
+                    <div class="content-view">
                         <?php print render($content['field_story_category']); ?>
                     </div>
               </div>
@@ -61,7 +64,7 @@
                         
                         // Print sign name
                         $output .= '<div class="field-label">';
-                        $output .= itg_common_sunsign_name($i);
+                        $output .= itg_astro_sunsign_name($i);
                         $output .= '</div>';
                         
                         // Print all field
@@ -85,7 +88,7 @@
                           $audio .= '<div class="inner-label">Audio: </div>';                                                  
                           $audio = '<span class="file">';                        
                           $audio .= '<img class="file-icon" alt="Audio icon" src="'.$base_url.'/modules/file/icons/audio-x-generic.png"> ';
-                          $audio .= '<a href="'.$audio_uri.'">'.itg_common_file_name($audio_fid).'</a>';
+                          $audio .= '<a href="'.$audio_uri.'">'.itg_astro_file_name($audio_fid).'</a>';
                           $audio .= '</span>';
                           print '<div class="inner-item">'.$audio.'</div>';
                         }
@@ -98,7 +101,7 @@
                           $video .= '<div class="inner-label">Video: </div>';                                                  
                           $video = '<span class="file">';                        
                           $video .= '<img class="file-icon" alt="File" src="'.$base_url.'/modules/file/icons/video-x-generic.png"> ';
-                          $video .= '<a href="'.$url_video.'">'.itg_common_file_name($video_fid).'</a>';
+                          $video .= '<a href="'.$url_video.'">'.itg_astro_file_name($video_fid).'</a>';
                           $video .= '</span>';
                           print '<div class="inner-item">'.$video.'</div>';
                         }
@@ -145,7 +148,7 @@
                               $audio .= '<div class="inner-label">Audio: </div>';                                                      
                               $audio .= '<span class="file">';                        
                               $audio .= '<img class="file-icon" alt="Audio icon" src="'.$base_url.'/modules/file/icons/audio-x-generic.png"> ';
-                              $audio .= '<a href="'.$audio_uri.'">'.itg_common_file_name($audio_fid).'</a>';
+                              $audio .= '<a href="'.$audio_uri.'">'.itg_astro_file_name($audio_fid).'</a>';
                               $audio .= '</span>';
                               print '<div class="inner-item">'.$audio.'</div>';
                             }
@@ -158,7 +161,7 @@
                               $video .= '<div class="inner-label">Video: </div>';                                                      
                               $video .= '<span class="file">';                        
                               $video .= '<img class="file-icon" alt="File" src="'.$base_url.'/modules/file/icons/video-x-generic.png"> ';
-                              $video .= '<a href="'.$url_video.'">'.itg_common_file_name($video_fid).'</a>';
+                              $video .= '<a href="'.$url_video.'">'.itg_astro_file_name($video_fid).'</a>';
                               $video .= '</span>';
                               print '<div class="inner-item">'.$video.'</div>';
                             }
