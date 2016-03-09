@@ -4,7 +4,6 @@
  * Implementation of hook_menu().
  */
 function itg_term_menu() {
-    $items                            = array();
     $items['texonomy/confirm/ajax/%'] = array(
         'title' => 'Texonomy Term',
         'page callback' => 'drupal_get_form',
@@ -137,8 +136,6 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
     return $form;
 }
 
-
-
 /**
  * Implementation of hook_batch_alter().
  * @param array reference $batch
@@ -157,7 +154,6 @@ function itg_term_batch_alter(&$batch) {
         $batch['form_state']['redirect']['path'] = 'tags-management';
     }
 }
-
 
 
 /**
@@ -206,8 +202,6 @@ function itg_term_views_pre_render(&$view) {
     }
 }
 
-
-
 /**
  * Implements _form_validate() for taxonomy_form_term().
  */
@@ -225,9 +219,6 @@ function itg_term_validate($form, &$form_state) {
         }
     }
 }
-
-
-
 
 /*
  * Implementation of hook_form_FORM_ID_alter
@@ -249,7 +240,6 @@ function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
         '#value' => t('Cancel'),
       );
 
-
       unset($form['tags']);
       unset($form['#metatags']);
       $form['description']['#access']              = FALSE;
@@ -268,7 +258,7 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
     if ($form['#id'] == 'views-exposed-form-tags-management-page') {
         $form['status']['#options']               = array(
             'All' => '- Any -',
-            1 => 'Published',
+            '1' => 'Published',
             '0' => 'Unpublished'
         );
         $form['#info']['filter-created']['label'] = FALSE;
