@@ -996,6 +996,8 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_issue_magazine']['id'] = 'field_issue_magazine';
   $handler->display->display_options['fields']['field_issue_magazine']['table'] = 'field_data_field_issue_magazine';
   $handler->display->display_options['fields']['field_issue_magazine']['field'] = 'field_issue_magazine';
+  $handler->display->display_options['fields']['field_issue_magazine']['alter']['max_length'] = '30';
+  $handler->display->display_options['fields']['field_issue_magazine']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_issue_magazine']['settings'] = array(
     'link' => 0,
   );
@@ -1003,6 +1005,8 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_issue_supplement']['id'] = 'field_issue_supplement';
   $handler->display->display_options['fields']['field_issue_supplement']['table'] = 'field_data_field_issue_supplement';
   $handler->display->display_options['fields']['field_issue_supplement']['field'] = 'field_issue_supplement';
+  $handler->display->display_options['fields']['field_issue_supplement']['alter']['max_length'] = '30';
+  $handler->display->display_options['fields']['field_issue_supplement']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_issue_supplement']['settings'] = array(
     'link' => 0,
   );
