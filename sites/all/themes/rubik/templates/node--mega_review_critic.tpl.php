@@ -1,3 +1,4 @@
+<a href="javascript:;" class="close-preview">&nbsp;</a>
 <?php if (!empty($pre_object)) print render($pre_object) ?>
 
 <div class='<?php print $classes ?> clearfix' <?php print ($attributes) ?>>
@@ -36,7 +37,27 @@
 
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
+      <?php //print render($content) ?>
+<!--      for preview-->
+      <?php if ($view_mode == 'full') { ?>
+        <?php print render($content['field_mega_review_cast']); ?>
+        <?php print render($content['field_mega_review_director']); ?>
+        <?php print render($content['field_mega_review_movie_plot']); ?>
+        <?php print render($content['field_mega_review_youtube_url']); ?>
+        <?php print render($content['field_mega_review_photo_gallery']); ?>
+        <?php print render($content['field_mega_review_twitter']); ?>
+        <?php print render($content['field_story_extra_large_image']); ?>
+        <?php print render($content['field_story_large_image']); ?>
+        <?php print render($content['field_story_medium_image']); ?>
+        <?php print render($content['field_story_small_image']); ?>
+        <?php print render($content['field_story_extra_small_image']); ?>
+        <?php print render($content['field_mega_review_video']); ?>
+        <?php print render($content['field_mega_review_review']); ?>
+        <?php // p($node);?>
+      <?php } else { ?>
       <?php print render($content) ?>
+      <?php } ?>
+<!--end preview-->
     </div>
   <?php endif; ?>
 

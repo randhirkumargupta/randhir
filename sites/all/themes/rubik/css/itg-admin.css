@@ -87,6 +87,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-survey .preview-wrapper, 
 .page-node-add-recipe .preview-wrapper,
 .node-type-recipe .preview-wrapper, 
+.page-node-add-mega-review-critic .preview-wrapper,
+.node-type-mega-review-critic .preview-wrapper, 
 .page-node-add-supplement .preview-wrapper,
 .node-type-breaking-news .preview-wrapper{
   background-color: rgba(0, 0, 0, 0.7);
@@ -115,6 +117,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-astro .preview,
 .page-node-add-recipe .preview,
 .node-type-recipe .preview,
+.page-node-add-mega-review-critic .preview,
+.node-type-mega-review-critic .preview,
 .page-node-add-supplement .preview,
 .node-type-breaking-news .preview{
   background-color: #fff;
@@ -145,6 +149,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-blog .preview > h3,
 .page-node-add-recipe .preview > h3,
 .node-type-recipe .preview > h3,
+.page-node-add-mega-review-critic .preview > h3,
+.node-type-mega-review-critic .preview > h3,
 .page-node-add-supplement .preview > h3,
 .node-type-breaking-news .preview > h3{
   font-size: 24px;
@@ -191,10 +197,18 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .node-preview .column-side, 
 .page-node-add-story .node-title, 
 .page-node-add-story .preview > h3:first-child,
+.page-node-add-mega-review-critic .node-teaser, 
+.page-node-add-mega-review-critic .node-preview .column-side, 
+.page-node-add-mega-review-critic .node-title, 
+.page-node-add-mega-review-critic .preview > h3:first-child,
 .node-type-story .node-teaser, 
 .node-type-story .node-preview .column-side, 
 .node-type-story .node-title, 
 .node-type-story .preview > h3:first-child, 
+.node-type-mega-review-critic .node-teaser, 
+.node-type-mega-review-critic .node-preview .column-side, 
+.node-type-mega-review-critic .node-title, 
+.node-type-mega-review-critic .preview > h3:first-child, 
 .node-type-blog .node-teaser, 
 .node-type-blog .node-preview .column-side, 
 .node-type-blog .node-title, 
@@ -257,6 +271,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-blog div.node,
 .page-node-add-recipe div.node, 
 .node-type-recipe div.node,
+.page-node-add-mega-review-critic div.node, 
+.node-type-mega-review-critic div.node,
 .node-type-breaking-news div.node,
 .node-type-story div.node{
   background: none;
@@ -283,6 +299,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-blog .column-main,
 .page-node-add-recipe .column-main, 
 .node-type-recipe .column-main,
+.page-node-add-mega-review-critic .preview .column-main, 
+.node-type-mega-review-critic .preview .column-main,
 .node-type-breaking-news .column-main{
   display: inline-block;
   width: 100%;
@@ -1006,6 +1024,7 @@ table td, table th{max-width: 200px;}
 #field-recipe-ingredient-values .tabledrag-toggle-weight-wrapper,
 #field-recipe-ingredient-values .tabledrag-hide,
 .field-name-field-astro-zodiac .sticky-header, 
+.sticky-header, 
 [id*="user-register-form"] .group-configuration > legend, 
 [class*="form-item-field-recipe-ingredient-und"] > label{display: none;}
 .node-astro-form .form-type-textarea .form-textarea-wrapper, 
@@ -1147,3 +1166,20 @@ table td, table th{max-width: 200px;}
 .node-photogallery-form #edit-field-gallery-image .field-name-field-images span.file, 
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio span.file{width: 165px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove{margin-top: 5px;}
+.node-mega_review_critic-form .form-type-managed-file .image-widget div.image-widget-data{width: 100%;} 
+.node-mega_review_critic-form .field-multiple-table fieldset .form-item label{width: 120px;} 
+.node-mega_review_critic-form .field-multiple-table fieldset .form-item .form-text{width: 300px !important;} 
+.node-mega_review_critic-form .field-multiple-table td{max-width: none;}
+.node-mega_review_critic-form .form-managed-file .image-preview + .image-widget-data{max-width: 285px;}
+.node-mega_review_critic-form .form-type-managed-file .form-managed-file span.file, 
+.node-mega_review_critic-form .form-type-managed-file .form-managed-file span.file-size{max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 5px;}
+.node-mega_review_critic-form .image-widget > .image-widget-data .form-file{float: left; width: 300px;}
+.node-mega_review_critic-form .vertical-tabs{padding-left: 0; border: none;}
+.node-mega_review_critic-form .vertical-tabs div.story-title{display: none;}
+.block-content > .node-mega-review-critic > .column-side, 
+.block-content > .node-mega-review-critic > .column-main .field-collection-container .action-links,
+.block-content > .node-mega-review-critic > .column-main .field-items .field-collection-view-links{display: none;}
+.block-content > .node-mega-review-critic > .column-main{width: 100%;}
+.block-content > .node-mega-review-critic > .column-main .field{display: inline-block; vertical-align: top; width: 100%;}
+.block-content > .node-mega-review-critic > .column-main .field-label{float: left; width: 30%; padding-bottom: 10px;}
+.block-content > .node-mega-review-critic > .column-main .field-items{float: left; width: 70%; padding-bottom: 10px;}
