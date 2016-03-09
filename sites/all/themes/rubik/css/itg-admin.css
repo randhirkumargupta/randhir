@@ -1209,3 +1209,4 @@ div.view table td, div.view table th{max-width: 200px;}
 [class*='form-item-field-supp-import-xml-und'] div.description{text-align: left;}
 .field-name-field-user-message .form-item span.error{padding-left: 0;}
 [id*="field-gallery-image-values"] .tabledrag-hide{display: none;}
+#branding .breadcrumb-link > a, #branding .breadcrumb-link > strong{max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
