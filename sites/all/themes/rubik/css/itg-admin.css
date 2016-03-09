@@ -509,11 +509,14 @@ form .form-item .form-item{
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
 #block-menu-menu-photogallery-admin-menu .block-content ul li{padding: 0;}
 #block-menu-menu-story-content-admin-menu .block-content ul li a,
+#block-menu-menu-ask-an-expert-menu .block-content ul li a,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a{padding: 10px 20px; display: block; color: #666; position: relative;}
 .block-itg-story-list span.active, .block-itg-story-list span:hover, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active, 
+#block-menu-menu-ask-an-expert-menu .block-content ul li a.active, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a:hover,
+#block-menu-menu-ask-an-expert-menu .block-content ul li a:hover,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a:hover{
   color: #008eb1;
   background-color: #fff;
@@ -1204,3 +1207,6 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 div.view table td, div.view table th{max-width: 200px;}
 [class*='form-item-field-supp-import-xml-und']{text-align: center; margin-top: 10px;}
 [class*='form-item-field-supp-import-xml-und'] div.description{text-align: left;}
+.field-name-field-user-message .form-item span.error{padding-left: 0;}
+[id*="field-gallery-image-values"] .tabledrag-hide{display: none;}
+#branding .breadcrumb-link > a, #branding .breadcrumb-link > strong{max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}

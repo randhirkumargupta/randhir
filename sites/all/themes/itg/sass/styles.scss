@@ -87,7 +87,7 @@ body{
     }
 }
 
-.success-message{
+.success-message, .messages--status{
   color:#009c00;
   font-size: 13px;
   @extend .pdb-10;
@@ -173,6 +173,15 @@ input[type="text"], select, input[type="password"]{
     @extend .pd-30;
     border: 1px solid #ddd;
     background-color: #eee;
+  }
+  .messages--status, .messages--error{
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .messages--error{
+    .messages__list{
+      padding-left: 15px;
+    }
   }
 } 
 .login{
