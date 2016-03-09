@@ -137,13 +137,6 @@ function user_management_user_default_permissions() {
   $permissions['create article content'] = array(
     'name' => 'create article content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -153,13 +146,6 @@ function user_management_user_default_permissions() {
   $permissions['create page content'] = array(
     'name' => 'create page content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -178,7 +164,6 @@ function user_management_user_default_permissions() {
   $permissions['delete own article content'] = array(
     'name' => 'delete own article content',
     'roles' => array(
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -188,11 +173,7 @@ function user_management_user_default_permissions() {
   $permissions['edit any article content'] = array(
     'name' => 'edit any article content',
     'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'SEO' => 'SEO',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -202,10 +183,6 @@ function user_management_user_default_permissions() {
   $permissions['edit any page content'] = array(
     'name' => 'edit any page content',
     'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -215,13 +192,6 @@ function user_management_user_default_permissions() {
   $permissions['edit own article content'] = array(
     'name' => 'edit own article content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -231,13 +201,6 @@ function user_management_user_default_permissions() {
   $permissions['edit own page content'] = array(
     'name' => 'edit own page content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
