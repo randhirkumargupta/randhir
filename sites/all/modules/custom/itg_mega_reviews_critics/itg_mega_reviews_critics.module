@@ -15,7 +15,7 @@ function itg_mega_reviews_critics_views_pre_render(&$view) {
   if ($view->name == "movie_review_list") {
     global $user; // Get user information
     
-    $header_content = l('Create Reviews', 'node/add/mega-review-critic', array('query' => array('destination' => 'movie-review-list')));
+    $header_content = l('Create Mega Review & Critic', 'node/add/mega-review-critic', array('query' => array('destination' => 'movie-review-list')));
     
     $view->attachment_before = $header_content;
   }    
