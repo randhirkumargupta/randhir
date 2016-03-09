@@ -27,6 +27,10 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
     case 'photogallery_node_form':
       $form['#after_build'][] = 'itg_workflow_after_build';      
     break;
+  
+    case 'blog_node_form':
+      $form['#after_build'][] = 'itg_workflow_after_build';      
+    break;
     
     case 'views_exposed_form':
       $form['#after_build'][] = 'itg_workflow_views_exposed_form_after_build';      
@@ -117,7 +121,7 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param type $node
  */
 function itg_workflow_node_presave($node) {  
-  if ($node->type == 'story' || $node->type == 'photogallery') {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
    if ($node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
     $node->workbench_moderation_state_new = 'published';
    }
@@ -169,7 +173,20 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
                jQuery("#edit-tokens").hide();
                jQuery("#edit-actions-submit").val("Archive");
                jQuery("#edit-bundle-photogallery-field-story-archive-und-yes").attr("checked", true);
-               jQuery("#edit-bundle-story-field-story-archive-und").hide();               
+               jQuery("#edit-bundle-photogallery-field-story-archive-und").hide();               
+             });', array('type' => 'inline', 'scope' => 'footer'));
+      
+  } else if ($form['#id'] == 'views-exposed-form-blog-management-page') {
+      // Code for Bulk opration related work for Blog
+      drupal_add_js('jQuery(document).ready(function() {
+               jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
+               var myInputBoxID = "edit-bundle-blog-appendfield-story-archive";
+               jQuery("label[for=" + myInputBoxID + "]").hide();
+               jQuery("#edit-bundle-blog-appendfield-story-archive").hide();
+               jQuery("#edit-tokens").hide();
+               jQuery("#edit-actions-submit").val("Archive");
+               jQuery("#edit-bundle-blog-field-story-archive-und-yes").attr("checked", true);
+               jQuery("#edit-bundle-blog-field-story-archive-und").hide();               
              });', array('type' => 'inline', 'scope' => 'footer'));
       
   }
@@ -183,10 +200,10 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
  * @param type $query 
  */
 function itg_workflow_views_query_alter(&$view, &$query) {
- // p($query);
+
   // < published
   // >= approved
-  
+  // for story
   if ((!isset($_REQUEST['field_story_schedule_date_time_value_1_op'])) && $view->current_display == 'page_5') {
     unset($view->query->where[1]['conditions'][4]);
   } else if ((!isset($_REQUEST['field_story_schedule_date_time_value_op'])) && $view->current_display == 'page_1') {
@@ -231,6 +248,10 @@ function itg_workflow_node_access($node, $op, $account) {
       if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
         return NODE_ACCESS_DENY;
       }
+  } else if (isset($node->type) && $node->type == 'blog' && $op == 'update') {
+      if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
+        return NODE_ACCESS_DENY;
+      }
   }
 
   return NODE_ACCESS_IGNORE;
@@ -244,7 +265,7 @@ function itg_workflow_node_access($node, $op, $account) {
  */
 function itg_workflow_node_view($node, $view_mode, $langcode) {
   
-  if ($node->type == 'story' || $node->type == 'photogallery') {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
     $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
   }
 }
@@ -258,7 +279,7 @@ function itg_workflow_node_view($node, $view_mode, $langcode) {
  */
 function itg_workflow_node_validate($node, $form, &$form_state) {
   // Code for check remarks field is empty or not
-  if ($node->type == 'story' || $node->type == 'photogallery') {    
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {    
     if (empty($node->log) && (($node->workbench_moderation_state_new == 'needs_modification') || ($node->workbench_moderation_state_new == 'rejected'))) {
       form_set_error('log', t("Remarks field is required."));
     }
