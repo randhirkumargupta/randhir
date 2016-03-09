@@ -3,6 +3,7 @@ description = Astro content type and views settings.
 core = 7.x
 package = Features
 version = 7.x-1.0
+dependencies[] = field_collection_fieldset
 dependencies[] = itg_astro
 dependencies[] = node
 dependencies[] = photogallery

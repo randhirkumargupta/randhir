@@ -57,6 +57,10 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   
   // condition for user register and profile form
   if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    $settings['uid'] = $user->uid;
+    drupal_add_js(array('itg_users' => array('settings' => $settings)), array('type' => 'setting'));
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_users') . '/js/itg_users.js',
     );
