@@ -75,11 +75,14 @@
                         $output .= '<div class="inner-item">'. $node->field_astro_zodiac['und'][$i]['field_buzz_description']['und'][0]['value'].'</div>';
                         
                         // Print thumb icon
-                        $output .= '<div class="inner-label">Thumbnail Icon: </div>';
                         $img_fid = $node->field_astro_zodiac['und'][$i]['field_astro_thumb_icon']['und'][0]['fid'];
-                        $imguri = _itg_photogallery_fid($img_fid);
-                        $output .= '<div class="inner-item"><img src="'.image_style_url("thumbnail", $imguri).'"></div>';
-                        print $output;
+                        if ($img_fid != NULL || $img_fid != '') {
+                          $output .= '<div class="inner-label">Thumbnail Icon: </div>';                        
+                          $imguri = _itg_photogallery_fid($img_fid);
+                          $output .= '<div class="inner-item"><img src="'.image_style_url("thumbnail", $imguri).'"></div>';
+                          print $output;
+                        }
+                        
                         // Print audio field 
                         $audio_fid = isset($node->field_astro_zodiac['und'][$i]['field_audio']['und'][0]['fid']) ? $node->field_astro_zodiac['und'][$i]['field_audio']['und'][0]['fid'] : '';                                                
                         if ($audio_fid != '') {

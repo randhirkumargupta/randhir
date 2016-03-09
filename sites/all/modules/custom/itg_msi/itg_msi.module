@@ -231,7 +231,6 @@ function itg_msi_magazine_ajax_callback($form, $form_state) {
  * @param Object $view
  */
 function itg_msi_views_pre_render(&$view) {
-  
   //Add "Create Magazine" button on listing page of magazine
   if ($view->name == "manage_magazines") {
     $header_content_magazine = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
@@ -602,11 +601,15 @@ function itg_msi_show_mapped_stories($row){
         $entity_id[] = $record['entity_id'];
     }
     $count = count($entity_id);
-    
-    //Prepare link for list associated stoies to this node
     $text = 'List Stories('.$count.')';
     $path = 'issue-listing/'.$row->type.'/'.$row->nid;
-    return l($text, $path, array('attributes' => array('target'=>'_blank')));
+    
+    //Prepare link for list associated stoies to this node
+    if($count < 1){
+      return $text;
+    } else {
+      return l($text, $path, array('attributes' => array('target'=>'_blank')));
+    }
 }
 
 /**

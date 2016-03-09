@@ -52,6 +52,9 @@ body{
 .dib{
   display: inline-block;
 }
+.vmid{
+  vertical-align: middle;
+}
 .vtop{
   vertical-align: top;
 }
@@ -136,18 +139,29 @@ input[type="text"], select, input[type="password"]{
 }
 .page-user{
   form{
-    @extend .pd-30;
-    border: 1px solid #ddd;
-    background-color: #eee;
+    max-width: 440px; margin: 0 auto;
+    h2{
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 36px;
+      @extend .mb-10;
+    }
     label{
     @extend .db;
+    font-size: 16px;
+    padding-bottom: 5px;
     }
-    .form-type-password{
+    .form-type-password, .form-actions{
       @extend .mt-10;
+    }
+    .forgot-link{
+      @extend .dib;
+      @extend .vmid;
+      margin: 7px;
+      color: #333;
     }
     .form-submit{
       @extend .btn;
-      @extend .mt-10;
     }
     .form-text{width: 100%;}
     div.description{
@@ -155,7 +169,11 @@ input[type="text"], select, input[type="password"]{
       color: #8d8d8d;
     }
   }
-  .login-wrapper{max-width: 440px; margin: 0 auto;}
+  .login-wrapper{
+    @extend .pd-30;
+    border: 1px solid #ddd;
+    background-color: #eee;
+  }
 } 
 .login{
   line-height: 58px;

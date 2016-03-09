@@ -30,6 +30,7 @@ function itg_mega_reviews_critics_views_pre_render(&$view) {
 function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form, &$form_state, $form_id) {
   
   $form['#after_build'][] = 'itg_mega_reviews_critics_form_after_build';
+  $form['actions']['submit']['#submit'][] = 'itg_mega_reviews_critics_form_custom_callback';
 }
 
 /**
@@ -59,4 +60,22 @@ function itg_mega_reviews_critics_form_views_exposed_form_alter(&$form, &$form_s
      $form['nid']['#attributes'] = array('placeholder' => t('Review ID'));
    }
 
+}
+
+/**
+ * Custom submit callback for Mega reviews form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {  
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+  
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'mega-review-critic') {
+    drupal_set_message('Movie review has been submitted successfully.');
+  } else {
+      drupal_set_message('Movie review has been updated successfully.');
+  }
+   
 }

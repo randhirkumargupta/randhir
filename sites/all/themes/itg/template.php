@@ -148,3 +148,19 @@ function itg_preprocess_block(&$variables, $hook) {
 //      $output .= "</div>\n";
 //      return $output;
 //  }
+
+
+function itg_theme(){
+    $items = array();
+    $items['user_login'] = array(
+      'render element' => 'form',
+      'path' => drupal_get_path('theme', 'itg') . '/templates',
+      'template' => 'user-login',
+    );
+    $items['user_pass'] = array(
+      'render element' => 'form',
+      'path' => drupal_get_path('theme', 'itg') . '/templates',
+      'template' => 'user-pass',
+    );
+    return $items;
+}
