@@ -1010,7 +1010,6 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .field-name-field-breaking-content-details .field-collection-view{border-bottom: 1px dashed #ddd;margin: 0;} 
 .block-content > .node-breaking-news .content-node-view .field-name-field-breaking-content-details > .field-items{width: 100%;}
 .page-content .form-item div.description{margin: 0;}
-table td, table th{max-width: 200px;}
 .page-admin-people-create .fieldset .fieldset-content, .page-user-edit .fieldset .fieldset-content{padding: 40px 0 0;}
 .page-admin-people-create .fieldset .fieldset-content #edit-account, .page-user-edit .fieldset .fieldset-content #edit-account{margin: 0;}
 .page-admin-people-create .fieldset .fieldset-content #edit-account .form-item.form-type-password-confirm.form-item-pass, 
@@ -1202,6 +1201,6 @@ table td, table th{max-width: 200px;}
 .block-content > .node-mega-review-critic > .column-main .field-items{float: left; width: 70%; padding-bottom: 10px;}
 .form-type-managed-file .image-widget .image-preview + .image-widget-data .file,
 .form-type-managed-file .image-widget .image-preview + .image-widget-data .file-size{max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 5px;}
-table td, table th{max-width: none;}
+div.view table td, div.view table th{max-width: 200px;}
 [class*='form-item-field-supp-import-xml-und']{text-align: center; margin-top: 10px;}
 [class*='form-item-field-supp-import-xml-und'] div.description{text-align: left;}
