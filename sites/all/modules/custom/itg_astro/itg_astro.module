@@ -28,6 +28,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js',
       drupal_get_path('module', 'itg_astro') . '/js/moment.js',
+      drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
     );        
     if ($form['nid']['#value'] == NULL) {
       $form['title']['#default_value'] = date('M jS Y');
@@ -56,12 +57,16 @@ function itg_astro_after_build($form, &$form_state) {
     '#markup' => l(t('Cancel'), 'manage-astro', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
   );   
-  global $user;
+  global $user, $base_url;
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
 
   $settings = array();  
   $settings['uid'] = $user->uid;
+  $settings['base_url'] = $base_url;
+  $settings['type'] = 'astro';
+  $settings['nid'] = $form['nid']['#value'];
+  
 
   drupal_add_js(array('uid' => $settings), 'setting');
   

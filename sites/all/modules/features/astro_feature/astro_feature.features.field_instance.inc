@@ -305,7 +305,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_astro_video',
-    'label' => 'Zodiac Video',
+    'label' => 'Video',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -402,7 +402,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_audio',
-    'label' => 'Zodiac Audio',
+    'label' => 'Audio',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -466,7 +466,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_buzz_description',
-    'label' => 'Zodiac text',
+    'label' => 'Text',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -512,7 +512,7 @@ function astro_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_astro_date_range',
     'label' => 'Date Range',
     'required' => 1,
@@ -530,12 +530,12 @@ function astro_feature_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'M jS Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-0:+0',
       ),
       'type' => 'date_popup',
       'weight' => 4,
@@ -948,12 +948,12 @@ function astro_feature_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'M jS Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-0:+0',
       ),
       'type' => 'date_popup',
       'weight' => 12,
@@ -1053,13 +1053,11 @@ function astro_feature_field_default_field_instances() {
   t('Please select zodiac sign name.');
   t('Select Frequency');
   t('Select Program');
+  t('Text');
   t('Thumbnail Icon');
   t('Video');
   t('Zodiac');
-  t('Zodiac Audio');
   t('Zodiac Sign Name');
-  t('Zodiac Video');
-  t('Zodiac text');
 
   return $field_instances;
 }
