@@ -1175,7 +1175,9 @@ table td, table th{max-width: 200px;}
 .node-mega_review_critic-form .form-type-managed-file .form-managed-file span.file-size{max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 5px;}
 .node-mega_review_critic-form .image-widget > .image-widget-data .form-file{float: left; width: 300px;}
 .node-mega_review_critic-form .vertical-tabs{padding-left: 0; border: none;}
-.node-mega_review_critic-form .vertical-tabs div.story-title{display: none;}
+.node-mega_review_critic-form .vertical-tabs div.story-title, 
+[id*="draggableviews-table-manage-blogs-page"] .tabledrag-hide,
+.view-manage-blogs .tabledrag-toggle-weight-wrapper{display: none;}
 .block-content > .node-mega-review-critic > .column-side, 
 .block-content > .node-mega-review-critic > .column-main .field-collection-container .action-links,
 .block-content > .node-mega-review-critic > .column-main .field-items .field-collection-view-links{display: none;}
