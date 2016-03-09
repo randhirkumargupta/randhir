@@ -401,7 +401,7 @@ function features_supplement_magazine_views_default_views() {
   /* Display: Issue listing */
   $handler = $view->new_display('page', 'Issue listing', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Issue listing';
+  $handler->display->display_options['title'] = 'Story Listing';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -1324,6 +1324,8 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['label'] = 'Magazine Title';
+  $handler->display->display_options['fields']['title_1']['alter']['max_length'] = '30';
+  $handler->display->display_options['fields']['title_1']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
   /* Field: Content: Print Issue Date */
   $handler->display->display_options['fields']['field_print_magazine_issue_date']['id'] = 'field_print_magazine_issue_date';
@@ -1613,14 +1615,16 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Supplement Title';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['max_length'] = '30';
+  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Select Magazine */
   $handler->display->display_options['fields']['field_supp_select_magazine']['id'] = 'field_supp_select_magazine';
   $handler->display->display_options['fields']['field_supp_select_magazine']['table'] = 'field_data_field_supp_select_magazine';
   $handler->display->display_options['fields']['field_supp_select_magazine']['field'] = 'field_supp_select_magazine';
   $handler->display->display_options['fields']['field_supp_select_magazine']['label'] = 'Magazine Name';
+  $handler->display->display_options['fields']['field_supp_select_magazine']['alter']['max_length'] = '30';
+  $handler->display->display_options['fields']['field_supp_select_magazine']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_supp_select_magazine']['settings'] = array(
     'link' => 0,
   );
