@@ -86,6 +86,12 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
             break;
 
         case 'taxonomy_csv_import_form':
+            global $base_url;
+            $download_path = $base_url . "/" .drupal_get_path('module', 'itg_term') . '/examples/term.csv';
+            $form['csv_import_example']                          = array(
+                '#prefix' => '<div class="term-main-wrap"> Click to Download <a href="'.$download_path.'">Import Example</a></div>'
+            );
+
             $form['tab']['import_format']['#options']['#access'] = FALSE;
             $form['tab']['import_format']['#options']            = array(
                 'fields' => 'Fields'
