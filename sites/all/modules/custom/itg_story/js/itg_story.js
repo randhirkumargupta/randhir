@@ -7,7 +7,7 @@
         Drupal.behaviors.itg_story = {
              attach: function(context, settings) {
                    var uid = settings.itg_story.settings.uid;
-                   var expdate = new Date(y, m, 1);
+                   
                    if (uid != 1) {
                      $('#edit-field-story-select-magazine').hide();
                      $('#edit-field-story-select-supplement').hide();
@@ -172,7 +172,7 @@
                     changeMonth: false,
                     changeYear: true,
                     readonly: true,
-                    minDate:expdate,
+                   
                     //maxDate: '+1M',
                 });
                 
