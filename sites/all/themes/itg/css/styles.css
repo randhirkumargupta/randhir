@@ -54,7 +54,7 @@ body {
 }
 
 /* line 37, ../sass/styles.scss */
-.pdb-10, .success-message, #block-formblock-ask-an-expert h2 {
+.pdb-10, .success-message, .messages--status, #block-formblock-ask-an-expert h2 {
   padding-bottom: 10px;
 }
 
@@ -129,7 +129,7 @@ body {
 }
 
 /* line 90, ../sass/styles.scss */
-.success-message {
+.success-message, .messages--status {
   color: #009c00;
   font-size: 13px;
 }
@@ -216,23 +216,32 @@ input[type="text"], select, input[type="password"] {
   border: 1px solid #ddd;
   background-color: #eee;
 }
+/* line 177, ../sass/styles.scss */
+.page-user .messages--status, .page-user .messages--error {
+  max-width: 440px;
+  margin: 0 auto;
+}
+/* line 182, ../sass/styles.scss */
+.page-user .messages--error .messages__list {
+  padding-left: 15px;
+}
 
-/* line 178, ../sass/styles.scss */
+/* line 187, ../sass/styles.scss */
 .login {
   line-height: 58px;
   font-size: 18px;
 }
-/* line 181, ../sass/styles.scss */
+/* line 190, ../sass/styles.scss */
 .login a {
   color: #333;
   text-decoration: none;
 }
-/* line 184, ../sass/styles.scss */
+/* line 193, ../sass/styles.scss */
 .login a:hover {
   text-decoration: underline;
 }
 
-/* line 189, ../sass/styles.scss */
+/* line 198, ../sass/styles.scss */
 #page-title {
   font-size: 24px;
   line-height: 28px;
@@ -240,48 +249,48 @@ input[type="text"], select, input[type="password"] {
   margin-bottom: 10px;
 }
 
-/* line 198, ../sass/styles.scss */
+/* line 207, ../sass/styles.scss */
 #block-formblock-ask-an-expert h2 {
   border-bottom: 1px solid #ddd;
 }
 
-/* line 212, ../sass/styles.scss */
+/* line 221, ../sass/styles.scss */
 .node-ask-an-expert .field {
   padding-bottom: 5px;
 }
-/* line 213, ../sass/styles.scss */
+/* line 222, ../sass/styles.scss */
 .node-ask-an-expert .field-label {
   width: 80px;
 }
-/* line 214, ../sass/styles.scss */
+/* line 223, ../sass/styles.scss */
 .node-ask-an-expert .field-items {
   overflow: hidden;
   float: none;
 }
 
-/* line 217, ../sass/styles.scss */
+/* line 226, ../sass/styles.scss */
 .view-ask-an-expert .views-row {
   border-top: 1px solid #ddd;
 }
-/* line 219, ../sass/styles.scss */
+/* line 228, ../sass/styles.scss */
 .view-ask-an-expert .views-row:first-child {
   border: none;
 }
-/* line 221, ../sass/styles.scss */
+/* line 230, ../sass/styles.scss */
 .view-ask-an-expert .views-field {
   padding-bottom: 5px;
 }
-/* line 222, ../sass/styles.scss */
+/* line 231, ../sass/styles.scss */
 .view-ask-an-expert .views-label {
   width: 80px;
   font-weight: 600;
 }
-/* line 223, ../sass/styles.scss */
+/* line 232, ../sass/styles.scss */
 .view-ask-an-expert .field-content {
   overflow: hidden;
   float: none;
 }
-/* line 225, ../sass/styles.scss */
+/* line 234, ../sass/styles.scss */
 .view-ask-an-expert .field-content a {
   color: #333;
 }
