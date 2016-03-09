@@ -149,7 +149,7 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<a href="taxonomy/term/[tid]">View</a> | [edit_term] | <a href="./texonomy/confirm/ajax/[tid]">Delete</a>';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[edit_term] | <a href="./texonomy/confirm/ajax/[tid]">Delete</a>';
   /* Sort criterion: Category Manager: changed field */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
   $handler->display->display_options['sorts']['changed']['table'] = 'itg_category_manager';
