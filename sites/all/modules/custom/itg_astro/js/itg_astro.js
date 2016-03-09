@@ -14,7 +14,7 @@ Drupal.behaviors.itg_astro = {
       $('#edit-field-astro-frequency-und-daily').click(function () {
         var state = $(this).is(':checked');
         if (state) {
-          var startDay = moment().format('L');          
+          var startDay = moment().format('MMM Do YYYY');          
           $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay);
           $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(startDay);          
           $("#edit-title").val(startDay);
@@ -32,8 +32,8 @@ Drupal.behaviors.itg_astro = {
         if (state) {
           var startDay = moment().day(0); // Sun
           var endDay = moment().day(6); // Sat          
-          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay.format('L'));
-          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay.format('L'));
+          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay.format('MMM Do YYYY'));
+          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay.format('MMM Do YYYY'));
           var titleText = startDay.format('MMM Do YYYY') + " - " + endDay.format('MMM Do YYYY');
           $("#edit-title").val(titleText);
         }
@@ -45,8 +45,8 @@ Drupal.behaviors.itg_astro = {
         if (state) {
           var firstDay = moment().date(1);
           var lastDay = moment().endOf('month');
-          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay.format('L'));
-          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(lastDay.format('L'));
+          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay.format('MMM Do YYYY'));
+          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(lastDay.format('MMM Do YYYY'));
           var titleText = firstDay.format('MMM Do YYYY') + " - " + lastDay.format('MMM Do YYYY');
           $("#edit-title").val(titleText);
         }
@@ -56,9 +56,9 @@ Drupal.behaviors.itg_astro = {
       $('#edit-field-astro-frequency-und-yearly').click(function () {
         var state = $(this).is(':checked');
         if (state) {
-          var firstDay = moment().dayOfYear(1).format('L');
+          var firstDay = moment().dayOfYear(1).format('MMM Do YYYY');
           $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay);
-          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val('12/31/' + moment().year());
+          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val('Dec 31st ' + moment().year());
           var startYear = moment().dayOfYear(1).format('MMM Do YYYY');
           var endyear = "Dec 31st " + moment().year();
           $("#edit-title").val(startYear + " - " + endyear);
@@ -71,8 +71,8 @@ Drupal.behaviors.itg_astro = {
         if (state) {
           var startDay = moment().day(0); // Sun
           var endDay = moment().day(6); // Sat          
-          $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(startDay.format('L'));
-          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(endDay.format('L'));
+          $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(startDay.format('MMM Do YYYY'));
+          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(endDay.format('MMM Do YYYY'));
         }
       });
       
@@ -82,8 +82,8 @@ Drupal.behaviors.itg_astro = {
         if (state) {
           var firstDay = moment().date(1);
           var lastDay = moment().endOf('month');
-          $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(firstDay.format('L'));
-          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(lastDay.format('L'));
+          $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(firstDay.format('MMM Do YYYY'));
+          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(lastDay.format('MMM Do YYYY'));
         }
       });
       
@@ -91,9 +91,9 @@ Drupal.behaviors.itg_astro = {
       $('#edit-field-astro-frequency2-und-yearly').click(function () {
         var state = $(this).is(':checked');
         if (state) {
-          var firstDay = moment().dayOfYear(1).format('L');
+          var firstDay = moment().dayOfYear(1).format('MMM Do YYYY');
           $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(firstDay);
-          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val('12/31/' + moment().year());
+          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val('Dec 31st ' + moment().year());
         }
       });
       
@@ -101,7 +101,7 @@ Drupal.behaviors.itg_astro = {
       $("#edit-field-astro-frequency2-und-daily").click(function() {
         var state = $(this).is(':checked');
         if (state) {
-          var firstDay = moment().format('L');
+          var firstDay = moment().format('MMM Do YYYY');
           $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(firstDay);
           $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(firstDay);
         }

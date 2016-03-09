@@ -28,10 +28,10 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js',
       drupal_get_path('module', 'itg_astro') . '/js/moment.js',
-    );    
+    );        
     if ($form['nid']['#value'] == NULL) {
-      $form['title']['#default_value'] = date('m/d/Y');
-    }    
+      $form['title']['#default_value'] = date('M jS Y');
+    }       
     $form['#action'] = '?destination=manage-astro';
     $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';
     $form['#validate'][] = 'itg_astro_validate_astro';
@@ -44,14 +44,14 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
 /**
  * after build function for altering field collection label.
  */
-function itg_astro_after_build($form, &$form_state) {
- for($i = 0; $i <= 11; $i++) {    
-    $name = itg_astro_sunsign_name($i);            
-    $form['field_astro_zodiac']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = $name.' Text';
-    $form['field_astro_zodiac']['und'][$i]['field_astro_thumb_icon']['und'][0]['#title'] = $name.' Thumbnail Icon'; 
-    $form['field_astro_zodiac']['und'][$i]['field_audio']['und'][0]['#title'] = $name.' Audio'; 
-    $form['field_astro_zodiac']['und'][$i]['field_astro_video']['und'][0]['#title'] = $name.' Video'; 
-  ;}
+function itg_astro_after_build($form, &$form_state) {  
+  
+  for($i = 0; $i <= 11; $i++) {    
+    $name = itg_astro_sunsign_name($i);  
+    $form['field_astro_zodiac']['und'][$i]['#title'] = $name; 
+    //$form_state['values']['field_astro_zodiac']['und'][$i]['field_astro_thumb_icon']['und'][0]['fid'] = 28;    
+  }
+  //dpm($form_state['values']['field_astro_zodiac']);
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'manage-astro', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
@@ -84,7 +84,7 @@ function itg_astro_sunsign_name($index) {
     'Sagittarius',
     'Capricorn',
     'Aquarius',
-    'pisces',
+    'Pisces',
   );
   if ($index <= 11) {
     return $name[$index];
@@ -186,5 +186,72 @@ function itg_astro_theme($existing, $type, $theme, $path) {
   );
 
   return $themes;
+}
 
+/**
+ * Implements hook_field_widget_form_alter()
+ * @staticvar int $count
+ * @param type $element
+ * @param type $form_state
+ * @param type $context
+ */
+function itg_astro_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element[0]['#field_name']) && $element[0]['#field_name'] == 'field_astro_thumb_icon') {    
+    static $count = 0;   
+    //dpm($count);
+    $fid = itg_astro_last_updated_node($count);
+    $trigered_button = isset($form_state['clicked_button']['#value']) ? $form_state['clicked_button']['#value'] : '';
+    if($element[0]['#default_value']['fid'] == 0 && $trigered_button != 'Remove') {
+      $element[0]['#default_value']['fid'] = $fid;      
+    }        
+    ++$count;
+  }
+}
+
+/**
+ * Fetch last node zodiac thumbnail icon
+ */
+function itg_astro_last_updated_node($index) {  
+  $itg_results = array();  
+  $nid = variable_get('astro_latest_node');      
+  if ($nid != NULL) {    
+    $itg_query = db_select('field_data_field_astro_zodiac', 'az');
+    $itg_query->condition('az.entity_id', $nid)
+        ->condition('az.delta', $index);
+    $itg_query->fields('t', array('field_astro_thumb_icon_fid'));    
+    $itg_query->join('field_data_field_astro_thumb_icon', 't', 'az.field_astro_zodiac_value = t.entity_id');    
+    $itg_results = $itg_query->execute()->fetchField();    
+  }   
+  
+  return $itg_results;
+}
+
+/**
+ * Implements hook_node_presave($node).
+ * @param type $node
+ */
+function itg_astro_node_presave($node) {  
+  if (isset($node->nid) && $node->nid !=0 && $node->type == 'astro') {
+    variable_set('astro_latest_node', $node->nid);
+  }
+}
+
+/**
+ * Implements hook_node_insert($node)  
+ * @param type $node
+ */
+
+function itg_astro_node_insert($node) {
+  if (isset($node->nid) && $node->nid != 0 && $node->type == 'astro') {
+    variable_set('astro_latest_node', $node->nid);
+  }
+}
+
+/**
+ * Implements hook_menu-alter()
+ * @param array $item
+ */
+function itg_astro_menu_alter(&$item) {
+  // Hide the "Create new account" tab
+  $item['user/login']['type'] = MENU_CALLBACK;
 }
