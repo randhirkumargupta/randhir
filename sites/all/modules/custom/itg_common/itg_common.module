@@ -152,3 +152,15 @@ function itg_common_views_pre_render(&$view) {
     $view->attachment_before = $header_content;
   }    
 }
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {    
+   if (isset($form['title'])) {
+    $form['title']['#maxlength']= 255;
+   }
+}
