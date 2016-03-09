@@ -44,7 +44,7 @@
       </div>
       <div class="field">
         <div class="field-label">Survey Instruction:</div>
-        <div class="form-items"><?php echo $content['body']['#object']->body[LANGUAGE_NONE][0]['value']; ?></div>
+        <div class="field-items"><?php echo $content['body']['#object']->body[LANGUAGE_NONE][0]['value']; ?></div>
       </div>
       <?php print render($content);?>
     </div>

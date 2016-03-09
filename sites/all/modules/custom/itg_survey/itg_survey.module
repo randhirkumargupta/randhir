@@ -8,6 +8,21 @@
  *
  */
 
+/**
+ * Implement hook_menu
+ * @return string
+ */
+function itg_survey_menu() {
+   $items = array();
+   $items['survey'] = array(
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_survey_survey_form'), 
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK, 
+    );
+   return $items;
+}
+
 /***************************Form Related hooks*********************************/
 /**
  * Implement hook_form_alter
@@ -17,8 +32,6 @@
  */
 function itg_survey_form_alter(&$form, &$form_state, $form_id) {
 
-  
-  
   global $user;
   
   //Set destination for survey form
@@ -153,9 +166,35 @@ function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 function itg_survey_node_validate($node, $form, &$form_state) {
   
   //Date validation for start date and end date
-  if($node->type == 'survey'){
+  if($node->type == 'survey' && !empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
    if(strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
       form_set_error('field_survey_end_date',t('Survey end date must be greater or equal to start date.'));
     }
   }
+}
+
+/*******************************Common Functions*****************************/
+
+/**
+ * Create survey form
+ */
+function itg_survey_survey_form() {
+  itg_survey_get_survey();
+}
+
+/**
+ * Get Survey nid
+ */
+function itg_survey_get_survey() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'))
+          ->condition('n.type', 'survey', '=')
+          ->condition('n.status', 1, '=')
+          ->orderBy('n.created', 'DESC')
+          ->range(0, 1);
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $nid[] = $record['nid'];
+  }
+  return $nid;
 }
