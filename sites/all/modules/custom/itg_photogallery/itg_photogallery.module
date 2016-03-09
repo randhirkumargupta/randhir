@@ -16,15 +16,18 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
     $form['upload'] = array(
       '#type' => 'plupload',
       '#weight' => 21,
-      '#imgfilevalidate' => array(
-        'file_validate_extensions' => array("png gif jpg jpeg"),
+//      '#imgfilevalidate' => array(
+//        'file_validate_extensions' => array("png gif jpg jpeg"),
+//      ),
+      '#upload_validators' => array(
+         'file_validate_extensions' => array("png gif jpg jpeg"),
       ),
       '#states' => array(
         'visible' => array(
           ':input[name="field_bulk_media_upload[und][1]"]' => array('checked' => TRUE),
         ),
       ),
-      '#description' => t('Allowed file types:<strong>png gif jpg jpeg</strong>, 88x66 smallest size of image.'),
+      '#description' => t('88x66 smallest size of image.'),
     );
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
@@ -36,6 +39,7 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
       ),
     );
+    
     $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'manage-photogallery', array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
@@ -46,6 +50,14 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
      );
     $form['#validate'][] = 'itg_photogallery_custom_validate';
     $form['#after_build'][] = 'itg_photogallery_after_build';
+    
+    $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<div class="img-crt"></div>');
+    
+  $coverid = $form_state['values']['field_story_extra_large_image']['und'][0]['fid'];
+  $form_state['values']['field_story_large_image']['und'][0]['fid'] = $coverid;
+  $form_state['values']['field_story_medium_image']['und'][0]['fid'] = $coverid;
+  $form_state['values']['field_story_small_image']['und'][0]['fid'] = $coverid;
+  $form_state['values']['field_story_extra_small_image']['und'][0]['fid'] = $coverid;
   } 
 }
 
@@ -71,12 +83,7 @@ function itg_photogallery_after_build($form, &$form_state) {
   if (arg(0) != 'unpublished-photogallery') {
   drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
   }
- $coverid = $form_state['values']['field_story_extra_large_image']['und'][0]['fid'];
- $form_state['values']['field_story_large_image']['und'][0]['fid'] = $coverid;
-  $form_state['values']['field_story_medium_image']['und'][0]['fid'] = $coverid;
-  $form_state['values']['field_story_small_image']['und'][0]['fid'] = $coverid;
-  $form_state['values']['field_story_extra_small_image']['und'][0]['fid'] = $coverid;
-   return $form;
+return $form;
 }
 
 /**

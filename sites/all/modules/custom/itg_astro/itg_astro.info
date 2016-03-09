@@ -1,0 +1,5 @@
+name = ITG Astro
+description = Astrology content type, listing and preview.
+core = 7.x
+
+package = ITG

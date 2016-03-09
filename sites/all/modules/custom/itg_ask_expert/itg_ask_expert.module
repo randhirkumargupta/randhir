@@ -1,0 +1,147 @@
+<?php
+
+/**
+ * @file
+ * The ITG Ask an Expert module.
+ *
+ * Contains functionality related to Ask an Expert.
+ *
+ */
+/**
+ * Implements hook_theme().
+ */
+function itg_ask_expert_theme($existing, $type, $theme, $path) {
+  $themes = array(
+      'ask_an_expert_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'ask-an-expert-node-form',
+      'path' => drupal_get_path('module', 'itg_ask_expert') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+
+  return $themes;
+}
+
+/**
+ * Implement hook_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param string $form_id
+ */
+function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
+     global $user;
+  $user_fields = user_load($user->uid);
+  if ($form_id == 'ask_an_expert_node_form') {
+   //code to hide source field
+   if ($user->uid != '1') {
+      $form['field_user_source_term_id']['#access'] = FALSE;
+    }
+    // hide message box in add condition
+    if(empty($form['nid']['#value']) && $user->uid != '1') {
+      $form['field_user_message']['#access'] = FALSE;
+    }
+    // check if user is logged in auto fill email
+    if ($user->uid && $form['#node']->nid == '') {
+     $form['field_user_email'][LANGUAGE_NONE][0]['value']['#value'] = $user->mail;
+     $form['field_user_name'][LANGUAGE_NONE][0]['value']['#value'] = $user_fields->field_first_name['und']['0']['value'];
+    }
+    
+    if (!empty($form['nid']['#value'])) {
+     $form['title']['#attributes']['disabled'] = TRUE;
+     $form['field_user_name'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
+     $form['field_user_email'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
+     $form['field_user_city'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
+     $form['field_user_state'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
+     //$form['field_disclose_your_identity'][LANGUAGE_NONE]['1']['#attributes']['disabled'] = TRUE;
+     $form['field_disclose_your_identity']['#disabled'] = TRUE;
+        }
+    
+   // set term_id from url in hidden field 
+    $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = 54;
+    $form['actions']['submit']['#value'] = 'Submit';
+    $form['#after_build'][] = 'itg_ask_expert_after_build';
+    $form['actions']['submit']['#submit'][] = 'itg_ask_expert_form_custom_callback';
+      } 
+}
+
+/**
+ * Implement hook_after_build
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_ask_expert_after_build($form, &$form_state) {
+  
+  global $user, $base_url;
+  
+  // update automatic alias name
+  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
+  //Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  drupal_add_js(array('itg_ask_expert' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module','itg_ask_expert').'/js/itg_ask_expert.js');
+  return $form;
+}
+
+/**
+ * Custom submit callback for redirecting breaking news form.
+ */
+function itg_ask_expert_form_custom_callback($form, &$form_state) {
+
+  $redirect_url = end(explode('/',$form['#action']));
+  $final_url='content/'.$redirect_url;
+
+  
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+  if (empty($form['nid']['#value'])) {
+    $_SESSION['ask_an_expert_message']= 'Your query has been successfully submitted, our expert will reply you back soon.';
+  } else {
+      drupal_set_message('Message updated successfully.');
+  }
+  
+  
+  $form_state['redirect'] = $final_url;
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Array $view
+ */
+function itg_ask_expert_views_pre_render(&$view) {
+
+  // add link for in queue and history
+  if ($view->name == "ask_an_expert" && $view->current_display != 'page_1') {
+    $header_content_ask_an_expert = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $view->attachment_before = $header_content_ask_an_expert;
+  }
+  
+  
+  // check condition for ask an expert view display
+  if ($view->name == 'ask_an_expert' && $view->current_display == 'page_1') {
+
+    foreach ($view->result as $chkvalue) {
+
+      if ($chkvalue->field_field_disclose_your_identity[0]['raw']['value'] != '1') {
+
+        $chkvalue->field_field_user_name[0]['rendered']['#access'] = FALSE;
+        $chkvalue->field_field_user_email[0]['rendered']['#access'] = FALSE;
+      }
+      
+      if (empty($chkvalue->field_field_user_message[0]['raw']['value'])) {
+        $chkvalue->node_title = FALSE;
+        $chkvalue->node_created = FALSE;
+        $chkvalue->field_field_user_name[0]['rendered']['#access'] = FALSE;
+        $chkvalue->field_field_user_email[0]['rendered']['#access'] = FALSE;
+        $chkvalue->field_field_disclose_your_identity[0]['rendered']['#access'] = FALSE;
+      }
+    }
+  }
+  
+  
+}
