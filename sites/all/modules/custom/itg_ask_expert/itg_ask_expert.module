@@ -9,13 +9,6 @@
  */
 
 /**
- * Implements hook_init().
- */
-function itg_ask_expert_init() {
-  
-}
-
-/**
  * Implements hook_theme().
  */
 function itg_ask_expert_theme($existing, $type, $theme, $path) {
