@@ -182,20 +182,18 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
  */
 
 function itg_term_batch_alter(&$batch) {
-    $term_export_message = 'Terms are exported from Tags.';
-    $term_import_message = 'Terms are imported into existing vocabulary Tags.';
 
     if ($batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_export_process') {
         // set message
         variable_set('term_export_message', 'Terms are exported from Tags');
-        drupal_set_message(check_plain(t($term_export_message)));
+        drupal_set_message(t(variable_get('term_export_message')));
         // redirect path
         $batch['form_state']['redirect']['path'] = 'tags-management';
     }
     elseif ($batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_import_process') {
         // set message
-        variable_set('term_import_message', $term_import_message);
-        drupal_set_message(check_plain(t($term_import_message)));
+        variable_set('term_import_message', 'Terms are imported into existing vocabulary Tags.');
+        drupal_set_message(t(variable_get('term_export_message')));
         // redirect path
         $batch['form_state']['redirect']['path'] = 'tags-management';
     }
@@ -236,7 +234,7 @@ function itg_term_views_pre_render(&$view) {
                     $filename      = $matches[0][3];
                     $download_link = l(t($filename), $filepath);
                     //To override message
-                    drupal_set_message(check_plain(t('Click on csv file to download')) . ' ' . $download_link);
+                    drupal_set_message(check_plain(t('Click csv file to download')) . ' ' . $download_link);
                 }
             }
         }
