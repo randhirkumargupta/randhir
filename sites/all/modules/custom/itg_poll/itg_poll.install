@@ -1,0 +1,67 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Poll module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * 
+ * @access public
+ * @return array
+ */
+function itg_poll_schema() {
+  $schema = array();      
+  $schema['itg_polls'] = array(
+    'description' => 'Poll Information!',
+    'fields' => array(
+      'Id' => array(
+        'description' => 'id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nId' => array(
+        'description' => 'node nid',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+     'ansId' => array(
+        'description' => 'poll option',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uId' => array(
+        'description' => 'user id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'created' => array(
+        'description' => t('Created Poll date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('Id'),
+  );
+  return $schema;
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_poll_uninstall() {
+  drupal_uninstall_schema('itg_polls');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_poll_update_7001() {
+  cache_clear_all(NULL, 'cache_menu');
+}

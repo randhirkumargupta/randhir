@@ -48,8 +48,9 @@
   <div class="field-div"><div class="field-label">Large Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_large_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
   <div class="field-div"><div class="field-label">Small Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_small_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
   <div class="field-div"><div class="field-label">Status: </div><div class="field-item"><?php print $status ? 'Published' : 'Unpublished';?></div></div>
-  <div class="field-div"><div class="field-label"><strong>Attached XML Files:</strong> </div>
-    
+  <div class="field-div">
+    <div class="field-label"><strong>Attached XML Files:</strong></div>
+    <div class="field-item">
     <?php 
     $count_file = count($node->field_field_issue_import_xml[LANGUAGE_NONE]);
     $i = 1;
@@ -61,5 +62,6 @@
       $i++;
     }
     ?>
+    </div>
   </div>
 </div>
