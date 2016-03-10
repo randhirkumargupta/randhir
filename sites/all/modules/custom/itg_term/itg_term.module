@@ -231,14 +231,14 @@ function itg_term_views_pre_render(&$view) {
                     $download_link = "<a href='" . $filepath . "'>" . $filename . "</a>";
                     //To override message
 
-                    drupal_set_message(check_plain(t('Click to this link to download CSV')) . $download_link);
+                    drupal_set_message(check_plain(t('Click on csv file to download ')) . $download_link);
                 }
             }
         }
 
         //Add "Create Tag" button on listing page of Tags Management
 
-        $header_content_term = l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('CSV import'), 'admin/structure/taxonomy/csv_import') . " " . l(t('Create export'), 'admin/structure/taxonomy/csv_export');
+        $header_content_term = l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('CSV Import'), 'admin/structure/taxonomy/csv_import') . " " . l(t('CSV Export'), 'admin/structure/taxonomy/csv_export');
 
         $view->attachment_before = $header_content_term;
     }
