@@ -379,8 +379,13 @@ function rubik_breadcrumb($vars) {
     $end = end($vars['breadcrumb']);
     $title = drupal_get_title();
     if ($end && strip_tags($end) !== $title) {
-      // $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
-      $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $title : check_plain($title);
+      //$vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
+      if (arg(2) == 'edit') {
+        $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
+      }
+      else {
+        $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $title : check_plain($title);
+      }
     }
   }
 

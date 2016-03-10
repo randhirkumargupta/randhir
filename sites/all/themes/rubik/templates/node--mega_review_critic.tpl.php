@@ -40,6 +40,10 @@
       <?php //print render($content) ?>
 <!--      for preview-->
       <?php if ($view_mode == 'full') { ?>
+        <div class="field">
+          <div class="field-label">Movie Title:</div>
+          <div class="field-items"><?php print render($title); ?></div>
+        </div>
         <?php print render($content['field_mega_review_cast']); ?>
         <?php print render($content['field_mega_review_director']); ?>
         <?php print render($content['field_mega_review_movie_plot']); ?>
@@ -52,6 +56,8 @@
         <?php print render($content['field_story_small_image']); ?>
         <?php print render($content['field_story_extra_small_image']); ?>
         <?php print render($content['field_mega_review_video']); ?>
+        <?php print render($content['field_mega_review_review']); ?>
+        <?php // p($node);?>
       <?php } else { ?>
       <?php print render($content) ?>
       <?php } ?>
