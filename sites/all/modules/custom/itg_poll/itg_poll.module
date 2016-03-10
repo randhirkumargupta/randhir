@@ -61,9 +61,9 @@ function itg_poll_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * After build for story form.
- * @param type $form
- * @param type $form_state
+ * After build for pollform.
+ * @param array $form
+ * @param array $form_state
  */
 function itg_poll_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3));
@@ -75,11 +75,7 @@ function itg_poll_after_build($form, &$form_state) {
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
-
   drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
-  if (arg(0) == "node" && is_numeric(arg(1)) && arg(2) == "edit") {
-    
-  }
   return $form;
 }
 
@@ -89,16 +85,13 @@ function itg_poll_after_build($form, &$form_state) {
  * @param array reference $form_state
  */
 function itg_poll_node_form_validate($form, &$form_state) {
-  $field = $form_state['build_info']['args'][0];
-  $field_input = $form_state['input'];
-  $poll_question_value = $form_state['values']['field_poll_question'][LANGUAGE_NONE][0]['value'];
   $que_type = $form_state['values']['field_poll_answer_option'][LANGUAGE_NONE][0]['value'];
   $cnt = count($form_state['values']['field_poll_answer'][LANGUAGE_NONE]);
-  if ($que_type == 1) {
+  if ($que_type == 1) { //1 = Text Question
     $field = 'field_poll_answer_text';
     $msg = 'Required Poll Answer Text';
   }
-  elseif ($que_type == 2) {
+  elseif ($que_type == 2) { //2 == Image Type Question
     $field = 'field_poll_answer_image';
     $msg = 'Required Poll Answer Image';
   }
@@ -134,7 +127,7 @@ function validate_answer($cnt, $form_state, $type, $field, $err_msg) {
 }
 
 /**
- * check cookies set or not
+ * Implement function for check cookie
  * @param int $nid
  * @return string
  */
@@ -213,14 +206,12 @@ function getcurrent_userpoll($nid) {
 function itg_poll_form($form, &$form_state, $parms) {
   $form = array();
   $form['#id'] = 'subsPollForm';
-
   $form["wrapper"] = array(
     "#markup" => "<div class='inline-messages'></div>",
   );
 
   foreach ($parms as $item):
     $nid = $item->nid;
-// field_display_result
     foreach ($item->_field_data['nid']['entity']->field_poll_answer['und'] as $row) {
       $item_id[] = $row['value']; //fieldcollection id
     }
@@ -244,8 +235,6 @@ function itg_poll_form($form, &$form_state, $parms) {
         }
       }
     }
-
-
   endforeach;
   $val = array_keys($pollAnswer);
   $form['pole_answer'] = array(
