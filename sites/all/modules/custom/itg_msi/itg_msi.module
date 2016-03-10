@@ -495,10 +495,10 @@ function itg_msi_check_duplicate_title() {
 
     $itgResult = $itgQuery->execute()->fetchObject();
     if (isset($itgResult->title) && strcasecmp($title, $itgResult->title) == 0) {
-      echo drupal_json_encode(array('Code' => 1));
+      echo ($type == 'astro') ? 'false' : drupal_json_encode(array('Code' => 1));
     }    
     else {
-      echo drupal_json_encode(array('Code' => 0));
+      echo ($type == 'astro') ? 'true' :  drupal_json_encode(array('Code' => 0));
     }
 }
 
