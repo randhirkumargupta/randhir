@@ -67,13 +67,6 @@ if (isset($isCookies) && $isCookies == 'yes') {
               <?php print $poll_image; ?>
               </div>
             <?php } ?> 
-              <?php if ($polls_answer_video) { ?>
-              <div class="poll-video-container">
-              <?php print $polls_answer_video; ?>
-              </div>
-      <?php } ?>  
-
-
           </div>		
 
           <div class="pull-right">

@@ -47,21 +47,17 @@ function feature_for_poll_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'imagefield_crop',
+      'module' => 'image',
       'settings' => array(
-        'collapsible' => 2,
-        'croparea' => '500x500',
-        'enforce_minimum' => TRUE,
-        'enforce_ratio' => TRUE,
         'filefield_sources' => array(
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 0,
+            'imce' => 'imce',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -79,9 +75,8 @@ function feature_for_poll_field_default_field_instances() {
         'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
-        'resolution' => '200x150',
       ),
-      'type' => 'imagefield_crop_widget',
+      'type' => 'image_image',
       'weight' => 2,
     ),
   );
@@ -333,17 +328,36 @@ function feature_for_poll_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'imagefield_crop',
+      'module' => 'image',
       'settings' => array(
-        'collapsible' => 2,
-        'croparea' => '500x500',
-        'enforce_minimum' => 1,
-        'enforce_ratio' => 1,
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
-        'resolution' => '200x150',
       ),
-      'type' => 'imagefield_crop_widget',
+      'type' => 'image_image',
       'weight' => 10,
     ),
   );
@@ -390,17 +404,36 @@ function feature_for_poll_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'imagefield_crop',
+      'module' => 'image',
       'settings' => array(
-        'collapsible' => 2,
-        'croparea' => '500x500',
-        'enforce_minimum' => 1,
-        'enforce_ratio' => 1,
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
-        'resolution' => '200x150',
       ),
-      'type' => 'imagefield_crop_widget',
+      'type' => 'image_image',
       'weight' => 11,
     ),
   );
@@ -486,17 +519,36 @@ function feature_for_poll_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'imagefield_crop',
+      'module' => 'image',
       'settings' => array(
-        'collapsible' => 2,
-        'croparea' => '500x500',
-        'enforce_minimum' => 1,
-        'enforce_ratio' => 1,
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
-        'resolution' => '200x150',
       ),
-      'type' => 'imagefield_crop_widget',
+      'type' => 'image_image',
       'weight' => 5,
     ),
   );
