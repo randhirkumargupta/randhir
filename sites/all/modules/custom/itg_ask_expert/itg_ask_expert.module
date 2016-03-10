@@ -9,13 +9,6 @@
  */
 
 /**
- * Implements hook_init().
- */
-function itg_ask_expert_init() {
-  
-}
-
-/**
  * Implements hook_theme().
  */
 function itg_ask_expert_theme($existing, $type, $theme, $path) {
@@ -105,7 +98,6 @@ function itg_ask_expert_form_custom_callback($form, &$form_state) {
     $redirect_url = end(explode('/', $form['#action']));
     $final_url = 'content/' . $redirect_url;
 
-
     if (isset($_SESSION['messages'])) {
       unset($_SESSION['messages']);
     }
@@ -132,8 +124,7 @@ function itg_ask_expert_views_pre_render(&$view) {
     $header_content_ask_an_expert = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
     $view->attachment_before = $header_content_ask_an_expert;
   }
-  
-  
+    
   // check condition for ask an expert view display
   if ($view->name == 'ask_an_expert' && $view->current_display == 'page_1') {
 
@@ -165,20 +156,20 @@ function itg_ask_expert_views_pre_render(&$view) {
 function itg_ask_expert_node_insert($node) {
 
   if ($node->type == 'ask_an_expert') {
+
     // get term id to fetch all role related to term id
-
     $term_id = $node->field_user_source_term_id[LANGUAGE_NONE][0]['value'];
-
-    $expert_arr=itg_expert_mail($term_id);
     
-    $mail_content = itg_ask_expert_get_mail_content($entity);
+    $expert_arr = itg_expert_mail($term_id);
+
+    $mail_content = itg_ask_expert_get_mail_content($node);
     $params = array(
       'body' => $mail_content,
       'subject' => 'India Today | New Query Received!',
     );
-    
-    $to = array('haripalrao@gmail.com', 'ankushgautam76@gmail.com');
-    
+
+    $to = implode(',', $expert_arr);
+
     $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -219,12 +210,19 @@ function itg_ask_expert_mail($key, &$message, $params) {
 /**
  * Get Mail content
  * @global String $base_url
- * @param Array $entity
+ * @param Array $node
  * @return string
  */
-function itg_ask_expert_get_mail_content($entity) {
+function itg_ask_expert_get_mail_content($node) {
+  
   global $base_url;
   
+  $uname = $node->field_user_name[LANGUAGE_NONE][0]['value'];
+  $uemail = $node->field_user_email[LANGUAGE_NONE][0]['value'];
+  $ucity = $node->field_user_city[LANGUAGE_NONE][0]['value'];
+  $ustate = $node->field_user_state[LANGUAGE_NONE][0]['value'];
+  $question = $node->title;
+
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -232,7 +230,15 @@ function itg_ask_expert_get_mail_content($entity) {
 </head>
 <body style="margin:0; padding:0;">
       <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi Team,</td></tr>
-      <tr><td>New Query has been received</td></tr>
+      <tr><td></td></tr>
+      <tr><td>New Query has been received, please find below detail.</td></tr>
+      <tr><td></td></tr>
+      <tr><td>Question: ' . $question . '</td></tr>
+      <tr><td>Name: ' . $uname . '</td></tr>
+      <tr><td>Email: ' . $uemail . '</td></tr>
+      <tr><td>City: ' . $ucity . '</td></tr>
+      <tr><td>State: ' . $ustate . '</td></tr>
+      <tr><td></td></tr>
       <tr><td>Thanks,</td></tr>
       <tr><td>India Today Team</td></tr></table>
 </body></html>';
