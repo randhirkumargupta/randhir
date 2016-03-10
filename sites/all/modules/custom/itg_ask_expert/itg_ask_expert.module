@@ -7,6 +7,14 @@
  * Contains functionality related to Ask an Expert.
  *
  */
+
+/**
+ * Implements hook_init().
+ */
+function itg_ask_expert_init() {
+  
+}
+
 /**
  * Implements hook_theme().
  */
@@ -91,22 +99,26 @@ function itg_ask_expert_after_build($form, &$form_state) {
  * Custom submit callback for redirecting breaking news form.
  */
 function itg_ask_expert_form_custom_callback($form, &$form_state) {
+  global $user, $base_url;
 
-  $redirect_url = end(explode('/',$form['#action']));
-  $final_url='content/'.$redirect_url;
+  if ($user->uid != '1') {
+    $redirect_url = end(explode('/', $form['#action']));
+    $final_url = 'content/' . $redirect_url;
 
-  
-  if (isset($_SESSION['messages'])) {
-    unset($_SESSION['messages']);
-  }
-  if (empty($form['nid']['#value'])) {
-    $_SESSION['ask_an_expert_message']= 'Your query has been successfully submitted, our expert will reply you back soon.';
-  } else {
+
+    if (isset($_SESSION['messages'])) {
+      unset($_SESSION['messages']);
+    }
+    if (empty($form['nid']['#value'])) {
+      $_SESSION['ask_an_expert_message'] = 'Your query has been successfully submitted, our expert will reply you back soon.';
+    }
+    else {
       drupal_set_message('Message updated successfully.');
+    }
+
+
+    $form_state['redirect'] = $final_url;
   }
-  
-  
-  $form_state['redirect'] = $final_url;
 }
 
 /**
@@ -144,4 +156,106 @@ function itg_ask_expert_views_pre_render(&$view) {
   }
   
   
+}
+
+/**
+ * Implements hook_node_insert
+ * @param type $node
+ */
+function itg_ask_expert_node_insert($node) {
+
+  if ($node->type == 'ask_an_expert') {
+    // get term id to fetch all role related to term id
+
+    $term_id = $node->field_user_source_term_id[LANGUAGE_NONE][0]['value'];
+
+    $expert_arr=itg_expert_mail($term_id);
+    
+    $mail_content = itg_ask_expert_get_mail_content($entity);
+    $params = array(
+      'body' => $mail_content,
+      'subject' => 'India Today | New Query Received!',
+    );
+    $to = "itoday135@gmail.com"; // SEO team mail id
+    $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', 'haripalrao@gmail.com,ankushgautam76@gmail.com', language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    }
+    else {
+      $error_msg = 'Failed to send the email!';
+      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      return FALSE;
+    }
+  }
+}
+
+/**
+ * Send mail to expert, when query is received
+ * @global type $base_url
+ * @param type $key
+ * @param type $message
+ * @param type $entity
+ */
+function itg_ask_expert_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'send_mail_to_expert':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
+}
+
+/**
+ * Get Mail content
+ * @global type $base_url
+ * @param type $entity
+ * @return string
+ */
+function itg_ask_expert_get_mail_content($entity) {
+  global $base_url;
+  
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title></title>
+</head>
+<body style="margin:0; padding:0;">
+      <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi Team,</td></tr>
+      <tr><td>New Query has been received</td></tr>
+      <tr><td>Thanks,</td></tr>
+      <tr><td>India Today Team</td></tr></table>
+</body></html>';
+
+  return $content;
+}
+
+
+/**
+ * Fetch expert mail based on term id
+ */
+function itg_expert_mail($get_term_id)
+{
+  
+  $itg_query = db_select('field_data_field_user_section', 's');
+  $itg_query->fields('s', array('entity_id', 'field_user_section_tid'));
+  $itg_query->fields('u', array('mail', 'name'));
+  $itg_query->condition('s.field_user_section_tid', $get_term_id, '=');
+  $itg_query->join('users', 'u', 's.entity_id = u.uid');
+  $itg_expert_role_arr = $itg_query->execute()->fetchAll();
+
+  foreach ($itg_expert_role_arr as $expert_mail_arr) {
+    $itg_final_mail[] = $expert_mail_arr->mail;
+  }
+  //$itg_expert_role_mail=$itg_expert_role_array->mail;
+
+  return $itg_final_mail;
 }
