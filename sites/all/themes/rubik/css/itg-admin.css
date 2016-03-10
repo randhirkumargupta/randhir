@@ -472,6 +472,7 @@ form .form-item .form-item{
 #block-menu-menu-ask-an-expert-menu,
 #block-menu-menu-photogallery-admin-menu, 
 #block-itg-photogallery-photogallery-tab-form-block, 
+#block-itg-astro-astro-tab-form-block, 
 #block-itg-recipe-recipe-tab-form-block{
   border-left: none;
   border-right: none;
@@ -482,6 +483,7 @@ form .form-item .form-item{
 #block-menu-menu-story-content-admin-menu .block-content, 
 #block-menu-menu-ask-an-expert-menu .block-content,
 #block-menu-menu-photogallery-admin-menu .block-content,
+#block-itg-astro-astro-tab-form-block .block-content,
 #block-itg-photogallery-photogallery-tab-form-block .block-content{
   padding: 0;
 }
@@ -534,6 +536,7 @@ form .form-item .form-item{
   background-color: #008eb1;
 }
 .block-itg-story.fixed, 
+.block-itg-astro.fixed, 
 .block-itg-recipe.fixed, 
 .block-itg-breaking-news.fixed, 
 .block-itg-photogallery.fixed{
@@ -1225,3 +1228,11 @@ div.view table td, div.view table th{max-width: 200px;}
 .field-type-text.field-name-field-blog-bloggers .form-text,
 .field-name-field-recipe-ingredients.field-widget-text-textfield .form-text{max-width: 100% !important;}
 [id*="edit-field-field-issue-import-xml-und"] > legend{padding: 10px 10px 0;}
+.page-tags-management div.views-exposed-form input.form-text{box-sizing: border-box;}
+.page-tags-management .views-exposed-form .container-inline-date .date-padding label, 
+[id*="taxonomy-csv-import-form"] .vertical-tabs-list{display: none;}
+.page-tags-management .views-exposed-form .container-inline-date{clear: none; float: left;}
+[id*="taxonomy-csv-import-form"] .vertical-tabs{padding-left: 0;}
+.page-admin-structure-taxonomy-csv-export .vertical-tabs-list li a{border-bottom: none;}
+.page-admin-structure-taxonomy-csv-export .vertical-tabs{padding-left: 0;}
+.page-admin-structure-taxonomy-csv-export .vertical-tabs-list{margin: 0; width: auto;}
