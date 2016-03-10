@@ -202,7 +202,6 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
-  $handler->display->display_options['fields']['field_user_message']['label'] = 'Message';
   $handler->display->display_options['fields']['field_user_message']['exclude'] = TRUE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
@@ -334,7 +333,6 @@ else
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
-  $handler->display->display_options['fields']['field_user_message']['label'] = 'Message';
   $handler->display->display_options['fields']['field_user_message']['hide_empty'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
@@ -412,7 +410,6 @@ else
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
-  $handler->display->display_options['fields']['field_user_message']['label'] = 'Message';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Source term id (field_user_source_term_id) */
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['id'] = 'field_user_source_term_id_value';
