@@ -222,7 +222,7 @@ function itg_term_views_pre_render(&$view) {
                 // To unset message
                 unset($_SESSION['messages']['status']);
                 //To override message
-                drupal_set_message(t('Terms are imported into existing vocabulary Tags.'));
+                drupal_set_message(t('Terms are imported into vocabulary "tags".'));
             }
             elseif (isset($message_arr['status']) && $message_arr['status'][0] == variable_get('term_export_message')) {
                 $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>";
@@ -242,7 +242,7 @@ function itg_term_views_pre_render(&$view) {
 
         //Add "Create Tag" button on listing page of Tags Management
 
-        $header_content_term = l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('CSV Import'), 'admin/structure/taxonomy/csv_import') . " " . l(t('CSV Export'), 'admin/structure/taxonomy/csv_export');
+        $header_content_term = l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV'), 'admin/structure/taxonomy/csv_import') . " " . l(t('Export CSV'), 'admin/structure/taxonomy/csv_export');
 
         $view->attachment_before = $header_content_term;
     }
