@@ -11,103 +11,59 @@
       $('.field-name-field-astro-zodiac-sign-name').css('display', 'none');
 
       // Change title and date range on click daily radio button
-      $('#edit-field-astro-frequency-und-daily').click(function () {
-        var state = $(this).is(':checked');
-        if (state) {
-          var startDay = moment().format('MMM Do YYYY');
-          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay);
-          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(startDay);
-          $("#edit-title").val(startDay);
-          check_duplicate(startDay);
+      $('input[name="field_astro_frequency[und]"]').on('change', function () {
+        var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
+        switch (frequency) {
+          case 'daily':
+            var startDay = moment().format('MMM Do YYYY');
+            $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay);
+            $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(startDay);
+            $("#edit-title").val(startDay);            
+            var is_valid = validateAstroNodeForm('title');
+            if (is_valid == false) {
+              return false;
+            }
+            break;
+          case 'weekly':
+            var startDay = moment().day(0); // Sun
+            var endDay = moment().day(6); // Sat          
+            $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay.format('MMM Do YYYY'));
+            $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay.format('MMM Do YYYY'));
+            var titleText = startDay.format('MMM Do YYYY') + " - " + endDay.format('MMM Do YYYY');
+            $("#edit-title").val(titleText);            
+            var is_valid = validateAstroNodeForm('title');
+            if (is_valid == false) {
+              return false;
+            }
+            break;
+          case 'monthly':
+            var firstDay = moment().date(1);
+            var lastDay = moment().endOf('month');
+            $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay.format('MMM Do YYYY'));
+            $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(lastDay.format('MMM Do YYYY'));
+            var titleText = firstDay.format('MMM Do YYYY') + " - " + lastDay.format('MMM Do YYYY');
+            $("#edit-title").val(titleText);            
+            var is_valid = validateAstroNodeForm('title');
+            if (is_valid == false) {
+              return false;
+            }
+            break;
+          case 'yearly':
+            var firstDay = moment().dayOfYear(1).format('MMM Do YYYY');
+            $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay);
+            $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val('Dec 31st ' + moment().year());
+            var startYear = moment().dayOfYear(1).format('MMM Do YYYY');
+            var endyear = "Dec 31st " + moment().year();            
+            $("#edit-title").val(startYear + " - " + endyear);
+            var is_valid = validateAstroNodeForm('title');
+            if (is_valid == false) {
+              return false;
+            }
         }
       });
 
       // Hide date range field from display      
       $('#edit-field-astro-numerology-values').css('display', 'none');
-
-      // Change title and date range on click weekly radio button
-      $('#edit-field-astro-frequency-und-weekly').click(function () {
-        var state = $(this).is(':checked');
-        if (state) {
-          var startDay = moment().day(0); // Sun
-          var endDay = moment().day(6); // Sat          
-          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay.format('MMM Do YYYY'));
-          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay.format('MMM Do YYYY'));
-          var titleText = startDay.format('MMM Do YYYY') + " - " + endDay.format('MMM Do YYYY');
-          $("#edit-title").val(titleText);
-          check_duplicate(titleText);
-        }
-      });
-
-      // Change title and date range on click Monthly radio button 
-      $('#edit-field-astro-frequency-und-monthly').click(function () {
-        var state = $(this).is(':checked');
-        if (state) {
-          var firstDay = moment().date(1);
-          var lastDay = moment().endOf('month');
-          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay.format('MMM Do YYYY'));
-          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(lastDay.format('MMM Do YYYY'));
-          var titleText = firstDay.format('MMM Do YYYY') + " - " + lastDay.format('MMM Do YYYY');
-          $("#edit-title").val(titleText);
-          check_duplicate(titleText)
-        }
-      });
-
-      // Change title and date range on click Yearly radio button 
-      $('#edit-field-astro-frequency-und-yearly').click(function () {
-        var state = $(this).is(':checked');
-        if (state) {
-          var firstDay = moment().dayOfYear(1).format('MMM Do YYYY');
-          $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay);
-          $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val('Dec 31st ' + moment().year());
-          var startYear = moment().dayOfYear(1).format('MMM Do YYYY');
-          var endyear = "Dec 31st " + moment().year();
-          $("#edit-title").val(startYear + " - " + endyear);
-          check_duplicate(startYear + " - " + endyear);
-        }
-      });
-
-      // Numerology frequency fields
-      $('#edit-field-astro-frequency2-und-weekly').click(function () {
-        var state = $(this).is(':checked');
-        if (state) {
-          var startDay = moment().day(0); // Sun
-          var endDay = moment().day(6); // Sat          
-          $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(startDay.format('MMM Do YYYY'));
-          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(endDay.format('MMM Do YYYY'));
-        }
-      });
-
-      // Monthly
-      $('#edit-field-astro-frequency2-und-monthly').click(function () {
-        var state = $(this).is(':checked');
-        if (state) {
-          var firstDay = moment().date(1);
-          var lastDay = moment().endOf('month');
-          $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(firstDay.format('MMM Do YYYY'));
-          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(lastDay.format('MMM Do YYYY'));
-        }
-      });
-
-      // Yearly
-      $('#edit-field-astro-frequency2-und-yearly').click(function () {
-        var state = $(this).is(':checked');
-        if (state) {
-          var firstDay = moment().dayOfYear(1).format('MMM Do YYYY');
-          $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(firstDay);
-          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val('Dec 31st ' + moment().year());
-        }
-      });
-
-      // Daily 
-      $("#edit-field-astro-frequency2-und-daily").click(function () {
-        var state = $(this).is(':checked');
-        if (state) {
-          var firstDay = moment().format('MMM Do YYYY');
-          $('#edit-field-field-astro-date-range2-und-0-value-datepicker-popup-0').val(firstDay);
-          $('#edit-field-field-astro-date-range2-und-0-value2-datepicker-popup-0').val(firstDay);
-        }
-      });
 
       // Show numerology values
       $("#edit-field-numerology-und-1").click(function () {
@@ -132,32 +88,7 @@
         $('#edit-metatags').show();
         $('.vertical-tabs-list').hide();
         $('#edit-metatags-und-advanced').hide();
-      }
-
-      //Check duplicacy on title for astro
-      function check_duplicate(title) {
-        $(".form-item-title .error").html('');
-        var trimmed_title = $.trim(title);
-        var base_url = Drupal.settings.uid.base_url;
-        var type = Drupal.settings.uid.type;
-        var nid = Drupal.settings.uid.nid;
-
-        //Call Ajax
-        $.ajax({
-          url: base_url + "/check-duplicate-title/" + type + '/' + nid,
-          type: 'post',
-          data: {'title': trimmed_title},
-          dataType: "JSON",
-          success: function (data) {
-            if (data.Code === 1) {
-              $(".form-item-title").append($('<span class="error">' + type + ' title ' + trimmed_title + ' already exist.</span>'));
-            }
-            else {
-              $(".form-item-title .error").html('');
-            }
-          }
-        });
-      }
+      }     
 
       // validateJobSearch validation function            
       function validateAstroNodeForm() {
@@ -176,6 +107,17 @@
             error.appendTo(errorPlaceHolder);
           },
           rules: {
+            'title': {
+              remote: {
+                url: Drupal.settings.uid.base_url + "/check-duplicate-title/" + Drupal.settings.uid.type + '/' + Drupal.settings.uid.nid,
+                type: "post",
+                data: {
+                  title: function () {
+                    return jQuery("input[name='title']").val();
+                  }
+                }
+              }
+            },
             'field_astro_zodiac[und][0][field_buzz_description][und][0][value]': {
               required: true
             },
@@ -344,7 +286,7 @@
                   }
                 }
               },
-              number:true
+              number: true
             },
             'field_astro_numerology_values[und][0][field_buzz_description][und][0][value]': {
               required: {
@@ -358,6 +300,9 @@
             }
           },
           messages: {
+            'title': {
+              remote: 'Selected date range is already exist.'
+            }
           }
         });
 
