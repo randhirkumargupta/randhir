@@ -143,7 +143,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
                     1 => 'Tags'
                 );
 
-               $form['tab']['destination']['#type']                = FALSE;
+                $form['tab']['destination']['#type']                           = FALSE;
                 $form['tab']['destination']['import_fields_custom']['#access'] = FALSE;
                 $form['tab']['destination']['info_hierarchy']['#access']       = FALSE;
                 $form['tab']['destination']['check_hierarchy']['#access']      = FALSE;
