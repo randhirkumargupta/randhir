@@ -176,9 +176,10 @@ function itg_ask_expert_node_insert($node) {
       'body' => $mail_content,
       'subject' => 'India Today | New Query Received!',
     );
-    //$to = array('haripalrao@gmail.com', 'ankushgautam76@gmail.com');
-    $to = "ankushgautam76@gmail.com"; 
-    $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'haripal.rao@kelltontech.com', TRUE);
+    
+    $to = array('haripalrao@gmail.com', 'ankushgautam76@gmail.com');
+    
+    $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
     }
