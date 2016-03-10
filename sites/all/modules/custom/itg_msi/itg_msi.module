@@ -402,7 +402,7 @@ function itg_msi_node_presave($node){
  */
 function itg_msi_node_validate($node, $form, &$form_state) {
   
-  if ($node->type == 'magazine' || $node->type == 'supplement') { // Validate duplicacy on titles for magazine and supplement
+  if ($node->type == 'magazine' || $node->type == 'supplement' || $node->type == 'astro') { // Validate duplicacy on titles for magazine and supplement
     //if (!isset($node->nid)) {
     $title = $form_state['values']['title'];
     if (isset($node->nid)) {
@@ -495,10 +495,10 @@ function itg_msi_check_duplicate_title() {
 
     $itgResult = $itgQuery->execute()->fetchObject();
     if (isset($itgResult->title) && strcasecmp($title, $itgResult->title) == 0) {
-      echo drupal_json_encode(array('Code' => 1));
+      echo ($type == 'astro') ? 'false' : drupal_json_encode(array('Code' => 1));
     }    
     else {
-      echo drupal_json_encode(array('Code' => 0));
+      echo ($type == 'astro') ? 'true' :  drupal_json_encode(array('Code' => 0));
     }
 }
 

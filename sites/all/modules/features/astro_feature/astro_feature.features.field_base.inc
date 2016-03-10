@@ -72,36 +72,6 @@ function astro_feature_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_astro_frequency2'.
-  $field_bases['field_astro_frequency2'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_astro_frequency2',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'daily' => 'Daily',
-        'weekly' => 'Weekly',
-        'monthly' => 'Monthly',
-        'yearly' => 'Yearly',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
-  );
-
   // Exported field_base: 'field_astro_numerology_values'.
   $field_bases['field_astro_numerology_values'] = array(
     'active' => 1,
@@ -239,38 +209,6 @@ function astro_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
-  );
-
-  // Exported field_base: 'field_field_astro_date_range2'.
-  $field_bases['field_field_astro_date_range2'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_field_astro_date_range2',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'date',
-    'settings' => array(
-      'cache_count' => 4,
-      'cache_enabled' => 0,
-      'granularity' => array(
-        'day' => 'day',
-        'hour' => 0,
-        'minute' => 0,
-        'month' => 'month',
-        'second' => 0,
-        'year' => 'year',
-      ),
-      'timezone_db' => '',
-      'todate' => 'required',
-      'tz_handling' => 'none',
-    ),
-    'translatable' => 0,
-    'type' => 'datestamp',
   );
 
   // Exported field_base: 'field_numerology'.
