@@ -96,7 +96,7 @@ function itg_poll_node_form_validate($form, &$form_state) {
     $msg = 'Required Poll Answer Image';
   }
   if ($que_type) {
-    validate_answer($cnt, $form_state, $que_type, $field, $msg);
+    itg_poll_validate_answer($cnt, $form_state, $que_type, $field, $msg);
   }
 }
 
@@ -108,7 +108,7 @@ function itg_poll_node_form_validate($form, &$form_state) {
  * @param string $field: validate fields
  * @param string $err_msg: show error message with fields
  */
-function validate_answer($cnt, $form_state, $type, $field, $err_msg) {
+function itg_poll_validate_answer($cnt, $form_state, $type, $field, $err_msg) {
   $count = ($cnt <= 2 ) ? $cnt : $cnt - 1;
   $err_msg = ($count == 2 ) ? 'Required Minimum Two Poll Answer' : $err_msg;
 
@@ -131,7 +131,7 @@ function validate_answer($cnt, $form_state, $type, $field, $err_msg) {
  * @param int $nid
  * @return string
  */
-function isCookies($nid) {
+function itg_poll_isCookies($nid) {
   $is_cookies = '';
   // get poll cookie
   if (isset($_COOKIE['visitedPoll'])) {
@@ -150,7 +150,7 @@ function isCookies($nid) {
  * @param int $this_nid
  * @return array
  */
-function getPollResult($this_nid) {
+function itg_poll_getPollResult($this_nid) {
 
   if (empty($this_nid)) {
     return false;
@@ -177,7 +177,7 @@ function getPollResult($this_nid) {
  * @param int $this_nid
  * @return numbers
  */
-function getTotalPoll($this_nid) {
+function itg_poll_getTotalPoll($this_nid) {
 
   if (empty($this_nid)) {
     return false;
@@ -190,7 +190,7 @@ function getTotalPoll($this_nid) {
 /**
  * Implements function for check user
  */
-function getcurrent_userpoll($nid) {
+function itg_poll_getcurrent_userpoll($nid) {
   return $total = db_select('itg_polls', 'p')
           ->fields('p', array('uid'))
           ->condition('p.nid', $nid)->execute()->fetchField();

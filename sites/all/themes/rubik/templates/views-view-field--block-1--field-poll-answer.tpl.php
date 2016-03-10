@@ -24,8 +24,8 @@
  */
 $this_nid = $view->result[0]->nid;
 global $user;
-$isCookies = isCookies($this_nid);
-if (empty($isCookies)) {
+$isCookies = itg_poll_isCookies($this_nid);
+if ($isCookies != 'yes') {
   ?>
   <div class="poll-main">
   <?php

@@ -5,7 +5,7 @@ global $user;
 if (isset($view->result[0]->nid)) {
   $this_nid = $view->result[0]->nid;
 
-  $isCookies = isCookies($this_nid);
+  $isCookies = itg_poll_isCookies($this_nid);
 }
 if (isset($isCookies) && $isCookies == 'yes') {
    drupal_add_js("jQuery(document).ready(function(){jQuery('#block-views-poll-listing-block-1').hide(); });", 'inline');
@@ -15,8 +15,8 @@ if (isset($isCookies) && $isCookies == 'yes') {
 if (isset($isCookies) && $isCookies == 'yes') {
   $result_format = $view->result[0]->_field_data['nid']['entity']->field_result_format['und'][0]['value'];
   $display_format = $view->result[0]->_field_data['nid']['entity']->field_display_result['und'][0]['value'];
-  $optionArr = getPollResult($this_nid);
-  $opttotal = getTotalPoll($this_nid);
+  $optionArr = itg_poll_getPollResult($this_nid);
+  $opttotal = itg_poll_getTotalPoll($this_nid);
 
   foreach ($view->result as $item) {
     foreach ($item->_field_data['nid']['entity']->field_poll_answer['und'] as $row) {

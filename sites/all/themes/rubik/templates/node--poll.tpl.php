@@ -51,10 +51,10 @@
           <?php if ($view_mode == 'full'): ?>
 
             <div class="basic-details content-box">
-              <h2>Poll Title</h2>
+              <h2><?php echo t('Poll Title'); ?></h2>
               <div class="content-details">
                 <div class="field">
-                  <div class="field-label">Poll Title:</div>
+                  <div class="field-label"><?php echo t('Poll Title'); ?>:</div>
                   <div class="field-items"><?php print $title; ?></div>
                 </div>
                 <?php
@@ -102,7 +102,7 @@
               if (isset($output) && !empty($output)):
                 ?>
                 <div class="expert-details content-box">
-                  <h2>Poll Answer</h2>
+                  <h2><?php echo t('Poll Answer'); ?></h2>
                   <div class="content-details">     
       <?php echo '<ul>' . $output . '</ul>'; ?>     
                   </div>
@@ -112,7 +112,7 @@
           
           
             <div class="poll-details">
-              <h2>Poll Details</h2>
+              <h2><?php echo t('Poll Details'); ?></h2>
               <div class="content-details">
                 <?php
                 $field_story_url = render($content['field_story_url']);
