@@ -177,8 +177,8 @@ function itg_ask_expert_node_insert($node) {
       'subject' => 'India Today | New Query Received!',
     );
     
-    $to = array('haripalrao@gmail.com', 'ankushgautam76@gmail.com');
-    
+    $to = implode(',', $expert_arr);
+   
     $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
