@@ -301,7 +301,7 @@
           },
           messages: {
             'title': {
-              remote: 'Selected date range is already exist.'
+              remote: 'Astro for selected frequency is already filled.'
             }
           }
         });

@@ -166,6 +166,9 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['filters']['field_astro_frequency_value']['id'] = 'field_astro_frequency_value';
   $handler->display->display_options['filters']['field_astro_frequency_value']['table'] = 'field_data_field_astro_frequency';
   $handler->display->display_options['filters']['field_astro_frequency_value']['field'] = 'field_astro_frequency_value';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['value'] = array(
+    'daily' => 'daily',
+  );
   $handler->display->display_options['filters']['field_astro_frequency_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator_id'] = 'field_astro_frequency_value_op';
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['label'] = 'Select Frequency';
