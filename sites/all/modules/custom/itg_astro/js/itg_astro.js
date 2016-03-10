@@ -112,8 +112,6 @@
       // Show numerology values
       $("#edit-field-numerology-und-1").click(function () {
         $('#edit-field-astro-numerology-values').css('display', 'block');
-        $("#edit-field-astro-numerology-values-und-0-field-story-source-id label:first").html('Enter Number<span class="form-required" title="This field is required."> *</span>');
-        $("#edit-field-astro-numerology-values-und-0-field-buzz-description label:first").html('Enter Text<span class="form-required" title="This field is required."> *</span>');
       });
 
       // Hide numerology values
@@ -125,8 +123,6 @@
       var num = $('input[name="field_numerology[und]"]:checked').val();
       if (num == 1) {
         $('#edit-field-astro-numerology-values').css('display', 'block');
-        $("#edit-field-astro-numerology-values-und-0-field-story-source-id label:first").html('Enter Number<span class="form-required" title="This field is required."> *</span>');
-        $("#edit-field-astro-numerology-values-und-0-field-buzz-description label:first").html('Enter Text<span class="form-required" title="This field is required."> *</span>');
       }
 
       // Code for astro node form to expand sef url and meta fields.
@@ -164,19 +160,19 @@
       }
 
       // validateJobSearch validation function            
-      function validateAstroNodeForm() {        
+      function validateAstroNodeForm() {
         var validator = jQuery("#astro-node-form").validate({
           ignore: '',
-          errorElement: 'div',          
+          errorElement: 'span',
           errorPlacement: function (error, element) {
             var elementName = element.attr('name');
-                var errorPlaceHolder = '';
-                switch (elementName) {
-                  case 'field_astro_zodiac[und][0][field_astro_thumb_icon][und][0][fid]':
-                    errorPlaceHolder = element.parent().parent().parent();
-                  default:
-                    errorPlaceHolder = element.parent();                  
-                }
+            var errorPlaceHolder = '';
+            switch (elementName) {
+              case 'field_astro_zodiac[und][0][field_astro_thumb_icon][und][0][fid]':
+                errorPlaceHolder = element.parent().parent().parent();
+              default:
+                errorPlaceHolder = element.parent();
+            }
             error.appendTo(errorPlaceHolder);
           },
           rules: {
@@ -215,32 +211,161 @@
             },
             'field_astro_zodiac[und][11][field_buzz_description][und][0][value]': {
               required: true
-            },            
+            },
             'field_story_category[und][]': {
               required: true
             },
             'field_astro_zodiac[und][0][field_astro_thumb_icon][und][0][fid]': {
               required: {
-                  depends: function(element) {
-                    var fid = jQuery("input[name='field_astro_zodiac[und][0][field_astro_thumb_icon][und][0][fid]'").val();
-                    if (fid == 0) {
-                      return true;
-                    }
-                    return false;
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][1][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][2][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][3][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][4][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][5][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][6][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][7][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][8][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][9][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][10][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_zodiac[und][11][field_astro_thumb_icon][und][0][fid]': {
+              required: {
+                depends: function () {
+                  if ($(this).val() == 0) {
+                    $(this).removeAttr('value');
+                  }
+                  return true;
+                }
+              }
+            },
+            'field_astro_numerology_values[und][0][field_story_source_id][und][0][value]': {
+              required: {
+                depends: function () {
+                  var numerology = $('input[name="field_numerology[und]"]:checked').val();
+                  if (numerology == 1) {
+                    return true;
                   }
                 }
+              },
+              number:true
+            },
+            'field_astro_numerology_values[und][0][field_buzz_description][und][0][value]': {
+              required: {
+                depends: function () {
+                  var numerology = $('input[name="field_numerology[und]"]:checked').val();
+                  if (numerology == 1) {
+                    return true;
+                  }
+                }
+              }
             }
           },
           messages: {
-            
           }
         });
-        
+
         return validator.form();
       }
 
       // Inline validation for astro node
-      $("#astro-node-form").on('submit', function(event) {        
+      $("#astro-node-form").on('submit', function (event) {
         var is_valid = validateAstroNodeForm();
 
         if (is_valid == false) {
