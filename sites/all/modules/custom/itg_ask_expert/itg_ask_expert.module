@@ -160,7 +160,7 @@ function itg_ask_expert_views_pre_render(&$view) {
 
 /**
  * Implements hook_node_insert
- * @param type $node
+ * @param Array $node
  */
 function itg_ask_expert_node_insert($node) {
 
@@ -176,8 +176,10 @@ function itg_ask_expert_node_insert($node) {
       'body' => $mail_content,
       'subject' => 'India Today | New Query Received!',
     );
-    $to = "itoday135@gmail.com"; // SEO team mail id
-    $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', 'haripalrao@gmail.com,ankushgautam76@gmail.com', language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    
+    $to = array('haripalrao@gmail.com', 'ankushgautam76@gmail.com');
+    
+    $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
     }
@@ -191,10 +193,10 @@ function itg_ask_expert_node_insert($node) {
 
 /**
  * Send mail to expert, when query is received
- * @global type $base_url
- * @param type $key
- * @param type $message
- * @param type $entity
+ * @global String $base_url
+ * @param String $key
+ * @param String $message
+ * @param Array $entity
  */
 function itg_ask_expert_mail($key, &$message, $params) {
   switch ($key) {
@@ -216,8 +218,8 @@ function itg_ask_expert_mail($key, &$message, $params) {
 
 /**
  * Get Mail content
- * @global type $base_url
- * @param type $entity
+ * @global String $base_url
+ * @param Array $entity
  * @return string
  */
 function itg_ask_expert_get_mail_content($entity) {
