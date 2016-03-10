@@ -11,43 +11,6 @@ function feature_for_poll_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'field_collection_item-field_poll_answer-field_poll_answe_default_value'.
-  $field_instances['field_collection_item-field_poll_answer-field_poll_answe_default_value'] = array(
-    'bundle' => 'field_poll_answer',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_poll_answe_default_value',
-    'label' => 'Poll Answer default value',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_poll_answer-field_poll_answer_image'.
   $field_instances['field_collection_item-field_poll_answer-field_poll_answer_image'] = array(
     'bundle' => 'field_poll_answer',
@@ -88,8 +51,32 @@ function feature_for_poll_field_default_field_instances() {
       'settings' => array(
         'collapsible' => 2,
         'croparea' => '500x500',
-        'enforce_minimum' => 1,
-        'enforce_ratio' => 1,
+        'enforce_minimum' => TRUE,
+        'enforce_ratio' => TRUE,
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
         'resolution' => '200x150',
@@ -133,50 +120,6 @@ function feature_for_poll_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-poll-body'.
-  $field_instances['node-poll-body'] = array(
-    'bundle' => 'poll',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
-    'settings' => array(
-      'display_summary' => TRUE,
-      'exclude_cv' => FALSE,
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
-      ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => 3,
     ),
   );
 
@@ -305,7 +248,7 @@ function feature_for_poll_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -344,7 +287,7 @@ function feature_for_poll_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -401,7 +344,7 @@ function feature_for_poll_field_default_field_instances() {
         'resolution' => '200x150',
       ),
       'type' => 'imagefield_crop_widget',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -458,7 +401,7 @@ function feature_for_poll_field_default_field_instances() {
         'resolution' => '200x150',
       ),
       'type' => 'imagefield_crop_widget',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -497,7 +440,7 @@ function feature_for_poll_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -554,7 +497,7 @@ function feature_for_poll_field_default_field_instances() {
         'resolution' => '200x150',
       ),
       'type' => 'imagefield_crop_widget',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -596,7 +539,7 @@ function feature_for_poll_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -664,7 +607,7 @@ function feature_for_poll_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -722,7 +665,7 @@ function feature_for_poll_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -803,19 +746,17 @@ function feature_for_poll_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Associate poll');
-  t('Body');
   t('Display Result');
   t('Poll Answer');
   t('Poll Answer Image');
   t('Poll Answer Text');
-  t('Poll Answer default value');
   t('Poll Banner');
   t('Poll Call to Action Image');
   t('Poll Option');

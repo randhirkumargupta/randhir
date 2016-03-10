@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default simple view template to all the fields as a row.
@@ -23,26 +22,17 @@
  *
  * @ingroup views_templates
  */
-
 $this_nid = $view->result[0]->nid;
-
+global $user;
 $isCookies = isCookies($this_nid);
-
-if(empty($isCookies)) {
-?>
-<div class="poll-main">
-<?php 
-	
-	if(is_array($view->result) && count($view->result) > 0) {
-		$itg_poll_form = drupal_get_form('itg_poll_form', $view->result);		
-		print drupal_render($itg_poll_form); 
-	}
-
-} else 
-{ 
-	// unset data
-	unset($view->result[0]->_field_data['nid']['entity']->field_poll_question_text);
-
+if (empty($isCookies)) {
+  ?>
+  <div class="poll-main">
+  <?php
+  if (is_array($view->result) && count($view->result) > 0) {
+    $itg_poll_form = drupal_get_form('itg_poll_form', $view->result);
+    print drupal_render($itg_poll_form);
+  }
 }
 ?>
 
