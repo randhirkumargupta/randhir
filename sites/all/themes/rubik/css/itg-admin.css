@@ -1275,3 +1275,13 @@ div.view table td, div.view table th{max-width: 200px;}
 [id*="edit-field-poll-start-date"] .date-float{padding-left: 300px;}
 [id*="edit-field-poll-start-date"] .end-date-wrapper{padding-top: 20px;}
 .node-poll-form .vertical-tabs{padding: 10px 10px 0;}
+.view-poll-listing .views-field{display: inline-block; width: 100%;}
+.view-poll-listing .views-field .views-label{float: left; width: 30%; font-weight: bold;}
+.view-poll-listing .views-field .field-content{float: left; width: 70%;}
+.poll-text, .poll-image{float: left; width: 60%; padding-right: 20px; box-sizing: border-box;}
+.poll-image img{vertical-align: top;}
+.pole-vote{float: left; width: 40%;}
+.poll-list{padding: 10px 0; border-top: 1px dashed #ddd; display: inline-block; width: 100%;}
+.poll-list:first-child{padding-top: 0; border-top: none;}
+[id*="subsPollForm"] .form-type-radio{display: inline-block; vertical-align: middle; width: auto; padding-right: 20px;}
+[id*="subsPollForm"] .form-type-radio label.option{float: none;}
