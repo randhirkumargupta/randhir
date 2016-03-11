@@ -13,7 +13,11 @@ function feature_tag_management_field_default_field_instances() {
   // Exported field_instance: 'taxonomy_term-tags-field_tags_display'.
   $field_instances['taxonomy_term-tags-field_tags_display'] = array(
     'bundle' => 'tags',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -29,7 +33,7 @@ function feature_tag_management_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_tags_display',
     'label' => 'Tags to be displayed at front end',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
