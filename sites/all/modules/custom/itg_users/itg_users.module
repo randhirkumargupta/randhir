@@ -128,7 +128,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
       // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
       $destination = 'user';
       if (isset($_GET['destination'])) {
-        $destination = $_GET['destination'];
+        $destination = 'manage-users';
       } else {
         $destination = 'user/' . $user->uid;
       }
