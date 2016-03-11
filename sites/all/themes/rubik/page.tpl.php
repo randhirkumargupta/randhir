@@ -3,12 +3,19 @@
  * Rename "Add Term" to "Add Category"
  * Remove primary local task link (Edit and manage fields links from right top side)
  */
-global $base_url;
+global $base_url, $user;
 if(!in_array('administrator', $user->roles)){
   if(arg(3) == 'category_management'){
       //$action_links = '<li><a href="'.$base_url.'/admin/structure/taxonomy/category_management/add">Add Category</a></li>';
       $primary_local_tasks = '';
   }
+  
+  //Tag Management
+  if( arg(3) == 'tags'){
+    $primary_local_tasks = '';
+    $title = 'Create Tag';
+  }
+  
   //Hide primary local task for others user(except )
   if(arg(1) == 'people' && arg(2) == 'create'){
      $primary_local_tasks = '';
