@@ -85,7 +85,7 @@ function itg_category_manager_menu() {
  * Implements hook_menu_alter
  * @param type $menu
  */
-function itg_category_manager_menu_alter(&$menu) {  
+function itg_category_manager_menu_alter(&$menu) {
   if (isset($menu['taxonomy/term/%taxonomy_term'])) {
     $menu['taxonomy/term/%taxonomy_term']['page callback'] = 'itg_category_manager_taxonomy_view_page';
     $menu['taxonomy/term/%taxonomy_term']['access callback'] = TRUE;
@@ -204,9 +204,11 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     }
   }
   else {
-
-
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
+      // Add js file
+      $form['#attached']['js'] = array(
+        drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
+      );
       $form['#action'] = '?destination=category-manager'; //Redirect to term listing page, after term has been added successfully.
       $form['name']['#title'] = t('Category Title');
       $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
@@ -239,12 +241,13 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       }
       // Taxonomy active deactive logic
       $form['term_state'] = array(
-        '#prefix' => '<label>Term State</label>',
+        '#prefix' => '<div class="itg-term-state"><label>Term State</label>',
         '#type' => 'checkbox',
         '#title' => t('Active'),
         '#weight' => 20,
         '#default_value' => true,
         '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
+        '#suffix' => '</div>',
       );
       if ($form['tid']['#value'] !== NULL) {
         $form['state-mode'] = array(
@@ -266,24 +269,10 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#attributes' => array('class' => array('tid')),
       );
 
-
-
       //Call valiadte and after build
       $form['#validate'][] = 'itg_category_manager_term_validate';
       $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
     }
-    // If vocabulary is tgs then add some fields
-    if ($form['#term']['vocabulary_machine_name'] == 'tags') {
-      // Taxonomy active deactive logic
-      $form['term_state'] = array(
-        '#prefix' => '<label>Term State</label>',
-        '#type' => 'checkbox',
-        '#title' => t('Active'),
-        '#weight' => 20,
-        '#default_value' => true,
-        '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
-      );
-    }    
   }
 }
 
@@ -626,7 +615,7 @@ function itg_category_manager_taxonomy_term_presave($term) {
     drupal_write_record('itg_sef_url', $data);
 
     // Update modified date on itg_category_manager table
-     $status = isset($term->term_state) ? $term->term_state : 1;
+    $status = isset($term->term_state) ? $term->term_state : 1;
     db_update('itg_category_manager')
         ->fields(array('changed' => time(), 'status' => $status))
         ->condition('tid', $term->tid)
@@ -743,8 +732,9 @@ function itg_category_manager_views_data() {
  * @param array $form_state array contains submitted form values
  * @param string $form_id name of the form id
  */
-function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {  
+function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
+    drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js', 'file');
     $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
     $form['status']['#options'][1] = t('Active');
     $form['status']['#options'][0] = t('Inactive');
@@ -773,7 +763,7 @@ function itg_category_manager_block_view($delta = '') {
 
   //$data = itg_category_manager_sefurl_log($tid);
   switch ($delta) {
-    case 'sef_url_log':
+    case 'sef_url_log':      
       $arg = arg();
       $ass_node = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
       if (count($ass_node)) {
