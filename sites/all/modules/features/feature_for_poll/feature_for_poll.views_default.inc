@@ -220,8 +220,10 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: Poll */
+  $handler = $view->new_display('page', 'Poll', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Poll';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
