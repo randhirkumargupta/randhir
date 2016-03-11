@@ -138,8 +138,15 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     var offSet = 80;
     var dti = $(this).attr('data-target-id');
     var targetOffset = $('#' + dti).offset().top - offSet;
-    $(this).addClass('active').siblings('.target-link').removeClass('active');
-    $("body,html").animate({ scrollTop: targetOffset }, 1000);
+    if(dti == "BasicDetails"){
+      $(this).addClass('active').siblings('.target-link').removeClass('active');
+      $("body,html").animate({ scrollTop: 0 }, 1000);
+    }
+    else{
+      $(this).addClass('active').siblings('.target-link').removeClass('active');
+      $("body,html").animate({ scrollTop: targetOffset }, 1000);
+    }
+    
     });
     
   // Jquery code to close preview popup
