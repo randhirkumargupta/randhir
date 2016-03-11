@@ -19,10 +19,8 @@
             $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay);
             $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(startDay);
             $("#edit-title").val(startDay);
-            var is_valid = validateAstroNodeForm('title');
-            if (is_valid == false) {
-              return false;
-            }
+            check_duplicate();
+            
             break;
           case 'weekly':
             var startDay = moment().day(0); // Sun
@@ -31,10 +29,8 @@
             $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay.format('MMM Do YYYY'));
             var titleText = startDay.format('MMM Do YYYY') + " - " + endDay.format('MMM Do YYYY');
             $("#edit-title").val(titleText);
-            var is_valid = validateAstroNodeForm('title');
-            if (is_valid == false) {
-              return false;
-            }
+            check_duplicate();
+            
             break;
           case 'monthly':
             var firstDay = moment().date(1);
@@ -43,10 +39,8 @@
             $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(lastDay.format('MMM Do YYYY'));
             var titleText = firstDay.format('MMM Do YYYY') + " - " + lastDay.format('MMM Do YYYY');
             $("#edit-title").val(titleText);
-            var is_valid = validateAstroNodeForm('title');
-            if (is_valid == false) {
-              return false;
-            }
+            check_duplicate();
+            
             break;
           case 'yearly':
             var firstDay = moment().dayOfYear(1).format('MMM Do YYYY');
@@ -55,10 +49,7 @@
             var startYear = moment().dayOfYear(1).format('MMM Do YYYY');
             var endyear = "Dec 31st " + moment().year();
             $("#edit-title").val(startYear + " - " + endyear);
-            var is_valid = validateAstroNodeForm('title');
-            if (is_valid == false) {
-              return false;
-            }
+            check_duplicate();            
         }
       });
 
@@ -89,9 +80,32 @@
         $('.vertical-tabs-list').hide();
         $('#edit-metatags-und-advanced').hide();
       }
+      
+      //Check duplicacy on title for magazine
+      function check_duplicate() {
+        $(".form-item-title .error").html('');
+        var title = $('#edit-title').val();
+        var trimmed_title = $.trim(title);
+        
+        //Call Ajax
+        $.ajax({
+          url: Drupal.settings.uid.base_url + "/check-duplicate-title/" + Drupal.settings.uid.type + '/' + Drupal.settings.uid.nid,
+          type: 'post',
+          data: {'title': trimmed_title},
+          dataType: "JSON",
+          success: function(data) {            
+            if (data == false) {
+              $(".form-item-title").append($('<span class="error">'+Drupal.settings.uid.type+' title '+trimmed_title+' already exist.</span>'));                                          
+            }
+            else {
+              $(".form-item-title .error").html('');              
+            }
+          }
+        });
+      }
 
       // validateJobSearch validation function            
-      $("#astro-node-form").validate({
+      $("#astro-node-form, #edit-title").validate({
         submitHandler: function (form) {
           $('input:submit').attr('disabled', 'disabled');
           form.submit();
