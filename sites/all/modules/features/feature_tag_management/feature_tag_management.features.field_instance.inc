@@ -32,7 +32,7 @@ function feature_tag_management_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'exclude_cv' => 0,
     'field_name' => 'field_tags_display',
-    'label' => 'Tags to be displayed at front end',
+    'label' => 'Feature Tags',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -49,7 +49,7 @@ function feature_tag_management_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Tags to be displayed at front end');
+  t('Feature Tags');
 
   return $field_instances;
 }

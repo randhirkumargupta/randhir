@@ -29,8 +29,8 @@ function feature_tag_management_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        1 => 'Published',
-        0 => 'Unpublished',
+        1 => 'Yes',
+        0 => 'No',
       ),
       'allowed_values_function' => '',
     ),
