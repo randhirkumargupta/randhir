@@ -223,7 +223,79 @@ function feature_for_poll_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['access'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    6 => '6',
+    10 => '10',
+  );
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'counter' => 'counter',
+    'title' => 'title',
+    'name' => 'name',
+    'changed' => 'changed',
+    'view_node' => 'nothing',
+    'edit_node' => 'nothing',
+    'delete_node' => 'nothing',
+    'nothing' => 'nothing',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'view_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'delete_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing' => array(
+      'align' => '',
+      'separator' => ' |',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
@@ -305,6 +377,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -315,18 +388,19 @@ function feature_for_poll_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
-    18 => 0,
+    20 => 0,
     6 => 0,
+    22 => 0,
     19 => 0,
-    12 => 0,
     10 => 0,
-    15 => 0,
-    16 => 0,
     13 => 0,
     11 => 0,
-    14 => 0,
+    16 => 0,
     17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
   );
   /* Filter criterion: Content: Poll Question (field_poll_question) */
   $handler->display->display_options['filters']['field_poll_question_value']['id'] = 'field_poll_question_value';
@@ -334,6 +408,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['filters']['field_poll_question_value']['field'] = 'field_poll_question_value';
   $handler->display->display_options['filters']['field_poll_question_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_poll_question_value']['expose']['operator_id'] = 'field_poll_question_value_op';
+  $handler->display->display_options['filters']['field_poll_question_value']['expose']['label'] = 'Poll Question';
   $handler->display->display_options['filters']['field_poll_question_value']['expose']['operator'] = 'field_poll_question_value_op';
   $handler->display->display_options['filters']['field_poll_question_value']['expose']['identifier'] = 'field_poll_question_value';
   $handler->display->display_options['filters']['field_poll_question_value']['expose']['remember_roles'] = array(
@@ -344,18 +419,19 @@ function feature_for_poll_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
-    18 => 0,
+    20 => 0,
     6 => 0,
+    22 => 0,
     19 => 0,
-    12 => 0,
     10 => 0,
-    15 => 0,
-    16 => 0,
     13 => 0,
     11 => 0,
-    14 => 0,
+    16 => 0,
     17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
   );
   $handler->display->display_options['path'] = 'manage-poll';
 
