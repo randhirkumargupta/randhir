@@ -240,7 +240,7 @@ function feature_category_management_views_default_views() {
 <span>[created]</span>
 <span>[changed]</span>
 <span>[status]</span>
-[edit_term]
+<div class="edit-cm">[edit_term]</div>
 </div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_type'] = '0';
