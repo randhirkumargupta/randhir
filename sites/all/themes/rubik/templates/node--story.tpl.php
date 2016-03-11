@@ -55,11 +55,11 @@
               <?php print render($content['field_story_magazine_story_issue']); ?>
               <?php print render($content['field_story_select_magazine']); ?>
               <?php print render($content['field_story_select_supplement']); ?>
-              <?php print render($content['field_story_long_head_line']); ?>
               <div class="field">
-                <div class="field-label">Story Title:</div>
+                <div class="field-label">Long headline:</div>
                 <div class="field-items"><?php print $title; ?></div>
               </div>
+              <?php print render($content['field_story_long_head_line']); ?>
               <?php print render($content['field_story_short_headline']); ?>
               <?php print render($content['field_story_redirection_url']); ?>
               <?php print render($content['field_story_new_title']); ?>
@@ -199,7 +199,8 @@
             <div class="Story-details">
             <h2>Story Details</h2>
             <div class="content-details">
-            <?php print render($content['field_story_expiry_date']); ?>
+            <?php $story_exp_chk=$content['field_story_expires']['#items']['0']['value'];  ?>
+            <?php if(!empty($story_exp_chk)): print render($content['field_story_expiry_date']); endif;?>
             <?php print render($content['field_story_kicker_text']); ?>
             <?php print render($content['field_story_category']); ?>
             </div>
