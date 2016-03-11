@@ -49,9 +49,8 @@
           ?>
 
           <?php if ($view_mode == 'full'): ?>
-
+          <div class="content-node-view">
             <div class="basic-details content-box">
-              <h2><?php echo t('Poll Title'); ?></h2>
               <div class="content-details">
                 <div class="field">
                   <div class="field-label"><?php echo t('Poll Title'); ?>:</div>
@@ -74,6 +73,7 @@
                 ?>
               </div>
             </div>
+          </div>
             
               <?php
               $output = '';
@@ -101,16 +101,18 @@
               }
               if (isset($output) && !empty($output)):
                 ?>
+          <div class="content-node-view">
                 <div class="expert-details content-box">
                   <h2><?php echo t('Poll Answer'); ?></h2>
                   <div class="content-details">     
       <?php echo '<ul>' . $output . '</ul>'; ?>     
                   </div>
                 </div>
+        </div>
               <?php endif; ?> 
             <?php endif; ?>
           
-          
+          <div class="content-node-view">
             <div class="poll-details">
               <h2><?php echo t('Poll Details'); ?></h2>
               <div class="content-details">
@@ -157,7 +159,7 @@
                 ?>
               </div>
             </div>
-
+        </div>
 
           
           
