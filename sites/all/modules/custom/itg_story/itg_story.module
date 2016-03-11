@@ -326,7 +326,7 @@ function itg_story_create_breaking_news($story_node) {
   $node->language = LANGUAGE_NONE;
   $node->field_content_type[LANGUAGE_NONE][0]['value']  = 'Story';
   $node->field_type[LANGUAGE_NONE][0]['value']  = 'Breaking News';
-  $node->field_source[LANGUAGE_NONE][0]['value']  = 'Story';
+  $node->field_source[LANGUAGE_NONE][0]['value']  = $story_node->nid;
   $node->field_stroy_city[LANGUAGE_NONE][0]['tid']= $story_node->field_stroy_city[LANGUAGE_NONE][0]['tid'];
   $node->field_display_on[LANGUAGE_NONE][0]['value']  = 'Section';
   

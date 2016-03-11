@@ -18,7 +18,7 @@
             var startDay = moment().format('MMM Do YYYY');
             $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay);
             $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(startDay);
-            $("#edit-title").val(startDay);            
+            $("#edit-title").val(startDay);
             var is_valid = validateAstroNodeForm('title');
             if (is_valid == false) {
               return false;
@@ -30,7 +30,7 @@
             $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay.format('MMM Do YYYY'));
             $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay.format('MMM Do YYYY'));
             var titleText = startDay.format('MMM Do YYYY') + " - " + endDay.format('MMM Do YYYY');
-            $("#edit-title").val(titleText);            
+            $("#edit-title").val(titleText);
             var is_valid = validateAstroNodeForm('title');
             if (is_valid == false) {
               return false;
@@ -42,7 +42,7 @@
             $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay.format('MMM Do YYYY'));
             $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(lastDay.format('MMM Do YYYY'));
             var titleText = firstDay.format('MMM Do YYYY') + " - " + lastDay.format('MMM Do YYYY');
-            $("#edit-title").val(titleText);            
+            $("#edit-title").val(titleText);
             var is_valid = validateAstroNodeForm('title');
             if (is_valid == false) {
               return false;
@@ -53,7 +53,7 @@
             $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay);
             $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val('Dec 31st ' + moment().year());
             var startYear = moment().dayOfYear(1).format('MMM Do YYYY');
-            var endyear = "Dec 31st " + moment().year();            
+            var endyear = "Dec 31st " + moment().year();
             $("#edit-title").val(startYear + " - " + endyear);
             var is_valid = validateAstroNodeForm('title');
             if (is_valid == false) {
@@ -88,236 +88,227 @@
         $('#edit-metatags').show();
         $('.vertical-tabs-list').hide();
         $('#edit-metatags-und-advanced').hide();
-      }     
-
-      // validateJobSearch validation function            
-      function validateAstroNodeForm() {
-        var validator = jQuery("#astro-node-form").validate({
-          ignore: '',
-          errorElement: 'span',
-          errorPlacement: function (error, element) {
-            var elementName = element.attr('name');
-            var errorPlaceHolder = '';
-            switch (elementName) {
-              case 'field_astro_zodiac[und][0][field_astro_thumb_icon][und][0][fid]':
-                errorPlaceHolder = element.parent().parent().parent();
-              default:
-                errorPlaceHolder = element.parent();
-            }
-            error.appendTo(errorPlaceHolder);
-          },
-          rules: {
-            'title': {
-              remote: {
-                url: Drupal.settings.uid.base_url + "/check-duplicate-title/" + Drupal.settings.uid.type + '/' + Drupal.settings.uid.nid,
-                type: "post",
-                data: {
-                  title: function () {
-                    return jQuery("input[name='title']").val();
-                  }
-                }
-              }
-            },
-            'field_astro_zodiac[und][0][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][1][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][2][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][3][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][4][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][5][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][6][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][7][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][8][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][9][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][10][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_astro_zodiac[und][11][field_buzz_description][und][0][value]': {
-              required: true
-            },
-            'field_story_category[und][]': {
-              required: true
-            },
-            'field_astro_zodiac[und][0][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][1][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][2][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][3][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][4][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][5][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][6][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][7][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][8][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][9][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][10][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_zodiac[und][11][field_astro_thumb_icon][und][0][fid]': {
-              required: {
-                depends: function () {
-                  if ($(this).val() == 0) {
-                    $(this).removeAttr('value');
-                  }
-                  return true;
-                }
-              }
-            },
-            'field_astro_numerology_values[und][0][field_story_source_id][und][0][value]': {
-              required: {
-                depends: function () {
-                  var numerology = $('input[name="field_numerology[und]"]:checked').val();
-                  if (numerology == 1) {
-                    return true;
-                  }
-                }
-              },
-              number: true
-            },
-            'field_astro_numerology_values[und][0][field_buzz_description][und][0][value]': {
-              required: {
-                depends: function () {
-                  var numerology = $('input[name="field_numerology[und]"]:checked').val();
-                  if (numerology == 1) {
-                    return true;
-                  }
-                }
-              }
-            }
-          },
-          messages: {
-            'title': {
-              remote: 'Astro for selected frequency is already filled.'
-            }
-          }
-        });
-
-        return validator.form();
       }
 
-      // Inline validation for astro node
-      $("#astro-node-form").on('submit', function (event) {
-        var is_valid = validateAstroNodeForm();
-
-        if (is_valid == false) {
-          return false;
-        }
-        else {
-          return true
+      // validateJobSearch validation function            
+      $("#astro-node-form").validate({
+        submitHandler: function (form) {
+          $('input:submit').attr('disabled', 'disabled');
+          form.submit();
+        },
+        onfocusout: function (element) {
+          $(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          var elementName = element.attr('name');
+          var errorPlaceHolder = '';
+          switch (elementName) {
+            case 'field_astro_zodiac[und][0][field_astro_thumb_icon][und][0][fid]':
+              errorPlaceHolder = element.parent().parent().parent();
+            default:
+              errorPlaceHolder = element.parent();
+          }
+          error.appendTo(errorPlaceHolder);
+        },
+        rules: {
+          'title': {
+            remote: {
+              url: Drupal.settings.uid.base_url + "/check-duplicate-title/" + Drupal.settings.uid.type + '/' + Drupal.settings.uid.nid,
+              type: "post",
+              data: {
+                title: function () {
+                  return jQuery("input[name='title']").val();
+                }
+              }
+            }
+          },
+          'field_astro_zodiac[und][0][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][1][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][2][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][3][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][4][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][5][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][6][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][7][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][8][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][9][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][10][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_astro_zodiac[und][11][field_buzz_description][und][0][value]': {
+            required: true
+          },
+          'field_story_category[und][]': {
+            required: true
+          },
+          'field_astro_zodiac[und][0][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][1][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][2][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][3][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][4][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][5][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][6][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][7][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][8][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][9][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][10][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_zodiac[und][11][field_astro_thumb_icon][und][0][fid]': {
+            required: {
+              depends: function () {
+                if ($(this).val() == 0) {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
+          'field_astro_numerology_values[und][0][field_story_source_id][und][0][value]': {
+            required: {
+              depends: function () {
+                var numerology = $('input[name="field_numerology[und]"]:checked').val();
+                if (numerology == 1) {
+                  return true;
+                }
+              }
+            },
+            number: true
+          },
+          'field_astro_numerology_values[und][0][field_buzz_description][und][0][value]': {
+            required: {
+              depends: function () {
+                var numerology = $('input[name="field_numerology[und]"]:checked').val();
+                if (numerology == 1) {
+                  return true;
+                }
+              }
+            }
+          }
+        },
+        messages: {
+          'title': {
+            remote: 'Astro for selected frequency is already filled.'
+          }
         }
       });
 

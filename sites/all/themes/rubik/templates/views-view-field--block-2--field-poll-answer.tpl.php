@@ -46,38 +46,28 @@ if (isset($isCookies) && $isCookies == 'yes') {
       if ($result_format == 1) { // Percent
         if (isset($finaltotal)) {
 
-          $outputnew = number_format(($optionCnt / $finaltotal) * 100, 2);
+          $outputnew = '<strong>Percent: </strong> '.number_format(($optionCnt / $finaltotal) * 100, 2).'%';
         }
       }
       elseif ($result_format == 2) { // Number of votes
-        $outputnew = $optionCnt;
+        $outputnew = '<strong>Number of vote: </strong> '.$optionCnt;
       }
       ?>
 
-      <div class="poll-main-wrap">
-        <div class="poll-list row">
-          <div class="pull-left">
-              <?php if ($polls_answer_text) { ?>
-              <div class="poll-text-container">
+    
+        <div class="poll-list">
+          <?php if ($polls_answer_text) { ?>
+            <div class="poll-text">
               <?php print $polls_answer_text; ?>
-              </div>
+            </div>
             <?php } ?>
-              <?php if (isset($poll_image)) { ?>
-              <div class="poll-image-container">
-              <?php print $poll_image; ?>
+            <?php if (isset($poll_image)) { ?>
+              <div class="poll-image">
+                <?php print $poll_image; ?>
               </div>
-            <?php } ?> 
-          </div>		
-
-          <div class="pull-right">
-
-      <?php print $outputnew; ?>			
-          </div>
-        </div>
-
-      </div>
-
-
+          <?php } ?>
+          <div class="pole-vote"> <?php print $outputnew; ?></div>
+        </div>  
       <?php
     }
     
