@@ -54,28 +54,21 @@ if (isset($isCookies) && $isCookies == 'yes') {
       }
       ?>
 
-      <div class="poll-main-wrap">
-        <div class="poll-list row">
-          <div class="pull-left">
+   
+        <div class="poll-list">
               <?php if ($polls_answer_text) { ?>
-              <div class="poll-text-container">
+              <div class="poll-text">
               <?php print $polls_answer_text; ?>
               </div>
             <?php } ?>
               <?php if (isset($poll_image)) { ?>
-              <div class="poll-image-container">
+              <div class="poll-image">
               <?php print $poll_image; ?>
               </div>
             <?php } ?> 
-          </div>		
 
-          <div class="pull-right">
-
-      <?php print $outputnew; ?>			
-          </div>
+          <div class="pole-vote"><strong>Number of vote: </strong> <?php print $outputnew; ?></div>
         </div>
-
-      </div>
 
 
       <?php
