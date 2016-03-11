@@ -623,9 +623,15 @@ function astro_feature_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
+      'module' => 'field_collection_fieldset',
+      'settings' => array(
+        'collapsed' => FALSE,
+        'field_as_label' => array(),
+        'last_item_collapsed' => FALSE,
+        'new_item_open' => FALSE,
+        'replace_label' => FALSE,
+      ),
+      'type' => 'field_collection_fieldset',
       'weight' => 14,
     ),
   );

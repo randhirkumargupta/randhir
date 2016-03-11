@@ -123,12 +123,11 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'tid';
-  /* Field: Taxonomy term: Tags to be displayed at front end */
+  /* Field: Taxonomy term: Feature Tags */
   $handler->display->display_options['fields']['field_tags_display']['id'] = 'field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['table'] = 'field_data_field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['field'] = 'field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['relationship'] = 'tid';
-  $handler->display->display_options['fields']['field_tags_display']['label'] = 'Status';
   /* Field: Taxonomy term: Term edit link */
   $handler->display->display_options['fields']['edit_term']['id'] = 'edit_term';
   $handler->display->display_options['fields']['edit_term']['table'] = 'taxonomy_term_data';
@@ -206,7 +205,7 @@ function feature_tag_management_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Taxonomy term: Tags to be displayed at front end (field_tags_display) */
+  /* Filter criterion: Taxonomy term: Feature Tags (field_tags_display) */
   $handler->display->display_options['filters']['field_tags_display_value']['id'] = 'field_tags_display_value';
   $handler->display->display_options['filters']['field_tags_display_value']['table'] = 'field_data_field_tags_display';
   $handler->display->display_options['filters']['field_tags_display_value']['field'] = 'field_tags_display_value';
@@ -214,7 +213,7 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['filters']['field_tags_display_value']['group'] = 1;
   $handler->display->display_options['filters']['field_tags_display_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_tags_display_value']['expose']['operator_id'] = 'field_tags_display_value_op';
-  $handler->display->display_options['filters']['field_tags_display_value']['expose']['label'] = 'Status';
+  $handler->display->display_options['filters']['field_tags_display_value']['expose']['label'] = 'Feature Tags';
   $handler->display->display_options['filters']['field_tags_display_value']['expose']['operator'] = 'field_tags_display_value_op';
   $handler->display->display_options['filters']['field_tags_display_value']['expose']['identifier'] = 'field_tags_display_value';
   $handler->display->display_options['filters']['field_tags_display_value']['expose']['remember_roles'] = array(
