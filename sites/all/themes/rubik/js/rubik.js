@@ -129,17 +129,24 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-astro, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').addClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-astro, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').removeClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
     var offSet = 80;
     var dti = $(this).attr('data-target-id');
     var targetOffset = $('#' + dti).offset().top - offSet;
-    $(this).addClass('active').siblings('.target-link').removeClass('active');
-    $("body,html").animate({ scrollTop: targetOffset }, 1000);
+    if(dti == "BasicDetails"){
+      $(this).addClass('active').siblings('.target-link').removeClass('active');
+      $("body,html").animate({ scrollTop: 0 }, 1000);
+    }
+    else{
+      $(this).addClass('active').siblings('.target-link').removeClass('active');
+      $("body,html").animate({ scrollTop: targetOffset }, 1000);
+    }
+    
     });
     
   // Jquery code to close preview popup
