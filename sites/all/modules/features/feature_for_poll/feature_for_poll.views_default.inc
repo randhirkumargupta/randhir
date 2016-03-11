@@ -319,6 +319,11 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Poll Title';
+  /* Field: Content: Poll Question */
+  $handler->display->display_options['fields']['field_poll_question']['id'] = 'field_poll_question';
+  $handler->display->display_options['fields']['field_poll_question']['table'] = 'field_data_field_poll_question';
+  $handler->display->display_options['fields']['field_poll_question']['field'] = 'field_poll_question';
+  $handler->display->display_options['fields']['field_poll_question']['label'] = 'Question Type';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -414,7 +419,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['filters']['field_poll_question_value']['field'] = 'field_poll_question_value';
   $handler->display->display_options['filters']['field_poll_question_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_poll_question_value']['expose']['operator_id'] = 'field_poll_question_value_op';
-  $handler->display->display_options['filters']['field_poll_question_value']['expose']['label'] = 'Poll Question';
+  $handler->display->display_options['filters']['field_poll_question_value']['expose']['label'] = 'Question Type';
   $handler->display->display_options['filters']['field_poll_question_value']['expose']['operator'] = 'field_poll_question_value_op';
   $handler->display->display_options['filters']['field_poll_question_value']['expose']['identifier'] = 'field_poll_question_value';
   $handler->display->display_options['filters']['field_poll_question_value']['expose']['remember_roles'] = array(
