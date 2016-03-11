@@ -274,7 +274,7 @@ function itg_term_validate($form, &$form_state) {
  * Hiding taxonomy term description field
  */
 function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
-    if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
+    if (isset($form['#term']['vocabulary_machine_name']) && $form['actions']['submit']['#value'] != 'Delete' && $form['#term']['vocabulary_machine_name'] == 'tags') {
         $destination         = 'tags-management';
         //Call valiadte and after build
         $form['#validate'][] = 'itg_term_validate';
@@ -293,6 +293,7 @@ function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
 
         unset($form['tags']);
         unset($form['#metatags']);
+        unset($form['actions']['delete']);
         $form['description']['#access']              = FALSE;
         $form['relations']['#access']                = FALSE;
         $form['tags']['und']['#metatags']['#access'] = FALSE;

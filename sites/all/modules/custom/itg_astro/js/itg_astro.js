@@ -95,7 +95,7 @@
           dataType: "JSON",
           success: function(data) {            
             if (data == false) {
-              $(".form-item-title").append($('<span class="error">'+Drupal.settings.uid.type+' title '+trimmed_title+' already exist.</span>'));                                          
+              $(".form-item-title").append($('<span class="error">Astro for selected frequency is already filled.</span>'));                                          
             }
             else {
               $(".form-item-title .error").html('');              
