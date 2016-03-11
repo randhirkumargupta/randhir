@@ -45,7 +45,7 @@
     </div>
   <?php endif; ?>
     <div class="attachment attachment-before">
-      <?php print l('Add Category', 'admin/structure/taxonomy/category_management/add'); ?>
+      <?php print l('Create Category', 'admin/structure/taxonomy/category_management/add'); ?>
     </div>
   
   <div class="category-manager-thead">

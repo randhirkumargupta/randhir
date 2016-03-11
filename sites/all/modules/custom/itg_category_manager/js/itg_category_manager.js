@@ -52,14 +52,12 @@
       
       // Pager settings
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      var d = new Date();
-      //console.log(monthNames[d.getMonth()]);
-      //console.log(d.getFullYear());
+      var d = new Date();      
       var currentMonth = monthNames[d.getMonth()]+' '+d.getFullYear();
       var currentMonthPager = $(".date-heading h3").text();
       if (currentMonth === currentMonthPager) {        
         $(".date-next").css("display", "none");
-      }      
+      }     
     }
   };
 })(jQuery, Drupal, this, this.document);

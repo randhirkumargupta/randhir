@@ -33,7 +33,7 @@ if (array_key_exists(EDITOR, $user->roles)) {
   }else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
     $user_array = array(AUTHOR_GUEST=>'Author/Guest',INTERN=>'Intern' );
   }else if(array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(ADMINISTRATOR, $user->roles)) {
-    $user_array = array(AUTHOR_GUEST=>'Author/Guest', COPY_EDITOR=>'Copy Editor', EDITOR=>'Editor', INTERN=>'Intern', SECTION_EDITOR_ANCHOR=>'Section Editor/Anchor',  SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub' );
+    $user_array = array(AUTHOR_GUEST=>'Author/Guest', COPY_EDITOR=>'Copy Editor', EDITOR=>'Editor', EXPERT=>'Expert', INTERN=>'Intern', SECTION_EDITOR_ANCHOR=>'Section Editor/Anchor',  SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub' );
   }
 
 

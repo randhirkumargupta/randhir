@@ -17,6 +17,7 @@ function feature_category_management_user_default_permissions() {
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'taxonomy',
   );
@@ -28,6 +29,7 @@ function feature_category_management_user_default_permissions() {
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'taxonomy',
   );

@@ -768,7 +768,7 @@ function features_supplement_magazine_field_default_field_instances() {
   $field_instances['node-supplement-field_supp_import_xml'] = array(
     'bundle' => 'supplement',
     'deleted' => 0,
-    'description' => 'Please import XML.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -980,7 +980,6 @@ function features_supplement_magazine_field_default_field_instances() {
   t('Magazine');
   t('Please check to publish this content.');
   t('Please enter issue title.');
-  t('Please import XML.');
   t('Please select magazine to map with supplement.');
   t('Please select magazine.');
   t('Please select the date using date picker.

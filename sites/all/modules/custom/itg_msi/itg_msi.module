@@ -126,8 +126,8 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
  * Custom submit callback for redirecting breaking news form.
  */
 function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
-  if (isset($_SESSION['messages'])) {
-    unset($_SESSION['messages']);
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
   }
   
   if(arg(2) == 'edit'){
@@ -137,8 +137,6 @@ function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
   }
   $issue_title = date('m/d/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
   drupal_set_message(t('Issue '.$issue_title.' has been '.$op.' successfully.'));
-  $_GET['destination'] = 'breaking-news'; 
-   
 }
 
 /**
@@ -184,6 +182,48 @@ function itg_msi_form_after_build($form, &$form_state){
   return $form;
 }
 
+/**
+ * Implement hook_form_id_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param Array $form_id
+ */
+function itg_msi_form_issue_node_form_alter(&$form, &$form_state, $form_id) {
+    
+    $magazine_field = 'field_issue_magazine';
+    $supplement_field = 'field_issue_supplement';
+    
+    // Set magazine on edit and trigger action
+    if(isset($form[$magazine_field]['und']['#default_value'][0]) && !isset($form_state['triggering_element'])) {
+      $magazine_id = $form[$magazine_field]['und']['#default_value'][0];
+    } else {
+      $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
+    }
+    
+    // Add ajax on magazine field 
+    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+      'event' => 'change',
+      'callback' => 'itg_msi_magazine_ajax_callback',
+      'wrapper' => $supplement_field . '_replace',
+    );
+
+    // Setup supplement select
+    $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="'.$supplement_field.'_replace">';
+    $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+    if (function_exists('itg_common_dropdown_supplement')) {
+      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+    }
+}
+
+/**
+* Ajax callback for supplement
+* @param Array $form
+* @param Array $form_state
+*/
+function itg_msi_magazine_ajax_callback($form, $form_state) {
+    return $form['field_issue_supplement'];
+}
+
 /*******************************View Related hooks*****************************/
 
 /**
@@ -191,7 +231,6 @@ function itg_msi_form_after_build($form, &$form_state){
  * @param Object $view
  */
 function itg_msi_views_pre_render(&$view) {
-  
   //Add "Create Magazine" button on listing page of magazine
   if ($view->name == "manage_magazines") {
     $header_content_magazine = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
@@ -242,6 +281,17 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
      $form['title']['#autocomplete_path'] = 'content/'.$type.'/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title')); 
    }
+   
+   /*
+   //Add Autocomplete on story title and NID for story listing page
+   if ($form['#id'] == 'views-exposed-form-issue-listing-page-1'){
+     $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+     
+     //Autocomplete on story NID
+     $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
+     $form['nid']['#attributes'] = array('placeholder' => t('Nid'));
+   } */
 }
 
 
@@ -276,18 +326,40 @@ function itg_msi_node_insert($node){
   switch ($node->type) {
     case 'supplement':
       module_load_include('inc', 'itg_msi', 'create_issue_xml');
-      _create_issue_using_xmlfile($node);
+      _create_issue_using_xmlfile($node, 'insert');
       break;
 
     case 'issue':
       module_load_include('inc', 'itg_msi', 'create_issue_xml');
-      _create_issue_using_xmlfile($node);
+      _create_issue_using_xmlfile($node, 'insert');
       break;
 
     default:
       break;
   }
 }
+
+/**
+ * Implement hook_node_update
+ * @param Object $node
+ */
+function itg_msi_node_update($node){
+    switch ($node->type) {
+    case 'supplement':
+      module_load_include('inc', 'itg_msi', 'create_issue_xml');
+      _create_issue_using_xmlfile($node, 'update');
+      break;
+
+    case 'issue':
+      module_load_include('inc', 'itg_msi', 'create_issue_xml');
+      _create_issue_using_xmlfile($node, 'update');
+      break;
+
+    default:
+      break;
+  }
+}
+
 
 /**
  * Implement hook_node_presave
@@ -330,7 +402,7 @@ function itg_msi_node_presave($node){
  */
 function itg_msi_node_validate($node, $form, &$form_state) {
   
-  if ($node->type == 'magazine' || $node->type == 'supplement') { // Validate duplicacy on titles for magazine and supplement
+  if ($node->type == 'magazine' || $node->type == 'supplement' || $node->type == 'astro') { // Validate duplicacy on titles for magazine and supplement
     //if (!isset($node->nid)) {
     $title = $form_state['values']['title'];
     if (isset($node->nid)) {
@@ -423,10 +495,10 @@ function itg_msi_check_duplicate_title() {
 
     $itgResult = $itgQuery->execute()->fetchObject();
     if (isset($itgResult->title) && strcasecmp($title, $itgResult->title) == 0) {
-      echo drupal_json_encode(array('Code' => 1));
+      echo ($type == 'astro') ? 'false' : drupal_json_encode(array('Code' => 1));
     }    
     else {
-      echo drupal_json_encode(array('Code' => 0));
+      echo ($type == 'astro') ? 'true' :  drupal_json_encode(array('Code' => 0));
     }
 }
 
@@ -529,121 +601,29 @@ function itg_msi_show_mapped_stories($row){
         $entity_id[] = $record['entity_id'];
     }
     $count = count($entity_id);
-    
-    //Prepare link for list associated stoies to this node
     $text = 'List Stories('.$count.')';
     $path = 'issue-listing/'.$row->type.'/'.$row->nid;
-    return l($text, $path, array('attributes' => array('target'=>'_blank')));
+    
+    //Prepare link for list associated stoies to this node
+    if($count < 1){
+      return $text;
+    } else {
+      return l($text, $path, array('attributes' => array('target'=>'_blank')));
+    }
 }
 
 /**
- * Run batch process to create issue using XML file
- * @global Array $user
- * @param Int $fid
- * @param Array $node_info
- * @param string $context
+ * Get fids of files associated with a node
+ * @return Array
  */
-function itg_msi_create_issue_batch_process($fid, $node_info) {
-  global $user;
-
-  $xml_file = file_load($fid);
-  $xml_file_path = str_replace('public://', 'sites/default/files/', $xml_file->uri);
-  $xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
-
-  $city = trim($xml->City);
-  $city_tid = itg_msi_get_term_from_name($city, 'city');
-
-  //Parent Category
-  $section = trim($xml->Section);
-  $section_tid = itg_msi_get_term_from_name($section, 'category_management');
+function itg_msi_get_associated_fid_node($node){
   
-  //Collect kicker, headline, byline and body from this array($xml_other)
-  foreach ($xml as $key => $value) {
-    $xml_other[strtolower($key)] = $value;
+  $result = db_select('itg_msi_node_xml', 'fn')
+          ->fields('fn', array('fid'))
+          ->condition('nid', $node->nid, '=')
+          ->execute();
+  while ($record = $result->fetchAssoc()) {
+    $fid[] = $record['fid'];
   }
-  
-  $byline = trim($xml_other['byline']->p);
-  $byline_id = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');
-  $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));
-  $kicker = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['kicker']->p))));
-  
-  //Add check for required fields
-  if (empty($city)) {
-    drupal_set_message(t('No city found in the file' . $xml_file->filename . '. Please insert a city and try again.'), 'error');
-    
-  } else if(empty($city_tid) && !empty($city)) {
-    drupal_set_message(t('City <strong>'.$city.'</strong> in the file '.$xml_file->filename .' doesn\'t exist in our database. Please choose another city and try again.'), 'error');
-    
-  } else if(empty($section)) {
-    drupal_set_message(t('No section found in the file ' . $xml_file->filename . '. Please insert a section and try again.'), 'error');
-    
-  } else if(empty($section_tid) && !empty($section)) {
-    drupal_set_message(t('Section <strong>'.$section.'</strong> in the file '.$xml_file->filename .' doesn\'t exist in our database. Please choose another section and try again.'), 'error');
-
-  } else if(empty($byline)) {
-    drupal_set_message(t('No Author found in the file ' . $xml_file->filename . '. Please insert a Author name and try again.'), 'error');
-    
-  } else if(empty($byline_id) && !empty($byline)) {
-    drupal_set_message(t('Author <strong>'.$byline.'</strong> in the file '.$xml_file->filename.' doesn\'t exist in our database. Please choose another Author and try again.'), 'error');
-    
-  } else if(empty($headline) || $headline == 'NA') {
-    drupal_set_message(t('No story headline found in the file ' . $xml_file->filename . '. Please insert a story headline and try again.'), 'error');
-    
-  } else {
-    //Prepare date
-    $issue_date_xml = str_replace('/', '-', trim($xml->IssueDate));
-    $issue_date = date('Y-m-d h:i:s', strtotime($issue_date_xml));
-
-    //Prepare body
-    foreach ($xml_other['body']->p as $bodyTxt) {
-      $body .= '<p>' . ucfirst(htmlentities($bodyTxt)) . '</p>';
-    }
-
-    //Set values to node
-    $node = new stdClass();
-    $node->title = trim($headline);
-    $node->type = "story";
-    node_object_prepare($node);
-
-    $node->language = LANGUAGE_NONE;
-    $node->uid = $user->uid;
-    $node->status = 1;
-    $node->promote = 0;
-    $node->comment = 0;
-    $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
-    $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
-    $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
-    $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = $city_tid; // 58: New Delhi
-    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $issue_date ? $issue_date : date('Y-m-d h:i:s', time());
-    
-    //Issue, magazine and supplement
-    $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
-    if ($node_info['magazine']) {
-      $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $node_info['magazine'];
-    }
-    if ($node_info['supplement']) {
-      $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $node_info['supplement'];
-    }
-
-    //Insert Kicker
-    $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
-    $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
-    
-    //Insert Author(Byline)
-    $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $byline_id;
-   
-    //Insert Section and sub-section
-    $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $section_tid;
-  
-
-    //Set source variables in to story content type
-    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = $node_info['source_type'];
-    $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = $node_info['source_nid'];
-    $node->revision = 1;
-    $node->log = 'State Changed to published';
-
-    $node = node_submit($node); // Prepare node for saving
-    node_save($node); // Finally save node
-    workbench_moderation_moderate($node, 'published');
-  }
+  return $fid;
 }

@@ -21,40 +21,16 @@ function feature_for_breaking_news_views_api($module = NULL, $api = NULL) {
 }
 
 /**
- * Implements hook_image_default_styles().
- */
-function feature_for_breaking_news_image_default_styles() {
-  $styles = array();
-
-  // Exported image style: photogallery_slider.
-  $styles['photogallery_slider'] = array(
-    'label' => 'photogallery_slider',
-    'effects' => array(
-      2 => array(
-        'name' => 'image_scale_and_crop',
-        'data' => array(
-          'width' => 815,
-          'height' => 300,
-        ),
-        'weight' => 1,
-      ),
-    ),
-  );
-
-  return $styles;
-}
-
-/**
  * Implements hook_node_info().
  */
 function feature_for_breaking_news_node_info() {
   $items = array(
     'breaking_news' => array(
-      'name' => t('Breaking News'),
+      'name' => t('Breaking News Live Blog'),
       'base' => 'node_content',
-      'description' => t('Breaking News'),
+      'description' => t('Breaking News Live Blog'),
       'has_title' => '1',
-      'title_label' => t('News Title 1'),
+      'title_label' => t('Breaking Text'),
       'help' => '',
     ),
   );

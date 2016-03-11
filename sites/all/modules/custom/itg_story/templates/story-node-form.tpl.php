@@ -4,7 +4,7 @@
  * Theme implementation for story form in tab display.
  * 
  */
-//p($page);
+//p($form['menu']['#groups']['additional_settings'][0]['log']['#weight']);
 ?>
 <!--<div class=""><?php //print drupal_render($form['actions']); ?></div>-->
 
@@ -13,6 +13,7 @@
   <?php print drupal_render($form['field_story_magazine_story_issue']); ?>
   <?php print drupal_render($form['field_story_select_magazine']); ?>
   <?php print drupal_render($form['field_story_select_supplement']); ?>
+  <?php print drupal_render($form['field_story_issue_date']); ?>
   <?php print drupal_render($form['title']); ?>
   <?php print drupal_render($form['field_story_long_head_line']); ?>
   
@@ -44,6 +45,7 @@
   <?php print drupal_render($form['field_story_configurations']); ?>
   <?php print drupal_render($form['field_story_comment_question']); ?>
   <?php print drupal_render($form['field_story_client_title']); ?>
+  <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
   <?php print drupal_render($form['field_story_rating']); ?>
 </div>
 <div id="SocialMedia">
@@ -72,8 +74,12 @@
   <?php print drupal_render($form['field_story_template_buzz']); ?>
 </div>
 <div id="category">
-  <h2 class="story-title">Category</h2>
-  <?php print drupal_render($form['field_story_category']); ?>  
+  <h2 class="story-title">Category</h2>  
+  <?php print drupal_render($form['field_story_itg_tags']); ?>  
+  <?php print drupal_render($form['field_story_category']); ?>
+  <?php //print drupal_render($form['edit_workbench_moderation_state_new']); ?>
+  <?php //print drupal_render($form['edit_log']); ?>
+  
 </div>
 <h2 id="title-metatags" class="story-title">Remarks</h2>
  <?php print drupal_render_children($form); ?>

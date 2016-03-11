@@ -1,0 +1,8 @@
+name = ITG Mega Reviews & Critics
+description = "ITG Mega Reviews & Critics Module"
+core = 7.x
+package = ITG
+
+files[] = itg_mega_reviews_critics.module
+
+

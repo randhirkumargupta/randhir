@@ -129,17 +129,24 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').addClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery').removeClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
     var offSet = 80;
     var dti = $(this).attr('data-target-id');
     var targetOffset = $('#' + dti).offset().top - offSet;
-    $(this).addClass('active').siblings('.target-link').removeClass('active');
-    $("body,html").animate({ scrollTop: targetOffset }, 1000);
+    if(dti == "BasicDetails"){
+      $(this).addClass('active').siblings('.target-link').removeClass('active');
+      $("body,html").animate({ scrollTop: 0 }, 1000);
+    }
+    else{
+      $(this).addClass('active').siblings('.target-link').removeClass('active');
+      $("body,html").animate({ scrollTop: targetOffset }, 1000);
+    }
+    
     });
     
   // Jquery code to close preview popup
@@ -181,20 +188,24 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   // jQuery code to filter category manager
   $('.itg-section').click(function(e){
+    $(this).addClass('active').siblings().removeClass('active');
     var el = $('.view-content > .item-list > ul > li > .category-manager-details > .cmd-heading');
     el.not('.active').addClass('active').parent().next().addClass('hide').find('.cmd-heading').addClass('active');
   });
   $('.itg-category').click(function(e){
+    $(this).addClass('active').siblings().removeClass('active');
     var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
     el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
     el.parent().parent().parent().parent().prev().children('.cmd-heading').removeClass('active');
   });
   $('.itg-sub-category').click(function(e){
+    $(this).addClass('active').siblings().removeClass('active');
     var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
     el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
     el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
   });
   $('.itg-sub-sub-category').click(function(e){
+    $(this).addClass('active').siblings().removeClass('active');
     var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li .item-list > ul > li > .category-manager-details > .cmd-heading');
     el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
     el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
@@ -207,7 +218,38 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     controlNav: false
   });
   
+  // jQuery code to hide select option whenever user hover on ITGCMS navbar
+  $('#block-menu-menu-admin-left-menu').mouseover(function(){
+    $('select').blur();
+  });
   
+  $('.node-type-survey div.clearfix .field-add-more-submit, .page-node-add-survey div.clearfix .field-add-more-submit').val('Add another question');
+  $('.node-type-survey .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit, .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit').val('Add another answer');
+  
+  $('.field-name-field-gallery-image').find('.form-text').each(function(){
+    var plaholderText = $(this).prev().text();
+    $(this).attr('placeholder', plaholderText);
+  });
+  $('.field-name-field-gallery-image').find('.form-textarea').each(function(){
+    var plaholderText = $(this).parent().prev().text();
+    $(this).attr('placeholder', plaholderText);
+  });
+  $('#edit-field-gallery-image .field-name-field-images').find('.image-widget-data .file-size').each(function(){
+    var txt = $(this).text();
+    $(this).prev().attr('title', txt);
+  });
+  $('#edit-field-gallery-image .field-name-field-audio').find('.file-widget .file-size').each(function(){
+    var txt = $(this).text();
+    $(this).prev().attr('title', txt);
+  });
+  
+  $('a.filefield-sources-imce-browse').hover(function(e){
+    e.stopPropagation();
+    $(this).parents('.form-type-managed-file').addClass('no-image-selected');
+  }, function(e){
+    e.stopPropagation();
+    $(this).parents('.form-type-managed-file').removeClass('no-image-selected');
+  });
 
 };
 })(jQuery);
