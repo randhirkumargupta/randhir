@@ -60,7 +60,6 @@ function itg_recipe_form_custom_callback($form, &$form_state) {
  * @param Array $form_state
  */
 function itg_recipe_after_build($form, &$form_state) {
-  global $user;
 
   global $user, $base_url;
   unset($form['metatags']['intro_text']['#markup']);
