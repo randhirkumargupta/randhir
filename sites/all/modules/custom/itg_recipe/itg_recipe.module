@@ -106,7 +106,7 @@ function itg_recipe_theme($existing, $type, $theme, $path) {
       'template' => 'recipe-form-tab-template',
       'path' => drupal_get_path('module', 'itg_recipe') . '/templates',
       'variables' => array('data' => NULL),
-    )
+    ),
   );
   return $themes;
 }
