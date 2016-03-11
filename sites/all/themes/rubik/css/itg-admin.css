@@ -959,9 +959,13 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 }
 .page-node-revision .node-story .column-side, 
 .page-node-revisions .node-story .column-side, 
+.page-node-revision .node .column-side, 
+.page-node-revisions .node .column-side, 
 .node-breaking-news .column-side{width: 30%;}
 .page-node-revision .node-story .column-main, 
 .page-node-revisions .node-story .column-main, 
+.page-node-revision .node .column-main, 
+.page-node-revisions .node .column-main, 
 .node-breaking-news .column-main{width: 70%;}
 .page-node-revision .column-side .byline, 
 .page-node-revisions .column-side .byline{font-size: 14px;}
@@ -991,7 +995,6 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 #taxonomy-form-term .path-form .fieldset-content{padding: 0 10px;}
 #taxonomy-form-term .form-item-term-state label.option{float: none;}
 .form-item div.password-confirm span.error{float: right; width: auto; padding: 0;}
-.view-strory-menegment.view-display-id-page_1 .views-table th.views-field-views-bulk-operations{padding-left: 35px;}
 .node-breaking-news.node-preview .column-main{width: 100%;}
 .group-supp-import-xml fieldset legend{display: none !important;}
 .group-supp-import-xml fieldset{border: none; padding: 0;}
@@ -1136,7 +1139,8 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field-collection-view-links,
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .action-links{display: none;} 
 .field-collection-view, 
-.node-type-mega-review-critic .field-collection-view{border-bottom: 1px dashed #d3d7d9;}
+.node-type-mega-review-critic .field-collection-view, 
+.node-type-survey .field-collection-view{border-bottom: 1px dashed #d3d7d9;}
 .node-survey-form .field-multiple-table .field-multiple-table tbody{float: left;}
 [id*="field-survey-add-questions-values"] + div .field-add-more-submit{margin: 0;}
 
@@ -1285,3 +1289,11 @@ div.view table td, div.view table th{max-width: 200px;}
 .poll-list:first-child{padding-top: 0; border-top: none;}
 [id*="subsPollForm"] .form-type-radio{display: inline-block; vertical-align: middle; width: auto; padding-right: 20px;}
 [id*="subsPollForm"] .form-type-radio label.option{float: none;}
+[id*="edit-field-gallery-image-und"] > legend > span.fieldset-legend{background-color: #eee;}
+[id*="edit-field-gallery-image-und"] > legend > span > a{max-width: 200px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.node-survey-form .field-multiple-table tbody div.file-widget .button-remove{margin-left: 5px;}
+.node-type-issue .block-content > .cm-node-view{overflow: visible;}
+.page-content .field-name-field-supp-issue .form-type-date-popup div.description, 
+.page-content .field-name-field-supp-publish .form-item div.description{left: 200px;} 
+[id*="field-astro-numerology-values-values"] .form-item.form-type-textfield span.error{padding-left: 150px;}
+[id*="field-astro-numerology-values-values"] .form-item.form-type-textarea span.error{padding-left: 0;}
