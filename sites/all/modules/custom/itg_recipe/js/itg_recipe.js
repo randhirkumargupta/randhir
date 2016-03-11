@@ -16,5 +16,5 @@
                 $('#edit-metatags-und-advanced').hide();
             }
         }
-    }
+    };
 })(jQuery, Drupal, this, this.document);
