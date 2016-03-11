@@ -246,13 +246,11 @@ function itg_ask_expert_get_mail_content($node) {
   return $content;
 }
 
-
 /**
  * Fetch expert mail based on term id
  */
-function itg_expert_mail($get_term_id)
-{
-  
+function itg_expert_mail($get_term_id) {
+
   $itg_query = db_select('field_data_field_user_section', 's');
   $itg_query->fields('s', array('entity_id', 'field_user_section_tid'));
   $itg_query->fields('u', array('mail', 'name'));
@@ -263,7 +261,5 @@ function itg_expert_mail($get_term_id)
   foreach ($itg_expert_role_arr as $expert_mail_arr) {
     $itg_final_mail[] = $expert_mail_arr->mail;
   }
-  //$itg_expert_role_mail=$itg_expert_role_array->mail;
-
   return $itg_final_mail;
 }
