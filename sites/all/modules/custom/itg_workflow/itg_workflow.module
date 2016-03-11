@@ -197,7 +197,7 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
       
   } else if ($form['#id'] == 'views-exposed-form-blog-management-page') {
       // Code for Bulk opration related work for Blog
-      drupal_add_js('jQuery(document).ready(function() {
+     /* drupal_add_js('jQuery(document).ready(function() {
                jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
                var myInputBoxID = "edit-bundle-blog-appendfield-story-archive";
                jQuery("label[for=" + myInputBoxID + "]").hide();
@@ -206,7 +206,7 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
                jQuery("#edit-actions-submit").val("Archive");
                jQuery("#edit-bundle-blog-field-story-archive-und-yes").attr("checked", true);
                jQuery("#edit-bundle-blog-field-story-archive-und").hide();               
-             });', array('type' => 'inline', 'scope' => 'footer'));
+             });', array('type' => 'inline', 'scope' => 'footer'));*/
       
   }
   
