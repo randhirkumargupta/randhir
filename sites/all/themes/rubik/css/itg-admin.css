@@ -1300,5 +1300,5 @@ div.view table td, div.view table th{max-width: 200px;}
 [id*="views-exposed-form-poll-listing-page"] .views-exposed-form .views-exposed-widget .form-submit{margin-top: 0;}
 .form-item .form-textarea-wrapper span.error{padding-left: 0;}
 .itg-term-state {display: inline-block; width: 100%;}
-.itg-term-state > label {color: #333;float: left;font-size: 12px;font-weight: normal;padding: 5px 0; width: 300px;}
+.itg-term-state > label {color: #666;float: left;font-size: 12px;font-weight: normal;padding: 5px 0; width: 300px;}
 .form-item.form-type-checkbox.form-item-term-state {float: left; width: auto;}
