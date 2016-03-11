@@ -111,13 +111,16 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
  */
 function itg_meta_tags_extra_element_hide($form, &$form_state) {
   global $user, $base_url;
-
+  
   if (!isset($_REQUEST['destination'])) {
-    $_REQUEST['destination'] = '';
+    $destination = '';
+  } else {
+      $destination_array = explode('?', $_REQUEST['destination']);
+      $destination = $destination_array[0];
   }
 
   $form['actions']['cancel'] = array(
-    '#markup' => l(t('Cancel'), $_REQUEST['destination'], array('attributes' => array('class' => 'button'))),
+    '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
   );
 

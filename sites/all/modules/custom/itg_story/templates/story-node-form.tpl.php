@@ -74,7 +74,8 @@
   <?php print drupal_render($form['field_story_template_buzz']); ?>
 </div>
 <div id="category">
-  <h2 class="story-title">Category</h2>
+  <h2 class="story-title">Category</h2>  
+  <?php print drupal_render($form['field_story_itg_tags']); ?>  
   <?php print drupal_render($form['field_story_category']); ?>  
 </div>
 <h2 id="title-metatags" class="story-title">Remarks</h2>
