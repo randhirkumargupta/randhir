@@ -155,13 +155,12 @@ function feature_for_recipe_views_default_views() {
     'created' => 'created',
     'changed' => 'changed',
     'field_recipe_content_type' => 'field_recipe_content_type',
-    'field_recipe_section' => 'field_recipe_section',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
   );
-  $handler->display->display_options['style_options']['default'] = 'changed';
+  $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'counter' => array(
       'align' => '',
@@ -192,11 +191,6 @@ function feature_for_recipe_views_default_views() {
     'field_recipe_content_type' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_recipe_section' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -238,7 +232,7 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
-  $handler->display->display_options['fields']['counter']['label'] = 'Sr. No.';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Content: Title */
@@ -271,12 +265,6 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['fields']['field_recipe_content_type']['id'] = 'field_recipe_content_type';
   $handler->display->display_options['fields']['field_recipe_content_type']['table'] = 'field_data_field_recipe_content_type';
   $handler->display->display_options['fields']['field_recipe_content_type']['field'] = 'field_recipe_content_type';
-  /* Field: Content: Select Section */
-  $handler->display->display_options['fields']['field_recipe_section']['id'] = 'field_recipe_section';
-  $handler->display->display_options['fields']['field_recipe_section']['table'] = 'field_data_field_recipe_section';
-  $handler->display->display_options['fields']['field_recipe_section']['field'] = 'field_recipe_section';
-  $handler->display->display_options['fields']['field_recipe_section']['type'] = 'hs_taxonomy_term_reference_hierarchical_text';
-  $handler->display->display_options['fields']['field_recipe_section']['delta_offset'] = '0';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -359,41 +347,6 @@ function feature_for_recipe_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Select Section (field_recipe_section) */
-  $handler->display->display_options['filters']['field_recipe_section_tid']['id'] = 'field_recipe_section_tid';
-  $handler->display->display_options['filters']['field_recipe_section_tid']['table'] = 'field_data_field_recipe_section';
-  $handler->display->display_options['filters']['field_recipe_section_tid']['field'] = 'field_recipe_section_tid';
-  $handler->display->display_options['filters']['field_recipe_section_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_recipe_section_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_recipe_section_tid']['expose']['operator_id'] = 'field_recipe_section_tid_op';
-  $handler->display->display_options['filters']['field_recipe_section_tid']['expose']['label'] = 'Section';
-  $handler->display->display_options['filters']['field_recipe_section_tid']['expose']['operator'] = 'field_recipe_section_tid_op';
-  $handler->display->display_options['filters']['field_recipe_section_tid']['expose']['identifier'] = 'field_recipe_section_tid';
-  $handler->display->display_options['filters']['field_recipe_section_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    19 => 0,
-    15 => 0,
-    18 => 0,
-  );
-  $handler->display->display_options['filters']['field_recipe_section_tid']['vocabulary'] = 'category_management';
-  $handler->display->display_options['filters']['field_recipe_section_tid']['hierarchy'] = 1;
-  $handler->display->display_options['filters']['field_recipe_section_tid']['error_message'] = FALSE;
   /* Filter criterion: Content: Content type (field_recipe_content_type) */
   $handler->display->display_options['filters']['field_recipe_content_type_value']['id'] = 'field_recipe_content_type_value';
   $handler->display->display_options['filters']['field_recipe_content_type_value']['table'] = 'field_data_field_recipe_content_type';

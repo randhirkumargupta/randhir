@@ -89,9 +89,9 @@
                 <h2>Sections</h2>
                 <div class="content-details">
                   <?php
-                  $selection = render($content['field_blog_category_selection']);
+                  $selection = render($content['field_story_category']);
                   if (!empty($selection)):
-                    print render($content['field_blog_category_selection']);
+                    print render($content['field_story_category']);
                     ?>
                   </div>
                 </div>
