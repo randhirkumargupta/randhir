@@ -202,6 +202,7 @@
             <?php $story_exp_chk=$content['field_story_expires']['#items']['0']['value'];  ?>
             <?php if(!empty($story_exp_chk)){ print render($content['field_story_expiry_date']); }?>
             <?php print render($content['field_story_kicker_text']); ?>
+            <?php print render($content['field_story_itg_tags']); ?>
             <?php print render($content['field_story_category']); ?>
             </div>
           </div>

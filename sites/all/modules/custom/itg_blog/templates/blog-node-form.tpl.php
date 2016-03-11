@@ -23,7 +23,7 @@
 </div>
 <div id="categorySection">
   <h2 class="story-title">Section</h2>
-  <?php print drupal_render($form['field_blog_category_selection']); ?>
+  <?php print drupal_render($form['field_story_category']); ?>
 </div>
 <h2 id="title-metatags" class="story-title">Meta Tags</h2>
 <?php print drupal_render_children($form); ?>
