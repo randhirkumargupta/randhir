@@ -34,7 +34,7 @@ function astro_feature_field_default_field_instances() {
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'numerology_video',
-      'file_extensions' => 'mp4 avi flv ogg',
+      'file_extensions' => 'mp4 avi flv ogg wmv',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -238,7 +238,7 @@ function astro_feature_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_astro_thumb_icon',
     'label' => 'Thumbnail Icon',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -305,13 +305,13 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_astro_video',
-    'label' => 'Zodiac Video',
+    'label' => 'Video',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'astro_video',
-      'file_extensions' => 'mp4 flv avi mkv ogg',
+      'file_extensions' => 'mp4 flv avi mkv ogg wmv',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -402,7 +402,7 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_audio',
-    'label' => 'Zodiac Audio',
+    'label' => 'Audio',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -466,8 +466,8 @@ function astro_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_buzz_description',
-    'label' => 'Zodiac text',
-    'required' => 1,
+    'label' => 'Text',
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -512,7 +512,7 @@ function astro_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_astro_date_range',
     'label' => 'Date Range',
     'required' => 1,
@@ -530,12 +530,12 @@ function astro_feature_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'M jS Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-0:+0',
       ),
       'type' => 'date_popup',
       'weight' => 4,
@@ -585,49 +585,6 @@ function astro_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-astro-field_astro_frequency2'.
-  $field_instances['node-astro-field_astro_frequency2'] = array(
-    'bundle' => 'astro',
-    'default_value' => array(
-      0 => array(
-        'value' => 'daily',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 11,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_astro_frequency2',
-    'label' => 'Select Frequency',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 11,
-    ),
-  );
-
   // Exported field_instance: 'node-astro-field_astro_numerology_values'.
   $field_instances['node-astro-field_astro_numerology_values'] = array(
     'bundle' => 'astro',
@@ -666,10 +623,16 @@ function astro_feature_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 13,
+      'module' => 'field_collection_fieldset',
+      'settings' => array(
+        'collapsed' => FALSE,
+        'field_as_label' => array(),
+        'last_item_collapsed' => FALSE,
+        'new_item_open' => FALSE,
+        'replace_label' => FALSE,
+      ),
+      'type' => 'field_collection_fieldset',
+      'weight' => 14,
     ),
   );
 
@@ -702,7 +665,7 @@ function astro_feature_field_default_field_instances() {
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'astro_collective_vodeos',
-      'file_extensions' => 'mp4 flv avi ogg',
+      'file_extensions' => 'mp4 flv avi ogg wmv',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -737,7 +700,7 @@ function astro_feature_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -772,23 +735,23 @@ function astro_feature_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_astro_zodiac',
     'label' => 'Zodiac',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
+      'active' => 1,
       'module' => 'field_collection_fieldset',
       'settings' => array(
-        'collapsed' => FALSE,
-        'field_as_label' => array(),
-        'last_item_collapsed' => FALSE,
-        'new_item_open' => FALSE,
-        'replace_label' => FALSE,
+        'collapsed' => 0,
+        'field_as_label' => '',
+        'last_item_collapsed' => 0,
+        'new_item_open' => 0,
+        'replace_label' => 0,
       ),
       'type' => 'field_collection_fieldset',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -830,7 +793,7 @@ function astro_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -898,72 +861,18 @@ function astro_feature_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 9,
-    ),
-  );
-
-  // Exported field_instance: 'node-astro-field_field_astro_date_range2'.
-  $field_instances['node-astro-field_field_astro_date_range2'] = array(
-    'bundle' => 'astro',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_field_astro_date_range2',
-    'label' => 'Date Range',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 12,
+      'weight' => 10,
     ),
   );
 
   // Exported field_instance: 'node-astro-field_numerology'.
   $field_instances['node-astro-field_numerology'] = array(
     'bundle' => 'astro',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -995,7 +904,7 @@ function astro_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -1024,7 +933,7 @@ function astro_feature_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_category',
     'label' => 'Select Program',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -1053,13 +962,11 @@ function astro_feature_field_default_field_instances() {
   t('Please select zodiac sign name.');
   t('Select Frequency');
   t('Select Program');
+  t('Text');
   t('Thumbnail Icon');
   t('Video');
   t('Zodiac');
-  t('Zodiac Audio');
   t('Zodiac Sign Name');
-  t('Zodiac Video');
-  t('Zodiac text');
 
   return $field_instances;
 }

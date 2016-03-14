@@ -237,6 +237,8 @@ function feature_for_breaking_news_views_default_views() {
 
   /* Display: Breaking News */
   $handler = $view->new_display('page', 'Breaking News', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Breaking News Live Blog';
   $handler->display->display_options['display_description'] = 'Breaking News';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';

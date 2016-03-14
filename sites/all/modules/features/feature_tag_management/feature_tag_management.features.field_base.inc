@@ -13,7 +13,7 @@ function feature_tag_management_field_default_field_bases() {
   // Exported field_base: 'field_tags_display'.
   $field_bases['field_tags_display'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_tags_display',
@@ -29,7 +29,8 @@ function feature_tag_management_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        1 => 'Active',
+        1 => 'Yes',
+        0 => 'No',
       ),
       'allowed_values_function' => '',
     ),

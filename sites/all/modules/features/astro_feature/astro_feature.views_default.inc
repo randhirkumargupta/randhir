@@ -71,7 +71,7 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'itg';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd-m-Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Delete link */
@@ -166,12 +166,46 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['filters']['field_astro_frequency_value']['id'] = 'field_astro_frequency_value';
   $handler->display->display_options['filters']['field_astro_frequency_value']['table'] = 'field_data_field_astro_frequency';
   $handler->display->display_options['filters']['field_astro_frequency_value']['field'] = 'field_astro_frequency_value';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['value'] = array(
+    'daily' => 'daily',
+  );
   $handler->display->display_options['filters']['field_astro_frequency_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator_id'] = 'field_astro_frequency_value_op';
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['label'] = 'Select Frequency';
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator'] = 'field_astro_frequency_value_op';
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['identifier'] = 'field_astro_frequency_value';
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  /* Filter criterion: Content: Numerology (field_numerology) */
+  $handler->display->display_options['filters']['field_numerology_value']['id'] = 'field_numerology_value';
+  $handler->display->display_options['filters']['field_numerology_value']['table'] = 'field_data_field_numerology';
+  $handler->display->display_options['filters']['field_numerology_value']['field'] = 'field_numerology_value';
+  $handler->display->display_options['filters']['field_numerology_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_numerology_value']['expose']['operator_id'] = 'field_numerology_value_op';
+  $handler->display->display_options['filters']['field_numerology_value']['expose']['label'] = 'Numerology';
+  $handler->display->display_options['filters']['field_numerology_value']['expose']['operator'] = 'field_numerology_value_op';
+  $handler->display->display_options['filters']['field_numerology_value']['expose']['identifier'] = 'field_numerology_value';
+  $handler->display->display_options['filters']['field_numerology_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,

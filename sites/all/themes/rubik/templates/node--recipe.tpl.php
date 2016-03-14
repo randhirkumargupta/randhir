@@ -55,9 +55,21 @@
                   ?>
                 <?php endif; ?>
                 <?php
+                $type_audio = render($content['field_recipe_audio']);
+                if (!empty($type_audio)):
+                  print render($content['field_recipe_audio']);
+                  ?>
+                <?php endif; ?>
+                <?php
+                $type_video = render($content['field_recipe_video']);
+                if (!empty($type_video)):
+                  print render($content['field_recipe_video']);
+                  ?>
+                <?php endif; ?>
+                <?php
                 $strap = render($content['field_recipe_strap_headline']);
                 if (!empty($strap)):
-                  print $strap;
+                  print render($content['field_recipe_strap_headline']);
                   ?>
                 <?php endif; ?>
                 <?php
@@ -82,22 +94,22 @@
                 <?php endif; ?>
 
                 <?php
-                $byline = render($content['field_recipe_byline']);
+                $byline = render($content['field_story_reporter']);
                 if (!empty($byline)):
                   ?>    
-                  <?php print render($content['field_recipe_byline']); ?>
+                  <?php print render($content['field_story_reporter']); ?>
                 <?php endif; ?>
                 <?php
-                $courtesy = render($content['field_recipe_courtesy']);
+                $courtesy = render($content['field_story_courtesy']);
                 if (!empty($courtesy)):
                   ?>    
-                  <?php print render($content['field_recipe_courtesy']); ?>
+                  <?php print render($content['field_story_courtesy']); ?>
                 <?php endif; ?>
                 <?php
-                $city = render($content['field_recipe_city']);
+                $city = render($content['field_stroy_city']);
                 if (!empty($city)):
                   ?>    
-                  <?php print render($content['field_recipe_city']); ?>
+                  <?php print render($content['field_stroy_city']); ?>
                 <?php endif; ?>
               </div>
             </div>
@@ -118,7 +130,7 @@
                 <?php
                 $cuisine_type = render($content['field_recipe_cuisine_type']);
                 if (!empty($cuisine_type)):
-                  print $cuisine_type;
+                  print render($content['field_recipe_cuisine_type']);
                   ?>
                 <?php endif; ?>
                 <?php
@@ -175,44 +187,35 @@
             </div>
 
             <?php
-            $browsemedialarge = render($content['field_recipe_upload_large_image']);
-            $browsemediamedium = render($content['field_recipe_medium_image']);
-            $browsemediasmall = render($content['field_recipe_small_image']);
+            $browsemedialarge = render($content['field_story_large_image']);
+            $browsemediamedium = render($content['field_story_medium_image']);
+            $browsemediasmall = render($content['field_story_small_image']);
             $browsemediamobile = render($content['field_recipe_mobile_image']);
             if (!empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediamobile)):
               ?>
               <div class="content-node-view">
                 <h2>Recipe Images</h2>
                 <div class="content-details">
-                  <?php print render($content['field_recipe_upload_large_image']); ?>
-                  <?php print render($content['field_recipe_medium_image']); ?>
-      <?php print render($content['field_recipe_small_image']); ?>
-              <?php print render($content['field_recipe_mobile_image']); ?>
+                  <?php print render($content['field_story_large_image']); ?>
+                  <?php print render($content['field_story_medium_image']); ?>
+                  <?php print render($content['field_story_small_image']); ?>
+                  <?php print render($content['field_recipe_mobile_image']); ?>
                 </div>
               </div>
             <?php endif; ?>
-
-            <?php
-          // end of view mode full condition
-          endif;
-          ?>
-          <div class="content-node-view">
+            <div class="content-node-view">
             <h2>Syndication</h2>
             <div class="content-details">      
               <?php
               $syndication = render($content['field_recipe_syndication']);
-              $client_title = render($content['field_recipe_client_title']);
+              $client_title = render($content['field_story_client_title']);
               ?>
 
                 <?php if (!empty($syndication) || !empty($client_title)): ?>
                 <div class="description-details content-box">
-                  <?php
-                  if (!empty($syndication)):
-                    print render($content['field_recipe_syndication']);
-                    ?>
-                  <?php endif; ?>
+                  
                 <?php if (!empty($client_title)): ?>
-                    <div class="breaking-content-details"><?php print render($content['field_recipe_client_title']); ?></div> 
+                    <div class="breaking-content-details"><?php print render($content['field_story_client_title']); ?></div> 
     <?php endif; ?>
                 </div>
   <?php endif; ?>
@@ -223,14 +226,17 @@
             <h2>Recipe Section</h2>
             <div class="content-details">
               <?php
-              $section = render($content['field_recipe_section']);
+              $section = render($content['field_story_category']);
               if (!empty($section)):
                 ?>    
-    <?php print render($content['field_recipe_section']); ?>
+    <?php print render($content['field_story_category']); ?>
   <?php endif; ?>
             </div>
           </div>
-
+            <?php
+          // end of view mode full condition
+          endif;
+          ?>
 
         </div>
   <?php endif; ?>

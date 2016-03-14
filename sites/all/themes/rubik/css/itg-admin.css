@@ -89,6 +89,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-recipe .preview-wrapper, 
 .page-node-add-mega-review-critic .preview-wrapper,
 .node-type-mega-review-critic .preview-wrapper, 
+.page-node-add-poll .preview-wrapper,
+.node-type-poll .preview-wrapper, 
 .page-node-add-supplement .preview-wrapper,
 .node-type-breaking-news .preview-wrapper{
   background-color: rgba(0, 0, 0, 0.7);
@@ -119,6 +121,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-recipe .preview,
 .page-node-add-mega-review-critic .preview,
 .node-type-mega-review-critic .preview,
+.page-node-add-poll .preview,
+.node-type-poll .preview,
 .page-node-add-supplement .preview,
 .node-type-breaking-news .preview{
   background-color: #fff;
@@ -151,6 +155,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-recipe .preview > h3,
 .page-node-add-mega-review-critic .preview > h3,
 .node-type-mega-review-critic .preview > h3,
+.page-node-add-poll .preview > h3,
+.node-type-poll .preview > h3,
 .page-node-add-supplement .preview > h3,
 .node-type-breaking-news .preview > h3{
   font-size: 24px;
@@ -186,6 +192,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-recipe .close-preview,
 .page-node-add-mega-review-critic .close-preview,
 .node-type-mega-review-critic .close-preview,
+.page-node-add-poll .close-preview,
+.node-type-poll .close-preview,
 .page-node-add-supplement .close-preview,
 .node-type-breaking-news .close-preview{
   display: block;
@@ -199,6 +207,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .node-preview .column-side, 
 .page-node-add-story .node-title, 
 .page-node-add-story .preview > h3:first-child,
+.page-node-add-poll .node-teaser, 
+.page-node-add-poll .node-preview .column-side, 
+.page-node-add-poll .node-title, 
+.page-node-add-poll .preview > h3:first-child,
 .page-node-add-mega-review-critic .node-teaser, 
 .page-node-add-mega-review-critic .node-preview .column-side, 
 .page-node-add-mega-review-critic .node-title, 
@@ -207,6 +219,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-story .node-preview .column-side, 
 .node-type-story .node-title, 
 .node-type-story .preview > h3:first-child, 
+.node-type-poll .node-teaser, 
+.node-type-poll .node-preview .column-side, 
+.node-type-poll .node-title, 
+.node-type-poll .preview > h3:first-child, 
 .node-type-mega-review-critic .node-teaser, 
 .node-type-mega-review-critic .node-preview .column-side, 
 .node-type-mega-review-critic .node-title, 
@@ -275,6 +291,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-recipe div.node,
 .page-node-add-mega-review-critic div.node, 
 .node-type-mega-review-critic div.node,
+.page-node-add-poll div.node, 
+.node-type-poll div.node,
 .node-type-breaking-news div.node,
 .node-type-story div.node{
   background: none;
@@ -303,6 +321,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-recipe .column-main,
 .page-node-add-mega-review-critic .preview .column-main, 
 .node-type-mega-review-critic .preview .column-main,
+.page-node-add-poll .preview .column-main, 
+.node-type-poll .preview .column-main,
 .node-type-breaking-news .column-main{
   display: inline-block;
   width: 100%;
@@ -467,21 +487,25 @@ form .form-item .form-item{
   margin-bottom: 20px;
 }
 #block-itg-story-story-tab-form-block, 
+#block-itg-poll-poll-tab-form-block, 
 #block-itg-breaking-news-breaking-news-tab-form-block, 
 #block-menu-menu-story-content-admin-menu, 
 #block-menu-menu-ask-an-expert-menu,
 #block-menu-menu-photogallery-admin-menu, 
 #block-itg-photogallery-photogallery-tab-form-block, 
+#block-itg-astro-astro-tab-form-block, 
 #block-itg-recipe-recipe-tab-form-block{
   border-left: none;
   border-right: none;
 }
 #block-itg-story-story-tab-form-block .block-content, 
+#block-itg-poll-poll-tab-form-block .block-content, 
 #block-itg-recipe-recipe-tab-form-block .block-content, 
 #block-itg-breaking-news-breaking-news-tab-form-block .block-content, 
 #block-menu-menu-story-content-admin-menu .block-content, 
 #block-menu-menu-ask-an-expert-menu .block-content,
 #block-menu-menu-photogallery-admin-menu .block-content,
+#block-itg-astro-astro-tab-form-block .block-content,
 #block-itg-photogallery-photogallery-tab-form-block .block-content{
   padding: 0;
 }
@@ -534,6 +558,8 @@ form .form-item .form-item{
   background-color: #008eb1;
 }
 .block-itg-story.fixed, 
+.block-itg-poll.fixed, 
+.block-itg-astro.fixed, 
 .block-itg-recipe.fixed, 
 .block-itg-breaking-news.fixed, 
 .block-itg-photogallery.fixed{
@@ -781,11 +807,13 @@ div.image-widget-data .ajax-progress{position: absolute; left: 100%; top: 0;}
 .user-profile-div .field-name-field-user-picture .field-label{display: none;}
 form .path-form .form-item-path-pathauto{padding-left: 300px; width: 100%; box-sizing: border-box;}
 form .path-form .form-item-path-pathauto label{float: none;}
-.edit-link, .view-link, .delete-link{position: relative; vertical-align: middle; display: inline-block; padding-left: 20px;}
+.edit-link, .view-link, .delete-link, .edit-cm a{position: relative; vertical-align: middle; display: inline-block; padding-left: 20px;}
 .edit-link:after, 
 .view-link:after, 
-.delete-link:after{width: 20px; height: 20px; font: normal normal normal 18px/20px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0;}
-.edit-link:after{content: '\f044';}
+.delete-link:after, 
+.edit-cm a:after{width: 20px; height: 20px; font: normal normal normal 18px/20px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0;}
+.edit-cm a:after{line-height: 28px;}
+.edit-link:after, .edit-cm a:after{content: '\f044';}
 .view-link:after{content: '\f06e';}
 .delete-link:after{content: '\f1f8';}
 table.sticky-header{z-index: 99;}
@@ -864,11 +892,11 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .category-manager-details,
 .view-category-manager-dev .view-content ul li{float: left; width: 100%; box-sizing: border-box;}
 .view-category-manager-dev .view-content ul li{padding: 0;}
-.cmd-detail span, .cmd-detail a{position: absolute; top: 0; height: 100%; padding: 5px 10px; width: 25%; box-sizing: border-box;}
+.cmd-detail span, .cmd-detail .edit-cm{position: absolute; top: 0; height: 100%; padding: 5px 10px; width: 25%; box-sizing: border-box;}
 .cmd-detail span:nth-child(1){left: 0;}
 .cmd-detail span:nth-child(2){left: 25%;}
 .cmd-detail span:nth-child(3){left: 50%;}
-.cmd-detail a{left: 75%;}
+.cmd-detail .edit-cm{left: 75%;}
 .cmd-detail span{border-right: 1px solid #ddd;}
 .details-parent{position: absolute; bottom: 0; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
 .details-parent .photo-title{font-size: 16px;}
@@ -931,9 +959,13 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 }
 .page-node-revision .node-story .column-side, 
 .page-node-revisions .node-story .column-side, 
+.page-node-revision .node .column-side, 
+.page-node-revisions .node .column-side, 
 .node-breaking-news .column-side{width: 30%;}
 .page-node-revision .node-story .column-main, 
 .page-node-revisions .node-story .column-main, 
+.page-node-revision .node .column-main, 
+.page-node-revisions .node .column-main, 
 .node-breaking-news .column-main{width: 70%;}
 .page-node-revision .column-side .byline, 
 .page-node-revisions .column-side .byline{font-size: 14px;}
@@ -963,7 +995,6 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 #taxonomy-form-term .path-form .fieldset-content{padding: 0 10px;}
 #taxonomy-form-term .form-item-term-state label.option{float: none;}
 .form-item div.password-confirm span.error{float: right; width: auto; padding: 0;}
-.view-strory-menegment.view-display-id-page_1 .views-table th.views-field-views-bulk-operations{padding-left: 35px;}
 .node-breaking-news.node-preview .column-main{width: 100%;}
 .group-supp-import-xml fieldset legend{display: none !important;}
 .group-supp-import-xml fieldset{border: none; padding: 0;}
@@ -1064,7 +1095,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-astro-form .vertical-tabs{padding: 10px 0 0 10px;}
 [class*="form-item-field-field-astro-date-range2"] label{display: none;}
 .node-astro-form .field-multiple-table tbody td .button-remove{margin-left: 150px;}
-.user-role{display: inline-block; vertical-align: top; padding: 5px; margin-left: 10px;}
+.user-role{display: inline-block; vertical-align: top; padding: 6px; margin-left: 10px; float: right;}
 #astro-node-form .form-layout-default > .column-main{width: 65%;}
 .content-node-view .root-label .field-label{vertical-align: top;}
 .content-node-view .root-label .field-items{width: 75%; border-bottom: 1px dashed #ddd; margin-bottom: 7px;}
@@ -1107,7 +1138,9 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field .field-items{width: 400px;} 
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field-collection-view-links,
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .action-links{display: none;} 
-.field-collection-view{border-bottom: 1px dashed #d3d7d9;}
+.field-collection-view, 
+.node-type-mega-review-critic .field-collection-view, 
+.node-type-survey .field-collection-view{border-bottom: 1px dashed #d3d7d9;}
 .node-survey-form .field-multiple-table .field-multiple-table tbody{float: left;}
 [id*="field-survey-add-questions-values"] + div .field-add-more-submit{margin: 0;}
 
@@ -1180,6 +1213,8 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-mega_review_critic-form .form-type-managed-file .image-widget div.image-widget-data{width: 100%;} 
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item label{width: 120px;} 
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item .form-text{width: 300px !important;} 
+.node-mega_review_critic-form .field-multiple-table fieldset .form-item span.error,
+.node-mega_review_critic-form .field-multiple-table fieldset .form-item div.description{padding-left: 120px;}
 .node-mega_review_critic-form .field-multiple-table td{max-width: none;}
 .node-mega_review_critic-form .form-managed-file .image-preview + .image-widget-data{max-width: 285px;}
 .node-mega_review_critic-form .form-type-managed-file .form-managed-file span.file, 
@@ -1205,8 +1240,66 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .form-type-managed-file .image-widget .image-preview + .image-widget-data .file,
 .form-type-managed-file .image-widget .image-preview + .image-widget-data .file-size{max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 5px;}
 div.view table td, div.view table th{max-width: 200px;}
-[class*='form-item-field-supp-import-xml-und']{text-align: center; margin-top: 10px;}
-[class*='form-item-field-supp-import-xml-und'] div.description{text-align: left;}
+[class*='form-item-field-supp-import-xml-und'], 
+[class*='form-item-field-field-issue-import-xml-und']{text-align: center; margin-top: 10px !important;}
+[class*='form-item-field-supp-import-xml-und'] div.description,
+[class*='form-item-field-field-issue-import-xml-und'] div.description{text-align: left;}
 .field-name-field-user-message .form-item span.error{padding-left: 0;}
-[id*="field-gallery-image-values"] .tabledrag-hide{display: none;}
+[id*="field-gallery-image-values"] .tabledrag-hide, 
+.view-movie-review-list .tabledrag-hide, 
+.view-movie-review-list .tabledrag-toggle-weight-wrapper, 
+.node-issue-form .tabledrag-hide{display: none;}
 #branding .breadcrumb-link > a, #branding .breadcrumb-link > strong{max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.field-name-field-recipe-ingredients.field-widget-text-textfield, 
+.field-type-text.field-name-field-blog-bloggers{float:left; max-width: 300px; margin-right: 10px;}
+.field-type-text.field-name-field-blog-bloggers .form-text,
+.field-name-field-recipe-ingredients.field-widget-text-textfield .form-text{max-width: 100% !important;}
+[id*="edit-field-field-issue-import-xml-und"] > legend{padding: 10px 10px 0;}
+.page-tags-management div.views-exposed-form input.form-text{box-sizing: border-box;}
+.page-tags-management .views-exposed-form .container-inline-date .date-padding label, 
+[id*="taxonomy-csv-import-form"] .vertical-tabs-list{display: none;}
+.page-tags-management .views-exposed-form .container-inline-date{clear: none; float: left;}
+[id*="taxonomy-csv-import-form"] .vertical-tabs{padding-left: 0;}
+.page-admin-structure-taxonomy-csv-export .vertical-tabs-list li a{border-bottom: none;}
+.page-admin-structure-taxonomy-csv-export .vertical-tabs{padding-left: 0;}
+.page-admin-structure-taxonomy-csv-export .vertical-tabs-list{margin: 0; width: auto;}
+
+.node-poll-form .tabledrag-hide,
+.node-poll-form .tabledrag-toggle-weight-wrapper{display: none;}
+[id*="field-poll-answer-values"] [for*="edit-field-poll-answer-und"]{display: none;}
+.field-name-field-poll-answer-text{float:left; max-width: 300px; margin-right: 10px;}
+.field-name-field-poll-answer-text .form-text{max-width: 100% !important;}
+[id*="field-poll-answer-values"] td{padding-bottom: 10px !important;}
+[id*="edit-field-poll-start-date"]{position: relative;}
+[id*="edit-field-poll-start-date"] .start-date-wrapper{position: absolute; left: 300px; top: 0;}
+[id*="edit-field-poll-start-date"] .fieldset-content{padding-left: 0; padding-right: 0;}
+[id*="edit-field-poll-start-date"] .start-date-wrapper label, 
+[id*="edit-field-poll-start-date"] .end-date-wrapper .date-padding label{display: none;}
+[id*="edit-field-poll-start-date"] .date-float .form-item label{float: none !important;}
+[id*="edit-field-poll-start-date"] .date-float{padding-left: 300px;}
+[id*="edit-field-poll-start-date"] .end-date-wrapper{padding-top: 20px;}
+.node-poll-form .vertical-tabs{padding: 0; border: none;}
+.view-poll-listing.view-display-id-block_1 .views-field{display: inline-block; width: 100%;}
+.view-poll-listing.view-display-id-block_1 .views-field .views-label{float: left; width: 30%; font-weight: bold;}
+.view-poll-listing.view-display-id-block_1 .views-field .field-content{float: left; width: 70%;}
+.poll-text, .poll-image{float: left; width: 60%; padding-right: 20px; box-sizing: border-box;}
+.poll-image img{vertical-align: top;}
+.pole-vote{float: left; width: 40%;}
+.poll-list{padding: 10px 0; border-top: 1px dashed #ddd; display: inline-block; width: 100%;}
+.poll-list:first-child{padding-top: 0; border-top: none;}
+[id*="subsPollForm"] .form-type-radio{display: inline-block; vertical-align: middle; width: auto; padding-right: 20px;}
+[id*="subsPollForm"] .form-type-radio label.option{float: none;}
+[id*="edit-field-gallery-image-und"] > legend > span.fieldset-legend{background-color: #eee;}
+[id*="edit-field-gallery-image-und"] > legend > span > a{max-width: 200px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.node-survey-form .field-multiple-table tbody div.file-widget .button-remove{margin-left: 5px;}
+.node-type-issue .block-content > .cm-node-view{overflow: visible;}
+.page-content .field-name-field-supp-issue .form-type-date-popup div.description, 
+.page-content .field-name-field-supp-publish .form-item div.description{left: 200px;} 
+[id*="field-astro-numerology-values-values"] .form-item.form-type-textfield span.error{padding-left: 150px;}
+[id*="field-astro-numerology-values-values"] .form-item.form-type-textarea span.error{padding-left: 0;}
+/*[id*="views-exposed-form-poll-listing-page"] .views-exposed-form .views-exposed-widget .form-submit{margin-top: 0;}*/
+.form-item .form-textarea-wrapper span.error{padding-left: 0;}
+.itg-term-state {display: inline-block; width: 100%;}
+.itg-term-state > label {color: #666;float: left;font-size: 12px;font-weight: normal;padding: 5px 0; width: 300px;}
+.form-item.form-type-checkbox.form-item-term-state {float: left; width: auto;}
+.node-type-poll .content-node-view .field-label{vertical-align: top;}

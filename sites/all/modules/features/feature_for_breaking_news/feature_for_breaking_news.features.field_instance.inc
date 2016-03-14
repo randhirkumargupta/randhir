@@ -409,49 +409,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_keywords'.
-  $field_instances['node-breaking_news-field_keywords'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Keywords',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_keywords',
-    'label' => 'Tags',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 5,
     ),
   );
 
@@ -493,7 +451,7 @@ function feature_for_breaking_news_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 4,
     ),
   );
 
@@ -532,7 +490,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 6,
     ),
   );
 
@@ -574,7 +532,7 @@ function feature_for_breaking_news_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 23,
+      'weight' => 15,
     ),
   );
 
@@ -651,7 +609,7 @@ function feature_for_breaking_news_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 18,
+      'weight' => 10,
     ),
   );
 
@@ -728,7 +686,53 @@ function feature_for_breaking_news_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 22,
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-breaking_news-field_story_itg_tags'.
+  $field_instances['node-breaking_news-field_story_itg_tags'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 26,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_itg_tags',
+    'label' => 'Tags',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'autocomplete_deluxe',
+      'settings' => array(
+        'autocomplete_deluxe_path' => 'autocomplete_deluxe/taxonomy',
+        'delimiter' => '',
+        'limit' => 10,
+        'min_length' => 0,
+        'not_found_message' => 'The term \'@term\' will be added.',
+        'size' => 60,
+      ),
+      'type' => 'autocomplete_deluxe_taxonomy',
+      'weight' => 8,
     ),
   );
 
@@ -804,7 +808,7 @@ function feature_for_breaking_news_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 19,
+      'weight' => 11,
     ),
   );
 
@@ -880,7 +884,7 @@ function feature_for_breaking_news_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 20,
+      'weight' => 12,
     ),
   );
 
@@ -956,7 +960,7 @@ function feature_for_breaking_news_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 21,
+      'weight' => 13,
     ),
   );
 
@@ -1016,7 +1020,6 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Image Size (300 x 350)');
   t('Image Size (650 x 445)');
   t('Image Size (88 x 66)');
-  t('Keywords');
   t('Large image');
   t('Mark as Breaking band');
   t('Medium image');
