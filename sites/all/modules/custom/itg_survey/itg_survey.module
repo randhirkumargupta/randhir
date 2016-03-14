@@ -13,14 +13,31 @@
  * @return string
  */
 function itg_survey_menu() {
-   $items = array();
-   $items['survey'] = array(
+  $items = array();
+  $items['survey'] = array(
       'page callback' => 'drupal_get_form',
-      'page arguments' => array('itg_survey_survey_form'), 
+      'page arguments' => array('itg_survey_survey_form'),
       'access callback' => TRUE,
-      'type' => MENU_CALLBACK, 
-    );
-   return $items;
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_survey_form.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implement hook_theme
+ * @return Array
+ */
+function itg_survey_theme() {
+  $path = drupal_get_path('module', 'itg_survey') . '/templates';
+  return array(    
+    'itg_survey_form' => array(
+      'variable' => array('data' => NULL),
+      'path' =>  $path,
+      'template' => 'itg-survey-form',
+      'render element' => 'form',
+    ),
+ );
 }
 
 /***************************Form Related hooks*********************************/
@@ -36,12 +53,9 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
   
   //Set destination for survey form
   if ($form_id == 'survey_node_form') {
+    
+      //Set Destination
       $destination = 'manage-survey';
-      if (isset($_GET['destination'])) {
-        $destination = $_GET['destination'];
-      } else {
-        $destination = 'manage-survey';
-      }
      
       //Form fields treatment
       $form['title']['#title'] = 'Survey Title';
@@ -176,16 +190,11 @@ function itg_survey_node_validate($node, $form, &$form_state) {
 /*******************************Common Functions*****************************/
 
 /**
- * Create survey form
+ * Get Active node for survey
+ * @return Array
  */
-function itg_survey_survey_form() {
-  itg_survey_get_survey();
-}
-
-/**
- * Get Survey nid
- */
-function itg_survey_get_survey() {
+function itg_survey_get_current_survey() {
+  $curr_time = time();
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'))
           ->condition('n.type', 'survey', '=')
@@ -194,7 +203,61 @@ function itg_survey_get_survey() {
           ->range(0, 1);
   $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
-    $nid[] = $record['nid'];
+    $nid = $record['nid'];
   }
-  return $nid;
+
+  //Load Node
+  $node = node_load($nid);
+  $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+  if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
+    if ($survey_end_date < $curr_time) {
+      return FALSE;
+    } else {
+      return $node;
+    }
+  } else {
+    return $node;
+  }
+}
+
+/**
+ * Get survey percentage taken by a user type(Anonymous/Authenticated)
+ * @param Int $nid
+ * @param String $user_type
+ * @return string
+ */
+function itg_survey_get_survey_by_users($nid, $user_type){
+  
+  //Get total survey for a node
+  $total_survey = itg_survey_get_total_survey($nid);
+  if (!$total_survey) {
+    return '0%';
+  } else {
+    $result = db_select('itg_survey_user', 'su')
+            ->fields('su')
+            ->condition('su.user_type', $user_type, '=')
+            ->condition('su.nid', $nid, '=')
+            ->execute();
+    $total_survey_by_user = $result->rowCount();
+    $survey_percentage = ($total_survey_by_user / $total_survey) * 100;
+    return round($survey_percentage, 2) . '%';
+  }
+}
+
+/**
+ * Get total number of survey taken by users for a node
+ * @param Int $nid
+ * @return Int
+ */
+function itg_survey_get_total_survey($nid){
+    $result = db_select('itg_survey_user', 'isu')
+            ->fields('isu')
+            ->execute();
+    $total_survey = $result->rowCount();
+    if($total_survey){
+      return $total_survey;
+    } else {
+      return 0;
+    }
+    
 }
