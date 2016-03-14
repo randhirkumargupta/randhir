@@ -43,7 +43,7 @@ function feature_tag_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 43,
+      'weight' => 1,
     ),
   );
 

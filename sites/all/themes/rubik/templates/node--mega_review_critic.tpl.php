@@ -51,10 +51,10 @@
         <?php print render($content['field_mega_review_photo_gallery']); ?>
         <?php print render($content['field_mega_review_twitter']); ?>
         <?php print render($content['field_story_extra_large_image']); ?>
-        <?php print render($content['field_story_large_image']); ?>
-        <?php print render($content['field_story_medium_image']); ?>
-        <?php print render($content['field_story_small_image']); ?>
-        <?php print render($content['field_story_extra_small_image']); ?>
+        <?php // print render($content['field_story_large_image']); ?>
+        <?php // print render($content['field_story_medium_image']); ?>
+        <?php // print render($content['field_story_small_image']); ?>
+        <?php // print render($content['field_story_extra_small_image']); ?>
         <?php print render($content['field_mega_review_video']); ?>
         <?php print render($content['field_mega_review_review']); ?>
         <?php // p($node);?>
