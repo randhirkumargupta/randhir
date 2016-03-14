@@ -1,0 +1,116 @@
+<?php
+
+/**
+ * @file
+ * The ITG Blog module.
+ *
+ * Contains functionality related to Blog.
+ *
+ */
+
+/**
+ * Implementation of hook_node_presave().
+ * @param Array $node
+ */
+function itg_blog_node_presave($node) {
+  if ($node->type == 'blog') {
+    $node->title = trim($node->title);
+  }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_blog_views_pre_render(&$view) {
+  //Add "Post new Blog" button on listing page of Blog
+  if ($view->name == "manage_blogs") {
+    $header_content_blog = l(t('Post new Blog'), 'node/add/blog');
+    $view->attachment_before = $header_content_blog;
+  }
+}
+
+/**
+ * Implemets hook_form_alter().
+ * @param Array $form
+ * @param Array $form_state
+ * @param string $form_id
+ */
+function itg_blog_form_alter(&$form, &$form_state, $form_id) {
+  global $user, $base_url;
+
+  switch ($form_id) {
+    case 'blog_node_form':
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'manage-blogs', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+      );
+      $form['#after_build'][] = 'itg_blog_after_build';
+      $form['actions']['submit']['#submit'][] = 'itg_blog_form_custom_callback';
+      break;
+  }
+}
+
+/**
+ * Custom submit callback for redirecting Blog form.
+ */
+function itg_blog_form_custom_callback($form, &$form_state) {
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'blog') {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';
+  }
+  $blog_title = $form_state['node']->title;
+  drupal_set_message(t('Blog ' . $blog_title . ' has been ' . $op . ' successfully and has been submitted for further review and approval.'));
+  $_GET['destination'] = 'manage-blogs';
+}
+
+/**
+ * After build for Blog form.
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_blog_after_build($form, &$form_state) {
+
+  global $user, $base_url;
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+
+  drupal_add_js(array('itg_blog' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_blog') . '/js/itg_blog.js', array('weight' => 1));
+  return $form;
+}
+
+function itg_blog_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'blog_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'blog-node-form',
+      'path' => drupal_get_path('module', 'itg_blog') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+  return $themes;
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_blog_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  if ($form["#id"] == 'views-exposed-form-manage-blogs-page' || $form["#id"] == 'views-exposed-form-blogs-management-page' || $form['#id'] == 'views-exposed-form-blogs-management-page-1' || $form['#id'] == 'views-exposed-form-blogs-management-page-2' || $form['#id'] == 'views-exposed-form-blogs-management-page-3' || $form['#id'] == 'views-exposed-form-blogs-management-page-5' || $form['#id'] == 'views-exposed-form-blogs-management-page-6' || $form['#id'] == 'views-exposed-form-blogs-management-page-7' || $form['#id'] == 'views-exposed-form-blogs-management-page-4' || $form['#id'] == 'views-exposed-form-blogs-management-page-10') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/blog/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+    $form['nid']['#autocomplete_path'] = 'content-nid-list/blog/autocomplete';
+    $form['nid']['#attributes'] = array('placeholder' => t('Blogs ID'));
+  }
+}

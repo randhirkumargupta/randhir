@@ -13,7 +13,7 @@
                         $('#edit-metatags').show();
                         $('#edit-metatags-und-advanced').hide();
 
-                        }        
-        }
+                        }
+                    }
     }
 })(jQuery);

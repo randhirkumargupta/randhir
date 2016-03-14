@@ -32,13 +32,28 @@ function features_for_story_user_default_permissions() {
   $permissions['administer url aliases'] = array(
     'name' => 'administer url aliases',
     'roles' => array(
+      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'SEO' => 'SEO',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'path',
+  );
+
+  // Exported permission: 'create reporter content'.
+  $permissions['create reporter content'] = array(
+    'name' => 'create reporter content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'create story content'.
@@ -78,12 +93,30 @@ function features_for_story_user_default_permissions() {
     'module' => 'ckeditor',
   );
 
+  // Exported permission: 'delete any reporter content'.
+  $permissions['delete any reporter content'] = array(
+    'name' => 'delete any reporter content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any story content'.
   $permissions['delete any story content'] = array(
     'name' => 'delete any story content',
     'roles' => array(
       'Site Admin' => 'Site Admin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own reporter content'.
+  $permissions['delete own reporter content'] = array(
+    'name' => 'delete own reporter content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -101,6 +134,17 @@ function features_for_story_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'edit any reporter content'.
+  $permissions['edit any reporter content'] = array(
+    'name' => 'edit any reporter content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any story content'.
   $permissions['edit any story content'] = array(
     'name' => 'edit any story content',
@@ -110,6 +154,13 @@ function features_for_story_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own reporter content'.
+  $permissions['edit own reporter content'] = array(
+    'name' => 'edit own reporter content',
+    'roles' => array(),
     'module' => 'node',
   );
 

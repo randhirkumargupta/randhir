@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Astro Feature feature.
+ */
+
+include_once 'astro_feature.features.inc';

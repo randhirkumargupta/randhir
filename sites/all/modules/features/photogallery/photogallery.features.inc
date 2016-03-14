@@ -26,6 +26,21 @@ function photogallery_views_api($module = NULL, $api = NULL) {
 function photogallery_image_default_styles() {
   $styles = array();
 
+  // Exported image style: photgallery_edit_page.
+  $styles['photgallery_edit_page'] = array(
+    'label' => 'photgallery_edit_page',
+    'effects' => array(
+      6 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 248,
+          'height' => 200,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: photogallery_slide.
   $styles['photogallery_slide'] = array(
     'label' => 'Photogallery_slide',
@@ -55,7 +70,7 @@ function photogallery_node_info() {
       'base' => 'node_content',
       'description' => t('photogallery'),
       'has_title' => '1',
-      'title_label' => t('Gallery Title'),
+      'title_label' => t('Gallery Headline'),
       'help' => '',
     ),
   );

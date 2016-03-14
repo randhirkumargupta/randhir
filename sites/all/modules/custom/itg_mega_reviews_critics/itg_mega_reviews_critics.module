@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * @file
+ * The ITG Mega Reviews & Critics module.
+ * Provides Mega Reviews & Critics functionality and customizations.
+ */
+
+/**
+ * Implements views header link 
+ * @param type $view Description
+ */
+function itg_mega_reviews_critics_views_pre_render(&$view) {
+  
+  if ($view->name == "movie_review_list") {
+    global $user; // Get user information
+    
+    $header_content = l('Create Mega Review & Critic', 'node/add/mega-review-critic', array('query' => array('destination' => 'movie-review-list')));
+    
+    $view->attachment_before = $header_content;
+  }    
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form, &$form_state, $form_id) {
+  
+  $form['#after_build'][] = 'itg_mega_reviews_critics_form_after_build';
+  $form['actions']['submit']['#submit'][] = 'itg_mega_reviews_critics_form_custom_callback';
+}
+
+/**
+ * After build for mega_review_critic_node_form form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
+  
+  for($i = 0; $i <= $form['field_mega_review_review']['und']['#max_delta']; $i++) {
+    $count = $i+1;
+    $form['field_mega_review_review']['und'][$i]['#title'] = 'Review '.$count;  
+  }
+ 
+  drupal_add_js(drupal_get_path('module', 'itg_mega_reviews_critics') . '/js/itg_mega_reviews_critics.js', array('weight' => 1));
+  
+  return $form;
+  
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_mega_reviews_critics_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
+   if ($form['#id'] == 'views-exposed-form-movie-review-list-page') {
+     $form['title']['#autocomplete_path'] = 'content-title-list/mega_review_critic/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
+     $form['nid']['#autocomplete_path'] = 'content-nid-list/mega_review_critic/autocomplete';
+     $form['nid']['#attributes'] = array('placeholder' => t('Review ID'));
+   }
+
+}
+
+/**
+ * Custom submit callback for Mega reviews form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {  
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+  
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'mega-review-critic') {
+    drupal_set_message('Movie review has been submitted successfully.');
+  } else {
+      drupal_set_message('Movie review has been updated successfully.');
+  }
+   
+}
+
+/**
+ * Implements hook_field_widget_form_alter()
+ * @staticvar int $count
+ * @param type $element
+ * @param type $form_state
+ * @param type $context
+ */
+function itg_mega_reviews_critics_field_widget_form_alter(&$element, &$form_state, $context) {
+  //dpm($element[0]['#field_name']);
+//  if (isset($element[0]['#field_name']) && $element[0]['#field_name'] == 'field_astro_thumb_icon') {    
+//    static $count = 0;   
+//    //dpm($count);
+//    $fid = itg_astro_last_updated_node($count);
+//    $trigered_button = isset($form_state['clicked_button']['#value']) ? $form_state['clicked_button']['#value'] : '';
+//    if($element[0]['#default_value']['fid'] == 0 && $trigered_button != 'Remove') {
+//      $element[0]['#default_value']['fid'] = $fid;      
+//    }        
+//    ++$count;
+//  }
+}
