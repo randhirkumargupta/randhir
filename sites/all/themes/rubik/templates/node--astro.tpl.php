@@ -145,11 +145,11 @@
                           foreach ($node->field_astro_numerology_values['und'] as $num_item) {                           
                             // Print number field                            
                             $output = '';
-                            $output .= '<div class="field-label">Number: '.$num_item['field_story_source_id']['und'][0]['value'].'</div>';
+                            $output .= '<div class="field"><div class="field-label">Number: '.$num_item['field_story_source_id']['und'][0]['value'].'</div>';
                             $output .= '<div class="field-items">';
                             // Print text
                             $output .= '<div class="inner-label">Text: </div>';
-                            $output .= '<div class="inner-item">'.$num_item['field_buzz_description']['und'][0]['value'].'</div>';
+                            $output .= '<div class="inner-item">'.$num_item['field_buzz_description']['und'][0]['value'].'</div></div>';
                             echo $output;
                             // Print audio field 
                             $audio_fid = isset($num_item['field_common_audio_file']['und'][0]['fid']) ? $num_item['field_common_audio_file']['und'][0]['fid'] : '';                                                

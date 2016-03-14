@@ -1084,7 +1084,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 [id*="field-astro-numerology-values-values"] td .form-item{width: 100%;display: inline-block; vertical-align: top;}
 [id*="field-astro-zodiac-values"] td .form-item > div,
 [id*="field-astro-numerology-values-values"] td .form-item > div, 
-.node-astro-form .field-multiple-table tbody .form-item .form-text{float: left; width: 300px;}
+.node-astro-form .field-multiple-table tbody .form-item .form-text{float: left; width: 290px;}
 [id*="field-astro-zodiac-values"] .form-item span.error{padding: 0;}
 .field-name-field-astro-date-range .end-date-wrapper, 
 .field-name-field-field-astro-date-range2 .end-date-wrapper{position: relative;}
