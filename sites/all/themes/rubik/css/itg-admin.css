@@ -1175,7 +1175,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .field-name-field-gallery-image .field-name-field-images .form-type-managed-file label,
 .field-name-field-gallery-image .field-name-field-audio .form-type-managed-file label{display: none;}
 .node-photogallery-form #edit-field-gallery-image .field-multiple-table tbody .form-item .form-text{width: 100%;}
-.node-photogallery-form #edit-field-gallery-image .field-multiple-table tbody td label{display: none;}
+.node-photogallery-form #edit-field-gallery-image .field-multiple-table tbody td .field-name-field-image-syndication .form-type-checkboxes > label{display: none;}
 .node-photogallery-form #edit-field-gallery-image .form-type-managed-file div.description {
     background: rgba(0, 0, 0, 0) url("../images/popup.png") no-repeat scroll 50% 100%;
     border-top: 1px solid #d8e4e0;
