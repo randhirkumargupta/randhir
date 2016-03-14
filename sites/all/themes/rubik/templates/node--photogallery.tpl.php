@@ -189,14 +189,14 @@
           
           
             <?php
-            $ppl_tag = render($content['field_people_tag']);
+            $ppl_tag = render($content['field_story_itg_tags']);
             if (!empty($ppl_tag)):
               ?>
               <div class="expert-details content-box">
                 <h2>Tags to follow</h2>
                 <div class="content-details">
                   <?php
-                  if (!empty($ppl_tag)): print render($content['field_people_tag']);
+                  if (!empty($ppl_tag)): print render($content['field_story_itg_tags']);
                   endif;
                   ?>
                 </div>  
