@@ -42,6 +42,13 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '15';
   $handler->display->display_options['style_plugin'] = 'table';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No result found!';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
@@ -162,6 +169,7 @@ function astro_feature_views_default_views() {
     18 => 0,
   );
   $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['field_story_category_tid']['error_message'] = FALSE;
   /* Filter criterion: Content: Select Frequency (field_astro_frequency) */
   $handler->display->display_options['filters']['field_astro_frequency_value']['id'] = 'field_astro_frequency_value';
   $handler->display->display_options['filters']['field_astro_frequency_value']['table'] = 'field_data_field_astro_frequency';

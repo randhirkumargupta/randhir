@@ -40,31 +40,31 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
       ),
     );
     
-    $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'manage-photogallery', array('attributes' => array('class' => 'button'))),
+    if (!isset($_REQUEST['destination'])) {
+    $destination = '';
+      } else {
+          $destination_array = explode('?', $_REQUEST['destination']);
+          $destination = $destination_array[0];
+      }
+
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
       );
+
       $form['field_story_extra_large_image']['#ajax'] = array(
       'callback' => 'ajax_example_simplest_callback',
       'wrapper' => 'replace_textfield_div',
      );
     $form['#validate'][] = 'itg_photogallery_custom_validate';
     $form['#after_build'][] = 'itg_photogallery_after_build';
-    
-    
-    
-//  $coverid = $form_state['values']['field_story_extra_large_image']['und'][0]['fid'];
-//  $form_state['values']['field_story_large_image']['und'][0]['fid'] = $coverid;
-//  $form_state['values']['field_story_medium_image']['und'][0]['fid'] = $coverid;
-//  $form_state['values']['field_story_small_image']['und'][0]['fid'] = $coverid;
-//  $form_state['values']['field_story_extra_small_image']['und'][0]['fid'] = $coverid;
   } 
 }
 
 /**
  * After build for story form.
- * @param type $form
- * @param type $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function itg_photogallery_after_build($form, &$form_state) {
   //p();
@@ -79,7 +79,6 @@ function itg_photogallery_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   
   drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
-  //drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 3));
   if (arg(0) != 'unpublished-photogallery') {
   drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
   }
@@ -88,8 +87,8 @@ return $form;
 
 /**
  * Implements custom validate for client title
- * @param type $form
- * @param type $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function itg_photogallery_custom_validate(&$form, &$form_state){
   foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
@@ -109,7 +108,7 @@ function itg_photogallery_views_pre_render(&$view) {
     if ($view->name == "manage_photogallery") {
         global $user; // Get user information
         $photo_content = '';
-        $photo_content = '<a href ="./node/add/photogallery?destination=manage-photogallery">Create Photogallery</a>';
+        $photo_content =  l('Create Photogallery', 'node/add/photogallery', array('query' => array('destination' => 'manage-photogallery')));
         $view->attachment_before = $photo_content;
     }    
 }
@@ -118,8 +117,8 @@ function itg_photogallery_views_pre_render(&$view) {
  * Implements hook_field_attach_form().
  * @param type $entity_type
  * @param type $entity
- * @param type $form
- * @param type $form_state
+ * @param array $form
+ * @param array $form_state
  * @param type $langcode
  */
 function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
@@ -166,7 +165,7 @@ function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$for
 /**
  * Implements hook_form_submit().
  * @global type $user
- * @param type $form
+ * @param array $form
  * @param boolean $form_state
  */
 function itg_photogallery_field_add_more_submit($form, &$form_state) {

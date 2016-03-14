@@ -54,6 +54,7 @@
                     </div>
               </div>
               <div class="content-node-view">
+                <?php if (arg(0) == 'node' && arg(2) == 'edit'): ?>  
                 <h2>Zodiac Sign</h2>
                     <div class="content-view">                                                                                           
                       <?php 
@@ -113,7 +114,7 @@
                        ?>
                     </div>
               </div>
-              
+              <?php endif; ?>
               
               
               <div class="content-node-view">
