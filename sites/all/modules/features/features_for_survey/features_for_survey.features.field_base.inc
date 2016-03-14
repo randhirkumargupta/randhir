@@ -152,8 +152,8 @@ function features_for_survey_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'radio' => 'Radio Button',
-        'checkbox' => 'Checkbox',
+        'radios' => 'Radio Button',
+        'checkboxes' => 'Checkbox',
         'rating' => 'Rating',
         'textfield' => 'Text Field',
       ),

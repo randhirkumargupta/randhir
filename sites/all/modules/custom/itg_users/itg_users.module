@@ -31,6 +31,9 @@ function itg_users_cms_user_dashboard() {
    $data = '';
    
    // Code for User menu on dashboard
+   
+   $remove_menu_link = array('manage-poll' => 'Poll', 'manage-survey' => 'Survey');
+   
    $user_menu_tree = menu_tree_all_data('menu-admin-left-menu');
    
    foreach ($user_menu_tree as $key_tree => $val_tree) {     
@@ -42,6 +45,8 @@ function itg_users_cms_user_dashboard() {
        }
      }     
    }
+   
+   $menu_link = array_diff($menu_link, $remove_menu_link);
    
    $data['user_link'] = $menu_link;
    
