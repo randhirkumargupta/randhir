@@ -114,7 +114,7 @@
             <h2>Browse Media</h2>
             <div class="content-details">
             <?php print render($content['field_story_extra_large_image']); ?>
-                        </div>
+            </div>
           </div>
            <?php endif;?>
            
