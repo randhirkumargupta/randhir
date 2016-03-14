@@ -39,6 +39,7 @@
 </div>
 <div id="RecipeImages">
   <h2 class="story-title">Recipe Images</h2>
+  <?php print drupal_render($form['field_story_extra_large_image']); ?>
   <?php print drupal_render($form['field_story_large_image']); ?>
   <?php print drupal_render($form['field_story_medium_image']); ?>
   <?php print drupal_render($form['field_story_small_image']); ?>
