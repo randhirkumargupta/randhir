@@ -3160,7 +3160,7 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
@@ -3202,7 +3202,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
@@ -3216,7 +3216,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
@@ -3452,7 +3452,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3474,7 +3474,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3484,7 +3484,7 @@ my-rejected-photogallery',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3496,7 +3496,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3506,7 +3506,7 @@ my-rejected-photogallery',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3518,7 +3518,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3528,7 +3528,7 @@ my-rejected-photogallery',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3540,7 +3540,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3550,7 +3550,7 @@ my-rejected-photogallery',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3562,7 +3562,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
