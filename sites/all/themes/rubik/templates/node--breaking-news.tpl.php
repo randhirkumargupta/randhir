@@ -114,11 +114,7 @@
             <h2>Browse Media</h2>
             <div class="content-details">
             <?php print render($content['field_story_extra_large_image']); ?>
-            <?php print render($content['field_story_large_image']); ?>
-            <?php print render($content['field_story_medium_image']); ?>
-            <?php print render($content['field_story_small_image']); ?>
-            <?php print render($content['field_story_extra_small_image']); ?>
-            </div>
+                        </div>
           </div>
            <?php endif;?>
            
