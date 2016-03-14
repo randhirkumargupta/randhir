@@ -187,15 +187,17 @@
             </div>
 
             <?php
+            $browsemediaextralarge = render($form['field_story_extra_large_image']);
             $browsemedialarge = render($content['field_story_large_image']);
             $browsemediamedium = render($content['field_story_medium_image']);
             $browsemediasmall = render($content['field_story_small_image']);
             $browsemediamobile = render($content['field_recipe_mobile_image']);
-            if (!empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediamobile)):
+            if (!empty($browsemediaextralarge)|| !empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediamobile)):
               ?>
               <div class="content-node-view">
                 <h2>Recipe Images</h2>
                 <div class="content-details">
+                  <?php print drupal_render($form['field_story_extra_large_image']); ?>
                   <?php print render($content['field_story_large_image']); ?>
                   <?php print render($content['field_story_medium_image']); ?>
                   <?php print render($content['field_story_small_image']); ?>

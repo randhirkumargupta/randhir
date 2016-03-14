@@ -274,32 +274,34 @@ function itg_term_validate($form, &$form_state) {
  * Hiding taxonomy term description field
  */
 function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
-    if (isset($form['#term']['vocabulary_machine_name']) && $form['actions']['submit']['#value'] != 'Delete' && $form['#term']['vocabulary_machine_name'] == 'tags') {
-        $destination         = 'tags-management';
-        //Call valiadte and after build
-        $form['#validate'][] = 'itg_term_validate';
-        // redirect path
-        $form['#submit'][]   = 'term_redirect_handler';
+    if (is_array($form['#term']) && count($form['#term']) > 0) {
+        if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
+            $destination = 'tags-management';
 
-        $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), $destination, array(
-                'attributes' => array(
-                    'class' => 'button'
-                )
-            )),
-            '#weight' => 21,
-            '#value' => t('Cancel')
-        );
+            // Call valiadte and after build
 
-        unset($form['tags']);
-        unset($form['#metatags']);
-        unset($form['actions']['delete']);
-        $form['description']['#access']              = FALSE;
-        $form['relations']['#access']                = FALSE;
-        $form['tags']['und']['#metatags']['#access'] = FALSE;
+            $form['#validate'][] = 'itg_term_validate';
+
+            // redirect path
+
+            $form['#submit'][] = 'term_redirect_handler';
+            $form['actions']['cancel'] = array(
+                '#markup' => l(t('Cancel') , $destination, array(
+                    'attributes' => array(
+                        'class' => 'button'
+                    )
+                )) ,
+                '#weight' => 21,
+                '#value' => t('Cancel')
+            );
+            unset($form['tags']);
+            unset($form['#metatags']);
+            $form['description']['#access'] = FALSE;
+            $form['relations']['#access'] = FALSE;
+            $form['tags']['und']['#metatags']['#access'] = FALSE;
+        }
     }
 }
-
 
 /**
  * Implementation of hook_form_views_exposed_form_alter().
@@ -326,5 +328,24 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
             '#date_year_range' => '-1:+1',
             '#attributes' => array('readonly' => 'readonly'),
         );
+    }
+}
+
+/**
+ * Implementation of hook_views_query_alter
+ * @param array reference $view
+ * @param array reference $query
+ */
+function itg_term_views_query_alter(&$view, &$query) {
+    if (isset($view->name) && $view->name === 'tags_management') {
+        if (isset($_GET['created']['max']['date'])) {
+            $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
+            $max_date_condition = " AND " . $max_date;
+
+            // $max_conditions = $view->query->where[1]['conditions'][1]['field'];
+
+            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][1]['field']);
+            $view->query->where[1]['conditions'][1]['field'] = $max_conditions_array[0] . $max_date_condition;
+        }
     }
 }
