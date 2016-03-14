@@ -82,6 +82,7 @@ function itg_photogallery_after_build($form, &$form_state) {
   if (arg(0) != 'unpublished-photogallery') {
   drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
   }
+  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 3));
 return $form;
 }
 

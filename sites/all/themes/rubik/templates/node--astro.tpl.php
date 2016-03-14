@@ -54,8 +54,9 @@
                     </div>
               </div>
               <div class="content-node-view">
-                <?php if (arg(0) == 'node' && arg(2) == 'edit'): ?>  
+                
                 <h2>Zodiac Sign</h2>
+                <?php if ($node->op == 'Preview') { ?>  
                     <div class="content-view">                                                                                           
                       <?php 
                       
@@ -113,8 +114,14 @@
                       }
                        ?>
                     </div>
+                <?php
+                }
+                else {                  
+                  print '<div class="content-view">'.render($content['field_astro_zodiac']).'</div>';                  
+                }
+              ?>
               </div>
-              <?php endif; ?>
+              
               
               
               <div class="content-node-view">
@@ -130,8 +137,8 @@
               <div class="content-node-view">
                 <h2>Numerology</h2>
                     <div class="content-view">                  
-                        <?php print render($content['field_numerology']); ?>
-                        <?php if ($content['field_numerology'][0]['#markup'] == 'Yes'): ?>
+                        <?php print render($content['field_numerology']); ?>                        
+                        <?php if ($content['field_numerology'][0]['#markup'] == 'Yes' && $node->op == 'Preview') { ?>
                           <?php print render($content['field_astro_frequency2']); ?>
                           <?php print render($content['field_field_astro_date_range2']); ?>                                                    
                           <?php
@@ -172,7 +179,12 @@
                             print '</div>';
                           }
                           ?>
-                        <?php endif; ?>                        
+                        <?php 
+                         } 
+                         else {                           
+                           print render($content['field_astro_numerology_values']);
+                         }
+                        ?>                        
                     </div>
               </div>
           </div>

@@ -684,7 +684,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_small_image',
     'label' => 'Extra small image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -760,7 +760,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_large_image',
     'label' => 'Large image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -837,7 +837,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_medium_image',
     'label' => 'Medium image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
