@@ -44,6 +44,7 @@
   <div class="field-div"><div class="field-label">Issue: </div><div class="field-item"><?php print date('m/d/Y', strtotime($node->field_supp_issue[LANGUAGE_NONE][0]['value'])); ?></div></div>
   <div class="field-div"><div class="field-label">Status: </div><div class="field-item"><?php print $status ? 'Published' : 'Unpublished'; ?></div></div>
   <div class="field-div"><div class="field-label">Attached XML Files:</div>
+    <div class="field-item">
     <?php 
     $count_file = count($node->field_supp_import_xml[LANGUAGE_NONE]);
     $i = 1;
@@ -55,5 +56,7 @@
       $i++;
     }
     
-    ?></div>
+    ?>
+    </div>
+  </div>
 </div>

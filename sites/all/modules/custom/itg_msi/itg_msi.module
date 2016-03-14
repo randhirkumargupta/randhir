@@ -62,35 +62,20 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
   //Set destination for magazine form
   if ($form_id == 'magazine_node_form') {
     $destination = 'manage-magazines';
-    if (isset($_GET['destination'])) {
-      $destination = $_GET['destination'];
-    } else {
-      $destination = 'manage-magazines';
-    }
   }
 
   //Set destination for supplement form
   if ($form_id == 'supplement_node_form') {
     $destination = 'manage-supplements';
-    if (isset($_GET['destination'])) {
-      $destination = $_GET['destination'];
-    } else {
-      $destination = 'manage-supplements';
-    }
     $form['title']['#description'] = '<p>' . t('Please enter supplement title.') . '</p>';
   }
-  
+
   //Set destination for issue form
   if ($form_id == 'issue_node_form') {
-      unset($form['title']);
-      $destination = 'manage-issues';
-      if (isset($_GET['destination'])) {
-        $destination = $_GET['destination'];
-      } else {
-        $destination = 'manage-issues';
-      }
-      $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
-    }
+    unset($form['title']);
+    $destination = 'manage-issues';
+    $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
+  }
   
   //Add cancel button for magazine, supplement and issue
   if($form_id == 'magazine_node_form' || $form_id == 'supplement_node_form' || $form_id == 'issue_node_form'){
