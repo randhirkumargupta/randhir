@@ -26,6 +26,7 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    6 => '6',
     19 => '19',
     10 => '10',
   );
@@ -134,6 +135,8 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['edit_term']['field'] = 'edit_term';
   $handler->display->display_options['fields']['edit_term']['relationship'] = 'tid';
   $handler->display->display_options['fields']['edit_term']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['edit_term']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['edit_term']['element_label_class'] = 'edit-link';
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
   $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
@@ -161,7 +164,7 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<span class="edit-link">[edit_term]</span> | <span class="delete-link"><a href="./texonomy/confirm/ajax/[tid]">Delete</a></span>';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[edit_term] | <span class="delete-link"><a href="./texonomy/confirm/ajax/[tid]">Delete</a></span>';
   /* Sort criterion: Category Manager: changed field */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
   $handler->display->display_options['sorts']['changed']['table'] = 'itg_category_manager';
