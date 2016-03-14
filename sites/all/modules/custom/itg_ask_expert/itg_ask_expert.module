@@ -135,18 +135,8 @@ function itg_ask_expert_views_pre_render(&$view) {
         $chkvalue->field_field_user_name[0]['rendered']['#access'] = FALSE;
         $chkvalue->field_field_user_email[0]['rendered']['#access'] = FALSE;
       }
-      
-      if (empty($chkvalue->field_field_user_message[0]['raw']['value'])) {
-        $chkvalue->node_title = FALSE;
-        $chkvalue->node_created = FALSE;
-        $chkvalue->field_field_user_name[0]['rendered']['#access'] = FALSE;
-        $chkvalue->field_field_user_email[0]['rendered']['#access'] = FALSE;
-        $chkvalue->field_field_disclose_your_identity[0]['rendered']['#access'] = FALSE;
-      }
     }
   }
-  
-  
 }
 
 /**

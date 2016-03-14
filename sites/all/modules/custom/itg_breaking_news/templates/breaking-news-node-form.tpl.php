@@ -41,6 +41,6 @@
 
 
 <h2 id="title-metatags" class="story-title">Meta Tags</h2>
-<?php print drupal_render($form['field_keywords']); ?>
+<?php print drupal_render($form['field_story_itg_tags']); ?>
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
