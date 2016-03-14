@@ -317,6 +317,14 @@ else
   $handler->display->display_options['fields']['field_user_email']['table'] = 'field_data_field_user_email';
   $handler->display->display_options['fields']['field_user_email']['field'] = 'field_user_email';
   $handler->display->display_options['fields']['field_user_email']['hide_empty'] = TRUE;
+  /* Field: Content: City */
+  $handler->display->display_options['fields']['field_user_city']['id'] = 'field_user_city';
+  $handler->display->display_options['fields']['field_user_city']['table'] = 'field_data_field_user_city';
+  $handler->display->display_options['fields']['field_user_city']['field'] = 'field_user_city';
+  /* Field: Content: State */
+  $handler->display->display_options['fields']['field_user_state']['id'] = 'field_user_state';
+  $handler->display->display_options['fields']['field_user_state']['table'] = 'field_data_field_user_state';
+  $handler->display->display_options['fields']['field_user_state']['field'] = 'field_user_state';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
