@@ -1175,7 +1175,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .field-name-field-gallery-image .field-name-field-images .form-type-managed-file label,
 .field-name-field-gallery-image .field-name-field-audio .form-type-managed-file label{display: none;}
 .node-photogallery-form #edit-field-gallery-image .field-multiple-table tbody .form-item .form-text{width: 100%;}
-.node-photogallery-form #edit-field-gallery-image .field-multiple-table tbody td label{display: none;}
+.node-photogallery-form #edit-field-gallery-image .field-multiple-table tbody td .field-name-field-image-syndication .form-type-checkboxes > label{display: none;}
 .node-photogallery-form #edit-field-gallery-image .form-type-managed-file div.description {
     background: rgba(0, 0, 0, 0) url("../images/popup.png") no-repeat scroll 50% 100%;
     border-top: 1px solid #d8e4e0;
@@ -1303,3 +1303,5 @@ div.view table td, div.view table th{max-width: 200px;}
 .itg-term-state > label {color: #666;float: left;font-size: 12px;font-weight: normal;padding: 5px 0; width: 300px;}
 .form-item.form-type-checkbox.form-item-term-state {float: left; width: auto;}
 .node-type-poll .content-node-view .field-label{vertical-align: top;}
+[id*="draggableviews-table-manage-blogs-page"] th.views-field-counter{padding-left: 25px;}
+[id*="field-breaking-content-details-values"] .tabledrag-hide{display: none;}
