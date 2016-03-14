@@ -73,8 +73,7 @@
                   <?php endif; ?>
                   </div>
                 </div>
-              
-              <div class="content-node-view">
+               <div class="content-node-view">
                 <h2>Bloggers</h2>
                 <div class="content-details">
                   <?php
