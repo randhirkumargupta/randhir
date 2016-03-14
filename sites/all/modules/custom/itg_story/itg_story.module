@@ -288,7 +288,7 @@ function itg_story_after_build($form, &$form_state) {
   }
   $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
   $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';
-  $form['revision_information']['log']['#title'] = 'Remarks';
+  // $form['revision_information']['log']['#title'] = 'Remarks';
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;

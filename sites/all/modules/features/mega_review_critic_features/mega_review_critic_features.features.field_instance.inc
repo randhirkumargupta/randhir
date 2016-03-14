@@ -16,7 +16,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'bundle' => 'field_mega_review_review',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Byline',
+    'description' => 'Please Enter Byline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -56,7 +56,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'bundle' => 'field_mega_review_review',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Description',
+    'description' => 'Please Enter Description',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -93,7 +93,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'bundle' => 'field_mega_review_review',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Headline',
+    'description' => 'Please Enter Headline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -130,7 +130,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'bundle' => 'field_mega_review_review',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Review URL Link',
+    'description' => 'Please Enter Review URL Link',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -167,7 +167,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'bundle' => 'field_mega_review_review',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Rating',
+    'description' => 'Please Select Rating',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -934,11 +934,11 @@ function mega_review_critic_features_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 0,
+            'imce' => 'imce',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -946,7 +946,7 @@ function mega_review_critic_features_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -976,6 +976,11 @@ function mega_review_critic_features_field_default_field_instances() {
   t('Large image');
   t('Medium image');
   t('Movie Plot');
+  t('Please Enter Byline');
+  t('Please Enter Description');
+  t('Please Enter Headline');
+  t('Please Enter Review URL Link');
+  t('Please Select Rating');
   t('Rating');
   t('Review');
   t('Review URL Link');

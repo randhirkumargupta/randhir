@@ -49,6 +49,7 @@ function itg_workflow_after_build($form, &$form_state) {
 // $form['revision_information']['log']['#weight'] = 7;
 // $form['revision_information']['workbench_moderation_state_new']['#weight'] = 6;
  
+ $form['revision_information']['log']['#title'] = 'Remarks';
  
  // hide workbench dropdown
   drupal_add_js('jQuery(document).ready(function() {
