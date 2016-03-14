@@ -1,5 +1,5 @@
 name = Feature for recipe
-description = Recipe Management Updated
+description = Recipe Management field Updated
 core = 7.x
 package = Features
 version = 7.x-1.0-beta2
