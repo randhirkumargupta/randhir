@@ -72,12 +72,12 @@
              print '</div>';
              } ?>
               <?php
-              $keywords = render($content['field_keywords']);
+              $keywords = render($content['field_story_itg_tags']);
   
                   if (!empty($keywords)):
               ?>
               <div class="display content-box">
-              <?php print render($content['field_keywords']); ?>
+              <?php print render($content['field_story_itg_tags']); ?>
               </div>
               <?php endif; ?>
                  </div>
