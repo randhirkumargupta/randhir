@@ -130,25 +130,13 @@ function itg_ask_expert_views_pre_render(&$view) {
 
     foreach ($view->result as $chkvalue) {
 
-      if (isset($chkvalue->field_field_disclose_your_identity[0]['raw']['value'])) {
-        if ($chkvalue->field_field_disclose_your_identity[0]['raw']['value'] != '1') {
+      if ($chkvalue->field_field_disclose_your_identity[0]['raw']['value'] != '1') {
 
         $chkvalue->field_field_user_name[0]['rendered']['#access'] = FALSE;
         $chkvalue->field_field_user_email[0]['rendered']['#access'] = FALSE;
       }
-      }
-      
-      if (empty($chkvalue->field_field_user_message[0]['raw']['value'])) {
-        $chkvalue->node_title = FALSE;
-        $chkvalue->node_created = FALSE;
-        $chkvalue->field_field_user_name[0]['rendered']['#access'] = FALSE;
-        $chkvalue->field_field_user_email[0]['rendered']['#access'] = FALSE;
-        $chkvalue->field_field_disclose_your_identity[0]['rendered']['#access'] = FALSE;
-      }
     }
   }
-  
-  
 }
 
 /**

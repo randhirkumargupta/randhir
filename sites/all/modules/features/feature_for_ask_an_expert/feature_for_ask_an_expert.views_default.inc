@@ -277,6 +277,8 @@ else
 
   /* Display: Ask an expert question answer */
   $handler = $view->new_display('page', 'Ask an expert question answer', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Ask an expert question answer';
   $handler->display->display_options['display_description'] = 'Ask an expert question answer';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
@@ -351,6 +353,11 @@ else
   $handler->display->display_options['filters']['type']['value'] = array(
     'ask_an_expert' => 'ask_an_expert',
   );
+  /* Filter criterion: Content: Answer (field_user_message) */
+  $handler->display->display_options['filters']['field_user_message_value']['id'] = 'field_user_message_value';
+  $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
+  $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';
+  $handler->display->display_options['filters']['field_user_message_value']['operator'] = 'not empty';
   $handler->display->display_options['path'] = 'ask-an-expert-question-answer';
 
   /* Display: Ask an expert history */
@@ -362,6 +369,12 @@ else
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
   );
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
