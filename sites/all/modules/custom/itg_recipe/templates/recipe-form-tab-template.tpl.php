@@ -12,5 +12,5 @@
   <span class="target-link" data-target-id="RecipeImages">Recipe Images</span>
   <span class="target-link" data-target-id="RecipeSyndication">Syndication</span>
   <span class="target-link" data-target-id="RecipeSection">Recipe Section</span>
-  <span class="target-link" data-target-id="Keywords">Meta Tags</span>
+  <span class="target-link" data-target-id="edit-metatags">Meta Tags</span>
 </div>

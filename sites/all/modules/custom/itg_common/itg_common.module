@@ -79,11 +79,37 @@ function itg_common_dropdown_supplement($id = '') {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  // P($form_id);
+  
+  if ($form_id != 'ask_an_expert_node_form') {
+    if (isset($form['title']['#title'])) {
+      $form['title']['#description'] = $form['title']['#title'];
+    }
+  }
   // Extra meta tags element hide from form
   if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form') {
     $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
   }
+  //Auto Generate image according photogallery
+   if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form') {
+     $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<div class="img-crt"></div>');
+     $coverid = $form_state['values']['field_story_extra_large_image']['und'][0]['fid'];
+     $form_state['values']['field_story_large_image']['und'][0]['fid'] = $coverid;
+     $form_state['values']['field_story_medium_image']['und'][0]['fid'] = $coverid;
+     $form_state['values']['field_story_small_image']['und'][0]['fid'] = $coverid;
+     $form_state['values']['field_story_extra_small_image']['und'][0]['fid'] = $coverid;
+     $form['#after_build'][] = 'itg_common_image_generate';
+   }
+}
+
+/**
+ * Implement after build for image generate according large image. 
+ * @param Array $form
+ * @param Array $form_state
+ * @return 
+ */
+function itg_common_image_generate($form, &$form_state){
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_image.js', array('weight' => 3));
+  return $form;
 }
 
 /**
@@ -111,13 +137,16 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
  */
 function itg_meta_tags_extra_element_hide($form, &$form_state) {
   global $user, $base_url;
-
+  
   if (!isset($_REQUEST['destination'])) {
-    $_REQUEST['destination'] = '';
+    $destination = '';
+  } else {
+      $destination_array = explode('?', $_REQUEST['destination']);
+      $destination = $destination_array[0];
   }
 
   $form['actions']['cancel'] = array(
-    '#markup' => l(t('Cancel'), $_REQUEST['destination'], array('attributes' => array('class' => 'button'))),
+    '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
   );
 
@@ -151,4 +180,16 @@ function itg_common_views_pre_render(&$view) {
     
     $view->attachment_before = $header_content;
   }    
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {    
+   if (isset($form['title'])) {
+    $form['title']['#maxlength']= 255;
+   }
 }

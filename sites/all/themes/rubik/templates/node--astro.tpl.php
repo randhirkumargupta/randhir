@@ -54,7 +54,9 @@
                     </div>
               </div>
               <div class="content-node-view">
+                
                 <h2>Zodiac Sign</h2>
+                <?php if ($node->op == 'Preview') { ?>  
                     <div class="content-view">                                                                                           
                       <?php 
                       
@@ -112,6 +114,12 @@
                       }
                        ?>
                     </div>
+                <?php
+                }
+                else {                  
+                  print '<div class="content-view">'.render($content['field_astro_zodiac']).'</div>';                  
+                }
+              ?>
               </div>
               
               
@@ -129,19 +137,19 @@
               <div class="content-node-view">
                 <h2>Numerology</h2>
                     <div class="content-view">                  
-                        <?php print render($content['field_numerology']); ?>
-                        <?php if ($content['field_numerology'][0]['#markup'] == 'Yes'): ?>
+                        <?php print render($content['field_numerology']); ?>                        
+                        <?php if ($content['field_numerology'][0]['#markup'] == 'Yes' && $node->op == 'Preview') { ?>
                           <?php print render($content['field_astro_frequency2']); ?>
                           <?php print render($content['field_field_astro_date_range2']); ?>                                                    
                           <?php
                           foreach ($node->field_astro_numerology_values['und'] as $num_item) {                           
                             // Print number field                            
                             $output = '';
-                            $output .= '<div class="field-label">Number: '.$num_item['field_story_source_id']['und'][0]['value'].'</div>';
+                            $output .= '<div class="field"><div class="field-label">Number: '.$num_item['field_story_source_id']['und'][0]['value'].'</div>';
                             $output .= '<div class="field-items">';
                             // Print text
                             $output .= '<div class="inner-label">Text: </div>';
-                            $output .= '<div class="inner-item">'.$num_item['field_buzz_description']['und'][0]['value'].'</div>';
+                            $output .= '<div class="inner-item">'.$num_item['field_buzz_description']['und'][0]['value'].'</div></div>';
                             echo $output;
                             // Print audio field 
                             $audio_fid = isset($num_item['field_common_audio_file']['und'][0]['fid']) ? $num_item['field_common_audio_file']['und'][0]['fid'] : '';                                                
@@ -171,7 +179,12 @@
                             print '</div>';
                           }
                           ?>
-                        <?php endif; ?>                        
+                        <?php 
+                         } 
+                         else {                           
+                           print render($content['field_astro_numerology_values']);
+                         }
+                        ?>                        
                     </div>
               </div>
           </div>

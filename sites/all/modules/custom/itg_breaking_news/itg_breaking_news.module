@@ -124,11 +124,6 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id)
 
         $form['field_publish_time'][LANGUAGE_NONE][0]['value']['date']['#disabled'] = TRUE;
         $destination = 'breaking-news';
-        if (isset($_GET['destination'])) {
-            $destination = $_GET['destination'];
-        } else {
-            $destination = 'breaking-news';
-        }
         $form['actions']['cancel'] = array(
             '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
             '#weight' => 21,

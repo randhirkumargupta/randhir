@@ -87,7 +87,7 @@ body{
     }
 }
 
-.success-message{
+.success-message, .messages--status{
   color:#009c00;
   font-size: 13px;
   @extend .pdb-10;
@@ -98,6 +98,7 @@ input[type="text"], select, input[type="password"]{
   height: 32px;
   line-height: 30px;
   padding: 5px;
+  color: #333;
 }
 .form-required, .error{
   color: red;
@@ -174,6 +175,15 @@ input[type="text"], select, input[type="password"]{
     border: 1px solid #ddd;
     background-color: #eee;
   }
+  .messages--status, .messages--error{
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .messages--error{
+    .messages__list{
+      padding-left: 15px;
+    }
+  }
 } 
 .login{
   line-height: 58px;
@@ -200,7 +210,10 @@ input[type="text"], select, input[type="password"]{
     @extend .mb-10;
     .form-item{@extend .mr-0;}
   }
-  .captcha{@extend .pd-10;}
+  .captcha{
+    @extend .pd-10;
+    div, iframe{max-width: 270px;}
+  }
   .form-text{@extend .full;}
   .form-submit{@extend .btn; @extend .mt-10;}
   .form-field-name-field-disclose-your-identity{

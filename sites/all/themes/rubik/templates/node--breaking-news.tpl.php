@@ -72,12 +72,12 @@
              print '</div>';
              } ?>
               <?php
-              $keywords = render($content['field_keywords']);
+              $keywords = render($content['field_story_itg_tags']);
   
                   if (!empty($keywords)):
               ?>
               <div class="display content-box">
-              <?php print render($content['field_keywords']); ?>
+              <?php print render($content['field_story_itg_tags']); ?>
               </div>
               <?php endif; ?>
                  </div>
@@ -114,10 +114,6 @@
             <h2>Browse Media</h2>
             <div class="content-details">
             <?php print render($content['field_story_extra_large_image']); ?>
-            <?php print render($content['field_story_large_image']); ?>
-            <?php print render($content['field_story_medium_image']); ?>
-            <?php print render($content['field_story_small_image']); ?>
-            <?php print render($content['field_story_extra_small_image']); ?>
             </div>
           </div>
            <?php endif;?>

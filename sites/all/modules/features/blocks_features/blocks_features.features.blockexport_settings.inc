@@ -3160,12 +3160,12 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
   'title' => 'Category Log',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 221,
@@ -3179,7 +3179,7 @@ node/*/edit',
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
   'title' => 'Category Log',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 222,
@@ -3193,7 +3193,7 @@ node/*/edit',
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
   'title' => 'Category Log',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 223,
@@ -3202,12 +3202,12 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
   'title' => 'Category Log',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 224,
@@ -3216,12 +3216,12 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'taxonomy/term/*/edit',
   'title' => 'Category Log',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 225,
@@ -3452,7 +3452,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3474,7 +3474,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3484,7 +3484,7 @@ my-rejected-photogallery',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3496,7 +3496,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3506,7 +3506,7 @@ my-rejected-photogallery',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3518,7 +3518,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3528,7 +3528,7 @@ my-rejected-photogallery',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3540,7 +3540,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3550,7 +3550,7 @@ my-rejected-photogallery',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3562,7 +3562,7 @@ my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
 my-rejected-photogallery',
-  'title' => '',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -3746,7 +3746,7 @@ node/add/recipe',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/astro
@@ -3791,7 +3791,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/astro
@@ -3806,7 +3806,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/astro
@@ -3821,7 +3821,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/astro
@@ -3940,6 +3940,11 @@ node/*/edit',
   'rid' => 5,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_category_manager',
+  'delta' => 'sef_url_log',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_photogallery',
   'delta' => 'photogallery_tab_form_block',
   'rid' => 6,
@@ -4080,6 +4085,11 @@ node/*/edit',
   'rid' => 9,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_category_manager',
+  'delta' => 'sef_url_log',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_photogallery',
   'delta' => 'photogallery_tab_form_block',
   'rid' => 10,
@@ -4113,6 +4123,11 @@ node/*/edit',
   'module' => 'system',
   'delta' => 'main',
   'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_category_manager',
+  'delta' => 'sef_url_log',
+  'rid' => 20,
 );
   $export['block_role'][] = array(
   'module' => 'itg_photogallery',

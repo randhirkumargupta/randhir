@@ -58,7 +58,7 @@
                 <?php
                 $short_description = render($content['field_blog_short_description']);
                 if (!empty($short_description)):
-                  print $short_description;
+                  print render($content['field_blog_short_description']);
                   ?>
                 <?php endif; ?>
               </div>
@@ -70,10 +70,10 @@
                   if (!empty($long_description)):
                     print render($content['field_blog_long_description']);
                     ?>
+                  <?php endif; ?>
                   </div>
                 </div>
-              <?php endif; ?>
-              <div class="content-node-view">
+               <div class="content-node-view">
                 <h2>Bloggers</h2>
                 <div class="content-details">
                   <?php
@@ -89,9 +89,9 @@
                 <h2>Sections</h2>
                 <div class="content-details">
                   <?php
-                  $selection = render($content['field_blog_category_selection']);
+                  $selection = render($content['field_story_category']);
                   if (!empty($selection)):
-                    print render($content['field_blog_category_selection']);
+                    print render($content['field_story_category']);
                     ?>
                   </div>
                 </div>

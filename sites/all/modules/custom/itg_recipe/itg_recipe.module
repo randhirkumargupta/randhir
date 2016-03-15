@@ -34,16 +34,29 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       );
       $form['#after_build'][] = 'itg_recipe_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_recipe_form_custom_callback';
+      //$form['#validate'][] = 'itg_recipe_fields_validate';
       break;
   }
 }
+/**
+ * Custom validation function for Recipe node.
+ * @param array $form
+ * @param array $form_state
+ */
+//function itg_recipe_fields_validate($form, &$form_state) {    
+//  // check manadotory field
+//  if ($form_state['values']['field_recipe_content_type']['und'][0]['value'] == 'Text'){
+//    form_set_error('field_recipe_description', 'Please enter Description.');
+//}
+//}
 /**
  * After submit recipe
  * @param Array $form
  * @param Array $form_state
  */
 function itg_recipe_form_custom_callback($form, &$form_state) {
-   if (isset($_SESSION['messages'])) {
+  
+  if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
    if(arg(2) == 'edit'){
@@ -52,7 +65,7 @@ function itg_recipe_form_custom_callback($form, &$form_state) {
      $op = 'created';
   } 
   drupal_set_message(t('Recipe has been '.$op.' successfully.'));
-  $_GET['destination'] = 'recipe-management'; 
+  $_GET['destination'] = 'recipe-management';
 }
 /**
  * After build for Recipe form.
@@ -60,12 +73,11 @@ function itg_recipe_form_custom_callback($form, &$form_state) {
  * @param Array $form_state
  */
 function itg_recipe_after_build($form, &$form_state) {
-  global $user;
 
   global $user, $base_url;
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
-
+  //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -107,7 +119,7 @@ function itg_recipe_theme($existing, $type, $theme, $path) {
       'template' => 'recipe-form-tab-template',
       'path' => drupal_get_path('module', 'itg_recipe') . '/templates',
       'variables' => array('data' => NULL),
-    )
+    ),
   );
   return $themes;
 }
