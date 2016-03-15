@@ -341,22 +341,3 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
         );
     }
 }
-
-/**
- * Implementation of hook_views_query_alter
- * @param array reference $view
- * @param array reference $query
- */
-function itg_term_views_query_alter(&$view, &$query) {
-    if (isset($view->name) && $view->name === 'tags_management') {
-        if (isset($_GET['created']['max']['date'])) {
-            $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
-            $max_date_condition = " AND " . $max_date;
-
-            // $max_conditions = $view->query->where[1]['conditions'][1]['field'];
-
-            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][1]['field']);
-            $view->query->where[1]['conditions'][1]['field'] = $max_conditions_array[0] . $max_date_condition;
-        }
-    }
-}
