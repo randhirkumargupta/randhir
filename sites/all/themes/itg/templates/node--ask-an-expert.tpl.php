@@ -50,9 +50,7 @@
    print '<div class="field-label"><strong>Post date:</strong>&nbsp;</div><div class="field-items">'.format_date($node->created, 'ask_an_expert').'</div>';
    ?>
   <?php print render($content['field_user_message']);?>
-  
   <?php print render($content['links']); ?>
-
   <?php print render($content['comments']); ?>
 
 </article>
