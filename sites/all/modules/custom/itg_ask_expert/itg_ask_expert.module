@@ -105,7 +105,7 @@ function itg_ask_expert_form_custom_callback($form, &$form_state) {
       $_SESSION['ask_an_expert_message'] = 'Your query has been successfully submitted, our expert will reply you back soon.';
     }
     else {
-      drupal_set_message('Message updated successfully.');
+      drupal_set_message(t('Message updated successfully.'));
     }
 
 
