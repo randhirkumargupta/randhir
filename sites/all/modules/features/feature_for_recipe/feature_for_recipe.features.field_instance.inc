@@ -82,7 +82,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -193,7 +193,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -232,7 +232,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -314,7 +314,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -356,7 +356,7 @@ function feature_for_recipe_field_default_field_instances() {
         'rows' => 20,
       ),
       'type' => 'text_textarea',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -395,7 +395,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -442,49 +442,7 @@ function feature_for_recipe_field_default_field_instances() {
         'replace_label' => FALSE,
       ),
       'type' => 'field_collection_embed',
-      'weight' => 22,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_recipe_kicker_headline'.
-  $field_instances['node-recipe-field_recipe_kicker_headline'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter Kicker headline.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_recipe_kicker_headline',
-    'label' => 'Kicker headline',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 23,
     ),
   );
 
@@ -526,7 +484,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -565,7 +523,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -604,7 +562,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -680,49 +638,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 27,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_recipe_strap_headline'.
-  $field_instances['node-recipe-field_recipe_strap_headline'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter Strap headline (Short Headline).',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_recipe_strap_headline',
-    'label' => 'Strap headline (Short Headline)',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 28,
     ),
   );
 
@@ -761,7 +677,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 28,
+      'weight' => 29,
     ),
   );
 
@@ -800,7 +716,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -949,7 +865,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 30,
+      'weight' => 31,
     ),
   );
 
@@ -991,7 +907,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 29,
+      'weight' => 30,
     ),
   );
 
@@ -1033,7 +949,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -1109,7 +1025,49 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 23,
+      'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance: 'node-recipe-field_story_kicker_text'.
+  $field_instances['node-recipe-field_story_kicker_text'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter kicker headline.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 36,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_kicker_text',
+    'label' => 'Kicker headline',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 9,
     ),
   );
 
@@ -1185,7 +1143,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -1261,7 +1219,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 25,
+      'weight' => 26,
     ),
   );
 
@@ -1306,7 +1264,49 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 10,
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'node-recipe-field_story_short_headline'.
+  $field_instances['node-recipe-field_story_short_headline'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter strap headline.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 35,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_short_headline',
+    'label' => 'Strap headline (Short Headline)',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
     ),
   );
 
@@ -1382,7 +1382,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 26,
+      'weight' => 27,
     ),
   );
 
@@ -1424,7 +1424,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -1584,11 +1584,11 @@ function feature_for_recipe_field_default_field_instances() {
 ');
   t('Please enter City.');
   t('Please enter Courtesy.');
-  t('Please enter Kicker headline.');
   t('Please enter Long headline.');
-  t('Please enter Strap headline (Short Headline).');
   t('Please enter Time (e.g.15-30 min, 30 min - 1hr etc.)');
   t('Please enter WAP headline.');
+  t('Please enter kicker headline.');
+  t('Please enter strap headline.');
   t('Please select Ailment (e.g. Cancer, Hypertension etc.)');
   t('Please select Calorie Type (e.g. Medium etc.)');
   t('Please select Content type.');
