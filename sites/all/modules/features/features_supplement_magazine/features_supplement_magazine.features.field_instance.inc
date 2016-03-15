@@ -671,7 +671,7 @@ function features_supplement_magazine_field_default_field_instances() {
     'bundle' => 'magazine',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please check to publish this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
