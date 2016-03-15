@@ -144,10 +144,13 @@ function itg_breaking_news_form_custom_callback($form, &$form_state)
     if (isset($_SESSION['messages'])) {
         unset($_SESSION['messages']);
     }
-
-    drupal_set_message('News has been created successfully.');
-    $_GET['destination'] = 'breaking-news';
-
+    
+    if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'breaking-news') {
+    drupal_set_message('Breaking News has been created successfully.');
+  } else {
+      drupal_set_message('Breaking News has been updated successfully.');
+  }
+    
 }
 
 /**
