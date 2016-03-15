@@ -59,14 +59,9 @@ function itg_survey_survey_form() {
       $form['question_heading' . $num] = array(
           '#type' => 'markup',
           '#markup' => '<h2 class="question-heading">' . ($num + 1) . '. ' . $question . '?</h2>',
-          '#prefix' => '<div id="question-container-'.$num.'">'
+          '#prefix' => '<div id="question-container-'.$num.'" class="question-container">'
       );
-
-      $form['answer' . $num] = array(
-          '#type' => 'markup',
-          '#markup' => '<h2>Answer: ' . $required . '</h2> ',
-      );
-
+      
       $form['question' . $num] = array(
           '#type' => 'hidden',
           '#value' => $question,
@@ -87,6 +82,12 @@ function itg_survey_survey_form() {
           '#value' => $answer_type,
       );
       
+      $form['answer' . $num] = array(
+          '#type' => 'markup',
+          '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
+          '#markup' => '<h2 class="answer-heading">Answer: ' . $required . '</h2> ',
+      );
+
       if ($answer_type == 'textfield') {
         $txt_num = 0;
         foreach ($all_ans_options[$num] as $val_txt_option) {
@@ -94,6 +95,7 @@ function itg_survey_survey_form() {
               '#title' => $val_txt_option,
               '#type' => $answer_type,
               '#size' => 30,
+              '#suffix' => '</div>',
           );
           $txt_num++;
         }
@@ -105,6 +107,7 @@ function itg_survey_survey_form() {
               '#title' => t($rating_option),
               '#type' => 'checkboxes',
               '#options' => $arr,
+              '#suffix' => '</div>',
           );
           $rating_num++;
         }
@@ -113,6 +116,7 @@ function itg_survey_survey_form() {
             '#title' => t(''),
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
+            '#suffix' => '</div>',
         );
       }
 
