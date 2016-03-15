@@ -39,16 +39,18 @@
     ?>
    <div class="field field-name-field-user-name field-type-text field-label-inline clearfix"><div class="field-label">Question:&nbsp;</div><div class="field-items"><div class="field-item even"><?php print $title; ?></div></div></div>
    <?php
-   $identity = $content['field_disclose_your_identity']['#items']['0']['value'];
-   if(!empty($identity)) {
-   print render($content['field_user_name']);
-   print render($content['field_user_email']);
+   // get identity value of ask an expert front end user
+   $identity = $content['field_user_name']['#object']->field_disclose_your_identity[LANGUAGE_NONE]['0']['value'];
+   if (!empty($identity)) {
+     print render($content['field_user_name']);
+     print render($content['field_user_email']);
    }
    print render($content['field_user_city']);
    print render($content['field_user_state']);
+   print '<div class="field-label"><strong>Post date:</strong>&nbsp;</div><div class="field-items">'.format_date($node->created, 'ask_an_expert').'</div>';
    ?>
   <?php print render($content['field_user_message']);?>
-   
+  
   <?php print render($content['links']); ?>
 
   <?php print render($content['comments']); ?>
