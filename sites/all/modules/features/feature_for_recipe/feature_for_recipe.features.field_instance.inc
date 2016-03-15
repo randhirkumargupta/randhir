@@ -635,7 +635,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_recipe_mobile_image',
     'label' => 'Mobile image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -1140,7 +1140,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_large_image',
     'label' => 'Large image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -1216,7 +1216,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_medium_image',
     'label' => 'Medium image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -1337,7 +1337,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_small_image',
     'label' => 'Small image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,

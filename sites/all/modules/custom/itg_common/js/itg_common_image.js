@@ -9,7 +9,7 @@
                 });    
                 $('.img-crt').click(function() {
                 var pic = $('#edit-field-story-extra-large-image .image-preview').html();
-                var pic = '<div class="jqpicmain"><div class="jqpic">' + pic + '</div><span class="remove-image">Remove</span></div>';
+                var pic = '<div class="jqpicmain"><div class="jqpic">' + pic + '</div><a class="remove-image button" href="javascript:;">Remove</a></div>';
                 if ($('#edit-field-story-extra-large-image .image-preview').length != 0) {
                     if ((!$('#edit-field-story-large-image .image-widget').hasClass("custompic")) && ($('#edit-field-story-large-image .image-preview').length == 0)) {
                         $('#edit-field-story-large-image .image-widget-data').hide();
@@ -37,7 +37,7 @@
                     alert('Please upload Extra large image.');
                 }
 
-                $('.image-widget span.remove-image').click(function() {
+                $('.image-widget a.remove-image').click(function() {
 
                     var pid = $(this).parent().parent().parent().parent().attr('id');
                     $('#' + pid + ' .image-widget-data').show();
