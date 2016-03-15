@@ -194,7 +194,7 @@ function itg_survey_node_validate($node, $form, &$form_state) {
  * @return Array
  */
 function itg_survey_get_current_survey() {
-  $curr_time = time();
+  $curr_time = strtotime(date('Y-m-d').' 00:00:00');
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'))
           ->condition('n.type', 'survey', '=')
@@ -209,6 +209,7 @@ function itg_survey_get_current_survey() {
   //Load Node
   $node = node_load($nid);
   $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+
   if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
     if ($survey_end_date < $curr_time) {
       return FALSE;

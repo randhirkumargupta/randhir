@@ -49,13 +49,17 @@ function itg_survey_survey_form() {
       );
 
       //Array collection of both arrays
-      $all_ans_options[$num] = array_merge($answer_options[$num], $more_ans_option[$num]);
-
-
+      if(!empty($more_ans_option[$num])){
+        $all_ans_options[$num] = array_merge($answer_options[$num], $more_ans_option[$num]);
+      } else {
+        $all_ans_options[$num] = $answer_options[$num];
+      }
+     
       //Prepare form
       $form['question_heading' . $num] = array(
           '#type' => 'markup',
-          '#markup' => '<h2>' . ($num + 1) . '. ' . $question . '?</h2>',
+          '#markup' => '<h2 class="question-heading">' . ($num + 1) . '. ' . $question . '?</h2>',
+          '#prefix' => '<div id="question-container-'.$num.'">'
       );
 
       $form['answer' . $num] = array(
@@ -82,7 +86,7 @@ function itg_survey_survey_form() {
           '#type' => 'hidden',
           '#value' => $answer_type,
       );
-
+      
       if ($answer_type == 'textfield') {
         $txt_num = 0;
         foreach ($all_ans_options[$num] as $val_txt_option) {
@@ -93,6 +97,17 @@ function itg_survey_survey_form() {
           );
           $txt_num++;
         }
+      } elseif ($answer_type == 'rating') {
+        $rating_num = 0;
+        foreach ($all_ans_options[$num] as $rating_option) {
+          $arr = array(1 => '', 2 => '', 3 => '', 4 => '', 5 => '');
+          $form['answer_option' . $num . '_' . $rating_num] = array(
+              '#title' => t($rating_option),
+              '#type' => 'checkboxes',
+              '#options' => $arr,
+          );
+          $rating_num++;
+        }
       } else {
         $form['answer_option' . $num] = array(
             '#title' => t(''),
@@ -101,7 +116,20 @@ function itg_survey_survey_form() {
         );
       }
 
+      $form['survey_submit_' . $num] = array(
+        '#type' => 'submit',
+        '#value' => 'Next',
+        '#name' => 'btn_' . $num,
+        '#ajax' => array(
+            'callback' => 'survey_form_ajax_handler',
+            'effect' => 'fade',
+        ),
+          '#suffix' => '</div>',
+
+     );
+
       $num++;
+      
     } //End of for loop
 
     $form['question_total'] = array(
@@ -113,16 +141,22 @@ function itg_survey_survey_form() {
         '#type' => 'hidden',
         '#value' => $node->nid,
     );
-    
-   $form['textfield_val'] = array(
+
+    $form['textfield_total_count'] = array(
         '#type' => 'hidden',
         '#value' => $txt_num,
     );
-   
-    $form['submit'] = array(
-        '#type' => 'submit',
-        '#value' => 'Submit',
+    
+    $form['rating_total_count'] = array(
+        '#type' => 'hidden',
+        '#value' => $rating_num,
     );
+
+//    $form['survey_submit'] = array(
+//        '#type' => 'submit',
+//        '#value' => 'Submit',
+//    );
+    
   } else { //If no survey found
     $form['no_survey'] = array(
         '#type' => 'markup',
@@ -138,12 +172,16 @@ function itg_survey_survey_form() {
  * @param Array $form
  * @param Array $form_state
  */
-function itg_survey_survey_form_validate($form, &$form_state){
+function itg_survey_survey_form_validate($form, &$form_state) {
+$btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
+$num = $btn_num_arr[1];
 
   $form_detail = $form_state['values'];
   $ans_flag = FALSE;
-  
-  for ($num = 0; $num < $form_detail['question_total']; $num++) {
+  $txt_ans_flag = FALSE;
+  $rating_ans_flag = FALSE;
+
+  //for ($num = 0; $num < $form_detail['question_total']; $num++) {
     if ($form_detail['question_type' . $num] === 'checkboxes') {
       if ($form_detail['question_skip' . $num] !== 'yes') {
         foreach ($form_detail['answer_option' . $num] as $key => $value) {
@@ -155,16 +193,37 @@ function itg_survey_survey_form_validate($form, &$form_state){
           form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
         }
       }
-    } elseif ($form_detail['question_type' . $num] === 'radios') {
+    }
+    
+   
+    if ($form_detail['question_type' . $num] === 'radios') {
       if ($form_detail['question_skip' . $num] !== 'yes') {
         if (empty($form_detail['answer_option' . $num])) {
           form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
         }
       }
-    } else {
+    } 
+    
+    if ($form_detail['question_type' . $num] === 'rating') {
+      if ($form_detail['question_skip' . $num] !== 'yes') {
+        for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
+          for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
+            if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] !== 0) {
+              $rating_ans_flag = TRUE;
+            }
+          }
+        }
+        if (!$rating_ans_flag) {
+          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
+        }
+      }
+    } 
+    
+    
+    if($form_detail['question_type' . $num] === 'textfield'){
       if ($form_detail['question_skip' . $num] !== 'yes') {
         $txt_ans_flag = FALSE;
-        for ($text_field = 0; $text_field < $form_detail['textfield_val']; $text_field++) {
+        for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
           if ($form_detail['answer_option' . $num . '_' . $text_field] !== '') {
             $txt_ans_flag = TRUE;
           }
@@ -174,7 +233,8 @@ function itg_survey_survey_form_validate($form, &$form_state){
         }
       }
     }
-  }
+    
+  //}
 }
 
 /**
@@ -199,6 +259,10 @@ function itg_survey_survey_form_submit($form, &$form_state){
           ))
           ->execute();
   drupal_set_message(t('Survey has been saved successfully.'));
+}
+
+function survey_form_ajax_handler(&$form, &$form_state){
+  return $form;
 }
 
 ?>
