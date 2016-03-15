@@ -1294,6 +1294,8 @@ div.view table td, div.view table th{max-width: 200px;}
 .node-survey-form .field-multiple-table tbody div.file-widget .button-remove{margin-left: 5px;}
 .node-type-issue .block-content > .cm-node-view{overflow: visible;}
 .page-content .field-name-field-supp-issue .form-type-date-popup div.description, 
+.page-content .field-name-field-print-magazine-issue-date .form-type-date-popup div.description, 
+.page-content .field-name-field-magazine-publish .form-item div.description, 
 .page-content .field-name-field-supp-publish .form-item div.description{left: 200px;} 
 [id*="field-astro-numerology-values-values"] .form-item.form-type-textfield span.error{padding-left: 150px;}
 [id*="field-astro-numerology-values-values"] .form-item.form-type-textarea span.error{padding-left: 0;}
