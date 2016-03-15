@@ -54,7 +54,7 @@ function itg_astro_after_build($form, &$form_state) {
       $form['field_astro_numerology_values']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Enter Text').'<span class="form-required" title="This field is required."> *</span>';
     }
     $name = itg_astro_sunsign_name($i);  
-    $form['field_astro_zodiac']['und'][$i]['#title'] = $name;     
+    $form['field_astro_zodiac']['und'][$i]['#title'] = t($name);     
     $form['field_astro_zodiac']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Text').'<span class="form-required" title="This field is required."> *</span>'; 
     $form['field_astro_zodiac']['und'][$i]['field_astro_thumb_icon']['und'][0]['#title'] = t('Thumbnail Icon'). '<span class="form-required" title="This field is required."> *</span>';     
   }
@@ -126,10 +126,10 @@ function itg_astro_field_collection_item_presave(FieldCollectionItemEntity $fiel
 function itg_astro_validate_astro($form, &$form_state) {    
   // check manadotory field    
   if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_numerology_values']['und'][0]['field_story_source_id']['und'][0]['value'] == '') {
-    form_set_error('field_story_source_id', 'Please enter number.');
+    form_set_error('field_story_source_id', t('Please enter number.'));
   }
   if ($form_state['values']['field_numerology']['und'][0]['value'] == 1 && $form_state['values']['field_astro_numerology_values']['und'][0]['field_buzz_description']['und'][0]['value'] == '') {
-    form_set_error('field_story_source_id', 'Please enter description.');
+    form_set_error('field_story_source_id', t('Please enter description.'));
   }
 }
 

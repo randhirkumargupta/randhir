@@ -34,14 +34,14 @@ function itg_category_manager_menu() {
 
   $items = array();
   $items['admin/config/itg_category_manager'] = array(
-    'title' => 'ITG Category Manager',
-    'description' => 'Configuration for ITG Category Manager module.',
+    'title' => t('ITG Category Manager'),
+    'description' => t('Configuration for ITG Category Manager module.'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_category_manager_form'),
     'access arguments' => array('administer taxonomy'),
   );
   $items['test'] = array(
-    'title' => 'ITG Category Manager',
+    'title' => t('ITG Category Manager'),
     'page callback' => 'notify_insert_statuspost',
     'access callback' => TRUE
   );
@@ -52,7 +52,7 @@ function itg_category_manager_menu() {
   );
   // SEF Url log menu
   $items['sef-log/%'] = array(
-    'title' => 'SEF URL Log',
+    'title' => t('SEF URL Log'),
     'page callback' => 'itg_category_manager_seflogpage',
     'access callback' => TRUE,
     'page arguments' => array(1),
@@ -133,7 +133,7 @@ function itg_category_manager_form($form, &$form_state) {
   // Checkboxes to choose what should be checked for dupes (vocab, terms, both)
   $form['itg_category_manager_types'] = array(
     '#type' => 'checkboxes',
-    '#title' => 'Check for duplicate',
+    '#title' => t('Check for duplicate'),
     '#default_value' => variable_get('itg_category_manager_types', array()),
     '#options' => array(
       'vocab' => t('Vocabularies'),
@@ -148,7 +148,7 @@ function itg_category_manager_form($form, &$form_state) {
   }
   $form['itg_category_manager_vocabularies'] = array(
     '#type' => 'checkboxes',
-    '#title' => 'Limit term check on specific vocabularies',
+    '#title' => t('Limit term check on specific vocabularies'),
     '#default_value' => variable_get('itg_category_manager_vocabularies', array()),
     '#options' => $options,
     '#description' => t('If no option is selected, all terms will be checked for duplicates.'),
@@ -157,7 +157,7 @@ function itg_category_manager_form($form, &$form_state) {
   // Checkbox to indicate whether the check should be case-sensitive
   $form['itg_category_manager_case_sensitive'] = array(
     '#type' => 'checkbox',
-    '#title' => "Case-sensitive comparison (e.g. 'Foo' and 'foo' are not duplicates if checked).",
+    '#title' => t("Case-sensitive comparison (e.g. 'Foo' and 'foo' are not duplicates if checked)."),
     '#default_value' => variable_get('itg_category_manager_case_sensitive'),
   );
 
@@ -179,7 +179,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
 
       $count_used = count($used_by_content);
-      drupal_set_message('This category is mapped with ' . $count_used . ' contents.' . l(' Click here', 'category-remove-from-node/' . $tid, array('attributes' => array('target' => '_blank'))), 'status');
+      drupal_set_message(t('This category is mapped with ' . $count_used . ' contents.') . l(' Click here', 'category-remove-from-node/' . $tid, array('attributes' => array('target' => '_blank'))), 'status');
       if ($user->uid != 1) {
         drupal_add_js('(function($) {$(document).ready(function() {
         $("#taxonomy-form-term #edit-submit").hide();
@@ -241,7 +241,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       }
       // Taxonomy active deactive logic
       $form['term_state'] = array(
-        '#prefix' => '<div class="itg-term-state"><label>Term State</label>',
+        '#prefix' => '<div class="itg-term-state"><label>'.t('Term State').'</label>',
         '#type' => 'checkbox',
         '#title' => t('Active'),
         '#weight' => 20,
@@ -311,7 +311,7 @@ function itg_category_manager_term_validate($form, &$form_state) {
     $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];
   }
   if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL) {
-    form_set_error('state-mode', 'Please select one mode.');
+    form_set_error('state-mode', t('Please select one mode.'));
   }
   // Code end for publish time
 
@@ -346,9 +346,8 @@ function itg_category_manager_term_validate($form, &$form_state) {
  * @param type $form_state
  * @return int
  */
-function itg_category_manager_add_form_after_build($form, &$form_state) {
-  // print_r($form); exit;
-//Add cancel link to add and edit form of category add form exit;
+function itg_category_manager_add_form_after_build($form, &$form_state) {  
+  //Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'category-manager', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
@@ -357,6 +356,7 @@ function itg_category_manager_add_form_after_build($form, &$form_state) {
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
+  
   return $form;
 }
 
@@ -502,7 +502,7 @@ function itg_category_manager_entity_update($entity, $type) {
     $mail_content = itg_category_manager_get_mail_content($entity);
     $params = array(
       'body' => $mail_content,
-      'subject' => 'India Today | Category Updated!',
+      'subject' => t('India Today | Category Updated!'),
     );
     $to = "itoday135@gmail.com"; // SEO team mail id
     $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'haripal.rao@kelltontech.com', TRUE);
@@ -510,7 +510,7 @@ function itg_category_manager_entity_update($entity, $type) {
       return TRUE;
     }
     else {
-      $error_msg = 'Failed to send the email!';
+      $error_msg = t('Failed to send the email!');
       watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
       return FALSE;
     }
@@ -992,7 +992,7 @@ function itg_category_manager_disable_manually_form() {
  */
 function itg_category_manager_disable_manually_form_validate($form, &$form_state) {
   if ($form_state['input']['itg_categories']['hierarchical_select']['selects'][0] == 'label_0') {
-    form_set_error('itg_categories', 'Please choose a category.');
+    form_set_error('itg_categories', t('Please choose a category.'));
   }
 }
 
