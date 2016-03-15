@@ -250,6 +250,10 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     e.stopPropagation();
     $(this).parents('.form-type-managed-file').removeClass('no-image-selected');
   });
+//  $('#page-title:contains("00:00:00")').html().split("00:00:00").join("");
+  $('.node-type-issue #page-title:contains("00:00:00")').each(function(){
+    $(this).html($(this).html().split("00:00:00").join(""));
+});
 
 };
 })(jQuery);
