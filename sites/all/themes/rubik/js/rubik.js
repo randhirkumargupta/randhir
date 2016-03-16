@@ -268,7 +268,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
   });
   
-  $('.survey-submit').mousedown(function(){
+  $('.survey-submit, .survey-submit-skip').mousedown(function(){
     var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
     var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
     var textValue = $(this).parents('.question-container').find('.form-text').val();
