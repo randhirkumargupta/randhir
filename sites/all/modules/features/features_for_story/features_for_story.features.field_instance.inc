@@ -731,7 +731,7 @@ function features_for_story_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-0:+3',
+        'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
       'weight' => 17,
@@ -765,7 +765,7 @@ function features_for_story_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
     'label' => 'Extra large image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,

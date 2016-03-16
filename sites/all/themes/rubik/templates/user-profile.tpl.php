@@ -56,15 +56,15 @@
     <?php //echo "<pre>";?>
     <?php //print_r ($elements['#account']->name); ?>
     <div class="field">
-      <div class="field-label">User name:</div>
+      <div class="field-label"><?php print t('User name'); ?>:</div>
       <div class="field-items"><?php print_r($elements['#account']->name); ?></div>
     </div> 
     <div class="field">
-      <div class="field-label">Email:</div>
+      <div class="field-label"><?php print t('Email'); ?>:</div>
       <div class="field-items"><?php print_r($elements['#account']->mail); ?></div>
     </div>
     <div class="field">
-      <div class="field-label">Role:</div>
+      <div class="field-label"><?php print t('Role'); ?>:</div>
       <div class="field-items"><?php 
       // get role array
       $role_display=$elements['#account']->roles;
