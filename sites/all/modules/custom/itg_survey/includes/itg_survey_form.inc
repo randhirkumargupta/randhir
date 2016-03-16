@@ -94,11 +94,13 @@ function itg_survey_survey_form() {
       $form['question_skip' . $num] = array(
           '#type' => 'hidden',
           '#value' => $skip_question[$num],
+          '#attributes' => array('id' => array('question-skip-'.$num))
       );
 
       $form['question_type' . $num] = array(
           '#type' => 'hidden',
           '#value' => $answer_type,
+          '#attributes' => array('id' => array('question-type-'.$num))
       );
       
       $form['answer' . $num] = array(
