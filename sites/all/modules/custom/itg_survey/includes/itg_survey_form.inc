@@ -142,6 +142,20 @@ function itg_survey_survey_form() {
             '#suffix' => '</div>',
         );
       }
+//      
+//      if(($total_num_of_ques-1) === $num){
+//              $form['survey_submit_skip' . $num] = array(
+//        '#type' => 'submit',
+//        '#value' => 'Skip',
+//        '#name' => 'surveysubmit_' . $num,
+//        '#ajax' => array(
+//            'callback' => 'survey_form_ajax_handler',
+//            'effect' => 'fade',
+//        ),
+//        '#attributes' => array('class' => array('survey-submit-skip'))
+//      );
+//      }
+
       
       $form['survey_submit_' . $num] = array(
         '#type' => 'submit',
@@ -151,7 +165,8 @@ function itg_survey_survey_form() {
             'callback' => 'survey_form_ajax_handler',
             'effect' => 'fade',
         ),
-        '#attributes' => array('class' => array('survey-submit'))
+          
+          '#attributes' => array('class' => array('survey-submit'))
       );
       
      if(($total_num_of_ques-1) !== $num){
@@ -163,12 +178,10 @@ function itg_survey_survey_form() {
                 'callback' => 'survey_form_ajax_handler',
                 'effect' => 'fade',
             ),
+            '#suffix' => '</div>',
             '#attributes' => array('class' => array('survey-submit-skip'))
         );
       }
-      
-      //Clode div of question container
-      $form['survey_submit_' . $num]['#suffix'] = '</div>';
       
       $num++;
       
