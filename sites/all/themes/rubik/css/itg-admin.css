@@ -1060,7 +1060,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-astro-form .field-name-field-field-astro-date-range2 fieldset .description{margin: 0;}
 [class*="form-item-field-astro-date-range-und-"] label{display: none !important;}
 .field-name-field-astro-date-range .date-no-float, 
-.field-name-field-field-astro-date-range2 .date-no-float{clear: none; float: left; width: 50%; pointer-events: none;}
+.field-name-field-field-astro-date-range2 .date-no-float{clear: none; float: left; width: 50%;}
 .node-astro-form .tabledrag-hide, 
 .node-astro-form .tabledrag-toggle-weight-wrapper, 
 #field-recipe-ingredient-values .tabledrag-toggle-weight-wrapper,
@@ -1084,7 +1084,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 [id*="field-astro-numerology-values-values"] td .form-item{width: 100%;display: inline-block; vertical-align: top;}
 [id*="field-astro-zodiac-values"] td .form-item > div,
 [id*="field-astro-numerology-values-values"] td .form-item > div, 
-.node-astro-form .field-multiple-table tbody .form-item .form-text{float: left; width: 300px;}
+.node-astro-form .field-multiple-table tbody .form-item .form-text{float: left; width: 290px;}
 [id*="field-astro-zodiac-values"] .form-item span.error{padding: 0;}
 .field-name-field-astro-date-range .end-date-wrapper, 
 .field-name-field-field-astro-date-range2 .end-date-wrapper{position: relative;}
@@ -1294,6 +1294,8 @@ div.view table td, div.view table th{max-width: 200px;}
 .node-survey-form .field-multiple-table tbody div.file-widget .button-remove{margin-left: 5px;}
 .node-type-issue .block-content > .cm-node-view{overflow: visible;}
 .page-content .field-name-field-supp-issue .form-type-date-popup div.description, 
+.page-content .field-name-field-print-magazine-issue-date .form-type-date-popup div.description, 
+.page-content .field-name-field-magazine-publish .form-item div.description, 
 .page-content .field-name-field-supp-publish .form-item div.description{left: 200px;} 
 [id*="field-astro-numerology-values-values"] .form-item.form-type-textfield span.error{padding-left: 150px;}
 [id*="field-astro-numerology-values-values"] .form-item.form-type-textarea span.error{padding-left: 0;}

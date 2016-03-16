@@ -34,7 +34,7 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       );
       $form['#after_build'][] = 'itg_recipe_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_recipe_form_custom_callback';
-      $form['#validate'][] = 'itg_recipe_fields_validate';
+      //$form['#validate'][] = 'itg_recipe_fields_validate';
       break;
   }
 }

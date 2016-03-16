@@ -16,8 +16,8 @@
         switch (frequency) {
           case 'daily':
             var startDay = moment().format('MMM Do YYYY');
-            $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay);
-            $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(startDay);
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay);
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(startDay);
             $("#edit-title").val(startDay);
             check_duplicate();
 
@@ -25,8 +25,8 @@
           case 'weekly':
             var startDay = moment().day(0); // Sun
             var endDay = moment().day(6); // Sat          
-            $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(startDay.format('MMM Do YYYY'));
-            $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(endDay.format('MMM Do YYYY'));
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay.format('MMM Do YYYY'));
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(endDay.format('MMM Do YYYY'));
             var titleText = startDay.format('MMM Do YYYY') + " - " + endDay.format('MMM Do YYYY');
             $("#edit-title").val(titleText);
             check_duplicate();
@@ -35,8 +35,8 @@
           case 'monthly':
             var firstDay = moment().date(1);
             var lastDay = moment().endOf('month');
-            $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay.format('MMM Do YYYY'));
-            $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val(lastDay.format('MMM Do YYYY'));
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay.format('MMM Do YYYY'));
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(lastDay.format('MMM Do YYYY'));
             var titleText = firstDay.format('MMM Do YYYY') + " - " + lastDay.format('MMM Do YYYY');
             $("#edit-title").val(titleText);
             check_duplicate();
@@ -44,8 +44,8 @@
             break;
           case 'yearly':
             var firstDay = moment().dayOfYear(1).format('MMM Do YYYY');
-            $('#edit-field-astro-date-range-und-0-value-datepicker-popup-0').val(firstDay);
-            $('#edit-field-astro-date-range-und-0-value2-datepicker-popup-0').val('Dec 31st ' + moment().year());
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay);
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val('Dec 31st ' + moment().year());
             var startYear = moment().dayOfYear(1).format('MMM Do YYYY');
             var endyear = "Dec 31st " + moment().year();
             $("#edit-title").val(startYear + " - " + endyear);

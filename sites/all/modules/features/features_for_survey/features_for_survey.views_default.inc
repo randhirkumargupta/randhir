@@ -226,12 +226,6 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
-  $handler->display->display_options['fields']['field_survey_start_date']['label'] = 'Start Date ';
-  $handler->display->display_options['fields']['field_survey_start_date']['alter']['max_length'] = '12';
-  $handler->display->display_options['fields']['field_survey_start_date']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['field_survey_start_date']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['field_survey_start_date']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_survey_start_date']['type'] = 'date_plain';
   $handler->display->display_options['fields']['field_survey_start_date']['settings'] = array(
     'format_type' => 'custom_date',
     'fromto' => 'both',
@@ -244,13 +238,8 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
-  $handler->display->display_options['fields']['field_survey_end_date']['label'] = 'End Date';
-  $handler->display->display_options['fields']['field_survey_end_date']['alter']['max_length'] = '12';
-  $handler->display->display_options['fields']['field_survey_end_date']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['field_survey_end_date']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['field_survey_end_date']['type'] = 'date_plain';
   $handler->display->display_options['fields']['field_survey_end_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -263,7 +252,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Last Modified';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'Y-m-d';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'Y/m/d';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';

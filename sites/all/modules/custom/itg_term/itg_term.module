@@ -11,7 +11,7 @@ function itg_term_menu() {
             'texonomy_term_ajax_confirm'
         ),
         'access arguments' => array(
-            'access content'
+            'administer itg_term settings'
         ),
         'type' => MENU_NORMAL_ITEM
     );
@@ -62,6 +62,17 @@ function texonomy_term_ajax_confirm_submit($form, &$form_state) {
     drupal_goto('tags-management'); // redirect path
 }
 
+ /**
+ * Implement hook_permissions() to set access permission on ITG Autosave settings form
+ */
+function itg_term_permission() {
+  return array(
+    'administer itg_term settings' => array(
+      'title' => t('Administer ITG Term Settings'),
+      'description' => t('Perform administration tasks for ITG Term.'),
+    ),
+  );
+}
 
 /**
  * Implementation of hook_form_alter().
