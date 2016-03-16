@@ -151,11 +151,10 @@ function itg_survey_survey_form() {
             'callback' => 'survey_form_ajax_handler',
             'effect' => 'fade',
         ),
-          '#suffix' => '</div>',
-          '#attributes' => array('class' => array('survey-submit'))
+        '#attributes' => array('class' => array('survey-submit'))
       );
       
-     if(($total_num_of_ques-1) != $num){
+     if(($total_num_of_ques-1) !== $num){
         $form['survey_submit_skip' . $num] = array(
             '#type' => 'submit',
             '#value' => 'Skip',
@@ -167,7 +166,10 @@ function itg_survey_survey_form() {
             '#attributes' => array('class' => array('survey-submit-skip'))
         );
       }
-
+      
+      //Clode div of question container
+      $form['survey_submit_' . $num]['#suffix'] = '</div>';
+      
       $num++;
       
     } //End of for loop
