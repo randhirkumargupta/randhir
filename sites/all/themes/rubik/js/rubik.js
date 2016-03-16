@@ -267,6 +267,28 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
     $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
   });
+  
+  $('.survey-submit').mousedown(function(){
+    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
+    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
+    var textValue = $(this).parents('.question-container').find('.form-text').val();
+    
+    if(checkValue){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    }
+    
+    if(radioValue){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    }
+    
+    if(textValue && textValue != 'undefined'){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    }
+    
+  });
 
 };
 })(jQuery);
