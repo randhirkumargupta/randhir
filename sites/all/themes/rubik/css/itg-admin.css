@@ -1060,7 +1060,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-astro-form .field-name-field-field-astro-date-range2 fieldset .description{margin: 0;}
 [class*="form-item-field-astro-date-range-und-"] label{display: none !important;}
 .field-name-field-astro-date-range .date-no-float, 
-.field-name-field-field-astro-date-range2 .date-no-float{clear: none; float: left; width: 50%; pointer-events: none;}
+.field-name-field-field-astro-date-range2 .date-no-float{clear: none; float: left; width: 50%;}
 .node-astro-form .tabledrag-hide, 
 .node-astro-form .tabledrag-toggle-weight-wrapper, 
 #field-recipe-ingredient-values .tabledrag-toggle-weight-wrapper,
