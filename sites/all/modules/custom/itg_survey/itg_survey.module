@@ -52,7 +52,7 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   
   //Set destination for survey form
-  if ($form_id == 'survey_node_form' || $form_id == 'itg_survey_survey_form') {
+  if ($form_id == 'survey_node_form') {
     
       //Set Destination
       $destination = 'manage-survey';
