@@ -22,6 +22,8 @@ function itg_survey_survey_form() {
     $num = 0;
     $form = array();
 
+    $total_num_of_ques = count($node->field_survey_add_questions[LANGUAGE_NONE]);
+    
     foreach ($node->field_survey_add_questions[LANGUAGE_NONE] as $question_arr) {
 
       //Question Info
@@ -39,6 +41,13 @@ function itg_survey_survey_form() {
       $answer_type = $question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value'];
       $answer_op1 = $question_detail[$question_arr['value']]->field_survey_answer_option_1[LANGUAGE_NONE][0]['value'];
       $answer_op2 = $question_detail[$question_arr['value']]->field_survey_answer_option_2[LANGUAGE_NONE][0]['value'];
+      
+      //Submit button text
+      if(($total_num_of_ques-1) === $num){
+        $button_text = 'Submit';
+      } else {
+        $button_text = 'Next';
+      }
 
       //Get more answer options
       foreach ($question_detail[$question_arr['value']]->field_survey_answer_option_more[LANGUAGE_NONE] as $more_ans_arr) {
@@ -131,10 +140,10 @@ function itg_survey_survey_form() {
             '#suffix' => '</div>',
         );
       }
-
+      
       $form['survey_submit_' . $num] = array(
         '#type' => 'submit',
-        '#value' => 'Next',
+        '#value' => $button_text,
         '#name' => 'btn_' . $num,
         '#ajax' => array(
             'callback' => 'survey_form_ajax_handler',
@@ -142,8 +151,7 @@ function itg_survey_survey_form() {
         ),
           '#suffix' => '</div>',
           '#attributes' => array('class' => array('survey-submit'))
-
-     );
+      );
 
       $num++;
       
@@ -151,7 +159,7 @@ function itg_survey_survey_form() {
 
     $form['question_total'] = array(
         '#type' => 'hidden',
-        '#value' => $num,
+        '#value' => $total_num_of_ques,
     );
 
     $form['nid'] = array(
@@ -263,12 +271,21 @@ function itg_survey_survey_form_validate($form, &$form_state) {
  * @param Array $form_state
  */
 function itg_survey_survey_form_submit($form, &$form_state){
- global $user;
+  global $user;
+ 
+  //Form variable
+  $form_detail = $form_state['values'];
+  $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
+  $num = $btn_num_arr[1];
+  
+  //Extract user type
   if ($user->uid) {
     $user_type = 'authenticated';
   } else {
     $user_type = 'anonymous';
   }
+  
+  //Insert question & answer in to DB
   db_insert('itg_survey_user')
           ->fields(array(
               'nid' => $form_state['values']['nid'],
@@ -278,7 +295,11 @@ function itg_survey_survey_form_submit($form, &$form_state){
               'created' => time(),
           ))
           ->execute();
-  drupal_set_message(t('Survey has been saved successfully.'));
+
+  //Display saved survey message on final submit only.
+  if ($num == ($form_detail['question_total'] - 1)) {
+    drupal_set_message(t('Survey has been saved successfully.'));
+  }
 }
 
 /**
