@@ -94,7 +94,7 @@ function itg_survey_survey_form() {
       $form['question_skip' . $num] = array(
           '#type' => 'hidden',
           '#value' => $skip_question[$num],
-          '#attributes' => array('id' => array('question-skip-'.$num))
+          '#attributes' => array('id' => array('question-skip-'.$num), 'class' => array('question-skip'))
       );
 
       $form['question_type' . $num] = array(
@@ -146,7 +146,7 @@ function itg_survey_survey_form() {
       $form['survey_submit_' . $num] = array(
         '#type' => 'submit',
         '#value' => $button_text,
-        '#name' => 'btn_' . $num,
+        '#name' => 'surveysubmit_' . $num,
         '#ajax' => array(
             'callback' => 'survey_form_ajax_handler',
             'effect' => 'fade',
@@ -300,7 +300,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
 
   //Display saved survey message on final submit only.
   if ($num == ($form_detail['question_total'] - 1)) {
-    drupal_set_message(t('Survey has been saved successfully.'));
+    drupal_set_message(t('Survey has been saved successfully. Thank you for taking our survey!'));
   }
 }
 
