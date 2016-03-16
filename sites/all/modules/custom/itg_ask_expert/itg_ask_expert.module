@@ -105,7 +105,7 @@ function itg_ask_expert_form_custom_callback($form, &$form_state) {
       $_SESSION['ask_an_expert_message'] = 'Your query has been successfully submitted, our expert will reply you back soon.';
     }
     else {
-      drupal_set_message('Message updated successfully.');
+      drupal_set_message(t('Message updated successfully.'));
     }
 
 
@@ -129,8 +129,8 @@ function itg_ask_expert_views_pre_render(&$view) {
   if ($view->name == 'ask_an_expert' && $view->current_display == 'page_1') {
 
     foreach ($view->result as $chkvalue) {
-
-      if ($chkvalue->field_field_disclose_your_identity[0]['raw']['value'] != '1') {
+      
+      if (!array_filter($chkvalue->field_field_disclose_your_identity)) {
 
         $chkvalue->field_field_user_name[0]['rendered']['#access'] = FALSE;
         $chkvalue->field_field_user_email[0]['rendered']['#access'] = FALSE;
