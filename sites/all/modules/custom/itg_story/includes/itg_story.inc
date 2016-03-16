@@ -16,7 +16,7 @@ function itg_story_reporter_details() {
     $node = node_load($reporter_array[1]);
     $email = $node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
     $twitter = $node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-    $content = '<div>Byline’s  Email id: '.$email.'</div><div>Byline’s Twitter Handle: '.$twitter.'</div>';
+    $content = '<div>'.t("Byline’s  Email id: ").$email.'</div><div>'.t("Byline’s Twitter Handle: ").$twitter.'</div>';  
   }
   
   echo $content;
@@ -34,7 +34,7 @@ function itg_story_issue_date_checked() {
   $issue = itg_story_checked_issue($issue_date);  
   
   if (!$issue) {
-    echo '<div id="idIssue">Issue dose not exit.</div>';
+    echo '<div id="idIssue">'.t("Issue dose not exit.").'</div>';
   }
 }
 
