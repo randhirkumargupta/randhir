@@ -272,18 +272,28 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
     var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
     var textValue = $(this).parents('.question-container').find('.form-text').val();
+    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
     
-    if(checkValue){
+    if(checkValue && skipValue == 'no'){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    } else if(skipValue == 'yes'){
       $('.question-container').hide();
       $(this).parents('.question-container').next().show();
     }
     
-    if(radioValue){
+    if(radioValue && skipValue == 'no'){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    } else if(skipValue == 'yes'){
       $('.question-container').hide();
       $(this).parents('.question-container').next().show();
     }
     
-    if(textValue && textValue != 'undefined'){
+    if(textValue  && skipValue == 'no' && textValue != 'undefined'){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    } else if(skipValue == 'yes'){
       $('.question-container').hide();
       $(this).parents('.question-container').next().show();
     }
