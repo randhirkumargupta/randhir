@@ -15,6 +15,10 @@ function itg_survey_survey_form() {
 
   //Check: Any survey is activated OR not
   if ($node) {
+    
+    //Add survey JS file
+    //drupal_add_js(drupal_get_path('module', 'itg_survey').'/js/itg_survey.js');
+    
     $num = 0;
     $form = array();
 
@@ -55,6 +59,12 @@ function itg_survey_survey_form() {
         $all_ans_options[$num] = $answer_options[$num];
       }
      
+      //Show error message
+      $form['messages'] = array(
+          '#prefix' => '<div style="color:red" id="messages">',
+          '#suffix' => '</div>'
+      );
+      
       //Prepare form
       $form['question_heading' . $num] = array(
           '#type' => 'markup',
@@ -95,10 +105,11 @@ function itg_survey_survey_form() {
               '#title' => $val_txt_option,
               '#type' => $answer_type,
               '#size' => 30,
-              '#suffix' => '</div>',
           );
           $txt_num++;
         }
+        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
+        
       } elseif ($answer_type == 'rating') {
         $rating_num = 0;
         foreach ($all_ans_options[$num] as $rating_option) {
@@ -107,10 +118,11 @@ function itg_survey_survey_form() {
               '#title' => t($rating_option),
               '#type' => 'checkboxes',
               '#options' => $arr,
-              '#suffix' => '</div>',
+              '#attributes' => array('class' => array('rating'))
           );
           $rating_num++;
         }
+        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       } else {
         $form['answer_option' . $num] = array(
             '#title' => t(''),
@@ -129,6 +141,7 @@ function itg_survey_survey_form() {
             'effect' => 'fade',
         ),
           '#suffix' => '</div>',
+          '#attributes' => array('class' => array('survey-submit'))
 
      );
 
@@ -177,8 +190,8 @@ function itg_survey_survey_form() {
  * @param Array $form_state
  */
 function itg_survey_survey_form_validate($form, &$form_state) {
-$btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
-$num = $btn_num_arr[1];
+  $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
+  $num = $btn_num_arr[1];
 
   $form_detail = $form_state['values'];
   $ans_flag = FALSE;
@@ -186,6 +199,8 @@ $num = $btn_num_arr[1];
   $rating_ans_flag = FALSE;
 
   //for ($num = 0; $num < $form_detail['question_total']; $num++) {
+  
+  //Checkbox validation
     if ($form_detail['question_type' . $num] === 'checkboxes') {
       if ($form_detail['question_skip' . $num] !== 'yes') {
         foreach ($form_detail['answer_option' . $num] as $key => $value) {
@@ -199,7 +214,7 @@ $num = $btn_num_arr[1];
       }
     }
     
-   
+   //Radio Button validation
     if ($form_detail['question_type' . $num] === 'radios') {
       if ($form_detail['question_skip' . $num] !== 'yes') {
         if (empty($form_detail['answer_option' . $num])) {
@@ -208,6 +223,7 @@ $num = $btn_num_arr[1];
       }
     } 
     
+    //Rating validation
     if ($form_detail['question_type' . $num] === 'rating') {
       if ($form_detail['question_skip' . $num] !== 'yes') {
         for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
@@ -223,7 +239,7 @@ $num = $btn_num_arr[1];
       }
     } 
     
-    
+    //Textfield validation
     if($form_detail['question_type' . $num] === 'textfield'){
       if ($form_detail['question_skip' . $num] !== 'yes') {
         $txt_ans_flag = FALSE;
@@ -265,8 +281,18 @@ function itg_survey_survey_form_submit($form, &$form_state){
   drupal_set_message(t('Survey has been saved successfully.'));
 }
 
+/**
+ * Submit handler of Ajax
+ * @param Array $form
+ * @param Array $form_state
+ * @return Array
+ */
 function survey_form_ajax_handler(&$form, &$form_state){
-  return $form;
+  $commands = array();
+  $commands[] = ajax_command_replace('#messages', '<div id="messages">' . theme('status_messages') . '</div>');
+  return array(
+      '#type' => 'ajax',
+      '#commands' => $commands);
 }
 
 ?>
