@@ -146,7 +146,7 @@ function itg_survey_survey_form() {
       $form['survey_submit_' . $num] = array(
         '#type' => 'submit',
         '#value' => $button_text,
-        '#name' => 'btn_' . $num,
+        '#name' => 'surveysubmit_' . $num,
         '#ajax' => array(
             'callback' => 'survey_form_ajax_handler',
             'effect' => 'fade',
