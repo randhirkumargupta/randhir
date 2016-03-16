@@ -3,7 +3,7 @@
  */
 
 (function($) {
-  Drupal.behaviors.itg_msi = {
+  Drupal.behaviors.itg_survey = {
     attach: function(context, settings) {
       //Hide left side vertical tabs in case of simple users
       var uid = settings.itg_survey.settings.uid;
