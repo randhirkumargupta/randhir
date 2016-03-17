@@ -18,7 +18,7 @@ function itg_survey_survey_form() {
     
     $num = 0;
     $form = array();
-
+    
     $total_num_of_ques = count($node->field_survey_add_questions[LANGUAGE_NONE]);
     
     foreach ($node->field_survey_add_questions[LANGUAGE_NONE] as $question_arr) {
