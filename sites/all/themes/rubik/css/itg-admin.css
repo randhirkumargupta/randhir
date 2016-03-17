@@ -1324,3 +1324,5 @@ div.view table td, div.view table th{max-width: 200px;}
 .buzz-section{padding: 10px 0; border-top: 1px dashed #ddd;}
 .buzz-section:first-child{padding-top: 0; border: 0;}
 .ajax-loader{height: 80px; text-align: center;}
+.page-survey .block-system{min-height: 250px;}
+.page-survey .ajax-progress-throbber .message{display: none;}
