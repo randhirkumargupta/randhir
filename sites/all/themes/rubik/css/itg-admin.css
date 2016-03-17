@@ -1309,11 +1309,16 @@ div.view table td, div.view table th{max-width: 200px;}
 [id*="field-breaking-content-details-values"] .tabledrag-hide{display: none;}
 
 /* CSS for servey */
+[id*="itg-survey-survey-form"] .form-type-checkboxes > .form-checkboxes > .form-type-checkbox, 
+[id*="itg-survey-survey-form"] .form-type-radios > .form-radios > .form-type-radio{width: 100%; padding: 0;}
+[id*="itg-survey-survey-form"] .form-type-checkboxes > .form-checkboxes.rating > .form-type-checkbox{width: auto;}
+[id*="itg-survey-survey-form"] .form-type-radios, 
+[id*="itg-survey-survey-form"] .form-type-checkboxes{margin: 0;}
 .answer-container{display: inline-block; width: 100%; padding: 10px 0;}
 .answer-heading{display: inline-block; width: 100px; vertical-align: top;}
 .answer-heading + .form-type-checkboxes{display: inline-block; width: 100%; vertical-align: top; margin: 0;}
 /*.answer-heading + .form-type-checkboxes > label{width: 100px;}*/
-.question-container{display: inline-block; width: 100%; padding-bottom: 20px; display: none;}
+.question-container{display: none; width: 100%; padding-bottom: 20px; }
 .question-container .survey-submit{margin-right: 5px;}
 #question-container-0{display: block;}
 .form-checkboxes.rating .form-type-checkbox{position: relative; padding: 0 !important;}

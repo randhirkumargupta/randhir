@@ -31,6 +31,8 @@
   <h2 class="story-title"><?php echo t('Configuration'); ?></h2>
     <?php print drupal_render($form['field_poll_start_date']); ?>
   <?php print drupal_render($form['field_end_date']); ?>
+  <?php print drupal_render($form['field_show_end_date']); ?>
+  <?php print drupal_render($form['field_poll_end_date']); ?>
   <?php print drupal_render($form['field_result_format']); ?>
   <?php print drupal_render($form['field_display_result']); ?>
   <?php print drupal_render($form['field_associate_poll']); ?>

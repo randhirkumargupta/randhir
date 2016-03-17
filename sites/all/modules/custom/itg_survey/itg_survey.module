@@ -15,6 +15,7 @@
 function itg_survey_menu() {
   $items = array();
   $items['survey'] = array(
+      'title' => 'India Today Survey',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_survey_survey_form'),
       'access callback' => TRUE,
