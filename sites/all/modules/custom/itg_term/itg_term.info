@@ -2,5 +2,8 @@ name = ITG Term
 description = "ITG Term Module"
 core = 7.x
 package = ITG
-
 files[] = itg_term.module
+dependencies[] = taxonomy
+dependencies[] = views_data_export
+dependencies[] = taxonomy_csv
+project = "itg_term"
