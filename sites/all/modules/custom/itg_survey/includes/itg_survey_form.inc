@@ -12,12 +12,9 @@ function itg_survey_survey_form() {
   
   //Get node of current survey (load all questions ans answer options to generate survey form)
   $node = itg_survey_get_current_survey();
-
+  
   //Check: Any survey is activated OR not
   if ($node) {
-    
-    //Add survey JS file
-    //drupal_add_js(drupal_get_path('module', 'itg_survey').'/js/itg_survey.js');
     
     $num = 0;
     $form = array();
@@ -25,12 +22,12 @@ function itg_survey_survey_form() {
     $total_num_of_ques = count($node->field_survey_add_questions[LANGUAGE_NONE]);
     
     foreach ($node->field_survey_add_questions[LANGUAGE_NONE] as $question_arr) {
-
       //Question Info
       $question_detail = entity_load('field_collection_item', array($question_arr['value']));
       $question = $question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value'];
       $skip_question[$num] = $question_detail[$question_arr['value']]->field_survey_skip[LANGUAGE_NONE][0]['value'];
-
+      
+      //If any question is required, show required sign(*) for that question
       if ($skip_question[$num] == 'yes') {
         $required = '';
       } else {
@@ -54,27 +51,26 @@ function itg_survey_survey_form() {
         $more_ans_option[$num][$more_ans_arr['value']] = t($more_ans_arr['value']);
       }
 
-
-      //Required answer option array
+      //Required answer option array (Option 1 and Option 2)
       $answer_options[$num] = array(
           $answer_op1 => t($answer_op1),
           $answer_op2 => t($answer_op2),
       );
 
-      //Array collection of both arrays
+      //Merge array of answer options and more answer options
       if(!empty($more_ans_option[$num])){
         $all_ans_options[$num] = array_merge($answer_options[$num], $more_ans_option[$num]);
       } else {
         $all_ans_options[$num] = $answer_options[$num];
       }
      
-      //Show error message
+      //Show error message, if user tries to skip required question
       $form['messages'] = array(
           '#prefix' => '<div style="color:red" id="messages">',
           '#suffix' => '</div>'
       );
       
-      //Prepare form
+      //Prepare Question and Answer form
       $form['question_heading' . $num] = array(
           '#type' => 'markup',
           '#markup' => '<h2 class="question-heading">' . ($num + 1) . '. ' . $question . '?</h2>',
@@ -109,7 +105,7 @@ function itg_survey_survey_form() {
           '#markup' => '<h2 class="answer-heading">Answer: ' . $required . '</h2> ',
       );
 
-      if ($answer_type == 'textfield') {
+      if ($answer_type == 'textfield') { // Answer options for Textfield
         $txt_num = 0;
         foreach ($all_ans_options[$num] as $val_txt_option) {
           $form['answer_option' . $num . '_' . $txt_num] = array(
@@ -121,7 +117,7 @@ function itg_survey_survey_form() {
         }
         $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
-      } elseif ($answer_type == 'rating') {
+      } elseif ($answer_type == 'rating') { // Answer option for Rating
         $rating_num = 0;
         foreach ($all_ans_options[$num] as $rating_option) {
           $arr = array(1 => '', 2 => '', 3 => '', 4 => '', 5 => '');
@@ -134,7 +130,8 @@ function itg_survey_survey_form() {
           $rating_num++;
         }
         $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
-      } else {
+        
+      } else {  //Answer option for Radios and Checkboxes
         $form['answer_option' . $num] = array(
             '#title' => t(''),
             '#type' => $answer_type,
@@ -142,21 +139,8 @@ function itg_survey_survey_form() {
             '#suffix' => '</div>',
         );
       }
-//      
-//      if(($total_num_of_ques-1) === $num){
-//              $form['survey_submit_skip' . $num] = array(
-//        '#type' => 'submit',
-//        '#value' => 'Skip',
-//        '#name' => 'surveysubmit_' . $num,
-//        '#ajax' => array(
-//            'callback' => 'survey_form_ajax_handler',
-//            'effect' => 'fade',
-//        ),
-//        '#attributes' => array('class' => array('survey-submit-skip'))
-//      );
-//      }
-
       
+      //Nex button for all questions
       $form['survey_submit_' . $num] = array(
         '#type' => 'submit',
         '#value' => $button_text,
@@ -168,7 +152,8 @@ function itg_survey_survey_form() {
           
           '#attributes' => array('class' => array('survey-submit'))
       );
-      
+     
+     //Skip button for all qustions except last one
      if(($total_num_of_ques-1) !== $num){
         $form['survey_submit_skip' . $num] = array(
             '#type' => 'submit',
@@ -187,6 +172,7 @@ function itg_survey_survey_form() {
       
     } //End of for loop
 
+    //Hidden variable, same for all questions  
     $form['question_total'] = array(
         '#type' => 'hidden',
         '#value' => $total_num_of_ques,
@@ -206,11 +192,16 @@ function itg_survey_survey_form() {
         '#type' => 'hidden',
         '#value' => $rating_num,
     );
-
-//    $form['survey_submit'] = array(
-//        '#type' => 'submit',
-//        '#value' => 'Submit',
-//    );
+    
+    $form['survey_url'] = array(
+        '#type' => 'hidden',
+        '#value' => $_GET['q'],
+    );
+    
+    $form['survey_title'] = array(
+        '#type' => 'hidden',
+        '#value' => $node->title,
+    );
     
   } else { //If no survey found
     $form['no_survey'] = array(
@@ -302,7 +293,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
  */
 function itg_survey_survey_form_submit($form, &$form_state){
   global $user;
- 
+
   //Form variable
   $form_detail = $form_state['values'];
   $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
@@ -315,16 +306,42 @@ function itg_survey_survey_form_submit($form, &$form_state){
     $user_type = 'anonymous';
   }
   
-  //Insert question & answer in to DB
-  db_insert('itg_survey_user')
-          ->fields(array(
-              'nid' => $form_state['values']['nid'],
-              'uid' => $user->uid,
-              'user_type' => $user_type,
-              'page_url' => $_GET['q'],
-              'created' => time(),
-          ))
-          ->execute();
+  //Set a session for a survey(Will be same for all questions during a survey) 
+  if(!isset($_SESSION['survey_unique_key'])){
+    $_SESSION['survey_unique_key'] = user_password(6);
+  }
+  
+  //Insert each question of survey in our DB
+  db_insert('itg_survey_detail')
+        ->fields(array(
+            'nid' => $form_state['values']['nid'],
+            'uid' => $user->uid,
+            'ques_id' => $form_state['values']['question_id'.$num],
+            'question' => $form_state['values']['question'.$num],
+            'answer' => '',
+            'ans_type' => $form_state['values']['question_type'.$num],
+            'user_type' => $user_type,
+            'page_url' => $form_state['values']['survey_url'],
+            'survey_title' => $form_state['values']['survey_title'],
+            'survey_key' => $_SESSION['survey_unique_key'],
+            'created' => time(),
+        ))
+        ->execute();
+
+  
+  //Insert survey in to DB on final submit
+  if(strtolower($form_state['clicked_button']['#value']) == 'submit'){
+    db_insert('itg_survey_user')
+            ->fields(array(
+                'nid' => $form_state['values']['nid'],
+                'uid' => $user->uid,
+                'user_type' => $user_type,
+                'page_url' => $_GET['q'],
+                'created' => time(),
+            ))
+            ->execute();
+    unset($_SESSION['unique_survey']);
+  }
 
   //Display saved survey message on final submit only.
   if ($num == ($form_detail['question_total'] - 1)) {
