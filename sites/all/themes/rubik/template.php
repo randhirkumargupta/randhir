@@ -148,6 +148,10 @@ function rubik_preprocess_page(&$vars) {
   if (arg(2) == 'taxonomy' && arg(3) == 'category_management' && arg(4) == 'add') {
     drupal_set_title('Create Category');
   }
+  //  // Change create Tag page title.
+  if (arg(2) == 'taxonomy' && arg(3) == 'tags' && arg(4) == 'add') {
+    drupal_set_title('Create Tag');
+  }
   
 }
 
