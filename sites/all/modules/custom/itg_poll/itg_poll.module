@@ -611,9 +611,9 @@ function itg_poll_node_presave($node){
   if($node->type == 'poll'){
     $poll_question = $node->field_poll_question[LANGUAGE_NONE][0]['value'];
     if ($poll_question == 1) { //1 = text
-      $node->field_poll_question_image[LANGUAGE_NONE] = '';
+      $node->field_poll_question_image = '';
     } elseif ($poll_question == 2) { // Image
-      $node->field_poll_question_text[LANGUAGE_NONE] = '';
+      $node->field_poll_question_text = '';
     }elseif ($poll_question == 3) { // video
       
     }
