@@ -182,18 +182,20 @@
             <h2><?php print t('Templates Buzz'); ?></h2>
             <div class="content-details">
             <?php 
-            $buzz_output.= '<div class="buzz-section">';
+            $buzz_output.= '';
             foreach ($node->field_story_template_buzz['und'] as $buzz_item) {
                   $buzz_img_fid = $buzz_item['field_buzz_image']['und'][0]['fid'];
+                  $buzz_output.= '<div class="buzz-section">';
                   if ($buzz_img_fid != NULL || $buzz_img_fid != '') {
                     $buzz_imguri = _itg_photogallery_fid($buzz_img_fid);
                     $img = '<img src="' . image_style_url("thumbnail", $buzz_imguri) . '">';
                   }
-                  $buzz_output.= 'Headline :' . $buzz_item['field_buzz_headline']['und'][0]['value'];
-                  $buzz_output.= 'Image :' . $img;
-                  $buzz_output.= 'Description :' . $buzz_item['field_buzz_description']['und'][0]['value'];
+                  $buzz_output.= '<div class="field"><div class="field-label">Headline:</div><div class="field-items">' . $buzz_item['field_buzz_headline']['und'][0]['value'] . '</div></div>';
+                  $buzz_output.= '<div class="field"><div class="field-label">Image:</div><div class="field-items">' . $img . '</div></div>';
+                  $buzz_output.= '<div class="field"><div class="field-label">Description:</div><div class="field-items">' . $buzz_item['field_buzz_description']['und'][0]['value'] . '</div></div>';
+                  $buzz_output.= '</div>';
                 }
-                $buzz_output.= '</div>';
+                
             ?>
             <?php print $buzz_output; ?>
             </div>
