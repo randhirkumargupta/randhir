@@ -5,6 +5,7 @@ body{
   font: 400 14px/18px 'Roboto';
   color: #333;
 }
+h1, h2, h3, h4{font-weight: 500;}
 .mr-0{
   margin: 0;
 }
@@ -16,6 +17,9 @@ body{
 }
 .mb-10{
   margin-bottom: 10px;
+}
+.mb-5{
+  margin-bottom: 5px;
 }
 .pd-0{
   padding: 0;
@@ -66,6 +70,9 @@ body{
 }
 .fright{
   float: right;
+}
+.pos-rel{
+  position: relative;
 }
 .btn {
     background-color: #337ab7;
@@ -236,5 +243,64 @@ input[type="text"], select, input[type="password"]{
   .field-content{
     overflow: hidden; float: none; @extend .db;
     a{color: #333;}
+  }
+}
+
+
+/* SCSS For Survey Page */
+.page-survey .ajax-progress-throbber .message{
+  display: none;
+}
+.ajax-loader{
+  height: 80px; 
+  text-align: center;
+}
+.question-container{
+  display: none;
+  .form-submit{
+    @extend .btn;
+    margin-right: 5px;
+  }
+  &#question-container-0{
+    display: block;
+  }
+}
+.question-heading{
+  @extend .mb-10;
+  @extend .mt-10;
+  font-size: 18px;
+}
+.answer-heading{
+  font-size: 14px;
+  @extend .mb-5;
+}
+.answer-container{
+  @extend .dib;
+  @extend .full;
+  @extend .mb-10;
+  .form-type-checkbox, .form-type-radio{
+    @extend .mb-5;
+  }
+  .form-type-textfield{
+    @extend .mb-10;
+    label{width: 200px; @extend .dib; @extend .vmid;}
+  }
+  .form-type-checkboxes{
+    > label{width: 200px; @extend .dib; @extend .vmid;}
+    > .rating{
+      @extend .dib; @extend .vmid;
+      .form-type-checkbox{
+        @extend .pos-rel; @extend .dib;
+        &:before{
+          content: '\f005'; color: #ddd; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;
+        }
+        &.rating-hover:before, &.rated-div:before{
+          color: #f6b800;
+        }
+        input[type="checkbox"]{
+          width: 18px; height: 18px; @extend .fleft; opacity: 0; @extend .pos-rel; z-index: 10; cursor: pointer;
+        }
+      }
+    }
   }
 }

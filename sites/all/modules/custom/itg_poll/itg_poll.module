@@ -48,7 +48,15 @@ function itg_poll_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_poll_question[und]"]' => array('value' => '_none'),
       )
     );
-    if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'poll') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')){
+    $form['field_poll_end_date']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_show_end_date[und][1]"]' => array('checked' => TRUE),
+      ),
+      'disable' => array(
+        ':input[name="field_show_end_date[und][1]"]' => array('checked' => FALSE),
+      )
+    );
+    if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'poll') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')) {
       drupal_add_js("jQuery(document).ready(function(){ jQuery('input[name=field_poll_answer_add_more]').mousedown();});", 'inline');
     }
     $form['#after_build'][] = 'itg_poll_after_build';
@@ -75,7 +83,7 @@ function itg_poll_after_build($form, &$form_state) {
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
-  drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(array('itg_poll' => array('settings' => $settings)), array('type' => 'setting'));
   return $form;
 }
 
@@ -190,10 +198,21 @@ function itg_poll_getTotalPoll($this_nid) {
 /**
  * Implements function for check user
  */
-function itg_poll_getcurrent_userpoll($nid) {
+function itg_poll_getcurrent_userpoll($nid, $uid) {
   return $total = db_select('itg_polls', 'p')
           ->fields('p', array('uid'))
-          ->condition('p.nid', $nid)->execute()->fetchField();
+          ->condition('p.nid', $nid)
+          ->condition('p.uId', $uid, '=')->execute()->fetchField();
+}
+
+/**
+ * Implements function for check user
+ */
+function itg_poll_poll_data() {
+  return $total = db_select('itg_polls', 'p')
+          ->fields('p')
+          ->condition('p.mail_flag', '1', '!=')
+          ->condition('p.uId', '0', '!=' )->execute()->fetchAll();
 }
 
 /**
@@ -249,22 +268,54 @@ function itg_poll_form($form, &$form_state, $parms) {
     '#type' => 'hidden',
     '#value' => $nid,
   );
+  
+  $form['argument_current_nid'] = array(
+    '#type' => 'hidden',
+    '#value' => arg(1),
+  );
 
   $form['display_result'] = array(
     '#type' => 'hidden',
     '#value' => $display_result,
   );
 
-  $form['captcha'] = array(
-    '#type' => 'captcha',
-    '#captcha_type' => 'recaptcha/reCAPTCHA',
-  );
+//  $form['captcha'] = array(
+//    '#type' => 'captcha',
+//    '#captcha_type' => 'recaptcha/reCAPTCHA',
+//    '#prefix' => '<div class="poll-ajax-error"></div>',
+//  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',
+     '#ajax' => array(
+        'callback' => 'itg_poll_form_ajax_submit',
+        'effect' => 'fade',
+        'progress' => array('type' => 'throbber', 'message' => ''),
+        'validate_first' => TRUE,
+      ),  
   );
 
   return $form;
+}
+
+function itg_poll_form_ajax_submit($form, &$form_state){
+   if (form_get_errors()) {
+     $error = form_get_errors();
+     $error = $error['captcha_response'];
+     $html = '<div class="error">'.$error.'</div>';
+     $commands[] = ajax_command_replace('.poll-ajax-error', $html);
+     drupal_get_messages();
+     return array('#type' => 'ajax', '#commands' => $commands);
+  }
+  $commands = array();
+	global $user;
+	//$commands[] = ajax_command_remove('section .inner-wrap .commerce-add-to-cart-confirmation');
+  $_SESSION['first_submit_anomoyous'] = 'yes';
+  $poll_answer = views_embed_view('poll_listing', 'block_2', $form_state['values']['argument_current_nid']);
+  $commands[] = ajax_command_replace('#block-views-poll-listing-block-1', $poll_answer);
+
+	return array('#type' => 'ajax', '#commands' => $commands);
+    
 }
 
 /**
@@ -292,14 +343,12 @@ function itg_poll_form_submit($form, &$form_state) {
 
   //if($display_result == 1) { //Instant Result
   // setcookie(name, value, expire, path, domain); 
+  $nId = $form_state['values']['nid'];
   $expire = time() + 60 * 60 * 24 * 30; // expires in one month
   $value = 'yes_' . $nId;
   setcookie('visitedPoll', $value, $expire, '/');
   //}
-  // you may not want to return the form at all.
-  //$element = $form['wrapper'];
-  $form['wrapper']['#markup'] = drupal_set_message('Thanks, Your Poll is valuable for me.');
-  return $form;
+
 }
 
 /**
@@ -398,14 +447,20 @@ function itg_poll_views_pre_render(&$view) {
     $view->attachment_before = $poll_content;
   }
 }
-
+/**
+ * Implement hook_form_FORM_ID_alter().
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
 function itg_poll_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-poll-listing-page') {
-    //$form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
     $form['title']['#autocomplete_path'] = 'content-title-list/poll/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+    $form['nid']['#autocomplete_path'] = 'content-nid-list/poll/autocomplete';
+    $form['nid']['#attributes'] = array('placeholder' => t('Poll ID'));
   }
 }
 
@@ -415,33 +470,168 @@ function itg_poll_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
  * @param type $query
  */
 function itg_poll_views_query_alter(&$view, &$query) {
-  if ($view->name == "autocomplete_for_poll") {
-    $join = new views_join();
-    $join->table = 'field_data_field_associate_poll';
-    $join->field = 'field_associate_poll_target_id';
-    $join->left_table = 'node';
-    $join->left_field = 'nid';
-    $join->type = 'left';
-    $query->add_relationship('dname', $join, 'node');
-    if (arg(4) == 'node' && arg(5) == 'poll' && arg(6) == "NULL") {
-      $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
-      $query->where[1]['conditions'][2]['operator'] = 'IS NULL';
-      $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
-    }
-    elseif (arg(4) == 'node' && is_numeric(arg(6)) && arg(5) == 'poll') {
-      if (is_numeric(arg(6))) {
-        $node = node_load(arg(6));
-        foreach ($node->field_associate_poll[LANGUAGE_NONE] as $value) {
-          $nid_array[] = $value;
+//  if ($view->name == "autocomplete_for_poll") {
+//    $join = new views_join();
+//    $join->table = 'field_data_field_associate_poll';
+//    $join->field = 'field_associate_poll_target_id';
+//    $join->left_table = 'node';
+//    $join->left_field = 'nid';
+//    $join->type = 'left';
+//    $query->add_relationship('dname', $join, 'node');
+//    if (arg(4) == 'node' && arg(5) == 'poll' && arg(6) == "NULL") {
+//      $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
+//      $query->where[1]['conditions'][2]['operator'] = 'IS NULL';
+//      $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
+//    }
+//    elseif (arg(4) == 'node' && is_numeric(arg(6)) && arg(5) == 'poll') {
+//      if (is_numeric(arg(6))) {
+//        $node = node_load(arg(6));
+//        if (isset($node->field_associate_poll[LANGUAGE_NONE])) {
+//         foreach ($node->field_associate_poll[LANGUAGE_NONE] as $value) {
+//            $nid_array[] = $value['target_id'];
+//          }
+//          // watchdog('vedpareek', '<pre>' . print_r($nid_array, TRUE) . '</pre>');
+//          $query->where[2]['conditions'][0]['field'] = 'dname.field_associate_poll_target_id';
+//          $query->where[2]['conditions'][0]['operator'] = 'IS NULL';
+//          $query->where[2]['conditions'][0]['field'] = 'dname.field_associate_poll_target_id';
+//          $query->where[2]['conditions'][1]['field'] = 'dname.field_associate_poll_target_id';
+//          $query->where[2]['conditions'][1]['value'] = $nid_array;
+//          $query->where[2]['conditions'][1]['operator'] = 'IN';
+//          $query->where[2]['type'] = 'OR';
+//        }else {
+//          $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
+//          $query->where[1]['conditions'][2]['operator'] = 'IS NULL';
+//          $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
+//        }
+//        
+//      }
+//    }
+//  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function itg_poll_menu() {
+  $items['send-mail'] = array(
+    'page callback' => 'itg_poll_complete_time_mail',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implement cron function for send mail.
+ */
+function itg_poll_complete_time_mail() {
+  $poll_user_value = itg_poll_poll_data();
+  p($poll_user_value);
+  if (isset($poll_user_value)) {
+    foreach ($poll_user_value as $p_user_val) {
+      $poll_user_id = $p_user_val->uId;
+      $poll_nid = $p_user_val->nId;
+      $mail_flag = $p_user_val->mail_flag;
+      $user = user_load($poll_user_id);
+      $node = node_load($poll_nid);
+      if (isset($node->field_poll_end_date) && isset($node->field_show_end_date)) {
+        $end_date = $node->field_poll_end_date[LANGUAGE_NONE][0]['value'];
+        $etime = strtotime($end_date);
+        $endtime = mktime(23, 59, 59, date("m", $etime), date("d", $etime), date("Y", $etime));
+        $display_format = $node->field_display_result[LANGUAGE_NONE][0]['value']; // After Poll Completion 
+        if ($display_format == 2 && $endtime <= time() && $mail_flag == 0) {
+          $url_nid = $node->field_associate_poll[LANGUAGE_NONE][0]['target_id'];
+          $message_body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+      <html xmlns:v="urn:schemas-microsoft-com:vml">
+      <head>
+          <title></title>
+      </head>
+      <body style="margin:0; padding:0;">
+            <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi ' . $user->name . ',</td></tr>
+            <tr><td></td></tr>
+            <tr><td>Please check your poll result on <a href="node/' . $url_nid . '">Click Here</a></td></tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr><td>Thanks,</td></tr>
+            <tr><td>India Today Team</td></tr></table>
+      </body></html>';
+          $params = array(
+            'body' => $message_body,
+            'subject' => 'India Today | poll!',
+          );
+          $mail = drupal_mail('itg_poll', 'send_mail_to_poll_submit_user', 'vedprakash.pareek@kelltontech.com', language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+          if ($mail['result']) {
+            db_update('itg_polls')
+                ->fields(array(
+                  'mail_flag' => 1,
+                ))
+                ->condition('nId', $poll_nid, '=')
+                ->condition('uId', $poll_user_id, '=')
+                ->execute();
+            return TRUE;
+          }
+          else {
+            $error_msg = 'Failed to send the email!';
+            watchdog('poll-email', $error_msg, array(), WATCHDOG_ALERT);
+            return FALSE;
+          }
         }
       }
-      $query->where[2]['conditions'][0]['field'] = 'dname.field_associate_poll_target_id';
-      $query->where[2]['conditions'][0]['operator'] = 'IS NULL';
-      $query->where[2]['conditions'][0]['field'] = 'dname.field_associate_poll_target_id';
-      $query->where[2]['conditions'][1]['field'] = 'dname.field_associate_poll_target_id';
-      $query->where[2]['conditions'][1]['value'] = $nid_array;
-      $query->where[2]['conditions'][1]['operator'] = 'IN';
-      $query->where[2]['type'] = 'OR';
     }
+  }
+}
+
+/**
+ * Send mail to expert, when query is received
+ * @global String $base_url
+ * @param String $key
+ * @param String $message
+ * @param Array $entity
+ */
+function itg_poll_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'send_mail_to_poll_submit_user':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
+}
+
+function itg_poll_node_presave($node){
+  if($node->type == 'poll'){
+    $poll_question = $node->field_poll_question[LANGUAGE_NONE][0]['value'];
+    if ($poll_question == 1) { //1 = text
+      $node->field_poll_question_image[LANGUAGE_NONE] = '';
+    } elseif ($poll_question == 2) { // Image
+      $node->field_poll_question_text[LANGUAGE_NONE] = '';
+    }elseif ($poll_question == 3) { // video
+      
+    }
+    $poll_answer_option = $node->field_poll_answer_option[LANGUAGE_NONE][0]['value'];
+    if ($poll_answer_option == 1) { //1 = text
+    //$node->field_poll_answer[LANGUAGE_NONE][$key]['field_poll_answer_image'][LANGUAGE_NONE][0]['fid'] = 0; 
+      //$node->field_poll_answer[LANGUAGE_NONE][0]['field_poll_answer_image'][LANGUAGE_NONE] = '';
+
+      foreach($node->field_poll_answer[LANGUAGE_NONE] as $key => $pollanswer){
+          unset($node->field_poll_answer[LANGUAGE_NONE][$key]['field_poll_answer_image'][LANGUAGE_NONE]); 
+      }
+    } elseif ($poll_answer_option == 2) { // Image
+      foreach($node->field_poll_answer[LANGUAGE_NONE] as $key => $pollanswer){
+          unset($node->field_poll_answer[LANGUAGE_NONE][$key]['field_poll_answer_text'][LANGUAGE_NONE]); 
+      }
+    }elseif ($poll_answer_option == 3) { // video
+      
+    }
+
   }
 }
