@@ -1307,3 +1307,22 @@ div.view table td, div.view table th{max-width: 200px;}
 .node-type-poll .content-node-view .field-label{vertical-align: top;}
 [id*="draggableviews-table-manage-blogs-page"] th.views-field-counter{padding-left: 25px;}
 [id*="field-breaking-content-details-values"] .tabledrag-hide{display: none;}
+
+/* CSS for servey */
+.answer-container{display: inline-block; width: 100%; padding: 10px 0;}
+.answer-heading{display: inline-block; width: 100px; vertical-align: top;}
+.answer-heading + .form-type-checkboxes{display: inline-block; width: 100%; vertical-align: top; margin: 0;}
+/*.answer-heading + .form-type-checkboxes > label{width: 100px;}*/
+.question-container{display: inline-block; width: 100%; padding-bottom: 20px; display: none;}
+.question-container .survey-submit{margin-right: 5px;}
+#question-container-0{display: block;}
+.form-checkboxes.rating .form-type-checkbox{position: relative; padding: 0 !important;}
+.form-checkboxes.rating .form-type-checkbox input[type="checkbox"]{width: 18px; height: 18px; float: left; opacity: 0; position: relative; z-index: 10; cursor: pointer;}
+.form-checkboxes.rating .form-type-checkbox:before{content: '\f005'; color: #ddd; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;}
+.form-checkboxes.rating .form-type-checkbox.rating-hover:before, 
+.form-checkboxes.rating .form-type-checkbox.rated-div:before{content: '\f005'; color: #f6b800; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;}
+.buzz-section{padding: 10px 0; border-top: 1px dashed #ddd;}
+.buzz-section:first-child{padding-top: 0; border: 0;}
+.ajax-loader{height: 80px; text-align: center;}
+.page-survey .block-system{min-height: 250px;}
+.page-survey .ajax-progress-throbber .message{display: none;}

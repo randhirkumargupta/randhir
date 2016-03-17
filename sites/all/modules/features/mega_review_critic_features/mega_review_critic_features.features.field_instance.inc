@@ -11,42 +11,39 @@ function mega_review_critic_features_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'field_collection_item-field_mega_review_review-field_mega_review_by_line'.
-  $field_instances['field_collection_item-field_mega_review_review-field_mega_review_by_line'] = array(
+  // 'field_collection_item-field_mega_review_review-field_buzz_headline'.
+  $field_instances['field_collection_item-field_mega_review_review-field_buzz_headline'] = array(
     'bundle' => 'field_mega_review_review',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please Enter Byline',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 1,
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
-    'field_name' => 'field_mega_review_by_line',
-    'label' => 'Byline',
+    'field_name' => 'field_buzz_headline',
+    'label' => 'HeadLine',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference',
+      'module' => 'text',
       'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 2,
+      'type' => 'text_textfield',
+      'weight' => 1,
     ),
   );
 
@@ -84,43 +81,6 @@ function mega_review_critic_features_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_mega_review_review-field_mega_review_headline'.
-  $field_instances['field_collection_item-field_mega_review_review-field_mega_review_headline'] = array(
-    'bundle' => 'field_mega_review_review',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please Enter Headline',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_mega_review_headline',
-    'label' => 'Headline',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 1,
     ),
   );
 
@@ -191,7 +151,47 @@ function mega_review_critic_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_mega_review_review-field_story_reporter'.
+  $field_instances['field_collection_item-field_mega_review_review-field_story_reporter'] = array(
+    'bundle' => 'field_mega_review_review',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_reporter',
+    'label' => 'Byline',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 2,
     ),
   );
 
@@ -972,13 +972,11 @@ function mega_review_critic_features_field_default_field_instances() {
   t('Director');
   t('Extra large image');
   t('Extra small image');
-  t('Headline');
+  t('HeadLine');
   t('Large image');
   t('Medium image');
   t('Movie Plot');
-  t('Please Enter Byline');
   t('Please Enter Description');
-  t('Please Enter Headline');
   t('Please Enter Review URL Link');
   t('Please Select Rating');
   t('Rating');

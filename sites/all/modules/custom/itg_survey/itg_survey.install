@@ -121,6 +121,20 @@ function itg_survey_schema() {
               'not null' => TRUE,
               'default' => '',
           ),
+          'survey_title' => array(
+              'description' => 'Survey Title.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'survey_key' => array(
+              'description' => 'Survey Unique key.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
           'survey_info' => array(
               'description' => 'Survey info.',
               'type' => 'varchar',
