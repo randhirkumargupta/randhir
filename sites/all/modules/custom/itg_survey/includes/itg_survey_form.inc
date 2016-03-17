@@ -18,6 +18,10 @@ function itg_survey_survey_form() {
     
     $num = 0;
     $form = array();
+    $form['survey_heading_text'] = array(
+        '#markup' => '<p>India Today Survey</p>',
+        '#attributes' => array('class' => array('india-today-survey-heading'))
+    );
 
     $total_num_of_ques = count($node->field_survey_add_questions[LANGUAGE_NONE]);
     
