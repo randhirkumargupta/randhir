@@ -10,22 +10,10 @@
 function feature_tag_management_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'administer itg_term settings'.
-  $permissions['administer itg_term settings'] = array(
-    'name' => 'administer itg_term settings',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'itg_term',
-  );
-
   // Exported permission: 'delete terms in tags'.
   $permissions['delete terms in tags'] = array(
     'name' => 'delete terms in tags',
     'roles' => array(
-      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -36,7 +24,6 @@ function feature_tag_management_user_default_permissions() {
   $permissions['edit terms in tags'] = array(
     'name' => 'edit terms in tags',
     'roles' => array(
-      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -47,6 +34,8 @@ function feature_tag_management_user_default_permissions() {
   $permissions['export taxonomy by csv'] = array(
     'name' => 'export taxonomy by csv',
     'roles' => array(
+      'Editor' => 'Editor',
+      'SEO' => 'SEO',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -57,6 +46,8 @@ function feature_tag_management_user_default_permissions() {
   $permissions['import taxonomy by csv'] = array(
     'name' => 'import taxonomy by csv',
     'roles' => array(
+      'Editor' => 'Editor',
+      'SEO' => 'SEO',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),

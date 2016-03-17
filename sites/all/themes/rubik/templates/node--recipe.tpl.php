@@ -44,7 +44,7 @@
               <h2>Basic Details</h2>
               <div class="content-details">
                 <div class="field">
-                  <div class="field-label">Title</div>
+                  <div class="field-label"><?php print t('Title'); ?></div>
                   <div class="field-items"><?php print $title; ?></div>
                 </div>
 
@@ -67,9 +67,9 @@
                   ?>
                 <?php endif; ?>
                 <?php
-                $strap = render($content['field_recipe_strap_headline']);
+                $strap = render($content['field_story_short_headline']);
                 if (!empty($strap)):
-                  print render($content['field_recipe_strap_headline']);
+                  print render($content['field_story_short_headline']);
                   ?>
                 <?php endif; ?>
                 <?php
@@ -87,9 +87,9 @@
                 <?php endif; ?>
 
                 <?php
-                $kicker = render($content['field_recipe_kicker_headline']);
+                $kicker = render($content['field_story_kicker_text']);
                 if (!empty($kicker)):
-                  print render($content['field_recipe_kicker_headline']);
+                  print render($content['field_story_kicker_text']);
                   ?>
                 <?php endif; ?>
 
@@ -118,7 +118,7 @@
               <h2>Recipe Details</h2>
               <div class="content-details">
                 <div class="field">
-                  <div class="field-label">Description / Procedure</div>
+                  <div class="field-label"><?php print t('Description / Procedure'); ?></div>
                   <div class="field-items"> <?php $description = render($content['field_recipe_description'][0]['#markup']);
             $short_des = render($content['field_label']);
                 ?>
@@ -195,7 +195,7 @@
             if (!empty($browsemediaextralarge)|| !empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediamobile)):
               ?>
               <div class="content-node-view">
-                <h2>Recipe Images</h2>
+                <h2><?php print t('Recipe Images'); ?></h2>
                 <div class="content-details">
                   <?php print drupal_render($form['field_story_extra_large_image']); ?>
                   <?php print render($content['field_story_large_image']); ?>
@@ -206,7 +206,7 @@
               </div>
             <?php endif; ?>
             <div class="content-node-view">
-            <h2>Syndication</h2>
+            <h2><?php print t('Syndication'); ?></h2>
             <div class="content-details">      
               <?php
               $syndication = render($content['field_recipe_syndication']);
@@ -225,14 +225,14 @@
 
           </div>
           <div class="content-node-view">
-            <h2>Recipe Section</h2>
+            <h2><?php print t('Recipe Section'); ?></h2>
             <div class="content-details">
               <?php
               $section = render($content['field_story_category']);
               if (!empty($section)):
                 ?>    
-    <?php print render($content['field_story_category']); ?>
-  <?php endif; ?>
+              <?php print render($content['field_story_category']); ?>
+            <?php endif; ?>
             </div>
           </div>
             <?php

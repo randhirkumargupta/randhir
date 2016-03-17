@@ -44,7 +44,7 @@
               <h2>Basic Details</h2>
               <div class="content-details">
                 <div class="field">
-                  <div class="field-label">Title</div>
+                  <div class="field-label"><?php print t('Title'); ?></div>
                   <div class="field-items"><?php print $title; ?></div>
                 </div>
 
@@ -63,7 +63,7 @@
                 <?php endif; ?>
               </div>
               <div class="content-node-view">
-                <h2>Blog Description</h2>
+                <h2><?php print t('Blog Description'); ?></h2>
                 <div class="content-details">      
                   <?php
                   $long_description = render($content['field_blog_long_description']);
@@ -74,7 +74,7 @@
                   </div>
                 </div>
                <div class="content-node-view">
-                <h2>Bloggers</h2>
+                <h2><?php print t('Bloggers'); ?></h2>
                 <div class="content-details">
                   <?php
                   $bloggers = render($content['field_blog_blogger']);
@@ -86,7 +86,7 @@
                 </div>
               
               <div class="content-node-view">
-                <h2>Sections</h2>
+                <h2><?php print t('Sections'); ?></h2>
                 <div class="content-details">
                   <?php
                   $selection = render($content['field_story_category']);

@@ -53,7 +53,10 @@ function pr($arg) {
 function itg_common_dropdown_supplement($id = '') {
 
   // Fetch query for supplements 
-  $data = '';
+  // $data = '';
+  $select = t('- None -');
+  $data = array('_none' => $select);
+    
   $query = db_select('field_data_field_supp_select_magazine', 'm');
   $query->join('node', 'n', 'm.entity_id = n.nid');
   $query->fields('m', array('entity_id'));
@@ -67,9 +70,10 @@ function itg_common_dropdown_supplement($id = '') {
   }
 
   //If record found, then return array else return blank
-  if (empty($data)) {
-    $data = array('_none' => '-Select-');
-  }
+//  if (empty($data)) {
+//    $select = t('-Select-');
+//    $data = array('_none' => $select);
+//  }
 
   return $data;
 }
@@ -85,10 +89,13 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#description'] = $form['title']['#title'];
     }
   }
+  
   // Extra meta tags element hide from form
   if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form') {
     $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+    $form['#after_build'][] = 'itg_common_cancel_button';   
   }
+  
   //Auto Generate image according photogallery
    if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form') {
      $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<div class="img-crt"></div>');
@@ -136,25 +143,13 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
  * @return 
  */
 function itg_meta_tags_extra_element_hide($form, &$form_state) {
-  global $user, $base_url;
+  global $user, $base_url;  
   
-  if (!isset($_REQUEST['destination'])) {
-    $destination = '';
-  } else {
-      $destination_array = explode('?', $_REQUEST['destination']);
-      $destination = $destination_array[0];
-  }
-
-  $form['actions']['cancel'] = array(
-    '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-    '#weight' => 20,
-  );
-
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
 
-  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
-  $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';
+  $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
+  $form['path']['#prefix'] = '<div class="story-title">'.t('Meta Tags').'</div>';
 
   drupal_add_js('jQuery(document).ready(function() {
              // hide some eliment of metatags
@@ -168,6 +163,30 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
 }
 
 /**
+ * Extra meta tags element hide from form 
+ * @param Array $form
+ * @param Array $form_state
+ * @return 
+ */
+function itg_common_cancel_button($form, &$form_state) {
+  global $user, $base_url;
+  
+  if (!isset($_REQUEST['destination'])) {
+    $destination = '';
+  } else {
+      $destination_array = explode('?', $_REQUEST['destination']);
+      $destination = $destination_array[0];
+  }
+
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+  
+  return $form;
+}
+
+/**
  * Implements views header link 
  * @param type $view Description
  */
@@ -176,7 +195,7 @@ function itg_common_views_pre_render(&$view) {
   if ($view->name == "byline_list") {
     global $user; // Get user information
     
-    $header_content = l('Create Byline', 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
+    $header_content = l(t('Create Byline'), 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
     
     $view->attachment_before = $header_content;
   }    
@@ -192,4 +211,14 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
    if (isset($form['title'])) {
     $form['title']['#maxlength']= 255;
    }
+}
+
+/**
+ * Implement hook_date_popup_process_alter().
+ */
+function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
+  $element['#datepicker_options'] = array(
+      'minDate' => "+0D",
+  );
+  $element['date'] = date_popup_process_date_part($element);
 }
