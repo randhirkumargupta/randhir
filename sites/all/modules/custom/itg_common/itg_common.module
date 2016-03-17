@@ -84,6 +84,18 @@ function itg_common_dropdown_supplement($id = '') {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   
+  // code to change page title on node edit
+  if (!empty($form['nid']['#value'])) {
+    /* @var $node_type string */
+    $node_type = $form['#node']->type;
+    $node_type = str_replace("_", " ", $node_type);
+    $node_type = ucfirst($node_type);
+    $node_title = $form['#node']->title;
+    $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
+    drupal_set_title($edit_title);
+  }
+
+
   if ($form_id != 'ask_an_expert_node_form') {
     if (isset($form['title']['#title'])) {
       $form['title']['#description'] = $form['title']['#title'];
@@ -91,8 +103,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
   
   // Extra meta tags element hide from form
-  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form') {
-    $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form') {
+    if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+      $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+    }
     $form['#after_build'][] = 'itg_common_cancel_button';   
   }
   
@@ -217,8 +231,10 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * Implement hook_date_popup_process_alter().
  */
 function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-  $element['#datepicker_options'] = array(
+  if ($form_state['build_info']['form_id'] != 'views_exposed_form') {
+    $element['#datepicker_options'] = array(
       'minDate' => "+0D",
-  );
-  $element['date'] = date_popup_process_date_part($element);
+    );
+    $element['date'] = date_popup_process_date_part($element);
+  }
 }
