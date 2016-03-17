@@ -42,7 +42,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
       drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
     );
     if ($form['nid']['#value'] == NULL) {
-      $form['title']['#default_value'] = date('M jS Y');
+      $form['title']['#default_value'] = date('M j, Y');
     }
     $form['#action'] = '?destination=manage-astro';
     $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';    
