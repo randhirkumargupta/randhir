@@ -275,29 +275,99 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     var skipValue = $(this).parents('.question-container').find('.question-skip').val();
     
     if(checkValue && skipValue == 'no'){
-      $('.question-container').hide();
-      $(this).parents('.question-container').next().show();
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
     } else if(skipValue == 'yes'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    }
+    
+    if(radioValue && skipValue == 'no'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    } else if(skipValue == 'yes'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    }
+    
+    if(textValue  && skipValue == 'no' && textValue != 'undefined'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    } else if(skipValue == 'yes'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    }
+    
+  });
+  
+  var loader = '<div class="ajax-loader"><img src="sites/all/themes/rubik/images/loader.svg" alt=""/></div>';
+  
+  $('#itg-survey-survey-form .button-yes').mousedown(function(){
+    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
+    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
+    var textValue = $(this).parents('.question-container').find('.form-text').val();
+    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
+    
+    if(checkValue && skipValue == 'no'){
       $('.question-container').hide();
-      $(this).parents('.question-container').next().show();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+      
+    } else if(skipValue == 'yes'){
+     $('.question-container').hide();
+     $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
     }
     
     if(radioValue && skipValue == 'no'){
       $('.question-container').hide();
-      $(this).parents('.question-container').next().show();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
     } else if(skipValue == 'yes'){
-      $('.question-container').hide();
-      $(this).parents('.question-container').next().show();
+     $('.question-container').hide();
+     $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
     }
     
     if(textValue  && skipValue == 'no' && textValue != 'undefined'){
       $('.question-container').hide();
-      $(this).parents('.question-container').next().show();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
     } else if(skipValue == 'yes'){
       $('.question-container').hide();
-      $(this).parents('.question-container').next().show();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
     }
-    
   });
 
 };
