@@ -70,6 +70,13 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['field_tags_display']['id'] = 'field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['table'] = 'field_data_field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['field'] = 'field_tags_display';
+  /* Filter criterion: Taxonomy term: Vocabulary */
+  $handler->display->display_options['filters']['vid']['id'] = 'vid';
+  $handler->display->display_options['filters']['vid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['vid']['field'] = 'vid';
+  $handler->display->display_options['filters']['vid']['value'] = array(
+    1 => '1',
+  );
 
   /* Display: Data export */
   $handler = $view->new_display('page', 'Data export', 'page');
@@ -125,7 +132,7 @@ function feature_tag_management_views_default_views() {
     'tid' => 'tid',
     'created' => 'created',
     'changed' => 'changed',
-    'edit_term' => 'nothing',
+    'edit_term' => 'edit_term',
     'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -238,14 +245,17 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['edit_term']['field'] = 'edit_term';
   $handler->display->display_options['fields']['edit_term']['relationship'] = 'tid';
   $handler->display->display_options['fields']['edit_term']['label'] = 'Edit link';
-  $handler->display->display_options['fields']['edit_term']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_term']['alter']['text'] = '<span class="edit-link">[edit_term]</span> | ';
+  $handler->display->display_options['fields']['edit_term']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['edit_term']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['edit_term']['hide_empty'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<span class="delete-link"><a href="./texonomy/confirm/ajax/[tid]">Delete</a></span>';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<span class="edit-link">[edit_term]</span><span class ="views-action-separator"> | </span><span class="delete-link"><a href="./texonomy/confirm/ajax/[tid]">Delete</a></span>';
+  $handler->display->display_options['fields']['nothing']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['hide_alter_empty'] = TRUE;
   /* Sort criterion: Category Manager: changed field */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
   $handler->display->display_options['sorts']['changed']['table'] = 'itg_category_manager';

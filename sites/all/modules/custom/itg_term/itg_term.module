@@ -235,11 +235,14 @@ function itg_term_views_pre_render(&$view) {
     if (isset($view->name) && $view->name == "tags_management") {
         if (arg(0) == 'tags-management') {
             global $user;
-            if (!in_array('Site Admin', $user->roles)) {
+            $user_roles = array_values($user->roles);
+
+            if (!in_array('Site Admin', $user_roles) && !in_array('administrator', $user_roles)) {
                 if (is_object($view->field['nothing']) && count($view->field['nothing']) > 0) {
                     if (is_array($view->field['nothing']->options['alter']) && count($view->field['nothing']->options['alter']) > 0) {
                         if (isset($view->field['nothing']->options['alter']['text'])) {
-                            $view->field['nothing']->options['alter']['text'] = '';
+                        $view->field['nothing']->options['label'] = '';
+                        $view->field['nothing']->options['alter']['text'] = '';
                         }
 
                     }
@@ -252,11 +255,15 @@ function itg_term_views_pre_render(&$view) {
                 // To unset message
 
                 unset($_SESSION['messages']['status']);
-                unset($_SESSION['messages']['warning']);
 
-                // To override message
+                if (isset($_SESSION['messages']['warning'])) {
+                    //unset($_SESSION['messages']['warning']);
 
-                drupal_set_message(t('Warnings have been reported during import process (bad formatted)') , 'warning');
+                    // To override message
+
+                    //drupal_set_message(t('Warnings have been reported during import process (bad formatted)') , 'warning');
+                }
+
                 drupal_set_message(t('Terms are imported into vocabulary "tags".'));
             }
             elseif (isset($message_arr['status']) && $message_arr['status'][0] == variable_get('term_export_message')) {
