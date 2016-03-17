@@ -148,6 +148,10 @@ function rubik_preprocess_page(&$vars) {
   if (arg(2) == 'taxonomy' && arg(3) == 'category_management' && arg(4) == 'add') {
     drupal_set_title('Create Category');
   }
+  //  // Change create Tag page title.
+  if (arg(2) == 'taxonomy' && arg(3) == 'tags' && arg(4) == 'add') {
+    drupal_set_title('Create Tag');
+  }
   
 }
 
@@ -384,7 +388,7 @@ function rubik_breadcrumb($vars) {
         $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
       }
       else {
-        $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $title : check_plain($title);
+        $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $title : decode_entities(check_plain($title));
       }
     }
   }

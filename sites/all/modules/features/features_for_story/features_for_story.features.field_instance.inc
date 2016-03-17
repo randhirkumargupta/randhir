@@ -1158,7 +1158,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_large_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 225)',
+    'description' => 'Image Size (300x350)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1438,7 +1438,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_medium_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 350)',
+    'description' => 'Image Size (300 x 225)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2431,7 +2431,7 @@ function features_for_story_field_default_field_instances() {
   t('Image');
   t('Image Size (210 x 145)');
   t('Image Size (300 x 225)');
-  t('Image Size (300 x 350)');
+  t('Image Size (300x350)');
   t('Image Size (650 x 445)');
   t('Image Size (88 x 66)');
   t('Issue based story');
