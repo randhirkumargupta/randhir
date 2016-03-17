@@ -1321,3 +1321,6 @@ div.view table td, div.view table th{max-width: 200px;}
 .form-checkboxes.rating .form-type-checkbox:before{content: '\f005'; color: #ddd; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;}
 .form-checkboxes.rating .form-type-checkbox.rating-hover:before, 
 .form-checkboxes.rating .form-type-checkbox.rated-div:before{content: '\f005'; color: #f6b800; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;}
+.buzz-section{padding: 10px 0; border-top: 1px dashed #ddd;}
+.buzz-section:first-child{padding-top: 0; border: 0;}
+.ajax-loader{height: 80px; text-align: center;}
