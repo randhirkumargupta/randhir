@@ -39,6 +39,13 @@ function itg_poll_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
+      'mail_flag' => array(
+        'description' => 'send mail flag 1',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'created' => array(
         'description' => t('Created Poll date'),
         'type' => 'varchar',
