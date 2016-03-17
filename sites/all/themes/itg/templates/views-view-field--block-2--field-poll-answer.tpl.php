@@ -6,20 +6,21 @@ if (isset($view->result[0]->nid)) {
   $this_nid = $view->result[0]->nid;
 
   $isCookies = itg_poll_isCookies($this_nid);
-}
-if (isset($isCookies) && $isCookies == 'yes') {
-   drupal_add_js("jQuery(document).ready(function(){jQuery('#block-views-poll-listing-block-1').hide(); });", 'inline');
+  $poll_uid = itg_poll_getcurrent_userpoll($this_nid, $user->uid);
 }
 
-// || (getcurrent_userpoll($this_nid) == $user->uid)
-if (isset($isCookies) && $isCookies == 'yes') {
-  $result_format = $view->result[0]->_field_data['nid']['entity']->field_result_format['und'][0]['value'];
-  $display_format = $view->result[0]->_field_data['nid']['entity']->field_display_result['und'][0]['value'];
+if ((isset($isCookies) && $isCookies == 'yes' && user_is_anonymous()) || (user_is_logged_in() && $poll_uid == $user->uid)) {
+  drupal_add_js("jQuery(document).ready(function(){jQuery('#block-views-poll-listing-block-1').hide(); });", 'inline');
+}
+
+if ((isset($isCookies) && $isCookies == 'yes' && user_is_anonymous()) || (isset($_SESSION['first_submit_anomoyous']) && $_SESSION['first_submit_anomoyous'] == 'yes' && user_is_anonymous()) || (user_is_logged_in() && $poll_uid == $user->uid)) {
+  $result_format = $view->result[0]->_field_data['nid']['entity']->field_result_format[LANGUAGE_NONE][0]['value'];
+  $display_format = $view->result[0]->_field_data['nid']['entity']->field_display_result[LANGUAGE_NONE][0]['value'];
   $optionArr = itg_poll_getPollResult($this_nid);
   $opttotal = itg_poll_getTotalPoll($this_nid);
 
   foreach ($view->result as $item) {
-    foreach ($item->_field_data['nid']['entity']->field_poll_answer['und'] as $row) {
+    foreach ($item->_field_data['nid']['entity']->field_poll_answer[LANGUAGE_NONE] as $row) {
       $item_id[] = $row['value'];
     }
   }
@@ -34,7 +35,7 @@ if (isset($isCookies) && $isCookies == 'yes') {
       $polls_answer_image = isset($temp_ents->field_poll_answer_image[LANGUAGE_NONE]) ? trim($temp_ents->field_poll_answer_image[LANGUAGE_NONE][0]['fid']) : '';
 
       if (isset($polls_answer_image) && $polls_answer_image > 0) {
-          $poll_image = theme('image_style', array('style_name' => 'thumbnail', 'path' => file_load($polls_answer_image)->uri));
+        $poll_image = theme('image_style', array('style_name' => 'thumbnail', 'path' => file_load($polls_answer_image)->uri));
       }
 
       $ansId = isset($optionArr[$temp_ent_id]->ansId) ? $optionArr[$temp_ent_id]->ansId : '';
@@ -46,36 +47,31 @@ if (isset($isCookies) && $isCookies == 'yes') {
       if ($result_format == 1) { // Percent
         if (isset($finaltotal)) {
 
-          $outputnew = number_format(($optionCnt / $finaltotal) * 100, 2);
+          $outputnew = '<strong>Percent: </strong> ' . number_format(($optionCnt / $finaltotal) * 100, 2) . '%';
         }
       }
       elseif ($result_format == 2) { // Number of votes
-        $outputnew = $optionCnt;
+        $outputnew = '<strong>Number of vote: </strong> ' . $optionCnt;
       }
       ?>
 
-   
-        <div class="poll-list">
-              <?php if ($polls_answer_text) { ?>
-              <div class="poll-text">
-              <?php print $polls_answer_text; ?>
-              </div>
-            <?php } ?>
-              <?php if (isset($poll_image)) { ?>
-              <div class="poll-image">
-              <?php print $poll_image; ?>
-              </div>
-            <?php } ?> 
 
-          <div class="pole-vote"><strong>Number of vote: </strong> <?php print $outputnew; ?></div>
-        </div>
-
-
+      <div class="poll-list">
+        <?php if ($polls_answer_text) { ?>
+          <div class="poll-text">
+            <?php print $polls_answer_text; ?>
+          </div>
+        <?php } ?>
+        <?php if (isset($poll_image)) { ?>
+          <div class="poll-image">
+            <?php print $poll_image; ?>
+          </div>
+        <?php } ?>
+        <div class="pole-vote"> <?php print $outputnew; ?></div>
+      </div>  
       <?php
     }
-    
   }
- 
 }
 else {
   // unset data	

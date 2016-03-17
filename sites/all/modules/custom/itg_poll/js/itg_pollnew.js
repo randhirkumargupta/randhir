@@ -6,7 +6,7 @@
 
 (function($) {
 
-    Drupal.behaviors.itg_photogallery_form = {
+    Drupal.behaviors.itg_poll_form = {
        attach: function(context, settings) {
            
            var getOptionAnswerValnew = $( "#edit-field-poll-answer-option-und option:selected" ).val();
@@ -39,7 +39,7 @@
            
            $('.tabledrag-toggle-weight-wrapper a.tabledrag-toggle-weight').hide();
            $('.form-item-field-gallery-image-add-more-number').hide();
-            var uid = settings.itg_photogallery.settings.uid;
+            var uid = settings.itg_poll.settings.uid;
                         // code to hide body text format filter 
                         if (uid != 1) {
                         $('#edit-field-gallery-kicer-und-0-format').hide();

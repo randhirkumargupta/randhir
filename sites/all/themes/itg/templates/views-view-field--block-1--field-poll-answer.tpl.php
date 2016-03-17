@@ -25,14 +25,16 @@
 $this_nid = $view->result[0]->nid;
 global $user;
 $isCookies = itg_poll_isCookies($this_nid);
-if ($isCookies != 'yes') {
+$poll_uid = itg_poll_getcurrent_userpoll($this_nid, $user->uid);
+if (($isCookies != 'yes' && user_is_anonymous()) || (user_is_logged_in() && $poll_uid != $user->uid)) {
+//if ($isCookies != 'yes') {
   ?>
   <div class="poll-main">
-  <?php
-  if (is_array($view->result) && count($view->result) > 0) {
-    $itg_poll_form = drupal_get_form('itg_poll_form', $view->result);
-    print drupal_render($itg_poll_form);
+    <?php
+    if (is_array($view->result) && count($view->result) > 0) {
+      $itg_poll_form = drupal_get_form('itg_poll_form', $view->result);
+      print drupal_render($itg_poll_form);
+    }
   }
-}
-?>
+  ?>
 
