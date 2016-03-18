@@ -498,43 +498,43 @@ function itg_poll_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
  * @param type $query
  */
 function itg_poll_views_query_alter(&$view, &$query) {
-//  if ($view->name == "autocomplete_for_poll") {
-//    $join = new views_join();
-//    $join->table = 'field_data_field_associate_poll';
-//    $join->field = 'field_associate_poll_target_id';
-//    $join->left_table = 'node';
-//    $join->left_field = 'nid';
-//    $join->type = 'left';
-//    $query->add_relationship('dname', $join, 'node');
-//    if (arg(4) == 'node' && arg(5) == 'poll' && arg(6) == "NULL") {
-//      $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
-//      $query->where[1]['conditions'][2]['operator'] = 'IS NULL';
-//      $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
-//    }
-//    elseif (arg(4) == 'node' && is_numeric(arg(6)) && arg(5) == 'poll') {
-//      if (is_numeric(arg(6))) {
-//        $node = node_load(arg(6));
-//        if (isset($node->field_associate_poll[LANGUAGE_NONE])) {
-//         foreach ($node->field_associate_poll[LANGUAGE_NONE] as $value) {
-//            $nid_array[] = $value['target_id'];
-//          }
-//          // watchdog('vedpareek', '<pre>' . print_r($nid_array, TRUE) . '</pre>');
-//          $query->where[2]['conditions'][0]['field'] = 'dname.field_associate_poll_target_id';
-//          $query->where[2]['conditions'][0]['operator'] = 'IS NULL';
-//          $query->where[2]['conditions'][0]['field'] = 'dname.field_associate_poll_target_id';
-//          $query->where[2]['conditions'][1]['field'] = 'dname.field_associate_poll_target_id';
-//          $query->where[2]['conditions'][1]['value'] = $nid_array;
-//          $query->where[2]['conditions'][1]['operator'] = 'IN';
-//          $query->where[2]['type'] = 'OR';
-//        }else {
-//          $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
-//          $query->where[1]['conditions'][2]['operator'] = 'IS NULL';
-//          $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
-//        }
-//        
-//      }
-//    }
-//  }
+  if ($view->name == "autocomplete_for_poll") {
+    $join = new views_join();
+    $join->table = 'field_data_field_associate_poll';
+    $join->field = 'field_associate_poll_target_id';
+    $join->left_table = 'node';
+    $join->left_field = 'nid';
+    $join->type = 'left';
+    $query->add_relationship('dname', $join, 'node');
+    if (arg(4) == 'node' && arg(5) == 'poll' && arg(6) == "NULL") {
+      $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
+      $query->where[1]['conditions'][2]['operator'] = 'IS NULL';
+      $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
+    }
+    elseif (arg(4) == 'node' && is_numeric(arg(6)) && arg(5) == 'poll') {
+      if (is_numeric(arg(6))) {
+        $node = node_load(arg(6));
+        if (isset($node->field_associate_poll[LANGUAGE_NONE])) {
+         foreach ($node->field_associate_poll[LANGUAGE_NONE] as $value) {
+            $nid_array[] = $value['target_id'];
+          }
+          // watchdog('vedpareek', '<pre>' . print_r($nid_array, TRUE) . '</pre>');
+          $query->where[2]['conditions'][0]['field'] = 'dname.field_associate_poll_target_id';
+          $query->where[2]['conditions'][0]['operator'] = 'IS NULL';
+          $query->where[2]['conditions'][0]['field'] = 'dname.field_associate_poll_target_id';
+          $query->where[2]['conditions'][1]['field'] = 'dname.field_associate_poll_target_id';
+          $query->where[2]['conditions'][1]['value'] = $nid_array;
+          $query->where[2]['conditions'][1]['operator'] = 'IN';
+          $query->where[2]['type'] = 'OR';
+        }else {
+          $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
+          $query->where[1]['conditions'][2]['operator'] = 'IS NULL';
+          $query->where[1]['conditions'][2]['field'] = 'dname.field_associate_poll_target_id';
+        }
+        
+      }
+    }
+  }
 }
 
 /**
