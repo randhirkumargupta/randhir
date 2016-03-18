@@ -29,7 +29,7 @@
       <?php if (!empty($title) && !$page): ?>
         <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
           <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-          <a href="<?php print $node_url ?>"><?php  print $title ?></a>
+          <a href="<?php print $node_url ?>"><?php print $title ?></a>
         </h2>
       <?php endif; ?>
 
@@ -41,7 +41,7 @@
 
           <?php if ($view_mode == 'full'): ?>
             <div class="content-node-view">
-              <h2>Basic Details</h2>
+              <h2><?php print t('Basic Details'); ?></h2>
               <div class="content-details">
                 <div class="field">
                   <div class="field-label"><?php print t('Title'); ?></div>
@@ -71,20 +71,20 @@
                     print render($content['field_blog_long_description']);
                     ?>
                   <?php endif; ?>
-                  </div>
                 </div>
-               <div class="content-node-view">
+              </div>
+              <div class="content-node-view">
                 <h2><?php print t('Bloggers'); ?></h2>
                 <div class="content-details">
                   <?php
-                  $bloggers = render($content['field_blog_blogger']);
+                  $bloggers = render($content['field_blog_bloggers']);
                   if (!empty($bloggers)):
-                    print render($content['field_blog_blogger']);
+                    print render($content['field_blog_bloggers']);
                     ?>
                   <?php endif; ?>
-                  </div>
                 </div>
-              
+              </div>
+
               <div class="content-node-view">
                 <h2><?php print t('Sections'); ?></h2>
                 <div class="content-details">
@@ -109,4 +109,3 @@
 </div>
 
 <?php if (!empty($post_object)) print render($post_object) ?>
-

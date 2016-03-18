@@ -19,7 +19,7 @@
 </div>
 <div id="Bloggers">
   <h2 class="story-title"><?php print t('Bloggers Name'); ?></h2>
-  <?php print drupal_render($form['field_blog_blogger']); ?>
+  <?php print drupal_render($form['field_blog_bloggers']); ?>
 </div>
 <div id="categorySection">
   <h2 class="story-title"><?php print t('Section'); ?></h2>
