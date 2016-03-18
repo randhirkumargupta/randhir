@@ -254,6 +254,7 @@ function itg_survey_get_survey_by_users($nid, $user_type){
 function itg_survey_get_total_survey($nid){
     $result = db_select('itg_survey_user', 'isu')
             ->fields('isu')
+            ->condition('isu.nid', $nid, '=')
             ->execute();
     $total_survey = $result->rowCount();
     if($total_survey){

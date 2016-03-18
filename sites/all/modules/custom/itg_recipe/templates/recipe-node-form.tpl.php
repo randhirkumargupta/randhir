@@ -1,6 +1,5 @@
 <?php
-
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -15,13 +14,16 @@
   <?php print drupal_render($form['field_recipe_content_type']); ?>
   <?php print drupal_render($form['field_recipe_video']); ?>
   <?php print drupal_render($form['field_recipe_audio']); ?>
+  <?php print drupal_render($form['field_recipe_food_type']); ?>
   <?php print drupal_render($form['field_story_short_headline']); ?>
   <?php print drupal_render($form['field_recipe_long_headline']); ?>
   <?php print drupal_render($form['field_recipe_wap_headline']); ?>
   <?php print drupal_render($form['field_story_kicker_text']); ?>
   <?php print drupal_render($form['field_story_reporter']); ?>
   <?php print drupal_render($form['field_story_courtesy']); ?>
-  <?php print drupal_render($form['field_stroy_city']); ?>
+  <?php print drupal_render($form['field_recipe_ingredients']); ?>
+  <?php print drupal_render($form['field_recipe_garnishing']); ?>
+  <?php print drupal_render($form['field_associate_photo_gallery']); ?>
 </div>
 
 <div id="RecipeDetails">
@@ -35,7 +37,6 @@
   <?php print drupal_render($form['field_recipe_ailment']); ?>
   <?php print drupal_render($form['field_recipe_meal_type']); ?>
   <?php print drupal_render($form['field_recipe_festivals']); ?>
-  <?php print drupal_render($form['field_recipe_ingredient']); ?>
 </div>
 <div id="RecipeImages">
   <h2 class="story-title"><?php print t('Recipe Images'); ?></h2>
@@ -43,7 +44,6 @@
   <?php print drupal_render($form['field_story_large_image']); ?>
   <?php print drupal_render($form['field_story_medium_image']); ?>
   <?php print drupal_render($form['field_story_small_image']); ?>
-  <?php print drupal_render($form['field_recipe_mobile_image']); ?>
 </div>
 <div id="RecipeSyndication">
   <h2 class="story-title"><?php print t('Syndication'); ?></h2>
