@@ -176,8 +176,8 @@ function mega_review_critic_features_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_story_reporter',
-    'label' => 'Byline',
-    'required' => 0,
+    'label' => 'Reviewer',
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -195,19 +195,277 @@ function mega_review_critic_features_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-mega_review_critic-field_mega_review_cast'.
-  $field_instances['node-mega_review_critic-field_mega_review_cast'] = array(
-    'bundle' => 'mega_review_critic',
+  // Exported field_instance: 'node-itg_celebrity_profile-body'.
+  $field_instances['node-itg_celebrity_profile-body'] = array(
+    'bundle' => 'itg_celebrity_profile',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Cast',
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'body',
+    'label' => 'About',
+    'required' => 0,
+    'settings' => array(
+      'display_summary' => 1,
+      'exclude_cv' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-itg_celebrity_profile-field_celebrity_pro_occupation'.
+  $field_instances['node-itg_celebrity_profile-field_celebrity_pro_occupation'] = array(
+    'bundle' => 'itg_celebrity_profile',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_celebrity_pro_occupation',
+    'label' => 'Occupation',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'autocomplete_deluxe',
+      'settings' => array(
+        'autocomplete_deluxe_path' => 'autocomplete_deluxe/taxonomy',
+        'delimiter' => '',
+        'limit' => 10,
+        'min_length' => 0,
+        'not_found_message' => 'The Occupation \'@term\' will be added.',
+        'size' => 60,
+      ),
+      'type' => 'autocomplete_deluxe_taxonomy',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-itg_celebrity_profile-field_reporter_email_id'.
+  $field_instances['node-itg_celebrity_profile-field_reporter_email_id'] = array(
+    'bundle' => 'itg_celebrity_profile',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_email_id',
+    'label' => 'Email id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-itg_celebrity_profile-field_reporter_twitter_handle'.
+  $field_instances['node-itg_celebrity_profile-field_reporter_twitter_handle'] = array(
+    'bundle' => 'itg_celebrity_profile',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_twitter_handle',
+    'label' => 'Reporter Twitter Handle',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-itg_celebrity_profile-field_user_picture'.
+  $field_instances['node-itg_celebrity_profile-field_user_picture'] = array(
+    'bundle' => 'itg_celebrity_profile',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_user_picture',
+    'label' => 'Picture',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-mega_review_critic-field_mega_review_cast'.
+  $field_instances['node-mega_review_critic-field_mega_review_cast'] = array(
+    'bundle' => 'mega_review_critic',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -220,20 +478,21 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_mega_review_cast',
     'label' => 'Cast',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'entityreference',
       'settings' => array(
-        'rows' => 3,
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
       ),
-      'type' => 'text_textarea',
-      'weight' => 1,
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 2,
     ),
   );
 
@@ -276,7 +535,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -319,7 +578,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -362,7 +621,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -457,7 +716,46 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-mega_review_critic-field_mega_review_type'.
+  $field_instances['node-mega_review_critic-field_mega_review_type'] = array(
+    'bundle' => 'mega_review_critic',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 17,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mega_review_type',
+    'label' => 'Mega Review Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 1,
     ),
   );
 
@@ -525,7 +823,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -575,7 +873,7 @@ function mega_review_critic_features_field_default_field_instances() {
       'module' => 'youtube',
       'settings' => array(),
       'type' => 'youtube',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -652,7 +950,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -805,7 +1103,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -882,7 +1180,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -964,24 +1262,30 @@ function mega_review_critic_features_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('About');
   t('Associate Photo Gallery');
   t('Associate Video');
-  t('Byline');
   t('Cast');
   t('Description');
   t('Director');
+  t('Email id');
   t('Extra large image');
   t('Extra small image');
   t('HeadLine');
   t('Large image');
   t('Medium image');
+  t('Mega Review Type');
   t('Movie Plot');
+  t('Occupation');
+  t('Picture');
   t('Please Enter Description');
   t('Please Enter Review URL Link');
   t('Please Select Rating');
   t('Rating');
+  t('Reporter Twitter Handle');
   t('Review');
   t('Review URL Link');
+  t('Reviewer');
   t('Small image');
   t('Twitter handle & tag (widget)');
   t('Youtube url');
