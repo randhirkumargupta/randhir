@@ -59,15 +59,7 @@ function itg_users_cms_user_dashboard() {
 function itg_users_form_alter(&$form, &$form_state, $form_id) {
   
   global $user;
-  
-   if($form_id == 'user_login'  || $form_id == 'user_login_block') {
-    $user_login_final_validate_index = array_search('user_login_final_validate', $form['#validate']);
-      if ($user_login_final_validate_index >= 0) {
-        $form['#validate'][$user_login_final_validate_index] = 'itg_users_final_validate';
-    }
-   }
-
-  
+    
   if ($form_id == 'user_profile_form') {
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#attributes']['disabled'] = 'disabled';
@@ -416,9 +408,4 @@ function itg_users_tokens($type, $tokens, array $data = array(), array $options 
   }
 
   return $replacements;
-}
-
-function itg_users_final_validate($form, &$form_state) {
-  form_set_error('name', t('The username or password entered by you is incorrect. Please try again or click forgot password to retrieve your password'));
-      watchdog('user', 'Login attempt failed for %user.', array('%user' => $form_state['values']['name']));
 }
