@@ -385,7 +385,7 @@ function feature_for_recipe_views_default_views() {
   /* Display: Cooking Tips */
   $handler = $view->new_display('page', 'Cooking Tips', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Cooking Tips';
+  $handler->display->display_options['title'] = 'Manage Cooking Tips';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
