@@ -61,7 +61,7 @@
                   print render($content['field_blog_short_description']);
                   ?>
                 <?php endif; ?>
-              </div>
+              </div></div>
               <div class="content-node-view">
                 <h2><?php print t('Blog Description'); ?></h2>
                 <div class="content-details">      
@@ -93,10 +93,11 @@
                   if (!empty($selection)):
                     print render($content['field_story_category']);
                     ?>
+                  <?php endif; ?>
                   </div>
                 </div>
-              <?php endif; ?>
-            </div>
+              
+            
 
           <?php endif; ?>
 
