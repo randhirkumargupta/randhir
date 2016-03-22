@@ -51,7 +51,7 @@ if ((isset($isCookies) && $isCookies == 'yes' && user_is_anonymous()) || (isset(
         }
       }
       elseif ($result_format == 2) { // Number of votes
-        $outputnew = '<strong>Number of vote: </strong> ' . $optionCnt;
+        $outputnew = '<strong>Number of votes: </strong> ' . $optionCnt;
       }
       ?>
 
