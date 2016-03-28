@@ -1251,9 +1251,7 @@ div.view table td, div.view table th{max-width: 200px;}
 .view-movie-review-list .tabledrag-toggle-weight-wrapper, 
 .node-issue-form .tabledrag-hide{display: none;}
 #branding .breadcrumb-link > a, #branding .breadcrumb-link > strong{max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-.field-name-field-recipe-ingredients.field-widget-text-textfield, 
-.field-type-text.field-name-field-blog-bloggers{float:left; max-width: 300px; margin-right: 10px;}
-.field-type-text.field-name-field-blog-bloggers .form-text,
+.field-name-field-recipe-ingredients.field-widget-text-textfield{float:left; max-width: 300px; margin-right: 10px;}
 .field-name-field-recipe-ingredients.field-widget-text-textfield .form-text{max-width: 100% !important;}
 [id*="edit-field-field-issue-import-xml-und"] > legend{padding: 10px 10px 0;}
 .page-tags-management div.views-exposed-form input.form-text{box-sizing: border-box;}
@@ -1336,3 +1334,4 @@ div.view table td, div.view table th{max-width: 200px;}
 .node-blog-form .field-name-field-blog-image .form-managed-file{overflow: visible;}
 .node-blog-form .field-name-field-blog-image .form-managed-file div.image-widget-data div.description{left: 0; bottom: 30px;}
 .view-strory-menegment.view-display-id-page_1 .view-content .form-submit{margin-right: 5px;}
+.content-node-view .field-label {vertical-align: top;}
