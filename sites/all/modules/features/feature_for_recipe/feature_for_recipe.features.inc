@@ -31,6 +31,14 @@ function feature_for_recipe_views_api($module = NULL, $api = NULL) {
  */
 function feature_for_recipe_node_info() {
   $items = array(
+    'cooking_tips' => array(
+      'name' => t('Cooking Tips'),
+      'base' => 'node_content',
+      'description' => t('Provide cooking tips for recipe.'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'recipe' => array(
       'name' => t('Recipe'),
       'base' => 'node_content',

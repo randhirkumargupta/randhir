@@ -65,11 +65,16 @@ function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
  */
 function itg_mega_reviews_critics_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   
-   if ($form['#id'] == 'views-exposed-form-movie-review-list-page') {
+   if ($form['#id'] == 'views-exposed-form-movie-review-list-page' || $form['#id'] == 'views-exposed-form-movie-review-list-page-1') {
      $form['title']['#autocomplete_path'] = 'content-title-list/mega_review_critic/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
      $form['nid']['#autocomplete_path'] = 'content-nid-list/mega_review_critic/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Review ID'));
+   } else if ($form['#id'] == 'views-exposed-form-celebrity-profile-list-page') {
+     $form['title']['#autocomplete_path'] = 'content-title-list/itg_celebrity_profile/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Name'));     
+     $form['nid']['#autocomplete_path'] = 'content-nid-list/itg_celebrity_profile/autocomplete';
+     $form['nid']['#attributes'] = array('placeholder' => t('Profile ID'));
    }
 
 }

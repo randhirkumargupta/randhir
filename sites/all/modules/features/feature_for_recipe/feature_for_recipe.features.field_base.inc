@@ -10,10 +10,48 @@
 function feature_for_recipe_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_associate_photo_gallery'.
+  $field_bases['field_associate_photo_gallery'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_associate_photo_gallery',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'photogallery' => 'photogallery',
+        ),
+      ),
+      'target_type' => 'node',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
   // Exported field_base: 'field_recipe_ailment'.
   $field_bases['field_recipe_ailment'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_recipe_ailment',
@@ -201,7 +239,7 @@ function feature_for_recipe_field_default_field_bases() {
   // Exported field_base: 'field_recipe_festivals'.
   $field_bases['field_recipe_festivals'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_recipe_festivals',
@@ -227,29 +265,56 @@ function feature_for_recipe_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_recipe_ingredient'.
-  $field_bases['field_recipe_ingredient'] = array(
+  // Exported field_base: 'field_recipe_food_type'.
+  $field_bases['field_recipe_food_type'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_recipe_ingredient',
+    'field_name' => 'field_recipe_food_type',
     'field_permissions' => array(
       'type' => 0,
     ),
     'indexes' => array(
-      'revision_id' => array(
-        0 => 'revision_id',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'field_collection',
+    'module' => 'list',
     'settings' => array(
-      'hide_blank_items' => 1,
-      'path' => '',
+      'allowed_values' => array(
+        'veg' => 'Veg',
+        'nonveg' => 'Nonveg',
+      ),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'field_collection',
+    'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_recipe_garnishing'.
+  $field_bases['field_recipe_garnishing'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_recipe_garnishing',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_recipe_ingredients'.
@@ -269,11 +334,9 @@ function feature_for_recipe_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 100,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_recipe_long_headline'.
@@ -356,31 +419,6 @@ function feature_for_recipe_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
-  );
-
-  // Exported field_base: 'field_recipe_mobile_image'.
-  $field_bases['field_recipe_mobile_image'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_recipe_mobile_image',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'fid' => array(
-        0 => 'fid',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'image',
-    'settings' => array(
-      'default_image' => 0,
-      'uri_scheme' => 'public',
-    ),
-    'translatable' => 0,
-    'type' => 'image',
   );
 
   // Exported field_base: 'field_recipe_syndication'.
@@ -472,54 +510,6 @@ function feature_for_recipe_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_recipe_wap_headline',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
-  // Exported field_base: 'field_reporter_email_id'.
-  $field_bases['field_reporter_email_id'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_reporter_email_id',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
-  // Exported field_base: 'field_reporter_twitter_handle'.
-  $field_bases['field_reporter_twitter_handle'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_reporter_twitter_handle',
     'field_permissions' => array(
       'type' => 0,
     ),
