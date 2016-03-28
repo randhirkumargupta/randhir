@@ -46,7 +46,9 @@ if (theme_get_setting('rubik_show_branding')): ?>
 <div id='page-title'><div class='limiter clearfix'>
   <div class='tabs clearfix'>
     <?php if ($primary_local_tasks): ?>
+    <?php if (arg(0) == 'user' && arg(1) == $user->uid) {?>
       <ul class='primary-tabs links clearfix'><?php print render($primary_local_tasks) ?></ul>
+    <?php } ?>
     <?php endif; ?>
   </div>
   <?php print render($title_prefix); ?>

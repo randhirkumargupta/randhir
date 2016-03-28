@@ -10,35 +10,10 @@
 function feature_for_blog_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_blog_blogger'.
-  $field_bases['field_blog_blogger'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_blog_blogger',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'revision_id' => array(
-        0 => 'revision_id',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'field_collection',
-    'settings' => array(
-      'hide_blank_items' => 1,
-      'path' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'field_collection',
-  );
-
   // Exported field_base: 'field_blog_bloggers'.
   $field_bases['field_blog_bloggers'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_blog_bloggers',
@@ -46,17 +21,22 @@ function feature_for_blog_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'tid' => array(
+        0 => 'tid',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'taxonomy',
     'settings' => array(
-      'max_length' => 255,
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'bloggers',
+          'parent' => 0,
+        ),
+      ),
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_blog_image'.

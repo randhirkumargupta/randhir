@@ -10,58 +10,19 @@
 function feature_for_blog_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance:
-  // 'field_collection_item-field_blog_blogger-field_blog_bloggers'.
-  $field_instances['field_collection_item-field_blog_blogger-field_blog_bloggers'] = array(
-    'bundle' => 'field_blog_blogger',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_plain',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_blog_bloggers',
-    'label' => 'Bloggers',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-blog-field_blog_blogger'.
-  $field_instances['node-blog-field_blog_blogger'] = array(
+  // Exported field_instance: 'node-blog-field_blog_bloggers'.
+  $field_instances['node-blog-field_blog_bloggers'] = array(
     'bundle' => 'blog',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter bloggers name (e.g. Ankush, Sumit etc.)',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'field_collection',
-        'settings' => array(
-          'view_mode' => 'full',
-        ),
-        'type' => 'field_collection_fields',
-        'weight' => 6,
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -72,7 +33,7 @@ function feature_for_blog_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_blog_blogger',
+    'field_name' => 'field_blog_bloggers',
     'label' => 'Bloggers',
     'required' => 0,
     'settings' => array(
@@ -81,9 +42,12 @@ function feature_for_blog_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
       'weight' => 6,
     ),
   );
@@ -333,6 +297,7 @@ function feature_for_blog_field_default_field_instances() {
   t('Image');
   t('Long description');
   t('Please enter Short description.');
+  t('Please enter bloggers name (e.g. Ankush, Sumit etc.)');
   t('Please upload image.');
   t('Section');
   t('Short description');
