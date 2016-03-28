@@ -1341,3 +1341,5 @@ div.view table td, div.view table th{max-width: 200px;}
 form.node-cooking_tips-form .form-type-managed-file .form-managed-file,
 form.node-recipe-form .form-type-managed-file .form-managed-file{overflow: visible;}
 #group-survey-date-settings .form-item{position: static;}
+.vertical-tabs .node-form-revision-information .fieldset-content{padding: 0;}
+.node-photogallery-form #BrowseMedia .form-type-managed-file .image-widget div.image-widget-data{width: auto;}
