@@ -175,7 +175,7 @@ function itg_api_mail_today_content() {
           print '<br/>';
         }
         $i++;
-        if ($i == 1)
+        if ($i == 3)
           break;
       }
     }
