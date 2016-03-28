@@ -425,32 +425,7 @@
         var startDate = $('input[name="field_astro_date_range[und][0][value][date]"]').val();
         var endDate = $('input[name="field_astro_date_range[und][0][value2][date]"]').val();
         $('#edit-title').val(startDate + ' - ' + endDate);
-      });
-
-      // Show hide for collective group
-      ///$('#Configuration').css('display', 'none');
-      //$('#SocialMedia').css('display', 'none');
-      //$('#StoryContent').css('display', 'none');
-      $('select[name="field_astro_type[und]"]').on('change', function () {
-        var astroType = $(this).val();
-        switch (astroType) {
-          case '217':
-            $('#SocialMedia').css('display', 'none');
-            $('#StoryContent').css('display', 'none');
-            $('#Configuration').css('display', 'block');
-            break;
-          case '218':
-            $('#StoryContent').css('display', 'none');
-            $('#Configuration').css('display', 'none');
-            $('#SocialMedia').css('display', 'block');
-            break;
-          case '219':
-            $('#SocialMedia').css('display', 'none');
-            $('#Configuration').css('display', 'none');
-            $('#StoryContent').css('display', 'block');
-            break;
-        }
-      });
+      });      
       
       // Common function to reset all values
       function clear_form_elements(class_name) {
@@ -472,27 +447,32 @@
       // Reset form if someone change astro type
       $("select[name='field_astro_type[und]']").on('change', function() {
         var astroType = $(this).val();
+        //var values = $('.field-name-field-astro-numerology-values > div.fieldset-content').length;
+        //var num_values = $('.field-name-field-astro-numerology-values .fieldset-content').length;
+        
         switch (astroType) {
           // Collective Content
           case '217':            
             clear_form_elements('field-name-field-astro-zodiac');
-            $('.field-name-field-astro-zodiac .button-remove').mousedown();
-            clear_form_elements('field-name-field-astro-numerology-values');
-            $('.field-name-field-astro-numerology-values .button-remove').mousedown();            
+            jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
+            clear_form_elements('field-name-field-astro-numerology-values');            
+            jQuery('.field-name-field-astro-numerology-values .button-remove').each(function(){
+              $(this).mousedown();        
+            });                            
             break;
           // Numerology  
           case '218':
             clear_form_elements('field-name-field-astro-zodiac');            
-            $('.field-name-field-astro-zodiac .button-remove').mousedown();
+            jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
             clear_form_elements('collective-wrapper');
-            $('.collective-wrapper .button-remove').mousedown();
+            jQuery('.collective-wrapper .button-remove').mousedown();
             break;
           // Zodiac  
           case '219':
             clear_form_elements('collective-wrapper');
-            $('.collective-wrapper .button-remove').mousedown();
+            jQuery('.collective-wrapper .button-remove').mousedown();
             clear_form_elements('field-name-field-astro-numerology-values');
-            $('.field-name-field-astro-numerology-values .button-remove').mousedown();            
+            jQuery('.field-name-field-astro-numerology-values .button-remove').mousedown();            
             break;
         }
       });

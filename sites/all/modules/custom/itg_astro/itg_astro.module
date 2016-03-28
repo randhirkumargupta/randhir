@@ -41,6 +41,34 @@ function itg_astro_zodiac_thumbnail() {
 }
 
 /**
+ * Fetch term name from drupal cache
+ * @param type $tid
+ * @return type
+ */
+function itg_astro_get_term_name($tid) {
+  try {
+    $cache = cache_get('itg_number', 'cache');
+    if ($cache && !empty($cache->data)) {
+      $data = $cache->data;            
+    }
+    else {
+      $itg_vid = taxonomy_vocabulary_machine_name_load('numerology');
+      $itg_term = taxonomy_get_tree($itg_vid->vid, 0, NULL, TRUE);
+      $data = array();
+      foreach ($itg_term as $all_term) {
+        $data[$all_term->tid] = $all_term->name;
+      }
+      cache_set('itg_number', $data, 'cache', time() + 60 * 60);            
+    }
+  }
+  catch (Exception $ex) {
+    return $ex->getMessage();
+  }  
+  
+  return $data[$tid];
+}
+
+/**
  * Implements hook_form_alter().
  * @param type $form
  * @param type $form_state

@@ -130,51 +130,50 @@
               <div class="content-node-view">
                 <h2>Numerology</h2>
                     <div class="content-view">                  
-                        <?php print render($content['field_numerology']); ?>                        
-                        <?php if ($content['field_numerology'][0]['#markup'] == 'Yes' && $node->op == 'Preview') { ?>
-                          <?php print render($content['field_astro_frequency2']); ?>
-                          <?php print render($content['field_field_astro_date_range2']); ?>                                                    
+                        
+                        <?php if (isset($node->op) && $node->op == 'Preview') { ?>
+                          
+                          
                           <?php
                           foreach ($node->field_astro_numerology_values['und'] as $num_item) {                           
-                            // Print number field                            
+                            // Print number field                                                        
                             $output = '';
-                            $output .= '<div class="field"><div class="field-label">Number: '.$num_item['field_story_source_id']['und'][0]['value'].'</div>';
-                            $output .= '<div class="field-items">';
-                            // Print text
-                            $output .= '<div class="inner-label">Text: </div>';
-                            $output .= '<div class="inner-item">'.$num_item['field_buzz_description']['und'][0]['value'].'</div></div>';
-                            echo $output;
-                            // Print audio field 
-                            $audio_fid = isset($num_item['field_common_audio_file']['und'][0]['fid']) ? $num_item['field_common_audio_file']['und'][0]['fid'] : '';                                                
-                            if ($audio_fid != '') {
-                              $audio_uri = _itg_photogallery_fid($audio_fid);                          
-                              $audio = '';
-                              $audio .= '<div class="inner-label">Audio: </div>';                                                      
-                              $audio .= '<span class="file">';                        
-                              $audio .= '<img class="file-icon" alt="Audio icon" src="'.$base_url.'/modules/file/icons/audio-x-generic.png"> ';
-                              $audio .= '<a href="'.$audio_uri.'">'.itg_astro_file_name($audio_fid).'</a>';
-                              $audio .= '</span>';
-                              print '<div class="inner-item">'.$audio.'</div>';
-                            }
+                            $output .= '<div class="field">';
+                              $output .= '<div class="field-label">Number: '.itg_astro_get_term_name($num_item['field_astro_select_number']['und'][0]['tid']).'</div>';
+                              $output .= '<div class="field-items">';                              
+                              $output .= '<div class="inner-label">Text: </div>';
+                              $output .= '<div class="inner-item">'.$num_item['field_buzz_description']['und'][0]['value'].'</div>';
+                              echo $output;
+                              // Print audio field 
+                              $audio_fid = isset($num_item['field_common_audio_file']['und'][0]['fid']) ? $num_item['field_common_audio_file']['und'][0]['fid'] : '';                                                
+                              if ($audio_fid != '') {
+                                $audio_uri = _itg_photogallery_fid($audio_fid);                          
+                                $audio = '';
+                                $audio .= '<div class="inner-label">Audio: </div>';                                                      
+                                $audio .= '<span class="file">';                        
+                                $audio .= '<img class="file-icon" alt="Audio icon" src="'.$base_url.'/modules/file/icons/audio-x-generic.png"> ';
+                                $audio .= '<a href="'.$audio_uri.'">'.itg_astro_file_name($audio_fid).'</a>';
+                                $audio .= '</span>';
+                                print '<div class="inner-item">'.$audio.'</div>';
+                              }
 
-                            // Print video field
-                            $video_fid = isset($num_item['field_astro_video']['und'][0]['fid']) ? $num_item['field_astro_video']['und'][0]['fid'] : '';                        
-                            if ($video_fid != '') {
-                              $url_video = _itg_photogallery_fid($video_fid);
-                              $video = '';
-                              $video .= '<div class="inner-label">Video: </div>';                                                      
-                              $video .= '<span class="file">';                        
-                              $video .= '<img class="file-icon" alt="File" src="'.$base_url.'/modules/file/icons/video-x-generic.png"> ';
-                              $video .= '<a href="'.$url_video.'">'.itg_astro_file_name($video_fid).'</a>';
-                              $video .= '</span>';
-                              print '<div class="inner-item">'.$video.'</div>';
-                            }
-                            print '</div>';
-                          }
-                          ?>
-                        <?php 
-                         } 
-                         else {                           
+                              // Print video field
+                              $video_fid = isset($num_item['field_astro_video']['und'][0]['fid']) ? $num_item['field_astro_video']['und'][0]['fid'] : '';                        
+                              if ($video_fid != '') {
+                                $url_video = _itg_photogallery_fid($video_fid);
+                                $video = '';
+                                $video .= '<div class="inner-label">Video: </div>';                                                      
+                                $video .= '<span class="file">';                        
+                                $video .= '<img class="file-icon" alt="File" src="'.$base_url.'/modules/file/icons/video-x-generic.png"> ';
+                                $video .= '<a href="'.$url_video.'">'.itg_astro_file_name($video_fid).'</a>';
+                                $video .= '</span>';
+                                print '<div class="inner-item">'.$video.'</div>';
+                              }
+                            print '</div></div>';
+                          }                           
+                         }
+                         
+                         if (!isset($node->op)) {
                            print render($content['field_astro_numerology_values']);
                          }
                         ?>                        
