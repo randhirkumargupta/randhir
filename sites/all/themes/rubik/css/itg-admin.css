@@ -1140,6 +1140,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .action-links{display: none;} 
 .field-collection-view, 
 .node-type-mega-review-critic .field-collection-view, 
+.page-node-add-mega-review-critic .field-collection-view, 
 .node-type-survey .field-collection-view{border-bottom: 1px dashed #d3d7d9;}
 .node-survey-form .field-multiple-table .field-multiple-table tbody{float: left;}
 [id*="field-survey-add-questions-values"] + div .field-add-more-submit{margin: 0;}
@@ -1148,7 +1149,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 /* Blog form css */
 .page-node-add-blog .field-name-field-blog-image, .node-type-blog .field-name-field-blog-image{margin-bottom: 0;}
 [id*="field-blog-blogger-values"] .form-item > label{display: none;}
-[id*="field-blog-blogger-values"] .ajax-new-content .form-item{margin-top: 10px;}
+[id*="field-blog-blogger-values"] .ajax-new-content .form-item{margin-top: 0;}
 [id*="field-blog-blogger-values"] .form-item span.error{padding: 0;}
 
 
@@ -1331,3 +1332,7 @@ div.view table td, div.view table th{max-width: 200px;}
 .ajax-loader{height: 80px; text-align: center;}
 .page-survey .block-system{min-height: 250px;}
 .page-survey .ajax-progress-throbber .message{display: none;}
+.field.field-name-field-astro-zodiac-sign-name.field-type-list-text{font-weight: bold; font-size: 18px;}
+.node-blog-form .field-name-field-blog-image .form-managed-file{overflow: visible;}
+.node-blog-form .field-name-field-blog-image .form-managed-file div.image-widget-data div.description{left: 0; bottom: 30px;}
+.view-strory-menegment.view-display-id-page_1 .view-content .form-submit{margin-right: 5px;}

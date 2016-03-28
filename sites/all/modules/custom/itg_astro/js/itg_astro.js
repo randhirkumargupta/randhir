@@ -15,7 +15,7 @@
         var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
         switch (frequency) {
           case 'daily':
-            var startDay = moment().format('MMM Do YYYY');
+            var startDay = moment().format('MMM DD, YYYY');
             $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay);
             $('input[name="field_astro_date_range[und][0][value2][date]"]').val(startDay);
             $("#edit-title").val(startDay);
@@ -25,9 +25,9 @@
           case 'weekly':
             var startDay = moment().day(0); // Sun
             var endDay = moment().day(6); // Sat          
-            $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay.format('MMM Do YYYY'));
-            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(endDay.format('MMM Do YYYY'));
-            var titleText = startDay.format('MMM Do YYYY') + " - " + endDay.format('MMM Do YYYY');
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay.format('MMM DD, YYYY'));
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(endDay.format('MMM DD, YYYY'));
+            var titleText = startDay.format('MMM DD, YYYY') + " - " + endDay.format('MMM DD, YYYY');
             $("#edit-title").val(titleText);
             check_duplicate();
 
@@ -35,19 +35,19 @@
           case 'monthly':
             var firstDay = moment().date(1);
             var lastDay = moment().endOf('month');
-            $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay.format('MMM Do YYYY'));
-            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(lastDay.format('MMM Do YYYY'));
-            var titleText = firstDay.format('MMM Do YYYY') + " - " + lastDay.format('MMM Do YYYY');
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay.format('MMM DD, YYYY'));
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(lastDay.format('MMM DD, YYYY'));
+            var titleText = firstDay.format('MMM DD, YYYY') + " - " + lastDay.format('MMM DD, YYYY');
             $("#edit-title").val(titleText);
             check_duplicate();
 
             break;
           case 'yearly':
-            var firstDay = moment().dayOfYear(1).format('MMM Do YYYY');
+            var firstDay = moment().dayOfYear(1).format('MMM DD, YYYY');
             $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay);
-            $('input[name="field_astro_date_range[und][0][value2][date]"]').val('Dec 31st ' + moment().year());
-            var startYear = moment().dayOfYear(1).format('MMM Do YYYY');
-            var endyear = "Dec 31st " + moment().year();
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val('Dec 31, ' + moment().year());
+            var startYear = moment().dayOfYear(1).format('MMM DD, YYYY');
+            var endyear = "Dec 31, " + moment().year();
             $("#edit-title").val(startYear + " - " + endyear);
             check_duplicate();
         }
@@ -176,125 +176,8 @@
           'field_story_category[und][]': {
             required: true
           },
-          'field_astro_zodiac[und][0][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][1][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][2][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][3][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][4][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][5][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][6][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][7][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][8][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][9][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][10][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
-          },
-          'field_astro_zodiac[und][11][field_astro_thumb_icon][und][0][fid]': {
-            required: {
-              depends: function () {
-                if ($(this).val() == 0) {
-                  $(this).removeAttr('value');
-                }
-                return true;
-              }
-            }
+          'field_astro_zodiac[und][0][field_zodiac_sign][und]': {
+            required: true
           },
           'field_astro_numerology_values[und][0][field_story_source_id][und][0][value]': {
             required: {
@@ -316,6 +199,9 @@
                 }
               }
             }
+          },
+          'field_astro_date_range[und][0][value2][date]': {
+            validateRange: true
           }
         },
         messages: {
@@ -324,7 +210,61 @@
           }
         }
       });
-
+      jQuery.validator.addMethod("validateRange", function(value, element) {                    
+        return validateDateRange(value, element);
+      }, "* Please enter valid date.");
+      
+      // validate date difference
+      function validateDateRange(value, element) {
+        var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
+        var startDate = $('input[name="field_astro_date_range[und][0][value][date]"]').val();
+        var endDate = $('input[name="field_astro_date_range[und][0][value2][date]"]').val();
+        var momenta = moment(startDate, 'MMM DD YYYY');
+        var momentb = moment(endDate, 'MMM DD YYYY');
+        var days = momentb.diff(momenta, 'days');        
+        switch (frequency) {
+          case 'daily':            
+            if (startDate !== endDate) {
+              return false;
+              console.log(startDate+' '+endDate);
+            }
+            else {
+              return true;
+            }
+            break;
+          case 'weekly':            
+            
+            if (days !== 6) {
+              return false;
+            }
+            else {
+              return true;
+            }
+            break;
+          case 'monthly':
+            if (days == 29 || days == 30) {
+              return true;
+            }
+            else {
+              return false;
+            }
+            break;
+          case 'yearly': 
+            if (days !== 365) {
+              return false;
+            }
+            else {
+              return true;
+            }            
+        }
+      }
+      
+      // Change title it someone changed date range manually
+      $('select[name="field_story_category[und][]"]').on('change', function() {
+        var startDate = $('input[name="field_astro_date_range[und][0][value][date]"]').val();
+        var endDate = $('input[name="field_astro_date_range[und][0][value2][date]"]').val();
+        $('#edit-title').val(startDate+' - '+endDate);
+      });
 
     }
   };
