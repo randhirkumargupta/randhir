@@ -43,7 +43,7 @@ function itg_api_node_presave($node) {
 
   if ($node->type == 'story' && $node->feeds_item->id == 'pti') {
     
-    // calculate length of title
+    // calculate length of xml title
     $title_length = strlen($node->title);
     
     // get byline reporter id

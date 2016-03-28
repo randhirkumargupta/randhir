@@ -1,5 +1,5 @@
 name = ITG API
-description = "Contains functionality related to ITG API."
+description = "Contains functionality related to ITG THIRD PARTY API."
 package = "ITG"
 core = 7.x
 
