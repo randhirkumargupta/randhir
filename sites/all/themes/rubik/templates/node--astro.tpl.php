@@ -53,20 +53,20 @@
                         <?php print render($content['field_story_category']); ?>
                     </div>
               </div>
-              <div class="content-node-view">
-                
+              <?php if($node->field_astro_zodiac['und'][0]['field_zodiac_sign']['und'][0]['tid'] != 0): ?>              
+              <div class="content-node-view">                
                 <h2>Zodiac Sign</h2>
-                <?php if ($node->op == 'Preview') { ?>  
+                <?php if (isset($node->op) && $node->op == 'Preview'): ?>  
                     <div class="content-view">                                                                                           
-                      <?php 
-                      
+                      <?php                       
+                      $zodiac_sign = itg_astro_zodiac_thumbnail();                                            
                       for ($i = 0; $i <= 11; ++$i) {
                         $output = '';
                         $output .= '<div class="root-label">';
                         
                         // Print sign name
                         $output .= '<div class="field-label">';
-                        $output .= itg_astro_sunsign_name($i);
+                        $output .= $zodiac_sign[$i]->name;
                         $output .= '</div>';
                         
                         // Print all field
@@ -74,16 +74,10 @@
                         
                         // Print name field
                         $output .= '<div class="inner-label">Text: </div>';
-                        $output .= '<div class="inner-item">'. $node->field_astro_zodiac['und'][$i]['field_buzz_description']['und'][0]['value'].'</div>';
-                        
-                        // Print thumb icon
-                        $img_fid = $node->field_astro_zodiac['und'][$i]['field_astro_thumb_icon']['und'][0]['fid'];
-                        if ($img_fid != NULL || $img_fid != '') {
-                          $output .= '<div class="inner-label">Thumbnail Icon: </div>';                        
-                          $imguri = _itg_photogallery_fid($img_fid);
-                          $output .= '<div class="inner-item"><img src="'.image_style_url("thumbnail", $imguri).'"></div>';
-                          print $output;
-                        }
+                        $output .= '<div class="inner-item">'. $node->field_astro_zodiac['und'][0]['field_buzz_description']['und'][0]['value'].'</div>';
+                        $output .= '<div class="inner-label">Thumbnail Icon: </div>';                        
+                        $output .= '<div class="inner-item"><img src="' . image_style_url("thumbnail", $zodiac_sign[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_sign[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_sign[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';                        
+                        print $output;
                         
                         // Print audio field 
                         $audio_fid = isset($node->field_astro_zodiac['und'][$i]['field_audio']['und'][0]['fid']) ? $node->field_astro_zodiac['und'][$i]['field_audio']['und'][0]['fid'] : '';                                                
@@ -114,17 +108,14 @@
                       }
                        ?>
                     </div>
-                <?php
-                }
-                else {                  
-                  print '<div class="content-view">'.render($content['field_astro_zodiac']).'</div>';                  
-                }
-              ?>
+                <?php endif; ?>
               </div>
-              
-              
-              
-              <div class="content-node-view">
+              <?php endif; ?>
+              <?php if (!isset($node->op)): ?>
+              <?php print render($content['field_astro_zodiac']); ?>
+              <?php endif; ?>
+              <?php if(isset($content['field_buzz_description'])): ?>  
+              <div class="content-node-view">                  
                 <h2>Collective Content</h2>
                     <div class="content-view">
                         <?php
@@ -134,6 +125,8 @@
                         ?>
                     </div>
               </div>
+              <?php endif; ?>
+              <?php if (isset($content['field_astro_numerology_values'])): ?>
               <div class="content-node-view">
                 <h2>Numerology</h2>
                     <div class="content-view">                  
@@ -187,6 +180,7 @@
                         ?>                        
                     </div>
               </div>
+              <?php endif; ?>
           </div>
       <?php endif; ?>  
     </div>
