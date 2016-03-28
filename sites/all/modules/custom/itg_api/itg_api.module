@@ -1,0 +1,225 @@
+<?php
+
+/**
+ * @file
+ * The ITG API module.
+ *
+ * Contains functionality related to Third Party API.
+ *
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function itg_api_menu() {
+  $items = array();
+  $items['itg-mail-today-content'] = array(
+    'title' => 'api callback menu',
+    'page callback' => 'itg_api_mail_today_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['itg-bhasha-content'] = array(
+    'title' => 'api callback menu',
+    'page callback' => 'itg_api_bhasha_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+}
+  
+/**
+* Implements hook_feeds_presave().
+*/
+function itg_api_node_presave($node) {
+  // get bad words list in array
+  $tax = taxonomy_get_tree(13, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  
+  foreach ($tax as $key => $val) {
+    $op[$val->tid] = $val->name;
+  }
+
+  if ($node->type == 'story' && $node->feeds_item->id == 'pti') {
+    
+    // calculate length of xml title
+    $title_length = strlen($node->title);
+    
+    // get byline reporter id
+    $byline=$node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    
+    // get category 
+    $pti_category=$node->field_story_category[LANGUAGE_NONE][0]['tid'];
+    
+    // assig value to reporter field l12,s
+    $node->field_story_reporter[LANGUAGE_NONE][0]['value']  = $byline ? $byline : 12;
+    
+    // get publish date 
+    $pubdate = $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'];
+    // asign value to schedule date field
+    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']  = $pubdate;
+    $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($node->title);
+    $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = 'NA';
+    $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = 'NA';
+    $node->field_story_comment_question[LANGUAGE_NONE][0]['value'] = 'NA';
+    $node->field_stroy_city[LANGUAGE_NONE][0]['tid']  = 2; //54
+    $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $pti_category ? $pti_category : 54;
+    // get description value
+    $description = $node->body[LANGUAGE_NONE][0]['value'];
+    // strip html tags
+    $description = strip_tags($description);
+    // convert string to arary
+    $exp_description = explode(" ", $description);
+
+    if ($title_length > 39) {
+      // $node->revision = 1;
+      $node->log = 'State Changed to published';
+      $node->workbench_moderation_state_new = workbench_moderation_state_published();
+    }
+    elseif (array_intersect($op, $exp_description)) {
+
+      $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+    }
+
+    if ($title_length < 39) {
+
+      $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+    }
+    elseif (array_intersect($op, $exp_description)) {
+
+      $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+    }
+
+    //pr($op);
+    //p($node);
+  }
+}
+
+/**
+ * Returns the key which represents the live revision.
+ *
+ * @TODO: make this configurable.
+ */
+function workbench_moderation_state_Review() {
+  return 'needs_review';
+}
+
+
+/**
+ * Implement itg_api_mail_today_content
+ */
+function itg_api_mail_today_content() {
+
+  global $base_url, $user;
+
+  $direc = getDirContents('sites/default/files/mailtoday/');
+
+  foreach ($direc as $xm_file) {
+
+    $xml_file_path = $xm_file;
+    $mail_today_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
+
+    //p($mail_today_xml);
+    if (!empty($mail_today_xml)) {
+      $i = 0;
+      foreach ($mail_today_xml as $value) {
+
+        $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $value->Headline))));
+        $category_name = trim($value->ArticleName);
+        // get taxonomy term id by name
+        $terms_array = taxonomy_get_term_by_name($category_name);
+        // get first element of array
+        $term = reset($terms_array); 
+        
+        $title = itg_api_check_title($headline);
+
+        if (!$title) {
+          // description
+          // get description value
+          $description = $value->Bodytext->Bodytext;
+          $description = strip_tags($description, '<p>');
+
+          // get pubdate
+          $publish_date = $value->Publishdate;
+          $publish_date = strtotime($publish_date);
+          $publish_date = date('Y-m-d', $publish_date);
+
+          //Set values to node l54,s130
+          $node = new stdClass();
+          $node->title = trim($headline);
+          $node->type = "story";
+          node_object_prepare($node);
+          $node->language = LANGUAGE_NONE;
+          $node->uid = $user->uid;
+          $node->promote = 0;
+          $node->comment = 0;
+          $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
+          $node->body[$node->language][0]['format'] = 'full_html';
+          $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);
+          $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = 'NA';
+          $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = 'NA';
+          $node->field_story_comment_question[LANGUAGE_NONE][0]['value'] = 'NA';
+          $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'NA';
+          $node->field_story_reporter[LANGUAGE_NONE][0]['target_id']  = 12; //54
+          $node->field_stroy_city[LANGUAGE_NONE][0]['tid']  = 58; //2
+          $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $term->tid ? $term->tid : 130;
+          $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date ? $publish_date : date('Y-m-d', time());
+          $node = node_submit($node); // Prepare node for saving
+          node_save($node); // Finally save node
+          print '<font color="green">' . $headline . ' imported sucessfully' . '</font>';
+          print '<br/>';
+        }
+        else {
+          print '<font color="red">' . $headline . ' Already imported' . '</font>';
+          print '<br/>';
+        }
+        $i++;
+        if ($i == 1)
+          break;
+      }
+    }
+  }
+}
+
+/**
+ * Implements function for node exit or not
+ * @param $title
+ * $return 
+ */
+
+function itg_api_check_title($title) {
+  $result = db_select('node', 'node')
+          ->fields('node', array('title'))
+          ->condition('title', $title, '=')
+          ->condition('type', 'story', '=')
+          ->execute()->fetchAssoc();
+
+  if (!empty($result['title'])) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Implements function for get all files from directory
+ * $dir
+ */
+
+function getDirContents($dir, &$results = array()) {
+  $files = scandir($dir);
+
+  foreach ($files as $key => $value) {
+    $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
+    if (!is_dir($path)) {
+      $results[] = $path;
+    }
+    else if ($value != "." && $value != "..") {
+      getDirContents($path, $results);
+      $results[] = $path;
+    }
+  }
+
+  return $results;
+}
