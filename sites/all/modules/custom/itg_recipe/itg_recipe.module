@@ -150,10 +150,15 @@ function itg_recipe_after_build($form, &$form_state) {
 function itg_recipe_views_pre_render(&$view) {
   //Add "Create recipe" button on listing page of recipe
   if ($view->name == "recipe_management") {
-    $header_content_recipe = '<span class="manage_recipe_view_menu">' . l(t('Recipes'), 'recipe-management') . '&nbsp;</span>';
+    $header_content_recipe = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_recipe .= '<span class="manage_recipe_view_menu">' . l(t('Recipes'), 'recipe-management') . '&nbsp;</span>';
     $header_content_recipe .= '<span class="manage_cooking_tips_view_menu">' . l(t('Cooking Tips'), 'manage-cooking-tips') . '&nbsp;</span>';
     $header_content_recipe .= '<span class="create_cooking_tips">' . l(t('Create Cooking Tips'), 'node/add/cooking-tips') . '&nbsp;</span>';
     $header_content_recipe .= l(t('Create Recipe'), 'node/add/recipe');
+    $view->attachment_before = $header_content_recipe;
+  }
+  if ($view->name == "manage_cooking_tips") {
+    $header_content_recipe .= '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
     $view->attachment_before = $header_content_recipe;
   }
 }
