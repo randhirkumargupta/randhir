@@ -85,6 +85,24 @@ function itg_poll_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_poll' => array('settings' => $settings)), array('type' => 'setting'));
   
+  
+  //poll disable after create
+  if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+    $result = itg_poll_getTotalPoll(arg(1));
+    if($result > 0){
+      foreach ($form['field_poll_answer'][LANGUAGE_NONE] as $key => $item) {
+            if(is_numeric($key)){
+              $form['field_poll_answer'][LANGUAGE_NONE][$key]['remove_button']['#access'] = FALSE;
+             }
+          }
+        $form['field_poll_answer'][LANGUAGE_NONE]['add_more']['#access'] = FALSE; // Disable Add more button
+        
+        $form['field_poll_question_text'][LANGUAGE_NONE][0]['value']['#attributes'] = array('readonly' => 'readonly');
+        drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew_disable.js', array('weight' => 4,  'scope' => 'footer'));
+    
+    }
+  }
+  
   return $form;
 }
 
