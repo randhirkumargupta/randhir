@@ -84,7 +84,6 @@ function itg_term_permission() {
  */
 
 function itg_term_form_alter(&$form, &$form_state, $form_id) {
-
     // Load the currently logged in user.
 
     global $user;
@@ -232,7 +231,9 @@ function term_redirect_handler($form, &$form_state) {
  */
 
 function itg_term_views_pre_render(&$view) {
-    if (isset($view->name) && $view->name == "tags_management") {
+
+   if (isset($view->name) && $view->name == "tags_management")
+    {
         if (arg(0) == 'tags-management') {
             global $user;
             $user_roles = array_values($user->roles);
@@ -402,3 +403,4 @@ function itg_term_views_query_alter(&$view, &$query) {
         }
     }
 }
+
