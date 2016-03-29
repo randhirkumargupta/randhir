@@ -131,29 +131,36 @@ function feature_for_poll_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
         'weight' => 2,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_poll_manipulate_value',
-    'label' => 'Poll Value',
+    'label' => 'Poll manipulate',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
+      'max' => 999,
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 3,
-      ),
-      'type' => 'text_textfield',
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
       'weight' => 3,
     ),
   );
@@ -958,7 +965,7 @@ function feature_for_poll_field_default_field_instances() {
   t('Poll Question Image');
   t('Poll Question Text');
   t('Poll Question Video');
-  t('Poll Value');
+  t('Poll manipulate');
   t('Result format');
   t('Show End Date');
   t('Start Date');
