@@ -159,6 +159,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
  * @param type $form_id  
  */
 function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) { 
+  
    if ($form['#id'] == 'views-exposed-form-strory-menegment-page' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' 
