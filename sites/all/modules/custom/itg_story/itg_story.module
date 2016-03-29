@@ -123,20 +123,13 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
     switch ($form_id) {
     case 'story_node_form':
-//      if (!isset($_REQUEST['destination'])) {
-//        $_REQUEST['destination'] = '';
-//      }
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
-      unset($form['actions']['preview_changes']);
-      
-//      $form['actions']['cancel'] = array(
-//        '#markup' => l(t('Cancel'), $_REQUEST['destination'], array('attributes' => array('class' => 'button'))),
-//        '#weight' => 20,
-//      );     
-      
+      unset($form['actions']['preview_changes']);      
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['#after_build'][] = 'itg_story_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
+      
+      
     break;      
   }
 }
@@ -152,9 +145,9 @@ function itg_story_form_custom_callback($form, &$form_state) {
   }
   
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'story') {
-    drupal_set_message('Story has been created successfully.');
+    drupal_set_message(t('Story has been created successfully.'));
   } else {
-      drupal_set_message('Story has been updated successfully.');
+      drupal_set_message(t('Story has been updated successfully.'));
   }
    
 }
@@ -166,6 +159,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
  * @param type $form_id  
  */
 function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) { 
+  
    if ($form['#id'] == 'views-exposed-form-strory-menegment-page' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' 
@@ -181,12 +175,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
    }
-   
-//   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
-//     drupal_add_js('jQuery(document).ready(function() {
-//              jQuery("#edit-actionnode-publish-action").hide();                    
-//            });', array('type' => 'inline', 'scope' => 'footer'));
-//   }
+ 
 }
 
 /**
@@ -280,15 +269,14 @@ function itg_story_after_build($form, &$form_state) {
   
   //p($form_state['triggering_element']['#value']);
   global $user, $base_url;
-  unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
-  unset($form['metatags']['intro_text']['#markup']);
-  //$form['metatags']['#prefix'] = '<div class="story-title">Meta Tags</div>';
-  if (isset($form['#node']->nid) && $form['#node']->nid) {
-    $form['field_story_configurations'][LANGUAGE_NONE]['breaking_news']['#attributes']['disabled'] = 'disabled';
-  }
-  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
-  $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';
-  // $form['revision_information']['log']['#title'] = 'Remarks';
+  if (!isset($form['#node']->nid)) {
+    
+    // hide remove button of first field on add form 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }  
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -386,6 +374,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     
     $magazine_field = 'field_story_select_magazine';
     $supplement_field = 'field_story_select_supplement';
+    
     // set magazine on edit and trigger action
     if (isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
       $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
@@ -406,6 +395,88 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     if (function_exists('itg_common_dropdown_supplement')) {
       $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
     }
+    
+    // code for conditanal field
+    
+    // code for story expiry date field show and hide
+    $form['field_story_expiry_date']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_expires[und][Yes]"]' => array('checked' => TRUE),
+      )
+    );
+      
+    // code for Comment Question field hide and show
+    $form['field_story_comment_question']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_configurations[und][comment]"]' => array('checked' => TRUE),
+      )
+    );
+      
+//    $form['field_story_comment_question']['#states'] = array(
+//      'visible' => array(
+//        ':input[name="field_story_configurations[und][comment]"]' => array('value' => ''),
+//        ':input[name="field_story_configurations[und][comment]"]' => array('checked' => FALSE),
+//      )
+//    );
+    // code for Comment Question field hide and show
+    $form['field_story_facebook_narrative']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+      )
+    );
+     
+    // code for facebook image field hide and show
+    $form['field_story_facebook_image']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+      )
+    );
+       
+    // code for tweet field show and hide 
+    $form['field_story_tweet']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+      ),
+      /*'reset' => array(
+        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => FALSE),
+      )*/
+    );
+    
+    // code for magazine field hide and show
+    $form['field_story_select_magazine']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+      )
+    );
+    
+    // code for supplement field hide and show
+    $form['field_story_select_supplement']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+      ),
+        
+    );
+    
+    // code for issue date field hide and show
+    $form['field_story_issue_date']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+      )
+    );
+    
+    // code for client Title field show and hide
+    $form['field_story_client_title']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_configurations[und][syndication]"]' => array('checked' => TRUE),
+      )
+    );
+    
+    // code for media field show and hide
+    $form['field_story_media_files_syndicat']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_configurations[und][syndication]"]' => array('checked' => TRUE),
+      )
+    );
   
 }
 

@@ -11,6 +11,94 @@ function feature_tag_management_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'download_taxonomy_tags';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'taxonomy_term_data';
+  $view->human_name = 'download_taxonomy_tags';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Data export';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    6 => '6',
+    19 => '19',
+    10 => '10',
+  );
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'name' => 'name',
+    'field_tags_display' => 'field_tags_display',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_tags_display' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['label'] = 'Tags';
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
+  /* Field: Taxonomy term: Feature Tags */
+  $handler->display->display_options['fields']['field_tags_display']['id'] = 'field_tags_display';
+  $handler->display->display_options['fields']['field_tags_display']['table'] = 'field_data_field_tags_display';
+  $handler->display->display_options['fields']['field_tags_display']['field'] = 'field_tags_display';
+  /* Filter criterion: Taxonomy term: Vocabulary */
+  $handler->display->display_options['filters']['vid']['id'] = 'vid';
+  $handler->display->display_options['filters']['vid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['vid']['field'] = 'vid';
+  $handler->display->display_options['filters']['vid']['value'] = array(
+    1 => '1',
+  );
+
+  /* Display: Data export */
+  $handler = $view->new_display('page', 'Data export', 'page');
+  $handler->display->display_options['path'] = 'download_taxonomy_tags';
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
+  $handler->display->display_options['path'] = 'download-tags';
+  $handler->display->display_options['sitename_title'] = 0;
+  $export['download_taxonomy_tags'] = $view;
+
+  $view = new view();
   $view->name = 'tags_management';
   $view->description = '';
   $view->tag = 'default';
@@ -26,6 +114,7 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    6 => '6',
     19 => '19',
     10 => '10',
   );
@@ -40,10 +129,10 @@ function feature_tag_management_views_default_views() {
     'counter' => 'counter',
     'name' => 'name',
     'field_tags_display' => 'field_tags_display',
-    'edit_term' => 'edit_term',
     'tid' => 'tid',
     'created' => 'created',
     'changed' => 'changed',
+    'edit_term' => 'edit_term',
     'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -67,11 +156,6 @@ function feature_tag_management_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'edit_term' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'tid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
@@ -89,6 +173,11 @@ function feature_tag_management_views_default_views() {
     'changed' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_term' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -128,12 +217,6 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['field_tags_display']['table'] = 'field_data_field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['field'] = 'field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['relationship'] = 'tid';
-  /* Field: Taxonomy term: Term edit link */
-  $handler->display->display_options['fields']['edit_term']['id'] = 'edit_term';
-  $handler->display->display_options['fields']['edit_term']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['edit_term']['field'] = 'edit_term';
-  $handler->display->display_options['fields']['edit_term']['relationship'] = 'tid';
-  $handler->display->display_options['fields']['edit_term']['exclude'] = TRUE;
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
   $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
@@ -156,12 +239,23 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Taxonomy term: Term edit link */
+  $handler->display->display_options['fields']['edit_term']['id'] = 'edit_term';
+  $handler->display->display_options['fields']['edit_term']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['edit_term']['field'] = 'edit_term';
+  $handler->display->display_options['fields']['edit_term']['relationship'] = 'tid';
+  $handler->display->display_options['fields']['edit_term']['label'] = 'Edit link';
+  $handler->display->display_options['fields']['edit_term']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['edit_term']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['edit_term']['hide_empty'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<span class="edit-link">[edit_term]</span> | <span class="delete-link"><a href="./texonomy/confirm/ajax/[tid]">Delete</a></span>';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<span class="edit-link">[edit_term]</span><span class ="views-action-separator"> | </span><span class="delete-link"><a href="./texonomy/confirm/ajax/[tid]">Delete</a></span>';
+  $handler->display->display_options['fields']['nothing']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['hide_alter_empty'] = TRUE;
   /* Sort criterion: Category Manager: changed field */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
   $handler->display->display_options['sorts']['changed']['table'] = 'itg_category_manager';

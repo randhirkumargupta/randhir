@@ -34,14 +34,14 @@ function itg_category_manager_menu() {
 
   $items = array();
   $items['admin/config/itg_category_manager'] = array(
-    'title' => 'ITG Category Manager',
-    'description' => 'Configuration for ITG Category Manager module.',
+    'title' => t('ITG Category Manager'),
+    'description' => t('Configuration for ITG Category Manager module.'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_category_manager_form'),
     'access arguments' => array('administer taxonomy'),
   );
   $items['test'] = array(
-    'title' => 'ITG Category Manager',
+    'title' => t('ITG Category Manager'),
     'page callback' => 'notify_insert_statuspost',
     'access callback' => TRUE
   );
@@ -52,7 +52,7 @@ function itg_category_manager_menu() {
   );
   // SEF Url log menu
   $items['sef-log/%'] = array(
-    'title' => 'SEF URL Log',
+    'title' => t('SEF URL Log'),
     'page callback' => 'itg_category_manager_seflogpage',
     'access callback' => TRUE,
     'page arguments' => array(1),
@@ -133,7 +133,7 @@ function itg_category_manager_form($form, &$form_state) {
   // Checkboxes to choose what should be checked for dupes (vocab, terms, both)
   $form['itg_category_manager_types'] = array(
     '#type' => 'checkboxes',
-    '#title' => 'Check for duplicate',
+    '#title' => t('Check for duplicate'),
     '#default_value' => variable_get('itg_category_manager_types', array()),
     '#options' => array(
       'vocab' => t('Vocabularies'),
@@ -148,7 +148,7 @@ function itg_category_manager_form($form, &$form_state) {
   }
   $form['itg_category_manager_vocabularies'] = array(
     '#type' => 'checkboxes',
-    '#title' => 'Limit term check on specific vocabularies',
+    '#title' => t('Limit term check on specific vocabularies'),
     '#default_value' => variable_get('itg_category_manager_vocabularies', array()),
     '#options' => $options,
     '#description' => t('If no option is selected, all terms will be checked for duplicates.'),
@@ -157,7 +157,7 @@ function itg_category_manager_form($form, &$form_state) {
   // Checkbox to indicate whether the check should be case-sensitive
   $form['itg_category_manager_case_sensitive'] = array(
     '#type' => 'checkbox',
-    '#title' => "Case-sensitive comparison (e.g. 'Foo' and 'foo' are not duplicates if checked).",
+    '#title' => t("Case-sensitive comparison (e.g. 'Foo' and 'foo' are not duplicates if checked)."),
     '#default_value' => variable_get('itg_category_manager_case_sensitive'),
   );
 
@@ -179,7 +179,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
 
       $count_used = count($used_by_content);
-      drupal_set_message('This category is mapped with ' . $count_used . ' contents.' . l(' Click here', 'category-remove-from-node/' . $tid, array('attributes' => array('target' => '_blank'))), 'status');
+      drupal_set_message(t('This category is mapped with ' . $count_used . ' contents.') . l(' Click here', 'category-remove-from-node/' . $tid, array('attributes' => array('target' => '_blank'))), 'status');
       if ($user->uid != 1) {
         drupal_add_js('(function($) {$(document).ready(function() {
         $("#taxonomy-form-term #edit-submit").hide();
@@ -241,7 +241,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       }
       // Taxonomy active deactive logic
       $form['term_state'] = array(
-        '#prefix' => '<div class="itg-term-state"><label>Term State</label>',
+        '#prefix' => '<div class="itg-term-state"><label>'.t('Term State').'</label>',
         '#type' => 'checkbox',
         '#title' => t('Active'),
         '#weight' => 20,
@@ -311,7 +311,7 @@ function itg_category_manager_term_validate($form, &$form_state) {
     $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];
   }
   if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL) {
-    form_set_error('state-mode', 'Please select one mode.');
+    form_set_error('state-mode', t('Please select one mode.'));
   }
   // Code end for publish time
 
@@ -346,9 +346,8 @@ function itg_category_manager_term_validate($form, &$form_state) {
  * @param type $form_state
  * @return int
  */
-function itg_category_manager_add_form_after_build($form, &$form_state) {
-  // print_r($form); exit;
-//Add cancel link to add and edit form of category add form exit;
+function itg_category_manager_add_form_after_build($form, &$form_state) {  
+  //Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'category-manager', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
@@ -357,6 +356,7 @@ function itg_category_manager_add_form_after_build($form, &$form_state) {
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
+  
   return $form;
 }
 
@@ -497,20 +497,21 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
  * @param type $type
  * @return boolean
  */
-function itg_category_manager_entity_update($entity, $type) {
+function itg_category_manager_entity_update($entity, $type) {  
   if ($type == 'taxonomy_term' && $entity->vocabulary_machine_name == 'category_management') {
     $mail_content = itg_category_manager_get_mail_content($entity);
+    
     $params = array(
       'body' => $mail_content,
-      'subject' => 'India Today | Category Updated!',
-    );
+      'subject' => t('India Today | '.$entity->name.' Category Updated!'),
+    );    
     $to = "itoday135@gmail.com"; // SEO team mail id
     $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'haripal.rao@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
     }
     else {
-      $error_msg = 'Failed to send the email!';
+      $error_msg = t('Failed to send the email!');
       watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
       return FALSE;
     }
@@ -552,7 +553,7 @@ function itg_category_manager_get_mail_content($entity) {
   global $base_url;
   $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
-
+  $redirection_url = isset($entity->field_cm_redirection_url['und'][0]['value']) ? $entity->field_cm_redirection_url['und'][0]['value'] : 'NA';
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -562,7 +563,10 @@ function itg_category_manager_get_mail_content($entity) {
       <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi SEO Team,</td></tr>
       <tr><td style="font-weight: bold;">Category ' . $entity->name . ' has been modified. Details are given below:</td></tr>
       <tr><td>Display Title: ' . $display_name . '</td></tr>
-      <tr><td>Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a></td></tr>
+      <tr><td>
+        Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a><br />
+        Redirection URL: '.$redirection_url.'  
+      </td></tr>
       <tr><td>Thanks,</td></tr>
       <tr><td>India Today Team</td></tr></table>
 </body></html>';
@@ -582,7 +586,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
     'uid' => $user->uid,
     'created' => time(),
     'changed' => time(),
-    'status' => $term->term_state,
+    'status' => isset($term->term_state) ? $term->term_state : 1,
   );
   drupal_write_record('itg_category_manager', $data);
   $data = array();
@@ -763,46 +767,49 @@ function itg_category_manager_block_view($delta = '') {
 
   //$data = itg_category_manager_sefurl_log($tid);
   switch ($delta) {
-    case 'sef_url_log':      
+    case 'sef_url_log':
       $arg = arg();
-      $ass_node = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
-      if (count($ass_node)) {
-        global $language;
-        $data .= '<div class="content-associated">';
-        $data .= '<div>Last created article: ' . l('View', drupal_get_path_alias('node/' . $ass_node[0], $language->language), array('attributes' => array('target' => '_blank'))) . '</div>';
-        $data .= '<div class="tid" style="display:none;">' . $arg[2] . '</div>';
-        $data .= '<div id="show-content-count">Associated Contents: <button class="button">Show counts</button><span class="count"></span></div>';
-        $data .= '</div>';
-      }
-      $itg_sef_log = itg_category_manager_seflog($arg[2], 6);
-      if (count($itg_sef_log)) {
-        $data .= '<div class="audit-info">SEF URL Log</div>';
-        $data .= '<table class="itg-log"><thead><tr>';
-        $data .= '<th class="th1">Sr. No</th>';
-        $data .= '<th class="th2">last URL</th>';
-        $data .= '<th class="th3">Modified By</th>';
-        $data .= '<th class="th4">Timestamp</th><tr></thead>';
-        $counter = 0;
-        foreach ($itg_sef_log as $value) {
-          ++$counter;
-          if ($counter > 5) {
-            continue;
+      $term = taxonomy_term_load($arg[2]);      
+      if ($term->vid == 4) {
+        $ass_node = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
+        if (count($ass_node)) {
+          global $language;
+          $data .= '<div class="content-associated">';
+          $data .= '<div>Last created article: ' . l('View', drupal_get_path_alias('node/' . $ass_node[0], $language->language), array('attributes' => array('target' => '_blank'))) . '</div>';
+          $data .= '<div class="tid" style="display:none;">' . $arg[2] . '</div>';
+          $data .= '<div id="show-content-count">Associated Contents: <button class="button">Show counts</button><span class="count"></span></div>';
+          $data .= '</div>';
+        }
+        $itg_sef_log = itg_category_manager_seflog($arg[2], 6);
+        if (count($itg_sef_log)) {
+          $data .= '<div class="audit-info">SEF URL Log</div>';
+          $data .= '<table class="itg-log"><thead><tr>';
+          $data .= '<th class="th1">Sr. No</th>';
+          $data .= '<th class="th2">last URL</th>';
+          $data .= '<th class="th3">Modified By</th>';
+          $data .= '<th class="th4">Timestamp</th><tr></thead>';
+          $counter = 0;
+          foreach ($itg_sef_log as $value) {
+            ++$counter;
+            if ($counter > 5) {
+              continue;
+            }
+            $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
+            $data .= '<tr>';
+            $data .= '<td class="th1">' . $counter . '</td>';
+            $data .= '<td class="th2">' . $url . '</td>';
+            $data .= '<td class="th3">' . $value->name . '</td>';
+            $data .= '<td class="th4">' . format_date($value->changed, 'custom', 'm-d-Y g:i:s a') . '</td>';
+            $data .= '</tr>';
           }
-          $url = isset($value->sef_url_modified) ? $value->sef_url_modified : $value->sef_url;
-          $data .= '<tr>';
-          $data .= '<td class="th1">' . $counter . '</td>';
-          $data .= '<td class="th2">' . $url . '</td>';
-          $data .= '<td class="th3">' . $value->name . '</td>';
-          $data .= '<td class="th4">' . format_date($value->changed, 'custom', 'm-d-Y g:i:s a') . '</td>';
-          $data .= '</tr>';
+          $data .= '</table>';
+          if ($counter > 5) {
+            $data .= '<div class="more">' . l('more...', 'sef-log/' . $arg[2], array('attributes' => array('target' => '_blank'))) . '</div>';
+          }
+          $data .= '</div">';
         }
-        $data .= '</table>';
-        if ($counter > 5) {
-          $data .= '<div class="more">' . l('more...', 'sef-log/' . $arg[2], array('attributes' => array('target' => '_blank'))) . '</div>';
-        }
-        $data .= '</div">';
+        $block['content'] = theme('sef_url_log', array('data' => $data));
       }
-      $block['content'] = theme('sef_url_log', array('data' => $data));
       break;
   }
 
@@ -989,7 +996,7 @@ function itg_category_manager_disable_manually_form() {
  */
 function itg_category_manager_disable_manually_form_validate($form, &$form_state) {
   if ($form_state['input']['itg_categories']['hierarchical_select']['selects'][0] == 'label_0') {
-    form_set_error('itg_categories', 'Please choose a category.');
+    form_set_error('itg_categories', t('Please choose a category.'));
   }
 }
 

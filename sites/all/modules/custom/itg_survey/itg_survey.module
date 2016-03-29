@@ -15,6 +15,7 @@
 function itg_survey_menu() {
   $items = array();
   $items['survey'] = array(
+      'title' => 'India Today Survey',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_survey_survey_form'),
       'access callback' => TRUE,
@@ -194,7 +195,7 @@ function itg_survey_node_validate($node, $form, &$form_state) {
  * @return Array
  */
 function itg_survey_get_current_survey() {
-  $curr_time = time();
+  $curr_time = strtotime(date('Y-m-d').' 00:00:00');
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'))
           ->condition('n.type', 'survey', '=')
@@ -209,6 +210,7 @@ function itg_survey_get_current_survey() {
   //Load Node
   $node = node_load($nid);
   $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+
   if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
     if ($survey_end_date < $curr_time) {
       return FALSE;
@@ -252,6 +254,7 @@ function itg_survey_get_survey_by_users($nid, $user_type){
 function itg_survey_get_total_survey($nid){
     $result = db_select('itg_survey_user', 'isu')
             ->fields('isu')
+            ->condition('isu.nid', $nid, '=')
             ->execute();
     $total_survey = $result->rowCount();
     if($total_survey){

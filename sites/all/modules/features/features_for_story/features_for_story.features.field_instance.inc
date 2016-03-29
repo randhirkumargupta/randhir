@@ -731,7 +731,7 @@ function features_for_story_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-0:+3',
+        'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
       'weight' => 17,
@@ -765,7 +765,7 @@ function features_for_story_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
     'label' => 'Extra large image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -1158,7 +1158,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_large_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 225)',
+    'description' => 'Image Size (300x350)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1438,7 +1438,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_medium_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 350)',
+    'description' => 'Image Size (300 x 225)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2431,7 +2431,7 @@ function features_for_story_field_default_field_instances() {
   t('Image');
   t('Image Size (210 x 145)');
   t('Image Size (300 x 225)');
-  t('Image Size (300 x 350)');
+  t('Image Size (300x350)');
   t('Image Size (650 x 445)');
   t('Image Size (88 x 66)');
   t('Issue based story');

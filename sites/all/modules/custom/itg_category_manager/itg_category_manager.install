@@ -26,23 +26,23 @@ function itg_category_manager_update_7001() {
  */
 function itg_category_manager_schema() {
   $schema['itg_category_manager'] = array(
-    'description' => 'Table for itg_category_manager module settings.',
+    'description' => t('Table for itg_category_manager module settings.'),
     'fields' => array(
       'id' => array(
-        'description' => 'The primary identifier for a table.',
+        'description' => t('The primary identifier for a table.'),
         'type' => 'serial',
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
       'tid' => array(
-        'description' => 'Taxonomy term id.',
+        'description' => t('Taxonomy term id.'),
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
         'default' => 0,
       ),
       'uid' => array(
-        'description' => 'Auther or modifier id .',
+        'description' => t('Auther or modifier id.'),
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
@@ -63,7 +63,7 @@ function itg_category_manager_schema() {
         'not null' => TRUE,
         'default' => 1,
         'size' => 'tiny',
-        'description' => 'Whether the term is active(1) or blocked(0).',
+        'description' => t('Whether the term is active(1) or blocked(0).'),
       ),
     ),
     'indexes' => array(
@@ -74,24 +74,24 @@ function itg_category_manager_schema() {
     'primary key' => array('id'),
   );
   $schema['itg_sef_url'] = array(
-    'description' => 'Table for Sef Url Log.',
+    'description' => t('Table for Sef Url Log.'),
     'fields' => array(      
       'tid' => array(
-        'description' => 'Taxonomy term id.',
+        'description' => t('Taxonomy term id.'),
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
         'default' => 0,
       ),
       'sef_url' => array(
-        'description' => 'Sef Url original.',
+        'description' => t('Sef Url original.'),
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
       ),
       'uid' => array(
-        'description' => 'Auther or modifier id .',
+        'description' => t('Auther or modifier id .'),
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,

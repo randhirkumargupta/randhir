@@ -566,7 +566,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'label' => 'Extra large image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -574,7 +574,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -643,7 +643,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'label' => 'Extra small image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -651,7 +651,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -740,7 +740,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_large_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 225)',
+    'description' => 'Image Size (300x350)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -765,7 +765,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'label' => 'Large image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -773,7 +773,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -816,7 +816,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_medium_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 350)',
+    'description' => 'Image Size (300x225)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -841,7 +841,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'label' => 'Medium image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -849,7 +849,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -917,7 +917,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'label' => 'Small image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -925,7 +925,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1016,8 +1016,8 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Extra large image');
   t('Extra small image');
   t('Image Size (210 x 145)');
-  t('Image Size (300 x 225)');
-  t('Image Size (300 x 350)');
+  t('Image Size (300x225)');
+  t('Image Size (300x350)');
   t('Image Size (650 x 445)');
   t('Image Size (88 x 66)');
   t('Large image');

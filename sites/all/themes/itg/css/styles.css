@@ -7,109 +7,124 @@ body {
 }
 
 /* line 8, ../sass/styles.scss */
+h1, h2, h3, h4 {
+  font-weight: 500;
+}
+
+/* line 9, ../sass/styles.scss */
 .mr-0, *, #block-formblock-ask-an-expert .form-item .form-item {
   margin: 0;
 }
 
-/* line 11, ../sass/styles.scss */
-.mt-10, .page-user form .form-type-password, .page-user form .form-actions, #block-formblock-ask-an-expert .form-submit {
+/* line 12, ../sass/styles.scss */
+.mt-10, .page-user form .form-type-password, .page-user form .form-actions, #block-formblock-ask-an-expert .form-submit, .question-heading {
   margin-top: 10px;
 }
 
-/* line 14, ../sass/styles.scss */
+/* line 15, ../sass/styles.scss */
 .ml-10, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes {
   margin-left: 10px;
 }
 
-/* line 17, ../sass/styles.scss */
-.mb-10, .page-user form h2, #block-formblock-ask-an-expert h2, #block-formblock-ask-an-expert .form-item {
+/* line 18, ../sass/styles.scss */
+.mb-10, .page-user form h2, #block-formblock-ask-an-expert h2, #block-formblock-ask-an-expert .form-item, .question-heading, .answer-container, .answer-container .form-type-textfield {
   margin-bottom: 10px;
 }
 
-/* line 20, ../sass/styles.scss */
+/* line 21, ../sass/styles.scss */
+.mb-5, .answer-heading, .answer-container .form-type-checkbox, .answer-container .form-type-radio {
+  margin-bottom: 5px;
+}
+
+/* line 24, ../sass/styles.scss */
 .pd-0, * {
   padding: 0;
 }
 
-/* line 23, ../sass/styles.scss */
+/* line 27, ../sass/styles.scss */
 .pd-10, #block-formblock-ask-an-expert .captcha {
   padding: 10px;
 }
 
-/* line 26, ../sass/styles.scss */
+/* line 30, ../sass/styles.scss */
 .pd-30, .page-user .login-wrapper {
   padding: 30px;
 }
 
-/* line 29, ../sass/styles.scss */
+/* line 33, ../sass/styles.scss */
 .pdlr-30, .tabs-primary li a {
   padding-left: 30px;
   padding-right: 30px;
 }
 
-/* line 33, ../sass/styles.scss */
+/* line 37, ../sass/styles.scss */
 .pdtb-10, .header, .tabs-primary li a, .view-ask-an-expert .views-row {
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-/* line 37, ../sass/styles.scss */
+/* line 41, ../sass/styles.scss */
 .pdb-10, .success-message, .messages--status, #block-formblock-ask-an-expert h2 {
   padding-bottom: 10px;
 }
 
-/* line 40, ../sass/styles.scss */
+/* line 44, ../sass/styles.scss */
 .pdr-10 {
   padding-right: 10px;
 }
 
-/* line 43, ../sass/styles.scss */
+/* line 47, ../sass/styles.scss */
 .no-bullet, .tabs-primary {
   list-style: none;
 }
 
-/* line 46, ../sass/styles.scss */
+/* line 50, ../sass/styles.scss */
 .no-underline, .tabs-primary li a {
   text-decoration: none;
 }
 
-/* line 49, ../sass/styles.scss */
+/* line 53, ../sass/styles.scss */
 .db, .tabs-primary li a, .page-user form label, .view-ask-an-expert .field-content {
   display: block;
 }
 
-/* line 52, ../sass/styles.scss */
-.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row {
+/* line 56, ../sass/styles.scss */
+.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating, .answer-container .form-type-checkboxes > .rating .form-type-checkbox {
   display: inline-block;
 }
 
-/* line 55, ../sass/styles.scss */
-.vmid, .page-user form .forgot-link {
+/* line 59, ../sass/styles.scss */
+.vmid, .page-user form .forgot-link, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating {
   vertical-align: middle;
 }
 
-/* line 58, ../sass/styles.scss */
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row {
+/* line 62, ../sass/styles.scss */
+.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row {
   vertical-align: top;
 }
 
-/* line 61, ../sass/styles.scss */
-.full, #page, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row {
+/* line 65, ../sass/styles.scss */
+.full, #page, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container {
   width: 100%;
 }
 
-/* line 64, ../sass/styles.scss */
-.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label {
+/* line 68, ../sass/styles.scss */
+.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"] {
   float: left;
 }
 
-/* line 67, ../sass/styles.scss */
+/* line 71, ../sass/styles.scss */
 .fright {
   float: right;
 }
 
-/* line 70, ../sass/styles.scss */
-.btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit {
+/* line 74, ../sass/styles.scss */
+.pos-rel, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"] {
+  position: relative;
+}
+
+/* line 77, ../sass/styles.scss */
+.btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
   color: #fff;
@@ -121,20 +136,20 @@ body {
   text-align: center;
   white-space: nowrap;
 }
-/* line 83, ../sass/styles.scss */
-.btn:hover, .page-user form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover {
+/* line 90, ../sass/styles.scss */
+.btn:hover, .page-user form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover, .question-container .form-submit:hover {
   background-color: #286090;
   border-color: #204d74;
   color: #fff;
 }
 
-/* line 90, ../sass/styles.scss */
+/* line 97, ../sass/styles.scss */
 .success-message, .messages--status {
   color: #009c00;
   font-size: 13px;
 }
 
-/* line 96, ../sass/styles.scss */
+/* line 103, ../sass/styles.scss */
 input[type="text"], select, input[type="password"] {
   border: 1px solid #ddd;
   height: 32px;
@@ -143,32 +158,32 @@ input[type="text"], select, input[type="password"] {
   color: #333;
 }
 
-/* line 103, ../sass/styles.scss */
+/* line 110, ../sass/styles.scss */
 .form-required, .error {
   color: red;
 }
 
-/* line 106, ../sass/styles.scss */
+/* line 113, ../sass/styles.scss */
 * {
   box-sizing: border-box;
 }
 
-/* line 111, ../sass/styles.scss */
+/* line 118, ../sass/styles.scss */
 #page {
   padding-bottom: 30px;
 }
 
-/* line 112, ../sass/styles.scss */
+/* line 119, ../sass/styles.scss */
 .header {
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
 }
 
-/* line 121, ../sass/styles.scss */
+/* line 128, ../sass/styles.scss */
 .tabs-primary li {
   margin-right: 1px;
 }
-/* line 124, ../sass/styles.scss */
+/* line 131, ../sass/styles.scss */
 .tabs-primary li a {
   background-color: #ddd;
   font-weight: bold;
@@ -176,73 +191,73 @@ input[type="text"], select, input[type="password"] {
   transition: all 300ms;
   font-weight: 400;
 }
-/* line 134, ../sass/styles.scss */
+/* line 141, ../sass/styles.scss */
 .tabs-primary li a:hover, .tabs-primary li a.active {
   background-color: #FF2B36;
   color: #fff;
 }
 
-/* line 142, ../sass/styles.scss */
+/* line 149, ../sass/styles.scss */
 .page-user form {
   max-width: 440px;
   margin: 0 auto;
 }
-/* line 144, ../sass/styles.scss */
+/* line 151, ../sass/styles.scss */
 .page-user form h2 {
   font-size: 28px;
   font-weight: 400;
   line-height: 36px;
 }
-/* line 150, ../sass/styles.scss */
+/* line 157, ../sass/styles.scss */
 .page-user form label {
   font-size: 16px;
   padding-bottom: 5px;
 }
-/* line 158, ../sass/styles.scss */
+/* line 165, ../sass/styles.scss */
 .page-user form .forgot-link {
   margin: 7px;
   color: #333;
 }
-/* line 167, ../sass/styles.scss */
+/* line 174, ../sass/styles.scss */
 .page-user form .form-text {
   width: 100%;
 }
-/* line 168, ../sass/styles.scss */
+/* line 175, ../sass/styles.scss */
 .page-user form div.description {
   font-size: 12px;
   color: #8d8d8d;
 }
-/* line 173, ../sass/styles.scss */
+/* line 180, ../sass/styles.scss */
 .page-user .login-wrapper {
   border: 1px solid #ddd;
   background-color: #eee;
 }
-/* line 178, ../sass/styles.scss */
+/* line 185, ../sass/styles.scss */
 .page-user .messages--status, .page-user .messages--error {
   max-width: 440px;
   margin: 0 auto;
 }
-/* line 183, ../sass/styles.scss */
+/* line 190, ../sass/styles.scss */
 .page-user .messages--error .messages__list {
   padding-left: 15px;
 }
 
-/* line 188, ../sass/styles.scss */
+/* line 195, ../sass/styles.scss */
 .login {
   line-height: 58px;
   font-size: 18px;
 }
-/* line 191, ../sass/styles.scss */
+/* line 198, ../sass/styles.scss */
 .login a {
   color: #333;
   text-decoration: none;
 }
-/* line 194, ../sass/styles.scss */
+/* line 201, ../sass/styles.scss */
 .login a:hover {
   text-decoration: underline;
 }
 
-/* line 199, ../sass/styles.scss */
+/* line 206, ../sass/styles.scss */
 #page-title {
   font-size: 24px;
   line-height: 28px;
@@ -250,52 +265,123 @@ input[type="text"], select, input[type="password"] {
   margin-bottom: 10px;
 }
 
-/* line 208, ../sass/styles.scss */
+/* line 215, ../sass/styles.scss */
 #block-formblock-ask-an-expert h2 {
   border-bottom: 1px solid #ddd;
 }
-/* line 215, ../sass/styles.scss */
+/* line 222, ../sass/styles.scss */
 #block-formblock-ask-an-expert .captcha div, #block-formblock-ask-an-expert .captcha iframe {
   max-width: 270px;
 }
 
-/* line 225, ../sass/styles.scss */
+/* line 232, ../sass/styles.scss */
 .node-ask-an-expert .field {
   padding-bottom: 5px;
 }
-/* line 226, ../sass/styles.scss */
+/* line 233, ../sass/styles.scss */
 .node-ask-an-expert .field-label {
   width: 80px;
 }
-/* line 227, ../sass/styles.scss */
+/* line 234, ../sass/styles.scss */
 .node-ask-an-expert .field-items {
   overflow: hidden;
   float: none;
 }
 
-/* line 230, ../sass/styles.scss */
+/* line 237, ../sass/styles.scss */
 .view-ask-an-expert .views-row {
   border-top: 1px solid #ddd;
 }
-/* line 232, ../sass/styles.scss */
+/* line 239, ../sass/styles.scss */
 .view-ask-an-expert .views-row:first-child {
   border: none;
 }
-/* line 234, ../sass/styles.scss */
+/* line 241, ../sass/styles.scss */
 .view-ask-an-expert .views-field {
   padding-bottom: 5px;
 }
-/* line 235, ../sass/styles.scss */
+/* line 242, ../sass/styles.scss */
 .view-ask-an-expert .views-label {
   width: 80px;
   font-weight: 600;
 }
-/* line 236, ../sass/styles.scss */
+/* line 243, ../sass/styles.scss */
 .view-ask-an-expert .field-content {
   overflow: hidden;
   float: none;
 }
-/* line 238, ../sass/styles.scss */
+/* line 245, ../sass/styles.scss */
 .view-ask-an-expert .field-content a {
   color: #333;
+}
+
+/* SCSS For Survey Page */
+/* line 251, ../sass/styles.scss */
+.page-survey .ajax-progress-throbber .message {
+  display: none;
+}
+
+/* line 254, ../sass/styles.scss */
+.ajax-loader {
+  height: 80px;
+  text-align: center;
+}
+
+/* line 258, ../sass/styles.scss */
+.question-container {
+  display: none;
+}
+/* line 260, ../sass/styles.scss */
+.question-container .form-submit {
+  margin-right: 5px;
+}
+/* line 264, ../sass/styles.scss */
+.question-container#question-container-0 {
+  display: block;
+}
+
+/* line 268, ../sass/styles.scss */
+.question-heading {
+  font-size: 18px;
+}
+
+/* line 273, ../sass/styles.scss */
+.answer-heading {
+  font-size: 14px;
+}
+
+/* line 286, ../sass/styles.scss */
+.answer-container .form-type-textfield label {
+  width: 200px;
+}
+/* line 289, ../sass/styles.scss */
+.answer-container .form-type-checkboxes > label {
+  width: 200px;
+}
+/* line 294, ../sass/styles.scss */
+.answer-container .form-type-checkboxes > .rating .form-type-checkbox:before {
+  content: '\f005';
+  color: #ddd;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  font: normal normal normal 18px/18px FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+}
+/* line 297, ../sass/styles.scss */
+.answer-container .form-type-checkboxes > .rating .form-type-checkbox.rating-hover:before, .answer-container .form-type-checkboxes > .rating .form-type-checkbox.rated-div:before {
+  color: #f6b800;
+}
+/* line 300, ../sass/styles.scss */
+.answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer;
 }
