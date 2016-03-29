@@ -46,11 +46,12 @@
     <div class="view-filters">
       <?php print $exposed; ?>
     </div>
+    <div class="attachment">
+      <span class="count"><?php print 'Count ('.$view->total_rows.')'; ?></span>
+      <?php print l('Create Story', 'node/add/story', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0)))); ?>
+    </div>
   <?php endif; ?>
-  <div class="attachment">
-    <span class="count"><?php print 'Count ('.$view->total_rows.')'; ?></span>
-    <?php print l('Create Story', 'node/add/story', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0)))); ?>
-  </div>
+  
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
       <?php //echo $view->total_rows; ?>
