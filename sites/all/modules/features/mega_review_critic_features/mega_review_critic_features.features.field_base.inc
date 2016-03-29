@@ -10,6 +10,30 @@
 function mega_review_critic_features_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_celebrity_facebook_page'.
+  $field_bases['field_celebrity_facebook_page'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_celebrity_facebook_page',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_celebrity_pro_occupation'.
   $field_bases['field_celebrity_pro_occupation'] = array(
     'active' => 1,
