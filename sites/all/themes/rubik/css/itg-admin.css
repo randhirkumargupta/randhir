@@ -91,6 +91,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview-wrapper, 
 .page-node-add-poll .preview-wrapper,
 .node-type-poll .preview-wrapper, 
+.page-node-add-cooking-tips .preview-wrapper,
+.node-type-cooking-tips .preview-wrapper, 
 .page-node-add-supplement .preview-wrapper,
 .node-type-breaking-news .preview-wrapper{
   background-color: rgba(0, 0, 0, 0.7);
@@ -123,6 +125,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview,
 .page-node-add-poll .preview,
 .node-type-poll .preview,
+.page-node-add-cooking-tips .preview,
+.node-type-cooking-tips .preview,
 .page-node-add-supplement .preview,
 .node-type-breaking-news .preview{
   background-color: #fff;
@@ -157,6 +161,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview > h3,
 .page-node-add-poll .preview > h3,
 .node-type-poll .preview > h3,
+.page-node-add-cooking-tips .preview > h3,
+.node-type-cooking-tips .preview > h3,
 .page-node-add-supplement .preview > h3,
 .node-type-breaking-news .preview > h3{
   font-size: 24px;
@@ -194,6 +200,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .close-preview,
 .page-node-add-poll .close-preview,
 .node-type-poll .close-preview,
+.page-node-add-cooking-tips .close-preview,
+.node-type-cooking-tips .close-preview,
 .page-node-add-supplement .close-preview,
 .node-type-breaking-news .close-preview{
   display: block;
@@ -207,6 +215,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .node-preview .column-side, 
 .page-node-add-story .node-title, 
 .page-node-add-story .preview > h3:first-child,
+.page-node-add-cooking-tips .node-teaser, 
+.page-node-add-cooking-tips .node-preview .column-side, 
+.page-node-add-cooking-tips .node-title, 
+.page-node-add-cooking-tips .preview > h3:first-child,
 .page-node-add-poll .node-teaser, 
 .page-node-add-poll .node-preview .column-side, 
 .page-node-add-poll .node-title, 
@@ -219,6 +231,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-story .node-preview .column-side, 
 .node-type-story .node-title, 
 .node-type-story .preview > h3:first-child, 
+.node-type-cooking-tips .node-teaser, 
+.node-type-cooking-tips .node-preview .column-side, 
+.node-type-cooking-tips .node-title, 
+.node-type-cooking-tips .preview > h3:first-child, 
 .node-type-poll .node-teaser, 
 .node-type-poll .node-preview .column-side, 
 .node-type-poll .node-title, 
@@ -293,6 +309,8 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic div.node,
 .page-node-add-poll div.node, 
 .node-type-poll div.node,
+.page-node-add-cooking-tips div.node, 
+.node-type-cooking-tips div.node,
 .node-type-breaking-news div.node,
 .node-type-story div.node{
   background: none;
@@ -319,10 +337,14 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-blog .column-main,
 .page-node-add-recipe .column-main, 
 .node-type-recipe .column-main,
+.page-node-add-cooking-tips .column-main, 
+.node-type-cooking-tips .column-main,
 .page-node-add-mega-review-critic .preview .column-main, 
 .node-type-mega-review-critic .preview .column-main,
 .page-node-add-poll .preview .column-main, 
 .node-type-poll .preview .column-main,
+.page-node-add-cooking-tips .preview .column-main, 
+.node-type-cooking-tips .preview .column-main,
 .node-type-breaking-news .column-main{
   display: inline-block;
   width: 100%;
@@ -928,7 +950,8 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .date-nav .pager li{height: auto; border: none;}
 .view-category-manager-dev .view-header{text-align: right;}
 .view-category-manager-dev .view-header > div{ background-color: #7bc; border-radius: 5px; color: #fff; display: inline-block; font-weight: bold; padding: 5px 10px; text-shadow: 0 1px 0 #38a; vertical-align: top; cursor: pointer;}
-.view-category-manager-dev .view-header > div.active{background-color: #008eb1;}
+.view-category-manager-dev .view-header > div.active, 
+.view > .attachment a.active{background-color: #008eb1;}
 .page-node-revision .views-label, 
 .page-node-revision .field .field-label, 
 .page-node-revisions .views-label, 
@@ -1233,6 +1256,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .view-strory-menegment .tabledrag-hide{display: none;}
 .block-content > .node-mega-review-critic > .column-side, 
 .block-content > .node-recipe > .column-side, 
+.block-content > .node-cooking-tips > .column-side, 
 .block-content > .node-mega-review-critic > .column-main .field-collection-container .action-links,
 .block-content > .node-mega-review-critic > .column-main .field-items .field-collection-view-links{display: none;}
 .block-content > .node-mega-review-critic > .column-main{width: 100%;}
@@ -1353,3 +1377,7 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .field-name-field-recipe-audio .form-managed-file .ajax-progress-throbber .message,
 .field-name-field-recipe-video .form-managed-file .ajax-progress-throbber .message{display: none;}
 #subsPollForm .captcha{margin-bottom: 10px;}
+.node-itg_celebrity_profile-form .text-format-wrapper .filter-wrapper{display: none;}
+.node-itg_celebrity_profile-form .form-type-managed-file .image-widget div.image-widget-data{width: auto;}
+.node-itg_celebrity_profile-form .vertical-tabs{border: none; padding: 0;}
+.node-itg_celebrity_profile-form input.form-file{float: left;}
