@@ -11,6 +11,9 @@
     <?php print drupal_render($form['title']); ?>
     <?php print drupal_render($form['field_astro_frequency']); ?>
     <?php print drupal_render($form['field_astro_date_range']); ?>
+    <?php print render($form['field_story_expiry_date']); ?>
+    <?php print render($form['field_last_name']); ?>
+    <?php print render($form['field_astro_type']); ?>
     <h2 class="story-title"><?php echo t('Channel'); ?></h2>
     <?php print drupal_render($form['field_story_category']); ?>    
 </div>
@@ -22,6 +25,7 @@
 <div id="Configuration">
     <h2 class="story-title"><?php echo t('Collective Content'); ?></h2>
     <?php print drupal_render($form['field_buzz_description']); ?>
+    <?php print drupal_render($form['field_astro_video_thumbnail']); ?>
     <?php print drupal_render($form['field_astro_video']); ?>
     <?php print drupal_render($form['field_common_audio_file']); ?>
 </div>
