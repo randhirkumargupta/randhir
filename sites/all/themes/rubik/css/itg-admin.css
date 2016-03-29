@@ -1344,3 +1344,9 @@ form.node-recipe-form .form-type-managed-file .form-managed-file{overflow: visib
 .vertical-tabs .node-form-revision-information .fieldset-content{padding: 0;}
 .node-photogallery-form #BrowseMedia .form-type-managed-file .image-widget div.image-widget-data{width: auto;}
 .manage_recipe_view_menu, .manage_cooking_tips_view_menu{float: left;}
+.field-name-field-recipe-audio .form-managed-file, 
+.field-name-field-recipe-video .form-managed-file{position: relative; float: left;}
+.field-name-field-recipe-audio .form-managed-file .ajax-progress-throbber,
+.field-name-field-recipe-video .form-managed-file .ajax-progress-throbber{left: 100%; top: 5px; position: absolute;}
+.field-name-field-recipe-audio .form-managed-file .ajax-progress-throbber .message,
+.field-name-field-recipe-video .form-managed-file .ajax-progress-throbber .message{display: none;}
