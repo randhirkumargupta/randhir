@@ -230,7 +230,7 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
  * @param type $query 
  */
 function itg_workflow_views_query_alter(&$view, &$query) {
-
+//p($view->query->where[1]['conditions']);
   // < published and >= approved
   
   // for story
