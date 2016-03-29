@@ -12,6 +12,7 @@
         $('#edit-body-und-0-format').hide();
         $('.vertical-tabs-list').hide();
         $('#edit-metatags').show();
+        $('#edit-field-survey-add-questions-und-0-remove-button').hide();
       }
 
       //Collect values assigned in settings array 
@@ -21,7 +22,7 @@
 
       //Restrict print issue date to select previous date in magazine form 
       if (type === 'Survey') {
-        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-end-date-und-0-value-datepicker-popup-0').datepicker({
+        $('edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, edit-field-survey-end-date-und-0-value-datepicker-popup-1').datepicker({
           changeYear: true,
           minDate: '0',
           readonly: true
