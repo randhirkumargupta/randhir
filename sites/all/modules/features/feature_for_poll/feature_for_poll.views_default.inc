@@ -253,6 +253,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
     'counter' => 'counter',
     'title' => 'title',
     'nid' => 'nid',
@@ -261,13 +262,21 @@ function feature_for_poll_views_default_views() {
     'name' => 'name',
     'field_poll_start_date' => 'field_poll_start_date',
     'field_poll_end_date' => 'field_poll_end_date',
+    'nothing_1' => 'nothing_1',
+    'status' => 'status',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
+    'field_associate_poll' => 'field_associate_poll',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'counter' => array(
       'align' => '',
       'separator' => '',
@@ -288,7 +297,7 @@ function feature_for_poll_views_default_views() {
       'empty_column' => 0,
     ),
     'field_poll_question' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -322,6 +331,18 @@ function feature_for_poll_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'status' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'view_node' => array(
       'align' => '',
       'separator' => '',
@@ -342,10 +363,23 @@ function feature_for_poll_views_default_views() {
       'separator' => ' |',
       'empty_column' => 0,
     ),
+    'field_associate_poll' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<p>No Result found.</p>';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
@@ -365,14 +399,14 @@ function feature_for_poll_views_default_views() {
     'action::node_publish_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
-      'skip_confirmation' => 0,
+      'skip_confirmation' => 1,
       'override_label' => 0,
       'label' => '',
     ),
     'action::node_unpublish_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
-      'skip_confirmation' => 0,
+      'skip_confirmation' => 1,
       'override_label' => 0,
       'label' => '',
     ),
@@ -696,19 +730,6 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['filters']['field_poll_start_date_value']['expose']['operator'] = 'field_poll_start_date_value_op';
   $handler->display->display_options['filters']['field_poll_start_date_value']['expose']['identifier'] = 'field_poll_start_date_value';
   $handler->display->display_options['filters']['field_poll_start_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: End Date (field_poll_end_date) */
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['id'] = 'field_poll_end_date_value_1';
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['table'] = 'field_data_field_poll_end_date';
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['field'] = 'field_poll_end_date_value';
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['group'] = 2;
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['default_date'] = 'now';
-  /* Filter criterion: Content: End Date (field_poll_end_date) */
-  $handler->display->display_options['filters']['field_poll_end_date_value']['id'] = 'field_poll_end_date_value';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['table'] = 'field_data_field_poll_end_date';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['field'] = 'field_poll_end_date_value';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['group'] = 2;
 
   /* Display: Answer Poll block */
   $handler = $view->new_display('block', 'Answer Poll block', 'block_2');
@@ -806,19 +827,6 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['filters']['field_poll_start_date_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_poll_start_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_poll_start_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: End Date (field_poll_end_date) */
-  $handler->display->display_options['filters']['field_poll_end_date_value']['id'] = 'field_poll_end_date_value';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['table'] = 'field_data_field_poll_end_date';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['field'] = 'field_poll_end_date_value';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['group'] = 2;
-  /* Filter criterion: Content: End Date (field_poll_end_date) */
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['id'] = 'field_poll_end_date_value_1';
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['table'] = 'field_data_field_poll_end_date';
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['field'] = 'field_poll_end_date_value';
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['group'] = 2;
-  $handler->display->display_options['filters']['field_poll_end_date_value_1']['default_date'] = 'now';
   $export['poll_listing'] = $view;
 
   return $export;

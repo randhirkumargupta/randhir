@@ -76,12 +76,13 @@
           </div>
             
               <?php
+              if ($node->op == 'Preview') {
               $output = '';
               $imgfid = '';
               $items = field_get_items('node', $node, 'field_poll_answer');
-              foreach ($items as $imagecollection) {
-                if(isset($imagecollection['field_poll_answer_image']['und'])){
-                $imgfid = $imagecollection['field_poll_answer_image']['und'][0]['fid'];
+               foreach ($items as $imagecollection) {
+                if(isset($imagecollection['field_poll_answer_image'][LANGUAGE_NONE])){
+                $imgfid = $imagecollection['field_poll_answer_image'][LANGUAGE_NONE][0]['fid'];
                 }
                 if ($imgfid != 0) {
                   $output .= '<li>';
@@ -93,13 +94,13 @@
                     }
                   }
                 }
-                  if (isset($imagecollection['field_poll_answer_text']['und']) && !empty($imagecollection['field_poll_answer_text']['und'])) {
-                    $output .= '<div class="ans-text"><span>' . $imagecollection['field_poll_answer_text']['und'][0]['value'] . '</span></div>';
+                  if (isset($imagecollection['field_poll_answer_text'][LANGUAGE_NONE]) && !empty($imagecollection['field_poll_answer_text'][LANGUAGE_NONE])) {
+                    $output .= '<div class="ans-text"><span>' . $imagecollection['field_poll_answer_text'][LANGUAGE_NONE][0]['value'] . '</span></div>';
                   }
-
+                  
                   $output .= '</li>';
               }
-              if (isset($output) && !empty($output)):
+              if (isset($output) && !empty($output)){
                 ?>
           <div class="content-node-view">
                 <div class="expert-details content-box">
@@ -109,8 +110,14 @@
                   </div>
                 </div>
         </div>
-              <?php endif; ?> 
-            <?php endif; ?>
+              <?php } 
+              }else{
+                $field_poll_answer = render($content['field_poll_answer']);
+                if (!empty($field_poll_answer)): print render($content['field_poll_answer']);
+                endif;
+              }?> 
+              <?php endif; ?>
+
           
           <div class="content-node-view">
             <div class="poll-details">
@@ -138,8 +145,8 @@
                 endif;
                 ?>
                 <?php
-                $field_end_date = render($content['field_end_date']);
-                if (!empty($field_end_date)): print render($content['field_end_date']);
+                $field_end_date = render($content['field_poll_end_date']);
+                if (!empty($field_end_date)): print render($content['field_poll_end_date']);
                 endif;
                 ?>
                 <?php
@@ -160,12 +167,21 @@
               </div>
             </div>
         </div>
-
-          
+          <?php if ($node->op != 'Preview'): ?>
+          <div class="current-poll-result">
+            <?php
+              
+              if(isset($node->field_associate_poll[LANGUAGE_NONE])){
+                $associat_nid = $node->field_associate_poll[LANGUAGE_NONE][0]['target_id'];
+                print views_embed_view('poll_listing', 'block_2', $associat_nid);
+              }
+              ?>
+          </div>
+          <?php endif; ?>
           
          </div>
       <?php endif; ?>
-
+        
       <?php if ($layout): ?>
       </div></div>
   <?php endif; ?>

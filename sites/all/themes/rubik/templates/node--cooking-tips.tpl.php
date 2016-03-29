@@ -1,3 +1,4 @@
+<a href="javascript:;" class="close-preview">&nbsp;</a>
 <?php if (!empty($pre_object)) print render($pre_object) ?>
 
 <div class='<?php print $classes ?> clearfix' <?php print ($attributes) ?>>
