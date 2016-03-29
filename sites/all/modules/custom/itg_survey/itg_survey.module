@@ -15,7 +15,7 @@
 function itg_survey_menu() {
   $items = array();
   $items['survey'] = array(
-      'title' => 'India Today Survey',
+      'title' => t('Survey'),
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_survey_survey_form'),
       'access callback' => TRUE,
@@ -71,6 +71,10 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       //After build and custom summit callback
       $form['#after_build'][] = 'itg_survey_form_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_survey_form_custom_submit_callback';
+    }
+    
+    if($form_id == 'itg_survey_survey_form'){
+      drupal_set_title('India Today Survey');
     }
 }
 
