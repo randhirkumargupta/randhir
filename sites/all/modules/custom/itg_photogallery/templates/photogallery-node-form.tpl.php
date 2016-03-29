@@ -18,7 +18,6 @@
   <h2 class="story-title">Gallery Cover Image</h2>
   <?php print drupal_render($form['field_story_extra_large_image']); ?>
   <p class="pre-desc">This image will be resized by the system into pre-defined dimensions</p>
-  <?php print drupal_render($form['imagecreate']); ?>
   <?php print drupal_render($form['field_story_resize_extra_large']); ?>
   <?php print drupal_render($form['field_story_large_image']); ?>
   <?php print drupal_render($form['field_story_medium_image']); ?>
