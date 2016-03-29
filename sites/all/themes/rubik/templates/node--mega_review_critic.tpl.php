@@ -45,6 +45,7 @@
           <div class="field-items"><?php print render($title); ?></div>
         </div>
         <?php print render($content['field_mega_review_cast']); ?>
+        <?php print render($content['field_mega_review_type']); ?>
         <?php print render($content['field_mega_review_director']); ?>
         <?php print render($content['field_mega_review_movie_plot']); ?>
         <?php print render($content['field_mega_review_youtube_url']); ?>
