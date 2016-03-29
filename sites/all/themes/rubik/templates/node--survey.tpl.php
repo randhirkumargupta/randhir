@@ -77,7 +77,6 @@
           $media = $file->uri;
           $media_type = strtolower(substr(strrchr($media, '.'), 1));
           $media_path = $base_url . str_replace('public://', '/sites/default/files/', $media);
-          
           echo '<h2>Question ' . ($prev_num + 1) . ' Details:</h2>';
           ?>
            <div class="field">
@@ -88,7 +87,9 @@
               <div class="field-label">Skip Question:</div>
               <div class="field-items"><?php echo ucwords($question_arr['field_survey_skip'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
-            <?php if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){?>
+            <?php 
+            if(!empty($media_type)){
+            if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){?>
               <div class="field">
                 <div class="field-label">Add Media:</div>
                 <div class="field-items"><img src="<?php echo $media_path; ?>" height="100" width="130"/></div>
@@ -105,7 +106,7 @@
                       </video>
                    </div>
                   </div>
-            <?php } ?>
+            <?php } }?>
            <div class="field">
               <div class="field-label">Answer Type:</div>
               <div class="field-items"><?php echo ucwords($question_arr['field_survey_answer_type'][LANGUAGE_NONE][0]['value']); ?></div>
@@ -143,7 +144,6 @@
           $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
           $media_type = strtolower(substr(strrchr($media, '.'), 1));
           $media_path = $base_url . str_replace('public://', '/sites/default/files/', $media);
-          
           echo '<h2>Question ' . ($num + 1) . ' Details:</h2>';
           ?>
       
@@ -155,7 +155,9 @@
             <div class="field-label">Skip Question:</div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_skip[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
-          <?php if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){?>
+          <?php 
+          if(!empty($media_type)){
+          if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){?>
               <div class="field" style="padding-left: 20px">
                 <div class="field-label">Add Media:</div>
                 <div class="field-items"><img src="<?php echo $media_path; ?>" height="100" width="130"/></div>
@@ -172,7 +174,7 @@
                     </video>
                  </div>
                 </div>
-          <?php } ?>
+          <?php } }?>
           <div class="field" style="padding-left: 20px">
             <div class="field-label">Answer Type:</div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value']); ?></div>
