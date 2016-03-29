@@ -13,4 +13,5 @@
 <span class="target-link" data-target-id="Configuration">Configuration</span>
 <span class="target-link" data-target-id="Categorization">Categorization</span>
 <span class="target-link" data-target-id="title-metatags">Meta Details</span>
+<span class="target-link" data-target-id="edit-revision-information"><?php print t('Remarks'); ?></span>
 </div>
