@@ -1141,6 +1141,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .field-collection-view, 
 .node-type-mega-review-critic .field-collection-view, 
 .page-node-add-mega-review-critic .field-collection-view, 
+.page-node-add-survey .field-collection-view, 
 .node-type-survey .field-collection-view{border-bottom: 1px dashed #d3d7d9;}
 .node-survey-form .field-multiple-table .field-multiple-table tbody{float: left;}
 [id*="field-survey-add-questions-values"] + div .field-add-more-submit{margin: 0;}
@@ -1339,7 +1340,8 @@ div.view table td, div.view table th{max-width: 200px;}
 .content-node-view .field-label {vertical-align: top;}
 .node-cooking_tips-form .vertical-tabs{padding: 10px 10px 0;}
 form.node-cooking_tips-form .form-type-managed-file .form-managed-file,
-form.node-recipe-form .form-type-managed-file .form-managed-file{overflow: visible;}
+form.node-recipe-form .form-type-managed-file .form-managed-file, 
+form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible;}
 #group-survey-date-settings .form-item{position: static;}
 .vertical-tabs .node-form-revision-information .fieldset-content{padding: 0;}
 .node-photogallery-form #BrowseMedia .form-type-managed-file .image-widget div.image-widget-data{width: auto;}
