@@ -84,6 +84,25 @@ function itg_poll_after_build($form, &$form_state) {
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_poll' => array('settings' => $settings)), array('type' => 'setting'));
+  
+  
+  //poll disable after create
+  if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+    $result = itg_poll_getTotalPoll(arg(1));
+    if($result > 0){
+      foreach ($form['field_poll_answer'][LANGUAGE_NONE] as $key => $item) {
+            if(is_numeric($key)){
+              $form['field_poll_answer'][LANGUAGE_NONE][$key]['remove_button']['#access'] = FALSE;
+             }
+          }
+        $form['field_poll_answer'][LANGUAGE_NONE]['add_more']['#access'] = FALSE; // Disable Add more button
+        
+        $form['field_poll_question_text'][LANGUAGE_NONE][0]['value']['#attributes'] = array('readonly' => 'readonly');
+        drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew_disable.js', array('weight' => 4,  'scope' => 'footer'));
+    
+    }
+  }
+  
   return $form;
 }
 
@@ -634,6 +653,10 @@ function itg_poll_mail($key, &$message, $params) {
   }
 }
 
+/**
+ * Implements hook_node_presave().
+ * @param type $node
+ */
 function itg_poll_node_presave($node){
   if($node->type == 'poll'){
     $poll_question = $node->field_poll_question[LANGUAGE_NONE][0]['value'];
@@ -644,21 +667,5 @@ function itg_poll_node_presave($node){
     }elseif ($poll_question == 3) { // video
       
     }
-    $poll_answer_option = $node->field_poll_answer_option[LANGUAGE_NONE][0]['value'];
-    if ($poll_answer_option == 1) { //1 = text
-    //$node->field_poll_answer[LANGUAGE_NONE][$key]['field_poll_answer_image'][LANGUAGE_NONE][0]['fid'] = 0; 
-      //$node->field_poll_answer[LANGUAGE_NONE][0]['field_poll_answer_image'][LANGUAGE_NONE] = '';
-
-      foreach($node->field_poll_answer[LANGUAGE_NONE] as $key => $pollanswer){
-          unset($node->field_poll_answer[LANGUAGE_NONE][$key]['field_poll_answer_image'][LANGUAGE_NONE]); 
-      }
-    } elseif ($poll_answer_option == 2) { // Image
-      foreach($node->field_poll_answer[LANGUAGE_NONE] as $key => $pollanswer){
-          unset($node->field_poll_answer[LANGUAGE_NONE][$key]['field_poll_answer_text'][LANGUAGE_NONE]); 
-      }
-    }elseif ($poll_answer_option == 3) { // video
-      
-    }
-
   }
 }

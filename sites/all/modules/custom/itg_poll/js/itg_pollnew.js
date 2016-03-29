@@ -19,7 +19,8 @@
             } else if (getOptionAnswerValnew == '_none') {
                 $('#edit-field-poll-answer').hide();
             }
-
+            
+            
             var getOptionAnswerVal;
             $('#edit-field-poll-answer-option-und').on('change', function() {
                 getOptionAnswerVal = $("#edit-field-poll-answer-option-und").val();
@@ -27,11 +28,14 @@
                     $('#edit-field-poll-answer').show();
                     $('.field-name-field-poll-answer-image').hide();
                     $('.field-name-field-poll-answer-text').show();
+                    $('.field-name-field-poll-manipulate-value input').val('');
+                    $('.field-name-field-poll-answer-image .button-remove').mousedown();
                 } else if (getOptionAnswerVal == 2) {
                     $('#edit-field-poll-answer').show();
                     $('.field-name-field-poll-answer-image').show();
                     $('.field-name-field-poll-answer-text').hide();
                     $('.field-name-field-poll-answer-text input').val('');
+                    $('.field-name-field-poll-manipulate-value input').val('');
                 } else if (getOptionAnswerVal == '_none') {
                     $('#edit-field-poll-answer').hide();
                 }
@@ -83,8 +87,10 @@
             
           $('#edit-field-poll-question-und').change(function(){
               var queVal =  $('#edit-field-poll-question-und').val();
-              if(queVal == 2){
+              if(queVal == 2){ // Image question
                   $('#edit-field-poll-question-text-und-0-value').val('');
+              }else if (queVal == 1) { // Text Question
+                   $('#edit-field-poll-question-image-und-0-remove-button').mousedown();
               }
           });  
             
