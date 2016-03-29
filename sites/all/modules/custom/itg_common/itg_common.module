@@ -232,7 +232,13 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
                  var title = jQuery.trim(jQuery("#edit-title").val());       
                  if (title == "") {
                    jQuery("#edit-title").val("");
-                 }                                       
+                 }
+                 
+                 var nid = jQuery.trim(jQuery("#edit-nid").val());       
+                 if (nid == "") {
+                   jQuery("#edit-nid").val("");
+                 }
+                 
                });              
           });', array('type' => 'inline', 'scope' => 'footer'));
   }
