@@ -162,6 +162,7 @@ function itg_survey_survey_form() {
         );
       }
       
+      if(!empty($media_type)){
       if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){
         $form['media' . $num] = array(
             '#type' => 'markup',
@@ -181,6 +182,7 @@ function itg_survey_survey_form() {
       </video>',
             '#suffix' => '</div>',
         );
+      }
       }
       
       //Nex button for all questions
