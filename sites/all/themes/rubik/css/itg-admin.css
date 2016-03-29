@@ -1352,3 +1352,4 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .field-name-field-recipe-video .form-managed-file .ajax-progress-throbber{left: 100%; top: 5px; position: absolute;}
 .field-name-field-recipe-audio .form-managed-file .ajax-progress-throbber .message,
 .field-name-field-recipe-video .form-managed-file .ajax-progress-throbber .message{display: none;}
+#subsPollForm .captcha{margin-bottom: 10px;}
