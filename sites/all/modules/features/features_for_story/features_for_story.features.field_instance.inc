@@ -269,7 +269,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 44,
+      'weight' => 45,
     ),
   );
 
@@ -308,7 +308,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 42,
+      'weight' => 43,
     ),
   );
 
@@ -810,7 +810,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 32,
+      'weight' => 33,
     ),
   );
 
@@ -886,7 +886,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 36,
+      'weight' => 37,
     ),
   );
 
@@ -1108,7 +1108,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'autocomplete_deluxe_taxonomy',
-      'weight' => 43,
+      'weight' => 44,
     ),
   );
 
@@ -1136,7 +1136,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_kicker_text',
-    'label' => 'Story kicker text',
+    'label' => 'Story kicker',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1226,7 +1226,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 33,
+      'weight' => 34,
     ),
   );
 
@@ -1338,7 +1338,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_magazine_kicker_text',
-    'label' => 'Magazine kicker text',
+    'label' => 'Magazine kicker',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1506,7 +1506,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 34,
+      'weight' => 35,
     ),
   );
 
@@ -1932,7 +1932,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 35,
+      'weight' => 36,
     ),
   );
 
@@ -2061,7 +2061,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 48,
+      'weight' => 49,
     ),
   );
 
@@ -2103,7 +2103,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 47,
+      'weight' => 48,
     ),
   );
 
@@ -2148,7 +2148,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 41,
+      'weight' => 42,
     ),
   );
 
@@ -2190,7 +2190,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 40,
+      'weight' => 41,
     ),
   );
 
@@ -2232,7 +2232,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 38,
+      'weight' => 39,
     ),
   );
 
@@ -2274,7 +2274,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 39,
+      'weight' => 40,
     ),
   );
 
@@ -2317,7 +2317,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 37,
+      'weight' => 38,
     ),
   );
 
@@ -2360,6 +2360,82 @@ function features_for_story_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_story_tweet_image'.
+  $field_instances['node-story-field_story_tweet_image'] = array(
+    'bundle' => 'story',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 57,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_tweet_image',
+    'label' => 'Twitter Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 32,
     ),
   );
 
@@ -2440,7 +2516,7 @@ function features_for_story_field_default_field_instances() {
   t('Listicle');
   t('Magazine Kicker Text');
   t('Magazine headline');
-  t('Magazine kicker text');
+  t('Magazine kicker');
   t('Media Files');
   t('Medium image');
   t('New title');
@@ -2462,7 +2538,7 @@ function features_for_story_field_default_field_instances() {
   t('Story body');
   t('Story expires');
   t('Story expiry date');
-  t('Story kicker text');
+  t('Story kicker');
   t('Story rating');
   t('Story title');
   t('Tags');
@@ -2471,6 +2547,7 @@ function features_for_story_field_default_field_instances() {
   t('This is the redirection URL for the New Title added above (url format: https://www.w3schools.com)');
   t('This title will append after the main Story headline on the homepage');
   t('Tweet');
+  t('Twitter Image');
   t('Twitter narrative');
 
   return $field_instances;
