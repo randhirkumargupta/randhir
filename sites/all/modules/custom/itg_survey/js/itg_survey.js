@@ -7,11 +7,17 @@
     attach: function(context, settings) {
       //Hide left side vertical tabs in case of simple users
       var uid = settings.itg_survey.settings.uid;
+      var nid = settings.itg_survey.settings.nid;
+      
       if (uid != 1) {
         $('.field-edit-link').hide();
         $('#edit-body-und-0-format').hide();
         $('.vertical-tabs-list').hide();
         $('#edit-metatags').show();
+        
+      }
+   
+      if(nid == ''){
         $('#edit-field-survey-add-questions-und-0-remove-button').hide();
       }
 
