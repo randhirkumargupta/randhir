@@ -14,6 +14,7 @@ function feature_tag_management_user_default_permissions() {
   $permissions['administer itg_term settings'] = array(
     'name' => 'administer itg_term settings',
     'roles' => array(
+      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -24,6 +25,7 @@ function feature_tag_management_user_default_permissions() {
   $permissions['delete terms in tags'] = array(
     'name' => 'delete terms in tags',
     'roles' => array(
+      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -34,6 +36,7 @@ function feature_tag_management_user_default_permissions() {
   $permissions['edit terms in tags'] = array(
     'name' => 'edit terms in tags',
     'roles' => array(
+      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
