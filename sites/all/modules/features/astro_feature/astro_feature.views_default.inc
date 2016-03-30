@@ -205,16 +205,38 @@ function astro_feature_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Broken/missing handler */
-  $handler->display->display_options['filters']['field_numerology_value']['id'] = 'field_numerology_value';
-  $handler->display->display_options['filters']['field_numerology_value']['table'] = 'field_data_field_numerology';
-  $handler->display->display_options['filters']['field_numerology_value']['field'] = 'field_numerology_value';
-  $handler->display->display_options['filters']['field_numerology_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_numerology_value']['expose']['operator_id'] = 'field_numerology_value_op';
-  $handler->display->display_options['filters']['field_numerology_value']['expose']['label'] = 'Numerology';
-  $handler->display->display_options['filters']['field_numerology_value']['expose']['operator'] = 'field_numerology_value_op';
-  $handler->display->display_options['filters']['field_numerology_value']['expose']['identifier'] = 'field_numerology_value';
-  $handler->display->display_options['filters']['field_numerology_value']['expose']['remember_roles'] = array(
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'astro' => 'astro',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Section (field_story_category) */
+  $handler->display->display_options['filters']['field_story_category_tid']['id'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_story_category_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'Select Program';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator'] = 'field_story_category_tid_op';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['identifier'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -236,9 +258,77 @@ function astro_feature_views_default_views() {
     15 => 0,
     18 => 0,
   );
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['field_story_category_tid']['error_message'] = FALSE;
+  /* Filter criterion: Content: Select Frequency (field_astro_frequency) */
+  $handler->display->display_options['filters']['field_astro_frequency_value']['id'] = 'field_astro_frequency_value';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['table'] = 'field_data_field_astro_frequency';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['field'] = 'field_astro_frequency_value';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['value'] = array(
+    'daily' => 'daily',
+  );
+  $handler->display->display_options['filters']['field_astro_frequency_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_astro_frequency_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator_id'] = 'field_astro_frequency_value_op';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['label'] = 'Select Frequency';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator'] = 'field_astro_frequency_value_op';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['identifier'] = 'field_astro_frequency_value';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  /* Filter criterion: Content: Astro Type (field_astro_type) */
+  $handler->display->display_options['filters']['field_astro_type_tid']['id'] = 'field_astro_type_tid';
+  $handler->display->display_options['filters']['field_astro_type_tid']['table'] = 'field_data_field_astro_type';
+  $handler->display->display_options['filters']['field_astro_type_tid']['field'] = 'field_astro_type_tid';
+  $handler->display->display_options['filters']['field_astro_type_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_astro_type_tid']['expose']['operator_id'] = 'field_astro_type_tid_op';
+  $handler->display->display_options['filters']['field_astro_type_tid']['expose']['label'] = 'Astro Type';
+  $handler->display->display_options['filters']['field_astro_type_tid']['expose']['operator'] = 'field_astro_type_tid_op';
+  $handler->display->display_options['filters']['field_astro_type_tid']['expose']['identifier'] = 'field_astro_type_tid';
+  $handler->display->display_options['filters']['field_astro_type_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  $handler->display->display_options['filters']['field_astro_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_astro_type_tid']['vocabulary'] = 'astro_type';
+  $handler->display->display_options['filters']['field_astro_type_tid']['error_message'] = FALSE;
   $handler->display->display_options['path'] = 'manage-astro';
   $export['manage_astroo'] = $view;
 
