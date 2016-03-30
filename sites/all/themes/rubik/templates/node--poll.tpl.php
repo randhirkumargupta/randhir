@@ -10,7 +10,7 @@
       <?php endif; ?>
         <?php
         //p($node);
-        echo $node->moderation_history_block;
+       // echo $node->moderation_history_block;
         ?>
       <!-- add && !$teaser for hide comment link -->
       <?php if (!empty($links) && !$teaser): ?>
