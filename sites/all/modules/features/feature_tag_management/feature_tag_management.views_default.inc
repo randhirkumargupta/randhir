@@ -11,31 +11,25 @@ function feature_tag_management_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'download_taxonomy_tags';
+  $view->name = 'itg_download_taxonomy';
   $view->description = '';
   $view->tag = 'default';
-  $view->base_table = 'taxonomy_term_data';
-  $view->human_name = 'download_taxonomy_tags';
+  $view->base_table = 'itg_category_manager';
+  $view->human_name = 'ITG_download_taxonomy';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Data export';
+  $handler->display->display_options['title'] = 'ITG_download_taxonomy';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    6 => '6',
-    19 => '19',
-    10 => '10',
-  );
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'name' => 'name',
@@ -58,29 +52,32 @@ function feature_tag_management_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* Relationship: Category Manager: ITG */
+  $handler->display->display_options['relationships']['tid']['id'] = 'tid';
+  $handler->display->display_options['relationships']['tid']['table'] = 'itg_category_manager';
+  $handler->display->display_options['relationships']['tid']['field'] = 'tid';
   /* Field: Taxonomy term: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = 'Tags';
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
+  $handler->display->display_options['fields']['name']['relationship'] = 'tid';
   /* Field: Taxonomy term: Feature Tags */
   $handler->display->display_options['fields']['field_tags_display']['id'] = 'field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['table'] = 'field_data_field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['field'] = 'field_tags_display';
-  /* Filter criterion: Taxonomy term: Vocabulary */
-  $handler->display->display_options['filters']['vid']['id'] = 'vid';
-  $handler->display->display_options['filters']['vid']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['filters']['vid']['field'] = 'vid';
-  $handler->display->display_options['filters']['vid']['value'] = array(
-    1 => '1',
+  $handler->display->display_options['fields']['field_tags_display']['relationship'] = 'tid';
+  /* Filter criterion: Taxonomy vocabulary: Machine name */
+  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['relationship'] = 'tid';
+  $handler->display->display_options['filters']['machine_name']['value'] = array(
+    'tags' => 'tags',
   );
 
-  /* Display: Data export */
-  $handler = $view->new_display('page', 'Data export', 'page');
-  $handler->display->display_options['path'] = 'download_taxonomy_tags';
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'itg-download-taxonomy';
 
   /* Display: Data export */
   $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
@@ -89,14 +86,13 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 0;
   $handler->display->display_options['style_options']['quote'] = 1;
-  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['trim'] = 1;
   $handler->display->display_options['style_options']['replace_newlines'] = 0;
   $handler->display->display_options['style_options']['newline_token'] = '1';
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 0;
   $handler->display->display_options['path'] = 'download-tags';
-  $handler->display->display_options['sitename_title'] = 0;
-  $export['download_taxonomy_tags'] = $view;
+  $export['itg_download_taxonomy'] = $view;
 
   $view = new view();
   $view->name = 'tags_management';
