@@ -150,7 +150,7 @@ function itg_poll_node_form_validate($form, &$form_state) {
     }
   }elseif ($question == 3) { //Video
     $question_video = $form_state['values']['field_poll_question_video'][LANGUAGE_NONE][0]['fid'];
-    if($question_image == 0){
+    if($question_video == 0){
       form_set_error('field_poll_question_video', 'Poll Question Video is required.');
     }
   }
@@ -327,11 +327,11 @@ function itg_poll_form($form, &$form_state, $parms) {
     '#value' => $display_result,
   );
 
-  $form['captcha'] = array(
-    '#type' => 'captcha',
-    '#captcha_type' => 'recaptcha/reCAPTCHA',
-    '#prefix' => '<div class="poll-ajax-error"></div>',
-  );
+//  $form['captcha'] = array(
+//    '#type' => 'captcha',
+//    '#captcha_type' => 'recaptcha/reCAPTCHA',
+//    '#prefix' => '<div class="poll-ajax-error"></div>',
+//  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',

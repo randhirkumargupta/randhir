@@ -46,25 +46,24 @@
         </div>
         <div class="field">
           <div class="field-label">Survey Instruction:</div>
-          <div class="field-items"><?php echo $content['body']['#object']->body[LANGUAGE_NONE][0]['value']; ?></div>
+          <div class="field-items"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
         </div>
         <div class="field">
           <div class="field-label">Survey Question Display:</div>
-          <div class="field-items"><?php echo ucwords($content['body']['#object']->field_survey_question_display[LANGUAGE_NONE][0]['value']); ?></div>
+          <div class="field-items"><?php echo ucwords($node->field_survey_question_display[LANGUAGE_NONE][0]['value']); ?></div>
         </div>
         <div class="field">
           <div class="field-label">Category:</div>
-          <div class="field-items"><?php echo $content['body']['#object']->field_survey_category[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
+          <div class="field-items"><?php echo $node->field_survey_category[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
         </div>
         <div class="field">
           <div class="field-label">Start Date:</div>
-          <div class="field-items"><?php echo date('Y/m/d', strtotime($content['body']['#object']->field_survey_start_date[LANGUAGE_NONE][0]['value'])); ?></div>
+          <div class="field-items"><?php echo date('Y/m/d', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])); ?></div>
         </div>
         <div class="field">
           <div class="field-label">End Date:</div>
-          <div class="field-items"><?php echo date('Y/m/d', strtotime($content['body']['#object']->field_survey_end_date[LANGUAGE_NONE][0]['value'])); ?></div>
+          <div class="field-items"><?php echo date('Y/m/d', strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])); ?></div>
         </div>
-      
       
       <?php
       if (isset($node->op) && $node->op == 'Preview'){
@@ -121,12 +120,12 @@
             </div>
        <?php
             if(count($question_arr['field_survey_answer_option_more'][LANGUAGE_NONE]) > 2){
-              echo '<div>More Answer Options:</div>';
-              $more_ans_num = 1;
+//              echo '<div>More Answer Options:</div>';
+              $more_ans_num = 3;
               foreach($question_arr['field_survey_answer_option_more'][LANGUAGE_NONE] as $more_ans_arr){
               if(!empty($more_ans_arr['value'])){
                 echo '<div class="field">';
-                echo '<div class="field-label">Option '.$more_ans_num.':</div>';
+                echo '<div class="field-label">Answer Option '.$more_ans_num.':</div>';
                 echo '<div class="field-items">'.$more_ans_arr['value'].'</div></div>';
               }
                 $more_ans_num++;
@@ -189,11 +188,11 @@
           </div>
             <?php
             if(count($question_detail[$question_arr['value']]->field_survey_answer_option_more[LANGUAGE_NONE]) > 0){
-              echo '<h2 style="padding-left: 20px">More Answer Options:</h2>';
-              $more_ans_num = 1;
+              //echo '<h2 style="padding-left: 20px">More Answer Options:</h2>';
+              $more_ans_num = 3;
               foreach($question_detail[$question_arr['value']]->field_survey_answer_option_more[LANGUAGE_NONE] as $more_ans_arr){
                 echo '<div class="field" style="padding-left: 10px">';
-                echo '<div class="field-label" style="padding-left: 20px">Option '.$more_ans_num.':</div>';
+                echo '<div class="field-label" style="padding-left: 10px">Answer Option '.$more_ans_num.':</div>';
                 echo '<div class="field-items">'.$more_ans_arr['value'].'</div></div>';
                 $more_ans_num++;
               }

@@ -8,6 +8,7 @@
  * @ingroup views_templates
  */
 global $user;
+$poll_uid = '';
 if (isset($view->result[0]->nid)) {
   $this_nid = $view->result[0]->nid;
 
