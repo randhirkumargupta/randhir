@@ -205,7 +205,7 @@ function astro_feature_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Numerology (field_numerology) */
+  /* Filter criterion: Broken/missing handler */
   $handler->display->display_options['filters']['field_numerology_value']['id'] = 'field_numerology_value';
   $handler->display->display_options['filters']['field_numerology_value']['table'] = 'field_data_field_numerology';
   $handler->display->display_options['filters']['field_numerology_value']['field'] = 'field_numerology_value';
