@@ -1410,4 +1410,6 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field{display: inline-block; width: 100%; padding-bottom: 10px;}
 .node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field .field-label{float: left; width: 200px;}
 .node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field .field-items{float: left; width: 60%;}
+.node-type-itg-celebrity-profile .preview-wrapper .node-content .field.field.field-name-body .field-items,
+.page-node-add-itg-celebrity-profile .preview-wrapper .node-content .field.field.field-name-body .field-items,
 .node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field.field-name-body .field-items{float: left; width: 100%;}
