@@ -369,6 +369,10 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
       });
     }
   });
+  
+  
+  $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
+  $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
 
 };
 })(jQuery);

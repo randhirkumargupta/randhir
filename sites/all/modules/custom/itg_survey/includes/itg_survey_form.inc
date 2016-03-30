@@ -9,19 +9,35 @@
  * Create survey form
  */
 function itg_survey_survey_form() {
-  
+  global $base_url;
   //Get node of current survey (load all questions ans answer options to generate survey form)
   $node = itg_survey_get_current_survey();
+
   
   //Check: Any survey is activated OR not
   if ($node) {
     
     $num = 0;
     $form = array();
+    //$ques_arr = $node->field_survey_add_questions[LANGUAGE_NONE];
     
-    $total_num_of_ques = count($node->field_survey_add_questions[LANGUAGE_NONE]);
-    
-    foreach ($node->field_survey_add_questions[LANGUAGE_NONE] as $question_arr) {
+    $question_display = $node->field_survey_question_display[LANGUAGE_NONE][0]['value'];
+    if($question_display == 'random'){
+      foreach ($node->field_survey_add_questions[LANGUAGE_NONE] as $ques_arr_for_shuffle){
+        $ques_arr_shuffle[] = $ques_arr_for_shuffle['value'];
+      }
+      shuffle($ques_arr_shuffle);
+      
+      foreach($ques_arr_shuffle as $ques_arr_new){
+          $ques_arr[]['value'] = $ques_arr_new;
+      }
+    } else {
+      $ques_arr = $node->field_survey_add_questions[LANGUAGE_NONE];
+    }
+ 
+    $total_num_of_ques = count($ques_arr);
+ 
+    foreach ($ques_arr as $question_arr) {
       //Question Info
       $question_detail = entity_load('field_collection_item', array($question_arr['value']));
       $question = $question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value'];
@@ -38,6 +54,12 @@ function itg_survey_survey_form() {
       $answer_type = $question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value'];
       $answer_op1 = $question_detail[$question_arr['value']]->field_survey_answer_option_1[LANGUAGE_NONE][0]['value'];
       $answer_op2 = $question_detail[$question_arr['value']]->field_survey_answer_option_2[LANGUAGE_NONE][0]['value'];
+      
+      
+      //Media info
+      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
+      $media_type = strtolower(substr(strrchr($media, '.'), 1));
+      $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
       
       //Submit button text
       if(($total_num_of_ques-1) === $num){
@@ -69,7 +91,7 @@ function itg_survey_survey_form() {
           '#prefix' => '<div style="color:red" id="messages">',
           '#suffix' => '</div>'
       );
-      
+ 
       //Prepare Question and Answer form
       $form['question_heading' . $num] = array(
           '#type' => 'markup',
@@ -138,6 +160,29 @@ function itg_survey_survey_form() {
             '#options' => $all_ans_options[$num],
             '#suffix' => '</div>',
         );
+      }
+      
+      if(!empty($media_type)){
+      if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){
+        $form['media' . $num] = array(
+            '#type' => 'markup',
+            '#prefix' => '<div>',
+            '#markup' => '<img src="'.$media_path.'" height="100" width="130"/>',
+            '#suffix' => '</div>',
+        );
+      } else {
+        $form['media' . $num] = array(
+            '#type' => 'markup',
+            '#prefix' => '<div>',
+            '#markup' => '<video width="140" height="145" controls="controls">
+        <source src="'.$media.'" type="video/mp4"> 
+         <object> 
+           <embed  src="'.$media.'"> 
+         </object> 
+      </video>',
+            '#suffix' => '</div>',
+        );
+      }
       }
       
       //Nex button for all questions

@@ -43,11 +43,12 @@
     <div class="view-filters">
       <?php print $exposed; ?>
     </div>
-  <?php endif; ?>
   <div class="attachment">
     <span class="count"><?php print 'Count ('.$view->total_rows.')'; ?></span>
     <?php print l('Create photo gallery', 'node/add/photogallery', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0)))); ?>
   </div>
+  <?php endif; ?>
+  
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
       <?php print $attachment_before; ?>
