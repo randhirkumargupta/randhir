@@ -301,8 +301,8 @@ function itg_astro_field_widget_form_alter(&$element, &$form_state, $context) {
     $itg_thumb = itg_astro_zodiac_thumbnail();
     $element['#title'] = t($itg_thumb[$count]->name);
     $itg_img_uri = $itg_thumb[$count]->field_astro_thumb_icon['und'][0]['uri'];
-    //$element['#prefix'] = '<div style="display:none;">';
-    //$element['#suffix'] = '</div>';
+    $element['#prefix'] = '<div style="display:none;">';
+    $element['#suffix'] = '</div>';
     $element['#default_value'] = $itg_thumb[$count]->tid;
     ++$count;
   }
