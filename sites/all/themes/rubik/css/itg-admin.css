@@ -1333,8 +1333,9 @@ div.view table td, div.view table th{max-width: 200px;}
 .pole-vote{float: left; width: 40%;}
 .poll-list{padding: 10px 0; border-top: 1px dashed #ddd; display: inline-block; width: 100%;}
 .poll-list:first-child{padding-top: 0; border-top: none;}
-[id*="subsPollForm"] .form-type-radio{display: inline-block; vertical-align: middle; width: auto; padding-right: 20px;}
+[id*="subsPollForm"] .form-type-radio{display: inline-block; vertical-align: top; width: auto; padding-right: 20px;}
 [id*="subsPollForm"] .form-type-radio label.option{float: none;}
+[id*="subsPollForm"] .form-type-radio input.form-radio, [id*="subsPollForm"] .form-type-checkbox input.form-checkbox{vertical-align: top;}
 [id*="edit-field-gallery-image-und"] > legend > span.fieldset-legend{background-color: #eee;}
 [id*="edit-field-gallery-image-und"] > legend > span > a{max-width: 200px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .node-survey-form .field-multiple-table tbody div.file-widget .button-remove{margin-left: 5px;}
@@ -1402,3 +1403,5 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-itg_celebrity_profile-form .vertical-tabs{border: none; padding: 0;}
 .node-itg_celebrity_profile-form input.form-file{float: left;}
 .img-crt.button{margin: 0 0 20px 300px;}
+.preview .field-name-field-gallery-kicer div{max-width: 100%;}
+.photogallery-list.flexslider{overflow: hidden;}
