@@ -150,7 +150,8 @@ function features_supplement_magazine_field_default_field_instances() {
   $field_instances['node-issue-field_issue_large_cover_image'] = array(
     'bundle' => 'issue',
     'deleted' => 0,
-    'description' => 'Please upload large cover image.',
+    'description' => 'Please upload large cover image.<br/>
+Image Size (300 x 225)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -267,7 +268,8 @@ function features_supplement_magazine_field_default_field_instances() {
   $field_instances['node-issue-field_issue_small_cover_image'] = array(
     'bundle' => 'issue',
     'deleted' => 0,
-    'description' => 'Please upload small cover image.',
+    'description' => 'Please upload small cover image.<br/>
+Image Size (210 x 145).',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -343,7 +345,8 @@ function features_supplement_magazine_field_default_field_instances() {
   $field_instances['node-issue-field_issue_supp_large_image'] = array(
     'bundle' => 'issue',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please upload large cover image.<br/>
+Image Size (300 x 225)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -496,7 +499,7 @@ function features_supplement_magazine_field_default_field_instances() {
     'bundle' => 'issue',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select supplements.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -982,11 +985,14 @@ function features_supplement_magazine_field_default_field_instances() {
   t('Please enter issue title.');
   t('Please select magazine to map with supplement.');
   t('Please select magazine.');
+  t('Please select supplements.');
   t('Please select the date using date picker.
 ');
   t('Please upload a magazine cover photo.');
-  t('Please upload large cover image.');
-  t('Please upload small cover image.');
+  t('Please upload large cover image.<br/>
+Image Size (300 x 225)');
+  t('Please upload small cover image.<br/>
+Image Size (210 x 145).');
   t('Print Issue Date');
   t('Publish');
   t('Select Magazine');
