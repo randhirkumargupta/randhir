@@ -1333,8 +1333,9 @@ div.view table td, div.view table th{max-width: 200px;}
 .pole-vote{float: left; width: 40%;}
 .poll-list{padding: 10px 0; border-top: 1px dashed #ddd; display: inline-block; width: 100%;}
 .poll-list:first-child{padding-top: 0; border-top: none;}
-[id*="subsPollForm"] .form-type-radio{display: inline-block; vertical-align: middle; width: auto; padding-right: 20px;}
+[id*="subsPollForm"] .form-type-radio{display: inline-block; vertical-align: top; width: auto; padding-right: 20px;}
 [id*="subsPollForm"] .form-type-radio label.option{float: none;}
+[id*="subsPollForm"] .form-type-radio input.form-radio, [id*="subsPollForm"] .form-type-checkbox input.form-checkbox{vertical-align: top;}
 [id*="edit-field-gallery-image-und"] > legend > span.fieldset-legend{background-color: #eee;}
 [id*="edit-field-gallery-image-und"] > legend > span > a{max-width: 200px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .node-survey-form .field-multiple-table tbody div.file-widget .button-remove{margin-left: 5px;}
@@ -1402,3 +1403,14 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-itg_celebrity_profile-form .vertical-tabs{border: none; padding: 0;}
 .node-itg_celebrity_profile-form input.form-file{float: left;}
 .img-crt.button{margin: 0 0 20px 300px;}
+.preview .field-name-field-gallery-kicer div{max-width: 100%;}
+.photogallery-list.flexslider{overflow: hidden;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .column-main{width: 100%;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .column-side{display: none;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field{display: inline-block; width: 100%; padding-bottom: 10px;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field .field-label{float: left; width: 200px;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field .field-items{float: left; width: 60%;}
+.node-type-itg-celebrity-profile .preview-wrapper .node-content .field.field.field-name-body .field-items,
+.page-node-add-itg-celebrity-profile .preview-wrapper .node-content .field.field.field-name-body .field-items,
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field.field-name-body .field-items{float: left; width: 100%;}
+.ui-datepicker{z-index: 9999 !important;}
