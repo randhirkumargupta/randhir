@@ -209,7 +209,14 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['#attached']['js'] = array(
         drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
       );
-      $form['#action'] = '?destination=category-manager'; //Redirect to term listing page, after term has been added successfully.
+      if ($form['tid']['#value'] != NULL) {
+        $destination_edit = $form_state['term']->field_publish_time['und'][0]['value'];
+        $filter = explode('-', $destination_edit);        
+        $form['#action'] = '?destination=category-manager?date='.$filter[0].'-'.$filter[1]; //Redirect to term listing page, after term has been added successfully.        
+      }
+      else {
+        $form['#action'] = '?destination=category-manager'; //Redirect to term listing page, after term has been added successfully.
+      }
       $form['name']['#title'] = t('Category Title');
       $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
       unset($form['description']);
