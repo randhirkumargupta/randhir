@@ -1413,3 +1413,4 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-type-itg-celebrity-profile .preview-wrapper .node-content .field.field.field-name-body .field-items,
 .page-node-add-itg-celebrity-profile .preview-wrapper .node-content .field.field.field-name-body .field-items,
 .node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field.field-name-body .field-items{float: left; width: 100%;}
+.ui-datepicker{z-index: 9999 !important;}
