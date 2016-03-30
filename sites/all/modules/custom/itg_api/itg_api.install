@@ -33,13 +33,6 @@ function itg_api_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
-      'xml_uid' => array(
-        'description' => 'XML Unique id.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ),
       'filename' => array(
         'description' => 'XML File Name.',
         'type' => 'varchar',
@@ -49,6 +42,13 @@ function itg_api_schema() {
       ),
       'type' => array(
         'description' => 'Node Type.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'source' => array(
+        'description' => 'Source Type.',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
@@ -65,11 +65,4 @@ function itg_api_schema() {
   );
 
   return $schema;
-}
-
-/**
- * Implements hook_uninstall().
- */
-function itg_api_uninstall() {
-  drupal_uninstall_schema('itg_api_xml_info');
 }
