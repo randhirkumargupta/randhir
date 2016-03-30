@@ -122,11 +122,7 @@ function feature_for_poll_field_default_field_instances() {
   // 'field_collection_item-field_poll_answer-field_poll_manipulate_value'.
   $field_instances['field_collection_item-field_poll_answer-field_poll_manipulate_value'] = array(
     'bundle' => 'field_poll_answer',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -150,7 +146,7 @@ function feature_for_poll_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => 999,
+      'max' => 99,
       'min' => 0,
       'prefix' => '',
       'suffix' => '',

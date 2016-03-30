@@ -31,9 +31,17 @@ if ((isset($isCookies) && $isCookies == 'yes' && user_is_anonymous()) || (isset(
     $finaltotal = $opttotal;
     $outputnew = '';
     foreach ($temp_entities as $temp_ent_id => $temp_ents) {
+       $poll_manipulate_allval += isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
+    }
+    $finaltotal += $poll_manipulate_allval;
+    
+    foreach ($temp_entities as $temp_ent_id => $temp_ents) {
       $polls_answer_text = isset($temp_ents->field_poll_answer_text[LANGUAGE_NONE]) ? $temp_ents->field_poll_answer_text[LANGUAGE_NONE][0]['value'] : '';
       $polls_answer_image = isset($temp_ents->field_poll_answer_image[LANGUAGE_NONE]) ? trim($temp_ents->field_poll_answer_image[LANGUAGE_NONE][0]['fid']) : '';
 
+      // Poll Manipulate value
+      $poll_manipulate_val = isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
+      
       if (isset($polls_answer_image) && $polls_answer_image > 0) {
         $poll_image = theme('image_style', array('style_name' => 'thumbnail', 'path' => file_load($polls_answer_image)->uri));
       }
@@ -42,7 +50,7 @@ if ((isset($isCookies) && $isCookies == 'yes' && user_is_anonymous()) || (isset(
       $uid = isset($optionArr[$temp_ent_id]->uid) ? $optionArr[$temp_ent_id]->uid : 0;
       $preOptionCnt = isset($optionArr[$temp_ent_id]->optionCnt) ? $optionArr[$temp_ent_id]->optionCnt : 0;
 
-      $optionCnt = $preOptionCnt;
+      $optionCnt = $preOptionCnt + $poll_manipulate_val;
 
       if ($result_format == 1) { // Percent
         if (isset($finaltotal)) {
