@@ -65,7 +65,7 @@ function astro_feature_field_default_field_instances() {
     'label' => 'Video',
     'required' => 0,
     'settings' => array(
-      'description_field' => 0,
+      'description_field' => 1,
       'exclude_cv' => FALSE,
       'file_directory' => 'numerology_video',
       'file_extensions' => 'mp4 avi flv ogg wmv',
@@ -165,7 +165,7 @@ function astro_feature_field_default_field_instances() {
     'label' => 'Audio',
     'required' => 0,
     'settings' => array(
-      'description_field' => 0,
+      'description_field' => 1,
       'exclude_cv' => FALSE,
       'file_directory' => 'numerology_audio',
       'file_extensions' => 'mp3 mp4 ogg',
@@ -228,7 +228,7 @@ function astro_feature_field_default_field_instances() {
     'label' => 'Video',
     'required' => 0,
     'settings' => array(
-      'description_field' => 0,
+      'description_field' => 1,
       'exclude_cv' => FALSE,
       'file_directory' => 'astro_video',
       'file_extensions' => 'mp4 flv avi mkv ogg wmv',
@@ -291,7 +291,7 @@ function astro_feature_field_default_field_instances() {
     'label' => 'Audio',
     'required' => 0,
     'settings' => array(
-      'description_field' => 0,
+      'description_field' => 1,
       'exclude_cv' => FALSE,
       'file_directory' => 'astro_audio',
       'file_extensions' => 'mp3 mp4',
@@ -339,7 +339,7 @@ function astro_feature_field_default_field_instances() {
     'bundle' => 'field_astro_zodiac',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Maximum allowed character for this field is 500.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -563,7 +563,7 @@ function astro_feature_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 11,
       ),
       'teaser' => array(
@@ -1113,6 +1113,7 @@ function astro_feature_field_default_field_instances() {
   t('Date Range');
   t('Day');
   t('Enter Text');
+  t('Maximum allowed character for this field is 500.');
   t('Numerology Values');
   t('Panchaang-Calendar');
   t('Select Frequency');
