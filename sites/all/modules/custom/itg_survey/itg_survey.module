@@ -90,6 +90,9 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       );
       $form['field_survey_add_questions'][LANGUAGE_NONE]['#title'] = '';
       
+      //Unset add more answer option
+      unset($form['field_survey_add_questions'][LANGUAGE_NONE][0]['field_survey_answer_option_more']);
+      
       //After build and custom summit callback
       $form['#after_build'][] = 'itg_survey_form_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_survey_form_custom_submit_callback';
