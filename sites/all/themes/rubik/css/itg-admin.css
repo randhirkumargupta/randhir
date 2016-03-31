@@ -1414,3 +1414,28 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .page-node-add-itg-celebrity-profile .preview-wrapper .node-content .field.field.field-name-body .field-items,
 .node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field.field-name-body .field-items{float: left; width: 100%;}
 .ui-datepicker{z-index: 9999 !important;}
+[id*="field-gallery-image-values"] td .fieldset-content .messages, [id*="field-gallery-image-values"] td .fieldset-content .messages .error{display: none;}
+[id*="field-survey-add-questions-values"] .field-name-field-survey-answer-type,
+[id*="field-survey-add-questions-values"] .field-name-field-survey-skip{float: left; width: 300px; box-sizing: border-box;}
+.node-survey-form .field-name-field-survey-answer-type .form-item label,
+.node-survey-form .field-name-field-survey-question .form-item label,
+.node-survey-form .field-name-field-survey-add-media .form-item label{width: 98px;}
+.node-survey-form .field-name-field-survey-skip .form-item label{width: auto; padding-right: 20px;}
+.node-survey-form .field-name-field-survey-skip .form-radios .form-type-radio{width: auto; padding-right: 0; line-height: 26px;}
+.node-survey-form .field-name-field-survey-answer-type .form-item span.error,
+.node-survey-form .field-name-field-survey-add-media .form-item div.description,
+.node-survey-form .field-name-field-survey-question .form-item div.description{padding-left: 98px;}
+.node-survey-form .field-name-field-survey-question input.form-text{width: 100% !important; max-width: 75% !important;}
+.node-survey-form .field-name-field-survey-answer-option-1 .form-item label{width: 100% !important;}
+.node-survey-form .field-name-field-survey-answer-option-2 .form-item label{display: none;}
+.node-survey-form .field-name-field-survey-answer-option-1 .form-item input.form-text, 
+.node-survey-form .field-name-field-survey-answer-option-2 .form-item input.form-text{width: 100% !important; max-width: 87.9% !important;}
+.node-survey-form .field-multiple-table .field-multiple-table tbody{float: none;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item{position: relative;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix{position: absolute; left: 89%; bottom: 5px;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .form-submit{vertical-align: top; background-color: #008eb1; border: none; color: #fff; font-size: 32px; height: 28px; margin: 0; padding: 0 5px 2px;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .ajax-progress-throbber{position: absolute; left: 100%; top: 5px;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .ajax-progress-throbber .message{display: none;}
+[id*="field-survey-add-questions-values"] .form-item span.error{padding-left: 0 !important;}
+[id*="edit-field-story-expiry-date"] .date-combo .fieldset-content{padding: 0; float: left; max-width: 400px;}
+

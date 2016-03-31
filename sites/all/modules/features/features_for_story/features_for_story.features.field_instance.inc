@@ -312,48 +312,6 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-story-field_story_client_title'.
-  $field_instances['node-story-field_story_client_title'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Client title',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 48,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_client_title',
-    'label' => 'Client title',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 24,
-    ),
-  );
-
   // Exported field_instance: 'node-story-field_story_comment_question'.
   $field_instances['node-story-field_story_comment_question'] = array(
     'bundle' => 'story',
@@ -2487,7 +2445,6 @@ function features_for_story_field_default_field_instances() {
   t('Buzz Description');
   t('Byline');
   t('City');
-  t('Client title');
   t('Comment');
   t('Comment Question');
   t('Comment question');
