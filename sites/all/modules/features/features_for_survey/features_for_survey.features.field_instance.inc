@@ -69,7 +69,7 @@ function features_for_survey_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -92,7 +92,7 @@ function features_for_survey_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_survey_answer_option_1',
-    'label' => 'Answer Option 1',
+    'label' => 'Answer choices',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -106,7 +106,7 @@ function features_for_survey_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -143,7 +143,7 @@ function features_for_survey_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -180,7 +180,7 @@ function features_for_survey_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -214,7 +214,7 @@ function features_for_survey_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 0,
     ),
   );
 
@@ -251,7 +251,7 @@ function features_for_survey_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -289,7 +289,7 @@ function features_for_survey_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -594,9 +594,9 @@ function features_for_survey_field_default_field_instances() {
   t('Add Media');
   t('Add Survey Question');
   t('Add more options for answer.');
-  t('Answer Option 1');
   t('Answer Option 2');
   t('Answer Type');
+  t('Answer choices');
   t('Category');
   t('More Answer Options');
   t('Please add survey question.');
