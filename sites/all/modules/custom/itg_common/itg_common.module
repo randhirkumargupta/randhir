@@ -137,11 +137,13 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_common_image_generate($form, &$form_state){
   $coverid = $form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'];
-  $settings = array();
-  $file = file_load($coverid);
-  $settings['large_uri'] = $file->uri;
-  drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
-  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_image.js', array('weight' => 3));
+  if (isset($coverid)) {
+    $settings = array();
+    $file = file_load($coverid);
+    $settings['large_uri'] = $file->uri;
+    drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_image.js', array('weight' => 3));
+  }
   return $form;
 }
 
