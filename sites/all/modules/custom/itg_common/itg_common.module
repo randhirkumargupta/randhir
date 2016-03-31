@@ -137,10 +137,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_common_image_generate($form, &$form_state){
   $coverid = $form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'];
- if(isset($coverid) && !empty($coverid)){
-  $settings = array();
-  $file = file_load($coverid);
-  $settings['large_uri'] = $file->uri;
+  if(isset($coverid) && !empty($coverid)){
+    $settings = array();
+    $file = file_load($coverid);
+    $settings['large_uri'] = $file->uri;
   }else{
     $settings['large_uri'] = '';
   }
