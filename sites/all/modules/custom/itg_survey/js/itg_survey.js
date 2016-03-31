@@ -28,12 +28,11 @@
 
       //Restrict print issue date to select previous date in magazine form 
       if (type === 'Survey') {
-        $('edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, edit-field-survey-end-date-und-0-value-datepicker-popup-1').datepicker({
+        $('edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, #edit-field-survey-end-date-und-0-value-datepicker-popup-1').datepicker({
           changeYear: true,
           minDate: '0',
-          readonly: true
         });
-        $('edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, edit-field-survey-end-date-und-0-value-datepicker-popup-1').prop("readonly", true);
+        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, #edit-field-survey-end-date-und-0-value-datepicker-popup-1').prop("readonly", true);
       }
     }
   };
