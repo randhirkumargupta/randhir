@@ -127,37 +127,37 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     // Set field visibility for zodiac sign field
     $form['field_astro_zodiac']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '219'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '315'),
       ),
     );
     // Set field visibility for collective text field    
     $form['field_buzz_description']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '217'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective video thumbnail field
     $form['field_astro_video_thumbnail']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '217'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective video field
     $form['field_astro_video']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '217'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective audio field
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '217'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective audio field
     $form['field_astro_numerology_values']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '218'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '313'),
       ),
     );  
 
