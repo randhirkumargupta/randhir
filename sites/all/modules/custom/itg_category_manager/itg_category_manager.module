@@ -165,6 +165,22 @@ function itg_category_manager_form($form, &$form_state) {
 }
 
 /**
+ * Get term state drom db
+ */
+function itg_category_manager_term_state($tid) {
+  $itg_query = db_select('itg_category_manager', 'itg')
+      ->fields('itg', array('status'))
+      ->condition('tid', $tid, '=');
+  $itg_result = $itg_query->execute()->fetchField();
+  $flag = FALSE;
+  if(isset($itg_result) && $itg_result == 1) {
+    $flag = TRUE;
+  }  
+  
+  return $flag; 
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
  */
 function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
@@ -252,7 +268,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#type' => 'checkbox',
         '#title' => t('Active'),
         '#weight' => 20,
-        '#default_value' => true,
+        '#default_value' => $form['tid']['#value'] == NULL ? TRUE : itg_category_manager_term_state($form['tid']['#value']),
         '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
         '#suffix' => '</div>',
       );
