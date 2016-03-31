@@ -54,6 +54,7 @@
   <?php print drupal_render($form['field_story_facebook_narrative']); ?>
   <?php print drupal_render($form['field_story_facebook_image']); ?>
   <?php print drupal_render($form['field_story_tweet']); ?>
+  <?php print drupal_render($form['field_story_tweet_image']); ?>
 </div>
 <div id="BrowseMedia">
   <h2 class="story-title"><?php print t('Browse Media'); ?></h2>

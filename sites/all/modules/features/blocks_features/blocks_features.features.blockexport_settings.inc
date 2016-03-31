@@ -956,7 +956,7 @@ node/*/edit',
   'delta' => 'story_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -21,
+  'weight' => -20,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -1069,7 +1069,7 @@ node/*/edit',
   'delta' => 'main',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -14,
+  'weight' => -13,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2785,7 +2785,7 @@ node/*/edit',
   'delta' => 'breaking_news_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -16,
+  'weight' => -15,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2875,7 +2875,7 @@ node/*/edit',
   'delta' => 'photogallery_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -15,
+  'weight' => -14,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3685,7 +3685,7 @@ node/add/recipe',
   'delta' => 'recipe_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -19,
+  'weight' => -17,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3775,7 +3775,7 @@ node/*/edit',
   'delta' => 'astro_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -20,
+  'weight' => -19,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3948,7 +3948,7 @@ ask-an-expert-history',
   'delta' => 'poll_listing-block_2',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -13,
+  'weight' => -12,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -4018,7 +4018,7 @@ ask-an-expert-history',
   'delta' => 'poll_listing-block_1',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -12,
+  'weight' => -11,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -4074,7 +4074,7 @@ ask-an-expert-history',
   'delta' => 'ask_an_expert',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -11,
+  'weight' => -10,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4130,7 +4130,7 @@ ask-an-expert-history',
   'delta' => 'menu-ask-an-expert-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -18,
+  'weight' => -16,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4444,7 +4444,7 @@ movie-review-draft-list',
   'delta' => 'menu-movie-review-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -20,
+  'weight' => -18,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4460,13 +4460,13 @@ movie-review-draft-list',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'movie-review-list
 movie-review-draft-list',
   'title' => '',
-  'cache' => 1,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 309,
@@ -4475,13 +4475,13 @@ movie-review-draft-list',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'movie-review-list
 movie-review-draft-list',
   'title' => '',
-  'cache' => 1,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 310,
@@ -4490,13 +4490,13 @@ movie-review-draft-list',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'movie-review-list
 movie-review-draft-list',
   'title' => '',
-  'cache' => 1,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 311,
@@ -4505,13 +4505,13 @@ movie-review-draft-list',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'movie-review-list
 movie-review-draft-list',
   'title' => '',
-  'cache' => 1,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 312,
@@ -4771,10 +4771,147 @@ movie-review-draft-list',
   'title' => '',
   'cache' => -1,
 );
+  $export['block'][] = array(
+  'bid' => 330,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 331,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -21,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 332,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 333,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 334,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 335,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
   'delta' => 'astro_tab_form_block',
   'type' => 'astro',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'views',
+  'delta' => 'view_moderation_history-block_1',
+  'type' => 'blog',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_breaking_news',
