@@ -44,10 +44,6 @@
       <?php print $exposed; ?>
     </div>
   <?php endif; ?>
-  <div class="attachment">    
-    <?php print l('File Astro', 'node/add/astro', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0)))); ?>
-  </div>
-
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
       <?php print $attachment_before; ?>
