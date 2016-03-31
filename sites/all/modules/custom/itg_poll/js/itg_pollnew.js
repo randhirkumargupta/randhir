@@ -85,14 +85,19 @@
                 });
             });
             
-          $('#edit-field-poll-question-und').change(function(){
-              var queVal =  $('#edit-field-poll-question-und').val();
-              if(queVal == 2){ // Image question
-                  $('#edit-field-poll-question-text-und-0-value').val('');
-              }else if (queVal == 1) { // Text Question
-                   $('#edit-field-poll-question-image-und-0-remove-button').mousedown();
-              }
-          });  
+            $('#edit-field-poll-question-und').change(function() {
+                var queVal = $('#edit-field-poll-question-und').val();
+                if (queVal == 2) { // Image question
+                    $('#edit-field-poll-question-text-und-0-value').val('');
+                    $('#edit-field-poll-question-video-und-0-remove-button').mousedown();
+                } else if (queVal == 1) { // Text Question
+                    $('#edit-field-poll-question-image-und-0-remove-button').mousedown();
+                    $('#edit-field-poll-question-video-und-0-remove-button').mousedown();
+                } else if (queVal == 3) { // Video question
+                    $('#edit-field-poll-question-image-und-0-remove-button').mousedown();
+                    $('#edit-field-poll-question-text-und-0-value').val('');
+                }
+            });  
             
         }
     }

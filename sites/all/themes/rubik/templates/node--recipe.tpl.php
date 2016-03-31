@@ -114,7 +114,7 @@
                 <?php
                 $ingredients = render($content['field_recipe_ingredients']);
                 if (!empty($ingredients)):
-                  print render($content['field_recipe_ingredients']);
+                  print nl2br(render($content['field_recipe_ingredients']));
                   ?> 
                 <?php endif; ?>
                 <?php
@@ -225,7 +225,10 @@
 
                 <?php if (!empty($syndication) || !empty($client_title)): ?>
                   <div class="description-details content-box">
-
+                    <?php if (!empty($syndication)): ?>
+                      <div class="breaking-content-details"><?php print render($content['field_recipe_syndication']); ?></div>
+                      <div class="recipe-syndication"><?php print ('yes'); ?></div>
+                    <?php endif; ?>
                     <?php if (!empty($client_title)): ?>
                       <div class="breaking-content-details"><?php print render($content['field_story_client_title']); ?></div> 
                     <?php endif; ?>

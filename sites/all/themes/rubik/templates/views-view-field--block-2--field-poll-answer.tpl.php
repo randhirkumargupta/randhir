@@ -30,6 +30,7 @@ if ((isset($isCookies) && $isCookies == 'yes' && user_is_anonymous()) || (user_i
 
     $finaltotal = $opttotal;
     $outputnew = '';
+    $poll_manipulate_allval = '';
     foreach ($temp_entities as $temp_ent_id => $temp_ents) {
        $poll_manipulate_allval += isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
     }
