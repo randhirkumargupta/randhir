@@ -439,7 +439,12 @@
               break;
           }
         });
-      }     
+      } 
+      
+      // Hide navigation label
+      $('.node-astro-form .story-title-coll').css('display', 'none');
+      $('.node-astro-form .story-title-zod').css('display', 'none');
+      $('.node-astro-form .story-title-num').css('display', 'none');
       
       // Reset form if someone change astro type
       $("select[name='field_astro_type[und]']").on('change', function () {
@@ -456,16 +461,19 @@
             jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
               $(this).mousedown();
             });
+            $('.node-astro-form .story-title-zod').css('display', 'none');
+            $('.node-astro-form .story-title-num').css('display', 'none');
+            $('.node-astro-form .story-title-coll').css('display', 'block');
             break;
             // Numerology  
           case '218':
             clear_form_elements('field-name-field-astro-zodiac');
             jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
             clear_form_elements('collective-wrapper');
-            jQuery('.collective-wrapper .button-remove').mousedown();
-            jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
-              $(this).mousedown();
-            });
+            jQuery('.collective-wrapper .button-remove').mousedown();            
+            $('.node-astro-form .story-title-zod').css('display', 'none');            
+            $('.node-astro-form .story-title-coll').css('display', 'none');
+            $('.node-astro-form .story-title-num').css('display', 'block');
             break;
             // Zodiac  
           case '219':
@@ -481,9 +489,23 @@
               $('select[name="field_astro_zodiac[und]['+i+'][field_zodiac_sign][und]"]').val(sign_name[key]);              
               ++i;
             }
+                        
+            $('.node-astro-form .story-title-coll').css('display', 'none');
+            $('.node-astro-form .story-title-num').css('display', 'none');
+            $('.node-astro-form .story-title-zod').css('display', 'block');
             break;
         }
       });
+      
+      if ($('select[name="field_astro_type[und]"').val() == '217') {
+        $('.node-astro-form .story-title-coll').css('display', 'block');
+      }
+      if ($('select[name="field_astro_type[und]"').val() == '218') {
+        $('.node-astro-form .story-title-num').css('display', 'block');
+      }
+      if ($('select[name="field_astro_type[und]"').val() == '219') {
+        $('.node-astro-form .story-title-num').css('display', 'block');
+      }
 
     }
   };
