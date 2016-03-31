@@ -1,0 +1,155 @@
+<?php
+/**
+ * @file
+ * Install functions for quiz
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store quiz user information
+ * @return array
+ */
+function itg_quiz_schema() {
+  $schema['itg_quiz_user'] = array(
+      'description' => 'Table for quiz.',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The primary identifier for a table.',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'nid' => array(
+              'description' => 'Node id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'uid' => array(
+              'description' => 'User id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'user_type' => array(
+              'description' => 'User Type.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'page_url' => array(
+              'description' => 'Page URL.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  $schema['itg_quiz_detail'] = array(
+      'description' => 'Table for quiz detail.',
+      'fields' => array(
+          'id' => array(
+              'description' => 'Primary id.',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'nid' => array(
+              'description' => 'Node id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'uid' => array(
+              'description' => 'User id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'ques_id' => array(
+              'description' => 'Question id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'question' => array(
+              'description' => 'Question.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'answer' => array(
+              'description' => 'Answer.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'ans_type' => array(
+              'description' => 'Answer type.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'user_type' => array(
+              'description' => 'User type.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'page_url' => array(
+              'description' => 'Page URL.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'quiz_title' => array(
+              'description' => 'Quiz Title.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'quiz_key' => array(
+              'description' => 'Quiz Unique key.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'quiz_info' => array(
+              'description' => 'Quiz info.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  return $schema;
+}
