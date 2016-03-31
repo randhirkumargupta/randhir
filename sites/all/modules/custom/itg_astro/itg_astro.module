@@ -110,6 +110,19 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     if ($form['nid']['#value'] == NULL) {
       $form['title']['#default_value'] = date('M j, Y');
     }
+    // Create navigation label
+    $form['itg_collective'] = array(
+      '#type' => 'markup',
+      '#markup' => '<h2 class="story-title story-title-coll">'. t('Collective Content').'</h2>',      
+    );
+    $form['itg_zodiac'] = array(
+      '#type' => 'markup',
+      '#markup' => '<h2 class="story-title story-title-zod">'. t('Zodiac Sign').'</h2>',      
+    );
+    $form['itg_numerology'] = array(
+      '#type' => 'markup',
+      '#markup' => '<h2 class="story-title story-title-num">'. t('Numerology').'</h2>',      
+    ); 
 
     // Set field visibility for zodiac sign field
     $form['field_astro_zodiac']['#states'] = array(
@@ -146,7 +159,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
       'visible' => array(
         ':input[name="field_astro_type[und]"]' => array('value' => '218'),
       ),
-    );
+    );  
 
 
     $form['#action'] = '?destination=manage-astro';
