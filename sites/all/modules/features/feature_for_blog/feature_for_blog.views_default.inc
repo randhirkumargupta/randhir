@@ -434,9 +434,9 @@ function feature_for_blog_views_default_views() {
       'override_label' => 0,
       'label' => '',
       'settings' => array(
-        'show_all_tokens' => 1,
+        'show_all_tokens' => 0,
         'display_values' => array(
-          'photogallery::field_story_archive' => 'photogallery::field_story_archive',
+          'blog::field_story_archive' => 'blog::field_story_archive',
         ),
       ),
     ),

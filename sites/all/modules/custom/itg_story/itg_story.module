@@ -442,6 +442,13 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
       )*/
     );
     
+     // code for tweeter image field hide and show
+    $form['field_story_tweet_image']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+      )
+    );
+    
     // code for magazine field hide and show
     $form['field_story_select_magazine']['#states'] = array(
       'visible' => array(
