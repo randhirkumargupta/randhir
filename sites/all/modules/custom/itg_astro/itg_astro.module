@@ -1,6 +1,32 @@
 <?php
 
 /**
+ * Implements hook_init()
+ */
+function itg_astro_init() {
+  $sign_name = itg_astro_zodiac_thumbnail();
+  $settings = array();
+  foreach ($sign_name as $value) {
+    $data[] = array('name' => $value->name ,'tid' => $value->tid);
+  }
+  $settings = array(
+    $data[0]['name'] => $data[0]['tid'],
+    $data[1]['name'] => $data[1]['tid'],
+    $data[2]['name'] => $data[2]['tid'],
+    $data[3]['name'] => $data[3]['tid'],
+    $data[4]['name'] => $data[4]['tid'],
+    $data[5]['name'] => $data[5]['tid'],
+    $data[6]['name'] => $data[6]['tid'],
+    $data[7]['name'] => $data[7]['tid'],
+    $data[8]['name'] => $data[8]['tid'],
+    $data[9]['name'] => $data[9]['tid'],
+    $data[10]['name'] => $data[10]['tid'],
+    $data[11]['name'] => $data[11]['tid'],
+  );  
+  drupal_add_js(array('sign' => $settings), 'setting');
+}
+
+/**
  * Get file name from fid
  * @param type $audioFid
  */
