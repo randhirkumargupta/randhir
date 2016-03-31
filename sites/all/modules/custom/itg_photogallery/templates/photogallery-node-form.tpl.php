@@ -40,7 +40,6 @@
 <div id="Configuration">
   <h2 class="story-title">Configuration</h2>
   <?php print drupal_render($form['field_featured']); ?>
-  <?php print drupal_render($form['field_p_client_title']); ?>
 </div>
 <div id="Categorization">
   <h2 class="story-title">Categorization</h2>

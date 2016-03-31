@@ -693,48 +693,6 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photogallery-field_p_client_title'.
-  $field_instances['node-photogallery-field_p_client_title'] = array(
-    'bundle' => 'photogallery',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Client Title',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 23,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_p_client_title',
-    'label' => 'Client Title',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 16,
-    ),
-  );
-
   // Exported field_instance: 'node-photogallery-field_photo_by'.
   $field_instances['node-photogallery-field_photo_by'] = array(
     'bundle' => 'photogallery',
@@ -1296,7 +1254,6 @@ function photogallery_field_default_field_instances() {
   t('Bulk media upload');
   t('Byline');
   t('Caption');
-  t('Client Title');
   t('Common Audio');
   t('Common Audio file');
   t('Credit');
