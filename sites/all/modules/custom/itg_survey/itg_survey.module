@@ -9,11 +9,25 @@
  */
 
 /**
+ * Implement hook_permission
+ * @return type
+ */
+function itg_survey_permission() {
+    return array(
+    'survey admin users' => array(
+      'title' => t('Access Survey Result'),
+    )
+  );
+}
+
+/**
  * Implement hook_menu
  * @return string
  */
 function itg_survey_menu() {
+  
   $items = array();
+  
   $items['survey'] = array(
       'title' => t('Survey'),
       'page callback' => 'drupal_get_form',
@@ -21,6 +35,14 @@ function itg_survey_menu() {
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_survey_form.inc',
+  );
+  
+  $items['survey-result/%'] = array(
+      'title' => t('Survey Result'),
+      'page callback' => 'itg_survey_result',
+      'access callback' => 'user_access',
+      'access arguments' => array('survey admin users'),
+      'file' => 'includes/itg_survey_result.inc',
   );
   return $items;
 }
