@@ -151,7 +151,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     
   // Jquery code to close preview popup
   $(document).on('click', '.close-preview', function(){
-    $(this).parents('.preview-wrapper').hide();
+    $(this).parents('.preview-wrapper').remove();
   });
   
   // jQuery code to change text URL alias to Sef URL
