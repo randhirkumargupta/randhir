@@ -387,6 +387,8 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
       $(this).removeClass('has-preview');
     }
   });
+  
+  $('.page-user').find('.password-suggestions').removeClass('description');
 
 };
 })(jQuery);
