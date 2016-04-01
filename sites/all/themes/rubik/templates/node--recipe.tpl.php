@@ -226,8 +226,13 @@
                 <?php if (!empty($syndication) || !empty($client_title)): ?>
                   <div class="description-details content-box">
                     <?php if (!empty($syndication)): ?>
-                      <div class="breaking-content-details"><?php print render($content['field_recipe_syndication']); ?></div>
-                      <div class="recipe-syndication"><?php print ('yes'); ?></div>
+                    <div class="breaking-content-details">
+                      <div class="field">
+                        <div class="field-label">Syndication: </div>
+                        <div class="field-items"><?php print ('yes'); ?></div>
+                      </div>
+                    </div>
+                      
                     <?php endif; ?>
                     <?php if (!empty($client_title)): ?>
                       <div class="breaking-content-details"><?php print render($content['field_story_client_title']); ?></div> 
