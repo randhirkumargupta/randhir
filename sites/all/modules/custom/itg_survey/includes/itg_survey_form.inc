@@ -135,6 +135,12 @@ function itg_survey_survey_form() {
               '#type' => $answer_type,
               '#size' => 30,
           );
+          
+          $form['answer_option_name' . $num . '_' . $txt_num] = array(
+              '#type' => 'hidden',
+              '#value' => $val_txt_option,
+          );
+          
           $txt_num++;
         }
         $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
@@ -149,6 +155,11 @@ function itg_survey_survey_form() {
               '#options' => $arr,
               '#attributes' => array('class' => array('rating'))
           );
+          $form['answer_option' . $num . '_' . $rating_num.'_name'] = array(
+              '#type' => 'hidden',
+              '#value' => $rating_option,
+          );
+          
           $rating_num++;
         }
         $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
@@ -356,24 +367,95 @@ function itg_survey_survey_form_submit($form, &$form_state){
     $_SESSION['survey_unique_key'] = user_password(6);
   }
   
-  //Insert each question of survey in our DB
-  db_insert('itg_survey_detail')
-        ->fields(array(
-            'nid' => $form_state['values']['nid'],
-            'uid' => $user->uid,
-            'ques_id' => $form_state['values']['question_id'.$num],
-            'question' => $form_state['values']['question'.$num],
-            'answer' => '',
-            'ans_type' => $form_state['values']['question_type'.$num],
-            'user_type' => $user_type,
-            'page_url' => $form_state['values']['survey_url'],
-            'survey_title' => $form_state['values']['survey_title'],
-            'survey_key' => $_SESSION['survey_unique_key'],
-            'created' => time(),
-        ))
-        ->execute();
+  if ($form_state['values']['question_type' . $num] == 'radios') {
 
-  
+    db_insert('itg_survey_detail')
+            ->fields(array(
+                'nid' => $form_state['values']['nid'],
+                'uid' => $user->uid,
+                'ques_id' => $form_state['values']['question_id' . $num],
+                'question' => $form_state['values']['question' . $num],
+                'answer' => strtolower($form_state['values']['answer_option' . $num]),
+                'ans_type' => $form_state['values']['question_type' . $num],
+                'user_type' => $user_type,
+                'page_url' => $form_state['values']['survey_url'],
+                'survey_title' => $form_state['values']['survey_title'],
+                'survey_key' => $_SESSION['survey_unique_key'],
+                'created' => time(),
+            ))
+            ->execute();
+  }
+
+  if ($form_state['values']['question_type' . $num] == 'checkboxes') {
+
+    foreach ($form_state['values']['answer_option' . $num] as $key => $value) {
+      if ($value) {
+        db_insert('itg_survey_detail')
+                ->fields(array(
+                    'nid' => $form_state['values']['nid'],
+                    'uid' => $user->uid,
+                    'ques_id' => $form_state['values']['question_id' . $num],
+                    'question' => $form_state['values']['question' . $num],
+                    'answer' => strtolower($value),
+                    'ans_type' => $form_state['values']['question_type' . $num],
+                    'user_type' => $user_type,
+                    'page_url' => $form_state['values']['survey_url'],
+                    'survey_title' => $form_state['values']['survey_title'],
+                    'survey_key' => $_SESSION['survey_unique_key'],
+                    'created' => time(),
+                ))
+                ->execute();
+      }
+    }
+  }
+
+  if ($form_state['values']['question_type' . $num] == 'textfield') {
+    for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
+      if ($form_detail['answer_option' . $num . '_' . $text_field] !== '') {
+        db_insert('itg_survey_detail')
+                ->fields(array(
+                    'nid' => $form_state['values']['nid'],
+                    'uid' => $user->uid,
+                    'ques_id' => $form_state['values']['question_id' . $num],
+                    'question' => $form_state['values']['question' . $num],
+                    'answer' => strtolower($form_detail['answer_option_name' . $num . '_' . $text_field]),
+                    'ans_type' => $form_state['values']['question_type' . $num],
+                    'user_type' => $user_type,
+                    'page_url' => $form_state['values']['survey_url'],
+                    'survey_title' => $form_state['values']['survey_title'],
+                    'survey_key' => $_SESSION['survey_unique_key'],
+                    'created' => time(),
+                ))
+                ->execute();
+      }
+    }
+  }
+
+  if ($form_state['values']['question_type' . $num] == 'rating') {
+    for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
+      for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
+        if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] == 1) {
+          db_insert('itg_survey_detail')
+                  ->fields(array(
+                      'nid' => $form_state['values']['nid'],
+                      'uid' => $user->uid,
+                      'ques_id' => $form_state['values']['question_id' . $num],
+                      'question' => $form_state['values']['question' . $num],
+                      'answer' => strtolower($form_detail['answer_option' . $num . '_' . $rating_field . '_name']),
+                      'ans_type' => $form_state['values']['question_type' . $num],
+                      'user_type' => $user_type,
+                      'page_url' => $form_state['values']['survey_url'],
+                      'survey_title' => $form_state['values']['survey_title'],
+                      'survey_key' => $_SESSION['survey_unique_key'],
+                      'created' => time(),
+                  ))
+                  ->execute();
+        }
+      }
+    }
+  }
+
+ 
   //Insert survey in to DB on final submit
   if(strtolower($form_state['clicked_button']['#value']) == 'submit'){
     db_insert('itg_survey_user')
