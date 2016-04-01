@@ -1453,4 +1453,5 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio div.filefield-source-imce{position: relative;}
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio div.filefield-source-imce .ajax-progress-throbber,
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio .file-widget .ajax-progress-throbber{display: none;}
+.ajax-progress-throbber .message{display: none;}
 
