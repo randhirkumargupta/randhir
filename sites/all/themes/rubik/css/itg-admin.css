@@ -1468,3 +1468,4 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .field-name-field-poll-manipulate-value .form-item span.error{padding-left: 0;}
 .block-content > div.node-survey .node-content > h2{border-bottom: 1px solid #ddd; margin-bottom: 5px; padding: 0 0 5px;}
 .page-content .field-name-field-supp-publish .form-item div.description {left: 0;}
+.page-content .form-item .password-suggestions{margin: -20px 0 15px 300px; font-size: 12px; color: #666;}
