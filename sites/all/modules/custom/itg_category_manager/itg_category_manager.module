@@ -574,7 +574,7 @@ function itg_category_manager_seo_team_mail($key, &$message, $params) {
  */
 function itg_category_manager_get_mail_content($entity) {
   global $base_url;
-  $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
+  $display_name = isset($entity->field_cm_display_title[LANGUAGE_NONE][0]['value']) ? $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'] : 'NA';
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
   $redirection_url = isset($entity->field_cm_redirection_url['und'][0]['value']) ? $entity->field_cm_redirection_url['und'][0]['value'] : 'NA';
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
@@ -630,7 +630,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
  * Update logs for Sef Url and modification time.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
-  if ($term->tid !== NULL) {
+  if ($term->tid !== NULL && $term->path['pathauto'] == 0) {    
     global $user;
     $data = array();
     $data = array(
@@ -655,9 +655,51 @@ function itg_category_manager_taxonomy_term_presave($term) {
  * Insert url aias to itg-category_manager table against specific term id.
  */
 function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
-  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert') {
+  // Handle Insert case
+  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert' && $context['data']['term']->vocabulary_machine_name == 'category_management') {    
+    // find section name
+    $parents = taxonomy_get_parents_all($context['data']['term']->tid);    
+    $section = end($parents);
+    // Set custom alias
+    if ($section->tid == $context['data']['term']->tid) {
+      $alias = str_replace(' ', '-', strtolower($context['data']['term']->name));
+    }
+    else {
+      $new_alias = str_replace(' ', '-', strtolower($section->name)) .'/'. str_replace(' ', '-', strtolower($context['data']['term']->name));
+      $alias = $new_alias;
+    }    
     db_update('itg_sef_url')
         ->fields(array('sef_url' => $alias))
+        ->condition('tid', $context['data']['term']->tid)
+        ->execute();
+  }
+  // Handle update case
+  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'update' && $context['data']['term']->vocabulary_machine_name == 'category_management') {    
+    // find section name
+    $parents = taxonomy_get_parents_all($context['data']['term']->tid);    
+    $section = end($parents);
+    // Set custom alias
+    if ($section->tid == $context['data']['term']->tid) {
+      $alias = $alias = str_replace(' ', '-', strtolower($context['data']['term']->name));
+    }
+    else {
+      $new_alias = str_replace(' ', '-', strtolower($section->name)) .'/'. str_replace(' ', '-', strtolower($context['data']['term']->name));
+      $alias = $new_alias;
+    }    
+    global $user;
+    $data = array();
+    $data = array(
+      'tid' => $context['data']['term']->tid,
+      'uid' => $user->uid,
+      'sef_url' => $alias,
+      'changed' => time(),
+    );
+    drupal_write_record('itg_sef_url', $data);
+    
+    // Update modified date on itg_category_manager table
+    $status = isset($context['data']['term']->term_state) ? $context['data']['term']->term_state : 1;
+    db_update('itg_category_manager')
+        ->fields(array('changed' => time(), 'status' => $status))
         ->condition('tid', $context['data']['term']->tid)
         ->execute();
   }
