@@ -373,6 +373,20 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
   $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
+  
+  $('.field-name-field-gallery-image .field-widget-image-image .filefield-source-imce').each(function(){
+    if(!($(this).next().hasClass('gallery-browse'))){
+      $(this).after('<a href="javascript:;" class="gallery-browse"><i class="fa fa-picture-o"></i><span>Browse</span></a>');
+    }
+  });
+  $('.field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function(){
+    if($(this).children().hasClass('image-preview')){
+      $(this).addClass('has-preview');
+    }
+    else{
+      $(this).removeClass('has-preview');
+    }
+  });
 
 };
 })(jQuery);
