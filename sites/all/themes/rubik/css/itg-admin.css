@@ -1468,3 +1468,14 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .field-name-field-poll-manipulate-value .form-item span.error{padding-left: 0;}
 .block-content > div.node-survey .node-content > h2{border-bottom: 1px solid #ddd; margin-bottom: 5px; padding: 0 0 5px;}
 .page-content .field-name-field-supp-publish .form-item div.description {left: 0;}
+.page-content .form-item .password-suggestions{margin: -20px 0 15px 300px; font-size: 12px; color: #666;}
+.field-name-field-buzz-description .description{padding-left: 150px !important;}
+.content-node-view .field-name-field-astro-zodiac .field-items{width: 100%;}
+.content-node-view .field-name-field-astro-zodiac .field-items > .field-item{border-top: 1px solid #ddd; padding-top: 10px;}
+.content-node-view .field-name-field-astro-zodiac .field-items > .field-item:first-child{border-top: none; padding-top: 0;}
+.field-name-field-astro-video .form-type-managed-file .file-widget > .form-item, 
+.field-name-field-common-audio-file .form-type-managed-file .file-widget > .form-item{margin-top: 10px;}
+.field-name-field-astro-video .form-type-managed-file .file-widget .file a, 
+.field-name-field-common-audio-file .form-type-managed-file .file-widget .file a{display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: top; white-space: nowrap; width: 200px;}
+.field-name-field-astro-video .form-type-managed-file .file-widget .file-size, 
+.field-name-field-astro-video .form-type-managed-file .file-widget .file-size{margin-right: 5px;}
