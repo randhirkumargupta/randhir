@@ -220,10 +220,9 @@
               <div class="content-details">      
                 <?php
                 $syndication = render($content['field_recipe_syndication']);
-                $client_title = render($content['field_story_client_title']);
                 ?>
 
-                <?php if (!empty($syndication) || !empty($client_title)): ?>
+                <?php if (!empty($syndication)): ?>
                   <div class="description-details content-box">
                     <?php if (!empty($syndication)): ?>
                     <div class="breaking-content-details">
@@ -234,10 +233,7 @@
                     </div>
                       
                     <?php endif; ?>
-                    <?php if (!empty($client_title)): ?>
-                      <div class="breaking-content-details"><?php print render($content['field_story_client_title']); ?></div> 
-                    <?php endif; ?>
-                  </div>
+                    </div>
                 <?php endif; ?>
               </div>
 

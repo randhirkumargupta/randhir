@@ -35,13 +35,14 @@ function mega_review_critic_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Basic Details',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-review-basic-settings field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-review-basic-settings field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_review_basic_settings|node|mega_review_critic|form'] = $field_group;
