@@ -57,7 +57,7 @@
                     </div>
               </div>
               
-              <?php if($node->field_astro_zodiac['und'][0]['field_zodiac_sign']['und'][0]['tid'] != 0): ?>              
+              <?php if($node->field_astro_zodiac['und'][0]['field_buzz_description']['und'][0]['value'] != ''): ?>              
               <div class="content-node-view">                
                 <h2>Zodiac Sign</h2>
                 <?php if (isset($node->op) && $node->op == 'Preview'): ?>  
