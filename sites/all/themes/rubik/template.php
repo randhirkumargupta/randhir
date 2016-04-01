@@ -153,6 +153,11 @@ function rubik_preprocess_page(&$vars) {
     drupal_set_title('Create Tag');
   }
   
+    if (arg(0) == 'survey-result' && is_numeric(arg(1))) {
+      $node = node_load(arg(1));
+    drupal_set_title('Survey Result: '.  ucwords($node->title));
+  }
+  
 }
 
 /**

@@ -555,7 +555,11 @@ function astro_feature_field_default_field_instances() {
   // Exported field_instance: 'node-astro-field_astro_type'.
   $field_instances['node-astro-field_astro_type'] = array(
     'bundle' => 'astro',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 217,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1006,7 +1010,7 @@ function astro_feature_field_default_field_instances() {
     'label' => 'Panchaang-Calendar',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',

@@ -88,7 +88,7 @@
                   <h2><?php print t('Configuration'); ?></h2>
                   <div class="content-details"><?php print render($content['field_story_configurations']); ?>
                   <?php print render($content['field_story_rating']); ?>
-                  <?php print render($content['field_story_client_title']); ?>
+                  <?php //print render($content['field_story_client_title']); ?>
                   <?php print render($content['field_story_media_files_syndicat']); ?>
                   </div>
                 </div>

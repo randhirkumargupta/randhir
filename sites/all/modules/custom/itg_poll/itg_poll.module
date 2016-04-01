@@ -260,6 +260,7 @@ function itg_poll_poll_data() {
   return $total = db_select('itg_polls', 'p')
           ->fields('p')
           ->condition('p.mail_flag', '1', '!=')
+          ->condition('p.display_result', '2', '=')
           ->condition('p.uId', '0', '!=' )->execute()->fetchAll();
 }
 
@@ -346,6 +347,13 @@ function itg_poll_form($form, &$form_state, $parms) {
   return $form;
 }
 
+/**
+ * Implements function poll ajax submit().
+ * @global type $user
+ * @param array $form
+ * @param array $form_state
+ * @return type
+ */
 function itg_poll_form_ajax_submit($form, &$form_state){
    if (form_get_errors()) {
      $error = form_get_errors();
@@ -378,6 +386,8 @@ function itg_poll_form_submit($form, &$form_state) {
   $pole_answer = $form_state['values']['pole_answer'];
 
 
+  // Get display result
+  $dsp_result = itg_poll_get_display_result($nId);
   /**
    * Insert poll information in the database.
    */
@@ -386,52 +396,25 @@ function itg_poll_form_submit($form, &$form_state) {
     'nId' => $nId,
     'ansId' => $pole_answer,
     'uId' => $user->uid,
+    'display_result' => $dsp_result,
     'created' => $created))->execute();
 
-  //if($display_result == 1) { //Instant Result
-  // setcookie(name, value, expire, path, domain); 
+ 
   $nId = $form_state['values']['nid'];
   $expire = time() + 60 * 60 * 24 * 30; // expires in one month
   $value = 'yes_' . $nId;
   setcookie('visitedPoll', $value, $expire, '/');
-  //}
-
 }
 
 /**
- * Ajax callback function.
- * @param array $form 
- * @param array reference $form_state
+ * Implement function for get display result in poll.
  */
-function poll_form_ajax_submit($form, &$form_state) {
-
-  if (empty($form_state['values']['pole_answer'])) {
-    form_set_error('pole_answer', t('Please select any one !'));
-    return $form;
-  }
-  global $user;
-  $nId = $form_state['values']['nid'];
-  $pole_answer = $form_state['values']['pole_answer'];
-
-  /**
-   * Insert poll information in the database.
-   */
-  $created = date('Y-m-d H:i:s');
-  db_insert('itg_polls')->fields(array(
-    'nId' => $nId,
-    'ansId' => $pole_answer,
-    'uId' => $user->uid,
-    'created' => $created))->execute();
-
-  // setcookie(name, value, expire, path, domain); 
-  $expire = time() + 60 * 60 * 24 * 30; // expires in one month
-  $value = 'yes_' . $nId;
-  setcookie('visitedPoll', $value, $expire, '/');
-
-  // you may not want to return the form at all.
-  $element = $form['wrapper'];
-  $element['#markup'] = "Thanks, Your Poll is valuable for me.";
-  return $element;
+function itg_poll_get_display_result($nid){
+    $result = db_select('field_data_field_display_result', 'fdr')
+          ->fields('fdr', array('field_display_result_value'))
+          ->condition('fdr.entity_id', $nid, '=')
+          ->condition('fdr.bundle', 'poll', '=' )->execute()->fetchField();
+    return $result;
 }
 
 /**
@@ -557,18 +540,17 @@ function itg_poll_views_query_alter(&$view, &$query) {
 }
 
 /**
- * Implements hook_menu().
+ * Implements hook__cronapi().
  */
-function itg_poll_menu() {
-  $items['send-mail'] = array(
-    'page callback' => 'itg_poll_complete_time_mail',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
+function itg_poll_cronapi($op, $job = NULL) {
+  $items['poll_complete_mail'] = array(
+    'description' => 'Mail shoot after poll completion.',
+    'rule' => 'string',
+    'weight' => 5,
+    'callback' => 'itg_poll_complete_time_mail', 
   );
-
   return $items;
 }
-
 /**
  * Implement cron function for send mail.
  */
@@ -596,7 +578,7 @@ function itg_poll_complete_time_mail() {
       <body style="margin:0; padding:0;">
             <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi ' . $user->name . ',</td></tr>
             <tr><td></td></tr>
-            <tr><td>Please check your poll result on <a href="node/' . $url_nid . '">Click Here</a></td></tr>
+            <tr><td>Please check your poll result on '.l('Click Here', 'node/'.$url_nid).'</td></tr>
             <tr><td></td></tr>
             <tr><td></td></tr>
             <tr><td>Thanks,</td></tr>
@@ -606,7 +588,7 @@ function itg_poll_complete_time_mail() {
             'body' => $message_body,
             'subject' => 'India Today | poll!',
           );
-          $mail = drupal_mail('itg_poll', 'send_mail_to_poll_submit_user', 'vedprakash.pareek@kelltontech.com', language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+          $mail = drupal_mail('itg_poll', 'send_mail_to_poll_submit_user', $user->mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
           if ($mail['result']) {
             db_update('itg_polls')
                 ->fields(array(
@@ -640,7 +622,7 @@ function itg_poll_mail($key, &$message, $params) {
     case 'send_mail_to_poll_submit_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );

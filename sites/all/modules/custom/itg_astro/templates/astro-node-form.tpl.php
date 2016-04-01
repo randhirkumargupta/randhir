@@ -13,32 +13,28 @@
     <?php print drupal_render($form['field_astro_date_range']); ?>
     <?php print render($form['field_story_expiry_date']); ?>
     <?php print render($form['field_last_name']); ?>
-    <?php print render($form['field_astro_type']); ?>
-    <h2 class="story-title"><?php echo t('Channel'); ?></h2>
-    <?php print drupal_render($form['field_story_category']); ?>    
+    <?php print render($form['field_astro_type']); ?>    
 </div>
-<div id="StoryContent">
-    
+<div id="StoryContent">    
     <?php print drupal_render($form['itg_zodiac']); ?>
     <?php print drupal_render($form['field_astro_zodiac']); ?>
-
 </div>
-<div id="Configuration">
-    
-    <?php print drupal_render($form['itg_collective']); ?>
-    <?php print drupal_render($form['field_buzz_description']); ?>
-    <?php print drupal_render($form['field_astro_video_thumbnail']); ?>
-    <?php print drupal_render($form['field_astro_video']); ?>
-    <?php print drupal_render($form['field_common_audio_file']); ?>
-</div>
-<div id="SocialMedia">
-    
+<div id="SocialMedia">    
     <?php print drupal_render($form['itg_numerology']); ?>
     <?php print drupal_render($form['field_numerology']); ?>
     <?php print drupal_render($form['field_astro_frequency2']); ?>
     <?php print drupal_render($form['field_field_astro_date_range2']); ?>
     <?php print drupal_render($form['field_astro_numerology_values']); ?>
 </div>
+<div id="Configuration">    
+    <?php print drupal_render($form['itg_collective']); ?>
+    <?php print drupal_render($form['field_buzz_description']); ?>
+    <?php print drupal_render($form['field_astro_video_thumbnail']); ?>
+    <?php print drupal_render($form['field_astro_video']); ?>
+    <?php print drupal_render($form['field_common_audio_file']); ?>
+</div>
+<h2 class="story-title"><?php echo t('Channel'); ?></h2>
+    <?php print drupal_render($form['field_story_category']); ?>    
 <h2 id="title-metatags" class="story-title"><?php echo t('Meta Tags'); ?></h2>
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
