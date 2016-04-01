@@ -100,7 +100,7 @@ function itg_astro_get_term_name($tid) {
  * @param type $form_state
  * @param type $form_id
  */
-function itg_astro_form_alter(&$form, &$form_state, $form_id) {
+function itg_astro_form_alter(&$form, &$form_state, $form_id) {  
   if ($form_id == 'astro_node_form') {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js',
@@ -190,6 +190,7 @@ function itg_astro_after_build($form, &$form_state) {
   }
   $form['field_buzz_description']['#prefix'] = '<div class="collective-wrapper">';
   $form['field_common_audio_file']['#suffix'] = '</div>';
+  $form['field_astro_type']['und']['#title'] = t('Astro Type') . '<span class="form-required" title="This field is required."> *</span>';
 
   // Add cancel button to create/edit astro page
   $form['actions']['cancel'] = array(
