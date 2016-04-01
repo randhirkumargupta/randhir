@@ -13,7 +13,7 @@
 function itg_mega_reviews_critics_views_pre_render(&$view) {
   
   if ($view->name == "movie_review_list") {    
-    $header_content = l(t('Create Mega Review & Critic'), 'node/add/mega-review-critic', array('query' => array('destination' => 'movie-review-list')));    
+    $header_content = l(t('Create Mega Review & Critic'), 'node/add/mega-review-critic', array('query' => array('destination' => arg(0))));    
     $view->attachment_before = $header_content;
   } else if ($view->name == "celebrity_profile_list") {
     $header_content = l(t('Create profile'), 'node/add/itg-celebrity-profile', array('query' => array('destination' => 'celebrity-profile-list')));    

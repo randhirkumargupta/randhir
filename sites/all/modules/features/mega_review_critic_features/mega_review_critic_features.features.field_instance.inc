@@ -429,7 +429,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'medium',
         ),
         'type' => 'image',
         'weight' => 3,
@@ -499,7 +499,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'bundle' => 'mega_review_critic',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Cast',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -774,7 +774,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 17,
       ),
       'teaser' => array(
