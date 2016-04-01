@@ -18,19 +18,22 @@
     <?php print drupal_render($form['field_story_category']); ?>    
 </div>
 <div id="StoryContent">
-    <h2 class="story-title"><?php echo t('Zodiac Sign'); ?></h2>
+    
+    <?php print drupal_render($form['itg_zodiac']); ?>
     <?php print drupal_render($form['field_astro_zodiac']); ?>
 
 </div>
 <div id="Configuration">
-    <h2 class="story-title"><?php echo t('Collective Content'); ?></h2>
+    
+    <?php print drupal_render($form['itg_collective']); ?>
     <?php print drupal_render($form['field_buzz_description']); ?>
     <?php print drupal_render($form['field_astro_video_thumbnail']); ?>
     <?php print drupal_render($form['field_astro_video']); ?>
     <?php print drupal_render($form['field_common_audio_file']); ?>
 </div>
 <div id="SocialMedia">
-    <h2 class="story-title"><?php echo t('Numerology'); ?></h2>
+    
+    <?php print drupal_render($form['itg_numerology']); ?>
     <?php print drupal_render($form['field_numerology']); ?>
     <?php print drupal_render($form['field_astro_frequency2']); ?>
     <?php print drupal_render($form['field_field_astro_date_range2']); ?>

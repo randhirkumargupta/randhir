@@ -9,11 +9,25 @@
  */
 
 /**
+ * Implement hook_permission
+ * @return type
+ */
+function itg_survey_permission() {
+    return array(
+    'survey admin users' => array(
+      'title' => t('Access Survey Result'),
+    )
+  );
+}
+
+/**
  * Implement hook_menu
  * @return string
  */
 function itg_survey_menu() {
+  
   $items = array();
+  
   $items['survey'] = array(
       'title' => t('Survey'),
       'page callback' => 'drupal_get_form',
@@ -21,6 +35,14 @@ function itg_survey_menu() {
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_survey_form.inc',
+  );
+  
+  $items['survey-result/%'] = array(
+      'title' => t('Survey Result'),
+      'page callback' => 'itg_survey_result',
+      'access callback' => 'user_access',
+      'access arguments' => array('survey admin users'),
+      'file' => 'includes/itg_survey_result.inc',
   );
   return $items;
 }
@@ -67,6 +89,9 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
         '#value' => t('Cancel'),
       );
       $form['field_survey_add_questions'][LANGUAGE_NONE]['#title'] = '';
+      
+      //Unset add more answer option
+      unset($form['field_survey_add_questions'][LANGUAGE_NONE][0]['field_survey_answer_option_more']);
       
       //After build and custom summit callback
       $form['#after_build'][] = 'itg_survey_form_after_build';

@@ -439,36 +439,42 @@
               break;
           }
         });
-      }     
+      } 
+      
+      // Hide navigation label
+      $('.node-astro-form .story-title-coll').css('display', 'none');
+      $('.node-astro-form .story-title-zod').css('display', 'none');
+      $('.node-astro-form .story-title-num').css('display', 'none');
       
       // Reset form if someone change astro type
       $("select[name='field_astro_type[und]']").on('change', function () {
         var astroType = $(this).val();
-        //var values = $('.field-name-field-astro-numerology-values > div.fieldset-content').length;
-        //var num_values = $('.field-name-field-astro-numerology-values .fieldset-content').length;
-
-        switch (astroType) {
+        var astroText = $(this).find('option:selected').text();        
+        switch (astroText) {
           // Collective Content
-          case '217':
+          case 'Collective Content':
             clear_form_elements('field-name-field-astro-zodiac');
             jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
             clear_form_elements('field-name-field-astro-numerology-values');
             jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
               $(this).mousedown();
             });
+            $('.node-astro-form .story-title-zod').css('display', 'none');
+            $('.node-astro-form .story-title-num').css('display', 'none');
+            $('.node-astro-form .story-title-coll').css('display', 'block');
             break;
             // Numerology  
-          case '218':
+          case 'Numerology':
             clear_form_elements('field-name-field-astro-zodiac');
             jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
             clear_form_elements('collective-wrapper');
-            jQuery('.collective-wrapper .button-remove').mousedown();
-            jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
-              $(this).mousedown();
-            });
+            jQuery('.collective-wrapper .button-remove').mousedown();            
+            $('.node-astro-form .story-title-zod').css('display', 'none');            
+            $('.node-astro-form .story-title-coll').css('display', 'none');
+            $('.node-astro-form .story-title-num').css('display', 'block');
             break;
             // Zodiac  
-          case '219':
+          case 'Zodiac':
             clear_form_elements('collective-wrapper');
             jQuery('.collective-wrapper .button-remove').mousedown();
             clear_form_elements('field-name-field-astro-numerology-values');
@@ -481,9 +487,23 @@
               $('select[name="field_astro_zodiac[und]['+i+'][field_zodiac_sign][und]"]').val(sign_name[key]);              
               ++i;
             }
+                        
+            $('.node-astro-form .story-title-coll').css('display', 'none');
+            $('.node-astro-form .story-title-num').css('display', 'none');
+            $('.node-astro-form .story-title-zod').css('display', 'block');
             break;
         }
       });
+      
+      if ($('select[name="field_astro_type[und]"').find('option:selected').text() == 'Collective Content') {
+        $('.node-astro-form .story-title-coll').css('display', 'block');
+      }
+      if ($('select[name="field_astro_type[und]"').find('option:selected').text() == 'Numerology') {
+        $('.node-astro-form .story-title-num').css('display', 'block');
+      }
+      if ($('select[name="field_astro_type[und]"').find('option:selected').text() == 'Zodiac') {
+        $('.node-astro-form .story-title-num').css('display', 'block');
+      }
 
     }
   };
