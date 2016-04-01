@@ -883,10 +883,13 @@ form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-pa
 form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-padding label{display: none;}
 #edit-field-issue-title .date-combo .fieldset-content .date-clear{clear: none;}
 .views-action-separator{color: #212121;}
-.node-photogallery-form #edit-field-gallery-image .form-item label{width: 140px;}
+.node-photogallery-form #edit-field-gallery-image .form-item label{width: 100%;}
+.node-photogallery-form #edit-field-gallery-image .form-item .form-textarea-wrapper{overflow: visible;}
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .form-item .form-text{max-width: 100% !important;}
 .node-photogallery-form #edit-field-gallery-image .description{padding-left: 140px;}
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .description{padding-left: 0;}
+[id*="field-gallery-image-values"] .form-item > label{display: none;}
+[id*="field-gallery-image-values"] .form-type-checkboxes label{display: inline-block; vertical-align: middle; width: auto !important;}
 .vertical-tabs{background: none;}
 .node-issue-form .vertical-tabs, 
 .node-supplement-form .vertical-tabs, 
@@ -1245,7 +1248,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-photogallery-form #edit-field-gallery-image table td > .ajax-new-content > fieldset{width: 265px;}
 .node-photogallery-form #edit-field-gallery-image .field-multiple-table > tbody > tr{float: left;}
 .node-photogallery-form #edit-field-gallery-image .field-multiple-table > tbody > tr.even{margin-left: 10px;}
-[id*="field-gallery-image-values"] fieldset .fieldset-content{position: relative; background: transparent;}
+[id*="field-gallery-image-values"] fieldset .fieldset-content{position: relative; background: transparent; height: 430px;}
 [id*="field-gallery-image-values"] fieldset .fieldset-content > .button-remove{position: absolute; top: -2px; right: 0; background: url('../images/close.png') no-repeat; width: 30px; height: 30px; border: none; box-shadow: none; font-size: 0;}
 .node-photogallery-form #edit-field-gallery-image .image-preview{height: 200px; padding: 0;}
 .node-photogallery-form #edit-field-gallery-image .image-preview img{height: 200px; width: 100%;}
@@ -1254,7 +1257,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio span.file-size{display: none;}
 .node-photogallery-form #edit-field-gallery-image .field-name-field-images span.file, 
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio span.file{width: 165px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-.node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove{margin-top: 5px;}
+.node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove{margin-top: 0; float: right;}
 .node-mega_review_critic-form .form-type-managed-file .image-widget div.image-widget-data{width: 100%;} 
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item label{width: 120px;} 
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item .form-text{width: 300px !important;} 
@@ -1438,4 +1441,16 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .ajax-progress-throbber .message{display: none;}
 [id*="field-survey-add-questions-values"] .form-item span.error{padding-left: 0 !important;}
 [id*="edit-field-story-expiry-date"] .date-combo .fieldset-content{padding: 0; float: left; max-width: 400px;}
+.field-name-field-gallery-image .field-widget-image-image .filefield-source-imce{opacity: 0; position: relative; z-index: 99; height: 200px;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images a.filefield-sources-imce-browse{width: 100%; box-sizing: border-box; height: 100%; position: absolute; left: 0; top: 0; z-index: 99;}
+.gallery-browse{position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 9; border: 1px solid #ddd; text-align: center; box-sizing: border-box;}
+.gallery-browse .fa{padding-top: 30px; font-size: 120px; color: #ddd;}
+.gallery-browse span{display: block; font-size: 18px; color: #bbb;}
+[id*="field-gallery-image-values"] .field-name-field-images .form-type-managed-file > .has-preview{position: relative;}
+[id*="field-gallery-image-values"] .field-name-field-images .form-type-managed-file > .has-preview > .image-widget-data{position: absolute; left: 0; bottom: 0; width: 100%; padding: 5px; background-color: rgba(0,0,0,.7); box-sizing: border-box; z-index: 99;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images span.file{width: 155px;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images span.file a{color: #fff; vertical-align: top;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio div.filefield-source-imce{position: relative;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio div.filefield-source-imce .ajax-progress-throbber,
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio .file-widget .ajax-progress-throbber{display: none;}
 
