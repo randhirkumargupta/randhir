@@ -237,7 +237,7 @@ function itg_common_views_pre_render(&$view) {
 function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {    
   if (isset($form['title'])) {
    $form['title']['#maxlength']= 255;
-
+   // pr($form['#id']);
    // remove space from title search field.
    drupal_add_js('jQuery(document).ready(function() {                  
                  jQuery(".form-submit").click(function() {            
@@ -253,6 +253,15 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
                  
                });              
           });', array('type' => 'inline', 'scope' => 'footer'));
+   
+   if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-movie-review-list-page' || $form['#id'] == 'views-exposed-form-blogs-management-page-1') {
+     
+     // remove space from title search field.
+   drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".tabledrag-toggle-weight-wrapper").hide();
+          });', array('type' => 'inline', 'scope' => 'footer'));
+   }
+   
   }
 }
 

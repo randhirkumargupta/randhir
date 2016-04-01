@@ -430,6 +430,7 @@ form .form-item label{
   float: none;
   padding-left: 300px;
 }
+.collapsible .fieldset-legend{background-color: #f6f6f6;}
 .node-story-form .form-item span.error, 
 .page-admin-people-create form .form-item span.error{padding-left: 300px;}
 .node-story-form .date-padding .form-item span.error {padding-left: 0;}
@@ -528,7 +529,8 @@ form .form-item .form-item{
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
 }
-#block-itg-story-story-tab-form-block, 
+#block-itg-story-story-tab-form-block,
+#block-menu-menu-mega-review-menu,
 #block-itg-poll-poll-tab-form-block, 
 #block-itg-breaking-news-breaking-news-tab-form-block, 
 #block-menu-menu-story-content-admin-menu, 
@@ -541,6 +543,7 @@ form .form-item .form-item{
   border-right: none;
 }
 #block-itg-story-story-tab-form-block .block-content, 
+#block-menu-menu-mega-review-menu .block-content, 
 #block-itg-poll-poll-tab-form-block .block-content, 
 #block-itg-recipe-recipe-tab-form-block .block-content, 
 #block-itg-breaking-news-breaking-news-tab-form-block .block-content, 
@@ -553,12 +556,14 @@ form .form-item .form-item{
 }
 .block-itg-story-list, 
 #block-menu-menu-story-content-admin-menu .block-content .ul, 
+#block-menu-menu-mega-review-menu .block-content .ul, 
 #block-menu-menu-ask-an-expert-menu .block-content .ul, 
 #block-menu-menu-photogallery-admin-menu .block-content .ul{
   text-align: center;
 }
 .block-itg-story-list span, 
 #block-menu-menu-story-content-admin-menu .block-content ul li,
+#block-menu-menu-mega-review-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
 #block-menu-menu-photogallery-admin-menu .block-content ul li{
   cursor: pointer;
@@ -572,16 +577,20 @@ form .form-item .form-item{
   border: none;
 }
 #block-menu-menu-story-content-admin-menu .block-content ul li,
+#block-menu-menu-mega-review-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
 #block-menu-menu-photogallery-admin-menu .block-content ul li{padding: 0;}
 #block-menu-menu-story-content-admin-menu .block-content ul li a,
+#block-menu-menu-mega-review-menu .block-content ul li a,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a{padding: 10px 20px; display: block; color: #666; position: relative;}
 .block-itg-story-list span.active, .block-itg-story-list span:hover, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active, 
+#block-menu-menu-mega-review-menu .block-content ul li a.active, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a:hover,
+#block-menu-menu-mega-review-menu .block-content ul li a:hover,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a:hover,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a:hover{
   color: #008eb1;
@@ -589,6 +598,7 @@ form .form-item .form-item{
 }
 .block-itg-story-list span.active:after, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active:after, 
+#block-menu-menu-mega-review-menu .block-content ul li a.active:after, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active:after, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active:after{
   content: '';
@@ -1260,7 +1270,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove{margin-top: 0; float: right;}
 .node-mega_review_critic-form .form-type-managed-file .image-widget div.image-widget-data{width: 100%;} 
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item label{width: 120px;} 
-.node-mega_review_critic-form .field-multiple-table fieldset .form-item .form-text{width: 300px !important;} 
+.node-mega_review_critic-form .field-multiple-table fieldset .form-item .form-text{width: 259px !important;} 
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item span.error,
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item div.description{padding-left: 120px;}
 .node-mega_review_critic-form .field-multiple-table td{max-width: none;}
@@ -1453,4 +1463,8 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio div.filefield-source-imce{position: relative;}
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio div.filefield-source-imce .ajax-progress-throbber,
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio .file-widget .ajax-progress-throbber{display: none;}
-
+.ajax-progress-throbber .message{display: none;}
+.page-content .form-type-date-popup .description{left: 200px;}
+.field-name-field-poll-manipulate-value .form-item span.error{padding-left: 0;}
+.block-content > div.node-survey .node-content > h2{border-bottom: 1px solid #ddd; margin-bottom: 5px; padding: 0 0 5px;}
+.page-content .field-name-field-supp-publish .form-item div.description {left: 0;}

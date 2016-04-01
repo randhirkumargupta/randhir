@@ -129,7 +129,7 @@ function itg_api_node_presave($node) {
     // convert string to arary
     $exp_description = explode(" ", $description);
 
-    if ($title_length > 39) {
+    if ($title_length > 35) {
       // $node->revision = 1;
       $node->log = 'State Changed to published';
       $node->workbench_moderation_state_new = workbench_moderation_state_published();
@@ -139,7 +139,7 @@ function itg_api_node_presave($node) {
       $node->workbench_moderation_state_new = workbench_moderation_state_Review();
     }
 
-    if ($title_length < 39) {
+    if ($title_length < 35) {
 
       $node->workbench_moderation_state_new = workbench_moderation_state_Review();
     }
@@ -267,7 +267,7 @@ function itg_api_mail_today_content() {
           print '<br/>';
         }
         $i++;
-        if ($i == 1)
+        if ($i == 2)
           break;
       }
     }
@@ -422,7 +422,7 @@ function itg_ians_content() {
         $subcat_name = trim(itg_api_get_term_id($ans_value->subcats));
 
         if (empty($category_name)) {
-          $category_name = itg_api_get_term_id('ANS');
+          $category_name = itg_api_get_term_id('IANS');
         }
         else {
           $category_name = trim(itg_api_get_term_id($ans_value->cats));
