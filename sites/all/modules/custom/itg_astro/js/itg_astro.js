@@ -369,8 +369,9 @@
           'field_astro_video_thumbnail[und][0][fid]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if ($(this).val() == 0 && astroType == '314cd /valuecd /') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                var video_field = $('input[name="field_astro_video[und][0][fid]"]').val();
+                if ($(this).val() == 0 && astroType == 'Collective Content' && video_field != '0') {
                   $(this).removeAttr('value');
                 }
                 return true;
