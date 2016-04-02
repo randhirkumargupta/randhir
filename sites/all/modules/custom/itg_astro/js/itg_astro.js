@@ -538,6 +538,18 @@
             $('.node-astro-form .story-title-num').css('display', 'none');
             $('.node-astro-form .story-title-zod').css('display', 'block');
             break;
+          case 'Tarrot':
+            $('.node-astro-form .story-title-coll').css('display', 'none');
+            $('.node-astro-form .story-title-num').css('display', 'none');
+            $('.node-astro-form .story-title-zod').css('display', 'none');
+            clear_form_elements('collective-wrapper');
+            jQuery('.collective-wrapper .button-remove').mousedown();
+            clear_form_elements('field-name-field-astro-numerology-values');
+            jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
+              $(this).mousedown();
+            });
+            clear_form_elements('field-name-field-astro-zodiac');
+            jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
         }
       });
 
@@ -548,7 +560,7 @@
         $('.node-astro-form .story-title-num').css('display', 'block');
       }
       if ($('select[name="field_astro_type[und]"').find('option:selected').text() == 'Zodiac') {
-        $('.node-astro-form .story-title-num').css('display', 'block');
+        $('.node-astro-form .story-title-zod').css('display', 'block');
       }
 
     }
