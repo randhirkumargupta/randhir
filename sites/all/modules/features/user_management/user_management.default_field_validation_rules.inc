@@ -13,51 +13,6 @@ function user_management_default_field_validation_rule() {
   $rule = new stdClass();
   $rule->disabled = FALSE; /* Edit this to true to make a default rule disabled initially */
   $rule->api_version = 2;
-  $rule->rulename = 'first_name_validation';
-  $rule->name = 'First name validation';
-  $rule->field_name = 'field_first_name';
-  $rule->col = 'value';
-  $rule->entity_type = 'user';
-  $rule->bundle = 'user';
-  $rule->validator = 'field_validation_regex_validator';
-  $rule->settings = array(
-    'data' => '^\\S[A-z ]+\\S$',
-    'bypass' => 0,
-    'roles' => array(
-      1 => 0,
-      2 => 0,
-      3 => 0,
-      4 => 0,
-      7 => 0,
-      9 => 0,
-      5 => 0,
-      20 => 0,
-      6 => 0,
-      10 => 0,
-      13 => 0,
-      11 => 0,
-      16 => 0,
-      19 => 0,
-      17 => 0,
-      14 => 0,
-      12 => 0,
-      15 => 0,
-      18 => 0,
-    ),
-    'errors' => 0,
-    'condition' => 0,
-    'condition_wrapper' => array(
-      'condition_field' => '',
-      'condition_operator' => 'equals',
-      'condition_value' => '',
-    ),
-  );
-  $rule->error_message = 'Please enter only characters in first name.';
-  $export['First name validation'] = $rule;
-
-  $rule = new stdClass();
-  $rule->disabled = FALSE; /* Edit this to true to make a default rule disabled initially */
-  $rule->api_version = 2;
   $rule->rulename = 'Mobile number validation';
   $rule->name = 'mobile_number_validation';
   $rule->field_name = 'field_mobile_number';
