@@ -162,8 +162,8 @@
           'field_astro_zodiac[und][0][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -176,8 +176,8 @@
           'field_astro_zodiac[und][1][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -190,8 +190,8 @@
           'field_astro_zodiac[und][2][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -204,8 +204,8 @@
           'field_astro_zodiac[und][3][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -218,8 +218,8 @@
           'field_astro_zodiac[und][4][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -232,8 +232,8 @@
           'field_astro_zodiac[und][5][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -246,8 +246,8 @@
           'field_astro_zodiac[und][6][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -260,8 +260,8 @@
           'field_astro_zodiac[und][7][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -274,8 +274,8 @@
           'field_astro_zodiac[und][8][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -288,8 +288,8 @@
           'field_astro_zodiac[und][9][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -302,8 +302,8 @@
           'field_astro_zodiac[und][10][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
@@ -316,8 +316,8 @@
           'field_astro_zodiac[und][11][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '219') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Zodiac') {
                   return true;
                 }
                 else {
