@@ -356,14 +356,16 @@
                 }
               }
             }
-          },
-          'field_astro_date_range[und][0][value2][date]': {
-            validateRange: true
-          },
+          },          
           'field_astro_type[und]': {
             required: true,
             validateSignName: true
-          },          
+          },
+          'field_astro_date_range[und][0][value2][date]': {
+            required: true,
+            date: true,
+            validateRange: true,
+          },
           'field_astro_video_thumbnail[und][0][fid]': {
             required: {
               depends: function () {
@@ -391,11 +393,7 @@
           'field_astro_date_range[und][0][value][date]': {
             required: true,
             date: true
-          },
-          'field_astro_date_range[und][0][value2][date]': {
-            required: true,
-            date: true
-          }
+          }          
         },
         messages: {          
           'field_astro_frequency[und]': {
@@ -421,6 +419,7 @@
         var days = momentb.diff(momenta, 'days');
         switch (frequency) {
           case 'daily':
+            $('input[name="title"').val(startDate+' - '+endDate);
             if (startDate !== endDate) {
               return false;
             }
@@ -429,7 +428,7 @@
             }
             break;
           case 'weekly':
-
+            $('input[name="title"').val(startDate+' - '+endDate);
             if (days !== 6) {
               return false;
             }
@@ -438,6 +437,7 @@
             }
             break;
           case 'monthly':
+            $('input[name="title"').val(startDate+' - '+endDate);
             if (days == 29 || days == 30) {
               return true;
             }
@@ -446,6 +446,7 @@
             }
             break;
           case 'yearly':
+            $('input[name="title"').val(startDate+' - '+endDate);
             if (days !== 365) {
               return false;
             }
