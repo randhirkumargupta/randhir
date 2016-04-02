@@ -350,7 +350,7 @@ function itg_story_create_breaking_news($story_node) {
 }
 
 /**
- * Implements hook_permission.
+ * Implements hook_node_insert
  * @param type $node
  */
 function itg_story_node_insert($node) { 
@@ -363,6 +363,19 @@ function itg_story_node_insert($node) {
   }    
 }
 
+/**
+ * Implements hook_node_update
+ * @param type $node
+ */
+function itg_story_node_update($node) {
+  if ($node->workbench_moderation_state_new != 'draft') {
+    foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+      if ($val['value'] == 'breaking_news') {
+        itg_story_create_breaking_news($node);
+      }
+    }
+  }
+}
 /**
  * Implements hook_form_FORMID_alter().
  * @param type $form

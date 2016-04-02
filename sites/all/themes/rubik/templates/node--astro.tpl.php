@@ -78,7 +78,7 @@
                         
                         // Print name field
                         $output .= '<div class="inner-label">Text: </div>';
-                        $output .= '<div class="inner-item">'. $node->field_astro_zodiac['und'][0]['field_buzz_description']['und'][0]['value'].'</div>';
+                        $output .= '<div class="inner-item">'. $node->field_astro_zodiac['und'][$i]['field_buzz_description']['und'][0]['value'].'</div>';
                         $output .= '<div class="inner-label">Thumbnail Icon: </div>';                        
                         $output .= '<div class="inner-item"><img src="' . image_style_url("thumbnail", $zodiac_sign[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_sign[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_sign[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';                        
                         print $output;
