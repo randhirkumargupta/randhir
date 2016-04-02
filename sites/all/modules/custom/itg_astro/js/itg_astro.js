@@ -112,18 +112,7 @@
           }
           error.appendTo(errorPlaceHolder);
         },
-        rules: {
-          'title': {
-            remote: {
-              url: Drupal.settings.uid.base_url + "/check-duplicate-title/" + Drupal.settings.uid.type + '/' + Drupal.settings.uid.nid,
-              type: "post",
-              data: {
-                title: function () {
-                  return jQuery("input[name='title']").val();
-                }
-              }
-            }
-          },
+        rules: {          
           'field_astro_frequency[und]': {
             remote: {
               url: Drupal.settings.uid.base_url + "/check-duplicate-title/" + Drupal.settings.uid.type + '/' + Drupal.settings.uid.nid,
@@ -345,8 +334,8 @@
           'field_astro_numerology_values[und][0][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '218') {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();                
+                if (astroType == 'Numerology') {
                   return true;
                 }
                 else {
@@ -358,8 +347,8 @@
           'field_astro_numerology_values[und][0][field_astro_select_number][und]': {
             validateSignName: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '218') {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();                
+                if (astroType == 'Numerology') {
                   return true;
                 }
                 else {
@@ -375,22 +364,22 @@
             required: true,
             validateSignName: true
           },          
-//          'field_astro_video_thumbnail[und][0][fid]': {
-//            required: {
-//              depends: function () {
-//                var astroType = $('select[name="field_astro_type[und]"]').val();
-//                if ($(this).val() == 0 && astroType == '217') {
-//                  $(this).removeAttr('value');
-//                }
-//                return true;
-//              }
-//            }
-//          },
+          'field_astro_video_thumbnail[und][0][fid]': {
+            required: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"]').val();
+                if ($(this).val() == 0 && astroType == '314cd /valuecd /') {
+                  $(this).removeAttr('value');
+                }
+                return true;
+              }
+            }
+          },
           'field_buzz_description[und][0][value]': {
             required: {
               depends: function () {
                 var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '217') {
+                if (astroType == '314') {
                   return true;
                 }
                 else {
@@ -408,12 +397,9 @@
             date: true
           }
         },
-        messages: {
-          'title': {
-            remote: 'Astro for selected frequency is already filled.'
-          },
+        messages: {          
           'field_astro_frequency[und]': {
-            remote: 'Astro for selected frequency is already filled frequencr.'
+            remote: 'Astro for selected frequency is already filled.'
           }
         }
       });
