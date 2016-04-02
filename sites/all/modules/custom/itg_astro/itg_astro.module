@@ -174,6 +174,12 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
  * after build function for altering field collection label.
  */
 function itg_astro_after_build($form, &$form_state) {
+  if (!isset($form['#node']->nid)) {
+    // hide remove button of first field on add form 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-astro-numerology-values-und-0-remove-button").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
   // Change Zodiac field item label name and add * on mandotory fields  
   $zodiac_name = itg_astro_zodiac_thumbnail();
   for ($i = 0; $i <= 11; $i++) {
@@ -182,7 +188,7 @@ function itg_astro_after_build($form, &$form_state) {
       '#markup' => '<div class="itg-astro-image"><img src="' . image_style_url("thumbnail", $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>',
     );
     $form['field_astro_zodiac']['und'][$i]['#title'] = t($zodiac_name[$i]->name);
-    if ($i == 0) {
+    if ($i == 0) {      
       $form['field_astro_numerology_values']['und'][$i]['field_astro_select_number']['und']['#title'] = t('Select Number') . '<span class="form-required" title="This field is required."> *</span>';
       $form['field_astro_numerology_values']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Enter Text') . '<span class="form-required" title="This field is required."> *</span>';
     }
