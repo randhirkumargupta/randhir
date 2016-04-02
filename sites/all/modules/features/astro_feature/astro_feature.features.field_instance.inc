@@ -379,10 +379,10 @@ function astro_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 5,
       ),
     ),
@@ -557,7 +557,7 @@ function astro_feature_field_default_field_instances() {
     'bundle' => 'astro',
     'default_value' => array(
       0 => array(
-        'tid' => 217,
+        'tid' => 314,
       ),
     ),
     'deleted' => 0,
