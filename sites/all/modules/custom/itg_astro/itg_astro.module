@@ -199,6 +199,8 @@ function itg_astro_after_build($form, &$form_state) {
   $form['field_buzz_description']['#prefix'] = '<div class="collective-wrapper">';
   $form['field_common_audio_file']['#suffix'] = '</div>';
   $form['field_astro_type']['und']['#title'] = t('Astro Type') . '<span class="form-required" title="This field is required."> *</span>';
+  $form['field_buzz_description']['und'][0]['value']['#title'] = t('Collective Text for all zodiac signs ').'<span class="form-required" title="This field is required."> *</span>';
+  
 
   // Add cancel button to create/edit astro page
   $form['actions']['cancel'] = array(
