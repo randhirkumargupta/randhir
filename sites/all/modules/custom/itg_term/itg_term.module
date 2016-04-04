@@ -216,11 +216,6 @@ function itg_term_batch_alter(&$batch) {
  */
 function term_redirect_handler($form, &$form_state) {
   $term = trim($form_state['values']['name']);
-  // To unset message
-  unset($_SESSION['messages']['status']);
-
-  drupal_set_message($term . ' ' . check_plain(t('Tag has been created successfully.')));
-
   $form_state['redirect'] = 'tags-management';
 }
 
@@ -407,6 +402,22 @@ function itg_term_views_query_alter(&$view, &$query) {
           }
         }
       }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_post_execute().
+ * @param type $view
+ */
+function itg_term_views_post_execute(&$view) {
+   if ($view->name == 'itg_download_taxonomy') {
+     drupal_get_messages();
+      drupal_set_message($term . ' ' . check_plain(t('Tag has been created successfully.')));
+    foreach ($view->result as $result) {
+      // Replace all empty fields with the dash '-' character.
+       $result->field_field_tags_display[0]['rendered']['#markup'] = $result->field_field_tags_display[0]['raw']['value'];
+     
     }
   }
 }

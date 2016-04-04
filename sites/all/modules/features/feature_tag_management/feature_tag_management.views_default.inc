@@ -90,7 +90,7 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['style_options']['trim'] = 1;
   $handler->display->display_options['style_options']['replace_newlines'] = 0;
   $handler->display->display_options['style_options']['newline_token'] = '1';
-  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['header'] = 0;
   $handler->display->display_options['style_options']['keep_html'] = 0;
   $handler->display->display_options['path'] = 'download-tags';
   $export['itg_download_taxonomy'] = $view;
