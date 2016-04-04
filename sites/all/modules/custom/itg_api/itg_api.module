@@ -167,7 +167,7 @@ function itg_api_mail_today_content() {
 
   global $base_url, $user;
 
-  $direc = getDirContents('sites/default/files/mailtoday/');
+  $direc = getDirContents('sites/default/files/gallery/mailtoday/');
 
   foreach ($direc as $xm_file) {
 
@@ -282,7 +282,7 @@ function itg_ani_content() {
   global $base_url, $user;
   
 
-  $direc = getDirContents('sites/default/files/ani/');
+  $direc = getDirContents('sites/default/files/gallery/ani/');
  
   foreach ($direc as $xm_file) {
 
@@ -401,7 +401,7 @@ function itg_ians_content() {
 
   global $base_url, $user;
 
-  $direc = getDirContents('sites/default/files/ians/');
+  $direc = getDirContents('sites/default/files/gallery/ians/');
 
   foreach ($direc as $xm_file) {
 
