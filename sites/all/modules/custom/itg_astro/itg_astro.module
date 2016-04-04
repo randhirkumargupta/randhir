@@ -173,7 +173,8 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
 /**
  * after build function for altering field collection label.
  */
-function itg_astro_after_build($form, &$form_state) {
+function itg_astro_after_build($form, &$form_state) {  
+  $form['field_story_category']['und']['#title'] = t('Select Program') . '<span class="form-required" title="This field is required."> *</span>';
   if (!isset($form['#node']->nid)) {
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
@@ -192,7 +193,7 @@ function itg_astro_after_build($form, &$form_state) {
       $form['field_astro_numerology_values']['und'][$i]['field_astro_select_number']['und']['#title'] = t('Select Number') . '<span class="form-required" title="This field is required."> *</span>';
       $form['field_astro_numerology_values']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Enter Text') . '<span class="form-required" title="This field is required."> *</span>';
     }
-
+    
     $form['field_astro_zodiac']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Text') . '<span class="form-required" title="This field is required."> *</span>';
     $form['field_astro_zodiac']['und'][$i]['field_zodiac_sign']['und']['#title'] = t('Zodiac Sign') . '<span class="form-required" title="This field is required."> *</span>';
   }
