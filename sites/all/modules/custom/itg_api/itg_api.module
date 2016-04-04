@@ -120,7 +120,6 @@ function itg_api_node_presave($node) {
     // asign value to schedule date field
     $node->uid = $user->uid;
     $node->comment = 0;
-    $node->revision = FALSE;
     $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $pubdate;
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($node->title);
@@ -245,7 +244,6 @@ function itg_api_mail_today_content() {
           $node->uid = $user->uid;
           $node->promote = 0;
           $node->comment = 0;
-          $node->revision = FALSE;
           $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
           $node->body[$node->language][0]['format'] = 'full_html';
           $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);
@@ -363,7 +361,6 @@ function itg_ani_content() {
           $node->uid = $user->uid;
           $node->promote = 0;
           $node->comment = 0;
-          $node->revision = FALSE;
           $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
           $node->body[$node->language][0]['format'] = 'full_html';
           $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);
@@ -470,7 +467,6 @@ function itg_ians_content() {
           $node->uid = $user->uid;
           $node->promote = 0;
           $node->comment = 0;
-          $node->revision = FALSE;
           $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
           $node->body[$node->language][0]['format'] = 'full_html';
           $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);
