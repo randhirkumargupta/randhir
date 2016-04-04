@@ -31,16 +31,16 @@ function _create_issue_using_xmlfile($node, $op) {
 
   //Segregation update and insert case
   if ($op == 'update') {
-    $existing_fids = itg_msi_get_associated_fid_node($node);
+    $existing_fids = itg_msi_get_associated_fid_node($node, NULL);
     foreach ($file as $result) {
       if (!in_array($result['fid'], $existing_fids)) { //Allow only xml file to create story which is new.
-        _create_issue_process($result['fid'], $node_info);
+        _create_issue_process($result['fid'], $node_info, $node);
       }
     }
   } else {
     foreach ($file as $result) {
       sleep(1);
-      _create_issue_process($result['fid'], $node_info);
+      _create_issue_process($result['fid'], $node_info, $node);
     }
   }
 }
@@ -52,12 +52,13 @@ function _create_issue_using_xmlfile($node, $op) {
  * @param Array $node_info
  * @param string $context
  */
-function _create_issue_process($fid, $node_info) {
+function _create_issue_process($fid, $node_info, $parent_node) {
   global $user;
 
   $xml_file = file_load($fid);
   $xml_file_path = str_replace('public://', 'sites/default/files/', $xml_file->uri);
   $xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
+  
 
   if (!empty($xml)) {
 
@@ -85,7 +86,10 @@ function _create_issue_process($fid, $node_info) {
     $kicker = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['kicker']->p))));
 
     //Add check for required fields
-    if (empty($city)) {
+    $existing_xml = itg_msi_get_associated_fid_node($parent_node, $xml_uid);
+    if(count($existing_xml) > 0){
+      drupal_set_message(t('Sorry! <strong>'.$xml_file->filename.'</strong> is a duplicate xml file. Please upload another one.'), 'error');
+    } else if (empty($city)) {
       drupal_set_message(t('No city found in the file ' . $xml_file->filename . '. Please insert a city and try again.'), 'error');
     } else if (empty($city_tid) && !empty($city)) {
       drupal_set_message(t('City <strong>' . $city . '</strong> in the file ' . $xml_file->filename . ' doesn\'t exist in our database. Please choose another city and try again.'), 'error');
@@ -181,4 +185,3 @@ function _create_issue_process($fid, $node_info) {
     
   }
 }
-
