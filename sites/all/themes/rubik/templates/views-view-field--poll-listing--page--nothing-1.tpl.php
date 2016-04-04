@@ -26,10 +26,10 @@
 //pr($row->_field_data['nid']['entity']->field_poll_start_date);
 //pr($row->_field_data['nid']['entity']->field_poll_end_date);
 if(isset($row->_field_data['nid']['entity']->field_poll_start_date)){
-  $start_date = $row->_field_data['nid']['entity']->field_poll_start_date['und'][0]['value'];
+  $start_date = $row->_field_data['nid']['entity']->field_poll_start_date[LANGUAGE_NONE][0]['value'];
  $starttime = strtotime($start_date);
- if(isset($row->_field_data['nid']['entity']->field_poll_end_date)){
-  $end_date = $row->_field_data['nid']['entity']->field_poll_end_date['und'][0]['value'];
+ if(isset($row->_field_data['nid']['entity']->field_poll_end_date[LANGUAGE_NONE])){
+  $end_date = $row->_field_data['nid']['entity']->field_poll_end_date[LANGUAGE_NONE][0]['value'];
   $etime = strtotime($end_date);
   $endtime = mktime(23, 59, 59, date("m", $etime), date("d", $etime), date("Y", $etime));
 }

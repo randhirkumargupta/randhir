@@ -122,38 +122,41 @@ function feature_for_poll_field_default_field_instances() {
   // 'field_collection_item-field_poll_answer-field_poll_manipulate_value'.
   $field_instances['field_collection_item-field_poll_answer-field_poll_manipulate_value'] = array(
     'bundle' => 'field_poll_answer',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
         'weight' => 2,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_poll_manipulate_value',
-    'label' => 'Poll Value',
+    'label' => 'Poll manipulate',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
+      'max' => 99,
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 3,
-      ),
-      'type' => 'text_textfield',
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
       'weight' => 3,
     ),
   );
@@ -722,7 +725,7 @@ function feature_for_poll_field_default_field_instances() {
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'txt mp4',
+      'file_extensions' => 'mp4',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -734,11 +737,11 @@ function feature_for_poll_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 0,
+            'imce' => 'imce',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -746,7 +749,7 @@ function feature_for_poll_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -958,7 +961,7 @@ function feature_for_poll_field_default_field_instances() {
   t('Poll Question Image');
   t('Poll Question Text');
   t('Poll Question Video');
-  t('Poll Value');
+  t('Poll manipulate');
   t('Result format');
   t('Show End Date');
   t('Start Date');

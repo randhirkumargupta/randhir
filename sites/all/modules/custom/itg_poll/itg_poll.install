@@ -46,6 +46,12 @@ function itg_poll_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'display_result' => array(
+        'description' => 'Instant result and After poll complete result',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
       'created' => array(
         'description' => t('Created Poll date'),
         'type' => 'varchar',

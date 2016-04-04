@@ -165,6 +165,22 @@ function itg_category_manager_form($form, &$form_state) {
 }
 
 /**
+ * Get term state drom db
+ */
+function itg_category_manager_term_state($tid) {
+  $itg_query = db_select('itg_category_manager', 'itg')
+      ->fields('itg', array('status'))
+      ->condition('tid', $tid, '=');
+  $itg_result = $itg_query->execute()->fetchField();
+  $flag = FALSE;
+  if(isset($itg_result) && $itg_result == 1) {
+    $flag = TRUE;
+  }  
+  
+  return $flag; 
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
  */
 function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
@@ -209,7 +225,14 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['#attached']['js'] = array(
         drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
       );
-      $form['#action'] = '?destination=category-manager'; //Redirect to term listing page, after term has been added successfully.
+      if ($form['tid']['#value'] != NULL) {
+        $destination_edit = $form_state['term']->field_publish_time['und'][0]['value'];
+        $filter = explode('-', $destination_edit);        
+        $form['#action'] = '?destination=category-manager?date='.$filter[0].'-'.$filter[1]; //Redirect to term listing page, after term has been added successfully.        
+      }
+      else {
+        $form['#action'] = '?destination=category-manager'; //Redirect to term listing page, after term has been added successfully.
+      }
       $form['name']['#title'] = t('Category Title');
       $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
       unset($form['description']);
@@ -245,7 +268,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#type' => 'checkbox',
         '#title' => t('Active'),
         '#weight' => 20,
-        '#default_value' => true,
+        '#default_value' => $form['tid']['#value'] == NULL ? TRUE : itg_category_manager_term_state($form['tid']['#value']),
         '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
         '#suffix' => '</div>',
       );
@@ -551,7 +574,7 @@ function itg_category_manager_seo_team_mail($key, &$message, $params) {
  */
 function itg_category_manager_get_mail_content($entity) {
   global $base_url;
-  $display_name = $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'];
+  $display_name = isset($entity->field_cm_display_title[LANGUAGE_NONE][0]['value']) ? $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'] : 'NA';
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
   $redirection_url = isset($entity->field_cm_redirection_url['und'][0]['value']) ? $entity->field_cm_redirection_url['und'][0]['value'] : 'NA';
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
@@ -607,7 +630,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
  * Update logs for Sef Url and modification time.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
-  if ($term->tid !== NULL) {
+  if ($term->tid !== NULL && $term->path['pathauto'] == 0) {    
     global $user;
     $data = array();
     $data = array(
@@ -632,9 +655,51 @@ function itg_category_manager_taxonomy_term_presave($term) {
  * Insert url aias to itg-category_manager table against specific term id.
  */
 function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
-  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert') {
+  // Handle Insert case
+  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert' && $context['data']['term']->vocabulary_machine_name == 'category_management') {    
+    // find section name
+    $parents = taxonomy_get_parents_all($context['data']['term']->tid);    
+    $section = end($parents);
+    // Set custom alias
+    if ($section->tid == $context['data']['term']->tid) {
+      $alias = str_replace(' ', '-', strtolower($context['data']['term']->name));
+    }
+    else {
+      $new_alias = str_replace(' ', '-', strtolower($section->name)) .'/'. str_replace(' ', '-', strtolower($context['data']['term']->name));
+      $alias = $new_alias;
+    }    
     db_update('itg_sef_url')
         ->fields(array('sef_url' => $alias))
+        ->condition('tid', $context['data']['term']->tid)
+        ->execute();
+  }
+  // Handle update case
+  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'update' && $context['data']['term']->vocabulary_machine_name == 'category_management') {    
+    // find section name
+    $parents = taxonomy_get_parents_all($context['data']['term']->tid);    
+    $section = end($parents);
+    // Set custom alias
+    if ($section->tid == $context['data']['term']->tid) {
+      $alias = $alias = str_replace(' ', '-', strtolower($context['data']['term']->name));
+    }
+    else {
+      $new_alias = str_replace(' ', '-', strtolower($section->name)) .'/'. str_replace(' ', '-', strtolower($context['data']['term']->name));
+      $alias = $new_alias;
+    }    
+    global $user;
+    $data = array();
+    $data = array(
+      'tid' => $context['data']['term']->tid,
+      'uid' => $user->uid,
+      'sef_url' => $alias,
+      'changed' => time(),
+    );
+    drupal_write_record('itg_sef_url', $data);
+    
+    // Update modified date on itg_category_manager table
+    $status = isset($context['data']['term']->term_state) ? $context['data']['term']->term_state : 1;
+    db_update('itg_category_manager')
+        ->fields(array('changed' => time(), 'status' => $status))
         ->condition('tid', $context['data']['term']->tid)
         ->execute();
   }

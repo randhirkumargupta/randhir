@@ -46,14 +46,18 @@
                 <h2>Basic Details</h2>
                     <div class="content-view">
                         <?php print render($content['field_astro_frequency']); ?>
-                        <?php print render($content['field_astro_date_range']); ?>                        
+                        <?php print render($content['field_astro_date_range']); ?>
+                        <?php print render($content['field_story_expiry_date']); ?>
+                        <?php print render($content['field_astro_type']); ?>
+                        <?php print render($content['field_last_name']); ?>
                     </div>
                     <h2>Channel</h2>
                     <div class="content-view">
                         <?php print render($content['field_story_category']); ?>
                     </div>
               </div>
-              <?php if($node->field_astro_zodiac['und'][0]['field_zodiac_sign']['und'][0]['tid'] != 0): ?>              
+              
+              <?php if($node->field_astro_zodiac['und'][0]['field_buzz_description']['und'][0]['value'] != ''): ?>              
               <div class="content-node-view">                
                 <h2>Zodiac Sign</h2>
                 <?php if (isset($node->op) && $node->op == 'Preview'): ?>  
@@ -74,7 +78,7 @@
                         
                         // Print name field
                         $output .= '<div class="inner-label">Text: </div>';
-                        $output .= '<div class="inner-item">'. $node->field_astro_zodiac['und'][0]['field_buzz_description']['und'][0]['value'].'</div>';
+                        $output .= '<div class="inner-item">'. $node->field_astro_zodiac['und'][$i]['field_buzz_description']['und'][0]['value'].'</div>';
                         $output .= '<div class="inner-label">Thumbnail Icon: </div>';                        
                         $output .= '<div class="inner-item"><img src="' . image_style_url("thumbnail", $zodiac_sign[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_sign[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_sign[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';                        
                         print $output;

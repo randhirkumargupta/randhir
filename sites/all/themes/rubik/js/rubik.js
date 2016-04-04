@@ -138,7 +138,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     var offSet = 80;
     var dti = $(this).attr('data-target-id');
     var targetOffset = $('#' + dti).offset().top - offSet;
-    if(dti == "BasicDetails"){
+    if(dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element"){
       $(this).addClass('active').siblings('.target-link').removeClass('active');
       $("body,html").animate({ scrollTop: 0 }, 1000);
     }
@@ -148,10 +148,12 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
     
     });
+  //Incorrect navigation when user click on home page from view blog page
+  $("a[href='/itgcms/blog']").attr('href', '/itgcms/my-draft');
     
   // Jquery code to close preview popup
   $(document).on('click', '.close-preview', function(){
-    $(this).parents('.preview-wrapper').hide();
+    $(this).parents('.preview-wrapper').remove();
   });
   
   // jQuery code to change text URL alias to Sef URL
@@ -223,8 +225,8 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     $('select').blur();
   });
   
-  $('.node-type-survey div.clearfix .field-add-more-submit, .page-node-add-survey div.clearfix .field-add-more-submit').val('Add another question');
-  $('.node-type-survey .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit, .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit').val('Add another answer');
+  $('.field-name-field-survey-add-questions > .form-item > div.clearfix .field-add-more-submit').val('Add another question');
+  $('.field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .field-add-more-submit').val('+');
   
   $('.field-name-field-gallery-image').find('.form-text').each(function(){
     var plaholderText = $(this).prev().text();
@@ -373,6 +375,22 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
   $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
+  
+  $('.field-name-field-gallery-image .field-widget-image-image .filefield-source-imce').each(function(){
+    if(!($(this).next().hasClass('gallery-browse'))){
+      $(this).after('<a href="javascript:;" class="gallery-browse"><i class="fa fa-picture-o"></i><span>Browse</span></a>');
+    }
+  });
+  $('.field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function(){
+    if($(this).children().hasClass('image-preview')){
+      $(this).addClass('has-preview');
+    }
+    else{
+      $(this).removeClass('has-preview');
+    }
+  });
+  
+  $('.page-user').find('.password-suggestions').removeClass('description');
 
 };
 })(jQuery);

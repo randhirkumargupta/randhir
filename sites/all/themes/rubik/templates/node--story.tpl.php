@@ -88,7 +88,7 @@
                   <h2><?php print t('Configuration'); ?></h2>
                   <div class="content-details"><?php print render($content['field_story_configurations']); ?>
                   <?php print render($content['field_story_rating']); ?>
-                  <?php print render($content['field_story_client_title']); ?>
+                  <?php //print render($content['field_story_client_title']); ?>
                   <?php print render($content['field_story_media_files_syndicat']); ?>
                   </div>
                 </div>
@@ -127,7 +127,10 @@
               if(!empty($twitter)):?>
                 <div class="Twitter content-box">
                   <h2><?php print t('Twitter'); ?></h2>
-                  <div class="content-details"><?php print render($content['field_story_tweet']); ?></div>
+                  <div class="content-details">
+                    <?php print render($content['field_story_tweet']); ?>
+                    <?php print render($content['field_story_tweet_image']); ?>
+                  </div>
                 </div>
             <?php endif;?>
             <?php 

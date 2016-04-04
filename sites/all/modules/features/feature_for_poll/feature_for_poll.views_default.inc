@@ -238,7 +238,9 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    5 => '5',
     6 => '6',
+    20 => '20',
     10 => '10',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
@@ -246,10 +248,11 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -527,6 +530,12 @@ function feature_for_poll_views_default_views() {
     'link' => 1,
   );
   $handler->display->display_options['fields']['field_associate_poll']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -663,7 +672,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['field_poll_question_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_poll_question_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_poll_question_image']['settings'] = array(
-    'image_style' => '',
+    'image_style' => 'medium',
     'image_link' => '',
   );
   /* Field: Content: Poll Question Video */

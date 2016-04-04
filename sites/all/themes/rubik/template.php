@@ -119,7 +119,7 @@ function rubik_theme() {
 /**
  * Preprocessor for theme('page').
  */
-function rubik_preprocess_page(&$vars) {  
+function rubik_preprocess_page(&$vars) {
   // Show a warning if base theme is not present.
   if (!function_exists('tao_theme') && user_access('administer site configuration')) {
     drupal_set_message(t('The Rubik theme requires the !tao base theme in order to work properly.', array('!tao' => l('Tao', 'http://drupal.org/project/tao'))), 'warning');
@@ -151,6 +151,11 @@ function rubik_preprocess_page(&$vars) {
   //  // Change create Tag page title.
   if (arg(2) == 'taxonomy' && arg(3) == 'tags' && arg(4) == 'add') {
     drupal_set_title('Create Tag');
+  }
+  
+    if (arg(0) == 'survey-result' && is_numeric(arg(1))) {
+      $node = node_load(arg(1));
+    drupal_set_title('Survey Result: '.  ucwords($node->title));
   }
   
 }
@@ -390,6 +395,37 @@ function rubik_breadcrumb($vars) {
       else {
         $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $title : decode_entities(check_plain($title));
       }
+    }
+    
+    //Story Listing
+    if(arg(0) == 'issue-listing'){
+      $list_story_parent_link = 'manage-'.arg(1).'s';;
+      $list_story_link = 'issue-listing'.'/'.arg(1).'/'.arg(2);
+        $breadcrumb[] = l('Home','cms-user-dashboard').l('List '.  ucfirst(arg(1)).'s', $list_story_parent_link).l('List Stories',$list_story_link);
+        return '<div class="breadcrumb-link">'. implode(' » ', $breadcrumb) .'</div>';
+    }
+    
+    // get first argument from url 
+     $content_url = arg(0);
+     // make title for breadcrumb
+     $content_title = ucfirst(str_replace('-',' ',$content_url));
+     
+    //story tab breadcrumb
+    if(arg(0) == ('in-queue-story' || 'published-story' || 'expired-story' || 'unpublished-story' || 'archive-story')){
+      $breadcrumb[] = l('Home','cms-user-dashboard').l('Content Management ', $content_url).l($content_title,$content_url);
+        return '<div class="breadcrumb-link">'. implode('  ', $breadcrumb) .'</div>';
+    }
+    
+    //photogallery tab breadcrumb
+    if(arg(0) == ('in-queue-photogallery' || 'published-photogallery' || 'unpublished-photogallery' || 'archive-photogallery')){
+      $breadcrumb[] = l('Home','cms-user-dashboard').l('Content Management ', $content_url).l($content_title,$content_url);
+        return '<div class="breadcrumb-link">'. implode('  ', $breadcrumb) .'</div>';
+    }
+    
+    //Blog tab breadcrumb
+    if(arg(0) == ('published-blogs' || 'unpublished-blogs' || 'in-queue-blogs' || 'archive-blogs')){
+      $breadcrumb[] = l('Home','cms-user-dashboard').l('Content Management ', $content_url).l($content_title,$content_url);
+        return '<div class="breadcrumb-link">'. implode('  ', $breadcrumb) .'</div>';
     }
   }
 

@@ -1,6 +1,32 @@
 <?php
 
 /**
+ * Implements hook_init()
+ */
+function itg_astro_init() {
+  $sign_name = itg_astro_zodiac_thumbnail();
+  $settings = array();
+  foreach ($sign_name as $value) {
+    $data[] = array('name' => $value->name, 'tid' => $value->tid);
+  }
+  $settings = array(
+    $data[0]['name'] => $data[0]['tid'],
+    $data[1]['name'] => $data[1]['tid'],
+    $data[2]['name'] => $data[2]['tid'],
+    $data[3]['name'] => $data[3]['tid'],
+    $data[4]['name'] => $data[4]['tid'],
+    $data[5]['name'] => $data[5]['tid'],
+    $data[6]['name'] => $data[6]['tid'],
+    $data[7]['name'] => $data[7]['tid'],
+    $data[8]['name'] => $data[8]['tid'],
+    $data[9]['name'] => $data[9]['tid'],
+    $data[10]['name'] => $data[10]['tid'],
+    $data[11]['name'] => $data[11]['tid'],
+  );
+  drupal_add_js(array('sign' => $settings), 'setting');
+}
+
+/**
  * Get file name from fid
  * @param type $audioFid
  */
@@ -21,22 +47,22 @@ function itg_astro_file_name($audio_fid) {
  * Load zodiac thumbnail for astro content type
  * @return type
  */
-function itg_astro_zodiac_thumbnail() { 
+function itg_astro_zodiac_thumbnail() {
   try {
     $cache = cache_get('itg_astro_zodiac', 'cache');
     if ($cache && !empty($cache->data)) {
-      $itg_term = $cache->data;      
+      $itg_term = $cache->data;
     }
     else {
       $itg_vid = taxonomy_vocabulary_machine_name_load('zodiac_sign');
-      $itg_term = taxonomy_get_tree($itg_vid->vid, 0, NULL, TRUE);      
-      cache_set('itg_astro_zodiac', $itg_term, 'cache', time() + 60 * 60);            
+      $itg_term = taxonomy_get_tree($itg_vid->vid, 0, NULL, TRUE);
+      cache_set('itg_astro_zodiac', $itg_term, 'cache', time() + 60 * 60);
     }
   }
   catch (Exception $ex) {
     return $ex->getMessage();
-  }  
-  
+  }
+
   return $itg_term;
 }
 
@@ -49,7 +75,7 @@ function itg_astro_get_term_name($tid) {
   try {
     $cache = cache_get('itg_number', 'cache');
     if ($cache && !empty($cache->data)) {
-      $data = $cache->data;            
+      $data = $cache->data;
     }
     else {
       $itg_vid = taxonomy_vocabulary_machine_name_load('numerology');
@@ -58,13 +84,13 @@ function itg_astro_get_term_name($tid) {
       foreach ($itg_term as $all_term) {
         $data[$all_term->tid] = $all_term->name;
       }
-      cache_set('itg_number', $data, 'cache', time() + 60 * 60);            
+      cache_set('itg_number', $data, 'cache', time() + 60 * 60);
     }
   }
   catch (Exception $ex) {
     return $ex->getMessage();
-  }  
-  
+  }
+
   return $data[$tid];
 }
 
@@ -74,7 +100,7 @@ function itg_astro_get_term_name($tid) {
  * @param type $form_state
  * @param type $form_id
  */
-function itg_astro_form_alter(&$form, &$form_state, $form_id) {
+function itg_astro_form_alter(&$form, &$form_state, $form_id) {  
   if ($form_id == 'astro_node_form') {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js',
@@ -84,45 +110,58 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     if ($form['nid']['#value'] == NULL) {
       $form['title']['#default_value'] = date('M j, Y');
     }
-    
+    // Create navigation label
+    $form['itg_collective'] = array(
+      '#type' => 'markup',
+      '#markup' => '<h2 class="story-title story-title-coll">'. t('Collective Content').'</h2>',      
+    );
+    $form['itg_zodiac'] = array(
+      '#type' => 'markup',
+      '#markup' => '<h2 class="story-title story-title-zod">'. t('Zodiac Sign').'</h2>',      
+    );
+    $form['itg_numerology'] = array(
+      '#type' => 'markup',
+      '#markup' => '<h2 class="story-title story-title-num">'. t('Numerology').'</h2>',      
+    ); 
+
     // Set field visibility for zodiac sign field
     $form['field_astro_zodiac']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '219'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '315'),
       ),
     );
     // Set field visibility for collective text field    
     $form['field_buzz_description']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '217'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective video thumbnail field
     $form['field_astro_video_thumbnail']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '217'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective video field
     $form['field_astro_video']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '217'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective audio field
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '217'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective audio field
     $form['field_astro_numerology_values']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '218'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '313'),
       ),
-    );
-    
-    
+    );  
+
+
     $form['#action'] = '?destination=manage-astro';
     $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';
     $form['#after_build'][] = 'itg_astro_after_build';
@@ -135,23 +174,34 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
  * after build function for altering field collection label.
  */
 function itg_astro_after_build($form, &$form_state) {
+  if (!isset($form['#node']->nid)) {
+    // hide remove button of first field on add form 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-astro-numerology-values-und-0-remove-button").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
   // Change Zodiac field item label name and add * on mandotory fields  
-  $zodiac_name = itg_astro_zodiac_thumbnail();    
+  $zodiac_name = itg_astro_zodiac_thumbnail();
   for ($i = 0; $i <= 11; $i++) {
     $form['field_astro_zodiac']['und'][$i]['itg'] = array(
       '#type' => 'markup',
-      '#markup' => '<div class="itg-astro-image"><img src="' . image_style_url("thumbnail", $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>',       
+      '#markup' => '<div class="itg-astro-image"><img src="' . image_style_url("thumbnail", $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>',
     );
     $form['field_astro_zodiac']['und'][$i]['#title'] = t($zodiac_name[$i]->name);
-    $form['field_astro_numerology_values']['und'][$i]['field_astro_select_number']['und']['#title'] = t('Select Number') . '<span class="form-required" title="This field is required."> *</span>';
-    $form['field_astro_numerology_values']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Enter Text') . '<span class="form-required" title="This field is required."> *</span>';
-    
+    if ($i == 0) {      
+      $form['field_astro_numerology_values']['und'][$i]['field_astro_select_number']['und']['#title'] = t('Select Number') . '<span class="form-required" title="This field is required."> *</span>';
+      $form['field_astro_numerology_values']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Enter Text') . '<span class="form-required" title="This field is required."> *</span>';
+    }
+
     $form['field_astro_zodiac']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Text') . '<span class="form-required" title="This field is required."> *</span>';
     $form['field_astro_zodiac']['und'][$i]['field_zodiac_sign']['und']['#title'] = t('Zodiac Sign') . '<span class="form-required" title="This field is required."> *</span>';
-  }  
+  }
   $form['field_buzz_description']['#prefix'] = '<div class="collective-wrapper">';
   $form['field_common_audio_file']['#suffix'] = '</div>';
+  $form['field_astro_type']['und']['#title'] = t('Astro Type') . '<span class="form-required" title="This field is required."> *</span>';
+  $form['field_buzz_description']['und'][0]['value']['#title'] = t('Collective Text for all zodiac signs ').'<span class="form-required" title="This field is required."> *</span>';
   
+
   // Add cancel button to create/edit astro page
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'manage-astro', array('attributes' => array('class' => 'button'))),
@@ -269,15 +319,17 @@ function itg_astro_theme($existing, $type, $theme, $path) {
  * @param type $form_state
  * @param type $context
  */
-function itg_astro_field_widget_form_alter(&$element, &$form_state, $context) {  
-  if (isset($element['#field_name']) && $element['#field_name'] == 'field_zodiac_sign') {    
-    static $count = 0;    
-    $itg_thumb = itg_astro_zodiac_thumbnail();
-    $element['#title'] = t($itg_thumb[$count]->name);
-    $itg_img_uri = $itg_thumb[$count]->field_astro_thumb_icon['und'][0]['uri'];
-    $element['#prefix'] = '<div style="display:none;">';
-    $element['#suffix'] = '</div>';
-    $element['#default_value'] = $itg_thumb[$count]->tid;
+function itg_astro_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element['#field_name']) && $element['#field_name'] == 'field_zodiac_sign') {
+    static $count = 0;
+    if ($count <= 11) {
+      $itg_thumb = itg_astro_zodiac_thumbnail();
+      $element['#title'] = t($itg_thumb[$count]->name);
+      $itg_img_uri = $itg_thumb[$count]->field_astro_thumb_icon['und'][0]['uri'];
+      $element['#prefix'] = '<div style="display:none;">';
+      $element['#suffix'] = '</div>';
+      $element['#default_value'] = $itg_thumb[$count]->tid;
+    }    
     ++$count;
   }
 }
@@ -289,4 +341,22 @@ function itg_astro_field_widget_form_alter(&$element, &$form_state, $context) {
 function itg_astro_menu_alter(&$item) {
   // Hide the "Create new account" tab
   $item['user/login']['type'] = MENU_CALLBACK;
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Array $view
+ */
+function itg_astro_views_pre_render(&$view) {  
+  //Add "Create Breaking news" on listing page of Breaking news
+  if ($view->name == "manage_astroo") {
+    $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
+    $header_content_astro .= l(t('File Astro'), 'node/add/astro', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
+    $view->attachment_before = $header_content_astro;
+  }
+  if ($view->name == 'category_manager_dev') {    
+    $header_content_astro = '<span class="count">Count(' . count($view->result) . ')&nbsp;</span>';  
+    $header_content_astro .= l(t('Create Category'), 'admin/structure/taxonomy/category_management/add');
+    $view->attachment_before = $header_content_astro;
+  }
 }

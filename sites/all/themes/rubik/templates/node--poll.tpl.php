@@ -10,7 +10,7 @@
       <?php endif; ?>
         <?php
         //p($node);
-        echo $node->moderation_history_block;
+       // echo $node->moderation_history_block;
         ?>
       <!-- add && !$teaser for hide comment link -->
       <?php if (!empty($links) && !$teaser): ?>
@@ -110,12 +110,14 @@
                   </div>
                 </div>
         </div>
-              <?php } 
-              }else{
-                $field_poll_answer = render($content['field_poll_answer']);
-                if (!empty($field_poll_answer)): print render($content['field_poll_answer']);
-                endif;
-              }?> 
+              <?php } }else{ ?>
+                <div class="content-node-view">
+                  <?php
+                    $field_poll_answer = render($content['field_poll_answer']);
+                      if (!empty($field_poll_answer)): print render($content['field_poll_answer']);
+                      endif;
+                    } ?> 
+                </div>
               <?php endif; ?>
 
           

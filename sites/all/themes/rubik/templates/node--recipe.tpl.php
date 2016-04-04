@@ -114,7 +114,7 @@
                 <?php
                 $ingredients = render($content['field_recipe_ingredients']);
                 if (!empty($ingredients)):
-                  print render($content['field_recipe_ingredients']);
+                  print str_replace("<br />" , ",", nl2br(render($content['field_recipe_ingredients'])));
                   ?> 
                 <?php endif; ?>
                 <?php
@@ -220,16 +220,20 @@
               <div class="content-details">      
                 <?php
                 $syndication = render($content['field_recipe_syndication']);
-                $client_title = render($content['field_story_client_title']);
                 ?>
 
-                <?php if (!empty($syndication) || !empty($client_title)): ?>
+                <?php if (!empty($syndication)): ?>
                   <div class="description-details content-box">
-
-                    <?php if (!empty($client_title)): ?>
-                      <div class="breaking-content-details"><?php print render($content['field_story_client_title']); ?></div> 
+                    <?php if (!empty($syndication)): ?>
+                    <div class="breaking-content-details">
+                      <div class="field">
+                        <div class="field-label">Syndication: </div>
+                        <div class="field-items"><?php print ('yes'); ?></div>
+                      </div>
+                    </div>
+                      
                     <?php endif; ?>
-                  </div>
+                    </div>
                 <?php endif; ?>
               </div>
 
