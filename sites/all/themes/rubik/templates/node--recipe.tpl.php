@@ -221,8 +221,7 @@
                 <?php
                 $syndication = render($content['field_recipe_syndication']);
                 ?>
-
-                <?php if (!empty($syndication)): ?>
+               
                   <div class="description-details content-box">
                     <?php if (!empty($syndication)): ?>
                     <div class="breaking-content-details">
@@ -234,7 +233,6 @@
                       
                     <?php endif; ?>
                     </div>
-                <?php endif; ?>
               </div>
 
             </div>
