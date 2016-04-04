@@ -234,10 +234,11 @@ function itg_common_views_pre_render(&$view) {
  * @param type $form_state
  * @param type $form_id  
  */
-function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {    
+function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+ 
   if (isset($form['title'])) {
    $form['title']['#maxlength']= 255;
-   // pr($form['#id']);
+   
    // remove space from title search field.
    drupal_add_js('jQuery(document).ready(function() {                  
                  jQuery(".form-submit").click(function() {            
@@ -263,6 +264,17 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
    }
    
   }
+  
+  if ($form['#id'] == 'views-exposed-form-manage-users-page'){
+     drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".form-submit").click(function() {
+                 jQuery("#edit-mail").val(jQuery.trim(jQuery("#edit-mail").val()));
+                 jQuery("#edit-field-first-name-value").val(jQuery.trim(jQuery("#edit-field-first-name-value").val()));
+                 jQuery("#edit-field-mobile-number-value").val(jQuery.trim(jQuery("#edit-field-mobile-number-value").val()));
+               });              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
 }
 
 /**

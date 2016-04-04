@@ -48,6 +48,7 @@ function itg_api_menu() {
 * Implements hook_feeds_presave().
 */
 function itg_api_node_presave($node) {
+  global $user;
   // get bad words list in array
   $tax = taxonomy_get_tree(13, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
@@ -117,6 +118,9 @@ function itg_api_node_presave($node) {
     $by_line = itg_api_get_nid($author, 'reporter');
 
     // asign value to schedule date field
+    $node->uid = $user->uid;
+    $node->comment = 0;
+    $node->revision = FALSE;
     $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $pubdate;
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($node->title);
@@ -126,7 +130,7 @@ function itg_api_node_presave($node) {
     //$node->field_story_comment_question[LANGUAGE_NONE][0]['value'] = 'NA';
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'PTI';
     $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $pti_category;
-    // convert string to arary
+    // convert string to array
     $exp_description = explode(" ", $description);
 
     if ($title_length > 35) {
@@ -158,7 +162,6 @@ function itg_api_node_presave($node) {
 function workbench_moderation_state_Review() {
   return 'needs_review';
 }
-
 
 /**
  * Implement itg_api_mail_today_content
@@ -218,7 +221,8 @@ function itg_api_mail_today_content() {
           $pre_final_kicker = preg_split('/(?<!\d)\.(?!\d)/', $kicker1);
           $final_kicker = $kicker.' '.$pre_final_kicker[0];
           $final_kicker = str_replace(array('\'', '"'), '', $final_kicker);
-          $final_kicker = substr($final_kicker, 0, 252);
+          $final_kicker_length = strlen($final_kicker);
+          $final_kicker = substr($final_kicker, 0, 250);
           $final_kicker = $final_kicker.'..';
           
           
@@ -351,8 +355,8 @@ function itg_ani_content() {
 
           // get byline id based on name 
           $by_line = itg_api_get_nid('ANI', 'reporter');
-
-          //Set values to node l54,s130
+          
+         //Set values to node l54,s130
           $node = new stdClass();
           $node->title = trim($headline);
           $node->type = "story";
