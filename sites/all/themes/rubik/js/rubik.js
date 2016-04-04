@@ -390,7 +390,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   
-  $('.page-user').find('.password-suggestions').removeClass('description');
+  $('.page-user, .page-admin-people-create').find('.password-suggestions').removeClass('description');
 
 };
 })(jQuery);
