@@ -601,12 +601,21 @@ function itg_msi_show_mapped_stories($row){
  * Get fids of files associated with a node
  * @return Array
  */
-function itg_msi_get_associated_fid_node($node){
+function itg_msi_get_associated_fid_node($node, $xml_uid){
   
-  $result = db_select('itg_msi_node_xml', 'fn')
-          ->fields('fn', array('fid'))
-          ->condition('nid', $node->nid, '=')
-          ->execute();
+  if ($xml_uid) {
+    $result = db_select('itg_msi_node_xml', 'fn')
+            ->fields('fn', array('fid'))
+            ->condition('nid', $node->nid, '=')
+            ->condition('xml_uid', $xml_uid, '=')
+            ->execute();
+  } else {
+    $result = db_select('itg_msi_node_xml', 'fn')
+            ->fields('fn', array('fid'))
+            ->condition('nid', $node->nid, '=')
+            ->execute();
+  }
+
   while ($record = $result->fetchAssoc()) {
     $fid[] = $record['fid'];
   }
