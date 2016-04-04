@@ -1488,5 +1488,5 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-mega_review_critic-form .group-review-browse-media legend .form-required, 
 .node-mega_review_critic-form .vertical-tabs-list{display: none;}
 .node-mega_review_critic-form #field-mega-review-review-values tbody{max-width: 400px;}
-.celebrity-about .field{float: left; width: 60%;}
+.celebrity-about .field{float: left; width: 60% !important;}
 .field-name-field-story-schedule-date-time .date-padding .form-item:first-child .date-clear, .page-manage-issues #edit-title, .date-icon{background: url('../images/calendar.png') center right 5px no-repeat !important;}
