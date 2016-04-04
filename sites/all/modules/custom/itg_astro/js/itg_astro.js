@@ -397,14 +397,7 @@
         else {
           return true;
         }
-      }
-
-      // Change title it someone changed date range manually
-      $('select[name="field_story_category[und][]"]').on('change', function () {
-        var startDate = $('input[name="field_astro_date_range[und][0][value][date]"]').val();
-        var endDate = $('input[name="field_astro_date_range[und][0][value2][date]"]').val();
-        $('#edit-title').val(startDate + ' - ' + endDate);
-      });
+      }      
 
       // Common function to reset all values
       function clear_form_elements(class_name) {
