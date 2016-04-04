@@ -391,6 +391,5 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   });
   
   $('.page-user, .page-admin-people-create').find('.password-suggestions').removeClass('description');
-  $('.page-manage-issues #edit-title').datepicker();
 };
 })(jQuery);
