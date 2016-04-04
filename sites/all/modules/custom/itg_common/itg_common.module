@@ -264,6 +264,13 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
    }
    
   }
+  if ($form['#id'] == 'views-exposed-form-category-manager-dev-page' || $form['#id'] =='views-exposed-form-tags-management-page'){
+     drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".form-submit").click(function() {
+                 jQuery("#edit-name").val(jQuery.trim(jQuery("#edit-name").val()));
+               });              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
   
   if ($form['#id'] == 'views-exposed-form-manage-users-page'){
      drupal_add_js('jQuery(document).ready(function() {                  
