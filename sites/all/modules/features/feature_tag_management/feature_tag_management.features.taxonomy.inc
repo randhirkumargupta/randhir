@@ -13,7 +13,7 @@ function feature_tag_management_taxonomy_default_vocabularies() {
       'name' => 'Tags',
       'machine_name' => 'tags',
       'description' => 'Use tags to group articles on similar topics into categories.',
-      'hierarchy' => 1,
+      'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
       'rdf_mapping' => array(
