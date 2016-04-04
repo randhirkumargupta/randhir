@@ -34,9 +34,9 @@ function itg_api_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['itg-bhasha-content'] = array(
+  $items['itg-ap-content'] = array(
     'title' => 'api callback menu',
-    'page callback' => 'itg_api_bhasha_content',
+    'page callback' => 'itg_ap_content',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -113,6 +113,8 @@ function itg_api_node_presave($node) {
     $final_kicker = str_replace(array('\'', '"'), '', $final_kicker);
     $final_kicker = substr($final_kicker, 0, 252);
     $final_kicker = $final_kicker.'..';
+    $final_kicker = trim(preg_replace('/[\s\t\n\r\s]+/', ' ', $final_kicker));
+    
 
     // get byline id based on name 
     $by_line = itg_api_get_nid($author, 'reporter');
@@ -123,7 +125,7 @@ function itg_api_node_presave($node) {
     $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $pubdate;
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($node->title);
-    $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker;
+    $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $final_kicker;
     $node->field_story_reporter[LANGUAGE_NONE][0]['value'] = $byline;
     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($node->title);
     //$node->field_story_comment_question[LANGUAGE_NONE][0]['value'] = 'NA';
