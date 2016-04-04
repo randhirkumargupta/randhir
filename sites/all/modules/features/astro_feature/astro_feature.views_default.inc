@@ -342,9 +342,6 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['filters']['field_astro_frequency_value']['id'] = 'field_astro_frequency_value';
   $handler->display->display_options['filters']['field_astro_frequency_value']['table'] = 'field_data_field_astro_frequency';
   $handler->display->display_options['filters']['field_astro_frequency_value']['field'] = 'field_astro_frequency_value';
-  $handler->display->display_options['filters']['field_astro_frequency_value']['value'] = array(
-    'daily' => 'daily',
-  );
   $handler->display->display_options['filters']['field_astro_frequency_value']['group'] = 1;
   $handler->display->display_options['filters']['field_astro_frequency_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator_id'] = 'field_astro_frequency_value_op';
@@ -362,7 +359,6 @@ function astro_feature_views_default_views() {
     20 => 0,
     6 => 0,
     21 => 0,
-    19 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
@@ -370,6 +366,7 @@ function astro_feature_views_default_views() {
     17 => 0,
     14 => 0,
     12 => 0,
+    19 => 0,
     15 => 0,
     18 => 0,
   );
@@ -377,6 +374,7 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['filters']['field_astro_type_tid']['id'] = 'field_astro_type_tid';
   $handler->display->display_options['filters']['field_astro_type_tid']['table'] = 'field_data_field_astro_type';
   $handler->display->display_options['filters']['field_astro_type_tid']['field'] = 'field_astro_type_tid';
+  $handler->display->display_options['filters']['field_astro_type_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_astro_type_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_astro_type_tid']['expose']['operator_id'] = 'field_astro_type_tid_op';
   $handler->display->display_options['filters']['field_astro_type_tid']['expose']['label'] = 'Astro Type';
