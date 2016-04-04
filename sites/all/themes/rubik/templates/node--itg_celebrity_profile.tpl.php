@@ -50,8 +50,10 @@
         <?php print render($content['field_celebrity_facebook_page']); ?>
         <?php print render($content['field_celebrity_pro_occupation']); ?>
         <?php //print render($content['field_user_picture']); ?>
+        <div class="field celebrity-about">
         <div class="field-label"><?php print t('About:'); ?></div>
         <?php print render($content['body']); ?>        
+        </div>
       <?php } else { ?>
       <?php print render($content) ?>
       <?php } ?>

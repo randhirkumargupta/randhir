@@ -1,21 +1,21 @@
 <?php
+
 /**
  * Implementation of hook_menu().
  */
-
 function itg_term_menu() {
-    $items['texonomy/confirm/ajax/%'] = array(
-        'title' => 'Texonomy Term',
-        'page callback' => 'drupal_get_form',
-        'page arguments' => array(
-            'texonomy_term_ajax_confirm'
-        ) ,
-        'access arguments' => array(
-            'administer itg_term settings'
-        ) ,
-        'type' => MENU_NORMAL_ITEM
-    );
-    return $items;
+  $items['texonomy/confirm/ajax/%'] = array(
+    'title' => 'Texonomy Term',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array(
+      'texonomy_term_ajax_confirm'
+    ),
+    'access arguments' => array(
+      'administer itg_term settings'
+    ),
+    'type' => MENU_NORMAL_ITEM
+  );
+  return $items;
 }
 
 /**
@@ -24,22 +24,21 @@ function itg_term_menu() {
  * @param array reference $form_state
  * @return array $confirm_form
  */
-
 function texonomy_term_ajax_confirm($form, &$form_state) {
-    $tid = arg(3);
-    $term = taxonomy_term_load($tid);
-    $form['tid'] = array(
-        '#type' => 'value',
-        '#value' => $tid
-    );
-    $form['name'] = array(
-        '#type' => 'value',
-        '#value' => $term->name
-    );
-    $confirm_form = confirm_form($form, t('delete', array(
-        '%title' => $term->name
-    )) , "tags-management", t("Are you sure you want to delete this term $term->name?") , t('Delete') , t('Cancel'));
-    return $confirm_form;
+  $tid = arg(3);
+  $term = taxonomy_term_load($tid);
+  $form['tid'] = array(
+    '#type' => 'value',
+    '#value' => $tid
+  );
+  $form['name'] = array(
+    '#type' => 'value',
+    '#value' => $term->name
+  );
+  $confirm_form = confirm_form($form, t('delete', array(
+    '%title' => $term->name
+      )), "tags-management", t("Are you sure you want to delete this term $term->name?"), t('Delete'), t('Cancel'));
+  return $confirm_form;
 }
 
 /**
@@ -47,37 +46,35 @@ function texonomy_term_ajax_confirm($form, &$form_state) {
  * @param array $form
  * @param array reference $form_state
  */
-
 function texonomy_term_ajax_confirm_submit($form, &$form_state) {
-    $form_values = $form_state['values'];
-    if (isset($form_state['values']['confirm'])) {
-        $tid = $form_state['values']['tid'];
-        $term = taxonomy_term_load($tid);
-        taxonomy_term_delete($tid);
+  $form_values = $form_state['values'];
+  if (isset($form_state['values']['confirm'])) {
+    $tid = $form_state['values']['tid'];
+    $term = taxonomy_term_load($tid);
+    taxonomy_term_delete($tid);
 
-        db_delete('itg_category_manager')
-            ->condition('tid', $tid)
-            ->execute();
+    db_delete('itg_category_manager')
+        ->condition('tid', $tid)
+        ->execute();
 
-        drupal_set_message(t('Delete %title.', array(
-            '%title' => $term->name
-        )));
-    }
+    drupal_set_message(t('Delete %title.', array(
+      '%title' => $term->name
+    )));
+  }
 
-    drupal_goto('tags-management'); // redirect path
+  drupal_goto('tags-management'); // redirect path
 }
 
 /**
  * Implement hook_permissions() to set access permission on ITG Autosave settings form
  */
-
 function itg_term_permission() {
-    return array(
-        'administer itg_term settings' => array(
-            'title' => t('Administer ITG Term Settings') ,
-            'description' => t('Perform administration tasks for ITG Term.') ,
-        ) ,
-    );
+  return array(
+    'administer itg_term settings' => array(
+      'title' => t('Administer ITG Term Settings'),
+      'description' => t('Perform administration tasks for ITG Term.'),
+    ),
+  );
 }
 
 /**
@@ -87,131 +84,129 @@ function itg_term_permission() {
  * @param type $form_id
  * @return array $form
  */
-
 function itg_term_form_alter(&$form, &$form_state, $form_id) {
-    // Load the currently logged in user.
-    global $user;
-    switch ($form_id) {
+  // Load the currently logged in user.
+  global $user;
+  switch ($form_id) {
     case 'taxonomy_form_term':
-        if (isset($_REQUEST['destination']) && $_REQUEST['destination'] == 'tags-management') {
-            unset($form['actions']['delete']);
-        }
+      if (isset($_REQUEST['destination']) && $_REQUEST['destination'] == 'tags-management') {
+        unset($form['actions']['delete']);
+      }
     case 'taxonomy_csv_export_form':
 
-        // Check if the user has not the 'administrator' role.
-        if (!in_array('administrator', $user->roles)) {
-            $form['tab']['content']['#title'] = FALSE;
-            $form['tab']['csv_format']['#access'] = FALSE;
-            $form['tab']['advanced_options']['#access'] = FALSE;
-            $form['tab']['content']['#title'] = t('Vocabularies to export for tags');
-            $form['tab']['content']['export_format']['#access'] = FALSE;
-            $form['tab']['content']['export_vocabulary_id']['#access'] = FALSE;
-            $form['export_default_values']['#access'] = FALSE;
+      // Check if the user has not the 'administrator' role.
+      if (!in_array('administrator', $user->roles)) {
+        $form['tab']['content']['#title'] = FALSE;
+        $form['tab']['csv_format']['#access'] = FALSE;
+        $form['tab']['advanced_options']['#access'] = FALSE;
+        $form['tab']['content']['#title'] = t('Vocabularies to export for tags');
+        $form['tab']['content']['export_format']['#access'] = FALSE;
+        $form['tab']['content']['export_vocabulary_id']['#access'] = FALSE;
+        $form['export_default_values']['#access'] = FALSE;
 
-            // set redirect destination
-            $destination = 'tags-management';
+        // set redirect destination
+        $destination = 'tags-management';
 
-            $form['actions']['cancel'] = array(
-                '#markup' => l(t('Cancel') , $destination, array(
-                    'attributes' => array(
-                        'class' => 'button'
-                    )
-                )) ,
-                '#weight' => 21,
-                '#value' => t('Cancel')
-            );
-        }
+        $form['actions']['cancel'] = array(
+          '#markup' => l(t('Cancel'), $destination, array(
+            'attributes' => array(
+              'class' => 'button'
+            )
+          )),
+          '#weight' => 21,
+          '#value' => t('Cancel')
+        );
+      }
 
-        break;
+      break;
 
     case 'taxonomy_csv_import_form':
 
-        // Check if the user has not the 'administrator' role.
-        if (!in_array('administrator', $user->roles)) {
-            $form['csv_import_example'] = array(
-                '#prefix' => "<div class='term-main-wrap'>" . t('Click to Download') . " " . l(t('Import Example') , 'sites/all/modules/custom/itg_term/examples/term.csv') . "</div>"
-            );
-            $form['tab']['import_format']['#options']['#access'] = FALSE;
-            $form['tab']['import_format']['#options'] = array(
-                'fields' => 'Fields'
-            );
-            $form['tab']['format']['#access'] = FALSE;
-            $form['tab']['csv_format']['#access'] = FALSE;
-            $form['tab']['import_options']['#access'] = FALSE;
-            $form['tab']['advanced_options']['#access'] = FALSE;
-            $form['tab']['import_format']['#options']['#access'] = FALSE;
-            $form['tab']['import_format']['#options'] = array(
-                'fields' => 'Fields'
-            );
-            $form['tab']['import']['#title'] = FALSE;
-            $form['tab']['import']['source_choice']['#options']['#access'] = FALSE;
-            $form['tab']['import']['source_choice']['#options'] = array(
-                'file' => 'In a local file'
-            );
-            $form['tab']['import']['source_choice']['#access'] = FALSE;
-            $form['tab']['import']['text']['#access'] = FALSE;
-            $form['tab']['import']['url']['#access'] = FALSE;
-            $form['tab']['destination']['vocabulary_target']['#options']['#access'] = FALSE;
-            $form['tab']['destination']['vocabulary_target']['#options'] = array(
-                'existing' => 'Import in an existing vocabulary'
-            );
-            $form['tab']['destination']['vocabulary_id']['#options']['#access'] = FALSE;
-            $form['tab']['destination']['vocabulary_id']['#options'] = array(
-                1 => 'Tags'
-            );
-            $form['tab']['destination']['#type'] = FALSE;
-            $form['tab']['destination']['import_fields_custom']['#access'] = FALSE;
-            $form['tab']['destination']['info_hierarchy']['#access'] = FALSE;
-            $form['tab']['destination']['check_hierarchy']['#access'] = FALSE;
-            $form['tab']['destination']['set_hierarchy']['#access'] = FALSE;
-            $form['tab']['destination']['delete_terms']['#access'] = FALSE;
-            $form['tab']['destination']['vocabulary_target']['#access'] = FALSE;
-            $form['tab']['destination']['vocabulary_id']['#access'] = FALSE;
-            $form['tab']['destination']['i18n_translation']['#title'] = FALSE;
-            $form['actions']['import_default_values']['#access'] = FALSE;
-            $form['#submit'][] = 'term_redirect_handler';
+      // Check if the user has not the 'administrator' role.
+      if (!in_array('administrator', $user->roles)) {
+        $form['csv_import_example'] = array(
+          '#prefix' => "<div class='term-main-wrap'>" . t('Click to Download') . " " . l(t('Import Example'), 'sites/all/modules/custom/itg_term/examples/term.csv') . "</div>"
+        );
+        $form['tab']['import_format']['#options']['#access'] = FALSE;
+        $form['tab']['import_format']['#options'] = array(
+          'fields' => 'Fields'
+        );
+        $form['tab']['format']['#access'] = FALSE;
+        $form['tab']['csv_format']['#access'] = FALSE;
+        $form['tab']['import_options']['#access'] = FALSE;
+        $form['tab']['advanced_options']['#access'] = FALSE;
+        $form['tab']['import_format']['#options']['#access'] = FALSE;
+        $form['tab']['import_format']['#options'] = array(
+          'fields' => 'Fields'
+        );
+        $form['tab']['import']['#title'] = FALSE;
+        $form['tab']['import']['source_choice']['#options']['#access'] = FALSE;
+        $form['tab']['import']['source_choice']['#options'] = array(
+          'file' => 'In a local file'
+        );
+        $form['tab']['import']['source_choice']['#access'] = FALSE;
+        $form['tab']['import']['text']['#access'] = FALSE;
+        $form['tab']['import']['url']['#access'] = FALSE;
+        $form['tab']['destination']['vocabulary_target']['#options']['#access'] = FALSE;
+        $form['tab']['destination']['vocabulary_target']['#options'] = array(
+          'existing' => 'Import in an existing vocabulary'
+        );
+        $form['tab']['destination']['vocabulary_id']['#options']['#access'] = FALSE;
+        $form['tab']['destination']['vocabulary_id']['#options'] = array(
+          1 => 'Tags'
+        );
+        $form['tab']['destination']['#type'] = FALSE;
+        $form['tab']['destination']['import_fields_custom']['#access'] = FALSE;
+        $form['tab']['destination']['info_hierarchy']['#access'] = FALSE;
+        $form['tab']['destination']['check_hierarchy']['#access'] = FALSE;
+        $form['tab']['destination']['set_hierarchy']['#access'] = FALSE;
+        $form['tab']['destination']['delete_terms']['#access'] = FALSE;
+        $form['tab']['destination']['vocabulary_target']['#access'] = FALSE;
+        $form['tab']['destination']['vocabulary_id']['#access'] = FALSE;
+        $form['tab']['destination']['i18n_translation']['#title'] = FALSE;
+        $form['actions']['import_default_values']['#access'] = FALSE;
+        $form['#submit'][] = 'term_redirect_handler';
 
-            // set redirect destination
-            $destination = 'tags-management';
-            $form['actions']['cancel'] = array(
-                '#markup' => l(t('Cancel') , $destination, array(
-                    'attributes' => array(
-                        'class' => 'button'
-                    )
-                )) ,
-                '#weight' => 21,
-                '#value' => t('Cancel')
-            );
-        }
-        break;
-    }
-    return $form;
+        // set redirect destination
+        $destination = 'tags-management';
+        $form['actions']['cancel'] = array(
+          '#markup' => l(t('Cancel'), $destination, array(
+            'attributes' => array(
+              'class' => 'button'
+            )
+          )),
+          '#weight' => 21,
+          '#value' => t('Cancel')
+        );
+      }
+      break;
+  }
+  return $form;
 }
 
 /**
  * Implementation of hook_batch_alter().
  * @param array reference $batch
  */
-
 function itg_term_batch_alter(&$batch) {
-    if (isset($batch['sets'][0]['operations'][0][0]) && $batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_export_process') {
+  if (isset($batch['sets'][0]['operations'][0][0]) && $batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_export_process') {
 
-        // set message
-        variable_set('term_export_message', 'Terms are exported from Tags');
-        drupal_set_message(t(variable_get('term_export_message')));
+    // set message
+    variable_set('term_export_message', 'Terms are exported from Tags');
+    drupal_set_message(t(variable_get('term_export_message')));
 
-        // redirect path
-        $batch['form_state']['redirect']['path'] = 'tags-management';
-    }
-    elseif (isset($batch['sets'][0]['operations'][0][0]) && $batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_import_process') {
+    // redirect path
+    $batch['form_state']['redirect']['path'] = 'tags-management';
+  }
+  elseif (isset($batch['sets'][0]['operations'][0][0]) && $batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_import_process') {
 
-        // set message
-        variable_set('term_import_message', 'Terms are imported.');
-        drupal_set_message(t(variable_get('term_import_message')));
+    // set message
+    variable_set('term_import_message', 'Terms are imported.');
+    drupal_set_message(t(variable_get('term_import_message')));
 
-        // redirect path
-        $batch['form_state']['redirect']['path'] = 'tags-management';
-    }
+    // redirect path
+    $batch['form_state']['redirect']['path'] = 'tags-management';
+  }
 }
 
 /**
@@ -219,134 +214,134 @@ function itg_term_batch_alter(&$batch) {
  * @param type $form
  * @param array reference $form_state
  */
-
 function term_redirect_handler($form, &$form_state) {
-    $term = trim($form_state['values']['name']);
-    // To unset message
-    unset($_SESSION['messages']['status']);
-
-    drupal_set_message($term . ' ' . check_plain(t('Tag has been created successfully.')));
-
-    $form_state['redirect'] = 'tags-management';
+  $term = trim($form_state['values']['name']);
+  $form_state['redirect'] = 'tags-management';
 }
 
 /**
  * Implement hook_views_pre_render
  * @param Object $view
  */
-
 function itg_term_views_pre_render(&$view) {
 
-   if (isset($view->name) && $view->name == "tags_management") {
-        if (arg(0) == 'tags-management') {
-            global $user;
-            $user_roles = array_values($user->roles);
-            if (!in_array('Editor', $user_roles) && !in_array('Site Admin', $user_roles) && !in_array('administrator', $user_roles)) {
-                if (is_object($view->field['nothing']) && count($view->field['nothing']) > 0) {
-                    if (is_array($view->field['nothing']->options['alter']) && count($view->field['nothing']->options['alter']) > 0) {
-                        if (isset($view->field['nothing']->options['alter']['text'])) {
-                        $view->field['nothing']->options['label'] = '';
-                        $view->field['nothing']->options['alter']['text'] = '';
-                        }
-
-                    }
-                }
+  if (isset($view->name) && $view->name == "tags_management") {
+    if (arg(0) == 'tags-management') {
+      global $user;
+      $user_roles = array_values($user->roles);
+      if (!in_array('Editor', $user_roles) && !in_array('Site Admin', $user_roles) && !in_array('administrator', $user_roles)) {
+        if (is_object($view->field['nothing']) && count($view->field['nothing']) > 0) {
+          if (is_array($view->field['nothing']->options['alter']) && count($view->field['nothing']->options['alter']) > 0) {
+            if (isset($view->field['nothing']->options['alter']['text'])) {
+              $view->field['nothing']->options['label'] = '';
+              $view->field['nothing']->options['alter']['text'] = '';
             }
+          }
+        }
+      }
 
-            $message_arr = drupal_set_message();
-            if (isset($message_arr['status']) && $message_arr['status'][0] == variable_get('term_import_message')) {
+      $message_arr = drupal_set_message();
+      if (isset($message_arr['status']) && $message_arr['status'][0] == variable_get('term_import_message')) {
 
-                // To unset message
+        // To unset message
 
-                unset($_SESSION['messages']['status']);
+        unset($_SESSION['messages']['status']);
 
-                if (isset($_SESSION['messages']['warning'])) {
-                    //unset($_SESSION['messages']['warning']);
+        if (isset($_SESSION['messages']['warning'])) {
+          unset($_SESSION['messages']['warning']);
 
-                    // To override message
-
-                    //drupal_set_message(t('Warnings have been reported during import process (bad formatted)') , 'warning');
-                }
-
-                drupal_set_message(t('Terms are imported into vocabulary "tags".'));
-            }
-            elseif (isset($message_arr['status']) && $message_arr['status'][0] == variable_get('term_export_message')) {
-                $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>";
-                if (preg_match_all("/$regexp/siU", $message_arr['status'][2], $matches, PREG_SET_ORDER)) {
-
-                    // To unset message
-
-                    unset($_SESSION['messages']['status']);
-                    unset($_SESSION['messages']['warning']);
-                    $filepath = $matches[0][2];
-                    $filename = $matches[0][3];
-                    $download_link = l(t($filename) , $filepath);
-
-                    // To override message
-
-                    drupal_set_message(check_plain(t('Click csv file to download')) . ' ' . $download_link);
-                }
-            }
+          // To override message
+          drupal_set_message(t('Warnings have been reported during import process (bad formatted)'), 'warning');
         }
 
-        // Add "Create Tag" button on listing page of Tags Management
+        drupal_set_message(t('Terms are imported into vocabulary "tags".'));
+      }
+      elseif (isset($message_arr['status']) && $message_arr['status'][0] == variable_get('term_export_message')) {
+        $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>";
+        if (preg_match_all("/$regexp/siU", $message_arr['status'][2], $matches, PREG_SET_ORDER)) {
 
-        $header_content_term = l(t('Create Tag') , 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV') , 'admin/structure/taxonomy/csv_import') . " " . l(t('Export CSV') , 'download-tags');
-        $view->attachment_before = $header_content_term;
+          // To unset message
+
+          unset($_SESSION['messages']['status']);
+          unset($_SESSION['messages']['warning']);
+          $filepath = $matches[0][2];
+          $filename = $matches[0][3];
+          $download_link = l(t($filename), $filepath);
+
+          // To override message
+
+          drupal_set_message(check_plain(t('Click csv file to download')) . ' ' . $download_link);
+        }
+      }
     }
+
+    // Add "Create Tag" button on listing page of Tags Management
+
+    $header_content_term = l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV'), 'admin/structure/taxonomy/csv_import') . " " . l(t('Export CSV'), 'download-tags');
+    $view->attachment_before = $header_content_term;
+  }
 }
 
 /**
  * Implements custom _form_validate() for taxonomy_form_term().
  */
-
 function itg_term_validate($form, &$form_state) {
-    $term = trim($form_state['values']['name']);
-    $vid = trim($form_state['values']['vid']);
-    $tid = trim($form_state['values']['tid']);
-    if (itg_category_manager_is_dupe_term($term, $vid, $tid)) {
-        $tid_existing_term = itg_category_manager_get_term_from_name($term, $vid);
-        if ($tid_existing_term) {
-            form_set_error('name', t('Tag name already exists.'));
-        }
+  $term = trim($form_state['values']['name']);
+  $vid = trim($form_state['values']['vid']);
+  $tid = trim($form_state['values']['tid']);
+  if (itg_category_manager_is_dupe_term($term, $vid, $tid)) {
+    $tid_existing_term = itg_category_manager_get_term_from_name($term, $vid);
+    if ($tid_existing_term) {
+      form_set_error('name', t('Tag name already exists.'));
     }
+  }
 }
 
 /*
-* Implementation of hook_form_FORM_ID_alter
-* @param array $form
-* @param array reference $form_state
-* Hiding taxonomy term description field
-*/
+ * Implementation of hook_form_FORM_ID_alter
+ * @param array $form
+ * @param array reference $form_state
+ * Hiding taxonomy term description field
+ */
 
 function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
-    if (is_array($form['#term']) && count($form['#term']) > 0) {
-        if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
-            $destination = 'tags-management';
+  if (is_array($form['#term']) && count($form['#term']) > 0) {
+    if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
+      $destination = 'tags-management';
+      $delete_destination = 'texonomy/confirm/ajax/' . trim($form['#term']['tid']);
+      // Call valiadte and after build
 
-            // Call valiadte and after build
+      $form['#validate'][] = 'itg_term_validate';
 
-            $form['#validate'][] = 'itg_term_validate';
+      // redirect path
 
-            // redirect path
+      $form['#submit'][] = 'term_redirect_handler';
+      $form['actions']['delete'] = array(
+        '#markup' => l(t('Delete'), $delete_destination, array(
+          'attributes' => array(
+            'class' => 'button'
+          )
+        )),
+        '#weight' => 21,
+        '#value' => t('Delete')
+      );
 
-            $form['#submit'][] = 'term_redirect_handler';
-            $form['actions']['cancel'] = array(
-                '#markup' => l(t('Cancel') , $destination, array(
-                    'attributes' => array(
-                        'class' => 'button'
-                    )
-                )) ,
-                '#weight' => 21,
-                '#value' => t('Cancel')
-            );
-            unset($form['tags']);
-            unset($form['#metatags']);
-            $form['description']['#access'] = FALSE;
-            $form['relations']['#access'] = FALSE;
-            $form['tags']['und']['#metatags']['#access'] = FALSE;
-        }
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $delete_destination, array(
+          'attributes' => array(
+            'class' => 'button'
+          )
+        )),
+        '#weight' => 21,
+        '#value' => t('Cancel')
+      );
+      unset($form['tags']);
+      unset($form['#metatags']);
+      $form['description']['#access'] = FALSE;
+      $form['relations']['#access'] = FALSE;
+      $form['tags']['und']['#metatags']['#access'] = FALSE;
     }
+  }
 }
 
 /**
@@ -354,33 +349,38 @@ function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
  * @param array $form
  * @param array reference $form_state
  */
-
 function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
-    if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-tags-management-page') {
-        $form['#info']['filter-created']['label'] = FALSE;
-        $form['name']['#attributes'] = array(
-            'placeholder' => t('Name')
-        );
-        unset($form['filter-created']['label']);
-        $form['created']['min'] = array(
-            '#type' => 'date_popup',
-            '#title' => t('From') ,
-            '#date_format' => 'Y-m-d',
-            '#date_year_range' => '-1:+1',
-            '#attributes' => array(
-                'readonly' => 'readonly'
-            ) ,
-        );
-        $form['created']['max'] = array(
-            '#type' => 'date_popup',
-            '#title' => t('To') ,
-            '#date_format' => 'Y-m-d',
-            '#date_year_range' => '-1:+1',
-            '#attributes' => array(
-                'readonly' => 'readonly'
-            ) ,
-        );
-    }
+  if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-tags-management-page') {
+    drupal_add_js(drupal_get_path('module', 'itg_term') . '/itg_term_date_popup.js', array('weight' => 13));
+    $settings = array();
+    $settings['base_url'] = $base_url;
+
+    drupal_add_js(array('itg_term' => array('settings' => $settings)), array('type' => 'setting'));
+
+    $form['#info']['filter-created']['label'] = FALSE;
+    $form['name']['#attributes'] = array(
+      'placeholder' => t('Name')
+    );
+    unset($form['filter-created']['label']);
+    $form['created']['min'] = array(
+      '#type' => 'date_popup',
+      '#title' => t('From'),
+      '#date_format' => 'Y-m-d',
+      '#date_year_range' => '-1:+1',
+      '#attributes' => array(
+        'readonly' => 'readonly'
+      ),
+    );
+    $form['created']['max'] = array(
+      '#type' => 'date_popup',
+      '#title' => t('To'),
+      '#date_format' => 'Y-m-d',
+      '#date_year_range' => '-1:+1',
+      '#attributes' => array(
+        'readonly' => 'readonly'
+      ),
+    );
+  }
 }
 
 /**
@@ -388,22 +388,36 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
  * @param array reference $view
  * @param array reference $query
  */
-
 function itg_term_views_query_alter(&$view, &$query) {
-    if (isset($view->name) && $view->name === 'tags_management') {
-        if (isset($_GET['created']['max']['date'])) {
-            $max_conditions_array = array();
-            $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
-            $max_date_condition = " AND " . $max_date;
-            if (isset($view->query->where[1]['conditions'][1]['field'])) {
-                foreach ($query->where[1]['conditions'] as $idx => $condition) {
-                    if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
-                        $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
-                        $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
-                    }
-                }
-            }
+  if (isset($view->name) && $view->name === 'tags_management') {
+    if (isset($_GET['created']['max']['date'])) {
+      $max_conditions_array = array();
+      $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
+      $max_date_condition = " AND " . $max_date;
+      if (isset($view->query->where[1]['conditions'][1]['field'])) {
+        foreach ($query->where[1]['conditions'] as $idx => $condition) {
+          if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
+            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
+            $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
+          }
         }
+      }
     }
+  }
 }
 
+/**
+ * Implements hook_views_post_execute().
+ * @param type $view
+ */
+function itg_term_views_post_execute(&$view) {
+   if ($view->name == 'itg_download_taxonomy') {
+     drupal_get_messages();
+      drupal_set_message($term . ' ' . check_plain(t('Tag has been created successfully.')));
+    foreach ($view->result as $result) {
+      // Replace all empty fields with the dash '-' character.
+       $result->field_field_tags_display[0]['rendered']['#markup'] = $result->field_field_tags_display[0]['raw']['value'];
+     
+    }
+  }
+}
