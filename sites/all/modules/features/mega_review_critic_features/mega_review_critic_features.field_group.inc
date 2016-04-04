@@ -96,13 +96,14 @@ function mega_review_critic_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Movie Review',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-review-movie-review field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-review-movie-review field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_review_movie_review|node|mega_review_critic|form'] = $field_group;

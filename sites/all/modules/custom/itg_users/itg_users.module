@@ -92,7 +92,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
     $form['account']['mail']['#weight'] = '-6';
     $form['#validate'][] = 'itg_users_validate_user_profile_validate';
     $form['#after_build'][] = 'itg_users_after_user_profile_validate';
-
+    
     if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
       $user_array = array(COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
       $user_id_log = $user->uid;
@@ -434,7 +434,7 @@ function itg_users_theme($existing, $type, $theme, $path) {
  */
 function itg_users_user_login(&$edit, $account) {
   if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
-    if (!isset($_GET['destination'])) {
+    if (!isset($_GET['destination']) && arg(1) != "reset") {
       $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
     }
   }

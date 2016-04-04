@@ -93,12 +93,11 @@
                   if (!empty($selection)):
                     print render($content['field_story_category']);
                     ?>
+                  <?php endif; ?>
                   </div>
                 </div>
-                  <?php endif; ?>
-        </div>
+     
           <?php endif; ?>
-
         </div>
       <?php endif; ?>
 

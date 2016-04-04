@@ -108,7 +108,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
       drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
     );
     if ($form['nid']['#value'] == NULL) {
-      $form['title']['#default_value'] = date('M j, Y');
+      $form['title']['#default_value'] = date('M d, Y');
     }
     // Create navigation label
     $form['itg_collective'] = array(
@@ -122,7 +122,11 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     $form['itg_numerology'] = array(
       '#type' => 'markup',
       '#markup' => '<h2 class="story-title story-title-num">'. t('Numerology').'</h2>',      
-    ); 
+    );
+    $form['itg_flag'] = array(
+      '#type' => 'hidden',
+      '#default_value' => 0,
+    );
 
     // Set field visibility for zodiac sign field
     $form['field_astro_zodiac']['#states'] = array(
@@ -359,4 +363,19 @@ function itg_astro_views_pre_render(&$view) {
     $header_content_astro .= l(t('Create Category'), 'admin/structure/taxonomy/category_management/add');
     $view->attachment_before = $header_content_astro;
   }
+}
+
+/**
+ * render zodiac icon image with sign name.
+ * @staticvar int $count
+ * @param string $build
+ * @param type $type
+ */
+function itg_astro_entity_view_alter(&$build, $type) { 
+  static $count = 0;
+  if ($type == 'field_collection_item' && isset($build['field_zodiac_sign']) && $count <= 11) {    
+    $zodiac_sign = itg_astro_zodiac_thumbnail();
+    $build['field_zodiac_sign'][0]['#markup'] .= '<div class="inner-item"><img src="' . image_style_url("thumbnail", $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';    
+  }
+  ++$count;
 }
