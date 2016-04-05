@@ -88,11 +88,13 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#title'] = 'Survey Title';
       $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
       
-      $form['actions']['view_survey_result'] = array(
-        '#markup' => l(t('View Survey Result'), 'survey-result/'.arg(1), array('attributes' => array('class' => 'button', 'target'=>'_blank'))),
-        '#weight' => 20,
-        '#value' => t('View Survey Result'),
-      );
+      if(is_numeric(arg(1)) && arg(2) == 'edit') {
+        $form['actions']['view_survey_result'] = array(
+          '#markup' => l(t('View Survey Result'), 'survey-result/'.arg(1), array('attributes' => array('class' => 'button', 'target'=>'_blank'))),
+          '#weight' => 20,
+          '#value' => t('View Survey Result'),
+        );
+      }
             
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
