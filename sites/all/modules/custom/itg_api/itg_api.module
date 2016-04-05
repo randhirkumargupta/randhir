@@ -34,9 +34,9 @@ function itg_api_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['itg-bhasha-content'] = array(
+  $items['itg-ap-content'] = array(
     'title' => 'api callback menu',
-    'page callback' => 'itg_api_bhasha_content',
+    'page callback' => 'itg_ap_content',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -50,7 +50,8 @@ function itg_api_menu() {
 function itg_api_node_presave($node) {
   global $user;
   // get bad words list in array
-  $tax = taxonomy_get_tree(13, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
+  $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
   foreach ($tax as $key => $val) {
     $op[$val->tid] = $val->name;
@@ -101,7 +102,6 @@ function itg_api_node_presave($node) {
     $description = $node->body[LANGUAGE_NONE][0]['value'];
     // strip html tags
     $description = strip_tags($description);
-
     $description = trim($description);
     $kicker = substr($description, 0, 200);
     $kicker = strip_tags($kicker);
@@ -113,6 +113,8 @@ function itg_api_node_presave($node) {
     $final_kicker = str_replace(array('\'', '"'), '', $final_kicker);
     $final_kicker = substr($final_kicker, 0, 252);
     $final_kicker = $final_kicker.'..';
+    $final_kicker = trim(preg_replace('/[\s\t\n\r\s]+/', ' ', $final_kicker));
+    
 
     // get byline id based on name 
     $by_line = itg_api_get_nid($author, 'reporter');
@@ -120,36 +122,33 @@ function itg_api_node_presave($node) {
     // asign value to schedule date field
     $node->uid = $user->uid;
     $node->comment = 0;
-    $node->revision = FALSE;
     $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $pubdate;
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($node->title);
-    $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker;
+    $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $final_kicker;
     $node->field_story_reporter[LANGUAGE_NONE][0]['value'] = $byline;
     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($node->title);
     //$node->field_story_comment_question[LANGUAGE_NONE][0]['value'] = 'NA';
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'PTI';
     $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $pti_category;
     // convert string to array
-    $exp_description = explode(" ", $description);
+    $exp_description = strtolower($description);
+    $exp_description = explode(" ", $exp_description);
 
-    if ($title_length > 35) {
-      // $node->revision = 1;
-      $node->log = 'State Changed to published';
-      $node->workbench_moderation_state_new = workbench_moderation_state_published();
-    }
-    elseif (array_intersect($op, $exp_description)) {
-
+    if (array_intersect($op, $exp_description)) {
+      $node->log = 'State Changed to Review';
       $node->workbench_moderation_state_new = workbench_moderation_state_Review();
     }
+    else {
+      if ($title_length > 35) {
+        $node->log = 'State Changed to published';
+        $node->workbench_moderation_state_new = workbench_moderation_state_published();
+      }
 
-    if ($title_length < 35) {
-
-      $node->workbench_moderation_state_new = workbench_moderation_state_Review();
-    }
-    elseif (array_intersect($op, $exp_description)) {
-
-      $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+      if ($title_length < 35) {
+        $node->log = 'State Changed to Review';
+        $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+      }
     }
   }
 }
@@ -170,7 +169,7 @@ function itg_api_mail_today_content() {
 
   global $base_url, $user;
 
-  $direc = getDirContents('sites/default/files/mailtoday/');
+  $direc = getDirContents('sites/default/files/gallery/mailtoday/');
 
   foreach ($direc as $xm_file) {
 
@@ -247,7 +246,6 @@ function itg_api_mail_today_content() {
           $node->uid = $user->uid;
           $node->promote = 0;
           $node->comment = 0;
-          $node->revision = FALSE;
           $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
           $node->body[$node->language][0]['format'] = 'full_html';
           $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);
@@ -286,7 +284,7 @@ function itg_ani_content() {
   global $base_url, $user;
   
 
-  $direc = getDirContents('sites/default/files/ani/');
+  $direc = getDirContents('sites/default/files/gallery/ani/');
  
   foreach ($direc as $xm_file) {
 
@@ -365,7 +363,6 @@ function itg_ani_content() {
           $node->uid = $user->uid;
           $node->promote = 0;
           $node->comment = 0;
-          $node->revision = FALSE;
           $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
           $node->body[$node->language][0]['format'] = 'full_html';
           $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);
@@ -406,7 +403,7 @@ function itg_ians_content() {
 
   global $base_url, $user;
 
-  $direc = getDirContents('sites/default/files/ians/');
+  $direc = getDirContents('sites/default/files/gallery/ians/');
 
   foreach ($direc as $xm_file) {
 
@@ -472,7 +469,6 @@ function itg_ians_content() {
           $node->uid = $user->uid;
           $node->promote = 0;
           $node->comment = 0;
-          $node->revision = FALSE;
           $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
           $node->body[$node->language][0]['format'] = 'full_html';
           $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);

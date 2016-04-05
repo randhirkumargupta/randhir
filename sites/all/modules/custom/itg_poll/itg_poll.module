@@ -545,7 +545,6 @@ function itg_poll_views_query_alter(&$view, &$query) {
 function itg_poll_cronapi($op, $job = NULL) {
   $items['poll_complete_mail'] = array(
     'description' => 'Mail shoot after poll completion.',
-    'rule' => 'string',
     'weight' => 5,
     'callback' => 'itg_poll_complete_time_mail', 
   );
@@ -578,7 +577,7 @@ function itg_poll_complete_time_mail() {
       <body style="margin:0; padding:0;">
             <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi ' . $user->name . ',</td></tr>
             <tr><td></td></tr>
-            <tr><td>Please check your poll result on '.l('Click Here', 'node/'.$url_nid).'</td></tr>
+            <tr><td>Please check your poll result on '.l("Click Here", "user/login", array("query" => array("destination" => "node/".$url_nid))).'</td></tr>
             <tr><td></td></tr>
             <tr><td></td></tr>
             <tr><td>Thanks,</td></tr>

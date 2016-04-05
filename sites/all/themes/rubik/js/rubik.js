@@ -148,6 +148,8 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
     
     });
+  //Incorrect navigation when user click on home page from view blog page
+  $("a[href='/itgcms/blog']").attr('href', '/itgcms/mydraft-blogs');
     
   // Jquery code to close preview popup
   $(document).on('click', '.close-preview', function(){
@@ -388,7 +390,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   
-  $('.page-user').find('.password-suggestions').removeClass('description');
-
+  $('.page-user, .page-admin-people-create').find('.password-suggestions').removeClass('description');
 };
 })(jQuery);

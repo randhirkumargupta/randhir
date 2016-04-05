@@ -232,6 +232,7 @@ function itg_msi_views_pre_render(&$view) {
   
   //Add "Create Issue" button on listing page of issue
   if ($view->name == "manage_issues") {
+    drupal_add_js(drupal_get_path('module', 'jquery_update').'/replace/ui/ui/minified/jquery.ui.datepicker.min.js');
     $header_content_issue = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
     $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
     $view->attachment_before = $header_content_issue;
@@ -601,12 +602,21 @@ function itg_msi_show_mapped_stories($row){
  * Get fids of files associated with a node
  * @return Array
  */
-function itg_msi_get_associated_fid_node($node){
+function itg_msi_get_associated_fid_node($node, $xml_uid){
   
-  $result = db_select('itg_msi_node_xml', 'fn')
-          ->fields('fn', array('fid'))
-          ->condition('nid', $node->nid, '=')
-          ->execute();
+  if ($xml_uid) {
+    $result = db_select('itg_msi_node_xml', 'fn')
+            ->fields('fn', array('fid'))
+            ->condition('nid', $node->nid, '=')
+            ->condition('xml_uid', $xml_uid, '=')
+            ->execute();
+  } else {
+    $result = db_select('itg_msi_node_xml', 'fn')
+            ->fields('fn', array('fid'))
+            ->condition('nid', $node->nid, '=')
+            ->execute();
+  }
+
   while ($record = $result->fetchAssoc()) {
     $fid[] = $record['fid'];
   }
