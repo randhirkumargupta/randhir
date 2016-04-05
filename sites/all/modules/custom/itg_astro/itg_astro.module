@@ -376,3 +376,39 @@ function itg_astro_entity_view_alter(&$build, $type) {
   }
   ++$count;
 }
+
+/**
+ * Callback function for frequency and astro mapping
+ */
+function itg_astro_frequency_map($title, $freq, $astro_type) {    
+  $title = check_plain($title);
+  $freq = check_plain($freq);
+  $astro_type = check_plain($astro_type);
+  
+  // Fetch fdata from db
+  $itg_query = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('n.title', $title);
+  $itg_query->join('field_data_field_astro_frequency', 'frq', 'n.nid = frq.entity_id');
+  $itg_query->condition('frq.field_astro_frequency_value', $freq);
+  $itg_query->join('field_data_field_astro_type', 'ast', 'n.nid = ast.entity_id');
+  $itg_query->condition('ast.field_astro_type_tid', $astro_type);
+  $itg_result = $itg_query->execute()->fetchField();
+  
+  return $itg_result;
+}
+
+/**
+ * Implements hook_node_validate()
+ * @param type $node
+ */
+function itg_astro_node_validate($node) {
+  $result = '';
+  $title = $node->title;
+  $freq = $node->field_astro_frequency['und'][0]['value'];
+  $astro_type = $node->field_astro_type['und'][0]['tid'];
+  $result = itg_astro_frequency_map($title, $freq, $astro_type);
+  if ($result != '') {
+    form_set_error('field_astro_type', 'Astro for selected frequency is already filled.');
+  }
+}
