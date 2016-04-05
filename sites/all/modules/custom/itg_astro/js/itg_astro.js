@@ -322,10 +322,7 @@
             date: true
           }
         },
-        messages: {
-          'field_astro_frequency[und]': {
-            remote: 'Astro for selected frequency is already filled.'
-          }
+        messages: {          
         }
       });
       jQuery.validator.addMethod("validateRange", function (value, element) {
@@ -341,46 +338,15 @@
         var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
         var startDate = $('input[name="field_astro_date_range[und][0][value][date]"]').val();
         var endDate = $('input[name="field_astro_date_range[und][0][value2][date]"]').val();
-        var momenta = moment(startDate, 'MMM DD YYYY');
-        var momentb = moment(endDate, 'MMM DD YYYY');
-        var days = momentb.diff(momenta, 'days');
-        switch (frequency) {
-          case 'daily':
-            $('input[name="title"').val(startDate);
-            if (startDate !== endDate) {
-              return false;
-            }
-            else {
-              return true;
-            }
-            break;
-          case 'weekly':
-            $('input[name="title"').val(startDate + ' - ' + endDate);
-            if (days !== 6) {
-              return false;
-            }
-            else {
-              return true;
-            }
-            break;
-          case 'monthly':
-            $('input[name="title"').val(startDate + ' - ' + endDate);
-            if (days == 29 || days == 30) {
-              return true;
-            }
-            else {
-              return false;
-            }
-            break;
-          case 'yearly':
-            $('input[name="title"').val(startDate + ' - ' + endDate);
-            if (days !== 365) {
-              return false;
-            }
-            else {
-              return true;
-            }
+        
+        if (frequency === 'daily') {
+          $('input[name="title"').val(startDate);          
         }
+        else {
+          $('input[name="title"').val(startDate + ' - ' + endDate);          
+        }
+        
+        return true;
       }
 
       // validate sign name drop down
