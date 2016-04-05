@@ -125,6 +125,7 @@
                     <div class="content-view">
                         <?php
                         print render($content['field_buzz_description']);
+                        print render($content['field_astro_video_thumbnail']);
                         print render($content['field_astro_video']);
                         print render($content['field_common_audio_file']);
                         ?>

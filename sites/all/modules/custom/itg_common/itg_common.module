@@ -325,3 +325,17 @@ function itg_common_form_node_delete_confirm_alter(&$form, &$form_state, $form_i
       $_GET['destination'] = $destination_array[0];      
   }
 }
+
+function itg_common_check_record_existance($nid, $tbl_name){
+ 
+    $result = db_select($tbl_name, 'tbl')
+          ->fields('tbl')
+          ->condition('tbl.nid', $nid, '=')
+          ->execute();
+  $total_survey = $result->rowCount();
+  if ($total_survey) {
+    return $total_survey;
+  } else {
+    return 0;
+  }
+}

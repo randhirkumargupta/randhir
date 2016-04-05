@@ -212,7 +212,7 @@ function itg_survey_survey_form() {
         $form['survey_submit_skip' . $num] = array(
             '#type' => 'submit',
             '#value' => 'Skip',
-            '#name' => 'surveysubmit_' . $num,
+            '#name' => 'surveyskip_' . $num,
             '#ajax' => array(
                 'callback' => 'survey_form_ajax_handler',
                 'effect' => 'fade',
@@ -221,7 +221,6 @@ function itg_survey_survey_form() {
             '#attributes' => array('class' => array('survey-submit-skip'))
         );
       }
-      
       $num++;
       
     } //End of for loop
@@ -365,6 +364,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
     $_SESSION['survey_unique_key'] = user_password(6);
   }
   
+  if($btn_num_arr[0] == 'surveysubmit') {
   if ($form_state['values']['question_type' . $num] == 'radios') {
 
     db_insert('itg_survey_detail')
@@ -452,7 +452,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
       }
     }
   }
-
+  }
  
   //Insert survey in to DB on final submit
   if(strtolower($form_state['clicked_button']['#value']) == 'submit'){
