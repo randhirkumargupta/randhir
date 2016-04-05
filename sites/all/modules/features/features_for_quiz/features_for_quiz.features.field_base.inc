@@ -103,8 +103,8 @@ function features_for_quiz_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'Multiple Correct' => 'Multiple Correct',
-        'Single Correct' => 'Single Correct',
+        'multiple_correct' => 'Multiple Correct',
+        'single_correct' => 'Single Correct',
       ),
       'allowed_values_function' => '',
     ),
