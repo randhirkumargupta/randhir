@@ -31,19 +31,30 @@
 
     foreach ($pieces as $pieces_value) {
       if (!empty($pieces_value)) {
-        print '<table>';
+        print "<table>";
         $pieces1 = explode(",", $pieces_value);
         $i = 1;
         foreach ($pieces1 as $pieces_value1) {
           if ($i == 3) {
-            print '<tr><td><div class="negative-number">' . $pieces_value1 . '</div></td></tr>';
+            if($i == 3) {
+              $numeric_val = substr($pieces_value1, strpos($pieces_value1, ":") + 1);
+             if($numeric_val > 0) {
+               $cls="positive-number";
+            }
+             
+            else
+            {
+              $cls="negative-number";
+            }
+            }
+            print "<tr><td><div class='$cls'>$pieces_value1</div></td></tr>";
           }
           else {
-            print '<tr><td>' . $pieces_value1 . '</td></tr>';
+            print "<tr><td>$pieces_value1</td></tr>";
           }
           $i++;
         }
-        print '</table>';
+        print "</table>";
       }
     }
     ?>
