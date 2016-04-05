@@ -373,12 +373,10 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   });
   
   $('#itg-quiz-quiz-form .button-yes').mousedown(function(){
-    $('.question-container').hide();
-      $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
+    $(this).ajaxSuccess(function(){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    });
   });
   
   
