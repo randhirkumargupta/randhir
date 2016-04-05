@@ -53,7 +53,6 @@ function itg_survey_survey_form() {
       //Answer Info
       $answer_type = $question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value'];
       $answer_op1 = $question_detail[$question_arr['value']]->field_survey_answer_option_1[LANGUAGE_NONE][0]['value'];
-      $answer_op2 = $question_detail[$question_arr['value']]->field_survey_answer_option_2[LANGUAGE_NONE][0]['value'];
       
       
       //Media info
@@ -69,14 +68,13 @@ function itg_survey_survey_form() {
       }
 
       //Get more answer options
-      foreach ($question_detail[$question_arr['value']]->field_survey_answer_option_more[LANGUAGE_NONE] as $more_ans_arr) {
+      foreach ($question_detail[$question_arr['value']]->field_survey_answer_option_2[LANGUAGE_NONE] as $more_ans_arr) {
         $more_ans_option[$num][$more_ans_arr['value']] = t($more_ans_arr['value']);
       }
 
       //Required answer option array (Option 1 and Option 2)
       $answer_options[$num] = array(
-          $answer_op1 => t($answer_op1),
-          $answer_op2 => t($answer_op2),
+          $answer_op1 => t($answer_op1)
       );
 
       //Merge array of answer options and more answer options
@@ -214,7 +212,7 @@ function itg_survey_survey_form() {
         $form['survey_submit_skip' . $num] = array(
             '#type' => 'submit',
             '#value' => 'Skip',
-            '#name' => 'surveysubmit_' . $num,
+            '#name' => 'surveyskip_' . $num,
             '#ajax' => array(
                 'callback' => 'survey_form_ajax_handler',
                 'effect' => 'fade',
@@ -223,7 +221,6 @@ function itg_survey_survey_form() {
             '#attributes' => array('class' => array('survey-submit-skip'))
         );
       }
-      
       $num++;
       
     } //End of for loop
@@ -367,6 +364,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
     $_SESSION['survey_unique_key'] = user_password(6);
   }
   
+  if($btn_num_arr[0] == 'surveysubmit') {
   if ($form_state['values']['question_type' . $num] == 'radios') {
 
     db_insert('itg_survey_detail')
@@ -454,7 +452,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
       }
     }
   }
-
+  }
  
   //Insert survey in to DB on final submit
   if(strtolower($form_state['clicked_button']['#value']) == 'submit'){

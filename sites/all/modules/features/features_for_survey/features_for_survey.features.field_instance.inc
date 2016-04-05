@@ -148,43 +148,6 @@ function features_for_survey_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_survey_add_questions-field_survey_answer_option_more'.
-  $field_instances['field_collection_item-field_survey_add_questions-field_survey_answer_option_more'] = array(
-    'bundle' => 'field_survey_add_questions',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Add more options for answer.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_survey_answer_option_more',
-    'label' => 'More Answer Options',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_survey_add_questions-field_survey_answer_type'.
   $field_instances['field_collection_item-field_survey_add_questions-field_survey_answer_type'] = array(
     'bundle' => 'field_survey_add_questions',
@@ -593,12 +556,10 @@ function features_for_survey_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Add Media');
   t('Add Survey Question');
-  t('Add more options for answer.');
   t('Answer Option 2');
   t('Answer Type');
   t('Answer choices');
   t('Category');
-  t('More Answer Options');
   t('Please add survey question.');
   t('Please select category.');
   t('Please select end date.');

@@ -41,7 +41,11 @@ function itg_recipe_node_presave($node) {
  */
 function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
-
+  if ($form_id == 'recipe_node_form') {
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_recipe') . '/js/jquery.validate.min.js',
+    );
+  }
   switch ($form_id) {
     case 'recipe_node_form':
       $form['actions']['cancel'] = array(

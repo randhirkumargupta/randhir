@@ -57,7 +57,7 @@
                     </div>
               </div>
               
-              <?php if($node->field_astro_zodiac['und'][0]['field_buzz_description']['und'][0]['value'] != ''): ?>              
+              <?php if(isset($node->field_astro_zodiac['und'][0]['field_buzz_description']) && $node->field_astro_zodiac['und'][0]['field_buzz_description']['und'][0]['value'] != ''): ?>              
               <div class="content-node-view">                
                 <h2>Zodiac Sign</h2>
                 <?php if (isset($node->op) && $node->op == 'Preview'): ?>  
@@ -115,7 +115,8 @@
                 <?php endif; ?>
               </div>
               <?php endif; ?>
-              <?php if (!isset($node->op)): ?>
+              
+              <?php if (!isset($node->op) && isset($content['field_astro_type'][0]['#markup']) && $content['field_astro_type'][0]['#markup'] == 'Zodiac'): ?>
               <?php print render($content['field_astro_zodiac']); ?>
               <?php endif; ?>
               <?php if(isset($content['field_buzz_description'])): ?>  
@@ -124,6 +125,7 @@
                     <div class="content-view">
                         <?php
                         print render($content['field_buzz_description']);
+                        print render($content['field_astro_video_thumbnail']);
                         print render($content['field_astro_video']);
                         print render($content['field_common_audio_file']);
                         ?>

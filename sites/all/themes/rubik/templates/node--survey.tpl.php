@@ -94,35 +94,29 @@
                 <div class="field-items"><img src="<?php echo $media_path; ?>" height="100" width="130"/></div>
               </div>
             <?php }  else { ?>
-                  <div class="field">
-                    <div class="field-label">Add Media:</div>
-                    <div class="field-items">
-                      <video width="140" height="145" controls="controls">
-                        <source src="<?php echo $media ?>" type="video/mp4"> 
-                        <object> 
-                          <embed  src="<?php echo $media ?>"> 
-                        </object> 
-                      </video>
-                   </div>
-                  </div>
+              <div class="field">
+                <div class="field-label">Add Media:</div>
+                <div class="field-items">
+                  <video width="140" height="145" controls="controls">
+                    <source src="<?php echo $media ?>" type="video/mp4"> 
+                    <object> 
+                      <embed  src="<?php echo $media ?>"> 
+                    </object> 
+                  </video>
+               </div>
+              </div>
             <?php } }?>
            <div class="field">
               <div class="field-label">Answer Type:</div>
               <div class="field-items"><?php echo ucwords($question_arr['field_survey_answer_type'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
-                  <div class="field">
+            <div class="field">
               <div class="field-label">Answer Option 1:</div>
               <div class="field-items"><?php echo ucwords($question_arr['field_survey_answer_option_1'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
-           <div class="field">
-              <div class="field-label">Answer Option 2:</div>
-              <div class="field-items"><?php echo ucwords($question_arr['field_survey_answer_option_2'][LANGUAGE_NONE][0]['value']); ?></div>
-            </div>
-       <?php
-            if(count($question_arr['field_survey_answer_option_more'][LANGUAGE_NONE]) > 2){
-//              echo '<div>More Answer Options:</div>';
-              $more_ans_num = 3;
-              foreach($question_arr['field_survey_answer_option_more'][LANGUAGE_NONE] as $more_ans_arr){
+           <?php
+              $more_ans_num = 2;
+              foreach($question_arr['field_survey_answer_option_2'][LANGUAGE_NONE] as $more_ans_arr){
               if(!empty($more_ans_arr['value'])){
                 echo '<div class="field">';
                 echo '<div class="field-label">Answer Option '.$more_ans_num.':</div>';
@@ -130,7 +124,6 @@
               }
                 $more_ans_num++;
               }
-            }
          $prev_num++; 
          
         }
@@ -146,23 +139,23 @@
           echo '<h2>Question ' . ($num + 1) . ' Details:</h2>';
           ?>
       
-          <div class="field" style="padding-left: 20px">
+          <div class="field">
             <div class="field-label">Question:</div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value']) . '?'; ?></div>
           </div>
-          <div class="field" style="padding-left: 20px">
+          <div class="field">
             <div class="field-label">Skip Question:</div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_skip[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
           <?php 
           if(!empty($media_type)){
           if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){?>
-              <div class="field" style="padding-left: 20px">
+              <div class="field">
                 <div class="field-label">Add Media:</div>
                 <div class="field-items"><img src="<?php echo $media_path; ?>" height="100" width="130"/></div>
               </div>
           <?php }  else { ?>
-                <div class="field" style="padding-left: 20px">
+                <div class="field">
                   <div class="field-label">Add Media:</div>
                   <div class="field-items">
                     <video width="140" height="145" controls="controls">
@@ -174,25 +167,20 @@
                  </div>
                 </div>
           <?php } }?>
-          <div class="field" style="padding-left: 20px">
+          <div class="field">
             <div class="field-label">Answer Type:</div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
-          <div class="field" style="padding-left: 20px">
+          <div class="field">
             <div class="field-label">Answer Option 1:</div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_answer_option_1[LANGUAGE_NONE][0]['value']); ?></div>
-          </div>
-          <div class="field" style="padding-left: 20px">
-            <div class="field-label">Answer Option 2:</div>
-            <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_answer_option_2[LANGUAGE_NONE][0]['value']); ?></div>
-          </div>
+            </div>
             <?php
-            if(count($question_detail[$question_arr['value']]->field_survey_answer_option_more[LANGUAGE_NONE]) > 0){
-              //echo '<h2 style="padding-left: 20px">More Answer Options:</h2>';
-              $more_ans_num = 3;
-              foreach($question_detail[$question_arr['value']]->field_survey_answer_option_more[LANGUAGE_NONE] as $more_ans_arr){
-                echo '<div class="field" style="padding-left: 10px">';
-                echo '<div class="field-label" style="padding-left: 10px">Answer Option '.$more_ans_num.':</div>';
+            if(count($question_detail[$question_arr['value']]->field_survey_answer_option_2[LANGUAGE_NONE]) > 0){
+              $more_ans_num = 2;
+              foreach($question_detail[$question_arr['value']]->field_survey_answer_option_2[LANGUAGE_NONE] as $more_ans_arr){
+                echo '<div class="field">';
+                echo '<div class="field-label">Answer Option '.$more_ans_num.':</div>';
                 echo '<div class="field-items">'.$more_ans_arr['value'].'</div></div>';
                 $more_ans_num++;
               }
@@ -201,7 +189,7 @@
    }
  }
      ?>
-    </div>
+ </div>   
   <?php endif; ?>
 
   <?php if ($layout): ?>

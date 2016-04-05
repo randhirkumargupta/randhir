@@ -59,6 +59,11 @@ function itg_survey_theme() {
       'template' => 'itg-survey-form',
       'render element' => 'form',
     ),
+    'survey_tab_form_display_block' => array(
+      'template' => 'survey-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_survey') . '/templates',
+      'variables' => array('data' => NULL),
+    ), 
  );
 }
 
@@ -83,11 +88,13 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#title'] = 'Survey Title';
       $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
       
-      $form['actions']['view_survey_result'] = array(
-        '#markup' => l(t('View Survey Result'), 'survey-result/'.arg(1), array('attributes' => array('class' => 'button', 'target'=>'_blank'))),
-        '#weight' => 20,
-        '#value' => t('View Survey Result'),
-      );
+      if(is_numeric(arg(1)) && arg(2) == 'edit') {
+        $form['actions']['view_survey_result'] = array(
+          '#markup' => l(t('View Survey Result'), 'survey-result/'.arg(1), array('attributes' => array('class' => 'button', 'target'=>'_blank'))),
+          '#weight' => 20,
+          '#value' => t('View Survey Result'),
+        );
+      }
             
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
@@ -383,4 +390,33 @@ function itg_survey_get_total_vote_question($nid, $ques_id, $answer, $user_type)
   } else {
     return 0;
   }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function itg_survey_block_info() {
+  $blocks['survey_tab_form_block'] = array(
+    'info' => t('Survey Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_survey_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'survey_tab_form_block':                       
+      $block['content'] = theme('survey_tab_form_display_block', array('data' => $data));
+    break;        
+  }
+  
+  return $block;
 }
