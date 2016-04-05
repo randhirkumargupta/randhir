@@ -622,37 +622,33 @@ function itg_ap_content() {
 function itg_nifty_feed() {
 
   global $base_url, $user;
-  $direc = $_SERVER['DOCUMENT_ROOT'].'itgcms/sites/default/files/gallery/nifty/';
-  $newFileName = $direc.'SensexNiftyFeed.txt';
+  $direc = $_SERVER['DOCUMENT_ROOT'] . 'itgcms/sites/default/files/gallery/nifty/';
+  $newFileName = $direc . 'SensexNiftyFeed.txt';
   $response_xml_data = get_content_from_xml_loc('http://businesstoday.accordhostings.com/SensexNiftyFeed.aspx');
-  
+
   if ($response_xml_data) {
-    
-    $nifty_xml = simplexml_load_string($response_xml_data); 
-    
+
+    $nifty_xml = simplexml_load_string($response_xml_data);
+
     foreach ($nifty_xml as $nifty_value) {
-      
-      $final_output.= $nifty_name = $nifty_value->name.',';
-      $final_output.='Current Value : '.$current_value = $nifty_value->current_value.',';
-     
-      $final_output.='Value Change : '.$value_change = $nifty_value->value_change.',';
-      
-      $final_output.='Percentage Change : '.$percentage_change = $nifty_value->percentage_change.'@';
-     
-      
-      
+
+      $final_output.= $nifty_name = $nifty_value->name . ',';
+      $final_output.='Current Value : ' . $current_value = $nifty_value->current_value . ',';
+
+      $final_output.='Value Change : ' . $value_change = $nifty_value->value_change . ',';
+
+      $final_output.='Percentage Change : ' . $percentage_change = $nifty_value->percentage_change . '@';
     }
     unlink($newFileName);
     if (!file_exists($newFileName)) {
-    $file = fopen($newFileName,"w+");
-    fwrite($file,$final_output);
-    fclose($file);
-    chmod($file, 777);
+      $file = fopen($newFileName, "w+");
+      fwrite($file, $final_output);
+      fclose($file);
+      chmod($file, 777);
+    }
+  }
 }
 
-  }
-  
-}
 /**
  * Implements function for node exit or not
  * @param $title
