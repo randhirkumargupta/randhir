@@ -36,7 +36,7 @@ function features_for_quiz_field_group_info() {
       'label' => 'Basic Settings',
       'instance_settings' => array(
         'required_fields' => 0,
-        'id' => '',
+        'id' => 'BasicDetails',
         'classes' => 'group-quiz-basic-settings field-group-fieldset',
         'description' => '',
       ),

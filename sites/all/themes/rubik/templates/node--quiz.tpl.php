@@ -104,7 +104,7 @@
           </div>
           
               <?php
-              if ($node->op == 'Preview') {
+              //if ($node->op == 'Preview') {
               $output = '';
               $imgfid = '';
               $output_sub = '';
@@ -185,7 +185,7 @@
                   </div>
                 </div>
         </div>
-              <?php } }else{ ?>
+              <?php } /*}else{ ?>
                 <div class="content-node-view">
                   <div class="expert-details content-box">
                   <h2><?php echo t('Add Quiz Question'); ?></h2>
@@ -199,7 +199,7 @@
                   </div>
                 </div>
                     <?php
-                    } ?> 
+                    */ //} ?> 
 
               <?php endif; ?>
 
