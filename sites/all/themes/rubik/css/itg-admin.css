@@ -859,7 +859,7 @@ div.image-widget-data .ajax-progress{position: absolute; left: 100%; top: 0;}
 .user-profile-div .field-name-field-user-picture .field-label{display: none;}
 form .path-form .form-item-path-pathauto{padding-left: 300px; width: 100%; box-sizing: border-box;}
 form .path-form .form-item-path-pathauto label{float: none;}
-.edit-link, .view-link, .delete-link, .edit-cm a{position: relative; vertical-align: middle; display: inline-block; padding-left: 20px;}
+.edit-link, .view-link, .delete-link, .edit-cm a{position: relative; vertical-align: middle; display: inline-block; padding-left: 20px; color: #008eb1;}
 .edit-link:after, 
 .view-link:after, 
 .delete-link:after, 
@@ -1486,7 +1486,34 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-mega_review_critic-form .group-review-basic-settings legend .form-required, 
 .node-mega_review_critic-form .group-review-movie-review legend .form-required, 
 .node-mega_review_critic-form .group-review-browse-media legend .form-required, 
-.node-mega_review_critic-form .vertical-tabs-list{display: none;}
+.node-mega_review_critic-form .vertical-tabs-list, .node-quiz-form .vertical-tabs-list{display: none;}
 .node-mega_review_critic-form #field-mega-review-review-values tbody{max-width: 400px;}
 .celebrity-about .field{float: left; width: 60% !important;}
-.field-name-field-story-schedule-date-time .date-padding .form-item:first-child .date-clear, .page-manage-issues #edit-title, .date-icon{background: url('../images/calendar.png') center right 5px no-repeat !important;}
+.field-name-field-story-schedule-date-time .date-padding .form-item:first-child .date-clear, 
+.field-name-field-story-expiry-date .date-padding .form-item:first-child .date-clear, 
+.page-manage-issues #edit-title, .date-icon{background: url('../images/calendar.png') center right 5px no-repeat !important;}
+
+/* ITGCMS QUIZ */
+.node-quiz-form .field-add-more-submit{margin-left: 0;}
+.node-quiz-form fieldset legend .form-required,
+.node-quiz-form .tabledrag-toggle-weight-wrapper,
+.node-quiz-form .tabledrag-hide{display: none;}
+.node-quiz-form .vertical-tabs{padding: 10px 0 0 10px;}
+[id*="field-quiz-add-questions-values"] tbody{max-width: 455px !important; width: 455px;}
+.node-quiz-form .field-name-field-quiz-add-questions .form-item label{width: 140px;}
+.node-quiz-form .field-name-field-quiz-add-questions .form-item .form-text{max-width: 285px !important;}
+.page-content .node-quiz-form .field-name-field-quiz-add-questions .form-item div.description,
+.page-content .node-quiz-form .field-name-field-quiz-add-questions .form-item span.error{padding-left: 140px;}
+.node-quiz-form .field-name-field-quiz-add-questions .field-name-field-quiz-options-answer .field-multiple-table thead{display: none;}
+[id*="field-quiz-add-questions-values"] .field-name-field-quiz-options-answer .field-multiple-table tbody{max-width: none !important; width: 100%;}
+.field-name-field-quiz-answer-image .form-managed-file div.image-widget-data{width: 100%;}
+.field-name-field-quiz-answer-image .form-managed-file div.image-widget-data input.form-file, 
+.field-name-field-quiz-answer-video .form-managed-file input.form-file{width: 210px;}
+[id*="field-quiz-options-answer-values"] td > .button-remove, [id*="field-quiz-options-answer-values"] td > .ajax-new-content > .button-remove{margin-left: 140px;}
+.node-quiz-form .field-name-field-quiz-answer-image, 
+.node-quiz-form .field-name-field-quiz-answer-video, 
+.node-quiz-form .field-name-field-quiz-answer-text{display: none;} 
+[id*="field-quiz-options-answer-values"] tbody tr td{padding: 10px 0; border-bottom: 1px solid #ddd;}
+[id*="field-quiz-options-answer-values"] tbody tr, [id*="field-quiz-options-answer-values"] tbody tr td{float: left; width: 100%;}
+[id*="field-quiz-add-questions-add-more-wrapper"] > .form-item > div > .field-add-more-submit{margin-left: 300px !important;}
+
