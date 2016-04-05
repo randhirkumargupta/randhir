@@ -17,9 +17,6 @@
 <div class="market">
     <iframe src="http://businesstoday.acemf.co.in/Market/MarketToday.aspx" frameborder="0"  height="1000" width="380" scrolling="auto"></iframe>
 </div>
-<div class="Top-indices">
-    <iframe src="http://businesstoday.acemf.co.in/Market/MarketToday.aspx" frameborder="0"  height="1000" width="380" scrolling="auto"></iframe>
-</div>
 
 <div class="SensexNiftyFeed">
     <?php
