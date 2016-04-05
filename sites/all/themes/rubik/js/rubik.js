@@ -372,7 +372,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   
-  $('#itg-quiz-quiz-form .button-yes').mousedown(function(){
+  $('#itg-quiz-quiz-form .quiz-submit').mousedown(function(){
     $(this).ajaxSuccess(function(){
       $('.question-container').hide();
       $(this).parents('.question-container').next().show();
