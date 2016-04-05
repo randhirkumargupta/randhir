@@ -10,18 +10,18 @@
  */
 function itg_quiz_quiz_form() {
   global $base_url;
+  
   //Get node of current quiz (load all questions ans answer options to generate quiz form)
   $node = itg_quiz_get_current_quiz();
 
-  
   //Check: Any quiz is activated OR not
   if ($node) {
     
     $num = 0;
     $form = array();
-    //$ques_arr = $node->field_quiz_add_questions[LANGUAGE_NONE];
     
-    $question_display = $node->field_quiz_question_display[LANGUAGE_NONE][0]['value'];
+    $question_display = $node->field_quiz_display_sequence[LANGUAGE_NONE][0]['value'];
+    
     if($question_display == 'random'){
       foreach ($node->field_quiz_add_questions[LANGUAGE_NONE] as $ques_arr_for_shuffle){
         $ques_arr_shuffle[] = $ques_arr_for_shuffle['value'];
@@ -38,11 +38,14 @@ function itg_quiz_quiz_form() {
     $total_num_of_ques = count($ques_arr);
  
     foreach ($ques_arr as $question_arr) {
+      
       //Question Info
       $question_detail = entity_load('field_collection_item', array($question_arr['value']));
-      $question = $question_detail[$question_arr['value']]->field_quiz_question[LANGUAGE_NONE][0]['value'];
-      $skip_question[$num] = $question_detail[$question_arr['value']]->field_quiz_skip[LANGUAGE_NONE][0]['value'];
       
+      $question = $question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value'];
+      
+      $skip_question[$num] = 'yes';
+    
       //If any question is required, show required sign(*) for that question
       if ($skip_question[$num] == 'yes') {
         $required = '';
@@ -50,11 +53,29 @@ function itg_quiz_quiz_form() {
         $required = '<span style="color:red">*</span>';
       }
 
-      //Answer Info
-      $answer_type = $question_detail[$question_arr['value']]->field_quiz_answer_type[LANGUAGE_NONE][0]['value'];
-      $answer_op1 = $question_detail[$question_arr['value']]->field_quiz_answer_option_1[LANGUAGE_NONE][0]['value'];
-      $answer_op2 = $question_detail[$question_arr['value']]->field_quiz_answer_option_2[LANGUAGE_NONE][0]['value'];
       
+      //Answer Info
+      $answer_type_type = $question_detail[$question_arr['value']]->field_quiz_answer_type[LANGUAGE_NONE][0]['value'];
+      if( $answer_type_type == 'single_correct') {
+        $answer_type = 'radios';
+      } else {
+        $answer_type = 'checkboxes';
+      }
+
+      foreach($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option){
+        $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
+        foreach($ans_option_arr[$ans_option['value']]->field_quiz_answer_text[LANGUAGE_NONE] as $final_ans_op){
+          $all_ans_options[$num][$ans_option['value'].'-'.$final_ans_op['value']] = $final_ans_op['value'];
+        }
+        
+
+        foreach($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $currect_ans){
+          if($currect_ans['value'] == 'Yes'){
+            $currect_ans_op[$num] = $ans_option['value'];
+          }
+        }
+      }
+
       
       //Media info
       $media = $question_detail[$question_arr['value']]->field_quiz_add_media[LANGUAGE_NONE][0]['uri'];
@@ -66,24 +87,6 @@ function itg_quiz_quiz_form() {
         $button_text = 'Submit';
       } else {
         $button_text = 'Next';
-      }
-
-      //Get more answer options
-      foreach ($question_detail[$question_arr['value']]->field_quiz_answer_option_more[LANGUAGE_NONE] as $more_ans_arr) {
-        $more_ans_option[$num][$more_ans_arr['value']] = t($more_ans_arr['value']);
-      }
-
-      //Required answer option array (Option 1 and Option 2)
-      $answer_options[$num] = array(
-          $answer_op1 => t($answer_op1),
-          $answer_op2 => t($answer_op2),
-      );
-
-      //Merge array of answer options and more answer options
-      if(!empty($more_ans_option[$num])){
-        $all_ans_options[$num] = array_merge($answer_options[$num], $more_ans_option[$num]);
-      } else {
-        $all_ans_options[$num] = $answer_options[$num];
       }
      
       //Show error message, if user tries to skip required question
@@ -127,40 +130,18 @@ function itg_quiz_quiz_form() {
           '#markup' => '<h2 class="answer-heading">Answer: ' . $required . '</h2> ',
       );
 
-      if ($answer_type == 'textfield') { // Answer options for Textfield
-        $txt_num = 0;
-        foreach ($all_ans_options[$num] as $val_txt_option) {
-          $form['answer_option' . $num . '_' . $txt_num] = array(
-              '#title' => $val_txt_option,
-              '#type' => $answer_type,
-              '#size' => 30,
-          );
-          $txt_num++;
-        }
-        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
-        
-      } elseif ($answer_type == 'rating') { // Answer option for Rating
-        $rating_num = 0;
-        foreach ($all_ans_options[$num] as $rating_option) {
-          $arr = array(1 => '', 2 => '', 3 => '', 4 => '', 5 => '');
-          $form['answer_option' . $num . '_' . $rating_num] = array(
-              '#title' => t($rating_option),
-              '#type' => 'checkboxes',
-              '#options' => $arr,
-              '#attributes' => array('class' => array('rating'))
-          );
-          $rating_num++;
-        }
-        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
-        
-      } else {  //Answer option for Radios and Checkboxes
-        $form['answer_option' . $num] = array(
-            '#title' => t(''),
-            '#type' => $answer_type,
-            '#options' => $all_ans_options[$num],
-            '#suffix' => '</div>',
-        );
-      }
+      $form['currect_answer' . $num] = array(
+          '#type' => 'hidden',
+          '#value' => $currect_ans_op[$num],
+      );
+      
+      $form['answer_option' . $num] = array(
+          '#title' => t(''),
+          '#type' => $answer_type,
+          '#options' => $all_ans_options[$num],
+          '#suffix' => '</div>',
+      );
+      
       
       if(!empty($media_type)){
       if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){
@@ -190,6 +171,7 @@ function itg_quiz_quiz_form() {
         '#type' => 'submit',
         '#value' => $button_text,
         '#name' => 'quizsubmit_' . $num,
+        '#suffix' => '</div>',
         '#ajax' => array(
             'callback' => 'quiz_form_ajax_handler',
             'effect' => 'fade',
@@ -199,19 +181,19 @@ function itg_quiz_quiz_form() {
       );
      
      //Skip button for all qustions except last one
-     if(($total_num_of_ques-1) !== $num){
-        $form['quiz_submit_skip' . $num] = array(
-            '#type' => 'submit',
-            '#value' => 'Skip',
-            '#name' => 'quizsubmit_' . $num,
-            '#ajax' => array(
-                'callback' => 'quiz_form_ajax_handler',
-                'effect' => 'fade',
-            ),
-            '#suffix' => '</div>',
-            '#attributes' => array('class' => array('quiz-submit-skip'))
-        );
-      }
+//     if(($total_num_of_ques-1) !== $num){
+//        $form['quiz_submit_skip' . $num] = array(
+//            '#type' => 'submit',
+//            '#value' => 'Skip',
+//            '#name' => 'quizsubmit_' . $num,
+//            '#ajax' => array(
+//                'callback' => 'quiz_form_ajax_handler',
+//                'effect' => 'fade',
+//            ),
+//            '#suffix' => '</div>',
+//            '#attributes' => array('class' => array('quiz-submit-skip'))
+//        );
+//      }
       
       $num++;
       
@@ -228,16 +210,6 @@ function itg_quiz_quiz_form() {
         '#value' => $node->nid,
     );
 
-    $form['textfield_total_count'] = array(
-        '#type' => 'hidden',
-        '#value' => $txt_num,
-    );
-    
-    $form['rating_total_count'] = array(
-        '#type' => 'hidden',
-        '#value' => $rating_num,
-    );
-    
     $form['quiz_url'] = array(
         '#type' => 'hidden',
         '#value' => $_GET['q'],
@@ -263,73 +235,36 @@ function itg_quiz_quiz_form() {
  * @param Array $form
  * @param Array $form_state
  */
-function itg_quiz_quiz_form_validate($form, &$form_state) {
-  $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
-  $num = $btn_num_arr[1];
-
-  $form_detail = $form_state['values'];
-  $ans_flag = FALSE;
-  $txt_ans_flag = FALSE;
-  $rating_ans_flag = FALSE;
-
-  //for ($num = 0; $num < $form_detail['question_total']; $num++) {
-  
-  //Checkbox validation
-    if ($form_detail['question_type' . $num] === 'checkboxes') {
-      if ($form_detail['question_skip' . $num] !== 'yes') {
-        foreach ($form_detail['answer_option' . $num] as $key => $value) {
-          if ($value !== 0) {
-            $ans_flag = TRUE;
-          }
-        }
-        if (!$ans_flag) {
-          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
-        }
-      }
-    }
-    
-   //Radio Button validation
-    if ($form_detail['question_type' . $num] === 'radios') {
-      if ($form_detail['question_skip' . $num] !== 'yes') {
-        if (empty($form_detail['answer_option' . $num])) {
-          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
-        }
-      }
-    } 
-    
-    //Rating validation
-    if ($form_detail['question_type' . $num] === 'rating') {
-      if ($form_detail['question_skip' . $num] !== 'yes') {
-        for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
-          for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
-            if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] !== 0) {
-              $rating_ans_flag = TRUE;
-            }
-          }
-        }
-        if (!$rating_ans_flag) {
-          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
-        }
-      }
-    } 
-    
-    //Textfield validation
-    if($form_detail['question_type' . $num] === 'textfield'){
-      if ($form_detail['question_skip' . $num] !== 'yes') {
-        $txt_ans_flag = FALSE;
-        for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
-          if ($form_detail['answer_option' . $num . '_' . $text_field] !== '') {
-            $txt_ans_flag = TRUE;
-          }
-        }
-        if (!$txt_ans_flag) {
-          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
-        }
-      }
-    }
-    
-  //}
-}
+//function itg_quiz_quiz_form_validate($form, &$form_state) {
+//  $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
+//  $num = $btn_num_arr[1];
+//
+//  $form_detail = $form_state['values'];
+//  $ans_flag = FALSE;
+//
+//    //Checkbox validation
+//    if ($form_detail['question_type' . $num] === 'checkboxes') {
+//      if ($form_detail['question_skip' . $num] !== 'yes') {
+//        foreach ($form_detail['answer_option' . $num] as $key => $value) {
+//          if ($value !== 0) {
+//            $ans_flag = TRUE;
+//          }
+//        }
+//        if (!$ans_flag) {
+//          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
+//        }
+//      }
+//    }
+//    
+//   //Radio Button validation
+//    if ($form_detail['question_type' . $num] === 'radios') {
+//      if ($form_detail['question_skip' . $num] !== 'yes') {
+//        if (empty($form_detail['answer_option' . $num])) {
+//          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
+//        }
+//      }
+//    } 
+//}
 
 /**
  * Submit handler for quiz form
@@ -343,6 +278,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
   $form_detail = $form_state['values'];
   $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
   $num = $btn_num_arr[1];
+
   
   //Extract user type
   if ($user->uid) {
@@ -356,23 +292,64 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
     $_SESSION['quiz_unique_key'] = user_password(6);
   }
   
-  //Insert each question of quiz in our DB
-  db_insert('itg_quiz_detail')
-        ->fields(array(
-            'nid' => $form_state['values']['nid'],
-            'uid' => $user->uid,
-            'ques_id' => $form_state['values']['question_id'.$num],
-            'question' => $form_state['values']['question'.$num],
-            'answer' => '',
-            'ans_type' => $form_state['values']['question_type'.$num],
-            'user_type' => $user_type,
-            'page_url' => $form_state['values']['quiz_url'],
-            'quiz_title' => $form_state['values']['quiz_title'],
-            'quiz_key' => $_SESSION['quiz_unique_key'],
-            'created' => time(),
-        ))
-        ->execute();
+  
 
+    
+  //Insert each question and answer in to DB
+  if ($form_state['values']['question_type' . $num] == 'radios') {
+    $ans_op_arr = explode('-', $form_state['values']['answer_option' . $num]);
+       if($ans_op_arr[0] == $form_state['values']['currect_answer' . $num]){
+     $currect_ans = 'yes';
+   } else {
+     $currect_ans = 'no';
+   }
+    db_insert('itg_quiz_detail')
+            ->fields(array(
+                'nid' => $form_state['values']['nid'],
+                'uid' => $user->uid,
+                'ques_id' => $form_state['values']['question_id' . $num],
+                'question' => $form_state['values']['question' . $num],
+                'answer' => strtolower($ans_op_arr[1]),
+                'currect_answer' => $currect_ans,
+                'ans_type' => $form_state['values']['question_type' . $num],
+                'user_type' => $user_type,
+                'page_url' => $form_state['values']['quiz_url'],
+                'quiz_title' => $form_state['values']['quiz_title'],
+                'quiz_key' => $_SESSION['quiz_unique_key'],
+                'created' => time(),
+            ))
+            ->execute();
+  }
+
+  if ($form_state['values']['question_type' . $num] == 'checkboxes') {
+
+    foreach ($form_state['values']['answer_option' . $num] as $key => $value) {
+      if ($value) {
+        $ans_op_arr = explode('-', $value);
+        if ($ans_op_arr[0] == $form_state['values']['currect_answer' . $num]) {
+          $currect_ans = 'yes';
+        } else {
+          $currect_ans = 'no';
+        }
+        db_insert('itg_quiz_detail')
+                ->fields(array(
+                    'nid' => $form_state['values']['nid'],
+                    'uid' => $user->uid,
+                    'ques_id' => $form_state['values']['question_id' . $num],
+                    'question' => $form_state['values']['question' . $num],
+                    'answer' => strtolower($ans_op_arr[1]),
+                    'currect_answer' => $currect_ans,
+                    'ans_type' => $form_state['values']['question_type' . $num],
+                    'user_type' => $user_type,
+                    'page_url' => $form_state['values']['quiz_url'],
+                    'quiz_title' => $form_state['values']['quiz_title'],
+                    'quiz_key' => $_SESSION['quiz_unique_key'],
+                    'created' => time(),
+                ))
+                ->execute();
+      }
+    }
+  }
   
   //Insert quiz in to DB on final submit
   if(strtolower($form_state['clicked_button']['#value']) == 'submit'){
@@ -385,7 +362,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
                 'created' => time(),
             ))
             ->execute();
-    unset($_SESSION['unique_quiz']);
+    unset($_SESSION['quiz_unique_key']);
   }
 
   //Display saved quiz message on final submit only.

@@ -129,9 +129,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').addClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').removeClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
@@ -372,6 +372,13 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   
+  $('#itg-quiz-quiz-form .quiz-submit').mousedown(function(){
+    $(this).ajaxSuccess(function(){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    });
+  });
+  
   
   $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
   $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
@@ -391,5 +398,44 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   });
   
   $('.page-user, .page-admin-people-create').find('.password-suggestions').removeClass('description');
+  
+  /* jQuery code ITGCMS QUIZ */
+  $('.field-name-field-quiz-option').on('change', 'select', function(){
+    var selvalue = $(this).val();
+    if(selvalue == "Text"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
+    }
+    if(selvalue == "Video"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').show();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
+    }
+    if(selvalue == "Photo"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').show();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
+    }
+  });
+  $('.field-name-field-quiz-option select').each(function(){
+    var selvalue = $(this).val();
+    if(selvalue == "Text"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
+    }
+    if(selvalue == "Video"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').show();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
+    }
+    if(selvalue == "Photo"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').show();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
+    }
+  });
+  $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
 };
 })(jQuery);

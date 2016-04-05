@@ -18,6 +18,46 @@
         $('#edit-metatags-und-advanced').hide();
       }
 
+      // Map date with frequency
+      $('input[name="field_astro_frequency[und]"]').on('change', function () {
+
+        var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
+        switch (frequency) {
+          case 'daily':
+            var startDay = moment().format('MMM DD, YYYY');
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay);
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(startDay);
+            $("#edit-title").val(startDay);
+
+            break;
+          case 'weekly':
+            var startDay = moment().day(0); // Sun
+            var endDay = moment().day(6); // Sat          
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay.format('MMM DD, YYYY'));
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(endDay.format('MMM DD, YYYY'));
+            var titleText = startDay.format('MMM DD, YYYY') + " - " + endDay.format('MMM DD, YYYY');
+            $("#edit-title").val(titleText);
+
+            break;
+          case 'monthly':
+            var firstDay = moment().date(1);
+            var lastDay = moment().endOf('month');
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay.format('MMM DD, YYYY'));
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val(lastDay.format('MMM DD, YYYY'));
+            var titleText = firstDay.format('MMM DD, YYYY') + " - " + lastDay.format('MMM DD, YYYY');
+            $("#edit-title").val(titleText);
+
+            break;
+          case 'yearly':
+            var firstDay = moment().dayOfYear(1).format('MMM DD, YYYY');
+            $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay);
+            $('input[name="field_astro_date_range[und][0][value2][date]"]').val('Dec 31, ' + moment().year());
+            var startYear = moment().dayOfYear(1).format('MMM DD, YYYY');
+            var endyear = "Dec 31, " + moment().year();
+            $("#edit-title").val(startYear + " - " + endyear);
+        }
+      });
+
       // validateJobSearch validation function            
       $("#astro-node-form").validate({
         submitHandler: function (form) {
@@ -26,10 +66,7 @@
         },
         onfocusout: function (element) {
           $(element).valid();
-        },
-        onclick: function (element) {
-          $(element).valid();
-        },
+        },        
         ignore: '',
         errorElement: 'span',
         errorPlacement: function (error, element) {
@@ -44,52 +81,9 @@
           }
           error.appendTo(errorPlaceHolder);
         },
-        rules: {          
+        rules: {
           'field_astro_frequency[und]': {
-            remote: {
-              url: Drupal.settings.uid.base_url + "/check-duplicate-title/" + Drupal.settings.uid.type + '/' + Drupal.settings.uid.nid,
-              type: "post",
-              data: {
-                title: function () {
-                  var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
-                  switch (frequency) {
-                    case 'daily':
-                      var startDay = moment().format('MMM DD, YYYY');
-                      $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay);
-                      $('input[name="field_astro_date_range[und][0][value2][date]"]').val(startDay);
-                      $("#edit-title").val(startDay);                      
-
-                      break;
-                    case 'weekly':
-                      var startDay = moment().day(0); // Sun
-                      var endDay = moment().day(6); // Sat          
-                      $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay.format('MMM DD, YYYY'));
-                      $('input[name="field_astro_date_range[und][0][value2][date]"]').val(endDay.format('MMM DD, YYYY'));
-                      var titleText = startDay.format('MMM DD, YYYY') + " - " + endDay.format('MMM DD, YYYY');
-                      $("#edit-title").val(titleText);                      
-
-                      break;
-                    case 'monthly':
-                      var firstDay = moment().date(1);
-                      var lastDay = moment().endOf('month');
-                      $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay.format('MMM DD, YYYY'));
-                      $('input[name="field_astro_date_range[und][0][value2][date]"]').val(lastDay.format('MMM DD, YYYY'));
-                      var titleText = firstDay.format('MMM DD, YYYY') + " - " + lastDay.format('MMM DD, YYYY');
-                      $("#edit-title").val(titleText);                      
-
-                      break;
-                    case 'yearly':
-                      var firstDay = moment().dayOfYear(1).format('MMM DD, YYYY');
-                      $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay);
-                      $('input[name="field_astro_date_range[und][0][value2][date]"]').val('Dec 31, ' + moment().year());
-                      var startYear = moment().dayOfYear(1).format('MMM DD, YYYY');
-                      var endyear = "Dec 31, " + moment().year();
-                      $("#edit-title").val(startYear + " - " + endyear);                      
-                  }                  
-                  return jQuery("input[name='title']").val();
-                }
-              }
-            }
+            required: true
           },
           'field_astro_zodiac[und][0][field_buzz_description][und][0][value]': {
             required: {
@@ -266,7 +260,7 @@
           'field_astro_numerology_values[und][0][field_buzz_description][und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();                
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
                 if (astroType == 'Numerology') {
                   return true;
                 }
@@ -279,7 +273,7 @@
           'field_astro_numerology_values[und][0][field_astro_select_number][und]': {
             validateSignName: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();                
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
                 if (astroType == 'Numerology') {
                   return true;
                 }
@@ -288,7 +282,7 @@
                 }
               }
             }
-          },          
+          },
           'field_astro_type[und]': {
             required: true,
             validateSignName: true
@@ -326,12 +320,9 @@
           'field_astro_date_range[und][0][value][date]': {
             required: true,
             date: true
-          }          
+          }
         },
         messages: {          
-          'field_astro_frequency[und]': {
-            remote: 'Astro for selected frequency is already filled.'
-          }
         }
       });
       jQuery.validator.addMethod("validateRange", function (value, element) {
@@ -347,46 +338,15 @@
         var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
         var startDate = $('input[name="field_astro_date_range[und][0][value][date]"]').val();
         var endDate = $('input[name="field_astro_date_range[und][0][value2][date]"]').val();
-        var momenta = moment(startDate, 'MMM DD YYYY');
-        var momentb = moment(endDate, 'MMM DD YYYY');
-        var days = momentb.diff(momenta, 'days');
-        switch (frequency) {
-          case 'daily':
-            $('input[name="title"').val(startDate);
-            if (startDate !== endDate) {
-              return false;
-            }
-            else {
-              return true;
-            }
-            break;
-          case 'weekly':
-            $('input[name="title"').val(startDate+' - '+endDate);
-            if (days !== 6) {
-              return false;
-            }
-            else {
-              return true;
-            }
-            break;
-          case 'monthly':
-            $('input[name="title"').val(startDate+' - '+endDate);
-            if (days == 29 || days == 30) {
-              return true;
-            }
-            else {
-              return false;
-            }
-            break;
-          case 'yearly':
-            $('input[name="title"').val(startDate+' - '+endDate);
-            if (days !== 365) {
-              return false;
-            }
-            else {
-              return true;
-            }
+        
+        if (frequency === 'daily') {
+          $('input[name="title"').val(startDate);          
         }
+        else {
+          $('input[name="title"').val(startDate + ' - ' + endDate);          
+        }
+        
+        return true;
       }
 
       // validate sign name drop down
@@ -397,7 +357,7 @@
         else {
           return true;
         }
-      }      
+      }
 
       // Common function to reset all values
       function clear_form_elements(class_name) {

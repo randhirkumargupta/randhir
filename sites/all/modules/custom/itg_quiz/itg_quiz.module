@@ -35,6 +35,58 @@ function itg_quiz_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_block_info().
+ */
+function itg_quiz_block_info() {
+  $blocks['quiz_tab_form_block'] = array(
+    'info' => t('Quiz Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_quiz_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'quiz_tab_form_block':                       
+      $block['content'] = theme('quiz_tab_form_display_block', array('data' => $data));
+    break;        
+  }
+  
+  return $block;
+}
+
+
+
+/**
+ * Implements hook_theme().
+ * @param type $existing
+ * @param type $type
+ * @param type $theme
+ * @param type $path
+ */
+function itg_quiz_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'quiz_tab_form_display_block' => array(
+      'template' => 'quiz-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_quiz') . '/templates',
+      'variables' => array('data' => NULL),
+    ),   
+  );
+
+  return $themes;
+}
+
+
+
 
 /***************************Form Related hooks*********************************/
 /**
@@ -46,7 +98,7 @@ function itg_quiz_menu() {
 function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 
   global $user;
-  
+  //$form['field_quiz_add_questions']['#attributes']['class'][] = 'shravan';
   //Set destination for quiz form
   if ($form_id == 'quiz_node_form') {
     
@@ -165,7 +217,9 @@ function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
      
      //Call function autocomplete to show matching titles
      $form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+     $form['nid']['#autocomplete_path'] = 'content-nid-list/quiz/autocomplete';
+     $form['nid']['#attributes'] = array('placeholder' => t('Quiz id'));
    }
 }
 
@@ -180,8 +234,8 @@ function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
 function itg_quiz_node_validate($node, $form, &$form_state) {
   
   //Date validation for start date and end date
-  if($node->type == 'quiz' && !empty($node->field_quiz_end_date[LANGUAGE_NONE][0]['value'])){
-   if(strtotime($node->field_quiz_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_quiz_end_date[LANGUAGE_NONE][0]['value'])){
+  if($node->type == 'quiz' && !empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
+   if(strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
       form_set_error('field_quiz_end_date',t('Quiz end date must be greater or equal to start date.'));
     }
   }
