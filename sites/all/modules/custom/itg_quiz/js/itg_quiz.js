@@ -11,9 +11,14 @@
       
       //Code by shravan
       //$('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-text-und-0-value').hide();
-      $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-image-und-0-ajax-wrapper').hide();
-      $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-video-und-0-ajax-wrapper').hide();
-      
+//      $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-image-und-0-ajax-wrapper').hide();
+//      $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-video-und-0-ajax-wrapper').hide();
+//       $('#selectMe').change(function () {
+//        //$('.group').hide();
+//        //$('#'+$(this).val()).show();
+//        })
+//        
+//        jQuery(this).attr("id");
       
       if (uid != 1) {
         $('.field-edit-link').hide();

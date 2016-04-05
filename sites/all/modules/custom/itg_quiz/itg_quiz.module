@@ -35,6 +35,58 @@ function itg_quiz_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_block_info().
+ */
+function itg_quiz_block_info() {
+  $blocks['quiz_tab_form_block'] = array(
+    'info' => t('Quiz Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_quiz_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'quiz_tab_form_block':                       
+      $block['content'] = theme('quiz_tab_form_display_block', array('data' => $data));
+    break;        
+  }
+  
+  return $block;
+}
+
+
+
+/**
+ * Implements hook_theme().
+ * @param type $existing
+ * @param type $type
+ * @param type $theme
+ * @param type $path
+ */
+function itg_quiz_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'quiz_tab_form_display_block' => array(
+      'template' => 'quiz-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_quiz') . '/templates',
+      'variables' => array('data' => NULL),
+    ),   
+  );
+
+  return $themes;
+}
+
+
+
 
 /***************************Form Related hooks*********************************/
 /**
