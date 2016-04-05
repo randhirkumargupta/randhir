@@ -11,6 +11,44 @@ function features_for_quiz_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_quiz_add_questions-field_quiz_answer_type'.
+  $field_instances['field_collection_item-field_quiz_add_questions-field_quiz_answer_type'] = array(
+    'bundle' => 'field_quiz_add_questions',
+    'default_value' => array(
+      0 => array(
+        'value' => 'single_correct',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_quiz_answer_type',
+    'label' => 'Answer Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_quiz_add_questions-field_quiz_options_answer'.
   $field_instances['field_collection_item-field_quiz_add_questions-field_quiz_options_answer'] = array(
     'bundle' => 'field_quiz_add_questions',
@@ -46,7 +84,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -83,7 +121,7 @@ function features_for_quiz_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -292,44 +330,6 @@ function features_for_quiz_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_quiz_options_answer-field_quiz_answer_type'.
-  $field_instances['field_collection_item-field_quiz_options_answer-field_quiz_answer_type'] = array(
-    'bundle' => 'field_quiz_options_answer',
-    'default_value' => array(
-      0 => array(
-        'value' => 'Single Correct',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 5,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_quiz_answer_type',
-    'label' => 'Answer Type',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 6,
     ),
   );
 
