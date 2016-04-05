@@ -299,7 +299,11 @@ function features_for_quiz_field_default_field_instances() {
   // 'field_collection_item-field_quiz_options_answer-field_quiz_answer_type'.
   $field_instances['field_collection_item-field_quiz_options_answer-field_quiz_answer_type'] = array(
     'bundle' => 'field_quiz_options_answer',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'Single Correct',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -315,7 +319,7 @@ function features_for_quiz_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_quiz_answer_type',
     'label' => 'Answer Type',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -446,7 +450,7 @@ function features_for_quiz_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_quiz_option',
     'label' => 'Option',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -468,7 +472,7 @@ function features_for_quiz_field_default_field_instances() {
     'description' => 'It will be like guidelines to quiz and will be displayed to front end user.',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -563,7 +567,7 @@ function features_for_quiz_field_default_field_instances() {
     'bundle' => 'quiz',
     'default_value' => array(
       0 => array(
-        'value' => 'random',
+        'value' => 'normal',
       ),
     ),
     'deleted' => 0,
@@ -604,7 +608,11 @@ function features_for_quiz_field_default_field_instances() {
   // Exported field_instance: 'node-quiz-field_quiz_immediate_result'.
   $field_instances['node-quiz-field_quiz_immediate_result'] = array(
     'bundle' => 'quiz',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'qwr',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -626,7 +634,7 @@ function features_for_quiz_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_quiz_immediate_result',
     'label' => 'Immediate Result',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -636,7 +644,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -669,7 +677,7 @@ function features_for_quiz_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_quiz_scoring_type',
     'label' => 'Quiz Scoring Type',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -726,6 +734,45 @@ function features_for_quiz_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-quiz-field_quiz_winners'.
+  $field_instances['node-quiz-field_quiz_winners'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_quiz_winners',
+    'label' => 'Winners',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-quiz-field_story_category'.
   $field_instances['node-quiz-field_story_category'] = array(
     'bundle' => 'quiz',
@@ -737,7 +784,7 @@ function features_for_quiz_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 8,
       ),
       'teaser' => array(
@@ -765,54 +812,6 @@ function features_for_quiz_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-quiz-field_story_source_id'.
-  $field_instances['node-quiz-field_story_source_id'] = array(
-    'bundle' => 'quiz',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'It is the count of winners which will be declared for the quiz and this feature is only available for contest type quiz ',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_source_id',
-    'label' => 'Winners',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 5,
-    ),
-  );
-
   // Exported field_instance: 'node-quiz-field_survey_end_date'.
   $field_instances['node-quiz-field_survey_end_date'] = array(
     'bundle' => 'quiz',
@@ -823,12 +822,12 @@ function features_for_quiz_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'itg',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
         'weight' => 11,
@@ -881,12 +880,12 @@ function features_for_quiz_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'itg',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
         'weight' => 10,
@@ -939,7 +938,6 @@ function features_for_quiz_field_default_field_instances() {
   t('Correct Answer');
   t('If user selects, normal; first added questions will appear on top for front end user. And if user selects ‘Random’ quiz questions will appear on random basis.');
   t('Immediate Result');
-  t('It is the count of winners which will be declared for the quiz and this feature is only available for contest type quiz ');
   t('It will be like guidelines to quiz and will be displayed to front end user.');
   t('It will define whether all the questions are of equal score or have different weight.');
   t('Option');
