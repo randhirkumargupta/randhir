@@ -380,7 +380,7 @@ function itg_astro_entity_view_alter(&$build, $type) {
 /**
  * Callback function for frequency and astro mapping
  */
-function itg_astro_frequency_map($title, $freq, $astro_type) {    
+function itg_astro_frequency_map($title, $freq, $astro_type, $nid = 0) {    
   $title = check_plain($title);
   $freq = check_plain($freq);
   $astro_type = check_plain($astro_type);
@@ -389,6 +389,9 @@ function itg_astro_frequency_map($title, $freq, $astro_type) {
   $itg_query = db_select('node', 'n')
       ->fields('n', array('nid'))
       ->condition('n.title', $title);
+  if ($nid) {
+    $itg_query->condition('n.nid', $nid, '!=');
+  }
   $itg_query->join('field_data_field_astro_frequency', 'frq', 'n.nid = frq.entity_id');
   $itg_query->condition('frq.field_astro_frequency_value', $freq);
   $itg_query->join('field_data_field_astro_type', 'ast', 'n.nid = ast.entity_id');
@@ -407,8 +410,14 @@ function itg_astro_node_validate($node) {
   $title = $node->title;
   $freq = $node->field_astro_frequency['und'][0]['value'];
   $astro_type = $node->field_astro_type['und'][0]['tid'];
-  $result = itg_astro_frequency_map($title, $freq, $astro_type);
+  if (isset($node->nid) && $node->nid > 1) {
+    $result = itg_astro_frequency_map($title, $freq, $astro_type, $node->nid);
+  }
+  else {
+    $result = itg_astro_frequency_map($title, $freq, $astro_type);
+  }
+  
   if ($result != '') {
-    form_set_error('field_astro_type', 'Astro for selected frequency is already filled.');
+    form_set_error('title', 'Astro for selected frequency is already filled.');
   }
 }
