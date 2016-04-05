@@ -372,6 +372,15 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   
+  $('#itg-quiz-quiz-form .button-yes').mousedown(function(){
+    $('.question-container').hide();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+  });
+  
   
   $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
   $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
