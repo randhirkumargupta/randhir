@@ -5,7 +5,7 @@
 
 function itg_survey_result() {
   $node = node_load(arg(1));
-
+  if(itg_common_check_record_existance($node->nid, 'itg_survey_detail') > 0){
   if ($node->type == 'survey') {
     
       $num = 0;
@@ -71,5 +71,9 @@ function itg_survey_result() {
     
   } else {
     drupal_access_denied();
+  }
+  
+  } else {
+    return '<h2>No Result Found! This survey has not taken yet.</h2>';
   }
 }
