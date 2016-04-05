@@ -108,7 +108,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
       drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
     );
     if ($form['nid']['#value'] == NULL) {
-      $form['title']['#default_value'] = date('M j, Y');
+      $form['title']['#default_value'] = date('M d, Y');
     }
     // Create navigation label
     $form['itg_collective'] = array(
@@ -122,7 +122,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     $form['itg_numerology'] = array(
       '#type' => 'markup',
       '#markup' => '<h2 class="story-title story-title-num">'. t('Numerology').'</h2>',      
-    ); 
+    );    
 
     // Set field visibility for zodiac sign field
     $form['field_astro_zodiac']['#states'] = array(
@@ -173,7 +173,8 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
 /**
  * after build function for altering field collection label.
  */
-function itg_astro_after_build($form, &$form_state) {
+function itg_astro_after_build($form, &$form_state) {  
+  $form['field_story_category']['und']['#title'] = t('Select Program') . '<span class="form-required" title="This field is required."> *</span>';
   if (!isset($form['#node']->nid)) {
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
@@ -192,7 +193,7 @@ function itg_astro_after_build($form, &$form_state) {
       $form['field_astro_numerology_values']['und'][$i]['field_astro_select_number']['und']['#title'] = t('Select Number') . '<span class="form-required" title="This field is required."> *</span>';
       $form['field_astro_numerology_values']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Enter Text') . '<span class="form-required" title="This field is required."> *</span>';
     }
-
+    
     $form['field_astro_zodiac']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Text') . '<span class="form-required" title="This field is required."> *</span>';
     $form['field_astro_zodiac']['und'][$i]['field_zodiac_sign']['und']['#title'] = t('Zodiac Sign') . '<span class="form-required" title="This field is required."> *</span>';
   }
@@ -359,4 +360,19 @@ function itg_astro_views_pre_render(&$view) {
     $header_content_astro .= l(t('Create Category'), 'admin/structure/taxonomy/category_management/add');
     $view->attachment_before = $header_content_astro;
   }
+}
+
+/**
+ * render zodiac icon image with sign name.
+ * @staticvar int $count
+ * @param string $build
+ * @param type $type
+ */
+function itg_astro_entity_view_alter(&$build, $type) { 
+  static $count = 0;
+  if ($type == 'field_collection_item' && isset($build['field_zodiac_sign']) && $count <= 11) {    
+    $zodiac_sign = itg_astro_zodiac_thumbnail();
+    $build['field_zodiac_sign'][0]['#markup'] .= '<div class="inner-item"><img src="' . image_style_url("thumbnail", $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';    
+  }
+  ++$count;
 }

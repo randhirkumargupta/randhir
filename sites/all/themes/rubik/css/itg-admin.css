@@ -1470,7 +1470,7 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .page-content .field-name-field-supp-publish .form-item div.description {left: 0;}
 .page-content .form-item .password-suggestions{margin: -20px 0 15px 300px; font-size: 12px; color: #666;}
 .field-name-field-buzz-description .description{padding-left: 150px !important;}
-.content-node-view .field-name-field-astro-zodiac .field-items{width: 100%;}
+.content-node-view .field-name-field-astro-zodiac > .field-items{width: 100%;}
 .content-node-view .field-name-field-astro-zodiac .field-items > .field-item{border-top: 1px solid #ddd; padding-top: 10px;}
 .content-node-view .field-name-field-astro-zodiac .field-items > .field-item:first-child{border-top: none; padding-top: 0;}
 .field-name-field-astro-video .form-type-managed-file .file-widget > .form-item, 
@@ -1479,3 +1479,14 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .field-name-field-common-audio-file .form-type-managed-file .file-widget .file a{display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: top; white-space: nowrap; width: 200px;}
 .field-name-field-astro-video .form-type-managed-file .file-widget .file-size, 
 .field-name-field-astro-video .form-type-managed-file .file-widget .file-size{margin-right: 5px;}
+#views-form-photo-gallery-management-page-1 thead .views-field.views-field-counter, 
+#draggableviews-table-strory-menegment-page-1 thead .views-field.views-field-counter, 
+#draggableviews-table-movie-review-list-page thead .views-field.views-field-counter, 
+#draggableviews-table-blogs-management-page-1 thead .views-field.views-field-counter{padding-left: 36px;}
+.node-mega_review_critic-form .group-review-basic-settings legend .form-required, 
+.node-mega_review_critic-form .group-review-movie-review legend .form-required, 
+.node-mega_review_critic-form .group-review-browse-media legend .form-required, 
+.node-mega_review_critic-form .vertical-tabs-list{display: none;}
+.node-mega_review_critic-form #field-mega-review-review-values tbody{max-width: 400px;}
+.celebrity-about .field{float: left; width: 60% !important;}
+.field-name-field-story-schedule-date-time .date-padding .form-item:first-child .date-clear, .page-manage-issues #edit-title, .date-icon{background: url('../images/calendar.png') center right 5px no-repeat !important;}
