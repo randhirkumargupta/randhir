@@ -92,7 +92,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
       if (isset($_REQUEST['destination']) && $_REQUEST['destination'] == 'tags-management') {
         unset($form['actions']['delete']);
       }
-  
+
     case 'taxonomy_csv_import_form':
 
       // Check if the user has not the 'administrator' role.
@@ -100,7 +100,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
         $form['csv_import_example'] = array(
           '#prefix' => "<div class='term-main-wrap'>" . t('Click to Download') . " " . l(t('Import Example'), 'sites/all/modules/custom/itg_term/examples/term.csv') . "</div>"
         );
-        
+
         $form['tab']['import_format']['#options']['#access'] = FALSE;
         $form['tab']['import_format']['#options'] = array(
           'fields' => 'Fields'
@@ -189,7 +189,7 @@ function itg_term_batch_alter(&$batch) {
  * @param array reference $form_state
  */
 function term_redirect_handler($form, &$form_state) {
-  $term = trim($form_state['values']['name']);
+  //$term = trim($form_state['values']['name']);
   $form_state['redirect'] = 'tags-management';
 }
 
@@ -386,13 +386,16 @@ function itg_term_views_query_alter(&$view, &$query) {
  * @param type $view
  */
 function itg_term_views_post_execute(&$view) {
-   if ($view->name == 'itg_download_taxonomy') {
-     drupal_get_messages();
-      drupal_set_message($term . ' ' . check_plain(t('Tag has been created successfully.')));
-    foreach ($view->result as $result) {
-      // Replace all empty fields with the dash '-' character.
-       $result->field_field_tags_display[0]['rendered']['#markup'] = $result->field_field_tags_display[0]['raw']['value'];
-     
+  if (isset($view->name) && $view->name == 'itg_download_taxonomy') {
+    drupal_get_messages();
+    drupal_set_message(check_plain(t('Tag has been created successfully.')));
+    if (is_array($view->result) && count($view->result) > 0) {
+      foreach ($view->result as $result) {
+        // Replace all empty fields with the dash '-' character.
+        if (is_array($result) && count($view->result) > 0) {
+          $result->field_field_tags_display[0]['rendered']['#markup'] = $result->field_field_tags_display[0]['raw']['value'];
+        }
+      }
     }
   }
 }
