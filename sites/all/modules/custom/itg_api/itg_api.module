@@ -620,9 +620,12 @@ function itg_ap_content() {
  * Implement itg_nifty_feed
  */
 function itg_nifty_feed() {
-
+  
   global $base_url, $user;
-  $direc = $_SERVER['DOCUMENT_ROOT'] . 'itgcms/sites/default/files/gallery/nifty/';
+  $base_path_set = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+  $base_path_set = explode('/', $base_path_set);
+  $path_instance = $base_path_set[1];
+  $direc = $_SERVER['DOCUMENT_ROOT'] . $path_instance . '/sites/default/files/gallery/nifty/';
   $newFileName = $direc . 'SensexNiftyFeed.txt';
   $response_xml_data = get_content_from_xml_loc('http://businesstoday.accordhostings.com/SensexNiftyFeed.aspx');
 
