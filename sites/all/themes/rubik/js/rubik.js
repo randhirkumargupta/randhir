@@ -429,5 +429,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
       $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
     }
   });
+  $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
 };
 })(jQuery);
