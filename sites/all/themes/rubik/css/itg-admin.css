@@ -1561,3 +1561,11 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-type-quiz .field-collection-container{border-bottom: none; margin: 0;}
 .node-type-quiz .block-content > .node-quiz > .column-side{display: none;}
 .node-type-quiz .block-content > .node-quiz > .column-main{width: 100%;}
+.page-display-question .view-question-list .views-field .views-label{font-weight: bold; padding-bottom: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px; display: block;}
+.page-display-question .view-question-list .entity-field-collection-item .field{padding-bottom: 10px;}
+.page-display-question .view-question-list .entity-field-collection-item .field-label{float: left; width: 20%;}
+.page-display-question .view-question-list .entity-field-collection-item .field-items{overflow: hidden;}
+.page-display-question .view-question-list .entity-field-collection-item .field-collection-view{margin: 0 0 10px; padding: 0 0 10px;}
+.page-display-question .view-question-list .entity-field-collection-item .field-collection-view:last-child{border-bottom: none; padding-bottom: 0;}
+.page-display-question .view-question-list .entity-field-collection-item .field-collection-view-links,
+.page-display-question .view-question-list .entity-field-collection-item .action-links{display: none;}
