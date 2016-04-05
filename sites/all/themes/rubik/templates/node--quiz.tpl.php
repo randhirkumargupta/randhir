@@ -112,7 +112,7 @@
                foreach ($items as $imagecollection) {
                  
                 if (isset($imagecollection['field_survey_question'][LANGUAGE_NONE]) && !empty($imagecollection['field_survey_question'][LANGUAGE_NONE])) {
-                    $output =  '<div class="field"><div class="field-label">Question</div><div class="field-items">'.$imagecollection['field_survey_question'][LANGUAGE_NONE][0]['value'].'</div></div>';
+                    $output .=  '<div class="field"><div class="field-label">Question</div><div class="field-items">'.$imagecollection['field_survey_question'][LANGUAGE_NONE][0]['value'].'</div></div>';
                   }
                   
                 if(isset($imagecollection['field_survey_add_media'][LANGUAGE_NONE])){
