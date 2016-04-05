@@ -9,6 +9,12 @@
       var uid = settings.itg_quiz.settings.uid;
       var nid = settings.itg_quiz.settings.nid;
       
+      //Code by shravan
+      //$('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-text-und-0-value').hide();
+      $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-image-und-0-ajax-wrapper').hide();
+      $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-video-und-0-ajax-wrapper').hide();
+      
+      
       if (uid != 1) {
         $('.field-edit-link').hide();
         $('#edit-body-und-0-format').hide();

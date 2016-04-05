@@ -46,7 +46,7 @@ function itg_quiz_menu() {
 function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 
   global $user;
-  
+  //$form['field_quiz_add_questions']['#attributes']['class'][] = 'shravan';
   //Set destination for quiz form
   if ($form_id == 'quiz_node_form') {
     
