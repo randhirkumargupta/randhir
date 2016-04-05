@@ -20,7 +20,7 @@
 
 <div class="SensexNiftyFeed">
     <?php
-    // get base path of server
+    // get base path detail of server
     $base_path_set = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
     $base_path_set = explode('/', $base_path_set);
     $path_instance = $base_path_set[1];
