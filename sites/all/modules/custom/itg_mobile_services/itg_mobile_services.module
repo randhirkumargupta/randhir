@@ -1,0 +1,218 @@
+<?php
+
+/**
+ * Implementation of hook_form_alter().
+ * @param array $form
+ * @param array reference $form_state
+ * @param type $form_id
+ * @return array $form
+ */
+function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
+  // Load the currently logged in user.
+  global $user;
+ // echo $form_id;
+
+  switch ($form_id) {
+    case 'clients_creation_node_form':
+      unset($form['title']);
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'clients-listing', array(
+          'attributes' => array(
+            'class' => 'button'
+          )
+        )),
+        '#weight' => 21,
+        '#value' => t('Cancel')
+      );
+      $form_state['redirect'] = 'clients-listing';
+      break;
+    case 'service_creation_node_form':
+      //dpm($form);
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'service-listing', array(
+          'attributes' => array(
+            'class' => 'button'
+          )
+        )),
+        '#weight' => 21,
+        '#value' => t('Cancel')
+      );
+      // p($form['#groups']['group_service_ftp']);
+      //Disable when question is not selected
+      $form['field_service_regional']['#states'] = array(
+        'visible' => array(
+          ':input[name="field_service_type[und]"]' => array('checked' => TRUE),
+        ),
+      );
+
+      $form['field_service_fetch_link']['#states'] = array(
+        'visible' => array(
+          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '1'),
+        ),
+        'required' => array(
+          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '1'),
+        ),
+      );
+
+      $form['field_email_address']['#states'] = array(
+        'visible' => array(
+          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
+        ),
+        'required' => array(
+          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
+        ),
+      );
+      $form_state['redirect'] = 'service-listing';
+      break;
+
+    case 'client_service_association_node_form':
+     // p($form['field_service_title'][LANGUAGE_NONE]);
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'clients-listing', array(
+          'attributes' => array(
+            'class' => 'button'
+          )
+        )),
+        '#weight' => 21,
+        '#value' => t('Cancel')
+      );
+      
+      $form['field_service_association_title']['und']['#ajax'] = array(
+        'callback' => 'itg_mobile_services_custom_callback',
+        'wrapper' => 'field_cmn_state_replace',
+        );
+      unset($form['title']);
+      break;
+    case 'create_content_node_form':
+      unset($form['title']);
+    $form['student_type'] = array(
+    '#type' => 'radios',
+    '#options' => array(
+      'high_school' => t('High School'),
+      'undergraduate' => t('Undergraduate'),
+      'graduate' => t('Graduate'),
+    ),
+    '#title' => t('What type of student are you?'),
+  );
+      $form['field_story_kicker_text']['#states'] = array(
+        'visible' => array(
+          ':select[name="method"]' => array('value' => '2569'),
+        ),
+        'required' => array(
+          ':input[name="field_content_service[und]"]' => array('value' => '2569'),
+        ),
+      );
+      
+      
+      $form['field_content_service']['#prefix']='<div id="jicustom_evaluation_entity_wrapper">';
+      $form['field_content_service']['#suffix']='</div>';
+      
+      $form['field_client_title'][LANGUAGE_NONE]['#ajax'] = array(
+        'callback' => 'itg_mobile_set_service_callback',
+        'wrapper' =>'jicustom_evaluation_entity_wrapper',
+        'method' => 'replace',  // the data would replace the field
+          'effect' => 'fade',
+          'event' => 'change',  // On change of the selection this action would take place
+        );
+//p($form['field_content_service']['und']['0']['value']);       
+//$form['field_content_service']['und']['0']['value']['#default_value'] = 'xyz';
+      $form['field_content_service']['und']['0']['value']['#attributes']['disabled'] = TRUE;
+      break;
+  }
+  return $form;
+}
+
+
+// ajax service callback
+
+function itg_mobile_set_service_callback(&$form, &$form_state) {
+
+  $form_field_state = abc; //$form['field_service_association_title'];
+
+  $form['field_content_service']['und'][0]['value']['#value'] = 'Arun';
+  return $form['field_content_service'];
+}
+
+// ajax service callback
+
+function itg_mobile_services_custom_callback($form, $form_state) {
+
+$form_field_state = abc; //$form['field_service_association_title'];
+//$form_field_city = $form['field_service_association_title'];
+//return $form['field_service_title'][LANGUAGE_NONE];
+
+return array(
+'#type' => 'ajax',
+'#commands' => array(
+ajax_command_replace("#edit-field-service-title-und-0-value", render($form_field_state)),
+ajax_command_replace("#field_cmn_city_replace", render($form_field_city))
+)
+);
+
+}
+
+
+
+
+
+/**
+ * Implements hook_field_group_build_pre_render_alter.
+ */
+function itg_mobile_services_field_group_build_pre_render_alter(&$element) {
+  // echo $element['#form_id'];
+  if (isset($element['#form_id'])) {
+    if ($element['#form_id'] == 'service_creation_node_form') {
+      //  p($element['group_service_ftp']);
+      $element['group_service_ftp']['#states'] = array(
+        'visible' => array(
+          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+        ),
+        'required' => array(
+          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+        ),
+      );
+
+      $element['group_service_ftp']['#id'] = 'group_service_ftp';
+    }
+  }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_mobile_services_views_pre_render(&$view) {
+  //Add "Create Client" button on listing page of Client Details
+  if (isset($view->name) && $view->name == "clients_details") {
+    if (isset($view->current_display) && $view->current_display == "page") {
+      $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+      $header_content_client .= l(t('Create Client'), 'node/add/clients-creation');
+      $header_content_client .= '<span class="client-services">&nbsp;'.l(t('Associate Client & Services'), 'node/add/client-service-association').'&nbsp;</span>';
+    }
+    elseif (isset($view->current_display) && $view->current_display == "page_1") {
+      $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+      $header_content_client .= l(t('Create Service'), 'node/add/service-creation');
+    }
+    $view->attachment_before = $header_content_client;
+  }
+}
+
+/**
+ * Implementation of hook_form_views_exposed_form_alter().
+ * @param array $form
+ * @param array reference $form_state
+ */
+function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state) {
+
+  switch ($form['#id']) {
+    case 'views-exposed-form-clients-details-page':
+      $form['field_client_title_tid']['#attributes'] = array(
+        'placeholder' => t('Title')
+      );
+      break;
+    case 'views-exposed-form-clients-details-page-1':
+      $form['title']['#attributes'] = array(
+        'placeholder' => t('Title')
+      );
+  }
+}
