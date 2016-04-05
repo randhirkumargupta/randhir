@@ -24,24 +24,23 @@ function features_for_quiz_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_quiz_answer_type',
-      2 => 'field_quiz_display_sequence',
-      3 => 'field_quiz_immediate_result',
-      4 => 'field_quiz_options',
-      5 => 'field_quiz_scoring_type',
-      6 => 'field_quiz_type',
-      7 => 'field_story_source_id',
-      8 => 'title',
+      1 => 'field_quiz_display_sequence',
+      2 => 'field_quiz_immediate_result',
+      3 => 'field_quiz_scoring_type',
+      4 => 'field_quiz_type',
+      5 => 'field_quiz_winners',
+      6 => 'title',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Basic Settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-quiz-basic-settings field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-quiz-basic-settings field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_quiz_basic_settings|node|quiz|form'] = $field_group;
@@ -64,13 +63,14 @@ function features_for_quiz_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Date Settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-quiz-date-settings field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-quiz-date-settings field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_quiz_date_settings|node|quiz|form'] = $field_group;
@@ -92,13 +92,14 @@ function features_for_quiz_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Section',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-quiz-section field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-quiz-section field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_quiz_section|node|quiz|form'] = $field_group;

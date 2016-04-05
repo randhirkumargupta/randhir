@@ -30,6 +30,7 @@
    
       if(nid == ''){
         $('#edit-field-quiz-add-questions-und-0-remove-button').hide();
+        $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-remove-button').hide();
       }
 
       //Collect values assigned in settings array 
