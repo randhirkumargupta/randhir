@@ -32,7 +32,7 @@ function features_for_survey_field_group_info() {
       'label' => 'Basic Settings',
       'instance_settings' => array(
         'required_fields' => 0,
-        'id' => '',
+        'id' => 'BasicDetails',
         'classes' => 'group-survey-basic-settings field-group-fieldset',
         'description' => '',
       ),
@@ -62,7 +62,7 @@ function features_for_survey_field_group_info() {
       'label' => 'Date Settings',
       'instance_settings' => array(
         'required_fields' => 0,
-        'id' => '',
+        'id' => 'DateSettings',
         'classes' => 'group-survey-date-settings field-group-fieldset',
         'description' => '',
       ),
@@ -91,7 +91,7 @@ function features_for_survey_field_group_info() {
       'label' => 'Section',
       'instance_settings' => array(
         'required_fields' => 0,
-        'id' => '',
+        'id' => 'category',
         'classes' => 'group-survey-section field-group-fieldset',
         'description' => '',
       ),
