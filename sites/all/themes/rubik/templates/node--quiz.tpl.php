@@ -112,7 +112,7 @@
                foreach ($items as $imagecollection) {
                  
                 if (isset($imagecollection['field_survey_question'][LANGUAGE_NONE]) && !empty($imagecollection['field_survey_question'][LANGUAGE_NONE])) {
-                    $output =  $imagecollection['field_survey_question'][LANGUAGE_NONE][0]['value'];
+                    $output =  '<div class="field"><div class="field-label">Question</div><div class="field-items">'.$imagecollection['field_survey_question'][LANGUAGE_NONE][0]['value'].'</div></div>';
                   }
                   
                 if(isset($imagecollection['field_survey_add_media'][LANGUAGE_NONE])){
@@ -123,21 +123,24 @@
                     if (!empty($imgfid)) {
                       $imguri = _itg_photogallery_fid($imgfid);
                       $style = 'thumbnail';
-                      $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
+                      $output .='<div class="field"><div class="field-label">Media:</div><div class="field-items"><img src="' . image_style_url($style, $imguri) . '"/></div></div>';
                     }
                   }
                 }
+                if (isset($imagecollection['field_quiz_answer_type'][LANGUAGE_NONE]) && !empty($imagecollection['field_quiz_answer_type'][LANGUAGE_NONE])) {
+                      $output .= '<div class="field"><div class="field-label">Answer Type:</div><div class="field-items">'.$imagecollection['field_quiz_answer_type'][LANGUAGE_NONE][0]['value'].'</div></div>';
+                    }  
                   if (isset($imagecollection['field_quiz_weightage'][LANGUAGE_NONE]) && !empty($imagecollection['field_quiz_weightage'][LANGUAGE_NONE])) {
-                    $output .= $imagecollection['field_quiz_weightage'][LANGUAGE_NONE][0]['value'];
+                    $output .= '<div class="field"><div class="field-label">Weightage:</div><div class="field-items">'.$imagecollection['field_quiz_weightage'][LANGUAGE_NONE][0]['value'].'</div></div>';
                   }
                   $output_sub .= '<div class="sub-field-quiz">';
                 foreach($imagecollection['field_quiz_options_answer'][LANGUAGE_NONE] as $key => $subfield){
                     $output_sub .= '<div class="sub-field-quiz-inner">';
                     if (isset($subfield['field_quiz_option'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_option'][LANGUAGE_NONE])) {
-                      $output_sub .= $subfield['field_quiz_option'][LANGUAGE_NONE][0]['value'];
+                      $output_sub .= '<div class="field"><div class="field-label">Options:</div><div class="field-items">'.$subfield['field_quiz_option'][LANGUAGE_NONE][0]['value'].'</div></div>';
                     }
                     if (isset($subfield['field_quiz_answer_text'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_answer_text'][LANGUAGE_NONE])) {
-                      $output_sub .= $subfield['field_quiz_answer_text'][LANGUAGE_NONE][0]['value'];
+                      $output_sub .= '<div class="field"><div class="field-label">Answer:</div><div class="field-items">'.$subfield['field_quiz_answer_text'][LANGUAGE_NONE][0]['value'].'</div></div>';
                     }
                     if(isset($subfield['field_quiz_answer_image'][LANGUAGE_NONE])){
                       $imgfid_new = $subfield['field_quiz_answer_image'][LANGUAGE_NONE][0]['fid'];
@@ -146,7 +149,7 @@
                           if (!empty($imgfid_new)) {
                             $img_uri = _itg_photogallery_fid($imgfid_new);
                             $style = 'thumbnail';
-                            $output_sub .='<img src="' . image_style_url($style, $img_uri) . '"/>';
+                            $output_sub .='<div class="field"><div class="field-label">Answer:</div><div class="field-items"><img src="' . image_style_url($style, $img_uri) . '"/></div></div>';
                           }
                         }
                       }
@@ -157,18 +160,15 @@
                         if (module_exists('itg_photogallery')) {
                           if (!empty($imgfid)) {
                             $video_uri = _itg_photogallery_fid($videofid);
-                            $output_sub .= $video_uri;
+                            $output_sub .= '<div class="field"><div class="field-label">Answer:</div><div class="field-items">'.$video_uri.'</div></div>';
                           }
                         }
                       }
                     }
                   if (isset($subfield['field_quiz_correct_answer'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_correct_answer'][LANGUAGE_NONE])) {
-                      $output_sub .= $subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'];
+                      $output_sub .= '<div class="field"><div class="field-label">Correct Answer:</div><div class="field-items">'.$subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'].'</div></div>';
                     }
-                    
-                 if (isset($subfield['field_quiz_answer_type'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_answer_type'][LANGUAGE_NONE])) {
-                      $output_sub .= $subfield['field_quiz_answer_type'][LANGUAGE_NONE][0]['value'];
-                    }   
+                     
                     $output_sub .= "</div>";    
                 } //endforeach sub field collection
                 $output_sub .= "</div>";
