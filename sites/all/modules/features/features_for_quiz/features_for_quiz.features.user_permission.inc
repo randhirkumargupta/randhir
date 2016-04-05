@@ -30,6 +30,9 @@ function features_for_quiz_user_default_permissions() {
   $permissions['delete any quiz content'] = array(
     'name' => 'delete any quiz content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -46,8 +49,10 @@ function features_for_quiz_user_default_permissions() {
   $permissions['edit any quiz content'] = array(
     'name' => 'edit any quiz content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );

@@ -100,6 +100,13 @@ function itg_quiz_schema() {
               'not null' => TRUE,
               'default' => '',
           ),
+         'currect_answer' => array(
+              'description' => 'Currect Answer.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
           'ans_type' => array(
               'description' => 'Answer type.',
               'type' => 'varchar',
