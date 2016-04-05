@@ -1450,6 +1450,7 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .ajax-progress-throbber{position: absolute; left: 100%; top: 5px;}
 .node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .ajax-progress-throbber .message{display: none;}
 [id*="field-survey-add-questions-values"] .form-item span.error{padding-left: 0 !important;}
+.node-survey-form .field-name-field-survey-question .form-item span.error{padding-left: 98px !important;}
 [id*="edit-field-story-expiry-date"] .date-combo .fieldset-content{padding: 0; float: left; max-width: 400px;}
 .field-name-field-gallery-image .field-widget-image-image .filefield-source-imce{opacity: 0; position: relative; z-index: 99; height: 200px;}
 .node-photogallery-form #edit-field-gallery-image .field-name-field-images a.filefield-sources-imce-browse{width: 100%; box-sizing: border-box; height: 100%; position: absolute; left: 0; top: 0; z-index: 99;}
@@ -1500,20 +1501,36 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-quiz-form .tabledrag-hide{display: none;}
 .node-quiz-form .vertical-tabs{padding: 10px 0 0 10px;}
 [id*="field-quiz-add-questions-values"] tbody{max-width: 455px !important; width: 455px;}
-.node-quiz-form .field-name-field-quiz-add-questions .form-item label{width: 140px;}
+.node-quiz-form .field-name-field-quiz-add-questions table .form-item label{width: 15%;}
 .node-quiz-form .field-name-field-quiz-add-questions .form-item .form-text{max-width: 285px !important;}
 .page-content .node-quiz-form .field-name-field-quiz-add-questions .form-item div.description,
-.page-content .node-quiz-form .field-name-field-quiz-add-questions .form-item span.error{padding-left: 140px;}
+.page-content .node-quiz-form .field-name-field-quiz-add-questions .form-item span.error{padding-left: 15%;}
 .node-quiz-form .field-name-field-quiz-add-questions .field-name-field-quiz-options-answer .field-multiple-table thead{display: none;}
 [id*="field-quiz-add-questions-values"] .field-name-field-quiz-options-answer .field-multiple-table tbody{max-width: none !important; width: 100%;}
 .field-name-field-quiz-answer-image .form-managed-file div.image-widget-data{width: 100%;}
 .field-name-field-quiz-answer-image .form-managed-file div.image-widget-data input.form-file, 
 .field-name-field-quiz-answer-video .form-managed-file input.form-file{width: 210px;}
-[id*="field-quiz-options-answer-values"] td > .button-remove, [id*="field-quiz-options-answer-values"] td > .ajax-new-content > .button-remove{margin-left: 140px;}
 .node-quiz-form .field-name-field-quiz-answer-image, 
 .node-quiz-form .field-name-field-quiz-answer-video, 
 .node-quiz-form .field-name-field-quiz-answer-text{display: none;} 
-[id*="field-quiz-options-answer-values"] tbody tr td{padding: 10px 0; border-bottom: 1px solid #ddd;}
 [id*="field-quiz-options-answer-values"] tbody tr, [id*="field-quiz-options-answer-values"] tbody tr td{float: left; width: 100%;}
-[id*="field-quiz-add-questions-add-more-wrapper"] > .form-item > div > .field-add-more-submit{margin-left: 300px !important;}
-
+[id*="field-quiz-add-questions-add-more-wrapper"] > .form-item > div > .field-add-more-submit{margin-left: 0 !important;}
+[id*="field-quiz-add-questions-values"] > thead, 
+[id*="field-quiz-add-questions-values"] > tbody, 
+[id*="field-quiz-add-questions-values"] > tbody > tr, 
+[id*="field-quiz-add-questions-values"] > tbody tr > td{width: 100% !important; max-width: none !important; box-sizing: border-box; float: left;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset{border: none;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > .fieldset-content{padding: 0;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > legend{display: none;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-question{background-color: #fffddf; padding: 10px; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-add-media{padding: 0 10px; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type,
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type{padding: 10px; box-sizing: border-box; float: left; width: 50%;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-question .form-item .form-text{width: 85% !important; max-width: none !important; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type .form-item label{width: 30%;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-weightage .form-item .form-text{max-width: 100px !important;}
+[id*="field-quiz-options-answer-values"] > tbody > tr > td{ background: #ebeff2 !important; padding: 10px; position: relative; margin-bottom: 10px;}
+[id*="field-quiz-options-answer-values"] td > .button-remove, 
+[id*="field-quiz-options-answer-values"] td > .ajax-new-content > .button-remove{background: rgba(0, 0, 0, 0) url("../images/close.png") no-repeat; height: 32px; width: 32px; border: none; box-shadow: none; border-radius: 0; margin-left: 0; position: absolute; right: 5px; top: 5px; font-size: 0; text-indent: -9999px;}
+[id*="field-quiz-add-questions-values"] .field-name-field-quiz-options-answer{position: relative;}
+[id*="field-quiz-options-answer-values"] + div.clearfix .field-add-more-submit{float: right; background-color: #008eb1; border: none; color: #fff; font-size: 32px; height: 28px; margin: -5px 0 0; padding: 0 5px 2px; vertical-align: top;}
