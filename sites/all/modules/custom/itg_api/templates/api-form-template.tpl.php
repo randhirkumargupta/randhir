@@ -10,6 +10,7 @@
         <script src="//widget.crowdynews.com/js/widget.js" async="true"></script>
     </div>
 </div>
+<div class="api-grid">
 <div class="Bse-market">
     <iframe src="http://businesstoday.acemf.co.in/Market/VolumeToppers.aspx?Exchg=NSE" frameborder="0"  height="1000" width="380" scrolling="auto"></iframe>
 </div>
@@ -47,4 +48,8 @@
     }
     ?>
 </div>
+</div>
+<style>
+  .api-grid > div{display: inline-block; vertical-align: top;}
+</style>
 
