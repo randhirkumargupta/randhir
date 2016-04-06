@@ -426,7 +426,7 @@ function itg_quiz_winner_user_list($unique_key){
               $user_name = 'Anonymous';
             } else {
               $user = user_load($record['uid']);
-              $user_name = $user->name;       
+              $user_name = ucfirst($user->name);       
             }
       
     }
