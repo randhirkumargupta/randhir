@@ -142,16 +142,18 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
         $form['#submit'][] = 'term_redirect_handler';
 
         // set redirect destination
-        $destination = 'tags-management';
-        $form['actions']['cancel'] = array(
-          '#markup' => l(t('Cancel'), $destination, array(
-            'attributes' => array(
-              'class' => 'button'
-            )
-          )),
-          '#weight' => 21,
-          '#value' => t('Cancel')
-        );
+        if (arg(3) == 'csv_import') {
+          $destination = 'tags-management';
+          $form['actions']['cancel'] = array(
+            '#markup' => l(t('Cancel'), $destination, array(
+              'attributes' => array(
+                'class' => 'button'
+              )
+            )),
+            '#weight' => 21,
+            '#value' => t('Cancel')
+          );
+        }
       }
       break;
   }
@@ -288,17 +290,19 @@ function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
       $form['#validate'][] = 'itg_term_validate';
 
       // redirect path
+      if (arg(4) != 'add') {
+        $form['#submit'][] = 'term_redirect_handler';
+        $form['actions']['delete'] = array(
+          '#markup' => l(t('Delete'), $delete_destination, array(
+            'attributes' => array(
+              'class' => 'button'
+            )
+          )),
+          '#weight' => 21,
+          '#value' => t('Delete')
+        );
+      }
 
-      $form['#submit'][] = 'term_redirect_handler';
-      $form['actions']['delete'] = array(
-        '#markup' => l(t('Delete'), $delete_destination, array(
-          'attributes' => array(
-            'class' => 'button'
-          )
-        )),
-        '#weight' => 21,
-        '#value' => t('Delete')
-      );
 
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), $destination, array(
