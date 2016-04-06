@@ -11,10 +11,11 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
   // Load the currently logged in user.
   global $user;
  // echo $form_id;
-
   switch ($form_id) {
     case 'clients_creation_node_form':
       unset($form['title']);
+      unset($form['actions']['preview_changes']);
+      //p($form['field_service_association_title']);
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'clients-listing', array(
           'attributes' => array(
@@ -27,7 +28,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form_state['redirect'] = 'clients-listing';
       break;
     case 'service_creation_node_form':
-      //dpm($form);
+      unset($form['actions']['preview_changes']);
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-listing', array(
           'attributes' => array(
@@ -85,26 +86,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'create_content_node_form':
       unset($form['title']);
-   /*
-      $form['student_type'] = array(
-    '#type' => 'radios',
-    '#options' => array(
-      'high_school' => t('High School'),
-      'undergraduate' => t('Undergraduate'),
-      'graduate' => t('Graduate'),
-    ),
-    '#title' => t('What type of student are you?'),
-  );
-      $form['field_story_kicker_text']['#states'] = array(
-        'visible' => array(
-          ':select[name="method"]' => array('value' => '2569'),
-        ),
-        'required' => array(
-          ':input[name="field_content_service[und]"]' => array('value' => '2569'),
-        ),
-      );
-      
-    */  
+
       $form['field_content_service']['#prefix']='<div id="jicustom_evaluation_entity_wrapper">';
       $form['field_content_service']['#suffix']='</div>';
       
@@ -217,3 +199,4 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state)
       );
   }
 }
+

@@ -35,6 +35,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'title' => 'title',
+    'field_client_selection' => 'field_client_selection',
     'created' => 'created',
     'changed' => 'changed',
     'view_node' => 'nothing',
@@ -52,6 +53,11 @@ function feature_for_mobile_services_views_default_views() {
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_client_selection' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -98,6 +104,11 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No Client Found.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_client_selection_target_id']['id'] = 'field_client_selection_target_id';
+  $handler->display->display_options['relationships']['field_client_selection_target_id']['table'] = 'field_data_field_client_selection';
+  $handler->display->display_options['relationships']['field_client_selection_target_id']['field'] = 'field_client_selection_target_id';
+  $handler->display->display_options['relationships']['field_client_selection_target_id']['required'] = TRUE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
@@ -281,6 +292,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
@@ -294,6 +306,13 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['field_client_title']['table'] = 'field_data_field_client_title';
   $handler->display->display_options['fields']['field_client_title']['field'] = 'field_client_title';
   $handler->display->display_options['fields']['field_client_title']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Service Title */
+  $handler->display->display_options['fields']['field_service_association_title']['id'] = 'field_service_association_title';
+  $handler->display->display_options['fields']['field_service_association_title']['table'] = 'field_data_field_service_association_title';
+  $handler->display->display_options['fields']['field_service_association_title']['field'] = 'field_service_association_title';
+  $handler->display->display_options['fields']['field_service_association_title']['settings'] = array(
+    'link' => 0,
+  );
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -338,6 +357,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -395,6 +415,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler = $view->new_display('page', 'Service', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Service Listing';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
@@ -409,6 +430,15 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Service Title';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Client selection */
+  $handler->display->display_options['fields']['field_client_selection']['id'] = 'field_client_selection';
+  $handler->display->display_options['fields']['field_client_selection']['table'] = 'field_data_field_client_selection';
+  $handler->display->display_options['fields']['field_client_selection']['field'] = 'field_client_selection';
+  $handler->display->display_options['fields']['field_client_selection']['label'] = 'Client Title';
+  $handler->display->display_options['fields']['field_client_selection']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['field_client_selection']['delta_offset'] = '0';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
