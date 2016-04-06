@@ -25,7 +25,7 @@
     $base_path_set = explode('/', $base_path_set);
     $path_instance = $base_path_set[1];
     $direc = $_SERVER['DOCUMENT_ROOT'] .$path_instance. '/sites/default/files/gallery/nifty/';
-    $newFileName = $direc . 'SensexNiftyFeed.txt';
+   print  $newFileName = $direc . 'SensexNiftyFeed.txt';
     $html = implode('', file($newFileName));
     $pieces = explode("@", $html);
 
