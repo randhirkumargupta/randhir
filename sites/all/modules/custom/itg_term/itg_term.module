@@ -97,9 +97,12 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
 
       // Check if the user has not the 'administrator' role.
       if (!in_array('administrator', $user->roles)) {
-        $form['csv_import_example'] = array(
-          '#prefix' => "<div class='term-main-wrap'>" . t('Click to Download') . " " . l(t('Import Example'), 'sites/all/modules/custom/itg_term/examples/term.csv') . "</div>"
-        );
+        if (arg(3) == 'csv_import') {
+          $form['csv_import_example'] = array(
+            '#prefix' => "<div class='term-main-wrap'>" . t('Click to Download') . " " . l(t('Import Example'), 'sites/all/modules/custom/itg_term/examples/term.csv') . "</div>"
+          );
+        }
+
 
         $form['tab']['import_format']['#options']['#access'] = FALSE;
         $form['tab']['import_format']['#options'] = array(
