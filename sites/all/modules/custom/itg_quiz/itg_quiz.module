@@ -16,7 +16,7 @@ function itg_quiz_menu() {
   
   $items = array();
   
-  $items['quiz'] = array(
+  $items['itg-quiz'] = array(
       'title' => t('Quiz'),
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_quiz_quiz_form'),
@@ -262,9 +262,9 @@ function itg_quiz_get_current_quiz() {
 
   //Load Node
   $node = node_load($nid);
-  $quiz_end_date = strtotime($node->field_quiz_end_date[LANGUAGE_NONE][0]['value']);
+  $quiz_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
 
-  if (!empty($node->field_quiz_quiz_date[LANGUAGE_NONE][0]['value'])) {
+  if (!empty($quiz_end_date)) {
     if ($quiz_end_date < $curr_time) {
       return FALSE;
     } else {
