@@ -645,7 +645,9 @@ form .form-item .form-item{
 .block-itg-story.fixed, 
 .block-itg-poll.fixed, 
 .block-itg-astro.fixed, 
-.block-itg-recipe.fixed, 
+.block-itg-recipe.fixed,
+.block-itg-survey.fixed,
+.block-itg-quiz.fixed,
 .block-itg-breaking-news.fixed, 
 .block-itg-photogallery.fixed{
   position: fixed;
