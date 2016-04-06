@@ -173,7 +173,7 @@ function feature_for_recipe_conditional_fields_default_fields() {
       ),
       'element_edit' => array(
         1 => 1,
-        3 => 0,
+        3 => 3,
       ),
       'element_edit_per_role' => 0,
       'element_edit_roles' => array(
@@ -276,9 +276,9 @@ function feature_for_recipe_conditional_fields_default_fields() {
     'dependent' => 'field_recipe_description',
     'dependee' => 'field_recipe_content_type',
     'options' => array(
-      'state' => '!visible',
+      'state' => 'visible',
       'condition' => 'value',
-      'grouping' => 'OR',
+      'grouping' => 'AND',
       'effect' => 'show',
       'effect_options' => array(),
       'element_view' => array(
@@ -433,7 +433,7 @@ function feature_for_recipe_conditional_fields_default_fields() {
       ),
       'element_edit' => array(
         1 => 1,
-        3 => 0,
+        3 => 3,
       ),
       'element_edit_per_role' => 0,
       'element_edit_roles' => array(
@@ -519,13 +519,14 @@ function feature_for_recipe_conditional_fields_default_fields() {
         ),
       ),
       'selector' => '',
-      'values_set' => 3,
-      'value_form' => 'Audio',
-      'values' => array(
-        0 => 'Audio',
-        1 => 'Video',
+      'values_set' => 1,
+      'value_form' => 'Text',
+      'value' => array(
+        0 => array(
+          'value' => 'Text',
+        ),
       ),
-      'value' => array(),
+      'values' => array(),
     ),
   );
 
@@ -692,7 +693,7 @@ function feature_for_recipe_conditional_fields_default_fields() {
       ),
       'element_edit' => array(
         1 => 1,
-        3 => 0,
+        3 => 3,
       ),
       'element_edit_per_role' => 0,
       'element_edit_roles' => array(
@@ -783,268 +784,6 @@ function feature_for_recipe_conditional_fields_default_fields() {
       'value' => array(
         0 => array(
           'value' => 'Video',
-        ),
-      ),
-      'values' => array(),
-    ),
-  );
-
-  $items["node:recipe:3"] = array(
-    'entity' => 'node',
-    'bundle' => 'recipe',
-    'dependent' => 'field_story_client_title',
-    'dependee' => 'field_recipe_syndication',
-    'options' => array(
-      'state' => 'visible',
-      'condition' => 'value',
-      'grouping' => 'AND',
-      'effect' => 'show',
-      'effect_options' => array(),
-      'element_view' => array(
-        1 => 1,
-        2 => 2,
-        5 => 0,
-        3 => 0,
-        4 => 0,
-      ),
-      'element_view_per_role' => 0,
-      'element_view_roles' => array(
-        1 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        2 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        3 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        4 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        7 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        9 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        5 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        20 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        6 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        21 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        10 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        13 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        11 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        16 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        17 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        14 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        12 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        19 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        15 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        18 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-      ),
-      'element_edit' => array(
-        1 => 1,
-        3 => 0,
-      ),
-      'element_edit_per_role' => 0,
-      'element_edit_roles' => array(
-        1 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        2 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        3 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        4 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        7 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        9 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        5 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        20 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        6 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        21 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        10 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        13 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        11 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        16 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        17 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        14 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        12 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        19 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        15 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        18 => array(
-          1 => 1,
-          3 => 0,
-        ),
-      ),
-      'selector' => '',
-      'values_set' => 1,
-      'value_form' => array(
-        'Client Title' => 'Client Title',
-      ),
-      'value' => array(
-        0 => array(
-          'value' => 'Client Title',
         ),
       ),
       'values' => array(),

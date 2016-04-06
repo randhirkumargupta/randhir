@@ -69,7 +69,7 @@ function features_for_survey_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -92,7 +92,7 @@ function features_for_survey_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_survey_answer_option_1',
-    'label' => 'Answer Option 1',
+    'label' => 'Answer choices',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -106,7 +106,7 @@ function features_for_survey_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -143,44 +143,7 @@ function features_for_survey_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_survey_add_questions-field_survey_answer_option_more'.
-  $field_instances['field_collection_item-field_survey_add_questions-field_survey_answer_option_more'] = array(
-    'bundle' => 'field_survey_add_questions',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Add more options for answer.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_survey_answer_option_more',
-    'label' => 'More Answer Options',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -214,7 +177,7 @@ function features_for_survey_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 0,
     ),
   );
 
@@ -251,7 +214,7 @@ function features_for_survey_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -289,7 +252,7 @@ function features_for_survey_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -402,7 +365,7 @@ function features_for_survey_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 1,
       ),
       'teaser' => array(
@@ -593,12 +556,10 @@ function features_for_survey_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Add Media');
   t('Add Survey Question');
-  t('Add more options for answer.');
-  t('Answer Option 1');
   t('Answer Option 2');
   t('Answer Type');
+  t('Answer choices');
   t('Category');
-  t('More Answer Options');
   t('Please add survey question.');
   t('Please select category.');
   t('Please select end date.');

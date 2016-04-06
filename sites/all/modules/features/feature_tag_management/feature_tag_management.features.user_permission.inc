@@ -47,6 +47,8 @@ function feature_tag_management_user_default_permissions() {
   $permissions['export taxonomy by csv'] = array(
     'name' => 'export taxonomy by csv',
     'roles' => array(
+      'Editor' => 'Editor',
+      'SEO' => 'SEO',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -57,6 +59,8 @@ function feature_tag_management_user_default_permissions() {
   $permissions['import taxonomy by csv'] = array(
     'name' => 'import taxonomy by csv',
     'roles' => array(
+      'Editor' => 'Editor',
+      'SEO' => 'SEO',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),

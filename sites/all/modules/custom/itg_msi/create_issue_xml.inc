@@ -31,16 +31,16 @@ function _create_issue_using_xmlfile($node, $op) {
 
   //Segregation update and insert case
   if ($op == 'update') {
-    $existing_fids = itg_msi_get_associated_fid_node($node);
+    $existing_fids = itg_msi_get_associated_fid_node($node, NULL);
     foreach ($file as $result) {
       if (!in_array($result['fid'], $existing_fids)) { //Allow only xml file to create story which is new.
-        _create_issue_process($result['fid'], $node_info);
+        _create_issue_process($result['fid'], $node_info, $node);
       }
     }
   } else {
     foreach ($file as $result) {
       sleep(1);
-      _create_issue_process($result['fid'], $node_info);
+      _create_issue_process($result['fid'], $node_info, $node);
     }
   }
 }
@@ -52,12 +52,13 @@ function _create_issue_using_xmlfile($node, $op) {
  * @param Array $node_info
  * @param string $context
  */
-function _create_issue_process($fid, $node_info) {
+function _create_issue_process($fid, $node_info, $parent_node) {
   global $user;
 
   $xml_file = file_load($fid);
   $xml_file_path = str_replace('public://', 'sites/default/files/', $xml_file->uri);
   $xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
+  
 
   if (!empty($xml)) {
 
@@ -79,13 +80,17 @@ function _create_issue_process($fid, $node_info) {
       $xml_other[strtolower($key)] = $value;
     }
 
-    $byline = trim($xml_other['byline']->p);
-    $byline_id = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');
+     $byline = trim($xml_other['byline']->p);
+     $byline_id = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');
+   
     $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));
     $kicker = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['kicker']->p))));
 
     //Add check for required fields
-    if (empty($city)) {
+    $existing_xml = itg_msi_get_associated_fid_node($parent_node, $xml_uid);
+    if(count($existing_xml) > 0){
+      drupal_set_message(t('Sorry! <strong>'.$xml_file->filename.'</strong> is a duplicate xml file. Please upload another one.'), 'error');
+    } else if (empty($city)) {
       drupal_set_message(t('No city found in the file ' . $xml_file->filename . '. Please insert a city and try again.'), 'error');
     } else if (empty($city_tid) && !empty($city)) {
       drupal_set_message(t('City <strong>' . $city . '</strong> in the file ' . $xml_file->filename . ' doesn\'t exist in our database. Please choose another city and try again.'), 'error');
@@ -134,6 +139,10 @@ function _create_issue_process($fid, $node_info) {
       if ($node_info['supplement']) {
         $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $node_info['supplement'];
       }
+      
+      $publish_date = date('Y-m-d', time());
+      $exp_date = strtotime('+90 years', strtotime($publish_date));
+      $exp_date = date('Y-m-d', $exp_date);
 
       //Insert Kicker
       $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
@@ -149,9 +158,11 @@ function _create_issue_process($fid, $node_info) {
       //Set source variables in to story content type
       $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = $node_info['source_type'];
       $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = $node_info['source_nid'];
+      $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date;
+      $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
       $node->revision = 1;
       $node->log = 'State Changed to published';
-
+      $node->workbench_moderation_state_new = workbench_moderation_state_published();
       $node = node_submit($node); // Prepare node for saving
       node_save($node); // Finally save node
       
@@ -168,7 +179,6 @@ function _create_issue_process($fid, $node_info) {
                 ))
                 ->execute();
       }
-      workbench_moderation_moderate($node, 'published');
       
     } // Close else condition
   } else {
@@ -180,4 +190,3 @@ function _create_issue_process($fid, $node_info) {
     
   }
 }
-

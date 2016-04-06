@@ -18,11 +18,11 @@ function feature_for_poll_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'thumbnail',
         ),
         'type' => 'image',
         'weight' => 1,
@@ -34,7 +34,7 @@ function feature_for_poll_field_default_field_instances() {
     'label' => 'Poll Answer Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -42,7 +42,7 @@ function feature_for_poll_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -90,7 +90,7 @@ function feature_for_poll_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -115,6 +115,49 @@ function feature_for_poll_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_poll_answer-field_poll_manipulate_value'.
+  $field_instances['field_collection_item-field_poll_answer-field_poll_manipulate_value'] = array(
+    'bundle' => 'field_poll_answer',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_poll_manipulate_value',
+    'label' => 'Poll manipulate',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => 99,
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 3,
     ),
   );
 
@@ -145,7 +188,7 @@ function feature_for_poll_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_associate_poll',
     'label' => 'Associate poll',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -166,7 +209,11 @@ function feature_for_poll_field_default_field_instances() {
   // Exported field_instance: 'node-poll-field_display_result'.
   $field_instances['node-poll-field_display_result'] = array(
     'bundle' => 'poll',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -213,13 +260,9 @@ function feature_for_poll_field_default_field_instances() {
         'label' => 'above',
         'module' => 'field_collection',
         'settings' => array(
-          'add' => 'Add',
-          'delete' => 'Delete',
-          'description' => TRUE,
-          'edit' => 'Edit',
           'view_mode' => 'full',
         ),
-        'type' => 'field_collection_view',
+        'type' => 'field_collection_fields',
         'weight' => 4,
       ),
       'teaser' => array(
@@ -297,7 +340,7 @@ function feature_for_poll_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'thumbnail',
         ),
         'type' => 'image',
         'weight' => 7,
@@ -315,7 +358,7 @@ function feature_for_poll_field_default_field_instances() {
     'label' => 'Poll Banner',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -323,7 +366,7 @@ function feature_for_poll_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -373,7 +416,7 @@ function feature_for_poll_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'thumbnail',
         ),
         'type' => 'image',
         'weight' => 13,
@@ -391,7 +434,7 @@ function feature_for_poll_field_default_field_instances() {
     'label' => 'Poll Call to Action Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -399,7 +442,7 @@ function feature_for_poll_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -435,6 +478,64 @@ function feature_for_poll_field_default_field_instances() {
       ),
       'type' => 'image_image',
       'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'node-poll-field_poll_end_date'.
+  $field_instances['node-poll-field_poll_end_date'] = array(
+    'bundle' => 'poll',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'itg',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_poll_end_date',
+    'label' => 'End Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-0:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 17,
     ),
   );
 
@@ -506,7 +607,7 @@ function feature_for_poll_field_default_field_instances() {
     'label' => 'Poll Question Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -514,7 +615,7 @@ function feature_for_poll_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -624,7 +725,7 @@ function feature_for_poll_field_default_field_instances() {
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'txt mp4',
+      'file_extensions' => 'mp4',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -636,11 +737,11 @@ function feature_for_poll_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 0,
+            'imce' => 'imce',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -648,7 +749,7 @@ function feature_for_poll_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -673,12 +774,12 @@ function feature_for_poll_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'itg',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
         'weight' => 8,
@@ -714,7 +815,7 @@ function feature_for_poll_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
       'weight' => 12,
@@ -724,7 +825,11 @@ function feature_for_poll_field_default_field_instances() {
   // Exported field_instance: 'node-poll-field_result_format'.
   $field_instances['node-poll-field_result_format'] = array(
     'bundle' => 'poll',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -757,6 +862,45 @@ function feature_for_poll_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-poll-field_show_end_date'.
+  $field_instances['node-poll-field_show_end_date'] = array(
+    'bundle' => 'poll',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_show_end_date',
+    'label' => 'Show End Date',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 18,
     ),
   );
 
@@ -806,6 +950,7 @@ function feature_for_poll_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Associate poll');
   t('Display Result');
+  t('End Date');
   t('Poll Answer');
   t('Poll Answer Image');
   t('Poll Answer Text');
@@ -816,7 +961,9 @@ function feature_for_poll_field_default_field_instances() {
   t('Poll Question Image');
   t('Poll Question Text');
   t('Poll Question Video');
+  t('Poll manipulate');
   t('Result format');
+  t('Show End Date');
   t('Start Date');
   t('Story url');
 

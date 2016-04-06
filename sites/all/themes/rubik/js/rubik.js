@@ -129,16 +129,16 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').addClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').removeClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
     var offSet = 80;
     var dti = $(this).attr('data-target-id');
     var targetOffset = $('#' + dti).offset().top - offSet;
-    if(dti == "BasicDetails"){
+    if(dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element"){
       $(this).addClass('active').siblings('.target-link').removeClass('active');
       $("body,html").animate({ scrollTop: 0 }, 1000);
     }
@@ -148,10 +148,12 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
     
     });
+  //Incorrect navigation when user click on home page from view blog page
+  $("a[href='/itgcms/blog']").attr('href', '/itgcms/mydraft-blogs');
     
   // Jquery code to close preview popup
   $(document).on('click', '.close-preview', function(){
-    $(this).parents('.preview-wrapper').hide();
+    $(this).parents('.preview-wrapper').remove();
   });
   
   // jQuery code to change text URL alias to Sef URL
@@ -223,8 +225,8 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     $('select').blur();
   });
   
-  $('.node-type-survey div.clearfix .field-add-more-submit, .page-node-add-survey div.clearfix .field-add-more-submit').val('Add another question');
-  $('.node-type-survey .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit, .field-name-field-survey-answer-option-more div.clearfix .field-add-more-submit').val('Add another answer');
+  $('.field-name-field-survey-add-questions > .form-item > div.clearfix .field-add-more-submit').val('Add another question');
+  $('.field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .field-add-more-submit').val('+');
   
   $('.field-name-field-gallery-image').find('.form-text').each(function(){
     var plaholderText = $(this).prev().text();
@@ -250,6 +252,193 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     e.stopPropagation();
     $(this).parents('.form-type-managed-file').removeClass('no-image-selected');
   });
+//  $('#page-title:contains("00:00:00")').html().split("00:00:00").join("");
+  $('.node-type-issue #page-title:contains("00:00:00")').each(function(){
+    $(this).html($(this).html().split("00:00:00").join(""));
+});
 
+  $('input.rating').hover(function(){
+    $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
+    $(this).parent().nextAll().removeClass('rating-hover');
+  }, function(){
+    $('.form-checkboxes.rating .form-type-checkbox').removeClass('rating-hover');
+  });
+  
+  $('input.rating').click(function(){
+    $(this).parent().addClass('rated-div current-rating').prevAll().addClass('rated-div');
+    $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
+    $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
+  });
+  
+  $('.survey-submit, .survey-submit-skip').mousedown(function(){
+    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
+    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
+    var textValue = $(this).parents('.question-container').find('.form-text').val();
+    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
+    
+    if(checkValue && skipValue == 'no'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    } else if(skipValue == 'yes'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    }
+    
+    if(radioValue && skipValue == 'no'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    } else if(skipValue == 'yes'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    }
+    
+    if(textValue  && skipValue == 'no' && textValue != 'undefined'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    } else if(skipValue == 'yes'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    }
+    
+  });
+  
+  var loader = '<div class="ajax-loader"><img src="sites/all/themes/rubik/images/loader.svg" alt=""/></div>';
+  
+  $('#itg-survey-survey-form .button-yes').mousedown(function(){
+    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
+    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
+    var textValue = $(this).parents('.question-container').find('.form-text').val();
+    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
+    
+    if(checkValue && skipValue == 'no'){
+      $('.question-container').hide();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+      
+    } else if(skipValue == 'yes'){
+     $('.question-container').hide();
+     $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    }
+    
+    if(radioValue && skipValue == 'no'){
+      $('.question-container').hide();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    } else if(skipValue == 'yes'){
+     $('.question-container').hide();
+     $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    }
+    
+    if(textValue  && skipValue == 'no' && textValue != 'undefined'){
+      $('.question-container').hide();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    } else if(skipValue == 'yes'){
+      $('.question-container').hide();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    }
+  });
+  
+  $('#itg-quiz-quiz-form .quiz-submit').mousedown(function(){
+    $(this).ajaxSuccess(function(){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    });
+  });
+  
+  
+  $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
+  $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
+  
+  $('.field-name-field-gallery-image .field-widget-image-image .filefield-source-imce').each(function(){
+    if(!($(this).next().hasClass('gallery-browse'))){
+      $(this).after('<a href="javascript:;" class="gallery-browse"><i class="fa fa-picture-o"></i><span>Browse</span></a>');
+    }
+  });
+  $('.field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function(){
+    if($(this).children().hasClass('image-preview')){
+      $(this).addClass('has-preview');
+    }
+    else{
+      $(this).removeClass('has-preview');
+    }
+  });
+  
+  $('.page-user, .page-admin-people-create').find('.password-suggestions').removeClass('description');
+  
+  /* jQuery code ITGCMS QUIZ */
+  $('.field-name-field-quiz-option').on('change', 'select', function(){
+    var selvalue = $(this).val();
+    $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').find('.button-remove').trigger('mousedown');
+    $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').find('.button-remove').trigger('mousedown');
+    $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').find('.form-text').val('');
+    if(selvalue == "Text"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
+    }
+    if(selvalue == "Video"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').show();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
+    }
+    if(selvalue == "Photo"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').show();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
+    }
+  });
+  $('.field-name-field-quiz-option select').each(function(){
+    var selvalue = $(this).val();
+    if(selvalue == "Text"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
+    }
+    if(selvalue == "Video"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').show();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
+    }
+    if(selvalue == "Photo"){
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').show();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
+      $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
+    }
+  });
+  $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
 };
 })(jQuery);
