@@ -138,7 +138,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     var offSet = 80;
     var dti = $(this).attr('data-target-id');
     var targetOffset = $('#' + dti).offset().top - offSet;
-    if(dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element"){
+    if(dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails"){
       $(this).addClass('active').siblings('.target-link').removeClass('active');
       $("body,html").animate({ scrollTop: 0 }, 1000);
     }
