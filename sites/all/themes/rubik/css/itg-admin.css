@@ -559,6 +559,7 @@ form .form-item .form-item{
 #block-itg-photogallery-photogallery-tab-form-block, 
 #block-itg-astro-astro-tab-form-block,
 #block-itg-survey-survey-tab-form-block,
+#block-itg-quiz-quiz-tab-form-block,
 #block-itg-recipe-recipe-tab-form-block{
   border-left: none;
   border-right: none;
@@ -573,6 +574,7 @@ form .form-item .form-item{
 #block-menu-menu-photogallery-admin-menu .block-content,
 #block-itg-astro-astro-tab-form-block .block-content,
 #block-itg-survey-survey-tab-form-block .block-content,
+#block-itg-quiz-quiz-tab-form-block .block-content,
 #block-itg-photogallery-photogallery-tab-form-block .block-content{
   padding: 0;
 }
@@ -1541,11 +1543,10 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 [id*="field-quiz-add-questions-values"] > tbody, 
 [id*="field-quiz-add-questions-values"] > tbody > tr, 
 [id*="field-quiz-add-questions-values"] > tbody tr > td{width: 100% !important; max-width: none !important; box-sizing: border-box; float: left;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset{border: none;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > .fieldset-content{padding: 0; position: relative;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset-content > .button-remove{position: absolute; left: 10px; bottom: 8px;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td .ajax-new-content .fieldset-content > .button-remove{bottom: 17px;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > legend{display: none;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset{border: none;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset .fieldset-content{padding: 0; position: relative;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset-content > .button-remove{position: absolute; left: 0; bottom: 8px;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset legend{display: none;}
 [id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-survey-question{background-color: #fffddf; padding: 10px; box-sizing: border-box;}
 [id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-survey-add-media{padding: 0 10px; box-sizing: border-box;}
 [id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-quiz-answer-type{padding: 0 10px; box-sizing: border-box; float: left; width: 50%;}
@@ -1573,3 +1574,4 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .form-item legend span.error{padding-left: 0 !important;}
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove + .form-item{display: block !important;}
 .field-name-field-quiz-answer-image .form-managed-file .image-preview + div.image-widget-data{width: auto;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td{padding: 10px 10px 0; border: 1px solid #ddd; margin-bottom: 10px;}
