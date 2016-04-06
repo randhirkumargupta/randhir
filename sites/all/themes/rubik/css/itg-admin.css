@@ -1531,7 +1531,7 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 [id*="field-quiz-add-questions-values"] .field-name-field-quiz-options-answer .field-multiple-table tbody{max-width: none !important; width: 100%;}
 .field-name-field-quiz-answer-image .form-managed-file div.image-widget-data{width: 100%;}
 .field-name-field-quiz-answer-image .form-managed-file div.image-widget-data input.form-file, 
-.field-name-field-quiz-answer-video .form-managed-file input.form-file{width: 210px;}
+.field-name-field-quiz-answer-video .form-managed-file input.form-file{width: 210px; float: left;}
 .node-quiz-form .field-name-field-quiz-answer-image, 
 .node-quiz-form .field-name-field-quiz-answer-video, 
 .node-quiz-form .field-name-field-quiz-answer-text{display: none;} 
@@ -1542,15 +1542,16 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 [id*="field-quiz-add-questions-values"] > tbody > tr, 
 [id*="field-quiz-add-questions-values"] > tbody tr > td{width: 100% !important; max-width: none !important; box-sizing: border-box; float: left;}
 [id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset{border: none;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > .fieldset-content{padding: 0;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > .fieldset-content{padding: 0; position: relative;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset-content > .button-remove{position: absolute; left: 10px; bottom: 8px;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .ajax-new-content .fieldset-content > .button-remove{bottom: 17px;}
 [id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > legend{display: none;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-question{background-color: #fffddf; padding: 10px; box-sizing: border-box;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-add-media{padding: 0 10px; box-sizing: border-box;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type,
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type{padding: 10px; box-sizing: border-box; float: left; width: 50%;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-question .form-item .form-text{width: 85% !important; max-width: none !important; box-sizing: border-box;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type .form-item label{width: 30%;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-weightage .form-item .form-text{max-width: 100px !important;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-survey-question{background-color: #fffddf; padding: 10px; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-survey-add-media{padding: 0 10px; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-quiz-answer-type{padding: 0 10px; box-sizing: border-box; float: left; width: 50%;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-survey-question .form-item .form-text{width: 85% !important; max-width: none !important; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-quiz-answer-type .form-item label{width: 30%;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-quiz-weightage .form-item .form-text{max-width: 100px !important;}
 [id*="field-quiz-options-answer-values"] > tbody > tr > td{ background: #ebeff2 !important; padding: 10px; position: relative; margin-bottom: 10px;}
 [id*="field-quiz-options-answer-values"] td > .button-remove, 
 [id*="field-quiz-options-answer-values"] td > .ajax-new-content > .button-remove{background: rgba(0, 0, 0, 0) url("../images/close.png") no-repeat; height: 32px; width: 32px; border: none; box-shadow: none; border-radius: 0; margin-left: 0; position: absolute; right: 5px; top: 5px; font-size: 0; text-indent: -9999px;}
@@ -1567,5 +1568,8 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .page-display-question .view-question-list .entity-field-collection-item .field-items{overflow: hidden;}
 .page-display-question .view-question-list .entity-field-collection-item .field-collection-view{margin: 0 0 10px; padding: 0 0 10px;}
 .page-display-question .view-question-list .entity-field-collection-item .field-collection-view:last-child{border-bottom: none; padding-bottom: 0;}
-.page-display-question .view-question-list .entity-field-collection-item .field-collection-view-links,
-.page-display-question .view-question-list .entity-field-collection-item .action-links{display: none;}
+/*.page-display-question .view-question-list .entity-field-collection-item .field-collection-view-links,
+.page-display-question .view-question-list .entity-field-collection-item .action-links{display: none;}*/
+.form-item legend span.error{padding-left: 0 !important;}
+.node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove + .form-item{display: block !important;}
+.field-name-field-quiz-answer-image .form-managed-file .image-preview + div.image-widget-data{width: auto;}
