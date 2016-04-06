@@ -41,6 +41,35 @@ function itg_recipe_node_presave($node) {
  */
 function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
+  
+    // code for Comment Question field hide and show
+    $form['field_story_facebook_narrative']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+      )
+    );
+     
+    // code for facebook image field hide and show
+    $form['field_story_facebook_image']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+      )
+    );
+       
+    // code for tweet field show and hide 
+    $form['field_story_tweet']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+      ),
+    );
+    
+     // code for tweeter image field hide and show
+    $form['field_story_tweet_image']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+      )
+    );
+  
   if ($form_id == 'recipe_node_form') {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_recipe') . '/js/jquery.validate.min.js',

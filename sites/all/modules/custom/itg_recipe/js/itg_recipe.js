@@ -16,7 +16,19 @@
                 $('.vertical-tabs-list').hide();
                 $('#edit-metatags-und-advanced').hide();
             }
-            
+            // Code for facebook field value set Null
+                 $('#edit-field-story-social-media-integ-und-facebook').click(function() {                     
+                    if ($("#edit-field-story-social-media-integ-und-facebook").is(":not(:checked)")) {                         
+                      $("#edit-field-story-facebook-narrative-und-0-value").val('');  
+                    }                    
+                 });                 
+                 
+                 // Code for tweet field value set Null
+                 $('#edit-field-story-social-media-integ-und-twitter').click(function() {                     
+                    if ($("#edit-field-story-social-media-integ-und-twitter").is(":not(:checked)")) {                         
+                      $("#edit-field-story-tweet-und-0-value").val('');                          
+                    }                    
+                 });
             
             $("#recipe-node-form").validate({
         submitHandler: function (form) {
