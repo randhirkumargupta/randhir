@@ -94,33 +94,30 @@ function features_for_quiz_field_default_field_instances() {
     'bundle' => 'field_quiz_add_questions',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter weight of question.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
+        'type' => 'list_default',
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_quiz_weightage',
     'label' => 'Weightage',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
       'weight' => 3,
     ),
   );
@@ -237,7 +234,7 @@ function features_for_quiz_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'medium',
         ),
         'type' => 'image',
         'weight' => 2,
@@ -943,7 +940,6 @@ function features_for_quiz_field_default_field_instances() {
   t('Option');
   t('Options');
   t('Please add quiz question.');
-  t('Please enter weight of question.');
   t('Please select quiz validity end date.');
   t('Please select quiz validity start date.');
   t('Question');

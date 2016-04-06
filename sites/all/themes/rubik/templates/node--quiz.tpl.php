@@ -104,15 +104,14 @@
           </div>
           
               <?php
-              if ($node->op == 'Preview') {
+             if (isset($node->op) && $node->op == 'Preview') {
               $output = '';
               $imgfid = '';
-              $output_sub = '';
               $items = field_get_items('node', $node, 'field_quiz_add_questions');
                foreach ($items as $imagecollection) {
                  
                 if (isset($imagecollection['field_survey_question'][LANGUAGE_NONE]) && !empty($imagecollection['field_survey_question'][LANGUAGE_NONE])) {
-                    $output =  '<div class="field"><div class="field-label">Question</div><div class="field-items">'.$imagecollection['field_survey_question'][LANGUAGE_NONE][0]['value'].'</div></div>';
+                    $output .=  '<div class="field"><div class="field-label">Question</div><div class="field-items">'.$imagecollection['field_survey_question'][LANGUAGE_NONE][0]['value'].'</div></div>';
                   }
                   
                 if(isset($imagecollection['field_survey_add_media'][LANGUAGE_NONE])){
@@ -133,14 +132,15 @@
                   if (isset($imagecollection['field_quiz_weightage'][LANGUAGE_NONE]) && !empty($imagecollection['field_quiz_weightage'][LANGUAGE_NONE])) {
                     $output .= '<div class="field"><div class="field-label">Weightage:</div><div class="field-items">'.$imagecollection['field_quiz_weightage'][LANGUAGE_NONE][0]['value'].'</div></div>';
                   }
-                  $output_sub .= '<div class="sub-field-quiz">';
+                  $output .= '<div class="sub-field-quiz">'; //$output_sub
+                  $imgfid_new = '';
                 foreach($imagecollection['field_quiz_options_answer'][LANGUAGE_NONE] as $key => $subfield){
-                    $output_sub .= '<div class="sub-field-quiz-inner">';
+                    //$output .= '<div class="sub-field-quiz-inner">';
                     if (isset($subfield['field_quiz_option'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_option'][LANGUAGE_NONE])) {
-                      $output_sub .= '<div class="field"><div class="field-label">Options:</div><div class="field-items">'.$subfield['field_quiz_option'][LANGUAGE_NONE][0]['value'].'</div></div>';
+                      $output .= '<div class="field"><div class="field-label">Options:</div><div class="field-items">'.$subfield['field_quiz_option'][LANGUAGE_NONE][0]['value'].'</div></div>';
                     }
-                    if (isset($subfield['field_quiz_answer_text'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_answer_text'][LANGUAGE_NONE])) {
-                      $output_sub .= '<div class="field"><div class="field-label">Answer:</div><div class="field-items">'.$subfield['field_quiz_answer_text'][LANGUAGE_NONE][0]['value'].'</div></div>';
+                    if (isset($subfield['field_quiz_answer_text'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_answer_text'][LANGUAGE_NONE][0]['value'])) {
+                      $output .= '<div class="field"><div class="field-label">Answer:</div><div class="field-items">'.$subfield['field_quiz_answer_text'][LANGUAGE_NONE][0]['value'].'</div></div>';
                     }
                     if(isset($subfield['field_quiz_answer_image'][LANGUAGE_NONE])){
                       $imgfid_new = $subfield['field_quiz_answer_image'][LANGUAGE_NONE][0]['fid'];
@@ -149,7 +149,7 @@
                           if (!empty($imgfid_new)) {
                             $img_uri = _itg_photogallery_fid($imgfid_new);
                             $style = 'thumbnail';
-                            $output_sub .='<div class="field"><div class="field-label">Answer:</div><div class="field-items"><img src="' . image_style_url($style, $img_uri) . '"/></div></div>';
+                            $output .='<div class="field"><div class="field-label">Answer:</div><div class="field-items"><img src="' . image_style_url($style, $img_uri) . '"/></div></div>';
                           }
                         }
                       }
@@ -158,37 +158,39 @@
                       $videofid = $subfield['field_quiz_answer_video'][LANGUAGE_NONE][0]['fid'];
                       if ($videofid != 0) {
                         if (module_exists('itg_photogallery')) {
-                          if (!empty($imgfid)) {
+                          if (!empty($videofid)) {
                             $video_uri = _itg_photogallery_fid($videofid);
-                            $output_sub .= '<div class="field"><div class="field-label">Answer:</div><div class="field-items">'.$video_uri.'</div></div>';
+                            $output .= '<div class="field"><div class="field-label">Answer:</div><div class="field-items">'.$video_uri.'</div></div>';
                           }
                         }
                       }
                     }
                   if (isset($subfield['field_quiz_correct_answer'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_correct_answer'][LANGUAGE_NONE])) {
-                      $output_sub .= '<div class="field"><div class="field-label">Correct Answer:</div><div class="field-items">'.$subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'].'</div></div>';
+                      $output .= '<div class="field"><div class="field-label">Correct Answer:</div><div class="field-items">'.$subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'].'</div></div>';
                     }
                      
-                    $output_sub .= "</div>";    
+                   // $output .= "</div>";    
                 } //endforeach sub field collection
-                $output_sub .= "</div>";
+                $output .= "</div>";
             } //endforeach main filed collection
 
               if (isset($output) && !empty($output)){
                 ?>
           <div class="content-node-view">
                 <div class="expert-details content-box">
-                  <h2><?php echo t('Add Quiz Question'); ?></h2>
+                  <h2><?php echo t('Quiz Question'); ?></h2>
                   <div class="content-details">     
-      <?php echo $output; ?>     
-      <?php echo $output_sub; ?>     
+      <?php echo $output; ?>  
                   </div>
                 </div>
         </div>
-              <?php } }else{ ?>
+              <?php } 
+              
+              }else{              
+                ?>
                 <div class="content-node-view">
                   <div class="expert-details content-box">
-                  <h2><?php echo t('Add Quiz Question'); ?></h2>
+                  <h2><?php echo t('Quiz Question'); ?></h2>
                   <div class="content-details">   
                   <?php
                     $field_poll_answer = render($content['field_quiz_add_questions']);
@@ -199,7 +201,7 @@
                   </div>
                 </div>
                     <?php
-                    } ?> 
+                     } ?> 
 
               <?php endif; ?>
 
