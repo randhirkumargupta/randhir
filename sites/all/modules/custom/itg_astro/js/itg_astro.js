@@ -308,8 +308,8 @@
           'field_buzz_description[und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '314') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Collective Content') {
                   return true;
                 }
                 else {
