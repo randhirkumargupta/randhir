@@ -95,7 +95,7 @@ function features_for_quiz_field_group_info() {
       'label' => 'Section',
       'instance_settings' => array(
         'required_fields' => 0,
-        'id' => '',
+        'id' => 'category',
         'classes' => 'group-quiz-section field-group-fieldset',
         'description' => '',
       ),
