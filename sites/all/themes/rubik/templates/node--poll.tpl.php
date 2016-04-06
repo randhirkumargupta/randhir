@@ -8,10 +8,10 @@
       <?php if (!empty($submitted)): ?>
         <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
       <?php endif; ?>
-        <?php
-        //p($node);
-       // echo $node->moderation_history_block;
-        ?>
+      <?php
+      //p($node);
+      // echo $node->moderation_history_block;
+      ?>
       <!-- add && !$teaser for hide comment link -->
       <?php if (!empty($links) && !$teaser): ?>
         <div class='<?php print $hook ?>-links clearfix'>
@@ -41,106 +41,94 @@
 
       <?php if (!empty($content)): ?>
         <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-          <?php
-          //print render($content) 
-          // print '<pre>';
-          //print_r($content);
-          //print '</pre>';
-          ?>
-
           <?php if ($view_mode == 'full'): ?>
-          <div class="content-node-view">
-            <div class="basic-details content-box">
-              <div class="content-details">
-                <div class="field">
-                  <div class="field-label"><?php echo t('Poll Title'); ?>:</div>
-                  <div class="field-items"><?php print $title; ?></div>
-                </div>
-                <?php
-                $poll_question_text = render($content['field_poll_question_text']);
-                if (!empty($poll_question_text)): print render($content['field_poll_question_text']);
-                endif;
-                ?>
-                <?php
-                $poll_question_image = render($content['field_poll_question_image']);
-                if (!empty($poll_question_image)): print render($content['field_poll_question_image']);
-                endif;
-                ?>
-                <?php
-                $poll_question_video = render($content['field_poll_question_video']);
-                if (!empty($poll_question_video)): print render($content['field_poll_question_video']);
-                endif;
-                ?>
-              </div>
-            </div>
-          </div>
-            
-              <?php
-              if ($node->op == 'Preview') {
-              $output = '';
-              $imgfid = '';
-              $items = field_get_items('node', $node, 'field_poll_answer');
-               foreach ($items as $imagecollection) {
-                if(isset($imagecollection['field_poll_answer_image'][LANGUAGE_NONE])){
-                $imgfid = $imagecollection['field_poll_answer_image'][LANGUAGE_NONE][0]['fid'];
-                }
-                if ($imgfid != 0) {
-                  $output .= '<li>';
-                  if (module_exists('itg_photogallery')) {
-                    if (!empty($imgfid)) {
-                      $imguri = _itg_photogallery_fid($imgfid);
-                      $style = 'thumbnail';
-                      $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
+            <div class="content-node-view">
+              <div class="basic-details content-box">
+                <h2><?php echo t('Basic Details'); ?></h2>
+                <div class="content-details">
+                  <div class="field">
+                    <div class="field-label"><?php echo t('Poll Title'); ?>:</div>
+                    <div class="field-items"><?php print $title; ?></div>
+                  </div>
+                  <?php
+                  $poll_question_text = render($content['field_poll_question_text']);
+                  if (!empty($poll_question_text)): print render($content['field_poll_question_text']);
+                  endif;
+                  ?>
+                  <?php
+                  $poll_question_image = render($content['field_poll_question_image']);
+                  if (!empty($poll_question_image)): print render($content['field_poll_question_image']);
+                  endif;
+                  ?>
+                  <?php
+                  $poll_question_video = render($content['field_poll_question_video']);
+                  if (!empty($poll_question_video)): print render($content['field_poll_question_video']);
+                  endif;
+                  ?>
+
+                  <?php
+                  if ($node->op == 'Preview') {
+                    $output = '';
+                    $imgfid = '';
+                    $items = field_get_items('node', $node, 'field_poll_answer');
+                    $ansnumber = 1;
+                    foreach ($items as $imagecollection) {
+                      if (isset($imagecollection['field_poll_answer_image'][LANGUAGE_NONE])) {
+                        $imgfid = $imagecollection['field_poll_answer_image'][LANGUAGE_NONE][0]['fid'];
+                      }
+                      $output .= '<li>';
+                      if ($imgfid != 0) {
+
+                        if (module_exists('itg_photogallery')) {
+                          if (!empty($imgfid)) {
+                            $imguri = _itg_photogallery_fid($imgfid);
+                            $style = 'thumbnail';
+                            $output .='<div class="field"><div class="field-label">Answer ' . $ansnumber . ':</div><div class="field-items"><img src="' . image_style_url($style, $imguri) . '"/></div></div>';
+                          }
+                        }
+                      }
+                      if (isset($imagecollection['field_poll_answer_text'][LANGUAGE_NONE]) && !empty($imagecollection['field_poll_answer_text'][LANGUAGE_NONE][0]['value'])) {
+                        $output .= '<div class="field"><div class="field-label">Answer ' . $ansnumber . ':</div><div class="field-items"><div class="ans-text"><span>' . $imagecollection['field_poll_answer_text'][LANGUAGE_NONE][0]['value'] . '</span></div></div></div>';
+                      }
+
+                      $output .= '</li>';
+                      $ansnumber++;
+                    }
+                    if (isset($output) && !empty($output)) {
+                      echo '<ul>' . $output . '</ul>';
                     }
                   }
-                }
-                  if (isset($imagecollection['field_poll_answer_text'][LANGUAGE_NONE]) && !empty($imagecollection['field_poll_answer_text'][LANGUAGE_NONE])) {
-                    $output .= '<div class="ans-text"><span>' . $imagecollection['field_poll_answer_text'][LANGUAGE_NONE][0]['value'] . '</span></div>';
-                  }
-                  
-                  $output .= '</li>';
-              }
-              if (isset($output) && !empty($output)){
-                ?>
-          <div class="content-node-view">
-                <div class="expert-details content-box">
-                  <h2><?php echo t('Poll Answer'); ?></h2>
-                  <div class="content-details">     
-      <?php echo '<ul>' . $output . '</ul>'; ?>     
-                  </div>
-                </div>
-        </div>
-              <?php } }else{ ?>
-                <div class="content-node-view">
-                  <?php
+                  else {
                     $field_poll_answer = render($content['field_poll_answer']);
-                      if (!empty($field_poll_answer)): print render($content['field_poll_answer']);
-                      endif;
-                    } ?> 
+                    if (!empty($field_poll_answer)): print render($content['field_poll_answer']);
+                    endif;
+                  }
+                  ?>
+                  <?php
+                  $field_story_url = render($content['field_story_url']);
+                  if (!empty($field_story_url)): print render($content['field_story_url']);
+                  endif;
+                  ?>
+                  <?php
+                  $field_poll_banner = render($content['field_poll_banner']);
+                  if (!empty($field_poll_banner)): print render($content['field_poll_banner']);
+                  endif;
+                  ?>
+                  <?php
+                  $field_poll_call_to_action_image = render($content['field_poll_call_to_action_image']);
+                  if (!empty($field_poll_call_to_action_image)): print render($content['field_poll_call_to_action_image']);
+                  endif;
+                  ?>
                 </div>
-              <?php endif; ?>
+              </div>
+            </div>
+          <?php endif; ?>
 
-          
+
           <div class="content-node-view">
             <div class="poll-details">
-              <h2><?php echo t('Poll Details'); ?></h2>
-              <div class="content-details">
-                <?php
-                $field_story_url = render($content['field_story_url']);
-                if (!empty($field_story_url)): print render($content['field_story_url']);
-                endif;
-                ?>
-                <?php
-                $field_poll_banner = render($content['field_poll_banner']);
-                if (!empty($field_poll_banner)): print render($content['field_poll_banner']);
-                endif;
-                ?>
-                <?php
-                $field_poll_call_to_action_image = render($content['field_poll_call_to_action_image']);
-                if (!empty($field_poll_call_to_action_image)): print render($content['field_poll_call_to_action_image']);
-                endif;
-                ?>
-                
+              <h2><?php echo t('Configuration'); ?></h2>
+              <div class="content-details">               
                 <?php
                 $field_poll_start_date = render($content['field_poll_start_date']);
                 if (!empty($field_poll_start_date)): print render($content['field_poll_start_date']);
@@ -168,25 +156,24 @@
                 ?>
               </div>
             </div>
-        </div>
+          </div>
           <?php if ($node->op != 'Preview'): ?>
-          <div class="current-poll-result">
-            <?php
-              
-              if(isset($node->field_associate_poll[LANGUAGE_NONE])){
+            <div class="current-poll-result">
+              <?php
+              if (isset($node->field_associate_poll[LANGUAGE_NONE])) {
                 $associat_nid = $node->field_associate_poll[LANGUAGE_NONE][0]['target_id'];
                 print views_embed_view('poll_listing', 'block_2', $associat_nid);
               }
               ?>
-          </div>
-          <?php endif; ?>
-          
-         </div>
-      <?php endif; ?>
-        
+            </div>
+            <?php endif; ?>
+
+        </div>
+<?php endif; ?>
+
       <?php if ($layout): ?>
       </div></div>
-  <?php endif; ?>
+      <?php endif; ?>
 </div>
 
-<?php if (!empty($post_object)) print render($post_object)  ?>
+<?php if (!empty($post_object)) print render($post_object) ?>
