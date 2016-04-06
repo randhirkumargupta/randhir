@@ -366,7 +366,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
       $output = '<div class = "quiz-contest-result"> <h2>Quiz Result:</h2>
       <div class = "quiz-contest-result"><strong>Total Question  attempted:</strong> ' . $total_ques_attempt . '</div>
       <div class = "quiz-contest-result"><strong>Currect Answer:</strong> ' . $currect_answer . '</div>
-      <div class = "quiz-contest-result"><strong>incorrect Answer:</strong> ' . $incurrect_answer . '</div>
+      <div class = "quiz-contest-result"><strong>Incorrect Answer:</strong> ' . $incurrect_answer . '</div>
       </div>';
       drupal_set_message($output);
   }
