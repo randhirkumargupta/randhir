@@ -324,7 +324,6 @@ function itg_survey_survey_form_validate($form, &$form_state) {
     //Textfield validation
     if($form_detail['question_type' . $num] === 'textfield'){
       if ($form_detail['question_skip' . $num] !== 'yes') {
-        $txt_ans_flag = FALSE;
         for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
           if ($form_detail['answer_option' . $num . '_' . $text_field] !== '') {
             $txt_ans_flag = TRUE;

@@ -20,8 +20,12 @@
 
 <div class="SensexNiftyFeed">
     <?php
-    $direc = $_SERVER['DOCUMENT_ROOT'] . 'itgcms/sites/default/files/gallery/nifty/';
-    $newFileName = $direc . 'SensexNiftyFeed.txt';
+    // get base path of server 
+    $base_path_set = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+    $base_path_set = explode('/', $base_path_set);
+    $path_instance = $base_path_set[1];
+    $direc = $_SERVER['DOCUMENT_ROOT'].'/'.$path_instance. '/sites/default/files/gallery/nifty/';
+   print  $newFileName = $direc . 'SensexNiftyFeed.txt';
     $html = implode('', file($newFileName));
     $pieces = explode("@", $html);
 
