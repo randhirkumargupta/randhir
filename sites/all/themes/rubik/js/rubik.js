@@ -129,9 +129,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').addClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe').removeClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
@@ -370,6 +370,13 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
         $('body').find('.ajax-loader').remove();
       });
     }
+  });
+  
+  $('#itg-quiz-quiz-form .quiz-submit').mousedown(function(){
+    $(this).ajaxSuccess(function(){
+      $('.question-container').hide();
+      $(this).parents('.question-container').next().show();
+    });
   });
   
   

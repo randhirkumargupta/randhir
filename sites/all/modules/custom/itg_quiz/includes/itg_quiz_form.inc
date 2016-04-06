@@ -53,6 +53,7 @@ function itg_quiz_quiz_form() {
         $required = '<span style="color:red">*</span>';
       }
 
+      
       //Answer Info
       $answer_type_type = $question_detail[$question_arr['value']]->field_quiz_answer_type[LANGUAGE_NONE][0]['value'];
       if( $answer_type_type == 'single_correct') {
@@ -60,14 +61,22 @@ function itg_quiz_quiz_form() {
       } else {
         $answer_type = 'checkboxes';
       }
-       
+
       foreach($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option){
         $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
         foreach($ans_option_arr[$ans_option['value']]->field_quiz_answer_text[LANGUAGE_NONE] as $final_ans_op){
-          $all_ans_options[$num][$final_ans_op['value']] = $final_ans_op['value'];
+          $all_ans_options[$num][$ans_option['value'].'-'.$final_ans_op['value']] = $final_ans_op['value'];
+        }
+        
+
+        foreach($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $currect_ans){
+          if($currect_ans['value'] == 'Yes'){
+            $currect_ans_op[$num] = $ans_option['value'];
+          }
         }
       }
- 
+
+      
       //Media info
       $media = $question_detail[$question_arr['value']]->field_quiz_add_media[LANGUAGE_NONE][0]['uri'];
       $media_type = strtolower(substr(strrchr($media, '.'), 1));
@@ -121,6 +130,11 @@ function itg_quiz_quiz_form() {
           '#markup' => '<h2 class="answer-heading">Answer: ' . $required . '</h2> ',
       );
 
+      $form['currect_answer' . $num] = array(
+          '#type' => 'hidden',
+          '#value' => $currect_ans_op[$num],
+      );
+      
       $form['answer_option' . $num] = array(
           '#title' => t(''),
           '#type' => $answer_type,
@@ -157,6 +171,7 @@ function itg_quiz_quiz_form() {
         '#type' => 'submit',
         '#value' => $button_text,
         '#name' => 'quizsubmit_' . $num,
+        '#suffix' => '</div>',
         '#ajax' => array(
             'callback' => 'quiz_form_ajax_handler',
             'effect' => 'fade',
@@ -263,6 +278,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
   $form_detail = $form_state['values'];
   $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
   $num = $btn_num_arr[1];
+
   
   //Extract user type
   if ($user->uid) {
@@ -276,16 +292,25 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
     $_SESSION['quiz_unique_key'] = user_password(6);
   }
   
+  
+
+    
   //Insert each question and answer in to DB
   if ($form_state['values']['question_type' . $num] == 'radios') {
-
+    $ans_op_arr = explode('-', $form_state['values']['answer_option' . $num]);
+       if($ans_op_arr[0] == $form_state['values']['currect_answer' . $num]){
+     $currect_ans = 'yes';
+   } else {
+     $currect_ans = 'no';
+   }
     db_insert('itg_quiz_detail')
             ->fields(array(
                 'nid' => $form_state['values']['nid'],
                 'uid' => $user->uid,
                 'ques_id' => $form_state['values']['question_id' . $num],
                 'question' => $form_state['values']['question' . $num],
-                'answer' => strtolower($form_state['values']['answer_option' . $num]),
+                'answer' => strtolower($ans_op_arr[1]),
+                'currect_answer' => $currect_ans,
                 'ans_type' => $form_state['values']['question_type' . $num],
                 'user_type' => $user_type,
                 'page_url' => $form_state['values']['quiz_url'],
@@ -300,13 +325,20 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
 
     foreach ($form_state['values']['answer_option' . $num] as $key => $value) {
       if ($value) {
+        $ans_op_arr = explode('-', $value);
+        if ($ans_op_arr[0] == $form_state['values']['currect_answer' . $num]) {
+          $currect_ans = 'yes';
+        } else {
+          $currect_ans = 'no';
+        }
         db_insert('itg_quiz_detail')
                 ->fields(array(
                     'nid' => $form_state['values']['nid'],
                     'uid' => $user->uid,
                     'ques_id' => $form_state['values']['question_id' . $num],
                     'question' => $form_state['values']['question' . $num],
-                    'answer' => strtolower($value),
+                    'answer' => strtolower($ans_op_arr[1]),
+                    'currect_answer' => $currect_ans,
                     'ans_type' => $form_state['values']['question_type' . $num],
                     'user_type' => $user_type,
                     'page_url' => $form_state['values']['quiz_url'],
@@ -330,7 +362,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
                 'created' => time(),
             ))
             ->execute();
-    unset($_SESSION['unique_quiz']);
+    unset($_SESSION['quiz_unique_key']);
   }
 
   //Display saved quiz message on final submit only.
