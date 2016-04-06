@@ -402,6 +402,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   /* jQuery code ITGCMS QUIZ */
   $('.field-name-field-quiz-option').on('change', 'select', function(){
     var selvalue = $(this).val();
+    $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').find('.button-remove').trigger('mousedown');
+    $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').find('.button-remove').trigger('mousedown');
+    $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').find('.form-text').val('');
     if(selvalue == "Text"){
       $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
       $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
