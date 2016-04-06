@@ -328,12 +328,13 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
  */
 function itg_category_manager_term_validate($form, &$form_state) {
   // Set published time same as parent term
+  
   $termParent = $form_state['values']['parent'][0];
   if ($termParent) {
     $pTerm = taxonomy_term_load($termParent);
     $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];
   }
-  if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL) {
+  if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete') {
     form_set_error('state-mode', t('Please select one mode.'));
   }
   // Code end for publish time
@@ -352,13 +353,23 @@ function itg_category_manager_term_validate($form, &$form_state) {
       form_set_error('parent', t('Sorry! You can not create more than 4 levels of categories within a section.'));
     }
     //Check for duplicate category
-    if (itg_category_manager_is_dupe_term($term, $vid, $tid)) {
-      $tid_existing_term = itg_category_manager_get_term_from_name($term, $vid);
-      $parent_tid = taxonomy_get_parents_all($tid_existing_term);
-      $tid_arr_key = $num_cat_selected - 2;
-      if ($cat_arr[$tid_arr_key] == $parent_tid[1]->tid) {
-        form_set_error('name', t('Category name already exists.'));
+    $dup_parents = itg_category_manager_is_dupe_term($term, $vid, $tid);    
+    if (count($dup_parents) >= 1) {
+      $new_rparent = $termParent != 0 ? taxonomy_get_parents_all($termParent) : 0;
+      $new_rparent = is_array($new_rparent) ? $new_rparent[count($new_rparent) - 1]->tid : 0;
+      foreach ($dup_parents as $value) {        
+        if (isset($value->tid) && $value->tid == $new_rparent) {
+          form_set_error('name', t('Category name already exists.'));
+        }
+        else if ($new_rparent == 0 && $value->name == $form_state['values']['name']) {
+          form_set_error('name', t('Category name already exists.'));
+        }
+        else {
+          
+        }
       }
+      
+      
     }
   }
 }
@@ -458,7 +469,22 @@ function itg_category_manager_is_dupe_term($term, $vid, $tid = 0) {
       return $is_dupe;
     }
     else { // Not case sensitive
-      return TRUE;
+      foreach ($result['taxonomy_term'] as $found_term) {
+        // Load the term data and see if it's a dupe
+        $term_data = taxonomy_term_load($found_term->tid);
+        if (!strcmp($term_data->name, $term)) {
+          $root_parent = taxonomy_get_parents_all($found_term->tid);
+          if ($found_term->tid == $root_parent[count($root_parent) - 1]->tid) {
+            $data[] = $term_data;
+          }
+          else {
+            $data[] = $root_parent[count($root_parent) - 1];
+          }
+                    
+        }
+      }
+      
+      return $data;      
     }
   }
 
