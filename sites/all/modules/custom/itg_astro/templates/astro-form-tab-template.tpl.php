@@ -7,9 +7,8 @@
 
 ?>
 <div class="block-itg-story-list">
-  <span class="target-link" data-target-id="BasicDetails">Basic Details</span> 
-  <span class="target-link" data-target-id="StoryContent">Zodiac Sign</span> 
-  <span class="target-link" data-target-id="Configuration">Collective Content</span> 
-  <span class="target-link" data-target-id="SocialMedia">Numerology</span> 
-  <span class="target-link" data-target-id="edit-metatags">Meta Details</span>  
+  <span class="target-link" data-target-id="BasicDetails"><?php echo t('Basic Details'); ?></span>  
+  <span class="target-link" data-target-id="SocialMedia"><?php echo t('Astro Type'); ?></span> 
+  <span class="target-link" data-target-id="channel"><?php echo t('Channel'); ?></span> 
+  <span class="target-link" data-target-id="edit-metatags"><?php echo t('Meta Details'); ?></span>  
 </div>

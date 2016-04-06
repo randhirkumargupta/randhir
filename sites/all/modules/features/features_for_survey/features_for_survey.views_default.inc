@@ -54,9 +54,12 @@ function features_for_survey_views_default_views() {
     'field_survey_start_date' => 'field_survey_start_date',
     'field_survey_end_date' => 'field_survey_end_date',
     'changed' => 'changed',
+    'php' => 'php',
+    'php_1' => 'php_1',
     'view_node' => 'nothing_1',
     'edit_node' => 'nothing_1',
     'nothing_1' => 'nothing_1',
+    'nothing_2' => 'nothing_1',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -106,8 +109,6 @@ function features_for_survey_views_default_views() {
       'empty_column' => 0,
     ),
     'field_survey_category' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -138,6 +139,16 @@ function features_for_survey_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'php' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'view_node' => array(
       'align' => '',
       'separator' => '',
@@ -149,6 +160,11 @@ function features_for_survey_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing_2' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -222,10 +238,11 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Validity Start Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
+  $handler->display->display_options['fields']['field_survey_start_date']['label'] = 'Survey Start Date ';
   $handler->display->display_options['fields']['field_survey_start_date']['settings'] = array(
     'format_type' => 'custom_date',
     'fromto' => 'both',
@@ -234,10 +251,11 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Validity End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
+  $handler->display->display_options['fields']['field_survey_end_date']['label'] = 'Survey End Date';
   $handler->display->display_options['fields']['field_survey_end_date']['settings'] = array(
     'format_type' => 'custom_date',
     'fromto' => 'both',
@@ -258,7 +276,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['label'] = 'Anonymous User Survey';
+  $handler->display->display_options['fields']['php']['label'] = 'Anonymous User Vote';
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_survey_get_survey_by_users($row->nid, \'anonymous\'); ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -267,7 +285,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
   $handler->display->display_options['fields']['php_1']['table'] = 'views';
   $handler->display->display_options['fields']['php_1']['field'] = 'php';
-  $handler->display->display_options['fields']['php_1']['label'] = 'Authenticated User Survey';
+  $handler->display->display_options['fields']['php_1']['label'] = 'Authenticated User Vote';
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php echo itg_survey_get_survey_by_users($row->nid, \'authenticated\'); ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -285,7 +303,18 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span> | ';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = '';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = 'Survey Result';
+  $handler->display->display_options['fields']['nothing_2']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_2']['alter']['path'] = 'survey-result/[nid]';
+  $handler->display->display_options['fields']['nothing_2']['alter']['link_class'] = 'view-survey-result';
+  $handler->display->display_options['fields']['nothing_2']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -307,7 +336,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Survey Title';
@@ -323,8 +352,9 @@ function features_for_survey_views_default_views() {
     5 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,

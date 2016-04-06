@@ -164,3 +164,8 @@ function itg_theme(){
     );
     return $items;
 }
+
+// hide read more link from front page 
+function itg_preprocess_node (&$variables) {
+  unset($variables['content']['links']['node']['#links']['node-readmore']);
+}

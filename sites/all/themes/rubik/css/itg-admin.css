@@ -91,6 +91,12 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview-wrapper, 
 .page-node-add-poll .preview-wrapper,
 .node-type-poll .preview-wrapper, 
+.page-node-add-quiz .preview-wrapper,
+.node-type-quiz .preview-wrapper, 
+.page-node-add-itg-celebrity-profile .preview-wrapper,
+.node-type-itg-celebrity-profile .preview-wrapper, 
+.page-node-add-cooking-tips .preview-wrapper,
+.node-type-cooking-tips .preview-wrapper, 
 .page-node-add-supplement .preview-wrapper,
 .node-type-breaking-news .preview-wrapper{
   background-color: rgba(0, 0, 0, 0.7);
@@ -123,6 +129,12 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview,
 .page-node-add-poll .preview,
 .node-type-poll .preview,
+.page-node-add-quiz .preview,
+.node-type-quiz .preview,
+.page-node-add-itg-celebrity-profile .preview,
+.node-type-itg-celebrity-profile .preview,
+.page-node-add-cooking-tips .preview,
+.node-type-cooking-tips .preview,
 .page-node-add-supplement .preview,
 .node-type-breaking-news .preview{
   background-color: #fff;
@@ -157,6 +169,12 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview > h3,
 .page-node-add-poll .preview > h3,
 .node-type-poll .preview > h3,
+.page-node-add-quiz .preview > h3,
+.node-type-quiz .preview > h3,
+.page-node-add-itg-celebrity-profile .preview > h3,
+.node-type-itg-celebrity-profile .preview > h3,
+.page-node-add-cooking-tips .preview > h3,
+.node-type-cooking-tips .preview > h3,
 .page-node-add-supplement .preview > h3,
 .node-type-breaking-news .preview > h3{
   font-size: 24px;
@@ -194,6 +212,12 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .close-preview,
 .page-node-add-poll .close-preview,
 .node-type-poll .close-preview,
+.page-node-add-quiz .close-preview,
+.node-type-quiz .close-preview,
+.page-node-add-itg-celebrity-profile .close-preview,
+.node-type-itg-celebrity-profile .close-preview,
+.page-node-add-cooking-tips .close-preview,
+.node-type-cooking-tips .close-preview,
 .page-node-add-supplement .close-preview,
 .node-type-breaking-news .close-preview{
   display: block;
@@ -207,6 +231,18 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .node-preview .column-side, 
 .page-node-add-story .node-title, 
 .page-node-add-story .preview > h3:first-child,
+.page-node-add-quiz .node-teaser, 
+.page-node-add-quiz .node-preview .column-side, 
+.page-node-add-quiz .node-title, 
+.page-node-add-quiz .preview > h3:first-child,
+.page-node-add-itg-celebrity-profile .node-teaser, 
+.page-node-add-itg-celebrity-profile .node-preview .column-side, 
+.page-node-add-itg-celebrity-profile .node-title, 
+.page-node-add-itg-celebrity-profile .preview > h3:first-child,
+.page-node-add-cooking-tips .node-teaser, 
+.page-node-add-cooking-tips .node-preview .column-side, 
+.page-node-add-cooking-tips .node-title, 
+.page-node-add-cooking-tips .preview > h3:first-child,
 .page-node-add-poll .node-teaser, 
 .page-node-add-poll .node-preview .column-side, 
 .page-node-add-poll .node-title, 
@@ -219,10 +255,18 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-story .node-preview .column-side, 
 .node-type-story .node-title, 
 .node-type-story .preview > h3:first-child, 
+.node-type-cooking-tips .node-teaser, 
+.node-type-cooking-tips .node-preview .column-side, 
+.node-type-cooking-tips .node-title, 
+.node-type-cooking-tips .preview > h3:first-child, 
 .node-type-poll .node-teaser, 
 .node-type-poll .node-preview .column-side, 
 .node-type-poll .node-title, 
 .node-type-poll .preview > h3:first-child, 
+.node-type-itg-celebrity-profile .node-teaser, 
+.node-type-itg-celebrity-profile .node-preview .column-side, 
+.node-type-itg-celebrity-profile .node-title, 
+.node-type-itg-celebrity-profile .preview > h3:first-child, 
 .node-type-mega-review-critic .node-teaser, 
 .node-type-mega-review-critic .node-preview .column-side, 
 .node-type-mega-review-critic .node-title, 
@@ -267,6 +311,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-survey .node-preview .column-side, 
 .node-type-survey .node-title, 
 .node-type-survey .preview > h3:first-child,
+.node-type-quiz .node-teaser, 
+.node-type-quiz .node-preview .column-side, 
+.node-type-quiz .node-title, 
+.node-type-quiz .preview > h3:first-child,
 .page-node-add-survey .node-teaser, 
 .page-node-add-survey .node-preview .column-side, 
 .page-node-add-survey .node-title, 
@@ -293,6 +341,12 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic div.node,
 .page-node-add-poll div.node, 
 .node-type-poll div.node,
+.page-node-add-quiz div.node, 
+.node-type-quiz div.node,
+.page-node-add-itg-celebrity-profile div.node, 
+.node-type-itg-celebrity-profile div.node,
+.page-node-add-cooking-tips div.node, 
+.node-type-cooking-tips div.node,
 .node-type-breaking-news div.node,
 .node-type-story div.node{
   background: none;
@@ -319,10 +373,18 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-blog .column-main,
 .page-node-add-recipe .column-main, 
 .node-type-recipe .column-main,
+.page-node-add-cooking-tips .column-main, 
+.node-type-cooking-tips .column-main,
 .page-node-add-mega-review-critic .preview .column-main, 
 .node-type-mega-review-critic .preview .column-main,
 .page-node-add-poll .preview .column-main, 
 .node-type-poll .preview .column-main,
+.page-node-add-quiz .preview .column-main, 
+.node-type-quiz .preview .column-main,
+.page-node-add-itg-celebrity-profile .preview .column-main, 
+.node-type-itg-celebrity-profile .preview .column-main,
+.page-node-add-cooking-tips .preview .column-main, 
+.node-type-cooking-tips .preview .column-main,
 .node-type-breaking-news .column-main{
   display: inline-block;
   width: 100%;
@@ -388,6 +450,7 @@ form .form-item label{
   float: none;
   padding-left: 300px;
 }
+.collapsible .fieldset-legend{background-color: #f6f6f6;}
 .node-story-form .form-item span.error, 
 .page-admin-people-create form .form-item span.error{padding-left: 300px;}
 .node-story-form .date-padding .form-item span.error {padding-left: 0;}
@@ -486,19 +549,22 @@ form .form-item .form-item{
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
 }
-#block-itg-story-story-tab-form-block, 
+#block-itg-story-story-tab-form-block,
+#block-menu-menu-mega-review-menu,
 #block-itg-poll-poll-tab-form-block, 
 #block-itg-breaking-news-breaking-news-tab-form-block, 
 #block-menu-menu-story-content-admin-menu, 
 #block-menu-menu-ask-an-expert-menu,
 #block-menu-menu-photogallery-admin-menu, 
 #block-itg-photogallery-photogallery-tab-form-block, 
-#block-itg-astro-astro-tab-form-block, 
+#block-itg-astro-astro-tab-form-block,
+#block-itg-survey-survey-tab-form-block,
 #block-itg-recipe-recipe-tab-form-block{
   border-left: none;
   border-right: none;
 }
 #block-itg-story-story-tab-form-block .block-content, 
+#block-menu-menu-mega-review-menu .block-content, 
 #block-itg-poll-poll-tab-form-block .block-content, 
 #block-itg-recipe-recipe-tab-form-block .block-content, 
 #block-itg-breaking-news-breaking-news-tab-form-block .block-content, 
@@ -506,17 +572,20 @@ form .form-item .form-item{
 #block-menu-menu-ask-an-expert-menu .block-content,
 #block-menu-menu-photogallery-admin-menu .block-content,
 #block-itg-astro-astro-tab-form-block .block-content,
+#block-itg-survey-survey-tab-form-block .block-content,
 #block-itg-photogallery-photogallery-tab-form-block .block-content{
   padding: 0;
 }
 .block-itg-story-list, 
 #block-menu-menu-story-content-admin-menu .block-content .ul, 
+#block-menu-menu-mega-review-menu .block-content .ul, 
 #block-menu-menu-ask-an-expert-menu .block-content .ul, 
 #block-menu-menu-photogallery-admin-menu .block-content .ul{
   text-align: center;
 }
 .block-itg-story-list span, 
 #block-menu-menu-story-content-admin-menu .block-content ul li,
+#block-menu-menu-mega-review-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
 #block-menu-menu-photogallery-admin-menu .block-content ul li{
   cursor: pointer;
@@ -530,16 +599,20 @@ form .form-item .form-item{
   border: none;
 }
 #block-menu-menu-story-content-admin-menu .block-content ul li,
+#block-menu-menu-mega-review-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
 #block-menu-menu-photogallery-admin-menu .block-content ul li{padding: 0;}
 #block-menu-menu-story-content-admin-menu .block-content ul li a,
+#block-menu-menu-mega-review-menu .block-content ul li a,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a{padding: 10px 20px; display: block; color: #666; position: relative;}
 .block-itg-story-list span.active, .block-itg-story-list span:hover, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active, 
+#block-menu-menu-mega-review-menu .block-content ul li a.active, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a:hover,
+#block-menu-menu-mega-review-menu .block-content ul li a:hover,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a:hover,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a:hover{
   color: #008eb1;
@@ -547,6 +620,7 @@ form .form-item .form-item{
 }
 .block-itg-story-list span.active:after, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active:after, 
+#block-menu-menu-mega-review-menu .block-content ul li a.active:after, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active:after, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active:after{
   content: '';
@@ -807,7 +881,7 @@ div.image-widget-data .ajax-progress{position: absolute; left: 100%; top: 0;}
 .user-profile-div .field-name-field-user-picture .field-label{display: none;}
 form .path-form .form-item-path-pathauto{padding-left: 300px; width: 100%; box-sizing: border-box;}
 form .path-form .form-item-path-pathauto label{float: none;}
-.edit-link, .view-link, .delete-link, .edit-cm a{position: relative; vertical-align: middle; display: inline-block; padding-left: 20px;}
+.edit-link, .view-link, .delete-link, .edit-cm a{position: relative; vertical-align: middle; display: inline-block; padding-left: 20px; color: #008eb1;}
 .edit-link:after, 
 .view-link:after, 
 .delete-link:after, 
@@ -841,10 +915,13 @@ form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-pa
 form #edit-field-issue-title fieldset.date-combo .container-inline-date .date-padding label{display: none;}
 #edit-field-issue-title .date-combo .fieldset-content .date-clear{clear: none;}
 .views-action-separator{color: #212121;}
-.node-photogallery-form #edit-field-gallery-image .form-item label{width: 140px;}
+.node-photogallery-form #edit-field-gallery-image .form-item label{width: 100%;}
+.node-photogallery-form #edit-field-gallery-image .form-item .form-textarea-wrapper{overflow: visible;}
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .form-item .form-text{max-width: 100% !important;}
 .node-photogallery-form #edit-field-gallery-image .description{padding-left: 140px;}
 .node-photogallery-form #edit-field-gallery-image .image-widget-data .description{padding-left: 0;}
+[id*="field-gallery-image-values"] .form-item > label{display: none;}
+[id*="field-gallery-image-values"] .form-type-checkboxes label{display: inline-block; vertical-align: middle; width: auto !important;}
 .vertical-tabs{background: none;}
 .node-issue-form .vertical-tabs, 
 .node-supplement-form .vertical-tabs, 
@@ -928,7 +1005,8 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .date-nav .pager li{height: auto; border: none;}
 .view-category-manager-dev .view-header{text-align: right;}
 .view-category-manager-dev .view-header > div{ background-color: #7bc; border-radius: 5px; color: #fff; display: inline-block; font-weight: bold; padding: 5px 10px; text-shadow: 0 1px 0 #38a; vertical-align: top; cursor: pointer;}
-.view-category-manager-dev .view-header > div.active{background-color: #008eb1;}
+.view-category-manager-dev .view-header > div.active, 
+.view > .attachment a.active{background-color: #008eb1;}
 .page-node-revision .views-label, 
 .page-node-revision .field .field-label, 
 .page-node-revisions .views-label, 
@@ -1060,7 +1138,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-astro-form .field-name-field-field-astro-date-range2 fieldset .description{margin: 0;}
 [class*="form-item-field-astro-date-range-und-"] label{display: none !important;}
 .field-name-field-astro-date-range .date-no-float, 
-.field-name-field-field-astro-date-range2 .date-no-float{clear: none; float: left; width: 50%; pointer-events: none;}
+.field-name-field-field-astro-date-range2 .date-no-float{clear: none; float: left; width: 50%;}
 .node-astro-form .tabledrag-hide, 
 .node-astro-form .tabledrag-toggle-weight-wrapper, 
 #field-recipe-ingredient-values .tabledrag-toggle-weight-wrapper,
@@ -1084,7 +1162,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 [id*="field-astro-numerology-values-values"] td .form-item{width: 100%;display: inline-block; vertical-align: top;}
 [id*="field-astro-zodiac-values"] td .form-item > div,
 [id*="field-astro-numerology-values-values"] td .form-item > div, 
-.node-astro-form .field-multiple-table tbody .form-item .form-text{float: left; width: 300px;}
+.node-astro-form .field-multiple-table tbody .form-item .form-text{float: left; width: 290px;}
 [id*="field-astro-zodiac-values"] .form-item span.error{padding: 0;}
 .field-name-field-astro-date-range .end-date-wrapper, 
 .field-name-field-field-astro-date-range2 .end-date-wrapper{position: relative;}
@@ -1140,6 +1218,8 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .action-links{display: none;} 
 .field-collection-view, 
 .node-type-mega-review-critic .field-collection-view, 
+.page-node-add-mega-review-critic .field-collection-view, 
+.page-node-add-survey .field-collection-view, 
 .node-type-survey .field-collection-view{border-bottom: 1px dashed #d3d7d9;}
 .node-survey-form .field-multiple-table .field-multiple-table tbody{float: left;}
 [id*="field-survey-add-questions-values"] + div .field-add-more-submit{margin: 0;}
@@ -1148,7 +1228,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 /* Blog form css */
 .page-node-add-blog .field-name-field-blog-image, .node-type-blog .field-name-field-blog-image{margin-bottom: 0;}
 [id*="field-blog-blogger-values"] .form-item > label{display: none;}
-[id*="field-blog-blogger-values"] .ajax-new-content .form-item{margin-top: 10px;}
+[id*="field-blog-blogger-values"] .ajax-new-content .form-item{margin-top: 0;}
 [id*="field-blog-blogger-values"] .form-item span.error{padding: 0;}
 
 
@@ -1200,7 +1280,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-photogallery-form #edit-field-gallery-image table td > .ajax-new-content > fieldset{width: 265px;}
 .node-photogallery-form #edit-field-gallery-image .field-multiple-table > tbody > tr{float: left;}
 .node-photogallery-form #edit-field-gallery-image .field-multiple-table > tbody > tr.even{margin-left: 10px;}
-[id*="field-gallery-image-values"] fieldset .fieldset-content{position: relative; background: transparent;}
+[id*="field-gallery-image-values"] fieldset .fieldset-content{position: relative; background: transparent; height: 430px;}
 [id*="field-gallery-image-values"] fieldset .fieldset-content > .button-remove{position: absolute; top: -2px; right: 0; background: url('../images/close.png') no-repeat; width: 30px; height: 30px; border: none; box-shadow: none; font-size: 0;}
 .node-photogallery-form #edit-field-gallery-image .image-preview{height: 200px; padding: 0;}
 .node-photogallery-form #edit-field-gallery-image .image-preview img{height: 200px; width: 100%;}
@@ -1209,10 +1289,10 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio span.file-size{display: none;}
 .node-photogallery-form #edit-field-gallery-image .field-name-field-images span.file, 
 .node-photogallery-form #edit-field-gallery-image .field-name-field-audio span.file{width: 165px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-.node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove{margin-top: 5px;}
+.node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove{margin-top: 0; float: right;}
 .node-mega_review_critic-form .form-type-managed-file .image-widget div.image-widget-data{width: 100%;} 
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item label{width: 120px;} 
-.node-mega_review_critic-form .field-multiple-table fieldset .form-item .form-text{width: 300px !important;} 
+.node-mega_review_critic-form .field-multiple-table fieldset .form-item .form-text{width: 259px !important;} 
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item span.error,
 .node-mega_review_critic-form .field-multiple-table fieldset .form-item div.description{padding-left: 120px;}
 .node-mega_review_critic-form .field-multiple-table td{max-width: none;}
@@ -1231,6 +1311,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .view-strory-menegment .tabledrag-hide{display: none;}
 .block-content > .node-mega-review-critic > .column-side, 
 .block-content > .node-recipe > .column-side, 
+.block-content > .node-cooking-tips > .column-side, 
 .block-content > .node-mega-review-critic > .column-main .field-collection-container .action-links,
 .block-content > .node-mega-review-critic > .column-main .field-items .field-collection-view-links{display: none;}
 .block-content > .node-mega-review-critic > .column-main{width: 100%;}
@@ -1250,9 +1331,7 @@ div.view table td, div.view table th{max-width: 200px;}
 .view-movie-review-list .tabledrag-toggle-weight-wrapper, 
 .node-issue-form .tabledrag-hide{display: none;}
 #branding .breadcrumb-link > a, #branding .breadcrumb-link > strong{max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-.field-name-field-recipe-ingredients.field-widget-text-textfield, 
-.field-type-text.field-name-field-blog-bloggers{float:left; max-width: 300px; margin-right: 10px;}
-.field-type-text.field-name-field-blog-bloggers .form-text,
+.field-name-field-recipe-ingredients.field-widget-text-textfield{float:left; max-width: 300px; margin-right: 10px;}
 .field-name-field-recipe-ingredients.field-widget-text-textfield .form-text{max-width: 100% !important;}
 [id*="edit-field-field-issue-import-xml-und"] > legend{padding: 10px 10px 0;}
 .page-tags-management div.views-exposed-form input.form-text{box-sizing: border-box;}
@@ -1270,14 +1349,16 @@ div.view table td, div.view table th{max-width: 200px;}
 .field-name-field-poll-answer-text{float:left; max-width: 300px; margin-right: 10px;}
 .field-name-field-poll-answer-text .form-text{max-width: 100% !important;}
 [id*="field-poll-answer-values"] td{padding-bottom: 10px !important;}
-[id*="edit-field-poll-start-date"]{position: relative;}
-[id*="edit-field-poll-start-date"] .start-date-wrapper{position: absolute; left: 300px; top: 0;}
-[id*="edit-field-poll-start-date"] .fieldset-content{padding-left: 0; padding-right: 0;}
-[id*="edit-field-poll-start-date"] .start-date-wrapper label, 
-[id*="edit-field-poll-start-date"] .end-date-wrapper .date-padding label{display: none;}
-[id*="edit-field-poll-start-date"] .date-float .form-item label{float: none !important;}
-[id*="edit-field-poll-start-date"] .date-float{padding-left: 300px;}
-[id*="edit-field-poll-start-date"] .end-date-wrapper{padding-top: 20px;}
+[id*="edit-field-poll-end-date"] .date-combo{margin-bottom: 20px;}
+[id*="edit-field-poll-end-date"] .date-combo > .fieldset-content{padding: 0; position: absolute; left: 300px; top: 0;}
+[id*="edit-field-poll-end-date"] .date-combo legend{line-height: 28px; color: #666;}
+[id*="edit-field-poll-end-date"] .date-combo legend span{color: #666;}
+[id*="edit-field-poll-end-date"] .date-combo > .fieldset-content label{display: none;}
+[id*="edit-field-poll-start-date"] .date-combo{margin-bottom: 20px;}
+[id*="edit-field-poll-start-date"] .date-combo > .fieldset-content{padding: 0; position: absolute; left: 300px; top: 0;}
+[id*="edit-field-poll-start-date"] .date-combo legend{line-height: 28px; color: #666;}
+[id*="edit-field-poll-start-date"] .date-combo legend span{color: #666;}
+[id*="edit-field-poll-start-date"] .date-combo > .fieldset-content label{display: none;}
 .node-poll-form .vertical-tabs{padding: 0; border: none;}
 .view-poll-listing.view-display-id-block_1 .views-field{display: inline-block; width: 100%;}
 .view-poll-listing.view-display-id-block_1 .views-field .views-label{float: left; width: 30%; font-weight: bold;}
@@ -1287,13 +1368,16 @@ div.view table td, div.view table th{max-width: 200px;}
 .pole-vote{float: left; width: 40%;}
 .poll-list{padding: 10px 0; border-top: 1px dashed #ddd; display: inline-block; width: 100%;}
 .poll-list:first-child{padding-top: 0; border-top: none;}
-[id*="subsPollForm"] .form-type-radio{display: inline-block; vertical-align: middle; width: auto; padding-right: 20px;}
+[id*="subsPollForm"] .form-type-radio{display: inline-block; vertical-align: top; width: auto; padding-right: 20px;}
 [id*="subsPollForm"] .form-type-radio label.option{float: none;}
+[id*="subsPollForm"] .form-type-radio input.form-radio, [id*="subsPollForm"] .form-type-checkbox input.form-checkbox{vertical-align: top;}
 [id*="edit-field-gallery-image-und"] > legend > span.fieldset-legend{background-color: #eee;}
 [id*="edit-field-gallery-image-und"] > legend > span > a{max-width: 200px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .node-survey-form .field-multiple-table tbody div.file-widget .button-remove{margin-left: 5px;}
 .node-type-issue .block-content > .cm-node-view{overflow: visible;}
 .page-content .field-name-field-supp-issue .form-type-date-popup div.description, 
+.page-content .field-name-field-print-magazine-issue-date .form-type-date-popup div.description, 
+.page-content .field-name-field-magazine-publish .form-item div.description, 
 .page-content .field-name-field-supp-publish .form-item div.description{left: 200px;} 
 [id*="field-astro-numerology-values-values"] .form-item.form-type-textfield span.error{padding-left: 150px;}
 [id*="field-astro-numerology-values-values"] .form-item.form-type-textarea span.error{padding-left: 0;}
@@ -1305,3 +1389,183 @@ div.view table td, div.view table th{max-width: 200px;}
 .node-type-poll .content-node-view .field-label{vertical-align: top;}
 [id*="draggableviews-table-manage-blogs-page"] th.views-field-counter{padding-left: 25px;}
 [id*="field-breaking-content-details-values"] .tabledrag-hide{display: none;}
+
+/* CSS for servey */
+[id*="itg-survey-survey-form"] .form-type-checkboxes > .form-checkboxes > .form-type-checkbox, 
+[id*="itg-survey-survey-form"] .form-type-radios > .form-radios > .form-type-radio{width: 100%; padding: 0;}
+[id*="itg-survey-survey-form"] .form-type-checkboxes > .form-checkboxes.rating > .form-type-checkbox{width: auto;}
+[id*="itg-survey-survey-form"] .form-type-radios, 
+[id*="itg-survey-survey-form"] .form-type-checkboxes{margin: 0;}
+.answer-container{display: inline-block; width: 100%; padding: 10px 0;}
+.answer-heading{display: inline-block; width: 100px; vertical-align: top;}
+.answer-heading + .form-type-checkboxes{display: inline-block; width: 100%; vertical-align: top; margin: 0;}
+/*.answer-heading + .form-type-checkboxes > label{width: 100px;}*/
+.question-container{display: none; width: 100%; padding-bottom: 20px; }
+.question-container .survey-submit{margin-right: 5px;}
+#question-container-0{display: block;}
+.form-checkboxes.rating .form-type-checkbox{position: relative; padding: 0 !important;}
+.form-checkboxes.rating .form-type-checkbox input[type="checkbox"]{width: 18px; height: 18px; float: left; opacity: 0; position: relative; z-index: 10; cursor: pointer;}
+.form-checkboxes.rating .form-type-checkbox:before{content: '\f005'; color: #ddd; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;}
+.form-checkboxes.rating .form-type-checkbox.rating-hover:before, 
+.form-checkboxes.rating .form-type-checkbox.rated-div:before{content: '\f005'; color: #f6b800; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;}
+.buzz-section{padding: 10px 0; border-top: 1px dashed #ddd;}
+.buzz-section:first-child{padding-top: 0; border: 0;}
+.ajax-loader{height: 80px; text-align: center;}
+.page-survey .block-system{min-height: 250px;}
+.page-survey .ajax-progress-throbber .message{display: none;}
+.field.field-name-field-astro-zodiac-sign-name.field-type-list-text{font-weight: bold; font-size: 18px;}
+.node-blog-form .field-name-field-blog-image .form-managed-file{overflow: visible;}
+.node-blog-form .field-name-field-blog-image .form-managed-file div.image-widget-data div.description{left: 0; bottom: 30px;}
+.view-strory-menegment.view-display-id-page_1 .view-content .form-submit, .view-strory-menegment.view-display-id-page .view-content .form-submit{margin-right: 5px;}
+.content-node-view .field-label {vertical-align: top;}
+.node-cooking_tips-form .vertical-tabs{padding: 10px 10px 0;}
+form.node-cooking_tips-form .form-type-managed-file .form-managed-file,
+form.node-recipe-form .form-type-managed-file .form-managed-file, 
+form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible;}
+#group-survey-date-settings .form-item{position: static;}
+.vertical-tabs .node-form-revision-information .fieldset-content{padding: 0 !important;}
+.node-photogallery-form #BrowseMedia .form-type-managed-file .image-widget div.image-widget-data{width: auto;}
+.manage_recipe_view_menu, .manage_cooking_tips_view_menu{float: left;}
+.field-name-field-recipe-audio .form-managed-file, 
+.field-name-field-recipe-video .form-managed-file{position: relative; float: left;}
+.field-name-field-recipe-audio .form-managed-file .ajax-progress-throbber,
+.field-name-field-recipe-video .form-managed-file .ajax-progress-throbber{left: 100%; top: 5px; position: absolute;}
+.field-name-field-recipe-audio .form-managed-file .ajax-progress-throbber .message,
+.field-name-field-recipe-video .form-managed-file .ajax-progress-throbber .message{display: none;}
+#subsPollForm .captcha{margin-bottom: 10px;}
+.node-itg_celebrity_profile-form .text-format-wrapper .filter-wrapper{display: none;}
+.node-itg_celebrity_profile-form .form-type-managed-file .image-widget div.image-widget-data{width: auto;}
+.node-itg_celebrity_profile-form .vertical-tabs{border: none; padding: 0;}
+.node-itg_celebrity_profile-form input.form-file{float: left;}
+.img-crt.button{margin: 0 0 20px 300px;}
+.preview .field-name-field-gallery-kicer div{max-width: 100%;}
+.photogallery-list.flexslider{overflow: hidden;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .column-main{width: 100%;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .column-side{display: none;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field{display: inline-block; width: 100%; padding-bottom: 10px;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field .field-label{float: left; width: 200px;}
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field .field-items{float: left; width: 60%;}
+.node-type-itg-celebrity-profile .preview-wrapper .node-content .field.field.field-name-body .field-items,
+.page-node-add-itg-celebrity-profile .preview-wrapper .node-content .field.field.field-name-body .field-items,
+.node-type-itg-celebrity-profile .block-content > .node-itg-celebrity-profile .field.field-name-body .field-items{float: left; width: 100%;}
+.ui-datepicker{z-index: 9999 !important;}
+[id*="field-gallery-image-values"] td .fieldset-content .messages, [id*="field-gallery-image-values"] td .fieldset-content .messages .error{display: none;}
+[id*="field-survey-add-questions-values"] .field-name-field-survey-answer-type,
+[id*="field-survey-add-questions-values"] .field-name-field-survey-skip{float: left; width: 300px; box-sizing: border-box;}
+.node-survey-form .field-name-field-survey-answer-type .form-item label,
+.node-survey-form .field-name-field-survey-question .form-item label,
+.node-survey-form .field-name-field-survey-add-media .form-item label{width: 98px;}
+.node-survey-form .field-name-field-survey-skip .form-item label{width: auto; padding-right: 20px;}
+.node-survey-form .field-name-field-survey-skip .form-radios .form-type-radio{width: auto; padding-right: 0; line-height: 26px;}
+.node-survey-form .field-name-field-survey-answer-type .form-item span.error,
+.node-survey-form .field-name-field-survey-add-media .form-item div.description,
+.node-survey-form .field-name-field-survey-question .form-item div.description{padding-left: 98px;}
+.node-survey-form .field-name-field-survey-question input.form-text{width: 100% !important; max-width: 75% !important;}
+.node-survey-form .field-name-field-survey-answer-option-1 .form-item label{width: 100% !important;}
+.node-survey-form .field-name-field-survey-answer-option-2 .form-item label{display: none;}
+.node-survey-form .field-name-field-survey-answer-option-1 .form-item input.form-text, 
+.node-survey-form .field-name-field-survey-answer-option-2 .form-item input.form-text{width: 100% !important; max-width: 87.9% !important;}
+.node-survey-form .field-multiple-table .field-multiple-table tbody{float: none;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item{position: relative;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix{position: absolute; left: 89%; bottom: 5px;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .form-submit{vertical-align: top; background-color: #008eb1; border: none; color: #fff; font-size: 32px; height: 28px; margin: 0; padding: 0 5px 2px;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .ajax-progress-throbber{position: absolute; left: 100%; top: 5px;}
+.node-survey-form .field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .ajax-progress-throbber .message{display: none;}
+[id*="field-survey-add-questions-values"] .form-item span.error{padding-left: 0 !important;}
+.node-survey-form .field-name-field-survey-question .form-item span.error{padding-left: 98px !important;}
+[id*="edit-field-story-expiry-date"] .date-combo .fieldset-content{padding: 0; float: left; max-width: 400px;}
+.field-name-field-gallery-image .field-widget-image-image .filefield-source-imce{opacity: 0; position: relative; z-index: 99; height: 200px;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images a.filefield-sources-imce-browse{width: 100%; box-sizing: border-box; height: 100%; position: absolute; left: 0; top: 0; z-index: 99;}
+.gallery-browse{position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 9; border: 1px solid #ddd; text-align: center; box-sizing: border-box;}
+.gallery-browse .fa{padding-top: 30px; font-size: 120px; color: #ddd;}
+.gallery-browse span{display: block; font-size: 18px; color: #bbb;}
+[id*="field-gallery-image-values"] .field-name-field-images .form-type-managed-file > .has-preview{position: relative;}
+[id*="field-gallery-image-values"] .field-name-field-images .form-type-managed-file > .has-preview > .image-widget-data{position: absolute; left: 0; bottom: 0; width: 100%; padding: 5px; background-color: rgba(0,0,0,.7); box-sizing: border-box; z-index: 99;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images span.file{width: 155px;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-images span.file a{color: #fff; vertical-align: top;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio div.filefield-source-imce{position: relative;}
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio div.filefield-source-imce .ajax-progress-throbber,
+.node-photogallery-form #edit-field-gallery-image .field-name-field-audio .file-widget .ajax-progress-throbber{display: none;}
+.ajax-progress-throbber .message{display: none;}
+.page-content .form-type-date-popup .description{left: 200px;}
+.field-name-field-poll-manipulate-value .form-item span.error{padding-left: 0;}
+.block-content > div.node-survey .node-content > h2{border-bottom: 1px solid #ddd; margin-bottom: 5px; padding: 0 0 5px;}
+.page-content .field-name-field-supp-publish .form-item div.description {left: 0;}
+.page-content .form-item .password-suggestions{margin: -20px 0 15px 300px; font-size: 12px; color: #666;}
+.field-name-field-buzz-description .description{padding-left: 150px !important;}
+.content-node-view .field-name-field-astro-zodiac > .field-items{width: 100%;}
+.content-node-view .field-name-field-astro-zodiac .field-items > .field-item{border-top: 1px solid #ddd; padding-top: 10px;}
+.content-node-view .field-name-field-astro-zodiac .field-items > .field-item:first-child{border-top: none; padding-top: 0;}
+.field-name-field-astro-video .form-type-managed-file .file-widget > .form-item, 
+.field-name-field-common-audio-file .form-type-managed-file .file-widget > .form-item{margin-top: 10px;}
+.field-name-field-astro-video .form-type-managed-file .file-widget .file a, 
+.field-name-field-common-audio-file .form-type-managed-file .file-widget .file a{display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: top; white-space: nowrap; width: 200px;}
+.field-name-field-astro-video .form-type-managed-file .file-widget .file-size, 
+.field-name-field-astro-video .form-type-managed-file .file-widget .file-size{margin-right: 5px;}
+#views-form-photo-gallery-management-page-1 thead .views-field.views-field-counter, 
+#draggableviews-table-strory-menegment-page-1 thead .views-field.views-field-counter, 
+#draggableviews-table-movie-review-list-page thead .views-field.views-field-counter, 
+#draggableviews-table-blogs-management-page-1 thead .views-field.views-field-counter{padding-left: 36px;}
+.node-mega_review_critic-form .group-review-basic-settings legend .form-required, 
+.node-mega_review_critic-form .group-review-movie-review legend .form-required, 
+.node-mega_review_critic-form .group-review-browse-media legend .form-required, 
+.node-mega_review_critic-form .vertical-tabs-list, .node-quiz-form .vertical-tabs-list{display: none;}
+.node-mega_review_critic-form #field-mega-review-review-values tbody{max-width: 400px;}
+.celebrity-about .field{float: left; width: 60% !important;}
+.field-name-field-story-schedule-date-time .date-padding .form-item:first-child .date-clear, 
+.field-name-field-story-expiry-date .date-padding .form-item:first-child .date-clear, 
+.page-manage-issues #edit-title, .date-icon{background: url('../images/calendar.png') center right 5px no-repeat !important;}
+
+/* ITGCMS QUIZ */
+.node-quiz-form .field-add-more-submit{margin-left: 0;}
+.node-quiz-form fieldset legend .form-required,
+.node-quiz-form .tabledrag-toggle-weight-wrapper,
+.node-quiz-form .tabledrag-hide{display: none;}
+.node-quiz-form .vertical-tabs{padding: 10px 0 0 10px;}
+[id*="field-quiz-add-questions-values"] tbody{max-width: 455px !important; width: 455px;}
+.node-quiz-form .field-name-field-quiz-add-questions table .form-item label{width: 15%;}
+.node-quiz-form .field-name-field-quiz-add-questions .form-item .form-text{max-width: 285px !important;}
+.page-content .node-quiz-form .field-name-field-quiz-add-questions .form-item div.description,
+.page-content .node-quiz-form .field-name-field-quiz-add-questions .form-item span.error{padding-left: 15%;}
+.node-quiz-form .field-name-field-quiz-add-questions .field-name-field-quiz-options-answer .field-multiple-table thead{display: none;}
+[id*="field-quiz-add-questions-values"] .field-name-field-quiz-options-answer .field-multiple-table tbody{max-width: none !important; width: 100%;}
+.field-name-field-quiz-answer-image .form-managed-file div.image-widget-data{width: 100%;}
+.field-name-field-quiz-answer-image .form-managed-file div.image-widget-data input.form-file, 
+.field-name-field-quiz-answer-video .form-managed-file input.form-file{width: 210px;}
+.node-quiz-form .field-name-field-quiz-answer-image, 
+.node-quiz-form .field-name-field-quiz-answer-video, 
+.node-quiz-form .field-name-field-quiz-answer-text{display: none;} 
+[id*="field-quiz-options-answer-values"] tbody tr, [id*="field-quiz-options-answer-values"] tbody tr td{float: left; width: 100%;}
+[id*="field-quiz-add-questions-add-more-wrapper"] > .form-item > div > .field-add-more-submit{margin-left: 0 !important;}
+[id*="field-quiz-add-questions-values"] > thead, 
+[id*="field-quiz-add-questions-values"] > tbody, 
+[id*="field-quiz-add-questions-values"] > tbody > tr, 
+[id*="field-quiz-add-questions-values"] > tbody tr > td{width: 100% !important; max-width: none !important; box-sizing: border-box; float: left;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset{border: none;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > .fieldset-content{padding: 0;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > legend{display: none;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-question{background-color: #fffddf; padding: 10px; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-add-media{padding: 0 10px; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type,
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type{padding: 10px; box-sizing: border-box; float: left; width: 50%;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-question .form-item .form-text{width: 85% !important; max-width: none !important; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type .form-item label{width: 30%;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-weightage .form-item .form-text{max-width: 100px !important;}
+[id*="field-quiz-options-answer-values"] > tbody > tr > td{ background: #ebeff2 !important; padding: 10px; position: relative; margin-bottom: 10px;}
+[id*="field-quiz-options-answer-values"] td > .button-remove, 
+[id*="field-quiz-options-answer-values"] td > .ajax-new-content > .button-remove{background: rgba(0, 0, 0, 0) url("../images/close.png") no-repeat; height: 32px; width: 32px; border: none; box-shadow: none; border-radius: 0; margin-left: 0; position: absolute; right: 5px; top: 5px; font-size: 0; text-indent: -9999px;}
+[id*="field-quiz-add-questions-values"] .field-name-field-quiz-options-answer{position: relative;}
+[id*="field-quiz-options-answer-values"] + div.clearfix .field-add-more-submit{float: right; background-color: #008eb1; border: none; color: #fff; font-size: 32px; height: 28px; margin: -5px 0 0; padding: 0 5px 2px; vertical-align: top;}
+.node-type-quiz .field-collection-view-links,
+.node-type-quiz .action-links{display: none;}
+.node-type-quiz .field-collection-container{border-bottom: none; margin: 0;}
+.node-type-quiz .block-content > .node-quiz > .column-side{display: none;}
+.node-type-quiz .block-content > .node-quiz > .column-main{width: 100%;}
+.page-display-question .view-question-list .views-field .views-label{font-weight: bold; padding-bottom: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px; display: block;}
+.page-display-question .view-question-list .entity-field-collection-item .field{padding-bottom: 10px;}
+.page-display-question .view-question-list .entity-field-collection-item .field-label{float: left; width: 20%;}
+.page-display-question .view-question-list .entity-field-collection-item .field-items{overflow: hidden;}
+.page-display-question .view-question-list .entity-field-collection-item .field-collection-view{margin: 0 0 10px; padding: 0 0 10px;}
+.page-display-question .view-question-list .entity-field-collection-item .field-collection-view:last-child{border-bottom: none; padding-bottom: 0;}
+.page-display-question .view-question-list .entity-field-collection-item .field-collection-view-links,
+.page-display-question .view-question-list .entity-field-collection-item .action-links{display: none;}

@@ -956,7 +956,7 @@ node/*/edit',
   'delta' => 'story_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -17,
+  'weight' => -21,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -1069,7 +1069,7 @@ node/*/edit',
   'delta' => 'main',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -12,
+  'weight' => -11,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2555,7 +2555,7 @@ node/*/edit',
   'delta' => 'menu-admin-left-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -20,
+  'weight' => -25,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2635,7 +2635,7 @@ my-rejected-story',
   'delta' => 'menu-story-content-admin-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -19,
+  'weight' => -24,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2785,7 +2785,7 @@ node/*/edit',
   'delta' => 'breaking_news_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -14,
+  'weight' => -16,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2875,7 +2875,7 @@ node/*/edit',
   'delta' => 'photogallery_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -13,
+  'weight' => -15,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3461,7 +3461,7 @@ my-rejected-photogallery',
   'delta' => 'menu-photogallery-admin-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -18,
+  'weight' => -23,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3484,7 +3484,7 @@ my-rejected-photogallery',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3506,7 +3506,7 @@ my-rejected-photogallery',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3528,7 +3528,7 @@ my-rejected-photogallery',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3550,7 +3550,7 @@ my-rejected-photogallery',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-photogallery
@@ -3685,7 +3685,7 @@ node/add/recipe',
   'delta' => 'recipe_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -15,
+  'weight' => -18,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3775,7 +3775,7 @@ node/*/edit',
   'delta' => 'astro_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -16,
+  'weight' => -20,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3829,10 +3829,1275 @@ node/*/edit',
   'title' => '',
   'cache' => 8,
 );
+  $export['block'][] = array(
+  'bid' => 264,
+  'module' => 'formblock',
+  'delta' => 'ask_an_expert',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/lorem-ipsum-simply-dummy-text',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 265,
+  'module' => 'formblock',
+  'delta' => 'user_register',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 266,
+  'module' => 'formblock',
+  'delta' => 'user_password_request',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 267,
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/poll
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 268,
+  'module' => 'menu',
+  'delta' => 'menu-ask-an-expert-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ask-an-expert
+ask-an-expert-history',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 269,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_1',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 270,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_2',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 271,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_2',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 272,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_2',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -10,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 273,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_2',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 274,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_2',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 275,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_2',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 276,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_1',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 277,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_1',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -9,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 278,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_1',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 279,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_1',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 280,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_1',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 281,
+  'module' => 'formblock',
+  'delta' => 'ask_an_expert',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -8,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/lorem-ipsum-simply-dummy-text',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 282,
+  'module' => 'formblock',
+  'delta' => 'user_register',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 283,
+  'module' => 'formblock',
+  'delta' => 'user_password_request',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 284,
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -12,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/poll
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 285,
+  'module' => 'menu',
+  'delta' => 'menu-ask-an-expert-menu',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -17,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ask-an-expert
+ask-an-expert-history',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 286,
+  'module' => 'formblock',
+  'delta' => 'ask_an_expert',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/lorem-ipsum-simply-dummy-text',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 287,
+  'module' => 'formblock',
+  'delta' => 'user_register',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 288,
+  'module' => 'formblock',
+  'delta' => 'user_password_request',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 289,
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/poll
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 290,
+  'module' => 'menu',
+  'delta' => 'menu-ask-an-expert-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ask-an-expert
+ask-an-expert-history',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 291,
+  'module' => 'formblock',
+  'delta' => 'ask_an_expert',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/lorem-ipsum-simply-dummy-text',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 292,
+  'module' => 'formblock',
+  'delta' => 'user_register',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 293,
+  'module' => 'formblock',
+  'delta' => 'user_password_request',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 294,
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/poll
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 295,
+  'module' => 'menu',
+  'delta' => 'menu-ask-an-expert-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ask-an-expert
+ask-an-expert-history',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 296,
+  'module' => 'formblock',
+  'delta' => 'ask_an_expert',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/lorem-ipsum-simply-dummy-text',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 297,
+  'module' => 'formblock',
+  'delta' => 'user_register',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 298,
+  'module' => 'formblock',
+  'delta' => 'user_password_request',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 299,
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/poll
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 300,
+  'module' => 'menu',
+  'delta' => 'menu-ask-an-expert-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ask-an-expert
+ask-an-expert-history',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 301,
+  'module' => 'formblock',
+  'delta' => 'ask_an_expert',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/lorem-ipsum-simply-dummy-text',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 302,
+  'module' => 'formblock',
+  'delta' => 'user_register',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 303,
+  'module' => 'formblock',
+  'delta' => 'user_password_request',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 304,
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/poll
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 305,
+  'module' => 'menu',
+  'delta' => 'menu-ask-an-expert-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ask-an-expert
+ask-an-expert-history',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 306,
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 307,
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -19,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 308,
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 309,
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 310,
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 311,
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 312,
+  'module' => 'formblock',
+  'delta' => 'breaking_news',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 313,
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 314,
+  'module' => 'menu',
+  'delta' => 'menu-site-setting',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 315,
+  'module' => 'formblock',
+  'delta' => 'breaking_news',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 316,
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 317,
+  'module' => 'menu',
+  'delta' => 'menu-site-setting',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 318,
+  'module' => 'formblock',
+  'delta' => 'breaking_news',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 319,
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -17,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 320,
+  'module' => 'menu',
+  'delta' => 'menu-site-setting',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 321,
+  'module' => 'formblock',
+  'delta' => 'breaking_news',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 322,
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 323,
+  'module' => 'menu',
+  'delta' => 'menu-site-setting',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 324,
+  'module' => 'formblock',
+  'delta' => 'breaking_news',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 325,
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 326,
+  'module' => 'menu',
+  'delta' => 'menu-site-setting',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 327,
+  'module' => 'formblock',
+  'delta' => 'breaking_news',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 328,
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 329,
+  'module' => 'menu',
+  'delta' => 'menu-site-setting',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 330,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 331,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -22,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 332,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 333,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 334,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 335,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 336,
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/quiz
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 337,
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/quiz
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 338,
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -14,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/quiz
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 339,
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/quiz
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 340,
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/quiz
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 341,
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/quiz
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 342,
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/survey
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 343,
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/survey
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 344,
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -13,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/survey
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 345,
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/survey
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 346,
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/survey
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 347,
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/survey
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
   'delta' => 'astro_tab_form_block',
   'type' => 'astro',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'views',
+  'delta' => 'view_moderation_history-block_1',
+  'type' => 'blog',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_breaking_news',
@@ -3848,6 +5113,16 @@ node/*/edit',
   'module' => 'views',
   'delta' => 'view_moderation_history-block_1',
   'type' => 'photogallery',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'type' => 'poll',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'type' => 'quiz',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_recipe',
@@ -3869,9 +5144,19 @@ node/*/edit',
   'delta' => 'view_moderation_history-block_2',
   'type' => 'story',
 );
+  $export['block_node_type'][] = array(
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'type' => 'survey',
+);
   $export['block_role'][] = array(
   'module' => 'itg_photogallery',
   'delta' => 'photogallery_tab_form_block',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
   'rid' => 4,
 );
   $export['block_role'][] = array(
@@ -3880,8 +5165,23 @@ node/*/edit',
   'rid' => 4,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-admin-left-menu',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
   'rid' => 4,
 );
   $export['block_role'][] = array(
@@ -3910,13 +5210,38 @@ node/*/edit',
   'rid' => 5,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 5,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-admin-left-menu',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
   'rid' => 5,
 );
   $export['block_role'][] = array(
@@ -3950,13 +5275,38 @@ node/*/edit',
   'rid' => 6,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 6,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-admin-left-menu',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
   'rid' => 6,
 );
   $export['block_role'][] = array(
@@ -3985,13 +5335,33 @@ node/*/edit',
   'rid' => 7,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'rid' => 7,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 7,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'rid' => 7,
+);
+  $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-admin-left-menu',
+  'rid' => 7,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'rid' => 7,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
   'rid' => 7,
 );
   $export['block_role'][] = array(
@@ -4055,13 +5425,28 @@ node/*/edit',
   'rid' => 9,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'rid' => 9,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 9,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'rid' => 9,
+);
+  $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-admin-left-menu',
+  'rid' => 9,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
   'rid' => 9,
 );
   $export['block_role'][] = array(
@@ -4095,13 +5480,38 @@ node/*/edit',
   'rid' => 10,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 10,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-admin-left-menu',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
   'rid' => 10,
 );
   $export['block_role'][] = array(
@@ -4135,13 +5545,38 @@ node/*/edit',
   'rid' => 20,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_story',
   'delta' => 'story_tab_form_block',
   'rid' => 20,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-admin-left-menu',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-movie-review-menu',
   'rid' => 20,
 );
   $export['block_role'][] = array(

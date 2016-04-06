@@ -45,7 +45,7 @@
                     <?php print render($content['field_type']); ?>
                     <?php print render($content['field_content_type']); ?>
                      <div class="field">
-                        <div class="field-label">Breaking Text:</div>
+                        <div class="field-label"><?php print t('Breaking Text:');?></div>
                         <div class="field-items"><h1><?php print $title; ?></h1></div>
                     </div>
                    
@@ -91,7 +91,7 @@
                     ?>
               <div class="content-node-view">
                   <?php if($cnd != '') { ?>
-                  <h2>Display on</h2>
+                  <h2><?php print t('Display on');?></h2>
                   <?php } ?>
                   <div class="content-details">
                     <?php
@@ -111,19 +111,15 @@
             $browsemedia = render($content['field_story_extra_large_image']);  
             if(!empty($browsemedia)):?>
           <div class="content-node-view">
-            <h2>Browse Media</h2>
+            <h2><?php print t('Browse Media');?></h2>
             <div class="content-details">
             <?php print render($content['field_story_extra_large_image']); ?>
-            <?php print render($content['field_story_large_image']); ?>
-            <?php print render($content['field_story_medium_image']); ?>
-            <?php print render($content['field_story_small_image']); ?>
-            <?php print render($content['field_story_extra_small_image']); ?>
             </div>
           </div>
            <?php endif;?>
            
           <div class="content-node-view">
-            <h2>Content Details</h2>
+            <h2><?php print t('Content Details');?></h2>
             <div class="content-details">
             <?php print render($content['field_breaking_content_details']); ?>
                         </div>

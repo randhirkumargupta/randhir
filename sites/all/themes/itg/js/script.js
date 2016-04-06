@@ -18,6 +18,120 @@ Drupal.behaviors.my_custom_behavior = {
   attach: function(context, settings) {
 
     // Place your code here.
+    $('input.rating').hover(function(){
+    $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
+    $(this).parent().nextAll().removeClass('rating-hover');
+  }, function(){
+    $('.form-checkboxes.rating .form-type-checkbox').removeClass('rating-hover');
+  });
+  
+  $('input.rating').click(function(){
+    $(this).parent().addClass('rated-div current-rating').prevAll().addClass('rated-div');
+    $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
+    $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
+  });
+  
+  $('.survey-submit, .survey-submit-skip').mousedown(function(){
+    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
+    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
+    var textValue = $(this).parents('.question-container').find('.form-text').val();
+    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
+    
+    if(checkValue && skipValue == 'no'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    } else if(skipValue == 'yes'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    }
+    
+    if(radioValue && skipValue == 'no'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    } else if(skipValue == 'yes'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    }
+    
+    if(textValue  && skipValue == 'no' && textValue != 'undefined'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    } else if(skipValue == 'yes'){
+      $(this).ajaxSuccess(function(){
+        $('.question-container').hide();
+        $(this).parents('.question-container').next().show();
+      });
+    }
+    
+  });
+  
+  var loader = '<div class="ajax-loader"><img src="sites/all/themes/rubik/images/loader.svg" alt=""/></div>';
+  
+  $('#itg-survey-survey-form .button-yes').mousedown(function(){
+    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
+    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
+    var textValue = $(this).parents('.question-container').find('.form-text').val();
+    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
+    
+    if(checkValue && skipValue == 'no'){
+      $('.question-container').hide();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+      
+    } else if(skipValue == 'yes'){
+     $('.question-container').hide();
+     $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    }
+    
+    if(radioValue && skipValue == 'no'){
+      $('.question-container').hide();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    } else if(skipValue == 'yes'){
+     $('.question-container').hide();
+     $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    }
+    
+    if(textValue  && skipValue == 'no' && textValue != 'undefined'){
+      $('.question-container').hide();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    } else if(skipValue == 'yes'){
+      $('.question-container').hide();
+      $('body').find('.ajax-loader').remove();
+      $(this).parents('.block-content').append(loader);
+      $(this).ajaxSuccess(function(){
+        $('body').find('.ajax-loader').remove();
+      });
+    }
+  });
 
   }
 };

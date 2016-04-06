@@ -9,17 +9,39 @@
  */
 
 /**
+ * Implement hook_permission
+ * @return type
+ */
+function itg_survey_permission() {
+    return array(
+    'survey admin users' => array(
+      'title' => t('Access Survey Result'),
+    )
+  );
+}
+
+/**
  * Implement hook_menu
  * @return string
  */
 function itg_survey_menu() {
+  
   $items = array();
+  
   $items['survey'] = array(
+      'title' => t('Survey'),
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_survey_survey_form'),
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_survey_form.inc',
+  );
+  
+  $items['survey-result/%'] = array(
+      'page callback' => 'itg_survey_result',
+      'access callback' => 'user_access',
+      'access arguments' => array('survey admin users'),
+      'file' => 'includes/itg_survey_result.inc',
   );
   return $items;
 }
@@ -37,6 +59,11 @@ function itg_survey_theme() {
       'template' => 'itg-survey-form',
       'render element' => 'form',
     ),
+    'survey_tab_form_display_block' => array(
+      'template' => 'survey-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_survey') . '/templates',
+      'variables' => array('data' => NULL),
+    ), 
  );
 }
 
@@ -60,16 +87,33 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       //Form fields treatment
       $form['title']['#title'] = 'Survey Title';
       $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
+      
+      if(is_numeric(arg(1)) && arg(2) == 'edit') {
+        $form['actions']['view_survey_result'] = array(
+          '#markup' => l(t('View Survey Result'), 'survey-result/'.arg(1), array('attributes' => array('class' => 'button', 'target'=>'_blank'))),
+          '#weight' => 20,
+          '#value' => t('View Survey Result'),
+        );
+      }
+            
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
         '#weight' => 21,
         '#value' => t('Cancel'),
       );
+                 
       $form['field_survey_add_questions'][LANGUAGE_NONE]['#title'] = '';
+      
+      //Unset add more answer option
+      unset($form['field_survey_add_questions'][LANGUAGE_NONE][0]['field_survey_answer_option_more']);
       
       //After build and custom summit callback
       $form['#after_build'][] = 'itg_survey_form_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_survey_form_custom_submit_callback';
+    }
+    
+    if($form_id == 'itg_survey_survey_form'){
+      drupal_set_title('India Today Survey');
     }
 }
 
@@ -194,7 +238,7 @@ function itg_survey_node_validate($node, $form, &$form_state) {
  * @return Array
  */
 function itg_survey_get_current_survey() {
-  $curr_time = time();
+  $curr_time = strtotime(date('Y-m-d').' 00:00:00');
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'))
           ->condition('n.type', 'survey', '=')
@@ -209,6 +253,7 @@ function itg_survey_get_current_survey() {
   //Load Node
   $node = node_load($nid);
   $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+
   if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
     if ($survey_end_date < $curr_time) {
       return FALSE;
@@ -252,6 +297,7 @@ function itg_survey_get_survey_by_users($nid, $user_type){
 function itg_survey_get_total_survey($nid){
     $result = db_select('itg_survey_user', 'isu')
             ->fields('isu')
+            ->condition('isu.nid', $nid, '=')
             ->execute();
     $total_survey = $result->rowCount();
     if($total_survey){
@@ -260,4 +306,117 @@ function itg_survey_get_total_survey($nid){
       return 0;
     }
     
+}
+
+/**
+ * Get total vote of a perticular answer for a individual question
+ * @param Int $nid
+ * @param Int $ques_id
+ * @param String $answer
+ * @return string
+ */
+function itg_survey_vote_percentage($nid, $ques_id, $answer){
+  
+  $total_vote_on_question = itg_survey_get_total_vote_question($nid, $ques_id, $answer, NULL);
+  
+  if (!$total_vote_on_question) {
+    return '0%';
+  } else {
+    $result = db_select('itg_survey_detail', 'su')
+            ->fields('su')
+            ->condition('su.ques_id', $ques_id, '=')
+            ->condition('su.nid', $nid, '=')
+            ->condition('su.answer', $answer, '=')
+            ->execute();
+    $total_answwer_for_ques = $result->rowCount();
+    $vote_percentage = ($total_answwer_for_ques / $total_vote_on_question) * 100;
+    return round($vote_percentage, 2) . '%';
+  }
+}
+
+/**
+ * 
+ * @param Int $nid
+ * @param Int $ques_id
+ * @param String $answer
+ * @param String $user_type
+ * @return string
+ */
+function itg_survey_vote_percentage_user($nid, $ques_id, $answer, $user_type){
+
+  $total_vote_on_question_user = itg_survey_get_total_vote_question($nid, $ques_id, $answer, $user_type);
+  
+  if (!$total_vote_on_question_user) {
+    return '0%';
+  } else {
+    $result = db_select('itg_survey_detail', 'su')
+            ->fields('su')
+            ->condition('su.ques_id', $ques_id, '=')
+            ->condition('su.nid', $nid, '=')
+            ->condition('su.answer', $answer, '=')
+            ->condition('su.user_type', $user_type, '=')
+            ->execute();
+    $total_answwer_for_ques_user = $result->rowCount();
+    $vote_percentage = ($total_answwer_for_ques_user / $total_vote_on_question_user) * 100;
+    return round($vote_percentage, 2) . '%';
+  }
+}
+
+/**
+ * Get total vote for a question
+ * @param Int $nid
+ * @param Int $ques_id
+ * @return int
+ */
+function itg_survey_get_total_vote_question($nid, $ques_id, $answer, $user_type){
+  if ($user_type) {
+    $result = db_select('itg_survey_detail', 'isu')
+            ->fields('isu')
+            ->condition('isu.nid', $nid, '=')
+            ->condition('isu.ques_id', $ques_id, '=')
+            ->condition('isu.answer', $answer, '=')
+            ->execute();
+  } else {
+    $result = db_select('itg_survey_detail', 'isu')
+            ->fields('isu')
+            ->condition('isu.nid', $nid, '=')
+            ->condition('isu.ques_id', $ques_id, '=')
+            ->execute();
+  }
+
+  $total_question_vote = $result->rowCount();
+  if ($total_question_vote) {
+    return $total_question_vote;
+  } else {
+    return 0;
+  }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function itg_survey_block_info() {
+  $blocks['survey_tab_form_block'] = array(
+    'info' => t('Survey Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_survey_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'survey_tab_form_block':                       
+      $block['content'] = theme('survey_tab_form_display_block', array('data' => $data));
+    break;        
+  }
+  
+  return $block;
 }

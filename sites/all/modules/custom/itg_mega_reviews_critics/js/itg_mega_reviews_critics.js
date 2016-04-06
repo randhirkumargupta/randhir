@@ -6,7 +6,7 @@
 (function ($) {
   Drupal.behaviors.mega_reviews_critics = {
     attach: function (context) {
-        $('.tabledrag-toggle-weight-wrapper').hide();
+        $('.tabledrag-toggle-weight-wrapper').hide();        
     }
 
   };

@@ -1,0 +1,6 @@
+name = ITG Quiz
+description = "Contains functionality related to quiz."
+package = "ITG"
+core = 7.x
+
+files[] = itg_quiz.module

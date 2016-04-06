@@ -1,0 +1,319 @@
+<?php
+
+/**
+ * @file
+ * The ITG Quiz module.
+ *
+ * Contains functionality for quiz.
+ *
+ */
+
+/**
+ * Implement hook_menu
+ * @return string
+ */
+function itg_quiz_menu() {
+  
+  $items = array();
+  
+  $items['quiz'] = array(
+      'title' => t('Quiz'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_quiz_quiz_form'),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_quiz_form.inc',
+  );
+  
+  $items['quiz-result/%'] = array(
+      'title' => t('Quiz Result'),
+      'page callback' => 'itg_quiz_result',
+      'access callback' => 'user_access',
+      'access arguments' => array('quiz admin users'),
+      'file' => 'includes/itg_quiz_result.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function itg_quiz_block_info() {
+  $blocks['quiz_tab_form_block'] = array(
+    'info' => t('Quiz Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_quiz_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'quiz_tab_form_block':                       
+      $block['content'] = theme('quiz_tab_form_display_block', array('data' => $data));
+    break;        
+  }
+  
+  return $block;
+}
+
+
+
+/**
+ * Implements hook_theme().
+ * @param type $existing
+ * @param type $type
+ * @param type $theme
+ * @param type $path
+ */
+function itg_quiz_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'quiz_tab_form_display_block' => array(
+      'template' => 'quiz-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_quiz') . '/templates',
+      'variables' => array('data' => NULL),
+    ),   
+  );
+
+  return $themes;
+}
+
+
+
+
+/***************************Form Related hooks*********************************/
+/**
+ * Implement hook_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param String $form_id
+ */
+function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
+
+  global $user;
+  //$form['field_quiz_add_questions']['#attributes']['class'][] = 'shravan';
+  //Set destination for quiz form
+  if ($form_id == 'quiz_node_form') {
+    
+      //Set Destination
+      $destination = 'manage-quiz';
+     
+      //Form fields treatment
+      $form['title']['#title'] = 'Quiz Title';
+      $form['title']['#description'] = '<p>' . t('Please enter quiz title.') . '</p>';
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+      );
+      $form['field_quiz_add_questions'][LANGUAGE_NONE]['#title'] = '';
+      
+      //After build and custom summit callback
+      $form['#after_build'][] = 'itg_quiz_form_after_build';
+      $form['actions']['submit']['#submit'][] = 'itg_quiz_form_custom_submit_callback';
+    }
+    
+    if($form_id == 'itg_quiz_quiz_form'){
+      drupal_set_title('India Today Quiz');
+    }
+}
+
+/**
+ * Custom function on submit of quiz form
+ * @param Array $form
+ * @param Array $form_state
+ */
+ function itg_quiz_form_custom_submit_callback($form, &$form_state) {
+  
+  //Unset drupal redirection and add custom redirection URL
+  if (isset($_GET['destination'])) {
+    unset($_GET['destination']);
+  }
+  $form_state['redirect'] = 'manage-quiz';
+
+  //Set custom message on creation and updation of quiz form.
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+  if (arg(2) == 'edit') {
+    drupal_set_message(t('Quiz has been updated.'));
+  } else {
+    drupal_set_message(t('Quiz has been submitted for further review and approval.'));
+  }
+}
+
+/**
+ * After build function for quiz
+ * @param Array $form
+ * @param Array $form_state
+ * @return Array
+ */
+function itg_quiz_form_after_build($form, &$form_state) {
+  global $user, $base_url;
+  
+  //Extract type of node
+  if (arg(0) == 'node') {
+    if (arg(1) == 'add') {
+        $type = arg(2);
+        $nid = '';
+    } else {
+      $node = node_load(arg(1));
+      $type = $node->type;
+      $nid = arg(1);
+    }
+  }
+
+  //Array used in itg_quiz.js
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  $settings['type'] = ucfirst($type);
+  $settings['nid'] = $nid;
+  
+  drupal_add_js(array('itg_quiz' => array('settings' => $settings)), array('type' => 'setting'));
+  
+  //Add JS for quiz
+   drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz.js', array('weight' => 1));
+    
+  //Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+ 
+  return $form;
+}
+
+/*******************************View Related hooks*****************************/
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_quiz_views_pre_render(&$view) {
+  
+  //Add "Create Magazine" button on listing page of magazine
+  if ($view->name == "manage_quiz") {
+    $header_content_quiz = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_quiz .= l(t('Create Quiz'), 'node/add/quiz');
+    $view->attachment_before = $header_content_quiz;
+  }
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param String $form_id
+ */
+function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
+   if ($form['#id'] == 'views-exposed-form-manage-quiz-page') {
+     
+     //Call function autocomplete to show matching titles
+     $form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+     $form['nid']['#autocomplete_path'] = 'content-nid-list/quiz/autocomplete';
+     $form['nid']['#attributes'] = array('placeholder' => t('Quiz id'));
+   }
+}
+
+/*******************************Node Related hooks*****************************/
+
+/**
+ * 
+ * @param Object $node
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_quiz_node_validate($node, $form, &$form_state) {
+  
+  //Date validation for start date and end date
+  if($node->type == 'quiz' && !empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
+   if(strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
+      form_set_error('field_quiz_end_date',t('Quiz end date must be greater or equal to start date.'));
+    }
+  }
+}
+
+/*******************************Common Functions*****************************/
+
+/**
+ * Get Active node for quiz
+ * @return Array
+ */
+function itg_quiz_get_current_quiz() {
+  $curr_time = strtotime(date('Y-m-d').' 00:00:00');
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'))
+          ->condition('n.type', 'quiz', '=')
+          ->condition('n.status', 1, '=')
+          ->orderBy('n.created', 'DESC')
+          ->range(0, 1);
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $nid = $record['nid'];
+  }
+
+  //Load Node
+  $node = node_load($nid);
+  $quiz_end_date = strtotime($node->field_quiz_end_date[LANGUAGE_NONE][0]['value']);
+
+  if (!empty($node->field_quiz_quiz_date[LANGUAGE_NONE][0]['value'])) {
+    if ($quiz_end_date < $curr_time) {
+      return FALSE;
+    } else {
+      return $node;
+    }
+  } else {
+    return $node;
+  }
+}
+
+/**
+ * Get quiz percentage taken by a user type(Anonymous/Authenticated)
+ * @param Int $nid
+ * @param String $user_type
+ * @return string
+ */
+function itg_quiz_get_quiz_by_users($nid, $user_type){
+  
+  //Get total quiz for a node
+  $total_quiz = itg_quiz_get_total_quiz($nid);
+  if (!$total_quiz) {
+    return '0%';
+  } else {
+    $result = db_select('itg_quiz_user', 'su')
+            ->fields('su')
+            ->condition('su.user_type', $user_type, '=')
+            ->condition('su.nid', $nid, '=')
+            ->execute();
+    $total_quiz_by_user = $result->rowCount();
+    $quiz_percentage = ($total_quiz_by_user / $total_quiz) * 100;
+    return round($quiz_percentage, 2) . '%';
+  }
+}
+
+/**
+ * Get total number of quiz taken by users for a node
+ * @param Int $nid
+ * @return Int
+ */
+function itg_quiz_get_total_quiz($nid){
+    $result = db_select('itg_quiz_user', 'isu')
+            ->fields('isu')
+            ->condition('isu.nid', $nid, '=')
+            ->execute();
+    $total_quiz = $result->rowCount();
+    if($total_quiz){
+      return $total_quiz;
+    } else {
+      return 0;
+    }
+    
+}

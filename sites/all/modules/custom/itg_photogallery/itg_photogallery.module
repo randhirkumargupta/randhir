@@ -83,6 +83,7 @@ function itg_photogallery_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
   }
   drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 3));
+  $form['revision_information']['log']['#prefix'] = '<h2 id="title-metatags" class="story-title">Remark</h2>';
 return $form;
 }
 
@@ -323,16 +324,16 @@ function itg_photogallery_byline_photoby($type, $id){
 function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
   //Get the Form Id
-  if ($form['#id'] == 'views-exposed-form-photo-gallery-menegment-page' 
+  if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page' 
            || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' 
-           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-3' 
-           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-8' 
-           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-6' 
-           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-5' 
-           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-2' 
-           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-9' 
-           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-7'           
-           || $form['#id'] == 'views-exposed-form-photo-gallery-menegment-page-1') {
+           || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-3' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-8' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-9' 
+           || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-7'           
+           || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-4') {
     //$form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
     $form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));

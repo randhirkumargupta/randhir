@@ -18,7 +18,7 @@
  */
 function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
-  // p($form); //Moderation state 
+  
   switch ($form_id) {
     case 'story_node_form':
       $form['#after_build'][] = 'itg_workflow_after_build';      
@@ -29,7 +29,7 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
     break;
   
     case 'blog_node_form':
-      //$form['#after_build'][] = 'itg_workflow_after_build';      
+      $form['#after_build'][] = 'itg_workflow_after_build';      
     break;
     
     case 'views_exposed_form':
@@ -46,10 +46,18 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
 function itg_workflow_after_build($form, &$form_state) {
  global $user, $base_url;
  
-// $form['revision_information']['log']['#weight'] = 7;
-// $form['revision_information']['workbench_moderation_state_new']['#weight'] = 6;
+  // code for sequence change of modration field
  
- $form['revision_information']['log']['#title'] = 'Remarks';
+  $log = $form['revision_information']['log'];
+  $state = $form['revision_information']['workbench_moderation_state_new'];
+  unset($form['revision_information']['log']);
+  unset($form['revision_information']['workbench_moderation_state_new']);
+  $form['revision_information']['workbench_moderation_state_new'] = $state;
+  $form['revision_information']['log'] = $log;
+  
+  // code end
+ 
+  $form['revision_information']['log']['#title'] = t('Remarks');
  
  // hide workbench dropdown
   drupal_add_js('jQuery(document).ready(function() {
@@ -62,20 +70,21 @@ function itg_workflow_after_build($form, &$form_state) {
     if (!isset($form['#node']->workbench_moderation['current'])) {
       $state_class = ' published';
       $submit_name = 'Publish';
-      $form['actions']['submit']['#value'] = 'Save as Draft';
+      $form['actions']['submit']['#value'] = t('Save as Draft');
       
     } else if (isset($form['#node']->workbench_moderation['current'])) {
       if ($form['#node']->workbench_moderation['current']->state == 'draft') {
         $state_class = ' published';
         $submit_name = 'Publish';
-        $form['actions']['submit']['#value'] = 'Save as Draft';
+        $form['actions']['submit']['#value'] = t('Save as Draft');
         
       } else if ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
             $submit_name = '';            
             $state_class = ' published';
+            
             drupal_add_js('jQuery(document).ready(function() {
-             jQuery(".form-item-workbench-moderation-state-new").show();
-             jQuery("#edit-log").val("");
+              jQuery(".form-item-workbench-moderation-state-new").show();
+              jQuery("#edit-log").val("");
             });', array('type' => 'inline', 'scope' => 'footer'));
           }      
     }
@@ -83,7 +92,7 @@ function itg_workflow_after_build($form, &$form_state) {
       if (!isset($form['#node']->workbench_moderation['current'])) {
         $submit_name = 'Submit for Review';
         $state_class = ' needs_review';
-        $form['actions']['submit']['#value'] = 'Save as Draft'; 
+        $form['actions']['submit']['#value'] = t('Save as Draft'); 
         
       } else if (isset($form['#node']->workbench_moderation['current']) && ($form['#node']->workbench_moderation['current']->state == 'draft' || $form['#node']->workbench_moderation['current']->state == 'needs_review' || $form['#node']->workbench_moderation['current']->state == 'needs_modification')) {
           if ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
@@ -92,7 +101,8 @@ function itg_workflow_after_build($form, &$form_state) {
           } else if ($form['#node']->workbench_moderation['current']->state == 'needs_modification') {
             $submit_name = 'Submit for Review';
             $state_class = ' needs_review';
-            $form['actions']['submit']['#value'] = 'Save as Draft';
+            $form['actions']['submit']['#value'] = t('Save as Draft');
+            
             drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-workbench-moderation-state-new").val("needs_modification");              
             });', array('type' => 'inline', 'scope' => 'footer'));
@@ -103,7 +113,7 @@ function itg_workflow_after_build($form, &$form_state) {
           } else if ($form['#node']->workbench_moderation['current']->state == 'draft') {
               $submit_name = 'Submit for Review';
               $state_class = ' needs_review';
-              $form['actions']['submit']['#value'] = 'Save as Draft';
+              $form['actions']['submit']['#value'] = t('Save as Draft');
               
           } else {
             
@@ -124,6 +134,7 @@ function itg_workflow_after_build($form, &$form_state) {
 
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
+  
   return $form;
 }
 
@@ -133,8 +144,8 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param type $node
  */
 function itg_workflow_node_presave($node) {
-  // if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
-  if ($node->type == 'story' || $node->type == 'photogallery') {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
+  // if ($node->type == 'story' || $node->type == 'photogallery') {
    if ($node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
     $node->workbench_moderation_state_new = 'published';
    }
@@ -148,7 +159,7 @@ function itg_workflow_node_presave($node) {
  */
 function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
   global $user, $base_url;
-  // p($form['#id']);
+  // pr($form['#id']);
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6') {
     $form['state']['#options'] = array('All' => '-All-', 
                                        'needs_review' => 'Submitted for Review', 
@@ -156,13 +167,15 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
                                        'needs_modification' => 'Needs Modification' );
     
   } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {     
-    $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => '-All-', '<' => 'Published', '>=' => 'To Be Live');    
+    $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));    
+    
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
     
   } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {     
-    $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => '-All-', '<' => 'Published', '>=' => 'To Be Live');    
+    $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));    
+    
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
               jQuery("#edit-field-story-schedule-date-time-value-op").click(function() {                     
@@ -171,7 +184,11 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
             });', array('type' => 'inline', 'scope' => 'footer'));
     
   } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page') {
+      
       // Code for Bulk opration related work for story
+      
+      // itg_workflow_bulk_opration_related('edit-bundle-story-appendfield-story-archive', 'edit-bundle-story-field-story-archive-und');
+      
       drupal_add_js('jQuery(document).ready(function() {
                jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
                var myInputBoxID = "edit-bundle-story-appendfield-story-archive";
@@ -184,7 +201,11 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
              });', array('type' => 'inline', 'scope' => 'footer'));
       
   } else if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page') {
+      
       // Code for Bulk opration related work for Gallery
+      
+      // itg_workflow_bulk_opration_related('edit-bundle-photogallery-appendfield-story-archive', 'edit-bundle-photogallery-field-story-archive-und');
+      
       drupal_add_js('jQuery(document).ready(function() {
                jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
                var myInputBoxID = "edit-bundle-photogallery-appendfield-story-archive";
@@ -196,9 +217,12 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
                jQuery("#edit-bundle-photogallery-field-story-archive-und").hide();               
              });', array('type' => 'inline', 'scope' => 'footer'));
       
-  } else if ($form['#id'] == 'views-exposed-form-blog-management-page') {
+  } else if ($form['#id'] == 'views-exposed-form-blogs-management-page') {
+    
+      // itg_workflow_bulk_opration_related('edit-bundle-blog-appendfield-story-archive', 'edit-bundle-blog-field-story-archive-und');
+      
       // Code for Bulk opration related work for Blog
-     /* drupal_add_js('jQuery(document).ready(function() {
+      drupal_add_js('jQuery(document).ready(function() {
                jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
                var myInputBoxID = "edit-bundle-blog-appendfield-story-archive";
                jQuery("label[for=" + myInputBoxID + "]").hide();
@@ -207,7 +231,7 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
                jQuery("#edit-actions-submit").val("Archive");
                jQuery("#edit-bundle-blog-field-story-archive-und-yes").attr("checked", true);
                jQuery("#edit-bundle-blog-field-story-archive-und").hide();               
-             });', array('type' => 'inline', 'scope' => 'footer'));*/
+             });', array('type' => 'inline', 'scope' => 'footer'));
       
   }
   
@@ -223,7 +247,7 @@ function itg_workflow_views_query_alter(&$view, &$query) {
 
   // < published and >= approved
   
-  // for story
+  // for story list
   if ((!isset($_REQUEST['field_story_schedule_date_time_value_1_op'])) && $view->current_display == 'page_5') {
     unset($view->query->where[1]['conditions'][4]);
   } else if ((!isset($_REQUEST['field_story_schedule_date_time_value_op'])) && $view->current_display == 'page_1') {
@@ -255,25 +279,22 @@ function itg_workflow_query_alter(QueryAlterableInterface $query) {
  */
 function itg_workflow_node_access($node, $op, $account) {
   
- $arr_source_type = array('issue', 'supplement');
+  $arr_source_type = array('issue', 'supplement');
  
   if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
     $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
     $current_time = time();
+    
     if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected'))
       return NODE_ACCESS_DENY;
     else if (($story_expiry_date < $current_time) && (arg(0) != 'issue-listing'))
       return NODE_ACCESS_DENY;
-  } else if (isset($node->type) && $node->type == 'photogallery' && $op == 'update') {
+  } else if (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog')) {
       if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
         return NODE_ACCESS_DENY;
       }
-  } 
-//  else if (isset($node->type) && $node->type == 'blog' && $op == 'update') {
-//      if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
-//        return NODE_ACCESS_DENY;
-//      }
-//  }
+  }  
+  
 
   return NODE_ACCESS_IGNORE;
 }
@@ -285,8 +306,7 @@ function itg_workflow_node_access($node, $op, $account) {
  * @param type $langcode
  */
 function itg_workflow_node_view($node, $view_mode, $langcode) {
-  // if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
-  if ($node->type == 'story' || $node->type == 'photogallery') {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {  
     $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
   }
 }
@@ -300,11 +320,29 @@ function itg_workflow_node_view($node, $view_mode, $langcode) {
  */
 function itg_workflow_node_validate($node, $form, &$form_state) {
   // Code for check remarks field is empty or not
-  // if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
-  if ($node->type == 'story' || $node->type == 'photogallery') {    
+   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {     
     if (empty($node->log) && (($node->workbench_moderation_state_new == 'needs_modification') || ($node->workbench_moderation_state_new == 'rejected'))) {
       form_set_error('log', t("Remarks field is required."));
     }
   }
 }
 
+
+/**
+ * Bulk opration related work
+ * @param type $field1:edit-bundle-blog-appendfield-story-archive
+ * @param type $field2:edit-bundle-blog-field-story-archive-und    
+ */
+function itg_workflow_bulk_opration_related($field1, $field2) {
+  drupal_add_js('jQuery(document).ready(function() {
+                jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
+                var myInputBoxID = '.$field1.';
+                jQuery("label[for=" + myInputBoxID + "]").hide();
+                jQuery("#"+myInputBoxID).hide();
+                jQuery("#edit-tokens").hide();
+                jQuery("#edit-actions-submit").val("Archive");
+                var fieldId = '.$field2.';
+                jQuery("#"+fieldId+"-yes").attr("checked", true);
+                jQuery("#"+fieldId).hide();               
+             });', array('type' => 'inline', 'scope' => 'footer'));
+}

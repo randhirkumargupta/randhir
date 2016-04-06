@@ -53,7 +53,10 @@ function pr($arg) {
 function itg_common_dropdown_supplement($id = '') {
 
   // Fetch query for supplements 
-  $data = '';
+  // $data = '';
+  $select = t('- None -');
+  $data = array('_none' => $select);
+    
   $query = db_select('field_data_field_supp_select_magazine', 'm');
   $query->join('node', 'n', 'm.entity_id = n.nid');
   $query->fields('m', array('entity_id'));
@@ -66,11 +69,6 @@ function itg_common_dropdown_supplement($id = '') {
     $data[$record['entity_id']] = $record['title'];
   }
 
-  //If record found, then return array else return blank
-  if (empty($data)) {
-    $data = array('_none' => '-Select-');
-  }
-
   return $data;
 }
 
@@ -79,24 +77,54 @@ function itg_common_dropdown_supplement($id = '') {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  
+ 
+  // code to change page title on node edit
+  if (!empty($form['nid']['#value'])) {
+    /* @var $node_type string */
+    $node_type = $form['#node']->type;
+    $node_type = str_replace("_", " ", $node_type);
+    $node_type = ucfirst($node_type);
+    $node_title = $form['#node']->title;
+    $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
+    drupal_set_title($edit_title);
+  }
+
+
   if ($form_id != 'ask_an_expert_node_form') {
     if (isset($form['title']['#title'])) {
       $form['title']['#description'] = $form['title']['#title'];
     }
   }
-  // Extra meta tags element hide from form
-  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form') {
-    $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+  
+  // Button name change some content
+  if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
+    
+    $form['actions']['itg_custom_button'] = array('#type' => 'submit',
+                                                  '#value' => t('Save as Draft'),
+                                                  '#submit' => array('node_form_submit'));
+    $form['actions']['submit']['#value'] = t('Publish');
   }
+  
+  // Extra meta tags element hide from form
+  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form') {
+    if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+      $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+    }
+    $form['#after_build'][] = 'itg_common_cancel_button';   
+  }
+  
   //Auto Generate image according photogallery
    if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form') {
-     $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<div class="img-crt"></div>');
-     $coverid = $form_state['values']['field_story_extra_large_image']['und'][0]['fid'];
-     $form_state['values']['field_story_large_image']['und'][0]['fid'] = $coverid;
-     $form_state['values']['field_story_medium_image']['und'][0]['fid'] = $coverid;
-     $form_state['values']['field_story_small_image']['und'][0]['fid'] = $coverid;
-     $form_state['values']['field_story_extra_small_image']['und'][0]['fid'] = $coverid;
+     // $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<a class="img-crt button" href="javascript:;">Generate Image</a>');
+     $form['field_story_extra_large_image']['#suffix'] = '<a class="img-crt button" href="javascript:;">Generate Image</a>';
+     if(isset($form_state['build_info']['args'][0]->field_story_extra_large_image)){
+       $cover_id = $form_state['build_info']['args'][0]->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
+       $settings = array();
+       $file = file_load($cover_id);
+       $settings['large_node_uri'] = $file->uri;
+       drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
+     }
+
      $form['#after_build'][] = 'itg_common_image_generate';
    }
 }
@@ -108,6 +136,15 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
  * @return 
  */
 function itg_common_image_generate($form, &$form_state){
+  $coverid = $form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'];
+  if(isset($coverid) && !empty($coverid)){
+    $settings = array();
+    $file = file_load($coverid);
+    $settings['large_uri'] = $file->uri;
+  }else{
+    $settings['large_uri'] = '';
+  }
+  drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_image.js', array('weight' => 3));
   return $form;
 }
@@ -136,25 +173,13 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
  * @return 
  */
 function itg_meta_tags_extra_element_hide($form, &$form_state) {
-  global $user, $base_url;
+  global $user, $base_url;  
   
-  if (!isset($_REQUEST['destination'])) {
-    $destination = '';
-  } else {
-      $destination_array = explode('?', $_REQUEST['destination']);
-      $destination = $destination_array[0];
-  }
-
-  $form['actions']['cancel'] = array(
-    '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-    '#weight' => 20,
-  );
-
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
 
-  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
-  $form['path']['#prefix'] = '<div class="story-title">Meta Tags</div>';
+  $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
+  $form['path']['#prefix'] = '<div class="story-title">'.t('Meta Tags').'</div>';
 
   drupal_add_js('jQuery(document).ready(function() {
              // hide some eliment of metatags
@@ -168,16 +193,37 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
 }
 
 /**
+ * Extra meta tags element hide from form 
+ * @param Array $form
+ * @param Array $form_state
+ * @return 
+ */
+function itg_common_cancel_button($form, &$form_state) {
+  global $user, $base_url;
+  
+  if (!isset($_REQUEST['destination'])) {
+    $destination = '';
+  } else {
+      $destination_array = explode('?', $_REQUEST['destination']);
+      $destination = $destination_array[0];
+  }
+
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+  
+  return $form;
+}
+
+/**
  * Implements views header link 
  * @param type $view Description
  */
-function itg_common_views_pre_render(&$view) {
-  
+function itg_common_views_pre_render(&$view) {  
   if ($view->name == "byline_list") {
-    global $user; // Get user information
-    
-    $header_content = l('Create Byline', 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
-    
+    global $user; // Get user information    
+    $header_content = l(t('Create Byline'), 'node/add/reporter', array('query' => array('destination' => 'byline-list')));    
     $view->attachment_before = $header_content;
   }    
 }
@@ -188,8 +234,108 @@ function itg_common_views_pre_render(&$view) {
  * @param type $form_state
  * @param type $form_id  
  */
-function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {    
-   if (isset($form['title'])) {
-    $form['title']['#maxlength']= 255;
+function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+ 
+  if (isset($form['title'])) {
+   $form['title']['#maxlength']= 255;
+   
+   // remove space from title search field.
+   drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".form-submit").click(function() {            
+                 var title = jQuery.trim(jQuery("#edit-title").val());       
+                 if (title == "") {
+                   jQuery("#edit-title").val("");
+                 }
+                 
+                 var nid = jQuery.trim(jQuery("#edit-nid").val());       
+                 if (nid == "") {
+                   jQuery("#edit-nid").val("");
+                 }
+                 
+               });              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+   
+   if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-movie-review-list-page' || $form['#id'] == 'views-exposed-form-blogs-management-page-1') {
+     
+     // remove space from title search field.
+   drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".tabledrag-toggle-weight-wrapper").hide();
+          });', array('type' => 'inline', 'scope' => 'footer'));
    }
+   
+  }
+  if ($form['#id'] == 'views-exposed-form-category-manager-dev-page' || $form['#id'] =='views-exposed-form-tags-management-page'){
+     drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".form-submit").click(function() {
+                 jQuery("#edit-name").val(jQuery.trim(jQuery("#edit-name").val()));
+               });              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
+  if ($form['#id'] == 'views-exposed-form-manage-users-page'){
+     drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".form-submit").click(function() {
+                 jQuery("#edit-mail").val(jQuery.trim(jQuery("#edit-mail").val()));
+                 jQuery("#edit-field-first-name-value").val(jQuery.trim(jQuery("#edit-field-first-name-value").val()));
+                 jQuery("#edit-field-mobile-number-value").val(jQuery.trim(jQuery("#edit-field-mobile-number-value").val()));
+               });              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
+}
+
+/**
+ * Implement hook_date_popup_process_alter().
+ */
+function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
+  if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'astro_node_form') {
+    $element['#datepicker_options'] = array(
+      'minDate' => "+0D",
+    );
+    $element['date'] = date_popup_process_date_part($element);
+  }
+}
+
+/**
+ * Implementation of hook_node_presave().
+ * @param Array $node
+ */
+function itg_common_node_presave($node) { 
+  if ($node->type == 'mega_review_critic') {
+    if ($node->op == 'Save as Draft') {
+      $node->status = 0;
+    }else {
+      $node->status = 1;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_common_form_node_delete_confirm_alter(&$form, &$form_state, $form_id) {  
+  // redirect node after delete
+  if (!isset($_REQUEST['destination'])) {
+    $destination = '';
+  } else {
+      $destination_array = explode('?', $_REQUEST['destination']);
+      $_GET['destination'] = $destination_array[0];      
+  }
+}
+
+function itg_common_check_record_existance($nid, $tbl_name){
+ 
+    $result = db_select($tbl_name, 'tbl')
+          ->fields('tbl')
+          ->condition('tbl.nid', $nid, '=')
+          ->execute();
+  $total_survey = $result->rowCount();
+  if ($total_survey) {
+    return $total_survey;
+  } else {
+    return 0;
+  }
 }
