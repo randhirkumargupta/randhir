@@ -372,7 +372,7 @@ function itg_astro_entity_view_alter(&$build, $type) {
   static $count = 0;
   if ($type == 'field_collection_item' && isset($build['field_zodiac_sign']) && $count <= 11) {    
     $zodiac_sign = itg_astro_zodiac_thumbnail();
-    $build['field_zodiac_sign'][0]['#markup'] .= '<div class="inner-item"><img src="' . image_style_url("thumbnail", $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';    
+    $build['field_zodiac_sign'][0]['#markup'] = '<div class="inner-item"><img src="' . image_style_url("thumbnail", $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['title'] . '"><p><strong>' . $build['field_zodiac_sign'][0]['#markup'] . '</strong></p></div>';    
   }
   ++$count;
 }
