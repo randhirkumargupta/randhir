@@ -557,7 +557,7 @@ function astro_feature_field_default_field_instances() {
     'bundle' => 'astro',
     'default_value' => array(
       0 => array(
-        'tid' => 314,
+        'tid' => 224,
       ),
     ),
     'deleted' => 0,
