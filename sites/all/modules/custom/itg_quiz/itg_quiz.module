@@ -33,7 +33,7 @@ function itg_quiz_menu() {
       'file' => 'includes/itg_quiz_result.inc',
   );
   
-    $items['winners'] = array(
+ $items['winners'] = array(
       'title' => t('Quiz'),
       'page callback' => 'itg_quiz_winners_list',
       'access callback' => TRUE,
