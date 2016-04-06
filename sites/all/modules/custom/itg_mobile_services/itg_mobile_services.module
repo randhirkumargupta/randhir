@@ -85,7 +85,8 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'create_content_node_form':
       unset($form['title']);
-    $form['student_type'] = array(
+   /*
+      $form['student_type'] = array(
     '#type' => 'radios',
     '#options' => array(
       'high_school' => t('High School'),
@@ -103,7 +104,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         ),
       );
       
-      
+    */  
       $form['field_content_service']['#prefix']='<div id="jicustom_evaluation_entity_wrapper">';
       $form['field_content_service']['#suffix']='</div>';
       
