@@ -1209,7 +1209,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-survey-form .field-multiple-table tbody div.description,
 .node-survey-form .field-multiple-table tbody .form-item span.error{clear: both;}
 .node-survey-form .field-multiple-table tbody div.description{padding-left: 300px;}
-.node-survey-form .field-multiple-table tbody .button-remove{margin-left: 300px;}
+.node-survey-form .field-multiple-table tbody .button-remove{margin-left: 0;}
 .node-survey-form table td, .node-survey-form table th{max-width: none;} 
 .field-name-field-survey-start-date .date-combo > .fieldset-content,
 .field-name-field-survey-end-date .date-combo > .fieldset-content{float: left; padding: 0;}
@@ -1573,7 +1573,8 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .page-display-question .view-question-list .views-field .views-label{font-weight: bold; padding-bottom: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px; display: block;}
 .page-display-question .view-question-list .entity-field-collection-item .field{padding-bottom: 10px;}
 .page-display-question .view-question-list .entity-field-collection-item .field-label{float: left; width: 20%;}
-.page-display-question .view-question-list .entity-field-collection-item .field-items{overflow: hidden;}
+.page-display-question .view-question-list .entity-field-collection-item .field-items{overflow: hidden; float: none;}
+.page-display-question .view-question-list .entity-field-collection-item .field-name-field-quiz-options-answer > .field-items > .field-item{border-bottom: 1px dashed #ddd; margin-bottom: 8px;}
 .page-display-question .view-question-list .entity-field-collection-item .field-collection-view{margin: 0 0 10px; padding: 0 0 10px;}
 .page-display-question .view-question-list .entity-field-collection-item .field-collection-view:last-child{border-bottom: none; padding-bottom: 0;}
 /*.page-display-question .view-question-list .entity-field-collection-item .field-collection-view-links,
