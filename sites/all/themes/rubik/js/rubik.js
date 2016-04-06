@@ -129,9 +129,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').addClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').removeClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
@@ -440,5 +440,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
+  $('input[name="field_quiz_add_questions_add_more"]').val('Add another question');
 };
 })(jQuery);
