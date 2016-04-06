@@ -1569,3 +1569,4 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .page-display-question .view-question-list .entity-field-collection-item .field-collection-view:last-child{border-bottom: none; padding-bottom: 0;}
 .page-display-question .view-question-list .entity-field-collection-item .field-collection-view-links,
 .page-display-question .view-question-list .entity-field-collection-item .action-links{display: none;}
+.form-item legend span.error{padding-left: 0;}
