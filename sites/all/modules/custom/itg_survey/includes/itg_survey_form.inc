@@ -212,7 +212,7 @@ function itg_survey_survey_form() {
         $form['survey_submit_skip' . $num] = array(
             '#type' => 'submit',
             '#value' => 'Skip',
-            '#name' => 'surveysubmit_' . $num,
+            '#name' => 'surveyskip_' . $num,
             '#ajax' => array(
                 'callback' => 'survey_form_ajax_handler',
                 'effect' => 'fade',
@@ -324,6 +324,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
     //Textfield validation
     if($form_detail['question_type' . $num] === 'textfield'){
       if ($form_detail['question_skip' . $num] !== 'yes') {
+        $txt_ans_flag = FALSE;
         for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
           if ($form_detail['answer_option' . $num . '_' . $text_field] !== '') {
             $txt_ans_flag = TRUE;
@@ -349,7 +350,6 @@ function itg_survey_survey_form_submit($form, &$form_state){
   //Form variable
   $form_detail = $form_state['values'];
   $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
-
   $num = $btn_num_arr[1];
   
   //Extract user type
@@ -364,7 +364,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
     $_SESSION['survey_unique_key'] = user_password(6);
   }
   
- // if($btn_num_arr[0] == 'surveysubmit') {
+  if($btn_num_arr[0] == 'surveysubmit') {
   if ($form_state['values']['question_type' . $num] == 'radios') {
 
     db_insert('itg_survey_detail')
@@ -452,7 +452,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
       }
     }
   }
-  //}
+  }
  
   //Insert survey in to DB on final submit
   if(strtolower($form_state['clicked_button']['#value']) == 'submit'){
