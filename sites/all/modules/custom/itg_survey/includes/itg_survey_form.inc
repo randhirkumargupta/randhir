@@ -212,7 +212,7 @@ function itg_survey_survey_form() {
         $form['survey_submit_skip' . $num] = array(
             '#type' => 'submit',
             '#value' => 'Skip',
-            '#name' => 'surveyskip_' . $num,
+            '#name' => 'surveysubmit_' . $num,
             '#ajax' => array(
                 'callback' => 'survey_form_ajax_handler',
                 'effect' => 'fade',
