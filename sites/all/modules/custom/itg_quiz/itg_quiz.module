@@ -317,3 +317,34 @@ function itg_quiz_get_total_quiz($nid){
     }
     
 }
+
+
+/**
+ * Get Answer detail attempt by users
+ * @param Int $nid
+ * @return Int
+ */
+function itg_quiz_contest_result($nid, $unique_key, $param = NULL){
+  if (!empty($param)) {
+    $result = db_select('itg_quiz_detail', 'qd')
+            ->fields('qd')
+            ->condition('qd.nid', $nid, '=')
+            ->condition('qd.currect_answer', $param, '=')
+            ->condition('qd.quiz_key', $unique_key, '=')
+            ->execute();
+  } else {
+    $result = db_select('itg_quiz_detail', 'qd')
+            ->fields('qd')
+            ->condition('qd.nid', $nid, '=')
+            ->condition('qd.quiz_key', $unique_key, '=')
+            ->execute();
+  }
+
+  $total_quiz = $result->rowCount();
+  if ($total_quiz) {
+    return $total_quiz;
+  } else {
+    return 0;
+  }
+    
+}
