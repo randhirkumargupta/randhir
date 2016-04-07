@@ -225,7 +225,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     $('select').blur();
   });
   
-  $('.field-name-field-survey-add-questions > .form-item > div.clearfix .field-add-more-submit').val('Add another question');
   $('.field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .field-add-more-submit').val('+');
   
   $('.field-name-field-gallery-image').find('.form-text').each(function(){
@@ -440,6 +439,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
-  $('input[name="field_quiz_add_questions_add_more"]').val('Add another question');
+  $('input[name="field_quiz_add_questions_add_more"], input[name="field_survey_add_questions_add_more"]').val('Add another question');
 };
 })(jQuery);
