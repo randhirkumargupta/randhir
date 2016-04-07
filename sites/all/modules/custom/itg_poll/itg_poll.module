@@ -310,7 +310,7 @@ function itg_poll_form($form, &$form_state, $parms) {
     '#options' => $pollAnswer,
     //'#default_value' => $val[0],
     '#prefix' => '<div class="poll-main-wrap">',
-    '#suffix' => '</div><div class="poll-ans-error"></div>',
+    '#suffix' => '</div><span class="poll-ans-error"></span>',
   );
 
   $form['nid'] = array(
@@ -331,7 +331,7 @@ function itg_poll_form($form, &$form_state, $parms) {
   $form['captcha'] = array(
     '#type' => 'captcha',
     '#captcha_type' => 'recaptcha/reCAPTCHA',
-    '#prefix' => '<div class="poll-ajax-error"></div>',
+    '#prefix' => '<span class="poll-ajax-error"></span>',
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -356,13 +356,13 @@ function itg_poll_form($form, &$form_state, $parms) {
  */
 function itg_poll_form_ajax_submit($form, &$form_state){
    if(!isset($form_state['values']['pole_answer']) && empty($form_state['values']['pole_answer'])){
-    $commands[] = ajax_command_replace('.poll-ans-error', '<div class="poll-ans-error">Please select at least one option.</div>');
+    $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Please select at least one option.</span>');
     drupal_get_messages();
      return array('#type' => 'ajax', '#commands' => $commands);
   }
    if (form_get_errors()) {
      $error = form_get_errors();
-     $error = $error['captcha_response'];
+     $error = '<span class="poll-ajax-error error">'.$error['captcha_response'].'</span>';
      $commands[] = ajax_command_replace('.poll-ajax-error', $error);
      $commands[] = ajax_command_replace('.poll-ans-error', '');
      drupal_get_messages();
@@ -387,7 +387,7 @@ function itg_poll_form_ajax_submit($form, &$form_state){
  */
 function itg_poll_form_submit($form, &$form_state) {
   if(!isset($form_state['values']['pole_answer']) && empty($form_state['values']['pole_answer'])){
-    $commands[] = ajax_command_replace('.poll-ans-error', '<div class="poll-ans-error">Please select at least one option.</div>');
+    $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Please select at least one option.</span>');
     drupal_get_messages();
      return array('#type' => 'ajax', '#commands' => $commands);
   }
