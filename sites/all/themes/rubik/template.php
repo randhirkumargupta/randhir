@@ -397,52 +397,36 @@ function rubik_breadcrumb($vars) {
       }
     }
     
-    // check condition for create page
-    if (arg(0) != 'node') {
-      //Story Listing
-      if (arg(0) == 'issue-listing') {
-        $list_story_parent_link = 'manage-' . arg(1) . 's';
-        ;
-        $list_story_link = 'issue-listing' . '/' . arg(1) . '/' . arg(2);
-        $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('List ' . ucfirst(arg(1)) . 's', $list_story_parent_link) . l('List Stories', $list_story_link);
-        return '<div class="breadcrumb-link">' . implode(' » ', $breadcrumb) . '</div>';
-      }
-
-
-
-      //story tab breadcrumb
-
-      if (arg(0) == ('in-queue-story' || 'published-story' || 'expired-story' || 'unpublished-story' || 'archive-story')) {
-        // get first argument from url 
-        $content_url = arg(0);
-        // make title for breadcrumb
-        $content_title = ucfirst(str_replace('-', ' ', $content_url));
-        $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
-        return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
-      }
-
-
-      //photogallery tab breadcrumb
-      if (arg(0) == ('in-queue-photogallery' || 'published-photogallery' || 'unpublished-photogallery' || 'archive-photogallery')) {
-        // get first argument from url 
-        $content_url = arg(0);
-        // make title for breadcrumb
-        $content_title = ucfirst(str_replace('-', ' ', $content_url));
-        $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
-        return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
-      }
-
-      //Blog tab breadcrumb
-      if (arg(0) == ('published-blogs' || 'unpublished-blogs' || 'in-queue-blogs' || 'archive-blogs')) {
-        // get first argument from url 
-        $content_url = arg(0);
-        // make title for breadcrumb
-        $content_title = ucfirst(str_replace('-', ' ', $content_url));
-        $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
-        return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
-      };
-      // if condition close for node condition
+    //Story Listing
+    if(arg(0) == 'issue-listing'){
+      $list_story_parent_link = 'manage-'.arg(1).'s';;
+      $list_story_link = 'issue-listing'.'/'.arg(1).'/'.arg(2);
+        $breadcrumb[] = l('Home','cms-user-dashboard').l('List '.  ucfirst(arg(1)).'s', $list_story_parent_link).l('List Stories',$list_story_link);
+        return '<div class="breadcrumb-link">'. implode(' » ', $breadcrumb) .'</div>';
     }
+    
+    // get first argument from url 
+     //$content_url = arg(0);
+     // make title for breadcrumb
+     //$content_title = ucfirst(str_replace('-',' ',$content_url));
+     
+    //story tab breadcrumb
+//    if(arg(0) == ('in-queue-story' || 'published-story' || 'expired-story' || 'unpublished-story' || 'archive-story')){
+//      $breadcrumb[] = l('Home','cms-user-dashboard').l('Content Management ', $content_url).l($content_title,$content_url);
+//        return '<div class="breadcrumb-link">'. implode('  ', $breadcrumb) .'</div>';
+//    }
+    
+    //photogallery tab breadcrumb
+//    if(arg(0) == ('in-queue-photogallery' || 'published-photogallery' || 'unpublished-photogallery' || 'archive-photogallery')){
+//      $breadcrumb[] = l('Home','cms-user-dashboard').l('Content Management ', $content_url).l($content_title,$content_url);
+//        return '<div class="breadcrumb-link">'. implode('  ', $breadcrumb) .'</div>';
+//    }
+    
+    //Blog tab breadcrumb
+//    if(arg(0) == ('published-blogs' || 'unpublished-blogs' || 'in-queue-blogs' || 'archive-blogs')){
+//      $breadcrumb[] = l('Home','cms-user-dashboard').l('Content Management ', $content_url).l($content_title,$content_url);
+//        return '<div class="breadcrumb-link">'. implode('  ', $breadcrumb) .'</div>';
+//    }
   }
 
   // Optional: Add the site name to the front of the stack.
