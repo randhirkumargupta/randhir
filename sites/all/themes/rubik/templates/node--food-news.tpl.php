@@ -44,19 +44,13 @@
               <h2><?php print t('Basic Details'); ?></h2>
               <div class="content-details">
                 <div class="field">
-                  <div class="field-label"><?php print t('Title'); ?></div>
+                  <div class="field-label"><?php print t('Strap headline (Short Headline)'); ?></div>
                   <div class="field-items"><?php print $title; ?></div>
                 </div>
                 <?php
                 $long_headline = render($content['field_recipe_long_headline']);
                 if (!empty($long_headline)):
                   print render($content['field_recipe_long_headline']);
-                  ?>
-                <?php endif; ?>
-                <?php
-                $strap = render($content['field_story_short_headline']);
-                if (!empty($strap)):
-                  print render($content['field_story_short_headline']);
                   ?>
                 <?php endif; ?>
                 <?php
