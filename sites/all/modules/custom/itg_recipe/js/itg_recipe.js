@@ -29,7 +29,38 @@
                       $("#edit-field-story-tweet-und-0-value").val('');                          
                     }                    
                  });
-            
+            $("#cooking-tips-node-form").validate({
+        submitHandler: function (form) {
+          $('input:submit').attr('disabled', 'disabled');
+          form.submit();
+        },
+        onfocusout: function (element) {
+          $(element).valid();
+        },
+        onclick: function (element) {
+          $(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+     
+    });  
+    
+      $("#food-news-node-form").validate({
+        submitHandler: function (form) {
+          $('input:submit').attr('disabled', 'disabled');
+          form.submit();
+        },
+        onfocusout: function (element) {
+          $(element).valid();
+        },
+        onclick: function (element) {
+          $(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+     
+    });  
+    
             $("#recipe-node-form").validate({
         submitHandler: function (form) {
           $('input:submit').attr('disabled', 'disabled');
@@ -93,7 +124,7 @@
       }
       jQuery.validator.addMethod("validateSignName", function (value, element) {
         return validateSignNameValue(value, element);
-      }, "* This field is required.");
+      }, " This field is required.");
  
         }
     };
