@@ -166,7 +166,7 @@ function feature_for_poll_field_default_field_instances() {
     'bundle' => 'poll',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please Search by title.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -951,6 +951,7 @@ function feature_for_poll_field_default_field_instances() {
   t('Associate poll');
   t('Display Result');
   t('End Date');
+  t('Please Search by title.');
   t('Poll Answer');
   t('Poll Answer Image');
   t('Poll Answer Text');

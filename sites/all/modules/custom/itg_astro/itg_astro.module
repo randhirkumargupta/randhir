@@ -127,37 +127,37 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     // Set field visibility for zodiac sign field
     $form['field_astro_zodiac']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '315'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '227'),
       ),
     );
     // Set field visibility for collective text field    
     $form['field_buzz_description']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
       ),
     );
     // Set field visibility for collective video thumbnail field
     $form['field_astro_video_thumbnail']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
       ),
     );
     // Set field visibility for collective video field
     $form['field_astro_video']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
       ),
     );
     // Set field visibility for collective audio field
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
       ),
     );
     // Set field visibility for collective audio field
     $form['field_astro_numerology_values']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '313'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '225'),
       ),
     );  
 
@@ -372,7 +372,7 @@ function itg_astro_entity_view_alter(&$build, $type) {
   static $count = 0;
   if ($type == 'field_collection_item' && isset($build['field_zodiac_sign']) && $count <= 11) {    
     $zodiac_sign = itg_astro_zodiac_thumbnail();
-    $build['field_zodiac_sign'][0]['#markup'] .= '<div class="inner-item"><img src="' . image_style_url("thumbnail", $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';    
+    $build['field_zodiac_sign'][0]['#markup'] = '<div class="inner-item"><img src="' . image_style_url("thumbnail", $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_sign[$count]->field_astro_thumb_icon['und'][0]['title'] . '"><p><strong>' . $build['field_zodiac_sign'][0]['#markup'] . '</strong></p></div>';    
   }
   ++$count;
 }

@@ -75,7 +75,7 @@
           switch (elementName) {
             case 'field_astro_frequency[und]':
               errorPlaceHolder = $('#edit-title').parent();
-              break;
+              break;            
             default:
               errorPlaceHolder = element.parent();
           }
@@ -299,6 +299,7 @@
                 var video_field = $('input[name="field_astro_video[und][0][fid]"]').val();
                 if ($(this).val() == 0 && astroType == 'Collective Content' && video_field != '0') {
                   $(this).removeAttr('value');
+                  $('.form-item-field-astro-video-thumbnail-und-0 label').html('Video Thumbnail <span class="form-required" title="This field is required."> *</span>');
                 }
                 return true;
               }
@@ -307,8 +308,8 @@
           'field_buzz_description[und][0][value]': {
             required: {
               depends: function () {
-                var astroType = $('select[name="field_astro_type[und]"]').val();
-                if (astroType == '314') {
+                var astroType = $('select[name="field_astro_type[und]"]').find('option:selected').text();
+                if (astroType == 'Collective Content') {
                   return true;
                 }
                 else {
@@ -449,6 +450,11 @@
       if ($('select[name="field_astro_type[und]"').find('option:selected').text() == 'Zodiac') {
         $('.node-astro-form .story-title-zod').css('display', 'block');
       }
+      
+      $('input[name="field_astro_date_range[und][0][value][date]"]').keydown(false);
+      $('input[name="field_astro_date_range[und][0][value2][date]"]').keydown(false);
+      $('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
+      
 
     }
   };
