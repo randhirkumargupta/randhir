@@ -1519,7 +1519,7 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-mega_review_critic-form .group-review-movie-review legend .form-required, 
 .node-mega_review_critic-form .group-review-browse-media legend .form-required, 
 .node-mega_review_critic-form .vertical-tabs-list, .node-quiz-form .vertical-tabs-list{display: none;}
-.node-mega_review_critic-form #field-mega-review-review-values tbody{max-width: 400px;}
+[id*="field-mega-review-review-values"] tbody{max-width: 400px !important;}
 .celebrity-about .field{float: left; width: 60% !important;}
 .field-name-field-story-schedule-date-time .date-padding .form-item:first-child .date-clear, 
 .field-name-field-story-expiry-date .date-padding .form-item:first-child .date-clear, 
@@ -1591,3 +1591,5 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-astro-form .field-name-field-buzz-description .form-item span.error{padding-left: 300px;}
 .node-astro-form table .field-name-field-buzz-description .form-item span.error{padding-left: 0px;}
 .field-name-field-astro-select-number .form-item span.error{padding-left: 150px;}
+.field-name-field-astro-numerology-values > .field-items > .field-item{border-bottom: 1px dashed #ddd; margin-bottom: 8px;}
+.page-ask-an-expert-history .view-ask-an-expert .views-field-field-user-message table{width: 100% !important;}
