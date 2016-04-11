@@ -26,6 +26,22 @@ function feature_for_recipe_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create food_news content'.
+  $permissions['create food_news content'] = array(
+    'name' => 'create food_news content',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create recipe content'.
   $permissions['create recipe content'] = array(
     'name' => 'create recipe content',
@@ -49,6 +65,13 @@ function feature_for_recipe_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any food_news content'.
+  $permissions['delete any food_news content'] = array(
+    'name' => 'delete any food_news content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any recipe content'.
   $permissions['delete any recipe content'] = array(
     'name' => 'delete any recipe content',
@@ -59,6 +82,13 @@ function feature_for_recipe_user_default_permissions() {
   // Exported permission: 'delete own cooking_tips content'.
   $permissions['delete own cooking_tips content'] = array(
     'name' => 'delete own cooking_tips content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own food_news content'.
+  $permissions['delete own food_news content'] = array(
+    'name' => 'delete own food_news content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -82,11 +112,25 @@ function feature_for_recipe_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any food_news content'.
+  $permissions['edit any food_news content'] = array(
+    'name' => 'edit any food_news content',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any recipe content'.
   $permissions['edit any recipe content'] = array(
     'name' => 'edit any recipe content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -95,6 +139,22 @@ function feature_for_recipe_user_default_permissions() {
   // Exported permission: 'edit own cooking_tips content'.
   $permissions['edit own cooking_tips content'] = array(
     'name' => 'edit own cooking_tips content',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own food_news content'.
+  $permissions['edit own food_news content'] = array(
+    'name' => 'edit own food_news content',
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',

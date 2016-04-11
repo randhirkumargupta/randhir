@@ -71,6 +71,12 @@
                   print render($content['field_story_reporter']);
                   ?>
                 <?php endif; ?>
+                <?php
+                $byline = render($content['field_stroy_city']);
+                if (!empty($byline)):
+                  print render($content['field_stroy_city']);
+                  ?>
+                <?php endif; ?>
                 <div class="field"> 
                   <div class="field-label"><?php print t('Description'); ?></div>
                   <div class="field-items"><?php print render($content['body']); ?></div>
@@ -141,6 +147,7 @@
 </div>
 
 <?php if (!empty($post_object)) print render($post_object) ?>
+
 
 
 

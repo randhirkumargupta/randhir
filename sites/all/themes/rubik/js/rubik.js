@@ -129,16 +129,16 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').addClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey').removeClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
     var offSet = 80;
     var dti = $(this).attr('data-target-id');
     var targetOffset = $('#' + dti).offset().top - offSet;
-    if(dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element"){
+    if(dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails"){
       $(this).addClass('active').siblings('.target-link').removeClass('active');
       $("body,html").animate({ scrollTop: 0 }, 1000);
     }
@@ -225,7 +225,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     $('select').blur();
   });
   
-  $('.field-name-field-survey-add-questions > .form-item > div.clearfix .field-add-more-submit').val('Add another question');
   $('.field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .field-add-more-submit').val('+');
   
   $('.field-name-field-gallery-image').find('.form-text').each(function(){
@@ -440,5 +439,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
+  $('input[name="field_quiz_add_questions_add_more"], input[name="field_survey_add_questions_add_more"]').val('Add another question');
 };
 })(jQuery);

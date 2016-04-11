@@ -1,0 +1,5 @@
+name = ITG Mobile Services
+description = "ITG Mobile Services - VAS Module"
+core = 7.x
+package = ITG
+project = "itg_mobile_services"
