@@ -16,7 +16,7 @@ function itg_quiz_menu() {
   
   $items = array();
   
-  $items['quiz'] = array(
+  $items['itg-quiz'] = array(
       'title' => t('Quiz'),
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_quiz_quiz_form'),
@@ -31,6 +31,14 @@ function itg_quiz_menu() {
       'access callback' => 'user_access',
       'access arguments' => array('quiz admin users'),
       'file' => 'includes/itg_quiz_result.inc',
+  );
+  
+ $items['winners'] = array(
+      'title' => t('Quiz'),
+      'page callback' => 'itg_quiz_winners_list',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+
   );
   return $items;
 }
@@ -262,9 +270,9 @@ function itg_quiz_get_current_quiz() {
 
   //Load Node
   $node = node_load($nid);
-  $quiz_end_date = strtotime($node->field_quiz_end_date[LANGUAGE_NONE][0]['value']);
+  $quiz_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
 
-  if (!empty($node->field_quiz_quiz_date[LANGUAGE_NONE][0]['value'])) {
+  if (!empty($quiz_end_date)) {
     if ($quiz_end_date < $curr_time) {
       return FALSE;
     } else {
@@ -316,4 +324,111 @@ function itg_quiz_get_total_quiz($nid){
       return 0;
     }
     
+}
+
+
+/**
+ * Get Answer detail attempt by users
+ * @param Int $nid
+ * @return Int
+ */
+function itg_quiz_contest_result($nid, $unique_key, $param = NULL){
+  if (!empty($param)) {
+    $result = db_select('itg_quiz_detail', 'qd')
+            ->fields('qd')
+            ->condition('qd.nid', $nid, '=')
+            ->condition('qd.currect_answer', $param, '=')
+            ->condition('qd.quiz_key', $unique_key, '=')
+            ->execute();
+  } else {
+    $result = db_select('itg_quiz_detail', 'qd')
+            ->fields('qd')
+            ->condition('qd.nid', $nid, '=')
+            ->condition('qd.quiz_key', $unique_key, '=')
+            ->execute();
+  }
+
+  $total_quiz = $result->rowCount();
+  if ($total_quiz) {
+    return $total_quiz;
+  } else {
+    return 0;
+  }
+    
+}
+
+
+/**
+ * Get winners list
+ * @param Int $nid
+ * @return Int
+ */
+function itg_quiz_winners_list($nid, $range){
+    if(!empty($range)) {
+      $result = db_select('itg_quiz_detail', 'qd')
+              ->fields('qd')
+              ->condition('qd.nid', $nid, '=')
+              ->groupBy('qd.quiz_key')
+              ->range(0, $range)
+              ->execute();
+    } else {
+      $result = db_select('itg_quiz_detail', 'qd')
+              ->fields('qd')
+              ->condition('qd.nid', $nid, '=')
+              ->groupBy('qd.quiz_key')
+              ->execute();
+    }
+
+    while ($record = $result->fetchAssoc()) {
+      $winners_arr[$record['quiz_key']] = itg_quiz_winners_count_uniquekey($nid, $record['quiz_key']);
+    }
+    arsort($winners_arr);
+    foreach($winners_arr as $key => $value){
+      $winner_final_list[] = itg_quiz_winner_user_list($key);
+    }
+    return $winner_final_list;
+}
+
+/**
+ * Get count for unique key
+ * @param Int $nid
+ * @return Int
+ */
+function itg_quiz_winners_count_uniquekey($nid, $unique_key){
+    $result = db_select('itg_quiz_detail', 'qd')
+            ->fields('qd')
+            ->condition('qd.quiz_key', $unique_key, '=')
+            ->condition('qd.currect_answer', 'yes', '=')
+            ->condition('qd.nid', $nid, '=')
+            ->execute();
+  $total_quiz = $result->rowCount();
+  if ($total_quiz) {
+    return $total_quiz;
+  } else {
+    return 0;
+  }
+    
+}
+
+/**
+ * Get User list
+ * @param type $unique_key
+ * @return type
+ */
+function itg_quiz_winner_user_list($unique_key){
+      $result = db_select('itg_quiz_detail', 'qd')
+            ->fields('qd', array('uid'))
+            ->condition('qd.quiz_key', $unique_key, '=')
+            ->range(0,1)  
+            ->execute();
+          while ($record = $result->fetchAssoc()) {
+            if($record['uid'] == 0){
+              $user_name = 'Anonymous';
+            } else {
+              $user = user_load($record['uid']);
+              $user_name = ucfirst($user->name);       
+            }
+      
+    }
+    return $user_name;
 }

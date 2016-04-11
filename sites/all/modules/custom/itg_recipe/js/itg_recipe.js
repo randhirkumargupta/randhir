@@ -16,8 +16,51 @@
                 $('.vertical-tabs-list').hide();
                 $('#edit-metatags-und-advanced').hide();
             }
-            
-            
+            // Code for facebook field value set Null
+                 $('#edit-field-story-social-media-integ-und-facebook').click(function() {                     
+                    if ($("#edit-field-story-social-media-integ-und-facebook").is(":not(:checked)")) {                         
+                      $("#edit-field-story-facebook-narrative-und-0-value").val('');  
+                    }                    
+                 });                 
+                 
+                 // Code for tweet field value set Null
+                 $('#edit-field-story-social-media-integ-und-twitter').click(function() {                     
+                    if ($("#edit-field-story-social-media-integ-und-twitter").is(":not(:checked)")) {                         
+                      $("#edit-field-story-tweet-und-0-value").val('');                          
+                    }                    
+                 });
+            $("#cooking-tips-node-form").validate({
+        submitHandler: function (form) {
+          $('input:submit').attr('disabled', 'disabled');
+          form.submit();
+        },
+        onfocusout: function (element) {
+          $(element).valid();
+        },
+        onclick: function (element) {
+          $(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+     
+    });  
+    
+      $("#food-news-node-form").validate({
+        submitHandler: function (form) {
+          $('input:submit').attr('disabled', 'disabled');
+          form.submit();
+        },
+        onfocusout: function (element) {
+          $(element).valid();
+        },
+        onclick: function (element) {
+          $(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+     
+    });  
+    
             $("#recipe-node-form").validate({
         submitHandler: function (form) {
           $('input:submit').attr('disabled', 'disabled');
@@ -31,6 +74,18 @@
         },
         ignore: '',
         errorElement: 'span',
+        errorPlacement: function (error, element) {
+          var elementName = element.attr('name');
+          var errorPlaceHolder = '';
+          switch (elementName) {
+            case 'field_recipe_food_type[und]':
+              errorPlaceHolder = element.parent().parent().parent();
+              break;
+            default:
+              errorPlaceHolder = element.parent();
+          }
+          error.appendTo(errorPlaceHolder);
+        },
         rules: { 
         'field_recipe_cuisine_type[und]': {
             required: true,
@@ -69,7 +124,7 @@
       }
       jQuery.validator.addMethod("validateSignName", function (value, element) {
         return validateSignNameValue(value, element);
-      }, "* This field is required.");
+      }, " This field is required.");
  
         }
     };

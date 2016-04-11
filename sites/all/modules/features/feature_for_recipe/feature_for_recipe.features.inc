@@ -39,6 +39,14 @@ function feature_for_recipe_node_info() {
       'title_label' => t('Title'),
       'help' => '',
     ),
+    'food_news' => array(
+      'name' => t('Food News'),
+      'base' => 'node_content',
+      'description' => t('Provide food news.'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => t('Astrick icon field is required.'),
+    ),
     'recipe' => array(
       'name' => t('Recipe'),
       'base' => 'node_content',
