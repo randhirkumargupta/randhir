@@ -59,7 +59,7 @@ function itg_api_menu() {
 }
   
 /**
- * Implement itg_api_mail_today_content
+ * Implement itg_pti_content
  */
 function itg_pti_content() {
 
