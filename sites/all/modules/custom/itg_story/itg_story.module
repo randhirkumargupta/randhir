@@ -123,6 +123,11 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
     switch ($form_id) {
     case 'story_node_form':
+      
+      if (arg(1) == 'add' && isset($form['#node']->op)) {       
+       drupal_set_title('Create Story'); 
+      }
+      
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       unset($form['actions']['preview_changes']);      
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
