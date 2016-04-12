@@ -63,7 +63,15 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
     $form['actions']['submit']['#value'] = 'Submit';
     $form['#after_build'][] = 'itg_ask_expert_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_ask_expert_form_custom_callback';
+    $destination = 'ask-an-expert';
+    $form['actions']['cancel'] = array(
+            '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+            '#weight' => 21,
+            '#value' => t('Cancel'),
+        );
       } 
+      
+      
 }
 
 /**
