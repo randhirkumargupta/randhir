@@ -13,7 +13,6 @@ dependencies[] = node
 dependencies[] = rules
 dependencies[] = strongarm
 dependencies[] = text
-dependencies[] = user_reference
 dependencies[] = views
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
