@@ -1640,11 +1640,10 @@ input[name="field_newsl_add_news_und_0_remove_button"],
 .block-content > .node-clients-creation .column-side,
 .node-clients_creation-form legend .form-required,
 [id*="field-newsl-add-news-values"] .tabledrag-hide{display: none;}
-.node-newsletter-form .field-multiple-table tbody{max-width: 400px;}
-.node-newsletter-form .field-multiple-table .form-item label{width: 140px;}
-.node-newsletter-form .field-multiple-table tbody .form-item .form-text {width: 238px;}
-.node-newsletter-form .ckeditor_links{margin: 0 0 0 140px;}
-.field-name-field-news-kicker + .button-remove{margin-left: 140px;}
+.field-name-field-news-kicker + .button-remove{margin-left: 300px;}
+.node-newsletter-form .field-multiple-table thead{display: none;}
+.node-newsletter-form .field-multiple-table tbody{float: none; max-width: none;}
+.node-newsletter-form .field-add-more-submit{margin-left: 0;}
 .node-newsletter-form .vertical-tabs{padding: 10px 0 0 10px;}
 .block-content > .node-newsletter .column-main, .block-content > .node-clients-creation .column-main{width: 100%;}
 .block-content > .node-newsletter .field, .block-content > .node-clients-creation .field{display: inline-block; width: 100%;}
