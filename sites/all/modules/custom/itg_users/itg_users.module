@@ -444,9 +444,18 @@ function itg_users_theme($existing, $type, $theme, $path) {
  * @param Object $account
  */
 function itg_users_user_login(&$edit, $account) {
-  if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
+  $role_count = count($account->roles);
+  //p($account->roles);
+   if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
     if (!isset($_GET['destination']) && arg(1) != "reset") {
       $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
+    }
+  }
+  if ($role_count < 3) {
+    if (array_key_exists(EXPERT, $account->roles)) {
+       if (arg(1) != "reset") {
+      $_GET['destination'] = 'ask-an-expert';
+       }
     }
   }
 }
