@@ -39,6 +39,7 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
     $node_edit_id = $form['nid']['#value'];
     $result = itg_ask_expert_description_check($node_edit_id);
     
+    // check if answer is already submitted redirect to myqueue page
     if(!empty($result) && $user->uid != '1') {
       drupal_goto('ask-an-expert');
     }
