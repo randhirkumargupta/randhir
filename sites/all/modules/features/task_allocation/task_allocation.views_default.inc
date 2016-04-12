@@ -113,34 +113,26 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S.no.';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Content: Task / idea */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_add_task_idea']['id'] = 'field_add_task_idea';
   $handler->display->display_options['fields']['field_add_task_idea']['table'] = 'field_data_field_add_task_idea';
   $handler->display->display_options['fields']['field_add_task_idea']['field'] = 'field_add_task_idea';
   $handler->display->display_options['fields']['field_add_task_idea']['label'] = 'Task Description';
-  $handler->display->display_options['fields']['field_add_task_idea']['delta_offset'] = '0';
-  /* Field: Content: Select team member */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_select_team_member']['id'] = 'field_select_team_member';
   $handler->display->display_options['fields']['field_select_team_member']['table'] = 'field_data_field_select_team_member';
   $handler->display->display_options['fields']['field_select_team_member']['field'] = 'field_select_team_member';
   $handler->display->display_options['fields']['field_select_team_member']['label'] = 'Task assign to';
-  /* Field: Content: Finish Date and time */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_finish_date_and_time']['id'] = 'field_finish_date_and_time';
   $handler->display->display_options['fields']['field_finish_date_and_time']['table'] = 'field_data_field_finish_date_and_time';
   $handler->display->display_options['fields']['field_finish_date_and_time']['field'] = 'field_finish_date_and_time';
   $handler->display->display_options['fields']['field_finish_date_and_time']['label'] = 'Last date';
-  $handler->display->display_options['fields']['field_finish_date_and_time']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
-  /* Field: Content: Status */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
   $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
   $handler->display->display_options['fields']['field_status']['field'] = 'field_status';
+  $handler->display->display_options['fields']['field_status']['label'] = 'Status';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -163,14 +155,11 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['comments_link']['label'] = 'reply';
   $handler->display->display_options['fields']['comments_link']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['comments_link']['alter']['path'] = 'comment/reply/[nid]';
-  /* Field: Content: user mail */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_user_mail']['id'] = 'field_user_mail';
   $handler->display->display_options['fields']['field_user_mail']['table'] = 'field_data_field_user_mail';
   $handler->display->display_options['fields']['field_user_mail']['field'] = 'field_user_mail';
   $handler->display->display_options['fields']['field_user_mail']['label'] = 'user email';
-  $handler->display->display_options['fields']['field_user_mail']['settings'] = array(
-    'link' => 0,
-  );
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -212,33 +201,36 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Content: Task / idea */
-  $handler->display->display_options['fields']['field_add_task_idea']['id'] = 'field_add_task_idea';
-  $handler->display->display_options['fields']['field_add_task_idea']['table'] = 'field_data_field_add_task_idea';
-  $handler->display->display_options['fields']['field_add_task_idea']['field'] = 'field_add_task_idea';
-  $handler->display->display_options['fields']['field_add_task_idea']['label'] = 'Task Description';
-  $handler->display->display_options['fields']['field_add_task_idea']['delta_offset'] = '0';
-  /* Field: Content: Select team member */
-  $handler->display->display_options['fields']['field_select_team_member']['id'] = 'field_select_team_member';
-  $handler->display->display_options['fields']['field_select_team_member']['table'] = 'field_data_field_select_team_member';
-  $handler->display->display_options['fields']['field_select_team_member']['field'] = 'field_select_team_member';
-  $handler->display->display_options['fields']['field_select_team_member']['label'] = 'Task assign to';
+  $handler->display->display_options['fields']['field_task_task_idea']['id'] = 'field_task_task_idea';
+  $handler->display->display_options['fields']['field_task_task_idea']['table'] = 'field_data_field_task_task_idea';
+  $handler->display->display_options['fields']['field_task_task_idea']['field'] = 'field_task_task_idea';
+  $handler->display->display_options['fields']['field_task_task_idea']['label'] = 'Task Description';
+  $handler->display->display_options['fields']['field_task_task_idea']['delta_offset'] = '0';
   /* Field: Content: Finish Date and time */
-  $handler->display->display_options['fields']['field_finish_date_and_time']['id'] = 'field_finish_date_and_time';
-  $handler->display->display_options['fields']['field_finish_date_and_time']['table'] = 'field_data_field_finish_date_and_time';
-  $handler->display->display_options['fields']['field_finish_date_and_time']['field'] = 'field_finish_date_and_time';
-  $handler->display->display_options['fields']['field_finish_date_and_time']['label'] = 'Last date';
-  $handler->display->display_options['fields']['field_finish_date_and_time']['settings'] = array(
-    'format_type' => 'long',
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['id'] = 'field_task_finish_date_and_time';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['table'] = 'field_data_field_task_finish_date_and_time';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['field'] = 'field_task_finish_date_and_time';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['label'] = 'Last date';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['settings'] = array(
+    'format_type' => 'short',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Field: Content: Select team member */
+  $handler->display->display_options['fields']['field_task_team_member']['id'] = 'field_task_team_member';
+  $handler->display->display_options['fields']['field_task_team_member']['table'] = 'field_data_field_task_team_member';
+  $handler->display->display_options['fields']['field_task_team_member']['field'] = 'field_task_team_member';
+  $handler->display->display_options['fields']['field_task_team_member']['label'] = 'User name';
+  $handler->display->display_options['fields']['field_task_team_member']['settings'] = array(
+    'link' => 0,
+  );
   /* Field: Content: Status */
-  $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
-  $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
-  $handler->display->display_options['fields']['field_status']['field'] = 'field_status';
+  $handler->display->display_options['fields']['field_task_status']['id'] = 'field_task_status';
+  $handler->display->display_options['fields']['field_task_status']['table'] = 'field_data_field_task_status';
+  $handler->display->display_options['fields']['field_task_status']['field'] = 'field_task_status';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -261,13 +253,6 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['comments_link']['label'] = 'reply';
   $handler->display->display_options['fields']['comments_link']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['comments_link']['alter']['path'] = 'comment/reply/[nid]';
-  /* Field: Content: user mail */
-  $handler->display->display_options['fields']['field_user_mail']['id'] = 'field_user_mail';
-  $handler->display->display_options['fields']['field_user_mail']['table'] = 'field_data_field_user_mail';
-  $handler->display->display_options['fields']['field_user_mail']['field'] = 'field_user_mail';
-  $handler->display->display_options['fields']['field_user_mail']['settings'] = array(
-    'link' => 0,
-  );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -286,43 +271,71 @@ function task_allocation_views_default_views() {
     'task_idea_allocation_tracking' => 'task_idea_allocation_tracking',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Finish Date and time (field_finish_date_and_time) */
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['id'] = 'field_finish_date_and_time_value';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['table'] = 'field_data_field_finish_date_and_time';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['field'] = 'field_finish_date_and_time_value';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['operator'] = 'between';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['operator_id'] = 'field_finish_date_and_time_value_op';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['label'] = 'Finish Date';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['operator'] = 'field_finish_date_and_time_value_op';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['identifier'] = 'field_finish_date_and_time_value';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    19 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-  );
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['form_type'] = 'date_popup';
   $handler->display->display_options['path'] = 'assigned-task-list';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S.no.';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Task / idea */
+  $handler->display->display_options['fields']['field_task_task_idea']['id'] = 'field_task_task_idea';
+  $handler->display->display_options['fields']['field_task_task_idea']['table'] = 'field_data_field_task_task_idea';
+  $handler->display->display_options['fields']['field_task_task_idea']['field'] = 'field_task_task_idea';
+  $handler->display->display_options['fields']['field_task_task_idea']['label'] = 'Task Description';
+  $handler->display->display_options['fields']['field_task_task_idea']['delta_offset'] = '0';
+  /* Field: Content: Finish Date and time */
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['id'] = 'field_task_finish_date_and_time';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['table'] = 'field_data_field_task_finish_date_and_time';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['field'] = 'field_task_finish_date_and_time';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['label'] = 'Last date';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Select team member */
+  $handler->display->display_options['fields']['field_task_team_member']['id'] = 'field_task_team_member';
+  $handler->display->display_options['fields']['field_task_team_member']['table'] = 'field_data_field_task_team_member';
+  $handler->display->display_options['fields']['field_task_team_member']['field'] = 'field_task_team_member';
+  $handler->display->display_options['fields']['field_task_team_member']['label'] = 'User name';
+  $handler->display->display_options['fields']['field_task_team_member']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Status */
+  $handler->display->display_options['fields']['field_task_status']['id'] = 'field_task_status';
+  $handler->display->display_options['fields']['field_task_status']['table'] = 'field_data_field_task_status';
+  $handler->display->display_options['fields']['field_task_status']['field'] = 'field_task_status';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  /* Field: Content: Add comment link */
+  $handler->display->display_options['fields']['comments_link']['id'] = 'comments_link';
+  $handler->display->display_options['fields']['comments_link']['table'] = 'node';
+  $handler->display->display_options['fields']['comments_link']['field'] = 'comments_link';
+  $handler->display->display_options['fields']['comments_link']['label'] = 'reply';
+  $handler->display->display_options['fields']['comments_link']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['comments_link']['alter']['path'] = 'comment/reply/[nid]';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -339,39 +352,6 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'task_idea_allocation_tracking' => 'task_idea_allocation_tracking',
   );
-  /* Filter criterion: Content: Finish Date and time (field_finish_date_and_time) */
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['id'] = 'field_finish_date_and_time_value';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['table'] = 'field_data_field_finish_date_and_time';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['field'] = 'field_finish_date_and_time_value';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['operator'] = 'between';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['operator_id'] = 'field_finish_date_and_time_value_op';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['label'] = 'Date';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['operator'] = 'field_finish_date_and_time_value_op';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['identifier'] = 'date';
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    19 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-  );
-  $handler->display->display_options['filters']['field_finish_date_and_time_value']['form_type'] = 'date_popup';
   $handler->display->display_options['path'] = 'created-task-list';
   $export['task'] = $view;
 
