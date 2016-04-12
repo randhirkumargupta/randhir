@@ -91,6 +91,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview-wrapper, 
 .page-node-add-poll .preview-wrapper,
 .node-type-poll .preview-wrapper, 
+.page-node-add-clients-creation .preview-wrapper,
+.node-type-clients-creation .preview-wrapper, 
+.page-node-add-newsletter .preview-wrapper,
+.node-type-newsletter .preview-wrapper, 
 .page-node-add-quiz .preview-wrapper,
 .node-type-quiz .preview-wrapper, 
 .page-node-add-itg-celebrity-profile .preview-wrapper,
@@ -129,6 +133,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview,
 .page-node-add-poll .preview,
 .node-type-poll .preview,
+.page-node-add-clients-creation .preview,
+.node-type-clients-creation .preview,
+.page-node-add-newsletter .preview,
+.node-type-newsletter .preview,
 .page-node-add-quiz .preview,
 .node-type-quiz .preview,
 .page-node-add-itg-celebrity-profile .preview,
@@ -169,6 +177,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview > h3,
 .page-node-add-poll .preview > h3,
 .node-type-poll .preview > h3,
+.page-node-add-clients-creation .preview > h3,
+.node-type-clients-creation .preview > h3,
+.page-node-add-newsletter .preview > h3,
+.node-type-newsletter .preview > h3,
 .page-node-add-quiz .preview > h3,
 .node-type-quiz .preview > h3,
 .page-node-add-itg-celebrity-profile .preview > h3,
@@ -212,6 +224,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .close-preview,
 .page-node-add-poll .close-preview,
 .node-type-poll .close-preview,
+.page-node-add-clients-creation .close-preview,
+.node-type-clients-creation .close-preview,
+.page-node-add-newsletter .close-preview,
+.node-type-newsletter .close-preview,
 .page-node-add-quiz .close-preview,
 .node-type-quiz .close-preview,
 .page-node-add-itg-celebrity-profile .close-preview,
@@ -231,6 +247,14 @@ textarea.form-textarea{resize: none; height: 90px;}
 .page-node-add-story .node-preview .column-side, 
 .page-node-add-story .node-title, 
 .page-node-add-story .preview > h3:first-child,
+.page-node-add-clients-creation .node-teaser, 
+.page-node-add-clients-creation .node-preview .column-side, 
+.page-node-add-clients-creation .node-title, 
+.page-node-add-clients-creation .preview > h3:first-child,
+.page-node-add-newsletter .node-teaser, 
+.page-node-add-newsletter .node-preview .column-side, 
+.page-node-add-newsletter .node-title, 
+.page-node-add-newsletter .preview > h3:first-child,
 .page-node-add-quiz .node-teaser, 
 .page-node-add-quiz .node-preview .column-side, 
 .page-node-add-quiz .node-title, 
@@ -255,6 +279,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-story .node-preview .column-side, 
 .node-type-story .node-title, 
 .node-type-story .preview > h3:first-child, 
+.node-type-clients-creation .node-teaser, 
+.node-type-clients-creation .node-preview .column-side, 
+.node-type-clients-creation .node-title, 
+.node-type-clients-creation .preview > h3:first-child, 
 .node-type-cooking-tips .node-teaser, 
 .node-type-cooking-tips .node-preview .column-side, 
 .node-type-cooking-tips .node-title, 
@@ -275,6 +303,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-blog .node-preview .column-side, 
 .node-type-blog .node-title, 
 .node-type-blog .preview > h3:first-child, 
+.node-type-newsletter .node-teaser, 
+.node-type-newsletter .node-preview .column-side, 
+.node-type-newsletter .node-title, 
+.node-type-newsletter .preview > h3:first-child, 
 .node-type-recipe .node-teaser, 
 .node-type-recipe .node-preview .column-side, 
 .node-type-recipe .node-title, 
@@ -341,6 +373,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic div.node,
 .page-node-add-poll div.node, 
 .node-type-poll div.node,
+.page-node-add-clients-creation div.node, 
+.node-type-clients-creation div.node,
+.page-node-add-newsletter div.node, 
+.node-type-newsletter div.node,
 .page-node-add-quiz div.node, 
 .node-type-quiz div.node,
 .page-node-add-itg-celebrity-profile div.node, 
@@ -379,6 +415,10 @@ textarea.form-textarea{resize: none; height: 90px;}
 .node-type-mega-review-critic .preview .column-main,
 .page-node-add-poll .preview .column-main, 
 .node-type-poll .preview .column-main,
+.page-node-add-clients-creation .preview .column-main, 
+.node-type-clients-creation .preview .column-main,
+.page-node-add-newsletter .preview .column-main, 
+.node-type-newsletter .preview .column-main,
 .page-node-add-quiz .preview .column-main, 
 .node-type-quiz .preview .column-main,
 .page-node-add-itg-celebrity-profile .preview .column-main, 
@@ -1041,7 +1081,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .page-node-revision .field, 
 .page-node-revisions .field{padding-bottom: 10px;}
 .page-node-revision .content-box > h2, 
-.page-node-revisions .content-box > h2, 
+.block-content > .node-newsletter h2, 
 .content-node-view h2 {
     border-bottom: 1px solid #ddd;
     font-size: 18px;
@@ -1593,3 +1633,21 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .field-name-field-astro-select-number .form-item span.error{padding-left: 150px;}
 .field-name-field-astro-numerology-values > .field-items > .field-item{border-bottom: 1px dashed #ddd; margin-bottom: 8px;}
 .page-ask-an-expert-history .view-ask-an-expert .views-field-field-user-message table{width: 100% !important;}
+.node-newsletter-form .tabledrag-toggle-weight-wrapper, 
+.node-newsletter-form .filter-wrapper, 
+input[name="field_newsl_add_news_und_0_remove_button"],
+.block-content > .node-newsletter .column-side,
+.block-content > .node-clients-creation .column-side,
+.node-clients_creation-form legend .form-required,
+[id*="field-newsl-add-news-values"] .tabledrag-hide{display: none;}
+.node-newsletter-form .field-multiple-table tbody{max-width: 400px;}
+.node-newsletter-form .field-multiple-table .form-item label{width: 140px;}
+.node-newsletter-form .field-multiple-table tbody .form-item .form-text {width: 238px;}
+.node-newsletter-form .ckeditor_links{margin: 0 0 0 140px;}
+.field-name-field-news-kicker + .button-remove{margin-left: 140px;}
+.node-newsletter-form .vertical-tabs{padding: 10px 0 0 10px;}
+.block-content > .node-newsletter .column-main, .block-content > .node-clients-creation .column-main{width: 100%;}
+.block-content > .node-newsletter .field, .block-content > .node-clients-creation .field{display: inline-block; width: 100%;}
+.block-content > .node-newsletter .field .field-label, .block-content > .node-clients-creation .field .field-label{width: 30%; float: left;}
+.block-content > .node-newsletter .field .field-items, .block-content > .node-clients-creation .field .field-items{width: 70%; float: left;}
+.block-content > .node-newsletter h2{margin-top: 10px;}
