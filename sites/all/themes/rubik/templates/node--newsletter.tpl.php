@@ -67,7 +67,7 @@
           ?>
            <div class="field">
               <div class="field-label">Headline:</div>
-              <div class="field-items"><?php echo ucwords($news_arr['field_news_headline'][LANGUAGE_NONE][0]['value']) . '?'; ?></div>
+              <div class="field-items"><?php echo ucwords($news_arr['field_news_headline'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
             <div class="field">
               <div class="field-label">Ordering:</div>
@@ -102,7 +102,7 @@
       
           <div class="field">
             <div class="field-label">Headline:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_headline[LANGUAGE_NONE][0]['value']) . '?'; ?></div>
+            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_headline[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
           <div class="field">
             <div class="field-label">Ordering:</div>
