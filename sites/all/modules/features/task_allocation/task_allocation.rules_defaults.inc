@@ -17,10 +17,10 @@ function task_allocation_default_rules_configuration() {
       "ON" : { "node_insert--task_idea_allocation_tracking" : { "bundle" : "task_idea_allocation_tracking" } },
       "DO" : [
         { "mail" : {
-            "to" : "[node:field_user_mail]",
+            "to" : "[node:field_task_user_mail]",
             "subject" : "New task has been assign to you",
-            "message" : "[node:field_add_task_idea]",
-            "from" : "demosingh707@gmail.com",
+            "message" : "[node:field_task_task_idea]",
+            "from" : "[site:current-user]",
             "language" : [ "" ]
           }
         }
