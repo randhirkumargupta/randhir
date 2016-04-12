@@ -95,8 +95,8 @@
   <thead>
     <tr>
       <th>My Stats</th>
-      <th>Total</th>
       <th>Published</th>
+      <th>Total Created</th>
     </tr>
   </thead>
   <tbody>
@@ -108,8 +108,8 @@
     ?>
     <tr>
       <td><?php print $final_type1; ?></td>
-      <td><?php print $total; ?></td>
       <td><?php print $publish; ?></td>
+      <td><?php print $total; ?></td>
     </tr>
     <?php } ?>
   </tbody>
@@ -199,7 +199,7 @@
       $comma_role_arr = implode (", ", $final_role_arr);
       $comma_del_arr = implode (", ", $final_del_arr);
       
-$output = "<table style='width:100%'>
+$output = "<h2>My Permissions</h2><table style='width:100%'>
         <tr>
         <th>Operations</th>
         <th>Types</th>
