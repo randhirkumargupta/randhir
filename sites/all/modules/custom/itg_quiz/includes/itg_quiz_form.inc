@@ -355,7 +355,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
       $winners_list = itg_quiz_winners_list($form_state['values']['nid'], $form_state['values']['no_of_winners']);
       $output = '<div class = "quiz-contest-result"> <h2>Quiz Result:</h2>
       <div class = "quiz-contest-result"><strong>Total Question  attempted:</strong> ' . $total_ques_attempt . '</div>
-      <div class = "quiz-contest-result"><strong>Currect Answer:</strong> ' . $currect_answer . '</div>
+      <div class = "quiz-contest-result"><strong>Correct Answer:</strong> ' . $currect_answer . '</div>
       <div class = "quiz-contest-result"><strong>Incorrect Answer:</strong> ' . $incurrect_answer . '</div>
       <div class = "quiz-contest-result"><strong>Winners List:</strong></div>';
       foreach($winners_list as $key => $value){
