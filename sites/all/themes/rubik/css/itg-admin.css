@@ -1651,6 +1651,5 @@ input[name="field_newsl_add_news_und_0_remove_button"],
 .block-content > .node-newsletter .field .field-items, .block-content > .node-clients-creation .field .field-items{width: 70%; float: left;}
 .block-content > .node-newsletter h2{margin-top: 10px;}
 .my-stats h2{font-size: 18px; margin: 10px 0;}
-.my-stats-last-details{display: inline-block; width: 100%; padding: 0 0 10px 0;}
-.my-stats-left{float: left; width: 50%;}
-.my-stats-right{float: right; width: 50%; text-align: right;}
+.my-stats-last-details{display: inline-block; width: 100%;}
+.my-stats-left{padding-bottom: 5px;}
