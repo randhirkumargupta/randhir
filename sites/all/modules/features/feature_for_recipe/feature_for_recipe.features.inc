@@ -36,7 +36,15 @@ function feature_for_recipe_node_info() {
       'base' => 'node_content',
       'description' => t('Provide cooking tips for recipe.'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Strap headline (Short headline)'),
+      'help' => '',
+    ),
+    'food_news' => array(
+      'name' => t('Food News'),
+      'base' => 'node_content',
+      'description' => t('Provide food news.'),
+      'has_title' => '1',
+      'title_label' => t('Strap headline (Short headline)'),
       'help' => '',
     ),
     'recipe' => array(
@@ -44,7 +52,7 @@ function feature_for_recipe_node_info() {
       'base' => 'node_content',
       'description' => t('Use recipe for your recipe content.'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Strap headline (Short headline)'),
       'help' => '',
     ),
     'reporter' => array(

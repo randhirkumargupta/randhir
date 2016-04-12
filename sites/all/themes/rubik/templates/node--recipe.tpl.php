@@ -44,7 +44,7 @@
               <h2><?php print t('Basic Details'); ?></h2>
               <div class="content-details">
                 <div class="field">
-                  <div class="field-label"><?php print t('Title'); ?></div>
+                  <div class="field-label"><?php print t('Strap headline (Short Headline)'); ?></div>
                   <div class="field-items"><?php print $title; ?></div>
                 </div>
 
@@ -73,22 +73,9 @@
                   ?>
                 <?php endif; ?>
                 <?php
-                $strap = render($content['field_story_short_headline']);
-                if (!empty($strap)):
-                  print render($content['field_story_short_headline']);
-                  ?>
-                <?php endif; ?>
-                <?php
                 $long_headline = render($content['field_recipe_long_headline']);
                 if (!empty($long_headline)):
                   print render($content['field_recipe_long_headline']);
-                  ?>
-                <?php endif; ?>
-
-                <?php
-                $wap_headline = render($content['field_recipe_wap_headline']);
-                if (!empty($wap_headline)):
-                  print render($content['field_recipe_wap_headline']);
                   ?>
                 <?php endif; ?>
 
@@ -120,7 +107,7 @@
                 <?php
                 $garnishing = render($content['field_recipe_garnishing']);
                 if (!empty($garnishing)):
-                  print render($content['field_recipe_garnishing']);
+                  print str_replace("<br />" , ",", nl2br(render($content['field_recipe_garnishing'])));
                   ?> 
                 <?php endif; ?>
                 <?php
@@ -129,24 +116,12 @@
                   print render($content['field_associate_photo_gallery']);
                   ?> 
                 <?php endif; ?>
-                <?php
-                $city = render($content['field_stroy_city']);
-                if (!empty($city)):
-                  print render($content['field_stroy_city']);
-                  ?>
-                <?php endif; ?>
               </div>
             </div>
 
             <div class="content-node-view">
               <h2><?php print t('Recipe Details'); ?></h2>
               <div class="content-details">
-                <?php
-                $description = render($content['field_recipe_description']);
-                if (!empty($description)):
-                  print render($content['field_recipe_description']);
-                  ?>
-                <?php endif; ?>
                 <?php
                 $cuisine_type = render($content['field_recipe_cuisine_type']);
                 if (!empty($cuisine_type)):
@@ -195,6 +170,12 @@
                   print render($content['field_recipe_festivals']);
                   ?>
                 <?php endif; ?>
+                <?php
+                $description = render($content['field_recipe_description']);
+                if (!empty($description)):
+                  print render($content['field_recipe_description']);
+                  ?>
+                <?php endif; ?>
               </div>
             </div>
 
@@ -203,7 +184,8 @@
             $browsemedialarge = render($content['field_story_large_image']);
             $browsemediamedium = render($content['field_story_medium_image']);
             $browsemediasmall = render($content['field_story_small_image']);
-            if (!empty($browsemediaextralarge) || !empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall)):
+            $browsemediawriter = render($content['field_recipe_writer_image']);
+            if (!empty($browsemediaextralarge) || !empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediawriter)):
               ?>
               <div class="content-node-view">
                 <h2><?php print t('Recipe Images'); ?></h2>
@@ -212,9 +194,41 @@
                   <?php print render($content['field_story_large_image']); ?>
                   <?php print render($content['field_story_medium_image']); ?>
                   <?php print render($content['field_story_small_image']); ?>
+                  <?php print render($content['field_recipe_writer_image']); ?>
                 </div>
               </div>
             <?php endif; ?>
+          
+          <?php 
+            $social_media = render($content['field_story_social_media_integ']);
+             if(!empty($social_media)):?>
+              <div class="SocialMedia content-box">
+                <h2><?php print t('Social Media'); ?></h2>
+                <div class="content-details"><?php print render($content['field_story_social_media_integ']); ?></div>
+              </div>
+            <?php endif;?>
+             <?php 
+              $facebook_narrative = render($content['field_story_facebook_narrative']);
+              if(!empty($facebook_narrative)):?>
+                <div class="Facebook-narretive content-box">
+                  <h2><?php print t('Facebook Narrative'); ?></h2>
+                  <div class="content-details">
+                    <?php print render($content['field_story_facebook_narrative']); ?>
+                    <?php print render($content['field_story_facebook_image']); ?>
+                  </div>
+                </div>
+             <?php endif;?>
+            <?php 
+              $twitter = render($content['field_story_tweet']);
+              if(!empty($twitter)):?>
+                <div class="Twitter content-box">
+                  <h2><?php print t('Twitter'); ?></h2>
+                  <div class="content-details">
+                    <?php print render($content['field_story_tweet']); ?>
+                  </div>
+                </div>
+            <?php endif;?>
+          
             <div class="content-node-view">
               <h2><?php print t('Syndication'); ?></h2>
               <div class="content-details">      

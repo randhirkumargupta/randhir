@@ -1,215 +1,215 @@
 <?php
 /**
  * @file
- * feature_for_recipe.strongarm.inc
+ * feature_for_mobile_services.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function feature_for_recipe_strongarm() {
+function feature_for_mobile_services_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_anonymous_cooking_tips';
+  $strongarm->name = 'comment_anonymous_clients_creation';
   $strongarm->value = 0;
-  $export['comment_anonymous_cooking_tips'] = $strongarm;
+  $export['comment_anonymous_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_anonymous_food_news';
+  $strongarm->name = 'comment_anonymous_client_service_association';
   $strongarm->value = 0;
-  $export['comment_anonymous_food_news'] = $strongarm;
+  $export['comment_anonymous_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_anonymous_recipe';
+  $strongarm->name = 'comment_anonymous_create_content';
   $strongarm->value = 0;
-  $export['comment_anonymous_recipe'] = $strongarm;
+  $export['comment_anonymous_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_anonymous_reporter';
+  $strongarm->name = 'comment_anonymous_service_creation';
   $strongarm->value = 0;
-  $export['comment_anonymous_reporter'] = $strongarm;
+  $export['comment_anonymous_service_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_cooking_tips';
-  $strongarm->value = '1';
-  $export['comment_cooking_tips'] = $strongarm;
+  $strongarm->name = 'comment_clients_creation';
+  $strongarm->value = '0';
+  $export['comment_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_mode_cooking_tips';
+  $strongarm->name = 'comment_client_service_association';
+  $strongarm->value = '0';
+  $export['comment_client_service_association'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_create_content';
+  $strongarm->value = '0';
+  $export['comment_create_content'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_default_mode_clients_creation';
+  $strongarm->value = 0;
+  $export['comment_default_mode_clients_creation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_default_mode_client_service_association';
+  $strongarm->value = 0;
+  $export['comment_default_mode_client_service_association'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_default_mode_create_content';
   $strongarm->value = 1;
-  $export['comment_default_mode_cooking_tips'] = $strongarm;
+  $export['comment_default_mode_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_mode_food_news';
-  $strongarm->value = 1;
-  $export['comment_default_mode_food_news'] = $strongarm;
+  $strongarm->name = 'comment_default_mode_service_creation';
+  $strongarm->value = 0;
+  $export['comment_default_mode_service_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_mode_recipe';
-  $strongarm->value = 1;
-  $export['comment_default_mode_recipe'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_mode_reporter';
-  $strongarm->value = 1;
-  $export['comment_default_mode_reporter'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_per_page_cooking_tips';
+  $strongarm->name = 'comment_default_per_page_clients_creation';
   $strongarm->value = '50';
-  $export['comment_default_per_page_cooking_tips'] = $strongarm;
+  $export['comment_default_per_page_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_per_page_food_news';
+  $strongarm->name = 'comment_default_per_page_client_service_association';
   $strongarm->value = '50';
-  $export['comment_default_per_page_food_news'] = $strongarm;
+  $export['comment_default_per_page_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_per_page_recipe';
+  $strongarm->name = 'comment_default_per_page_create_content';
   $strongarm->value = '50';
-  $export['comment_default_per_page_recipe'] = $strongarm;
+  $export['comment_default_per_page_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_per_page_reporter';
+  $strongarm->name = 'comment_default_per_page_service_creation';
   $strongarm->value = '50';
-  $export['comment_default_per_page_reporter'] = $strongarm;
+  $export['comment_default_per_page_service_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_food_news';
-  $strongarm->value = '1';
-  $export['comment_food_news'] = $strongarm;
+  $strongarm->name = 'comment_form_location_clients_creation';
+  $strongarm->value = 0;
+  $export['comment_form_location_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_form_location_cooking_tips';
-  $strongarm->value = 1;
-  $export['comment_form_location_cooking_tips'] = $strongarm;
+  $strongarm->name = 'comment_form_location_client_service_association';
+  $strongarm->value = 0;
+  $export['comment_form_location_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_form_location_food_news';
-  $strongarm->value = 1;
-  $export['comment_form_location_food_news'] = $strongarm;
+  $strongarm->name = 'comment_form_location_create_content';
+  $strongarm->value = 0;
+  $export['comment_form_location_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_form_location_recipe';
-  $strongarm->value = 1;
-  $export['comment_form_location_recipe'] = $strongarm;
+  $strongarm->name = 'comment_form_location_service_creation';
+  $strongarm->value = 0;
+  $export['comment_form_location_service_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_form_location_reporter';
-  $strongarm->value = 1;
-  $export['comment_form_location_reporter'] = $strongarm;
+  $strongarm->name = 'comment_preview_clients_creation';
+  $strongarm->value = '0';
+  $export['comment_preview_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_preview_cooking_tips';
-  $strongarm->value = '1';
-  $export['comment_preview_cooking_tips'] = $strongarm;
+  $strongarm->name = 'comment_preview_client_service_association';
+  $strongarm->value = '0';
+  $export['comment_preview_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_preview_food_news';
-  $strongarm->value = '1';
-  $export['comment_preview_food_news'] = $strongarm;
+  $strongarm->name = 'comment_preview_create_content';
+  $strongarm->value = '0';
+  $export['comment_preview_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_preview_recipe';
-  $strongarm->value = '1';
-  $export['comment_preview_recipe'] = $strongarm;
+  $strongarm->name = 'comment_preview_service_creation';
+  $strongarm->value = '0';
+  $export['comment_preview_service_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_preview_reporter';
-  $strongarm->value = '1';
-  $export['comment_preview_reporter'] = $strongarm;
+  $strongarm->name = 'comment_service_creation';
+  $strongarm->value = '0';
+  $export['comment_service_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_recipe';
-  $strongarm->value = '1';
-  $export['comment_recipe'] = $strongarm;
+  $strongarm->name = 'comment_subject_field_clients_creation';
+  $strongarm->value = 0;
+  $export['comment_subject_field_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_reporter';
-  $strongarm->value = '2';
-  $export['comment_reporter'] = $strongarm;
+  $strongarm->name = 'comment_subject_field_client_service_association';
+  $strongarm->value = 0;
+  $export['comment_subject_field_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_subject_field_cooking_tips';
-  $strongarm->value = 1;
-  $export['comment_subject_field_cooking_tips'] = $strongarm;
+  $strongarm->name = 'comment_subject_field_create_content';
+  $strongarm->value = 0;
+  $export['comment_subject_field_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_subject_field_food_news';
-  $strongarm->value = 1;
-  $export['comment_subject_field_food_news'] = $strongarm;
+  $strongarm->name = 'comment_subject_field_service_creation';
+  $strongarm->value = 0;
+  $export['comment_subject_field_service_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_subject_field_recipe';
-  $strongarm->value = 1;
-  $export['comment_subject_field_recipe'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_subject_field_reporter';
-  $strongarm->value = 1;
-  $export['comment_subject_field_reporter'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_node__cooking_tips';
+  $strongarm->name = 'field_bundle_settings_node__clients_creation';
   $strongarm->value = array(
     'view_modes' => array(
       'teaser' => array(
@@ -237,273 +237,245 @@ function feature_for_recipe_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '2',
+          'weight' => '6',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '1',
+          'weight' => '5',
         ),
       ),
       'display' => array(),
     ),
   );
-  $export['field_bundle_settings_node__cooking_tips'] = $strongarm;
+  $export['field_bundle_settings_node__clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_node__food_news';
-  $strongarm->value = array(
-    'view_modes' => array(
-      'teaser' => array(
-        'custom_settings' => TRUE,
-      ),
-      'full' => array(
-        'custom_settings' => FALSE,
-      ),
-      'rss' => array(
-        'custom_settings' => FALSE,
-      ),
-      'search_index' => array(
-        'custom_settings' => FALSE,
-      ),
-      'search_result' => array(
-        'custom_settings' => FALSE,
-      ),
-      'diff_standard' => array(
-        'custom_settings' => FALSE,
-      ),
-      'token' => array(
-        'custom_settings' => FALSE,
-      ),
-    ),
-    'extra_fields' => array(
-      'form' => array(
-        'metatags' => array(
-          'weight' => '2',
-        ),
-        'title' => array(
-          'weight' => '0',
-        ),
-        'path' => array(
-          'weight' => '1',
-        ),
-      ),
-      'display' => array(),
-    ),
-  );
-  $export['field_bundle_settings_node__food_news'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_node__recipe';
-  $strongarm->value = array(
-    'view_modes' => array(
-      'teaser' => array(
-        'custom_settings' => TRUE,
-      ),
-      'full' => array(
-        'custom_settings' => FALSE,
-      ),
-      'rss' => array(
-        'custom_settings' => FALSE,
-      ),
-      'search_index' => array(
-        'custom_settings' => FALSE,
-      ),
-      'search_result' => array(
-        'custom_settings' => FALSE,
-      ),
-      'diff_standard' => array(
-        'custom_settings' => FALSE,
-      ),
-      'token' => array(
-        'custom_settings' => FALSE,
-      ),
-    ),
-    'extra_fields' => array(
-      'form' => array(
-        'metatags' => array(
-          'weight' => '2',
-        ),
-        'title' => array(
-          'weight' => '0',
-        ),
-        'path' => array(
-          'weight' => '1',
-        ),
-      ),
-      'display' => array(),
-    ),
-  );
-  $export['field_bundle_settings_node__recipe'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_node__reporter';
+  $strongarm->name = 'field_bundle_settings_node__client_service_association';
   $strongarm->value = array(
     'view_modes' => array(),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '4',
+          'weight' => '2',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '1',
         ),
       ),
       'display' => array(),
     ),
   );
-  $export['field_bundle_settings_node__reporter'] = $strongarm;
+  $export['field_bundle_settings_node__client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_options_cooking_tips';
+  $strongarm->name = 'field_bundle_settings_node__create_content';
+  $strongarm->value = array(
+    'view_modes' => array(),
+    'extra_fields' => array(
+      'form' => array(
+        'metatags' => array(
+          'weight' => '40',
+        ),
+        'title' => array(
+          'weight' => '-5',
+        ),
+        'path' => array(
+          'weight' => '30',
+        ),
+      ),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_node__create_content'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_node__service_creation';
+  $strongarm->value = array(
+    'view_modes' => array(),
+    'extra_fields' => array(
+      'form' => array(
+        'metatags' => array(
+          'weight' => '2',
+        ),
+        'title' => array(
+          'weight' => '0',
+        ),
+        'path' => array(
+          'weight' => '1',
+        ),
+      ),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_node__service_creation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_options_clients_creation';
   $strongarm->value = array(
     0 => 'main-menu',
   );
-  $export['menu_options_cooking_tips'] = $strongarm;
+  $export['menu_options_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_options_food_news';
+  $strongarm->name = 'menu_options_client_service_association';
   $strongarm->value = array(
     0 => 'main-menu',
   );
-  $export['menu_options_food_news'] = $strongarm;
+  $export['menu_options_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_options_recipe';
+  $strongarm->name = 'menu_options_create_content';
   $strongarm->value = array(
     0 => 'main-menu',
   );
-  $export['menu_options_recipe'] = $strongarm;
+  $export['menu_options_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_parent_cooking_tips';
+  $strongarm->name = 'menu_options_service_creation';
+  $strongarm->value = array(
+    0 => 'main-menu',
+  );
+  $export['menu_options_service_creation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_parent_clients_creation';
   $strongarm->value = 'main-menu:0';
-  $export['menu_parent_cooking_tips'] = $strongarm;
+  $export['menu_parent_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_parent_food_news';
+  $strongarm->name = 'menu_parent_client_service_association';
   $strongarm->value = 'main-menu:0';
-  $export['menu_parent_food_news'] = $strongarm;
+  $export['menu_parent_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_parent_recipe';
+  $strongarm->name = 'menu_parent_create_content';
   $strongarm->value = 'main-menu:0';
-  $export['menu_parent_recipe'] = $strongarm;
+  $export['menu_parent_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_cooking_tips';
+  $strongarm->name = 'menu_parent_service_creation';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_service_creation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_clients_creation';
   $strongarm->value = array(
     0 => 'status',
   );
-  $export['node_options_cooking_tips'] = $strongarm;
+  $export['node_options_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_food_news';
+  $strongarm->name = 'node_options_client_service_association';
   $strongarm->value = array(
     0 => 'status',
   );
-  $export['node_options_food_news'] = $strongarm;
+  $export['node_options_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_recipe';
-  $strongarm->value = array(
-    0 => 'status',
-  );
-  $export['node_options_recipe'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_reporter';
+  $strongarm->name = 'node_options_create_content';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
   );
-  $export['node_options_reporter'] = $strongarm;
+  $export['node_options_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_cooking_tips';
+  $strongarm->name = 'node_options_service_creation';
+  $strongarm->value = array(
+    0 => 'status',
+  );
+  $export['node_options_service_creation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_clients_creation';
   $strongarm->value = '1';
-  $export['node_preview_cooking_tips'] = $strongarm;
+  $export['node_preview_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_food_news';
+  $strongarm->name = 'node_preview_client_service_association';
   $strongarm->value = '1';
-  $export['node_preview_food_news'] = $strongarm;
+  $export['node_preview_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_recipe';
+  $strongarm->name = 'node_preview_create_content';
   $strongarm->value = '1';
-  $export['node_preview_recipe'] = $strongarm;
+  $export['node_preview_create_content'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_reporter';
+  $strongarm->name = 'node_preview_service_creation';
   $strongarm->value = '1';
-  $export['node_preview_reporter'] = $strongarm;
+  $export['node_preview_service_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_cooking_tips';
-  $strongarm->value = 0;
-  $export['node_submitted_cooking_tips'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_food_news';
-  $strongarm->value = 0;
-  $export['node_submitted_food_news'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_recipe';
-  $strongarm->value = 0;
-  $export['node_submitted_recipe'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_reporter';
+  $strongarm->name = 'node_submitted_clients_creation';
   $strongarm->value = 1;
-  $export['node_submitted_reporter'] = $strongarm;
+  $export['node_submitted_clients_creation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_client_service_association';
+  $strongarm->value = 1;
+  $export['node_submitted_client_service_association'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_create_content';
+  $strongarm->value = 1;
+  $export['node_submitted_create_content'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_service_creation';
+  $strongarm->value = 1;
+  $export['node_submitted_service_creation'] = $strongarm;
 
   return $export;
 }
