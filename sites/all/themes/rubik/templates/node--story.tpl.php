@@ -98,7 +98,6 @@
               $comment_question = render($content['field_story_configurations']);
               if(!empty($comment_question)):?>
                 <div class="Comment content-box">
-                  <h2><?php print t('Comment Question'); ?></h2>
                   <div class="content-details"><?php print render($content['field_story_comment_question']); ?>
                   </div>
                 </div>

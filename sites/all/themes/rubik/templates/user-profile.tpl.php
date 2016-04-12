@@ -89,46 +89,66 @@
 </div>
 
 <div class="my-stats">
-<h1> My Stats </h1>
-<?php
- $node_type = itg_get_all_node_type($elements['#account']->uid);
-      
+<h2> My Stats </h2>
+<?php $node_type = itg_get_all_node_type($elements['#account']->uid); ?>
+<table class="views-table">
+  <thead>
+    <tr>
+      <th>My Stats</th>
+      <th>Published</th>
+      <th>Total Created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
       foreach ($node_type as $final_type) {
-        $final_type1 = ucfirst(str_replace('_', '', $final_type));
-        $total  =  $final_type1.': Total '.itg_get_all_node($final_type,$elements['#account']->uid);
-        $publish = ': Publish '.itg_get_all_publish_node($final_type,$elements['#account']->uid);
-       print $total.$publish;
-       print '<br/>';
-       
-      }
+      $final_type1 = ucfirst(str_replace('_', '', $final_type));
+      $total  =  itg_get_all_node($final_type,$elements['#account']->uid);
+      $publish = itg_get_all_publish_node($final_type,$elements['#account']->uid);
+    ?>
+    <tr>
+      <td><?php print $final_type1; ?></td>
+      <td><?php print $publish; ?></td>
+      <td><?php print $total; ?></td>
+    </tr>
+    <?php } ?>
+  </tbody>
+</table>
+
+<div class="my-stats-last-details">
+
+<?php
       
       // get last node title and type publish by user
       $last_record = itg_last_node_user($elements['#account']->uid);
       $last_record_type = ucfirst(str_replace('_', '', $last_record['type']));
       if(!empty($last_record)) {
-      $last_record_display = 'Last Content Filed : '.$last_record_type.' - '.$last_record['title'];
-      print $last_record_display;
+      $last_record_display = '<strong>Last Content Filed:</strong> '.$last_record_type.' - '.$last_record['title'];
+      print '<div class="my-stats-left">' . $last_record_display . '</div>';
       }
       else
       {
       $last_record_display = 'Last Content Filed : N/A';
-      print $last_record_display;
+      print '<div class="my-stats-left">' . $last_record_display . '</div>';
       }
-      print '<br/>';
       $last_publish_record = itg_last_node_published_user($elements['#account']->uid,'1');
       
       if(!empty($last_publish_record)) {
         $last_title = node_load($last_publish_record['nid'], $last_publish_record['vid']);
-        $last_record_publish = 'Last Content publish : '.$last_title->title;
-        print $last_record_publish;
+        $last_record_publish = '<strong>Last Content publish:</strong> '.$last_title->title;
+        print '<div class="my-stats-right">' . $last_record_publish . '</div>';
       }
       else
       {
         $last_record_publish = 'Last Content publish : N/A';
-        print $last_record_publish;
+        print '<div class="my-stats-right">' . $last_record_publish . '</div>';
       }
       
-      
+?>
+
+</div>
+
+<?php
       $permissions= user_role_permissions($elements['#account']->roles);
       foreach($permissions as $key => $value) {
         foreach($value as $key1 => $value1) {
@@ -179,7 +199,7 @@
       $comma_role_arr = implode (", ", $final_role_arr);
       $comma_del_arr = implode (", ", $final_del_arr);
       
-$output = "<table style='width:100%'>
+$output = "<h2>My Permissions</h2><table style='width:100%'>
         <tr>
         <th>Operations</th>
         <th>Types</th>

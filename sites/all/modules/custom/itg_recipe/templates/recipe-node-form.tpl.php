@@ -10,12 +10,11 @@
 
 <div id="RecipeBasicDetails">
   <h2 class="story-title"><?php print t('Basic Details'); ?></h2>
-  <?php print drupal_render($form['title']); ?>
   <?php print drupal_render($form['field_recipe_content_type']); ?>
   <?php print drupal_render($form['field_recipe_video']); ?>
   <?php print drupal_render($form['field_recipe_audio']); ?>
   <?php print drupal_render($form['field_recipe_food_type']); ?>
-  <?php print drupal_render($form['field_story_short_headline']); ?>
+  <?php print drupal_render($form['title']); ?>
   <?php print drupal_render($form['field_recipe_long_headline']); ?>
   <?php print drupal_render($form['field_story_kicker_text']); ?>
   <?php print drupal_render($form['field_story_reporter']); ?>
