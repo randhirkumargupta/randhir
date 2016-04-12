@@ -87,7 +87,7 @@
             </div>
             <div class="field">
               <div class="field-label">Kicker:</div>
-              <div class="field-items"><?php echo ucwords($news_arr['field_news_kicker'][LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><?php echo ucwords($news_arr['field_field_news_kicker'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
            <?php
          $prev_num++; 
@@ -122,7 +122,7 @@
           </div>
           <div class="field">
             <div class="field-label">Kicker:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value']); ?></div>
+            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_field_news_kicker[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
             <?php
      $num++;
