@@ -321,9 +321,63 @@
           'field_astro_date_range[und][0][value][date]': {
             required: true,
             date: true
-          }
+          }          
         },
         messages: {          
+          'field_buzz_description[und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_story_category[und][]': {
+            required: 'This field is required.'
+          },
+          'field_astro_video_thumbnail[und][0][fid]': {
+            required: 'This field is required.'
+          },
+          'field_astro_type[und]': {
+            required: 'This field is required.'
+          },
+          'field_astro_numerology_values[und][0][field_astro_select_number][und]': {
+            required: 'This field is required.'
+          },
+          'field_astro_numerology_values[und][0][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][0][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][1][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][2][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][3][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][4][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][5][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][6][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][7][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][8][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][9][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][10][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_zodiac[und][11][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          }
         }
       });
       jQuery.validator.addMethod("validateRange", function (value, element) {
@@ -331,7 +385,7 @@
       }, "* Please enter valid date.");
       jQuery.validator.addMethod("validateSignName", function (value, element) {
         return validateSignNameValue(value, element);
-      }, "* This field is required.");
+      }, "This field is required.");
 
 
       // validate date difference
