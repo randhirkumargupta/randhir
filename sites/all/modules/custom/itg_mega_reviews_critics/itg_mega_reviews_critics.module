@@ -117,3 +117,53 @@ function itg_mega_reviews_critics_field_widget_form_alter(&$element, &$form_stat
 //    ++$count;
 //  }
 }
+
+/**
+ * Implements hook_block_info().
+ */
+function itg_mega_reviews_critics_block_info() {
+  $blocks['mega_reviews_tab_form_block'] = array(
+    'info' => t('Mega Reviews Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_mega_reviews_critics_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'mega_reviews_tab_form_block':                       
+      $block['content'] = theme('mega_reviews_tab_form_display_block', array('data' => $data));
+    break;        
+  }
+  
+  return $block;
+}
+
+
+
+/**
+ * Implements hook_theme().
+ * @param type $existing
+ * @param type $type
+ * @param type $theme
+ * @param type $path
+ */
+function itg_mega_reviews_critics_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'mega_reviews_tab_form_display_block' => array(
+      'template' => 'mega-reviews-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_mega_reviews_critics') . '/templates',
+      'variables' => array('data' => NULL),
+    ),   
+  );
+
+  return $themes;
+}
