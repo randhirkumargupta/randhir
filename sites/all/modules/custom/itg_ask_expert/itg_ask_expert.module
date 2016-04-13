@@ -156,6 +156,22 @@ function itg_ask_expert_views_pre_render(&$view) {
   }
 }
 
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_ask_expert_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
+{
+//Get the Form Id
+    if ($form["#id"] == 'views-exposed-form-ask-an-expert-page' || $form['#id'] == 'views-exposed-form-ask-an-expert-page-2') {
+        $form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
+        $form['title']['#autocomplete_path'] = 'content-title-list/ask_an_expert/autocomplete';
+        $form['title']['#attributes'] = array('placeholder' => t('Question'));
+    }
+}
+
 /**
  * Implements hook_node_insert
  * @param Array $node
