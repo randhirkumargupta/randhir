@@ -166,7 +166,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  /* Field: Content: Client Title */
+  /* Field: Content: Client */
   $handler->display->display_options['fields']['field_client_title']['id'] = 'field_client_title';
   $handler->display->display_options['fields']['field_client_title']['table'] = 'field_data_field_client_title';
   $handler->display->display_options['fields']['field_client_title']['field'] = 'field_client_title';
@@ -191,7 +191,7 @@ function feature_for_mobile_services_views_default_views() {
     'service_creation' => 'service_creation',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Client Title (field_client_title) */
+  /* Filter criterion: Content: Client (field_client_title) */
   $handler->display->display_options['filters']['field_client_title_tid']['id'] = 'field_client_title_tid';
   $handler->display->display_options['filters']['field_client_title_tid']['table'] = 'field_data_field_client_title';
   $handler->display->display_options['filters']['field_client_title_tid']['field'] = 'field_client_title_tid';
@@ -301,7 +301,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S. No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Content: Client Title */
+  /* Field: Content: Client */
   $handler->display->display_options['fields']['field_client_title']['id'] = 'field_client_title';
   $handler->display->display_options['fields']['field_client_title']['table'] = 'field_data_field_client_title';
   $handler->display->display_options['fields']['field_client_title']['field'] = 'field_client_title';
@@ -375,7 +375,7 @@ function feature_for_mobile_services_views_default_views() {
     'clients_creation' => 'clients_creation',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Client Title (field_client_title) */
+  /* Filter criterion: Content: Client (field_client_title) */
   $handler->display->display_options['filters']['field_client_title_tid']['id'] = 'field_client_title_tid';
   $handler->display->display_options['filters']['field_client_title_tid']['table'] = 'field_data_field_client_title';
   $handler->display->display_options['filters']['field_client_title_tid']['field'] = 'field_client_title_tid';

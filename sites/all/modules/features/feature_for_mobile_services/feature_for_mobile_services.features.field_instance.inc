@@ -11,86 +11,6 @@ function feature_for_mobile_services_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'field_collection_item-field_definition_for_content-field_service_char_limit'.
-  $field_instances['field_collection_item-field_definition_for_content-field_service_char_limit'] = array(
-    'bundle' => 'field_definition_for_content',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_char_limit',
-    'label' => 'Field char limit',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_definition_for_content-field_service_title'.
-  $field_instances['field_collection_item-field_definition_for_content-field_service_title'] = array(
-    'bundle' => 'field_definition_for_content',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_title',
-    'label' => 'Field Title',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance:
   // 'node-client_service_association-field_client_selection'.
   $field_instances['node-client_service_association-field_client_selection'] = array(
     'bundle' => 'client_service_association',
@@ -260,6 +180,55 @@ function feature_for_mobile_services_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-client_service_association-field_service_char_limit'.
+  $field_instances['node-client_service_association-field_service_char_limit'] = array(
+    'bundle' => 'client_service_association',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_service_char_limit',
+    'label' => 'Field char limit',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 11,
     ),
   );
 
@@ -890,52 +859,6 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-service_creation-field_client_selection'.
-  $field_instances['node-service_creation-field_client_selection'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 17,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_client_selection',
-    'label' => 'Client selection',
-    'required' => 1,
-    'settings' => array(
-      'behaviors' => array(
-        'taxonomy-index' => array(
-          'status' => TRUE,
-        ),
-      ),
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 19,
-    ),
-  );
-
   // Exported field_instance:
   // 'node-service_creation-field_content_sharing_mode'.
   $field_instances['node-service_creation-field_content_sharing_mode'] = array(
@@ -973,52 +896,6 @@ function feature_for_mobile_services_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-service_creation-field_definition_for_content'.
-  $field_instances['node-service_creation-field_definition_for_content'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'field_collection',
-        'settings' => array(
-          'add' => 'Add',
-          'delete' => 'Delete',
-          'description' => TRUE,
-          'edit' => 'Edit',
-          'view_mode' => 'full',
-        ),
-        'type' => 'field_collection_view',
-        'weight' => 16,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_definition_for_content',
-    'label' => 'Field Definition for a content',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 17,
     ),
   );
 
@@ -1061,48 +938,6 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 13,
-    ),
-  );
-
-  // Exported field_instance: 'node-service_creation-field_footer'.
-  $field_instances['node-service_creation-field_footer'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 20,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_footer',
-    'label' => 'Footer',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 22,
     ),
   );
 
@@ -1232,51 +1067,8 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-service_creation-field_header'.
-  $field_instances['node-service_creation-field_header'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 19,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_header',
-    'label' => 'Header',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 21,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-service_creation-field_service_content_count'.
-  $field_instances['node-service_creation-field_service_content_count'] = array(
+  // Exported field_instance: 'node-service_creation-field_service_char_limit'.
+  $field_instances['node-service_creation-field_service_char_limit'] = array(
     'bundle' => 'service_creation',
     'default_value' => NULL,
     'deleted' => 0,
@@ -1292,7 +1084,7 @@ function feature_for_mobile_services_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 18,
+        'weight' => 17,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1303,8 +1095,8 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_service_content_count',
-    'label' => 'Content Count',
+    'field_name' => 'field_service_char_limit',
+    'label' => 'Field char limit',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1319,7 +1111,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -1527,6 +1319,48 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-service_creation-field_service_title'.
+  $field_instances['node-service_creation-field_service_title'] = array(
+    'bundle' => 'service_creation',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_service_title',
+    'label' => 'Field Title',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 18,
+    ),
+  );
+
   // Exported field_instance: 'node-service_creation-field_short_description'.
   $field_instances['node-service_creation-field_short_description'] = array(
     'bundle' => 'service_creation',
@@ -1645,7 +1479,6 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('FTP Password');
   t('FTP Username');
   t('Fetch link (our server)');
-  t('Field Definition for a content');
   t('Field Title');
   t('Field char limit');
   t('Footer');
