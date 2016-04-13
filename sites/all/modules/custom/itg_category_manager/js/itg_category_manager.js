@@ -4,15 +4,15 @@
       // Place your code here.
       var setting = Drupal.settings.baseUrl;
       // Term status mode show hide
-      $('#edit-term-state').click(function () {
-        var state = $(this).is(':checked');
-        if (state) {
-          $("#state-mode").css("display", "none");
-        }
-        else {
-          $("#state-mode").css("display", "block");
-        }
-      });
+//      $('#edit-term-state').click(function () {
+//        var state = $(this).is(':checked');
+//        if (state) {
+//          $("#state-mode").css("display", "none");
+//        }
+//        else {
+//          $("#state-mode").css("display", "block");
+//        }
+//      });
 
       // Disable manual or forcefully
       $('#edit-state-mode-1, #edit-state-mode-0').click(function () {

@@ -276,10 +276,13 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['state-mode'] = array(
           '#type' => 'radios',
           '#title' => t('Disable mode'),
-          '#options' => array('Forcefully', 'Manually'),
-          '#prefix' => '<div id="state-mode" style="display: none;">',
-          '#suffix' => '</div>',
+          '#options' => array('Forcefully', 'Manually'),          
           '#weight' => 20,
+          '#states' => array(
+            'visible' => array(
+              ':input[name="term_state"]' => array('checked' => FALSE),
+            ),
+          ),
         );
       }
       // Hide publish time field.
@@ -327,14 +330,13 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
  * Implements _form_validate() for taxonomy_form_term().
  */
 function itg_category_manager_term_validate($form, &$form_state) {
-  // Set published time same as parent term
-  
+  // Set published time same as parent term  
   $termParent = $form_state['values']['parent'][0];
   if ($termParent) {
     $pTerm = taxonomy_term_load($termParent);
     $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];
   }
-  if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete') {
+  if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete' && $form_state['term']->tid != NULL ) {
     form_set_error('state-mode', t('Please select one mode.'));
   }
   // Code end for publish time
