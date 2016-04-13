@@ -11,53 +11,43 @@ function task_allocation_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'node-task_idea_allocation_tracking-field_add_task_idea'.
-  $field_instances['node-task_idea_allocation_tracking-field_add_task_idea'] = array(
-    'bundle' => 'task_idea_allocation_tracking',
+  // 'comment-comment_node_task_idea_allocation_tracking-comment_body'.
+  $field_instances['comment-comment_node_task_idea_allocation_tracking-comment_body'] = array(
+    'bundle' => 'comment_node_task_idea_allocation_tracking',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
         'weight' => 0,
       ),
     ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_add_task_idea',
-    'label' => 'Task / idea',
-    'required' => 1,
+    'entity_type' => 'comment',
+    'field_name' => 'comment_body',
+    'label' => 'Comment',
+    'required' => TRUE,
     'settings' => array(
-      'display_summary' => 0,
       'exclude_cv' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
+        'rows' => 5,
       ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => 7,
+      'type' => 'text_textarea',
+      'weight' => 0,
     ),
   );
 
   // Exported field_instance:
-  // 'node-task_idea_allocation_tracking-field_finish_date_and_time'.
-  $field_instances['node-task_idea_allocation_tracking-field_finish_date_and_time'] = array(
+  // 'node-task_idea_allocation_tracking-field_task_finish_date_and_time'.
+  $field_instances['node-task_idea_allocation_tracking-field_task_finish_date_and_time'] = array(
     'bundle' => 'task_idea_allocation_tracking',
     'deleted' => 0,
     'description' => '',
@@ -74,7 +64,7 @@ function task_allocation_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 2,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -85,7 +75,7 @@ function task_allocation_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_finish_date_and_time',
+    'field_name' => 'field_task_finish_date_and_time',
     'label' => 'Finish Date and time',
     'required' => 1,
     'settings' => array(
@@ -110,56 +100,13 @@ function task_allocation_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 8,
+      'weight' => 3,
     ),
   );
 
   // Exported field_instance:
-  // 'node-task_idea_allocation_tracking-field_select_team_member'.
-  $field_instances['node-task_idea_allocation_tracking-field_select_team_member'] = array(
-    'bundle' => 'task_idea_allocation_tracking',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'user_reference',
-        'settings' => array(),
-        'type' => 'user_reference_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_select_team_member',
-    'label' => 'Select team member',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'user_reference',
-      'settings' => array(
-        'autocomplete_match' => 'contains',
-        'autocomplete_path' => 'user_reference/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'user_reference_autocomplete',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-task_idea_allocation_tracking-field_status'.
-  $field_instances['node-task_idea_allocation_tracking-field_status'] = array(
+  // 'node-task_idea_allocation_tracking-field_task_status'.
+  $field_instances['node-task_idea_allocation_tracking-field_task_status'] = array(
     'bundle' => 'task_idea_allocation_tracking',
     'default_value' => NULL,
     'deleted' => 0,
@@ -170,7 +117,7 @@ function task_allocation_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 3,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -181,7 +128,7 @@ function task_allocation_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_status',
+    'field_name' => 'field_task_status',
     'label' => 'Status',
     'required' => 0,
     'settings' => array(
@@ -193,13 +140,58 @@ function task_allocation_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 4,
     ),
   );
 
   // Exported field_instance:
-  // 'node-task_idea_allocation_tracking-field_user_mail'.
-  $field_instances['node-task_idea_allocation_tracking-field_user_mail'] = array(
+  // 'node-task_idea_allocation_tracking-field_task_task_idea'.
+  $field_instances['node-task_idea_allocation_tracking-field_task_task_idea'] = array(
+    'bundle' => 'task_idea_allocation_tracking',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_task_task_idea',
+    'label' => 'Task / idea',
+    'required' => 1,
+    'settings' => array(
+      'display_summary' => 0,
+      'exclude_cv' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-task_idea_allocation_tracking-field_task_team_member'.
+  $field_instances['node-task_idea_allocation_tracking-field_task_team_member'] = array(
     'bundle' => 'task_idea_allocation_tracking',
     'default_value' => NULL,
     'deleted' => 0,
@@ -212,7 +204,7 @@ function task_allocation_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 4,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -223,8 +215,8 @@ function task_allocation_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_user_mail',
-    'label' => 'user mail',
+    'field_name' => 'field_task_team_member',
+    'label' => 'Select team member',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -238,18 +230,18 @@ function task_allocation_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete_tags',
-      'weight' => 10,
+      'type' => 'entityreference_autocomplete',
+      'weight' => 1,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Comment');
   t('Finish Date and time');
   t('Select team member');
   t('Status');
   t('Task / idea');
-  t('user mail');
 
   return $field_instances;
 }
