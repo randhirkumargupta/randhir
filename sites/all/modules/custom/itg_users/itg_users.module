@@ -32,6 +32,14 @@ function itg_users_menu() {
       // 'file' => 'includes/itg_common.inc',
   );
 
+  $items['user-block'] = array(
+    'title' => 'User Block',
+    'page callback' => 'itg_users_block_user',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+     
+  );
+
   return $items;
 }
 
@@ -88,6 +96,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
       });", array('type' => 'inline', 'scope' => 'footer'));
   }
   if ($form_id == 'user_profile_form') {
+   
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#weight'] = '-6';
@@ -100,7 +109,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
 
       if ($user->uid == arg(1)) {
         unset($form['account']['status']);
-      }
+        }
     }
 
     if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
@@ -496,4 +505,31 @@ function itg_users_tokens($type, $tokens, array $data = array(), array $options 
   }
 
   return $replacements;
+}
+
+// query to block user on expirt date
+function itg_users_block_user() {
+
+  $query = db_select('users', 'u');
+  $query->join('field_data_field_story_expiry_date', 'de', 'u.uid = de.entity_id');
+  $query->fields('u', array('uid'));
+  $query->fields('de', array('field_story_expiry_date_value'));
+  $result = $query->execute();
+
+  while ($user_record = $result->fetchAssoc()) {
+    $user_id = $user_record['uid'];
+    $user_exp_date = strtotime($user_record['field_story_expiry_date_value']);
+    $user_exp_date = date('Y-m-d', $user_exp_date);
+    $current_date = date('Y-m-d');
+
+    if ($user_exp_date == $current_date) {
+      // block user
+      db_update('users')
+          ->fields(array(
+            'status' => 0
+          ))
+          ->condition('uid', $user_id)
+          ->execute();
+    }
+  }
 }
