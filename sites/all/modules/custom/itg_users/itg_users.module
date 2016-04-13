@@ -45,7 +45,8 @@ function itg_users_cms_user_dashboard() {
 
   // Code for User menu on dashboard
 
-  $remove_menu_link = array('manage-poll' => 'Poll', 'manage-survey' => 'Survey');
+  // $remove_menu_link = array('manage-poll' => 'Poll', 'manage-survey' => 'Survey');
+  $remove_menu_link = array();
 
   $user_menu_tree = menu_tree_all_data('menu-admin-left-menu');
 
