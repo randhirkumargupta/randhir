@@ -86,6 +86,6 @@
     <?php // print drupal_render($form['revision_information']['log']); ?>
     <?php //unset($form['revision_information']); ?>
 </div>
-<h2 id="title-metatags" class="story-title">Remarks</h2>
+<h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
