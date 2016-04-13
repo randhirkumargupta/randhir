@@ -1,25 +1,177 @@
-/**
- * @file
- * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
- *
- * When you turn on CSS aggregation at admin/config/development/performance, all
- * of these @include files will be combined into a single file.
- */
+/*---------------------------- ITG CSS -----------------------------------*/
 
-/* Import Sass mixins, variables, Compass modules, etc. */
-@import "init";
+/* Global CSS */
+body{
+  font: 400 14px/18px 'Roboto';
+  color: #2f2f2f;
+}
+h1, h2, h3, h4{font-weight: 500;}
+.mr-0{
+  margin: 0;
+}
+.mt-10{
+  margin-top: 10px;
+}
+.ml-10{
+  margin-left: 10px;
+}
+.mb-10{
+  margin-bottom: 10px;
+}
+.mb-5{
+  margin-bottom: 5px;
+}
+.pd-0{
+  padding: 0;
+}
+.pd-10{
+  padding: 10px;
+}
+.pd-30{
+  padding: 30px;
+}
+.pdlr-30{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.pdtb-10{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.pdb-10{
+  padding-bottom: 10px;
+}
+.pdr-10{
+  padding-right: 10px;
+}
+.no-bullet{
+  list-style: none;
+}
+.no-underline{
+  text-decoration: none;
+}
+.db{
+  display: block;
+}
+.dib{
+  display: inline-block;
+}
+.vmid{
+  vertical-align: middle;
+}
+.vtop{
+  vertical-align: top;
+}
+.full{
+  width: 100%;
+}
+.fleft{
+  float: left;
+}
+.fright{
+  float: right;
+}
+.pos-rel{
+  position: relative;
+}
+.btn {
+    background-color: #337ab7;
+    border: 1px solid #2e6da4;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 6px 12px;
+    text-align: center;
+    white-space: nowrap;
+    @extend .dib;
+    @extend .vtop;
+    &:hover{
+    background-color: #286090;
+    border-color: #204d74;
+    color: #fff;
+    }
+}
 
-/* HTML element (SMACSS base) rules */
-@import "normalize";
+.success-message, .messages--status{
+  color:#009c00;
+  font-size: 13px;
+  @extend .pdb-10;
+}
 
-/* Layout rules */
-@import "layouts/responsive";
+input[type="text"], select, input[type="password"]{
+  border: 1px solid #ddd;
+  height: 32px;
+  line-height: 30px;
+  padding: 5px;
+  color: #2f2f2f;
+}
+.form-required, .error{
+  color: red;
+}
+*{
+  @extend .mr-0;
+  @extend .pd-0;
+  box-sizing: border-box;
+}
 
-/* Component (SMACSS module) rules */
-@import "components/misc";
-// Optionally, add your own components here.
-@import "print";
+/* Layout CSS */
 
-/* SMACSS theme rules */
-/* @import "theme-A"; */
-/* @import "theme-B"; */
+.container{
+  max-width: 1000px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+.header{
+  @extend .pdtb-10;
+  box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* Form CSS */
+.node-form{
+  h2{
+    background-color: #fefafb;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 8px 20px;
+    line-height: 28px;
+    font-size: 18px;
+    margin: 15px 0;
+  }
+}
+
+.form-type-textfield,
+.form-type-select,
+.form-type-managed-file,
+.form-type-checkboxes,
+.form-type-autocomplete-deluxe,
+.form-type-textarea{
+  padding: 0 30px;
+  margin: 15px 0;
+}
+.form-type-textfield > label, 
+.form-type-textarea > label, 
+.form-type-select > label, 
+.form-type-autocomplete-deluxe > label,
+.form-type-managed-file > label, 
+.form-type-checkboxes > label{
+  width: 220px;
+  float: left;
+  padding-right: 20px;
+}
+.form-type-textfield > label + div, 
+.form-type-textarea > label + div, 
+.form-type-select > label + div, 
+.form-type-managed-file > label + div, 
+.form-type-autocomplete-deluxe > label + div,
+.form-type-checkboxes > label + div{
+  padding-left: 220px;
+}
+div.filefield-source .form-item{
+  @extend .mr-0;
+}
+
+

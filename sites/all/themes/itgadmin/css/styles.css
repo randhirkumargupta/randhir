@@ -1,22 +1,229 @@
-/**
- * @file
- * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
- *
- * When you turn on CSS aggregation at admin/config/development/performance, all
- * of these @include files will be combined into a single file.
- */
+/*---------------------------- ITG CSS -----------------------------------*/
+/* Global CSS */
+/* line 4, ../sass/styles.scss */
+body {
+  font: 400 14px/18px 'Roboto';
+  color: #2f2f2f;
+}
 
-/* HTML element (SMACSS base) rules */
-@import "normalize.css";
+/* line 8, ../sass/styles.scss */
+h1, h2, h3, h4 {
+  font-weight: 500;
+}
 
-/* Layout rules */
-@import "layouts/responsive.css";
+/* line 9, ../sass/styles.scss */
+.mr-0, *, div.filefield-source .form-item {
+  margin: 0;
+}
 
-/* Component (SMACSS module) rules */
-@import "components/misc.css";
-/* Optionally, add your own components here. */
-@import "print.css";
+/* line 12, ../sass/styles.scss */
+.mt-10 {
+  margin-top: 10px;
+}
 
-/* SMACSS theme rules */
-/* @import "theme-A.css"; */
-/* @import "theme-B.css"; */
+/* line 15, ../sass/styles.scss */
+.ml-10 {
+  margin-left: 10px;
+}
+
+/* line 18, ../sass/styles.scss */
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+/* line 21, ../sass/styles.scss */
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+/* line 24, ../sass/styles.scss */
+.pd-0, * {
+  padding: 0;
+}
+
+/* line 27, ../sass/styles.scss */
+.pd-10 {
+  padding: 10px;
+}
+
+/* line 30, ../sass/styles.scss */
+.pd-30 {
+  padding: 30px;
+}
+
+/* line 33, ../sass/styles.scss */
+.pdlr-30 {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* line 37, ../sass/styles.scss */
+.pdtb-10, .header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* line 41, ../sass/styles.scss */
+.pdb-10, .success-message, .messages--status {
+  padding-bottom: 10px;
+}
+
+/* line 44, ../sass/styles.scss */
+.pdr-10 {
+  padding-right: 10px;
+}
+
+/* line 47, ../sass/styles.scss */
+.no-bullet {
+  list-style: none;
+}
+
+/* line 50, ../sass/styles.scss */
+.no-underline {
+  text-decoration: none;
+}
+
+/* line 53, ../sass/styles.scss */
+.db {
+  display: block;
+}
+
+/* line 56, ../sass/styles.scss */
+.dib, .btn {
+  display: inline-block;
+}
+
+/* line 59, ../sass/styles.scss */
+.vmid {
+  vertical-align: middle;
+}
+
+/* line 62, ../sass/styles.scss */
+.vtop, .btn {
+  vertical-align: top;
+}
+
+/* line 65, ../sass/styles.scss */
+.full {
+  width: 100%;
+}
+
+/* line 68, ../sass/styles.scss */
+.fleft {
+  float: left;
+}
+
+/* line 71, ../sass/styles.scss */
+.fright {
+  float: right;
+}
+
+/* line 74, ../sass/styles.scss */
+.pos-rel {
+  position: relative;
+}
+
+/* line 77, ../sass/styles.scss */
+.btn {
+  background-color: #337ab7;
+  border: 1px solid #2e6da4;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+/* line 90, ../sass/styles.scss */
+.btn:hover {
+  background-color: #286090;
+  border-color: #204d74;
+  color: #fff;
+}
+
+/* line 97, ../sass/styles.scss */
+.success-message, .messages--status {
+  color: #009c00;
+  font-size: 13px;
+}
+
+/* line 103, ../sass/styles.scss */
+input[type="text"], select, input[type="password"] {
+  border: 1px solid #ddd;
+  height: 32px;
+  line-height: 30px;
+  padding: 5px;
+  color: #2f2f2f;
+}
+
+/* line 110, ../sass/styles.scss */
+.form-required, .error {
+  color: red;
+}
+
+/* line 113, ../sass/styles.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* Layout CSS */
+/* line 121, ../sass/styles.scss */
+.container {
+  max-width: 1000px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+
+/* line 127, ../sass/styles.scss */
+.header {
+  box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* Form CSS */
+/* line 135, ../sass/styles.scss */
+.node-form h2 {
+  background-color: #fefafb;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 8px 20px;
+  line-height: 28px;
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+/* line 146, ../sass/styles.scss */
+.form-type-textfield,
+.form-type-select,
+.form-type-managed-file,
+.form-type-checkboxes,
+.form-type-autocomplete-deluxe,
+.form-type-textarea {
+  padding: 0 30px;
+  margin: 15px 0;
+}
+
+/* line 155, ../sass/styles.scss */
+.form-type-textfield > label,
+.form-type-textarea > label,
+.form-type-select > label,
+.form-type-autocomplete-deluxe > label,
+.form-type-managed-file > label,
+.form-type-checkboxes > label {
+  width: 220px;
+  float: left;
+  padding-right: 20px;
+}
+
+/* line 165, ../sass/styles.scss */
+.form-type-textfield > label + div,
+.form-type-textarea > label + div,
+.form-type-select > label + div,
+.form-type-managed-file > label + div,
+.form-type-autocomplete-deluxe > label + div,
+.form-type-checkboxes > label + div {
+  padding-left: 220px;
+}
