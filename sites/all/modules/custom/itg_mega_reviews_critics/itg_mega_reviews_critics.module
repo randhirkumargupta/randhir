@@ -90,9 +90,9 @@ function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {
   }
   
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'mega-review-critic') {
-    drupal_set_message(t('Movie review has been submitted successfully.'));
+    drupal_set_message(t('<b>Movie review</b> has been submitted successfully.'));
   } else {
-      drupal_set_message(t('Movie review has been updated successfully.'));
+      drupal_set_message(t('<b>Movie review</b> has been updated successfully.'));
   }
    
 }
