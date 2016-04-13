@@ -499,7 +499,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'bundle' => 'mega_review_critic',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Cast',
+    'description' => ' Please select cast name',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1256,7 +1256,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'label' => 'Small image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -1264,7 +1264,7 @@ function mega_review_critic_features_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1305,6 +1305,7 @@ function mega_review_critic_features_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t(' Please select cast name');
   t('About');
   t('Associate Photo Gallery');
   t('Associate Video');
