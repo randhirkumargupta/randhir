@@ -135,9 +135,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
       }
     });
   $('body').on('click', '.target-link', function(e) {
-    var offSet = 80;
+    var offSet = 120;
     var dti = $(this).attr('data-target-id');
-    var targetOffset = $('#' + dti).offset().top - offSet;
+    var targetOffset = $('#' + dti).offset().top - offSet;console.log(targetOffset);
     if(dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails"){
       $(this).addClass('active').siblings('.target-link').removeClass('active');
       $("body,html").animate({ scrollTop: 0 }, 1000);
