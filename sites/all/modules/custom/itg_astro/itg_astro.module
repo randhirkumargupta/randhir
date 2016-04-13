@@ -368,7 +368,11 @@ function itg_astro_views_pre_render(&$view) {
  * @param string $build
  * @param type $type
  */
-function itg_astro_entity_view_alter(&$build, $type) { 
+function itg_astro_entity_view_alter(&$build, $type) {   
+  if ($type == 'field_collection_item' && isset($build['field_astro_select_number']['#field_name']) && $build['field_astro_select_number']['#field_name'] == 'field_astro_select_number') {
+    $build['field_astro_select_number']['#title'] = t('Number');
+    $build['field_buzz_description']['#title'] = t('Text');
+  }
   static $count = 0;
   if ($type == 'field_collection_item' && isset($build['field_zodiac_sign']) && $count <= 11) {    
     $zodiac_sign = itg_astro_zodiac_thumbnail();

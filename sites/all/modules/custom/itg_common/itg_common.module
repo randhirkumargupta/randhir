@@ -77,6 +77,12 @@ function itg_common_dropdown_supplement($id = '') {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+  
+  // Set title on Preview
+  if (arg(1) == 'add' && isset($form['#node']->op) && $form['#node']->op == 'Preview') {       
+    $content_type_name = get_content_type_name($form['#node']->type);
+    drupal_set_title('Create '.$content_type_name); 
+  }
  
   // code to change page title on node edit
   if (!empty($form['nid']['#value'])) {
@@ -345,4 +351,17 @@ function itg_common_check_record_existance($nid, $tbl_name){
   } else {
     return 0;
   }
+}
+
+/**
+ * Get content type name by content type machine name.
+ * @param type $type
+ *   
+ */
+function get_content_type_name($type) {
+   $content_type_name = db_select('node_type', 'n')
+       ->fields('n', array('name'))
+      ->condition('type', $type)
+      ->execute()->fetchField();
+   return $content_type_name;
 }

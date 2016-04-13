@@ -87,7 +87,10 @@
     </div>
   </div>
 </div>
-
+<?php
+$view_user_id = $elements['#account']->uid;
+if($user->uid == $view_user_id) {
+?>
 <div class="my-stats">
 <h2> My Stats </h2>
 <?php $node_type = itg_get_all_node_type($elements['#account']->uid); ?>
@@ -135,7 +138,7 @@
       
       if(!empty($last_publish_record)) {
         $last_title = node_load($last_publish_record['nid'], $last_publish_record['vid']);
-        $last_record_publish = '<strong>Last Content publish:</strong> '.$last_title->title;
+        $last_record_publish = '<strong>Last Content Publish: </strong>'.ucwords($last_title->type).' - '.$last_title->title;
         print '<div class="my-stats-right">' . $last_record_publish . '</div>';
       }
       else
@@ -225,7 +228,9 @@ print $output;
 ?>
 
 </div>
-
+<?php
+}
+?>
 <?php
 // query to get count of All node 
 function itg_get_all_node($content_type,$uid) {
