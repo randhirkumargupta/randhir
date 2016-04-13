@@ -45,6 +45,7 @@
               <div class="content-node-view">               
                 <h2>Basic Details</h2>
                     <div class="content-view">
+                        <?php print '<div class="field-label">Frequency: </div>'; ?>
                         <?php print render($content['field_astro_frequency']); ?>
                         <?php print render($content['field_astro_date_range']); ?>
                         <?php print render($content['field_story_expiry_date']); ?>
@@ -53,6 +54,7 @@
                     </div>
                     <h2>Channel</h2>
                     <div class="content-view">
+                        <?php print '<div class="field-label">Program: </div>'; ?>
                         <?php print render($content['field_story_category']); ?>
                     </div>
               </div>
