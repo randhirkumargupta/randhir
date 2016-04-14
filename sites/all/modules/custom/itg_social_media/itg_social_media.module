@@ -1,0 +1,28 @@
+<?php
+
+/* 
+ * Author: ITG
+ * Date: 14-04-2016
+ * Purpose: ITG social media integration module.
+ */
+
+/**
+ * Implements hook_form_alter() 
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  if(isset($form['created']['min'])) {
+    $form['created']['min'] = array(
+      '#type' => 'date_popup',
+      '#date_format' => 'd/m/Y',
+      '#date_year_range' => '-3:+3',
+    );
+    $form['created']['max'] = array(
+      '#type' => 'date_popup',
+      '#date_format' => 'd/m/Y',
+      '#date_year_range' => '-3:+3',
+    );
+  }  
+}
