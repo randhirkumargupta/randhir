@@ -283,13 +283,13 @@ function feature_for_mobile_services_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '1',
         ),
         'title' => array(
-          'weight' => '-5',
+          'weight' => '3',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
