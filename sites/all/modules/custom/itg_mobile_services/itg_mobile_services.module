@@ -13,7 +13,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       unset($form['title']);
       unset($form['#metatags']);
-                
+
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'clients-listing', array(
           'attributes' => array(
@@ -102,6 +102,12 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         'effect' => 'fade',
         'event' => 'change', // On change of the selection this action would take place
       );
+
+      $form['field_client_selection'][LANGUAGE_NONE]['#ajax'] = array(
+        'callback' => 'itg_mobile_content_selection_callback',
+        'event' => 'blur', // On change of the selection this action would take place
+      );
+
       unset($form['title']);
       $form['#after_build'][] = 'itg_service_association_after_build';
 
@@ -110,40 +116,19 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       }
       break;
     case 'create_content_node_form':
-     // unset($form['title']);
+      // unset($form['title']);
       unset($form['#metatags']);
 
-      $form['field_story_kicker_text']['#prefix'] = '<div id="client_entity_wrapper">';
-      $form['field_story_kicker_text']['#suffix'] = '</div>';
+      $form['title']['#prefix'] = '<div id="client_entity_wrapper">';
+      $form['title']['#suffix'] = '</div>';
 
-      
-     $query = db_select('node', 'node')
-                ->fields('sa', array('nid', 'vid', 'title'))
-                ->fields('cs', array('entity_id', 'revision_id'))
-                ->fields('td', array('name', 'tid'));
-  
-      $query->leftJoin('field_data_field_client_selection', 'cs', "n.nid = cs.entity_id AND cs.entity_type = 'node' AND cs.deleted = '0'");
-      $query->join('taxonomy_term_data', 'td', "cs.field_client_selection_target_id = td.tid");
-      $query->leftJoin('field_data_field_service_association_title', 'sa', "node.nid = sa.entity_id AND (sa.entity_type = 'node' AND sa.deleted = '0'");
-      $query->Join('node', 'service_association', "sa.field_service_association_title_target_id = service_association.nid");
-      $query->condition('sa.status', 1, '=');
-      $query->condition('node.type', array('client_service_association'), 'IN');
-      $query->range(0, 10);
-      dpq($query); // Display the query. 
-      $result = $query->execute();
-      
-    while($record = $result->fetchAssoc()) {
-        print_r($record);
-    }
-
-print $query;
-       $form['field_service_association_title'][LANGUAGE_NONE]['#ajax'] = array(
+      $form['field_service_association_title'][LANGUAGE_NONE]['#ajax'] = array(
         'callback' => 'itg_mobile_content_custom_callback',
         'wrapper' => 'client_entity_wrapper',
-       // 'method' => 'replace', // the data would replace the field
+        // 'method' => 'replace', // the data would replace the field
         'effect' => 'fade',
         'event' => 'change', // On change of the selection this action would take place
-         '#attached' => array(
+        '#attached' => array(
           'js' => array(
             drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_services.js' => array(
               'scope' => 'footer',
@@ -151,9 +136,90 @@ print $query;
           ),
         ),
       );
+
+      $form['#validate'][] = 'itg_mobile_association_validator';
+
+      drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
+
       break;
   }
   return $form;
+}
+
+/**
+ * Implements custom _form_validate() for taxonomy_form_term().
+ */
+function itg_mobile_association_validator($form, &$form_state) {
+  //dpm($form_state);
+  // p($form_state['values']);
+  //exit;
+  $target_id = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id']);
+
+
+  // watchdog("mobile_5", '<pre>' . print_r( $nid, true) . '</pre>'); 
+  if ($target_id) {
+    $contact_text = ($form_state['values']['field_story_kicker_text'][LANGUAGE_NONE][0]['value']) ? trim($form_state['values']['field_story_kicker_text'][LANGUAGE_NONE][0]['value']) : '';
+    $contact_image = ($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid']) ? trim($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid']) : '';
+    $contact_audio = ($form_state['values']['field_service_audio'][LANGUAGE_NONE][0]['fid']) ? trim($form_state['values']['field_service_audio'][LANGUAGE_NONE][0]['fid']) : '';
+    $contact_video = ($form_state['values']['field_service_video'][LANGUAGE_NONE][0]['fid']) ? trim($form_state['values']['field_service_video'][LANGUAGE_NONE][0]['fid']) : '';
+
+
+    $query = db_select('node', 'node')
+        ->fields('service_asso', array('nid', 'vid', 'title'))
+        ->fields('cs', array('entity_id', 'revision_id'))
+        ->fields('td', array('name', 'tid'));
+
+    $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id AND cs.entity_type = 'node' AND cs.deleted = '0'");
+    $query->join('taxonomy_term_data', 'td', "cs.field_client_selection_target_id = td.tid");
+    $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id AND (sat.entity_type = 'node' AND sat.deleted = '0')");
+    $query->Join('node', 'service_asso', "sat.field_service_association_title_target_id = service_asso.nid");
+    $query->condition('service_asso.status', 1, '=');
+    $query->condition('service_asso.nid', $target_id, '=');
+    $query->condition('node.type', array('client_service_association'), 'IN');
+    $query->range(0, 10);
+    //dpq($query); // Display the query. 
+    $result = $query->execute();
+    $record = $result->fetchAssoc();
+    $entity_id = $record['entity_id'];
+    $node = node_load($entity_id);
+    // watchdog("mobile_15", '<pre>' . print_r( $entity_id, true) . '</pre>'); 
+    $service_content_type = field_get_items('node', $node, 'field_service_content_type');
+    drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
+    foreach ($service_content_type as $key => $value) {
+
+      $content_type = field_view_value('node', $node, 'field_service_content_type', $service_content_type[$key], array());
+      $content_result = render($content_type);
+      $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
+
+      watchdog("mobile_1", '<pre>' . print_r($content_type_val, true) . '</pre>');
+
+      if ($content_type_val == 'text') {
+        form_set_error('field_story_kicker_text', t('Content Text Required.'));
+        //drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
+        drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').show(); });", 'inline');
+      }
+      elseif ($content_type_val == 'image') {
+        form_set_error('field_story_large_image', t('Content Image Required.'));
+        // drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').hide(); jQuery('#edit-field-service-audio').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
+        drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-large-image').show();});", 'inline');
+      }
+      elseif ($content_type_val == 'video') {
+        form_set_error('field_service_video', t('Content Video Required.'));
+        drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();});", 'inline');
+      }
+      elseif ($content_type_val == 'audio') {
+        form_set_error('field_service_audio', t('Content Audio Required.'));
+        drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
+      }
+      elseif ($content_type_val == 'wap(image,text,videoandaudio)') {
+        form_set_error('field_story_kicker_text', t('Content Text Required.'));
+        form_set_error('field_story_large_image', t('Content Image Required.'));
+        form_set_error('field_service_video', t('Content Video Required.'));
+        form_set_error('field_service_audio', t('Content Audio Required.'));
+        drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').show(); jQuery('#edit-field-story-large-image').show();jQuery('#edit-field-service-audio').show();jQuery('#edit-field-service-video').show();});", 'inline');
+      }
+    }
+  }
 }
 
 /**
@@ -193,41 +259,102 @@ function itg_service_association_after_build($form, &$form_state) {
  * @return array $form
  */
 function itg_mobile_content_custom_callback(&$form, &$form_state) {
-  $form_state['rebuild'] = true;  // not helping 
-  $nid = '221'; //$form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-  $node = node_load($nid);
-  //$item = entity_load('field_collection_item', array($item_id));
-  // chain logo
-  //$chainLogo = field_view_field('node', $node, 'field_service_content_type', '');
- $service_content_type = field_get_items('node', $node, 'field_service_content_type');
- $form['title'] =  array('#access' => TRUE);
- $form['field_story_large_image']['#access'] = FALSE;
- foreach ($service_content_type as $key=>$value) {
-    $content_type  = field_view_value('node', $node, 'field_service_content_type', $service_content_type[$key], array());
-    $content_value .=  render($content_type) . ",";
-    if($content_value == 'Text') {
-      $form['field_story_large_image']['#access'] = FALSE;
-    }
-}
-  $content_result = rtrim($content_value, ',');  
-  
-  
-  $form['field_story_kicker_text'][LANGUAGE_NONE][0]['value']['#value'] = $content_result;
-  // remove space from title search field.
-   watchdog("mobile_5", '<pre>' . print_r( $form_state, true) . '</pre>'); 
-   
- // drupal_add_js("jQuery(document).ready(function(){ alert('hi'); jQuery('#edit-field-story-large-image-und-0-ajax-wrapper').hide();});", 'inline');
-  
+  //$form_state['rebuild'] = true;  // not helping
+  $commands = array();
+  $commands[] = ajax_command_invoke('#edit-field-story-kicker-text', 'hide');
+  $commands[] = ajax_command_invoke('#edit-field-story-large-image', 'hide');
+  $commands[] = ajax_command_invoke('#edit-field-service-video', 'hide');
+  $commands[] = ajax_command_invoke('#edit-field-service-audio', 'hide');
+  $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
+  // watchdog("mobile_5", '<pre>' . print_r( $nid, true) . '</pre>'); 
+  $query = db_select('node', 'node')
+      ->fields('service_asso', array('nid', 'vid', 'title'))
+      ->fields('cs', array('entity_id', 'revision_id'))
+      ->fields('td', array('name', 'tid'));
 
-  
-  //return $form['field_story_kicker_text'];
-  //return $form;
-    
-    $commands = array();
-    $commands[] = ajax_command_invoke('#edit-field-story-large-image-und-0-ajax-wrapper', 'hide');
-    $commands[] = ajax_command_replace("#client_entity_wrapper", render($form['field_story_kicker_text']));
-    $page = array('#type' => 'ajax', '#commands' => $commands);
-    ajax_deliver($page);
+  $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id AND cs.entity_type = 'node' AND cs.deleted = '0'");
+  $query->join('taxonomy_term_data', 'td', "cs.field_client_selection_target_id = td.tid");
+  $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id AND (sat.entity_type = 'node' AND sat.deleted = '0')");
+  $query->Join('node', 'service_asso', "sat.field_service_association_title_target_id = service_asso.nid");
+  $query->condition('service_asso.status', 1, '=');
+  $query->condition('service_asso.nid', $association_nid, '=');
+  $query->condition('node.type', array('client_service_association'), 'IN');
+  $query->range(0, 10);
+  //dpq($query); // Display the query. 
+  $result = $query->execute();
+  $name = '';
+  while ($record = $result->fetchAssoc()) {
+    $entity_id = $record['entity_id'];
+    $name .= $record['name'] . ",";
+  }
+
+  $client_name = rtrim($name, ',');
+  // $nid = '221'; //$form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
+  $node = node_load($entity_id);
+  //  watchdog("mobile_8", '<pre>' . print_r( $entity_id, true) . '</pre>');
+
+  $service_content_type = field_get_items('node', $node, 'field_service_content_type');
+
+  // $i = 1;
+  foreach ($service_content_type as $key => $value) {
+
+    $content_type = field_view_value('node', $node, 'field_service_content_type', $service_content_type[$key], array());
+    $content_result = render($content_type);
+    $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
+
+    // watchdog("mobile_".$i, '<pre>' . print_r( $content_type, true) . '</pre>'); 
+    if ($content_type_val == 'text') {
+      $commands[] = ajax_command_invoke('#edit-field-story-kicker-text', 'show');
+    }
+    elseif ($content_type_val == 'image') {
+      $commands[] = ajax_command_invoke('#edit-field-story-large-image', 'show');
+    }
+    elseif ($content_type_val == 'video') {
+      $commands[] = ajax_command_invoke('#edit-field-service-video', 'show');
+    }
+    elseif ($content_type_val == 'audio') {
+      $commands[] = ajax_command_invoke('#edit-field-service-audio', 'show');
+    }
+    elseif ($content_type_val == 'wap(image,text,videoandaudio)') {
+      $commands[] = ajax_command_invoke('#edit-field-story-kicker-text', 'show');
+      $commands[] = ajax_command_invoke('#edit-field-story-large-image', 'show');
+      $commands[] = ajax_command_invoke('#edit-field-service-video', 'show');
+      $commands[] = ajax_command_invoke('#edit-field-service-audio', 'show');
+    }
+    // $i++;
+  }
+
+  $form['title']['#value'] = $client_name;
+  //watchdog("mobile_6", '<pre>' . print_r( $form['title'], true) . '</pre>'); 
+  //field_story_kicker_text
+  $commands[] = ajax_command_replace("#client_entity_wrapper", render($form['title']));
+  $page = array('#type' => 'ajax', '#commands' => $commands);
+  ajax_deliver($page);
+}
+
+/**
+ * ajax service callback
+ * @param array $form
+ * @param array reference $form_state
+ * @return array $form
+ */
+function itg_mobile_content_selection_callback(&$form, &$form_state) {
+  //$form_state['rebuild'] = true;  // not helping
+
+  $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
+
+
+  $form['title']['#value'] = $client_name;
+
+
+  $field_client_selection = $form_state['values']['field_client_selection'][LANGUAGE_NONE];
+  foreach ($field_client_selection as $key => $value) {
+    watchdog("mobile_ass", '<pre>' . print_r($key, true) . '</pre>');
+    watchdog("mobile_association", '<pre>' . print_r($value, true) . '</pre>');
+    $client_selection = $value['target_id'];
+  }
+
+  //field_story_kicker_text
 }
 
 /**

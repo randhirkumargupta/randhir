@@ -95,7 +95,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -137,7 +137,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -228,7 +228,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -277,6 +277,46 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-client_service_association-field_service_content_type'.
+  $field_instances['node-client_service_association-field_service_content_type'] = array(
+    'bundle' => 'client_service_association',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_service_content_type',
+    'label' => 'Content Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
       'weight' => 5,
     ),
   );
@@ -660,8 +700,9 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-create_content-field_client_title'.
-  $field_instances['node-create_content-field_client_title'] = array(
+  // Exported field_instance:
+  // 'node-create_content-field_service_association_title'.
+  $field_instances['node-create_content-field_service_association_title'] = array(
     'bundle' => 'create_content',
     'default_value' => NULL,
     'deleted' => 0,
@@ -669,10 +710,12 @@ function feature_for_mobile_services_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -683,8 +726,8 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_client_title',
-    'label' => 'Client',
+    'field_name' => 'field_service_association_title',
+    'label' => 'Service Title',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -695,23 +738,22 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 43,
+      'weight' => 2,
     ),
   );
 
-  // Exported field_instance: 'node-create_content-field_content_service'.
-  $field_instances['node-create_content-field_content_service'] = array(
+  // Exported field_instance: 'node-create_content-field_service_audio'.
+  $field_instances['node-create_content-field_service_audio'] = array(
     'bundle' => 'create_content',
-    'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please upload audio',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'file',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
+        'type' => 'file_default',
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -722,22 +764,117 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_content_service',
-    'label' => 'Service',
-    'required' => 1,
+    'field_name' => 'field_service_audio',
+    'label' => 'Content Audio',
+    'required' => 0,
     'settings' => array(
+      'description_field' => 0,
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'mp3 wav',
+      'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'file',
       'settings' => array(
-        'size' => 60,
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
       ),
-      'type' => 'text_textfield',
-      'weight' => 44,
+      'type' => 'file_generic',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-create_content-field_service_video'.
+  $field_instances['node-create_content-field_service_video'] = array(
+    'bundle' => 'create_content',
+    'deleted' => 0,
+    'description' => 'Please upload video.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_service_video',
+    'label' => 'Content Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'mp4 avi flv',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 7,
     ),
   );
 
@@ -765,7 +902,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_kicker_text',
-    'label' => 'Content text',
+    'label' => 'Content',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -779,7 +916,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 4,
     ),
   );
 
@@ -831,11 +968,11 @@ function feature_for_mobile_services_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 0,
+            'imce' => 'imce',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -855,7 +992,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 48,
+      'weight' => 5,
     ),
   );
 
@@ -1112,46 +1249,6 @@ function feature_for_mobile_services_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 21,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-service_creation-field_service_content_type'.
-  $field_instances['node-service_creation-field_service_content_type'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_content_type',
-    'label' => 'Content Type',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 7,
     ),
   );
 
@@ -1463,15 +1560,16 @@ function feature_for_mobile_services_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Client');
   t('Client Title');
   t('Client selection');
   t('Contact Person Name');
+  t('Content');
+  t('Content Audio');
   t('Content Count');
   t('Content Sharing mode');
   t('Content Type');
+  t('Content Video');
   t('Content image');
-  t('Content text');
   t('Delivery Mode');
   t('Email address');
   t('Expiry Date');
@@ -1486,8 +1584,9 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('Header');
   t('Mail to');
   t('Mobile Number');
+  t('Please upload audio');
+  t('Please upload video.');
   t('Regional service');
-  t('Service');
   t('Service Title');
   t('Short Description');
 

@@ -42,17 +42,9 @@
       <?php if (!empty($content)): ?>
         <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
           <?php
-          //print render($content) 
-          //print '<pre>';
-         // print_r($content);
-         // print '</pre>';
-          //exit;
+         
            if ($node->op == 'Preview') {
           ?>
-
-             
-   
-          
           <div class="content-node-view">
             <div class="poll-details">
               <h2><?php echo t('Client Client'); ?></h2>

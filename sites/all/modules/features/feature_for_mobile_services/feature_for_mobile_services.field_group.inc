@@ -85,8 +85,8 @@ function feature_for_mobile_services_field_group_info() {
     'weight' => '12',
     'children' => array(
       0 => 'field_ftp_ip_address',
-      1 => 'field_ftp_password',
-      2 => 'field_ftp_username',
+      1 => 'field_ftp_username',
+      2 => 'field_ftp_password',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
