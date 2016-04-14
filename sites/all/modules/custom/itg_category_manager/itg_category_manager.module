@@ -273,17 +273,24 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#suffix' => '</div>',
       );
       if ($form['tid']['#value'] !== NULL) {
-        $form['state-mode'] = array(
-          '#type' => 'radios',
-          '#title' => t('Disable mode'),
-          '#options' => array('Forcefully', 'Manually'),          
-          '#weight' => 20,
-          '#states' => array(
-            'visible' => array(
-              ':input[name="term_state"]' => array('checked' => FALSE),
+        $term_status = itg_category_manager_term_state($form['tid']['#value']);
+        if ($term_status) {
+          $form['state-mode'] = array(
+            '#type' => 'radios',
+            '#title' => t('Disable mode'),
+            '#options' => array('Forcefully', 'Manually'),          
+            '#weight' => 20,
+            '#states' => array(
+              'visible' => array(
+                ':input[name="term_state"]' => array('checked' => FALSE),
+              ),
             ),
-          ),
-        );
+          );
+        }
+        else {
+          $form['term_state']['#description'] = t('This category is currently in inactive mode.');          
+        }
+        
       }
       // Hide publish time field.
       $form['field_publish_time']['#prefix'] = '<div style="display:none;">';
@@ -387,8 +394,16 @@ function itg_category_manager_add_form_after_build($form, &$form_state) {
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'category-manager', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
+  );  
+  // Hide save buttons once someone uncheck state checkbox.
+  $form['actions']['submit']['#states'] = array(
+    'invisible' => array(
+      ':input[name="state-mode"]' => array(
+        array('value' => '0'),
+        array('value' => '1'),
+      ),      
+    ),
   );
-
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
