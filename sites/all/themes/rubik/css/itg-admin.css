@@ -1563,6 +1563,7 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .celebrity-about .field{float: left; width: 60% !important;}
 .field-name-field-story-schedule-date-time .date-padding .form-item:first-child .date-clear, 
 .field-name-field-story-expiry-date .date-padding .form-item:first-child .date-clear, 
+.field-name-field-story-issue-date .date-padding .form-item:first-child .date-clear, 
 .page-manage-issues #edit-title, .date-icon{background: url('../images/calendar.png') center right 5px no-repeat !important;}
 
 /* ITGCMS QUIZ */
@@ -1653,3 +1654,5 @@ input[name="field_newsl_add_news_und_0_remove_button"],
 .my-stats h2{font-size: 18px; margin: 10px 0;}
 .my-stats-last-details{display: inline-block; width: 100%;}
 .my-stats-left{padding-bottom: 5px;}
+.field-name-field-story-category .hierarchical-select-wrapper .dropbox{margin-left: 300px;}
+.field-name-field-story-issue-date .form-item label{display: none;}
