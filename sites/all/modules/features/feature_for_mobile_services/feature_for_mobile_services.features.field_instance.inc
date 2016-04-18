@@ -69,7 +69,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -92,9 +92,9 @@ function feature_for_mobile_services_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 8,
     ),
   );
@@ -111,7 +111,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 11,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -134,9 +134,9 @@ function feature_for_mobile_services_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 7,
     ),
   );
@@ -806,7 +806,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -874,12 +874,13 @@ function feature_for_mobile_services_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
-  // Exported field_instance: 'node-create_content-field_story_kicker_text'.
-  $field_instances['node-create_content-field_story_kicker_text'] = array(
+  // Exported field_instance:
+  // 'node-create_content-field_story_expert_description'.
+  $field_instances['node-create_content-field_story_expert_description'] = array(
     'bundle' => 'create_content',
     'default_value' => NULL,
     'deleted' => 0,
@@ -890,7 +891,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -901,7 +902,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_story_kicker_text',
+    'field_name' => 'field_story_expert_description',
     'label' => 'Content',
     'required' => 0,
     'settings' => array(
@@ -913,10 +914,10 @@ function feature_for_mobile_services_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
-      'weight' => 4,
+      'type' => 'text_textarea',
+      'weight' => 5,
     ),
   );
 
@@ -992,7 +993,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 

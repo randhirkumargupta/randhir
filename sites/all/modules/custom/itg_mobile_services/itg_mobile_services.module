@@ -80,8 +80,9 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
     case 'client_service_association_node_form':
       unset($form['#metatags']);
+      $_SESSION['current_path'] = arg();
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'clients-listing', array(
+        '#markup' => l(t('Cancel'), 'service-association-listing', array(
           'attributes' => array(
             'class' => 'button'
           )
@@ -105,16 +106,15 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       $form['field_client_selection'][LANGUAGE_NONE]['#ajax'] = array(
         'callback' => 'itg_mobile_content_selection_callback',
-        'method' => 'replace', // the data would replace the field
         'event' => 'blur', // On change of the selection this action would take place
       );
 
       unset($form['title']);
       $form['#after_build'][] = 'itg_service_association_after_build';
-
       if (empty($_GET['destination'])) {
         $_GET['destination'] = 'service-association-listing';
       }
+
       break;
     case 'create_content_node_form':
       // unset($form['title']);
@@ -133,8 +133,8 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       );
 
       $form['#validate'][] = 'itg_mobile_association_validator';
-
-      drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
+      $form['#after_build'][] = 'itg_service_content_after_build';
+      drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
 
       break;
   }
@@ -153,7 +153,7 @@ function itg_mobile_association_validator($form, &$form_state) {
 
   // watchdog("mobile_5", '<pre>' . print_r( $nid, true) . '</pre>'); 
   if ($target_id) {
-    $contact_text = ($form_state['values']['field_story_kicker_text'][LANGUAGE_NONE][0]['value']) ? trim($form_state['values']['field_story_kicker_text'][LANGUAGE_NONE][0]['value']) : '';
+    $contact_text = ($form_state['values']['field_story_expert_description'][LANGUAGE_NONE][0]['value']) ? trim($form_state['values']['field_story_expert_description'][LANGUAGE_NONE][0]['value']) : '';
     $contact_image = ($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid']) ? trim($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid']) : '';
     $contact_audio = ($form_state['values']['field_service_audio'][LANGUAGE_NONE][0]['fid']) ? trim($form_state['values']['field_service_audio'][LANGUAGE_NONE][0]['fid']) : '';
     $contact_video = ($form_state['values']['field_service_video'][LANGUAGE_NONE][0]['fid']) ? trim($form_state['values']['field_service_video'][LANGUAGE_NONE][0]['fid']) : '';
@@ -166,7 +166,7 @@ function itg_mobile_association_validator($form, &$form_state) {
       $node = node_load($entity_id);
       // watchdog("mobile_15", '<pre>' . print_r( $entity_id, true) . '</pre>'); 
       $service_content_type = field_get_items('node', $node, 'field_service_content_type');
-      drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
+      drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
       foreach ($service_content_type as $key => $value) {
 
         $content_type = field_view_value('node', $node, 'field_service_content_type', $service_content_type[$key], array());
@@ -174,8 +174,8 @@ function itg_mobile_association_validator($form, &$form_state) {
         $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
 
         if ($content_type_val == 'text') {
-          form_set_error('field_story_kicker_text', t('Content Text Required.'));
-          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').show(); });", 'inline');
+          form_set_error('field_story_expert_description', t('Content Text Required.'));
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').show(); });", 'inline');
         }
         elseif ($content_type_val == 'image') {
           form_set_error('field_story_large_image', t('Content Image Required.'));
@@ -183,18 +183,18 @@ function itg_mobile_association_validator($form, &$form_state) {
         }
         elseif ($content_type_val == 'video') {
           form_set_error('field_service_video', t('Content Video Required.'));
-          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();});", 'inline');
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();});", 'inline');
         }
         elseif ($content_type_val == 'audio') {
           form_set_error('field_service_audio', t('Content Audio Required.'));
-          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
         }
         elseif ($content_type_val == 'wap(image,text,videoandaudio)') {
-          form_set_error('field_story_kicker_text', t('Content Text Required.'));
+          form_set_error('field_story_expert_description', t('Content Text Required.'));
           form_set_error('field_story_large_image', t('Content Image Required.'));
           form_set_error('field_service_video', t('Content Video Required.'));
           form_set_error('field_service_audio', t('Content Audio Required.'));
-          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-kicker-text').show(); jQuery('#edit-field-story-large-image').show();jQuery('#edit-field-service-audio').show();jQuery('#edit-field-service-video').show();});", 'inline');
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').show(); jQuery('#edit-field-story-large-image').show();jQuery('#edit-field-service-audio').show();jQuery('#edit-field-service-video').show();});", 'inline');
         }
       }
     }
@@ -231,6 +231,18 @@ function itg_service_association_after_build($form, &$form_state) {
   return $form;
 }
 
+
+/**
+ * after_build itg_service_content_after_build
+ * @param array $form
+ * @param array reference $form_state
+ * @return array $form
+ */
+function itg_service_content_after_build($form, &$form_state) {
+  $form['title']['#attributes']['readonly'] = 'readonly';
+  return $form;
+}
+
 /**
  * ajax service callback
  * @param array $form
@@ -240,7 +252,7 @@ function itg_service_association_after_build($form, &$form_state) {
 function itg_mobile_content_custom_callback(&$form, &$form_state) {
   //$form_state['rebuild'] = true;  // not helping
   $commands = array();
-  $commands[] = ajax_command_invoke('#edit-field-story-kicker-text', 'hide');
+  $commands[] = ajax_command_invoke('#edit-field-story-expert-description', 'hide');
   $commands[] = ajax_command_invoke('#edit-field-story-large-image', 'hide');
   $commands[] = ajax_command_invoke('#edit-field-service-video', 'hide');
   $commands[] = ajax_command_invoke('#edit-field-service-audio', 'hide');
@@ -276,7 +288,7 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
         $content_result = render($content_type);
         $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
         if ($content_type_val == 'text') {
-          $commands[] = ajax_command_invoke('#edit-field-story-kicker-text', 'show');
+          $commands[] = ajax_command_invoke('#edit-field-story-expert-description', 'show');
         }
         elseif ($content_type_val == 'image') {
           $commands[] = ajax_command_invoke('#edit-field-story-large-image', 'show');
@@ -288,7 +300,7 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
           $commands[] = ajax_command_invoke('#edit-field-service-audio', 'show');
         }
         elseif ($content_type_val == 'wap(image,text,videoandaudio)') {
-          $commands[] = ajax_command_invoke('#edit-field-story-kicker-text', 'show');
+          $commands[] = ajax_command_invoke('#edit-field-story-expert-description', 'show');
           $commands[] = ajax_command_invoke('#edit-field-story-large-image', 'show');
           $commands[] = ajax_command_invoke('#edit-field-service-video', 'show');
           $commands[] = ajax_command_invoke('#edit-field-service-audio', 'show');
@@ -297,7 +309,7 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
       $form['title']['#description'] = '';
       $form['title']['#value'] = $client_name;
       //watchdog("mobile_6", '<pre>' . print_r( $form['title'], true) . '</pre>'); 
-      //field_story_kicker_text
+      //field_story_expert_description
       $commands[] = ajax_command_replace("#client_entity_wrapper", render($form['title']));
       $page = array('#type' => 'ajax', '#commands' => $commands);
       ajax_deliver($page);
@@ -314,9 +326,8 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
 function itg_mobile_content_selection_callback(&$form, &$form_state) {
 
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-
-  //$form['title']['#value'] = $client_name;
-
+//HTTP_REFERER
+  watchdog("url", '<pre>' . print_r($_SESSION, true) . '</pre>');
   $field_client_selection = $form_state['values']['field_client_selection'][LANGUAGE_NONE];
   //$name = array();
   $client_name = '';
@@ -331,6 +342,7 @@ function itg_mobile_content_selection_callback(&$form, &$form_state) {
     $query->condition('node.status', 1, '=');
     $query->condition('cs.field_client_selection_target_id', $target_id, '=');
     $query->condition('sat.field_service_association_title_target_id', $association_nid, '=');
+    $query->condition('node.nid', $association_nid, '=');
     $query->condition('node.type', array('client_service_association'), 'IN');
     $query->range(0, 1);
 
@@ -363,10 +375,9 @@ function itg_mobile_content_selection_callback(&$form, &$form_state) {
         );
       }
     }
-   
+
     // watchdog("mobile_association", '<pre>' . print_r($client_selection, true) . '</pre>');
   }
-
 }
 
 /**
@@ -423,7 +434,6 @@ function itg_mobile_services_field_group_build_pre_render_alter(&$element) {
  */
 function itg_mobile_services_views_pre_render(&$view) {
   //Add "Create Client" button on listing page of Client Details
-  // echo $view->current_display;
   if (isset($view->name) && $view->name == "clients_details") {
     if (isset($view->current_display) && $view->current_display == "page") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
