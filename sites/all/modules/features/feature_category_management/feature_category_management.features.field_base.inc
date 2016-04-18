@@ -84,6 +84,7 @@ function feature_category_management_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         1 => 'No Follow',
+        2 => 'No Index',
       ),
       'allowed_values_function' => '',
     ),
