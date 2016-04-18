@@ -1107,8 +1107,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .page-node-revisions .column-side .views-label, 
 .page-node-revisions .column-side .field-content{font-size: 13px;}
 .node-issue-form fieldset legend .form-required, 
-.node-supplement-form fieldset legend .form-required, 
-.node-magazine-form fieldset legend .form-required{display: none;}
+.node-supplement-form fieldset legend .form-required{display: none;}
 .page-node-add-issue .vertical-tabs-panes, 
 .node-supplement-form .vertical-tabs-panes, 
 .node-magazine-form .vertical-tabs-panes{padding: 10px 10px 0;} 
@@ -1564,7 +1563,7 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .field-name-field-story-schedule-date-time .date-padding .form-item:first-child .date-clear, 
 .field-name-field-story-expiry-date .date-padding .form-item:first-child .date-clear, 
 .field-name-field-story-issue-date .date-padding .form-item:first-child .date-clear, 
-.page-manage-issues #edit-title, .date-icon{background: url('../images/calendar.png') center right 5px no-repeat !important;}
+.page-manage-issues #edit-title, .date-icon, .container-inline-date input.form-text{background: url('../images/calendar.png') center right 5px no-repeat !important;}
 
 /* ITGCMS QUIZ */
 .node-quiz-form .field-add-more-submit{margin-left: 0;}
@@ -1656,3 +1655,6 @@ input[name="field_newsl_add_news_und_0_remove_button"],
 .my-stats-left{padding-bottom: 5px;}
 .field-name-field-story-category .hierarchical-select-wrapper .dropbox{margin-left: 300px;}
 .field-name-field-story-issue-date .form-item label{display: none;}
+ .view-manage-issues .view-filters input.form-text{height: auto;}
+ [id*="field-survey-add-questions-values"] .field-name-field-survey-answer-type span.error{padding-left: 98px !important;}
+ 
