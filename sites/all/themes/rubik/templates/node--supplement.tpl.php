@@ -42,7 +42,7 @@
   <div class="field-div"><div class="field-label">Supplement Title: </div><div class="field-item"><?php print $title; ?></div></div>
   <div class="field-div"><div class="field-label">Magazine: </div><div class="field-item"><?php print $node->field_supp_select_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
   <div class="field-div"><div class="field-label">Issue: </div><div class="field-item"><?php print date('m/d/Y', strtotime($node->field_supp_issue[LANGUAGE_NONE][0]['value'])); ?></div></div>
-  <div class="field-div"><div class="field-label">Status: </div><div class="field-item"><?php print $status ? 'Published' : 'Unpublished'; ?></div></div>
+  <div class="field-div"><div class="field-label">Status: </div><div class="field-item"><?php print $node->field_supp_publish[LANGUAGE_NONE][0]['value'] ? 'Published' : 'Unpublished'; ?></div></div>
   <div class="field-div">
       <div class="field-label">Attached XML Files:</div>
       <div class="field-item">
