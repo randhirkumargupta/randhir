@@ -1,22 +1,456 @@
-/**
- * @file
- * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
- *
- * When you turn on CSS aggregation at admin/config/development/performance, all
- * of these @include files will be combined into a single file.
- */
+/*---------------------------- ITG CSS -----------------------------------*/
+/* Global CSS */
+/* line 4, ../sass/styles.scss */
+body {
+  font: 400 14px/18px 'muli';
+  color: #2f2f2f;
+  box-sizing: border-box;
+}
 
-/* HTML element (SMACSS base) rules */
-@import "normalize.css";
+/* line 9, ../sass/styles.scss */
+h1, h2, h3, h4 {
+  font-weight: 500;
+}
 
-/* Layout rules */
-@import "layouts/responsive.css";
+/* line 10, ../sass/styles.scss */
+.mr-0, *, div.filefield-source .form-item {
+  margin: 0;
+}
 
-/* Component (SMACSS module) rules */
-@import "components/misc.css";
-/* Optionally, add your own components here. */
-@import "print.css";
+/* line 13, ../sass/styles.scss */
+.mt-10 {
+  margin-top: 10px;
+}
 
-/* SMACSS theme rules */
-/* @import "theme-A.css"; */
-/* @import "theme-B.css"; */
+/* line 16, ../sass/styles.scss */
+.ml-10 {
+  margin-left: 10px;
+}
+
+/* line 19, ../sass/styles.scss */
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+/* line 22, ../sass/styles.scss */
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+/* line 25, ../sass/styles.scss */
+.pd-0, *, .image-preview {
+  padding: 0;
+}
+
+/* line 28, ../sass/styles.scss */
+.pd-10 {
+  padding: 10px;
+}
+
+/* line 31, ../sass/styles.scss */
+.pd-30 {
+  padding: 30px;
+}
+
+/* line 34, ../sass/styles.scss */
+.pdlr-30 {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* line 38, ../sass/styles.scss */
+.pdtb-10, .header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* line 42, ../sass/styles.scss */
+.pdb-10, .success-message, .messages--status {
+  padding-bottom: 10px;
+}
+
+/* line 45, ../sass/styles.scss */
+.pdr-10 {
+  padding-right: 10px;
+}
+
+/* line 48, ../sass/styles.scss */
+.no-bullet {
+  list-style: none;
+}
+
+/* line 51, ../sass/styles.scss */
+.no-underline {
+  text-decoration: none;
+}
+
+/* line 54, ../sass/styles.scss */
+.db {
+  display: block;
+}
+
+/* line 57, ../sass/styles.scss */
+.dib, .btn, .add-more, .img-crt, .form-type-managed-file .filefield-source {
+  display: inline-block;
+}
+
+/* line 60, ../sass/styles.scss */
+.vmid {
+  vertical-align: middle;
+}
+
+/* line 63, ../sass/styles.scss */
+.vtop, .btn, .add-more, .img-crt, .form-type-managed-file .filefield-source {
+  vertical-align: top;
+}
+
+/* line 66, ../sass/styles.scss */
+.full {
+  width: 100%;
+}
+
+/* line 69, ../sass/styles.scss */
+.fleft {
+  float: left;
+}
+
+/* line 72, ../sass/styles.scss */
+.fright {
+  float: right;
+}
+
+/* line 75, ../sass/styles.scss */
+.pos-rel, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image {
+  position: relative;
+}
+
+/* line 78, ../sass/styles.scss */
+.of-hide, .form-type-managed-file .filefield-source {
+  overflow: hidden;
+}
+
+/* line 81, ../sass/styles.scss */
+.btn {
+  background-color: #337ab7;
+  border: 1px solid #2e6da4;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+}
+/* line 95, ../sass/styles.scss */
+.btn:hover {
+  background-color: #286090;
+  border-color: #204d74;
+  color: #fff;
+}
+
+/* line 101, ../sass/styles.scss */
+.add-more, .img-crt {
+  background-color: #1fb5ad;
+  border: 1px solid #1fb5ad;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+}
+/* line 115, ../sass/styles.scss */
+.add-more:hover, .img-crt:hover {
+  background-color: #1fb5ad;
+  border: 1px solid #1fb5ad;
+}
+
+/* line 120, ../sass/styles.scss */
+a.ckeditor_links {
+  font-size: 12px;
+  color: #0c8bb1;
+  margin-left: 250px;
+  margin-top: 5px;
+  text-decoration: underline;
+}
+/* line 126, ../sass/styles.scss */
+a.ckeditor_links:hover {
+  text-decoration: underline;
+}
+
+/* line 130, ../sass/styles.scss */
+.desc-popup, .form-type-textfield .form-text + div.description, .form-type-managed-file .form-managed-file + div.description, .img-crt + .pre-desc {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  color: #8d8d8d;
+  display: none;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  max-width: 300px;
+  transform: translateY(-50%);
+}
+/* line 140, ../sass/styles.scss */
+.desc-popup:before, .form-type-textfield .form-text + div.description:before, .form-type-managed-file .form-managed-file + div.description:before, .img-crt + .pre-desc:before {
+  border-width: 7px 13px 7px 7px;
+  border-style: solid;
+  border-color: transparent #d9d9d9 transparent transparent;
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 0;
+  left: -20px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+/* line 153, ../sass/styles.scss */
+.desc-popup:after, .form-type-textfield .form-text + div.description:after, .form-type-managed-file .form-managed-file + div.description:after, .img-crt + .pre-desc:after {
+  border-width: 7px 13px 7px 7px;
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 0;
+  left: -17px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* line 169, ../sass/styles.scss */
+.success-message, .messages--status {
+  color: #009c00;
+  font-size: 13px;
+}
+
+/* line 175, ../sass/styles.scss */
+input[type="text"], select, input[type="password"] {
+  border: 1px solid #d9d9d9;
+  height: 36px;
+  line-height: 34px;
+  padding: 5px;
+  color: #2f2f2f;
+}
+
+/* line 182, ../sass/styles.scss */
+textarea {
+  border: 1px solid #d9d9d9;
+  height: 100px;
+  padding: 5px;
+  color: #2f2f2f;
+  resize: none;
+}
+
+/* line 189, ../sass/styles.scss */
+.form-required, .error {
+  color: red;
+}
+
+/* line 192, ../sass/styles.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* Layout CSS */
+/* line 200, ../sass/styles.scss */
+.container {
+  max-width: 1200px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+
+/* line 206, ../sass/styles.scss */
+.header {
+  box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* Form CSS */
+/* line 214, ../sass/styles.scss */
+.node-form h2 {
+  background-color: #fefafb;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 8px 20px;
+  line-height: 28px;
+  font-size: 18px;
+  margin: 15px 0;
+}
+/* line 223, ../sass/styles.scss */
+.node-form input[type="text"], .node-form select, .node-form .form-textarea-wrapper textarea {
+  width: 100%;
+  max-width: 332px;
+}
+
+/* line 229, ../sass/styles.scss */
+.form-textarea-wrapper .grippie {
+  display: none !important;
+}
+
+/* line 232, ../sass/styles.scss */
+.form-type-textfield,
+.form-type-select,
+.form-type-managed-file,
+.form-type-checkboxes,
+.form-type-autocomplete-deluxe,
+.form-type-textarea {
+  padding: 0 30px;
+  margin: 30px 0;
+}
+
+/* line 241, ../sass/styles.scss */
+.form-type-textfield > label,
+.form-type-textarea > label,
+.form-type-select > label,
+.form-type-autocomplete-deluxe > label,
+.form-type-managed-file > label,
+.form-type-checkboxes > label {
+  width: 220px;
+  float: left;
+  padding-right: 20px;
+}
+
+/* line 251, ../sass/styles.scss */
+.form-type-textfield > label + div,
+.form-type-textarea > label + div,
+.form-type-select > label + div,
+.form-type-managed-file > label + div,
+.form-type-checkboxes > label + div {
+  padding-left: 220px;
+}
+
+/* line 259, ../sass/styles.scss */
+.form-type-autocomplete-deluxe .autocomplete-deluxe-multiple {
+  background: none;
+  box-shadow: 0;
+  border: 1px solid #d9d9d9;
+  padding: 0;
+  width: 100%;
+  max-width: 332px;
+}
+
+/* line 272, ../sass/styles.scss */
+div.description, .pre-desc {
+  font-size: 12px;
+  color: #8d8d8d;
+}
+
+/* line 276, ../sass/styles.scss */
+.form-type-textfield {
+  position: relative;
+}
+/* line 279, ../sass/styles.scss */
+.form-type-textfield .form-text + div.description {
+  left: 600px;
+}
+/* line 283, ../sass/styles.scss */
+.form-type-textfield .form-text:hover + div.description {
+  display: block;
+}
+
+/* line 291, ../sass/styles.scss */
+.form-type-managed-file .form-managed-file + div.description {
+  left: 400px;
+}
+/* line 295, ../sass/styles.scss */
+.form-type-managed-file .form-managed-file:hover + div.description {
+  display: block;
+}
+/* line 299, ../sass/styles.scss */
+.form-type-managed-file .filefield-source {
+  width: 134px;
+  height: 28px;
+}
+/* line 306, ../sass/styles.scss */
+.form-type-managed-file .filefield-source .filefield-sources-imce-browse {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+/* line 312, ../sass/styles.scss */
+.form-type-managed-file .filefield-source .filefield-sources-imce-browse:after {
+  content: 'Choose Your File';
+  font-size: 12px;
+  font-weight: 300;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  line-height: 26px;
+  color: #2f2f2f;
+  cursor: pointer;
+}
+
+/* line 336, ../sass/styles.scss */
+.img-crt {
+  margin-left: 250px;
+}
+/* line 339, ../sass/styles.scss */
+.img-crt + .pre-desc {
+  left: 400px;
+}
+/* line 343, ../sass/styles.scss */
+.img-crt:hover + .pre-desc {
+  display: block;
+}
+
+/* line 349, ../sass/styles.scss */
+.image-preview .image-fullname {
+  font-size: 12px;
+  width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: 5px;
+}
+/* line 356, ../sass/styles.scss */
+.image-preview .image-fullname .file-icon {
+  display: none;
+}
+/* line 359, ../sass/styles.scss */
+.image-preview .image-fullname a {
+  color: #2f2f2f;
+  text-decoration: none;
+}
+
+/* line 367, ../sass/styles.scss */
+.form-managed-file .image-widget-data .form-type-textfield {
+  padding: 0 20px;
+  margin: 0;
+}
+/* line 370, ../sass/styles.scss */
+.form-managed-file .image-widget-data .form-type-textfield + .form-type-textfield {
+  margin-top: 10px;
+}
+/* line 374, ../sass/styles.scss */
+.form-managed-file .image-widget-data .form-submit[value="Remove"] {
+  border: none;
+  background: none;
+  color: #ee4d4d;
+  font-size: 13px;
+  position: absolute;
+  left: 775px;
+  top: 7px;
+}
+/* line 383, ../sass/styles.scss */
+.form-managed-file .image-widget-data div.description {
+  width: 200px;
+  left: 370px;
+  background-color: #fff;
+}
