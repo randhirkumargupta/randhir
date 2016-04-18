@@ -11,7 +11,7 @@
 <div id="page">
 
   <header class="header" id="header" role="banner">
-
+    <section class="container">
     <?php if ($logo): ?>
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
     <?php endif; ?>
@@ -47,12 +47,12 @@
     <?php endif; ?>
 
     <?php print render($page['header']); ?>
-
+  </section>
   </header>
 
-  <div id="main">
+  <main id="main">
 
-    <div id="content" class="column" role="main">
+    <section id="content" class="container" role="main">
       <?php print render($page['highlighted']); ?>
       <?php print $breadcrumb; ?>
       <a id="main-content"></a>
@@ -69,7 +69,7 @@
       <?php endif; ?>
       <?php print render($page['content']); ?>
       <?php print $feed_icons; ?>
-    </div>
+    </section>
 
     <div id="navigation">
 
@@ -111,7 +111,7 @@
       </aside>
     <?php endif; ?>
 
-  </div>
+  </main>
 
   <?php print render($page['footer']); ?>
 

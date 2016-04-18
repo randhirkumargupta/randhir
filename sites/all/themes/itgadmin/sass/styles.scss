@@ -1,25 +1,393 @@
-/**
- * @file
- * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
- *
- * When you turn on CSS aggregation at admin/config/development/performance, all
- * of these @include files will be combined into a single file.
- */
+/*---------------------------- ITG CSS -----------------------------------*/
 
-/* Import Sass mixins, variables, Compass modules, etc. */
-@import "init";
+/* Global CSS */
+body{
+  font: 400 14px/18px 'muli';
+  color: #2f2f2f;
+  box-sizing: border-box;
+}
+h1, h2, h3, h4{font-weight: 500;}
+.mr-0{
+  margin: 0;
+}
+.mt-10{
+  margin-top: 10px;
+}
+.ml-10{
+  margin-left: 10px;
+}
+.mb-10{
+  margin-bottom: 10px;
+}
+.mb-5{
+  margin-bottom: 5px;
+}
+.pd-0{
+  padding: 0;
+}
+.pd-10{
+  padding: 10px;
+}
+.pd-30{
+  padding: 30px;
+}
+.pdlr-30{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.pdtb-10{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.pdb-10{
+  padding-bottom: 10px;
+}
+.pdr-10{
+  padding-right: 10px;
+}
+.no-bullet{
+  list-style: none;
+}
+.no-underline{
+  text-decoration: none;
+}
+.db{
+  display: block;
+}
+.dib{
+  display: inline-block;
+}
+.vmid{
+  vertical-align: middle;
+}
+.vtop{
+  vertical-align: top;
+}
+.full{
+  width: 100%;
+}
+.fleft{
+  float: left;
+}
+.fright{
+  float: right;
+}
+.pos-rel{
+  position: relative;
+}
+.of-hide{
+  overflow: hidden;
+}
+.btn{
+    background-color: #337ab7;
+    border: 1px solid #2e6da4;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 6px 12px;
+    text-align: center;
+    white-space: nowrap;
+    @extend .dib;
+    @extend .vtop;
+    text-decoration: none;
+    &:hover{
+    background-color: #286090;
+    border-color: #204d74;
+    color: #fff;
+    }
+}
+.add-more{
+    background-color: #1fb5ad;
+    border: 1px solid #1fb5ad;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 6px 12px;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    @extend .dib;
+    @extend .vtop;
+    &:hover{
+    background-color: #1fb5ad;
+    border: 1px solid #1fb5ad;
+    }
+}
+a.ckeditor_links{
+  font-size: 12px;
+  color: #0c8bb1;
+  margin-left: 250px;
+  margin-top: 5px;
+  text-decoration: underline;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+.desc-popup{
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  color: #8d8d8d;
+  display: none;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  max-width: 300px;
+  transform: translateY(-50%);
+  &:before{
+    border-width: 7px 13px 7px 7px;
+    border-style: solid;
+    border-color: transparent #d9d9d9 transparent transparent;
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 0;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  &:after{
+    border-width: 7px 13px 7px 7px;
+    border-style: solid;
+    border-color: transparent #fff transparent transparent;
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 0;
+    left: -17px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+}
 
-/* HTML element (SMACSS base) rules */
-@import "normalize";
 
-/* Layout rules */
-@import "layouts/responsive";
+.success-message, .messages--status{
+  color:#009c00;
+  font-size: 13px;
+  @extend .pdb-10;
+}
 
-/* Component (SMACSS module) rules */
-@import "components/misc";
-// Optionally, add your own components here.
-@import "print";
+input[type="text"], select, input[type="password"]{
+  border: 1px solid #d9d9d9;
+  height: 36px;
+  line-height: 34px;
+  padding: 5px;
+  color: #2f2f2f;
+}
+textarea{
+  border: 1px solid #d9d9d9;
+  height: 100px;
+  padding: 5px;
+  color: #2f2f2f;
+  resize: none;
+}
+.form-required, .error{
+  color: red;
+}
+*{
+  @extend .mr-0;
+  @extend .pd-0;
+  box-sizing: border-box;
+}
 
-/* SMACSS theme rules */
-/* @import "theme-A"; */
-/* @import "theme-B"; */
+/* Layout CSS */
+
+.container{
+  max-width: 1200px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+.header{
+  @extend .pdtb-10;
+  box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* Form CSS */
+.node-form{
+  h2{
+    background-color: #fefafb;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 8px 20px;
+    line-height: 28px;
+    font-size: 18px;
+    margin: 15px 0;
+  }
+  input[type="text"], select, .form-textarea-wrapper textarea{
+    width: 100%;
+    max-width: 332px;
+  }
+}
+.form-textarea-wrapper{
+  .grippie{display: none !important;}
+}
+
+.form-type-textfield,
+.form-type-select,
+.form-type-managed-file,
+.form-type-checkboxes,
+.form-type-autocomplete-deluxe,
+.form-type-textarea{
+  padding: 0 30px;
+  margin: 30px 0;
+}
+.form-type-textfield > label, 
+.form-type-textarea > label, 
+.form-type-select > label, 
+.form-type-autocomplete-deluxe > label,
+.form-type-managed-file > label, 
+.form-type-checkboxes > label{
+  width: 220px;
+  float: left;
+  padding-right: 20px;
+}
+.form-type-textfield > label + div, 
+.form-type-textarea > label + div, 
+.form-type-select > label + div, 
+.form-type-managed-file > label + div, 
+.form-type-checkboxes > label + div{
+  padding-left: 220px;
+}
+.form-type-autocomplete-deluxe{
+  .autocomplete-deluxe-multiple{
+    background: none;
+    box-shadow: 0;
+    border: 1px solid #d9d9d9;
+    padding: 0;
+    width: 100%;
+    max-width: 332px;
+  }
+}
+
+div.filefield-source .form-item{
+  @extend .mr-0;
+}
+div.description, .pre-desc{
+  font-size: 12px;
+  color: #8d8d8d;
+}
+.form-type-textfield{
+  position: relative;
+  .form-text{
+    & + div.description{
+      @extend .desc-popup;
+      left: 600px;
+    }
+    &:hover + div.description{
+      display: block;
+    }
+  } 
+}
+.form-type-managed-file{
+  @extend .pos-rel;
+  .form-managed-file{
+    & + div.description{
+      @extend .desc-popup;
+      left: 400px;
+    }
+    &:hover + div.description{
+      display: block;
+    } 
+  } 
+  .filefield-source{
+    @extend .dib;
+    @extend .vtop;
+    @extend .pos-rel;
+    @extend .of-hide;
+    width: 134px;
+    height: 28px;
+    .filefield-sources-imce-browse{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      &:after{
+        content:'Choose Your File';
+        font-size: 12px;
+        font-weight: 300;
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        left: 0; 
+        top: 0;
+        box-sizing: border-box;
+        line-height: 26px;
+        color: #2f2f2f;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.generate-image{
+  @extend .pos-rel;
+}
+.img-crt{
+  @extend .add-more;
+  margin-left: 250px;
+  & + .pre-desc{
+    @extend .desc-popup;
+    left: 400px;
+  }
+  &:hover + .pre-desc{
+    display: block;
+  }
+}
+.image-preview{
+  @extend .pd-0;
+  .image-fullname{
+    font-size: 12px;
+    width: 150px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 5px;
+    .file-icon{
+      display: none;
+    }
+    a{
+      color: #2f2f2f;
+      text-decoration: none;
+    }
+  }
+}
+.form-managed-file{
+  .image-widget-data{
+    .form-type-textfield{
+      padding: 0 20px;
+      margin: 0;
+      & + .form-type-textfield{
+        margin-top: 10px;
+      }
+    }
+    .form-submit[value="Remove"]{
+      border: none;
+      background: none;
+      color: #ee4d4d;
+      font-size: 13px;
+      position: absolute;
+      left: 775px;
+      top: 7px;
+    }
+    div.description{
+      width: 200px;
+      left: 370px;
+      background-color: #fff;
+    }
+  }
+}
+
+
+
+

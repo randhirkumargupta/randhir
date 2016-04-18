@@ -187,6 +187,35 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
   global $user;
   global $base_url;
 
+  if ($form_id == 'taxonomy_form_term') {
+    // code for facebook image field hide and show
+    $form['field_cm_no_follow']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_cm_hide_cat_from_search[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
+    
+     drupal_add_js('jQuery(document).ready(function() {
+             //code to check unchek checkbox when all search engine checkbox is checked
+             
+            jQuery("#edit-field-cm-hide-cat-from-search-und-1").click(function () {
+                if (jQuery("#edit-field-cm-hide-cat-from-search-und-1").is(":checked")) {
+                    // code to checked all checkbox when all is checked in mobile subscriber
+                    jQuery("#edit-field-cm-no-follow-und-1").prop("checked", true);
+                    jQuery("#edit-field-cm-no-follow-und-2").prop("checked", true);
+                   
+                } else {
+                    // unchecked all checkbox      
+                   jQuery("#edit-field-cm-no-follow-und-1").prop("checked", false);
+                    jQuery("#edit-field-cm-no-follow-und-2").prop("checked", false);
+
+                }
+
+            });
+              
+           });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+
   // Delete category functionality.
   if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete')) {
     $tid = $form_state['term']->tid;
