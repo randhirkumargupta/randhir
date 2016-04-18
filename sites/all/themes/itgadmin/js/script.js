@@ -227,14 +227,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   $('.field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .field-add-more-submit').val('+');
   
-  $('.field-name-field-gallery-image').find('.form-text').each(function(){
-    var plaholderText = $(this).prev().text();
-    $(this).attr('placeholder', plaholderText);
-  });
-  $('.field-name-field-gallery-image').find('.form-textarea').each(function(){
-    var plaholderText = $(this).parent().prev().text();
-    $(this).attr('placeholder', plaholderText);
-  });
+  
   $('#edit-field-gallery-image .field-name-field-images').find('.image-widget-data .file-size').each(function(){
     var txt = $(this).text();
     $(this).prev().attr('title', txt);
@@ -382,19 +375,8 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
   $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
   
-  $('.field-name-field-gallery-image .field-widget-image-image .filefield-source-imce').each(function(){
-    if(!($(this).next().hasClass('gallery-browse'))){
-      $(this).after('<a href="javascript:;" class="gallery-browse"><i class="fa fa-picture-o"></i><span>Browse</span></a>');
-    }
-  });
-  $('.field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function(){
-    if($(this).children().hasClass('image-preview')){
-      $(this).addClass('has-preview');
-    }
-    else{
-      $(this).removeClass('has-preview');
-    }
-  });
+  
+  
   
   $('.page-user, .page-admin-people-create').find('.password-suggestions').removeClass('description');
   
@@ -447,6 +429,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   /* Java script code for itgadmin */
   $('.img-crt, .pre-desc').wrapAll('<div class="generate-image"></div>');
+  $('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
   $('.image-widget').each(function(){
     var filename = $(this).find('.file').html();
     var filesize = $(this).find('.file-size').html();
@@ -461,6 +444,25 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     var plaholderText = $(this).prev().text();
     $(this).attr('placeholder', plaholderText);
     $(this).prev('label').hide();
+  });
+  
+  /* jQuery code for photogallery */
+  $('.form-field-name-field-credit-name .form-item .form-text').attr('placeholder', 'Credit Name');
+  $('.form-field-name-field-gallery-image').find('.form-text').each(function(){
+    var plaholderText = $(this).prev().text();
+    $(this).attr('placeholder', plaholderText);
+  });
+  $('.form-field-name-field-gallery-image').find('.form-textarea').each(function(){
+    var plaholderText = $(this).parent().prev().text();
+    $(this).attr('placeholder', plaholderText);
+  });
+  $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function(){
+    if($(this).children().hasClass('image-preview')){
+      $(this).addClass('has-preview');
+    }
+    else{
+      $(this).removeClass('has-preview');
+    }
   });
   
   

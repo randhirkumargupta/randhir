@@ -6,7 +6,19 @@ body{
   color: #2f2f2f;
   box-sizing: border-box;
 }
-h1, h2, h3, h4{font-weight: 500;}
+h1, h2, h3, h4{
+  font-weight: 500;
+}
+table{
+  border-collapse: collapse;
+}
+a, img{
+  text-decoration: none;
+  outline: none;
+}
+img{
+  max-width: 100%;
+}
 .mr-0{
   margin: 0;
 }
@@ -56,6 +68,9 @@ h1, h2, h3, h4{font-weight: 500;}
 }
 .dib{
   display: inline-block;
+}
+.sticky-header{
+  display: none;
 }
 .vmid{
   vertical-align: middle;
@@ -127,6 +142,9 @@ a.ckeditor_links{
     text-decoration: underline;
   }
 }
+.form-submit{
+  cursor: pointer;
+}
 .desc-popup{
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -137,6 +155,8 @@ a.ckeditor_links{
   top: 50%;
   max-width: 300px;
   transform: translateY(-50%);
+  background-color: #fff;
+  z-index: 9999;
   &:before{
     border-width: 7px 13px 7px 7px;
     border-style: solid;
@@ -178,6 +198,7 @@ input[type="text"], select, input[type="password"]{
   line-height: 34px;
   padding: 5px;
   color: #2f2f2f;
+  font-family: 'muli';
 }
 textarea{
   border: 1px solid #d9d9d9;
@@ -185,6 +206,7 @@ textarea{
   padding: 5px;
   color: #2f2f2f;
   resize: none;
+  font-family: 'muli';
 }
 .form-required, .error{
   color: red;
@@ -387,6 +409,158 @@ div.description, .pre-desc{
     }
   }
 }
+.credit-to-all{
+  @extend .dib;
+  @extend .full;
+  > div{
+    @extend .fleft;
+    &.form-field-name-field-credit-to-all{
+      .form-item{
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+    &.form-field-name-field-credit-name{
+      .form-item{
+        @extend .pd-0;
+        margin: -10px 0 0;
+        label{
+          display: none;
+        }
+        .form-text{
+          max-width: 208px;
+        }
+      }
+    }
+  }
+}
+[id*="field-gallery-image-values"]{
+  float: left;
+  @extend .full;
+  thead{
+    @extend .fleft;
+    padding-right: 20px;
+    width: 250px;
+  }
+  tbody{
+    @extend .fleft;
+    width: 720px;
+    margin: 0 -15px;
+    .field-multiple-drag{
+      display: none;
+    }
+    tr{
+      @extend .fleft;
+      width: 33.33%;
+      padding: 0 15px 30px;
+      td:nth-child(2){
+        @extend .pos-rel;
+        @extend .fleft;
+        @extend .full;
+        border: 1px solid #d9d9d9;
+        input[type="text"], select, textarea{
+          height: 28px;
+          line-height: 18px;
+          font-size: 12px;
+        }
+        .form-type-textfield, .form-type-checkboxes, .form-type-textarea, .form-type-managed-file{
+          margin: 10px 0;
+          padding: 0 7px;
+          > label{
+            display: none;
+            & + div{
+              padding: 0;
+            }
+          } 
+        } 
+        .form-type-managed-file{
+          .has-preview{
+            height: 124px;
+            @extend .pos-rel;
+            .image-widget-data{
+              position: absolute;
+              bottom: 0;
+              .form-type-textfield:nth-child(3){
+                display: none;
+              }
+              .form-submit[value="Remove"]{
+                left: auto;
+                background: url('../images/cross_small.png') 3px center no-repeat #fff;
+                width: 16px;
+                height: 16px;
+                border-radius: 2px;
+                right: 3px;
+                top: -73px;
+                text-indent: -9999px;
+              }
+            }
+            .image-preview{
+              padding: 0;
+              @extend .full;
+              img{
+                max-height: 124px;
+              }
+              .image-fullname{
+                @extend .desc-popup;
+              }
+              &:hover{
+                .image-fullname{
+                  display: block;
+                  left: 108%;
+                  width: auto;
+                  overflow: visible;
+                }
+              }
+            }
+          }
+          .image-widget-data{
+            float: none;
+            .filefield-source{
+              width: 100%;
+              height: 124px;
+              .filefield-sources-imce-browse{
+                border-radius: 0;
+                &:after{
+                  content: '\f03e';
+                  font-family: 'FontAwesome';
+                  font-size: 50px;
+                  line-height: 120px;
+                  color: #e5e5e5;
+                }
+              }
+            }
+          }
+          .form-managed-file + div.description {
+            left: 220px;
+            min-width: 230px;
+          }
+        }
+        > input[value="Remove"], > .ajax-new-content > input[value="Remove"]{
+          position: absolute;
+          border: none;
+          background: url('../images/cross_small.png') center center no-repeat;
+          width: 12px;
+          height: 12px;
+          text-indent: -9999px;
+          top: 9px;
+          right: 7px;
+        }
+        &:before{
+          content: 'Gallery Image';
+          background-color: #f6f6f6;
+          padding: 7px;
+          font-size: 12px;
+          display: block;
+        }
+      }
+    }
+  }
+}
+input[name="field_gallery_image_add_more"]{
+  @extend .add-more;
+  margin: 0 0 0 250px;
+}
+
 
 
 
