@@ -120,7 +120,8 @@ function itg_cooking_tips_form_custom_callback($form, &$form_state) {
   else {
     $op = 'created';
   }
-  drupal_set_message(t('Cooking Tips has been ' . $op . ' successfully.'));
+ $cooking_tips_title = $form_state['node']->title;
+  drupal_set_message(t('Cooking Tips <b>' . $cooking_tips_title . '</b> has been ' . $op .'.'));
   $_GET['destination'] = 'manage-cooking-tips';
 }
 
@@ -160,7 +161,8 @@ function itg_food_news_form_custom_callback($form, &$form_state) {
   else {
     $op = 'created';
   }
-  drupal_set_message(t('Food News has been ' . $op . ' successfully.'));
+  $food_title = $form_state['node']->title;
+  drupal_set_message(t('Food News <b>' . $food_title . '</b> has been ' . $op .'.'));
   $_GET['destination'] = 'manage-food-news';
 }
 
@@ -198,8 +200,9 @@ function itg_recipe_form_custom_callback($form, &$form_state) {
   }
   else {
     $op = 'created';
-  }
-  drupal_set_message(t('Recipe has been ' . $op . ' successfully.'));
+  }$recipe_title = $form_state['node']->title;
+  drupal_set_message(t('Recipe <b>' . $recipe_title . '</b> has been ' . $op .'.'));
+  //$_GET['destination'] = $_REQUEST['destination'];
   $_GET['destination'] = 'recipe-management';
 }
 

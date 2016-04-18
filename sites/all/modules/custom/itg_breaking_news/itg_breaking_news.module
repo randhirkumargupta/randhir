@@ -139,19 +139,20 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id)
 /**
  * Custom submit callback for redirecting breaking news form.
  */
-function itg_breaking_news_form_custom_callback($form, &$form_state)
-{
-    if (isset($_SESSION['messages'])) {
-        unset($_SESSION['messages']);
+function itg_breaking_news_form_custom_callback($form, &$form_state) {
+    if (isset($_SESSION['messages']['status'])) {
+        unset($_SESSION['messages']['status']);
     }
-    
     if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'breaking-news') {
-    drupal_set_message(t('Breaking News has been created successfully.'));
-  } else {
-      drupal_set_message(t('Breaking News has been updated successfully.'));
-  }
-    
+        $op = 'created';
+    } else {
+        $op = 'updated';
+    }
+    $breaking_news_title = $form_state['node']->title;
+    drupal_set_message(t('Breaking News <b>' . $breaking_news_title . '</b> has been ' . $op . '.'));
+    $_GET['destination'] = $_REQUEST['destination'];
 }
+
 
 /**
  * Implement hook_views_pre_render
