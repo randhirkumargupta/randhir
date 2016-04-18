@@ -1476,7 +1476,7 @@ form.node-recipe-form .form-type-managed-file .form-managed-file,
 form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible;}
 #group-survey-date-settings .form-item{position: static;}
 .vertical-tabs .node-form-revision-information .fieldset-content{padding: 0 !important;}
-.node-photogallery-form #BrowseMedia .form-type-managed-file .image-widget div.image-widget-data{width: auto;}
+.node-photogallery-form #BrowseMedia .form-type-managed-file .image-widget div.image-widget-data{width: 320px;}
 .manage_recipe_view_menu, .manage_cooking_tips_view_menu{float: left;}
 .field-name-field-recipe-audio .form-managed-file, 
 .field-name-field-recipe-video .form-managed-file{position: relative; float: left;}
@@ -1657,4 +1657,5 @@ input[name="field_newsl_add_news_und_0_remove_button"],
 .field-name-field-story-issue-date .form-item label{display: none;}
  .view-manage-issues .view-filters input.form-text{height: auto;}
  [id*="field-survey-add-questions-values"] .field-name-field-survey-answer-type span.error{padding-left: 98px !important;}
+ .node-food_news-form .vertical-tabs{padding: 10px 0 0 10px;}
  
