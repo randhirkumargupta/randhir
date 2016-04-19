@@ -27,9 +27,8 @@
         //alert(this.value);
         if (this.value == 'Live Blog') {
 
-          $("input[id*=field-mark-as-breaking-band]").hide();
+          $(".field-name-field-mark-as-breaking-band").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
-          $('label[for*="field-mark-as-breaking-band"]').hide();
 
 
 
@@ -37,16 +36,14 @@
         else
         {
 
-          $("input[id*=field-mark-as-breaking-band]").show();
-          $('label[for*="field-mark-as-breaking-band"]').show();
+          $(".field-name-field-mark-as-breaking-band").show();
 
         }
       });
 
       // type check for edit form
       if (type == 'Live Blog') {
-        $('input[id*=field-mark-as-breaking-band]').hide();
-        $('label[for*="field-mark-as-breaking-band"]').hide();
+        $(".field-name-field-mark-as-breaking-band").hide();
       }
 
 

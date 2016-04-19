@@ -601,6 +601,7 @@ form .form-item .form-item{
 #block-itg-survey-survey-tab-form-block,
 #block-itg-quiz-quiz-tab-form-block,
 #block-menu-menu-blog-admin-menu,
+#block-menu-menu-task-allocation-menu,
 #block-itg-recipe-recipe-tab-form-block{
   border-left: none;
   border-right: none;
@@ -613,6 +614,7 @@ form .form-item .form-item{
 #block-menu-menu-story-content-admin-menu .block-content, 
 #block-menu-menu-ask-an-expert-menu .block-content,
 #block-menu-menu-photogallery-admin-menu .block-content,
+#block-menu-menu-task-allocation-menu .block-content,
 #block-menu-menu-blog-admin-menu .block-content,
 #block-itg-astro-astro-tab-form-block .block-content,
 #block-itg-survey-survey-tab-form-block .block-content,
@@ -623,6 +625,7 @@ form .form-item .form-item{
 .block-itg-story-list, 
 #block-menu-menu-story-content-admin-menu .block-content .ul, 
 #block-menu-menu-mega-review-menu .block-content .ul, 
+#block-menu-menu-task-allocation-menu .block-content .ul, 
 #block-menu-menu-ask-an-expert-menu .block-content .ul, 
 #block-menu-menu-blog-admin-menu .block-content .ul, 
 #block-menu-menu-photogallery-admin-menu .block-content .ul{
@@ -630,6 +633,7 @@ form .form-item .form-item{
 }
 .block-itg-story-list span, 
 #block-menu-menu-story-content-admin-menu .block-content ul li,
+#block-menu-menu-task-allocation-menu .block-content ul li,
 #block-menu-menu-mega-review-menu .block-content ul li,
 #block-menu-menu-blog-admin-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
@@ -646,21 +650,26 @@ form .form-item .form-item{
 }
 #block-menu-menu-story-content-admin-menu .block-content ul li,
 #block-menu-menu-blog-admin-menu .block-content ul li,
+#block-menu-menu-task-allocation-menu .block-content ul li,
 #block-menu-menu-mega-review-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
 #block-menu-menu-photogallery-admin-menu .block-content ul li{padding: 0;}
 #block-menu-menu-story-content-admin-menu .block-content ul li a,
+#block-menu-menu-task-allocation-menu .block-content ul li a,
 #block-menu-menu-blog-admin-menu .block-content ul li a,
 #block-menu-menu-mega-review-menu .block-content ul li a,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a{padding: 10px 20px; display: block; color: #666; position: relative;}
-.block-itg-story-list span.active, .block-itg-story-list span:hover, 
+.block-itg-story-list span.active, 
+.block-itg-story-list span:hover, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active, 
 #block-menu-menu-blog-admin-menu .block-content ul li a.active, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active, 
 #block-menu-menu-mega-review-menu .block-content ul li a.active, 
+#block-menu-menu-task-allocation-menu .block-content ul li a.active, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a:hover,
+#block-menu-menu-task-allocation-menu .block-content ul li a:hover,
 #block-menu-menu-mega-review-menu .block-content ul li a:hover,
 #block-menu-menu-blog-admin-menu .block-content ul li a:hover,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a:hover,
@@ -671,6 +680,7 @@ form .form-item .form-item{
 .block-itg-story-list span.active:after, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active:after, 
 #block-menu-menu-mega-review-menu .block-content ul li a.active:after, 
+#block-menu-menu-task-allocation-menu .block-content ul li a.active:after, 
 #block-menu-menu-blog-admin-menu .block-content ul li a.active:after, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active:after, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active:after{
@@ -1107,8 +1117,7 @@ form.node-photogallery-form .path-form.fieldset.titled .fieldset-content, .verti
 .page-node-revisions .column-side .views-label, 
 .page-node-revisions .column-side .field-content{font-size: 13px;}
 .node-issue-form fieldset legend .form-required, 
-.node-supplement-form fieldset legend .form-required, 
-.node-magazine-form fieldset legend .form-required{display: none;}
+.node-supplement-form fieldset legend .form-required{display: none;}
 .page-node-add-issue .vertical-tabs-panes, 
 .node-supplement-form .vertical-tabs-panes, 
 .node-magazine-form .vertical-tabs-panes{padding: 10px 10px 0;} 
@@ -1477,7 +1486,7 @@ form.node-recipe-form .form-type-managed-file .form-managed-file,
 form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible;}
 #group-survey-date-settings .form-item{position: static;}
 .vertical-tabs .node-form-revision-information .fieldset-content{padding: 0 !important;}
-.node-photogallery-form #BrowseMedia .form-type-managed-file .image-widget div.image-widget-data{width: auto;}
+.node-photogallery-form #BrowseMedia .form-type-managed-file .image-widget div.image-widget-data{width: 320px;}
 .manage_recipe_view_menu, .manage_cooking_tips_view_menu{float: left;}
 .field-name-field-recipe-audio .form-managed-file, 
 .field-name-field-recipe-video .form-managed-file{position: relative; float: left;}
@@ -1563,7 +1572,8 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .celebrity-about .field{float: left; width: 60% !important;}
 .field-name-field-story-schedule-date-time .date-padding .form-item:first-child .date-clear, 
 .field-name-field-story-expiry-date .date-padding .form-item:first-child .date-clear, 
-.page-manage-issues #edit-title, .date-icon{background: url('../images/calendar.png') center right 5px no-repeat !important;}
+.field-name-field-story-issue-date .date-padding .form-item:first-child .date-clear, 
+.page-manage-issues #edit-title, .date-icon, .container-inline-date input.form-text{background: url('../images/calendar.png') center right 5px no-repeat !important;}
 
 /* ITGCMS QUIZ */
 .node-quiz-form .field-add-more-submit{margin-left: 0;}
@@ -1651,6 +1661,21 @@ input[name="field_newsl_add_news_und_0_remove_button"],
 .block-content > .node-newsletter .field .field-items, .block-content > .node-clients-creation .field .field-items{width: 70%; float: left;}
 .block-content > .node-newsletter h2{margin-top: 10px;}
 .my-stats h2{font-size: 18px; margin: 10px 0;}
-.my-stats-last-details{display: inline-block; width: 100%; padding: 0 0 10px 0;}
-.my-stats-left{float: left; width: 50%;}
-.my-stats-right{float: right; width: 50%; text-align: right;}
+.my-stats-last-details{display: inline-block; width: 100%;}
+.my-stats-left{padding-bottom: 5px;}
+.field-name-field-story-category .hierarchical-select-wrapper .dropbox{margin-left: 300px;}
+.field-name-field-story-issue-date .form-item label{display: none;}
+ .view-manage-issues .view-filters input.form-text{height: auto;}
+ [id*="field-survey-add-questions-values"] .field-name-field-survey-answer-type span.error{padding-left: 98px !important;}
+ .node-food_news-form .vertical-tabs{padding: 10px 0 0 10px;}
+ [id*="views-exposed-form-task-page"] .views-exposed-widget .container-inline-date{float: left; clear: none;}
+ [id*="views-exposed-form-task-page"] .views-exposed-widget .container-inline-date .date-padding label{display: none;}
+ div.views-exposed-form input.form-text, div.views-exposed-form input.form-autocomplete{box-sizing: border-box;}
+ .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea .tabledrag-toggle-weight-wrapper, 
+ .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody label{display: none;}
+ .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody tr{padding-top: 10px;}
+ .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody tr:first-child{padding-top: 0;}
+ .field-name-field-task-finish-date-and-time .fieldset-content{padding: 0 !important; float: left; width: 400px;}
+ .field-name-field-story-expiry-date{margin-top: 10px;}
+ .field-name-field-story-expiry-date .container-inline-date label{display: none;}
+ .field-name-field-story-expiry-date .fieldset-title{margin-top: 5px;}

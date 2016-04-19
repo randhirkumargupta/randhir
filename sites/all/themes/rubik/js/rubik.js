@@ -135,9 +135,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
       }
     });
   $('body').on('click', '.target-link', function(e) {
-    var offSet = 80;
+    var offSet = 120;
     var dti = $(this).attr('data-target-id');
-    var targetOffset = $('#' + dti).offset().top - offSet;
+    var targetOffset = $('#' + dti).offset().top - offSet;console.log(targetOffset);
     if(dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails"){
       $(this).addClass('active').siblings('.target-link').removeClass('active');
       $("body,html").animate({ scrollTop: 0 }, 1000);
@@ -441,5 +441,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
   $('input[name="field_quiz_add_questions_add_more"], input[name="field_survey_add_questions_add_more"]').val('Add another question');
   $('input[name="field_newsl_add_news_add_more"]').val('Add More News');
+  $('.form-item-field-issue-title-value-value-date .form-text').attr('readonly', true);
 };
 })(jQuery);

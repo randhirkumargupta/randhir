@@ -42,52 +42,91 @@
       <?php if (!empty($content)): ?>
         <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>          
 
-          <?php if ($view_mode == 'full'): ?>
+          <?php if ($view_mode == 'full'): ?>          
           <div class="basic-details content-box">
-            <h2><?php print t('Basic Details'); ?></h2>
+            <h2><?php print t('Quick File'); ?></h2>
             <div class="content-details">
               <?php print render($content['field_story_magazine_story_issue']); ?>
               <?php print render($content['field_story_select_magazine']); ?>
               <?php print render($content['field_story_select_supplement']); ?>
+                <?php print render($content['field_story_issue_date']);  ?>
               <div class="field">
                 <div class="field-label"><?php print t('Long headline:'); ?></div>
                 <div class="field-items"><?php print $title; ?></div>
               </div>
-              <?php print render($content['field_story_long_head_line']); ?>
-              <?php print render($content['field_story_short_headline']); ?>
+              
               <?php print render($content['field_story_redirection_url']); ?>
               <?php print render($content['field_story_new_title']); ?>
               <?php print render($content['field_story_redirection_url_titl']); ?>
               <?php print render($content['field_story_magazine_headline']); ?>
               <?php print render($content['field_story_magazine_kicker_text']); ?>
+                <?php 
+                $story_kicker = $content['field_story_kicker_text'];
+                if(!empty($story_kicker)) {
+                  print render($content['field_story_kicker_text']); 
+                }
+                ?>
               <?php print render($content['field_stroy_city']); ?>
+                <?php print render($content['field_story_category']); ?>
+                <?php 
+                $extra_large = $content['field_story_extra_large_image'];
+                if(!empty($extra_large)) {
+                  print render($content['field_story_extra_large_image']); 
+                }
+                ?>
+                <?php print render($content['field_story_itg_tags']); ?>
               <?php print render($content['field_story_courtesy']); ?>
               <?php print render($content['field_story_reporter']); ?>
+                <?php print render($content['body']); ?>
             </div>
           </div>
-             <?php 
-              $expert = render($content['field_story_expert_name']); 
-              if(!empty($expert)):?>
+            <?php 
+              $short_headline = render($content['field_story_short_headline']); 
+              if(!empty($short_headline)):?>
                 <div class="expert-details content-box">
-                  <h2><?php print t('Expert Details'); ?></h2>
+                  <h2><?php print t('More Details'); ?></h2>
                   <div class="content-details">
-                    <?php print render($content['field_story_expert_name']); ?>
-                    <?php print render($content['field_story_expert_image']); ?>
-                    <?php print render($content['field_story_expert_description']); ?>
+                      <?php print render($content['field_story_short_headline']); ?>
+                    <?php print render($content['field_story_long_head_line']); ?>
+                      <?php print render($content['field_story_new_title']); ?>
+                      <?php print render($content['field_story_rating']); ?>
+                      <?php print render($content['field_story_redirection_url_titl']); ?>
+                      <?php print render($content['field_story_courtesy']); ?>
+                      <?php print render($content['field_story_snap_post']); ?>
+              
                   </div>  
                 </div>
              <?php endif; ?>
-          <div class="story-content content-box">
-            <h2><?php print t('Story Content'); ?></u></h2>
-            <div class="content-details"><?php print render($content['body']); ?></div>
-          </div>
+            
+          <?php 
+            $social_media = render($content['field_story_social_media_integ']);
+             if(!empty($social_media)):?>
+              <div class="SocialMedia content-box">
+                <h2><?php print t('Social Media'); ?></h2>
+                <div class="content-details"><?php print render($content['field_story_social_media_integ']); ?>
+                <?php 
+                $facebook_narrative = render($content['field_story_facebook_narrative']);
+              if(!empty($facebook_narrative)):?>
+                    <?php print render($content['field_story_facebook_narrative']); ?>
+                    <?php print render($content['field_story_facebook_image']); ?>
+                    <?php endif; ?>
+                    
+                    <?php
+                    $twitter = render($content['field_story_tweet']);
+                      if(!empty($twitter)): ?>
+                    <?php print render($content['field_story_tweet']); ?>
+                    <?php print render($content['field_story_tweet_image']); ?>
+                    <?php endif;?>
+                </div>
+              </div>
+            <?php endif;?>
+             
             <?php 
               $configuration = render($content['field_story_configurations']); 
               if(!empty($configuration)):?>
                 <div class="configuration content-box">
                   <h2><?php print t('Configuration'); ?></h2>
                   <div class="content-details"><?php print render($content['field_story_configurations']); ?>
-                  <?php print render($content['field_story_rating']); ?>
                   <?php //print render($content['field_story_client_title']); ?>
                   <?php print render($content['field_story_media_files_syndicat']); ?>
                   </div>
@@ -102,50 +141,17 @@
                   </div>
                 </div>
             <?php endif; ?>
-            <?php 
-            $social_media = render($content['field_story_social_media_integ']);
-             if(!empty($social_media)):?>
-              <div class="SocialMedia content-box">
-                <h2><?php print t('Social Media'); ?></h2>
-                <div class="content-details"><?php print render($content['field_story_social_media_integ']); ?></div>
-              </div>
-            <?php endif;?>
-             <?php 
-              $facebook_narrative = render($content['field_story_facebook_narrative']);
-              if(!empty($facebook_narrative)):?>
-                <div class="Facebook-narretive content-box">
-                  <h2><?php print t('Facebook Narrative'); ?></h2>
-                  <div class="content-details">
-                    <?php print render($content['field_story_facebook_narrative']); ?>
-                    <?php print render($content['field_story_facebook_image']); ?>
-                  </div>
-                </div>
-             <?php endif;?>
-            <?php 
-              $twitter = render($content['field_story_tweet']);
-              if(!empty($twitter)):?>
-                <div class="Twitter content-box">
-                  <h2><?php print t('Twitter'); ?></h2>
-                  <div class="content-details">
-                    <?php print render($content['field_story_tweet']); ?>
-                    <?php print render($content['field_story_tweet_image']); ?>
-                  </div>
-                </div>
-            <?php endif;?>
-            <?php 
-            $browsemedia = render($content['field_story_extra_large_image']);  
-            if(!empty($browsemedia)):?>
-              <div class="BrowseMedia">
-                <h2><?php print t('BrowseMedia'); ?></h2>
-                <div class="content-details">
-                <?php print render($content['field_story_extra_large_image']); ?>
-                <?php print render($content['field_story_large_image']); ?>
-                <?php print render($content['field_story_medium_image']); ?>
-                <?php print render($content['field_story_small_image']); ?>
-                <?php print render($content['field_story_extra_small_image']); ?>
-                </div>
-              </div>
-           <?php endif;?>
+            
+            <div class="Story-details">
+            <h2><?php print t('Date & Time'); ?></h2>
+            <div class="content-details">
+                <?php print render($content['field_story_schedule_date_time']);?>
+            <?php $story_exp_chk=$content['field_story_expires']['#items']['0']['value'];  ?>
+            <?php if(!empty($story_exp_chk)){ print render($content['field_story_expiry_date']); }?>
+            
+            </div>
+          </div>
+            
            <?php 
            $templates = render($content['field_story_templates']);
            if(!empty($templates)):?>
@@ -180,9 +186,7 @@
             </div>
           </div>
             <?php endif;?>
-            <div class="Templates-buzz">
-            <h2><?php print t('Templates Buzz'); ?></h2>
-            <div class="content-details">
+            
             <?php 
             $buzz_output.= '';
             foreach ($node->field_story_template_buzz['und'] as $buzz_item) {
@@ -199,19 +203,27 @@
                 }
                 
             ?>
+            <?php if(!empty($buzz_item['field_buzz_headline']['und'][0]['value'])) { ?>
+            <div class="Templates-buzz">
+            <h2><?php print t('Templates Buzz');?></h2>
+            
+            <div class="content-details">
             <?php print $buzz_output; ?>
             </div>
           </div>
-            <div class="Story-details">
-            <h2><?php print t('Story Details'); ?></h2>
-            <div class="content-details">
-            <?php $story_exp_chk=$content['field_story_expires']['#items']['0']['value'];  ?>
-            <?php if(!empty($story_exp_chk)){ print render($content['field_story_expiry_date']); }?>
-            <?php print render($content['field_story_kicker_text']); ?>
-            <?php print render($content['field_story_itg_tags']); ?>
-            <?php print render($content['field_story_category']); ?>
-            </div>
-          </div>
+            <?php } ?>
+            <?php 
+              $expert = render($content['field_story_expert_name']); 
+              if(!empty($expert)):?>
+                <div class="expert-details content-box">
+                  <h2><?php print t('Expert Chunk'); ?></h2>
+                  <div class="content-details">
+                    <?php print render($content['field_story_expert_name']); ?>
+                    <?php print render($content['field_story_expert_image']); ?>
+                    <?php print render($content['field_story_expert_description']); ?>
+                  </div>  
+                </div>
+             <?php endif; ?>
         <?php endif; ?>
       </div>
     <?php endif; ?>

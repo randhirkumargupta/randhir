@@ -12,12 +12,14 @@
  * @param array $category
  */
 function itg_users_user_presave(&$edit, $account, $category) {
+  
   if ($edit['field_first_name'][LANGUAGE_NONE][0]['value']) {
     $edit['field_first_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_first_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
   if ($edit['field_last_name'][LANGUAGE_NONE][0]['value']) {
     $edit['field_last_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_last_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
+   
 }
 
 /**
@@ -30,6 +32,14 @@ function itg_users_menu() {
     'access callback' => 'user_is_logged_in',
     'type' => MENU_CALLBACK,
       // 'file' => 'includes/itg_common.inc',
+  );
+
+  $items['user-block'] = array(
+    'title' => 'User Block',
+    'page callback' => 'itg_users_block_user',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+     
   );
 
   return $items;
@@ -45,7 +55,8 @@ function itg_users_cms_user_dashboard() {
 
   // Code for User menu on dashboard
 
-  $remove_menu_link = array('manage-poll' => 'Poll', 'manage-survey' => 'Survey');
+  // $remove_menu_link = array('manage-poll' => 'Poll', 'manage-survey' => 'Survey');
+  $remove_menu_link = array();
 
   $user_menu_tree = menu_tree_all_data('menu-admin-left-menu');
 
@@ -87,6 +98,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
       });", array('type' => 'inline', 'scope' => 'footer'));
   }
   if ($form_id == 'user_profile_form') {
+    $form['field_notify_user_of_update_acco']['und']['#attributes'] = array('checked' => 'checked');
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#weight'] = '-6';
@@ -99,7 +111,9 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
 
       if ($user->uid == arg(1)) {
         unset($form['account']['status']);
-      }
+        unset($form['field_story_expiry_date']);
+        unset($form['field_notify_user_of_update_acco']);
+        }
     }
 
     if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
@@ -495,4 +509,175 @@ function itg_users_tokens($type, $tokens, array $data = array(), array $options 
   }
 
   return $replacements;
+}
+
+// query to block user on expirt date
+function itg_users_block_user() {
+
+  $query = db_select('users', 'u');
+  $query->join('field_data_field_story_expiry_date', 'de', 'u.uid = de.entity_id');
+  $query->fields('u', array('uid'));
+  $query->fields('de', array('field_story_expiry_date_value'));
+  $result = $query->execute();
+
+  while ($user_record = $result->fetchAssoc()) {
+    $user_id = $user_record['uid'];
+    $user_exp_date = strtotime($user_record['field_story_expiry_date_value']);
+    $user_exp_date = date('Y-m-d', $user_exp_date);
+    $current_date = date('Y-m-d');
+
+    if ($user_exp_date == $current_date) {
+      // block user
+      db_update('users')
+          ->fields(array(
+            'status' => 0
+          ))
+          ->condition('uid', $user_id)
+          ->execute();
+    }
+  }
+}
+
+function itg_users_user_update(&$edit, $account, $category) {
+
+  // send mail when password is changed
+  if ($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
+    if (!empty($edit['pass'])) {
+      $role = 'Your Password has been updated';
+      $mail_content = itg_users_get_mail_content($role);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => 'India Today | Password Updated!',
+      );
+
+      $to = $account->mail;
+
+      $mail = drupal_mail('itg_users', 'send_password_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
+      if ($mail['result']) {
+        return TRUE;
+      }
+      else {
+        $error_msg = 'Failed to send the email!';
+        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+        return FALSE;
+      }
+    }
+  }
+
+  // send mail whe role is changed
+  if ($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
+
+    $user_intersec = array_diff_key($account->roles, $account->original->roles);
+
+    foreach ($account->roles as $key => $value) {
+      $rol_name[] = itg_users_role_name($value);
+    }
+
+    $role_comma_value = implode(',', $rol_name);
+    $role_comma_value = rtrim($role_comma_value, ',');
+
+    $role = 'Your Role has been changed to ' . $role_comma_value;
+    if ($user_intersec) {
+      $mail_content = itg_users_get_mail_content($role);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => 'India Today | Role Updated!',
+      );
+
+      $to = $account->mail;
+
+      $mail = drupal_mail('itg_users', 'send_role_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
+      if ($mail['result']) {
+        return TRUE;
+      }
+      else {
+        $error_msg = 'Failed to send the email!';
+        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+        return FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Send mail to user, when role/password is update
+ * @global String $base_url
+ * @param String $key
+ * @param String $message
+ * @param Array $entity
+ */
+function itg_users_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'send_role_mail_to_user':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+      
+      case 'send_password_mail_to_user':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
+}
+
+/**
+ * Get Mail content
+ * @global String $base_url
+ * @param Array $node
+ * @return string
+ */
+function itg_users_get_mail_content($role) {
+  
+  global $base_url;
+  
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title></title>
+</head>
+<body style="margin:0; padding:0;">
+      <table cellpadding="0" cellspacing="0" width="760" align="center">
+      <tr><td></td></tr>
+      <tr><td>Dear user,</td></tr>
+      <tr><td></td></tr>
+      <tr><td>'.$role.'</td></tr>
+      <tr><td></td></tr>
+      <tr><td>Thanks,</td></tr>
+      <tr><td>India Today Team</td></tr></table>
+</body></html>';
+
+  return $content;
+  
+}
+
+
+// query to get last node published by user
+function itg_users_role_name($rid) {
+  
+  $role_result = db_select('role', 'r')
+    ->fields('r')
+    ->condition('rid', $rid)
+    ->condition('rid', 1,'!=')
+    ->execute()
+    ->fetchAssoc();
+   
+    return $role_result['name'];
 }

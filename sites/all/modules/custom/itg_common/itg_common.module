@@ -77,6 +77,12 @@ function itg_common_dropdown_supplement($id = '') {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+  
+  // Set title on Preview
+  if (arg(1) == 'add' && isset($form['#node']->op) && $form['#node']->op == 'Preview') {       
+    $content_type_name = get_content_type_name($form['#node']->type);
+    drupal_set_title('Create '.$content_type_name); 
+  }
  
   // code to change page title on node edit
   if (!empty($form['nid']['#value'])) {
@@ -106,7 +112,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
   
   // Extra meta tags element hide from form
-  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form') {
+  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form') {
     if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
       $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
     }
@@ -114,7 +120,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
   
   //Auto Generate image according photogallery
-   if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form') {
+   if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form') {
      // $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<a class="img-crt button" href="javascript:;">Generate Image</a>');
      $form['field_story_extra_large_image']['#suffix'] = '<a class="img-crt button" href="javascript:;">Generate Image</a>';
      if(isset($form_state['build_info']['args'][0]->field_story_extra_large_image)){
@@ -345,4 +351,17 @@ function itg_common_check_record_existance($nid, $tbl_name){
   } else {
     return 0;
   }
+}
+
+/**
+ * Get content type name by content type machine name.
+ * @param type $type
+ *   
+ */
+function get_content_type_name($type) {
+   $content_type_name = db_select('node_type', 'n')
+       ->fields('n', array('name'))
+      ->condition('type', $type)
+      ->execute()->fetchField();
+   return $content_type_name;
 }

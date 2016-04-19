@@ -187,6 +187,35 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
   global $user;
   global $base_url;
 
+  if ($form_id == 'taxonomy_form_term') {
+    // code for facebook image field hide and show
+    $form['field_cm_no_follow']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_cm_hide_cat_from_search[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
+    
+     drupal_add_js('jQuery(document).ready(function() {
+             //code to check unchek checkbox when all search engine checkbox is checked
+             
+            jQuery("#edit-field-cm-hide-cat-from-search-und-1").click(function () {
+                if (jQuery("#edit-field-cm-hide-cat-from-search-und-1").is(":checked")) {
+                    // code to checked all checkbox when all is checked in mobile subscriber
+                    jQuery("#edit-field-cm-no-follow-und-1").prop("checked", true);
+                    jQuery("#edit-field-cm-no-follow-und-2").prop("checked", true);
+                   
+                } else {
+                    // unchecked all checkbox      
+                   jQuery("#edit-field-cm-no-follow-und-1").prop("checked", false);
+                    jQuery("#edit-field-cm-no-follow-und-2").prop("checked", false);
+
+                }
+
+            });
+              
+           });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+
   // Delete category functionality.
   if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete')) {
     $tid = $form_state['term']->tid;
@@ -273,14 +302,24 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#suffix' => '</div>',
       );
       if ($form['tid']['#value'] !== NULL) {
-        $form['state-mode'] = array(
-          '#type' => 'radios',
-          '#title' => t('Disable mode'),
-          '#options' => array('Forcefully', 'Manually'),
-          '#prefix' => '<div id="state-mode" style="display: none;">',
-          '#suffix' => '</div>',
-          '#weight' => 20,
-        );
+        $term_status = itg_category_manager_term_state($form['tid']['#value']);
+        if ($term_status) {
+          $form['state-mode'] = array(
+            '#type' => 'radios',
+            '#title' => t('Disable mode'),
+            '#options' => array('Forcefully', 'Manually'),          
+            '#weight' => 20,
+            '#states' => array(
+              'visible' => array(
+                ':input[name="term_state"]' => array('checked' => FALSE),
+              ),
+            ),
+          );
+        }
+        else {
+          $form['term_state']['#description'] = t('This category is currently in inactive mode.');          
+        }
+        
       }
       // Hide publish time field.
       $form['field_publish_time']['#prefix'] = '<div style="display:none;">';
@@ -327,14 +366,13 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
  * Implements _form_validate() for taxonomy_form_term().
  */
 function itg_category_manager_term_validate($form, &$form_state) {
-  // Set published time same as parent term
-  
+  // Set published time same as parent term  
   $termParent = $form_state['values']['parent'][0];
   if ($termParent) {
     $pTerm = taxonomy_term_load($termParent);
     $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];
   }
-  if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete') {
+  if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete' && $form_state['term']->tid != NULL ) {
     form_set_error('state-mode', t('Please select one mode.'));
   }
   // Code end for publish time
@@ -385,8 +423,16 @@ function itg_category_manager_add_form_after_build($form, &$form_state) {
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'category-manager', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
+  );  
+  // Hide save buttons once someone uncheck state checkbox.
+  $form['actions']['submit']['#states'] = array(
+    'invisible' => array(
+      ':input[name="state-mode"]' => array(
+        array('value' => '0'),
+        array('value' => '1'),
+      ),      
+    ),
   );
-
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);

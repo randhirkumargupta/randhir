@@ -79,7 +79,8 @@ function itg_survey_survey_form() {
 
       //Merge array of answer options and more answer options
       if(!empty($more_ans_option[$num])){
-        $all_ans_options[$num] = array_merge($answer_options[$num], $more_ans_option[$num]);
+        //$all_ans_options[$num] = array_merge($answer_options[$num], $more_ans_option[$num]);
+         $all_ans_options[$num] = $answer_options[$num] + $more_ans_option[$num];
       } else {
         $all_ans_options[$num] = $answer_options[$num];
       }
@@ -184,11 +185,11 @@ function itg_survey_survey_form() {
             '#type' => 'markup',
             '#prefix' => '<div>',
             '#markup' => '<video width="140" height="145" controls="controls">
-        <source src="'.$media.'" type="video/mp4"> 
-         <object> 
-           <embed  src="'.$media.'"> 
-         </object> 
-      </video>',
+                <source src="'.$media.'" type="video/mp4"> 
+                 <object> 
+                   <embed  src="'.$media.'"> 
+                 </object> 
+               </video>',
             '#suffix' => '</div>',
         );
       }
@@ -203,11 +204,11 @@ function itg_survey_survey_form() {
             'callback' => 'survey_form_ajax_handler',
             'effect' => 'fade',
         ),
-          
           '#attributes' => array('class' => array('survey-submit'))
       );
      
      //Skip button for all qustions except last one
+      if($skip_question[$num] == 'yes') {
      if(($total_num_of_ques-1) !== $num){
         $form['survey_submit_skip' . $num] = array(
             '#type' => 'submit',
@@ -219,6 +220,12 @@ function itg_survey_survey_form() {
             ),
             '#suffix' => '</div>',
             '#attributes' => array('class' => array('survey-submit-skip'))
+        );
+      }
+      } else {
+          $form['close_question_container' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '</div>',
         );
       }
       $num++;
@@ -274,6 +281,7 @@ function itg_survey_survey_form() {
 function itg_survey_survey_form_validate($form, &$form_state) {
   $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
   $num = $btn_num_arr[1];
+  $button_name = $btn_num_arr[0];
 
   $form_detail = $form_state['values'];
   $ans_flag = FALSE;
@@ -291,8 +299,12 @@ function itg_survey_survey_form_validate($form, &$form_state) {
           }
         }
         if (!$ans_flag) {
-          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
-        }
+          if($button_name == 'surveysubmit'){
+            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please select any answer option to proceed.'));       
+          } else {
+            form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
+          }
+        } 
       }
     }
     
@@ -300,7 +312,11 @@ function itg_survey_survey_form_validate($form, &$form_state) {
     if ($form_detail['question_type' . $num] === 'radios') {
       if ($form_detail['question_skip' . $num] !== 'yes') {
         if (empty($form_detail['answer_option' . $num])) {
+          if($button_name == 'surveysubmit'){
+            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please select any answer option to proceed.'));       
+          } else {
           form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
+          }
         }
       }
     } 
@@ -316,7 +332,12 @@ function itg_survey_survey_form_validate($form, &$form_state) {
           }
         }
         if (!$rating_ans_flag) {
-          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
+          if($button_name == 'surveysubmit'){
+            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please provide your answer to proceed.'));       
+          } else {
+            form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
+          
+          }
         }
       }
     } 
@@ -331,7 +352,11 @@ function itg_survey_survey_form_validate($form, &$form_state) {
           }
         }
         if (!$txt_ans_flag) {
-          form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
+           if($button_name == 'surveysubmit'){
+            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please provide your answer to proceed.'));       
+          } else {
+            form_set_error('answer_option' . $num, t('You can not skip question "' . $form_detail['question' . $num] . '?"'));
+          }
         }
       }
     }
@@ -465,7 +490,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
                 'created' => time(),
             ))
             ->execute();
-    unset($_SESSION['unique_survey']);
+    unset($_SESSION['survey_unique_key']);
   }
 
   //Display saved survey message on final submit only.

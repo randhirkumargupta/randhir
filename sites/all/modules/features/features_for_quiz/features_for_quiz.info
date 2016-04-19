@@ -39,6 +39,7 @@ features[field_base][] = field_quiz_scoring_type
 features[field_base][] = field_quiz_type
 features[field_base][] = field_quiz_weightage
 features[field_base][] = field_quiz_winners
+features[field_group][] = group_quiz_add_ques|node|quiz|form
 features[field_group][] = group_quiz_basic_settings|node|quiz|form
 features[field_group][] = group_quiz_date_settings|node|quiz|form
 features[field_group][] = group_quiz_section|node|quiz|form

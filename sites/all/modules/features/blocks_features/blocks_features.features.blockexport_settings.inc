@@ -1069,7 +1069,7 @@ node/*/edit',
   'delta' => 'main',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -10,
+  'weight' => -8,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2555,7 +2555,7 @@ node/*/edit',
   'delta' => 'menu-admin-left-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -25,
+  'weight' => -26,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2635,7 +2635,7 @@ my-rejected-story',
   'delta' => 'menu-story-content-admin-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -24,
+  'weight' => -25,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2785,7 +2785,7 @@ node/*/edit',
   'delta' => 'breaking_news_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -15,
+  'weight' => -13,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2875,7 +2875,7 @@ node/*/edit',
   'delta' => 'photogallery_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -14,
+  'weight' => -12,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3461,7 +3461,7 @@ my-rejected-photogallery',
   'delta' => 'menu-photogallery-admin-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -23,
+  'weight' => -24,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3949,7 +3949,7 @@ ask-an-expert-history',
   'delta' => 'poll_listing-block_2',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -9,
+  'weight' => -7,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -4019,7 +4019,7 @@ ask-an-expert-history',
   'delta' => 'poll_listing-block_1',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -8,
+  'weight' => -6,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -4075,7 +4075,7 @@ ask-an-expert-history',
   'delta' => 'ask_an_expert',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -7,
+  'weight' => -15,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4117,7 +4117,7 @@ ask-an-expert-history',
   'delta' => 'poll_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -11,
+  'weight' => -9,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4132,7 +4132,7 @@ node/*/edit',
   'delta' => 'menu-ask-an-expert-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -16,
+  'weight' => -14,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4805,7 +4805,7 @@ my-rejected-blogs',
   'delta' => 'menu-blog-admin-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -22,
+  'weight' => -23,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4945,7 +4945,7 @@ node/*/edit',
   'delta' => 'quiz_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -13,
+  'weight' => -11,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -5035,7 +5035,7 @@ node/*/edit',
   'delta' => 'survey_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -12,
+  'weight' => -10,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -5125,7 +5125,7 @@ node/*/edit',
   'delta' => 'newsletter_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -17,
+  'weight' => -16,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -5179,6 +5179,186 @@ node/*/edit',
   'title' => '<none>',
   'cache' => 8,
 );
+  $export['block'][] = array(
+  'bid' => 354,
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/mega-review-critic
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 355,
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/mega-review-critic
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 356,
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -17,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/mega-review-critic
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 357,
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/mega-review-critic
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 358,
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/mega-review-critic
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 359,
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/mega-review-critic
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 360,
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'created-task-list
+assigned-task-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 361,
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -22,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'created-task-list
+assigned-task-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 362,
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'created-task-list
+assigned-task-list',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 363,
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'created-task-list
+assigned-task-list',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 364,
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'created-task-list
+assigned-task-list',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 365,
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'created-task-list
+assigned-task-list',
+  'title' => '',
+  'cache' => -1,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
   'delta' => 'astro_tab_form_block',
@@ -5193,6 +5373,11 @@ node/*/edit',
   'module' => 'itg_breaking_news',
   'delta' => 'breaking_news_tab_form_block',
   'type' => 'breaking_news',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'type' => 'mega_review_critic',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_newsletter',
@@ -5245,6 +5430,11 @@ node/*/edit',
   'type' => 'survey',
 );
   $export['block_role'][] = array(
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_photogallery',
   'delta' => 'photogallery_tab_form_block',
   'rid' => 4,
@@ -5290,6 +5480,11 @@ node/*/edit',
   'rid' => 4,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'rid' => 4,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 4,
@@ -5298,6 +5493,11 @@ node/*/edit',
   'module' => 'system',
   'delta' => 'main',
   'rid' => 4,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'rid' => 5,
 );
   $export['block_role'][] = array(
   'module' => 'itg_newsletter',
@@ -5352,6 +5552,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-story-content-admin-menu',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
   'rid' => 5,
 );
   $export['block_role'][] = array(
@@ -5370,6 +5575,11 @@ node/*/edit',
   'rid' => 6,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_newsletter',
   'delta' => 'newsletter_tab_form_block',
   'rid' => 6,
@@ -5425,6 +5635,11 @@ node/*/edit',
   'rid' => 6,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 6,
@@ -5433,6 +5648,11 @@ node/*/edit',
   'module' => 'system',
   'delta' => 'main',
   'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'rid' => 7,
 );
   $export['block_role'][] = array(
   'module' => 'itg_photogallery',
@@ -5480,6 +5700,11 @@ node/*/edit',
   'rid' => 7,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'rid' => 7,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 7,
@@ -5523,6 +5748,11 @@ node/*/edit',
   'module' => 'system',
   'delta' => 'main',
   'rid' => 8,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'rid' => 9,
 );
   $export['block_role'][] = array(
   'module' => 'itg_photogallery',
@@ -5562,6 +5792,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-story-content-admin-menu',
+  'rid' => 9,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
   'rid' => 9,
 );
   $export['block_role'][] = array(
@@ -5580,6 +5815,11 @@ node/*/edit',
   'rid' => 10,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_newsletter',
   'delta' => 'newsletter_tab_form_block',
   'rid' => 10,
@@ -5632,6 +5872,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-story-content-admin-menu',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
   'rid' => 10,
 );
   $export['block_role'][] = array(
@@ -5650,6 +5895,11 @@ node/*/edit',
   'rid' => 20,
 );
   $export['block_role'][] = array(
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
   'module' => 'itg_newsletter',
   'delta' => 'newsletter_tab_form_block',
   'rid' => 20,
@@ -5702,6 +5952,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-story-content-admin-menu',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
   'rid' => 20,
 );
   $export['block_role'][] = array(

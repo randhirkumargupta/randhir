@@ -547,7 +547,7 @@ function features_for_quiz_field_default_field_instances() {
         'replace_label' => FALSE,
       ),
       'type' => 'field_collection_fieldset',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -556,7 +556,7 @@ function features_for_quiz_field_default_field_instances() {
     'bundle' => 'quiz',
     'default_value' => array(
       0 => array(
-        'value' => 'normal',
+        'value' => 'random',
       ),
     ),
     'deleted' => 0,
@@ -719,7 +719,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -758,7 +758,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 

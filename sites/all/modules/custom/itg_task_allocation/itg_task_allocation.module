@@ -1,0 +1,274 @@
+<?php
+
+/**
+ * @file
+ * The ITG Mega Reviews & Critics module.
+ * Provides Mega Reviews & Critics functionality and customizations.
+ */
+
+/**
+ * Implements views header link 
+ * @param type $view Description
+ */
+function itg_task_allocation_views_pre_render(&$view) {
+ 
+  if ($view->name == "task") {    
+    $header_content = l(t('Create Task Idea'), 'node/add/task-idea-allocation-tracking', array('query' => array('destination' => arg(0))));    
+    $view->attachment_before = $header_content;
+  }  
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_task_allocation_form_task_idea_allocation_tracking_node_form_alter(&$form, &$form_state, $form_id) {  
+  $form['#after_build'][] = 'itg_task_allocation_form_after_build';
+  $form['#after_build'][] = 'itg_common_cancel_button';
+  $form['actions']['submit']['#submit'][] = 'itg_task_allocation_form_custom_callback';
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_task_allocation_form_comment_node_task_idea_allocation_tracking_form_alter(&$form, &$form_state, $form_id) {
+  $form['field_task_comment_change_status'][LANGUAGE_NONE]['#options'] = array('_none' => '- None -', 'open' => 'Assigned', 'closed' => 'Completed');
+  if ($form['#node']->field_task_comment_change_status[LANGUAGE_NONE][0]['value'] == 'closed') {
+    $form['#access'] = FALSE;
+  }
+  
+  
+  
+}
+
+/**
+ * After build for mega_review_critic_node_form form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_task_allocation_form_after_build($form, &$form_state) {
+  hide($form['field_task_comment_change_status']);
+  
+  if (isset($form['#node']->nid)){
+    $form['actions']['submit']['#value'] = 'Update';
+  } else {
+      $form['actions']['submit']['#value'] = 'Create';
+  }
+  drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js', array('weight' => 1));
+  
+  return $form;
+  
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_task_allocation_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+ 
+   if ($form['#id'] == 'views-exposed-form-task-page' || $form['#id'] == 'views-exposed-form-task-page-1') {
+     $form['title']['#autocomplete_path'] = 'content-title-list/task_idea_allocation_tracking/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Task Name'));
+     
+     $form['#info']['filter-created']['label'] = '';
+     
+     $form['created']['min'] = array(
+      '#type' => 'date_popup',
+      '#title' => t('From'),
+      '#date_format' => 'Y-m-d',
+      '#date_year_range' => '-1:+1',
+      '#attributes' => array(
+        'readonly' => 'readonly'
+      ),
+    );
+     
+    $form['created']['max'] = array(
+      '#type' => 'date_popup',
+      '#title' => t('To'),
+      '#date_format' => 'Y-m-d',
+      '#date_year_range' => '-1:+1',
+      '#attributes' => array(
+        'readonly' => 'readonly'
+      ),
+    );
+   }
+}
+
+
+/**
+ * Custom submit callback for Mega reviews form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_task_allocation_form_custom_callback($form, &$form_state) {  
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+  
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'mega-review-critic') {
+    drupal_set_message(t('Task has been submitted successfully.'));
+  } else {
+      drupal_set_message(t('Task has been updated successfully.'));
+  }
+   
+}
+
+function itg_task_allocation_comment_insert($comment) {
+  if ($comment->node_type == 'comment_node_task_idea_allocation_tracking') {
+    // task_get_mail_content($node, 'comment');
+  }
+  
+  if ($comment->node_type == 'comment_node_task_idea_allocation_tracking' && $comment->field_task_comment_change_status[LANGUAGE_NONE][0]['value'] == 'closed') {
+   $node = node_load($comment->nid);
+   $node->field_task_comment_change_status[LANGUAGE_NONE][0]['value'] = 'closed';
+   field_attach_update('node', $node);
+  }
+}
+
+/**
+ * Implements hook_node_access.
+ * Check access for forum menu item.
+ * @param type $node
+ * @param type $op
+ * @param type $account
+ */
+function itg_task_allocation_node_access($node, $op, $account) {  
+  if (isset($node->type) && $node->type == 'task_idea_allocation_tracking' && $node->field_task_comment_change_status[LANGUAGE_NONE][0]['value'] == 'closed') {
+   if ($op == 'update') {
+     return NODE_ACCESS_DENY; 
+   }        
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implementation of hook_views_query_alter
+ * @param array reference $view
+ * @param array reference $query
+ */
+function itg_task_allocation_views_query_alter(&$view, &$query) {  
+  if (isset($view->name) && $view->name === 'task') {
+    if (isset($_GET['created']['max']['date'])) {
+      $max_conditions_array = array();
+      $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
+      $max_date_condition = " AND " . $max_date;
+      if (isset($view->query->where[1]['conditions'][1]['field'])) {
+        foreach ($query->where[1]['conditions'] as $idx => $condition) {
+          if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
+            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
+            $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_node_insert
+ * @param Array $node
+ */
+function itg_task_allocation_node_insert($node) {  
+  if ($node->type == 'task_idea_allocation_tracking') {
+    task_get_mail_content($node, 'create');   
+  }
+}
+
+/**
+ * Implements hook_node_update
+ * @param Array $node
+ */
+function itg_task_allocation_node_update($node) {  
+  if ($node->type == 'task_idea_allocation_tracking') {
+    task_get_mail_content($node, 'update');   
+  }
+}
+
+/**
+ * Get Mail content
+ * @global String $base_url
+ * @param Array $node
+ * @return string
+ */
+function task_get_mail_content($node, $event) {
+  
+  global $base_url;
+  
+  if ($event == 'create') {
+    $task_subject = 'New Task has been assigned, please find below detail.';
+  } else if ($event == 'update') {
+      $task_subject = 'Your Task has been updated, please find below detail.';
+  }
+  
+  
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title></title>
+</head>
+<body style="margin:0; padding:0;">
+      <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi Team,</td></tr>
+      <tr><td></td></tr>
+      <tr><td>'.$task_subject.'</td></tr>
+      <tr><td></td></tr>
+      <tr><td>Task Name: ' . $node->title . '</td></tr>
+      <tr><td>Task / idea: ' . $node->field_task_task_idea[LANGUAGE_NONE][0]['value'] . '</td></tr>
+      <tr><td>Finish Date and time: ' . $node->field_task_finish_date_and_time[LANGUAGE_NONE][0]['value'] . '</td></tr>     
+      <tr><td></td></tr>
+      <tr><td>Thanks,</td></tr>
+      <tr><td>India Today Team</td></tr></table>
+</body></html>';
+  
+  
+   $params = array(
+      'body' => $content,
+      'subject' => $node->title,
+    );
+    
+    $user_fields = user_load($node->field_task_team_member[LANGUAGE_NONE][0]['target_id']);
+    
+    $to = $user_fields->mail;
+
+    $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    }
+    else {
+      $error_msg = 'Failed to send the email!';
+      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      return FALSE;
+    }
+  
+}
+
+/**
+ * Send mail to expert, when query is received
+ * @global String $base_url
+ * @param String $key
+ * @param String $message
+ * @param Array $entity
+ */
+function itg_task_allocation_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'send_mail_to_task':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
+}

@@ -169,6 +169,16 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
   );
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -363,6 +373,70 @@ else
   $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';
   $handler->display->display_options['filters']['field_user_message_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Question';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    22 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  /* Filter criterion: Content: Email (field_user_email) */
+  $handler->display->display_options['filters']['field_user_email_value']['id'] = 'field_user_email_value';
+  $handler->display->display_options['filters']['field_user_email_value']['table'] = 'field_data_field_user_email';
+  $handler->display->display_options['filters']['field_user_email_value']['field'] = 'field_user_email_value';
+  $handler->display->display_options['filters']['field_user_email_value']['operator'] = 'word';
+  $handler->display->display_options['filters']['field_user_email_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['operator_id'] = 'field_user_email_value_op';
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['label'] = 'Email';
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['operator'] = 'field_user_email_value_op';
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['identifier'] = 'field_user_email_value';
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    22 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
   $handler->display->display_options['path'] = 'ask-an-expert';
 
   /* Display: Ask an expert question answer */
@@ -467,12 +541,16 @@ else
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
   );
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
@@ -569,6 +647,70 @@ else
   $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';
   $handler->display->display_options['filters']['field_user_message_value']['operator'] = 'not empty';
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Question';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    22 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  /* Filter criterion: Content: Email (field_user_email) */
+  $handler->display->display_options['filters']['field_user_email_value']['id'] = 'field_user_email_value';
+  $handler->display->display_options['filters']['field_user_email_value']['table'] = 'field_data_field_user_email';
+  $handler->display->display_options['filters']['field_user_email_value']['field'] = 'field_user_email_value';
+  $handler->display->display_options['filters']['field_user_email_value']['operator'] = 'word';
+  $handler->display->display_options['filters']['field_user_email_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['operator_id'] = 'field_user_email_value_op';
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['label'] = 'Email';
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['operator'] = 'field_user_email_value_op';
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['identifier'] = 'field_user_email_value';
+  $handler->display->display_options['filters']['field_user_email_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    22 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
   $handler->display->display_options['path'] = 'ask-an-expert-history';
   $export['ask_an_expert'] = $view;
 
