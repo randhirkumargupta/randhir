@@ -7,7 +7,8 @@
         Drupal.behaviors.itg_story = {
              attach: function(context, settings) {
                    var uid = settings.itg_story.settings.uid;
-                   
+                   jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
+                   jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
                    if (uid != 1) {
                      $('.field-edit-link').hide();
                      $('#edit-body-und-0-format').hide();                     
