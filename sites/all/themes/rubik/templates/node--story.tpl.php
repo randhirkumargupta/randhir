@@ -42,7 +42,7 @@
       <?php if (!empty($content)): ?>
         <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>          
 
-          <?php if ($view_mode == 'full'): ?>
+          <?php if ($view_mode == 'full'): ?>          
           <div class="basic-details content-box">
             <h2><?php print t('Quick File'); ?></h2>
             <div class="content-details">

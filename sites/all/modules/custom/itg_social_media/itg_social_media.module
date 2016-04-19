@@ -1,0 +1,124 @@
+<?php
+
+/* 
+ * Author: ITG
+ * Date: 14-04-2016
+ * Purpose: ITG social media integration module.
+ */
+
+/**
+ * Implements hook_form_alter() 
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  if(isset($form['created']['min'])) {
+    $form['created']['min'] = array(
+      '#type' => 'date_popup',
+      '#date_format' => 'd/m/Y',
+      '#date_year_range' => '-3:+3',
+    );
+    $form['created']['max'] = array(
+      '#type' => 'date_popup',
+      '#date_format' => 'd/m/Y',
+      '#date_year_range' => '-3:+3',
+    );
+  }  
+}
+
+/**
+ * Create custom form for social media integration.
+ */
+function itg_social_media_form($form, &$form_state) {
+  $form = array();
+  $form['itg_smi'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Social media integration '),
+    '#options' => array(
+      'facebook' => 'Facebook', 
+      'facebook_instant_article' => 'Facebook Instant Article',
+      'twitter'  => 'Twitter',
+    ),
+  );
+  $form['itg_facebook_narrative'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook Narrative'),
+    '#maxlength' => 255,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+      )
+    ),
+  );  
+  $form['itg_fb_img'] = array(
+    '#title' => t('Facebook Image'),
+    '#type' => 'managed_file',
+    '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
+    '#default_value' => variable_get('image_example_image_fid', ''),
+    '#upload_location' => 'public://itg_fb_img/',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+      )
+    ),
+  );
+  $form['itg_twitter_narrative'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Twitter Narrative'),
+    '#maxlength' => 255,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+      )
+    ),
+  );
+  $form['itg_twitter_img'] = array(
+    '#title' => t('Twitter Image'),
+    '#type' => 'managed_file',
+    '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
+    '#default_value' => variable_get('image_example_image_fid', ''),
+    '#upload_location' => 'public://itg_twitter_img/',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+      )
+    ),
+  );
+  
+  return $form;
+}
+
+/**
+ * Implements hook_block_info()
+ */
+function itg_social_media_block_info() {
+  $block = array();
+  $block['social_media_form'] = array(
+    'info' => t('Social Media Integration'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $block;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_social_media_block_view($delta = '') {
+  $block = array();
+  $data = '';
+  
+  switch ($delta) {
+    case 'social_media_form':
+      $block = array(
+        'subject' => t('Social media Integration'),
+        'content' => drupal_get_form('itg_social_media_form'),
+      );
+      
+      break;
+  }
+  
+  return $block;
+}
