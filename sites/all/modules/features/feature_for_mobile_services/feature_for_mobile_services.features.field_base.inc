@@ -493,9 +493,9 @@ function feature_for_mobile_services_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         1 => 'XMLs',
-        2 => 'RSS.',
-        3 => 'MRSS.',
-        4 => 'USSD.',
+        2 => 'RSS',
+        3 => 'MRSS',
+        4 => 'USSD',
         5 => 'SMS',
         6 => 'Simple Text Feed',
       ),
