@@ -48,6 +48,43 @@ function task_allocation_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'comment-comment_node_task_idea_allocation_tracking-field_task_comment_change_status'.
+  $field_instances['comment-comment_node_task_idea_allocation_tracking-field_task_comment_change_status'] = array(
+    'bundle' => 'comment_node_task_idea_allocation_tracking',
+    'default_value' => array(
+      0 => array(
+        'value' => 'open',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'comment',
+    'exclude_cv' => 0,
+    'field_name' => 'field_task_comment_change_status',
+    'label' => 'Change Status',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-task_idea_allocation_tracking-field_task_comment_change_status'.
   $field_instances['node-task_idea_allocation_tracking-field_task_comment_change_status'] = array(
     'bundle' => 'task_idea_allocation_tracking',
@@ -61,9 +98,8 @@ function task_allocation_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 9,
       ),
       'teaser' => array(
@@ -102,12 +138,12 @@ function task_allocation_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'medium',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
         'weight' => 6,
@@ -137,7 +173,7 @@ function task_allocation_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
-        'increment' => 15,
+        'increment' => 1,
         'input_format' => 'Y-m-d H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',

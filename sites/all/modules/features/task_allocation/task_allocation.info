@@ -22,6 +22,7 @@ features[field_base][] = field_task_finish_date_and_time
 features[field_base][] = field_task_task_idea
 features[field_base][] = field_task_team_member
 features[field_instance][] = comment-comment_node_task_idea_allocation_tracking-comment_body
+features[field_instance][] = comment-comment_node_task_idea_allocation_tracking-field_task_comment_change_status
 features[field_instance][] = node-task_idea_allocation_tracking-field_task_comment_change_status
 features[field_instance][] = node-task_idea_allocation_tracking-field_task_finish_date_and_time
 features[field_instance][] = node-task_idea_allocation_tracking-field_task_task_idea
