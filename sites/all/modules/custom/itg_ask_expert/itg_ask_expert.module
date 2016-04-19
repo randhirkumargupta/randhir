@@ -35,15 +35,6 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
   $user_fields = user_load($user->uid);
   if ($form_id == 'ask_an_expert_node_form') {
     
-    // get edit id
-    $node_edit_id = $form['nid']['#value'];
-    $result = itg_ask_expert_description_check($node_edit_id);
-    
-    // check if answer is already submitted redirect to myqueue page
-    if(!empty($result) && $user->uid != '1') {
-      drupal_goto('ask-an-expert');
-    }
-    
    //code to hide source field
    if ($user->uid != '1') {
       $form['field_user_source_term_id']['#access'] = FALSE;
@@ -74,14 +65,33 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
     $form['#after_build'][] = 'itg_ask_expert_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_ask_expert_form_custom_callback';
     $destination = 'ask-an-expert';
-    $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-            '#weight' => 21,
-            '#value' => t('Cancel'),
-        );
-      } 
+    if (!empty($node->nid)) {
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+      );
+    }
+  } 
       
       
+}
+
+
+/**
+ * Implements hook_node_access.
+ * Check access for forum menu item.
+ * @param type $node
+ * @param type $op
+ * @param type $account
+ */
+function itg_ask_expert_node_access($node, $op, $account) { 
+  if (isset($node->type) && $node->type == 'ask_an_expert' && $node->field_user_message[LANGUAGE_NONE][0]['value'] != '') {
+   if ($op == 'update') {
+     return NODE_ACCESS_DENY; 
+   }        
+  }
+  return NODE_ACCESS_IGNORE;
 }
 
 /**
