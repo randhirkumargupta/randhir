@@ -16,6 +16,10 @@ function itg_quiz_permission() {
     return array(
     'access quiz page' => array(
       'title' => t('Access Quiz Page'),
+    ),
+        
+   'access quiz users list' => array(
+      'title' => t('Access Quiz Users List'),
     )
   );
 }
@@ -38,11 +42,11 @@ function itg_quiz_menu() {
       'file' => 'includes/itg_quiz_form.inc',
   );
   
-  $items['quiz-result/%'] = array(
-      'title' => t('Quiz Result'),
-      'page callback' => 'itg_quiz_result',
+  $items['quiz-user-list/%'] = array(
+      'title' => t('Quiz User List'),
+      'page callback' => 'itg_quiz_user_list',
       'access callback' => 'user_access',
-      'access arguments' => array('quiz admin users'),
+      'access arguments' => array('access quiz users list'),
       'file' => 'includes/itg_quiz_result.inc',
   );
   
@@ -419,6 +423,7 @@ function itg_quiz_winners_list($nid, $range){
               ->fields('qd')
               ->condition('qd.nid', $nid, '=')
               ->groupBy('qd.quiz_key')
+              ->range(0, 10)
               ->execute();
     }
 
@@ -492,4 +497,17 @@ function itg_quiz_get_correct_answer($ques_id){
         }
       }
       return $correct_ans_op;
+}
+
+/**
+ * View User List, who have attempted quiz
+ * @param type $nid
+ * @return string
+ */
+function itg_quiz_views_user_list($nid){
+    if(itg_common_check_record_existance($nid, 'itg_quiz_user_score') > 0){
+    return l('View List','quiz-user-list/'.$nid, array('attributes' => array('target'=>'_blank')));
+  } else {
+    return 'View List';
+  }
 }
