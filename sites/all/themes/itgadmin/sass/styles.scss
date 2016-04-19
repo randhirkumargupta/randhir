@@ -94,24 +94,56 @@ img{
   overflow: hidden;
 }
 .btn{
-    background-color: #337ab7;
-    border: 1px solid #2e6da4;
+    background-color: #33a26d;
+    border: 1px solid #197e4e;
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 400;
+    height: 32px;
+    margin-right: 5px;
     padding: 6px 12px;
     text-align: center;
     white-space: nowrap;
     @extend .dib;
     @extend .vtop;
+    transition: background-color 300ms;
     text-decoration: none;
     &:hover{
-    background-color: #286090;
-    border-color: #204d74;
+    background-color: #197e4e;
+    border-color: #197e4e;
     color: #fff;
     }
+}
+.btn-save-draft{
+  background-color: #3295a7;
+  border: 1px solid #227d8d;
+  &:hover{
+    background-color: #227d8d;
+    border-color: #227d8d;
+    color: #fff;
+  }
+}
+.btn-preview{
+  background-color: #fff;
+  border: 1px solid #197e4e;
+  color: #197e4e;
+  &:hover{
+    background-color: #fff;
+  border: 1px solid #197e4e;
+  color: #197e4e;
+  }
+}
+.btn-cancel{
+  background-color: #fff;
+  border: 1px solid #ee4d4d;
+  color: #ee4d4d;
+  &:hover{
+    background-color: #fff;
+    border: 1px solid #ee4d4d;
+    color: #ee4d4d;
+  }
 }
 .add-more{
     background-color: #1fb5ad;
@@ -144,6 +176,21 @@ a.ckeditor_links{
 }
 .form-submit{
   cursor: pointer;
+}
+.form-submit[value="Preview"]{
+  @extend .btn;
+  @extend .btn-preview;
+}
+.form-submit[value="Save as Draft"]{
+  @extend .btn;
+  @extend .btn-save-draft;
+}
+.button{
+  @extend .btn;
+  @extend .btn-cancel;
+}
+.button.published{
+  @extend .btn;
 }
 .desc-popup{
   border: 1px solid #d9d9d9;
