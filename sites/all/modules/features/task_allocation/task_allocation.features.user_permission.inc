@@ -35,30 +35,14 @@ function task_allocation_user_default_permissions() {
   // Exported permission: 'delete own task_idea_allocation_tracking content'.
   $permissions['delete own task_idea_allocation_tracking content'] = array(
     'name' => 'delete own task_idea_allocation_tracking content',
-    'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any task_idea_allocation_tracking content'.
   $permissions['edit any task_idea_allocation_tracking content'] = array(
     'name' => 'edit any task_idea_allocation_tracking content',
-    'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
