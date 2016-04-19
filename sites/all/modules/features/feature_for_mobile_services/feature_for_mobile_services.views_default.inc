@@ -573,6 +573,12 @@ function feature_for_mobile_services_views_default_views() {
     'link' => 0,
   );
   $handler->display->display_options['fields']['field_client_selection']['delta_offset'] = '0';
+  /* Field: Content: Content Type */
+  $handler->display->display_options['fields']['field_service_content_type']['id'] = 'field_service_content_type';
+  $handler->display->display_options['fields']['field_service_content_type']['table'] = 'field_data_field_service_content_type';
+  $handler->display->display_options['fields']['field_service_content_type']['field'] = 'field_service_content_type';
+  $handler->display->display_options['fields']['field_service_content_type']['label'] = 'Package Type';
+  $handler->display->display_options['fields']['field_service_content_type']['delta_offset'] = '0';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -617,11 +623,6 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  /* Field: Content: Content Type */
-  $handler->display->display_options['fields']['field_service_content_type']['id'] = 'field_service_content_type';
-  $handler->display->display_options['fields']['field_service_content_type']['table'] = 'field_data_field_service_content_type';
-  $handler->display->display_options['fields']['field_service_content_type']['field'] = 'field_service_content_type';
-  $handler->display->display_options['fields']['field_service_content_type']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -636,6 +637,38 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'client_service_association' => 'client_service_association',
+  );
+  /* Filter criterion: Content: Field Title (field_service_title) */
+  $handler->display->display_options['filters']['field_service_title_value']['id'] = 'field_service_title_value';
+  $handler->display->display_options['filters']['field_service_title_value']['table'] = 'field_data_field_service_title';
+  $handler->display->display_options['filters']['field_service_title_value']['field'] = 'field_service_title_value';
+  $handler->display->display_options['filters']['field_service_title_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_service_title_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator_id'] = 'field_service_title_value_op';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['label'] = 'Service Title';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator'] = 'field_service_title_value_op';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['identifier'] = 'field_service_title_value';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
   );
   $handler->display->display_options['path'] = 'service-association-listing';
 
