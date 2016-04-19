@@ -41,6 +41,10 @@ function itg_task_allocation_form_comment_node_task_idea_allocation_tracking_for
   if ($form['#node']->field_task_comment_change_status[LANGUAGE_NONE][0]['value'] == 'closed') {
     $form['#access'] = FALSE;
   }
+   drupal_add_js('jQuery(document).ready(function() {                  
+                     jQuery(".comment-add").hide(); 
+                     jQuery(".comment-reply").hide(); 
+          });', array('type' => 'inline', 'scope' => 'footer'));
   
   
   
@@ -214,7 +218,7 @@ function task_get_mail_content($node, $event) {
     <title></title>
 </head>
 <body style="margin:0; padding:0;">
-      <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi Team,</td></tr>
+      <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi,</td></tr>
       <tr><td></td></tr>
       <tr><td>'.$task_subject.'</td></tr>
       <tr><td></td></tr>

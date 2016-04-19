@@ -1267,11 +1267,16 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .preview-wrapper .field-collection-container .field-collection-view{margin: 0; padding: 0;}
 .node-type-survey .preview-wrapper .field-label{font-weight: normal;}
 .node-survey-form .column-main{width: 65%;}
-.node-type-survey .block-content > .node-survey > .column-main{float: left; width: 100%;}
-.node-type-survey .block-content > .node-survey > .column-side{display: none;}
-.node-type-survey .block-content > .node-survey > .column-main .field{display: inline-block; width: 100%; padding-bottom: 10px;}
-.node-type-survey .block-content > .node-survey > .column-main .field .field-label{float: left; width: 240px;}
-.node-type-survey .block-content > .node-survey > .column-main .field .field-items{float: left; width: 560px;}
+.node-type-survey .block-content > .node-survey > .column-main, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-main{float: left; width: 100%;}
+.node-type-survey .block-content > .node-survey > .column-side, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-side{display: none;}
+.node-type-survey .block-content > .node-survey > .column-main .field, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-main .field{display: inline-block; width: 100%; padding-bottom: 10px;}
+.node-type-survey .block-content > .node-survey > .column-main .field .field-label, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-main .field .field-label{float: left; width: 240px;}
+.node-type-survey .block-content > .node-survey > .column-main .field .field-items, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-main .field .field-items{float: left; width: 560px;}
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view{margin: 0; padding: 0;}
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
@@ -1679,3 +1684,4 @@ input[name="field_newsl_add_news_und_0_remove_button"],
  .field-name-field-story-expiry-date{margin-top: 10px;}
  .field-name-field-story-expiry-date .container-inline-date label{display: none;}
  .field-name-field-story-expiry-date .fieldset-title{margin-top: 5px;}
+ .node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking{background: none;}
