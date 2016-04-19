@@ -137,7 +137,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('body').on('click', '.target-link', function(e) {
     var offSet = 120;
     var dti = $(this).attr('data-target-id');
-    var targetOffset = $('#' + dti).offset().top - offSet;console.log(targetOffset);
+    var targetOffset = $('#' + dti).offset().top - offSet;
     if(dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails"){
       $(this).addClass('active').siblings('.target-link').removeClass('active');
       $("body,html").animate({ scrollTop: 0 }, 1000);
@@ -434,7 +434,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     var filename = $(this).find('.file').html();
     var filesize = $(this).find('.file-size').html();
     var fullname = filename + filesize;
-    console.log(fullname);
     if(!($(this).find('.image-preview').children().hasClass('image-fullname'))){
       $(this).find('.image-preview').append('<div class="image-fullname">' + fullname + '</div>');
     }
