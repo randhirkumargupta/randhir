@@ -143,13 +143,12 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
   return $form;
 }
 
-
 /**
  * Custom submit callback for genrate token.
  * @param type $form
  * @param type $form_state
  */
-function itg_mobile_client_association_submit($form, &$form_state) {  
+function itg_mobile_client_association_submit($form, &$form_state) {
   $node_nid = $form['nid']['#value'];
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
 
@@ -157,13 +156,10 @@ function itg_mobile_client_association_submit($form, &$form_state) {
   $client_name = '';
   foreach ($field_client_selection as $key => $value) {
 
-   // $client_id = $value['target_id'];
-   // sh1(client_id + service_id + timestamp + randam 6-digit )
-   // $token = $client_id + $association_nid + 
-
-
+    // $client_id = $value['target_id'];
+    // sh1(client_id + service_id + timestamp + randam 6-digit )
+    // $token = $client_id + $association_nid + 
   }
-   
 }
 
 /**
@@ -518,7 +514,14 @@ function itg_mobile_services_views_pre_render(&$view) {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
       $header_content_client .= l(t('Associate Client & Services'), 'node/add/client-service-association');
     }
-    $view->attachment_before = $header_content_client;
+    elseif (isset($view->current_display) && $view->current_display == "page_3") {
+      $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+      $header_content_client .= l(t('Create Content'), 'node/add/create-content');
+    }
+
+    if (isset($header_content_client)) {
+      $view->attachment_before = $header_content_client;
+    }
   }
 }
 
