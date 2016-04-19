@@ -49,7 +49,7 @@ function feature_for_mobile_services_node_info() {
       'base' => 'node_content',
       'description' => t('ITG CMS users should be able to create content for a service which have been associated with a client and shall be able to share it with client for mobile service.'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Client'),
       'help' => '',
     ),
     'service_creation' => array(

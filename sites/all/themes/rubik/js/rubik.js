@@ -441,5 +441,6 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
   $('input[name="field_quiz_add_questions_add_more"], input[name="field_survey_add_questions_add_more"]').val('Add another question');
   $('input[name="field_newsl_add_news_add_more"]').val('Add More News');
+  $('.form-item-field-issue-title-value-value-date .form-text').attr('readonly', true);
 };
 })(jQuery);

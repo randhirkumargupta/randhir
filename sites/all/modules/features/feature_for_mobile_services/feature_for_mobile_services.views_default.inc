@@ -27,6 +27,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
@@ -166,11 +167,10 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  /* Field: Content: Client Title */
-  $handler->display->display_options['fields']['field_client_title']['id'] = 'field_client_title';
-  $handler->display->display_options['fields']['field_client_title']['table'] = 'field_data_field_client_title';
-  $handler->display->display_options['fields']['field_client_title']['field'] = 'field_client_title';
-  $handler->display->display_options['fields']['field_client_title']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Client selection */
+  $handler->display->display_options['fields']['field_client_selection']['id'] = 'field_client_selection';
+  $handler->display->display_options['fields']['field_client_selection']['table'] = 'field_data_field_client_selection';
+  $handler->display->display_options['fields']['field_client_selection']['field'] = 'field_client_selection';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -188,7 +188,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'service_creation' => 'service_creation',
+    'create_content' => 'create_content',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Client Title (field_client_title) */
@@ -534,6 +534,212 @@ function feature_for_mobile_services_views_default_views() {
     18 => 0,
   );
   $handler->display->display_options['path'] = 'service-listing';
+
+  /* Display: Service Association */
+  $handler = $view->new_display('page', 'Service Association', 'page_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Service Association Listing';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_client_selection_target_id']['id'] = 'field_client_selection_target_id';
+  $handler->display->display_options['relationships']['field_client_selection_target_id']['table'] = 'field_data_field_client_selection';
+  $handler->display->display_options['relationships']['field_client_selection_target_id']['field'] = 'field_client_selection_target_id';
+  $handler->display->display_options['relationships']['field_client_selection_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_service_association_title_target_id']['id'] = 'field_service_association_title_target_id';
+  $handler->display->display_options['relationships']['field_service_association_title_target_id']['table'] = 'field_data_field_service_association_title';
+  $handler->display->display_options['relationships']['field_service_association_title_target_id']['field'] = 'field_service_association_title_target_id';
+  $handler->display->display_options['relationships']['field_service_association_title_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_service_association_title_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'Service Title';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Client selection */
+  $handler->display->display_options['fields']['field_client_selection']['id'] = 'field_client_selection';
+  $handler->display->display_options['fields']['field_client_selection']['table'] = 'field_data_field_client_selection';
+  $handler->display->display_options['fields']['field_client_selection']['field'] = 'field_client_selection';
+  $handler->display->display_options['fields']['field_client_selection']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['field_client_selection']['delta_offset'] = '0';
+  /* Field: Content: Content Type */
+  $handler->display->display_options['fields']['field_service_content_type']['id'] = 'field_service_content_type';
+  $handler->display->display_options['fields']['field_service_content_type']['table'] = 'field_data_field_service_content_type';
+  $handler->display->display_options['fields']['field_service_content_type']['field'] = 'field_service_content_type';
+  $handler->display->display_options['fields']['field_service_content_type']['label'] = 'Package Type';
+  $handler->display->display_options['fields']['field_service_content_type']['delta_offset'] = '0';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['timezone'] = 'Asia/Kolkata';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="views-action-separator"> | </span><span class="edit-link">[edit_node]</span>';
+  /* Field: Content: Delete link */
+  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
+  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="views-action-separator"> | </span><span class="delete-link">[delete_node]</span>';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'client_service_association' => 'client_service_association',
+  );
+  /* Filter criterion: Content: Field Title (field_service_title) */
+  $handler->display->display_options['filters']['field_service_title_value']['id'] = 'field_service_title_value';
+  $handler->display->display_options['filters']['field_service_title_value']['table'] = 'field_data_field_service_title';
+  $handler->display->display_options['filters']['field_service_title_value']['field'] = 'field_service_title_value';
+  $handler->display->display_options['filters']['field_service_title_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_service_title_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator_id'] = 'field_service_title_value_op';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['label'] = 'Service Title';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator'] = 'field_service_title_value_op';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['identifier'] = 'field_service_title_value';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  $handler->display->display_options['path'] = 'service-association-listing';
+
+  /* Display: Service Content Listing */
+  $handler = $view->new_display('page', 'Service Content Listing', 'page_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Service Content Listing';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_service_association_title_target_id']['id'] = 'field_service_association_title_target_id';
+  $handler->display->display_options['relationships']['field_service_association_title_target_id']['table'] = 'field_data_field_service_association_title';
+  $handler->display->display_options['relationships']['field_service_association_title_target_id']['field'] = 'field_service_association_title_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Client Name';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['timezone'] = 'Asia/Kolkata';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="views-action-separator"> | </span><span class="edit-link">[edit_node]</span>';
+  /* Field: Content: Delete link */
+  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
+  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="views-action-separator"> | </span><span class="delete-link">[delete_node]</span>';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  $handler->display->display_options['path'] = 'service-content-listing';
   $export['clients_details'] = $view;
 
   return $export;

@@ -62,6 +62,7 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
   //Set destination for magazine form
   if ($form_id == 'magazine_node_form') {
     $destination = 'manage-magazines';
+    $form['title']['#description'] = '<p>' . t('Please enter magazine title.') . '</p>';
   }
 
   //Set destination for supplement form

@@ -172,6 +172,39 @@ function user_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_notify_user_of_update_acco'.
+  $field_instances['user-user-field_notify_user_of_update_acco'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_notify_user_of_update_acco',
+    'label' => 'Notify user of update account',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_story_expiry_date'.
   $field_instances['user-user-field_story_expiry_date'] = array(
     'bundle' => 'user',
@@ -334,6 +367,7 @@ function user_management_field_default_field_instances() {
   t('Last name');
   t('Mark as Expert');
   t('Mobile number');
+  t('Notify user of update account');
   t('Picture');
   t('Please enter your first name.');
   t('Please enter your last name.');

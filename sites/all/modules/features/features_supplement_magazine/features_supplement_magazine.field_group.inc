@@ -145,13 +145,14 @@ function features_supplement_magazine_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Basic Settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-magazine-basic-settings field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-magazine-basic-settings field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_magazine_basic_settings|node|magazine|form'] = $field_group;
@@ -173,13 +174,14 @@ function features_supplement_magazine_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Magazine Cover Photo',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-magazine-cover-photo field-group-fieldset',
-        'required_fields' => 1,
+        'required_fields' => 0,
         'id' => '',
+        'classes' => 'group-magazine-cover-photo field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_magazine_cover_photo|node|magazine|form'] = $field_group;

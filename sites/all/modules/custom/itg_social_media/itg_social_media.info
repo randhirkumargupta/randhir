@@ -1,0 +1,5 @@
+name = ITG Social Media
+description = ITG integration with social media like Facebook, Twitter and Instagram.
+core = 7.x
+
+package = ITG

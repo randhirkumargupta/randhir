@@ -71,12 +71,11 @@ function itg_quiz_quiz_form() {
         
 
         foreach($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $currect_ans){
-          if($currect_ans['value'] == 'Yes'){
-            $currect_ans_op[$num] = $ans_option['value'];
-          }
+           if($currect_ans['value'] == 'Yes'){
+           $currect_ans_op[$num][] = $ans_option['value'];
+           }
         }
-      }
-
+      } 
       
       //Media info
       $media = $question_detail[$question_arr['value']]->field_quiz_add_media[LANGUAGE_NONE][0]['uri'];
@@ -131,7 +130,7 @@ function itg_quiz_quiz_form() {
           '#markup' => '<h2 class="answer-heading">Answer: ' . $required . '</h2> ',
       );
 
-      $form['currect_answer' . $num] = array(
+      $form['correct_answer' . $num] = array(
           '#type' => 'hidden',
           '#value' => $currect_ans_op[$num],
       );
@@ -289,7 +288,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
   if ($form_state['values']['question_type' . $num] == 'radios') {
     
     $ans_op_arr = explode('-', $form_state['values']['answer_option' . $num]);
-       if($ans_op_arr[0] == $form_state['values']['currect_answer' . $num]){
+       if($ans_op_arr[0] == $form_state['values']['correct_answer' . $num][0]){
      $currect_ans = 'yes';
    } else {
      $currect_ans = 'no';
@@ -301,9 +300,10 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
                 'nid' => $form_state['values']['nid'],
                 'uid' => $user->uid,
                 'ques_id' => $form_state['values']['question_id' . $num],
+                'ans_id' => $ans_op_arr[0],
                 'question' => $form_state['values']['question' . $num],
                 'answer' => strtolower($ans_op_arr[1]),
-                'currect_answer' => $currect_ans,
+                'correct_answer' => $currect_ans,
                 'ans_type' => $form_state['values']['question_type' . $num],
                 'user_type' => $user_type,
                 'page_url' => $form_state['values']['quiz_url'],
@@ -316,47 +316,49 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
   }
 
   if ($form_state['values']['question_type' . $num] == 'checkboxes') {
-
+    $i = 0;
     foreach ($form_state['values']['answer_option' . $num] as $key => $value) {
       if ($value) {
         $ans_op_arr = explode('-', $value);
-        if ($ans_op_arr[0] == $form_state['values']['currect_answer' . $num]) {
+        if ($ans_op_arr[0] == $form_state['values']['correct_answer' . $num][$i]) {
           $currect_ans = 'yes';
         } else {
           $currect_ans = 'no';
         }
         
         if(!empty($ans_op_arr[1])) {
-        db_insert('itg_quiz_detail')
-                ->fields(array(
-                    'nid' => $form_state['values']['nid'],
-                    'uid' => $user->uid,
-                    'ques_id' => $form_state['values']['question_id' . $num],
-                    'question' => $form_state['values']['question' . $num],
-                    'answer' => strtolower($ans_op_arr[1]),
-                    'currect_answer' => $currect_ans,
-                    'ans_type' => $form_state['values']['question_type' . $num],
-                    'user_type' => $user_type,
-                    'page_url' => $form_state['values']['quiz_url'],
-                    'quiz_title' => $form_state['values']['quiz_title'],
-                    'quiz_key' => $_SESSION['quiz_unique_key'],
-                    'created' => time(),
-                ))
-                ->execute();
+          db_insert('itg_quiz_detail')
+                  ->fields(array(
+                      'nid' => $form_state['values']['nid'],
+                      'uid' => $user->uid,
+                      'ques_id' => $form_state['values']['question_id' . $num],
+                      'ans_id' => $ans_op_arr[0],
+                      'question' => $form_state['values']['question' . $num],
+                      'answer' => strtolower($ans_op_arr[1]),
+                      'correct_answer' => $currect_ans,
+                      'ans_type' => $form_state['values']['question_type' . $num],
+                      'user_type' => $user_type,
+                      'page_url' => $form_state['values']['quiz_url'],
+                      'quiz_title' => $form_state['values']['quiz_title'],
+                      'quiz_key' => $_SESSION['quiz_unique_key'],
+                      'created' => time(),
+                  ))
+                  ->execute();
         }
       }
+      $i++;
     }
+    
   }
 
   if ($num == ($form_detail['question_total'] - 1)) {
       $total_ques_attempt = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL);
-      $currect_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
-      $incurrect_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'no');
+      $correct_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
+      $incorrect_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'no');
       $winners_list = itg_quiz_winners_list($form_state['values']['nid'], $form_state['values']['no_of_winners']);
       $output = '<div class = "quiz-contest-result"> <h2>Quiz Result:</h2>
       <div class = "quiz-contest-result"><strong>Total Question  attempted:</strong> ' . $total_ques_attempt . '</div>
-      <div class = "quiz-contest-result"><strong>Correct Answer:</strong> ' . $currect_answer . '</div>
-      <div class = "quiz-contest-result"><strong>Incorrect Answer:</strong> ' . $incurrect_answer . '</div>
+      <div class = "quiz-contest-result"><strong>Correct Answer:</strong> ' . $correct_answer. '</div>
       <div class = "quiz-contest-result"><strong>Winners List:</strong></div>';
       foreach($winners_list as $key => $value){
         $output .= '<div class = "quiz-contest-result">'.$value.'</div>';
