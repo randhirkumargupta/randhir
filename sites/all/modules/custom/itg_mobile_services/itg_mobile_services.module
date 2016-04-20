@@ -13,6 +13,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       unset($form['title']);
       unset($form['#metatags']);
+      unset($form['actions']['preview']);
 
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'clients-listing', array(
@@ -31,16 +32,18 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       if (isset($form['field_contact_tech_email_address'])) {
         $form['field_contact_tech_email_address']['#element_validate'][] = 'itg_mobile_clients_validator';
       }
-      
+
       $form['#after_build'][] = 'itg_mobile_client_after_build';
-      
+
       if (empty($_GET['destination'])) {
         $_GET['destination'] = 'clients-listing';
       }
-     
+
       break;
     case 'service_creation_node_form':
       unset($form['#metatags']);
+      unset($form['actions']['preview']);
+      // p($form);
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-listing', array(
           'attributes' => array(
@@ -65,7 +68,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
           ':input[name="field_content_sharing_mode[und]"]' => array('value' => '1'),
         ),
       );
-   
+
       $form['field_email_address']['#states'] = array(
         'visible' => array(
           ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
@@ -78,11 +81,11 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       if (!empty($form['field_email_address'])) {
         $form['field_email_address']['#element_validate'][] = 'itg_mobile_service_validator';
       }
-     
+
       $form['#validate'][] = 'itg_mobile_services_validator';
-      
+
       $form['#after_build'][] = 'itg_mobile_service_after_build';
-      
+
       if (empty($_GET['destination'])) {
         $_GET['destination'] = 'service-listing';
       }
@@ -90,7 +93,8 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
     case 'client_service_association_node_form':
       unset($form['#metatags']);
-      
+      unset($form['actions']['preview']);
+
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-association-listing', array(
           'attributes' => array(
@@ -123,15 +127,16 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['#validate'][] = 'itg_mobile_client_association_validator';
       $form['actions']['submit']['#submit'][] = 'itg_mobile_client_association_submit';
       $form['#after_build'][] = 'itg_service_association_after_build';
-    //  if (empty($_GET['destination'])) {
+      //  if (empty($_GET['destination'])) {
       //  $_GET['destination'] = 'service-association-listing';
-     // }
+      // }
 
       break;
     case 'create_content_node_form':
       // unset($form['title']);
       unset($form['#metatags']);
-      
+      unset($form['actions']['preview']);
+
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-content-listing', array(
           'attributes' => array(
@@ -141,7 +146,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 21,
         '#value' => t('Cancel')
       );
-      
+
       $form['#prefix'] = '<div id="client_error_wrapper">';
       $form['#suffix'] = '</div>';
 
@@ -157,61 +162,62 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       $form['#validate'][] = 'itg_mobile_association_validator';
       $form['#after_build'][] = 'itg_service_content_after_build';
-  
+
       if (arg(0) == 'node' && arg(2) == 'edit' && $_REQUEST['destination'] == 'service-content-listing') {
-          
-          if(isset($form['field_story_expert_description'][LANGUAGE_NONE][0])) {
-            $contact_text = !is_null($form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#default_value']) ? $form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#default_value'] : '';
-          }
-          
-          if(isset($form['field_ftp_ip_address'][LANGUAGE_NONE][0])) {
-            $contact_image = !is_null($form['field_ftp_ip_address'][LANGUAGE_NONE][0]['value']['#default_value']) ? $form['field_ftp_ip_address'][LANGUAGE_NONE][0]['value']['#default_value'] : '';
-          }
-          
-          if(isset($form['field_ftp_username'][LANGUAGE_NONE][0])) {
-            $contact_audio = !is_null($form['field_ftp_username'][LANGUAGE_NONE][0]['value']['#default_value']) ? $form['field_ftp_username'][LANGUAGE_NONE][0]['value']['#default_value'] : '';
-          }
-          
-          if(isset($form['field_ftp_password'][LANGUAGE_NONE][0])) {
-            $contact_video = !is_null($form['field_ftp_password'][LANGUAGE_NONE][0]['value']['#default_value']) ? $form['field_ftp_password'][LANGUAGE_NONE][0]['value']['#default_value'] : '';
-          }
-        
-          if (!empty($contact_text)) {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').show(); });", 'inline');
-          }else {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); });", 'inline');
-          }
-         
-          
-          if (!empty($contact_image)) {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-ip-address').show();});", 'inline');
-          }else {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-ip-address').hide();});", 'inline');
-          }
-          
-          if (!empty($contact_video)) {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-password').show();});", 'inline');
-          }else {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-password').hide();});", 'inline');
-          }
-          
-          if (!empty($contact_audio)) {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-username').show();});", 'inline');
-          }
-           else {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-username').hide();});", 'inline');
-          }
-     
-          if (!empty($contact_text) && !empty($contact_image) && !empty($contact_video) && !empty($contact_audio)) {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').show(); jQuery('#edit-field-ftp-ip-address').show();jQuery('#edit-field-ftp-username').show();jQuery('#edit-field-ftp-password').show();});", 'inline');
-          }
-          
-        
+
+        if (isset($form['field_story_expert_description'][LANGUAGE_NONE][0])) {
+          $contact_text = !is_null($form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#default_value']) ? $form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#default_value'] : '';
+        }
+
+        if (isset($form['field_ftp_ip_address'][LANGUAGE_NONE][0])) {
+          $contact_image = !is_null($form['field_ftp_ip_address'][LANGUAGE_NONE][0]['value']['#default_value']) ? $form['field_ftp_ip_address'][LANGUAGE_NONE][0]['value']['#default_value'] : '';
+        }
+
+        if (isset($form['field_ftp_username'][LANGUAGE_NONE][0])) {
+          $contact_audio = !is_null($form['field_ftp_username'][LANGUAGE_NONE][0]['value']['#default_value']) ? $form['field_ftp_username'][LANGUAGE_NONE][0]['value']['#default_value'] : '';
+        }
+
+        if (isset($form['field_ftp_password'][LANGUAGE_NONE][0])) {
+          $contact_video = !is_null($form['field_ftp_password'][LANGUAGE_NONE][0]['value']['#default_value']) ? $form['field_ftp_password'][LANGUAGE_NONE][0]['value']['#default_value'] : '';
+        }
+
+        if (!empty($contact_text)) {
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').show(); });", 'inline');
+        }
+        else {
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); });", 'inline');
+        }
+
+
+        if (!empty($contact_image)) {
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-ip-address').show();});", 'inline');
+        }
+        else {
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-ip-address').hide();});", 'inline');
+        }
+
+        if (!empty($contact_video)) {
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-password').show();});", 'inline');
+        }
+        else {
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-password').hide();});", 'inline');
+        }
+
+        if (!empty($contact_audio)) {
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-username').show();});", 'inline');
+        }
+        else {
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-username').hide();});", 'inline');
+        }
+
+        if (!empty($contact_text) && !empty($contact_image) && !empty($contact_video) && !empty($contact_audio)) {
+          drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').show(); jQuery('#edit-field-ftp-ip-address').show();jQuery('#edit-field-ftp-username').show();jQuery('#edit-field-ftp-password').show();});", 'inline');
+        }
       }
       else {
         drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); jQuery('#edit-field-ftp-ip-address').hide();jQuery('#edit-field-ftp-username').hide();jQuery('#edit-field-ftp-password').hide();});", 'inline');
       }
-     
+
       break;
   }
   return $form;
@@ -294,43 +300,41 @@ function itg_mobile_client_association_validator($form, &$form_state) {
  * Implements custom _form_validate() for taxonomy_form_term().
  */
 function itg_mobile_services_validator($form, &$form_state) {
- // p($form_state['values']['field_content_sharing_mode']);  
- // exit;
+  // p($form_state['values']['field_content_sharing_mode']);  
+  // exit;
   $sharing_mode = trim($form_state['values']['field_content_sharing_mode'][LANGUAGE_NONE][0]['value']);
   if ($sharing_mode) {
-    if($sharing_mode == 1) {
+    if ($sharing_mode == 1) {
       $fetch_link = trim($form_state['values']['field_service_fetch_link'][LANGUAGE_NONE][0]['value']);
-      if(empty($fetch_link)) {
+      if (empty($fetch_link)) {
         form_set_error('field_service_fetch_link', t('Fetch link (our server) Required.'));
       }
     }
-    if($sharing_mode == 2) {
+    if ($sharing_mode == 2) {
       $ftp_ip_address = trim($form_state['values']['field_ftp_ip_address'][LANGUAGE_NONE][0]['value']);
       $ftp_username = trim($form_state['values']['field_ftp_username'][LANGUAGE_NONE][0]['value']);
       $ftp_password = trim($form_state['values']['field_ftp_password'][LANGUAGE_NONE][0]['value']);
-      
-      if(empty($ftp_ip_address)) {
+
+      if (empty($ftp_ip_address)) {
         form_set_error('field_ftp_ip_address', t('FTP IP Address Required.'));
       }
-      
-      if(empty($ftp_username)) {
+
+      if (empty($ftp_username)) {
         form_set_error('field_ftp_username', t('FTP Username Required.'));
       }
-      
-      if(empty($ftp_password)) {
+
+      if (empty($ftp_password)) {
         form_set_error('field_ftp_password', t('FTP Password Required.'));
       }
-      
     }
-    if($sharing_mode == 3) {
+    if ($sharing_mode == 3) {
       $email_address = trim($form_state['values']['field_email_address'][LANGUAGE_NONE][0]['value']);
-      if(empty($email_address)) {
+      if (empty($email_address)) {
         form_set_error('field_email_address', t('Mail to Required.'));
       }
     }
-        
   }
- // exit;
+  // exit;
 }
 
 /**
@@ -353,14 +357,14 @@ function itg_mobile_association_validator($form, &$form_state) {
       $node = node_load($entity_id);
       // watchdog("mobile_15", '<pre>' . print_r( $entity_id, true) . '</pre>'); 
       $service_content_type = field_get_items('node', $node, 'field_service_content_type');
-    drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); jQuery('#edit-field-ftp-ip-address').hide();jQuery('#edit-field-ftp-username').hide();jQuery('#edit-field-ftp-password').hide();});", 'inline'); 
+      drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); jQuery('#edit-field-ftp-ip-address').hide();jQuery('#edit-field-ftp-username').hide();jQuery('#edit-field-ftp-password').hide();});", 'inline');
       foreach ($service_content_type as $key => $value) {
 
         $content_type = field_view_value('node', $node, 'field_service_content_type', $service_content_type[$key], array());
         $content_result = render($content_type);
         $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
-     
-        
+
+
         if ($content_type_val == 'text') {
           if (empty($contact_text)) {
             form_set_error('field_story_expert_description', t('Content Text Required.'));
@@ -368,7 +372,7 @@ function itg_mobile_association_validator($form, &$form_state) {
 
           drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').show(); });", 'inline');
         }
-        
+
         if ($content_type_val == 'image') {
           if (empty($contact_image)) {
             form_set_error('field_ftp_ip_address', t('Content Image Required.'));
@@ -376,7 +380,7 @@ function itg_mobile_association_validator($form, &$form_state) {
 
           drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-ip-address').show();});", 'inline');
         }
-        
+
         if ($content_type_val == 'video') {
           if (empty($contact_video)) {
             form_set_error('field_ftp_password', t('Content Video Required.'));
@@ -384,7 +388,7 @@ function itg_mobile_association_validator($form, &$form_state) {
 
           drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-password').show();});", 'inline');
         }
-        
+
         if ($content_type_val == 'audio') {
           if (empty($contact_audio)) {
             form_set_error('field_ftp_username', t('Content Audio Required.'));
@@ -392,7 +396,7 @@ function itg_mobile_association_validator($form, &$form_state) {
 
           drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-ftp-username').show();});", 'inline');
         }
-        
+
         if ($content_type_val == 'wap(image,text,videoandaudio)') {
           if (empty($contact_text)) {
             form_set_error('field_story_expert_description', t('Content Text Required.'));
@@ -494,7 +498,6 @@ function itg_mobile_service_after_build($form, &$form_state) {
   $form_state['redirect'] = 'service-listing';
   return $form;
 }
-
 
 /**
  * ajax service callback
