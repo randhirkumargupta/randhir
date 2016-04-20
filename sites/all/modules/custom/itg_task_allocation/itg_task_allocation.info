@@ -1,0 +1,8 @@
+name = ITG Task Allocation
+description = "ITG Task Allocation Module"
+core = 7.x
+package = ITG
+
+files[] = itg_task_allocation.module
+
+
