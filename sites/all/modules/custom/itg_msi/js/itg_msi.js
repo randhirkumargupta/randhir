@@ -35,7 +35,7 @@
           minDate: '0',
           readonly: true
         });
-        $('#edit-field-supp-issue-und-0-value-datepicker-popup-0, #edit-field-supp-issue-und-0-value-datepicker-popup-1, ##edit-field-supp-issue-und-0-value-datepicker-popup-3').prop("readonly", true);
+        $('#edit-field-supp-issue-und-0-value-datepicker-popup-0, #edit-field-supp-issue-und-0-value-datepicker-popup-1, #edit-field-supp-issue-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
       
       if(type === 'Issue'){
@@ -45,9 +45,7 @@
           readonly: true
         });
         $('#edit-field-issue-title-und-0-value-datepicker-popup-0, #edit-field-issue-title-und-0-value-datepicker-popup-1, #edit-field-issue-title-und-0-value-datepicker-popup-3').prop("readonly", true);
-      }
-
-    //$('#magazine-node-form').submit(function () { return false; });  
+      } 
       
       //Check duplicacy on title for magazine
       $('#magazine-node-form #edit-title, #supplement-node-form #edit-title').blur(function() {

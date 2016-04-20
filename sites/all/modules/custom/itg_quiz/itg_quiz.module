@@ -66,7 +66,7 @@ function itg_quiz_menu() {
 function itg_quiz_block_info() {
   $blocks['quiz_tab_form_block'] = array(
     'info' => t('Quiz Form Tab Block'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_CACHE_GLOBAL, 
   );
   
   return $blocks;
@@ -98,7 +98,7 @@ function itg_quiz_block_view($delta = '') {
  * @param type $theme
  * @param type $path
  */
-function itg_quiz_theme($existing, $type, $theme, $path) {
+function itg_quiz_theme() {
   $themes = array(
     'quiz_tab_form_display_block' => array(
       'template' => 'quiz-form-tab-template',
