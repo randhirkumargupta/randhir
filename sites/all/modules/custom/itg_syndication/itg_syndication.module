@@ -43,13 +43,15 @@ function itg_syndication_form() {
     $options[$key] = $value->name;
   }
   
+   $selected = isset($form_state['values']['web_property']) ? $form_state['values']['web_property'] : key($options);
+  
   // Create web property field.
   $form['web_property'] = array(
     '#type' => 'select', 
     '#title' => t('Web Property'),
     '#description' => t('System displays all the web properties. User can select any of them and correspondingly content will only be displayed.'),
     '#options' => $options,
-    '#default_value' => '_none',
+    '#default_value' => $selected,
     '#required' => TRUE,
     '#ajax' => array(
       'callback' => 'itg_syndication_issue_callback',
@@ -62,8 +64,8 @@ function itg_syndication_form() {
     '#type' => 'select', 
     '#title' => t('Issue'),
     '#description' => t('The drop down displays the values from the repository of issues for the selected magazine.'),
-    '#options' => itg_syndication_issue_list(),    
-    '#default_value' => '_none',
+    '#options' => itg_syndication_issue_list($selected),    
+    '#default_value' => isset($form_state['values']['issue']) ? $form_state['values']['issue'] : '',
      '#prefix' => '<div id="issue_replace">',
     '#suffix' => '</div>',
     '#states' => array(
@@ -87,10 +89,10 @@ function itg_syndication_issue_callback($form, $form_state) {
   return $form['issue'];
 }
 
-function itg_syndication_issue_list() {
+function itg_syndication_issue_list($key = '') {
   $itg_query = db_select('node', 'n');
   $itg_query->fields('n', array('nid','title'))
-      ->condition('type', 'issue')
+      ->condition('type', $key)
       ->condition('status', 1);
   $itg_result = $itg_query->execute();
   $data = array();
