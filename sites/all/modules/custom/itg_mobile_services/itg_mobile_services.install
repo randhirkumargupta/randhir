@@ -1,0 +1,91 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Mobile Services module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * 
+ * @access public
+ * @return array
+ */
+function itg_mobile_services_schema() {
+  $schema = array();      
+  $schema['itg_client_token'] = array(
+    'description' => t('client token Information!'),
+    'fields' => array(
+      'id' => array(
+        'description' => t('id'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => t('node nid'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'cid' => array(
+        'description' => t('client id'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'sid' => array(
+        'description' => t('service id'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'token' => array(
+        'description' => t('Token'),
+         'type' => 'varchar',
+         'length' => 255,
+        'not null' => TRUE,
+      ),
+       'created_by' => array(
+        'description' => t('Token created by'),
+         'type' => 'varchar',
+         'length' => 255,
+        'not null' => TRUE,
+      ),
+       'reset_by' => array(
+        'description' => t('Token reset by'),
+         'type' => 'varchar',
+         'length' => 255,
+        'not null' => TRUE,
+      ),  
+      'created_date' => array(
+        'description' => t('Created token date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+      'updated_date' => array(
+        'description' => t('Updated token date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_mobile_services_uninstall() {
+  drupal_uninstall_schema('itg_client_token');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_mobile_services_update_7001() {
+  cache_clear_all(NULL, 'cache_menu');
+}

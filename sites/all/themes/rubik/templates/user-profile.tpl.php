@@ -190,8 +190,10 @@ if($user->uid == $view_user_id) {
         
         // make role permission array
         if(strstr($key1,'assign')) {
-          $role_arr = explode(' ', $key1);
-          $final_role_arr[] = ucwords(str_replace('_', ' ', $role_arr[1]));
+          // $role_arr = explode(' ', $key1);
+         // pr($role_arr);
+          // $final_role_arr[] = ucwords(str_replace('_', ' ', $role_arr[1]));
+          $final_role_arr[] = ucwords($key1);
         }
       }
       }

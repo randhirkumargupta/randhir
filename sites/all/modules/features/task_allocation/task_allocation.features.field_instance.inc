@@ -27,21 +27,103 @@ function task_allocation_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'comment',
+    'exclude_cv' => 0,
     'field_name' => 'comment_body',
     'label' => 'Comment',
-    'required' => TRUE,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
       ),
       'type' => 'text_textarea',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'comment-comment_node_task_idea_allocation_tracking-field_task_comment_change_status'.
+  $field_instances['comment-comment_node_task_idea_allocation_tracking-field_task_comment_change_status'] = array(
+    'bundle' => 'comment_node_task_idea_allocation_tracking',
+    'default_value' => array(
+      0 => array(
+        'value' => 'open',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'comment',
+    'exclude_cv' => 0,
+    'field_name' => 'field_task_comment_change_status',
+    'label' => 'Change Status',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
       'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-task_idea_allocation_tracking-field_task_comment_change_status'.
+  $field_instances['node-task_idea_allocation_tracking-field_task_comment_change_status'] = array(
+    'bundle' => 'task_idea_allocation_tracking',
+    'default_value' => array(
+      0 => array(
+        'value' => 'open',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_task_comment_change_status',
+    'label' => 'Change Status',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 8,
     ),
   );
 
@@ -56,12 +138,12 @@ function task_allocation_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'medium',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
         'weight' => 6,
@@ -79,7 +161,7 @@ function task_allocation_field_default_field_instances() {
     'label' => 'Finish Date and time',
     'required' => 1,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -91,7 +173,7 @@ function task_allocation_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
-        'increment' => 15,
+        'increment' => 1,
         'input_format' => 'Y-m-d H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
@@ -101,46 +183,6 @@ function task_allocation_field_default_field_instances() {
       ),
       'type' => 'date_popup',
       'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-task_idea_allocation_tracking-field_task_status'.
-  $field_instances['node-task_idea_allocation_tracking-field_task_status'] = array(
-    'bundle' => 'task_idea_allocation_tracking',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_task_status',
-    'label' => 'Status',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 4,
     ),
   );
 
@@ -174,7 +216,7 @@ function task_allocation_field_default_field_instances() {
     'settings' => array(
       'display_summary' => 0,
       'exclude_cv' => FALSE,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -237,10 +279,10 @@ function task_allocation_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Change Status');
   t('Comment');
   t('Finish Date and time');
   t('Select team member');
-  t('Status');
   t('Task / idea');
 
   return $field_instances;

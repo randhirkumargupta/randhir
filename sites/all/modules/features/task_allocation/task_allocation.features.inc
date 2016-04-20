@@ -30,7 +30,7 @@ function task_allocation_node_info() {
       'base' => 'node_content',
       'description' => t('used for allocating tasks'),
       'has_title' => '1',
-      'title_label' => t('Task / Idea Allocation & Tracking'),
+      'title_label' => t('Task Name'),
       'help' => '',
     ),
   );
