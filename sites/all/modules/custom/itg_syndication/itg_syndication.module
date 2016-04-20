@@ -181,7 +181,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
  * @param array $form_state
  */
 function itg_syndication_change_message($form, &$form_state) {    
-  $messages = drupal_get_messages('status');
+  drupal_get_messages('status');
   if ($form_state['values']['changed'] == '') {
     drupal_set_message(t('Client created successfully.'));
   }
