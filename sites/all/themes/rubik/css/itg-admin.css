@@ -559,6 +559,8 @@ form .form-item .form-item{
 #block-itg-photogallery-photogallery-tab-form-block, 
 #block-itg-astro-astro-tab-form-block,
 #block-itg-survey-survey-tab-form-block,
+#block-itg-quiz-quiz-tab-form-block,
+#block-menu-menu-blog-admin-menu,
 #block-itg-recipe-recipe-tab-form-block{
   border-left: none;
   border-right: none;
@@ -571,8 +573,10 @@ form .form-item .form-item{
 #block-menu-menu-story-content-admin-menu .block-content, 
 #block-menu-menu-ask-an-expert-menu .block-content,
 #block-menu-menu-photogallery-admin-menu .block-content,
+#block-menu-menu-blog-admin-menu .block-content,
 #block-itg-astro-astro-tab-form-block .block-content,
 #block-itg-survey-survey-tab-form-block .block-content,
+#block-itg-quiz-quiz-tab-form-block .block-content,
 #block-itg-photogallery-photogallery-tab-form-block .block-content{
   padding: 0;
 }
@@ -580,12 +584,14 @@ form .form-item .form-item{
 #block-menu-menu-story-content-admin-menu .block-content .ul, 
 #block-menu-menu-mega-review-menu .block-content .ul, 
 #block-menu-menu-ask-an-expert-menu .block-content .ul, 
+#block-menu-menu-blog-admin-menu .block-content .ul, 
 #block-menu-menu-photogallery-admin-menu .block-content .ul{
   text-align: center;
 }
 .block-itg-story-list span, 
 #block-menu-menu-story-content-admin-menu .block-content ul li,
 #block-menu-menu-mega-review-menu .block-content ul li,
+#block-menu-menu-blog-admin-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
 #block-menu-menu-photogallery-admin-menu .block-content ul li{
   cursor: pointer;
@@ -599,20 +605,24 @@ form .form-item .form-item{
   border: none;
 }
 #block-menu-menu-story-content-admin-menu .block-content ul li,
+#block-menu-menu-blog-admin-menu .block-content ul li,
 #block-menu-menu-mega-review-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
 #block-menu-menu-photogallery-admin-menu .block-content ul li{padding: 0;}
 #block-menu-menu-story-content-admin-menu .block-content ul li a,
+#block-menu-menu-blog-admin-menu .block-content ul li a,
 #block-menu-menu-mega-review-menu .block-content ul li a,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a{padding: 10px 20px; display: block; color: #666; position: relative;}
 .block-itg-story-list span.active, .block-itg-story-list span:hover, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active, 
+#block-menu-menu-blog-admin-menu .block-content ul li a.active, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active, 
 #block-menu-menu-mega-review-menu .block-content ul li a.active, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a:hover,
 #block-menu-menu-mega-review-menu .block-content ul li a:hover,
+#block-menu-menu-blog-admin-menu .block-content ul li a:hover,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a:hover,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a:hover{
   color: #008eb1;
@@ -621,6 +631,7 @@ form .form-item .form-item{
 .block-itg-story-list span.active:after, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active:after, 
 #block-menu-menu-mega-review-menu .block-content ul li a.active:after, 
+#block-menu-menu-blog-admin-menu .block-content ul li a.active:after, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active:after, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active:after{
   content: '';
@@ -634,7 +645,9 @@ form .form-item .form-item{
 .block-itg-story.fixed, 
 .block-itg-poll.fixed, 
 .block-itg-astro.fixed, 
-.block-itg-recipe.fixed, 
+.block-itg-recipe.fixed,
+.block-itg-survey.fixed,
+.block-itg-quiz.fixed,
 .block-itg-breaking-news.fixed, 
 .block-itg-photogallery.fixed{
   position: fixed;
@@ -1196,7 +1209,7 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .node-survey-form .field-multiple-table tbody div.description,
 .node-survey-form .field-multiple-table tbody .form-item span.error{clear: both;}
 .node-survey-form .field-multiple-table tbody div.description{padding-left: 300px;}
-.node-survey-form .field-multiple-table tbody .button-remove{margin-left: 300px;}
+.node-survey-form .field-multiple-table tbody .button-remove{margin-left: 0;}
 .node-survey-form table td, .node-survey-form table th{max-width: none;} 
 .field-name-field-survey-start-date .date-combo > .fieldset-content,
 .field-name-field-survey-end-date .date-combo > .fieldset-content{float: left; padding: 0;}
@@ -1498,10 +1511,6 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .content-node-view .field-name-field-astro-zodiac .field-items > .field-item:first-child{border-top: none; padding-top: 0;}
 .field-name-field-astro-video .form-type-managed-file .file-widget > .form-item, 
 .field-name-field-common-audio-file .form-type-managed-file .file-widget > .form-item{margin-top: 10px;}
-.field-name-field-astro-video .form-type-managed-file .file-widget .file a, 
-.field-name-field-common-audio-file .form-type-managed-file .file-widget .file a{display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: top; white-space: nowrap; width: 200px;}
-.field-name-field-astro-video .form-type-managed-file .file-widget .file-size, 
-.field-name-field-astro-video .form-type-managed-file .file-widget .file-size{margin-right: 5px;}
 #views-form-photo-gallery-management-page-1 thead .views-field.views-field-counter, 
 #draggableviews-table-strory-menegment-page-1 thead .views-field.views-field-counter, 
 #draggableviews-table-movie-review-list-page thead .views-field.views-field-counter, 
@@ -1531,7 +1540,7 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 [id*="field-quiz-add-questions-values"] .field-name-field-quiz-options-answer .field-multiple-table tbody{max-width: none !important; width: 100%;}
 .field-name-field-quiz-answer-image .form-managed-file div.image-widget-data{width: 100%;}
 .field-name-field-quiz-answer-image .form-managed-file div.image-widget-data input.form-file, 
-.field-name-field-quiz-answer-video .form-managed-file input.form-file{width: 210px;}
+.field-name-field-quiz-answer-video .form-managed-file input.form-file{width: 210px; float: left;}
 .node-quiz-form .field-name-field-quiz-answer-image, 
 .node-quiz-form .field-name-field-quiz-answer-video, 
 .node-quiz-form .field-name-field-quiz-answer-text{display: none;} 
@@ -1541,16 +1550,16 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 [id*="field-quiz-add-questions-values"] > tbody, 
 [id*="field-quiz-add-questions-values"] > tbody > tr, 
 [id*="field-quiz-add-questions-values"] > tbody tr > td{width: 100% !important; max-width: none !important; box-sizing: border-box; float: left;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset{border: none;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > .fieldset-content{padding: 0;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset > legend{display: none;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-question{background-color: #fffddf; padding: 10px; box-sizing: border-box;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-add-media{padding: 0 10px; box-sizing: border-box;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type,
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type{padding: 10px; box-sizing: border-box; float: left; width: 50%;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-survey-question .form-item .form-text{width: 85% !important; max-width: none !important; box-sizing: border-box;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-answer-type .form-item label{width: 30%;}
-[id*="field-quiz-add-questions-values"] > tbody tr > td > .fieldset .field-name-field-quiz-weightage .form-item .form-text{max-width: 100px !important;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset{border: none;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset .fieldset-content{padding: 0; position: relative;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset-content > .button-remove{position: absolute; left: 0; bottom: 8px;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .fieldset legend{display: none;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-survey-question{background-color: #fffddf; padding: 10px; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-survey-add-media{padding: 0 10px; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-quiz-answer-type{padding: 0 10px; box-sizing: border-box; float: left; width: 50%;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-survey-question .form-item .form-text{width: 85% !important; max-width: none !important; box-sizing: border-box;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-quiz-answer-type .form-item label{width: 30%;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td .field-name-field-quiz-weightage .form-item .form-text{max-width: 100px !important;}
 [id*="field-quiz-options-answer-values"] > tbody > tr > td{ background: #ebeff2 !important; padding: 10px; position: relative; margin-bottom: 10px;}
 [id*="field-quiz-options-answer-values"] td > .button-remove, 
 [id*="field-quiz-options-answer-values"] td > .ajax-new-content > .button-remove{background: rgba(0, 0, 0, 0) url("../images/close.png") no-repeat; height: 32px; width: 32px; border: none; box-shadow: none; border-radius: 0; margin-left: 0; position: absolute; right: 5px; top: 5px; font-size: 0; text-indent: -9999px;}
@@ -1564,8 +1573,21 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .page-display-question .view-question-list .views-field .views-label{font-weight: bold; padding-bottom: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px; display: block;}
 .page-display-question .view-question-list .entity-field-collection-item .field{padding-bottom: 10px;}
 .page-display-question .view-question-list .entity-field-collection-item .field-label{float: left; width: 20%;}
-.page-display-question .view-question-list .entity-field-collection-item .field-items{overflow: hidden;}
+.page-display-question .view-question-list .entity-field-collection-item .field-items{overflow: hidden; float: none;}
+.page-display-question .view-question-list .entity-field-collection-item .field-name-field-quiz-options-answer > .field-items > .field-item{border-bottom: 1px dashed #ddd; margin-bottom: 8px;}
 .page-display-question .view-question-list .entity-field-collection-item .field-collection-view{margin: 0 0 10px; padding: 0 0 10px;}
 .page-display-question .view-question-list .entity-field-collection-item .field-collection-view:last-child{border-bottom: none; padding-bottom: 0;}
-.page-display-question .view-question-list .entity-field-collection-item .field-collection-view-links,
-.page-display-question .view-question-list .entity-field-collection-item .action-links{display: none;}
+/*.page-display-question .view-question-list .entity-field-collection-item .field-collection-view-links,
+.page-display-question .view-question-list .entity-field-collection-item .action-links{display: none;}*/
+.form-item legend span.error{padding-left: 0 !important;}
+.node-photogallery-form #edit-field-gallery-image .image-widget-data .button-remove + .form-item{display: block !important;}
+.field-name-field-quiz-answer-image .form-managed-file .image-preview + div.image-widget-data{width: auto;}
+[id*="field-quiz-add-questions-values"] > tbody tr > td{padding: 10px 10px 0; border: 1px solid #ddd; margin-bottom: 10px;}
+.node-astro-form .form-managed-file .button-remove{margin-left: 5px !important;}
+.node-astro-form .form-managed-file span.file{max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.node-astro-form .form-type-managed-file .image-widget div.image-widget-data{width: 275px;}
+.node-astro-form .form-type-managed-file .ajax-progress-throbber{display: none;}
+.node-astro-form .form-type-managed-file .image-widget div.image-widget-data > span.error{padding-left: 0;}
+.node-astro-form .field-name-field-buzz-description .form-item span.error{padding-left: 300px;}
+.node-astro-form table .field-name-field-buzz-description .form-item span.error{padding-left: 0px;}
+.field-name-field-astro-select-number .form-item span.error{padding-left: 150px;}

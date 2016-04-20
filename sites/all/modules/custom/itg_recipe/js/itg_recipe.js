@@ -31,6 +31,18 @@
         },
         ignore: '',
         errorElement: 'span',
+        errorPlacement: function (error, element) {
+          var elementName = element.attr('name');
+          var errorPlaceHolder = '';
+          switch (elementName) {
+            case 'field_recipe_food_type[und]':
+              errorPlaceHolder = element.parent().parent().parent();
+              break;
+            default:
+              errorPlaceHolder = element.parent();
+          }
+          error.appendTo(errorPlaceHolder);
+        },
         rules: { 
         'field_recipe_cuisine_type[und]': {
             required: true,
