@@ -338,8 +338,7 @@ function itg_astro_menu_alter(&$item) {
  * Implement hook_views_pre_render
  * @param stdObject $view
  */
- 
-function itg_astro_views_pre_render(&$view) {  
+function itg_astro_views_pre_render(&$view) {    
   //Add "Create Breaking news" on listing page of Breaking news
   if ($view->name == "manage_astroo") {
     $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
@@ -349,6 +348,12 @@ function itg_astro_views_pre_render(&$view) {
   if ($view->name == 'category_manager_dev') {    
     $header_content_astro = '<span class="count">Count(' . count($view->result) . ')&nbsp;</span>';  
     $header_content_astro .= l(t('Create Category'), 'admin/structure/taxonomy/category_management/add');
+    $view->attachment_before = $header_content_astro;
+  }
+  if ($view->name == 'syndication_client') {
+    $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
+    $header_content_astro .= l(t('Create Client'), 'node/add/syndication-client');
+    $header_content_astro .= l(t('Associate Service with Client'), 'node/add/syndication-client-service-assoc');
     $view->attachment_before = $header_content_astro;
   }
 }

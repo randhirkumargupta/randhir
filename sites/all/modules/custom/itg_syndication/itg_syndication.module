@@ -1,6 +1,109 @@
 <?php
 
 /**
+ * Implement hook_permissions()
+ */
+function itg_syndication_permission() {
+  return array(
+    'administer itg_syndication settings' => array(
+      'title' => t('Administer Syndication Feed Generator'),
+      'description' => t('Generate feeds for syndication.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu()
+ * @return array
+ */
+function itg_syndication_menu() {
+  // Syndication Feed Generator  
+  $items['syndication/feed-generator'] = array(
+    'title' => t('Syndication Feed Generator'),    
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_syndication_form'),
+    'access arguments' => array('administer itg_syndication settings'),        
+    'type' => MENU_CALLBACK,    
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_form()
+ * @return array
+ */
+function itg_syndication_form() {
+  // Get list of all content type
+  $all_content_type = node_type_get_types();
+  
+  // Praper array for options
+  $options = array('_none' => '- Select web property - ');
+  foreach ($all_content_type as $key => $value) {
+    $options[$key] = $value->name;
+  }
+  
+   $selected = isset($form_state['values']['web_property']) ? $form_state['values']['web_property'] : key($options);
+  
+  // Create web property field.
+  $form['web_property'] = array(
+    '#type' => 'select', 
+    '#title' => t('Web Property'),
+    '#description' => t('System displays all the web properties. User can select any of them and correspondingly content will only be displayed.'),
+    '#options' => $options,
+    '#default_value' => $selected,
+    '#required' => TRUE,
+    '#ajax' => array(
+      'callback' => 'itg_syndication_issue_callback',
+      'wrapper' => 'issue_replace',      
+    ),
+  );
+  
+  // Create issue field
+  $form['issue'] = array(
+    '#type' => 'select', 
+    '#title' => t('Issue'),
+    '#description' => t('The drop down displays the values from the repository of issues for the selected magazine.'),
+    '#options' => itg_syndication_issue_list($selected),    
+    '#default_value' => isset($form_state['values']['issue']) ? $form_state['values']['issue'] : '',
+     '#prefix' => '<div id="issue_replace">',
+    '#suffix' => '</div>',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="web_property"]' => array('value' => 'magazine'),
+      ),
+      'required' => array(
+        ':input[name="web_property"]' => array('value' => 'magazine'),
+      ),
+    ),
+  );     
+  
+  return $form;
+}
+
+/**
+ * Callback function for magazine.
+ * @return array
+ */
+function itg_syndication_issue_callback($form, $form_state) {
+  return $form['issue'];
+}
+
+function itg_syndication_issue_list($key = '') {
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('nid','title'))
+      ->condition('type', $key)
+      ->condition('status', 1);
+  $itg_result = $itg_query->execute();
+  $data = array();
+  foreach($itg_result as $value) {
+    $data[$value->nid] = $value->title;
+  }
+  
+  return $data;
+}
+
+/**
  * Check duplicate client name.
  * @param string $title
  * @param string $sharing_mode
@@ -27,7 +130,7 @@ function itg_syndication_check_duplicate($title, $sharing_mode, $nid = NULL) {
  * @param array $form_state
  * @param string $form_id
  */ 
-function itg_syndication_form_alter(&$form, &$form_state, $form_id) {    
+function itg_syndication_form_alter(&$form, &$form_state, $form_id) {  
   if ($form_id == 'syndication_client_node_form') {        
     // Load vocabulary id from machine name.
     $vid = taxonomy_vocabulary_machine_name_load('client_title');
@@ -59,10 +162,35 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     );
     
     // Custom callback for  after form built
+    $form['#action'] = '?destination=syndication-client-listing';
     $form['#after_build'][] = 'itg_syndication_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_syndication_change_message';
   }
+  if ($form_id == 'syndication_client_service_assoc_node_form') {
+    $form['#action'] = '?destination=syndication-client-listing';
+    $form['#after_build'][] = 'itg_syndication_service_after_build';
+    $form['actions']['submit']['#submit'][] = 'itg_syndication_service_change_message';
+  }
 }
+
+/**
+ * After build callback function for syndication service assosiation form
+ * @param array $form
+ * @param array $form_state
+ * @return array 
+ */
+function itg_syndication_service_after_build($form, &$form_state) {
+  // Add cancel button to create/edit astro page
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'syndication-client-listing', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+  $form['additional_settings']['#access'] = FALSE;
+  
+  return $form;
+}
+
+
 
 /**
  * After build callback function.
@@ -95,6 +223,7 @@ function itg_syndication_after_build($form, &$form_state) {
     '#markup' => l(t('Cancel'), 'syndication-client-listing', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
   );
+  $form['additional_settings']['#access'] = FALSE;
   
   return $form;
 }
@@ -187,5 +316,20 @@ function itg_syndication_change_message($form, &$form_state) {
   }
   else {
     drupal_set_message(t('Client updated successfully.'));
+  }  
+}
+
+/**
+ * Custom submit callback function to change message after Syndication service node save/update.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_syndication_service_change_message($form, &$form_state) {    
+  drupal_get_messages('status');
+  if ($form_state['values']['changed'] == '') {
+    drupal_set_message(t('Service associated successfully.'));
+  }
+  else {
+    drupal_set_message(t('Service updated successfully.'));
   }  
 }
