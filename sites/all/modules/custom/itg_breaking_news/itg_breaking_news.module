@@ -181,7 +181,15 @@ function itg_breaking_news_form_views_exposed_form_alter(&$form, &$form_state, $
         $form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
         $form['title']['#autocomplete_path'] = 'content-title-list/breaking_news/autocomplete';
         $form['title']['#attributes'] = array('placeholder' => t('Title'));
-    }
+        
+        // code to reset breaking news listing when user click on back button
+        drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("form").each(function() {            
+                 this.reset();
+                 
+               });              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
 }
 
 /**
