@@ -469,7 +469,7 @@
             jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
               $(this).mousedown();
             });
-            var sign_name = Drupal.settings.sign;
+            var sign_name = Drupal.settings.sign;            
             var i = 0;
             for (var key in sign_name) {
               $('select[name="field_astro_zodiac[und][' + i + '][field_zodiac_sign][und]"]').val(sign_name[key]);
