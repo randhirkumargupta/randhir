@@ -55,8 +55,8 @@
   <?php print drupal_render($form['field_recipe_syndication']); ?>
 </div>
 
-<div id="RecipeSection">
-  <h2 class="story-title"><?php print t('Recipe Section'); ?></h2>
+<div id="RecipeCategory">
+  <h2 class="story-title"><?php print t('Recipe Category'); ?></h2>
   <?php print drupal_render($form['field_story_category']); ?>
 </div>
 <h2 id="title-metatags" class="story-title"><?php print t('Meta Tags'); ?></h2>
