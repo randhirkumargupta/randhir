@@ -128,7 +128,7 @@ function itg_task_allocation_comment_insert($comment) {
     $first_key = key($uid_array);
     if(isset($first_key)){
       $user_fields = user_load($first_key);
-      $$node->comment_value = $comment->comment_body[LANGUAGE_NONE][0]['value'];
+      $node->comment_value = $comment->comment_body[LANGUAGE_NONE][0]['value'];
       task_get_mail_content($node, 'comment', $user_fields->mail);
     }
   }
