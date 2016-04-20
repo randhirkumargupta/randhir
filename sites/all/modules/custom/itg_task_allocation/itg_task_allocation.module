@@ -10,8 +10,7 @@
  * Implements views header link 
  * @param type $view Description
  */
-function itg_task_allocation_views_pre_render(&$view) {
- 
+function itg_task_allocation_views_pre_render(&$view) { 
   if ($view->name == "task") {    
     $header_content = l(t('Create Task Idea'), 'node/add/task-idea-allocation-tracking', array('query' => array('destination' => arg(0))));    
     $view->attachment_before = $header_content;
@@ -37,17 +36,14 @@ function itg_task_allocation_form_task_idea_allocation_tracking_node_form_alter(
  * @param type $form_id  
  */
 function itg_task_allocation_form_comment_node_task_idea_allocation_tracking_form_alter(&$form, &$form_state, $form_id) {
-  $form['field_task_comment_change_status'][LANGUAGE_NONE]['#options'] = array('_none' => '- None -', 'open' => 'Assigned', 'closed' => 'Completed');
+  $form['field_task_comment_change_status'][LANGUAGE_NONE]['#options'] = array('_none' => '- None -', 'open' => 'In Progress', 'closed' => 'Completed');
   if ($form['#node']->field_task_comment_change_status[LANGUAGE_NONE][0]['value'] == 'closed') {
     $form['#access'] = FALSE;
   }
-   drupal_add_js('jQuery(document).ready(function() {                  
+  drupal_add_js('jQuery(document).ready(function() {                  
                      jQuery(".comment-add").hide(); 
                      jQuery(".comment-reply").hide(); 
           });', array('type' => 'inline', 'scope' => 'footer'));
-  
-  
-  
 }
 
 /**
@@ -75,14 +71,12 @@ function itg_task_allocation_form_after_build($form, &$form_state) {
  * @param type $form_state
  * @param type $form_id  
  */
-function itg_task_allocation_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
- 
+function itg_task_allocation_form_views_exposed_form_alter(&$form, &$form_state, $form_id) { 
    if ($form['#id'] == 'views-exposed-form-task-page' || $form['#id'] == 'views-exposed-form-task-page-1') {
+     
      $form['title']['#autocomplete_path'] = 'content-title-list/task_idea_allocation_tracking/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Task Name'));
-     
-     $form['#info']['filter-created']['label'] = '';
-     
+     $form['title']['#attributes'] = array('placeholder' => t('Task Name'));     
+     $form['#info']['filter-created']['label'] = '';     
      $form['created']['min'] = array(
       '#type' => 'date_popup',
       '#title' => t('From'),
