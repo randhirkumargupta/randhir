@@ -295,6 +295,15 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
           });', array('type' => 'inline', 'scope' => 'footer'));
   }
   
+  if ($form['#id'] == 'views-exposed-form-ask-an-expert-page' || $form['#id'] == 'views-exposed-form-ask-an-expert-page-2') {
+    drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".form-submit").click(function() {
+                 jQuery("#edit-field-user-email-value").val(jQuery.trim(jQuery("#edit-field-user-email-value").val()));
+                 jQuery("#edit-title").val(jQuery.trim(jQuery("#edit-title").val()));
+                 
+               });              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
 }
 
 /**
