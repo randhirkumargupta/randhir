@@ -54,8 +54,9 @@ function features_for_survey_field_group_info() {
     'label' => 'Date Settings',
     'weight' => '3',
     'children' => array(
-      0 => 'field_survey_start_date',
-      1 => 'field_survey_end_date',
+      0 => 'field_survey_end_date',
+      1 => 'field_survey_start_date',
+      2 => 'field_survey_expity_date',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

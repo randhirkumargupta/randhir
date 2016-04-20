@@ -16,7 +16,13 @@ function itg_quiz_quiz_form() {
 
   //Check: Any quiz is activated OR not
   if ($node) {
-    
+    $start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
+    if(time() < $start_date){
+        $form['no_quiz_attempt'] = array(
+        '#type' => 'markup',
+        '#markup' => '<h2>You can not attempt quiz today. Quiz start date is: ' .date('Y/m/d', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])).'</h2>',
+        );
+    } else {
     $num = 0;
     $form = array();
     
@@ -221,7 +227,7 @@ function itg_quiz_quiz_form() {
         '#type' => 'hidden',
         '#value' => $quiz_result_type,
     );
-    
+   }
   } else { //If no quiz found
     $form['no_quiz'] = array(
         '#type' => 'markup',
