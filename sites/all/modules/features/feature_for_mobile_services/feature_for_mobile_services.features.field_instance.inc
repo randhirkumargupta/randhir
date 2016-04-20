@@ -746,14 +746,14 @@ function feature_for_mobile_services_field_default_field_instances() {
   $field_instances['node-create_content-field_service_audio'] = array(
     'bundle' => 'create_content',
     'deleted' => 0,
-    'description' => 'Please upload audio',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 6,
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -771,7 +771,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'mp3 wav',
+      'file_extensions' => 'mp3 mp4 ogg',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -806,7 +806,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 7,
+      'weight' => 15,
     ),
   );
 
@@ -814,14 +814,14 @@ function feature_for_mobile_services_field_default_field_instances() {
   $field_instances['node-create_content-field_service_video'] = array(
     'bundle' => 'create_content',
     'deleted' => 0,
-    'description' => 'Please upload video.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 7,
+        'weight' => 13,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -839,7 +839,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'mp4 avi flv',
+      'file_extensions' => 'mp4 flv avi ogg wmv',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -874,7 +874,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 8,
+      'weight' => 16,
     ),
   );
 
@@ -1585,8 +1585,6 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('Header');
   t('Mail to');
   t('Mobile Number');
-  t('Please upload audio');
-  t('Please upload video.');
   t('Regional service');
   t('Service Title');
   t('Short Description');
