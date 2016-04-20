@@ -700,6 +700,132 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-create_content-field_ftp_ip_address'.
+  $field_instances['node-create_content-field_ftp_ip_address'] = array(
+    'bundle' => 'create_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ftp_ip_address',
+    'label' => 'Content image',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance: 'node-create_content-field_ftp_password'.
+  $field_instances['node-create_content-field_ftp_password'] = array(
+    'bundle' => 'create_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ftp_password',
+    'label' => 'Content Video',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-create_content-field_ftp_username'.
+  $field_instances['node-create_content-field_ftp_username'] = array(
+    'bundle' => 'create_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ftp_username',
+    'label' => 'Content Audio',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-create_content-field_service_association_title'.
   $field_instances['node-create_content-field_service_association_title'] = array(
@@ -742,142 +868,6 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-create_content-field_service_audio'.
-  $field_instances['node-create_content-field_service_audio'] = array(
-    'bundle' => 'create_content',
-    'deleted' => 0,
-    'description' => 'Please upload audio',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_audio',
-    'label' => 'Content Audio',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'exclude_cv' => FALSE,
-      'file_directory' => '',
-      'file_extensions' => 'mp3 wav',
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 0,
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 0,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-            'search_all_fields' => 0,
-          ),
-        ),
-        'imce_filefield_on' => 0,
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'file_generic',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance: 'node-create_content-field_service_video'.
-  $field_instances['node-create_content-field_service_video'] = array(
-    'bundle' => 'create_content',
-    'deleted' => 0,
-    'description' => 'Please upload video.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_video',
-    'label' => 'Content Video',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'exclude_cv' => FALSE,
-      'file_directory' => '',
-      'file_extensions' => 'mp4 avi flv',
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 0,
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 0,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-            'search_all_fields' => 0,
-          ),
-        ),
-        'imce_filefield_on' => 0,
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'file_generic',
-      'weight' => 8,
-    ),
-  );
-
   // Exported field_instance:
   // 'node-create_content-field_story_expert_description'.
   $field_instances['node-create_content-field_story_expert_description'] = array(
@@ -903,7 +893,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_expert_description',
-    'label' => 'Content',
+    'label' => 'Content Text',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -918,82 +908,6 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-create_content-field_story_large_image'.
-  $field_instances['node-create_content-field_story_large_image'] = array(
-    'bundle' => 'create_content',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_large_image',
-    'label' => 'Content image',
-    'required' => 0,
-    'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'exclude_cv' => FALSE,
-      'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'image',
-      'settings' => array(
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 0,
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 0,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-            'search_all_fields' => 0,
-          ),
-        ),
-        'imce_filefield_on' => 0,
-        'preview_image_style' => 'thumbnail',
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'image_image',
-      'weight' => 6,
     ),
   );
 
@@ -1062,7 +976,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_email_address',
     'label' => 'Mail to',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -1564,10 +1478,10 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('Client Title');
   t('Client selection');
   t('Contact Person Name');
-  t('Content');
   t('Content Audio');
   t('Content Count');
   t('Content Sharing mode');
+  t('Content Text');
   t('Content Type');
   t('Content Video');
   t('Content image');
@@ -1585,8 +1499,6 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('Header');
   t('Mail to');
   t('Mobile Number');
-  t('Please upload audio');
-  t('Please upload video.');
   t('Regional service');
   t('Service Title');
   t('Short Description');
