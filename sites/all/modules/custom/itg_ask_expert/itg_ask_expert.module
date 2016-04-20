@@ -38,10 +38,12 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
    //code to hide source field
    if ($user->uid != '1') {
       $form['field_user_source_term_id']['#access'] = FALSE;
+      $form['field_story_source_type']['#access'] = FALSE;
     }
     // hide message box in add condition
     if(empty($form['nid']['#value']) && $user->uid != '1') {
       $form['field_user_message']['#access'] = FALSE;
+      $form['field_story_source_type']['#access'] = FALSE;
     }
     // check if user is logged in auto fill email
     if ($user->uid && $form['#node']->nid == '') {
@@ -310,4 +312,17 @@ function itg_ask_expert_description_check($nid) {
           ->execute()->fetchAssoc();
 
   return $result['entity_id'];
+}
+
+/*
+ * Implement hook_node_presave
+ * @param array $node
+ */
+function itg_ask_expert_node_presave($node) {
+  global $user;
+  if ($node->type == 'ask_an_expert') {
+    if(!empty($node->nid)) {
+     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = $user->uid;
+    }
+  }
 }
