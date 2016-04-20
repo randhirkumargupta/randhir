@@ -1,8 +1,13 @@
 <?php
 
 /**
- * Check duplicate title
+ * Check duplicate client name.
+ * @param string $title
+ * @param string $sharing_mode
+ * @param integer $nid
+ * @return integer
  */
+ 
 function itg_syndication_check_duplicate($title, $sharing_mode, $nid = NULL) {
   $itg_query = db_select('node', 'n');
   if ($nid != NULL) {
@@ -19,9 +24,9 @@ function itg_syndication_check_duplicate($title, $sharing_mode, $nid = NULL) {
 
 /**
  * Implements hook_form_alter()
- * @param type $form
- * @param type $form_state
- * @param type $form_id
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
  */
  
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {    
@@ -63,8 +68,9 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * After build callback function.
- * @param type $form
- * @param type $form_state
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
  
 function itg_syndication_after_build($form, &$form_state) {
@@ -98,6 +104,7 @@ function itg_syndication_after_build($form, &$form_state) {
 
 /**
  * Implements hook_field_group_build_pre_render_alter.
+ * @param array $element
  */
 function itg_syndication_field_group_build_pre_render_alter(&$element) {
   if (isset($element['#form_id'])) {
@@ -117,9 +124,9 @@ function itg_syndication_field_group_build_pre_render_alter(&$element) {
 
 /**
  * Implemtnts hook_node_validate()
- * @param type $node
- * @param type $form
- * @param type $form_state
+ * @param Object $node
+ * @param array $form
+ * @param array $form_state
  */
 function itg_syndication_node_validate($node, $form, &$form_state) {   
   if ($node->type == 'syndication_client') {
@@ -172,9 +179,9 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
 }
 
 /**
- * Custom submit callback function to change message after astro node save.
- * @param type $form
- * @param type $form_state
+ * Custom submit callback function to change message after Syndication client node save/update.
+ * @param array $form
+ * @param array $form_state
  */
 function itg_syndication_change_message($form, &$form_state) {    
   $messages = drupal_get_messages('status');
