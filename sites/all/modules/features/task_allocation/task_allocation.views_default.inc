@@ -26,10 +26,21 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     4 => '4',
+    11 => '11',
+    12 => '12',
     5 => '5',
+    13 => '13',
+    14 => '14',
+    15 => '15',
     6 => '6',
+    21 => '21',
     7 => '7',
+    16 => '16',
+    17 => '17',
+    18 => '18',
     20 => '20',
+    19 => '19',
+    10 => '10',
     9 => '9',
   );
   $handler->display->display_options['cache']['type'] = 'none';
@@ -399,6 +410,12 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['comments_link']['exclude'] = TRUE;
   $handler->display->display_options['fields']['comments_link']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['comments_link']['alter']['path'] = 'comment/reply/[nid]';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Select team member (field_task_team_member) */
   $handler->display->display_options['arguments']['field_task_team_member_target_id']['id'] = 'field_task_team_member_target_id';
@@ -752,6 +769,12 @@ print $user->mail;
   $handler->display->display_options['fields']['created']['exclude'] = TRUE;
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Author uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
