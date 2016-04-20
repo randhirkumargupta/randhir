@@ -6,8 +6,7 @@
  * @param string $sharing_mode
  * @param integer $nid
  * @return integer
- */
- 
+ */ 
 function itg_syndication_check_duplicate($title, $sharing_mode, $nid = NULL) {
   $itg_query = db_select('node', 'n');
   if ($nid != NULL) {
@@ -27,8 +26,7 @@ function itg_syndication_check_duplicate($title, $sharing_mode, $nid = NULL) {
  * @param array $form
  * @param array $form_state
  * @param string $form_id
- */
- 
+ */ 
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {    
   if ($form_id == 'syndication_client_node_form') {        
     // Load vocabulary id from machine name.
@@ -71,8 +69,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form
  * @param array $form_state
  * @return array
- */
- 
+ */ 
 function itg_syndication_after_build($form, &$form_state) {
   $form['field_email_address']['#states'] = array(
     'visible' => array(      
