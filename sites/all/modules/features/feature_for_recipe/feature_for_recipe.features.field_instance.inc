@@ -2112,6 +2112,48 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-recipe-field_recipe_wap_headline'.
+  $field_instances['node-recipe-field_recipe_wap_headline'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter WAP headline.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_recipe_wap_headline',
+    'label' => 'WAP headline',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 9,
+    ),
+  );
+
   // Exported field_instance: 'node-recipe-field_recipe_writer_image'.
   $field_instances['node-recipe-field_recipe_writer_image'] = array(
     'bundle' => 'recipe',
@@ -2702,6 +2744,48 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-recipe-field_story_short_headline'.
+  $field_instances['node-recipe-field_story_short_headline'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter strap headline.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 23,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_short_headline',
+    'label' => 'Strap headline (Short Headline)',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'node-recipe-field_story_small_image'.
   $field_instances['node-recipe-field_story_small_image'] = array(
     'bundle' => 'recipe',
@@ -2975,9 +3059,11 @@ function feature_for_recipe_field_default_field_instances() {
   t('Please enter Courtesy.');
   t('Please enter Long headline.');
   t('Please enter Time (e.g.15-30 min, 30 min - 1hr etc.)');
+  t('Please enter WAP headline.');
   t('Please enter kicker headline.');
   t('Please enter recipe garnishing.');
   t('Please enter recipe ingredients one value per line.');
+  t('Please enter strap headline.');
   t('Please select Ailment (e.g. Cancer, Hypertension etc.)');
   t('Please select Calorie Type (e.g. Medium etc.)');
   t('Please select Content type.');
@@ -2998,11 +3084,13 @@ function feature_for_recipe_field_default_field_instances() {
   t('Section');
   t('Small image');
   t('Social media integration');
+  t('Strap headline (Short Headline)');
   t('Syndication');
   t('Time');
   t('Tweet');
   t('Twitter narrative');
   t('Video');
+  t('WAP headline');
   t('Writer\'s image');
 
   return $field_instances;
