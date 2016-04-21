@@ -62,7 +62,9 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
         }
     
    // set term_id from url in hidden field 
-    $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = 130; //147
+    if (empty($form['nid']['#value'])) {
+      $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = 130; //147
+    }
     $form['actions']['submit']['#value'] = 'Submit';
     $form['#after_build'][] = 'itg_ask_expert_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_ask_expert_form_custom_callback';
