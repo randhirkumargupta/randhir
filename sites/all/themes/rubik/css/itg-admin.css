@@ -1685,3 +1685,11 @@ input[name="field_newsl_add_news_und_0_remove_button"],
  .field-name-field-story-expiry-date .container-inline-date label{display: none;}
  .field-name-field-story-expiry-date .fieldset-title{margin-top: 5px;}
  .node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking{background: none;}
+ .node-create_content-form .vertical-tabs, 
+ .node-clients_creation-form .vertical-tabs, 
+ .node-service_creation-form .vertical-tabs, 
+ .node-client_service_association-form .vertical-tabs{padding: 10px 10px;}
+ .node-create_content-form .vertical-tabs .vertical-tabs-list, 
+ .node-clients_creation-form .vertical-tabs .vertical-tabs-list, 
+ .node-service_creation-form .vertical-tabs .vertical-tabs-list, 
+ .node-client_service_association-form .vertical-tabs .vertical-tabs-list{display: none;}
