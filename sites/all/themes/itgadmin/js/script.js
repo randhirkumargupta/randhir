@@ -464,6 +464,8 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   });
   
+  $('.header__secondary-menu ul li.last a').html('<i class="fa fa-power-off" aria-hidden="true"></i>');
+  
   
   
 };
