@@ -63,12 +63,14 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
   if ($form_id == 'magazine_node_form') {
     $destination = 'manage-magazines';
     $form['title']['#description'] = '<p>' . t('Please enter magazine title.') . '</p>';
+    $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
   }
 
   //Set destination for supplement form
   if ($form_id == 'supplement_node_form') {
     $destination = 'manage-supplements';
     $form['title']['#description'] = '<p>' . t('Please enter supplement title.') . '</p>';
+    $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
   }
 
   //Set destination for issue form
@@ -117,12 +119,19 @@ function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
   }
   
   if(arg(2) == 'edit'){
-    $op = 'updated';
+    $op = 'updated.';
   } else {
-     $op = 'created';
+     $op = 'created.';
   }
-  $issue_title = date('m/d/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
-  drupal_set_message(t('Issue '.$issue_title.' has been '.$op.' successfully.'));
+  
+  if($form_state['node']->type == 'issue'){
+    
+    $title = date('m/d/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
+  } else {
+    $title = $form_state['node']->title;
+  }
+  $content_type = ucwords($form_state['node']->type);
+  drupal_set_message(t($content_type.' <strong>'.$title.'</strong> has been '.$op));
 }
 
 /**
@@ -268,17 +277,6 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
      $form['title']['#autocomplete_path'] = 'content/'.$type.'/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title')); 
    }
-   
-   /*
-   //Add Autocomplete on story title and NID for story listing page
-   if ($form['#id'] == 'views-exposed-form-issue-listing-page-1'){
-     $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Title'));
-     
-     //Autocomplete on story NID
-     $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
-     $form['nid']['#attributes'] = array('placeholder' => t('Nid'));
-   } */
 }
 
 
