@@ -278,6 +278,7 @@ function itg_workflow_query_alter(QueryAlterableInterface $query) {
  * @param type $account
  */
 function itg_workflow_node_access($node, $op, $account) {
+  global $user;
   
   $arr_source_type = array('issue', 'supplement');
  
@@ -293,7 +294,18 @@ function itg_workflow_node_access($node, $op, $account) {
       if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
         return NODE_ACCESS_DENY;
       }
-  }  
+  }
+  
+   // code for lock story  
+   if (isset($node->type) && $node->type == 'story' && $node->status == 1) {    
+     if (!array_key_exists(COPY_EDITOR, $user->roles) && !array_key_exists(SECTION_EDITOR, $user->roles) && !array_key_exists(EDITOR, $user->roles)){
+       foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+         if ($val['value'] == 'display_lock') {
+           return NODE_ACCESS_DENY;
+         }
+       }       
+     }
+   }
   
 
   return NODE_ACCESS_IGNORE;

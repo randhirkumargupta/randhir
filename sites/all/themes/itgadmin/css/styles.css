@@ -44,7 +44,7 @@ img {
 }
 
 /* line 31, ../sass/styles.scss */
-.mb-10 {
+.mb-10, #page-title {
   margin-bottom: 10px;
 }
 
@@ -75,7 +75,7 @@ img {
 }
 
 /* line 50, ../sass/styles.scss */
-.pdtb-10, .header {
+.pdtb-10 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -91,7 +91,7 @@ img {
 }
 
 /* line 60, ../sass/styles.scss */
-.no-bullet {
+.no-bullet, #block-menu-menu-admin-left-menu > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu, .content-block-menu > .menu, #block-menu-menu-story-content-admin-menu > .menu, .breadcrumb ol, .header__secondary-menu ul {
   list-style: none;
 }
 
@@ -101,12 +101,12 @@ img {
 }
 
 /* line 66, ../sass/styles.scss */
-.db {
+.db, span.error {
   display: block;
 }
 
 /* line 69, ../sass/styles.scss */
-.dib, .btn, .form-submit[value="Preview"], .form-submit[value="Save as Draft"], .button, .button.published, .add-more, .img-crt, input[name="field_gallery_image_add_more"], .form-type-managed-file .filefield-source, .credit-to-all, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size {
+.dib, .btn, .form-submit[value="Preview"], .form-submit[value="Save as Draft"], .button, .button.published, .add-more, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .header .header__logo, .form-type-managed-file .filefield-source, .credit-to-all, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #block-menu-menu-admin-left-menu > .menu, .content-block-menu > .menu, #block-menu-menu-story-content-admin-menu > .menu, .content-block-menu > .menu > li, #block-menu-menu-story-content-admin-menu > .menu > li, .breadcrumb ol li {
   display: inline-block;
 }
 
@@ -116,32 +116,32 @@ img {
 }
 
 /* line 75, ../sass/styles.scss */
-.vmid {
+.vmid, .breadcrumb ol li {
   vertical-align: middle;
 }
 
 /* line 78, ../sass/styles.scss */
-.vtop, .btn, .form-submit[value="Preview"], .form-submit[value="Save as Draft"], .button, .button.published, .add-more, .img-crt, input[name="field_gallery_image_add_more"], .form-type-managed-file .filefield-source, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size {
+.vtop, .btn, .form-submit[value="Preview"], .form-submit[value="Save as Draft"], .button, .button.published, .add-more, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .header .header__logo-image, .form-type-managed-file .filefield-source, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .content-block-menu > .menu > li, #block-menu-menu-story-content-admin-menu > .menu > li {
   vertical-align: top;
 }
 
 /* line 81, ../sass/styles.scss */
-.full, .credit-to-all, [id*="field-gallery-image-values"], [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview {
+.full, .credit-to-all, [id*="field-gallery-image-values"], [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview, #block-menu-menu-admin-left-menu > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu, .content-block-menu > .menu, #block-menu-menu-story-content-admin-menu > .menu {
   width: 100%;
 }
 
 /* line 84, ../sass/styles.scss */
-.fleft, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) {
+.fleft, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li {
   float: left;
 }
 
 /* line 87, ../sass/styles.scss */
-.fright {
+.fright, .header__secondary-menu {
   float: right;
 }
 
 /* line 90, ../sass/styles.scss */
-.pos-rel, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper {
+.pos-rel, .header, .header .container, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu > .menu > li {
   position: relative;
 }
 
@@ -213,7 +213,7 @@ img {
 }
 
 /* line 148, ../sass/styles.scss */
-.add-more, .img-crt, input[name="field_gallery_image_add_more"] {
+.add-more, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add {
   background-color: #1fb5ad;
   border: 1px solid #1fb5ad;
   color: #fff;
@@ -227,12 +227,27 @@ img {
   text-decoration: none;
 }
 /* line 162, ../sass/styles.scss */
-.add-more:hover, .img-crt:hover, input[name="field_gallery_image_add_more"]:hover {
+.add-more:hover, .img-crt:hover, input[name="field_gallery_image_add_more"]:hover, .form-type-plupload .plupload_buttons .plupload_button.plupload_add:hover {
   background-color: #1fb5ad;
   border: 1px solid #1fb5ad;
 }
 
 /* line 167, ../sass/styles.scss */
+.add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start {
+  background-color: #fff;
+  border: 1px solid #1fb5ad;
+  color: #1fb5ad;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* line 182, ../sass/styles.scss */
 a.ckeditor_links {
   font-size: 12px;
   color: #0c8bb1;
@@ -240,18 +255,18 @@ a.ckeditor_links {
   margin-top: 5px;
   text-decoration: underline;
 }
-/* line 173, ../sass/styles.scss */
+/* line 188, ../sass/styles.scss */
 a.ckeditor_links:hover {
   text-decoration: underline;
 }
 
-/* line 177, ../sass/styles.scss */
+/* line 192, ../sass/styles.scss */
 .form-submit {
   cursor: pointer;
 }
 
-/* line 195, ../sass/styles.scss */
-.desc-popup, .form-type-textfield .form-text + div.description, .form-type-checkboxes .form-checkboxes + div.description, .form-item-path-pathauto div.description, .form-type-textarea div.description, .form-type-managed-file .form-managed-file + div.description, .img-crt + .pre-desc, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname {
+/* line 210, ../sass/styles.scss */
+.desc-popup, .form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description, .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description, .form-type-checkboxes .form-checkboxes + div.description, .form-item-path-pathauto div.description, .form-type-textarea div.description, .form-type-managed-file .form-managed-file + div.description, .img-crt + .pre-desc, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   color: #8d8d8d;
@@ -264,8 +279,8 @@ a.ckeditor_links:hover {
   background-color: #fff;
   z-index: 9999;
 }
-/* line 207, ../sass/styles.scss */
-.desc-popup:before, .form-type-textfield .form-text + div.description:before, .form-type-checkboxes .form-checkboxes + div.description:before, .form-item-path-pathauto div.description:before, .form-type-textarea div.description:before, .form-type-managed-file .form-managed-file + div.description:before, .img-crt + .pre-desc:before, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before {
+/* line 222, ../sass/styles.scss */
+.desc-popup:before, .form-type-textfield .form-text + div.description:before, .form-type-textfield .form-text + span.error + div.description:before, .form-type-select .form-select + div.description:before, .form-type-select .form-select + span.error + div.description:before, .form-type-checkboxes .form-checkboxes + div.description:before, .form-item-path-pathauto div.description:before, .form-type-textarea div.description:before, .form-type-managed-file .form-managed-file + div.description:before, .img-crt + .pre-desc:before, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before {
   border-width: 7px 13px 7px 7px;
   border-style: solid;
   border-color: transparent #d9d9d9 transparent transparent;
@@ -278,8 +293,8 @@ a.ckeditor_links:hover {
   bottom: 0;
   margin: auto;
 }
-/* line 220, ../sass/styles.scss */
-.desc-popup:after, .form-type-textfield .form-text + div.description:after, .form-type-checkboxes .form-checkboxes + div.description:after, .form-item-path-pathauto div.description:after, .form-type-textarea div.description:after, .form-type-managed-file .form-managed-file + div.description:after, .img-crt + .pre-desc:after, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after {
+/* line 235, ../sass/styles.scss */
+.desc-popup:after, .form-type-textfield .form-text + div.description:after, .form-type-textfield .form-text + span.error + div.description:after, .form-type-select .form-select + div.description:after, .form-type-select .form-select + span.error + div.description:after, .form-type-checkboxes .form-checkboxes + div.description:after, .form-item-path-pathauto div.description:after, .form-type-textarea div.description:after, .form-type-managed-file .form-managed-file + div.description:after, .img-crt + .pre-desc:after, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after {
   border-width: 7px 13px 7px 7px;
   border-style: solid;
   border-color: transparent #fff transparent transparent;
@@ -293,13 +308,13 @@ a.ckeditor_links:hover {
   margin: auto;
 }
 
-/* line 236, ../sass/styles.scss */
+/* line 253, ../sass/styles.scss */
 .success-message, .messages--status {
   color: #009c00;
   font-size: 13px;
 }
 
-/* line 242, ../sass/styles.scss */
+/* line 259, ../sass/styles.scss */
 input[type="text"], select, input[type="password"] {
   border: 1px solid #d9d9d9;
   height: 36px;
@@ -309,7 +324,7 @@ input[type="text"], select, input[type="password"] {
   font-family: 'muli';
 }
 
-/* line 250, ../sass/styles.scss */
+/* line 267, ../sass/styles.scss */
 textarea {
   border: 1px solid #d9d9d9;
   height: 100px;
@@ -319,18 +334,23 @@ textarea {
   font-family: 'muli';
 }
 
-/* line 258, ../sass/styles.scss */
+/* line 275, ../sass/styles.scss */
 .form-required, .error {
   color: red;
 }
 
-/* line 261, ../sass/styles.scss */
+/* line 281, ../sass/styles.scss */
 * {
   box-sizing: border-box;
 }
 
 /* Layout CSS */
-/* line 269, ../sass/styles.scss */
+/* line 289, ../sass/styles.scss */
+#main {
+  padding-bottom: 30px;
+}
+
+/* line 293, ../sass/styles.scss */
 .container {
   max-width: 1200px;
   padding-left: 15px;
@@ -338,14 +358,56 @@ textarea {
   margin: 0 auto;
 }
 
-/* line 275, ../sass/styles.scss */
+/* line 299, ../sass/styles.scss */
 .header {
-  box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+  background-size: 100% auto;
   margin-bottom: 30px;
+}
+/* line 303, ../sass/styles.scss */
+.header:before {
+  background-color: #e4e3e5;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+}
+/* line 313, ../sass/styles.scss */
+.header:after {
+  background-color: #2f2f2f;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+}
+/* line 323, ../sass/styles.scss */
+.header .container {
+  background-color: #2f2f2f;
+  z-index: 9;
+}
+/* line 327, ../sass/styles.scss */
+.header .container:before {
+  background-color: #e4e3e5;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 100%;
+}
+/* line 337, ../sass/styles.scss */
+.header .header__logo {
+  padding: 8px 10px 9px 0;
+  background-color: #e4e3e5;
 }
 
 /* Form CSS */
-/* line 283, ../sass/styles.scss */
+/* line 349, ../sass/styles.scss */
 .node-form h2 {
   background-color: #fefafb;
   border-top: 1px solid #d9d9d9;
@@ -355,18 +417,18 @@ textarea {
   font-size: 18px;
   margin: 15px 0;
 }
-/* line 292, ../sass/styles.scss */
+/* line 358, ../sass/styles.scss */
 .node-form input[type="text"], .node-form select, .node-form .form-textarea-wrapper textarea {
   width: 100%;
   max-width: 332px;
 }
 
-/* line 298, ../sass/styles.scss */
+/* line 364, ../sass/styles.scss */
 .form-textarea-wrapper .grippie {
   display: none !important;
 }
 
-/* line 301, ../sass/styles.scss */
+/* line 367, ../sass/styles.scss */
 .form-type-textfield,
 .form-type-select,
 .form-type-managed-file,
@@ -377,7 +439,7 @@ textarea {
   margin: 30px 0;
 }
 
-/* line 310, ../sass/styles.scss */
+/* line 376, ../sass/styles.scss */
 .form-type-textfield > label,
 .form-type-textarea > label,
 .form-type-select > label,
@@ -389,7 +451,7 @@ textarea {
   padding-right: 20px;
 }
 
-/* line 320, ../sass/styles.scss */
+/* line 386, ../sass/styles.scss */
 .form-type-textfield > label + div,
 .form-type-textarea > label + div,
 .form-type-select > label + div,
@@ -398,7 +460,7 @@ textarea {
   padding-left: 220px;
 }
 
-/* line 328, ../sass/styles.scss */
+/* line 394, ../sass/styles.scss */
 .form-type-autocomplete-deluxe .autocomplete-deluxe-multiple {
   background: none;
   box-shadow: 0;
@@ -408,99 +470,120 @@ textarea {
   max-width: 332px;
 }
 
-/* line 341, ../sass/styles.scss */
+/* line 407, ../sass/styles.scss */
 div.description, .pre-desc {
   font-size: 12px;
   color: #8d8d8d;
 }
 
-/* line 345, ../sass/styles.scss */
+/* line 411, ../sass/styles.scss */
 div.vertical-tabs {
   border: none;
   margin: 0;
   position: relative;
 }
-/* line 349, ../sass/styles.scss */
+/* line 415, ../sass/styles.scss */
 div.vertical-tabs .form-type-textfield, div.vertical-tabs .form-type-textarea {
   margin: 0 0 30px;
 }
-/* line 352, ../sass/styles.scss */
+/* line 418, ../sass/styles.scss */
 div.vertical-tabs .form-item-log {
   margin-top: 30px;
 }
-/* line 355, ../sass/styles.scss */
+/* line 421, ../sass/styles.scss */
 div.vertical-tabs .form-textarea-wrapper {
   max-width: 555px;
 }
 
-/* line 359, ../sass/styles.scss */
+/* line 425, ../sass/styles.scss */
 .vertical-tabs fieldset.vertical-tabs-pane {
   padding: 0;
 }
 
-/* line 362, ../sass/styles.scss */
+/* line 428, ../sass/styles.scss */
 .form-type-textfield {
   position: relative;
 }
-/* line 365, ../sass/styles.scss */
-.form-type-textfield .form-text + div.description {
+/* line 431, ../sass/styles.scss */
+.form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description {
   left: 600px;
 }
-/* line 369, ../sass/styles.scss */
-.form-type-textfield .form-text:hover + div.description {
+/* line 435, ../sass/styles.scss */
+.form-type-textfield .form-text:hover + div.description, .form-type-textfield .form-text:hover + span.error + div.description {
   display: block;
 }
+/* line 439, ../sass/styles.scss */
+.form-type-textfield label + .form-text + span.error {
+  padding-left: 220px;
+}
 
-/* line 374, ../sass/styles.scss */
+/* line 443, ../sass/styles.scss */
+.form-type-select {
+  position: relative;
+}
+/* line 446, ../sass/styles.scss */
+.form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description {
+  left: 600px;
+}
+/* line 450, ../sass/styles.scss */
+.form-type-select .form-select:hover + div.description, .form-type-select .form-select:hover + span.error + div.description {
+  display: block;
+}
+/* line 454, ../sass/styles.scss */
+.form-type-select label + .form-select + span.error {
+  padding-left: 220px;
+}
+
+/* line 458, ../sass/styles.scss */
 .form-type-checkboxes {
   position: relative;
 }
-/* line 377, ../sass/styles.scss */
+/* line 461, ../sass/styles.scss */
 .form-type-checkboxes .form-checkboxes + div.description {
   left: 600px;
 }
-/* line 381, ../sass/styles.scss */
+/* line 465, ../sass/styles.scss */
 .form-type-checkboxes .form-checkboxes:hover + div.description {
   display: block;
 }
 
-/* line 387, ../sass/styles.scss */
+/* line 471, ../sass/styles.scss */
 .form-item-path-pathauto div.description {
   left: 105%;
   min-width: 165px;
 }
-/* line 392, ../sass/styles.scss */
+/* line 476, ../sass/styles.scss */
 .form-item-path-pathauto:hover div.description {
   display: block;
 }
 
-/* line 396, ../sass/styles.scss */
+/* line 480, ../sass/styles.scss */
 .form-type-textarea {
   position: relative;
 }
-/* line 399, ../sass/styles.scss */
+/* line 483, ../sass/styles.scss */
 .form-type-textarea div.description {
   left: 600px;
 }
-/* line 403, ../sass/styles.scss */
+/* line 487, ../sass/styles.scss */
 .form-type-textarea:hover div.description {
   display: block;
 }
 
-/* line 410, ../sass/styles.scss */
+/* line 494, ../sass/styles.scss */
 .form-type-managed-file .form-managed-file + div.description {
   left: 400px;
 }
-/* line 414, ../sass/styles.scss */
+/* line 498, ../sass/styles.scss */
 .form-type-managed-file .form-managed-file:hover + div.description {
   display: block;
 }
-/* line 418, ../sass/styles.scss */
+/* line 502, ../sass/styles.scss */
 .form-type-managed-file .filefield-source {
   width: 134px;
   height: 28px;
 }
-/* line 424, ../sass/styles.scss */
+/* line 508, ../sass/styles.scss */
 .form-type-managed-file .filefield-source .filefield-sources-imce-browse {
   position: absolute;
   left: 0;
@@ -508,7 +591,7 @@ div.vertical-tabs .form-textarea-wrapper {
   width: 100%;
   height: 100%;
 }
-/* line 430, ../sass/styles.scss */
+/* line 514, ../sass/styles.scss */
 .form-type-managed-file .filefield-source .filefield-sources-imce-browse:after {
   content: 'Choose Your File';
   font-size: 12px;
@@ -528,20 +611,20 @@ div.vertical-tabs .form-textarea-wrapper {
   cursor: pointer;
 }
 
-/* line 454, ../sass/styles.scss */
+/* line 538, ../sass/styles.scss */
 .img-crt {
   margin-left: 250px;
 }
-/* line 457, ../sass/styles.scss */
+/* line 541, ../sass/styles.scss */
 .img-crt + .pre-desc {
   left: 400px;
 }
-/* line 461, ../sass/styles.scss */
+/* line 545, ../sass/styles.scss */
 .img-crt:hover + .pre-desc {
   display: block;
 }
 
-/* line 467, ../sass/styles.scss */
+/* line 551, ../sass/styles.scss */
 .image-preview .image-fullname {
   font-size: 12px;
   width: 150px;
@@ -550,26 +633,26 @@ div.vertical-tabs .form-textarea-wrapper {
   overflow: hidden;
   margin-top: 5px;
 }
-/* line 474, ../sass/styles.scss */
+/* line 558, ../sass/styles.scss */
 .image-preview .image-fullname .file-icon {
   display: none;
 }
-/* line 477, ../sass/styles.scss */
+/* line 561, ../sass/styles.scss */
 .image-preview .image-fullname a {
   color: #2f2f2f;
   text-decoration: none;
 }
 
-/* line 485, ../sass/styles.scss */
+/* line 569, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-type-textfield {
   padding: 0 20px;
   margin: 0;
 }
-/* line 488, ../sass/styles.scss */
+/* line 572, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-type-textfield + .form-type-textfield {
   margin-top: 10px;
 }
-/* line 492, ../sass/styles.scss */
+/* line 576, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   border: none;
   background: none;
@@ -579,96 +662,101 @@ div.vertical-tabs .form-textarea-wrapper {
   left: 775px;
   top: 7px;
 }
-/* line 501, ../sass/styles.scss */
+/* line 585, ../sass/styles.scss */
 .form-managed-file .image-widget-data div.description {
   width: 200px;
   left: 370px;
   background-color: #fff;
 }
 
-/* line 514, ../sass/styles.scss */
+/* line 598, ../sass/styles.scss */
 .credit-to-all > div.form-field-name-field-credit-to-all .form-item {
   margin-top: 0;
   margin-bottom: 0;
 }
-/* line 520, ../sass/styles.scss */
+/* line 604, ../sass/styles.scss */
 .credit-to-all > div.form-field-name-field-credit-name .form-item {
   margin: -10px 0 0;
 }
-/* line 523, ../sass/styles.scss */
+/* line 607, ../sass/styles.scss */
 .credit-to-all > div.form-field-name-field-credit-name .form-item label {
   display: none;
 }
-/* line 526, ../sass/styles.scss */
+/* line 610, ../sass/styles.scss */
 .credit-to-all > div.form-field-name-field-credit-name .form-item .form-text {
   max-width: 208px;
 }
 
-/* line 533, ../sass/styles.scss */
+/* line 617, ../sass/styles.scss */
 [id*="field-gallery-image-values"] {
   float: left;
 }
-/* line 536, ../sass/styles.scss */
+/* line 620, ../sass/styles.scss */
 [id*="field-gallery-image-values"] thead {
   padding-right: 20px;
   width: 250px;
 }
-/* line 541, ../sass/styles.scss */
+/* line 624, ../sass/styles.scss */
+[id*="field-gallery-image-values"] thead th {
+  font-weight: 400;
+  padding-left: 30px;
+}
+/* line 629, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody {
   width: 720px;
   margin: 0 -15px;
 }
-/* line 545, ../sass/styles.scss */
+/* line 633, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody .field-multiple-drag {
   display: none;
 }
-/* line 548, ../sass/styles.scss */
+/* line 636, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr {
   width: 33.33%;
   padding: 0 15px 30px;
 }
-/* line 552, ../sass/styles.scss */
+/* line 640, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) {
   min-height: 396px;
   border: 1px solid #d9d9d9;
 }
-/* line 558, ../sass/styles.scss */
+/* line 646, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .messages--error {
   display: none;
 }
-/* line 561, ../sass/styles.scss */
+/* line 649, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) input[type="text"], [id*="field-gallery-image-values"] tbody tr td:nth-child(2) select, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) textarea {
   height: 28px;
   line-height: 18px;
   font-size: 12px;
 }
-/* line 566, ../sass/styles.scss */
+/* line 654, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-textfield, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-checkboxes, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-textarea, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file {
   margin: 10px 0;
   padding: 0 7px;
 }
-/* line 569, ../sass/styles.scss */
+/* line 657, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-textfield > label, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-checkboxes > label, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-textarea > label, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file > label {
   display: none;
 }
-/* line 571, ../sass/styles.scss */
+/* line 659, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-textfield > label + div, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-checkboxes > label + div, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-textarea > label + div, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file > label + div {
   padding: 0;
 }
-/* line 577, ../sass/styles.scss */
+/* line 665, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview {
   height: 124px;
 }
-/* line 580, ../sass/styles.scss */
+/* line 668, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-widget-data {
   position: absolute;
   bottom: 0;
 }
-/* line 583, ../sass/styles.scss */
+/* line 671, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-widget-data .form-type-textfield:nth-child(3) {
   display: none;
 }
-/* line 586, ../sass/styles.scss */
+/* line 674, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-widget-data .form-submit[value="Remove"] {
   left: auto;
   background: url("../images/cross_small.png") 3px center no-repeat #fff;
@@ -679,35 +767,35 @@ div.vertical-tabs .form-textarea-wrapper {
   top: -73px;
   text-indent: -9999px;
 }
-/* line 597, ../sass/styles.scss */
+/* line 685, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview {
   padding: 0;
 }
-/* line 600, ../sass/styles.scss */
+/* line 688, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview img {
   max-height: 124px;
 }
-/* line 607, ../sass/styles.scss */
+/* line 695, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview:hover .image-fullname {
   display: block;
   left: 108%;
   width: auto;
   overflow: visible;
 }
-/* line 616, ../sass/styles.scss */
+/* line 704, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data {
   float: none;
 }
-/* line 618, ../sass/styles.scss */
+/* line 706, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data .filefield-source {
   width: 100%;
   height: 124px;
 }
-/* line 621, ../sass/styles.scss */
+/* line 709, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data .filefield-source .filefield-sources-imce-browse {
   border-radius: 0;
 }
-/* line 623, ../sass/styles.scss */
+/* line 711, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data .filefield-source .filefield-sources-imce-browse:after {
   content: '\f03e';
   font-family: 'FontAwesome';
@@ -715,27 +803,27 @@ div.vertical-tabs .form-textarea-wrapper {
   line-height: 120px;
   color: #e5e5e5;
 }
-/* line 633, ../sass/styles.scss */
+/* line 721, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .form-managed-file + div.description {
   left: 220px;
   min-width: 230px;
 }
-/* line 638, ../sass/styles.scss */
+/* line 726, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file {
   font-size: 12px;
 }
-/* line 640, ../sass/styles.scss */
+/* line 728, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a {
   color: #2f2f2f;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 82px;
 }
-/* line 650, ../sass/styles.scss */
+/* line 738, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size {
   font-size: 12px;
 }
-/* line 655, ../sass/styles.scss */
+/* line 743, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget > input[value="Remove"] {
   border: none;
   background: url("../images/cross_small.png") center center no-repeat;
@@ -744,7 +832,7 @@ div.vertical-tabs .form-textarea-wrapper {
   text-indent: -9999px;
   margin: 4px 0 4px 10px;
 }
-/* line 665, ../sass/styles.scss */
+/* line 753, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) > input[value="Remove"], [id*="field-gallery-image-values"] tbody tr td:nth-child(2) > .ajax-new-content > input[value="Remove"] {
   position: absolute;
   border: none;
@@ -755,7 +843,7 @@ div.vertical-tabs .form-textarea-wrapper {
   top: 9px;
   right: 7px;
 }
-/* line 675, ../sass/styles.scss */
+/* line 763, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2):before {
   content: 'Gallery Image';
   background-color: #f6f6f6;
@@ -763,33 +851,192 @@ div.vertical-tabs .form-textarea-wrapper {
   font-size: 12px;
   display: block;
 }
-/* line 685, ../sass/styles.scss */
+/* line 773, ../sass/styles.scss */
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source .form-type-textfield {
   margin: 0;
 }
 
-/* line 694, ../sass/styles.scss */
+/* line 782, ../sass/styles.scss */
 input[name="field_gallery_image_add_more"] {
   margin: 0 0 0 250px;
 }
 
-/* line 698, ../sass/styles.scss */
+/* line 786, ../sass/styles.scss */
 .ajax-progress-throbber {
   position: absolute;
   left: 100%;
   top: 3px;
 }
 
-/* line 700, ../sass/styles.scss */
+/* line 788, ../sass/styles.scss */
 #Categorization select {
   max-width: 180px;
   min-height: 200px;
 }
 
-/* line 708, ../sass/styles.scss */
+/* line 796, ../sass/styles.scss */
 .path-form .fieldset-wrapper .form-type-checkbox {
   position: absolute;
   left: 600px;
   top: 10px;
   z-index: 9;
+}
+
+/* line 805, ../sass/styles.scss */
+.form-type-plupload {
+  margin-left: 250px;
+  margin-right: 30px;
+}
+/* line 809, ../sass/styles.scss */
+.form-type-plupload .plupload_buttons {
+  position: absolute;
+  left: 0;
+  top: -49px;
+}
+/* line 813, ../sass/styles.scss */
+.form-type-plupload .plupload_buttons .plupload_button {
+  background-image: none;
+  text-align: center;
+}
+/* line 816, ../sass/styles.scss */
+.form-type-plupload .plupload_buttons .plupload_button.plupload_add {
+  padding: 6px 40px;
+}
+/* line 820, ../sass/styles.scss */
+.form-type-plupload .plupload_buttons .plupload_button.plupload_start {
+  padding: 6px 40px;
+}
+
+/* line 827, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu {
+  margin: 20px 0;
+}
+/* line 829, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu h2 {
+  display: none;
+}
+/* line 832, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu > .menu {
+  border: 1px solid #d9d9d9;
+}
+/* line 840, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu > .menu > li > a {
+  display: block;
+  padding: 12px 12px;
+  color: #2f2f2f;
+}
+/* line 846, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu > .menu > li.active-trail > a, #block-menu-menu-admin-left-menu > .menu > li.active-trail > a.active, #block-menu-menu-admin-left-menu > .menu > li:hover > a, #block-menu-menu-admin-left-menu > .menu > li:hover > a.active {
+  background-color: #d00b26;
+  color: #fff;
+}
+/* line 851, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu > .menu > li > .menu {
+  display: none;
+}
+/* line 855, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu > .menu > li:hover > .menu {
+  background-color: #fff;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 42px;
+  border: 1px solid #d9d9d9;
+  z-index: 9999;
+}
+/* line 866, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu > .menu > li:hover > .menu li a {
+  padding: 10px 12px;
+  color: #2f2f2f;
+  display: block;
+}
+/* line 870, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu > .menu > li:hover > .menu li a:hover, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li a.active {
+  background-color: #f5f5f5;
+}
+/* line 874, ../sass/styles.scss */
+#block-menu-menu-admin-left-menu > .menu > li:hover > .menu li + li {
+  border-top: 1px solid #d9d9d9;
+}
+
+/* line 883, ../sass/styles.scss */
+.content-block-menu, #block-menu-menu-story-content-admin-menu {
+  margin: 20px 0;
+}
+/* line 885, ../sass/styles.scss */
+.content-block-menu h2, #block-menu-menu-story-content-admin-menu h2 {
+  display: none;
+}
+/* line 888, ../sass/styles.scss */
+.content-block-menu > .menu, #block-menu-menu-story-content-admin-menu > .menu {
+  background-color: #f0f0f0;
+}
+/* line 893, ../sass/styles.scss */
+.content-block-menu > .menu > li, #block-menu-menu-story-content-admin-menu > .menu > li {
+  font-size: 0;
+}
+/* line 897, ../sass/styles.scss */
+.content-block-menu > .menu > li > a, #block-menu-menu-story-content-admin-menu > .menu > li > a {
+  display: block;
+  padding: 10px 0 7px;
+  margin: 0 20px;
+  color: #5f5f5f;
+  font-size: 13px;
+  border-bottom: 2px solid transparent;
+}
+/* line 904, ../sass/styles.scss */
+.content-block-menu > .menu > li > a:hover, #block-menu-menu-story-content-admin-menu > .menu > li > a:hover {
+  border-bottom-color: #d00b26;
+}
+
+/* line 916, ../sass/styles.scss */
+.breadcrumb h2 {
+  display: none;
+}
+/* line 924, ../sass/styles.scss */
+.breadcrumb ol li a {
+  color: #666;
+  font-size: 13px;
+}
+/* line 927, ../sass/styles.scss */
+.breadcrumb ol li a:hover {
+  color: #2f2f2f;
+  text-decoration: underline;
+}
+/* line 932, ../sass/styles.scss */
+.breadcrumb ol li + li {
+  margin-left: 3px;
+}
+
+/* line 939, ../sass/styles.scss */
+.form-field-name-field-bulk-media-upload .form-checkboxes {
+  visibility: hidden;
+}
+
+/* line 943, ../sass/styles.scss */
+#name-and-slogan {
+  display: none;
+}
+
+/* line 944, ../sass/styles.scss */
+.header__secondary-menu {
+  line-height: 50px;
+}
+/* line 947, ../sass/styles.scss */
+.header__secondary-menu h2 {
+  display: none;
+}
+/* line 952, ../sass/styles.scss */
+.header__secondary-menu ul li {
+  margin-left: 20px;
+  font-weight: 300;
+}
+/* line 957, ../sass/styles.scss */
+.header__secondary-menu ul li.first a {
+  color: #fff;
+}
+/* line 962, ../sass/styles.scss */
+.header__secondary-menu ul li.last a {
+  color: #d00b26;
+  font-size: 21px;
 }

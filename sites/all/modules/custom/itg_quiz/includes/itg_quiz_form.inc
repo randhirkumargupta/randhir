@@ -16,7 +16,13 @@ function itg_quiz_quiz_form() {
 
   //Check: Any quiz is activated OR not
   if ($node) {
-    
+    $start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
+    if(time() < $start_date){
+        $form['no_quiz_attempt'] = array(
+        '#type' => 'markup',
+        '#markup' => '<h2>You can not attempt quiz today. Quiz start date is: ' .date('Y/m/d', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])).'</h2>',
+        );
+    } else {
     $num = 0;
     $form = array();
     
@@ -221,7 +227,7 @@ function itg_quiz_quiz_form() {
         '#type' => 'hidden',
         '#value' => $quiz_result_type,
     );
-    
+   }
   } else { //If no quiz found
     $form['no_quiz'] = array(
         '#type' => 'markup',
@@ -348,11 +354,16 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
         <div class = "quiz-contest-result"><strong>Winners List:</strong></div>';
         
         //Display winner list
-        $i = 1;
+        if(count($winners_list)<1){
+          $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp; No winner found!</div>';
+        } else {
+                  $i = 1;
         foreach ($winners_list as $key => $value) {
           $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp;'. $i.'. '.$value . '</div>';
           $i++;
         }
+        }
+
         $output .= '</div>';
         drupal_set_message($output, 'message');
         

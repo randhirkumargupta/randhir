@@ -164,6 +164,21 @@ img{
     border: 1px solid #1fb5ad;
     }
 }
+.add-more-wbg{
+    background-color: #fff;
+    border: 1px solid #1fb5ad;
+    color: #1fb5ad;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 6px 12px;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    @extend .dib;
+    @extend .vtop;
+}
 a.ckeditor_links{
   font-size: 12px;
   color: #0c8bb1;
@@ -232,7 +247,9 @@ a.ckeditor_links{
   }
 }
 
-
+#page-title{
+  @extend .mb-10;
+}
 .success-message, .messages--status{
   color:#009c00;
   font-size: 13px;
@@ -258,6 +275,9 @@ textarea{
 .form-required, .error{
   color: red;
 }
+span.error{
+  @extend .db;
+}
 *{
   @extend .mr-0;
   @extend .pd-0;
@@ -266,6 +286,10 @@ textarea{
 
 /* Layout CSS */
 
+#main{
+  padding-bottom: 30px;
+}
+
 .container{
   max-width: 1200px;
   padding-left: 15px;
@@ -273,9 +297,51 @@ textarea{
   margin: 0 auto;
 }
 .header{
-  @extend .pdtb-10;
-  box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+  background-size: 100% auto;
   margin-bottom: 30px;
+  @extend .pos-rel;
+  &:before{
+    background-color: #e4e3e5;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+  }
+  &:after{
+    background-color: #2f2f2f;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+  }
+  .container{
+    background-color: #2f2f2f;
+    @extend .pos-rel;
+    z-index: 9;
+    &:before{
+    background-color: #e4e3e5;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 15px;
+    height: 100%;
+  }
+  }
+  .header__logo{
+    padding: 8px 10px 9px 0;
+    @extend .dib;
+    background-color: #e4e3e5;
+  }
+  .header__logo-image{
+    @extend .vtop;
+  }
 }
 
 /* Form CSS */
@@ -362,14 +428,32 @@ div.vertical-tabs {
 .form-type-textfield{
   position: relative;
   .form-text{
-    & + div.description{
+    & + div.description, & + span.error + div.description{
       @extend .desc-popup;
       left: 600px;
     }
-    &:hover + div.description{
+    &:hover + div.description, &:hover + span.error + div.description{
       display: block;
     }
   } 
+  label + .form-text + span.error{
+    padding-left: 220px;
+  }
+}
+.form-type-select{
+  position: relative;
+  .form-select{
+    & + div.description, & + span.error + div.description{
+      @extend .desc-popup;
+      left: 600px;
+    }
+    &:hover + div.description, &:hover + span.error + div.description{
+      display: block;
+    }
+  }
+  label + .form-select + span.error{
+    padding-left: 220px;
+  }
 }
 .form-type-checkboxes{
   position: relative;
@@ -537,6 +621,10 @@ div.vertical-tabs {
     @extend .fleft;
     padding-right: 20px;
     width: 250px;
+    th{
+      font-weight: 400;
+      padding-left: 30px;
+    }
   }
   tbody{
     @extend .fleft;
@@ -710,6 +798,172 @@ input[name="field_gallery_image_add_more"]{
       left: 600px;
       top: 10px;
       z-index: 9;
+    }
+  }
+}
+
+.form-type-plupload{
+  margin-left: 250px;
+  margin-right: 30px;
+  @extend .pos-rel;
+  .plupload_buttons{
+    position: absolute;
+    left: 0;
+    top: -49px;
+    .plupload_button{
+      background-image: none;
+      text-align: center;
+      &.plupload_add{
+        @extend .add-more;
+        padding: 6px 40px;
+      }
+      &.plupload_start{
+        @extend .add-more-wbg;
+        padding: 6px 40px;
+      }
+    }
+  }
+}
+#block-menu-menu-admin-left-menu{
+  margin: 20px 0;
+  h2{
+    display: none;
+  }
+  > .menu{
+    border: 1px solid #d9d9d9;
+    @extend .dib;
+    @extend .full;
+    @extend .no-bullet;
+    > li{
+      @extend .fleft;
+      @extend .pos-rel;
+      > a{
+        display: block;
+        padding: 12px 12px;
+        color: #2f2f2f;
+      }
+      &.active-trail, &:hover{
+        & > a, & > a.active{
+          background-color: #d00b26;
+          color: #fff;
+        }
+      }
+      > .menu{
+        display: none;
+      }
+      &:hover{
+        > .menu{
+          background-color: #fff;
+          display: block;
+          @extend .full;
+          @extend .no-bullet;
+          position: absolute;
+          left: 0;
+          top: 42px;
+          border: 1px solid #d9d9d9;
+          z-index: 9999;
+          li{
+            a{
+              padding: 10px 12px;
+              color: #2f2f2f;
+              display: block;
+              &:hover, &.active{
+                background-color: #f5f5f5;
+              }
+            }
+            & + li{
+              border-top: 1px solid #d9d9d9;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.content-block-menu{
+  margin: 20px 0;
+  h2{
+    display: none;
+  }
+  > .menu{
+    background-color: #f0f0f0;
+    @extend .dib;
+    @extend .full;
+    @extend .no-bullet;
+    > li{
+      @extend .dib;
+      @extend .vtop;
+      font-size: 0;
+      > a{
+        display: block;
+        padding: 10px 0 7px;
+        margin: 0 20px;
+        color: #5f5f5f;
+        font-size: 13px;
+        border-bottom: 2px solid transparent;
+        &:hover{
+          border-bottom-color: #d00b26; 
+        }
+      }
+      
+    }
+  }
+}
+#block-menu-menu-story-content-admin-menu{
+  @extend .content-block-menu;
+}
+.breadcrumb{
+  h2{
+    display: none;
+  }
+  ol{
+    @extend .no-bullet;
+    li{
+      @extend .dib;
+      @extend .vmid;
+      a{
+        color: #666;
+        font-size: 13px;
+        &:hover{
+          color: #2f2f2f;
+          text-decoration: underline;
+        }
+      }
+      & + li{
+        margin-left: 3px;
+      }
+    }
+  }
+}
+.form-field-name-field-bulk-media-upload{
+  .form-checkboxes{
+    visibility: hidden;
+  }
+}
+#name-and-slogan{display: none;}
+.header__secondary-menu{
+  @extend .fright;
+  line-height: 50px;
+  h2{
+    display: none;
+  }
+  ul{
+    @extend .no-bullet;
+    li{
+      @extend .fleft;
+      margin-left: 20px;
+      font-weight: 300;
+      &.first{
+        a{
+          color: #fff;
+        }
+      }
+      &.last{
+        a{
+          color: #d00b26;
+          font-size: 21px;
+        }
+      }
     }
   }
 }
