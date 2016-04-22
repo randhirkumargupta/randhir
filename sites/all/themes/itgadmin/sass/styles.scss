@@ -304,7 +304,6 @@ span.error{
 }
 .header{
   background-size: 100% auto;
-  margin-bottom: 30px;
   @extend .pos-rel;
   &:before{
     background-color: #e4e3e5;
@@ -924,6 +923,7 @@ input[name="field_gallery_image_add_more"]{
   }
   ol{
     @extend .no-bullet;
+    line-height: 30px;
     li{
       @extend .dib;
       @extend .vmid;
@@ -982,7 +982,6 @@ input[name="field_gallery_image_add_more"]{
   th, td{
     padding: 8px 5px;
     max-width: 200px;
-    border-bottom: 1px solid #d9d9d9;
     a{
       color: #0c8bb1;
     }
@@ -991,6 +990,11 @@ input[name="field_gallery_image_add_more"]{
     background-color: #f6f6f6;
     th{
       font-weight: 500;
+    }
+  }
+  tbody{
+    td{
+      border-top: 1px solid #f6f6f6;
     }
   }
 }
