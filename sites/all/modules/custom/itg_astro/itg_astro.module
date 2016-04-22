@@ -352,8 +352,7 @@ function itg_astro_views_pre_render(&$view) {
   }
   if ($view->name == 'syndication_client') {
     $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
-    $header_content_astro .= l(t('Create Client'), 'node/add/syndication-client');
-    $header_content_astro .= l(t('Associate Service with Client'), 'node/add/syndication-client-service-assoc');
+    $header_content_astro .= l(t('Create Client'), 'node/add/syndication-client');    
     $view->attachment_before = $header_content_astro;
   }
 }
