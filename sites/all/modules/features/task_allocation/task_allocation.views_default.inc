@@ -335,11 +335,13 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Task Name';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Task / idea */
   $handler->display->display_options['fields']['field_task_task_idea']['id'] = 'field_task_task_idea';
   $handler->display->display_options['fields']['field_task_task_idea']['table'] = 'field_data_field_task_task_idea';
   $handler->display->display_options['fields']['field_task_task_idea']['field'] = 'field_task_task_idea';
   $handler->display->display_options['fields']['field_task_task_idea']['label'] = 'Task Description';
+  $handler->display->display_options['fields']['field_task_task_idea']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_task_task_idea']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_task_task_idea']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_task_task_idea']['delta_offset'] = '0';
@@ -347,9 +349,9 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['field_task_finish_date_and_time']['id'] = 'field_task_finish_date_and_time';
   $handler->display->display_options['fields']['field_task_finish_date_and_time']['table'] = 'field_data_field_task_finish_date_and_time';
   $handler->display->display_options['fields']['field_task_finish_date_and_time']['field'] = 'field_task_finish_date_and_time';
-  $handler->display->display_options['fields']['field_task_finish_date_and_time']['label'] = 'Last date';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['label'] = 'Task Completion Date';
   $handler->display->display_options['fields']['field_task_finish_date_and_time']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'itg_date_with_time',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -360,9 +362,17 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -390,6 +400,7 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['view_node']['label'] = 'View';
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">View</span>';
+  $handler->display->display_options['fields']['view_node']['alter']['absolute'] = TRUE;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -509,7 +520,7 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['filters']['created']['id'] = 'created';
   $handler->display->display_options['filters']['created']['table'] = 'node';
   $handler->display->display_options['filters']['created']['field'] = 'created';
-  $handler->display->display_options['filters']['created']['operator'] = 'not between';
+  $handler->display->display_options['filters']['created']['operator'] = 'between';
   $handler->display->display_options['filters']['created']['exposed'] = TRUE;
   $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
   $handler->display->display_options['filters']['created']['expose']['label'] = 'Created date';
@@ -679,11 +690,13 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Task Name';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Task / idea */
   $handler->display->display_options['fields']['field_task_task_idea']['id'] = 'field_task_task_idea';
   $handler->display->display_options['fields']['field_task_task_idea']['table'] = 'field_data_field_task_task_idea';
   $handler->display->display_options['fields']['field_task_task_idea']['field'] = 'field_task_task_idea';
   $handler->display->display_options['fields']['field_task_task_idea']['label'] = 'Task Description';
+  $handler->display->display_options['fields']['field_task_task_idea']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_task_task_idea']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_task_task_idea']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_task_task_idea']['delta_offset'] = '0';
@@ -691,9 +704,9 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['field_task_finish_date_and_time']['id'] = 'field_task_finish_date_and_time';
   $handler->display->display_options['fields']['field_task_finish_date_and_time']['table'] = 'field_data_field_task_finish_date_and_time';
   $handler->display->display_options['fields']['field_task_finish_date_and_time']['field'] = 'field_task_finish_date_and_time';
-  $handler->display->display_options['fields']['field_task_finish_date_and_time']['label'] = 'Last date';
+  $handler->display->display_options['fields']['field_task_finish_date_and_time']['label'] = 'Task Completion Date';
   $handler->display->display_options['fields']['field_task_finish_date_and_time']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'itg_date_with_time',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -704,9 +717,17 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created_1']['id'] = 'created_1';
+  $handler->display->display_options['fields']['created_1']['table'] = 'node';
+  $handler->display->display_options['fields']['created_1']['field'] = 'created';
+  $handler->display->display_options['fields']['created_1']['label'] = 'Created Date';
+  $handler->display->display_options['fields']['created_1']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created_1']['second_date_format'] = 'long';
   /* Field: Content: Select team member */
   $handler->display->display_options['fields']['field_task_team_member']['id'] = 'field_task_team_member';
   $handler->display->display_options['fields']['field_task_team_member']['table'] = 'field_data_field_task_team_member';
@@ -787,13 +808,6 @@ print $user->mail;
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -801,41 +815,12 @@ print $user->mail;
   $handler->display->display_options['filters']['type']['value'] = array(
     'task_idea_allocation_tracking' => 'task_idea_allocation_tracking',
   );
-  /* Filter criterion: Field: Change Status (field_task_comment_change_status) */
-  $handler->display->display_options['filters']['field_task_comment_change_status_value']['id'] = 'field_task_comment_change_status_value';
-  $handler->display->display_options['filters']['field_task_comment_change_status_value']['table'] = 'field_data_field_task_comment_change_status';
-  $handler->display->display_options['filters']['field_task_comment_change_status_value']['field'] = 'field_task_comment_change_status_value';
-  $handler->display->display_options['filters']['field_task_comment_change_status_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['operator_id'] = 'field_task_comment_change_status_value_op';
-  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['label'] = 'Status';
-  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['operator'] = 'field_task_comment_change_status_value_op';
-  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['identifier'] = 'field_task_comment_change_status_value';
-  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    19 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Task name';
@@ -863,11 +848,51 @@ print $user->mail;
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: Field: Change Status (field_task_comment_change_status) */
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['id'] = 'field_task_comment_change_status_value';
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['table'] = 'field_data_field_task_comment_change_status';
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['field'] = 'field_task_comment_change_status_value';
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['operator_id'] = 'field_task_comment_change_status_value_op';
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['label'] = 'Status';
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['operator'] = 'field_task_comment_change_status_value_op';
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['identifier'] = 'field_task_comment_change_status_value';
+  $handler->display->display_options['filters']['field_task_comment_change_status_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Post date */
   $handler->display->display_options['filters']['created']['id'] = 'created';
   $handler->display->display_options['filters']['created']['table'] = 'node';
   $handler->display->display_options['filters']['created']['field'] = 'created';
   $handler->display->display_options['filters']['created']['operator'] = 'between';
+  $handler->display->display_options['filters']['created']['group'] = 1;
   $handler->display->display_options['filters']['created']['exposed'] = TRUE;
   $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
   $handler->display->display_options['filters']['created']['expose']['label'] = 'Created date';
@@ -912,8 +937,10 @@ print $user->mail;
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Task user Email';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'access user profiles';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';

@@ -336,6 +336,8 @@ function rubik_preprocess_node(&$vars) {
 function rubik_preprocess_comment(&$vars) {
   $vars['layout'] = TRUE;
   $vars['submitted'] = _rubik_submitted($vars['comment']);
+  // Remove comment title from display
+  $vars['title'] = '';
 }
 
 /**
@@ -657,7 +659,8 @@ function rubik_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
  */
 function _rubik_submitted($node) {
   $byline = t('Posted by !username', array('!username' => theme('username', array('account' => $node))));
-  $date = format_date($node->created, 'small');
+  // $date = format_date($node->created, 'small');
+  $date = date('d/m/Y', $node->created);
   return "<div class='byline'>{$byline}</div><div class='date'>$date</div>";
 }
 
@@ -734,3 +737,9 @@ function rubik_node_preview($variables) {
 
   return $output;
 }
+
+
+function rubik_date_all_day_label() {
+  return '- 00:00';
+}
+
