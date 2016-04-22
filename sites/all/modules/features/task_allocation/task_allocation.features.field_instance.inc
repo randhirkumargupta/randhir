@@ -138,7 +138,7 @@ function task_allocation_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'medium',
+          'format_type' => 'itg_date_with_time',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
