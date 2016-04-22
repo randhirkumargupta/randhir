@@ -591,6 +591,7 @@ form .form-item .form-item{
 }
 #block-itg-story-story-tab-form-block,
 #block-menu-menu-mega-review-menu,
+#block-itg-mega-reviews-critics-mega-reviews-tab-form-block,
 #block-itg-poll-poll-tab-form-block, 
 #block-itg-breaking-news-breaking-news-tab-form-block, 
 #block-menu-menu-story-content-admin-menu, 
@@ -606,7 +607,8 @@ form .form-item .form-item{
   border-left: none;
   border-right: none;
 }
-#block-itg-story-story-tab-form-block .block-content, 
+#block-itg-story-story-tab-form-block .block-content,
+#block-itg-mega-reviews-critics-mega-reviews-tab-form-block .block-content,
 #block-menu-menu-mega-review-menu .block-content, 
 #block-itg-poll-poll-tab-form-block .block-content, 
 #block-itg-recipe-recipe-tab-form-block .block-content, 
@@ -698,6 +700,7 @@ form .form-item .form-item{
 .block-itg-recipe.fixed,
 .block-itg-survey.fixed,
 .block-itg-quiz.fixed,
+.block-itg-mega-reviews-critics.fixed,
 .block-itg-breaking-news.fixed, 
 .block-itg-photogallery.fixed{
   position: fixed;
