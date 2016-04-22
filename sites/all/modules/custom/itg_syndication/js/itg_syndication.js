@@ -36,7 +36,17 @@
             itg_syndication_clear_form('group-syndication-ftp');
         }
       });
-
+      
+      // Change val
+      $('select[name="client_title"]').on('change', function() {
+        $('input[name="itg_row_selector_client"]').val($(this).val());
+      });
+      $('select[name="type"]').on('change', function() {
+        $('input[name="itg_row_selector_web_property"]').val($(this).val());
+      });
+      $('select[name="issue"]').on('change', function() {
+        $('input[name="itg_row_selector_issue"]').val($(this).val());
+      });
     }
   };
 

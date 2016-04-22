@@ -27,13 +27,6 @@ function syndication_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create syndication_client_service_assoc content'.
-  $permissions['create syndication_client_service_assoc content'] = array(
-    'name' => 'create syndication_client_service_assoc content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any syndication_client content'.
   $permissions['delete any syndication_client content'] = array(
     'name' => 'delete any syndication_client content',
@@ -48,13 +41,6 @@ function syndication_feature_user_default_permissions() {
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete any syndication_client_service_assoc content'.
-  $permissions['delete any syndication_client_service_assoc content'] = array(
-    'name' => 'delete any syndication_client_service_assoc content',
-    'roles' => array(),
     'module' => 'node',
   );
 
@@ -75,13 +61,6 @@ function syndication_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete own syndication_client_service_assoc content'.
-  $permissions['delete own syndication_client_service_assoc content'] = array(
-    'name' => 'delete own syndication_client_service_assoc content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any syndication_client content'.
   $permissions['edit any syndication_client content'] = array(
     'name' => 'edit any syndication_client content',
@@ -99,13 +78,6 @@ function syndication_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any syndication_client_service_assoc content'.
-  $permissions['edit any syndication_client_service_assoc content'] = array(
-    'name' => 'edit any syndication_client_service_assoc content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit own syndication_client content'.
   $permissions['edit own syndication_client content'] = array(
     'name' => 'edit own syndication_client content',
@@ -120,13 +92,6 @@ function syndication_feature_user_default_permissions() {
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own syndication_client_service_assoc content'.
-  $permissions['edit own syndication_client_service_assoc content'] = array(
-    'name' => 'edit own syndication_client_service_assoc content',
-    'roles' => array(),
     'module' => 'node',
   );
 
