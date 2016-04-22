@@ -88,6 +88,7 @@ function features_for_quiz_field_group_info() {
     'children' => array(
       0 => 'field_survey_end_date',
       1 => 'field_survey_start_date',
+      2 => 'field_survey_expity_date',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
