@@ -591,6 +591,7 @@ form .form-item .form-item{
 }
 #block-itg-story-story-tab-form-block,
 #block-menu-menu-mega-review-menu,
+#block-itg-mega-reviews-critics-mega-reviews-tab-form-block,
 #block-itg-poll-poll-tab-form-block, 
 #block-itg-breaking-news-breaking-news-tab-form-block, 
 #block-menu-menu-story-content-admin-menu, 
@@ -606,7 +607,8 @@ form .form-item .form-item{
   border-left: none;
   border-right: none;
 }
-#block-itg-story-story-tab-form-block .block-content, 
+#block-itg-story-story-tab-form-block .block-content,
+#block-itg-mega-reviews-critics-mega-reviews-tab-form-block .block-content,
 #block-menu-menu-mega-review-menu .block-content, 
 #block-itg-poll-poll-tab-form-block .block-content, 
 #block-itg-recipe-recipe-tab-form-block .block-content, 
@@ -698,6 +700,7 @@ form .form-item .form-item{
 .block-itg-recipe.fixed,
 .block-itg-survey.fixed,
 .block-itg-quiz.fixed,
+.block-itg-mega-reviews-critics.fixed,
 .block-itg-breaking-news.fixed, 
 .block-itg-photogallery.fixed{
   position: fixed;
@@ -1678,10 +1681,18 @@ input[name="field_newsl_add_news_und_0_remove_button"],
  div.views-exposed-form input.form-text, div.views-exposed-form input.form-autocomplete{box-sizing: border-box;}
  .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea .tabledrag-toggle-weight-wrapper, 
  .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody label{display: none;}
- .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody tr{padding-top: 10px;}
+ .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody tr{padding-top: 10px; float: left;}
  .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody tr:first-child{padding-top: 0;}
  .field-name-field-task-finish-date-and-time .fieldset-content{padding: 0 !important; float: left; width: 400px;}
  .field-name-field-story-expiry-date{margin-top: 10px;}
  .field-name-field-story-expiry-date .container-inline-date label{display: none;}
  .field-name-field-story-expiry-date .fieldset-title{margin-top: 5px;}
  .node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking{background: none;}
+ .node-create_content-form .vertical-tabs, 
+ .node-clients_creation-form .vertical-tabs, 
+ .node-service_creation-form .vertical-tabs, 
+ .node-client_service_association-form .vertical-tabs{padding: 10px 10px;}
+ .node-create_content-form .vertical-tabs .vertical-tabs-list, 
+ .node-clients_creation-form .vertical-tabs .vertical-tabs-list, 
+ .node-service_creation-form .vertical-tabs .vertical-tabs-list, 
+ .node-client_service_association-form .vertical-tabs .vertical-tabs-list{display: none;}

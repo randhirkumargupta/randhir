@@ -212,7 +212,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'body',
     'label' => 'Story body',
     'required' => 1,

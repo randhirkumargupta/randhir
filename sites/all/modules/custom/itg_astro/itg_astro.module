@@ -242,8 +242,16 @@ function itg_astro_after_build($form, &$form_state) {
  * @param array $form_state
  */ 
 function itg_astro_change_message($form, &$form_state) {
-  $messages = drupal_get_messages('status');
-  drupal_set_message(t('Astro has been successfully filled.'));
+    if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);}
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'astro') {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';}
+  $astro_title = $form_state['node']->title;
+  drupal_set_message(t('Astro <b>' . $astro_title . '</b> has been ' . $op.'.' ));
+  $_GET['destination'] = $_REQUEST['destination'];
 }
 
 /**

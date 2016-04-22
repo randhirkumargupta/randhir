@@ -599,6 +599,11 @@ else
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  /* Field: Content: Updated by */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Source term id (field_user_source_term_id) */
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['id'] = 'field_user_source_term_id_value';
@@ -626,6 +631,16 @@ else
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['limit'] = '0';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['break_phrase'] = TRUE;
+  /* Contextual filter: Content: Updated by (field_story_source_type) */
+  $handler->display->display_options['arguments']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['arguments']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['arguments']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['arguments']['field_story_source_type_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_story_source_type_value']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['field_story_source_type_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_story_source_type_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_story_source_type_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_story_source_type_value']['limit'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

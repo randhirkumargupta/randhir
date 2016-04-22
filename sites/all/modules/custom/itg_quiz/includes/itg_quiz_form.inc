@@ -354,11 +354,16 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
         <div class = "quiz-contest-result"><strong>Winners List:</strong></div>';
         
         //Display winner list
-        $i = 1;
+        if(count($winners_list)<1){
+          $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp; No winner found!</div>';
+        } else {
+                  $i = 1;
         foreach ($winners_list as $key => $value) {
           $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp;'. $i.'. '.$value . '</div>';
           $i++;
         }
+        }
+
         $output .= '</div>';
         drupal_set_message($output, 'message');
         

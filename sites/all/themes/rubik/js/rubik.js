@@ -129,9 +129,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz').addClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz').removeClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
@@ -442,5 +442,26 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('input[name="field_quiz_add_questions_add_more"], input[name="field_survey_add_questions_add_more"]').val('Add another question');
   $('input[name="field_newsl_add_news_add_more"]').val('Add More News');
   $('.form-item-field-issue-title-value-value-date .form-text').attr('readonly', true);
+  
+//  $('.field-name-field-quiz-add-questions > div > div > table > tbody > tr').each(function(){
+//    var correctVal = $(this).find('.field-name-field-quiz-answer-type .form-radio[value="single_correct"]').is(":checked");
+//    alert(correctVal);
+//    if(){
+//      
+//    }
+//  });
+
+    $('.field-name-field-quiz-add-questions .field-name-field-quiz-answer-type .form-radio[value="single_correct"]').change(function(){
+      var correctVal = $(this).is(":checked");
+      if(correctVal == true){
+        $(this).parents('.field-name-field-quiz-answer-type').siblings('.field-name-field-quiz-options-answer').find('.form-checkbox').attr('checked', false);
+      }
+    });
+    $('.field-name-field-quiz-add-questions .field-name-field-quiz-options-answer .form-checkbox').change(function(){
+      var correctVal = $(this).parents('.field-name-field-quiz-options-answer').siblings('.field-name-field-quiz-answer-type').find('.form-radio[value="single_correct"]').is(':checked');
+      if(correctVal == true){
+        $(this).parents('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
+      }
+    });
 };
 })(jQuery);
