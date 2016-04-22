@@ -35,9 +35,9 @@ function syndication_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'body',
-    'label' => 'Body',
+    'label' => 'Short Description ',
     'required' => 0,
     'settings' => array(
       'display_summary' => 0,
@@ -447,7 +447,6 @@ function syndication_feature_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Body');
   t('Content Sharing mode');
   t('Delivery Mode');
   t('Expiry date');
@@ -457,6 +456,7 @@ function syndication_feature_field_default_field_instances() {
   t('Fetch link (our server)');
   t('Frequency');
   t('Mail to');
+  t('Short Description ');
   t('User will enter short description about the client.');
 
   return $field_instances;
