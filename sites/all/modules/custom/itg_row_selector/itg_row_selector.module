@@ -139,7 +139,7 @@ function itg_row_selector_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  */
 function itg_row_selector_custom_submit($form, &$form_state) {
-  dpm($form_state['values']);
+  //dpm($form_state['values']);
   $client_name = check_plain($form_state['values']['itg_row_selector_client']);
   $web_property = check_plain($form_state['values']['itg_row_selector_web_property']);
   $issue = check_plain($form_state['values']['itg_row_selector_issue']);  
