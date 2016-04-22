@@ -87,6 +87,9 @@ img{
 .fright{
   float: right;
 }
+.fnone{
+  float: none;
+}
 .pos-rel{
   position: relative;
 }
@@ -967,6 +970,95 @@ input[name="field_gallery_image_add_more"]{
     }
   }
 }
+.views-table{
+  @extend .full;
+  @extend .mt-10;
+  border-collapse: collapse;
+  border: 1px solid #d9d9d9;
+  text-align: left;
+  th, td{
+    padding: 8px 5px;
+    a{
+      color: #0c8bb1;
+    }
+  }
+  thead{
+    background-color: #f6f6f6;
+    th{
+      font-weight: 500;
+    }
+  }
+  tbody{
+    td{
+      
+    }
+  }
+  
+}
+.view{
+  .view-filters{
+    .form-item{
+      @extend .pd-0;
+      @extend .mr-0;
+      input{
+        @extend .mr-0;
+      }
+    }
+    .container-inline-date{
+      .form-item{
+        @extend .full;
+        .date-padding{
+          @extend .fnone;
+        }
+      }
+    } 
+    .views-exposed-form{
+      label{
+        font-weight: 400;
+      }
+      .views-exposed-widget{
+        display: inline-block;
+        padding: 10px 5px 0 0;
+        vertical-align: bottom;
+        @extend .fnone;
+        width: 140px;
+        .form-text, .form-select{
+          @extend .full;
+        }
+      }
+      .views-widget-filter-title, 
+      .views-widget-filter-field_story_category_tid,
+      .views-widget-filter-field_issue_title_value{
+        width: 200px;
+      }
+      .views-submit-button{
+        width: auto;
+        .form-submit{
+          @extend .mr-0;
+          @extend .add-more;
+          height: 36px;
+        }
+      }
+      .views-reset-button{
+        width: auto;
+        .form-submit{
+          @extend .mr-0;
+          @extend .add-more-wbg;
+          height: 36px;
+        }
+      }
+    } 
+  }
+  .attachment{
+    text-align: right;
+    a{
+      @extend .btn;
+      text-align: center;
+      margin: 0 0 0 5px;
+    }
+  }
+}
+
 
 
 
