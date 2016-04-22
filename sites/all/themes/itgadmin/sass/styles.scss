@@ -297,9 +297,51 @@ span.error{
   margin: 0 auto;
 }
 .header{
-  @extend .pdtb-10;
-  box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+  background-size: 100% auto;
   margin-bottom: 30px;
+  @extend .pos-rel;
+  &:before{
+    background-color: #e4e3e5;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+  }
+  &:after{
+    background-color: #2f2f2f;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+  }
+  .container{
+    background-color: #2f2f2f;
+    @extend .pos-rel;
+    z-index: 9;
+    &:before{
+    background-color: #e4e3e5;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 15px;
+    height: 100%;
+  }
+  }
+  .header__logo{
+    padding: 8px 10px 9px 0;
+    @extend .dib;
+    background-color: #e4e3e5;
+  }
+  .header__logo-image{
+    @extend .vtop;
+  }
 }
 
 /* Form CSS */
@@ -896,6 +938,33 @@ input[name="field_gallery_image_add_more"]{
 .form-field-name-field-bulk-media-upload{
   .form-checkboxes{
     visibility: hidden;
+  }
+}
+#name-and-slogan{display: none;}
+.header__secondary-menu{
+  @extend .fright;
+  line-height: 50px;
+  h2{
+    display: none;
+  }
+  ul{
+    @extend .no-bullet;
+    li{
+      @extend .fleft;
+      margin-left: 20px;
+      font-weight: 300;
+      &.first{
+        a{
+          color: #fff;
+        }
+      }
+      &.last{
+        a{
+          color: #d00b26;
+          font-size: 21px;
+        }
+      }
+    }
   }
 }
 
