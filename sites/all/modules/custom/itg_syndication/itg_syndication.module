@@ -25,6 +25,13 @@ function itg_syndication_menu() {
     'access arguments' => array('administer itg_syndication settings'),
     'type' => MENU_CALLBACK,
   );
+  
+   $items['syndication/feed-generator-of-content'] = array(      
+      'page callback' => 'feed_generator_of_content',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_syndication.inc',
+  );
 
   return $items;
 }
