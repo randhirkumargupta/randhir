@@ -308,7 +308,7 @@ function itg_task_allocation_node_validate($node, $form, &$form_state) {
     $time = time();
     
     if (isset($schedule_date) && $time > $schedule_date) { 
-      form_set_error('edit-field-task-finish-date-and-time-und-0-value-datepicker-popup-2', t("Schedule date should be greater then schedule current date"));
+      form_set_error('edit-field-task-finish-date-and-time-und-0-value-datepicker-popup-2', t("Scheduled time should be greater than current time"));
     }   
   }
 }
