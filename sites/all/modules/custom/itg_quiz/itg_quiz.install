@@ -164,6 +164,88 @@ function itg_quiz_schema() {
       ),
       'primary key' => array('id'),
   );
+  
+  $schema['itg_quiz_user_score'] = array(
+      'description' => 'Table for user\'s scrore.',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The primary identifier for a table.',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'uid' => array(
+              'description' => 'User id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'nid' => array(
+              'description' => 'Quiz Node id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'user_name' => array(
+              'description' => 'User Type.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'user_email' => array(
+              'description' => 'User Type.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'quiz_title' => array(
+              'description' => 'Quiz Title.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+         'quiz_score' => array(
+              'description' => 'Quiz Score.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'ques_attempt' => array(
+              'description' => 'Quiz Score.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'ques_total' => array(
+              'description' => 'Quiz Score.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'quiz_key' => array(
+              'description' => 'Quiz Unique Key.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
 
   return $schema;
 }

@@ -22,11 +22,11 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
       '#upload_validators' => array(
          'file_validate_extensions' => array("png gif jpg jpeg"),
       ),
-      '#states' => array(
-        'visible' => array(
-          ':input[name="field_bulk_media_upload[und][1]"]' => array('checked' => TRUE),
-        ),
-      ),
+//      '#states' => array(
+//        'visible' => array(
+//          ':input[name="field_bulk_media_upload[und][1]"]' => array('checked' => TRUE),
+//        ),
+//      ),
       '#description' => t('88x66 smallest size of image.'),
     );
     $form['field_common_audio_file']['#states'] = array(
@@ -51,7 +51,9 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
       );
-
+      
+      $form['actions']['submit']['#submit'][] = 'itg_photogallery_form_custom_callback';
+      
       $form['field_story_extra_large_image']['#ajax'] = array(
       'callback' => 'ajax_example_simplest_callback',
       'wrapper' => 'replace_textfield_div',
@@ -59,6 +61,31 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = 'itg_photogallery_custom_validate';
     $form['#after_build'][] = 'itg_photogallery_after_build';
   } 
+}
+
+
+/**
+ * Custom submit callback for redirecting story form.
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_photogallery_form_custom_callback($form, &$form_state) {  
+   if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+    }
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'photogallery') {
+    $op = 'created';
+   $photogallery_title = $form_state['node']->title;
+  drupal_set_message(t('Photogallery <b>' . $photogallery_title . '</b> has been ' . $op. ' successfully and submitted for further review and approval.' ));
+  $_GET['destination'] = $_REQUEST['destination'];
+    }
+  else {
+    $op = 'updated';
+     $photogallery_title = $form_state['node']->title;
+  drupal_set_message(t('Photogallery <b>' . $photogallery_title . '</b> has been ' . $op.'.' ));
+  $_GET['destination'] = $_REQUEST['destination'];
+    }
+ 
 }
 
 /**

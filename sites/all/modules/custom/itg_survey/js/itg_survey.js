@@ -25,10 +25,24 @@
         }
       }
 
+      //Expiry date treatment
+      if($('input[name="field_survey_expity_date[und][1]"]').prop("checked") == true){
+        $('#edit-field-survey-end-date').show();
+      } else {
+        $('#edit-field-survey-end-date').hide();
+      }
+      
+      $('input[name="field_survey_expity_date[und][1]"]').click(function (){
+        if($(this).prop("checked") == true){
+          $('#edit-field-survey-end-date').show();
+        } else {
+          $('#edit-field-survey-end-date').hide();
+        }
+      });
+
       //Collect values assigned in settings array 
       var base_url = settings.itg_survey.settings.base_url;
       var type = settings.itg_survey.settings.type;
-      var nid = settings.itg_survey.settings.nid;
 
       //Restrict print issue date to select previous date in magazine form 
       if (type === 'Survey') {

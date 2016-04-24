@@ -16,6 +16,10 @@ function itg_quiz_permission() {
     return array(
     'access quiz page' => array(
       'title' => t('Access Quiz Page'),
+    ),
+        
+   'access quiz users list' => array(
+      'title' => t('Access Quiz Users List'),
     )
   );
 }
@@ -38,11 +42,11 @@ function itg_quiz_menu() {
       'file' => 'includes/itg_quiz_form.inc',
   );
   
-  $items['quiz-result/%'] = array(
-      'title' => t('Quiz Result'),
-      'page callback' => 'itg_quiz_result',
+  $items['quiz-user-list/%'] = array(
+      'title' => t('Quiz User List'),
+      'page callback' => 'itg_quiz_user_list',
       'access callback' => 'user_access',
-      'access arguments' => array('quiz admin users'),
+      'access arguments' => array('access quiz users list'),
       'file' => 'includes/itg_quiz_result.inc',
   );
   
@@ -62,7 +66,7 @@ function itg_quiz_menu() {
 function itg_quiz_block_info() {
   $blocks['quiz_tab_form_block'] = array(
     'info' => t('Quiz Form Tab Block'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_CACHE_GLOBAL, 
   );
   
   return $blocks;
@@ -94,7 +98,7 @@ function itg_quiz_block_view($delta = '') {
  * @param type $theme
  * @param type $path
  */
-function itg_quiz_theme($existing, $type, $theme, $path) {
+function itg_quiz_theme() {
   $themes = array(
     'quiz_tab_form_display_block' => array(
       'template' => 'quiz-form-tab-template',
@@ -106,8 +110,28 @@ function itg_quiz_theme($existing, $type, $theme, $path) {
   return $themes;
 }
 
+/*******************************Node Related hooks*****************************/
 
-
+/**
+ * Implement hook_node_insert
+ * @param Object $node
+ */
+//function itg_quiz_node_presave($node){
+//  if ($node->type == 'quiz') {
+//    $ques_arr = $node->field_quiz_add_questions[LANGUAGE_NONE];
+//    foreach ($ques_arr as $question_arr) {
+//      $question_detail = entity_load('field_collection_item', array($question_arr['value']));
+//      if (count($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE]) == 1) {
+//        foreach ($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option) {
+//          $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
+//          if (empty($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value'])) {
+//            $ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value'] = 'Yes';
+//          }
+//        }
+//      }
+//    }
+//  }
+//}
 
 /***************************Form Related hooks*********************************/
 /**
@@ -411,6 +435,7 @@ function itg_quiz_winners_list($nid, $range){
       $result = db_select('itg_quiz_detail', 'qd')
               ->fields('qd')
               ->condition('qd.nid', $nid, '=')
+              ->condition('qd.correct_answer', 'yes', '=')
               ->groupBy('qd.quiz_key')
               ->range(0, $range)
               ->execute();
@@ -418,7 +443,9 @@ function itg_quiz_winners_list($nid, $range){
       $result = db_select('itg_quiz_detail', 'qd')
               ->fields('qd')
               ->condition('qd.nid', $nid, '=')
+              ->condition('qd.correct_answer', 'yes', '=')
               ->groupBy('qd.quiz_key')
+              ->range(0, 10)
               ->execute();
     }
 
@@ -445,7 +472,7 @@ function itg_quiz_winners_count_uniquekey($nid, $unique_key){
             ->condition('qd.nid', $nid, '=')
             ->execute();
   $total_quiz = $result->rowCount();
-  if ($total_quiz) {
+  if ($total_quiz > 0) {
     return $total_quiz;
   } else {
     return 0;
@@ -492,4 +519,17 @@ function itg_quiz_get_correct_answer($ques_id){
         }
       }
       return $correct_ans_op;
+}
+
+/**
+ * View User List, who have attempted quiz
+ * @param type $nid
+ * @return string
+ */
+function itg_quiz_views_user_list($nid){
+    if(itg_common_check_record_existance($nid, 'itg_quiz_user_score') > 0){
+    return l('View List','quiz-user-list/'.$nid, array('attributes' => array('target'=>'_blank')));
+  } else {
+    return 'View List';
+  }
 }

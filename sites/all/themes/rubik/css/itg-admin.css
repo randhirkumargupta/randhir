@@ -590,7 +590,9 @@ form .form-item .form-item{
   margin-bottom: 20px;
 }
 #block-itg-story-story-tab-form-block,
+#block-itg-newsletter-newsletter-tab-form-block,
 #block-menu-menu-mega-review-menu,
+#block-itg-mega-reviews-critics-mega-reviews-tab-form-block,
 #block-itg-poll-poll-tab-form-block, 
 #block-itg-breaking-news-breaking-news-tab-form-block, 
 #block-menu-menu-story-content-admin-menu, 
@@ -601,18 +603,22 @@ form .form-item .form-item{
 #block-itg-survey-survey-tab-form-block,
 #block-itg-quiz-quiz-tab-form-block,
 #block-menu-menu-blog-admin-menu,
+#block-menu-menu-task-allocation-menu,
 #block-itg-recipe-recipe-tab-form-block{
   border-left: none;
   border-right: none;
 }
-#block-itg-story-story-tab-form-block .block-content, 
+#block-itg-story-story-tab-form-block .block-content,
+#block-itg-mega-reviews-critics-mega-reviews-tab-form-block .block-content,
 #block-menu-menu-mega-review-menu .block-content, 
+#block-itg-newsletter-newsletter-tab-form-block .block-content,
 #block-itg-poll-poll-tab-form-block .block-content, 
 #block-itg-recipe-recipe-tab-form-block .block-content, 
 #block-itg-breaking-news-breaking-news-tab-form-block .block-content, 
 #block-menu-menu-story-content-admin-menu .block-content, 
 #block-menu-menu-ask-an-expert-menu .block-content,
 #block-menu-menu-photogallery-admin-menu .block-content,
+#block-menu-menu-task-allocation-menu .block-content,
 #block-menu-menu-blog-admin-menu .block-content,
 #block-itg-astro-astro-tab-form-block .block-content,
 #block-itg-survey-survey-tab-form-block .block-content,
@@ -623,6 +629,7 @@ form .form-item .form-item{
 .block-itg-story-list, 
 #block-menu-menu-story-content-admin-menu .block-content .ul, 
 #block-menu-menu-mega-review-menu .block-content .ul, 
+#block-menu-menu-task-allocation-menu .block-content .ul, 
 #block-menu-menu-ask-an-expert-menu .block-content .ul, 
 #block-menu-menu-blog-admin-menu .block-content .ul, 
 #block-menu-menu-photogallery-admin-menu .block-content .ul{
@@ -630,6 +637,7 @@ form .form-item .form-item{
 }
 .block-itg-story-list span, 
 #block-menu-menu-story-content-admin-menu .block-content ul li,
+#block-menu-menu-task-allocation-menu .block-content ul li,
 #block-menu-menu-mega-review-menu .block-content ul li,
 #block-menu-menu-blog-admin-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
@@ -646,21 +654,26 @@ form .form-item .form-item{
 }
 #block-menu-menu-story-content-admin-menu .block-content ul li,
 #block-menu-menu-blog-admin-menu .block-content ul li,
+#block-menu-menu-task-allocation-menu .block-content ul li,
 #block-menu-menu-mega-review-menu .block-content ul li,
 #block-menu-menu-ask-an-expert-menu .block-content ul li,
 #block-menu-menu-photogallery-admin-menu .block-content ul li{padding: 0;}
 #block-menu-menu-story-content-admin-menu .block-content ul li a,
+#block-menu-menu-task-allocation-menu .block-content ul li a,
 #block-menu-menu-blog-admin-menu .block-content ul li a,
 #block-menu-menu-mega-review-menu .block-content ul li a,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a,
 #block-menu-menu-photogallery-admin-menu .block-content ul li a{padding: 10px 20px; display: block; color: #666; position: relative;}
-.block-itg-story-list span.active, .block-itg-story-list span:hover, 
+.block-itg-story-list span.active, 
+.block-itg-story-list span:hover, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active, 
 #block-menu-menu-blog-admin-menu .block-content ul li a.active, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active, 
 #block-menu-menu-mega-review-menu .block-content ul li a.active, 
+#block-menu-menu-task-allocation-menu .block-content ul li a.active, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a:hover,
+#block-menu-menu-task-allocation-menu .block-content ul li a:hover,
 #block-menu-menu-mega-review-menu .block-content ul li a:hover,
 #block-menu-menu-blog-admin-menu .block-content ul li a:hover,
 #block-menu-menu-ask-an-expert-menu .block-content ul li a:hover,
@@ -671,6 +684,7 @@ form .form-item .form-item{
 .block-itg-story-list span.active:after, 
 #block-menu-menu-story-content-admin-menu .block-content ul li a.active:after, 
 #block-menu-menu-mega-review-menu .block-content ul li a.active:after, 
+#block-menu-menu-task-allocation-menu .block-content ul li a.active:after, 
 #block-menu-menu-blog-admin-menu .block-content ul li a.active:after, 
 #block-menu-menu-ask-an-expert-menu .block-content ul li a.active:after, 
 #block-menu-menu-photogallery-admin-menu .block-content ul li a.active:after{
@@ -683,11 +697,13 @@ form .form-item .form-item{
   background-color: #008eb1;
 }
 .block-itg-story.fixed, 
-.block-itg-poll.fixed, 
+.block-itg-poll.fixed,
+.block-itg-newsletter.fixed,
 .block-itg-astro.fixed, 
 .block-itg-recipe.fixed,
 .block-itg-survey.fixed,
 .block-itg-quiz.fixed,
+.block-itg-mega-reviews-critics.fixed,
 .block-itg-breaking-news.fixed, 
 .block-itg-photogallery.fixed{
   position: fixed;
@@ -1257,11 +1273,16 @@ body.imce form .form-item, body.imce form .form-item .form-type-checkbox{display
 .preview-wrapper .field-collection-container .field-collection-view{margin: 0; padding: 0;}
 .node-type-survey .preview-wrapper .field-label{font-weight: normal;}
 .node-survey-form .column-main{width: 65%;}
-.node-type-survey .block-content > .node-survey > .column-main{float: left; width: 100%;}
-.node-type-survey .block-content > .node-survey > .column-side{display: none;}
-.node-type-survey .block-content > .node-survey > .column-main .field{display: inline-block; width: 100%; padding-bottom: 10px;}
-.node-type-survey .block-content > .node-survey > .column-main .field .field-label{float: left; width: 240px;}
-.node-type-survey .block-content > .node-survey > .column-main .field .field-items{float: left; width: 560px;}
+.node-type-survey .block-content > .node-survey > .column-main, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-main{float: left; width: 100%;}
+.node-type-survey .block-content > .node-survey > .column-side, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-side{display: none;}
+.node-type-survey .block-content > .node-survey > .column-main .field, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-main .field{display: inline-block; width: 100%; padding-bottom: 10px;}
+.node-type-survey .block-content > .node-survey > .column-main .field .field-label, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-main .field .field-label{float: left; width: 240px;}
+.node-type-survey .block-content > .node-survey > .column-main .field .field-items, 
+.node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking > .column-main .field .field-items{float: left; width: 560px;}
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view{margin: 0; padding: 0;}
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
 .node-type-survey .block-content > .node-survey > .column-main .field-collection-container .field-collection-view .field .field-label{width: 150px;} 
@@ -1658,4 +1679,24 @@ input[name="field_newsl_add_news_und_0_remove_button"],
  .view-manage-issues .view-filters input.form-text{height: auto;}
  [id*="field-survey-add-questions-values"] .field-name-field-survey-answer-type span.error{padding-left: 98px !important;}
  .node-food_news-form .vertical-tabs{padding: 10px 0 0 10px;}
- 
+ [id*="views-exposed-form-task-page"] .views-exposed-widget .container-inline-date{float: left; clear: none;}
+ [id*="views-exposed-form-task-page"] .views-exposed-widget .container-inline-date .date-padding label{display: none;}
+ div.views-exposed-form input.form-text, div.views-exposed-form input.form-autocomplete{box-sizing: border-box;}
+ .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea .tabledrag-toggle-weight-wrapper, 
+ .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody label{display: none;}
+ .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody tr{padding-top: 10px; float: left;}
+ .node-task_idea_allocation_tracking-form .field-name-field-task-task-idea table tbody tr:first-child{padding-top: 0;}
+ .field-name-field-task-finish-date-and-time .fieldset-content{padding: 0 !important; float: left; width: 400px;}
+ .field-name-field-story-expiry-date{margin-top: 10px;}
+ .field-name-field-story-expiry-date .container-inline-date label{display: none;}
+ .field-name-field-story-expiry-date .fieldset-title{margin-top: 5px;}
+ .node-type-task-idea-allocation-tracking .block-content > .node-task-idea-allocation-tracking{background: none;}
+ .node-create_content-form .vertical-tabs, 
+ .node-clients_creation-form .vertical-tabs, 
+ .node-service_creation-form .vertical-tabs, 
+ .node-client_service_association-form .vertical-tabs{padding: 10px 10px;}
+ .node-create_content-form .vertical-tabs .vertical-tabs-list, 
+ .node-clients_creation-form .vertical-tabs .vertical-tabs-list, 
+ .node-service_creation-form .vertical-tabs .vertical-tabs-list, 
+ .node-client_service_association-form .vertical-tabs .vertical-tabs-list{display: none;}
+ .field-name-field-story-category > .form-item > label:after{content: '*'; color: red;}

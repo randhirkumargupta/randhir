@@ -5,20 +5,10 @@
 (function($) {
   Drupal.behaviors.itg_quiz = {
     attach: function(context, settings) {
+      
       //Hide left side vertical tabs in case of simple users
       var uid = settings.itg_quiz.settings.uid;
       var nid = settings.itg_quiz.settings.nid;
-      
-      //Code by shravan
-      //$('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-text-und-0-value').hide();
-//      $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-image-und-0-ajax-wrapper').hide();
-//      $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-field-quiz-answer-video-und-0-ajax-wrapper').hide();
-//       $('#selectMe').change(function () {
-//        //$('.group').hide();
-//        //$('#'+$(this).val()).show();
-//        })
-//        
-//        jQuery(this).attr("id");
       
       if (uid != 1) {
         $('.field-edit-link').hide();
@@ -28,15 +18,34 @@
         
       }
    
-      if(nid == ''){
-        $('#edit-field-quiz-add-questions-und-0-remove-button').hide();
+     //Hide "Remove" button initially which comes after clicking of "Add More"
+      if(nid == '' || nid == null){
+       if($('input[name="field_quiz_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_quiz_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
+          $('input[name="field_quiz_add_questions_und_0_remove_button"]').hide();
+        }
         $('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-remove-button').hide();
       }
+      
 
       //Collect values assigned in settings array 
       var base_url = settings.itg_quiz.settings.base_url;
       var type = settings.itg_quiz.settings.type;
       var nid = settings.itg_quiz.settings.nid;
+      
+            //Expiry date treatment
+      if($('input[name="field_survey_expity_date[und][1]"]').prop("checked") == true){
+        $('#edit-field-survey-end-date').show();
+      } else {
+        $('#edit-field-survey-end-date').hide();
+      }
+      
+      $('input[name="field_survey_expity_date[und][1]"]').click(function (){
+        if($(this).prop("checked") == true){
+          $('#edit-field-survey-end-date').show();
+        } else {
+          $('#edit-field-survey-end-date').hide();
+        }
+      });
 
       //Restrict print issue date to select previous date in magazine form 
       if (type === 'Quiz') {
@@ -44,22 +53,41 @@
           changeYear: true,
           minDate: '0',
         });
-        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-1').prop("readonly", true);
+        $('#edit-field-survey-start-date-und-0-value-datepicker-popup, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-end-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup, #edit-field-survey-end-date-und-0-value-datepicker-popup-2, #edit-field-survey-end-date-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
       
-      //Number of answer option select functionality
-      $('.field-name-field-quiz-option-1, .field-name-field-quiz-option-2, .field-name-field-quiz-option-3, .field-name-field-quiz-option-4, .field-name-field-quiz-option-5').hide();
-      var ans_op_val = $('#edit-field-quiz-options-und').val();
-      for(var ans_op_ini = 1; ans_op_ini <= ans_op_val; ans_op_ini++){
-         $('.field-name-field-quiz-option-'+ans_op_ini).show();
-       }
-       
-      $('#edit-field-quiz-options-und').change(function (){
-       $('.field-name-field-quiz-option-1, .field-name-field-quiz-option-2, .field-name-field-quiz-option-3, .field-name-field-quiz-option-4, .field-name-field-quiz-option-5').hide();
-       for(var ans_op = 1; ans_op <= $(this).val(); ans_op++){
-         $('.field-name-field-quiz-option-'+ans_op).show();
-       }
+      //Immediate and contest type radio button treatment
+      if ($("input[name='field_quiz_type[und]']").val() === 'immediate') {
+        $('#edit-field-quiz-immediate-result').show();
+      } else {
+        $('#edit-field-quiz-immediate-result').hide();
+      }
+      
+      $("input[name='field_quiz_type[und]']").on("click", function() {
+        var check_radio_name = $(this).val();
+        if (check_radio_name == 'immediate') {
+          $('#edit-field-quiz-immediate-result').show();
+        } else {
+          $('#edit-field-quiz-immediate-result').hide();
+        }
       });
+      
+      //Scoring type treatment
+     if ($("input[name='field_quiz_scoring_type[und]']").val() === 'normal') {
+        $('.field-name-field-quiz-weightage').hide();
+      } else {
+        $('.field-name-field-quiz-weightage').show();
+      }
+      
+      $("input[name='field_quiz_scoring_type[und]']").on("click", function() {
+        var check_radio_name = $(this).val();
+        if (check_radio_name == 'normal') {
+          $('.field-name-field-quiz-weightage').hide();
+        } else {
+          $('.field-name-field-quiz-weightage').show();
+        }
+      });
+      
       
       //Answer Option
       $('.field-name-field-quiz-option-1-text, .field-name-field-quiz-option-1-media, .field-name-field-quiz-option-2-text, .field-name-field-quiz-option-2-media').hide();

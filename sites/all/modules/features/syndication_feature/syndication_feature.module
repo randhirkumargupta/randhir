@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Syndication Feature feature.
+ */
+
+include_once 'syndication_feature.features.inc';

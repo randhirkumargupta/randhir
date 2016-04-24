@@ -1,0 +1,378 @@
+<?php
+
+/**
+ * Implement hook_permissions()
+ */
+function itg_syndication_permission() {
+  return array(
+    'administer itg_syndication settings' => array(
+      'title' => t('Administer Syndication Feed Generator'),
+      'description' => t('Generate feeds for syndication.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu()
+ * @return array
+ */
+function itg_syndication_menu() {
+  // Syndication Feed Generator  
+  $items['syndication/feed-generator'] = array(
+    'title' => t('Syndication Feed Generator'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_syndication_form'),
+    'access arguments' => array('administer itg_syndication settings'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_form()
+ * @return array
+ */
+function itg_syndication_form() {
+  // Get list of all content type
+  $all_content_type = node_type_get_types();
+  //Select client 
+  $form['client'] = array(
+    '#type' => 'select',
+    '#title' => t('Select Client'),
+    '#description' => t('Client’s name will be fetched from Master Sheet.  e.g. Airtel, Vodafone etc'),
+    '#options' => itg_syndication_get_client(),
+    '#default_value' => '_none',
+    '#required' => TRUE,
+  );
+
+  // Praper array for options
+  $options = array('_none' => '- Select web property - ');
+  foreach ($all_content_type as $key => $value) {
+    $options[$key] = $value->name;
+  }
+
+  // Create web property field.
+  $form['web_property'] = array(
+    '#type' => 'select',
+    '#title' => t('Web Property'),
+    '#description' => t('System displays all the web properties. User can select any of them and correspondingly content will only be displayed.'),
+    '#options' => $options,
+    '#default_value' => '_none',
+    '#required' => TRUE,
+    '#ajax' => array(
+      'callback' => 'itg_syndication_content_callback', // Callback will replace the students field with new values.
+      'wrapper' => 'itg-issue',
+      'method' => 'replace',
+      'event' => 'change',
+    ),
+  );
+
+  // Students checkboxes field container.
+  $form['issue'] = array(
+    '#type' => 'container',
+    '#tree' => TRUE,
+    '#prefix' => '<div id="itg-issue">',
+    '#suffix' => '</div>',
+  );
+
+  // Create default checkboxes field with default selected class's students options.
+  $form['issue']['list'] = array(
+    '#title' => t('Issue List'),
+    '#type' => 'checkboxes',
+    '#options' => itg_syndication_issue_list($options['issue']),
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Generate Feed'),
+  );
+
+  return $form;
+}
+
+/**
+ * Custom callback to build form fields.
+ */
+function itg_syndication_content_callback($form, &$form_state) {
+  $values = $form_state['values'];
+  // Overwrite the student list fields with new options value.
+  $form['issue']['list'] = array(
+    '#type' => 'checkboxes',
+    '#options' => itg_syndication_issue_list($values['web_property']), // Api will return the class students list as array.
+  );
+  $form['issue']['list'] = form_process_checkboxes($form['issue']['list']); // Process the checkboxes fields.
+
+  return $form['issue']; // return full students field container.
+}
+
+/**
+ * API to return class's students list.
+ */
+function itg_syndication_issue_list($c_type) {
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('nid', 'title'))
+      ->condition('type', $c_type)
+      ->condition('status', 1);
+  $itg_result = $itg_query->execute();
+
+  foreach ($itg_result as $value) {
+    $data[$value->nid] = $value->title;
+  }
+
+  return $data;
+}
+
+/**
+ * Check duplicate client name.
+ * @param string $title
+ * @param string $sharing_mode
+ * @param integer $nid
+ * @return integer
+ */
+function itg_syndication_check_duplicate($title, $sharing_mode, $nid = NULL) {
+  $itg_query = db_select('node', 'n');
+  if ($nid != NULL) {
+    $itg_query->condition('n.nid', $nid, '!=');
+  }
+  $itg_query->condition('n.title', $title)
+      ->fields('n', array('nid'));
+  $itg_query->join('field_data_field_content_sharing_mode', 'cm', 'n.nid = cm.entity_id');
+  $itg_query->condition('cm.field_content_sharing_mode_value', $sharing_mode);
+  $itg_result = $itg_query->execute()->fetchField();
+
+  return $itg_result;
+}
+
+/**
+ * Callback function for client list
+ * @return array
+ */
+function itg_syndication_get_client() {
+  // Load vocabulary id from machine name.
+  $vid = taxonomy_vocabulary_machine_name_load('client_title');
+
+  // Load list of clients from master
+  $options = taxonomy_get_tree($vid->vid);
+
+  // Create default option for list
+  $data['_none'] = '- Select a value -';
+
+  // Prepare options list from php stdObject
+  foreach ($options as $value) {
+    $data[$value->name] = $value->name;
+  }
+
+  return $data;
+}
+
+/**
+ * Implements hook_form_alter()
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'syndication_client_node_form') {
+    // Convert title fields from textfield to select fields.
+    $form['title'] = array(
+      '#type' => 'select',
+      '#title' => t('Client Title'),
+      '#description' => t('Client’s name will be fetched from Master Sheet.  e.g. Airtel, Vodafone etc'),
+      '#required' => TRUE,
+      '#options' => itg_syndication_get_client(),
+      '#default_value' => $form['nid']['#value'] != NULL ? $form['title']['#default_value'] : '_none',
+    );
+
+    // Include js file
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication.js',
+    );
+
+    // Custom callback for  after form built
+    $form['#action'] = '?destination=syndication-client-listing';
+    $form['#after_build'][] = 'itg_syndication_after_build';
+    $form['actions']['submit']['#submit'][] = 'itg_syndication_change_message';
+  }
+  if ($form_id == 'syndication_client_service_assoc_node_form') {
+    $form['#action'] = '?destination=syndication-client-listing';
+    $form['#after_build'][] = 'itg_syndication_service_after_build';
+    $form['actions']['submit']['#submit'][] = 'itg_syndication_service_change_message';
+  }
+  // Add client dropdown to view
+  if($form_id == 'views_exposed_form') {
+    $form['client_title'] = array(
+      '#type' => 'select',
+      '#title' => t('Select Client'),      
+      '#options' => itg_syndication_get_client(),
+      '#default_value' => '_none',      
+      '#weight' => 1,
+    );
+    $form['issue'] = array(
+      '#type' => 'select',
+      '#title' => t('Select Issue'),      
+      '#options' => array('_none' => '-Select '),
+      '#default_value' => '_none',      
+      '#weight' => 3,
+    );
+    $form['type']['#weight'] = 2;
+    $form['submit']['#weight'] = 4;    
+  }  
+}
+
+/**
+ * After build callback function for syndication service assosiation form
+ * @param array $form
+ * @param array $form_state
+ * @return array 
+ */
+function itg_syndication_service_after_build($form, &$form_state) {
+  // Add cancel button to create/edit astro page
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'syndication-client-listing', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+  $form['additional_settings']['#access'] = FALSE;
+
+  return $form;
+}
+
+/**
+ * After build callback function.
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_syndication_after_build($form, &$form_state) {
+  $form['field_email_address']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
+    ),
+    'required' => array(
+      ':input[name="field_content_sharing_mode[und]"]' => array(
+        'value' => '1'
+      ),
+    ),
+  );
+  $form['field_service_fetch_link']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_content_sharing_mode[und]"]' => array('value' => '1'),
+    ),
+    'required' => array(
+      ':input[name="field_content_sharing_mode[und]"]' => array('value' => '1'),
+    ),
+  );
+
+  // Add cancel button to create/edit astro page
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'syndication-client-listing', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+  $form['additional_settings']['#access'] = FALSE;
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_group_build_pre_render_alter.
+ * @param array $element
+ */
+function itg_syndication_field_group_build_pre_render_alter(&$element) {
+  if (isset($element['#form_id'])) {
+    if ($element['#form_id'] == 'syndication_client_node_form') {
+      $element['group_syndication_ftp']['#states'] = array(
+        'visible' => array(
+          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+        ),
+        'required' => array(
+          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+        )
+      );
+      $element['group_syndication_ftp']['#id'] = 'group_syndication_ftp';
+    }
+  }
+}
+
+/**
+ * Implemtnts hook_node_validate()
+ * @param Object $node
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_syndication_node_validate($node, $form, &$form_state) {
+  if ($node->type == 'syndication_client') {
+    $sharing_mode = $node->field_content_sharing_mode['und'][0]['value'];
+    switch ($sharing_mode) {
+      // Web url Case
+      case '1':
+        if (isset($node->field_service_fetch_link['und'][0]['value']) && $node->field_service_fetch_link['und'][0]['value'] == '') {
+          form_set_error('field_service_fetch_link', t('Fetch link (our server) field is required'));
+        }
+        break;
+
+      // FTP case
+      case '2':
+        if (isset($node->field_ftp_ip_address['und'][0]['value']) && $node->field_ftp_ip_address['und'][0]['value'] == '') {
+          form_set_error('field_ftp_ip_address', t('FTP IP Address field is required.'));
+        }
+        elseif (isset($node->field_ftp_username['und'][0]['value']) && $node->field_ftp_username['und'][0]['value'] == '') {
+          form_set_error('field_ftp_username', t('FTP Username field is required'));
+        }
+        elseif (isset($node->field_ftp_password['und'][0]['value']) && $node->field_ftp_password['und'][0]['value'] == '') {
+          form_set_error('field_ftp_password', t('FTP Password field is required'));
+        }
+        else {
+          
+        }
+        break;
+
+      // Mail to case
+      case '3':
+        if (isset($node->field_email_address['und'][0]['value']) && $node->field_email_address['und'][0]['value'] == '') {
+          form_set_error('field_email_address', t('Mail to field is required.'));
+        }
+    }
+
+    // Validate same client with same sharing mode.
+    $is_dupl_client = 0;
+    if ($node->nid != NULL) {
+      $is_dupl_client = itg_syndication_check_duplicate($node->title, $node->field_content_sharing_mode['und'][0]['value'], $node->nid);
+    }
+    else {
+      $is_dupl_client = itg_syndication_check_duplicate($node->title, $node->field_content_sharing_mode['und'][0]['value']);
+    }
+
+    if ($is_dupl_client) {
+      form_set_error('title', t('Client already exist for selected content sharing mode.'));
+    }
+  }
+}
+
+/**
+ * Custom submit callback function to change message after Syndication client node save/update.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_syndication_change_message($form, &$form_state) {
+  drupal_get_messages('status');
+  if ($form_state['values']['changed'] == '') {
+    drupal_set_message(t('Client created successfully.'));
+  }
+  else {
+    drupal_set_message(t('Client updated successfully.'));
+  }
+}
+
+/**
+ * Custom submit callback function to change message after Syndication service node save/update.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_syndication_service_change_message($form, &$form_state) {
+  drupal_get_messages('status');
+  if ($form_state['values']['changed'] == '') {
+    drupal_set_message(t('Service associated successfully.'));
+  }
+  else {
+    drupal_set_message(t('Service updated successfully.'));
+  }
+}

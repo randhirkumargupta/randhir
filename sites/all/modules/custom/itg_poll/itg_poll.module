@@ -17,7 +17,8 @@
  */
 function itg_poll_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == "poll_node_form") {
-    $form['field_poll_question_text']['#states'] = array(
+      $form['actions']['submit']['#submit'][] = 'alter_submit_status_message';
+      $form['field_poll_question_text']['#states'] = array(
       'visible' => array(
         ':input[name="field_poll_question[und]"]' => array('value' => '1'),
       ),
@@ -66,6 +67,18 @@ function itg_poll_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 20,
     );
   }
+}
+function alter_submit_status_message(&$form, $form_state) {
+   if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);}
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'poll') {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';}
+  $poll_title = $form_state['node']->title;
+  drupal_set_message(t('Poll <b>' . $poll_title . '</b> has been ' . $op.'.' ));
+  $_GET['destination'] = $_REQUEST['destination'];
 }
 
 /**

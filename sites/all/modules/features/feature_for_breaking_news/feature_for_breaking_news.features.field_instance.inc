@@ -151,7 +151,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_breaking_tile',
     'label' => 'Title',
     'required' => 1,

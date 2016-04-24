@@ -719,7 +719,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -758,7 +758,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -834,9 +834,9 @@ function features_for_quiz_field_default_field_instances() {
     'label' => 'Validity End Date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'strtotime',
       'default_value2' => 'same',
-      'default_value_code' => '',
+      'default_value_code' => '+7 days',
       'default_value_code2' => '',
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -855,6 +855,45 @@ function features_for_quiz_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_survey_expity_date'.
+  $field_instances['node-quiz-field_survey_expity_date'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_survey_expity_date',
+    'label' => 'Quiz Expiry Date',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
       'weight' => 7,
     ),
   );
@@ -936,6 +975,7 @@ function features_for_quiz_field_default_field_instances() {
   t('Please select quiz validity start date.');
   t('Question');
   t('Questions Display Sequence');
+  t('Quiz Expiry Date');
   t('Quiz Instructions');
   t('Quiz Scoring Type');
   t('Quiz Type');
