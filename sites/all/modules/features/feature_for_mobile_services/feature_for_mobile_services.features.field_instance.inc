@@ -266,8 +266,8 @@ function feature_for_mobile_services_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => '',
-      'min' => '',
+      'max' => 5000,
+      'min' => 1,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -770,7 +770,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'exclude_cv' => FALSE,
-      'file_directory' => '',
+      'file_directory' => 'mobile_audio',
       'file_extensions' => 'mp3 mp4 ogg',
       'max_filesize' => '',
       'user_register_form' => FALSE,
@@ -795,7 +795,7 @@ function feature_for_mobile_services_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -863,7 +863,7 @@ function feature_for_mobile_services_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -953,7 +953,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'alt_field' => 0,
       'default_image' => 0,
       'exclude_cv' => FALSE,
-      'file_directory' => '',
+      'file_directory' => 'mobile_image',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
@@ -981,7 +981,7 @@ function feature_for_mobile_services_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -1062,7 +1062,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_email_address',
     'label' => 'Mail to',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -1238,8 +1238,8 @@ function feature_for_mobile_services_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => '',
-      'min' => '',
+      'max' => 5000,
+      'min' => 1,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
