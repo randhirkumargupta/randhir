@@ -52,7 +52,7 @@ function features_for_survey_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Date Settings',
-    'weight' => '3',
+    'weight' => '2',
     'children' => array(
       0 => 'field_survey_end_date',
       1 => 'field_survey_start_date',
@@ -83,7 +83,7 @@ function features_for_survey_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Section',
-    'weight' => '1',
+    'weight' => '3',
     'children' => array(
       0 => 'field_survey_category',
     ),
