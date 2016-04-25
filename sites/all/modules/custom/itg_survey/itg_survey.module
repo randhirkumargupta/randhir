@@ -464,20 +464,24 @@ function itg_survey_get_answer_type_name($name){
  * @return string
  */
 function itg_survey_node_access($node, $op, $account) {
-  $curr_time = strtotime(date('Y-m-d') . ' 00:00:00');
-  $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
-
-  $node_edit = FALSE;
-  if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
-    if ($curr_time > $survey_end_date) {
-      $node_edit = TRUE;
-    }
-  }
+  global $user;
   
-  if (isset($node->type) && $node->type == 'survey' && $node_edit) {
-   if ($op == 'update') {
-     return NODE_ACCESS_DENY; 
-   }        
+  if (!in_array('Site Admin', $user->roles)) {
+    $curr_time = strtotime(date('Y-m-d') . ' 00:00:00');
+    $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+
+    $node_edit = FALSE;
+    if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
+      if ($curr_time > $survey_end_date) {
+        $node_edit = TRUE;
+      }
+    }
+
+    if (isset($node->type) && $node->type == 'survey' && $node_edit) {
+      if ($op == 'update') {
+        return NODE_ACCESS_DENY;
+      }
+    }
+    return NODE_ACCESS_IGNORE;
   }
-  return NODE_ACCESS_IGNORE;
 }
