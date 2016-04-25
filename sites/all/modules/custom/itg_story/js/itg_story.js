@@ -11,14 +11,25 @@
                    jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
                    if (uid != 1) {
                      $('.field-edit-link').hide();
+                     var magazine = $('#edit-field-story-select-magazine-und').val();
+                     if (magazine == '_none') {
+                       $('.form-item-field-story-configurations-und-display-lock').hide();
+                     }
                      $('#edit-body-und-0-format').hide();                     
                      $('#edit-field-story-archive').hide();
                      $('#edit-path').show();
                    }
                  
+                   $('#edit-field-story-select-magazine-und').change(function() {                     
+                     $('.form-item-field-story-configurations-und-display-lock').show();                   
+                   });
+                 
+                 
                  // Code for Magazine, Supplement and date field value set Null
                  $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function() {                     
-                    if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":not(:checked)")) {                         
+                    if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":not(:checked)")) {
+                      $('#edit-field-story-configurations-und-display-lock').attr('checked', false);
+                      $('.form-item-field-story-configurations-und-display-lock').hide();
                       $("#edit-field-story-select-magazine-und").val('_none');
                       $('[name="field_story_select_supplement[und]"]').val('_none');                      
                       $("#edit-field-story-issue-date-und-0-value-datepicker-popup-1").val('');

@@ -177,6 +177,10 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
    }
+   
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
+    $form['field_story_configurations_value']['#options'] = array('All' => '- Any -', 'display_lock' => 'Lock Story');
+  }
  
 }
 
@@ -532,6 +536,8 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
       )
     );
+    
+    
   
 }
 

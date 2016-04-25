@@ -62,7 +62,6 @@
         
         $prev_num = 0;
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
-
           echo '<h2>News ' . ($prev_num + 1) . ' Details:</h2>';
           ?>
            <div class="field">
@@ -79,7 +78,7 @@
             </div>
             <div class="field">
               <div class="field-label">Story ID:</div>
-              <div class="field-items"><?php echo ucwords($news_arr['field_news_story_id'][LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><?php echo $news_arr['field_news_story_id'][LANGUAGE_NONE][0]['target_id']; ?></div>
             </div>
             <div class="field">
               <div class="field-label">Description:</div>

@@ -7,6 +7,8 @@
  * @see https://drupal.org/node/1728216
  */
 ?>
+
+
 <article class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <header>

@@ -5,9 +5,10 @@
 
 function itg_quiz_user_list() {
   $node = node_load(arg(1));
+  $nid = arg(1);
   if ($node->type == 'quiz') {
     $output = '';
-    $output.= '<div><strong>Quiz User List</strong></div>
+    $output.= '<div><strong>Quiz User List</strong></div><div align="right">'.l(t("Send Mail"),"quiz-winners-mail/$nid").'</div>
       <table style="width:100%">
         <tr>
         <th>Username</th>

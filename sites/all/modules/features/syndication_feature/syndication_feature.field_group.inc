@@ -21,7 +21,7 @@ function syndication_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'FTP',
-    'weight' => '52',
+    'weight' => '8',
     'children' => array(
       0 => 'field_ftp_ip_address',
       1 => 'field_ftp_username',

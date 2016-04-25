@@ -409,6 +409,7 @@ function feature_for_mobile_services_views_default_views() {
     18 => 0,
   );
   $handler->display->display_options['filters']['field_client_title_tid']['vocabulary'] = 'client_title';
+  $handler->display->display_options['filters']['field_client_title_tid']['error_message'] = FALSE;
   $handler->display->display_options['path'] = 'clients-listing';
 
   /* Display: Service */

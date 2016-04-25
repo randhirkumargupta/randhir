@@ -35,9 +35,9 @@ function syndication_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'body',
-    'label' => 'Body',
+    'label' => 'Short Description ',
     'required' => 0,
     'settings' => array(
       'display_summary' => 0,
@@ -53,7 +53,7 @@ function syndication_feature_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 41,
+      'weight' => 3,
     ),
   );
 
@@ -93,7 +93,7 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 47,
+      'weight' => 6,
     ),
   );
 
@@ -135,7 +135,7 @@ function syndication_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 9,
     ),
   );
 
@@ -266,46 +266,6 @@ function syndication_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-syndication_client-field_service_delivery_mode'.
-  $field_instances['node-syndication_client-field_service_delivery_mode'] = array(
-    'bundle' => 'syndication_client',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_delivery_mode',
-    'label' => 'Delivery Mode',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 43,
-    ),
-  );
-
-  // Exported field_instance:
   // 'node-syndication_client-field_service_fetch_link'.
   $field_instances['node-syndication_client-field_service_fetch_link'] = array(
     'bundle' => 'syndication_client',
@@ -344,7 +304,7 @@ function syndication_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 49,
+      'weight' => 7,
     ),
   );
 
@@ -383,7 +343,7 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 45,
+      'weight' => 4,
     ),
   );
 
@@ -441,13 +401,52 @@ function syndication_feature_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 57,
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-syndication_client-field_syndication_delivery_mode'.
+  $field_instances['node-syndication_client-field_syndication_delivery_mode'] = array(
+    'bundle' => 'syndication_client',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_syndication_delivery_mode',
+    'label' => 'Delivery Mode',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 5,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Body');
   t('Content Sharing mode');
   t('Delivery Mode');
   t('Expiry date');
@@ -457,6 +456,7 @@ function syndication_feature_field_default_field_instances() {
   t('Fetch link (our server)');
   t('Frequency');
   t('Mail to');
+  t('Short Description ');
   t('User will enter short description about the client.');
 
   return $field_instances;

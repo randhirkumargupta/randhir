@@ -126,7 +126,7 @@ function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
   
   if($form_state['node']->type == 'issue'){
     
-    $title = date('m/d/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
+    $title = date('d/m/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
   } else {
     $title = $form_state['node']->title;
   }

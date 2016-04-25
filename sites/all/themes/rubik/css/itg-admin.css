@@ -590,6 +590,7 @@ form .form-item .form-item{
   margin-bottom: 20px;
 }
 #block-itg-story-story-tab-form-block,
+#block-itg-newsletter-newsletter-tab-form-block,
 #block-menu-menu-mega-review-menu,
 #block-itg-mega-reviews-critics-mega-reviews-tab-form-block,
 #block-itg-poll-poll-tab-form-block, 
@@ -610,6 +611,7 @@ form .form-item .form-item{
 #block-itg-story-story-tab-form-block .block-content,
 #block-itg-mega-reviews-critics-mega-reviews-tab-form-block .block-content,
 #block-menu-menu-mega-review-menu .block-content, 
+#block-itg-newsletter-newsletter-tab-form-block .block-content,
 #block-itg-poll-poll-tab-form-block .block-content, 
 #block-itg-recipe-recipe-tab-form-block .block-content, 
 #block-itg-breaking-news-breaking-news-tab-form-block .block-content, 
@@ -695,7 +697,8 @@ form .form-item .form-item{
   background-color: #008eb1;
 }
 .block-itg-story.fixed, 
-.block-itg-poll.fixed, 
+.block-itg-poll.fixed,
+.block-itg-newsletter.fixed,
 .block-itg-astro.fixed, 
 .block-itg-recipe.fixed,
 .block-itg-survey.fixed,
@@ -1696,3 +1699,4 @@ input[name="field_newsl_add_news_und_0_remove_button"],
  .node-clients_creation-form .vertical-tabs .vertical-tabs-list, 
  .node-service_creation-form .vertical-tabs .vertical-tabs-list, 
  .node-client_service_association-form .vertical-tabs .vertical-tabs-list{display: none;}
+ .field-name-field-story-category > .form-item > label:after{content: '*'; color: red;}
