@@ -19,7 +19,8 @@ function itg_quiz_winners_mail_list() {
 
     $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
-      return TRUE;
+      drupal_set_message('Winners list has been sent to users.');
+      drupal_goto('quiz-user-list/'.$nid);
     }
     else {
       $error_msg = 'Failed to send the email!';
@@ -34,6 +35,7 @@ function itg_quiz_winners_user_list($nid) {
   $query = db_select('itg_quiz_user_score', 'qs');
   $query->fields('qs')
       ->condition('qs.nid', $nid, '=')
+      ->condition('qs.quiz_score', 0, '!=')
       ->orderBy('qs.quiz_score', 'DESC');
   $result = $query->execute();
   $i = 0;
@@ -92,16 +94,15 @@ $winners = '';
     <title></title>
 </head>
 <body style="margin:0; padding:0;">
-      <table cellpadding="0" cellspacing="0"><tr>
-        <th>Username</th>
-        <th>Score</th></tr>';
+<table cellpadding="0" cellspacing="0"><tr><td>Dear user,<td></tr><tr><td>Thanks for taking our quiz. Winners list is given below:<td></tr><tr><td>&nbsp;</td></tr></table>
+<table cellpadding="0" cellspacing="0"><tr style="font-weight:bold"><td>User Name</td><td>Score</td></tr>';
   foreach ($winner_records as $key=>$value) {
    $winners .= '<tr><td>'.$value['user_name'].'</td>
         <td>'.$value['quiz_score'].'</td></tr>';
      
   }
-  $content_end ='<tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
+  $content_end ='<tr><td>&nbsp;</td></tr><tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
   $final_output = $content.$winners.$content_end;
-  print $final_output;
-  exit;
+  echo $final_output; exit;
+  return $final_output;
 }
