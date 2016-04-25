@@ -134,11 +134,13 @@ if($user->uid == $view_user_id) {
       $last_record_display = 'Last Content Filed : N/A';
       print '<div class="my-stats-left">' . $last_record_display . '</div>';
       }
-      $last_publish_record = itg_last_node_published_user($elements['#account']->uid,'1');
+      // $last_publish_record = itg_last_node_published_user($elements['#account']->uid,'1');
+      $last_publish_record = itg_last_publish_user_node($elements['#account']->uid,1);
       
       if(!empty($last_publish_record)) {
-        $last_title = node_load($last_publish_record['nid'], $last_publish_record['vid']);
-        $last_record_publish = '<strong>Last Content Publish: </strong>'.ucwords($last_title->type).' - '.$last_title->title;
+        //$last_title = node_load($last_publish_record['nid'], $last_publish_record['vid']);
+        $last_type = ucfirst(str_replace('_', '', $last_publish_record['type']));
+        $last_record_publish = '<strong>Last Content Publish: </strong>'.ucwords($last_type).' - '.$last_publish_record['title'];
         print '<div class="my-stats-right">' . $last_record_publish . '</div>';
       }
       else
@@ -287,9 +289,29 @@ function itg_last_node_user($uid) {
     return $last_record_info;
 }
 
-// query to get last node published by user
-function itg_last_node_published_user($uid,$publish_id) {
+
+// query to get last node published by user without workflow 
+
+function itg_last_publish_user_node($uid,$publish_id) {
+  $last_result_user = db_select('node', 'n')
+          ->fields('n', array('title','type'))
+          ->condition('uid', $uid, '=')
+          ->condition('status', $publish_id, '=')
+          ->orderBy('created', 'DESC')//ORDER BY created
+          ->range(0,1)
+          ->execute();
   
+  while ($last_record_user = $last_result_user->fetchAssoc()) {
+    $last_record_info_user['title'] = $last_record_user['title'];
+    $last_record_info_user['type'] = $last_record_user['type'];
+  }
+  
+    return $last_record_info_user;
+}
+
+// query to get last node published by using workflow user
+
+function itg_last_node_published_user($uid,$publish_id) {
   $last_publish_result = db_select('workbench_moderation_node_history', 'w')
           ->fields('w', array('nid','vid'))
           ->condition('uid', $uid, '=')
