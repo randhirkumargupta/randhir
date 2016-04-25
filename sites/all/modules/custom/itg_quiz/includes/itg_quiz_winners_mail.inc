@@ -103,6 +103,5 @@ $winners = '';
   }
   $content_end ='<tr><td>&nbsp;</td></tr><tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
   $final_output = $content.$winners.$content_end;
-  echo $final_output; exit;
   return $final_output;
 }
