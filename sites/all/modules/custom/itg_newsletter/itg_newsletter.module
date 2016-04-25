@@ -116,7 +116,7 @@ function itg_newsletter_form_after_build($form, &$form_state){
   
   for($i = 0; $i <= $form['field_newsl_add_news']['und']['#max_delta']; $i++) {
     $count = $i+1;
-    $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News - ').$count;  
+    $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News ').$count;  
   }
   
   //Extract type of node
