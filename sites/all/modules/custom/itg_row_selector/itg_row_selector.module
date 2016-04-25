@@ -141,15 +141,14 @@ function itg_row_selector_custom_submit($form, &$form_state) {
   $client_name = check_plain($form_state['values']['itg_row_selector_client']);
   $web_property = check_plain($form_state['values']['itg_row_selector_web_property']);
   $issue = check_plain($form_state['values']['itg_row_selector_issue']);
-  $syndication_node = check_plain($form_state['values']['selected_rows']);
-  $syndication_node = implode(',', $syndication_node);
-
+  $syndication_node = check_plain($form_state['values']['selected_rows']);  
+  $syndication_node = strpos($syndication_node, ',') !== FALSE ? explode(',', $syndication_node) : array($syndication_node);  
 
   $pre_save = array(
     'web_property' => $web_property,
     'client_title' => $client_name,
     'syndication' => serialize($syndication_node),
-    'created' => time(),
+    'created' => format_date(time(), 'custom', 'Y-m-d'),
   );
 
   // insert records into database table itg_row_selector.
