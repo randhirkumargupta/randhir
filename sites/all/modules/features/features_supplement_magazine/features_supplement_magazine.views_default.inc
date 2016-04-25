@@ -986,7 +986,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_issue_title']['table'] = 'field_data_field_issue_title';
   $handler->display->display_options['fields']['field_issue_title']['field'] = 'field_issue_title';
   $handler->display->display_options['fields']['field_issue_title']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -1041,7 +1041,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
@@ -1327,7 +1327,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_print_magazine_issue_date']['table'] = 'field_data_field_print_magazine_issue_date';
   $handler->display->display_options['fields']['field_print_magazine_issue_date']['field'] = 'field_print_magazine_issue_date';
   $handler->display->display_options['fields']['field_print_magazine_issue_date']['settings'] = array(
-    'format_type' => 'custom_date',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -1340,7 +1340,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'Y/m/d';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
@@ -1630,7 +1630,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'Y/m/d';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
