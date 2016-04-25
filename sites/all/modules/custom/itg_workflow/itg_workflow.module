@@ -53,7 +53,7 @@ function itg_workflow_after_build($form, &$form_state) {
   unset($form['revision_information']['log']);
   unset($form['revision_information']['workbench_moderation_state_new']);
   $form['revision_information']['workbench_moderation_state_new'] = $state;
-  if ($form['#entity']->workbench_moderation['current']->state == 'needs_review') {
+  /*if ($form['#entity']->workbench_moderation['current']->state == 'needs_review') {
     $terms=taxonomy_get_tree(22);
     foreach($terms as $key => $val){
       $term_name[$val->name] = $val->name;
@@ -67,7 +67,7 @@ function itg_workflow_after_build($form, &$form_state) {
         '#prefix' => '<div class="reasons-form">',
         '#suffix' => '</div>',
     );
-  }
+  }*/
   
   $form['revision_information']['log'] = $log;
   
@@ -98,27 +98,11 @@ function itg_workflow_after_build($form, &$form_state) {
             $submit_name = '';            
             $state_class = ' published';
             
-            drupal_add_js('jQuery(document).ready(function() {
-              jQuery(".reasons-form").hide();
+            drupal_add_js('jQuery(document).ready(function() {              
               jQuery(".form-item-workbench-moderation-state-new").show();
               jQuery("#edit-log").val("");
-              
-              // code for reject content type
-              jQuery("#edit-workbench-moderation-state-new").change(function() {
-                if(jQuery("#edit-workbench-moderation-state-new").val() == "rejected") {
-                  jQuery(".reasons-form").show();
-                  jQuery(".form-item-log").hide();                  
-                  jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
-                  jQuery(".reasons-form-msg").change(function() {                  
-                    jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
-                  });                  
-                }else {
-                  jQuery(".reasons-form").hide();
-                  jQuery(".form-item-log").show();
-                  jQuery("#edit-log").val("");
-                }                
-              });
             });', array('type' => 'inline', 'scope' => 'footer'));
+            
           }      
     }
   } else if (array_key_exists(AUTHOR_GUEST, $user->roles) || array_key_exists(INTERN, $user->roles) || array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {

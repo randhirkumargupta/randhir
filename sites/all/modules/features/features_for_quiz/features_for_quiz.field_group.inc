@@ -84,7 +84,7 @@ function features_for_quiz_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Date Settings',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'field_survey_end_date',
       1 => 'field_survey_start_date',

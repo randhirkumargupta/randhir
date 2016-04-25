@@ -97,7 +97,7 @@ jQuery(document).ready(function() {
     jQuery('#edit-submit').click(function() {                 
         var status_val = jQuery("input[name='status']:checked").val();
         if (status_val == 0) {                   
-           var msg = confirm("Are you sure you want to  Blocked this User?");
+           var msg = confirm("Are you sure you want to Blocked this User?");
            if (msg == true) {
                return true;
            }

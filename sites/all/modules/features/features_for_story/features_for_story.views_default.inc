@@ -110,7 +110,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Reporter's Email id */
+  /* Field: Content: Email id */
   $handler->display->display_options['fields']['field_reporter_email_id']['id'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
@@ -611,10 +611,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -920,10 +921,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -1146,6 +1148,37 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Lock Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
   $handler->display->display_options['path'] = 'published-story';
 
   /* Display: My Un Published Story */
@@ -1219,10 +1252,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -2668,10 +2702,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -3334,10 +3369,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
@@ -3584,10 +3620,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
