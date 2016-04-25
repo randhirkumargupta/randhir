@@ -22,7 +22,7 @@ function _views_row_selector_get_field($view) {
  * Implements hook_views_form_substitutions().
  * 
  * @return type array
- */ 
+ */
 function itg_row_selector_views_form_substitutions() {
   // Views check_plains the column label, so do the same here in order for the
   // replace operation to succeed.
@@ -37,7 +37,6 @@ function itg_row_selector_views_form_substitutions() {
   );
 }
 
-
 /**
  * Returns the 'select all' div that gets inserted above the view results
  * for non-table style plugins.
@@ -47,7 +46,7 @@ function itg_row_selector_views_form_substitutions() {
  * 
  * @param array $variables
  * @return string
- */ 
+ */
 function theme_views_row_selector_select_all($variables) {
   $form = array();
   $form['select_all'] = array(
@@ -75,7 +74,7 @@ function theme_views_row_selector_select_all($variables) {
  * @param array $form_state
  * @param string $form_id
  * @return
- */ 
+ */
 function itg_row_selector_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_form_syndication_feed_generator_page') {
     $form['#attached']['js'] = array(
@@ -105,7 +104,6 @@ function itg_row_selector_form_alter(&$form, &$form_state, $form_id) {
   $query = drupal_get_query_parameters($_GET, array('q'));
   $form['#action'] = url($field->view->get_url(), array('query' => $query));
   //unset($form['actions']);
-
   // Cache the built form to prevent it from being rebuilt prior to validation
   // and submission, which could lead to data being processed incorrectly,
   // because the views rows (and thus, the form elements as well) have changed
@@ -142,8 +140,22 @@ function itg_row_selector_custom_submit($form, &$form_state) {
   //dpm($form_state['values']);
   $client_name = check_plain($form_state['values']['itg_row_selector_client']);
   $web_property = check_plain($form_state['values']['itg_row_selector_web_property']);
-  $issue = check_plain($form_state['values']['itg_row_selector_issue']);  
-} 
+  $issue = check_plain($form_state['values']['itg_row_selector_issue']);
+  $syndication_node = check_plain($form_state['values']['selected_rows']);
+  $syndication_node = implode(',', $syndication_node);
+
+
+  $pre_save = array(
+    'web_property' => $web_property,
+    'client_title' => $client_name,
+    'syndication' => serialize($syndication_node),
+    'created' => time(),
+  );
+
+  // insert records into database table itg_row_selector.
+  drupal_write_record('itg_row_selector', $pre_save);
+  watchdog('Syndication', 'Node has been inserted for syndication.');
+}
 
 /**
  * Implements hook_permission().
@@ -177,7 +189,6 @@ function itg_row_selector_permission() {
  * @param string $path
  * @return array
  */
- 
 function itg_row_selector_theme($existing, $type, $theme, $path) {
   return array(
     'itg_row_selector_select_all' => array(
@@ -200,7 +211,6 @@ function itg_row_selector_views_api() {
   );
 }
 
-
 /**
  * Find the value for a given "field" in a Views result (row).
  *
@@ -213,7 +223,7 @@ function itg_row_selector_views_api() {
  * @param boolean $key
  * @return boolean
  */
-function _views_row_selector_get_from_views_result($views_result, $field, $key=FALSE) {
+function _views_row_selector_get_from_views_result($views_result, $field, $key = FALSE) {
   if (empty($field)) {
     return FALSE;
   }
@@ -241,4 +251,3 @@ function _views_row_selector_get_from_views_result($views_result, $field, $key=F
   }
   return $value;
 }
-
