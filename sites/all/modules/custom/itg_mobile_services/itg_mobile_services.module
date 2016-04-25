@@ -8,11 +8,14 @@
  * @return array $form
  */
 function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
+
   switch ($form_id) {
     case 'clients_creation_node_form':
-      unset($form['title']);
+
+      $form['title']['#type'] = 'hidden';
+      $form['title']['#default_value'] = 'client';
+
       $form['metatags']['#type'] = 'hidden';
-      // $form['metatags']['#type'] = 'hidden';
       unset($form['actions']['preview']);
 
       $form['actions']['cancel'] = array(
@@ -28,6 +31,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['#validate'][] = 'itg_mobile_clients_validator';
 
       $form['#after_build'][] = 'itg_mobile_client_after_build';
+      $form['#submit'][] = 'itg_mobile_client_after_submit';
 
       if (empty($_GET['destination'])) {
         $_GET['destination'] = 'clients-listing';
@@ -93,6 +97,8 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
     case 'client_service_association_node_form':
       unset($form['#metatags']);
       unset($form['actions']['preview']);
+      $form['title']['#type'] = 'hidden';
+      $form['title']['#default_value'] = 'service association';
 
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-association-listing', array(
@@ -122,10 +128,11 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         'event' => 'change', // On change of the selection this action would take place
       );
 
-      unset($form['title']);
+
       $form['#validate'][] = 'itg_mobile_client_association_validator';
-      $form['actions']['submit']['#submit'][] = 'itg_mobile_client_association_submit';
+      // $form['actions']['submit']['#submit'][] = 'itg_mobile_client_association_submit';
       $form['#after_build'][] = 'itg_service_association_after_build';
+      $form['#submit'][] = 'itg_mobile_client_association_submit';
 
       break;
     case 'create_content_node_form':
@@ -216,7 +223,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       else {
         drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expert-description').hide(); jQuery('#edit-field-story-large-image').hide();jQuery('#edit-field-service-audio').hide();jQuery('#edit-field-service-video').hide();});", 'inline');
       }
-      
+
       if (empty($_GET['destination'])) {
         $_GET['destination'] = 'service-content-listing';
       }
@@ -235,36 +242,42 @@ function itg_mobile_client_association_submit($form, &$form_state) {
   $node_nid = $form['nid']['#value'];
   $form_state['redirect'] = 'service-association-listing';
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
+
+  $node = node_load($association_nid);
+  $form_state['values']['title'] = $node->title;
+  return $form;
+
+
   $timestamp = strtotime("now") . "_";
   $six_digit_random_number = mt_rand(100000, 999999);
   $timestamps = date("Y-m-d H:i:s");
-  
+
   $field_client_selection = $form_state['values']['field_client_selection'][LANGUAGE_NONE];
   $client_name = '';
   foreach ($field_client_selection as $key => $value) {
-/*
-    $client_id = $value['target_id'] ."_";
-    $service_id = $association_nid ."_";
-    $token = $client_id . $service_id . $timestamp . $six_digit_random_number;
-    # new drupal 7 style sql insert
-    $id = db_insert('itg_client_token')
-        ->fields(array(
-            'nid' => $node_nid,
-            'cid' => $value['target_id'],
-            'sid' => $association_nid,
-            'token' => $token,
-            'created_by' => $user->name,
-            'reset_by' => '',
-            'created_date' => $timestamps,
-            'updated_date' => $timestamps  # use REQUEST_TIME or time() here if you want the date as a long
-    ))
-    ->execute();
-    watchdog('sleetmute', "NID  = " . $id);
- */
+    /*
+      $client_id = $value['target_id'] ."_";
+      $service_id = $association_nid ."_";
+      $token = $client_id . $service_id . $timestamp . $six_digit_random_number;
+      # new drupal 7 style sql insert
+      $id = db_insert('itg_client_token')
+      ->fields(array(
+      'nid' => $node_nid,
+      'cid' => $value['target_id'],
+      'sid' => $association_nid,
+      'token' => $token,
+      'created_by' => $user->name,
+      'reset_by' => '',
+      'created_date' => $timestamps,
+      'updated_date' => $timestamps  # use REQUEST_TIME or time() here if you want the date as a long
+      ))
+      ->execute();
+      watchdog('sleetmute', "NID  = " . $id);
+     */
 
     // watchdog("token", '<pre>' . print_r($token, true) . '</pre>');
   }
-
+  return $form;
 }
 
 /**
@@ -448,7 +461,7 @@ function itg_mobile_association_validator($form, &$form_state) {
  * @param array reference $form_state
  */
 function itg_mobile_clients_validator($form, &$form_state) {
-
+  //dpm($form_state['values']['title']); 
   $mobile_number = trim($form_state['values']['field_mobile_number'][LANGUAGE_NONE][0]['value']);
   $tech_mobile_number = trim($form_state['values']['field_contact_tech_mobile_number'][LANGUAGE_NONE][0]['value']);
 
@@ -461,10 +474,10 @@ function itg_mobile_clients_validator($form, &$form_state) {
       form_set_error('field_mobile_number', t('Business Mobile Numbers should contain 10 digits'));
     }
     /*
-    if (!preg_match('/^0[0-9]{9,10}$/', $mobile_number)) {
+      if (!preg_match('/^0[0-9]{9,10}$/', $mobile_number)) {
       form_set_error('field_mobile_number', t('Business Mobile Number should start with a 0'));
-    }
-     
+      }
+
      */
   }
 
@@ -476,7 +489,6 @@ function itg_mobile_clients_validator($form, &$form_state) {
     if (!preg_match('/^[0-9]{9,10}$/', $tech_mobile_number)) {
       form_set_error('field_contact_tech_mobile_number', t('Technical Mobile Numbers should contain 10 digits'));
     }
-   
   }
 
   $valid_email = $form_state['values']['field_email_address'][LANGUAGE_NONE][0]['value'];
@@ -527,6 +539,18 @@ function itg_service_content_after_build($form, &$form_state) {
   $form['path']['#access'] = FALSE;
   $form['title']['#attributes']['readonly'] = 'readonly';
   $form_state['redirect'] = 'service-content-listing';
+  return $form;
+}
+
+/**
+ * after_build itg_mobile_client_after_submit
+ * @param array $form
+ * @param array reference $form_state
+ * @return array $form
+ */
+function itg_mobile_client_after_submit($form, &$form_state) {
+  $form_state['values']['title'] = taxonomy_term_load(trim($form_state['values']['field_client_title'][LANGUAGE_NONE][0]['tid']))->name;
+  $form_state['redirect'] = 'clients-listing';
   return $form;
 }
 
@@ -818,45 +842,44 @@ function get_service_association($target_id) {
   return $query->execute();
 }
 
-
-function get_report(){
+function get_report() {
   $service_id = '210';
   $client_id = '2569';
   /*
     $query = db_select('node', 'node')
-      ->fields('sa', array('nid', 'title'));
+    ->fields('sa', array('nid', 'title'));
 
-  $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id AND cs.entity_type = 'node' AND cs.deleted = '0'");
-  $query->join('taxonomy_term_data', 'td', "cs.field_client_selection_target_id = td.tid");
-  $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id AND (sat.entity_type = 'node' AND sat.deleted = '0')");
-  $query->Join('node', 'sa', "sat.field_service_association_title_target_id = sa.nid");
-  $query->condition('node.status', 1, '=');
-  $query->condition('sat.field_service_association_title_target_id', $service_id, '=');
-  $query->condition('cs.field_client_selection_target_id', $client_id, '=');
-  $query->condition('node.type', array('client_service_association'), 'IN');
-  $query->range(0, 1);
-  
-  //dpq($query); // Display the query. 
-  //return $query->execute();
-  $result = $query->execute()->fetchAssoc();
-  $nid = $result['nid'];
-  $title = $result['title'];
-  
-  if($nid > 0) {
-     $cquery = db_select('node', 'node')
-      ->fields('node', array('nid', 'title', 'created', 'changed'));
+    $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id AND cs.entity_type = 'node' AND cs.deleted = '0'");
+    $query->join('taxonomy_term_data', 'td', "cs.field_client_selection_target_id = td.tid");
+    $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id AND (sat.entity_type = 'node' AND sat.deleted = '0')");
+    $query->Join('node', 'sa', "sat.field_service_association_title_target_id = sa.nid");
+    $query->condition('node.status', 1, '=');
+    $query->condition('sat.field_service_association_title_target_id', $service_id, '=');
+    $query->condition('cs.field_client_selection_target_id', $client_id, '=');
+    $query->condition('node.type', array('client_service_association'), 'IN');
+    $query->range(0, 1);
+
+    //dpq($query); // Display the query.
+    //return $query->execute();
+    $result = $query->execute()->fetchAssoc();
+    $nid = $result['nid'];
+    $title = $result['title'];
+
+    if($nid > 0) {
+    $cquery = db_select('node', 'node')
+    ->fields('node', array('nid', 'title', 'created', 'changed'));
     $cquery->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id AND sat.entity_type = 'node' AND sat.deleted = '0'");
     $cquery->leftJoin('node', 'node_sat', "sat.field_service_association_title_target_id = node_sat.nid");
     $cquery->condition('node.status', 1, '=');
     $cquery->condition('sat.field_service_association_title_target_id', $nid, '=');
     $cquery->condition('node.type', array('create_content'), 'IN');
     $cquery->range(0, 10);
-    dpq($cquery); // Display the query. 
-  }
-  
-  
-    */
-  
+    dpq($cquery); // Display the query.
+    }
+
+
+   */
+
   $query = db_query("SELECT content_text.entity_id AS content_nid,
 content_text.field_story_expert_description_value AS content_text,
 content_image.field_story_large_image_fid AS content_image_fid,
@@ -886,14 +909,13 @@ left join field_data_field_content_sharing_mode AS sharing_mode ON service_assoc
 left join field_data_field_story_expiry_date AS service_expiry_date ON service_association.field_service_association_title_target_id = service_expiry_date.entity_id
 join field_data_field_client_selection AS client_selection ON service_association.entity_id = client_selection.entity_id
 where client_selection.entity_id = '$client_id' AND service_association.field_service_association_title_target_id = '$service_id'");
-  
-  while ($data = db_fetch_object($result)) { 
-    //  print $row->zip;
-   echo "<pre>";
-   print_r($row);
-   echo "</pre>";
-  }
 
+  while ($data = db_fetch_object($result)) {
+    //  print $row->zip;
+    echo "<pre>";
+    print_r($row);
+    echo "</pre>";
+  }
 }
 
 // left end date and delivery mode, content type (Text / image / video)  and limit
