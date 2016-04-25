@@ -187,7 +187,7 @@ function itg_astro_after_build($form, &$form_state) {
   // Initialize globals
   global $user, $base_url;
   
-  $form['field_story_category']['und']['#title'] = t('Select Program') . '<span class="form-required" title="This field is required."> *</span>';
+  //$form['field_story_category']['und']['#title'] = t('Select Program') . '<span class="form-required" title="This field is required."> *</span>';
   if (!isset($form['#node']->nid)) {
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {

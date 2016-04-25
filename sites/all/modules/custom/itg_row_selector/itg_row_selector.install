@@ -20,14 +20,7 @@ function itg_row_selector_schema() {
         'length' => 128,
         'not null' => TRUE,
         'default' => '',
-      ),
-      'delivery_mode' => array(
-        'description' => 'Type of syndication generation.',
-        'type' => 'varchar',
-        'length' => 12,
-        'not null' => TRUE,
-        'default' => '',
-      ),
+      ),      
       'client_title' => array(
         'description' => 'Client title.',
         'type' => 'varchar',
@@ -39,10 +32,17 @@ function itg_row_selector_schema() {
         'description' => 'A blob field that contains list of node which are ready to syndicate with client.',
         'type' => 'blob',
       ),
-      'created' => array(
+      'status' => array(
+        'description' => t('File status: 0 means file not been created and 1 for file successful created.'),
         'type' => 'int',
         'not null' => TRUE,
-        'default' => 0
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => t('The created date for the single record'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
       ),
     ),
     'indexes' => array(

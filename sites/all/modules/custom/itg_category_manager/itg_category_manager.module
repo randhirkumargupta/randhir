@@ -17,6 +17,10 @@ function itg_category_manager_init() {
 
 /**
  * Implements hook_help().
+ * 
+ * @param string $path
+ * @param array $arg
+ * @return string
  */
 function itg_category_manager_help($path, $arg) {
   if ($path == 'admin/help#itg_category_manager') {
@@ -29,6 +33,8 @@ function itg_category_manager_help($path, $arg) {
 
 /**
  * Implements hook_menu().
+ * 
+ * @return array
  */
 function itg_category_manager_menu() {
 
@@ -83,7 +89,7 @@ function itg_category_manager_menu() {
 
 /**
  * Implements hook_menu_alter
- * @param type $menu
+ * @param array $menu
  */
 function itg_category_manager_menu_alter(&$menu) {
   if (isset($menu['taxonomy/term/%taxonomy_term'])) {
@@ -95,8 +101,8 @@ function itg_category_manager_menu_alter(&$menu) {
 
 /**
  * Functionality of taxonomy term view page
- * @param type $term
- * @return type
+ * @param stdObject $term
+ * @return array
  */
 function itg_category_manager_taxonomy_view_page($term) {
   $voc = taxonomy_vocabulary_load($term->vid);
@@ -127,6 +133,10 @@ function itg_category_manager_taxonomy_view_page($term) {
 /**
  * Form builder; creates and displays the ITG Category Manager
  * configuration settings form.
+ * 
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function itg_category_manager_form($form, &$form_state) {
 
@@ -166,6 +176,9 @@ function itg_category_manager_form($form, &$form_state) {
 
 /**
  * Get term state drom db
+ * 
+ * @param int $tid
+ * @return boolean
  */
 function itg_category_manager_term_state($tid) {
   $itg_query = db_select('itg_category_manager', 'itg')
@@ -182,6 +195,12 @@ function itg_category_manager_term_state($tid) {
 
 /**
  * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
+ * 
+ * @global stdObject $user
+ * @global string $base_url
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
  */
 function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
   global $user;
@@ -340,10 +359,10 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
 
 /**
  * Get all categories under their parent category
- * @param type $tid
- * @param type $vid
- * @param type $key
- * @return type
+ * @param int $tid
+ * @param int $vid
+ * @param string $key
+ * @return array
  */
 function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
   $c = taxonomy_get_children($tid, $vid, $key);
