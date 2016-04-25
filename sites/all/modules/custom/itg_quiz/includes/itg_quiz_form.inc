@@ -368,7 +368,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
         drupal_set_message($output, 'message');
         
       } else {
-        drupal_set_message(('You have selected wrong answer.'), 'error');
+        drupal_set_message(t('Thank you for attempting our quiz.'));
       }
 
     } else {

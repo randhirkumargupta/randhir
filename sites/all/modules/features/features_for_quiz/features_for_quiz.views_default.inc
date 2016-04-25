@@ -44,7 +44,6 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'draggableviews' => 'draggableviews',
@@ -149,14 +148,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No Result Found!';
-  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
-  /* Field: Draggableviews: Content */
-  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['table'] = 'node';
-  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
+  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
@@ -184,26 +176,26 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Validity Start Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['label'] = 'Start Date';
   $handler->display->display_options['fields']['field_survey_start_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Validity End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['label'] = 'End Date';
   $handler->display->display_options['fields']['field_survey_end_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -364,7 +356,6 @@ function features_for_quiz_views_default_views() {
     20 => 0,
     6 => 0,
     21 => 0,
-    19 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
@@ -372,10 +363,12 @@ function features_for_quiz_views_default_views() {
     17 => 0,
     14 => 0,
     12 => 0,
+    19 => 0,
     15 => 0,
     18 => 0,
   );
   $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['field_story_category_tid']['error_message'] = FALSE;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
