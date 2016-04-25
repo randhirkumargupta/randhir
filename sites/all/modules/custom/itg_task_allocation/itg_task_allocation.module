@@ -342,14 +342,23 @@ function itg_task_allocation_node_validate($node, $form, &$form_state) {
   }
 }
 
-//$start = date('Y-m-d H:i:s');
-//$end = date('Y-m-d H:i:s', strtotime('+8 day'));
-////echo $start.'#'.$end;exit;
-//$query = db_select('node', 'n')
-//->join('field_data_field_task_finish_date_and_time', 'f', 'n.nid = f.entity_id')
-////$query->fields('m', array('entity_id'));
-//->fields('n', array('title'))  
-//->condition('f.field_task_finish_date_and_time_value', $start, '>')
-//->condition('f.field_task_finish_date_and_time_value', $end, '<=')
-//->execute();
-//$num_of_results = $query->rowCount();
+/**
+ * Get task count of user.
+ * @return task count    
+ */
+function get_task_count_of_user() {
+  global $user;
+  $start = date('Y-m-d H:i:s');
+  $end = date('Y-m-d H:i:s', strtotime('+1 day'));  
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->join('field_data_field_task_finish_date_and_time', 'f', 'n.nid = f.entity_id');  
+  $query->join('field_data_field_task_team_member', 'tm', 'n.nid = tm.entity_id');
+  $query->condition('f.field_task_finish_date_and_time_value', $start, '>');
+  $query->condition('f.field_task_finish_date_and_time_value', $end, '<=');
+  $query->condition('tm.field_task_team_member_target_id', $user->uid, '=');
+  $query->condition('n.type', 'task_idea_allocation_tracking', '=');
+  $result = $query->execute();
+  return $num_of_results = $result->rowCount();
+  //p($num_of_results);
+}
