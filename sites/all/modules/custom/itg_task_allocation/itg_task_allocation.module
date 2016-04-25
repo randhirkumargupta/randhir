@@ -248,7 +248,7 @@ function task_get_mail_content($node, $event, $to, $user_name) {
       $task_subject = 'New Comment has been added, please find below detail.';
   }
   
-  
+  $node_url = 'node/'.$node->nid;
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
               <head><title></title></head>
@@ -257,7 +257,7 @@ function task_get_mail_content($node, $event, $to, $user_name) {
                     <tr><td></td></tr>
                     <tr><td>'.$task_subject.'</td></tr>
                     <tr><td></td></tr>
-                    <tr><td>Task Name: ' . $node->title . '</td></tr>
+                    <tr><td>Task Name: ' . l($node->title, $node_url) . '</td></tr>
                     <tr><td></td></tr>';
                     if ($event != 'comment') {
                       $content .='<tr><td>Assigned By: ' . $user_name . '</td></tr>
