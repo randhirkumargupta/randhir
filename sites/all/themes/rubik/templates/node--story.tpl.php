@@ -77,7 +77,8 @@
                 <?php print render($content['field_story_itg_tags']); ?>
               <?php print render($content['field_story_courtesy']); ?>
               <?php print render($content['field_story_reporter']); ?>
-                <?php print render($content['body']); ?>
+                <div class="field field-name-field-story-category field-type-taxonomy-term-reference field-label-above"><div class="field-label">Story Body:&nbsp;</div><div class="field-items"><div class="field-item even"><?php print render($content['body']); ?></div></div></div>
+                
             </div>
           </div>
             <?php 
