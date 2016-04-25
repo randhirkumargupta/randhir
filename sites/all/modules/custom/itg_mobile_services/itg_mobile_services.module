@@ -774,20 +774,20 @@ function itg_mobile_services_views_pre_render(&$view) {
   if (isset($view->name) && $view->name == "clients_details") {
     if (isset($view->current_display) && $view->current_display == "page") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-      $header_content_client .= l(t('Create Client'), 'node/add/clients-creation');
-      $header_content_client .= '<span class="client-services">&nbsp;' . l(t('Associate Client & Services'), 'node/add/client-service-association') . '&nbsp;</span>';
+      $header_content_client .= l(t('Create Client'), 'node/add/clients-creation', array('query' => array('destination' => 'clients-listing')));
+      $header_content_client .= '<span class="client-services">&nbsp;' . l(t('Associate Client & Services'), 'node/add/client-service-association', array('query' => array('destination' => 'clients-listing'))) . '&nbsp;</span>';
     }
     elseif (isset($view->current_display) && $view->current_display == "page_1") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-      $header_content_client .= l(t('Create Service'), 'node/add/service-creation');
+      $header_content_client .= l(t('Create Service'), 'node/add/service-creation', array('query' => array('destination' => 'service-listing')));
     }
     elseif (isset($view->current_display) && $view->current_display == "page_2") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-      $header_content_client .= l(t('Associate Client & Services'), 'node/add/client-service-association');
+      $header_content_client .= l(t('Associate Client & Services'), 'node/add/client-service-association', array('query' => array('destination' => 'service-association-listing')));
     }
     elseif (isset($view->current_display) && $view->current_display == "page_3") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-      $header_content_client .= l(t('Create Content'), 'node/add/create-content');
+      $header_content_client .= l(t('Create Content'), 'node/add/create-content', array('query' => array('destination' => 'service-content-listing')));
     }
 
     if (isset($header_content_client)) {
@@ -797,11 +797,22 @@ function itg_mobile_services_views_pre_render(&$view) {
 }
 
 /**
+ * Implements hook_menu().
+ */
+function itg_mobile_services_menu(){
+  $items['contentfield/%/autocomplete'] = array(
+    'page callback' => 'itg_mobile_services_autocomplete_content',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+/**
  * Implementation of hook_form_views_exposed_form_alter().
  * @param array $form
  * @param array reference $form_state
  */
-function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state) {
+function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
   switch ($form['#id']) {
     case 'views-exposed-form-clients-details-page':
@@ -813,6 +824,46 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state)
       $form['title']['#attributes'] = array(
         'placeholder' => t('Title')
       );
+      $form['title']['#autocomplete_path'] = 'content-title-list/service_creation/autocomplete';
+      break;
+    case 'views-exposed-form-clients-details-page-3':
+      $form['title']['#attributes'] = array(
+        'placeholder' => t('Title')
+      );
+      $form['title']['#autocomplete_path'] = 'content-title-list/create_content/autocomplete';
+      break;
+    case 'views-exposed-form-clients-details-page-2':
+      $form['field_service_title_value']['#attributes'] = array(
+        'placeholder' => t('Title')
+      );
+      $form['field_service_title_value']['#autocomplete_path'] = 'contentfield/client_service_association/autocomplete';
+      //p($form['field_service_title_value']);
+      break;
+  }
+}
+
+
+/**
+ * Autocomplete on title(date field) of issue listing
+ * @param string $title
+ */
+function itg_mobile_services_autocomplete_content($title) {
+  
+    if (strlen(trim($title)) > 0) {
+    $content_type = arg(1);
+    $options = '';
+    $title = strtolower(trim($title));
+    $query = db_select('field_service_title_value', 'c');
+    $query->fields('c', array('field_service_title_value'));
+    $query->condition('field_service_title_value', '%' . $title . '%', 'LIKE');
+    $query->condition('c.bundle', $content_type, '=');
+    $query->range(0, 20);
+
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $options[date('Y-m-d', strtotime($record['field_issue_title_value']))] = date('m/d/Y', strtotime($record['field_issue_title_value']));
+    }
+    drupal_json_output($options);
   }
 }
 
