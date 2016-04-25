@@ -17,116 +17,14 @@ function itg_syndication_permission() {
  * @return array
  */
 function itg_syndication_menu() {
-  // Syndication Feed Generator  
-  $items['syndication/feed-generator'] = array(
-    'title' => t('Syndication Feed Generator'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_syndication_form'),
-    'access arguments' => array('administer itg_syndication settings'),
+  $items['syndication/feed-generator-of-content'] = array(
+    'page callback' => 'feed_generator_of_content',
+    'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
-  );
-  
-   $items['syndication/feed-generator-of-content'] = array(      
-      'page callback' => 'feed_generator_of_content',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_syndication.inc',
+    'file' => 'includes/itg_syndication.inc',
   );
 
   return $items;
-}
-
-/**
- * Implements hook_form()
- * @return array
- */
-function itg_syndication_form() {
-  // Get list of all content type
-  $all_content_type = node_type_get_types();
-  //Select client 
-  $form['client'] = array(
-    '#type' => 'select',
-    '#title' => t('Select Client'),
-    '#description' => t('Client’s name will be fetched from Master Sheet.  e.g. Airtel, Vodafone etc'),
-    '#options' => itg_syndication_get_client(),
-    '#default_value' => '_none',
-    '#required' => TRUE,
-  );
-
-  // Praper array for options
-  $options = array('_none' => '- Select web property - ');
-  foreach ($all_content_type as $key => $value) {
-    $options[$key] = $value->name;
-  }
-
-  // Create web property field.
-  $form['web_property'] = array(
-    '#type' => 'select',
-    '#title' => t('Web Property'),
-    '#description' => t('System displays all the web properties. User can select any of them and correspondingly content will only be displayed.'),
-    '#options' => $options,
-    '#default_value' => '_none',
-    '#required' => TRUE,
-    '#ajax' => array(
-      'callback' => 'itg_syndication_content_callback', // Callback will replace the students field with new values.
-      'wrapper' => 'itg-issue',
-      'method' => 'replace',
-      'event' => 'change',
-    ),
-  );
-
-  // Students checkboxes field container.
-  $form['issue'] = array(
-    '#type' => 'container',
-    '#tree' => TRUE,
-    '#prefix' => '<div id="itg-issue">',
-    '#suffix' => '</div>',
-  );
-
-  // Create default checkboxes field with default selected class's students options.
-  $form['issue']['list'] = array(
-    '#title' => t('Issue List'),
-    '#type' => 'checkboxes',
-    '#options' => itg_syndication_issue_list($options['issue']),
-  );
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Generate Feed'),
-  );
-
-  return $form;
-}
-
-/**
- * Custom callback to build form fields.
- */
-function itg_syndication_content_callback($form, &$form_state) {
-  $values = $form_state['values'];
-  // Overwrite the student list fields with new options value.
-  $form['issue']['list'] = array(
-    '#type' => 'checkboxes',
-    '#options' => itg_syndication_issue_list($values['web_property']), // Api will return the class students list as array.
-  );
-  $form['issue']['list'] = form_process_checkboxes($form['issue']['list']); // Process the checkboxes fields.
-
-  return $form['issue']; // return full students field container.
-}
-
-/**
- * API to return class's students list.
- */
-function itg_syndication_issue_list($c_type) {
-  $itg_query = db_select('node', 'n');
-  $itg_query->fields('n', array('nid', 'title'))
-      ->condition('type', $c_type)
-      ->condition('status', 1);
-  $itg_result = $itg_query->execute();
-
-  foreach ($itg_result as $value) {
-    $data[$value->nid] = $value->title;
-  }
-
-  return $data;
 }
 
 /**
@@ -206,24 +104,30 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#submit'][] = 'itg_syndication_service_change_message';
   }
   // Add client dropdown to view
-  if($form_id == 'views_exposed_form') {
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {
+    //dpm($form_state);
     $form['client_title'] = array(
       '#type' => 'select',
-      '#title' => t('Select Client'),      
+      '#title' => t('Select Client'),
       '#options' => itg_syndication_get_client(),
-      '#default_value' => '_none',      
+      '#default_value' => '_none',
       '#weight' => 1,
     );
     $form['issue'] = array(
       '#type' => 'select',
-      '#title' => t('Select Issue'),      
+      '#title' => t('Select Issue'),
       '#options' => array('_none' => '-Select '),
-      '#default_value' => '_none',      
+      '#default_value' => '_none',
       '#weight' => 3,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="type"]' => array('value' => 'magazine'),
+        ),
+      ),
     );
     $form['type']['#weight'] = 2;
-    $form['submit']['#weight'] = 4;    
-  }  
+    $form['submit']['#weight'] = 4;
+  }
 }
 
 /**

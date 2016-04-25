@@ -50,6 +50,14 @@ function itg_quiz_menu() {
       'file' => 'includes/itg_quiz_result.inc',
   );
   
+  $items['quiz-winners-mail/%'] = array(
+      'title' => t('Quiz Winner Mail'),
+      'page callback' => 'itg_quiz_winners_mail_list',
+      'access callback' => 'user_access',
+      'access arguments' => array('access quiz users list'),
+      'file' => 'includes/itg_quiz_winners_mail.inc',
+  );
+  
  $items['winners'] = array(
       'title' => t('Quiz'),
       'page callback' => 'itg_quiz_winners_list',
