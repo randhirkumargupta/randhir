@@ -805,6 +805,12 @@ function itg_mobile_services_menu(){
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
+   $items['mobile_services/feed-generator-of-content'] = array(      
+      'page callback' => 'mobile_services_generator_of_content',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_mobile_services.inc',
+  );
   return $items;
 }
 /**
