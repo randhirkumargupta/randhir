@@ -85,7 +85,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
  
   // code to change page title on node edit
-  if (!empty($form['nid']['#value'] && arg(2) == 'edit')) {
+  if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
     /* @var $node_type string */
     $node_type = $form['#node']->type;
     $node_type = str_replace("_", " ", $node_type);
