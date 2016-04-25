@@ -146,7 +146,7 @@ function itg_newsletter_form_after_build($form, &$form_state){
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
-   $form['#validate'][] = 'itg_newsletter_custom_validate';  
+   //$form['#validate'][] = 'itg_newsletter_custom_validate';  
   return $form;
 }
 
