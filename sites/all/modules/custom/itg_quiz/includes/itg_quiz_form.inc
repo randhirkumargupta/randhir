@@ -87,7 +87,8 @@ function itg_quiz_quiz_form() {
       } 
       
       //Media info
-      $media = $question_detail[$question_arr['value']]->field_quiz_add_media[LANGUAGE_NONE][0]['uri'];
+      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
+
       $media_type = strtolower(substr(strrchr($media, '.'), 1));
       $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
       
