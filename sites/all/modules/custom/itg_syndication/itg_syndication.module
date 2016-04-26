@@ -128,6 +128,11 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['type']['#weight'] = 2;
     $form['submit']['#weight'] = 4;
   }
+  
+  // View autocomplete title field.
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_client') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/syndication_client/autocomplete';
+  }  
 }
 
 /**
