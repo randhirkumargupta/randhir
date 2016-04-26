@@ -34,9 +34,22 @@
 // code for moderation value change on click of dropdown and save story 
 jQuery(document).ready(function() {               
     jQuery('#story_submit_link').click(function() {
-       var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];                     
+       /*var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];                     
        jQuery("#edit-workbench-moderation-state-new").val(story_state);
-       jQuery("#edit-submit").click();                                    
+       jQuery("#edit-submit").click();*/
+       
+       var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];                   
+       
+       if (story_state == 'published' || story_state == 'needs_review') {                   
+           var msg = confirm("Hope you have Previewed the story before submitting. Do you want to continue to submit?");
+           if (msg == true) {
+                jQuery("#edit-workbench-moderation-state-new").val(story_state);
+                jQuery("#story-node-form").submit();
+                return true;
+           }
+           return false; 
+       }
+        
     });
 
     jQuery('#edit-submit').click(function() {                 

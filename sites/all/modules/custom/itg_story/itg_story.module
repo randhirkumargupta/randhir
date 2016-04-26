@@ -12,7 +12,8 @@
  * Implements hook_init().
  */
 function itg_story_init() {
- 
+  $task_count = get_task_count_of_user();
+  //p($task_count);
 }
 
 
@@ -536,6 +537,8 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
       )
     );
+    
+    
   
 }
 
