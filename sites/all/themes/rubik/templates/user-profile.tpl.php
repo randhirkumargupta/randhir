@@ -159,12 +159,18 @@ if($user->uid == $view_user_id) {
         foreach($value as $key1 => $value1) {
           //pr($key1);
           // make create permission array
-         if(strstr($key1,'create')) {
-          $create_arr = explode(' ', $key1);
-          $final_create_arr[] = ucwords(str_replace('_', ' ', $create_arr[1]));
+          if (strstr($key1, 'create')) {
+        if (!strstr($key1, 'url')) {
+          if (!strstr($key1, 'any')) {
+            if (!strstr($key1, 'own')) {
+             $create_arr = explode(' ', $key1);
+              $final_create_arr[] = ucwords(str_replace('_', ' ', $create_arr[1]));
+            }
+          }
         }
-        
-        // make edit permission array
+      }
+
+      // make edit permission array
         if(strstr($key1,'edit')) {
           
           if(!strstr($key1,'assign')) {
