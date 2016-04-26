@@ -134,28 +134,85 @@ function print_xml($query) {
             $content_image_width = $row->content_image_width;
             $content_image_height = $row->content_image_height;
             
+            $short_title1 = "<![CDATA[
+Ramdev's business plan: Make Nestle's bird, Colgate's gate disappear
+]]>";
+            $short_title = "Ramdev's business plan: Make Nestle's bird, Colgate's gate disappear";
+            
             $file_path = drupal_realpath('public://');
             $file_path = '/var/www/html/itgcms/sites/default/files/mobile_xml';
-            $dom = new DOMDocument('1.0','UTF-8');
-            $dom->formatOutput = true;
+           // $dom = new DOMDocument('1.0','UTF-8');
+           // $dom->formatOutput = true;
+            $doc = new DOMDocument('1.0','UTF-8');
+            $doc->formatOutput = true;
+            //$doc->preserveWhiteSpace = false;     
+
+            $root = $doc->appendChild($doc->createElement('feed'));
+            $root = $doc->appendChild($root);
+            $root->appendChild( $doc->createElement('provider', 'indiatoday') );
+            $root->appendChild( $doc->createElement('language', 'en-US') );
             
-            $root = $dom->createElement('feed');
-            $dom->appendChild($root);
-            $root->appendChild( $dom->createElement('provider', $content_text) );
-            $root->appendChild( $dom->createElement('language', $content_text) );
+            $items = $root->appendChild($doc->createElement('news'));
+
+            $item = $doc->createElement('item');
+            $item->appendChild($doc->createElement('id', 'Noodle'));
+            $item->appendChild($doc->createCDATASection($short_title));
+            $item->appendChild($doc->createCDATASection($short_title));
+            $item->appendChild($doc->createElement('publish_date', 'Noodle'));
+            $item->appendChild($doc->createElement('last_update', 'Noodle'));
+            $item->appendChild($doc->createElement('detail', 'Noodle'));
+
+            $items->appendChild($item);
             
-            $currentTrack = $dom->createElement("news");
-            $currentTrack = $root->appendChild($currentTrack);
-            $currentTrack->appendChild($dom->createElement('category','Scores'));
+           // $multimedia = $items->appendChild($doc->createElement('multimedia'));
+            // for multimedia
+            //$multimedia = $doc->createElement('multimedia');
+           
             
-            $result = $dom->createElement('item');
-            $root->appendChild($result);
+           //   $multimedia = $root->appendChild($doc->createElement('multimedia'));
             
-            $result->setAttribute('id', $key+1);
-            $result->appendChild( $dom->createElement('title', $content_text) );
-            $result->appendChild( $dom->createElement('body', $content_image_fid) );
-            $result->appendChild( $dom->createElement('headline', $header) );
+           // $images = $multimedia->appendChild($doc->createElement('images'));
+
+          //  $item = $doc->createElement('item');
+           // $item->appendChild($doc->createElement('id', 'Noodle'));
+            
+            
+            
+           // $multimedia->appendChild($doc->createElement('id', 'Noodle'));
+         //   $items->appendChild($multimedia);
+            //$items->appendChild($item_short_title);
+
+
+            $item = $doc->createElement('item');
+            $item->appendChild($doc->createElement('name', 'Sausage'));
+            $item->appendChild($doc->createElement('age', '3'));
+            $items->appendChild($item);
+            
+            
+//            $root = $dom->createElement('feed');
+//            $root = $dom->appendChild($root);
+//            $root->appendChild( $dom->createElement('provider', 'indiatoday') );
+//            $root->appendChild( $dom->createElement('language', 'en-US') );
+//            
+//            $news = $dom->createElement("news");
+//            $root->appendChild($news);
+//            
+//            $item = $dom->createElement("item");
+//            $item = $root->appendChild($item);
+//            
+//            $news->appendChild($dom->createElement('id', $content_text) );
+//            $news->appendChild($dom->createElement('short_title', $short_title) );
+//            
+//            
+//            $result = $dom->createElement('item');
+//            $root->appendChild($result);
+            
+//            $result->setAttribute('id', $key+1);
+//            $result->appendChild( $dom->createElement('title', $content_text) );
+//            $result->appendChild( $dom->createElement('body', $content_image_fid) );
+//            $result->appendChild( $dom->createElement('headline', $header) );
         }
-    $dom->save($file_path.'/result.xml') or die('XML Create Error');    
+       // echo $doc->saveXML();
+        $doc->save($file_path.'/result.xml') or die('XML Create Error');    
       
 }
