@@ -12,7 +12,8 @@
  * Implements hook_init().
  */
 function itg_story_init() {
-  
+  $task_count = get_task_count_of_user();
+  //p($task_count);
 }
 
 
