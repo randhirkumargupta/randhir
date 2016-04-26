@@ -295,7 +295,7 @@ function features_for_survey_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 10,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -350,7 +350,7 @@ function features_for_survey_field_default_field_instances() {
         'replace_label' => 0,
       ),
       'type' => 'field_collection_fieldset',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -426,9 +426,9 @@ function features_for_survey_field_default_field_instances() {
     'label' => 'Survey End Date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'strtotime',
       'default_value2' => 'same',
-      'default_value_code' => '',
+      'default_value_code' => '+7 days',
       'default_value_code2' => '',
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -447,6 +447,45 @@ function features_for_survey_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-survey-field_survey_expity_date'.
+  $field_instances['node-survey-field_survey_expity_date'] = array(
+    'bundle' => 'survey',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please check to set expiry date of survey.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_survey_expity_date',
+    'label' => 'Survey Expiry Date',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
       'weight' => 5,
     ),
   );
@@ -561,12 +600,14 @@ function features_for_survey_field_default_field_instances() {
   t('Answer choices');
   t('Category');
   t('Please add survey question.');
+  t('Please check to set expiry date of survey.');
   t('Please select category.');
   t('Please select end date.');
   t('Please select the start date.');
   t('Question');
   t('Skip');
   t('Survey End Date');
+  t('Survey Expiry Date');
   t('Survey Instructions');
   t('Survey Question Display');
   t('Survey Start Date ');

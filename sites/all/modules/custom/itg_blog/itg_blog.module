@@ -25,7 +25,7 @@ function itg_blog_node_presave($node) {
 function itg_blog_views_pre_render(&$view) {
   //Add "Post new Blog" button on listing page of Blog
   if ($view->name == "manage_blogs") {
-    $header_content_blog = l(t('Post new Blog'), 'node/add/blog');
+    $header_content_blog =  l('Post new Blog', 'node/add/blog', array('query' => array('destination' => 'manage-blogs')));
     $view->attachment_before = $header_content_blog;
   }
 }
@@ -66,14 +66,17 @@ function itg_blog_form_custom_callback($form, &$form_state) {
   }
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'blog') {
     $op = 'created';
+    $blog_title = $form_state['node']->title;
+  drupal_set_message(t('Blog <b>' . $blog_title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
+   $_GET['destination'] = $_REQUEST['destination'];
   }
   else {
     $op = 'updated';
-  }
-  $blog_title = $form_state['node']->title;
-  drupal_set_message(t('Blog ' . $blog_title . ' has been ' . $op . ' successfully and has been submitted for further review and approval.'));
-  // $_GET['destination'] = 'manage-blogs';
+     $blog_title = $form_state['node']->title;
+  drupal_set_message(t('Blog <b>' . $blog_title . '</b> has been ' . $op.'.'));
   $_GET['destination'] = $_REQUEST['destination'];
+  }
+ 
 }
 
 /**

@@ -175,7 +175,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: User: Last name */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -265,7 +265,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
@@ -323,7 +323,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: User: Last name */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -351,7 +351,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Modified on';
   $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y h:i';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';

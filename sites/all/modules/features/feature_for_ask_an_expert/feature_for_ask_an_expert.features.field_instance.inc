@@ -49,6 +49,48 @@ function feature_for_ask_an_expert_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-ask_an_expert-field_story_source_type'.
+  $field_instances['node-ask_an_expert-field_story_source_type'] = array(
+    'bundle' => 'ask_an_expert',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_source_type',
+    'label' => 'Updated by',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance: 'node-ask_an_expert-field_user_city'.
   $field_instances['node-ask_an_expert-field_user_city'] = array(
     'bundle' => 'ask_an_expert',
@@ -311,6 +353,7 @@ function feature_for_ask_an_expert_field_default_field_instances() {
   t('Name');
   t('Source term id');
   t('State');
+  t('Updated by');
 
   return $field_instances;
 }

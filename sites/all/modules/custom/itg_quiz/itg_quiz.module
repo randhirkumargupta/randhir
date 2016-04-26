@@ -9,6 +9,22 @@
  */
 
 /**
+ * Implement hook_permission
+ * @return type
+ */
+function itg_quiz_permission() {
+    return array(
+    'access quiz page' => array(
+      'title' => t('Access Quiz Page'),
+    ),
+        
+   'access quiz users list' => array(
+      'title' => t('Access Quiz Users List'),
+    )
+  );
+}
+
+/**
  * Implement hook_menu
  * @return string
  */
@@ -20,17 +36,26 @@ function itg_quiz_menu() {
       'title' => t('Quiz'),
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_quiz_quiz_form'),
-      'access callback' => TRUE,
+      'access callback' => 'user_access',
+      'access arguments' => array('access quiz page'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_quiz_form.inc',
   );
   
-  $items['quiz-result/%'] = array(
-      'title' => t('Quiz Result'),
-      'page callback' => 'itg_quiz_result',
+  $items['quiz-user-list/%'] = array(
+      'title' => t('Quiz User List'),
+      'page callback' => 'itg_quiz_user_list',
       'access callback' => 'user_access',
-      'access arguments' => array('quiz admin users'),
+      'access arguments' => array('access quiz users list'),
       'file' => 'includes/itg_quiz_result.inc',
+  );
+  
+  $items['quiz-winners-mail/%'] = array(
+      'title' => t('Quiz Winner Mail'),
+      'page callback' => 'itg_quiz_winners_mail_list',
+      'access callback' => 'user_access',
+      'access arguments' => array('access quiz users list'),
+      'file' => 'includes/itg_quiz_winners_mail.inc',
   );
   
  $items['winners'] = array(
@@ -49,7 +74,7 @@ function itg_quiz_menu() {
 function itg_quiz_block_info() {
   $blocks['quiz_tab_form_block'] = array(
     'info' => t('Quiz Form Tab Block'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_CACHE_GLOBAL, 
   );
   
   return $blocks;
@@ -81,7 +106,7 @@ function itg_quiz_block_view($delta = '') {
  * @param type $theme
  * @param type $path
  */
-function itg_quiz_theme($existing, $type, $theme, $path) {
+function itg_quiz_theme() {
   $themes = array(
     'quiz_tab_form_display_block' => array(
       'template' => 'quiz-form-tab-template',
@@ -93,8 +118,28 @@ function itg_quiz_theme($existing, $type, $theme, $path) {
   return $themes;
 }
 
+/*******************************Node Related hooks*****************************/
 
-
+/**
+ * Implement hook_node_insert
+ * @param Object $node
+ */
+//function itg_quiz_node_presave($node){
+//  if ($node->type == 'quiz') {
+//    $ques_arr = $node->field_quiz_add_questions[LANGUAGE_NONE];
+//    foreach ($ques_arr as $question_arr) {
+//      $question_detail = entity_load('field_collection_item', array($question_arr['value']));
+//      if (count($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE]) == 1) {
+//        foreach ($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option) {
+//          $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
+//          if (empty($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value'])) {
+//            $ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value'] = 'Yes';
+//          }
+//        }
+//      }
+//    }
+//  }
+//}
 
 /***************************Form Related hooks*********************************/
 /**
@@ -131,6 +176,12 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
     if($form_id == 'itg_quiz_quiz_form'){
       drupal_set_title('India Today Quiz');
     }
+    
+    //Add two answer option default
+    if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'quiz') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')) {
+      drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-quiz-options-answer .field-add-more-submit').mousedown();
+        });", 'inline');
+   }
 }
 
 /**
@@ -150,10 +201,12 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
+  
+  $title = $form_state['node']->title;
   if (arg(2) == 'edit') {
-    drupal_set_message(t('Quiz has been updated.'));
+    drupal_set_message(t('Quiz <strong>'.$title.'</strong> has been updated.'));
   } else {
-    drupal_set_message(t('Quiz has been submitted for further review and approval.'));
+    drupal_set_message(t('Quiz <strong>'.$title.'</strong> has been submitted for further review and approval.'));
   }
 }
 
@@ -333,28 +386,58 @@ function itg_quiz_get_total_quiz($nid){
  * @return Int
  */
 function itg_quiz_contest_result($nid, $unique_key, $param = NULL){
-  if (!empty($param)) {
+  if (empty($param)) {
     $result = db_select('itg_quiz_detail', 'qd')
             ->fields('qd')
             ->condition('qd.nid', $nid, '=')
-            ->condition('qd.currect_answer', $param, '=')
             ->condition('qd.quiz_key', $unique_key, '=')
+            ->groupBy('qd.ques_id')
             ->execute();
+    $total_quiz = $result->rowCount();
+    return $total_quiz ? $total_quiz : 0;
   } else {
-    $result = db_select('itg_quiz_detail', 'qd')
+    $quiz_radios = 0;
+    $result_radios = db_select('itg_quiz_detail', 'qd')
             ->fields('qd')
             ->condition('qd.nid', $nid, '=')
             ->condition('qd.quiz_key', $unique_key, '=')
+            ->condition('qd.correct_answer', $param, '=')
+            ->condition('qd.ans_type', 'radios', '=')
             ->execute();
-  }
+    $quiz_radios = $result_radios->rowCount();
 
-  $total_quiz = $result->rowCount();
-  if ($total_quiz) {
-    return $total_quiz;
-  } else {
-    return 0;
-  }
+    $result_checkbox = db_select('itg_quiz_detail', 'qd')
+            ->fields('qd')
+            ->condition('qd.nid', $nid, '=')
+            ->condition('qd.quiz_key', $unique_key, '=')
+            ->condition('qd.ans_type', 'checkboxes', '=')
+            ->execute();
+    while ($records = $result_checkbox->fetchAssoc()) {
+      $ques_ans[$records['ques_id']][] = $records['ans_id'];
+    }
+
+    $quiz_checkboxes = 0;
+    foreach ($ques_ans as $key => $value) {
+      $correct_ans_arr = itg_quiz_get_correct_answer($key);
+      
+      if(count($value) == count($correct_ans_arr)){
+        $arr_diff_count = count(array_diff($correct_ans_arr, $value));
+        if ($arr_diff_count < 1) {
+          $quiz_checkboxes = $quiz_checkboxes + 1;
+        } else {
+          $quiz_checkboxes = $quiz_checkboxes;
+        }
+      } else {
+        $quiz_checkboxes = $quiz_checkboxes;
+      }
+      
+    }
     
+    $total_correct_ans = $quiz_radios + $quiz_checkboxes;
+
+    return $total_correct_ans;
+  }
+ 
 }
 
 
@@ -368,6 +451,7 @@ function itg_quiz_winners_list($nid, $range){
       $result = db_select('itg_quiz_detail', 'qd')
               ->fields('qd')
               ->condition('qd.nid', $nid, '=')
+              ->condition('qd.correct_answer', 'yes', '=')
               ->groupBy('qd.quiz_key')
               ->range(0, $range)
               ->execute();
@@ -375,7 +459,9 @@ function itg_quiz_winners_list($nid, $range){
       $result = db_select('itg_quiz_detail', 'qd')
               ->fields('qd')
               ->condition('qd.nid', $nid, '=')
+              ->condition('qd.correct_answer', 'yes', '=')
               ->groupBy('qd.quiz_key')
+              ->range(0, 10)
               ->execute();
     }
 
@@ -398,11 +484,11 @@ function itg_quiz_winners_count_uniquekey($nid, $unique_key){
     $result = db_select('itg_quiz_detail', 'qd')
             ->fields('qd')
             ->condition('qd.quiz_key', $unique_key, '=')
-            ->condition('qd.currect_answer', 'yes', '=')
+            ->condition('qd.correct_answer', 'yes', '=')
             ->condition('qd.nid', $nid, '=')
             ->execute();
   $total_quiz = $result->rowCount();
-  if ($total_quiz) {
+  if ($total_quiz > 0) {
     return $total_quiz;
   } else {
     return 0;
@@ -411,7 +497,7 @@ function itg_quiz_winners_count_uniquekey($nid, $unique_key){
 }
 
 /**
- * Get User list
+ * Get user name to display winners list
  * @param type $unique_key
  * @return type
  */
@@ -431,4 +517,35 @@ function itg_quiz_winner_user_list($unique_key){
       
     }
     return $user_name;
+}
+
+/**
+ * Fetch correct Answer
+ * @param Int $ques_id
+ * @return Array
+ */
+function itg_quiz_get_correct_answer($ques_id){
+  $question_detail = entity_load('field_collection_item', array($ques_id));
+  foreach($question_detail[$ques_id]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option){
+        $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
+        foreach($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $correct_ans){
+           if($correct_ans['value'] == 'Yes'){
+           $correct_ans_op[] = $ans_option['value'];
+           }
+        }
+      }
+      return $correct_ans_op;
+}
+
+/**
+ * View User List, who have attempted quiz
+ * @param type $nid
+ * @return string
+ */
+function itg_quiz_views_user_list($nid){
+    if(itg_common_check_record_existance($nid, 'itg_quiz_user_score') > 0){
+    return l('View List','quiz-user-list/'.$nid, array('attributes' => array('target'=>'_blank')));
+  } else {
+    return 'View List';
+  }
 }

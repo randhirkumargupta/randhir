@@ -151,7 +151,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_breaking_tile',
     'label' => 'Title',
     'required' => 1,
@@ -179,7 +179,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'field_breaking_content_details',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Breaking Band should be in text only format',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1009,6 +1009,7 @@ function feature_for_breaking_news_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Breaking Band should be in text only format');
   t('Comment');
   t('Content Type');
   t('Content details');

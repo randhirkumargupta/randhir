@@ -34,13 +34,16 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
      global $user;
   $user_fields = user_load($user->uid);
   if ($form_id == 'ask_an_expert_node_form') {
+    
    //code to hide source field
    if ($user->uid != '1') {
       $form['field_user_source_term_id']['#access'] = FALSE;
+      $form['field_story_source_type']['#access'] = FALSE;
     }
     // hide message box in add condition
     if(empty($form['nid']['#value']) && $user->uid != '1') {
       $form['field_user_message']['#access'] = FALSE;
+      $form['field_story_source_type']['#access'] = FALSE;
     }
     // check if user is logged in auto fill email
     if ($user->uid && $form['#node']->nid == '') {
@@ -59,11 +62,40 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
         }
     
    // set term_id from url in hidden field 
-    $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = 147;
+    if (empty($form['nid']['#value'])) {
+      $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = 147; //130
+    }
     $form['actions']['submit']['#value'] = 'Submit';
     $form['#after_build'][] = 'itg_ask_expert_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_ask_expert_form_custom_callback';
-      } 
+    $destination = 'ask-an-expert';
+    if (!empty($form['nid']['#value'])) {
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+      );
+    }
+  } 
+      
+      
+}
+
+
+/**
+ * Implements hook_node_access.
+ * Check access for forum menu item.
+ * @param type $node
+ * @param type $op
+ * @param type $account
+ */
+function itg_ask_expert_node_access($node, $op, $account) { 
+  if (isset($node->type) && $node->type == 'ask_an_expert' && $node->field_user_message[LANGUAGE_NONE][0]['value'] != '') {
+   if ($op == 'update') {
+     return NODE_ACCESS_DENY; 
+   }        
+  }
+  return NODE_ACCESS_IGNORE;
 }
 
 /**
@@ -74,7 +106,6 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id){
 function itg_ask_expert_after_build($form, &$form_state) {
   
   global $user, $base_url;
-  
   // update automatic alias name
   $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
   //Unset metatag description
@@ -137,6 +168,22 @@ function itg_ask_expert_views_pre_render(&$view) {
       }
     }
   }
+}
+
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_ask_expert_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
+{
+//Get the Form Id
+    if ($form["#id"] == 'views-exposed-form-ask-an-expert-page' || $form['#id'] == 'views-exposed-form-ask-an-expert-page-2') {
+        $form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
+        $form['title']['#autocomplete_path'] = 'content-title-list/ask_an_expert/autocomplete';
+        $form['title']['#attributes'] = array('placeholder' => t('Question'));
+    }
 }
 
 /**
@@ -252,4 +299,32 @@ function itg_expert_mail($get_term_id) {
     $itg_final_mail[] = $expert_mail_arr->mail;
   }
   return $itg_final_mail;
+}
+
+
+/**
+ * Implements function to fetch node body based on nid
+ * @param $nid
+ * $return 
+ */
+function itg_ask_expert_description_check($nid) {
+  $result = db_select('field_data_field_user_message', 'fdm')
+          ->fields('fdm', array('field_user_message_value','entity_id'))
+          ->condition('entity_id', $nid, '=')
+          ->execute()->fetchAssoc();
+
+  return $result['entity_id'];
+}
+
+/*
+ * Implement hook_node_presave
+ * @param array $node
+ */
+function itg_ask_expert_node_presave($node) {
+  global $user;
+  if ($node->type == 'ask_an_expert') {
+    if(!empty($node->nid)) {
+     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = $user->uid;
+    }
+  }
 }

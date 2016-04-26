@@ -165,7 +165,7 @@
                         }
                       }
                     }
-                  if (isset($subfield['field_quiz_correct_answer'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_correct_answer'][LANGUAGE_NONE])) {
+                  if (isset($subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value']) && !empty($subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'])) {
                       $output .= '<div class="field"><div class="field-label">Correct Answer:</div><div class="field-items">'.$subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'].'</div></div>';
                     }
                      

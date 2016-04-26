@@ -200,6 +200,33 @@ function features_for_survey_field_default_field_bases() {
     'type' => 'datetime',
   );
 
+  // Exported field_base: 'field_survey_expity_date'.
+  $field_bases['field_survey_expity_date'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_survey_expity_date',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        1 => '',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
+  );
+
   // Exported field_base: 'field_survey_question'.
   $field_bases['field_survey_question'] = array(
     'active' => 1,

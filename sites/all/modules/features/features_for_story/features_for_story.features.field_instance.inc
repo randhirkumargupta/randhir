@@ -212,7 +212,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'body',
     'label' => 'Story body',
     'required' => 1,
@@ -859,7 +859,7 @@ function features_for_story_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'medium',
         ),
         'type' => 'image',
         'weight' => 26,
@@ -1297,7 +1297,7 @@ function features_for_story_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_magazine_kicker_text',
     'label' => 'Magazine kicker',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -2332,7 +2332,7 @@ function features_for_story_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'medium',
         ),
         'type' => 'image',
         'weight' => 57,
