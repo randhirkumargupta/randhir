@@ -45,18 +45,24 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'counter' => 'counter',
     'title' => 'title',
     'field_content_sharing_mode' => 'field_content_sharing_mode',
+    'field_syndication_delivery_mode' => 'field_syndication_delivery_mode',
     'delete_node' => 'delete_node',
-    'field_service_delivery_mode' => 'field_service_delivery_mode',
     'edit_node' => 'edit_node',
     'view_node' => 'view_node',
     'changed' => 'changed',
     'field_story_expiry_date' => 'field_story_expiry_date',
     'nothing' => 'nothing',
   );
-  $handler->display->display_options['style_options']['default'] = 'changed';
+  $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
@@ -71,14 +77,14 @@ function syndication_feature_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'delete_node' => array(
+    'field_syndication_delivery_mode' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_service_delivery_mode' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
+    'delete_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -113,6 +119,13 @@ function syndication_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No result Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
@@ -241,6 +254,73 @@ function syndication_feature_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No ';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Client Title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Content Sharing mode */
+  $handler->display->display_options['fields']['field_content_sharing_mode']['id'] = 'field_content_sharing_mode';
+  $handler->display->display_options['fields']['field_content_sharing_mode']['table'] = 'field_data_field_content_sharing_mode';
+  $handler->display->display_options['fields']['field_content_sharing_mode']['field'] = 'field_content_sharing_mode';
+  $handler->display->display_options['fields']['field_content_sharing_mode']['label'] = 'Sharing mode';
+  /* Field: Content: Delivery Mode */
+  $handler->display->display_options['fields']['field_syndication_delivery_mode']['id'] = 'field_syndication_delivery_mode';
+  $handler->display->display_options['fields']['field_syndication_delivery_mode']['table'] = 'field_data_field_syndication_delivery_mode';
+  $handler->display->display_options['fields']['field_syndication_delivery_mode']['field'] = 'field_syndication_delivery_mode';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['edit_node']['text'] = 'Edit';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'View';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm-d-Y';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Field: Expiry date */
+  $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
+  $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
+  $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
+  $handler->display->display_options['fields']['field_story_expiry_date']['settings'] = array(
+    'format_type' => 'custom_date_d_m_y_',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<span class="view-link">[view_node]</span> | <span class="edit-link">[edit_node]</span>';
   $handler->display->display_options['path'] = 'syndication-client-listing';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Client Listing';
