@@ -239,8 +239,8 @@ $routput = "<tr><td>Role</td>
                         </tr>"; 
 }
 }
-$output .= $routput."</table>";
 
+$output .= $routput."</table>";
 print $output;
 ?>
 

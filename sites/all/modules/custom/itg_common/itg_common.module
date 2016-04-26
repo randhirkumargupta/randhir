@@ -384,7 +384,7 @@ function get_content_type_name($type) {
 }
 
 
-/* functions for user role and permission display on my accoutn page */
+/* functions for user role and permission display on my accountpage */
 
 /**
  * Get node count.
