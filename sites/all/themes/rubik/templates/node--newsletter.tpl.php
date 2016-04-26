@@ -62,8 +62,13 @@
         
         $prev_num = 0;
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
-          echo '<h2>News ' . ($prev_num + 1) . ' Details:</h2>';
+          $sn = $prev_num + 1;
+          echo '<h2>News ' . $sn . ' Details:</h2>';
           ?>
+         <div class="field">
+            <div class="field-label">Dialog Box Name:</div>
+            <div class="field-items"><?php echo ucwords($news_arr['field_news_dialog_box_name'][LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
            <div class="field">
               <div class="field-label">Headline:</div>
               <div class="field-items"><?php echo ucwords($news_arr['field_news_headline'][LANGUAGE_NONE][0]['value']); ?></div>
@@ -96,9 +101,13 @@
       $num = 0;
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
           $news_detail = entity_load('field_collection_item', array($news_arr['value']));
-          echo '<h2>News ' . ($num + 1) . ' Details:</h2>';
+          $sn = $num + 1;
+          echo '<h2>News ' . $sn . ' Details:</h2>';
           ?>
-      
+          <div class="field">
+            <div class="field-label">Dialog Box Name:</div>
+            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_dialog_box_name[LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
           <div class="field">
             <div class="field-label">Headline:</div>
             <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_headline[LANGUAGE_NONE][0]['value']); ?></div>
