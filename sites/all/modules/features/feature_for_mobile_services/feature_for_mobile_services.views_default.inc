@@ -103,7 +103,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'No Client Found.';
+  $handler->display->display_options['empty']['area']['content'] = 'No Service Found.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_client_selection_target_id']['id'] = 'field_client_selection_target_id';
@@ -292,6 +292,14 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Client Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
@@ -540,6 +548,14 @@ function feature_for_mobile_services_views_default_views() {
   $handler = $view->new_display('page', 'Service Association', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Service Association Listing';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Service Association Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_client_selection_target_id']['id'] = 'field_client_selection_target_id';
@@ -639,17 +655,18 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'client_service_association' => 'client_service_association',
   );
-  /* Filter criterion: Content: Field Title (field_service_title) */
-  $handler->display->display_options['filters']['field_service_title_value']['id'] = 'field_service_title_value';
-  $handler->display->display_options['filters']['field_service_title_value']['table'] = 'field_data_field_service_title';
-  $handler->display->display_options['filters']['field_service_title_value']['field'] = 'field_service_title_value';
-  $handler->display->display_options['filters']['field_service_title_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_service_title_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator_id'] = 'field_service_title_value_op';
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['label'] = 'Service Title';
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator'] = 'field_service_title_value_op';
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['identifier'] = 'field_service_title_value';
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['remember_roles'] = array(
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Service Title (field_service_association_title) */
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['id'] = 'field_service_association_title_target_id';
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['table'] = 'field_data_field_service_association_title';
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['field'] = 'field_service_association_title_target_id';
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['group'] = 1;
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['operator_id'] = 'field_service_association_title_target_id_op';
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['label'] = 'Service Title';
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['operator'] = 'field_service_association_title_target_id_op';
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['identifier'] = 'field_service_association_title_target_id';
+  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -677,6 +694,14 @@ function feature_for_mobile_services_views_default_views() {
   $handler = $view->new_display('page', 'Service Content Listing', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Service Content Listing';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Service Content Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_service_association_title_target_id']['id'] = 'field_service_association_title_target_id';

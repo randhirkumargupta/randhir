@@ -23,7 +23,6 @@
        if($('input[name="field_quiz_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_quiz_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
           $('input[name="field_quiz_add_questions_und_0_remove_button"]').hide();
         }
-        //$('#edit-field-quiz-add-questions-und-0-field-quiz-options-answer-und-0-remove-button').hide();
       }
       
 
@@ -75,6 +74,8 @@
       //Scoring type treatment
      if ($("input[name='field_quiz_scoring_type[und]']").val() === 'normal') {
         $('.field-name-field-quiz-weightage').hide();
+        $('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
+        
       } else {
         $('.field-name-field-quiz-weightage').show();
       }
@@ -83,8 +84,10 @@
         var check_radio_name = $(this).val();
         if (check_radio_name == 'normal') {
           $('.field-name-field-quiz-weightage').hide();
+          $('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
         } else {
           $('.field-name-field-quiz-weightage').show();
+           $('.quiz-weightage-backup').remove();
         }
       });
       
