@@ -536,6 +536,8 @@ function itg_service_association_after_build($form, &$form_state) {
  * @return array $form
  */
 function itg_service_content_after_build($form, &$form_state) {
+  $form['field_story_expert_description']['#suffix'] = '<span id="remain"></span>';
+  drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_service.js', array('weight' => 1));
   $form['path']['#access'] = FALSE;
   $form['title']['#attributes']['readonly'] = 'readonly';
   $form_state['redirect'] = 'service-content-listing';
@@ -805,8 +807,26 @@ function itg_mobile_services_menu(){
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
+   $items['countchar_validation'] = array(
+    'page callback' => 'itg_countchar_validation',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
+
+/**
+ * Implements ajax callback function
+ */
+function itg_countchar_validation(){
+  $nodeid = $_POST['nidvalue'];
+  $query = db_select('field_data_field_service_char_limit', 'fc');
+      $query->fields('fc', array('field_service_char_limit_value'));
+      $query->condition('entity_id', $nodeid, '=');
+    $result = $query->execute()->fetchField();
+    echo $result;
+}
+
 /**
  * Implementation of hook_form_views_exposed_form_alter().
  * @param array $form
@@ -836,7 +856,7 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
       $form['field_service_title_value']['#attributes'] = array(
         'placeholder' => t('Title')
       );
-      $form['field_service_title_value']['#autocomplete_path'] = 'contentfield/client_service_association/autocomplete';
+      //$form['field_service_title_value']['#autocomplete_path'] = 'contentfield/client_service_association/autocomplete';
       //p($form['field_service_title_value']);
       break;
   }
