@@ -92,7 +92,10 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication.js',
     );
-
+    // Hide time field from form
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery(".form-item-field-story-expiry-date-und-0-value-time").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
     // Custom callback for  after form built
     $form['#action'] = '?destination=syndication-client-listing';
     $form['#after_build'][] = 'itg_syndication_after_build';

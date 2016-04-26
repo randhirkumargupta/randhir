@@ -15,7 +15,7 @@ function syndication_feature_field_default_field_instances() {
     'bundle' => 'syndication_client',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'User will enter short description about the client.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -42,7 +42,7 @@ function syndication_feature_field_default_field_instances() {
     'settings' => array(
       'display_summary' => 0,
       'exclude_cv' => FALSE,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -393,7 +393,7 @@ function syndication_feature_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'site-wide',
+        'input_format' => 'd/m/Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -457,7 +457,6 @@ function syndication_feature_field_default_field_instances() {
   t('Frequency');
   t('Mail to');
   t('Short Description ');
-  t('User will enter short description about the client.');
 
   return $field_instances;
 }
