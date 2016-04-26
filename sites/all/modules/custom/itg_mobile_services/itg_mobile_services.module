@@ -536,6 +536,8 @@ function itg_service_association_after_build($form, &$form_state) {
  * @return array $form
  */
 function itg_service_content_after_build($form, &$form_state) {
+  $form['field_story_expert_description']['#suffix'] = '<span id="remain"></span>';
+  drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_service.js', array('weight' => 1));
   $form['path']['#access'] = FALSE;
   $form['title']['#attributes']['readonly'] = 'readonly';
   $form_state['redirect'] = 'service-content-listing';
@@ -573,6 +575,7 @@ function itg_mobile_client_after_build($form, &$form_state) {
  * @return array $form
  */
 function itg_mobile_service_after_build($form, &$form_state) {
+  drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4,  'scope' => 'footer'));
   $form['path']['#access'] = FALSE;
   $form['field_story_expiry_date']['#attributes'] = array('readonly' => 'readonly');
   $form_state['redirect'] = 'service-listing';
@@ -800,11 +803,11 @@ function itg_mobile_services_views_pre_render(&$view) {
  * Implements hook_menu().
  */
 function itg_mobile_services_menu() {
-  $items['contentfield/%/autocomplete'] = array(
-    'page callback' => 'itg_mobile_services_autocomplete_content',
-    'access arguments' => array('access itg story'),
+   $items['countchar_validation'] = array(
+    'page callback' => 'itg_countchar_validation',
+    'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
-  );
+     );
   $items['mobile_services/feed-generator-of-content'] = array(
     'page callback' => 'mobile_services_generator_of_content',
     'access arguments' => array('access itg story'),
@@ -817,6 +820,18 @@ function itg_mobile_services_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+/**
+ * Implements ajax callback function
+ */
+function itg_countchar_validation(){
+  $nodeid = $_POST['nidvalue'];
+  $query = db_select('field_data_field_service_char_limit', 'fc');
+      $query->fields('fc', array('field_service_char_limit_value'));
+      $query->condition('entity_id', $nodeid, '=');
+    $result = $query->execute()->fetchField();
+    echo $result;
 }
 
 /**
@@ -848,34 +863,12 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
       $form['field_service_title_value']['#attributes'] = array(
         'placeholder' => t('Title')
       );
+
+      //$form['field_service_title_value']['#autocomplete_path'] = 'contentfield/client_service_association/autocomplete';
       //p($form);
       $form['field_service_association_title_target_id']['#autocomplete_path'] = 'mobile_services/service_creation/autocomplete';
       //p($form['field_service_title_value']);
       break;
-  }
-}
-
-/**
- * Autocomplete on title(date field) of issue listing
- * @param string $title
- */
-function itg_mobile_services_autocomplete_content($title) {
-
-  if (strlen(trim($title)) > 0) {
-    $content_type = arg(1);
-    $options = '';
-    $title = strtolower(trim($title));
-    $query = db_select('field_service_title_value', 'c');
-    $query->fields('c', array('field_service_title_value'));
-    $query->condition('field_service_title_value', '%' . $title . '%', 'LIKE');
-    $query->condition('c.bundle', $content_type, '=');
-    $query->range(0, 20);
-
-    $result = $query->execute();
-    while ($record = $result->fetchAssoc()) {
-      $options[date('Y-m-d', strtotime($record['field_issue_title_value']))] = date('m/d/Y', strtotime($record['field_issue_title_value']));
-    }
-    drupal_json_output($options);
   }
 }
 
