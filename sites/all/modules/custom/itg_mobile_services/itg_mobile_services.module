@@ -799,25 +799,26 @@ function itg_mobile_services_views_pre_render(&$view) {
 /**
  * Implements hook_menu().
  */
-function itg_mobile_services_menu(){
+function itg_mobile_services_menu() {
   $items['contentfield/%/autocomplete'] = array(
     'page callback' => 'itg_mobile_services_autocomplete_content',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
-   $items['mobile_services/feed-generator-of-content'] = array(      
-      'page callback' => 'mobile_services_generator_of_content',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_mobile_services.inc',
+  $items['mobile_services/feed-generator-of-content'] = array(
+    'page callback' => 'mobile_services_generator_of_content',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_mobile_services.inc',
   );
-   $items['mobile_services/%/autocomplete'] = array(      
-      'page callback' => 'itg_mobile_services_get_content_title',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
+  $items['mobile_services/%/autocomplete'] = array(
+    'page callback' => 'itg_mobile_services_get_content_title',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
   );
   return $items;
 }
+
 /**
  * Implementation of hook_form_views_exposed_form_alter().
  * @param array $form
@@ -854,14 +855,13 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
   }
 }
 
-
 /**
  * Autocomplete on title(date field) of issue listing
  * @param string $title
  */
 function itg_mobile_services_autocomplete_content($title) {
-  
-    if (strlen(trim($title)) > 0) {
+
+  if (strlen(trim($title)) > 0) {
     $content_type = arg(1);
     $options = '';
     $title = strtolower(trim($title));
@@ -982,38 +982,34 @@ where client_selection.entity_id = '$client_id' AND service_association.field_se
 }
 
 // left end date and delivery mode, content type (Text / image / video)  and limit
-
 // Field char limit not validete when enter content text (create content)
-
 // for service fetch link
 // join field_data_field_service_fetch_link AS service_fetch_link ON service_node.nid = service_fetch_link.entity_id 
 
 /**
-* callback for all the mobile service association of title
-*  
-*/
-
+ * callback for all the mobile service association of title
+ *  
+ */
 function itg_mobile_services_get_content_title($title) {
-  
-    if (strlen(trim($title)) > 0) {
-      $content_type = arg(1);
-      $options = '';
-      $title = strtolower(trim($title));
-      $query = db_select('node', 'n');
-      $query->fields('n', array('title','nid'));
-      $query->condition('title', '%'.$title.'%', 'LIKE');
-      $query->condition('n.type', $content_type, '=');
-      //$query->condition('n.status', 1, '=');
-      $query->range(0, 20);
-      
-      $result = $query->execute(); 
-      while ($record = $result->fetchAssoc()) {     
-        $options[$record['title'].'('.$record['nid'].')'] = $record['title'];
-      }    
-      drupal_json_output($options);    
-  }    
-}
 
+  if (strlen(trim($title)) > 0) {
+    $content_type = arg(1);
+    $options = '';
+    $title = strtolower(trim($title));
+    $query = db_select('node', 'n');
+    $query->fields('n', array('title', 'nid'));
+    $query->condition('title', '%' . $title . '%', 'LIKE');
+    $query->condition('n.type', $content_type, '=');
+    //$query->condition('n.status', 1, '=');
+    $query->range(0, 20);
+
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $options[$record['title'] . '(' . $record['nid'] . ')'] = $record['title'];
+    }
+    drupal_json_output($options);
+  }
+}
 
 /**
  * Implementation of hook_views_query_alter
@@ -1023,9 +1019,9 @@ function itg_mobile_services_get_content_title($title) {
 function itg_mobile_services_views_query_alter(&$view, &$query) {
 
   if (isset($view->name) && $view->name === 'clients_details' && $view->current_display == 'page_2') {
-   // p($view->query->where);
+    // p($view->query->where);
     if (isset($_GET['field_service_association_title_target_id'])) {
-      $association = explode('(',$_GET['field_service_association_title_target_id']);
+      $association = explode('(', $_GET['field_service_association_title_target_id']);
       $association = rtrim($association['1'], ')');
       $association_condition = $association;
       if (isset($view->query->where[1]['conditions'][1]['field'])) {
@@ -1036,7 +1032,7 @@ function itg_mobile_services_views_query_alter(&$view, &$query) {
           }
         }
       }
-     // p($view->query->where);
+      // p($view->query->where);
     }
   }
 }
