@@ -71,6 +71,8 @@
         }
       });
       
+
+      
       //Scoring type treatment
      if ($("input[name='field_quiz_scoring_type[und]']").val() === 'normal') {
         $('.field-name-field-quiz-weightage').hide();
@@ -78,6 +80,7 @@
         
       } else {
         $('.field-name-field-quiz-weightage').show();
+        $('.quiz-weightage-backup').remove();
       }
       
       $("input[name='field_quiz_scoring_type[und]']").on("click", function() {
@@ -91,6 +94,10 @@
         }
       });
       
+      $('.field-name-field-quiz-options-answer .field-add-more-submit, .field-name-field-quiz-options-answer .button-remove').mousedown(function(){
+        $('.quiz-weightage-backup').remove();
+      })
+     
       
       //Answer Option
       $('.field-name-field-quiz-option-1-text, .field-name-field-quiz-option-1-media, .field-name-field-quiz-option-2-text, .field-name-field-quiz-option-2-media').hide();
