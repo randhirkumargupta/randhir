@@ -343,7 +343,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
     $output = '';
     if($quiz_type == 'immediate'){
       
-      if($quiz_result_type == 'ate'){
+      //if($quiz_result_type == 'ate'){
         $total_ques_attempt = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL);
         $correct_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
         $incorrect_answer = $total_ques_attempt - $correct_answer;
@@ -368,12 +368,12 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
         $output .= '</div>';
         drupal_set_message($output, 'message');
         
-      } else {
-        drupal_set_message(t('Thank you for attempting our quiz.'));
-      }
+      //} else {
+       // drupal_set_message(t('Thank you for attempting our quiz.'));
+      //}
 
     } else {
-     drupal_set_message(t('Thank you for attempting our quiz. Once our quiz will be finished, you would get an email with winner name.'));
+     drupal_set_message(t('Thank you for attempting our quiz. Once our quiz will be finished, you would get an email with winner\'s name.'));
     }
       
   }
