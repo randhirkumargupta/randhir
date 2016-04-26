@@ -575,6 +575,7 @@ function itg_mobile_client_after_build($form, &$form_state) {
  * @return array $form
  */
 function itg_mobile_service_after_build($form, &$form_state) {
+  drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4,  'scope' => 'footer'));
   $form['path']['#access'] = FALSE;
   $form['field_story_expiry_date']['#attributes'] = array('readonly' => 'readonly');
   $form_state['redirect'] = 'service-listing';
