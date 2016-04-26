@@ -132,7 +132,7 @@ function task_allocation_field_default_field_instances() {
   $field_instances['node-task_idea_allocation_tracking-field_task_finish_date_and_time'] = array(
     'bundle' => 'task_idea_allocation_tracking',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Finish time should be 24 hr format.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -174,7 +174,7 @@ function task_allocation_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 1,
-        'input_format' => 'Y-m-d H:i:s',
+        'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -282,6 +282,7 @@ function task_allocation_field_default_field_instances() {
   t('Change Status');
   t('Comment');
   t('Finish Date and time');
+  t('Finish time should be 24 hr format.');
   t('Select team member');
   t('Task / idea');
 
