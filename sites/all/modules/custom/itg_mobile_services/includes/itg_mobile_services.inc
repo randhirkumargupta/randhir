@@ -64,11 +64,13 @@ where service_association.field_service_association_title_target_id = '$sid' AND
     case 1:
         // Code for XMLs
       print_xml($query);
+     // itg_mobile_services_generate_rss($query);
       
   
         break;
     case 2:
         // Code for RSS
+      itg_mobile_services_generate_rss($query);
         break;
     case 3:
       // Code for MRSS
@@ -188,31 +190,104 @@ Ramdev's business plan: Make Nestle's bird, Colgate's gate disappear
             $item->appendChild($doc->createElement('age', '3'));
             $items->appendChild($item);
             
-            
-//            $root = $dom->createElement('feed');
-//            $root = $dom->appendChild($root);
-//            $root->appendChild( $dom->createElement('provider', 'indiatoday') );
-//            $root->appendChild( $dom->createElement('language', 'en-US') );
-//            
-//            $news = $dom->createElement("news");
-//            $root->appendChild($news);
-//            
-//            $item = $dom->createElement("item");
-//            $item = $root->appendChild($item);
-//            
-//            $news->appendChild($dom->createElement('id', $content_text) );
-//            $news->appendChild($dom->createElement('short_title', $short_title) );
-//            
-//            
-//            $result = $dom->createElement('item');
-//            $root->appendChild($result);
-            
-//            $result->setAttribute('id', $key+1);
-//            $result->appendChild( $dom->createElement('title', $content_text) );
-//            $result->appendChild( $dom->createElement('body', $content_image_fid) );
-//            $result->appendChild( $dom->createElement('headline', $header) );
+         
         }
        // echo $doc->saveXML();
         $doc->save($file_path.'/result.xml') or die('XML Create Error');    
       
+}
+
+
+
+/**
+ * Function to generate rss
+ * @param array $data
+ * @param array $syndication_node
+ */
+
+function itg_mobile_services_generate_rss($query) {
+  
+// The XML structure
+
+        $data = '<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
+        $data .= '<channel>';
+        $data .= '<title>India Today | KARNATAKA NEWS</title>';
+        $data .= '<description>India Today</description>';
+        $data .= '<link>http://indiatoday.intoday.in/</link>';
+        $data .= '<lastBuildDate>Mon, 03 Feb 2014 12:38:02 IST</lastBuildDate>';
+        $data .= '<generator>FeedCreator 1.7.2</generator>';
+        $data .= '<image>';
+        $data .= '<url>http://mobileservice.digitaltoday.in/content/img/rss/karnataka.jpg</url>';
+        $data .= '<title>India Today | KARNATAKA NEWS</title>';			
+        $data .= '<description>India Today</description>';
+        $data .= '</image>';
+
+       foreach ($query as $row) {
+          $content_text = $row->content_text;
+          $short_title = "Ramdev's business plan: Make Nestle's bird, Colgate's gate disappear";
+
+          $file_path = drupal_realpath('public://');
+          $file_path = '/var/www/html/itgcms/sites/default/files/mobile_xml';
+          $data .= '<item>';
+          $data .= '<title>Karnataka team gets Rs 1 crore</title>';
+          $data .= '<link>http://indiatoday.intoday.in/</link>';
+          $data .= "<description>".$content_text."</description>";
+          $data .= '<image></image>';
+          $data .= '<image></image>';
+          $data .= '</item>';
+        }  
+      $data .= '</channel>';
+      $data .= '</rss>';
+      //$doc->save($file_path.'/result_rss.xml') or die('XML Create Error');   
+       // header('Content-Type: application/xml');
+      echo $data;
+       watchdog('mobile_rss', 'RSS created');
+      drupal_set_message('rss file has been created.', 'status');   
+  
+}
+
+/**
+ * Function to generate rss
+ * @param array $data
+ * @param array $syndication_node
+ */
+
+function itg_mobile_services_generate_simple_text($query) {
+  
+// The XML structure
+
+        $data .= '<channel>';
+        $data .= '<title>India Today | KARNATAKA NEWS</title>';
+        $data .= '<description>India Today</description>';
+        $data .= '<link>http://indiatoday.intoday.in/</link>';
+        $data .= '<lastBuildDate>Mon, 03 Feb 2014 12:38:02 IST</lastBuildDate>';
+        $data .= '<generator>FeedCreator 1.7.2</generator>';
+        $data .= '<image>';
+        $data .= '<url>http://mobileservice.digitaltoday.in/content/img/rss/karnataka.jpg</url>';
+        $data .= '<title>India Today | KARNATAKA NEWS</title>';			
+        $data .= '<description>India Today</description>';
+        $data .= '</image>';
+
+       foreach ($query as $row) {
+          $content_text = $row->content_text;
+          $short_title = "Ramdev's business plan: Make Nestle's bird, Colgate's gate disappear";
+
+          $file_path = drupal_realpath('public://');
+          $file_path = '/var/www/html/itgcms/sites/default/files/mobile_xml';
+          $data .= '<item>';
+          $data .= '<title>Karnataka team gets Rs 1 crore</title>';
+          $data .= '<link>http://indiatoday.intoday.in/</link>';
+          $data .= "<description>".$content_text."</description>";
+          $data .= '<image></image>';
+          $data .= '<image></image>';
+          $data .= '</item>';
+        }  
+      $data .= '</channel>';
+      $data .= '</rss>';
+      //$doc->save($file_path.'/result_rss.xml') or die('XML Create Error');   
+       // header('Content-Type: application/xml');
+      echo $data;
+       watchdog('mobile_rss', 'RSS created');
+      drupal_set_message('rss file has been created.', 'status');   
+  
 }
