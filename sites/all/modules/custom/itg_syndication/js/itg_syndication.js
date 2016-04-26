@@ -18,6 +18,9 @@
         });
       }
       
+      // Disable date field
+      $('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
+      
       // Clear hidden fields value
       $('select[name="field_content_sharing_mode[und]"]').on('change', function() {        
         switch ($(this).val()) {
