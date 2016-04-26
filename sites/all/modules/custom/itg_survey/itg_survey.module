@@ -468,16 +468,21 @@ function itg_survey_node_access($node, $op, $account) {
   
   if (!in_array('Site Admin', $user->roles)) {
     $curr_time = strtotime(date('Y-m-d') . ' 00:00:00');
+    
+    $survey_start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
     $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
 
     $node_edit = FALSE;
-    if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
-      if ($curr_time > $survey_end_date) {
-        $node_edit = TRUE;
-      }
+
+    if ($curr_time > $survey_end_date) {
+      $node_edit = TRUE;
+    }
+    
+    if ($curr_time >= $survey_start_date) {
+      $node_edit = TRUE;
     }
 
-    if (isset($node->type) && $node->type == 'survey' && $node_edit) {
+    if (isset($node->type) && ($node->type == 'survey' || $node->type == 'quiz') && $node_edit) {
       if ($op == 'update') {
         return NODE_ACCESS_DENY;
       }
