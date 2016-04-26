@@ -5,12 +5,14 @@
 
 function itg_quiz_winners_mail_list() {
  $nid = arg(1);
+ $winner_count = itg_quiz_winners_count($record->nid);
+ $no_of_winner = $winner_count['field_quiz_winners_value'];
   $user_email = itg_quiz_winners_user_list($nid);
   foreach($user_email as $key=>$value) {
     $user_email_arr[] = $value['user_email'];
   }
-  
-    $user_email_str = implode(',',$user_email_arr);
+  $user_email_arr = array_slice($user_email_arr, 0, $no_of_winner, true);
+  $user_email_str = implode(',',$user_email_arr);
   $mail_content = itg_quiz_get_mail_content($nid);
     $params = array(
       'body' => $mail_content,
@@ -35,7 +37,7 @@ function itg_quiz_winners_user_list($nid) {
   $query = db_select('itg_quiz_user_score', 'qs');
   $query->fields('qs')
       ->condition('qs.nid', $nid, '=')
-      ->condition('qs.quiz_score', 0, '!=')
+      //->condition('qs.quiz_score', 0, '!=')
       ->orderBy('qs.quiz_score', 'DESC');
   $result = $query->execute();
   $i = 0;
@@ -104,4 +106,21 @@ $winners = '';
   $content_end ='<tr><td>&nbsp;</td></tr><tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
   $final_output = $content.$winners.$content_end;
   return $final_output;
+}
+
+
+
+// function to get no of winner count
+function itg_quiz_winners_count($nid) {
+  $query = db_select('field_data_field_quiz_winners', 'qwc');
+  $query->fields('qwc')
+      ->condition('qwc.entity_id', $nid, '=');
+      $result = $query->execute();
+  $i = 0;
+  while ($user_winner_count = $result->fetchAssoc()) {
+    $user_rec_count['field_quiz_winners_value'] = $user_winner_count['field_quiz_winners_value'];
+    $i++;
+    }
+
+  return $user_rec_count;
 }
