@@ -32,7 +32,7 @@ if (theme_get_setting('rubik_show_branding')): ?>
   
   <div class="user-role">
     <span>
-      <?php if (function_exists('get_task_count_of_user')) { print 'Pending Task <b>('.get_task_count_of_user().')</b>'; }?>
+      <?php if (function_exists('get_task_count_of_user')) { print l('Pending Task ('.get_task_count_of_user().')', 'assigned-task-list'); }?>
     </span> User role - <?php 
       // get role array
       $role_display = $user->roles;

@@ -11,6 +11,7 @@
         var base_url = settings.itg_newsletter.settings.base_url;
         var type = settings.itg_newsletter.settings.type;
         var nid = settings.itg_newsletter.settings.nid;
+        
         if(nid) {
           $('#edit-field-newsl-add-news-und-0-remove-button').show();
         }
