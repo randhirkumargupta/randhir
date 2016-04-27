@@ -243,9 +243,21 @@ function itg_mobile_client_association_submit($form, &$form_state) {
   $form_state['redirect'] = 'service-association-listing';
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
 
+
   $node = node_load($association_nid);
   $form_state['values']['title'] = $node->title;
-  return $form;
+  $delivery_mode = ($node->field_service_delivery_mode) ? $node->field_service_delivery_mode[LANGUAGE_NONE][0]['value'] : '';
+  $service_frequency = ($node->field_service_frequency) ? $node->field_service_frequency[LANGUAGE_NONE][0]['value'] : '';
+  $content_sharing_mode = ($node->field_content_sharing_mode) ? $node->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] : '';
+  $service_fetch_link = ($node->field_service_fetch_link) ? $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
+  $ftp_ip_address = ($node->field_ftp_ip_address) ? $node->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
+  $ftp_username = ($node->field_ftp_username) ? $node->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
+  $ftp_password = ($node->field_ftp_password) ? $node->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
+  $service_email_address = ($node->field_email_address) ? $node->field_email_address[LANGUAGE_NONE][0]['value'] : '';
+  $service_expiry_date = ($node->field_story_expiry_date) ? $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] : '';
+
+  //watchdog("association_nid", '<pre>' . print_r($service_fields_array, true) . '</pre>');
+  // return $form;
 
 
   $timestamp = strtotime("now") . "_";
@@ -255,28 +267,64 @@ function itg_mobile_client_association_submit($form, &$form_state) {
   $field_client_selection = $form_state['values']['field_client_selection'][LANGUAGE_NONE];
   $client_name = '';
   foreach ($field_client_selection as $key => $value) {
-    /*
-      $client_id = $value['target_id'] ."_";
-      $service_id = $association_nid ."_";
-      $token = $client_id . $service_id . $timestamp . $six_digit_random_number;
+
+    $client_id = $value['target_id'] . "_";
+    $service_id = $association_nid . "_";
+    $token = $client_id . $service_id . $timestamp . $six_digit_random_number;
+    $str = base64_encode($token);
+
+    $check_token = itg_mobile_service_check_token($value['target_id'], $association_nid);
+    if ($check_token) {
+      # new drupal 7 style sql insert
+      $id = db_update('itg_client_token')
+          ->fields(array(
+            'delivery_mode' => $delivery_mode,
+            'service_frequency' => $service_frequency,
+            'content_sharing_mode' => $content_sharing_mode,
+            'service_fetch_link' => 'http://localhost/itgcms/mobile_services/token/' . $str,
+            'ftp_ip_address' => $ftp_ip_address,
+            'ftp_username' => $ftp_username,
+            'ftp_password' => $ftp_password,
+            'service_email_address' => $service_email_address,
+            'service_expiry_date' => $service_expiry_date,
+            'token' => $token,
+            'reset_by' => $user->name,
+            'updated_date' => $timestamps  # use REQUEST_TIME or time() here if you want the date as a long
+          ))
+          ->condition('cid', $value['target_id'], '=')
+          ->condition('sid', $association_nid, '=')
+          ->execute();
+    }
+    else {
       # new drupal 7 style sql insert
       $id = db_insert('itg_client_token')
-      ->fields(array(
-      'nid' => $node_nid,
-      'cid' => $value['target_id'],
-      'sid' => $association_nid,
-      'token' => $token,
-      'created_by' => $user->name,
-      'reset_by' => '',
-      'created_date' => $timestamps,
-      'updated_date' => $timestamps  # use REQUEST_TIME or time() here if you want the date as a long
-      ))
-      ->execute();
-      watchdog('sleetmute', "NID  = " . $id);
-     */
+          ->fields(array(
+            'nid' => $node_nid,
+            'cid' => $value['target_id'],
+            'sid' => $association_nid,
+            'delivery_mode' => $delivery_mode,
+            'service_frequency' => $service_frequency,
+            'content_sharing_mode' => $content_sharing_mode,
+            'service_fetch_link' => 'http://localhost/itgcms/mobile_services/token/' . $str,
+            'ftp_ip_address' => $ftp_ip_address,
+            'ftp_username' => $ftp_username,
+            'ftp_password' => $ftp_password,
+            'service_email_address' => $service_email_address,
+            'service_expiry_date' => $service_expiry_date,
+            'token' => $token,
+            'created_by' => $user->name,
+            'reset_by' => '',
+            'created_date' => $timestamps
+          ))
+          ->execute();
+    }
+
+    watchdog('sleetmute', "NID  = " . $id);
 
     // watchdog("token", '<pre>' . print_r($token, true) . '</pre>');
   }
+  // $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = 'http://localhost/itgcms/service?token='.$str;
+  // field_attach_update('node', $node);
   return $form;
 }
 
@@ -816,6 +864,14 @@ function itg_mobile_services_menu() {
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
+
+  $items['mobile_services/token/%'] = array(
+    'page callback' => 'mobile_services_generator_data',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_mobile_services.inc',
+  );
+
   return $items;
 }
 
@@ -1035,4 +1091,17 @@ function itg_mobile_services_views_query_alter(&$view, &$query) {
       // p($view->query->where);
     }
   }
+}
+
+/**
+ * Get check service token by token
+ * @param type $token
+ *   
+ */
+function itg_mobile_service_check_token($cid, $association_nid) {
+  return $entity_id = db_select('itg_client_token', 't')
+          ->fields('t', array('id'))
+          ->condition('cid', $cid, '=')
+          ->condition('sid', $association_nid, '=')
+          ->range(0, 1)->execute()->rowCount();
 }
