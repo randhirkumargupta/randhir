@@ -31,6 +31,7 @@ function itg_quiz_quiz_form() {
     $quiz_no_of_winners = $node->field_quiz_winners[LANGUAGE_NONE][0]['value'];
     $quiz_type = $node->field_quiz_type[LANGUAGE_NONE][0]['value']; //immediate/contest_type
     $quiz_result_type = $node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value']; //qwr/ate
+    $quiz_score_type = $node->field_quiz_type[LANGUAGE_NONE][0]['value']; 
     
     if($question_display == 'random'){
       foreach ($node->field_quiz_add_questions[LANGUAGE_NONE] as $ques_arr_for_shuffle){
@@ -53,6 +54,7 @@ function itg_quiz_quiz_form() {
       $question_detail = entity_load('field_collection_item', array($question_arr['value']));
       
       $question = $question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value'];
+      $question_weightage = $question_detail[$question_arr['value']]->field_quiz_weightage[LANGUAGE_NONE][0]['value'];
       
       $skip_question[$num] = 'yes';
     
@@ -116,6 +118,19 @@ function itg_quiz_quiz_form() {
           '#type' => 'hidden',
           '#value' => $question,
       );
+     
+      if ($quiz_score_type == 'normal') {
+          $form['question_weightage_' . $question_arr['value']] = array(
+              '#type' => 'hidden',
+              '#value' => 1,
+          );
+        } else {
+          $form['question_weightage_' . $question_arr['value']] = array(
+              '#type' => 'hidden',
+              '#value' => $question_weightage,
+          );
+        }
+
       
       $form['question_id' . $num] = array(
           '#type' => 'hidden',
@@ -255,7 +270,6 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
   $form_detail = $form_state['values'];
   $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
   $num = $btn_num_arr[1];
-
   
   //Extract user type
   if ($user->uid) {
@@ -270,13 +284,11 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
   }
   
   
-
-    
-  //Insert each question and answer in to DB
+//Insert each question and answer in to DB
   if ($form_state['values']['question_type' . $num] == 'radios') {
-    
-    $ans_op_arr = explode('-', $form_state['values']['answer_option' . $num]);
-       if($ans_op_arr[0] == $form_state['values']['correct_answer' . $num][0]){
+   $ans_op_arr = explode('-', $form_state['values']['answer_option' . $num]);
+   if($ans_op_arr[0] == $form_state['values']['correct_answer' . $num][0]){
+     $_SESSION['score_radios'] = $_SESSION['score_radios'] + $form_state['values']['question_weightage_'.$form_state['values']['question_id' . $num]];
      $currect_ans = 'yes';
    } else {
      $currect_ans = 'no';
@@ -310,6 +322,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
         $ans_op_arr = explode('-', $value);
         if ($ans_op_arr[0] == $form_state['values']['correct_answer' . $num][$i]) {
           $currect_ans = 'yes';
+          $ans_corr[] = $form_state['values']['correct_answer' . $num][$i];
         } else {
           $currect_ans = 'no';
         }
@@ -336,8 +349,21 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
       }
       $i++;
     }
-    
+ 
+    $corr_ans_for_this_ques = itg_quiz_get_correct_answer($form_state['values']['question_id' . $num]);
+
+    if (count($ans_corr) == count($corr_ans_for_this_ques)) {
+      $arr_diff_count = count(array_diff($corr_ans_for_this_ques, $ans_corr));
+      if ($arr_diff_count < 1) {
+        $_SESSION['score_checkboxes'] = $_SESSION['score_checkboxes'] + $form_state['values']['question_weightage_' . $form_state['values']['question_id' . $num]];
+      } else {
+        $_SESSION['score_checkboxes'] = $_SESSION['score_checkboxes'] ? $_SESSION['score_checkboxes'] : 0;
+      }
+    }
   }
+  
+  
+  $total_score = $_SESSION['score_radios'] + $_SESSION['score_checkboxes'];
 
   if ($num == ($form_detail['question_total'] - 1)) {
     $output = '';
@@ -347,23 +373,26 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
         $total_ques_attempt = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL);
         $correct_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
         $incorrect_answer = $total_ques_attempt - $correct_answer;
-        $winners_list = itg_quiz_winners_list($form_state['values']['nid'], $form_state['values']['no_of_winners']);
+
         $output = '<div class = "quiz-contest-result"> <h2 style="font-size:16px; margin: 10px 0px 5px 0px">Quiz Result:</h2>
         <div class = "quiz-contest-result"><strong>Total Question  attempted:</strong> ' . $total_ques_attempt . '</div>
         <div class = "quiz-contest-result"><strong>Correct Answer:</strong> ' . $correct_answer . '</div>
         <div class = "quiz-contest-result"><strong>Incorrect Answer:</strong> ' . $incorrect_answer . '</div>
-        <div class = "quiz-contest-result"><strong>Winners List:</strong></div>';
+        <div class = "quiz-contest-result"><strong>Total Score:</strong> ' . $total_score . '</div>';
+
         
-        //Display winner list
-        if(count($winners_list)<1){
-          $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp; No winner found!</div>';
-        } else {
-                  $i = 1;
-        foreach ($winners_list as $key => $value) {
-          $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp;'. $i.'. '.$value . '</div>';
-          $i++;
-        }
-        }
+        //Display Winners List
+//        $winners_list = itg_quiz_winners_list($form_state['values']['nid'], $form_state['values']['no_of_winners']);
+//        $output .= '<div class = "quiz-contest-result"><strong>Winners List:</strong></div>';
+//        if (count($winners_list) < 1) {
+//          $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp; No winner found!</div>';
+//        } else {
+//          $i = 1;
+//          foreach ($winners_list as $key => $value) {
+//            $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp;' . $i . '. ' . $value . '</div>';
+//            $i++;
+//          }
+//        }
 
         $output .= '</div>';
         drupal_set_message($output, 'message');
@@ -398,15 +427,17 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
             'user_name' => $user->name,
             'user_email' => $user->mail,
             'quiz_title' => $form_state['values']['quiz_title'],
-            'quiz_score' => itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes'),
+            'quiz_score' => $total_score ? $total_score : 0, //itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes'),
             'ques_attempt' => itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL),
             'ques_total' => $form_state['values']['question_total'],
             'quiz_key' => $_SESSION['quiz_unique_key'],
             'created' => time(),
         ))
         ->execute();
-
-    unset($_SESSION['quiz_unique_key']);
+    
+      unset($_SESSION['score_radios']);
+      unset($_SESSION['score_checkboxes']);
+      unset($_SESSION['quiz_unique_key']);
     
   }
 }

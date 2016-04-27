@@ -15,9 +15,11 @@ function itg_quiz_user_list() {
         <th>Email</th>
         <th>Quiz Taken</th>
         <th>Quiz Taken Date</th>
-        <th>Quiz Score</th>
-        <th>Attempted Question</th>
         <th>Total Question</th>
+        <th>Attempted Question</th>
+        <th>Correct</th>
+        <th>Incorrect</th>
+        <th>Total Score</th>
       </tr>';
     
       $answer_op_tbl = '';
@@ -28,14 +30,18 @@ function itg_quiz_user_list() {
       $result = $query->execute();
       
        while ($record = $result->fetchObject()) {
-       $answer_op_tbl .= '<tr>
+         $correct_answer = itg_quiz_contest_result($node->nid, $record->quiz_key, 'yes');
+         $incorrect_answer = $record->ques_attempt - $correct_answer;
+         $answer_op_tbl .= '<tr>
           <td>' . $record->user_name . '</td>
           <td>'.$record->user_email.'</td>
           <td>'.$record->quiz_title.'</td>
           <td>'.date('Y/m/d', $record->created).'</td>
-          <td>'.$record->quiz_score.'</td>
-          <td>'.$record->ques_attempt.'</td>
           <td>'.$record->ques_total.'</td>
+          <td>'.$record->ques_attempt.'</td>
+          <td>'.$correct_answer.'</td>
+          <td>'.$incorrect_answer.'</td>
+          <td>'.$record->quiz_score.'</td>
         </tr>';
       }
          $output.= $answer_op_tbl;
