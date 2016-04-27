@@ -31,7 +31,56 @@
       var type = settings.itg_quiz.settings.type;
       var nid = settings.itg_quiz.settings.nid;
       
-            //Expiry date treatment
+
+
+      //Restrict print issue date to select previous date in magazine form 
+      if (type === 'Quiz') {
+        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-1').datepicker({
+          changeYear: true,
+          minDate: '0',
+        });
+        $('#edit-field-survey-start-date-und-0-value-datepicker-popup, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-end-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup, #edit-field-survey-end-date-und-0-value-datepicker-popup-2, #edit-field-survey-end-date-und-0-value-datepicker-popup-3').prop("readonly", true);
+      }
+      
+      //Immediate and contest type radio button treatment
+      if ($("input[name='field_quiz_type[und]']:checked").val() === 'immediate') {
+        $('#edit-field-quiz-immediate-result').show();
+      } else {
+        $('#edit-field-quiz-immediate-result').hide();
+      }
+
+      $("input[name='field_quiz_type[und]']").on("click", function() {
+        var check_radio_name = $(this).val();
+        if (check_radio_name == 'immediate') {
+          $('#edit-field-quiz-immediate-result').show();
+        } else {
+          $('#edit-field-quiz-immediate-result').hide();
+        }
+      });
+      
+      //Scoring type treatment(Normal|Weightage)
+      if ($("input[name='field_quiz_scoring_type[und]']:checked'").val() === 'weight') {
+        $('.field-name-field-quiz-weightage').show();
+        $('.quiz-weightage-backup').remove();
+
+      } else {
+        $('.field-name-field-quiz-weightage').hide();
+        $('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
+
+      }
+
+      $("input[name='field_quiz_scoring_type[und]']").on("click", function() {
+        var check_radio_name = $(this).val();
+        if (check_radio_name == 'normal') {
+          $('.field-name-field-quiz-weightage').hide();
+          $('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
+        } else {
+          $('.field-name-field-quiz-weightage').show();
+          $('.quiz-weightage-backup').remove();
+        }
+      });
+      
+      //Expiry date treatment
       if($('input[name="field_survey_expity_date[und][1]"]').prop("checked") == true){
         $('#edit-field-survey-end-date').show();
       } else {
@@ -45,55 +94,8 @@
           $('#edit-field-survey-end-date').hide();
         }
       });
-
-      //Restrict print issue date to select previous date in magazine form 
-      if (type === 'Quiz') {
-        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-1').datepicker({
-          changeYear: true,
-          minDate: '0',
-        });
-        $('#edit-field-survey-start-date-und-0-value-datepicker-popup, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-end-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup, #edit-field-survey-end-date-und-0-value-datepicker-popup-2, #edit-field-survey-end-date-und-0-value-datepicker-popup-3').prop("readonly", true);
-      }
       
-      //Immediate and contest type radio button treatment
-      if ($("input[name='field_quiz_type[und]']").val() === 'immediate') {
-        $('#edit-field-quiz-immediate-result').show();
-      } else {
-        $('#edit-field-quiz-immediate-result').hide();
-      }
-      
-      $("input[name='field_quiz_type[und]']").on("click", function() {
-        var check_radio_name = $(this).val();
-        if (check_radio_name == 'immediate') {
-          $('#edit-field-quiz-immediate-result').show();
-        } else {
-          $('#edit-field-quiz-immediate-result').hide();
-        }
-      });
-      
-
-      
-      //Scoring type treatment
-     if ($("input[name='field_quiz_scoring_type[und]']").val() === 'normal') {
-        $('.field-name-field-quiz-weightage').hide();
-        $('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
-        
-      } else {
-        $('.field-name-field-quiz-weightage').show();
-        $('.quiz-weightage-backup').remove();
-      }
-      
-      $("input[name='field_quiz_scoring_type[und]']").on("click", function() {
-        var check_radio_name = $(this).val();
-        if (check_radio_name == 'normal') {
-          $('.field-name-field-quiz-weightage').hide();
-          $('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
-        } else {
-          $('.field-name-field-quiz-weightage').show();
-           $('.quiz-weightage-backup').remove();
-        }
-      });
-      
+      //Remove "quiz-weightage-backup" dic on click of Add more answer option button
       $('.field-name-field-quiz-options-answer .field-add-more-submit, .field-name-field-quiz-options-answer .button-remove').mousedown(function(){
         $('.quiz-weightage-backup').remove();
       })
