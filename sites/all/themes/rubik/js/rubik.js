@@ -451,17 +451,17 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
 //    }
 //  });
 
-    $('.field-name-field-quiz-add-questions .field-name-field-quiz-answer-type .form-radio[value="single_correct"]').change(function(){
-      var correctVal = $(this).is(":checked");
-      if(correctVal == true){
-        $(this).parents('.field-name-field-quiz-answer-type').siblings('.field-name-field-quiz-options-answer').find('.form-checkbox').attr('checked', false);
-      }
-    });
-    $('.field-name-field-quiz-add-questions .field-name-field-quiz-options-answer .form-checkbox').change(function(){
-      var correctVal = $(this).parents('.field-name-field-quiz-options-answer').siblings('.field-name-field-quiz-answer-type').find('.form-radio[value="single_correct"]').is(':checked');
-      if(correctVal == true){
-        $(this).parents('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
-      }
-    });
+//    $('.field-name-field-quiz-add-questions .field-name-field-quiz-answer-type .form-radio[value="single_correct"]').change(function(){
+//      var correctVal = $(this).is(":checked");
+//      if(correctVal == true){
+//        $(this).parents('.field-name-field-quiz-answer-type').siblings('.field-name-field-quiz-options-answer').find('.form-checkbox').attr('checked', false);
+//      }
+//    });
+//    $('.field-name-field-quiz-add-questions .field-name-field-quiz-options-answer .form-checkbox').change(function(){
+//      var correctVal = $(this).parents('.field-name-field-quiz-options-answer').siblings('.field-name-field-quiz-answer-type').find('.form-radio[value="single_correct"]').is(':checked');
+//      if(correctVal == true){
+//        $(this).parents('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
+//      }
+//    });
 };
 })(jQuery);

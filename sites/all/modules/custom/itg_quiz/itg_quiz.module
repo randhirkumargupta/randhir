@@ -176,6 +176,12 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
     if($form_id == 'itg_quiz_quiz_form'){
       drupal_set_title('India Today Quiz');
     }
+    
+    //Add two answer option default
+    if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'quiz') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')) {
+      drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-quiz-options-answer .field-add-more-submit').mousedown();
+        });", 'inline');
+   }
 }
 
 /**
@@ -195,10 +201,12 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
+  
+  $title = $form_state['node']->title;
   if (arg(2) == 'edit') {
-    drupal_set_message(t('Quiz has been updated.'));
+    drupal_set_message(t('Quiz <strong>'.$title.'</strong> has been updated.'));
   } else {
-    drupal_set_message(t('Quiz has been submitted for further review and approval.'));
+    drupal_set_message(t('Quiz <strong>'.$title.'</strong> has been submitted for further review and approval.'));
   }
 }
 
@@ -359,15 +367,15 @@ function itg_quiz_get_quiz_by_users($nid, $user_type){
  */
 function itg_quiz_get_total_quiz($nid){
     $result = db_select('itg_quiz_user', 'isu')
-            ->fields('isu')
-            ->condition('isu.nid', $nid, '=')
-            ->execute();
-    $total_quiz = $result->rowCount();
-    if($total_quiz){
-      return $total_quiz;
-    } else {
-      return 0;
-    }
+          ->fields('isu')
+          ->condition('isu.nid', $nid, '=')
+          ->execute();
+  $total_quiz = $result->rowCount();
+  if ($total_quiz) {
+    return $total_quiz;
+  } else {
+    return 0;
+  }
     
 }
 
@@ -432,6 +440,16 @@ function itg_quiz_contest_result($nid, $unique_key, $param = NULL){
  
 }
 
+function itg_quiz_get_total_score($nid, $unique_key){
+    $result = db_select('itg_quiz_detail', 'qd')
+          ->fields('qd')
+          ->condition('qd.nid', $nid, '=')
+          ->condition('qd.quiz_key', $unique_key, '=')
+          ->groupBy('qd.ques_id')
+          ->execute();
+  $total_quiz = $result->rowCount();
+  return $total_quiz ? $total_quiz : 0;
+}
 
 /**
  * Get winners list
@@ -439,32 +457,32 @@ function itg_quiz_contest_result($nid, $unique_key, $param = NULL){
  * @return Int
  */
 function itg_quiz_winners_list($nid, $range){
-    if(!empty($range)) {
-      $result = db_select('itg_quiz_detail', 'qd')
-              ->fields('qd')
-              ->condition('qd.nid', $nid, '=')
-              ->condition('qd.correct_answer', 'yes', '=')
-              ->groupBy('qd.quiz_key')
-              ->range(0, $range)
-              ->execute();
-    } else {
-      $result = db_select('itg_quiz_detail', 'qd')
-              ->fields('qd')
-              ->condition('qd.nid', $nid, '=')
-              ->condition('qd.correct_answer', 'yes', '=')
-              ->groupBy('qd.quiz_key')
-              ->range(0, 10)
-              ->execute();
-    }
+    if (!empty($range)) {
+    $result = db_select('itg_quiz_detail', 'qd')
+            ->fields('qd')
+            ->condition('qd.nid', $nid, '=')
+            ->condition('qd.correct_answer', 'yes', '=')
+            ->groupBy('qd.quiz_key')
+            ->range(0, $range)
+            ->execute();
+  } else {
+    $result = db_select('itg_quiz_detail', 'qd')
+            ->fields('qd')
+            ->condition('qd.nid', $nid, '=')
+            ->condition('qd.correct_answer', 'yes', '=')
+            ->groupBy('qd.quiz_key')
+            ->range(0, 10)
+            ->execute();
+  }
 
-    while ($record = $result->fetchAssoc()) {
-      $winners_arr[$record['quiz_key']] = itg_quiz_winners_count_uniquekey($nid, $record['quiz_key']);
-    }
-    arsort($winners_arr);
-    foreach($winners_arr as $key => $value){
-      $winner_final_list[] = itg_quiz_winner_user_list($key);
-    }
-    return $winner_final_list;
+  while ($record = $result->fetchAssoc()) {
+    $winners_arr[$record['quiz_key']] = itg_quiz_winners_count_uniquekey($nid, $record['quiz_key']);
+  }
+  arsort($winners_arr);
+  foreach ($winners_arr as $key => $value) {
+    $winner_final_list[] = itg_quiz_winner_user_list($key);
+  }
+  return $winner_final_list;
 }
 
 /**
@@ -472,20 +490,19 @@ function itg_quiz_winners_list($nid, $range){
  * @param Int $nid
  * @return Int
  */
-function itg_quiz_winners_count_uniquekey($nid, $unique_key){
-    $result = db_select('itg_quiz_detail', 'qd')
-            ->fields('qd')
-            ->condition('qd.quiz_key', $unique_key, '=')
-            ->condition('qd.correct_answer', 'yes', '=')
-            ->condition('qd.nid', $nid, '=')
-            ->execute();
+function itg_quiz_winners_count_uniquekey($nid, $unique_key) {
+  $result = db_select('itg_quiz_detail', 'qd')
+          ->fields('qd')
+          ->condition('qd.quiz_key', $unique_key, '=')
+          ->condition('qd.correct_answer', 'yes', '=')
+          ->condition('qd.nid', $nid, '=')
+          ->execute();
   $total_quiz = $result->rowCount();
   if ($total_quiz > 0) {
     return $total_quiz;
   } else {
     return 0;
   }
-    
 }
 
 /**
@@ -493,22 +510,21 @@ function itg_quiz_winners_count_uniquekey($nid, $unique_key){
  * @param type $unique_key
  * @return type
  */
-function itg_quiz_winner_user_list($unique_key){
-      $result = db_select('itg_quiz_detail', 'qd')
-            ->fields('qd', array('uid'))
-            ->condition('qd.quiz_key', $unique_key, '=')
-            ->range(0,1)  
-            ->execute();
-          while ($record = $result->fetchAssoc()) {
-            if($record['uid'] == 0){
-              $user_name = 'Anonymous';
-            } else {
-              $user = user_load($record['uid']);
-              $user_name = ucfirst($user->name);       
-            }
-      
+function itg_quiz_winner_user_list($unique_key) {
+  $result = db_select('itg_quiz_detail', 'qd')
+          ->fields('qd', array('uid'))
+          ->condition('qd.quiz_key', $unique_key, '=')
+          ->range(0, 1)
+          ->execute();
+  while ($record = $result->fetchAssoc()) {
+    if ($record['uid'] == 0) {
+      $user_name = 'Anonymous';
+    } else {
+      $user = user_load($record['uid']);
+      $user_name = ucfirst($user->name);
     }
-    return $user_name;
+  }
+  return $user_name;
 }
 
 /**
@@ -518,15 +534,15 @@ function itg_quiz_winner_user_list($unique_key){
  */
 function itg_quiz_get_correct_answer($ques_id){
   $question_detail = entity_load('field_collection_item', array($ques_id));
-  foreach($question_detail[$ques_id]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option){
-        $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
-        foreach($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $correct_ans){
-           if($correct_ans['value'] == 'Yes'){
-           $correct_ans_op[] = $ans_option['value'];
-           }
-        }
+  foreach ($question_detail[$ques_id]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option) {
+    $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
+    foreach ($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $correct_ans) {
+      if ($correct_ans['value'] == 'Yes') {
+        $correct_ans_op[] = $ans_option['value'];
       }
-      return $correct_ans_op;
+    }
+  }
+  return $correct_ans_op;
 }
 
 /**

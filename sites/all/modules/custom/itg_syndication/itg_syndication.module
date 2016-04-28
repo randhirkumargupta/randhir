@@ -197,7 +197,7 @@ function itg_syndication_field_group_build_pre_render_alter(&$element) {
  * @param array $form_state
  */
 function itg_syndication_node_validate($node, $form, &$form_state) {  
-  if ($node->type == 'syndication_client') {
+  if ($node->type == 'syndication_client' && $form_state['clicked_button']['#value'] != 'Delete') {
     $sharing_mode = $node->field_content_sharing_mode['und'][0]['value'];
     switch ($sharing_mode) {
       // Web url Case
@@ -207,8 +207,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
         }
         if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $node->field_service_fetch_link['und'][0]['value'])) {
           form_set_error('field_service_fetch_link', t('Invalid URL.'));
-        }
-        //$node->title .= ' Fetch web URL (our server)';
+        }        
         break;
 
       // FTP case
@@ -216,25 +215,21 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
         if (isset($node->field_ftp_ip_address['und'][0]['value']) && $node->field_ftp_ip_address['und'][0]['value'] == '') {
           form_set_error('field_ftp_ip_address', t('FTP IP Address field is required.'));
         }
-        elseif (!filter_var($node->field_ftp_ip_address['und'][0]['value'], FILTER_VALIDATE_IP)) {
+        if (!filter_var($node->field_ftp_ip_address['und'][0]['value'], FILTER_VALIDATE_IP)) {
           form_set_error('field_ftp_ip_address', t('FTP IP Address is not valid.'));
         }
-        elseif (isset($node->field_ftp_username['und'][0]['value']) && $node->field_ftp_username['und'][0]['value'] == '') {
+        if (isset($node->field_ftp_username['und'][0]['value']) && $node->field_ftp_username['und'][0]['value'] == '') {
           form_set_error('field_ftp_username', t('FTP Username field is required.'));
         }
-        elseif (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $node->field_ftp_username['und'][0]['value'])) {
+        if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $node->field_ftp_username['und'][0]['value'])) {
           form_set_error('field_ftp_username', t('FTP Username must be minimum 8 digit alphanumeric and without space.'));
         }
-        elseif (isset($node->field_ftp_password['und'][0]['value']) && $node->field_ftp_password['und'][0]['value'] == '') {
+        if (isset($node->field_ftp_password['und'][0]['value']) && $node->field_ftp_password['und'][0]['value'] == '') {
           form_set_error('field_ftp_password', t('FTP Password field is required.'));
         }
-        elseif (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $node->field_ftp_password['und'][0]['value'])) {
+        if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $node->field_ftp_password['und'][0]['value'])) {
           form_set_error('field_ftp_password', t('FTP Password must be minimum 8 digit alphanumeric and without space.'));
-        }
-        else {
-          
-        }
-        //$node->title .= ' Via FTP location';
+        }        
         break;
 
       // Mail to case
@@ -246,8 +241,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
         // Validate email                
         if (!filter_var($node->field_email_address['und'][0]['value'], FILTER_VALIDATE_EMAIL)) {
           form_set_error('field_email_address', t('Please enter valid email address.'));
-        }        
-        //$node->title .= ' Via Email';
+        }                
     }
     
     // Validate same client with same sharing mode.
