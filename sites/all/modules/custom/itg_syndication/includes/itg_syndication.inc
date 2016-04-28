@@ -158,8 +158,9 @@ function itg_syndication_mail_syndication($data, $syndication_node, $file_path) 
     'body' => 'test',
     'attachment' => $attachment
   );
+  $language = language_default();
 
-  drupal_mail('itg_syndication', $key, $to, $language, $params, $from);
+  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);
 }
 
 /**
