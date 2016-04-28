@@ -20,6 +20,7 @@ function itg_syndication_menu() {
   $items['syndication/feed-generator-of-content'] = array(
     'page callback' => 'feed_generator_of_content',
     'access arguments' => array('access itg story'),
+    'page arguments' => array(2),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_syndication.inc',
   );
@@ -50,11 +51,12 @@ function itg_syndication_check_duplicate($title, $sharing_mode, $nid = NULL) {
 
 /**
  * Callback function for client list
+ * @param string $voc_name Vocabulary name
  * @return array
  */
-function itg_syndication_get_client() {
+function itg_syndication_get_client($voc_name) {
   // Load vocabulary id from machine name.
-  $vid = taxonomy_vocabulary_machine_name_load('client_title');
+  $vid = taxonomy_vocabulary_machine_name_load($voc_name);
 
   // Load list of clients from master
   $options = taxonomy_get_tree($vid->vid);
@@ -84,7 +86,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
       '#title' => t('Client Title'),
       '#description' => t('Client’s name will be fetched from Master Sheet.  e.g. Airtel, Vodafone etc'),
       '#required' => TRUE,
-      '#options' => itg_syndication_get_client(),
+      '#options' => itg_syndication_get_client('client_title'),
       '#default_value' => $form['nid']['#value'] != NULL ? $form['title']['#default_value'] : '_none',
     );
 
@@ -104,11 +106,11 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {
-    //dpm($form_state);
+    //$form['type']['#options'] = itg_syndication_get_client('content_for_syndication');
     $form['client_title'] = array(
       '#type' => 'select',
       '#title' => t('Select Client'),
-      '#options' => itg_syndication_get_client(),
+      '#options' => itg_syndication_get_client('client_title'),
       '#default_value' => '_none',
       '#weight' => 1,
     );

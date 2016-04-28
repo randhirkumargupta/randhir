@@ -257,6 +257,39 @@ function user_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_subscribe_for_newsletter'.
+  $field_instances['user-user-field_subscribe_for_newsletter'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 9,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_subscribe_for_newsletter',
+    'label' => 'Subscribe for newsletter',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_user_picture'.
   $field_instances['user-user-field_user_picture'] = array(
     'bundle' => 'user',
@@ -373,6 +406,7 @@ function user_management_field_default_field_instances() {
   t('Please enter your last name.');
   t('Please enter your mobile number.');
   t('Section');
+  t('Subscribe for newsletter');
 
   return $field_instances;
 }

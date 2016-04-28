@@ -4,33 +4,6 @@
  * Inc file contains the functions
  */
 
-function mobile_services_generator_of_content_old() {
-  $node_array = array(220, 363);
-
-  $file_path = drupal_realpath('public://');
-  $file_path = '/var/www/html/itgcms/sites/default/files/syndication_xml';
-  $dom = new DOMDocument('1.0', 'UTF-8');
-  $dom->formatOutput = true;
-
-  $root = $dom->createElement('student');
-  $dom->appendChild($root);
-
-
-  foreach ($node_array as $key => $val) {
-    $node = node_load($val);
-    //p($node);
-    $result = $dom->createElement('result');
-    $root->appendChild($result);
-    $result->setAttribute('id', $key + 1);
-    $result->appendChild($dom->createElement('title', $node->title));
-    $result->appendChild($dom->createElement('body', $node->body[LANGUAGE_NONE][0]['value']));
-    $result->appendChild($dom->createElement('headline', $node->body[LANGUAGE_NONE][0]['value']));
-  }
-  //echo '<xmp>'. $dom->saveXML() .'</xmp>';
-
-  $dom->save($file_path . '/result.xml') or die('XML Create Error');
-}
-
 function mobile_services_generator_of_content() {
 
   $result = get_services_result();
@@ -156,17 +129,6 @@ Ramdev's business plan: Make Nestle's bird, Colgate's gate disappear
 
     $items->appendChild($item);
 
-    // $multimedia = $items->appendChild($doc->createElement('multimedia'));
-    // for multimedia
-    //$multimedia = $doc->createElement('multimedia');
-    //   $multimedia = $root->appendChild($doc->createElement('multimedia'));
-    // $images = $multimedia->appendChild($doc->createElement('images'));
-    //  $item = $doc->createElement('item');
-    // $item->appendChild($doc->createElement('id', 'Noodle'));
-    // $multimedia->appendChild($doc->createElement('id', 'Noodle'));
-    //   $items->appendChild($multimedia);
-    //$items->appendChild($item_short_title);
-
 
     $item = $doc->createElement('item');
     $item->appendChild($doc->createElement('name', 'Sausage'));
@@ -267,26 +229,30 @@ function itg_mobile_services_generate_simple_text($query) {
 }
 
 function mobile_services_generator_data() {
-   $arg = arg();
+  $arg = arg();
   //p(arg());
+  watchdog("service arg", '<pre>' . print_r($arg, true) . '</pre>');
   if ($arg[1] == 'token' && !empty($arg[2])) {
     $token = base64_decode(arg(2));
     $record = itg_mobile_service_get_client_token($token);
-    $cid = $record['cid'];
-    $sid = $record['sid'];
+    if (is_array($record) && count($record) > 0) {
+      watchdog("check_client_token", '<pre>' . print_r($record, true) . '</pre>');
+      $cid = $record['cid'];
+      $sid = $record['sid'];
 
-    $delivery_mode = $record['delivery_mode'];
-    $service_frequency = $record['service_frequency'];
-    $content_sharing_mode = $record['content_sharing_mode'];
-    $ftp_ip_address = $record['ftp_ip_address'];
-    $ftp_username = $record['ftp_username'];
-    $ftp_password = $record['ftp_password'];
-    $service_email_address = $record['service_email_address'];
-    $service_expiry_date = $record['service_expiry_date'];
+      $delivery_mode = $record['delivery_mode'];
+      $service_frequency = $record['service_frequency'];
+      $content_sharing_mode = $record['content_sharing_mode'];
+      $ftp_ip_address = $record['ftp_ip_address'];
+      $ftp_username = $record['ftp_username'];
+      $ftp_password = $record['ftp_password'];
+      $service_email_address = $record['service_email_address'];
+      $service_expiry_date = $record['service_expiry_date'];
+    }
   }
 //echo $cid . " = " .$sid;
   $result = get_services_result($cid, $sid);
-
+  watchdog("check_service_result", '<pre>' . print_r($result, true) . '</pre>');
   foreach ($result as $item) {
 
     $sid = $item->association_service_target_id;
@@ -315,32 +281,39 @@ left join field_data_field_service_video as content_video ON service_association
 where service_association.field_service_association_title_target_id = '$sid' AND content_text.entity_id <>  'NULL'")->fetchAll();
 
 
+    // watchdog("check_content_result", $query);
 
     switch ($delivery_mode) {
       case 1:
         // Code for XMLs
         print_mobile_xml($query);
+        // watchdog('print_mobile_xml', $query);
 
         break;
       case 2:
         // Code for RSS
         print_mobile_rss($query);
+        // watchdog('print_mobile_rss', $query);
         break;
       case 3:
         // Code for MRSS
         print_mobile_mrss($query);
+        //  watchdog('print_mobile_mrss', $query);
         break;
       case 4:
         // Code for USSD
         print_mobile_ussd($query);
+        //  watchdog('print_mobile_ussd', $query);
         break;
       case 5:
         // Code for SMS
         print_mobile_sms($query);
+        //  watchdog('print_mobile_sms', $query);
         break;
       case 6:
         // Code for Simple Text Feed
         print_mobile_simple_feed($query);
+        //  watchdog('print_mobile_simple_feed', $query);
         break;
     }
   }
@@ -362,6 +335,21 @@ function itg_mobile_service_get_client_token($token) {
 
 function print_mobile_xml($query) {
 
+  global $base_url;
+  $file_path = drupal_realpath('public://');
+  $file_path = $file_path . '/mobile_xml';
+  $doc = new DOMDocument('1.0', 'UTF-8');
+  $doc->formatOutput = true;
+  //$doc->preserveWhiteSpace = false;     
+
+  $root = $doc->appendChild($doc->createElement('channel'));
+  $root = $doc->appendChild($root);
+  $root->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS'));
+  $root->appendChild($doc->createElement('description', 'India Today'));
+  $root->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
+  $root->appendChild($doc->createElement('lastBuildDate', 'Mon, 03 Feb 2014 12:38:02 IST'));
+  $root->appendChild($doc->createElement('generator', 'FeedCreator 1.7.2'));
+
   foreach ($query as $row) {
 
     $content_text = $row->content_text;
@@ -369,16 +357,6 @@ function print_mobile_xml($query) {
     $content_image_width = $row->content_image_width;
     $content_image_height = $row->content_image_height;
 
-    $short_title = "Ramdev's business plan: Make Nestle's bird, Colgate's gate disappear";
-
-    $file_path = drupal_realpath('public://');
-    $file_path = '/var/www/html/itgcms/sites/default/files/mobile_xml';
-    $doc = new DOMDocument('1.0', 'UTF-8');
-    $doc->formatOutput = true;
-    //$doc->preserveWhiteSpace = false;     
-
-    $root = $doc->appendChild($doc->createElement('data'));
-    $root = $doc->appendChild($root);
     $root->appendChild($doc->createElement('keyword', 'indiatoday'));
     $root->appendChild($doc->createElement('timestamp', 'en-US'));
     $item = $doc->createElement('content');
@@ -386,15 +364,15 @@ function print_mobile_xml($query) {
     $root->appendChild($doc->createElement('transid', '31313131'));
     $root->appendChild($item);
   }
-
   $doc->save($file_path . '/result.xml') or die('XML Create Error');
-  drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result.xml');
+  drupal_goto($base_url . "/sites/default/files/mobile_xml/result.xml");
 }
 
 function print_mobile_rss($query) {
   global $base_url;
   $file_path = drupal_realpath('public://');
-  $file_path = '/var/www/html/itgcms/sites/default/files/mobile_xml';
+  echo $file_path = $file_path . '/mobile_xml';
+  //exit;
   $doc = new DOMDocument('1.0', 'UTF-8');
   $doc->formatOutput = true;
   //$doc->preserveWhiteSpace = false;     
@@ -425,13 +403,13 @@ function print_mobile_rss($query) {
   }
 
   $doc->save($file_path . '/result_rss.xml') or die('XML Create Error');
-  drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result_rss.xml');
+  drupal_goto($base_url . "/sites/default/files/mobile_xml/result_rss.xml");
 }
 
 function print_mobile_mrss($query) {
   global $base_url;
   $file_path = drupal_realpath('public://');
-  $file_path = '/var/www/html/itgcms/sites/default/files/mobile_xml';
+  $file_path = $file_path . '/mobile_xml';
   // header("Content-Type: application/rss+xml; charset=UTF-8");
   $doc = new DOMDocument('1.0', 'iso-8859-1');
   $doc->formatOutput = true;
@@ -501,12 +479,13 @@ function print_mobile_mrss($query) {
 
   $channel->appendChild($items);
   $doc->save($file_path . '/result_mrss.xml') or die('XML Create Error');
-  drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result_mrss.xml');
+  drupal_goto($base_url . "/sites/default/files/mobile_xml/result_mrss.xml");
 }
 
 function print_mobile_sms($query) {
+  global $base_url;
   $file_path = drupal_realpath('public://');
-  $file_path = '/var/www/html/itgcms/sites/default/files/mobile_xml';
+  $file_path = $file_path . '/mobile_xml';
   $doc = new DOMDocument('1.0', 'UTF-8');
   $doc->formatOutput = true;
   //$doc->preserveWhiteSpace = false;     
@@ -525,29 +504,30 @@ function print_mobile_sms($query) {
   $root->appendChild($doc->createElement('transid', '31313131'));
 
   $doc->save($file_path . '/result_sms.xml') or die('XML Create Error');
-  drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result_sms.xml');
+  // drupal_goto($base_url . "/sites/default/files/mobile_image/result_sms.xml");
+  drupal_goto($base_url . "/sites/default/files/mobile_xml/result_sms.xml");
 }
 
 function print_mobile_simple_feed($query) {
+  global $base_url;
   $file_path = drupal_realpath('public://');
-  $file_path = '/var/www/html/itgcms/sites/default/files/mobile_xml';
+  $file_path = $file_path . '/mobile_xml';
 
   foreach ($query as $row) {
     $content_text .= $row->content_text;
   }
   print $content_text;
-  // drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result.xml');     
 }
 
 function print_mobile_ussd($query) {
+  global $base_url;
   $file_path = drupal_realpath('public://');
-  $file_path = '/var/www/html/itgcms/sites/default/files/mobile_xml';
+  $file_path = $file_path . '/mobile_xml';
 
   foreach ($query as $row) {
     $content_text .= $row->content_text;
   }
   print $content_text;
-  // drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result.xml');     
 }
 
 function mobile_services_token_list() {
