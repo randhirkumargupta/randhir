@@ -38,7 +38,7 @@ function itg_quiz_winners_user_list($nid) {
   $query = db_select('itg_quiz_user_score', 'qs');
   $query->fields('qs')
       ->condition('qs.nid', $nid, '=')
-      //->condition('qs.quiz_score', 0, '!=')
+      ->condition('qs.quiz_score', 0, '!=')
       ->orderBy('qs.quiz_score', 'DESC');
   $result = $query->execute();
   $i = 0;
