@@ -88,7 +88,11 @@ function features_for_quiz_field_default_field_instances() {
   // 'field_collection_item-field_quiz_add_questions-field_quiz_weightage'.
   $field_instances['field_collection_item-field_quiz_add_questions-field_quiz_weightage'] = array(
     'bundle' => 'field_quiz_add_questions',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
