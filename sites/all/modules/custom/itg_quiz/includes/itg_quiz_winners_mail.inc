@@ -104,7 +104,7 @@ $winners = '';
 //        <td>'.$value['quiz_score'].'</td></tr>';
 //     
 //  }
-  $content = '<p>Dear user <p/><p>Thanks for taking our quiz. Winners list is given below:<p/>';
+  $content = '<p>Dear user, </p><p>Thanks for taking our quiz. Winners list is given below:</p>';
   $i = 1;
     foreach ($winner_records as $key=>$value) {
    $winners .= '<p>'.$i.'. '.$value['user_name'].'('.$value['quiz_score'].')'.'</p>';
