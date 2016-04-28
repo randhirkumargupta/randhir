@@ -58,7 +58,7 @@ function astro_feature_views_default_views() {
     'view_node' => 'view_node',
     'nothing' => 'nothing',
   );
-  $handler->display->display_options['style_options']['default'] = 'changed';
+  $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'counter' => array(
       'align' => '',
@@ -434,7 +434,7 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['filters']['field_astro_frequency_value']['group'] = 1;
   $handler->display->display_options['filters']['field_astro_frequency_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator_id'] = 'field_astro_frequency_value_op';
-  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['label'] = 'Select Frequency';
+  $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['label'] = 'Frequency';
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['operator'] = 'field_astro_frequency_value_op';
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['identifier'] = 'field_astro_frequency_value';
   $handler->display->display_options['filters']['field_astro_frequency_value']['expose']['remember_roles'] = array(
@@ -448,6 +448,7 @@ function astro_feature_views_default_views() {
     20 => 0,
     6 => 0,
     21 => 0,
+    19 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
@@ -455,7 +456,6 @@ function astro_feature_views_default_views() {
     17 => 0,
     14 => 0,
     12 => 0,
-    19 => 0,
     15 => 0,
     18 => 0,
   );
