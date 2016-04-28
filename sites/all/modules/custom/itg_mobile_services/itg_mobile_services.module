@@ -248,6 +248,7 @@ function itg_mobile_services_node_insert($node) {
 
 function itg_mobile_services_token_insert($node) {
   global $user;
+  global $base_url;
   $timestamp = strtotime("now") . "_";
   $six_digit_random_number = mt_rand(100000, 999999);
   $timestamps = date("Y-m-d H:i:s");
@@ -291,7 +292,7 @@ function itg_mobile_services_token_insert($node) {
           'delivery_mode' => $delivery_mode,
           'service_frequency' => $service_frequency,
           'content_sharing_mode' => $content_sharing_mode,
-          'service_fetch_link' => 'http://localhost/itgcms/mobile_services/token/' . $str,
+          'service_fetch_link' => $base_url . '/mobile_services/token/' . $str,
           'ftp_ip_address' => $ftp_ip_address,
           'ftp_username' => $ftp_username,
           'ftp_password' => $ftp_password,
@@ -309,6 +310,7 @@ function itg_mobile_services_token_insert($node) {
 
 function itg_mobile_services_token_update($node) {
   global $user;
+  global $base_url;
   $timestamp = strtotime("now") . "_";
   $six_digit_random_number = mt_rand(100000, 999999);
   $timestamps = date("Y-m-d H:i:s");
@@ -350,7 +352,7 @@ function itg_mobile_services_token_update($node) {
             'delivery_mode' => $delivery_mode,
             'service_frequency' => $service_frequency,
             'content_sharing_mode' => $content_sharing_mode,
-            'service_fetch_link' => 'http://localhost/itgcms/mobile_services/token/' . $str,
+            'service_fetch_link' => $base_url . '/mobile_services/token/' . $str,
             'ftp_ip_address' => $ftp_ip_address,
             'ftp_username' => $ftp_username,
             'ftp_password' => $ftp_password,
@@ -373,7 +375,7 @@ function itg_mobile_services_token_update($node) {
             'delivery_mode' => $delivery_mode,
             'service_frequency' => $service_frequency,
             'content_sharing_mode' => $content_sharing_mode,
-            'service_fetch_link' => 'http://localhost/itgcms/mobile_services/token/' . $str,
+            'service_fetch_link' => $base_url . '/mobile_services/token/' . $str,
             'ftp_ip_address' => $ftp_ip_address,
             'ftp_username' => $ftp_username,
             'ftp_password' => $ftp_password,
