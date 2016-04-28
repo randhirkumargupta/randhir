@@ -15,10 +15,10 @@ function syndication_feature_field_default_field_instances() {
     'bundle' => 'syndication_client',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'User will enter short description about the client.',
+    'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -42,7 +42,7 @@ function syndication_feature_field_default_field_instances() {
     'settings' => array(
       'display_summary' => 0,
       'exclude_cv' => FALSE,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -357,12 +357,12 @@ function syndication_feature_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'custom_date_d_m_y_',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
         'weight' => 9,
@@ -380,7 +380,7 @@ function syndication_feature_field_default_field_instances() {
     'label' => 'Expiry date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -393,7 +393,7 @@ function syndication_feature_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'site-wide',
+        'input_format' => 'd/m/Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -457,7 +457,6 @@ function syndication_feature_field_default_field_instances() {
   t('Frequency');
   t('Mail to');
   t('Short Description ');
-  t('User will enter short description about the client.');
 
   return $field_instances;
 }

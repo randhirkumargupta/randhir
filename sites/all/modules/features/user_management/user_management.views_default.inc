@@ -217,7 +217,7 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
-  /* Field: User: Mobile number */
+  /* Field: Field: Mobile Number */
   $handler->display->display_options['fields']['field_mobile_number']['id'] = 'field_mobile_number';
   $handler->display->display_options['fields']['field_mobile_number']['table'] = 'field_data_field_mobile_number';
   $handler->display->display_options['fields']['field_mobile_number']['field'] = 'field_mobile_number';
@@ -234,13 +234,15 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'users';
   $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg_date_with_time';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: User: Last access */
   $handler->display->display_options['fields']['access']['id'] = 'access';
   $handler->display->display_options['fields']['access']['table'] = 'users';
   $handler->display->display_options['fields']['access']['field'] = 'access';
-  $handler->display->display_options['fields']['access']['date_format'] = 'short';
+  $handler->display->display_options['fields']['access']['date_format'] = 'itg_date_with_time';
+  $handler->display->display_options['fields']['access']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['access']['second_date_format'] = 'long';
   /* Field: User: Active */
   $handler->display->display_options['fields']['status']['id'] = 'status';
@@ -371,7 +373,7 @@ function user_management_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: User: Mobile number (field_mobile_number) */
+  /* Filter criterion: Field: Mobile Number (field_mobile_number) */
   $handler->display->display_options['filters']['field_mobile_number_value']['id'] = 'field_mobile_number_value';
   $handler->display->display_options['filters']['field_mobile_number_value']['table'] = 'field_data_field_mobile_number';
   $handler->display->display_options['filters']['field_mobile_number_value']['field'] = 'field_mobile_number_value';
@@ -444,6 +446,11 @@ function user_management_views_default_views() {
   $handler->display->display_options['filters']['rid_1']['table'] = 'users_roles';
   $handler->display->display_options['filters']['rid_1']['field'] = 'rid';
   $handler->display->display_options['filters']['rid_1']['operator'] = 'not empty';
+  /* Filter criterion: User: Current */
+  $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
+  $handler->display->display_options['filters']['uid_current']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
+  $handler->display->display_options['filters']['uid_current']['value'] = '0';
   $handler->display->display_options['path'] = 'manage-users';
   $export['manage_users'] = $view;
 
