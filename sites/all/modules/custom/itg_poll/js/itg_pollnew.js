@@ -23,6 +23,7 @@
             
             var getOptionAnswerVal;
             $('#edit-field-poll-answer-option-und').on('change', function() {
+                $('.field-name-field-ans-caption input').val(''); // caption value reset
                 getOptionAnswerVal = $("#edit-field-poll-answer-option-und").val();
                 if (getOptionAnswerVal == 1) {
                     $('#edit-field-poll-answer').show();
@@ -60,22 +61,32 @@
             $("#edit-field-display-result-und-2").prop("disabled", true);
             $('#edit-field-show-end-date-und-1').click(function() {
                 if ($("#edit-field-show-end-date-und-1").is(":not(:checked)")) {
-                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-1").val('');
+                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val('');
+                    $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val('');
                     $("#edit-field-display-result-und-1").prop("checked", true);
                     $("#edit-field-display-result-und-2").prop("disabled", true);
-                }
-            });
-            $('document').ready(function() {
-                if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-1').val()) {
+                }else{
+                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val($('#edit-field-poll-start-date-und-0-value-datepicker-popup-2').val());
+                    $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val('23:00');
+                    if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
                     $("#edit-field-display-result-und-2").prop("disabled", false);
                 } else {
                     $("#edit-field-display-result-und-1").prop("checked", true);
                     $("#edit-field-display-result-und-2").prop("disabled", true);
                 }
-                jQuery("#edit-field-poll-end-date-und-0-value-datepicker-popup-1").datepicker({
+                }
+            });
+            $('document').ready(function() {
+                if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
+                    $("#edit-field-display-result-und-2").prop("disabled", false);
+                } else {
+                    $("#edit-field-display-result-und-1").prop("checked", true);
+                    $("#edit-field-display-result-und-2").prop("disabled", true);
+                }
+                jQuery("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").datepicker({
                     minDate: 0,
                     onClose: function() {
-                        if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-1').val()) {
+                        if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
                             $("#edit-field-display-result-und-2").prop("disabled", false);
                         } else {
                             $("#edit-field-display-result-und-2").prop("disabled", true);
