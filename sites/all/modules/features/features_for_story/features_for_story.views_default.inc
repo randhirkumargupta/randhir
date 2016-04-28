@@ -1154,7 +1154,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
   $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
-  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Lock Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Locked Story';
   $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
   $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
   $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
