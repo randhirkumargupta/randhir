@@ -56,7 +56,8 @@ function itg_workflow_after_build($form, &$form_state) {
   
   // Code for rejection master message
   if ($form['#entity']->workbench_moderation['current']->state == 'needs_review') {
-    $terms=taxonomy_get_tree(22);
+    $vid = taxonomy_vocabulary_machine_name_load('reasons_for_reject');
+    $terms=taxonomy_get_tree($vid->vid);
     foreach($terms as $key => $val){
       $term_name[$val->name] = $val->name;
     }
@@ -123,6 +124,7 @@ function itg_workflow_after_build($form, &$form_state) {
                   });
                 } else {
                   jQuery(".form-item-log").show();
+                  jQuery(".reasons-form").hide();
                 }
               });
             });', array('type' => 'inline', 'scope' => 'footer'));
