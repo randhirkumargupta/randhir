@@ -14,6 +14,7 @@ function itg_quiz_winners_mail_list() {
   $user_email_arr = array_slice($user_email_arr, 0, $no_of_winner, true);
   $user_email_str = implode(',',$user_email_arr);
   $mail_content = itg_quiz_get_mail_content($nid);
+  
     $params = array(
       'body' => $mail_content,
       'subject' => 'India Today | Quiz Winners',
@@ -21,7 +22,7 @@ function itg_quiz_winners_mail_list() {
 
     $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
-      drupal_set_message('Winners list has been sent to users.');
+      drupal_set_message('Mail has been sent successfully.');
       drupal_goto('quiz-user-list/'.$nid);
     }
     else {
