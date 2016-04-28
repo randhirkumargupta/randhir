@@ -64,7 +64,7 @@ function itg_quiz_winners_list_mail($key, &$message, $params) {
     case 'send_mail_to_winners':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
