@@ -113,6 +113,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         unset($form['account']['status']);
         unset($form['field_story_expiry_date']);
         unset($form['field_notify_user_of_update_acco']);
+        unset($form['field_subscribe_for_newsletter']);
         }
     }
 
