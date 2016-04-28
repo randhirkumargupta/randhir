@@ -267,9 +267,9 @@ function itg_mobile_services_generate_simple_text($query) {
 }
 
 function mobile_services_generator_data() {
-
+   $arg = arg();
   //p(arg());
-  if (arg(1) == 'token' && !empty(arg(2))) {
+  if ($arg[1] == 'token' && !empty($arg[2])) {
     $token = base64_decode(arg(2));
     $record = itg_mobile_service_get_client_token($token);
     $cid = $record['cid'];
