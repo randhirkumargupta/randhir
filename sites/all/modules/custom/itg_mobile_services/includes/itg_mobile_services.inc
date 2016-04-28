@@ -315,7 +315,7 @@ left join field_data_field_service_video as content_video ON service_association
 where service_association.field_service_association_title_target_id = '$sid' AND content_text.entity_id <>  'NULL'")->fetchAll();
 
 
-    
+
     switch ($delivery_mode) {
       case 1:
         // Code for XMLs
@@ -406,7 +406,7 @@ function print_mobile_rss($query) {
   $root->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
   $root->appendChild($doc->createElement('lastBuildDate', 'Mon, 03 Feb 2014 12:38:02 IST'));
   $root->appendChild($doc->createElement('generator', 'FeedCreator 1.7.2'));
-          
+
   foreach ($query as $row) {
 
     $content_text = $row->content_text;
@@ -456,17 +456,17 @@ function print_mobile_mrss($query) {
     $content_image_fid = $row->content_image_fid;
     $content_image_width = $row->content_image_width;
     $content_image_height = $row->content_image_height;
-    
+
     $content_audio_fid = $row->content_audio_fid;
     $content_video_fid = $row->content_video_fid;
-    
+
     $file = file_load($content_image_fid)->filename;
-    
+
     $file_audio = ($content_audio_fid) ? file_load($content_audio_fid) : '';
     $file_video = ($content_video_fid) ? file_load($content_video_fid) : '';
 
     // $item = $doc->createElement('media');
-    if(!empty($file_audio->filename)) {
+    if (!empty($file_audio->filename)) {
       $itemaudio = $doc->createElement('media:category');
       $itemaudio->setAttribute('url', $base_url . "/sites/default/files/mobile_image/" . $file_audio->filename);
       $itemaudio->setAttribute('type', $file_audio->filemime);
@@ -479,27 +479,24 @@ function print_mobile_mrss($query) {
 
       $items->appendChild($itemaudio);
     }
-   
-    
-    // $item = $doc->createElement('media');
-    if(!empty($file_video->filename)) {
-        $item = $doc->createElement('media:category');
-        $item->setAttribute('url', $base_url . "/sites/default/files/mobile_image/" . $file_video->filename);
-        $item->setAttribute('type', $file_video->filemime);
-        //$item->setAttribute('duration', '00:19');
-        $item->appendChild($doc->createElement('media:title', htmlspecialchars('ARIES_27042016')));
-        $item->appendChild($doc->createElement('media:description'));
-        $item->appendChild($doc->createElement('media:thumbnail'));
-        $item->appendChild($doc->createElement('media:keywords'));
-        $item->appendChild($doc->createElement('media:category'));
-        $item->appendChild($doc->createElement('url', $base_url . "/sites/default/files/mobile_image/" . $file));
-        $item->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS<'));
-        $item->appendChild($doc->createElement('description', $content_text));
-        $items->appendChild($item);
-    }
-   
 
-    
+
+    // $item = $doc->createElement('media');
+    if (!empty($file_video->filename)) {
+      $item = $doc->createElement('media:category');
+      $item->setAttribute('url', $base_url . "/sites/default/files/mobile_image/" . $file_video->filename);
+      $item->setAttribute('type', $file_video->filemime);
+      //$item->setAttribute('duration', '00:19');
+      $item->appendChild($doc->createElement('media:title', htmlspecialchars('ARIES_27042016')));
+      $item->appendChild($doc->createElement('media:description'));
+      $item->appendChild($doc->createElement('media:thumbnail'));
+      $item->appendChild($doc->createElement('media:keywords'));
+      $item->appendChild($doc->createElement('media:category'));
+      $item->appendChild($doc->createElement('url', $base_url . "/sites/default/files/mobile_image/" . $file));
+      $item->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS<'));
+      $item->appendChild($doc->createElement('description', $content_text));
+      $items->appendChild($item);
+    }
   }
 
   $channel->appendChild($items);
