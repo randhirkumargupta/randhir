@@ -108,7 +108,7 @@ $winners = '';
   $i = 1;
     foreach ($winner_records as $key=>$value) {
    $winners .= $i.'. '.$value['user_name'].'('.$value['quiz_score'].')'.'<br/>';
-     
+     $i++;
   }
   //$content_end ='<tr><td>&nbsp;</td></tr><tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
   $final_output = $content.$winners;
