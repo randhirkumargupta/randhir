@@ -267,9 +267,9 @@ function itg_mobile_services_generate_simple_text($query) {
 }
 
 function mobile_services_generator_data() {
-
+   $arg = arg();
   //p(arg());
-  if (arg(1) == 'token' && !empty(arg(2))) {
+  if ($arg[1] == 'token' && !empty($arg[2])) {
     $token = base64_decode(arg(2));
     $record = itg_mobile_service_get_client_token($token);
     $cid = $record['cid'];
@@ -304,11 +304,16 @@ function mobile_services_generator_data() {
 content_text.field_story_expert_description_value AS content_text,
 content_image.field_story_large_image_fid AS content_image_fid,
 content_image.field_story_large_image_width AS content_image_width,
-content_image.field_story_large_image_height AS content_image_height
+content_image.field_story_large_image_height AS content_image_height,
+content_audio.field_service_audio_fid AS content_audio_fid,
+content_video.field_service_video_fid AS content_video_fid
 FROM field_data_field_service_association_title service_association 
 left join field_data_field_story_expert_description as content_text ON service_association.entity_id = content_text.entity_id
 left join field_data_field_story_large_image as content_image ON service_association.entity_id = content_image.entity_id
+left join field_data_field_service_audio as content_audio ON service_association.entity_id = content_audio.entity_id
+left join field_data_field_service_video as content_video ON service_association.entity_id = content_video.entity_id
 where service_association.field_service_association_title_target_id = '$sid' AND content_text.entity_id <>  'NULL'")->fetchAll();
+
 
 
     switch ($delivery_mode) {
@@ -401,7 +406,7 @@ function print_mobile_rss($query) {
   $root->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
   $root->appendChild($doc->createElement('lastBuildDate', 'Mon, 03 Feb 2014 12:38:02 IST'));
   $root->appendChild($doc->createElement('generator', 'FeedCreator 1.7.2'));
-  //p($query);          
+
   foreach ($query as $row) {
 
     $content_text = $row->content_text;
@@ -451,25 +456,47 @@ function print_mobile_mrss($query) {
     $content_image_fid = $row->content_image_fid;
     $content_image_width = $row->content_image_width;
     $content_image_height = $row->content_image_height;
+
+    $content_audio_fid = $row->content_audio_fid;
+    $content_video_fid = $row->content_video_fid;
+
     $file = file_load($content_image_fid)->filename;
+
+    $file_audio = ($content_audio_fid) ? file_load($content_audio_fid) : '';
+    $file_video = ($content_video_fid) ? file_load($content_video_fid) : '';
+
+    // $item = $doc->createElement('media');
+    if (!empty($file_audio->filename)) {
+      $itemaudio = $doc->createElement('media:category');
+      $itemaudio->setAttribute('url', $base_url . "/sites/default/files/mobile_image/" . $file_audio->filename);
+      $itemaudio->setAttribute('type', $file_audio->filemime);
+      //$item->setAttribute('duration', '00:19');
+      $itemaudio->appendChild($doc->createElement('media:title', htmlspecialchars('ARIES_27042016')));
+      $itemaudio->appendChild($doc->createElement('media:description'));
+      $itemaudio->appendChild($doc->createElement('media:thumbnail'));
+      $itemaudio->appendChild($doc->createElement('media:keywords'));
+      $itemaudio->appendChild($doc->createElement('description', $content_text));
+
+      $items->appendChild($itemaudio);
+    }
 
 
     // $item = $doc->createElement('media');
-    $item = $doc->createElement('media:category');
-    $item->setAttribute('url', 'http://videodeliverys3.s3.amazonaws.com/mobile/vuclip/videos/April2016/ARIES_27042016.mp4');
-    $item->setAttribute('type', 'video/flv');
-    $item->setAttribute('duration', '00:19');
-    $item->appendChild($doc->createElement('media:title', htmlspecialchars('ARIES_27042016')));
-    $item->appendChild($doc->createElement('media:description'));
-    $item->appendChild($doc->createElement('media:thumbnail'));
-    $item->appendChild($doc->createElement('media:keywords'));
-    $item->appendChild($doc->createElement('media:category'));
-    $item->appendChild($doc->createElement('url', $base_url . "/sites/default/files/mobile_image/" . $file));
-    $item->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS<'));
-    $item->appendChild($doc->createElement('description', $content_text));
-
-
-    $items->appendChild($item);
+    if (!empty($file_video->filename)) {
+      $item = $doc->createElement('media:category');
+      $item->setAttribute('url', $base_url . "/sites/default/files/mobile_image/" . $file_video->filename);
+      $item->setAttribute('type', $file_video->filemime);
+      //$item->setAttribute('duration', '00:19');
+      $item->appendChild($doc->createElement('media:title', htmlspecialchars('ARIES_27042016')));
+      $item->appendChild($doc->createElement('media:description'));
+      $item->appendChild($doc->createElement('media:thumbnail'));
+      $item->appendChild($doc->createElement('media:keywords'));
+      $item->appendChild($doc->createElement('media:category'));
+      $item->appendChild($doc->createElement('url', $base_url . "/sites/default/files/mobile_image/" . $file));
+      $item->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS<'));
+      $item->appendChild($doc->createElement('description', $content_text));
+      $items->appendChild($item);
+    }
   }
 
   $channel->appendChild($items);
