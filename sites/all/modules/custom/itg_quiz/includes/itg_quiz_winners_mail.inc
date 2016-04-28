@@ -38,7 +38,7 @@ function itg_quiz_winners_user_list($nid) {
   $query = db_select('itg_quiz_user_score', 'qs');
   $query->fields('qs')
       ->condition('qs.nid', $nid, '=')
-      //->condition('qs.quiz_score', 0, '!=')
+      ->condition('qs.quiz_score', 0, '!=')
       ->orderBy('qs.quiz_score', 'DESC');
   $result = $query->execute();
   $i = 0;
@@ -87,10 +87,12 @@ function itg_quiz_get_mail_content($nid) {
   
   global $base_url;
   $winner_records = itg_quiz_winners_user_list($nid);
+
+  $result_link = $base_url.'/quiz-user-list/'.$nid;
+  $content = '';
+  $content_end = '';
+  $winners = '';
   
-$content = '';
-$content_end = '';
-$winners = '';
 //  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 //<html xmlns:v="urn:schemas-microsoft-com:vml">
 //<head>
@@ -110,8 +112,10 @@ $winners = '';
    $winners .= '<p>'.$i.'. '.$value['user_name'].'('.$value['quiz_score'].')'.'</p>';
      $i++;
   }
-  //$content_end ='<tr><td>&nbsp;</td></tr><tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
-  $final_output = $content.$winners;
+  //$content_link = '<p><a href="'.$result_link.'">Click here to see result</a></p>';
+  
+  $content_end ='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
+  $final_output = $content.$winners.$content_end;
   return $final_output;
 }
 
