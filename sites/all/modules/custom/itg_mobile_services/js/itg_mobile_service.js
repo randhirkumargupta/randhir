@@ -14,6 +14,8 @@
                  $('#edit-field-service-audio .button-remove').mousedown();
                  $('#edit-field-service-video .button-remove').mousedown();
             });
+                 $('#edit-actions').css('display','block');
+                 $('.form-layout-default .column-main .column-wrapper > .form-actions').show();
         }
     }
 })(jQuery);
