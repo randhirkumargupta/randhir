@@ -91,21 +91,27 @@ function itg_quiz_get_mail_content($nid) {
 $content = '';
 $content_end = '';
 $winners = '';
-  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns:v="urn:schemas-microsoft-com:vml">
-<head>
-    <title></title>
-</head>
-<body style="margin:0; padding:0;">
-<table cellpadding="0" cellspacing="0"><tr><td>Dear user,<td></tr><tr><td>Thanks for taking our quiz. Winners list is given below:<td></tr><tr><td>&nbsp;</td></tr></table>
-<table cellpadding="0" cellspacing="0"><tr style="font-weight:bold"><td>User Name</td><td>Score</td></tr>';
-  foreach ($winner_records as $key=>$value) {
-   $winners .= '<tr><td>'.$value['user_name'].'</td>
-        <td>'.$value['quiz_score'].'</td></tr>';
+//  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+//<html xmlns:v="urn:schemas-microsoft-com:vml">
+//<head>
+//    <title></title>
+//</head>
+//<body style="margin:0; padding:0;">
+//<table cellpadding="0" cellspacing="0"><tr><td>Dear user,<td></tr><tr><td>Thanks for taking our quiz. Winners list is given below:<td></tr><tr><td>&nbsp;</td></tr></table>
+//<table cellpadding="0" cellspacing="0"><tr style="font-weight:bold"><td>User Name</td><td>Score</td></tr>';
+//  foreach ($winner_records as $key=>$value) {
+//   $winners .= '<tr><td>'.$value['user_name'].'</td>
+//        <td>'.$value['quiz_score'].'</td></tr>';
+//     
+//  }
+  $content = 'Dear user <br/>Thanks for taking our quiz. Winners list is given below:<br/>';
+  $i = 1;
+    foreach ($winner_records as $key=>$value) {
+   $winners .= $i.'. '.$value['user_name'].'('.$value['quiz_score'].')'.'<br/>';
      
   }
-  $content_end ='<tr><td>&nbsp;</td></tr><tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
-  $final_output = $content.$winners.$content_end;
+  //$content_end ='<tr><td>&nbsp;</td></tr><tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
+  $final_output = $content.$winners;
   return $final_output;
 }
 
