@@ -146,20 +146,27 @@ function itg_syndication_generate_rss($data, $syndication_node) {
  * @param type $data
  * @param type $syndication_node
  */
-function itg_syndication_mail_syndication($data, $syndication_node, $file_path) {  
+function itg_syndication_mail_syndication($data, $syndication_node, $file_path) {
   $attachment = array(
     'filepath' => $file_path,
   );
   $params = array(
     'key' => 'itg_syndication',
     'to' => 'yogesh.kushwaha@kelltontech.com',
-    'from' => 'test@itg.com',
+    'from' => 'noreply@indiatoday.com',
     'subject' => 'Test email',
-    'body' => 'test',
-    'attachment' => $attachment
+    'body' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+    'attachment' => $attachment,
+    'headers' => array(
+      'MIME-Version: 1.0' . "\r\n",
+      'Content-type: text/html; charset=iso-8859-1' . "\r\n",
+      'To: Yogesh Kushwaha <yogesh.kushwaha@kelltontech.com.com>' . "\r\n",
+      'From: India Today <noreply@indiatoday.com>' . "\r\n",
+    ),
   );
+  $language = language_default();
 
-  drupal_mail('itg_syndication', $key, $to, $language, $params, $from);
+  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);
 }
 
 /**
@@ -170,11 +177,13 @@ function itg_syndication_mail_syndication($data, $syndication_node, $file_path) 
  * @param array $params
  */
 function itg_syndication_mail($key, &$message, $params) {
-  $message['subject'] = $params['subject'];
-  $message['body'][] = $params['body'];
+  if ($key == 'itg_syndication') {
+    $message['subject'] = $params['subject'];
+    $message['body'][] = $params['body'];
 
-  // Add attachment when available.
-  if (isset($params['attachment'])) {
-    $message['params']['attachments'][] = $params['attachment'];
+    // Add attachment when available.
+    if (isset($params['attachment'])) {
+      $message['params']['attachments'][] = $params['attachment'];
+    }
   }
 }

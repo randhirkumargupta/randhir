@@ -11,6 +11,43 @@ function feature_for_poll_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_poll_answer-field_ans_caption'.
+  $field_instances['field_collection_item-field_poll_answer-field_ans_caption'] = array(
+    'bundle' => 'field_poll_answer',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ans_caption',
+    'label' => 'Caption',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_poll_answer-field_poll_answer_image'.
   $field_instances['field_collection_item-field_poll_answer-field_poll_answer_image'] = array(
     'bundle' => 'field_poll_answer',
@@ -542,7 +579,11 @@ function feature_for_poll_field_default_field_instances() {
   // Exported field_instance: 'node-poll-field_poll_question'.
   $field_instances['node-poll-field_poll_question'] = array(
     'bundle' => 'poll',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -563,7 +604,7 @@ function feature_for_poll_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_poll_question',
-    'label' => 'Poll Question',
+    'label' => 'Poll Type',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -662,10 +703,9 @@ function feature_for_poll_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'teaser' => array(
@@ -949,6 +989,7 @@ function feature_for_poll_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Associate poll');
+  t('Caption');
   t('Display Result');
   t('End Date');
   t('Please Search by title.');
@@ -958,10 +999,10 @@ function feature_for_poll_field_default_field_instances() {
   t('Poll Banner');
   t('Poll Call to Action Image');
   t('Poll Option');
-  t('Poll Question');
   t('Poll Question Image');
   t('Poll Question Text');
   t('Poll Question Video');
+  t('Poll Type');
   t('Poll manipulate');
   t('Result format');
   t('Show End Date');

@@ -90,6 +90,7 @@ function itg_poll_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3));
   global $user, $base_url;
   unset($form['metatags']['intro_text']['#markup']);
+  $form['title']['#title'] = 'Poll Question';
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
@@ -98,7 +99,16 @@ function itg_poll_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_poll' => array('settings' => $settings)), array('type' => 'setting'));
   
-  
+  global $user;
+    foreach ($form['field_poll_answer'][LANGUAGE_NONE] as $key => $item) {
+            if(is_numeric($key)){
+              if(!in_array('Site Admin', $user->roles)){
+                $form['field_poll_answer'][LANGUAGE_NONE][$key]['field_poll_manipulate_value']['#access'] = FALSE;
+               }
+               $form['field_poll_answer'][LANGUAGE_NONE][$key]['field_ans_caption'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = "Caption";
+             }
+         
+    }
   //poll disable after create
   if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
     $result = itg_poll_getTotalPoll(arg(1));
@@ -109,10 +119,13 @@ function itg_poll_after_build($form, &$form_state) {
              }
           }
         $form['field_poll_answer'][LANGUAGE_NONE]['add_more']['#access'] = FALSE; // Disable Add more button
-        
+        if(!in_array('Site Admin', $user->roles)){
         $form['field_poll_question_text'][LANGUAGE_NONE][0]['value']['#attributes'] = array('readonly' => 'readonly');
+        $form['title']['#attributes'] = array('readonly' => 'readonly');
         drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew_disable.js', array('weight' => 4,  'scope' => 'footer'));
-    
+        }
+        drupal_add_js("jQuery('document').ready(function(){  jQuery('#edit-field-poll-answer-option').remove();
+            jQuery('#edit-field-poll-question').remove(); });", "inline");
     }
   }
   
@@ -154,7 +167,7 @@ function itg_poll_node_form_validate($form, &$form_state) {
   if($question == 1){ //Text
     $question_text = $form_state['values']['field_poll_question_text'][LANGUAGE_NONE][0]['value'];
     if(empty($question_text)){
-      form_set_error('field_poll_question_text', 'Poll Question Text is required.');
+      //form_set_error('field_poll_question_text', 'Poll Question Text is required.');
     }
   }elseif($question == 2){ //Image
     $question_image = $form_state['values']['field_poll_question_image'][LANGUAGE_NONE][0]['fid'];
@@ -167,6 +180,12 @@ function itg_poll_node_form_validate($form, &$form_state) {
       form_set_error('field_poll_question_video', 'Poll Question Video is required.');
     }
   }
+ 
+  //associate poll INCORRECT validateion
+  if(isset($form_state['values']['field_associate_poll'][LANGUAGE_NONE][0]) && $form_state['values']['field_associate_poll'][LANGUAGE_NONE][0]['target_id'] == ''){
+    form_set_error('field_associate_poll', 'Please associate correct title with poll.');
+  }
+  
 }
 
 /**
@@ -306,13 +325,15 @@ function itg_poll_form($form, &$form_state, $parms) {
 
         $poll_answer_text = isset($temp_ent->field_poll_answer_text[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_text[LANGUAGE_NONE][0]['value'] : '';
         $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
-
+        
+        $poll_caption_text = isset($temp_ent->field_ans_caption[LANGUAGE_NONE]) ? $temp_ent->field_ans_caption[LANGUAGE_NONE][0]['value'] : '';
+        
         if (isset($poll_answer_image) && $poll_answer_image > 0) {
-          $poll_image = theme('image_style', array('style_name' => 'thumbnail', 'path' => file_load($poll_answer_image)->uri));
+          $poll_image = theme('image_style', array('style_name' => 'thumbnail', 'path' => file_load($poll_answer_image)->uri)).'<br /><span class="poll-ans-caption">'.$poll_caption_text.'</span>';
           $pollAnswer[$key] = isset($poll_image) ? $poll_image : '';
         }
         else {
-          $pollAnswer[$key] = isset($poll_answer_text) ? $poll_answer_text : '';
+          $pollAnswer[$key] = isset($poll_answer_text) ? $poll_answer_text.'<br /><span class="poll-ans-caption">'.$poll_caption_text.'</span>' : '';
         }
       }
     }
@@ -671,6 +692,10 @@ function itg_poll_node_presave($node){
       $node->field_poll_question_text = '';
     }elseif ($poll_question == 3) { // video
       
+    }
+
+    if($node->field_poll_question[LANGUAGE_NONE][0]['value'] == 1){ //1 = text
+      $node->field_poll_question_text[LANGUAGE_NONE][0]['value'] = $node->title;
     }
   }
 }
