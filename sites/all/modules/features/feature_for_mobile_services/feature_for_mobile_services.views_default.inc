@@ -314,13 +314,6 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['field_client_title']['table'] = 'field_data_field_client_title';
   $handler->display->display_options['fields']['field_client_title']['field'] = 'field_client_title';
   $handler->display->display_options['fields']['field_client_title']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Content: Service Title */
-  $handler->display->display_options['fields']['field_service_association_title']['id'] = 'field_service_association_title';
-  $handler->display->display_options['fields']['field_service_association_title']['table'] = 'field_data_field_service_association_title';
-  $handler->display->display_options['fields']['field_service_association_title']['field'] = 'field_service_association_title';
-  $handler->display->display_options['fields']['field_service_association_title']['settings'] = array(
-    'link' => 0,
-  );
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -439,15 +432,6 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Service Title';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Client selection */
-  $handler->display->display_options['fields']['field_client_selection']['id'] = 'field_client_selection';
-  $handler->display->display_options['fields']['field_client_selection']['table'] = 'field_data_field_client_selection';
-  $handler->display->display_options['fields']['field_client_selection']['field'] = 'field_client_selection';
-  $handler->display->display_options['fields']['field_client_selection']['label'] = 'Client Title';
-  $handler->display->display_options['fields']['field_client_selection']['settings'] = array(
-    'link' => 0,
-  );
-  $handler->display->display_options['fields']['field_client_selection']['delta_offset'] = '0';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
