@@ -503,3 +503,33 @@ creating a view. */
   color: #fff;
 }
 /* Fixes for other modules end */
+/* 27 April */
+#content .column-side .column-wrapper.fixed {
+  position: static;
+}
+#edit-field-task-finish-date-and-time-und-0-value .description {
+  left:285px;
+}
+.user-role span a {
+  background: url(../images/notification.png) left -2px no-repeat;
+  height:25px;
+  width:28px;
+  outline: none;
+  display: inline-block;
+  text-indent: -9999px;
+}
+ .block-content > .node-service-creation .field {
+   display: inline-block;
+    width: 100%;
+}
+ .block-content > .node-service-creation .field .field-label {
+  float: left;
+  width:30%;
+}
+ .block-content > .node-service-creation .field .field-items {
+  float: left;
+  width:70%;
+}
+.block-itg-astro.fixed {
+      z-index: 99999;
+}

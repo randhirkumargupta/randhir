@@ -134,6 +134,13 @@ function features_for_story_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in reasons_for_reject'.
+  $permissions['delete terms in reasons_for_reject'] = array(
+    'name' => 'delete terms in reasons_for_reject',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'edit any reporter content'.
   $permissions['edit any reporter content'] = array(
     'name' => 'edit any reporter content',
@@ -182,6 +189,13 @@ function features_for_story_user_default_permissions() {
   // Exported permission: 'edit terms in city'.
   $permissions['edit terms in city'] = array(
     'name' => 'edit terms in city',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in reasons_for_reject'.
+  $permissions['edit terms in reasons_for_reject'] = array(
+    'name' => 'edit terms in reasons_for_reject',
     'roles' => array(),
     'module' => 'taxonomy',
   );
