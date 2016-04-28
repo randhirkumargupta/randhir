@@ -124,6 +124,7 @@ function itg_workflow_after_build($form, &$form_state) {
                   });
                 } else {
                   jQuery(".form-item-log").show();
+                  jQuery(".reasons-form").hide();
                 }
               });
             });', array('type' => 'inline', 'scope' => 'footer'));
