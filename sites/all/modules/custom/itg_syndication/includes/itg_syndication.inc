@@ -9,7 +9,7 @@ function feed_generator_of_content() {
   $today = date('Y/m/d') . ' 00:00:00';
   // Fetch syndication item from database whoes status is 0
   $itg_query = db_select('itg_row_selector', 'itg');
-  $itg_query->fields('itg', array('web_property', 'client_title', 'syndication'))
+  $itg_query->fields('itg', array('id', 'web_property', 'client_title', 'syndication'))
       ->condition('created', $today)
       ->conditions('status', 0);
   $itg_result = $itg_query->execute()->fetchAll();
@@ -26,7 +26,7 @@ function feed_generator_of_content() {
             itg_syndication_generate_xml($data, $syndication_node);
             break;
           case 'rss':
-
+            itg_syndication_generate_rss($data, $syndication_node);
             break;
           case 'mrss':
 
@@ -69,8 +69,8 @@ function itg_syndication_client_details($client) {
 
 /**
  * Function for generating xml files.
- * @param type $data
- * @param type $syndication_node
+ * @param array $data
+ * @param array $syndication_node
  */
 function itg_syndication_generate_xml($data, $syndication_node) {
   $file_path = drupal_realpath('public://');  
@@ -89,7 +89,40 @@ function itg_syndication_generate_xml($data, $syndication_node) {
     $result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
   }
 
-  $dom->save($file_path . '/result.xml') or die('XML Create Error');
-  watchdog('syndication_xml', 'XML created');
+  $dom->save($file_path . '/'.$data->title.'.xml') or die('XML Create Error');
+  drupal_set_message('xml file has been created.', 'status');
   
+}
+
+/**
+ * Function to generate rss
+ * @param array $data
+ * @param array $syndication_node
+ */
+function itg_syndication_generate_rss($data, $syndication_node) {
+  $file_path = drupal_realpath('public://');  
+  $dom = new DOMDocument('1.0', 'UTF-8');
+  $dom->formatOutput = true;
+  //create "RSS" element
+  $rss = $dom->createElement("rss"); 
+  $rss = $dom->appendChild($rss); //add RSS element to XML node
+  $rss->setAttribute("version","2.0"); //set RSS version
+
+
+  $root = $dom->createElement('syndication');
+  $dom->appendChild($root);
+
+  foreach ($syndication_node as $key => $val) {    
+    $node = node_load($val);        
+    $result = $dom->createElement('content');
+    $root->appendChild($result);
+    $result->setAttribute('id', $key + 1);
+    $result->appendChild($dom->createElement('title', $node->title));
+    $result->appendChild($dom->createElement('body', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
+    $result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
+  }
+
+  $dom->save($file_path . '/itg_rss.xml') or die('rss Create Error');
+  watchdog('syndication_rss', 'RSS created');
+  drupal_set_message('rss file has been created.', 'status');
 }

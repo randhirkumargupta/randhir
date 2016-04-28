@@ -92,17 +92,16 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication.js',
     );
-
+    // Hide time field from form
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery(".form-item-field-story-expiry-date-und-0-value-time").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
     // Custom callback for  after form built
     $form['#action'] = '?destination=syndication-client-listing';
     $form['#after_build'][] = 'itg_syndication_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_syndication_change_message';
   }
-  if ($form_id == 'syndication_client_service_assoc_node_form') {
-    $form['#action'] = '?destination=syndication-client-listing';
-    $form['#after_build'][] = 'itg_syndication_service_after_build';
-    $form['actions']['submit']['#submit'][] = 'itg_syndication_service_change_message';
-  }
+  
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {
     //dpm($form_state);
@@ -128,23 +127,11 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['type']['#weight'] = 2;
     $form['submit']['#weight'] = 4;
   }
-}
-
-/**
- * After build callback function for syndication service assosiation form
- * @param array $form
- * @param array $form_state
- * @return array 
- */
-function itg_syndication_service_after_build($form, &$form_state) {
-  // Add cancel button to create/edit astro page
-  $form['actions']['cancel'] = array(
-    '#markup' => l(t('Cancel'), 'syndication-client-listing', array('attributes' => array('class' => 'button'))),
-    '#weight' => 20,
-  );
-  $form['additional_settings']['#access'] = FALSE;
-
-  return $form;
+  
+  // View autocomplete title field.
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_client') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/syndication_client/autocomplete';
+  }  
 }
 
 /**
@@ -160,7 +147,7 @@ function itg_syndication_after_build($form, &$form_state) {
     ),
     'required' => array(
       ':input[name="field_content_sharing_mode[und]"]' => array(
-        'value' => '1'
+        'value' => '3'
       ),
     ),
   );
@@ -209,15 +196,18 @@ function itg_syndication_field_group_build_pre_render_alter(&$element) {
  * @param array $form
  * @param array $form_state
  */
-function itg_syndication_node_validate($node, $form, &$form_state) {
-  if ($node->type == 'syndication_client') {
+function itg_syndication_node_validate($node, $form, &$form_state) {  
+  if ($node->type == 'syndication_client' && $form_state['clicked_button']['#value'] != 'Delete') {
     $sharing_mode = $node->field_content_sharing_mode['und'][0]['value'];
     switch ($sharing_mode) {
       // Web url Case
       case '1':
         if (isset($node->field_service_fetch_link['und'][0]['value']) && $node->field_service_fetch_link['und'][0]['value'] == '') {
-          form_set_error('field_service_fetch_link', t('Fetch link (our server) field is required'));
+          form_set_error('field_service_fetch_link', t('Fetch link (our server) field is required.'));
         }
+        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $node->field_service_fetch_link['und'][0]['value'])) {
+          form_set_error('field_service_fetch_link', t('Invalid URL.'));
+        }        
         break;
 
       // FTP case
@@ -225,25 +215,37 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
         if (isset($node->field_ftp_ip_address['und'][0]['value']) && $node->field_ftp_ip_address['und'][0]['value'] == '') {
           form_set_error('field_ftp_ip_address', t('FTP IP Address field is required.'));
         }
-        elseif (isset($node->field_ftp_username['und'][0]['value']) && $node->field_ftp_username['und'][0]['value'] == '') {
-          form_set_error('field_ftp_username', t('FTP Username field is required'));
+        if (!filter_var($node->field_ftp_ip_address['und'][0]['value'], FILTER_VALIDATE_IP)) {
+          form_set_error('field_ftp_ip_address', t('FTP IP Address is not valid.'));
         }
-        elseif (isset($node->field_ftp_password['und'][0]['value']) && $node->field_ftp_password['und'][0]['value'] == '') {
-          form_set_error('field_ftp_password', t('FTP Password field is required'));
+        if (isset($node->field_ftp_username['und'][0]['value']) && $node->field_ftp_username['und'][0]['value'] == '') {
+          form_set_error('field_ftp_username', t('FTP Username field is required.'));
         }
-        else {
-          
+        if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $node->field_ftp_username['und'][0]['value'])) {
+          form_set_error('field_ftp_username', t('FTP Username must be minimum 8 digit alphanumeric and without space.'));
         }
+        if (isset($node->field_ftp_password['und'][0]['value']) && $node->field_ftp_password['und'][0]['value'] == '') {
+          form_set_error('field_ftp_password', t('FTP Password field is required.'));
+        }
+        if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $node->field_ftp_password['und'][0]['value'])) {
+          form_set_error('field_ftp_password', t('FTP Password must be minimum 8 digit alphanumeric and without space.'));
+        }        
         break;
 
       // Mail to case
       case '3':
+        
         if (isset($node->field_email_address['und'][0]['value']) && $node->field_email_address['und'][0]['value'] == '') {
           form_set_error('field_email_address', t('Mail to field is required.'));
         }
+        // Validate email                
+        if (!filter_var($node->field_email_address['und'][0]['value'], FILTER_VALIDATE_EMAIL)) {
+          form_set_error('field_email_address', t('Please enter valid email address.'));
+        }                
     }
-
+    
     // Validate same client with same sharing mode.
+    /*
     $is_dupl_client = 0;
     if ($node->nid != NULL) {
       $is_dupl_client = itg_syndication_check_duplicate($node->title, $node->field_content_sharing_mode['und'][0]['value'], $node->nid);
@@ -255,6 +257,8 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
     if ($is_dupl_client) {
       form_set_error('title', t('Client already exist for selected content sharing mode.'));
     }
+    * 
+    */   
   }
 }
 
@@ -270,20 +274,5 @@ function itg_syndication_change_message($form, &$form_state) {
   }
   else {
     drupal_set_message(t('Client updated successfully.'));
-  }
-}
-
-/**
- * Custom submit callback function to change message after Syndication service node save/update.
- * @param array $form
- * @param array $form_state
- */
-function itg_syndication_service_change_message($form, &$form_state) {
-  drupal_get_messages('status');
-  if ($form_state['values']['changed'] == '') {
-    drupal_set_message(t('Service associated successfully.'));
-  }
-  else {
-    drupal_set_message(t('Service updated successfully.'));
   }
 }
