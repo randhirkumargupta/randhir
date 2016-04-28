@@ -78,8 +78,8 @@ function astro_feature_views_default_views() {
       'empty_column' => 0,
     ),
     'field_astro_type' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'desc',
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
