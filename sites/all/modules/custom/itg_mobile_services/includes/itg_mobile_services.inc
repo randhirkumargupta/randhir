@@ -474,7 +474,7 @@ function print_mobile_mrss($query) {
 
   $channel->appendChild($items);
   $doc->save($file_path . '/result_mrss.xml') or die('XML Create Error');
-  // drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result_mrss.xml');
+  drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result_mrss.xml');
 }
 
 function print_mobile_sms($query) {
@@ -498,7 +498,7 @@ function print_mobile_sms($query) {
   $root->appendChild($doc->createElement('transid', '31313131'));
 
   $doc->save($file_path . '/result_sms.xml') or die('XML Create Error');
-  // drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result.xml');
+  drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result_sms.xml');
 }
 
 function print_mobile_simple_feed($query) {
@@ -521,4 +521,62 @@ function print_mobile_ussd($query) {
   }
   print $content_text;
   // drupal_goto('http://localhost/itgcms/sites/default/files/mobile_xml/result.xml');     
+}
+
+function mobile_services_token_list() {
+
+  $query = db_select('itg_client_token', 't');
+  $query->fields('t', array('cid', 'sid', 'delivery_mode', 'service_frequency', 'content_sharing_mode', 'service_fetch_link'));
+  $query->range(0, 100);
+  $result = $query->execute();
+  $table = '<table cellpadding="0" cellspacing="0" width="100%" style="border: 1px;">';
+  $table .= '<tbody>';
+  $table .= '<tr>';
+  $table .= '<th style="width: 96px;">Client Name</th>';
+  $table .= '<th style="width: 96px;">Service Name</th>';
+  $table .= '<th style="width: 96px;">Link</th>';
+  $table .= '</tr>';
+
+  while ($record = $result->fetchAssoc()) {
+    $cid = $record['cid'];
+    $sid = $record['sid'];
+    $service_fetch_link = $record['service_fetch_link'];
+    if ($cid) {
+      $term = taxonomy_term_load($cid);
+
+      $client_name = $term->name;
+    }
+    $sname = itg_mobile_services_get_service_title($sid);
+
+    $table .= '<tr>';
+    $table .= '<td style="width: 96px;">' . $client_name . '</td>';
+    $table .= '<td style="width: 96px;">' . $sname . '</td>';
+    $table .= '<td style="width: 96px;">' . $service_fetch_link . '</td>';
+    $table .= '</tr>';
+  }
+  $table .= '</tbody>';
+  return $table .= '</table>';
+}
+
+/**
+ * callback for all the mobile service association of title
+ *  
+ */
+function itg_mobile_services_get_service_title($sid) {
+
+  if ($sid) {
+    $content_type = 'service_creation';
+    $options = '';
+    $title = strtolower(trim($title));
+    $query = db_select('node', 'n');
+    $query->fields('n', array('title', 'nid'));
+    $query->condition('nid', $sid, '=');
+    $query->condition('n.type', $content_type, '=');
+    //$query->condition('n.status', 1, '=');
+    $query->range(0, 1);
+
+    $result = $query->execute();
+    $record = $result->fetchAssoc();
+    return $record['title'];
+  }
 }
