@@ -53,8 +53,11 @@ function itg_workflow_after_build($form, &$form_state) {
   unset($form['revision_information']['log']);
   unset($form['revision_information']['workbench_moderation_state_new']);
   $form['revision_information']['workbench_moderation_state_new'] = $state;
-  /*if ($form['#entity']->workbench_moderation['current']->state == 'needs_review') {
-    $terms=taxonomy_get_tree(22);
+  
+  // Code for rejection master message
+  if ($form['#entity']->workbench_moderation['current']->state == 'needs_review') {
+    $vid = taxonomy_vocabulary_machine_name_load('reasons_for_reject');
+    $terms=taxonomy_get_tree($vid->vid);
     foreach($terms as $key => $val){
       $term_name[$val->name] = $val->name;
     }
@@ -67,7 +70,7 @@ function itg_workflow_after_build($form, &$form_state) {
         '#prefix' => '<div class="reasons-form">',
         '#suffix' => '</div>',
     );
-  }*/
+  }
   
   $form['revision_information']['log'] = $log;
   
@@ -97,10 +100,32 @@ function itg_workflow_after_build($form, &$form_state) {
       } else if ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
             $submit_name = '';            
             $state_class = ' published';
+            $form['actions']['submit']['#attributes']['class'][] = 'edit-submit-class';
+            //p($form['actions']['submit']);
+            /*drupal_add_js('jQuery(document).ready(function() {              
+              jQuery(".form-item-workbench-moderation-state-new").show();
+              jQuery("#edit-log").val("");
+            });', array('type' => 'inline', 'scope' => 'footer'));*/
             
             drupal_add_js('jQuery(document).ready(function() {              
               jQuery(".form-item-workbench-moderation-state-new").show();
+              jQuery(".reasons-form").hide();              
               jQuery("#edit-log").val("");
+              
+               jQuery("#edit-workbench-moderation-state-new").change(function() {
+                jQuery("#edit-log").val("");
+                if(jQuery("#edit-workbench-moderation-state-new").val() == "rejected") {                  
+                  jQuery(".form-item-log").hide();
+                  jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
+                  jQuery(".reasons-form").show();
+                  
+                  jQuery(".reasons-form-msg").change(function() {
+                    jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
+                  });
+                } else {
+                  jQuery(".form-item-log").show();
+                }
+              });
             });', array('type' => 'inline', 'scope' => 'footer'));
             
           }      
@@ -161,8 +186,7 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param type $node
  */
 function itg_workflow_node_presave($node) {
-  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
-  // if ($node->type == 'story' || $node->type == 'photogallery') {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {  
    if ($node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
     $node->workbench_moderation_state_new = 'published';
    }
@@ -176,7 +200,7 @@ function itg_workflow_node_presave($node) {
  */
 function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
   global $user, $base_url;
-  // pr($form['#id']);
+  
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6') {
     $form['state']['#options'] = array('All' => '-All-', 
                                        'needs_review' => 'Submitted for Review', 
@@ -203,8 +227,6 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
   } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page') {
       
       // Code for Bulk opration related work for story
-      
-      // itg_workflow_bulk_opration_related('edit-bundle-story-appendfield-story-archive', 'edit-bundle-story-field-story-archive-und');
       
       drupal_add_js('jQuery(document).ready(function() {
                jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");

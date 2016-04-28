@@ -164,6 +164,13 @@ function features_for_story_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'metatag_enable_taxonomy_term__reasons_for_reject';
+  $strongarm->value = TRUE;
+  $export['metatag_enable_taxonomy_term__reasons_for_reject'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_story';
   $strongarm->value = array(
     0 => 'moderation',

@@ -14,6 +14,7 @@ function itg_quiz_winners_mail_list() {
   $user_email_arr = array_slice($user_email_arr, 0, $no_of_winner, true);
   $user_email_str = implode(',',$user_email_arr);
   $mail_content = itg_quiz_get_mail_content($nid);
+  
     $params = array(
       'body' => $mail_content,
       'subject' => 'India Today | Quiz Winners',
@@ -21,7 +22,7 @@ function itg_quiz_winners_mail_list() {
 
     $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
-      drupal_set_message('Winners list has been sent to users.');
+      drupal_set_message('Mail has been sent successfully.');
       drupal_goto('quiz-user-list/'.$nid);
     }
     else {
@@ -90,21 +91,27 @@ function itg_quiz_get_mail_content($nid) {
 $content = '';
 $content_end = '';
 $winners = '';
-  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns:v="urn:schemas-microsoft-com:vml">
-<head>
-    <title></title>
-</head>
-<body style="margin:0; padding:0;">
-<table cellpadding="0" cellspacing="0"><tr><td>Dear user,<td></tr><tr><td>Thanks for taking our quiz. Winners list is given below:<td></tr><tr><td>&nbsp;</td></tr></table>
-<table cellpadding="0" cellspacing="0"><tr style="font-weight:bold"><td>User Name</td><td>Score</td></tr>';
-  foreach ($winner_records as $key=>$value) {
-   $winners .= '<tr><td>'.$value['user_name'].'</td>
-        <td>'.$value['quiz_score'].'</td></tr>';
-     
+//  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+//<html xmlns:v="urn:schemas-microsoft-com:vml">
+//<head>
+//    <title></title>
+//</head>
+//<body style="margin:0; padding:0;">
+//<table cellpadding="0" cellspacing="0"><tr><td>Dear user,<td></tr><tr><td>Thanks for taking our quiz. Winners list is given below:<td></tr><tr><td>&nbsp;</td></tr></table>
+//<table cellpadding="0" cellspacing="0"><tr style="font-weight:bold"><td>User Name</td><td>Score</td></tr>';
+//  foreach ($winner_records as $key=>$value) {
+//   $winners .= '<tr><td>'.$value['user_name'].'</td>
+//        <td>'.$value['quiz_score'].'</td></tr>';
+//     
+//  }
+  $content = '<p>Dear user, </p><p>Thanks for taking our quiz. Winners list is given below:</p>';
+  $i = 1;
+    foreach ($winner_records as $key=>$value) {
+   $winners .= '<p>'.$i.'. '.$value['user_name'].'('.$value['quiz_score'].')'.'</p>';
+     $i++;
   }
-  $content_end ='<tr><td>&nbsp;</td></tr><tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
-  $final_output = $content.$winners.$content_end;
+  //$content_end ='<tr><td>&nbsp;</td></tr><tr><td>Thanks,</td></tr><tr><td>India Today Team</td></tr></table></body></html>';
+  $final_output = $content.$winners;
   return $final_output;
 }
 
