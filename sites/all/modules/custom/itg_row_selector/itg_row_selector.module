@@ -154,6 +154,7 @@ function itg_row_selector_custom_submit($form, &$form_state) {
   // insert records into database table itg_row_selector.
   drupal_write_record('itg_row_selector', $pre_save);
   watchdog('Syndication', 'Node has been inserted for syndication.');
+  drupal_set_message('Content has been saved for syndication.', 'status');
 }
 
 /**
