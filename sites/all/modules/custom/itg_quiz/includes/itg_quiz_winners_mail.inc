@@ -112,9 +112,10 @@ function itg_quiz_get_mail_content($nid) {
    $winners .= '<p>'.$i.'. '.$value['user_name'].'('.$value['quiz_score'].')'.'</p>';
      $i++;
   }
-  $content_end = '<p>'.l('Click here to see result.', $result_link).'</p>';
-  $content_end .='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
-  $final_output = $content.$winners.$content_end;
+  $content_link = '<p><a href="'.$result_link.'">Click here to see result</a></p>';
+  
+  $content_end ='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
+  $final_output = $content.$winners.$content_link.$content_end;
   return $final_output;
 }
 
