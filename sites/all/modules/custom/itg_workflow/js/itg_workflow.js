@@ -44,7 +44,7 @@ jQuery(document).ready(function() {
            var msg = confirm("Hope you have Previewed the story before submitting. Do you want to continue to submit?");
            if (msg == true) {
                 jQuery("#edit-workbench-moderation-state-new").val(story_state);
-                jQuery("#story-node-form").submit();
+                jQuery("#edit-submit").click();
                 return true;
            }
            return false; 
@@ -52,9 +52,9 @@ jQuery(document).ready(function() {
         
     });
 
-    jQuery('#edit-submit').click(function() {                 
+    jQuery('.edit-submit-class').click(function() {                 
         var moderation_state = jQuery("#edit-workbench-moderation-state-new").val();
-        if (moderation_state == 'published' || moderation_state == 'needs_review') {                   
+        if (moderation_state == 'published') {                   
            var msg = confirm("Hope you have Previewed the story before submitting. Do you want to continue to submit?");
            if (msg == true) {
                return true;
@@ -64,3 +64,18 @@ jQuery(document).ready(function() {
         return true;                     
     });                  
 });
+
+//jQuery(document).ready(function() {
+//              
+//              
+//              // code for reject content type
+//              jQuery("#edit-workbench-moderation-state-new").change(function() {
+//                if(jQuery("#edit-workbench-moderation-state-new").val() == "rejected") {
+//                  jQuery(".reasons-form").show();
+//                  jQuery(".form-item-log").hide();                  
+//                  jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
+//                                 }               
+//
+//                  });                  
+//              });
+            
