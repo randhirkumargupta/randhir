@@ -8,7 +8,8 @@
 
     Drupal.behaviors.itg_poll_form = {
         attach: function(context, settings) {
-
+            jQuery('input[name="field_poll_start_date[und][0][value][date]"]').keydown(false);
+            jQuery('input[name="field_poll_end_date[und][0][value][date]"]').keydown(false);
             var getOptionAnswerValnew = $("#edit-field-poll-answer-option-und option:selected").val();
             if (getOptionAnswerValnew == 1) {
                 $('.field-name-field-poll-answer-image').hide();
