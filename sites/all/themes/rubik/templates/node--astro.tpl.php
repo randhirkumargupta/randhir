@@ -155,6 +155,20 @@
                               $output .= '<div class="inner-label">Text: </div>';
                               $output .= '<div class="inner-item">'.$num_item['field_buzz_description']['und'][0]['value'].'</div>';
                               echo $output;
+                              
+                              // Print video field
+                              $video_fid = isset($num_item['field_astro_video']['und'][0]['fid']) ? $num_item['field_astro_video']['und'][0]['fid'] : '';                        
+                              if ($video_fid != '') {
+                                $url_video = _itg_photogallery_fid($video_fid);
+                                $video = '';
+                                $video .= '<div class="inner-label">Video: </div>';                                                      
+                                $video .= '<span class="file">';                        
+                                $video .= '<img class="file-icon" alt="File" src="'.$base_url.'/modules/file/icons/video-x-generic.png"> ';
+                                $video .= '<a href="'.$url_video.'">'.itg_astro_file_name($video_fid).'</a>';
+                                $video .= '</span>';
+                                print '<div class="inner-item">'.$video.'</div>';
+                              }
+                              
                               // Print audio field 
                               $audio_fid = isset($num_item['field_common_audio_file']['und'][0]['fid']) ? $num_item['field_common_audio_file']['und'][0]['fid'] : '';                                                
                               if ($audio_fid != '') {
@@ -168,18 +182,7 @@
                                 print '<div class="inner-item">'.$audio.'</div>';
                               }
 
-                              // Print video field
-                              $video_fid = isset($num_item['field_astro_video']['und'][0]['fid']) ? $num_item['field_astro_video']['und'][0]['fid'] : '';                        
-                              if ($video_fid != '') {
-                                $url_video = _itg_photogallery_fid($video_fid);
-                                $video = '';
-                                $video .= '<div class="inner-label">Video: </div>';                                                      
-                                $video .= '<span class="file">';                        
-                                $video .= '<img class="file-icon" alt="File" src="'.$base_url.'/modules/file/icons/video-x-generic.png"> ';
-                                $video .= '<a href="'.$url_video.'">'.itg_astro_file_name($video_fid).'</a>';
-                                $video .= '</span>';
-                                print '<div class="inner-item">'.$video.'</div>';
-                              }
+                              
                             print '</div></div>';
                           }                           
                          }
