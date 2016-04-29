@@ -14,6 +14,7 @@
             $('#edit-field-poll-question').remove();
             $('.field-name-field-poll-answer-text input').attr('readonly', true);
             $('#edit-field-poll-question-image .button-remove').remove();
+            $('.field-name-field-poll-manipulate-value').remove();
             
         }
     }

@@ -8,7 +8,8 @@
 
     Drupal.behaviors.itg_poll_form = {
         attach: function(context, settings) {
-
+            jQuery('input[name="field_poll_start_date[und][0][value][date]"]').keydown(false);
+            jQuery('input[name="field_poll_end_date[und][0][value][date]"]').keydown(false);
             var getOptionAnswerValnew = $("#edit-field-poll-answer-option-und option:selected").val();
             if (getOptionAnswerValnew == 1) {
                 $('.field-name-field-poll-answer-image').hide();
@@ -23,6 +24,7 @@
             
             var getOptionAnswerVal;
             $('#edit-field-poll-answer-option-und').on('change', function() {
+                $('.field-name-field-ans-caption input').val(''); // caption value reset
                 getOptionAnswerVal = $("#edit-field-poll-answer-option-und").val();
                 if (getOptionAnswerVal == 1) {
                     $('#edit-field-poll-answer').show();
@@ -60,22 +62,35 @@
             $("#edit-field-display-result-und-2").prop("disabled", true);
             $('#edit-field-show-end-date-und-1').click(function() {
                 if ($("#edit-field-show-end-date-und-1").is(":not(:checked)")) {
-                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-1").val('');
+                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val('');
+                    $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val('');
                     $("#edit-field-display-result-und-1").prop("checked", true);
                     $("#edit-field-display-result-und-2").prop("disabled", true);
-                }
-            });
-            $('document').ready(function() {
-                if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-1').val()) {
+                }else{
+                    var myDate = new Date($('#edit-field-poll-start-date-und-0-value-datepicker-popup-2').val());
+                    myDate.setDate(myDate.getDate()+7);
+                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val($.datepicker.formatDate('mm/dd/yy', myDate));
+                    
+                    $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val($.datepicker.formatDate('23:00', myDate));
+                    if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
                     $("#edit-field-display-result-und-2").prop("disabled", false);
                 } else {
                     $("#edit-field-display-result-und-1").prop("checked", true);
                     $("#edit-field-display-result-und-2").prop("disabled", true);
                 }
-                jQuery("#edit-field-poll-end-date-und-0-value-datepicker-popup-1").datepicker({
+                }
+            });
+            $('document').ready(function() {
+                if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
+                    $("#edit-field-display-result-und-2").prop("disabled", false);
+                } else {
+                    $("#edit-field-display-result-und-1").prop("checked", true);
+                    $("#edit-field-display-result-und-2").prop("disabled", true);
+                }
+                jQuery("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").datepicker({
                     minDate: 0,
                     onClose: function() {
-                        if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-1').val()) {
+                        if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
                             $("#edit-field-display-result-und-2").prop("disabled", false);
                         } else {
                             $("#edit-field-display-result-und-2").prop("disabled", true);

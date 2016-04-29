@@ -113,6 +113,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         unset($form['account']['status']);
         unset($form['field_story_expiry_date']);
         unset($form['field_notify_user_of_update_acco']);
+        unset($form['field_subscribe_for_newsletter']);
         }
     }
 
@@ -599,9 +600,9 @@ function itg_users_user_update(&$edit, $account, $category) {
   }
   
   // send mail when user select notification chekbox
-  if ($account->field_user_subscribe[LANGUAGE_NONE][0]['value'] == '1') {
+  if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
 
-    $news_info = 'You are sucessfully subscribe for Newsletter';    
+    $news_info = 'You have sucessfully subscribed for India Today newsletters.';    
     $mail_content = itg_users_get_mail_content($news_info);
       $params = array(
         'body' => $mail_content,
@@ -628,8 +629,8 @@ function itg_users_user_update(&$edit, $account, $category) {
  * @param type $node
  */
 function itg_users_user_insert(&$edit, $account, $category) { 
-  if ($account->field_user_subscribe[LANGUAGE_NONE][0]['value'] == '1') {
-    $news_info = 'You are sucessfully subscribe for Newsletter';    
+  if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
+    $news_info = 'You have sucessfully subscribed for India Today newsletters.';    
     $mail_content = itg_users_get_mail_content($news_info);
       $params = array(
         'body' => $mail_content,

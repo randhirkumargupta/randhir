@@ -56,7 +56,7 @@ if ((isset($isCookies) && $isCookies == 'yes' && user_is_anonymous()) || (isset(
       if ($result_format == 1) { // Percent
         if (isset($finaltotal)) {
 
-          $outputnew = '<strong>Percent: </strong> ' . number_format(($optionCnt / $finaltotal) * 100, 2) . '%';
+          $outputnew = '<strong>Percent: </strong> ' . number_format(($optionCnt / $finaltotal) * 100) . '%';
         }
       }
       elseif ($result_format == 2) { // Number of votes

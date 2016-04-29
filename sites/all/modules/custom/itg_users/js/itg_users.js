@@ -13,8 +13,8 @@
                 var EDITOR = '6';
                 var SECTIONEDITORANCHOR = '20';
                 var COPYEDITOR = '5';
-
-                // code for 
+                $('#edit-field-user-section > .form-type-select > label').html('Section<span class="form-required"> *</span>');
+               
                 $('.form-item-roles').hide();
                 $('#edit-metatags').hide();
                 $('#edit-timezone').hide();
