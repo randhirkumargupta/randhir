@@ -32,35 +32,7 @@
                     $('#edit-field-ugc-upload-photo-und-0-remove-button').mousedown();
                      $('#edit-field-astro-video-und-0-remove-button').mousedown();
                 }
-                
-                var labelcontenttypevalue = $('#edit-field-ugc-content-type-und').val();
-              if (labelcontenttypevalue == 'blog' || labelcontenttypevalue == 'story' || labelcontenttypevalue == 'recipe' || labelcontenttypevalue == 'audio') { 
-                    
-                    $('.form-type-textarea > label').html('Description<span class="form-required"> *</span>');
-                }
-                else
-                {
-                  $('.form-type-textarea > label').html('Description');  
-                }
-                
-                if (labelcontenttypevalue == 'photogallery') { 
-                    
-                    $('#edit-field-ugc-upload-photo .form-type-managed-file > label').html('Upload Photo<span class="form-required"> *</span>');
-                }
-                else
-                {
-                  $('#edit-field-ugc-upload-photo .form-type-managed-file > label').html('Upload Photo');  
-                }
-                
-                if (labelcontenttypevalue == 'video') { 
-                   
-                  $('#edit-field-astro-video .form-type-managed-file > label').html('Upload Video<span class="form-required"> *</span>');
-                }
-                else
-                {
-                  $('#edit-field-astro-video .form-type-managed-file > label').html('Upload Video');  
-                }
-                
+               
             }); 
     }
 
