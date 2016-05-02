@@ -4,7 +4,7 @@
  * Implement itg_pti_content
  */
 function itg_pti_content() {
-
+ $file_path = drupal_realpath('public://');
   global $base_url, $user;
   module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
   
@@ -15,7 +15,7 @@ function itg_pti_content() {
     $op[$val->tid] = $val->name;
   }
 
-  $direc = getDirContents('sites/default/files/gallery/pti/');
+  $direc = getDirContents($file_path.'/gallery/pti/');
 
   foreach ($direc as $xm_file) {
 
