@@ -23,14 +23,14 @@ sites/all/themes/README.txt
 .DS_Store
 .htaccess
 .idea
-web.config
-authorize.php
-cron.php
-index.php
-install.php
-update.php
-xmlrpc.php
-/includes
-/misc
-/profiles
-/themes
+# web.config
+# authorize.php
+# cron.php
+# index.php
+# install.php
+# update.php
+# xmlrpc.php
+# /includes
+# /misc
+# /profiles
+# /themes
