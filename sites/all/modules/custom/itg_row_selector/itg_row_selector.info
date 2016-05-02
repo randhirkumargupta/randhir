@@ -1,0 +1,10 @@
+name = ITG Row Selector
+description = Allows user to select rows by check box
+package = ITG
+dependencies[] = views
+
+core = 7.x
+
+files[] = views/itg_row_selector_field_handler_row_selector.inc
+
+

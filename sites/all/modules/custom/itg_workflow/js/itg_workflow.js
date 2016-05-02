@@ -34,14 +34,27 @@
 // code for moderation value change on click of dropdown and save story 
 jQuery(document).ready(function() {               
     jQuery('#story_submit_link').click(function() {
-       var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];                     
+       /*var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];                     
        jQuery("#edit-workbench-moderation-state-new").val(story_state);
-       jQuery("#edit-submit").click();                                    
+       jQuery("#edit-submit").click();*/
+       
+       var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];                   
+       
+       if (story_state == 'published' || story_state == 'needs_review') {                   
+           var msg = confirm("Hope you have Previewed the story before submitting. Do you want to continue to submit?");
+           if (msg == true) {
+                jQuery("#edit-workbench-moderation-state-new").val(story_state);
+                jQuery("#edit-submit").click();
+                return true;
+           }
+           return false; 
+       }
+        
     });
 
-    jQuery('#edit-submit').click(function() {                 
+    jQuery('.edit-submit-class').click(function() {                 
         var moderation_state = jQuery("#edit-workbench-moderation-state-new").val();
-        if (moderation_state == 'published' || moderation_state == 'needs_review') {                   
+        if (moderation_state == 'published') {                   
            var msg = confirm("Hope you have Previewed the story before submitting. Do you want to continue to submit?");
            if (msg == true) {
                return true;
@@ -51,3 +64,18 @@ jQuery(document).ready(function() {
         return true;                     
     });                  
 });
+
+//jQuery(document).ready(function() {
+//              
+//              
+//              // code for reject content type
+//              jQuery("#edit-workbench-moderation-state-new").change(function() {
+//                if(jQuery("#edit-workbench-moderation-state-new").val() == "rejected") {
+//                  jQuery(".reasons-form").show();
+//                  jQuery(".form-item-log").hide();                  
+//                  jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
+//                                 }               
+//
+//                  });                  
+//              });
+            

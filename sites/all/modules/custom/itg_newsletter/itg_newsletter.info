@@ -1,0 +1,6 @@
+name = ITG Newsletter
+description = "Contains functionality related to newsletter."
+package = "ITG"
+core = 7.x
+
+files[] = itg_newsletter.module

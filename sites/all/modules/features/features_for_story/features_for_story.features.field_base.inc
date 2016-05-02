@@ -43,6 +43,9 @@ function features_for_story_field_default_field_bases() {
       0 => 'comment',
     ),
     'field_name' => 'comment_body',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',

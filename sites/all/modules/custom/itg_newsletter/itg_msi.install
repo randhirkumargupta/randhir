@@ -1,0 +1,60 @@
+<?php
+/**
+ * @file
+ * Install functions for newsletter.
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store newsletter information
+ * @return array
+ */
+function itg_newsletter_schema() {
+  $schema['itg_newsletter'] = array(
+      'description' => 'Table for itg_newsletter module.',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The primary identifier for a table.',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'uid' => array(
+              'description' => 'User Id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'email' => array(
+              'description' => 'User Email.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'website' => array(
+              'description' => 'Website Name.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'status' => array(
+              'description' => 'Subscription Status.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  return $schema;
+}

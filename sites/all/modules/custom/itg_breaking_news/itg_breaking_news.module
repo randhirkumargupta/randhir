@@ -139,19 +139,20 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id)
 /**
  * Custom submit callback for redirecting breaking news form.
  */
-function itg_breaking_news_form_custom_callback($form, &$form_state)
-{
-    if (isset($_SESSION['messages'])) {
-        unset($_SESSION['messages']);
+function itg_breaking_news_form_custom_callback($form, &$form_state) {
+    if (isset($_SESSION['messages']['status'])) {
+        unset($_SESSION['messages']['status']);
     }
-    
     if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'breaking-news') {
-    drupal_set_message(t('Breaking News has been created successfully.'));
-  } else {
-      drupal_set_message(t('Breaking News has been updated successfully.'));
-  }
-    
+        $op = 'created';
+    } else {
+        $op = 'updated';
+    }
+    $breaking_news_title = $form_state['node']->title;
+    drupal_set_message(t('Breaking News <b>' . $breaking_news_title . '</b> has been ' . $op . '.'));
+    $_GET['destination'] = $_REQUEST['destination'];
 }
+
 
 /**
  * Implement hook_views_pre_render
@@ -181,7 +182,15 @@ function itg_breaking_news_form_views_exposed_form_alter(&$form, &$form_state, $
         $form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
         $form['title']['#autocomplete_path'] = 'content-title-list/breaking_news/autocomplete';
         $form['title']['#attributes'] = array('placeholder' => t('Title'));
-    }
+        
+        // code to reset breaking news listing when user click on back button
+        drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("form").each(function() {            
+                 this.reset();
+                 
+               });              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
 }
 
 /**
@@ -195,7 +204,11 @@ function itg_breaking_news_after_build($form, &$form_state)
 {
 
     global $user, $base_url;
-
+    
+for($i = 0; $i <= $form['field_breaking_content_details']['und']['#max_delta']; $i++) {
+    $count = $i+1;
+    $form['field_breaking_content_details']['und'][$i]['#title'] = 'Content details - '.$count;  
+  }
     // update automatic alias name
     $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
     //Unset metatag description

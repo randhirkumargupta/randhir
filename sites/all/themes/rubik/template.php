@@ -336,6 +336,8 @@ function rubik_preprocess_node(&$vars) {
 function rubik_preprocess_comment(&$vars) {
   $vars['layout'] = TRUE;
   $vars['submitted'] = _rubik_submitted($vars['comment']);
+  // Remove comment title from display
+  $vars['title'] = '';
 }
 
 /**
@@ -406,27 +408,34 @@ function rubik_breadcrumb($vars) {
     }
     
     // get first argument from url 
-     //$content_url = arg(0);
+     $content_url = arg(0);
      // make title for breadcrumb
-     //$content_title = ucfirst(str_replace('-',' ',$content_url));
+     $content_title = ucfirst(str_replace('-',' ',$content_url));
      
-    //story tab breadcrumb
-//    if(arg(0) == ('in-queue-story' || 'published-story' || 'expired-story' || 'unpublished-story' || 'archive-story')){
-//      $breadcrumb[] = l('Home','cms-user-dashboard').l('Content Management ', $content_url).l($content_title,$content_url);
-//        return '<div class="breadcrumb-link">'. implode('  ', $breadcrumb) .'</div>';
-//    }
+     $story_tab = array('in-queue-story','published-story','expired-story', 'unpublished-story', 'archive-story');
+     $photogallery_tab = array('in-queue-photogallery','published-photogallery','unpublished-photogallery', 'archive-photogallery');
+     $bolg_tab = array('published-blogs','unpublished-blogs','in-queue-blogs', 'archive-blogs');
+     
+     //story tab breadcrumb
+     if (in_array($content_url, $story_tab)) {
+      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
+      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+    }
     
-    //photogallery tab breadcrumb
-//    if(arg(0) == ('in-queue-photogallery' || 'published-photogallery' || 'unpublished-photogallery' || 'archive-photogallery')){
-//      $breadcrumb[] = l('Home','cms-user-dashboard').l('Content Management ', $content_url).l($content_title,$content_url);
-//        return '<div class="breadcrumb-link">'. implode('  ', $breadcrumb) .'</div>';
-//    }
+    //Photogallery tab breadcrumb
+     if (in_array($content_url, $photogallery_tab)) {
+      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
+      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+    }
+
     
     //Blog tab breadcrumb
-//    if(arg(0) == ('published-blogs' || 'unpublished-blogs' || 'in-queue-blogs' || 'archive-blogs')){
-//      $breadcrumb[] = l('Home','cms-user-dashboard').l('Content Management ', $content_url).l($content_title,$content_url);
-//        return '<div class="breadcrumb-link">'. implode('  ', $breadcrumb) .'</div>';
-//    }
+     if (in_array($content_url, $bolg_tab)) {
+      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
+      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+    }
+
+
   }
 
   // Optional: Add the site name to the front of the stack.
@@ -650,7 +659,8 @@ function rubik_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
  */
 function _rubik_submitted($node) {
   $byline = t('Posted by !username', array('!username' => theme('username', array('account' => $node))));
-  $date = format_date($node->created, 'small');
+  // $date = format_date($node->created, 'small');
+  $date = date('d/m/Y', $node->created);
   return "<div class='byline'>{$byline}</div><div class='date'>$date</div>";
 }
 
@@ -727,3 +737,9 @@ function rubik_node_preview($variables) {
 
   return $output;
 }
+
+
+function rubik_date_all_day_label() {
+  return '- 00:00';
+}
+

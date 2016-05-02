@@ -29,14 +29,18 @@ if (theme_get_setting('rubik_show_branding')): ?>
   <?php if (!$overlay && isset($secondary_menu)) : ?>
     <?php print theme('links', array('links' => $secondary_menu, 'attributes' => array('class' => 'links secondary-menu'))) ?>
   <?php endif; ?>
-  <div class="user-role">User role - <?php 
-  // get role array
-      $role_display=$user->roles;
+  
+  <div class="user-role">
+    <span>
+      <i class="fa fa-bell-o" style="padding-right: 5px !important;"></i>
+      <?php if (function_exists('get_task_count_of_user')) { print l(get_task_count_of_user(), 'assigned-task-list'); }?>
+    </span> User role - <?php 
+      // get role array
+      $role_display = $user->roles;
       // skip key for authenticated user
-      $role_display=array_slice($role_display,1);
+      $role_display = array_slice($role_display,1);
       // get value in comma seprated
-      $role_display = implode(',', $role_display);
-      
+      $role_display = implode(',', $role_display);      
       print $role_display;
   
   ?></div>

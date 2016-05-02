@@ -13,8 +13,8 @@
                 var EDITOR = '6';
                 var SECTIONEDITORANCHOR = '20';
                 var COPYEDITOR = '5';
-
-                // code for 
+                $('#edit-field-user-section > .form-type-select > label').html('Section<span class="form-required"> *</span>');
+               
                 $('.form-item-roles').hide();
                 $('#edit-metatags').hide();
                 $('#edit-timezone').hide();
@@ -91,3 +91,17 @@
     }
   };
 })(jQuery, Drupal, this, this.document);
+
+// code for moderation value change on click of dropdown and save story 
+jQuery(document).ready(function() {
+    jQuery('.button-yes').click(function() {                 
+        var status_val = jQuery("input[name='status']:checked").val();
+        if (status_val == 0) {                   
+           var msg = confirm("Are you sure you want to Blocked this User?");
+           if (msg == true) {
+               return true;
+           }
+           return false; 
+        }                             
+    });                  
+});

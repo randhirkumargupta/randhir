@@ -44,7 +44,6 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'draggableviews' => 'draggableviews',
@@ -143,13 +142,13 @@ function features_for_quiz_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Field: Draggableviews: Content */
-  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['table'] = 'node';
-  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Result Found!';
+  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
@@ -183,7 +182,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['label'] = 'Start Date';
   $handler->display->display_options['fields']['field_survey_start_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -196,7 +195,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['label'] = 'End Date';
   $handler->display->display_options['fields']['field_survey_end_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -246,12 +245,20 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  /* Sort criterion: Draggableviews: Weight */
-  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'draggableviews_structure';
-  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['draggableviews_setting_view'] = 'manage_quiz:page';
-  $handler->display->display_options['sorts']['weight']['draggableviews_setting_new_items_bottom_list'] = 1;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = 'View User List';
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_quiz_views_user_list($row->nid); ?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -349,7 +356,6 @@ function features_for_quiz_views_default_views() {
     20 => 0,
     6 => 0,
     21 => 0,
-    19 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
@@ -357,10 +363,12 @@ function features_for_quiz_views_default_views() {
     17 => 0,
     14 => 0,
     12 => 0,
+    19 => 0,
     15 => 0,
     18 => 0,
   );
   $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['field_story_category_tid']['error_message'] = FALSE;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

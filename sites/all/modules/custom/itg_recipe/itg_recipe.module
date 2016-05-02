@@ -41,6 +41,35 @@ function itg_recipe_node_presave($node) {
  */
 function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
+  
+    // code for Comment Question field hide and show
+    $form['field_story_facebook_narrative']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+      )
+    );
+     
+    // code for facebook image field hide and show
+    $form['field_story_facebook_image']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+      )
+    );
+       
+    // code for tweet field show and hide 
+    $form['field_story_tweet']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+      ),
+    );
+    
+     // code for tweeter image field hide and show
+    $form['field_story_tweet_image']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+      )
+    );
+  
   if ($form_id == 'recipe_node_form') {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_recipe') . '/js/jquery.validate.min.js',
@@ -64,6 +93,14 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'][] = 'itg_cooking_tips_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_cooking_tips_form_custom_callback';
       break;
+    case 'food_news_node_form':
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'manage-food-news', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+      );
+      $form['#after_build'][] = 'itg_food_news_after_build';
+      $form['actions']['submit']['#submit'][] = 'itg_food_news_form_custom_callback';
+      break;
   }
 }
 
@@ -83,7 +120,8 @@ function itg_cooking_tips_form_custom_callback($form, &$form_state) {
   else {
     $op = 'created';
   }
-  drupal_set_message(t('Cooking Tips has been ' . $op . ' successfully.'));
+ $cooking_tips_title = $form_state['node']->title;
+  drupal_set_message(t('Cooking Tips <b>' . $cooking_tips_title . '</b> has been ' . $op .'.'));
   $_GET['destination'] = 'manage-cooking-tips';
 }
 
@@ -108,6 +146,46 @@ function itg_cooking_tips_after_build($form, &$form_state) {
 }
 
 /**
+ * After submit Cooking Tips
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_food_news_form_custom_callback($form, &$form_state) {
+
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if (arg(2) == 'edit') {
+    $op = 'updated';
+  }
+  else {
+    $op = 'created';
+  }
+  $food_title = $form_state['node']->title;
+  drupal_set_message(t('Food News <b>' . $food_title . '</b> has been ' . $op .'.'));
+  $_GET['destination'] = 'manage-food-news';
+}
+
+/**
+ * After build for Cooking Tips form.
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_food_news_after_build($form, &$form_state) {
+
+  global $user, $base_url;
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+  //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+
+  drupal_add_js(array('itg_recipe' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_recipe') . '/js/itg_recipe.js', array('weight' => 1));
+  return $form;
+}
+/**
  * After submit recipe
  * @param Array $form
  * @param Array $form_state
@@ -122,8 +200,9 @@ function itg_recipe_form_custom_callback($form, &$form_state) {
   }
   else {
     $op = 'created';
-  }
-  drupal_set_message(t('Recipe has been ' . $op . ' successfully.'));
+  }$recipe_title = $form_state['node']->title;
+  drupal_set_message(t('Recipe <b>' . $recipe_title . '</b> has been ' . $op .'.'));
+  //$_GET['destination'] = $_REQUEST['destination'];
   $_GET['destination'] = 'recipe-management';
 }
 
@@ -158,10 +237,16 @@ function itg_recipe_views_pre_render(&$view) {
     $header_content_recipe .= '<span class="manage_recipe_view_menu">' . l(t('Recipes'), 'recipe-management') . '&nbsp;</span>';
     $header_content_recipe .= '<span class="manage_cooking_tips_view_menu">' . l(t('Cooking Tips'), 'manage-cooking-tips') . '&nbsp;</span>';
     $header_content_recipe .= '<span class="create_cooking_tips">' . l(t('Create Cooking Tips'), 'node/add/cooking-tips') . '&nbsp;</span>';
+    $header_content_recipe .= '<span class="manage_cooking_tips_view_menu">' . l(t('Food News'), 'manage-food-news') . '&nbsp;</span>';
+    $header_content_recipe .= '<span class="create_cooking_tips">' . l(t('Create Food News'), 'node/add/food-news') . '&nbsp;</span>';
     $header_content_recipe .= l(t('Create Recipe'), 'node/add/recipe');
     $view->attachment_before = $header_content_recipe;
   }
   if ($view->name == "manage_cooking_tips") {
+    $header_content_recipe .= '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $view->attachment_before = $header_content_recipe;
+  }
+  if ($view->name == "manage_food_news") {
     $header_content_recipe .= '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
     $view->attachment_before = $header_content_recipe;
   }
@@ -191,6 +276,12 @@ function itg_recipe_theme($existing, $type, $theme, $path) {
     'cooking_tips_node_form' => array(
       'arguments' => array('form' => NULL),
       'template' => 'cooking-tips-node-form',
+      'path' => drupal_get_path('module', 'itg_recipe') . '/templates',
+      'render element' => 'form',
+    ),
+    'food_news_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'food-news-node-form',
       'path' => drupal_get_path('module', 'itg_recipe') . '/templates',
       'render element' => 'form',
     ),
@@ -239,6 +330,10 @@ function itg_recipe_form_views_exposed_form_alter(&$form, &$form_state, $form_id
   }
   if ($form["#id"] == 'views-exposed-form-recipe-management-page-1') {
     $form['title']['#autocomplete_path'] = 'content-title-list/cooking_tips/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  if ($form["#id"] == 'views-exposed-form-recipe-management-page-2') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/food_news/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
 }

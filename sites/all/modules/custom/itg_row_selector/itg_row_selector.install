@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * Implements hook_schema()
+ * @return array
+ */
+function itg_row_selector_schema() {
+  $schema['itg_row_selector'] = array(
+    'description' => 'The base table for syndication.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a node.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'web_property' => array(
+        'description' => 'The node type for syndication.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),      
+      'client_title' => array(
+        'description' => 'Client title.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'syndication' => array(
+        'description' => 'A blob field that contains list of node which are ready to syndicate with client.',
+        'type' => 'blob',
+      ),
+      'status' => array(
+        'description' => t('File status: 0 means file not been created and 1 for file successful created.'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => t('The created date for the single record'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+    ),
+    'indexes' => array(
+      'web_property' => array('web_property'),
+      'node_created' => array('created'),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}

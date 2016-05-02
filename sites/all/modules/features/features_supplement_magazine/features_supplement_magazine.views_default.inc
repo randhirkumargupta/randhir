@@ -202,7 +202,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: User: Last name */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -479,7 +479,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: User: Last name */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -855,7 +855,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: User: Last name */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -927,18 +927,16 @@ function features_supplement_magazine_views_default_views() {
     'issue' => 'issue',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Title */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
-  $handler->display->display_options['filters']['title']['group'] = 1;
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Title (field_issue_title) */
+  $handler->display->display_options['filters']['field_issue_title_value']['id'] = 'field_issue_title_value';
+  $handler->display->display_options['filters']['field_issue_title_value']['table'] = 'field_data_field_issue_title';
+  $handler->display->display_options['filters']['field_issue_title_value']['field'] = 'field_issue_title_value';
+  $handler->display->display_options['filters']['field_issue_title_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_issue_title_value']['expose']['operator_id'] = 'field_issue_title_value_op';
+  $handler->display->display_options['filters']['field_issue_title_value']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['field_issue_title_value']['expose']['operator'] = 'field_issue_title_value_op';
+  $handler->display->display_options['filters']['field_issue_title_value']['expose']['identifier'] = 'field_issue_title_value';
+  $handler->display->display_options['filters']['field_issue_title_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -948,17 +946,20 @@ function features_supplement_magazine_views_default_views() {
     5 => 0,
     20 => 0,
     6 => 0,
+    21 => 0,
     10 => 0,
-    19 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
     17 => 0,
     14 => 0,
     12 => 0,
+    19 => 0,
     15 => 0,
     18 => 0,
   );
+  $handler->display->display_options['filters']['field_issue_title_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_issue_title_value']['year_range'] = '-0:+3';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -985,7 +986,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_issue_title']['table'] = 'field_data_field_issue_title';
   $handler->display->display_options['fields']['field_issue_title']['field'] = 'field_issue_title';
   $handler->display->display_options['fields']['field_issue_title']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -1021,7 +1022,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: User: Last name */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -1040,7 +1041,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
@@ -1326,7 +1327,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_print_magazine_issue_date']['table'] = 'field_data_field_print_magazine_issue_date';
   $handler->display->display_options['fields']['field_print_magazine_issue_date']['field'] = 'field_print_magazine_issue_date';
   $handler->display->display_options['fields']['field_print_magazine_issue_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -1338,7 +1339,8 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
@@ -1627,7 +1629,8 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';

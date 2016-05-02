@@ -52,7 +52,10 @@ function user_management_field_group_info() {
     'label' => 'Account Details',
     'weight' => '3',
     'children' => array(
-      0 => 'account',
+      0 => 'field_notify_user_of_update_acco',
+      1 => 'field_story_expiry_date',
+      2 => 'field_subscribe_for_newsletter',
+      3 => 'account',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

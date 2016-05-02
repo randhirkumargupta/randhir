@@ -10,6 +10,9 @@
 <div id="RecipeBasicDetails">
   <h2 class="story-title"><?php print t('Basic Details'); ?></h2>
   <?php print drupal_render($form['title']); ?>
+  <?php print drupal_render($form['field_recipe_long_headline']); ?>
+  <?php print drupal_render($form['field_story_kicker_text']); ?>
+  <?php print drupal_render($form['field_story_reporter']); ?>
   <?php print drupal_render($form['body']); ?>
 </div>
 <div id="RecipeImages">
@@ -18,6 +21,7 @@
   <?php print drupal_render($form['field_story_large_image']); ?>
   <?php print drupal_render($form['field_story_medium_image']); ?>
   <?php print drupal_render($form['field_story_small_image']); ?>
+  <?php print drupal_render($form['field_recipe_writer_image']); ?>
 </div>
 <div id="RecipeSyndication">
   <h2 class="story-title"><?php print t('Syndication'); ?></h2>

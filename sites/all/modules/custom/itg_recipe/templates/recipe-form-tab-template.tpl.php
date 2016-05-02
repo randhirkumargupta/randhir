@@ -11,6 +11,6 @@
   <span class="target-link" data-target-id="RecipeDetails"><?php print t('Recipe Details'); ?></span>
   <span class="target-link" data-target-id="RecipeImages"><?php print t('Recipe Images'); ?></span>
   <span class="target-link" data-target-id="RecipeSyndication"><?php print t('Syndication'); ?></span>
-  <span class="target-link" data-target-id="RecipeSection"><?php print t('Recipe Section'); ?></span>
+  <span class="target-link" data-target-id="RecipeCategory"><?php print t('Recipe Category'); ?></span>
   <span class="target-link" data-target-id="edit-metatags"><?php print t('Meta Tags'); ?></span>
 </div>

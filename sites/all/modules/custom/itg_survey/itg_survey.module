@@ -420,3 +420,73 @@ function itg_survey_block_view($delta = '') {
   
   return $block;
 }
+
+/**
+ * View survey result link in listing.
+ * @param type $nid
+ * @return string
+ */
+function itg_survey_show_survey_result($nid){
+  if(itg_common_check_record_existance($nid, 'itg_survey_detail') > 0){
+    return l('View Result','survey-result/'.$nid, array('attributes' => array('target'=>'_blank')));
+  } else {
+    return 'View Result';
+  }
+}
+
+/**
+ * Return name as per dropdown
+ * @param type $name
+ */
+function itg_survey_get_answer_type_name($name){
+  switch ($name) {
+        case 'radios':
+          $name = 'Radio Button';
+      break;
+        case 'checkboxes':
+          $name = 'Checkbox';
+      break;
+        case 'rating':
+          $name = 'Rating';
+      break;
+        case 'textfield':
+          $name = 'Text Field';
+      break;
+  }
+  return ucwords($name);
+}
+
+/**
+ * Access denied for expired node
+ * @param Object $node
+ * @param String $op
+ * @param Array $account
+ * @return string
+ */
+function itg_survey_node_access($node, $op, $account) {
+  global $user;
+  
+  if (!in_array('Site Admin', $user->roles)) {
+    $curr_time = strtotime(date('Y-m-d') . ' 00:00:00');
+    
+    $survey_start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
+    $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+
+    $node_edit = FALSE;
+
+    if ($curr_time > $survey_end_date) {
+      $node_edit = TRUE;
+    }
+    
+    if ($curr_time >= $survey_start_date) {
+      $node_edit = TRUE;
+    }
+
+    if (isset($node->type) && ($node->type == 'survey' || $node->type == 'quiz') && $node_edit) {
+      if ($op == 'update') {
+        return NODE_ACCESS_DENY;
+      }
+    }
+    return NODE_ACCESS_IGNORE;
+  }
+}

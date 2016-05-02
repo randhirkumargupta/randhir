@@ -110,7 +110,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Reporter's Email id */
+  /* Field: Content: Email id */
   $handler->display->display_options['fields']['field_reporter_email_id']['id'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
@@ -574,6 +574,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -610,10 +611,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -683,7 +685,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -694,11 +696,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -801,7 +803,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -882,6 +884,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -918,10 +921,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -985,7 +989,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -996,11 +1000,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -1096,7 +1100,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -1144,6 +1148,37 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Locked Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
   $handler->display->display_options['path'] = 'published-story';
 
   /* Display: My Un Published Story */
@@ -1180,6 +1215,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -1216,10 +1252,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -1299,7 +1336,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -1310,11 +1347,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -1417,7 +1454,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -1570,6 +1607,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -1675,7 +1713,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -1686,11 +1724,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -1794,7 +1832,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -1843,6 +1881,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -1948,7 +1987,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -1959,11 +1998,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -2059,7 +2098,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2107,6 +2146,14 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
+    'display_lock' => 'display_lock',
+  );
   $handler->display->display_options['path'] = 'my-published-story';
 
   /* Display: My queue */
@@ -2236,6 +2283,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -2336,7 +2384,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -2347,11 +2395,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -2474,7 +2522,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2617,6 +2665,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -2653,10 +2702,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -2713,7 +2763,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -2724,11 +2774,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -2824,7 +2874,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state_1']['value'] = array(
     'needs_review' => 'needs_review',
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2872,6 +2922,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -2914,7 +2965,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Panchaang-Calendar */
+  /* Field: Field: Expiry date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -2973,7 +3024,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -2984,11 +3035,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -3108,7 +3159,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -3248,6 +3299,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -3290,7 +3342,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Panchaang-Calendar */
+  /* Field: Field: Expiry date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -3317,10 +3369,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
@@ -3345,7 +3398,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -3356,11 +3409,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -3480,7 +3533,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -3530,6 +3583,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -3566,10 +3620,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Source type */
+  /* Field: Content: Updated by */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source type';
   $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Story';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -3614,7 +3669,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -3625,11 +3680,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -3859,6 +3914,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -3947,7 +4003,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -3958,11 +4014,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -4084,7 +4140,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -4172,6 +4228,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -4270,7 +4327,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -4281,11 +4338,11 @@ function features_for_story_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -4381,7 +4438,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Content: Panchaang-Calendar (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
