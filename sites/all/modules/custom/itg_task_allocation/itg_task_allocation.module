@@ -120,9 +120,11 @@ function itg_task_allocation_form_custom_callback($form, &$form_state) {
   }
   
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'task-idea-allocation-tracking') {
-    drupal_set_message(t('Task has been submitted successfully.'));
+   $task_title = $form_state['node']->title; 
+   drupal_set_message(t('Task <b>'. $task_title .'</b> has been submitted successfully.'));
   } else {
-      drupal_set_message(t('Task has been updated successfully.'));
+      $task_title = $form_state['node']->title;
+      drupal_set_message(t('Task <b>'. $task_title .'</b> has been updated successfully.'));
   }
   
   if (isset($_REQUEST['destination'])) {    

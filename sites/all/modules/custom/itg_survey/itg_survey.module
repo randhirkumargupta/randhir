@@ -135,9 +135,11 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
     unset($_SESSION['messages']);
   }
   if (arg(2) == 'edit') {
-    drupal_set_message(t('Survey has been updated.'));
+    $survey_title = $form_state['node']->title;  
+    drupal_set_message(t('Survey <b>'. $survey_title .'</b> has been updated.'));
   } else {
-    drupal_set_message(t('Survey has been submitted for further review and approval.'));
+     $survey_title = $form_state['node']->title;  
+    drupal_set_message(t('Survey <b>'. $survey_title .'</b> has been submitted for further review and approval.'));
   }
 }
 
