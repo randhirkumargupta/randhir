@@ -1,8 +1,0 @@
-name = ITG ADS MANAGEMENT
-description = "ITG Ads Management Module"
-core = 7.x
-package = ITG
-
-files[] = itg_ads_management.module
-
-
