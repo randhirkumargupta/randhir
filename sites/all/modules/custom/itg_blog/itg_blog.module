@@ -99,6 +99,9 @@ function itg_blog_after_build($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Implemets hook_theme()
+ */
 function itg_blog_theme($existing, $type, $theme, $path) {
   $themes = array(
     'blog_node_form' => array(
