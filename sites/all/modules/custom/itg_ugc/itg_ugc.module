@@ -20,6 +20,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   $user_fields = user_load($user->uid);
   if ($form_id == 'ugc_node_form') {
 
+    
     $form['field_recipe_audio']['und'][0]['#title'] = t('Audio') . '<span class="form-required" title="This field is required."> *</span>';
     // get content type field value
     $type = $form['field_ugc_content_type'][LANGUAGE_NONE][0]['value'];
@@ -223,8 +224,10 @@ function itg_ugc_create_content($ugc_node) {
   $exp_date = strtotime('+90 years', strtotime($publish_date));
   $exp_date = date('Y-m-d', $exp_date);
 
-  // get fid of uplaod image
+  // get fid of uplaod video
   $upload_video = $ugc_node->field_astro_video[LANGUAGE_NONE][0]['fid'];
+  // get fid of uplaod image
+  $upload_image = $ugc_node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
   // get body content of ugc
   $description = $ugc_node->field_user_message[LANGUAGE_NONE][0]['value'];
   // add style if find any bad word in body content
@@ -237,8 +240,8 @@ function itg_ugc_create_content($ugc_node) {
   $node->language = LANGUAGE_NONE;
   $node->uid = $user->uid;
   $node->promote = 0;
-  $node->comment = 0;
-  $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = $ugc_node->nid;
+  $node->comment = 0;	
+  $node->field_story_source_id_relation[LANGUAGE_NONE][0]['target_id'] = $ugc_node->nid;
   $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'UGC';
   if ($ugc_node->field_ugc_content_type[LANGUAGE_NONE][0]['value'] == 'story') {
     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($ugc_node->title);
@@ -248,20 +251,27 @@ function itg_ugc_create_content($ugc_node) {
     $node->body[$node->language][0]['format'] = 'full_html';
     $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date ? $publish_date : date('Y-m-d', time());
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
+    // set moderation state to needs reveiw
+  $node->workbench_moderation_state_new = workbench_moderation_state_Review();
   }
   else if ($ugc_node->field_ugc_content_type[LANGUAGE_NONE][0]['value'] == 'blog') {
 
     $node->field_blog_long_description[$node->language][0]['value'] = $final_description;
     $node->field_blog_long_description[$node->language][0]['format'] = 'full_html';
+    // set moderation state to needs reveiw
+  $node->workbench_moderation_state_new = workbench_moderation_state_Review();
   }
   else if ($ugc_node->field_ugc_content_type[LANGUAGE_NONE][0]['value'] == 'recipe') {
     if (!empty($upload_video)) {
       $node->field_recipe_content_type[LANGUAGE_NONE][0]['value'] = 'Video';
+      $node->field_recipe_video = $ugc_node->field_astro_video;
     }
     $node->field_recipe_description[$node->language][0]['value'] = $final_description;
     $node->field_recipe_description[$node->language][0]['format'] = 'full_html';
+    if(!empty($upload_image)) {
     $node->field_story_extra_large_image = $ugc_node->field_ugc_upload_photo;
-    $node->field_recipe_video = $ugc_node->field_astro_video;
+    }
+    $node->status = 0;
   }
   else if ($ugc_node->field_ugc_content_type[LANGUAGE_NONE][0]['value'] == 'photogallery') {
 
@@ -271,9 +281,10 @@ function itg_ugc_create_content($ugc_node) {
 
     $field_collection_item->setHostEntity('node', $node);
     $field_collection_item->save(true);
-  }
-  // set moderation state to needs reveiw
+    // set moderation state to needs reveiw
   $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+  }
+  
   node_save($node);
 }
 
