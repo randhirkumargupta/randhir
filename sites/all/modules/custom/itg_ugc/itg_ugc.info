@@ -1,0 +1,6 @@
+name = ITG UGC
+description = "Contains functionality related to User Generated Content."
+package = "ITG"
+core = 7.x
+
+files[] = itg_ugc.module
