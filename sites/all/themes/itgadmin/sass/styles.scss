@@ -14,6 +14,7 @@ h1, h2, h3, h4{
 }
 table{
   border-collapse: collapse;
+  @extend .full;
 }
 a, img{
   text-decoration: none;
@@ -65,6 +66,9 @@ img{
 }
 .no-underline{
   text-decoration: none;
+}
+.hide{
+  display: none;
 }
 .db{
   display: block;
@@ -202,7 +206,7 @@ a.ckeditor_links{
   @extend .btn;
   @extend .btn-preview;
 }
-.form-submit[value="Save as Draft"]{
+.form-submit[value="Save as Draft"], .form-submit[value="Save"]{
   @extend .btn;
   @extend .btn-save-draft;
 }
@@ -284,6 +288,10 @@ textarea{
 span.error{
   @extend .db;
 }
+.field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide{
+  @extend .hide;
+}
+
 *{
   @extend .mr-0;
   @extend .pd-0;
@@ -368,12 +376,31 @@ span.error{
 .form-textarea-wrapper{
   .grippie{display: none !important;}
 }
-
+fieldset.date-combo{
+  border: none;
+  .container-inline-date{
+    clear: none;
+    .date-padding{
+      @extend .pd-0;
+      .form-item{
+        @extend .mr-0;
+        > label{
+          display: none;
+        }
+        div.description{
+          left: 175px;
+        }
+      }
+    }
+  }
+}
 .form-type-textfield,
 .form-type-select,
 .form-type-managed-file,
 .form-type-checkboxes,
+.form-type-radios,
 .form-type-autocomplete-deluxe,
+.date-combo,
 .form-type-textarea{
   padding: 0 30px;
   margin: 30px 0;
@@ -382,7 +409,9 @@ span.error{
 .form-type-textarea > label, 
 .form-type-select > label, 
 .form-type-autocomplete-deluxe > label,
-.form-type-managed-file > label, 
+.form-type-managed-file > label,
+.form-type-radios > label,
+.date-combo > legend,
 .form-type-checkboxes > label{
   width: 220px;
   float: left;
@@ -392,8 +421,15 @@ span.error{
 .form-type-textarea > label + div, 
 .form-type-select > label + div, 
 .form-type-managed-file > label + div, 
+.form-type-radios > label + div,
+.date-combo > legend + div,
 .form-type-checkboxes > label + div{
   padding-left: 220px;
+}
+.form-type-radio{
+  @extend .dib;
+  @extend .vtop;
+  margin-right: 20px;
 }
 .form-type-autocomplete-deluxe{
   .autocomplete-deluxe-multiple{
@@ -416,7 +452,7 @@ div.description, .pre-desc{
 div.vertical-tabs {
     border: none;
     margin: 0;
-    position: relative;
+    @extend .pos-rel;
     .form-type-textfield, .form-type-textarea{
       margin: 0 0 30px;
     }
@@ -431,7 +467,7 @@ div.vertical-tabs {
   padding: 0;
 }
 .form-type-textfield{
-  position: relative;
+  @extend .pos-rel;
   .form-text{
     & + div.description, & + span.error + div.description{
       @extend .desc-popup;
@@ -446,7 +482,7 @@ div.vertical-tabs {
   }
 }
 .form-type-select{
-  position: relative;
+  @extend .pos-rel;
   .form-select{
     & + div.description, & + span.error + div.description{
       @extend .desc-popup;
@@ -461,7 +497,7 @@ div.vertical-tabs {
   }
 }
 .form-type-checkboxes{
-  position: relative;
+  @extend .pos-rel;
   .form-checkboxes{
     & + div.description{
       @extend .desc-popup;
@@ -482,8 +518,19 @@ div.vertical-tabs {
     display: block;
   }
 }
+.form-type-radios{
+  @extend .pos-rel;
+  div.description{
+    @extend .desc-popup;
+    left: 600px;
+    min-width: 165px;
+  }
+  &:hover div.description{
+    display: block;
+  }
+}
 .form-type-textarea{
-  position: relative;
+  @extend .pos-rel;
   
   div.description{
     @extend .desc-popup;
@@ -1101,6 +1148,19 @@ input[name="field_gallery_image_add_more"]{
         }
       }
     }
+  }
+}
+
+
+.node-quiz-form {
+  .field-name-field-quiz-answer-image, .field-name-field-quiz-answer-video, .field-name-field-quiz-answer-text {
+    @extend .hide;
+  }
+}
+[id*="field-quiz-add-questions-values"]{
+  @extend .full;
+  thead{
+    @extend .hide;
   }
 }
 
