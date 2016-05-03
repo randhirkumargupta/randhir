@@ -1,18 +1,41 @@
 <?php
 
-
-function itg_ads_form_alter(&$form, &$form_state, $form_id) {
- if ($form_id == 'ads_management_node_form') {
+/**
+ * Implementation of hook_form_FORM_ID_alter().
+ * @param array $form
+ * @param array reference $form_state
+ */
+function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form_id) {
+    
     $form['#after_build'][] = 'itg_common_cancel_button';
     drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js', array('weight' => 1));
     $form['actions']['submit']['#submit'][] = 'alter_ad_submit_status_message';
- }
+    
+    $form['field_ads_section_selection']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
+      )
+    );
+    
+    $form['field_ads_content_selection']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
+      )
+    );
+    
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+    foreach ($tax as $key => $val) {
+        $op[$val->tid] = $val->name;
+    }
+    // assign array value to taxonomy field
+    $form['field_ads_section_selection']['und']['#options'] = $op;
 }
 
 
 
 /**
- * Implementation of hook_form_views_exposed_form_alter().
+ * Implementation of hook_form_FORM_ID_alter().
  * @param array $form
  * @param array reference $form_state
  */
@@ -47,4 +70,34 @@ function alter_ad_submit_status_message(&$form, $form_state) {
   $ads_title = $form_state['node']->title;
   drupal_set_message(t('Ad <b>' . $ads_title . '</b> has been ' . $op.'.' ));
   $_GET['destination'] = $_REQUEST['destination'];
+}
+
+
+/**
+ * Implements hook_node_validate().
+ * @param type $node
+ * @param type $form
+ * @param type $form_state   
+ */
+function itg_ads_node_validate($node, $form, &$form_state) {  
+  
+  if ($node->type == 'ads_management') {
+    $template = $node->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
+    $content_selection = $node->field_ads_content_selection[LANGUAGE_NONE][0]['tid'];
+    $section_selection = $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'];
+    
+    // code to check if issue based is check fill magazine kicker text
+    if ($template == 'Section') {
+      if (empty($content_selection)) {
+        form_set_error('field_ads_content_selection', t("Content selection is required"));
+      }
+    }
+    
+    // code to validation magazine field when issue based story is checked
+    if ($template == 'Section') {
+      if (empty($section_selection)) {
+        form_set_error('field_ads_section_selection', t("Section selection is required"));
+      }
+    }    
+  }
 }
