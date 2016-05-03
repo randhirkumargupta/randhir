@@ -1,9 +1,9 @@
 (function ($, Drupal, window, document, undefined) {
   Drupal.behaviors.itg_social_media = {
     attach: function (context, settings) {
-      
+
       // Module code start
-      
+
       // Callback function for custom methods.
       var FormValidation = {
         // Validate Social Media Integration checkboxes.
@@ -17,9 +17,23 @@
           else {
             return false;
           }
+        },
+        // Common function to reset all values
+        clear_form_elements: function (class_name) {
+          jQuery("." + class_name).find(':input').each(function () {
+            switch (this.type) {
+              case 'text':
+              case 'textarea':
+                $(this).val('');
+                break;
+              case 'select-one':
+                $(this).val('_none');
+                break;
+            }
+          });
         }
       };
-      
+
       // Custom validator function for social media start
       $("#itg-social-media-form").validate({
         submitHandler: function (form) {
@@ -28,7 +42,7 @@
         },
         onfocusout: function (element) {
           $(element).valid();
-        },        
+        },
         ignore: '',
         errorElement: 'span',
         errorPlacement: function (error, element) {
@@ -38,11 +52,11 @@
             case 'itg_smi[facebook]':
               errorPlaceHolder = element.parent().parent().parent();
               break;
-            case 'itg_twitter_img[fid]':  
-            case 'itg_fb_img[fid]':  
+            case 'itg_twitter_img[fid]':
+            case 'itg_fb_img[fid]':
               errorPlaceHolder = element.parent().parent();
-              break;              
-              
+              break;
+
             default:
               errorPlaceHolder = element.parent();
           }
@@ -54,7 +68,7 @@
           },
           'itg_facebook_narrative': {
             required: {
-              depends: function() {
+              depends: function () {
                 var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
                 if (smi_fb) {
                   return true;
@@ -68,10 +82,10 @@
           'itg_fb_img[fid]': {
             required: {
               depends: function () {
-                var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');                
+                var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
                 var fid = $('input[name="itg_fb_img[fid]"]').val();
                 if (smi_fb && fid === '0') {
-                  $(this).removeAttr('value');                  
+                  $(this).removeAttr('value');
                 }
                 return true;
               }
@@ -79,7 +93,7 @@
           },
           'itg_twitter_narrative': {
             required: {
-              depends: function() {
+              depends: function () {
                 var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
                 if (smi_fb) {
                   return true;
@@ -93,10 +107,10 @@
           'itg_twitter_img[fid]': {
             required: {
               depends: function () {
-                var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');                
+                var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
                 var fid = $('input[name="itg_twitter_img[fid]"]').val();
                 if (smi_fb && fid === '0') {
-                  $(this).removeAttr('value');                  
+                  $(this).removeAttr('value');
                 }
                 return true;
               }
@@ -121,10 +135,28 @@
           }
         }
       });
-      jQuery.validator.addMethod('validateSmi', function(value, element) {
+      jQuery.validator.addMethod('validateSmi', function (value, element) {
         return FormValidation.validate_smi(value, element);
       }, 'This field is required.');
       // custom validator function end here.
+       
+      // Clear fb fields based on checkbox.
+      $('input[name="itg_smi[facebook]"]').click(function () {
+        if (!$(this).is(':checked')) {
+          FormValidation.clear_form_elements('social-fb-block');
+          jQuery('.form-item-itg-fb-img .button-remove').mousedown();            
+        } 
+      });
+      
+      // Clear twitter fields
+      $('input[name="itg_smi[twitter]"]').click(function () {
+        if (!$(this).is(':checked')) {
+          FormValidation.clear_form_elements('social-twitter-block');
+          jQuery('.form-item-itg-twitter-img .button-remove').mousedown();            
+        } 
+      });
+      // clear form end here.
+     
       // Moduel code end.      
     }
   };
