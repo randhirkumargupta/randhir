@@ -62,11 +62,10 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   //dpm($c_type);
   //dpm($nid);
   $form['#attached']['js'] = array(
-    drupal_get_path('module', 'itg_itg_social_media') . '/js/itg_social_media.js',
+    drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js',
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
-  );
+  ); 
   
-  $form = array();
   $form['itg_smi'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Social media integration '),
@@ -83,6 +82,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+      ),
+      'required' => array(
+        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
       )
     ),
   );  
@@ -94,6 +96,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#upload_location' => 'public://itg_fb_img/',
     '#states' => array(
       'visible' => array(
+        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+      ),
+      'required' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
       )
     ),
