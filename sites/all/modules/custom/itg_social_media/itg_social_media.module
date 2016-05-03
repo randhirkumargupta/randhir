@@ -7,6 +7,34 @@
  */
 
 /**
+ * Implement hook_permissions()
+ */
+function itg_social_media_permission() {
+  return array(
+    'administer itg_social_media edit_content settings' => array(
+      'title' => t('Edit social media section'),
+      'description' => t('Using this permission user can edit social media part of any node.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu()
+ * @return array
+ */
+function itg_social_media_menu() {
+  $items['itg-social-media/edit-content/%'] = array(
+    'title' => t('Social Media Section'),
+    'page callback' => 'drupal_get_form',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'page arguments' => array(itg_social_media_form, 2, 3),
+    'type' => MENU_CALLBACK,    
+  );
+
+  return $items;
+}
+
+/**
  * Implements hook_form_alter() 
  * @param type $form
  * @param type $form_state
@@ -30,7 +58,14 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
 /**
  * Create custom form for social media integration.
  */
-function itg_social_media_form($form, &$form_state) {
+function itg_social_media_form($form, &$form_state, $c_type, $nid) {
+  //dpm($c_type);
+  //dpm($nid);
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_itg_social_media') . '/js/itg_social_media.js',
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+  );
+  
   $form = array();
   $form['itg_smi'] = array(
     '#type' => 'checkboxes',
@@ -71,7 +106,7 @@ function itg_social_media_form($form, &$form_state) {
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
       )
-    ),
+    ),    
   );
   $form['itg_twitter_img'] = array(
     '#title' => t('Twitter Image'),
@@ -86,6 +121,10 @@ function itg_social_media_form($form, &$form_state) {
     ),
   );
   
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Share Content'),
+  );
   return $form;
 }
 
@@ -108,7 +147,6 @@ function itg_social_media_block_info() {
  */
 function itg_social_media_block_view($delta = '') {
   $block = array();
-  $data = '';
   
   switch ($delta) {
     case 'social_media_form':
