@@ -7,43 +7,8 @@
  * Provides common functionality and customizations.
  *
  */
-define('AUTHOR_GUEST', 4);
-define('INTERN', 7);
-define('SUBEDITOR_SR_SUB', 9);
-define('COPY_EDITOR', 5);
-define('SECTION_EDITOR', 8);
-define('SECTION_EDITOR_ANCHOR', 20);
-define('EDITOR', 6);
-define('SITE_ADMIN', 10);
-define('SEO', 19);
-define('CORRESPONDENT', 13);
-define('CO_ORDINATOR', 11);
-define('PHOTO_COORDINATOR', 16);
-define('PHOTO_HEAD', 17);
-define('DESIGN_HEAD', 14);
-define('COPY_DESK', 12);
-define('DESIGNER', 15);
-define('PHOTOGRAPHER', 18);
-define('ADMINISTRATOR', 3);
-define('CATEGORY_MANAGMENT', 4);
-define('EXPERT', 21);
 
-/**
- * Function for debugging arrays and objects.
- * @param $arg
- *  array or object to be printed.
- */
-function p($arg) {
-  print '<pre>';
-  print_r($arg);
-  die;
-}
-
-function pr($arg) {
-  print '<pre>';
-  print_r($arg);
-  print '</pre>';
-}
+module_load_include('inc', 'aegon_products', 'includes/aegon_products_helper');
 
 /**
  * Helper function to populate the second dropdown.
@@ -464,7 +429,7 @@ function itg_last_publish_user_node($uid,$publish_id) {
           ->fields('n', array('title','type'))
           ->condition('uid', $uid, '=')
           ->condition('status', $publish_id, '=')
-          ->orderBy('created', 'DESC')//ORDER BY created
+          ->orderBy('created', 'DESC')
           ->range(0,1)
           ->execute();
   
@@ -506,11 +471,9 @@ function itg_last_node_published_user($uid,$publish_id) {
  */
 function itg_common_check_role_access($rid) {
   $role_not_create_per = array(AUTHOR_GUEST,INTERN,EXPERT);
-  if(in_array($rid,$role_not_create_per)) {
+  if (in_array($rid,$role_not_create_per)) {
     return false;
-  }
-  else
-  {
+  } else {
     return true;
   }
 }
