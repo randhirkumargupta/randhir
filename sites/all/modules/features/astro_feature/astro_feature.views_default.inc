@@ -336,7 +336,7 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd-m-Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Delete link */
