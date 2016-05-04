@@ -20,7 +20,8 @@ function itg_survey_survey_form() {
     $num = 0;
     $form = array();
     
-    $cookie_name = 'survey~' . $node->nid;
+    $cookie_name = 'Drupal_visitor_itgcms_survey_' . $node->nid;
+
     if (isset($_COOKIE[$cookie_name])) {
       $survey_taken = 'yes';
     } else {
@@ -130,11 +131,6 @@ function itg_survey_survey_form() {
           '#type' => 'markup',
           '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
           '#markup' => '<h2 class="answer-heading">Answer: ' . $required . '</h2> ',
-      );
-
-      $form['survey_taken'] = array(
-          '#type' => 'hidden',
-          '#value' => $survey_taken
       );
 
       if ($answer_type == 'textfield') { // Answer options for Textfield
@@ -274,6 +270,11 @@ function itg_survey_survey_form() {
         '#value' => $node->title,
     );
     
+   $form['survey_taken'] = array(
+        '#type' => 'hidden',
+        '#value' => $survey_taken
+    );
+    
   } else { //If no survey found
     $form['no_survey'] = array(
         '#type' => 'markup',
@@ -291,7 +292,8 @@ function itg_survey_survey_form() {
  */
 function itg_survey_survey_form_validate($form, &$form_state) {
   
-  $cookie_name = 'survey~'.$form_state['values']['nid'];
+  $cookie_name = 'Drupal_visitor_itgcms_survey_'.$form_state['values']['nid'];
+  
   if(isset($_COOKIE[$cookie_name])){
     form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));
   }
@@ -502,9 +504,11 @@ function itg_survey_survey_form_submit($form, &$form_state){
   if(strtolower($form_state['clicked_button']['#value']) == 'submit'){
     
     //Set cookie for survey
-    $cookie_time = 60*60*24*30*12; // Set cookie for 1 year
-    $cookie_name = 'survey~'.$form_state['values']['nid'];
-    setcookie($cookie_name, 1, time()+$cookie_time);
+//    $cookie_time = 60*60*24*30*12; // Set cookie for 1 year
+//    $cookie_name = 'itgcms_survey_'.$form_state['values']['nid'];
+//    setcookie($cookie_name, 1, time()+$cookie_time);
+    
+    user_cookie_save(array('itgcms_survey_'.$form_state['values']['nid'] => 1));
     
     //Insert in to survey user table
     db_insert('itg_survey_user')
