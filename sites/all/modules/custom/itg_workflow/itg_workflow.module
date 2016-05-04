@@ -8,8 +8,6 @@
  *
  */
 
-
-
 /**
  * Implemets hook_form_alter().
  * @param type $form
@@ -44,7 +42,7 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
  * @param type $form_state
  */
 function itg_workflow_after_build($form, &$form_state) {
- global $user, $base_url;
+  global $user, $base_url;
  
   // code for sequence change of modration field
  
@@ -64,18 +62,14 @@ function itg_workflow_after_build($form, &$form_state) {
     $form['revision_information']['reject_msg'] = array(
         '#type' => 'select',
         '#title' => t('Remarks'),
-        '#options' => $term_name,
-        //'#default_value' => $category['selected'],
+        '#options' => $term_name,        
         '#attributes' => array('class' => array('reasons-form-msg')),
         '#prefix' => '<div class="reasons-form">',
         '#suffix' => '</div>',
     );
   }
   
-  $form['revision_information']['log'] = $log;
-  
-  // code end
- 
+  $form['revision_information']['log'] = $log;  
   $form['revision_information']['log']['#title'] = t('Remarks');
  
  // hide workbench dropdown
@@ -345,8 +339,7 @@ function itg_workflow_node_access($node, $op, $account) {
          }
        }       
      }
-   }
-  
+   }  
 
   return NODE_ACCESS_IGNORE;
 }
