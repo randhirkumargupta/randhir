@@ -118,29 +118,6 @@ function itg_quiz_theme() {
   return $themes;
 }
 
-/*******************************Node Related hooks*****************************/
-
-/**
- * Implement hook_node_insert
- * @param Object $node
- */
-//function itg_quiz_node_presave($node){
-//  if ($node->type == 'quiz') {
-//    $ques_arr = $node->field_quiz_add_questions[LANGUAGE_NONE];
-//    foreach ($ques_arr as $question_arr) {
-//      $question_detail = entity_load('field_collection_item', array($question_arr['value']));
-//      if (count($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE]) == 1) {
-//        foreach ($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option) {
-//          $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
-//          if (empty($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value'])) {
-//            $ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value'] = 'Yes';
-//          }
-//        }
-//      }
-//    }
-//  }
-//}
-
 /***************************Form Related hooks*********************************/
 /**
  * Implement hook_form_alter
@@ -295,9 +272,33 @@ function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
 function itg_quiz_node_validate($node, $form, &$form_state) {
   
   //Date validation for start date and end date
-  if($node->type == 'quiz' && !empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
-   if(strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
-      form_set_error('field_quiz_end_date',t('Quiz end date must be greater or equal to start date.'));
+  if ($node->type == 'quiz') {
+    if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
+      if (strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_quiz_end_date', t('Quiz end date must be greater or equal to start date.'));
+    }
+  }
+    
+    //Add validation for answer options(Every question must have atleast two answer options with one correct answer.)
+    foreach ($node->field_quiz_add_questions[LANGUAGE_NONE] as $key => $question_arr) {
+      $question_txt = $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'];
+      
+      if (is_numeric($key)) {
+        if (count($question_arr['field_quiz_options_answer'][LANGUAGE_NONE]) < 3) {
+          form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>@question</strong>?', array('@question' => $question_txt)));
+}
+
+        $correct_ans_available = FALSE;
+        foreach ($question_arr['field_quiz_options_answer'][LANGUAGE_NONE] as $correct_ans_arr) {
+          if (!empty($correct_ans_arr['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'])) {
+            $correct_ans_available = TRUE;
+          }
+        }
+
+        if (!$correct_ans_available) {
+          form_set_error('field_quiz_options_answer', t('Please mark correct answer for question <strong>@question</strong>?', array('@question' => $question_txt)));
+        }
+      }
     }
   }
 }
