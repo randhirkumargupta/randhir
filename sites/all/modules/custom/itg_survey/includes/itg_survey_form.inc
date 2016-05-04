@@ -19,7 +19,13 @@ function itg_survey_survey_form() {
     
     $num = 0;
     $form = array();
-    //$ques_arr = $node->field_survey_add_questions[LANGUAGE_NONE];
+    
+    $cookie_name = 'survey~' . $node->nid;
+    if (isset($_COOKIE[$cookie_name])) {
+      $survey_taken = 'yes';
+    } else {
+      $survey_taken = 'no';
+    }
     
     $question_display = $node->field_survey_question_display[LANGUAGE_NONE][0]['value'];
     if($question_display == 'random'){
@@ -126,6 +132,11 @@ function itg_survey_survey_form() {
           '#markup' => '<h2 class="answer-heading">Answer: ' . $required . '</h2> ',
       );
 
+      $form['survey_taken'] = array(
+          '#type' => 'hidden',
+          '#value' => $survey_taken
+      );
+
       if ($answer_type == 'textfield') { // Answer options for Textfield
         $txt_num = 0;
         foreach ($all_ans_options[$num] as $val_txt_option) {
@@ -172,12 +183,12 @@ function itg_survey_survey_form() {
         );
       }
       
-      if(!empty($media_type)){
-      if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){
+      if (!empty($media_type)) {
+        if ($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif') {
         $form['media' . $num] = array(
             '#type' => 'markup',
             '#prefix' => '<div>',
-            '#markup' => '<img src="'.$media_path.'" height="100" width="130"/>',
+              '#markup' => '<img src="' . $media_path . '" height="100" width="130"/>',
             '#suffix' => '</div>',
         );
       } else {
@@ -185,9 +196,9 @@ function itg_survey_survey_form() {
             '#type' => 'markup',
             '#prefix' => '<div>',
             '#markup' => '<video width="140" height="145" controls="controls">
-                <source src="'.$media.'" type="video/mp4"> 
+                <source src="' . $media . '" type="video/mp4"> 
                  <object> 
-                   <embed  src="'.$media.'"> 
+                   <embed  src="' . $media . '"> 
                  </object> 
                </video>',
             '#suffix' => '</div>',
@@ -208,8 +219,8 @@ function itg_survey_survey_form() {
       );
      
      //Skip button for all qustions except last one
-      if($skip_question[$num] == 'yes') {
-     if(($total_num_of_ques-1) !== $num){
+      if ($skip_question[$num] == 'yes') {
+        if (($total_num_of_ques - 1) !== $num) {
         $form['survey_submit_skip' . $num] = array(
             '#type' => 'submit',
             '#value' => 'Skip',
@@ -279,6 +290,12 @@ function itg_survey_survey_form() {
  * @param Array $form_state
  */
 function itg_survey_survey_form_validate($form, &$form_state) {
+  
+  $cookie_name = 'survey~'.$form_state['values']['nid'];
+  if(isset($_COOKIE[$cookie_name])){
+    form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));
+  }
+  
   $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
   $num = $btn_num_arr[1];
   $button_name = $btn_num_arr[0];
@@ -288,8 +305,6 @@ function itg_survey_survey_form_validate($form, &$form_state) {
   $txt_ans_flag = FALSE;
   $rating_ans_flag = FALSE;
 
-  //for ($num = 0; $num < $form_detail['question_total']; $num++) {
-  
   //Checkbox validation
     if ($form_detail['question_type' . $num] === 'checkboxes') {
       if ($form_detail['question_skip' . $num] !== 'yes') {
@@ -360,8 +375,6 @@ function itg_survey_survey_form_validate($form, &$form_state) {
         }
       }
     }
-    
-  //}
 }
 
 /**
@@ -404,6 +417,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
                 'page_url' => $form_state['values']['survey_url'],
                 'survey_title' => $form_state['values']['survey_title'],
                 'survey_key' => $_SESSION['survey_unique_key'],
+                'survey_info' => 0,
                 'created' => time(),
             ))
             ->execute();
@@ -425,6 +439,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
                     'page_url' => $form_state['values']['survey_url'],
                     'survey_title' => $form_state['values']['survey_title'],
                     'survey_key' => $_SESSION['survey_unique_key'],
+                    'survey_info' => 0,
                     'created' => time(),
                 ))
                 ->execute();
@@ -433,6 +448,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
   }
 
   if ($form_state['values']['question_type' . $num] == 'textfield') {
+    
     for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
       if ($form_detail['answer_option' . $num . '_' . $text_field] !== '') {
         db_insert('itg_survey_detail')
@@ -447,6 +463,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
                     'page_url' => $form_state['values']['survey_url'],
                     'survey_title' => $form_state['values']['survey_title'],
                     'survey_key' => $_SESSION['survey_unique_key'],
+                    'survey_info' => 0,
                     'created' => time(),
                 ))
                 ->execute();
@@ -455,6 +472,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
   }
 
   if ($form_state['values']['question_type' . $num] == 'rating') {
+    
     for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
       for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
         if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] == 1) {
@@ -470,6 +488,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
                       'page_url' => $form_state['values']['survey_url'],
                       'survey_title' => $form_state['values']['survey_title'],
                       'survey_key' => $_SESSION['survey_unique_key'],
+                      'survey_info' => 0,
                       'created' => time(),
                   ))
                   ->execute();
@@ -479,8 +498,15 @@ function itg_survey_survey_form_submit($form, &$form_state){
   }
   }
  
-  //Insert survey in to DB on final submit
+  //On final survey submit
   if(strtolower($form_state['clicked_button']['#value']) == 'submit'){
+    
+    //Set cookie for survey
+    $cookie_time = 60*60*24*30*12; // Set cookie for 1 year
+    $cookie_name = 'survey~'.$form_state['values']['nid'];
+    setcookie($cookie_name, 1, time()+$cookie_time);
+    
+    //Insert in to survey user table
     db_insert('itg_survey_user')
             ->fields(array(
                 'nid' => $form_state['values']['nid'],
@@ -490,6 +516,15 @@ function itg_survey_survey_form_submit($form, &$form_state){
                 'created' => time(),
             ))
             ->execute();
+    
+    //Update table and set survey_info(status) = 1, means this survey has been completed by a user 
+    db_update('itg_survey_detail')
+            ->fields(array(
+                'survey_info' => 1,
+            ))
+            ->condition('survey_key', $_SESSION['survey_unique_key'], '=')
+            ->execute();
+    
     unset($_SESSION['survey_unique_key']);
   }
 
