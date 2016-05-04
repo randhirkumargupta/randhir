@@ -42,6 +42,7 @@
           <?php if ($view_mode == 'full'): ?>
             <div class="content-node-view">
               <h2><?php print t('Basic Details'); ?></h2>
+              <div class="itg_smi"><?php echo l(t('Create Social media'), 'itg-social-media/edit-content/'.$node->type.'/'.$node->nid, array('attributes' => array('class' => 'button'))); ?></div>
               <div class="content-details">
                 <div class="field">
                   <div class="field-label"><?php print t('Strap headline (Short Headline)'); ?></div>
