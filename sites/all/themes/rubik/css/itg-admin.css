@@ -1702,3 +1702,4 @@ input[name="field_newsl_add_news_und_0_remove_button"],
  .node-client_service_association-form .vertical-tabs .vertical-tabs-list{display: none;}
  .field-name-field-survey-end-date .date-combo .fieldset-title::after{content: '*'; color: red;}
  form .field-name-field-task-task-idea .field-multiple-table tbody{max-width: 400px;}
+ .node-poll-form .date-no-float{width: 100%;}
