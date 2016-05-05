@@ -1167,8 +1167,7 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
   $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
   //get the number from the select
   $numbtoadd = $form[$field_name]['add_more_number']['#value'];
-
-
+  
   if ($numbtoadd) {
     $field_state['items_count'] += $numbtoadd - 1;
     field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
