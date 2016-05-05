@@ -23,6 +23,12 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
       )
     );
     
+    $form['field_ads_template_variants']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Home'),
+      )
+    );
+    
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
     foreach ($tax as $key => $val) {
@@ -85,6 +91,7 @@ function itg_ads_node_validate($node, $form, &$form_state) {
     $template = $node->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
     $content_selection = $node->field_ads_content_selection[LANGUAGE_NONE][0]['tid'];
     $section_selection = $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'];
+    $template_variants = $node->field_ads_template_variants[LANGUAGE_NONE][0]['tid'];
     
     // code to check if issue based is check fill magazine kicker text
     if ($template == 'Section') {
@@ -97,6 +104,11 @@ function itg_ads_node_validate($node, $form, &$form_state) {
     if ($template == 'Section') {
       if (empty($section_selection)) {
         form_set_error('field_ads_section_selection', t("Section selection is required"));
+      }
+    }   
+    if ($template == 'Home') {
+      if (empty($template_variants)) {
+        form_set_error('field_ads_template_variants', t("Template variant is required"));
       }
     }    
   }
