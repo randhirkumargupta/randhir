@@ -17,6 +17,18 @@
                 $('#edit-metatags-und-advanced').hide();
             }
             
+            jQuery('.reject-ugc').click(function() {                 
+        var reject_status = 'reject';
+        if (reject_status == 'reject') {                   
+           var msg = confirm('Are you sure you want to reject this content?');
+           if (msg == true) {
+               return true;
+           }
+           return false; 
+        }
+        return true;                     
+    });           
+            
       $('#edit-field-ugc-content-type-und').change(function() {
                 var contenttypevalue = $('#edit-field-ugc-content-type-und').val();
                 // alert(contenttypevalue);
@@ -28,7 +40,13 @@
                         || contenttypevalue == 'story'
                         || contenttypevalue == '_none') { // Image question
                     $('#edit-title').val('');
+                    if (typeof CKEDITOR != "undefined") {
                     CKEDITOR.instances['edit-field-user-message-und-0-value'].setData('');
+                }
+                else
+                {
+                    $('#edit-field-user-message-und-0-value').val(''); 
+                }
                     $('#edit-field-ugc-upload-photo-und-0-remove-button').mousedown();
                      $('#edit-field-astro-video-und-0-remove-button').mousedown();
                 }
