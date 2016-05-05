@@ -68,7 +68,7 @@
                  ?>
                 <div class="field">
                 <div class="field-label"><?php print t('Created on:'); ?></div>
-                <div class="field-items"><?php print  date("d/m/Y", $node->created); ?></div>
+                <div class="field-items"><?php print  date(ITGDATE, $node->created); ?></div>
               </div>
                 <?php 
                 // create path for approve and reject
