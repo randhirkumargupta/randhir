@@ -67,7 +67,7 @@ img{
 .no-underline{
   text-decoration: none;
 }
-.hide{
+.hide, .grippie{
   display: none;
 }
 .db{
@@ -401,6 +401,7 @@ fieldset.date-combo{
 .form-type-radios,
 .form-type-autocomplete-deluxe,
 .date-combo,
+.form-type-hierarchical-select,
 .form-type-textarea{
   padding: 0 30px;
   margin: 30px 0;
@@ -412,6 +413,7 @@ fieldset.date-combo{
 .form-type-managed-file > label,
 .form-type-radios > label,
 .date-combo > legend,
+.form-type-hierarchical-select > label,
 .form-type-checkboxes > label{
   width: 220px;
   float: left;
@@ -423,6 +425,7 @@ fieldset.date-combo{
 .form-type-managed-file > label + div, 
 .form-type-radios > label + div,
 .date-combo > legend + div,
+.form-type-hierarchical-select > label + div,
 .form-type-checkboxes > label + div{
   padding-left: 220px;
 }
@@ -1162,6 +1165,62 @@ input[name="field_gallery_image_add_more"]{
   thead{
     @extend .hide;
   }
+}
+.hierarchical-select-wrapper{
+  .add-to-dropbox{
+    @extend .add-more;
+  }
+  .dropbox{
+    table{
+      width: 332px;
+      border: 1px solid #d9d9d9;
+      tr, td{border: none;}
+      td{padding: 5px;}
+    }
+  }
+}
+.node-story-form{
+  #Templates{
+    .form-field-type-text, .form-field-type-field-collection{
+      margin: 30px 0;
+      padding: 0 30px;
+      .form-item{
+        @extend .mr-0;
+        @extend .pd-0;
+        @extend .pos-rel;
+        > table + .description{
+          @extend .desc-popup;
+        }
+        > table + .description + div{
+          padding-left: 220px;
+          .form-submit{
+            @extend .add-more;
+          }
+        }
+        &:hover > table + .description{
+          display: block;
+          left: 575px;
+          top: 20px;
+        }
+      }
+      thead{
+        padding-right: 20px;
+        width: 220px;
+        th{
+          font-weight: 400;
+        }
+      }
+      tbody, thead{
+        @extend .fleft;
+      }
+      tbody td{
+        .ajax-new-content{
+          @extend .mt-10;
+        }
+      }
+    }
+  }
+  .hierarchical-select-wrapper .hierarchical-select .selects{max-width: 340px;}
 }
 
 
