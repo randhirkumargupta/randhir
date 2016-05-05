@@ -188,6 +188,7 @@ jQuery('document').ready(function () {
         }
     });
     
+    
     jQuery('#edit-field-story-expert-description-und-0-value').keyup(function () {
         var tlength = jQuery(this).val().length;
         console.log(maxLen);
