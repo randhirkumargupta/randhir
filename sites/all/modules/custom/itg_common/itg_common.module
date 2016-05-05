@@ -78,6 +78,14 @@ function itg_common_dropdown_supplement($id = '') {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   
+  if ($user->uid != '1') {
+    // hide source relation and type field from other users 
+    if ($form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form') {
+      $form['field_story_source_id']['#access'] = FALSE;
+      $form['field_story_source_type']['#access'] = FALSE;
+    }
+  }
+
   // Set title on Preview
   if (arg(1) == 'add' && isset($form['#node']->op) && $form['#node']->op == 'Preview') {       
     $content_type_name = get_content_type_name($form['#node']->type);
