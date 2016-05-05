@@ -124,6 +124,48 @@ function feature_for_ugc_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-ugc-field_story_source_id'.
+  $field_instances['node-ugc-field_story_source_id'] = array(
+    'bundle' => 'ugc',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_source_id',
+    'label' => 'Source id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'node-ugc-field_ugc_content_type'.
   $field_instances['node-ugc-field_ugc_content_type'] = array(
     'bundle' => 'ugc',
@@ -363,6 +405,7 @@ function feature_for_ugc_field_default_field_instances() {
   t('Description');
   t('Email');
   t('Name');
+  t('Source id');
   t('Upload Photo');
   t('Video');
 
