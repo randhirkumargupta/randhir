@@ -31,22 +31,32 @@ function feature_for_ugc_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_astro_video',
     'label' => 'Video',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'txt',
-      'max_filesize' => '',
+      'file_extensions' => 'mp4',
+      'max_filesize' => '200 MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'file',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
@@ -57,6 +67,7 @@ function feature_for_ugc_field_default_field_instances() {
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
         'imce_filefield_on' => 0,
@@ -88,22 +99,32 @@ function feature_for_ugc_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_recipe_audio',
     'label' => 'Audio',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'txt',
-      'max_filesize' => '',
+      'file_extensions' => 'mp4',
+      'max_filesize' => '200 MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'file',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
@@ -114,6 +135,7 @@ function feature_for_ugc_field_default_field_instances() {
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
         'imce_filefield_on' => 0,
@@ -121,48 +143,6 @@ function feature_for_ugc_field_default_field_instances() {
       ),
       'type' => 'file_generic',
       'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance: 'node-ugc-field_story_source_id'.
-  $field_instances['node-ugc-field_story_source_id'] = array(
-    'bundle' => 'ugc',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_source_id',
-    'label' => 'Source id',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 11,
     ),
   );
 
@@ -405,7 +385,6 @@ function feature_for_ugc_field_default_field_instances() {
   t('Description');
   t('Email');
   t('Name');
-  t('Source id');
   t('Upload Photo');
   t('Video');
 

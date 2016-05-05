@@ -75,12 +75,14 @@ function feature_for_ugc_views_default_views() {
     'field_ugc_content_type' => 'field_ugc_content_type',
     'field_user_name' => 'field_user_name',
     'field_user_email' => 'field_user_email',
+    'nid' => 'nid',
     'field_story_source_id' => 'field_story_source_id',
     'field_user_message' => 'field_user_message',
     'created' => 'created',
     'view_node' => 'nothing',
     'nothing' => 'nothing',
     'nothing_1' => 'nothing',
+    'nothing_2' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -111,6 +113,13 @@ function feature_for_ugc_views_default_views() {
       'empty_column' => 0,
     ),
     'field_user_email' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -153,6 +162,11 @@ function feature_for_ugc_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'nothing_2' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -184,6 +198,11 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['field_user_email']['id'] = 'field_user_email';
   $handler->display->display_options['fields']['field_user_email']['table'] = 'field_data_field_user_email';
   $handler->display->display_options['fields']['field_user_email']['field'] = 'field_user_email';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   /* Field: Content: Source id */
   $handler->display->display_options['fields']['field_story_source_id']['id'] = 'field_story_source_id';
   $handler->display->display_options['fields']['field_story_source_id']['table'] = 'field_data_field_story_source_id';
@@ -222,11 +241,21 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'edit';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'Approve';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'node/[field_story_source_id]/edit?destination=manage-ugc';
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'node/add/[field_ugc_content_type]?destination=manage-ugc&id=[nid]';
   $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'edit-link';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = '';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = 'Reject';
+  $handler->display->display_options['fields']['nothing_2']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_2']['alter']['path'] = 'ugc-title/[nid]/reject';
+  $handler->display->display_options['fields']['nothing_2']['alter']['link_class'] = 'ugc-reject';
+  $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -309,6 +338,267 @@ function feature_for_ugc_views_default_views() {
     18 => 0,
   );
   $handler->display->display_options['path'] = 'manage-ugc';
+
+  /* Display: Ugc reject list */
+  $handler = $view->new_display('page', 'Ugc reject list', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Rejected ugc content';
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    10 => '10',
+  );
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'counter' => 'counter',
+    'title' => 'title',
+    'field_ugc_content_type' => 'field_ugc_content_type',
+    'field_user_name' => 'field_user_name',
+    'field_user_email' => 'field_user_email',
+    'nid' => 'nid',
+    'field_story_source_id' => 'field_story_source_id',
+    'field_user_message' => 'field_user_message',
+    'created' => 'created',
+    'view_node' => 'nothing',
+    'nothing' => 'nothing',
+    'nothing_1' => 'nothing',
+    'nothing_2' => 'nothing',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ugc_content_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_user_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_user_email' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_source_id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_user_message' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'view_node' => array(
+      'align' => '',
+      'separator' => ' | ',
+      'empty_column' => 0,
+    ),
+    'nothing' => array(
+      'align' => '',
+      'separator' => ' | ',
+      'empty_column' => 0,
+    ),
+    'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing_2' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No ';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Content type */
+  $handler->display->display_options['fields']['field_ugc_content_type']['id'] = 'field_ugc_content_type';
+  $handler->display->display_options['fields']['field_ugc_content_type']['table'] = 'field_data_field_ugc_content_type';
+  $handler->display->display_options['fields']['field_ugc_content_type']['field'] = 'field_ugc_content_type';
+  /* Field: Content: Name */
+  $handler->display->display_options['fields']['field_user_name']['id'] = 'field_user_name';
+  $handler->display->display_options['fields']['field_user_name']['table'] = 'field_data_field_user_name';
+  $handler->display->display_options['fields']['field_user_name']['field'] = 'field_user_name';
+  /* Field: Content: Email */
+  $handler->display->display_options['fields']['field_user_email']['id'] = 'field_user_email';
+  $handler->display->display_options['fields']['field_user_email']['table'] = 'field_data_field_user_email';
+  $handler->display->display_options['fields']['field_user_email']['field'] = 'field_user_email';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Content: Source id */
+  $handler->display->display_options['fields']['field_story_source_id']['id'] = 'field_story_source_id';
+  $handler->display->display_options['fields']['field_story_source_id']['table'] = 'field_data_field_story_source_id';
+  $handler->display->display_options['fields']['field_story_source_id']['field'] = 'field_story_source_id';
+  $handler->display->display_options['fields']['field_story_source_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_source_id']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Answer */
+  $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom_date_d_m_y_';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'ugc' => 'ugc',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  /* Filter criterion: Content: Content type (field_ugc_content_type) */
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['id'] = 'field_ugc_content_type_value';
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['table'] = 'field_data_field_ugc_content_type';
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['field'] = 'field_ugc_content_type_value';
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['operator_id'] = 'field_ugc_content_type_value_op';
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['label'] = 'Content type';
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['operator'] = 'field_ugc_content_type_value_op';
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['identifier'] = 'field_ugc_content_type_value';
+  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  $handler->display->display_options['path'] = 'reject-ugc-content-list';
   $export['manage_ugc'] = $view;
 
   return $export;
