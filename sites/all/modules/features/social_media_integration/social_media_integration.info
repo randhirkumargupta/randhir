@@ -49,5 +49,6 @@ features[user_permission][] = view own photo facebook publication
 features[user_permission][] = view own post facebook publication
 features[user_permission][] = view own question facebook publication
 features[user_permission][] = view own status facebook publication
+features[user_role][] = Social Media
 features[views_view][] = browse_content
 features_exclude[dependencies][ctools] = ctools
