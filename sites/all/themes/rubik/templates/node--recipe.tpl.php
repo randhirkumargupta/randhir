@@ -37,12 +37,18 @@
 
       <?php if (!empty($content)): ?>
         <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-          <?php //print render($content)  ?>
-
+          <?php //print render($content)  ?>            
           <?php if ($view_mode == 'full'): ?>
             <div class="content-node-view">
-              <h2><?php print t('Basic Details'); ?></h2>
-              <div class="itg_smi"><?php echo l(t('Create Social media'), 'itg-social-media/edit-content/'.$node->type.'/'.$node->nid, array('attributes' => array('class' => 'button'))); ?></div>
+              <h2><?php print t('Basic Details'); ?></h2>              
+              <?php
+              // Load custom block for social media integration              
+              if (!isset($node->op)) {
+                echo '<div class="itg_smi">'. l(t('Create Social media'), 'itg-social-media/edit-content/'.$node->type.'/'.$node->nid, array('attributes' => array('class' => 'button'))) .'</div>';
+                $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+                print render($block['content']);
+              }              
+              ?>
               <div class="content-details">
                 <div class="field">
                   <div class="field-label"><?php print t('Strap headline (Short Headline)'); ?></div>
