@@ -3,6 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var rowCount = 1;
+var datechange = 1;
+var sdate = null;
+var edate = null;
+var firstDate = 1;
+//var nid = location.search.split('nid=')[1]; // get nid from url
 
 (function ($) {
 
@@ -50,47 +56,84 @@
 
             // hide defaut service-frequency-date
             jQuery('#edit-field-service-frequency-date').hide();
+            jQuery("#edit-field-service-frequency-date-und-0-show-todate").prop('checked', true);
+            jQuery('#edit-field-service-frequency-date-und-0-show-todate').hide();
+            jQuery('.form-item-field-service-frequency-date-und-0-value2').show();
+
 
             var selectedVal = "";
             var selected = $("#edit-field-service-frequency-und input[type='radio']:checked");
             if (selected.length > 0) {
                 selectedVal = selected.val();
-                if (selectedVal > 1) {
-                    jQuery('#edit-field-service-frequency-date').show();
+
+                if (selectedVal == 2) {
+                    fixedDate = "+6 D";
+                } else if (selectedVal == 3) {
+                    fixedDate = "+1M";
                 }
+
+                if (selectedVal > 1) {
+                    jQuery('#edit-field-service-frequency-und-1').attr('disabled', true);
+                    jQuery('#edit-field-service-frequency-und-2').attr('disabled', true);
+                    jQuery('#edit-field-service-frequency-und-3').attr('disabled', true);
+                    jQuery('#edit-field-service-frequency-date').show();
+                    $('#edit-field-service-content').show();
+                }
+
+
+            } else {
+                $('#edit-field-service-content').hide();
             }
 
-            jQuery('input[type="radio"]').click(function () {
+            //alert('hi' + fixedDate);
+            jQuery('#edit-field-service-frequency-und input[type="radio"]').click(function () {
                 if ($(this).attr("value") == "1") {
+                    jQuery('#edit-field-service-content').show();
                     jQuery('#edit-field-service-frequency-date').hide();
+                    jQuery('#edit-field-service-content-und-0-remove-button').hide();
+                    jQuery('#edit-field-service-content-und-add-more').hide();
                 } else if ($(this).attr("value") == "2") {
+                    jQuery('#edit-field-service-content').show();
                     jQuery('#edit-field-service-frequency-date').show();
+                    fixedDate = "+6 D";
+
                 } else if ($(this).attr("value") == "3") {
+                    jQuery('#edit-field-service-content').show();
                     jQuery('#edit-field-service-frequency-date').show();
+                    fixedDate = "+1M";
                 }
             });
 
 
-            //  var selectedDate = jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').datepicker('getDate');
-            jQuery("#edit-field-service-frequency-date-und-0-value-datepicker-popup-1").datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 1,
+
+
+            $("#edit-field-service-frequency-date-und-0-value-datepicker-popup-1").datepicker({
                 minDate: 0,
-                onSelect: show_days,
-                onClose: function (selectedDate) {
-                    jQuery("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker("option", "minDate", selectedDate);
+                onSelect: function (selected) {
+                    var date = $(this).datepicker('getDate');
+                    date.setDate(date.getDate() + 6); // Add 7 days
+                    $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker("option", "minDate", selected);
+                    $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker("option", "maxDate", date);
+                    $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
+
                 }
             });
-            jQuery("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 1,
-                onSelect: show_days,
-                onClose: function (selectedDate) {
-                    jQuery("#edit-field-service-frequency-date-und-0-value-datepicker-popup-1").datepicker("option", "maxDate", selectedDate);
-                }
-            });
+
+
+            if (firstDate == 1) {
+                $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker({
+                    minDate: 0,
+                    maxDate: fixedDate,
+                    onSelect: show_days,
+                });
+                firstDate++;
+            } else {
+                $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker({
+                    onSelect: show_days,
+                });
+            }
+
+
 
 
             function show_days() {
@@ -100,30 +143,34 @@
                 var oneDay = 24 * 60 * 60 * 1000;
                 var diff = 0;
                 if (start && end) {
-                    diff = 1 + Math.round(Math.abs((end.getTime() - start.getTime()) / (oneDay)));
+                    diff = Math.round(Math.abs((end.getTime() - start.getTime()) / (oneDay)));
                 }
 
 
                 var rowCount = jQuery(".page-node-add-create-content .field-multiple-table tbody tr").length;
-                if (rowCount == '0') {
-                    var rowCount = jQuery(".node-type-create-content .field-multiple-table tbody tr").length;
+//                if (rowCount == '0') {
+//                    var rowCount = jQuery(".node-type-create-content .field-multiple-table tbody tr").length;
+//                }
+
+//                if (rowCount > 0) {
+//                    diff = diff - rowCount;
+//                }
+//                
+
+
+                if (diff > 0) {
+                    for (var ii = 1; ii <= rowCount; ) {
+                        jQuery('input[name="field_service_content_und_' + ii + '_remove_button"]').mousedown();
+                        ii++;
+                    }
                 }
 
-                if (rowCount > 0) {
-                    diff = diff - rowCount;
-                }
 
-                //field_service_content_und_1_remove_button
-                alert('rowCount : ' + rowCount);
-                var i = 1;
-                for (; i <= rowCount; ) {
-                    jQuery("input[name$='field_service_content_und_" + i + "_remove_button']").mousedown();
-                    i++;
-                }
+
                 jQuery('#edit-field-service-content-add-more-number').val(diff);
                 jQuery('.field-name-field-service-content .field-add-more-submit').mousedown();
 
-                //reshow_hide(content_format_arr);
+
 
             }
 
@@ -140,10 +187,10 @@
                     start_date = start_date[start_date.length - 1]
                 }
                 start_date = start_date - today_date;
-                var no_of_days = jQuery('#edit-field-service-content-add-more-number').val();
+                var no_of_days = 1 + jQuery('#edit-field-service-content-add-more-number').val();
 
-                var i = 0;
-                for (; i <= no_of_days + 1; ) {
+
+                for (var i = 0; i <= no_of_days; ) {
 
                     var tomorrow = new Date(new Date().getTime() + start_date * 24 * 60 * 60 * 1000);
                     var dd = tomorrow.getDate();
@@ -169,7 +216,10 @@
     }
 })(jQuery);
 
+jQuery('document').ready(function ($) {
+    // $('#edit-field-service-frequency').hide();
 
+});
 
 jQuery('document').ready(function () {
     var maxLen = 0
@@ -187,8 +237,8 @@ jQuery('document').ready(function () {
             });
         }
     });
-    
-    
+
+
     jQuery('#edit-field-story-expert-description-und-0-value').keyup(function () {
         var tlength = jQuery(this).val().length;
         console.log(maxLen);
