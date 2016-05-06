@@ -46,9 +46,9 @@
                  print  render($content['field_ugc_content_type']);
                  ?>
                  <div class="field">
-                <div class="field-label"><?php print t('Title:'); ?></div>
-                <div class="field-items"><?php print $title; ?></div>
-              </div>
+                  <div class="field-label"><?php print t('Title:'); ?></div>
+                  <div class="field-items"><?php print $title; ?></div>
+                 </div>
                     <?php
                  if($content_type == 'story' || $content_type == 'recipe' || $content_type == 'blog') { 
                    print  render($content['field_user_message']);
@@ -67,9 +67,9 @@
                  
                  ?>
                 <div class="field">
-                <div class="field-label"><?php print t('Created on:'); ?></div>
-                <div class="field-items"><?php print  date("d/m/Y", $node->created); ?></div>
-              </div>
+                  <div class="field-label"><?php print t('Created on:'); ?></div>
+                  <div class="field-items"><?php print  date(ITGDATE, $node->created); ?></div>
+                </div>
                 <?php 
                 // create path for approve and reject
                $arg_id = arg(1);
@@ -84,6 +84,7 @@
                 }
                 else
                 {
+                  print '<strong>Action :</strong> ';
                   print l(  t('Cancel'),  'reject-ugc-content-list',  array('attributes' =>array('class'=>'reject-ugc-content-list', 'id'=>'reject-ugc-content-list')));
                 }
                 ?>
