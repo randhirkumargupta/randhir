@@ -21,8 +21,9 @@ if (isset($view->result[0]->nid)) {
   <?php
   if (isset($view->result[0]->_field_data['nid']['entity']->field_poll_end_date)) {
     $end_date = $view->result[0]->_field_data['nid']['entity']->field_poll_end_date[LANGUAGE_NONE][0]['value'];
-    $etime = strtotime($end_date);
-    $endtime = mktime(23, 59, 59, date("m", $etime), date("d", $etime), date("Y", $etime));
+    $etime = strtotime($end_date);    
+    //$endtime = mktime(23, 59, 59, date("m", $etime), date("d", $etime), date("Y", $etime));
+    $endtime = $etime;
   }
   $display_format = $view->result[0]->_field_data['nid']['entity']->field_display_result[LANGUAGE_NONE][0]['value'];
   ?>

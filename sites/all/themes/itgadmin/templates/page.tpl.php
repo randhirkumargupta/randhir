@@ -8,6 +8,31 @@
  */
 ?>
 
+<?php
+/**
+ * Rename "Add Term" to "Add Category"
+ * Remove primary local task link (Edit and manage fields links from right top side)
+ */
+global $base_url, $user;
+if(!in_array('administrator', $user->roles)){
+  if(arg(3) == 'category_management'){
+      //$action_links = '<li><a href="'.$base_url.'/admin/structure/taxonomy/category_management/add">Add Category</a></li>';
+      $primary_local_tasks = '';
+  }
+  
+  //Tag Management
+  if( arg(3) == 'tags'){
+    $primary_local_tasks = '';
+    $title = 'Create Tag';
+  }
+  
+  //Hide primary local task for others user(except )
+  if(arg(1) == 'people' && arg(2) == 'create'){
+     $primary_local_tasks = '';
+  }
+}
+?>
+
 <div id="page">
 
   <header class="header" id="header" role="banner">
@@ -45,7 +70,21 @@
         )); ?>
       </nav>
     <?php endif; ?>
-
+    <div class="user-role">
+      <span>
+        <i class="fa fa-bell-o" style="padding-right: 5px !important;"></i>
+        <?php if (function_exists('get_task_count_of_user')) { print l(get_task_count_of_user(), 'assigned-task-list'); }?>
+      </span> User role - 
+        <?php 
+          // get role array
+          $role_display = $user->roles;
+          // skip key for authenticated user
+          $role_display = array_slice($role_display,1);
+          // get value in comma seprated
+          $role_display = implode(',', $role_display);      
+          print $role_display;  
+        ?>
+    </div>
     <?php print render($page['header']); ?>
   </section>
   </header>
