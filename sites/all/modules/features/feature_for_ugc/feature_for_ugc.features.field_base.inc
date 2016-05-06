@@ -29,12 +29,12 @@ function feature_for_ugc_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'story' => 'Story',
-        'recipe' => 'Recipe',
-        'photogallery' => 'Photo',
-        'video' => 'Video',
-        'audio' => 'Audio',
-        'blog' => 'Blog',
+        'story' => 'story',
+        'recipe' => 'recipe',
+        'photogallery' => 'photogallery',
+        'video' => 'video',
+        'audio' => 'audio',
+        'blog' => 'blog',
       ),
       'allowed_values_function' => '',
     ),

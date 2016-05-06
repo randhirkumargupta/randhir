@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Author: ITG
  * Date: 14-04-2016
  * Purpose: ITG social media integration module.
@@ -28,7 +28,7 @@ function itg_social_media_menu() {
     'page callback' => 'drupal_get_form',
     'access arguments' => array('administer itg_social_media edit_content settings'),
     'page arguments' => array('itg_social_media_form', 2, 3),
-    'type' => MENU_CALLBACK,    
+    'type' => MENU_CALLBACK,
   );
 
   return $items;
@@ -41,7 +41,7 @@ function itg_social_media_menu() {
  * @param type $form_id
  */
 function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  if(isset($form['created']['min'])) {
+  if (isset($form['created']['min'])) {
     $form['created']['min'] = array(
       '#type' => 'date_popup',
       '#date_format' => 'd/m/Y',
@@ -52,7 +52,7 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-3:+3',
     );
-  }  
+  }
 }
 
 /**
@@ -61,24 +61,25 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
 function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   // Load node so that we can provide default value if values already present.
   $node = node_load($nid);
-  foreach ($node->field_story_social_media_integ['und'] as $option) {    
+  $data = array();
+  foreach ($node->field_story_social_media_integ['und'] as $option) {
     $data[] = $option['value'];
   }
-  
+
   // Add js file to form.
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js',
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
-  ); 
-  
+  );
+
   // Prepare form array.
   $form['itg_smi'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Social media integration '),
     '#options' => array(
-      'facebook' => 'Facebook', 
+      'facebook' => 'Facebook',
       'facebook_instant_article' => 'Facebook Instant Article',
-      'twitter'  => 'Twitter',
+      'twitter' => 'Twitter',
     ),
     '#default_value' => $data,
   );
@@ -105,7 +106,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
       )
     ),
-  );  
+  );
   $form['fb_wrap']['itg_fb_img'] = array(
     '#title' => t('Facebook Image'),
     '#type' => 'managed_file',
@@ -144,7 +145,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       'required' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
       )
-    ),    
+    ),
   );
   $form['twit_wrap']['itg_twitter_img'] = array(
     '#title' => t('Twitter Image'),
@@ -169,12 +170,12 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'hidden',
     '#default_value' => check_plain($nid),
   );
-  
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Share Content'),
   );
-  
+
   return $form;
 }
 
@@ -183,9 +184,10 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
  * @param array $form
  * @param array $form_state
  */
-function itg_social_media_form_submit($form, &$form_state) {  
-  if ($form_state['values']['itg_smi']['facebook'] == 'facebook') {
-    $node = node_load($form_state['values']['nid']);
+function itg_social_media_form_submit($form, &$form_state) {
+  $node = node_load($form_state['values']['nid']);
+  
+  if ($form_state['values']['itg_fb_img'] != 0) {
     // Load the file via file.fid.
     $file = file_load($form_state['values']['itg_fb_img']);
     // Change status to permanent.
@@ -194,59 +196,71 @@ function itg_social_media_form_submit($form, &$form_state) {
     file_save($file);
     // Record that the module (in this example, user module) is using the file. 
     file_usage_add($file, 'user', 'user', 1);
-    
-    // Change field value  
-    $node->field_story_social_media_integ['und'][0]['value'] = $form_state['values']['itg_smi']['facebook'];  
-    // Get the numeric id of your field by passing field name
-    $info = field_info_field('field_story_social_media_integ');
-    $fields[] = $info['id'];  
-
-    $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
-    // Get the numeric id of your field by passing field name
-    $info = field_info_field('field_story_facebook_narrative');
-    $fields[] = $info['id'];  
-
-    $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
-    // Get the numeric id of your field by passing field name
-    $info = field_info_field('field_story_facebook_image');
-    $fields[] = $info['id'];
   }
   
-  /*
-  if ($form_state['values']['itg_smi']['twitter'] == 'twitter') {
-    $node = node_load($form_state['values']['nid']);
+  // Change field value     
+  foreach ($form_state['values']['itg_smi'] as $value) {
+    if ($value != '0') {
+      $data[]['value'][$value] = $value;
+    }
+  }
+  
+  // Social Media integration field
+  $node->field_story_social_media_integ['und'] = $data;  
+  
+  // Facebook narrative field
+  if ($form_state['values']['itg_facebook_narrative'] != '') {
+    $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
+  }
+  else {
+    unset($node->field_story_facebook_narrative['und']);
+  } 
+  
+  // Facebook Image field
+  if ($form_state['values']['itg_fb_img'] != 0) {
+    $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
+  }
+  else {
+    unset($node->field_story_facebook_image['und']);
+    $path = file_create_url($node->field_story_facebook_image['und'][0]['uri']);
+    if ($path != '') {
+      unlink($path);
+    }        
+  }
+  
+  // TWITTER IMAGE
+  if ($form_state['values']['itg_twitter_img'] != 0) {
     // Load the file via file.fid.
     $file = file_load($form_state['values']['itg_twitter_img']);
     // Change status to permanent.
     $file->status = FILE_STATUS_PERMANENT;
     // Save.
     file_save($file);
-    // Record that the module (in this example, user module) is using the file. 
+    // Record that the module (in this example, user module) is using the file.
     file_usage_add($file, 'user', 'user', 1);
-    dpm($node);
-    // Change field value  
-    $node->field_story_social_media_integ['und'][0]['value'] = $form_state['values']['itg_smi']['twitter'];  
-    // Get the numeric id of your field by passing field name
-    $info = field_info_field('field_story_social_media_integ');
-    $fields[] = $info['id'];  
-
-    $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
-    // Get the numeric id of your field by passing field name
-    $info = field_info_field('field_story_facebook_narrative');
-    $fields[] = $info['id'];  
-
-    $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
-    // Get the numeric id of your field by passing field name
-    $info = field_info_field('field_story_facebook_image');
-    $fields[] = $info['id'];
-  }
-   * 
-   */
-  // Insert fields value into database.
-  field_sql_storage_field_storage_write('node', $node, 'update', $fields);
+  }  
   
-  // Clear field cache
-  cache_clear_all("field:node:$node->nid", 'cache_field');  
+  // Twitter narrative
+  if ($form_state['values']['itg_twitter_narrative'] != '') {
+    $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
+  }
+  else {
+    unset($node->field_story_tweet['und']);
+  }
+  
+  // Twitter Image field
+  if ($form_state['values']['itg_twitter_img'] != 0) {
+    $node->field_story_tweet_image['und'][0]['fid'] = $form_state['values']['itg_twitter_img'];
+  }
+  else {
+    unset($node->field_story_tweet_image['und']);
+    $path = file_create_url($node->field_story_tweet_image['und'][0]['uri']);
+    if ($path != '') {
+      unlink($path);
+    }    
+  }
+  
+  node_save($node);
 }
 
 /**
@@ -258,7 +272,7 @@ function itg_social_media_block_info() {
     'info' => t('Social Media Integration'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+
   return $block;
 }
 
@@ -268,16 +282,32 @@ function itg_social_media_block_info() {
  */
 function itg_social_media_block_view($delta = '') {
   $block = array();
-  
+  $arg = arg();
+  $c_type = itg_social_media_node_info(check_plain($arg[1]));
+  $nid = check_plain($arg[1]);
   switch ($delta) {
     case 'social_media_form':
       $block = array(
         'subject' => t('Social media Integration'),
-        'content' => drupal_get_form('itg_social_media_form'),
+        'content' => drupal_get_form('itg_social_media_form', $c_type, $nid),
       );
-      
+
       break;
   }
-  
+
   return $block;
+}
+
+/**
+ * get type of the node from nid.
+ * @param type $nid
+ * @return type
+ */
+function itg_social_media_node_info($nid) {
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('type'))
+      ->condition('nid', $nid);
+  $itg_result = $itg_query->execute()->fetchField();
+
+  return $itg_result;
 }
