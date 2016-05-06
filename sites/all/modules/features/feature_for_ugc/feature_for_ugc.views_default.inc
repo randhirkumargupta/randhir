@@ -598,6 +598,11 @@ function feature_for_ugc_views_default_views() {
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
   $handler->display->display_options['path'] = 'reject-ugc-content-list';
   $export['manage_ugc'] = $view;
 
