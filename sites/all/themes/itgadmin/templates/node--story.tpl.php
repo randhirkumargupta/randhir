@@ -42,7 +42,7 @@
       <?php if (!empty($content)): ?>
         <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>          
 
-          <?php if ($view_mode == 'full'): ?>
+          <?php if ($view_mode == 'full'): ?>          
           <div class="basic-details content-box">
             <h2><?php print t('Quick File'); ?></h2>
             <div class="content-details">
@@ -77,7 +77,13 @@
                 <?php print render($content['field_story_itg_tags']); ?>
               <?php print render($content['field_story_courtesy']); ?>
               <?php print render($content['field_story_reporter']); ?>
-                <?php print render($content['body']); ?>
+                <div class="field field-name-field-story-body">
+                    <div class="field-label">Story Body:&nbsp;</div>
+                    <div class="field-items">
+                    <div class="field-item even"><?php print render($content['body']); ?></div>
+                    </div>
+                </div>
+                
             </div>
           </div>
             <?php 
