@@ -84,6 +84,7 @@
                 }
                 else
                 {
+                  print '<strong>Action :</strong> ';
                   print l(  t('Cancel'),  'reject-ugc-content-list',  array('attributes' =>array('class'=>'reject-ugc-content-list', 'id'=>'reject-ugc-content-list')));
                 }
                 ?>
