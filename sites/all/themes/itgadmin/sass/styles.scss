@@ -286,10 +286,16 @@ a.ckeditor_links{
     .form-submit[value="Remove"]{
       @extend .btn-cancel;
       @extend .btn;
-      bottom: -41px;
+      bottom: -15px;
       height: 34px;
-      left: 396px;
+      left: 250px;
       position: absolute;
+    }
+  }
+  tbody tr:last-child td{
+    .form-submit[value="Remove"]{
+      bottom: -41px;
+      left: 396px;
     }
   }
   & + div.clearfix{
@@ -1301,11 +1307,7 @@ input[name="field_gallery_image_add_more"]{
 .form-field-name-field-astro-date-range{
   @extend .itg-date-range;
 }
-[id*="field-breaking-content-details-values"]{
-  thead{
-    @extend .hide;
-  }
-}
+
 .field-name-field-breaking-publish-time{
   .date-padding .form-type-textfield:first-child{@extend .hide;}
 }
@@ -1478,8 +1480,11 @@ input[name="field_gallery_image_add_more"]{
 .node-type-breaking-news .close-preview{
   display: block;
 }
-[id*="field-breaking-content-details-values"]{
+[id*="field-breaking-content-details-values"], [id*="field-mega-review-review-values"]{
   @extend .itg-add-another-item;
+  thead{
+    @extend .hide;
+  }
 }
 
 
