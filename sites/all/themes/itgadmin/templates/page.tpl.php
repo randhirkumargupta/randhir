@@ -71,10 +71,12 @@ if(!in_array('administrator', $user->roles)){
       </nav>
     <?php endif; ?>
     <div class="user-role">
+      <a href="assigned-task-list">
+        <i class="fa fa-bell-o"></i>
+        <dfn><?php if (function_exists('get_task_count_of_user')) { print get_task_count_of_user(); }?></dfn>
+      </a> 
       <span>
-        <i class="fa fa-bell-o" style="padding-right: 5px !important;"></i>
-        <?php if (function_exists('get_task_count_of_user')) { print l(get_task_count_of_user(), 'assigned-task-list'); }?>
-      </span> User role - 
+        User role - 
         <?php 
           // get role array
           $role_display = $user->roles;
@@ -84,6 +86,7 @@ if(!in_array('administrator', $user->roles)){
           $role_display = implode(',', $role_display);      
           print $role_display;  
         ?>
+      </span>
     </div>
     <?php print render($page['header']); ?>
   </section>
