@@ -1046,6 +1046,11 @@ input[name="field_gallery_image_add_more"]{
   width: 100%;
   z-index: 9999;
 }
+#block-menu-menu-ask-an-expert-menu,
+#block-menu-menu-photogallery-admin-menu,
+#block-menu-menu-mega-review-menu,
+#block-menu-menu-blog-admin-menu,
+#block-menu-menu-task-allocation-menu,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -1102,6 +1107,37 @@ input[name="field_gallery_image_add_more"]{
           font-size: 21px;
         }
       }
+    }
+  }
+}
+.user-role{
+  @extend .fright;
+  line-height: 50px;
+  font-weight: 300;
+  color: #8e8e8e;
+  a{
+    @extend .pos-rel;
+    color: #8e8e8e;
+    margin-right: 20px;
+    .fa{
+      padding-right: 0;
+      font-size: 18px;
+    }
+    dfn{
+      background-color: #d00b26;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      height: 18px;
+      line-height: 18px;
+      position: absolute;
+      right: -3px;
+      text-align: center;
+      text-indent: -1px;
+      top: -10px;
+      width: 18px;
+      font-style: normal;
     }
   }
 }
