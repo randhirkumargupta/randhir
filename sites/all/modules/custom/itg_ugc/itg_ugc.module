@@ -48,6 +48,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'story_node_form' && !empty($url_nid)) {
     // p($form);
     $form['title']['#value'] = $node->title;
+    $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
+     $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
     $form['body'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
     $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'ugc';
   }
