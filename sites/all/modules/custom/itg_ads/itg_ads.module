@@ -5,10 +5,12 @@
  * @param array $form
  * @param array reference $form_state
  */
-function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form_id) {
-    
-    $form['#after_build'][] = 'itg_common_cancel_button';
-    drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js', array('weight' => 1));
+function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form_id) {    
+    module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js',      
+    );
+    $form['#after_build'][] = 'itg_common_cancel_button';    
     $form['actions']['submit']['#submit'][] = 'alter_ad_submit_status_message';
     
     $form['field_ads_section_selection']['#states'] = array(
@@ -28,12 +30,13 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
         ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Home'),
       )
     );
-    
+        
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-
+    $op = array();
     foreach ($tax as $key => $val) {
         $op[$val->tid] = $val->name;
     }
+    
     // assign array value to taxonomy field
     $form['field_ads_section_selection']['und']['#options'] = $op;
 }
@@ -85,9 +88,10 @@ function alter_ad_submit_status_message(&$form, $form_state) {
  * @param type $form
  * @param type $form_state   
  */
-function itg_ads_node_validate($node, $form, &$form_state) {  
+function itg_ads_node_validate($node, $form, &$form_state) {    
   
   if ($node->type == 'ads_management') {
+      
     $template = $node->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
     $content_selection = $node->field_ads_content_selection[LANGUAGE_NONE][0]['tid'];
     $section_selection = $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'];
