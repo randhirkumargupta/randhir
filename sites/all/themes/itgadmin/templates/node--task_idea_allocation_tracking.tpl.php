@@ -36,6 +36,13 @@
 
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
+       <div class="field">
+          <div class="field-label"><?php print t('Task Name:'); ?></div>
+          <div class="field-items"><?php print render($title); ?></div>
+        </div>
+      <?php
+      //p($content['field_task_finish_date_and_time']['#items']);
+      ?>
       <?php print render($content) ?>
     </div>
   <?php endif; ?>
