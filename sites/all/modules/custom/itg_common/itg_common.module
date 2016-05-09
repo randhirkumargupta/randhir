@@ -8,7 +8,7 @@
  *
  */
 
-module_load_include('inc', 'aegon_products', 'includes/aegon_products_helper');
+module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 
 /**
  * Helper function to populate the second dropdown.
@@ -158,7 +158,7 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
   unset($form['metatags']['intro_text']['#markup']);
 
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
-  $form['path']['#prefix'] = '<div class="story-title">'.t('Meta Tags').'</div>';
+  $form['path']['#prefix'] = '<h2 class="story-title">'.t('Meta Tags').'</h2>';
 
   drupal_add_js('jQuery(document).ready(function() {
              // hide some eliment of metatags
