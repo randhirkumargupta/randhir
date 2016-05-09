@@ -208,9 +208,16 @@ function itg_recipe_form_custom_callback($form, &$form_state) {
   else {
     $op = 'created';
   }$recipe_title = $form_state['node']->title;
-  drupal_set_message(t('Recipe <b>' . $recipe_title . '</b> has been ' . $op .'.'));
+  drupal_set_message(t('Recipe <b>' . $recipe_title . '</b> has been ' . $op . '.'));
   //$_GET['destination'] = $_REQUEST['destination'];
-  $_GET['destination'] = 'recipe-management';
+  if (!empty($_REQUEST['destination'])) {
+    $destination = $_REQUEST['destination'];
+  }
+  else {
+    $destination = 'recipe-management';
+  }
+  // redirect page
+  $_GET['destination'] = $destination;
 }
 
 /**
