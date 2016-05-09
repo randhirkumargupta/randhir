@@ -46,7 +46,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   
   // get id of ugc content
-  $url_nid = $_REQUEST['id'];
+  $url_nid = arg(3);
+ 
   // get node values 
   $node = node_load($url_nid);
   
@@ -373,7 +374,10 @@ function itg_ugc_node_status_update($nid, $title) {
   {
    drupal_set_message(t($node->title.' has been rejected successfully.')); 
   }
-  drupal_goto('manage-ugc');
+  
+  $_GET['destination'] = 'manage-ugc';
+  
+  //drupal_goto('manage-ugc');
 }
 
 /**
@@ -401,6 +405,7 @@ function itg_ugc_node_view($node, $view_mode, $langcode) {
  * @param type $node
  */
 function itg_ugc_node_insert($node) {
+  
     if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery') {
     $title = $node->title;
     $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];

@@ -76,7 +76,7 @@
                //$node_status = $node->node_status;
                 if($node->status == '1') {
                   print '<strong>Action :</strong> ';
-                  print l(  t('Approve'),  'node/add/'.$content_type,  array('attributes' =>array('class'=>'approve-ugc', 'id'=>'approve-ugc'), 'query'=>array('destination'=>'manage-ugc','id'=>$arg_id) ));
+                  print l(  t('Approve'),  'node/add/'.$content_type.'/'.$arg_id,  array('attributes' =>array('class'=>'approve-ugc', 'id'=>'approve-ugc'), 'query'=>array('destination'=>'manage-ugc') ));
                   print ' | ';
                   print l(  t('Reject'),  'ugc-title/'.$arg_id.'/reject',  array('attributes' =>array('class'=>'reject-ugc', 'id'=>'reject-ugc')));
                   print ' | ';
