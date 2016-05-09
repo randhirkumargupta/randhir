@@ -10,6 +10,17 @@
 function feature_for_ugc_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access reject ugc content link'.
+  $permissions['access reject ugc content link'] = array(
+    'name' => 'access reject ugc content link',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'itg_ugc',
+  );
+
   // Exported permission: 'create ugc content'.
   $permissions['create ugc content'] = array(
     'name' => 'create ugc content',
