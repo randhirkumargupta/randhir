@@ -174,9 +174,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'][] = 'itg_service_content_after_build';
       $form['field_service_association_title'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_assoc_service();
       $arg = arg();
-      //  p($form['field_service_association_title']);
       if ($arg[0] == 'node' && $arg[2] == 'edit' && $_REQUEST['destination'] == 'service-content-listing') {
-        //p($form['field_service_association_title'][LANGUAGE_NONE]);
         // hide default fields
         drupal_add_js("jQuery(document).ready(function(){ 
             jQuery('#edit-field-service-association-title-und').attr('disabled', true);
@@ -527,24 +525,14 @@ function itg_mobile_association_validator($form, &$form_state) {
   $target_id = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id']);
   $start_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value'];
   $end_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value2'];
-  //  p($form_state['values']['field_service_frequency_date']);
-  //  $sid = '210';
   $exist_service_content = itg_mobile_services_check_exist_content($target_id, $start_date, $end_date);
 
   if ($exist_service_content) {
-    // echo "arun";
-    form_set_error('field_service_association_title', t('Service content already exist please <a href=http://localhost/itgcms/node/' . $c . '/edit?destination=service-content-listing>click here</a>'));
+    form_set_error('field_service_association_title', t('Service content already exist please&nbsp;') . l(t('click here'), 'node/' . $exist_service_content . '/edit?destination=service-content-listing'));
   }
-
-  // exit;  
 
   $form_state['redirect'] = 'service-content-listing';
   if ($target_id) {
-
-    $contact_text = ($form_state['values']['field_story_expert_description'][LANGUAGE_NONE][0]['value']) ? trim($form_state['values']['field_story_expert_description'][LANGUAGE_NONE][0]['value']) : '';
-    $contact_image = ($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid']) ? trim($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid']) : '';
-    $contact_audio = ($form_state['values']['field_service_audio'][LANGUAGE_NONE][0]['fid']) ? trim($form_state['values']['field_service_audio'][LANGUAGE_NONE][0]['fid']) : '';
-    $contact_video = ($form_state['values']['field_service_video'][LANGUAGE_NONE][0]['fid']) ? trim($form_state['values']['field_service_video'][LANGUAGE_NONE][0]['fid']) : '';
 
     $result = get_service_association($target_id);
     $record = $result->fetchAssoc();
@@ -659,7 +647,7 @@ function itg_service_association_after_build($form, &$form_state) {
  * @return array $form
  */
 function itg_service_content_after_build($form, &$form_state) {
-
+  global $base_url;
   $form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#title'] = '<label for="edit-field-story-expert-description-und-0-value">Content <span class="form-required" title="This field is required.">*</span></label>';
   $form['field_story_large_image'][LANGUAGE_NONE][0]['#title'] = '<label for="edit-field-story-large-image-und-0-upload">Content image <span class="form-required" title="This field is required.">*</span></label>';
   $form['field_service_audio'][LANGUAGE_NONE][0]['#title'] = '<label for="edit-field-service-audio-und-0-upload">Content Audio <span class="form-required" title="This field is required.">*</span></label>';
@@ -667,7 +655,7 @@ function itg_service_content_after_build($form, &$form_state) {
   $form['field_story_expert_description']['#suffix'] = '<span id="remain"></span>';
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_service.js', array('weight' => 1));
 
-  $settings = array('base_url' => $base_url, 'sdate' => $sDate, 'edate' => $eDate);
+  $settings = array('base_url' => $base_url);
   drupal_add_js(array('itg_mobile_services' => $settings), 'setting');
 
   $form['path']['#access'] = FALSE;
@@ -683,7 +671,9 @@ function itg_service_content_after_build($form, &$form_state) {
  * @return array $form
  */
 function itg_mobile_client_after_submit($form, &$form_state) {
-  $form_state['values']['title'] = taxonomy_term_load(trim($form_state['values']['field_client_title'][LANGUAGE_NONE][0]['tid']))->name;
+  if ($form_state['values']['field_client_title'][LANGUAGE_NONE]) {
+    $form_state['values']['title'] = taxonomy_term_load(trim($form_state['values']['field_client_title'][LANGUAGE_NONE][0]['tid']))->name;
+  }
   $form_state['redirect'] = 'clients-listing';
   return $form;
 }
@@ -1229,7 +1219,7 @@ function itg_mobile_services_check_exist_content($sid, $start_time, $end_time) {
   $query->range(0, 1);
 
   $result = $query->execute();
-  dpq($query);
+  // dpq($query);
   $record = $result->fetchAssoc();
 
   return $record['entity_id'];

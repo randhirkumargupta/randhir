@@ -705,6 +705,30 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Client Name';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Service Title */
+  $handler->display->display_options['fields']['field_service_association_title']['id'] = 'field_service_association_title';
+  $handler->display->display_options['fields']['field_service_association_title']['table'] = 'field_data_field_service_association_title';
+  $handler->display->display_options['fields']['field_service_association_title']['field'] = 'field_service_association_title';
+  $handler->display->display_options['fields']['field_service_association_title']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Frequency */
+  $handler->display->display_options['fields']['field_service_frequency']['id'] = 'field_service_frequency';
+  $handler->display->display_options['fields']['field_service_frequency']['table'] = 'field_data_field_service_frequency';
+  $handler->display->display_options['fields']['field_service_frequency']['field'] = 'field_service_frequency';
+  /* Field: Content: Service Frequency Date */
+  $handler->display->display_options['fields']['field_service_frequency_date']['id'] = 'field_service_frequency_date';
+  $handler->display->display_options['fields']['field_service_frequency_date']['table'] = 'field_data_field_service_frequency_date';
+  $handler->display->display_options['fields']['field_service_frequency_date']['field'] = 'field_service_frequency_date';
+  $handler->display->display_options['fields']['field_service_frequency_date']['type'] = 'date_plain';
+  $handler->display->display_options['fields']['field_service_frequency_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';

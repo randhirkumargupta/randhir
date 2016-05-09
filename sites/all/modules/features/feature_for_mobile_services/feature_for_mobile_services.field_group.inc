@@ -58,15 +58,20 @@ function feature_for_mobile_services_field_group_info() {
       1 => 'field_email_address',
       2 => 'field_mobile_number',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Business Contact',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-business-contact field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_business_contact|node|clients_creation|form'] = $field_group;
@@ -88,15 +93,20 @@ function feature_for_mobile_services_field_group_info() {
       1 => 'field_ftp_username',
       2 => 'field_ftp_password',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'FTP',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-service-ftp field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_service_ftp|node|service_creation|form'] = $field_group;
@@ -118,15 +128,20 @@ function feature_for_mobile_services_field_group_info() {
       1 => 'field_contact_tech_email_address',
       2 => 'field_contact_tech_mobile_number',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Technical Contact',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-technical-contact field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_technical_contact|node|clients_creation|form'] = $field_group;
