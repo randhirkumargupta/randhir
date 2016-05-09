@@ -16,11 +16,23 @@ function itg_ugc_menu() {
   $items['ugc-title/%/reject'] = array(
     'page callback' => 'itg_ugc_node_status_update',
     'page arguments' => array(1),
-    'access callback' => TRUE,
+    'access arguments' => array('access reject ugc content link'),
     'type' => MENU_CALLBACK,
     );
  
   return $items;
+}
+
+/**
+ * Implements hook_permission.
+ */
+function itg_ugc_permission() {
+  return array(
+    'access reject ugc content link' => array(
+      'title' => t('Ugc reject permission'),
+      'description' => t('Ugc reject permission.'),
+    ),    
+  );
 }
 
 
@@ -191,7 +203,7 @@ function itg_ugc_form_custom_callback($form, &$form_state) {
   }
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'ugc') {
     $op = 'has been submitted for further review and approval';
-    drupal_set_message(t('<b>' . $type . '</b> ' . $op));
+    drupal_set_message(t('<b>' . ucfirst($type) . '</b> ' . $op));
     $_REQUEST['destination'] = 'node/add/ugc';
     $_GET['destination'] = $_REQUEST['destination'];
   }
