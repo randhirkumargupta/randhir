@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var firstTime = 1;
 var rowCount = 1;
 var datechange = 1;
 var sdate = null;
@@ -15,7 +16,8 @@ var fixedDate = '';
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
-            // jQuery('.field-name-field-service-audio').hide();
+
+            jQuery('#client_entity_wrapper').hide();
             jQuery('.field-name-field-story-expert-description').hide();
             jQuery('.field-name-field-story-large-image').hide();
             jQuery('.field-name-field-service-video').hide();
@@ -109,18 +111,34 @@ var fixedDate = '';
 
 
 
+            $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').attr('disabled', 'disabled');
+            $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').keyup(function () {
+                $(this).val('');
+                alert('Please select date from Calendar');
+            });
+            $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').keyup(function () {
+                $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1,#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
+                $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').attr('disabled', 'disabled');
+                alert('Please select date from Calendar');
+            });
 
             $("#edit-field-service-frequency-date-und-0-value-datepicker-popup-1").datepicker({
                 minDate: 0,
+                required: true,
+                showOn: "focus",
                 onSelect: function (selected) {
                     var date = $(this).datepicker('getDate');
                     date.setDate(date.getDate() + fixedDay); // Add 7 days
                     $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker("option", "minDate", selected);
                     $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker("option", "maxDate", date);
-                    $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
+                    // $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
+
+                    $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('').removeAttr('disabled');
 
                 }
             });
+
+
 
             if (firstDate == 1) {
                 $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker({
@@ -131,6 +149,8 @@ var fixedDate = '';
                 firstDate++;
             } else {
                 $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker({
+                    minDate: 0,
+                    maxDate: fixedDate,
                     onSelect: show_days,
                 });
             }
@@ -149,28 +169,22 @@ var fixedDate = '';
                 }
 
 
-                var rowCount = jQuery(".page-node-add-create-content .field-multiple-table tbody tr").length;
-//                if (rowCount == '0') {
-//                    var rowCount = jQuery(".node-type-create-content .field-multiple-table tbody tr").length;
-//                }
-
-//                if (rowCount > 0) {
-//                    diff = diff - rowCount;
-//                }
-//                
+                var rowCount = jQuery(".field-multiple-table tbody tr").length;
 
 
                 if (diff > 0) {
-                    for (var ii = 1; ii <= rowCount; ) {
-                        jQuery('input[name="field_service_content_und_' + ii + '_remove_button"]').mousedown();
-                        ii++;
+
+                    if (firstTime > 1) {
+                        for (var ii = 1; ii <= rowCount; ) {
+                            jQuery('.button-remove').mousedown();
+                            ii++;
+                        }
                     }
+                    firstTime = 2;
                 }
 
                 jQuery('#edit-field-service-content-add-more-number').val(diff);
                 jQuery('.field-name-field-service-content .field-add-more-submit').mousedown();
-
-
 
             }
 
