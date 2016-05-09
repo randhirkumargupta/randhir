@@ -77,8 +77,15 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
   }
   switch ($form_id) {
     case 'recipe_node_form':
+      if (!empty($_REQUEST['destination'])) {
+        $destination = $_REQUEST['destination'];
+      }
+      else {
+        $destination = 'recipe-management';
+      }
+    
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'recipe-management', array('attributes' => array('class' => 'button'))),
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
       );
       $form['#after_build'][] = 'itg_recipe_after_build';

@@ -14,6 +14,7 @@ function feature_for_ugc_user_default_permissions() {
   $permissions['create ugc content'] = array(
     'name' => 'create ugc content',
     'roles' => array(
+      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
@@ -25,6 +26,7 @@ function feature_for_ugc_user_default_permissions() {
   $permissions['edit any ugc content'] = array(
     'name' => 'edit any ugc content',
     'roles' => array(
+      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
