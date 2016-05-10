@@ -40,7 +40,7 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
     // assign array value to taxonomy field
     $form['field_ads_section_selection']['und']['#options'] = $op;
     
-    $variants_field = 'field_ads_template_variants';
+   /* $variants_field = 'field_ads_template_variants';
     $placeholder_field = 'field_ads_placeholder';
     
     // set magazine on edit and trigger action
@@ -49,7 +49,7 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
     } else {
       $variants_id = $form_state['input'][$variants_field][LANGUAGE_NONE];
     }
-    //p($variants_id);
+    
     // add ajax on magazine field 
     $form[$variants_field][LANGUAGE_NONE]['#ajax'] = array(
                     'event' => 'change',
@@ -62,7 +62,8 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
     $form[$placeholder_field][LANGUAGE_NONE]['#suffix'] = '</div>';
     if (function_exists('itg_ads_dropdown_variants')) {
       $form[$placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_dropdown_variants($variants_id);
-    }
+    } */
+    
     
     
     
