@@ -329,6 +329,12 @@ function itg_common_form_node_delete_confirm_alter(&$form, &$form_state, $form_i
   }
 }
 
+/**
+ * Get survey count.
+ * @param type $nid
+ * @param type $tbl_name
+ *   
+ */
 function itg_common_check_record_existance($nid, $tbl_name){
  
     $result = db_select($tbl_name, 'tbl')
@@ -336,6 +342,7 @@ function itg_common_check_record_existance($nid, $tbl_name){
           ->condition('tbl.nid', $nid, '=')
           ->execute();
   $total_survey = $result->rowCount();
+  
   if ($total_survey) {
     return $total_survey;
   } else {
@@ -368,8 +375,9 @@ function itg_get_all_node($content_type,$uid) {
   
   $query = "SELECT COUNT(*) amount FROM {node} n ".
               "WHERE n.type = :type AND n.uid = :uid";
-     $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
-     return $result->amount;
+  $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
+  
+  return $result->amount;
 }
 
 /**
@@ -381,8 +389,9 @@ function itg_get_all_publish_node($content_type,$uid) {
   
   $query = "SELECT COUNT(*) amount FROM {node} n ".
               "WHERE n.type = :type AND n.uid = :uid AND n.status = '1'";
-     $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
-     return $result->amount;
+  $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
+  
+  return $result->amount;
 }
 
 /**
@@ -398,10 +407,10 @@ function itg_get_all_node_type($uid) {
           ->execute();
   
   while($record = $result->fetchAssoc()) {
-        $type[] = $record['type'];
-    }
+    $type[] = $record['type'];
+  }
     
-    return $type;
+  return $type;
 }
 
 
@@ -423,7 +432,7 @@ function itg_last_node_user($uid) {
     $last_record_info['type'] = $last_record['type'];
   }
   
-    return $last_record_info;
+  return $last_record_info;
 }
 
 
@@ -446,7 +455,7 @@ function itg_last_publish_user_node($uid,$publish_id) {
     $last_record_info_user['type'] = $last_record_user['type'];
   }
   
-    return $last_record_info_user;
+  return $last_record_info_user;
 }
 
 /**
@@ -469,7 +478,7 @@ function itg_last_node_published_user($uid,$publish_id) {
     $last_publish_record_info['nid'] = $last_publish_record['nid'];
   }
   
-    return $last_publish_record_info;
+  return $last_publish_record_info;
 }
 
 /**
@@ -484,4 +493,23 @@ function itg_common_check_role_access($rid) {
   } else {
     return true;
   }
+}
+
+/**
+ * Implements itg_ugc_bad_words
+ * @param type $description
+ */
+function itg_ugc_bad_words($description) {
+  $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
+  $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+  foreach ($tax as $key => $val) {
+    $op[$val->tid] = $val->name;
+  }
+  
+  // implode bad words array
+  $keyword = implode("#", $op);
+  $keyword = implode('|', explode('#', preg_quote($keyword)));
+  
+  return $final_description = preg_replace("/($keyword)/i", "<b style='font-size:14px; color:#FF0000; font-weight:bold;'>$0</b>", $description);
 }

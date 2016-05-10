@@ -14,6 +14,7 @@ dependencies[] = field_validation
 dependencies[] = image
 dependencies[] = mega_review_critic_features
 dependencies[] = node
+dependencies[] = number
 dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = views

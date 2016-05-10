@@ -21,6 +21,7 @@ function feature_for_blog_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'UGC Moderator' => 'UGC Moderator',
     ),
     'module' => 'node',
   );
@@ -62,6 +63,7 @@ function feature_for_blog_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'UGC Moderator' => 'UGC Moderator',
     ),
     'module' => 'node',
   );
