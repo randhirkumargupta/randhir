@@ -296,8 +296,9 @@ function itg_survey_survey_form_validate($form, &$form_state) {
   
   if(isset($_COOKIE[$cookie_name])){
     form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));
-  }
-  
+    
+  } else {
+    
   $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
   $num = $btn_num_arr[1];
   $button_name = $btn_num_arr[0];
@@ -377,6 +378,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
         }
       }
     }
+}
 }
 
 /**
