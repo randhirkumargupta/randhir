@@ -355,12 +355,8 @@ function itg_ugc_node_status_update($nid, $title = NULL) {
   
   // code for redirect after node save or reject
   if (!empty($title)) {
-    if (isset($_SESSION['messages']['status'])) {
-      unset($_SESSION['messages']['status']);
-    }
     drupal_set_message(t($title . ' has been Submitted successfully.'));
-  }
-  else {
+  } else {
       drupal_set_message(t($node->title.' has been rejected successfully.')); 
   }
   
