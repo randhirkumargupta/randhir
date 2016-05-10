@@ -356,11 +356,14 @@ function itg_ugc_node_status_update($nid, $title = NULL) {
   // code for redirect after node save or reject
   if (!empty($title)) {
     drupal_set_message(t($title . ' has been Submitted successfully.'));
-  } else {
+    $_GET['destination'] = 'manage-ugc';
+  } 
+  else {
       drupal_set_message(t($node->title.' has been rejected successfully.')); 
+      drupal_goto('manage-ugc');
   }
   
-  $_GET['destination'] = 'manage-ugc';
+  
   
 }
 
