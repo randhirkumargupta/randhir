@@ -52,9 +52,9 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // get node values 
     $node = node_load($url_nid);
     
-    $form['title']['#value'] = $node->title;
+    $form['title']['#default_value'] = $node->title;
     $form['field_blog_long_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#value'] = $url_nid;
+    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
     $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'ugc';
   }
   
@@ -63,11 +63,11 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // get node values 
     $node = node_load($url_nid);
     
-    $form['title']['#value'] = $node->title;
+    $form['title']['#default_value'] = $node->title;
     $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
     $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
     $form['body'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#value'] = $url_nid;
+    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
     $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'ugc';
   }
 
@@ -76,7 +76,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // get node values 
     $node = node_load($url_nid);
     
-    $form['title']['#value'] = $node->title;
+    $form['title']['#default_value'] = $node->title;
     
     if (!empty($node->field_astro_video[LANGUAGE_NONE][0]['fid'])) {
       $form['field_recipe_content_type'][LANGUAGE_NONE]['#default_value'] = 'Video';
@@ -85,7 +85,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     
     $form['field_recipe_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
     $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
-    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#value'] = $url_nid;
+    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
     $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'ugc';
   }
 
@@ -94,8 +94,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // get node values 
     $node = node_load($url_nid);
     
-    $form['title']['#value'] = $node->title;
-    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#value'] = $url_nid;
+    $form['title']['#default_value'] = $node->title;
+    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
     $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'ugc';
     
     foreach ($form['field_gallery_image']['und'] as $delta => $field) {
@@ -371,7 +371,12 @@ function itg_ugc_node_status_update($nid, $title = NULL) {
  * @param Array $langcode
  */
 function itg_ugc_node_view($node, $view_mode, $langcode) {
-  if ($node->type == "ugc") {   
+  if ($node->type == "ugc") {
+    global $user, $base_url;
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    $settings['uid'] = $user->uid;
+    drupal_add_js(array('itg_ugc' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_ugc') . '/js/itg_ugc.js');
   }
 }
