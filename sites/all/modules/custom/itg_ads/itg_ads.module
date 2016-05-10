@@ -6,7 +6,7 @@
  * @param array reference $form_state
  */
 function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form_id) {    
-    module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
+    
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js',      
     );
@@ -39,9 +39,62 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
     
     // assign array value to taxonomy field
     $form['field_ads_section_selection']['und']['#options'] = $op;
+    
+    $variants_field = 'field_ads_template_variants';
+    $placeholder_field = 'field_ads_placeholder';
+    
+    // set magazine on edit and trigger action
+    if (isset($form[$variants_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
+      $variants_id = $form[$variants_field][LANGUAGE_NONE]['#default_value'][0];
+    } else {
+      $variants_id = $form_state['input'][$variants_field][LANGUAGE_NONE];
+    }
+    //p($variants_id);
+    // add ajax on magazine field 
+    $form[$variants_field][LANGUAGE_NONE]['#ajax'] = array(
+                    'event' => 'change',
+                    'callback' => 'itg_ads_variants_ajax_callback',
+                    'wrapper' => $placeholder_field.'_replace',
+            ); 
+    
+    // Setup placeholder select
+    $form[$placeholder_field][LANGUAGE_NONE]['#prefix'] = '<div id="'.$placeholder_field.'_replace">';
+    $form[$placeholder_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+    if (function_exists('itg_ads_dropdown_variants')) {
+      $form[$placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_dropdown_variants($variants_id);
+    }
+    
+    
+    
+}
+
+/**
+* Ajax callback for Event roles dropdown
+* @param type $form
+* @param type $form_state
+*/
+function itg_ads_variants_ajax_callback($form, $form_state) {
+    return $form['field_ads_placeholder'];
 }
 
 
+/**
+ * Helper function to populate the second dropdown.
+ * @param type $id
+ * @return $data
+ */
+function itg_ads_dropdown_variants($id = '') {
+  $data = array(''=> '- Select -');
+  if ($id == '314') {
+    $data = array('200*200', '150*150');
+  } else if ($id == '316') {
+      $data = array('400*400', '250*250');
+  } else {
+    
+  }
+
+  return $data;
+}
 
 /**
  * Implementation of hook_form_FORM_ID_alter().
