@@ -1352,3 +1352,10 @@ input[name="field_gallery_image_add_more"] {
 .node-type-breaking-news .close-preview {
   display: block;
 }
+
+.node-ads_management-form .form-type-date-popup .form-type-textfield label + .form-text + span.error {
+  padding-left: 0;
+}
+.node-ads_management-form fieldset.date-combo .container-inline-date .date-padding .form-item div.description {
+  min-width: 135px;
+}
