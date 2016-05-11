@@ -42,12 +42,12 @@ function ads_features_views_default_views() {
     'title' => 'title',
     'created' => 'created',
     'changed' => 'changed',
+    'field_ads_start_date' => 'field_ads_start_date',
+    'field_ads_end_date' => 'field_ads_end_date',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
-    'field_ads_start_date' => 'field_ads_start_date',
-    'field_ads_end_date' => 'field_ads_end_date',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -77,6 +77,20 @@ function ads_features_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_ads_start_date' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ads_end_date' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'view_node' => array(
       'align' => '',
       'separator' => '',
@@ -94,21 +108,7 @@ function ads_features_views_default_views() {
     ),
     'nothing' => array(
       'align' => '',
-      'separator' => '|',
-      'empty_column' => 0,
-    ),
-    'field_ads_start_date' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_ads_end_date' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
   );
@@ -116,7 +116,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
-  $handler->display->display_options['fields']['counter']['label'] = 'S.no.';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Content: Title */
@@ -148,7 +148,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['field_ads_start_date']['table'] = 'field_data_field_ads_start_date';
   $handler->display->display_options['fields']['field_ads_start_date']['field'] = 'field_ads_start_date';
   $handler->display->display_options['fields']['field_ads_start_date']['settings'] = array(
-    'format_type' => 'itg',
+    'format_type' => 'custom_date',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -160,7 +160,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['field_ads_end_date']['table'] = 'field_data_field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['field'] = 'field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['settings'] = array(
-    'format_type' => 'itg',
+    'format_type' => 'custom_date',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
