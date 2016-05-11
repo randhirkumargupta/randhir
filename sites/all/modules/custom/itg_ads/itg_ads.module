@@ -168,6 +168,11 @@ function itg_ads_node_validate($node, $form, &$form_state) {
       if (empty($template_variants)) {
         form_set_error('field_ads_template_variants', t("Template variant is required"));
       }
-    }    
+    }  
+    $startdate = strtotime($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value']);
+    $enddate = strtotime($form_state['values']['field_ads_end_date'][LANGUAGE_NONE][0]['value']);
+    if($enddate < $startdate){
+    form_set_error('field_ads_end_date', 'End date must greater then Start date.');
+  }
   }
 }
