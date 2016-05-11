@@ -117,16 +117,16 @@ function event_backend_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '15',
+          'weight' => '20',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '14',
+          'weight' => '19',
         ),
         'additional_settings' => array(
-          'weight' => '4',
+          'weight' => '7',
         ),
       ),
       'display' => array(),
