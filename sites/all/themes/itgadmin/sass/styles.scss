@@ -1530,7 +1530,16 @@ input[name="field_gallery_image_add_more"]{
     }
   }
 }
-
+.node-ads_management-form{
+  .form-type-date-popup{
+    .form-type-textfield label + .form-text + span.error{
+      padding-left: 0;
+    }
+  }
+  fieldset.date-combo .container-inline-date .date-padding .form-item div.description{
+    min-width: 135px;
+  }
+}
 
 
 
