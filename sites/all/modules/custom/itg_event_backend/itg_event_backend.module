@@ -237,6 +237,11 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
       'render element' => 'form',
     ),
+    'itg_event_sponsor_tab_form_display_block' => array(
+      'template' => 'itg-event-backend-form-sponsor-tab-template',
+      'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
   return $themes;
 }
