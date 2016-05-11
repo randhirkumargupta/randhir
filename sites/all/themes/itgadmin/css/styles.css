@@ -81,6 +81,7 @@ img {
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
+#block-menu-menu-ugc-content-menu > .menu,
 #block-menu-menu-task-allocation-menu > .menu,
 #block-menu-menu-story-content-admin-menu > .menu, .breadcrumb ol, .header__secondary-menu ul, .dashboard-tab {
   list-style: none;
@@ -102,11 +103,13 @@ img {
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
+#block-menu-menu-ugc-content-menu > .menu,
 #block-menu-menu-task-allocation-menu > .menu,
 #block-menu-menu-story-content-admin-menu > .menu, .content-block-menu > .menu > li, #block-menu-menu-ask-an-expert-menu > .menu > li,
 #block-menu-menu-photogallery-admin-menu > .menu > li,
 #block-menu-menu-mega-review-menu > .menu > li,
 #block-menu-menu-blog-admin-menu > .menu > li,
+#block-menu-menu-ugc-content-menu > .menu > li,
 #block-menu-menu-task-allocation-menu > .menu > li,
 #block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .breadcrumb ol li, .view .attachment .count, .dashboard-tab {
   display: inline-block;
@@ -124,6 +127,7 @@ img {
 #block-menu-menu-photogallery-admin-menu > .menu > li,
 #block-menu-menu-mega-review-menu > .menu > li,
 #block-menu-menu-blog-admin-menu > .menu > li,
+#block-menu-menu-ugc-content-menu > .menu > li,
 #block-menu-menu-task-allocation-menu > .menu > li,
 #block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .view .attachment .count {
   vertical-align: top;
@@ -133,6 +137,7 @@ img {
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
+#block-menu-menu-ugc-content-menu > .menu,
 #block-menu-menu-task-allocation-menu > .menu,
 #block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text, .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-quiz-add-questions-values"] {
   width: 100%;
@@ -896,6 +901,7 @@ input[name="field_gallery_image_add_more"] {
 #block-menu-menu-photogallery-admin-menu,
 #block-menu-menu-mega-review-menu,
 #block-menu-menu-blog-admin-menu,
+#block-menu-menu-ugc-content-menu,
 #block-menu-menu-task-allocation-menu,
 #block-menu-menu-story-content-admin-menu {
   margin: 20px 0;
@@ -904,6 +910,7 @@ input[name="field_gallery_image_add_more"] {
 #block-menu-menu-photogallery-admin-menu h2,
 #block-menu-menu-mega-review-menu h2,
 #block-menu-menu-blog-admin-menu h2,
+#block-menu-menu-ugc-content-menu h2,
 #block-menu-menu-task-allocation-menu h2,
 #block-menu-menu-story-content-admin-menu h2 {
   display: none;
@@ -912,6 +919,7 @@ input[name="field_gallery_image_add_more"] {
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
+#block-menu-menu-ugc-content-menu > .menu,
 #block-menu-menu-task-allocation-menu > .menu,
 #block-menu-menu-story-content-admin-menu > .menu {
   background-color: #f0f0f0;
@@ -920,6 +928,7 @@ input[name="field_gallery_image_add_more"] {
 #block-menu-menu-photogallery-admin-menu > .menu > li,
 #block-menu-menu-mega-review-menu > .menu > li,
 #block-menu-menu-blog-admin-menu > .menu > li,
+#block-menu-menu-ugc-content-menu > .menu > li,
 #block-menu-menu-task-allocation-menu > .menu > li,
 #block-menu-menu-story-content-admin-menu > .menu > li {
   font-size: 0;
@@ -928,6 +937,7 @@ input[name="field_gallery_image_add_more"] {
 #block-menu-menu-photogallery-admin-menu > .menu > li > a,
 #block-menu-menu-mega-review-menu > .menu > li > a,
 #block-menu-menu-blog-admin-menu > .menu > li > a,
+#block-menu-menu-ugc-content-menu > .menu > li > a,
 #block-menu-menu-task-allocation-menu > .menu > li > a,
 #block-menu-menu-story-content-admin-menu > .menu > li > a {
   display: block;
@@ -941,6 +951,7 @@ input[name="field_gallery_image_add_more"] {
 #block-menu-menu-photogallery-admin-menu > .menu > li > a:hover,
 #block-menu-menu-mega-review-menu > .menu > li > a:hover,
 #block-menu-menu-blog-admin-menu > .menu > li > a:hover,
+#block-menu-menu-ugc-content-menu > .menu > li > a:hover,
 #block-menu-menu-task-allocation-menu > .menu > li > a:hover,
 #block-menu-menu-story-content-admin-menu > .menu > li > a:hover {
   border-bottom-color: #d00b26;
