@@ -1,0 +1,230 @@
+<?php
+/**
+ * @file
+ * features_for_event_registration.views_default.inc
+ */
+
+/**
+ * Implements hook_views_default_views().
+ */
+function features_for_event_registration_views_default_views() {
+  $export = array();
+
+  $view = new view();
+  $view->name = 'event_users_list';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Event Users List';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Event Users List';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    4 => '4',
+    5 => '5',
+    6 => '6',
+    7 => '7',
+    20 => '20',
+    10 => '10',
+    9 => '9',
+  );
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Registration Found!';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Broken/missing handler */
+  $handler->display->display_options['fields']['field_erf_registration']['id'] = 'field_erf_registration';
+  $handler->display->display_options['fields']['field_erf_registration']['table'] = 'field_data_field_erf_registration';
+  $handler->display->display_options['fields']['field_erf_registration']['field'] = 'field_erf_registration';
+  $handler->display->display_options['fields']['field_erf_registration']['label'] = 'Registration Details';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['nid']['default_argument_options']['code'] = 'return arg(1);';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'event_registration' => 'event_registration',
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'event-users-list/%';
+  $export['event_users_list'] = $view;
+
+  $view = new view();
+  $view->name = 'manage_event_registration';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Manage Event Registration';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Manage Event Registration';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    4 => '4',
+    5 => '5',
+    6 => '6',
+    7 => '7',
+    10 => '10',
+    9 => '9',
+  );
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'table';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Result Found!';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S.No';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Field: Gender Title */
+  $handler->display->display_options['fields']['field_erf_gender']['id'] = 'field_erf_gender';
+  $handler->display->display_options['fields']['field_erf_gender']['table'] = 'field_data_field_erf_gender';
+  $handler->display->display_options['fields']['field_erf_gender']['field'] = 'field_erf_gender';
+  $handler->display->display_options['fields']['field_erf_gender']['exclude'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'First Name';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Field: Last name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['exclude'] = TRUE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Name';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_erf_gender] [title] [field_last_name]';
+  /* Field: Field: Mobile */
+  $handler->display->display_options['fields']['field_erf_mobile']['id'] = 'field_erf_mobile';
+  $handler->display->display_options['fields']['field_erf_mobile']['table'] = 'field_data_field_erf_mobile';
+  $handler->display->display_options['fields']['field_erf_mobile']['field'] = 'field_erf_mobile';
+  $handler->display->display_options['fields']['field_erf_mobile']['label'] = 'Mobile No.';
+  /* Field: Field: Designation */
+  $handler->display->display_options['fields']['field_erf_designation']['id'] = 'field_erf_designation';
+  $handler->display->display_options['fields']['field_erf_designation']['table'] = 'field_data_field_erf_designation';
+  $handler->display->display_options['fields']['field_erf_designation']['field'] = 'field_erf_designation';
+  /* Field: Field: Company/Organization Name */
+  $handler->display->display_options['fields']['field_erf_company_name']['id'] = 'field_erf_company_name';
+  $handler->display->display_options['fields']['field_erf_company_name']['table'] = 'field_data_field_erf_company_name';
+  $handler->display->display_options['fields']['field_erf_company_name']['field'] = 'field_erf_company_name';
+  $handler->display->display_options['fields']['field_erf_company_name']['label'] = 'Organization Name';
+  /* Field: Field: City */
+  $handler->display->display_options['fields']['field_erf_city']['id'] = 'field_erf_city';
+  $handler->display->display_options['fields']['field_erf_city']['table'] = 'field_data_field_erf_city';
+  $handler->display->display_options['fields']['field_erf_city']['field'] = 'field_erf_city';
+  $handler->display->display_options['fields']['field_erf_city']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_erf_city']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Field: Country */
+  $handler->display->display_options['fields']['field_erf_country']['id'] = 'field_erf_country';
+  $handler->display->display_options['fields']['field_erf_country']['table'] = 'field_data_field_erf_country';
+  $handler->display->display_options['fields']['field_erf_country']['field'] = 'field_erf_country';
+  $handler->display->display_options['fields']['field_erf_country']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_erf_country']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Address';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_erf_city] ([field_erf_country])';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Registered Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = 'Registered Users';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = 'View List';
+  $handler->display->display_options['fields']['nothing_2']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_2']['alter']['path'] = 'event-users-list/[nid]';
+  $handler->display->display_options['fields']['nothing_2']['alter']['target'] = '_blank';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'event_registration' => 'event_registration',
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'manage-event-registration';
+  $export['manage_event_registration'] = $view;
+
+  return $export;
+}
