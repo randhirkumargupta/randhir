@@ -206,7 +206,7 @@ a.ckeditor_links{
   @extend .btn;
   @extend .btn-preview;
 }
-.btn-save, .form-submit[value="Save as Draft"], .form-submit[value="Save"]{
+.btn-save, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"]{
   @extend .btn;
   @extend .btn-save-draft;
 }
@@ -220,7 +220,7 @@ a.ckeditor_links{
   @extend .btn;
   @extend .btn-cancel;
 }
-.button.published{
+.button.published, .form-submit[value="Back"]{
   @extend .btn;
 }
 .desc-popup{
@@ -1530,7 +1530,24 @@ input[name="field_gallery_image_add_more"]{
     }
   }
 }
-
+.node-ads_management-form{
+  .form-type-date-popup{
+    .form-type-textfield label + .form-text + span.error{
+      padding-left: 0;
+    }
+  }
+  fieldset.date-combo .container-inline-date .date-padding .form-item div.description{
+    min-width: 135px;
+  }
+}
+.form-field-name-field-ads-content-selection,
+.form-field-name-field-ads-template-variants,
+.form-field-name-field-ads-section-selection{
+  label{
+    color: red;
+    content: "*";
+  }
+}
 
 
 

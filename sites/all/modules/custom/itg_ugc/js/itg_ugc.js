@@ -29,8 +29,8 @@
         return true;                     
     });           
             
-      $('#edit-field-ugc-content-type-und').change(function() {
-                var contenttypevalue = $('#edit-field-ugc-content-type-und').val();
+      $('#edit-field-ugc-ctype-und').change(function() {
+                var contenttypevalue = $('#edit-field-ugc-ctype-und').val();
                 // alert(contenttypevalue);
                 if (contenttypevalue == 'photogallery' 
                         || contenttypevalue == 'blog' 
