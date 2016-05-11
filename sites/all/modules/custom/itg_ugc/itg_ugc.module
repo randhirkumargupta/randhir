@@ -118,7 +118,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
     $form['field_recipe_audio']['und'][0]['#title'] = t('Audio') . '<span class="form-required" title="This field is required."> *</span>';
     // get content type field value
-    $type = $form['field_ugc_content_type'][LANGUAGE_NONE][0]['value'];
+    $type = $form['field_ugc_ctype'][LANGUAGE_NONE][0]['value'];
 
     // Check if user is logged-in, fill email and name field automatically
     if ($user->uid && $form['#node']->nid == '') {
@@ -136,10 +136,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   // Hide/show description field
   $form['field_user_message']['#states'] = array(
     'invisible' => array(
-      ':input[name="field_ugc_content_type[und]"]' => array('value' => 'photogallery'),
+      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
     ),
     'required' => array(
-      ':input[name="field_ugc_content_type[und]"]' => array(
+      ':input[name="field_ugc_ctype[und]"]' => array(
         array('value' => 'story'),
         array('value' => 'recipe'),
         array('value' => 'audio'),
@@ -152,13 +152,13 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   $form['field_ugc_upload_photo']['#states'] = array(
     'visible' => array(
       array(
-        array(':input[name="field_ugc_content_type[und]"]' => array('value' => 'photogallery')),
+        array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery')),
         'or',
-        array(':input[name="field_ugc_content_type[und]"]' => array('value' => 'recipe')),
+        array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'recipe')),
       ),
     ),
     'required' => array(
-      ':input[name="field_ugc_content_type[und]"]' => array('value' => 'photogallery'),
+      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
     )
   );
 
@@ -166,20 +166,20 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   $form['field_astro_video']['#states'] = array(
     'visible' => array(
       array(
-        array(':input[name="field_ugc_content_type[und]"]' => array('value' => 'video')),
+        array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'video')),
         'or',
-        array(':input[name="field_ugc_content_type[und]"]' => array('value' => 'recipe')),
+        array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'recipe')),
       ),
     ),
     'required' => array(
-      ':input[name="field_ugc_content_type[und]"]' => array('value' => 'video'),
+      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'video'),
     )
   );
 
   // Hide/show Audio field
   $form['field_recipe_audio']['#states'] = array(
     'visible' => array(
-      ':input[name="field_ugc_content_type[und]"]' => array('value' => 'audio'),
+      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'audio'),
     )
   );
 }
@@ -234,7 +234,7 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
 
   if ($node->type == 'ugc') {
     // get value of content type field
-    $type = $node->field_ugc_content_type[LANGUAGE_NONE][0]['value'];
+    $type = $node->field_ugc_ctype[LANGUAGE_NONE][0]['value'];
     // get value of body field
     $description = $node->field_user_message[LANGUAGE_NONE][0]['value'];
     // get fid of upload image

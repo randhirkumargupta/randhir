@@ -90,7 +90,7 @@ function feature_for_ugc_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '3',
+          'weight' => '2',
         ),
         'path' => array(
           'weight' => '9',

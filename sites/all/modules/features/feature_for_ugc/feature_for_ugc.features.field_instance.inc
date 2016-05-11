@@ -188,8 +188,8 @@ function feature_for_ugc_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-ugc-field_ugc_content_type'.
-  $field_instances['node-ugc-field_ugc_content_type'] = array(
+  // Exported field_instance: 'node-ugc-field_ugc_ctype'.
+  $field_instances['node-ugc-field_ugc_ctype'] = array(
     'bundle' => 'ugc',
     'default_value' => NULL,
     'deleted' => 0,
@@ -200,7 +200,7 @@ function feature_for_ugc_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 3,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -211,7 +211,7 @@ function feature_for_ugc_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_ugc_content_type',
+    'field_name' => 'field_ugc_ctype',
     'label' => 'Content type',
     'required' => 1,
     'settings' => array(
@@ -223,7 +223,7 @@ function feature_for_ugc_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 

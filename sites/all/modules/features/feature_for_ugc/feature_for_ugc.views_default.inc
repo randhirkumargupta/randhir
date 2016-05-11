@@ -203,9 +203,9 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Content type */
-  $handler->display->display_options['fields']['field_ugc_content_type']['id'] = 'field_ugc_content_type';
-  $handler->display->display_options['fields']['field_ugc_content_type']['table'] = 'field_data_field_ugc_content_type';
-  $handler->display->display_options['fields']['field_ugc_content_type']['field'] = 'field_ugc_content_type';
+  $handler->display->display_options['fields']['field_ugc_ctype']['id'] = 'field_ugc_ctype';
+  $handler->display->display_options['fields']['field_ugc_ctype']['table'] = 'field_data_field_ugc_ctype';
+  $handler->display->display_options['fields']['field_ugc_ctype']['field'] = 'field_ugc_ctype';
   /* Field: Content: Name */
   $handler->display->display_options['fields']['field_user_name']['id'] = 'field_user_name';
   $handler->display->display_options['fields']['field_user_name']['table'] = 'field_data_field_user_name';
@@ -228,10 +228,11 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Post date */
@@ -322,17 +323,16 @@ function feature_for_ugc_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Content type (field_ugc_content_type) */
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['id'] = 'field_ugc_content_type_value';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['table'] = 'field_data_field_ugc_content_type';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['field'] = 'field_ugc_content_type_value';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['operator_id'] = 'field_ugc_content_type_value_op';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['label'] = 'Content type';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['operator'] = 'field_ugc_content_type_value_op';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['identifier'] = 'field_ugc_content_type_value';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Content type (field_ugc_ctype) */
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['id'] = 'field_ugc_ctype_value';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['table'] = 'field_data_field_ugc_ctype';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['field'] = 'field_ugc_ctype_value';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['operator_id'] = 'field_ugc_ctype_value_op';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['label'] = 'Content type';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['operator'] = 'field_ugc_ctype_value_op';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['identifier'] = 'field_ugc_ctype_value';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -353,6 +353,7 @@ function feature_for_ugc_views_default_views() {
     19 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
   );
   $handler->display->display_options['path'] = 'manage-ugc';
 
@@ -485,9 +486,9 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Content type */
-  $handler->display->display_options['fields']['field_ugc_content_type']['id'] = 'field_ugc_content_type';
-  $handler->display->display_options['fields']['field_ugc_content_type']['table'] = 'field_data_field_ugc_content_type';
-  $handler->display->display_options['fields']['field_ugc_content_type']['field'] = 'field_ugc_content_type';
+  $handler->display->display_options['fields']['field_ugc_ctype']['id'] = 'field_ugc_ctype';
+  $handler->display->display_options['fields']['field_ugc_ctype']['table'] = 'field_data_field_ugc_ctype';
+  $handler->display->display_options['fields']['field_ugc_ctype']['field'] = 'field_ugc_ctype';
   /* Field: Content: Name */
   $handler->display->display_options['fields']['field_user_name']['id'] = 'field_user_name';
   $handler->display->display_options['fields']['field_user_name']['table'] = 'field_data_field_user_name';
@@ -510,10 +511,11 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Post date */
@@ -584,17 +586,21 @@ function feature_for_ugc_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Content type (field_ugc_content_type) */
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['id'] = 'field_ugc_content_type_value';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['table'] = 'field_data_field_ugc_content_type';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['field'] = 'field_ugc_content_type_value';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['operator_id'] = 'field_ugc_content_type_value_op';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['label'] = 'Content type';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['operator'] = 'field_ugc_content_type_value_op';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['identifier'] = 'field_ugc_content_type_value';
-  $handler->display->display_options['filters']['field_ugc_content_type_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Content type (field_ugc_ctype) */
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['id'] = 'field_ugc_ctype_value';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['table'] = 'field_data_field_ugc_ctype';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['field'] = 'field_ugc_ctype_value';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['operator_id'] = 'field_ugc_ctype_value_op';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['label'] = 'Content type';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['operator'] = 'field_ugc_ctype_value_op';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['identifier'] = 'field_ugc_ctype_value';
+  $handler->display->display_options['filters']['field_ugc_ctype_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -615,12 +621,8 @@ function feature_for_ugc_views_default_views() {
     19 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
   );
-  /* Filter criterion: Content: Source type (field_story_source_type) */
-  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
   $handler->display->display_options['path'] = 'reject-ugc-content-list';
   $export['manage_ugc'] = $view;
 
