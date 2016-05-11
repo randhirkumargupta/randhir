@@ -107,6 +107,16 @@ input[type="text"], select, input[type="password"]{
   padding: 5px;
   color: #333;
 }
+.form-textarea{
+  border: 1px solid #ddd;
+  padding: 5px;
+  color: #333;
+  max-height: 128px;
+  resize: none;
+}
+.grippie{
+  display: none;
+}
 .form-required, .error{
   color: red;
 }
@@ -302,5 +312,42 @@ input[type="text"], select, input[type="password"]{
         }
       }
     }
+  }
+}
+
+#content{
+  .node-form{
+    .form-type-textfield, 
+      .form-type-textarea, 
+      .form-type-select, 
+      .form-type-autocomplete-deluxe,
+      .form-type-managed-file,
+      .form-type-radios,
+      .date-combo,
+      .form-type-hierarchical-select,
+      .form-type-checkboxes{
+        > label{
+          width: 220px;
+          float: left;
+          padding-right: 20px;
+        }
+        > label + div{
+          padding-left: 220px;
+        }
+      }
+      .form-item{
+        margin: 30px 0;
+        .form-item{margin: 0;}
+      }
+      .form-text, .form-textarea{
+        width: 400px;
+        max-width: 100%;
+      }
+      .form-actions{
+        padding-left: 220px;
+        .form-submit{
+          @extend .btn;
+        }
+      }
   }
 }
