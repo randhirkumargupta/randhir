@@ -223,6 +223,41 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
   return $themes;
 }
 
+/**
+ * Implements hook_block_info().
+ */
+function itg_event_backend_block_info() {
+  $blocks['event_backend_tab_form_block'] = array(
+    'info' => t('event backend Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  $blocks['sponsor_tab_form_block'] = array(
+    'info' => t('sponsor Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function itg_event_backend_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'event_backend_tab_form_block':
+      $block['content'] = theme('itg_event_backend_tab_form_display_block', array('data' => $data));
+      break;
+    case 'sponsor_tab_form_block':
+      $block['content'] = theme('itg_event_sponsor_tab_form_display_block', array('data' => $data));
+      break;
+  }
+
+  return $block;
+}
 
 /**
  * Implements views header link 

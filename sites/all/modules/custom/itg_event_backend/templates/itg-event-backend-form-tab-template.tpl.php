@@ -7,7 +7,9 @@
 
 ?>
 <div class="block-itg-story-list">
-<span class="target-link" data-target-id="GalleryIndividualImages"><?php echo t('Basic Details'); ?></span>
-<span class="target-link" data-target-id="Configuration"><?php echo t('Configuration'); ?></span>
-<span class="target-link" data-target-id="title-metatags"><?php echo t('Meta Details'); ?></span>
+<?php echo l(t('Basic Details'), 'node/'.arg(1).'/edit', array('query' => array('step' => 'step_first'))); ?>
+<?php echo l(t('Registration, Sponsor'), 'node/'.arg(1).'/edit', array('query' => array('step' => 'step_second'))); ?>
+<?php echo l(t('Program Schedule'), 'node/'.arg(1).'/edit', array('query' => array('step' => 'step_program_schedule'))); ?>
+<?php echo l(t('Highlights, Media, Configuration'), 'node/'.arg(1).'/edit', array('query' => array('step' => 'step_last'))); ?>
+
 </div>
