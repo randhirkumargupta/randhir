@@ -10,13 +10,13 @@
 function feature_for_ugc_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_ugc_content_type'.
-  $field_bases['field_ugc_content_type'] = array(
+  // Exported field_base: 'field_ugc_ctype'.
+  $field_bases['field_ugc_ctype'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_ugc_content_type',
+    'field_name' => 'field_ugc_ctype',
     'field_permissions' => array(
       'type' => 0,
     ),
