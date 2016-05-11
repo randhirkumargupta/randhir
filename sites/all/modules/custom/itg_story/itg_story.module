@@ -136,20 +136,17 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * @param type $form_state
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-    if (isset($_SESSION['messages']['status'])) {
-        unset($_SESSION['messages']['status']);
-    }
-    if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'story') {
-        $op = 'created';
-        $story_title = $form_state['node']->title;
-        drupal_set_message(t('Story <b>' . $story_title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
-        $_GET['destination'] = $_REQUEST['destination'];
-    } else {
-        $op = 'updated';
-        $story_title = $form_state['node']->title;
-        drupal_set_message(t('Story <b>' . $story_title . '</b> has been ' . $op . '.'));
-        $_GET['destination'] = $_REQUEST['destination'];
-    }
+  
+  $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
+  $node_type = ucfirst($form_state['node']->type);
+  $node_type = str_replace("_", " ", $node_type);
+  $title = ucfirst($form_state['node']->title);
+
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+
+  $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
 }
 
 /**
