@@ -412,6 +412,13 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'cooking_tips' => 'cooking_tips',
+    'food_news' => 'food_news',
+    'recipe' => 'recipe',
+    'story' => 'story',
+    'photogallery' => 'photogallery',
+  );
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Web Property';
@@ -439,6 +446,7 @@ function syndication_feature_views_default_views() {
     15 => 0,
     18 => 0,
   );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

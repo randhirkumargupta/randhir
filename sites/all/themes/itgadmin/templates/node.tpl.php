@@ -1,44 +1,49 @@
-<?php
-/**
- * @file
- * Returns the HTML for a node.
- *
- * Complete documentation for this file is available online.
- * @see https://drupal.org/node/1728164
- */
-?>
-<article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+<?php if (!empty($pre_object)) print render($pre_object) ?>
 
-  <?php if ($title_prefix || $title_suffix || $display_submitted || $unpublished || !$page && $title): ?>
-    <header>
-      <?php print render($title_prefix); ?>
-      <?php if (!$page && $title): ?>
-        <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
-      <?php endif; ?>
-      <?php print render($title_suffix); ?>
-
-      <?php if ($display_submitted): ?>
-        <p class="submitted">
-          <?php print $user_picture; ?>
-          <?php print $submitted; ?>
-        </p>
-      <?php endif; ?>
-
-      <?php if ($unpublished): ?>
-        <mark class="unpublished"><?php print t('Unpublished'); ?></mark>
-      <?php endif; ?>
-    </header>
+<div class='<?php print $classes ?> clearfix' <?php print ($attributes) ?>>
+  <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
+    <div class='column-side'><div class='column-wrapper'>
   <?php endif; ?>
 
-  <?php
-    // We hide the comments and links now so that we can render them later.
-    hide($content['comments']);
-    hide($content['links']);
-    print render($content);
-  ?>
+  <?php if (!empty($submitted)): ?>
+    <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
+  <?php endif; ?>
 
-  <?php print render($content['links']); ?>
+  <?php if (!empty($links)): ?>
+    <div class='<?php print $hook ?>-links clearfix'>
+      <?php print render($links) ?>
+    </div>
+  <?php endif; ?>
 
-  <?php print render($content['comments']); ?>
+  <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
+    </div></div>
+  <?php endif; ?>
 
-</article>
+  <?php if ($layout): ?>
+    <div class='column-main'><div class='column-wrapper'>
+  <?php endif; ?>
+
+  <?php if (!empty($title_prefix)) print render($title_prefix); ?>
+
+  <?php if (!empty($title) && !$page): ?>
+    <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
+      <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
+      <a href="<?php print $node_url ?>"><?php print $title ?></a>
+    </h2>
+  <?php endif; ?>
+
+  <?php if (!empty($title_suffix)) print render($title_suffix); ?>
+
+  <?php if (!empty($content)): ?>
+    <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
+      <?php print render($content) ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($layout): ?>
+    </div></div>
+  <?php endif; ?>
+</div>
+
+<?php if (!empty($post_object)) print render($post_object) ?>
+

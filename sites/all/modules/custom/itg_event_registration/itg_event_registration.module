@@ -1,0 +1,176 @@
+<?php
+
+/**
+ * @file
+ * The ITG Event Registration module.
+ *
+ * Contains functionality for event registration.
+ *
+ */
+
+
+/**
+ * Implement hook_menu
+ * @return string
+ */
+function itg_event_registration_menu() {
+  
+  $items = array();
+  
+  $items['event-registration/%'] = array(
+      'title' => t('Event Registration'),
+      'page arguments' => array('itg_event_registration_form'),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_event_registration.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implement hook_theme
+ * @return Array
+ */
+function itg_event_registration_theme() {
+  return array(    
+    'event_registration_tab_form_display_block' => array(
+      'template' => 'event-registration-form-tab',
+      'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+      'variables' => array('data' => NULL),
+    ), 
+ );
+}
+
+/***************************Form Related hooks*********************************/
+/**
+ * Implement hook_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param String $form_id
+ */
+function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
+
+  global $user;
+  
+  //Set destination for Event Registration form
+  if ($form_id == 'event_registration_node_form') {
+    
+      unset($form['actions']['preview']);
+      
+      //Set Destination
+      $destination = 'manage-event-registration';
+     
+      //Form fields treatment
+      $form['title']['#description'] = '<p>' . t('Please enter first name.') . '</p>';
+      
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+      );
+      
+      //After build and custom summit callback
+      $form['#after_build'][] = 'itg_event_registration_form_after_build';
+      $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
+
+  }
+}
+
+
+
+/**
+ * After build function for Event Registration
+ * @param Array $form
+ * @param Array $form_state
+ * @return Array
+ */
+function itg_event_registration_form_after_build($form, &$form_state) {
+  global $user, $base_url;
+  
+  //Extract type of node
+  if (arg(0) == 'node') {
+    if (arg(1) == 'add') {
+        $type = arg(2);
+        $nid = '';
+    } else {
+      $node = node_load(arg(1));
+      $type = $node->type;
+      $nid = arg(1);
+    }
+  }
+
+  //Array used in event_registration.js
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  $settings['type'] = ucfirst($type);
+  $settings['nid'] = $nid;
+  
+  drupal_add_js(array('itg_event_registration' => array('settings' => $settings)), array('type' => 'setting'));
+  
+  //Add JS for Event Registration
+   drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
+    
+  //Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+ 
+  return $form;
+}
+
+/**
+ * Custom function on submit of Event Registration form
+ * @param Array $form
+ * @param Array $form_state
+ */
+ function itg_event_registration_form_custom_submit_callback($form, &$form_state) {
+  
+  //Unset drupal redirection and add custom redirection URL
+  if (isset($_GET['destination'])) {
+    unset($_GET['destination']);
+  }
+  $form_state['redirect'] = 'node/add/event-registration';
+
+  //Set custom message on creation and updation of event registration form.
+  if (isset($_SESSION['messages'])) {
+    unset($_SESSION['messages']);
+  }
+  
+  if (arg(2) == 'edit') {
+    drupal_set_message(t('This information has been updated successfully.'));
+  } else {
+    drupal_set_message(t('Your information has been submitted successfully.'));
+  }
+}
+
+/*******************************View Related hooks*****************************/
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_event_registration_views_pre_render(&$view) {
+  
+  //Add "Event Registration" button on listing page of event registered user
+  if ($view->name == "manage_event_registration") {
+    $header_content_event = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_event .= l(t('Registration for Event'), 'node/add/event-registration');
+    $view->attachment_before = $header_content_event;
+  }
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ * @param String $form_id
+ */
+function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
+   if ($form['#id'] == 'views-exposed-form-manage-event-registration-page') {
+     
+     //Call function autocomplete to show matching titles
+     $form['title']['#autocomplete_path'] = 'content-title-list/event_registration/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
+   }
+}

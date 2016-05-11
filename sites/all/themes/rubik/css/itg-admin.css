@@ -1591,6 +1591,7 @@ form.node-poll-form .form-type-managed-file .form-managed-file{overflow: visible
 .node-quiz-form fieldset legend .form-required,
 .node-quiz-form .tabledrag-toggle-weight-wrapper,
 .node-quiz-form .tabledrag-hide{display: none;}
+.node-quiz-form fieldset.date-combo legend .form-required{display: inline;}
 .node-quiz-form .vertical-tabs{padding: 10px 0 0 10px;}
 [id*="field-quiz-add-questions-values"] tbody{max-width: 455px !important; width: 455px;}
 .node-quiz-form .field-name-field-quiz-add-questions table .form-item label{width: 15%;}
@@ -1699,4 +1700,6 @@ input[name="field_newsl_add_news_und_0_remove_button"],
  .node-clients_creation-form .vertical-tabs .vertical-tabs-list, 
  .node-service_creation-form .vertical-tabs .vertical-tabs-list, 
  .node-client_service_association-form .vertical-tabs .vertical-tabs-list{display: none;}
- .field-name-field-story-category > .form-item > label:after{content: '*'; color: red;}
+ .field-name-field-survey-end-date .date-combo .fieldset-title::after{content: '*'; color: red;}
+ form .field-name-field-task-task-idea .field-multiple-table tbody{max-width: 400px;}
+ .node-poll-form .date-no-float{width: 100%;}

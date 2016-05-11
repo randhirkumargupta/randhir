@@ -663,11 +663,24 @@ function itg_category_manager_seo_team_mail($key, &$message, $params) {
  * @param type $entity
  * @return string
  */
-function itg_category_manager_get_mail_content($entity) {
+function itg_category_manager_get_mail_content($entity) {  
   global $base_url;
   $display_name = isset($entity->field_cm_display_title[LANGUAGE_NONE][0]['value']) ? $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'] : 'NA';
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
   $redirection_url = isset($entity->field_cm_redirection_url['und'][0]['value']) ? $entity->field_cm_redirection_url['und'][0]['value'] : 'NA';
+  
+  $output = '<ul>';
+  // Find content type value
+  if (count($entity->field_cm_select_type['und']) >= 1) {
+    foreach ($entity->field_cm_select_type['und'] as $value) {      
+      $output .= '<li>'. ucfirst($value['value']) .'</li>';
+    }    
+  }
+  else {
+    $output .= '<li>NA</li>';
+  }
+  $output .= '</ul>';
+  
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -679,7 +692,8 @@ function itg_category_manager_get_mail_content($entity) {
       <tr><td>Display Title: ' . $display_name . '</td></tr>
       <tr><td>
         Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a><br />
-        Redirection URL: '.$redirection_url.'  
+        Redirection URL: '.$redirection_url.'<br />
+        Content Type: '.$output.'  
       </td></tr>
       <tr><td>Thanks,</td></tr>
       <tr><td>India Today Team</td></tr></table>

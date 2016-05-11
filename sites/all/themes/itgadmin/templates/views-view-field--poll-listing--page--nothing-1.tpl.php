@@ -31,7 +31,8 @@ if(isset($row->_field_data['nid']['entity']->field_poll_start_date)){
  if(isset($row->_field_data['nid']['entity']->field_poll_end_date[LANGUAGE_NONE])){
   $end_date = $row->_field_data['nid']['entity']->field_poll_end_date[LANGUAGE_NONE][0]['value'];
   $etime = strtotime($end_date);
-  $endtime = mktime(23, 59, 59, date("m", $etime), date("d", $etime), date("Y", $etime));
+ // $endtime = mktime(23, 59, 59, date("m", $etime), date("d", $etime), date("Y", $etime));
+  $endtime = $etime;
 }
  if(($starttime <= time()) && empty($end_date)){
    $status = "Active";

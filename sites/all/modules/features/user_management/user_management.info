@@ -120,6 +120,7 @@ features[user_role][] = Photographer
 features[user_role][] = Section Editor/Anchor
 features[user_role][] = Site Admin
 features[user_role][] = Subeditor/Sr.Sub
+features[user_role][] = UGC Moderator
 features[user_role][] = administrator
 features[views_view][] = manage_users
 features[workbench_moderation_states][] = draft

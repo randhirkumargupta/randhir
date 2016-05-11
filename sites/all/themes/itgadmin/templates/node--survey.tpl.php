@@ -112,7 +112,7 @@
             </div>
             <div class="field">
               <div class="field-label">Answer Option 1:</div>
-              <div class="field-items"><?php echo ucwords($question_arr['field_survey_answer_option_1'][LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><?php echo itg_survey_get_answer_type_name($question_arr['field_survey_answer_option_1'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
            <?php
               $more_ans_num = 2;
@@ -169,7 +169,7 @@
           <?php } }?>
           <div class="field">
             <div class="field-label">Answer Type:</div>
-            <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value']); ?></div>
+            <div class="field-items"><?php echo itg_survey_get_answer_type_name($question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
           <div class="field">
             <div class="field-label">Answer Option 1:</div>

@@ -27,15 +27,20 @@ function features_supplement_magazine_field_group_info() {
       1 => 'field_issue_supplement',
       2 => 'field_issue_title',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Basic Settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-issue-basic-settings field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_issue_basic_settings|node|issue|form'] = $field_group;
@@ -56,15 +61,20 @@ function features_supplement_magazine_field_group_info() {
       0 => 'field_issue_large_cover_image',
       1 => 'field_issue_small_cover_image',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Issue Cover Images',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-issue-img field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_issue_img|node|issue|form'] = $field_group;
@@ -85,15 +95,20 @@ function features_supplement_magazine_field_group_info() {
       0 => 'field_issue_supp_large_image',
       1 => 'field_issue_supp_small_image',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Supplement Cover Images',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-issue-supp-img field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_issue_supp_img|node|issue|form'] = $field_group;
@@ -113,15 +128,20 @@ function features_supplement_magazine_field_group_info() {
     'children' => array(
       0 => 'field_field_issue_import_xml',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Import XML',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-issue-upload-xml field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_issue_upload_xml|node|issue|form'] = $field_group;
@@ -143,16 +163,20 @@ function features_supplement_magazine_field_group_info() {
       1 => 'field_magazine_publish',
       2 => 'title',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Basic Settings',
       'instance_settings' => array(
-        'required_fields' => 0,
+        'required_fields' => 1,
         'id' => '',
-        'classes' => 'group-magazine-basic-settings field-group-fieldset',
+        'classes' => 'itg-group-field',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_magazine_basic_settings|node|magazine|form'] = $field_group;
@@ -172,16 +196,20 @@ function features_supplement_magazine_field_group_info() {
     'children' => array(
       0 => 'field_magazine_cover_photo',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Magazine Cover Photo',
       'instance_settings' => array(
-        'required_fields' => 0,
+        'required_fields' => 1,
         'id' => '',
-        'classes' => 'group-magazine-cover-photo field-group-fieldset',
+        'classes' => 'itg-group-field',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_magazine_cover_photo|node|magazine|form'] = $field_group;
@@ -204,15 +232,20 @@ function features_supplement_magazine_field_group_info() {
       2 => 'field_supp_issue',
       3 => 'title',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Basic Settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-supp-basic-settings field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_supp_basic_settings|node|supplement|form'] = $field_group;
@@ -232,15 +265,20 @@ function features_supplement_magazine_field_group_info() {
     'children' => array(
       0 => 'field_supp_import_xml',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Import XML',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-supp-import-xml field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_supp_import_xml|node|supplement|form'] = $field_group;
