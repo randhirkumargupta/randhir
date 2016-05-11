@@ -41,7 +41,7 @@
                 <div class="content-node-view">
                  <?php
                  $content_type = $node->field_ugc_content_type[LANGUAGE_NONE][0]['value'];
-                 print render($content['field_user_name']);
+                 print  render($content['field_user_name']);
                  print  render($content['field_user_email']);
                  print  render($content['field_ugc_content_type']);
                  ?>
