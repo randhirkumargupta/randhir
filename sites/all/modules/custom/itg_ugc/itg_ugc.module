@@ -330,7 +330,7 @@ function itg_ugc_node_presave($node) {
 /**
  * Implement itg_ugc_node_status_update
  */
-function itg_ugc_node_status_update($nid, $title = NULL) {
+function itg_ugc_node_status_update($nid, $title) {
   $node = node_load($nid);
   // set status property to 0
   $node->status = 0;
