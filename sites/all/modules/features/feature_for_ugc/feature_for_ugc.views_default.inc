@@ -228,11 +228,10 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Answer */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
-  $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Post date */
@@ -261,7 +260,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'Approve';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'node/add/[field_ugc_content_type]/[nid]?destination=manage-ugc';
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'node/add/[field_ugc_ctype]/[nid]?destination=manage-ugc';
   $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'edit-link';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
@@ -511,11 +510,10 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Answer */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
-  $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Post date */
