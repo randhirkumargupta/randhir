@@ -63,11 +63,11 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       //Form fields treatment
       $form['title']['#description'] = '<p>' . t('Please enter first name.') . '</p>';
       
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-        '#weight' => 21,
-        '#value' => t('Cancel'),
-      );
+//      $form['actions']['cancel'] = array(
+//        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+//        '#weight' => 21,
+//        '#value' => t('Cancel'),
+//      );
       
       //After build and custom summit callback
       $form['#after_build'][] = 'itg_event_registration_form_after_build';
