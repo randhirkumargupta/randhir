@@ -52,11 +52,9 @@
                     <?php
                  if($content_type == 'story' || $content_type == 'recipe' || $content_type == 'blog') { 
                    print  render($content['field_user_message']);
-                  
-                 }
+                  }
                   
                  if($content_type == 'photogallery') {
-                   
                    print  render($content['field_ugc_upload_photo']);
                  }
                  
