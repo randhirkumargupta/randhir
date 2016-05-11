@@ -1415,7 +1415,7 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => 9999999,
+      'max' => '',
       'min' => 1,
       'prefix' => '₹',
       'suffix' => '',
@@ -1513,7 +1513,7 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => 9999999,
+      'max' => '',
       'min' => 1,
       'prefix' => '₹',
       'suffix' => '',
@@ -1561,7 +1561,7 @@ function event_backend_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => 999,
+      'max' => '',
       'min' => 1,
       'prefix' => '',
       'suffix' => '',
