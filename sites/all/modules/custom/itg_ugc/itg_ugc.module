@@ -108,14 +108,14 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
   $user_fields = user_load($user->uid);
   
-  if ($form_id == 'ugc_node_form') {    
+  if ($form_id == 'ugc_node_form') {
     if ($user->uid != '1') {
-    // hide source relation and type field from other users 
-    if ($form_id == 'ugc_node_form') {
-      $form['field_story_source_type']['#access'] = FALSE;
+      // hide source relation and type field from other users 
+      if ($form_id == 'ugc_node_form') {
+        $form['field_story_source_type']['#access'] = FALSE;
+      }
     }
-  }
-  
+
     $form['field_recipe_audio']['und'][0]['#title'] = t('Audio') . '<span class="form-required" title="This field is required."> *</span>';
     // get content type field value
     $type = $form['field_ugc_content_type'][LANGUAGE_NONE][0]['value'];
@@ -131,15 +131,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#value'] = 'Submit';
     $form['#after_build'][] = 'itg_ugc_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_ugc_form_custom_callback';
-    $destination = 'ugc';
-    
-    if (!empty($form['nid']['#value'])) {
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-        '#weight' => 21,
-        '#value' => t('Cancel'),
-      );
-    }
   }
 
   // Hide/show description field
@@ -200,20 +191,16 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_ugc_form_custom_callback($form, &$form_state) {
 
-  // get value of content type field
-  $type = $form_state['node']->field_ugc_content_type[LANGUAGE_NONE][0]['value'];
+  $node_type = ucfirst($form_state['node']->type);
+  $node_type = str_replace("_", " ", $node_type);
+  $title = ucfirst($form_state['node']->title);
 
-  // unset default message
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
   
-  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'ugc') {
-    $op = 'has been submitted for further review and approval';
-    drupal_set_message(t('<b>' . ucfirst($type) . '</b> ' . $op));
-    $_REQUEST['destination'] = 'node/add/ugc';
-    $_GET['destination'] = $_REQUEST['destination'];
-  }
+  $_REQUEST['destination'] = 'node/add/ugc';
+  $msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
 }
 
 /**
@@ -352,19 +339,15 @@ function itg_ugc_node_status_update($nid, $title = NULL) {
   }
   // re-save the node
   node_save($node);
-  
+
   // code for redirect after node save or reject
   if (!empty($title)) {
-    drupal_set_message(t($title . ' has been Submitted successfully.'));
     $_GET['destination'] = 'manage-ugc';
-  } 
-  else {
-      drupal_set_message(t($node->title.' has been rejected successfully.')); 
-      drupal_goto('manage-ugc');
   }
-  
-  
-  
+  else {
+    drupal_set_message(t($node->title . ' has been rejected successfully.'));
+    drupal_goto('manage-ugc');
+  }
 }
 
 /**

@@ -228,10 +228,11 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Post date */
@@ -510,10 +511,11 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Post date */

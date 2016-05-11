@@ -513,3 +513,32 @@ function itg_ugc_bad_words($description) {
   
   return $final_description = preg_replace("/($keyword)/i", "<b style='font-size:14px; color:#FF0000; font-weight:bold;'>$0</b>", $description);
 }
+
+/**
+ * Implements itg_custom_message
+ * @param type $type
+ * @param type $workbench_current_state
+ * @param type $case
+ * @param type $title
+ * @param type $destination
+ */
+function itg_custom_message($type, $workbench_current_state, $case, $title, $destination) {
+
+  if ($case == 'add') {
+    
+    if ($workbench_current_state == 'published') {
+      $op = 'published';
+      drupal_set_message(t($type . ' <b>' . $title . '</b> has been ' . $op . ' successfully.'));
+    }
+    else {
+      $op = 'created';
+      drupal_set_message(t($type . ' <b>' . $title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
+    }
+    $_GET['destination'] = $destination;
+  }
+  else {
+    $op = 'updated';
+    drupal_set_message(t($type . ' <b>' . $title . '</b> has been ' . $op . '.'));
+    $_GET['destination'] = $destination;
+  }
+}
