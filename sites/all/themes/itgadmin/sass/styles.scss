@@ -14,6 +14,7 @@ h1, h2, h3, h4{
 }
 table{
   border-collapse: collapse;
+  @extend .full;
 }
 a, img{
   text-decoration: none;
@@ -65,6 +66,9 @@ img{
 }
 .no-underline{
   text-decoration: none;
+}
+.hide, .grippie{
+  display: none;
 }
 .db{
   display: block;
@@ -202,9 +206,15 @@ a.ckeditor_links{
   @extend .btn;
   @extend .btn-preview;
 }
-.form-submit[value="Save as Draft"]{
+.form-submit[value="Save as Draft"], .form-submit[value="Save"]{
   @extend .btn;
   @extend .btn-save-draft;
+}
+.form-submit[value="Publish"]{
+  @extend .btn;
+}
+.form-submit[value="Add another item"]{
+  @extend .add-more;
 }
 .button{
   @extend .btn;
@@ -252,6 +262,46 @@ a.ckeditor_links{
     margin: auto;
   }
 }
+.itg-date-range{
+  .start-date-wrapper, .end-date-wrapper{
+    @extend .fleft;
+    width: auto;
+    .form-type-textfield{
+      max-width: 143.5px;
+    }
+  }
+  .end-date-wrapper{
+    .form-type-date-popup{
+      > label{
+        float: left;
+        padding: 0 5px;
+        line-height: 36px;
+      }
+    }
+  }
+}
+.itg-add-another-item{
+  tbody tr td{
+    @extend .pos-rel;
+    .form-submit[value="Remove"]{
+      @extend .btn-cancel;
+      @extend .btn;
+      bottom: -15px;
+      height: 34px;
+      left: 250px;
+      position: absolute;
+    }
+  }
+  tbody tr:last-child td{
+    .form-submit[value="Remove"]{
+      bottom: -41px;
+      left: 396px;
+    }
+  }
+  & + div.clearfix{
+    .form-submit{margin-left: 250px;}
+  }
+}
 
 #page-title{
   @extend .mb-10;
@@ -284,6 +334,10 @@ textarea{
 span.error{
   @extend .db;
 }
+.field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide{
+  @extend .hide;
+}
+
 *{
   @extend .mr-0;
   @extend .pd-0;
@@ -364,16 +418,46 @@ span.error{
     width: 100%;
     max-width: 332px;
   }
+  .form-actions{
+    background-color: #fefafb;
+    border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    margin: 15px 0;
+    padding: 15px 30px;
+  }
+  .filter-wrapper{
+    @extend .hide;
+  }
 }
 .form-textarea-wrapper{
   .grippie{display: none !important;}
 }
-
+fieldset.date-combo{
+  border: none;
+  .container-inline-date{
+    clear: none;
+    .date-padding{
+      @extend .pd-0;
+      .form-item{
+        @extend .mr-0;
+        > label{
+          display: none;
+        }
+        div.description{
+          left: 175px;
+        }
+      }
+    }
+  }
+}
 .form-type-textfield,
 .form-type-select,
 .form-type-managed-file,
 .form-type-checkboxes,
+.form-type-radios,
 .form-type-autocomplete-deluxe,
+.date-combo,
+.form-type-hierarchical-select,
 .form-type-textarea{
   padding: 0 30px;
   margin: 30px 0;
@@ -382,7 +466,10 @@ span.error{
 .form-type-textarea > label, 
 .form-type-select > label, 
 .form-type-autocomplete-deluxe > label,
-.form-type-managed-file > label, 
+.form-type-managed-file > label,
+.form-type-radios > label,
+.date-combo > legend,
+.form-type-hierarchical-select > label,
 .form-type-checkboxes > label{
   width: 220px;
   float: left;
@@ -392,8 +479,16 @@ span.error{
 .form-type-textarea > label + div, 
 .form-type-select > label + div, 
 .form-type-managed-file > label + div, 
+.form-type-radios > label + div,
+.date-combo > legend + div,
+.form-type-hierarchical-select > label + div,
 .form-type-checkboxes > label + div{
   padding-left: 220px;
+}
+.form-type-radio{
+  @extend .dib;
+  @extend .vtop;
+  margin-right: 20px;
 }
 .form-type-autocomplete-deluxe{
   .autocomplete-deluxe-multiple{
@@ -416,7 +511,7 @@ div.description, .pre-desc{
 div.vertical-tabs {
     border: none;
     margin: 0;
-    position: relative;
+    @extend .pos-rel;
     .form-type-textfield, .form-type-textarea{
       margin: 0 0 30px;
     }
@@ -431,7 +526,7 @@ div.vertical-tabs {
   padding: 0;
 }
 .form-type-textfield{
-  position: relative;
+  @extend .pos-rel;
   .form-text{
     & + div.description, & + span.error + div.description{
       @extend .desc-popup;
@@ -446,7 +541,7 @@ div.vertical-tabs {
   }
 }
 .form-type-select{
-  position: relative;
+  @extend .pos-rel;
   .form-select{
     & + div.description, & + span.error + div.description{
       @extend .desc-popup;
@@ -461,7 +556,7 @@ div.vertical-tabs {
   }
 }
 .form-type-checkboxes{
-  position: relative;
+  @extend .pos-rel;
   .form-checkboxes{
     & + div.description{
       @extend .desc-popup;
@@ -482,8 +577,19 @@ div.vertical-tabs {
     display: block;
   }
 }
+.form-type-radios{
+  @extend .pos-rel;
+  div.description{
+    @extend .desc-popup;
+    left: 600px;
+    min-width: 165px;
+  }
+  &:hover div.description{
+    display: block;
+  }
+}
 .form-type-textarea{
-  position: relative;
+  @extend .pos-rel;
   
   div.description{
     @extend .desc-popup;
@@ -914,6 +1020,37 @@ input[name="field_gallery_image_add_more"]{
     }
   }
 }
+.block-itg-story-list{
+  margin: 20px auto;
+  max-width: 1170px;
+  background-color: #f0f0f0;
+  @extend .full;
+  span{
+    @extend .dib;
+    @extend .vtop;
+    padding: 10px 0 7px;
+    color: #5f5f5f;
+    font-size: 13px;
+    margin: 0 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    &:hover{
+      border-bottom-color: #d00b26; 
+    }
+  }
+}
+.block.fixed{
+  position: fixed;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+#block-menu-menu-ask-an-expert-menu,
+#block-menu-menu-photogallery-admin-menu,
+#block-menu-menu-mega-review-menu,
+#block-menu-menu-blog-admin-menu,
+#block-menu-menu-task-allocation-menu,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -970,6 +1107,37 @@ input[name="field_gallery_image_add_more"]{
           font-size: 21px;
         }
       }
+    }
+  }
+}
+.user-role{
+  @extend .fright;
+  line-height: 50px;
+  font-weight: 300;
+  color: #8e8e8e;
+  a{
+    @extend .pos-rel;
+    color: #8e8e8e;
+    margin-right: 20px;
+    .fa{
+      padding-right: 0;
+      font-size: 18px;
+    }
+    dfn{
+      background-color: #d00b26;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      height: 18px;
+      line-height: 18px;
+      position: absolute;
+      right: -3px;
+      text-align: center;
+      text-indent: -1px;
+      top: -10px;
+      width: 18px;
+      font-style: normal;
     }
   }
 }
@@ -1101,6 +1269,257 @@ input[name="field_gallery_image_add_more"]{
         }
       }
     }
+  }
+}
+
+
+.node-quiz-form {
+  .field-name-field-quiz-answer-image, .field-name-field-quiz-answer-video, .field-name-field-quiz-answer-text {
+    @extend .hide;
+  }
+}
+[id*="field-quiz-add-questions-values"]{
+  @extend .full;
+  thead{
+    @extend .hide;
+  }
+}
+.hierarchical-select-wrapper{
+  .add-to-dropbox{
+    @extend .add-more;
+  }
+  .dropbox{
+    table{
+      width: 332px;
+      border: 1px solid #d9d9d9;
+      tr, td{border: none;}
+      td{padding: 5px;}
+    }
+  }
+}
+.node-story-form{
+  #Templates{
+    .form-field-type-text, .form-field-type-field-collection{
+      margin: 30px 0;
+      padding: 0 30px;
+      .form-item{
+        @extend .mr-0;
+        @extend .pd-0;
+        @extend .pos-rel;
+        > table + .description{
+          @extend .desc-popup;
+        }
+        > table + .description + div{
+          padding-left: 220px;
+          .form-submit{
+            @extend .add-more;
+          }
+        }
+        &:hover > table + .description{
+          display: block;
+          left: 575px;
+          top: 20px;
+        }
+      }
+      thead{
+        padding-right: 20px;
+        width: 220px;
+        th{
+          font-weight: 400;
+        }
+      }
+      tbody, thead{
+        @extend .fleft;
+      }
+      tbody td{
+        .ajax-new-content{
+          @extend .mt-10;
+        }
+      }
+    }
+  }
+  .hierarchical-select-wrapper .hierarchical-select .selects{max-width: 340px;}
+}
+.form-field-name-field-astro-date-range{
+  @extend .itg-date-range;
+}
+
+.field-name-field-breaking-publish-time{
+  .date-padding .form-type-textfield:first-child{@extend .hide;}
+}
+.page-node-add-story .preview-wrapper, 
+.page-node-add-magazine .preview-wrapper, 
+.node-type-magazine .preview-wrapper, 
+.page-node-add-blog .preview-wrapper, 
+.node-type-blog .preview-wrapper, 
+.page-node-add-photogallery .preview-wrapper, 
+.node-type-photogallery .preview-wrapper, 
+.node-type-story .preview-wrapper, 
+.page-node-add-breaking-news .preview-wrapper,
+.node-type-issue .preview-wrapper, 
+.page-node-add-issue .preview-wrapper,
+.node-type-supplement .preview-wrapper, 
+.page-node-add-astro .preview-wrapper,
+.node-type-astro .preview-wrapper, 
+.page-node-add-survey .preview-wrapper,
+.node-type-survey .preview-wrapper, 
+.page-node-add-recipe .preview-wrapper,
+.node-type-recipe .preview-wrapper, 
+.page-node-add-mega-review-critic .preview-wrapper,
+.node-type-mega-review-critic .preview-wrapper, 
+.page-node-add-poll .preview-wrapper,
+.node-type-poll .preview-wrapper, 
+.page-node-add-clients-creation .preview-wrapper,
+.node-type-clients-creation .preview-wrapper, 
+.page-node-add-newsletter .preview-wrapper,
+.node-type-newsletter .preview-wrapper, 
+.page-node-add-quiz .preview-wrapper,
+.node-type-quiz .preview-wrapper, 
+.page-node-add-itg-celebrity-profile .preview-wrapper,
+.node-type-itg-celebrity-profile .preview-wrapper, 
+.page-node-add-cooking-tips .preview-wrapper,
+.node-type-cooking-tips .preview-wrapper, 
+.page-node-add-supplement .preview-wrapper,
+.node-type-breaking-news .preview-wrapper{
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+.page-node-add-story .preview, 
+.page-node-add-magazine .preview, 
+.node-type-story .preview,
+.page-node-add-blog .preview, 
+.node-type-blog .preview,
+.page-node-add-survey .preview, 
+.node-type-survey .preview,
+.node-type-magazine .preview, 
+.page-node-add-photogallery .preview, 
+.node-type-photogallery .preview,
+.page-node-add-breaking-news .preview,
+.node-type-issue .preview,
+.page-node-add-issue .preview,
+.node-type-supplement .preview,
+.page-node-add-astro .preview,
+.node-type-astro .preview,
+.page-node-add-recipe .preview,
+.node-type-recipe .preview,
+.page-node-add-mega-review-critic .preview,
+.node-type-mega-review-critic .preview,
+.page-node-add-poll .preview,
+.node-type-poll .preview,
+.page-node-add-clients-creation .preview,
+.node-type-clients-creation .preview,
+.page-node-add-newsletter .preview,
+.node-type-newsletter .preview,
+.page-node-add-quiz .preview,
+.node-type-quiz .preview,
+.page-node-add-itg-celebrity-profile .preview,
+.node-type-itg-celebrity-profile .preview,
+.page-node-add-cooking-tips .preview,
+.node-type-cooking-tips .preview,
+.page-node-add-supplement .preview,
+.node-type-breaking-news .preview{
+  background-color: #fff;
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  width: 900px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.page-node-add-story .preview > h3,
+.node-type-story .preview > h3,
+.page-node-add-astro .preview > h3,
+.node-type-astro .preview > h3,
+.page-node-add-magazine .preview > h3,
+.node-type-magazine .preview > h3,
+.page-node-add-photogallery .preview > h3, 
+.node-type-photogallery .preview > h3,
+.page-node-add-breaking-news .preview > h3,
+.node-type-issue .preview > h3,
+.page-node-add-issue .preview > h3,
+.node-type-supplement .preview > h3,
+.page-node-add-survey .preview > h3,
+.node-type-survey .preview > h3,
+.page-node-add-blog .preview > h3,
+.node-type-blog .preview > h3,
+.page-node-add-recipe .preview > h3,
+.node-type-recipe .preview > h3,
+.page-node-add-mega-review-critic .preview > h3,
+.node-type-mega-review-critic .preview > h3,
+.page-node-add-poll .preview > h3,
+.node-type-poll .preview > h3,
+.page-node-add-clients-creation .preview > h3,
+.node-type-clients-creation .preview > h3,
+.page-node-add-newsletter .preview > h3,
+.node-type-newsletter .preview > h3,
+.page-node-add-quiz .preview > h3,
+.node-type-quiz .preview > h3,
+.page-node-add-itg-celebrity-profile .preview > h3,
+.node-type-itg-celebrity-profile .preview > h3,
+.page-node-add-cooking-tips .preview > h3,
+.node-type-cooking-tips .preview > h3,
+.page-node-add-supplement .preview > h3,
+.node-type-breaking-news .preview > h3{
+  font-size: 24px;
+  padding: 20px;
+}
+.close-preview{
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: url('../images/close.png') no-repeat;
+  width: 32px;
+  height: 32px;
+  text-indent: -9999px;
+  display: none;
+}
+.page-node-add-story .close-preview, 
+.node-type-story .close-preview, 
+.page-node-add-blog .close-preview, 
+.node-type-blog .close-preview, 
+.page-node-add-survey .close-preview, 
+.node-type-survey .close-preview, 
+.page-node-add-magazine .close-preview,
+.node-type-magazine .close-preview,
+.page-node-add-photogallery .close-preview, 
+.node-type-photogallery .close-preview,
+.page-node-add-breaking-news .close-preview,
+.node-type-issue .close-preview,
+.page-node-add-issue .close-preview,
+.node-type-supplement .close-preview,
+.page-node-add-astro .close-preview,
+.node-type-astro .close-preview,
+.page-node-add-recipe .close-preview,
+.node-type-recipe .close-preview,
+.page-node-add-mega-review-critic .close-preview,
+.node-type-mega-review-critic .close-preview,
+.page-node-add-poll .close-preview,
+.node-type-poll .close-preview,
+.page-node-add-clients-creation .close-preview,
+.node-type-clients-creation .close-preview,
+.page-node-add-newsletter .close-preview,
+.node-type-newsletter .close-preview,
+.page-node-add-quiz .close-preview,
+.node-type-quiz .close-preview,
+.page-node-add-itg-celebrity-profile .close-preview,
+.node-type-itg-celebrity-profile .close-preview,
+.page-node-add-cooking-tips .close-preview,
+.node-type-cooking-tips .close-preview,
+.page-node-add-supplement .close-preview,
+.node-type-breaking-news .close-preview{
+  display: block;
+}
+[id*="field-breaking-content-details-values"], [id*="field-mega-review-review-values"]{
+  @extend .itg-add-another-item;
+  thead{
+    @extend .hide;
   }
 }
 

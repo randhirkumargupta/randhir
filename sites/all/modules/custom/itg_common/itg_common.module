@@ -7,43 +7,8 @@
  * Provides common functionality and customizations.
  *
  */
-define('AUTHOR_GUEST', 4);
-define('INTERN', 7);
-define('SUBEDITOR_SR_SUB', 9);
-define('COPY_EDITOR', 5);
-define('SECTION_EDITOR', 8);
-define('SECTION_EDITOR_ANCHOR', 20);
-define('EDITOR', 6);
-define('SITE_ADMIN', 10);
-define('SEO', 19);
-define('CORRESPONDENT', 13);
-define('CO_ORDINATOR', 11);
-define('PHOTO_COORDINATOR', 16);
-define('PHOTO_HEAD', 17);
-define('DESIGN_HEAD', 14);
-define('COPY_DESK', 12);
-define('DESIGNER', 15);
-define('PHOTOGRAPHER', 18);
-define('ADMINISTRATOR', 3);
-define('CATEGORY_MANAGMENT', 4);
-define('EXPERT', 21);
 
-/**
- * Function for debugging arrays and objects.
- * @param $arg
- *  array or object to be printed.
- */
-function p($arg) {
-  print '<pre>';
-  print_r($arg);
-  die;
-}
-
-function pr($arg) {
-  print '<pre>';
-  print_r($arg);
-  print '</pre>';
-}
+module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 
 /**
  * Helper function to populate the second dropdown.
@@ -78,6 +43,14 @@ function itg_common_dropdown_supplement($id = '') {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   
+  if ($user->uid != '1') {
+    // hide source relation and type field from other users 
+    if ($form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form') {
+      $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
+      $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
+    }
+  }
+
   // Set title on Preview
   if (arg(1) == 'add' && isset($form['#node']->op) && $form['#node']->op == 'Preview') {       
     $content_type_name = get_content_type_name($form['#node']->type);
@@ -185,7 +158,7 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
   unset($form['metatags']['intro_text']['#markup']);
 
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
-  $form['path']['#prefix'] = '<div class="story-title">'.t('Meta Tags').'</div>';
+  $form['path']['#prefix'] = '<h2 class="story-title">'.t('Meta Tags').'</h2>';
 
   drupal_add_js('jQuery(document).ready(function() {
              // hide some eliment of metatags
@@ -356,6 +329,12 @@ function itg_common_form_node_delete_confirm_alter(&$form, &$form_state, $form_i
   }
 }
 
+/**
+ * Get survey count.
+ * @param type $nid
+ * @param type $tbl_name
+ *   
+ */
 function itg_common_check_record_existance($nid, $tbl_name){
  
     $result = db_select($tbl_name, 'tbl')
@@ -363,6 +342,7 @@ function itg_common_check_record_existance($nid, $tbl_name){
           ->condition('tbl.nid', $nid, '=')
           ->execute();
   $total_survey = $result->rowCount();
+  
   if ($total_survey) {
     return $total_survey;
   } else {
@@ -395,8 +375,9 @@ function itg_get_all_node($content_type,$uid) {
   
   $query = "SELECT COUNT(*) amount FROM {node} n ".
               "WHERE n.type = :type AND n.uid = :uid";
-     $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
-     return $result->amount;
+  $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
+  
+  return $result->amount;
 }
 
 /**
@@ -408,8 +389,9 @@ function itg_get_all_publish_node($content_type,$uid) {
   
   $query = "SELECT COUNT(*) amount FROM {node} n ".
               "WHERE n.type = :type AND n.uid = :uid AND n.status = '1'";
-     $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
-     return $result->amount;
+  $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
+  
+  return $result->amount;
 }
 
 /**
@@ -425,10 +407,10 @@ function itg_get_all_node_type($uid) {
           ->execute();
   
   while($record = $result->fetchAssoc()) {
-        $type[] = $record['type'];
-    }
+    $type[] = $record['type'];
+  }
     
-    return $type;
+  return $type;
 }
 
 
@@ -450,7 +432,7 @@ function itg_last_node_user($uid) {
     $last_record_info['type'] = $last_record['type'];
   }
   
-    return $last_record_info;
+  return $last_record_info;
 }
 
 
@@ -464,7 +446,7 @@ function itg_last_publish_user_node($uid,$publish_id) {
           ->fields('n', array('title','type'))
           ->condition('uid', $uid, '=')
           ->condition('status', $publish_id, '=')
-          ->orderBy('created', 'DESC')//ORDER BY created
+          ->orderBy('created', 'DESC')
           ->range(0,1)
           ->execute();
   
@@ -473,7 +455,7 @@ function itg_last_publish_user_node($uid,$publish_id) {
     $last_record_info_user['type'] = $last_record_user['type'];
   }
   
-    return $last_record_info_user;
+  return $last_record_info_user;
 }
 
 /**
@@ -496,7 +478,7 @@ function itg_last_node_published_user($uid,$publish_id) {
     $last_publish_record_info['nid'] = $last_publish_record['nid'];
   }
   
-    return $last_publish_record_info;
+  return $last_publish_record_info;
 }
 
 /**
@@ -506,11 +488,28 @@ function itg_last_node_published_user($uid,$publish_id) {
  */
 function itg_common_check_role_access($rid) {
   $role_not_create_per = array(AUTHOR_GUEST,INTERN,EXPERT);
-  if(in_array($rid,$role_not_create_per)) {
+  if (in_array($rid,$role_not_create_per)) {
     return false;
-  }
-  else
-  {
+  } else {
     return true;
   }
+}
+
+/**
+ * Implements itg_ugc_bad_words
+ * @param type $description
+ */
+function itg_ugc_bad_words($description) {
+  $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
+  $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+  foreach ($tax as $key => $val) {
+    $op[$val->tid] = $val->name;
+  }
+  
+  // implode bad words array
+  $keyword = implode("#", $op);
+  $keyword = implode('|', explode('#', preg_quote($keyword)));
+  
+  return $final_description = preg_replace("/($keyword)/i", "<b style='font-size:14px; color:#FF0000; font-weight:bold;'>$0</b>", $description);
 }

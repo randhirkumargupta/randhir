@@ -106,6 +106,12 @@ function user_management_user_default_roles() {
     'weight' => 5,
   );
 
+  // Exported role: UGC Moderator.
+  $roles['UGC Moderator'] = array(
+    'name' => 'UGC Moderator',
+    'weight' => 21,
+  );
+
   // Exported role: administrator.
   $roles['administrator'] = array(
     'name' => 'administrator',

@@ -47,7 +47,7 @@
                 <h2><?php echo t('Basic Details'); ?></h2>
                 <div class="content-details">
                   <div class="field">
-                    <div class="field-label"><?php echo t('Poll Title'); ?>:</div>
+                    <div class="field-label"><?php echo t('Poll Question'); ?>:</div>
                     <div class="field-items"><?php print $title; ?></div>
                   </div>
                   <?php
@@ -67,7 +67,7 @@
                   ?>
 
                   <?php
-                  if ($node->op == 'Preview') {
+                  if (isset($node->op) && $node->op == 'Preview') {
                     $output = '';
                     $imgfid = '';
                     $items = field_get_items('node', $node, 'field_poll_answer');
@@ -99,9 +99,38 @@
                     }
                   }
                   else {
-                    $field_poll_answer = render($content['field_poll_answer']);
-                    if (!empty($field_poll_answer)): print render($content['field_poll_answer']);
-                    endif;
+                    $ansnumber = 1;
+                    foreach ($node->field_poll_answer[LANGUAGE_NONE] as $answer_arr) {
+                      $ans_detail = entity_load('field_collection_item', array($answer_arr['value']));
+                      $ans_image = $ans_detail[$answer_arr['value']]->field_poll_answer_image;
+                      $ans_text = $ans_detail[$answer_arr['value']]->field_poll_answer_text;
+                       if (isset($ans_image[LANGUAGE_NONE])) {
+                        $imgfid = $ans_image[LANGUAGE_NONE][0]['fid'];
+                      }
+                      $output .= '<li>';
+                      if ($imgfid != 0) {
+
+                        if (module_exists('itg_photogallery')) {
+                          if (!empty($imgfid)) {
+                            $imguri = _itg_photogallery_fid($imgfid);
+                            $style = 'thumbnail';
+                            $output .='<div class="field"><div class="field-label">Answer ' . $ansnumber . ':</div><div class="field-items"><img src="' . image_style_url($style, $imguri) . '"/></div></div>';
+                          }
+                        }
+                      }
+                      if (isset($ans_text[LANGUAGE_NONE]) && !empty($ans_text[LANGUAGE_NONE][0]['value'])) {
+                        $output .= '<div class="field"><div class="field-label">Answer ' . $ansnumber . ':</div><div class="field-items"><div class="ans-text"><span>' . $ans_text[LANGUAGE_NONE][0]['value'] . '</span></div></div></div>';
+                      }
+
+                      $output .= '</li>';
+                      $ansnumber++;
+                    }
+                    if (isset($output) && !empty($output)) {
+                      echo '<ul>' . $output . '</ul>';
+                    }
+//                    $field_poll_answer = render($content['field_poll_answer']);
+//                    if (!empty($field_poll_answer)): print render($content['field_poll_answer']);
+//                    endif;
                   }
                   ?>
                   <?php
