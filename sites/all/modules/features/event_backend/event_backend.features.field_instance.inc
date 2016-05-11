@@ -536,6 +536,42 @@ function event_backend_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_program_schedule-field_select_speaker'.
+  $field_instances['field_collection_item-field_program_schedule-field_select_speaker'] = array(
+    'bundle' => 'field_program_schedule',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_select_speaker',
+    'label' => 'Select Speaker',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_program_schedule-field_source'.
   $field_instances['field_collection_item-field_program_schedule-field_source'] = array(
     'bundle' => 'field_program_schedule',
@@ -643,59 +679,6 @@ function event_backend_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_program_schedule-field_times'.
-  $field_instances['field_collection_item-field_program_schedule-field_times'] = array(
-    'bundle' => 'field_program_schedule',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 9,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_times',
-    'label' => 'time',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'blank',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 1,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-0:+0',
-      ),
-      'type' => 'date_popup',
-      'weight' => 8,
     ),
   );
 
@@ -1897,6 +1880,7 @@ function event_backend_field_default_field_instances() {
   t('Program Schedule');
   t('Programme');
   t('Registration Close Date');
+  t('Select Speaker');
   t('Session Title ');
   t('Short Description');
   t('Speakers');
@@ -1908,7 +1892,6 @@ function event_backend_field_default_field_instances() {
   t('This displays information about the event.');
   t('Values – Paid and Free');
   t('Video');
-  t('time');
 
   return $field_instances;
 }
