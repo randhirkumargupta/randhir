@@ -1540,6 +1540,14 @@ input[name="field_gallery_image_add_more"]{
     min-width: 135px;
   }
 }
+.form-field-name-field-ads-content-selection,
+.form-field-name-field-ads-template-variants,
+.form-field-name-field-ads-section-selection{
+  label{
+    color: red;
+    content: "*";
+  }
+}
 
 
 
