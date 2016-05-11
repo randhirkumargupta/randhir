@@ -103,12 +103,12 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
   }
 
   //Hide source type and source id from story add and edit form.
-  if ($form_id == 'story_node_form') {
-    if(!in_array('administrator', $user->roles)){ // Not applicable for super admin
-      unset($form['field_story_source_type']);
-      unset($form['field_story_source_id']);
-    }
-  }
+//  if ($form_id == 'story_node_form') {
+//    if(!in_array('administrator', $user->roles)){ 
+//      unset($form['field_story_source_type']);
+//      unset($form['field_story_source_id']);
+//    }
+//  }
 }
  /**
  * Custom submit callback for redirecting breaking news form.

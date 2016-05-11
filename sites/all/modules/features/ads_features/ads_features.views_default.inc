@@ -46,6 +46,8 @@ function ads_features_views_default_views() {
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
+    'field_ads_start_date' => 'field_ads_start_date',
+    'field_ads_end_date' => 'field_ads_end_date',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -55,7 +57,7 @@ function ads_features_views_default_views() {
       'empty_column' => 0,
     ),
     'title' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -95,6 +97,20 @@ function ads_features_views_default_views() {
       'separator' => '|',
       'empty_column' => 0,
     ),
+    'field_ads_start_date' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ads_end_date' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
@@ -127,6 +143,30 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Start Date */
+  $handler->display->display_options['fields']['field_ads_start_date']['id'] = 'field_ads_start_date';
+  $handler->display->display_options['fields']['field_ads_start_date']['table'] = 'field_data_field_ads_start_date';
+  $handler->display->display_options['fields']['field_ads_start_date']['field'] = 'field_ads_start_date';
+  $handler->display->display_options['fields']['field_ads_start_date']['settings'] = array(
+    'format_type' => 'itg',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: End Date */
+  $handler->display->display_options['fields']['field_ads_end_date']['id'] = 'field_ads_end_date';
+  $handler->display->display_options['fields']['field_ads_end_date']['table'] = 'field_data_field_ads_end_date';
+  $handler->display->display_options['fields']['field_ads_end_date']['field'] = 'field_ads_end_date';
+  $handler->display->display_options['fields']['field_ads_end_date']['settings'] = array(
+    'format_type' => 'itg',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';

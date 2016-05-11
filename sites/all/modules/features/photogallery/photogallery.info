@@ -14,6 +14,7 @@ dependencies[] = image
 dependencies[] = list
 dependencies[] = metatag
 dependencies[] = node
+dependencies[] = number
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text

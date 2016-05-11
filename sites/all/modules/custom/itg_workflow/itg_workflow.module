@@ -79,7 +79,7 @@ function itg_workflow_after_build($form, &$form_state) {
               jQuery("#edit-field-story-archive").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
   
-  if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles)) {    
+  if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles)) {    
     if (!isset($form['#node']->workbench_moderation['current'])) {
       $state_class = ' published';
       $submit_name = 'Publish';
@@ -172,6 +172,14 @@ function itg_workflow_after_build($form, &$form_state) {
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
   
+  // Code for UGC
+  $arg3 = arg(3);
+  if (arg(1) == 'add' && isset($arg3) && is_numeric($arg3)) {
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-submit").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  //End
   return $form;
 }
 

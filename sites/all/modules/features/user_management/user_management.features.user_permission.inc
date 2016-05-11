@@ -237,6 +237,7 @@ function user_management_user_default_permissions() {
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
+      'UGC Moderator' => 'UGC Moderator',
     ),
     'module' => 'workbench_moderation',
   );

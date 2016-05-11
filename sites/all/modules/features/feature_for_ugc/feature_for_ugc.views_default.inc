@@ -31,6 +31,10 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
   /* No results behavior: Global: Text area */
@@ -65,8 +69,20 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    5 => '5',
+    6 => '6',
+    20 => '20',
     10 => '10',
+    9 => '9',
+    23 => '23',
   );
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -99,7 +115,7 @@ function feature_for_ugc_views_default_views() {
       'empty_column' => 0,
     ),
     'field_ugc_content_type' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -217,6 +233,8 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
+  $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
+  $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -243,7 +261,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'Approve';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'node/add/[field_ugc_content_type]?destination=manage-ugc&id=[nid]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'node/add/[field_ugc_content_type]/[nid]?destination=manage-ugc';
   $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'edit-link';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
@@ -346,8 +364,20 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    5 => '5',
+    6 => '6',
+    20 => '20',
     10 => '10',
+    9 => '9',
+    23 => '23',
   );
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -362,8 +392,6 @@ function feature_for_ugc_views_default_views() {
     'created' => 'created',
     'view_node' => 'nothing',
     'nothing' => 'nothing',
-    'nothing_1' => 'nothing',
-    'nothing_2' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -380,7 +408,7 @@ function feature_for_ugc_views_default_views() {
       'empty_column' => 0,
     ),
     'field_ugc_content_type' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -438,16 +466,6 @@ function feature_for_ugc_views_default_views() {
       'separator' => ' | ',
       'empty_column' => 0,
     ),
-    'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'nothing_2' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -498,6 +516,8 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
+  $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
+  $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -598,6 +618,11 @@ function feature_for_ugc_views_default_views() {
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
   $handler->display->display_options['path'] = 'reject-ugc-content-list';
   $export['manage_ugc'] = $view;
 

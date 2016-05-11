@@ -1103,6 +1103,11 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = 'Gallery ID';
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source';
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
