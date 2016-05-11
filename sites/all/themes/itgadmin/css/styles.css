@@ -1359,3 +1359,10 @@ input[name="field_gallery_image_add_more"] {
 .node-ads_management-form fieldset.date-combo .container-inline-date .date-padding .form-item div.description {
   min-width: 135px;
 }
+
+.form-field-name-field-ads-content-selection label,
+.form-field-name-field-ads-template-variants label,
+.form-field-name-field-ads-section-selection label {
+  color: red;
+  content: "*";
+}
