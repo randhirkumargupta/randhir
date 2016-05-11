@@ -274,7 +274,7 @@ function itg_event_backend_views_pre_render(&$view) {
   if ($view->name == "Sponsor" && $view->current_display == 'page') {
     global $user; // Get user information
     $sponsor_content = '';
-    $sponsor_content = l(t('Create Sponsor'), 'node/add/event-backend', array('query' => array('destination' => 'manage-sponsor')));
+    $sponsor_content = l(t('Create Sponsor'), 'node/add/sponsor', array('query' => array('destination' => 'manage-sponsor')));
     $view->attachment_before = $sponsor_content;
   }
 }
