@@ -206,7 +206,7 @@ a.ckeditor_links{
   @extend .btn;
   @extend .btn-preview;
 }
-.form-submit[value="Save as Draft"], .form-submit[value="Save"]{
+.btn-save, .form-submit[value="Save as Draft"], .form-submit[value="Save"]{
   @extend .btn;
   @extend .btn-save-draft;
 }
@@ -1050,6 +1050,7 @@ input[name="field_gallery_image_add_more"]{
 #block-menu-menu-photogallery-admin-menu,
 #block-menu-menu-mega-review-menu,
 #block-menu-menu-blog-admin-menu,
+#block-menu-menu-ugc-content-menu,
 #block-menu-menu-task-allocation-menu,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
@@ -1522,7 +1523,13 @@ input[name="field_gallery_image_add_more"]{
     @extend .hide;
   }
 }
-
+.node-ugc-form{
+  .form-actions{
+    .form-submit{
+      @extend .btn-save;
+    }
+  }
+}
 
 
 
