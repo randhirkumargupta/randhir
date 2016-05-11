@@ -16,6 +16,7 @@ function feature_for_ugc_user_default_permissions() {
     'roles' => array(
       'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
+      'UGC Moderator' => 'UGC Moderator',
       'administrator' => 'administrator',
     ),
     'module' => 'itg_ugc',
