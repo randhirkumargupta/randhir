@@ -525,7 +525,10 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $form['field_story_magazine_kicker_text']['#states'] = array(
       'visible' => array(
         ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-      )
+      ),
+    'required' => array(
+      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+    )
     );
     
     // code for Magazine Headline * field show and hide
