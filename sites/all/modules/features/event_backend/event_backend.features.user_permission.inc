@@ -19,6 +19,7 @@ function event_backend_user_default_permissions() {
       'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
@@ -33,6 +34,7 @@ function event_backend_user_default_permissions() {
       'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
@@ -41,7 +43,9 @@ function event_backend_user_default_permissions() {
   // Exported permission: 'delete any event_backend content'.
   $permissions['delete any event_backend content'] = array(
     'name' => 'delete any event_backend content',
-    'roles' => array(),
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+    ),
     'module' => 'node',
   );
 
@@ -55,7 +59,9 @@ function event_backend_user_default_permissions() {
   // Exported permission: 'delete any sponsor content'.
   $permissions['delete any sponsor content'] = array(
     'name' => 'delete any sponsor content',
-    'roles' => array(),
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+    ),
     'module' => 'node',
   );
 
@@ -68,6 +74,7 @@ function event_backend_user_default_permissions() {
       'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
@@ -89,6 +96,7 @@ function event_backend_user_default_permissions() {
       'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
@@ -103,6 +111,7 @@ function event_backend_user_default_permissions() {
       'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
@@ -117,6 +126,7 @@ function event_backend_user_default_permissions() {
       'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
@@ -131,6 +141,7 @@ function event_backend_user_default_permissions() {
       'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
@@ -145,6 +156,7 @@ function event_backend_user_default_permissions() {
       'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',

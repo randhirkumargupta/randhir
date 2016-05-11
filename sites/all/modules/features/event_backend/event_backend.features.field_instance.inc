@@ -767,7 +767,7 @@ function event_backend_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'field_collection_fieldset',
+      'module' => 'field_collection',
       'settings' => array(
         'collapsed' => 0,
         'field_as_label' => '',
@@ -775,7 +775,7 @@ function event_backend_field_default_field_instances() {
         'new_item_open' => 0,
         'replace_label' => 0,
       ),
-      'type' => 'field_collection_fieldset',
+      'type' => 'field_collection_embed',
       'weight' => 7,
     ),
   );
@@ -819,7 +819,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 18,
     ),
   );
 
@@ -862,7 +862,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 12,
     ),
   );
 
@@ -905,7 +905,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 16,
     ),
   );
 
@@ -948,7 +948,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 13,
     ),
   );
 
@@ -991,7 +991,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 14,
     ),
   );
 
@@ -1034,7 +1034,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 15,
     ),
   );
 
@@ -1077,7 +1077,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 17,
     ),
   );
 
@@ -1177,7 +1177,7 @@ function event_backend_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'field_collection_fieldset',
+      'module' => 'field_collection',
       'settings' => array(
         'collapsed' => 0,
         'field_as_label' => '',
@@ -1185,8 +1185,8 @@ function event_backend_field_default_field_instances() {
         'new_item_open' => 0,
         'replace_label' => 0,
       ),
-      'type' => 'field_collection_fieldset',
-      'weight' => 4,
+      'type' => 'field_collection_embed',
+      'weight' => 9,
     ),
   );
 
@@ -1228,7 +1228,7 @@ function event_backend_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'field_collection_fieldset',
+      'module' => 'field_collection',
       'settings' => array(
         'collapsed' => 0,
         'field_as_label' => '',
@@ -1236,8 +1236,8 @@ function event_backend_field_default_field_instances() {
         'new_item_open' => 0,
         'replace_label' => 0,
       ),
-      'type' => 'field_collection_fieldset',
-      'weight' => 5,
+      'type' => 'field_collection_embed',
+      'weight' => 10,
     ),
   );
 
@@ -1614,7 +1614,7 @@ function event_backend_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'field_collection_fieldset',
+      'module' => 'field_collection',
       'settings' => array(
         'collapsed' => 0,
         'field_as_label' => '',
@@ -1622,7 +1622,7 @@ function event_backend_field_default_field_instances() {
         'new_item_open' => 0,
         'replace_label' => 0,
       ),
-      'type' => 'field_collection_fieldset',
+      'type' => 'field_collection_embed',
       'weight' => 3,
     ),
   );
