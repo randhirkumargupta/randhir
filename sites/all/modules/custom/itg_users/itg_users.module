@@ -275,7 +275,7 @@ function itg_users_validate_user_profile_validate(&$form, &$form_state) {
     }
   }
 
-  if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR) {
+  if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR || $form_state['values']['selected'] == SITE_ADMIN) {
     $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
 
 //    if (empty($mark_expert)) {
