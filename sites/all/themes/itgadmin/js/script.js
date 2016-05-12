@@ -466,7 +466,25 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   $('.header__secondary-menu ul li.last a').html('<i class="fa fa-power-off" aria-hidden="true"></i>');
   
-  
+  /* jQuery code for Event Backend */
+  $('.form-field-name-field-event-media').on('change', '.form-radio', function(){
+    var isChecked = $(this).is(':checked');
+    var isVal = $(this).val();
+//    && isVal == 'video'
+    if(isChecked == true && isVal == 'video'){
+      console.log(isVal);
+      $(this).parents('.field-type-list-text').nextAll('div').find('.form-submit[value="Remove"]').mousedown();
+      $(this).parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-poll-question-video').show();
+    }
+    else if(isChecked == true && isVal == 'audio'){
+      $(this).parents('.field-type-list-text').nextAll('div').find('.form-submit[value="Remove"]').mousedown();
+      $(this).parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-audio').show();
+    }
+    else if(isChecked == true && isVal == 'photo'){
+      $(this).parents('.field-type-list-text').nextAll('div').find('.form-submit[value="Remove"]').mousedown();
+      $(this).parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-quiz-answer-image').show();
+    }
+  }); 
   
 };
 })(jQuery);
