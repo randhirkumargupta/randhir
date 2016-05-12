@@ -65,9 +65,24 @@
                  
                  ?>
                 <div class="field">
-                  <div class="field-label"><?php print t('Created on:'); ?></div>
+                  <div class="field-label"><?php print t('Posted date:'); ?></div>
                   <div class="field-items"><?php print  date(ITGDATE, $node->created); ?></div>
                 </div>
+                <?php if($node->status == '0') { 
+                  $node_author = user_load($node->uid);
+                  $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'].' '.$node_author->field_last_name[LANGUAGE_NONE][0]['value'];
+                  ?>    
+                <div class="field">
+                  <div class="field-label"><?php print t('Rejected date:'); ?></div>
+                  <div class="field-items"><?php print  date(ITGDATE, $node->changed); ?></div>
+                </div>
+                <div class="field">
+                  <div class="field-label"><?php print t('Rejected by:'); ?></div>
+                  <div class="field-items"><?php print $rejected_by; ?></div>
+                </div>
+                <?php
+                }
+                ?>  
                 <?php 
                 // create path for approve and reject
                $arg_id = arg(1);

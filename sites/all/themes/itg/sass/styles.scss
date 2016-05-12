@@ -349,5 +349,12 @@ input[type="text"], select, input[type="password"]{
           @extend .btn;
         }
       }
+      span.error{
+        display: block;
+        padding-left: 220px;
+      }
   }
+}
+[id*="edit-field-ugc-content-type-und"] option + option{
+  text-transform: capitalize;
 }
