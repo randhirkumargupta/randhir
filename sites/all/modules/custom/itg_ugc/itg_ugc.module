@@ -55,7 +55,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#default_value'] = $node->title;
     $form['field_blog_long_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
-    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'ugc';
+    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'UGC';
   }
   
   // prefill input value in story form
@@ -68,7 +68,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
     $form['body'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
-    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'ugc';
+    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'UGC';
   }
 
   // prefill input value in recipe form
@@ -86,7 +86,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     $form['field_recipe_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
     $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
-    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'ugc';
+    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'UGC';
   }
 
   // prefill input value in photogallery form
@@ -96,7 +96,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     
     $form['title']['#default_value'] = $node->title;
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
-    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'ugc';
+    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'UGC';
     
     foreach ($form['field_gallery_image']['und'] as $delta => $field) {
       if (is_numeric($delta)) {
@@ -377,7 +377,7 @@ function itg_ugc_node_insert($node) {
       $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
       $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 
-      if ($source_type == 'ugc' && !empty($source_id)) {
+      if ($source_type == 'UGC' && !empty($source_id)) {
         itg_ugc_node_status_update($source_id,$title);
       }
     }
