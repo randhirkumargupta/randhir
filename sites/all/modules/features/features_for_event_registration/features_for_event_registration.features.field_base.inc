@@ -214,7 +214,7 @@ function features_for_event_registration_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 10,
     ),
     'translatable' => 0,
     'type' => 'text',
