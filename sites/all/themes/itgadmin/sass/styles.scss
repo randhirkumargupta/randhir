@@ -1614,6 +1614,11 @@ input[name="field_gallery_image_add_more"]{
     }
   }
 }
+[id*="field-event-media-values"]{
+  .field-type-file{
+    @extend .hide;
+  }
+}
 
 
 
