@@ -104,12 +104,17 @@ img {
   display: block;
 }
 
-.dib, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"], .view .attachment a, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .node-story-form #Templates .form-field-type-field-collection .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo, .form-type-radio, .form-type-managed-file .filefield-source, .credit-to-all, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #block-menu-menu-admin-left-menu > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
+.dib, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .node-story-form #Templates .form-field-type-field-collection .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo, .form-type-radio, .form-type-managed-file .filefield-source, .credit-to-all, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #block-menu-menu-admin-left-menu > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
@@ -133,12 +138,17 @@ img {
   vertical-align: middle;
 }
 
-.vtop, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"], .view .attachment a, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .node-story-form #Templates .form-field-type-field-collection .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo-image, .form-type-radio, .form-type-managed-file .filefield-source, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .content-block-menu > .menu > li, #block-menu-menu-ask-an-expert-menu > .menu > li,
+.vtop, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .node-story-form #Templates .form-field-type-field-collection .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo-image, .form-type-radio, .form-type-managed-file .filefield-source, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .content-block-menu > .menu > li, #block-menu-menu-ask-an-expert-menu > .menu > li,
 #block-menu-menu-photogallery-admin-menu > .menu > li,
 #block-menu-menu-mega-review-menu > .menu > li,
 #block-menu-menu-blog-admin-menu > .menu > li,
@@ -183,12 +193,17 @@ img {
   overflow: hidden;
 }
 
-.btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"], .view .attachment a {
+.btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a {
   background-color: #33a26d;
   border: 1px solid #197e4e;
   color: #fff;
@@ -204,12 +219,17 @@ img {
   transition: background-color 300ms;
   text-decoration: none;
 }
-.btn:hover, .form-submit[value="Preview"]:hover, .btn-save:hover, .node-ugc-form .form-actions .form-submit:hover, .form-submit[value="Save as Draft"]:hover, .form-submit[value="Save"]:hover, .form-submit[value="Next"]:hover, .form-submit[value="Publish"]:hover, .button:hover, .form-submit[value="Back"]:hover, .form-submit[value="Delete"]:hover, .itg-add-another-item tbody tr td .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"]:hover, .view .attachment a:hover {
+.btn:hover, .form-submit[value="Preview"]:hover, .btn-save:hover, .node-ugc-form .form-actions .form-submit:hover, .form-submit[value="Save as Draft"]:hover, .form-submit[value="Save"]:hover, .form-submit[value="Next"]:hover, .form-submit[value="Publish"]:hover, .button:hover, .form-submit[value="Back"]:hover, .form-submit[value="Delete"]:hover, .itg-add-another-item tbody tr td > .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"]:hover, .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-program-schedule-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, .view .attachment a:hover {
   background-color: #197e4e;
   border-color: #197e4e;
   color: #fff;
@@ -236,22 +256,32 @@ img {
   color: #197e4e;
 }
 
-.btn-cancel, .button, .form-submit[value="Delete"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"] {
+.btn-cancel, .button, .form-submit[value="Delete"], .itg-add-another-item tbody tr td > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
   background-color: #fff;
   border: 1px solid #ee4d4d;
   color: #ee4d4d;
 }
-.btn-cancel:hover, .button:hover, .form-submit[value="Delete"]:hover, .itg-add-another-item tbody tr td .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"]:hover,
-[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"]:hover {
+.btn-cancel:hover, .button:hover, .form-submit[value="Delete"]:hover, .itg-add-another-item tbody tr td > .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"]:hover, .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-program-schedule-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover {
   background-color: #fff;
   border: 1px solid #ee4d4d;
   color: #ee4d4d;
@@ -356,23 +386,33 @@ a.ckeditor_links:hover {
   line-height: 36px;
 }
 
-.itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
-[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"] {
+.itg-add-another-item tbody tr td > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
   bottom: -15px;
   height: 34px;
   left: 250px;
   position: absolute;
 }
-.itg-add-another-item tbody tr:last-child td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr:last-child td .form-submit[value="Remove"],
-[id*="field-program-schedule-values"] tbody tr:last-child td .form-submit[value="Remove"],
-[id*="field-associate-sponsors-values"] tbody tr:last-child td .form-submit[value="Remove"],
-[id*="field-event-highlights-values"] tbody tr:last-child td .form-submit[value="Remove"],
-[id*="field-event-media-values"] tbody tr:last-child td .form-submit[value="Remove"],
-[id*="field-mega-review-review-values"] tbody tr:last-child td .form-submit[value="Remove"] {
+.itg-add-another-item tbody tr:last-child td > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr:last-child td > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr:last-child td > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr:last-child td > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr:last-child td > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr:last-child td > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr:last-child td > .form-submit[value="Remove"], .itg-add-another-item tbody tr:last-child td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr:last-child td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr:last-child td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr:last-child td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr:last-child td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr:last-child td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr:last-child td .ajax-new-content > .form-submit[value="Remove"] {
   bottom: -41px;
   left: 396px;
 }

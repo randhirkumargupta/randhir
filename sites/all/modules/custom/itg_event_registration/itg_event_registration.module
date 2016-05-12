@@ -8,15 +8,16 @@
  *
  */
 
-
 /**
- * Implement hook_menu
- * @return string
+ * Implementation of hook_menu
+ * 
+ * @return array
+ *   an array $item with all menu callbacks
  */
 function itg_event_registration_menu() {
-  
+
   $items = array();
-  
+
   $items['event-registration/%'] = array(
       'title' => t('Event Registration'),
       'page arguments' => array('itg_event_registration_form'),
@@ -28,70 +29,68 @@ function itg_event_registration_menu() {
 }
 
 /**
- * Implement hook_theme
- * @return Array
+ * Implementation of hook_theme
+ * 
+ * @return array
+ *   an array with templates information and other array variables
  */
 function itg_event_registration_theme() {
-  return array(    
-    'event_registration_tab_form_display_block' => array(
-      'template' => 'event-registration-form-tab',
-      'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
-      'variables' => array('data' => NULL),
-    ), 
- );
+  return array(
+      'event_registration_tab_form_display_block' => array(
+          'template' => 'event-registration-form-tab',
+          'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+          'variables' => array('data' => NULL),
+      ),
+  );
 }
 
-/***************************Form Related hooks*********************************/
 /**
- * Implement hook_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * Implementation of hook_form_alter
+ * 
+ * @param array $form
+ *   Contains whole information of a from
+ * 
+ * @param array $form_state
+ *   the form state structure to extract the info from.  
+ * 
+ * @param string $form_id
+ *    the form ID of the form we are currently processing
  */
 function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
-  global $user;
-  
-  //Set destination for Event Registration form
   if ($form_id == 'event_registration_node_form') {
-    
-      unset($form['actions']['preview']);
-      
-      //Set Destination
-      $destination = 'manage-event-registration';
-     
-      //Form fields treatment
-      $form['title']['#description'] = '<p>' . t('Please enter first name.') . '</p>';
-      
-//      $form['actions']['cancel'] = array(
-//        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-//        '#weight' => 21,
-//        '#value' => t('Cancel'),
-//      );
-      
-      //After build and custom summit callback
-      $form['#after_build'][] = 'itg_event_registration_form_after_build';
-      $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
 
+    unset($form['actions']['preview']);
+    $form['title']['#description'] = t('Please enter first name.');
+
+    //Call function after form build
+    $form['#after_build'][] = 'itg_event_registration_form_after_build';
+    
+    //Call custom summit callback
+    $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
   }
 }
 
-
-
 /**
  * After build function for Event Registration
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * 
+ * @param array $form
+ *   Contains whole information of a from
+ * 
+ * @param array $form_state
+ *    the form state structure to extract the info from.
+ * 
+ * @return array
+ *   the manipulated form
  */
 function itg_event_registration_form_after_build($form, &$form_state) {
   global $user, $base_url;
-  
+
   //Extract type of node
   if (arg(0) == 'node') {
     if (arg(1) == 'add') {
-        $type = arg(2);
-        $nid = '';
+      $type = arg(2);
+      $nid = '';
     } else {
       $node = node_load(arg(1));
       $type = $node->type;
@@ -105,52 +104,51 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   $settings['type'] = ucfirst($type);
   $settings['nid'] = $nid;
-  
+
   drupal_add_js(array('itg_event_registration' => array('settings' => $settings)), array('type' => 'setting'));
-  
+
   //Add JS for Event Registration
-   drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
-    
+  drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
+
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
- 
+
   return $form;
 }
 
 /**
  * Custom function on submit of Event Registration form
- * @param Array $form
- * @param Array $form_state
+ * 
+ * @param array $form
+ *   Contains whole information of a from
+ * 
+ * @param array $form_state
+ *    the form state structure to extract the info from.
  */
- function itg_event_registration_form_custom_submit_callback($form, &$form_state) {
-  
+function itg_event_registration_form_custom_submit_callback($form, &$form_state) {
+
   //Unset drupal redirection and add custom redirection URL
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
   $form_state['redirect'] = 'node/add/event-registration';
 
-  //Set custom message on creation and updation of event registration form.
+  //Set custom message on creation of event registration form.
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
-  
-  if (arg(2) == 'edit') {
-    drupal_set_message(t('This information has been updated successfully.'));
-  } else {
-    drupal_set_message(t('Your information has been submitted successfully.'));
-  }
+ 
+    drupal_set_message(t('Congratulations! You have successfully registered yourself for the event.'));
 }
 
-/*******************************View Related hooks*****************************/
-
 /**
- * Implement hook_views_pre_render
- * @param Object $view
+ * Implementation of hook_views_pre_render
+ * 
+ * @param object $view
  */
 function itg_event_registration_views_pre_render(&$view) {
-  
+
   //Add "Event Registration" button on listing page of event registered user
   if ($view->name == "manage_event_registration") {
     $header_content_event = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -160,17 +158,23 @@ function itg_event_registration_views_pre_render(&$view) {
 }
 
 /**
- * Implement hook_form_views_exposed_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * Implementation of hook_form_views_exposed_form_alter
+ * 
+ * @param array $form
+ *   Contains whole information of a from
+ * 
+ * @param array $form_state
+ *    the form state structure to extract the info from.
+ * 
+ * @param string $form_id
+ *    the form ID of the form we are currently processing
  */
 function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  
-   if ($form['#id'] == 'views-exposed-form-manage-event-registration-page') {
-     
-     //Call function autocomplete to show matching titles
-     $form['title']['#autocomplete_path'] = 'content-title-list/event_registration/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
-   }
+
+  if ($form['#id'] == 'views-exposed-form-manage-event-registration-page') {
+
+    //Call function autocomplete to show matching titles
+    $form['title']['#autocomplete_path'] = 'content-title-list/event_registration/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
 }
