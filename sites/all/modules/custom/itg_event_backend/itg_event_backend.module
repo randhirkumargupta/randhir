@@ -227,6 +227,7 @@ function itg_event_backend_date_interval($startDate, $endDate, $format = "Y-m-d"
 
 /**
  * Implements hook_theme().
+ * {@inheritdoc}
  */
 function itg_event_backend_theme($existing, $type, $theme, $path) {
   $themes = array(
@@ -252,6 +253,7 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
 
 /**
  * Implements hook_block_info().
+ * {@inheritdoc}
  */
 function itg_event_backend_block_info() {
   $blocks['event_backend_tab_form_block'] = array(
@@ -269,6 +271,7 @@ function itg_event_backend_block_info() {
 
 /**
  * Implements hook_block_view().
+ * {@inheritdoc}
  */
 function itg_event_backend_block_view($delta = '') {
   global $user;
@@ -287,8 +290,8 @@ function itg_event_backend_block_view($delta = '') {
 }
 
 /**
- * Implements views header link 
- *
+ * Implements hook_views_pre_render() 
+ * {@inheritdoc}
  */
 function itg_event_backend_views_pre_render(&$view) {
   if ($view->name == "Event_backend" && $view->current_display == 'page') {
