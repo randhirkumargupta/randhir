@@ -4,18 +4,17 @@
  * @param array $node
  * @return string
  */
-function itg_ask_expert_get_mail_content($node)
-{
-    global $base_url;
+function itg_ask_expert_get_mail_content($node) {
+  global $base_url;
 
-    $uname = $node->field_user_name[LANGUAGE_NONE][0]['value'];
-    $uemail = $node->field_user_email[LANGUAGE_NONE][0]['value'];
-    $ucity = $node->field_user_city[LANGUAGE_NONE][0]['value'];
-    $ustate = $node->field_user_state[LANGUAGE_NONE][0]['value'];
-    $question = $node->title;
+  $uname = $node->field_user_name[LANGUAGE_NONE][0]['value'];
+  $uemail = $node->field_user_email[LANGUAGE_NONE][0]['value'];
+  $ucity = $node->field_user_city[LANGUAGE_NONE][0]['value'];
+  $ustate = $node->field_user_state[LANGUAGE_NONE][0]['value'];
+  $question = $node->title;
 
-    // todo: move to email template
-    $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+  // todo: move to email template
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
     <title></title>
@@ -35,5 +34,5 @@ function itg_ask_expert_get_mail_content($node)
       <tr><td>India Today Team</td></tr></table>
 </body></html>';
 
-    return $content;
+  return $content;
 }
