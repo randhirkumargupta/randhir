@@ -91,7 +91,12 @@ img {
   text-decoration: none;
 }
 
-.hide, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, [id*="field-breaking-content-details-values"] thead, [id*="field-mega-review-review-values"] thead, .grippie {
+.hide, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, [id*="field-breaking-content-details-values"] thead,
+[id*="field-program-schedule-values"] thead,
+[id*="field-associate-sponsors-values"] thead,
+[id*="field-event-highlights-values"] thead,
+[id*="field-event-media-values"] thead,
+[id*="field-mega-review-review-values"] thead, .grippie {
   display: none;
 }
 
@@ -99,7 +104,12 @@ img {
   display: block;
 }
 
-.dib, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"], [id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"], .view .attachment a, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .node-story-form #Templates .form-field-type-field-collection .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo, .form-type-radio, .form-type-managed-file .filefield-source, .credit-to-all, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #block-menu-menu-admin-left-menu > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
+.dib, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"], .view .attachment a, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .node-story-form #Templates .form-field-type-field-collection .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo, .form-type-radio, .form-type-managed-file .filefield-source, .credit-to-all, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #block-menu-menu-admin-left-menu > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
@@ -111,7 +121,7 @@ img {
 #block-menu-menu-blog-admin-menu > .menu > li,
 #block-menu-menu-ugc-content-menu > .menu > li,
 #block-menu-menu-task-allocation-menu > .menu > li,
-#block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .breadcrumb ol li, .view .attachment .count, .dashboard-tab {
+#block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .breadcrumb ol li, .view .attachment .count, .dashboard-tab, .block-itg-event-backend .block-itg-story-list {
   display: inline-block;
 }
 
@@ -123,7 +133,12 @@ img {
   vertical-align: middle;
 }
 
-.vtop, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"], [id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"], .view .attachment a, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .node-story-form #Templates .form-field-type-field-collection .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo-image, .form-type-radio, .form-type-managed-file .filefield-source, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .content-block-menu > .menu > li, #block-menu-menu-ask-an-expert-menu > .menu > li,
+.vtop, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"], .view .attachment a, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .node-story-form #Templates .form-field-type-field-collection .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo-image, .form-type-radio, .form-type-managed-file .filefield-source, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .content-block-menu > .menu > li, #block-menu-menu-ask-an-expert-menu > .menu > li,
 #block-menu-menu-photogallery-admin-menu > .menu > li,
 #block-menu-menu-mega-review-menu > .menu > li,
 #block-menu-menu-blog-admin-menu > .menu > li,
@@ -139,11 +154,11 @@ img {
 #block-menu-menu-blog-admin-menu > .menu,
 #block-menu-menu-ugc-content-menu > .menu,
 #block-menu-menu-task-allocation-menu > .menu,
-#block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text, .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-quiz-add-questions-values"] {
+#block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text, .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-quiz-add-questions-values"], .block-itg-event-backend .block-itg-story-list {
   width: 100%;
 }
 
-.fleft, .itg-date-range .start-date-wrapper, .form-field-name-field-astro-date-range .start-date-wrapper, .itg-date-range .end-date-wrapper, .form-field-name-field-astro-date-range .end-date-wrapper, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li, .dashboard-tab li, .node-story-form #Templates .form-field-type-text tbody, .node-story-form #Templates .form-field-type-text thead, .node-story-form #Templates .form-field-type-field-collection tbody, .node-story-form #Templates .form-field-type-field-collection thead {
+.fleft, .itg-date-range .start-date-wrapper, .form-field-name-field-astro-date-range .start-date-wrapper, .itg-date-range .end-date-wrapper, .form-field-name-field-astro-date-range .end-date-wrapper, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li, .dashboard-tab li, .node-story-form #Templates .form-field-type-text tbody, .node-story-form #Templates .form-field-type-text thead, .node-story-form #Templates .form-field-type-field-collection tbody, .node-story-form #Templates .form-field-type-field-collection thead, .block-itg-event-backend .block-itg-story-list a {
   float: left;
 }
 
@@ -155,7 +170,12 @@ img {
   float: none;
 }
 
-.pos-rel, .itg-add-another-item tbody tr td, [id*="field-breaking-content-details-values"] tbody tr td, [id*="field-mega-review-review-values"] tbody tr td, .header, .header .container, div.vertical-tabs, .form-type-textfield, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu > .menu > li, .user-role a, .dashboard-tab li, .node-story-form #Templates .form-field-type-text .form-item, .node-story-form #Templates .form-field-type-field-collection .form-item {
+.pos-rel, .itg-add-another-item tbody tr td, [id*="field-breaking-content-details-values"] tbody tr td,
+[id*="field-program-schedule-values"] tbody tr td,
+[id*="field-associate-sponsors-values"] tbody tr td,
+[id*="field-event-highlights-values"] tbody tr td,
+[id*="field-event-media-values"] tbody tr td,
+[id*="field-mega-review-review-values"] tbody tr td, .header, .header .container, div.vertical-tabs, .form-type-textfield, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu > .menu > li, .user-role a, .dashboard-tab li, .node-story-form #Templates .form-field-type-text .form-item, .node-story-form #Templates .form-field-type-field-collection .form-item, .block-itg-event-backend .block-itg-story-list a {
   position: relative;
 }
 
@@ -163,7 +183,12 @@ img {
   overflow: hidden;
 }
 
-.btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"], [id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"], .view .attachment a {
+.btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"], .view .attachment a {
   background-color: #33a26d;
   border: 1px solid #197e4e;
   color: #fff;
@@ -179,7 +204,12 @@ img {
   transition: background-color 300ms;
   text-decoration: none;
 }
-.btn:hover, .form-submit[value="Preview"]:hover, .btn-save:hover, .node-ugc-form .form-actions .form-submit:hover, .form-submit[value="Save as Draft"]:hover, .form-submit[value="Save"]:hover, .form-submit[value="Next"]:hover, .form-submit[value="Publish"]:hover, .button:hover, .form-submit[value="Back"]:hover, .itg-add-another-item tbody tr td .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"]:hover, [id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"]:hover, .view .attachment a:hover {
+.btn:hover, .form-submit[value="Preview"]:hover, .btn-save:hover, .node-ugc-form .form-actions .form-submit:hover, .form-submit[value="Save as Draft"]:hover, .form-submit[value="Save"]:hover, .form-submit[value="Next"]:hover, .form-submit[value="Publish"]:hover, .button:hover, .form-submit[value="Back"]:hover, .form-submit[value="Delete"]:hover, .itg-add-another-item tbody tr td .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"]:hover, .view .attachment a:hover {
   background-color: #197e4e;
   border-color: #197e4e;
   color: #fff;
@@ -206,12 +236,22 @@ img {
   color: #197e4e;
 }
 
-.btn-cancel, .button, .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"], [id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"] {
+.btn-cancel, .button, .form-submit[value="Delete"], .itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"] {
   background-color: #fff;
   border: 1px solid #ee4d4d;
   color: #ee4d4d;
 }
-.btn-cancel:hover, .button:hover, .itg-add-another-item tbody tr td .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"]:hover, [id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"]:hover {
+.btn-cancel:hover, .button:hover, .form-submit[value="Delete"]:hover, .itg-add-another-item tbody tr td .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"]:hover,
+[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"]:hover {
   background-color: #fff;
   border: 1px solid #ee4d4d;
   color: #ee4d4d;
@@ -316,17 +356,32 @@ a.ckeditor_links:hover {
   line-height: 36px;
 }
 
-.itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"], [id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"] {
+.itg-add-another-item tbody tr td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr td .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr td .form-submit[value="Remove"] {
   bottom: -15px;
   height: 34px;
   left: 250px;
   position: absolute;
 }
-.itg-add-another-item tbody tr:last-child td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr:last-child td .form-submit[value="Remove"], [id*="field-mega-review-review-values"] tbody tr:last-child td .form-submit[value="Remove"] {
+.itg-add-another-item tbody tr:last-child td .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr:last-child td .form-submit[value="Remove"],
+[id*="field-program-schedule-values"] tbody tr:last-child td .form-submit[value="Remove"],
+[id*="field-associate-sponsors-values"] tbody tr:last-child td .form-submit[value="Remove"],
+[id*="field-event-highlights-values"] tbody tr:last-child td .form-submit[value="Remove"],
+[id*="field-event-media-values"] tbody tr:last-child td .form-submit[value="Remove"],
+[id*="field-mega-review-review-values"] tbody tr:last-child td .form-submit[value="Remove"] {
   bottom: -41px;
   left: 396px;
 }
-.itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit, [id*="field-mega-review-review-values"] + div.clearfix .form-submit {
+.itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
+[id*="field-program-schedule-values"] + div.clearfix .form-submit,
+[id*="field-associate-sponsors-values"] + div.clearfix .form-submit,
+[id*="field-event-highlights-values"] + div.clearfix .form-submit,
+[id*="field-event-media-values"] + div.clearfix .form-submit,
+[id*="field-mega-review-review-values"] + div.clearfix .form-submit {
   margin-left: 250px;
 }
 
@@ -1365,4 +1420,50 @@ input[name="field_gallery_image_add_more"] {
 .form-field-name-field-ads-section-selection label {
   color: red;
   content: "*";
+}
+
+.block-itg-event-backend .block-itg-story-list {
+  overflow: hidden;
+  background-color: #fff;
+}
+.block-itg-event-backend .block-itg-story-list a {
+  color: #5f5f5f;
+  padding: 10px 40px 10px 20px;
+  background-color: #f0f0f0;
+  overflow: hidden;
+}
+.block-itg-event-backend .block-itg-story-list a:before {
+  border-color: transparent transparent transparent #f0f0f0;
+  border-image: none;
+  border-style: solid;
+  border-width: 22px;
+  bottom: 0;
+  content: "";
+  height: 0;
+  position: absolute;
+  right: -15px;
+  top: -3px;
+  width: 0;
+  z-index: 9;
+}
+.block-itg-event-backend .block-itg-story-list a:after {
+  border-color: #fff transparent #fff #fff;
+  border-image: none;
+  border-style: solid;
+  border-width: 26px;
+  bottom: 0;
+  content: "";
+  height: 0;
+  margin: auto 0;
+  position: absolute;
+  right: -25px;
+  top: -7px;
+  width: 0;
+}
+.block-itg-event-backend .block-itg-story-list a.current {
+  background-color: #aaa;
+  color: #fff;
+}
+.block-itg-event-backend .block-itg-story-list a.current:before {
+  border-color: transparent transparent transparent #aaa;
 }
