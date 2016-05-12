@@ -562,6 +562,11 @@ fieldset.date-combo .container-inline-date .date-padding .form-item div.descript
 div.description, .pre-desc {
   font-size: 12px;
   color: #8d8d8d;
+  min-width: 120px;
+}
+
+.text-format-wrapper div.description {
+  padding-left: 250px;
 }
 
 div.vertical-tabs {
