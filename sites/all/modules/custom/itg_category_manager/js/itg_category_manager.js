@@ -3,23 +3,24 @@
     attach: function (context, settings) {
       // Place your code here.
       var setting = Drupal.settings.baseUrl;
-      // Term status mode show hide
-//      $('#edit-term-state').click(function () {
-//        var state = $(this).is(':checked');
-//        if (state) {
-//          $("#state-mode").css("display", "none");
-//        }
-//        else {
-//          $("#state-mode").css("display", "block");
-//        }
-//      });
+      // Show loader image
+      $('.term-spinner').hide();
+      function showLoadingImage() {
+        $('.term-spinner').show();
+      }
+      
+      // Hide loader image
+      function hideLodingImage() {
+        $('.term-spinner').hide();
+      }
 
       // Disable manual or forcefully
       $('#edit-state-mode-1, #edit-state-mode-0').click(function () {
         var state = $(this).is(':checked');
         var tid = $('input[name="term_tid"]').val();
         switch ($(this).val()) {
-          case '0':            
+          case '0':
+            showLoadingImage();
             $.ajax({
               url: setting.baseUrl + "/category-management/disable-forcefully",
               type: 'post',
@@ -27,10 +28,14 @@
               dataType: "JSON",
               success: function (data) {                
                 window.location = setting.baseUrl + "/category-manager";                
+              },
+              complete: function () {
+                hideLoadingImage();
               }
             });
             break;
-          case '1':            
+          case '1': 
+            showLoadingImage();
             window.location = setting.baseUrl + "/category-management/disable-manually/"+tid;
         }
       });

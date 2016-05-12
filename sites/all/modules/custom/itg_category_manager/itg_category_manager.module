@@ -185,6 +185,7 @@ function itg_category_manager_term_state($tid) {
       ->fields('itg', array('status'))
       ->condition('tid', $tid, '=');
   $itg_result = $itg_query->execute()->fetchField();
+  
   $flag = FALSE;
   if(isset($itg_result) && $itg_result == 1) {
     $flag = TRUE;
@@ -240,8 +241,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     $tid = $form_state['term']->tid;
     $used_by_content = taxonomy_select_nodes($tid);
     if (count($used_by_content) > 0) {
-      form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
-
+      form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));      
       $count_used = count($used_by_content);
       drupal_set_message(t('This category is mapped with ' . $count_used . ' contents.') . l(' Click here', 'category-remove-from-node/' . $tid, array('attributes' => array('target' => '_blank'))), 'status');
       if ($user->uid != 1) {
@@ -326,7 +326,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       );
       if ($form['tid']['#value'] !== NULL) {
         $term_status = itg_category_manager_term_state($form['tid']['#value']);
-        if ($term_status) {
+        
+        if ($term_status) {          
           $form['term-state-wrap']['state-mode'] = array(
             '#type' => 'radios',
             '#title' => t('Disable mode'),
@@ -336,10 +337,11 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
                 ':input[name="term_state"]' => array('checked' => FALSE),
               ),
             ),
+            '#suffix' => '<div class="term-spinner"><img src="'.$base_url .'/'. drupal_get_path('module', 'views').'/images/status-active.gif" />',
           );
         }
-        else {
-          $form['term-state-wrap']['term_state']['#description'] = t('This category is currently in inactive mode.');          
+        else {          
+          $form['term-state-wrap']['term_state']['#suffix'] = '<div class="status-message">'. t('This category is currently in inactive mode.') .'</div>';          
         }
         
       }
