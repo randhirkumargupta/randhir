@@ -13,6 +13,7 @@
                 var EDITOR = '6';
                 var SECTIONEDITORANCHOR = '20';
                 var COPYEDITOR = '5';
+                var SITE_ADMIN = '10';
                 $('#edit-field-user-section > .form-type-select > label').html('Section<span class="form-required"> *</span>');
                
                 $('.form-item-roles').hide();
@@ -44,7 +45,7 @@
                     var markexpert = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
                     if (value == EXPERT) {
                         $('.field-name-field-user-section').show();
-                    } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR) {
+                    } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR || value == SITE_ADMIN) {
                         $('.field-name-field-mark-as-expert').show();
                         if (markexpert == true) {
                             $('.field-name-field-user-section').show();
@@ -64,7 +65,7 @@
                         $('.field-name-field-user-section').show();
                         $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
                         $('.field-name-field-mark-as-expert').hide();
-                    } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR) {
+                    } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR || value == SITE_ADMIN) {
                         $('.field-name-field-user-section').hide();
                         $('.field-name-field-user-section').find('select').val("_none");
                         $('.field-name-field-mark-as-expert').show();
