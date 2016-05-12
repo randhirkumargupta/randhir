@@ -50,6 +50,9 @@ h1, h2, h3, h4{font-weight: 500;}
 .no-underline{
   text-decoration: none;
 }
+.hide{
+  display: none;
+}
 .db{
   display: block;
 }
@@ -315,44 +318,90 @@ input[type="text"], select, input[type="password"]{
   }
 }
 
+.add-more{
+    background-color: #1fb5ad;
+    border: 1px solid #1fb5ad;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 6px 12px;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    @extend .dib;
+    @extend .vtop;
+    &:hover{
+    background-color: #1fb5ad;
+    border: 1px solid #1fb5ad;
+    }
+}
+.btn-cancel{
+  background-color: #fff;
+  border: 1px solid #ee4d4d;
+  color: #ee4d4d;
+  &:hover{
+    background-color: #fff;
+    border: 1px solid #ee4d4d;
+    color: #ee4d4d;
+  }
+}
+
 #content{
   .node-form{
     .form-type-textfield, 
-      .form-type-textarea, 
-      .form-type-select, 
-      .form-type-autocomplete-deluxe,
-      .form-type-managed-file,
-      .form-type-radios,
-      .date-combo,
-      .form-type-hierarchical-select,
-      .form-type-checkboxes{
-        > label{
-          width: 220px;
-          float: left;
-          padding-right: 20px;
-        }
-        > label + div{
-          padding-left: 220px;
-        }
+    .form-type-textarea, 
+    .form-type-select, 
+    .form-type-autocomplete-deluxe,
+    .form-type-managed-file,
+    .form-type-radios,
+    .date-combo,
+    .form-type-hierarchical-select,
+    .form-type-checkboxes{
+      > label{
+        width: 220px;
+        float: left;
+        padding-right: 20px;
       }
+      > label + div{
+        padding-left: 220px;
+      }
+    }
+    .form-item{
+      margin: 30px;
+      .form-item{margin: 0;}
+    }
+    .form-field-type-field-collection{
       .form-item{
-        margin: 30px 0;
-        .form-item{margin: 0;}
-      }
-      .form-text, .form-textarea{
-        width: 400px;
-        max-width: 100%;
-      }
-      .form-actions{
-        padding-left: 220px;
-        .form-submit{
-          @extend .btn;
+        .form-item{
+          margin: 30px 0;
+          .form-item{margin: 0;}
         }
       }
-      span.error{
-        display: block;
-        padding-left: 220px;
+    }
+    .form-text, .form-textarea{
+      width: 400px;
+      max-width: 100%;
+    }
+    .form-actions{
+      padding-left: 250px;
+      .form-submit{
+        @extend .btn;
       }
+    }
+    span.error{
+      display: block;
+      padding-left: 220px;
+    }
+    .form-submit[value="Add another item"]{
+      @extend .add-more;
+    }
+    div.description {
+      color: #5f5f5f;
+      font-size: 12px;
+      padding-left: 220px;
+    }
   }
   fieldset.captcha {
     max-width: 400px;
@@ -360,6 +409,46 @@ input[type="text"], select, input[type="password"]{
     padding: 10px;
   }
 }
-[id*="edit-field-ugc-content-type-und"] option + option{
+[id*="edit-field-ugc-ctype-und"] option + option{
   text-transform: capitalize;
+}
+.sticky-header{
+  @extend .hide;
+}
+.form-field-type-field-collection{
+  .tabledrag-toggle-weight-wrapper{
+    display: none;
+  }
+  .field-multiple-table{
+    @extend .full;
+    thead{
+      th{
+        background-color: #fefafb;
+        border-top: 1px solid #d9d9d9;
+        border-bottom: 1px solid #d9d9d9;
+        padding: 8px 20px;
+        line-height: 28px;
+        font-size: 18px;
+        margin: 15px 0;
+        text-align: left;
+      }
+    }
+    tbody{
+      .field-multiple-drag{
+        @extend .hide;
+      }
+      td{
+        > .form-submit{
+          @extend .btn;
+          @extend .btn-cancel;
+          margin-left: 220px;
+        }
+      }
+    }
+    & + .clearfix{
+      .form-submit{
+        margin-left: 220px;
+      }
+    }
+  }
 }
