@@ -1,8 +1,8 @@
 <?php
 
-/*
- * Author: ITG
- * Date: 14-04-2016
+/**
+ * @file
+ *
  * Purpose: ITG social media integration module.
  */
 
@@ -35,10 +35,8 @@ function itg_social_media_menu() {
 }
 
 /**
- * Implements hook_form_alter() 
- * @param type $form
- * @param type $form_state
- * @param type $form_id
+ * Implements hook_form_alter()
+ * {@inheritdoc}
  */
 function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   if (isset($form['created']['min'])) {
@@ -57,6 +55,8 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
 
 /**
  * Create custom form for social media integration.
+ *
+ * {@inheritdoc}
  */
 function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   // Load node so that we can provide default value if values already present.
@@ -180,13 +180,13 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
 }
 
 /**
- * Implments hook_form_submit()
- * @param array $form
- * @param array $form_state
+ * Implements hook_form_submit()
+ *
+ * {@inheritdoc}
  */
 function itg_social_media_form_submit($form, &$form_state) {
   $node = node_load($form_state['values']['nid']);
-  
+
   if ($form_state['values']['itg_fb_img'] != 0) {
     // Load the file via file.fid.
     $file = file_load($form_state['values']['itg_fb_img']);
@@ -197,25 +197,25 @@ function itg_social_media_form_submit($form, &$form_state) {
     // Record that the module (in this example, user module) is using the file. 
     file_usage_add($file, 'user', 'user', 1);
   }
-  
+
   // Change field value     
   foreach ($form_state['values']['itg_smi'] as $value) {
     if ($value != '0') {
       $data[]['value'][$value] = $value;
     }
   }
-  
+
   // Social Media integration field
-  $node->field_story_social_media_integ['und'] = $data;  
-  
+  $node->field_story_social_media_integ['und'] = $data;
+
   // Facebook narrative field
   if ($form_state['values']['itg_facebook_narrative'] != '') {
     $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
   }
   else {
     unset($node->field_story_facebook_narrative['und']);
-  } 
-  
+  }
+
   // Facebook Image field
   if ($form_state['values']['itg_fb_img'] != 0) {
     $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
@@ -225,9 +225,9 @@ function itg_social_media_form_submit($form, &$form_state) {
     $path = file_create_url($node->field_story_facebook_image['und'][0]['uri']);
     if ($path != '') {
       unlink($path);
-    }        
+    }
   }
-  
+
   // TWITTER IMAGE
   if ($form_state['values']['itg_twitter_img'] != 0) {
     // Load the file via file.fid.
@@ -238,8 +238,8 @@ function itg_social_media_form_submit($form, &$form_state) {
     file_save($file);
     // Record that the module (in this example, user module) is using the file.
     file_usage_add($file, 'user', 'user', 1);
-  }  
-  
+  }
+
   // Twitter narrative
   if ($form_state['values']['itg_twitter_narrative'] != '') {
     $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
@@ -247,7 +247,7 @@ function itg_social_media_form_submit($form, &$form_state) {
   else {
     unset($node->field_story_tweet['und']);
   }
-  
+
   // Twitter Image field
   if ($form_state['values']['itg_twitter_img'] != 0) {
     $node->field_story_tweet_image['und'][0]['fid'] = $form_state['values']['itg_twitter_img'];
@@ -257,14 +257,16 @@ function itg_social_media_form_submit($form, &$form_state) {
     $path = file_create_url($node->field_story_tweet_image['und'][0]['uri']);
     if ($path != '') {
       unlink($path);
-    }    
+    }
   }
-  
+
   node_save($node);
 }
 
 /**
  * Implements hook_block_info()
+ *
+ * {@inheritdoc}
  */
 function itg_social_media_block_info() {
   $block = array();
@@ -278,12 +280,12 @@ function itg_social_media_block_info() {
 
 /**
  * Implements hook_block_view()
- * @param type $delta
+ * {@inheritdoc}
  */
 function itg_social_media_block_view($delta = '') {
   $block = array();
   $arg = arg();
-  $c_type = itg_social_media_node_info(check_plain($arg[1]));
+  $c_type = itg_social_media_node_type(check_plain($arg[1]));
   $nid = check_plain($arg[1]);
   switch ($delta) {
     case 'social_media_form':
@@ -300,13 +302,14 @@ function itg_social_media_block_view($delta = '') {
 
 /**
  * get type of the node from nid.
- * @param type $nid
- * @return type
+ *
+ * @param int $nid
+ * @return mixed
  */
-function itg_social_media_node_info($nid) {
+function itg_social_media_node_type($nid) {
   $itg_query = db_select('node', 'n');
   $itg_query->fields('n', array('type'))
-      ->condition('nid', $nid);
+    ->condition('nid', $nid);
   $itg_result = $itg_query->execute()->fetchField();
 
   return $itg_result;
