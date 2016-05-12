@@ -52,6 +52,20 @@
                 }
                
             }); 
+            
+            if ($('.form-field-name-field-ugc-ctype .form-select').val() == 'photogallery') {
+                
+                $('.form-field-name-field-ugc-ctype').siblings('.form-field-name-field-ugc-upload-photo').find('.form-item > label').html('Upload Photo <span class="form-required" title="This field is required.">*</span>');
+            }
+            $('.form-field-name-field-ugc-ctype').on('change', '.form-select', function () {
+                
+                var selectedVal = $(this).val();
+                if (selectedVal == 'photogallery') {
+                    $(this).parent().parent().siblings('.form-field-name-field-ugc-upload-photo').find('.form-item > label').html('Upload Photo <span class="form-required" title="This field is required.">*</span>');
+                }
+            });
+            
+            
     }
 
   };
