@@ -51,18 +51,16 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No Registration Found!';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Broken/missing handler */
-  $handler->display->display_options['fields']['field_erf_registration']['id'] = 'field_erf_registration';
-  $handler->display->display_options['fields']['field_erf_registration']['table'] = 'field_data_field_erf_registration';
-  $handler->display->display_options['fields']['field_erf_registration']['field'] = 'field_erf_registration';
-  $handler->display->display_options['fields']['field_erf_registration']['label'] = 'Registration Details';
+  /* Field: Content: Registration Fee */
+  $handler->display->display_options['fields']['field_erf_registration_fee']['id'] = 'field_erf_registration_fee';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['table'] = 'field_data_field_erf_registration_fee';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['field'] = 'field_erf_registration_fee';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['type'] = 'field_collection_fields';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['settings'] = array(
+    'view_mode' => 'full',
+  );
+  $handler->display->display_options['fields']['field_erf_registration_fee']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_erf_registration_fee']['delta_offset'] = '0';
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
