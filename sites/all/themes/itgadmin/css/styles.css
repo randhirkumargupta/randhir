@@ -956,7 +956,7 @@ input[name="field_gallery_image_add_more"] {
 }
 
 #block-menu-menu-admin-left-menu {
-  margin: 20px 0;
+  margin: 20px 0 5px;
 }
 #block-menu-menu-admin-left-menu h2 {
   display: none;

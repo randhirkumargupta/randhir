@@ -94,7 +94,7 @@ if(!in_array('administrator', $user->roles)){
 
   <main id="main">
     <section class="container">
-      <?php print $breadcrumb; ?>
+      
       <div id="navigation">
         <?php if ($main_menu): ?>
           <nav id="main-menu" role="navigation" tabindex="-1">
@@ -120,6 +120,7 @@ if(!in_array('administrator', $user->roles)){
 <?php print render($page['navigation']); ?>
 
       </div>
+      <?php print $breadcrumb; ?>
     </section>
     <section id="content" class="container" role="main">
       <?php print render($page['highlighted']); ?>
