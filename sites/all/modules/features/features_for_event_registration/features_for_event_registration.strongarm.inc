@@ -74,10 +74,10 @@ function features_for_event_registration_strongarm() {
           'weight' => '2',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '8',
         ),
         'additional_settings' => array(
-          'weight' => '8',
+          'weight' => '7',
         ),
       ),
       'display' => array(),

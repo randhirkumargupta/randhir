@@ -452,7 +452,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 12,
+      'weight' => 8,
     ),
   );
 
@@ -494,7 +494,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 2,
     ),
   );
 
@@ -536,7 +536,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 10,
+      'weight' => 6,
     ),
   );
 
@@ -578,7 +578,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 3,
     ),
   );
 
@@ -664,7 +664,7 @@ function features_for_event_registration_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 4,
     ),
   );
 
@@ -750,7 +750,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -793,7 +793,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 5,
     ),
   );
 
@@ -839,7 +839,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 3,
+      'weight' => 10,
     ),
   );
 
@@ -881,7 +881,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 11,
+      'weight' => 7,
     ),
   );
 
@@ -927,7 +927,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
