@@ -40,10 +40,10 @@
           <?php if ($view_mode == 'full'):  ?>
                 <div class="content-node-view">
                  <?php
-                 $content_type = $node->field_ugc_content_type[LANGUAGE_NONE][0]['value'];
+                 $content_type = $node->field_ugc_ctype[LANGUAGE_NONE][0]['value'];
                  print render($content['field_user_name']);
                  print  render($content['field_user_email']);
-                 print  render($content['field_ugc_content_type']);
+                 print  render($content['field_ugc_ctype']);
                  ?>
                  <div class="field">
                   <div class="field-label"><?php print t('Title:'); ?></div>
@@ -64,12 +64,27 @@
                    print  render($content['field_ugc_upload_photo']);
                    print  render($content['field_astro_video']);
                  }
-                 
+               
                  ?>
                 <div class="field">
-                  <div class="field-label"><?php print t('Created on:'); ?></div>
+                  <div class="field-label"><?php print t('Posted date:'); ?></div>
                   <div class="field-items"><?php print  date(ITGDATE, $node->created); ?></div>
                 </div>
+                <?php if($node->status == '0') { 
+                  $node_author = user_load($node->uid);
+                  $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'].' '.$node_author->field_last_name[LANGUAGE_NONE][0]['value'];
+                  ?>    
+                <div class="field">
+                  <div class="field-label"><?php print t('Rejected date:'); ?></div>
+                  <div class="field-items"><?php print  date(ITGDATE, $node->changed); ?></div>
+                </div>
+                <div class="field">
+                  <div class="field-label"><?php print t('Rejected by:'); ?></div>
+                  <div class="field-items"><?php print $rejected_by; ?></div>
+                </div>
+                <?php
+                }
+                ?>
                 <?php 
                 // create path for approve and reject
                $arg_id = arg(1);

@@ -13,12 +13,54 @@ function event_backend_msnf_step_info() {
   $msnf = new stdClass();
   $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
   $msnf->api_version = 1;
+  $msnf->identifier = 'step_configuration|node|event_backend';
+  $msnf->step_name = 'step_configuration';
+  $msnf->entity_type = 'node';
+  $msnf->bundle = 'event_backend';
+  $msnf->data = array(
+    'label' => 'Step7-Configuration',
+    'weight' => '8',
+    'children' => array(
+      0 => 'field_config_programme',
+      1 => 'field_config_speakers',
+      2 => 'field_config_sponsors',
+      3 => 'field_config_photo',
+      4 => 'field_config_video',
+      5 => 'field_config_flashback',
+      6 => 'field_config_home',
+      7 => 'metatags',
+      8 => 'path',
+      9 => 'additional_settings',
+    ),
+    'format_type' => 'default',
+    'format_settings' => array(
+      'label' => 'Step7-Configuration',
+      'instance_settings' => array(
+        'skip_non_required' => 1,
+        'hide_if_empty' => 0,
+        'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'buttons' => array(
+          'previous' => 'Back',
+          'next' => 'Next',
+          'skip' => 'Skip next step',
+        ),
+      ),
+    ),
+  );
+  $export['step_configuration|node|event_backend'] = $msnf;
+
+  $msnf = new stdClass();
+  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->api_version = 1;
   $msnf->identifier = 'step_first|node|event_backend';
   $msnf->step_name = 'step_first';
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
-    'label' => 'Basic Details',
+    'label' => 'Step1-Basic Details',
     'weight' => '0',
     'children' => array(
       0 => 'body',
@@ -31,7 +73,7 @@ function event_backend_msnf_step_info() {
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Basic Details',
+      'label' => 'Step1-Basic Details',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,
@@ -48,6 +90,39 @@ function event_backend_msnf_step_info() {
     ),
   );
   $export['step_first|node|event_backend'] = $msnf;
+
+  $msnf = new stdClass();
+  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->api_version = 1;
+  $msnf->identifier = 'step_highlights|node|event_backend';
+  $msnf->step_name = 'step_highlights';
+  $msnf->entity_type = 'node';
+  $msnf->bundle = 'event_backend';
+  $msnf->data = array(
+    'label' => 'Step5-Highlights',
+    'weight' => '4',
+    'children' => array(
+      0 => 'field_event_highlights',
+    ),
+    'format_type' => 'default',
+    'format_settings' => array(
+      'label' => 'Step5-Highlights',
+      'instance_settings' => array(
+        'skip_non_required' => 1,
+        'hide_if_empty' => 0,
+        'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'buttons' => array(
+          'previous' => 'Back',
+          'next' => 'Next',
+          'skip' => 'Skip next step',
+        ),
+      ),
+    ),
+  );
+  $export['step_highlights|node|event_backend'] = $msnf;
 
   $msnf = new stdClass();
   $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
@@ -95,19 +170,52 @@ function event_backend_msnf_step_info() {
   $msnf = new stdClass();
   $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
   $msnf->api_version = 1;
+  $msnf->identifier = 'step_media|node|event_backend';
+  $msnf->step_name = 'step_media';
+  $msnf->entity_type = 'node';
+  $msnf->bundle = 'event_backend';
+  $msnf->data = array(
+    'label' => 'Step6-Media',
+    'weight' => '5',
+    'children' => array(
+      0 => 'field_event_media',
+    ),
+    'format_type' => 'default',
+    'format_settings' => array(
+      'label' => 'Step6-Media',
+      'instance_settings' => array(
+        'skip_non_required' => 1,
+        'hide_if_empty' => 0,
+        'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'buttons' => array(
+          'previous' => 'Back',
+          'next' => 'Next',
+          'skip' => 'Skip next step',
+        ),
+      ),
+    ),
+  );
+  $export['step_media|node|event_backend'] = $msnf;
+
+  $msnf = new stdClass();
+  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->api_version = 1;
   $msnf->identifier = 'step_program_schedule|node|event_backend';
   $msnf->step_name = 'step_program_schedule';
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
-    'label' => 'Program Schedule',
+    'label' => 'Step3-Program Schedule',
     'weight' => '2',
     'children' => array(
       0 => 'field_program_schedule',
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Program Schedule',
+      'label' => 'Step3-Program Schedule',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,
@@ -133,7 +241,7 @@ function event_backend_msnf_step_info() {
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
-    'label' => 'Registration, Sponsor',
+    'label' => 'Step2-Registration Fees',
     'weight' => '1',
     'children' => array(
       0 => 'field_event_type',
@@ -141,11 +249,10 @@ function event_backend_msnf_step_info() {
       2 => 'field_group_registration_fee_10',
       3 => 'field_individual_registration_fe',
       4 => 'field_no_of_tickets',
-      5 => 'field_associate_sponsors',
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Registration, Sponsor',
+      'label' => 'Step2-Registration Fees',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,
@@ -162,6 +269,39 @@ function event_backend_msnf_step_info() {
     ),
   );
   $export['step_second|node|event_backend'] = $msnf;
+
+  $msnf = new stdClass();
+  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->api_version = 1;
+  $msnf->identifier = 'step_sponsor|node|event_backend';
+  $msnf->step_name = 'step_sponsor';
+  $msnf->entity_type = 'node';
+  $msnf->bundle = 'event_backend';
+  $msnf->data = array(
+    'label' => 'Step4-Sponsor',
+    'weight' => '3',
+    'children' => array(
+      0 => 'field_associate_sponsors',
+    ),
+    'format_type' => 'default',
+    'format_settings' => array(
+      'label' => 'Step4-Sponsor',
+      'instance_settings' => array(
+        'skip_non_required' => 1,
+        'hide_if_empty' => 0,
+        'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'buttons' => array(
+          'previous' => 'Back',
+          'next' => 'Next',
+          'skip' => 'Skip next step',
+        ),
+      ),
+    ),
+  );
+  $export['step_sponsor|node|event_backend'] = $msnf;
 
   return $export;
 }

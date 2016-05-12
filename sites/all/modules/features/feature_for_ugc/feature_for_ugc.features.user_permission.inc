@@ -14,7 +14,9 @@ function feature_for_ugc_user_default_permissions() {
   $permissions['access reject ugc content link'] = array(
     'name' => 'access reject ugc content link',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'UGC Moderator' => 'UGC Moderator',
       'administrator' => 'administrator',

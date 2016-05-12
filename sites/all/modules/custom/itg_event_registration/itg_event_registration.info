@@ -1,0 +1,6 @@
+name = ITG Event Registration
+description = "Contains functionality related to event registration form."
+package = "ITG"
+core = 7.x
+
+files[] = itg_event_registration.module

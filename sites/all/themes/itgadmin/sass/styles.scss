@@ -206,7 +206,7 @@ a.ckeditor_links{
   @extend .btn;
   @extend .btn-preview;
 }
-.btn-save, .form-submit[value="Save as Draft"], .form-submit[value="Save"]{
+.btn-save, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"]{
   @extend .btn;
   @extend .btn-save-draft;
 }
@@ -220,7 +220,11 @@ a.ckeditor_links{
   @extend .btn;
   @extend .btn-cancel;
 }
-.button.published{
+.button.published, .form-submit[value="Back"]{
+  @extend .btn;
+}
+.form-submit[value="Delete"]{
+  @extend .btn-cancel;
   @extend .btn;
 }
 .desc-popup{
@@ -507,6 +511,12 @@ div.filefield-source .form-item{
 div.description, .pre-desc{
   font-size: 12px;
   color: #8d8d8d;
+  min-width: 120px;
+}
+.text-format-wrapper{
+  div.description{
+    padding-left: 250px;
+  }
 }
 div.vertical-tabs {
     border: none;
@@ -1517,7 +1527,12 @@ input[name="field_gallery_image_add_more"]{
 .node-type-breaking-news .close-preview{
   display: block;
 }
-[id*="field-breaking-content-details-values"], [id*="field-mega-review-review-values"]{
+[id*="field-breaking-content-details-values"], 
+[id*="field-program-schedule-values"], 
+[id*="field-associate-sponsors-values"], 
+[id*="field-event-highlights-values"], 
+[id*="field-event-media-values"], 
+[id*="field-mega-review-review-values"]{
   @extend .itg-add-another-item;
   thead{
     @extend .hide;
@@ -1530,8 +1545,80 @@ input[name="field_gallery_image_add_more"]{
     }
   }
 }
-
-
+.node-ads_management-form{
+  .form-type-date-popup{
+    .form-type-textfield label + .form-text + span.error{
+      padding-left: 0;
+    }
+  }
+  fieldset.date-combo .container-inline-date .date-padding .form-item div.description{
+    min-width: 135px;
+  }
+}
+.form-field-name-field-ads-content-selection,
+.form-field-name-field-ads-template-variants,
+.form-field-name-field-ads-section-selection{
+  label{
+    color: red;
+    content: "*";
+  }
+}
+.block-itg-event-backend{
+  .block-itg-story-list{
+    overflow: hidden;
+    background-color: #fff;
+    @extend .dib;
+    @extend .full;
+    a{
+      color: #5f5f5f;
+      padding: 10px 40px 10px 20px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      @extend .pos-rel;
+      @extend .fleft;
+      &:before{
+        border-color: transparent transparent transparent #f0f0f0;
+        border-image: none;
+        border-style: solid;
+        border-width: 22px;
+        bottom: 0;
+        content: "";
+        height: 0;
+        position: absolute;
+        right: -15px;
+        top: -3px;
+        width: 0;
+        z-index: 9;
+      }
+      &:after{
+        border-color: #fff transparent #fff #fff;
+        border-image: none;
+        border-style: solid;
+        border-width: 26px;
+        bottom: 0;
+        content: "";
+        height: 0;
+        margin: auto 0;
+        position: absolute;
+        right: -25px;
+        top: -7px;
+        width: 0;
+      }
+      &.current{
+        background-color: #aaa;
+        color: #fff;
+        &:before{
+          border-color: transparent transparent transparent #aaa;
+        }
+      }
+    }
+  }
+}
+[id*="field-event-media-values"]{
+  .field-type-file{
+    @extend .hide;
+  }
+}
 
 
 
