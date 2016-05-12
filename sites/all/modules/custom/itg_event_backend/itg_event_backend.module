@@ -29,6 +29,10 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
        // $form['#submit'][] = 'custom_node_submit';
          $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect'; 
    }
+   // Current step save in session variable
+   if (isset($form_state['storage']['step'])){
+      $_SESSION['current_step'] = $form_state['storage']['step'];
+   }
   }
   if($form_id == 'sponsor_node_form'){
       $form['#after_build'][] = 'itg_event_backend_sponsor';
