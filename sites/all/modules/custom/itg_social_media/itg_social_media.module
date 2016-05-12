@@ -303,11 +303,14 @@ function itg_social_media_block_view($delta = '') {
  * @param type $nid
  * @return type
  */
-function itg_social_media_node_info($nid) {
-  $itg_query = db_select('node', 'n');
-  $itg_query->fields('n', array('type'))
-      ->condition('nid', $nid);
-  $itg_result = $itg_query->execute()->fetchField();
+function itg_social_media_node_info($nid = NULL) {
+  $itg_result = '';
+  if ($nid) {
+    $itg_query = db_select('node', 'n');
+    $itg_query->fields('n', array('type'))
+        ->condition('nid', $nid);
+    $itg_result = $itg_query->execute()->fetchField();
+  }  
 
   return $itg_result;
 }
