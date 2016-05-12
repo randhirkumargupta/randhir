@@ -182,7 +182,7 @@ function event_backend_field_default_field_instances() {
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'txt',
+      'file_extensions' => 'mp3',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -206,7 +206,7 @@ function event_backend_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -317,7 +317,7 @@ function event_backend_field_default_field_instances() {
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'txt',
+      'file_extensions' => 'mp4',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -341,7 +341,7 @@ function event_backend_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -1127,7 +1127,7 @@ function event_backend_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -1330,7 +1330,7 @@ function event_backend_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -1674,7 +1674,7 @@ function event_backend_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
