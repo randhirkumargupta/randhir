@@ -185,6 +185,7 @@ function itg_category_manager_term_state($tid) {
       ->fields('itg', array('status'))
       ->condition('tid', $tid, '=');
   $itg_result = $itg_query->execute()->fetchField();
+  
   $flag = FALSE;
   if(isset($itg_result) && $itg_result == 1) {
     $flag = TRUE;
@@ -325,7 +326,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       );
       if ($form['tid']['#value'] !== NULL) {
         $term_status = itg_category_manager_term_state($form['tid']['#value']);
-        if ($term_status) {
+        
+        if ($term_status) {          
           $form['term-state-wrap']['state-mode'] = array(
             '#type' => 'radios',
             '#title' => t('Disable mode'),
@@ -337,8 +339,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
             ),
           );
         }
-        else {
-          $form['term-state-wrap']['term_state']['#description'] = t('This category is currently in inactive mode.');          
+        else {          
+          $form['term-state-wrap']['term_state']['#suffix'] = '<div class="status-message">'. t('This category is currently in inactive mode.') .'</div>';          
         }
         
       }
