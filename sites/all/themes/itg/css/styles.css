@@ -443,3 +443,13 @@ input[type="text"], select, input[type="password"] {
 #content .node-form .form-actions {
   padding-left: 220px;
 }
+/* line 352, ../sass/styles.scss */
+#content .node-form span.error {
+  display: block;
+  padding-left: 220px;
+}
+
+/* line 358, ../sass/styles.scss */
+[id*="edit-field-ugc-content-type-und"] option + option {
+  text-transform: capitalize;
+}
