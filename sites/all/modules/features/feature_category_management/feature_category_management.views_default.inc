@@ -174,7 +174,7 @@ function feature_category_management_views_default_views() {
   $export['associated_content'] = $view;
 
   $view = new view();
-  $view->name = 'category_manager_dev';
+  $view->name = 'category_manager';
   $view->description = 'Category listing page';
   $view->tag = 'default';
   $view->base_table = 'itg_category_manager';
@@ -440,7 +440,7 @@ function feature_category_management_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'category-manager';
-  $export['category_manager_dev'] = $view;
+  $export['category_manager'] = $view;
 
   return $export;
 }

@@ -359,7 +359,7 @@ function itg_astro_views_pre_render(&$view) {
       $view->attachment_before = $header_content_astro;    
       break;
   
-    case 'category_manager_dev':
+    case 'category_manager':
       $header_content_astro = '<span class="count">Count(' . count($view->result) . ')&nbsp;</span>';  
       $header_content_astro .= l(t('Create Category'), 'admin/structure/taxonomy/category_management/add');
       $view->attachment_before = $header_content_astro;
