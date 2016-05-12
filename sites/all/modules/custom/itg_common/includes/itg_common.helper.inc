@@ -22,7 +22,7 @@ define('COPY_DESK', 12);
 define('DESIGNER', 15);
 define('PHOTOGRAPHER', 18);
 define('ADMINISTRATOR', 3);
-define('UGC_MODERATOR', 23); //
+define('UGC_MODERATOR', 22); //
 define('CATEGORY_MANAGMENT', 4);
 define('EXPERT', 21);
 define('ITGDATE', 'd/m/Y');
