@@ -354,6 +354,11 @@ input[type="text"], select, input[type="password"]{
         padding-left: 220px;
       }
   }
+  fieldset.captcha {
+    max-width: 400px;
+    margin: 0 0 30px;
+    padding: 10px;
+  }
 }
 [id*="edit-field-ugc-content-type-und"] option + option{
   text-transform: capitalize;
