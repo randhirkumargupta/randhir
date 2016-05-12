@@ -30,6 +30,12 @@
             //hide skip button
             $('#edit-skip').hide();
             $('#edit-skip-1').hide();
+            //Reset Paid value after click on Free
+            $('#edit-field-event-type-und-free').on('click', function(){
+                $('#edit-field-group-registration-fee-5-und-0-value').val('');
+                $('#edit-field-group-registration-fee-10-und-0-value').val('');
+                $('#edit-field-individual-registration-fe-und-0-value').val('');
+            });
          
         }
     }
