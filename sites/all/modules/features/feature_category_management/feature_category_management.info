@@ -40,5 +40,5 @@ features[variable][] = field_bundle_settings_taxonomy_term__category_management
 features[variable][] = itg_category_manager_vocabularies
 features[variable][] = metatag_enable_taxonomy_term__category_management
 features[views_view][] = associated_content
-features[views_view][] = category_manager_dev
+features[views_view][] = category_manager
 features_exclude[dependencies][views] = views

@@ -114,6 +114,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       // hide source relation and type field from other users 
       if ($form_id == 'ugc_node_form') {
         $form['field_story_source_type']['#access'] = FALSE;
+        $form['field_source']['#access'] = FALSE;
       }
     }
 
@@ -256,13 +257,13 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     }
     
     // validate if name field accept number
-    if (!ctype_alpha($user_name)) {
-      form_set_error('field_user_name', t("Only letters are allowed for name field."));
+    if (preg_match('#[0-9]#',$user_name)){ 
+      form_set_error('field_user_name', t("Numbers not allowed for name field."));
     }
     
     // validate if title field accept number
-    if (!ctype_alpha($title)) {
-      form_set_error('title', t("Only letters are allowed for title field."));
+    if (preg_match('#[0-9]#',$title)){ 
+      form_set_error('title', t("Numbers not allowed for title field."));
     }
 
     // validate Email
@@ -346,12 +347,17 @@ function itg_ugc_node_presave($node) {
  * @param string $title
  */
 function itg_ugc_node_status_update($nid, $title) {
+  global $user;
   $node = node_load($nid);
+  $node_author = user_load($user->uid);
+  $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'].' '.$node_author->field_last_name[LANGUAGE_NONE][0]['value'];
   // set status property to 0
   $node->status = 0;
   if (!empty($title)) {
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 1;
+    
   }
+  $node->field_source[LANGUAGE_NONE][0]['value'] = $rejected_by;
   // re-save the node
   node_save($node);
 

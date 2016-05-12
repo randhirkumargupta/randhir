@@ -206,6 +206,15 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing_2']['alter']['path'] = 'event-users-list/[nid]';
   $handler->display->display_options['fields']['nothing_2']['alter']['target'] = '_blank';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
+  $handler->display->display_options['fields']['nothing_3']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_3']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_3']['label'] = 'Actions';
+  $handler->display->display_options['fields']['nothing_3']['alter']['text'] = 'View';
+  $handler->display->display_options['fields']['nothing_3']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_3']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['nothing_3']['alter']['target'] = '_blank';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';

@@ -16,6 +16,10 @@
         $('.vertical-tabs-list').hide();
         $('#edit-metatags').show();
       }
+      
+      //Hide skip button
+      $('#edit-skip').hide();
+      $('#edit-skip-1').hide();
 
       if(nid == '' || nid == null){
         if($('input[name="field_erf_registration[und][0][field_first_name][und][0][value]"]').val() == '' || $('input[name="field_erf_registration[und][0][field_first_name][und][0][value]"]').val() == 'undefined') {
