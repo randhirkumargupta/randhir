@@ -97,6 +97,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#default_value'] = $node->title;
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
     $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'UGC';
+    $form['field_gallery_kicer'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
     
     foreach ($form['field_gallery_image']['und'] as $delta => $field) {
       if (is_numeric($delta)) {
@@ -135,9 +136,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
   // Hide/show description field
   $form['field_user_message']['#states'] = array(
-    'invisible' => array(
-      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
-    ),
     'required' => array(
       ':input[name="field_ugc_ctype[und]"]' => array(
         array('value' => 'story'),
@@ -226,9 +224,9 @@ function itg_ugc_after_build($form, &$form_state) {
 
 /**
  * Implements hook_node_validate().
+ * @param type $node
  * @param type $form
- * @param type $form
- * @param type $form   
+ * @param type $form_state   
  */
 function itg_ugc_node_validate($node, $form, &$form_state) {
 
@@ -245,6 +243,10 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     $upload_audio = $node->field_recipe_audio[LANGUAGE_NONE][0]['fid'];
     // get email of user
     $user_email = $node->field_user_email[LANGUAGE_NONE][0]['value'];
+    // get name of user
+    $user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
+    // get email of user
+    $title = $node->title;
 
     // validate if decription field is blank
     if ($type == 'story' || $type == 'recipe' || $type == 'audio' || $type == 'blog') {
@@ -253,6 +255,16 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
       }
     }
     
+    // validate if name field accept number
+    if (!ctype_alpha($user_name)) {
+      form_set_error('field_user_name', t("Only letters are allowed for name field."));
+    }
+    
+    // validate if title field accept number
+    if (!ctype_alpha($title)) {
+      form_set_error('title', t("Only letters are allowed for title field."));
+    }
+
     // validate Email
     
     if (!valid_email_address($user_email)) {
@@ -286,6 +298,7 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
  * Implement hook_form_views_exposed_form_alter
  * @param Array $form
  * @param Array $form_state
+ * @param Array $form_id
  */
 function itg_ugc_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
@@ -329,6 +342,8 @@ function itg_ugc_node_presave($node) {
 
 /**
  * Implement itg_ugc_node_status_update
+ * @param int $nid
+ * @param string $title
  */
 function itg_ugc_node_status_update($nid, $title) {
   $node = node_load($nid);
