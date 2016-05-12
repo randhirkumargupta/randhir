@@ -311,11 +311,15 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['relations']['#attributes'] = array('disabled' => TRUE);
       }
       // Taxonomy active deactive logic
-      $form['term_state'] = array(
+      $form['term-state-wrap'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Term Status'),
+        '#weight' => 3,
+      );
+      $form['term-state-wrap']['term_state'] = array(
         '#prefix' => '<div class="itg-term-state"><label>'.t('Term State').'</label>',
         '#type' => 'checkbox',
-        '#title' => t('Active'),
-        '#weight' => 20,
+        '#title' => t('Active'),        
         '#default_value' => $form['tid']['#value'] == NULL ? TRUE : itg_category_manager_term_state($form['tid']['#value']),
         '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
         '#suffix' => '</div>',
@@ -323,11 +327,10 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       if ($form['tid']['#value'] !== NULL) {
         $term_status = itg_category_manager_term_state($form['tid']['#value']);
         if ($term_status) {
-          $form['state-mode'] = array(
+          $form['term-state-wrap']['state-mode'] = array(
             '#type' => 'radios',
             '#title' => t('Disable mode'),
-            '#options' => array('Forcefully', 'Manually'),          
-            '#weight' => 20,
+            '#options' => array('Forcefully', 'Manually'),                      
             '#states' => array(
               'visible' => array(
                 ':input[name="term_state"]' => array('checked' => FALSE),
@@ -336,7 +339,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
           );
         }
         else {
-          $form['term_state']['#description'] = t('This category is currently in inactive mode.');          
+          $form['term-state-wrap']['term_state']['#description'] = t('This category is currently in inactive mode.');          
         }
         
       }

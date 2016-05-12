@@ -304,7 +304,7 @@ function itg_social_media_block_view($delta = '') {
  * get type of the node from nid.
  *
  * @param int $nid
- * @return mixed
+ * @return string
  */
 function itg_social_media_node_type($nid) {
   $itg_query = db_select('node', 'n');
