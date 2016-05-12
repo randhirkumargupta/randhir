@@ -240,8 +240,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     $tid = $form_state['term']->tid;
     $used_by_content = taxonomy_select_nodes($tid);
     if (count($used_by_content) > 0) {
-      form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
-
+      form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));      
       $count_used = count($used_by_content);
       drupal_set_message(t('This category is mapped with ' . $count_used . ' contents.') . l(' Click here', 'category-remove-from-node/' . $tid, array('attributes' => array('target' => '_blank'))), 'status');
       if ($user->uid != 1) {
