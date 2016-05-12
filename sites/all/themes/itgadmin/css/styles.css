@@ -96,7 +96,7 @@ img {
 [id*="field-associate-sponsors-values"] thead,
 [id*="field-event-highlights-values"] thead,
 [id*="field-event-media-values"] thead,
-[id*="field-mega-review-review-values"] thead, .grippie {
+[id*="field-mega-review-review-values"] thead, [id*="field-event-media-values"] .field-type-file, .grippie {
   display: none;
 }
 
