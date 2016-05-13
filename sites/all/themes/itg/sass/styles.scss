@@ -347,7 +347,7 @@ input[type="text"], select, input[type="password"]{
     color: #ee4d4d;
   }
 }
-
+.breadcrumb{display: none;}
 #content{
   .node-form{
     .form-type-textfield, 
@@ -388,6 +388,7 @@ input[type="text"], select, input[type="password"]{
       padding-left: 250px;
       .form-submit{
         @extend .btn;
+        margin-right: 8px;
       }
     }
     span.error{
@@ -405,7 +406,7 @@ input[type="text"], select, input[type="password"]{
   }
   fieldset.captcha {
     max-width: 400px;
-    margin: 0 0 30px;
+    margin: 0 0 30px 250px;
     padding: 10px;
   }
 }
@@ -422,6 +423,7 @@ input[type="text"], select, input[type="password"]{
   .field-multiple-table{
     @extend .full;
     thead{
+      display: none;
       th{
         background-color: #fefafb;
         border-top: 1px solid #d9d9d9;
@@ -437,7 +439,7 @@ input[type="text"], select, input[type="password"]{
       .field-multiple-drag{
         @extend .hide;
       }
-      td{
+      td, td > .ajax-new-content{
         > .form-submit{
           @extend .btn;
           @extend .btn-cancel;
