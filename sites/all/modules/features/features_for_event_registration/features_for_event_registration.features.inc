@@ -8,6 +8,9 @@
  * Implements hook_ctools_plugin_api().
  */
 function features_for_event_registration_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "msnf" && $api == "msnf") {
+    return array("version" => "1");
+  }
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }

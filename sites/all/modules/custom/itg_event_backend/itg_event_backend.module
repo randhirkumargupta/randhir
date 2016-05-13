@@ -33,6 +33,13 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
    if (isset($form_state['storage']['step'])){
       $_SESSION['current_step'] = $form_state['storage']['step'];
    }
+   
+  if(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit"){
+    if($form['#node']->status == 1){
+      drupal_add_js('jQuery(document).ready(function(){ jQuery("#edit-field-event-start-date-und-0-value-datepicker-popup-1").attr("disabled", "disabled")});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+      drupal_add_js('jQuery(document).ready(function(){ jQuery("#edit-field-event-close-date-und-0-value-datepicker-popup-1").attr("disabled", "disabled")});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+    }
+  }
   }
   if($form_id == 'sponsor_node_form'){
       $form['#after_build'][] = 'itg_event_backend_sponsor';
@@ -46,10 +53,14 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
 function itg_event_backend_node_form_validate($form, &$form_state) {
   $startdate = strtotime($form_state['values']['field_event_start_date'][LANGUAGE_NONE][0]['value']);
   $enddate = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
+  $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   if($enddate < $startdate){
     form_set_error('field_event_close_date', 'Close Date must greater then start date.');
   }
-
+  if($registration_close > $enddate){
+    form_set_error('field_registration_close_date', 'Registration Date must less then event close date.');
+  }
+  
   $event_type = $form_state['values']['field_event_type'][LANGUAGE_NONE][0]['value'];
   if($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == ''){
     form_set_error('field_group_registration_fee_5', 'Group Registration Fee (upto 5) is required.');

@@ -60,6 +60,8 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'event_registration_node_form') {
 
+    //Fields treatment
+    unset($form['#metatags']);
     unset($form['actions']['preview']);
     $form['title']['#description'] = t('Please enter first name.');
 
@@ -110,10 +112,9 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   //Add JS for Event Registration
   drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
 
-  //Unset metatag description
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
-
+  //Hide SEF url path setting
+  //$form['path']['#access'] = FALSE;
+  
   return $form;
 }
 
@@ -176,5 +177,33 @@ function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_sta
     //Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/event_registration/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+}
+
+/**
+ * Implementation of hook_node_validate
+ * 
+ * @param object $node
+ *   Contains whole information of current node
+ */
+function itg_event_registration_node_validate($node){
+  
+  if ($node->type == 'event_registration') {
+    if (!empty($node->title)) {
+      if (!preg_match("/^[a-zA-Z ]*$/", $node->title)) {
+        form_set_error('title', t('First Name must be alphabetic.'));
+      }
+    }
+    if (!empty($node->field_last_name[LANGUAGE_NONE][0]['value'])) {
+      if (!preg_match("/^[a-zA-Z ]*$/", $node->field_last_name[LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_last_name', t('Last Name must be alphabetic.'));
+      }
+    }
+
+    if (!empty($node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
+      if (!preg_match("/^[0-9]{10}$/", $node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_erf_mobile', t('Mobile number must be 10 digit numeric value.'));
+      }
+    }
   }
 }
