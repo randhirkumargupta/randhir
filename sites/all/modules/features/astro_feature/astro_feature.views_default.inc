@@ -11,7 +11,7 @@ function astro_feature_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'manage_astroo';
+  $view->name = 'manage_astro';
   $view->description = 'Manage astro content and listing.';
   $view->tag = 'default';
   $view->base_table = 'node';
@@ -495,7 +495,7 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['filters']['field_astro_type_tid']['vocabulary'] = 'astro_type';
   $handler->display->display_options['filters']['field_astro_type_tid']['error_message'] = FALSE;
   $handler->display->display_options['path'] = 'manage-astro';
-  $export['manage_astroo'] = $view;
+  $export['manage_astro'] = $view;
 
   return $export;
 }

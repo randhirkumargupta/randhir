@@ -346,22 +346,30 @@ function itg_astro_menu_alter(&$item) {
  * Implement hook_views_pre_render
  * @param stdObject $view
  */
-function itg_astro_views_pre_render(&$view) {    
-  //Add "Create Breaking news" on listing page of Breaking news  
-  if ($view->name == "manage_astroo") {
-    $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
-    $header_content_astro .= l(t('File Astro'), 'node/add/astro', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
-    $view->attachment_before = $header_content_astro;    
-  }
-  if ($view->name == 'category_manager_dev') {    
-    $header_content_astro = '<span class="count">Count(' . count($view->result) . ')&nbsp;</span>';  
-    $header_content_astro .= l(t('Create Category'), 'admin/structure/taxonomy/category_management/add');
-    $view->attachment_before = $header_content_astro;
-  }
-  if ($view->name == 'syndication_client') {
-    $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
-    $header_content_astro .= l(t('Create Client'), 'node/add/syndication-client');    
-    $view->attachment_before = $header_content_astro;
+function itg_astro_views_pre_render(&$view) {  
+  switch ($view->name) {
+    case 'associated_content':
+      $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';        
+      $view->attachment_before = $header_content_astro;    
+      break;
+      
+    case 'manage_astro':
+      $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
+      $header_content_astro .= l(t('File Astro'), 'node/add/astro', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
+      $view->attachment_before = $header_content_astro;    
+      break;
+  
+    case 'category_manager':
+      $header_content_astro = '<span class="count">Count(' . count($view->result) . ')&nbsp;</span>';  
+      $header_content_astro .= l(t('Create Category'), 'admin/structure/taxonomy/category_management/add');
+      $view->attachment_before = $header_content_astro;
+      break;
+    
+    case 'syndication_client':
+      $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
+      $header_content_astro .= l(t('Create Client'), 'node/add/syndication-client');    
+      $view->attachment_before = $header_content_astro;
+      break;
   }
 }
 
