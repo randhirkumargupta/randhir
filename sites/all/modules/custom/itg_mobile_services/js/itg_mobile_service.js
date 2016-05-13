@@ -112,6 +112,8 @@ var fixedDate = '';
 
 
             $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').attr('disabled', 'disabled');
+            // $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val('');
+            // $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
             $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').keyup(function () {
                 $(this).val('');
                 alert('Please select date from Calendar');
@@ -176,7 +178,7 @@ var fixedDate = '';
 
                     if (firstTime > 1) {
                         for (var ii = 1; ii <= rowCount; ) {
-                            jQuery('.button-remove').mousedown();
+                            jQuery("input[name='field_service_content_und_" + ii + "_remove_button']").mousedown();
                             ii++;
                         }
                     }
@@ -185,6 +187,7 @@ var fixedDate = '';
 
                 jQuery('#edit-field-service-content-add-more-number').val(diff);
                 jQuery('.field-name-field-service-content .field-add-more-submit').mousedown();
+
 
             }
 
@@ -201,7 +204,7 @@ var fixedDate = '';
                     start_date = start_date[start_date.length - 1]
                 }
                 start_date = start_date - today_date;
-                var no_of_days = 1 + jQuery('#edit-field-service-content-add-more-number').val();
+                var no_of_days = 1 + parseInt(jQuery('#edit-field-service-content-add-more-number').val());
 
 
                 for (var i = 0; i <= no_of_days; ) {

@@ -129,7 +129,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['#submit'][] = 'itg_mobile_client_association_submit';
 
       break;
-      case 'vas_service_content_node_form':
+    case 'vas_service_content_node_form':
       $form['metatags']['#type'] = 'hidden';
       unset($form['actions']['preview']);
 
@@ -165,18 +165,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
           'id' => 'content-format-hidden',
         ),
       );
-    //  dpm($form);
-    //  p($form['nid']);
-     // $form['nid']['#value'] = ($form['nid']['#value']) ? $form['nid']['#value'] : '266666';
-     // $form['field_service_content'][LANGUAGE_NONE]['add_more']['#id'] = 'field_service_content_unique_id_' . $form['nid']['#value'];
-     // $form['field_service_content'][LANGUAGE_NONE]['add_more']['#name'] = 'field_service_content_unique_id_' . $form['nid']['#value'];
 
-    //  $form['field_service_content'][LANGUAGE_NONE]['add_more']['#ajax']['wrapper'] = 'field_service_content_unique_wrapper_' . $form['nid']['#value'];
-
-    //  $form['field_service_content'][LANGUAGE_NONE]['#prefix'] = str_replace('"custom_service_content_field-add-more-wrapper"', '"field_service_content_unique_wrapper_' . $form['nid']['#value'] . '"',$form['field_service_content'][LANGUAGE_NONE]['#prefix']);
-      
-      
-     // $form['field_story_client_title']['#attributes']['readonly'] = 'readonly';
 
       $form['#validate'][] = 'itg_mobile_association_validator';
       $form['#after_build'][] = 'itg_service_content_after_build';
@@ -236,7 +225,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         $_GET['destination'] = 'service-content-listing';
       }
       break;
-      
   }
   return $form;
 }
@@ -663,12 +651,12 @@ function itg_service_content_after_build($form, &$form_state) {
 
   $settings = array('base_url' => $base_url);
   drupal_add_js(array('itg_mobile_services' => $settings), 'setting');
-  
+
   $form['path']['#access'] = FALSE;
   $form['title']['#attributes']['readonly'] = 'readonly';
-  
- $form['field_story_client_title'][LANGUAGE_NONE][0]['value']['#attributes']['readonly'] = 'readonly';
-  
+
+  $form['field_story_client_title'][LANGUAGE_NONE][0]['value']['#attributes']['readonly'] = 'readonly';
+
   $form_state['redirect'] = 'service-content-listing';
   return $form;
 }
@@ -722,7 +710,7 @@ function itg_mobile_service_after_build($form, &$form_state) {
 function itg_mobile_content_custom_callback(&$form, &$form_state) {
   $form_state['redirect'] = 'service-content-listing';
   $commands = array();
-  
+
   $commands[] = ajax_command_invoke('.field-name-field-story-expert-description', 'hide');
   $commands[] = ajax_command_invoke('.field-name-field-service-audio', 'hide');
   $commands[] = ajax_command_invoke('.field-name-field-service-video', 'hide');
