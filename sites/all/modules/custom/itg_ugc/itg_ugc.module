@@ -388,7 +388,7 @@ function itg_ugc_node_insert($node) {
       $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 
       if ($source_type == 'UGC' && !empty($source_id)) {
-        itg_ugc_node_status_update($source_id,$title);
+        itg_ugc_node_status_update($source_id, $title);
       }
     }
 }
