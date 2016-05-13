@@ -18,7 +18,7 @@ function features_for_event_registration_msnf_step_info() {
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_registration';
   $msnf->data = array(
-    'label' => 'Basic Details:',
+    'label' => 'Step 1 - Basic Details:',
     'weight' => '0',
     'children' => array(
       0 => 'field_last_name',
@@ -28,7 +28,7 @@ function features_for_event_registration_msnf_step_info() {
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Basic Details:',
+      'label' => 'Step 1 - Basic Details:',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,
@@ -54,7 +54,7 @@ function features_for_event_registration_msnf_step_info() {
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_registration';
   $msnf->data = array(
-    'label' => 'Company Details:',
+    'label' => 'Step 2 - Company Details:',
     'weight' => '1',
     'children' => array(
       0 => 'field_erf_company_name',
@@ -67,7 +67,7 @@ function features_for_event_registration_msnf_step_info() {
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Company Details:',
+      'label' => 'Step 2 - Company Details:',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,
@@ -93,7 +93,7 @@ function features_for_event_registration_msnf_step_info() {
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_registration';
   $msnf->data = array(
-    'label' => 'Order Summary:',
+    'label' => 'Step 4 - Order Summary:',
     'weight' => '3',
     'children' => array(
       0 => 'field_erf_payment_gateway',
@@ -101,7 +101,7 @@ function features_for_event_registration_msnf_step_info() {
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Order Summary:',
+      'label' => 'Step 4 - Order Summary:',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,
@@ -127,14 +127,14 @@ function features_for_event_registration_msnf_step_info() {
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_registration';
   $msnf->data = array(
-    'label' => 'Registration Fee:',
+    'label' => 'Step 3 - Registration Details:',
     'weight' => '2',
     'children' => array(
       0 => 'field_erf_registration_fee',
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Registration Fee:',
+      'label' => 'Step 3 - Registration Details:',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,

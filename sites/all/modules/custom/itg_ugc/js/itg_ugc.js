@@ -66,6 +66,95 @@
             });
             
             
+                           
+                 $('#edit-field-user-name-und-0-value, #edit-title').keyup(function () { 
+                 this.value = this.value.replace(/[^a-zA-Z\s.]/g,'');
+                  });  
+            
+            // client side validation
+            
+            // Custom validator function for social media start
+      $("#ugc-node-form").validate({
+        submitHandler: function (form) {
+          $('input:submit').attr('disabled', 'disabled');
+          form.submit();
+        },
+        onfocusout: function (element) {
+          $(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          var elementName = element.attr('name');
+          var errorPlaceHolder = '';
+          switch (elementName) {
+            
+            default:
+              errorPlaceHolder = element.parent();
+          }
+          error.appendTo(errorPlaceHolder);
+        },
+        rules: {
+          'field_user_name[und][0][value]': {
+            required: true
+            
+          },
+          'field_user_email[und][0][value]': {
+            required: true,
+            email: true
+          },
+          'title': {
+            required: true
+            
+          },
+          'field_ugc_ctype[und]': {
+            required: true,
+            validateSignName: true
+           
+          },
+          'captcha_response': {
+            required: true
+           
+          },
+          
+        },
+        messages: {
+          'field_user_name[und][0][value]': {
+            required: 'Name field is required.'
+          },
+          'field_user_email[und][0][value]': {
+            required: 'Email field is required.'
+           
+          },
+          'title': {
+            required: 'Title field is required.'
+          },
+          'field_ugc_ctype[und]': {
+            required: 'Content Type field is required.'
+          },
+          'captcha_response': {
+            required: 'Captcha field is required.'
+          }
+        }
+      });
+      
+      // validate content type drop down
+       jQuery.validator.addMethod("validateSignName", function (value, element) {
+        return validateSignNameValue(value, element);
+      }, "Content Type field is required.");
+      
+            
+      // validate content type drop down
+      function validateSignNameValue(event, element) {
+        if ($(element).val() == '_none') {
+          return false;
+        }
+        else {
+          return true;
+        }
+      }
+    
+            
     }
 
   };
