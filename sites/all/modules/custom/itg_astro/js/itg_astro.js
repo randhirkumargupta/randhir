@@ -270,8 +270,8 @@
               }
             }
           },
-          'field_astro_numerology_values[und][0][field_astro_select_number][und]': {
-            validateSignName: {
+          'field_astro_numerology_values[und][1][field_buzz_description][und][0][value]': {
+            required: {
               depends: function () {
                 var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
                 if (astroType == 'Numerology') {
@@ -283,6 +283,313 @@
               }
             }
           },
+          'field_astro_numerology_values[und][2][field_buzz_description][und][0][value]': {
+            required: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][3][field_buzz_description][und][0][value]': {
+            required: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][4][field_buzz_description][und][0][value]': {
+            required: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][5][field_buzz_description][und][0][value]': {
+            required: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][6][field_buzz_description][und][0][value]': {
+            required: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][7][field_buzz_description][und][0][value]': {
+            required: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][8][field_buzz_description][und][0][value]': {
+            required: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][0][field_astro_select_number][und]': {
+            validateSignName: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            dupliNumero: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][1][field_astro_select_number][und]': {
+            validateSignName: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            dupliNumero: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][2][field_astro_select_number][und]': {
+            validateSignName: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            dupliNumero: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][3][field_astro_select_number][und]': {
+            validateSignName: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            dupliNumero: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][4][field_astro_select_number][und]': {
+            validateSignName: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            dupliNumero: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][5][field_astro_select_number][und]': {
+            validateSignName: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            dupliNumero: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][6][field_astro_select_number][und]': {
+            validateSignName: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            dupliNumero: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][7][field_astro_select_number][und]': {
+            validateSignName: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            dupliNumero: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },
+          'field_astro_numerology_values[und][8][field_astro_select_number][und]': {
+            validateSignName: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            dupliNumero: {
+              depends: function () {
+                var astroType = $('select[name="field_astro_type[und]"').find('option:selected').text();
+                if (astroType == 'Numerology') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          },          
           'field_astro_type[und]': {
             required: true,
             validateSignName: true
@@ -342,6 +649,30 @@
           'field_astro_numerology_values[und][0][field_buzz_description][und][0][value]': {
             required: 'This field is required.'
           },
+          'field_astro_numerology_values[und][1][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_numerology_values[und][2][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_numerology_values[und][3][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_numerology_values[und][4][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_numerology_values[und][5][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_numerology_values[und][6][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_numerology_values[und][7][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
+          'field_astro_numerology_values[und][8][field_buzz_description][und][0][value]': {
+            required: 'This field is required.'
+          },
           'field_astro_zodiac[und][0][field_buzz_description][und][0][value]': {
             required: 'This field is required.'
           },
@@ -386,6 +717,9 @@
       jQuery.validator.addMethod("validateSignName", function (value, element) {
         return validateSignNameValue(value, element);
       }, "This field is required.");
+      jQuery.validator.addMethod("dupliNumero", function (value, element) {
+        return dupliNumeroValue(value, element);
+      }, "This is duplicate value.");
 
 
       // validate date difference
@@ -412,6 +746,22 @@
         else {
           return true;
         }
+      }
+      
+      // Check duplicate numerology field value.
+      function dupliNumeroValue(value, element) {
+        var counter = 0;
+        jQuery('.field-name-field-astro-numerology-values').find('.form-select').each(function () {           
+          if ($(this).val() == value) {
+            ++counter;
+          }
+        });        
+        if (counter >= 2) {
+          return false;
+        }
+        else {
+          return true;
+        }        
       }
 
       // Common function to reset all values

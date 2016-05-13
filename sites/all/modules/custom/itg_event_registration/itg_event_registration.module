@@ -64,6 +64,20 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     unset($form['#metatags']);
     unset($form['actions']['preview']);
     $form['title']['#description'] = t('Please enter first name.');
+    
+    if ($form_state['storage']['step'] == 'step_erf_order_summary') {
+      $current_event_nid = $_GET['event_id'];
+      // If free then
+      //You are welcome in event "ABC". Please click on "Save" button to complete your registration.
+      if (isset($current_event_nid)) {
+        //$event_node = node_load($current_event_nid);
+        $total_fee = 5433.00;
+      } else {
+        $total_fee = 0.00;
+      }
+      $form['field_erf_total_fee'][LANGUAGE_NONE][0]['value']['#value'] = $total_fee;
+      $form['field_erf_total_fee']['#disabled'] = TRUE;
+    }
 
     //Call function after form build
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
