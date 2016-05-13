@@ -94,7 +94,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 59, ../sass/styles.scss */
-.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"] {
+.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"] {
   display: inline-block;
 }
 
@@ -104,7 +104,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 65, ../sass/styles.scss */
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"] {
+.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"] {
   vertical-align: top;
 }
 
@@ -129,7 +129,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 80, ../sass/styles.scss */
-.btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit {
+.btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
   color: #fff;
@@ -426,7 +426,7 @@ input[type="text"], select, input[type="password"] {
 }
 
 /* line 340, ../sass/styles.scss */
-.btn-cancel, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit {
+.btn-cancel, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit {
   background-color: #fff;
   border: 1px solid #ee4d4d;
   color: #ee4d4d;
@@ -436,6 +436,11 @@ input[type="text"], select, input[type="password"] {
   background-color: #fff;
   border: 1px solid #ee4d4d;
   color: #ee4d4d;
+}
+
+/* line 350, ../sass/styles.scss */
+.breadcrumb {
+  display: none;
 }
 
 /* line 362, ../sass/styles.scss */
@@ -489,34 +494,42 @@ input[type="text"], select, input[type="password"] {
 #content .node-form .form-actions {
   padding-left: 250px;
 }
-/* line 393, ../sass/styles.scss */
+/* line 389, ../sass/styles.scss */
+#content .node-form .form-actions .form-submit {
+  margin-right: 8px;
+}
+/* line 394, ../sass/styles.scss */
 #content .node-form span.error {
   display: block;
   padding-left: 220px;
 }
-/* line 400, ../sass/styles.scss */
+/* line 401, ../sass/styles.scss */
 #content .node-form div.description {
   color: #5f5f5f;
   font-size: 12px;
   padding-left: 220px;
 }
-/* line 406, ../sass/styles.scss */
+/* line 407, ../sass/styles.scss */
 #content fieldset.captcha {
   max-width: 400px;
-  margin: 0 0 30px;
+  margin: 0 0 30px 250px;
   padding: 10px;
 }
 
-/* line 412, ../sass/styles.scss */
+/* line 413, ../sass/styles.scss */
 [id*="edit-field-ugc-ctype-und"] option + option {
   text-transform: capitalize;
 }
 
-/* line 419, ../sass/styles.scss */
+/* line 420, ../sass/styles.scss */
 .form-field-type-field-collection .tabledrag-toggle-weight-wrapper {
   display: none;
 }
 /* line 425, ../sass/styles.scss */
+.form-field-type-field-collection .field-multiple-table thead {
+  display: none;
+}
+/* line 427, ../sass/styles.scss */
 .form-field-type-field-collection .field-multiple-table thead th {
   background-color: #fefafb;
   border-top: 1px solid #d9d9d9;
@@ -527,11 +540,11 @@ input[type="text"], select, input[type="password"] {
   margin: 15px 0;
   text-align: left;
 }
-/* line 441, ../sass/styles.scss */
-.form-field-type-field-collection .field-multiple-table tbody td > .form-submit {
+/* line 443, ../sass/styles.scss */
+.form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit {
   margin-left: 220px;
 }
-/* line 449, ../sass/styles.scss */
+/* line 451, ../sass/styles.scss */
 .form-field-type-field-collection .field-multiple-table + .clearfix .form-submit {
   margin-left: 220px;
 }
