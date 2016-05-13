@@ -188,20 +188,22 @@ function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_sta
  */
 function itg_event_registration_node_validate($node){
   
-  if (!empty($node->title)) {
-    if (!preg_match("/^[a-zA-Z ]*$/", $node->title)) {
-      form_set_error('title', t('First Name must be alphabetic.'));
+  if ($node->type == 'event_registration') {
+    if (!empty($node->title)) {
+      if (!preg_match("/^[a-zA-Z ]*$/", $node->title)) {
+        form_set_error('title', t('First Name must be alphabetic.'));
+      }
     }
-  }
-  if (!empty($node->field_last_name[LANGUAGE_NONE][0]['value'])) {
-    if (!preg_match("/^[a-zA-Z ]*$/", $node->field_last_name[LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_last_name', t('Last Name must be alphabetic.'));
+    if (!empty($node->field_last_name[LANGUAGE_NONE][0]['value'])) {
+      if (!preg_match("/^[a-zA-Z ]*$/", $node->field_last_name[LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_last_name', t('Last Name must be alphabetic.'));
+      }
     }
-  }
 
-  if (!empty($node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
-    if (!preg_match("/^[0-9]{10}$/", $node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_erf_mobile', t('Mobile number must be 10 digit numeric value.'));
+    if (!empty($node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
+      if (!preg_match("/^[0-9]{10}$/", $node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_erf_mobile', t('Mobile number must be 10 digit numeric value.'));
+      }
     }
   }
 }
