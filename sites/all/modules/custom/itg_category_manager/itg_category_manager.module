@@ -314,7 +314,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['term-state-wrap'] = array(
         '#type' => 'fieldset',
         '#title' => t('Term Status'),
-        '#weight' => 3,
+        '#weight' => 4,
       );
       $form['term-state-wrap']['term_state'] = array(
         '#prefix' => '<div class="itg-term-state"><label>'.t('Term State').'</label>',
