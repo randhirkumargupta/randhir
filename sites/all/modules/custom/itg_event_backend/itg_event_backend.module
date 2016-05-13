@@ -25,6 +25,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       '#markup' => l(t('Cancel'), 'manage-event-backend', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,
     );
+    // Node redirection code
     if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule')) {
        // $form['#submit'][] = 'custom_node_submit';
          $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect'; 
@@ -130,6 +131,13 @@ function itg_event_backend_after_build($form, &$form_state) {
     if (is_numeric($key)) {
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
+//      drupal_rebuild_form($form_state['build_info']['form_id'], $form_state, $form);
+//      $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#ajax'] = array(
+//        'event' => 'change',
+//        'callback' => 'programmes_ajax_callback',
+//        'method' => 'replace',
+//        'wrapper' => 'countries_wrapper'
+//      );
     }
   }
 //event media
@@ -205,12 +213,12 @@ function itg_event_backend_configuration_redirect($form, &$form_state) {
  * Implements hook_node_insert().
  * @param Object $node
  */
-function itg_event_backend_node_insert($node) {
-  if ($node->type == "event_backend") {
-    drupal_goto('node/' . $node->nid . '/edit', array('query' => array('step' => 'step_sponsor')));
-  //  $_REQUEST['destination'] = 'node/' . $node->nid . '/edit?step=step_sponsor';
-  }
-}
+//function itg_event_backend_node_insert($node) {
+//  if ($node->type == "event_backend") {
+//    drupal_goto('node/' . $node->nid . '/edit', array('query' => array('step' => 'step_sponsor')));
+//  //  $_REQUEST['destination'] = 'node/' . $node->nid . '/edit?step=step_sponsor';
+//  }
+//}
 
 /**
  * Returns every date between two dates as an array
