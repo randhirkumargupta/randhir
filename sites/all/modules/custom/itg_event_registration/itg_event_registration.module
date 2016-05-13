@@ -18,9 +18,9 @@ function itg_event_registration_menu() {
 
   $items = array();
 
-  $items['event-registration/%'] = array(
+  $items['event-registration'] = array(
       'title' => t('Event Registration'),
-      'page arguments' => array('itg_event_registration_form'),
+      'page callback' => 'itg_event_registration_form',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_event_registration.inc',
@@ -133,14 +133,20 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
-  $form_state['redirect'] = 'node/add/event-registration';
 
   //Set custom message on creation of event registration form.
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
- 
-    drupal_set_message(t('Congratulations! You have successfully registered yourself for the event.'));
+
+  //Set Redirection after completion of event registration form
+  if (!empty($_GET['event_id'])) {
+    $form_state['redirect'] = array('event-registration', array('query' => array('event_id' => $_GET['event_id'])));
+  } else {
+    $form_state['redirect'] = 'event-registration';
+  }
+
+  drupal_set_message(t('Congratulations! You have successfully registered yourself for the event.'));
 }
 
 /**
@@ -153,7 +159,7 @@ function itg_event_registration_views_pre_render(&$view) {
   //Add "Event Registration" button on listing page of event registered user
   if ($view->name == "manage_event_registration") {
     $header_content_event = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_event .= l(t('Registration for Event'), 'node/add/event-registration');
+    $header_content_event .= l(t('Registration for Event'), 'event-registration');
     $view->attachment_before = $header_content_event;
   }
 }

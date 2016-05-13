@@ -26,6 +26,15 @@
           $('input[name="field_erf_registration_und_0_remove_button"]').hide();
         }
       }
+      
+      //Validation of event registration fields
+      $('#edit-field-last-name-und-0-value, #edit-title').keyup(function() {
+        this.value = this.value.replace(/[^a-zA-Z\s.]/g, '');
+      });
+      
+      $('#edit-field-erf-mobile-und-0-value, #edit-field-erf-postal-code-und-0-value').keyup(function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+      });
     }
   };
 })(jQuery, Drupal, this, this.document);
