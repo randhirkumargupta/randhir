@@ -18,9 +18,9 @@ function itg_event_registration_menu() {
 
   $items = array();
 
-  $items['event-registration/%'] = array(
+  $items['event-registration'] = array(
       'title' => t('Event Registration'),
-      'page arguments' => array('itg_event_registration_form'),
+      'page callback' => 'itg_event_registration_form',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_event_registration.inc',
@@ -64,6 +64,20 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     unset($form['#metatags']);
     unset($form['actions']['preview']);
     $form['title']['#description'] = t('Please enter first name.');
+    
+    if ($form_state['storage']['step'] == 'step_erf_order_summary') {
+      $current_event_nid = $_GET['event_id'];
+      // If free then
+      //You are welcome in event "ABC". Please click on "Save" button to complete your registration.
+      if (isset($current_event_nid)) {
+        //$event_node = node_load($current_event_nid);
+        $total_fee = 5433.00;
+      } else {
+        $total_fee = 0.00;
+      }
+      $form['field_erf_total_fee'][LANGUAGE_NONE][0]['value']['#value'] = $total_fee;
+      $form['field_erf_total_fee']['#disabled'] = TRUE;
+    }
 
     //Call function after form build
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
@@ -133,14 +147,20 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
-  $form_state['redirect'] = 'node/add/event-registration';
 
   //Set custom message on creation of event registration form.
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
- 
-    drupal_set_message(t('Congratulations! You have successfully registered yourself for the event.'));
+
+  //Set Redirection after completion of event registration form
+  if (!empty($_GET['event_id'])) {
+    $form_state['redirect'] = array('event-registration', array('query' => array('event_id' => $_GET['event_id'])));
+  } else {
+    $form_state['redirect'] = 'event-registration';
+  }
+
+  drupal_set_message(t('Congratulations! You have successfully registered yourself for the event.'));
 }
 
 /**
@@ -153,7 +173,7 @@ function itg_event_registration_views_pre_render(&$view) {
   //Add "Event Registration" button on listing page of event registered user
   if ($view->name == "manage_event_registration") {
     $header_content_event = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_event .= l(t('Registration for Event'), 'node/add/event-registration');
+    $header_content_event .= l(t('Registration for Event'), 'event-registration');
     $view->attachment_before = $header_content_event;
   }
 }
@@ -188,18 +208,16 @@ function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_sta
  */
 function itg_event_registration_node_validate($node){
   
-  if (!empty($node->title)) {
+  if ($node->type == 'event_registration') {
+
     if (!preg_match("/^[a-zA-Z ]*$/", $node->title)) {
       form_set_error('title', t('First Name must be alphabetic.'));
     }
-  }
-  if (!empty($node->field_last_name[LANGUAGE_NONE][0]['value'])) {
+
     if (!preg_match("/^[a-zA-Z ]*$/", $node->field_last_name[LANGUAGE_NONE][0]['value'])) {
       form_set_error('field_last_name', t('Last Name must be alphabetic.'));
     }
-  }
 
-  if (!empty($node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
     if (!preg_match("/^[0-9]{10}$/", $node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
       form_set_error('field_erf_mobile', t('Mobile number must be 10 digit numeric value.'));
     }
