@@ -81,6 +81,7 @@
                 <?php
                 }
                 ?>  
+                  <div class="ugc-action">
                 <?php 
                 // create path for approve and reject
                $arg_id = arg(1);
@@ -88,9 +89,9 @@
                 if($node->status == '1') {
                   print '<strong>Action :</strong> ';
                   print l(  t('Approve'),  'node/add/'.$content_type.'/'.$arg_id,  array('attributes' =>array('class'=>'approve-ugc', 'id'=>'approve-ugc'), 'query'=>array('destination'=>'manage-ugc') ));
-                  print ' | ';
+                  
                   print l(  t('Reject'),  'ugc-title/'.$arg_id.'/reject',  array('attributes' =>array('class'=>'reject-ugc', 'id'=>'reject-ugc')));
-                  print ' | ';
+                  
                   print l(  t('Cancel'),  'manage-ugc',  array('attributes' =>array('class'=>'manage-ugc', 'id'=>'manage-ugc')));
                 }
                 else
@@ -99,6 +100,7 @@
                   print l(  t('Cancel'),  'reject-ugc-content-list',  array('attributes' =>array('class'=>'reject-ugc-content-list', 'id'=>'reject-ugc-content-list')));
                 }
                 ?>
+                    </div>
                 <?php
               // end of view mode full condition
               endif;
