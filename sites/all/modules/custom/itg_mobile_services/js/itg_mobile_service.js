@@ -78,9 +78,9 @@ var fixedDate = '';
                 }
 
                 if (selectedVal > 1) {
-                    jQuery('#edit-field-service-frequency-und-1').attr('disabled', true);
-                    jQuery('#edit-field-service-frequency-und-2').attr('disabled', true);
-                    jQuery('#edit-field-service-frequency-und-3').attr('disabled', true);
+                    //  jQuery('#edit-field-service-frequency-und-1').attr('disabled', true);
+                    //  jQuery('#edit-field-service-frequency-und-2').attr('disabled', true);
+                    //  jQuery('#edit-field-service-frequency-und-3').attr('disabled', true);
                     jQuery('#edit-field-service-frequency-date').show();
                     $('#edit-field-service-content').show();
                 }
@@ -111,7 +111,7 @@ var fixedDate = '';
 
 
 
-            $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').attr('disabled', 'disabled');
+            // $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').attr('disabled', 'disabled');
             // $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val('');
             // $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
             $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').keyup(function () {
@@ -151,7 +151,6 @@ var fixedDate = '';
                 firstDate++;
             } else {
                 $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker({
-                    minDate: 0,
                     maxDate: fixedDate,
                     onSelect: show_days,
                 });

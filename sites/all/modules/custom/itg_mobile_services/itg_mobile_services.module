@@ -169,6 +169,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       $form['#validate'][] = 'itg_mobile_association_validator';
       $form['#after_build'][] = 'itg_service_content_after_build';
+      $form['#submit'][] = 'itg_mobile_vas_service_content_submit';
       $form['field_service_association_title'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_assoc_service();
       $arg = arg();
       if ($arg[0] == 'node' && $arg[2] == 'edit' && $_REQUEST['destination'] == 'service-content-listing') {
@@ -396,11 +397,11 @@ function itg_mobile_services_token_update($node) {
 }
 
 /**
- * Custom submit callback for itg_mobile_client_association_submit
+ * Custom submit callback for itg_mobile_vas_service_content_submit
  * @param type $form
  * @param type $form_state
  */
-function itg_mobile_client_association_submit($form, &$form_state) {
+function itg_mobile_vas_service_content_submit($form, &$form_state) {
   global $user;
   $form_state['redirect'] = 'service-association-listing';
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
@@ -408,6 +409,25 @@ function itg_mobile_client_association_submit($form, &$form_state) {
   if ($association_nid) {
     $node = node_load($association_nid);
     $form_state['values']['title'] = $node->title;
+  }
+
+  return $form;
+}
+
+/**
+ * Custom submit callback for itg_mobile_client_association_submit
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_mobile_client_association_submit($form, &$form_state) {
+  global $user;
+  //$form_state['redirect'] = 'service-association-listing';
+  $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
+  watchdog('vas values', '<pre>' . print_($form_state['values']) . '</pre>');
+  if ($association_nid) {
+    $node = node_load($association_nid);
+    watchdog('vas array', '<pre>' . print_($node) . '</pre>');
+    // $form_state['values']['title'] = $node->title;
   }
 
   return $form;
@@ -515,7 +535,7 @@ function itg_mobile_services_validator($form, &$form_state) {
  * @param type $form_state
  */
 function itg_mobile_association_validator($form, &$form_state) {
-
+  //  p($form_state['values']);
   $target_id = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id']);
   $start_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value'];
   $end_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value2'];
@@ -915,7 +935,7 @@ function itg_mobile_services_views_pre_render(&$view) {
     }
     elseif (isset($view->current_display) && $view->current_display == "page_3") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-      $header_content_client .= l(t('Create Content'), 'node/add/create-content', array('query' => array('destination' => 'service-content-listing')));
+      $header_content_client .= l(t('Create Content'), 'node/add/vas-service-content', array('query' => array('destination' => 'service-content-listing')));
     }
 
     if (isset($header_content_client)) {
