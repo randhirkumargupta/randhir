@@ -363,6 +363,22 @@ function get_content_type_name($type) {
    return $content_type_name;
 }
 
+/**
+ * Get node title using nid
+ * 
+ * @param int $nid
+ *   unique id of current node
+ * 
+ * @return string
+ *   current node title
+ */
+function itg_common_get_node_title($nid){
+  $query = db_select('node', 'n')
+  ->fields('n', array('title'))
+  ->condition('n.nid', $nid, '=');
+
+return $query->execute()->fetchField();
+}
 
 /* functions for user role and permission display on my accountpage */
 

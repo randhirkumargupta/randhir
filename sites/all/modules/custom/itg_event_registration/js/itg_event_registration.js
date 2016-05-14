@@ -22,10 +22,9 @@
       $('#edit-skip-1').hide();
 
       if(nid == '' || nid == null){
-        if($('input[name="field_erf_registration[und][0][field_first_name][und][0][value]"]').val() == '' || $('input[name="field_erf_registration[und][0][field_first_name][und][0][value]"]').val() == 'undefined') {
           $('input[name="field_erf_registration_und_0_remove_button"]').hide();
+          $('#edit-field-erf-registration-fee-und-0-remove-button').hide();
         }
-      }
       
       //Validation of event registration fields
       $('#edit-field-last-name-und-0-value, #edit-title').keyup(function() {
