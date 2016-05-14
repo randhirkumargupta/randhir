@@ -493,6 +493,9 @@ input.password-confirm, input.password-field{
 .form-textarea-wrapper{
   .grippie{display: none !important;}
 }
+.form-type-textarea .field-edit-link{
+  @extend .hide;
+}
 fieldset.date-combo{
   border: none;
   .container-inline-date{
@@ -1835,5 +1838,29 @@ input[name="field_gallery_image_add_more"]{
 .field-name-field-mobile-subscribers{
   @extend .hide;
 }
-
+.node-itg_celebrity_profile-form{
+  .form-type-managed-file .form-managed-file + div.description{
+    left: 600px;
+  }
+  .image-widget-data{
+    input.form-file{
+      margin-top: 5px;
+      & + .form-submit{
+        @extend .add-more-wbg;
+      }
+    }
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
+  }
+}
+.node-category-form{
+  fieldset.path-form{
+    border: none;
+    legend{
+      @extend .hide;
+    }
+    .form-type-textfield{margin-top: 0;}
+  }
+}
 
