@@ -31,7 +31,7 @@ img {
   margin: 0;
 }
 
-.mt-10, .views-table, .node-story-form #Templates .form-field-type-text tbody td .ajax-new-content {
+.mt-10, ul.pager, .views-table, .node-story-form #Templates .form-field-type-text tbody td .ajax-new-content {
   margin-top: 10px;
 }
 
@@ -77,7 +77,7 @@ img {
   padding-right: 10px;
 }
 
-.no-bullet, div.form-type-password-confirm div.password-suggestions ul, #block-menu-menu-admin-left-menu > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
+.no-bullet, ul.pager, div.form-type-password-confirm div.password-suggestions ul, #block-menu-menu-admin-left-menu > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
@@ -91,11 +91,20 @@ img {
   text-decoration: none;
 }
 
-.hide, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, [id*="field-erf-registration-fee-values"] thead, [id*="field-event-media-values"] .field-type-file, .grippie {
+.hide, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, [id*="field-erf-registration-fee-values"] thead,
+[id*="field-mega-review-review-values"] thead, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .grippie {
   display: none;
 }
 
-.db, span.error, .dashboard-tab li a span {
+.db, .itg-add-another-item tbody, [id*="field-breaking-content-details-values"] tbody,
+[id*="field-program-schedule-values"] tbody,
+[id*="field-associate-sponsors-values"] tbody,
+[id*="field-event-highlights-values"] tbody,
+[id*="field-event-media-values"] tbody,
+[id*="field-newsl-add-news-values"] tbody,
+[id*="field-story-template-buzz-values"] tbody,
+[id*="field-erf-registration-fee-values"] tbody,
+[id*="field-mega-review-review-values"] tbody, span.error, .dashboard-tab li a span {
   display: block;
 }
 
@@ -108,6 +117,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
@@ -115,9 +125,18 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
-[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo, .form-type-radio, .form-type-managed-file .filefield-source, .credit-to-all, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #block-menu-menu-admin-left-menu > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
+[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
+[id*="field-program-schedule-values"] + div.clearfix .form-submit,
+[id*="field-associate-sponsors-values"] + div.clearfix .form-submit,
+[id*="field-event-highlights-values"] + div.clearfix .form-submit,
+[id*="field-event-media-values"] + div.clearfix .form-submit,
+[id*="field-newsl-add-news-values"] + div.clearfix .form-submit,
+[id*="field-story-template-buzz-values"] + div.clearfix .form-submit,
+[id*="field-erf-registration-fee-values"] + div.clearfix .form-submit,
+[id*="field-mega-review-review-values"] + div.clearfix .form-submit, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .add-more-wbg, [id*="user-register-form"] .image-widget-data input.form-file + .form-submit, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, ul.pager li, .header .header__logo, .form-type-radio, .form-type-managed-file .filefield-source, .credit-to-all, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #block-menu-menu-admin-left-menu > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
@@ -150,6 +169,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
@@ -157,9 +177,18 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
-[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, .add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .header .header__logo-image, .form-type-radio, .form-type-managed-file .filefield-source, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .content-block-menu > .menu > li, #block-menu-menu-ask-an-expert-menu > .menu > li,
+[id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
+[id*="field-program-schedule-values"] + div.clearfix .form-submit,
+[id*="field-associate-sponsors-values"] + div.clearfix .form-submit,
+[id*="field-event-highlights-values"] + div.clearfix .form-submit,
+[id*="field-event-media-values"] + div.clearfix .form-submit,
+[id*="field-newsl-add-news-values"] + div.clearfix .form-submit,
+[id*="field-story-template-buzz-values"] + div.clearfix .form-submit,
+[id*="field-erf-registration-fee-values"] + div.clearfix .form-submit,
+[id*="field-mega-review-review-values"] + div.clearfix .form-submit, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, .add-more-wbg, [id*="user-register-form"] .image-widget-data input.form-file + .form-submit, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, ul.pager li, .header .header__logo-image, .form-type-radio, .form-type-managed-file .filefield-source, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .content-block-menu > .menu > li, #block-menu-menu-ask-an-expert-menu > .menu > li,
 #block-menu-menu-photogallery-admin-menu > .menu > li,
 #block-menu-menu-mega-review-menu > .menu > li,
 #block-menu-menu-blog-admin-menu > .menu > li,
@@ -184,16 +213,10 @@ img {
 [id*="field-associate-sponsors-values"] thead,
 [id*="field-event-highlights-values"] thead,
 [id*="field-event-media-values"] thead,
+[id*="field-newsl-add-news-values"] thead,
 [id*="field-story-template-buzz-values"] thead,
 [id*="field-erf-registration-fee-values"] thead,
-[id*="field-mega-review-review-values"] thead, .itg-add-another-item tbody, [id*="field-breaking-content-details-values"] tbody,
-[id*="field-program-schedule-values"] tbody,
-[id*="field-associate-sponsors-values"] tbody,
-[id*="field-event-highlights-values"] tbody,
-[id*="field-event-media-values"] tbody,
-[id*="field-story-template-buzz-values"] tbody,
-[id*="field-erf-registration-fee-values"] tbody,
-[id*="field-mega-review-review-values"] tbody, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li, .dashboard-tab li, .node-story-form #Templates .form-field-type-text tbody, .node-story-form #Templates .form-field-type-text thead, .block-itg-event-backend .block-itg-story-list a, [class*="node-type-"] .node .field .field-label, .ugc-action strong {
+[id*="field-mega-review-review-values"] thead, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li, .dashboard-tab li, .node-story-form #Templates .form-field-type-text tbody, .node-story-form #Templates .form-field-type-text thead, .block-itg-event-backend .block-itg-story-list a, [class*="node-type-"] .node .field .field-label, .ugc-action strong {
   float: left;
 }
 
@@ -210,13 +233,22 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td,
 [id*="field-event-highlights-values"] tbody tr td,
 [id*="field-event-media-values"] tbody tr td,
+[id*="field-newsl-add-news-values"] tbody tr td,
 [id*="field-story-template-buzz-values"] tbody tr td,
 [id*="field-erf-registration-fee-values"] tbody tr td,
 [id*="field-mega-review-review-values"] tbody tr td, .header, .header .container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu > .menu > li, .user-role a, .dashboard-tab li, .node-story-form #Templates .form-field-type-text .form-item, .block-itg-event-backend .block-itg-story-list a {
   position: relative;
 }
 
-.of-hide, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a {
+.of-hide, .itg-add-another-item tbody, [id*="field-breaking-content-details-values"] tbody,
+[id*="field-program-schedule-values"] tbody,
+[id*="field-associate-sponsors-values"] tbody,
+[id*="field-event-highlights-values"] tbody,
+[id*="field-event-media-values"] tbody,
+[id*="field-newsl-add-news-values"] tbody,
+[id*="field-story-template-buzz-values"] tbody,
+[id*="field-erf-registration-fee-values"] tbody,
+[id*="field-mega-review-review-values"] tbody, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a {
   overflow: hidden;
 }
 
@@ -229,6 +261,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
@@ -236,6 +269,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc {
@@ -263,6 +297,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-newsl-add-news-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-erf-registration-fee-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"]:hover, .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
@@ -270,6 +305,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-newsl-add-news-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-erf-registration-fee-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, .view .attachment a:hover, .ugc-action .reject-ugc:hover, .ugc-action .manage-ugc:hover {
@@ -312,6 +348,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
@@ -319,6 +356,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .ugc-action .reject-ugc, .ugc-action .manage-ugc {
@@ -331,6 +369,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"]:hover,
+[id*="field-newsl-add-news-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-erf-registration-fee-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"]:hover, .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
@@ -338,6 +377,7 @@ img {
 [id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
+[id*="field-newsl-add-news-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-erf-registration-fee-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, .ugc-action .reject-ugc:hover, .ugc-action .manage-ugc:hover {
@@ -346,7 +386,15 @@ img {
   color: #ee4d4d;
 }
 
-.add-more, .form-submit[value="Add another item"], .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit {
+.add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
+[id*="field-program-schedule-values"] + div.clearfix .form-submit,
+[id*="field-associate-sponsors-values"] + div.clearfix .form-submit,
+[id*="field-event-highlights-values"] + div.clearfix .form-submit,
+[id*="field-event-media-values"] + div.clearfix .form-submit,
+[id*="field-newsl-add-news-values"] + div.clearfix .form-submit,
+[id*="field-story-template-buzz-values"] + div.clearfix .form-submit,
+[id*="field-erf-registration-fee-values"] + div.clearfix .form-submit,
+[id*="field-mega-review-review-values"] + div.clearfix .form-submit, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit {
   background-color: #1fb5ad;
   border: 1px solid #1fb5ad;
   color: #fff;
@@ -359,12 +407,20 @@ img {
   white-space: nowrap;
   text-decoration: none;
 }
-.add-more:hover, .form-submit[value="Add another item"]:hover, .img-crt:hover, input[name="field_gallery_image_add_more"]:hover, .form-type-plupload .plupload_buttons .plupload_button.plupload_add:hover, .view .view-filters .views-exposed-form .views-submit-button .form-submit:hover, .hierarchical-select-wrapper .add-to-dropbox:hover, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit:hover {
+.add-more:hover, .form-submit[value="Add another item"]:hover, .itg-add-another-item + div.clearfix .form-submit:hover, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit:hover,
+[id*="field-program-schedule-values"] + div.clearfix .form-submit:hover,
+[id*="field-associate-sponsors-values"] + div.clearfix .form-submit:hover,
+[id*="field-event-highlights-values"] + div.clearfix .form-submit:hover,
+[id*="field-event-media-values"] + div.clearfix .form-submit:hover,
+[id*="field-newsl-add-news-values"] + div.clearfix .form-submit:hover,
+[id*="field-story-template-buzz-values"] + div.clearfix .form-submit:hover,
+[id*="field-erf-registration-fee-values"] + div.clearfix .form-submit:hover,
+[id*="field-mega-review-review-values"] + div.clearfix .form-submit:hover, .img-crt:hover, input[name="field_gallery_image_add_more"]:hover, .form-type-plupload .plupload_buttons .plupload_button.plupload_add:hover, .view .view-filters .views-exposed-form .views-submit-button .form-submit:hover, .hierarchical-select-wrapper .add-to-dropbox:hover, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit:hover {
   background-color: #1fb5ad;
   border: 1px solid #1fb5ad;
 }
 
-.add-more-wbg, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit {
+.add-more-wbg, [id*="user-register-form"] .image-widget-data input.form-file + .form-submit, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit {
   background-color: #fff;
   border: 1px solid #1fb5ad;
   color: #1fb5ad;
@@ -454,6 +510,7 @@ a.button {
 [id*="field-associate-sponsors-values"] thead,
 [id*="field-event-highlights-values"] thead,
 [id*="field-event-media-values"] thead,
+[id*="field-newsl-add-news-values"] thead,
 [id*="field-story-template-buzz-values"] thead,
 [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead {
@@ -466,6 +523,7 @@ a.button {
 [id*="field-associate-sponsors-values"] tbody tr td,
 [id*="field-event-highlights-values"] tbody tr td,
 [id*="field-event-media-values"] tbody tr td,
+[id*="field-newsl-add-news-values"] tbody tr td,
 [id*="field-story-template-buzz-values"] tbody tr td,
 [id*="field-erf-registration-fee-values"] tbody tr td,
 [id*="field-mega-review-review-values"] tbody tr td {
@@ -477,6 +535,7 @@ a.button {
 [id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"], .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
@@ -484,6 +543,7 @@ a.button {
 [id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+[id*="field-newsl-add-news-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-erf-registration-fee-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
@@ -495,10 +555,39 @@ a.button {
 [id*="field-associate-sponsors-values"] + div.clearfix .form-submit,
 [id*="field-event-highlights-values"] + div.clearfix .form-submit,
 [id*="field-event-media-values"] + div.clearfix .form-submit,
+[id*="field-newsl-add-news-values"] + div.clearfix .form-submit,
 [id*="field-story-template-buzz-values"] + div.clearfix .form-submit,
 [id*="field-erf-registration-fee-values"] + div.clearfix .form-submit,
 [id*="field-mega-review-review-values"] + div.clearfix .form-submit {
   margin-left: 250px;
+}
+
+ul.pager {
+  text-align: center;
+}
+ul.pager li {
+  margin: 0 5px;
+}
+ul.pager li.pager-current {
+  height: 20px;
+  width: 20px;
+  border: 1px solid #1fb5ad;
+  background-color: #1fb5ad;
+  color: #fff;
+}
+ul.pager li.pager-item a {
+  border: 1px solid #1fb5ad;
+  display: block;
+  height: 20px;
+  width: 20px;
+  color: #1fb5ad;
+}
+ul.pager li.pager-item a:hover {
+  background-color: #1fb5ad;
+  color: #fff;
+}
+ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, ul.pager li.pager-previous a {
+  color: #1fb5ad;
 }
 
 .success-message, .messages--status {
@@ -586,6 +675,10 @@ textarea {
 }
 
 /* Form CSS */
+.form-select[multiple="multiple"] {
+  min-height: 100px;
+}
+
 .confirm-parent, .password-parent {
   clear: none;
   width: auto;
@@ -663,6 +756,16 @@ fieldset.date-combo .container-inline-date .date-padding .form-item div.descript
   padding-right: 20px;
 }
 
+.form-type-textfield > label,
+.date-combo > legend,
+.form-type-select > label {
+  padding-top: 8px;
+}
+
+.form-type-managed-file > label {
+  padding-top: 4px;
+}
+
 .form-type-textfield > label + div,
 .form-type-textarea > label + div,
 .form-type-select > label + div,
@@ -718,7 +821,7 @@ div.form-type-password-confirm div.password-suggestions ul {
   font-size: 12px;
   color: #8d8d8d;
 }
-div.form-type-password-confirm > .description {
+div.form-type-password-confirm > .description, div.form-type-password-confirm > .password-suggestions[style="display: none;"] + .description {
   padding-left: 250px;
   margin-top: -30px;
 }
@@ -726,8 +829,33 @@ div.form-type-password-confirm > .password-suggestions + .description {
   margin-top: 0;
 }
 
+[id*="user-register-form"] h2 {
+  background-color: #fefafb;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 8px 20px;
+  line-height: 28px;
+  font-size: 18px;
+  margin: 15px 0;
+}
 [id*="user-register-form"] .form-text {
   max-width: 332px;
+}
+[id*="user-register-form"] .form-item-notify {
+  padding-left: 250px;
+}
+[id*="user-register-form"] .form-type-managed-file .form-managed-file + div.description {
+  left: 600px;
+}
+[id*="user-register-form"] .image-widget-data input.form-file {
+  margin-top: 5px;
+}
+[id*="user-register-form"] .form-actions {
+  background-color: #fefafb;
+  border-bottom: 1px solid #d9d9d9;
+  border-top: 1px solid #d9d9d9;
+  margin: 15px 0;
+  padding: 15px 30px;
 }
 
 div.description, .pre-desc {
@@ -764,7 +892,7 @@ div.vertical-tabs .form-textarea-wrapper {
 .form-type-textfield .form-text:hover + div.description, .form-type-textfield .form-text:hover + span.error + div.description {
   display: block;
 }
-.form-type-textfield label + .form-text + span.error {
+.form-type-textfield label + .form-text + span.error, .form-type-textfield label + .form-text + div.description + span.error {
   padding-left: 220px;
 }
 
@@ -781,7 +909,7 @@ div.vertical-tabs .form-textarea-wrapper {
 .form-type-select .form-select:hover + div.description, .form-type-select .form-select:hover + span.error + div.description {
   display: block;
 }
-.form-type-select label + .form-select + span.error {
+.form-type-select label + .form-select + span.error, .form-type-select label + .form-select + div.description + span.error {
   padding-left: 220px;
 }
 
@@ -1350,6 +1478,7 @@ input[name="field_gallery_image_add_more"] {
 .view .attachment a {
   text-align: center;
   margin: 0 0 0 5px;
+  padding: 6px 12px;
 }
 .view .attachment .count {
   line-height: 34px;
@@ -1384,6 +1513,9 @@ input[name="field_gallery_image_add_more"] {
   color: #1fb5ad;
 }
 
+.hierarchical-select-wrapper .add-to-dropbox {
+  margin: 1px 8px !important;
+}
 .hierarchical-select-wrapper .dropbox table {
   width: 332px;
   border: 1px solid #d9d9d9;
@@ -1409,6 +1541,7 @@ input[name="field_gallery_image_add_more"] {
 }
 .node-story-form #Templates .form-field-type-text thead {
   padding-right: 20px;
+  padding-top: 8px;
   width: 220px;
 }
 .node-story-form #Templates .form-field-type-text thead th {
@@ -1416,6 +1549,12 @@ input[name="field_gallery_image_add_more"] {
 }
 .node-story-form .hierarchical-select-wrapper .hierarchical-select .selects {
   max-width: 340px;
+}
+.node-story-form .form-field-name-field-story-schedule-date-time .date-padding .form-type-textfield:last-child {
+  margin-left: 10px;
+}
+.node-story-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story {
+  padding-left: 220px;
 }
 
 .page-node-add-story .preview-wrapper,
@@ -1592,10 +1731,12 @@ input[name="field_gallery_image_add_more"] {
   display: block;
 }
 
-[id*="field-erf-registration-fee-values"] tbody {
+[id*="field-erf-registration-fee-values"] tbody,
+[id*="field-mega-review-review-values"] tbody {
   float: none;
 }
-[id*="field-erf-registration-fee-values"] tbody tr td {
+[id*="field-erf-registration-fee-values"] tbody tr td,
+[id*="field-mega-review-review-values"] tbody tr td {
   border: none;
   padding: 0;
   margin: 0;
