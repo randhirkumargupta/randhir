@@ -224,8 +224,8 @@ a.button{
   @extend .add-more;
 }
 .button{
-  @extend .btn;
   @extend .btn-cancel;
+  @extend .btn;
 }
 .button.published, .form-submit[value="Back"]{
   @extend .btn;
@@ -299,7 +299,8 @@ a.button{
     width: 250px;
   }
   tbody{
-    @extend .fleft;
+    @extend .db;
+    @extend .of-hide;
     tr td{
       border: 1px solid #d9d9d9;
       padding-bottom: 30px;
@@ -313,10 +314,44 @@ a.button{
     }
   } 
   & + div.clearfix{
-    .form-submit{margin-left: 250px;}
+    .form-submit{@extend .add-more; margin-left: 250px;}
   }
 }
-
+ul.pager{
+  @extend .mt-10;
+  @extend .no-bullet;
+  text-align: center;
+  li{
+    @extend .dib;
+    @extend .vtop;
+    margin: 0 5px;
+    &.pager-current{
+      height: 20px;
+      width: 20px;
+      border: 1px solid #1fb5ad;
+      background-color: #1fb5ad;
+      color: #fff;
+    }
+    &.pager-item{
+      a{
+        border: 1px solid #1fb5ad;
+        display: block;
+        height: 20px;
+        width: 20px;
+        color: #1fb5ad;
+        &:hover{
+          background-color: #1fb5ad;
+          color: #fff;
+        }
+      }
+    }
+    &.pager-next, &.pager-last, &.pager-first, &.pager-previous{
+      a{
+        color: #1fb5ad;
+      }
+    }
+  }
+}
 #page-title{
   @extend .mb-10;
 }
@@ -419,6 +454,9 @@ span.error{
 
 
 /* Form CSS */
+.form-select[multiple="multiple"]{
+  min-height: 100px;
+}
 .confirm-parent, .password-parent{
   clear: none;
   width: auto;
@@ -500,6 +538,14 @@ fieldset.date-combo{
   float: left;
   padding-right: 20px;
 }
+.form-type-textfield > label,
+.date-combo > legend,
+.form-type-select > label{
+  padding-top: 8px;
+}
+.form-type-managed-file > label{
+  padding-top: 4px;
+}
 .form-type-textfield > label + div, 
 .form-type-textarea > label + div, 
 .form-type-select > label + div, 
@@ -561,7 +607,7 @@ div.form-type-password-confirm{
       color: #8d8d8d;
     }
   }
-  > .description{
+  > .description, > .password-suggestions[style="display: none;"] + .description{
     padding-left: 250px;
     margin-top: -30px;
   }
@@ -570,8 +616,41 @@ div.form-type-password-confirm{
   }
 }
 [id*="user-register-form"]{
+  h2{
+    background-color: #fefafb;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 8px 20px;
+    line-height: 28px;
+    font-size: 18px;
+    margin: 15px 0;
+  }
   .form-text{
     max-width: 332px;
+  }
+  .form-item-notify{
+    padding-left: 250px;
+  }
+  .form-type-managed-file .form-managed-file + div.description{
+    left: 600px;
+  }
+  .image-widget-data{
+    input.form-file{
+      margin-top: 5px;
+      & + .form-submit{
+        @extend .add-more-wbg;
+      }
+    }
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
+  }
+  .form-actions{
+    background-color: #fefafb;
+    border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    margin: 15px 0;
+    padding: 15px 30px;
   }
 }
 div.filefield-source .form-item{
@@ -616,7 +695,7 @@ div.vertical-tabs {
       display: block;
     }
   } 
-  label + .form-text + span.error{
+  label + .form-text + span.error, label + .form-text + div.description + span.error{
     padding-left: 220px;
   }
 }
@@ -643,7 +722,7 @@ div.vertical-tabs {
       display: block;
     }
   }
-  label + .form-select + span.error{
+  label + .form-select + span.error, label + .form-select + div.description + span.error{
     padding-left: 220px;
   }
 }
@@ -1321,6 +1400,7 @@ input[name="field_gallery_image_add_more"]{
       @extend .btn;
       text-align: center;
       margin: 0 0 0 5px;
+      padding: 6px 12px;
     }
     .count{
       @extend .dib;
@@ -1381,6 +1461,7 @@ input[name="field_gallery_image_add_more"]{
 .hierarchical-select-wrapper{
   .add-to-dropbox{
     @extend .add-more;
+    margin: 1px 8px !important;
   }
   .dropbox{
     table{
@@ -1417,6 +1498,7 @@ input[name="field_gallery_image_add_more"]{
       }
       thead{
         padding-right: 20px;
+        padding-top: 8px;
         width: 220px;
         th{
           font-weight: 400;
@@ -1433,6 +1515,16 @@ input[name="field_gallery_image_add_more"]{
     }
   }
   .hierarchical-select-wrapper .hierarchical-select .selects{max-width: 340px;}
+  .form-field-name-field-story-schedule-date-time{
+    .date-padding{
+      .form-type-textfield:last-child{
+        margin-left: 10px;
+      }
+    }
+  }
+  .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
+    padding-left: 220px;
+  }
 }
 .form-field-name-field-astro-date-range{
   @extend .itg-date-range;
@@ -1615,12 +1707,14 @@ input[name="field_gallery_image_add_more"]{
 [id*="field-associate-sponsors-values"], 
 [id*="field-event-highlights-values"], 
 [id*="field-event-media-values"], 
+[id*="field-newsl-add-news-values"], 
 [id*="field-story-template-buzz-values"], 
 [id*="field-erf-registration-fee-values"], 
 [id*="field-mega-review-review-values"]{
   @extend .itg-add-another-item;
 }
-[id*="field-erf-registration-fee-values"]{
+[id*="field-erf-registration-fee-values"], 
+[id*="field-mega-review-review-values"]{
   thead{
     @extend .hide;
   }
@@ -1738,6 +1832,8 @@ input[name="field_gallery_image_add_more"]{
   .approve-ugc{@extend .btn-save;}
   .reject-ugc, .manage-ugc{@extend .btn; @extend .btn-cancel;}
 }
-
+.field-name-field-mobile-subscribers{
+  @extend .hide;
+}
 
 
