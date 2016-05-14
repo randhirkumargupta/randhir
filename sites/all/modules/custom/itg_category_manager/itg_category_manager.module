@@ -1132,8 +1132,7 @@ function itg_category_manager_disable_forcefully() {
  * Callback function for manually category disable
  */
 function itg_category_manager_disable_manually_form() {
-  $arg = arg();
-  $form = array();
+  $arg = arg();  
   // Load includes/common.inc from the hierarchical select module.
   module_load_include('inc', 'hierarchical_select', 'includes/common');
 
@@ -1164,6 +1163,11 @@ function itg_category_manager_disable_manually_form() {
     '#type' => 'submit',
     '#value' => 'Save',
   );
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'taxonomy/term/'. check_plain($arg[2]) . '/edit', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+  
   return $form;
 }
 
