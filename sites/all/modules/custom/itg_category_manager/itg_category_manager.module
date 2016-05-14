@@ -203,10 +203,15 @@ function itg_category_manager_term_state($tid) {
  * @param array $form_state
  * @param string $form_id
  */
-function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
+function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {    
   global $user;
   global $base_url;
-
+  // Add js to category management form
+  if ($form['#vocabulary']->machine_name == 'category_management') {
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
+    );
+  }  
   if ($form_id == 'taxonomy_form_term') {
     // code for facebook image field hide and show
     $form['field_cm_no_follow']['#states'] = array(
@@ -268,11 +273,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     }
   }
   else {
-    if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
-      // Add js file
-      $form['#attached']['js'] = array(
-        drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
-      );
+    if ($form['#term']['vocabulary_machine_name'] == 'category_management') {      
       if ($form['tid']['#value'] != NULL) {
         $destination_edit = $form_state['term']->field_publish_time['und'][0]['value'];
         $filter = explode('-', $destination_edit);        
