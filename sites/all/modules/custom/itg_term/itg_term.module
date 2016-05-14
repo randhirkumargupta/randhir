@@ -347,7 +347,7 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
     $form['created']['min'] = array(
       '#type' => 'date_popup',
       '#title' => t('From'),
-      '#date_format' => 'Y-m-d',
+      '#date_format' => 'd/m/Y',
       '#date_year_range' => '-1:+1',
       '#attributes' => array(
         'readonly' => 'readonly'
@@ -356,7 +356,7 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
     $form['created']['max'] = array(
       '#type' => 'date_popup',
       '#title' => t('To'),
-      '#date_format' => 'Y-m-d',
+      '#date_format' => 'd/m/Y',
       '#date_year_range' => '-1:+1',
       '#attributes' => array(
         'readonly' => 'readonly'
@@ -374,7 +374,10 @@ function itg_term_views_query_alter(&$view, &$query) {
   if (isset($view->name) && $view->name === 'tags_management') {
     if (isset($_GET['created']['max']['date'])) {
       $max_conditions_array = array();
-      $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
+      $_GET['created']['min']['date'] = str_replace('/','-',$_GET['created']['min']['date']);
+      $_GET['created']['max']['date'] = str_replace('/','-',$_GET['created']['max']['date']);
+      $_GET['created']['min']['date'] = date("Y-m-d",strtotime($_GET['created']['min']['date']));
+      $max_date = strtotime(date('d-m-Y', strtotime($_GET['created']['max']['date'] . ' +1 days')));
       $max_date_condition = " AND " . $max_date;
       if (isset($view->query->where[1]['conditions'][1]['field'])) {
         foreach ($query->where[1]['conditions'] as $idx => $condition) {
