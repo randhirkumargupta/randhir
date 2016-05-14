@@ -55,6 +55,8 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['field_erf_registration_fee']['id'] = 'field_erf_registration_fee';
   $handler->display->display_options['fields']['field_erf_registration_fee']['table'] = 'field_data_field_erf_registration_fee';
   $handler->display->display_options['fields']['field_erf_registration_fee']['field'] = 'field_erf_registration_fee';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['label'] = 'Registration Details';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['element_label_type'] = 'strong';
   $handler->display->display_options['fields']['field_erf_registration_fee']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_erf_registration_fee']['settings'] = array(
     'view_mode' => 'full',
@@ -197,15 +199,15 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
-  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_2']['label'] = 'Registered Users';
-  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = 'View List';
-  $handler->display->display_options['fields']['nothing_2']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_2']['alter']['path'] = 'event-users-list/[nid]';
-  $handler->display->display_options['fields']['nothing_2']['alter']['target'] = '_blank';
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = 'Registered Users';
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_event_registration_get_registered_user($row->nid); ?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
   $handler->display->display_options['fields']['nothing_3']['table'] = 'views';
