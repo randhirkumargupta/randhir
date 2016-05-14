@@ -113,7 +113,7 @@ img{
     font-weight: 400;
     height: 32px;
     margin-right: 5px;
-    padding: 6px 12px;
+    padding: 4px 12px 8px;
     text-align: center;
     white-space: nowrap;
     @extend .dib;
@@ -199,6 +199,9 @@ a.ckeditor_links{
     text-decoration: underline;
   }
 }
+a.button{
+  padding: 6px 12px;
+}
 .form-submit{
   cursor: pointer;
 }
@@ -209,6 +212,7 @@ a.ckeditor_links{
 .btn-save, .form-submit[value="Save as Draft"], 
 .form-submit[value="Save"], 
 .form-submit[value="Proceed to Payment"], 
+.form-submit[value="Create new account"], 
 .form-submit[value="Next"]{
   @extend .btn;
   @extend .btn-save-draft;
@@ -413,7 +417,16 @@ span.error{
   }
 }
 
+
 /* Form CSS */
+.confirm-parent, .password-parent{
+  clear: none;
+  width: auto;
+}
+input.password-confirm, input.password-field{
+  width: 200px;
+  margin: 0;
+}
 .node-form{
   h2{
     background-color: #fefafb;
@@ -461,6 +474,7 @@ fieldset.date-combo{
   }
 }
 .form-type-textfield,
+.form-type-password,
 .form-type-select,
 .form-type-managed-file,
 .form-type-checkboxes,
@@ -473,6 +487,7 @@ fieldset.date-combo{
   margin: 30px 0;
 }
 .form-type-textfield > label, 
+.form-type-password > label,
 .form-type-textarea > label, 
 .form-type-select > label, 
 .form-type-autocomplete-deluxe > label,
@@ -510,7 +525,55 @@ fieldset.date-combo{
     max-width: 332px;
   }
 }
-
+.form-type-password{
+  @extend .pos-rel;
+  > span.error{
+    padding-left: 220px;
+  }
+  div.password-strength, div.password-confirm{
+    font-size: 12px;
+    left: 460px;
+    margin-top: 0;
+    position: absolute;
+    top: 5px;
+    width: 195px;
+  }
+  div.password-confirm{
+    top: 10px;
+    span.error{
+      display: inline;
+    }
+    span.ok{
+      color: #33a26d;
+    }
+  }
+}
+div.form-type-password-confirm{
+  @extend .pos-rel;
+  div.password-suggestions{
+    border: 1px solid #d9d9d9;
+    margin: -20px 0 0 250px;
+    padding: 5px;
+    width: 400px;
+    ul{
+      @extend .no-bullet;
+      font-size: 12px;
+      color: #8d8d8d;
+    }
+  }
+  > .description{
+    padding-left: 250px;
+    margin-top: -30px;
+  }
+  > .password-suggestions + .description{
+    margin-top: 0;
+  }
+}
+[id*="user-register-form"]{
+  .form-text{
+    max-width: 332px;
+  }
+}
 div.filefield-source .form-item{
   @extend .mr-0;
 }
