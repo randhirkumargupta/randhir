@@ -398,7 +398,7 @@ function itg_category_manager_term_validate($form, &$form_state) {
     $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];
   }
   if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete' && $form_state['term']->tid != NULL ) {
-    form_set_error('state-mode', t('Please select one mode.'));
+    form_set_error('state-mode', t('Please select either forcefully or manually disable mode.'));
   }
   // Code end for publish time
 
