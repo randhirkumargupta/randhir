@@ -126,6 +126,7 @@ function itg_mobile_service_get_client_token($token) {
   return $record = $result->fetchAssoc();
 }
 
+
 /**
  * Custom callback for print mobile xml
  * @param type $query
@@ -136,7 +137,7 @@ function print_mobile_xml($query) {
   $file_path = drupal_realpath('public://');
   $file_path = $file_path . '/mobile_xml';
   $doc = new DOMDocument('1.0', 'UTF-8');
-  $doc->formatOutput = true;
+  $doc->formatOutput = TRUE;
 
   $root = $doc->appendChild($doc->createElement('channel'));
   $root = $doc->appendChild($root);
@@ -174,7 +175,7 @@ function print_mobile_rss($query) {
   echo $file_path = $file_path . '/mobile_xml';
   //exit;
   $doc = new DOMDocument('1.0', 'UTF-8');
-  $doc->formatOutput = true;
+  $doc->formatOutput = TRUE;
 
   $root = $doc->appendChild($doc->createElement('channel'));
   $root = $doc->appendChild($root);
@@ -215,7 +216,7 @@ function print_mobile_mrss($query) {
   $file_path = $file_path . '/mobile_xml';
   // header("Content-Type: application/rss+xml; charset=UTF-8");
   $doc = new DOMDocument('1.0', 'iso-8859-1');
-  $doc->formatOutput = true;
+  $doc->formatOutput = TRUE;
 
   $root = $doc->appendChild($doc->createElement('rss'));
   $root->setAttribute('version', '2.0');
@@ -288,7 +289,7 @@ function print_mobile_sms($query) {
   $file_path = drupal_realpath('public://');
   $file_path = $file_path . '/mobile_xml';
   $doc = new DOMDocument('1.0', 'UTF-8');
-  $doc->formatOutput = true;
+  $doc->formatOutput = TRUE;
 
   $root = $doc->appendChild($doc->createElement('data'));
   $root = $doc->appendChild($root);
@@ -396,3 +397,8 @@ function itg_mobile_services_get_service_title($sid) {
     return $record['title'];
   }
 }
+
+
+
+
+

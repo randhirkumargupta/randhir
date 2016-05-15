@@ -113,7 +113,7 @@ img{
     font-weight: 400;
     height: 32px;
     margin-right: 5px;
-    padding: 6px 12px;
+    padding: 4px 12px 8px;
     text-align: center;
     white-space: nowrap;
     @extend .dib;
@@ -199,6 +199,9 @@ a.ckeditor_links{
     text-decoration: underline;
   }
 }
+a.button{
+  padding: 6px 12px;
+}
 .form-submit{
   cursor: pointer;
 }
@@ -206,7 +209,11 @@ a.ckeditor_links{
   @extend .btn;
   @extend .btn-preview;
 }
-.btn-save, .form-submit[value="Save as Draft"], .form-submit[value="Save"], .form-submit[value="Next"]{
+.btn-save, .form-submit[value="Save as Draft"], 
+.form-submit[value="Save"], 
+.form-submit[value="Proceed to Payment"], 
+.form-submit[value="Create new account"], 
+.form-submit[value="Next"]{
   @extend .btn;
   @extend .btn-save-draft;
 }
@@ -217,8 +224,8 @@ a.ckeditor_links{
   @extend .add-more;
 }
 .button{
-  @extend .btn;
   @extend .btn-cancel;
+  @extend .btn;
 }
 .button.published, .form-submit[value="Back"]{
   @extend .btn;
@@ -285,28 +292,66 @@ a.ckeditor_links{
   }
 }
 .itg-add-another-item{
-  tbody tr td{
-    @extend .pos-rel;
-    > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
-      @extend .btn-cancel;
-      @extend .btn;
-      bottom: -15px;
-      height: 34px;
-      left: 250px;
-      position: absolute;
-    }
+  thead{
+    @extend .fleft;
+    padding-left: 30px;
+    padding-right: 20px;
+    width: 250px;
   }
-  tbody tr:last-child td{
-    > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
-      bottom: -41px;
-      left: 396px;
+  tbody{
+    @extend .db;
+    @extend .of-hide;
+    tr td{
+      border: 1px solid #d9d9d9;
+      padding-bottom: 30px;
+      @extend .pos-rel;
+      > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+        @extend .btn-cancel;
+        @extend .btn;
+        height: 34px;
+        margin-left: 250px;
+      }
     }
-  }
+  } 
   & + div.clearfix{
-    .form-submit{margin-left: 250px;}
+    .form-submit{@extend .add-more; margin-left: 250px;}
   }
 }
-
+ul.pager{
+  @extend .mt-10;
+  @extend .no-bullet;
+  text-align: center;
+  li{
+    @extend .dib;
+    @extend .vtop;
+    margin: 0 5px;
+    &.pager-current{
+      height: 20px;
+      width: 20px;
+      border: 1px solid #1fb5ad;
+      background-color: #1fb5ad;
+      color: #fff;
+    }
+    &.pager-item{
+      a{
+        border: 1px solid #1fb5ad;
+        display: block;
+        height: 20px;
+        width: 20px;
+        color: #1fb5ad;
+        &:hover{
+          background-color: #1fb5ad;
+          color: #fff;
+        }
+      }
+    }
+    &.pager-next, &.pager-last, &.pager-first, &.pager-previous{
+      a{
+        color: #1fb5ad;
+      }
+    }
+  }
+}
 #page-title{
   @extend .mb-10;
 }
@@ -407,7 +452,19 @@ span.error{
   }
 }
 
+
 /* Form CSS */
+.form-select[multiple="multiple"]{
+  min-height: 100px;
+}
+.confirm-parent, .password-parent{
+  clear: none;
+  width: auto;
+}
+input.password-confirm, input.password-field{
+  width: 200px;
+  margin: 0;
+}
 .node-form{
   h2{
     background-color: #fefafb;
@@ -436,6 +493,9 @@ span.error{
 .form-textarea-wrapper{
   .grippie{display: none !important;}
 }
+.form-type-textarea .field-edit-link{
+  @extend .hide;
+}
 fieldset.date-combo{
   border: none;
   .container-inline-date{
@@ -455,6 +515,7 @@ fieldset.date-combo{
   }
 }
 .form-type-textfield,
+.form-type-password,
 .form-type-select,
 .form-type-managed-file,
 .form-type-checkboxes,
@@ -467,6 +528,7 @@ fieldset.date-combo{
   margin: 30px 0;
 }
 .form-type-textfield > label, 
+.form-type-password > label,
 .form-type-textarea > label, 
 .form-type-select > label, 
 .form-type-autocomplete-deluxe > label,
@@ -478,6 +540,14 @@ fieldset.date-combo{
   width: 220px;
   float: left;
   padding-right: 20px;
+}
+.form-type-textfield > label,
+.date-combo > legend,
+.form-type-select > label{
+  padding-top: 8px;
+}
+.form-type-managed-file > label{
+  padding-top: 4px;
 }
 .form-type-textfield > label + div, 
 .form-type-textarea > label + div, 
@@ -504,7 +574,88 @@ fieldset.date-combo{
     max-width: 332px;
   }
 }
-
+.form-type-password{
+  @extend .pos-rel;
+  > span.error{
+    padding-left: 220px;
+  }
+  div.password-strength, div.password-confirm{
+    font-size: 12px;
+    left: 460px;
+    margin-top: 0;
+    position: absolute;
+    top: 5px;
+    width: 195px;
+  }
+  div.password-confirm{
+    top: 10px;
+    span.error{
+      display: inline;
+    }
+    span.ok{
+      color: #33a26d;
+    }
+  }
+}
+div.form-type-password-confirm{
+  @extend .pos-rel;
+  div.password-suggestions{
+    border: 1px solid #d9d9d9;
+    margin: -20px 0 0 250px;
+    padding: 5px;
+    width: 400px;
+    ul{
+      @extend .no-bullet;
+      font-size: 12px;
+      color: #8d8d8d;
+    }
+  }
+  > .description, > .password-suggestions[style="display: none;"] + .description{
+    padding-left: 250px;
+    margin-top: -30px;
+  }
+  > .password-suggestions + .description{
+    margin-top: 0;
+  }
+}
+[id*="user-register-form"]{
+  h2{
+    background-color: #fefafb;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 8px 20px;
+    line-height: 28px;
+    font-size: 18px;
+    margin: 15px 0;
+  }
+  .form-text{
+    max-width: 332px;
+  }
+  .form-item-notify{
+    padding-left: 250px;
+  }
+  .form-type-managed-file .form-managed-file + div.description{
+    left: 600px;
+  }
+  .image-widget-data{
+    input.form-file{
+      margin-top: 5px;
+      & + .form-submit{
+        @extend .add-more-wbg;
+      }
+    }
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
+  }
+  .form-actions{
+    background-color: #fefafb;
+    border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    margin: 15px 0;
+    padding: 15px 30px;
+  }
+}
 div.filefield-source .form-item{
   @extend .mr-0;
 }
@@ -547,7 +698,7 @@ div.vertical-tabs {
       display: block;
     }
   } 
-  label + .form-text + span.error{
+  label + .form-text + span.error, label + .form-text + div.description + span.error{
     padding-left: 220px;
   }
 }
@@ -574,7 +725,7 @@ div.vertical-tabs {
       display: block;
     }
   }
-  label + .form-select + span.error{
+  label + .form-select + span.error, label + .form-select + div.description + span.error{
     padding-left: 220px;
   }
 }
@@ -754,6 +905,7 @@ div.vertical-tabs {
   thead{
     @extend .fleft;
     padding-right: 20px;
+    padding-left: 30px;
     width: 250px;
     th{
       font-weight: 400;
@@ -1251,6 +1403,7 @@ input[name="field_gallery_image_add_more"]{
       @extend .btn;
       text-align: center;
       margin: 0 0 0 5px;
+      padding: 6px 12px;
     }
     .count{
       @extend .dib;
@@ -1311,6 +1464,7 @@ input[name="field_gallery_image_add_more"]{
 .hierarchical-select-wrapper{
   .add-to-dropbox{
     @extend .add-more;
+    margin: 1px 8px !important;
   }
   .dropbox{
     table{
@@ -1323,7 +1477,7 @@ input[name="field_gallery_image_add_more"]{
 }
 .node-story-form{
   #Templates{
-    .form-field-type-text, .form-field-type-field-collection{
+    .form-field-type-text{
       margin: 30px 0;
       padding: 0 30px;
       .form-item{
@@ -1347,6 +1501,7 @@ input[name="field_gallery_image_add_more"]{
       }
       thead{
         padding-right: 20px;
+        padding-top: 8px;
         width: 220px;
         th{
           font-weight: 400;
@@ -1363,6 +1518,16 @@ input[name="field_gallery_image_add_more"]{
     }
   }
   .hierarchical-select-wrapper .hierarchical-select .selects{max-width: 340px;}
+  .form-field-name-field-story-schedule-date-time{
+    .date-padding{
+      .form-type-textfield:last-child{
+        margin-left: 10px;
+      }
+    }
+  }
+  .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
+    padding-left: 220px;
+  }
 }
 .form-field-name-field-astro-date-range{
   @extend .itg-date-range;
@@ -1545,11 +1710,24 @@ input[name="field_gallery_image_add_more"]{
 [id*="field-associate-sponsors-values"], 
 [id*="field-event-highlights-values"], 
 [id*="field-event-media-values"], 
+[id*="field-newsl-add-news-values"], 
+[id*="field-story-template-buzz-values"], 
 [id*="field-erf-registration-fee-values"], 
 [id*="field-mega-review-review-values"]{
   @extend .itg-add-another-item;
+}
+[id*="field-erf-registration-fee-values"], 
+[id*="field-mega-review-review-values"]{
   thead{
     @extend .hide;
+  }
+  tbody{
+    float: none;
+    tr td{
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
   }
 }
 .node-ugc-form{
@@ -1633,6 +1811,56 @@ input[name="field_gallery_image_add_more"]{
     @extend .hide;
   }
 }
-
-
+[class*="node-type-"]{
+  .tabs-primary{display: none;}
+  .node{
+    .field{
+      padding: 5px 30px;
+      @extend .dib;
+      @extend .full;
+      .field-label{
+        @extend .fleft;
+        width: 220px;
+        padding-right: 20px;
+      }
+      .field-items{
+        overflow: hidden;
+      }
+    }
+  }
+}
+.ugc-action{
+  padding: 5px 30px;
+  strong{line-height: 30px; @extend .fleft; width: 220px;}
+  .approve-ugc{@extend .btn-save;}
+  .reject-ugc, .manage-ugc{@extend .btn; @extend .btn-cancel;}
+}
+.field-name-field-mobile-subscribers{
+  @extend .hide;
+}
+.node-itg_celebrity_profile-form{
+  .form-type-managed-file .form-managed-file + div.description{
+    left: 600px;
+  }
+  .image-widget-data{
+    input.form-file{
+      margin-top: 5px;
+      & + .form-submit{
+        @extend .add-more-wbg;
+      }
+    }
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
+  }
+}
+.node-category-form{
+  fieldset.path-form{
+    border: none;
+    legend{
+      @extend .hide;
+    }
+    .form-type-textfield{margin-top: 0;}
+  }
+}
 
