@@ -12,20 +12,21 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
       drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js',
     );
     $form['#after_build'][] = 'itg_common_cancel_button';
+    //custom callback on submit button
     $form['actions']['submit']['#submit'][] = 'alter_ad_submit_status_message';
-
+    // code to check if section is selected then section selection field show
     $form['field_ads_section_selection']['#states'] = array(
       'visible' => array(
         ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
       )
     );
-
+    // code to check if section is selected then content selection field show
     $form['field_ads_content_selection']['#states'] = array(
       'visible' => array(
         ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
       )
     );
-
+    // code to check if section is selected then template variant field show
     $form['field_ads_template_variants']['#states'] = array(
       'visible' => array(
         ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Home'),
@@ -107,26 +108,27 @@ function itg_ads_node_validate($node, $form, &$form_state) {
         $section_selection = $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'];
         $template_variants = $node->field_ads_template_variants[LANGUAGE_NONE][0]['tid'];
 
-        // code to check if section is selected then content selection field show
+        // field validation on content selection 
         if ($template == 'Section') {
             if (empty($content_selection)) {
                 form_set_error('field_ads_content_selection', t("Content selection is required"));
             }
         }
 
-        // code to check if section is selected then section selection field show
+        // field validation on content selection
         if ($template == 'Section') {
             if (empty($section_selection)) {
                 form_set_error('field_ads_section_selection', t("Section selection is required"));
             }
         }
 
-        // code to check if home is selected then template variant field show
+        // field validation on template variant
         if ($template == 'Home') {
             if (empty($template_variants)) {
                 form_set_error('field_ads_template_variants', t("Template variant is required"));
             }
         }
+        //check on date values
         $startdate = strtotime($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value']);
         $enddate = strtotime($form_state['values']['field_ads_end_date'][LANGUAGE_NONE][0]['value']);
         if ($enddate < $startdate) {
