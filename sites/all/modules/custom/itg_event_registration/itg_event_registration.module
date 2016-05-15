@@ -232,8 +232,8 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
   } else {
     $form_state['redirect'] = 'event-registration';
   }
-
-  drupal_set_message(t('Congratulations! You have successfully registered yourself for the event.'));
+  $event_name = itg_common_get_node_title($_GET['event_id']);
+  drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
 }
 
 /**
