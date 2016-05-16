@@ -397,8 +397,3 @@ function itg_mobile_services_get_service_title($sid) {
     return $record['title'];
   }
 }
-
-
-
-
-
