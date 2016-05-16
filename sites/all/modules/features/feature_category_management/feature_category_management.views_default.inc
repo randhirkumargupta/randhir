@@ -214,6 +214,13 @@ function feature_category_management_views_default_views() {
       <div class="itg-sub-category">Sub Category</div>
       <div class="itg-sub-sub-category">Sub Sub Category</div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No result found!';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Category Manager: ITG */
   $handler->display->display_options['relationships']['tid']['id'] = 'tid';
   $handler->display->display_options['relationships']['tid']['table'] = 'itg_category_manager';
