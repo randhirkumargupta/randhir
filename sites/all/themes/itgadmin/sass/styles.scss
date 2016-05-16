@@ -2020,3 +2020,58 @@ input[name="field_gallery_image_add_more"]{
     }
   }
 }
+.itg-popup{
+  @extend .hide;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    @extend .full;
+    z-index: 9999;
+  .popup-body{
+    padding: 20px;
+    width: 600px;
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .itg-close-popup{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #d00b26;
+    background: url('../images/cross_small.png') center center no-repeat #fff;
+    text-indent: -9999px;
+  }
+}
+[id*="itg-social-media-form"]{
+  > div > a{
+    @extend .btn;
+    background-color: #3b5998;
+    border-color: #3b5998;
+    padding: 6px 12px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    max-width: 240px;
+    &:hover{
+      background-color: #3b5998;
+      border-color: #3b5998;
+    }
+  }
+}
