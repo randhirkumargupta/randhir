@@ -146,10 +146,15 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
             '#required' => TRUE,
           );
         }
+      }           
+      if ($form['#user']->uid > 0) {
+        unset($form['field_notify_user_of_update_acco']);
       }
-
-      //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
-      $form['account']['notify']['#default_value'] = TRUE;
+      else {        
+        //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
+        $form['account']['notify']['#default_value'] = TRUE;
+      }
+      
 
       // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
       $destination = 'user';
