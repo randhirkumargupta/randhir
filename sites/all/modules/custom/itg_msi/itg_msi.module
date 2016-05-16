@@ -403,7 +403,14 @@ function itg_msi_node_validate($node, $form, &$form_state) {
 
     //Set error for duplicacy
     if (isset($matches) && !empty($matches)) {
-      form_set_error('title', t(ucfirst($node->type) . ' title ' . $title . ' already exist.'));
+      form_set_error('title', t('@contenttype title <strong>@contenttitle</strong> is already exist.', array('@contenttype' => ucfirst($node->type), '@contenttitle' => $title)));
+      
+      //Change message order for type "Magazine"
+      if($node->type == 'magazine'){
+        $message_arr = $_SESSION['messages']['error'];
+        $message_arr_new = array($message_arr[1],$message_arr[0]);
+        $_SESSION['messages']['error'] = $message_arr_new;
+      }
     }
     
     //Case: Supplement creation (If issue is already exist, throw an error)
