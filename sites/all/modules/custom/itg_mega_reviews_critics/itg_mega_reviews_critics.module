@@ -40,7 +40,7 @@ function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form
  * @param type $form_state
  */
 function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
- 
+ //p($form);
   if (!isset($form['#node']->nid)) {
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
