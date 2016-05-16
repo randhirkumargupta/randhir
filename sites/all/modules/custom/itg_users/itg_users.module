@@ -112,6 +112,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_register_form') {
     $form['#validate'][] = 'itg_users_validate_user_register_validate';
     $form['#after_build'][] = 'itg_users_after_user_register_validate';
+    $form['account']['status']['#access'] = FALSE;
   }
 
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
@@ -145,10 +146,15 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
             '#required' => TRUE,
           );
         }
+      }           
+      if ($form['#user']->uid > 0) {
+        unset($form['field_notify_user_of_update_acco']);
       }
-
-      //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
-      $form['account']['notify']['#default_value'] = TRUE;
+      else {        
+        //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
+        $form['account']['notify']['#default_value'] = TRUE;
+      }
+      
 
       // Add cancel button to user edit form and redirects to user manage page on click of cancel button.
       $destination = 'user';

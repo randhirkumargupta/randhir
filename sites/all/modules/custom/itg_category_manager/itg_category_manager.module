@@ -203,10 +203,16 @@ function itg_category_manager_term_state($tid) {
  * @param array $form_state
  * @param string $form_id
  */
-function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
+function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {    
   global $user;
   global $base_url;
-
+  // Add js to category management form
+  if ($form['#vocabulary']->machine_name == 'category_management') {
+    $form['#attributes']['class'][] = 'node-form node-category-form';
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
+    );
+  }  
   if ($form_id == 'taxonomy_form_term') {
     // code for facebook image field hide and show
     $form['field_cm_no_follow']['#states'] = array(
@@ -268,11 +274,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     }
   }
   else {
-    if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
-      // Add js file
-      $form['#attached']['js'] = array(
-        drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
-      );
+    if ($form['#term']['vocabulary_machine_name'] == 'category_management') {      
       if ($form['tid']['#value'] != NULL) {
         $destination_edit = $form_state['term']->field_publish_time['und'][0]['value'];
         $filter = explode('-', $destination_edit);        
@@ -396,11 +398,19 @@ function itg_category_manager_term_validate($form, &$form_state) {
     $pTerm = taxonomy_term_load($termParent);
     $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];
   }
+  
+  // Check status of the mode
+  $mode_status = itg_category_manager_term_state($form_state['values']['tid']);  
+  
+  // If term is inactive then set disable mode value to 0 to avoid below error.
+  if (!$mode_status) {
+    $form_state['values']['state-mode'] = 1;    
+  }  
   if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete' && $form_state['term']->tid != NULL ) {
-    form_set_error('state-mode', t('Please select one mode.'));
+    form_set_error('state-mode', t('Please select either forcefully or manually disable mode.'));
   }
+  
   // Code end for publish time
-
   $term = $form_state['values']['name'];
   $vid = $form_state['values']['vid'];
   $tid = $form_state['values']['tid'];
@@ -1131,8 +1141,7 @@ function itg_category_manager_disable_forcefully() {
  * Callback function for manually category disable
  */
 function itg_category_manager_disable_manually_form() {
-  $arg = arg();
-  $form = array();
+  $arg = arg();  
   // Load includes/common.inc from the hierarchical select module.
   module_load_include('inc', 'hierarchical_select', 'includes/common');
 
@@ -1163,6 +1172,11 @@ function itg_category_manager_disable_manually_form() {
     '#type' => 'submit',
     '#value' => 'Save',
   );
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'taxonomy/term/'. check_plain($arg[2]) . '/edit', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+  
   return $form;
 }
 

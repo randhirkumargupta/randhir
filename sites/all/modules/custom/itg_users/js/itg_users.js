@@ -62,18 +62,15 @@
                     var value = $(this).val();
                     $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
                     if (value == EXPERT) {
-                        $('.field-name-field-user-section').show();
+                        $('.user-configurations').show().find('.field-name-field-user-section').show().prev().hide();
                         $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
-                        $('.field-name-field-mark-as-expert').hide();
                     } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR || value == SITE_ADMIN) {
-                        $('.field-name-field-user-section').hide();
                         $('.field-name-field-user-section').find('select').val("_none");
-                        $('.field-name-field-mark-as-expert').show();
+                        $('.user-configurations').show().find('.field-name-field-user-section').hide().prev().show();
                     } else {
                         $('.field-name-field-user-section').find('select').val("_none");
                         $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
-                        $('.field-name-field-user-section').hide();
-                        $('.field-name-field-mark-as-expert').hide();
+                        $('.user-configurations').hide();
                     }
                 });
 
