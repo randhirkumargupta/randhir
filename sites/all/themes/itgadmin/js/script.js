@@ -486,5 +486,13 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     }
   }); 
   
+  $('body').on('click', '.data-popup-link', function(){
+    var ID = $(this).attr('data-id');
+    $('body').find('#'+ID).show();
+  });
+  $('body').on('click', '.itg-close-popup', function(){
+    $(this).parent().parent().hide();
+  });
+  
 };
 })(jQuery);
