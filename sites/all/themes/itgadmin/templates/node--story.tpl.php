@@ -42,7 +42,15 @@
       <?php if (!empty($content)): ?>
         <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>          
 
-          <?php if ($view_mode == 'full'): ?>          
+          <?php if ($view_mode == 'full'): ?>
+          <?php
+            // Load custom block for social media integration              
+            if (!isset($node->op)) {
+              echo '<div class="itg_smi">'. l(t('Create Social media'), 'itg-social-media/edit-content/'.$node->type.'/'.$node->nid, array('attributes' => array('class' => 'button'))) .'</div>';
+              $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+              print render($block['content']);
+            }              
+          ?>
           <div class="basic-details content-box">
             <h2><?php print t('Quick File'); ?></h2>
             <div class="content-details">
