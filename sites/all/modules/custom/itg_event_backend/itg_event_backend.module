@@ -127,15 +127,28 @@ function itg_event_backend_after_build($form, &$form_state) {
   $options_daywise = itg_event_backend_date_interval($startDate_new[0], $endDate_new);
   foreach ($form['field_program_schedule'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
-      // p($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_events']);
+      // p($form['field_program_schedule'][LANGUAGE_NONE][$key]);
+      if (isset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+        $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      }
+      //$form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'] = '';
+      // code by shravan
+      unset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated']);
       $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
-      $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
+      //$form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
     }
   }
 
 //event hightlights
   foreach ($form['field_event_highlights'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
+      //p($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]);
+      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      }
+      
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#ajax'] = array(
@@ -149,6 +162,10 @@ function itg_event_backend_after_build($form, &$form_state) {
 //event media
   foreach ($form['field_event_media'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
+      if (isset($form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      }
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
     }
