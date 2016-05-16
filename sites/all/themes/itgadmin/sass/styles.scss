@@ -1710,6 +1710,7 @@ input[name="field_gallery_image_add_more"]{
 [id*="field-associate-sponsors-values"], 
 [id*="field-event-highlights-values"], 
 [id*="field-event-media-values"], 
+[id*="field-quiz-add-questions-values"], 
 [id*="field-newsl-add-news-values"], 
 [id*="field-story-template-buzz-values"], 
 [id*="field-erf-registration-fee-values"], 
@@ -1727,6 +1728,100 @@ input[name="field_gallery_image_add_more"]{
       border: none;
       padding: 0;
       margin: 0;
+    }
+  }
+}
+[id*="field-quiz-add-questions-values"]{
+  thead{
+    @extend .hide;
+  }
+  > tbody > tr > td:nth-child(2){padding-top: 30px;}
+  > tbody > tr:first-child > td:nth-child(2){padding-top: 0px;}
+  > tbody > tr > td, > tbody > tr > td > .ajax-new-content{
+    > .form-submit[value="Remove"]{
+      margin: 0;
+      position: absolute;
+      left: 0;
+      bottom: -30px;
+    }
+  }
+  > tbody > tr > td > .ajax-new-content{
+    > .form-submit[value="Remove"]{
+      left: 172px;
+    }
+  }
+  tbody{
+    float: none;
+    display: table-row-group;
+    tr td{
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+    .field-name-field-survey-question{
+      .form-type-textfield{
+        background-color: #fffddf;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      
+    }
+    .field-name-field-quiz-options-answer{
+      @extend .pos-rel;
+      table{
+        tr td:nth-child(2){
+          background-color: #ebeff2;
+          margin-bottom: 10px;
+          @extend .fleft;
+          @extend .full;
+          @extend .pos-rel;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          .form-type-select{
+            margin-top: 0;
+          }
+          .field-name-field-quiz-correct-answer{
+            .form-type-checkboxes{
+              margin-bottom: 0;
+            }
+          }
+          > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+            position: absolute;
+            right: 0;
+            top: 5px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: url('../images/cross_small.png') center center no-repeat #fff;
+            text-indent: -9999px;
+          }
+        }
+        & + .clearfix{
+          bottom: -28px;
+          position: absolute;
+          right: 0;
+          .field-add-more-submit{
+            @extend .add-more;
+            font-size: 26px;
+            line-height: 24px;
+            padding: 0 5px 4px;
+          }
+        }
+      }
+    }
+  }
+}
+.form-field-name-field-quiz-add-questions{
+  @extend .pos-rel;
+  margin-bottom: 60px;
+  > div > .form-item{
+    > .clearfix{
+      position: absolute;
+      bottom: -30px;
+      left: 0;
+      .form-submit{
+        margin: 0;
+      }
     }
   }
 }
@@ -1838,11 +1933,28 @@ input[name="field_gallery_image_add_more"]{
 .field-name-field-mobile-subscribers{
   @extend .hide;
 }
-.node-itg_celebrity_profile-form{
+.node-itg_celebrity_profile-form, 
+.field-name-field-quiz-answer-image{
   .form-type-managed-file .form-managed-file + div.description{
     left: 600px;
   }
   .image-widget-data{
+    input.form-file{
+      margin-top: 5px;
+      & + .form-submit{
+        @extend .add-more-wbg;
+      }
+    }
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
+  }
+}
+.field-name-field-quiz-answer-video{
+  .form-type-managed-file .form-managed-file + div.description{
+    left: 600px;
+  }
+  .file-widget{
     input.form-file{
       margin-top: 5px;
       & + .form-submit{
@@ -1863,4 +1975,48 @@ input[name="field_gallery_image_add_more"]{
     .form-type-textfield{margin-top: 0;}
   }
 }
-
+[id*="itg-survey-survey-form"]{
+  #messages{
+    margin: 20px 0;
+  }
+  .question-container{
+    @extend .hide;
+    .question-heading{
+      font-size: 18px;
+      font-weight: 600;
+    }
+    &#question-container-0{
+      @extend .db;
+    }
+    .ajax-progress-throbber{
+      position: static;
+    }
+    .form-submit{
+      @extend .btn-save;
+    }
+  }
+  .answer-container{
+    padding: 10px 0;
+    @extend .dib;
+    @extend .full;
+    .answer-heading{
+      font-size: 14px;
+      font-weight: 600;
+      padding-bottom: 5px;
+    }
+    > .form-item{
+      margin: 0;
+      padding: 0;
+      .form-item{
+        display: block;
+        margin: 0;
+        &.form-type-radio{
+          .form-radio{
+            @extend .fleft;
+            margin: 1px 5px 0 0;
+          }
+        }
+      }
+    }
+  }
+}
