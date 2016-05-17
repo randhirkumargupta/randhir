@@ -28,7 +28,9 @@ function feature_for_ugc_user_default_permissions() {
   $permissions['create ugc content'] = array(
     'name' => 'create ugc content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',

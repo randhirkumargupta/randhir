@@ -194,6 +194,13 @@ function itg_story_node_validate($node, $form, &$form_state) {
   // Code for redirection url validation
   if ($node->type == 'story') {
     
+     // code to validation magazine field when issue based story is checked
+    if (!empty($issue_based)) {
+      if (empty($magazine)) {
+        form_set_error('field_story_select_magazine', t("Please select Magazine"));
+      }
+    }
+    
     // code to check if issue based is check fill magazine kicker text
     if (!empty($issue_based)) {
       if (empty($magazine_kicker)) {
@@ -201,14 +208,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
       }
     }
     
-    // code to validation magazine field when issue based story is checked
-    if (!empty($issue_based)) {
-      if (empty($magazine)) {
-        form_set_error('field_story_select_magazine', t("Please select Magazine"));
-      }
-    }
-
-    $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
+   $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
     
     if (!empty($redirection_url)) { 
       if (filter_var($redirection_url, FILTER_VALIDATE_URL) === false) {

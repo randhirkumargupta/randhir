@@ -110,6 +110,12 @@ function itg_event_backend_sponsor($form, &$form_state) {
  */
 function itg_event_backend_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3));
+  if(isset($form_state['values']['nid'])){
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    $settings['node_id'] = $form_state['values']['nid'];
+    drupal_add_js(array('itg_event_backend_nid' => array('settings' => $settings)), array('type' => 'setting'));
+  }
   global $user, $base_url;
   unset($form['metatags']['intro_text']['#markup']);
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
@@ -148,15 +154,20 @@ function itg_event_backend_after_build($form, &$form_state) {
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
       }
+      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'])) {
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      }
       
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
+//      $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#ajax'] =  array(
+//      'callback' => 'ajax_example_autocheckboxes_callback',
+//      'wrapper' => 'checkboxes-div',
+//      'method' => 'replace',
+//      'effect' => 'fade',
+//    );
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
-      $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#ajax'] = array(
-        'event' => 'change',
-        'callback' => 'programmes_ajax_callback',
-        'method' => 'replace',
-        'wrapper' => 'countries_wrapper'
-      );
+//      unset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title']['#validated']);
     }
   }
 //event media
@@ -166,6 +177,7 @@ function itg_event_backend_after_build($form, &$form_state) {
         $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
       }
+      
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
     }
@@ -250,7 +262,7 @@ function itg_event_backend_configuration_redirect($form, &$form_state) {
  * @param string $format DateTime format, default is Y-m-d
  * @return array returns every date between $startDate and $endDate, formatted as "Y-m-d"
  */
-function itg_event_backend_date_interval($startDate, $endDate, $format = "Y-m-d") {
+function itg_event_backend_date_interval($startDate, $endDate, $format = "d-m-Y") {
   $begin = new DateTime($startDate);
   $end = new DateTime($endDate);
   $interval = new DateInterval('P1D'); // 1 Day
@@ -383,6 +395,12 @@ function itg_event_backend_menu() {
   );
   $items['event-unpublish'] = array(
     'page callback' => 'itg_event_backend_unpublish_event',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_event_backend.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['event-title/%'] = array(
+    'page callback' => 'itg_event_backend_title_event',
     'access arguments' => array('access content'),
     'file' => 'includes/itg_event_backend.inc',
     'type' => MENU_CALLBACK,
