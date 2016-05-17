@@ -28,9 +28,10 @@ function event_backend_msnf_step_info() {
       4 => 'field_config_video',
       5 => 'field_config_flashback',
       6 => 'field_config_home',
-      7 => 'metatags',
-      8 => 'path',
-      9 => 'additional_settings',
+      7 => 'field_force_registration_open',
+      8 => 'metatags',
+      9 => 'path',
+      10 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(

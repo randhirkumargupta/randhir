@@ -14,13 +14,10 @@ function event_backend_user_default_permissions() {
   $permissions['create event_backend content'] = array(
     'name' => 'create event_backend content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
@@ -62,13 +59,10 @@ function event_backend_user_default_permissions() {
   $permissions['delete own event_backend content'] = array(
     'name' => 'delete own event_backend content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
@@ -92,13 +86,10 @@ function event_backend_user_default_permissions() {
   $permissions['edit any event_backend content'] = array(
     'name' => 'edit any event_backend content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
@@ -122,13 +113,10 @@ function event_backend_user_default_permissions() {
   $permissions['edit own event_backend content'] = array(
     'name' => 'edit own event_backend content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
