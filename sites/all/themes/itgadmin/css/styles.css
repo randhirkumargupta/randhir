@@ -91,9 +91,9 @@ img {
   text-decoration: none;
 }
 
-.hide, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, [id*="field-erf-registration-fee-values"] thead,
+.hide, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
-.field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, [id*="itg-survey-survey-form"] .question-container, .itg-popup, .grippie {
+.field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, [id*="itg-survey-survey-form"] .question-container, .itg-popup, .page-admin-structure-taxonomy-tags form .path-form legend, .grippie {
   display: none;
 }
 
@@ -141,7 +141,7 @@ img {
 [id*="field-newsl-add-news-values"] + div.clearfix .form-submit,
 [id*="field-story-template-buzz-values"] + div.clearfix .form-submit,
 [id*="field-erf-registration-fee-values"] + div.clearfix .form-submit,
-[id*="field-mega-review-review-values"] + div.clearfix .form-submit, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit, .add-more-wbg, [id*="user-register-form"] .image-widget-data input.form-file + .form-submit, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .node-itg_celebrity_profile-form .image-widget-data input.form-file + .form-submit,
+[id*="field-mega-review-review-values"] + div.clearfix .form-submit, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit, fieldset#edit-select .form-submit, .add-more-wbg, [id*="user-register-form"] .image-widget-data input.form-file + .form-submit, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .node-itg_celebrity_profile-form .image-widget-data input.form-file + .form-submit,
 .field-name-field-quiz-answer-image .image-widget-data input.form-file + .form-submit, .field-name-field-quiz-answer-video .file-widget input.form-file + .form-submit, ul.pager li, .header .header__logo, .form-type-radio, .form-type-managed-file .filefield-source, .credit-to-all, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #block-menu-menu-admin-left-menu > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
@@ -197,7 +197,7 @@ img {
 [id*="field-newsl-add-news-values"] + div.clearfix .form-submit,
 [id*="field-story-template-buzz-values"] + div.clearfix .form-submit,
 [id*="field-erf-registration-fee-values"] + div.clearfix .form-submit,
-[id*="field-mega-review-review-values"] + div.clearfix .form-submit, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit, .add-more-wbg, [id*="user-register-form"] .image-widget-data input.form-file + .form-submit, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .node-itg_celebrity_profile-form .image-widget-data input.form-file + .form-submit,
+[id*="field-mega-review-review-values"] + div.clearfix .form-submit, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit, fieldset#edit-select .form-submit, .add-more-wbg, [id*="user-register-form"] .image-widget-data input.form-file + .form-submit, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .node-itg_celebrity_profile-form .image-widget-data input.form-file + .form-submit,
 .field-name-field-quiz-answer-image .image-widget-data input.form-file + .form-submit, .field-name-field-quiz-answer-video .file-widget input.form-file + .form-submit, ul.pager li, .header .header__logo-image, .form-type-radio, .form-type-managed-file .filefield-source, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .content-block-menu > .menu > li, #block-menu-menu-ask-an-expert-menu > .menu > li,
 #block-menu-menu-photogallery-admin-menu > .menu > li,
 #block-menu-menu-mega-review-menu > .menu > li,
@@ -227,7 +227,7 @@ img {
 [id*="field-newsl-add-news-values"] thead,
 [id*="field-story-template-buzz-values"] thead,
 [id*="field-erf-registration-fee-values"] thead,
-[id*="field-mega-review-review-values"] thead, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li, .dashboard-tab li, .node-story-form #Templates .form-field-type-text tbody, .node-story-form #Templates .form-field-type-text thead, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .block-itg-event-backend .block-itg-story-list a, [id*="field-event-media-values"] > tbody > tr, [id*="field-event-media-values"] > tbody > tr > td, [class*="node-type-"] .node .field .field-label, .ugc-action strong, [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio, [id*="field-program-schedule-values"] > tbody > tr, [id*="field-program-schedule-values"] > tbody > tr > td {
+[id*="field-mega-review-review-values"] thead, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li, .dashboard-tab li, .node-story-form #Templates .form-field-type-text tbody, .node-story-form #Templates .form-field-type-text thead, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .block-itg-event-backend .block-itg-story-list a, [id*="field-event-media-values"] > tbody > tr, [id*="field-event-media-values"] > tbody > tr > td, [class*="node-type-"] .node .field .field-label, .ugc-action strong, [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio, [id*="field-program-schedule-values"] > tbody > tr, [id*="field-program-schedule-values"] > tbody > tr > td, [id*="views-exposed-form-syndication-feed-generator-page"] .views-submit-button .form-type-select {
   float: left;
 }
 
@@ -416,7 +416,7 @@ img {
 [id*="field-newsl-add-news-values"] + div.clearfix .form-submit,
 [id*="field-story-template-buzz-values"] + div.clearfix .form-submit,
 [id*="field-erf-registration-fee-values"] + div.clearfix .form-submit,
-[id*="field-mega-review-review-values"] + div.clearfix .form-submit, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit {
+[id*="field-mega-review-review-values"] + div.clearfix .form-submit, .img-crt, input[name="field_gallery_image_add_more"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .hierarchical-select-wrapper .add-to-dropbox, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit, fieldset#edit-select .form-submit {
   background-color: #1fb5ad;
   border: 1px solid #1fb5ad;
   color: #fff;
@@ -438,7 +438,7 @@ img {
 [id*="field-newsl-add-news-values"] + div.clearfix .form-submit:hover,
 [id*="field-story-template-buzz-values"] + div.clearfix .form-submit:hover,
 [id*="field-erf-registration-fee-values"] + div.clearfix .form-submit:hover,
-[id*="field-mega-review-review-values"] + div.clearfix .form-submit:hover, .img-crt:hover, input[name="field_gallery_image_add_more"]:hover, .form-type-plupload .plupload_buttons .plupload_button.plupload_add:hover, .view .view-filters .views-exposed-form .views-submit-button .form-submit:hover, .hierarchical-select-wrapper .add-to-dropbox:hover, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit:hover, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit:hover {
+[id*="field-mega-review-review-values"] + div.clearfix .form-submit:hover, .img-crt:hover, input[name="field_gallery_image_add_more"]:hover, .form-type-plupload .plupload_buttons .plupload_button.plupload_add:hover, .view .view-filters .views-exposed-form .views-submit-button .form-submit:hover, .hierarchical-select-wrapper .add-to-dropbox:hover, .node-story-form #Templates .form-field-type-text .form-item > table + .description + div .form-submit:hover, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit:hover, fieldset#edit-select .form-submit:hover {
   background-color: #1fb5ad;
   border: 1px solid #1fb5ad;
 }
@@ -718,7 +718,7 @@ input.password-confirm, input.password-field {
   margin: 0;
 }
 
-.node-form h2 {
+.node-form h2, .page-admin-structure-taxonomy-tags form h2 {
   background-color: #fefafb;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
@@ -727,11 +727,11 @@ input.password-confirm, input.password-field {
   font-size: 18px;
   margin: 15px 0;
 }
-.node-form input[type="text"], .node-form select, .node-form .form-textarea-wrapper textarea {
+.node-form input[type="text"], .page-admin-structure-taxonomy-tags form input[type="text"], .node-form select, .page-admin-structure-taxonomy-tags form select, .node-form .form-textarea-wrapper textarea, .page-admin-structure-taxonomy-tags form .form-textarea-wrapper textarea {
   width: 100%;
   max-width: 332px;
 }
-.node-form .form-actions {
+.node-form .form-actions, .page-admin-structure-taxonomy-tags form .form-actions {
   background-color: #fefafb;
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #d9d9d9;
@@ -2098,4 +2098,42 @@ input[name="field_gallery_image_add_more"] {
   left: -220px;
   position: absolute;
   top: 26px;
+}
+
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created {
+  width: 300px;
+}
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created .container-inline-date {
+  float: left;
+  width: 50%;
+  clear: none;
+  padding-right: 5px;
+}
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created .container-inline-date .form-type-textfield > label {
+  display: none;
+}
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created .container-inline-date + .container-inline-date {
+  padding-left: 5px;
+}
+
+[id*="views-exposed-form-syndication-feed-generator-page"] .views-submit-button .form-type-select {
+  margin-right: 10px;
+}
+[id*="views-exposed-form-syndication-feed-generator-page"] .views-submit-button #edit-submit-syndication-feed-generator {
+  margin-top: 26px;
+}
+[id*="views-exposed-form-syndication-feed-generator-page"] > div > .form-actions .form-submit {
+  margin-top: 10px;
+}
+
+fieldset#edit-select {
+  padding: 10px;
+}
+
+.page-admin-structure-taxonomy-tags form .form-type-textfield .form-text {
+  max-width: 332px;
+}
+.page-admin-structure-taxonomy-tags form .path-form {
+  border: none;
+  margin-top: -30px;
 }

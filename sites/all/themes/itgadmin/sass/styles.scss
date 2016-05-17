@@ -2171,5 +2171,60 @@ input[name="field_gallery_image_add_more"]{
     } 
   }
 }
-
+.view .view-filters .views-exposed-form .views-exposed-widget{
+  &.views-widget-filter-created{
+    width: 300px;
+    .container-inline-date{
+      float: left;
+      width: 50%;
+      clear: none;
+      padding-right: 5px;
+      .form-type-textfield{
+        > label{
+          display: none;
+        }
+      }
+      & + .container-inline-date{
+        padding-left: 5px;
+      }
+    }
+  }
+}
+[id*="views-exposed-form-syndication-feed-generator-page"]{
+  .views-submit-button{
+    .form-type-select{
+      @extend .fleft;
+      margin-right: 10px;
+    }
+    #edit-submit-syndication-feed-generator{
+      margin-top: 26px;
+    }
+  }
+  > div{
+    > .form-actions{
+      .form-submit{
+        margin-top: 10px;
+      }
+    }
+  }
+}
+fieldset#edit-select{
+  padding: 10px;
+  .form-submit{
+    @extend .add-more;
+  }
+}
+.page-admin-structure-taxonomy-tags form{
+  @extend .node-form;
+  .form-type-textfield{
+    .form-text{max-width: 332px;}
+  }
+  .path-form{
+    border: none;
+    margin-top: -30px;
+    legend{
+      @extend .hide;
+    }
+  }
+}
 
