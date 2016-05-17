@@ -8,11 +8,7 @@
       <?php if (!empty($submitted)): ?>
         <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
       <?php endif; ?>
-        <?php
-        //p($node);
-       // echo $node->moderation_history_block;
-        ?>
-      <!-- add && !$teaser for hide comment link -->
+
       <?php if (!empty($links) && !$teaser): ?>
         <div class='<?php print $hook ?>-links clearfix'>
           <?php print render($links) ?>
@@ -41,12 +37,6 @@
 
       <?php if (!empty($content)): ?>
         <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-          <?php
-          //print render($content) 
-          // print '<pre>';
-          //print_r($content);
-          //print '</pre>';
-          ?>
 
           <?php if ($view_mode == 'full'): ?>
           <div class="content-node-view">
@@ -57,36 +47,33 @@
                   <div class="field-label"><?php echo t('Title'); ?>:</div>
                   <div class="field-items"><?php print $title; ?></div>
                 </div>
+                
                 <?php
                 $quiz_body = render($content['body']);
                 if (!empty($quiz_body)): print render($content['body']);
                 endif;
-                ?>
-                <?php
+
                 $field_quiz_type = render($content['field_quiz_type']);
                 if (!empty($field_quiz_type)): print render($content['field_quiz_type']);
                 endif;
-                ?>
-                <?php
-                $immediate_result = render($content['field_quiz_immediate_result']);
-                if (!empty($immediate_result)): print render($content['field_quiz_immediate_result']);
-                endif;
-                ?>
-                <?php
+
+                if($content['field_quiz_type']['#items'][0]['value'] == 'immediate'){
+                  print render($content['field_quiz_immediate_result']);
+                }
+
                 $source_id = render($content['field_story_source_id']);
                 if (!empty($source_id)): print render($content['field_story_source_id']);
                 endif;
-                ?>
-                <?php
+
                 $quiz_scoring_type = render($content['field_quiz_scoring_type']);
                 if (!empty($quiz_scoring_type)): print render($content['field_quiz_scoring_type']);
                 endif;
-                ?>
-                <?php
+
                 $display_sequence = render($content['field_quiz_display_sequence']);
                 if (!empty($display_sequence)): print render($content['field_quiz_display_sequence']);
                 endif;
                 ?>
+                
               </div>
             </div>
           </div>
@@ -129,7 +116,7 @@
                 if (isset($imagecollection['field_quiz_answer_type'][LANGUAGE_NONE]) && !empty($imagecollection['field_quiz_answer_type'][LANGUAGE_NONE])) {
                       $output .= '<div class="field"><div class="field-label">Answer Type:</div><div class="field-items">'.$imagecollection['field_quiz_answer_type'][LANGUAGE_NONE][0]['value'].'</div></div>';
                     }  
-                  if (isset($imagecollection['field_quiz_weightage'][LANGUAGE_NONE]) && !empty($imagecollection['field_quiz_weightage'][LANGUAGE_NONE])) {
+                  if ($content['field_quiz_scoring_type']['#items'][0]['value'] == 'weight' && isset($imagecollection['field_quiz_weightage'][LANGUAGE_NONE]) && !empty($imagecollection['field_quiz_weightage'][LANGUAGE_NONE])) {
                     $output .= '<div class="field"><div class="field-label">Weightage:</div><div class="field-items">'.$imagecollection['field_quiz_weightage'][LANGUAGE_NONE][0]['value'].'</div></div>';
                   }
                   $output .= '<div class="sub-field-quiz">'; //$output_sub
@@ -165,7 +152,7 @@
                         }
                       }
                     }
-                  if (isset($subfield['field_quiz_correct_answer'][LANGUAGE_NONE]) && !empty($subfield['field_quiz_correct_answer'][LANGUAGE_NONE])) {
+                  if (isset($subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value']) && !empty($subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'])) {
                       $output .= '<div class="field"><div class="field-label">Correct Answer:</div><div class="field-items">'.$subfield['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'].'</div></div>';
                     }
                      
@@ -186,7 +173,7 @@
         </div>
               <?php } 
               
-              }else{              
+              } else{              
                 ?>
                 <div class="content-node-view">
                   <div class="expert-details content-box">

@@ -67,6 +67,7 @@ function features_for_story_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'UGC Moderator' => 'UGC Moderator',
     ),
     'module' => 'node',
   );

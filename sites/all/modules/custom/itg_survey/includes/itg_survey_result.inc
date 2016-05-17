@@ -5,7 +5,7 @@
 
 function itg_survey_result() {
   $node = node_load(arg(1));
-  if(itg_common_check_record_existance($node->nid, 'itg_survey_detail') > 0){
+  if(itg_common_check_record_existance($node->nid, 'itg_survey_detail', 'nid') > 0){
   if ($node->type == 'survey') {
     
       $num = 0;

@@ -28,16 +28,20 @@ function features_for_newsletter_field_group_info() {
       2 => 'field_newsl_website_name',
       3 => 'title',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Basic Settings',
       'instance_settings' => array(
-        'required_fields' => 0,
-        'id' => 'BasicDetails',
-        'classes' => 'group-newsl-basic-settings field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'itg-group-field',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_newsl_basic_settings|node|newsletter|form'] = $field_group;

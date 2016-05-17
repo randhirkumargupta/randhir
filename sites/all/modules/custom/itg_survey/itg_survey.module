@@ -134,10 +134,12 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
+  
+  $title = $form_state['node']->title;
   if (arg(2) == 'edit') {
-    drupal_set_message(t('Survey has been updated.'));
+    drupal_set_message(t('Survey <strong>'.$title.'</strong> has been updated.'));
   } else {
-    drupal_set_message(t('Survey has been submitted for further review and approval.'));
+    drupal_set_message(t('Survey <strong>'.$title.'</strong> has been submitted for further review and approval.'));
   }
 }
 
@@ -173,6 +175,10 @@ function itg_survey_form_after_build($form, &$form_state) {
   
   //Add JS for survey
    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey.js', array('weight' => 1));
+   
+     $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+  );
     
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
@@ -327,6 +333,7 @@ function itg_survey_vote_percentage($nid, $ques_id, $answer){
             ->condition('su.ques_id', $ques_id, '=')
             ->condition('su.nid', $nid, '=')
             ->condition('su.answer', $answer, '=')
+            ->condition('su.survey_info', 1, '=')
             ->execute();
     $total_answwer_for_ques = $result->rowCount();
     $vote_percentage = ($total_answwer_for_ques / $total_vote_on_question) * 100;
@@ -355,6 +362,7 @@ function itg_survey_vote_percentage_user($nid, $ques_id, $answer, $user_type){
             ->condition('su.nid', $nid, '=')
             ->condition('su.answer', $answer, '=')
             ->condition('su.user_type', $user_type, '=')
+            ->condition('su.survey_info', 1, '=')
             ->execute();
     $total_answwer_for_ques_user = $result->rowCount();
     $vote_percentage = ($total_answwer_for_ques_user / $total_vote_on_question_user) * 100;
@@ -375,12 +383,14 @@ function itg_survey_get_total_vote_question($nid, $ques_id, $answer, $user_type)
             ->condition('isu.nid', $nid, '=')
             ->condition('isu.ques_id', $ques_id, '=')
             ->condition('isu.answer', $answer, '=')
+            ->condition('isu.survey_info', 1, '=')
             ->execute();
   } else {
     $result = db_select('itg_survey_detail', 'isu')
             ->fields('isu')
             ->condition('isu.nid', $nid, '=')
             ->condition('isu.ques_id', $ques_id, '=')
+            ->condition('isu.survey_info', 1, '=')
             ->execute();
   }
 
@@ -427,7 +437,7 @@ function itg_survey_block_view($delta = '') {
  * @return string
  */
 function itg_survey_show_survey_result($nid){
-  if(itg_common_check_record_existance($nid, 'itg_survey_detail') > 0){
+  if(itg_common_check_record_existance($nid, 'itg_survey_detail', 'nid') > 0){
     return l('View Result','survey-result/'.$nid, array('attributes' => array('target'=>'_blank')));
   } else {
     return 'View Result';

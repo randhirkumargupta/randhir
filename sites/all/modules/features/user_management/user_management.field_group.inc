@@ -26,15 +26,20 @@ function user_management_field_group_info() {
       0 => 'field_mark_as_expert',
       1 => 'field_user_section',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'configuration',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-configuration field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'user-configurations',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_configuration|user|user|form'] = $field_group;
@@ -57,16 +62,20 @@ function user_management_field_group_info() {
       2 => 'field_subscribe_for_newsletter',
       3 => 'account',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Account Details',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'group-account-details field-group-fieldset',
+        'classes' => '',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_reset_password|user|user|form'] = $field_group;
@@ -89,16 +98,20 @@ function user_management_field_group_info() {
       2 => 'field_mobile_number',
       3 => 'field_user_picture',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Basic Details',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'group-user-basic-details field-group-fieldset',
+        'classes' => '',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_user_basic_details|user|user|form'] = $field_group;

@@ -306,7 +306,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     
   });
   
-  var loader = '<div class="ajax-loader"><img src="sites/all/themes/rubik/images/loader.svg" alt=""/></div>';
+  var loader = '<div class="ajax-loader"><img src="sites/all/themes/itgadmin/images/loader.svg" alt=""/></div>';
   
   $('#itg-survey-survey-form .button-yes').mousedown(function(){
     var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
@@ -466,7 +466,48 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   $('.header__secondary-menu ul li.last a').html('<i class="fa fa-power-off" aria-hidden="true"></i>');
   
+  /* jQuery code for Event Backend */
+
+  $('.form-field-name-field-event-media table tbody tr').each(function(){
+    var ebAudio = $(this).find('.field-name-field-browse-or-upload .form-radio[value="audio"]');
+    var ebPhoto = $(this).find('.field-name-field-browse-or-upload .form-radio[value="photo"]');
+    var ebVideo = $(this).find('.field-name-field-browse-or-upload .form-radio[value="video"]');
+    var audioCheck  = ebAudio.is(':checked');
+    var photoCheck  = ebPhoto.is(':checked');
+    var videoCheck  = ebVideo.is(':checked');
+    if(videoCheck){
+      ebVideo.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-poll-question-video').show();
+    }else if(audioCheck){
+      ebAudio.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-audio').show();
+    }else if(photoCheck){
+      ebPhoto.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-quiz-answer-image').show();
+    }
+  }); 
   
+  $('.form-field-name-field-event-media').on('change', '.form-radio', function(){
+    var isChecked = $(this).is(':checked');
+    var isVal = $(this).val();
+    if(isChecked == true && isVal == 'video'){
+      $(this).parents('.field-type-list-text').nextAll('div').find('.form-submit[value="Remove"]').mousedown();
+      $(this).parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-poll-question-video').show();
+    }
+    else if(isChecked == true && isVal == 'audio'){
+      $(this).parents('.field-type-list-text').nextAll('div').find('.form-submit[value="Remove"]').mousedown();
+      $(this).parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-audio').show();
+    }
+    else if(isChecked == true && isVal == 'photo'){
+      $(this).parents('.field-type-list-text').nextAll('div').find('.form-submit[value="Remove"]').mousedown();
+      $(this).parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-quiz-answer-image').show();
+    }
+  }); 
+  
+  $('body').on('click', '.data-popup-link', function(){
+    var ID = $(this).attr('data-id');
+    $('body').find('#'+ID).show();
+  });
+  $('body').on('click', '.itg-close-popup', function(){
+    $(this).parent().parent().hide();
+  });
   
 };
 })(jQuery);
