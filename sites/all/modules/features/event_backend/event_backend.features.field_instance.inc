@@ -129,77 +129,6 @@ function event_backend_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_event_highlights-field_daywise_event'.
-  $field_instances['field_collection_item-field_event_highlights-field_daywise_event'] = array(
-    'bundle' => 'field_event_highlights',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_daywise_event',
-    'label' => 'Daywise',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 0,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_event_highlights-field_programe_time'.
-  $field_instances['field_collection_item-field_event_highlights-field_programe_time'] = array(
-    'bundle' => 'field_event_highlights',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_programe_time',
-    'label' => 'Time',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_event_highlights-field_programe_title'.
   $field_instances['field_collection_item-field_event_highlights-field_programe_title'] = array(
     'bundle' => 'field_event_highlights',
@@ -218,8 +147,8 @@ function event_backend_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_programe_title',
-    'label' => 'Title',
-    'required' => 0,
+    'label' => 'Select Program',
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -1962,6 +1891,7 @@ function event_backend_field_default_field_instances() {
   t('Program Schedule');
   t('Programme');
   t('Registration Close Date');
+  t('Select Program');
   t('Select Speaker');
   t('Session Title ');
   t('Short Description');
@@ -1972,8 +1902,6 @@ function event_backend_field_default_field_instances() {
   t('Start Time');
   t('The complete description of the event.');
   t('This displays information about the event.');
-  t('Time');
-  t('Title');
   t('Values – Paid and Free');
   t('Video');
 
