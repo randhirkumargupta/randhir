@@ -65,7 +65,7 @@ function feature_for_mobile_services_field_default_field_instances() {
             'search_all_fields' => 0,
           ),
         ),
-        'imce_filefield_on' => 0,
+        'imce_filefield_on' => 1,
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
@@ -296,12 +296,10 @@ function feature_for_mobile_services_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 4,
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -316,11 +314,6 @@ function feature_for_mobile_services_field_default_field_instances() {
     'label' => 'Client selection',
     'required' => 1,
     'settings' => array(
-      'behaviors' => array(
-        'taxonomy-index' => array(
-          'status' => TRUE,
-        ),
-      ),
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
@@ -640,6 +633,49 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-clients_creation-field_client_short_description'.
+  $field_instances['node-clients_creation-field_client_short_description'] = array(
+    'bundle' => 'clients_creation',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_client_short_description',
+    'label' => 'Short Description',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'node-clients_creation-field_client_title'.
   $field_instances['node-clients_creation-field_client_title'] = array(
     'bundle' => 'clients_creation',
@@ -675,7 +711,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -931,48 +967,6 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 46,
-    ),
-  );
-
-  // Exported field_instance: 'node-clients_creation-field_short_description'.
-  $field_instances['node-clients_creation-field_short_description'] = array(
-    'bundle' => 'clients_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_short_description',
-    'label' => 'Short Description',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 2,
     ),
   );
 
@@ -1462,7 +1456,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'bundle' => 'service_creation',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'http://indiatoday.com',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1496,49 +1490,6 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 11,
-    ),
-  );
-
-  // Exported field_instance: 'node-service_creation-field_service_frequency'.
-  $field_instances['node-service_creation-field_service_frequency'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => array(
-      0 => array(
-        'value' => 1,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_frequency',
-    'label' => 'Frequency',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 9,
     ),
   );
 
@@ -1985,6 +1936,7 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('Service Frequency Date');
   t('Service Title');
   t('Short Description');
+  t('http://indiatoday.com');
 
   return $field_instances;
 }

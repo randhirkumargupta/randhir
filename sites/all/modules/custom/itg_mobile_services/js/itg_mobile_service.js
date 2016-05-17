@@ -62,7 +62,7 @@ var fixedDate = '';
             jQuery("#edit-field-service-frequency-date-und-0-show-todate").prop('checked', true);
             jQuery('#edit-field-service-frequency-date-und-0-show-todate').hide();
             jQuery('.form-item-field-service-frequency-date-und-0-value2').show();
-            
+
 
             var selectedVal = "";
             var selected = $("#edit-field-service-frequency-und input[type='radio']:checked");

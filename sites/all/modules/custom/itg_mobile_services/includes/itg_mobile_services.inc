@@ -126,7 +126,6 @@ function itg_mobile_service_get_client_token($token) {
   return $record = $result->fetchAssoc();
 }
 
-
 /**
  * Custom callback for print mobile xml
  * @param type $query
