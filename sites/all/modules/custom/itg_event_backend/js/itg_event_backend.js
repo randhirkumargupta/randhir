@@ -36,6 +36,24 @@
                 $('#edit-field-group-registration-fee-10-und-0-value').val('');
                 $('#edit-field-individual-registration-fe-und-0-value').val('');
             });
+            
+             //Ajax implement on daywise
+//           $('.field-name-field-event-highlights').on('change', '.field-name-field-daywise-event .form-select', function(){
+//               var node_id = settings.itg_event_backend_nid.settings.node_id;
+//                //$(this).parents('.field-name-field-daywise-event').next().find('.form-select').addClass('vddd');
+//                var base_url = Drupal.settings.basePath;
+//                 $.ajax({
+//                       url: base_url + "event-title/"+node_id,
+//                       method: 'POST',
+//                       //data: {'daywise': $(this).val()},
+//                       data: 'daywise='+$(this).val(),
+//                       success: function(data) {                              
+//                              // $(this).parents('.field-name-field-daywise-event').next().find('.field-name-field-programe-title .form-select').html(data);
+//                               //$(this).next().find('.field-name-field-programe-title .form-select').html(data);
+//                               $('#edit-field-event-highlights-und-0-field-programe-title-und').html(data);
+//                       }
+//                 });
+//            });
          
         }
     }

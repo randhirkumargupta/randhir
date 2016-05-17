@@ -306,7 +306,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     
   });
   
-  var loader = '<div class="ajax-loader"><img src="sites/all/themes/rubik/images/loader.svg" alt=""/></div>';
+  var loader = '<div class="ajax-loader"><img src="sites/all/themes/itgadmin/images/loader.svg" alt=""/></div>';
   
   $('#itg-survey-survey-form .button-yes').mousedown(function(){
     var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
@@ -485,6 +485,14 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
       $(this).parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-quiz-answer-image').show();
     }
   }); 
+  
+  $('body').on('click', '.data-popup-link', function(){
+    var ID = $(this).attr('data-id');
+    $('body').find('#'+ID).show();
+  });
+  $('body').on('click', '.itg-close-popup', function(){
+    $(this).parent().parent().hide();
+  });
   
 };
 })(jQuery);
