@@ -138,6 +138,9 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       $form['field_erf_total_fee'][LANGUAGE_NONE][0]['value']['#value'] = $total_fee;
       $form['field_erf_total_fee']['#disabled'] = TRUE;
     }
+    
+    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $_GET['event_id'];
+    $form['field_story_source_id']['#access'] = TRUE;
 
     //Call function after form build
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
@@ -186,8 +189,11 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   //Add JS for Event Registration
   drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
 
-  //Hide SEF url path setting
-  //$form['path']['#access'] = FALSE;
+  //Hide submit button for all steps except last one
+  if($form_state['storage']['step'] == 'step_erf_company_details' || $form_state['storage']['step'] == 'step_erf_registration_fee'){
+    unset($form['actions']['submit']);
+  }
+  
   
   if ($form_state['storage']['step'] == 'step_erf_order_summary') {
     $current_event_nid = $_GET['event_id'];

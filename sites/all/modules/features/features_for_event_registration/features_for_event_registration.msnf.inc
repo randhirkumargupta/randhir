@@ -94,7 +94,7 @@ function features_for_event_registration_msnf_step_info() {
   $msnf->bundle = 'event_registration';
   $msnf->data = array(
     'label' => 'Step 4 - Order Summary:',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_erf_payment_gateway',
       1 => 'field_erf_total_fee',
@@ -131,6 +131,7 @@ function features_for_event_registration_msnf_step_info() {
     'weight' => '2',
     'children' => array(
       0 => 'field_erf_registration_fee',
+      1 => 'field_erf_type',
     ),
     'format_type' => 'default',
     'format_settings' => array(

@@ -46,10 +46,19 @@
           <?php
             // Load custom block for social media integration              
             if (!isset($node->op)) {
-              echo '<div class="itg_smi">'. l(t('Create Social media'), 'itg-social-media/edit-content/'.$node->type.'/'.$node->nid, array('attributes' => array('class' => 'button'))) .'</div>';
+//              echo '<div class="itg_smi">'. l(t('Create Social media'), 'itg-social-media/edit-content/'.$node->type.'/'.$node->nid, array('attributes' => array('class' => 'btn data-popup-link', 'id' => 'smi-popup'))) .'</div>';
               $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
-              print render($block['content']);
-            }              
+              ?>
+          <div class="itg-smi">
+            <button data-id="smi-popup" class="btn data-popup-link">Create Social media</button>
+          </div>
+          <div id="smi-popup" class="itg-popup">
+            <div class="popup-body">
+              <a class="itg-close-popup" href="javascript:;"> Close </a>
+              <?php print render($block['content']); ?>
+            </div>
+          </div>
+           <?php }              
           ?>
           <div class="basic-details content-box">
             <h2><?php print t('Quick File'); ?></h2>
