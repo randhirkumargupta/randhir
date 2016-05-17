@@ -24,7 +24,10 @@ function features_for_event_registration_msnf_step_info() {
       0 => 'field_last_name',
       1 => 'field_erf_gender',
       2 => 'field_erf_mobile',
-      3 => 'title',
+      3 => 'field_email_address',
+      4 => 'field_erf_select_id_type',
+      5 => 'field_erf_id_number',
+      6 => 'title',
     ),
     'format_type' => 'default',
     'format_settings' => array(
