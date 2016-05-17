@@ -346,7 +346,8 @@ function itg_astro_menu_alter(&$item) {
  * Implement hook_views_pre_render
  * @param stdObject $view
  */
-function itg_astro_views_pre_render(&$view) {  
+function itg_astro_views_pre_render(&$view) {
+  
   switch ($view->name) {
     case 'associated_content':
       $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';        
@@ -368,6 +369,11 @@ function itg_astro_views_pre_render(&$view) {
     case 'syndication_client':
       $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
       $header_content_astro .= l(t('Create Client'), 'node/add/syndication-client');    
+      $view->attachment_before = $header_content_astro;
+      break;
+    case 'syndication_rule_listing':
+      $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
+      $header_content_astro .= l(t('Create Rule'), 'node/add/syndication-rule');    
       $view->attachment_before = $header_content_astro;
       break;
   }
