@@ -326,3 +326,32 @@ function itg_event_registration_get_registered_user($nid){
     return l($text, $path, array('attributes' => array('target' => '_blank')));
   }
 }
+
+/**
+ * Get ID type value
+ * @param string $val
+ * @return string
+ *   ID type
+ */
+function itg_event_registration_get_id_type($val){
+  switch ($val) {
+    case 'aadhar_card':
+      $id_type = 'Aadhar Card';
+      break;
+    case 'driving_licence':
+      $id_type = 'Driving Licence';
+      break;
+    case 'pan':
+      $id_type = 'PAN Card';
+      break;
+    case 'passport':
+      $id_type = 'Passport';
+      break;
+    case 'voter_id':
+      $id_type = 'Voter Id Card';
+      break;
+    default:
+      break;
+  }
+  return $id_type;
+}
