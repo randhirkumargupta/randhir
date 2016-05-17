@@ -6,7 +6,6 @@
  * @param type $service_id
  */
 function get_services_result($client_id, $service_id) {
-
   return $result = db_query("SELECT service_association.field_service_association_title_target_id AS association_service_target_id, 
       service_association.entity_id AS service_nid,
       service_content_type.field_service_content_type_value AS service_content_type,
@@ -38,7 +37,7 @@ function get_services_result($client_id, $service_id) {
 function mobile_services_generator_data() {
   $arg = arg();
   if ($arg[1] == 'token' && !empty($arg[2])) {
-    $token = base64_decode(arg(2));
+    $token = base64_decode($arg[2]);
     $record = itg_mobile_service_get_client_token($token);
     if (is_array($record) && count($record) > 0) {
       $cid = $record['cid'];
@@ -55,9 +54,7 @@ function mobile_services_generator_data() {
     }
   }
   $result = get_services_result($cid, $sid);
-
   foreach ($result as $item) {
-
     $sid = $item->association_service_target_id;
     $content_type = $item->service_content_type;
     $content_count = $item->service_content_count_value;
@@ -66,7 +63,6 @@ function mobile_services_generator_data() {
     $delivery_mode = $item->delivery_mode_value;
     $frequency = $item->frequency_value;
     $sharing_mode = $item->sharing_mode;
-
 
     $query = db_query("SELECT service_association.field_service_association_title_target_id AS association_service_target_id, 
           content_text.entity_id AS content_nid,
@@ -126,10 +122,9 @@ function itg_mobile_service_get_client_token($token) {
   return $record = $result->fetchAssoc();
 }
 
-
 /**
  * Custom callback for print mobile xml
- * @param type $query
+ * @param Object reference $query
  */
 function print_mobile_xml($query) {
 
@@ -167,7 +162,7 @@ function print_mobile_xml($query) {
 
 /**
  * Custom callback for print mobile rss
- * @param type $query
+ * @param Object reference $query
  */
 function print_mobile_rss($query) {
   global $base_url;
@@ -186,22 +181,18 @@ function print_mobile_rss($query) {
   $root->appendChild($doc->createElement('generator', 'FeedCreator 1.7.2'));
 
   foreach ($query as $row) {
-
     $content_text = $row->content_text;
     $content_image_fid = $row->content_image_fid;
     $content_image_width = $row->content_image_width;
     $content_image_height = $row->content_image_height;
     $file = file_load($content_image_fid)->filename;
     $items = $root->appendChild($doc->createElement('item'));
-
     $item = $doc->createElement('image');
     $item->appendChild($doc->createElement('url', $base_url . "/sites/default/files/mobile_image/" . $file));
     $item->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS<'));
     $item->appendChild($doc->createElement('description', $content_text));
-
     $items->appendChild($item);
   }
-
   $doc->save($file_path . '/result_rss.xml') or die('XML Create Error');
   drupal_goto($base_url . "/sites/default/files/mobile_xml/result_rss.xml");
 }
@@ -222,30 +213,21 @@ function print_mobile_mrss($query) {
   $root->setAttribute('version', '2.0');
   $root->setAttribute('xmlns:media', 'http://search.yahoo.com/mrss/');
   $root = $doc->appendChild($root);
-
   $channel = $root->appendChild($doc->createElement('channel'));
   $channel->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS'));
   $channel->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
   $channel->appendChild($doc->createElement('description', 'India Today'));
-
-
   $items = $root->appendChild($doc->createElement('item'));
-
   foreach ($query as $row) {
-
     $content_text = $row->content_text;
     $content_image_fid = $row->content_image_fid;
     $content_image_width = $row->content_image_width;
     $content_image_height = $row->content_image_height;
-
     $content_audio_fid = $row->content_audio_fid;
     $content_video_fid = $row->content_video_fid;
-
     $file = file_load($content_image_fid)->filename;
-
     $file_audio = ($content_audio_fid) ? file_load($content_audio_fid) : '';
     $file_video = ($content_video_fid) ? file_load($content_video_fid) : '';
-
     if (!empty($file_audio->filename)) {
       $itemaudio = $doc->createElement('media:category');
       $itemaudio->setAttribute('url', $base_url . "/sites/default/files/mobile_image/" . $file_audio->filename);
@@ -255,7 +237,6 @@ function print_mobile_mrss($query) {
       $itemaudio->appendChild($doc->createElement('media:thumbnail'));
       $itemaudio->appendChild($doc->createElement('media:keywords'));
       $itemaudio->appendChild($doc->createElement('description', $content_text));
-
       $items->appendChild($itemaudio);
     }
 
@@ -282,7 +263,7 @@ function print_mobile_mrss($query) {
 
 /**
  * Custom callback for print mobile sms
- * @param type $query
+ * @param Object reference $query
  */
 function print_mobile_sms($query) {
   global $base_url;
@@ -290,33 +271,29 @@ function print_mobile_sms($query) {
   $file_path = $file_path . '/mobile_xml';
   $doc = new DOMDocument('1.0', 'UTF-8');
   $doc->formatOutput = TRUE;
-
   $root = $doc->appendChild($doc->createElement('data'));
   $root = $doc->appendChild($root);
   $root->appendChild($doc->createElement('keyword', 'indiatoday'));
   $root->appendChild($doc->createElement('timestamp', 'en-US'));
   foreach ($query as $row) {
-
     $content_text = $row->content_text;
     $item = $doc->createElement('content');
     $item->appendChild($doc->createCDATASection($content_text));
     $root->appendChild($item);
   }
   $root->appendChild($doc->createElement('transid', '31313131'));
-
   $doc->save($file_path . '/result_sms.xml') or die('XML Create Error');
   drupal_goto($base_url . "/sites/default/files/mobile_xml/result_sms.xml");
 }
 
 /**
  * Custom callback for print mobile simple feed
- * @param type $query
+ * @param Object reference $query
  */
 function print_mobile_simple_feed($query) {
   global $base_url;
   $file_path = drupal_realpath('public://');
   $file_path = $file_path . '/mobile_xml';
-
   foreach ($query as $row) {
     $content_text .= $row->content_text;
   }
@@ -325,13 +302,12 @@ function print_mobile_simple_feed($query) {
 
 /**
  * Custom callback for print mobile ussd
- * @param type $query
+ * @param Object reference $query
  */
 function print_mobile_ussd($query) {
   global $base_url;
   $file_path = drupal_realpath('public://');
   $file_path = $file_path . '/mobile_xml';
-
   foreach ($query as $row) {
     $content_text .= $row->content_text;
   }
@@ -381,7 +357,6 @@ function mobile_services_token_list() {
  * @param type $sid
  */
 function itg_mobile_services_get_service_title($sid) {
-
   if ($sid) {
     $content_type = 'service_creation';
     $options = '';
@@ -391,14 +366,8 @@ function itg_mobile_services_get_service_title($sid) {
     $query->condition('nid', $sid, '=');
     $query->condition('n.type', $content_type, '=');
     $query->range(0, 1);
-
     $result = $query->execute();
     $record = $result->fetchAssoc();
     return $record['title'];
   }
 }
-
-
-
-
-

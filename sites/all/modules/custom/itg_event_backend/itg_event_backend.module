@@ -34,13 +34,6 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     if (isset($form_state['storage']['step'])) {
       $_SESSION['current_step'] = $form_state['storage']['step'];
     }
-
-    if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") {
-      if ($form['#node']->status == 1) {
-        drupal_add_js('jQuery(document).ready(function(){ jQuery("#edit-field-event-start-date-und-0-value-datepicker-popup-1").attr("disabled", "disabled")});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
-        drupal_add_js('jQuery(document).ready(function(){ jQuery("#edit-field-event-close-date-und-0-value-datepicker-popup-1").attr("disabled", "disabled")});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
-      }
-    }
   }
   if ($form_id == 'sponsor_node_form') {
     $form['#after_build'][] = 'itg_event_backend_sponsor';
@@ -79,6 +72,13 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
     form_set_error('field_individual_registration_fe', 'Individual Registration Fee is required.');
   }
+  // Fees validation for registration
+  if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
+    form_set_error('field_individual_registration_fe', 'Individual Registration Fee should be less then Group Registration Fee (upto 5)');
+  }
+   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
+    form_set_error('field_group_registration_fee_5', 'Group Registration Fee (upto 5) should be less then Group Registration Fee (upto 10).');
+  }
 }
 
 /**
@@ -109,8 +109,14 @@ function itg_event_backend_sponsor($form, &$form_state) {
  * @return array $form
  */
 function itg_event_backend_after_build($form, &$form_state) {
+  if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") {
+    if ($form['#node']->status == 1) {
+      drupal_add_js('jQuery(document).ready(function(){ jQuery("#edit-field-event-start-date-und-0-value-datepicker-popup-1").attr("disabled", "disabled")});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+      drupal_add_js('jQuery(document).ready(function(){ jQuery("#edit-field-event-close-date-und-0-value-datepicker-popup-1").attr("disabled", "disabled")});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+    }
+  }
   drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3));
-  if(isset($form_state['values']['nid'])){
+  if (isset($form_state['values']['nid'])) {
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['node_id'] = $form_state['values']['nid'];
@@ -158,7 +164,7 @@ function itg_event_backend_after_build($form, &$form_state) {
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
       }
-      
+
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
 //      $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#ajax'] =  array(
 //      'callback' => 'ajax_example_autocheckboxes_callback',
@@ -177,7 +183,7 @@ function itg_event_backend_after_build($form, &$form_state) {
         $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
       }
-      
+
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
     }

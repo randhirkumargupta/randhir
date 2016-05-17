@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Install, update and uninstall functions for the ITG Mobile Services module.
@@ -11,7 +12,7 @@
  * @return array
  */
 function itg_mobile_services_schema() {
-  $schema = array();      
+  $schema = array();
   $schema['itg_client_token'] = array(
     'description' => t('client token Information!'),
     'fields' => array(
@@ -28,10 +29,10 @@ function itg_mobile_services_schema() {
         'not null' => TRUE,
       ),
       'cid' => array(
-        'description' => t('client id'),
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
+        'description' => t('client name'),
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
       ),
       'sid' => array(
         'description' => t('service id'),
@@ -99,18 +100,24 @@ function itg_mobile_services_schema() {
         'length' => 255,
         'default' => NULL,
       ),
-       'created_by' => array(
+      'custom_sharing_url' => array(
+        'description' => t('custom sharing url'),
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+      'created_by' => array(
         'description' => t('Token created by'),
         'type' => 'varchar',
         'length' => 255,
         'default' => NULL,
       ),
-       'reset_by' => array(
+      'reset_by' => array(
         'description' => t('Token reset by'),
         'type' => 'varchar',
         'length' => 255,
         'default' => NULL,
-      ),  
+      ),
       'created_date' => array(
         'description' => t('Created token date'),
         'type' => 'varchar',
@@ -128,7 +135,6 @@ function itg_mobile_services_schema() {
   );
   return $schema;
 }
-
 
 /**
  * Implements hook_uninstall().
