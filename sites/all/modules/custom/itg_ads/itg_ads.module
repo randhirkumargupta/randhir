@@ -64,7 +64,7 @@ function itg_ads_views_pre_render(&$view) {
     if ($view->name == "manage_ads") {
         global $user; // Get user information
         $header_content = '';
-        if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles) && !in_array('Editor', $user->roles) && !in_array('Subeditor/Sr.Sub', $user->roles) && !in_array('Section Editor/Anchor', $user->roles) && !in_array('Copy Editor', $user->roles)) {
+        if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles) && !in_array('Subeditor/Sr.Sub', $user->roles)) {
             $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
             $header_content .= l(t('Create Ads'), 'node/add/ads-management', array('query' => array('destination' => arg(0))));
         }
