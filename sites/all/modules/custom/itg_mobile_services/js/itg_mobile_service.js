@@ -10,7 +10,6 @@ var sdate = null;
 var edate = null;
 var firstDate = 1;
 var fixedDate = '';
-//var nid = location.search.split('nid=')[1]; // get nid from url
 
 (function ($) {
 
@@ -31,11 +30,10 @@ var fixedDate = '';
 
                 console.log(value)
                 // content-format-hidden
-                if (value == 'text') { //alert(" val" + value );
+                if (value == 'text') {
                     jQuery('.field-name-field-story-expert-description').show();
                 } else if (value == 'image') {
                     jQuery('.field-name-field-story-large-image').show();
-
                 } else if (value == 'video') {
                     jQuery('.field-name-field-service-video').show();
                 } else if (value == 'audio') {
@@ -78,14 +76,9 @@ var fixedDate = '';
                 }
 
                 if (selectedVal > 1) {
-                    //  jQuery('#edit-field-service-frequency-und-1').attr('disabled', true);
-                    //  jQuery('#edit-field-service-frequency-und-2').attr('disabled', true);
-                    //  jQuery('#edit-field-service-frequency-und-3').attr('disabled', true);
                     jQuery('#edit-field-service-frequency-date').show();
                     $('#edit-field-service-content').show();
                 }
-
-
             } else {
                 $('#edit-field-service-content').hide();
             }
@@ -110,10 +103,6 @@ var fixedDate = '';
             });
 
 
-
-            // $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').attr('disabled', 'disabled');
-            // $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val('');
-            // $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
             $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').keyup(function () {
                 $(this).val('');
                 alert('Please select date from Calendar');
@@ -133,14 +122,9 @@ var fixedDate = '';
                     date.setDate(date.getDate() + fixedDay); // Add 7 days
                     $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker("option", "minDate", selected);
                     $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker("option", "maxDate", date);
-                    // $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
-
                     $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('').removeAttr('disabled');
-
                 }
             });
-
-
 
             if (firstDate == 1) {
                 $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker({
@@ -156,11 +140,7 @@ var fixedDate = '';
                 });
             }
 
-
-
-
             function show_days() {
-
                 var start = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').datepicker('getDate');
                 var end = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').datepicker('getDate');
                 var oneDay = 24 * 60 * 60 * 1000;
@@ -168,13 +148,8 @@ var fixedDate = '';
                 if (start && end) {
                     diff = Math.round(Math.abs((end.getTime() - start.getTime()) / (oneDay)));
                 }
-
-
                 var rowCount = jQuery(".field-multiple-table tbody tr").length;
-
-
                 if (diff > 0) {
-
                     if (firstTime > 1) {
                         for (var ii = 1; ii <= rowCount; ) {
                             jQuery("input[name='field_service_content_und_" + ii + "_remove_button']").mousedown();
@@ -187,33 +162,25 @@ var fixedDate = '';
                 jQuery('#edit-field-service-content-add-more-number').val(diff);
                 jQuery('.field-name-field-service-content .field-add-more-submit').mousedown();
 
-
             }
 
             set_dates();
 
             function set_dates() {
-
                 var today = new Date();
                 var today_date = today.getDate();
                 var from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val().split('/');
                 var start_date = from_date[1];
-
                 if (start_date < 10) {
                     start_date = start_date[start_date.length - 1]
                 }
                 start_date = start_date - today_date;
                 var no_of_days = 1 + parseInt(jQuery('#edit-field-service-content-add-more-number').val());
-
-
                 for (var i = 0; i <= no_of_days; ) {
-
                     var tomorrow = new Date(new Date().getTime() + start_date * 24 * 60 * 60 * 1000);
                     var dd = tomorrow.getDate();
-                    var mm = tomorrow.getMonth() + 1; //January is 0!
-
+                    var mm = tomorrow.getMonth() + 1;
                     var yyyy = tomorrow.getFullYear();
-
                     if (dd < 10) {
                         dd = '0' + dd
                     }
@@ -231,8 +198,6 @@ var fixedDate = '';
         }
     }
 })(jQuery);
-
-
 
 jQuery('document').ready(function () {
     var maxLen = 0

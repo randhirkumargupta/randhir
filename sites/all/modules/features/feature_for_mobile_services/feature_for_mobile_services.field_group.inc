@@ -95,18 +95,17 @@ function feature_for_mobile_services_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'FTP',
+      'formatter' => 'open',
       'instance_settings' => array(
-        'required_fields' => 1,
-        'id' => '',
-        'classes' => 'itg-group-field',
         'description' => '',
-        'show_label' => '1',
-        'label_element' => 'h2',
+        'show_label' => 1,
+        'label_element' => 'h3',
         'effect' => 'none',
         'speed' => 'fast',
+        'classes' => '',
+        'required_fields' => 1,
+        'id' => '',
       ),
-      'formatter' => 'open',
     ),
   );
   $field_groups['group_service_ftp|node|service_creation|form'] = $field_group;
