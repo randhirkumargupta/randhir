@@ -467,21 +467,22 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.header__secondary-menu ul li.last a').html('<i class="fa fa-power-off" aria-hidden="true"></i>');
   
   /* jQuery code for Event Backend */
-  var ebAudio = $('.field-name-field-browse-or-upload .form-radio[value="audio"]');
-  var ebPhoto = $('.field-name-field-browse-or-upload .form-radio[value="photo"]');
-  var ebVideo = $('.field-name-field-browse-or-upload .form-radio[value="video"]');
-  var audioCheck  = ebAudio.is(':checked');
-  var photoCheck  = ebPhoto.is(':checked');
-  var videoCheck  = ebVideo.is(':checked');
-  if(audioCheck){
+
+  $('.form-field-name-field-event-media table tbody tr').each(function(){
+    var ebAudio = $(this).find('.field-name-field-browse-or-upload .form-radio[value="audio"]');
+    var ebPhoto = $(this).find('.field-name-field-browse-or-upload .form-radio[value="photo"]');
+    var ebVideo = $(this).find('.field-name-field-browse-or-upload .form-radio[value="video"]');
+    var audioCheck  = ebAudio.is(':checked');
+    var photoCheck  = ebPhoto.is(':checked');
+    var videoCheck  = ebVideo.is(':checked');
+    if(videoCheck){
+      ebVideo.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-poll-question-video').show();
+    }else if(audioCheck){
       ebAudio.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-audio').show();
-    }
-    else if(photoCheck){
+    }else if(photoCheck){
       ebPhoto.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-quiz-answer-image').show();
     }
-    else if(videoCheck){
-      ebVideo.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-poll-question-video').show();
-    }
+  }); 
   
   $('.form-field-name-field-event-media').on('change', '.form-radio', function(){
     var isChecked = $(this).is(':checked');
