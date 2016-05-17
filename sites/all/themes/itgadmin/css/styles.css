@@ -214,7 +214,7 @@ img {
 #block-menu-menu-blog-admin-menu > .menu,
 #block-menu-menu-ugc-content-menu > .menu,
 #block-menu-menu-task-allocation-menu > .menu,
-#block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text, .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-quiz-add-questions-values"], [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .block-itg-event-backend .block-itg-story-list, [class*="node-type-"] .node .field, [id*="itg-survey-survey-form"] .answer-container, .itg-popup {
+#block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text, .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-quiz-add-questions-values"], [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .block-itg-event-backend .block-itg-story-list, [id*="field-event-media-values"] > tbody > tr, [class*="node-type-"] .node .field, [id*="itg-survey-survey-form"] .answer-container, .itg-popup {
   width: 100%;
 }
 
@@ -227,7 +227,7 @@ img {
 [id*="field-newsl-add-news-values"] thead,
 [id*="field-story-template-buzz-values"] thead,
 [id*="field-erf-registration-fee-values"] thead,
-[id*="field-mega-review-review-values"] thead, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li, .dashboard-tab li, .node-story-form #Templates .form-field-type-text tbody, .node-story-form #Templates .form-field-type-text thead, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .block-itg-event-backend .block-itg-story-list a, [class*="node-type-"] .node .field .field-label, .ugc-action strong, [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio {
+[id*="field-mega-review-review-values"] thead, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li, .dashboard-tab li, .node-story-form #Templates .form-field-type-text tbody, .node-story-form #Templates .form-field-type-text thead, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .block-itg-event-backend .block-itg-story-list a, [id*="field-event-media-values"] > tbody > tr, [id*="field-event-media-values"] > tbody > tr > td, [class*="node-type-"] .node .field .field-label, .ugc-action strong, [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio {
   float: left;
 }
 
@@ -1905,6 +1905,38 @@ input[name="field_gallery_image_add_more"] {
   border-color: transparent transparent transparent #aaa;
 }
 
+[id*="field-event-media-values"] > tbody > tr > td {
+  min-width: 620px;
+  margin-bottom: 20px;
+}
+[id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file img, [id*="field-event-media-values"] .field-name-field-audio .form-managed-file span.file img {
+  vertical-align: top;
+}
+[id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file a, [id*="field-event-media-values"] .field-name-field-audio .form-managed-file span.file a {
+  display: inline-block;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  white-space: nowrap;
+  color: #2f2f2f;
+}
+[id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file-size, [id*="field-event-media-values"] .field-name-field-audio .form-managed-file span.file-size {
+  vertical-align: top;
+}
+[id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file .form-submit[value="Remove"], [id*="field-event-media-values"] .field-name-field-audio .form-managed-file .form-submit[value="Remove"] {
+  background: transparent none repeat scroll 0 0;
+  border: medium none;
+  color: #ee4d4d;
+  font-size: 13px;
+  left: 532px;
+  position: absolute;
+  top: 0;
+}
+[id*="field-event-media-values"] .field-name-field-quiz-answer-image .form-managed-file .form-submit[value="Remove"] {
+  left: 532px;
+}
+
 [class*="node-type-"] .tabs-primary {
   display: none;
 }
@@ -2030,4 +2062,35 @@ input[name="field_gallery_image_add_more"] {
 [id*="itg-social-media-form"] > div > a:hover {
   background-color: #3b5998;
   border-color: #3b5998;
+}
+
+[id*="field-program-schedule-values"] .field-name-field-start-time fieldset.date-combo > legend {
+  padding-top: 28px;
+}
+[id*="field-program-schedule-values"] .field-name-field-start-time fieldset.date-combo .container-inline-date .form-type-date-select {
+  margin: 0;
+}
+[id*="field-program-schedule-values"] .field-name-field-start-time fieldset.date-combo .container-inline-date .form-type-date-select .date-padding .form-type-select {
+  width: 101px;
+}
+[id*="field-program-schedule-values"] .field-name-field-start-time fieldset.date-combo .container-inline-date .form-type-date-select .date-padding .form-type-select + .form-type-select {
+  margin-left: 10px;
+}
+[id*="field-program-schedule-values"] .field-name-field-start-time fieldset.date-combo .container-inline-date .form-type-date-select .date-padding .form-type-select label {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+[id*="field-program-schedule-values"] .field-name-field-start-time fieldset.date-combo .container-inline-date .form-type-date-select .date-padding .form-type-select label + div {
+  padding-left: 0;
+}
+[id*="field-program-schedule-values"] .field-name-field-start-time fieldset.date-combo .container-inline-date.end-date-wrapper .form-type-date-select {
+  margin-top: 27px;
+  position: relative;
+}
+[id*="field-program-schedule-values"] .field-name-field-start-time fieldset.date-combo .container-inline-date.end-date-wrapper .form-type-date-select > label {
+  left: -220px;
+  position: absolute;
+  top: 26px;
 }
