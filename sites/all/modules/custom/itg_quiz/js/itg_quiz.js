@@ -25,6 +25,7 @@
         }
       }
       
+      $('#edit-metatags-und-advanced').hide();
 
       //Collect values assigned in settings array 
       var base_url = settings.itg_quiz.settings.base_url;

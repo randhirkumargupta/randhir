@@ -40,10 +40,11 @@
 	<div class="content-node-view">               
         <h2>Client Details</h2>
             <div class="content-view">
-<?php// p($content); ?>
 		<div class="content-rows">
-	            
-		       <div class="clent-right"><?php print render($content['title']); ?> </div>
+		      <div class="content-rows">
+			<div class="clent-left"><strong>Client Title:</strong> </div> 
+		       <div class="clent-right"><?php print render($title); ?> </div>
+		     </div>
 		</div>
               	<h2>Business Contact</h2>
 		<div class="content-rows">
