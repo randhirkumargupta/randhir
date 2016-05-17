@@ -2122,6 +2122,15 @@ input[name="field_gallery_image_add_more"]{
   }
 }
 [id*="field-program-schedule-values"]{
+  > tbody > tr{
+    @extend .fleft;
+    @extend .full;
+    > td{
+      @extend .fleft;
+      min-width: 620px;
+      margin-bottom: 20px;
+    }
+  }
   .field-name-field-start-time{
     fieldset.date-combo{
       > legend{padding-top: 28px;}
@@ -2130,9 +2139,10 @@ input[name="field_gallery_image_add_more"]{
           margin: 0;
           .date-padding{
             .form-type-select{
-              width: 101px;
-              & + .form-type-select{
-                margin-left: 10px;
+              width: 80px;
+              margin-right: 10px;
+              &:first-child{
+                display: none;
               }
               label{
                 display: block;
@@ -2161,3 +2171,5 @@ input[name="field_gallery_image_add_more"]{
     } 
   }
 }
+
+
