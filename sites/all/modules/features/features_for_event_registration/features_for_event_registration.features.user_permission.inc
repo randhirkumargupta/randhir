@@ -38,7 +38,6 @@ function features_for_event_registration_user_default_permissions() {
   $permissions['edit any event_registration content'] = array(
     'name' => 'edit any event_registration content',
     'roles' => array(
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -47,9 +46,7 @@ function features_for_event_registration_user_default_permissions() {
   // Exported permission: 'edit own event_registration content'.
   $permissions['edit own event_registration content'] = array(
     'name' => 'edit own event_registration content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 

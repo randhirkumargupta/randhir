@@ -437,7 +437,7 @@ function itg_survey_block_view($delta = '') {
  * @return string
  */
 function itg_survey_show_survey_result($nid){
-  if(itg_common_check_record_existance($nid, 'itg_survey_detail') > 0){
+  if(itg_common_check_record_existance($nid, 'itg_survey_detail', 'nid') > 0){
     return l('View Result','survey-result/'.$nid, array('attributes' => array('target'=>'_blank')));
   } else {
     return 'View Result';

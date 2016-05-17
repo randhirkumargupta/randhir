@@ -336,12 +336,12 @@ function itg_common_form_node_delete_confirm_alter(&$form, &$form_state, $form_i
  * @param type $tbl_name
  *   
  */
-function itg_common_check_record_existance($nid, $tbl_name) {
 
-  $result = db_select($tbl_name, 'tbl')
-      ->fields('tbl')
-      ->condition('tbl.nid', $nid, '=')
-      ->execute();
+function itg_common_check_record_existance($nid, $tbl_name, $field_name){
+     $result = db_select($tbl_name, 'tbl')
+          ->fields('tbl')
+          ->condition('tbl.'.$field_name, $nid, '=')
+          ->execute();
   $total_survey = $result->rowCount();
 
   if ($total_survey) {
@@ -350,6 +350,26 @@ function itg_common_check_record_existance($nid, $tbl_name) {
   else {
     return 0;
   }
+}
+
+/**
+ * Get any field value using table name and field name
+ * @param string $field_name
+ * @param string $tbl_name
+ * @param string $cid_name
+ * @param string $cid_val
+ * @return array
+ */
+function itg_common_select_field_value($field_name, $tbl_name, $cid_name, $cid_val){
+    $query = db_select($tbl_name, 'tbl')
+          ->fields('tbl', array($field_name))
+          ->condition('tbl.' . $cid_name, $cid_val, '=');
+
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $records[] = $record[$field_name];
+  }
+  return $records;
 }
 
 /**
