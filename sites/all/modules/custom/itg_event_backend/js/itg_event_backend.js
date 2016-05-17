@@ -18,6 +18,7 @@
                 $('#edit-body-und-0-format').hide();
                 $('.vertical-tabs-list').hide();
                 $('#edit-metatags').show();
+                $('#edit-scheduler-settings').show();
                 $('#edit-metatags-und-advanced').hide();
 
             }
@@ -25,6 +26,8 @@
             jQuery('input[name="field_event_start_date[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_event_close_date[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_registration_close_date[und][0][value][date]"]').keydown(false);
+            jQuery('input[name="publish_on[date]"]').keydown(false);
+            jQuery('input[name="unpublish_on[date]"]').keydown(false);
             // end code
 
             //hide skip button

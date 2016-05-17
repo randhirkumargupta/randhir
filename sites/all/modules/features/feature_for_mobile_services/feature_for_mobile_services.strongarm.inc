@@ -289,7 +289,7 @@ function feature_for_mobile_services_strongarm() {
           'weight' => '6',
         ),
         'title' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'path' => array(
           'weight' => '5',

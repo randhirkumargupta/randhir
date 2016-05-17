@@ -53,6 +53,12 @@ function itg_task_allocation_form_comment_node_task_idea_allocation_tracking_for
                      jQuery(".comment-add").hide(); 
                      jQuery(".comment-reply").hide(); 
           });', array('type' => 'inline', 'scope' => 'footer'));
+  $form['#after_build'][] = 'itg_task_allocation_form_after_build';
+   // Add cancel button to create/edit astro page
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'assigned-task-list', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
 }
 
 /**

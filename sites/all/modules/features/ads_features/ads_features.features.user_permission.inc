@@ -14,6 +14,9 @@ function ads_features_user_default_permissions() {
   $permissions['create ads_management content'] = array(
     'name' => 'create ads_management content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -23,6 +26,9 @@ function ads_features_user_default_permissions() {
   $permissions['delete any ads_management content'] = array(
     'name' => 'delete any ads_management content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -32,6 +38,9 @@ function ads_features_user_default_permissions() {
   $permissions['delete own ads_management content'] = array(
     'name' => 'delete own ads_management content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -48,6 +57,9 @@ function ads_features_user_default_permissions() {
   $permissions['edit any ads_management content'] = array(
     'name' => 'edit any ads_management content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -57,6 +69,7 @@ function ads_features_user_default_permissions() {
   $permissions['edit own ads_management content'] = array(
     'name' => 'edit own ads_management content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',

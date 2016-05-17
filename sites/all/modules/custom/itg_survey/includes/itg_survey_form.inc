@@ -478,8 +478,8 @@ function itg_survey_survey_form_submit($form, &$form_state){
   if ($form_state['values']['question_type' . $num] == 'rating') {
     
     for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
-      for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
-        if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] == 1) {
+      for ($rating_field_val = 1; $rating_field_val <= 1; $rating_field_val++) {
+        //if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] == 1) {
           db_insert('itg_survey_detail')
                   ->fields(array(
                       'nid' => $form_state['values']['nid'],
@@ -496,7 +496,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
                       'created' => time(),
                   ))
                   ->execute();
-        }
+        //}
       }
     }
   }
