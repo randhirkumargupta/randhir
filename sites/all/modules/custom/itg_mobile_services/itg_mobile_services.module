@@ -270,7 +270,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_mobile_services_node_insert($node) {
   if ($node->type == 'client_service_association') {
-    // p($node);
     itg_mobile_services_token_insert($node);
   }
 }
@@ -317,10 +316,6 @@ function itg_mobile_services_token_insert($node) {
 
 
   foreach ($field_client_selection as $key => $client) {
-//    $client_id = $value['target_id'] . "_";
-//    $service_id = $association_nid . "_";
-//    $token = $client_id . $service_id . $timestamp . $six_digit_random_number;
-//    $str = base64_encode($token);
     $token = sha1($client . $association_nid . $timestamp . $six_digit_random_number);
 
     $id = db_insert('itg_client_token')
@@ -378,11 +373,8 @@ function itg_mobile_services_token_update($node) {
 
 
   foreach ($field_client_selection as $key => $value) {
-    $client_id = $value['target_id'] . "_";
-    $service_id = $association_nid . "_";
-    $token = $client_id . $service_id . $timestamp . $six_digit_random_number;
-    $str = base64_encode($token);
 
+    $token = sha1($client . $association_nid . $timestamp . $six_digit_random_number);
     $check_token = itg_mobile_service_check_token($value['target_id'], $association_nid);
 
     if ($check_token) {
@@ -391,13 +383,13 @@ function itg_mobile_services_token_update($node) {
             'delivery_mode' => $delivery_mode,
             'service_frequency' => $service_frequency,
             'content_sharing_mode' => $content_sharing_mode,
-            'service_fetch_link' => $base_url . '/mobile_services/token/' . $str,
             'ftp_ip_address' => $ftp_ip_address,
             'ftp_username' => $ftp_username,
             'ftp_password' => $ftp_password,
             'service_email_address' => $service_email_address,
             'service_expiry_date' => $service_expiry_date,
             'token' => $token,
+            'custom_sharing_url' => $base_url . '/mobile_services/token/' . $token,
             'reset_by' => $user->name,
             'updated_date' => $timestamps  # use REQUEST_TIME or time() here if you want the date as a long
           ))
@@ -409,18 +401,19 @@ function itg_mobile_services_token_update($node) {
       $id = db_insert('itg_client_token')
           ->fields(array(
             'nid' => $node_nid,
-            'cid' => $value['target_id'],
+            'cid' => $client,
             'sid' => $association_nid,
             'delivery_mode' => $delivery_mode,
             'service_frequency' => $service_frequency,
             'content_sharing_mode' => $content_sharing_mode,
-            'service_fetch_link' => $base_url . '/mobile_services/token/' . $str,
+            'service_fetch_link' => $service_fetch_link,
             'ftp_ip_address' => $ftp_ip_address,
             'ftp_username' => $ftp_username,
             'ftp_password' => $ftp_password,
             'service_email_address' => $service_email_address,
             'service_expiry_date' => $service_expiry_date,
             'token' => $token,
+            'custom_sharing_url' => $base_url . '/mobile_services/token/' . $token,
             'created_by' => $user->name,
             'reset_by' => '',
             'created_date' => $timestamps
@@ -428,7 +421,6 @@ function itg_mobile_services_token_update($node) {
           ->execute();
     }
   }
-  watchdog('client_selection_token_update', $str . " token updated");
 }
 
 /**
@@ -515,6 +507,10 @@ function itg_mobile_client_association_validator($form, &$form_state) {
  * @param array $form_state
  */
 function itg_mobile_services_validator($form, &$form_state) {
+  $short_description = trim($form_state['values']['field_short_description'][LANGUAGE_NONE][0]['value']);
+  if (strlen($short_description) > 200) {
+    form_set_error('field_short_description', t('Your text contains more than 200 characters'));
+  }
 
   $sharing_mode = trim($form_state['values']['field_content_sharing_mode'][LANGUAGE_NONE][0]['value']);
   switch ($sharing_mode) {
