@@ -236,7 +236,6 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['field_user_message']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -561,7 +560,6 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['field_user_message']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
@@ -603,6 +601,12 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
