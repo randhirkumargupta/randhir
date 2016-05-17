@@ -21,18 +21,31 @@ function feature_for_mobile_services_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'value' => array(
-        0 => 'value',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'list',
+    'module' => 'entityreference',
     'settings' => array(
-      'allowed_values' => array(),
-      'allowed_values_function' => '',
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'clients_creation' => 'clients_creation',
+        ),
+      ),
+      'target_type' => 'node',
     ),
     'translatable' => 0,
-    'type' => 'list_text',
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_client_short_description'.

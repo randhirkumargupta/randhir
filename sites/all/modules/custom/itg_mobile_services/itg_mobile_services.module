@@ -151,16 +151,14 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         'event' => 'change', // On change of the selection this action would take place
       );
 
-      $form['field_client_selection'][LANGUAGE_NONE]['#multiple'] = 1;
-      $form['field_client_selection'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_clients();
-
       $form['field_client_selection'][LANGUAGE_NONE]['#ajax'] = array(
         'callback' => 'itg_mobile_content_selection_callback',
         'event' => 'change', // On change of the selection this action would take place
       );
 
-      itg_mobile_content_selection_callback();
-      // $form['#validate'][] = 'itg_mobile_client_association_validator';
+
+
+      $form['#validate'][] = 'itg_mobile_client_association_validator';
       $form['#after_build'][] = 'itg_service_association_after_build';
       $form['#submit'][] = 'itg_mobile_client_association_submit';
 
@@ -480,42 +478,34 @@ function itg_mobile_client_association_validator($form, &$form_state) {
 
     $target_id = $value['target_id'];
 
-    $query = db_select('node', 'node')->fields('node', array('nid'));
-    $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id AND cs.entity_type = 'node' AND cs.deleted = '0'");
-    $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id AND sat.entity_type = 'node' AND sat.deleted = '0'");
-    $query->condition('node.status', 1, '=');
-    $query->condition('cs.field_client_selection_target_id', $target_id, '=');
+    $query = db_select('node', 'node')->fields('cs', array('field_client_selection_target_id'));
+    $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id");
+    $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id");
     $query->condition('sat.field_service_association_title_target_id', $association_nid, '=');
+    $query->condition('cs.field_client_selection_target_id', $target_id, '=');
     if (!empty($node_nid)) {
       $query->condition('node.nid', $node_nid, '<>');
     }
 
     $query->condition('node.type', array('client_service_association'), 'IN');
     $query->range(0, 1);
-
     $result = $query->execute();
     $record = $result->fetchAssoc();
 
-    $nid = ($record['nid']) ? $record['nid'] : '';
+    $target_id = ($record['field_client_selection_target_id']) ? $record['field_client_selection_target_id'] : '';
 
-    if ($nid) {
-      $node = node_load($nid);
-      $client_selection = field_get_items('node', $node, 'field_client_selection');
-      foreach ($client_selection as $client_val) {
-
-        $tid = ($client_val['target_id']) ? $client_val['target_id'] : '';
-        if ($tid) {
-          $term = taxonomy_term_load($tid);
-
-          $client_name .= $term->name . ", ";
-        }
-      }
-      $client_name = rtrim($client_name, ',');
-
-      if ($client_name) {
-        form_set_error('field_client_selection', $client_name . 'is already associated this service');
+    if ($target_id) {
+      $node = node_load($target_id);
+      if ($node->title) {
+        $client_name .= $node->title . ", ";
       }
     }
+
+    $client_name = rtrim($client_name, ',');
+  }
+
+  if ($client_name) {
+    form_set_error('field_client_selection', $client_name . 'is already associated this service');
   }
 }
 
@@ -867,47 +857,47 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
 function itg_mobile_content_selection_callback(&$form, &$form_state) {
   $form_state['redirect'] = 'service-association-listing';
   $node_nid = $form['nid']['#value'];
-  $association_nid = '207'; //$form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-  //$field_client_selection = $form_state['values']['field_client_selection'][LANGUAGE_NONE];
-  $client_name = '';
-  $field_client_selection = array('Vodafone-news' => 'Vodafone-news', 'Airtel-games' => 'Airtel-games');
+  $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
+  $field_client_selection = $form_state['values']['field_client_selection'][LANGUAGE_NONE];
 
-
-  foreach ($field_client_selection as $key => $client_name) {
+  foreach ($field_client_selection as $key => $value) {
 
     $target_id = $value['target_id'];
 
-    $query = db_select('node', 'node')->fields('node', array('nid'));
+    $query = db_select('node', 'node')->fields('cs', array('field_client_selection_target_id'));
     $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id");
     $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id");
     $query->condition('sat.field_service_association_title_target_id', $association_nid, '=');
-    $query->condition('cs.field_client_selection_value', $client_name, '=');
+    $query->condition('cs.field_client_selection_target_id', $target_id, '=');
     if (!empty($node_nid)) {
       $query->condition('node.nid', $node_nid, '<>');
     }
 
     $query->condition('node.type', array('client_service_association'), 'IN');
     $query->range(0, 1);
-
     $result = $query->execute();
     $record = $result->fetchAssoc();
 
-    $nid = ($record['nid']) ? $record['nid'] : '';
+    $target_id = ($record['field_client_selection_target_id']) ? $record['field_client_selection_target_id'] : '';
 
-    if ($nid) {
-      $client_name .= $client_name . ", ";
+    if ($target_id) {
+      $node = node_load($target_id);
+      if ($node->title) {
+        $client_name .= $node->title . ", ";
+      }
     }
-    echo $client_name = rtrim($client_name, ',');
-    exit;
-    if ($client_name) {
-      return array(
-        '#type' => 'ajax',
-        '#commands' => array(
-          ajax_command_remove("#edit-field-service-association-title .error", "<span class='error'>" . $client_name . " is already associated this service</span>"),
-          ajax_command_append("#edit-field-service-association-title", "<span class='error'>" . $client_name . " is already associated this service</span>")
-        )
-      );
-    }
+
+    $client_name = rtrim($client_name, ',');
+  }
+
+  if ($client_name) {
+    return array(
+      '#type' => 'ajax',
+      '#commands' => array(
+        ajax_command_remove("#edit-field-service-association-title .error", "<span class='error'>" . $client_name . " is already associated this service</span>"),
+        ajax_command_append("#edit-field-service-association-title", "<span class='error'>" . $client_name . " is already associated this service</span>")
+      )
+    );
   }
 }
 
@@ -1183,21 +1173,6 @@ ORDER BY node_created DESC", array(':type' => 'service_creation'));
   $options['_none'] = '- Select a value -';
   foreach ($result as $val) {
     $options[$val->nid] = $val->node_title;
-  }
-  return $options;
-}
-
-/**
- * Get all services association for itg_mobile_services_get_clients
- * @return type $options
- *   
- */
-function itg_mobile_services_get_clients() {
-  $query = db_select('node')->fields('node', array('title'))
-      ->condition('type', 'clients_creation');
-  $result = $query->execute()->fetchAll();
-  foreach ($result as $val) {
-    $options[$val->title] = $val->title;
   }
   return $options;
 }

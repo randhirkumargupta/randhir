@@ -296,9 +296,11 @@ function feature_for_mobile_services_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
         'weight' => 13,
       ),
       'teaser' => array(
@@ -311,7 +313,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_client_selection',
-    'label' => 'Client selection',
+    'label' => 'Client Selection',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1905,8 +1907,8 @@ function feature_for_mobile_services_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Client Selection');
   t('Client Title');
-  t('Client selection');
   t('Client title');
   t('Contact Person Name');
   t('Content');

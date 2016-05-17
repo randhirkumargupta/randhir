@@ -116,7 +116,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No Service Found.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
-  /* Relationship: Broken/missing handler */
+  /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_client_selection_target_id']['id'] = 'field_client_selection_target_id';
   $handler->display->display_options['relationships']['field_client_selection_target_id']['table'] = 'field_data_field_client_selection';
   $handler->display->display_options['relationships']['field_client_selection_target_id']['field'] = 'field_client_selection_target_id';
@@ -178,7 +178,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  /* Field: Content: Client selection */
+  /* Field: Content: Client Selection */
   $handler->display->display_options['fields']['field_client_selection']['id'] = 'field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['table'] = 'field_data_field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['field'] = 'field_client_selection';
@@ -586,7 +586,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No Service Association Found.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Broken/missing handler */
+  /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_client_selection_target_id']['id'] = 'field_client_selection_target_id';
   $handler->display->display_options['relationships']['field_client_selection_target_id']['table'] = 'field_data_field_client_selection';
   $handler->display->display_options['relationships']['field_client_selection_target_id']['field'] = 'field_client_selection_target_id';
@@ -611,7 +611,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['title']['relationship'] = 'field_service_association_title_target_id';
   $handler->display->display_options['fields']['title']['label'] = 'Service Title';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Client selection */
+  /* Field: Content: Client Selection */
   $handler->display->display_options['fields']['field_client_selection']['id'] = 'field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['table'] = 'field_data_field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['field'] = 'field_client_selection';
