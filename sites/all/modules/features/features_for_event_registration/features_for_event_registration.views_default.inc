@@ -208,6 +208,24 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_event_registration_get_registered_user($row->nid); ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Content: Source id */
+  $handler->display->display_options['fields']['field_story_source_id']['id'] = 'field_story_source_id';
+  $handler->display->display_options['fields']['field_story_source_id']['table'] = 'field_data_field_story_source_id';
+  $handler->display->display_options['fields']['field_story_source_id']['field'] = 'field_story_source_id';
+  $handler->display->display_options['fields']['field_story_source_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_source_id']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+  $handler->display->display_options['fields']['php_1']['table'] = 'views';
+  $handler->display->display_options['fields']['php_1']['field'] = 'php';
+  $handler->display->display_options['fields']['php_1']['label'] = 'Event Name';
+  $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_1']['php_output'] = '<?php echo itg_common_get_node_title($data->_field_data[\'nid\'][\'entity\']->field_story_source_id[\'und\'][0][\'value\']); ?>';
+  $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
   $handler->display->display_options['fields']['nothing_3']['table'] = 'views';

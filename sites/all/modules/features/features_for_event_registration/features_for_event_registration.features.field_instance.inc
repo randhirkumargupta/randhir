@@ -839,7 +839,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 10,
+      'weight' => 4,
     ),
   );
 
@@ -931,6 +931,49 @@ function features_for_event_registration_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event_registration-field_erf_type'.
+  $field_instances['node-event_registration-field_erf_type'] = array(
+    'bundle' => 'event_registration',
+    'default_value' => array(
+      0 => array(
+        'value' => 'self',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_erf_type',
+    'label' => 'Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'node-event_registration-field_last_name'.
   $field_instances['node-event_registration-field_last_name'] = array(
     'bundle' => 'event_registration',
@@ -970,6 +1013,54 @@ function features_for_event_registration_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_registration-field_story_source_id'.
+  $field_instances['node-event_registration-field_story_source_id'] = array(
+    'bundle' => 'event_registration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_source_id',
+    'label' => 'Source id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 8,
     ),
   );
 
@@ -1074,8 +1165,10 @@ function features_for_event_registration_field_default_field_instances() {
   t('Select County');
   t('Select Payment Gateway');
   t('Select State');
+  t('Source id');
   t('State');
   t('Total Fee');
+  t('Type');
 
   return $field_instances;
 }

@@ -49,13 +49,6 @@ function event_backend_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any speaker content'.
-  $permissions['delete any speaker content'] = array(
-    'name' => 'delete any speaker content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any sponsor content'.
   $permissions['delete any sponsor content'] = array(
     'name' => 'delete any sponsor content',
@@ -77,13 +70,6 @@ function event_backend_user_default_permissions() {
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own speaker content'.
-  $permissions['delete own speaker content'] = array(
-    'name' => 'delete own speaker content',
-    'roles' => array(),
     'module' => 'node',
   );
 
