@@ -113,7 +113,7 @@ img{
   font-weight: 400;
   height: 32px;
   margin-right: 5px;
-  padding: 4px 12px 8px;
+  padding: 5px 12px 7px;
   text-align: center;
   white-space: nowrap;
   @extend .dib;
@@ -1845,7 +1845,7 @@ input[name="field_gallery_image_add_more"]{
 .form-field-name-field-ads-content-selection,
 .form-field-name-field-ads-template-variants,
 .form-field-name-field-ads-section-selection{
-  label{
+  label:after{
     color: red;
     content: "*";
   }
@@ -2225,6 +2225,16 @@ fieldset#edit-select{
     legend{
       @extend .hide;
     }
+  }
+}
+#confirmation{
+  @extend .node-form;
+  a#edit-cancel{
+    @extend .btn-cancel;
+    @extend .dib;
+    @extend .vtop;
+    padding: 6px 12px;
+    border-radius: 4px;
   }
 }
 
