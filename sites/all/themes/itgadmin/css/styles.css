@@ -2659,3 +2659,19 @@ fieldset#edit-select .form-submit {
   margin: 0;
   padding: 0;
 }
+
+.node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on {
+  display: block;
+  margin: 0;
+}
+.node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on > lebel {
+  float: left;
+  padding: 0 20px 0 30px;
+  width: 250px;
+}
+.node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on .date-padding .form-type-textfield > label {
+  display: none;
+}
+.node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on .date-padding + div.description {
+  display: none;
+}
