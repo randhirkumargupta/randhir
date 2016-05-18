@@ -84,14 +84,14 @@ function event_backend_views_default_views() {
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Field: Field: Master Title */
+  /* Field: Field: Poll Question Text */
   $handler->display->display_options['fields']['field_poll_question_text']['id'] = 'field_poll_question_text';
   $handler->display->display_options['fields']['field_poll_question_text']['table'] = 'field_data_field_poll_question_text';
   $handler->display->display_options['fields']['field_poll_question_text']['field'] = 'field_poll_question_text';
   $handler->display->display_options['fields']['field_poll_question_text']['label'] = '';
   $handler->display->display_options['fields']['field_poll_question_text']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_poll_question_text']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Video */
+  /* Field: Field: Poll Question Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';
@@ -959,14 +959,14 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Field: Field: Master Title */
+  /* Field: Field: Poll Question Text */
   $handler->display->display_options['fields']['field_poll_question_text']['id'] = 'field_poll_question_text';
   $handler->display->display_options['fields']['field_poll_question_text']['table'] = 'field_data_field_poll_question_text';
   $handler->display->display_options['fields']['field_poll_question_text']['field'] = 'field_poll_question_text';
   $handler->display->display_options['fields']['field_poll_question_text']['label'] = '';
   $handler->display->display_options['fields']['field_poll_question_text']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_poll_question_text']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Video */
+  /* Field: Field: Poll Question Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';
