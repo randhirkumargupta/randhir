@@ -1,5 +1,5 @@
 {
     "require": {
-        "abraham/twitteroauth": "^0.6.4"
+         "ricardoper/twitteroauth": "2.*"
     }
 }
