@@ -1504,7 +1504,8 @@ input[name="field_gallery_image_add_more"]{
     @extend .hide;
   }
 }
-[id*="field-quiz-add-questions-values"]{
+[id*="field-quiz-add-questions-values"], 
+[id*="field-survey-add-questions-values"]{
   @extend .full;
   thead{
     @extend .hide;
@@ -1760,6 +1761,7 @@ input[name="field_gallery_image_add_more"]{
 [id*="field-event-highlights-values"], 
 [id*="field-event-media-values"], 
 [id*="field-quiz-add-questions-values"], 
+[id*="field-survey-add-questions-values"], 
 [id*="field-newsl-add-news-values"], 
 [id*="field-task-task-idea-values"], 
 [id*="field-story-template-buzz-values"], 
@@ -2421,6 +2423,145 @@ fieldset#edit-select{
 .view-content > .item-list > ul > li > .category-manager-details{background-color: #efefef;}
 .show{display: block;}
 .hide{display: none;}
+
+
+
+
+[id*="edit-field-supp-import-xml"], 
+[id*="edit-field-field-issue-import-xml"]{
+  fieldset.form-wrapper{
+    border: none;
+    legend{
+      @extend .fleft;
+      width: 250px;
+      padding: 0 20px 0 30px;
+    }
+    > div.fieldset-wrapper{
+      @extend .of-hide;
+      table{
+        thead{
+          @extend .hide;
+        }
+        tbody{
+          tr{
+            @extend .dib;
+            @extend .full;
+            margin-bottom: 10px;
+            td{
+              @extend .fleft;
+              @extend .choose-audio-video-file;
+              .form-submit[value="Remove"]{
+                background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+                border: medium none;
+                color: #ee4d4d;
+                font-size: 13px;
+                margin-left: 100px;
+                margin-top: -2px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .form-type-managed-file{
+    margin: 0;
+    padding: 0;
+    .filefield-sources-list{
+      display: none;
+    }
+    .filefield-source{
+      @extend .hide;
+      &.filefield-source-plupload{
+        @extend .pos-rel;
+        display: block !important;
+        @extend .full;
+        padding-top: 32px;
+        height: auto;
+        min-height: 32px;
+        .form-submit[value="Start upload"], .form-submit[value="Uploading..."]{
+          @extend .add-more-wbg;
+          height: 32px;
+          left: 152px;
+          padding: 0 40px;
+          position: absolute;
+          top: 0;
+        }
+        .form-submit[value="Uploading..."]{
+          left: 0;
+        }
+        .form-type-plupload{
+          position: static !important;
+          > label{
+            @extend .fright;
+            &+div.plupload-element{
+              position: static !important;
+              @extend .dib;
+              @extend .full;
+            }
+          }
+          .plupload_buttons{
+            top: 0;
+          }
+        }
+      }
+    }
+    > div.description{
+      background-color: transparent;
+      padding: 0;
+      border: none;
+      display: block;
+      position: static;
+      margin-top: 15px;
+      &:after, &:before{
+        display: none;
+      }
+    }
+  }
+}
+.form-field-name-field-magazine-publish, 
+.form-field-name-field-supp-publish{
+  .form-type-checkbox{padding-left: 220px;margin-top: -10px;}
+}
+
+[id*="field-survey-add-questions-values"]{
+  > tbody{
+    @extend .fleft;
+    display: table-row-group;
+    @extend .full;
+    > tr > td{
+      width: 650px;
+    }
+    .field-name-field-survey-answer-option-2{
+      @extend .pos-rel;
+      > div > div > .clearfix{
+         bottom: 31px;
+        position: absolute;
+        right: 15px;
+        .form-submit{
+          @extend .add-more-wbg;
+          font-size: 30px;
+          line-height: 18px;
+          padding: 4px 6px 8px;
+        }
+      }
+    }
+    table{
+      thead{
+        display: block;
+        th.field-label{
+          padding-top: 8px;
+        }
+      }
+      td{
+        border: none;
+        .form-type-textfield{
+          margin: 0; padding: 0;
+        }
+      }
+    }
+  }
+}
 
 
 
