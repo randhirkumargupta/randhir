@@ -320,6 +320,22 @@ a.button{
     .form-submit{@extend .add-more; margin-left: 250px;}
   }
 }
+.Browse-upload{
+  .form-type-managed-file .form-managed-file + div.description{
+    left: 600px;
+  }
+  .image-widget-data, .file-widget{
+    input.form-file{
+      margin-top: 5px;
+      & + .form-submit{
+        @extend .add-more-wbg;
+      }
+    }
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
+  }
+}
 ul.pager{
   @extend .mt-10;
   @extend .no-bullet;
@@ -580,7 +596,7 @@ fieldset.date-combo{
   padding-top: 8px;
 }
 .form-type-managed-file > label{
-  padding-top: 4px;
+  padding-top: 8px;
 }
 .form-type-textfield > label + div, 
 .form-type-textarea > label + div, 
@@ -2321,6 +2337,10 @@ fieldset#edit-select{
     }
   }
 }
+[id*="ugc-node-form"]{
+  @extend .Browse-upload;
+}
+
 .view-category-manager{
   .view-header{
     text-align: right;
