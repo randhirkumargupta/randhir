@@ -252,7 +252,7 @@ function itg_event_registration_views_pre_render(&$view) {
   //Add "Event Registration" button on listing page of event registered user
   if ($view->name == "manage_event_registration") {
     $header_content_event = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_event .= l(t('Registration for Event'), 'event-registration');
+//    $header_content_event .= l(t('Registration for Event'), 'event-registration');
     $view->attachment_before = $header_content_event;
   }
 }
