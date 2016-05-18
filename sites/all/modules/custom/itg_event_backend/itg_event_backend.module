@@ -26,7 +26,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 20,
     );
     // Node redirection code
-    if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media')) {
+    if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights')) {
       // $form['#submit'][] = 'custom_node_submit';
       $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect';
     }
@@ -137,8 +137,15 @@ function itg_event_backend_after_build($form, &$form_state) {
   $endDate_new = date('Y-m-d', $endDate);
   $startDate_new = explode(' ', $startDate);
   $options_daywise = itg_event_backend_date_interval($startDate_new[0], $endDate_new);
+  $highlight_options = array('_none' => t('- Select Daywise -'));
   foreach ($form['field_program_schedule'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
+      $program_daywise = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      $program_title = $form['field_program_schedule'][LANGUAGE_NONE][$key]['#entity']->field_story_expert_name[LANGUAGE_NONE][0]['value'];
+      $start_time = date('H:i', strtotime($form['field_program_schedule'][LANGUAGE_NONE][$key]['#entity']->field_start_time[LANGUAGE_NONE][0]['value']));
+      $end_time = date('H:i', strtotime($form['field_program_schedule'][LANGUAGE_NONE][$key]['#entity']->field_start_time[LANGUAGE_NONE][0]['value_2']));
+      $day_value = explode(':', $program_daywise);
+      $highlight_options[$program_daywise.'--'.$program_title.'--'.$start_time.'--'.$end_time] = t($day_value[0].' - '.$program_title.' - '.$start_time.' to '.$end_time);
       // p($form['field_program_schedule'][LANGUAGE_NONE][$key]);
       if (isset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
         $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
@@ -155,23 +162,22 @@ function itg_event_backend_after_build($form, &$form_state) {
 //event hightlights
   foreach ($form['field_event_highlights'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
+
       //p($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]);
       if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
       }
+      //p($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title['und'][0]['value']);
       if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'])) {
-        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
       }
 
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
-//      $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#ajax'] =  array(
-//      'callback' => 'ajax_example_autocheckboxes_callback',
-//      'wrapper' => 'checkboxes-div',
-//      'method' => 'replace',
-//      'effect' => 'fade',
-//    );
+      $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#options'] = $highlight_options;
+      //p($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title']);
+
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
 //      unset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title']['#validated']);
     }
@@ -189,12 +195,12 @@ function itg_event_backend_after_build($form, &$form_state) {
     }
   }
   //Next and Save button access according steps
-  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_highlights')) {
+  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second' || $form_state['storage']['step'] == 'step_program_schedule')) {
     $form['actions']['submit']['#access'] = FALSE;
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
   }
-  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media')) {
+  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights')) {
     $form['actions']['submit']['#access'] = TRUE;
     $form['actions']['submit']['#value'] = 'Next';
     $form['actions']['next']['#access'] = FALSE;
@@ -254,6 +260,10 @@ function itg_event_backend_configuration_redirect($form, &$form_state) {
   elseif (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_media')) {
     drupal_get_messages();
     $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => 'step_configuration')));
+  }
+  elseif (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_highlights')) {
+    drupal_get_messages();
+    $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => 'step_media')));
   }
   else {
     drupal_get_messages();
