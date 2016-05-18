@@ -54,9 +54,9 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $enddate = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
-  if ($registration_close < $registration_start) {
-    form_set_error('field_story_expiry_date', 'Registration start date must be less then registration close date.');
-  }
+//  if ($registration_close < $registration_start) {
+//    form_set_error('field_story_expiry_date', 'Registration start date must be less then registration close date.');
+//  }
   if ($enddate < $startdate) {
     form_set_error('field_event_close_date', 'Close date must be greater then start date.');
   }

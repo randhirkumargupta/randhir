@@ -45,66 +45,69 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   // get id of ugc content
   $url_nid = arg(3);  
   
-  // prefill input value in blog form
-  if ($form_id == 'blog_node_form' && !empty($url_nid)) {
-    // get node values 
-    $node = node_load($url_nid);
-    
-    $form['title']['#default_value'] = $node->title;
-    $form['field_blog_long_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
-    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'UGC';
-  }
-  
-  // prefill input value in story form
-  if ($form_id == 'story_node_form' && !empty($url_nid)) {
-    // get node values 
-    $node = node_load($url_nid);
-    
-    $form['title']['#default_value'] = $node->title;
-    $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
-    $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
-    $form['body'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
-    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'UGC';
-  }
+  if (empty($form['nid']['#value'])) {
+    // prefill input value in blog form
+    if ($form_id == 'blog_node_form' && !empty($url_nid)) {
+      // get node values 
+      $node = node_load($url_nid);
 
-  // prefill input value in recipe form
-  if ($form_id == 'recipe_node_form' && !empty($url_nid)) {
-    // get node values 
-    $node = node_load($url_nid);
-    
-    $form['title']['#default_value'] = $node->title;
-    
-    if (!empty($node->field_astro_video[LANGUAGE_NONE][0]['fid'])) {
-      $form['field_recipe_content_type'][LANGUAGE_NONE]['#default_value'] = 'Video';
-      $form['field_recipe_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];
+      $form['title']['#default_value'] = $node->title;
+      $form['field_blog_long_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
     }
-    
-    $form['field_recipe_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-    $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
-    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
-    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'UGC';
-  }
 
-  // prefill input value in photogallery form
-  if ($form_id == 'photogallery_node_form' && !empty($url_nid)) {
-    // get node values 
-    $node = node_load($url_nid);
-    
-    $form['title']['#default_value'] = $node->title;
-    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
-    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'UGC';
-    $form['field_gallery_kicer'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-    
-    foreach ($form['field_gallery_image']['und'] as $delta => $field) {
-      if (is_numeric($delta)) {
-        // assign value in first field collection item
-        $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
-        $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_image_caption'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
+    // prefill input value in story form
+    if ($form_id == 'story_node_form' && !empty($url_nid)) {
+      // get node values 
+      $node = node_load($url_nid);
+
+      $form['title']['#default_value'] = $node->title;
+      $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
+      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
+      $form['body'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
+    }
+
+    // prefill input value in recipe form
+    if ($form_id == 'recipe_node_form' && !empty($url_nid)) {
+      print 'ankush';
+      // get node values 
+      $node = node_load($url_nid);
+
+      $form['title']['#default_value'] = $node->title;
+
+      if (!empty($node->field_astro_video[LANGUAGE_NONE][0]['fid'])) {
+        $form['field_recipe_content_type'][LANGUAGE_NONE]['#default_value'] = 'Video';
+        $form['field_recipe_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];
+      }
+
+      $form['field_recipe_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
+      $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
+    }
+
+    // prefill input value in photogallery form
+    if ($form_id == 'photogallery_node_form' && !empty($url_nid)) {
+      // get node values 
+      $node = node_load($url_nid);
+
+      $form['title']['#default_value'] = $node->title;
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
+      $form['field_gallery_kicer'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
+
+      foreach ($form['field_gallery_image']['und'] as $delta => $field) {
+        if (is_numeric($delta)) {
+          // assign value in first field collection item
+          $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
+          $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_image_caption'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
+        }
       }
     }
-  }  
+  }
 
   $user_fields = user_load($user->uid);
   
@@ -408,5 +411,10 @@ function itg_ugc_views_pre_render(&$view) {
       }
       $chkvalue->field_field_user_message[0]['rendered']['#markup'] = $user_message_raw_value;
     }
+  }
+
+  if ($view->name == "manage_ugc") {
+    $header_content_ugc = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $view->attachment_before = $header_content_ugc;
   }
 }

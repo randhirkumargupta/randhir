@@ -38,6 +38,7 @@ function itg_survey_menu() {
   );
   
   $items['survey-result/%'] = array(
+       'title' => t('Survey'),
       'page callback' => 'itg_survey_result',
       'access callback' => 'user_access',
       'access arguments' => array('survey admin users'),
