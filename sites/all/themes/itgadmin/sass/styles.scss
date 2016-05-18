@@ -2562,6 +2562,27 @@ fieldset#edit-select{
     }
   }
 }
+.node-event_backend-form{
+  .vertical-tabs{
+    .container-inline-date{
+      .form-item-publish-on{
+        > lebel{
+          float: left;
+          padding: 0 20px 0 30px;
+          width: 250px;
+        }
+        display: block;
+        margin: 0;
+        .date-padding{
+          .form-type-textfield{
+            > label{display: none;}
+          }
+          &+div.description{display: none;}
+        }
+      }
+    }
+  }
+}
 
 
 
