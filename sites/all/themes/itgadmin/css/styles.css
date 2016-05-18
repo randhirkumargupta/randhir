@@ -2675,3 +2675,7 @@ fieldset#edit-select .form-submit {
 .node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on .date-padding + div.description {
   display: none;
 }
+
+.form-select[name="field_ugc_ctype[und]"] {
+  text-transform: capitalize;
+}
