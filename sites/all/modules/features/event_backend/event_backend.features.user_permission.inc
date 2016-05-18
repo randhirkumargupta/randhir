@@ -136,5 +136,17 @@ function event_backend_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'schedule publishing of nodes'.
+  $permissions['schedule publishing of nodes'] = array(
+    'name' => 'schedule publishing of nodes',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'scheduler',
+  );
+
   return $permissions;
 }
