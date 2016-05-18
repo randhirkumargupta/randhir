@@ -2583,7 +2583,9 @@ fieldset#edit-select{
     }
   }
 }
-
+.form-select[name="field_ugc_ctype[und]"]{
+    text-transform: capitalize;
+}
 
 
 
