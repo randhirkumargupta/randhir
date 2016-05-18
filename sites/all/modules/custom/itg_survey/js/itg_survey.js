@@ -54,7 +54,9 @@
         $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, #edit-field-survey-end-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-2, #edit-field-survey-end-date-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
       
-      //alert($('input[name="field_survey_add_questions[und][0][field_survey_answer_type][und]"]').val();
+//      $('#edit-field-survey-add-questions-und-add-more').mousedown(function(){
+//
+//      });
       
       $("#survey-node-form").validate({ 
         submitHandler: function (form) {
