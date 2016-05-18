@@ -26,22 +26,6 @@ function itg_social_media_permission() {
 }
 
 /**
- * Implements hook_menu()
- * @return array
- */
-function itg_social_media_menu() {
-  $items['itg-social-media/edit-content/%'] = array(
-    'title' => t('Social Media Section'),
-    'page callback' => 'drupal_get_form',
-    'access arguments' => array('administer itg_social_media edit_content settings'),
-    'page arguments' => array('itg_social_media_form', 2, 3),
-    'type' => MENU_CALLBACK,
-  );
-
-  return $items;
-}
-
-/**
  * Implements hook_form_alter()
  * {@inheritdoc}
  */
