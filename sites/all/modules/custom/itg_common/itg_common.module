@@ -48,6 +48,12 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
     }
+    
+    //Add JS to hide Advance seeting from all content type forms
+    drupal_add_js('jQuery(document).ready(function() {                  
+           jQuery("#edit-metatags-und-advanced").hide();         
+    });', array('type' => 'inline', 'scope' => 'footer'));
+  
   }
 
   // Set title on Preview
@@ -215,7 +221,6 @@ function itg_common_views_pre_render(&$view) {
  * @param type $form_id  
  */
 function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  //p($form['#id']);
   if (isset($form['title'])) {
     $form['title']['#maxlength'] = 255;
 
