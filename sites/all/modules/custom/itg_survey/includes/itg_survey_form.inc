@@ -478,15 +478,15 @@ function itg_survey_survey_form_submit($form, &$form_state){
   if ($form_state['values']['question_type' . $num] == 'rating') {
     
     for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
-      for ($rating_field_val = 1; $rating_field_val <= 1; $rating_field_val++) {
-        //if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] == 1) {
+      for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
+        if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] == 1) {
           db_insert('itg_survey_detail')
                   ->fields(array(
                       'nid' => $form_state['values']['nid'],
                       'uid' => $user->uid,
                       'ques_id' => $form_state['values']['question_id' . $num],
                       'question' => $form_state['values']['question' . $num],
-                      'answer' => strtolower($form_detail['answer_option' . $num . '_' . $rating_field . '_name']),
+                      'answer' => $form_detail['answer_option' . $num . '_' . $rating_field . '_name'] ? strtolower($form_detail['answer_option' . $num . '_' . $rating_field . '_name']) : $form_state['values']['question' . $num],
                       'ans_type' => $form_state['values']['question_type' . $num],
                       'user_type' => $user_type,
                       'page_url' => $form_state['values']['survey_url'],
@@ -496,7 +496,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
                       'created' => time(),
                   ))
                   ->execute();
-        //}
+       }
       }
     }
   }
