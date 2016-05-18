@@ -26,6 +26,10 @@ define('UGC_MODERATOR', 22); //
 define('CATEGORY_MANAGMENT', 4);
 define('EXPERT', 21);
 define('ITGDATE', 'd/m/Y');
+define('CONSUMER_KEY', 'K1TzwL8xnWeffEHXIhE6F9bAx');
+define('CONSUMER_SECRET', 'xVisrDtALboGsFrN1fz8X8MghpxKJlyFZf8msZvPwMDuRHrO20');    
+define('OAUTH_TOKEN', '732461289138585601-V8jbnDVblpWt1f7IhekRzpy17IgSBUv');    
+define('OAUTH_TOKEN_SECRET', '2dSlK7P6fGeZh2uo2pCCGj1fEKHsJV73J7DibQ7DqyvgB');        
 
 /**
  * Function for debugging arrays and objects.
