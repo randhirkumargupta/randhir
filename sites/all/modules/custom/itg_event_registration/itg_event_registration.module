@@ -326,3 +326,55 @@ function itg_event_registration_get_registered_user($nid){
     return l($text, $path, array('attributes' => array('target' => '_blank')));
   }
 }
+
+/**
+ * Get ID type value
+ * @param string $val
+ * @return string
+ *   ID type
+ */
+function itg_event_registration_get_id_type($val){
+  switch ($val) {
+    case 'aadhar_card':
+      $id_type = 'Aadhar Card';
+      break;
+    case 'driving_licence':
+      $id_type = 'Driving Licence';
+      break;
+    case 'pan':
+      $id_type = 'PAN Card';
+      break;
+    case 'passport':
+      $id_type = 'Passport';
+      break;
+    case 'voter_id':
+      $id_type = 'Voter Id Card';
+      break;
+    default:
+      break;
+  }
+  return $id_type;
+}
+
+/**
+ * Registration details of a event
+ * @param int $nid
+ * @return int
+ */
+function itg_event_registration_registered_user_detail($nid){
+      if (isset($nid)) {
+      $registration_main_users = itg_common_check_record_existance($nid, 'field_data_field_story_source_id', 'field_story_source_id_value');
+
+      //Count group users registration for an event
+      $main_user_nid_arr = itg_common_select_field_value('entity_id', 'field_data_field_story_source_id', 'field_story_source_id_value', $nid);
+      $registration_group_users = 0;
+      foreach ($main_user_nid_arr as $main_user_nid) {
+        $registration_group_users = $registration_group_users + itg_common_check_record_existance($main_user_nid, 'field_data_field_erf_registration_fee', 'entity_id');
+      }
+
+      //Total count for an event
+      $total_registration_users = $registration_main_users + $registration_group_users;
+      $total_registration_for_event = $total_registration_users ? $total_registration_users : 0;
+    }
+    return $total_registration_for_event;
+}

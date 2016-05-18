@@ -137,7 +137,7 @@ function ads_features_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
+        'input_format' => 'd/m/Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -174,7 +174,7 @@ function ads_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_ads_placeholder',
     'label' => 'Ads Placeholder',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -315,7 +315,7 @@ function ads_features_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
+        'input_format' => 'd/m/Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,

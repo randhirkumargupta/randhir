@@ -11,6 +11,43 @@ function features_for_event_registration_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_erf_registration_fee-field_email_address'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_email_address'] = array(
+    'bundle' => 'field_erf_registration_fee',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_email_address',
+    'label' => 'Email',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_erf_registration_fee-field_erf_city'.
   $field_instances['field_collection_item-field_erf_registration_fee-field_erf_city'] = array(
     'bundle' => 'field_erf_registration_fee',
@@ -43,7 +80,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -80,7 +117,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -117,7 +154,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -154,7 +191,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -225,7 +262,7 @@ function features_for_event_registration_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -262,7 +299,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -299,7 +336,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -336,7 +373,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -414,6 +451,48 @@ function features_for_event_registration_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event_registration-field_email_address'.
+  $field_instances['node-event_registration-field_email_address'] = array(
+    'bundle' => 'event_registration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter a valid email id.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_email_address',
+    'label' => 'Email',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-event_registration-field_erf_city'.
   $field_instances['node-event_registration-field_erf_city'] = array(
     'bundle' => 'event_registration',
@@ -452,7 +531,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
+      'weight' => 23,
     ),
   );
 
@@ -494,7 +573,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 17,
     ),
   );
 
@@ -536,7 +615,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 6,
+      'weight' => 21,
     ),
   );
 
@@ -578,7 +657,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 18,
     ),
   );
 
@@ -625,6 +704,48 @@ function features_for_event_registration_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event_registration-field_erf_id_number'.
+  $field_instances['node-event_registration-field_erf_id_number'] = array(
+    'bundle' => 'event_registration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter your valid ID number.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 17,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_erf_id_number',
+    'label' => 'ID Number',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-event_registration-field_erf_mailing_address'.
   $field_instances['node-event_registration-field_erf_mailing_address'] = array(
@@ -664,7 +785,7 @@ function features_for_event_registration_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 4,
+      'weight' => 19,
     ),
   );
 
@@ -706,7 +827,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -750,7 +871,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 12,
     ),
   );
 
@@ -793,7 +914,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 20,
     ),
   );
 
@@ -839,7 +960,51 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 4,
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-event_registration-field_erf_select_id_type'.
+  $field_instances['node-event_registration-field_erf_select_id_type'] = array(
+    'bundle' => 'event_registration',
+    'default_value' => array(
+      0 => array(
+        'value' => 'pan',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Please select your id type.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_erf_select_id_type',
+    'label' => 'Select ID Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 6,
     ),
   );
 
@@ -881,7 +1046,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 22,
     ),
   );
 
@@ -927,7 +1092,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 11,
     ),
   );
 
@@ -970,7 +1135,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 10,
     ),
   );
 
@@ -1142,11 +1307,14 @@ function features_for_event_registration_field_default_field_instances() {
   t('Company/Organization Name');
   t('Country');
   t('Designation');
+  t('Email');
   t('First name');
   t('Gender Title');
+  t('ID Number');
   t('Last name');
   t('Mailing Address');
   t('Mobile');
+  t('Please enter a valid email id.');
   t('Please enter designation.');
   t('Please enter last name.');
   t('Please enter mobile number.');
@@ -1154,15 +1322,18 @@ function features_for_event_registration_field_default_field_instances() {
 <b>Allowed:</b> 6 digit numeric value.');
   t('Please enter your company/organization name.');
   t('Please enter your mailing address.');
+  t('Please enter your valid ID number.');
   t('Please select city.');
   t('Please select country for this state.');
   t('Please select country.');
   t('Please select gender title.');
   t('Please select state for this city.');
   t('Please select state.');
+  t('Please select your id type.');
   t('Postal Code');
   t('Registration Fee');
   t('Select County');
+  t('Select ID Type');
   t('Select Payment Gateway');
   t('Select State');
   t('Source id');

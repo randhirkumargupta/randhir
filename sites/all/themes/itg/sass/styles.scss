@@ -454,3 +454,82 @@ input[type="text"], select, input[type="password"]{
     }
   }
 }
+
+/* UGC comment CSS */
+.block-itg-ugc-comment{
+  @extend .dib;
+  width: 100%;
+  padding: 20px;
+  background-color: #f0f0f0;
+  #total-comment{
+    padding: 0 0 10px;
+    font-size: 18px;
+  }
+  .form-item{
+    > label{
+      @extend .hide;
+    }
+    .form-textarea, .form-text{
+      @extend .full;
+    }
+  }
+  #user-message {
+    margin-bottom: 10px;
+  }
+  #user-name, #user-email{
+    width: 300px;
+    @extend .dib;
+    @extend .vtop;
+    margin-right: 10px;
+  }
+  .form-submit{
+    @extend .btn;
+    @extend .fright;
+  }
+  .comment{
+    @extend .full;
+    @extend .dib;
+    background-color: #fff;
+    margin-top: 30px;
+    padding: 20px;
+    .comment-image{
+      @extend .fleft;
+      width: 50px;
+      margin-right: 10px;
+      border: 1px solid #d9d9d9;
+      img{
+        @extend .vtop;
+      }
+    }
+    .comment-details{
+      overflow: hidden;
+    }
+    .comment-name{
+      color: #337ab7;
+      font-size: 16px;
+    }
+    .comment-body{
+      padding: 5px 0;
+    }
+    .comment-timestamp{
+      color: #8d8d8d;
+      font-size: 12px;
+      margin-right: 10px;
+    }
+    .reply{
+      font-size: 12px;
+      color: #337ab7;
+      text-decoration: none;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+    > ul{
+      padding-left: 60px;
+      .comment{
+        margin-top: 20px;
+        padding: 0;
+      }
+    }
+  }
+}
