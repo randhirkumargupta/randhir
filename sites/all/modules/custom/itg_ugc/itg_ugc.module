@@ -412,4 +412,9 @@ function itg_ugc_views_pre_render(&$view) {
       $chkvalue->field_field_user_message[0]['rendered']['#markup'] = $user_message_raw_value;
     }
   }
+
+  if ($view->name == "manage_ugc") {
+    $header_content_ugc = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $view->attachment_before = $header_content_ugc;
+  }
 }
