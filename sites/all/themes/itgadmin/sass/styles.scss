@@ -211,6 +211,8 @@ a.button{
 }
 .btn-save, .form-submit[value="Save as Draft"], 
 .form-submit[value="Save"], 
+.form-submit[value="Create"], 
+.form-submit[value="Update"], 
 .form-submit[value="Proceed to Payment"], 
 .form-submit[value="Create new account"], 
 .form-submit[value="Next"]{
@@ -537,6 +539,11 @@ input.password-confirm, input.password-field{
   }
   .filter-wrapper{
     @extend .hide;
+  }
+  .form-radios{
+    &+div.description + span.error{
+      padding-left: 220px;
+    }
   }
 }
 .form-textarea-wrapper{
@@ -1193,6 +1200,7 @@ input[name="field_gallery_image_add_more"]{
           @extend .full;
           @extend .no-bullet;
           position: absolute;
+          min-width: 170px;
           left: 0;
           top: 42px;
           border: 1px solid #d9d9d9;
@@ -1202,12 +1210,53 @@ input[name="field_gallery_image_add_more"]{
               padding: 10px 12px;
               color: #2f2f2f;
               display: block;
-              &:hover, &.active{
+              &.active-trail{
+                background-color: #f5f5f5;
+              }
+            }
+            &:hover{
+              > a{
                 background-color: #f5f5f5;
               }
             }
             & + li{
               border-top: 1px solid #d9d9d9;
+            }
+            &.expanded{
+              > a{
+                @extend .pos-rel;
+                &:after{
+                  border-color: transparent transparent transparent #8d8d8d;
+                  border-style: solid;
+                  border-width: 5px 10px;
+                  bottom: 0;
+                  content: "";
+                  height: 0;
+                  margin: auto 0;
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                  width: 0;
+                }
+              }
+              @extend .pos-rel;
+              > .menu{
+                background-color: #fff;
+                display: none;
+                @extend .full;
+                @extend .no-bullet;
+                position: absolute;
+                left: 100%;
+                top: -1px;
+                border: 1px solid #d9d9d9;
+                z-index: 9999;
+              }
+              &:hover{
+                > a:after{display: none;}
+                > .menu{
+                  display: block;
+                }
+              }
             }
           }
         }
@@ -2523,7 +2572,6 @@ fieldset#edit-select{
 .form-field-name-field-supp-publish{
   .form-type-checkbox{padding-left: 220px;margin-top: -10px;}
 }
-
 [id*="field-survey-add-questions-values"]{
   > tbody{
     @extend .fleft;
@@ -2566,7 +2614,7 @@ fieldset#edit-select{
   .vertical-tabs{
     .container-inline-date{
       .form-item-publish-on{
-        > lebel{
+        > label{
           float: left;
           padding: 0 20px 0 30px;
           width: 250px;
@@ -2576,6 +2624,9 @@ fieldset#edit-select{
         .date-padding{
           .form-type-textfield{
             > label{display: none;}
+            .form-text + div.description{
+              left: 175px;
+            }
           }
           &+div.description{display: none;}
         }
@@ -2586,7 +2637,46 @@ fieldset#edit-select{
 .form-select[name="field_ugc_ctype[und]"]{
     text-transform: capitalize;
 }
-
+div#autocomplete{
+  padding: 0;
+  border: 1px solid #d9d9d9;
+  ul{
+    li{
+      padding: 5px;
+      color: #2f2f2f;
+      cursor: pointer;
+      &:hover{
+        background-color: #f5f5f5;
+      }
+      &+li{
+        border-top: 1px solid #f5f5f5;
+      }
+      div{
+        word-wrap: break-word;
+      }
+    }
+  }
+}
+div.node{
+  a{color: #1fb5ad;}
+  .-submitted{
+    margin-bottom: 20px;
+  }
+  #comments{
+    .comment-form{
+      @extend .node-form;
+    }
+    h2{
+      background-color: #fefafb;
+      border-top: 1px solid #d9d9d9;
+      border-bottom: 1px solid #d9d9d9;
+      padding: 8px 20px;
+      line-height: 28px;
+      font-size: 18px;
+      margin: 15px 0;
+    }
+  }
+}
 
 
 
