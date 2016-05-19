@@ -18,7 +18,12 @@ function itg_event_registration_form(){
       $corrent_date = strtotime(date('Y-m-d').' 00:00:00');  
       $event_reg_start_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       $event_reg_close_date = strtotime($node->field_registration_close_date[LANGUAGE_NONE][0]['value']);
-      if($event_reg_start_date > $corrent_date || $corrent_date > $event_reg_close_date){
+
+      
+      if($corrent_date > $event_reg_start_date){
+        return 'Registration for event <strong>' . ucwords($node->title) . '</strong> has not started yet. Start date is: '.date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']));
+      } 
+      elseif($corrent_date > $event_reg_close_date){
         return 'Registration has been closed for event <strong>' . ucwords($node->title) . '</strong>.';
       } 
       else {
@@ -53,5 +58,71 @@ function itg_event_registration_form(){
       $message = 'Event not found. ';
     }
     return $message . 'Sorry! you can not register for this event.';
+  }
+}
+
+/**
+ * Show list of users registered for an event.
+ * @return string
+ */
+function itg_event_registration_users_list(){
+  $node_event = node_load(arg(2));
+  
+  if($node_event->type == 'event_backend'){
+    
+      //Get event registered user list
+      $main_user_nid_arr = itg_common_select_field_value('entity_id', 'field_data_field_story_source_id', 'field_story_source_id_value', $node_event->nid);
+      
+      $i = 0;
+      foreach ($main_user_nid_arr as $main_user_nid) {
+        $node = node_load($main_user_nid);
+        $data[$i]['name'] = $node->field_erf_gender[LANGUAGE_NONE][0]['value'].'. '.$node->title.' '.$node->field_last_name[LANGUAGE_NONE][0]['value'];
+        $data[$i]['email'] = $node->field_email_address[LANGUAGE_NONE][0]['value'];
+        $data[$i]['mobile'] = $node->field_erf_mobile[LANGUAGE_NONE][0]['value'];
+        $data[$i]['company'] = $node->field_erf_company_name[LANGUAGE_NONE][0]['value'];
+        $data[$i]['designation'] = $node->field_erf_designation[LANGUAGE_NONE][0]['value'];
+        $data[$i]['city'] = taxonomy_term_load($node->field_erf_city[LANGUAGE_NONE][0]['tid'])->name;
+        if(!empty($node->field_erf_registration_fee[LANGUAGE_NONE])){
+          foreach($node->field_erf_registration_fee[LANGUAGE_NONE] as $group_user_arr){
+            $i++;
+            $field_collection_id = $group_user_arr['value'];
+            $entity = entity_load('field_collection_item', array($field_collection_id));
+            $data[$i]['name'] = $entity[$field_collection_id]->field_erf_gender[LANGUAGE_NONE][0]['value'].'. '.$entity[$field_collection_id]->field_first_name[LANGUAGE_NONE][0]['value'].' '.$entity[$field_collection_id]->field_last_name[LANGUAGE_NONE][0]['value'];
+            $data[$i]['email'] = $entity[$field_collection_id]->field_email_address[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_email_address[LANGUAGE_NONE][0]['value'] : '-';
+            $data[$i]['mobile'] = $entity[$field_collection_id]->field_erf_mobile[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_mobile[LANGUAGE_NONE][0]['value'] : '-';
+            $data[$i]['company'] = $entity[$field_collection_id]->field_erf_company_name[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_company_name[LANGUAGE_NONE][0]['value'] : '-';
+            $data[$i]['designation'] = $entity[$field_collection_id]->field_erf_designation[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_designation[LANGUAGE_NONE][0]['value'] : '-';
+            $data[$i]['city'] = taxonomy_term_load($entity[$field_collection_id]->field_erf_city[LANGUAGE_NONE][0]['tid'])->name ? taxonomy_term_load($entity[$field_collection_id]->field_erf_city[LANGUAGE_NONE][0]['tid'])->name : '-';
+          }
+        }
+        $i++;
+      }
+      
+      $output_header = '<div><strong>Event: '.$node_event->title.'</strong></div><div><strong>Registered Users List: </strong></div>
+      <table style="width:100%">
+        <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Company</th>
+        <th>Designation</th>
+        <th>City</th>
+      </tr>';
+      
+      $output_data = '';
+      for($user_list = 0; $user_list < count($data); $user_list++){
+        $output_data .= '<tr>
+            <td>' . $data[$user_list]['name'] . '</td>
+            <td>' . $data[$user_list]['email'] . '</td>
+            <td>' . $data[$user_list]['mobile'] . '</td>
+            <td>' . $data[$user_list]['company'] . '</td>
+            <td>' . $data[$user_list]['designation'] . '</td>
+            <td>' . $data[$user_list]['city'] . '</td>
+          </tr>';
+      }
+      $output = $output_header.$output_data;
+      return $output;
+  } else {
+    return 'Event is not valid! Please check your url.';
   }
 }
