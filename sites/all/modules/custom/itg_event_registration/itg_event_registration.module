@@ -9,6 +9,18 @@
  */
 
 /**
+ * Implementation of hook_permission
+ * @return array
+ */
+function itg_event_registration_permission() {
+    return array(
+    'event registered users' => array(
+      'title' => t('View Event Registered User List'),
+    )
+  );
+}
+
+/**
  * Implementation of hook_menu
  * 
  * @return array
@@ -22,6 +34,15 @@ function itg_event_registration_menu() {
       'title' => t('Event Registration'),
       'page callback' => 'itg_event_registration_form',
       'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_event_registration.inc',
+  );
+  
+  $items['event-registration/users-list/%'] = array(
+      'title' => t('Registered Users List'),
+      'page callback' => 'itg_event_registration_users_list',
+      'access callback' => 'user_access',
+      'access arguments' => array('event registered users'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_event_registration.inc',
   );
@@ -300,6 +321,19 @@ function itg_event_registration_node_validate($node){
     if (!preg_match("/^[0-9]{10}$/", $node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
       form_set_error('field_erf_mobile', t('Mobile number must be 10 digit numeric value.'));
     }
+    
+    if (!valid_email_address($node->field_email_address[LANGUAGE_NONE][0]['value'])) {
+      form_set_error('field_email_address', t('Please enter a valid email id.'));
+    }
+    
+    //Validate Email for group users
+    foreach ($node->field_erf_registration_fee[LANGUAGE_NONE] as $emails) {
+      if (!empty($emails['field_email_address'][LANGUAGE_NONE][0]['value'])) {
+        if (!valid_email_address($emails['field_email_address'][LANGUAGE_NONE][0]['value'])) {
+          form_set_error('field_email_address', t('Email "'.$emails['field_email_address'][LANGUAGE_NONE][0]['value'].'" is not a valid email.'));
+        }
+      }
+    }
   }
 }
 
@@ -363,18 +397,26 @@ function itg_event_registration_get_id_type($val){
  */
 function itg_event_registration_registered_user_detail($nid){
       if (isset($nid)) {
-      $registration_main_users = itg_common_check_record_existance($nid, 'field_data_field_story_source_id', 'field_story_source_id_value');
+    $registration_main_users = itg_common_check_record_existance($nid, 'field_data_field_story_source_id', 'field_story_source_id_value');
 
-      //Count group users registration for an event
-      $main_user_nid_arr = itg_common_select_field_value('entity_id', 'field_data_field_story_source_id', 'field_story_source_id_value', $nid);
-      $registration_group_users = 0;
-      foreach ($main_user_nid_arr as $main_user_nid) {
-        $registration_group_users = $registration_group_users + itg_common_check_record_existance($main_user_nid, 'field_data_field_erf_registration_fee', 'entity_id');
-      }
-
-      //Total count for an event
-      $total_registration_users = $registration_main_users + $registration_group_users;
-      $total_registration_for_event = $total_registration_users ? $total_registration_users : 0;
+    //Count group users registration for an event
+    $main_user_nid_arr = itg_common_select_field_value('entity_id', 'field_data_field_story_source_id', 'field_story_source_id_value', $nid);
+    $registration_group_users = 0;
+    foreach ($main_user_nid_arr as $main_user_nid) {
+      $registration_group_users = $registration_group_users + itg_common_check_record_existance($main_user_nid, 'field_data_field_erf_registration_fee', 'entity_id');
     }
-    return $total_registration_for_event;
+
+    //Total count for an event
+    $total_registration_users = $registration_main_users + $registration_group_users;
+    $total_registration_for_event = $total_registration_users ? $total_registration_users : 0;
+  }
+
+  $text = 'List Users(' . $total_registration_for_event . ')';
+  $path = 'event-registration/users-list/' . $nid;
+
+  if ($total_registration_for_event < 1) {
+    return 0;
+  } else {
+    return l($text, $path, array('attributes' => array('target' => '_blank')));
+  }
 }

@@ -30,6 +30,17 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       // $form['#submit'][] = 'custom_node_submit';
       $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect';
     }
+    //add extra save button
+    if(arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))){
+      $form['actions']['submit2'] = array(
+       '#type' => 'submit',
+       '#name' => 'second_submit',
+       '#value' => t('Save'),
+       '#access' => TRUE,
+       '#submit' => array('node_form_submit', 'itg_event_backend_second_submit'),
+       '#weight' => 7,
+     );
+    }
     // Current step save in session variable
     if (isset($form_state['storage']['step'])) {
       $_SESSION['current_step'] = $form_state['storage']['step'];
@@ -54,9 +65,9 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $enddate = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
-//  if ($registration_close < $registration_start) {
-//    form_set_error('field_story_expiry_date', 'Registration start date must be less then registration close date.');
-//  }
+  if ($registration_close < $registration_start) {
+    form_set_error('field_story_expiry_date', 'Registration start date must be less then registration close date.');
+  }
   if ($enddate < $startdate) {
     form_set_error('field_event_close_date', 'Close date must be greater then start date.');
   }
@@ -199,7 +210,7 @@ function itg_event_backend_after_build($form, &$form_state) {
   }
   //Next and Save button access according steps step_configuration
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
-    //$form['actions']['submit']['#access'] = FALSE;
+    $form['actions']['submit2']['#access'] = FALSE;
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
   }
@@ -291,6 +302,21 @@ function itg_event_backend_configuration_redirect($form, &$form_state) {
   else {
     drupal_get_messages();
     $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => 'step_sponsor')));
+  }
+}
+
+/**
+ * Implements function itg_event_backend_second_submit().
+ * @param array $form
+ * @param array $form_state 
+ */
+function itg_event_backend_second_submit($form, &$form_state) {
+  if (isset($_GET['destination'])) {
+    unset($_GET['destination']);
+  }
+  if (isset($form_state['storage']['step'])){
+      $current_step = $form_state['storage']['step'];
+      $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => $current_step)));
   }
 }
 
