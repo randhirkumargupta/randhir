@@ -1224,10 +1224,17 @@ input[name="field_gallery_image_add_more"]{
               > a{
                 @extend .pos-rel;
                 &:after{
-                  content: '';
+                  border-color: transparent transparent transparent #8d8d8d;
                   border-style: solid;
-                  border-color: transparent transparent transparent #d9d9d9;
-                  border-width: 5px;
+                  border-width: 5px 10px;
+                  bottom: 0;
+                  content: "";
+                  height: 0;
+                  margin: auto 0;
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                  width: 0;
                 }
               }
               @extend .pos-rel;
@@ -1243,6 +1250,7 @@ input[name="field_gallery_image_add_more"]{
                 z-index: 9999;
               }
               &:hover{
+                > a:after{display: none;}
                 > .menu{
                   display: block;
                 }
@@ -2628,7 +2636,26 @@ fieldset#edit-select{
 .form-select[name="field_ugc_ctype[und]"]{
     text-transform: capitalize;
 }
-
+div#autocomplete{
+  padding: 0;
+  border: 1px solid #d9d9d9;
+  ul{
+    li{
+      padding: 5px;
+      color: #2f2f2f;
+      cursor: pointer;
+      &:hover{
+        background-color: #f5f5f5;
+      }
+      &+li{
+        border-top: 1px solid #f5f5f5;
+      }
+      div{
+        word-wrap: break-word;
+      }
+    }
+  }
+}
 
 
 
