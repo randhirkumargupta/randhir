@@ -32,11 +32,13 @@ function itg_social_media_permission() {
 function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   if (isset($form['created']['min'])) {
     $form['created']['min'] = array(
+      '#title' => t('Start Date'),
       '#type' => 'date_popup',
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-3:+3',
     );
     $form['created']['max'] = array(
+      '#title' => t('End Date'),
       '#type' => 'date_popup',
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-3:+3',
