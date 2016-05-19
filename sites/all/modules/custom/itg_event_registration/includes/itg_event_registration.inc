@@ -20,7 +20,7 @@ function itg_event_registration_form(){
       $event_reg_close_date = strtotime($node->field_registration_close_date[LANGUAGE_NONE][0]['value']);
 
       
-      if($corrent_date > $event_reg_start_date){
+      if($corrent_date < $event_reg_start_date){
         return 'Registration for event <strong>' . ucwords($node->title) . '</strong> has not started yet. Start date is: '.date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']));
       } 
       elseif($corrent_date > $event_reg_close_date){
