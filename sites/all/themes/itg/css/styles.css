@@ -517,7 +517,7 @@ input[type="text"], select, input[type="password"] {
 }
 
 /* line 413, ../sass/styles.scss */
-[id*="edit-field-ugc-ctype-und"] option + option {
+.form-select[name="field_ugc_ctype[und]"] {
   text-transform: capitalize;
 }
 
