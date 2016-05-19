@@ -317,6 +317,7 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Address';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_erf_city] ([field_erf_country])';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
@@ -330,7 +331,7 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['label'] = 'Registered Users';
+  $handler->display->display_options['fields']['php']['label'] = 'Group Registered Users';
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_event_registration_get_registered_user($row->nid); ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
