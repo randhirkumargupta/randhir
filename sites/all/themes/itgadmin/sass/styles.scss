@@ -211,6 +211,8 @@ a.button{
 }
 .btn-save, .form-submit[value="Save as Draft"], 
 .form-submit[value="Save"], 
+.form-submit[value="Create"], 
+.form-submit[value="Update"], 
 .form-submit[value="Proceed to Payment"], 
 .form-submit[value="Create new account"], 
 .form-submit[value="Next"]{
@@ -2570,7 +2572,6 @@ fieldset#edit-select{
 .form-field-name-field-supp-publish{
   .form-type-checkbox{padding-left: 220px;margin-top: -10px;}
 }
-
 [id*="field-survey-add-questions-values"]{
   > tbody{
     @extend .fleft;
@@ -2653,6 +2654,26 @@ div#autocomplete{
       div{
         word-wrap: break-word;
       }
+    }
+  }
+}
+div.node{
+  a{color: #1fb5ad;}
+  .-submitted{
+    margin-bottom: 20px;
+  }
+  #comments{
+    .comment-form{
+      @extend .node-form;
+    }
+    h2{
+      background-color: #fefafb;
+      border-top: 1px solid #d9d9d9;
+      border-bottom: 1px solid #d9d9d9;
+      padding: 8px 20px;
+      line-height: 28px;
+      font-size: 18px;
+      margin: 15px 0;
     }
   }
 }
