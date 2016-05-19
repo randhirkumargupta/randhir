@@ -39,7 +39,7 @@ function itg_event_registration_menu() {
   );
   
   $items['event-registration/users-list/%'] = array(
-      'title' => t('Registred Users List'),
+      'title' => t('Registered Users List'),
       'page callback' => 'itg_event_registration_users_list',
       'access callback' => 'user_access',
       'access arguments' => array('event registered users'),

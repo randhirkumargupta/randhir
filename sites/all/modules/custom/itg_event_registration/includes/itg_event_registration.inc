@@ -98,7 +98,7 @@ function itg_event_registration_users_list(){
         $i++;
       }
       
-      $output_header = '<div><strong>Event: '.$node_event->title.'</strong></div><div><strong>Registered Users List: </strong></div>
+      $output_header = '<div><strong>Event: '.$node_event->title.'</strong></div>
       <table style="width:100%">
         <tr>
         <th>Name</th>
