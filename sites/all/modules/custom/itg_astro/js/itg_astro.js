@@ -60,10 +60,6 @@
 
       // validateJobSearch validation function            
       $("#astro-node-form").validate({
-        submitHandler: function (form) {
-          $('input:submit').attr('disabled', 'disabled');
-          form.submit();
-        },
         onfocusout: function (element) {
           $(element).valid();
         },        
@@ -720,7 +716,7 @@
       jQuery.validator.addMethod("dupliNumero", function (value, element) {
         return dupliNumeroValue(value, element);
       }, "This is duplicate value.");
-
+      
 
       // validate date difference
       function validateDateRange(value, element) {
@@ -751,7 +747,7 @@
       // Check duplicate numerology field value.
       function dupliNumeroValue(value, element) {
         var counter = 0;
-        jQuery('.field-name-field-astro-numerology-values').find('.form-select').each(function () {           
+        jQuery('.form-field-name-field-astro-numerology-values').find('.form-select').each(function () {           
           if ($(this).val() == value) {
             ++counter;
           }
