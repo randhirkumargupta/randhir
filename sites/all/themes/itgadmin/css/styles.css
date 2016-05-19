@@ -77,7 +77,7 @@ img {
   padding-right: 10px;
 }
 
-.no-bullet, ul.pager, div.form-type-password-confirm div.password-suggestions ul, #block-menu-menu-admin-left-menu > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
+.no-bullet, ul.pager, div.form-type-password-confirm div.password-suggestions ul, #block-menu-menu-admin-left-menu > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
@@ -231,7 +231,7 @@ img {
   vertical-align: top;
 }
 
-.full, table, .credit-to-all, [id*="field-gallery-image-values"], [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview, #block-menu-menu-admin-left-menu > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
+.full, table, .credit-to-all, [id*="field-gallery-image-values"], [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview, #block-menu-menu-admin-left-menu > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > .menu, .content-block-menu > .menu, #block-menu-menu-ask-an-expert-menu > .menu,
 #block-menu-menu-photogallery-admin-menu > .menu,
 #block-menu-menu-mega-review-menu > .menu,
 #block-menu-menu-blog-admin-menu > .menu,
@@ -283,7 +283,7 @@ img {
 [id*="field-task-task-idea-values"] tbody tr td,
 [id*="field-story-template-buzz-values"] tbody tr td,
 [id*="field-erf-registration-fee-values"] tbody tr td,
-[id*="field-mega-review-review-values"] tbody tr td, .header, .header .container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu > .menu > li, .user-role a, .dashboard-tab li, .node-story-form #Templates .form-field-type-text .form-item, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .block-itg-event-backend .block-itg-story-list a, .category-manager-details .cmd-heading, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-source.filefield-source-plupload,
+[id*="field-mega-review-review-values"] tbody tr td, .header, .header .container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .user-role a, .dashboard-tab li, .node-story-form #Templates .form-field-type-text .form-item, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .block-itg-event-backend .block-itg-story-list a, .category-manager-details .cmd-heading, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-source.filefield-source-plupload,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-source.filefield-source-plupload, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2 {
   position: relative;
 }
@@ -863,6 +863,9 @@ input.password-confirm, input.password-field {
   margin: 15px 0;
   padding: 15px 30px;
 }
+.node-form .form-radios + div.description + span.error, .page-admin-structure-taxonomy-tags form .form-radios + div.description + span.error, .confirmation .form-radios + div.description + span.error {
+  padding-left: 220px;
+}
 
 .form-textarea-wrapper .grippie {
   display: none !important;
@@ -1401,6 +1404,7 @@ input[name="field_gallery_image_add_more"] {
   background-color: #fff;
   display: block;
   position: absolute;
+  min-width: 170px;
   left: 0;
   top: 42px;
   border: 1px solid #d9d9d9;
@@ -1411,11 +1415,32 @@ input[name="field_gallery_image_add_more"] {
   color: #2f2f2f;
   display: block;
 }
-#block-menu-menu-admin-left-menu > .menu > li:hover > .menu li a:hover, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li a.active {
+#block-menu-menu-admin-left-menu > .menu > li:hover > .menu li a.active-trail {
+  background-color: #f5f5f5;
+}
+#block-menu-menu-admin-left-menu > .menu > li:hover > .menu li:hover > a {
   background-color: #f5f5f5;
 }
 #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li + li {
   border-top: 1px solid #d9d9d9;
+}
+#block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a:after {
+  content: '';
+  border-style: solid;
+  border-color: transparent transparent transparent #d9d9d9;
+  border-width: 5px;
+}
+#block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > .menu {
+  background-color: #fff;
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -1px;
+  border: 1px solid #d9d9d9;
+  z-index: 9999;
+}
+#block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded:hover > .menu {
+  display: block;
 }
 
 .content-block-menu, #block-menu-menu-ask-an-expert-menu,
@@ -2664,13 +2689,16 @@ fieldset#edit-select .form-submit {
   display: block;
   margin: 0;
 }
-.node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on > lebel {
+.node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on > label {
   float: left;
   padding: 0 20px 0 30px;
   width: 250px;
 }
 .node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on .date-padding .form-type-textfield > label {
   display: none;
+}
+.node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on .date-padding .form-type-textfield .form-text + div.description {
+  left: 175px;
 }
 .node-event_backend-form .vertical-tabs .container-inline-date .form-item-publish-on .date-padding + div.description {
   display: none;
