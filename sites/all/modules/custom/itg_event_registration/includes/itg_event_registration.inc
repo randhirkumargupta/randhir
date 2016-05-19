@@ -99,7 +99,8 @@ function itg_event_registration_users_list(){
       }
       
       $output_header = '<div><strong>Event: '.$node_event->title.'</strong></div>
-      <table style="width:100%">
+      <table class="views-table">
+      <thead>
         <tr>
         <th>Name</th>
         <th>Email</th>
@@ -107,7 +108,7 @@ function itg_event_registration_users_list(){
         <th>Company</th>
         <th>Designation</th>
         <th>City</th>
-      </tr>';
+      </tr></thead><tbody>';
       
       $output_data = '';
       for($user_list = 0; $user_list < count($data); $user_list++){
@@ -120,6 +121,7 @@ function itg_event_registration_users_list(){
             <td>' . $data[$user_list]['city'] . '</td>
           </tr>';
       }
+      $output_data .='</tbody></table>';
       $output = $output_header.$output_data;
       return $output;
   } else {
