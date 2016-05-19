@@ -223,7 +223,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
             $content_format .= $content_type_val . ',';
             // content-format-hidden
             if ($content_type_val == 'text') {
-              drupal_add_js("jQuery(document).ready(function(){ alert('hi'); jQuery('.field-name-field-story-expert-description').show(); });", 'inline');
+              drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-story-expert-description').show(); });", 'inline');
             }
             elseif ($content_type_val == 'image') {
               drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-story-large-image').show();});", 'inline');
