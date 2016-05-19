@@ -550,7 +550,7 @@ a.button {
   cursor: pointer;
 }
 
-.desc-popup, .form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description, .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description, .form-type-checkboxes .form-checkboxes + div.description, .form-item-path-pathauto div.description, .form-type-radios div.description, .form-type-textarea div.description, .form-type-managed-file .form-managed-file + div.description, .img-crt + .pre-desc, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, .node-story-form #Templates .form-field-type-text .form-item > table + .description {
+.desc-popup, .form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description, .form-type-textfield .form-text + span.error + .autocomplete + div.description, .form-type-textfield .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description, .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description, .form-type-checkboxes .form-checkboxes + div.description, .form-item-path-pathauto div.description, .form-type-radios div.description, .form-type-textarea div.description, .form-type-managed-file .form-managed-file + div.description, .img-crt + .pre-desc, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, .node-story-form #Templates .form-field-type-text .form-item > table + .description {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   color: #8d8d8d;
@@ -563,7 +563,7 @@ a.button {
   background-color: #fff;
   z-index: 9999;
 }
-.desc-popup:before, .form-type-textfield .form-text + div.description:before, .form-type-textfield .form-text + span.error + div.description:before, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:before, .form-type-select .form-select + div.description:before, .form-type-select .form-select + span.error + div.description:before, .form-type-checkboxes .form-checkboxes + div.description:before, .form-item-path-pathauto div.description:before, .form-type-radios div.description:before, .form-type-textarea div.description:before, .form-type-managed-file .form-managed-file + div.description:before, .img-crt + .pre-desc:before, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, .node-story-form #Templates .form-field-type-text .form-item > table + .description:before {
+.desc-popup:before, .form-type-textfield .form-text + div.description:before, .form-type-textfield .form-text + span.error + div.description:before, .form-type-textfield .form-text + span.error + .autocomplete + div.description:before, .form-type-textfield .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:before, .form-type-select .form-select + div.description:before, .form-type-select .form-select + span.error + div.description:before, .form-type-checkboxes .form-checkboxes + div.description:before, .form-item-path-pathauto div.description:before, .form-type-radios div.description:before, .form-type-textarea div.description:before, .form-type-managed-file .form-managed-file + div.description:before, .img-crt + .pre-desc:before, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, .node-story-form #Templates .form-field-type-text .form-item > table + .description:before {
   border-width: 7px 13px 7px 7px;
   border-style: solid;
   border-color: transparent #d9d9d9 transparent transparent;
@@ -576,7 +576,7 @@ a.button {
   bottom: 0;
   margin: auto;
 }
-.desc-popup:after, .form-type-textfield .form-text + div.description:after, .form-type-textfield .form-text + span.error + div.description:after, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:after, .form-type-select .form-select + div.description:after, .form-type-select .form-select + span.error + div.description:after, .form-type-checkboxes .form-checkboxes + div.description:after, .form-item-path-pathauto div.description:after, .form-type-radios div.description:after, .form-type-textarea div.description:after, .form-type-managed-file .form-managed-file + div.description:after, .img-crt + .pre-desc:after, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, .node-story-form #Templates .form-field-type-text .form-item > table + .description:after {
+.desc-popup:after, .form-type-textfield .form-text + div.description:after, .form-type-textfield .form-text + span.error + div.description:after, .form-type-textfield .form-text + span.error + .autocomplete + div.description:after, .form-type-textfield .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:after, .form-type-select .form-select + div.description:after, .form-type-select .form-select + span.error + div.description:after, .form-type-checkboxes .form-checkboxes + div.description:after, .form-item-path-pathauto div.description:after, .form-type-radios div.description:after, .form-type-textarea div.description:after, .form-type-managed-file .form-managed-file + div.description:after, .img-crt + .pre-desc:after, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, .node-story-form #Templates .form-field-type-text .form-item > table + .description:after {
   border-width: 7px 13px 7px 7px;
   border-style: solid;
   border-color: transparent #fff transparent transparent;
@@ -1055,13 +1055,15 @@ div.vertical-tabs .form-textarea-wrapper {
   padding: 0;
 }
 
-.form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description {
+.form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description, .form-type-textfield .form-text + span.error + .autocomplete + div.description, .form-type-textfield .form-text + .autocomplete + div.description {
   left: 600px;
 }
-.form-type-textfield .form-text:hover + div.description, .form-type-textfield .form-text:hover + span.error + div.description {
+.form-type-textfield .form-text:hover + div.description, .form-type-textfield .form-text:hover + span.error + div.description, .form-type-textfield .form-text:hover + .autocomplete + div.description, .form-type-textfield .form-text:hover + span.error + .autocomplete + div.description {
   display: block;
 }
-.form-type-textfield label + .form-text + span.error, .form-type-textfield label + .form-text + div.description + span.error {
+.form-type-textfield label + .form-text + span.error,
+.form-type-textfield label + #autocomplete + .form-text + span.error,
+.form-type-textfield label + .form-text + div.description + span.error {
   padding-left: 220px;
 }
 

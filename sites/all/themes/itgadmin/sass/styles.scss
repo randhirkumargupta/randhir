@@ -746,15 +746,23 @@ div.vertical-tabs {
 .form-type-textfield{
   @extend .pos-rel;
   .form-text{
-    & + div.description, & + span.error + div.description{
+    & + div.description, 
+    & + span.error + div.description, 
+    & + span.error + .autocomplete + div.description,
+    & + .autocomplete + div.description{
       @extend .desc-popup;
       left: 600px;
     }
-    &:hover + div.description, &:hover + span.error + div.description{
+    &:hover + div.description, 
+    &:hover + span.error + div.description,
+    &:hover + .autocomplete + div.description,
+    &:hover + span.error + .autocomplete + div.description{
       display: block;
     }
   } 
-  label + .form-text + span.error, label + .form-text + div.description + span.error{
+  label + .form-text + span.error, 
+  label + #autocomplete + .form-text + span.error,
+  label + .form-text + div.description + span.error{
     padding-left: 220px;
   }
 }
