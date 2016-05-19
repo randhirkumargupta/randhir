@@ -17,17 +17,6 @@
                 $('#edit-metatags-und-advanced').hide();
             }
             
-            jQuery('.reject-ugc').click(function() {                 
-        var reject_status = 'reject';
-        if (reject_status == 'reject') {                   
-           var msg = confirm('Are you sure you want to reject this content?');
-           if (msg == true) {
-               return true;
-           }
-           return false; 
-        }
-        return true;                     
-    });           
             
       $('#edit-field-ugc-ctype-und').change(function() {
                 var contenttypevalue = $('#edit-field-ugc-ctype-und').val();
