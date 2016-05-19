@@ -293,7 +293,7 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
                  jQuery("#views-form-manage-users-page input:checkbox:checked").map(function(){
                  searchIDs.push(jQuery(this).val());
               });
-                 if (searchIDs.length != 0 && operation != 0) {
+                 if (searchIDs.length != 0 && operation == "action::user_block_user_action") {
                   var msg = confirm("Are you sure you want to Blocked User?");
                      if (msg == true) {
                        return true;
