@@ -117,7 +117,7 @@
 
 // code for moderation value change on click of dropdown and save story 
 jQuery(document).ready(function() {
-    jQuery('.button-yes').click(function() {                 
+    jQuery('#edit-submit').click(function() {                 
         var status_val = jQuery("input[name='status']:checked").val();
         if (status_val == 0) {                   
            var msg = confirm("Are you sure you want to Blocked this User?");

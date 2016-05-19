@@ -695,47 +695,6 @@ function feature_for_poll_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-poll-field_poll_question_text'.
-  $field_instances['node-poll-field_poll_question_text'] = array(
-    'bundle' => 'poll',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_poll_question_text',
-    'label' => 'Poll Question Text',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'node-poll-field_poll_question_video'.
   $field_instances['node-poll-field_poll_question_video'] = array(
     'bundle' => 'poll',
@@ -1000,7 +959,6 @@ function feature_for_poll_field_default_field_instances() {
   t('Poll Call to Action Image');
   t('Poll Option');
   t('Poll Question Image');
-  t('Poll Question Text');
   t('Poll Question Video');
   t('Poll Type');
   t('Poll manipulate');
