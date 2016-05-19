@@ -26,9 +26,20 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 20,
     );
     // Node redirection code
-    if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights')) {
+    if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
       // $form['#submit'][] = 'custom_node_submit';
       $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect';
+    }
+    //add extra save button
+    if(arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))){
+      $form['actions']['submit2'] = array(
+       '#type' => 'submit',
+       '#name' => 'second_submit',
+       '#value' => t('Save'),
+       '#access' => TRUE,
+       '#submit' => array('node_form_submit', 'itg_event_backend_second_submit'),
+       '#weight' => 7,
+     );
     }
     // Current step save in session variable
     if (isset($form_state['storage']['step'])) {
@@ -197,13 +208,13 @@ function itg_event_backend_after_build($form, &$form_state) {
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
     }
   }
-  //Next and Save button access according steps
-  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second' || $form_state['storage']['step'] == 'step_program_schedule')) {
-    $form['actions']['submit']['#access'] = FALSE;
+  //Next and Save button access according steps step_configuration
+  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
+    $form['actions']['submit2']['#access'] = FALSE;
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
   }
-  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights')) {
+  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
     $form['actions']['submit']['#access'] = TRUE;
     $form['actions']['submit']['#value'] = 'Next';
     $form['actions']['next']['#access'] = FALSE;
@@ -280,9 +291,32 @@ function itg_event_backend_configuration_redirect($form, &$form_state) {
     drupal_get_messages();
     $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => 'step_media')));
   }
+  elseif (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_first')) {
+    drupal_get_messages();
+    $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => 'step_second')));
+  }
+  elseif (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_second')) {
+    drupal_get_messages();
+    $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => 'step_program_schedule')));
+  }
   else {
     drupal_get_messages();
     $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => 'step_sponsor')));
+  }
+}
+
+/**
+ * Implements function itg_event_backend_second_submit().
+ * @param array $form
+ * @param array $form_state 
+ */
+function itg_event_backend_second_submit($form, &$form_state) {
+  if (isset($_GET['destination'])) {
+    unset($_GET['destination']);
+  }
+  if (isset($form_state['storage']['step'])){
+      $current_step = $form_state['storage']['step'];
+      $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => $current_step)));
   }
 }
 
@@ -401,7 +435,7 @@ function itg_event_backend_views_pre_render(&$view) {
  */
 function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   //Get the Form Id
-  if ($form["#id"] == 'views-exposed-form-Event-backend-page') {
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page' || $form['#id'] == 'views-exposed-form-Event-backend-page-1') {
     $form['title']['#autocomplete_path'] = 'content-title-list/event_backend/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
@@ -409,31 +443,4 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
     $form['title']['#autocomplete_path'] = 'content-title-list/sponsor/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
-}
-
-/**
- * Implements hook_menu().
- * {@inheritdoc}
- */
-function itg_event_backend_menu() {
-  $items = array();
-  $items['event-publish'] = array(
-    'page callback' => 'itg_event_backend_publish_event',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_event_backend.inc',
-    'type' => MENU_CALLBACK,
-  );
-  $items['event-unpublish'] = array(
-    'page callback' => 'itg_event_backend_unpublish_event',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_event_backend.inc',
-    'type' => MENU_CALLBACK,
-  );
-  $items['event-title/%'] = array(
-    'page callback' => 'itg_event_backend_title_event',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_event_backend.inc',
-    'type' => MENU_CALLBACK,
-  );
-  return $items;
 }

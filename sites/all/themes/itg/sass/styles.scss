@@ -403,14 +403,15 @@ input[type="text"], select, input[type="password"]{
       font-size: 12px;
       padding-left: 220px;
     }
-  }
-  fieldset.captcha {
-    max-width: 400px;
-    margin: 0 0 30px 250px;
-    padding: 10px;
+    fieldset.captcha {
+      max-width: 400px;
+      margin: 0 0 30px 250px;
+      padding: 10px;
+      div.description{padding-left: 0;}
+    }
   }
 }
-[id*="edit-field-ugc-ctype-und"] option + option{
+.form-select[name="field_ugc_ctype[und]"]{
   text-transform: capitalize;
 }
 .sticky-header{

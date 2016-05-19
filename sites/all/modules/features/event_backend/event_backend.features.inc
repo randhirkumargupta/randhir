@@ -29,7 +29,7 @@ function event_backend_views_api($module = NULL, $api = NULL) {
 function event_backend_node_info() {
   $items = array(
     'event_backend' => array(
-      'name' => t('Event backend'),
+      'name' => t('Event'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
