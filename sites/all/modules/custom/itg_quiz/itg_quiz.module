@@ -552,7 +552,7 @@ function itg_quiz_get_correct_answer($ques_id){
  * @return string
  */
 function itg_quiz_views_user_list($nid){
-    if(itg_common_check_record_existance($nid, 'itg_quiz_user_score') > 0){
+    if(itg_common_check_record_existance($nid, 'itg_quiz_user_score', 'nid') > 0){
     return l('View List','quiz-user-list/'.$nid, array('attributes' => array('target'=>'_blank')));
   } else {
     return 'View List';

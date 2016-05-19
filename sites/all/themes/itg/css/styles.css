@@ -84,7 +84,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 53, ../sass/styles.scss */
-.hide, .sticky-header, .form-field-type-field-collection .field-multiple-table tbody .field-multiple-drag {
+.hide, .sticky-header, .form-field-type-field-collection .field-multiple-table tbody .field-multiple-drag, .block-itg-ugc-comment .form-item > label {
   display: none;
 }
 
@@ -94,7 +94,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 59, ../sass/styles.scss */
-.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"] {
+.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .block-itg-ugc-comment .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], .block-itg-ugc-comment, .block-itg-ugc-comment #user-name, .block-itg-ugc-comment #user-email, .block-itg-ugc-comment .comment {
   display: inline-block;
 }
 
@@ -104,22 +104,22 @@ h1, h2, h3, h4 {
 }
 
 /* line 65, ../sass/styles.scss */
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"] {
+.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .block-itg-ugc-comment .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], .block-itg-ugc-comment #user-name, .block-itg-ugc-comment #user-email, .block-itg-ugc-comment .comment .comment-image img {
   vertical-align: top;
 }
 
 /* line 68, ../sass/styles.scss */
-.full, #page, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .form-field-type-field-collection .field-multiple-table {
+.full, #page, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .form-field-type-field-collection .field-multiple-table, .block-itg-ugc-comment .form-item .form-textarea, .block-itg-ugc-comment .form-item .form-text, .block-itg-ugc-comment .comment {
   width: 100%;
 }
 
 /* line 71, ../sass/styles.scss */
-.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"] {
+.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"], .block-itg-ugc-comment .comment .comment-image {
   float: left;
 }
 
 /* line 74, ../sass/styles.scss */
-.fright {
+.fright, .block-itg-ugc-comment .form-submit {
   float: right;
 }
 
@@ -129,7 +129,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 80, ../sass/styles.scss */
-.btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit {
+.btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .block-itg-ugc-comment .form-submit {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
   color: #fff;
@@ -142,7 +142,7 @@ h1, h2, h3, h4 {
   white-space: nowrap;
 }
 /* line 93, ../sass/styles.scss */
-.btn:hover, .page-user form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover, .question-container .form-submit:hover, #content .node-form .form-actions .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover {
+.btn:hover, .page-user form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover, .question-container .form-submit:hover, #content .node-form .form-actions .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover, .block-itg-ugc-comment .form-submit:hover {
   background-color: #286090;
   border-color: #204d74;
   color: #fff;
@@ -547,4 +547,76 @@ input[type="text"], select, input[type="password"] {
 /* line 451, ../sass/styles.scss */
 .form-field-type-field-collection .field-multiple-table + .clearfix .form-submit {
   margin-left: 220px;
+}
+
+/* UGC comment CSS */
+/* line 459, ../sass/styles.scss */
+.block-itg-ugc-comment {
+  width: 100%;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+/* line 464, ../sass/styles.scss */
+.block-itg-ugc-comment #total-comment {
+  padding: 0 0 10px;
+  font-size: 18px;
+}
+/* line 476, ../sass/styles.scss */
+.block-itg-ugc-comment #user-message {
+  margin-bottom: 10px;
+}
+/* line 479, ../sass/styles.scss */
+.block-itg-ugc-comment #user-name, .block-itg-ugc-comment #user-email {
+  width: 300px;
+  margin-right: 10px;
+}
+/* line 489, ../sass/styles.scss */
+.block-itg-ugc-comment .comment {
+  background-color: #fff;
+  margin-top: 30px;
+  padding: 20px;
+}
+/* line 495, ../sass/styles.scss */
+.block-itg-ugc-comment .comment .comment-image {
+  width: 50px;
+  margin-right: 10px;
+  border: 1px solid #d9d9d9;
+}
+/* line 504, ../sass/styles.scss */
+.block-itg-ugc-comment .comment .comment-details {
+  overflow: hidden;
+}
+/* line 507, ../sass/styles.scss */
+.block-itg-ugc-comment .comment .comment-name {
+  color: #337ab7;
+  font-size: 16px;
+}
+/* line 511, ../sass/styles.scss */
+.block-itg-ugc-comment .comment .comment-body {
+  padding: 5px 0;
+}
+/* line 514, ../sass/styles.scss */
+.block-itg-ugc-comment .comment .comment-timestamp {
+  color: #8d8d8d;
+  font-size: 12px;
+  margin-right: 10px;
+}
+/* line 519, ../sass/styles.scss */
+.block-itg-ugc-comment .comment .reply {
+  font-size: 12px;
+  color: #337ab7;
+  text-decoration: none;
+}
+/* line 523, ../sass/styles.scss */
+.block-itg-ugc-comment .comment .reply:hover {
+  text-decoration: underline;
+}
+/* line 527, ../sass/styles.scss */
+.block-itg-ugc-comment .comment > ul {
+  padding-left: 60px;
+}
+/* line 529, ../sass/styles.scss */
+.block-itg-ugc-comment .comment > ul .comment {
+  margin-top: 20px;
+  padding: 0;
 }

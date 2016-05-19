@@ -24,8 +24,7 @@
           $('input[name="field_quiz_add_questions_und_0_remove_button"]').hide();
         }
       }
-      
-
+     
       //Collect values assigned in settings array 
       var base_url = settings.itg_quiz.settings.base_url;
       var type = settings.itg_quiz.settings.type;

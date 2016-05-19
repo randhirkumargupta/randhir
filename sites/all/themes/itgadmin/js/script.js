@@ -467,12 +467,27 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.header__secondary-menu ul li.last a').html('<i class="fa fa-power-off" aria-hidden="true"></i>');
   
   /* jQuery code for Event Backend */
+
+  $('.form-field-name-field-event-media table tbody tr').each(function(){
+    var ebAudio = $(this).find('.field-name-field-browse-or-upload .form-radio[value="audio"]');
+    var ebPhoto = $(this).find('.field-name-field-browse-or-upload .form-radio[value="photo"]');
+    var ebVideo = $(this).find('.field-name-field-browse-or-upload .form-radio[value="video"]');
+    var audioCheck  = ebAudio.is(':checked');
+    var photoCheck  = ebPhoto.is(':checked');
+    var videoCheck  = ebVideo.is(':checked');
+    if(videoCheck){
+      ebVideo.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-poll-question-video').show();
+    }else if(audioCheck){
+      ebAudio.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-audio').show();
+    }else if(photoCheck){
+      ebPhoto.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-quiz-answer-image').show();
+    }
+  }); 
+  
   $('.form-field-name-field-event-media').on('change', '.form-radio', function(){
     var isChecked = $(this).is(':checked');
     var isVal = $(this).val();
-//    && isVal == 'video'
     if(isChecked == true && isVal == 'video'){
-      console.log(isVal);
       $(this).parents('.field-type-list-text').nextAll('div').find('.form-submit[value="Remove"]').mousedown();
       $(this).parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-poll-question-video').show();
     }

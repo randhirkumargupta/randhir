@@ -113,20 +113,42 @@ function event_backend_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__event_backend';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '20',
+          'weight' => '34',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '19',
+          'weight' => '33',
         ),
         'additional_settings' => array(
-          'weight' => '21',
+          'weight' => '35',
         ),
       ),
       'display' => array(),

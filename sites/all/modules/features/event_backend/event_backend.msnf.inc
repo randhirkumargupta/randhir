@@ -19,7 +19,7 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step7-Configuration',
-    'weight' => '8',
+    'weight' => '7',
     'children' => array(
       0 => 'field_config_programme',
       1 => 'field_config_speakers',
@@ -28,9 +28,10 @@ function event_backend_msnf_step_info() {
       4 => 'field_config_video',
       5 => 'field_config_flashback',
       6 => 'field_config_home',
-      7 => 'metatags',
-      8 => 'path',
-      9 => 'additional_settings',
+      7 => 'field_force_registration_open',
+      8 => 'metatags',
+      9 => 'path',
+      10 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -69,7 +70,8 @@ function event_backend_msnf_step_info() {
       3 => 'field_event_start_date',
       4 => 'field_event_close_date',
       5 => 'field_registration_close_date',
-      6 => 'title',
+      6 => 'field_story_expiry_date',
+      7 => 'title',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -100,7 +102,7 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step5-Highlights',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_event_highlights',
     ),
@@ -176,7 +178,7 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step6-Media',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_event_media',
     ),
@@ -209,7 +211,7 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step3-Program Schedule',
-    'weight' => '2',
+    'weight' => '3',
     'children' => array(
       0 => 'field_program_schedule',
     ),
@@ -242,7 +244,7 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step2-Registration Fees',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
       0 => 'field_event_type',
       1 => 'field_group_registration_fee_5',
@@ -279,7 +281,7 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step4-Sponsor',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_associate_sponsors',
     ),
