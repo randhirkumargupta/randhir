@@ -17,34 +17,6 @@ var fixedDate = '';
         attach: function (context, settings) {
 
             jQuery('#client_entity_wrapper').hide();
-            jQuery('.field-name-field-story-expert-description').hide();
-            jQuery('.field-name-field-story-large-image').hide();
-            jQuery('.field-name-field-service-video').hide();
-            jQuery('.field-name-field-service-audio').hide();
-
-            var content_format = jQuery('#content-format-hidden').val();
-
-            var content_format_arr = jQuery('#content-format-hidden').val().split(',');
-
-            jQuery.each(content_format_arr, function (key, value) {
-
-                console.log(value)
-                // content-format-hidden
-                if (value == 'text') {
-                    jQuery('.field-name-field-story-expert-description').show();
-                } else if (value == 'image') {
-                    jQuery('.field-name-field-story-large-image').show();
-                } else if (value == 'video') {
-                    jQuery('.field-name-field-service-video').show();
-                } else if (value == 'audio') {
-                    jQuery('.field-name-field-service-audio').show();
-                } else if (value == 'wap(image,text,videoandaudio)') {
-                    jQuery('.field-name-field-story-expert-description').show();
-                    jQuery('.field-name-field-story-large-image').show();
-                    jQuery('.field-name-field-service-video').show();
-                    jQuery('.field-name-field-service-audio').show();
-                }
-            });
 
             $('#edit-field-service-association-title-und').change(function () {
                 $('#edit-field-story-expert-description-und-0-value').val('');
@@ -80,7 +52,7 @@ var fixedDate = '';
                     $('#edit-field-service-content').show();
                 }
             } else {
-                $('#edit-field-service-content').hide();
+                // $('#edit-field-service-content').hide();
             }
 
             jQuery('#edit-field-service-frequency-und input[type="radio"]').click(function () {
@@ -164,7 +136,7 @@ var fixedDate = '';
 
             }
 
-            set_dates();
+            // set_dates();
 
             function set_dates() {
                 var today = new Date();

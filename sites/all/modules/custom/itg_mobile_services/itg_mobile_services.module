@@ -172,6 +172,8 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 21,
         '#value' => t('Cancel')
       );
+      // 285, 286
+
 
       $form['#prefix'] = '<div id="client_error_wrapper">';
       $form['#suffix'] = '</div>';
@@ -198,56 +200,53 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'][] = 'itg_service_content_after_build';
       $form['#submit'][] = 'itg_mobile_vas_service_content_submit';
       $form['field_service_association_title'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_assoc_service();
+
+      if (isset($form_state['values']['field_service_association_title'][LANGUAGE_NONE])) {
+        $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
+        if ($association_nid) {
+          drupal_add_js("jQuery(document).ready(function(){  jQuery('.field-name-field-story-expert-description').hide(); jQuery('.field-name-field-story-large-image').hide();jQuery('.field-name-field-service-audio').hide();jQuery('.field-name-field-service-video').hide();});", 'inline');
+          $result = get_service_association($association_nid);
+          $entity_id = '';
+          $record = $result->fetchAssoc();
+          $entity_id = $record['entity_id'];
+
+
+          $node = node_load($entity_id);
+          $service_content_type = field_get_items('node', $node, 'field_service_content_type');
+
+          $content_format = '';
+          foreach ($service_content_type as $key => $value) {
+            $content_type = field_view_value('node', $node, 'field_service_content_type', $service_content_type[$key], array());
+            $content_result = render($content_type);
+
+            $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
+            $content_format .= $content_type_val . ',';
+            // content-format-hidden
+            if ($content_type_val == 'text') {
+              drupal_add_js("jQuery(document).ready(function(){ alert('hi'); jQuery('.field-name-field-story-expert-description').show(); });", 'inline');
+            }
+            elseif ($content_type_val == 'image') {
+              drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-story-large-image').show();});", 'inline');
+            }
+            elseif ($content_type_val == 'video') {
+              drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-service-video').show();});", 'inline');
+            }
+            elseif ($content_type_val == 'audio') {
+              drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-service-audio').show();});", 'inline');
+            }
+            elseif ($content_type_val == 'wap(image,text,videoandaudio)') {
+              drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-story-expert-description').show(); jQuery('.field-name-field-story-large-image').show();jQuery('.field-name-field-service-audio').show();jQuery('.field-name-field-service-video').show();});", 'inline');
+            }
+          }
+        }
+      }
+
+
       $arg = arg();
       if ($arg[0] == 'node' && $arg[2] == 'edit' && $_REQUEST['destination'] == 'service-content-listing') {
-        // hide default fields
-        drupal_add_js("jQuery(document).ready(function(){ 
-            jQuery('#edit-field-service-association-title-und').attr('disabled', true);
-            jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').attr('disabled','disabled');
-            jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').attr('disabled','disabled');
-            jQuery('#edit-field-service-frequency-date-und-0-show-todate').hide();
-        });", 'inline');
-
-        drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-story-expert-description').hide(); jQuery('.field-name-field-story-large-image').hide();jQuery('.field-name-field-service-audio').hide();jQuery('.field-name-field-service-video').hide();});", 'inline');
-        $association_nid = $form['field_service_association_title'][LANGUAGE_NONE]['#default_value'][0];
-
-        $result = get_service_association($association_nid);
-
-        $entity_id = '';
-        while ($record = $result->fetchAssoc()) {
-          $entity_id = $record['entity_id'];
-        }
-        $node = node_load($entity_id);
-        $service_content_type = field_get_items('node', $node, 'field_service_content_type');
-        $content_format = '';
-        foreach ($service_content_type as $key => $value) {
-          $content_type = field_view_value('node', $node, 'field_service_content_type', $service_content_type[$key], array());
-          $content_result = render($content_type);
-          $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
-          $content_format .= $content_type_val . ',';
-          // content-format-hidden
-          if ($content_type_val == 'text') {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-story-expert-description').show(); });", 'inline');
-          }
-          elseif ($content_type_val == 'image') {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-story-large-image').show();});", 'inline');
-          }
-          elseif ($content_type_val == 'video') {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-service-video').show();});", 'inline');
-          }
-          elseif ($content_type_val == 'audio') {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-service-audio').show();});", 'inline');
-          }
-          elseif ($content_type_val == 'wap(image,text,videoandaudio)') {
-            drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-story-expert-description').show(); jQuery('.field-name-field-story-large-image').show();jQuery('.field-name-field-service-audio').show();jQuery('.field-name-field-service-video').show();});", 'inline');
-          }
-        }
-
-        drupal_add_js("jQuery(document).ready(function(){ jQuery('#content-format-hidden').val('$content_format');});", 'inline');
+        
       }
-      else {
-        drupal_add_js("jQuery(document).ready(function(){  jQuery('.field-name-field-story-expert-description').hide(); jQuery('.field-name-field-story-large-image').hide();jQuery('.field-name-field-service-audio').hide();jQuery('.field-name-field-service-video').hide();});", 'inline');
-      }
+
 
       if (empty($_GET['destination'])) {
         $_GET['destination'] = 'service-content-listing';
@@ -769,7 +768,9 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
     while ($record = $result->fetchAssoc()) {
       $service_title = $record['title'];
       $entity_id = $record['entity_id'];
-      $name .= $record['name'] . ",";
+      $client_node = node_load($record['field_client_selection_target_id']);
+      $client_selection_val = str_replace(' ', '', trim($client_node->title));
+      $name .= $client_selection_val . ",";
     }
     if (empty($entity_id)) {
       $form['title']['#description'] = 'service not associated.';
@@ -779,8 +780,9 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
       exit;
     }
     else {
-      $client_name = rtrim($name, ',');
+
       $commands[] = ajax_command_invoke('#edit-field-service-frequency', 'show');
+
       $node = node_load($entity_id);
       $service_content_type = field_get_items('node', $node, 'field_service_content_type');
       $content_format = '';
@@ -789,6 +791,8 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
         $content_result = render($content_type);
         $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
         $content_format .= $content_type_val . ',';
+
+
         // content-format-hidden
         if ($content_type_val == 'text') {
           $commands[] = ajax_command_invoke('.field-name-field-story-expert-description', 'show');
@@ -809,6 +813,7 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
           $commands[] = ajax_command_invoke('.field-name-field-story-large-image', 'show');
         }
       }
+      $client_name = rtrim($name, ',');
       $commands[] = ajax_command_invoke('#content-format-hidden', 'val', array($content_format));
       $form['title']['#description'] = '';
       $form['title']['#value'] = $service_title;
@@ -1042,16 +1047,14 @@ function get_service_association($target_id) {
     return '';
   }
   $query = db_select('node', 'node')
-      ->fields('service_asso', array('nid', 'vid', 'title'))
-      ->fields('cs', array('entity_id', 'revision_id'))
-      ->fields('td', array('name', 'tid'));
+      ->fields('service_asso', array('title'))
+      ->fields('sat', array('entity_id'))
+      ->fields('cs', array('field_client_selection_target_id', 'revision_id'));
 
-  $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id AND cs.entity_type = 'node' AND cs.deleted = '0'");
-  $query->join('taxonomy_term_data', 'td', "cs.field_client_selection_target_id = td.tid");
-  $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id AND (sat.entity_type = 'node' AND sat.deleted = '0')");
+  $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id");
+  $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id");
   $query->Join('node', 'service_asso', "sat.field_service_association_title_target_id = service_asso.nid");
-  $query->condition('service_asso.status', 1, '=');
-  $query->condition('service_asso.nid', $target_id, '=');
+  $query->condition('sat.field_service_association_title_target_id', $target_id, '=');
   $query->condition('node.type', array('client_service_association'), 'IN');
   $query->range(0, 10);
   return $query->execute();
