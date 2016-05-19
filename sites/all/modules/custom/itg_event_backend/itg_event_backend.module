@@ -71,9 +71,9 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   if ($enddate < $startdate) {
     form_set_error('field_event_close_date', 'Close date must be greater then start date.');
   }
-  if ($registration_close > $enddate) {
-    form_set_error('field_registration_close_date', 'Registration close date must be less then event close date.');
-  }
+//  if ($registration_close > $enddate) {
+//    form_set_error('field_registration_close_date', 'Registration close date must be less then event close date.');
+//  }
 
   $event_type = $form_state['values']['field_event_type'][LANGUAGE_NONE][0]['value'];
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
