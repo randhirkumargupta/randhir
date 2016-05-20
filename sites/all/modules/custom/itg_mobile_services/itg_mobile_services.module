@@ -172,8 +172,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 21,
         '#value' => t('Cancel')
       );
-      // 285, 286
-
 
       $form['#prefix'] = '<div id="client_error_wrapper">';
       $form['#suffix'] = '</div>';
@@ -210,7 +208,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
           $record = $result->fetchAssoc();
           $entity_id = $record['entity_id'];
 
-
           $node = node_load($entity_id);
           $service_content_type = field_get_items('node', $node, 'field_service_content_type');
 
@@ -239,12 +236,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
             }
           }
         }
-      }
-
-
-      $arg = arg();
-      if ($arg[0] == 'node' && $arg[2] == 'edit' && $_REQUEST['destination'] == 'service-content-listing') {
-        
       }
 
 
@@ -568,7 +559,7 @@ function itg_mobile_association_validator($form, &$form_state) {
   $exist_service_content = itg_mobile_services_check_exist_content($target_id, $start_date, $end_date);
 
   if ($exist_service_content) {
-    form_set_error('field_service_association_title', t('Service content already exist please&nbsp;') . l(t('click here'), 'node/' . $exist_service_content . '/edit?destination=service-content-listing'));
+    form_set_error('field_service_association_title', t('Service content already exist please&nbsp;') . l(t('click here'), 'node/' . $exist_service_content . '/edit'));
   }
 
   $form_state['redirect'] = 'service-content-listing';

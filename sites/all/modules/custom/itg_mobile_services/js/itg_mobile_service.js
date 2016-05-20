@@ -10,7 +10,7 @@ var sdate = null;
 var edate = null;
 var firstDate = 1;
 var fixedDate = '';
-
+var next_level = '';
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
@@ -77,12 +77,10 @@ var fixedDate = '';
 
             $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').keyup(function () {
                 $(this).val('');
-                alert('Please select date from Calendar');
             });
             $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').keyup(function () {
                 $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1,#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
                 $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').attr('disabled', 'disabled');
-                alert('Please select date from Calendar');
             });
 
             $("#edit-field-service-frequency-date-und-0-value-datepicker-popup-1").datepicker({
@@ -134,9 +132,9 @@ var fixedDate = '';
                 jQuery('#edit-field-service-content-add-more-number').val(diff);
                 jQuery('.field-name-field-service-content .field-add-more-submit').mousedown();
 
+
             }
 
-            // set_dates();
 
             function set_dates() {
                 var today = new Date();
