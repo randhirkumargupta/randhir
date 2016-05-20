@@ -17,7 +17,6 @@
  */
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == "event_backend_node_form") {
-
     $form['#after_build'][] = 'itg_event_backend_after_build';
     //$form['#validate'][] = 'itg_event_backend_node_form_validate';
     array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
@@ -31,15 +30,34 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect';
     }
     //add extra save button
-    if(arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))){
+    if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
       $form['actions']['submit2'] = array(
-       '#type' => 'submit',
-       '#name' => 'second_submit',
-       '#value' => t('Save'),
-       '#access' => TRUE,
-       '#submit' => array('node_form_submit', 'itg_event_backend_second_submit'),
-       '#weight' => 7,
-     );
+        '#type' => 'submit',
+        '#name' => 'second_submit',
+        '#value' => t('Save'),
+        '#access' => TRUE,
+        '#submit' => array('node_form_submit', 'itg_event_backend_second_submit'),
+        '#weight' => -7,
+      );
+    }
+    $form['actions']['cancel']['#weight'] = -6;
+    if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") {
+      if ($form['#node']->status == 1) {
+        $form['field_event_start_date']['#attributes']['class'][] = 'date-disabled';
+        $form['field_event_close_date']['#attributes']['class'][] = 'date-disabled';
+        $form['field_story_expiry_date']['#attributes']['class'][] = 'date-disabled';
+        $form['field_registration_close_date']['#attributes']['class'][] = 'date-disabled';
+      }
+    }
+
+    if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
+      /* @var $node_type string */
+      $node_type = 'Event';
+      $node_type = str_replace("_", " ", $node_type);
+      $node_type = ucfirst($node_type);
+      $node_title = $form['#node']->title;
+      $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
+      drupal_set_title($edit_title);
     }
     // Current step save in session variable
     if (isset($form_state['storage']['step'])) {
@@ -66,13 +84,13 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
   if ($registration_close < $registration_start) {
-    form_set_error('field_story_expiry_date', 'Registration start date must be less then registration close date.');
+    form_set_error('field_story_expiry_date', 'Registration start date must be less than registration close date.');
   }
   if ($enddate < $startdate) {
-    form_set_error('field_event_close_date', 'Close date must be greater then start date.');
+    form_set_error('field_event_close_date', 'Close date must be greater than start date.');
   }
   if ($registration_close > $enddate) {
-    form_set_error('field_registration_close_date', 'Registration close date must be less then event close date.');
+    form_set_error('field_registration_close_date', 'Registration close date must be less than event close date.');
   }
 
   $event_type = $form_state['values']['field_event_type'][LANGUAGE_NONE][0]['value'];
@@ -127,13 +145,6 @@ function itg_event_backend_sponsor($form, &$form_state) {
  * @return array $form
  */
 function itg_event_backend_after_build($form, &$form_state) {
-  if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") {
-    if ($form['#node']->status == 1) {
-      drupal_add_js('jQuery(document).ready(function(){ jQuery("#edit-field-event-start-date-und-0-value-datepicker-popup-1").attr("disabled", "disabled")});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
-      drupal_add_js('jQuery(document).ready(function(){ jQuery("#edit-field-event-close-date-und-0-value-datepicker-popup-1").attr("disabled", "disabled")});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
-      drupal_add_js('jQuery(document).ready(function(){ jQuery("#edit-field-story-expiry-date-und-0-value-datepicker-popup-1").attr("disabled", "disabled")});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
-    }
-  }
   drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3));
   if (isset($form_state['values']['nid'])) {
     $settings = array();
