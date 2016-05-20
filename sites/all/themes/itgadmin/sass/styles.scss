@@ -2716,6 +2716,9 @@ div.node{
   padding-left: 250px;
   padding-top: 5px;
 }
+.has-image-preview + div.description{
+  display: none !important;
+}
 
 
 
