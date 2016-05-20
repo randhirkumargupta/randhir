@@ -21,7 +21,6 @@ function photogallery_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
-      'UGC Moderator' => 'UGC Moderator',
     ),
     'module' => 'node',
   );
@@ -68,7 +67,6 @@ function photogallery_user_default_permissions() {
       'Author/Guest' => 'Author/Guest',
       'Intern' => 'Intern',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
-      'UGC Moderator' => 'UGC Moderator',
     ),
     'module' => 'node',
   );
