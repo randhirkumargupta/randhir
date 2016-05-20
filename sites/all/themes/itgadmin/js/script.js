@@ -509,5 +509,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     $(this).parent().parent().hide();
   });
   
+  $('body').find('.image-preview').parent().addClass('has-image-preview');
+  
 };
 })(jQuery);
