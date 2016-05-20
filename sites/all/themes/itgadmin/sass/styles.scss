@@ -2515,6 +2515,8 @@ fieldset#edit-select{
                 margin-left: 100px;
                 margin-top: -2px;
               }
+              .tabledrag-handle{display: none;}
+              &:first-child{min-width: 300px;}
             }
           }
         }
@@ -2525,16 +2527,26 @@ fieldset#edit-select{
     margin: 0;
     padding: 0;
     .filefield-sources-list{
-      display: none;
+      color: #fff;
+      @extend .dib;
+      @extend .full;
+      a.filefield-source.filefield-source-plupload{
+        @extend .add-more;
+        width: 150px;
+        padding: 4px 12px 8px;
+      }
+      a.filefield-source.filefield-source-imce{
+        visibility: hidden;
+      }
     }
-    .filefield-source{
-      @extend .hide;
+    div.filefield-source{
+      
       &.filefield-source-plupload{
         @extend .pos-rel;
-        display: block !important;
         @extend .full;
         padding-top: 32px;
         height: auto;
+        margin-top: 10px;
         min-height: 32px;
         .form-submit[value="Start upload"], .form-submit[value="Uploading..."]{
           @extend .add-more-wbg;
@@ -2560,6 +2572,14 @@ fieldset#edit-select{
           .plupload_buttons{
             top: 0;
           }
+        }
+      }
+      &.filefield-source-imce{
+        display: block !important;
+        margin-top: -28px;
+        margin-bottom: 5px;
+        .ajax-progress-throbber{
+          display: none;
         }
       }
     }
