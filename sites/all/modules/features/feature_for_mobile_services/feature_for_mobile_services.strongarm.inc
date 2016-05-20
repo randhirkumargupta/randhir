@@ -386,6 +386,9 @@ function feature_for_mobile_services_strongarm() {
         'path' => array(
           'weight' => '1',
         ),
+        'additional_settings' => array(
+          'weight' => '5',
+        ),
       ),
       'display' => array(),
     ),
