@@ -2771,3 +2771,8 @@ div.node #comments h2 {
   font-size: 18px;
   margin: 15px 0;
 }
+
+.generate-image-error {
+  padding-left: 250px;
+  padding-top: 5px;
+}
