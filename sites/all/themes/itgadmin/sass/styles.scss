@@ -2148,7 +2148,7 @@ input[name="field_gallery_image_add_more"]{
     .form-type-textfield{margin-top: 0;}
   }
 }
-[id*="itg-survey-survey-form"]{
+[id*="itg-survey-survey-form"], [id*="itg-quiz-quiz-form"]{
   #messages{
     margin: 20px 0;
   }
