@@ -2641,6 +2641,13 @@ fieldset#edit-select{
       }
     }
   }
+  .date-disabled{
+    .form-text{
+      background-color: #d9d9d9;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+  }
 }
 .form-select[name="field_ugc_ctype[und]"]{
     text-transform: capitalize;
@@ -2685,6 +2692,7 @@ div.node{
     }
   }
 }
+
 
 
 
