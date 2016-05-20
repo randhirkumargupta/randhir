@@ -1176,6 +1176,8 @@ input[name="field_gallery_image_add_more"]{
 }
 #block-menu-menu-admin-left-menu{
   margin: 20px 0 5px;
+  @extend .pos-rel;
+  z-index: 99999;
   h2{
     display: none;
   }
