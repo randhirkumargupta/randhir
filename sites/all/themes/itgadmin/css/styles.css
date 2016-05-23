@@ -121,6 +121,7 @@ img {
 .form-submit[value="Create"],
 .form-submit[value="Update"],
 .form-submit[value="Proceed to Payment"],
+.form-submit[value="Make Payment"],
 .form-submit[value="Create new account"],
 .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"],
@@ -191,6 +192,7 @@ img {
 .form-submit[value="Create"],
 .form-submit[value="Update"],
 .form-submit[value="Proceed to Payment"],
+.form-submit[value="Make Payment"],
 .form-submit[value="Create new account"],
 .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"],
@@ -318,6 +320,7 @@ img {
 .form-submit[value="Create"],
 .form-submit[value="Update"],
 .form-submit[value="Proceed to Payment"],
+.form-submit[value="Make Payment"],
 .form-submit[value="Create new account"],
 .form-submit[value="Next"], .form-submit[value="Publish"], .button, .button.published, .form-submit[value="Back"], .form-submit[value="Delete"], .itg-add-another-item tbody tr td > .form-submit[value="Remove"], [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"],
 [id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"],
@@ -362,6 +365,7 @@ img {
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
 .form-submit[value="Proceed to Payment"]:hover,
+.form-submit[value="Make Payment"]:hover,
 .form-submit[value="Create new account"]:hover,
 .form-submit[value="Next"]:hover, .form-submit[value="Publish"]:hover, .button:hover, .form-submit[value="Back"]:hover, .form-submit[value="Delete"]:hover, .itg-add-another-item tbody tr td > .form-submit[value="Remove"]:hover, [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"]:hover,
 [id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"]:hover,
@@ -396,6 +400,7 @@ img {
 .form-submit[value="Create"],
 .form-submit[value="Update"],
 .form-submit[value="Proceed to Payment"],
+.form-submit[value="Make Payment"],
 .form-submit[value="Create new account"],
 .form-submit[value="Next"] {
   background-color: #3295a7;
@@ -406,6 +411,7 @@ img {
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
 .form-submit[value="Proceed to Payment"]:hover,
+.form-submit[value="Make Payment"]:hover,
 .form-submit[value="Create new account"]:hover,
 .form-submit[value="Next"]:hover {
   background-color: #227d8d;
@@ -2749,4 +2755,8 @@ div.node #comments h2 {
 
 .has-image-preview + div.description {
   display: none !important;
+}
+
+#colorbox, #cboxOverlay, #cboxWrapper {
+  z-index: 99999;
 }
