@@ -12,7 +12,6 @@
  * Rename "Add Term" to "Add Category"
  * Remove primary local task link (Edit and manage fields links from right top side)
  */
-echo 'here'; exit;
 ?>
 
 <div id="page">
