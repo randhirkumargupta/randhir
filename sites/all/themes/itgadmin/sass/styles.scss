@@ -215,6 +215,7 @@ a.button{
 .form-submit[value="Create"], 
 .form-submit[value="Update"], 
 .form-submit[value="Proceed to Payment"], 
+.form-submit[value="Make Payment"], 
 .form-submit[value="Create new account"], 
 .form-submit[value="Next"]{
   @extend .btn;
@@ -2678,6 +2679,9 @@ div.node{
 }
 .has-image-preview + div.description{
   display: none !important;
+}
+#colorbox, #cboxOverlay, #cboxWrapper{
+  z-index: 99999;
 }
 
 
