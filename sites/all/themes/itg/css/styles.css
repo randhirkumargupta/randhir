@@ -64,7 +64,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 41, ../sass/styles.scss */
-.pdb-10, .success-message, .messages--status, #block-formblock-ask-an-expert h2 {
+.pdb-10, .success-message, .messages--status, #block-formblock-ask-an-expert h2, #comments .comment .submitted {
   padding-bottom: 10px;
 }
 
@@ -74,7 +74,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 47, ../sass/styles.scss */
-.no-bullet, .tabs-primary {
+.no-bullet, .tabs-primary, #comments .comment ul.links {
   list-style: none;
 }
 
@@ -84,7 +84,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 53, ../sass/styles.scss */
-.hide, .sticky-header, .form-field-type-field-collection .field-multiple-table tbody .field-multiple-drag, .block-itg-ugc-comment .form-item > label {
+.hide, .sticky-header, .form-field-type-field-collection .field-multiple-table tbody .field-multiple-drag {
   display: none;
 }
 
@@ -94,7 +94,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 59, ../sass/styles.scss */
-.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .block-itg-ugc-comment .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], .block-itg-ugc-comment, .block-itg-ugc-comment #user-name, .block-itg-ugc-comment #user-email, .block-itg-ugc-comment .comment {
+.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
   display: inline-block;
 }
 
@@ -104,32 +104,32 @@ h1, h2, h3, h4 {
 }
 
 /* line 65, ../sass/styles.scss */
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .block-itg-ugc-comment .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], .block-itg-ugc-comment #user-name, .block-itg-ugc-comment #user-email, .block-itg-ugc-comment .comment .comment-image img {
+.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
   vertical-align: top;
 }
 
 /* line 68, ../sass/styles.scss */
-.full, #page, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .form-field-type-field-collection .field-multiple-table, .block-itg-ugc-comment .form-item .form-textarea, .block-itg-ugc-comment .form-item .form-text, .block-itg-ugc-comment .comment {
+.full, #page, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .form-field-type-field-collection .field-multiple-table {
   width: 100%;
 }
 
 /* line 71, ../sass/styles.scss */
-.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"], .block-itg-ugc-comment .comment .comment-image {
+.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"] {
   float: left;
 }
 
 /* line 74, ../sass/styles.scss */
-.fright, .block-itg-ugc-comment .form-submit {
+.fright {
   float: right;
 }
 
 /* line 77, ../sass/styles.scss */
-.pos-rel, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"] {
+.pos-rel, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"], #comments .comment {
   position: relative;
 }
 
 /* line 80, ../sass/styles.scss */
-.btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .block-itg-ugc-comment .form-submit {
+.btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
   color: #fff;
@@ -142,7 +142,7 @@ h1, h2, h3, h4 {
   white-space: nowrap;
 }
 /* line 93, ../sass/styles.scss */
-.btn:hover, .page-user form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover, .question-container .form-submit:hover, #content .node-form .form-actions .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover, .block-itg-ugc-comment .form-submit:hover {
+.btn:hover, .page-user form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover, .question-container .form-submit:hover, #content .node-form .form-actions .form-submit:hover, #content #comments .comment-form .form-actions .form-submit:hover, #comments #content .comment-form .form-actions .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover {
   background-color: #286090;
   border-color: #204d74;
   color: #fff;
@@ -406,7 +406,7 @@ input[type="text"], select, input[type="password"] {
 }
 
 /* line 321, ../sass/styles.scss */
-.add-more, #content .node-form .form-submit[value="Add another item"] {
+.add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
   background-color: #1fb5ad;
   border: 1px solid #1fb5ad;
   color: #fff;
@@ -420,7 +420,7 @@ input[type="text"], select, input[type="password"] {
   text-decoration: none;
 }
 /* line 335, ../sass/styles.scss */
-.add-more:hover, #content .node-form .form-submit[value="Add another item"]:hover {
+.add-more:hover, #content .node-form .form-submit[value="Add another item"]:hover, #content #comments .comment-form .form-submit[value="Add another item"]:hover, #comments #content .comment-form .form-submit[value="Add another item"]:hover {
   background-color: #1fb5ad;
   border: 1px solid #1fb5ad;
 }
@@ -444,79 +444,111 @@ input[type="text"], select, input[type="password"] {
 }
 
 /* line 362, ../sass/styles.scss */
-#content .node-form .form-type-textfield > label,
+#content .node-form .form-type-textfield > label, #content #comments .comment-form .form-type-textfield > label, #comments #content .comment-form .form-type-textfield > label,
 #content .node-form .form-type-textarea > label,
+#content #comments .comment-form .form-type-textarea > label,
+#comments #content .comment-form .form-type-textarea > label,
 #content .node-form .form-type-select > label,
+#content #comments .comment-form .form-type-select > label,
+#comments #content .comment-form .form-type-select > label,
 #content .node-form .form-type-autocomplete-deluxe > label,
+#content #comments .comment-form .form-type-autocomplete-deluxe > label,
+#comments #content .comment-form .form-type-autocomplete-deluxe > label,
 #content .node-form .form-type-managed-file > label,
+#content #comments .comment-form .form-type-managed-file > label,
+#comments #content .comment-form .form-type-managed-file > label,
 #content .node-form .form-type-radios > label,
+#content #comments .comment-form .form-type-radios > label,
+#comments #content .comment-form .form-type-radios > label,
 #content .node-form .date-combo > label,
+#content #comments .comment-form .date-combo > label,
+#comments #content .comment-form .date-combo > label,
 #content .node-form .form-type-hierarchical-select > label,
-#content .node-form .form-type-checkboxes > label {
+#content #comments .comment-form .form-type-hierarchical-select > label,
+#comments #content .comment-form .form-type-hierarchical-select > label,
+#content .node-form .form-type-checkboxes > label,
+#content #comments .comment-form .form-type-checkboxes > label,
+#comments #content .comment-form .form-type-checkboxes > label {
   width: 220px;
   float: left;
   padding-right: 20px;
 }
 /* line 367, ../sass/styles.scss */
-#content .node-form .form-type-textfield > label + div,
+#content .node-form .form-type-textfield > label + div, #content #comments .comment-form .form-type-textfield > label + div, #comments #content .comment-form .form-type-textfield > label + div,
 #content .node-form .form-type-textarea > label + div,
+#content #comments .comment-form .form-type-textarea > label + div,
+#comments #content .comment-form .form-type-textarea > label + div,
 #content .node-form .form-type-select > label + div,
+#content #comments .comment-form .form-type-select > label + div,
+#comments #content .comment-form .form-type-select > label + div,
 #content .node-form .form-type-autocomplete-deluxe > label + div,
+#content #comments .comment-form .form-type-autocomplete-deluxe > label + div,
+#comments #content .comment-form .form-type-autocomplete-deluxe > label + div,
 #content .node-form .form-type-managed-file > label + div,
+#content #comments .comment-form .form-type-managed-file > label + div,
+#comments #content .comment-form .form-type-managed-file > label + div,
 #content .node-form .form-type-radios > label + div,
+#content #comments .comment-form .form-type-radios > label + div,
+#comments #content .comment-form .form-type-radios > label + div,
 #content .node-form .date-combo > label + div,
+#content #comments .comment-form .date-combo > label + div,
+#comments #content .comment-form .date-combo > label + div,
 #content .node-form .form-type-hierarchical-select > label + div,
-#content .node-form .form-type-checkboxes > label + div {
+#content #comments .comment-form .form-type-hierarchical-select > label + div,
+#comments #content .comment-form .form-type-hierarchical-select > label + div,
+#content .node-form .form-type-checkboxes > label + div,
+#content #comments .comment-form .form-type-checkboxes > label + div,
+#comments #content .comment-form .form-type-checkboxes > label + div {
   padding-left: 220px;
 }
 /* line 371, ../sass/styles.scss */
-#content .node-form .form-item {
+#content .node-form .form-item, #content #comments .comment-form .form-item, #comments #content .comment-form .form-item {
   margin: 30px;
 }
 /* line 373, ../sass/styles.scss */
-#content .node-form .form-item .form-item {
+#content .node-form .form-item .form-item, #content #comments .comment-form .form-item .form-item, #comments #content .comment-form .form-item .form-item {
   margin: 0;
 }
 /* line 377, ../sass/styles.scss */
-#content .node-form .form-field-type-field-collection .form-item .form-item {
+#content .node-form .form-field-type-field-collection .form-item .form-item, #content #comments .comment-form .form-field-type-field-collection .form-item .form-item, #comments #content .comment-form .form-field-type-field-collection .form-item .form-item {
   margin: 30px 0;
 }
 /* line 379, ../sass/styles.scss */
-#content .node-form .form-field-type-field-collection .form-item .form-item .form-item {
+#content .node-form .form-field-type-field-collection .form-item .form-item .form-item, #content #comments .comment-form .form-field-type-field-collection .form-item .form-item .form-item, #comments #content .comment-form .form-field-type-field-collection .form-item .form-item .form-item {
   margin: 0;
 }
 /* line 383, ../sass/styles.scss */
-#content .node-form .form-text, #content .node-form .form-textarea {
+#content .node-form .form-text, #content #comments .comment-form .form-text, #comments #content .comment-form .form-text, #content .node-form .form-textarea, #content #comments .comment-form .form-textarea, #comments #content .comment-form .form-textarea {
   width: 400px;
   max-width: 100%;
 }
 /* line 387, ../sass/styles.scss */
-#content .node-form .form-actions {
+#content .node-form .form-actions, #content #comments .comment-form .form-actions, #comments #content .comment-form .form-actions {
   padding-left: 250px;
 }
 /* line 389, ../sass/styles.scss */
-#content .node-form .form-actions .form-submit {
+#content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit {
   margin-right: 8px;
 }
 /* line 394, ../sass/styles.scss */
-#content .node-form span.error {
+#content .node-form span.error, #content #comments .comment-form span.error, #comments #content .comment-form span.error {
   display: block;
   padding-left: 220px;
 }
 /* line 401, ../sass/styles.scss */
-#content .node-form div.description {
+#content .node-form div.description, #content #comments .comment-form div.description, #comments #content .comment-form div.description {
   color: #5f5f5f;
   font-size: 12px;
   padding-left: 220px;
 }
 /* line 406, ../sass/styles.scss */
-#content .node-form fieldset.captcha {
+#content .node-form fieldset.captcha, #content #comments .comment-form fieldset.captcha, #comments #content .comment-form fieldset.captcha {
   max-width: 400px;
   margin: 0 0 30px 250px;
   padding: 10px;
 }
 /* line 410, ../sass/styles.scss */
-#content .node-form fieldset.captcha div.description {
+#content .node-form fieldset.captcha div.description, #content #comments .comment-form fieldset.captcha div.description, #comments #content .comment-form fieldset.captcha div.description {
   padding-left: 0;
 }
 
@@ -554,73 +586,37 @@ input[type="text"], select, input[type="password"] {
 }
 
 /* UGC comment CSS */
-/* line 460, ../sass/styles.scss */
-.block-itg-ugc-comment {
-  width: 100%;
-  padding: 20px;
-  background-color: #f0f0f0;
-}
-/* line 465, ../sass/styles.scss */
-.block-itg-ugc-comment #total-comment {
-  padding: 0 0 10px;
+/* line 461, ../sass/styles.scss */
+#comments h2 {
+  background-color: #fefafb;
+  border-bottom: 1px solid #d9d9d9;
+  border-top: 1px solid #d9d9d9;
   font-size: 18px;
+  line-height: 28px;
+  margin: 15px 0;
+  padding: 8px 20px;
 }
-/* line 477, ../sass/styles.scss */
-.block-itg-ugc-comment #user-message {
-  margin-bottom: 10px;
+/* line 475, ../sass/styles.scss */
+#comments .comment ul.links {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 /* line 480, ../sass/styles.scss */
-.block-itg-ugc-comment #user-name, .block-itg-ugc-comment #user-email {
-  width: 300px;
-  margin-right: 10px;
-}
-/* line 490, ../sass/styles.scss */
-.block-itg-ugc-comment .comment {
-  background-color: #fff;
-  margin-top: 30px;
-  padding: 20px;
-}
-/* line 496, ../sass/styles.scss */
-.block-itg-ugc-comment .comment .comment-image {
-  width: 50px;
-  margin-right: 10px;
-  border: 1px solid #d9d9d9;
-}
-/* line 505, ../sass/styles.scss */
-.block-itg-ugc-comment .comment .comment-details {
-  overflow: hidden;
-}
-/* line 508, ../sass/styles.scss */
-.block-itg-ugc-comment .comment .comment-name {
-  color: #337ab7;
-  font-size: 16px;
-}
-/* line 512, ../sass/styles.scss */
-.block-itg-ugc-comment .comment .comment-body {
-  padding: 5px 0;
-}
-/* line 515, ../sass/styles.scss */
-.block-itg-ugc-comment .comment .comment-timestamp {
-  color: #8d8d8d;
-  font-size: 12px;
-  margin-right: 10px;
-}
-/* line 520, ../sass/styles.scss */
-.block-itg-ugc-comment .comment .reply {
-  font-size: 12px;
+#comments .comment ul.links a {
   color: #337ab7;
   text-decoration: none;
 }
-/* line 524, ../sass/styles.scss */
-.block-itg-ugc-comment .comment .reply:hover {
+/* line 483, ../sass/styles.scss */
+#comments .comment ul.links a:hover {
   text-decoration: underline;
 }
-/* line 528, ../sass/styles.scss */
-.block-itg-ugc-comment .comment > ul {
-  padding-left: 60px;
+/* line 488, ../sass/styles.scss */
+#comments .comment .submitted {
+  font-size: 12px;
+  color: #8d8d8d;
 }
-/* line 530, ../sass/styles.scss */
-.block-itg-ugc-comment .comment > ul .comment {
-  margin-top: 20px;
-  padding: 0;
+/* line 492, ../sass/styles.scss */
+#comments .comment .submitted .username {
+  color: #337ab7;
 }

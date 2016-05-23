@@ -671,7 +671,7 @@ function photogallery_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_gallery_kicer',
     'label' => 'Gallery Slug',
     'required' => 0,

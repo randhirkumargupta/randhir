@@ -42,11 +42,11 @@
             <div class="content-view">
 		<div class="content-rows">
 		      <div class="content-rows">
-			<div class="clent-left"><strong>Client Title:</strong> </div> 
+			<div class="clent-left"><strong><?php print t('Client Title:');?></strong> </div> 
 		       <div class="clent-right"><?php print render($title); ?> </div>
 		     </div>
 		</div>
-              	<h2>Business Contact</h2>
+              	<h2><?php print t('Business Contact');?></h2>
 		<div class="content-rows">
 	              
 		       <div class="clent-right"><?php print render($content['field_contact_person_name']); ?> </div>
@@ -60,7 +60,7 @@
 		       <div class="clent-right"><?php print render($content['field_mobile_number']); ?> </div>
 		</div>
 
-		<h2>Technical Contact</h2>
+		<h2><?php print t('Technical Contact');?></h2>
 		<div class="content-rows">
 	              
 		       <div class="clent-right"><?php print render($content['field_contact_tech_person_name']); ?> </div>
