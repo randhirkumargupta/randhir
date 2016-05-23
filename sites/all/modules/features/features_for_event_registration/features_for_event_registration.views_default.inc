@@ -262,7 +262,6 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   /* Field: Field: Gender Title */
   $handler->display->display_options['fields']['field_erf_gender']['id'] = 'field_erf_gender';
   $handler->display->display_options['fields']['field_erf_gender']['table'] = 'field_data_field_erf_gender';
@@ -362,7 +361,7 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['nothing_3']['alter']['text'] = 'View';
   $handler->display->display_options['fields']['nothing_3']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing_3']['alter']['path'] = 'node/[nid]';
-  $handler->display->display_options['fields']['nothing_3']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['nothing_3']['alter']['link_class'] = 'colorbox-load';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
