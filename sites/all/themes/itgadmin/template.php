@@ -232,8 +232,9 @@ function itgadmin_preprocess_page(&$vars) {
     drupal_set_title('Survey Result: ' . ucwords($node->title));
   }
 
+  echo $vars['node']->type.' > '.arg(0). ' >> '.arg(1);
   //Add tpl for event registration view page
-  if ($vars['node']->type == 'event_registration' && arg(1) != 'add') {
-    $vars['theme_hook_suggestions'][] = 'page__' . $vars['node']->type;
+  if ($vars['node']->type == 'event_registration' || arg(0) == 'comment_view') {
+    $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 }
