@@ -22,6 +22,7 @@ a, img{
 }
 img{
   max-width: 100%;
+  height: auto;
 }
 .mr-0{
   margin: 0;
@@ -897,6 +898,7 @@ div.vertical-tabs {
 }
 .image-preview{
   @extend .pd-0;
+  max-width: 150px;
   .image-fullname{
     font-size: 12px;
     width: 150px;
@@ -1176,6 +1178,8 @@ input[name="field_gallery_image_add_more"]{
 }
 #block-menu-menu-admin-left-menu{
   margin: 20px 0 5px;
+  @extend .pos-rel;
+  z-index: 99999;
   h2{
     display: none;
   }
@@ -1643,129 +1647,6 @@ input[name="field_gallery_image_add_more"]{
 .field-name-field-breaking-publish-time{
   .date-padding .form-type-textfield:first-child{@extend .hide;}
 }
-.page-node-add-story .preview-wrapper, 
-.page-node-add-magazine .preview-wrapper, 
-.node-type-magazine .preview-wrapper, 
-.page-node-add-blog .preview-wrapper, 
-.node-type-blog .preview-wrapper, 
-.page-node-add-photogallery .preview-wrapper, 
-.node-type-photogallery .preview-wrapper, 
-.node-type-story .preview-wrapper, 
-.page-node-add-breaking-news .preview-wrapper,
-.node-type-issue .preview-wrapper, 
-.page-node-add-issue .preview-wrapper,
-.node-type-supplement .preview-wrapper, 
-.page-node-add-astro .preview-wrapper,
-.node-type-astro .preview-wrapper, 
-.page-node-add-survey .preview-wrapper,
-.node-type-survey .preview-wrapper, 
-.page-node-add-recipe .preview-wrapper,
-.node-type-recipe .preview-wrapper, 
-.page-node-add-mega-review-critic .preview-wrapper,
-.node-type-mega-review-critic .preview-wrapper, 
-.page-node-add-poll .preview-wrapper,
-.node-type-poll .preview-wrapper, 
-.page-node-add-clients-creation .preview-wrapper,
-.node-type-clients-creation .preview-wrapper, 
-.page-node-add-newsletter .preview-wrapper,
-.node-type-newsletter .preview-wrapper, 
-.page-node-add-quiz .preview-wrapper,
-.node-type-quiz .preview-wrapper, 
-.page-node-add-itg-celebrity-profile .preview-wrapper,
-.node-type-itg-celebrity-profile .preview-wrapper, 
-.page-node-add-cooking-tips .preview-wrapper,
-.node-type-cooking-tips .preview-wrapper, 
-.page-node-add-supplement .preview-wrapper,
-.node-type-breaking-news .preview-wrapper{
-  background-color: rgba(0, 0, 0, 0.7);
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 9999;
-}
-.page-node-add-story .preview, 
-.page-node-add-magazine .preview, 
-.node-type-story .preview,
-.page-node-add-blog .preview, 
-.node-type-blog .preview,
-.page-node-add-survey .preview, 
-.node-type-survey .preview,
-.node-type-magazine .preview, 
-.page-node-add-photogallery .preview, 
-.node-type-photogallery .preview,
-.page-node-add-breaking-news .preview,
-.node-type-issue .preview,
-.page-node-add-issue .preview,
-.node-type-supplement .preview,
-.page-node-add-astro .preview,
-.node-type-astro .preview,
-.page-node-add-recipe .preview,
-.node-type-recipe .preview,
-.page-node-add-mega-review-critic .preview,
-.node-type-mega-review-critic .preview,
-.page-node-add-poll .preview,
-.node-type-poll .preview,
-.page-node-add-clients-creation .preview,
-.node-type-clients-creation .preview,
-.page-node-add-newsletter .preview,
-.node-type-newsletter .preview,
-.page-node-add-quiz .preview,
-.node-type-quiz .preview,
-.page-node-add-itg-celebrity-profile .preview,
-.node-type-itg-celebrity-profile .preview,
-.page-node-add-cooking-tips .preview,
-.node-type-cooking-tips .preview,
-.page-node-add-supplement .preview,
-.node-type-breaking-news .preview{
-  background-color: #fff;
-  left: 0;
-  margin: 0 auto;
-  position: absolute;
-  right: 0;
-  top: 50px;
-  width: 900px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-.page-node-add-story .preview > h3,
-.node-type-story .preview > h3,
-.page-node-add-astro .preview > h3,
-.node-type-astro .preview > h3,
-.page-node-add-magazine .preview > h3,
-.node-type-magazine .preview > h3,
-.page-node-add-photogallery .preview > h3, 
-.node-type-photogallery .preview > h3,
-.page-node-add-breaking-news .preview > h3,
-.node-type-issue .preview > h3,
-.page-node-add-issue .preview > h3,
-.node-type-supplement .preview > h3,
-.page-node-add-survey .preview > h3,
-.node-type-survey .preview > h3,
-.page-node-add-blog .preview > h3,
-.node-type-blog .preview > h3,
-.page-node-add-recipe .preview > h3,
-.node-type-recipe .preview > h3,
-.page-node-add-mega-review-critic .preview > h3,
-.node-type-mega-review-critic .preview > h3,
-.page-node-add-poll .preview > h3,
-.node-type-poll .preview > h3,
-.page-node-add-clients-creation .preview > h3,
-.node-type-clients-creation .preview > h3,
-.page-node-add-newsletter .preview > h3,
-.node-type-newsletter .preview > h3,
-.page-node-add-quiz .preview > h3,
-.node-type-quiz .preview > h3,
-.page-node-add-itg-celebrity-profile .preview > h3,
-.node-type-itg-celebrity-profile .preview > h3,
-.page-node-add-cooking-tips .preview > h3,
-.node-type-cooking-tips .preview > h3,
-.page-node-add-supplement .preview > h3,
-.node-type-breaking-news .preview > h3{
-  font-size: 24px;
-  padding: 20px;
-}
 .close-preview{
   position: absolute;
   top: 12px;
@@ -1776,42 +1657,73 @@ input[name="field_gallery_image_add_more"]{
   text-indent: -9999px;
   display: none;
 }
-.page-node-add-story .close-preview, 
-.node-type-story .close-preview, 
-.page-node-add-blog .close-preview, 
-.node-type-blog .close-preview, 
-.page-node-add-survey .close-preview, 
-.node-type-survey .close-preview, 
-.page-node-add-magazine .close-preview,
-.node-type-magazine .close-preview,
-.page-node-add-photogallery .close-preview, 
-.node-type-photogallery .close-preview,
-.page-node-add-breaking-news .close-preview,
-.node-type-issue .close-preview,
-.page-node-add-issue .close-preview,
-.node-type-supplement .close-preview,
-.page-node-add-astro .close-preview,
-.node-type-astro .close-preview,
-.page-node-add-recipe .close-preview,
-.node-type-recipe .close-preview,
-.page-node-add-mega-review-critic .close-preview,
-.node-type-mega-review-critic .close-preview,
-.page-node-add-poll .close-preview,
-.node-type-poll .close-preview,
-.page-node-add-clients-creation .close-preview,
-.node-type-clients-creation .close-preview,
-.page-node-add-newsletter .close-preview,
-.node-type-newsletter .close-preview,
-.page-node-add-quiz .close-preview,
-.node-type-quiz .close-preview,
-.page-node-add-itg-celebrity-profile .close-preview,
-.node-type-itg-celebrity-profile .close-preview,
-.page-node-add-cooking-tips .close-preview,
-.node-type-cooking-tips .close-preview,
-.page-node-add-supplement .close-preview,
-.node-type-breaking-news .close-preview{
-  display: block;
+.preview-wrapper{
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999999;
+  > .preview{
+    background-color: #fff;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 900px;
+    border-radius: 8px;
+    overflow: hidden;
+    > .node-teaser{
+      @extend .hide;
+    }
+    > h3{
+      font-size: 24px;
+      padding: 20px;
+      &:first-child{
+        @extend .hide;
+      }
+    }
+    .close-preview{
+      display: block;
+    }
+    .node, .node-unpublished{
+      background-color: transparent;
+      padding: 20px;
+      max-height: 500px;
+      overflow-y: auto;
+      h2{
+        background-color: #fefafb;
+        border-top: 1px solid #d9d9d9;
+        border-bottom: 1px solid #d9d9d9;
+        padding: 8px 20px;
+        line-height: 28px;
+        font-size: 18px;
+        margin: 15px 0;
+      }
+    }
+  }
 }
+.field-collection-view {
+    border-bottom: 1px dashed #d9d9d9;
+    margin: 0 0 5px;
+    padding: 0 0 5px;
+}
+.field-collection-view ul.field-collection-view-links, 
+.field-collection-container ul.action-links{
+  @extend .hide;
+}
+.field-collection-container{
+  .field-item:last-child{
+    .field-collection-view{
+      border-bottom: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
 [id*="field-breaking-content-details-values"], 
 [id*="field-program-schedule-values"], 
 [id*="field-associate-sponsors-values"], 
@@ -2084,6 +1996,9 @@ input[name="field_gallery_image_add_more"]{
       padding: 5px 30px;
       @extend .dib;
       @extend .full;
+      .field{
+        padding: 0;
+      }
       .field-label{
         @extend .fleft;
         width: 220px;
@@ -2146,7 +2061,7 @@ input[name="field_gallery_image_add_more"]{
     .form-type-textfield{margin-top: 0;}
   }
 }
-[id*="itg-survey-survey-form"]{
+[id*="itg-survey-survey-form"], [id*="itg-quiz-quiz-form"]{
   #messages{
     margin: 20px 0;
   }
@@ -2515,6 +2430,8 @@ fieldset#edit-select{
                 margin-left: 100px;
                 margin-top: -2px;
               }
+              .tabledrag-handle{display: none;}
+              &:first-child{min-width: 300px;}
             }
           }
         }
@@ -2525,16 +2442,26 @@ fieldset#edit-select{
     margin: 0;
     padding: 0;
     .filefield-sources-list{
-      display: none;
+      color: #fff;
+      @extend .dib;
+      @extend .full;
+      a.filefield-source.filefield-source-plupload{
+        @extend .add-more;
+        width: 150px;
+        padding: 4px 12px 8px;
+      }
+      a.filefield-source.filefield-source-imce{
+        visibility: hidden;
+      }
     }
-    .filefield-source{
-      @extend .hide;
+    div.filefield-source{
+      
       &.filefield-source-plupload{
         @extend .pos-rel;
-        display: block !important;
         @extend .full;
         padding-top: 32px;
         height: auto;
+        margin-top: 10px;
         min-height: 32px;
         .form-submit[value="Start upload"], .form-submit[value="Uploading..."]{
           @extend .add-more-wbg;
@@ -2560,6 +2487,14 @@ fieldset#edit-select{
           .plupload_buttons{
             top: 0;
           }
+        }
+      }
+      &.filefield-source-imce{
+        display: block !important;
+        margin-top: -28px;
+        margin-bottom: 5px;
+        .ajax-progress-throbber{
+          display: none;
         }
       }
     }
@@ -2641,6 +2576,13 @@ fieldset#edit-select{
       }
     }
   }
+  .date-disabled{
+    .form-text{
+      background-color: #d9d9d9;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+  }
 }
 .form-select[name="field_ugc_ctype[und]"]{
     text-transform: capitalize;
@@ -2685,6 +2627,14 @@ div.node{
     }
   }
 }
+.generate-image-error{
+  padding-left: 250px;
+  padding-top: 5px;
+}
+.has-image-preview + div.description{
+  display: none !important;
+}
+
 
 
 
