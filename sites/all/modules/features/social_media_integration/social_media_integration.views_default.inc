@@ -205,6 +205,11 @@ function social_media_integration_views_default_views() {
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'food_news' => 'food_news',
+    'recipe' => 'recipe',
+    'story' => 'story',
+  );
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Content Type';
@@ -221,7 +226,6 @@ function social_media_integration_views_default_views() {
     20 => 0,
     6 => 0,
     21 => 0,
-    19 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
@@ -229,8 +233,21 @@ function social_media_integration_views_default_views() {
     17 => 0,
     14 => 0,
     12 => 0,
+    19 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'food_news' => 'food_news',
+    'recipe' => 'recipe',
+    'story' => 'story',
   );
 
   /* Display: Page */
