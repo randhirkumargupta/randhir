@@ -81,6 +81,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
         )
       ),
     );
+    // Additional field ends here
     
     $form['fb_wrap']['itg_fb_img'] = array(
       '#title' => t('Facebook Image'),
@@ -137,6 +138,35 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
         )
       ),
     );
+    
+    // Twitter additional fields    
+    $form['twit_wrap']['field_story_posted_by_twitter'] = array(
+      '#type' => 'hidden',      
+      '#maxlength' => 255,
+      '#default_value' => isset($node->field_story_posted_by_twitter['und'][0]['value']) ? $node->field_story_posted_by_twitter['und'][0]['value'] : $user->name,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+        ),
+        'required' => array(
+          ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+        )
+      ),
+    );    
+    $form['twit_wrap']['field_story_time_twitter'] = array(    
+      '#type' => 'hidden',
+      '#default_value' => REQUEST_TIME,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+        ),
+        'required' => array(
+          ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+        )
+      ),
+    );
+    // Additional field ends here
+    
     $form['ctype'] = array(
       '#type' => 'hidden',
       '#default_value' => check_plain($c_type),
@@ -214,6 +244,11 @@ function itg_social_media_form_submit($form, &$form_state) {
   if ($form_state['values']['field_story_posted_by_facebook'] != '') {
     $node->field_story_posted_by_facebook['und'][0]['value'] = $form_state['values']['field_story_posted_by_facebook'];
     $node->field_story_time_facebook['und'][0]['value'] = $form_state['values']['field_story_time_facebook'];
+  }
+  // Twitter additional fields
+  if ($form_state['values']['field_story_posted_by_twitter'] != '') {
+    $node->field_story_posted_by_twitter['und'][0]['value'] = $form_state['values']['field_story_posted_by_twitter'];
+    $node->field_story_time_twitter['und'][0]['value'] = $form_state['values']['field_story_time_twitter'];
   }
   // TWITTER IMAGE
   if ($form_state['values']['itg_twitter_img'] != 0) {
