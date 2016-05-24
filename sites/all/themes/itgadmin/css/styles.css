@@ -1561,7 +1561,13 @@ input[name="field_gallery_image_add_more"] {
 #block-menu-menu-blog-admin-menu > .menu > li > a:hover,
 #block-menu-menu-ugc-content-menu > .menu > li > a:hover,
 #block-menu-menu-task-allocation-menu > .menu > li > a:hover,
-#block-menu-menu-story-content-admin-menu > .menu > li > a:hover {
+#block-menu-menu-story-content-admin-menu > .menu > li > a:hover, .content-block-menu > .menu > li > a.active-trail, #block-menu-menu-ask-an-expert-menu > .menu > li > a.active-trail,
+#block-menu-menu-photogallery-admin-menu > .menu > li > a.active-trail,
+#block-menu-menu-mega-review-menu > .menu > li > a.active-trail,
+#block-menu-menu-blog-admin-menu > .menu > li > a.active-trail,
+#block-menu-menu-ugc-content-menu > .menu > li > a.active-trail,
+#block-menu-menu-task-allocation-menu > .menu > li > a.active-trail,
+#block-menu-menu-story-content-admin-menu > .menu > li > a.active-trail {
   border-bottom-color: #d00b26;
 }
 
