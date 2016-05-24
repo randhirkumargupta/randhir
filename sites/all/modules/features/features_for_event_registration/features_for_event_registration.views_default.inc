@@ -22,7 +22,7 @@ function features_for_event_registration_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Event Users List';
+  $handler->display->display_options['title'] = 'Group Users List';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -37,11 +37,8 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* No results behavior: Global: Text area */
@@ -262,6 +259,17 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = 'Group Registered Users';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_event_registration_get_registered_user($row->nid); ?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Field: Gender Title */
   $handler->display->display_options['fields']['field_erf_gender']['id'] = 'field_erf_gender';
   $handler->display->display_options['fields']['field_erf_gender']['table'] = 'field_data_field_erf_gender';
@@ -290,15 +298,21 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['field_erf_mobile']['table'] = 'field_data_field_erf_mobile';
   $handler->display->display_options['fields']['field_erf_mobile']['field'] = 'field_erf_mobile';
   $handler->display->display_options['fields']['field_erf_mobile']['label'] = 'Mobile No.';
-  /* Field: Field: Designation */
-  $handler->display->display_options['fields']['field_erf_designation']['id'] = 'field_erf_designation';
-  $handler->display->display_options['fields']['field_erf_designation']['table'] = 'field_data_field_erf_designation';
-  $handler->display->display_options['fields']['field_erf_designation']['field'] = 'field_erf_designation';
+  /* Field: Field: Mail to */
+  $handler->display->display_options['fields']['field_email_address']['id'] = 'field_email_address';
+  $handler->display->display_options['fields']['field_email_address']['table'] = 'field_data_field_email_address';
+  $handler->display->display_options['fields']['field_email_address']['field'] = 'field_email_address';
+  $handler->display->display_options['fields']['field_email_address']['label'] = 'Email';
+  $handler->display->display_options['fields']['field_email_address']['empty'] = '-';
   /* Field: Field: Company/Organization Name */
   $handler->display->display_options['fields']['field_erf_company_name']['id'] = 'field_erf_company_name';
   $handler->display->display_options['fields']['field_erf_company_name']['table'] = 'field_data_field_erf_company_name';
   $handler->display->display_options['fields']['field_erf_company_name']['field'] = 'field_erf_company_name';
   $handler->display->display_options['fields']['field_erf_company_name']['label'] = 'Organization Name';
+  /* Field: Field: Designation */
+  $handler->display->display_options['fields']['field_erf_designation']['id'] = 'field_erf_designation';
+  $handler->display->display_options['fields']['field_erf_designation']['table'] = 'field_data_field_erf_designation';
+  $handler->display->display_options['fields']['field_erf_designation']['field'] = 'field_erf_designation';
   /* Field: Field: City */
   $handler->display->display_options['fields']['field_erf_city']['id'] = 'field_erf_city';
   $handler->display->display_options['fields']['field_erf_city']['table'] = 'field_data_field_erf_city';
@@ -323,18 +337,10 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Registered Date';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: Global: PHP */
-  $handler->display->display_options['fields']['php']['id'] = 'php';
-  $handler->display->display_options['fields']['php']['table'] = 'views';
-  $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['label'] = 'Group Registered Users';
-  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_event_registration_get_registered_user($row->nid); ?>';
-  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
-  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Content: Source id */
   $handler->display->display_options['fields']['field_story_source_id']['id'] = 'field_story_source_id';
   $handler->display->display_options['fields']['field_story_source_id']['table'] = 'field_data_field_story_source_id';
@@ -349,16 +355,44 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['php_1']['table'] = 'views';
   $handler->display->display_options['fields']['php_1']['field'] = 'php';
   $handler->display->display_options['fields']['php_1']['label'] = 'Event Name';
+  $handler->display->display_options['fields']['php_1']['empty'] = '-';
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php echo itg_common_get_node_title($data->_field_data[\'nid\'][\'entity\']->field_story_source_id[\'und\'][0][\'value\']); ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+  /* Field: Content: Registration Fee */
+  $handler->display->display_options['fields']['field_erf_registration_fee']['id'] = 'field_erf_registration_fee';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['table'] = 'field_data_field_erf_registration_fee';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['field'] = 'field_erf_registration_fee';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_erf_registration_fee']['type'] = 'field_collection_fieldset_view';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['settings'] = array(
+    'edit' => '',
+    'delete' => '',
+    'add' => '',
+    'description' => 1,
+    'view_mode' => 'full',
+    'legend' => '0',
+    'collapsible' => 1,
+    'collapsed' => 0,
+  );
+  $handler->display->display_options['fields']['field_erf_registration_fee']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_erf_registration_fee']['multi_type'] = 'ol';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = 'Group Registered Users';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '[php]';
+  $handler->display->display_options['fields']['nothing_2']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_2']['alter']['path'] = 'event-users-list/[nid]';
+  $handler->display->display_options['fields']['nothing_2']['alter']['link_class'] = 'colorbox-load';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
   $handler->display->display_options['fields']['nothing_3']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_3']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_3']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_3']['alter']['text'] = 'View';
+  $handler->display->display_options['fields']['nothing_3']['alter']['text'] = 'View Detail';
   $handler->display->display_options['fields']['nothing_3']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing_3']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['nothing_3']['alter']['link_class'] = 'colorbox-load';

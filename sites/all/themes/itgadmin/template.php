@@ -233,7 +233,7 @@ function itgadmin_preprocess_page(&$vars) {
   }
 
   //Add tpl for event registration view page
-  if ($vars['node']->type == 'event_registration' || arg(0) == 'comment_view') {
+  if ($vars['node']->type == 'event_registration' || arg(0) == 'comment_view' || arg(0) == 'event-users-list') {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 }
