@@ -84,7 +84,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 53, ../sass/styles.scss */
-.hide, .sticky-header, .form-field-type-field-collection .field-multiple-table tbody .field-multiple-drag {
+.hide, .sticky-header, .form-field-type-field-collection .field-multiple-table tbody .field-multiple-drag, #comments .comment.comment-unpublished ul.links {
   display: none;
 }
 
@@ -587,6 +587,11 @@ input[type="text"], select, input[type="password"] {
 
 /* UGC comment CSS */
 /* line 461, ../sass/styles.scss */
+#comments .messages--warning {
+  color: #f6b800;
+  margin: 10px 0;
+}
+/* line 465, ../sass/styles.scss */
 #comments h2 {
   background-color: #fefafb;
   border-bottom: 1px solid #d9d9d9;
@@ -596,27 +601,31 @@ input[type="text"], select, input[type="password"] {
   margin: 15px 0;
   padding: 8px 20px;
 }
-/* line 475, ../sass/styles.scss */
+/* line 479, ../sass/styles.scss */
 #comments .comment ul.links {
   position: absolute;
   right: 0;
   top: 0;
 }
-/* line 480, ../sass/styles.scss */
+/* line 484, ../sass/styles.scss */
 #comments .comment ul.links a {
   color: #337ab7;
   text-decoration: none;
 }
-/* line 483, ../sass/styles.scss */
+/* line 487, ../sass/styles.scss */
 #comments .comment ul.links a:hover {
   text-decoration: underline;
 }
-/* line 488, ../sass/styles.scss */
+/* line 492, ../sass/styles.scss */
 #comments .comment .submitted {
   font-size: 12px;
   color: #8d8d8d;
 }
-/* line 492, ../sass/styles.scss */
+/* line 496, ../sass/styles.scss */
 #comments .comment .submitted .username {
   color: #337ab7;
+}
+/* line 500, ../sass/styles.scss */
+#comments .comment.comment-unpublished {
+  padding: 10px;
 }

@@ -319,6 +319,15 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
           });', array('type' => 'inline', 'scope' => 'footer'));
   }
   
+  // code to reset breaking news listing when user click on back button
+        drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("form").each(function() {            
+                 this.reset();
+                 
+               });              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+        
+        
   // code to restrict user to enter only numeric value
   drupal_add_js("jQuery(document).ready(function() {                  
                  jQuery('#edit-nid').keyup(function () { 

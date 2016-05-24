@@ -458,6 +458,10 @@ input[type="text"], select, input[type="password"]{
 
 /* UGC comment CSS */
 #comments{
+  .messages--warning{
+    color: #f6b800;
+    margin: 10px 0;
+  }
   h2{
     background-color: #fefafb;
     border-bottom: 1px solid #d9d9d9;
@@ -491,6 +495,12 @@ input[type="text"], select, input[type="password"]{
       @extend .pdb-10;
       .username{
         color: #337ab7;
+      }
+    }
+    &.comment-unpublished{
+      padding: 10px;
+      ul.links{
+        @extend .hide;
       }
     }
   }
