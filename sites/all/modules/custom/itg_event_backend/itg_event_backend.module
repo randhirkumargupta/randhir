@@ -83,6 +83,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $enddate = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
+    
   if ($registration_close < $registration_start) {
     form_set_error('field_story_expiry_date', 'Registration start date must be less than registration close date.');
   }
@@ -115,6 +116,14 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
    if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '') {
     form_set_error('field_no_of_tickets', 'Please enter No. of Tickets');
   }
+  // time validation
+//  foreach($form_state['values']['field_program_schedule'][LANGUAGE_NONE] as $key => $value){
+//    $start_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value'];
+//    $end_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value2'];
+//    if($start_time > $end_time){
+//      form_set_error('field_start_time', 'Start time must be less than end time.');
+//    }
+//  }
 }
 
 /**

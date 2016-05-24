@@ -465,6 +465,14 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
       $(this).removeClass('has-preview');
     }
   });
+  $('.form-field-name-field-gallery-image .messages--error').each(function(){
+    if(!$(this).children().hasClass('hide-message')){
+      $(this).append('<a class="hide-message" href="javascript:;">Close</a>');
+    }
+  });
+  $('.form-field-name-field-gallery-image').on('click', '.hide-message', function(){
+    $(this).parent().remove();
+  });
   
   $('.header__secondary-menu ul li.last a').html('<i class="fa fa-power-off" aria-hidden="true"></i>');
   
