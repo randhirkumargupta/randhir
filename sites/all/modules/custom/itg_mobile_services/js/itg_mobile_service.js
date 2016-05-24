@@ -11,12 +11,39 @@ var edate = null;
 var firstDate = 1;
 var fixedDate = '';
 var next_level = '';
+
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
-
             jQuery('#client_entity_wrapper').hide();
+            jQuery('.field-name-field-story-expert-description').hide(); 
+            jQuery('.field-name-field-story-large-image').hide();
+            jQuery('.field-name-field-service-audio').hide();
+            jQuery('.field-name-field-service-video').hide();
+
+
+var content_format_arr = Drupal.settings.itg_mobile_services.settings.service_content_type;
+    jQuery.each(content_format_arr, function (key, value) {
+               // content-format-hidden
+                if (value == 1) { 
+                    jQuery('.field-name-field-story-expert-description').show();
+                } else  if (value == 2) { 
+                    jQuery('.field-name-field-story-large-image').show();
+                } else  if (value == 3) { 
+                    jQuery('.field-name-field-service-video').show();
+                } else  if (value == 4) { 
+                    jQuery('.field-name-field-service-audio').show();
+                } else  if (value == 5) { 
+                    jQuery('.field-name-field-story-expert-description').show();
+                    jQuery('.field-name-field-story-large-image').show();
+                    jQuery('.field-name-field-service-video').show();
+                    jQuery('.field-name-field-service-audio').show();
+                }
+});
+
+
+
 
             $('#edit-field-service-association-title-und').change(function () {
                 $('#edit-field-story-expert-description-und-0-value').val('');
