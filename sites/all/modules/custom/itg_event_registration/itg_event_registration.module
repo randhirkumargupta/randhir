@@ -86,7 +86,17 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     unset($form['actions']['preview']);
     $form['title']['#description'] = t('Please enter first name.');
     
+    $destination = array('event-registration', array('query' => array('event_id' => $_GET['event_id'])));
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+      );
+    
     if ($form_state['storage']['step'] == 'step_erf_order_summary') {
+    
+    //
+    
       $current_event_nid = $_GET['event_id'];
       
       if (isset($current_event_nid)) {
@@ -102,6 +112,9 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
         }
         else {
+          $form['actions']['submit']['#value'] = 'Make Payment';
+          //$form['actions']['submit']['#attributes'] = array('class' => array('form-submit'));
+          
           $count_people = 0;
           foreach($form['#node']->field_erf_registration_fee[LANGUAGE_NONE] as $registered_people){
             if(!empty($registered_people['field_first_name'])){
@@ -151,8 +164,10 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
               
             }
           }
+          
         }
         $total_fee = ceil($total_fee);
+        
       } 
       
       $total_fee = $total_fee ? $total_fee : '0.00';
@@ -163,6 +178,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $_GET['event_id'];
     $form['field_story_source_id']['#access'] = TRUE;
 
+    
     //Call function after form build
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
     

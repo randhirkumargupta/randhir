@@ -226,10 +226,14 @@ function itgadmin_preprocess_page(&$vars) {
   if (arg(2) == 'taxonomy' && arg(3) == 'tags' && arg(4) == 'add') {
     drupal_set_title('Create Tag');
   }
-  
-    if (arg(0) == 'survey-result' && is_numeric(arg(1))) {
-      $node = node_load(arg(1));
-    drupal_set_title('Survey Result: '.  ucwords($node->title));
+
+  if (arg(0) == 'survey-result' && is_numeric(arg(1))) {
+    $node = node_load(arg(1));
+    drupal_set_title('Survey Result: ' . ucwords($node->title));
   }
-  
+
+  //Add tpl for event registration view page
+  if ($vars['node']->type == 'event_registration' || arg(0) == 'comment_view') {
+    $vars['theme_hook_suggestions'][] = 'page__event_registration';
+  }
 }

@@ -428,7 +428,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   
   /* Java script code for itgadmin */
-  $('.img-crt, .pre-desc').wrapAll('<div class="generate-image"></div>');
+  if(!$('.img-crt').parent().hasClass('.generate-image')){
+    $('.img-crt, .pre-desc').wrapAll('<div class="generate-image"></div>');
+  }
   $('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
   $('.image-widget').each(function(){
     var filename = $(this).find('.file').html();
@@ -508,6 +510,8 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('body').on('click', '.itg-close-popup', function(){
     $(this).parent().parent().hide();
   });
+  
+  $('body').find('.image-preview').parent().addClass('has-image-preview');
   
 };
 })(jQuery);
