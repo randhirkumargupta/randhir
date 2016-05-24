@@ -110,7 +110,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Email id */
+  /* Field: Content: Reporter's Email id */
   $handler->display->display_options['fields']['field_reporter_email_id']['id'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
@@ -330,7 +330,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -590,7 +590,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -899,7 +899,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1229,7 +1229,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1620,7 +1620,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1894,7 +1894,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -2296,7 +2296,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -2678,7 +2678,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -2934,7 +2934,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -3311,7 +3311,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -3593,7 +3593,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -3923,7 +3923,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -4237,7 +4237,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -4586,7 +4586,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['nid_1']['table'] = 'node_revision';
   $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
   $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -4676,7 +4676,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -4787,7 +4787,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['nid_1']['table'] = 'node_revision';
   $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
   $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -4858,7 +4858,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['log']['table'] = 'node_revision';
   $handler->display->display_options['fields']['log']['field'] = 'log';
   $handler->display->display_options['fields']['log']['label'] = 'Remarks';
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
