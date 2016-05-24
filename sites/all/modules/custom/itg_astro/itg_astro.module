@@ -131,40 +131,35 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     // Set field visibility for zodiac sign field
     $form['field_astro_zodiac']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '227'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '315'),
       ),
     );
     // Set field visibility for collective text field    
     $form['field_buzz_description']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective video thumbnail field
     $form['field_astro_video_thumbnail']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
-    // Set field visibility for collective video field
-    $form['field_astro_video']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
-      ),
-    );
+    
     // Set field visibility for collective audio field
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective audio field
     $form['field_astro_numerology_values']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '225'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '313'),
       ),
     );  
-
+    
 
     $form['#action'] = '?destination=manage-astro';
     $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';
@@ -186,7 +181,12 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
 function itg_astro_after_build($form, &$form_state) {  
   // Initialize globals
   global $user, $base_url;
-  
+  // Set field visibility for collective video field
+    $form['field_astro_video']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+      ),
+    );
   //$form['field_story_category']['und']['#title'] = t('Select Program') . '<span class="form-required" title="This field is required."> *</span>';
   if (!isset($form['#node']->nid)) {
     // hide remove button of first field on add form 
