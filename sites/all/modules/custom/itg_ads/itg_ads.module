@@ -1,6 +1,45 @@
 <?php
 
 /**
+ * @file
+ * The ITG Ads module.
+ *
+ * Contains functionality for Ads.
+ *
+ */
+
+
+/**
+ * Implementation of hook_menu
+ * @return string
+ */
+function itg_ads_menu() {
+  
+  $items = array();
+  
+  $items['itg-ads/%'] = array(
+      'title' => t('Ads'),
+      'page callback' => 'itg_ads',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_theme
+ * @return array
+ */
+function itg_ads_theme() {
+  return array(    
+    'itg_ads' => array(
+      'variables' => array('data' => NULL),
+      'template' => 'templates/itg-ads',
+    ),
+ );
+}
+
+/**
  * Implementation of hook_form_FORM_ID_alter()
  * @param array $form
  * @param array $form_state
@@ -135,4 +174,9 @@ function itg_ads_node_validate($node, $form, &$form_state) {
             form_set_error('field_ads_end_date', 'End date must be greater than or equal to Start date.');
         }
     }
+}
+
+function itg_ads(){
+  $node = node_load(arg(1));
+  return theme('itg_ads', array('data' => $node));
 }
