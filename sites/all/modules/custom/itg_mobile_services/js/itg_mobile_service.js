@@ -5,44 +5,19 @@
  */
 var firstTime = 1;
 var rowCount = 1;
-var datechange = 1;
-var sdate = null;
-var edate = null;
 var firstDate = 1;
 var fixedDate = '';
-var next_level = '';
 
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
             jQuery('#client_entity_wrapper').hide();
-            jQuery('.field-name-field-story-expert-description').hide(); 
+            jQuery('#field-service-content-add-more-wrapper').hide();
+            jQuery('.field-name-field-story-expert-description').hide();
             jQuery('.field-name-field-story-large-image').hide();
             jQuery('.field-name-field-service-audio').hide();
             jQuery('.field-name-field-service-video').hide();
-
-
-var content_format_arr = Drupal.settings.itg_mobile_services.settings.service_content_type;
-    jQuery.each(content_format_arr, function (key, value) {
-               // content-format-hidden
-                if (value == 1) { 
-                    jQuery('.field-name-field-story-expert-description').show();
-                } else  if (value == 2) { 
-                    jQuery('.field-name-field-story-large-image').show();
-                } else  if (value == 3) { 
-                    jQuery('.field-name-field-service-video').show();
-                } else  if (value == 4) { 
-                    jQuery('.field-name-field-service-audio').show();
-                } else  if (value == 5) { 
-                    jQuery('.field-name-field-story-expert-description').show();
-                    jQuery('.field-name-field-story-large-image').show();
-                    jQuery('.field-name-field-service-video').show();
-                    jQuery('.field-name-field-service-audio').show();
-                }
-});
-
-
 
 
             $('#edit-field-service-association-title-und').change(function () {
@@ -60,10 +35,32 @@ var content_format_arr = Drupal.settings.itg_mobile_services.settings.service_co
             jQuery('#edit-field-service-frequency-date-und-0-show-todate').hide();
             jQuery('.form-item-field-service-frequency-date-und-0-value2').show();
 
-
             var selectedVal = "";
             var selected = $("#edit-field-service-frequency-und input[type='radio']:checked");
             if (selected.length > 0) {
+
+                if (Drupal.settings.itg_mobile_services.settings.service_content_type) {
+                    var content_format_arr = Drupal.settings.itg_mobile_services.settings.service_content_type;
+                    jQuery.each(content_format_arr, function (key, value) {
+                        // content-format-hidden
+                        jQuery('#field-service-content-add-more-wrapper').show();
+                        if (value == 1) {
+                            jQuery('.field-name-field-story-expert-description').show();
+                        } else if (value == 2) {
+                            jQuery('.field-name-field-story-large-image').show();
+                        } else if (value == 3) {
+                            jQuery('.field-name-field-service-video').show();
+                        } else if (value == 4) {
+                            jQuery('.field-name-field-service-audio').show();
+                        } else if (value == 5) {
+                            jQuery('.field-name-field-story-expert-description').show();
+                            jQuery('.field-name-field-story-large-image').show();
+                            jQuery('.field-name-field-service-video').show();
+                            jQuery('.field-name-field-service-audio').show();
+                        }
+                    });
+                }
+
                 selectedVal = selected.val();
 
                 if (selectedVal == 2) {
@@ -78,8 +75,6 @@ var content_format_arr = Drupal.settings.itg_mobile_services.settings.service_co
                     jQuery('#edit-field-service-frequency-date').show();
                     $('#edit-field-service-content').show();
                 }
-            } else {
-                // $('#edit-field-service-content').hide();
             }
 
             jQuery('#edit-field-service-frequency-und input[type="radio"]').click(function () {
@@ -101,18 +96,12 @@ var content_format_arr = Drupal.settings.itg_mobile_services.settings.service_co
                 }
             });
 
+            $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val('').removeAttr('disabled');
+            $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('').removeAttr('disabled');
 
-            $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').keyup(function () {
-                $(this).val('');
-            });
-            $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').keyup(function () {
-                $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1,#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('');
-                $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').attr('disabled', 'disabled');
-            });
 
             $("#edit-field-service-frequency-date-und-0-value-datepicker-popup-1").datepicker({
                 minDate: 0,
-                required: true,
                 showOn: "focus",
                 onSelect: function (selected) {
                     var date = $(this).datepicker('getDate');
@@ -141,25 +130,17 @@ var content_format_arr = Drupal.settings.itg_mobile_services.settings.service_co
                 var start = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').datepicker('getDate');
                 var end = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').datepicker('getDate');
                 var oneDay = 24 * 60 * 60 * 1000;
+                if (start == null) {
+                    $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val('').removeAttr('disabled');
+                    $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('').removeAttr('disabled');
+                    $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').focus();
+                }
                 var diff = 0;
                 if (start && end) {
                     diff = Math.round(Math.abs((end.getTime() - start.getTime()) / (oneDay)));
                 }
-                var rowCount = jQuery(".field-multiple-table tbody tr").length;
-                if (diff > 0) {
-                    if (firstTime > 1) {
-                        for (var ii = 1; ii <= rowCount; ) {
-                            jQuery("input[name='field_service_content_und_" + ii + "_remove_button']").mousedown();
-                            ii++;
-                        }
-                    }
-                    firstTime = 2;
-                }
-
                 jQuery('#edit-field-service-content-add-more-number').val(diff);
                 jQuery('.field-name-field-service-content .field-add-more-submit').mousedown();
-
-
             }
 
 
@@ -195,6 +176,12 @@ var content_format_arr = Drupal.settings.itg_mobile_services.settings.service_co
         }
     }
 })(jQuery);
+
+
+//Month is 1 based
+function daysInMonth(month, year) {
+    return new Date(year, month, 0).getDate();
+}
 
 jQuery('document').ready(function () {
     var maxLen = 0
