@@ -97,7 +97,7 @@ img {
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
 .field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .page-admin-structure-taxonomy-tags form .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .grippie {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, .grippie {
   display: none;
 }
 
@@ -1119,6 +1119,9 @@ div.vertical-tabs .form-textarea-wrapper {
 .form-type-radios:hover div.description {
   display: block;
 }
+.form-type-radios .form-radios + span.error {
+  padding-left: 220px;
+}
 
 .form-type-textarea div.description {
   left: 600px;
@@ -1256,7 +1259,25 @@ div.vertical-tabs .form-textarea-wrapper {
   border: 1px solid #d9d9d9;
 }
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .messages--error {
-  display: none;
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  font-size: 12px;
+  margin: 0 7px;
+  min-height: 124px;
+  padding: 10px;
+  position: absolute;
+  top: 42px;
+  z-index: 99;
+}
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .messages--error .hide-message {
+  background: url("../images/cross_small.png") 5px center no-repeat #fff;
+  bottom: 2px;
+  height: 20px;
+  position: absolute;
+  right: 2px;
+  text-indent: -9999px;
+  width: 20px;
 }
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) input[type="text"], [id*="field-gallery-image-values"] tbody tr td:nth-child(2) select, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) textarea {
   height: 28px;
@@ -2540,7 +2561,7 @@ fieldset#edit-select .form-submit {
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
 .field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .page-admin-structure-taxonomy-tags form .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block {
   display: none;
 }
 
