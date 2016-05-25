@@ -22,12 +22,19 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), 'manage-event-backend', array('attributes' => array('class' => 'button'))),
-      '#weight' => 20,
+      '#weight' => -10,
     );
+
     // Node redirection code
     if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
       // $form['#submit'][] = 'custom_node_submit';
       $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect';
+    }
+    if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
+      $form['actions']['submit']['#weight'] = -10;
+    }
+    else {
+      $form['actions']['submit']['#weight'] = 10;
     }
     //add extra save button
     if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
@@ -37,10 +44,10 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         '#value' => t('Save'),
         '#access' => TRUE,
         '#submit' => array('node_form_submit', 'itg_event_backend_second_submit'),
-        '#weight' => -7,
+        '#weight' => -9,
       );
     }
-    $form['actions']['cancel']['#weight'] = -6;
+    $form['actions']['cancel']['#weight'] = -10;
     if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") {
       if ($form['#node']->status == 1) {
         $form['field_event_start_date']['#attributes']['class'][] = 'date-disabled';
@@ -83,47 +90,54 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $enddate = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
-    
+
   if ($registration_close < $registration_start) {
-    form_set_error('field_story_expiry_date', 'Registration start date must be less than registration close date.');
+    form_set_error('field_story_expiry_date', t('Registration start date must be less than registration close date.'));
   }
   if ($enddate < $startdate) {
-    form_set_error('field_event_close_date', 'Close date must be greater than start date.');
+    form_set_error('field_event_close_date', t('Close date must be greater than start date.'));
   }
   if ($registration_close > $enddate) {
-    form_set_error('field_registration_close_date', 'Registration close date must be less than event close date.');
+    form_set_error('field_registration_close_date', t('Registration close date must be less than event close date.'));
   }
 
   $event_type = $form_state['values']['field_event_type'][LANGUAGE_NONE][0]['value'];
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_group_registration_fee_5', 'Group Registration Fee (upto 5) is required.');
+    form_set_error('field_group_registration_fee_5', t('Group Registration Fee (upto 5) is required.'));
   }
 
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_group_registration_fee_10', 'Group Registration Fee (upto 10) is required.');
+    form_set_error('field_group_registration_fee_10', t('Group Registration Fee (upto 10) is required.'));
   }
 
   if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_individual_registration_fe', 'Individual Registration Fee is required.');
+    form_set_error('field_individual_registration_fe', t('Individual Registration Fee is required.'));
   }
   // Fees validation for registration
   if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
-    form_set_error('field_individual_registration_fe', 'Individual Registration Fee should be less then Group Registration Fee (upto 5)');
+    form_set_error('field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (upto 5)'));
   }
-   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
-    form_set_error('field_group_registration_fee_5', 'Group Registration Fee (upto 5) should be less then Group Registration Fee (upto 10).');
+  if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
+    form_set_error('field_group_registration_fee_5', t('Group Registration Fee (upto 5) should be less then Group Registration Fee (upto 10).'));
   }
-   if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_no_of_tickets', 'Please enter No. of Tickets');
+  if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '') {
+    form_set_error('field_no_of_tickets', t('Please enter No. of Tickets'));
   }
   // time validation
-//  foreach($form_state['values']['field_program_schedule'][LANGUAGE_NONE] as $key => $value){
-//    $start_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value'];
-//    $end_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value2'];
-//    if($start_time > $end_time){
-//      form_set_error('field_start_time', 'Start time must be less than end time.');
-//    }
-//  }
+  foreach ($form_state['values']['field_program_schedule'][LANGUAGE_NONE] as $key => $value) {
+    $start_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value'];
+    $end_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value2'];
+    if ($start_time > $end_time) {
+      drupal_get_messages();
+      form_set_error('field_start_time', t('Start time must be less than end time.'));
+    }
+  }
+  // URL validation
+  if (isset($form_state['values']['field_story_url'][LANGUAGE_NONE]) && $form_state['values']['field_story_url'][LANGUAGE_NONE][0]['value'] != '') {
+    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $form_state['values']['field_story_url'][LANGUAGE_NONE][0]['value'])) {
+      form_set_error('field_story_url', t('Invalid event URL .'));
+    }
+  }
 }
 
 /**
@@ -154,6 +168,17 @@ function itg_event_backend_sponsor($form, &$form_state) {
  * @return array $form
  */
 function itg_event_backend_after_build($form, &$form_state) {
+  //add extra save button
+  if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
+    $form['actions']['submit2'] = array(
+      '#type' => 'submit',
+      '#name' => 'second_submit',
+      '#value' => t('Save'),
+      '#access' => TRUE,
+      '#submit' => array('node_form_submit', 'itg_event_backend_second_submit'),
+      '#weight' => -9,
+    );
+  }
   drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3));
   if (isset($form_state['values']['nid'])) {
     $settings = array();
@@ -185,7 +210,7 @@ function itg_event_backend_after_build($form, &$form_state) {
       $start_time = date('H:i', strtotime($form['field_program_schedule'][LANGUAGE_NONE][$key]['#entity']->field_start_time[LANGUAGE_NONE][0]['value']));
       $end_time = date('H:i', strtotime($form['field_program_schedule'][LANGUAGE_NONE][$key]['#entity']->field_start_time[LANGUAGE_NONE][0]['value2']));
       $day_value = explode(':', $program_daywise);
-      $highlight_options[$program_daywise.'--'.$program_title.'--'.$start_time.'--'.$end_time] = t($day_value[0].' - '.$program_title.' - '.$start_time.' to '.$end_time);
+      $highlight_options[$program_daywise . '--' . $program_title . '--' . $start_time . '--' . $end_time] = t($day_value[0] . ' - ' . $program_title . ' - ' . $start_time . ' to ' . $end_time);
       $media_options[$program_daywise] = t($program_daywise);
       // p($form['field_program_schedule'][LANGUAGE_NONE][$key]);
       if (isset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
@@ -211,9 +236,8 @@ function itg_event_backend_after_build($form, &$form_state) {
 
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#options'] = $highlight_options;
-      
+
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
-//      unset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title']['#validated']);
     }
   }
 //event media
@@ -233,6 +257,7 @@ function itg_event_backend_after_build($form, &$form_state) {
     $form['actions']['submit2']['#access'] = FALSE;
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
+    $form['path']['#prefix'] = '<h2 id="title-metatags" class="story-title">Meta Tags</h2>';
   }
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
     $form['actions']['submit']['#access'] = TRUE;
@@ -334,9 +359,9 @@ function itg_event_backend_second_submit($form, &$form_state) {
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
-  if (isset($form_state['storage']['step'])){
-      $current_step = $form_state['storage']['step'];
-      $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => $current_step)));
+  if (isset($form_state['storage']['step'])) {
+    $current_step = $form_state['storage']['step'];
+    $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => $current_step)));
   }
 }
 
