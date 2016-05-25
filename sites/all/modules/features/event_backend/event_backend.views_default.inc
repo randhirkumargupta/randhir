@@ -436,6 +436,7 @@ function event_backend_views_default_views() {
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['label'] = 'Total Registered Users';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
@@ -443,6 +444,16 @@ echo itg_event_registration_registered_user_detail($row->nid);
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Total Registered Users';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[php]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'event-registration/users-list/[nid]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'colorbox-load';
+  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
@@ -787,6 +798,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['label'] = 'Total Registered Users';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
@@ -794,6 +806,16 @@ echo itg_event_registration_registered_user_detail($row->nid);
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Total Registered Users';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[php]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'event-registration/users-list/[nid]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'colorbox-load';
+  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
