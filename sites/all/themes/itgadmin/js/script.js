@@ -460,10 +460,19 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function(){
     if($(this).children().hasClass('image-preview')){
       $(this).addClass('has-preview');
+      
     }
     else{
       $(this).removeClass('has-preview');
     }
+  });
+  $('.form-field-name-field-gallery-image .has-preview').each(function(i){
+    var altName = "field_gallery_image[und][" + i + "][field_images][und][0][alt]";
+    var titleName = "field_gallery_image[und][" + i + "][field_images][und][0][title]";
+    $("input[name='" + altName + "']").keyup(function(){
+      var altVal = $(this).val();
+      $(this).parent().next().find('.form-text').val(altVal);
+    });
   });
   $('.form-field-name-field-gallery-image .messages--error').each(function(){
     if(!$(this).children().hasClass('hide-message')){
