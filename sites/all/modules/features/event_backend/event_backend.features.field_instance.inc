@@ -603,7 +603,7 @@ function event_backend_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'default_value' => 'now',
-      'default_value2' => 'blank',
+      'default_value2' => 'now',
       'default_value_code' => '',
       'default_value_code2' => '',
       'exclude_cv' => FALSE,
