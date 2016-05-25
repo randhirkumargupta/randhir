@@ -90,13 +90,13 @@ function photogallery_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '19',
+          'weight' => '10',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '18',
+          'weight' => '9',
         ),
       ),
       'display' => array(),
