@@ -1916,6 +1916,7 @@ input[name="field_gallery_image_add_more"] {
 .preview-wrapper > .preview > h3 {
   font-size: 24px;
   padding: 20px;
+  border-bottom: 1px solid #d9d9d9;
 }
 .preview-wrapper > .preview .close-preview {
   display: block;
@@ -2130,6 +2131,18 @@ input[name="field_gallery_image_add_more"] {
 
 [class*="node-type-"] .tabs-primary {
   display: none;
+}
+[class*="node-type-"] .node {
+  padding: 20px;
+}
+[class*="node-type-"] .node h2 {
+  background-color: #fefafb;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 8px 20px;
+  line-height: 28px;
+  font-size: 18px;
+  margin: 15px 0;
 }
 [class*="node-type-"] .node .field {
   padding: 5px 30px;
