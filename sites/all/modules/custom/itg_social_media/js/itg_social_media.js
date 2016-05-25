@@ -102,7 +102,8 @@
                   return false;
                 }
               }
-            }
+            },
+            itg_maxlength: true
           },
           'itg_twitter_img[fid]': {
             required: {
@@ -138,6 +139,9 @@
       jQuery.validator.addMethod('validateSmi', function (value, element) {
         return FormValidation.validate_smi(value, element);
       }, 'This field is required.');
+      jQuery.validator.addMethod("itg_maxlength", function (value, element) {
+        return value == "" || value.length <= 140;
+      }, 'This field can not exceed 140 character.');
       // custom validator function end here.
        
       // Clear fb fields based on checkbox.
