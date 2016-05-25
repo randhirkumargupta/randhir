@@ -1759,6 +1759,7 @@ input[name="field_gallery_image_add_more"]{
 [id*="field-task-task-idea-values"], 
 [id*="field-astro-numerology-values-values"], 
 [id*="field-astro-zodiac-values"], 
+[id*="field-poll-answer-values"], 
 [id*="field-story-template-buzz-values"], 
 [id*="field-erf-registration-fee-values"], 
 [id*="field-mega-review-review-values"]{
@@ -2711,8 +2712,46 @@ div.node{
 .workbench-info-block{
   @extend .hide;
 }
-
-
+[id*="field-poll-answer-values"]{
+  tbody{
+    tr{
+      @extend .fleft;
+      @extend .full;
+      td{
+        @extend .fleft;
+        @extend .mb-10;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+.view-popup{
+  max-height: 400px;
+  min-width: 800px;
+  max-width: 900px;
+  #page-title{
+    line-height: normal; 
+    padding-bottom: 10px; 
+    border-bottom: 1px solid #d9d9d9;
+  }
+  .field{
+    padding: 5px 30px;
+    @extend .dib;
+    @extend .full;
+    .field{
+      padding: 0;
+    }
+    .field-label{
+      @extend .fleft;
+      width: 220px;
+      padding-right: 20px;
+    }
+    .field-items{
+      overflow: hidden;
+      max-width: 100%;
+    }
+  }
+}
 
 
 
