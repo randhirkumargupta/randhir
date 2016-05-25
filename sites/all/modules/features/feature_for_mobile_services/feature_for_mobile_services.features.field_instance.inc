@@ -1520,7 +1520,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_service_regional',
     'label' => 'Regional service',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
