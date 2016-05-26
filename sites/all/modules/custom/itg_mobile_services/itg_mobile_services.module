@@ -162,7 +162,8 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
     case 'vas_service_content_node_form':
       $form['metatags']['#type'] = 'hidden';
       unset($form['actions']['preview']);
-
+      $form['field_service_association_title']['#prefix'] = '<div class="itg-date-disabled">';
+      $form['field_service_frequency_date']['#suffix'] = '</div>';
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-content-listing', array(
           'attributes' => array(

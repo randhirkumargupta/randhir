@@ -229,7 +229,7 @@ var fixedDate = '';
                             mm = '0' + mm
                         }
                         tomorrow = dd + '/' + mm + '/' + yyyy;
-                        jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').val(tomorrow).addClass('date-disabled');
+                        jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').val(tomorrow).addClass('itg-date-disabled');
                         i++;
                         start_date++;
                     }
