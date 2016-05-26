@@ -2772,11 +2772,16 @@ div.node{
 .photogallery-list.flexslider{
   @extend .pos-rel;
   padding: 0 50px;
-  .slides img{
-    vertical-align: top;
-    width: 100%;
-    height: 450px;
-  }
+  .slides{
+    li{
+      @extend .pos-rel;
+      text-align: center;
+    }
+    img{
+      max-height: 450px;
+      vertical-align: top;
+    }
+  } 
   .flex-direction-nav{
     @extend .no-bullet;
   }
