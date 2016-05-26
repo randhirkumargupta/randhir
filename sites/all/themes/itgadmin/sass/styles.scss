@@ -2922,4 +2922,18 @@ div.node{
     }
   }
 }
+.hierarchical-select-wrapper .dropbox-title{
+  text-align: left;
+}
+[id*="field-story-template-buzz-values"]{
+  tbody{
+    tr{
+      @extend .db;
+      td{
+        @extend .db;
+        padding-bottom: 0;
+      }
+    }
+  } 
+}
 
