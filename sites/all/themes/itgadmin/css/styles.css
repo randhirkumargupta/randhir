@@ -70,7 +70,7 @@ img {
   padding-bottom: 10px;
 }
 
-.pdb-10, .success-message, .messages--status {
+.pdb-10, .success-message, .messages--status, #comments .comment .submitted {
   padding-bottom: 10px;
 }
 
@@ -84,7 +84,7 @@ img {
 #block-menu-menu-blog-admin-menu > .menu,
 #block-menu-menu-ugc-content-menu > .menu,
 #block-menu-menu-task-allocation-menu > .menu,
-#block-menu-menu-story-content-admin-menu > .menu, .breadcrumb ol, .header__secondary-menu ul, .dashboard-tab, .view-category-manager .view-content .item-list ul {
+#block-menu-menu-story-content-admin-menu > .menu, .breadcrumb ol, .header__secondary-menu ul, .dashboard-tab, .view-category-manager .view-content .item-list ul, .photogallery-list.flexslider .flex-direction-nav, #comments .comment ul.links {
   list-style: none;
 }
 
@@ -92,12 +92,12 @@ img {
   text-decoration: none;
 }
 
-.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead,
+.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead,
 [id*="field-survey-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
 .field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .page-admin-structure-taxonomy-tags form .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, .grippie {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links, .grippie {
   display: none;
 }
 
@@ -115,7 +115,7 @@ img {
 [id*="field-poll-answer-values"] tbody,
 [id*="field-story-template-buzz-values"] tbody,
 [id*="field-erf-registration-fee-values"] tbody,
-[id*="field-mega-review-review-values"] tbody, span.error, .dashboard-tab li a span, [id*="itg-survey-survey-form"] .question-container#question-container-0, [id*="itg-quiz-quiz-form"] .question-container#question-container-0 {
+[id*="field-mega-review-review-values"] tbody, span.error, .dashboard-tab li a span, [id*="itg-survey-survey-form"] .question-container#question-container-0, [id*="itg-quiz-quiz-form"] .question-container#question-container-0, .photogallery-list.flexslider .flex-nav-prev a, .photogallery-list.flexslider .flex-nav-next a {
   display: block;
 }
 
@@ -322,7 +322,7 @@ img {
 [id*="field-story-template-buzz-values"] tbody tr td,
 [id*="field-erf-registration-fee-values"] tbody tr td,
 [id*="field-mega-review-review-values"] tbody tr td, .header, .header .container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .user-role a, .dashboard-tab li, .node-story-form #Templates .form-field-type-text .form-item, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .block-itg-event-backend .block-itg-story-list a, .category-manager-details .cmd-heading, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload,
-[id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2 {
+[id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2, .photogallery-list.flexslider, #comments .comment {
   position: relative;
 }
 
@@ -946,7 +946,7 @@ input.password-confirm, input.password-field {
   margin: 0;
 }
 
-.node-form h2, .page-admin-structure-taxonomy-tags form h2, .confirmation h2, div.node #comments .comment-form h2 {
+.node-form h2, .page-admin-structure-taxonomy-tags form h2, .confirmation h2, div.node #comments .comment-form h2, #comments .comment-form h2 {
   background-color: #fefafb;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
@@ -955,18 +955,18 @@ input.password-confirm, input.password-field {
   font-size: 18px;
   margin: 15px 0;
 }
-.node-form input[type="text"], .page-admin-structure-taxonomy-tags form input[type="text"], .confirmation input[type="text"], div.node #comments .comment-form input[type="text"], .node-form select, .page-admin-structure-taxonomy-tags form select, .confirmation select, div.node #comments .comment-form select, .node-form .form-textarea-wrapper textarea, .page-admin-structure-taxonomy-tags form .form-textarea-wrapper textarea, .confirmation .form-textarea-wrapper textarea, div.node #comments .comment-form .form-textarea-wrapper textarea {
+.node-form input[type="text"], .page-admin-structure-taxonomy-tags form input[type="text"], .confirmation input[type="text"], #comments .comment-form input[type="text"], .node-form select, .page-admin-structure-taxonomy-tags form select, .confirmation select, div.node #comments .comment-form select, #comments .comment-form select, .node-form .form-textarea-wrapper textarea, .page-admin-structure-taxonomy-tags form .form-textarea-wrapper textarea, .confirmation .form-textarea-wrapper textarea, #comments .comment-form .form-textarea-wrapper textarea {
   width: 100%;
   max-width: 332px;
 }
-.node-form .form-actions, .page-admin-structure-taxonomy-tags form .form-actions, .confirmation .form-actions, div.node #comments .comment-form .form-actions {
+.node-form .form-actions, .page-admin-structure-taxonomy-tags form .form-actions, .confirmation .form-actions, div.node #comments .comment-form .form-actions, #comments .comment-form .form-actions {
   background-color: #fefafb;
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #d9d9d9;
   margin: 15px 0;
   padding: 15px 30px;
 }
-.node-form .form-radios + div.description + span.error, .page-admin-structure-taxonomy-tags form .form-radios + div.description + span.error, .confirmation .form-radios + div.description + span.error, div.node #comments .comment-form .form-radios + div.description + span.error {
+.node-form .form-radios + div.description + span.error, .page-admin-structure-taxonomy-tags form .form-radios + div.description + span.error, .confirmation .form-radios + div.description + span.error, #comments .comment-form .form-radios + div.description + span.error {
   padding-left: 220px;
 }
 
@@ -2653,12 +2653,12 @@ fieldset#edit-select .form-submit {
   display: block;
 }
 
-.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead,
+.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead,
 [id*="field-survey-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
 .field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .page-admin-structure-taxonomy-tags form .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links {
   display: none;
 }
 
@@ -2906,4 +2906,69 @@ div.node #comments h2 {
 .view-popup .field .field-items {
   overflow: hidden;
   max-width: 100%;
+}
+
+.photogallery-list.flexslider {
+  padding: 0 50px;
+}
+.photogallery-list.flexslider .slides img {
+  vertical-align: top;
+  width: 100%;
+  height: 450px;
+}
+.photogallery-list.flexslider .flex-nav-prev, .photogallery-list.flexslider .flex-nav-next {
+  position: absolute;
+  width: 45px;
+  height: 95px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+.photogallery-list.flexslider .flex-nav-prev a, .photogallery-list.flexslider .flex-nav-next a {
+  font-size: 75px;
+  line-height: normal;
+  text-align: center;
+}
+.photogallery-list.flexslider .flex-nav-prev {
+  left: 0;
+}
+.photogallery-list.flexslider .flex-nav-next {
+  right: 0;
+}
+
+/* UGC comment CSS */
+#comments .messages--warning {
+  color: #f6b800;
+  margin: 10px 0;
+}
+#comments h2 {
+  background-color: #fefafb;
+  border-bottom: 1px solid #d9d9d9;
+  border-top: 1px solid #d9d9d9;
+  font-size: 18px;
+  line-height: 28px;
+  margin: 15px 0;
+  padding: 8px 20px;
+}
+#comments .comment ul.links {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#comments .comment ul.links a {
+  color: #337ab7;
+  text-decoration: none;
+}
+#comments .comment ul.links a:hover {
+  text-decoration: underline;
+}
+#comments .comment .submitted {
+  font-size: 12px;
+  color: #8d8d8d;
+}
+#comments .comment .submitted .username {
+  color: #337ab7;
+}
+#comments .comment.comment-unpublished {
+  padding: 10px;
 }
