@@ -139,7 +139,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Created on';
-  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg_date_with_time';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Updated date */
@@ -147,7 +147,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified on';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'itg_date_with_time';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Start Date */
@@ -155,7 +155,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['field_ads_start_date']['table'] = 'field_data_field_ads_start_date';
   $handler->display->display_options['fields']['field_ads_start_date']['field'] = 'field_ads_start_date';
   $handler->display->display_options['fields']['field_ads_start_date']['settings'] = array(
-    'format_type' => 'custom_date',
+    'format_type' => 'itg_date_with_time',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -167,7 +167,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['field_ads_end_date']['table'] = 'field_data_field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['field'] = 'field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['settings'] = array(
-    'format_type' => 'custom_date',
+    'format_type' => 'itg_date_with_time',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
