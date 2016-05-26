@@ -31,7 +31,7 @@ function mongodb($alias = 'default') {
   $db = $connection['db'];
   if (!isset($mongo_objects[$host][$db])) {
     try {
-      $mongo = new Mongo($host, $options);
+      $mongo = new MongoClient($host, $options);
       $mongo_objects[$host][$db] = $mongo->selectDB($db);
       $mongo_objects[$host][$db]->connection = $mongo;
     }
