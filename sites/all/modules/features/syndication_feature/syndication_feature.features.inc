@@ -33,7 +33,15 @@ function syndication_feature_node_info() {
       'base' => 'node_content',
       'description' => t('Use <em>Syndication Client</em> to create client information for predefined clients.'),
       'has_title' => '1',
-      'title_label' => t('Client Title'),
+      'title_label' => t('Client Description'),
+      'help' => '',
+    ),
+    'syndication_rule' => array(
+      'name' => t('Syndication rule'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Select Client Title'),
       'help' => '',
     ),
   );
