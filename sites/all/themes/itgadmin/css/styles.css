@@ -322,7 +322,7 @@ img {
 [id*="field-story-template-buzz-values"] tbody tr td,
 [id*="field-erf-registration-fee-values"] tbody tr td,
 [id*="field-mega-review-review-values"] tbody tr td, .header, .header .container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .user-role a, .dashboard-tab li, .node-story-form #Templates .form-field-type-text .form-item, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .block-itg-event-backend .block-itg-story-list a, .category-manager-details .cmd-heading, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload,
-[id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2, .photogallery-list.flexslider, #comments .comment {
+[id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2, .photogallery-list.flexslider, .photogallery-list.flexslider .slides li, #comments .comment {
   position: relative;
 }
 
@@ -2918,10 +2918,12 @@ div.node #comments h2 {
 .photogallery-list.flexslider {
   padding: 0 50px;
 }
+.photogallery-list.flexslider .slides li {
+  text-align: center;
+}
 .photogallery-list.flexslider .slides img {
+  max-height: 450px;
   vertical-align: top;
-  width: 100%;
-  height: 450px;
 }
 .photogallery-list.flexslider .flex-nav-prev, .photogallery-list.flexslider .flex-nav-next {
   position: absolute;
