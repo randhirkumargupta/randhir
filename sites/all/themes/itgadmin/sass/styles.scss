@@ -104,6 +104,11 @@ img{
 .of-hide{
   overflow: hidden;
 }
+.itg-disabled{
+  background-color: #d9d9d9;
+  opacity: 0.8;
+  pointer-events: none;
+}
 .btn{
   background-color: #33a26d;
   border: 1px solid #197e4e;
