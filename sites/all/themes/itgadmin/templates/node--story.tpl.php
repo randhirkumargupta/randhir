@@ -220,4 +220,11 @@
         </div>
       <?php endif; ?>
     <?php endif; // end of view mode full condition ?></div>
+            <?php 
+            // code for comment hide and show based on condition
+            if($node->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'comment') {
+            print render($content['comment_form']);
+            print render($content['comments']);
+            }
+            ?>
 <?php endif; ?>
