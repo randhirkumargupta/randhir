@@ -162,7 +162,8 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
     case 'vas_service_content_node_form':
       $form['metatags']['#type'] = 'hidden';
       unset($form['actions']['preview']);
-
+      $form['field_service_association_title']['#prefix'] = '<div class="itg-date-disabled">';
+      $form['field_service_frequency_date']['#suffix'] = '</div>';
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-content-listing', array(
           'attributes' => array(
@@ -186,14 +187,23 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         'event' => 'change', // On change of the selection this action would take place
       );
 
+
       $form['content_enable_button'] = array(
-        '#markup' => l(t('Next'), 'content-enable-button', array(
-          'attributes' => array(
-            'class' => 'button'
-          )
-        )),
-        '#weight' => 21,
-        '#value' => t('Next')
+        '#type' => 'button',
+        '#weight' => 8,
+        '#value' => t('Genrate Content'),
+        '#attributes' => array(
+          'id' => 'content-enable-button',
+        ),
+      );
+
+      $form['reset_date_button'] = array(
+        '#type' => 'button',
+        '#weight' => 8,
+        '#value' => t('Reset Date'),
+        '#attributes' => array(
+          'id' => 'reset-date-button',
+        ),
       );
 
       $form['content_format'] = array(
@@ -652,6 +662,7 @@ function itg_service_association_after_build($form, &$form_state) {
  */
 function itg_service_content_after_build($form, &$form_state) {
   global $base_url;
+
   $form['field_service_association_title'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_assoc_service();
   if (isset($form_state['values']['field_service_association_title'][LANGUAGE_NONE])) {
     $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0];
@@ -667,7 +678,7 @@ function itg_service_content_after_build($form, &$form_state) {
       }
     }
   }
-
+  // p($form_state['values']);
   $form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#title'] = '<label for="edit-field-story-expert-description-und-0-value">Content <span class="form-required" title="This field is required.">*</span></label>';
   $form['field_story_large_image'][LANGUAGE_NONE][0]['#title'] = '<label for="edit-field-story-large-image-und-0-upload">Content image <span class="form-required" title="This field is required.">*</span></label>';
   $form['field_service_audio'][LANGUAGE_NONE][0]['#title'] = '<label for="edit-field-service-audio-und-0-upload">Content Audio <span class="form-required" title="This field is required.">*</span></label>';
@@ -762,11 +773,11 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
       $service_content_type = field_get_items('node', $node, 'field_service_content_type');
       $content_format = '';
       $commands[] = ajax_command_invoke('#field-service-content-add-more-wrapper', 'show');
-//      foreach ($service_content_type as $key => $value) {
-//        $content_type = field_view_value('node', $node, 'field_service_content_type', $service_content_type[$key], array());
-//        $content_result = render($content_type);
-//        $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
-//        $content_format .= $content_type_val . ',';
+      foreach ($service_content_type as $key => $value) {
+        $content_type = field_view_value('node', $node, 'field_service_content_type', $service_content_type[$key], array());
+        $content_result = render($content_type);
+        $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
+        $content_format .= $content_type_val . ',';
 //
 //
 //        // content-format-hidden
@@ -788,9 +799,9 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
 //          $commands[] = ajax_command_invoke('.field-name-field-service-video', 'show');
 //          $commands[] = ajax_command_invoke('.field-name-field-story-large-image', 'show');
 //        }
-//      }
+      }
       $client_name = rtrim($name, ',');
-//      $commands[] = ajax_command_invoke('#content-format-hidden', 'val', array($content_format));
+      $commands[] = ajax_command_invoke('#content-format-hidden', 'val', array($content_format));
 //      $form['title']['#description'] = '';
       $form['title']['#value'] = $service_title;
       $form['field_story_client_title']['und'][0]['value']['#value'] = $client_name;
@@ -800,6 +811,42 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
       ajax_deliver($page);
       exit;
     }
+  }
+}
+
+/**
+ * ajax service callback for itg_mobile_content_enable
+ * @param array $form
+ * @param array reference $form_state
+ * @return array $form
+ */
+function itg_mobile_content_enable(&$form, &$form_state) {
+  $form_state['redirect'] = 'service-content-listing';
+  $commands = array();
+//  $commands[] = ajax_command_invoke('.field-name-field-story-expert-description', 'hide');
+//  $commands[] = ajax_command_invoke('.field-name-field-service-audio', 'hide');
+//  $commands[] = ajax_command_invoke('.field-name-field-service-video', 'hide');
+//  $commands[] = ajax_command_invoke('.field-name-field-story-large-image', 'hide');
+  $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
+
+
+
+  // ['field_service_frequency_date']['und'][0]['#default_value']['value']
+
+  $frequency = $form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value'];
+  $start_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value'];
+  $end_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value2'];
+
+  $days = (strtotime($end_date) - strtotime($start_date)) / (60 * 60 * 24);
+
+  if ($days) {
+
+    $commands[] = ajax_command_invoke('#field-service-content-add-more-wrapper', 'show');
+    // $commands[] = ajax_command_replace("#edit-field-service-content-add-more-number", $days);
+    $commands[] = ajax_command_invoke('.field-name-field-service-content .field-add-more-submit', 'trigger');
+    $page = array('#type' => 'ajax', '#commands' => $commands);
+    ajax_deliver($page);
+    exit;
   }
 }
 
@@ -1145,7 +1192,7 @@ function itg_mobile_services_field_attach_form($entity_type, $entity, &$form, &$
     $field_name = $field['field_name'];
     //If we are looking at our field type and specific widget type, and we are multiple entries
     if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
-      if ($field['bundles']['node'][0] == "create_content") {
+      if ($field['bundles']['node'][0] == "vas_service_content") {
         //Check just in case the button is here, and add another #submit function
         if (isset($form[$field['field_name']]['und']['add_more'])) {
           // add a simple select list, this defaults to numb 3
@@ -1154,7 +1201,7 @@ function itg_mobile_services_field_attach_form($entity_type, $entity, &$form, &$
             '#title' => t('Add more no.'),
             '#options' => drupal_map_assoc(range(0, 100)),
             '#default_value' => 1,
-            '#attributes' => array('style' => 'display:none;'),
+            '#attributes' => array('style' => 'display:none1;'),
           );
           $form[$field['field_name']]['und']['add_more']['#submit'][] = 'itg_mobile_services_field_add_more_submit';
           $form[$field['field_name']]['und']['add_more']['#value'] = 'Add more rows';
@@ -1184,6 +1231,11 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
     $field_state['items_count'] += $numbtoadd - 1;
     field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
     $form_state['rebuild'] = TRUE;
+  }
+  foreach ($form_state['field']['field_service_content']['und']['entity'] as $key => $filed_collection) {
+    if (is_numeric($key)) {
+      $form_state['field']['field_service_content']['und']['entity'][$key]->field_service_content_date['und'][0]['value'] = '10/05/2016';
+    }
   }
 }
 
