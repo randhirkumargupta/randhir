@@ -345,6 +345,12 @@ img {
   overflow: hidden;
 }
 
+.itg-disabled {
+  background-color: #d9d9d9;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
 .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
