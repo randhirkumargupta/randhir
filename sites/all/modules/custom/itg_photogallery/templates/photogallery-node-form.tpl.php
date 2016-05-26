@@ -45,6 +45,20 @@
   <h2 class="story-title">Categorization</h2>
   <?php print drupal_render($form['field_story_category']); ?>
 </div>
+<div id="SocialMedia">
+  <h2 class="story-title"><?php print t('Social Media'); ?></h2>
+  <?php print drupal_render($form['field_story_social_media_integ']); ?>
+  <?php print drupal_render($form['field_story_facebook_narrative']); ?>
+  <?php print drupal_render($form['field_story_facebook_image']); ?>
+  <?php print drupal_render($form['field_story_tweet']); ?>
+  <?php print drupal_render($form['field_story_tweet_image']); ?>
+  <?php print drupal_render($form['field_story_posted_by_facebook']); ?>
+  <?php print drupal_render($form['field_story_time_facebook']); ?>
+  <?php print drupal_render($form['field_story_posted_by_twitter']); ?>
+  <?php print drupal_render($form['field_story_time_twitter']); ?>
+  <?php print drupal_render($form['field_story_posted_by_instagram']); ?>
+  <?php print drupal_render($form['field_story_time_instagram']); ?>
+</div>
 <h2 id="title-metatags" class="story-title">Meta Tags</h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
