@@ -32,19 +32,6 @@ function feature_for_mobile_services_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create create_content content'.
-  $permissions['create create_content content'] = array(
-    'name' => 'create create_content content',
-    'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create service_creation content'.
   $permissions['create service_creation content'] = array(
     'name' => 'create service_creation content',
@@ -82,17 +69,6 @@ function feature_for_mobile_services_user_default_permissions() {
   // Exported permission: 'delete any clients_creation content'.
   $permissions['delete any clients_creation content'] = array(
     'name' => 'delete any clients_creation content',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete any create_content content'.
-  $permissions['delete any create_content content'] = array(
-    'name' => 'delete any create_content content',
     'roles' => array(
       'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
@@ -145,19 +121,6 @@ function feature_for_mobile_services_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete own create_content content'.
-  $permissions['delete own create_content content'] = array(
-    'name' => 'delete own create_content content',
-    'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete own service_creation content'.
   $permissions['delete own service_creation content'] = array(
     'name' => 'delete own service_creation content',
@@ -195,17 +158,6 @@ function feature_for_mobile_services_user_default_permissions() {
   // Exported permission: 'edit any clients_creation content'.
   $permissions['edit any clients_creation content'] = array(
     'name' => 'edit any clients_creation content',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit any create_content content'.
-  $permissions['edit any create_content content'] = array(
-    'name' => 'edit any create_content content',
     'roles' => array(
       'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
@@ -252,19 +204,6 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'edit own clients_creation content',
     'roles' => array(
       'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own create_content content'.
-  $permissions['edit own create_content content'] = array(
-    'name' => 'edit own create_content content',
-    'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
