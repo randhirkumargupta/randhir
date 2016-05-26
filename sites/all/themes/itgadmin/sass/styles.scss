@@ -1061,6 +1061,7 @@ div.vertical-tabs {
             .image-preview{
               padding: 0;
               @extend .full;
+              max-width: none;
               img{
                 max-height: 124px;
               }
