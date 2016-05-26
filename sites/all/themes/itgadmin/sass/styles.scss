@@ -2824,6 +2824,12 @@ div.node{
   }
   .comment-form{
     @extend .node-form;
+    .form-actions{
+      .form-submit[value="Cancel"]{
+        @extend .btn-cancel;
+        @extend .btn;
+      }
+    }
   }
   .comment{
     @extend .pos-rel;
