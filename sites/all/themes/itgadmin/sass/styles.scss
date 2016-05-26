@@ -2840,5 +2840,86 @@ div.node{
     }
   }
 }
-
+[id*="field-survey-add-questions-values"]{
+  > tbody{
+    .field-name-field-survey-answer-type{
+      @extend .fleft;
+      width: 615px;
+    }
+    .field-name-field-survey-skip{
+      @extend .of-hide;
+      margin-top: 10px;
+    }
+    .field-name-field-survey-question{
+      @extend .dib;
+      @extend .full;
+      .form-type-textfield{
+        margin: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #fffddf;
+      }
+    }
+    .field-name-field-survey-answer-option-2{
+      @extend .pos-rel;
+      margin-top: -20px;
+      > div > div > .clearfix{
+         bottom: 11px;
+        position: absolute;
+        left: 590px;
+        .form-submit{
+          @extend .add-more-wbg;
+          font-size: 30px;
+          line-height: 18px;
+          padding: 4px 6px 8px;
+        }
+        .ajax-progress-throbber{
+          position: absolute; 
+          left: 100%;
+          top: 15px;
+        }
+      }
+    }
+    > tr > td, > tr > td > .ajax-new-content{
+      @extend .pos-rel;
+      > .form-submit{
+        @extend .btn-cancel;
+        @extend .btn;
+        margin-left: 250px;
+      }
+    }
+    > tr > td > .ajax-new-content{
+      @extend .dib;
+      @extend .full;
+    }
+    table{
+      thead{
+        visibility: hidden;
+        @extend .fleft;
+        width: 250px;
+        padding: 0 20px 0 30px;
+        th.field-label{
+          padding-top: 8px;
+          font-weight: 400;
+        }
+      }
+      tbody{
+        @extend .fleft;
+      }
+      td{
+        border: none;
+        padding-bottom: 10px;
+        .form-type-textfield{
+          margin: 0; padding: 0;
+        }
+      }
+    }
+  }
+  &+div.clearfix{
+    .form-submit{
+      @extend .add-more;
+      margin-left: 250px;
+    }
+  }
+}
 
