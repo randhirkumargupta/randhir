@@ -2147,6 +2147,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         }
       }
     }
+    .form-type-checkboxes{
+      > label{width: 200px; @extend .dib; @extend .vmid;}
+    }
     .rating{
       @extend .dib; @extend .vmid;
       .form-type-checkbox{
