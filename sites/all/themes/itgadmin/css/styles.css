@@ -113,7 +113,7 @@ img {
 [id*="field-poll-answer-values"] tbody,
 [id*="field-story-template-buzz-values"] tbody,
 [id*="field-erf-registration-fee-values"] tbody,
-[id*="field-mega-review-review-values"] tbody, span.error, .dashboard-tab li a span, [id*="itg-survey-survey-form"] .question-container#question-container-0, [id*="itg-quiz-quiz-form"] .question-container#question-container-0, .photogallery-list.flexslider .flex-nav-prev a, .photogallery-list.flexslider .flex-nav-next a {
+[id*="field-mega-review-review-values"] tbody, span.error, .dashboard-tab li a span, [id*="itg-survey-survey-form"] .question-container#question-container-0, [id*="itg-quiz-quiz-form"] .question-container#question-container-0, .photogallery-list.flexslider .flex-nav-prev a, .photogallery-list.flexslider .flex-nav-next a, [id*="field-story-template-buzz-values"] tbody tr, [id*="field-story-template-buzz-values"] tbody tr td {
   display: block;
 }
 
@@ -2999,4 +2999,12 @@ div.node #comments h2 {
 }
 [id*="field-survey-add-questions-values"] + div.clearfix .form-submit {
   margin-left: 250px;
+}
+
+.hierarchical-select-wrapper .dropbox-title {
+  text-align: left;
+}
+
+[id*="field-story-template-buzz-values"] tbody tr td {
+  padding-bottom: 0;
 }
