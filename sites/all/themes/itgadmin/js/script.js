@@ -217,7 +217,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.photogallery-list').flexslider({
     animation: "slide",
     slideshowSpeed: 3000,
-    controlNav: false
+    controlNav: false,
+    prevText: "<i class='fa fa-angle-left' aria-hidden='true'></i>",
+    nextText: "<i class='fa fa-angle-right' aria-hidden='true'></i>"
   });
   
   // jQuery code to hide select option whenever user hover on ITGCMS navbar
@@ -460,10 +462,19 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function(){
     if($(this).children().hasClass('image-preview')){
       $(this).addClass('has-preview');
+      
     }
     else{
       $(this).removeClass('has-preview');
     }
+  });
+  $('.form-field-name-field-gallery-image .has-preview').each(function(i){
+    var altName = "field_gallery_image[und][" + i + "][field_images][und][0][alt]";
+    var titleName = "field_gallery_image[und][" + i + "][field_images][und][0][title]";
+    $("input[name='" + altName + "']").keyup(function(){
+      var altVal = $(this).val();
+      $(this).parent().next().find('.form-text').val(altVal);
+    });
   });
   $('.form-field-name-field-gallery-image .messages--error').each(function(){
     if(!$(this).children().hasClass('hide-message')){
