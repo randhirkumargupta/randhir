@@ -158,9 +158,11 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'vas_service_content_node_form':
       $form['metatags']['#type'] = 'hidden';
-      unset($form['actions']['preview']);
-      $form['field_service_association_title']['#prefix'] = '<div class="itg-disabled">';
-      $form['field_service_frequency_date']['#suffix'] = '</div>';
+
+      if (isset($form['nid']['#value'])) {
+        drupal_add_js("jQuery(document).ready(function(){jQuery('#edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-und, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').addClass('itg-disabled');  });", 'inline');
+      }
+
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-content-listing', array(
           'attributes' => array(
