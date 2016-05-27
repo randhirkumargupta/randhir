@@ -84,7 +84,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 53, ../sass/styles.scss */
-.hide, .sticky-header, .form-field-type-field-collection .field-multiple-table tbody .field-multiple-drag {
+.hide, .sticky-header, .form-field-type-field-collection .field-multiple-table tbody .field-multiple-drag, #comments .comment.comment-unpublished ul.links {
   display: none;
 }
 
@@ -94,12 +94,12 @@ h1, h2, h3, h4 {
 }
 
 /* line 59, ../sass/styles.scss */
-.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
+.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .rating, .answer-container .rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
   display: inline-block;
 }
 
 /* line 62, ../sass/styles.scss */
-.vmid, .page-user form .forgot-link, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes > .rating {
+.vmid, .page-user form .forgot-link, .answer-container .form-type-textfield label, .answer-container .form-type-checkboxes > label, .answer-container .rating {
   vertical-align: middle;
 }
 
@@ -114,7 +114,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 71, ../sass/styles.scss */
-.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"] {
+.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container .rating .form-type-checkbox input[type="checkbox"] {
   float: left;
 }
 
@@ -124,7 +124,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 77, ../sass/styles.scss */
-.pos-rel, .answer-container .form-type-checkboxes > .rating .form-type-checkbox, .answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"], #comments .comment {
+.pos-rel, .answer-container .rating .form-type-checkbox, .answer-container .rating .form-type-checkbox input[type="checkbox"], #comments .comment {
   position: relative;
 }
 
@@ -377,8 +377,8 @@ input[type="text"], select, input[type="password"] {
 .answer-container .form-type-checkboxes > label {
   width: 200px;
 }
-/* line 307, ../sass/styles.scss */
-.answer-container .form-type-checkboxes > .rating .form-type-checkbox:before {
+/* line 308, ../sass/styles.scss */
+.answer-container .rating .form-type-checkbox:before {
   content: '\f005';
   color: #ddd;
   width: 18px;
@@ -392,12 +392,12 @@ input[type="text"], select, input[type="password"] {
   top: 0;
   z-index: 5;
 }
-/* line 310, ../sass/styles.scss */
-.answer-container .form-type-checkboxes > .rating .form-type-checkbox.rating-hover:before, .answer-container .form-type-checkboxes > .rating .form-type-checkbox.rated-div:before {
+/* line 311, ../sass/styles.scss */
+.answer-container .rating .form-type-checkbox.rating-hover:before, .answer-container .rating .form-type-checkbox.rated-div:before {
   color: #f6b800;
 }
-/* line 313, ../sass/styles.scss */
-.answer-container .form-type-checkboxes > .rating .form-type-checkbox input[type="checkbox"] {
+/* line 314, ../sass/styles.scss */
+.answer-container .rating .form-type-checkbox input[type="checkbox"] {
   width: 18px;
   height: 18px;
   opacity: 0;
@@ -587,6 +587,11 @@ input[type="text"], select, input[type="password"] {
 
 /* UGC comment CSS */
 /* line 461, ../sass/styles.scss */
+#comments .messages--warning {
+  color: #f6b800;
+  margin: 10px 0;
+}
+/* line 465, ../sass/styles.scss */
 #comments h2 {
   background-color: #fefafb;
   border-bottom: 1px solid #d9d9d9;
@@ -596,27 +601,31 @@ input[type="text"], select, input[type="password"] {
   margin: 15px 0;
   padding: 8px 20px;
 }
-/* line 475, ../sass/styles.scss */
+/* line 479, ../sass/styles.scss */
 #comments .comment ul.links {
   position: absolute;
   right: 0;
   top: 0;
 }
-/* line 480, ../sass/styles.scss */
+/* line 484, ../sass/styles.scss */
 #comments .comment ul.links a {
   color: #337ab7;
   text-decoration: none;
 }
-/* line 483, ../sass/styles.scss */
+/* line 487, ../sass/styles.scss */
 #comments .comment ul.links a:hover {
   text-decoration: underline;
 }
-/* line 488, ../sass/styles.scss */
+/* line 492, ../sass/styles.scss */
 #comments .comment .submitted {
   font-size: 12px;
   color: #8d8d8d;
 }
-/* line 492, ../sass/styles.scss */
+/* line 496, ../sass/styles.scss */
 #comments .comment .submitted .username {
   color: #337ab7;
+}
+/* line 500, ../sass/styles.scss */
+#comments .comment.comment-unpublished {
+  padding: 10px;
 }

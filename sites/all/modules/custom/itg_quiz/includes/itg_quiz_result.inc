@@ -8,19 +8,21 @@ function itg_quiz_user_list() {
   $nid = arg(1);
   if ($node->type == 'quiz') {
     $output = '';
-    $output.= '<div><strong>Quiz User List</strong></div><div align="right">'.l(t("Send Mail"),"quiz-winners-mail/$nid").'</div>
-      <table style="width:100%">
-        <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Quiz Taken</th>
-        <th>Quiz Taken Date</th>
-        <th>Total Question</th>
-        <th>Attempted Question</th>
-        <th>Correct</th>
-        <th>Incorrect</th>
-        <th>Total Score</th>
-      </tr>';
+    $output.= '<div></div><div align="right">'.l(t("Send Mail"),"quiz-winners-mail/$nid").'</div>
+      <table class="views-table">
+        <thead>        
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Quiz Taken</th>
+            <th>Quiz Taken Date</th>
+            <th>Total Question</th>
+            <th>Attempted Question</th>
+            <th>Correct</th>
+            <th>Incorrect</th>
+            <th>Total Score</th>
+        </tr>
+      </thead><tbody>';
     
       $answer_op_tbl = '';
       $query = db_select('itg_quiz_user_score', 'qs');
@@ -45,7 +47,7 @@ function itg_quiz_user_list() {
         </tr>';
       }
          $output.= $answer_op_tbl;
-      $output.= '</table><p>&nbsp;</p>';
+      $output.= '</tbody></table><p>&nbsp;</p>';
       return $output;
   } else {
     drupal_access_denied();

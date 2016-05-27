@@ -5,7 +5,7 @@
  * {@inheritdoc}
  */
 function itg_social_media_form($form, &$form_state, $c_type, $nid) {
-  global $user;
+  global $user, $base_url;
   // Load node so that we can provide default value if values already present.
   $node = node_load($nid);  
   $data = array();
@@ -17,7 +17,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js',
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
-  );
+  ); 
   
   // Prepare form array.
     $form['itg_smi'] = array(
@@ -59,7 +59,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     $form['fb_wrap']['field_story_posted_by_facebook'] = array(
       '#type' => 'hidden',      
       '#maxlength' => 255,
-      '#default_value' => isset($node->field_story_posted_by_facebook['und'][0]['value']) ? $node->field_story_posted_by_facebook['und'][0]['value'] : $user->name,
+      '#default_value' => isset($node->field_story_posted_by_facebook['und'][0]['value']) ? $node->field_story_posted_by_facebook['und'][0]['value'] : $user->name,      
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
@@ -86,10 +86,11 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     $form['fb_wrap']['itg_fb_img'] = array(
       '#title' => t('Facebook Image'),
       '#type' => 'managed_file',
-      '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
-      '#default_value' => variable_get('image_example_image_fid', ''),
+      '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),      
       '#upload_location' => 'public://itg_fb_img/',
       '#default_value' => isset($node->field_story_facebook_image['und'][0]['fid']) ? $node->field_story_facebook_image['und'][0]['fid'] : 0,
+      '#widget' => 'imce',      
+      '#preview' => TRUE,
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
@@ -129,6 +130,8 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
       '#default_value' => isset($node->field_story_tweet_image['und'][0]['fid']) ? $node->field_story_tweet_image['und'][0]['fid'] : 0,
       '#upload_location' => 'public://itg_twitter_img/',
+      '#widget' => 'imce',      
+      '#preview' => TRUE,
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
@@ -249,6 +252,20 @@ function itg_social_media_form_submit($form, &$form_state) {
   if ($form_state['values']['field_story_posted_by_twitter'] != '') {
     $node->field_story_posted_by_twitter['und'][0]['value'] = $form_state['values']['field_story_posted_by_twitter'];
     $node->field_story_time_twitter['und'][0]['value'] = $form_state['values']['field_story_time_twitter'];
+    
+    // Call twitter login function
+    $auth = itg_social_media_twitter_login();
+    $file = file_load($form_state['values']['itg_twitter_img']);
+    $path = drupal_realpath($file->uri);  
+    $response = $auth->postMedia('media/upload', $path);
+    $media_ids[] = $response['media_id'];
+    $params = array(
+      'status' => 'This is a media/upload test...',
+      'media_ids' => implode(',', $media_ids),
+    );
+    $response = $auth->post('statuses/update', $params);  
+    // Twitter code ends here 
+    
   }
   // TWITTER IMAGE
   if ($form_state['values']['itg_twitter_img'] != 0) {
@@ -257,8 +274,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     // Change status to permanent.
     $file->status = FILE_STATUS_PERMANENT;
     // Save.
-    file_save($file);
-    // Record that the module (in this example, user module) is using the file.
+    file_save($file);    
     file_usage_add($file, 'user', 'user', 1);
   }
 
@@ -280,20 +296,6 @@ function itg_social_media_form_submit($form, &$form_state) {
     if ($path != '') {
       unlink($path);
     }
-  }
-  
-  // Call twitter login function
-//  $auth = itg_social_media_twitter_login();
-//  $file = file_load($form_state['values']['itg_twitter_img']);
-//  $path = drupal_realpath($file->uri);  
-//  $response = $auth->postMedia('media/upload', $path);
-//  $media_ids[] = $response['media_id'];
-//  $params = array(
-//    'status' => 'This is a media/upload test...',
-//    'media_ids' => implode(',', $media_ids),
-//  );
-//  $response = $auth->post('statuses/update', $params);  
-  // Twitter code ends here
-  
+  }  
   node_save($node);
 }

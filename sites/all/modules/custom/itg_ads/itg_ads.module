@@ -1,6 +1,45 @@
 <?php
 
 /**
+ * @file
+ * The ITG Ads module.
+ *
+ * Contains functionality for Ads.
+ *
+ */
+
+
+/**
+ * Implementation of hook_menu
+ * @return string
+ */
+function itg_ads_menu() {
+  
+  $items = array();
+  
+  $items['itg-ads/%'] = array(
+      'title' => t('Ads'),
+      'page callback' => 'itg_ads',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_theme
+ * @return array
+ */
+function itg_ads_theme() {
+  return array(    
+    'itg_ads' => array(
+      'variables' => array('data' => NULL),
+      'template' => 'templates/itg-ads',
+    ),
+ );
+}
+
+/**
  * Implementation of hook_form_FORM_ID_alter()
  * @param array $form
  * @param array $form_state
@@ -21,11 +60,11 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
       )
     );
     // code to check if section is selected then content selection field show
-    $form['field_ads_content_selection']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
-      )
-    );
+   // $form['field_ads_content_selection']['#states'] = array(
+    //  'visible' => array(
+    //    ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
+     // )
+   // );
     // code to check if section is selected then template variant field show
     $form['field_ads_template_variants']['#states'] = array(
       'visible' => array(
@@ -104,16 +143,16 @@ function itg_ads_node_validate($node, $form, &$form_state) {
     if ($node->type == 'ads_management') {
 
         $template = $node->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
-        $content_selection = $node->field_ads_content_selection[LANGUAGE_NONE][0]['tid'];
+        //$content_selection = $node->field_ads_content_selection[LANGUAGE_NONE][0]['tid'];
         $section_selection = $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'];
         $template_variants = $node->field_ads_template_variants[LANGUAGE_NONE][0]['tid'];
 
         // field validation on content selection 
-        if ($template == 'Section') {
-            if (empty($content_selection)) {
-                form_set_error('field_ads_content_selection', t("Content selection is required"));
-            }
-        }
+        //if ($template == 'Section') {
+        //    if (empty($content_selection)) {
+        //        form_set_error('field_ads_content_selection', t("Content selection is required"));
+       //     }
+       // }
 
         // field validation on content selection
         if ($template == 'Section') {
@@ -135,4 +174,9 @@ function itg_ads_node_validate($node, $form, &$form_state) {
             form_set_error('field_ads_end_date', 'End date must be greater than or equal to Start date.');
         }
     }
+}
+
+function itg_ads(){
+  $node = node_load(arg(1));
+  return theme('itg_ads', array('data' => $node));
 }

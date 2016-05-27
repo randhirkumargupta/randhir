@@ -60,11 +60,11 @@
       //Scoring type treatment(Normal|Weightage)
       if ($("input[name='field_quiz_scoring_type[und]']:checked'").val() === 'weight') {
         $('.field-name-field-quiz-weightage').show();
-        $('.quiz-weightage-backup').remove();
+        //$('.quiz-weightage-backup').remove();
 
       } else {
         $('.field-name-field-quiz-weightage').hide();
-        $('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
+        //$('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
 
       }
 
@@ -72,10 +72,10 @@
         var check_radio_name = $(this).val();
         if (check_radio_name == 'normal') {
           $('.field-name-field-quiz-weightage').hide();
-          $('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
+          //$('.field-name-field-quiz-answer-type').after("<div class='quiz-weightage-backup'>&nbsp;</div>");
         } else {
           $('.field-name-field-quiz-weightage').show();
-          $('.quiz-weightage-backup').remove();
+          //$('.quiz-weightage-backup').remove();
         }
       });
       
@@ -96,7 +96,7 @@
       
       //Remove "quiz-weightage-backup" dic on click of Add more answer option button
       $('.field-name-field-quiz-options-answer .field-add-more-submit, .field-name-field-quiz-options-answer .button-remove').mousedown(function(){
-        $('.quiz-weightage-backup').remove();
+        //$('.quiz-weightage-backup').remove();
       })
      
       

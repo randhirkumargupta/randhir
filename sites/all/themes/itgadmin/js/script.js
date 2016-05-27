@@ -217,7 +217,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.photogallery-list').flexslider({
     animation: "slide",
     slideshowSpeed: 3000,
-    controlNav: false
+    controlNav: false,
+    prevText: "<i class='fa fa-angle-left' aria-hidden='true'></i>",
+    nextText: "<i class='fa fa-angle-right' aria-hidden='true'></i>"
   });
   
   // jQuery code to hide select option whenever user hover on ITGCMS navbar
@@ -267,37 +269,38 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
     var textValue = $(this).parents('.question-container').find('.form-text').val();
     var skipValue = $(this).parents('.question-container').find('.question-skip').val();
+    var surveyTaken = $('body').find('input[name="survey_taken"]').val();
     
-    if(checkValue && skipValue == 'no'){
+    if(checkValue && skipValue == 'no' && surveyTaken == 'no'){
       $(this).ajaxSuccess(function(){
         $('.question-container').hide();
         $(this).parents('.question-container').next().show();
       });
-    } else if(skipValue == 'yes'){
+    } else if(skipValue == 'yes' && surveyTaken == 'no'){
       $(this).ajaxSuccess(function(){
         $('.question-container').hide();
         $(this).parents('.question-container').next().show();
       });
     }
     
-    if(radioValue && skipValue == 'no'){
+    if(radioValue && skipValue == 'no' && surveyTaken == 'no'){
       $(this).ajaxSuccess(function(){
         $('.question-container').hide();
         $(this).parents('.question-container').next().show();
       });
-    } else if(skipValue == 'yes'){
+    } else if(skipValue == 'yes' && surveyTaken == 'no'){
       $(this).ajaxSuccess(function(){
         $('.question-container').hide();
         $(this).parents('.question-container').next().show();
       });
     }
     
-    if(textValue  && skipValue == 'no' && textValue != 'undefined'){
+    if(textValue  && skipValue == 'no' && textValue != 'undefined' && surveyTaken == 'no'){
       $(this).ajaxSuccess(function(){
         $('.question-container').hide();
         $(this).parents('.question-container').next().show();
       });
-    } else if(skipValue == 'yes'){
+    } else if(skipValue == 'yes' && surveyTaken == 'no'){
       $(this).ajaxSuccess(function(){
         $('.question-container').hide();
         $(this).parents('.question-container').next().show();
@@ -460,10 +463,27 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function(){
     if($(this).children().hasClass('image-preview')){
       $(this).addClass('has-preview');
+      
     }
     else{
       $(this).removeClass('has-preview');
     }
+  });
+  $('.form-field-name-field-gallery-image .has-preview').each(function(i){
+    var altName = "field_gallery_image[und][" + i + "][field_images][und][0][alt]";
+    var titleName = "field_gallery_image[und][" + i + "][field_images][und][0][title]";
+    $("input[name='" + altName + "']").keyup(function(){
+      var altVal = $(this).val();
+      $(this).parent().next().find('.form-text').val(altVal);
+    });
+  });
+  $('.form-field-name-field-gallery-image .messages--error').each(function(){
+    if(!$(this).children().hasClass('hide-message')){
+      $(this).append('<a class="hide-message" href="javascript:;">Close</a>');
+    }
+  });
+  $('.form-field-name-field-gallery-image').on('click', '.hide-message', function(){
+    $(this).parent().remove();
   });
   
   $('.header__secondary-menu ul li.last a').html('<i class="fa fa-power-off" aria-hidden="true"></i>');

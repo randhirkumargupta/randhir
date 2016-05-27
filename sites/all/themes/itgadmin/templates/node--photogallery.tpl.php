@@ -49,7 +49,21 @@
           ?>
 
           <?php if ($view_mode == 'full'): ?>
-
+            <?php
+                        // Load custom block for social media integration              
+                        if (!isset($node->op)):
+                          $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+                          ?>
+                          <div class="itg-smi">
+                              <button data-id="smi-popup" class="btn data-popup-link">Create Social media</button>
+                          </div>
+                          <div id="smi-popup" class="itg-popup">
+                              <div class="popup-body">
+                                  <a class="itg-close-popup" href="javascript:;"> Close </a>
+                                  <?php print render($block['content']); ?>
+                              </div>
+                          </div>
+                        <?php endif; ?>
             <div class="basic-details content-box">
               <h2>Basic Gallery Details</h2>
               <div class="content-details">
@@ -82,6 +96,28 @@
                 </div>
               </div>
             <?php endif; ?>
+            
+            <!-- Social Media -->
+            <!-- Preview case -->
+            <?php if (isset($node->op) && $node->op == 'preview'): ?>
+            <?php endif; ?>
+            <!-- view case -->
+            <?php $social_media = render($content['field_story_social_media_integ']); ?>
+            <?php if (!empty($social_media)): ?>
+            <div class="BrowseMedia">
+                <h2>Social media </h2>
+                <div class="content-details">
+                <?php 
+                print render($content['field_story_social_media_integ']);
+                print render($content['field_story_facebook_narrative']);
+                print render($content['field_story_facebook_image']);
+                print render($content['field_story_tweet']);
+                print render($content['field_story_tweet_image']);
+                ?>
+               </div>
+            <?php endif; ?>
+            
+            <!-- Social Media Ends -->
 
             <?php
             $photocategory = render($content['field_story_category']);
