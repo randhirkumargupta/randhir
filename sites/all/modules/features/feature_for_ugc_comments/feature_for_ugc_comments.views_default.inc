@@ -330,6 +330,11 @@ function feature_for_ugc_comments_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'blog' => 'blog',
+    'story' => 'story',
+    'photogallery' => 'photogallery',
+  );
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
@@ -357,6 +362,16 @@ function feature_for_ugc_comments_views_default_views() {
     15 => 0,
     18 => 0,
     23 => 0,
+  );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type_1']['operator'] = 'not in';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'task_idea_allocation_tracking' => 'task_idea_allocation_tracking',
   );
   $handler->display->display_options['path'] = 'in-queue-ugc-comments';
 
@@ -602,6 +617,11 @@ function feature_for_ugc_comments_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'blog' => 'blog',
+    'story' => 'story',
+    'photogallery' => 'photogallery',
+  );
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
@@ -629,6 +649,16 @@ function feature_for_ugc_comments_views_default_views() {
     15 => 0,
     18 => 0,
     23 => 0,
+  );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type_1']['operator'] = 'not in';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'task_idea_allocation_tracking' => 'task_idea_allocation_tracking',
   );
   $handler->display->display_options['path'] = 'publish-ugc-comments';
   $export['ugc_comments'] = $view;
