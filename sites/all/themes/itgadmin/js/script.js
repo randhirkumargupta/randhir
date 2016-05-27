@@ -533,5 +533,39 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   $('body').find('.image-preview').parent().addClass('has-image-preview');
   
+  // Reset form Data
+  function itg_clear_form_data(class_name) {
+    jQuery("." + class_name).find(':input').each(function () {
+      switch (this.type) {
+        case 'text':
+        case 'textarea':
+          $(this).val('');
+          break;
+        case 'select-one':
+          $(this).val('_none');
+          break;
+      }
+    });
+  }
+  
+  // Clear facebook data fields
+  $('input[name="field_story_social_media_integ[und][facebook]"]').click(function () {
+    if (!$(this).is(':checked')) {
+      itg_clear_form_data('form-field-name-field-story-facebook-narrative');      
+      itg_clear_form_data('form-field-name-field-story-posted-by-facebook');      
+      itg_clear_form_data('form-field-name-field-story-time-facebook');      
+      jQuery('.form-field-name-field-story-facebook-image .ajax-processed').mousedown();
+    }
+  });
+
+  // Clear twitter data fields
+  $('input[name="field_story_social_media_integ[und][twitter]"]').click(function () {
+    if (!$(this).is(':checked')) {
+      itg_clear_form_data('form-field-name-field-story-tweet');      
+      jQuery('.form-field-name-field-story-tweet-image .ajax-processed').mousedown();
+    } 
+  });
+  // reset form data end.
+  
 };
 })(jQuery);
