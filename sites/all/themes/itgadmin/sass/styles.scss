@@ -104,6 +104,11 @@ img{
 .of-hide{
   overflow: hidden;
 }
+.itg-disabled{
+  background-color: #d9d9d9;
+  opacity: 0.8;
+  pointer-events: none;
+}
 .btn{
   background-color: #33a26d;
   border: 1px solid #197e4e;
@@ -173,6 +178,7 @@ img{
   &:hover{
     background-color: #1fb5ad;
     border: 1px solid #1fb5ad;
+    color: #fff;
   }
 }
 .add-more-wbg{
@@ -413,7 +419,6 @@ ul.pager{
   font-size: 13px;
   @extend .pdb-10;
 }
-
 input[type="text"], select, input[type="password"]{
   border: 1px solid #d9d9d9;
   height: 36px;
@@ -430,7 +435,7 @@ textarea{
   resize: none;
   font-family: 'muli';
 }
-.form-required, span.error, .messages--error{
+.form-required, span.error, .messages--error, .messages.error{
   color: red;
 }
 span.error{
@@ -632,6 +637,28 @@ fieldset.date-combo{
     max-width: 332px;
   }
 }
+.form-type-autocomplete-deluxe{
+  div.autocomplete-deluxe-container{
+    @extend .pos-rel;
+    background: none;
+    width: 100%;
+    max-width: 332px;
+    border: none;
+    .autocomplete-deluxe-throbber{
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    input.autocomplete-deluxe-form-single{
+      background: none;
+      box-shadow: 0;
+      border: 1px solid #d9d9d9;
+      width: 100%;
+      max-width: 332px;
+    }
+  }
+  
+}
 .form-type-password{
   @extend .pos-rel;
   > span.error{
@@ -720,7 +747,7 @@ div.filefield-source .form-item{
 div.description, .pre-desc{
   font-size: 12px;
   color: #8d8d8d;
-  min-width: 120px;
+  min-width: 130px;
 }
 .text-format-wrapper{
   div.description{
@@ -1061,6 +1088,7 @@ div.vertical-tabs {
             .image-preview{
               padding: 0;
               @extend .full;
+              max-width: none;
               img{
                 max-height: 124px;
               }
@@ -1159,7 +1187,7 @@ input[name="field_gallery_image_add_more"]{
   @extend .add-more;
   margin: 0 0 0 250px;
 }
-.ajax-progress-throbber{position: absolute; left: 100%; top: 3px;}
+div.image-widget-data .ajax-progress-throbber{display: none;}
 #Categorization{
   select{
     max-width: 180px;
@@ -1589,8 +1617,7 @@ input[name="field_gallery_image_add_more"]{
     @extend .hide;
   }
 }
-[id*="field-quiz-add-questions-values"], 
-[id*="field-survey-add-questions-values"]{
+[id*="field-quiz-add-questions-values"]{
   @extend .full;
   thead{
     @extend .hide;
@@ -1705,6 +1732,7 @@ input[name="field_gallery_image_add_more"]{
     > h3{
       font-size: 24px;
       padding: 20px;
+      border-bottom: 1px solid #d9d9d9;
       &:first-child{
         @extend .hide;
       }
@@ -1753,12 +1781,12 @@ input[name="field_gallery_image_add_more"]{
 [id*="field-associate-sponsors-values"], 
 [id*="field-event-highlights-values"], 
 [id*="field-event-media-values"], 
-[id*="field-quiz-add-questions-values"], 
-[id*="field-survey-add-questions-values"], 
+[id*="field-quiz-add-questions-values"]
 [id*="field-newsl-add-news-values"], 
 [id*="field-task-task-idea-values"], 
 [id*="field-astro-numerology-values-values"], 
 [id*="field-astro-zodiac-values"], 
+[id*="field-poll-answer-values"], 
 [id*="field-story-template-buzz-values"], 
 [id*="field-erf-registration-fee-values"], 
 [id*="field-mega-review-review-values"]{
@@ -2018,6 +2046,16 @@ input[name="field_gallery_image_add_more"]{
 [class*="node-type-"]{
   .tabs-primary{display: none;}
   .node{
+    padding: 20px;
+    h2{
+      background-color: #fefafb;
+      border-top: 1px solid #d9d9d9;
+      border-bottom: 1px solid #d9d9d9;
+      padding: 8px 20px;
+      line-height: 28px;
+      font-size: 18px;
+      margin: 15px 0;
+    }
     .field{
       padding: 5px 30px;
       @extend .dib;
@@ -2033,6 +2071,34 @@ input[name="field_gallery_image_add_more"]{
       .field-items{
         overflow: hidden;
       }
+    }
+  }
+}
+.node-preview{
+  padding: 20px;
+  h2{
+    background-color: #fefafb;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 8px 20px;
+    line-height: 28px;
+    font-size: 18px;
+    margin: 15px 0;
+  }
+  .field{
+    padding: 5px 30px;
+    @extend .dib;
+    @extend .full;
+    .field{
+      padding: 0;
+    }
+    .field-label{
+      @extend .fleft;
+      width: 220px;
+      padding-right: 20px;
+    }
+    .field-items{
+      overflow: hidden;
     }
   }
 }
@@ -2127,6 +2193,24 @@ input[name="field_gallery_image_add_more"]{
             @extend .fleft;
             margin: 1px 5px 0 0;
           }
+        }
+      }
+    }
+    .form-type-checkboxes{
+      > label{width: 200px; @extend .dib; @extend .vmid;}
+    }
+    .rating{
+      @extend .dib; @extend .vmid;
+      .form-type-checkbox{
+        @extend .pos-rel; @extend .dib;
+        &:before{
+          content: '\f005'; color: #ddd; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;
+        }
+        &.rating-hover:before, &.rated-div:before{
+          color: #f6b800;
+        }
+        input[type="checkbox"]{
+          width: 18px; height: 18px; @extend .fleft; opacity: 0; @extend .pos-rel; z-index: 10; cursor: pointer;
         }
       }
     }
@@ -2586,44 +2670,7 @@ fieldset#edit-select{
 .form-field-name-field-supp-publish{
   .form-type-checkbox{padding-left: 220px;margin-top: -10px;}
 }
-[id*="field-survey-add-questions-values"]{
-  > tbody{
-    @extend .fleft;
-    display: table-row-group;
-    @extend .full;
-    > tr > td{
-      width: 650px;
-    }
-    .field-name-field-survey-answer-option-2{
-      @extend .pos-rel;
-      > div > div > .clearfix{
-         bottom: 31px;
-        position: absolute;
-        right: 15px;
-        .form-submit{
-          @extend .add-more-wbg;
-          font-size: 30px;
-          line-height: 18px;
-          padding: 4px 6px 8px;
-        }
-      }
-    }
-    table{
-      thead{
-        display: block;
-        th.field-label{
-          padding-top: 8px;
-        }
-      }
-      td{
-        border: none;
-        .form-type-textfield{
-          margin: 0; padding: 0;
-        }
-      }
-    }
-  }
-}
+
 .node-event_backend-form{
   .vertical-tabs{
     .container-inline-date{
@@ -2711,9 +2758,283 @@ div.node{
 .workbench-info-block{
   @extend .hide;
 }
+[id*="field-poll-answer-values"]{
+  tbody{
+    tr{
+      @extend .fleft;
+      @extend .full;
+      td{
+        @extend .fleft;
+        @extend .mb-10;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+.view-popup{
+  max-height: 400px;
+  min-width: 800px;
+  max-width: 900px;
+  #page-title{
+    line-height: normal; 
+    padding-bottom: 10px; 
+    border-bottom: 1px solid #d9d9d9;
+  }
+  .field{
+    padding: 5px 30px;
+    @extend .dib;
+    @extend .full;
+    .field{
+      padding: 0;
+    }
+    .field-label{
+      @extend .fleft;
+      width: 220px;
+      padding-right: 20px;
+    }
+    .field-items{
+      overflow: hidden;
+      max-width: 100%;
+    }
+  }
+}
+.photogallery-list.flexslider{
+  @extend .pos-rel;
+  padding: 0 50px;
+  .slides{
+    li{
+      @extend .pos-rel;
+      text-align: center;
+    }
+    img{
+      max-height: 450px;
+      vertical-align: top;
+    }
+  } 
+  .flex-direction-nav{
+    @extend .no-bullet;
+  }
+  .flex-nav-prev, .flex-nav-next{
+    position: absolute;
+    width: 45px;
+    height: 95px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    a{
+      @extend .db;
+      font-size: 75px;
+      line-height: normal;
+      text-align: center;
+    }
+  }
+  .flex-nav-prev{
+    left: 0;
+  }
+  .flex-nav-next{
+    right: 0;
+  }
+}
 
-
-
-
-
-
+/* UGC comment CSS */
+#comments{
+  .messages--warning{
+    color: #f6b800;
+    margin: 10px 0;
+  }
+  h2{
+    background-color: #fefafb;
+    border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    font-size: 18px;
+    line-height: 28px;
+    margin: 15px 0;
+    padding: 8px 20px;
+  }
+  .comment-form{
+    @extend .node-form;
+    .form-actions{
+      .form-submit[value="Cancel"]{
+        @extend .btn-cancel;
+        @extend .btn;
+      }
+    }
+  }
+  .comment{
+    @extend .pos-rel;
+    ul.links{
+      @extend .no-bullet;
+      position: absolute;
+      right: 0; 
+      top: 0;
+      a{
+        color: #337ab7;
+        text-decoration: none;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+    .submitted{
+      font-size: 12px;
+      color: #8d8d8d;
+      padding-top: 5px;
+      @extend .pdb-10;
+      .username{
+        color: #337ab7;
+      }
+    }
+    &.comment-unpublished{
+      padding: 10px;
+      ul.links{
+        @extend .hide;
+      }
+    }
+  }
+}
+[id*="field-survey-add-questions-values"]{
+  > tbody{
+    .field-name-field-survey-answer-type{
+      @extend .fleft;
+      width: 615px;
+    }
+    .field-name-field-survey-skip{
+      @extend .of-hide;
+      margin-top: 10px;
+    }
+    .field-name-field-survey-question{
+      @extend .dib;
+      @extend .full;
+      .form-type-textfield{
+        margin: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #fffddf;
+      }
+    }
+    .field-name-field-survey-answer-option-2{
+      @extend .pos-rel;
+      margin-top: -20px;
+      > div > div > .clearfix{
+         bottom: 11px;
+        position: absolute;
+        left: 590px;
+        .form-submit{
+          @extend .add-more-wbg;
+          font-size: 30px;
+          line-height: 18px;
+          padding: 4px 6px 8px;
+        }
+        .ajax-progress-throbber{
+          position: absolute; 
+          left: 100%;
+          top: 15px;
+        }
+      }
+    }
+    > tr > td, > tr > td > .ajax-new-content{
+      @extend .pos-rel;
+      > .form-submit{
+        @extend .btn-cancel;
+        @extend .btn;
+        margin-left: 250px;
+      }
+    }
+    > tr > td > .ajax-new-content{
+      @extend .dib;
+      @extend .full;
+    }
+    table{
+      thead{
+        visibility: hidden;
+        @extend .fleft;
+        width: 250px;
+        padding: 0 20px 0 30px;
+        th.field-label{
+          padding-top: 8px;
+          font-weight: 400;
+        }
+      }
+      tbody{
+        @extend .fleft;
+      }
+      td{
+        border: none;
+        padding-bottom: 10px;
+        .form-type-textfield{
+          margin: 0; padding: 0;
+        }
+      }
+    }
+  }
+  &+div.clearfix{
+    .form-submit{
+      @extend .add-more;
+      margin-left: 250px;
+    }
+  }
+}
+.hierarchical-select-wrapper .dropbox-title{
+  text-align: left;
+}
+[id*="field-story-template-buzz-values"]{
+  tbody{
+    tr{
+      @extend .db;
+      td{
+        @extend .db;
+        padding-bottom: 0;
+      }
+    }
+  } 
+}
+.page-node-add-itg-celebrity-profile{
+  ul.ui-autocomplete{
+    width: 100% !important;
+    max-width: 332px;
+    padding: 0;
+    border: 1px solid #d9d9d9;
+    border-radius: 0;
+    font-size: 13px;
+    .ui-corner-all{
+      padding: 5px;
+      display: block;
+      border-radius: 0;
+      margin: 0;
+      &.ui-state-focus{
+        background: none #f0f0f0;
+        border: none;
+        margin: 0;
+      }
+    }
+    
+    .autocomplete-deluxe-highlight-char{
+      color: #1fb5ad;
+      font-weight: 400;
+    }
+  }
+}
+.edit-link, 
+.view-link, 
+.delete-link, 
+.edit-cm a{
+  @extend .pos-rel;
+  @extend .dib;
+  @extend .vmid;
+  padding-left: 20px; 
+  color: #008eb1;
+  &:after{
+    width: 20px; 
+    height: 20px; 
+    font: normal normal normal 18px/20px FontAwesome; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; 
+    position: absolute; 
+    left: 0; 
+    top: 0;
+  }
+}
+.edit-cm a:after{line-height: 28px;}
+.edit-link:after, .edit-cm a:after{content: '\f044';}
+.view-link:after{content: '\f06e';}
+.delete-link:after{content: '\f1f8';}

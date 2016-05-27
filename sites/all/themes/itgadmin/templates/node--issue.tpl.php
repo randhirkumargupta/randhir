@@ -38,19 +38,19 @@
 <h3>Preview full version</h3>
 <a class="close-preview" href="javascript:;"> </a>
 <div class="node node-preview">
-  <div class="field"><div class="field-label">Title: </div><div class="field-item"><?php print date('m/d/Y', strtotime($title)); ?></div></div>
-  <div class="field"><div class="field-label">Magazine: </div><div class="field-item"><?php print $node->field_issue_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
-  <div class="field"><div class="field-label">Supplement: </div><div class="field-item"><?php print $node->field_issue_supplement[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
-  <div class="field"><div class="field-label"><strong>Issue Cover Images:</strong> </div><div class="field-item"></div></div>
-  <div class="field"><div class="field-label">Large Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_large_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
-  <div class="field"><div class="field-label">Small Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_small_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
-  <div class="field"><div class="field-label"><strong>Supplement Cover Images:</strong> </div><div class="field-item"></div></div>
-  <div class="field"><div class="field-label">Large Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_large_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
-  <div class="field"><div class="field-label">Small Cover Image: </div><div class="field-item"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_small_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
-  <div class="field"><div class="field-label">Status: </div><div class="field-item"><?php print $status ? 'Published' : 'Unpublished';?></div></div>
+  <div class="field"><div class="field-label">Title: </div><div class="field-items"><?php print date('m/d/Y', strtotime($title)); ?></div></div>
+  <div class="field"><div class="field-label">Magazine: </div><div class="field-items"><?php print $node->field_issue_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
+  <div class="field"><div class="field-label">Supplement: </div><div class="field-items"><?php print $node->field_issue_supplement[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
+  <div class="field"><div class="field-label"><strong>Issue Cover Images:</strong> </div><div class="field-items"></div></div>
+  <div class="field"><div class="field-label">Large Cover Image: </div><div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_issue_large_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
+  <div class="field"><div class="field-label">Small Cover Image: </div><div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_issue_small_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
+  <div class="field"><div class="field-label"><strong>Supplement Cover Images:</strong> </div><div class="field-items"></div></div>
+  <div class="field"><div class="field-label">Large Cover Image: </div><div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_large_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
+  <div class="field"><div class="field-label">Small Cover Image: </div><div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_small_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
+  <div class="field"><div class="field-label">Status: </div><div class="field-items"><?php print $status ? 'Published' : 'Unpublished';?></div></div>
   <div class="field">
     <div class="field-label"><strong>Attached XML Files:</strong></div>
-    <div class="field-item">
+    <div class="field-items">
     <?php 
     $count_file = count($node->field_field_issue_import_xml[LANGUAGE_NONE]);
     $i = 1;
