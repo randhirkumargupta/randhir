@@ -154,6 +154,7 @@ if(!in_array('administrator', $user->roles)){
 
     <?php if ($sidebar_first || $sidebar_second): ?>
       <aside class="sidebars">
+        <span class="sidebar-trigger"><i class="fa fa-cog" aria-hidden="true"></i></span>
         <?php print $sidebar_first; ?>
         <?php print $sidebar_second; ?>
       </aside>
