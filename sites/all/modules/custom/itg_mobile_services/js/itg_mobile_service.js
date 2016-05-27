@@ -206,6 +206,8 @@ var fixedDate = '';
                 jQuery(document).on("click", "#content-enable-button", function (event) {
                     event.preventDefault();
                     if (genrateFlag == 1) {
+                        jQuery("#edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-und, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").addClass("itg-disabled");
+
                         var hideContent = 1;
                         jQuery('#reset-date-button').show();
                         jQuery('#content-enable-button').hide();
