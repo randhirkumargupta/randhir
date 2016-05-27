@@ -72,6 +72,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   if ($form_id == 'sponsor_node_form') {
+    $form['actions']['submit']['#submit'][] = 'itg_sponsor_alter_submit_status_message';
     $form['#after_build'][] = 'itg_event_backend_sponsor';
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), 'manage-sponsor', array('attributes' => array('class' => 'button'))),
@@ -80,6 +81,23 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Implements alter message function().
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_sponsor_alter_submit_status_message(&$form, $form_state) {
+   if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);}
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'sponsor') {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';}
+  $sponsor_title = $form_state['node']->title;
+  drupal_set_message(t('Sponsor <b>' . $sponsor_title . '</b> has been ' . $op.'.' ));
+  $_GET['destination'] = $_REQUEST['destination'];
+}
 /**
  * Implements custom validate for event backend.
  * @param array $form
