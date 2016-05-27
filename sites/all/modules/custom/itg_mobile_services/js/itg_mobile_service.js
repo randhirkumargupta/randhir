@@ -8,17 +8,20 @@ var genrateFlag = 1;
 var rowCount = 1;
 var firstDate = 1;
 var fixedDate = '';
-
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
+
+            jQuery('#content-enable-button').hide();
             jQuery('#client_entity_wrapper').hide();
-            jQuery('#field-service-content-add-more-wrapper').hide();
             jQuery('.field-name-field-story-expert-description').hide();
             jQuery('.field-name-field-story-large-image').hide();
             jQuery('.field-name-field-service-audio').hide();
             jQuery('.field-name-field-service-video').hide();
+            var today_date = custom_today_date();
+            jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date).addClass('itg-disabled');
+
             jQuery('input[name="field_service_content_add_more"]').hide();
 
             $('#edit-field-service-association-title-und').change(function () {
@@ -68,7 +71,7 @@ var fixedDate = '';
                     jQuery.each(content_format_array, function (keys, values) {
                         console.log(values)
                         // content-format-hidden
-                        if (values == 'text') { //alert(" val" + value );
+                        if (values == 'text') {
                             jQuery('.field-name-field-story-expert-description').show();
                         } else if (values == 'image') {
                             jQuery('.field-name-field-story-large-image').show();
@@ -88,7 +91,6 @@ var fixedDate = '';
 
 
                 selectedVal = selected.val();
-
                 if (selectedVal == 2) {
                     fixedDate = "+6 D";
                     fixedDay = 6;
@@ -96,7 +98,6 @@ var fixedDate = '';
                     fixedDate = "+1M";
                     fixedDay = 30;
                 }
-
                 if (selectedVal > 1) {
                     jQuery('#edit-field-service-frequency-date').show();
                     $('#edit-field-service-content').show();
@@ -105,16 +106,26 @@ var fixedDate = '';
 
             jQuery('#edit-field-service-frequency-und input[type="radio"]').click(function () {
                 if ($(this).attr("value") == "1") {
-                    jQuery('#edit-field-service-content').show();
+                    jQuery('#content-enable-button').hide();
+                    jQuery('#edit-field-service-content-und-0-remove-button').hide();
+                    jQuery('#field-service-content-add-more-wrapper').show();
                     jQuery('#edit-field-service-frequency-date').hide();
                     jQuery('#edit-field-service-content-und-0-remove-button').hide();
                     jQuery('#edit-field-service-content-und-add-more').hide();
+                    var today_date = custom_today_date();
+                    jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date).addClass('itg-disabled');
                 } else if ($(this).attr("value") == "2") {
+                    jQuery('#edit-field-service-content-und-0-remove-button').show();
+                    jQuery('#field-service-content-add-more-wrapper').hide();
+                    jQuery('#content-enable-button').show();
                     jQuery('#edit-field-service-content').show();
                     jQuery('#edit-field-service-frequency-date').show();
                     fixedDate = "+6 D";
                     fixedDay = 6;
                 } else if ($(this).attr("value") == "3") {
+                    jQuery('#edit-field-service-content-und-0-remove-button').show();
+                    jQuery('#field-service-content-add-more-wrapper').hide();
+                    jQuery('#content-enable-button').show();
                     jQuery('#edit-field-service-content').show();
                     jQuery('#edit-field-service-frequency-date').show();
                     fixedDate = "+1M";
@@ -123,9 +134,16 @@ var fixedDate = '';
             });
 
             if (firstTime == 1) {
+                jQuery('#field-service-content-add-more-wrapper').hide();
+
+                jQuery('#edit-field-service-frequency-und-1').prop('checked', true);
+
+                jQuery('#edit-field-service-frequency').hide();
                 jQuery('#reset-date-button').hide();
-                $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val('').removeAttr('disabled');
-                $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('').removeAttr('disabled');
+                if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode == false) {
+                    $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val('').removeAttr('disabled');
+                    $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('').removeAttr('disabled');
+                }
                 firstTime++;
             }
 
@@ -182,14 +200,13 @@ var fixedDate = '';
                     diff = Math.round(Math.abs((end.getTime() - start.getTime()) / (oneDay)));
                 }
                 jQuery('#edit-field-service-content-add-more-number').val(diff);
-
-
             }
 
             if (genrateFlag == 1) {
                 jQuery(document).on("click", "#content-enable-button", function (event) {
                     event.preventDefault();
                     if (genrateFlag == 1) {
+                        var hideContent = 1;
                         jQuery('#reset-date-button').show();
                         jQuery('#content-enable-button').hide();
                         jQuery('#edit-field-service-content-und-add-more').mousedown();
@@ -202,9 +219,6 @@ var fixedDate = '';
                     }
                 });
             }
-
-
-
 
             function set_dates() {
                 var today = new Date();
@@ -229,13 +243,33 @@ var fixedDate = '';
                             mm = '0' + mm
                         }
                         tomorrow = dd + '/' + mm + '/' + yyyy;
-                        jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').val(tomorrow).addClass('itg-date-disabled');
+                        // jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').val(tomorrow).addClass('itg-disabled');
+                        jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').addClass('itg-disabled');
                         i++;
                         start_date++;
                     }
                 }
 
+            }
 
+            if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
+                var content_edit_mode = Drupal.settings.itg_mobile_services.settings.service_content_edit_mode;
+                jQuery('#field-service-content-add-more-wrapper').show();
+                jQuery('#edit-field-service-frequency').show();
+            }
+
+            function custom_today_date() {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
+                return today = dd + '/' + mm + '/' + yyyy;
             }
 
         }
@@ -247,6 +281,9 @@ var fixedDate = '';
 function days_in_month(month, year) {
     return new Date(year, month, 0).getDate();
 }
+
+
+
 
 jQuery('document').ready(function () {
     var maxLen = 0
