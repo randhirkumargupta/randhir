@@ -227,7 +227,7 @@
                     if (!empty($facebook_narrative)):
                       ?>
                       <div class="Facebook-narretive content-box">
-                          <h2><?php print t('Facebook Narrative'); ?></h2>
+                          
                           <div class="content-details">
       <?php print render($content['field_story_facebook_narrative']); ?>
                       <?php print render($content['field_story_facebook_image']); ?>
@@ -238,12 +238,19 @@
                     $twitter = render($content['field_story_tweet']);
                     if (!empty($twitter)):
                       ?>
-                      <div class="Twitter content-box">
-                          <h2><?php print t('Twitter'); ?></h2>
+                      <div class="Twitter content-box">                          
                           <div class="content-details">
                       <?php print render($content['field_story_tweet']); ?>
                           </div>
                       </div>
+                  <?php $tweet_img = render($content['field_story_tweet_image']); ?>
+                  <?php if(!empty($tweet_img)): ?>
+                  <div class="Twitter content-box">                          
+                          <div class="content-details">
+                      <?php print render($content['field_story_tweet_image']); ?>
+                          </div>
+                      </div>
+                  <?php endif; ?>
     <?php endif; ?>
 
                     <div class="content-node-view">
