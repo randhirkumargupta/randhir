@@ -1371,7 +1371,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     margin: 0 20px;
     cursor: pointer;
     border-bottom: 2px solid transparent;
-    &:hover{
+    &:hover, &.active{
       border-bottom-color: #d00b26; 
     }
   }
@@ -1967,7 +1967,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     content: "*";
   }
 }
-.block-itg-event-backend{
+#block-itg-event-backend-event-backend-tab-form-block{
   .block-itg-story-list{
     overflow: hidden;
     background-color: #fff;
@@ -2186,7 +2186,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       margin: 0;
       padding: 0;
       .form-item{
-        display: block;
+        @extend .db;
         margin: 0;
         &.form-type-radio{
           .form-radio{
@@ -2195,12 +2195,24 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           }
         }
       }
+      &.form-type-textfield{
+        margin: 10px 0;
+      }
     }
     .form-type-checkboxes{
       > label{width: 200px; @extend .dib; @extend .vmid;}
+      div.rating{
+        @extend .fleft; 
+        @extend .full;
+        padding: 0;
+        margin: 10px 0;
+        .form-type-checkbox{
+          @extend .pos-rel; @extend .dib;
+        }
+      }
     }
-    .rating{
-      @extend .dib; @extend .vmid;
+    div.rating{
+      @extend .db; @extend .vmid;
       .form-type-checkbox{
         @extend .pos-rel; @extend .dib;
         &:before{
