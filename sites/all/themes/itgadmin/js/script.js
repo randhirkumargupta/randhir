@@ -533,5 +533,10 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   $('body').find('.image-preview').parent().addClass('has-image-preview');
   
+  // jQuery show n hide code for sidebar second 
+  $('body').on('click', '.sidebar-trigger', function(){
+    $(this).parent().toggleClass('active');
+  });
+  
 };
 })(jQuery);
