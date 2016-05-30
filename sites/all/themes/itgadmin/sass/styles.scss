@@ -3221,3 +3221,34 @@ div.node{
     }
   }
 }
+[id*="field-newsl-add-news-values"]{
+  fieldset{
+    border: none;
+    @extend .dib;
+    @extend .full;
+    legend{
+      @extend .fleft;
+      padding: 0 20px 0 30px;
+      width: 250px;
+      .fieldset-title{
+        color: #2f2f2f;
+      }
+      &+.fieldset-wrapper{
+        @extend .of-hide;
+        border: 1px solid #d9d9d9;
+        margin-bottom: 10px;
+        > .form-submit{
+          @extend .btn-cancel;
+          @extend .btn;
+          margin: 0 0 30px 250px;
+        }
+      }
+    }
+  }
+  &+.clearfix{
+    padding-left: 250px;
+  }
+  .field-name-field-news-thumbnail{
+    @extend .Browse-upload;
+  }
+}
