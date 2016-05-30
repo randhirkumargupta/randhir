@@ -441,6 +441,19 @@ textarea{
 .form-required, span.error, .messages--error, .messages.error{
   color: red;
 }
+.messages--error{
+  .messages__list{padding-left: 15px;}
+}
+.region-help{
+  ul{
+    padding-left: 15px;
+    padding-top: 10px;
+  }
+  .more-help-link{
+    text-align: right;
+  }
+  a{color: #1fb5ad;}
+}
 span.error{
   @extend .db;
 }
@@ -3165,6 +3178,45 @@ div.node{
         @extend .add-more;
         padding: 4px 12px 6px 12px;
         vertical-align: middle;
+      }
+    }
+  }
+}
+[id*="taxonomy-csv-import-form"]{
+  @extend .node-form;
+  .vertical-tabs-list{@extend .hide;}
+  .form-type-file{
+    .description{
+      @extend .desc-popup;
+      left: 275px;
+      min-width: 405px;
+    }
+    .form-file:hover + .description{
+      display: block;
+    }
+  }
+  .term-main-wrap{
+    a{color: #1fb5ad;}
+    @extend .mb-10;
+  }
+  .form-submit{
+    @extend .btn-save;
+  }
+}
+[id*="field-astro-zodiac-values"]{
+  > tbody > tr{
+    @extend .db;
+    > td{
+      @extend .fleft;
+      padding: 0;
+      @extend .mb-10;
+      .itg-astro-image{
+        padding: 30px 30px 0 250px;
+        img{
+          max-width: 100px;
+          height: auto;
+          vertical-align: top;
+        }
       }
     }
   }
