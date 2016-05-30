@@ -294,15 +294,42 @@ input[type="text"], select, input[type="password"]{
   .form-type-checkbox, .form-type-radio{
     @extend .mb-5;
   }
-  .form-type-textfield{
-    @extend .mb-10;
-    label{width: 200px; @extend .dib; @extend .vmid;}
-  }
-  .form-type-checkboxes{
-    > label{width: 200px; @extend .dib; @extend .vmid;}
-  }
-  .rating{
-      @extend .dib; @extend .vmid;
+  .answer-heading{
+      font-size: 14px;
+      font-weight: 600;
+      padding-bottom: 5px;
+    }
+    > .form-item{
+      margin: 0;
+      padding: 0;
+      .form-item{
+        @extend .db;
+        margin: 0;
+        &.form-type-radio{
+          .form-radio{
+            @extend .fleft;
+            margin: 1px 5px 0 0;
+          }
+        }
+      }
+      &.form-type-textfield{
+        margin: 10px 0;
+      }
+    }
+    .form-type-checkboxes{
+      > label{width: 200px; @extend .dib; @extend .vmid;}
+      div.rating{
+        @extend .fleft; 
+        @extend .full;
+        padding: 0;
+        margin: 10px 0;
+        .form-type-checkbox{
+          @extend .pos-rel; @extend .dib;
+        }
+      }
+    }
+    div.rating{
+      @extend .db; @extend .vmid;
       .form-type-checkbox{
         @extend .pos-rel; @extend .dib;
         &:before{
@@ -317,6 +344,63 @@ input[type="text"], select, input[type="password"]{
       }
     }
 }
+
+.answer-container{
+    padding: 10px 0;
+    @extend .dib;
+    @extend .full;
+    .answer-heading{
+      font-size: 14px;
+      font-weight: 600;
+      padding-bottom: 5px;
+    }
+    > .form-item{
+      margin: 0;
+      padding: 0;
+      .form-item{
+        @extend .db;
+        margin: 0;
+        &.form-type-radio{
+          .form-radio{
+            @extend .fleft;
+            margin: 1px 5px 0 0;
+          }
+        }
+      }
+      &.form-type-textfield{
+        margin: 10px 0;
+      }
+    }
+    .form-type-checkboxes{
+      > label{width: 200px; @extend .dib; @extend .vmid;}
+      div.rating{
+        @extend .fleft; 
+        @extend .full;
+        padding: 0;
+        margin: 10px 0;
+        .form-type-checkbox{
+          @extend .pos-rel; @extend .dib;
+        }
+      }
+    }
+    div.rating{
+      @extend .db; @extend .vmid;
+      .form-type-checkbox{
+        @extend .pos-rel; @extend .dib;
+        &:before{
+          content: '\f005'; color: #ddd; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;
+        }
+        &.rating-hover:before, &.rated-div:before{
+          color: #f6b800;
+        }
+        input[type="checkbox"]{
+          width: 18px; height: 18px; @extend .fleft; opacity: 0; @extend .pos-rel; z-index: 10; cursor: pointer;
+        }
+      }
+    }
+  }
+
+
 
 .add-more{
     background-color: #1fb5ad;

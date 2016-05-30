@@ -129,9 +129,9 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   // scroll-to-top animate
   $(window).scroll(function() {
       if ($(this).scrollTop() > 90) {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics').addClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block').addClass('fixed');
       } else {
-          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics').removeClass('fixed');
+          $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block').removeClass('fixed');
       }
     });
   $('body').on('click', '.target-link', function(e) {
@@ -533,6 +533,7 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
   
   $('body').find('.image-preview').parent().addClass('has-image-preview');
   
+<<<<<<< HEAD
   // Reset form Data
   function itg_clear_form_data(class_name) {
     jQuery("." + class_name).find(':input').each(function () {
@@ -566,6 +567,12 @@ Drupal.behaviors.rubik.attach = function(context, settings) {
     } 
   });
   // reset form data end.
+=======
+  // jQuery show n hide code for sidebar second 
+  $('body').on('click', '.sidebar-trigger', function(){
+    $(this).parent().toggleClass('active');
+  });
+>>>>>>> fb6331e2b948297d1856a68cff294949ba9b5e2d
   
 };
 })(jQuery);
