@@ -1,32 +1,34 @@
 [
     {
-        "name": "ricardoper/twitteroauth",
-        "version": "v2.1.6",
-        "version_normalized": "2.1.6.0",
+        "name": "abraham/twitteroauth",
+        "version": "0.6.4",
+        "version_normalized": "0.6.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/ricardoper/TwitterOAuth.git",
-            "reference": "cbdd43db781f30a4f291b15b90ab08a30108d5d6"
+            "url": "https://github.com/abraham/twitteroauth.git",
+            "reference": "f7dec715c6e79e6085470b8b5d4dc2727afc5186"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/cbdd43db781f30a4f291b15b90ab08a30108d5d6",
-            "reference": "cbdd43db781f30a4f291b15b90ab08a30108d5d6",
+            "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/f7dec715c6e79e6085470b8b5d4dc2727afc5186",
+            "reference": "f7dec715c6e79e6085470b8b5d4dc2727afc5186",
             "shasum": ""
         },
         "require": {
             "ext-curl": "*",
-            "ext-json": "*",
-            "lib-curl": "*",
-            "lib-openssl": "*",
-            "php": ">=5.3"
+            "php": ">=5.5.0"
         },
-        "time": "2016-05-27 19:06:33",
+        "require-dev": {
+            "phpmd/phpmd": "2.3.*",
+            "phpunit/phpunit": "4.8.*",
+            "squizlabs/php_codesniffer": "2.3.*"
+        },
+        "time": "2016-04-20 23:23:26",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "TwitterOAuth\\": "src/"
+                "Abraham\\TwitterOAuth\\": "src"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -35,17 +37,21 @@
         ],
         "authors": [
             {
-                "name": "Ricardo Pereira",
-                "email": "github@ricardopereira.es",
-                "homepage": "http://ricardopereira.es"
+                "name": "Abraham Williams",
+                "email": "abraham@abrah.am",
+                "homepage": "https://abrah.am",
+                "role": "Developer"
             }
         ],
-        "description": "PHP library to communicate with Twitter OAuth API version 1.1",
-        "homepage": "https://github.com/ricardoper",
+        "description": "The most popular PHP library for use with the Twitter OAuth REST API.",
+        "homepage": "https://twitteroauth.com",
         "keywords": [
-            "API v1.1",
+            "Twitter API",
+            "Twitter oAuth",
+            "api",
             "oauth",
-            "php",
+            "rest",
+            "social",
             "twitter"
         ]
     }

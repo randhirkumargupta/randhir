@@ -4,27 +4,27 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6dac4af76a216e04f38917a33981dd0a
+class ComposerStaticInitab444fc959d89d0a6e81fd878b3465ca
 {
     public static $prefixLengthsPsr4 = array (
-        'T' => 
+        'A' => 
         array (
-            'TwitterOAuth\\' => 13,
+            'Abraham\\TwitterOAuth\\' => 21,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'TwitterOAuth\\' => 
+        'Abraham\\TwitterOAuth\\' => 
         array (
-            0 => __DIR__ . '/..' . '/ricardoper/twitteroauth/src',
+            0 => __DIR__ . '/..' . '/abraham/twitteroauth/src',
         ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6dac4af76a216e04f38917a33981dd0a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6dac4af76a216e04f38917a33981dd0a::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitab444fc959d89d0a6e81fd878b3465ca::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitab444fc959d89d0a6e81fd878b3465ca::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }
