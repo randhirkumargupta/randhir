@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * ITG Astro module file has custom settings and logic about astro modules. 
+ */
 
 /**
  * Get file name from fid

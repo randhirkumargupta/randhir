@@ -148,7 +148,7 @@
       $('input[name="itg_smi[facebook]"]').click(function () {
         if (!$(this).is(':checked')) {
           FormValidation.clear_form_elements('social-fb-block');
-          jQuery('.form-item-itg-fb-img .button-remove').mousedown();            
+          jQuery('.form-item-itg-fb-img .ajax-processed').mousedown();            
         } 
       });
       
@@ -156,7 +156,7 @@
       $('input[name="itg_smi[twitter]"]').click(function () {
         if (!$(this).is(':checked')) {
           FormValidation.clear_form_elements('social-twitter-block');
-          jQuery('.form-item-itg-twitter-img .button-remove').mousedown();            
+          jQuery('.form-item-itg-twitter-img .ajax-processed').mousedown();            
         } 
       });
       // clear form end here.
