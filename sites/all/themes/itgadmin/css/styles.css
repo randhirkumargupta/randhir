@@ -348,6 +348,10 @@ img {
   pointer-events: none;
 }
 
+.itg-disabled-radio {
+  pointer-events: none;
+}
+
 .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
@@ -2990,11 +2994,18 @@ div.node #comments h2 {
   padding: 0 50px;
 }
 .photogallery-list.flexslider .slides li {
-  text-align: center;
+  min-height: 450px;
+  background-color: #f0f0f0;
 }
 .photogallery-list.flexslider .slides img {
   max-height: 450px;
   vertical-align: top;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
 }
 .photogallery-list.flexslider .flex-nav-prev, .photogallery-list.flexslider .flex-nav-next {
   position: absolute;
