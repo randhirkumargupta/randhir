@@ -40,7 +40,7 @@ img {
   margin-left: 10px;
 }
 
-.mb-10, #page-title, [id*="field-poll-answer-values"] tbody tr td {
+.mb-10, #page-title, [id*="field-poll-answer-values"] tbody tr td, [id*="taxonomy-csv-import-form"] .term-main-wrap, [id*="field-astro-zodiac-values"] > tbody > tr > td {
   margin-bottom: 10px;
 }
 
@@ -92,11 +92,11 @@ img {
   text-decoration: none;
 }
 
-.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
+.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, [id*="taxonomy-csv-import-form"] .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
 .field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, .node-category-form #edit-term-state-wrap legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .page-admin-structure-taxonomy-tags form .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links, .grippie {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links, [id*="taxonomy-csv-import-form"] .vertical-tabs-list, .grippie {
   display: none;
 }
 
@@ -113,11 +113,11 @@ img {
 [id*="field-poll-answer-values"] tbody,
 [id*="field-story-template-buzz-values"] tbody,
 [id*="field-erf-registration-fee-values"] tbody,
-[id*="field-mega-review-review-values"] tbody, span.error, .dashboard-tab li a span, .node-category-form fieldset#edit-relations legend, [id*="itg-survey-survey-form"] .question-container#question-container-0, [id*="itg-quiz-quiz-form"] .question-container#question-container-0, [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item, [id*="itg-survey-survey-form"] .answer-container div.rating, [id*="itg-quiz-quiz-form"] .answer-container div.rating, .photogallery-list.flexslider .flex-nav-prev a, .photogallery-list.flexslider .flex-nav-next a, [id*="field-story-template-buzz-values"] tbody tr, [id*="field-story-template-buzz-values"] tbody tr td {
+[id*="field-mega-review-review-values"] tbody, span.error, .dashboard-tab li a span, .node-category-form fieldset#edit-relations legend, [id*="itg-survey-survey-form"] .question-container#question-container-0, [id*="itg-quiz-quiz-form"] .question-container#question-container-0, [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item, [id*="itg-survey-survey-form"] .answer-container div.rating, [id*="itg-quiz-quiz-form"] .answer-container div.rating, .photogallery-list.flexslider .flex-nav-prev a, .photogallery-list.flexslider .flex-nav-next a, [id*="field-story-template-buzz-values"] tbody tr, [id*="field-story-template-buzz-values"] tbody tr td, [id*="field-astro-zodiac-values"] > tbody > tr {
   display: block;
 }
 
-.dib, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, .form-submit[value="Save as Draft"],
+.dib, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, [id*="taxonomy-csv-import-form"] .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -200,7 +200,7 @@ img {
   vertical-align: middle;
 }
 
-.vtop, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, .form-submit[value="Save as Draft"],
+.vtop, .btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, [id*="taxonomy-csv-import-form"] .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -290,7 +290,7 @@ img {
 [id*="field-mega-review-review-values"] thead, .credit-to-all > div, [id*="field-gallery-image-values"] thead, [id*="field-gallery-image-values"] tbody, [id*="field-gallery-image-values"] tbody tr, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), #block-menu-menu-admin-left-menu > .menu > li, .header__secondary-menu ul li, .dashboard-tab li, .node-story-form #Templates .form-field-type-text tbody, .node-story-form #Templates .form-field-type-text thead, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), #block-itg-event-backend-event-backend-tab-form-block .block-itg-story-list a, [id*="field-event-media-values"] > tbody > tr, [id*="field-event-media-values"] > tbody > tr > td, [class*="node-type-"] .node .field .field-label, .node-preview .field .field-label, .ugc-action strong, .node-category-form #edit-term-state-wrap .itg-term-state > label, [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox input[type="checkbox"], [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox input[type="checkbox"], [id*="field-program-schedule-values"] > tbody > tr, [id*="field-program-schedule-values"] > tbody > tr > td, [id*="views-exposed-form-syndication-feed-generator-page"] .views-submit-button .form-type-select, .manage_recipe_view_menu,
 .manage_cooking_tips_view_menu, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper legend,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper legend, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td, [id*="field-poll-answer-values"] tbody tr, [id*="field-poll-answer-values"] tbody tr td, .view-popup .field .field-label, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-type, [id*="field-survey-add-questions-values"] > tbody table thead, [id*="field-survey-add-questions-values"] > tbody table tbody {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td, [id*="field-poll-answer-values"] tbody tr, [id*="field-poll-answer-values"] tbody tr td, .view-popup .field .field-label, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-type, [id*="field-survey-add-questions-values"] > tbody table thead, [id*="field-survey-add-questions-values"] > tbody table tbody, [id*="field-astro-zodiac-values"] > tbody > tr > td {
   float: left;
 }
 
@@ -352,7 +352,7 @@ img {
   pointer-events: none;
 }
 
-.btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, .form-submit[value="Save as Draft"],
+.btn, .form-submit[value="Preview"], .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, [id*="taxonomy-csv-import-form"] .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -401,7 +401,7 @@ img {
   transition: background-color 300ms;
   text-decoration: none;
 }
-.btn:hover, .form-submit[value="Preview"]:hover, .btn-save:hover, .node-ugc-form .form-actions .form-submit:hover, .ugc-action .approve-ugc:hover, [id*="itg-survey-survey-form"] .question-container .form-submit:hover, [id*="itg-quiz-quiz-form"] .question-container .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
+.btn:hover, .form-submit[value="Preview"]:hover, .btn-save:hover, .node-ugc-form .form-actions .form-submit:hover, .ugc-action .approve-ugc:hover, [id*="itg-survey-survey-form"] .question-container .form-submit:hover, [id*="itg-quiz-quiz-form"] .question-container .form-submit:hover, [id*="taxonomy-csv-import-form"] .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
 .form-submit[value="Save"]:hover,
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
@@ -440,7 +440,7 @@ img {
   color: #fff;
 }
 
-.btn-save-draft, .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, .form-submit[value="Save as Draft"],
+.btn-save-draft, .btn-save, .node-ugc-form .form-actions .form-submit, .ugc-action .approve-ugc, [id*="itg-survey-survey-form"] .question-container .form-submit, [id*="itg-quiz-quiz-form"] .question-container .form-submit, [id*="taxonomy-csv-import-form"] .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -451,7 +451,7 @@ img {
   background-color: #3295a7;
   border: 1px solid #227d8d;
 }
-.btn-save-draft:hover, .btn-save:hover, .node-ugc-form .form-actions .form-submit:hover, .ugc-action .approve-ugc:hover, [id*="itg-survey-survey-form"] .question-container .form-submit:hover, [id*="itg-quiz-quiz-form"] .question-container .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
+.btn-save-draft:hover, .btn-save:hover, .node-ugc-form .form-actions .form-submit:hover, .ugc-action .approve-ugc:hover, [id*="itg-survey-survey-form"] .question-container .form-submit:hover, [id*="itg-quiz-quiz-form"] .question-container .form-submit:hover, [id*="taxonomy-csv-import-form"] .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
 .form-submit[value="Save"]:hover,
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
@@ -621,7 +621,7 @@ a.button {
   cursor: pointer;
 }
 
-.desc-popup, .form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description, .form-type-textfield .form-text + span.error + .autocomplete + div.description, .form-type-textfield .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description, .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description, .form-type-checkboxes .form-checkboxes + div.description, .form-item-path-pathauto div.description, .form-type-radios div.description, .form-type-textarea div.description, .form-type-managed-file .form-managed-file + div.description, .img-crt + .pre-desc, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, .node-story-form #Templates .form-field-type-text .form-item > table + .description, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description {
+.desc-popup, .form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description, .form-type-textfield .form-text + span.error + .autocomplete + div.description, .form-type-textfield .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description, .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description, .form-type-checkboxes .form-checkboxes + div.description, .form-item-path-pathauto div.description, .form-type-radios div.description, .form-type-textarea div.description, .form-type-managed-file .form-managed-file + div.description, .img-crt + .pre-desc, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, .node-story-form #Templates .form-field-type-text .form-item > table + .description, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description, [id*="taxonomy-csv-import-form"] .form-type-file .description {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   color: #8d8d8d;
@@ -634,7 +634,7 @@ a.button {
   background-color: #fff;
   z-index: 9999;
 }
-.desc-popup:before, .form-type-textfield .form-text + div.description:before, .form-type-textfield .form-text + span.error + div.description:before, .form-type-textfield .form-text + span.error + .autocomplete + div.description:before, .form-type-textfield .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:before, .form-type-select .form-select + div.description:before, .form-type-select .form-select + span.error + div.description:before, .form-type-checkboxes .form-checkboxes + div.description:before, .form-item-path-pathauto div.description:before, .form-type-radios div.description:before, .form-type-textarea div.description:before, .form-type-managed-file .form-managed-file + div.description:before, .img-crt + .pre-desc:before, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, .node-story-form #Templates .form-field-type-text .form-item > table + .description:before, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description:before {
+.desc-popup:before, .form-type-textfield .form-text + div.description:before, .form-type-textfield .form-text + span.error + div.description:before, .form-type-textfield .form-text + span.error + .autocomplete + div.description:before, .form-type-textfield .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:before, .form-type-select .form-select + div.description:before, .form-type-select .form-select + span.error + div.description:before, .form-type-checkboxes .form-checkboxes + div.description:before, .form-item-path-pathauto div.description:before, .form-type-radios div.description:before, .form-type-textarea div.description:before, .form-type-managed-file .form-managed-file + div.description:before, .img-crt + .pre-desc:before, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, .node-story-form #Templates .form-field-type-text .form-item > table + .description:before, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description:before, [id*="taxonomy-csv-import-form"] .form-type-file .description:before {
   border-width: 7px 13px 7px 7px;
   border-style: solid;
   border-color: transparent #d9d9d9 transparent transparent;
@@ -647,7 +647,7 @@ a.button {
   bottom: 0;
   margin: auto;
 }
-.desc-popup:after, .form-type-textfield .form-text + div.description:after, .form-type-textfield .form-text + span.error + div.description:after, .form-type-textfield .form-text + span.error + .autocomplete + div.description:after, .form-type-textfield .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:after, .form-type-select .form-select + div.description:after, .form-type-select .form-select + span.error + div.description:after, .form-type-checkboxes .form-checkboxes + div.description:after, .form-item-path-pathauto div.description:after, .form-type-radios div.description:after, .form-type-textarea div.description:after, .form-type-managed-file .form-managed-file + div.description:after, .img-crt + .pre-desc:after, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, .node-story-form #Templates .form-field-type-text .form-item > table + .description:after, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description:after {
+.desc-popup:after, .form-type-textfield .form-text + div.description:after, .form-type-textfield .form-text + span.error + div.description:after, .form-type-textfield .form-text + span.error + .autocomplete + div.description:after, .form-type-textfield .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:after, .form-type-select .form-select + div.description:after, .form-type-select .form-select + span.error + div.description:after, .form-type-checkboxes .form-checkboxes + div.description:after, .form-item-path-pathauto div.description:after, .form-type-radios div.description:after, .form-type-textarea div.description:after, .form-type-managed-file .form-managed-file + div.description:after, .img-crt + .pre-desc:after, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, .node-story-form #Templates .form-field-type-text .form-item > table + .description:after, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description:after, [id*="taxonomy-csv-import-form"] .form-type-file .description:after {
   border-width: 7px 13px 7px 7px;
   border-style: solid;
   border-color: transparent #fff transparent transparent;
@@ -866,6 +866,21 @@ textarea {
   color: red;
 }
 
+.messages--error .messages__list {
+  padding-left: 15px;
+}
+
+.region-help ul {
+  padding-left: 15px;
+  padding-top: 10px;
+}
+.region-help .more-help-link {
+  text-align: right;
+}
+.region-help a {
+  color: #1fb5ad;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -950,7 +965,7 @@ input.password-confirm, input.password-field {
   margin: 0;
 }
 
-.node-form h2, .page-admin-structure-taxonomy-tags form h2, .confirmation h2, div.node #comments .comment-form h2, #comments .comment-form h2 {
+.node-form h2, .page-admin-structure-taxonomy-tags form h2, .confirmation h2, div.node #comments .comment-form h2, #comments .comment-form h2, [id*="taxonomy-csv-import-form"] h2 {
   background-color: #fefafb;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
@@ -959,18 +974,18 @@ input.password-confirm, input.password-field {
   font-size: 18px;
   margin: 15px 0;
 }
-.node-form input[type="text"], .page-admin-structure-taxonomy-tags form input[type="text"], .confirmation input[type="text"], #comments .comment-form input[type="text"], .node-form select, .page-admin-structure-taxonomy-tags form select, .confirmation select, div.node #comments .comment-form select, #comments .comment-form select, .node-form .form-textarea-wrapper textarea, .page-admin-structure-taxonomy-tags form .form-textarea-wrapper textarea, .confirmation .form-textarea-wrapper textarea, #comments .comment-form .form-textarea-wrapper textarea {
+.node-form input[type="text"], .page-admin-structure-taxonomy-tags form input[type="text"], .confirmation input[type="text"], #comments .comment-form input[type="text"], [id*="taxonomy-csv-import-form"] input[type="text"], .node-form select, .page-admin-structure-taxonomy-tags form select, .confirmation select, div.node #comments .comment-form select, #comments .comment-form select, [id*="taxonomy-csv-import-form"] select, .node-form .form-textarea-wrapper textarea, .page-admin-structure-taxonomy-tags form .form-textarea-wrapper textarea, .confirmation .form-textarea-wrapper textarea, #comments .comment-form .form-textarea-wrapper textarea, [id*="taxonomy-csv-import-form"] .form-textarea-wrapper textarea {
   width: 100%;
   max-width: 332px;
 }
-.node-form .form-actions, .page-admin-structure-taxonomy-tags form .form-actions, .confirmation .form-actions, div.node #comments .comment-form .form-actions, #comments .comment-form .form-actions {
+.node-form .form-actions, .page-admin-structure-taxonomy-tags form .form-actions, .confirmation .form-actions, div.node #comments .comment-form .form-actions, #comments .comment-form .form-actions, [id*="taxonomy-csv-import-form"] .form-actions {
   background-color: #fefafb;
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #d9d9d9;
   margin: 15px 0;
   padding: 15px 30px;
 }
-.node-form .form-radios + div.description + span.error, .page-admin-structure-taxonomy-tags form .form-radios + div.description + span.error, .confirmation .form-radios + div.description + span.error, #comments .comment-form .form-radios + div.description + span.error {
+.node-form .form-radios + div.description + span.error, .page-admin-structure-taxonomy-tags form .form-radios + div.description + span.error, .confirmation .form-radios + div.description + span.error, #comments .comment-form .form-radios + div.description + span.error, [id*="taxonomy-csv-import-form"] .form-radios + div.description + span.error {
   padding-left: 220px;
 }
 
@@ -2766,11 +2781,11 @@ fieldset#edit-select .form-submit {
   display: block;
 }
 
-.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
+.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, [id*="taxonomy-csv-import-form"] .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
 .field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, .node-category-form #edit-term-state-wrap legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .page-admin-structure-taxonomy-tags form .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links, [id*="taxonomy-csv-import-form"] .vertical-tabs-list {
   display: none;
 }
 
@@ -3231,4 +3246,27 @@ div.node #comments h2 {
 .region-sidebar-second .block #show-content-count .button {
   padding: 4px 12px 6px 12px;
   vertical-align: middle;
+}
+
+[id*="taxonomy-csv-import-form"] .form-type-file .description {
+  left: 275px;
+  min-width: 405px;
+}
+[id*="taxonomy-csv-import-form"] .form-type-file .form-file:hover + .description {
+  display: block;
+}
+[id*="taxonomy-csv-import-form"] .term-main-wrap a {
+  color: #1fb5ad;
+}
+
+[id*="field-astro-zodiac-values"] > tbody > tr > td {
+  padding: 0;
+}
+[id*="field-astro-zodiac-values"] > tbody > tr > td .itg-astro-image {
+  padding: 30px 30px 0 250px;
+}
+[id*="field-astro-zodiac-values"] > tbody > tr > td .itg-astro-image img {
+  max-width: 100px;
+  height: auto;
+  vertical-align: top;
 }
