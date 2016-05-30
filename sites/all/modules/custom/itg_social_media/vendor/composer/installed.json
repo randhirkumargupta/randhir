@@ -1,17 +1,17 @@
 [
     {
         "name": "ricardoper/twitteroauth",
-        "version": "v2.1.5",
-        "version_normalized": "2.1.5.0",
+        "version": "v2.1.6",
+        "version_normalized": "2.1.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/ricardoper/TwitterOAuth.git",
-            "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4"
+            "reference": "cbdd43db781f30a4f291b15b90ab08a30108d5d6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/98cc0cbc58dc662c06a951456967ae0602fd3af4",
-            "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4",
+            "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/cbdd43db781f30a4f291b15b90ab08a30108d5d6",
+            "reference": "cbdd43db781f30a4f291b15b90ab08a30108d5d6",
             "shasum": ""
         },
         "require": {
@@ -21,7 +21,7 @@
             "lib-openssl": "*",
             "php": ">=5.3"
         },
-        "time": "2016-03-30 12:11:38",
+        "time": "2016-05-27 19:06:33",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
