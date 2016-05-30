@@ -77,6 +77,25 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
       '#value' => t('Cancel'),
     );
     
+    
+    
+    
+    //Unset N/A option from frequency and Newsletter Content
+    unset($form['field_newsl_frequency']['und']['#options']['_none']);
+    unset($form['field_newsl_newsletter_content']['und']['#options']['_none']);
+    unset($form['field_newsl_time']['und']['#options']['_none']);
+    unset($form['field_newsl_time_period']['und']['#options']['_none']);
+    unset($form['field_newsl_day']['und']['#options']['_none']);
+    unset($form['field_newsl_date']['und']['#options']['_none']);
+    
+    //Add required field icon(*) for above fields
+    $form['field_newsl_frequency']['und']['#title'] = 'Frequency <span class="form-required" title="This field is required.">*</span>';
+    $form['field_newsl_newsletter_content']['und']['#title'] = 'Newsletter Content <span class="form-required" title="This field is required.">*</span>';
+    $form['field_newsl_time']['und']['#title'] = 'Time <span class="form-required" title="This field is required.">*</span>';
+    $form['field_newsl_time_period']['und']['#title'] = 'Time Period <span class="form-required" title="This field is required.">*</span>';
+    $form['field_newsl_day']['und']['#title'] = 'Day <span class="form-required" title="This field is required.">*</span>';
+    $form['field_newsl_date']['und']['#title'] = 'Date <span class="form-required" title="This field is required.">*</span>';
+    
     //Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
     $form['actions']['submit']['#submit'][] ='itg_newsletter_submit_handler_for_redirect';
     
@@ -117,13 +136,13 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
 function itg_newsletter_form_after_build($form, &$form_state){
   global $user, $base_url;
   
-  //print_r($form); 
-  
+  //Hide default lavel and add dynamic label
+  $form['field_newsl_add_news'][LANGUAGE_NONE]['#title'] = '';
   for($i = 0; $i <= $form['field_newsl_add_news']['und']['#max_delta']; $i++) {
     $count = $i+1;
     $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News ').$count;  
   }
-  
+ 
   //Extract type of node
   if(arg(0) == 'node'){
     if(arg(1) == 'add'){
@@ -147,13 +166,17 @@ function itg_newsletter_form_after_build($form, &$form_state){
   
   //Add JS for itg_newsletter
    drupal_add_js(drupal_get_path('module', 'itg_newsletter') . '/js/itg_newsletter.js', array('weight' => 1));
-    
+ 
+  //Add JS for in-line validation
+  $form['#attached']['js'] = array(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
+  
+  //Unset SEF URL field
   $form['path']['#access'] = FALSE;
   
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
-   //$form['#validate'][] = 'itg_newsletter_custom_validate';  
+   
   return $form;
 }
 
