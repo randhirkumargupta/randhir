@@ -109,6 +109,12 @@ img{
   opacity: 0.8;
   pointer-events: none;
 }
+.itg-disabled-radio{
+  pointer-events: none;
+}
+html.js fieldset.collapsed{
+  height: auto;
+}
 .btn{
   background-color: #33a26d;
   border: 1px solid #197e4e;
@@ -437,6 +443,19 @@ textarea{
 }
 .form-required, span.error, .messages--error, .messages.error{
   color: red;
+}
+.messages--error{
+  .messages__list{padding-left: 15px;}
+}
+.region-help{
+  ul{
+    padding-left: 15px;
+    padding-top: 10px;
+  }
+  .more-help-link{
+    text-align: right;
+  }
+  a{color: #1fb5ad;}
 }
 span.error{
   @extend .db;
@@ -1796,12 +1815,13 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-associate-sponsors-values"], 
 [id*="field-event-highlights-values"], 
 [id*="field-event-media-values"], 
-[id*="field-quiz-add-questions-values"]
-[id*="field-newsl-add-news-values"], 
+[id*="field-quiz-add-questions-values"],
+/*[id*="field-newsl-add-news-values"],*/ 
 [id*="field-task-task-idea-values"], 
 [id*="field-astro-numerology-values-values"], 
 [id*="field-astro-zodiac-values"], 
 [id*="field-poll-answer-values"], 
+[id*="field-syndication-rule-details-values"], 
 [id*="field-story-template-buzz-values"], 
 [id*="field-erf-registration-fee-values"], 
 [id*="field-mega-review-review-values"]{
@@ -2878,11 +2898,18 @@ div.node{
   .slides{
     li{
       @extend .pos-rel;
-      text-align: center;
+      min-height: 450px;
+      background-color: #f0f0f0;
     }
     img{
       max-height: 450px;
       vertical-align: top;
+      position: absolute;
+      top: 0; 
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
     }
   } 
   .flex-direction-nav{
@@ -2908,6 +2935,12 @@ div.node{
   .flex-nav-next{
     right: 0;
   }
+}
+.tabledrag-changed-warning, .warning.tabledrag-changed{
+  color: #f6b800;
+}
+.tabledrag-changed-warning{
+  margin: 10px 0;
 }
 
 /* UGC comment CSS */
@@ -3155,6 +3188,154 @@ div.node{
         @extend .add-more;
         padding: 4px 12px 6px 12px;
         vertical-align: middle;
+      }
+    }
+  }
+}
+[id*="taxonomy-csv-import-form"]{
+  @extend .node-form;
+  .vertical-tabs-list{@extend .hide;}
+  .form-type-file{
+    .description{
+      @extend .desc-popup;
+      left: 275px;
+      min-width: 405px;
+    }
+    .form-file:hover + .description{
+      display: block;
+    }
+  }
+  .term-main-wrap{
+    a{color: #1fb5ad;}
+    @extend .mb-10;
+  }
+  .form-submit{
+    @extend .btn-save;
+  }
+}
+[id*="field-astro-zodiac-values"]{
+  > tbody > tr{
+    @extend .db;
+    > td{
+      @extend .fleft;
+      padding: 0;
+      @extend .mb-10;
+      .itg-astro-image{
+        padding: 30px 30px 0 250px;
+        img{
+          max-width: 100px;
+          height: auto;
+          vertical-align: top;
+        }
+      }
+    }
+  }
+}
+[id*="field-newsl-add-news-values"]{
+  @extend .views-table;
+  th.field-label{@extend .hide;}
+  tbody tr td{
+    padding: 10px 10px 0 0; max-width: none; border: 1px solid #d9d9d9;
+    &.field-multiple-drag{
+      display: table-cell;
+      text-align: center;
+      vertical-align: top;
+      .tabledrag-handle{
+        display: block !important;
+        height: auto;
+        padding: 3px;
+        .handle{
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+  fieldset{
+    border: none;
+    @extend .dib;
+    @extend .full;
+    legend{
+      @extend .fleft;
+      padding: 0 20px 5px 30px;
+      width: 250px;
+      .fieldset-title{
+        padding-left: 25px;
+        color: #2f2f2f;
+        @extend .pos-rel;
+        &:before{
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 16px;
+          height: 16px;
+          font-family: 'FontAwesome';
+          content: "\f147";
+          font-size: 17px;
+        }
+      }
+      &+.fieldset-wrapper{
+        @extend .of-hide;
+        border: 1px solid #d9d9d9;
+        margin-bottom: 10px;
+        > .form-submit{
+          @extend .btn-cancel;
+          @extend .btn;
+          margin: 0 0 30px 250px;
+        }
+      }
+    }
+    &.collapsed{
+      legend .fieldset-title:before{
+        content: "\f196";
+      }
+    }
+  }
+  .field-name-field-news-thumbnail{
+    @extend .Browse-upload;
+  }
+  &+.clearfix{
+    .form-submit{
+      @extend .add-more;
+    }
+  }
+}
+.node-syndication_rule-form{
+  .field-name-field-syndication-set-day, 
+  .field-name-field-syndication-set-day-month{
+    /*@extend .hide;*/
+  }
+  tbody{
+    td{
+      @extend .fleft;
+      @extend .mb-10;
+      width: 615px;
+      .field-name-field-syndication-time{
+        @extend .fleft;
+        width: 70%;
+        .form-type-textfield{
+          margin: 0;
+          padding-right: 0;
+          .form-text{
+            @extend .fleft;
+            width: 170px;
+          }
+        }
+      }
+      .field-name-field-syndication-time-format{
+        @extend .fleft;
+        width: 30%;
+        .form-type-select{
+          margin: 0;
+          padding: 0 30px 0 0;
+          label{@extend .hide;}
+          .form-text{
+            @extend .fleft;
+            width: 90px;
+          }
+        }
+      }
+      > .form-submit, .ajax-new-content > .form-submit{
+        margin-top: 30px;
       }
     }
   }
