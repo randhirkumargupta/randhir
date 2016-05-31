@@ -112,6 +112,9 @@ img{
 .itg-disabled-radio{
   pointer-events: none;
 }
+html.js fieldset.collapsed{
+  height: auto;
+}
 .btn{
   background-color: #33a26d;
   border: 1px solid #197e4e;
@@ -1812,8 +1815,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-associate-sponsors-values"], 
 [id*="field-event-highlights-values"], 
 [id*="field-event-media-values"], 
-[id*="field-quiz-add-questions-values"]
-[id*="field-newsl-add-news-values"], 
+[id*="field-quiz-add-questions-values"],
+/*[id*="field-newsl-add-news-values"],*/ 
 [id*="field-task-task-idea-values"], 
 [id*="field-astro-numerology-values-values"], 
 [id*="field-astro-zodiac-values"], 
@@ -2933,6 +2936,12 @@ div.node{
     right: 0;
   }
 }
+.tabledrag-changed-warning, .warning.tabledrag-changed{
+  color: #f6b800;
+}
+.tabledrag-changed-warning{
+  margin: 10px 0;
+}
 
 /* UGC comment CSS */
 #comments{
@@ -3223,16 +3232,46 @@ div.node{
   }
 }
 [id*="field-newsl-add-news-values"]{
+  @extend .views-table;
+  th.field-label{@extend .hide;}
+  tbody tr td{
+    padding: 10px 10px 0 0; max-width: none; border: 1px solid #d9d9d9;
+    &.field-multiple-drag{
+      display: table-cell;
+      text-align: center;
+      vertical-align: top;
+      .tabledrag-handle{
+        display: block !important;
+        height: auto;
+        padding: 3px;
+        .handle{
+          margin: 0 auto;
+        }
+      }
+    }
+  }
   fieldset{
     border: none;
     @extend .dib;
     @extend .full;
     legend{
       @extend .fleft;
-      padding: 0 20px 0 30px;
+      padding: 0 20px 5px 30px;
       width: 250px;
       .fieldset-title{
+        padding-left: 25px;
         color: #2f2f2f;
+        @extend .pos-rel;
+        &:before{
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 16px;
+          height: 16px;
+          font-family: 'FontAwesome';
+          content: "\f147";
+          font-size: 17px;
+        }
       }
       &+.fieldset-wrapper{
         @extend .of-hide;
@@ -3245,12 +3284,19 @@ div.node{
         }
       }
     }
-  }
-  &+.clearfix{
-    padding-left: 250px;
+    &.collapsed{
+      legend .fieldset-title:before{
+        content: "\f196";
+      }
+    }
   }
   .field-name-field-news-thumbnail{
     @extend .Browse-upload;
+  }
+  &+.clearfix{
+    .form-submit{
+      @extend .add-more;
+    }
   }
 }
 .node-syndication_rule-form{
