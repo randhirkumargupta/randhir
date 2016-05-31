@@ -59,7 +59,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     $form['fb_wrap']['field_story_posted_by_facebook'] = array(
       '#type' => 'hidden',      
       '#maxlength' => 255,
-      '#default_value' => isset($node->field_story_posted_by_facebook['und'][0]['value']) ? $node->field_story_posted_by_facebook['und'][0]['value'] : $user->name,      
+      '#default_value' => $user->name,      
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
@@ -145,7 +145,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     $form['twit_wrap']['field_story_posted_by_twitter'] = array(
       '#type' => 'hidden',      
       '#maxlength' => 255,
-      '#default_value' => isset($node->field_story_posted_by_twitter['und'][0]['value']) ? $node->field_story_posted_by_twitter['und'][0]['value'] : $user->name,
+      '#default_value' => $user->name,
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
