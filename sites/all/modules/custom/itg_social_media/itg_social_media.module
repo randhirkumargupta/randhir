@@ -1,20 +1,17 @@
 <?php
-
 /**
  * @file
  *
  * Purpose: ITG social media integration module.
  */
-require 'vendor/autoload.php';
-use TwitterOAuth\Auth\SingleUserAuth;
-
-/**
- * Serializer Namespace
- */
-use TwitterOAuth\Serializer\ArraySerializer;
-
 // Load form.inc file
+
+require "vendor/autoload.php";
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
+
+
 
 /**
  * Implement hook_permissions()
@@ -50,26 +47,6 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
 }
 
 /**
- * Login function for twitter integration.
- */
-function itg_social_media_twitter_login() {
-  // Include common helper file to get constant values
-  module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
-  
-  $credentials = array(
-    'consumer_key' => CONSUMER_KEY,
-    'consumer_secret' => CONSUMER_SECRET,
-    'oauth_token' => OAUTH_TOKEN,
-    'oauth_token_secret' => OAUTH_TOKEN_SECRET,
-  );
-  $serializer = new ArraySerializer();
-
-  $auth = new SingleUserAuth($credentials, $serializer);
-  
-  return $auth;
-}
-
-/**
  * Implements hook_block_info()
  *
  * {@inheritdoc}
@@ -102,7 +79,7 @@ function itg_social_media_block_view($delta = '') {
 
       break;
   }
-
+  
   return $block;
 }
 
@@ -119,4 +96,115 @@ function itg_social_media_node_type($nid) {
   $itg_result = $itg_query->execute()->fetchField();
 
   return $itg_result;
+}
+
+
+/**
+ * Implements hook_form_submit()
+ *
+ * {@inheritdoc}
+ */
+function itg_social_media_form_submit($form, &$form_state) {  
+  $node = node_load($form_state['values']['nid']);
+
+  if ($form_state['values']['itg_fb_img'] != 0) {
+    // Load the file via file.fid.
+    $file = file_load($form_state['values']['itg_fb_img']);
+    // Change status to permanent.
+    $file->status = FILE_STATUS_PERMANENT;
+    // Save.
+    file_save($file);
+    // Record that the module (in this example, user module) is using the file. 
+    file_usage_add($file, 'user', 'user', 1);
+  }
+
+  // Change field value     
+  foreach ($form_state['values']['itg_smi'] as $value) {
+    if ($value != '0') {
+      $data[]['value'][$value] = $value;
+    }
+  }
+
+  // Social Media integration field
+  $node->field_story_social_media_integ['und'] = $data;
+
+  // Facebook narrative field
+  if ($form_state['values']['itg_facebook_narrative'] != '') {
+    $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
+  }
+  else {
+    unset($node->field_story_facebook_narrative['und']);
+  }
+
+  // Facebook Image field
+  if ($form_state['values']['itg_fb_img'] != 0) {
+    $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
+  }
+  else {
+    unset($node->field_story_facebook_image['und']);
+    $path = file_create_url($node->field_story_facebook_image['und'][0]['uri']);
+    if ($path != '') {
+      unlink($path);
+    }
+  }  
+  if ($form_state['values']['field_story_posted_by_facebook'] != '') {
+    $node->field_story_posted_by_facebook['und'][0]['value'] = $form_state['values']['field_story_posted_by_facebook'];
+    $node->field_story_time_facebook['und'][0]['value'] = $form_state['values']['field_story_time_facebook'];
+  }
+  // Twitter additional fields
+  if ($form_state['values']['field_story_posted_by_twitter'] != '') {
+    $node->field_story_posted_by_twitter['und'][0]['value'] = $form_state['values']['field_story_posted_by_twitter'];
+    $node->field_story_time_twitter['und'][0]['value'] = $form_state['values']['field_story_time_twitter'];
+    
+    // Call twitter login function
+    $CONSUMER_KEY_LOCAL = 'ZrAM49Mh50YKRxRTtLY1mP1jE';
+    $CONSUMER_SECRET_LOCAL = 'GBNz25BRuSYcNJiWyTtsBSCrb6mDWNxtZrK4EHm0tmjB54Zpzi';
+    $OAUTH_TOKEN_LOCAL = '732461289138585601-yKseoi32vL9UTfoHmRt80cl5awdnLE4';
+    $OAUTH_TOKEN_SECRET_LOCAL = 'IBqZLZfohV5yz3xcXTTU8h9X6bZBqg3IRkUV3wiyN1aUI';
+    // Include common helper file to get constant values
+    $connection = new TwitterOAuth($CONSUMER_KEY_LOCAL, $CONSUMER_SECRET_LOCAL, $OAUTH_TOKEN_LOCAL, $OAUTH_TOKEN_SECRET_LOCAL);
+    $content = $connection->get("account/verify_credentials");  
+    $file = file_load($form_state['values']['itg_twitter_img']);
+    $path = drupal_realpath($file->uri);  
+    $media1 = $connection->upload('media/upload', ['media' => $path]);
+    
+    $parameters = [
+        'status' => $form_state['values']['itg_twitter_narrative'].' '.shorten_url($node->path['alias']),
+        'media_ids' => $media1->media_id_string
+    ];
+    $result = $connection->post('statuses/update', $parameters);      
+    // Twitter code ends here 
+    
+  }
+  // TWITTER IMAGE
+  if ($form_state['values']['itg_twitter_img'] != 0) {
+    // Load the file via file.fid.
+    $file = file_load($form_state['values']['itg_twitter_img']);
+    // Change status to permanent.
+    $file->status = FILE_STATUS_PERMANENT;
+    // Save.
+    file_save($file);    
+    file_usage_add($file, 'user', 'user', 1);
+  }
+
+  // Twitter narrative
+  if ($form_state['values']['itg_twitter_narrative'] != '') {
+    $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
+  }
+  else {
+    unset($node->field_story_tweet['und']);
+  }
+
+  // Twitter Image field
+  if ($form_state['values']['itg_twitter_img'] != 0) {
+    $node->field_story_tweet_image['und'][0]['fid'] = $form_state['values']['itg_twitter_img'];
+  }
+  else {
+    unset($node->field_story_tweet_image['und']);
+    $path = file_create_url($node->field_story_tweet_image['und'][0]['uri']);
+    if ($path != '') {
+      unlink($path);
+    }
+  }  
+  node_save($node);
 }
