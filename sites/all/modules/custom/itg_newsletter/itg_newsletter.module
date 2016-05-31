@@ -77,10 +77,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
       '#value' => t('Cancel'),
     );
     
-    
-    
-    
-    //Unset N/A option from frequency and Newsletter Content
+    //Unset N/A and none option
     unset($form['field_newsl_frequency']['und']['#options']['_none']);
     unset($form['field_newsl_newsletter_content']['und']['#options']['_none']);
     unset($form['field_newsl_time']['und']['#options']['_none']);
@@ -88,7 +85,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
     unset($form['field_newsl_day']['und']['#options']['_none']);
     unset($form['field_newsl_date']['und']['#options']['_none']);
     
-    //Add required field icon(*) for above fields
+    //Add required field icon(*)
     $form['field_newsl_frequency']['und']['#title'] = 'Frequency <span class="form-required" title="This field is required.">*</span>';
     $form['field_newsl_newsletter_content']['und']['#title'] = 'Newsletter Content <span class="form-required" title="This field is required.">*</span>';
     $form['field_newsl_time']['und']['#title'] = 'Time <span class="form-required" title="This field is required.">*</span>';
@@ -208,6 +205,51 @@ function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $for
      
      //Call function autocomplete to show matching titles
      $form['title']['#autocomplete_path'] = 'content-title-list/newsletter/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
+     $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));     
    }
+}
+
+/**
+ * Implementation of hook_node_validate
+ * @param Object $node
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_newsletter_node_validate($node, $form, &$form_state) {
+  
+  //Validation for automatic type newsletter
+  if($node->type == 'newsletter' && $node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic'){
+    $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
+    $newsletter_content = $node->	field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
+    $check_existance = itg_newsletter_check_existance_frequency($frequency, $newsletter_content);
+    if(isset($check_existance) && arg(1) != $check_existance){
+       form_set_error('field_newsl_newsletter_content',t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> '.l('Click here','node/'.$check_existance.'/edit', array('attributes' => array('target'=>'_blank'))).' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)).' news', '@frequency' => $frequency)));
+     }
+  }
+}
+
+/**
+ * Check newsletter content existance for current frequency
+ * @param string $frequency
+ * @param string $newsletter_content
+ * @return int
+ *    return node id(nid)
+ */
+function itg_newsletter_check_existance_frequency($frequency, $newsletter_content){
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_newsl_newsletter_type', 'nt', 'nt.entity_id = n.nid');
+  $query->join('field_data_field_newsl_frequency', 'nf', 'nf.entity_id = n.nid');
+  $query->join('field_data_field_newsl_newsletter_content', 'nc', 'nc.entity_id = n.nid');
+  $query->fields('n', array('nid'))
+          ->condition('nt.field_newsl_newsletter_type_value', 'automatic', '=')
+          ->condition('nf.field_newsl_frequency_value', $frequency, '=')
+          ->condition('nc.field_newsl_newsletter_content_value', $newsletter_content, '=');
+  $result = $query->execute();
+  $nid = $result->fetchObject()->nid;
+  if($nid){
+    return $nid;
+  }
+  else {
+    false;
+  }
 }
