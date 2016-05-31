@@ -91,7 +91,7 @@ function event_backend_views_default_views() {
   $handler->display->display_options['fields']['field_poll_question_text']['label'] = '';
   $handler->display->display_options['fields']['field_poll_question_text']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_poll_question_text']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Poll Question Video */
+  /* Field: Field: Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';
@@ -988,7 +988,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['field_poll_question_text']['label'] = '';
   $handler->display->display_options['fields']['field_poll_question_text']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_poll_question_text']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Poll Question Video */
+  /* Field: Field: Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';
@@ -1210,7 +1210,8 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Created On';
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
@@ -1218,8 +1219,16 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
   $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['changed']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = 'Status';
+  $handler->display->display_options['fields']['status']['type'] = 'published-notpublished';
+  $handler->display->display_options['fields']['status']['not'] = 0;
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -1251,13 +1260,6 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Field: Content: Published */
-  $handler->display->display_options['fields']['status']['id'] = 'status';
-  $handler->display->display_options['fields']['status']['table'] = 'node';
-  $handler->display->display_options['fields']['status']['field'] = 'status';
-  $handler->display->display_options['fields']['status']['label'] = 'Status';
-  $handler->display->display_options['fields']['status']['type'] = 'published-notpublished';
-  $handler->display->display_options['fields']['status']['not'] = 0;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';

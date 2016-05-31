@@ -1,0 +1,14 @@
+name = feature for ugc comments
+description = feature for ugc comments
+core = 7.x
+package = Features
+dependencies[] = comment
+dependencies[] = features
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[user_permission][] = access comments
+features[user_permission][] = administer comments
+features[user_permission][] = post comments
+features[views_view][] = ugc_comments
+features_exclude[dependencies][ctools] = ctools

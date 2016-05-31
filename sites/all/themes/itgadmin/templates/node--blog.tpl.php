@@ -98,6 +98,10 @@
                 </div>
      
           <?php endif; ?>
+            <?php 
+            print render($content['comment_form']);
+            print render($content['comments']);
+            ?>
         </div>
       <?php endif; ?>
 

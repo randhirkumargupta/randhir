@@ -83,7 +83,8 @@ if(!in_array('administrator', $user->roles)){
           // get role array
           $role_display = $user->roles;
           // skip key for authenticated user
-          $role_display = array_slice($role_display,1);
+          //$role_display = array_slice($role_display,1);
+          unset($role_display[2]);
           // get value in comma seprated
           $role_display = implode(',', $role_display);      
           print $role_display;  
@@ -153,6 +154,7 @@ if(!in_array('administrator', $user->roles)){
 
     <?php if ($sidebar_first || $sidebar_second): ?>
       <aside class="sidebars">
+        <span class="sidebar-trigger"><i class="fa fa-cog" aria-hidden="true"></i></span>
         <?php print $sidebar_first; ?>
         <?php print $sidebar_second; ?>
       </aside>
