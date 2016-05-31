@@ -140,8 +140,8 @@
         return FormValidation.validate_smi(value, element);
       }, 'This field is required.');
       jQuery.validator.addMethod("itg_maxlength", function (value, element) {
-        return value == "" || value.length <= 140;
-      }, 'This field can not exceed 140 character.');
+        return value == "" || value.length <= 126;
+      }, 'This field can not exceed 126 character.');
       // custom validator function end here.
        
       // Clear fb fields based on checkbox.
