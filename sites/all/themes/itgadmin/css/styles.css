@@ -954,6 +954,10 @@ body.sidebar-second .sidebars.active {
   background-color: #e4e3e5;
 }
 
+#content > ul.tabs-primary {
+  display: none;
+}
+
 /* Form CSS */
 .form-select[multiple="multiple"] {
   min-height: 100px;
@@ -3190,6 +3194,12 @@ div.node #comments h2 {
 
 [id*="field-story-template-buzz-values"] tbody tr td {
   padding-bottom: 0;
+}
+[id*="field-story-template-buzz-values"] tbody tr td.field-multiple-drag {
+  display: none;
+}
+[id*="field-story-template-buzz-values"] tbody tr td > .form-submit, [id*="field-story-template-buzz-values"] tbody tr td > .ajax-new-content > .form-submit {
+  margin-bottom: 30px;
 }
 
 .edit-link,
