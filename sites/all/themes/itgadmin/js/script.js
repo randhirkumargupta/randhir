@@ -607,6 +607,33 @@
         $(this).parents('td').find('.field-name-field-syndication-set-day-month').show();
       }
     });
+    var news_content_el = $('.field-name-field-news-type').find('.form-radio');
+    function newsContent(content_el){
+      var radioCheck = content_el.is(':checked');
+      var radioVal = content_el.val();
+      if(radioCheck == true && radioVal == 'internal'){
+        content_el.parents('td').find('.field-name-field-news-external-url').hide();
+        content_el.parents('td').find('.field-name-field-news-cid').show();
+      }
+      if(radioCheck == true && radioVal == 'external'){
+        content_el.parents('td').find('.field-name-field-news-cid').hide();
+        content_el.parents('td').find('.field-name-field-news-external-url').show();
+      }
+    }
+    newsContent(news_content_el);
+    
+    $('.field-name-field-news-type').on('change', '.form-radio', function(){
+      var radioCheck = $(this).is(':checked');
+      var radioVal = $(this).val();
+      if(radioCheck == true && radioVal == 'internal'){
+        $(this).parents('td').find('.field-name-field-news-external-url').hide();
+        $(this).parents('td').find('.field-name-field-news-cid').show();
+      }
+      if(radioCheck == true && radioVal == 'external'){
+        $(this).parents('td').find('.field-name-field-news-cid').hide();
+        $(this).parents('td').find('.field-name-field-news-external-url').show();
+      }
+    });
 
   };
 })(jQuery);
