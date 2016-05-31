@@ -543,6 +543,11 @@ body.sidebar-second{
     @extend .vtop;
   }
 }
+#content{
+  > ul.tabs-primary{
+    display: none;
+  }
+}
 
 
 /* Form CSS */
@@ -3126,6 +3131,10 @@ div.node{
       td{
         @extend .db;
         padding-bottom: 0;
+        &.field-multiple-drag{
+          display: none;
+        }
+        > .form-submit, > .ajax-new-content > .form-submit{margin-bottom: 30px;}
       }
     }
   } 
