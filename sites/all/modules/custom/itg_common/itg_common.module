@@ -51,7 +51,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     
     //Add JS to hide Advance seeting from all content type forms
     drupal_add_js('jQuery(document).ready(function() {                  
-           jQuery("#edit-metatags-und-advanced").hide();         
+           jQuery("#edit-metatags-und-advanced").hide();
+           jQuery(".form-item-metatags-und-abstract-value").hide();
     });', array('type' => 'inline', 'scope' => 'footer'));
   
   }
