@@ -131,9 +131,9 @@
     // scroll-to-top animate
     $(window).scroll(function () {
       if ($(this).scrollTop() > 90) {
-        $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block').addClass('fixed');
+        $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').addClass('fixed');
       } else {
-        $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block').removeClass('fixed');
+        $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').removeClass('fixed');
       }
     });
     $('body').on('click', '.target-link', function (e) {
@@ -142,11 +142,11 @@
       var targetOffset = $('#' + dti).offset().top - offSet;
       if (dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails") {
         $(this).addClass('active').siblings('.target-link').removeClass('active');
-        $("body,html").animate({scrollTop: 0}, 1000);
+        $("body,html").animate({scrollTop: 0}, 300);
       }
       else {
         $(this).addClass('active').siblings('.target-link').removeClass('active');
-        $("body,html").animate({scrollTop: targetOffset}, 1000);
+        $("body,html").animate({scrollTop: targetOffset}, 300);
       }
 
     });
@@ -571,6 +571,68 @@
     // jQuery show n hide code for sidebar second 
     $('body').on('click', '.sidebar-trigger', function () {
       $(this).parent().toggleClass('active');
+    });
+    
+    // jQuery code for syndication rule details
+    var srd_freq_el = $('.field-name-field-syndication-frequency').find('.form-radio');
+    function srdFreq(freq_el){
+      var radioCheck = freq_el.is(':checked');
+      var radioVal = freq_el.val();
+      if(radioCheck == true && radioVal == 'Daily'){
+        freq_el.parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').hide();
+      }
+      if(radioCheck == true && radioVal == 'Weekly'){
+        freq_el.parents('td').find('.field-name-field-syndication-set-day-month').hide();
+        freq_el.parents('td').find('.field-name-field-syndication-set-day').show();
+      }
+      if(radioCheck == true && radioVal == 'Monthly'){
+        freq_el.parents('td').find('.field-name-field-syndication-set-day').hide();
+        freq_el.parents('td').find('.field-name-field-syndication-set-day-month').show();
+      }
+    }
+    srdFreq(srd_freq_el);
+    
+    $('.field-name-field-syndication-frequency').on('change', '.form-radio', function(){
+      var radioCheck = $(this).is(':checked');
+      var radioVal = $(this).val();
+      if(radioCheck == true && radioVal == 'Daily'){
+        $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').hide();
+      }
+      if(radioCheck == true && radioVal == 'Weekly'){
+        $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
+        $(this).parents('td').find('.field-name-field-syndication-set-day').show();
+      }
+      if(radioCheck == true && radioVal == 'Monthly'){
+        $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
+        $(this).parents('td').find('.field-name-field-syndication-set-day-month').show();
+      }
+    });
+    var news_content_el = $('.field-name-field-news-type').find('.form-radio');
+    function newsContent(content_el){
+      var radioCheck = content_el.is(':checked');
+      var radioVal = content_el.val();
+      if(radioCheck == true && radioVal == 'internal'){
+        content_el.parents('td').find('.field-name-field-news-external-url').hide();
+        content_el.parents('td').find('.field-name-field-news-cid').show();
+      }
+      if(radioCheck == true && radioVal == 'external'){
+        content_el.parents('td').find('.field-name-field-news-cid').hide();
+        content_el.parents('td').find('.field-name-field-news-external-url').show();
+      }
+    }
+    newsContent(news_content_el);
+    
+    $('.field-name-field-news-type').on('change', '.form-radio', function(){
+      var radioCheck = $(this).is(':checked');
+      var radioVal = $(this).val();
+      if(radioCheck == true && radioVal == 'internal'){
+        $(this).parents('td').find('.field-name-field-news-external-url').hide();
+        $(this).parents('td').find('.field-name-field-news-cid').show();
+      }
+      if(radioCheck == true && radioVal == 'external'){
+        $(this).parents('td').find('.field-name-field-news-cid').hide();
+        $(this).parents('td').find('.field-name-field-news-external-url').show();
+      }
     });
 
   };

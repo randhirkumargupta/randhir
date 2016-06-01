@@ -131,6 +131,8 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
     //Get mode 
     if (isset($form_state['input'][$syndication_rule_title][LANGUAGE_NONE])) {
       $op = itg_syndication_get_mode($form_state['input'][$syndication_rule_title][LANGUAGE_NONE]);
+    }else {
+      $op = array('_none' => '- None -');
     }
     
     foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
@@ -387,62 +389,80 @@ function itg_syndication_get_client() {
  * @param array $form
  * @param array $form_state
  */
-/*function itg_syndication_node_validate($node, $form, &$form_state) {  
+function itg_syndication_node_validate($node, $form, &$form_state) {
+  
   if ($node->type == 'syndication_client' && $form_state['clicked_button']['#value'] != 'Delete') {
     
-    $sharing_mode = $node->field_content_sharing_mode['und'][0]['value'];
-    switch ($sharing_mode) {
-      // Web url Case
-      case '1':
-        if (isset($node->field_service_fetch_link['und'][0]['value']) && $node->field_service_fetch_link['und'][0]['value'] == '') {
-          form_set_error('field_service_fetch_link', t('Fetch link (our server) field is required.'));
-        }
-        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $node->field_service_fetch_link['und'][0]['value'])) {
-          form_set_error('field_service_fetch_link', t('Invalid URL.'));
-        }        
-        break;
-
-      // FTP case
-      case '2':
-        if (isset($node->field_ftp_ip_address['und'][0]['value']) && $node->field_ftp_ip_address['und'][0]['value'] == '') {
-          form_set_error('field_ftp_ip_address', t('FTP IP Address field is required.'));
-        }
-        if (!filter_var($node->field_ftp_ip_address['und'][0]['value'], FILTER_VALIDATE_IP)) {
-          form_set_error('field_ftp_ip_address', t('FTP IP Address is not valid.'));
-        }
-        if (isset($node->field_ftp_username['und'][0]['value']) && $node->field_ftp_username['und'][0]['value'] == '') {
-          form_set_error('field_ftp_username', t('FTP Username field is required.'));
-        }
-        if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $node->field_ftp_username['und'][0]['value'])) {
-          form_set_error('field_ftp_username', t('FTP Username must be minimum 8 digit alphanumeric and without space.'));
-        }
-        if (isset($node->field_ftp_password['und'][0]['value']) && $node->field_ftp_password['und'][0]['value'] == '') {
-          form_set_error('field_ftp_password', t('FTP Password field is required.'));
-        }
-        if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $node->field_ftp_password['und'][0]['value'])) {
-          form_set_error('field_ftp_password', t('FTP Password must be minimum 8 digit alphanumeric and without space.'));
-        }        
-        break;
-
-      // Mail to case
-      case '3':
+    foreach($node->field_syndication_delivery_mode[LANGUAGE_NONE] as $key_mode => $val_mode) {
+      if ($val_mode['value'] == 'FTP') {
         
-        if (isset($node->field_email_address['und'][0]['value']) && $node->field_email_address['und'][0]['value'] == '') {
-          form_set_error('field_email_address', t('Mail to field is required.'));
+        foreach($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {
+          //validate for ftp name
+          
+          if ($val['field_syndication_ftp_name'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_syndication_ftp_name', t('FTP Name field is required.'));
+          }
+         //p($val['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value']);
+          //validate for ftp url
+          if ($val['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_syndication_ftp_url', t('FTP URL field is required.'));
+          } else {
+              if (!filter_var($val['field_ftp_ip_address']['und'][0]['value'], FILTER_VALIDATE_IP)) {
+                form_set_error('field_syndication_ftp_url', t('FTP IP Address is not valid.'));
+              }
+          }
+          
+          //validate for ftp User name
+          if ($val['field_syndication_ftp_username'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_syndication_ftp_username', t('FTP User Name field is required.'));
+          } else {
+              if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $val['field_ftp_username']['und'][0]['value'])) {
+                form_set_error('field_syndication_ftp_username', t('FTP Username must be minimum 8 digit alphanumeric and without space.'));
+              }
+          }
+          
+          //validate for ftp password
+          if ($val['field_syndication_ftp_password'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_syndication_ftp_password', t('FTP Password field is required.'));
+          } else {
+              if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $val['field_syndication_ftp_password']['und'][0]['value'])) {
+               form_set_error('field_syndication_ftp_password', t('FTP Password must be minimum 8 digit alphanumeric and without space.'));
+              }  
+          }
+      
         }
-        // Validate email                
-        if (!filter_var($node->field_email_address['und'][0]['value'], FILTER_VALIDATE_EMAIL)) {
-          form_set_error('field_email_address', t('Please enter valid email address.'));
-        }                
+      } if ($val_mode['value'] == 'Email') {
+            foreach ($node->field_email_address[LANGUAGE_NONE] as $key_mail => $val_val) {
+              if ($val_val['value'] == '') {
+                form_set_error('field_email_address', t('Mail to field is required.'));
+              } else {
+                 // Validate email                
+                  if (!filter_var($node->field_email_address['und'][0]['value'], FILTER_VALIDATE_EMAIL)) {
+                    form_set_error('field_email_address', t('Please enter valid email address.'));
+                  }
+              }
+            }
+          }
     }
+     
+  
     
+  
    $is_dupl_client = itg_syndication_check_duplicate($node->field_syndication_client_title['und'][0]['tid'], $node->title);
    
    if ($is_dupl_client) {
       form_set_error('title', t('client already exists.'));
    }
+  } else if ($node->type == 'syndication_rule') {
+    foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key_time => $val_time) {
+      if (isset($val_time['field_syndication_time'][LANGUAGE_NONE][0]['value'])) {
+        if (!preg_match('/^(?:[01][0-9]|2[0-3]):[0-5][0-9]$/',$val_time['field_syndication_time'][LANGUAGE_NONE][0]['value'])) {
+          form_set_error('field_email_address', t('Please enter valid time.'));
+        }
+      }
+    }
   }
-}*/
+}
 
 /**
  * Implements hook_field_group_build_pre_render_alter.
@@ -485,3 +505,25 @@ function itg_syndication_get_issue_list() {
   
   return $data;
 }
+
+/*function upload_feed_by_ftp($xml, $ftp_server, $ftp_user_name, $ftp_user_pass) {
+  $file = $xml;
+  $remote_file = 'readme.txt';
+  $ftp_server = '';
+  
+  // set up basic connection
+  $conn_id = ftp_connect($ftp_server);
+
+  // login with username and password
+  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+
+  // upload a file
+  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+   echo "successfully uploaded $file\n";
+  } else {
+   echo "There was a problem while uploading $file\n";
+  }
+
+  // close the connection
+  ftp_close($conn_id);
+}*/

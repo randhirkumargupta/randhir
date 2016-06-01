@@ -167,9 +167,10 @@ function itg_social_media_form_submit($form, &$form_state) {
     $file = file_load($form_state['values']['itg_twitter_img']);
     $path = drupal_realpath($file->uri);  
     $media1 = $connection->upload('media/upload', ['media' => $path]);
-    
+    $bit_url = shorten_url($node->path['alias'], 'bit.ly');
+    watchdog('bit.ly Url', $bit_url);
     $parameters = [
-        'status' => $form_state['values']['itg_twitter_narrative'].' '.shorten_url($node->path['alias']),
+        'status' => $form_state['values']['itg_twitter_narrative'].' '.$bit_url,
         'media_ids' => $media1->media_id_string
     ];
     $result = $connection->post('statuses/update', $parameters);      
