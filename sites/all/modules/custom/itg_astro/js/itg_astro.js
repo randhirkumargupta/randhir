@@ -708,18 +708,18 @@
         }
       });
       jQuery.validator.addMethod("validateRange", function (value, element) {
-        return validateDateRange(value, element);
+        return validate_date_range(value, element);
       }, "* Please enter valid date.");
       jQuery.validator.addMethod("validateSignName", function (value, element) {
-        return validateSignNameValue(value, element);
+        return validate_sign_name_value(value, element);
       }, "This field is required.");
       jQuery.validator.addMethod("dupliNumero", function (value, element) {
-        return dupliNumeroValue(value, element);
+        return dupli_numero_value(value, element);
       }, "This is duplicate value.");
       
 
       // validate date difference
-      function validateDateRange(value, element) {
+      function validate_date_range(value, element) {
         var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
         var startDate = $('input[name="field_astro_date_range[und][0][value][date]"]').val();
         var endDate = $('input[name="field_astro_date_range[und][0][value2][date]"]').val();
@@ -735,7 +735,7 @@
       }
 
       // validate sign name drop down
-      function validateSignNameValue(event, element) {
+      function validate_sign_name_value(event, element) {
         if ($(element).val() == '_none') {
           return false;
         }
@@ -745,7 +745,7 @@
       }
       
       // Check duplicate numerology field value.
-      function dupliNumeroValue(value, element) {
+      function dupli_numero_value(value, element) {
         var counter = 0;
         jQuery('.form-field-name-field-astro-numerology-values').find('.form-select').each(function () {           
           if ($(this).val() == value) {
