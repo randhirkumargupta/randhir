@@ -12,7 +12,16 @@ var fixedDate = '';
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
-
+            jQuery('.form-field-name-field-service-content .cancel').hide();
+            jQuery('.form-field-name-field-service-content .form-type-date-popup input').addClass('itg-disabled');
+            jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').removeClass('itg-disabled');
+            jQuery('#edit-field-service-frequency-und input').click(function(){
+               if($(this).val() == 2){ // weekly
+                  jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');  
+                }else if($(this).val() == 3){ // monthly
+                   jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val(''); 
+                }
+            });
             jQuery('#content-enable-button').hide();
             jQuery('#client_entity_wrapper').hide();
             jQuery('.field-name-field-story-expert-description').hide();
@@ -20,7 +29,7 @@ var fixedDate = '';
             jQuery('.field-name-field-service-audio').hide();
             jQuery('.field-name-field-service-video').hide();
             var today_date = custom_today_date();
-            jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date).addClass('itg-disabled');
+            jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
 
             jQuery('input[name="field_service_content_add_more"]').hide();
 
@@ -38,7 +47,7 @@ var fixedDate = '';
             jQuery("#edit-field-service-frequency-date-und-0-show-todate").prop('checked', true);
             jQuery('#edit-field-service-frequency-date-und-0-show-todate').hide();
             jQuery('.form-item-field-service-frequency-date-und-0-value2').show();
-
+            
             var selectedVal = "";
             var selected = $("#edit-field-service-frequency-und input[type='radio']:checked");
             if (selected.length > 0) {
@@ -136,7 +145,7 @@ var fixedDate = '';
             if (firstTime == 1) {
                 jQuery('#field-service-content-add-more-wrapper').hide();
 
-                jQuery('#edit-field-service-frequency-und-1').prop('checked', true);
+                //jQuery('#edit-field-service-frequency-und-1').prop('checked', true);
 
                 jQuery('#edit-field-service-frequency').hide();
                 jQuery('#reset-date-button').hide();
@@ -204,10 +213,19 @@ var fixedDate = '';
 
             if (genrateFlag == 1) {
                 jQuery(document).on("click", "#content-enable-button", function (event) {
+                    var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
+                    var edate = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
+                    if(sdate == ''){
+                       jQuery('.form-item-field-service-frequency-date-und-0-value-date').remove('<span class="error">Please enter start date.</span>');
+                       jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
+                       return false;
+                    } else if(edate == '') {
+                       return false;
+                    }
                     event.preventDefault();
                     if (genrateFlag == 1) {
-                        jQuery("#edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-und, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").addClass("itg-disabled");
-
+                        jQuery("#edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").addClass("itg-disabled");
+                        jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');
                         var hideContent = 1;
                         jQuery('#reset-date-button').show();
                         jQuery('#content-enable-button').hide();
