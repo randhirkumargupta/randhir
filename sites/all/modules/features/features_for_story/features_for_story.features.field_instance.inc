@@ -966,6 +966,74 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_facebook_video'.
+  $field_instances['node-story-field_story_facebook_video'] = array(
+    'bundle' => 'story',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 64,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_facebook_video',
+    'label' => 'Facebook Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => 'facebook_video',
+      'file_extensions' => 'mp4 ogg flv avi',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 1,
+          ),
+        ),
+        'imce_filefield_on' => 1,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 56,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_issue_date'.
   $field_instances['node-story-field_story_issue_date'] = array(
     'bundle' => 'story',
@@ -2758,6 +2826,7 @@ function features_for_story_field_default_field_instances() {
   t('Extra large image');
   t('Extra small image');
   t('Facebook Narrative');
+  t('Facebook Video');
   t('Facebook image');
   t('Facebook narrative');
   t('Factoids');
