@@ -187,7 +187,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     $node->field_story_posted_by_twitter['und'][0]['value'] = $form_state['values']['field_story_posted_by_twitter'];
     $node->field_story_time_twitter['und'][0]['value'] = $form_state['values']['field_story_time_twitter'];
     
-    /* Call twitter login function
+    // Call twitter login function
     $CONSUMER_KEY_LOCAL = 'ZrAM49Mh50YKRxRTtLY1mP1jE';
     $CONSUMER_SECRET_LOCAL = 'GBNz25BRuSYcNJiWyTtsBSCrb6mDWNxtZrK4EHm0tmjB54Zpzi';
     $OAUTH_TOKEN_LOCAL = '732461289138585601-yKseoi32vL9UTfoHmRt80cl5awdnLE4';
@@ -205,7 +205,7 @@ function itg_social_media_form_submit($form, &$form_state) {
         'media_ids' => $media1->media_id_string
     ];
     $result = $connection->post('statuses/update', $parameters);      
-    // Twitter code ends here */
+    // Twitter code ends here 
     
   }
   // TWITTER IMAGE
