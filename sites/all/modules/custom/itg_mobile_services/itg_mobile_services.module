@@ -158,9 +158,11 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'vas_service_content_node_form':
       $form['metatags']['#type'] = 'hidden';
-
+      
       if (isset($form['nid']['#value'])) {
-        drupal_add_js("jQuery(document).ready(function(){jQuery('#edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-und, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').addClass('itg-disabled');  });", 'inline');
+        drupal_add_js("jQuery(document).ready(function(){jQuery('#edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').addClass('itg-disabled');  });", 'inline');
+        drupal_add_js("jQuery(document).ready(function(){jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');  });", 'inline');
+       // drupal_add_js("jQuery('input[name='field_service_content[und][0][field_service_content_date][und][0][value][date]']').addClass('itg-disabled');   });", 'inline');
       }
 
       $form['actions']['cancel'] = array(
@@ -685,9 +687,12 @@ function itg_service_content_after_build($form, &$form_state) {
   $form['field_service_audio'][LANGUAGE_NONE][0]['#title'] = '<label for="edit-field-service-audio-und-0-upload">Content Audio <span class="form-required" title="This field is required.">*</span></label>';
   $form['field_service_video'][LANGUAGE_NONE][0]['#title'] = '<label for="edit-field-service-video-und-0-upload">Content Video <span class="form-required" title="This field is required.">*</span></label>';
   $form['field_story_expert_description']['#suffix'] = '<span id="remain"></span>';
-  drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_service.js', array('weight' => 1));
+  
   if (isset($service_content_type)) {
-    $settings['service_content_type'] = array_column($service_content_type, 'value');
+    foreach($service_content_type as $service_content_type_val){
+      $final_val[] = $service_content_type_val['value'];
+    }
+    $settings['service_content_type'] = $final_val;
   }
   else {
     $settings['service_content_type'] = '';
@@ -696,6 +701,7 @@ function itg_service_content_after_build($form, &$form_state) {
     $settings['service_content_edit_mode'] = TRUE;
   }
   drupal_add_js(array('itg_mobile_services' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_service.js', array('weight' => 3, 'scope' => 'footer'));
   $form['path']['#access'] = FALSE;
   $form['title']['#attributes']['readonly'] = 'readonly';
   $form['field_story_client_title'][LANGUAGE_NONE][0]['value']['#attributes']['readonly'] = 'readonly';

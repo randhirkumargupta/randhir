@@ -543,6 +543,11 @@ body.sidebar-second{
     @extend .vtop;
   }
 }
+#content{
+  > ul.tabs-primary{
+    display: none;
+  }
+}
 
 
 /* Form CSS */
@@ -556,6 +561,39 @@ body.sidebar-second{
 input.password-confirm, input.password-field{
   width: 200px;
   margin: 0;
+}
+.ajax-progress .throbber{
+  margin: 15px 2px 0;
+}
+tr .ajax-progress .throbber{
+  margin: 10px 0 2px;
+}
+div.autocomplete-deluxe-throbber{
+  height: 20px;
+}
+ul.ui-autocomplete{
+  width: 100% !important;
+  max-width: 332px;
+  padding: 0;
+  border: 1px solid #d9d9d9;
+  border-radius: 0;
+  font-size: 13px;
+  .ui-corner-all{
+    padding: 5px;
+    display: block;
+    border-radius: 0;
+    margin: 0;
+    &.ui-state-focus{
+      background: none #f0f0f0;
+      border: none;
+      margin: 0;
+    }
+  }
+
+  .autocomplete-deluxe-highlight-char{
+    color: #1fb5ad;
+    font-weight: 400;
+  }
 }
 .node-form{
   h2{
@@ -662,13 +700,17 @@ fieldset.date-combo{
   margin-right: 20px;
 }
 .form-type-autocomplete-deluxe{
-  .autocomplete-deluxe-multiple{
+  .autocomplete-deluxe-container{
     background: none;
     box-shadow: 0;
     border: 1px solid #d9d9d9;
     padding: 0;
     width: 100%;
     max-width: 332px;
+    input.form-text{
+      min-width: 332px;
+      margin: 0;
+    }
   }
 }
 .form-type-autocomplete-deluxe{
@@ -677,7 +719,6 @@ fieldset.date-combo{
     background: none;
     width: 100%;
     max-width: 332px;
-    border: none;
     .autocomplete-deluxe-throbber{
       position: absolute;
       right: 0;
@@ -686,7 +727,6 @@ fieldset.date-combo{
     input.autocomplete-deluxe-form-single{
       background: none;
       box-shadow: 0;
-      border: 1px solid #d9d9d9;
       width: 100%;
       max-width: 332px;
     }
@@ -3091,35 +3131,13 @@ div.node{
       td{
         @extend .db;
         padding-bottom: 0;
+        &.field-multiple-drag{
+          display: none;
+        }
+        > .form-submit, > .ajax-new-content > .form-submit{margin-bottom: 30px;}
       }
     }
   } 
-}
-.page-node-add-itg-celebrity-profile{
-  ul.ui-autocomplete{
-    width: 100% !important;
-    max-width: 332px;
-    padding: 0;
-    border: 1px solid #d9d9d9;
-    border-radius: 0;
-    font-size: 13px;
-    .ui-corner-all{
-      padding: 5px;
-      display: block;
-      border-radius: 0;
-      margin: 0;
-      &.ui-state-focus{
-        background: none #f0f0f0;
-        border: none;
-        margin: 0;
-      }
-    }
-    
-    .autocomplete-deluxe-highlight-char{
-      color: #1fb5ad;
-      font-weight: 400;
-    }
-  }
 }
 .edit-link, 
 .view-link, 
@@ -3338,5 +3356,13 @@ div.node{
         margin-top: 30px;
       }
     }
+  }
+}
+.form-item-path-pathauto{
+  .description a{@extend .hide;}
+}
+.node-breaking_news-form{
+  .form-field-name-field-breaking-content-details{
+    .messages--error{padding-left: 250px;}
   }
 }
