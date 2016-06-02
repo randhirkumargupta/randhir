@@ -3477,5 +3477,13 @@ div.node{
     }
   }
 }
-
+.node-recipe-form{
+  .form-field-name-field-recipe-audio, 
+  .form-field-name-field-recipe-video{
+    .ajax-progress{
+      display: none;
+    }
+    @extend .choose-audio-video-file;
+  }
+}
 
