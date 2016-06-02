@@ -92,10 +92,10 @@ img {
   text-decoration: none;
 }
 
-.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, [id*="taxonomy-csv-import-form"] .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
+.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .taxonomy-form-term-tags .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, [id*="taxonomy-csv-import-form"] .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
-.field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, .node-category-form #edit-term-state-wrap legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .page-admin-structure-taxonomy-tags form .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
+.field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, .node-category-form #edit-term-state-wrap legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .taxonomy-form-term-tags .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links, [id*="taxonomy-csv-import-form"] .vertical-tabs-list, [id*="field-newsl-add-news-values"] th.field-label, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select label, .form-item-path-pathauto .description a, .grippie {
   display: none;
 }
@@ -1009,7 +1009,7 @@ ul.ui-autocomplete .autocomplete-deluxe-highlight-char {
   font-weight: 400;
 }
 
-.node-form h2, .page-admin-structure-taxonomy-tags form h2, .confirmation h2, div.node #comments .comment-form h2, #comments .comment-form h2, [id*="taxonomy-csv-import-form"] h2 {
+.node-form h2, .taxonomy-form-term-tags h2, .confirmation h2, div.node #comments .comment-form h2, #comments .comment-form h2, [id*="taxonomy-csv-import-form"] h2 {
   background-color: #fefafb;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
@@ -1018,18 +1018,18 @@ ul.ui-autocomplete .autocomplete-deluxe-highlight-char {
   font-size: 18px;
   margin: 15px 0;
 }
-.node-form input[type="text"], .page-admin-structure-taxonomy-tags form input[type="text"], .confirmation input[type="text"], #comments .comment-form input[type="text"], [id*="taxonomy-csv-import-form"] input[type="text"], .node-form select, .page-admin-structure-taxonomy-tags form select, .confirmation select, div.node #comments .comment-form select, #comments .comment-form select, [id*="taxonomy-csv-import-form"] select, .node-form .form-textarea-wrapper textarea, .page-admin-structure-taxonomy-tags form .form-textarea-wrapper textarea, .confirmation .form-textarea-wrapper textarea, #comments .comment-form .form-textarea-wrapper textarea, [id*="taxonomy-csv-import-form"] .form-textarea-wrapper textarea {
+.node-form input[type="text"], .taxonomy-form-term-tags input[type="text"], .confirmation input[type="text"], #comments .comment-form input[type="text"], [id*="taxonomy-csv-import-form"] input[type="text"], .node-form select, .taxonomy-form-term-tags select, .confirmation select, div.node #comments .comment-form select, #comments .comment-form select, [id*="taxonomy-csv-import-form"] select, .node-form .form-textarea-wrapper textarea, .taxonomy-form-term-tags .form-textarea-wrapper textarea, .confirmation .form-textarea-wrapper textarea, #comments .comment-form .form-textarea-wrapper textarea, [id*="taxonomy-csv-import-form"] .form-textarea-wrapper textarea {
   width: 100%;
   max-width: 332px;
 }
-.node-form .form-actions, .page-admin-structure-taxonomy-tags form .form-actions, .confirmation .form-actions, div.node #comments .comment-form .form-actions, #comments .comment-form .form-actions, [id*="taxonomy-csv-import-form"] .form-actions {
+.node-form .form-actions, .taxonomy-form-term-tags .form-actions, .confirmation .form-actions, div.node #comments .comment-form .form-actions, #comments .comment-form .form-actions, [id*="taxonomy-csv-import-form"] .form-actions {
   background-color: #fefafb;
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #d9d9d9;
   margin: 15px 0;
   padding: 15px 30px;
 }
-.node-form .form-radios + div.description + span.error, .page-admin-structure-taxonomy-tags form .form-radios + div.description + span.error, .confirmation .form-radios + div.description + span.error, #comments .comment-form .form-radios + div.description + span.error, [id*="taxonomy-csv-import-form"] .form-radios + div.description + span.error {
+.node-form .form-radios + div.description + span.error, .taxonomy-form-term-tags .form-radios + div.description + span.error, .confirmation .form-radios + div.description + span.error, #comments .comment-form .form-radios + div.description + span.error, [id*="taxonomy-csv-import-form"] .form-radios + div.description + span.error {
   padding-left: 220px;
 }
 
@@ -2551,10 +2551,10 @@ fieldset#edit-select .form-submit {
   margin-right: 10px;
 }
 
-.page-admin-structure-taxonomy-tags form .form-type-textfield .form-text {
+.taxonomy-form-term-tags .form-type-textfield .form-text {
   max-width: 332px;
 }
-.page-admin-structure-taxonomy-tags form .path-form {
+.taxonomy-form-term-tags .path-form {
   border: none;
   margin-top: -30px;
 }
@@ -2827,10 +2827,10 @@ fieldset#edit-select .form-submit {
   display: block;
 }
 
-.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .page-admin-structure-taxonomy-tags form .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, [id*="taxonomy-csv-import-form"] .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
+.hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .taxonomy-form-term-tags .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, [id*="taxonomy-csv-import-form"] .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
-.field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, .node-category-form #edit-term-state-wrap legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .page-admin-structure-taxonomy-tags form .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
+.field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, .node-category-form #edit-term-state-wrap legend, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, .taxonomy-form-term-tags .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links, [id*="taxonomy-csv-import-form"] .vertical-tabs-list, [id*="field-newsl-add-news-values"] th.field-label, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select label, .form-item-path-pathauto .description a {
   display: none;
 }
@@ -3390,4 +3390,8 @@ div.node #comments h2 {
 
 .node-breaking_news-form .form-field-name-field-breaking-content-details .messages--error {
   padding-left: 250px;
+}
+
+[id*="field-breaking-content-details-values"] .field-name-field-mark-as-breaking-band .form-type-checkboxes .form-checkboxes + div.description {
+  left: 310px;
 }

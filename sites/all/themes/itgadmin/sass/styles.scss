@@ -2544,7 +2544,7 @@ fieldset#edit-select{
     margin-right: 10px;
   }
 }
-.page-admin-structure-taxonomy-tags form{
+.taxonomy-form-term-tags{
   @extend .node-form;
   .form-type-textfield{
     .form-text{max-width: 332px;}
@@ -3364,5 +3364,12 @@ div.node{
 .node-breaking_news-form{
   .form-field-name-field-breaking-content-details{
     .messages--error{padding-left: 250px;}
+  }
+}
+[id*="field-breaking-content-details-values"]{
+  .field-name-field-mark-as-breaking-band{
+    .form-type-checkboxes .form-checkboxes + div.description{
+      left: 310px;
+    }
   }
 }
