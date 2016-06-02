@@ -537,16 +537,14 @@ function itg_mobile_association_validator($form, &$form_state) {
   $node_nid = isset($form_state['node']->nid) ? $form_state['node']->nid : '';
   $target_id = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id']);
   $frequency = $form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value'];
-
-  if ($frequency == 1) {
-    drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-service-frequency').show(); });", 'inline');
-  }
-
   $start_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value'];
   $end_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value2'];
   $exist_service_content = itg_mobile_services_check_exist_content($node_nid, $target_id, $start_date, $end_date);
 
-  if ($frequency > 1) {
+  if ($frequency == 1) {
+    drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-service-frequency').show(); });", 'inline');
+  }
+  else if ($frequency > 1) {
     if (empty($start_date) && empty($end_date)) {
       $validate = TRUE;
       drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-service-frequency').show(); jQuery('#field-service-content-values').hide();});", 'inline');
