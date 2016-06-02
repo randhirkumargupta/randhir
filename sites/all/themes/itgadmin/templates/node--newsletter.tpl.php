@@ -48,14 +48,51 @@
         </div>
       <?php
       if (isset($node->op) && $node->op == 'Preview'){
-        
-        $prev_num = 0;
+        if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic'){ ?>
+          <div class="field">
+            <div class="field-label">Frequency:</div>
+            <div class="field-items"><?php echo ucwords($node->field_newsl_frequency[LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
+      <?php if($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'daily') { ?>
+          <div class="field">
+            <div class="field-label">Time:</div>
+            <div class="field-items"><?php echo $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
+          </div>
+      <?php } if ($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'weekly') { ?>
+          <div class="field">
+            <div class="field-label">Time:</div>
+            <div class="field-items"><?php echo $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Day:</div>
+            <div class="field-items"><?php echo $node->field_newsl_day[LANGUAGE_NONE][0]['value']; ?></div>
+          </div>
+      <?php } if($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'monthly') { ?>
+         <div class="field">
+            <div class="field-label">Time:</div>
+            <div class="field-items"><?php echo $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Date:</div>
+            <div class="field-items"><?php echo $node->field_newsl_date[LANGUAGE_NONE][0]['value']; ?></div>
+          </div>
+      <?php } ?>
+          <div class="field">
+            <div class="field-label">Newsletter Content:</div>
+            <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'])).' news'; ?></div>
+          </div>
+        <?php } else {
+       $prev_num = 0;
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
+          $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
+          
+          //Avanish Work form here
           $sn = $prev_num + 1;
           echo '<h2>News ' . $sn . ' Details:</h2>';
-         $prev_num++; 
+          $prev_num++; 
          
-        }
+         }
+        } 
       } else { ?>
          <div class="field">
             <div class="field-label">Newsletter Type:</div>
@@ -97,6 +134,11 @@
             <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'])).' news'; ?></div>
           </div>
         <?php } else { ?>
+         <div class="field">
+            <div class="field-label">Schedule:</div>
+            <div class="field-items"><?php echo ucwords($node->field_newsl_schedule[LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
+      <?php if($node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'later') {?>
           <div class="field">
             <div class="field-label">Time:</div>
             <div class="field-items"><?php echo  $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
@@ -105,8 +147,9 @@
             <div class="field-label">Date:</div>
             <div class="field-items"><?php echo date('d/m/Y', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])); ?></div>
           </div>
-      
-        <?php
+      <?php } 
+     
+        //Render field collection items
         $num = 0;
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
           $news_detail = entity_load('field_collection_item', array($news_arr['value']));

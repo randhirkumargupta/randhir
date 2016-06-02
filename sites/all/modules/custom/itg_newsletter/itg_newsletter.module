@@ -87,6 +87,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
     unset($form['field_newsl_time_period']['und']['#options']['_none']);
     unset($form['field_newsl_day']['und']['#options']['_none']);
     unset($form['field_newsl_date']['und']['#options']['_none']);
+    unset($form['field_newsl_schedule']['und']['#options']['_none']);
     
     //Add required field icon(*)
     $form['field_newsl_frequency']['und']['#title'] = 'Frequency <span class="form-required" title="This field is required.">*</span>';
@@ -95,6 +96,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
     $form['field_newsl_time_period']['und']['#title'] = 'Time Period <span class="form-required" title="This field is required.">*</span>';
     $form['field_newsl_day']['und']['#title'] = 'Day <span class="form-required" title="This field is required.">*</span>';
     $form['field_newsl_date']['und']['#title'] = 'Date <span class="form-required" title="This field is required.">*</span>';
+    $form['field_newsl_schedule']['und']['#title'] = 'Schedule <span class="form-required" title="This field is required.">*</span>';
     
     //Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
     $form['actions']['submit']['#submit'][] ='itg_newsletter_submit_handler_for_redirect';
