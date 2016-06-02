@@ -104,6 +104,13 @@ function social_media_integration_user_default_permissions() {
     'module' => 'fb_autopost_entity',
   );
 
+  // Exported permission: 'edit any video facebook publication'.
+  $permissions['edit any video facebook publication'] = array(
+    'name' => 'edit any video facebook publication',
+    'roles' => array(),
+    'module' => 'fb_autopost_entity',
+  );
+
   // Exported permission: 'edit own album facebook publication'.
   $permissions['edit own album facebook publication'] = array(
     'name' => 'edit own album facebook publication',
@@ -156,6 +163,13 @@ function social_media_integration_user_default_permissions() {
   // Exported permission: 'edit own status facebook publication'.
   $permissions['edit own status facebook publication'] = array(
     'name' => 'edit own status facebook publication',
+    'roles' => array(),
+    'module' => 'fb_autopost_entity',
+  );
+
+  // Exported permission: 'edit own video facebook publication'.
+  $permissions['edit own video facebook publication'] = array(
+    'name' => 'edit own video facebook publication',
     'roles' => array(),
     'module' => 'fb_autopost_entity',
   );
@@ -225,6 +239,13 @@ function social_media_integration_user_default_permissions() {
     'module' => 'fb_autopost_entity',
   );
 
+  // Exported permission: 'view any video facebook publication'.
+  $permissions['view any video facebook publication'] = array(
+    'name' => 'view any video facebook publication',
+    'roles' => array(),
+    'module' => 'fb_autopost_entity',
+  );
+
   // Exported permission: 'view own album facebook publication'.
   $permissions['view own album facebook publication'] = array(
     'name' => 'view own album facebook publication',
@@ -277,6 +298,13 @@ function social_media_integration_user_default_permissions() {
   // Exported permission: 'view own status facebook publication'.
   $permissions['view own status facebook publication'] = array(
     'name' => 'view own status facebook publication',
+    'roles' => array(),
+    'module' => 'fb_autopost_entity',
+  );
+
+  // Exported permission: 'view own video facebook publication'.
+  $permissions['view own video facebook publication'] = array(
+    'name' => 'view own video facebook publication',
     'roles' => array(),
     'module' => 'fb_autopost_entity',
   );

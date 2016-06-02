@@ -90,6 +90,28 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#default_value' => isset($node->field_story_facebook_image['und'][0]['fid']) ? $node->field_story_facebook_image['und'][0]['fid'] : 0,
       '#widget' => 'imce',      
       '#preview' => TRUE,
+      "#upload_validators"  => array(
+        "file_validate_extensions" => array("gif jpg")
+      ),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+        ),
+        'required' => array(
+          ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+        )
+      ),
+    );
+    $form['fb_wrap']['itg_fb_video'] = array(
+      '#title' => t('Facebook Video'),
+      '#type' => 'managed_file',      
+      '#upload_location' => 'public://facebook_video/',
+      '#default_value' => isset($node->field_story_facebook_video['und'][0]['fid']) ? $node->field_story_facebook_video['und'][0]['fid'] : 0,
+      '#widget' => 'imce',      
+      '#preview' => TRUE,
+      "#upload_validators"  => array(
+        "file_validate_extensions" => array("mp4 ogg flv avi 3gp")
+      ),
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
@@ -131,6 +153,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#upload_location' => 'public://itg_twitter_img/',
       '#widget' => 'imce',      
       '#preview' => TRUE,
+      "#upload_validators"  => array(
+        "file_validate_extensions" => array("gif jpg")
+      ),
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
