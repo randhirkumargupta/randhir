@@ -1956,7 +1956,6 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         padding-top: 10px;
         padding-bottom: 10px;
       }
-
     }
     .field-name-field-quiz-options-answer{
       @extend .pos-rel;
@@ -1987,6 +1986,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
             background: url('../images/cross_small.png') center center no-repeat #fff;
             text-indent: -9999px;
           }
+          .ajax-progress{
+            display: none;
+          }
         }
         & + .clearfix{
           bottom: -28px;
@@ -1997,6 +1999,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
             font-size: 26px;
             line-height: 24px;
             padding: 0 5px 4px;
+          }
+          .ajax-progress{
+            display: none;
           }
         }
       }
@@ -3373,3 +3378,104 @@ div.node{
     }
   }
 }
+[id*="field-survey-add-questions-values"], [id*="field-quiz-add-questions-values"]{
+  .field-name-field-survey-add-media{
+    .ajax-progress{
+      display: none;
+    }
+    .form-managed-file{
+      .file{
+        @extend .fleft;
+        max-width: 200px;
+        text-overflow: ellipsis;
+        @extend .of-hide;
+        white-space: nowrap;
+        margin-top: 5px;
+        a{
+          @extend .vtop;
+          font-size: 13px;
+          color: #2f2f2f;
+        }
+      }
+      .file-size{
+        font-size: 13px;
+        margin-top: 5px;
+        margin-left: 5px;
+        @extend .fleft;
+        + .form-submit{
+          @extend .btn-cancel;
+          border: none;
+          margin-left: 50px;
+          margin-top: 5px;
+          &:hover{
+            border: none;
+          }
+        }
+      } 
+    }
+  }
+}
+.node-photogallery-form{
+  .form-field-name-field-common-audio-file{
+    .ajax-progress{
+      display: none;
+    }
+    .form-managed-file{
+      .file{
+        @extend .fleft;
+        max-width: 200px;
+        text-overflow: ellipsis;
+        @extend .of-hide;
+        white-space: nowrap;
+        margin-top: 5px;
+        a{
+          @extend .vtop;
+          font-size: 13px;
+          color: #2f2f2f;
+        }
+      }
+      .file-size{
+        font-size: 13px;
+        margin-top: 5px;
+        margin-left: 5px;
+        @extend .fleft;
+        + .form-submit{
+          @extend .btn-cancel;
+          border: none;
+          margin-left: 50px;
+          margin-top: 5px;
+          &:hover{
+            border: none;
+          }
+        }
+      } 
+    }
+  }
+  .plupload_upload_status{
+    bottom: 0;
+    left: 10px;
+    position: absolute;
+  }
+  .form-field-name-field-featured{
+    .form-type-checkboxes .form-checkboxes + div.description{
+      left: 280px;
+    }
+  }
+}
+#SocialMedia{
+  .form-field-type-image{
+    a.imce-filefield-opener{
+      font-size: 0;
+      height: 28px;
+      opacity: 0;
+      position: absolute;
+      width: 134px;
+      z-index: 99;
+    }
+    .ajax-progress{
+      display: none;
+    }
+  }
+}
+
+
