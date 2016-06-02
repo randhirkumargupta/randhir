@@ -1,6 +1,7 @@
 <?php
  global $base_url;
 ?>
+
 <a href="javascript:;" class="close-preview">&nbsp;</a>
 <?php if (!empty($pre_object)) print render($pre_object) ?>
 
@@ -40,23 +41,11 @@
 
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-       <div class="field">
-          <div class="field-label">Subject Line:</div>
-          <div class="field-items"><?php echo $title; ?></div>
-        </div>
+ 
         <div class="field">
-          <div class="field-label">Header Headline:</div>
-          <div class="field-items"><?php echo ucwords($node->field_newsl_header_headline[LANGUAGE_NONE][0]['value']); ?></div>
+          <div class="field-label">Template:</div>
+          <div class="field-items"><?php echo l(ucwords($title), 'node/'.$node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'], array('attributes' => array('target'=>'_blank'))) ; ?></div>
         </div>
-        <div class="field">
-          <div class="field-label">Main Headline:</div>
-          <div class="field-items"><?php echo ucwords($node->field_newsl_main_headline[LANGUAGE_NONE][0]['value']); ?></div>
-        </div>
-        <div class="field">
-          <div class="field-label">Property (Website Name):</div>
-          <div class="field-items"><?php echo $node->field_newsl_website_name[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
-        </div>
-      
       <?php
       if (isset($node->op) && $node->op == 'Preview'){
         
@@ -64,79 +53,101 @@
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
           $sn = $prev_num + 1;
           echo '<h2>News ' . $sn . ' Details:</h2>';
-          ?>
-         <div class="field">
-            <div class="field-label">Dialog Box Name:</div>
-            <div class="field-items"><?php echo ucwords($news_arr['field_news_dialog_box_name'][LANGUAGE_NONE][0]['value']); ?></div>
-          </div>
-           <div class="field">
-              <div class="field-label">Headline:</div>
-              <div class="field-items"><?php echo ucwords($news_arr['field_news_headline'][LANGUAGE_NONE][0]['value']); ?></div>
-            </div>
-            <div class="field">
-              <div class="field-label">Ordering:</div>
-              <div class="field-items"><?php echo ucwords($news_arr['field_news_ordering'][LANGUAGE_NONE][0]['value']); ?></div>
-            </div>
-           <div class="field">
-              <div class="field-label">Type:</div>
-              <div class="field-items"><?php echo ucwords($news_arr['field_news_type'][LANGUAGE_NONE][0]['value']); ?></div>
-            </div>
-            <div class="field">
-              <div class="field-label">Story ID:</div>
-              <div class="field-items"><?php echo $news_arr['field_news_story_id'][LANGUAGE_NONE][0]['target_id']; ?></div>
-            </div>
-            <div class="field">
-              <div class="field-label">Description:</div>
-              <div class="field-items"><?php echo ucwords($news_arr['field_news_description'][LANGUAGE_NONE][0]['value']); ?></div>
-            </div>
-            <div class="field">
-              <div class="field-label">Kicker:</div>
-              <div class="field-items"><?php echo ucwords($news_arr['field_field_news_kicker'][LANGUAGE_NONE][0]['value']); ?></div>
-            </div>
-           <?php
          $prev_num++; 
          
         }
-      } else {
-      $num = 0;
+      } else { ?>
+         <div class="field">
+            <div class="field-label">Newsletter Type:</div>
+            <div class="field-items"><?php echo ucwords($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
+      
+        <?php 
+        if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic'){ ?>
+         <div class="field">
+            <div class="field-label">Frequency:</div>
+            <div class="field-items"><?php echo ucwords($node->field_newsl_frequency[LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
+      <?php if($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'daily') { ?>
+          <div class="field">
+            <div class="field-label">Time:</div>
+            <div class="field-items"><?php echo $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
+          </div>
+      <?php } if ($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'weekly') { ?>
+          <div class="field">
+            <div class="field-label">Time:</div>
+            <div class="field-items"><?php echo $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Day:</div>
+            <div class="field-items"><?php echo $node->field_newsl_day[LANGUAGE_NONE][0]['value']; ?></div>
+          </div>
+      <?php } if($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'monthly') { ?>
+         <div class="field">
+            <div class="field-label">Time:</div>
+            <div class="field-items"><?php echo $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Date:</div>
+            <div class="field-items"><?php echo $node->field_newsl_date[LANGUAGE_NONE][0]['value']; ?></div>
+          </div>
+      <?php } ?>
+          <div class="field">
+            <div class="field-label">Newsletter Content:</div>
+            <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'])).' news'; ?></div>
+          </div>
+        <?php } else { ?>
+          <div class="field">
+            <div class="field-label">Time:</div>
+            <div class="field-items"><?php echo  $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
+          </div>
+         <div class="field">
+            <div class="field-label">Date:</div>
+            <div class="field-items"><?php echo date('d/m/Y', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])); ?></div>
+          </div>
+      
+        <?php
+        $num = 0;
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
           $news_detail = entity_load('field_collection_item', array($news_arr['value']));
           $sn = $num + 1;
           echo '<h2>News ' . $sn . ' Details:</h2>';
           ?>
           <div class="field">
-            <div class="field-label">Dialog Box Name:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_dialog_box_name[LANGUAGE_NONE][0]['value']); ?></div>
-          </div>
-          <div class="field">
-            <div class="field-label">Headline:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_headline[LANGUAGE_NONE][0]['value']); ?></div>
-          </div>
-          <div class="field">
-            <div class="field-label">Ordering:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_ordering[LANGUAGE_NONE][0]['value']); ?></div>
-          </div>
-          <div class="field">
-            <div class="field-label">Type:</div>
+            <div class="field-label">News Content:</div>
             <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
           <div class="field">
-            <div class="field-label">Story ID:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_story_id[LANGUAGE_NONE][0]['value']); ?></div>
+            <div class="field-label">Content Type:</div>
+            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_ctype[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
+        <?php if ($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal') {?>
           <div class="field">
-            <div class="field-label">Description:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_description[LANGUAGE_NONE][0]['value']); ?></div>
+            <div class="field-label">Content ID:</div>
+            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
+        <?php } else { ?>
+         <div class="field">
+            <div class="field-label">External URL:</div>
+            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
+        <?php } ?>
+          <div class="field">
+            <div class="field-label">Title:</div>
+            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
           <div class="field">
             <div class="field-label">Kicker:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_field_news_kicker[LANGUAGE_NONE][0]['value']); ?></div>
+            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
-            <?php
+      
+     <?php
      $num++;
-   }
- }
-     ?>
+   } //Foreach loop
+  } //Else condition for manual
+ } //Else condition for view
+?>
+      
  </div>   
   <?php endif; ?>
 

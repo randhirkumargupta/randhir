@@ -26,9 +26,12 @@
 
      //Automatic and manual field hide and show
       if ($("input[name='field_newsl_newsletter_type[und]']:checked").val() === 'automatic') {
+        
+        $('#edit-field-newsl-schedule').hide();
         $('#edit-field-newsl-frequency').show();
         $('#edit-field-newsl-newsletter-content').show();
         $('.group-newsl-add-news').hide();
+        $('.form-field-name-field-survey-start-date').hide();
         
         //Day, date and time
         if ($("input[name='field_newsl_frequency[und]']:checked").val() === 'daily') {
@@ -51,19 +54,25 @@
         }
       } 
       else {
-        $('.group-newsl-add-news').show();
-        $('#edit-field-newsl-frequency').hide();
-        $('#edit-field-newsl-newsletter-content').hide();
-        $('#edit-field-newsl-time').hide();
-        $('#edit-field-newsl-day').hide();
-        $('#edit-field-newsl-date').hide();
-        $('#edit-field-newsl-time-period').hide();
+          $('#edit-field-newsl-schedule').show();
+          $('.group-newsl-add-news').show();
+          $('#edit-field-newsl-time').show();
+          $('.form-field-name-field-survey-start-date').show();
+          $('#edit-field-newsl-frequency').hide();
+          $('#edit-field-newsl-newsletter-content').hide();
+          $('#edit-field-newsl-day').hide();
+          $('#edit-field-newsl-date').hide();
+          $('#edit-field-newsl-time-period').hide();
       }
       
       //Aautomatic and manual hide/show onclick
       $("input[name='field_newsl_newsletter_type[und]']").on("click", function() {
         var check_radio_name = $(this).val();
+        
         if (check_radio_name === 'automatic') {
+          
+          $('#edit-field-newsl-schedule').hide();
+          $('.form-field-name-field-survey-start-date').hide();
           $('#edit-field-newsl-frequency').show();
           $('#edit-field-newsl-newsletter-content').show();
           $('.group-newsl-add-news').hide();
@@ -77,22 +86,24 @@
           }
           else if ($("input[name='field_newsl_frequency[und]']:checked").val() === 'weekly') {
             $('#edit-field-newsl-day').show();
-            $('#edit-field-newsl-time').hide();
-            $('#edit-field-newsl-time-period').hide();
+            $('#edit-field-newsl-time').show();
+            $('#edit-field-newsl-time-period').show();
             $('#edit-field-newsl-time-date').hide();
           }
           else {
             $('#edit-field-newsl-date').show();
-            $('#edit-field-newsl-time').hide();
-            $('#edit-field-newsl-time-period').hide();
+            $('#edit-field-newsl-time').show();
+            $('#edit-field-newsl-time-period').show();
             $('#edit-field-newsl-day').hide();
           }
         } 
         else {
+          $('#edit-field-newsl-schedule').show();
           $('.group-newsl-add-news').show();
+          $('#edit-field-newsl-time').show();
+          $('.form-field-name-field-survey-start-date').show();
           $('#edit-field-newsl-frequency').hide();
           $('#edit-field-newsl-newsletter-content').hide();
-          $('#edit-field-newsl-time').hide();
           $('#edit-field-newsl-day').hide();
           $('#edit-field-newsl-date').hide();
           $('#edit-field-newsl-time-period').hide();
@@ -110,62 +121,89 @@
         }
         else if (check_radio_name === 'weekly') {
           $('#edit-field-newsl-day').show();
-          $('#edit-field-newsl-time').hide();
-          $('#edit-field-newsl-time-period').hide();
+          $('#edit-field-newsl-time').show();
+          $('#edit-field-newsl-time-period').show();
           $('#edit-field-newsl-date').hide();
         }
         else {
           $('#edit-field-newsl-date').show();
-          $('#edit-field-newsl-time').hide();
-          $('#edit-field-newsl-time-period').hide();
+          $('#edit-field-newsl-time').show();
+          $('#edit-field-newsl-time-period').show();
           $('#edit-field-newsl-day').hide();
         }
       });
       
-      //Inline validation
-       $("#newsletter-node-form").validate({
-        submitHandler: function (form) {
-          $('input:submit').attr('disabled', 'disabled');
-          form.submit();
-        },
-        onfocusout: function (element) {
-          $(element).valid();
-        },
-        ignore: '',
-        errorElement: 'span',
-        errorPlacement: function (error, element) {
-          var elementName = element.attr('name');
-          var errorPlaceHolder = '';
-          switch (elementName) {
-            
-            default:
-              errorPlaceHolder = element.parent();
-          }
-          error.appendTo(errorPlaceHolder);
-        },
-        rules: {
-          'field_newsl_frequency[und]': {
-            required: {
-              depends: function() {
-                var answerType = $("input[name='field_newsl_newsletter_type[und]']:checked").val();
-                if (answerType === 'automatic') {
-                  return true;
-                }
-                else {
-                  return false;
-                }
-              }
-            }
-          }
-        },
-                
-        messages: {
-          'field_newsl_frequency[und]': {
-            required: 'Frequency field is required.'
-          }
+      // Hide/show date and time using scheduler(Now/Later)
+      if ($("input[name='field_newsl_schedule[und]']:checked").val() === 'later') {
+        $('#edit-field-survey-start-date').show();
+        $('#edit-field-newsl-time').show();
+      } else {
+        $('#edit-field-survey-start-date').hide();
+        $('#edit-field-newsl-time').hide();
+      }
+      
+      //Now and Later Hide show
+      $("input[name='field_newsl_schedule[und]']").on("click", function() {
+        var check_radio_name = $(this).val();
+        if (check_radio_name === 'later') {
+          $('#edit-field-survey-start-date').show();
+          $('#edit-field-newsl-time').show();
+        }
+        else {
+          $('#edit-field-survey-start-date').hide();
+          $('#edit-field-newsl-time').hide();
         }
       });
+      
+     //Read only newsletter date field
+     if (type === 'Newsletter') {
+        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1').prop("readonly", true);
+      }
+      
+    //Inline validation
+    $("#newsletter-node-form").validate({
+     submitHandler: function (form) {
+       $('input:submit').attr('disabled', 'disabled');
+       form.submit();
+     },
+     onfocusout: function (element) {
+       $(element).valid();
+     },
+     ignore: '',
+     errorElement: 'span',
+     errorPlacement: function (error, element) {
+       var elementName = element.attr('name');
+       var errorPlaceHolder = '';
+       switch (elementName) {
+
+         default:
+           errorPlaceHolder = element.parent();
+       }
+       error.appendTo(errorPlaceHolder);
+     },
+     rules: {
+       'field_newsl_frequency[und]': {
+         required: {
+           depends: function() {
+             var answerType = $("input[name='field_newsl_newsletter_type[und]']:checked").val();
+             if (answerType === 'automatic') {
+               return true;
+             }
+             else {
+               return false;
+             }
+           }
+         }
+       }
+     },
+
+     messages: {
+       'field_newsl_frequency[und]': {
+         required: 'Frequency field is required.'
+       }
+     }
+   });
     
-    }
+  }
  };
 })(jQuery, Drupal, this, this.document);
