@@ -181,7 +181,7 @@ function feature_for_mobile_services_field_default_field_instances() {
             'search_all_fields' => 0,
           ),
         ),
-        'imce_filefield_on' => 0,
+        'imce_filefield_on' => 1,
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
@@ -245,9 +245,10 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_large_image',
     'label' => 'Content image',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -261,10 +262,19 @@ function feature_for_mobile_services_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'image',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
@@ -275,9 +285,10 @@ function feature_for_mobile_services_field_default_field_instances() {
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
-        'imce_filefield_on' => 0,
+        'imce_filefield_on' => 1,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -537,7 +548,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => 5000,
+      'max' => 255,
       'min' => 1,
       'prefix' => '',
       'suffix' => '',
@@ -1213,7 +1224,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => 5000,
+      'max' => 255,
       'min' => 1,
       'prefix' => '',
       'suffix' => '',

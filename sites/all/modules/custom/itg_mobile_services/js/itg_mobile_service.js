@@ -8,6 +8,7 @@ var genrateFlag = 1;
 var rowCount = 1;
 var firstDate = 1;
 var fixedDate = '';
+var maxLen = 0;
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
@@ -130,6 +131,8 @@ var fixedDate = '';
                     jQuery("#edit-field-service-content tbody tr:first").css("display", "block");
                     var today_date = custom_today_date();
                     jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                    jQuery('input[name="field_service_frequency_date[und][0][value][date]"]').val(today_date);
+                    jQuery('input[name="field_service_frequency_date[und][0][value2][date]"]').val(today_date);
                 } else if ($(this).attr("value") == "2") {
                     jQuery('#edit-field-service-content-und-0-remove-button').show();
                     jQuery('#field-service-content-add-more-wrapper').hide();
@@ -138,6 +141,8 @@ var fixedDate = '';
                     jQuery('#edit-field-service-frequency-date').show();
                     fixedDate = "+6 D";
                     fixedDay = 6;
+                    jQuery('input[name="field_service_frequency_date[und][0][value][date]"]').val('');
+                    jQuery('input[name="field_service_frequency_date[und][0][value2][date]"]').val('');
                 } else if ($(this).attr("value") == "3") {
                     jQuery('#edit-field-service-content-und-0-remove-button').show();
                     jQuery('#field-service-content-add-more-wrapper').hide();
@@ -146,6 +151,8 @@ var fixedDate = '';
                     jQuery('#edit-field-service-frequency-date').show();
                     fixedDate = "+1M";
                     fixedDay = 30;
+                    jQuery('input[name="field_service_frequency_date[und][0][value][date]"]').val('');
+                    jQuery('input[name="field_service_frequency_date[und][0][value2][date]"]').val('');
                 }
             });
 
@@ -157,8 +164,8 @@ var fixedDate = '';
                     jQuery('#edit-field-service-frequency-und-1').prop('checked', true);
                     var today_date = custom_today_date();
                     jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
-                    $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val('').removeAttr('disabled');
-                    $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('').removeAttr('disabled');
+                    $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val(today_date).removeAttr('disabled');
+                    $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(today_date).removeAttr('disabled');
                 }
                 firstTime++;
             }
@@ -166,6 +173,16 @@ var fixedDate = '';
             jQuery('#reset-date-button').on("click", function (event) {
                 event.preventDefault();
                 location.reload(true);
+            });
+
+            $("#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1").datepicker({
+                minDate: 0,
+                showOn: "focus",
+                dateFormat: 'dd/mm/yy',
+                onSelect: function (selected) {
+                    $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val(selected);
+                    $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(selected);
+                }
             });
 
             $("#edit-field-service-frequency-date-und-0-value-datepicker-popup-1").datepicker({
@@ -299,6 +316,30 @@ var fixedDate = '';
                 return today = dd + '/' + mm + '/' + yyyy;
             }
 
+            jQuery('#edit-field-service-association-title-und').change(function () {
+                jQuery('#remain').text('');
+                if (jQuery('#edit-field-service-association-title-und').val() != '_none') {
+                    var nid = jQuery('#edit-field-service-association-title-und').val();
+                    jQuery.ajax({
+                        type: "POST",
+                        url: Drupal.settings.basePath + 'countchar_validation',
+                        data: 'nidvalue=' + nid,
+                        success: function (msg) {
+                            maxLen = parseInt(msg);
+                        },
+                    });
+                }
+            });
+
+            jQuery('.field-name-field-story-expert-description .form-textarea').on('keyup', function () {
+                var tlength = jQuery(this).val().length;
+                console.log(maxLen);
+                console.log(tlength);
+                jQuery(this).val(jQuery(this).val().substring(0, maxLen));
+                remain = maxLen - parseInt(tlength);
+                jQuery('#remain').text(remain + ' characters remaining from ' + maxLen);
+            });
+
         }
     }
 })(jQuery);
@@ -309,34 +350,3 @@ function days_in_month(month, year) {
     return new Date(year, month, 0).getDate();
 }
 
-
-
-
-jQuery('document').ready(function () {
-    var maxLen = 0
-    jQuery('#edit-field-service-association-title-und').change(function () {
-        jQuery('#remain').text('');
-        if (jQuery('#edit-field-service-association-title-und').val() != '_none') {
-            var nid = jQuery('#edit-field-service-association-title-und').val();
-            jQuery.ajax({
-                type: "POST",
-                url: Drupal.settings.basePath + 'countchar_validation',
-                data: 'nidvalue=' + nid,
-                success: function (msg) {
-                    maxLen = parseInt(msg);
-                },
-            });
-        }
-    });
-
-
-    jQuery('#edit-field-story-expert-description-und-0-value').keyup(function () {
-        var tlength = jQuery(this).val().length;
-        console.log(maxLen);
-        console.log(tlength);
-        jQuery(this).val(jQuery(this).val().substring(0, maxLen));
-        var tlength = jQuery(this).val().length;
-        remain = maxLen - parseInt(tlength);
-        jQuery('#remain').text(remain + ' characters remaining from ' + maxLen);
-    });
-});
