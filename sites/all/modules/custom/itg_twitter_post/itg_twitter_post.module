@@ -2,10 +2,14 @@
 /**
  * Define constant for authentication keys
  */
-define('CONSUMER_KEY', 'oynNx70nQQo8aWUlcYtc7BUDX');
-define('CONSUMER_SECRET', '2RsvsZLF5hpEcFIjHvqbUNxoeqFStyB9ZEAxognUjVaBWz2r8X');
-define('OAUTH_TOKEN', '732461289138585601-ZGsz2F1L9hHH1OBVGAWyiA3Zb9IoxlX');
-define('OAUTH_TOKEN_SECRET', 'hp6qwLPSek76vapx9ReocpXdpXa4078SIoKAe3h0m5Xt7');
+//define('CONSUMER_KEY', 'oynNx70nQQo8aWUlcYtc7BUDX');
+define('CONSUMER_KEY', 'ZrAM49Mh50YKRxRTtLY1mP1jE');
+//define('CONSUMER_SECRET', '2RsvsZLF5hpEcFIjHvqbUNxoeqFStyB9ZEAxognUjVaBWz2r8X');
+define('CONSUMER_SECRET', 'GBNz25BRuSYcNJiWyTtsBSCrb6mDWNxtZrK4EHm0tmjB54Zpzi');
+//define('OAUTH_TOKEN', '732461289138585601-ZGsz2F1L9hHH1OBVGAWyiA3Zb9IoxlX');
+define('OAUTH_TOKEN', '732461289138585601-yKseoi32vL9UTfoHmRt80cl5awdnLE4');
+//define('OAUTH_TOKEN_SECRET', 'hp6qwLPSek76vapx9ReocpXdpXa4078SIoKAe3h0m5Xt7');
+define('OAUTH_TOKEN_SECRET', 'IBqZLZfohV5yz3xcXTTU8h9X6bZBqg3IRkUV3wiyN1aUI');
 
 require_once 'vendor/autoload.php';
 
