@@ -110,7 +110,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Reporter's Email id */
+  /* Field: Content: Email id */
   $handler->display->display_options['fields']['field_reporter_email_id']['id'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
@@ -802,7 +802,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -1098,7 +1098,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -1451,7 +1451,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -1829,7 +1829,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2095,7 +2095,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2519,7 +2519,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2870,7 +2870,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state_1']['value'] = array(
     'needs_review' => 'needs_review',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2961,7 +2961,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Field: Expiry On */
+  /* Field: Field: Expiry Date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -3155,7 +3155,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -3338,7 +3338,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Field: Expiry On */
+  /* Field: Field: Expiry Date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -3527,7 +3527,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -4133,7 +4133,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -4431,7 +4431,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
