@@ -158,7 +158,8 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'vas_service_content_node_form':
       $form['metatags']['#type'] = 'hidden';
-
+      // hide preview button
+      variable_set('node_preview_vas-service-content', '0');
       if (isset($form['nid']['#value'])) {
         drupal_add_js("jQuery(document).ready(function(){jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1, #edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').addClass('itg-disabled');  });", 'inline');
         drupal_add_js("jQuery(document).ready(function(){jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');  });", 'inline');

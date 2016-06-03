@@ -281,7 +281,7 @@ function feature_for_mobile_services_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -1658,7 +1658,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_service_frequency_date',
     'label' => 'Service Frequency Date',
     'required' => 1,
