@@ -85,7 +85,8 @@ var maxLen = 0;
                 var content_format_array = jQuery('#content-format-hidden').val().split(',');
                 if (content_format_array) {
                     jQuery.each(content_format_array, function (keys, values) {
-                        console.log(values)
+                        // content-format-hidden
+                        jQuery('#field-service-content-add-more-wrapper').show();
                         // content-format-hidden
                         if (values == 'text') {
                             jQuery('.field-name-field-story-expert-description').show();
@@ -96,7 +97,7 @@ var maxLen = 0;
                             jQuery('.field-name-field-service-video').show();
                         } else if (values == 'audio') {
                             jQuery('.field-name-field-service-audio').show();
-                        } else if (values == 'wap(image,text,videoandaudio)') {
+                        } else if (values == 'wap(image') {
                             jQuery('.field-name-field-story-expert-description').show();
                             jQuery('.field-name-field-story-large-image').show();
                             jQuery('.field-name-field-service-video').show();
