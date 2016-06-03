@@ -445,7 +445,10 @@ textarea{
   color: red;
 }
 .messages--error{
-  .messages__list{padding-left: 15px;}
+  .messages__list{padding-left: 13px;}
+  background: #fefafb none repeat scroll 0 0;
+  border: 1px solid red;
+  padding: 10px 30px;
 }
 .region-help{
   ul{
