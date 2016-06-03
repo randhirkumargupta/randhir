@@ -874,8 +874,13 @@ textarea {
   color: red;
 }
 
+.messages--error {
+  background: #fefafb none repeat scroll 0 0;
+  border: 1px solid red;
+  padding: 10px 30px;
+}
 .messages--error .messages__list {
-  padding-left: 15px;
+  padding-left: 13px;
 }
 
 .region-help ul {
