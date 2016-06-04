@@ -183,7 +183,7 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
@@ -213,11 +213,11 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
-  /* Field: Field: Mobile Number */
+  /* Field: Field: Mobile number */
   $handler->display->display_options['fields']['field_mobile_number']['id'] = 'field_mobile_number';
   $handler->display->display_options['fields']['field_mobile_number']['table'] = 'field_data_field_mobile_number';
   $handler->display->display_options['fields']['field_mobile_number']['field'] = 'field_mobile_number';
@@ -373,7 +373,7 @@ function user_management_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Field: Mobile Number (field_mobile_number) */
+  /* Filter criterion: Field: Mobile number (field_mobile_number) */
   $handler->display->display_options['filters']['field_mobile_number_value']['id'] = 'field_mobile_number_value';
   $handler->display->display_options['filters']['field_mobile_number_value']['table'] = 'field_data_field_mobile_number';
   $handler->display->display_options['filters']['field_mobile_number_value']['field'] = 'field_mobile_number_value';

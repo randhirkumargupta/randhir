@@ -159,6 +159,40 @@ function syndication_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_syndication_rule_details-field_syndication_content_type'.
+  $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_content_type'] = array(
+    'bundle' => 'field_syndication_rule_details',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_syndication_content_type',
+    'label' => 'Select Content Type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_syndication_rule_details-field_syndication_feed_type'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_feed_type'] = array(
     'bundle' => 'field_syndication_rule_details',
@@ -226,7 +260,7 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -294,7 +328,7 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -332,7 +366,7 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -370,7 +404,7 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -411,45 +445,7 @@ function syndication_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_syndication_rule_details-field_syndication_time_format'.
-  $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_time_format'] = array(
-    'bundle' => 'field_syndication_rule_details',
-    'default_value' => array(
-      0 => array(
-        'value' => 'AM',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 4,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_syndication_time_format',
-    'label' => 'Time format',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 7,
     ),
   );
 
@@ -810,6 +806,7 @@ function syndication_feature_field_default_field_instances() {
   t('FTP URL');
   t('FTP Username');
   t('Select Client title');
+  t('Select Content Type');
   t('Select Delivery Mode');
   t('Select Feed type');
   t('Select Frequency');
@@ -818,7 +815,6 @@ function syndication_feature_field_default_field_instances() {
   t('Set Day');
   t('Syndication rule details');
   t('Time');
-  t('Time format');
   t('Via FTP');
   t('Via Mail');
   t('Via Web URL');
