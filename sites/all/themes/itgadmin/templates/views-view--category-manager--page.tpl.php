@@ -20,7 +20,7 @@
  * - $rows: The results of the view query, if any
  * - $empty: The empty text to display if the view is empty
  * - $pager: The pager next/prev links to display, if any
- * - $exposed: Exposed widget form/info to display
+ * - $exposed: Exposed widget form/info to display  
  * - $feed_icon: Feed icon to display, if any
  * - $more: A link to view more, if any
  *
