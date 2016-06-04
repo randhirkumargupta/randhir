@@ -83,7 +83,7 @@
         onclick: function (element) {
           $(element).valid();
         },
-        ignore: '',
+        //ignore: '',
         errorElement: 'span',
         errorPlacement: function (error, element) {
           var elementName = element.attr('name');
