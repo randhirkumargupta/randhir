@@ -178,7 +178,6 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_term_status_message(&$form, $form_state) {
   if($form['#term']['vocabulary_machine_name'] == 'tags') {
-    
     if (isset($_SESSION['messages']['status'])) {
       unset($_SESSION['messages']['status']);
     }
