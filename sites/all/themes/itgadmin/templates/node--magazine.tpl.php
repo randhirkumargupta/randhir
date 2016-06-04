@@ -34,9 +34,12 @@
  * 
  * @ingroup themeable
  */
-
+ if (isset($node->op) && $node->op == 'Preview') {
 ?>
 <h3>Preview full version</h3>
+<?php
+ }
+?>
 <a class="close-preview" href="javascript:;"> </a>
 <div class="node node-preview">
   <div class="field"><div class="field-label">Magazine Title: </div><div class="field-items"><?php print $title; ?></div></div>

@@ -23,6 +23,21 @@ function features_for_newsletter_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create newsletter_templates content'.
+  $permissions['create newsletter_templates content'] = array(
+    'name' => 'create newsletter_templates content',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any newsletter content'.
   $permissions['delete any newsletter content'] = array(
     'name' => 'delete any newsletter content',
@@ -32,10 +47,30 @@ function features_for_newsletter_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any newsletter_templates content'.
+  $permissions['delete any newsletter_templates content'] = array(
+    'name' => 'delete any newsletter_templates content',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own newsletter content'.
   $permissions['delete own newsletter content'] = array(
     'name' => 'delete own newsletter content',
     'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own newsletter_templates content'.
+  $permissions['delete own newsletter_templates content'] = array(
+    'name' => 'delete own newsletter_templates content',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -54,6 +89,22 @@ function features_for_newsletter_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any newsletter_templates content'.
+  $permissions['edit any newsletter_templates content'] = array(
+    'name' => 'edit any newsletter_templates content',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Expert' => 'Expert',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own newsletter content'.
   $permissions['edit own newsletter content'] = array(
     'name' => 'edit own newsletter content',
@@ -62,6 +113,22 @@ function features_for_newsletter_user_default_permissions() {
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own newsletter_templates content'.
+  $permissions['edit own newsletter_templates content'] = array(
+    'name' => 'edit own newsletter_templates content',
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Expert' => 'Expert',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',

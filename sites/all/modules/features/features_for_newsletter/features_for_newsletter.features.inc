@@ -36,6 +36,14 @@ function features_for_newsletter_node_info() {
       'title_label' => t('Subject Line'),
       'help' => '',
     ),
+    'newsletter_templates' => array(
+      'name' => t('Newsletter Templates'),
+      'base' => 'node_content',
+      'description' => t('Created to manage newsletter templates.'),
+      'has_title' => '1',
+      'title_label' => t('Subject Line'),
+      'help' => '',
+    ),
   );
   drupal_alter('node_info', $items);
   return $items;

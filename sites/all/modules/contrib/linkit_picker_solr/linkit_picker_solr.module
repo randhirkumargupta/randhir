@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Main file for linkit_pikcer_solr module.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function linkit_picker_solr_views_api() {
+  return array(
+      'api' => 3,
+      'path' => drupal_get_path('module', 'linkit_picker_solr') . '/includes',
+  );
+}

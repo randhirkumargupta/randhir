@@ -24,9 +24,11 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#type' => 'checkboxes',
       '#title' => t('Social media integration '),
       '#options' => array(
-        'facebook' => 'Facebook',
+        'facebook' => 'Facebook Image',
+        'facebook_video' => 'Facebook Video',
         'facebook_instant_article' => 'Facebook Instant Article',
-        'twitter' => 'Twitter',
+        'twitter' => 'Twitter Image',
+        'twitter_video'
       ),
       '#default_value' => $data,
     );
@@ -36,7 +38,17 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#attributes' => array('class' => array('social-fb-block')),
       '#states' => array(
         'visible' => array(
-          ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+          ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),          
+        )
+      ),
+    );
+    $form['fb_video_wrap'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Facebook Social Media Video Integration'),
+      '#attributes' => array('class' => array('social-fb-block')),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),          
         )
       ),
     );
@@ -47,14 +59,13 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#default_value' => isset($node->field_story_facebook_narrative['und'][0]['value']) ? $node->field_story_facebook_narrative['und'][0]['value'] : '',
       '#states' => array(
         'visible' => array(
-          ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+          ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),          
         ),
         'required' => array(
-          ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+          ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),          
         )
       ),
     );
-    
     // Facebook additional fields
     $form['fb_wrap']['field_story_posted_by_facebook'] = array(
       '#type' => 'hidden',      
@@ -90,12 +101,48 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#default_value' => isset($node->field_story_facebook_image['und'][0]['fid']) ? $node->field_story_facebook_image['und'][0]['fid'] : 0,
       '#widget' => 'imce',      
       '#preview' => TRUE,
+      "#upload_validators"  => array(
+        "file_validate_extensions" => array("gif jpg")
+      ),
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
         ),
         'required' => array(
           ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+        )
+      ),
+    );
+    $form['fb_video_wrap']['itg_facebook_video_text'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Facebook Video Description'),
+      '#maxlength' => 255,
+      '#default_value' => isset($node->field_story_facebook_vdescription['und'][0]['value']) ? $node->field_story_facebook_vdescription['und'][0]['value'] : '',
+      '#states' => array(
+        'visible' => array(
+          ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),          
+        ),
+        'required' => array(
+          ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),          
+        )
+      ),
+    );
+    $form['fb_video_wrap']['itg_fb_video'] = array(
+      '#title' => t('Facebook Video'),
+      '#type' => 'managed_file',      
+      '#upload_location' => 'public://facebook_video/',
+      '#default_value' => isset($node->field_story_facebook_video['und'][0]['fid']) ? $node->field_story_facebook_video['und'][0]['fid'] : 0,
+      '#widget' => 'imce',      
+      '#preview' => TRUE,
+      "#upload_validators"  => array(
+        "file_validate_extensions" => array("mp4 ogg flv avi 3gp")
+      ),
+      '#states' => array(
+        'visible' => array(          
+          ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
+        ),
+        'required' => array(          
+          ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
         )
       ),
     );
@@ -131,6 +178,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#upload_location' => 'public://itg_twitter_img/',
       '#widget' => 'imce',      
       '#preview' => TRUE,
+      "#upload_validators"  => array(
+        "file_validate_extensions" => array("gif jpg")
+      ),
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
@@ -181,16 +231,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#type' => 'submit',
       '#value' => t('Share Content'),
     );
-    
-  // Check facebook USER IS LOGGED IN OR NOT
-  $fb = new FBAutopost();
-  $fb_user = $fb->getUser();  
-  if ($fb_user == 0) {
-    $form['not_login'] = array(
-      '#type' => 'markup',
-      '#markup' => l(t('Please login to facebook page'), $fb->getLoginUrl(), array('class' => array('button'))),
-    );
-  }
+  
   
   return $form;
 }
