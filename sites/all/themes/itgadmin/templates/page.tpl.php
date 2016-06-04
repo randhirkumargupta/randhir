@@ -73,7 +73,7 @@ if(!in_array('administrator', $user->roles)){
       </nav>
     <?php endif; ?>
     <div class="user-role">
-      <a href="assigned-task-list">
+      <a href="<?php  print $base_url.'/assigned-task-list'; ?>">
         <i class="fa fa-bell-o"></i>
         <dfn><?php if (function_exists('get_task_count_of_user')) { print get_task_count_of_user(); }?></dfn>
       </a> 

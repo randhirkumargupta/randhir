@@ -39,6 +39,37 @@ function syndication_feature_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
+  // Exported field_base: 'field_syndication_content_type'.
+  $field_bases['field_syndication_content_type'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_syndication_content_type',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'Cooking Tips' => 'Cooking Tips',
+        'Food News' => 'Food News',
+        'Recipe' => 'Recipe',
+        'Story' => 'Story',
+        'Photogallery' => 'Photogallery',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_syndication_delivery_mode'.
   $field_bases['field_syndication_delivery_mode'] = array(
     'active' => 1,
@@ -466,34 +497,6 @@ function syndication_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
-  );
-
-  // Exported field_base: 'field_syndication_time_format'.
-  $field_bases['field_syndication_time_format'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_syndication_time_format',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'AM' => 'AM',
-        'PM' => 'PM',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
   );
 
   return $field_bases;

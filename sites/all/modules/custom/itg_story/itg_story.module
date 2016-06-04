@@ -12,7 +12,8 @@
  * Implements hook_init().
  */
 function itg_story_init() {
-  
+  //echo date('d/m/Y', '1464719400');exit;
+  //get_ftp_details_by_client('Idea-JNP', 'JNP FTP2');
 }
 
 
