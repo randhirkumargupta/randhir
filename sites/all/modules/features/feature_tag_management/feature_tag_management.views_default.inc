@@ -261,6 +261,40 @@ function feature_tag_management_views_default_views() {
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: Taxonomy term: Tag Status (field_tags_status) */
+  $handler->display->display_options['filters']['field_tags_status_value']['id'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['table'] = 'field_data_field_tags_status';
+  $handler->display->display_options['filters']['field_tags_status_value']['field'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['relationship'] = 'tid';
+  $handler->display->display_options['filters']['field_tags_status_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_tags_status_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['operator_id'] = 'field_tags_status_value_op';
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['label'] = 'Tag Status';
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['operator'] = 'field_tags_status_value_op';
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['identifier'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    22 => 0,
+  );
   /* Filter criterion: Taxonomy vocabulary: Machine name */
   $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
   $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
@@ -302,39 +336,6 @@ function feature_tag_management_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
-  );
-  /* Filter criterion: Taxonomy term: Tag Status (field_tags_status) */
-  $handler->display->display_options['filters']['field_tags_status_value']['id'] = 'field_tags_status_value';
-  $handler->display->display_options['filters']['field_tags_status_value']['table'] = 'field_data_field_tags_status';
-  $handler->display->display_options['filters']['field_tags_status_value']['field'] = 'field_tags_status_value';
-  $handler->display->display_options['filters']['field_tags_status_value']['relationship'] = 'tid';
-  $handler->display->display_options['filters']['field_tags_status_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_tags_status_value']['expose']['operator_id'] = 'field_tags_status_value_op';
-  $handler->display->display_options['filters']['field_tags_status_value']['expose']['label'] = 'Tag Status';
-  $handler->display->display_options['filters']['field_tags_status_value']['expose']['operator'] = 'field_tags_status_value_op';
-  $handler->display->display_options['filters']['field_tags_status_value']['expose']['identifier'] = 'field_tags_status_value';
-  $handler->display->display_options['filters']['field_tags_status_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    19 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-    22 => 0,
   );
 
   /* Display: Page */
