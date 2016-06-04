@@ -128,7 +128,29 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
   if($form_id == "itg_celebrity_profile_node_form"){
       $form['#validate'][] = 'itg_common_managesite_validate';
+      $form['actions']['submit']['#submit'][] = 'itg_site_form_custom_submit_callback';
   }
+}
+
+/**
+ * After submit Cooking Tips
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_site_form_custom_submit_callback($form, &$form_state) {
+
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if (arg(2) == 'edit') {
+    $op = 'updated';
+  }
+  else {
+    $op = 'created';
+  }
+  $celebrity_title = $form_state['node']->title;
+  drupal_set_message(t('Celebrity profile <b>' . $celebrity_title . '</b> has been ' . $op .'.'));
+  //$_GET['destination'] = 'manage-food-news';
 }
 
 /**
