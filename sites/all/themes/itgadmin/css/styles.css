@@ -812,12 +812,14 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 
 .choose-audio-video-file .form-managed-file span.file img, [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file img,
 [id*="field-event-media-values"] .field-name-field-audio .form-managed-file span.file img, .form-field-name-field-astro-video .form-managed-file span.file img, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file img,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file img {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file img, .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file span.file img,
+.node-recipe-form .form-field-name-field-recipe-video .form-managed-file span.file img {
   vertical-align: top;
 }
 .choose-audio-video-file .form-managed-file span.file a, [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file a,
 [id*="field-event-media-values"] .field-name-field-audio .form-managed-file span.file a, .form-field-name-field-astro-video .form-managed-file span.file a, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file a,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file a {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file a, .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file span.file a,
+.node-recipe-form .form-field-name-field-recipe-video .form-managed-file span.file a {
   display: inline-block;
   max-width: 170px;
   overflow: hidden;
@@ -828,12 +830,14 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 }
 .choose-audio-video-file .form-managed-file span.file-size, [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file-size,
 [id*="field-event-media-values"] .field-name-field-audio .form-managed-file span.file-size, .form-field-name-field-astro-video .form-managed-file span.file-size, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file-size,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file-size {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file-size, .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file span.file-size,
+.node-recipe-form .form-field-name-field-recipe-video .form-managed-file span.file-size {
   vertical-align: top;
 }
 .choose-audio-video-file .form-managed-file .form-submit[value="Remove"], [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file .form-submit[value="Remove"],
 [id*="field-event-media-values"] .field-name-field-audio .form-managed-file .form-submit[value="Remove"], .form-field-name-field-astro-video .form-managed-file .form-submit[value="Remove"], [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file .form-submit[value="Remove"],
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file .form-submit[value="Remove"] {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file .form-submit[value="Remove"], .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file .form-submit[value="Remove"],
+.node-recipe-form .form-field-name-field-recipe-video .form-managed-file .form-submit[value="Remove"] {
   background: transparent none repeat scroll 0 0;
   border: medium none;
   color: #ee4d4d;
@@ -870,8 +874,13 @@ textarea {
   color: red;
 }
 
+.messages--error {
+  background: #fefafb none repeat scroll 0 0;
+  border: 1px solid red;
+  padding: 10px 30px;
+}
 .messages--error .messages__list {
-  padding-left: 15px;
+  padding-left: 13px;
 }
 
 .region-help ul {
@@ -3473,5 +3482,10 @@ div.node #comments h2 {
   z-index: 99;
 }
 #SocialMedia .form-field-type-image .ajax-progress {
+  display: none;
+}
+
+.node-recipe-form .form-field-name-field-recipe-audio .ajax-progress,
+.node-recipe-form .form-field-name-field-recipe-video .ajax-progress {
   display: none;
 }

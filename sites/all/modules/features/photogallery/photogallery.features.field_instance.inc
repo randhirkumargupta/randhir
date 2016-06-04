@@ -367,7 +367,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 9,
     ),
   );
 
@@ -406,7 +406,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 10,
     ),
   );
 
@@ -474,7 +474,7 @@ function photogallery_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 13,
+      'weight' => 11,
     ),
   );
 
@@ -516,7 +516,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 13,
     ),
   );
 
@@ -555,7 +555,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 12,
     ),
   );
 
@@ -645,7 +645,7 @@ function photogallery_field_default_field_instances() {
         'replace_label' => 0,
       ),
       'type' => 'field_collection_embed',
-      'weight' => 16,
+      'weight' => 14,
     ),
   );
 
@@ -739,7 +739,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 17,
+      'weight' => 15,
     ),
   );
 
@@ -778,7 +778,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 16,
     ),
   );
 
@@ -1045,7 +1045,7 @@ function photogallery_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 25,
+      'weight' => 22,
     ),
   );
 
@@ -1088,7 +1088,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 24,
+      'weight' => 21,
     ),
   );
 
@@ -1134,7 +1134,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'autocomplete_deluxe_taxonomy',
-      'weight' => 19,
+      'weight' => 17,
     ),
   );
 
@@ -1329,7 +1329,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 28,
+      'weight' => 25,
     ),
   );
 
@@ -1372,7 +1372,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 30,
+      'weight' => 27,
     ),
   );
 
@@ -1414,7 +1414,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 32,
+      'weight' => 29,
     ),
   );
 
@@ -1530,7 +1530,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 23,
+      'weight' => 20,
     ),
   );
 
@@ -1578,7 +1578,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 20,
+      'weight' => 18,
     ),
   );
 
@@ -1620,7 +1620,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 21,
+      'weight' => 19,
     ),
   );
 
@@ -1678,7 +1678,7 @@ function photogallery_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 29,
+      'weight' => 26,
     ),
   );
 
@@ -1736,7 +1736,7 @@ function photogallery_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 31,
+      'weight' => 28,
     ),
   );
 
@@ -1794,7 +1794,7 @@ function photogallery_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 33,
+      'weight' => 30,
     ),
   );
 
@@ -1836,7 +1836,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 26,
+      'weight' => 23,
     ),
   );
 
@@ -1912,7 +1912,7 @@ function photogallery_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 27,
+      'weight' => 24,
     ),
   );
 

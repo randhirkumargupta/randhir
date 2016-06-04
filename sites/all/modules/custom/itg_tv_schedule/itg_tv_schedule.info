@@ -1,0 +1,6 @@
+name = ITG TV SCHEDULE
+description = "ITG Tv Schedule Module"
+core = 7.x
+package = ITG
+
+files[] = itg_tv_schedule.module

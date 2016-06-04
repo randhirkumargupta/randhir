@@ -363,7 +363,7 @@ function feature_for_poll_views_default_views() {
     ),
     'nothing' => array(
       'align' => '',
-      'separator' => ' |',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
     'field_associate_poll' => array(
@@ -524,6 +524,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['field_associate_poll']['table'] = 'field_data_field_associate_poll';
   $handler->display->display_options['fields']['field_associate_poll']['field'] = 'field_associate_poll';
   $handler->display->display_options['fields']['field_associate_poll']['label'] = 'View Poll';
+  $handler->display->display_options['fields']['field_associate_poll']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_associate_poll']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_associate_poll']['settings'] = array(
     'link' => 1,
