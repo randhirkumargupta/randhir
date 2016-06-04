@@ -97,9 +97,10 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
       if (isset($_REQUEST['destination']) && $_REQUEST['destination'] == 'tags-management') {
         unset($form['actions']['delete']);
       }
-
-      $form['#submit'][] = 'itg_term_status_message';
-
+     
+      if($form['#term']['vocabulary_machine_name'] == 'tags') {
+        $form['#submit'][] = 'itg_term_status_message';
+      }
     case 'taxonomy_csv_import_form':
 
       // Check if the user has not the 'administrator' role.
@@ -176,20 +177,22 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
  * @return array $form
  */
 function itg_term_status_message(&$form, $form_state) {
-  if (isset($_SESSION['messages']['status'])) {
-    unset($_SESSION['messages']['status']);
-  }
-  $arg = arg();
-  if ($arg['2'] == 'taxonomy' && $arg['3'] == 'tags' && $arg['4'] == 'add') {
-    $op = 'created';
-  }
-  elseif ($arg['0'] == 'taxonomy' && $arg['1'] == 'term' && $arg['3'] == 'edit') {
-    $op = 'updated';
-  }
-  $term = $form_state['values']['name'];
-  drupal_set_message(t('Tag <b>' . $term . '</b> has been ' . $op . '.'));
-  $form_state['redirect'] = 'tags-management';
-  return $form;
+  if($form['#term']['vocabulary_machine_name'] == 'tags') {
+    if (isset($_SESSION['messages']['status'])) {
+      unset($_SESSION['messages']['status']);
+    }
+    $arg = arg();
+    if ($arg['2'] == 'taxonomy' && $arg['3'] == 'tags' && $arg['4'] == 'add') {
+      $op = 'created';
+    }
+    elseif ($arg['0'] == 'taxonomy' && $arg['1'] == 'term' && $arg['3'] == 'edit') {
+      $op = 'updated';
+    }
+    $term = $form_state['values']['name'];
+    drupal_set_message(t('Tag <b>' . $term . '</b> has been ' . $op . '.'));
+    $form_state['redirect'] = 'tags-management';
+    return $form;
+  } 
 }
 
 /**
