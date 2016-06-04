@@ -1,17 +1,16 @@
 <?php
+
 /**
  * @file
  *
  * Purpose: ITG social media integration module.
  */
-// Load form.inc file
-
-require "vendor/autoload.php";
-use Abraham\TwitterOAuth\TwitterOAuth;
-
+require 'vendor/autoload.php';
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
+module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.settings');
 
-
+define('FACEBOOK_APP_KEY', '189859088074191');
+define('FACEBOOK_APP_SECRET', '5a7a0b546315d37851ab8c4996c01150');
 
 /**
  * Implement hook_permissions()
@@ -23,6 +22,22 @@ function itg_social_media_permission() {
       'description' => t('Using this permission user can edit social media part of any node.'),
     ),
   );
+}
+
+/**
+ * Implements hook_menu()
+ * {@inheritdoc}
+ */
+function itg_social_media() {
+  $items['itg-social-media-settings'] = array(
+    'title' => t('Social Media Settings'),
+    'page callback' => 'itg_social_media_settings',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.settings.inc',
+  );
+
+  return $items;
 }
 
 /**
@@ -57,6 +72,10 @@ function itg_social_media_block_info() {
     'info' => t('Social Media Integration'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $block['social_media_callback'] = array(
+    'info' => t('Social Media Callback'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $block;
 }
@@ -65,7 +84,7 @@ function itg_social_media_block_info() {
  * Implements hook_block_view()
  * {@inheritdoc}
  */
-function itg_social_media_block_view($delta = '') {  
+function itg_social_media_block_view($delta = '') {
   $block = array();
   $arg = arg();
   $c_type = itg_social_media_node_type(check_plain($arg[1]));
@@ -78,9 +97,50 @@ function itg_social_media_block_view($delta = '') {
       );
 
       break;
+    case 'social_media_callback':
+      $block = array(
+        'subject' => t('Social Media Callback settings'),
+        'content' => '_facebook_callback_settings',
+      );
   }
-  
+
   return $block;
+}
+
+/**
+ * After callback function for facebook access token settings.
+ * @return stdObject
+ */
+function _facebook_callback_settings() {
+  $fb = itg_social_media_fb_connection();
+
+  $helper = $fb->getRedirectLoginHelper();
+  try {
+    $accessToken = $helper->getAccessToken();
+  }
+  catch (Facebook\Exceptions\FacebookResponseException $e) {
+    // When Graph returns an error
+    drupal_set_message('Graph returned an error: ' . $e->getMessage(), 'error');
+  }
+  catch (Facebook\Exceptions\FacebookSDKException $e) {
+    // When validation fails or other local issues
+    drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
+  }
+
+  if (isset($accessToken)) {
+    // Logged in!
+    $_SESSION['facebook_access_token'] = (string) $accessToken;
+    drupal_set_message('Facebook connection has been made successfully', 'status');
+  }
+  elseif ($helper->getError()) {
+    // The user denied the request
+    drupal_set_message('User denied the request.', 'error');
+  }
+  else {
+    drupal_set_message('Unable to connect to facebook.', 'error');
+  }
+
+  return $fb;
 }
 
 /**
@@ -113,29 +173,54 @@ function itg_social_media_perm_file($fid) {
   file_save($file);
   // Record that the module (in this example, user module) is using the file. 
   file_usage_add($file, 'user', 'user', $user->uid);
-}
 
+  return $file;
+}
 
 /**
  * Implements hook_form_submit()
  *
  * {@inheritdoc}
  */
-function itg_social_media_form_submit($form, &$form_state) {
+function itg_social_media_form_submit($form, &$form_state) {  
   $node = node_load($form_state['values']['nid']);
-  
+  // Facebook video section
+  if ($form_state['values']['itg_smi']['facebook_video'] == ' facebook_video') {    
+    $desc = $form_state['values']['itg_facebook_video_text'];
+    $fid = $form_state['values']['itg_fb_video'];
+    $file = itg_social_media_perm_file($fid);
+    $path = drupal_realpath($file->uri);
+    $fb = itg_social_media_fb_connection();
+    $data = [
+      'title' => t('India Today Group'),
+      'description' => t($desc),
+      'source' => $fb->videoToUpload($path),
+    ];
+
+    try {
+      $response = $fb->post('/me/videos', $data, $_SESSION['facebook_access_token']);
+    }
+    catch (Facebook\Exceptions\FacebookResponseException $e) {
+      // When Graph returns an error
+      drupal_set_message('Graph returned an error: ' . $e->getMessage(), 'error');
+    }
+    catch (Facebook\Exceptions\FacebookSDKException $e) {
+      // When validation fails or other local issues
+      drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
+    }
+  }
   // Facebook Image
   if ($form_state['values']['itg_fb_img'] != 0) {
     itg_social_media_perm_file($form_state['values']['itg_fb_img']);
   }
-  
+
   // Facebook video
   if ($form_state['values']['itg_fb_video'] != 0) {
     itg_social_media_perm_file($form_state['values']['itg_fb_video']);
   }
   // field_story_facebook_video  
   if ($form_state['values']['itg_fb_video'] != 0) {
-    $node->field_story_facebook_video['und'][0]= array(
+    $node->field_story_facebook_video['und'][0] = array(
       'fid' => $form_state['values']['itg_fb_video'],
       'display' => 1,
       'description' => ''
@@ -148,7 +233,7 @@ function itg_social_media_form_submit($form, &$form_state) {
       unlink($path);
     }
   }
-  
+
   // Change field value     
   foreach ($form_state['values']['itg_smi'] as $value) {
     if ($value != '0') {
@@ -177,7 +262,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     if ($path != '') {
       unlink($path);
     }
-  }  
+  }
   if ($form_state['values']['field_story_posted_by_facebook'] != '') {
     $node->field_story_posted_by_facebook['und'][0]['value'] = $form_state['values']['field_story_posted_by_facebook'];
     $node->field_story_time_facebook['und'][0]['value'] = $form_state['values']['field_story_time_facebook'];
@@ -186,30 +271,9 @@ function itg_social_media_form_submit($form, &$form_state) {
   if ($form_state['values']['field_story_posted_by_twitter'] != '') {
     $node->field_story_posted_by_twitter['und'][0]['value'] = $form_state['values']['field_story_posted_by_twitter'];
     $node->field_story_time_twitter['und'][0]['value'] = $form_state['values']['field_story_time_twitter'];
-    
-    // Call twitter login function
-    $CONSUMER_KEY_LOCAL = 'ZrAM49Mh50YKRxRTtLY1mP1jE';
-    $CONSUMER_SECRET_LOCAL = 'GBNz25BRuSYcNJiWyTtsBSCrb6mDWNxtZrK4EHm0tmjB54Zpzi';
-    $OAUTH_TOKEN_LOCAL = '732461289138585601-yKseoi32vL9UTfoHmRt80cl5awdnLE4';
-    $OAUTH_TOKEN_SECRET_LOCAL = 'IBqZLZfohV5yz3xcXTTU8h9X6bZBqg3IRkUV3wiyN1aUI';
-    // Include common helper file to get constant values
-    $connection = new TwitterOAuth($CONSUMER_KEY_LOCAL, $CONSUMER_SECRET_LOCAL, $OAUTH_TOKEN_LOCAL, $OAUTH_TOKEN_SECRET_LOCAL);
-    $content = $connection->get("account/verify_credentials");  
-    $file = file_load($form_state['values']['itg_twitter_img']);
-    $path = drupal_realpath($file->uri);  
-    $media1 = $connection->upload('media/upload', ['media' => $path]);
-    $bit_url = shorten_url($node->path['alias'], 'bit.ly');
-    watchdog('bit.ly Url', $bit_url);
-    $parameters = [
-        'status' => $form_state['values']['itg_twitter_narrative'].' '.$bit_url,
-        'media_ids' => $media1->media_id_string
-    ];
-    $result = $connection->post('statuses/update', $parameters);      
-    // Twitter code ends here 
-    
   }
   // TWITTER IMAGE
-  if ($form_state['values']['itg_twitter_img'] != 0) {    
+  if ($form_state['values']['itg_twitter_img'] != 0) {
     itg_social_media_perm_file($form_state['values']['itg_twitter_img']);
   }
 
@@ -231,6 +295,6 @@ function itg_social_media_form_submit($form, &$form_state) {
     if ($path != '') {
       unlink($path);
     }
-  }  
+  }
   node_save($node);
 }
