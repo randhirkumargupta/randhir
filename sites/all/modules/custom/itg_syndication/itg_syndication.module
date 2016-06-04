@@ -508,7 +508,7 @@ function itg_syndication_node_insert($node) {
  * @param array reference $query
  */
 function itg_syndication_views_query_alter(&$view, &$query) {
- 
+ //p($query->where[1]['conditions']);
   if (isset($view->name) && $view->name === 'syndication_feed_generator') {
     foreach($query->where[1]['conditions'] as $key => $val) {
       if(isset($val['field']) && $val['field'] == 'node.type' && $val['value'][0] == 'magazine') {
