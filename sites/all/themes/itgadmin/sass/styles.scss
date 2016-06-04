@@ -3512,4 +3512,10 @@ div.node{
     @extend .choose-audio-video-file;
   }
 }
-
+.page-node-add{
+  .breadcrumb{
+    ol li:nth-child(2){
+      pointer-events: none;
+    }
+  }
+}

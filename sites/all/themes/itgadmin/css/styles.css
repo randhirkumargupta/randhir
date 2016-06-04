@@ -3503,3 +3503,7 @@ div.node #comments h2 {
 .node-recipe-form .form-field-name-field-recipe-video .ajax-progress {
   display: none;
 }
+
+.page-node-add .breadcrumb ol li:nth-child(2) {
+  pointer-events: none;
+}
