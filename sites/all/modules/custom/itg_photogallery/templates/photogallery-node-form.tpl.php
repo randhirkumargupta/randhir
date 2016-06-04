@@ -40,6 +40,7 @@
 <div id="Configuration">
   <h2 class="story-title">Configuration</h2>
   <?php print drupal_render($form['field_featured']); ?>
+  <?php print drupal_render($form['field_story_itg_tags']); ?>
 </div>
 <div id="Categorization">
   <h2 class="story-title">Categorization</h2>
@@ -58,7 +59,8 @@
   <?php print drupal_render($form['field_story_time_twitter']); ?>
   <?php print drupal_render($form['field_story_posted_by_instagram']); ?>
   <?php print drupal_render($form['field_story_time_instagram']); ?>
+  
 </div>
-<h2 id="title-metatags" class="story-title">Meta Tags</h2>
+<h2 class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

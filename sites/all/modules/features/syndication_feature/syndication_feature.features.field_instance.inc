@@ -171,14 +171,14 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 2,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_syndication_feed_type',
     'label' => 'Select Feed type',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -243,14 +243,14 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 3,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_syndication_mode',
     'label' => 'Select Delivery Mode',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -276,15 +276,15 @@ function syndication_feature_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 1,
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_syndication_select_section',
     'label' => 'Select Section',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -302,7 +302,11 @@ function syndication_feature_field_default_field_instances() {
   // 'field_collection_item-field_syndication_rule_details-field_syndication_set_day'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_set_day'] = array(
     'bundle' => 'field_syndication_rule_details',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'Sunday',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -311,7 +315,7 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 5,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -336,7 +340,11 @@ function syndication_feature_field_default_field_instances() {
   // 'field_collection_item-field_syndication_rule_details-field_syndication_set_day_month'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_set_day_month'] = array(
     'bundle' => 'field_syndication_rule_details',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -345,13 +353,13 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 6,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_syndication_set_day_month',
-    'label' => 'Set Day',
+    'label' => 'Set Date',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -370,7 +378,11 @@ function syndication_feature_field_default_field_instances() {
   // 'field_collection_item-field_syndication_rule_details-field_syndication_time'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_time'] = array(
     'bundle' => 'field_syndication_rule_details',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => '01:00',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -379,7 +391,7 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -407,7 +419,11 @@ function syndication_feature_field_default_field_instances() {
   // 'field_collection_item-field_syndication_rule_details-field_syndication_time_format'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_time_format'] = array(
     'bundle' => 'field_syndication_rule_details',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'AM',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -416,7 +432,7 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 8,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -449,7 +465,7 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -492,7 +508,7 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -531,16 +547,9 @@ function syndication_feature_field_default_field_instances() {
       'default' => array(
         'label' => 'above',
         'module' => 'date',
-        'settings' => array(
-          'format_type' => 'custom_date_d_m_y_',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => 0,
-        ),
-        'type' => 'date_default',
-        'weight' => 9,
+        'settings' => array(),
+        'type' => 'date_plain',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -567,8 +576,8 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'site-wide',
+        'increment' => 1,
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -592,8 +601,8 @@ function syndication_feature_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 12,
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -633,7 +642,7 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 13,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -679,7 +688,7 @@ function syndication_feature_field_default_field_instances() {
           'view_mode' => 'full',
         ),
         'type' => 'field_collection_view',
-        'weight' => 14,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -765,7 +774,7 @@ function syndication_feature_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -805,6 +814,7 @@ function syndication_feature_field_default_field_instances() {
   t('Select Feed type');
   t('Select Frequency');
   t('Select Section');
+  t('Set Date');
   t('Set Day');
   t('Syndication rule details');
   t('Time');

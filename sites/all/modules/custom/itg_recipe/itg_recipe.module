@@ -35,55 +35,27 @@ function itg_recipe_node_presave($node) {
 
 /**
  * Implemets hook_form_alter().
+ * @global stdObject $$user
  * @param Array $form
  * @param Array $form_state
  * @param string $form_id
  */
 function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
-  global $user, $base_url;
-  
-    // code for Comment Question field hide and show
-    $form['field_story_facebook_narrative']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
-      )
-    );
-     
-    // code for facebook image field hide and show
-    $form['field_story_facebook_image']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
-      )
-    );
-       
-    // code for tweet field show and hide 
-    $form['field_story_tweet']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
-      ),
-    );
-    
-     // code for tweeter image field hide and show
-    $form['field_story_tweet_image']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
-      )
-    );
-  
-  if ($form_id == 'recipe_node_form') {
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'itg_recipe') . '/js/jquery.validate.min.js',
-    );
-  }
+  global $user, $base_url;  
   switch ($form_id) {
     case 'recipe_node_form':
+      // Social Media Integration field show hide
+      itg_recipe_smi_hideshow($form);
+      $form['#attached']['js'] = array(
+        drupal_get_path('module', 'itg_recipe') . '/js/jquery.validate.min.js',
+      );
       if (!empty($_REQUEST['destination'])) {
         $destination = $_REQUEST['destination'];
       }
       else {
         $destination = 'recipe-management';
       }
-    
+
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
@@ -108,7 +80,91 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'][] = 'itg_food_news_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_food_news_form_custom_callback';
       break;
+    case 'story_node_form':
+      itg_recipe_smi_hideshow($form);
+      break;
+    
+    case 'photogallery_node_form':
+      itg_recipe_smi_hideshow($form);
+  
   }
+}
+
+/**
+ * Social Media Integration fields show hide logic
+ * @global stdObject $user
+ * @param type $form
+ */
+function itg_recipe_smi_hideshow(&$form) {
+  global $user;
+  // Code for Comment Question field hide and show
+  $form['field_story_facebook_narrative']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // Code for facebook image field hide and show
+  $form['field_story_facebook_image']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+    )
+  );
+  
+  // Make facebook posted by field hidden
+  $form['field_story_posted_by_facebook']['und'][0]['value']['#type'] = 'hidden';
+  
+  // Set default value to posted by facebook value.
+  $form['field_story_posted_by_facebook']['und'][0]['value']['#default_value'] = $user->mail;
+  
+  // Make posted by field visible when someone check facebook checkbox
+  $form['field_story_posted_by_facebook']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+    )
+  );
+  
+  // Code for facebook time 
+  $form['field_story_time_facebook']['#type'] = 'hidden';
+  $form['field_story_time_facebook']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // code for tweet field show and hide 
+  $form['field_story_tweet']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+    ),
+  );
+
+  // code for tweeter image field hide and show
+  $form['field_story_tweet_image']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+    )
+  );
+  
+  // Code for posted by twitter and time field
+  $form['field_story_posted_by_twitter']['und'][0]['value']['#default_value'] = $user->mail;
+  $form['field_story_posted_by_twitter']['und'][0]['value']['#type'] = 'hidden';
+  $form['field_story_posted_by_twitter']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+    ),
+  );
+  $form['field_story_time_twitter']['#type'] = 'hidden';
+  $form['field_story_time_twitter']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+    ),
+  );
+
+  // Code for instagram fields show hide
+  $form['field_story_posted_by_instagram']['und'][0]['value']['#type'] = 'hidden';
+  $form['field_story_posted_by_twitter']['und'][0]['value']['#default_value'] = $user->mail;
+  $form['field_story_time_instagram']['#type'] = 'hidden';
 }
 
 /**
@@ -248,12 +304,12 @@ function itg_recipe_views_pre_render(&$view) {
   //Add "Create recipe" button on listing page of recipe
   if ($view->name == "recipe_management") {
     $header_content_recipe = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
-    $header_content_recipe .= '<span class="manage_recipe_view_menu">' . l(t('Recipes'), 'recipe-management') . '&nbsp;</span>';
+    $header_content_recipe .= '<span class="manage_recipe_view_menu">' .l(t("Recipes"), "recipe-management"). '&nbsp;</span>';
     $header_content_recipe .= '<span class="manage_cooking_tips_view_menu">' . l(t('Cooking Tips'), 'manage-cooking-tips') . '&nbsp;</span>';
-    $header_content_recipe .= '<span class="create_cooking_tips">' . l(t('Create Cooking Tips'), 'node/add/cooking-tips') . '&nbsp;</span>';
+    $header_content_recipe .= '<span class="create_cooking_tips">' . l(t('Create Cooking Tips'), 'node/add/cooking-tips', array('query' => array('destination' => 'manage-cooking-tips'))) . '&nbsp;</span>';
     $header_content_recipe .= '<span class="manage_cooking_tips_view_menu">' . l(t('Food News'), 'manage-food-news') . '&nbsp;</span>';
-    $header_content_recipe .= '<span class="create_cooking_tips">' . l(t('Create Food News'), 'node/add/food-news') . '&nbsp;</span>';
-    $header_content_recipe .= l(t('Create Recipe'), 'node/add/recipe');
+    $header_content_recipe .= '<span class="create_cooking_tips">' . l(t('Create Food News'), 'node/add/food-news', array('query' => array('destination' => 'manage-food-news'))) . '&nbsp;</span>';
+    $header_content_recipe .= l(t('Create Recipe'), 'node/add/recipe', array('query' => array('destination' => 'recipe-management')));
     $view->attachment_before = $header_content_recipe;
   }
   if ($view->name == "manage_cooking_tips") {
