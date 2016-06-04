@@ -44,12 +44,13 @@
       <?php print $exposed; ?>
     </div>
   <?php endif; ?>
-    
+
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
       <?php print $attachment_before; ?>
     </div>
   <?php endif; ?>
+
   <div class="category-manager-thead">
       <div class="cmt-title">Category Name</div>
       <div class="cmt-details">
@@ -58,8 +59,8 @@
       <span>Status</span>
       <span>Action</span>
       </div>
-  </div>
-
+  </div>    
+    
   <?php if ($rows): ?>
     <div class="view-content">
       <?php print $rows; ?>
@@ -95,4 +96,5 @@
       <?php print $feed_icon; ?>
     </div>
   <?php endif; ?>
-</div>
+
+</div><?php /* class view */ ?>
