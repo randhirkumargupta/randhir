@@ -212,6 +212,10 @@ a.ckeditor_links{
     text-decoration: underline;
   }
 }
+.astrick{
+  content: '*';
+  color: red;
+}
 a.button{
   padding: 6px 12px;
 }
@@ -1938,6 +1942,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       position: absolute;
       left: 0;
       bottom: -30px;
+      z-index: 99;
     }
   }
   > tbody > tr > td > .ajax-new-content{
@@ -1988,6 +1993,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
             border-radius: 50%;
             background: url('../images/cross_small.png') center center no-repeat #fff;
             text-indent: -9999px;
+            z-index: 99;
           }
           .ajax-progress{
             display: none;
@@ -1997,6 +2003,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           bottom: -28px;
           position: absolute;
           right: 0;
+          z-index: 99;
           .field-add-more-submit{
             @extend .add-more;
             font-size: 26px;
@@ -3056,6 +3063,22 @@ div.node{
     .field-name-field-survey-skip{
       @extend .of-hide;
       margin-top: 10px;
+      .form-type-radios{
+        > label{
+          width: auto;
+          &+div{
+            padding-left: 0;
+            .form-radio, label{@extend .vmid;}
+          }
+        }
+      }
+    }
+    .field-name-field-survey-answer-option-1{
+      .form-type-textfield{
+        > label:after{
+          @extend .astrick;
+        }
+      }
     }
     .field-name-field-survey-question{
       @extend .dib;

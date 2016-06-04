@@ -193,7 +193,7 @@ img {
   display: none !important;
 }
 
-.vmid, .breadcrumb ol li, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes > label, [id*="itg-survey-survey-form"] .answer-container div.rating, [id*="itg-quiz-quiz-form"] .answer-container div.rating, .edit-link,
+.vmid, .breadcrumb ol li, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes > label, [id*="itg-survey-survey-form"] .answer-container div.rating, [id*="itg-quiz-quiz-form"] .answer-container div.rating, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-skip .form-type-radios > label + div .form-radio, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-skip .form-type-radios > label + div label, .edit-link,
 .view-link,
 .delete-link,
 .edit-cm a {
@@ -615,6 +615,11 @@ a.ckeditor_links {
 }
 a.ckeditor_links:hover {
   text-decoration: underline;
+}
+
+.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after {
+  content: '*';
+  color: red;
 }
 
 a.button {
@@ -2090,6 +2095,7 @@ div.image-widget-data .ajax-progress-throbber {
   position: absolute;
   left: 0;
   bottom: -30px;
+  z-index: 99;
 }
 [id*="field-quiz-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit[value="Remove"] {
   left: 172px;
@@ -2129,6 +2135,7 @@ div.image-widget-data .ajax-progress-throbber {
   border-radius: 50%;
   background: url("../images/cross_small.png") center center no-repeat #fff;
   text-indent: -9999px;
+  z-index: 99;
 }
 [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .ajax-progress {
   display: none;
@@ -2137,6 +2144,7 @@ div.image-widget-data .ajax-progress-throbber {
   bottom: -28px;
   position: absolute;
   right: 0;
+  z-index: 99;
 }
 [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit {
   font-size: 26px;
@@ -3154,6 +3162,12 @@ div.node #comments h2 {
 }
 [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-skip {
   margin-top: 10px;
+}
+[id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-skip .form-type-radios > label {
+  width: auto;
+}
+[id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-skip .form-type-radios > label + div {
+  padding-left: 0;
 }
 [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-question .form-type-textfield {
   margin: 0;
