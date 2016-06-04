@@ -38,7 +38,7 @@ function mega_review_critic_features_field_group_info() {
       'label' => 'Basic Details',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => '',
+        'id' => 'basicdetails',
         'classes' => 'itg-group-field',
         'description' => '',
         'show_label' => '1',
@@ -75,7 +75,7 @@ function mega_review_critic_features_field_group_info() {
       'label' => 'Browse Media',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => '',
+        'id' => 'browsemedia',
         'classes' => 'itg-group-field',
         'description' => '',
         'show_label' => '1',
@@ -108,7 +108,7 @@ function mega_review_critic_features_field_group_info() {
       'label' => 'Movie Review',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => '',
+        'id' => 'moviereview',
         'classes' => 'itg-group-field',
         'description' => '',
         'show_label' => '1',

@@ -51,7 +51,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     
     //Add JS to hide Advance seeting from all content type forms
     drupal_add_js('jQuery(document).ready(function() {                  
-           jQuery("#edit-metatags-und-advanced").hide();         
+           jQuery("#edit-metatags-und-advanced").hide();
+           jQuery(".form-item-metatags-und-abstract-value").hide();
     });', array('type' => 'inline', 'scope' => 'footer'));
   
   }
@@ -124,6 +125,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
 
     $form['#after_build'][] = 'itg_common_image_generate';
+  }
+  if($form_id == "itg_celebrity_profile_node_form"){
+      $form['#validate'][] = 'itg_common_managesite_validate';
   }
 }
 
@@ -647,3 +651,27 @@ function itg_common_check_duplicate_title($title, $type, $nid) {
     return $results->execute()->rowCount();
   }
 }
+
+/**
+ * Implements hook_node_view()
+ *
+ * {@inheritdoc}
+ */
+function itg_common_node_view($node, $view_mode, $langcode) {
+
+    //$node_title = "Title : ".$node->title; // regression issue
+   // drupal_set_title(t($node_title));
+  }
+
+/**
+ * Implement validation for email in manage site 
+ * @param array $form
+ * @param array $form_state
+ */
+  function itg_common_managesite_validate($form, &$form_state){
+    if(isset($form_state['values']['field_reporter_email_id']) && $form_state['values']['field_reporter_email_id'][LANGUAGE_NONE][0]['value'] != ''){
+       if (!filter_var($form_state['values']['field_reporter_email_id'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_EMAIL)) {
+                    form_set_error('field_reporter_email_id', t('Please enter valid email address.'));
+              }
+    }
+  }

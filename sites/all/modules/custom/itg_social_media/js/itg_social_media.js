@@ -140,15 +140,15 @@
         return FormValidation.validate_smi(value, element);
       }, 'This field is required.');
       jQuery.validator.addMethod("itg_maxlength", function (value, element) {
-        return value == "" || value.length <= 140;
-      }, 'This field can not exceed 140 character.');
+        return value == "" || value.length <= 126;
+      }, 'This field can not exceed 126 character.');
       // custom validator function end here.
        
       // Clear fb fields based on checkbox.
       $('input[name="itg_smi[facebook]"]').click(function () {
         if (!$(this).is(':checked')) {
           FormValidation.clear_form_elements('social-fb-block');
-          jQuery('.form-item-itg-fb-img .button-remove').mousedown();            
+          jQuery('.form-item-itg-fb-img .ajax-processed').mousedown();            
         } 
       });
       
@@ -156,7 +156,7 @@
       $('input[name="itg_smi[twitter]"]').click(function () {
         if (!$(this).is(':checked')) {
           FormValidation.clear_form_elements('social-twitter-block');
-          jQuery('.form-item-itg-twitter-img .button-remove').mousedown();            
+          jQuery('.form-item-itg-twitter-img .ajax-processed').mousedown();            
         } 
       });
       // clear form end here.

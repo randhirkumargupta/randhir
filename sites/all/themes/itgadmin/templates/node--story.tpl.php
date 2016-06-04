@@ -93,7 +93,9 @@
               <?php print render($content['field_story_facebook_narrative']); ?>
               <?php print render($content['field_story_facebook_image']); ?>
             <?php endif; ?>
-
+            <?php if (isset($content['field_story_facebook_video'])): ?>
+              <?php print render($content['field_story_facebook_video']); ?>
+            <?php endif; ?>  
             <?php
             $twitter = render($content['field_story_tweet']);
             if (!empty($twitter)):
