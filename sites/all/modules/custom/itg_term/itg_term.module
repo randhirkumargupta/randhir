@@ -429,8 +429,8 @@ function itg_term_views_query_alter(&$view, &$query) {
  */
 function itg_term_views_post_execute(&$view) {
   if (isset($view->name) && $view->name == 'itg_download_taxonomy') {
-    //drupal_get_messages();
-    //drupal_set_message(check_plain(t('Tag has been created successfully.')));
+    drupal_get_messages();
+    drupal_set_message(check_plain(t('Tag has been created successfully.')));
     if (is_array($view->result) && count($view->result) > 0) {
       foreach ($view->result as $result) {
         // Replace all empty fields with the dash '-' character.
