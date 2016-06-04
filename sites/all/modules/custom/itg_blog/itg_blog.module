@@ -105,6 +105,11 @@ function itg_blog_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_blog') . '/templates',
       'render element' => 'form',
     ),
+    'itg_blog_tab_form_display_block' => array(
+      'template' => 'itg-blog-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_blog') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
   return $themes;
 }
@@ -122,3 +127,32 @@ function itg_blog_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
     $form['nid']['#attributes'] = array('placeholder' => t('Blogs ID'));
   }
 }
+
+/**
+ * Implements hook_block_info().
+ */
+function itg_blog_block_info() {
+  $blocks['blog_tab_form_block'] = array(
+    'info' => t('Blog Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function itg_blog_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'blog_tab_form_block':
+      $block['content'] = theme('itg_blog_tab_form_display_block', array('data' => $data));
+      break;
+  }
+
+  return $block;
+}
+

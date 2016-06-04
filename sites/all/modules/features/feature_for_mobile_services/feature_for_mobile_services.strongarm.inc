@@ -77,7 +77,7 @@ function feature_for_mobile_services_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_default_mode_vas_service_content';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['comment_default_mode_vas_service_content'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -448,7 +448,7 @@ function feature_for_mobile_services_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_vas_service_content';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['node_preview_vas_service_content'] = $strongarm;
 
   $strongarm = new stdClass();

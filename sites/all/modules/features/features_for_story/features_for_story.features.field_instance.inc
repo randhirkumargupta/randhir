@@ -725,7 +725,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Extra large image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Story Extra Large Image',
@@ -733,7 +733,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -801,7 +801,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Extra small image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Extra Small Image',
@@ -809,7 +809,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1209,7 +1209,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Large image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Story Large Image',
@@ -1217,7 +1217,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1489,7 +1489,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Medium image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Medium Image',
@@ -1497,7 +1497,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1876,7 +1876,7 @@ function features_for_story_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 1,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -2041,7 +2041,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Small image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Small Image',
@@ -2049,7 +2049,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -2264,7 +2264,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Buzz',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
