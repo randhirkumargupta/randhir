@@ -82,17 +82,33 @@
             <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'])).' news'; ?></div>
           </div>
         <?php } else {
-       $prev_num = 0;
+        
+        $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
+        $headline = $template_node->field_newst_header_headline[LANGUAGE_NONE][0]['value'];
+        $logo = image_style_url("thumbnail", $template_node->field_newst_logo[LANGUAGE_NONE][0]['uri']);
+        $banner = $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri'];
+        $footer = $template_node->body[LANGUAGE_NONE][0]['value'];
+       ?>
+       <div><?php echo $headline; ?></div>
+       <div><img src="<?php echo $logo; ?>" /></div>
+       <div><img style="height: 300px" src="<?php echo str_replace('public://', $base_url.'/sites/default/files/',$banner ); ?>" /></div>
+       
+       <?php
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
-          $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
-          
-          //Avanish Work form here
-          $sn = $prev_num + 1;
-          echo '<h2>News ' . $sn . ' Details:</h2>';
-          $prev_num++; 
+          $title = $news_arr['field_news_title'][LANGUAGE_NONE][0]['value'];
+          $kicker = $news_arr['field_news_kicker'][LANGUAGE_NONE][0]['value'];
+          $file = file_load($news_arr['field_news_thumbnail'][LANGUAGE_NONE][0]['fid']);
+          $thumbnail = image_style_url("thumbnail", $file->uri); ?>
+        
+          <div><img src="<?php echo $thumbnail; ?>" /></div>   
+          <div><?php echo $title; ?></div>
+          <div><?php echo $kicker; ?></div>
          
-         }
-        } 
+         <?php } ?>
+          
+         <div class="newsletter-footer"><?php echo $footer; ?></div>
+         
+        <?php } 
       } else { ?>
          <div class="field">
             <div class="field-label">Newsletter Type:</div>
