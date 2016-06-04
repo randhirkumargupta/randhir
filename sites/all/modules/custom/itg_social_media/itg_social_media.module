@@ -178,6 +178,32 @@ function itg_social_media_perm_file($fid) {
 }
 
 /**
+ * Facebook video post logic
+ */
+function itg_social_media_video_posting($fid, $desc) {
+  $file = itg_social_media_perm_file($fid);
+  $path = drupal_realpath($file->uri);
+  $fb = itg_social_media_fb_connection();
+  $data = [
+    'title' => t('India Today Group'),
+    'description' => t($desc),
+    'source' => $fb->videoToUpload($path),
+  ];
+
+  try {
+    $response = $fb->post('/me/videos', $data, $_SESSION['facebook_access_token']);
+  }
+  catch (Facebook\Exceptions\FacebookResponseException $e) {
+    // When Graph returns an error
+    drupal_set_message('Graph returned an error: ' . $e->getMessage(), 'error');
+  }
+  catch (Facebook\Exceptions\FacebookSDKException $e) {
+    // When validation fails or other local issues
+    drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
+  }
+}
+
+/**
  * Implements hook_form_submit()
  *
  * {@inheritdoc}
@@ -188,26 +214,7 @@ function itg_social_media_form_submit($form, &$form_state) {
   if ($form_state['values']['itg_smi']['facebook_video'] == ' facebook_video') {    
     $desc = $form_state['values']['itg_facebook_video_text'];
     $fid = $form_state['values']['itg_fb_video'];
-    $file = itg_social_media_perm_file($fid);
-    $path = drupal_realpath($file->uri);
-    $fb = itg_social_media_fb_connection();
-    $data = [
-      'title' => t('India Today Group'),
-      'description' => t($desc),
-      'source' => $fb->videoToUpload($path),
-    ];
-
-    try {
-      $response = $fb->post('/me/videos', $data, $_SESSION['facebook_access_token']);
-    }
-    catch (Facebook\Exceptions\FacebookResponseException $e) {
-      // When Graph returns an error
-      drupal_set_message('Graph returned an error: ' . $e->getMessage(), 'error');
-    }
-    catch (Facebook\Exceptions\FacebookSDKException $e) {
-      // When validation fails or other local issues
-      drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
-    }
+    itg_social_media_video_posting($fid, $desc);
   }
   // Facebook Image
   if ($form_state['values']['itg_fb_img'] != 0) {
