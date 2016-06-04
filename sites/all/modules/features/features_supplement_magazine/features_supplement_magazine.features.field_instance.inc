@@ -521,7 +521,7 @@ Image Size (300 x 225)',
     'exclude_cv' => 0,
     'field_name' => 'field_issue_supplement',
     'label' => 'Supplement',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
