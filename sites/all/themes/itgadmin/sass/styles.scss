@@ -1771,6 +1771,17 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
     padding-left: 220px;
   }
+  .form-field-name-field-story-reporter{
+    @extend .fleft;
+    width: 625px;
+    &+.byline{
+      display: inline-block;
+      line-height: 37px;
+      margin: 30px 0 0;
+      padding: 0;
+      vertical-align: middle;
+    }
+  }
 }
 .form-field-name-field-astro-date-range{
   @extend .itg-date-range;
@@ -3510,6 +3521,17 @@ div.node{
       display: none;
     }
     @extend .choose-audio-video-file;
+  }
+  .form-field-name-field-story-reporter{
+    @extend .fleft;
+    width: 625px;
+    &+.byline{
+      display: inline-block;
+      line-height: 37px;
+      margin: 30px 0 0;
+      padding: 0;
+      vertical-align: middle;
+    }
   }
 }
 .page-node-add{
