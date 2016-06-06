@@ -199,6 +199,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
         'title' => t('India Today Group'),
         'description' => t($desc),
         'source' => $fb->videoToUpload($path),
+        'permalink_url' => $short_url,
       ];
 
       break;
@@ -207,6 +208,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
       $data = [
         'message' => t($desc),
         'source' => $fb->fileToUpload($path),
+        'url' => $short_url,
       ];
 
       break;
