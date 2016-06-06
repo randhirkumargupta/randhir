@@ -315,12 +315,12 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
     $media_ids[] = $reply->media_id_string;
   }
   // convert media ids to string list
-  $media_ids = implode(',', $media_ids);
+  $media_id = implode(',', $media_ids);
   
   // send Tweet with these medias
   $reply = $cb->statuses_update([
     'status' => $desc . ' ' . $short_url,
-    'media_ids' => $media_ids
+    'media_ids' => $media_id
   ]);
   watchdog('twitter image', '<pre>' . print_r( $reply, true) . '</pre>');
 }
