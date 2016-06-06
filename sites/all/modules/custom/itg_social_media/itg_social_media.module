@@ -200,7 +200,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
         'title' => t('India Today Group'),
         'description' => t($desc),
         'source' => $fb->videoToUpload($path),
-        //'permalink_url' => $short_url,
+        'permalink_url' => $short_url,
       ];
 
       break;
@@ -208,8 +208,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
     case 'photos':
       $data = [
         'message' => t($desc),
-        'source' => $fb->fileToUpload($path),
-        //'url' => $short_url,
+        'source' => $fb->fileToUpload($path),        
       ];
 
       break;
@@ -234,19 +233,20 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
  *
  * {@inheritdoc}
  */
-function itg_social_media_form_submit($form, &$form_state) {
-  $node = node_load($form_state['values']['nid']);
+function itg_social_media_form_submit($form, &$form_state) {  
+  $node = node_load($form_state['values']['nid']);    
   // Facebook video section
-  if ($form_state['values']['itg_smi']['facebook_video'] == ' facebook_video') {
+  if ($form_state['values']['itg_smi']['facebook_video'] == 'facebook_video') {    
     $desc = $form_state['values']['itg_facebook_video_text'];
     $fid = $form_state['values']['itg_fb_video'];
     itg_social_media_facebook_post($fid, $desc, 'videos');
     // save node field
     $node->field_story_facebook_video['und'][0] = array(
-      'fid' => $form_state['values']['itg_fb_video'],
+      'fid' => $fid,
       'display' => 1,
       'description' => ''
     );
+    $node->field_story_facebook_vdescripti['und'][0]['value'] = $desc;
   }
 
   // Facebook Image
@@ -287,8 +287,8 @@ function itg_social_media_form_submit($form, &$form_state) {
     $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
     $node->field_story_tweet_image['und'][0]['fid'] = $form_state['values']['itg_twitter_img'];
     itg_social_media_twitter_photo_post($fid, $desc, $node);
-  }
-  node_save($node);
+  }  
+  node_save($node);  
 }
 
 function itg_social_media_twitter_photo_post($fid, $desc, $node) {

@@ -7,7 +7,7 @@
 function itg_social_media_form($form, &$form_state, $c_type, $nid) {  
   global $user, $base_url;
   // Load node so that we can provide default value if values already present.
-  $node = node_load($nid);    
+  $node = node_load($nid);   
   $data = array();
   foreach ($node->field_story_social_media_integ['und'] as $option) {
     $data[] = $option['value'];
@@ -117,7 +117,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#type' => 'textfield',
       '#title' => t('Facebook Video Description'),
       '#maxlength' => 255,
-      '#default_value' => isset($node->field_story_facebook_vdescription['und'][0]['value']) ? $node->field_story_facebook_vdescription['und'][0]['value'] : '',
+      '#default_value' => isset($node->field_story_facebook_vdescripti['und'][0]['value']) ? $node->field_story_facebook_vdescripti['und'][0]['value'] : '',
       '#states' => array(
         'visible' => array(
           ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),          
