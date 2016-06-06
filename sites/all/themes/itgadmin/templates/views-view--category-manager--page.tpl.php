@@ -20,7 +20,7 @@
  * - $rows: The results of the view query, if any
  * - $empty: The empty text to display if the view is empty
  * - $pager: The pager next/prev links to display, if any
- * - $exposed: Exposed widget form/info to display
+ * - $exposed: Exposed widget form/info to display  
  * - $feed_icon: Feed icon to display, if any
  * - $more: A link to view more, if any
  *
@@ -44,12 +44,13 @@
       <?php print $exposed; ?>
     </div>
   <?php endif; ?>
-    
+
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
       <?php print $attachment_before; ?>
     </div>
   <?php endif; ?>
+
   <div class="category-manager-thead">
       <div class="cmt-title">Category Name</div>
       <div class="cmt-details">
@@ -58,8 +59,8 @@
       <span>Status</span>
       <span>Action</span>
       </div>
-  </div>
-
+  </div>    
+    
   <?php if ($rows): ?>
     <div class="view-content">
       <?php print $rows; ?>
@@ -95,4 +96,5 @@
       <?php print $feed_icon; ?>
     </div>
   <?php endif; ?>
-</div>
+
+</div><?php /* class view */ ?>

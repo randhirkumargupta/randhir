@@ -28,7 +28,7 @@ function itg_social_media_permission() {
  * Implements hook_menu()
  * {@inheritdoc}
  */
-function itg_social_media() {
+function itg_social_media_menu() {
   $items['itg-social-media-settings'] = array(
     'title' => t('Social Media Settings'),
     'page callback' => 'itg_social_media_settings',
