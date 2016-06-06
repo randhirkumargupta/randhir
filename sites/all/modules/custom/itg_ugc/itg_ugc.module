@@ -126,6 +126,14 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
         $form['field_source']['#access'] = FALSE;
       }
     }
+    
+    if($user->uid && $user->uid != 1) {
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'cms-user-dashboard', array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+      );
+    }
 
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
     $op = array("_none" => "Select Category");
@@ -163,6 +171,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       ),
     ),
   );
+  
 
   // Hide/show photo field
   $form['field_ugc_upload_photo']['#states'] = array(
@@ -271,7 +280,7 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     // validate if decription field is blank
     if ($type == 'story' || $type == 'recipe'  || $type == 'blog') {
       if (empty($description)) {
-        form_set_error('field_user_message', t("Description Field is required."));
+        form_set_error('field_user_message', t("Description field is required."));
       }
     }
     
@@ -279,21 +288,21 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     // validate if image field is blank
     if (($type == 'photogallery')) {
       if (empty($upload_image)) {
-        form_set_error('field_ugc_upload_photo', t("Image Field is required."));
+        form_set_error('field_ugc_upload_photo', t("Image field is required."));
       }
     }
 
     // validate if video field is blank
     if (($type == 'video')) {
       if (empty($upload_video)) {
-        form_set_error('field_astro_video', t("Video Field is required."));
+        form_set_error('field_astro_video', t("Video field is required."));
       }
     }
 
     // validate if audio field is blank
     if ($type == 'audio') {
       if (empty($upload_audio)) {
-        form_set_error('field_recipe_audio', t("Audio Field is required."));
+        form_set_error('field_recipe_audio', t("Audio field is required."));
       }
     }
   }
