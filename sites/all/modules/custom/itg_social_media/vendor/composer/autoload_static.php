@@ -28,6 +28,10 @@ class ComposerStaticInit1a4f088603a22251df26bc2315a46ad0
         array (
             'Facebook\\' => 9,
         ),
+        'C' => 
+        array (
+            'Composer\\Installers\\' => 20,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -51,6 +55,14 @@ class ComposerStaticInit1a4f088603a22251df26bc2315a46ad0
         array (
             0 => __DIR__ . '/..' . '/facebook/php-sdk-v4/src/Facebook',
         ),
+        'Composer\\Installers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
+    );
+
+    public static $classMap = array (
+        'Codebird\\Codebird' => __DIR__ . '/..' . '/jublonet/codebird-php/src/codebird.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -58,6 +70,7 @@ class ComposerStaticInit1a4f088603a22251df26bc2315a46ad0
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit1a4f088603a22251df26bc2315a46ad0::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit1a4f088603a22251df26bc2315a46ad0::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit1a4f088603a22251df26bc2315a46ad0::$classMap;
 
         }, null, ClassLoader::class);
     }

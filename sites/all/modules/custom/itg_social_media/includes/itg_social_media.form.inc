@@ -4,10 +4,10 @@
  *
  * {@inheritdoc}
  */
-function itg_social_media_form($form, &$form_state, $c_type, $nid) {
+function itg_social_media_form($form, &$form_state, $c_type, $nid) {  
   global $user, $base_url;
   // Load node so that we can provide default value if values already present.
-  $node = node_load($nid);  
+  $node = node_load($nid);    
   $data = array();
   foreach ($node->field_story_social_media_integ['und'] as $option) {
     $data[] = $option['value'];
