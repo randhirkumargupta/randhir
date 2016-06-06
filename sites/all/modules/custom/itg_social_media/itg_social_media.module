@@ -144,7 +144,7 @@ function _facebook_callback_settings() {
     drupal_set_message('Unable to connect to facebook.', 'error');
   }
 
-  return $fb;
+  return '';
 }
 
 /**
