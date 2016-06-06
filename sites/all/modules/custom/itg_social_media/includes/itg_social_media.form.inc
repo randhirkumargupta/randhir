@@ -135,7 +135,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#widget' => 'imce',      
       '#preview' => TRUE,
       "#upload_validators"  => array(
-        "file_validate_extensions" => array("mp4 ogg flv avi 3gp")
+        "file_validate_extensions" => array("mp4 mov")
       ),
       '#states' => array(
         'visible' => array(          
