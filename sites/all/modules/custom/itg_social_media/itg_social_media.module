@@ -197,7 +197,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
   switch ($type) {
     case 'videos':
       $data = [
-        'title' => t('India Today Group'),
+        'title' => t('Yogesh kumar'),
         'description' => t($desc),
         'source' => $fb->videoToUpload($path),        
       ];
