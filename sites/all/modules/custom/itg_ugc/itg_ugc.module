@@ -159,7 +159,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       ':input[name="field_ugc_ctype[und]"]' => array(
         array('value' => 'story'),
         array('value' => 'recipe'),
-        array('value' => 'audio'),
         array('value' => 'blog')
       ),
     ),
@@ -270,7 +269,7 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     $title = $node->title;
 
     // validate if decription field is blank
-    if ($type == 'story' || $type == 'recipe' || $type == 'audio' || $type == 'blog') {
+    if ($type == 'story' || $type == 'recipe'  || $type == 'blog') {
       if (empty($description)) {
         form_set_error('field_user_message', t("Description Field is required."));
       }
