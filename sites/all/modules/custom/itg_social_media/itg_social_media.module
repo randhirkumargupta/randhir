@@ -104,7 +104,7 @@ function itg_social_media_block_view($delta = '') {
     case 'social_media_callback':
       $block = array(
         'subject' => t('Social Media Callback settings'),
-        'content' => '_facebook_callback_settings',
+        'content' => _facebook_callback_settings(),
       );
   }
 
