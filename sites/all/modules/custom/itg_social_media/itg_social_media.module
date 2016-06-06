@@ -199,8 +199,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
       $data = [
         'title' => t('India Today Group'),
         'description' => t($desc),
-        'source' => $fb->videoToUpload($path),
-        'permalink_url' => $short_url,
+        'source' => $fb->videoToUpload($path),        
       ];
 
       break;
@@ -226,6 +225,9 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
     // When validation fails or other local issues
     drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
   }
+  $graphNode = $response->getGraphNode();
+  
+  watchdog('facebook post', $graphNode['id']);
 }
 
 /**
@@ -300,9 +302,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
   $path = drupal_realpath($file->uri);
   // Get short url
   $short_url = shorten_url($node->path['alias'], 'goo.gl');
-  $media_files = [
-    $path
-  ];
+  $media_files = [$path];
   // will hold the uploaded IDs
   $media_ids = [];
 
@@ -322,6 +322,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
     'status' => $desc . ' ' . $short_url,
     'media_ids' => $media_ids
   ]);
+  watchdog('twitter image', '<pre>' . print_r( $reply, true) . '</pre>');
 }
 
 
