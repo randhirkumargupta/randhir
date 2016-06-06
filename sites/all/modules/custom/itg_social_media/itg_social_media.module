@@ -7,6 +7,7 @@
  */
 require 'vendor/autoload.php';
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
+module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.settings');
 
 define('FACEBOOK_APP_KEY', '998850543526214');
 define('FACEBOOK_APP_SECRET', '899729807fcf2061364278613db4a4e7');
