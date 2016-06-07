@@ -85,8 +85,7 @@
           ?>
           <div class="SocialMedia content-box">
               <h2><?php print t('Social Media'); ?></h2>
-              <div class="content-details"><?php print render($content['field_story_social_media_integ']); ?>
-                  <?php dpm($node->field_story_social_media_integ); ?>
+              <div class="content-details"><?php print render($content['field_story_social_media_integ']); ?>                  
                   <?php foreach ($node->field_story_social_media_integ['und'] as $value): ?>
                     <?php
                     switch ($value['value']) {
