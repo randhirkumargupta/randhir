@@ -165,7 +165,25 @@
      if (type === 'Newsletter') {
         $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1').prop("readonly", true);
       }
+      
+//    $('#newsletter-get-content').click(function(){
+//      var button_no = $(this).attr('rel');
+//      alert(button_no);
+//    });
+    
+    $('#newsletter-get-content').bind('click',function(){
+      var page = $(this).attr('rel');
+      $("input[name='field_newsl_add_news[und][0][field_news_title][und][0][value]']").text('This is my title');
+     })
 
   }
  };
+
 })(jQuery, Drupal, this, this.document);
+
+
+
+
+//field_newsl_add_news[und][0][field_news_title][und][0][value]
+//field_newsl_add_news[und][1][field_news_title][und][0][value]
+//field_newsl_add_news[und][2][field_news_title][und][0][value]
