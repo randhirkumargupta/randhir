@@ -175,9 +175,11 @@ var maxLen = 0;
                 event.preventDefault();
                 location.reload(true);
             });
-
+            var currentTime = new Date();
+            // First Date Of the month 
+            var startDateFrom = new Date(currentTime.getFullYear(), currentTime.getMonth(), 1);
             $("#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1").datepicker({
-                minDate: 0,
+                minDate: startDateFrom,
                 showOn: "focus",
                 dateFormat: 'dd/mm/yy',
                 onSelect: function (selected) {
@@ -187,7 +189,7 @@ var maxLen = 0;
             });
 
             $("#edit-field-service-frequency-date-und-0-value-datepicker-popup-1").datepicker({
-                minDate: 0,
+                minDate: startDateFrom,
                 showOn: "focus",
                 dateFormat: 'dd/mm/yy',
                 onSelect: function (selected) {
@@ -301,6 +303,12 @@ var maxLen = 0;
                 var content_edit_mode = Drupal.settings.itg_mobile_services.settings.service_content_edit_mode;
                 jQuery('#field-service-content-add-more-wrapper').show();
                 jQuery('#edit-field-service-frequency').show();
+                jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');
+                jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1, #edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').addClass('itg-disabled');
+                if (Drupal.settings.itg_mobile_services.settings.service_frequency) {
+                    var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
+                    jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(sdate);
+                }
             }
 
             function custom_today_date() {
