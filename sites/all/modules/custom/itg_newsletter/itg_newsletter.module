@@ -10,13 +10,14 @@
 
 
 function itg_newsletter_menu(){
-    $items['newsletter/autocomplete'] = array(
+    $items['newsletter_data'] = array(
       'title' => 'Autocomplete for Newsletter',
-      'page callback' => 'itg_newsletter_content_autocomplete',
-      'type' => MENU_CALLBACK
+      'page callback' => 'itg_newsletter_content_data',
+      'access callback' => TRUE,
     );
     return $items;
 }
+
 /**
  * Implements hook_block_info().
  */
@@ -183,8 +184,8 @@ function itg_newsletter_form_after_build($form, &$form_state){
     
     $form['field_newsl_add_news']['und'][$i]['get_content_btn'] = array(
            '#type' => 'item',
-           '#markup' => '<div id="newsletter-get-content" rel= "'.$i.'">Get Data</div>',
-           '#weight' => 5
+           '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div>',
+           '#weight' => 3,
     );
   }
  
@@ -328,20 +329,19 @@ function itg_newsletter_check_existance_frequency($frequency, $newsletter_conten
   }
 }
 
-function itg_newsletter_content_autocomplete($string){
-    
-  $matches = array();
-  $result = db_select('node', 'n')
-    ->fields('n', array('nid'))
-    ->condition('nid', '%' . db_like($string) . '%', 'LIKE')
-    ->condition('type','photogallery' , '=')      
-    ->execute();
-
-  // save the query to matches
-  foreach ($result as $row) {
-    $matches[$row->nid] = check_plain($row->nid);
-  }
-
-  // Return the result to the form in json
-  drupal_json_output($matches);
+/**
+ * Get Newsletter content using nid
+ * Used on newsletter form
+ */
+function itg_newsletter_content_data(){
+   $node = node_load($_POST['content_id']);
+   
+   if($node->type == 'story'){
+     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+   } else {
+     $kicker = '';
+   }
+   
+   echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'uri' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])); 
+   exit;
 }

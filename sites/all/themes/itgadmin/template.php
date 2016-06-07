@@ -217,8 +217,7 @@ function itgadmin_date_all_day_label() {
  * Preprocessor for theme('page').
  */
 function itgadmin_preprocess_page(&$vars) {  
-  
-  // Change create category page title.
+ // Change create category page title.
   if (arg(2) == 'taxonomy' && arg(3) == 'category_management' && arg(4) == 'add') {
     drupal_set_title('Create Category');
   }
@@ -230,6 +229,10 @@ function itgadmin_preprocess_page(&$vars) {
   if (arg(0) == 'survey-result' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
     drupal_set_title('Survey Result: ' . ucwords($node->title));
+  }
+  
+  if (!empty($vars['node']) && $vars['node']->type == 'ugc') {
+    drupal_set_title('');
   }
 
   //Add tpl for event registration view page

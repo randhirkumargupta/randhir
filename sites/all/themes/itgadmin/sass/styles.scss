@@ -899,7 +899,9 @@ div.vertical-tabs {
       display: block;
     }
   }
-  label + .form-select + span.error, label + .form-select + div.description + span.error{
+  label + .form-select + span.error, 
+  label + .form-select + .ajax-progress.ajax-progress-throbber + span.error, 
+  label + .form-select + div.description + span.error{
     padding-left: 220px;
   }
 }
@@ -1470,6 +1472,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-blog-admin-menu,
 #block-menu-menu-ugc-content-menu,
 #block-menu-menu-task-allocation-menu,
+#block-menu-menu-ugc-comment-menu,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -1771,17 +1774,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
     padding-left: 220px;
   }
-  .form-field-name-field-story-reporter{
-    @extend .fleft;
-    width: 625px;
-    &+.byline{
-      display: inline-block;
-      line-height: 37px;
-      margin: 30px 0 0;
-      padding: 0;
-      vertical-align: middle;
-    }
-  }
+  
 }
 .form-field-name-field-astro-date-range{
   @extend .itg-date-range;
@@ -1882,6 +1875,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-syndication-rule-details-values"], 
 [id*="field-story-template-buzz-values"], 
 [id*="field-erf-registration-fee-values"], 
+[id*="field-service-content-values"], 
 [id*="field-mega-review-review-values"]{
   @extend .itg-add-another-item;
 }
@@ -3522,22 +3516,121 @@ div.node{
     }
     @extend .choose-audio-video-file;
   }
-  .form-field-name-field-story-reporter{
-    @extend .fleft;
-    width: 625px;
-    &+.byline{
-      display: inline-block;
-      line-height: 37px;
-      margin: 30px 0 0;
-      padding: 0;
-      vertical-align: middle;
-    }
-  }
 }
 .page-node-add{
   .breadcrumb{
     ol li:nth-child(2){
       pointer-events: none;
+    }
+  }
+}
+.newsletter-templates{
+  border: 5px solid #d9d9d9;
+  @extend .mt-10;
+  .newsletter-header{
+    @extend .pos-rel;
+    margin-bottom: 30px;
+  }
+  .newsletter-banner{
+    img{
+      width: 100%;
+      height: 100px;
+    }
+  }
+  .newsletter-logo{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    img{
+      width: 60px;
+      height: 60px;
+    }
+  }
+  .newsletter-headline{
+    background-color: #d00b26;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    padding: 5px 5px 5px 40px;
+  }
+  .newsletter-list-parent{
+    margin: 0 20px 20px 20px;
+  }
+  .newsletter-list{
+    padding: 20px;
+    @extend .dib;
+    @extend .full;
+    border-bottom: 2px solid #d9d9d9;
+    .newsletter-thumbnail{
+      @extend .fleft;
+    }
+    .title-kicker{
+      @extend .of-hide;
+      padding-left: 20px;
+    }
+    .newsletter-title{
+      font-size: 18px;
+      color: #337ab7;
+      padding-bottom: 10px;
+    }
+  }
+}
+[id*="field-service-content-values"]{
+  tbody tr td{
+    padding-bottom: 0;
+    @extend .fleft;
+    margin-bottom: 30px;
+  }
+  .field-name-field-service-content-date{
+    @extend .fleft;
+    width: 180px;
+    height: 36px;
+    legend{
+      @extend .hide;
+      &+.fieldset-wrapper{
+        padding-left: 0;
+      }
+    }
+  }
+  .field-name-field-story-expert-description{
+    height: 36px;
+    label{
+      @extend .hide;
+      &+.form-textarea-wrapper{
+        padding-left: 150px;
+        &:after{
+          content: '';
+          @extend .dib;
+          @extend .full;
+        }
+      }
+    }
+    .form-type-textarea{
+      margin-bottom: 0;
+      .form-textarea{height: 36px;}
+    }
+  }
+}
+
+.node-vas_service_content-form{
+  .form-field-name-field-service-frequency-date{
+    @extend .itg-date-range;
+    .date-float{display: none;}
+  }
+  #content-enable-button{
+    @extend .add-more;
+    margin-left: 250px;
+  }  
+  #reset-date-button{
+    @extend .btn-cancel;
+    @extend .btn;
+    margin-left: 250px;
+    margin-bottom: 30px;
+  }
+  .form-field-name-field-service-content{
+    .ajax-progress-throbber{
+      @extend .hide;
     }
   }
 }
