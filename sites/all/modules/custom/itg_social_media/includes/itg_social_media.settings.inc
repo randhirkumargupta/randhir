@@ -21,8 +21,8 @@ function itg_social_media_settings() {
     }
 
     $user = $response->getGraphUser();
-    if (isset($user) && $user['name'] != '') {
-      drupal_set_message(t('Welcome '. $user['name']), 'status');
+    if (isset($user) && $user['name'] != '') {      
+      return t('Welcome '. $user['name']);
     }
     else {
       $helper = $fb->getRedirectLoginHelper();
@@ -35,7 +35,7 @@ function itg_social_media_settings() {
   else {
     $helper = $fb->getRedirectLoginHelper();
     $permissions = ['email', 'user_posts', 'user_videos', 'publish_actions', 'user_actions.video'];
-    $loginUrl = $helper->getLoginUrl($base_url . '/browse-content', $permissions);
+    $loginUrl = $helper->getLoginUrl($base_url . '/itg-social-media-settings-callback', $permissions);
     
     return l(t('Please login to facebook page'), $loginUrl, array('class' => array('button')));
   }  
