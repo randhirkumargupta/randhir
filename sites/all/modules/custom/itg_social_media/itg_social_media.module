@@ -8,7 +8,7 @@
 require 'vendor/autoload.php';
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.settings');
-
+// Define static variable for setting purpose.
 define('FACEBOOK_APP_KEY', '998850543526214');
 define('FACEBOOK_APP_SECRET', '899729807fcf2061364278613db4a4e7');
 define('TWITTER_API_KEY', 'ZrAM49Mh50YKRxRTtLY1mP1jE');
@@ -38,9 +38,17 @@ function itg_social_media_permission() {
  * {@inheritdoc}
  */
 function itg_social_media_menu() {
+  // Facebook login screen
   $items['itg-social-media-settings'] = array(
     'title' => t('Social Media Settings'),
     'page callback' => 'itg_social_media_settings',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.settings.inc',
+  );
+  // Facebook login callback
+  $items['itg-social-media-settings-callback'] = array(    
+    'page callback' => 'itg_social_media_settings_callback',
     'access arguments' => array('administer itg_social_media edit_content settings'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_social_media.settings.inc',
@@ -80,11 +88,7 @@ function itg_social_media_block_info() {
   $block['social_media_form'] = array(
     'info' => t('Social Media Integration'),
     'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  $block['social_media_callback'] = array(
-    'info' => t('Social Media Callback'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+  );  
 
   return $block;
 }
@@ -105,51 +109,10 @@ function itg_social_media_block_view($delta = '') {
         'content' => drupal_get_form('itg_social_media_form', $c_type, $nid),
       );
 
-      break;
-    case 'social_media_callback':
-      $block = array(
-        'subject' => t('Social Media Callback settings'),
-        'content' => _facebook_callback_settings(),
-      );
+      break;    
   }
 
   return $block;
-}
-
-/**
- * After callback function for facebook access token settings.
- * @return stdObject
- */
-function _facebook_callback_settings() {
-  $fb = itg_social_media_fb_connection();
-
-  $helper = $fb->getRedirectLoginHelper();
-  try {
-    $accessToken = $helper->getAccessToken();
-  }
-  catch (Facebook\Exceptions\FacebookResponseException $e) {
-    // When Graph returns an error
-    drupal_set_message('Graph returned an error: ' . $e->getMessage(), 'error');
-  }
-  catch (Facebook\Exceptions\FacebookSDKException $e) {
-    // When validation fails or other local issues
-    drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
-  }
-
-  if (isset($accessToken)) {
-    // Logged in!
-    $_SESSION['facebook_access_token'] = (string) $accessToken;
-    drupal_set_message('Facebook connection has been made successfully', 'status');
-  }
-  elseif ($helper->getError()) {
-    // The user denied the request
-    drupal_set_message('User denied the request.', 'error');
-  }
-  else {
-    drupal_set_message('Unable to connect to facebook.', 'error');
-  }
-
-  return '';
 }
 
 /**
