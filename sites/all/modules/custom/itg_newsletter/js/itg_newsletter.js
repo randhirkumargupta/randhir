@@ -166,24 +166,38 @@
         $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1').prop("readonly", true);
       }
       
-//    $('#newsletter-get-content').click(function(){
-//      var button_no = $(this).attr('rel');
-//      alert(button_no);
-//    });
-    
-    $('#newsletter-get-content').bind('click',function(){
-      var page = $(this).attr('rel');
-      $("input[name='field_newsl_add_news[und][0][field_news_title][und][0][value]']").text('This is my title');
-     })
-
+      //Get Newsletter data
+      $('body').on('click', '.newsletter-get-content', function() {
+        var contentId = $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
+        var relval = $(this).attr('rel');
+        
+        if(contentId === ''){
+          alert('Please select Content ID.');
+          $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').focus();
+        } 
+        else {
+          var contentIdArr = contentId.split(' (');
+          $.ajax({
+           url: Drupal.settings.basePath + 'newsletter_data',
+           type: "post",
+           data: { content_id : contentIdArr[0] },
+           cache: false,
+           dataType: "JSON",
+           success: function(data) {
+              $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-title').find('.form-text').val(data.title);
+              $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-kicker').find('.form-textarea').val(data.kicker);
+              $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-imce .form-text').attr('value', data.uri);
+              $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-imce .form-submit').triggerHandler('mousedown');
+//              $('#edit-field-newsl-add-news-und-0-field-news-thumbnail-und-0-upload-imce-path').attr('value', data.uri);
+//              $('#edit-field-newsl-add-news-und-0-field-news-thumbnail-und-0-upload-imce-select').triggerHandler('mousedown');
+           },
+            error: function() {
+              return false;
+            }
+         });
+        }
+      });
   }
  };
 
 })(jQuery, Drupal, this, this.document);
-
-
-
-
-//field_newsl_add_news[und][0][field_news_title][und][0][value]
-//field_newsl_add_news[und][1][field_news_title][und][0][value]
-//field_newsl_add_news[und][2][field_news_title][und][0][value]
