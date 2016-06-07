@@ -1264,9 +1264,7 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
   drupal_goto('category-manager');
 }
 
-function itg_category_manager_custom_submit($form, &$form_state) {
-  dpm($form_state);
-  
+function itg_category_manager_custom_submit($form, &$form_state) {  
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
