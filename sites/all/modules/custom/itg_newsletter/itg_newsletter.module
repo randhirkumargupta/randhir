@@ -331,10 +331,17 @@ function itg_newsletter_check_existance_frequency($frequency, $newsletter_conten
 
 /**
  * Get Newsletter content using nid
+ * Used on newsletter form
  */
 function itg_newsletter_content_data(){
    $node = node_load($_POST['content_id']);
-   $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-   echo drupal_json_encode(array('title' => $node->title, 'kicker' => $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'], 'uri' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])); 
+   
+   if($node->type == 'story'){
+     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+   } else {
+     $kicker = '';
+   }
+   
+   echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'uri' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])); 
    exit;
 }
