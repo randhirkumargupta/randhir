@@ -198,7 +198,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
 function itg_social_media_form_submit($form, &$form_state) {    
   $node = node_load($form_state['values']['nid']);    
   // Facebook video section
-  if ($form_state['values']['itg_smi']['facebook_video'] == 'facebook_video') {    
+  if (isset($form_state['values']['itg_smi']['facebook_video']) && $form_state['values']['itg_smi']['facebook_video'] == 'facebook_video') {    
     $desc = $form_state['values']['itg_facebook_video_text'];
     $fid = $form_state['values']['itg_fb_video'];
     //itg_social_media_facebook_post($fid, $desc, 'videos');
@@ -212,7 +212,7 @@ function itg_social_media_form_submit($form, &$form_state) {
   }
 
   // Facebook Image
-  if ($form_state['values']['itg_smi']['facebook'] == 'facebook') {
+  if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] == 'facebook') {
     $desc = $form_state['values']['itg_facebook_narrative'];
     $fid = $form_state['values']['itg_fb_img'];
     //itg_social_media_facebook_post($fid, $desc, 'photos');
@@ -231,19 +231,19 @@ function itg_social_media_form_submit($form, &$form_state) {
   $node->field_story_social_media_integ['und'] = $data;
 
   // Facebook log
-  if ($form_state['values']['field_story_posted_by_facebook'] != '') {
+  if (isset($form_state['values']['field_story_posted_by_facebook']) && $form_state['values']['field_story_posted_by_facebook'] != '') {
     $node->field_story_posted_by_facebook['und'][0]['value'] = $form_state['values']['field_story_posted_by_facebook'];
     $node->field_story_time_facebook['und'][0]['value'] = $form_state['values']['field_story_time_facebook'];
   }
 
   // Twitter log
-  if ($form_state['values']['field_story_posted_by_twitter'] != '') {
+  if (isset($form_state['values']['field_story_posted_by_twitter']) && $form_state['values']['field_story_posted_by_twitter'] != '') {
     $node->field_story_posted_by_twitter['und'][0]['value'] = $form_state['values']['field_story_posted_by_twitter'];
     $node->field_story_time_twitter['und'][0]['value'] = $form_state['values']['field_story_time_twitter'];
   }
 
   // TWITTER IMAGE
-  if ($form_state['values']['itg_smi']['twitter'] == 'twitter') {
+  if (isset($form_state['values']['itg_smi']['twitter']) && $form_state['values']['itg_smi']['twitter'] == 'twitter') {
     $desc = $form_state['values']['itg_twitter_narrative'];
     $fid = $form_state['values']['itg_twitter_img'];
     $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
@@ -252,7 +252,7 @@ function itg_social_media_form_submit($form, &$form_state) {
   }
   
   // Twitter Video
-  if ($form_state['values']['itg_smi']['twitter_video'] == 'twitter_video') {
+  if (isset($form_state['values']['itg_smi']['twitter_video']) && $form_state['values']['itg_smi']['twitter_video'] == 'twitter_video') {
     $desc = $form_state['values']['field_story_twitter_video_desc'];
     $fid = $form_state['values']['itg_twit_video'];
     $node->field_story_twitter_video['und'][] = array(
