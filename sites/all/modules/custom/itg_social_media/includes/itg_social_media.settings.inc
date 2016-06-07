@@ -21,8 +21,8 @@ function itg_social_media_settings() {
     }
 
     $user = $response->getGraphUser();
-    if (isset($user) && $user['name'] != '') {
-      drupal_set_message(t('Welcome '. $user['name']), 'status');
+    if (isset($user) && $user['name'] != '') {      
+      return t('Welcome '. $user['name']);
     }
     else {
       $helper = $fb->getRedirectLoginHelper();
