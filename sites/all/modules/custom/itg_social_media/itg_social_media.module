@@ -136,16 +136,8 @@ function itg_social_media_node_type($nid) {
  * @param int $fid
  */
 function itg_social_media_perm_file($fid) {
-  global $user;
-  // Load the file via file.fid.
   $file = file_load($fid);
-  // Change status to permanent.
-  $file->status = FILE_STATUS_PERMANENT;
-  // Save.
-  file_save($file);
-  // Record that the module (in this example, user module) is using the file. 
-  file_usage_add($file, 'user', 'user', $user->uid);
-
+  
   return $file;
 }
 
