@@ -24,11 +24,11 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       '#type' => 'checkboxes',
       '#title' => t('Social media integration '),
       '#options' => array(
-        'facebook' => 'Facebook Image',
-        'facebook_video' => 'Facebook Video',
-        'facebook_instant_article' => 'Facebook Instant Article',
-        'twitter' => 'Twitter Image',
-        'twitter_video'
+        'facebook' => t('Facebook Image'),
+        'facebook_video' => t('Facebook Video'),
+        'facebook_instant_article' => t('Facebook Instant Article'),
+        'twitter' => t('Twitter Image'),
+        'twitter_video' => t('Twitter Video'),
       ),
       '#default_value' => $data,
     );
@@ -214,6 +214,49 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
         ),
         'required' => array(
           ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+        )
+      ),
+    );
+    // Twitter video
+    $form['twitter_video_wrap'] = array(
+      '#title' => t('Twitter Video'),
+      '#type' => 'fieldset',
+      '#states' => array(
+        'visible' => array(          
+          ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
+        ),
+      ),      
+    );
+    $form['twitter_video_wrap']['itg_twit_video'] = array(
+      '#title' => t('Twitter Video'),
+      '#type' => 'managed_file',      
+      '#upload_location' => 'public://twitter_video/',
+      '#default_value' => isset($node->field_story_twitter_video['und'][0]['fid']) ? $node->field_story_twitter_video['und'][0]['fid'] : 0,
+      '#widget' => 'imce',      
+      '#preview' => TRUE,
+      "#upload_validators"  => array(
+        "file_validate_extensions" => array("mp4 mov")
+      ),
+      '#states' => array(
+        'visible' => array(          
+          ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
+        ),
+        'required' => array(          
+          ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
+        )
+      ),
+    );
+    $form['twitter_video_wrap']['field_story_twitter_video_desc'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Twitter Video Narrative'),
+      '#maxlength' => 255,
+      '#default_value' => isset($node->field_story_twitter_video_desc['und'][0]['value']) ? $node->field_story_twitter_video_desc['und'][0]['value'] : '',
+      '#states' => array(
+        'visible' => array(
+          ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
+        ),
+        'required' => array(
+          ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
         )
       ),
     );

@@ -8,6 +8,15 @@
  *
  */
 
+
+function itg_newsletter_menu(){
+    $items['newsletter/autocomplete'] = array(
+      'title' => 'Autocomplete for Newsletter',
+      'page callback' => 'itg_newsletter_content_autocomplete',
+      'type' => MENU_CALLBACK
+    );
+    return $items;
+}
 /**
  * Implements hook_block_info().
  */
@@ -69,6 +78,8 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
   
   //Set destination for newsletter form
   if ($form_id == 'newsletter_node_form') {
+    
+    //Add cancle button
     $destination = 'manage-newsletter';
     $form['title']['#description'] = '<p>' . t('Please enter subject line.') . '</p>';
     $form['actions']['cancel'] = array(
@@ -158,11 +169,23 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
 function itg_newsletter_form_after_build($form, &$form_state){
   global $user, $base_url;
   
+//  foreach ($form['field_newsl_add_news']['und'][0]['field_news_con_id']['und'] as $k => $v) {
+//    if (is_numeric($k)) {
+//      $form['field_newsl_add_news']['und'][0]['field_news_con_id']['und'][$k]['value']['#autocomplete_input'] = 'newsletter/autocomplete';
+//    }
+//  }
+  
   //Hide default lavel and add dynamic label
   $form['field_newsl_add_news'][LANGUAGE_NONE]['#title'] = '';
   for($i = 0; $i <= $form['field_newsl_add_news']['und']['#max_delta']; $i++) {
     $count = $i+1;
-    $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News ').$count;  
+    $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News ').$count;
+    
+    $form['field_newsl_add_news']['und'][$i]['get_content_btn'] = array(
+           '#type' => 'item',
+           '#markup' => '<div id="newsletter-get-content" rel= "'.$i.'">Get Data</div>',
+           '#weight' => 5
+    );
   }
  
   //Extract type of node
@@ -198,7 +221,7 @@ function itg_newsletter_form_after_build($form, &$form_state){
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
-   
+  
   return $form;
 }
 
@@ -303,4 +326,22 @@ function itg_newsletter_check_existance_frequency($frequency, $newsletter_conten
   else {
     false;
   }
+}
+
+function itg_newsletter_content_autocomplete($string){
+    
+  $matches = array();
+  $result = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('nid', '%' . db_like($string) . '%', 'LIKE')
+    ->condition('type','photogallery' , '=')      
+    ->execute();
+
+  // save the query to matches
+  foreach ($result as $row) {
+    $matches[$row->nid] = check_plain($row->nid);
+  }
+
+  // Return the result to the form in json
+  drupal_json_output($matches);
 }
