@@ -170,6 +170,10 @@
       $('body').on('click', '.newsletter-get-content', function() {
         var contentId = $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
         var relval = $(this).attr('rel');
+        var hasloader = $(this).parent().find('div').hasClass('.ajax-progress-throbber');
+          if(!hasloader){
+            $(this).after('<div class="ajax-progress ajax-progress-throbber"><div class="throbber"> </div><div class="message">Please wait...</div></div>');
+          }
         
         if(contentId === ''){
           alert('Please select Content ID.');

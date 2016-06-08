@@ -12,8 +12,7 @@
  * Implements hook_init().
  */
 function itg_story_init() {
-  //echo date('d/m/Y', '1464719400');exit;
-  //get_ftp_details_by_client('Idea-JNP', 'JNP FTP2');
+  //get_syndication_content_details();
 }
 
 
@@ -407,9 +406,7 @@ function itg_story_node_update($node) {
  * @param type $form_id  
  */
 function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
-  global $base_url, $user;
-  //dpm($form);
-    
+  global $base_url, $user;   
     $magazine_field = 'field_story_select_magazine';
     $supplement_field = 'field_story_select_supplement';
     

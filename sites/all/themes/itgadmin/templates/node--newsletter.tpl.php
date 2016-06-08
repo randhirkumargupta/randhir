@@ -98,14 +98,23 @@
         <div class="newsletter-list-parent">
        <?php
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
+ 
           $title = $news_arr['field_news_title'][LANGUAGE_NONE][0]['value'];
           $kicker = $news_arr['field_news_kicker'][LANGUAGE_NONE][0]['value'];
           $file = file_load($news_arr['field_news_thumbnail'][LANGUAGE_NONE][0]['fid']);
-          $thumbnail = image_style_url("thumbnail", $file->uri); ?>
+          $thumbnail = image_style_url("thumbnail", $file->uri); 
+          
+          if($news_arr['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal') {
+              $link = 'node/'.$news_arr['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+            } else {
+              $link = $news_arr['field_news_external_url'][LANGUAGE_NONE][0]['value'];
+          }
+          
+          ?>
         <div class="newsletter-list">
           <div class="newsletter-thumbnail"><img src="<?php echo $thumbnail; ?>" /></div>  
           <div class="title-kicker">
-            <div class="newsletter-title"><?php echo $title; ?></div>
+            <div class="newsletter-title"><?php echo l($title, $link, array('attributes' => array('target'=>'_blank'))); ?></div>
             <div class="newsletter-kicker"><?php echo $kicker; ?></div>
           </div>
         </div>
@@ -188,7 +197,7 @@
         <?php if ($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal') {?>
           <div class="field">
             <div class="field-label">Content ID:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['value']); ?></div>
+            <div class="field-items"><?php echo $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id']; ?></div>
           </div>
         <?php } else { ?>
          <div class="field">
@@ -203,6 +212,10 @@
           <div class="field">
             <div class="field-label">Kicker:</div>
             <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Thumbnail:</div>
+            <div class="field-items"><img src="<?php echo image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']); ?>" /></div>
           </div>
       
      <?php
