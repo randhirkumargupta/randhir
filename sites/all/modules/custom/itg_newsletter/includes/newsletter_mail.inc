@@ -6,7 +6,7 @@
  */
 
 function _send_mail_newsletter($node){
-  $node = node_load(1375);
+  //$node = node_load(1375);
    $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
    $user_email_arr = array('haripalrao@gmail.com', 'haripal.rao@kelltontech.com');
    $user_email_str = implode(',',$user_email_arr);
@@ -19,7 +19,7 @@ function _send_mail_newsletter($node){
       'subject' => 'India Today Newsletter | '.$template_node->title,
     );
 
-    $mail = drupal_mail('_newsletter_mail_sending', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       drupal_set_message('Newsletter has been sent successfully.');
     }
@@ -84,6 +84,8 @@ $content = '<!DOCTYPE html>
       </tr>';
 
   $content .='</table></body></html>';
+  
+  echo $content; exit;
 
   return $content;
 }
