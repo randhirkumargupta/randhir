@@ -182,7 +182,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm-d-Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Field: Expiry date */
+  /* Field: Field: Story expiry date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -306,7 +306,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Field: Expiry date */
+  /* Field: Field: Story expiry date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';

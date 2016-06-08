@@ -58,7 +58,8 @@ function itg_syndication_after_build($form, &$form_state) {
   
   // hide Web URL 
     drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-service-fetch-link").hide();              
+              jQuery("#edit-field-service-fetch-link").hide();
+              jQuery("#edit-field-syndication-ftp-details-und-0-remove-button").hide();
             });', array('type' => 'inline', 'scope' => 'footer'));
     
     
@@ -458,7 +459,7 @@ function get_content_id_for_syndication($data, $created_date) {
 function itg_syndication_node_insert($node) {
   
   if ($node->type == 'syndication_rule') {
-    save_cron_details_of_syndication($node);
+    //save_cron_details_of_syndication($node);
   }
   
 }
