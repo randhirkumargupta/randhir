@@ -28,7 +28,7 @@ function itg_social_media_settings() {
     }
     else {
       $helper = $fb->getRedirectLoginHelper();
-      $permissions = ['email', 'user_posts', 'user_videos', 'publish_actions', 'user_actions.video', 'manage_pages'];
+      $permissions = ['email', 'user_posts', 'user_videos', 'publish_actions', 'user_actions.video', 'manage_pages', 'publish_pages'];
       $loginUrl = $helper->getLoginUrl($base_url . '/itg-social-media-settings-callback', $permissions);
 
       $output .= '<div>' . l(t('Please login to facebook page'), $loginUrl, array('class' => array('button'))) . '</div>';
@@ -36,7 +36,7 @@ function itg_social_media_settings() {
   }
   else {
     $helper = $fb->getRedirectLoginHelper();
-    $permissions = ['email', 'user_posts', 'user_videos', 'publish_actions', 'user_actions.video', 'manage_pages'];
+    $permissions = ['email', 'user_posts', 'user_videos', 'publish_actions', 'user_actions.video', 'manage_pages', 'publish_pages'];
     $loginUrl = $helper->getLoginUrl($base_url . '/itg-social-media-settings-callback', $permissions);
     $output .= '<div>' . l(t('Please login to facebook page'), $loginUrl, array('class' => array('button'))) . '</div>';
   }
