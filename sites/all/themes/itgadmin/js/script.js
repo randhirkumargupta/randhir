@@ -614,10 +614,13 @@
       if(radioCheck == true && radioVal == 'internal'){
         content_el.parents('td').find('.field-name-field-news-external-url').hide();
         content_el.parents('td').find('.field-name-field-news-cid').show();
+        content_el.parents('td').find('.newsletter-get-content').parent().show();
+        
       }
       if(radioCheck == true && radioVal == 'external'){
         content_el.parents('td').find('.field-name-field-news-cid').hide();
         content_el.parents('td').find('.field-name-field-news-external-url').show();
+        content_el.parents('td').find('.newsletter-get-content').parent().hide();
       }
     }
     newsContent(news_content_el);
@@ -628,10 +631,12 @@
       if(radioCheck == true && radioVal == 'internal'){
         $(this).parents('td').find('.field-name-field-news-external-url').hide();
         $(this).parents('td').find('.field-name-field-news-cid').show();
+        $(this).parents('td').find('.newsletter-get-content').parent().show();
       }
       if(radioCheck == true && radioVal == 'external'){
         $(this).parents('td').find('.field-name-field-news-cid').hide();
         $(this).parents('td').find('.field-name-field-news-external-url').show();
+        $(this).parents('td').find('.newsletter-get-content').parent().hide();
       }
     });
 
