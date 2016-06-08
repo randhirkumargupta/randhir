@@ -26,6 +26,14 @@ function itg_tv_schedule_menu() {
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
     );
+    
+    $items['tv-show'] = array(
+      'title' => 'Tv Show Schedule',
+      'page callback' => 'tv_schedule_listing',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'include/tv_schedule_listing.inc',
+  );
 
     return $items;
 }
@@ -36,7 +44,6 @@ function itg_tv_schedule_form($form, &$form_state) {
   '#type' => 'managed_file',
   '#title' => t('Tv Schedule Upload'),
   '#description' => t('Allowed extensions: csv'),
-  
   '#upload_location' => 'public://',
   '#upload_validators' => array(
     'file_validate_extensions' => array('csv'),    
@@ -51,16 +58,94 @@ function itg_tv_schedule_form($form, &$form_state) {
   return $form;
 }
 
+function itg_tv_schedule_uploadmongo($file_id) {
+    
+    $f_id = $file_id;
+    $itg_query = db_select('file_managed', 'f');
+    $itg_query->condition('fid', $f_id, '=')
+              ->fields('f', array('uri'));   
+    $itg_result = $itg_query->execute()->fetchField();
+    $filename = substr($itg_result,9);
+    $filepath = "/var/www/html/itgcms/sites/default/files/";
+    $fileaddress = $filepath.$filename;
+    //p($fileaddress);
+     
+
+   
+    $file = fopen($fileaddress, "r");
+//connection with database
+    $con = new Mongo();
+    if ($con) {
+// Select Database
+        $db = $con->csvhandling;
+// create collection
+        $db->createCollection("itgcms_tys");
+// Select Collection
+        $people = $db->itgcms_tys;
+        $upload_date = date("Y/m/d");
+    }
 
 
+    while (($data = fgetcsv($file)) !== FALSE) {
+        //monday
+        if ($data[1]) {
+            $qry = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date);
+            $result = $people->insert($qry);
+        }
+
+        //tuesday
+        if ($data[2]) {
+            $qry = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date);
+            $result = $people->insert($qry);
+        }
+
+        //wednesday
+        if ($data[3]) {
+            $qry = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date);
+            $result = $people->insert($qry);
+        }
+
+
+        //thursday
+        if ($data[4]) {
+            $qry = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date);
+            $result = $people->insert($qry);
+        }
+
+        //friday
+        if ($data[5]) {
+            $qry = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date);
+            $result = $people->insert($qry);
+        }
+
+        //saturday
+        if ($data[6]) {
+            $qry = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date);
+            $result = $people->insert($qry);
+        }
+
+        //sunday
+        if ($data[7]) {
+            $qry = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date);
+            $result = $people->insert($qry);
+        }
+    }
+   
+    fclose($file);
+}
 
 function itg_tv_schedule_form_submit($form, &$form_state) {
   global $user;
+  //p($form_state['input']['file']['fid']);
+  $file_id = $form_state['input']['file']['fid'];
   $file=file_load($form_state['values']['file']);
   //unset($form_state['values']['file']);
   $file->status = FILE_STATUS_PERMANENT;
   file_save($file);
   file_usage_add($file,'user','user',$user->uid);
   drupal_set_message(t('The file has been submitted and saved, filename: @filename.', array('@filename' => $file->filename)));
+  //p($fil);
+  itg_tv_schedule_uploadmongo($file_id);
+  
 }
 ?>
