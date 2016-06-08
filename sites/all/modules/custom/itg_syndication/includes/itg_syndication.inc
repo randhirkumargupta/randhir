@@ -4,68 +4,39 @@
  * Inc file contains the functions
  */
 
-function feed_generator_of_content($client_name) {
+/**
+ * Feed generator of selected contents
+ * @param array $data 
+ */
 
-  // Today date
-  $today = date('Y/m/d') . ' 00:00:00';
-  // Fetch syndication item from database whoes status is 0
-  $itg_query = db_select('itg_row_selector', 'itg');
-  $itg_query->fields('itg', array('id', 'web_property', 'syndication'))
-      ->condition('created', $today)
-      ->condition('client_title', $client_name)
-      ->conditions('status', 0);
-  $itg_result = $itg_query->execute()->fetchAll();
-  // Count result
-  if (count($itg_result) >= 1) {
-    foreach ($itg_result as $synd_value) {
-      $data = itg_syndication_client_details($client_name);
-      // Check if client exist
-      if (isset($data->nid) && $data->nid > 0) {
-        $syndication_node = unserialize($synd_value->syndication);
-        switch ($data->field_syndication_delivery_mode['und'][0]['value']) {
-          case 'xml':
-            itg_syndication_generate_xml($data, $syndication_node);
-            break;
-          case 'rss':
-            itg_syndication_generate_rss($data, $syndication_node);
-            break;
-          case 'mrss':
+function feed_generator_of_contents($data) {
+       
+    switch ($data['feed_type']) {
+      case 'xml':
+        $file_path = itg_syndication_generate_xml($data);
+        break;
+      case 'rss':
+        $file_path = itg_syndication_generate_rss($data);
+        break;
+      case 'mrss':
 
-            break;
-          case 'ussd':
+        break;
+      case 'ussd':
 
-            break;
-          case 'sms':
+        break;
+      case 'sms':
 
-            break;
-          case 'stf':
-            watchdog('syndication_stf', 'I am in queue!');
-            break;
-          case 'html':
-            itg_syndication_mail_syndication($data, $syndication_node);
-            break;
-        }
-      }
+        break;
+      case 'stf':
+        watchdog('syndication_stf', 'I am in queue!');
+        break;
+      case 'html':
+        $file_path = itg_syndication_mail_syndication($data);
+        break;
     }
-  }
+      
 
-  return 'XML File Generated';
-}
-
-function itg_syndication_client_details($client) {
-  $itg_query = db_select('node', 'n');
-  $itg_query->fields('n', array('nid'))
-      ->condition('title', $client)
-      ->condition('status', 1)
-      ->condition('type', 'syndication_client');
-  $itg_result = $itg_query->execute()->fetchField();
-  $data = array();
-  // Load client  
-  if ($itg_result > 0) {
-    $data = node_load($itg_result);
-  }
-
-  return $data;
+  return $file_path;
 }
 
 /**
@@ -73,7 +44,8 @@ function itg_syndication_client_details($client) {
  * @param array $data
  * @param array $syndication_node
  */
-function itg_syndication_generate_xml($data, $syndication_node) {
+function itg_syndication_generate_xml($data) {
+  $syndication_node = unserialize($data->syndication);
   $file_path = drupal_realpath('public://');
   $dom = new DOMDocument('1.0', 'UTF-8');
   $dom->formatOutput = true;
@@ -90,55 +62,34 @@ function itg_syndication_generate_xml($data, $syndication_node) {
     $result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
   }
 
-  $dom->save($file_path . '/' . $data->title . '.xml') or die('XML Create Error');
+  $dom->save($file_path . '/' . $data->client_title . '.xml') or die('XML Create Error');
   drupal_set_message('xml file has been created.', 'status');
+  
+  $delivery_mode = $data['delivery_mode'];
 
+  if (!filter_var($delivery_mode, FILTER_VALIDATE_EMAIL) === false) {
+    $delivery_mode_type = 'Email';
+  } else {
+      $delivery_mode_type = 'FTP';
+  }
+  
   // Decide sharing mode
-  switch ($data->field_content_sharing_mode['und'][0]['value']) {
+  switch ($delivery_mode_type) {
     // 1. Fetch web URL (our server)
     case '1':
       break;
     // 2. Via FTP location
-    case '2':
+      
+    case 'FTP':
+      itg_syndication_ftp_syndication($data, $file_path . '/' . $data->client_title . '.xml');
       break;
     // 3. Via Email
-    case '3':
-      itg_syndication_mail_syndication($data, $syndication_node, $file_path . '/' . $data->title . '.xml');
+    case 'Email':
+      itg_syndication_mail_syndication($data, $file_path . '/' . $data->client_title . '.xml');
       break;
   }
-}
-
-/**
- * Function to generate rss
- * @param array $data
- * @param array $syndication_node
- */
-function itg_syndication_generate_rss($data, $syndication_node) {
-  $file_path = drupal_realpath('public://');
-  $dom = new DOMDocument('1.0', 'UTF-8');
-  $dom->formatOutput = true;
-  //create "RSS" element
-  $rss = $dom->createElement("rss");
-  $rss = $dom->appendChild($rss); //add RSS element to XML node
-  $rss->setAttribute("version", "2.0"); //set RSS version
-
-
-  $root = $dom->createElement('syndication');
-  $dom->appendChild($root);
-
-  foreach ($syndication_node as $key => $val) {
-    $node = node_load($val);
-    $result = $dom->createElement('content');
-    $root->appendChild($result);
-    $result->setAttribute('id', $key + 1);
-    $result->appendChild($dom->createElement('title', $node->title));
-    $result->appendChild($dom->createElement('body', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
-    $result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
-  }
-
-  $dom->save($file_path . '/itg_rss.xml') or die('rss Create Error');
-  watchdog('syndication_rss', 'RSS created');
-  drupal_set_message('rss file has been created.', 'status');
+  
+  return  $file_path . '/' . $data->title . '.xml';
 }
 
 /**
@@ -171,7 +122,6 @@ function itg_syndication_mail_syndication($data, $file_path) {
 
 /**
  * Implements hook_mail().
- * 
  * @param string $key
  * @param string $message
  * @param array $params
@@ -186,4 +136,68 @@ function itg_syndication_mail($key, &$message, $params) {
       $message['params']['attachments'][] = $params['attachment'];
     }
   }
+}
+
+/**
+ * function to feed for syndication by ftp.
+ * @param type $data
+ * @param type $file_path
+ */
+function itg_syndication_ftp_syndication($data, $file_path) {  
+  $ftp_details = get_ftp_details_by_client($data['client_title'], $data['delivery_mode']);
+  
+  $file = $file_path;
+  $remote_file = 'readme.txt';
+  
+  $ftp_server = $ftp_details->field_syndication_ftp_url_value;
+  $ftp_user_name = $ftp_details->field_syndication_ftp_username_value;
+  $ftp_user_pass = $ftp_details->field_syndication_ftp_password_value;
+  
+  // set up basic connection
+  $conn_id = ftp_connect($ftp_server);
+
+  // login with username and password
+  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+
+  // upload a file
+  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+   echo "successfully uploaded $file\n";
+  } else {
+   echo "There was a problem while uploading $file\n";
+  }
+
+  // close the connection
+  ftp_close($conn_id);
+}
+
+/**
+ * Get FTP details of client
+ * @param $client_name
+ * @param $ftp_name
+ */
+function get_ftp_details_by_client($client_name, $ftp_name) {
+  
+  $client = explode('-', $client_name);
+  $client_description = $client[1];
+  $client_title = $client[0];
+  $itg_query = db_select('node', 'n');
+  $itg_query->condition('n.title', $client_description)
+      ->fields('n', array('nid'))
+      ->fields('ftp', array('field_syndication_ftp_details_value'))
+      ->fields('ftp_name', array('field_syndication_ftp_name_value'))
+      ->fields('ftp_url', array('field_syndication_ftp_url_value'))
+      ->fields('ftp_username', array('field_syndication_ftp_username_value'))      
+      ->fields('ftp_pass', array('field_syndication_ftp_password_value'));
+  $itg_query->join('field_data_field_syndication_client_title', 'sc', 'n.nid = sc.entity_id');
+  $itg_query->join('taxonomy_term_data', 'term', 'term.tid = sc.field_syndication_client_title_tid');
+  $itg_query->join('field_data_field_syndication_ftp_details', 'ftp', 'ftp.entity_id = n.nid');
+  $itg_query->join('field_data_field_syndication_ftp_url', 'ftp_url', 'ftp_url.entity_id = ftp.field_syndication_ftp_details_value');
+  $itg_query->join('field_data_field_syndication_ftp_username', 'ftp_username', 'ftp_username.entity_id = ftp.field_syndication_ftp_details_value');
+  $itg_query->join('field_data_field_syndication_ftp_password', 'ftp_pass', 'ftp_pass.entity_id = ftp.field_syndication_ftp_details_value');
+  $itg_query->join('field_data_field_syndication_ftp_name', 'ftp_name', 'ftp_name.entity_id = ftp.field_syndication_ftp_details_value');
+  $itg_query->condition('term.name', $client_title);
+  $itg_query->condition('ftp_name.field_syndication_ftp_name_value', $ftp_name);
+  $itg_result = $itg_query->execute()->fetchAll(); 
+  
+  return $data;
 }
