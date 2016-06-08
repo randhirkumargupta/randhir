@@ -406,9 +406,7 @@ function itg_story_node_update($node) {
  * @param type $form_id  
  */
 function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
-  global $base_url, $user;
-  //dpm($form);
-    
+  global $base_url, $user;   
     $magazine_field = 'field_story_select_magazine';
     $supplement_field = 'field_story_select_supplement';
     
