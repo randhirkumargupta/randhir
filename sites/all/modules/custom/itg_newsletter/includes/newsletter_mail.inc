@@ -86,7 +86,6 @@ $content = '<tr>
         </td>
       </tr>';
 
-
 //  foreach (foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
 //   $winners .= '<tr><td>'.$value['user_name'].'</td>
 //        <td>'.$value['quiz_score'].'</td></tr>';
