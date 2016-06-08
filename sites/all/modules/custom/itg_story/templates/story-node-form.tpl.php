@@ -48,6 +48,10 @@
   <?php print drupal_render($form['field_story_time_twitter']); ?>
   <?php print drupal_render($form['field_story_posted_by_instagram']); ?>
   <?php print drupal_render($form['field_story_time_instagram']); ?>
+  <?php print drupal_render($form['field_story_facebook_video']); ?>
+  <?php print drupal_render($form['field_story_facebook_vdescripti']); ?>
+  <?php print drupal_render($form['field_story_twitter_video']); ?>
+  <?php print drupal_render($form['field_story_twitter_video_desc']); ?>
 </div>
 <div id="Configuration">
     <h2 class="story-title"><?php print t('Configuration'); ?></h2>

@@ -12,8 +12,7 @@
  * Implements hook_init().
  */
 function itg_story_init() {
-  //echo date('d/m/Y', '1464719400');exit;
-  //get_ftp_details_by_client('Idea-JNP', 'JNP FTP2');
+  //get_syndication_content_details();
 }
 
 
@@ -187,13 +186,13 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
  * @param type $form   
  */
 function itg_story_node_validate($node, $form, &$form_state) {
- 
-  $issue_based = $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'];
-  $magazine_kicker = $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'];
-  $magazine = $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
   
   // Code for redirection url validation
   if ($node->type == 'story') {
+    
+    $issue_based = $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'];
+    $magazine_kicker = $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'];
+    $magazine = $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
     
      // code to validation magazine field when issue based story is checked
     if (!empty($issue_based)) {
@@ -378,7 +377,7 @@ function itg_story_create_breaking_news($story_node) {
  * @param type $node
  */
 function itg_story_node_insert($node) { 
-  if ($node->workbench_moderation_state_new != 'draft') {
+  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
    foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
      if ($val['value'] == 'breaking_news') {
        itg_story_create_breaking_news($node);
@@ -391,8 +390,8 @@ function itg_story_node_insert($node) {
  * Implements hook_node_update
  * @param type $node
  */
-function itg_story_node_update($node) {
-  if ($node->workbench_moderation_state_new != 'draft') {
+function itg_story_node_update($node) { 
+  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
     foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
       if ($val['value'] == 'breaking_news') {
         itg_story_create_breaking_news($node);
@@ -407,9 +406,7 @@ function itg_story_node_update($node) {
  * @param type $form_id  
  */
 function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
-  global $base_url, $user;
-  //dpm($form);
-    
+  global $base_url, $user;   
     $magazine_field = 'field_story_select_magazine';
     $supplement_field = 'field_story_select_supplement';
     

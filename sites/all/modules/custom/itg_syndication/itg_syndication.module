@@ -1,7 +1,8 @@
 <?php
 
-
 module_load_include('inc', 'itg_syndication', 'includes/itg_syndication.manual_feed');
+
+module_load_include('inc', 'itg_syndication', 'includes/itg_syndication');
 
 /**
  * Implement hook_permissions()
@@ -14,23 +15,6 @@ function itg_syndication_permission() {
     ),
   );
 }
-
-/**
- * Implements hook_menu()
- * @return array
- */
-function itg_syndication_menu() {
-  $items['syndication/feed-generator-of-content'] = array(
-    'page callback' => 'feed_generator_of_content',
-    'access arguments' => array('access itg story'),
-    'page arguments' => array(2),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_syndication.inc',
-  );
-
-  return $items;
-}
-
 
 /**
  * Implements hook_form_FORMID_alter().
@@ -72,12 +56,13 @@ function itg_syndication_after_build($form, &$form_state) {
       )
     );
   
-  $form['field_service_fetch_link']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_syndication_delivery_mode[und][Web URL]"]' => array('checked' => TRUE),
-      )
-    );
-  
+  // hide Web URL 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-service-fetch-link").hide();
+              jQuery("#edit-field-syndication-ftp-details-und-0-remove-button").hide();
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    
+    
    $form['field_syndication_ftp_details']['#states'] = array(
       'visible' => array(
         ':input[name="field_syndication_delivery_mode[und][FTP]"]' => array('checked' => TRUE),
@@ -91,6 +76,8 @@ function itg_syndication_after_build($form, &$form_state) {
   );
   
   $form['additional_settings']['#access'] = FALSE;
+  
+  $_GET['destination'] = 'syndication-client-listing';
 
   return $form;
 }
@@ -317,62 +304,52 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
     foreach($node->field_syndication_delivery_mode[LANGUAGE_NONE] as $key_mode => $val_mode) {
       if ($val_mode['value'] == 'FTP') {
         
-        foreach($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {
-          //validate for ftp name
-          
-          if ($val['field_syndication_ftp_name'][LANGUAGE_NONE][0]['value'] == '') {
-            form_set_error('field_syndication_ftp_name', t('FTP Name field is required.'));
-          }
-         //p($val['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value']);
-          //validate for ftp url
-//          if ($val['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value'] == '') {
-//            form_set_error('field_syndication_ftp_url', t('FTP URL field is required.'));
-//          } else {
-//              if (!filter_var($val['field_ftp_ip_address']['und'][0]['value'], FILTER_VALIDATE_IP)) {
-//                form_set_error('field_syndication_ftp_url', t('FTP IP Address is not valid.'));
-//              }
-//          }
-          
-          //validate for ftp User name
-//          if ($val['field_syndication_ftp_username'][LANGUAGE_NONE][0]['value'] == '') {
-//            form_set_error('field_syndication_ftp_username', t('FTP User Name field is required.'));
-//          } else {
-//              if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $val['field_ftp_username']['und'][0]['value'])) {
-//                form_set_error('field_syndication_ftp_username', t('FTP Username must be minimum 8 digit alphanumeric and without space.'));
-//              }
-//          }
-          
-          //validate for ftp password
-//          if ($val['field_syndication_ftp_password'][LANGUAGE_NONE][0]['value'] == '') {
-//            form_set_error('field_syndication_ftp_password', t('FTP Password field is required.'));
-//          } else {
-//              if (!preg_match('/^(?=.*[A-Za-z])[A-Za-z0-9!@#$%]{8,}$/', $val['field_syndication_ftp_password']['und'][0]['value'])) {
-//               form_set_error('field_syndication_ftp_password', t('FTP Password must be minimum 8 digit alphanumeric and without space.'));
-//              }  
-//          }
-      
+        if ($node->field_syndication_ftp_details[LANGUAGE_NONE][0]['field_syndication_ftp_name'][LANGUAGE_NONE][0]['value'] == '') {
+          form_set_error('field_syndication_ftp_name', t('FTP Name field is required.'));
         }
-      } if ($val_mode['value'] == 'Email') {
-//            foreach ($node->field_email_address[LANGUAGE_NONE] as $key_mail => $val_val) {
-//              if ($val_val['value'] == '') {
-//                form_set_error('field_email_address', t('Mail to field is required.'));
-//              } else {
-//                 // Validate email                
-//                  if (!filter_var($node->field_email_address['und'][0]['value'], FILTER_VALIDATE_EMAIL)) {
-//                    form_set_error('field_email_address', t('Please enter valid email address.'));
-//                  }
-//              }
-//            }
+        if ($node->field_syndication_ftp_details[LANGUAGE_NONE][0]['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value'] == '') {
+          form_set_error('field_syndication_ftp_name', t('FTP URL field is required.'));
+        }
+        if ($node->field_syndication_ftp_details[LANGUAGE_NONE][0]['field_syndication_ftp_username'][LANGUAGE_NONE][0]['value'] == '') {
+          form_set_error('field_syndication_ftp_name', t('FTP User Name field is required.'));
+        }
+        if ($node->field_syndication_ftp_details[LANGUAGE_NONE][0]['field_syndication_ftp_password'][LANGUAGE_NONE][0]['value'] == '') {
+          form_set_error('field_syndication_ftp_name', t('FTP Password field is required.'));
+        }
+        
+        foreach($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {          
+          //validate for ftp url
+          if ($val['field_ftp_ip_address'][LANGUAGE_NONE][0]['value'] != '') {
+            if (!filter_var($val['field_ftp_ip_address'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_IP)) {
+              form_set_error('field_syndication_ftp_url', t('FTP IP Address is not valid.'));
+            }
           }
+        }
+       
+      } if ($val_mode['value'] == 'Email') {        
+          if ($node->field_email_address[LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_email_address', t('Mail to field is required.'));
+          }
+
+          $email_array = $node->field_email_address[LANGUAGE_NONE];
+          array_pop($email_array);
+
+          foreach ($email_array as $key_mail => $val_val) {
+            // Validate email
+            if ($val_val['value'] != '') {                
+              if (!filter_var($val_val['value'], FILTER_VALIDATE_EMAIL)) {                  
+                form_set_error('field_email_address_'.$key_mail, t('Please enter valid email address.'));
+              }               
+            }
+
+          }
+        }
     }
-     
-  
-    
   
    $is_dupl_client = itg_syndication_check_duplicate($node->field_syndication_client_title['und'][0]['tid'], $node->title);
    
    if ($is_dupl_client) {
-      //form_set_error('title', t('client already exists.'));
+      form_set_error('title', t('client already exists.'));
    }
   } else if ($node->type == 'syndication_rule') {
     foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key_time => $val_time) {
@@ -391,25 +368,6 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
   }
 }
 
-/**
- * Implements hook_field_group_build_pre_render_alter.
- * @param array $element
- */
-/*function itg_syndication_field_group_build_pre_render_alter(&$element) {
-  if (isset($element['#form_id'])) {
-    if ($element['#form_id'] == 'syndication_client_node_form') {
-      $element['group_syndication_ftp']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        )
-      );
-      $element['group_syndication_ftp']['#id'] = 'group_syndication_ftp';
-    }
-  }
-}*/
 
 /**
  * Callback function for Issue list
@@ -417,7 +375,6 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
  * @return array
  */
 function itg_syndication_get_issue_list() {
-  //2016-06-03
   
   // Create default option for list
   $data[''] = '- Select -';
@@ -437,22 +394,63 @@ function itg_syndication_get_issue_list() {
 
 
 /**
- * Callback function for content id
- * @param string $cat category id
+ * function for syndication content details
  * @return array
  */
-function itg_syndication_get_content_id_section($cat) {  
+function get_syndication_content_details() {
+  $current_time = time();
   
-  $itg_query = db_select('field_data_field_story_category', 'c');
-              $itg_query->fields('c', array('entity_id'));      
-              $itg_query->condition('c.field_story_category_tid', $cat);              
+  $itg_query = db_select('itg_cron_time_scheduler', 'ts');
+  $itg_query->fields('ts', array('cron_details'));
+  $itg_query->fields('ts', array('last_cron_time'));
+  $itg_query->fields('ts', array('scheduler_time'));
+  $itg_query->fields('ts', array('id'));
+  $itg_query->condition('ts.scheduler_time', $current_time, '<');
   $itg_result = $itg_query->execute()->fetchAll();
   
   foreach ($itg_result as $itg_val) {
-    $data[] = $itg_val->entity_id;
+    if (!empty($itg_val->cron_details)) {
+      $data = unserialize($itg_val->cron_details);      
+      $content_value = get_content_id_for_syndication($data, $itg_val->last_cron_time);
+      //code for update cron time
+      update_cron_time_after_feed_generate($data, $itg_val->id, $itg_val->scheduler_time);
+      // end code
+    }
   }
   
   return $data;
+}
+
+/**
+ * function for syndication content id
+ * @return array
+ */
+function get_content_id_for_syndication($data, $created_date) {
+  
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('nid'));
+  $itg_query->join('field_data_field_story_category', 'cat', 'cat.entity_id = n.nid');  
+  $itg_query->condition('n.status', 1);
+  //$itg_query->condition('n.created', $created_date, '>');
+  $itg_query->condition('n.type',$data['content_type']);
+  $itg_query->condition('cat.field_story_category_tid',$data['section_id']);
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  foreach ($itg_result as $itg_val) {
+    $content_id[] = $itg_val->nid;
+  }
+  
+  $data_array = array(
+    'web_property' => $data['content_type'],
+    'client_title' => $data['client_name'],
+    'delivery_mode' => $data['syndication_mode'],
+    'feed_type' => $data['feed_type'],
+    'syndication' => serialize($content_id),    
+  );
+  
+  $file_path = feed_generator_of_contents($data_array);
+  
+  return $file_path;
 }
 
 /**
@@ -461,77 +459,133 @@ function itg_syndication_get_content_id_section($cat) {
 function itg_syndication_node_insert($node) {
   
   if ($node->type == 'syndication_rule') {
-    
-    foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key => $val ) {
-      
-      $field_collection_item = entity_load('field_collection_item', array($val['value']));
-      $frequency = $field_collection_item[$val['value']]->field_syndication_frequency[LANGUAGE_NONE][0]['value'];
-      
-      $time_rule = $field_collection_item[$val['value']]->field_syndication_time[LANGUAGE_NONE][0]['value'];      
-      $day = $field_collection_item[$val['value']]->field_syndication_set_day[LANGUAGE_NONE][0]['value'];
-      $dt = $field_collection_item[$val['value']]->field_syndication_set_day_month[LANGUAGE_NONE][0]['value'];
-      
-      if ($frequency == 'Daily') {
-        $current_date = time();
-        $cron_time = date('m/d/Y', $current_date).' '.$time_rule;
-        $scheduler_time = strtotime($cron_time);       
-      } else if ($frequency == 'Weekly') {
-        //strtotime( "next monday" );
-        $current_date = strtotime( "previous ".$day );        
-        $cron_time = date('m/d/Y', $current_date).' '.$time_rule;
-        $scheduler_time = strtotime($cron_time);       
-      } else if ($frequency == 'Monthly') {         
-         $cron_time_month = date('m');
-         $cron_time_year = date('Y');
-         $cron_time = $cron_time_month.'/'.$dt.'/'.$cron_time_year.' '.$time_rule;         
-         $scheduler_time = strtotime($cron_time);
-      }
-      
-      $query = db_insert('itg_cron_time_scheduler');
-      $query->fields(array(
-        'content_id' => $node->nid,
-        'fid' => $val['value'],
-        'content_type' => $node->type,
-        'scheduler_time' => $scheduler_time,
-        'status' => true
-      )); 
-      $query->execute();
-    }
-  
+    //save_cron_details_of_syndication($node);
   }
   
 }
 
 /**
- * Implementation of hook_views_query_alter
- * @param array reference $view
- * @param array reference $query
+ * save cron details for feed of syndication content
+ * @param array $node 
  */
-function itg_syndication_views_query_alter(&$view, &$query) {
- //p($query->where[1]['conditions']);
-  if (isset($view->name) && $view->name === 'syndication_feed_generator') {
-    foreach($query->where[1]['conditions'] as $key => $val) {
-      if(isset($val['field']) && $val['field'] == 'node.type' && $val['value'][0] == 'magazine') {
-        $query->where[1]['conditions'][$key]['value'][0] = 'story';
-      }
+
+function save_cron_details_of_syndication($node) {
+  
+  foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key => $val ) {
+      
+    $field_collection_item = entity_load('field_collection_item', array($val['value']));
+
+    $section_id = $field_collection_item[$val['value']]->field_syndication_select_section[LANGUAGE_NONE][0]['tid'];
+    $feed_type = $field_collection_item[$val['value']]->field_syndication_feed_type[LANGUAGE_NONE][0]['value'];
+    $syndication_mode = $field_collection_item[$val['value']]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
+    $content_type = $field_collection_item[$val['value']]->field_syndication_content_type[LANGUAGE_NONE][0]['value'];
+    $client_name = $node->title;
+    $frequency = $field_collection_item[$val['value']]->field_syndication_frequency[LANGUAGE_NONE][0]['value'];
+
+    $time_rule = $field_collection_item[$val['value']]->field_syndication_time[LANGUAGE_NONE][0]['value'];      
+    $day = $field_collection_item[$val['value']]->field_syndication_set_day[LANGUAGE_NONE][0]['value'];
+    $dt = $field_collection_item[$val['value']]->field_syndication_set_day_month[LANGUAGE_NONE][0]['value'];
+
+    if ($frequency == 'Daily') {
+      $current_date = time();
+      $cron_time = date('m/d/Y', $current_date).' '.$time_rule;
+      $scheduler_time = strtotime($cron_time);
+      $previous_time = strtotime($cron_time.' -1 day');
+    } else if ($frequency == 'Weekly') {
+      //strtotime( "next monday" );
+      $current_date = strtotime( "previous ".$day );        
+      $cron_time = date('m/d/Y', $current_date).' '.$time_rule;
+      $scheduler_time = strtotime($cron_time);
+      $previous_time = strtotime($cron_time.' -7 days');
+    } else if ($frequency == 'Monthly') {         
+       $cron_time_month = date('m');
+       $cron_time_year = date('Y');
+       $cron_time = $cron_time_month.'/'.$dt.'/'.$cron_time_year.' '.$time_rule;         
+       $scheduler_time = strtotime($cron_time);
+       $previous_time = strtotime($cron_time.' -1 month');
+    }
+
+    $details_array = array('client_name' => $client_name, 
+                             'section_id' => $section_id, 
+                             'feed_type' => $feed_type, 
+                             'syndication_mode' => $syndication_mode, 
+                             'content_type' => $content_type, 
+                             'frequency' => $frequency, 
+                             'time_rule' => $time_rule, 
+                             'day_name' => $day, 
+                             'date' => $dt);
+
+    $details = serialize($details_array);
+
+    $query = db_insert('itg_cron_time_scheduler');
+    $query->fields(array(
+      'content_id' => $node->nid,
+      'fid' => $val['value'],
+      'content_type' => $node->type,
+      'last_cron_time' => $previous_time,
+      'scheduler_time' => $scheduler_time,
+      'cron_details' => $details,
+      'status' => true
+    )); 
+    $query->execute();
+  }
+  
+}
+
+
+
+/**
+ * Get web url for client
+ * @param array $node
+ * @param  $dir 
+ * @return url
+ */
+function get_weburl_for_syndication($dir, $node) {  
+  global $base_url;
+  $url = $base_url.'/'.$dir.'/';
+  
+  $six_digit_random_number = mt_rand(100000, 999999);
+  $timestamps = date("Y-m-d H:i:s");
+  $client_name = $node->field_syndication_client_title[LANGUAGE_NONE][0]['tid'].$node->title;
+  $token = sha1($client_name. $timestamp . $six_digit_random_number);
+  
+  return $url.$token;
+}
+
+/**
+ * Implementation of hook_node_presave
+ * @param array $node 
+ */
+function itg_syndication_node_presave($node) {  
+  if ($node->type =='syndication_client' && $node->field_syndication_delivery_mode[LANGUAGE_NONE][0]['value'] == 'Web URL') {
+    $web_url = get_weburl_for_syndication('syndication', $node);
+    $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
+  }
+}
+
+/**
+ * function for cron time update
+ * @param array $node
+ * @param array $id
+ * @param array $cron_time 
+ */
+function update_cron_time_after_feed_generate($data, $id, $cron_time) {
+  if ($data['frequency'] == 'Daily') {      
+      $scheduler_time = strtotime('+1 day', $cron_time);
+      $previous_time = $cron_time;
+    } else if ($data['frequency'] == 'Weekly') {
+      $scheduler_time = strtotime('+7 days', $cron_time);
+      $previous_time = $cron_time;
+    } else if ($data['frequency'] == 'Monthly') {         
+       $scheduler_time = strtotime('+1 month', $cron_time);
+      $previous_time = $cron_time;
     }
     
-    if (isset($_GET['changed']['max']['date'])) {      
-      $max_conditions_array = array();
-      $_GET['changed']['min']['date'] = str_replace('/','-',$_GET['changed']['min']['date']);
-      $_GET['changed']['max']['date'] = str_replace('/','-',$_GET['changed']['max']['date']);
-      
-      $tomorrow = strtotime(date('d-m-Y',strtotime($_GET['changed']['max']['date'] . "+1 days")));
-      $max_date_condition = "AND " .$tomorrow;
-      
-      if (isset($view->query->where[1]['conditions'])) {
-        foreach ($query->where[1]['conditions'] as $idx => $condition) {
-          if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
-            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);            
-            $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
-          }
-        }
-      }    
-    }
-  }
+    db_update('itg_cron_time_scheduler')
+          ->fields(array(
+            'last_cron_time' => $previous_time,
+            'scheduler_time' => $scheduler_time,            
+          ))
+          ->condition('id', $id)
+          ->execute();
 }

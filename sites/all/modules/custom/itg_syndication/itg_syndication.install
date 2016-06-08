@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * Implements hook_schema()
+ * @return array
+ */
+function itg_syndication_schema() {
+  $schema['itg_cron_time_scheduler'] = array(
+    'description' => t('The base table for cron.'),
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'content_id' => array(
+        'description' => t('for nid.'),
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+        'default' => '',
+      ),      
+      'fid' => array(
+        'description' => 'field collection id.',
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'cron_type' => array(
+        'description' => t('content type name.'),
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'last_cron_time' => array(
+        'description' => t('Previous cron time.'),
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'scheduler_time' => array(
+        'description' => t('Scheduler cron time'),
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'cron_details' => array(
+        'description' => t('cron details'),
+        'type' => 'longblob',       
+      ),
+      'status' => array(
+        'description' => t('Scheduler cron status'),
+        'type' => 'tinyint',
+        'length' => 1,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    
+    'primary key' => array('id'),
+  );
+  
+  $schema['itg_syndication_manual_feed_details'] = array(
+    'description' => t('Syndication manual feed details.'),
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'web_property' => array(
+        'description' => t('Web property.'),
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'client_title' => array(
+        'description' => t('client title.'),
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'delivery_mode' => array(
+        'description' => t('delivery mode.'),
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'feed_type' => array(
+        'description' => t('Feed type'),
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'feed_file_path' => array(
+        'description' => t('file path'),
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'syndication' => array(
+        'description' => t('Create feed details'),
+        'type' => 'blob',       
+      ),
+      'status' => array(
+        'description' => t('feed status'),
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'description' => t('The created date for the single record'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+    ),
+    
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+
