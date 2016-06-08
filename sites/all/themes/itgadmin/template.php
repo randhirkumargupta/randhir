@@ -217,8 +217,8 @@ function itgadmin_date_all_day_label() {
  * Preprocessor for theme('page').
  */
 function itgadmin_preprocess_page(&$vars) {  
-  
-  // Change create category page title.
+ // Change create category page title.
+  $arg0 = arg(0);
   if (arg(2) == 'taxonomy' && arg(3) == 'category_management' && arg(4) == 'add') {
     drupal_set_title('Create Category');
   }
@@ -227,13 +227,17 @@ function itgadmin_preprocess_page(&$vars) {
     drupal_set_title('Create Tag');
   }
 
-  if (arg(0) == 'survey-result' && is_numeric(arg(1))) {
+  if ($arg0 == 'survey-result' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
     drupal_set_title('Survey Result: ' . ucwords($node->title));
   }
+  
+  if (!empty($vars['node']) && $vars['node']->type == 'ugc') {
+    drupal_set_title('');
+  }
 
   //Add tpl for event registration view page
-  if ($vars['node']->type == 'event_registration' || arg(0) == 'comment_view' || arg(0) == 'event-users-list' || arg(0) == 'comment_edit') {
+  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit') {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 }

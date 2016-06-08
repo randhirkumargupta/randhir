@@ -8,18 +8,16 @@
 require 'vendor/autoload.php';
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.settings');
+
 // Define static variable for setting purpose.
 define('FACEBOOK_APP_KEY', '998850543526214');
 define('FACEBOOK_APP_SECRET', '899729807fcf2061364278613db4a4e7');
 define('TWITTER_API_KEY', 'ZrAM49Mh50YKRxRTtLY1mP1jE');
 define('TWITTER_API_SECRET', 'GBNz25BRuSYcNJiWyTtsBSCrb6mDWNxtZrK4EHm0tmjB54Zpzi');
-define('TWITTER_ACCESS_TOKEN', '732461289138585601-yKseoi32vL9UTfoHmRt80cl5awdnLE4');
-define('TWITTER_ACCESS_TOKEN_SECRET', 'IBqZLZfohV5yz3xcXTTU8h9X6bZBqg3IRkUV3wiyN1aUI');
+
 // Local settings
 //define('TWITTER_API_KEY', 'oynNx70nQQo8aWUlcYtc7BUDX');
 //define('TWITTER_API_SECRET', '2RsvsZLF5hpEcFIjHvqbUNxoeqFStyB9ZEAxognUjVaBWz2r8X');
-//define('TWITTER_ACCESS_TOKEN', '732461289138585601-ZGsz2F1L9hHH1OBVGAWyiA3Zb9IoxlX');
-//define('TWITTER_ACCESS_TOKEN_SECRET', 'hp6qwLPSek76vapx9ReocpXdpXa4078SIoKAe3h0m5Xt7');
 
 /**
  * Implement hook_permissions()
@@ -47,8 +45,20 @@ function itg_social_media_menu() {
     'file' => 'includes/itg_social_media.settings.inc',
   );
   // Facebook login callback
-  $items['itg-social-media-settings-callback'] = array(    
+  $items['itg-social-media-settings-callback'] = array(
     'page callback' => 'itg_social_media_settings_callback',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.settings.inc',
+  );
+  $items['twitter-login'] = array(
+    'page callback' => 'itg_social_media_twitter_login',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.settings.inc',
+  );
+  $items['twitter/oauth'] = array(
+    'page callback' => 'itg_social_media_twitter_callback',
     'access arguments' => array('administer itg_social_media edit_content settings'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_social_media.settings.inc',
@@ -88,7 +98,7 @@ function itg_social_media_block_info() {
   $block['social_media_form'] = array(
     'info' => t('Social Media Integration'),
     'cache' => DRUPAL_CACHE_GLOBAL,
-  );  
+  );
 
   return $block;
 }
@@ -103,7 +113,7 @@ function itg_social_media_block_view($delta = '') {
   if (isset($arg[1])) {
     $c_type = itg_social_media_node_type(check_plain($arg[1]));
     $nid = check_plain($arg[1]);
-  }  
+  }
   switch ($delta) {
     case 'social_media_form':
       $block = array(
@@ -111,7 +121,7 @@ function itg_social_media_block_view($delta = '') {
         'content' => drupal_get_form('itg_social_media_form', $c_type, $nid),
       );
 
-      break;    
+      break;
   }
 
   return $block;
@@ -139,7 +149,7 @@ function itg_social_media_node_type($nid) {
  */
 function itg_social_media_perm_file($fid) {
   $file = file_load($fid);
-  
+
   return $file;
 }
 
@@ -153,15 +163,18 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
   $path = drupal_realpath($file->uri);
   // Get connection object
   $fb = itg_social_media_fb_connection();
+  // Get page information
+  $page_id = _facebook_get_page_info($fb);
+
   // Get short url
   $short_url = shorten_url($node->path['alias'], 'goo.gl');
-  
+
   switch ($type) {
     case 'videos':
       $data = [
         'title' => t('Yogesh kumar'),
         'description' => t($desc),
-        'source' => $fb->videoToUpload($path),        
+        'source' => $fb->videoToUpload($path),
       ];
 
       break;
@@ -169,15 +182,13 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
     case 'photos':
       $data = [
         'message' => t($desc),
-        'source' => $fb->fileToUpload($path),        
+        'source' => $fb->fileToUpload($path),
       ];
 
       break;
   }
-
-
   try {
-    $response = $fb->post('/me/' . $type, $data, $_SESSION['facebook_access_token']);
+    $response = $fb->post($page_id['page_id'], $data, $page_id['access_token']);
   }
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
@@ -188,8 +199,40 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
     drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
   }
   $graphNode = $response->getGraphNode();
-  
+
   watchdog('facebook post', $graphNode['id']);
+}
+
+/**
+ * Get page info 
+ * @param stdObject $fb 
+ */
+function _facebook_get_page_info($fb) {
+  $helper = $fb->getPageTabHelper();
+
+  try {
+    $accessToken = $helper->getAccessToken();
+  }
+  catch (Facebook\Exceptions\FacebookResponseException $e) {
+    // When Graph returns an error
+    drupal_set_message('Graph returned an error: ' . $e->getMessage(), 'error');
+  }
+  catch (Facebook\Exceptions\FacebookSDKException $e) {
+    // When validation fails or other local issues
+    drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');    
+  }
+
+  if (!isset($accessToken)) {
+    drupal_set_message('No OAuth data could be obtained from the signed request. User has not authorized your app yet.', 'error');
+  }
+
+  // Logged in
+  drupal_set_message('Page id:'.$helper->getPageId() ,'status');
+  drupal_set_message('User is admin of page:'.$helper->isAdmin() ,'status');
+  drupal_set_message('Signed Request:'.$helper->getSignedRequest() ,'status');
+  drupal_set_message('Access Token:'.$accessToken->getValue() ,'status');
+  
+  return array('page_id' => $helper->getPageId(), 'access_token' => $accessToken->getValue());
 }
 
 /**
@@ -197,10 +240,10 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
  *
  * {@inheritdoc}
  */
-function itg_social_media_form_submit($form, &$form_state) {      
-  $node = node_load($form_state['values']['nid']);    
+function itg_social_media_form_submit($form, &$form_state) {
+  $node = node_load($form_state['values']['nid']);
   // Facebook video section
-  if (isset($form_state['values']['itg_smi']['facebook_video']) && $form_state['values']['itg_smi']['facebook_video'] === 'facebook_video') {        
+  if (isset($form_state['values']['itg_smi']['facebook_video']) && $form_state['values']['itg_smi']['facebook_video'] === 'facebook_video') {
     $desc = $form_state['values']['itg_facebook_video_text'];
     $fid = $form_state['values']['itg_fb_video'];
     itg_social_media_facebook_post($fid, $desc, 'videos');
@@ -214,7 +257,7 @@ function itg_social_media_form_submit($form, &$form_state) {
   }
 
   // Facebook Image
-  if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] === 'facebook') {    
+  if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] === 'facebook') {
     $desc = $form_state['values']['itg_facebook_narrative'];
     $fid = $form_state['values']['itg_fb_img'];
     itg_social_media_facebook_post($fid, $desc, 'photos');
@@ -245,16 +288,16 @@ function itg_social_media_form_submit($form, &$form_state) {
   }
 
   // TWITTER IMAGE
-  if (isset($form_state['values']['itg_smi']['twitter']) && $form_state['values']['itg_smi']['twitter'] === 'twitter') {    
+  if (isset($form_state['values']['itg_smi']['twitter']) && $form_state['values']['itg_smi']['twitter'] === 'twitter') {
     $desc = $form_state['values']['itg_twitter_narrative'];
     $fid = $form_state['values']['itg_twitter_img'];
     $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
     $node->field_story_tweet_image['und'][0]['fid'] = $form_state['values']['itg_twitter_img'];
     itg_social_media_twitter_photo_post($fid, $desc, $node);
   }
-  
+
   // Twitter Video
-  if (isset($form_state['values']['itg_smi']['twitter_video']) && $form_state['values']['itg_smi']['twitter_video'] === 'twitter_video') {    
+  if (isset($form_state['values']['itg_smi']['twitter_video']) && $form_state['values']['itg_smi']['twitter_video'] === 'twitter_video') {
     $desc = $form_state['values']['field_story_twitter_video_desc'];
     $fid = $form_state['values']['itg_twit_video'];
     $node->field_story_twitter_video['und'][] = array(
@@ -265,7 +308,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     $node->field_story_twitter_video_desc['und'][0]['value'] = $desc;
     itg_social_media_tvideo_post($fid, $desc, $node);
   }
-  node_save($node);  
+  node_save($node);
 }
 
 /**
@@ -297,13 +340,13 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
   }
   // convert media ids to string list
   $media_id = implode(',', $media_ids);
-  
+
   // send Tweet with these medias
   $reply = $cb->statuses_update([
     'status' => $desc . ' ' . $short_url,
     'media_ids' => $media_id
   ]);
-  watchdog('twitter image', '<pre>' . print_r( $reply, true) . '</pre>');
+  watchdog('twitter image', '<pre>' . print_r($reply, true) . '</pre>');
 }
 
 /**
@@ -316,19 +359,19 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
   // Set image status permanent
-  $file = itg_social_media_perm_file($fid);  
+  $file = itg_social_media_perm_file($fid);
   // Get real path of the file
   $path = drupal_realpath($file->uri);
   $size_bytes = filesize($path);
   // Get short url
   $short_url = shorten_url($node->path['alias'], 'goo.gl');
   $fp = fopen($path, 'r');
-  
+
   // INIT the upload
   $reply = $cb->media_upload([
     'command' => 'INIT',
     'total_bytes' => $size_bytes,
-    'media_type' => 'video/mp4',    
+    'media_type' => 'video/mp4',
   ]);
 
   $media_id = $reply->media_id_string;
@@ -338,7 +381,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
 
   while (!feof($fp)) {
     // 1MB per chunk for this sample
-    $chunk = fread($fp, 1048576); 
+    $chunk = fread($fp, 1048576);
     $reply = $cb->media_upload([
       'command' => 'APPEND',
       'media_id' => $media_id,
@@ -366,5 +409,5 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
     'status' => 'Twitter now accepts video uploads.',
     'media_ids' => $media_id
   ]);
-  watchdog('twitter video', '<pre>' . print_r( $reply, true) . '</pre>');
+  watchdog('twitter video', '<pre>' . print_r($reply, true) . '</pre>');
 }
