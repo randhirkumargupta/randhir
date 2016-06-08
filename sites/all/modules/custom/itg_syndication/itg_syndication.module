@@ -77,7 +77,7 @@ function itg_syndication_after_build($form, &$form_state) {
   
   $form['additional_settings']['#access'] = FALSE;
   
-  $_GET['destination'] = 'syndication-client-listing';
+  //$_GET['destination'] = 'syndication-client-listing';
 
   return $form;
 }
@@ -133,7 +133,7 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
     }    
     
     //code end    
-    
+    //$_GET['destination'] = 'syndication-rule-listing';
     $form['#after_build'][] = 'itg_syndication_rule_after_build';
 }
 
