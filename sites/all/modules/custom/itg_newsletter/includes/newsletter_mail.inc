@@ -63,7 +63,7 @@ foreach($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
   $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
 
   if($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal'){
-    $link = 'node/'.$news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
+    $link = $base_url.'/node/'.$news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
   } else {
     $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
   }
