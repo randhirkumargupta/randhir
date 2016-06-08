@@ -1876,6 +1876,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-template-buzz-values"], 
 [id*="field-erf-registration-fee-values"], 
 [id*="field-service-content-values"], 
+[id*="field-syndication-ftp-details-values"], 
 [id*="field-mega-review-review-values"]{
   @extend .itg-add-another-item;
 }
@@ -2521,7 +2522,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   }
 }
 .view .view-filters .views-exposed-form .views-exposed-widget{
-  &.views-widget-filter-created{
+  &.views-widget-filter-created, &.views-widget-filter-changed{
     width: 300px;
     .container-inline-date{
       float: left;
@@ -3662,6 +3663,52 @@ div.node{
   table{
     tbody tr td.views-field-nothing{
       white-space: nowrap;
+    }
+  }
+}
+#views-form-syndication-feed-generator-page{
+  @extend .node-form;
+  .form-actions{
+    .form-submit{
+      @extend .btn-save;
+    }
+  }
+}
+[id*="field-syndication-ftp-details-values"]{
+  tbody tr td{
+    padding: 0  10px 10px 0;
+    @extend .fleft;
+    margin-bottom: 10px;
+    background-color: #fffddf;
+    border: 0;
+    @extend .pos-rel;
+    .field-type-text{
+      @extend .fleft;
+      margin: 10px 0 0 10px;
+      width: 332px;
+      .form-item{
+        margin: 0;
+        padding: 0;
+      }
+    }
+    > .form-submit, > .ajax-new-content > .form-submit{
+      background: #fff url("../images/cross_small.png") no-repeat center center;
+      border-radius: 50% !important;
+      height: 30px !important;
+      position: absolute;
+      right: 0;
+      text-indent: -9999px;
+      top: 5px;
+      width: 30px;
+      z-index: 99;
+    }
+    
+  }
+}
+.node-syndication_client-form{
+  .form-field-name-field-story-expiry-date{
+    .form-type-textfield:first-child{
+      margin-right: 10px !important;
     }
   }
 }
