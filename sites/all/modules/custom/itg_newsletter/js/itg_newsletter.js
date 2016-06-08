@@ -170,6 +170,10 @@
       $('body').on('click', '.newsletter-get-content', function() {
         var contentId = $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
         var relval = $(this).attr('rel');
+        var hasloader = $(this).parent().find('div').hasClass('.ajax-progress-throbber');
+          if(!hasloader){
+            $(this).after('<div class="ajax-progress ajax-progress-throbber"><div class="throbber"> </div><div class="message">Please wait...</div></div>');
+          }
         
         if(contentId === ''){
           alert('Please select Content ID.');
@@ -184,6 +188,7 @@
            cache: false,
            dataType: "JSON",
            success: function(data) {
+              $('.newsletter-get-content[rel="' + relval + '"]').nextAll('.ajax-progress-throbber').remove();
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-title').find('.form-text').val(data.title);
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-kicker').find('.form-textarea').val(data.kicker);
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-imce .form-text').attr('value', data.uri);
