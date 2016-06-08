@@ -1877,6 +1877,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-erf-registration-fee-values"], 
 [id*="field-service-content-values"], 
 [id*="field-syndication-ftp-details-values"], 
+[id*="field-email-address-values"], 
 [id*="field-mega-review-review-values"]{
   @extend .itg-add-another-item;
 }
@@ -3709,6 +3710,25 @@ div.node{
   .form-field-name-field-story-expiry-date{
     .form-type-textfield:first-child{
       margin-right: 10px !important;
+    }
+  }
+}
+[id*="field-email-address-values"]{
+  tbody tr td{
+    padding: 0;
+    margin: 0 0 10px;
+    border: 0;
+    @extend .fleft;
+    .form-type-textfield{
+      padding: 0;
+    margin: 0;
+    }
+  }
+}
+.node-ask_an_expert-form{
+  .form-actions{
+    .form-submit{
+      @extend .btn-save;
     }
   }
 }
