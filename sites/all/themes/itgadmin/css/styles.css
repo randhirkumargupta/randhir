@@ -334,7 +334,7 @@ img {
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, .photogallery-list.flexslider, .photogallery-list.flexslider .slides li, #comments .comment, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2, [id*="field-survey-add-questions-values"] > tbody > tr > td, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, .edit-link,
 .view-link,
 .delete-link,
-.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date {
+.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date {
   position: relative;
 }
 
@@ -3032,6 +3032,9 @@ fieldset#edit-select .form-submit {
   opacity: 0.8;
   pointer-events: none;
 }
+.node-event_backend-form .form-field-name-field-no-of-tickets .field-prefix {
+  visibility: hidden;
+}
 
 .form-select[name="field_ugc_ctype[und]"] {
   text-transform: capitalize;
@@ -3422,6 +3425,20 @@ div.node #comments h2 {
 [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit {
   margin: 0 0 30px 250px;
 }
+[id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper .newsletter-get-content {
+  left: 590px;
+  position: absolute;
+  top: 146px;
+}
+[id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper .newsletter-get-content.inactive {
+  pointer-events: none;
+  opacity: .5;
+}
+[id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper .newsletter-get-content + .ajax-progress-throbber {
+  position: absolute;
+  top: 146px;
+  left: 680px;
+}
 [id*="field-newsl-add-news-values"] fieldset.collapsed legend .fieldset-title:before {
   content: "\f196";
 }
@@ -3628,4 +3645,8 @@ div.node #comments h2 {
 .node-vas_service_content-form #reset-date-button {
   margin-left: 250px;
   margin-bottom: 30px;
+}
+
+.view-Event-backend table tbody tr td.views-field-nothing {
+  white-space: nowrap;
 }

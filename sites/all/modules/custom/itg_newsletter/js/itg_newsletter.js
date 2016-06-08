@@ -180,6 +180,10 @@
           $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').focus();
         } 
         else {
+          if (!($(this).parent().children().hasClass('ajax-progress-throbber'))) {
+            $(this).parent().append('<div class="ajax-progress ajax-progress-throbber"><div class="throbber">&nbsp;</div></div>');
+            $(this).addClass('inactive');
+          }
           var contentIdArr = contentId.split(' (');
           $.ajax({
            url: Drupal.settings.basePath + 'newsletter_data',
@@ -188,7 +192,8 @@
            cache: false,
            dataType: "JSON",
            success: function(data) {
-              $('.newsletter-get-content[rel="' + relval + '"]').nextAll('.ajax-progress-throbber').remove();
+              $('.newsletter-get-content[rel="' + relval + '"]').removeClass('inactive');
+              $('.newsletter-get-content[rel="' + relval + '"]').parent().find('.ajax-progress-throbber').hide();
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-title').find('.form-text').val(data.title);
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-kicker').find('.form-textarea').val(data.kicker);
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-imce .form-text').attr('value', data.uri);
