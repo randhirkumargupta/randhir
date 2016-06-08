@@ -3586,6 +3586,8 @@ div.node{
     @extend .fleft;
     width: 180px;
     height: 36px;
+    z-index: 9;
+    @extend .pos-rel;
     legend{
       @extend .hide;
       &+.fieldset-wrapper{
