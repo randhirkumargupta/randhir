@@ -84,8 +84,6 @@ $content = '<!DOCTYPE html>
       </tr>';
 
   $content .='</table></body></html>';
-  
-  echo $content; exit;
 
   return $content;
 }
