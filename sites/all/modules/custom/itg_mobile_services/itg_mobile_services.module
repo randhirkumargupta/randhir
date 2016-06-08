@@ -22,43 +22,12 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         '#value' => t('Cancel')
       );
 
-      $form['#validate'][] = 'itg_mobile_clients_validator';
-      $form['#after_build'][] = 'itg_mobile_client_after_build';
-      $form['actions']['submit']['#submit'][] = 'itg_mobile_client_after_submit';
-
-      if (empty($_GET['destination'])) {
-        $_GET['destination'] = 'clients-listing';
-      }
-
-      break;
-    case 'service_creation_node_form':
-      unset($form['#metatags']);
-      unset($form['actions']['preview']);
-
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'service-listing', array(
-          'attributes' => array(
-            'class' => 'button'
-          )
-        )),
-        '#weight' => 21,
-        '#value' => t('Cancel')
-      );
-
       $form['field_service_regional']['#states'] = array(
         'visible' => array(
           ':input[name="field_service_type[und]"]' => array('checked' => TRUE),
         ),
       );
 
-      $form['field_service_fetch_link']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '1'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '1'),
-        ),
-      );
 
       $form['group_service_ftp']['#states'] = array(
         'visible' => array(
@@ -96,7 +65,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         ),
       );
 
-      $form['field_email_address']['#states'] = array(
+      $form['field_service_email_address']['#states'] = array(
         'visible' => array(
           ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
         ),
@@ -104,6 +73,31 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
           ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
         ),
       );
+
+
+      $form['#validate'][] = 'itg_mobile_clients_validator';
+      $form['#after_build'][] = 'itg_mobile_client_after_build';
+      $form['actions']['submit']['#submit'][] = 'itg_mobile_client_after_submit';
+
+      if (empty($_GET['destination'])) {
+        $_GET['destination'] = 'clients-listing';
+      }
+
+      break;
+    case 'service_creation_node_form':
+      unset($form['#metatags']);
+      unset($form['actions']['preview']);
+
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'service-listing', array(
+          'attributes' => array(
+            'class' => 'button'
+          )
+        )),
+        '#weight' => 21,
+        '#value' => t('Cancel')
+      );
+
 
 
       drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expiry-date-und-0-value-datepicker-popup-2').datepicker({minDate:0}).attr('readonly','readonly');  });", 'inline');
@@ -810,6 +804,7 @@ function itg_mobile_service_after_submit($form, $form_state) {
  */
 function itg_mobile_client_after_build($form, &$form_state) {
   $form['path']['#access'] = FALSE;
+  drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form_state['redirect'] = 'clients-listing';
   return $form;
 }
@@ -882,29 +877,6 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
     }
   }
 }
-
-/**
- * ajax service callback for itg_mobile_content_enable
- * @param array $form
- * @param array reference $form_state
- * @return array $form
- */
-//function itg_mobile_content_enable(&$form, &$form_state) {
-//  $form_state['redirect'] = 'service-content-listing';
-//  $commands = array();
-//  $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-//  $frequency = $form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value'];
-//  $start_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value'];
-//  $end_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value2'];
-//  $days = (strtotime($end_date) - strtotime($start_date)) / (60 * 60 * 24);
-//  if ($days) {
-//    $commands[] = ajax_command_invoke('#field-service-content-add-more-wrapper', 'show');
-//    $commands[] = ajax_command_invoke('.field-name-field-service-content .field-add-more-submit', 'trigger');
-//    $page = array('#type' => 'ajax', '#commands' => $commands);
-//    ajax_deliver($page);
-//    exit;
-//  }
-//}
 
 /**
  * ajax service callback for itg_mobile_content_selection_callback
@@ -984,27 +956,6 @@ function itg_mobile_services_custom_callback($form, &$form_state) {
       ajax_command_replace("#char_limit_replace_wrapper", render($form['field_service_char_limit']))
     )
   );
-}
-
-/**
- * Implements hook_field_group_build_pre_render_alter.
- * @param array $element
- */
-function itg_mobile_services_field_group_build_pre_render_alter(&$element) {
-  if (isset($element['#form_id'])) {
-    if ($element['#form_id'] == 'service_creation_node_form') {
-      $element['group_service_ftp']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
-      );
-
-      $element['group_service_ftp']['#id'] = 'group_service_ftp';
-    }
-  }
 }
 
 /**
