@@ -2855,6 +2855,11 @@ fieldset#edit-select{
       pointer-events: none;
     }
   }
+  .form-field-name-field-no-of-tickets{
+    .field-prefix{
+      visibility: hidden;
+    }
+  }
 }
 .form-select[name="field_ugc_ctype[und]"]{
     text-transform: capitalize;
@@ -3650,6 +3655,13 @@ div.node{
   .form-field-name-field-service-content{
     .ajax-progress-throbber{
       @extend .hide;
+    }
+  }
+}
+.view-Event-backend{
+  table{
+    tbody tr td.views-field-nothing{
+      white-space: nowrap;
     }
   }
 }
