@@ -160,7 +160,7 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'created' => format_date(time(), 'custom', 'Y-m-d'),
   );
   
-  $query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
+  //$query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
   
   
   //drupal_write_record('itg_row_selector', $pre_save);
