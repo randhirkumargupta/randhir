@@ -82,17 +82,47 @@
             <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'])).' news'; ?></div>
           </div>
         <?php } else {
-       $prev_num = 0;
+        
+        $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
+        $headline = $template_node->field_newst_header_headline[LANGUAGE_NONE][0]['value'];
+        $logo = image_style_url("thumbnail", $template_node->field_newst_logo[LANGUAGE_NONE][0]['uri']);
+        $banner = $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri'];
+        $footer = $template_node->body[LANGUAGE_NONE][0]['value'];
+       ?>
+      <div class="newsletter-templates">
+      <div class="newsletter-header">
+       <div class="newsletter-headline"><?php echo $headline; ?></div>
+       <div class="newsletter-logo"><img src="<?php echo $logo; ?>" /></div>
+       <div class="newsletter-banner"><img src="<?php echo str_replace('public://', $base_url.'/sites/default/files/',$banner ); ?>" alt="" /></div>
+      </div>
+        <div class="newsletter-list-parent">
+       <?php
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
-          $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
+ 
+          $title = $news_arr['field_news_title'][LANGUAGE_NONE][0]['value'];
+          $kicker = $news_arr['field_news_kicker'][LANGUAGE_NONE][0]['value'];
+          $file = file_load($news_arr['field_news_thumbnail'][LANGUAGE_NONE][0]['fid']);
+          $thumbnail = image_style_url("thumbnail", $file->uri); 
           
-          //Avanish Work form here
-          $sn = $prev_num + 1;
-          echo '<h2>News ' . $sn . ' Details:</h2>';
-          $prev_num++; 
-         
-         }
-        } 
+          if($news_arr['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal') {
+              $link = 'node/'.$news_arr['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+            } else {
+              $link = $news_arr['field_news_external_url'][LANGUAGE_NONE][0]['value'];
+          }
+          
+          ?>
+        <div class="newsletter-list">
+          <div class="newsletter-thumbnail"><img src="<?php echo $thumbnail; ?>" /></div>  
+          <div class="title-kicker">
+            <div class="newsletter-title"><?php echo l($title, $link, array('attributes' => array('target'=>'_blank'))); ?></div>
+            <div class="newsletter-kicker"><?php echo $kicker; ?></div>
+          </div>
+        </div>
+         <?php } ?>
+        </div>  
+         <div class="newsletter-footer"><?php echo $footer; ?></div>
+      </div>
+        <?php } 
       } else { ?>
          <div class="field">
             <div class="field-label">Newsletter Type:</div>
@@ -167,7 +197,7 @@
         <?php if ($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal') {?>
           <div class="field">
             <div class="field-label">Content ID:</div>
-            <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['value']); ?></div>
+            <div class="field-items"><?php echo $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id']; ?></div>
           </div>
         <?php } else { ?>
          <div class="field">
@@ -182,6 +212,10 @@
           <div class="field">
             <div class="field-label">Kicker:</div>
             <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value']); ?></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Thumbnail:</div>
+            <div class="field-items"><img src="<?php echo image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']); ?>" /></div>
           </div>
       
      <?php

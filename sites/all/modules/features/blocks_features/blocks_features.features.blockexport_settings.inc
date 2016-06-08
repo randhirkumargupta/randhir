@@ -604,7 +604,7 @@ function blocks_features_default_blockexport_settings() {
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
@@ -620,7 +620,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
@@ -1270,7 +1270,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
@@ -2028,7 +2028,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
@@ -2852,7 +2852,7 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
@@ -2900,7 +2900,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
@@ -2916,7 +2916,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
@@ -2932,7 +2932,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
@@ -3671,8 +3671,9 @@ my-rejected-photogallery',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3686,8 +3687,9 @@ node/add/recipe',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3701,8 +3703,9 @@ node/add/recipe',
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3716,8 +3719,9 @@ node/add/recipe',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3731,8 +3735,9 @@ node/add/recipe',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3746,8 +3751,9 @@ node/add/recipe',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -5914,8 +5920,10 @@ node/*/edit',
   'weight' => 0,
   'region' => 'form_tab',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -6389,12 +6397,12 @@ assigned-task-list',
   'module' => 'views',
   'delta' => 'view_moderation_history-block_1',
   'theme' => 'itgadmin',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'sidebar_second',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'node/*/edit',
   'title' => '',
   'cache' => -1,
 );
@@ -6692,7 +6700,7 @@ reject-ugc-content-list',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/*/edit',
@@ -6706,7 +6714,7 @@ reject-ugc-content-list',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/sponsor
@@ -6779,7 +6787,7 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/*/edit',
@@ -6793,7 +6801,7 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/sponsor
@@ -6808,7 +6816,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/*/edit',
@@ -6822,7 +6830,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/sponsor
@@ -6837,7 +6845,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/*/edit',
@@ -6851,7 +6859,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/sponsor
@@ -6866,7 +6874,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/*/edit',
@@ -6880,7 +6888,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/sponsor
@@ -6888,10 +6896,225 @@ node/*/edit',
   'title' => '',
   'cache' => 8,
 );
+  $export['block'][] = array(
+  'bid' => 473,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 474,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 475,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 476,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 477,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 478,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 479,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 480,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 481,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 482,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 483,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 484,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 485,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 486,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
   'delta' => 'astro_tab_form_block',
   'type' => 'astro',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'type' => 'blog',
 );
   $export['block_node_type'][] = array(
   'module' => 'views',
@@ -7100,6 +7323,11 @@ node/*/edit',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-ugc-content-menu',
   'rid' => 5,
 );
@@ -7181,6 +7409,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
   'rid' => 6,
 );
   $export['block_role'][] = array(
@@ -7401,6 +7634,11 @@ node/*/edit',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
   'rid' => 10,
 );
   $export['block_role'][] = array(
@@ -7535,6 +7773,11 @@ node/*/edit',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-ugc-content-menu',
   'rid' => 20,
 );
@@ -7577,6 +7820,16 @@ node/*/edit',
   'module' => 'menu',
   'delta' => 'menu-ugc-content-menu',
   'rid' => 22,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'rid' => 23,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'rid' => 23,
 );
 return $export;
 }

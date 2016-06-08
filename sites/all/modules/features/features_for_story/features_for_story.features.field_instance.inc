@@ -26,15 +26,17 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'comment',
+    'exclude_cv' => 0,
     'field_name' => 'comment_body',
     'label' => 'Comment',
-    'required' => TRUE,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
@@ -309,6 +311,48 @@ function features_for_story_field_default_field_instances() {
       'settings' => array(),
       'type' => 'taxonomy_hs',
       'weight' => 43,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_story_client_title'.
+  $field_instances['node-story-field_story_client_title'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Client title',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 48,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_client_title',
+    'label' => 'Client title',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 24,
     ),
   );
 
@@ -725,7 +769,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Extra large image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => 0,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Story Extra Large Image',
@@ -733,7 +777,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 1,
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -801,7 +845,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Extra small image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => 0,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Extra Small Image',
@@ -809,7 +853,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 1,
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1209,7 +1253,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Large image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => 0,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Story Large Image',
@@ -1217,7 +1261,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 1,
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1489,7 +1533,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Medium image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => 0,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Medium Image',
@@ -1497,7 +1541,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 1,
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1830,6 +1874,45 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_resize_extra_large'.
+  $field_instances['node-story-field_story_resize_extra_large'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 32,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_resize_extra_large',
+    'label' => 'Resize extra large ',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 30,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_schedule_date_time'.
   $field_instances['node-story-field_story_schedule_date_time'] = array(
     'bundle' => 'story',
@@ -1876,7 +1959,7 @@ function features_for_story_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 1,
-        'input_format' => 'd/m/Y - H:i:s',
+        'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -2041,7 +2124,7 @@ function features_for_story_field_default_field_instances() {
     'label' => 'Small image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => 0,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => 'Small Image',
@@ -2049,7 +2132,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 1,
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -2264,7 +2347,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Buzz',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2814,6 +2897,7 @@ function features_for_story_field_default_field_instances() {
   t('Buzz Description');
   t('Byline');
   t('City');
+  t('Client title');
   t('Comment');
   t('Comment Question');
   t('Comment question');
@@ -2852,6 +2936,7 @@ function features_for_story_field_default_field_instances() {
   t('Posted by facebook');
   t('Quotes');
   t('Redirection URL');
+  t('Resize extra large ');
   t('Schedule date & time');
   t('Section');
   t('Select listicle templates');
