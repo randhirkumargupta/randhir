@@ -9,12 +9,6 @@ require 'vendor/autoload.php';
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.settings');
 
-// Define static variable for setting purpose.
-define('FACEBOOK_APP_KEY', '998850543526214');
-define('FACEBOOK_APP_SECRET', '899729807fcf2061364278613db4a4e7');
-define('TWITTER_API_KEY', 'ZrAM49Mh50YKRxRTtLY1mP1jE');
-define('TWITTER_API_SECRET', 'GBNz25BRuSYcNJiWyTtsBSCrb6mDWNxtZrK4EHm0tmjB54Zpzi');
-
 // Local settings
 //define('TWITTER_API_KEY', 'oynNx70nQQo8aWUlcYtc7BUDX');
 //define('TWITTER_API_SECRET', '2RsvsZLF5hpEcFIjHvqbUNxoeqFStyB9ZEAxognUjVaBWz2r8X');
