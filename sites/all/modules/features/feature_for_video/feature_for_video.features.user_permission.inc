@@ -14,7 +14,13 @@ function feature_for_video_user_default_permissions() {
   $permissions['create videogallery content'] = array(
     'name' => 'create videogallery content',
     'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
@@ -22,7 +28,11 @@ function feature_for_video_user_default_permissions() {
   // Exported permission: 'delete any videogallery content'.
   $permissions['delete any videogallery content'] = array(
     'name' => 'delete any videogallery content',
-    'roles' => array(),
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+    ),
     'module' => 'node',
   );
 
@@ -30,7 +40,10 @@ function feature_for_video_user_default_permissions() {
   $permissions['delete own videogallery content'] = array(
     'name' => 'delete own videogallery content',
     'roles' => array(
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
   );
@@ -39,7 +52,13 @@ function feature_for_video_user_default_permissions() {
   $permissions['edit any videogallery content'] = array(
     'name' => 'edit any videogallery content',
     'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
@@ -48,7 +67,13 @@ function feature_for_video_user_default_permissions() {
   $permissions['edit own videogallery content'] = array(
     'name' => 'edit own videogallery content',
     'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
