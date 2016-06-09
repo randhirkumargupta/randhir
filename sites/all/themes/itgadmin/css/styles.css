@@ -200,7 +200,7 @@ img {
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element, .view-popup .field, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-question, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, .edit-link,
 .view-link,
 .delete-link,
-.edit-cm a, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after {
+.edit-cm a, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details {
   display: inline-block;
 }
 
@@ -296,7 +296,7 @@ img {
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element,
-[id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element, [id*="field-poll-answer-values"] tbody tr, .view-popup .field, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-question, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after {
+[id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element, [id*="field-poll-answer-values"] tbody tr, .view-popup .field, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-question, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details {
   width: 100%;
 }
 
@@ -3741,4 +3741,57 @@ div.node #comments h2 {
 [id*="field-email-address-values"] tbody tr td .form-type-textfield {
   padding: 0;
   margin: 0;
+}
+
+.user-profile-div .field {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+}
+.user-profile-div .field-name-field-user-picture {
+  float: left;
+  width: 200px;
+  margin-right: 30px;
+  border: 1px solid #ddd;
+  height: 200px;
+  position: relative;
+}
+.user-profile-div .field-name-field-user-picture a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.user-profile-div .field-name-field-user-picture img {
+  vertical-align: top;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.user-profile-div .field-name-field-user-picture .field-label {
+  display: none;
+}
+.user-profile-div .user-details, .user-profile-div .field-items {
+  overflow: hidden;
+}
+.user-profile-div .field-label {
+  float: left;
+  width: 150px;
+}
+.user-profile-div .field-items {
+  padding-bottom: 10px;
+}
+
+.my-stats h2 {
+  font-size: 18px;
+  margin: 30px 0 10px;
+}
+
+.my-stats-last-details {
+  padding-top: 10px;
+}
+
+.my-stats-left {
+  padding-bottom: 5px;
 }
