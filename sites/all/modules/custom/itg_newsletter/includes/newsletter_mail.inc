@@ -8,7 +8,7 @@
 function _send_mail_newsletter($node){
    //$node = node_load(1375);
    $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
-   $user_email_arr = array('haripalrao@gmail.com', 'haripal.rao@kelltontech.com');
+   $user_email_arr = array('haripalrao@gmail.com','neha.rani@kelltontech.com', 'vikash.kumar@kelltontech.com','ashish.singh@kelltontech.com');
    $user_email_str = implode(',',$user_email_arr);
    
    //Get Mail content
@@ -25,7 +25,7 @@ function _send_mail_newsletter($node){
     }
     else {
       $error_msg = 'Failed to send the newsletter mail!';
-      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      watchdog('newsletter-email', $error_msg, array(), WATCHDOG_ALERT);
       return FALSE;
     }
 }

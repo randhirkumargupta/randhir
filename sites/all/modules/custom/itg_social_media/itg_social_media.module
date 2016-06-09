@@ -28,6 +28,10 @@ function itg_social_media_permission() {
       'title' => t('Edit social media section'),
       'description' => t('Using this permission user can edit social media part of any node.'),
     ),
+    'administer itg_social_media settings' => array(
+      'title' => t('Administer api key settings'),
+      'description' => t('Using this permission user can edit social media api settings.'),
+    ),
   );
 }
 
@@ -36,14 +40,6 @@ function itg_social_media_permission() {
  * {@inheritdoc}
  */
 function itg_social_media_menu() {
-  // Facebook login screen
-  $items['itg-social-media-settings'] = array(
-    'title' => t('Social Media Settings'),
-    'page callback' => 'itg_social_media_settings',
-    'access arguments' => array('administer itg_social_media edit_content settings'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_social_media.settings.inc',
-  );
   // Facebook login callback
   $items['itg-social-media-settings-callback'] = array(
     'page callback' => 'itg_social_media_settings_callback',
@@ -51,17 +47,37 @@ function itg_social_media_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_social_media.settings.inc',
   );
-  $items['twitter-login'] = array(
-    'page callback' => 'itg_social_media_twitter_login',
-    'access arguments' => array('administer itg_social_media edit_content settings'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_social_media.settings.inc',
-  );
+  
   $items['twitter/oauth'] = array(
     'page callback' => 'itg_social_media_twitter_callback',
     'access arguments' => array('administer itg_social_media edit_content settings'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_social_media.settings.inc',
+  );
+  //settings form  
+  $items['admin/config/administration/itg_social_media'] = array(
+    'title' => 'ITG Social Media',
+    'description' => 'Social Media Settings Form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_social_media_settings_form'),
+    'access arguments' => array('administer itg_social_media settings'),        
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_social_media.admin.inc'
+  );
+  $items['admin/config/administration/social_media_login'] = array(
+    'title' => 'ITG Social Media',
+    'description' => 'Social Media Settings Form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_social_media_login_form'),
+    'access arguments' => array('administer itg_social_media settings'),        
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_social_media.admin.inc'
+  );
+  $items['admin/itg-social-media/facebook-pages'] = array(    
+    'page callback' => '_facebook_pages_list',    
+    'access arguments' => array('administer itg_social_media settings'),        
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.admin.inc'
   );
 
   return $items;
