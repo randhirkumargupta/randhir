@@ -111,7 +111,7 @@ function itg_social_media_settings_callback() {
 
 function itg_social_media_twitter_callback() {
   global $base_url;
-  \Codebird\Codebird::setConsumerKey(TWITTER_API_KEY, TWITTER_API_SECRET);
+  \Codebird\Codebird::setConsumerKey(variable_get('twitter_app_key'), variable_get('twitter_app_secret'));
 
   $cb = \Codebird\Codebird::getInstance();
   if (isset($_GET['oauth_verifier']) && isset($_SESSION['oauth_verify'])) {
@@ -136,7 +136,7 @@ function itg_social_media_twitter_callback() {
 function itg_social_media_twitter_login() {
   global $base_url;
   unset($_SESSION['oauth_token']);
-  \Codebird\Codebird::setConsumerKey(TWITTER_API_KEY, TWITTER_API_SECRET);
+  \Codebird\Codebird::setConsumerKey(variable_get('twitter_app_key'), variable_get('twitter_app_secret'));
 
   $cb = \Codebird\Codebird::getInstance();
 
