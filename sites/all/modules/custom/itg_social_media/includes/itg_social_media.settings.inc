@@ -11,7 +11,7 @@ function itg_social_media_fb_login() {
   $fb = itg_social_media_fb_connection();
   
   $helper = $fb->getRedirectLoginHelper();
-  $permissions = ['manage_pages, publish_pages, pages_show_list'];
+  $permissions = ['manage_pages', 'publish_pages', 'pages_show_list'];
   $loginUrl = $helper->getLoginUrl($base_url . '/itg-social-media-settings-callback', $permissions);
  
   return $loginUrl;
