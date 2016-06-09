@@ -170,6 +170,8 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
   $fb = itg_social_media_fb_connection();
   // Get page information
   $page_id = variable_get('facebook_page_id', '');
+  
+  $token = variable_get('access_token_one').variable_get('access_token_two');
 
   // Get short url
   $short_url = shorten_url($node->path['alias'], 'goo.gl');
@@ -193,7 +195,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
       break;
   }
   try {
-    $response = $fb->post($page_id, $data, variable_get('access_token'));
+    $response = $fb->post($page_id, $data, $token);
   }
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
