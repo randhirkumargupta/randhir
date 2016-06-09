@@ -40,17 +40,18 @@ function itg_social_media_login_form() {
   if (isset($_SESSION['facebook_pages'])) {
     $options = $_SESSION['facebook_pages'];
   }  
+  $page_id = variable_get('facebook_page_id', '');
   $form['facebook_page_id'] = array(
     '#type' => 'select',
     '#title' => t('Facebook Page'),
     '#options' => $options,
-    '#default_value' => '_none',
+    '#default_value' => $page_id,
   );
-  $page_id = variable_get('facebook_page_id', '');
+  
   $form['access_token'] = array(
     '#title' => t('Facebook Page Access Token'),
     '#type' => 'textfield',
-    '#default_value' => $page_id != '' ? $_SESSION[$page_id] : '', 
+    '#default_value' => $page_id != '' ? isset($_SESSION[$page_id]) ? $_SESSION[$page_id] : '' : '', 
   );
   $form['fb_login'] = array(
     '#type' => 'markup',
@@ -59,12 +60,6 @@ function itg_social_media_login_form() {
   $form['twitter_login'] = array(
     '#type' => 'markup',
     '#markup' => '<div>' . l(t('Twitter Login'), itg_social_media_twitter_login()) . '</div>',
-  );
-  
-  
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Save'),
   );
   
   return system_settings_form($form);
