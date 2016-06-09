@@ -22,43 +22,12 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         '#value' => t('Cancel')
       );
 
-      $form['#validate'][] = 'itg_mobile_clients_validator';
-      $form['#after_build'][] = 'itg_mobile_client_after_build';
-      $form['actions']['submit']['#submit'][] = 'itg_mobile_client_after_submit';
-
-      if (empty($_GET['destination'])) {
-        $_GET['destination'] = 'clients-listing';
-      }
-
-      break;
-    case 'service_creation_node_form':
-      unset($form['#metatags']);
-      unset($form['actions']['preview']);
-
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'service-listing', array(
-          'attributes' => array(
-            'class' => 'button'
-          )
-        )),
-        '#weight' => 21,
-        '#value' => t('Cancel')
-      );
-
       $form['field_service_regional']['#states'] = array(
         'visible' => array(
           ':input[name="field_service_type[und]"]' => array('checked' => TRUE),
         ),
       );
 
-      $form['field_service_fetch_link']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '1'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '1'),
-        ),
-      );
 
       $form['group_service_ftp']['#states'] = array(
         'visible' => array(
@@ -96,7 +65,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         ),
       );
 
-      $form['field_email_address']['#states'] = array(
+      $form['field_service_email_address']['#states'] = array(
         'visible' => array(
           ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
         ),
@@ -104,6 +73,31 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
           ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
         ),
       );
+
+
+      $form['#validate'][] = 'itg_mobile_clients_validator';
+      $form['#after_build'][] = 'itg_mobile_client_after_build';
+      $form['actions']['submit']['#submit'][] = 'itg_mobile_client_after_submit';
+
+      if (empty($_GET['destination'])) {
+        $_GET['destination'] = 'clients-listing';
+      }
+
+      break;
+    case 'service_creation_node_form':
+      unset($form['#metatags']);
+      unset($form['actions']['preview']);
+
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'service-listing', array(
+          'attributes' => array(
+            'class' => 'button'
+          )
+        )),
+        '#weight' => 21,
+        '#value' => t('Cancel')
+      );
+
 
 
       drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-story-expiry-date-und-0-value-datepicker-popup-2').datepicker({minDate:0}).attr('readonly','readonly');  });", 'inline');
@@ -220,166 +214,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
   return $form;
-}
-
-/**
- * Implements hook_node_insert().
- * {@inheritdoc}
- */
-function itg_mobile_services_node_insert($node) {
-  if ($node->type == 'client_service_association') {
-    itg_mobile_services_token_insert($node);
-  }
-}
-
-/**
- * Implements hook_node_update().
- * {@inheritdoc}
- */
-function itg_mobile_services_node_update($node) {
-  if ($node->type == 'client_service_association') {
-    itg_mobile_services_token_update($node);
-  }
-}
-
-/**
- * Implement function itg_mobile_services_token_insert().
- * @param object $node of node elements   
- */
-function itg_mobile_services_token_insert($node) {
-  global $user;
-  global $base_url;
-  $timestamp = strtotime("now");
-  $six_digit_random_number = mt_rand(100000, 999999);
-  $timestamps = date("Y-m-d H:i:s");
-
-  $node_nid = $node->nid;
-  $client_selection = $node->field_client_selection;
-  $field_client_selection = $client_selection[LANGUAGE_NONE];
-  $association_title = $node->field_service_association_title;
-  $association_nid = $association_title[LANGUAGE_NONE][0]['target_id'];
-
-  $client_name = '';
-
-  $node = node_load($association_nid);
-  $delivery_mode = ($node->field_service_delivery_mode) ? $node->field_service_delivery_mode[LANGUAGE_NONE][0]['value'] : '';
-  $service_frequency = isset($node->field_service_frequency) ? $node->field_service_frequency[LANGUAGE_NONE][0]['value'] : '1';
-  $content_sharing_mode = ($node->field_content_sharing_mode) ? $node->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] : '';
-  $service_fetch_link = ($node->field_service_fetch_link) ? $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
-  $ftp_ip_address = ($node->field_ftp_ip_address) ? $node->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
-  $ftp_username = ($node->field_ftp_username) ? $node->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
-  $ftp_password = ($node->field_ftp_password) ? $node->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
-  $service_email_address = ($node->field_email_address) ? $node->field_email_address[LANGUAGE_NONE][0]['value'] : '';
-  $service_expiry_date = ($node->field_story_expiry_date) ? $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] : '';
-
-  if (is_array($field_client_selection) && count($field_client_selection) > 0) {
-    foreach ($field_client_selection as $key => $client) {
-      $token = sha1($client . $association_nid . $timestamp . $six_digit_random_number);
-
-      $id = db_insert('itg_client_token')
-          ->fields(array(
-            'nid' => $node_nid,
-            'cid' => $client,
-            'sid' => $association_nid,
-            'delivery_mode' => $delivery_mode,
-            'service_frequency' => $service_frequency,
-            'content_sharing_mode' => $content_sharing_mode,
-            'service_fetch_link' => $service_fetch_link,
-            'ftp_ip_address' => $ftp_ip_address,
-            'ftp_username' => $ftp_username,
-            'ftp_password' => $ftp_password,
-            'service_email_address' => $service_email_address,
-            'service_expiry_date' => $service_expiry_date,
-            'token' => $token,
-            'custom_sharing_url' => $base_url . '/mobile_services/token/' . $token,
-            'created_by' => $user->name,
-            'reset_by' => '',
-            'created_date' => $timestamps
-          ))
-          ->execute();
-    }
-  }
-}
-
-/**
- * Implement function itg_mobile_services_token_update().
- * @param object $node of node elements   
- */
-function itg_mobile_services_token_update($node) {
-  global $user;
-  global $base_url;
-  $timestamp = strtotime("now");
-  $six_digit_random_number = mt_rand(100000, 999999);
-  $timestamps = date("Y-m-d H:i:s");
-
-  $node_nid = $node->nid;
-  $client_selection = $node->field_client_selection;
-  $field_client_selection = $client_selection[LANGUAGE_NONE];
-  $association_title = $node->field_service_association_title;
-
-  $association_nid = $association_title[LANGUAGE_NONE][0]['target_id'];
-
-  $client_name = '';
-  $node = node_load($association_nid);
-  $delivery_mode = ($node->field_service_delivery_mode) ? $node->field_service_delivery_mode[LANGUAGE_NONE][0]['value'] : '';
-  $service_frequency = isset($node->field_service_frequency) ? $node->field_service_frequency[LANGUAGE_NONE][0]['value'] : '1';
-  $content_sharing_mode = ($node->field_content_sharing_mode) ? $node->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] : '';
-  $service_fetch_link = ($node->field_service_fetch_link) ? $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
-  $ftp_ip_address = ($node->field_ftp_ip_address) ? $node->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
-  $ftp_username = ($node->field_ftp_username) ? $node->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
-  $ftp_password = ($node->field_ftp_password) ? $node->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
-  $service_email_address = ($node->field_email_address) ? $node->field_email_address[LANGUAGE_NONE][0]['value'] : '';
-  $service_expiry_date = ($node->field_story_expiry_date) ? $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] : '';
-
-
-  foreach ($field_client_selection as $key => $value) {
-    $token = sha1($client . $association_nid . $timestamp . $six_digit_random_number);
-    $check_token = itg_mobile_service_check_token($value['target_id'], $association_nid);
-
-    if ($check_token) {
-      $id = db_update('itg_client_token')
-          ->fields(array(
-            'delivery_mode' => $delivery_mode,
-            'service_frequency' => $service_frequency,
-            'content_sharing_mode' => $content_sharing_mode,
-            'ftp_ip_address' => $ftp_ip_address,
-            'ftp_username' => $ftp_username,
-            'ftp_password' => $ftp_password,
-            'service_email_address' => $service_email_address,
-            'service_expiry_date' => $service_expiry_date,
-            'token' => $token,
-            'custom_sharing_url' => $base_url . '/mobile_services/token/' . $token,
-            'reset_by' => $user->name,
-            'updated_date' => $timestamps  # use REQUEST_TIME or time() here if you want the date as a long
-          ))
-          ->condition('cid', $value['target_id'], '=')
-          ->condition('sid', $association_nid, '=')
-          ->execute();
-    }
-    else {
-      $id = db_insert('itg_client_token')
-          ->fields(array(
-            'nid' => $node_nid,
-            'cid' => $client,
-            'sid' => $association_nid,
-            'delivery_mode' => $delivery_mode,
-            'service_frequency' => $service_frequency,
-            'content_sharing_mode' => $content_sharing_mode,
-            'service_fetch_link' => $service_fetch_link,
-            'ftp_ip_address' => $ftp_ip_address,
-            'ftp_username' => $ftp_username,
-            'ftp_password' => $ftp_password,
-            'service_email_address' => $service_email_address,
-            'service_expiry_date' => $service_expiry_date,
-            'token' => $token,
-            'custom_sharing_url' => $base_url . '/mobile_services/token/' . $token,
-            'created_by' => $user->name,
-            'reset_by' => '',
-            'created_date' => $timestamps
-          ))
-          ->execute();
-    }
-  }
 }
 
 /**
@@ -810,6 +644,7 @@ function itg_mobile_service_after_submit($form, $form_state) {
  */
 function itg_mobile_client_after_build($form, &$form_state) {
   $form['path']['#access'] = FALSE;
+  drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form_state['redirect'] = 'clients-listing';
   return $form;
 }
@@ -882,29 +717,6 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
     }
   }
 }
-
-/**
- * ajax service callback for itg_mobile_content_enable
- * @param array $form
- * @param array reference $form_state
- * @return array $form
- */
-//function itg_mobile_content_enable(&$form, &$form_state) {
-//  $form_state['redirect'] = 'service-content-listing';
-//  $commands = array();
-//  $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-//  $frequency = $form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value'];
-//  $start_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value'];
-//  $end_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value2'];
-//  $days = (strtotime($end_date) - strtotime($start_date)) / (60 * 60 * 24);
-//  if ($days) {
-//    $commands[] = ajax_command_invoke('#field-service-content-add-more-wrapper', 'show');
-//    $commands[] = ajax_command_invoke('.field-name-field-service-content .field-add-more-submit', 'trigger');
-//    $page = array('#type' => 'ajax', '#commands' => $commands);
-//    ajax_deliver($page);
-//    exit;
-//  }
-//}
 
 /**
  * ajax service callback for itg_mobile_content_selection_callback
@@ -984,27 +796,6 @@ function itg_mobile_services_custom_callback($form, &$form_state) {
       ajax_command_replace("#char_limit_replace_wrapper", render($form['field_service_char_limit']))
     )
   );
-}
-
-/**
- * Implements hook_field_group_build_pre_render_alter.
- * @param array $element
- */
-function itg_mobile_services_field_group_build_pre_render_alter(&$element) {
-  if (isset($element['#form_id'])) {
-    if ($element['#form_id'] == 'service_creation_node_form') {
-      $element['group_service_ftp']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
-      );
-
-      $element['group_service_ftp']['#id'] = 'group_service_ftp';
-    }
-  }
 }
 
 /**

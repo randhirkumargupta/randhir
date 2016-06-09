@@ -1876,6 +1876,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-template-buzz-values"], 
 [id*="field-erf-registration-fee-values"], 
 [id*="field-service-content-values"], 
+[id*="field-syndication-ftp-details-values"], 
+[id*="field-email-address-values"], 
 [id*="field-mega-review-review-values"]{
   @extend .itg-add-another-item;
 }
@@ -2521,7 +2523,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   }
 }
 .view .view-filters .views-exposed-form .views-exposed-widget{
-  &.views-widget-filter-created{
+  &.views-widget-filter-created, &.views-widget-filter-changed{
     width: 300px;
     .container-inline-date{
       float: left;
@@ -2853,6 +2855,11 @@ fieldset#edit-select{
       background-color: #d9d9d9;
       opacity: 0.8;
       pointer-events: none;
+    }
+  }
+  .form-field-name-field-no-of-tickets{
+    .field-prefix{
+      visibility: hidden;
     }
   }
 }
@@ -3289,7 +3296,9 @@ div.node{
   @extend .views-table;
   th.field-label{@extend .hide;}
   tbody tr td{
-    padding: 10px 10px 0 0; max-width: none; border: 1px solid #d9d9d9;
+    padding: 10px 10px 0 0; 
+    max-width: none; 
+    border: 1px solid #d9d9d9;
     &.field-multiple-drag{
       display: table-cell;
       text-align: center;
@@ -3328,6 +3337,7 @@ div.node{
         }
       }
       &+.fieldset-wrapper{
+        @extend .pos-rel;
         @extend .of-hide;
         border: 1px solid #d9d9d9;
         margin-bottom: 10px;
@@ -3335,6 +3345,20 @@ div.node{
           @extend .btn-cancel;
           @extend .btn;
           margin: 0 0 30px 250px;
+        }
+        .newsletter-get-content{
+          left: 590px;
+          position: absolute;
+          top: 146px;
+          &.inactive{
+            pointer-events: none;
+            opacity: .5;
+          }
+          &+.ajax-progress-throbber{
+            position: absolute;
+            top: 146px;
+            left: 680px;
+          }
         }
       }
     }
@@ -3633,6 +3657,78 @@ div.node{
   .form-field-name-field-service-content{
     .ajax-progress-throbber{
       @extend .hide;
+    }
+  }
+}
+.view-Event-backend{
+  table{
+    tbody tr td.views-field-nothing{
+      white-space: nowrap;
+    }
+  }
+}
+#views-form-syndication-feed-generator-page{
+  @extend .node-form;
+  .form-actions{
+    .form-submit{
+      @extend .btn-save;
+    }
+  }
+}
+[id*="field-syndication-ftp-details-values"]{
+  tbody tr td{
+    padding: 0  10px 10px 0;
+    @extend .fleft;
+    margin-bottom: 10px;
+    background-color: #fffddf;
+    border: 0;
+    @extend .pos-rel;
+    .field-type-text{
+      @extend .fleft;
+      margin: 10px 0 0 10px;
+      width: 332px;
+      .form-item{
+        margin: 0;
+        padding: 0;
+      }
+    }
+    > .form-submit, > .ajax-new-content > .form-submit{
+      background: #fff url("../images/cross_small.png") no-repeat center center;
+      border-radius: 50% !important;
+      height: 30px !important;
+      position: absolute;
+      right: 0;
+      text-indent: -9999px;
+      top: 5px;
+      width: 30px;
+      z-index: 99;
+    }
+    
+  }
+}
+.node-syndication_client-form{
+  .form-field-name-field-story-expiry-date{
+    .form-type-textfield:first-child{
+      margin-right: 10px !important;
+    }
+  }
+}
+[id*="field-email-address-values"]{
+  tbody tr td{
+    padding: 0;
+    margin: 0 0 10px;
+    border: 0;
+    @extend .fleft;
+    .form-type-textfield{
+      padding: 0;
+    margin: 0;
+    }
+  }
+}
+.node-ask_an_expert-form{
+  .form-actions{
+    .form-submit{
+      @extend .btn-save;
     }
   }
 }
