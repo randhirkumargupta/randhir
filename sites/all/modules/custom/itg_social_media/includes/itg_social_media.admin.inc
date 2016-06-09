@@ -50,7 +50,7 @@ function itg_social_media_login_form() {
   $form['access_token'] = array(
     '#title' => t('Facebook Page Access Token'),
     '#type' => 'textfield',
-    '#default_value' => $access_token != '' ? $_SESSION[$page_id] : '', 
+    '#default_value' => $page_id != '' ? $_SESSION[$page_id] : '', 
   );
   $form['fb_login'] = array(
     '#type' => 'markup',
