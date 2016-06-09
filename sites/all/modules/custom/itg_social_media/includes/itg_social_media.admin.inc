@@ -40,6 +40,7 @@ function itg_social_media_login_form() {
   if (isset($_SESSION['facebook_pages'])) {
     $options = $_SESSION['facebook_pages'];
   }
+  pr($options);
   $form['facebook_page_id'] = array(
     '#type' => 'select',
     '#title' => t('Facebook Page'),
