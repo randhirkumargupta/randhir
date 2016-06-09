@@ -89,7 +89,7 @@ function itg_social_media_settings_callback() {
   $tokenMetadata = $oAuth2Client->debugToken($accessToken);
   
   // Validation (these will throw FacebookSDKException's when they fail)
-  $tokenMetadata->validateAppId(FACEBOOK_APP_KEY);
+  $tokenMetadata->validateAppId(variable_get('facebook_app_key'));
   
   $tokenMetadata->validateExpiration();
 
