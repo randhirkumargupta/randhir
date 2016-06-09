@@ -159,17 +159,6 @@ function itg_social_media_node_type($nid) {
 }
 
 /**
- * Set file status to permanant after save.
- * @global stdObject $user
- * @param int $fid
- */
-function itg_social_media_perm_file($fid) {
-  $file = file_load($fid);
-
-  return $file;
-}
-
-/**
  * Facebook video post logic
  */
 function itg_social_media_facebook_post($fid, $desc, $type) {
@@ -305,7 +294,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
   // Set image status permanent
-  $file = itg_social_media_perm_file($fid);
+  $file = file_load($fid);
   // Get real path of the file
   $path = drupal_realpath($file->uri);
   // Get short url
@@ -343,7 +332,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
   // Set image status permanent
-  $file = itg_social_media_perm_file($fid);
+  $file = file_load($fid);
   // Get real path of the file
   $path = drupal_realpath($file->uri);
   $size_bytes = filesize($path);
