@@ -39,13 +39,18 @@ function itg_social_media_login_form() {
   $options = array('_none' => '- Select a value -');
   if (isset($_SESSION['facebook_pages'])) {
     $options = $_SESSION['facebook_pages'];
-  }
-  pr($options);
+  }  
   $form['facebook_page_id'] = array(
     '#type' => 'select',
     '#title' => t('Facebook Page'),
     '#options' => $options,
     '#default_value' => '_none',
+  );
+  $page_id = variable_get('facebook_page_id', '');
+  $form['access_token'] = array(
+    '#title' => t('Facebook Page Access Token'),
+    '#type' => 'textfield',
+    '#default_value' => $access_token != '' ? $_SESSION[$page_id] : '', 
   );
   $form['fb_login'] = array(
     '#type' => 'markup',
@@ -85,8 +90,10 @@ function _facebook_pages_list() {
   $options = array();
   foreach ($accounts['accounts'] as $account) {
     $options[$account['id']] = $account['name'];
+    $token[$account['id']] = $account['access_token'];
   }
   watchdog('FB Accounts foreach', '<pre>' . print_r($options, TRUE) . '</pre>');
   $_SESSION['facebook_pages'] = $options;
+  $_SESSION['facebook_token'] = $token;
   drupal_goto($base_url.'/admin/config/administration/social_media_login');
 }
