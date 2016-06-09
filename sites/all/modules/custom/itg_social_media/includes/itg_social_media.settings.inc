@@ -36,7 +36,7 @@ function itg_social_media_fb_connection() {
  * @return stdObject 
  */
 function itg_social_media_twitter_connection() {
-  \Codebird\Codebird::setConsumerKey(TWITTER_API_KEY, TWITTER_API_SECRET);
+  \Codebird\Codebird::setConsumerKey(variable_get('twitter_app_key'), variable_get('twitter_app_secret'));
 
   $cb = \Codebird\Codebird::getInstance();
   if (isset($_SESSION['oauth_token'], $_SESSION['oauth_token_secret'])) {
