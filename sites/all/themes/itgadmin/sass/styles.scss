@@ -1821,6 +1821,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       &:first-child{
         @extend .hide;
       }
+      &.show:first-child{
+        display: block;
+      }
     }
     .close-preview{
       display: block;
@@ -2296,6 +2299,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   }
   .hierarchical-select-wrapper .hierarchical-select .selects{float: none;}
   .hierarchical-select-wrapper .hierarchical-select .selects .form-select{max-width: 170px;}
+  .metatags-form{
+    @extend .hide;
+  }
 }
 [id*="itg-survey-survey-form"], [id*="itg-quiz-quiz-form"]{
   #messages{
@@ -3758,3 +3764,8 @@ div.node{
   padding-top: 10px;
 }
 .my-stats-left{padding-bottom: 5px;}
+.node-type-task-idea-allocation-tracking{
+  .title.comment-form{
+    @extend .hide;
+  }
+}
