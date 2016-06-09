@@ -195,7 +195,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
       break;
   }
   try {
-    $response = $fb->post($page_id, $data, $token);
+    $response = $fb->post('/' . $page_id . '/' . $type, $data, $token);
   }
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
