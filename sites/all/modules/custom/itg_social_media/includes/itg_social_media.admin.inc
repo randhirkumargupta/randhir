@@ -80,12 +80,12 @@ function _facebook_pages_list() {
   }
   $pages = $response->getGraphPage();
   $accounts = $pages->asArray();
-  
+  watchdog('FB Accounts', '<pre>' . print_r($accounts, TRUE) . '</pre>');
   $options = array();
   foreach ($accounts['accounts'] as $account) {
     $options[$account['id']] = $account['name'];
   }
-  
+  watchdog('FB Accounts foreach', '<pre>' . print_r($options, TRUE) . '</pre>');
   $_SESSION['facebook_pages'] = $options;
   drupal_goto($base_url.'/admin/config/administration/social_media_login');
 }
