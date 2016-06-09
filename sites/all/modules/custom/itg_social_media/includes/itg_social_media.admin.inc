@@ -51,7 +51,7 @@ function itg_social_media_login_form() {
   $form['access_token'] = array(
     '#title' => t('Facebook Page Access Token'),
     '#type' => 'textfield',
-    '#default_value' => $page_id != '' ? isset($_SESSION[$page_id]) ? $_SESSION[$page_id] : '' : '', 
+    '#default_value' => $page_id != '' ? isset($_SESSION['facebook_token'][$page_id]) ? $_SESSION['facebook_token'][$page_id] : '' : '', 
   );
   $form['fb_login'] = array(
     '#type' => 'markup',
@@ -61,6 +61,8 @@ function itg_social_media_login_form() {
     '#type' => 'markup',
     '#markup' => '<div>' . l(t('Twitter Login'), itg_social_media_twitter_login()) . '</div>',
   );
+  watchdog('fb page', variable_get('facebook_page_id'), '');
+  watchdog('fb page token', variable_get('access_token'), '');
   
   return system_settings_form($form);
 }
