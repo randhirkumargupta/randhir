@@ -50,7 +50,7 @@ function itg_social_media_login_form() {
   $token = $page_id != '' ? isset($_SESSION['facebook_token'][$page_id]) ? $_SESSION['facebook_token'][$page_id] : '' : '';
   if ($token != '') {
     $tpart_one = substr($token, 0, 128);
-    $tpart_two = substr($str, 128);
+    $tpart_two = substr($token, 128);
     $form['access_token_one'] = array(
       '#title' => t('Facebook Page Access Token'),
       '#type' => 'textfield',
