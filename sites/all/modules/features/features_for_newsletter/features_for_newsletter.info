@@ -107,6 +107,7 @@ features[variable][] = node_submitted_newsletter
 features[variable][] = node_submitted_newsletter_templates
 features[views_view][] = manage_newsletter
 features[views_view][] = manage_newsletter_templates
+features[views_view][] = story_and_photo_id
 features[views_view][] = story_id
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][field_collection] = field_collection
