@@ -19,13 +19,15 @@ function tv_schedule_listing() {
   $output = '';
 
    // iterate cursor to display title of documents
+  $key = 0;
    foreach ($cursor as $document) {
-      $output .=  $document["time"] . "\n";
-      $output .=  $document["day"] . "\n";
-      $output .=  $document["program"] . "\n";
-      //echo $document["upload date"] . "\n";
-      $output .=  "<br/>";
+      $output[$key]['time'] =  $document["time"];
+      $output[$key]['day'] =  $document["day"];
+      $output[$key]['program'] =  $document["program"];
+      $key++;
    }
-   return $output;
+    return theme('itg_tv_schedule', array('output' => $output));
+
+
 }
 ?>
