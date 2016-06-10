@@ -1700,6 +1700,11 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .field-name-field-quiz-answer-image, .field-name-field-quiz-answer-video, .field-name-field-quiz-answer-text {
     @extend .hide;
   }
+  div.clearfix{
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
+  }
 }
 [id*="field-quiz-add-questions-values"]{
   @extend .full;
@@ -2069,6 +2074,12 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   }
   fieldset.date-combo .container-inline-date .date-padding .form-item div.description{
     min-width: 135px;
+  }
+  .form-field-name-field-ads-start-date, 
+  .form-field-name-field-ads-end-date{
+    .form-type-textfield:first-child{
+      margin-right: 10px !important;
+    }
   }
 }
 .form-field-name-field-ads-content-selection,
@@ -3622,6 +3633,7 @@ div.node{
   tbody tr td{
     padding-bottom: 0;
     @extend .fleft;
+    @extend .full;
     margin-bottom: 30px;
   }
   .field-name-field-service-content-date{
@@ -3678,7 +3690,7 @@ div.node{
     }
   }
 }
-.view-Event-backend{
+.view{
   table{
     tbody tr td.views-field-nothing{
       white-space: nowrap;
@@ -3726,6 +3738,14 @@ div.node{
 }
 .node-syndication_client-form{
   .form-field-name-field-story-expiry-date{
+    .form-type-textfield:first-child{
+      margin-right: 10px !important;
+    }
+  }
+}
+.node-poll-form{
+  .form-field-name-field-poll-start-date, 
+  .form-field-name-field-poll-end-date{
     .form-type-textfield:first-child{
       margin-right: 10px !important;
     }
