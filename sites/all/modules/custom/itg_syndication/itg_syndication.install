@@ -130,6 +130,48 @@ function itg_syndication_schema() {
     
     'primary key' => array('id'),
   );
+  
+  $schema['itg_syndication_feed_url'] = array(
+    'description' => t('Syndication feed url.'),
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),     
+      'xml_name' => array(
+        'description' => t('xml name.'),
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'client_feed_url' => array(
+        'description' => t('delivery mode.'),
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created_date' => array(
+        'description' => t('Created date'),
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),      
+      'status' => array(
+        'description' => t('feed status'),
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+        'default' => '',
+      ),     
+    ),
+    
+    'primary key' => array('id'),
+  );
 
   return $schema;
 }

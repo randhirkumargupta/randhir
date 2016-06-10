@@ -120,7 +120,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;  
 
     switch ($form_id) {
-    case 'story_node_form':
+    case 'story_node_form':      
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       unset($form['actions']['preview_changes']);      
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
@@ -165,15 +165,16 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'           
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-12'
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
    }
-   
-  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
+  
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
     $form['field_story_configurations_value']['#options'] = array('All' => '- All -', 'display_lock' => 'Locked Story');
   }
  
@@ -472,14 +473,14 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     // code for client Title field show and hide
     $form['field_story_client_title']['#states'] = array(
       'visible' => array(
-        ':input[name="field_story_configurations[und][syndication]"]' => array('checked' => TRUE),
+        ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
       )
     );
     
     // code for media field show and hide
     $form['field_story_media_files_syndicat']['#states'] = array(
       'visible' => array(
-        ':input[name="field_story_configurations[und][syndication]"]' => array('checked' => TRUE),
+        ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
       )
     );
     
