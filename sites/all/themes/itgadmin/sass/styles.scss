@@ -1700,6 +1700,11 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .field-name-field-quiz-answer-image, .field-name-field-quiz-answer-video, .field-name-field-quiz-answer-text {
     @extend .hide;
   }
+  div.clearfix{
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
+  }
 }
 [id*="field-quiz-add-questions-values"]{
   @extend .full;

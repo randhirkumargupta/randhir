@@ -428,7 +428,25 @@
     $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
     $('input[name="field_quiz_add_questions_add_more"], input[name="field_survey_add_questions_add_more"]').val('Add another question');
     $('input[name="field_newsl_add_news_add_more"]').val('Add More News');
-
+    
+    $('.field-name-field-quiz-answer-type').on('change', '.form-radio[value="single_correct"]', function(){
+      var correctVal = $(this).is(":checked");
+      if(correctVal == true){
+        $(this).parents('.field-name-field-quiz-answer-type').siblings('.field-name-field-quiz-options-answer').find('.form-checkbox').attr('checked', false);
+      }
+    });
+    $('.field-name-field-quiz-answer-type').on('change', '.form-radio[value="multiple_correct"]', function(){
+      var correctVal = $(this).is(":checked");
+      if(correctVal == true){
+        $(this).parents('.field-name-field-quiz-answer-type').siblings('.field-name-field-quiz-options-answer').find('.form-checkbox').attr('checked', false);
+      }
+    });
+    $('.field-name-field-quiz-options-answer').on('change', '.form-checkbox', function(){
+      var correctVal = $(this).parents('.field-name-field-quiz-options-answer').siblings('.field-name-field-quiz-answer-type').find('.form-radio[value="single_correct"]').is(':checked');
+      if(correctVal == true){
+        $(this).parents('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
+      }
+    });
 
 
 
