@@ -1,0 +1,8 @@
+name = ITG videogallery
+description = "ITG Video Gallery Module"
+core = 7.x
+package = ITG
+
+files[] = itg_videogallery.module
+
+
