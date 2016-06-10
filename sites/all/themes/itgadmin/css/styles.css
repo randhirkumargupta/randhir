@@ -2278,6 +2278,10 @@ div.image-widget-data .ajax-progress-throbber {
 .node-ads_management-form fieldset.date-combo .container-inline-date .date-padding .form-item div.description {
   min-width: 135px;
 }
+.node-ads_management-form .form-field-name-field-ads-start-date .form-type-textfield:first-child,
+.node-ads_management-form .form-field-name-field-ads-end-date .form-type-textfield:first-child {
+  margin-right: 10px !important;
+}
 
 .form-field-name-field-ads-content-selection label:after,
 .form-field-name-field-ads-template-variants label:after,
@@ -3712,7 +3716,7 @@ div.node #comments h2 {
   margin-bottom: 30px;
 }
 
-.view-Event-backend table tbody tr td.views-field-nothing {
+.view table tbody tr td.views-field-nothing {
   white-space: nowrap;
 }
 
@@ -3743,6 +3747,11 @@ div.node #comments h2 {
 }
 
 .node-syndication_client-form .form-field-name-field-story-expiry-date .form-type-textfield:first-child {
+  margin-right: 10px !important;
+}
+
+.node-poll-form .form-field-name-field-poll-start-date .form-type-textfield:first-child,
+.node-poll-form .form-field-name-field-poll-end-date .form-type-textfield:first-child {
   margin-right: 10px !important;
 }
 

@@ -2075,6 +2075,12 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   fieldset.date-combo .container-inline-date .date-padding .form-item div.description{
     min-width: 135px;
   }
+  .form-field-name-field-ads-start-date, 
+  .form-field-name-field-ads-end-date{
+    .form-type-textfield:first-child{
+      margin-right: 10px !important;
+    }
+  }
 }
 .form-field-name-field-ads-content-selection,
 .form-field-name-field-ads-template-variants,
@@ -3684,7 +3690,7 @@ div.node{
     }
   }
 }
-.view-Event-backend{
+.view{
   table{
     tbody tr td.views-field-nothing{
       white-space: nowrap;
@@ -3732,6 +3738,14 @@ div.node{
 }
 .node-syndication_client-form{
   .form-field-name-field-story-expiry-date{
+    .form-type-textfield:first-child{
+      margin-right: 10px !important;
+    }
+  }
+}
+.node-poll-form{
+  .form-field-name-field-poll-start-date, 
+  .form-field-name-field-poll-end-date{
     .form-type-textfield:first-child{
       margin-right: 10px !important;
     }
