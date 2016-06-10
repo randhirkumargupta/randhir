@@ -20,6 +20,14 @@ var maxLen = 0;
                 }
             }
 
+            jQuery.fn.content_create_custom_js = function () {
+                jQuery('#edit-field-service-frequency-und-1').prop('checked', true);
+                var today_date = custom_today_date();
+                jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val(today_date).removeAttr('disabled');
+                $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(today_date).removeAttr('disabled');
+            };
+
             jQuery('.form-field-name-field-service-content .cancel').hide();
             jQuery('.form-field-name-field-service-content .form-type-date-popup input').addClass('itg-disabled');
             jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').removeClass('itg-disabled');
@@ -240,18 +248,30 @@ var maxLen = 0;
 
             if (genrateFlag == 1) {
                 jQuery(document).on("click", "#content-enable-button", function (event) {
+                    event.preventDefault();
                     var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
                     var edate = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
                     if (sdate == '') {
-                        jQuery('.form-item-field-service-frequency-date-und-0-value-date').remove('<span class="error">Please enter start date.</span>');
+                        jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                        jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
                         jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
                         return false;
                     } else if (edate == '') {
+                        jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                        jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+                        jQuery('.form-item-field-service-frequency-date-und-0-value2').append('<span class="error">Please enter end date.</span>');
                         return false;
                     }
-                    event.preventDefault();
+                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").remove();
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').remove();
+
+                    var sTitle = jQuery("#edit-field-service-association-title-und option:selected").val();
+                    if (sTitle == '_none') {
+                        return false;
+                    }
+
                     if (genrateFlag == 1) {
-                        jQuery("#edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").addClass("itg-disabled");
+                        jQuery("#edit-field-service-association-title-und, #edit-field-footer-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").addClass("itg-disabled");
                         jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');
                         var hideContent = 1;
                         jQuery('#reset-date-button').show();
@@ -266,6 +286,8 @@ var maxLen = 0;
                     }
                 });
             }
+
+            jQuery('#edit-field-service-content textarea').attr("placeholder", "Content Text");
 
             function set_dates() {
                 var today = new Date();
@@ -304,7 +326,7 @@ var maxLen = 0;
                 jQuery('#field-service-content-add-more-wrapper').show();
                 jQuery('#edit-field-service-frequency').show();
                 jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');
-                jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1, #edit-field-service-association-title-und, #edit-field-story-client-title-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').addClass('itg-disabled');
+                jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1, #edit-field-service-association-title-und, #edit-field-footer-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').addClass('itg-disabled');
                 if (Drupal.settings.itg_mobile_services.settings.service_frequency) {
                     var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
                     jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(sdate);
