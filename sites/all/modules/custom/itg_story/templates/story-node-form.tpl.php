@@ -56,6 +56,7 @@
 <div id="Configuration">
     <h2 class="story-title"><?php print t('Configuration'); ?></h2>
     <?php print drupal_render($form['field_story_configurations']); ?>
+    <?php print drupal_render($form['field_story_syndication']); ?>
     <?php print drupal_render($form['field_story_comment_question']); ?>
     <?php print drupal_render($form['field_story_client_title']); ?>
     <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
