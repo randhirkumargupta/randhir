@@ -1,30 +1,42 @@
 <?php
 /**
  * Admin setting form for social media settings keys.
+ * 
+ * {@inheritdoc}
  */
 function itg_social_media_settings_form() {
+  // Facebook wrapper
+  $form['fb_wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Facebook'),
+  );
   // Facebook app key
-  $form['facebook_app_key'] = array(
+  $form['fb_wrapper']['facebook_app_key'] = array(
     '#type' => 'textfield',
     '#title' => t('Facebook App Key'),
     '#attributes' => array('placeholder' => array('Facebook App Key')),
     '#default_value' => variable_get('facebook_app_key'),
   );
   // Facebook app secret
-  $form['facebook_app_secret'] = array(
+  $form['fb_wrapper']['facebook_app_secret'] = array(
     '#type' => 'textfield',
     '#title' => t('Facebook App Secret'),
     '#attributes' => array('placeholder' => array('Facebook App Secret')),
     '#default_value' => variable_get('facebook_app_secret'),
   );
-  $form['twitter_app_key'] = array(
+  // Twitter wrapper
+  $form['fb_twitter'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Twitter'),
+  );
+  $form['fb_twitter']['twitter_app_key'] = array(
     '#type' => 'textfield',
     '#title' => t('Twitter App Key'),
     '#attributes' => array('placeholder' => array('Twitter App Key')),
     '#default_value' => variable_get('twitter_app_key'),
   );
   // Facebook app secret
-  $form['twitter_app_secret'] = array(
+  $form['fb_twitter']['twitter_app_secret'] = array(
     '#type' => 'textfield',
     '#title' => t('Twitter App Secret'),
     '#attributes' => array('placeholder' => array('Twitter App Secret')),
@@ -34,12 +46,20 @@ function itg_social_media_settings_form() {
   return system_settings_form($form);
 }
 
+/**
+ * Page and token setting form.
+ * {@inheritdoc}
+ */
 function itg_social_media_login_form() {
   // Facebook pages
-  $options = array('_none' => '- Select a value -');
-  if (isset($_SESSION['facebook_pages'])) {
-    $options = $_SESSION['facebook_pages'];
-  }  
+  if (variable_get('is_fb_logged_in', '')) {
+    $pages = itg_social_media_fb_paglist();
+    $options = $pages[0];
+  }
+  else {
+    $options = array('_none' => '- Select a value -');
+  }
+    
   $page_id = variable_get('facebook_page_id', '');
   $form['facebook_page_id'] = array(
     '#type' => 'select',
@@ -47,10 +67,10 @@ function itg_social_media_login_form() {
     '#options' => $options,
     '#default_value' => $page_id,
   );
-  $token = $page_id != '' ? isset($_SESSION['facebook_token'][$page_id]) ? $_SESSION['facebook_token'][$page_id] : '' : '';
-  if ($token != '') {
-    $tpart_one = substr($token, 0, 128);
-    $tpart_two = substr($token, 128);
+  $token = $page_id != '' ? $pages[1] : '';
+  if (is_array($token)) {
+    $tpart_one = substr($token[$page_id], 0, 128);
+    $tpart_two = substr($token[$page_id], 128);
     $form['access_token_one'] = array(
       '#prefix' => '<p>' . $tpart_one . '</p>',
       '#title' => t('Facebook Page Access Token'),
@@ -63,27 +83,39 @@ function itg_social_media_login_form() {
       '#type' => 'textfield',      
       '#default_value' => $tpart_two,
     );
-  }
-  
+  }   
   
   $form['fb_login'] = array(
     '#type' => 'markup',
     '#markup' => '<div>' . l(t('Facebook Login'), itg_social_media_fb_login()) . '</div>',
   );
-  $form['twitter_login'] = array(
-    '#type' => 'markup',
-    '#markup' => '<div>' . l(t('Twitter Login'), itg_social_media_twitter_login()) . '</div>',
-  );
-  watchdog('fb page', variable_get('facebook_page_id'), '');
-  watchdog('fb page token', variable_get('access_token'), '');
+    
+  if (variable_get('oauth_token', '') === '') {
+    $form['twitter_login'] = array(
+      '#type' => 'markup',
+      '#markup' => '<div>' . l(t('Twitter Login'), itg_social_media_twitter_login()) . '</div>',
+    );
+  }
   
+    
   return system_settings_form($form);
 }
 
+/**
+ * Facebook page selection code.
+ * @global string $base_url
+ */
 function _facebook_pages_list() {
   global $base_url;
-  $fb = itg_social_media_fb_connection();
+  variable_set('is_fb_logged_in', 'yes');
+  drupal_goto($base_url.'/admin/config/administration/social_media_login');
+}
 
+/**
+ * Function to get page list
+ */
+function itg_social_media_fb_paglist(){
+  $fb = itg_social_media_fb_connection();
   try {
     // Returns a `Facebook\FacebookResponse` object
     $response = $fb->get('/me?fields=accounts', variable_get('fb_access_token'));
@@ -102,8 +134,7 @@ function _facebook_pages_list() {
     $options[$account['id']] = $account['name'];
     $token[$account['id']] = $account['access_token'];
   }
-  watchdog('FB Accounts foreach', '<pre>' . print_r($options, TRUE) . '</pre>');
-  $_SESSION['facebook_pages'] = $options;
-  $_SESSION['facebook_token'] = $token;
-  drupal_goto($base_url.'/admin/config/administration/social_media_login');
+  $data = array($options, $token);
+  
+  return $data;
 }
