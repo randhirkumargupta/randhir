@@ -47,12 +47,25 @@ function itg_social_media_login_form() {
     '#options' => $options,
     '#default_value' => $page_id,
   );
+  $token = $page_id != '' ? isset($_SESSION['facebook_token'][$page_id]) ? $_SESSION['facebook_token'][$page_id] : '' : '';
+  if ($token != '') {
+    $tpart_one = substr($token, 0, 128);
+    $tpart_two = substr($token, 128);
+    $form['access_token_one'] = array(
+      '#prefix' => '<p>' . $tpart_one . '</p>',
+      '#title' => t('Facebook Page Access Token'),
+      '#type' => 'textfield',
+      '#default_value' => $tpart_one,
+    );
+    $form['access_token_two'] = array(
+      '#prefix' => '<p>' . $tpart_two . '</p>',
+      '#title' => t('Facebook Page Access Token'),
+      '#type' => 'textfield',      
+      '#default_value' => $tpart_two,
+    );
+  }
   
-  $form['access_token'] = array(
-    '#title' => t('Facebook Page Access Token'),
-    '#type' => 'textfield',
-    '#default_value' => $page_id != '' ? isset($_SESSION['facebook_token'][$page_id]) ? $_SESSION['facebook_token'][$page_id] : '' : '', 
-  );
+  
   $form['fb_login'] = array(
     '#type' => 'markup',
     '#markup' => '<div>' . l(t('Facebook Login'), itg_social_media_fb_login()) . '</div>',

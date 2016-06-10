@@ -9,12 +9,6 @@ require 'vendor/autoload.php';
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.settings');
 
-// Define static variable for setting purpose.
-define('FACEBOOK_APP_KEY', '998850543526214');
-define('FACEBOOK_APP_SECRET', '899729807fcf2061364278613db4a4e7');
-define('TWITTER_API_KEY', 'ZrAM49Mh50YKRxRTtLY1mP1jE');
-define('TWITTER_API_SECRET', 'GBNz25BRuSYcNJiWyTtsBSCrb6mDWNxtZrK4EHm0tmjB54Zpzi');
-
 // Local settings
 //define('TWITTER_API_KEY', 'oynNx70nQQo8aWUlcYtc7BUDX');
 //define('TWITTER_API_SECRET', '2RsvsZLF5hpEcFIjHvqbUNxoeqFStyB9ZEAxognUjVaBWz2r8X');
@@ -161,7 +155,7 @@ function itg_social_media_node_type($nid) {
 /**
  * Facebook video post logic
  */
-function itg_social_media_facebook_post($fid, $desc, $type) {
+function itg_social_media_facebook_post($fid, $desc, $type, $node) {
   // Set file status to permanent
   $file = file_load($fid);
   // Get file real path
@@ -170,6 +164,8 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
   $fb = itg_social_media_fb_connection();
   // Get page information
   $page_id = variable_get('facebook_page_id', '');
+  
+  $token = variable_get('access_token_one').variable_get('access_token_two');
 
   // Get short url
   $short_url = shorten_url($node->path['alias'], 'goo.gl');
@@ -193,7 +189,7 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
       break;
   }
   try {
-    $response = $fb->post($page_id, $data, variable_get('access_token'));
+    $response = $fb->post('/' . $page_id . '/' . $type, $data, $token);
   }
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
@@ -203,9 +199,9 @@ function itg_social_media_facebook_post($fid, $desc, $type) {
     // When validation fails or other local issues
     drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
   }
-  $graphNode = $response->getGraphNode();
+  //$graphNode = $response->getGraphNode();
 
-  watchdog('facebook post', $graphNode['id']);
+  //watchdog('facebook post', $graphNode['id']);
 }
 
 /**
@@ -219,7 +215,7 @@ function itg_social_media_form_submit($form, &$form_state) {
   if (isset($form_state['values']['itg_smi']['facebook_video']) && $form_state['values']['itg_smi']['facebook_video'] === 'facebook_video') {
     $desc = $form_state['values']['itg_facebook_video_text'];
     $fid = $form_state['values']['itg_fb_video'];
-    itg_social_media_facebook_post($fid, $desc, 'videos');
+    itg_social_media_facebook_post($fid, $desc, 'videos', $node);
     // save node field
     $node->field_story_facebook_video['und'][0] = array(
       'fid' => $fid,
@@ -233,7 +229,7 @@ function itg_social_media_form_submit($form, &$form_state) {
   if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] === 'facebook') {
     $desc = $form_state['values']['itg_facebook_narrative'];
     $fid = $form_state['values']['itg_fb_img'];
-    itg_social_media_facebook_post($fid, $desc, 'photos');
+    itg_social_media_facebook_post($fid, $desc, 'photos', $node);
     $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
     $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
   }

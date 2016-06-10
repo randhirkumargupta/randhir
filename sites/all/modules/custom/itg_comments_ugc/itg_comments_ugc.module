@@ -233,7 +233,7 @@ function itg_comments_ugc_comment_view($cid) {
     $comment_status = 'Submitted for approval';
   }
   else {
-    $comment_status = 'Publish';
+    $comment_status = 'Published';
   }
   
   // condition for redirection 
@@ -280,13 +280,14 @@ function itg_comments_ugc_comment_view($cid) {
  * @param type $form_id  
  */
 function itg_comments_ugc_form_views_exposed_form_alter(&$form, &$form_state, $form_id) { 
-   if ($form['#id'] == 'views-exposed-form-ugc-comments-page' || $form['#id'] == 'views-exposed-form-ugc-comments-page-1') {     
+   if ($form['#id'] == 'views-exposed-form-ugc-comments-page' 
+       || $form['#id'] == 'views-exposed-form-ugc-comments-page-1') {     
      $form['#info']['filter-created']['label'] = '';
      $form['created']['min'] = array(
       '#type' => 'date_popup',
       '#title' => t('From'),
-      '#date_format' => 'd-m-Y',
-      '#date_year_range' => '-1:+1',
+      '#date_format' => 'd/m/Y',
+      '#date_year_range' => '-1',
       '#attributes' => array(
         'readonly' => 'readonly'
       ),
@@ -295,8 +296,8 @@ function itg_comments_ugc_form_views_exposed_form_alter(&$form, &$form_state, $f
     $form['created']['max'] = array(
       '#type' => 'date_popup',
       '#title' => t('To'),
-      '#date_format' => 'd-m-Y',
-      '#date_year_range' => '-1:+1',
+      '#date_format' => 'd/m/Y',
+      '#date_year_range' => '-1',
       '#attributes' => array(
         'readonly' => 'readonly'
       ),
@@ -327,13 +328,14 @@ function itg_comments_ugc_form_views_exposed_form_alter(&$form, &$form_state, $f
  * @param array reference $query
  */
 function itg_comments_ugc_views_query_alter(&$view, &$query) {
-  if (isset($view->name) && $view->name === 'ugc_comments') {
+ 
+  if (isset($view->name) && $view->name == 'ugc_comments') {
     if (isset($_GET['created']['max']['date'])) {
 
       $max_conditions_array = array();
-      $_GET['created']['min']['date'] = date("d-m-Y", strtotime($_GET['created']['min']['date']));
+      // $_GET['created']['min']['date'] = date("d/m/Y", strtotime($_GET['created']['min']['date']));
 
-      $max_date = strtotime(date('d-m-Y', strtotime($_GET['created']['max']['date'] . ' +1 days')));
+      $max_date = strtotime(date('d/m/Y', strtotime($_GET['created']['max']['date'] . ' +1 days')));
       $max_date_condition = " AND " . $max_date;
 
       if (isset($view->query->where[1]['conditions'][1]['field'])) {
