@@ -233,7 +233,7 @@ function itg_comments_ugc_comment_view($cid) {
     $comment_status = 'Submitted for approval';
   }
   else {
-    $comment_status = 'Publish';
+    $comment_status = 'Published';
   }
   
   // condition for redirection 
@@ -331,7 +331,7 @@ function itg_comments_ugc_views_query_alter(&$view, &$query) {
     if (isset($_GET['created']['max']['date'])) {
 
       $max_conditions_array = array();
-      $_GET['created']['min']['date'] = date("d-m-Y", strtotime($_GET['created']['min']['date']));
+      // $_GET['created']['min']['date'] = date("d/m/Y", strtotime($_GET['created']['min']['date']));
 
       $max_date = strtotime(date('d-m-Y', strtotime($_GET['created']['max']['date'] . ' +1 days')));
       $max_date_condition = " AND " . $max_date;
