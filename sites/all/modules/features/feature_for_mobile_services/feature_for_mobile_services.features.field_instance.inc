@@ -1346,7 +1346,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_service_regional',
-    'label' => 'Regional service',
+    'label' => 'Service Type (Regional)',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1503,6 +1503,48 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-vas_service_content-field_footer'.
+  $field_instances['node-vas_service_content-field_footer'] = array(
+    'bundle' => 'vas_service_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_footer',
+    'label' => 'Client title',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 2,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-vas_service_content-field_service_association_title'.
   $field_instances['node-vas_service_content-field_service_association_title'] = array(
@@ -1541,7 +1583,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -1586,7 +1628,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 9,
+      'weight' => 7,
     ),
   );
 
@@ -1626,7 +1668,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -1659,7 +1701,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_service_frequency_date',
     'label' => 'Service Frequency Date',
     'required' => 1,
@@ -1685,50 +1727,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-vas_service_content-field_story_client_title'.
-  $field_instances['node-vas_service_content-field_story_client_title'] = array(
-    'bundle' => 'vas_service_content',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_client_title',
-    'label' => 'Client title',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -1759,11 +1758,11 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('Header');
   t('Mail to');
   t('Mobile Number');
-  t('Regional service');
   t('Service Content');
   t('Service Content Date');
   t('Service Frequency Date');
   t('Service Title');
+  t('Service Type (Regional)');
   t('Short Description');
 
   return $field_instances;
