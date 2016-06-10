@@ -3622,6 +3622,7 @@ div.node{
   tbody tr td{
     padding-bottom: 0;
     @extend .fleft;
+    @extend .full;
     margin-bottom: 30px;
   }
   .field-name-field-service-content-date{
