@@ -401,11 +401,7 @@ function features_for_story_field_default_field_instances() {
   // Exported field_instance: 'node-story-field_story_configurations'.
   $field_instances['node-story-field_story_configurations'] = array(
     'bundle' => 'story',
-    'default_value' => array(
-      0 => array(
-        'value' => 'comment',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
