@@ -47,7 +47,7 @@ function feed_generator_of_contents($data) {
 function itg_syndication_generate_xml($data) {
   
   //work start this line
-  $syndication_node = unserialize($data->syndication);
+  $syndication_node = unserialize($data['syndication']);
   $file_path = drupal_realpath('public://');
   $dom = new DOMDocument('1.0', 'UTF-8');
   $dom->formatOutput = true;
@@ -60,11 +60,17 @@ function itg_syndication_generate_xml($data) {
     $root->appendChild($result);
     $result->setAttribute('id', $key + 1);
     $result->appendChild($dom->createElement('title', $node->title));
-    $result->appendChild($dom->createElement('body', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
+    $result->appendChild($dom->createElement('body', '<![CDATA['.strip_tags($node->body[LANGUAGE_NONE][0]['value']).']]>'));
     $result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
+    
+    /*$result1 = $dom->createElement('body');
+    $result->appendChild($result1);
+    $result1->appendChild($dom->createElement('CDATA', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));*/
+    
   }
   
-  $token = sha1($client_name. $timestamp);
+  $timestamp = time();
+  $token = sha1($data['client_title']. $timestamp);
   $dt = date('d-m-Y');
   $xml_name = 'xml/'.$data['client_title'].'_'.$data['section_id'].'_'.$dt.'_'.$token;
   

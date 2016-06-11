@@ -468,7 +468,7 @@ function get_syndication_content_details() {
  * @return array
  */
 function get_content_id_for_syndication($data, $created_date) {
-  
+  $content_id = array();
   $itg_query = db_select('node', 'n');
   $itg_query->fields('n', array('nid'));
   $itg_query->join('field_data_field_story_syndication', 'syndication', 'syndication.entity_id = n.nid'); 
@@ -476,7 +476,7 @@ function get_content_id_for_syndication($data, $created_date) {
   $itg_query->condition('n.status', 1);
   //$itg_query->condition('n.created', $created_date, '>');
   $itg_query->condition('n.type',$data['content_type']);
-  $itg_query->condition('n.syndication','field_story_syndication_value');  
+  $itg_query->condition('syndication.field_story_syndication_value','Yes');  
   $itg_query->condition('cat.field_story_category_tid',$data['section_id']);
   
   $itg_result = $itg_query->execute()->fetchAll();
