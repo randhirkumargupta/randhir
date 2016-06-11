@@ -1571,7 +1571,7 @@ function event_backend_field_default_field_instances() {
       'exclude_cv' => FALSE,
       'max' => '',
       'min' => 1,
-      'prefix' => '',
+      'prefix' => '₹',
       'suffix' => '',
       'user_register_form' => FALSE,
     ),
