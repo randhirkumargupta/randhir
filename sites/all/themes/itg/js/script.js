@@ -133,6 +133,22 @@ Drupal.behaviors.my_custom_behavior = {
       });
     }
   });
+  
+  
+  $('.image-widget').each(function () {
+      var filename = $(this).find('.file').html();
+      var filesize = $(this).find('.file-size').html();
+      var fullname = filename + filesize;
+      if (!($(this).find('.image-preview').children().hasClass('image-fullname'))) {
+        $(this).find('.image-preview').append('<div class="image-fullname">' + fullname + '</div>');
+      }
+      $(this).find('.image-widget-data .file, .image-widget-data .file-size').remove();
+    });
+    $('.image-widget-data').find('.form-text').each(function () {
+      var plaholderText = $(this).prev().text();
+      $(this).attr('placeholder', plaholderText);
+      $(this).prev('label').hide();
+    });
 
   }
 };
