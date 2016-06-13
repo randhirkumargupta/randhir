@@ -92,21 +92,15 @@
                       case 'facebook':
                         print render($content['field_story_facebook_narrative']);
                         print render($content['field_story_facebook_image']);
+                        print render($content['field_story_facebook_vdescripti']);
+                        print render($content['field_story_facebook_video']);
 
                         break;
                       case 'twitter':
                         print render($content['field_story_tweet']);
                         print render($content['field_story_tweet_image']);
-
-                        break;
-                      case 'facebook_video':
-                        print render($content['field_story_facebook_vdescripti']);
-                        print render($content['field_story_facebook_video']);
-
-                        break;
-                      case 'twitter_video':
                         print render($content['field_story_twitter_video_desc']);
-                        print render($content['field_story_twitter_video']);
+                        print render($content['field_story_twitter_video']);                        
                     }
                     ?>
                   <?php endforeach; ?>
