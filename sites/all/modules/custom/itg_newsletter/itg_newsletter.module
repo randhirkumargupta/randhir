@@ -17,8 +17,8 @@ function itg_newsletter_menu(){
     );
     
     $items['test_mail'] = array(
-      'page callback' => '_send_mail_newsletter',
-      'file' => 'includes/newsletter_mail.inc',
+      'page callback' => 'itg_newsletter_send_automatic_newsletter',
+      //'file' => 'includes/newsletter_mail.inc',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
     );
@@ -179,12 +179,6 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
 function itg_newsletter_form_after_build($form, &$form_state){
   global $user, $base_url;
   
-//  foreach ($form['field_newsl_add_news']['und'][0]['field_news_con_id']['und'] as $k => $v) {
-//    if (is_numeric($k)) {
-//      $form['field_newsl_add_news']['und'][0]['field_news_con_id']['und'][$k]['value']['#autocomplete_input'] = 'newsletter/autocomplete';
-//    }
-//  }
-  
   //Hide default lavel and add dynamic label
   $form['field_newsl_add_news'][LANGUAGE_NONE]['#title'] = '';
   for($i = 0; $i <= $form['field_newsl_add_news']['und']['#max_delta']; $i++) {
@@ -301,11 +295,130 @@ function itg_newsletter_node_insert($node){
   switch ($node->type) {
     case 'newsletter':
       module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
+      $newsletter_type = $node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'];
       
       //Send mail in case of manual process and schedule is "now"
-      if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now'){
+      if($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now'){
         _send_mail_newsletter($node);
       }
+      else {
+        if($newsletter_type == 'manual'){
+          
+          $frequency = '';
+          //Format :Y-m-d 00:00:00
+          $date_arr = explode(' ', $node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
+          $scheduled_time = strtotime($date_arr[0]. ' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00'); // concatenation of date and time
+        }
+        else {
+          $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
+          
+          if ($frequency == 'daily') {
+            $date_time = date('Y-m-d').' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            $scheduled_time = strtotime($date_time);
+          }
+          
+         if ($frequency == 'weekly') {
+            $current_day = date('l');
+            
+            if(strtolower($current_day) == strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value'])){
+              $date_time = date('Y-m-d').' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+              $scheduled_time = strtotime($date_time);
+            }
+            else {
+              $date_time = date('Y-m-d', strtotime('next '.strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value']))). ' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+              $scheduled_time = strtotime($date_time);
+            }
+
+          } 
+          
+         if ($frequency == 'monthly') {
+            $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
+            $date = date('Y').'-'.date('m').'-'.$node->field_newsl_date[LANGUAGE_NONE][0]['value'];
+            $date_time = $date.' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            $scheduled_time = strtotime($date_time);
+          }
+        }
+        
+        //Insert data in to cron table
+        $query = db_insert('itg_cron_newsletter');
+        $query->fields(array(
+          'nid' => $node->nid,
+          'type' => $newsletter_type,
+          'frequency' => $frequency,
+          'scheduled_time' => $scheduled_time,
+          'status' => 0
+        )); 
+        $query->execute();
+      }
+      
+      break;
+    
+    default:
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_node_update
+ * @param Object $node
+ */
+function itg_newsletter_node_update($node){
+  switch ($node->type) {
+    case 'newsletter':
+      module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
+      $newsletter_type = $node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'];
+      
+      //Send mail in case of manual process and schedule is "now"
+      if($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now'){
+        //_send_mail_newsletter($node);
+      }
+      else {
+        if($newsletter_type == 'manual'){
+          
+          $frequency = '';
+          //Format :Y-m-d 00:00:00
+          $date_arr = explode(' ', $node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
+          $scheduled_time = strtotime($date_arr[0]. ' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00'); // concatenation of date and time
+        }
+        else {
+          $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
+          
+          if ($frequency == 'daily') {
+            $date_time = date('Y-m-d').' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            $scheduled_time = strtotime($date_time);
+          }
+          
+         if ($frequency == 'weekly') {
+            $current_day = date('l');
+            
+            if(strtolower($current_day) == strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value'])){
+              $date_time = date('Y-m-d').' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+              $scheduled_time = strtotime($date_time);
+            }
+            else {
+              $date_time = date('Y-m-d', strtotime('next '.strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value']))). ' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+              $scheduled_time = strtotime($date_time);
+            }
+
+          } 
+          
+         if ($frequency == 'monthly') {
+            $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
+            $date = date('Y').'-'.date('m').'-'.$node->field_newsl_date[LANGUAGE_NONE][0]['value'];
+            $date_time = $date.' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            $scheduled_time = strtotime($date_time);
+          }
+        }
+        
+        //Update table
+        db_update('itg_cron_newsletter')
+                ->fields(array(
+                    'scheduled_time' => $scheduled_time,
+                    'status' => 0,
+                ))
+                ->condition('nid', $node->nid, '=')
+                ->execute();
+        }
       
       break;
     
@@ -327,6 +440,7 @@ function itg_newsletter_node_validate($node, $form, &$form_state) {
     $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
     $newsletter_content = $node->	field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
     $check_existance = itg_newsletter_check_existance_frequency($frequency, $newsletter_content);
+    
     if(isset($check_existance) && arg(1) != $check_existance){
        form_set_error('field_newsl_newsletter_content',t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> '.l('Click here','node/'.$check_existance.'/edit', array('attributes' => array('target'=>'_blank'))).' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)).' news', '@frequency' => $frequency)));
      }
@@ -376,7 +490,12 @@ function itg_newsletter_content_data(){
    exit;
 }
 
-
+/**
+ * Implement hook_mail
+ * @param string $key
+ * @param string $message
+ * @param array $params
+ */
 function itg_newsletter_mail($key, &$message, $params){
     switch ($key) {
     case 'send_newsletter':
@@ -393,4 +512,43 @@ function itg_newsletter_mail($key, &$message, $params){
       }
       break;
   }
+}
+
+/**
+ * Implements hook_cronapi().
+ */
+function itg_newsletter_cronapi($op, $job = NULL) {
+  $items['itg_automatic_newsletter'] = array(
+    'description' => 'Send Newsletter Automatically ',
+    'callback' => 'itg_newsletter_send_automatic_newsletter', 
+  );
+  return $items;
+}
+
+/**
+ * Automation: Send newsletter in case of manual and automatic
+ */
+function itg_newsletter_send_automatic_newsletter(){
+  
+  //Include newsletter mail file to send mail
+  module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
+  
+  $query = db_select('itg_cron_newsletter', 'cn');
+  $query->fields('cn')
+          ->condition('cn.status', 0, '=')
+          ->condition('cn.type', 'manual', '=')
+          ->condition('cn.scheduled_time', time(), '<=');
+  $result = $query->execute();
+  while($record = $result->fetchAssoc()){
+    $manual_nids[] = $record['nid'];
+  }
+  
+  //Send manual mail in case of later
+  if(!empty($manual_nids)){
+    foreach($manual_nids as $nids){
+      $node = node_load($nids);
+      _send_mail_newsletter($node);
+    }
+  }
+  
 }
