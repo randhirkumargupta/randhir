@@ -68,7 +68,10 @@
                 }
             });
 
-            jQuery('#edit-field-story-expiry-date-und-0-value-datepicker-popup-2').datepicker({minDate: 0}).attr('readonly', 'readonly');
+            if (Drupal.settings.itg_mobile_newservice.settings.service_form) {
+                jQuery('#edit-field-story-expiry-date-und-0-value-datepicker-popup-2').datepicker({minDate: 0}).attr('readonly', 'readonly');
+            }
+
         }
     }
 })(jQuery);
