@@ -94,25 +94,52 @@
             required: {
               depends: function () {
                 var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
-                if (smi_fb) {
-                  return true;
+                var fid = $('input[name="itg_twitter_img[fid]"]').val();
+                console.log(smi + ' | ' + fid);
+                if (smi_fb && fid === '0') {
+                  return false;
                 }
                 else {
-                  return false;
+                  return true;
                 }
               }
             },
-            itg_maxlength: true
-          },
-          'itg_twitter_img[fid]': {
-            required: {
-              depends: function () {
+            itg_maxlength: {
+              depends: function() {
                 var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
                 var fid = $('input[name="itg_twitter_img[fid]"]').val();
                 if (smi_fb && fid === '0') {
-                  $(this).removeAttr('value');
+                  return false;
                 }
-                return true;
+                else {
+                  return true;
+                }
+              }
+            }
+          },
+          'field_story_twitter_video_desc': {
+            required: {
+              depends: function () {
+                var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
+                var fid = $('input[name="itg_twit_video[fid]"]').val();
+                if (smi_fb && fid === '0') {
+                  return false;
+                }
+                else {
+                  return true;
+                }
+              }
+            },
+            itg_maxlength: {
+              depends: function() {
+                var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
+                var fid = $('input[name="itg_twit_video[fid]"]').val();
+                if (smi_fb && fid === '0') {
+                  return false;
+                }
+                else {
+                  return true;
+                }
               }
             }
           }
@@ -124,13 +151,13 @@
           'itg_facebook_narrative': {
             required: 'This field is required.'
           },
-          'itg_fb_img[fid]': {
+          'itg_facebook_video_text': {
             required: 'This field is required.'
           },
           'itg_twitter_narrative': {
             required: 'This field is required.'
           },
-          'itg_twitter_img[fid]': {
+          'field_story_twitter_video_desc': {
             required: 'This field is required.'
           }
         }
