@@ -299,7 +299,7 @@ function itg_newsletter_node_insert($node){
       
       //Send mail in case of manual process and schedule is "now"
       if($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now'){
-        _send_mail_newsletter($node);
+        _send_mail_newsletter($node, 'manually');
       }
       else {
         if($newsletter_type == 'manual'){
@@ -346,7 +346,8 @@ function itg_newsletter_node_insert($node){
           'type' => $newsletter_type,
           'frequency' => $frequency,
           'scheduled_time' => $scheduled_time,
-          'status' => 0
+          'status' => 0,
+          'created' => time()
         )); 
         $query->execute();
       }
@@ -410,7 +411,7 @@ function itg_newsletter_node_update($node){
           }
         }
         
-        //Update table
+        //Update cron table
         db_update('itg_cron_newsletter')
                 ->fields(array(
                     'scheduled_time' => $scheduled_time,
@@ -547,7 +548,7 @@ function itg_newsletter_send_automatic_newsletter(){
   if(!empty($manual_nids)){
     foreach($manual_nids as $nids){
       $node = node_load($nids);
-      _send_mail_newsletter($node);
+      _send_mail_newsletter($node, 'automatically');
     }
   }
   
