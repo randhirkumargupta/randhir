@@ -377,11 +377,11 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
         }
     }
   
-   $is_dupl_client = itg_syndication_check_duplicate($node->field_syndication_client_title['und'][0]['tid'], $node->title);
-   
-   if (is_numeric($is_dupl_client) && arg(1) != $is_dupl_client) {     
-      form_set_error('title', t('client already exists.'));
-   }
+//   $is_dupl_client = itg_syndication_check_duplicate($node->field_syndication_client_title['und'][0]['tid'], $node->title);
+//   
+//   if (is_numeric($is_dupl_client) && arg(1) != $is_dupl_client) {     
+//      form_set_error('title', t('client already exists.'));
+//   }
   } else if ($node->type == 'syndication_rule') {
     foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key_time => $val_time) {
       if (isset($val_time['field_syndication_time'][LANGUAGE_NONE][0]['value'])) {
