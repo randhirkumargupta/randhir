@@ -19,7 +19,7 @@ function itg_ads_menu() {
   
   $items['itg-ads/%'] = array(
       'title' => t('Ads'),
-      'page callback' => 'itg_ads',
+      'page callback' => 'itg_ads_show_addsimage',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
   );
@@ -59,12 +59,7 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
         ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
       )
     );
-    // code to check if section is selected then content selection field show
-   // $form['field_ads_content_selection']['#states'] = array(
-    //  'visible' => array(
-    //    ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
-     // )
-   // );
+   
     // code to check if section is selected then template variant field show
     $form['field_ads_template_variants']['#states'] = array(
       'visible' => array(
@@ -146,14 +141,7 @@ function itg_ads_node_validate($node, $form, &$form_state) {
         //$content_selection = $node->field_ads_content_selection[LANGUAGE_NONE][0]['tid'];
         $section_selection = $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'];
         $template_variants = $node->field_ads_template_variants[LANGUAGE_NONE][0]['tid'];
-
-        // field validation on content selection 
-        //if ($template == 'Section') {
-        //    if (empty($content_selection)) {
-        //        form_set_error('field_ads_content_selection', t("Content selection is required"));
-       //     }
-       // }
-
+        
         // field validation on content selection
         if ($template == 'Section') {
             if (empty($section_selection)) {
@@ -176,7 +164,11 @@ function itg_ads_node_validate($node, $form, &$form_state) {
     }
 }
 
-function itg_ads(){
+/**
+ * Show adds image using nid
+ * @return theme
+ */
+function itg_ads_show_addsimage(){
   $node = node_load(arg(1));
   return theme('itg_ads', array('data' => $node));
 }
