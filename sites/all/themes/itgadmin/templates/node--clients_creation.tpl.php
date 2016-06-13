@@ -57,7 +57,7 @@
                             <h2><?php print t('Sharing Mode'); ?></h2>
                             <?php
                             if ($node->field_content_sharing_mode[0]['value'] == 1) {
-                              print render($content['field_ftp_ip_address']);
+                              print render($content['field_service_fetch_link']);
                             }
                             else if ($node->field_content_sharing_mode[0]['value'] == 2) {
                               print render($content['field_ftp_ip_address']);
@@ -65,7 +65,7 @@
                               print render($content['field_ftp_password']);
                             }
                             else if ($node->field_content_sharing_mode[0]['value'] == 3) {
-                              print render($content['field_ftp_ip_address']);
+                              print render($content['field_service_email_address']);
                             }
                             ?>
                           <?php endif; ?>

@@ -194,7 +194,7 @@ var maxLen = 0;
                     $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val(selected);
                     $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(selected);
                 }
-            });
+            }).attr('readonly', 'readonly');
 
             $("#edit-field-service-frequency-date-und-0-value-datepicker-popup-1").datepicker({
                 minDate: startDateFrom,
@@ -212,7 +212,7 @@ var maxLen = 0;
                     $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker("option", "maxDate", date);
                     $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val('').removeAttr('disabled');
                 }
-            });
+            }).attr('readonly', 'readonly');
 
             if (firstDate == 1) {
                 $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker({
@@ -220,14 +220,14 @@ var maxLen = 0;
                     maxDate: fixedDate,
                     dateFormat: 'dd/mm/yy',
                     onSelect: show_days,
-                });
+                }).attr('readonly', 'readonly');
                 firstDate++;
             } else {
                 $("#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").datepicker({
                     maxDate: fixedDate,
                     dateFormat: 'dd/mm/yy',
                     onSelect: show_days,
-                });
+                }).attr('readonly', 'readonly');
             }
 
             function show_days() {
@@ -312,7 +312,6 @@ var maxLen = 0;
                             mm = '0' + mm
                         }
                         tomorrow = dd + '/' + mm + '/' + yyyy;
-                        // jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').val(tomorrow).addClass('itg-disabled');
                         jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').addClass('itg-disabled');
                         i++;
                         start_date++;
@@ -328,8 +327,10 @@ var maxLen = 0;
                 jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');
                 jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1, #edit-field-service-association-title-und, #edit-field-footer-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').addClass('itg-disabled');
                 if (Drupal.settings.itg_mobile_services.settings.service_frequency) {
-                    var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
-                    jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(sdate);
+                    if (Drupal.settings.itg_mobile_services.settings.service_frequency == 1) {
+                        var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
+                        jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(sdate);
+                    }
                 }
             }
 
@@ -362,14 +363,22 @@ var maxLen = 0;
                 }
             });
 
+
             jQuery('.field-name-field-story-expert-description .form-textarea').on('keyup', function () {
+                if (Drupal.settings.itg_mobile_services.settings.countchar) {
+                    maxLen = Drupal.settings.itg_mobile_services.settings.countchar;
+                }
                 var tlength = jQuery(this).val().length;
                 console.log(maxLen);
                 console.log(tlength);
                 jQuery(this).val(jQuery(this).val().substring(0, maxLen));
                 remain = maxLen - parseInt(tlength);
                 jQuery('#remain').text(remain + ' characters remaining from ' + maxLen);
+                jQuery('#remainContent').text(remain + ' characters remaining from ' + maxLen);
             });
+
+
+
 
         }
     }

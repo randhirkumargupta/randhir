@@ -180,7 +180,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['content_enable_button'] = array(
         '#type' => 'button',
         '#weight' => 8,
-        '#value' => t('Genrate Content'),
+        '#value' => t('Generate Content'),
         '#attributes' => array(
           'id' => 'content-enable-button',
         ),
@@ -450,6 +450,14 @@ function itg_mobile_clients_validator($form, &$form_state) {
         form_set_error('title', t('<strong>@contenttitle</strong> is already exist.', array('@contenttitle' => $title)));
       }
     }
+
+    $content_sharing_mode = $form_state['values']['field_content_sharing_mode'][LANGUAGE_NONE][0]['value'];
+
+    if (isset($content_sharing_mode) && $content_sharing_mode == 1) {
+      $client_name = $form_state['values']['title'];
+      $web_url = get_weburl_for_mobile_services('mobile_services', $client_name);
+      $form_state['values']['field_service_fetch_link'][LANGUAGE_NONE][0]['value'] = $web_url;
+    }
   }
 
 
@@ -569,13 +577,17 @@ function itg_service_content_after_build($form, &$form_state) {
     $settings['service_content_type'] = '';
   }
   if ($form['nid']['#value']) {
+    $countchar = itg_countchar_validation($association_nid);
     $service_frequency = isset($form_state['node']->field_service_frequency[LANGUAGE_NONE][0]['value']) ? $form_state['node']->field_service_frequency[LANGUAGE_NONE][0]['value'] : '';
     $settings['service_content_edit_mode'] = TRUE;
     $settings['service_frequency'] = $service_frequency;
+    $settings['countchar'] = $countchar;
   }
   else {
     $settings['service_content_edit_mode'] = FALSE;
   }
+
+
 
   drupal_add_js(array('itg_mobile_services' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_service.js', array('weight' => 3, 'scope' => 'footer'));
@@ -884,13 +896,18 @@ function itg_mobile_services_menu() {
  * Implements ajax callback function for itg_countchar_validation
  * @print array $result 
  */
-function itg_countchar_validation() {
-  $nodeid = $_POST['nidvalue'];
-  $query = db_select('field_data_field_service_char_limit', 'fc');
-  $query->fields('fc', array('field_service_char_limit_value'));
-  $query->condition('entity_id', $nodeid, '=');
-  $result = $query->execute()->fetchField();
-  echo $result;
+function itg_countchar_validation($nid) {
+  $nodeid = isset($nid) ? $nid : $_POST['nidvalue'];
+  if (isset($nodeid)) {
+    $query = db_select('field_data_field_service_char_limit', 'fc');
+    $query->fields('fc', array('field_service_char_limit_value'));
+    $query->condition('entity_id', $nodeid, '=');
+    $result = $query->execute()->fetchField();
+    if (isset($nid)) {
+      return $result;
+    }
+    echo $result;
+  }
 }
 
 /**
@@ -916,7 +933,7 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
       $form['title']['#attributes'] = array(
         'placeholder' => t('Title')
       );
-      $form['title']['#autocomplete_path'] = 'content-title-list/create_content/autocomplete';
+      $form['title']['#autocomplete_path'] = 'content-title-list/vas_service_content/autocomplete';
       break;
     case 'views-exposed-form-clients-details-page-2':
       $form['field_service_title_value']['#attributes'] = array(
@@ -1189,4 +1206,19 @@ function itg_mobile_services_get_exist_content($sid, $start_time, $end_time) {
   $query->range(0, 50);
   $result = $query->execute();
   return $result;
+}
+
+/**
+ * Get web url for client
+ * @param array $node
+ * @param  $dir 
+ * @return url
+ */
+function get_weburl_for_mobile_services($dir, $client_name) {
+  global $base_url;
+  $url = $base_url . '/' . $dir . '/';
+  $six_digit_random_number = mt_rand(100000, 999999);
+  $timestamps = date("Y-m-d H:i:s");
+  $token = sha1($client_name . $timestamp . $six_digit_random_number);
+  return $url . $token;
 }
