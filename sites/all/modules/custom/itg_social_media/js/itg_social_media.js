@@ -67,6 +67,26 @@
           'itg_smi[facebook]': {
             validateSmi: true
           },
+          'itg_twitter_narrative': {
+            itg_maxlength: {
+              depends: function() {
+                var twitter = $('input[name="itg_smi[twitter]"]').is(':checked');
+                if (twitter) {
+                  return true;
+                }
+              } 
+            }
+          },
+          'field_story_twitter_video_desc': {
+            itg_maxlength: {
+              depends: function() {
+                var twitter = $('input[name="itg_smi[twitter]"]').is(':checked');
+                if (twitter) {
+                  return true;
+                }
+              } 
+            }
+          }
         },
         messages: {
           'itg_smi[facebook]': {
