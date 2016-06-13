@@ -72,10 +72,16 @@ function itg_syndication_generate_xml($data) {
   $timestamp = time();
   $token = sha1($data['client_title']. $timestamp);
   $dt = date('d-m-Y');
-  $xml_name = 'xml/'.$data['client_title'].'_'.$data['section_id'].'_'.$dt.'_'.$token;
   
-  $dom->save($file_path . '/' . $xml_name . '.xml') or die('XML Create Error');
-  drupal_set_message('xml file has been created.', 'status');
+  if (!empty($data['client_title'])) {
+    $client_title = $data['client_title'];
+  } else {
+      $client_title = 'syndication';
+  }
+  
+  $xml_name = 'xml/'.$client_title.'_'.$data['section_id'].'_'.$dt.'_'.$token;
+  
+  $dom->save($file_path . '/' . $xml_name . '.xml') or die('XML Create Error');  
   
   $delivery_mode = $data['delivery_mode'];
 
@@ -99,15 +105,15 @@ function itg_syndication_generate_xml($data) {
     // 2. Via FTP location
       
     case 'FTP':
-      itg_syndication_ftp_syndication($data, $file_path . '/' . $data['client_title'] . '.xml');
+      itg_syndication_ftp_syndication($data, $file_path . '/' . $xml_name . '.xml');
       break;
     // 3. Via Email
     case 'Email':
-      itg_syndication_mail_syndication($data, $file_path . '/' . $data['client_title'] . '.xml');
+      itg_syndication_mail_syndication($data, $file_path . '/' . $xml_name . '.xml');
       break;
   }
   
-  return  $file_path . '/' . $data['client_title'] . '.xml';
+  return  $xml_name . '.xml';
 }
 
 /**
