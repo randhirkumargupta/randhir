@@ -11,7 +11,8 @@
           var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
           var smi_instant_article = $('input[name="itg_smi[facebook_instant_article]"]').is(':checked');
           var smi_twitter = $('input[name="itg_smi[twitter]"]').is(':checked');
-          if (smi_fb || smi_instant_article || smi_twitter) {
+          var smi_instagram = $('input[name="itg_smi[instagram]"]').is(':checked');
+          if (smi_fb || smi_instant_article || smi_twitter || smi_instagram) {
             return true;
           }
           else {
@@ -35,7 +36,11 @@
       };
 
       // Custom validator function for social media start
-      $("#itg-social-media-form").validate({        
+      $("#itg-social-media-form").validate({  
+        submitHandler: function (form) {
+          $('input:submit').attr('disabled', 'disabled');
+          form.submit();
+        },
         onfocusout: function (element) {
           $(element).valid();
         },
@@ -62,104 +67,11 @@
           'itg_smi[facebook]': {
             validateSmi: true
           },
-          'itg_facebook_narrative': {
-            required: {
-              depends: function () {
-                var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
-                var fid = $('input[name="itg_fb_img[fid]"]').val();
-                if (smi_fb && fid === '0') {                  
-                  return false;
-                }
-                else {                  
-                  return true;                  
-                }
-              }
-            }
-          },
-          'itg_facebook_video_text': {
-            required: {
-              depends: function () {                
-                var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
-                var fid = $('input[name="itg_fb_video[fid]"]').val();
-                if (smi_fb && fid === '0') {                  
-                  return false;
-                }
-                else {                  
-                  return true;
-                }
-              }
-            }
-          },
-          'itg_twitter_narrative': {
-            required: {
-              depends: function () {
-                var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
-                var fid = $('input[name="itg_twitter_img[fid]"]').val();
-                console.log(smi + ' | ' + fid);
-                if (smi_fb && fid === '0') {
-                  return false;
-                }
-                else {
-                  return true;
-                }
-              }
-            },
-            itg_maxlength: {
-              depends: function() {
-                var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
-                var fid = $('input[name="itg_twitter_img[fid]"]').val();
-                if (smi_fb && fid === '0') {
-                  return false;
-                }
-                else {
-                  return true;
-                }
-              }
-            }
-          },
-          'field_story_twitter_video_desc': {
-            required: {
-              depends: function () {
-                var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
-                var fid = $('input[name="itg_twit_video[fid]"]').val();
-                if (smi_fb && fid === '0') {
-                  return false;
-                }
-                else {
-                  return true;
-                }
-              }
-            },
-            itg_maxlength: {
-              depends: function() {
-                var smi_fb = $('input[name="itg_smi[twitter]"]').is(':checked');
-                var fid = $('input[name="itg_twit_video[fid]"]').val();
-                if (smi_fb && fid === '0') {
-                  return false;
-                }
-                else {
-                  return true;
-                }
-              }
-            }
-          }
         },
         messages: {
           'itg_smi[facebook]': {
             required: 'This field is required.'
-          },
-          'itg_facebook_narrative': {
-            required: 'This field is required.'
-          },
-          'itg_facebook_video_text': {
-            required: 'This field is required.'
-          },
-          'itg_twitter_narrative': {
-            required: 'This field is required.'
-          },
-          'field_story_twitter_video_desc': {
-            required: 'This field is required.'
-          }
+          }          
         }
       });
       jQuery.validator.addMethod('validateSmi', function (value, element) {

@@ -54,10 +54,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
@@ -75,10 +72,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
@@ -90,10 +84,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
@@ -110,10 +101,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
@@ -138,10 +126,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
@@ -159,13 +144,21 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
 
+  $form['twit_wrap']['field_story_twitter_video_desc'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Twitter Video Narrative'),
+    '#maxlength' => 255,
+    '#default_value' => isset($node->field_story_twitter_video_desc['und'][0]['value']) ? $node->field_story_twitter_video_desc['und'][0]['value'] : '',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+      ),      
+    ),
+  );
   $form['twit_wrap']['itg_twit_video'] = array(
     '#title' => t('Twitter Video'),
     '#type' => 'managed_file',
@@ -179,29 +172,10 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
-  $form['twit_wrap']['field_story_twitter_video_desc'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Twitter Video Narrative'),
-    '#maxlength' => 255,
-    '#default_value' => isset($node->field_story_twitter_video_desc['und'][0]['value']) ? $node->field_story_twitter_video_desc['und'][0]['value'] : '',
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
-  // Additional field ends here
   $form['ctype'] = array(
     '#type' => 'hidden',
     '#default_value' => check_plain($c_type),
