@@ -167,8 +167,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#prefix'] = '<div id="client_entity_wrapper">';
       $form['title']['#suffix'] = '</div>';
 
-      //unset($form['field_service_association_title'][LANGUAGE_NONE]['#options']['_none']);
-
       $form['field_service_association_title'][LANGUAGE_NONE]['#ajax'] = array(
         'callback' => 'itg_mobile_content_custom_callback',
         'wrapper' => 'client_entity_wrapper',
@@ -524,6 +522,8 @@ function itg_mobile_service_validator($form, &$form_state) {
  */
 function itg_service_association_after_build($form, &$form_state) {
   $form_state['redirect'] = 'service-association-listing';
+  $settings['service_association_form'] = TRUE;
+  drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form['path']['#access'] = FALSE;
   $form['field_service_title'][LANGUAGE_NONE][0]['value']['#attributes']['readonly'] = 'readonly';
@@ -665,6 +665,8 @@ function itg_mobile_client_after_build($form, &$form_state) {
  * @return array $form
  */
 function itg_mobile_service_after_build($form, &$form_state) {
+  $settings['service_form'] = TRUE;
+  drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form['path']['#access'] = FALSE;
   $form['field_story_expiry_date']['#attributes'] = array('readonly' => 'readonly');
@@ -813,7 +815,7 @@ function itg_mobile_services_custom_callback($form, &$form_state) {
   $service_char_limit = $node->field_service_char_limit[LANGUAGE_NONE][0]['value'];
   $form['field_service_title'][LANGUAGE_NONE][0]['value']['#value'] = ($service_title) ? $service_title : '';
   $form['field_service_char_limit'][LANGUAGE_NONE][0]['value']['#value'] = ($service_char_limit) ? $service_char_limit : '';
-
+  //watchdog('service_char_limit', $service_char_limit);
   return array(
     '#type' => 'ajax',
     '#commands' => array(
