@@ -174,15 +174,15 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
  * @param array reference $query
  */
 function itg_syndication_views_query_alter(&$view, &$query) {
- 
+  
   if (isset($view->name) && $view->name === 'syndication_feed_generator') {
     foreach($query->where[1]['conditions'] as $key => $val) {
       if(isset($val['field']) && $val['field'] == 'node.type' && $val['value'][0] == 'magazine') {
         $query->where[1]['conditions'][$key]['value'][0] = 'story';
       }
     }
-    
-    if (isset($_GET['changed']['max']['date'])) {      
+   
+    if (!empty($_GET['changed']['max']['date'])) {      
       $max_conditions_array = array();
       $_GET['changed']['min']['date'] = str_replace('/','-',$_GET['changed']['min']['date']);
       $_GET['changed']['max']['date'] = str_replace('/','-',$_GET['changed']['max']['date']);
@@ -192,12 +192,15 @@ function itg_syndication_views_query_alter(&$view, &$query) {
       
       if (isset($view->query->where[1]['conditions'])) {
         foreach ($query->where[1]['conditions'] as $idx => $condition) {
-          if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
-            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);            
-            $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
+          if (!is_object($condition['field']) && $condition['operator'] == 'formula') {            
+            if (empty($condition['value'])) {              
+              $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);            
+              $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
+            }
           }
         }
-      }    
+      }     
     }
+    
   }
 }

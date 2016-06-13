@@ -2,6 +2,7 @@
 
 /**
  * Callback function for social media settings form.
+ * @global string $base_url
  * @return string
  */
 function itg_social_media_fb_login() {
@@ -33,14 +34,16 @@ function itg_social_media_fb_connection() {
 
 /**
  * Create connection object for twitter
+ * @global string $base_url
  * @return stdObject 
  */
 function itg_social_media_twitter_connection() {
+  global $base_url;
   \Codebird\Codebird::setConsumerKey(variable_get('twitter_app_key'), variable_get('twitter_app_secret'));
 
   $cb = \Codebird\Codebird::getInstance();
-  if (isset($_SESSION['oauth_token'], $_SESSION['oauth_token_secret'])) {
-    $cb->setToken($_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
+  if (variable_get('oauth_token', '') !== '' && variable_get('oauth_token_secret', '') !== '') {
+    $cb->setToken(variable_get('oauth_token', ''), variable_get('oauth_token_secret', ''));
   }
   else {
     drupal_set_message(t('Access tokens are not available.') . l(t('Please Login'), $base_url . '/twitter-login'), 'error');
@@ -50,7 +53,9 @@ function itg_social_media_twitter_connection() {
 }
 
 /**
- * Callback function for facebook login callback * 
+ * Callback function for facebook login callback
+ * 
+ * @global string $base_url
  */
 function itg_social_media_settings_callback() {
   global $base_url;
@@ -62,24 +67,24 @@ function itg_social_media_settings_callback() {
   }
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
-    drupal_set_message('Graph returned an error: ' . $e->getMessage(), 'error');
+    drupal_set_message(t('Graph returned an error: ' . $e->getMessage()), 'error');
   }
   catch (Facebook\Exceptions\FacebookSDKException $e) {
     // When validation fails or other local issues
-    drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
+    drupal_set_message(t('Facebook SDK returned an error: ' . $e->getMessage()), 'error');
   }
 
   if (isset($accessToken)) {
     // Logged in!
     $_SESSION['facebook_access_token'] = (string) $accessToken;
-    drupal_set_message('Facebook connection has been made successfully', 'status');
+    drupal_set_message(t('Facebook connection has been made successfully'), 'status');
   }
   elseif ($helper->getError()) {
     // The user denied the request
-    drupal_set_message('User denied the request.', 'error');
+    drupal_set_message(t('User denied the request.'), 'error');
   }
   else {
-    drupal_set_message('Unable to connect to facebook.', 'error');
+    drupal_set_message(t('Unable to connect to facebook.'), 'error');
   }
 
   // The OAuth 2.0 client handler helps us manage access tokens
@@ -99,7 +104,7 @@ function itg_social_media_settings_callback() {
       $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
     }
     catch (Facebook\Exceptions\FacebookSDKException $e) {
-      drupal_set_message('Error getting long-lived access token' . $helper->getMessage(), 'error');      
+      drupal_set_message(t('Error getting long-lived access token' . $helper->getMessage()), 'error');      
     }
   }
   // Long lived access token
@@ -109,6 +114,11 @@ function itg_social_media_settings_callback() {
   drupal_goto($base_url.'/admin/itg-social-media/facebook-pages');
 }
 
+/**
+ * Twitter login callback function
+ * 
+ * @global string $base_url
+ */
 function itg_social_media_twitter_callback() {
   global $base_url;
   \Codebird\Codebird::setConsumerKey(variable_get('twitter_app_key'), variable_get('twitter_app_secret'));
@@ -124,15 +134,21 @@ function itg_social_media_twitter_callback() {
       'oauth_verifier' => $_GET['oauth_verifier']
     ]);
 
-    // store the token (which is different from the request token!)
-    $_SESSION['oauth_token'] = $reply->oauth_token;
-    $_SESSION['oauth_token_secret'] = $reply->oauth_token_secret;
+    // store the token (which is different from the request token!)    
+    variable_set('oauth_token', $reply->oauth_token);
+    variable_set('oauth_token_secret', $reply->oauth_token_secret);
 
     // send to same URL, without oauth GET parameters
-    drupal_goto('/browse-content');
+    drupal_goto($base_url . '/admin/config/administration/social_media_login');
   }
 }
 
+/**
+ * Twitter login link generator function
+ * 
+ * @global string $base_url
+ * @return string
+ */
 function itg_social_media_twitter_login() {
   global $base_url;
   unset($_SESSION['oauth_token']);
