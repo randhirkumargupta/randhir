@@ -182,7 +182,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm-d-Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Field: Story expiry date */
+  /* Field: Field: Expiry On */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -306,7 +306,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Field: Story expiry date */
+  /* Field: Field: Expiry On */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -404,7 +404,10 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '25';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'itg_row_selector' => 'itg_row_selector',
@@ -461,6 +464,13 @@ function syndication_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Content Not Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Global: Row Selector */
   $handler->display->display_options['fields']['itg_row_selector']['id'] = 'itg_row_selector';
   $handler->display->display_options['fields']['itg_row_selector']['table'] = 'views';
@@ -511,6 +521,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['field_story_issue_date']['id'] = 'field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['field'] = 'field_story_issue_date';
+  $handler->display->display_options['fields']['field_story_issue_date']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_issue_date']['settings'] = array(
     'format_type' => 'itg_date_with_time',
     'fromto' => 'both',
@@ -519,11 +530,11 @@ function syndication_feature_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -531,14 +542,6 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Configurations (field_story_configurations) */
-  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
-  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
-  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
-  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
-    'syndication' => 'syndication',
-  );
-  $handler->display->display_options['filters']['field_story_configurations_value']['group'] = 1;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -628,14 +631,6 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Configurations (field_story_configurations) */
-  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
-  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
-  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
-  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
-    'syndication' => 'syndication',
-  );
-  $handler->display->display_options['filters']['field_story_configurations_value']['group'] = 1;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -685,7 +680,6 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['filters']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';
   $handler->display->display_options['filters']['field_story_issue_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_issue_date_value']['expose']['operator_id'] = 'field_story_issue_date_value_op';
-  $handler->display->display_options['filters']['field_story_issue_date_value']['expose']['label'] = 'Issue date';
   $handler->display->display_options['filters']['field_story_issue_date_value']['expose']['operator'] = 'field_story_issue_date_value_op';
   $handler->display->display_options['filters']['field_story_issue_date_value']['expose']['identifier'] = 'field_story_issue_date_value';
   $handler->display->display_options['filters']['field_story_issue_date_value']['expose']['remember_roles'] = array(
@@ -745,6 +739,13 @@ function syndication_feature_views_default_views() {
     18 => 0,
     22 => 0,
     23 => 0,
+  );
+  /* Filter criterion: Content: Syndication (field_story_syndication) */
+  $handler->display->display_options['filters']['field_story_syndication_value']['id'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['table'] = 'field_data_field_story_syndication';
+  $handler->display->display_options['filters']['field_story_syndication_value']['field'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['value'] = array(
+    'Yes' => 'Yes',
   );
   $handler->display->display_options['path'] = 'syndication-feed-generator';
   $export['syndication_feed_generator'] = $view;

@@ -21,5 +21,12 @@ function social_media_integration_user_default_permissions() {
     'module' => 'itg_social_media',
   );
 
+  // Exported permission: 'administer itg_social_media settings'.
+  $permissions['administer itg_social_media settings'] = array(
+    'name' => 'administer itg_social_media settings',
+    'roles' => array(),
+    'module' => 'itg_social_media',
+  );
+
   return $permissions;
 }

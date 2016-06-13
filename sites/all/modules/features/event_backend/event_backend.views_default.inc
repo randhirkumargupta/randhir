@@ -192,6 +192,7 @@ function event_backend_views_default_views() {
     'field_story_expiry_date' => 'field_story_expiry_date',
     'field_registration_close_date' => 'field_registration_close_date',
     'php' => 'php',
+    'nothing_1' => 'nothing_1',
     'status' => 'status',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
@@ -271,6 +272,11 @@ function event_backend_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'status' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
@@ -295,7 +301,7 @@ function event_backend_views_default_views() {
     ),
     'nothing' => array(
       'align' => '',
-      'separator' => ' |',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
   );
@@ -382,7 +388,6 @@ function event_backend_views_default_views() {
   $handler->display->display_options['fields']['field_event_start_date']['id'] = 'field_event_start_date';
   $handler->display->display_options['fields']['field_event_start_date']['table'] = 'field_data_field_event_start_date';
   $handler->display->display_options['fields']['field_event_start_date']['field'] = 'field_event_start_date';
-  $handler->display->display_options['fields']['field_event_start_date']['label'] = 'Start Date';
   $handler->display->display_options['fields']['field_event_start_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_event_start_date']['settings'] = array(
     'format_type' => 'itg_date_with_time',
@@ -405,7 +410,7 @@ function event_backend_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Expiry date */
+  /* Field: Field: Expiry Date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -459,7 +464,9 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['status']['table'] = 'node';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['label'] = 'Status';
-  $handler->display->display_options['fields']['status']['type'] = 'published-notpublished';
+  $handler->display->display_options['fields']['status']['type'] = 'custom';
+  $handler->display->display_options['fields']['status']['type_custom_true'] = 'Published';
+  $handler->display->display_options['fields']['status']['type_custom_false'] = 'Unpublished';
   $handler->display->display_options['fields']['status']['not'] = 0;
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
@@ -483,7 +490,8 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = '';
-  $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">Delete </span>';
   $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['delete_node']['text'] = 'Delete';
   /* Field: Global: Custom text */
@@ -568,7 +576,6 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'views_bulk_operations' => 'views_bulk_operations',
     'nid' => 'nid',
     'counter' => 'counter',
     'title' => 'title',
@@ -579,6 +586,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'field_story_expiry_date' => 'field_story_expiry_date',
     'field_registration_close_date' => 'field_registration_close_date',
     'php' => 'php',
+    'nothing_1' => 'nothing_1',
     'status' => 'status',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
@@ -587,11 +595,6 @@ echo itg_event_registration_registered_user_detail($row->nid);
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
-    'views_bulk_operations' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'nid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
@@ -658,6 +661,11 @@ echo itg_event_registration_registered_user_detail($row->nid);
       'separator' => '',
       'empty_column' => 0,
     ),
+    'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'status' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
@@ -682,7 +690,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     ),
     'nothing' => array(
       'align' => '',
-      'separator' => ' |',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
   );
@@ -767,7 +775,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Expiry date */
+  /* Field: Field: Expiry Date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';

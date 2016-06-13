@@ -25,7 +25,7 @@
 </div>
 <div id="RecipeSyndication">
   <h2 class="story-title"><?php print t('Syndication'); ?></h2>
-  <?php print drupal_render($form['field_recipe_syndication']); ?>
+  <?php print drupal_render($form['field_story_syndication']); ?>
 </div>
 
 <div id="RecipeSection">

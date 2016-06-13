@@ -212,7 +212,7 @@ if($user->uid == $view_user_id) {
       $comma_role_arr = implode (", ", $final_role_arr);
       $comma_del_arr = implode (", ", $final_del_arr);
       
-$output = "<h2>My Permissions</h2><table style='width:100%'>
+$output = "<h2>My Permissions</h2><table class='views-table'>
         <tr>
         <th>Operations</th>
         <th>Types</th>

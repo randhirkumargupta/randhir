@@ -86,6 +86,9 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
     
     case 'photogallery_node_form':
       itg_recipe_smi_hideshow($form);
+      break;
+    case 'videogallery_node_form':
+      itg_recipe_smi_hideshow($form);
   
   }
 }

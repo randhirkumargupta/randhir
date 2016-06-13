@@ -6,7 +6,6 @@ version = 7.x-1.0
 dependencies[] = feature_category_management
 dependencies[] = feature_for_mobile_services
 dependencies[] = field_group
-dependencies[] = itg_syndication
 dependencies[] = node
 dependencies[] = text
 dependencies[] = views

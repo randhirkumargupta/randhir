@@ -94,7 +94,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 59, ../sass/styles.scss */
-.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
+.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field {
   display: inline-block;
 }
 
@@ -109,12 +109,12 @@ h1, h2, h3, h4 {
 }
 
 /* line 68, ../sass/styles.scss */
-.full, #page, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes div.rating, .form-field-type-field-collection .field-multiple-table {
+.full, #page, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes div.rating, .form-field-type-field-collection .field-multiple-table, [class*="node-type-"] .node .field {
   width: 100%;
 }
 
 /* line 71, ../sass/styles.scss */
-.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container > .form-item .form-item.form-type-radio .form-radio, .answer-container .form-type-checkboxes div.rating, .answer-container div.rating .form-type-checkbox input[type="checkbox"] {
+.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container > .form-item .form-item.form-type-radio .form-radio, .answer-container .form-type-checkboxes div.rating, .answer-container div.rating .form-type-checkbox input[type="checkbox"], [class*="node-type-"] .node .field .field-label {
   float: left;
 }
 
@@ -716,4 +716,125 @@ input[type="text"], select, input[type="password"] {
 /* line 584, ../sass/styles.scss */
 #comments .comment.comment-unpublished {
   padding: 10px;
+}
+
+/* line 593, ../sass/styles.scss */
+[class*="node-type-"] .tabs-primary {
+  display: none;
+}
+/* line 594, ../sass/styles.scss */
+[class*="node-type-"] .node {
+  padding: 20px;
+}
+/* line 596, ../sass/styles.scss */
+[class*="node-type-"] .node h2 {
+  background-color: #fefafb;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 8px 20px;
+  line-height: 28px;
+  font-size: 18px;
+  margin: 15px 0;
+}
+/* line 605, ../sass/styles.scss */
+[class*="node-type-"] .node .field {
+  padding: 5px 30px;
+}
+/* line 609, ../sass/styles.scss */
+[class*="node-type-"] .node .field .field {
+  padding: 0;
+}
+/* line 612, ../sass/styles.scss */
+[class*="node-type-"] .node .field .field-label {
+  width: 220px;
+  padding-right: 20px;
+}
+/* line 617, ../sass/styles.scss */
+[class*="node-type-"] .node .field .field-items {
+  overflow: hidden;
+}
+
+/* line 623, ../sass/styles.scss */
+.comm-ques {
+  background-color: #fffddf;
+}
+
+/* line 626, ../sass/styles.scss */
+.slider {
+  width: 820px;
+  margin: 20px auto;
+}
+
+/* line 627, ../sass/styles.scss */
+.tv-schedule {
+  max-width: 820px;
+}
+
+/* line 628, ../sass/styles.scss */
+.tv-schedule .slick-list {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+}
+
+/* line 629, ../sass/styles.scss */
+.tv-schedule-time .slick-slide span {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  border-left: 1px solid #d9d9d9;
+}
+
+/* line 630, ../sass/styles.scss */
+.tv-schedule-time .slick-slide:first-child span {
+  border-left: none;
+}
+
+/* line 631, ../sass/styles.scss */
+.tv-schedule-time {
+  border: 1px solid #d9d9d9;
+}
+
+/* line 632, ../sass/styles.scss */
+.tv-schedule .slick-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 10px;
+  width: 0;
+  height: 0;
+  border: 10px solid;
+  background: none;
+  font-size: 0;
+  cursor: pointer;
+}
+
+/* line 633, ../sass/styles.scss */
+.tv-schedule .slick-prev {
+  right: 100%;
+  border-color: transparent #d9d9d9 transparent transparent;
+}
+
+/* line 634, ../sass/styles.scss */
+.tv-schedule .slick-next {
+  left: 100%;
+  border-color: transparent transparent transparent #d9d9d9;
+}
+
+/* line 635, ../sass/styles.scss */
+.tv-schedule-news .slick-slide span {
+  display: block;
+}
+
+/* line 636, ../sass/styles.scss */
+.tv-schedule-news {
+  border: 1px solid #d9d9d9;
+}
+
+/* line 637, ../sass/styles.scss */
+.tv-schedule-news .tv-schedule-task span {
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  overflow: hidden;
+  height: 100px;
 }

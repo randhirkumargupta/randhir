@@ -4,134 +4,171 @@
  * Implements hook_schema()
  * @return array
  */
+
 function itg_syndication_schema() {
+  
+  //schema for itg_cron_time_scheduler
+  
   $schema['itg_cron_time_scheduler'] = array(
-    'description' => t('The base table for cron.'),
+    'description' => 'TODO: please describe this table!',
     'fields' => array(
       'id' => array(
-        'description' => 'The primary identifier.',
+        'description' => 'TODO: please describe this field!',
         'type' => 'serial',
-        'unsigned' => TRUE,
         'not null' => TRUE,
       ),
       'content_id' => array(
-        'description' => t('for nid.'),
+        'description' => 'TODO: please describe this field!',
         'type' => 'int',
-        'length' => 11,
         'not null' => TRUE,
-        'default' => '',
-      ),      
+      ),
       'fid' => array(
-        'description' => 'field collection id.',
+        'description' => 'TODO: please describe this field!',
         'type' => 'int',
-        'length' => 11,
         'not null' => TRUE,
-        'default' => '',
       ),
       'cron_type' => array(
-        'description' => t('content type name.'),
+        'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
-        'length' => 250,
+        'length' => '250',
         'not null' => TRUE,
-        'default' => '',
       ),
       'last_cron_time' => array(
-        'description' => t('Previous cron time.'),
+        'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
-        'length' => 250,
+        'length' => '250',
         'not null' => TRUE,
-        'default' => '',
       ),
       'scheduler_time' => array(
-        'description' => t('Scheduler cron time'),
+        'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
-        'length' => 250,
+        'length' => '250',
         'not null' => TRUE,
-        'default' => '',
       ),
       'cron_details' => array(
-        'description' => t('cron details'),
-        'type' => 'longblob',       
+        'description' => 'TODO: please describe this field!',
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => TRUE,
       ),
       'status' => array(
-        'description' => t('Scheduler cron status'),
-        'type' => 'tinyint',
-        'length' => 1,
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'size' => 'tiny',
         'not null' => TRUE,
-        'default' => '',
       ),
     ),
-    
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+  
+  //schema for itg_syndication_feed_url
+  
+  $schema['itg_syndication_feed_url'] = array(
+    'description' => 'TODO: please describe this table!',
+    'fields' => array(
+      'id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'xml_name' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'client_feed_url' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'created_date' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
     'primary key' => array('id'),
   );
   
+  //schema for itg_syndication_manual_feed_details
+  
   $schema['itg_syndication_manual_feed_details'] = array(
-    'description' => t('Syndication manual feed details.'),
+    'description' => 'The base table for syndication.',
     'fields' => array(
       'id' => array(
-        'description' => 'The primary identifier.',
+        'description' => 'The primary identifier for a node.',
         'type' => 'serial',
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
       'web_property' => array(
-        'description' => t('Web property.'),
-        'type' => 'int',
-        'length' => 11,
+        'description' => 'The node type for syndication.',
+        'type' => 'varchar',
+        'length' => '128',
         'not null' => TRUE,
         'default' => '',
       ),
       'client_title' => array(
-        'description' => t('client title.'),
+        'description' => 'Client title.',
         'type' => 'varchar',
-        'length' => 250,
+        'length' => '255',
         'not null' => TRUE,
         'default' => '',
       ),
       'delivery_mode' => array(
-        'description' => t('delivery mode.'),
+        'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
-        'length' => 250,
+        'length' => '250',
         'not null' => TRUE,
-        'default' => '',
       ),
       'feed_type' => array(
-        'description' => t('Feed type'),
+        'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
-        'length' => 250,
+        'length' => '250',
         'not null' => TRUE,
-        'default' => '',
       ),
       'feed_file_path' => array(
-        'description' => t('file path'),
+        'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
-        'length' => 250,
+        'length' => '250',
         'not null' => TRUE,
-        'default' => '',
       ),
       'syndication' => array(
-        'description' => t('Create feed details'),
-        'type' => 'blob',       
+        'description' => 'A blob field that contains list of node which are ready to syndicate with client.',
+        'type' => 'blob',
+        'not null' => FALSE,
       ),
       'status' => array(
-        'description' => t('feed status'),
+        'description' => 'File status: 0 means file not been created and 1 for file successful created.',
         'type' => 'int',
-        'length' => 11,
         'not null' => TRUE,
-        'default' => '',
+        'default' => 0,
       ),
       'created' => array(
-        'description' => t('The created date for the single record'),
+        'description' => 'The created date for the single record',
         'type' => 'varchar',
         'mysql_type' => 'datetime',
         'not null' => FALSE,
-      ),
+       ),
     ),
-    
     'primary key' => array('id'),
+    'indexes' => array(
+      'node_created' => array('created'),
+      'web_property' => array('web_property'),
+    ),
   );
-
+  
   return $schema;
 }
-
 
