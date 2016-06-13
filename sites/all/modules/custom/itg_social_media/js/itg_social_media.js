@@ -35,11 +35,7 @@
       };
 
       // Custom validator function for social media start
-      $("#itg-social-media-form").validate({
-        submitHandler: function (form) {
-          $('input:submit').attr('disabled', 'disabled');
-          form.submit();
-        },
+      $("#itg-social-media-form").validate({        
         onfocusout: function (element) {
           $(element).valid();
         },

@@ -73,35 +73,6 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
   );
   
-  // Facebook additional fields
-  $form['fb_wrap']['field_story_posted_by_facebook'] = array(
-    '#type' => 'hidden',
-    '#maxlength' => 255,
-    '#default_value' => $user->name,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
-  $form['fb_wrap']['field_story_time_facebook'] = array(
-    '#type' => 'hidden',
-    '#default_value' => REQUEST_TIME,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
-  // Additional field ends here    
   $form['fb_wrap']['itg_fb_img'] = array(
     '#title' => t('Facebook Image'),
     '#type' => 'managed_file',
@@ -205,34 +176,6 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
   );
 
-  // Twitter additional fields    
-  $form['twit_wrap']['field_story_posted_by_twitter'] = array(
-    '#type' => 'hidden',
-    '#maxlength' => 255,
-    '#default_value' => $user->name,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
-  $form['twit_wrap']['field_story_time_twitter'] = array(
-    '#type' => 'hidden',
-    '#default_value' => REQUEST_TIME,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
   // Twitter video
   $form['twitter_video_wrap'] = array(
     '#title' => t('Twitter Video'),
