@@ -614,13 +614,16 @@
       var radioCheck = $(this).is(':checked');
       var radioVal = $(this).val();
       if(radioCheck == true && radioVal == 'Daily'){
+        $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
         $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').hide();
       }
       if(radioCheck == true && radioVal == 'Weekly'){
+        $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
         $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
         $(this).parents('td').find('.field-name-field-syndication-set-day').show();
       }
       if(radioCheck == true && radioVal == 'Monthly'){
+        $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
         $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
         $(this).parents('td').find('.field-name-field-syndication-set-day-month').show();
       }
@@ -656,6 +659,20 @@
         $(this).parents('td').find('.field-name-field-news-external-url').show();
         $(this).parents('td').find('.newsletter-get-content').parent().hide();
       }
+    });
+    
+    
+    // jQuery code for syndication client
+    $('.form-field-name-field-syndication-delivery-mode').on('change', '.form-checkbox', function(){
+      var check = $(this).is(':checked');
+      var ftp = $(this).val();
+      if(!check && ftp == 'FTP'){
+        $(this).parents('#edit-field-syndication-delivery-mode').siblings('.form-field-name-field-syndication-ftp-details').find('table td .form-text').val('');
+      }
+      if(!check && ftp == 'Email'){
+        $(this).parents('#edit-field-syndication-delivery-mode').siblings('.form-field-name-field-email-address').find('table td .form-text').val('');
+      }
+      
     });
 
   };
