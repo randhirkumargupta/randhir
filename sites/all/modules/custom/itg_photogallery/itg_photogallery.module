@@ -383,6 +383,10 @@ function itg_photogallery_form_field_gallery_image_form_alter(&$form, &$form_sta
   pr($form);
 }
 
+/**
+ * Implement hook_node_presave
+ * {@inheritdoc}
+ */
 function itg_photogallery_node_presave($node) {
   //p($node->field_featured[LANGUAGE_NONE][0]['value']);
   foreach ($node->field_gallery_image['und']as $delta => $field) {
