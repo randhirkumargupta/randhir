@@ -3835,3 +3835,23 @@ div.node{
     }
   }
 }
+.view-view-moderation-history{
+  padding: 0 10px;
+  .views-row{
+    padding: 10px 0;
+    &+.views-row{
+      border-top: 1px solid #fff;
+    }
+    .views-label{
+      @extend .fleft;
+      width: 120px;
+    }
+    .field-content{
+      @extend .db;
+      @extend .of-hide;
+    }
+  }
+  a{
+    color: #1fb5ad;
+  }
+}
