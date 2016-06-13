@@ -24,7 +24,7 @@
         $('#edit-metatags').show();
        }
 
-     //Automatic and manual field hide and show
+     //Hide/Sho Automatic and manual fields
       if ($("input[name='field_newsl_newsletter_type[und]']:checked").val() === 'automatic') {
         
         $('#edit-field-newsl-schedule').hide();
@@ -42,13 +42,13 @@
         }
         else if ($("input[name='field_newsl_frequency[und]']:checked").val() === 'weekly') {
           $('#edit-field-newsl-day').show();
-          $('#edit-field-newsl-time').hide();
+          $('#edit-field-newsl-time').show();
           $('#edit-field-newsl-time-period').hide();
-          $('#edit-field-newsl-time-date').hide();
+          $('#edit-field-newsl-date').hide();
         }
         else {
           $('#edit-field-newsl-date').show();
-          $('#edit-field-newsl-time').hide();
+          $('#edit-field-newsl-time').show();
           $('#edit-field-newsl-time-period').hide();
           $('#edit-field-newsl-day').hide();
         }
@@ -56,13 +56,21 @@
       else {
           $('#edit-field-newsl-schedule').show();
           $('.group-newsl-add-news').show();
-          $('#edit-field-newsl-time').show();
-          $('.form-field-name-field-survey-start-date').show();
           $('#edit-field-newsl-frequency').hide();
           $('#edit-field-newsl-newsletter-content').hide();
           $('#edit-field-newsl-day').hide();
           $('#edit-field-newsl-date').hide();
           $('#edit-field-newsl-time-period').hide();
+          
+          if ($("input[name='field_newsl_schedule[und]']:checked").val() === 'later') {
+            $('#edit-field-survey-start-date').show();
+            $('#edit-field-newsl-time').show();
+          } else {
+            $('#edit-field-newsl-time').hide();
+            $('#edit-field-survey-start-date').hide();
+            $('#edit-field-newsl-date').hide();
+          }
+
       }
       
       //Aautomatic and manual hide/show onclick
@@ -99,20 +107,19 @@
         } 
         else {
           $('#edit-field-newsl-schedule').show();
-          if($("input[name='field_newsl_schedule[und]']:checked").val() === 'later'){alert('l');
-            $('#edit-field-survey-start-date').show();
-            $('#edit-field-newsl-time').show();
-          } else {
-            $('#edit-field-survey-start-date').hide();
-            $('#edit-field-newsl-time').hide();
-          }
-          
           $('.group-newsl-add-news').show();
           $('#edit-field-newsl-frequency').hide();
           $('#edit-field-newsl-newsletter-content').hide();
           $('#edit-field-newsl-day').hide();
           $('#edit-field-newsl-date').hide();
           $('#edit-field-newsl-time-period').hide();
+          if($("input[name='field_newsl_schedule[und]']:checked").val() === 'later'){
+            $('#edit-field-survey-start-date').show();
+            $('#edit-field-newsl-time').show();
+          } else {
+            $('#edit-field-survey-start-date').hide();
+            $('#edit-field-newsl-time').hide();
+          }
         }
       });
       
@@ -139,15 +146,6 @@
         }
       });
       
-      // Hide/show date and time using scheduler(Now/Later)
-      if ($("input[name='field_newsl_schedule[und]']:checked").val() === 'later') {
-        $('#edit-field-survey-start-date').show();
-        $('#edit-field-newsl-time').show();
-      } else {
-        $('#edit-field-survey-start-date').hide();
-        $('#edit-field-newsl-time').hide();
-      }
-      
       //Now and Later Hide show
       $("input[name='field_newsl_schedule[und]']").on("click", function() {
         var check_radio_name = $(this).val();
@@ -166,7 +164,7 @@
         $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1').prop("readonly", true);
       }
       
-      //Get Newsletter data
+      //Get Newsletter data using AJAX
       $('body').on('click', '.newsletter-get-content', function() {
         var contentId = $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
         var relval = $(this).attr('rel');
