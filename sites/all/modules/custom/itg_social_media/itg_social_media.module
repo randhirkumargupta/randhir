@@ -9,12 +9,10 @@ require 'vendor/autoload.php';
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.settings');
 
-// Local settings
-//define('TWITTER_API_KEY', 'oynNx70nQQo8aWUlcYtc7BUDX');
-//define('TWITTER_API_SECRET', '2RsvsZLF5hpEcFIjHvqbUNxoeqFStyB9ZEAxognUjVaBWz2r8X');
-
 /**
  * Implement hook_permissions()
+ * 
+ * @return array
  */
 function itg_social_media_permission() {
   return array(
@@ -153,9 +151,11 @@ function itg_social_media_node_type($nid) {
 }
 
 /**
- * Facebook video post logic
+ * Facebook post logic
+ * @global string $base_url
  */
 function itg_social_media_facebook_post($fid, $desc, $type, $node) {
+  global $base_url;
   // Set file status to permanent
   $file = file_load($fid);
   // Get file real path
@@ -168,12 +168,12 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node) {
   $token = variable_get('access_token_one').variable_get('access_token_two');
 
   // Get short url
-  $short_url = shorten_url($node->path['alias'], 'goo.gl');
+  $short_url = shorten_url($base_url . '/' . $node->path['alias'], 'goo.gl');
 
   switch ($type) {
     case 'videos':
       $data = [
-        'title' => t('Yogesh kumar'),
+        'title' => $node->title,
         'description' => t($desc) . ' ' . $short_url,
         'source' => $fb->videoToUpload($path),
       ];
@@ -193,15 +193,12 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node) {
   }
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
-    drupal_set_message('Graph returned an error: ' . $e->getMessage(), 'error');
+    drupal_set_message(t('Graph returned an error: ' . $e->getMessage()), 'error');
   }
   catch (Facebook\Exceptions\FacebookSDKException $e) {
     // When validation fails or other local issues
-    drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');
-  }
-  //$graphNode = $response->getGraphNode();
-
-  //watchdog('facebook post', $graphNode['id']);
+    drupal_set_message(t('Facebook SDK returned an error: ' . $e->getMessage()), 'error');
+  }  
 }
 
 /**
@@ -278,6 +275,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     itg_social_media_tvideo_post($fid, $desc, $node);
   }
   node_save($node);
+  drupal_set_message(t('Social media fields has been updated.'), 'status');
 }
 
 /**
@@ -294,7 +292,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
   // Get real path of the file
   $path = drupal_realpath($file->uri);
   // Get short url
-  $short_url = shorten_url($node->path['alias'], 'goo.gl');
+  $short_url = shorten_url($base_url . '/' . $node->path['alias'], 'goo.gl');
   $media_files = [$path];
   // will hold the uploaded IDs
   $media_ids = [];
@@ -333,7 +331,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
   $path = drupal_realpath($file->uri);
   $size_bytes = filesize($path);
   // Get short url
-  $short_url = shorten_url($node->path['alias'], 'goo.gl');
+  $short_url = shorten_url($base_url . '/' . $node->path['alias'], 'goo.gl');
   $fp = fopen($path, 'r');
 
   // INIT the upload
@@ -370,7 +368,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
   ]);
 
   if ($reply->httpstatus < 200 || $reply->httpstatus > 299) {
-    die('I am dying');
+    drupal_set_message(t('Http status:' . $reply->httpstatus, 'error'));
   }
 
   // Now use the media_id in a Tweet

@@ -137,6 +137,14 @@ function itgadmin_preprocess_block(&$variables, $hook) {
 function itgadmin_preprocess_comment(&$vars) {  
   // Remove comment title from display
   $vars['title'] = '';
+  $comment = $vars['elements']['#comment'];
+  $node = $vars['elements']['#node'];
+  if($node->type == 'story' || $node->type == 'blog') {
+  $vars['created']   = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
+  $vars['changed']   = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
+
+  $vars['submitted'] = t('Submitted by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
+  }
 }
 
 /**
@@ -235,7 +243,12 @@ function itgadmin_preprocess_page(&$vars) {
   if (!empty($vars['node']) && $vars['node']->type == 'ugc') {
     drupal_set_title('');
   }
-
+   
+  // Add tpl for related content view page
+//  if (arg(0) == 'related-content') {
+//    $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
+//  }
+  
   //Add tpl for event registration view page
   if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit') {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';

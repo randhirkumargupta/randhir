@@ -71,6 +71,7 @@ function feature_for_ugc_comments_views_default_views() {
   $handler = $view->new_display('page', 'In queue ugc comments', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'In Queue comments';
+  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -259,7 +260,7 @@ function feature_for_ugc_comments_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'View';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'comment_view/[cid]';
-  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'colorbox-load';
+  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'colorbox-load view-link';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -268,7 +269,7 @@ function feature_for_ugc_comments_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'Edit';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'comment_edit/[cid]';
-  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'colorbox-load';
+  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'colorbox-load edit-link';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
   $handler->display->display_options['fields']['nothing_3']['table'] = 'views';
@@ -563,7 +564,7 @@ function feature_for_ugc_comments_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'View';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'comment_view/[cid]';
-  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'colorbox-load';
+  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'colorbox-load view-link';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Comment: Updated date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
