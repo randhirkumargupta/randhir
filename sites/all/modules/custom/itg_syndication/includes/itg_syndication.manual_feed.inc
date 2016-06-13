@@ -13,9 +13,6 @@
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
   if ($form_id == 'views_form_syndication_feed_generator_page') {
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication.js',
-    );
     $form['actions']['submit']['#submit'][] = 'itg_syndication_selector_custom_submit';
   }
   
@@ -77,7 +74,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
    if (isset($_GET['client_title'])) {
     $op = itg_syndication_get_mode($_GET['client_title']);
    } else {
-     $op = array('_none' => '- None -');
+      $op = array('_none' => '- None -');
    }
   
    $form['client_delivery_mode'] = array(
@@ -100,25 +97,66 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
               );
 
    $form['feed_type'] = array(
-    '#type' => 'radios',
-    '#title' => t('Select Feed Type'),
-    '#default_value' => 'xml',
-    '#options' => $feed_type_options,    
-    '#weight' => 99,
-  );
-   $form['actions']['download_feed'] = array('#type' => 'submit', '#value' => t('Download Feed'));
+      '#type' => 'radios',
+      '#title' => t('Select Feed Type'),
+      '#default_value' => 'xml',
+      '#options' => $feed_type_options,    
+      '#weight' => 99,
+    );  
+   
+   $form['actions']['download_feed'] = array('#type' => 'submit', 
+       '#value' => t('Download Feed'),
+       '#name' => t('download_feed'),
+       '#submit' => array('itg_syndication_selector_custom_submit'),);
+   
    $form['actions']['submit']['#value'] = 'Generate feed and Send it to client';
+   
    // Add cancel button to create/edit
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), 'syndication-rule-listing', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,
     );
+    
+    // for feed download 
+     $form['feed_download_value'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Select Feed Type'),        
+    '#weight' => 99,
+   );
+
+    $form['#after_build'][] = 'itg_syndication_feed_download_after_build';
+   
  }
 
   // View autocomplete title field.
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_client') {
     $form['title']['#autocomplete_path'] = 'content-title-list/syndication_client/autocomplete';
-  }  
+  }
+  
+}
+
+/**
+ * After build callback function.
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_syndication_feed_download_after_build($form, &$form_state) {  
+  
+   drupal_add_js('jQuery(document).ready(function() {
+              jQuery(".form-item-feed-download-value").hide();
+              
+              jQuery("#edit-download-feed").click(function() { 
+                jQuery("#edit-feed-download-value").val("yes");                
+              });
+              
+              jQuery("#edit-submit").click(function() { 
+                jQuery("#edit-feed-download-value").val("");                
+              });
+              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  
+  return $form;
 }
 
 
@@ -142,11 +180,10 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'client_title' => $client_name,
     'delivery_mode' => $delivery_mode,
     'feed_type' => $feed_type,
-    'syndication' => serialize($syndication_node),
-    //'created' => format_date(time(), 'custom', 'Y-m-d'),
+    'syndication' => serialize($syndication_node),    
   );
   
-  $file_path = feed_generator_of_contents($data);
+  $file_path = feed_generator_of_contents($data); 
   
   // insert records into database table itg_syndication_manual_feed_details.
   
@@ -160,12 +197,17 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'created' => format_date(time(), 'custom', 'Y-m-d'),
   );
   
-  //$query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
+  $query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
   
+  // for feed download
+  if($form_state['values']['feed_download_value'] == 'yes') {
+    global $base_url;    
+    $link_val = 'Click to Download. <a href="'.$base_url.'/sites/default/files/'.$file_path.'" download>Import Feed</a>';
+    drupal_set_message($link_val, 'status');    
+  } else {
+      drupal_set_message('Successfully feed Generated  and Sent to client.', 'status');
+  }
   
-  //drupal_write_record('itg_row_selector', $pre_save);
-  //watchdog('Syndication', 'Node has been inserted for syndication.');
-  drupal_set_message('Content has been saved for syndication.', 'status');
 }
 
 /**

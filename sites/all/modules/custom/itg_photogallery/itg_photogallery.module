@@ -13,6 +13,11 @@
  */
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'photogallery_node_form') {
+    //code for common syndication field hide
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-syndication").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    
     $form['upload'] = array(
       '#type' => 'plupload',
       '#weight' => 21,
@@ -376,4 +381,19 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
 
 function itg_photogallery_form_field_gallery_image_form_alter(&$form, &$form_state, $form_id) {
   pr($form);
+}
+
+/**
+ * Implement hook_node_presave
+ * {@inheritdoc}
+ */
+function itg_photogallery_node_presave($node) {
+  //p($node->field_featured[LANGUAGE_NONE][0]['value']);
+  foreach ($node->field_gallery_image['und']as $delta => $field) {
+    //p($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value']);
+    if($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value'] == 'yes') {
+      $node->field_featured[LANGUAGE_NONE][0]['value'] = 'yes';
+    }
+  }
+  
 }

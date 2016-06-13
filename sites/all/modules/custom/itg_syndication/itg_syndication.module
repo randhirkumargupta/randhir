@@ -163,9 +163,7 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
         }
         unset($form['field_syndication_rule_details'][LANGUAGE_NONE][$key][$syndication_mode]['#validated']);
       }
-    }    
-    
-    //code end    
+    }   
     
     $form['#after_build'][] = 'itg_syndication_rule_after_build';
 }
@@ -379,11 +377,11 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
         }
     }
   
-   $is_dupl_client = itg_syndication_check_duplicate($node->field_syndication_client_title['und'][0]['tid'], $node->title);
-   
-   if (isset($is_dupl_client) && arg(1) != $is_dupl_client) {
-      form_set_error('title', t('client already exists.'));
-   }
+//   $is_dupl_client = itg_syndication_check_duplicate($node->field_syndication_client_title['und'][0]['tid'], $node->title);
+//   
+//   if (is_numeric($is_dupl_client) && arg(1) != $is_dupl_client) {     
+//      form_set_error('title', t('client already exists.'));
+//   }
   } else if ($node->type == 'syndication_rule') {
     foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key_time => $val_time) {
       if (isset($val_time['field_syndication_time'][LANGUAGE_NONE][0]['value'])) {
@@ -395,7 +393,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
    
     $is_rule_client = itg_syndication_check_client_rule($node->field_syndication_rule_title[LANGUAGE_NONE][0]['value']);
     
-    if (isset($is_rule_client) && arg(1) != $is_rule_client) {
+    if (is_numeric($is_rule_client) && arg(1) != $is_rule_client) {
       form_set_error('title', t('Rule already exists for this client.'));
     }
     
@@ -455,8 +453,8 @@ function get_syndication_content_details() {
      
       $content_value = get_content_id_for_syndication($data, $itg_val->last_cron_time);
       //code for update cron time
-     // update_cron_time_after_feed_generate($data, $itg_val->id, $itg_val->scheduler_time);
-      // end code
+      update_cron_time_after_feed_generate($data, $itg_val->id, $itg_val->scheduler_time);
+      
     }
   }
   
@@ -468,15 +466,15 @@ function get_syndication_content_details() {
  * @return array
  */
 function get_content_id_for_syndication($data, $created_date) {
-  
+  $content_id = array();
   $itg_query = db_select('node', 'n');
   $itg_query->fields('n', array('nid'));
   $itg_query->join('field_data_field_story_syndication', 'syndication', 'syndication.entity_id = n.nid'); 
   $itg_query->join('field_data_field_story_category', 'cat', 'cat.entity_id = n.nid');
   $itg_query->condition('n.status', 1);
-  //$itg_query->condition('n.created', $created_date, '>');
+  $itg_query->condition('n.created', $created_date, '>');
   $itg_query->condition('n.type',$data['content_type']);
-  $itg_query->condition('n.syndication','field_story_syndication_value');  
+  $itg_query->condition('syndication.field_story_syndication_value','Yes');  
   $itg_query->condition('cat.field_story_category_tid',$data['section_id']);
   
   $itg_result = $itg_query->execute()->fetchAll();
@@ -505,7 +503,7 @@ function get_content_id_for_syndication($data, $created_date) {
 function itg_syndication_node_insert($node) {
   
   if ($node->type == 'syndication_rule') {
-    //save_cron_details_of_syndication($node);
+    save_cron_details_of_syndication($node);
   }
   
 }
@@ -516,13 +514,13 @@ function itg_syndication_node_insert($node) {
 function itg_syndication_node_update($node) {
   
   if ($node->type == 'syndication_rule') {
-    /*db_update('itg_cron_time_scheduler')
+    db_update('itg_cron_time_scheduler')
           ->fields(array(
             'status' => 0                       
           ))
           ->condition('content_id', $node->nid)
           ->execute();
-    save_cron_details_of_syndication($node);*/
+    save_cron_details_of_syndication($node);
   }
   
 }

@@ -3630,6 +3630,7 @@ div.node{
   }
 }
 [id*="field-service-content-values"]{
+  tbody tr{@extend .db;}
   tbody tr td{
     padding-bottom: 0;
     @extend .fleft;
@@ -3688,6 +3689,10 @@ div.node{
     .ajax-progress-throbber{
       @extend .hide;
     }
+  }
+  .field-name-field-service-audio, 
+  .field-name-field-service-video{
+    @extend .choose-audio-video-file;
   }
 }
 .view{
@@ -3752,6 +3757,7 @@ div.node{
   }
 }
 [id*="field-email-address-values"]{
+  margin-top: 30px !important;
   tbody tr td{
     padding: 0;
     margin: 0 0 10px;
@@ -3799,5 +3805,33 @@ div.node{
 .node-type-task-idea-allocation-tracking{
   .title.comment-form{
     @extend .hide;
+  }
+}
+.node-newsletter_templates-form{
+  .form-field-name-field-newst-logo, 
+  .form-field-name-field-newst-banner{
+    @extend .Browse-upload;
+  }
+  .form-item-title{
+    float: left;
+    &+.form-type-item{
+      @extend .dib;
+      margin-top: 32px;
+    }
+  }
+  .form-field-name-field-newst-header-headline{
+    @extend .dib;
+    @extend .full;
+    .form-type-textfield{
+      margin: 0;
+    }
+  }
+}
+.node-clients_creation-form{
+  .form-item-field-email-address-und-0-value{
+    > label{
+      @extend .hide;
+      &+.form-text + span.error{padding-left: 0;}
+    }
   }
 }

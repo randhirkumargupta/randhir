@@ -27,11 +27,10 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'checkboxes',
     '#title' => t('Social media integration '),
     '#options' => array(
-      'facebook' => t('Facebook Image'),
-      'facebook_video' => t('Facebook Video'),
-      'facebook_instant_article' => t('Facebook Instant Article'),
-      'twitter' => t('Twitter Image'),
-      'twitter_video' => t('Twitter Video'),
+      'facebook' => t('Facebook'),      
+      'twitter' => t('Twitter'),
+      'instagram' => t('Instagram'),
+      'facebook_instant_article' => t('Facebook Instant Article'),      
     ),
     '#default_value' => $data,
   );
@@ -47,61 +46,18 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
   );
   
-  $form['fb_video_wrap'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Facebook Social Media Video Integration'),
-    '#attributes' => array('class' => array('social-fb-block')),
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
   $form['fb_wrap']['itg_facebook_narrative'] = array(
     '#type' => 'textfield',
-    '#title' => t('Facebook Narrative'),
+    '#title' => t('Facebook Image Narrative'),
     '#maxlength' => 255,
     '#default_value' => isset($node->field_story_facebook_narrative['und'][0]['value']) ? $node->field_story_facebook_narrative['und'][0]['value'] : '',
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
-  // Facebook additional fields
-  $form['fb_wrap']['field_story_posted_by_facebook'] = array(
-    '#type' => 'hidden',
-    '#maxlength' => 255,
-    '#default_value' => $user->name,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
-  $form['fb_wrap']['field_story_time_facebook'] = array(
-    '#type' => 'hidden',
-    '#default_value' => REQUEST_TIME,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
-  // Additional field ends here    
   $form['fb_wrap']['itg_fb_img'] = array(
     '#title' => t('Facebook Image'),
     '#type' => 'managed_file',
@@ -116,29 +72,23 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
-  $form['fb_video_wrap']['itg_facebook_video_text'] = array(
+  $form['fb_wrap']['itg_facebook_video_text'] = array(
     '#type' => 'textfield',
     '#title' => t('Facebook Video Description'),
     '#maxlength' => 255,
     '#default_value' => isset($node->field_story_facebook_vdescripti['und'][0]['value']) ? $node->field_story_facebook_vdescripti['und'][0]['value'] : '',
     '#states' => array(
       'visible' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      )
+        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+      ),      
     ),
   );
   
-  $form['fb_video_wrap']['itg_fb_video'] = array(
+  $form['fb_wrap']['itg_fb_video'] = array(
     '#title' => t('Facebook Video'),
     '#type' => 'managed_file',
     '#upload_location' => 'public://facebook_video/',
@@ -150,13 +100,12 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
     '#states' => array(
       'visible' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      )
+        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+      ),      
     ),
   );
+  
+  
   
   $form['twit_wrap'] = array(
     '#type' => 'fieldset',
@@ -177,10 +126,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
@@ -198,53 +144,22 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
 
-  // Twitter additional fields    
-  $form['twit_wrap']['field_story_posted_by_twitter'] = array(
-    '#type' => 'hidden',
+  $form['twit_wrap']['field_story_twitter_video_desc'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Twitter Video Narrative'),
     '#maxlength' => 255,
-    '#default_value' => $user->name,
+    '#default_value' => isset($node->field_story_twitter_video_desc['und'][0]['value']) ? $node->field_story_twitter_video_desc['und'][0]['value'] : '',
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
-  
-  $form['twit_wrap']['field_story_time_twitter'] = array(
-    '#type' => 'hidden',
-    '#default_value' => REQUEST_TIME,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
-  // Twitter video
-  $form['twitter_video_wrap'] = array(
-    '#title' => t('Twitter Video'),
-    '#type' => 'fieldset',
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  
-  $form['twitter_video_wrap']['itg_twit_video'] = array(
+  $form['twit_wrap']['itg_twit_video'] = array(
     '#title' => t('Twitter Video'),
     '#type' => 'managed_file',
     '#upload_location' => 'public://twitter_video/',
@@ -256,30 +171,11 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
     '#states' => array(
       'visible' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      )
+        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+      ),      
     ),
   );
   
-  $form['twitter_video_wrap']['field_story_twitter_video_desc'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Twitter Video Narrative'),
-    '#maxlength' => 255,
-    '#default_value' => isset($node->field_story_twitter_video_desc['und'][0]['value']) ? $node->field_story_twitter_video_desc['und'][0]['value'] : '',
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
-  // Additional field ends here
   $form['ctype'] = array(
     '#type' => 'hidden',
     '#default_value' => check_plain($c_type),
