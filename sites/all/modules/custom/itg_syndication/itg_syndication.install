@@ -157,9 +157,10 @@ function itg_syndication_schema() {
       ),
       'created' => array(
         'description' => 'The created date for the single record',
-        'type' => 'datetime',
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
         'not null' => FALSE,
-      ),
+       ),
     ),
     'primary key' => array('id'),
     'indexes' => array(
@@ -170,3 +171,4 @@ function itg_syndication_schema() {
   
   return $schema;
 }
+
