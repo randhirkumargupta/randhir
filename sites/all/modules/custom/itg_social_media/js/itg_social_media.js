@@ -7,7 +7,7 @@
       // Callback function for custom methods.
       var FormValidation = {
         // Validate Social Media Integration checkboxes.
-        validate_smi: function (value, element) {
+        validate_smi: function (value, element) {          
           var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
           var smi_instant_article = $('input[name="itg_smi[facebook_instant_article]"]').is(':checked');
           var smi_twitter = $('input[name="itg_smi[twitter]"]').is(':checked');
@@ -66,24 +66,27 @@
             required: {
               depends: function () {
                 var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
-                if (smi_fb) {
-                  return true;
-                }
-                else {
+                var fid = $('input[name="itg_fb_img[fid]"]').val();
+                if (smi_fb && fid === '0') {                  
                   return false;
+                }
+                else {                  
+                  return true;                  
                 }
               }
             }
           },
-          'itg_fb_img[fid]': {
+          'itg_facebook_video_text': {
             required: {
-              depends: function () {
+              depends: function () {                
                 var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
-                var fid = $('input[name="itg_fb_img[fid]"]').val();
-                if (smi_fb && fid === '0') {
-                  $(this).removeAttr('value');
+                var fid = $('input[name="itg_fb_video[fid]"]').val();
+                if (smi_fb && fid === '0') {                  
+                  return false;
                 }
-                return true;
+                else {                  
+                  return true;
+                }
               }
             }
           },
@@ -145,6 +148,7 @@
         if (!$(this).is(':checked')) {
           FormValidation.clear_form_elements('social-fb-block');
           jQuery('.form-item-itg-fb-img .ajax-processed').mousedown();            
+          jQuery('.form-item-itg-fb-video .ajax-processed').mousedown();            
         } 
       });
       
@@ -153,6 +157,7 @@
         if (!$(this).is(':checked')) {
           FormValidation.clear_form_elements('social-twitter-block');
           jQuery('.form-item-itg-twitter-img .ajax-processed').mousedown();            
+          jQuery('.form-item-itg-twit-video .ajax-processed').mousedown();            
         } 
       });
       // clear form end here.

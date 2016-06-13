@@ -8,7 +8,7 @@
           $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
           ?>
           <div class="itg-smi">
-              <button data-id="smi-popup" class="btn data-popup-link">Create Social media</button>
+              <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
           </div>
           <div id="smi-popup" class="itg-popup">
               <div class="popup-body">
