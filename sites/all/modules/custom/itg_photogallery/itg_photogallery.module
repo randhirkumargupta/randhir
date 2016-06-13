@@ -13,6 +13,11 @@
  */
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'photogallery_node_form') {
+    //code for common syndication field hide
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-syndication").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    
     $form['upload'] = array(
       '#type' => 'plupload',
       '#weight' => 21,
