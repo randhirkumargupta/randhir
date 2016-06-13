@@ -5,7 +5,7 @@
  * @file newsletter_mail.inc
  */
 
-function _send_mail_newsletter($node){
+function _send_mail_newsletter($node , $news_eng_type){
    //$node = node_load(1375);
    $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
    $user_email_arr = array('haripalrao@gmail.com','neha.rani@kelltontech.com', 'vikash.kumar@kelltontech.com','ashish.singh@kelltontech.com');
@@ -20,8 +20,12 @@ function _send_mail_newsletter($node){
     );
 
     $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+
     if ($mail['result']) {
       drupal_set_message('Newsletter has been sent successfully.');
+      if( $news_eng_type == 'automatically') {
+        _update_newsletter_cron_tbl($node->nid);
+      }
     }
     else {
       $error_msg = 'Failed to send the newsletter mail!';
@@ -87,4 +91,33 @@ foreach($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
   $content .='</table><p>&nbsp;</p><p>Thanks,</p><p>India Today Group</p></body></html>';
 
   return $content;
+}
+
+/**
+ * Update cron table
+ * @param int $nid
+ */
+function _update_newsletter_cron_tbl($nid){
+  $query = db_select('itg_cron_newsletter', 'nc')
+  ->fields('nc', array('nid', 'type', 'scheduled_time', 'frequency'))
+  ->condition('nc.nid', $nid);
+   $result = $query->execute();
+   $records = $result->fetchAssoc();
+   
+   if($records['type'] == 'manual'){
+      db_update('itg_cron_newsletter')
+     ->fields(array(
+         'status' => 1,
+     ))
+     ->condition('nid', $nid, '=')
+     ->execute();
+   }
+   else {
+      db_update('itg_cron_newsletter')
+     ->fields(array(
+         'scheduled_time' => $scheduled_time,
+     ))
+     ->condition('nid', $nid, '=')
+     ->execute();
+   }
 }
