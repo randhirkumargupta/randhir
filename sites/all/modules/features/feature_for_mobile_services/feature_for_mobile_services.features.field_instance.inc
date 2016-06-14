@@ -1490,8 +1490,8 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'increment' => 1,
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
