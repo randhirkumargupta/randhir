@@ -220,12 +220,12 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_mobile_vas_service_content_submit($form, &$form_state) {
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-   
+
   if ($association_nid) {
     $node = node_load($association_nid);
     $form_state['values']['title'] = $node->title;
   }
-  
+
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
@@ -242,107 +242,75 @@ function itg_mobile_vas_service_content_submit($form, &$form_state) {
   return $form;
 }
 
-
 /**
  * Implement hook_node_insert()
  */
 function itg_mobile_services_node_insert($node) {
-  
+
   if ($node->type == 'vas_service_content') {
     save_cron_details_of_mobile_services($node);
   }
-  
 }
 
+/**
+ * Implement hook_node_update()
+ */
+function itg_mobile_services_node_update($node) {
+
+  if ($node->type == 'vas_service_content') {
+    save_cron_details_of_mobile_services($node);
+  }
+}
 
 /**
  * save cron details for feed of syndication content
  * @param array $node 
  */
 function save_cron_details_of_mobile_services($node) {
- 
-   // Load itg_mobile_services.inc from the node module.
+
+  // Load itg_mobile_services.inc from the node module.
   module_load_include('inc', 'itg_mobile_services', 'includes/itg_mobile_services');
-  
+
   $node_nid = $node->nid;
-  $association_title = $node->field_service_association_title;
-  $association_nid = $association_title[LANGUAGE_NONE][0]['target_id'];
-  
-  
-  
+  $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
+
   $frequency = $node->field_service_frequency[LANGUAGE_NONE][0]['value'];
   $frequency_date_start = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value'];
   $frequency_date_end = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value2'];
   $current_date = date('Y-m-d');
-  $frequency_date_start_array = explode(' ',$frequency_date_start);
-  
+  $frequency_date_start_array = explode(' ', $frequency_date_start);
 
-  if($frequency_date_start_array[0] == $current_date) {
-   
-    
+  if ($frequency_date_start_array[0] == $current_date) {
+    $service_details = node_load($association_nid);
+    $delivery_mode = $service_details->field_service_delivery_mode[LANGUAGE_NONE][0]['value'];
     itg_mobile_services_feed_generator_of_contents($delivery_mode, $node);
   }
-  
-  
-
-    $scheduler_time = strtotime($frequency_date_start);
-    $web_url = get_weburl_for_mobile_services('mobile_services', $node);
-
-    $details_array = array('service_id' => $association_nid, 
-                             'frequency' => $frequency, 
-                             'feed_type' => $node->type,
-                             'frequency_date_start' => $frequency_date_start, 
-                             'frequency_date_end' => $frequency_date_end, 
-                             'web_url' => $web_url);
-    
-    $details = serialize($details_array);
- //p($scheduler_time);
-    $query = db_insert('itg_cron_time_scheduler');
-    $query->fields(array(
-      'content_id' => $node->nid,
-      'fid' => $node->nid,
-      'cron_type' => $node->type,
-      'last_cron_time' => $scheduler_time,
-      'scheduler_time' => $scheduler_time,
-      'cron_details' => $details,
-      'status' => true
-    )); 
-    $query->execute();
-    
-  
-  
-}
 
 
-/**
- * Get web url for client
- * @param array $node
- * @param  $dir 
- * @return url
- */
-function get_weburl_for_mobile_services($dir, $node) {  
-  global $base_url;
-  $url = $base_url.'/'.$dir.'/';
-  
-  $six_digit_random_number = mt_rand(100000, 999999);
-  $timestamps = date("Y-m-d H:i:s");
-  
-  $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
-  $frequency = $node->field_service_frequency[LANGUAGE_NONE][0]['value'];
-  $frequency_date_start = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value'];
-  $frequency_date_end = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value2'];
-  
-  //$frequency_date = isset($frequency_date_end) ?  $frequency_date_start . "_" . $frequency_date_end : $frequency_date_start; 
-  
-  //$frequency_array = array(1 => 'Daily', 2 => 'Weekly', 3 => 'Monthly');
-  
-  //$frequency_name = $frequency_array[$frequency];
-  //$frequency_name . "_" . $association_nid . "_" . $frequency_date;
-  
-  $client_name = $node->field_syndication_client_title[LANGUAGE_NONE][0]['tid'].$node->title;
-  $token = sha1($association_nid. $timestamp . $six_digit_random_number);
-  
-  return $url.$token;
+
+  $scheduler_time = strtotime($frequency_date_start);
+  // $web_url = get_weburl_for_mobile_services('mobile_services', $node);
+
+  $details_array = array('service_id' => $association_nid,
+    'frequency' => $frequency,
+    'feed_type' => $node->type,
+    'frequency_date_start' => $frequency_date_start,
+    'frequency_date_end' => $frequency_date_end,
+    'content_send' => 1);
+
+  $details = serialize($details_array);
+
+//    $query = db_insert('itg_cron_time_scheduler');
+//    $query->fields(array(
+//      'content_id' => $node->nid,
+//      'fid' => $node->nid,
+//      'cron_type' => $node->type,
+//      'last_cron_time' => $scheduler_time,
+//      'scheduler_time' => $scheduler_time,
+//      'cron_details' => $details,
+//      'status' => true
+//    )); 
+//    $query->execute();
 }
 
 /**
@@ -1311,9 +1279,6 @@ function itg_mobile_services_get_exist_content($sid, $start_time, $end_time) {
   $query->range(0, 50);
   $result = $query->execute();
   return $result;
-<<<<<<< HEAD
-}
-=======
 }
 
 /**
@@ -1330,4 +1295,3 @@ function get_weburl_for_mobile_services($dir, $client_name) {
   $token = sha1($client_name . $timestamp . $six_digit_random_number);
   return $url . $token;
 }
->>>>>>> mobile
