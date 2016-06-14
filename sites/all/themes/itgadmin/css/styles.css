@@ -3121,6 +3121,9 @@ fieldset#edit-select .form-submit {
 .node-event_backend-form .form-field-name-field-no-of-tickets .field-prefix {
   visibility: hidden;
 }
+.node-event_backend-form .form-field-name-field-story-expiry-date .form-type-textfield:first-child {
+  margin-right: 10px !important;
+}
 
 .form-select[name="field_ugc_ctype[und]"] {
   text-transform: capitalize;
@@ -3875,4 +3878,8 @@ div.node #comments h2 {
 }
 .view-view-moderation-history a {
   color: #1fb5ad;
+}
+
+[id*="field-event-highlights-values"] tbody {
+  overflow: visible;
 }
