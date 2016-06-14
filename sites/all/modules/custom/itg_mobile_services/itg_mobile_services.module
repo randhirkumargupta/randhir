@@ -186,7 +186,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       $form['reset_date_button'] = array(
         '#type' => 'button',
-        '#weight' => 8,
+        '#weight' => 7,
         '#value' => t('Reset Date'),
         '#attributes' => array(
           'id' => 'reset-date-button',
