@@ -337,7 +337,7 @@ a.button{
     }
   } 
   & + div.clearfix{
-    .form-submit{@extend .add-more; margin-left: 250px;}
+    .form-submit{@extend .add-more; margin-left: 250px; height: 34px;}
   }
 }
 .Browse-upload{
@@ -1972,7 +1972,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       z-index: 99;
     }
   }
-  > tbody > tr > td > .ajax-new-content{
+  > tbody > tr + tr > td, > tbody > tr > td > .ajax-new-content{
     > .form-submit[value="Remove"]{
       left: 172px;
     }

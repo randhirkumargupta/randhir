@@ -870,6 +870,7 @@ a.button {
 [id*="field-email-address-values"] + div.clearfix .form-submit,
 [id*="field-mega-review-review-values"] + div.clearfix .form-submit {
   margin-left: 250px;
+  height: 34px;
 }
 
 .Browse-upload .form-type-managed-file .form-managed-file + div.description, [id*="ugc-node-form"] .form-type-managed-file .form-managed-file + div.description, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .form-type-managed-file .form-managed-file + div.description, .node-newsletter_templates-form .form-field-name-field-newst-logo .form-type-managed-file .form-managed-file + div.description,
@@ -2218,7 +2219,7 @@ div.image-widget-data .ajax-progress-throbber {
   bottom: -30px;
   z-index: 99;
 }
-[id*="field-quiz-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit[value="Remove"] {
+[id*="field-quiz-add-questions-values"] > tbody > tr + tr > td > .form-submit[value="Remove"], [id*="field-quiz-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit[value="Remove"] {
   left: 172px;
 }
 [id*="field-quiz-add-questions-values"] tbody {
