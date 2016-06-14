@@ -3636,6 +3636,13 @@ div.node{
     @extend .fleft;
     @extend .full;
     margin-bottom: 30px;
+    .ajax-new-content{
+      .field-name-field-service-content-date{
+        .date-combo{
+          margin-top: 0;
+        }
+      }
+    }
   }
   .field-name-field-service-content-date{
     @extend .fleft;
@@ -3665,7 +3672,11 @@ div.node{
     }
     .form-type-textarea{
       margin-bottom: 0;
-      .form-textarea{height: 36px;}
+      .form-textarea{
+        height: 36px;
+        max-width: none;
+        width: 100%;
+      }
     }
   }
 }
@@ -3753,6 +3764,7 @@ div.node{
   .form-field-name-field-poll-end-date{
     .form-type-textfield:first-child{
       margin-right: 10px !important;
+      span.error{padding-left: 0;}
     }
   }
 }
