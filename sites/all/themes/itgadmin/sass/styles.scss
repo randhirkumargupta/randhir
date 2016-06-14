@@ -2157,6 +2157,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .field-name-field-poll-question-video, 
   .field-name-field-audio{
     @extend .choose-audio-video-file;
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
   }
   .field-name-field-quiz-answer-image{
     .form-managed-file{
@@ -2184,7 +2187,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       @extend .dib;
       @extend .full;
       .field{
-        padding: 0;
+        padding: 0 0 5px;
+        vertical-align: top;
       }
       .field-label{
         @extend .fleft;
@@ -2193,6 +2197,12 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       }
       .field-items{
         overflow: hidden;
+        float: none;
+        > .field-item + .field-item{
+          border-top: 1px solid #d9d9d9;
+          padding-top: 6px;
+          margin-top: 5px;
+        }
       }
     }
   }
