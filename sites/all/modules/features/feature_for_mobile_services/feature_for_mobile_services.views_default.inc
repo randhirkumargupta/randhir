@@ -332,6 +332,11 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Customer Name';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Content Sharing mode */
+  $handler->display->display_options['fields']['field_content_sharing_mode']['id'] = 'field_content_sharing_mode';
+  $handler->display->display_options['fields']['field_content_sharing_mode']['table'] = 'field_data_field_content_sharing_mode';
+  $handler->display->display_options['fields']['field_content_sharing_mode']['field'] = 'field_content_sharing_mode';
+  $handler->display->display_options['fields']['field_content_sharing_mode']['label'] = 'Content Sharing Mode';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
