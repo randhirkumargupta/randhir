@@ -77,12 +77,12 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   );
   $form['fb_wrap']['img_schedule_time'] = array(
     '#type' => 'date_popup',
-    '#title' => t("Image Publish Time"),
-    '#description' => t('Please select schedule time'),
+    '#title' => t("Facebook image schedule time"),    
     '#required' => TRUE,
-    '#date_format' => 'd/m/Y',
+    '#date_format' => 'Y-m-d H:i',
     '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
-    '#default_value' => date('Y-m-d'),
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'Y-m-d H:i:s'),    
+    '#date_timezone' => date_default_timezone(),
   );
   
   $form['fb_wrap']['itg_facebook_video_text'] = array(
@@ -112,8 +112,15 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
       ),      
     ),
+  );  
+  $form['fb_wrap']['video_schedule_time'] = array(
+    '#type' => 'date_popup',
+    '#title' => t("Facebook video schedule time"),    
+    '#date_format' => 'Y-m-d H:i',
+    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'Y-m-d H:i:s'),    
+    '#date_timezone' => date_default_timezone(),
   );
-  
   
   
   $form['twit_wrap'] = array(
@@ -156,6 +163,15 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       ),      
     ),
   );
+  
+  $form['twit_wrap']['tw_img_schedule_time'] = array(
+    '#type' => 'date_popup',
+    '#title' => t("Twitter image schedule time"),    
+    '#date_format' => 'Y-m-d H:i',
+    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'Y-m-d H:i:s'),    
+    '#date_timezone' => date_default_timezone(),
+  );
 
   $form['twit_wrap']['field_story_twitter_video_desc'] = array(
     '#type' => 'textfield',
@@ -183,6 +199,15 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
       ),      
     ),
+  );
+  
+  $form['twit_wrap']['tw_vid_schedule_time'] = array(
+    '#type' => 'date_popup',
+    '#title' => t("Twitter video schedule time"),    
+    '#date_format' => 'Y-m-d H:i',
+    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'Y-m-d H:i:s'),    
+    '#date_timezone' => date_default_timezone(),
   );
   
   $form['ctype'] = array(
