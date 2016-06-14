@@ -10,13 +10,13 @@
  */
 
 function feed_generator_of_contents($data) {
-       
+    
     switch ($data['feed_type']) {
       case 'xml':
         $file_path = itg_syndication_generate_xml($data);
         break;
       case 'rss':
-        $file_path = itg_syndication_generate_rss($data);
+        //$file_path = itg_syndication_generate_rss($data);
         break;
       case 'mrss':
 
@@ -31,7 +31,7 @@ function feed_generator_of_contents($data) {
         watchdog('syndication_stf', 'I am in queue!');
         break;
       case 'html':
-        $file_path = itg_syndication_mail_syndication($data);
+        //$file_path = itg_syndication_mail_syndication($data);
         break;
     }
       
@@ -45,7 +45,9 @@ function feed_generator_of_contents($data) {
  * @param array $syndication_node
  */
 function itg_syndication_generate_xml($data) {
-  $syndication_node = unserialize($data->syndication);
+  
+  //work start this line
+  $syndication_node = unserialize($data['syndication']);
   $file_path = drupal_realpath('public://');
   $dom = new DOMDocument('1.0', 'UTF-8');
   $dom->formatOutput = true;
@@ -58,38 +60,60 @@ function itg_syndication_generate_xml($data) {
     $root->appendChild($result);
     $result->setAttribute('id', $key + 1);
     $result->appendChild($dom->createElement('title', $node->title));
-    $result->appendChild($dom->createElement('body', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
+    $result->appendChild($dom->createElement('body', '<![CDATA['.strip_tags($node->body[LANGUAGE_NONE][0]['value']).']]>'));
     $result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
+    
+    /*$result1 = $dom->createElement('body');
+    $result->appendChild($result1);
+    $result1->appendChild($dom->createElement('CDATA', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));*/
+    
   }
-
-  $dom->save($file_path . '/' . $data->client_title . '.xml') or die('XML Create Error');
-  drupal_set_message('xml file has been created.', 'status');
+  
+  $timestamp = time();
+  $token = sha1($data['client_title']. $timestamp);
+  $dt = date('d-m-Y');
+  
+  if (!empty($data['client_title'])) {
+    $client_title = $data['client_title'];
+  } else {
+      $client_title = 'syndication';
+  }
+  
+  $xml_name = 'xml/'.$client_title.'_'.$data['section_id'].'_'.$dt.'_'.$token;
+  
+  $dom->save($file_path . '/' . $xml_name . '.xml') or die('XML Create Error');  
   
   $delivery_mode = $data['delivery_mode'];
 
   if (!filter_var($delivery_mode, FILTER_VALIDATE_EMAIL) === false) {
     $delivery_mode_type = 'Email';
   } else {
-      $delivery_mode_type = 'FTP';
+      $check_mode = explode('/syndication/', $delivery_mode);
+      if (isset($check_mode[1])) {
+        $delivery_mode_type = 'web_url';
+      } else {
+          $delivery_mode_type = 'FTP';
+      }
   }
   
   // Decide sharing mode
   switch ($delivery_mode_type) {
     // 1. Fetch web URL (our server)
-    case '1':
+    case 'web_url':
+      itg_syndication_web_url_syndication($data, $file_path . '/' . $xml_name . '.xml');
       break;
     // 2. Via FTP location
       
     case 'FTP':
-      itg_syndication_ftp_syndication($data, $file_path . '/' . $data->client_title . '.xml');
+      itg_syndication_ftp_syndication($data, $file_path . '/' . $xml_name . '.xml');
       break;
     // 3. Via Email
     case 'Email':
-      itg_syndication_mail_syndication($data, $file_path . '/' . $data->client_title . '.xml');
+      itg_syndication_mail_syndication($data, $file_path . '/' . $xml_name . '.xml');
       break;
   }
   
-  return  $file_path . '/' . $data->title . '.xml';
+  return  $xml_name . '.xml';
 }
 
 /**
@@ -168,6 +192,23 @@ function itg_syndication_ftp_syndication($data, $file_path) {
 
   // close the connection
   ftp_close($conn_id);
+}
+
+/**
+ * function to feed for syndication by ftp.
+ * @param type $data
+ * @param type $file_path
+ */
+function itg_syndication_web_url_syndication($data, $file_path) {
+  
+  $query = db_insert('itg_syndication_feed_url');
+    $query->fields(array(
+      'xml_name' => $file_path,
+      'client_feed_url' => $data['delivery_mode'],      
+      'created_date' => time(),
+      'status' => 1
+    )); 
+    $query->execute();
 }
 
 /**

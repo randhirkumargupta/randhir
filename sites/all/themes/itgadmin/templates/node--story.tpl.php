@@ -8,7 +8,7 @@
           $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
           ?>
           <div class="itg-smi">
-              <button data-id="smi-popup" class="btn data-popup-link">Create Social media</button>
+              <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
           </div>
           <div id="smi-popup" class="itg-popup">
               <div class="popup-body">
@@ -92,21 +92,15 @@
                       case 'facebook':
                         print render($content['field_story_facebook_narrative']);
                         print render($content['field_story_facebook_image']);
+                        print render($content['field_story_facebook_vdescripti']);
+                        print render($content['field_story_facebook_video']);
 
                         break;
                       case 'twitter':
                         print render($content['field_story_tweet']);
                         print render($content['field_story_tweet_image']);
-
-                        break;
-                      case 'facebook_video':
-                        print render($content['field_story_facebook_vdescripti']);
-                        print render($content['field_story_facebook_video']);
-
-                        break;
-                      case 'twitter_video':
                         print render($content['field_story_twitter_video_desc']);
-                        print render($content['field_story_twitter_video']);
+                        print render($content['field_story_twitter_video']);                        
                     }
                     ?>
                   <?php endforeach; ?>
