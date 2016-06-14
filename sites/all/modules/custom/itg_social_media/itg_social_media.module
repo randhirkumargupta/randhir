@@ -155,7 +155,7 @@ function itg_social_media_node_type($nid) {
  * @global string $base_url
  */
 function itg_social_media_facebook_post($fid, $desc, $type, $node) {
-  global $base_url;
+  global $base_url, $user;
   // Set file status to permanent
   $file = file_load($fid);
   // Get file real path
@@ -198,7 +198,28 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node) {
   catch (Facebook\Exceptions\FacebookSDKException $e) {
     // When validation fails or other local issues
     drupal_set_message(t('Facebook SDK returned an error: ' . $e->getMessage()), 'error');
-  }  
+  }
+  // get response
+  $graphNode = $response->getGraphNode();
+  
+  if (isset($graphNode['id'])) {
+    $pre_save = array(
+      'nid' => $node->nid,
+      'node_title' => $node->title,
+      'username' => $user->name,
+      'social_media' => 'facebook ' . $type,
+      'created' => REQUEST_TIME,
+    );
+    
+    // iNSERT INTO DATABASE
+    $query = db_insert('itg_social_media_log');
+    $query->fields($pre_save)
+        ->execute();
+    // Set message
+    drupal_set_message(t('Facebook ' . $type . 'has been posted'), 'status');
+  }
+
+
 }
 
 /**
@@ -280,6 +301,8 @@ function itg_social_media_form_submit($form, &$form_state) {
  * @param stdObject $node
  */
 function itg_social_media_twitter_photo_post($fid, $desc, $node) {
+  global $base_url;
+  
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
   // Set image status permanent
@@ -309,6 +332,22 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
     'media_ids' => $media_id
   ]);
   watchdog('twitter image', '<pre>' . print_r($reply, true) . '</pre>');
+  if (iset($reply->id)) {
+    $pre_save = array(
+      'nid' => $node->nid,
+      'node_title' => $node->title,
+      'username' => $user->name,
+      'social_media' => 'Twitter Image',
+      'created' => REQUEST_TIME,
+    );
+    
+    // iNSERT INTO DATABASE
+    $query = db_insert('itg_social_media_log');
+    $query->fields($pre_save)
+        ->execute();
+    // Set message
+    drupal_set_message(t('Facebook image has been posted'), 'status');
+  }
 }
 
 /**
@@ -318,6 +357,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
  * @param stdObject $node
  */
 function itg_social_media_tvideo_post($fid, $desc, $node) {
+  global $base_url;
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
   // Set image status permanent
@@ -372,4 +412,20 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
     'media_ids' => $media_id
   ]);
   watchdog('twitter video', '<pre>' . print_r($reply, true) . '</pre>');
+  if (iset($reply->id)) {
+    $pre_save = array(
+      'nid' => $node->nid,
+      'node_title' => $node->title,
+      'username' => $user->name,
+      'social_media' => 'Twitter Video',
+      'created' => REQUEST_TIME,
+    );
+    
+    // iNSERT INTO DATABASE
+    $query = db_insert('itg_social_media_log');
+    $query->fields($pre_save)
+        ->execute();
+    // Set message
+    drupal_set_message(t('Facebook video has been posted'), 'status');
+  }
 }
