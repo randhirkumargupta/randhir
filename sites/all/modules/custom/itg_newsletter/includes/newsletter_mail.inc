@@ -133,12 +133,7 @@ foreach($story_nodes as $news_arr) {
   $title = $news_detail->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
   $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
   $thumbnail = image_style_url("thumbnail", $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-
-  if($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal'){
-    $link = $base_url.'/node/'.$news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
-  } else {
-    $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
-  }
+  $link = $base_url.'/node/'.$news_detail->nid;
 
   $news_content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img src="'.$thumbnail.'" alt="" /></td>
