@@ -10,38 +10,45 @@
  * @return array
  */
 function itg_newsletter_schema() {
-  $schema['itg_newsletter'] = array(
-      'description' => 'Table for itg_newsletter module.',
+  $schema['itg_cron_newsletter'] = array(
+      'description' => 'Table for itg_newsletter module',
       'fields' => array(
           'id' => array(
-              'description' => 'The primary identifier for a table.',
+              'description' => 'The Primary Id',
               'type' => 'serial',
               'unsigned' => TRUE,
               'not null' => TRUE,
           ),
-          'uid' => array(
-              'description' => 'User Id.',
+          'nid' => array(
+              'description' => 'Node Id',
               'type' => 'int',
               'unsigned' => TRUE,
               'not null' => TRUE,
               'default' => 0,
           ),
-          'email' => array(
-              'description' => 'User Email.',
+          'type' => array(
+              'description' => 'Node Type',
               'type' => 'varchar',
               'length' => 255,
               'not null' => TRUE,
               'default' => '',
           ),
-          'website' => array(
-              'description' => 'Website Name.',
+          'scheduled_time' => array(
+              'description' => 'Cron Scheduled Time',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+         'frequency' => array(
+              'description' => 'Frequency',
               'type' => 'varchar',
               'length' => 255,
               'not null' => TRUE,
               'default' => '',
           ),
           'status' => array(
-              'description' => 'Subscription Status.',
+              'description' => 'Status',
               'type' => 'int',
               'unsigned' => TRUE,
               'not null' => TRUE,
