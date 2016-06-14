@@ -3394,6 +3394,7 @@ div.node{
           left: 590px;
           position: absolute;
           top: 146px;
+          z-index: 999;
           &.inactive{
             pointer-events: none;
             opacity: .5;
