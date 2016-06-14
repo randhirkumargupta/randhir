@@ -17,8 +17,8 @@ function itg_newsletter_menu(){
     );
     
     $items['test_mail'] = array(
-      'page callback' => 'itg_newsletter_send_automatic_newsletter',
-      //'file' => 'includes/newsletter_mail.inc',
+      'page callback' => '_update_newsletter_cron_tbl',
+      'file' => 'includes/newsletter_mail.inc',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
     );
@@ -180,17 +180,25 @@ function itg_newsletter_form_after_build($form, &$form_state){
   global $user, $base_url;
   
   //Hide default lavel and add dynamic label
-  $form['field_newsl_add_news'][LANGUAGE_NONE]['#title'] = '';
-  for($i = 0; $i <= $form['field_newsl_add_news']['und']['#max_delta']; $i++) {
-    $count = $i+1;
-    $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News ').$count;
-    
-    $form['field_newsl_add_news']['und'][$i]['get_content_btn'] = array(
-           '#type' => 'item',
-           '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div>',
-           '#weight' => 3,
-    );
-  }
+  if($form_state['node']->type == 'newsletter') {
+    $form['field_newsl_add_news'][LANGUAGE_NONE]['#title'] = '';
+    for($i = 0; $i <= $form['field_newsl_add_news']['und']['#max_delta']; $i++) {
+      $count = $i+1;
+      $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News ').$count;
+
+      $form['field_newsl_add_news']['und'][$i]['get_content_btn'] = array(
+             '#type' => 'item',
+             '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div>',
+             '#weight' => 3,
+      );
+//      $form['field_newsl_add_news']['und'][$i]['loader'] = array(
+//             '#type' => 'item',
+//             '#markup' => '<div style="width:200px" id ="newsletter-loader"></div>',
+//             '#weight' => 4,
+//      );
+      unset($form['field_newsl_add_news'][LANGUAGE_NONE][$i]['field_news_ctype']);
+    }
+ }
  
   //Extract type of node
   if(arg(0) == 'node'){
@@ -414,7 +422,9 @@ function itg_newsletter_node_update($node){
         //Update cron table
         db_update('itg_cron_newsletter')
                 ->fields(array(
+                    'type' => $newsletter_type,
                     'scheduled_time' => $scheduled_time,
+                    'frequency' => $frequency,
                     'status' => 0,
                 ))
                 ->condition('nid', $node->nid, '=')
@@ -534,6 +544,7 @@ function itg_newsletter_send_automatic_newsletter(){
   //Include newsletter mail file to send mail
   module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
   
+  //For manual
   $query = db_select('itg_cron_newsletter', 'cn');
   $query->fields('cn')
           ->condition('cn.status', 0, '=')
@@ -552,4 +563,42 @@ function itg_newsletter_send_automatic_newsletter(){
     }
   }
   
+  //For Automatic
+  $query_auto = db_select('itg_cron_newsletter', 'cn');
+  $query_auto->fields('cn')
+          ->condition('cn.status', 0, '=')
+          ->condition('cn.type', 'automatic', '=')
+          ->condition('cn.scheduled_time', time(), '<=');
+  $result_auto = $query_auto->execute();
+  while($record_auto = $result_auto->fetchAssoc()){
+    $automatic_nids[] = $record_auto['nid'];
+  }
+  
+  //Send automatic mail
+  if(!empty($automatic_nids)){
+    foreach($automatic_nids as $auto_nids){
+      $node_auto = node_load($auto_nids);
+      _send_mail_newsletter($node_auto, 'automatically' , 'stories');
+    }
+  }
+}
+
+/**
+ * Get top 20 stories
+ * @param int $nid
+ * @return int
+ */
+function itg_newsletter_get_top_stories($nid){
+  $query = db_select('node', 'n');
+  $query->fields('n')
+          ->condition('n.status', 1, '=')
+          ->condition('n.type', 'story', '=')
+          ->orderBy('n.nid', 'DESC')
+          ->range(0, 20);
+
+  $result = $query->execute();
+  while($records = $result->fetchAssoc()){
+    $nids[] = $records['nid'];
+  }
+  return $nids;
 }

@@ -337,7 +337,7 @@ a.button{
     }
   } 
   & + div.clearfix{
-    .form-submit{@extend .add-more; margin-left: 250px;}
+    .form-submit{@extend .add-more; margin-left: 250px; height: 34px;}
   }
 }
 .Browse-upload{
@@ -1972,7 +1972,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       z-index: 99;
     }
   }
-  > tbody > tr > td > .ajax-new-content{
+  > tbody > tr + tr > td, > tbody > tr > td > .ajax-new-content{
     > .form-submit[value="Remove"]{
       left: 172px;
     }
@@ -2157,6 +2157,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .field-name-field-poll-question-video, 
   .field-name-field-audio{
     @extend .choose-audio-video-file;
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
   }
   .field-name-field-quiz-answer-image{
     .form-managed-file{
@@ -2184,7 +2187,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       @extend .dib;
       @extend .full;
       .field{
-        padding: 0;
+        padding: 0 0 5px;
+        vertical-align: top;
       }
       .field-label{
         @extend .fleft;
@@ -2193,6 +2197,12 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       }
       .field-items{
         overflow: hidden;
+        float: none;
+        > .field-item + .field-item{
+          border-top: 1px solid #d9d9d9;
+          padding-top: 6px;
+          margin-top: 5px;
+        }
       }
     }
   }
@@ -2891,6 +2901,11 @@ fieldset#edit-select{
       visibility: hidden;
     }
   }
+  .form-field-name-field-story-expiry-date{
+    .form-type-textfield:first-child{
+      margin-right: 10px !important;
+    }
+  }
 }
 .form-select[name="field_ugc_ctype[und]"]{
     text-transform: capitalize;
@@ -3379,6 +3394,7 @@ div.node{
           left: 590px;
           position: absolute;
           top: 146px;
+          z-index: 999;
           &.inactive{
             pointer-events: none;
             opacity: .5;
@@ -3636,6 +3652,13 @@ div.node{
     @extend .fleft;
     @extend .full;
     margin-bottom: 30px;
+    .ajax-new-content{
+      .field-name-field-service-content-date{
+        .date-combo{
+          margin-top: 0;
+        }
+      }
+    }
   }
   .field-name-field-service-content-date{
     @extend .fleft;
@@ -3665,7 +3688,11 @@ div.node{
     }
     .form-type-textarea{
       margin-bottom: 0;
-      .form-textarea{height: 36px;}
+      .form-textarea{
+        height: 36px;
+        max-width: none;
+        width: 100%;
+      }
     }
   }
 }
@@ -3753,6 +3780,7 @@ div.node{
   .form-field-name-field-poll-end-date{
     .form-type-textfield:first-child{
       margin-right: 10px !important;
+      span.error{padding-left: 0;}
     }
   }
 }
@@ -3834,4 +3862,27 @@ div.node{
       &+.form-text + span.error{padding-left: 0;}
     }
   }
+}
+.view-view-moderation-history{
+  padding: 0 10px;
+  .views-row{
+    padding: 10px 0;
+    &+.views-row{
+      border-top: 1px solid #fff;
+    }
+    .views-label{
+      @extend .fleft;
+      width: 120px;
+    }
+    .field-content{
+      @extend .db;
+      @extend .of-hide;
+    }
+  }
+  a{
+    color: #1fb5ad;
+  }
+}
+[id*="field-event-highlights-values"] tbody{
+  overflow: visible;
 }

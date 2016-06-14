@@ -56,15 +56,16 @@
                           <?php if (isset($node->field_content_sharing_mode)): ?> 
                             <h2><?php print t('Sharing Mode'); ?></h2>
                             <?php
-                            if ($node->field_content_sharing_mode[0]['value'] == 1) {
+                            watchdog('content_sharing', '<pre>' .print_r($node->field_content_sharing_mode, 1) . '</pre>');
+                            if (trim($node->field_content_sharing_mode[0]['value']) == 1) {
                               print render($content['field_service_fetch_link']);
                             }
-                            else if ($node->field_content_sharing_mode[0]['value'] == 2) {
+                            else if (trim($node->field_content_sharing_mode[0]['value']) == 2) {
                               print render($content['field_ftp_ip_address']);
                               print render($content['field_ftp_username']);
                               print render($content['field_ftp_password']);
                             }
-                            else if ($node->field_content_sharing_mode[0]['value'] == 3) {
+                            else if (trim($node->field_content_sharing_mode[0]['value']) == 3) {
                               print render($content['field_service_email_address']);
                             }
                             ?>

@@ -168,20 +168,15 @@
       $('body').on('click', '.newsletter-get-content', function() {
         var contentId = $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
         var relval = $(this).attr('rel');
-        var hasloader = $(this).parent().find('div').hasClass('.ajax-progress-throbber');
-          if(!hasloader){
-            $(this).after('<div class="ajax-progress ajax-progress-throbber"><div class="throbber"> </div><div class="message">Please wait...</div></div>');
-          }
+        
+        var loaderImg = base_url+'/sites/all/modules/custom/itg_newsletter/js/loader.gif';
+        //$("#newsletter-loader").html('<img width="100px" height="100px" src="'+loaderImg+'">');
         
         if(contentId === ''){
           alert('Please select Content ID.');
           $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').focus();
         } 
         else {
-          if (!($(this).parent().children().hasClass('ajax-progress-throbber'))) {
-            $(this).parent().append('<div class="ajax-progress ajax-progress-throbber"><div class="throbber">&nbsp;</div></div>');
-            $(this).addClass('inactive');
-          }
           var contentIdArr = contentId.split(' (');
           $.ajax({
            url: Drupal.settings.basePath + 'newsletter_data',
@@ -190,14 +185,13 @@
            cache: false,
            dataType: "JSON",
            success: function(data) {
+              //$("#newsletter-loader").hide();
               $('.newsletter-get-content[rel="' + relval + '"]').removeClass('inactive');
               $('.newsletter-get-content[rel="' + relval + '"]').parent().find('.ajax-progress-throbber').hide();
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-title').find('.form-text').val(data.title);
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-kicker').find('.form-textarea').val(data.kicker);
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-imce .form-text').attr('value', data.uri);
               $('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-imce .form-submit').triggerHandler('mousedown');
-//              $('#edit-field-newsl-add-news-und-0-field-news-thumbnail-und-0-upload-imce-path').attr('value', data.uri);
-//              $('#edit-field-newsl-add-news-und-0-field-news-thumbnail-und-0-upload-imce-select').triggerHandler('mousedown');
            },
             error: function() {
               return false;

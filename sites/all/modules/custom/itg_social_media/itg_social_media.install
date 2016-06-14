@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Create table itg_social_media_log table on back end.
+ * It will holds the logs of social media
+ */
+
+/**
+ * Implements hook_schema()
+ * {@inheritdoc}
+ */
+function itg_social_media_schema() {
+  $schema['itg_social_media_logs'] = array(
+    'description' => 'The base table for social media log.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a log.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => t('Node id of the shared content.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'node_title' => array(
+        'description' => 'The node title of the story.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),      
+      'username' => array(
+        'description' => 'Username of the user who have promoted the content.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'social_media' => array(
+        'description' => 'Name of the social media where content has been published.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'description' => t('The created date for the single record'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+    ),
+    'indexes' => array(
+      'username' => array('username'),
+      'log_created' => array('created'),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
