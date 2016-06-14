@@ -180,17 +180,25 @@ function itg_newsletter_form_after_build($form, &$form_state){
   global $user, $base_url;
   
   //Hide default lavel and add dynamic label
-  $form['field_newsl_add_news'][LANGUAGE_NONE]['#title'] = '';
-  for($i = 0; $i <= $form['field_newsl_add_news']['und']['#max_delta']; $i++) {
-    $count = $i+1;
-    $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News ').$count;
-    
-    $form['field_newsl_add_news']['und'][$i]['get_content_btn'] = array(
-           '#type' => 'item',
-           '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div>',
-           '#weight' => 3,
-    );
-  }
+  if($form_state['node']->type == 'newsletter') {
+    $form['field_newsl_add_news'][LANGUAGE_NONE]['#title'] = '';
+    for($i = 0; $i <= $form['field_newsl_add_news']['und']['#max_delta']; $i++) {
+      $count = $i+1;
+      $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News ').$count;
+
+      $form['field_newsl_add_news']['und'][$i]['get_content_btn'] = array(
+             '#type' => 'item',
+             '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div>',
+             '#weight' => 3,
+      );
+//      $form['field_newsl_add_news']['und'][$i]['loader'] = array(
+//             '#type' => 'item',
+//             '#markup' => '<div style="width:200px" id ="newsletter-loader"></div>',
+//             '#weight' => 4,
+//      );
+      unset($form['field_newsl_add_news'][LANGUAGE_NONE][$i]['field_news_ctype']);
+    }
+ }
  
   //Extract type of node
   if(arg(0) == 'node'){
