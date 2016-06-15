@@ -3527,7 +3527,7 @@ div.node #comments h2 {
 [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper .newsletter-get-content {
   left: 590px;
   position: absolute;
-  top: 146px;
+  top: 80px;
   z-index: 999;
 }
 [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper .newsletter-get-content.inactive {
