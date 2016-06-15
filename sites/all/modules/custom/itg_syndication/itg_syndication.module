@@ -1,0 +1,749 @@
+<?php
+
+module_load_include('inc', 'itg_syndication', 'includes/itg_syndication.manual_feed');
+
+module_load_include('inc', 'itg_syndication', 'includes/itg_syndication');
+
+/**
+ * Implements hook_menu().
+ */
+function itg_syndication_menu() {
+  $items['itg-syndication-feed'] = array(      
+      'page callback' => 'get_syndication_content_details',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,      
+  );
+  
+  $items['syndication/feed/%'] = array(      
+      'page callback' => 'get_syndication_feed_byurl',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,      
+  );
+  
+  $items['syndication_test'] = array(      
+      'page callback' => 'get_syndication_test',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,      
+  );
+  return $items;
+}
+
+
+
+
+/**
+ * Implement hook_permissions()
+ */
+function itg_syndication_permission() {
+  return array(
+    'administer itg_syndication settings' => array(
+      'title' => t('Administer Syndication Feed Generator'),
+      'description' => t('Generate feeds for syndication.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_syndication_form_syndication_client_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#after_build'][] = 'itg_syndication_after_build';
+  $form['actions']['submit']['#submit'][] = 'itg_syndication_change_message'; 
+}
+
+/**
+ * After build callback function.
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_syndication_after_build($form, &$form_state) {
+  foreach ($form['field_syndication_ftp_details'][LANGUAGE_NONE] as $key => $item) {
+    if (is_numeric($key)) {
+      $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_name'][LANGUAGE_NONE][0]['value']['#title'] = '';
+      $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value']['#title'] = '';
+      $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_username'][LANGUAGE_NONE][0]['value']['#title'] = '';
+      $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_password'][LANGUAGE_NONE][0]['value']['#title'] = '';
+      
+      $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_name'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('Enter FTP Name');
+      $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('Enter FTP URL');
+      $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_username'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('Enter FTP Username');
+      $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_password'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('Enter FTP Password');
+    }
+  }
+  
+  unset($form['actions']['delete']);
+  
+  $form['field_email_address']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_syndication_delivery_mode[und][Email]"]' => array('checked' => TRUE),
+      )
+    );
+  
+  // hide Web URL 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-service-fetch-link").hide();
+              jQuery("#edit-field-syndication-ftp-details-und-0-remove-button").hide();
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    
+    
+   $form['field_syndication_ftp_details']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_syndication_delivery_mode[und][FTP]"]' => array('checked' => TRUE),
+      )
+    );  
+ 
+  // Add cancel button to create/edit astro page
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'syndication-client-listing', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+  
+  $form['additional_settings']['#access'] = FALSE;
+
+  return $form;
+}
+
+/**
+ * Custom submit callback function to change message after Syndication client node save/update.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_syndication_change_message($form, &$form_state) {
+  drupal_get_messages('status');
+  if ($form_state['values']['changed'] == '') {
+    drupal_set_message(t('Client created successfully.'));
+  }
+  else {
+    drupal_set_message(t('Client updated successfully.'));
+  }
+}
+
+/**
+ * Implements hook_form_FORMID_alter()
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_state, $form_id) {
+  
+  //code for client related mode display in dropdown
+    $syndication_mode = 'field_syndication_mode';
+    $syndication_rule_title = 'field_syndication_rule_title';
+    $rule_title = $form[$syndication_rule_title][LANGUAGE_NONE]['#entity']->field_syndication_rule_title[LANGUAGE_NONE][0]['value'];
+    
+    $form[$syndication_rule_title][LANGUAGE_NONE]['#options'] = itg_syndication_get_client();
+    if (isset($rule_title)) {
+      $form[$syndication_rule_title][LANGUAGE_NONE]['#default_value'] = $rule_title;      
+    }
+    
+    $form[$syndication_rule_title][LANGUAGE_NONE]['#ajax'] = array(
+                    'event' => 'change',
+                    'callback' => 'itg_syndication_mode_ajax_callback',
+                    'wrapper' => $syndication_mode.'_replace',
+            );
+    
+    $form['field_syndication_rule_details']['#prefix'] = '<div id="'.$syndication_mode.'_replace">';
+    $form['field_syndication_rule_details']['#suffix'] = '</div>';
+    
+    //Get mode 
+    if (isset($form_state['input'][$syndication_rule_title][LANGUAGE_NONE])) {
+      $op = itg_syndication_get_mode($form_state['input'][$syndication_rule_title][LANGUAGE_NONE]);
+    } else if (isset($rule_title)) {      
+      $op = itg_syndication_get_mode($rule_title);
+    } else {
+      $op = array('_none' => '- None -');
+    }
+    
+    foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
+      if (is_numeric($key)) {
+        $syndication_mode_value = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['#entity']->field_syndication_mode[LANGUAGE_NONE][0]['value'];
+        
+        $form['field_syndication_rule_details'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#options'] = $op;
+        if(isset($syndication_mode_value)) {
+          $form['field_syndication_rule_details'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#default_value'] = $syndication_mode_value;
+        }
+        unset($form['field_syndication_rule_details'][LANGUAGE_NONE][$key][$syndication_mode]['#validated']);
+      }
+    }   
+    
+    $form['#after_build'][] = 'itg_syndication_rule_after_build';
+}
+
+/**
+ * After build callback function.
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_syndication_rule_after_build($form, &$form_state) { 
+  
+  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_rule.js', array('weight' => 1));
+  
+  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  $op = array();
+  foreach ($tax as $key => $val) {
+    $op[$val->tid] = $val->name;
+  } 
+  
+  foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
+    if (is_numeric($key)) {
+      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#options'] = $op;
+      
+    }
+  }    
+    
+  // Add cancel button to create/edit
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'syndication-rule-listing', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+  
+  $form['additional_settings']['#access'] = FALSE;
+
+  return $form;
+}
+
+/**
+* Ajax callback for syndication_mode dropdown
+* @param type $form
+* @param type $form_state
+*/
+function itg_syndication_mode_ajax_callback($form, $form_state) {
+  return $form['field_syndication_rule_details'];   
+}
+
+
+/**
+* Ajax callback for syndication_mode dropdown
+* @param type $form
+* @param type $form_state
+*/
+function itg_syndication_delivery_mode_ajax_callback($form, $form_state) {  
+  return $form['client_delivery_mode'];   
+}
+
+
+/**
+ * Get mode for syndication .
+ * @param string $title
+ * @param string $sharing_mode
+ * @param integer $nid
+ * @return integer
+ */
+function itg_syndication_get_mode($client_name) {
+  
+  $client = explode('-', $client_name);
+  $client_description = $client[1];
+  $client_title = $client[0];
+  $itg_query = db_select('node', 'n');
+  $itg_query->condition('n.title', $client_description)
+      ->fields('n', array('nid'));
+  $itg_query->join('field_data_field_syndication_client_title', 'sc', 'n.nid = sc.entity_id');
+  $itg_query->join('taxonomy_term_data', 'term', 'term.tid = sc.field_syndication_client_title_tid');
+  $itg_query->condition('term.name', $client_title);
+  $itg_result = $itg_query->execute()->fetchField();
+
+  $node = node_load($itg_result);
+  $data[] = '- None -';
+  
+  //Code for FTP
+  foreach($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {   
+    $field_collection_item = entity_load('field_collection_item', array($val['value']));
+    $ftp_name = $field_collection_item[$val['value']]->field_syndication_ftp_name[LANGUAGE_NONE][0]['value'];
+    $data[$ftp_name] = $ftp_name;
+  }
+  
+  //Code for Email id
+  foreach($node->field_email_address[LANGUAGE_NONE] as $key => $val) {
+    $data[$val['value']] = $val['value'];
+  }
+  
+  //Code for Weburl
+  if (isset($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
+    $data[$node->field_service_fetch_link[LANGUAGE_NONE][0]['value']] = $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'];
+  }
+  
+  return $data;
+}
+
+/**
+ * Check duplicate client name.
+ * @param string $title
+ * @param string $sharing_mode
+ * @param integer $nid
+ * @return integer
+ */
+function itg_syndication_check_duplicate($client_title, $client_description) { 
+  $itg_query = db_select('node', 'n');
+  $itg_query->condition('n.title', $client_description)
+      ->fields('n', array('nid'));
+  $itg_query->join('field_data_field_syndication_client_title', 'sc', 'n.nid = sc.entity_id');
+  $itg_query->condition('sc.field_syndication_client_title_tid', $client_title);
+  $itg_result = $itg_query->execute()->fetchField();
+
+  return $itg_result;
+}
+
+/**
+ * Check duplicate client name for rule.
+ * @param string $client_title 
+ * @return integer
+ */
+function itg_syndication_check_client_rule($client_title) { 
+  $itg_query = db_select('field_data_field_syndication_rule_title', 'rule');
+  $itg_query->condition('rule.field_syndication_rule_title_value', $client_title)
+      ->fields('rule', array('entity_id')); 
+  $itg_result = $itg_query->execute()->fetchField();
+
+  return $itg_result;
+}
+
+/**
+ * Callback function for client list
+ * @param string $voc_name Vocabulary name
+ * @return array
+ */
+function itg_syndication_get_client() {
+  
+  // Create default option for list
+  $data['_none'] = '- Select -';
+  
+  $itg_query = db_select('node', 'n');
+      $itg_query->fields('tax', array('name'));
+      $itg_query->fields('n', array('nid', 'title'));
+      $itg_query->join('field_data_field_syndication_client_title', 'sc', 'n.nid = sc.entity_id');
+      $itg_query->join('taxonomy_term_data', 'tax', 'tax.tid = sc.field_syndication_client_title_tid');
+      $itg_query->condition('n.type', 'syndication_client');
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  foreach ($itg_result as $itg_val) {
+    $data[$itg_val->name.'-'.$itg_val->title] = $itg_val->name.'-'.$itg_val->title;
+  }
+  
+  return $data;
+}
+
+/**
+ * Implemtnts hook_node_validate()
+ * @param Object $node
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_syndication_node_validate($node, $form, &$form_state) {
+  
+  if ($node->type == 'syndication_client' && $form_state['clicked_button']['#value'] != 'Delete') {
+    
+    foreach($node->field_syndication_delivery_mode[LANGUAGE_NONE] as $key_mode => $val_mode) {
+      if ($val_mode['value'] == 'FTP') {
+        
+        if ($node->field_syndication_ftp_details[LANGUAGE_NONE][0]['field_syndication_ftp_name'][LANGUAGE_NONE][0]['value'] == '') {
+          form_set_error('field_syndication_ftp_name', t('FTP Name field is required.'));
+        }
+        if ($node->field_syndication_ftp_details[LANGUAGE_NONE][0]['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value'] == '') {
+          form_set_error('field_syndication_ftp_name', t('FTP URL field is required.'));
+        }
+        if ($node->field_syndication_ftp_details[LANGUAGE_NONE][0]['field_syndication_ftp_username'][LANGUAGE_NONE][0]['value'] == '') {
+          form_set_error('field_syndication_ftp_name', t('FTP User Name field is required.'));
+        }
+        if ($node->field_syndication_ftp_details[LANGUAGE_NONE][0]['field_syndication_ftp_password'][LANGUAGE_NONE][0]['value'] == '') {
+          form_set_error('field_syndication_ftp_name', t('FTP Password field is required.'));
+        }
+        
+        foreach($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {          
+          //validate for ftp url
+          if ($val['field_ftp_ip_address'][LANGUAGE_NONE][0]['value'] != '') {
+            if (!filter_var($val['field_ftp_ip_address'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_IP)) {
+              //form_set_error('field_syndication_ftp_url', t('FTP IP Address is not valid.'));
+            }
+          }
+        }
+       
+      } if ($val_mode['value'] == 'Email') {        
+          if ($node->field_email_address[LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_email_address', t('Mail to field is required.'));
+          }
+
+          $email_array = $node->field_email_address[LANGUAGE_NONE];
+          array_pop($email_array);
+
+          foreach ($email_array as $key_mail => $val_val) {
+            // Validate email
+            if ($val_val['value'] != '') {                
+              if (!filter_var($val_val['value'], FILTER_VALIDATE_EMAIL)) {                  
+                form_set_error('field_email_address_'.$key_mail, t('Please enter valid email address.'));
+              }               
+            }
+
+          }
+        }
+    }
+  
+   $is_dupl_client = itg_syndication_check_duplicate($node->field_syndication_client_title['und'][0]['tid'], $node->title);
+   
+   if (is_numeric($is_dupl_client) && arg(1) != $is_dupl_client) {     
+      form_set_error('title', t('client already exists.'));
+   }
+  } else if ($node->type == 'syndication_rule') {
+    foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key_time => $val_time) {
+      if (isset($val_time['field_syndication_time'][LANGUAGE_NONE][0]['value'])) {
+        if (!preg_match('/(2[0-3]|[01][0-9]):([0-5][0-9])/',$val_time['field_syndication_time'][LANGUAGE_NONE][0]['value'])) {
+          form_set_error('field_email_address', t('Please enter valid time.'));
+        }
+      }
+    }
+   
+    $is_rule_client = itg_syndication_check_client_rule($node->field_syndication_rule_title[LANGUAGE_NONE][0]['value']);
+    
+    if (is_numeric($is_rule_client) && arg(1) != $is_rule_client) {
+      form_set_error('title', t('Rule already exists for this client.'));
+    }
+    
+  }
+}
+
+
+/**
+ * Callback function for Issue list
+ * @param string $voc_name Vocabulary name
+ * @return array
+ */
+function itg_syndication_get_issue_list() {
+  
+  // Create default option for list
+  $data[''] = '- Select -';
+  
+  $itg_query = db_select('node', 'n');
+              $itg_query->fields('n', array('title'));      
+              $itg_query->condition('n.type', 'issue');              
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  foreach ($itg_result as $itg_val) {
+    $dt = date('Y-m-d', strtotime($itg_val->title));
+    $data[$dt] = date('d/m/Y', strtotime($itg_val->title));
+  }
+  
+  return $data;
+}
+
+
+/**
+ * function for syndication content details
+ * @return array
+ */
+function get_syndication_content_details() {
+  $current_time = time();
+  $cron_type = 'syndication_rule';
+  
+  $itg_query = db_select('itg_cron_time_scheduler', 'ts');
+  $itg_query->fields('ts', array('cron_details'));
+  $itg_query->fields('ts', array('last_cron_time'));
+  $itg_query->fields('ts', array('scheduler_time'));
+  $itg_query->fields('ts', array('id'));
+  $itg_query->fields('ts', array('fid'));
+  $itg_query->condition('ts.scheduler_time', $current_time, '<');
+  $itg_query->condition('ts.status', 1, '=');
+  $itg_query->condition('ts.cron_type', $cron_type, '=');
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  foreach ($itg_result as $itg_val) {
+    
+    if (!empty($itg_val->cron_details)) {
+      $data = unserialize($itg_val->cron_details);
+      $data['fid'] = $itg_val->fid;
+     
+      $content_value = get_content_id_for_syndication($data, $itg_val->last_cron_time);
+      //code for update cron time
+      update_cron_time_after_feed_generate($data, $itg_val->id, $itg_val->scheduler_time);
+      
+    }
+  }
+  
+  return $data;
+}
+
+/**
+ * function for syndication content id
+ * @return array
+ */
+function get_content_id_for_syndication($data, $created_date) {
+  $content_id = array();
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('nid'));
+  $itg_query->join('field_data_field_story_syndication', 'syndication', 'syndication.entity_id = n.nid'); 
+  $itg_query->join('field_data_field_story_category', 'cat', 'cat.entity_id = n.nid');
+  $itg_query->condition('n.status', 1);
+  $itg_query->condition('n.created', $created_date, '>');
+  $itg_query->condition('n.type',$data['content_type']);
+  $itg_query->condition('syndication.field_story_syndication_value','Yes');  
+  $itg_query->condition('cat.field_story_category_tid',$data['section_id']);
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  foreach ($itg_result as $itg_val) {
+    $content_id[] = $itg_val->nid;
+  }
+  
+  $data_array = array(
+    'web_property' => $data['content_type'],
+    'client_title' => $data['client_name'],
+    'delivery_mode' => $data['syndication_mode'],
+    'feed_type' => $data['feed_type'],
+    'fid' => $data['fid'],
+    'section_id' => $data['section_id'],
+    'syndication' => serialize($content_id),    
+  );
+  
+  $file_path = feed_generator_of_contents($data_array);
+  
+  return $file_path;
+}
+
+/**
+ * Implement hook_node_insert()
+ */
+function itg_syndication_node_insert($node) {
+  
+  if ($node->type == 'syndication_rule') {
+    save_cron_details_of_syndication($node);
+  }
+  
+}
+
+/**
+ * Implement hook_node_insert()
+ */
+function itg_syndication_node_update($node) {
+  
+  if ($node->type == 'syndication_rule') {
+    db_update('itg_cron_time_scheduler')
+          ->fields(array(
+            'status' => 0                       
+          ))
+          ->condition('content_id', $node->nid)
+          ->execute();
+    save_cron_details_of_syndication($node);
+  }
+  
+}
+
+/**
+ * save cron details for feed of syndication content
+ * @param array $node 
+ */
+
+function save_cron_details_of_syndication($node) {
+  
+  foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key => $val ) {
+      
+    $field_collection_item = entity_load('field_collection_item', array($val['value']));
+
+    $section_id = $field_collection_item[$val['value']]->field_syndication_select_section[LANGUAGE_NONE][0]['tid'];
+    $feed_type = $field_collection_item[$val['value']]->field_syndication_feed_type[LANGUAGE_NONE][0]['value'];
+    $syndication_mode = $field_collection_item[$val['value']]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
+    $content_type = $field_collection_item[$val['value']]->field_syndication_content_type[LANGUAGE_NONE][0]['value'];
+    $client_name = $node->title;
+    $frequency = $field_collection_item[$val['value']]->field_syndication_frequency[LANGUAGE_NONE][0]['value'];
+
+    $time_rule = $field_collection_item[$val['value']]->field_syndication_time[LANGUAGE_NONE][0]['value'];      
+    $day = $field_collection_item[$val['value']]->field_syndication_set_day[LANGUAGE_NONE][0]['value'];
+    $dt = $field_collection_item[$val['value']]->field_syndication_set_day_month[LANGUAGE_NONE][0]['value'];    
+    
+    //get cron time
+    $cron_time_array = get_cron_time($frequency, $time_rule, $day, $dt);
+    $previous_time = $cron_time_array['previous_time'];
+    $scheduler_time = $cron_time_array['scheduler_time'];
+    
+    $details_array = array('client_name' => $client_name, 
+                             'section_id' => $section_id, 
+                             'feed_type' => $feed_type, 
+                             'syndication_mode' => $syndication_mode, 
+                             'content_type' => $content_type, 
+                             'frequency' => $frequency, 
+                             'time_rule' => $time_rule, 
+                             'day_name' => $day, 
+                             'date' => $dt);
+
+    $details = serialize($details_array);
+
+    $query = db_insert('itg_cron_time_scheduler');
+    $query->fields(array(
+      'content_id' => $node->nid,
+      'fid' => $val['value'],
+      'cron_type' => $node->type,
+      'last_cron_time' => $previous_time,
+      'scheduler_time' => $scheduler_time,
+      'cron_details' => $details,
+      'status' => true
+    )); 
+    $query->execute();
+  }
+  
+}
+
+
+
+/**
+ * Get web url for client
+ * @param array $node
+ * @param  $dir 
+ * @return url
+ */
+function get_weburl_for_syndication($dir, $node) {  
+  global $base_url;
+  $url = $base_url.'/'.$dir.'/';
+  
+  $six_digit_random_number = mt_rand(100000, 999999);
+  $timestamps = date("Y-m-d H:i:s");
+  $client_name = $node->field_syndication_client_title[LANGUAGE_NONE][0]['tid'].$node->title;
+  $token = sha1($client_name. $timestamp . $six_digit_random_number);
+  
+  return $url.$token;
+}
+
+/**
+ * Implementation of hook_node_presave
+ * @param array $node 
+ */
+function itg_syndication_node_presave($node) {  
+  if ($node->type =='syndication_client' && $node->field_syndication_delivery_mode[LANGUAGE_NONE][0]['value'] == 'Web URL') {
+    $web_url = get_weburl_for_syndication('syndication/feed', $node);
+    $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
+  }
+}
+
+/**
+ * function for cron time update
+ * @param array $node
+ * @param array $id
+ * @param array $cron_time 
+ */
+function update_cron_time_after_feed_generate($data, $id, $cron_time) {
+  if ($data['frequency'] == 'Daily') {      
+      $scheduler_time = strtotime('+1 day', $cron_time);
+      $previous_time = $cron_time;
+    } else if ($data['frequency'] == 'Weekly') {
+      $scheduler_time = strtotime('+7 days', $cron_time);
+      $previous_time = $cron_time;
+    } else if ($data['frequency'] == 'Monthly') {         
+       $scheduler_time = strtotime('+1 month', $cron_time);
+      $previous_time = $cron_time;
+    }
+    
+    db_update('itg_cron_time_scheduler')
+          ->fields(array(
+            'last_cron_time' => $previous_time,
+            'scheduler_time' => $scheduler_time,            
+          ))
+          ->condition('id', $id)
+          ->execute();
+}
+
+/**
+ * function for gat feed by url
+ * @return xml 
+ */
+
+function get_syndication_feed_byurl() {
+  global $base_url;
+  $url = $base_url.'/'.arg(0).'/'.arg(1).'/'.  arg(2);
+  
+  $itg_query = db_select('itg_syndication_feed_url', 'feed');
+  $itg_query->fields('feed', array('xml_name'));
+  $itg_query->fields('feed', array('created_date'));
+  $itg_query->condition('feed.client_feed_url', $url);
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  foreach ($itg_result as $itg_val) {
+    $xml_date = date('d/m/Y',$itg_val->created_date);
+    $file_url = explode('sites/', $itg_val->xml_name);
+    echo 'Click to Download. <a href="'.$base_url.'/sites/'.$file_url[1].'" download>'.$xml_date.'</a>';
+    echo '</br>';    
+  }
+  exit;
+ 
+}
+
+/**
+ * function for gat cron time
+ * @return array time
+ */
+function get_cron_time($frequency, $time_rule, $day = NULL, $dt = NULL) {
+  
+  if ($frequency == 'Daily') {
+      $current_date = time();
+      $cron_time = date('m/d/Y', $current_date).' '.$time_rule;
+      $scheduler_time = strtotime($cron_time);
+      $previous_time = strtotime($cron_time.' -1 day');
+    } else if ($frequency == 'Weekly') {
+      //strtotime( "next monday" );
+      $current_date = strtotime( "previous ".$day );        
+      $cron_time = date('m/d/Y', $current_date).' '.$time_rule;
+      $scheduler_time = strtotime($cron_time);
+      $previous_time = strtotime($cron_time.' -7 days');
+    } else if ($frequency == 'Monthly') {         
+       $cron_time_month = date('m');
+       $cron_time_year = date('Y');
+       $cron_time = $cron_time_month.'/'.$dt.'/'.$cron_time_year.' '.$time_rule;         
+       $scheduler_time = strtotime($cron_time);
+       $previous_time = strtotime($cron_time.' -1 month');
+    }
+    
+    $date_array = array('scheduler_time' => $scheduler_time, 'previous_time' => $previous_time);
+    
+    return $date_array;
+  
+}
+
+//function for test
+function get_syndication_test() {
+  $arg1 = arg(1);
+  $file_path = drupal_realpath('public://').'/xml/syndication__13-06-2016_49c1cf829fc81d0e1c9bde594e74571279c9af5a.xml'; 
+  if ($arg1 == 'ftp') {  
+    $file = $file_path;
+    $remote_file = 'xml/syndication__13-06-2016_49c1cf829fc81d0e1c9bde594e74571279c9af5a.xml';
+    $ftp_server = 'test.kelltontech.net';
+    $ftp_user_name = 'ftptest1';
+    $ftp_user_pass = 'FtpTEst@123';  
+    // set up basic connection
+    $conn_id = ftp_connect($ftp_server);
+    // login with user$file_pathname and password
+    $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+    // upload a file  
+    if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+     echo "successfully uploaded $file\n";
+    } else {
+     echo "There was a problem while uploading $file\n";
+    }
+
+    // close the connection
+    ftp_close($conn_id);
+
+    } else if ($arg1 == 'email') {
+         $attachment = array(
+          'filepath' => $file_path,
+        );
+
+    $tomail = 'shravan.kumar@kelltontech.com';
+    $params = array(
+      'key' => 'itg_syndication',
+      'to' => $tomail,
+      'from' => 'noreply@indiatoday.com',
+      'subject' => 'Test email',
+      'body' => 'test.',
+      'attachment' => $attachment,
+      'headers' => array(
+        'MIME-Version: 1.0' . "\r\n",
+        'Content-type: text/html; charset=iso-8859-1' . "\r\n",
+        'To: '.$tomail . "\r\n",
+        'From: India Today <noreply@indiatoday.com>' . "\r\n",
+      ),
+    );
+    $language = language_default();
+    drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);    
+  }
+  
+}
