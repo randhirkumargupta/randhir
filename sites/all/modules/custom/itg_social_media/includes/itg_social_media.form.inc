@@ -75,6 +75,15 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       ),      
     ),
   );
+  $form['fb_wrap']['img_schedule_time'] = array(
+    '#type' => 'date_popup',
+    '#title' => t("Image Publish Time"),
+    '#description' => t('Please select schedule time'),
+    '#required' => TRUE,
+    '#date_format' => 'd/m/Y',
+    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#default_value' => date('Y-m-d'),
+  );
   
   $form['fb_wrap']['itg_facebook_video_text'] = array(
     '#type' => 'textfield',

@@ -8,7 +8,7 @@
 function _send_mail_newsletter($node , $news_eng_type, $type = null){
    //$node = node_load(1375);
    $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
-   $user_email_arr = array('haripalrao@gmail.com','neha.rani@kelltontech.com', 'vikash.kumar@kelltontech.com','ashish.singh@kelltontech.com');
+   $user_email_arr = array('haripalrao@gmail.com','neha.rani@kelltontech.com', 'vikash.kumar@kelltontech.com','ashish.singh@kelltontech.com', 'gourav.walia@kelltontech.com');
    $user_email_str = implode(',',$user_email_arr);
    
    //Get Mail content
@@ -71,19 +71,29 @@ foreach($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
   $title = $news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value'];
   $kicker = $news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value'];
   $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
-
+  
+  //Set flag for empty records
+  if(empty($title) && empty($kicker)){
+    $flag = FALSE;
+  } else {
+     $flag = TRUE;
+  }
+  
+  //Set link for newsletter title
   if($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal'){
     $link = $base_url.'/node/'.$news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
   } else {
     $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
   }
-
+  
+  if($flag){
   $news_content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img src="'.$thumbnail.'" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">'.l($title, $link, array('attributes' => array('target'=>'_blank'))).'</h2>
                 <p style="margin: 0; font-size: 14px;">'.$kicker.'.</p>
               </td></tr>';
+   }
   }
 
   $content .= $news_content.'</table>
