@@ -105,7 +105,7 @@ function itg_syndication_generate_xml($data) {
     // 2. Via FTP location
       
     case 'FTP':
-      itg_syndication_ftp_syndication($data, $file_path . '/' . $xml_name . '.xml');
+      itg_syndication_ftp_syndication($data, $file_path . '/' . $xml_name . '.xml', $xml_name.'.xml');
       break;
     // 3. Via Email
     case 'Email':
@@ -167,11 +167,11 @@ function itg_syndication_mail($key, &$message, $params) {
  * @param type $data
  * @param type $file_path
  */
-function itg_syndication_ftp_syndication($data, $file_path) {  
+function itg_syndication_ftp_syndication($data, $file_path, $file_name) {  
   $ftp_details = get_ftp_details_by_client($data['client_title'], $data['delivery_mode']);
   
   $file = $file_path;
-  $remote_file = 'readme.txt';
+  $remote_file = 'xml/'.$file_name;
   
   $ftp_server = $ftp_details->field_syndication_ftp_url_value;
   $ftp_user_name = $ftp_details->field_syndication_ftp_username_value;
