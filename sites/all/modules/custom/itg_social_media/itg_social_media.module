@@ -210,9 +210,9 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     drupal_set_message(t('Facebook SDK returned an error: ' . $e->getMessage()), 'error');
   }
   // get response
-  $graphNode = $response->getGraphNode();
+  $graphNode = $response->isError();
   
-  if (isset($graphNode['id'])) {
+  if (!$graphNode) {
     $pre_save = array(
       'nid' => $node->nid,
       'node_title' => $node->title,
