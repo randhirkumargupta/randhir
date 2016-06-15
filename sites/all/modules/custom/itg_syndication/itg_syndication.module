@@ -25,6 +25,14 @@ function itg_syndication_menu() {
       'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,      
   );
+
+  $items['syndication/feed-test'] = array(
+    'page callback' => 'feed_test',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_syndication.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -357,7 +365,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
           //validate for ftp url
           if ($val['field_ftp_ip_address'][LANGUAGE_NONE][0]['value'] != '') {
             if (!filter_var($val['field_ftp_ip_address'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_IP)) {
-              form_set_error('field_syndication_ftp_url', t('FTP IP Address is not valid.'));
+              //form_set_error('field_syndication_ftp_url', t('FTP IP Address is not valid.'));
             }
           }
         }
