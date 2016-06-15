@@ -220,7 +220,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'facebook ' . $type,
-      'created' => REQUEST_TIME,
+      'created' => date('Y-m-d H:i:s'),
     );
     
     // iNSERT INTO DATABASE
@@ -352,7 +352,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'Twitter Image',
-      'created' => REQUEST_TIME,
+      'created' => date('Y-m-d H:i:s'),
     );
     
     // iNSERT INTO DATABASE
@@ -432,7 +432,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'Twitter Video',
-      'created' => REQUEST_TIME,
+      'created' => date('Y-m-d H:i:s'),
     );
     
     // iNSERT INTO DATABASE
