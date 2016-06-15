@@ -20,6 +20,11 @@ function itg_syndication_menu() {
       'type' => MENU_CALLBACK,      
   );
   
+  $items['syndication_test'] = array(      
+      'page callback' => 'get_syndication_test',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,      
+  );
   return $items;
 }
 
@@ -654,10 +659,16 @@ function get_syndication_feed_byurl() {
   
   foreach ($itg_result as $itg_val) {
     $xml_date = date('d/m/Y',$itg_val->created_date);
-    $data[$xml_date] = $itg_val->xml_name;
+    $file_url = explode('sites/', $itg_val->xml_name);
+    echo 'Click to Download. <a href="'.$base_url.'/sites/'.$file_url[1].'" download>'.$xml_date.'</a>';
+    echo '</br>';
+    //$data[$xml_date] = $itg_val->xml_name;
   }
-  p($data);
-  return $data;
+  exit;
+  
+  //$link_val = 'Click to Download. <a href="'.$base_url.'/sites/default/files/'.$file_path.'" download>Import Feed</a>';
+ // p($data);
+  //return $data;
   
 }
 
@@ -689,5 +700,60 @@ function get_cron_time($frequency, $time_rule, $day = NULL, $dt = NULL) {
     $date_array = array('scheduler_time' => $scheduler_time, 'previous_time' => $previous_time);
     
     return $date_array;
+  
+}
+//function for test
+function get_syndication_test() {
+  $arg1 = arg(1);
+  $file_path = drupal_realpath('public://').'xml/';
+  if ($arg1 == 'ftp') {
+  
+  $file = $file_path;
+  $remote_file = 'readme.txt';
+  
+  $ftp_server = 'test.kelltontech.net';
+  $ftp_user_name = 'ftptest1';
+  $ftp_user_pass = 'FtpTEst@123';
+  
+  // set up basic connection
+  $conn_id = ftp_connect($ftp_server);
+
+  // login with username and password
+  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+
+  // upload a file
+  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+   echo "successfully uploaded $file\n";
+  } else {
+   echo "There was a problem while uploading $file\n";
+  }
+
+  // close the connection
+  ftp_close($conn_id);
+  } else if ($arg1 == 'email') {
+       $attachment = array(
+        'filepath' => $file_path,
+      );
+       
+  $tomail = 'shravan.kumar@kelltontech.com';
+  $params = array(
+    'key' => 'itg_syndication',
+    'to' => $tomail,
+    'from' => 'noreply@indiatoday.com',
+    'subject' => 'Test email',
+    'body' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+    'attachment' => $attachment,
+    'headers' => array(
+      'MIME-Version: 1.0' . "\r\n",
+      'Content-type: text/html; charset=iso-8859-1' . "\r\n",
+      'To: '.$tomail . "\r\n",
+      'From: India Today <noreply@indiatoday.com>' . "\r\n",
+    ),
+  );
+  $language = language_default();
+
+  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);
+    
+  }
   
 }
