@@ -223,6 +223,7 @@ function generate_custom_feed($nid=1474) {
             }
             $xml = new SimpleXMLElement($new_text);
             echo $xml->asXML();
+            
         }else {
             drupal_set_message("not a valid field");
         }        
