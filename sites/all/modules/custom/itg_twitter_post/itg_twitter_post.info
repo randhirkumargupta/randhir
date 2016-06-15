@@ -1,5 +1,0 @@
-name = ITG Twitter Post
-description = Provide helper function to post site data into twitter.
-core = 7.x
-
-package = ITG
