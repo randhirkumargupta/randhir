@@ -347,7 +347,7 @@ a.button{
   .image-widget-data, .file-widget{
     input.form-file{
       margin-top: 5px;
-      & + .form-submit{
+      & + .form-submit, & + span.error + .form-submit{
         @extend .add-more-wbg;
       }
     }
