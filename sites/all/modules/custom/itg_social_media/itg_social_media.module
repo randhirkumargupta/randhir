@@ -224,7 +224,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     );
     
     // iNSERT INTO DATABASE
-    $query = db_insert('itg_social_media_log');
+    $query = db_insert('itg_social_media_logs');
     $query->fields($pre_save)
         ->execute();
     // Set message
@@ -356,7 +356,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
     );
     
     // iNSERT INTO DATABASE
-    $query = db_insert('itg_social_media_log');
+    $query = db_insert('itg_social_media_logs');
     $query->fields($pre_save)
         ->execute();
     // Set message
@@ -436,7 +436,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
     );
     
     // iNSERT INTO DATABASE
-    $query = db_insert('itg_social_media_log');
+    $query = db_insert('itg_social_media_logs');
     $query->fields($pre_save)
         ->execute();
     // Set message
