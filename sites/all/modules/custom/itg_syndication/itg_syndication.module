@@ -25,6 +25,14 @@ function itg_syndication_menu() {
       'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,      
   );
+
+  $items['syndication/feed-test'] = array(
+    'page callback' => 'feed_test',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_syndication.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
