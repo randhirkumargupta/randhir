@@ -14,6 +14,7 @@ function feature_smi_user_default_permissions() {
   $permissions['administer itg_social_media edit_content settings'] = array(
     'name' => 'administer itg_social_media edit_content settings',
     'roles' => array(
+      'Social Media' => 'Social Media',
       'administrator' => 'administrator',
     ),
     'module' => 'itg_social_media',
