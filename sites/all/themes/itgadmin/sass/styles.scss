@@ -1911,6 +1911,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         padding: 0;
         margin: 0;
         @extend .fleft;
+        @extend .full;
         @extend .pos-rel;
         .form-type-textarea{
           padding: 0;
@@ -1923,24 +1924,23 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           }
         }
         .form-submit{
-          background: #fff url("../images/cross_small.png") no-repeat center center;
-          border-radius: 50%;
-          height: 34px;
-          left: 100%;
-          margin: 0 0 0 10px;
-          position: absolute;
-          top: 0;
-          width: 34px;
+          margin: 10px 0 !important;
         }
       }
       &+tr{
         td{
           margin-top: 10px;
+          .form-submit{
+            margin-left: 142px !important;
+          }
         }
       }
     }
   }
   &+div.clearfix{
+    margin-top: -41px;
+    @extend .pos-rel;
+    z-index: 99;
     .ajax-progress-throbber{
       position: static;
       margin-top: 10px;
@@ -2053,6 +2053,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       position: absolute;
       bottom: -30px;
       left: 0;
+      z-index: 99;
       .form-submit{
         margin: 0;
       }
