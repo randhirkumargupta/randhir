@@ -40,57 +40,43 @@ function itg_mobile_services_feed_generator_of_contents($delivery_mode, $data) {
  * @param array $syndication_node
  */
 function itg_mobile_services_generate_xml($node) {
-  // get service id  
-  $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
-  // load service node  
-  $service_details = node_load($association_nid);
-  
-  // delivery mode
-  $delivery_mode = $service_details->field_service_delivery_mode;
-  // expiry date
-  $expiry_date = $service_details->field_story_expiry_date;
+        // get service id  
+        $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
+        // load service node  
+        $service_details = node_load($association_nid);
 
-  $get_clients_id = get_clients_id($association_nid);
-  watchdog('get_clients_id', '<pre>' . print_r($get_clients_id, 1) . '</pre>'); 
-  // client ids
-  $client_id_array = $get_clients_id['target_id'];
-  // service association id
-  $service_association_id = $get_clients_id['service_association_id'];
-  $service_association_info = node_load($service_association_id);
-  // service association data
-  if (is_object($service_association_info) && count($service_association_info) > 0) {
-    $content_type  = isset($service_association_info->field_service_content_type) ? $service_association_info->field_service_content_type[LANGUAGE_NONE][0]['value'] : '';
-    $content_count = isset($service_association_info->field_service_content_count) ? $service_association_info->field_service_content_count[LANGUAGE_NONE][0]['value'] : '';
-    $char_limit    = isset($service_association_info->field_service_char_limit) ? $service_association_info->field_service_char_limit[LANGUAGE_NONE][0]['value'] : '';
-    $field_header  = isset($service_association_info->field_header) ? $service_association_info->field_header[LANGUAGE_NONE][0]['value'] : '';
-    $field_footer  = isset($service_association_info->field_footer) ? $service_association_info->field_footer[LANGUAGE_NONE][0]['value'] : '';
-  }
+        // delivery mode
+        $delivery_mode = $service_details->field_service_delivery_mode;
+        // expiry date
+        $expiry_date = $service_details->field_story_expiry_date;
 
-
-  $data_array = array('service_id' => $association_nid,
-    'frequency' => $frequency,
-    'frequency_date_start' => $frequency_date_start,
-    'frequency_date_end' => $frequency_date_end,
-    'content_type' => $content_type,
-    'content_count' => $content_count,
-    'char_limit' => $char_limit,
-    'field_header' => $field_header,
-    'field_footer' => $field_footer,
-  );
+        $get_clients_id = get_clients_id($association_nid);
+        watchdog('get_clients_id', '<pre>' . print_r($get_clients_id, 1) . '</pre>'); 
+        // client ids
+        $client_id_array = $get_clients_id['target_id'];
+        // service association id
+        $service_association_id = $get_clients_id['service_association_id'];
+        $service_association_info = node_load($service_association_id);
+        // service association data
+        if (is_object($service_association_info) && count($service_association_info) > 0) {
+          $content_type  = isset($service_association_info->field_service_content_type[LANGUAGE_NONE]) ? $service_association_info->field_service_content_type[LANGUAGE_NONE][0]['value'] : '';
+          $content_count = isset($service_association_info->field_service_content_count[LANGUAGE_NONE]) ? $service_association_info->field_service_content_count[LANGUAGE_NONE][0]['value'] : '';
+          $char_limit    = isset($service_association_info->field_service_char_limit[LANGUAGE_NONE]) ? $service_association_info->field_service_char_limit[LANGUAGE_NONE][0]['value'] : '';
+          $field_header  = isset($service_association_info->field_header[LANGUAGE_NONE]) ? $service_association_info->field_header[LANGUAGE_NONE][0]['value'] : '';
+          $field_footer  = isset($service_association_info->field_footer[LANGUAGE_NONE]) ? $service_association_info->field_footer[LANGUAGE_NONE][0]['value'] : '';
+        }
 
 
-  // content field collection data
-  $fieldcollect = node_load($node->nid);
-  if (is_object($fieldcollect) && count($fieldcollect) > 0) {
-    foreach($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {   
-      $field_collection_item = entity_load('field_collection_item', array($val['value']));
-      $service_content_date = $field_collection_item[$val['value']]->field_service_content_date[LANGUAGE_NONE][0]['value'];
-      $service_content_text = $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'];
-      $service_conten_image = $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'];
-      $service_conten_audio = $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['fid'];
-      $service_conten_video = $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['fid'];
-    }
-  }
+      $data_array = array('service_id' => $association_nid,
+                          'frequency' => $frequency,
+                          'frequency_date_start' => $frequency_date_start,
+                          'frequency_date_end' => $frequency_date_end,
+                          'content_type' => $content_type,
+                          'content_count' => $content_count,
+                          'char_limit' => $char_limit,
+                          'field_header' => $field_header,
+                          'field_footer' => $field_footer,
+                        );
 
 
 
@@ -107,43 +93,67 @@ function itg_mobile_services_generate_xml($node) {
       $root->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
       $root->appendChild($doc->createElement('lastBuildDate', 'Mon, 03 Feb 2014 12:38:02 IST'));
       $root->appendChild($doc->createElement('generator', 'FeedCreator 1.7.2'));
-
-      foreach ($query as $row) {
-
-        $content_text = $row->content_text;
-        $content_image_fid = $row->content_image_fid;
-        $content_image_width = $row->content_image_width;
-        $content_image_height = $row->content_image_height;
-
-        $root->appendChild($doc->createElement('keyword', 'indiatoday'));
-        $root->appendChild($doc->createElement('timestamp', 'en-US'));
-        $item = $doc->createElement('content');
-        $item->appendChild($doc->createCDATASection($content_text));
-        $root->appendChild($doc->createElement('transid', '31313131'));
-        $root->appendChild($item);
+      
+       // content field collection data
+      $fieldcollect = node_load($node->nid);
+      if (is_object($fieldcollect) && count($fieldcollect) > 0) {
+        foreach($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {   
+          $field_collection_item = entity_load('field_collection_item', array($val['value']));
+          $service_content_date = isset($field_collection_item[$val['value']]->field_service_content_date[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_content_date[LANGUAGE_NONE][0]['value'] : '';
+          $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
+          $service_conten_image = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'] : '';
+          $service_conten_audio = isset($field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['fid'] : '';
+          $service_conten_video = isset($field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['fid'] : '';
+          
+          //$root->appendChild($doc->createElement('keyword', 'indiatoday'));
+          //$root->appendChild($doc->createElement('timestamp', 'en-US'));
+          $item = $doc->createElement('content');
+          $item->appendChild($doc->createCDATASection($service_content_text));
+          
+          //$root->appendChild($doc->createElement('transid', '31313131'));
+          $root->appendChild($item);
+          
+          // image
+          $image = $doc->createElement('image');
+          $image->appendChild($doc->createCDATASection($service_conten_image));
+          $root->appendChild($image);
+          
+          // audio
+          $audio = $doc->createElement('audio');
+          $audio->appendChild($doc->createCDATASection($service_conten_audio));
+          $root->appendChild($audio);
+          
+          // video
+          $video = $doc->createElement('video');
+          $video->appendChild($doc->createCDATASection($service_conten_video));
+          $root->appendChild($video);
+          
+        
+        }
       }
+      watchdog('done', '<pre>' . print_r($item, 1) . '</pre>'); 
       $doc->save($file_path . '/result.xml') or die('XML Create Error');
-      drupal_goto($base_url . "/sites/default/files/mobile_xml/result.xml");
+      //drupal_goto($base_url . "/sites/default/files/mobile_xml/result.xml");
 
 
   foreach ($client_id_array as $client_id) {
     $client_info = node_load($client_id);
     if (is_object($client_info) && count($client_info) > 0) {
-      $content_sharing_mode = isset($client_info->field_content_sharing_mode) ? $client_info->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] : '';
+      $content_sharing_mode = isset($client_info->field_content_sharing_mode[LANGUAGE_NONE]) ? $client_info->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] : '';
         // Decide sharing mode
         switch ($content_sharing_mode) {
           // 1. Fetch web URL (our server)
           case '1':
             break;
           case 2: // 2. Via FTP location
-            $ftp_ip_address = isset($client_info->field_ftp_ip_address) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
-            $ftp_username = isset($client_info->field_ftp_username) ? $client_info->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
-            $ftp_password = isset($client_info->field_ftp_password) ? $client_info->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
+            $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
+            $ftp_username = isset($client_info->field_ftp_username[LANGUAGE_NONE]) ? $client_info->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
+            $ftp_password = isset($client_info->field_ftp_password[LANGUAGE_NONE]) ? $client_info->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
             $data = array('ftp_ip_address' => $ftp_ip_address, 'ftp_username' => $ftp_username, 'ftp_password' => $ftp_password);
             itg_mobile_services_ftp_feeds($data, $file_path . '/' . $data->client_title . '.xml');
             break;
           case 3: // 3. Via Email
-            $service_email_address = isset($client_info->field_service_email_address) ? $client_info->field_service_email_address[LANGUAGE_NONE][0]['value'] : '';
+            $service_email_address = isset($client_info->field_service_email_address[LANGUAGE_NONE]) ? $client_info->field_service_email_address[LANGUAGE_NONE][0]['value'] : '';
             itg_mobile_services_mail($data, $file_path . '/' . $data->client_title . '.xml');
             break;
         }
@@ -218,28 +228,28 @@ function get_content_sharing_mode($entity_id) {
  * @param type $file_path
  */
 function itg_mobile_services_ftp_feeds($data, $file_path) {  
-  $ftp_details = get_ftp_details_by_client($data['client_title'], $data['delivery_mode']);
-  
-  $file = $file_path;
-  $remote_file = 'readme.txt';
-  
-  $ftp_server = $ftp_details->field_syndication_ftp_url_value;
-  $ftp_user_name = $ftp_details->field_syndication_ftp_username_value;
-  $ftp_user_pass = $ftp_details->field_syndication_ftp_password_value;
-  
-  // set up basic connection
-  $conn_id = ftp_connect($ftp_server);
-
-  // login with username and password
-  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
-
-  // upload a file
-  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
-   echo "successfully uploaded $file\n";
-  } else {
-   echo "There was a problem while uploading $file\n";
-  }
-
-  // close the connection
-  ftp_close($conn_id);
+//  $ftp_details = get_ftp_details_by_client($data['client_title'], $data['delivery_mode']);
+//  
+//  $file = $file_path;
+//  $remote_file = 'readme.txt';
+//  
+//  $ftp_server = $ftp_details->field_syndication_ftp_url_value;
+//  $ftp_user_name = $ftp_details->field_syndication_ftp_username_value;
+//  $ftp_user_pass = $ftp_details->field_syndication_ftp_password_value;
+//  
+//  // set up basic connection
+//  $conn_id = ftp_connect($ftp_server);
+//
+//  // login with username and password
+//  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+//
+//  // upload a file
+//  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+//   echo "successfully uploaded $file\n";
+//  } else {
+//   echo "There was a problem while uploading $file\n";
+//  }
+//
+//  // close the connection
+//  ftp_close($conn_id);
 }
