@@ -1486,6 +1486,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     li{
       @extend .dib;
       @extend .vmid;
+      @extend .pos-rel;
       a{
         color: #666;
         font-size: 13px;
@@ -1494,8 +1495,20 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           text-decoration: underline;
         }
       }
+      span{
+        color: #666;
+        font-size: 13px;
+      }
       & + li{
         margin-left: 3px;
+        &:before{
+          content: '\f105';
+          color: #2f2f2f;
+          padding: 0 5px 0 2px;
+          font: normal normal normal 12px/18px FontAwesome; 
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
       }
     }
   }
