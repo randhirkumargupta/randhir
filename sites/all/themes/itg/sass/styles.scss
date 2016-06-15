@@ -616,6 +616,10 @@ input[type="text"], select, input[type="password"]{
       }
       .field-items{
         overflow: hidden;
+        .file{
+          a{color: #1fb5ad;}
+          img{@extend .vtop;}
+        }
       }
     }
   }

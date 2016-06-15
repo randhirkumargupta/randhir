@@ -220,7 +220,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_mobile_vas_service_content_submit($form, &$form_state) {
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-  // p($form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]);
+
   if ($association_nid) {
     $node = node_load($association_nid);
     $form_state['values']['title'] = $node->title;
@@ -241,6 +241,7 @@ function itg_mobile_vas_service_content_submit($form, &$form_state) {
   $form_state['redirect'] = 'service-content-listing';
   return $form;
 }
+
 
 /**
  * Implement submit function itg_mobile_client_association_submit().
