@@ -199,7 +199,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'create_content' => 'create_content',
+    'service_creation' => 'service_creation',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Client Title (field_client_title) */
@@ -771,9 +771,8 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['field_service_frequency_date']['id'] = 'field_service_frequency_date';
   $handler->display->display_options['fields']['field_service_frequency_date']['table'] = 'field_data_field_service_frequency_date';
   $handler->display->display_options['fields']['field_service_frequency_date']['field'] = 'field_service_frequency_date';
-  $handler->display->display_options['fields']['field_service_frequency_date']['type'] = 'date_plain';
   $handler->display->display_options['fields']['field_service_frequency_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
