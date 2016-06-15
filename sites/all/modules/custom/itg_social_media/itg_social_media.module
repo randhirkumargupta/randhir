@@ -152,8 +152,16 @@ function itg_social_media_node_type($nid) {
 
 /**
  * Facebook post logic
- * @global string $base_url
+ * 
+ * @global type $base_url
+ * @global stdObject $user
+ * @param int $fid
+ * @param string $desc
+ * @param string $type
+ * @param stdObject $node
+ * @param string $stime
  */
+
 function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {  
   global $base_url, $user;
   // Set file status to permanent
