@@ -36,7 +36,9 @@
  */
 //print_r($node); exit;
 ?>
-<h3>Preview full version</h3>
+<?php if (isset($node->op)): ?>
+<h3 class="show">Preview full version</h3>
+<?php endif; ?>
 <a class="close-preview" href="javascript:;"> </a>
 <div class="node node-preview">
   <div class="field"><div class="field-label">Supplement Title: </div><div class="field-items"><?php print $title; ?></div></div>

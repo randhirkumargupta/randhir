@@ -428,7 +428,25 @@
     $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
     $('input[name="field_quiz_add_questions_add_more"], input[name="field_survey_add_questions_add_more"]').val('Add another question');
     $('input[name="field_newsl_add_news_add_more"]').val('Add More News');
-
+    
+    $('.field-name-field-quiz-answer-type').on('change', '.form-radio[value="single_correct"]', function(){
+      var correctVal = $(this).is(":checked");
+      if(correctVal == true){
+        $(this).parents('.field-name-field-quiz-answer-type').siblings('.field-name-field-quiz-options-answer').find('.form-checkbox').attr('checked', false);
+      }
+    });
+    $('.field-name-field-quiz-answer-type').on('change', '.form-radio[value="multiple_correct"]', function(){
+      var correctVal = $(this).is(":checked");
+      if(correctVal == true){
+        $(this).parents('.field-name-field-quiz-answer-type').siblings('.field-name-field-quiz-options-answer').find('.form-checkbox').attr('checked', false);
+      }
+    });
+    $('.field-name-field-quiz-options-answer').on('change', '.form-checkbox', function(){
+      var correctVal = $(this).parents('.field-name-field-quiz-options-answer').siblings('.field-name-field-quiz-answer-type').find('.form-radio[value="single_correct"]').is(':checked');
+      if(correctVal == true){
+        $(this).parents('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
+      }
+    });
 
 
 
@@ -596,13 +614,16 @@
       var radioCheck = $(this).is(':checked');
       var radioVal = $(this).val();
       if(radioCheck == true && radioVal == 'Daily'){
+        $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
         $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').hide();
       }
       if(radioCheck == true && radioVal == 'Weekly'){
+        $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
         $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
         $(this).parents('td').find('.field-name-field-syndication-set-day').show();
       }
       if(radioCheck == true && radioVal == 'Monthly'){
+        $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
         $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
         $(this).parents('td').find('.field-name-field-syndication-set-day-month').show();
       }
@@ -638,6 +659,20 @@
         $(this).parents('td').find('.field-name-field-news-external-url').show();
         $(this).parents('td').find('.newsletter-get-content').parent().hide();
       }
+    });
+    
+    
+    // jQuery code for syndication client
+    $('.form-field-name-field-syndication-delivery-mode').on('change', '.form-checkbox', function(){
+      var check = $(this).is(':checked');
+      var ftp = $(this).val();
+      if(!check && ftp == 'FTP'){
+        $(this).parents('#edit-field-syndication-delivery-mode').siblings('.form-field-name-field-syndication-ftp-details').find('table td .form-text').val('');
+      }
+      if(!check && ftp == 'Email'){
+        $(this).parents('#edit-field-syndication-delivery-mode').siblings('.form-field-name-field-email-address').find('table td .form-text').val('');
+      }
+      
     });
 
   };

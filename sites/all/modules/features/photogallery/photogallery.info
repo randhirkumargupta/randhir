@@ -70,6 +70,7 @@ features[field_instance][] = node-photogallery-field_story_small_image
 features[field_instance][] = node-photogallery-field_story_social_media_integ
 features[field_instance][] = node-photogallery-field_story_source_id
 features[field_instance][] = node-photogallery-field_story_source_type
+features[field_instance][] = node-photogallery-field_story_syndication
 features[field_instance][] = node-photogallery-field_story_time_facebook
 features[field_instance][] = node-photogallery-field_story_time_instagram
 features[field_instance][] = node-photogallery-field_story_time_twitter
