@@ -184,6 +184,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
         'title' => $node->title,
         'description' => t($desc) . ' ' . $short_url,
         'source' => $fb->videoToUpload($path),
+        'published' => FALSE,
         'scheduled_publish_time' => $stime,
       ];
 
@@ -193,6 +194,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
       $data = [
         'message' => t($desc) . ' ' . $short_url,
         'source' => $fb->fileToUpload($path),
+        'published' => FALSE,
         'scheduled_publish_time' => $stime,
       ];
 
