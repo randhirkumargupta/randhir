@@ -150,7 +150,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['metatags']['#type'] = 'hidden';
       // hide preview button
       variable_set('node_preview_vas-service-content', '0');
-
+      
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-content-listing', array(
           'attributes' => array(
@@ -280,11 +280,11 @@ function save_cron_details_of_mobile_services($node) {
   $current_date = date('Y-m-d');
   $frequency_date_start_array = explode(' ', $frequency_date_start);
 
-  if ($frequency_date_start_array[0] == $current_date) {
+  //if ($frequency_date_start_array[0] == $current_date) {
     $service_details = node_load($association_nid);
     $delivery_mode = $service_details->field_service_delivery_mode[LANGUAGE_NONE][0]['value'];
     itg_mobile_services_feed_generator_of_contents($delivery_mode, $node);
-  }
+  //}
 
 
 
