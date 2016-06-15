@@ -8,7 +8,8 @@
 
     Drupal.behaviors.itg_poll_form = {
         attach: function(context, settings) {
-
+            jQuery('input[name="field_poll_start_date[und][0][value][date]"]').keydown(false);
+            jQuery('input[name="field_poll_end_date[und][0][value][date]"]').keydown(false);
             var getOptionAnswerValnew = $("#edit-field-poll-answer-option-und option:selected").val();
             if (getOptionAnswerValnew == 1) {
                 $('.field-name-field-poll-answer-image').hide();
@@ -66,8 +67,11 @@
                     $("#edit-field-display-result-und-1").prop("checked", true);
                     $("#edit-field-display-result-und-2").prop("disabled", true);
                 }else{
-                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val($('#edit-field-poll-start-date-und-0-value-datepicker-popup-2').val());
-                    $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val('23:00');
+                    var myDate = new Date($('#edit-field-poll-start-date-und-0-value-datepicker-popup-2').val());
+                    myDate.setDate(myDate.getDate()+7);
+                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val($.datepicker.formatDate('mm/dd/yy', myDate));
+                    
+                    $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val($.datepicker.formatDate('23:00', myDate));
                     if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
                     $("#edit-field-display-result-und-2").prop("disabled", false);
                 } else {

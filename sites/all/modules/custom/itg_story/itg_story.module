@@ -12,7 +12,7 @@
  * Implements hook_init().
  */
 function itg_story_init() {
-  
+  //get_syndication_content_details();
 }
 
 
@@ -84,7 +84,6 @@ function itg_story_block_view($delta = '') {
 }
 
 
-
 /**
  * Implements hook_theme().
  * @param type $existing
@@ -111,7 +110,6 @@ function itg_story_theme($existing, $type, $theme, $path) {
 }
 
 
-
 /**
  * Implemets hook_form_alter().
  * @param type $form
@@ -122,7 +120,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;  
 
     switch ($form_id) {
-    case 'story_node_form':
+    case 'story_node_form':      
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       unset($form['actions']['preview_changes']);      
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
@@ -138,20 +136,17 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * @param type $form_state
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-    if (isset($_SESSION['messages']['status'])) {
-        unset($_SESSION['messages']['status']);
-    }
-    if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'story') {
-        $op = 'created';
-        $story_title = $form_state['node']->title;
-        drupal_set_message(t('Story <b>' . $story_title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
-        $_GET['destination'] = $_REQUEST['destination'];
-    } else {
-        $op = 'updated';
-        $story_title = $form_state['node']->title;
-        drupal_set_message(t('Story <b>' . $story_title . '</b> has been ' . $op . '.'));
-        $_GET['destination'] = $_REQUEST['destination'];
-    }
+  
+  $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
+  $node_type = ucfirst($form_state['node']->type);
+  $node_type = str_replace("_", " ", $node_type);
+  $title = ucfirst($form_state['node']->title);
+
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+
+  $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
 }
 
 /**
@@ -170,15 +165,16 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' 
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'           
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'
+           || $form['#id'] == 'views-exposed-form-strory-menegment-page-12'
            || $form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
    }
-   
-  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
+  
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
     $form['field_story_configurations_value']['#options'] = array('All' => '- All -', 'display_lock' => 'Locked Story');
   }
  
@@ -191,13 +187,20 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
  * @param type $form   
  */
 function itg_story_node_validate($node, $form, &$form_state) {
- 
-  $issue_based = $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'];
-  $magazine_kicker = $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'];
-  $magazine = $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
   
   // Code for redirection url validation
   if ($node->type == 'story') {
+    
+    $issue_based = $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'];
+    $magazine_kicker = $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'];
+    $magazine = $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
+    
+     // code to validation magazine field when issue based story is checked
+    if (!empty($issue_based)) {
+      if (empty($magazine)) {
+        form_set_error('field_story_select_magazine', t("Please select Magazine"));
+      }
+    }
     
     // code to check if issue based is check fill magazine kicker text
     if (!empty($issue_based)) {
@@ -206,14 +209,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
       }
     }
     
-    // code to validation magazine field when issue based story is checked
-    if (!empty($issue_based)) {
-      if (empty($magazine)) {
-        form_set_error('field_story_select_magazine', t("Please select Magazine"));
-      }
-    }
-
-    $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
+   $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
     
     if (!empty($redirection_url)) { 
       if (filter_var($redirection_url, FILTER_VALIDATE_URL) === false) {
@@ -382,7 +378,7 @@ function itg_story_create_breaking_news($story_node) {
  * @param type $node
  */
 function itg_story_node_insert($node) { 
-  if ($node->workbench_moderation_state_new != 'draft') {
+  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
    foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
      if ($val['value'] == 'breaking_news') {
        itg_story_create_breaking_news($node);
@@ -395,8 +391,8 @@ function itg_story_node_insert($node) {
  * Implements hook_node_update
  * @param type $node
  */
-function itg_story_node_update($node) {
-  if ($node->workbench_moderation_state_new != 'draft') {
+function itg_story_node_update($node) { 
+  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
     foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
       if ($val['value'] == 'breaking_news') {
         itg_story_create_breaking_news($node);
@@ -411,8 +407,7 @@ function itg_story_node_update($node) {
  * @param type $form_id  
  */
 function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
-  global $base_url;
-    
+  global $base_url, $user;   
     $magazine_field = 'field_story_select_magazine';
     $supplement_field = 'field_story_select_supplement';
     
@@ -452,44 +447,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_story_configurations[und][comment]"]' => array('checked' => TRUE),
       )
     );
-      
-//    $form['field_story_comment_question']['#states'] = array(
-//      'visible' => array(
-//        ':input[name="field_story_configurations[und][comment]"]' => array('value' => ''),
-//        ':input[name="field_story_configurations[und][comment]"]' => array('checked' => FALSE),
-//      )
-//    );
-    // code for Comment Question field hide and show
-    $form['field_story_facebook_narrative']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
-      )
-    );
-     
-    // code for facebook image field hide and show
-    $form['field_story_facebook_image']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
-      )
-    );
-       
-    // code for tweet field show and hide 
-    $form['field_story_tweet']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
-      ),
-      /*'reset' => array(
-        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => FALSE),
-      )*/
-    );
-    
-     // code for tweeter image field hide and show
-    $form['field_story_tweet_image']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
-      )
-    );
-    
+
     // code for magazine field hide and show
     $form['field_story_select_magazine']['#states'] = array(
       'visible' => array(
@@ -515,14 +473,14 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     // code for client Title field show and hide
     $form['field_story_client_title']['#states'] = array(
       'visible' => array(
-        ':input[name="field_story_configurations[und][syndication]"]' => array('checked' => TRUE),
+        ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
       )
     );
     
     // code for media field show and hide
     $form['field_story_media_files_syndicat']['#states'] = array(
       'visible' => array(
-        ':input[name="field_story_configurations[und][syndication]"]' => array('checked' => TRUE),
+        ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
       )
     );
     
@@ -530,7 +488,10 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $form['field_story_magazine_kicker_text']['#states'] = array(
       'visible' => array(
         ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-      )
+      ),
+    'required' => array(
+      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+    )
     );
     
     // code for Magazine Headline * field show and hide
@@ -539,7 +500,10 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
       )
     );
-    
+    // Set form default value for social media fields
+  
+  $form['field_story_posted_by_twitter']['#default_value'] = $user->mail;
+  $form['field_story_posted_by_instagram']['#default_value'] = $user->mail;
     
   
 }

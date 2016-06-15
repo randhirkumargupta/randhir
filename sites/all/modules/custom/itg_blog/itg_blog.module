@@ -61,22 +61,17 @@ function itg_blog_form_alter(&$form, &$form_state, $form_id) {
  * Custom submit callback for redirecting Blog form.
  */
 function itg_blog_form_custom_callback($form, &$form_state) {
+
+  $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
+  $node_type = ucfirst($form_state['node']->type);
+  $node_type = str_replace("_", " ", $node_type);
+  $title = ucfirst($form_state['node']->title);
+
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'blog') {
-    $op = 'created';
-    $blog_title = $form_state['node']->title;
-  drupal_set_message(t('Blog <b>' . $blog_title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
-   $_GET['destination'] = $_REQUEST['destination'];
-  }
-  else {
-    $op = 'updated';
-     $blog_title = $form_state['node']->title;
-  drupal_set_message(t('Blog <b>' . $blog_title . '</b> has been ' . $op.'.'));
-  $_GET['destination'] = $_REQUEST['destination'];
-  }
- 
+
+  $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
 }
 
 /**
@@ -99,6 +94,9 @@ function itg_blog_after_build($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Implemets hook_theme()
+ */
 function itg_blog_theme($existing, $type, $theme, $path) {
   $themes = array(
     'blog_node_form' => array(
@@ -106,6 +104,11 @@ function itg_blog_theme($existing, $type, $theme, $path) {
       'template' => 'blog-node-form',
       'path' => drupal_get_path('module', 'itg_blog') . '/templates',
       'render element' => 'form',
+    ),
+    'itg_blog_tab_form_display_block' => array(
+      'template' => 'itg-blog-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_blog') . '/templates',
+      'variables' => array('data' => NULL),
     ),
   );
   return $themes;
@@ -124,3 +127,32 @@ function itg_blog_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
     $form['nid']['#attributes'] = array('placeholder' => t('Blogs ID'));
   }
 }
+
+/**
+ * Implements hook_block_info().
+ */
+function itg_blog_block_info() {
+  $blocks['blog_tab_form_block'] = array(
+    'info' => t('Blog Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function itg_blog_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'blog_tab_form_block':
+      $block['content'] = theme('itg_blog_tab_form_display_block', array('data' => $data));
+      break;
+  }
+
+  return $block;
+}
+

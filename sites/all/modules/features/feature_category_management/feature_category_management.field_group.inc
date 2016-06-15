@@ -27,15 +27,20 @@ function feature_category_management_field_group_info() {
       1 => 'field_cm_redirection_url',
       2 => 'name',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Basic Details',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-cm-basic-details field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_cm_basic_details|taxonomy_term|category_management|form'] = $field_group;
@@ -55,15 +60,20 @@ function feature_category_management_field_group_info() {
     'children' => array(
       0 => 'field_cm_select_type',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Selection Details',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
         'required_fields' => 1,
         'id' => '',
+        'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_cm_selection_details|taxonomy_term|category_management|form'] = $field_group;
@@ -87,15 +97,20 @@ function feature_category_management_field_group_info() {
       3 => 'field_cm_sponsored_category',
       4 => 'field_publish_time',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Settings',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-cm-settings field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_cm_settings|taxonomy_term|category_management|form'] = $field_group;

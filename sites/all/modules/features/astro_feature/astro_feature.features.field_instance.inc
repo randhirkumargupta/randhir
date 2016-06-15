@@ -23,7 +23,7 @@ function astro_feature_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 6,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -56,7 +56,7 @@ function astro_feature_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 4,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -120,7 +120,7 @@ function astro_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -156,7 +156,7 @@ function astro_feature_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 5,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -539,7 +539,7 @@ function astro_feature_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'field_collection_fieldset',
+      'module' => 'field_collection',
       'settings' => array(
         'collapsed' => 1,
         'field_as_label' => 'field_astro_select_number',
@@ -547,7 +547,7 @@ function astro_feature_field_default_field_instances() {
         'new_item_open' => 0,
         'replace_label' => 0,
       ),
-      'type' => 'field_collection_fieldset',
+      'type' => 'field_collection_embed',
       'weight' => 13,
     ),
   );
@@ -557,7 +557,7 @@ function astro_feature_field_default_field_instances() {
     'bundle' => 'astro',
     'default_value' => array(
       0 => array(
-        'tid' => 224,
+        'tid' => 314,
       ),
     ),
     'deleted' => 0,
@@ -773,7 +773,7 @@ function astro_feature_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'field_collection_fieldset',
+      'module' => 'field_collection',
       'settings' => array(
         'collapsed' => 0,
         'field_as_label' => 'field_zodiac_sign',
@@ -781,7 +781,7 @@ function astro_feature_field_default_field_instances() {
         'new_item_open' => 0,
         'replace_label' => 0,
       ),
-      'type' => 'field_collection_fieldset',
+      'type' => 'field_collection_embed',
       'weight' => 8,
     ),
   );

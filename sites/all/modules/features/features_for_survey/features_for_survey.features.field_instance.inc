@@ -93,7 +93,7 @@ function features_for_survey_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_survey_answer_option_1',
     'label' => 'Answer choices',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -130,7 +130,7 @@ function features_for_survey_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_survey_answer_option_2',
     'label' => 'Answer Option 2',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -288,7 +288,7 @@ function features_for_survey_field_default_field_instances() {
     'settings' => array(
       'display_summary' => 1,
       'exclude_cv' => FALSE,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -341,7 +341,7 @@ function features_for_survey_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'field_collection_fieldset',
+      'module' => 'field_collection',
       'settings' => array(
         'collapsed' => 0,
         'field_as_label' => '',
@@ -349,8 +349,8 @@ function features_for_survey_field_default_field_instances() {
         'new_item_open' => 0,
         'replace_label' => 0,
       ),
-      'type' => 'field_collection_fieldset',
-      'weight' => 1,
+      'type' => 'field_collection_embed',
+      'weight' => 2,
     ),
   );
 
@@ -389,7 +389,7 @@ function features_for_survey_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 2,
     ),
   );
 
@@ -447,7 +447,7 @@ function features_for_survey_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 

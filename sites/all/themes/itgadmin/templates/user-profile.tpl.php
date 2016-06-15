@@ -134,11 +134,13 @@ if($user->uid == $view_user_id) {
       $last_record_display = 'Last Content Filed : N/A';
       print '<div class="my-stats-left">' . $last_record_display . '</div>';
       }
-      $last_publish_record = itg_last_node_published_user($elements['#account']->uid,'1');
+      // $last_publish_record = itg_last_node_published_user($elements['#account']->uid,'1');
+      $last_publish_record = itg_last_publish_user_node($elements['#account']->uid,1);
       
       if(!empty($last_publish_record)) {
-        $last_title = node_load($last_publish_record['nid'], $last_publish_record['vid']);
-        $last_record_publish = '<strong>Last Content Publish: </strong>'.ucwords($last_title->type).' - '.$last_title->title;
+        //$last_title = node_load($last_publish_record['nid'], $last_publish_record['vid']);
+        $last_type = ucfirst(str_replace('_', '', $last_publish_record['type']));
+        $last_record_publish = '<strong>Last Content Publish: </strong>'.ucwords($last_type).' - '.$last_publish_record['title'];
         print '<div class="my-stats-right">' . $last_record_publish . '</div>';
       }
       else
@@ -157,12 +159,18 @@ if($user->uid == $view_user_id) {
         foreach($value as $key1 => $value1) {
           //pr($key1);
           // make create permission array
-         if(strstr($key1,'create')) {
-          $create_arr = explode(' ', $key1);
-          $final_create_arr[] = ucwords(str_replace('_', ' ', $create_arr[1]));
+          if (strstr($key1, 'create')) {
+        if (!strstr($key1, 'url')) {
+          if (!strstr($key1, 'any')) {
+            if (!strstr($key1, 'own')) {
+             $create_arr = explode(' ', $key1);
+              $final_create_arr[] = ucwords(str_replace('_', ' ', $create_arr[1]));
+            }
+          }
         }
-        
-        // make edit permission array
+      }
+
+      // make edit permission array
         if(strstr($key1,'edit')) {
           
           if(!strstr($key1,'assign')) {
@@ -190,8 +198,10 @@ if($user->uid == $view_user_id) {
         
         // make role permission array
         if(strstr($key1,'assign')) {
-          $role_arr = explode(' ', $key1);
-          $final_role_arr[] = ucwords(str_replace('_', ' ', $role_arr[1]));
+          // $role_arr = explode(' ', $key1);
+         // pr($role_arr);
+          // $final_role_arr[] = ucwords(str_replace('_', ' ', $role_arr[1]));
+          $final_role_arr[] = ucwords($key1);
         }
       }
       }
@@ -202,7 +212,7 @@ if($user->uid == $view_user_id) {
       $comma_role_arr = implode (", ", $final_role_arr);
       $comma_del_arr = implode (", ", $final_del_arr);
       
-$output = "<h2>My Permissions</h2><table style='width:100%'>
+$output = "<h2>My Permissions</h2><table class='views-table'>
         <tr>
         <th>Operations</th>
         <th>Types</th>
@@ -217,91 +227,24 @@ $output = "<h2>My Permissions</h2><table style='width:100%'>
         <td>Delete</td>
         <td>$comma_del_arr</td>
           
-              </tr><tr>
-        <td>Role</td>
+              </tr>";
+$routput = '';
+foreach($user->roles as $key=>$value) {
+  if($key != 2) {
+$user_check = itg_common_check_role_access($key);
+  }
+if($user_check){
+$routput = "<tr><td>Role</td>
         <td>$comma_role_arr</td>
-          
-              </tr>";      
-$output .= "</table>";
+                        </tr>"; 
+}
+}
 
+$output .= $routput."</table>";
 print $output;
 ?>
 
 </div>
 <?php
 }
-?>
-<?php
-// query to get count of All node 
-function itg_get_all_node($content_type,$uid) {
-  
-  $query = "SELECT COUNT(*) amount FROM {node} n ".
-              "WHERE n.type = :type AND n.uid = :uid";
-     $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
-     return $result->amount;
-}
-
-// query to get count of publsh node 
-function itg_get_all_publish_node($content_type,$uid) {
-  
-  $query = "SELECT COUNT(*) amount FROM {node} n ".
-              "WHERE n.type = :type AND n.uid = :uid AND n.status = '1'";
-     $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
-     return $result->amount;
-}
-
-// query to get all node type of user
-function itg_get_all_node_type($uid) {
-  
-  $result = db_select('node', 'n')
-          ->fields('n', array('type'))
-          ->condition('uid', $uid, '=')
-          ->groupBy('type')
-          ->execute();
-  
-  while($record = $result->fetchAssoc()) {
-        $type[] = $record['type'];
-    }
-    
-    return $type;
-}
-
-
-// query to get last node created by user
-function itg_last_node_user($uid) {
-  
-  $last_result = db_select('node', 'n')
-          ->fields('n', array('title','type'))
-          ->condition('uid', $uid, '=')
-          ->orderBy('created', 'DESC')//ORDER BY created
-          ->range(0,1)
-          ->execute();
-  
-  while ($last_record = $last_result->fetchAssoc()) {
-    $last_record_info['title'] = $last_record['title'];
-    $last_record_info['type'] = $last_record['type'];
-  }
-  
-    return $last_record_info;
-}
-
-// query to get last node published by user
-function itg_last_node_published_user($uid,$publish_id) {
-  
-  $last_publish_result = db_select('workbench_moderation_node_history', 'w')
-          ->fields('w', array('nid','vid'))
-          ->condition('uid', $uid, '=')
-          ->condition('published', $publish_id, '=')
-          ->orderBy('stamp', 'DESC')//ORDER BY created
-          ->range(0,1)
-          ->execute();
-  
-  while ($last_publish_record = $last_publish_result->fetchAssoc()) {
-    $last_publish_record_info['vid'] = $last_publish_record['vid'];
-    $last_publish_record_info['nid'] = $last_publish_record['nid'];
-  }
-  
-    return $last_publish_record_info;
-}
-
 ?>

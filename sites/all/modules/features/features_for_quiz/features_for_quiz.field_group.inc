@@ -25,15 +25,20 @@ function features_for_quiz_field_group_info() {
     'children' => array(
       0 => 'field_quiz_add_questions',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Add Quiz Question',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-quiz-add-ques field-group-fieldset',
         'required_fields' => 1,
-        'id' => '',
+        'id' => 'tab-quiz-add-questions',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_quiz_add_ques|node|quiz|form'] = $field_group;
@@ -59,16 +64,20 @@ function features_for_quiz_field_group_info() {
       5 => 'field_quiz_winners',
       6 => 'title',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Basic Settings',
       'instance_settings' => array(
-        'required_fields' => 0,
-        'id' => 'BasicDetails',
-        'classes' => 'group-quiz-basic-settings field-group-fieldset',
+        'required_fields' => 1,
+        'id' => 'tab-quiz-basic-settings',
+        'classes' => 'itg-group-field',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_quiz_basic_settings|node|quiz|form'] = $field_group;
@@ -90,19 +99,57 @@ function features_for_quiz_field_group_info() {
       1 => 'field_survey_start_date',
       2 => 'field_survey_expity_date',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Date Settings',
       'instance_settings' => array(
-        'required_fields' => 0,
-        'id' => '',
-        'classes' => 'group-quiz-date-settings field-group-fieldset',
+        'required_fields' => 1,
+        'id' => 'tab-quiz-date-settings',
+        'classes' => 'itg-group-field',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_quiz_date_settings|node|quiz|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_quiz_metatags|node|quiz|form';
+  $field_group->group_name = 'group_quiz_metatags';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'quiz';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Meta Tags',
+    'weight' => '5',
+    'children' => array(
+      0 => 'metatags',
+      1 => 'path',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Meta Tags',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'tab-quiz-metatags',
+        'classes' => 'group-quiz-metatags field-group-div',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_quiz_metatags|node|quiz|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -119,16 +166,20 @@ function features_for_quiz_field_group_info() {
     'children' => array(
       0 => 'field_story_category',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Section',
       'instance_settings' => array(
-        'required_fields' => 0,
-        'id' => 'category',
-        'classes' => 'group-quiz-section field-group-fieldset',
+        'required_fields' => 1,
+        'id' => 'tab-quiz-section',
+        'classes' => 'itg-group-field',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_quiz_section|node|quiz|form'] = $field_group;
@@ -138,6 +189,7 @@ function features_for_quiz_field_group_info() {
   t('Add Quiz Question');
   t('Basic Settings');
   t('Date Settings');
+  t('Meta Tags');
   t('Section');
 
   return $field_groups;

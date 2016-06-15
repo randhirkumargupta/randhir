@@ -4,6 +4,8 @@
  * @file
  * Module file for the ITG Taxonomy Manager module.
  */
+// Load helper file
+module_load_include('inc', 'itg_category_manager', 'includes/itg_category_manager.helper');
 
 /**
  * Implements hook_init
@@ -185,12 +187,13 @@ function itg_category_manager_term_state($tid) {
       ->fields('itg', array('status'))
       ->condition('tid', $tid, '=');
   $itg_result = $itg_query->execute()->fetchField();
+
   $flag = FALSE;
-  if(isset($itg_result) && $itg_result == 1) {
+  if (isset($itg_result) && $itg_result == 1) {
     $flag = TRUE;
-  }  
-  
-  return $flag; 
+  }
+
+  return $flag;
 }
 
 /**
@@ -205,7 +208,15 @@ function itg_category_manager_term_state($tid) {
 function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
   global $user;
   global $base_url;
-
+  // Add js to category management form
+  if ($form['#vocabulary']->machine_name == 'category_management') {
+    $form['#attributes']['class'][] = 'node-form node-category-form';
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
+    );
+    $form['relations']['parent']['#config']['module'] = 'itg_category_manager';
+    $form['#submit'][] = 'itg_category_manager_custom_submit';
+  }
   if ($form_id == 'taxonomy_form_term') {
     // code for facebook image field hide and show
     $form['field_cm_no_follow']['#states'] = array(
@@ -213,8 +224,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         ':input[name="field_cm_hide_cat_from_search[und][1]"]' => array('checked' => TRUE),
       ),
     );
-    
-     drupal_add_js('jQuery(document).ready(function() {
+
+    drupal_add_js('jQuery(document).ready(function() {
              //code to check unchek checkbox when all search engine checkbox is checked
              
             jQuery("#edit-field-cm-hide-cat-from-search-und-1").click(function () {
@@ -241,7 +252,6 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     $used_by_content = taxonomy_select_nodes($tid);
     if (count($used_by_content) > 0) {
       form_set_error('name', t('Sorry! you cannot delete this category.<br/>'));
-
       $count_used = count($used_by_content);
       drupal_set_message(t('This category is mapped with ' . $count_used . ' contents.') . l(' Click here', 'category-remove-from-node/' . $tid, array('attributes' => array('target' => '_blank'))), 'status');
       if ($user->uid != 1) {
@@ -269,14 +279,10 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
   }
   else {
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
-      // Add js file
-      $form['#attached']['js'] = array(
-        drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
-      );
       if ($form['tid']['#value'] != NULL) {
         $destination_edit = $form_state['term']->field_publish_time['und'][0]['value'];
-        $filter = explode('-', $destination_edit);        
-        $form['#action'] = '?destination=category-manager?date='.$filter[0].'-'.$filter[1]; //Redirect to term listing page, after term has been added successfully.        
+        $filter = explode('-', $destination_edit);
+        $form['#action'] = '?destination=category-manager?date=' . $filter[0] . '-' . $filter[1]; //Redirect to term listing page, after term has been added successfully.        
       }
       else {
         $form['#action'] = '?destination=category-manager'; //Redirect to term listing page, after term has been added successfully.
@@ -311,34 +317,38 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['relations']['#attributes'] = array('disabled' => TRUE);
       }
       // Taxonomy active deactive logic
-      $form['term_state'] = array(
-        '#prefix' => '<div class="itg-term-state"><label>'.t('Term State').'</label>',
+      $form['term-state-wrap'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Term Status'),
+        '#weight' => 4,
+      );
+      $form['term-state-wrap']['term_state'] = array(
+        '#prefix' => '<div class="itg-term-state"><label>' . t('Term State') . '</label>',
         '#type' => 'checkbox',
         '#title' => t('Active'),
-        '#weight' => 20,
         '#default_value' => $form['tid']['#value'] == NULL ? TRUE : itg_category_manager_term_state($form['tid']['#value']),
         '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
         '#suffix' => '</div>',
       );
       if ($form['tid']['#value'] !== NULL) {
         $term_status = itg_category_manager_term_state($form['tid']['#value']);
+
         if ($term_status) {
-          $form['state-mode'] = array(
+          $form['term-state-wrap']['state-mode'] = array(
             '#type' => 'radios',
             '#title' => t('Disable mode'),
-            '#options' => array('Forcefully', 'Manually'),          
-            '#weight' => 20,
+            '#options' => array('Forcefully', 'Manually'),
             '#states' => array(
               'visible' => array(
                 ':input[name="term_state"]' => array('checked' => FALSE),
               ),
             ),
+            '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module', 'views') . '/images/status-active.gif" />',
           );
         }
         else {
-          $form['term_state']['#description'] = t('This category is currently in inactive mode.');          
+          $form['term-state-wrap']['term_state']['#suffix'] = '<div class="status-message">' . t('This category is currently in inactive mode.') . '</div>';
         }
-        
       }
       // Hide publish time field.
       $form['field_publish_time']['#prefix'] = '<div style="display:none;">';
@@ -382,7 +392,10 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
 }
 
 /**
- * Implements _form_validate() for taxonomy_form_term().
+ * Callback function for term validation.
+ * 
+ * @param array $form
+ * @param array $form_state
  */
 function itg_category_manager_term_validate($form, &$form_state) {
   // Set published time same as parent term  
@@ -391,11 +404,19 @@ function itg_category_manager_term_validate($form, &$form_state) {
     $pTerm = taxonomy_term_load($termParent);
     $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];
   }
-  if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete' && $form_state['term']->tid != NULL ) {
-    form_set_error('state-mode', t('Please select one mode.'));
-  }
-  // Code end for publish time
 
+  // Check status of the mode
+  $mode_status = itg_category_manager_term_state($form_state['values']['tid']);
+
+  // If term is inactive then set disable mode value to 0 to avoid below error.
+  if (!$mode_status) {
+    $form_state['values']['state-mode'] = 1;
+  }
+  if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete' && $form_state['term']->tid != NULL) {
+    form_set_error('state-mode', t('Please select either forcefully or manually disable mode.'));
+  }
+
+  // Code end for publish time
   $term = $form_state['values']['name'];
   $vid = $form_state['values']['vid'];
   $tid = $form_state['values']['tid'];
@@ -410,11 +431,11 @@ function itg_category_manager_term_validate($form, &$form_state) {
       form_set_error('parent', t('Sorry! You can not create more than 4 levels of categories within a section.'));
     }
     //Check for duplicate category
-    $dup_parents = itg_category_manager_is_dupe_term($term, $vid, $tid);    
+    $dup_parents = itg_category_manager_is_dupe_term($term, $vid, $tid);
     if (count($dup_parents) >= 1) {
       $new_rparent = $termParent != 0 ? taxonomy_get_parents_all($termParent) : 0;
       $new_rparent = is_array($new_rparent) ? $new_rparent[count($new_rparent) - 1]->tid : 0;
-      foreach ($dup_parents as $value) {        
+      foreach ($dup_parents as $value) {
         if (isset($value->tid) && $value->tid == $new_rparent) {
           form_set_error('name', t('Category name already exists.'));
         }
@@ -425,8 +446,6 @@ function itg_category_manager_term_validate($form, &$form_state) {
           
         }
       }
-      
-      
     }
   }
 }
@@ -437,30 +456,35 @@ function itg_category_manager_term_validate($form, &$form_state) {
  * @param type $form_state
  * @return int
  */
-function itg_category_manager_add_form_after_build($form, &$form_state) {  
+function itg_category_manager_add_form_after_build($form, &$form_state) {
   //Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'category-manager', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
-  );  
+  );
   // Hide save buttons once someone uncheck state checkbox.
   $form['actions']['submit']['#states'] = array(
     'invisible' => array(
       ':input[name="state-mode"]' => array(
         array('value' => '0'),
         array('value' => '1'),
-      ),      
+      ),
     ),
   );
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
-  
+
   return $form;
 }
 
 /**
- * Implements hook_form_FORM_ID_alter() for taxonomy_form_vocabulary().
+ * Implements hook_form_FORM_ID_alter()
+ * 
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ * @return array
  */
 function itg_category_manager_form_taxonomy_form_vocabulary_alter(&$form, &$form_state, $form_id) {
   // Do not add the validator if Delete was hit.
@@ -478,7 +502,9 @@ function itg_category_manager_form_taxonomy_form_vocabulary_alter(&$form, &$form
 }
 
 /**
- * Implements _form_validate() for taxonomy_form_vocabulary().
+ * Callback function for vocabulary validation
+ * @param array $form
+ * @param array $form_state
  */
 function itg_category_manager_vocabulary_validate_vocabulary_validate($form, &$form_state) {
   $vocab = $form_state['values']['name'];
@@ -490,6 +516,11 @@ function itg_category_manager_vocabulary_validate_vocabulary_validate($form, &$f
 
 /**
  * Checks whether a term is a duplicate, based on the module preferences.
+ * 
+ * @param string $term
+ * @param int $vid
+ * @param int $tid
+ * @return boolean
  */
 function itg_category_manager_is_dupe_term($term, $vid, $tid = 0) {
 
@@ -545,11 +576,10 @@ function itg_category_manager_is_dupe_term($term, $vid, $tid = 0) {
           else {
             $data[] = $root_parent[count($root_parent) - 1];
           }
-                    
         }
       }
-      
-      return $data;      
+
+      return $data;
     }
   }
 
@@ -557,7 +587,11 @@ function itg_category_manager_is_dupe_term($term, $vid, $tid = 0) {
 }
 
 /**
- * Checks whether a vocabulary is a duplicate, based on the module preferences.
+ * Check case sensitive comparision.
+ * 
+ * @param string $vocab
+ * @param int $vid
+ * @return boolean
  */
 function itg_category_manager_is_dupe_vocabulary($vocab, $vid = 0) {
 
@@ -611,14 +645,14 @@ function itg_category_manager_get_term_from_name($term_name, $vid) {
  * @param type $type
  * @return boolean
  */
-function itg_category_manager_entity_update($entity, $type) {  
+function itg_category_manager_entity_update($entity, $type) {
   if ($type == 'taxonomy_term' && $entity->vocabulary_machine_name == 'category_management') {
     $mail_content = itg_category_manager_get_mail_content($entity);
-    
+
     $params = array(
       'body' => $mail_content,
-      'subject' => t('India Today | '.$entity->name.' Category Updated!'),
-    );    
+      'subject' => t('India Today | ' . $entity->name . ' Category Updated!'),
+    );
     $to = "itoday135@gmail.com"; // SEO team mail id
     $mail = drupal_mail('itg_category_manager_seo_team', 'send_mail_to_seo', $to, language_default(), $params, 'haripal.rao@kelltontech.com', TRUE);
     if ($mail['result']) {
@@ -668,6 +702,19 @@ function itg_category_manager_get_mail_content($entity) {
   $display_name = isset($entity->field_cm_display_title[LANGUAGE_NONE][0]['value']) ? $entity->field_cm_display_title[LANGUAGE_NONE][0]['value'] : 'NA';
   $term_alias_url = $base_url . '/' . $entity->path['alias'];
   $redirection_url = isset($entity->field_cm_redirection_url['und'][0]['value']) ? $entity->field_cm_redirection_url['und'][0]['value'] : 'NA';
+
+  $output = '<ul>';
+  // Find content type value
+  if (count($entity->field_cm_select_type['und']) >= 1) {
+    foreach ($entity->field_cm_select_type['und'] as $value) {
+      $output .= '<li>' . ucfirst($value['value']) . '</li>';
+    }
+  }
+  else {
+    $output .= '<li>NA</li>';
+  }
+  $output .= '</ul>';
+
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -679,7 +726,8 @@ function itg_category_manager_get_mail_content($entity) {
       <tr><td>Display Title: ' . $display_name . '</td></tr>
       <tr><td>
         Category URL: <a href="' . $term_alias_url . '" target="_blank">' . $term_alias_url . '</a><br />
-        Redirection URL: '.$redirection_url.'  
+        Redirection URL: ' . $redirection_url . '<br />
+        Content Type: ' . $output . '  
       </td></tr>
       <tr><td>Thanks,</td></tr>
       <tr><td>India Today Team</td></tr></table>
@@ -721,7 +769,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
  * Update logs for Sef Url and modification time.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
-  if ($term->tid !== NULL && $term->path['pathauto'] == 0) {    
+  if ($term->tid !== NULL && $term->path['pathauto'] == 0) {
     global $user;
     $data = array();
     $data = array(
@@ -744,40 +792,45 @@ function itg_category_manager_taxonomy_term_presave($term) {
 /**
  * Implements hook_pathauto_alias_alter().
  * Insert url aias to itg-category_manager table against specific term id.
+ * 
+ * @global stdObject $user
+ * @param string $alias
+ * @param array $context
  */
 function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
+  global $user;
   // Handle Insert case
-  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert' && $context['data']['term']->vocabulary_machine_name == 'category_management') {    
+  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
     // find section name
-    $parents = taxonomy_get_parents_all($context['data']['term']->tid);    
+    $parents = taxonomy_get_parents_all($context['data']['term']->tid);
     $section = end($parents);
     // Set custom alias
     if ($section->tid == $context['data']['term']->tid) {
       $alias = str_replace(' ', '-', strtolower($context['data']['term']->name));
     }
     else {
-      $new_alias = str_replace(' ', '-', strtolower($section->name)) .'/'. str_replace(' ', '-', strtolower($context['data']['term']->name));
+      $new_alias = str_replace(' ', '-', strtolower($section->name)) . '/' . str_replace(' ', '-', strtolower($context['data']['term']->name));
       $alias = $new_alias;
-    }    
+    }
     db_update('itg_sef_url')
         ->fields(array('sef_url' => $alias))
         ->condition('tid', $context['data']['term']->tid)
         ->execute();
   }
   // Handle update case
-  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'update' && $context['data']['term']->vocabulary_machine_name == 'category_management') {    
+  if ($context['module'] == 'taxonomy_term' && $context['op'] == 'update' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
     // find section name
-    $parents = taxonomy_get_parents_all($context['data']['term']->tid);    
+    $parents = taxonomy_get_parents_all($context['data']['term']->tid);
     $section = end($parents);
     // Set custom alias
     if ($section->tid == $context['data']['term']->tid) {
       $alias = $alias = str_replace(' ', '-', strtolower($context['data']['term']->name));
     }
     else {
-      $new_alias = str_replace(' ', '-', strtolower($section->name)) .'/'. str_replace(' ', '-', strtolower($context['data']['term']->name));
+      $new_alias = str_replace(' ', '-', strtolower($section->name)) . '/' . str_replace(' ', '-', strtolower($context['data']['term']->name));
       $alias = $new_alias;
-    }    
-    global $user;
+    }
+
     $data = array();
     $data = array(
       'tid' => $context['data']['term']->tid,
@@ -786,7 +839,7 @@ function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
       'changed' => time(),
     );
     drupal_write_record('itg_sef_url', $data);
-    
+
     // Update modified date on itg_category_manager table
     $status = isset($context['data']['term']->term_state) ? $context['data']['term']->term_state : 1;
     db_update('itg_category_manager')
@@ -916,6 +969,8 @@ function itg_category_manager_block_info() {
 
 /**
  * Implements hook_block_view().
+ * @param string $delta
+ * @return array 
  */
 function itg_category_manager_block_view($delta = '') {
   $block = array();
@@ -925,7 +980,7 @@ function itg_category_manager_block_view($delta = '') {
   switch ($delta) {
     case 'sef_url_log':
       $arg = arg();
-      $term = taxonomy_term_load($arg[2]);      
+      $term = taxonomy_term_load($arg[2]);
       if ($term->vid == 4) {
         $ass_node = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
         if (count($ass_node)) {
@@ -1026,6 +1081,9 @@ function itg_category_manager_seflog($tid, $limit = NULL) {
 
 /**
  * callback function for sef url page
+ * 
+ * @param int $tid
+ * @return string
  */
 function itg_category_manager_seflogpage($tid) {
   $data = itg_category_manager_seflog($tid);
@@ -1050,6 +1108,8 @@ function itg_category_manager_seflogpage($tid) {
 }
 
 /**
+ * Callback function for category name autocomplete.
+ * 
  * @param string $string keyword for auto suggest.
  * @return json Autocomplete callback for category manager view
  */
@@ -1113,7 +1173,6 @@ function itg_category_manager_disable_forcefully() {
  */
 function itg_category_manager_disable_manually_form() {
   $arg = arg();
-  $form = array();
   // Load includes/common.inc from the hierarchical select module.
   module_load_include('inc', 'hierarchical_select', 'includes/common');
 
@@ -1144,11 +1203,19 @@ function itg_category_manager_disable_manually_form() {
     '#type' => 'submit',
     '#value' => 'Save',
   );
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'taxonomy/term/' . check_plain($arg[2]) . '/edit', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
+
   return $form;
 }
 
 /**
  * Validation function for manual disable category form.
+ * 
+ * @param array $form
+ * @param array $form_state
  */
 function itg_category_manager_disable_manually_form_validate($form, &$form_state) {
   if ($form_state['input']['itg_categories']['hierarchical_select']['selects'][0] == 'label_0') {
@@ -1158,6 +1225,9 @@ function itg_category_manager_disable_manually_form_validate($form, &$form_state
 
 /**
  * submit callback for manually disabled category.
+ * 
+ * @param array $form
+ * @param array $form_state
  */
 function itg_category_manager_disable_manually_form_submit($form, &$form_state) {
   $parent_category = $form_state['values']['itg_categories'];
@@ -1192,4 +1262,18 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
     }
   }
   drupal_goto('category-manager');
+}
+
+function itg_category_manager_custom_submit($form, &$form_state) {  
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if (arg(3) == 'category_management' && arg(4) == 'add') {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';
+  }
+  $category_title = $form_state['node']->title;
+  drupal_set_message(t('Category <b>' . $form_state['term']->name . '</b> has been ' . $op . '.'));  
 }

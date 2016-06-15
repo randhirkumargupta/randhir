@@ -40,7 +40,7 @@ function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form
  * @param type $form_state
  */
 function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
- 
+ //p($form);
   if (!isset($form['#node']->nid)) {
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
@@ -92,33 +92,16 @@ function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {
   }
   
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'mega-review-critic') {
-    drupal_set_message(t('<b>Movie review</b> has been submitted successfully.'));
+    $op = 'created';  
   } else {
-      drupal_set_message(t('<b>Movie review</b> has been updated successfully.'));
+      $op = 'updated';
   }
+    $mega_title = $form_state['node']->title;
+  drupal_set_message(t('Mega review <b>' . $mega_title . '</b> has been ' . $op.'.' ));
+  $_GET['destination'] = $_REQUEST['destination'];
    
 }
 
-/**
- * Implements hook_field_widget_form_alter()
- * @staticvar int $count
- * @param type $element
- * @param type $form_state
- * @param type $context
- */
-function itg_mega_reviews_critics_field_widget_form_alter(&$element, &$form_state, $context) {
-  //dpm($element[0]['#field_name']);
-//  if (isset($element[0]['#field_name']) && $element[0]['#field_name'] == 'field_astro_thumb_icon') {    
-//    static $count = 0;   
-//    //dpm($count);
-//    $fid = itg_astro_last_updated_node($count);
-//    $trigered_button = isset($form_state['clicked_button']['#value']) ? $form_state['clicked_button']['#value'] : '';
-//    if($element[0]['#default_value']['fid'] == 0 && $trigered_button != 'Remove') {
-//      $element[0]['#default_value']['fid'] = $fid;      
-//    }        
-//    ++$count;
-//  }
-}
 
 /**
  * Implements hook_block_info().
@@ -148,8 +131,6 @@ function itg_mega_reviews_critics_block_view($delta = '') {
   
   return $block;
 }
-
-
 
 /**
  * Implements hook_theme().

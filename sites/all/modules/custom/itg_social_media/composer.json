@@ -1,0 +1,7 @@
+{
+    "require": {
+        "facebook/php-sdk-v4": "^5.2",
+        "guzzlehttp/guzzle": "^6.2",
+        "jublonet/codebird-php": "^3.1"
+    }
+}

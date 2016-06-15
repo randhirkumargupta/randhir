@@ -58,18 +58,58 @@ function feature_for_mobile_services_field_group_info() {
       1 => 'field_email_address',
       2 => 'field_mobile_number',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Business Contact',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-business-contact field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_business_contact|node|clients_creation|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_service_ftp|node|clients_creation|form';
+  $field_group->group_name = 'group_service_ftp';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'clients_creation';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'FTP',
+    'weight' => '9',
+    'children' => array(
+      0 => 'field_ftp_ip_address',
+      1 => 'field_ftp_username',
+      2 => 'field_ftp_password',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'FTP',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'itg-group-service-ftp',
+        'classes' => 'group-service-ftp field-group-div',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_service_ftp|node|clients_creation|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -88,12 +128,16 @@ function feature_for_mobile_services_field_group_info() {
       1 => 'field_ftp_username',
       2 => 'field_ftp_password',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-service-ftp field-group-fieldset',
+        'show_label' => 1,
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
+        'classes' => '',
         'required_fields' => 1,
         'id' => '',
       ),
@@ -118,15 +162,20 @@ function feature_for_mobile_services_field_group_info() {
       1 => 'field_contact_tech_email_address',
       2 => 'field_contact_tech_mobile_number',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Technical Contact',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-technical-contact field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_technical_contact|node|clients_creation|form'] = $field_group;

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * ITG Astro module file has custom settings and logic about astro modules. 
+ */
 
 /**
  * Get file name from fid
@@ -131,40 +135,35 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     // Set field visibility for zodiac sign field
     $form['field_astro_zodiac']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '227'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '315'),
       ),
     );
     // Set field visibility for collective text field    
     $form['field_buzz_description']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective video thumbnail field
     $form['field_astro_video_thumbnail']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
-    // Set field visibility for collective video field
-    $form['field_astro_video']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
-      ),
-    );
+    
     // Set field visibility for collective audio field
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
       ),
     );
     // Set field visibility for collective audio field
     $form['field_astro_numerology_values']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '225'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '313'),
       ),
     );  
-
+    
 
     $form['#action'] = '?destination=manage-astro';
     $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';
@@ -186,7 +185,12 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
 function itg_astro_after_build($form, &$form_state) {  
   // Initialize globals
   global $user, $base_url;
-  
+  // Set field visibility for collective video field
+    $form['field_astro_video']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+      ),
+    );
   //$form['field_story_category']['und']['#title'] = t('Select Program') . '<span class="form-required" title="This field is required."> *</span>';
   if (!isset($form['#node']->nid)) {
     // hide remove button of first field on add form 
@@ -202,7 +206,7 @@ function itg_astro_after_build($form, &$form_state) {
       '#markup' => '<div class="itg-astro-image"><img src="' . image_style_url("thumbnail", $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>',
     );
     $form['field_astro_zodiac']['und'][$i]['#title'] = t($zodiac_name[$i]->name);
-    if ($i == 0) {      
+    if ($i < 9) {      
       $form['field_astro_numerology_values']['und'][$i]['field_astro_select_number']['und']['#title'] = t('Select Number') . '<span class="form-required" title="This field is required."> *</span>';
       $form['field_astro_numerology_values']['und'][$i]['field_buzz_description']['und'][0]['value']['#title'] = t('Enter Text') . '<span class="form-required" title="This field is required."> *</span>';
     }
@@ -346,22 +350,36 @@ function itg_astro_menu_alter(&$item) {
  * Implement hook_views_pre_render
  * @param stdObject $view
  */
-function itg_astro_views_pre_render(&$view) {    
-  //Add "Create Breaking news" on listing page of Breaking news
-  if ($view->name == "manage_astroo") {
-    $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
-    $header_content_astro .= l(t('File Astro'), 'node/add/astro', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
-    $view->attachment_before = $header_content_astro;
-  }
-  if ($view->name == 'category_manager_dev') {    
-    $header_content_astro = '<span class="count">Count(' . count($view->result) . ')&nbsp;</span>';  
-    $header_content_astro .= l(t('Create Category'), 'admin/structure/taxonomy/category_management/add');
-    $view->attachment_before = $header_content_astro;
-  }
-  if ($view->name == 'syndication_client') {
-    $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
-    $header_content_astro .= l(t('Create Client'), 'node/add/syndication-client');    
-    $view->attachment_before = $header_content_astro;
+function itg_astro_views_pre_render(&$view) {
+  
+  switch ($view->name) {
+    case 'associated_content':
+      $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';        
+      $view->attachment_before = $header_content_astro;    
+      break;
+      
+    case 'manage_astro':
+      $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
+      $header_content_astro .= l(t('File Astro'), 'node/add/astro', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
+      $view->attachment_before = $header_content_astro;    
+      break;
+  
+    case 'category_manager':
+      $header_content_astro = '<span class="count">Count(' . count($view->result) . ')&nbsp;</span>';  
+      $header_content_astro .= l(t('Create Category'), 'admin/structure/taxonomy/category_management/add');
+      $view->attachment_before = $header_content_astro;
+      break;
+    
+    case 'syndication_client':
+      $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
+      $header_content_astro .= l(t('Create Client'), 'node/add/syndication-client' , array('query' => array('destination' => 'syndication-client-listing')));    
+      $view->attachment_before = $header_content_astro;
+      break;
+    case 'syndication_rule_listing':
+      $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';  
+      $header_content_astro .= l(t('Create Rule'), 'node/add/syndication-rule' , array('query' => array('destination' => 'syndication-rule-listing')));    
+      $view->attachment_before = $header_content_astro;
+      break;
   }
 }
 

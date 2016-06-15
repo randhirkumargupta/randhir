@@ -604,10 +604,11 @@ function blocks_features_default_blockexport_settings() {
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/story/*
 node/*/edit',
   'title' => '',
   'cache' => 8,
@@ -619,10 +620,11 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/story/*
 node/*/edit',
   'title' => '',
   'cache' => 8,
@@ -652,6 +654,7 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/story/*
 node/*/edit',
   'title' => '',
   'cache' => 8,
@@ -956,11 +959,12 @@ node/*/edit',
   'delta' => 'story_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -21,
+  'weight' => -24,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/story/*
 node/*/edit',
   'title' => '',
   'cache' => 8,
@@ -1069,7 +1073,7 @@ node/*/edit',
   'delta' => 'main',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -8,
+  'weight' => -10,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -1266,10 +1270,11 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/story/*
 node/*/edit',
   'title' => '',
   'cache' => 8,
@@ -2023,10 +2028,11 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/story/*
 node/*/edit',
   'title' => '',
   'cache' => 8,
@@ -2555,7 +2561,7 @@ node/*/edit',
   'delta' => 'menu-admin-left-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -26,
+  'weight' => -29,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -2625,7 +2631,8 @@ in-queue-story
 my-expired-story
 expired-story
 archive-story
-my-rejected-story',
+my-rejected-story
+ugc-published-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2635,7 +2642,7 @@ my-rejected-story',
   'delta' => 'menu-story-content-admin-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -25,
+  'weight' => -28,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2649,7 +2656,8 @@ in-queue-story
 my-expired-story
 expired-story
 archive-story
-my-rejected-story',
+my-rejected-story
+ugc-published-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2673,7 +2681,8 @@ in-queue-story
 my-expired-story
 expired-story
 archive-story
-my-rejected-story',
+my-rejected-story
+ugc-published-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2697,7 +2706,8 @@ in-queue-story
 my-expired-story
 expired-story
 archive-story
-my-rejected-story',
+my-rejected-story
+ugc-published-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2721,7 +2731,8 @@ in-queue-story
 my-expired-story
 expired-story
 archive-story
-my-rejected-story',
+my-rejected-story
+ugc-published-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2745,7 +2756,8 @@ in-queue-story
 my-expired-story
 expired-story
 archive-story
-my-rejected-story',
+my-rejected-story
+ugc-published-story',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -2785,7 +2797,7 @@ node/*/edit',
   'delta' => 'breaking_news_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -12,
+  'weight' => -14,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -2850,8 +2862,9 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
+node/add/photogallery/*
 node/*/edit',
-  'title' => '',
+  'title' => '<none>',
   'cache' => 8,
 );
   $export['block'][] = array(
@@ -2865,8 +2878,9 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
+node/add/photogallery/*
 node/*/edit',
-  'title' => '',
+  'title' => '<none>',
   'cache' => 8,
 );
   $export['block'][] = array(
@@ -2875,13 +2889,14 @@ node/*/edit',
   'delta' => 'photogallery_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -11,
+  'weight' => -13,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
+node/add/photogallery/*
 node/*/edit',
-  'title' => '',
+  'title' => '<none>',
   'cache' => 8,
 );
   $export['block'][] = array(
@@ -2895,8 +2910,9 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
+node/add/photogallery/*
 node/*/edit',
-  'title' => '',
+  'title' => '<none>',
   'cache' => 8,
 );
   $export['block'][] = array(
@@ -2910,8 +2926,9 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
+node/add/photogallery/*
 node/*/edit',
-  'title' => '',
+  'title' => '<none>',
   'cache' => 8,
 );
   $export['block'][] = array(
@@ -2925,8 +2942,9 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
+node/add/photogallery/*
 node/*/edit',
-  'title' => '',
+  'title' => '<none>',
   'cache' => 8,
 );
   $export['block'][] = array(
@@ -3461,7 +3479,7 @@ my-rejected-photogallery',
   'delta' => 'menu-photogallery-admin-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -24,
+  'weight' => -27,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3659,8 +3677,9 @@ my-rejected-photogallery',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3674,8 +3693,9 @@ node/add/recipe',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3685,12 +3705,13 @@ node/add/recipe',
   'delta' => 'recipe_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -17,
+  'weight' => -20,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3704,8 +3725,9 @@ node/add/recipe',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3719,8 +3741,9 @@ node/add/recipe',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3734,8 +3757,9 @@ node/add/recipe',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'node/*/edit
-node/add/recipe',
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -3775,7 +3799,7 @@ node/*/edit',
   'delta' => 'astro_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -19,
+  'weight' => -22,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -3949,7 +3973,7 @@ ask-an-expert-history',
   'delta' => 'poll_listing-block_2',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -7,
+  'weight' => -9,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -4019,7 +4043,7 @@ ask-an-expert-history',
   'delta' => 'poll_listing-block_1',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -6,
+  'weight' => -8,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
@@ -4075,7 +4099,7 @@ ask-an-expert-history',
   'delta' => 'ask_an_expert',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -14,
+  'weight' => -16,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4117,7 +4141,7 @@ ask-an-expert-history',
   'delta' => 'poll_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -9,
+  'weight' => -11,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4132,7 +4156,7 @@ node/*/edit',
   'delta' => 'menu-ask-an-expert-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -13,
+  'weight' => -15,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4205,7 +4229,7 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'ask-an-expert
@@ -4277,7 +4301,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'ask-an-expert
@@ -4349,7 +4373,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'ask-an-expert
@@ -4421,7 +4445,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'ask-an-expert
@@ -4540,7 +4564,7 @@ movie-review-draft-list',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'movie-review-list
@@ -4625,7 +4649,7 @@ movie-review-draft-list',
   'delta' => 'menu-mega-review-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -17,
+  'weight' => -21,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4669,7 +4693,7 @@ movie-review-draft-list',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'movie-review-list
@@ -4712,7 +4736,7 @@ movie-review-draft-list',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'movie-review-list
@@ -4755,7 +4779,7 @@ movie-review-draft-list',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'movie-review-list
@@ -4805,7 +4829,7 @@ my-rejected-blogs',
   'delta' => 'menu-blog-admin-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -23,
+  'weight' => -26,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -4945,7 +4969,7 @@ node/*/edit',
   'delta' => 'quiz_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -20,
+  'weight' => -23,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -5035,7 +5059,7 @@ node/*/edit',
   'delta' => 'survey_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -10,
+  'weight' => -12,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -5090,96 +5114,6 @@ node/*/edit',
   'cache' => 8,
 );
   $export['block'][] = array(
-  'bid' => 348,
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'theme' => 'bartik',
-  'status' => 0,
-  'weight' => 0,
-  'region' => -1,
-  'custom' => 0,
-  'visibility' => 1,
-  'pages' => 'node/add/newsletter
-node/*/edit',
-  'title' => '<none>',
-  'cache' => 8,
-);
-  $export['block'][] = array(
-  'bid' => 349,
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'theme' => 'itg',
-  'status' => 0,
-  'weight' => 0,
-  'region' => -1,
-  'custom' => 0,
-  'visibility' => 1,
-  'pages' => 'node/add/newsletter
-node/*/edit',
-  'title' => '<none>',
-  'cache' => 8,
-);
-  $export['block'][] = array(
-  'bid' => 350,
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'theme' => 'rubik',
-  'status' => 1,
-  'weight' => -15,
-  'region' => 'content',
-  'custom' => 0,
-  'visibility' => 1,
-  'pages' => 'node/add/newsletter
-node/*/edit',
-  'title' => '<none>',
-  'cache' => 8,
-);
-  $export['block'][] = array(
-  'bid' => 351,
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'theme' => 'seven',
-  'status' => 0,
-  'weight' => 0,
-  'region' => -1,
-  'custom' => 0,
-  'visibility' => 1,
-  'pages' => 'node/add/newsletter
-node/*/edit',
-  'title' => '<none>',
-  'cache' => 8,
-);
-  $export['block'][] = array(
-  'bid' => 352,
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'theme' => 'tao',
-  'status' => 0,
-  'weight' => 0,
-  'region' => -1,
-  'custom' => 0,
-  'visibility' => 1,
-  'pages' => 'node/add/newsletter
-node/*/edit',
-  'title' => '<none>',
-  'cache' => 8,
-);
-  $export['block'][] = array(
-  'bid' => 353,
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'theme' => 'zen',
-  'status' => 0,
-  'weight' => 0,
-  'region' => -1,
-  'custom' => 0,
-  'visibility' => 1,
-  'pages' => 'node/add/newsletter
-node/*/edit',
-  'title' => '<none>',
-  'cache' => 8,
-);
-  $export['block'][] = array(
   'bid' => 354,
   'module' => 'itg_mega_reviews_critics',
   'delta' => 'mega_reviews_tab_form_block',
@@ -5215,7 +5149,7 @@ node/*/edit',
   'delta' => 'mega_reviews_tab_form_block',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -16,
+  'weight' => -19,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -5290,7 +5224,7 @@ assigned-task-list',
   'delta' => 'menu-task-allocation-menu',
   'theme' => 'rubik',
   'status' => 1,
-  'weight' => -22,
+  'weight' => -25,
   'region' => 'content',
   'custom' => 0,
   'visibility' => 1,
@@ -5359,10 +5293,1731 @@ assigned-task-list',
   'title' => '<none>',
   'cache' => -1,
 );
+  $export['block'][] = array(
+  'bid' => 366,
+  'module' => 'autologout',
+  'delta' => 'info',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 367,
+  'module' => 'itg_api',
+  'delta' => 'api_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/api-widgets',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 369,
+  'module' => 'autologout',
+  'delta' => 'info',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 370,
+  'module' => 'itg_api',
+  'delta' => 'api_form_block',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/api-widgets',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 372,
+  'module' => 'autologout',
+  'delta' => 'info',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 373,
+  'module' => 'itg_api',
+  'delta' => 'api_form_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/api-widgets',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 375,
+  'module' => 'autologout',
+  'delta' => 'info',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 376,
+  'module' => 'itg_api',
+  'delta' => 'api_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/api-widgets',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 378,
+  'module' => 'autologout',
+  'delta' => 'info',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 379,
+  'module' => 'itg_api',
+  'delta' => 'api_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/api-widgets',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 381,
+  'module' => 'autologout',
+  'delta' => 'info',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 382,
+  'module' => 'itg_api',
+  'delta' => 'api_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/api-widgets',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 384,
+  'module' => 'autologout',
+  'delta' => 'info',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 385,
+  'module' => 'backup_migrate',
+  'delta' => 'quick_backup',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 386,
+  'module' => 'blog',
+  'delta' => 'recent',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 387,
+  'module' => 'comment',
+  'delta' => 'recent',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 388,
+  'module' => 'devel',
+  'delta' => 'execute_php',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 389,
+  'module' => 'devel',
+  'delta' => 'switch_user',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 390,
+  'module' => 'diff',
+  'delta' => 'inline',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 391,
+  'module' => 'formblock',
+  'delta' => 'ask_an_expert',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/lorem-ipsum-simply-dummy-text',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 392,
+  'module' => 'formblock',
+  'delta' => 'breaking_news',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 393,
+  'module' => 'formblock',
+  'delta' => 'user_register',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 394,
+  'module' => 'formblock',
+  'delta' => 'user_password_request',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 397,
+  'module' => 'itg_api',
+  'delta' => 'api_form_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'content/api-widgets',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 398,
+  'module' => 'itg_astro',
+  'delta' => 'astro_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -21,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 399,
+  'module' => 'itg_breaking_news',
+  'delta' => 'breaking_news_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -20,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 400,
+  'module' => 'itg_category_manager',
+  'delta' => 'sef_url_log',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 401,
+  'module' => 'itg_mega_reviews_critics',
+  'delta' => 'mega_reviews_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 403,
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -19,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/photogallery
+node/add/photogallery/*
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 404,
+  'module' => 'itg_poll',
+  'delta' => 'poll_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 405,
+  'module' => 'itg_quiz',
+  'delta' => 'quiz_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 406,
+  'module' => 'itg_recipe',
+  'delta' => 'recipe_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/recipe
+node/add/recipe/*
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 408,
+  'module' => 'itg_story',
+  'delta' => 'story_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -22,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/story
+node/add/story/*
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 409,
+  'module' => 'itg_survey',
+  'delta' => 'survey_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 410,
+  'module' => 'menu',
+  'delta' => 'menu-ask-an-expert-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -23,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ask-an-expert
+ask-an-expert-history',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 411,
+  'module' => 'menu',
+  'delta' => 'menu-blog-admin-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -24,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-blogs
+published-blogs
+my-unpublished-blogs
+mydraft-blogs
+my-published-blogs
+my-queue-blogs
+in-queue-blogs
+archive-blogs
+my-rejected-blogs',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 412,
+  'module' => 'menu',
+  'delta' => 'features',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 413,
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'navigation',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 414,
+  'module' => 'menu',
+  'delta' => 'menu-mega-review-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -25,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'movie-review-list
+movie-review-draft-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 415,
+  'module' => 'menu',
+  'delta' => 'menu-photogallery-admin-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -28,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'unpublished-photogallery
+published-photogallery
+my-unpublished-photogallery
+mydraft-photogallery
+my-published-photogallery
+my-queue-photogallery
+in-queue-photogallery
+archive-photogallery
+my-rejected-photogallery',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 416,
+  'module' => 'menu',
+  'delta' => 'menu-site-setting',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 417,
+  'module' => 'menu',
+  'delta' => 'menu-story-content-admin-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -27,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'my-unpublished-story
+published-story
+unpublished-story
+mydraft-story
+my-published-story
+my-queue-story
+in-queue-story
+my-expired-story
+expired-story
+archive-story
+my-rejected-story
+ugc-published-story',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 418,
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -26,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'created-task-list
+assigned-task-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 419,
+  'module' => 'node',
+  'delta' => 'syndicate',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 420,
+  'module' => 'node',
+  'delta' => 'recent',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 421,
+  'module' => 'search',
+  'delta' => 'form',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 422,
+  'module' => 'shortcut',
+  'delta' => 'shortcuts',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 423,
+  'module' => 'superfish',
+  'delta' => 1,
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 424,
+  'module' => 'superfish',
+  'delta' => 2,
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 425,
+  'module' => 'superfish',
+  'delta' => 3,
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 426,
+  'module' => 'superfish',
+  'delta' => 4,
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 427,
+  'module' => 'system',
+  'delta' => 'main',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -27,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 428,
+  'module' => 'system',
+  'delta' => 'powered-by',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 10,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 429,
+  'module' => 'system',
+  'delta' => 'help',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 5,
+  'region' => 'help',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 430,
+  'module' => 'system',
+  'delta' => 'navigation',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 431,
+  'module' => 'system',
+  'delta' => 'management',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 432,
+  'module' => 'system',
+  'delta' => 'user-menu',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 433,
+  'module' => 'system',
+  'delta' => 'main-menu',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 434,
+  'module' => 'user',
+  'delta' => 'login',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 435,
+  'module' => 'user',
+  'delta' => 'new',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 436,
+  'module' => 'user',
+  'delta' => 'online',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 437,
+  'module' => 'workbench',
+  'delta' => 'block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => -28,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 438,
+  'module' => 'views',
+  'delta' => 'view_moderation_history-block_1',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/*/edit',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 439,
+  'module' => 'views',
+  'delta' => 'view_moderation_history-block_2',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 440,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_1',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 441,
+  'module' => 'views',
+  'delta' => 'poll_listing-block_2',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 442,
+  'module' => 'views',
+  'delta' => 'workbench_edited-block_1',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 443,
+  'module' => 'views',
+  'delta' => 'workbench_current_user-block_1',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 444,
+  'module' => 'views',
+  'delta' => '9cf22433e0efbd8b206c8e4c2edb177c',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 445,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'manage-ugc
+reject-ugc-content-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 446,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'theme' => 'rubik',
+  'status' => 1,
+  'weight' => -17,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'manage-ugc
+reject-ugc-content-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 447,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'manage-ugc
+reject-ugc-content-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 448,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'manage-ugc
+reject-ugc-content-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 449,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'manage-ugc
+reject-ugc-content-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 450,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'manage-ugc
+reject-ugc-content-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 451,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'manage-ugc
+reject-ugc-content-list',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 452,
+  'module' => 'msnf',
+  'delta' => 'msnf_step_data',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 453,
+  'module' => 'msnf',
+  'delta' => 'msnf_step_data',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 454,
+  'module' => 'msnf',
+  'delta' => 'msnf_step_data',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 455,
+  'module' => 'msnf',
+  'delta' => 'msnf_step_data',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 456,
+  'module' => 'msnf',
+  'delta' => 'msnf_step_data',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 457,
+  'module' => 'msnf',
+  'delta' => 'msnf_step_data',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 458,
+  'module' => 'msnf',
+  'delta' => 'msnf_step_data',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 459,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_backend_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 460,
+  'module' => 'itg_event_backend',
+  'delta' => 'sponsor_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/sponsor
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 461,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_backend_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 462,
+  'module' => 'itg_event_backend',
+  'delta' => 'sponsor_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/sponsor
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 463,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_backend_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 464,
+  'module' => 'itg_event_backend',
+  'delta' => 'sponsor_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/sponsor
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 465,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_backend_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 466,
+  'module' => 'itg_event_backend',
+  'delta' => 'sponsor_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/sponsor
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 467,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_backend_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 468,
+  'module' => 'itg_event_backend',
+  'delta' => 'sponsor_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/sponsor
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 469,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_backend_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 470,
+  'module' => 'itg_event_backend',
+  'delta' => 'sponsor_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/sponsor
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 471,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_backend_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 472,
+  'module' => 'itg_event_backend',
+  'delta' => 'sponsor_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/sponsor
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 473,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 474,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 475,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 476,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 477,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 478,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 479,
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/blog
+node/*/edit',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 480,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 481,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 482,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 483,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 484,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 485,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 486,
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'in-queue-ugc-comments
+publish-ugc-comments',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 487,
+  'module' => 'itg_newsletter',
+  'delta' => 'newsletter_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 488,
+  'module' => 'itg_newsletter',
+  'delta' => 'newsletter_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 489,
+  'module' => 'itg_newsletter',
+  'delta' => 'newsletter_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 490,
+  'module' => 'itg_newsletter',
+  'delta' => 'newsletter_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 491,
+  'module' => 'itg_newsletter',
+  'delta' => 'newsletter_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 492,
+  'module' => 'itg_newsletter',
+  'delta' => 'newsletter_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 493,
+  'module' => 'itg_newsletter',
+  'delta' => 'newsletter_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
   'delta' => 'astro_tab_form_block',
   'type' => 'astro',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_blog',
+  'delta' => 'blog_tab_form_block',
+  'type' => 'blog',
 );
   $export['block_node_type'][] = array(
   'module' => 'views',
@@ -5375,14 +7030,14 @@ assigned-task-list',
   'type' => 'breaking_news',
 );
   $export['block_node_type'][] = array(
+  'module' => 'itg_event_backend',
+  'delta' => 'event_backend_tab_form_block',
+  'type' => 'event_backend',
+);
+  $export['block_node_type'][] = array(
   'module' => 'itg_mega_reviews_critics',
   'delta' => 'mega_reviews_tab_form_block',
   'type' => 'mega_review_critic',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'type' => 'newsletter',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_photogallery',
@@ -5408,6 +7063,11 @@ assigned-task-list',
   'module' => 'itg_recipe',
   'delta' => 'recipe_tab_form_block',
   'type' => 'recipe',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_event_backend',
+  'delta' => 'sponsor_tab_form_block',
+  'type' => 'sponsor',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_story',
@@ -5500,11 +7160,6 @@ assigned-task-list',
   'rid' => 5,
 );
   $export['block_role'][] = array(
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'rid' => 5,
-);
-  $export['block_role'][] = array(
   'module' => 'itg_photogallery',
   'delta' => 'photogallery_tab_form_block',
   'rid' => 5,
@@ -5557,6 +7212,16 @@ assigned-task-list',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'rid' => 5,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
   'rid' => 5,
 );
   $export['block_role'][] = array(
@@ -5580,11 +7245,6 @@ assigned-task-list',
   'rid' => 6,
 );
   $export['block_role'][] = array(
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'rid' => 6,
-);
-  $export['block_role'][] = array(
   'module' => 'itg_photogallery',
   'delta' => 'photogallery_tab_form_block',
   'rid' => 6,
@@ -5637,6 +7297,16 @@ assigned-task-list',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
   'rid' => 6,
 );
   $export['block_role'][] = array(
@@ -5713,31 +7383,6 @@ assigned-task-list',
   'module' => 'system',
   'delta' => 'main',
   'rid' => 7,
-);
-  $export['block_role'][] = array(
-  'module' => 'itg_photogallery',
-  'delta' => 'photogallery_tab_form_block',
-  'rid' => 8,
-);
-  $export['block_role'][] = array(
-  'module' => 'itg_story',
-  'delta' => 'story_tab_form_block',
-  'rid' => 8,
-);
-  $export['block_role'][] = array(
-  'module' => 'menu',
-  'delta' => 'menu-admin-left-menu',
-  'rid' => 8,
-);
-  $export['block_role'][] = array(
-  'module' => 'menu',
-  'delta' => 'menu-photogallery-admin-menu',
-  'rid' => 8,
-);
-  $export['block_role'][] = array(
-  'module' => 'menu',
-  'delta' => 'menu-story-content-admin-menu',
-  'rid' => 8,
 );
   $export['block_role'][] = array(
   'module' => 'superfish',
@@ -5820,11 +7465,6 @@ assigned-task-list',
   'rid' => 10,
 );
   $export['block_role'][] = array(
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'rid' => 10,
-);
-  $export['block_role'][] = array(
   'module' => 'itg_photogallery',
   'delta' => 'photogallery_tab_form_block',
   'rid' => 10,
@@ -5877,6 +7517,16 @@ assigned-task-list',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
   'rid' => 10,
 );
   $export['block_role'][] = array(
@@ -5945,11 +7595,6 @@ assigned-task-list',
   'rid' => 20,
 );
   $export['block_role'][] = array(
-  'module' => 'itg_newsletter',
-  'delta' => 'newsletter_tab_form_block',
-  'rid' => 20,
-);
-  $export['block_role'][] = array(
   'module' => 'itg_photogallery',
   'delta' => 'photogallery_tab_form_block',
   'rid' => 20,
@@ -6005,6 +7650,16 @@ assigned-task-list',
   'rid' => 20,
 );
   $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
   'module' => 'superfish',
   'delta' => 1,
   'rid' => 20,
@@ -6018,6 +7673,41 @@ assigned-task-list',
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
   'rid' => 21,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_photogallery',
+  'delta' => 'photogallery_tab_form_block',
+  'rid' => 22,
+);
+  $export['block_role'][] = array(
+  'module' => 'itg_story',
+  'delta' => 'story_tab_form_block',
+  'rid' => 22,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 22,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-photogallery-admin-menu',
+  'rid' => 22,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-comment-menu',
+  'rid' => 22,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'rid' => 22,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-ugc-content-menu',
+  'rid' => 23,
 );
 return $export;
 }

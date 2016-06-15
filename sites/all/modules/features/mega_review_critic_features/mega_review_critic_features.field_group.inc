@@ -29,20 +29,24 @@ function mega_review_critic_features_field_group_info() {
       3 => 'field_mega_review_twitter',
       4 => 'field_mega_review_video',
       5 => 'field_mega_review_youtube_url',
-      6 => 'field_mega_review_cast',
-      7 => 'field_mega_review_type',
+      6 => 'field_mega_review_type',
+      7 => 'field_mega_review_cast',
       8 => 'title',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Basic Details',
       'instance_settings' => array(
-        'required_fields' => 0,
+        'required_fields' => 1,
         'id' => 'basicdetails',
-        'classes' => 'group-review-basic-settings field-group-fieldset',
+        'classes' => 'itg-group-field',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_review_basic_settings|node|mega_review_critic|form'] = $field_group;
@@ -66,16 +70,20 @@ function mega_review_critic_features_field_group_info() {
       3 => 'field_story_medium_image',
       4 => 'field_story_small_image',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Browse Media',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => 'browsemedia',
-        'classes' => 'group-review-browse-media field-group-fieldset',
+        'classes' => 'itg-group-field',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_review_browse_media|node|mega_review_critic|form'] = $field_group;
@@ -95,16 +103,20 @@ function mega_review_critic_features_field_group_info() {
     'children' => array(
       0 => 'field_mega_review_review',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Movie Review',
       'instance_settings' => array(
-        'required_fields' => 0,
+        'required_fields' => 1,
         'id' => 'moviereview',
-        'classes' => 'group-review-movie-review field-group-fieldset',
+        'classes' => 'itg-group-field',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_review_movie_review|node|mega_review_critic|form'] = $field_group;

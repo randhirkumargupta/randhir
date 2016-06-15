@@ -103,12 +103,12 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
   }
 
   //Hide source type and source id from story add and edit form.
-  if ($form_id == 'story_node_form') {
-    if(!in_array('administrator', $user->roles)){ // Not applicable for super admin
-      unset($form['field_story_source_type']);
-      unset($form['field_story_source_id']);
-    }
-  }
+//  if ($form_id == 'story_node_form') {
+//    if(!in_array('administrator', $user->roles)){ 
+//      unset($form['field_story_source_type']);
+//      unset($form['field_story_source_id']);
+//    }
+//  }
 }
  /**
  * Custom submit callback for redirecting breaking news form.
@@ -403,7 +403,14 @@ function itg_msi_node_validate($node, $form, &$form_state) {
 
     //Set error for duplicacy
     if (isset($matches) && !empty($matches)) {
-      form_set_error('title', t(ucfirst($node->type) . ' title ' . $title . ' already exist.'));
+      form_set_error('title', t('@contenttype title <strong>@contenttitle</strong> is already exist.', array('@contenttype' => ucfirst($node->type), '@contenttitle' => $title)));
+      
+      //Change message order for type "Magazine"
+      if($node->type == 'magazine'){
+        $message_arr = $_SESSION['messages']['error'];
+        $message_arr_new = array($message_arr[1],$message_arr[0]);
+        $_SESSION['messages']['error'] = $message_arr_new;
+      }
     }
     
     //Case: Supplement creation (If issue is already exist, throw an error)
