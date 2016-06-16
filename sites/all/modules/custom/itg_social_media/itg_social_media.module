@@ -466,3 +466,16 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
     drupal_set_message(t('Twitter video has been posted'), 'status');
   }
 }
+
+/**
+ * Implements hook_views_api().
+ *
+ * This tells drupal that there is Views integration file named
+ * itg_social_media.views.inc
+ */
+function itg_social_media_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'itg_social_media') . '/includes/views',    
+  );
+}
