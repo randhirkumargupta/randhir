@@ -60,8 +60,8 @@ function itg_syndication_generate_xml($data) {
     $root->appendChild($result);
     $result->setAttribute('id', $key + 1);
     $result->appendChild($dom->createElement('title', $node->title));
-    $result->appendChild($dom->createElement('body', '<![CDATA['.strip_tags($node->body[LANGUAGE_NONE][0]['value']).']]>'));
-    $result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
+    //$result->appendChild($dom->createElement('body', '<![CDATA['.strip_tags($node->body[LANGUAGE_NONE][0]['value']).']]>'));
+    //$result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
     
     /*$result1 = $dom->createElement('body');
     $result->appendChild($result1);
