@@ -79,9 +79,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'date_popup',
     '#title' => t("Facebook image schedule time"),    
     '#required' => TRUE,
-    '#date_format' => 'Y-m-d H:i',
+    '#date_format' => 'd/m/Y H:i',
     '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
-    '#default_value' => format_date(REQUEST_TIME, 'custom', 'Y-m-d H:i:s'),    
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),        
     '#date_timezone' => date_default_timezone(),
   );
   
@@ -116,9 +116,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   $form['fb_wrap']['video_schedule_time'] = array(
     '#type' => 'date_popup',
     '#title' => t("Facebook video schedule time"),    
-    '#date_format' => 'Y-m-d H:i',
+    '#date_format' => 'd/m/Y H:i',
     '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
-    '#default_value' => format_date(REQUEST_TIME, 'custom', 'Y-m-d H:i:s'),    
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),        
     '#date_timezone' => date_default_timezone(),
   );
   
@@ -167,9 +167,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   $form['twit_wrap']['tw_img_schedule_time'] = array(
     '#type' => 'date_popup',
     '#title' => t("Twitter image schedule time"),    
-    '#date_format' => 'Y-m-d H:i',
+    '#date_format' => 'd/m/Y H:i',
     '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
-    '#default_value' => format_date(REQUEST_TIME, 'custom', 'Y-m-d H:i:s'),    
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),    
     '#date_timezone' => date_default_timezone(),
   );
 
@@ -204,9 +204,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   $form['twit_wrap']['tw_vid_schedule_time'] = array(
     '#type' => 'date_popup',
     '#title' => t("Twitter video schedule time"),    
-    '#date_format' => 'Y-m-d H:i',
+    '#date_format' => 'd/m/Y H:i',
     '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
-    '#default_value' => format_date(REQUEST_TIME, 'custom', 'Y-m-d H:i:s'),    
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),    
     '#date_timezone' => date_default_timezone(),
   );
   
