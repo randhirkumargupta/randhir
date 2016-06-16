@@ -28,6 +28,7 @@ function tv_schedule_listing() {
             $key++;
         }
     }
+    
     // Particular day selection and current day selection 
     if (isset($arg[1])) {
         $day = $arg[1];

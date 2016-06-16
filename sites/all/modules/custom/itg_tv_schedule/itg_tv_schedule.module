@@ -69,7 +69,18 @@ function itg_tv_schedule_search_form($form, &$form_state) {
       '#size' => 60,
       '#maxlength' => 128,
     );
-
+    
+    $form['selected'] = array(
+       '#type' => 'select',
+       '#options' => array(
+         0 => t('IST'),
+         1 => t('PST'),
+         2 => t('GMT')
+       ),
+       '#default_value' => 0,
+       
+   );
+    
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Submit'),
@@ -178,7 +189,7 @@ function itg_tv_schedule_form_submit($form, &$form_state) {
  * Custom submit callback for searching popup.
  */
 function itg_tv_schedule_search_form_submit($form, &$form_state) {
-
+    
     $options = array('query' => array('title' => $form_state['input']['title']));
     drupal_goto('tv-show/' . arg(1), $options);
 }
