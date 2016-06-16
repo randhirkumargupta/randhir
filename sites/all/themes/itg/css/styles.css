@@ -104,7 +104,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 65, ../sass/styles.scss */
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
+.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field .field-items .file img {
   vertical-align: top;
 }
 
@@ -753,17 +753,21 @@ input[type="text"], select, input[type="password"] {
 [class*="node-type-"] .node .field .field-items {
   overflow: hidden;
 }
+/* line 620, ../sass/styles.scss */
+[class*="node-type-"] .node .field .field-items .file a {
+  color: #1fb5ad;
+}
 
-/* line 623, ../sass/styles.scss */
+/* line 627, ../sass/styles.scss */
 .comm-ques {
   background-color: #fffddf;
 }
 
-/* line 628, ../sass/styles.scss */
+/* line 632, ../sass/styles.scss */
 .file-widget span.file img {
   vertical-align: top;
 }
-/* line 631, ../sass/styles.scss */
+/* line 635, ../sass/styles.scss */
 .file-widget span.file a {
   display: inline-block;
   max-width: 170px;
@@ -773,11 +777,11 @@ input[type="text"], select, input[type="password"] {
   white-space: nowrap;
   color: #2f2f2f;
 }
-/* line 641, ../sass/styles.scss */
+/* line 645, ../sass/styles.scss */
 .file-widget span.file-size {
   vertical-align: top;
 }
-/* line 644, ../sass/styles.scss */
+/* line 648, ../sass/styles.scss */
 .file-widget .form-submit[value="Remove"] {
   background: transparent none repeat scroll 0 0;
   border: medium none;
@@ -788,21 +792,21 @@ input[type="text"], select, input[type="password"] {
   top: 0;
 }
 
-/* line 657, ../sass/styles.scss */
+/* line 661, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-type-textfield {
   padding: 0;
   margin: 0;
   max-width: 350px;
 }
-/* line 658, ../sass/styles.scss */
+/* line 662, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-type-textfield label {
   display: none;
 }
-/* line 662, ../sass/styles.scss */
+/* line 666, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-type-textfield + .form-type-textfield {
   margin-top: 10px !important;
 }
-/* line 666, ../sass/styles.scss */
+/* line 670, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   border: none;
   background: none;
@@ -812,15 +816,15 @@ input[type="text"], select, input[type="password"] {
   left: 775px;
   top: 7px;
 }
-/* line 675, ../sass/styles.scss */
+/* line 679, ../sass/styles.scss */
 .form-managed-file .image-widget-data div.description {
   padding-left: 0 !important;
 }
-/* line 679, ../sass/styles.scss */
+/* line 683, ../sass/styles.scss */
 .form-managed-file .image-preview {
   max-width: 150px;
 }
-/* line 682, ../sass/styles.scss */
+/* line 686, ../sass/styles.scss */
 .form-managed-file .image-preview .image-fullname {
   font-size: 12px;
   width: 150px;
@@ -829,35 +833,35 @@ input[type="text"], select, input[type="password"] {
   overflow: hidden;
   margin-top: 5px;
 }
-/* line 689, ../sass/styles.scss */
+/* line 693, ../sass/styles.scss */
 .form-managed-file .image-preview .image-fullname .file-icon {
   display: none;
 }
-/* line 692, ../sass/styles.scss */
+/* line 696, ../sass/styles.scss */
 .form-managed-file .image-preview .image-fullname a {
   color: #2f2f2f;
   text-decoration: none;
 }
 
-/* line 699, ../sass/styles.scss */
+/* line 703, ../sass/styles.scss */
 .slider {
   width: 820px;
   margin: 20px auto;
 }
 
-/* line 700, ../sass/styles.scss */
+/* line 704, ../sass/styles.scss */
 .tv-schedule {
   max-width: 820px;
 }
 
-/* line 701, ../sass/styles.scss */
+/* line 705, ../sass/styles.scss */
 .tv-schedule .slick-list {
   display: inline-block;
   width: 100%;
   vertical-align: top;
 }
 
-/* line 702, ../sass/styles.scss */
+/* line 706, ../sass/styles.scss */
 .tv-schedule-time .slick-slide span {
   display: block;
   padding: 10px;
@@ -865,17 +869,17 @@ input[type="text"], select, input[type="password"] {
   border-left: 1px solid #d9d9d9;
 }
 
-/* line 703, ../sass/styles.scss */
+/* line 707, ../sass/styles.scss */
 .tv-schedule-time .slick-slide:first-child span {
   border-left: none;
 }
 
-/* line 704, ../sass/styles.scss */
+/* line 708, ../sass/styles.scss */
 .tv-schedule-time {
   border: 1px solid #d9d9d9;
 }
 
-/* line 705, ../sass/styles.scss */
+/* line 709, ../sass/styles.scss */
 .tv-schedule .slick-arrow {
   position: absolute;
   top: 0;
@@ -889,29 +893,29 @@ input[type="text"], select, input[type="password"] {
   cursor: pointer;
 }
 
-/* line 706, ../sass/styles.scss */
+/* line 710, ../sass/styles.scss */
 .tv-schedule .slick-prev {
   right: 100%;
   border-color: transparent #d9d9d9 transparent transparent;
 }
 
-/* line 707, ../sass/styles.scss */
+/* line 711, ../sass/styles.scss */
 .tv-schedule .slick-next {
   left: 100%;
   border-color: transparent transparent transparent #d9d9d9;
 }
 
-/* line 708, ../sass/styles.scss */
+/* line 712, ../sass/styles.scss */
 .tv-schedule-news .slick-slide span {
   display: block;
 }
 
-/* line 709, ../sass/styles.scss */
+/* line 713, ../sass/styles.scss */
 .tv-schedule-news {
   border: 1px solid #d9d9d9;
 }
 
-/* line 710, ../sass/styles.scss */
+/* line 714, ../sass/styles.scss */
 .tv-schedule-news .tv-schedule-task span {
   padding: 10px;
   border: 1px solid #d9d9d9;

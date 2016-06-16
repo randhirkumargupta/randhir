@@ -11,6 +11,7 @@
             // default hide add another item for Email address
             jQuery('#edit-field-email-address-und-add-more').hide();
             jQuery('.form-item-field-email-address-und-0-value label').hide();
+            jQuery('#edit-field-email-address-und-1-value').hide();
             // default hide FTP label
             jQuery('#itg-group-service-ftp').hide();
             $('.form-item-field-service-fetch-link-und-0-value').hide();

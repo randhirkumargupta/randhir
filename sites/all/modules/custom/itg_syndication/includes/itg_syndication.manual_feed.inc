@@ -12,13 +12,20 @@
  */
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
+  if ($form_state['view']->name == 'syndication_rule_listing') {   
+    $form['field_syndication_rule_title_value']['#options'] = itg_syndication_get_client();
+    unset($form['field_syndication_rule_title_value']['#options']['_none']);
+    $form['field_syndication_rule_title_value']['#options']['All'] = '- Any -';
+  }
+  
   if ($form_id == 'views_form_syndication_feed_generator_page') {
     $form['actions']['submit']['#submit'][] = 'itg_syndication_selector_custom_submit';
+    $form['#validate'][] = 'syndication_selector_custom_form_validate';
   }
   
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {    
-    
+    // $form['#validate'][] = 'syndication_filter_custom_form_validate';
     $form['changed']['min'] = array(
       '#type' => 'date_popup',
       '#title' => t('From'),
@@ -44,6 +51,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
       '#title' => t('Select Client'),
       '#options' => itg_syndication_get_client(),
       '#default_value' => '_none',
+      '#validated' => true,
       '#weight' => 1,             
     );
        
@@ -68,7 +76,8 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
               jQuery("#edit-issue").change(function() {                
                 jQuery("#edit-field-story-issue-date-value-value-date").val(jQuery("#edit-issue").val());
               });
-            });', array('type' => 'inline', 'scope' => 'footer'));
+            });', array('type' => 'inline', 'scope' => 'footer'));   
+   
     
  } else if ($form_id == 'views_form_syndication_feed_generator_page') {
    if (isset($_GET['client_title'])) {
@@ -111,9 +120,9 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
    
    $form['actions']['submit']['#value'] = 'Generate feed and Send it to client';
    
-   // Add cancel button to create/edit
+   // Add cancel button
     $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), 'syndication-rule-listing', array('attributes' => array('class' => 'button'))),
+      '#markup' => l(t('Cancel'), 'syndication-feed-generator', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,
     );
     
@@ -146,11 +155,15 @@ function itg_syndication_feed_download_after_build($form, &$form_state) {
    drupal_add_js('jQuery(document).ready(function() {
               jQuery(".form-item-feed-download-value").hide();
               
-              jQuery("#edit-download-feed").click(function() { 
+              jQuery("#edit-download-feed").click(function() {
+                jQuery ("#edit-changed-min-datepicker-popup-0").val("");
+                jQuery ("#edit-changed-max-datepicker-popup-0").val("");
                 jQuery("#edit-feed-download-value").val("yes");                
               });
               
-              jQuery("#edit-submit").click(function() { 
+              jQuery("#edit-submit").click(function() {
+                jQuery ("#edit-changed-min-datepicker-popup-0").val("");
+                jQuery ("#edit-changed-max-datepicker-popup-0").val("");
                 jQuery("#edit-feed-download-value").val("");                
               });
               
@@ -245,4 +258,20 @@ function itg_syndication_views_query_alter(&$view, &$query) {
     }
     
   }
+}
+
+function syndication_selector_custom_form_validate($form, &$form_state) {
+  
+  if ($form_state['values']['client_delivery_mode'] == '_none' && $form_state['values']['feed_download_value'] != 'yes') {
+    form_set_error('client_delivery_mode', t('Please select Delivery Mode.'));
+  }
+  
+}
+
+function syndication_filter_custom_form_validate($form, &$form_state) {
+  //p($form_state['values']);
+  if ($form_state['values']['client_delivery_mode'] == '_none' && $form_state['values']['feed_download_value'] != 'yes') {
+    form_set_error('client_delivery_mode', t('Please select Delivery Mode.'));
+  }
+  
 }
