@@ -121,10 +121,10 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
    $form['actions']['submit']['#value'] = 'Generate feed and Send it to client';
    
    // Add cancel button
-    $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), 'syndication-feed-generator', array('attributes' => array('class' => 'button'))),
-      '#weight' => 20,
-    );
+//    $form['actions']['cancel'] = array(
+//      '#markup' => l(t('Cancel'), 'syndication-feed-generator', array('attributes' => array('class' => 'button'))),
+//      '#weight' => 20,
+//    );
     
     // for feed download 
      $form['feed_download_value'] = array(
