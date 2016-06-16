@@ -2924,6 +2924,14 @@ fieldset#edit-select{
       margin-right: 10px !important;
     }
   }
+  .form-field-name-field-individual-registration-fe,
+  .form-field-name-field-group-registration-fee-5,
+  .form-field-name-field-group-registration-fee-10,
+  .form-field-name-field-no-of-tickets{
+    .form-type-textfield{
+      span.error{padding-left: 231px;}
+    }
+  }
 }
 .form-select[name="field_ugc_ctype[und]"]{
     text-transform: capitalize;
