@@ -190,10 +190,10 @@
             <div class="field-label">News Content:</div>
             <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
-          <div class="field">
+<!--          <div class="field">
             <div class="field-label">Content Type:</div>
             <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_ctype[LANGUAGE_NONE][0]['value']); ?></div>
-          </div>
+          </div>-->
         <?php if ($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal') {?>
           <div class="field">
             <div class="field-label">Content ID:</div>
