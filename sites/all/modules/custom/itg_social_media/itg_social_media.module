@@ -152,9 +152,17 @@ function itg_social_media_node_type($nid) {
 
 /**
  * Facebook post logic
- * @global string $base_url
+ * 
+ * @global type $base_url
+ * @global stdObject $user
+ * @param int $fid
+ * @param string $desc
+ * @param string $type
+ * @param stdObject $node
+ * @param string $stime
  */
-function itg_social_media_facebook_post($fid, $desc, $type, $node) {
+
+function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {  
   global $base_url, $user;
   // Set file status to permanent
   $file = file_load($fid);
@@ -176,6 +184,8 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node) {
         'title' => $node->title,
         'description' => t($desc) . ' ' . $short_url,
         'source' => $fb->videoToUpload($path),
+        'published' => FALSE,
+        'scheduled_publish_time' => $stime,
       ];
 
       break;
@@ -184,6 +194,8 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node) {
       $data = [
         'message' => t($desc) . ' ' . $short_url,
         'source' => $fb->fileToUpload($path),
+        'published' => FALSE,
+        'scheduled_publish_time' => $stime,
       ];
 
       break;
@@ -200,26 +212,24 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node) {
     drupal_set_message(t('Facebook SDK returned an error: ' . $e->getMessage()), 'error');
   }
   // get response
-  $graphNode = $response->getGraphNode();
+  $graphNode = $response->isError();
   
-  if (isset($graphNode['id'])) {
+  if (!$graphNode) {
     $pre_save = array(
       'nid' => $node->nid,
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'facebook ' . $type,
-      'created' => REQUEST_TIME,
+      'created' => date('Y-m-d H:i:s', $stime),
     );
     
     // iNSERT INTO DATABASE
-    $query = db_insert('itg_social_media_log');
+    $query = db_insert('itg_social_media_logs');
     $query->fields($pre_save)
         ->execute();
     // Set message
     drupal_set_message(t('Facebook ' . $type . 'has been posted'), 'status');
   }
-
-
 }
 
 /**
@@ -228,15 +238,17 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node) {
  * {@inheritdoc}
  */
 function itg_social_media_form_submit($form, &$form_state) {
-  $node = node_load($form_state['values']['nid']);
-  
+  $node = node_load($form_state['values']['nid']);  
   // Facebook section
   if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] === 'facebook') {    
     // Facebook Image
     if ($form_state['values']['itg_fb_img'] > 0) {      
       $desc = $form_state['values']['itg_facebook_narrative'];
       $fid = $form_state['values']['itg_fb_img'];
-      itg_social_media_facebook_post($fid, $desc, 'photos', $node);
+      date_default_timezone('Asia/Kolkata');      
+      $stime = strtotime($form_state['values']['img_schedule_time']);
+      //$stime = $stime + ((5*3600) + 1800);      
+      itg_social_media_facebook_post($fid, $desc, 'photos', $node, $stime);
       $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
       $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
     }
@@ -245,7 +257,9 @@ function itg_social_media_form_submit($form, &$form_state) {
     if ($form_state['values']['itg_fb_video']) {      
       $desc = $form_state['values']['itg_facebook_video_text'];
       $fid = $form_state['values']['itg_fb_video'];
-      itg_social_media_facebook_post($fid, $desc, 'videos', $node);
+      $stime = strtotime($form_state['values']['video_schedule_time']);
+      //$stime = $stime + ((5*3600) + 1800);
+      itg_social_media_facebook_post($fid, $desc, 'videos', $node, $stime);
       // save node field
       $node->field_story_facebook_video['und'][0] = array(
         'fid' => $fid,
@@ -270,15 +284,19 @@ function itg_social_media_form_submit($form, &$form_state) {
   if ($form_state['values']['itg_smi']['twitter'] === 'twitter') {
     // Twitter image
     if ($form_state['values']['itg_twitter_img'] > 0) {      
+      $stime = strtotime($form_state['values']['tw_img_schedule_time']);
+      $stime = $stime + ((5*3600) + 1800);
       $desc = $form_state['values']['itg_twitter_narrative'];
       $fid = $form_state['values']['itg_twitter_img'];
       $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
       $node->field_story_tweet_image['und'][0]['fid'] = $form_state['values']['itg_twitter_img'];
-      itg_social_media_twitter_photo_post($fid, $desc, $node);
+      itg_social_media_twitter_photo_post($fid, $desc, $node, $stime);
     }
     
     // Twitter video
-    if ($form_state['values']['itg_twit_video'] > 0) {      
+    if ($form_state['values']['itg_twit_video'] > 0) { 
+      $stime = strtotime($form_state['values']['tw_vid_schedule_time']);
+      $stime = $stime + ((5*3600) + 1800);
       $desc = $form_state['values']['field_story_twitter_video_desc'];
       $fid = $form_state['values']['itg_twit_video'];
       $node->field_story_twitter_video['und'][] = array(
@@ -287,7 +305,7 @@ function itg_social_media_form_submit($form, &$form_state) {
         'description' => ''
       );
       $node->field_story_twitter_video_desc['und'][0]['value'] = $desc;
-      itg_social_media_tvideo_post($fid, $desc, $node);
+      itg_social_media_tvideo_post($fid, $desc, $node, $stime);
     }
   }
   node_save($node);
@@ -300,7 +318,7 @@ function itg_social_media_form_submit($form, &$form_state) {
  * @param string $desc
  * @param stdObject $node
  */
-function itg_social_media_twitter_photo_post($fid, $desc, $node) {
+function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
   global $base_url;
   
   // Create connection with twitter
@@ -338,11 +356,11 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'Twitter Image',
-      'created' => REQUEST_TIME,
+      'created' => date('Y-m-d H:i:s', $stime),
     );
     
     // iNSERT INTO DATABASE
-    $query = db_insert('itg_social_media_log');
+    $query = db_insert('itg_social_media_logs');
     $query->fields($pre_save)
         ->execute();
     // Set message
@@ -356,7 +374,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node) {
  * @param string $desc
  * @param stdObject $node
  */
-function itg_social_media_tvideo_post($fid, $desc, $node) {
+function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
   global $base_url;
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
@@ -418,11 +436,11 @@ function itg_social_media_tvideo_post($fid, $desc, $node) {
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'Twitter Video',
-      'created' => REQUEST_TIME,
+      'created' => date('Y-m-d H:i:s', $stime),
     );
     
     // iNSERT INTO DATABASE
-    $query = db_insert('itg_social_media_log');
+    $query = db_insert('itg_social_media_logs');
     $query->fields($pre_save)
         ->execute();
     // Set message
