@@ -53,19 +53,19 @@
                             <?php print render($content['field_contact_tech_email_address']); ?>
                             <?php print render($content['field_contact_tech_mobile_number']); ?>
                           <?php endif; ?>
-                          <?php  watchdog('content_sharing', '<pre>' .print_r($node->field_content_sharing_mode, 1) . '</pre>'); ?>    
+                          <?php  watchdog('content_sharing', '<pre>' .print_r($node->field_content_sharing_mode[LANGUAGE_NONE], 1) . '</pre>'); ?>    
                           <?php if (isset($node->field_content_sharing_mode)) { ?> 
                             <h2><?php print t('Sharing Mode'); ?></h2>
                             <?php
-                            if (trim($node->field_content_sharing_mode[0]['value']) == 1) {
+                            if (trim($node->field_content_sharing_mode[LANGUAGE_NONE][0]['value']) == 1) {
                               print render($content['field_service_fetch_link']);
                             }
-                            else if (trim($node->field_content_sharing_mode[0]['value']) == 2) {
+                            else if (trim($node->field_content_sharing_mode[LANGUAGE_NONE][0]['value']) == 2) {
                               print render($content['field_ftp_ip_address']);
                               print render($content['field_ftp_username']);
                               print render($content['field_ftp_password']);
                             }
-                            else if (trim($node->field_content_sharing_mode[0]['value']) == 3) {
+                            else if (trim($node->field_content_sharing_mode[LANGUAGE_NONE][0]['value']) == 3) {
                               print render($content['field_service_email_address']);
                             }
                             ?>
