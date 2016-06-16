@@ -169,7 +169,7 @@
         var contentId = $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
         var relval = $(this).attr('rel');
         
-        var loaderImg = base_url+'/sites/all/modules/custom/itg_newsletter/js/loader.gif';
+        //var loaderImg = base_url+'/sites/all/modules/custom/itg_newsletter/js/loader.gif';
         //$("#newsletter-loader").html('<img width="100px" height="100px" src="'+loaderImg+'">');
         
         if(contentId === ''){
