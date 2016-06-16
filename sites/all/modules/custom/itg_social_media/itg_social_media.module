@@ -247,7 +247,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     $query->fields($pre_save)
         ->execute();
     // Set message
-    drupal_set_message(t('Facebook ' . $type . 'has been posted'), 'status');
+    drupal_set_message(t('Facebook ' . $type . ' has been posted'), 'status');
   }
 }
 
@@ -338,7 +338,7 @@ function itg_social_media_form_submit($form, &$form_state) {
  * @param stdObject $node
  */
 function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
-  global $base_url;
+  global $base_url, $user;
   
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
@@ -383,7 +383,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
     $query->fields($pre_save)
         ->execute();
     // Set message
-    drupal_set_message(t('Facebook image has been posted'), 'status');
+    drupal_set_message(t('Twitter image has been posted'), 'status');
   }
 }
 
@@ -394,7 +394,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
  * @param stdObject $node
  */
 function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
-  global $base_url;
+  global $base_url, $user;
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
   // Set image status permanent
@@ -463,6 +463,6 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
     $query->fields($pre_save)
         ->execute();
     // Set message
-    drupal_set_message(t('Facebook video has been posted'), 'status');
+    drupal_set_message(t('Twitter video has been posted'), 'status');
   }
 }
