@@ -180,23 +180,42 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
 
   switch ($type) {
     case 'videos':
-      $data = [
-        'title' => $node->title,
-        'description' => t($desc) . ' ' . $short_url,
-        'source' => $fb->videoToUpload($path),
-        'published' => FALSE,
-        'scheduled_publish_time' => $stime,
-      ];
+      if ($stime !== '') {
+        $data = [
+          'title' => $node->title,
+          'description' => t($desc) . ' ' . $short_url,
+          'source' => $fb->videoToUpload($path),
+          'published' => FALSE,
+          'scheduled_publish_time' => $stime,
+        ];
+      }
+      else {
+        $data = [
+          'title' => $node->title,
+          'description' => t($desc) . ' ' . $short_url,
+          'source' => $fb->videoToUpload($path),
+          'published' => TRUE,          
+        ];
+      }
 
       break;
 
     case 'photos':
-      $data = [
-        'message' => t($desc) . ' ' . $short_url,
-        'source' => $fb->fileToUpload($path),
-        'published' => FALSE,
-        'scheduled_publish_time' => $stime,
-      ];
+      if ($stime !== '') {
+        $data = [
+          'message' => t($desc) . ' ' . $short_url,
+          'source' => $fb->fileToUpload($path),
+          'published' => FALSE,
+          'scheduled_publish_time' => $stime,
+        ];
+      }
+      else {
+        $data = [
+          'message' => t($desc) . ' ' . $short_url,
+          'source' => $fb->fileToUpload($path),
+          'published' => TRUE,
+        ];
+      }
 
       break;
   }
@@ -239,14 +258,14 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
  */
 function itg_social_media_form_submit($form, &$form_state) {
   $node = node_load($form_state['values']['nid']);  
+  date_default_timezone('Asia/Kolkata');      
   // Facebook section
   if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] === 'facebook') {    
     // Facebook Image
     if ($form_state['values']['itg_fb_img'] > 0) {      
       $desc = $form_state['values']['itg_facebook_narrative'];
-      $fid = $form_state['values']['itg_fb_img'];
-      date_default_timezone('Asia/Kolkata');      
-      $stime = strtotime($form_state['values']['img_schedule_time']);
+      $fid = $form_state['values']['itg_fb_img'];      
+      $stime = $form_state['values']['img_schedule_time'] !== '' ? strtotime($form_state['values']['img_schedule_time']) : '';
       //$stime = $stime + ((5*3600) + 1800);      
       itg_social_media_facebook_post($fid, $desc, 'photos', $node, $stime);
       $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
@@ -257,7 +276,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     if ($form_state['values']['itg_fb_video']) {      
       $desc = $form_state['values']['itg_facebook_video_text'];
       $fid = $form_state['values']['itg_fb_video'];
-      $stime = strtotime($form_state['values']['video_schedule_time']);
+      $stime = $form_state['values']['video_schedule_time'] !== '' ? strtotime($form_state['values']['video_schedule_time']) : '';
       //$stime = $stime + ((5*3600) + 1800);
       itg_social_media_facebook_post($fid, $desc, 'videos', $node, $stime);
       // save node field
@@ -284,8 +303,8 @@ function itg_social_media_form_submit($form, &$form_state) {
   if ($form_state['values']['itg_smi']['twitter'] === 'twitter') {
     // Twitter image
     if ($form_state['values']['itg_twitter_img'] > 0) {      
-      $stime = strtotime($form_state['values']['tw_img_schedule_time']);
-      $stime = $stime + ((5*3600) + 1800);
+      $stime = $form_state['values']['tw_img_schedule_time'] !== '' ? strtotime($form_state['values']['tw_img_schedule_time']) : '';
+      //$stime = $stime + ((5*3600) + 1800);
       $desc = $form_state['values']['itg_twitter_narrative'];
       $fid = $form_state['values']['itg_twitter_img'];
       $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
@@ -295,8 +314,8 @@ function itg_social_media_form_submit($form, &$form_state) {
     
     // Twitter video
     if ($form_state['values']['itg_twit_video'] > 0) { 
-      $stime = strtotime($form_state['values']['tw_vid_schedule_time']);
-      $stime = $stime + ((5*3600) + 1800);
+      $stime = $form_state['values']['tw_vid_schedule_time'] !== '' ? strtotime($form_state['values']['tw_vid_schedule_time']) : '';
+      //$stime = $stime + ((5*3600) + 1800);
       $desc = $form_state['values']['field_story_twitter_video_desc'];
       $fid = $form_state['values']['itg_twit_video'];
       $node->field_story_twitter_video['und'][] = array(

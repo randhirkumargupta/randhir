@@ -4,11 +4,24 @@
  */
 
 function itg_quiz_user_list() {
+  global $user;
   $node = node_load(arg(1));
   $nid = arg(1);
+  
   if ($node->type == 'quiz') {
     $output = '';
-    $output.= '<div></div><div align="right">'.l(t("Send Mail"),"quiz-winners-mail/$nid").'</div>
+    
+    //Send mail link is visible only for site admin, editor and main admin
+    if(in_array('Site Admin', array_values($user->roles))  
+       || in_array('administrator', array_values($user->roles)) 
+       || in_array('Editor', array_values($user->roles))){
+      $send_mail = l(t("Send Mail"),"quiz-winners-mail/".$nid);
+    } 
+    else {
+      $send_mail = '';
+    }
+    
+    $output.= '<div align="right">'.$send_mail.'</div>
       <table class="views-table">
         <thead>        
           <tr>
