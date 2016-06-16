@@ -78,7 +78,6 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   $form['fb_wrap']['img_schedule_time'] = array(
     '#type' => 'date_popup',
     '#title' => t("Facebook image schedule time"),    
-    '#required' => TRUE,
     '#date_format' => 'd/m/Y H:i',
     '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
     '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),        
