@@ -369,7 +369,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
     'media_ids' => $media_id
   ]);
   watchdog('twitter image', '<pre>' . print_r($reply, true) . '</pre>');
-  if (iset($reply->id)) {
+  if (isset($reply->id)) {
     $pre_save = array(
       'nid' => $node->nid,
       'node_title' => $node->title,
