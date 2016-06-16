@@ -33,7 +33,11 @@ function itg_quiz_winners_mail_list() {
 }
 
 
-// function to get user email
+/**
+ * Get winner's name, email and score
+ * @param int $nid
+ * @return array
+ */
 function itg_quiz_winners_user_list($nid) {
   $query = db_select('itg_quiz_user_score', 'qs');
   $query->fields('qs')
@@ -54,10 +58,10 @@ function itg_quiz_winners_user_list($nid) {
 
 /**
  * Send mail to expert, when query is received
- * @global String $base_url
- * @param String $key
- * @param String $message
- * @param Array $entity
+ * @global string $base_url
+ * @param string $key
+ * @param string $message
+ * @param array $entity
  */
 function itg_quiz_winners_list_mail($key, &$message, $params) {
   switch ($key) {
@@ -79,31 +83,16 @@ function itg_quiz_winners_list_mail($key, &$message, $params) {
 
 /**
  * Get Mail content
- * @global String $base_url
- * @param Array $node
+ * @global string $base_url
+ * @param array $node
  * @return string
  */
 function itg_quiz_get_mail_content($nid) {
   
   global $base_url;
   $winner_records = itg_quiz_winners_user_list($nid);
-
   $result_link = $base_url.'/quiz-user-list/'.$nid;
   $winners = '';
-  
-//  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-//<html xmlns:v="urn:schemas-microsoft-com:vml">
-//<head>
-//    <title></title>
-//</head>
-//<body style="margin:0; padding:0;">
-//<table cellpadding="0" cellspacing="0"><tr><td>Dear user,<td></tr><tr><td>Thanks for taking our quiz. Winners list is given below:<td></tr><tr><td>&nbsp;</td></tr></table>
-//<table cellpadding="0" cellspacing="0"><tr style="font-weight:bold"><td>User Name</td><td>Score</td></tr>';
-//  foreach ($winner_records as $key=>$value) {
-//   $winners .= '<tr><td>'.$value['user_name'].'</td>
-//        <td>'.$value['quiz_score'].'</td></tr>';
-//     
-//  }
   $content = '<p>Dear user, </p><p>Thanks for taking our quiz. Winners list is given below:</p>';
   $i = 1;
     foreach ($winner_records as $key=>$value) {
@@ -120,7 +109,11 @@ function itg_quiz_get_mail_content($nid) {
 
 
 
-// function to get no of winner count
+/**
+ * Get number of winners count
+ * @param int $nid
+ * @return int
+ */
 function itg_quiz_winners_count($nid) {
   $query = db_select('field_data_field_quiz_winners', 'qwc');
   $query->fields('qwc')
