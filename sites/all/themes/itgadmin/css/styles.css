@@ -3150,7 +3150,16 @@ fieldset#edit-select .form-submit {
 .node-event_backend-form .form-field-name-field-no-of-tickets .field-prefix {
   visibility: hidden;
 }
-.node-event_backend-form .form-field-name-field-story-expiry-date .form-type-textfield:first-child {
+.node-event_backend-form .form-field-name-field-story-expiry-date label + .form-text + span.error,
+.node-event_backend-form .form-field-name-field-event-close-date label + .form-text + span.error,
+.node-event_backend-form .form-field-name-field-registration-close-date label + .form-text + span.error,
+.node-event_backend-form .form-field-name-field-event-start-date label + .form-text + span.error {
+  padding-left: 0;
+}
+.node-event_backend-form .form-field-name-field-story-expiry-date .form-type-textfield:first-child,
+.node-event_backend-form .form-field-name-field-event-close-date .form-type-textfield:first-child,
+.node-event_backend-form .form-field-name-field-registration-close-date .form-type-textfield:first-child,
+.node-event_backend-form .form-field-name-field-event-start-date .form-type-textfield:first-child {
   margin-right: 10px !important;
 }
 
@@ -3744,6 +3753,7 @@ div.node #comments h2 {
 }
 [id*="field-service-content-values"] .field-name-field-story-expert-description {
   height: 36px;
+  margin: 30px 0;
 }
 [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper {
   padding-left: 150px;
@@ -3762,6 +3772,9 @@ div.node #comments h2 {
 
 .node-vas_service_content-form .form-field-name-field-service-frequency-date .date-float {
   display: none;
+}
+.node-vas_service_content-form .form-field-name-field-service-frequency-date .date-no-float:last-child span.error {
+  padding-left: 27px;
 }
 .node-vas_service_content-form #content-enable-button {
   margin-left: 250px;

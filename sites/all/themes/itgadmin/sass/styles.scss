@@ -2915,7 +2915,11 @@ fieldset#edit-select{
       visibility: hidden;
     }
   }
-  .form-field-name-field-story-expiry-date{
+  .form-field-name-field-story-expiry-date, 
+  .form-field-name-field-event-close-date,
+  .form-field-name-field-registration-close-date,
+  .form-field-name-field-event-start-date{
+    label + .form-text + span.error{padding-left: 0;}
     .form-type-textfield:first-child{
       margin-right: 10px !important;
     }
@@ -3689,6 +3693,7 @@ div.node{
   }
   .field-name-field-story-expert-description{
     height: 36px;
+    margin: 30px 0;
     label{
       @extend .hide;
       &+.form-textarea-wrapper{
@@ -3715,6 +3720,9 @@ div.node{
   .form-field-name-field-service-frequency-date{
     @extend .itg-date-range;
     .date-float{display: none;}
+    .date-no-float:last-child{
+      span.error{padding-left: 27px;}
+    }
   }
   #content-enable-button{
     @extend .add-more;
