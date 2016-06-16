@@ -150,7 +150,37 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['metatags']['#type'] = 'hidden';
       // hide preview button
       variable_set('node_preview_vas-service-content', '0');
-
+//      module_load_include('inc', 'itg_mobile_services', 'includes/itg_mobile_services');
+//      
+//      $nid = 313;
+//      $validate_content = validate_content_count($nid);
+//      $data = unserialize($validate_content);
+//      
+//     
+//      foreach ($data['clients'] as $key => $val) {
+//        if($content_count >= $val) {
+//            $client[$key] = $val + 1;
+//
+//            db_delete('itg_cron_time_scheduler')
+//            ->condition('cron_type', 'vas_service_content', '=')
+//            ->condition('s.content_id', $nid, '=')
+//            ->execute();
+//
+//            $query = db_insert('itg_cron_time_scheduler');
+//            $query->fields(array(
+//              'content_id' => $node->nid,
+//              'fid' => $node->nid,
+//              'cron_type' => $node->type,
+//              'last_cron_time' => $scheduler_time,
+//              'scheduler_time' => $scheduler_time,
+//              'cron_details' => $details,
+//              'status' => true
+//            ));
+//            $query->execute();
+//        }
+//      }
+//     
+//       p($client);
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-content-listing', array(
           'attributes' => array(
@@ -283,34 +313,12 @@ function save_cron_details_of_mobile_services($node) {
   //if ($frequency_date_start_array[0] == $current_date) {
     $service_details = node_load($association_nid);
     $delivery_mode = $service_details->field_service_delivery_mode[LANGUAGE_NONE][0]['value'];
-    itg_mobile_services_feed_generator_of_contents($delivery_mode, $node);
+    itg_mobile_services_feed_generator_of_contents($node);
+    
+   // $file_name = generate_file_name($node);
+    
   //}
 
-
-
-  $scheduler_time = strtotime($frequency_date_start);
-  // $web_url = get_weburl_for_mobile_services('mobile_services', $node);
-
-  $details_array = array('service_id' => $association_nid,
-    'frequency' => $frequency,
-    'feed_type' => $node->type,
-    'frequency_date_start' => $frequency_date_start,
-    'frequency_date_end' => $frequency_date_end,
-    'content_send' => 1);
-
-  $details = serialize($details_array);
-
-//    $query = db_insert('itg_cron_time_scheduler');
-//    $query->fields(array(
-//      'content_id' => $node->nid,
-//      'fid' => $node->nid,
-//      'cron_type' => $node->type,
-//      'last_cron_time' => $scheduler_time,
-//      'scheduler_time' => $scheduler_time,
-//      'cron_details' => $details,
-//      'status' => true
-//    )); 
-//    $query->execute();
 }
 
 /**
