@@ -137,7 +137,13 @@
       }
     });
     $('body').on('click', '.target-link', function (e) {
+      var abc = $('body').find('.block-itg-story');
       var offSet = 120;
+      if($('.block-itg-story').hasClass('fixed')){
+        offSet = 57;
+      }
+      
+      
       var dti = $(this).attr('data-target-id');
       var targetOffset = $('#' + dti).offset().top - offSet;
       if (dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails") {

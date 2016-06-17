@@ -290,13 +290,13 @@ function itgadmin_breadcrumb($vars) {
     // If the item isn't a link, surround it with a strong tag to format it like
     // one.
     if (!preg_match('/^<a/', $link) && !preg_match('/^<strong/', $link)) {
-      $link = '<strong>' . $link . '</strong>';
+      $link = '<span>' . $link . '</span>';
     }
 
-    $output .= "<span class='breadcrumb-link breadcrumb-depth-{$depth}'>{$link}</span>";
+    $output .= "<li class='breadcrumb-link breadcrumb-depth-{$depth}'>{$link}</li>";
     $depth++;
   }
-  return $output;
+  return ('<div class="breadcrumb"><ol>' . $output . '</ol></div>');
 }
 
 

@@ -391,8 +391,8 @@ function features_for_newsletter_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'automatic' => 'Automatic',
         'manual' => 'Manual',
+        'automatic' => 'Automatic',
       ),
       'allowed_values_function' => '',
     ),

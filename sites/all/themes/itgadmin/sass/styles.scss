@@ -347,7 +347,7 @@ a.button{
   .image-widget-data, .file-widget{
     input.form-file{
       margin-top: 5px;
-      & + .form-submit{
+      & + .form-submit, & + span.error + .form-submit{
         @extend .add-more-wbg;
       }
     }
@@ -1486,6 +1486,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     li{
       @extend .dib;
       @extend .vmid;
+      @extend .pos-rel;
       a{
         color: #666;
         font-size: 13px;
@@ -1494,8 +1495,20 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           text-decoration: underline;
         }
       }
+      span{
+        color: #666;
+        font-size: 13px;
+      }
       & + li{
         margin-left: 3px;
+        &:before{
+          content: '\f105';
+          color: #2f2f2f;
+          padding: 0 5px 0 2px;
+          font: normal normal normal 12px/18px FontAwesome; 
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
       }
     }
   }
@@ -1911,6 +1924,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         padding: 0;
         margin: 0;
         @extend .fleft;
+        @extend .full;
         @extend .pos-rel;
         .form-type-textarea{
           padding: 0;
@@ -1923,24 +1937,23 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           }
         }
         .form-submit{
-          background: #fff url("../images/cross_small.png") no-repeat center center;
-          border-radius: 50%;
-          height: 34px;
-          left: 100%;
-          margin: 0 0 0 10px;
-          position: absolute;
-          top: 0;
-          width: 34px;
+          margin: 10px 0 !important;
         }
       }
       &+tr{
         td{
           margin-top: 10px;
+          .form-submit{
+            margin-left: 142px !important;
+          }
         }
       }
     }
   }
   &+div.clearfix{
+    margin-top: -41px;
+    @extend .pos-rel;
+    z-index: 99;
     .ajax-progress-throbber{
       position: static;
       margin-top: 10px;
@@ -2053,6 +2066,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       position: absolute;
       bottom: -30px;
       left: 0;
+      z-index: 99;
       .form-submit{
         margin: 0;
       }
@@ -2901,7 +2915,11 @@ fieldset#edit-select{
       visibility: hidden;
     }
   }
-  .form-field-name-field-story-expiry-date{
+  .form-field-name-field-story-expiry-date, 
+  .form-field-name-field-event-close-date,
+  .form-field-name-field-registration-close-date,
+  .form-field-name-field-event-start-date{
+    label + .form-text + span.error{padding-left: 0;}
     .form-type-textfield:first-child{
       margin-right: 10px !important;
     }
@@ -3675,6 +3693,7 @@ div.node{
   }
   .field-name-field-story-expert-description{
     height: 36px;
+    margin: 30px 0;
     label{
       @extend .hide;
       &+.form-textarea-wrapper{
@@ -3701,6 +3720,9 @@ div.node{
   .form-field-name-field-service-frequency-date{
     @extend .itg-date-range;
     .date-float{display: none;}
+    .date-no-float:last-child{
+      span.error{padding-left: 27px;}
+    }
   }
   #content-enable-button{
     @extend .add-more;

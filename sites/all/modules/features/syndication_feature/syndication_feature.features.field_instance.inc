@@ -412,13 +412,9 @@ function syndication_feature_field_default_field_instances() {
   // 'field_collection_item-field_syndication_rule_details-field_syndication_time'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_time'] = array(
     'bundle' => 'field_syndication_rule_details',
-    'default_value' => array(
-      0 => array(
-        'value' => '01:00',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Time should be 24 hr format.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -431,8 +427,8 @@ function syndication_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_syndication_time',
-    'label' => 'Time',
-    'required' => 0,
+    'label' => 'Set Time',
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -813,8 +809,9 @@ function syndication_feature_field_default_field_instances() {
   t('Select Section');
   t('Set Date');
   t('Set Day');
+  t('Set Time');
   t('Syndication rule details');
-  t('Time');
+  t('Time should be 24 hr format.');
   t('Via FTP');
   t('Via Mail');
   t('Via Web URL');
