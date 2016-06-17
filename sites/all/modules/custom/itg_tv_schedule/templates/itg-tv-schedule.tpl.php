@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Theme implementation for poll form in tab display.
@@ -14,19 +15,24 @@ $thu = $base_url . "/tv-show/THU";
 $fri = $base_url . "/tv-show/FRI";
 $sat = $base_url . "/tv-show/SAT";
 $sun = $base_url . "/tv-show/SUN";
+$class = 'class="active"';
+$day = strtoupper(date("D"));
 ?>
 <!-- Listing shows and days option -->
 <div class="tv-schedule-parent">
     <ul class="no-bullet schedule-days">
-        <li><a href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
-        <li><a href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
-        <li><a href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
-        <li><a href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
-        <li><a href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
-        <li><a href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
-        <li><a href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'MON'){ print $class; }elseif($day == 'MON'){ print $class; } ?> href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'TUE'){ print $class; }elseif($day == 'TUE'){ print $class; } ?> href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'WED'){ print $class; }elseif($day == 'WED'){ print $class; } ?>href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'THU'){ print $class; }elseif($day == 'THU'){ print $class; } ?>href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'FRI'){ print $class; }elseif($day == 'FRI'){ print $class; } ?>href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'SAT'){ print $class; }elseif($day == 'SAT'){ print $class; } ?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'SUN'){ print $class; }elseif($day == 'SUN'){ print $class; } ?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
     </ul>
+    <div class="tv-schedule-form-wrapper">
+        <div class="fleft"><?php print render(drupal_get_form('itg_tv_schedule_time_form')); ?></div>
     <?php print render(drupal_get_form('itg_tv_schedule_search_form')); ?>
+    </div>
     <div class="tv-schedule tv-schedule-time slider">
         <?php foreach ($output as $val): ?>
 
@@ -112,7 +118,11 @@ $sun = $base_url . "/tv-show/SUN";
     .schedule-days li{display: inline-block; vertical-align: top; color: #008eb1;}
     .schedule-days li a{background-color: #d9d9d9; display: block; color: #008eb1; text-decoration: none; padding: 5px 30px;}
     .schedule-days li a:hover, .schedule-days li a.active{color: #fff;background-color: #008eb1;}
-    #itg-tv-schedule-search-form{display: inline-block; vertical-align: top; width: 100%; padding: 20px 0;}
+    .tv-schedule-form-wrapper{max-width: 810px; margin: 0 auto;}
+    #itg-tv-schedule-search-form{padding: 20px 0;}
+    #itg-tv-schedule-time-form .form-type-select{float: left;padding: 20px 0;}
+    #itg-tv-schedule-time-form .form-submit{display: none;}
+    #itg-tv-schedule-time-form .form-select{width: 200px;}
     #itg-tv-schedule-search-form > div{max-width: 820px; margin: 0 auto; text-align: right;}
     #itg-tv-schedule-search-form .form-submit{display: none;}
     #itg-tv-schedule-search-form .form-text{max-width: 332px;}
@@ -180,12 +190,14 @@ $sun = $base_url . "/tv-show/SUN";
     }
 </style>
 <script type="text/javascript">
+    var current_time_slot = <?php print $total; ?>;
     jQuery(document).on('ready', function() {
         jQuery(".tv-schedule").slick({
             dots: false,
             infinite: true,
             slidesToShow: 7,
             slidesToScroll: 1,
+            initialSlide: current_time_slot,
             asNavFor: '.tv-schedule'
         });
 

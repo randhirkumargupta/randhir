@@ -1,4 +1,5 @@
 <?php
+module_load_include('module', 'itg_tv_schedule', 'itg_tv_schedule.module');
 
 /*
  * Inc file contains the functions
@@ -8,6 +9,17 @@
  * ugc comment details callback
  */
 function tv_schedule_listing() {
+    //time_zone_conversion();
+   
+    date_default_timezone_set('Asia/Kolkata');
+    $date = date("Y-m-d H:i:s");
+    $time = new DateTime($date);
+    $curent_time = $time->format('H:i');
+    
+    
+    
+    
+    
     $arg = arg();
     $con = new Mongo();
     // Select Database
@@ -22,7 +34,7 @@ function tv_schedule_listing() {
         $cursor_popup = $people->find($cond);
         $key = 0;
         foreach ($cursor_popup as $document) {
-            $search[$key]['time'] = $document["time"];
+            $out[$key]['time'] = $document["time"];
             $search[$key]['day'] = $document["day"];
             $search[$key]['program'] = $document["program"];
             $key++;
@@ -38,18 +50,26 @@ function tv_schedule_listing() {
         $day = strtoupper(date("D"));
         $cond = array('day' => $day);
     }
-
     $cursor = $people->find($cond);
-    $key = 0;
+    $counter = 0;
+    $keys = 0;
     // iterate cursor to get value of documents
     foreach ($cursor as $document) {
-        $out[$key]['time'] = $document["time"];
-        $out[$key]['day'] = $document["day"];
-        $out[$key]['program'] = $document["program"];
-        $key++;
+        $s_time = time_zone_conversion($document["time"], $_GET['time_zone']);
+        $out[$keys]['time'] = $s_time;       
+        $out[$keys]['day'] = $document["day"];
+        $out[$keys]['program'] = $document["program"];
+        $keys++;
+       
+        if($curent_time >= $s_time){
+          $counter++;
+        }
+    }
+    if($counter > 0){
+       $count = $counter-1;
     }
 
-    return theme('itg_tv_schedule', array('output' => $out, 'search' => $search));
+    return theme('itg_tv_schedule', array('output' => $out, 'search' => $search, 'total' => $count));
 }
 
 ?>
