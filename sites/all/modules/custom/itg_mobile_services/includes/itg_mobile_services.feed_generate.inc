@@ -77,19 +77,21 @@ function generate_file_name($node, $service_title) {
   $frequency_to_arr = explode(' ', $node->field_service_frequency_date[LANGUAGE_NONE][0]['value2']);
   $frequency_from_date = $frequency_from_arr[0];
   $frequency_to_date = $frequency_to_arr[0];
+  $timestamp = time();
+  $token = sha1($timestamp);
   switch ($service_frequency) {
     case '1': // daily 
-      $file_name = '/daily-' . $service_title . '-' . $frequency_from_date . '-.xml';
+      $file_name = '/daily_' . $service_title . '_' . $frequency_from_date . '_' . $timestamp . '_' . $token . '.xml';
       break;
     case '2': // weekly
       $frequency_from_date = $frequency_from_arr[0];
       $frequency_to_date = $frequency_to_arr[0];
-      $file_name = '/weekly-' . $service_title . '-' . $frequency_from_date . '-' . $frequency_to_date . '-.xml';
+      $file_name = '/weekly_' . $service_title . '_' . $frequency_from_date . '-' . $frequency_to_date . '_' . $timestamp . '_' . $token . '.xml';
       break;
     case '3': // monthly
       $frequency_from_date = $frequency_from_arr[0];
       $frequency_to_date = $frequency_to_arr[0];
-      $file_name = '/monthly-' . $service_title . '-' . $frequency_from_date . '-' . $frequency_to_date . '-.xml';
+      $file_name = '/monthly_' . $service_title . '_' . $frequency_from_date . '-' . $frequency_to_date . '_' . $timestamp . '_' . $token . '.xml';
       break;
   }
   $file_path = drupal_realpath('public://');

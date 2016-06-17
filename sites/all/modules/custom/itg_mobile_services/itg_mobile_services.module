@@ -550,9 +550,9 @@ function itg_mobile_clients_validator($form, &$form_state) {
       if (empty($ftp_ip_address)) {
         form_set_error('field_ftp_ip_address', t('FTP IP Address Required.'));
       }
-      if (!filter_var($ftp_ip_address, FILTER_VALIDATE_IP)) {
-        form_set_error('field_ftp_ip_address', t('FTP IP Address is not valid.'));
-      }
+//      if (!filter_var($ftp_ip_address, FILTER_VALIDATE_IP)) {
+//        form_set_error('field_ftp_ip_address', t('FTP IP Address is not valid.'));
+//      }
 
       if (empty($ftp_username)) {
         form_set_error('field_ftp_username', t('FTP Username Required.'));

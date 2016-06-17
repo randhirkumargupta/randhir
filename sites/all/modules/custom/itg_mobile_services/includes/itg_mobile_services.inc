@@ -25,7 +25,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
   $expiry_date = $service_details->field_story_expiry_date[LANGUAGE_NONE][0]['value'];
 
   $get_clients_id = get_clients_id($association_nid);
-  watchdog('content_frequency', '<pre>' . print_r($node, 1) . '</pre>');
+  //watchdog('content_frequency', '<pre>' . print_r($node, 1) . '</pre>');
   // client ids
   $client_id_array = $get_clients_id['target_id'];
   // service association id
@@ -73,6 +73,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
       switch ($content_sharing_mode) {
         // 1. Fetch web URL (our server)
         case '1':
+          itg_syndication_web_url_syndication($data, $file_path . '/' . $xml_name . '.xml');
           break;
         case 2: // 2. Via FTP location
           $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
@@ -163,31 +164,32 @@ function get_content_sharing_mode($entity_id) {
  * @param type $data
  * @param type $file_path
  */
-function itg_mobile_services_ftp_feeds($data, $file_path) {
-//  $ftp_details = get_ftp_details_by_client($data['client_title'], $data['delivery_mode']);
-//  
-//  $file = $file_path;
-//  $remote_file = 'readme.txt';
-//  
-//  $ftp_server = $ftp_details->field_syndication_ftp_url_value;
-//  $ftp_user_name = $ftp_details->field_syndication_ftp_username_value;
-//  $ftp_user_pass = $ftp_details->field_syndication_ftp_password_value;
-//  
-//  // set up basic connection
-//  $conn_id = ftp_connect($ftp_server);
-//
-//  // login with username and password
-//  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
-//
-//  // upload a file
-//  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
-//   echo "successfully uploaded $file\n";
-//  } else {
-//   echo "There was a problem while uploading $file\n";
-//  }
-//
-//  // close the connection
-//  ftp_close($conn_id);
+function itg_mobile_services_ftp_feeds($data, $file) {
+  
+  $file_array = explode('/',$file);
+  $last = count($file_array) - 1;
+  $remote_file = $file_array[$last];
+ // $remote_file = 'readmefeeds.txt';
+
+  $ftp_server = $data['ftp_ip_address'];
+  $ftp_user_name = $data['ftp_username'];
+  $ftp_user_pass = $data['ftp_password'];
+  
+  // set up basic connection
+  $conn_id = ftp_connect($ftp_server);
+
+  // login with username and password
+  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+
+  // upload a file
+  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+   echo "successfully uploaded $file\n";
+  } else {
+   echo "There was a problem while uploading $file\n";
+  }
+
+  // close the connection
+  ftp_close($conn_id);
 }
 
 
