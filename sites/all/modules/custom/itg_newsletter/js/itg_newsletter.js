@@ -15,7 +15,8 @@
         if(nid) {
          $('input[name="field_newsl_add_news_und_0_remove_button"]').show();
         } else {
-          $('input[name="field_newsl_add_news_und_0_remove_button"]').hide();
+          //$('input[name="field_newsl_add_news_und_0_remove_button"]').hide();
+          $('#edit-field-newsl-add-news-und-0-remove-button').hide();
         }
         
        //Hide left side vertical tabs in case of simple users
