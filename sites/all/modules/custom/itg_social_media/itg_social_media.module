@@ -163,7 +163,7 @@ function itg_social_media_node_type($nid) {
  */
 
 function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {  
-  global $base_url, $user;
+  global $base_url, $user;  
   // Set file status to permanent
   $file = file_load($fid);
   // Get file real path
@@ -180,23 +180,42 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
 
   switch ($type) {
     case 'videos':
-      $data = [
-        'title' => $node->title,
-        'description' => t($desc) . ' ' . $short_url,
-        'source' => $fb->videoToUpload($path),
-        'published' => FALSE,
-        'scheduled_publish_time' => $stime,
-      ];
+      if ($stime != NULL) {
+        $data = [
+          'title' => $node->title,
+          'description' => t($desc) . ' ' . $short_url,
+          'source' => $fb->videoToUpload($path),
+          'published' => FALSE,
+          'scheduled_publish_time' => $stime,
+        ];
+      }
+      else {
+        $data = [
+          'title' => $node->title,
+          'description' => t($desc) . ' ' . $short_url,
+          'source' => $fb->videoToUpload($path),
+          'published' => TRUE,          
+        ];
+      }
 
       break;
 
     case 'photos':
-      $data = [
-        'message' => t($desc) . ' ' . $short_url,
-        'source' => $fb->fileToUpload($path),
-        'published' => FALSE,
-        'scheduled_publish_time' => $stime,
-      ];
+      if ($stime != NULL) {
+        $data = [
+          'message' => t($desc) . ' ' . $short_url,
+          'source' => $fb->fileToUpload($path),
+          'published' => FALSE,
+          'scheduled_publish_time' => $stime,
+        ];
+      }
+      else {
+        $data = [
+          'message' => t($desc) . ' ' . $short_url,
+          'source' => $fb->fileToUpload($path),
+          'published' => TRUE,
+        ];
+      }
 
       break;
   }
@@ -220,7 +239,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'facebook ' . $type,
-      'created' => date('Y-m-d H:i:s', $stime),
+      'created' => $stime != NULL ? date('Y-m-d H:i:s', $stime) : date('Y-m-d H:i:s', REQUEST_TIME),
     );
     
     // iNSERT INTO DATABASE
@@ -228,7 +247,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     $query->fields($pre_save)
         ->execute();
     // Set message
-    drupal_set_message(t('Facebook ' . $type . 'has been posted'), 'status');
+    drupal_set_message(t('Facebook ' . $type . ' has been posted'), 'status');
   }
 }
 
@@ -237,16 +256,16 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
  *
  * {@inheritdoc}
  */
-function itg_social_media_form_submit($form, &$form_state) {
+function itg_social_media_form_submit($form, &$form_state) {  
   $node = node_load($form_state['values']['nid']);  
+  date_default_timezone('Asia/Kolkata');      
   // Facebook section
   if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] === 'facebook') {    
     // Facebook Image
     if ($form_state['values']['itg_fb_img'] > 0) {      
       $desc = $form_state['values']['itg_facebook_narrative'];
-      $fid = $form_state['values']['itg_fb_img'];
-      date_default_timezone('Asia/Kolkata');      
-      $stime = strtotime($form_state['values']['img_schedule_time']);
+      $fid = $form_state['values']['itg_fb_img'];      
+      $stime = $form_state['values']['img_schedule_time'] != NULL ? strtotime($form_state['values']['img_schedule_time']) : NULL;
       //$stime = $stime + ((5*3600) + 1800);      
       itg_social_media_facebook_post($fid, $desc, 'photos', $node, $stime);
       $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
@@ -257,7 +276,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     if ($form_state['values']['itg_fb_video']) {      
       $desc = $form_state['values']['itg_facebook_video_text'];
       $fid = $form_state['values']['itg_fb_video'];
-      $stime = strtotime($form_state['values']['video_schedule_time']);
+      $stime = $form_state['values']['video_schedule_time'] !== '' ? strtotime($form_state['values']['video_schedule_time']) : '';
       //$stime = $stime + ((5*3600) + 1800);
       itg_social_media_facebook_post($fid, $desc, 'videos', $node, $stime);
       // save node field
@@ -284,8 +303,8 @@ function itg_social_media_form_submit($form, &$form_state) {
   if ($form_state['values']['itg_smi']['twitter'] === 'twitter') {
     // Twitter image
     if ($form_state['values']['itg_twitter_img'] > 0) {      
-      $stime = strtotime($form_state['values']['tw_img_schedule_time']);
-      $stime = $stime + ((5*3600) + 1800);
+      $stime = $form_state['values']['tw_img_schedule_time'] != NULL ? strtotime($form_state['values']['tw_img_schedule_time']) : NULL;
+      //$stime = $stime + ((5*3600) + 1800);
       $desc = $form_state['values']['itg_twitter_narrative'];
       $fid = $form_state['values']['itg_twitter_img'];
       $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
@@ -295,8 +314,8 @@ function itg_social_media_form_submit($form, &$form_state) {
     
     // Twitter video
     if ($form_state['values']['itg_twit_video'] > 0) { 
-      $stime = strtotime($form_state['values']['tw_vid_schedule_time']);
-      $stime = $stime + ((5*3600) + 1800);
+      $stime = $form_state['values']['tw_vid_schedule_time'] != NULL ? strtotime($form_state['values']['tw_vid_schedule_time']) : NULL;
+      //$stime = $stime + ((5*3600) + 1800);
       $desc = $form_state['values']['field_story_twitter_video_desc'];
       $fid = $form_state['values']['itg_twit_video'];
       $node->field_story_twitter_video['und'][] = array(
@@ -319,7 +338,7 @@ function itg_social_media_form_submit($form, &$form_state) {
  * @param stdObject $node
  */
 function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
-  global $base_url;
+  global $base_url, $user;
   
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
@@ -350,13 +369,13 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
     'media_ids' => $media_id
   ]);
   watchdog('twitter image', '<pre>' . print_r($reply, true) . '</pre>');
-  if (iset($reply->id)) {
+  if (isset($reply->id)) {
     $pre_save = array(
       'nid' => $node->nid,
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'Twitter Image',
-      'created' => date('Y-m-d H:i:s', $stime),
+      'created' => $stime != NULL ? date('Y-m-d H:i:s', $stime) : date('Y-m-d H:i:s', REQUEST_TIME),
     );
     
     // iNSERT INTO DATABASE
@@ -364,7 +383,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
     $query->fields($pre_save)
         ->execute();
     // Set message
-    drupal_set_message(t('Facebook image has been posted'), 'status');
+    drupal_set_message(t('Twitter image has been posted'), 'status');
   }
 }
 
@@ -375,7 +394,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
  * @param stdObject $node
  */
 function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
-  global $base_url;
+  global $base_url, $user;
   // Create connection with twitter
   $cb = itg_social_media_twitter_connection();
   // Set image status permanent
@@ -426,17 +445,17 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
 
   // Now use the media_id in a Tweet
   $reply = $cb->statuses_update([
-    'status' => 'Twitter now accepts video uploads.',
+    'status' => $desc . ' ' . $short_url ,
     'media_ids' => $media_id
   ]);
   watchdog('twitter video', '<pre>' . print_r($reply, true) . '</pre>');
-  if (iset($reply->id)) {
+  if (isset($reply->id)) {
     $pre_save = array(
       'nid' => $node->nid,
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'Twitter Video',
-      'created' => date('Y-m-d H:i:s', $stime),
+      'created' => $stime != NULL ? date('Y-m-d H:i:s', $stime) : date('Y-m-d H:i:s', REQUEST_TIME),
     );
     
     // iNSERT INTO DATABASE
@@ -444,6 +463,6 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
     $query->fields($pre_save)
         ->execute();
     // Set message
-    drupal_set_message(t('Facebook video has been posted'), 'status');
+    drupal_set_message(t('Twitter video has been posted'), 'status');
   }
 }

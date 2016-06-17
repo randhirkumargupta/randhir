@@ -30,7 +30,7 @@ function features_for_newsletter_field_group_info() {
       'label' => 'Add News',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => '',
+        'id' => 'newsletter-add-news',
         'classes' => 'group-newsl-add-news field-group-div',
         'description' => '',
         'show_label' => '1',
@@ -73,7 +73,7 @@ function features_for_newsletter_field_group_info() {
       'label' => 'Basic Settings',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => '',
+        'id' => 'newsletter-basic-details',
         'classes' => 'itg-group-field',
         'description' => '',
         'show_label' => '1',
@@ -107,7 +107,7 @@ function features_for_newsletter_field_group_info() {
       'label' => 'Meta Tags',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => '',
+        'id' => 'newsletter-metatags',
         'classes' => 'group-quiz-metatags field-group-div',
         'description' => '',
         'show_label' => '1',
