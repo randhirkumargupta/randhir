@@ -8,7 +8,24 @@
  *
  */
 
+/**
+ * Implementation of hook_init
+ */
+function itg_newsletter_init(){
+  
+  //Hide Abstract area which appears in metatags from all content type forms
+  if((arg(0) == 'node' && arg(1) == 'add') || (arg(0) == 'node' && arg(2) == 'edit')) {
+  drupal_add_js('jQuery(document).ready(function() {            
+           jQuery("#edit-metatags-und-advanced").hide();
+           jQuery(".form-item-metatags-und-abstract-value").hide();
+    });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+}
 
+/**
+ * Implementation of hook_menu
+ * @return string
+ */
 function itg_newsletter_menu(){
     $items['newsletter_data'] = array(
       'title' => 'Autocomplete for Newsletter',
@@ -28,7 +45,8 @@ function itg_newsletter_menu(){
 }
 
 /**
- * Implements hook_block_info().
+ * Implements hook_block_info()
+ * @return array
  */
 function itg_newsletter_block_info() {
   $blocks['newsletter_tab_form_block'] = array(
@@ -447,14 +465,28 @@ function itg_newsletter_node_update($node){
 function itg_newsletter_node_validate($node, $form, &$form_state) {
   
   //Validation for automatic type newsletter
-  if($node->type == 'newsletter' && $node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic'){
-    $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
-    $newsletter_content = $node->	field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
-    $check_existance = itg_newsletter_check_existance_frequency($frequency, $newsletter_content);
-    
-    if(isset($check_existance) && arg(1) != $check_existance){
-       form_set_error('field_newsl_newsletter_content',t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> '.l('Click here','node/'.$check_existance.'/edit', array('attributes' => array('target'=>'_blank'))).' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)).' news', '@frequency' => $frequency)));
-     }
+  if ($node->type == 'newsletter') {
+    if ($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') {
+      $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
+      $newsletter_content = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
+      $check_existance = itg_newsletter_check_existance_frequency($frequency, $newsletter_content);
+
+      //If record already exist for this frequency through an error
+      if (isset($check_existance) && arg(1) != $check_existance) {
+        form_set_error('field_newsl_newsletter_content', t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> ' . l('Click here', 'node/' . $check_existance . '/edit', array('attributes' => array('target' => '_blank'))) . ' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)) . ' news', '@frequency' => $frequency)));
+      }
+    } else {
+      if ($node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'later') {
+        $scheduled_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
+        $scheduled_time = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+        $current_date = strtotime(date('Y-m-d'));
+        $current_time = date('H');
+
+        if($scheduled_date <= $current_date && $scheduled_time <= $current_time) {
+          form_set_error('field_newsl_time', t('Time should be greater than current time for current date.'));
+        }
+      }
+    }
   }
 }
 
