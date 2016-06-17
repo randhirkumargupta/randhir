@@ -455,28 +455,28 @@ function feature_for_mobile_services_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_clients_creation';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_clients_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_client_service_association';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_client_service_association'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_service_creation';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_service_creation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_vas_service_content';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_vas_service_content'] = $strongarm;
 
   return $export;

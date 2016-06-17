@@ -199,7 +199,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'create_content' => 'create_content',
+    'service_creation' => 'service_creation',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Client Title (field_client_title) */
@@ -332,24 +332,27 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Customer Name';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Content Sharing mode */
+  $handler->display->display_options['fields']['field_content_sharing_mode']['id'] = 'field_content_sharing_mode';
+  $handler->display->display_options['fields']['field_content_sharing_mode']['table'] = 'field_data_field_content_sharing_mode';
+  $handler->display->display_options['fields']['field_content_sharing_mode']['field'] = 'field_content_sharing_mode';
+  $handler->display->display_options['fields']['field_content_sharing_mode']['label'] = 'Content Sharing Mode';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Created Date';
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  $handler->display->display_options['fields']['created']['timezone'] = 'Asia/Kolkata';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -477,18 +480,16 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Created Date';
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  $handler->display->display_options['fields']['created']['timezone'] = 'Asia/Kolkata';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -631,18 +632,16 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Created Date';
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  $handler->display->display_options['fields']['created']['timezone'] = 'Asia/Kolkata';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -760,9 +759,10 @@ function feature_for_mobile_services_views_default_views() {
     'link' => 0,
   );
   /* Field: Content: Client title */
-  $handler->display->display_options['fields']['field_story_client_title']['id'] = 'field_story_client_title';
-  $handler->display->display_options['fields']['field_story_client_title']['table'] = 'field_data_field_story_client_title';
-  $handler->display->display_options['fields']['field_story_client_title']['field'] = 'field_story_client_title';
+  $handler->display->display_options['fields']['field_footer']['id'] = 'field_footer';
+  $handler->display->display_options['fields']['field_footer']['table'] = 'field_data_field_footer';
+  $handler->display->display_options['fields']['field_footer']['field'] = 'field_footer';
+  $handler->display->display_options['fields']['field_footer']['label'] = 'Client Title';
   /* Field: Content: Frequency */
   $handler->display->display_options['fields']['field_service_frequency']['id'] = 'field_service_frequency';
   $handler->display->display_options['fields']['field_service_frequency']['table'] = 'field_data_field_service_frequency';
@@ -771,9 +771,8 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['field_service_frequency_date']['id'] = 'field_service_frequency_date';
   $handler->display->display_options['fields']['field_service_frequency_date']['table'] = 'field_data_field_service_frequency_date';
   $handler->display->display_options['fields']['field_service_frequency_date']['field'] = 'field_service_frequency_date';
-  $handler->display->display_options['fields']['field_service_frequency_date']['type'] = 'date_plain';
   $handler->display->display_options['fields']['field_service_frequency_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'custom_date_d_m_y_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -786,18 +785,16 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Created Date';
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  $handler->display->display_options['fields']['created']['timezone'] = 'Asia/Kolkata';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';

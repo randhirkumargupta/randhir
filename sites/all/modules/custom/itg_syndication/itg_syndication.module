@@ -20,6 +20,19 @@ function itg_syndication_menu() {
       'type' => MENU_CALLBACK,      
   );
   
+  $items['syndication_test'] = array(      
+      'page callback' => 'get_syndication_test',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,      
+  );
+
+  $items['syndication/feed-test'] = array(
+    'page callback' => 'feed_test',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_syndication.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -82,6 +95,7 @@ function itg_syndication_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-service-fetch-link").hide();
               jQuery("#edit-field-syndication-ftp-details-und-0-remove-button").hide();
+              jQuery("#edit-field-story-expiry-date-und-0-value-datepicker-popup-1").keydown(false);
             });', array('type' => 'inline', 'scope' => 'footer'));
     
     
@@ -108,13 +122,20 @@ function itg_syndication_after_build($form, &$form_state) {
  * @param array $form_state
  */
 function itg_syndication_change_message($form, &$form_state) {
-  drupal_get_messages('status');
-  if ($form_state['values']['changed'] == '') {
-    drupal_set_message(t('Client created successfully.'));
-  }
-  else {
-    drupal_set_message(t('Client updated successfully.'));
-  }
+   $tid = $form_state['node']->field_syndication_client_title[LANGUAGE_NONE][0]['tid'];
+   $term = taxonomy_term_load_multiple(array($tid), array());
+
+   if (isset($_SESSION['messages']['status'])) {
+     unset($_SESSION['messages']['status']);
+   }
+   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'syndication-client') {
+      $op = 'created';
+   }
+   else {
+      $op = 'updated';
+   }
+   $title = $term[$tid]->name;
+   drupal_set_message(t('Client <b>' . $title . '</b> has been ' . $op . '.'));
 }
 
 /**
@@ -166,6 +187,7 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
     }   
     
     $form['#after_build'][] = 'itg_syndication_rule_after_build';
+    $form['actions']['submit']['#submit'][] = 'itg_syndication_rule_change_message'; 
 }
 
 /**
@@ -198,6 +220,10 @@ function itg_syndication_rule_after_build($form, &$form_state) {
   );
   
   $form['additional_settings']['#access'] = FALSE;
+  
+   drupal_add_js('jQuery(document).ready(function() {              
+              jQuery("#edit-field-syndication-rule-details-und-0-remove-button").hide();
+            });', array('type' => 'inline', 'scope' => 'footer'));
 
   return $form;
 }
@@ -352,7 +378,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
           //validate for ftp url
           if ($val['field_ftp_ip_address'][LANGUAGE_NONE][0]['value'] != '') {
             if (!filter_var($val['field_ftp_ip_address'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_IP)) {
-              form_set_error('field_syndication_ftp_url', t('FTP IP Address is not valid.'));
+              //form_set_error('field_syndication_ftp_url', t('FTP IP Address is not valid.'));
             }
           }
         }
@@ -379,7 +405,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
   
    $is_dupl_client = itg_syndication_check_duplicate($node->field_syndication_client_title['und'][0]['tid'], $node->title);
    
-   if (isset($is_dupl_client) && arg(1) != $is_dupl_client) {
+   if (is_numeric($is_dupl_client) && arg(1) != $is_dupl_client) {     
       form_set_error('title', t('client already exists.'));
    }
   } else if ($node->type == 'syndication_rule') {
@@ -393,7 +419,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
    
     $is_rule_client = itg_syndication_check_client_rule($node->field_syndication_rule_title[LANGUAGE_NONE][0]['value']);
     
-    if (isset($is_rule_client) && arg(1) != $is_rule_client) {
+    if (is_numeric($is_rule_client) && arg(1) != $is_rule_client) {
       form_set_error('title', t('Rule already exists for this client.'));
     }
     
@@ -607,6 +633,8 @@ function itg_syndication_node_presave($node) {
   if ($node->type =='syndication_client' && $node->field_syndication_delivery_mode[LANGUAGE_NONE][0]['value'] == 'Web URL') {
     $web_url = get_weburl_for_syndication('syndication/feed', $node);
     $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
+  } else {
+     $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = '';
   }
 }
 
@@ -654,11 +682,12 @@ function get_syndication_feed_byurl() {
   
   foreach ($itg_result as $itg_val) {
     $xml_date = date('d/m/Y',$itg_val->created_date);
-    $data[$xml_date] = $itg_val->xml_name;
+    $file_url = explode('sites/', $itg_val->xml_name);
+    echo 'Click to Download. <a href="'.$base_url.'/sites/'.$file_url[1].'" download>'.$xml_date.'</a>';
+    echo '</br>';    
   }
-  p($data);
-  return $data;
-  
+  exit;
+ 
 }
 
 /**
@@ -690,4 +719,85 @@ function get_cron_time($frequency, $time_rule, $day = NULL, $dt = NULL) {
     
     return $date_array;
   
+}
+
+//function for test
+function get_syndication_test() {
+  $arg1 = arg(1);
+  $file_path = drupal_realpath('public://').'/xml/syndication__13-06-2016_49c1cf829fc81d0e1c9bde594e74571279c9af5a.xml'; 
+  if ($arg1 == 'ftp') {  
+    $file = $file_path;
+    $remote_file = 'xml/syndication__13-06-2016_49c1cf829fc81d0e1c9bde594e74571279c9af5a.xml';
+    $ftp_server = 'test.kelltontech.net';
+    $ftp_user_name = 'ftptest1';
+    $ftp_user_pass = 'FtpTEst@123';  
+    // set up basic connection
+    $conn_id = ftp_connect($ftp_server);
+    // login with user$file_pathname and password
+    $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+    // upload a file  
+    if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+     echo "successfully uploaded $file\n";
+    } else {
+     echo "There was a problem while uploading $file\n";
+    }
+
+    // close the connection
+    ftp_close($conn_id);
+
+    } else if ($arg1 == 'email') {
+         $attachment = array(
+          'filepath' => $file_path,
+        );
+
+    $tomail = 'shravan.kumar@kelltontech.com';
+    $params = array(
+      'key' => 'itg_syndication',
+      'to' => $tomail,
+      'from' => 'noreply@indiatoday.com',
+      'subject' => 'Test email',
+      'body' => 'test.',
+      'attachment' => $attachment,
+      'headers' => array(
+        'MIME-Version: 1.0' . "\r\n",
+        'Content-type: text/html; charset=iso-8859-1' . "\r\n",
+        'To: '.$tomail . "\r\n",
+        'From: India Today <noreply@indiatoday.com>' . "\r\n",
+      ),
+    );
+    $language = language_default();
+    drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);    
+  }
+  
+}
+
+function itg_syndication_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'syndication_client') {
+    if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
+      $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']));
+    }
+    if (empty($node->field_syndication_ftp_details)) {
+      unset($node->content['field_syndication_ftp_details']);    
+    }    
+  }
+}
+
+/**
+ * Custom submit callback function to change message after Syndication rule node save/update.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_syndication_rule_change_message($form, &$form_state) {
+   
+   if (isset($_SESSION['messages']['status'])) {
+     unset($_SESSION['messages']['status']);
+   }
+   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'syndication-rule') {
+      $op = 'created';
+   }
+   else {
+      $op = 'updated';
+   }
+   $title = $form_state['node']->field_syndication_rule_title[LANGUAGE_NONE][0]['value'];
+   drupal_set_message(t('Rule for <b>' . $title . '</b> has been ' . $op . '.'));
 }

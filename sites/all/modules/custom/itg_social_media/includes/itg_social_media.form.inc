@@ -27,11 +27,10 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'checkboxes',
     '#title' => t('Social media integration '),
     '#options' => array(
-      'facebook' => t('Facebook Image'),
-      'facebook_video' => t('Facebook Video'),
-      'facebook_instant_article' => t('Facebook Instant Article'),
-      'twitter' => t('Twitter Image'),
-      'twitter_video' => t('Twitter Video'),
+      'facebook' => t('Facebook'),      
+      'twitter' => t('Twitter'),
+      'instagram' => t('Instagram'),
+      'facebook_instant_article' => t('Facebook Instant Article'),      
     ),
     '#default_value' => $data,
   );
@@ -47,29 +46,15 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
   );
   
-  $form['fb_video_wrap'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Facebook Social Media Video Integration'),
-    '#attributes' => array('class' => array('social-fb-block')),
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  
   $form['fb_wrap']['itg_facebook_narrative'] = array(
     '#type' => 'textfield',
-    '#title' => t('Facebook Narrative'),
+    '#title' => t('Facebook Image Narrative'),
     '#maxlength' => 255,
     '#default_value' => isset($node->field_story_facebook_narrative['und'][0]['value']) ? $node->field_story_facebook_narrative['und'][0]['value'] : '',
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
@@ -87,29 +72,31 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
+  $form['fb_wrap']['img_schedule_time'] = array(
+    '#type' => 'date_popup',
+    '#title' => t("Facebook image schedule time"),    
+    '#date_format' => 'd/m/Y H:i',
+    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),        
+    '#date_timezone' => date_default_timezone(),
+  );
   
-  $form['fb_video_wrap']['itg_facebook_video_text'] = array(
+  $form['fb_wrap']['itg_facebook_video_text'] = array(
     '#type' => 'textfield',
     '#title' => t('Facebook Video Description'),
     '#maxlength' => 255,
     '#default_value' => isset($node->field_story_facebook_vdescripti['und'][0]['value']) ? $node->field_story_facebook_vdescripti['und'][0]['value'] : '',
     '#states' => array(
       'visible' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      )
+        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+      ),      
     ),
   );
   
-  $form['fb_video_wrap']['itg_fb_video'] = array(
+  $form['fb_wrap']['itg_fb_video'] = array(
     '#title' => t('Facebook Video'),
     '#type' => 'managed_file',
     '#upload_location' => 'public://facebook_video/',
@@ -121,13 +108,19 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
     '#states' => array(
       'visible' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[facebook_video]"]' => array('checked' => TRUE),
-      )
+        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
+      ),      
     ),
+  );  
+  $form['fb_wrap']['video_schedule_time'] = array(
+    '#type' => 'date_popup',
+    '#title' => t("Facebook video schedule time"),    
+    '#date_format' => 'd/m/Y H:i',
+    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),        
+    '#date_timezone' => date_default_timezone(),
   );
+  
   
   $form['twit_wrap'] = array(
     '#type' => 'fieldset',
@@ -148,10 +141,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
+      ),      
     ),
   );
   
@@ -169,25 +159,31 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-
-  // Twitter video
-  $form['twitter_video_wrap'] = array(
-    '#title' => t('Twitter Video'),
-    '#type' => 'fieldset',
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      ),
+      ),      
     ),
   );
   
-  $form['twitter_video_wrap']['itg_twit_video'] = array(
+  $form['twit_wrap']['tw_img_schedule_time'] = array(
+    '#type' => 'date_popup',
+    '#title' => t("Twitter image schedule time"),    
+    '#date_format' => 'd/m/Y H:i',
+    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),    
+    '#date_timezone' => date_default_timezone(),
+  );
+
+  $form['twit_wrap']['field_story_twitter_video_desc'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Twitter Video Narrative'),
+    '#maxlength' => 255,
+    '#default_value' => isset($node->field_story_twitter_video_desc['und'][0]['value']) ? $node->field_story_twitter_video_desc['und'][0]['value'] : '',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+      ),      
+    ),
+  );
+  $form['twit_wrap']['itg_twit_video'] = array(
     '#title' => t('Twitter Video'),
     '#type' => 'managed_file',
     '#upload_location' => 'public://twitter_video/',
@@ -199,30 +195,20 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
     '#states' => array(
       'visible' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      )
+        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
+      ),      
     ),
   );
   
-  $form['twitter_video_wrap']['field_story_twitter_video_desc'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Twitter Video Narrative'),
-    '#maxlength' => 255,
-    '#default_value' => isset($node->field_story_twitter_video_desc['und'][0]['value']) ? $node->field_story_twitter_video_desc['und'][0]['value'] : '',
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-        ':input[name="itg_smi[twitter_video]"]' => array('checked' => TRUE),
-      )
-    ),
+  $form['twit_wrap']['tw_vid_schedule_time'] = array(
+    '#type' => 'date_popup',
+    '#title' => t("Twitter video schedule time"),    
+    '#date_format' => 'd/m/Y H:i',
+    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),    
+    '#date_timezone' => date_default_timezone(),
   );
   
-  // Additional field ends here
   $form['ctype'] = array(
     '#type' => 'hidden',
     '#default_value' => check_plain($c_type),

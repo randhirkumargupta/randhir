@@ -337,7 +337,7 @@ a.button{
     }
   } 
   & + div.clearfix{
-    .form-submit{@extend .add-more; margin-left: 250px;}
+    .form-submit{@extend .add-more; margin-left: 250px; height: 34px;}
   }
 }
 .Browse-upload{
@@ -347,7 +347,7 @@ a.button{
   .image-widget-data, .file-widget{
     input.form-file{
       margin-top: 5px;
-      & + .form-submit{
+      & + .form-submit, & + span.error + .form-submit{
         @extend .add-more-wbg;
       }
     }
@@ -1486,6 +1486,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     li{
       @extend .dib;
       @extend .vmid;
+      @extend .pos-rel;
       a{
         color: #666;
         font-size: 13px;
@@ -1494,8 +1495,20 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           text-decoration: underline;
         }
       }
+      span{
+        color: #666;
+        font-size: 13px;
+      }
       & + li{
         margin-left: 3px;
+        &:before{
+          content: '\f105';
+          color: #2f2f2f;
+          padding: 0 5px 0 2px;
+          font: normal normal normal 12px/18px FontAwesome; 
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
       }
     }
   }
@@ -1911,6 +1924,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         padding: 0;
         margin: 0;
         @extend .fleft;
+        @extend .full;
         @extend .pos-rel;
         .form-type-textarea{
           padding: 0;
@@ -1923,24 +1937,23 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           }
         }
         .form-submit{
-          background: #fff url("../images/cross_small.png") no-repeat center center;
-          border-radius: 50%;
-          height: 34px;
-          left: 100%;
-          margin: 0 0 0 10px;
-          position: absolute;
-          top: 0;
-          width: 34px;
+          margin: 10px 0 !important;
         }
       }
       &+tr{
         td{
           margin-top: 10px;
+          .form-submit{
+            margin-left: 142px !important;
+          }
         }
       }
     }
   }
   &+div.clearfix{
+    margin-top: -41px;
+    @extend .pos-rel;
+    z-index: 99;
     .ajax-progress-throbber{
       position: static;
       margin-top: 10px;
@@ -1972,7 +1985,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       z-index: 99;
     }
   }
-  > tbody > tr > td > .ajax-new-content{
+  > tbody > tr + tr > td, > tbody > tr > td > .ajax-new-content{
     > .form-submit[value="Remove"]{
       left: 172px;
     }
@@ -2053,6 +2066,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       position: absolute;
       bottom: -30px;
       left: 0;
+      z-index: 99;
       .form-submit{
         margin: 0;
       }
@@ -2157,6 +2171,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .field-name-field-poll-question-video, 
   .field-name-field-audio{
     @extend .choose-audio-video-file;
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
   }
   .field-name-field-quiz-answer-image{
     .form-managed-file{
@@ -2184,7 +2201,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       @extend .dib;
       @extend .full;
       .field{
-        padding: 0;
+        padding: 0 0 5px;
+        vertical-align: top;
       }
       .field-label{
         @extend .fleft;
@@ -2193,6 +2211,12 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       }
       .field-items{
         overflow: hidden;
+        float: none;
+        > .field-item + .field-item{
+          border-top: 1px solid #d9d9d9;
+          padding-top: 6px;
+          margin-top: 5px;
+        }
       }
     }
   }
@@ -2891,6 +2915,15 @@ fieldset#edit-select{
       visibility: hidden;
     }
   }
+  .form-field-name-field-story-expiry-date, 
+  .form-field-name-field-event-close-date,
+  .form-field-name-field-registration-close-date,
+  .form-field-name-field-event-start-date{
+    label + .form-text + span.error{padding-left: 0;}
+    .form-type-textfield:first-child{
+      margin-right: 10px !important;
+    }
+  }
 }
 .form-select[name="field_ugc_ctype[und]"]{
     text-transform: capitalize;
@@ -3378,7 +3411,8 @@ div.node{
         .newsletter-get-content{
           left: 590px;
           position: absolute;
-          top: 146px;
+          top: 80px;
+          z-index: 999;
           &.inactive{
             pointer-events: none;
             opacity: .5;
@@ -3636,6 +3670,13 @@ div.node{
     @extend .fleft;
     @extend .full;
     margin-bottom: 30px;
+    .ajax-new-content{
+      .field-name-field-service-content-date{
+        .date-combo{
+          margin-top: 0;
+        }
+      }
+    }
   }
   .field-name-field-service-content-date{
     @extend .fleft;
@@ -3652,6 +3693,7 @@ div.node{
   }
   .field-name-field-story-expert-description{
     height: 36px;
+    margin: 30px 0;
     label{
       @extend .hide;
       &+.form-textarea-wrapper{
@@ -3665,7 +3707,11 @@ div.node{
     }
     .form-type-textarea{
       margin-bottom: 0;
-      .form-textarea{height: 36px;}
+      .form-textarea{
+        height: 36px;
+        max-width: none;
+        width: 100%;
+      }
     }
   }
 }
@@ -3674,6 +3720,9 @@ div.node{
   .form-field-name-field-service-frequency-date{
     @extend .itg-date-range;
     .date-float{display: none;}
+    .date-no-float:last-child{
+      span.error{padding-left: 27px;}
+    }
   }
   #content-enable-button{
     @extend .add-more;
@@ -3753,6 +3802,7 @@ div.node{
   .form-field-name-field-poll-end-date{
     .form-type-textfield:first-child{
       margin-right: 10px !important;
+      span.error{padding-left: 0;}
     }
   }
 }
@@ -3834,4 +3884,27 @@ div.node{
       &+.form-text + span.error{padding-left: 0;}
     }
   }
+}
+.view-view-moderation-history{
+  padding: 0 10px;
+  .views-row{
+    padding: 10px 0;
+    &+.views-row{
+      border-top: 1px solid #fff;
+    }
+    .views-label{
+      @extend .fleft;
+      width: 120px;
+    }
+    .field-content{
+      @extend .db;
+      @extend .of-hide;
+    }
+  }
+  a{
+    color: #1fb5ad;
+  }
+}
+[id*="field-event-highlights-values"] tbody{
+  overflow: visible;
 }
