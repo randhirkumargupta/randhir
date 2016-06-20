@@ -65,6 +65,18 @@ function itg_social_media_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_social_media.admin.inc'
   );
+  $items['twitter/logout'] = array(        
+    'page callback' => 'itg_social_media_twitter_logout',    
+    'access arguments' => array('administer itg_social_media settings'),        
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.admin.inc'
+  );
+  $items['facebook/logout'] = array(        
+    'page callback' => 'itg_social_media_facebook_logout',    
+    'access arguments' => array('administer itg_social_media settings'),        
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.admin.inc'
+  );
   $items['admin/itg-social-media/facebook-pages'] = array(    
     'page callback' => '_facebook_pages_list',    
     'access arguments' => array('administer itg_social_media settings'),        
@@ -172,6 +184,10 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
   $fb = itg_social_media_fb_connection();
   // Get page information
   $page_id = variable_get('facebook_page_id', '');
+  if (variable_get('access_token_one', '') === '') {
+    drupal_set_message(t('Please first login to facebook'));
+    drupal_goto('browse-content');
+  }
   
   $token = variable_get('access_token_one').variable_get('access_token_two');
 
@@ -225,10 +241,12 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
     drupal_set_message(t('Graph returned an error: ' . $e->getMessage()), 'error');
+    drupal_goto('/browse-content');
   }
   catch (Facebook\Exceptions\FacebookSDKException $e) {
     // When validation fails or other local issues
     drupal_set_message(t('Facebook SDK returned an error: ' . $e->getMessage()), 'error');
+    drupal_goto('/browse-content');
   }
   // get response
   $graphNode = $response->isError();
