@@ -3916,3 +3916,12 @@ div.node{
 [id*="field-event-highlights-values"] tbody{
   overflow: visible;
 }
+.block-itg-related{
+   padding: 20px;
+   a{
+       color: #1fb5ad;
+   }
+   ul{
+       @extend .no-bullet;
+   }
+}
