@@ -3536,6 +3536,10 @@ div.node #comments h2 {
 [id*="field-newsl-add-news-values"] tbody tr td.field-multiple-drag .tabledrag-handle .handle {
   margin: 0 auto;
 }
+[id*="field-newsl-add-news-values"] tbody tr td .form-managed-file .image-widget-data div.description {
+  width: 105px;
+  min-width: 0;
+}
 [id*="field-newsl-add-news-values"] fieldset {
   border: none;
 }
