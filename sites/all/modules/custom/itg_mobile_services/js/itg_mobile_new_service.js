@@ -22,7 +22,7 @@
                     $('#edit-field-ftp-ip-address-und-0-value').val('');
                     $('#edit-field-ftp-username-und-0-value').val('');
                     $('#edit-field-ftp-password-und-0-value').val('');
-                    //$('.form-item-field-service-fetch-link-und-0-value').hide();
+                    $('.form-item-field-service-fetch-link-und-0-value').hide();
                     $('#itg-group-service-ftp').hide();
                 } else if (val == 3) { // Via Email 
                     $('#edit-field-service-fetch-link-und-0-value').val('');

@@ -24,7 +24,6 @@ function itg_mobile_services_feed_generator_of_contents($node) {
   $expiry_date = $service_details->field_story_expiry_date[LANGUAGE_NONE][0]['value'];
 
   $get_clients_id = get_clients_id($association_nid);
-  //watchdog('content_frequency', '<pre>' . print_r($node, 1) . '</pre>');
   // client ids
   $client_id_array = $get_clients_id['target_id'];
   // service association id
@@ -72,7 +71,8 @@ function itg_mobile_services_feed_generator_of_contents($node) {
       switch ($content_sharing_mode) {
         // 1. Fetch web URL (our server)
         case '1':
-          // itg_mobile_web_url_mobile('web_url', $file_path);
+          $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
+          itg_mobile_web_url_mobile($service_fetch_link, $file_path);
           break;
         case 2: // 2. Via FTP location
           $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
@@ -132,7 +132,7 @@ function get_clients_id($association_nid) {
   $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id");
   $query->condition('sat.field_service_association_title_target_id', $association_nid, '=');
   $query->condition('node.type', array('client_service_association'), 'IN');
-  $query->range(0, 10);
+  $query->range(0, 20);
   $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
     $target_id[] = $record['field_client_selection_target_id'];
@@ -238,12 +238,14 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
 
   if (isset($validate_content)) {
     $data = unserialize($validate_content);
-    foreach ($data['clients'] as $key => $val) {
-      if ($content_count >= $val) {
-        echo $val . "<br>";
-        $client[$key] = $val + 1;
+    if (is_array($data['clients']) && count($data['clients']) > 0) {
+      foreach ($data['clients'] as $key => $val) {
+        if ($content_count >= $val) {
+          $client[$key] = $val + 1;
+        }
       }
     }
+
 
     $details_array = array('service_id' => $association_nid,
       'frequency' => $frequency,
@@ -292,12 +294,12 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
  * @param type $data
  * @param type $file_path
  */
-function itg_mobile_web_url_mobile($data, $file_path) {
+function itg_mobile_web_url_mobile($service_fetch_link, $file_path) {
 
   $query = db_insert('itg_syndication_feed_url');
   $query->fields(array(
     'xml_name' => $file_path,
-    'client_feed_url' => $data['delivery_mode'],
+    'client_feed_url' => $service_fetch_link,
     'created_date' => time(),
     'status' => 1
   ));

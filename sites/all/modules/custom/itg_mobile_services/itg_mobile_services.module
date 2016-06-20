@@ -173,7 +173,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         'event' => 'change', // On change of the selection this action would take place
       );
 
-
+     
       $form['content_enable_button'] = array(
         '#type' => 'button',
         '#weight' => 8,
