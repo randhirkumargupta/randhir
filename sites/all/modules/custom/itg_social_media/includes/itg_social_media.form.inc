@@ -27,10 +27,10 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'checkboxes',
     '#title' => t('Social media integration '),
     '#options' => array(
-      'facebook' => t('Facebook'),      
-      'twitter' => t('Twitter'),
-      'instagram' => t('Instagram'),
-      'facebook_instant_article' => t('Facebook Instant Article'),      
+      'facebook' => t('<i class="fa fa-facebook-square" aria-hidden="true"></i>'),      
+      'twitter' => t('<i class="fa fa-twitter-square" aria-hidden="true"></i>'),
+      'instagram' => t('<i class="fa fa-instagram" aria-hidden="true"></i>'),
+      'facebook_instant_article' => t('<i class="fa fa-facebook-square" aria-hidden="true"></i>'),      
     ),
     '#default_value' => $data,
   );
