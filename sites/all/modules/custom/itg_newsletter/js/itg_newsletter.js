@@ -164,7 +164,7 @@
       
      //Read only newsletter date field
      if (type === 'Newsletter') {
-        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1').prop("readonly", true);
+        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-start-date-und-0-value-datepicker-popup-4, #edit-field-survey-start-date-und-0-value-datepicker-popup-5').prop("readonly", true);
       }
       
       //Get Newsletter data using AJAX

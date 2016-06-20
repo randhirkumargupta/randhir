@@ -166,6 +166,7 @@ var maxLen = 0;
             });
 
             if (firstTime == 1) {
+                jQuery('<span id="custom_service_content_0"></span>').insertAfter('textarea[name="field_service_content[und][0][field_story_expert_description][und][0][value]"]');
                 jQuery('#field-service-content-add-more-wrapper').hide();
                 jQuery('#edit-field-service-frequency').hide();
                 jQuery('#reset-date-button').hide();
@@ -313,6 +314,7 @@ var maxLen = 0;
                         }
                         tomorrow = dd + '/' + mm + '/' + yyyy;
                         jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').addClass('itg-disabled');
+                        jQuery('<span id="custom_service_content_' + i + '"></span>').insertAfter('textarea[name="field_service_content[und][' + i + '][field_story_expert_description][und][0][value]"]');
                         i++;
                         start_date++;
                     }
@@ -368,15 +370,15 @@ var maxLen = 0;
                 if (Drupal.settings.itg_mobile_services.settings.countchar) {
                     maxLen = Drupal.settings.itg_mobile_services.settings.countchar;
                 }
+                var id = jQuery(this).attr("id");
+                var string = id.split("-");
                 var tlength = jQuery(this).val().length;
                 console.log(maxLen);
                 console.log(tlength);
                 jQuery(this).val(jQuery(this).val().substring(0, maxLen));
                 remain = maxLen - parseInt(tlength);
-                jQuery('#remain').text(remain + ' characters remaining from ' + maxLen);
-                jQuery('#remainContent').text(remain + ' characters remaining from ' + maxLen);
+                jQuery('#custom_service_content_' + string[5]).text(remain + ' characters remaining from ' + maxLen);
             });
-
 
 
 

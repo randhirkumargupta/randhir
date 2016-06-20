@@ -2923,6 +2923,17 @@ fieldset#edit-select{
     .form-type-textfield:first-child{
       margin-right: 10px !important;
     }
+    .form-type-textfield:last-child{
+      width: 150px;
+    }
+  }
+  .form-field-name-field-individual-registration-fe,
+  .form-field-name-field-group-registration-fee-5,
+  .form-field-name-field-group-registration-fee-10,
+  .form-field-name-field-no-of-tickets{
+    .form-type-textfield{
+      span.error{padding-left: 231px;}
+    }
   }
 }
 .form-select[name="field_ugc_ctype[und]"]{
@@ -3374,6 +3385,10 @@ div.node{
         }
       }
     }
+    .form-managed-file .image-widget-data div.description{
+        width: 105px;
+        min-width: 0;
+    }
   }
   fieldset{
     border: none;
@@ -3806,7 +3821,7 @@ div.node{
     }
   }
 }
-[id*="field-email-address-values"]{
+.node-syndication_client-form [id*="field-email-address-values"]{
   margin-top: 30px !important;
   tbody tr td{
     padding: 0;
@@ -3815,8 +3830,10 @@ div.node{
     @extend .fleft;
     .form-type-textfield{
       padding: 0;
-    margin: 0;
+      margin: 0;
+      @extend .fleft;
     }
+    .form-submit, .ajax-new-content .form-submit{margin-left: 10px;}
   }
 }
 .node-ask_an_expert-form{
@@ -3907,4 +3924,13 @@ div.node{
 }
 [id*="field-event-highlights-values"] tbody{
   overflow: visible;
+}
+.block-itg-related{
+   padding: 20px;
+   a{
+       color: #1fb5ad;
+   }
+   ul{
+       @extend .no-bullet;
+   }
 }
