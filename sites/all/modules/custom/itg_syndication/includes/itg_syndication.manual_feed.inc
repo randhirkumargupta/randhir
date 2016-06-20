@@ -179,7 +179,7 @@ function itg_syndication_feed_download_after_build($form, &$form_state) {
  * @param array $form_state
  */
 function itg_syndication_selector_custom_submit($form, &$form_state) {
-  
+  //p($form_state['values']);
   $client_name = check_plain($form_state['values']['itg_row_selector_client']);
   $web_property = check_plain($form_state['values']['itg_row_selector_web_property']);
   $issue = check_plain($form_state['values']['itg_row_selector_issue']);
@@ -187,7 +187,7 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
   $feed_type = check_plain($form_state['values']['feed_type']);
   
   $syndication_node = $form_state['values']['itg_row_selector'];
-  
+  //p($form_state['values']);
   $data = array(
     'web_property' => $web_property,
     'client_title' => $client_name,
@@ -195,7 +195,7 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'feed_type' => $feed_type,
     'syndication' => serialize($syndication_node),    
   );
-  
+  //p($data);
   $file_path = feed_generator_of_contents($data); 
   
   // insert records into database table itg_syndication_manual_feed_details.
@@ -209,9 +209,9 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'feed_file_path' => $file_path,
     'created' => format_date(time(), 'custom', 'Y-m-d'),
   );
-  
-  $query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
-  
+  if (isset($file_path)) {
+    $query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
+  }
   // for feed download
   if($form_state['values']['feed_download_value'] == 'yes') {
     global $base_url;    
@@ -239,22 +239,25 @@ function itg_syndication_views_query_alter(&$view, &$query) {
    
     if (!empty($_GET['changed']['max']['date'])) {      
       $max_conditions_array = array();
-      $_GET['changed']['min']['date'] = str_replace('/','-',$_GET['changed']['min']['date']);
-      $_GET['changed']['max']['date'] = str_replace('/','-',$_GET['changed']['max']['date']);
+      $min_date = str_replace('/','-',$_GET['changed']['min']['date']);
+      $max_date = str_replace('/','-',$_GET['changed']['max']['date']);
       
-      $tomorrow = strtotime(date('d-m-Y',strtotime($_GET['changed']['max']['date'] . "+1 days")));
-      $max_date_condition = "AND " .$tomorrow;
+      $min = strtotime(str_replace('/','-',$min_date));
+      $max = strtotime(date('d-m-Y',strtotime($max_date . "+1 days")));
+      
+      $max_date_condition = "BETWEEN ".$min." AND " .$max;
       
       if (isset($view->query->where[1]['conditions'])) {
         foreach ($query->where[1]['conditions'] as $idx => $condition) {
           if (!is_object($condition['field']) && $condition['operator'] == 'formula') {            
             if (empty($condition['value'])) {              
-              $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);            
+              $max_conditions_array = explode('BETWEEN', $view->query->where[1]['conditions'][$idx]['field']);            
               $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
             }
           }
         }
-      }     
+      }
+      
     }
     
   }
@@ -268,10 +271,20 @@ function syndication_selector_custom_form_validate($form, &$form_state) {
   
 }
 
-function syndication_filter_custom_form_validate($form, &$form_state) {
-  //p($form_state['values']);
+function syndication_filter_custom_form_validate($form, &$form_state) {  
   if ($form_state['values']['client_delivery_mode'] == '_none' && $form_state['values']['feed_download_value'] != 'yes') {
     form_set_error('client_delivery_mode', t('Please select Delivery Mode.'));
   }
   
+}
+
+/**
+ * Implements views header link 
+ * @param type $view Description
+ */
+function itg_syndication_views_pre_render(&$view) { 
+  if ($view->name == "syndication_feed_generator") {
+    $header_content = '<span class="count">Count ('.$view->total_rows.') </span>';    
+    $view->attachment_before = $header_content;
+  }   
 }
