@@ -114,7 +114,7 @@
         <div class="newsletter-list">
           <div class="newsletter-thumbnail"><img src="<?php echo $thumbnail; ?>" /></div>  
           <div class="title-kicker">
-            <div class="newsletter-title"><?php echo l($title, $link, array('attributes' => array('target'=>'_blank'))); ?></div>
+            <div class="newsletter-title"><?php echo $title; ?></div>
             <div class="newsletter-kicker"><?php echo $kicker; ?></div>
           </div>
         </div>
