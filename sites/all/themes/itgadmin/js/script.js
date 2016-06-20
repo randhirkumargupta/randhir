@@ -450,7 +450,7 @@
     $('.field-name-field-quiz-options-answer').on('change', '.form-checkbox', function(){
       var correctVal = $(this).parents('.field-name-field-quiz-options-answer').siblings('.field-name-field-quiz-answer-type').find('.form-radio[value="single_correct"]').is(':checked');
       if(correctVal == true){
-        $(this).parents('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
+        $(this).closest('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
       }
     });
 
@@ -679,6 +679,12 @@
         $(this).parents('#edit-field-syndication-delivery-mode').siblings('.form-field-name-field-email-address').find('table td .form-text').val('');
       }
       
+    });
+    
+    // jQuery code for block-itg-related in second sidebar
+    
+    $('.block-itg-related').on('click', 'a', function(){
+        
     });
 
   };
