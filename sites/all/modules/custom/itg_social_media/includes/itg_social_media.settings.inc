@@ -13,7 +13,7 @@ function itg_social_media_fb_login() {
   
   $helper = $fb->getRedirectLoginHelper();
   $permissions = ['manage_pages', 'publish_pages', 'pages_show_list'];
-  $loginUrl = $helper->getLoginUrl($base_url . '/itg-social-media-settings-callback', $permissions);
+  $loginUrl = $helper->getLoginUrl($base_url . '/itg-social-media-settings-callback', $permissions);  
  
   return $loginUrl;
 }
@@ -46,7 +46,8 @@ function itg_social_media_twitter_connection() {
     $cb->setToken(variable_get('oauth_token', ''), variable_get('oauth_token_secret', ''));
   }
   else {
-    drupal_set_message(t('Access tokens are not available.') . l(t('Please Login'), $base_url . '/twitter-login'), 'error');
+    drupal_set_message(t('Access tokens are not available please login.'), 'error');
+    drupal_goto('/browse-content');
   }
 
   return $cb;
@@ -68,10 +69,12 @@ function itg_social_media_settings_callback() {
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
     drupal_set_message(t('Graph returned an error: ' . $e->getMessage()), 'error');
+    drupal_goto('/browse-content');
   }
   catch (Facebook\Exceptions\FacebookSDKException $e) {
     // When validation fails or other local issues
     drupal_set_message(t('Facebook SDK returned an error: ' . $e->getMessage()), 'error');
+    drupal_goto('/browse-content');
   }
 
   if (isset($accessToken)) {

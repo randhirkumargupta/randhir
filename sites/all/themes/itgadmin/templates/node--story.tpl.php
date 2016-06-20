@@ -3,8 +3,9 @@
       <?php if ($view_mode == 'full'): ?>
         <a href="javascript:;" class="close-preview">&nbsp;</a>
         <?php
-        // Load custom block for social media integration              
-        if (!isset($node->op)):
+        // Load custom block for social media integration 
+        global $user;        
+        if (!isset($node->op) && in_array('Social Media', $user->roles)):
           $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
           ?>
           <div class="itg-smi">
