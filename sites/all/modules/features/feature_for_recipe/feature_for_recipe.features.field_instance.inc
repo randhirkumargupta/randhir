@@ -2466,6 +2466,116 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-recipe-field_story_facebook_vdescripti'.
+  $field_instances['node-recipe-field_story_facebook_vdescripti'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 45,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_facebook_vdescripti',
+    'label' => 'Facebook Video Narrative',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 40,
+    ),
+  );
+
+  // Exported field_instance: 'node-recipe-field_story_facebook_video'.
+  $field_instances['node-recipe-field_story_facebook_video'] = array(
+    'bundle' => 'recipe',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 46,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_facebook_video',
+    'label' => 'Facebook Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => 'smi_facebook_videos',
+      'file_extensions' => 'mp4 mov wmv mkv flv avi',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 1,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 42,
+    ),
+  );
+
   // Exported field_instance: 'node-recipe-field_story_kicker_text'.
   $field_instances['node-recipe-field_story_kicker_text'] = array(
     'bundle' => 'recipe',
@@ -2657,132 +2767,6 @@ function feature_for_recipe_field_default_field_instances() {
       ),
       'type' => 'image_image',
       'weight' => 26,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_story_posted_by_facebook'.
-  $field_instances['node-recipe-field_story_posted_by_facebook'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 38,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_posted_by_facebook',
-    'label' => 'Posted by facebook',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 39,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_story_posted_by_instagram'.
-  $field_instances['node-recipe-field_story_posted_by_instagram'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 40,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_posted_by_instagram',
-    'label' => 'Posted By Instagram',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 43,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_story_posted_by_twitter'.
-  $field_instances['node-recipe-field_story_posted_by_twitter'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 39,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_posted_by_twitter',
-    'label' => 'Posted by Twitter',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 41,
     ),
   );
 
@@ -3117,180 +3101,6 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-recipe-field_story_time_facebook'.
-  $field_instances['node-recipe-field_story_time_facebook'] = array(
-    'bundle' => 'recipe',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 43,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_time_facebook',
-    'label' => 'Time Facebook',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 40,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_story_time_instagram'.
-  $field_instances['node-recipe-field_story_time_instagram'] = array(
-    'bundle' => 'recipe',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 42,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_time_instagram',
-    'label' => 'Time Instagram',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 44,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_story_time_twitter'.
-  $field_instances['node-recipe-field_story_time_twitter'] = array(
-    'bundle' => 'recipe',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 41,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_time_twitter',
-    'label' => 'Time Twitter',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 42,
-    ),
-  );
-
   // Exported field_instance: 'node-recipe-field_story_tweet'.
   $field_instances['node-recipe-field_story_tweet'] = array(
     'bundle' => 'recipe',
@@ -3409,6 +3219,116 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-recipe-field_story_twitter_video'.
+  $field_instances['node-recipe-field_story_twitter_video'] = array(
+    'bundle' => 'recipe',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 48,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_twitter_video',
+    'label' => 'Twitter Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => 'smi_twitter_video',
+      'file_extensions' => 'mp4 mov wmv mkv flv avi',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 1,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 46,
+    ),
+  );
+
+  // Exported field_instance: 'node-recipe-field_story_twitter_video_desc'.
+  $field_instances['node-recipe-field_story_twitter_video_desc'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 47,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_twitter_video_desc',
+    'label' => 'Twitter Video Description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 44,
+    ),
+  );
+
   // Exported field_instance: 'node-reporter-field_reporter_email_id'.
   $field_instances['node-reporter-field_reporter_email_id'] = array(
     'bundle' => 'reporter',
@@ -3507,6 +3427,8 @@ function feature_for_recipe_field_default_field_instances() {
   t('Description / Procedure');
   t('Extra large image');
   t('Facebook Narrative');
+  t('Facebook Video');
+  t('Facebook Video Narrative');
   t('Facebook image');
   t('Facebook narrative');
   t('Festivals');
@@ -3544,9 +3466,6 @@ function feature_for_recipe_field_default_field_instances() {
   t('Please upload medium Image.');
   t('Please upload small Image.');
   t('Please upload video.');
-  t('Posted By Instagram');
-  t('Posted by Twitter');
-  t('Posted by facebook');
   t('Reporter Twitter Handle');
   t('Reporter\'s Email id');
   t('Section');
@@ -3557,11 +3476,10 @@ function feature_for_recipe_field_default_field_instances() {
   t('Strap headline (Short Headline)');
   t('Syndication');
   t('Time');
-  t('Time Facebook');
-  t('Time Instagram');
-  t('Time Twitter');
   t('Tweet');
   t('Twitter Image');
+  t('Twitter Video');
+  t('Twitter Video Description');
   t('Twitter narrative');
   t('Video');
   t('WAP headline');
