@@ -31,6 +31,10 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
@@ -189,8 +193,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = 'Modified Date';
-  $handler->display->display_options['fields']['changed']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
@@ -231,40 +234,6 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'newsletter' => 'newsletter',
-  );
-  /* Filter criterion: Content: Title */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Subject Line';
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    19 => 0,
-    15 => 0,
-    18 => 0,
-    23 => 0,
-    22 => 0,
   );
   /* Filter criterion: Content: Newsletter Type (field_newsl_newsletter_type) */
   $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['id'] = 'field_newsl_newsletter_type_value';
@@ -335,6 +304,10 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
@@ -404,6 +377,13 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No Result Found!';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S.No';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -429,25 +409,35 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = 'View';
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['alter']['text'] = 'View | ';
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
   /* Field: Content: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
   $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['delete_node']['alter']['text'] = ' | Delete';
+  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="delete-link">[delete_node]</span>';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -476,7 +466,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Subject Line';

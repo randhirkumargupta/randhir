@@ -1092,6 +1092,117 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-photogallery-field_story_facebook_vdescripti'.
+  $field_instances['node-photogallery-field_story_facebook_vdescripti'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 45,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_facebook_vdescripti',
+    'label' => 'Facebook Video Narrative',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 36,
+    ),
+  );
+
+  // Exported field_instance: 'node-photogallery-field_story_facebook_video'.
+  $field_instances['node-photogallery-field_story_facebook_video'] = array(
+    'bundle' => 'photogallery',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 46,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_facebook_video',
+    'label' => 'Facebook Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => 'smi_facebook_video',
+      'file_extensions' => 'mp4 avi flv mov wmv mkv',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 1,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 38,
+    ),
+  );
+
   // Exported field_instance: 'node-photogallery-field_story_itg_tags'.
   $field_instances['node-photogallery-field_story_itg_tags'] = array(
     'bundle' => 'photogallery',
@@ -1287,134 +1398,6 @@ function photogallery_field_default_field_instances() {
       ),
       'type' => 'image_image',
       'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-photogallery-field_story_posted_by_facebook'.
-  $field_instances['node-photogallery-field_story_posted_by_facebook'] = array(
-    'bundle' => 'photogallery',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 38,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_posted_by_facebook',
-    'label' => 'Posted by facebook',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 25,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-photogallery-field_story_posted_by_instagram'.
-  $field_instances['node-photogallery-field_story_posted_by_instagram'] = array(
-    'bundle' => 'photogallery',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 39,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_posted_by_instagram',
-    'label' => 'Posted By Instagram',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 27,
-    ),
-  );
-
-  // Exported field_instance: 'node-photogallery-field_story_posted_by_twitter'.
-  $field_instances['node-photogallery-field_story_posted_by_twitter'] = array(
-    'bundle' => 'photogallery',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 40,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_posted_by_twitter',
-    'label' => 'Posted by Twitter',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 29,
     ),
   );
 
@@ -1663,180 +1646,6 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photogallery-field_story_time_facebook'.
-  $field_instances['node-photogallery-field_story_time_facebook'] = array(
-    'bundle' => 'photogallery',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 41,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_time_facebook',
-    'label' => 'Time Facebook',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 26,
-    ),
-  );
-
-  // Exported field_instance: 'node-photogallery-field_story_time_instagram'.
-  $field_instances['node-photogallery-field_story_time_instagram'] = array(
-    'bundle' => 'photogallery',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 43,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_time_instagram',
-    'label' => 'Time Instagram',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 28,
-    ),
-  );
-
-  // Exported field_instance: 'node-photogallery-field_story_time_twitter'.
-  $field_instances['node-photogallery-field_story_time_twitter'] = array(
-    'bundle' => 'photogallery',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 42,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_time_twitter',
-    'label' => 'Time Twitter',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 30,
-    ),
-  );
-
   // Exported field_instance: 'node-photogallery-field_story_tweet'.
   $field_instances['node-photogallery-field_story_tweet'] = array(
     'bundle' => 'photogallery',
@@ -1955,6 +1764,117 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-photogallery-field_story_twitter_video'.
+  $field_instances['node-photogallery-field_story_twitter_video'] = array(
+    'bundle' => 'photogallery',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 48,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_twitter_video',
+    'label' => 'Twitter Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => 'smi_twitter_video',
+      'file_extensions' => 'mp4 avi flv mov wmv mkv',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 1,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 42,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-photogallery-field_story_twitter_video_desc'.
+  $field_instances['node-photogallery-field_story_twitter_video_desc'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 47,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_twitter_video_desc',
+    'label' => 'Twitter Video Description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 40,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Are you sure you want to Archive?');
@@ -1969,6 +1889,8 @@ function photogallery_field_default_field_instances() {
   t('Credit to all');
   t('Extra large image');
   t('Extra small image');
+  t('Facebook Video');
+  t('Facebook Video Narrative');
   t('Facebook image');
   t('Facebook narrative');
   t('Gallery Image');
@@ -1982,9 +1904,6 @@ function photogallery_field_default_field_instances() {
   t('Large image');
   t('Medium image');
   t('Photo by');
-  t('Posted By Instagram');
-  t('Posted by Twitter');
-  t('Posted by facebook');
   t('Section');
   t('Set As Featured');
   t('Small image');
@@ -1993,10 +1912,9 @@ function photogallery_field_default_field_instances() {
   t('Source type');
   t('Syndication');
   t('Tags');
-  t('Time Facebook');
-  t('Time Instagram');
-  t('Time Twitter');
   t('Twitter Image');
+  t('Twitter Video');
+  t('Twitter Video Description');
   t('Twitter narrative');
 
   return $field_instances;

@@ -36,7 +36,10 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '25';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
@@ -255,6 +258,13 @@ function feature_smi_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'Sr No.';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -295,6 +305,91 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['fields']['view_node']['text'] = 'View';
   $handler->display->display_options['path'] = 'browse-content';
   $export['browse_content'] = $view;
+
+  $view = new view();
+  $view->name = 'social_media_logs';
+  $view->description = 'Content logs posted on social media.';
+  $view->tag = 'default';
+  $view->base_table = 'itg_social_media_logs';
+  $view->human_name = 'Social media logs';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Social media logs';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    10 => '10',
+    23 => '23',
+  );
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'node_title' => 'node_title',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'node_title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: Social Media Logs: Node title */
+  $handler->display->display_options['fields']['node_title']['id'] = 'node_title';
+  $handler->display->display_options['fields']['node_title']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['node_title']['field'] = 'node_title';
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'Sr No.';
+  $handler->display->display_options['fields']['counter']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Social Media Logs: Created time */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Posted On';
+  $handler->display->display_options['fields']['created']['date_format'] = 'medium';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Social Media Logs: Node title */
+  $handler->display->display_options['fields']['node_title_1']['id'] = 'node_title_1';
+  $handler->display->display_options['fields']['node_title_1']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['node_title_1']['field'] = 'node_title';
+  $handler->display->display_options['fields']['node_title_1']['label'] = 'Title';
+  /* Field: Social Media Logs: Social media */
+  $handler->display->display_options['fields']['social_media']['id'] = 'social_media';
+  $handler->display->display_options['fields']['social_media']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['social_media']['field'] = 'social_media';
+  $handler->display->display_options['fields']['social_media']['label'] = 'Social Media Platform';
+  /* Field: Social Media Logs: Username */
+  $handler->display->display_options['fields']['username']['id'] = 'username';
+  $handler->display->display_options['fields']['username']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['username']['field'] = 'username';
+  $handler->display->display_options['fields']['username']['label'] = 'Posted By';
+  /* Sort criterion: Social Media Logs: Created time */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['created']['granularity'] = 'minute';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'social-media-logs';
+  $export['social_media_logs'] = $view;
 
   return $export;
 }

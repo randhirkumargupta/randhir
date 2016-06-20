@@ -11,9 +11,12 @@
         var base_url = settings.itg_newsletter.settings.base_url;
         var type = settings.itg_newsletter.settings.type;
         var nid = settings.itg_newsletter.settings.nid;
-        
+ 
         if(nid) {
-          $('#edit-field-newsl-add-news-und-0-remove-button').show();
+         $('input[name="field_newsl_add_news_und_0_remove_button"]').show();
+        } else {
+          //$('input[name="field_newsl_add_news_und_0_remove_button"]').hide();
+          $('#edit-field-newsl-add-news-und-0-remove-button').hide();
         }
         
        //Hide left side vertical tabs in case of simple users
@@ -169,7 +172,7 @@
         var contentId = $(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
         var relval = $(this).attr('rel');
         
-        var loaderImg = base_url+'/sites/all/modules/custom/itg_newsletter/js/loader.gif';
+        //var loaderImg = base_url+'/sites/all/modules/custom/itg_newsletter/js/loader.gif';
         //$("#newsletter-loader").html('<img width="100px" height="100px" src="'+loaderImg+'">');
         
         if(contentId === ''){
