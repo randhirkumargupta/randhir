@@ -3,11 +3,12 @@
   <?php if ($view_mode == 'full'): ?>
     <?php
     // Load custom block for social media integration              
-    if (!isset($node->op)):
+      global $user;        
+      if (!isset($node->op) && in_array('Social Media', $user->roles)):
       $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
-      ?>
+    ?>
       <div class="itg-smi">
-        <button data-id="smi-popup" class="btn data-popup-link">Create Social media</button>
+        <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
       </div>
       <div id="smi-popup" class="itg-popup">
         <div class="popup-body">
@@ -57,8 +58,12 @@
           print render($content['field_story_social_media_integ']);
           print render($content['field_story_facebook_narrative']);
           print render($content['field_story_facebook_image']);
+          print render($content['field_story_facebook_vdescripti']);
+          print render($content['field_story_facebook_video']);          
           print render($content['field_story_tweet']);
           print render($content['field_story_tweet_image']);
+          print render($content['field_story_twitter_video_desc']);
+          print render($content['field_story_twitter_video']);
           ?>
         </div>
       </div>
