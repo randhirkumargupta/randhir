@@ -682,9 +682,13 @@
     });
     
     // jQuery code for block-itg-related in second sidebar
-    
     $('.block-itg-related').on('click', 'a', function(){
-        
+        $('body').find('.sidebars').removeClass('active');
+    });
+    
+    // jQuery code for newsletter-get-content
+    $('#newsletter-add-news').on('click', '.newsletter-get-content', function(){
+        $(this).parent().siblings('.field-name-field-news-thumbnail').find('.form-submit').trigger('click');
     });
 
   };
