@@ -15,8 +15,8 @@ function feed_generator_of_contents($data) {
       case 'xml':
         $file_path = itg_syndication_generate_xml($data);
         break;
-      case 'rss':
-        //$file_path = itg_syndication_generate_rss($data);
+      /*case 'rss':
+        $file_path = itg_syndication_generate_rss($data);
         break;
       case 'mrss':
 
@@ -31,8 +31,8 @@ function feed_generator_of_contents($data) {
         watchdog('syndication_stf', 'I am in queue!');
         break;
       case 'html':
-        //$file_path = itg_syndication_mail_syndication($data);
-        break;
+        $file_path = itg_syndication_mail_syndication($data);
+        break;*/
     }
       
 
@@ -48,18 +48,22 @@ function itg_syndication_generate_xml($data) {
   
   //work start this line
   $syndication_node = unserialize($data['syndication']);
-  $file_path = drupal_realpath('public://');
+  
+  $file_path = drupal_realpath('public://').'/xml';
   $dom = new DOMDocument('1.0', 'UTF-8');
   $dom->formatOutput = true;
   $root = $dom->createElement('syndication');
   $dom->appendChild($root);
-
+  $i = 1;
   foreach ($syndication_node as $key => $val) {
-    $node = node_load($val);
-    $result = $dom->createElement('content');
-    $root->appendChild($result);
-    $result->setAttribute('id', $key + 1);
-    $result->appendChild($dom->createElement('title', $node->title));
+    if ($val != 0) {
+      $node = node_load($val);
+      $result = $dom->createElement('content');
+      $root->appendChild($result);
+      $result->setAttribute('id', $i);
+      $result->appendChild($dom->createElement('title', $node->title));
+      $i++;
+    }
     //$result->appendChild($dom->createElement('body', '<![CDATA['.strip_tags($node->body[LANGUAGE_NONE][0]['value']).']]>'));
     //$result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
     
@@ -79,7 +83,7 @@ function itg_syndication_generate_xml($data) {
       $client_title = 'syndication';
   }
   
-  $xml_name = 'xml/'.$client_title.'_'.$data['section_id'].'_'.$dt.'_'.$token;
+  $xml_name = $client_title.'_'.$data['section_id'].'_'.$dt.'_'.$token;
   
   $dom->save($file_path . '/' . $xml_name . '.xml') or die('XML Create Error');  
   
@@ -113,7 +117,7 @@ function itg_syndication_generate_xml($data) {
       break;
   }
   
-  return  $xml_name . '.xml';
+  return  'xml/'.$xml_name . '.xml';
 }
 
 /**
@@ -329,11 +333,12 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name) {
   $ftp_details = get_ftp_details_by_client($data['client_title'], $data['delivery_mode']);
   
   $file = $file_path;
+  
   $remote_file = 'xml/'.$file_name;
   
-  $ftp_server = $ftp_details->field_syndication_ftp_url_value;
-  $ftp_user_name = $ftp_details->field_syndication_ftp_username_value;
-  $ftp_user_pass = $ftp_details->field_syndication_ftp_password_value;
+  $ftp_server = $ftp_details[0]->field_syndication_ftp_url_value;
+  $ftp_user_name = $ftp_details[0]->field_syndication_ftp_username_value;
+  $ftp_user_pass = $ftp_details[0]->field_syndication_ftp_password_value;
   
   // set up basic connection
   $conn_id = ftp_connect($ftp_server);
@@ -379,6 +384,7 @@ function get_ftp_details_by_client($client_name, $ftp_name) {
   $client = explode('-', $client_name);
   $client_description = $client[1];
   $client_title = $client[0];
+  
   $itg_query = db_select('node', 'n');
   $itg_query->condition('n.title', $client_description)
       ->fields('n', array('nid'))
@@ -387,6 +393,7 @@ function get_ftp_details_by_client($client_name, $ftp_name) {
       ->fields('ftp_url', array('field_syndication_ftp_url_value'))
       ->fields('ftp_username', array('field_syndication_ftp_username_value'))      
       ->fields('ftp_pass', array('field_syndication_ftp_password_value'));
+  
   $itg_query->join('field_data_field_syndication_client_title', 'sc', 'n.nid = sc.entity_id');
   $itg_query->join('taxonomy_term_data', 'term', 'term.tid = sc.field_syndication_client_title_tid');
   $itg_query->join('field_data_field_syndication_ftp_details', 'ftp', 'ftp.entity_id = n.nid');
@@ -397,6 +404,7 @@ function get_ftp_details_by_client($client_name, $ftp_name) {
   $itg_query->condition('term.name', $client_title);
   $itg_query->condition('ftp_name.field_syndication_ftp_name_value', $ftp_name);
   $itg_result = $itg_query->execute()->fetchAll(); 
-  
-  return $data;
+
+  return $itg_result;
 }
+

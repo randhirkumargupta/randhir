@@ -85,15 +85,30 @@ function itg_social_media_login_form() {
     );
   }   
   
-  $form['fb_login'] = array(
-    '#type' => 'markup',
-    '#markup' => '<div>' . l(t('Facebook Login'), itg_social_media_fb_login()) . '</div>',
-  );
+  if (variable_get('is_fb_logged_in', '')) {
+    $form['fb_logout'] = array(
+      '#type' => 'markup',
+      '#markup' => '<div>' . l(t('Facebook Logout'), 'facebook/logout') . '</div>',
+    );
+  }
+  else {
+    $form['fb_login'] = array(
+      '#type' => 'markup',
+      '#markup' => '<div>' . l(t('Facebook Login'), itg_social_media_fb_login()) . '</div>',
+    );
+  }
+  
     
   if (variable_get('oauth_token', '') === '') {
     $form['twitter_login'] = array(
       '#type' => 'markup',
-      '#markup' => '<div>' . l(t('Twitter Login'), itg_social_media_twitter_login()) . '</div>',
+      '#markup' => '<div>' . l(t('Twitter Login'), itg_social_media_twitter_login() ) . '</div>',
+    );
+  }
+  else {
+    $form['twitter_logout'] = array(
+      '#type' => 'markup',
+      '#markup' => '<div>' . l(t('Twitter Logout'), 'twitter/logout') . '</div>',
     );
   }
   
@@ -137,4 +152,36 @@ function itg_social_media_fb_paglist(){
   $data = array($options, $token);
   
   return $data;
+}
+
+/**
+ * Twitter logout function.
+ * @global string $base_url
+ */
+function itg_social_media_twitter_logout() {
+  global $base_url;
+  \Codebird\Codebird::setConsumerKey(variable_get('twitter_app_key'), variable_get('twitter_app_secret'));
+  $cb = \Codebird\Codebird::getInstance();
+  $cb->logout();
+  // store the token (which is different from the request token!)    
+  variable_set('oauth_token', '');
+  variable_set('oauth_token_secret', '');
+  drupal_set_message(t('Twitter session has been closed.'), 'status');
+  drupal_goto($base_url . '/admin/config/administration/social_media_login');
+}
+
+/**
+ * facebook logout function.
+ * @global string $base_url
+ */
+function itg_social_media_facebook_logout() {
+  global $base_url;
+  $fb = itg_social_media_fb_connection();
+  $helper = $fb->getRedirectLoginHelper();
+  $token = $token = variable_get('access_token_one', '').variable_get('access_token_two', '');
+  $logout = $helper->getLogoutUrl($token, $base_url . '/admin/config/administration/social_media_login');
+  variable_set('access_token_one', NULL);
+  variable_set('access_token_two', NULL);
+  drupal_set_message(t('Facebook session has been closed.'), 'status');
+  drupal_goto($logout);
 }
