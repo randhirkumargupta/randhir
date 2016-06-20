@@ -7,6 +7,9 @@
  */
 ?>
 <?php
+//p($total);
+$counter = 0;
+$day = strtoupper(date("D"));
 global $base_url;
 $mon = $base_url . "/tv-show/MON";
 $tue = $base_url . "/tv-show/TUE";
@@ -47,7 +50,10 @@ $day = strtoupper(date("D"));
 
 
             <div class="tv-schedule-task"> 
-                <span><?php print $val['program']; ?></span>   
+                <span><?php  if($total == $counter && $day == $val['day']){
+                    echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">'.$val['program'].'</a>';
+                    //print $val['program'];
+                            }else{  print $val['program'];} $counter++;?></span>   
             </div>    
 
 
@@ -93,8 +99,8 @@ $day = strtoupper(date("D"));
             </div>
         </div>
     </div>
-<?php endif; ?>
 
+<?php endif; ?>
 
 
 
