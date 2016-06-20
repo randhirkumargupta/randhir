@@ -680,6 +680,12 @@
       }
       
     });
+    
+    // jQuery code for block-itg-related in second sidebar
+    
+    $('.block-itg-related').on('click', 'a', function(){
+        
+    });
 
   };
 })(jQuery);
