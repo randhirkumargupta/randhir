@@ -85,7 +85,7 @@ function itg_social_media_login_form() {
     );
   }   
   
-  if (variable_get('is_fb_logged_in', '')) {
+  if (variable_get('is_fb_logged_in', '') === 1) {
     $form['fb_logout'] = array(
       '#type' => 'markup',
       '#markup' => '<div>' . l(t('Facebook Logout'), 'facebook/logout') . '</div>',
@@ -122,7 +122,7 @@ function itg_social_media_login_form() {
  */
 function _facebook_pages_list() {
   global $base_url;
-  variable_set('is_fb_logged_in', 'yes');
+  variable_set('is_fb_logged_in', 1);
   drupal_goto($base_url.'/admin/config/administration/social_media_login');
 }
 
@@ -180,8 +180,10 @@ function itg_social_media_facebook_logout() {
   $helper = $fb->getRedirectLoginHelper();
   $token = $token = variable_get('access_token_one', '').variable_get('access_token_two', '');
   $logout = $helper->getLogoutUrl($token, $base_url . '/admin/config/administration/social_media_login');
-  variable_set('access_token_one', NULL);
-  variable_set('access_token_two', NULL);
+  variable_set('access_token_one', '');
+  variable_set('access_token_two', '');
+  variable_set('facebook_page_id', '');
+  variable_set('is_fb_logged_in', 0);
   drupal_set_message(t('Facebook session has been closed.'), 'status');
   drupal_goto($logout);
 }
