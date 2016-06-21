@@ -232,12 +232,25 @@ function itgadmin_breadcrumb($vars) {
     if ($end && strip_tags($end) !== $title) {
       //$vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
       if (arg(2) == 'edit') {
+        $node = node_load(arg(1));
+        if($node->type == 'issue'){
+          $title_arr = explode('00:', $node->title);
+          $vars['breadcrumb'][1] = date('d/m/Y', strtotime($title_arr[0]));
+        }
+        
         $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
       }
       else {
         $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $title : decode_entities(check_plain($title));
+        $node = node_load(arg(1));
+        if($node->type == 'issue'){
+          $title_arr = explode('00:', $node->title);
+          $vars['breadcrumb'][1] = date('d/m/Y', strtotime($title_arr[0]));
+        }
+        
       }
     }
+
     
     //Story Listing
     if(arg(0) == 'issue-listing'){

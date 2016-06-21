@@ -52,8 +52,7 @@
                             <?php print render($content['field_contact_tech_person_name']); ?>
                             <?php print render($content['field_contact_tech_email_address']); ?>
                             <?php print render($content['field_contact_tech_mobile_number']); ?>
-                          <?php endif; ?>
-                          <?php  watchdog('content_sharing', '<pre>' .print_r($node->field_content_sharing_mode[LANGUAGE_NONE], 1) . '</pre>'); ?>    
+                          <?php endif; ?>   
                           <?php if (isset($node->field_content_sharing_mode)) { ?> 
                             <h2><?php print t('Sharing Mode'); ?></h2>
                             <?php
