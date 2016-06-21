@@ -350,8 +350,7 @@ function itg_astro_menu_alter(&$item) {
  * Implement hook_views_pre_render
  * @param stdObject $view
  */
-function itg_astro_views_pre_render(&$view) {
-  
+function itg_astro_views_pre_render(&$view) {  
   switch ($view->name) {
     case 'associated_content':
       $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';        
