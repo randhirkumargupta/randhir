@@ -1,9 +1,9 @@
 <?php
-       
+module_load_include('inc', 'itg_tv_schedule', 'include/tv_schedule_listing.inc');       
+
 /*
  * Implementation of hook_permission()
  */
-
 function itg_tv_schedule_permission() {
     return array(
       'administer my module' => array(
@@ -27,40 +27,264 @@ function itg_tv_schedule_menu() {
       'type' => MENU_CALLBACK,
     );
 
+    $items['tv-show'] = array(
+      'title' => 'Tv Show Schedule',
+      'page callback' => 'tv_schedule_listing',
+      'page arguments' => array('itg_tv_schedule_search_form'),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'include/tv_schedule_listing.inc',
+    );
+
     return $items;
 }
 
+/*
+ * Implementation of hook_form()
+ */
 function itg_tv_schedule_form($form, &$form_state) {
-  
-   $form['file'] = array(
-  '#type' => 'managed_file',
-  '#title' => t('Tv Schedule Upload'),
-  '#description' => t('Allowed extensions: csv'),
-  
-  '#upload_location' => 'public://',
-  '#upload_validators' => array(
-    'file_validate_extensions' => array('csv'),    
-  ),
-);
+
+    $form['file'] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Tv Schedule Upload'),
+      '#description' => t('Allowed extensions: csv'),
+      '#upload_location' => 'public://',
+      '#upload_validators' => array(
+        'file_validate_extensions' => array('csv'),
+      ),
+    );
+
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit'),
+    );
+
+    return $form;
+}
+
+function itg_tv_schedule_search_form($form, &$form_state) {
+
+    $form['title'] = array(
+      '#type' => 'textfield',
+      '#size' => 60,
+      '#maxlength' => 128,
+    );
+    
+   
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit'),
+    );
+
+    return $form;
+}
+
+function itg_tv_schedule_time_form($form, &$form_state) {
+
+    $form['time_zone'] = array(
+       '#type' => 'select',
+       '#options' => array(
+         'IST' => t('IST'),
+         'PST' => t('PST'),
+         'GMT' => t('GMT')
+       ),
+       '#default_value' => (isset($_GET['time_zone']) ? $_GET['time_zone'] : 'IST'),
+       
+   );
     
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Submit'),
     );
 
-  return $form;
+     drupal_add_js('jQuery("#edit-time-zone").change(function()
+ {
+     jQuery("#itg-tv-schedule-time-form").submit();
+ });', array('type' => 'inline', 'scope' => 'footer'));
+    
+    
+    return $form;
 }
 
 
+/**
+ * Custom method for data uploading in database.
+ */
+function itg_tv_schedule_uploadmongo($file_id) {
+
+    $f_id = $file_id;
+    $itg_query = db_select('file_managed', 'f');
+    $itg_query->condition('fid', $f_id, '=')
+        ->fields('f', array('uri'));
+    $itg_result = $itg_query->execute()->fetchField();
+    $filename = substr($itg_result, 9);
+    $filepath = "/var/www/html/itgcms/sites/default/files/";
+    $fileaddress = $filepath . $filename;
+    //p($fileaddress);
 
 
+
+    $file = fopen($fileaddress, "r");
+//connection with database
+    $con = new Mongo();
+    if ($con) {
+// Select Database
+        $db = $con->csvhandling;
+// create collection
+        $db->createCollection("itgcms_demos");
+// Select Collection
+        $people = $db->itgcms_demos;
+        $upload_date = date("Y/m/d");
+    }
+
+    $i = 1;
+    while (($data = fgetcsv($file)) !== FALSE) {
+        if ($i > 1) {
+            //monday corresponding value insertion
+            if ($data[1]) {
+                $qry = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date);
+                $result = $people->insert($qry);
+            }
+
+            //tuesday corresponding value insertion
+            if ($data[2]) {
+                $qry = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date);
+                $result = $people->insert($qry);
+            }
+
+            //wednesday corresponding value insertion
+            if ($data[3]) {
+                $qry = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date);
+                $result = $people->insert($qry);
+            }
+
+
+            //thursday corresponding value insertion
+            if ($data[4]) {
+                $qry = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date);
+                $result = $people->insert($qry);
+            }
+
+            //friday corresponding value insertion
+            if ($data[5]) {
+                $qry = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date);
+                $result = $people->insert($qry);
+            }
+
+            //saturday corresponding value insertion
+            if ($data[6]) {
+                $qry = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date);
+                $result = $people->insert($qry);
+            }
+
+            //sunday corresponding value insertion
+            if ($data[7]) {
+                $qry = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date);
+                $result = $people->insert($qry);
+            }
+        }
+        $i++;
+    }
+
+    fclose($file);
+}
+
+/**
+ * Custom submit callback for saving csv file.
+ */
 function itg_tv_schedule_form_submit($form, &$form_state) {
-  global $user;
-  $file=file_load($form_state['values']['file']);
-  //unset($form_state['values']['file']);
-  $file->status = FILE_STATUS_PERMANENT;
-  file_save($file);
-  file_usage_add($file,'user','user',$user->uid);
-  drupal_set_message(t('The file has been submitted and saved, filename: @filename.', array('@filename' => $file->filename)));
+    global $user;
+    $file_id = $form_state['input']['file']['fid'];
+    $file = file_load($form_state['values']['file']);
+    $file->status = FILE_STATUS_PERMANENT;
+    file_save($file);
+    file_usage_add($file, 'user', 'user', $user->uid);
+    drupal_set_message(t('The file has been submitted and saved, filename: @filename.', array('@filename' => $file->filename)));
+    itg_tv_schedule_uploadmongo($file_id);
 }
-?>
+
+/**
+ * Custom submit callback for searching popup.
+ */
+function itg_tv_schedule_search_form_submit($form, &$form_state) {
+   
+    $options = array('query' => array('title' => $form_state['input']['title']));
+    //$options = array('query' => array('title' => $form_state['input']['title']));
+    drupal_goto('tv-show/' . arg(1), $options);
+   
+}
+
+/**
+ * Custom submit callback for searching popup.
+ */
+function itg_tv_schedule_time_form_submit($form, &$form_state) {
+   
+    $options = array('query' => array('time_zone' => $form_state['input']['time_zone']));
+    //$options = array('query' => array('title' => $form_state['input']['title']));
+    drupal_goto('tv-show/' . arg(1), $options);
+   
+}
+/**
+ * Implements hook_theme().
+ */
+function itg_tv_schedule_theme() {
+    return array(
+      'itg_tv_schedule' => array(
+        'variables' => array('output' => NULL),
+        'variables' => array('search' => NULL),
+        'variables' => array('total' => NULL),
+
+        'path' => drupal_get_path('module', 'itg_tv_schedule') . '/templates',
+        'template' => 'itg-tv-schedule',
+      ),);
+}
+
+
+function time_zone_conversion($date, $time_zone) {
+   //18:30
+    //6
+    $date = explode('-', $date);
+    date_default_timezone_set('Asia/Kolkata');
+   // $date = date("Y-m-d H:i:s");
+    // $date = '18:30';
+    $time = new DateTime($date[0]);
+    $timezone = timezone_list();
+    //$time_zone = 'PST';
+    
+    if ($time_zone == 'GMT') {
+        $time->setTimezone(new DateTimeZone($timezone['GMT+01:00']));
+    } else if ($time_zone == 'PST') {
+         $time->setTimezone(new DateTimeZone($timezone['GMT-07:00'])); 
+         
+    } else {
+      return $time->format('H:i');
+   } 
+    
+    return $time->format('H:i');
+}
+
+function timezone_list() {
+    static $timezones = null;
+
+    if ($timezones === null) {
+        $timezones = [];
+        $offsets = [];
+        $now = new DateTime();
+
+        foreach (DateTimeZone::listIdentifiers() as $timezone) {
+            $now->setTimezone(new DateTimeZone($timezone));
+            $offsets[] = $offset = $now->getOffset();
+            $timezones[format_GMT_offset($offset)] = $timezone;
+        }
+
+        array_multisort($offsets, $timezones);
+    }
+
+    return $timezones;
+}
+
+function format_GMT_offset($offset) {
+    $hours = intval($offset / 3600);
+    $minutes = abs(intval($offset % 3600 / 60));
+    return 'GMT' . ($offset ? sprintf('%+03d:%02d', $hours, $minutes) : '');
+}

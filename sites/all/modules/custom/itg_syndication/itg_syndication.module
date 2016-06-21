@@ -629,12 +629,14 @@ function get_weburl_for_syndication($dir, $node) {
  * Implementation of hook_node_presave
  * @param array $node 
  */
-function itg_syndication_node_presave($node) {  
-  if ($node->type =='syndication_client' && $node->field_syndication_delivery_mode[LANGUAGE_NONE][0]['value'] == 'Web URL') {
-    $web_url = get_weburl_for_syndication('syndication/feed', $node);
-    $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
-  } else {
-     $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = '';
+function itg_syndication_node_presave($node) {
+  if ($node->type =='syndication_client') {
+    if ($node->field_syndication_delivery_mode[LANGUAGE_NONE][0]['value'] == 'Web URL') {
+      $web_url = get_weburl_for_syndication('syndication/feed', $node);
+      $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
+    } else {
+       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = '';
+    }
   }
 }
 

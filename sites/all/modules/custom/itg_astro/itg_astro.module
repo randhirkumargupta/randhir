@@ -135,32 +135,32 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     // Set field visibility for zodiac sign field
     $form['field_astro_zodiac']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '315'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '227'),
       ),
     );
     // Set field visibility for collective text field    
     $form['field_buzz_description']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
       ),
     );
     // Set field visibility for collective video thumbnail field
     $form['field_astro_video_thumbnail']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
       ),
     );
     
     // Set field visibility for collective audio field
     $form['field_common_audio_file']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
       ),
     );
-    // Set field visibility for collective audio field
+    // Set field visibility for numerology field
     $form['field_astro_numerology_values']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '313'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '225'),
       ),
     );  
     
@@ -188,7 +188,7 @@ function itg_astro_after_build($form, &$form_state) {
   // Set field visibility for collective video field
     $form['field_astro_video']['#states'] = array(
       'visible' => array(
-        ':input[name="field_astro_type[und]"]' => array('value' => '314'),
+        ':input[name="field_astro_type[und]"]' => array('value' => '224'),
       ),
     );
   //$form['field_story_category']['und']['#title'] = t('Select Program') . '<span class="form-required" title="This field is required."> *</span>';
