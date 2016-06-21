@@ -49,28 +49,25 @@ $day = strtoupper(date("D"));
     <!-- Shows program name in slider middle part -->
     <div class="tv-schedule tv-schedule-news slider">
         <?php foreach ($output as $val): ?>
-
-
             <div class="tv-schedule-task"> 
-                <span><?php  if($total == $counter && $day == $val['day']){
-                    echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">'.$val['program'].'</a>';
-                    //print $val['program'];
-                            }else{  print $val['program'];} $counter++;?></span>   
+                <span><?php
+                    if ($total == $counter && $day == $val['day']) {
+                        echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . $val['program'] . '</a>';
+                        //print $val['program'];
+                    }
+                    else {
+                        print $val['program'];
+                    } $counter++;
+                    ?></span>   
             </div>    
-
-
         <?php endforeach; ?>
     </div>
-     <!-- Shows time in slider lower part -->
+    <!-- Shows time in slider lower part -->
     <div class="tv-schedule tv-schedule-time slider">
         <?php foreach ($output as $val): ?>
-
-
             <div>
                 <span><?php print $val['time']; ?></span>    
             </div>    
-
-
         <?php endforeach; ?>
     </div>
 </div>
