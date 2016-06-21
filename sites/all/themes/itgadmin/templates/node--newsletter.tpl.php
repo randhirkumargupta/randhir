@@ -98,27 +98,39 @@
         <div class="newsletter-list-parent">
        <?php
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
- 
+          
+          $content_id = $news_arr['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+
           $title = $news_arr['field_news_title'][LANGUAGE_NONE][0]['value'];
           $kicker = $news_arr['field_news_kicker'][LANGUAGE_NONE][0]['value'];
+          
+          if($news_arr['field_news_thumbnail'][LANGUAGE_NONE][0]['fid']){
           $file = file_load($news_arr['field_news_thumbnail'][LANGUAGE_NONE][0]['fid']);
           $thumbnail = image_style_url("thumbnail", $file->uri); 
+          }
+          else {
+            $thumbnail = $base_url.'/'.drupal_get_path('module', 'itg_newsletter').'/image/no-image-box.png';
+          }
+
           
           if($news_arr['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal') {
               $link = 'node/'.$news_arr['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+              $content_id = $news_arr['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
             } else {
               $link = $news_arr['field_news_external_url'][LANGUAGE_NONE][0]['value'];
+              $content_id = $link;
           }
           
+          if($content_id) {
           ?>
-        <div class="newsletter-list">
-          <div class="newsletter-thumbnail"><img src="<?php echo $thumbnail; ?>" /></div>  
-          <div class="title-kicker">
-            <div class="newsletter-title"><?php echo $title; ?></div>
-            <div class="newsletter-kicker"><?php echo $kicker; ?></div>
+          <div class="newsletter-list">
+            <div class="newsletter-thumbnail"><img style="width:100px; height: 56px" src="<?php echo $thumbnail; ?>" /></div>  
+            <div class="title-kicker">
+              <div class="newsletter-title"><?php echo $title; ?></div>
+              <div class="newsletter-kicker"><?php echo $kicker; ?></div>
+            </div>
           </div>
-        </div>
-         <?php } ?>
+        <?php } }?>
         </div>  
          <div class="newsletter-footer"><?php echo $footer; ?></div>
       </div>
@@ -185,6 +197,9 @@
           $news_detail = entity_load('field_collection_item', array($news_arr['value']));
           $sn = $num + 1;
           echo '<h2>News ' . $sn . ' Details:</h2>';
+          
+          $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
+    
           ?>
           <div class="field">
             <div class="field-label">News Content:</div>
@@ -209,15 +224,18 @@
             <div class="field-label">Title:</div>
             <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
+          <?php if(!empty($news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value'])) {?>
           <div class="field">
             <div class="field-label">Kicker:</div>
             <div class="field-items"><?php echo ucwords($news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
+          <?php } ?>
+          <?php if($news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']){ ?>
           <div class="field">
             <div class="field-label">Thumbnail:</div>
-            <div class="field-items"><img src="<?php echo image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']); ?>" /></div>
+            <div class="field-items"><img src="<?php echo $thumbnail; ?>" /></div>
           </div>
-      
+          <?php } ?>
      <?php
      $num++;
    } //Foreach loop

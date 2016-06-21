@@ -2605,6 +2605,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
             height: 28px;
             width: 134px;
             top: 1px;
+            z-index: 99;
             left: 250px;
             &:after{
                 background-color: #fff;
@@ -2627,6 +2628,37 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         }
         input[type="file"]{
             @extend .hide;
+        }
+        @each $social in #edit-itg-fb, #edit-itg-twitter, #edit-itg-instagram, #edit-itg-instant {
+            #{$social}-img-upload {
+                @extend .pos-rel;
+                .file{
+                    @extend .db;
+                    .file-icon{
+                        @extend .hide;
+                    }
+                    a{
+                        @extend .dib;
+                        max-width: 150px;
+                        white-space: nowrap;
+                        text-overflow: ellipses;
+                        overflow: hidden;
+                        pointer-events: none;
+                        cursor: default;
+                        
+                    }
+                }
+                #{$social}-img-remove-button {
+                    position: absolute;
+                    top: 0;
+                    left: 200px;
+                }
+                #{$social}-video-remove-button {
+                    position: absolute;
+                    top: 0;
+                    left: 300px;
+                }
+            }
         }
     }
   }
@@ -4046,4 +4078,20 @@ div.node{
    ul{
        @extend .no-bullet;
    }
+}
+.view-manage-users{
+    .confirmation{
+        .item-list{
+            ul{
+                padding: 10px 10px 10px 25px;
+                li{padding-top: 5px;}
+            }
+        }
+        .form-actions{
+            .form-submit{
+                @extend .btn-save;
+            }
+        }
+    }
+    
 }
