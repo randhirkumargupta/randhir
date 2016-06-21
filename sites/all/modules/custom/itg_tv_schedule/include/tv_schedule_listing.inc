@@ -10,12 +10,22 @@ module_load_include('module', 'itg_tv_schedule', 'itg_tv_schedule.module');
  */
 function tv_schedule_listing() {
     //time_zone_conversion();
-   
-    date_default_timezone_set('Asia/Kolkata');
-    $date = date("Y-m-d H:i:s");
-    $time = new DateTime($date);
-    $curent_time = $time->format('H:i');
-    
+    if ($_GET['time_zone'] == 'PST'){
+        date_default_timezone_set('America/Los_Angeles');
+        $date = date("Y-m-d H:i:s");
+        $time = new DateTime($date);
+        $curent_time = $time->format('H:i'); 
+    }elseif ($_GET['time_zone'] == 'GMT') {
+        date_default_timezone_set('Africa/Lome');
+        $date = date("Y-m-d H:i:s");
+        $time = new DateTime($date);
+        $curent_time = $time->format('H:i');    
+    }else{
+        date_default_timezone_set('Asia/Kolkata');
+        $date = date("Y-m-d H:i:s");
+        $time = new DateTime($date);
+        $curent_time = $time->format('H:i');  
+    }
     
     
     
@@ -29,12 +39,15 @@ function tv_schedule_listing() {
     // Search result  
     if (isset($_GET['title'])) {
         $title = $_GET['title'];
+        //if ($title == null){
+        // $result = "No Result Found";   
+        //}
         $regex = new MongoRegex("/^$title/i");
         $cond = array('program' => $regex);
         $cursor_popup = $people->find($cond);
         $key = 0;
         foreach ($cursor_popup as $document) {
-            $out[$key]['time'] = $document["time"];
+            $search[$key]['time'] = $document["time"];
             $search[$key]['day'] = $document["day"];
             $search[$key]['program'] = $document["program"];
             $key++;
@@ -64,6 +77,7 @@ function tv_schedule_listing() {
         if($curent_time >= $s_time){
           $counter++;
         }
+       
     }
     if($counter > 0){
        $count = $counter-1;
