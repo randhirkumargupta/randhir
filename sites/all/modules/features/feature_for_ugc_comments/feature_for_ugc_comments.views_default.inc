@@ -67,8 +67,8 @@ function feature_for_ugc_comments_views_default_views() {
   $handler->display->display_options['filters']['status_node']['group'] = 1;
   $handler->display->display_options['filters']['status_node']['expose']['operator'] = FALSE;
 
-  /* Display: In queue ugc comments */
-  $handler = $view->new_display('page', 'In queue ugc comments', 'page');
+  /* Display: In queue comments */
+  $handler = $view->new_display('page', 'In queue comments', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'In Queue comments';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
@@ -274,8 +274,8 @@ function feature_for_ugc_comments_views_default_views() {
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
   $handler->display->display_options['fields']['nothing_3']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_3']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_3']['label'] = 'Publish';
-  $handler->display->display_options['fields']['nothing_3']['alter']['text'] = 'Publish';
+  $handler->display->display_options['fields']['nothing_3']['label'] = 'Published';
+  $handler->display->display_options['fields']['nothing_3']['alter']['text'] = 'Published';
   $handler->display->display_options['fields']['nothing_3']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing_3']['alter']['path'] = 'comment_approve/[cid]';
   $handler->display->display_options['fields']['nothing_3']['alter']['link_class'] = 'approve-comment';
@@ -376,8 +376,8 @@ function feature_for_ugc_comments_views_default_views() {
   );
   $handler->display->display_options['path'] = 'in-queue-ugc-comments';
 
-  /* Display: publish ugc comments */
-  $handler = $view->new_display('page', 'publish ugc comments', 'page_1');
+  /* Display: published comments */
+  $handler = $view->new_display('page', 'published comments', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'publish comments';
   $handler->display->display_options['defaults']['access'] = FALSE;

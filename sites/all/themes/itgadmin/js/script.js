@@ -137,14 +137,15 @@
       }
     });
     $('body').on('click', '.target-link', function (e) {
-      var abc = $('body').find('.block-itg-story');
       var offSet = 120;
-      if($('.block-itg-story').hasClass('fixed')){
+      if($('.region-form-tab .block').hasClass('fixed')){
         offSet = 57;
       }
       
       
       var dti = $(this).attr('data-target-id');
+      var dataOffset = $('#' + dti).offset().top;
+      console.log(dti + '=' + dataOffset);
       var targetOffset = $('#' + dti).offset().top - offSet;
       if (dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails") {
         $(this).addClass('active').siblings('.target-link').removeClass('active');
