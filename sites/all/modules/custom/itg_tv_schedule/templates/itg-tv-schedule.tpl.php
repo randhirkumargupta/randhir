@@ -7,6 +7,8 @@
  */
 ?>
 <?php
+$counter = 0;
+$day = strtoupper(date("D"));
 global $base_url;
 $mon = $base_url . "/tv-show/MON";
 $tue = $base_url . "/tv-show/TUE";
@@ -29,10 +31,12 @@ $day = strtoupper(date("D"));
         <li><a <?php if(arg(1) == 'SAT'){ print $class; }elseif($day == 'SAT'){ print $class; } ?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
         <li><a <?php if(arg(1) == 'SUN'){ print $class; }elseif($day == 'SUN'){ print $class; } ?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
     </ul>
+    <!-- Showing Search box and time zone drop down list -->
     <div class="tv-schedule-form-wrapper">
         <div class="fleft"><?php print render(drupal_get_form('itg_tv_schedule_time_form')); ?></div>
     <?php print render(drupal_get_form('itg_tv_schedule_search_form')); ?>
     </div>
+    <!-- Shows time in slider upper part -->
     <div class="tv-schedule tv-schedule-time slider">
         <?php foreach ($output as $val): ?>
 
@@ -42,32 +46,33 @@ $day = strtoupper(date("D"));
 
         <?php endforeach; ?>
     </div>
+    <!-- Shows program name in slider middle part -->
     <div class="tv-schedule tv-schedule-news slider">
         <?php foreach ($output as $val): ?>
-
-
             <div class="tv-schedule-task"> 
-                <span><?php print $val['program']; ?></span>   
+                <span><?php
+                    if ($total == $counter && $day == $val['day']) {
+                        echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . $val['program'] . '</a>';
+                        //print $val['program'];
+                    }
+                    else {
+                        print $val['program'];
+                    } $counter++;
+                    ?></span>   
             </div>    
-
-
         <?php endforeach; ?>
     </div>
-
+    <!-- Shows time in slider lower part -->
     <div class="tv-schedule tv-schedule-time slider">
         <?php foreach ($output as $val): ?>
-
-
             <div>
                 <span><?php print $val['time']; ?></span>    
             </div>    
-
-
         <?php endforeach; ?>
     </div>
 </div>
 
-<!-- Search pop -->
+<!-- Search result pop -->
 
 <?php if (isset($search)): ?>
     <div  id="tv-search-popup" class="itg-popup" style="display: block;">
@@ -93,8 +98,8 @@ $day = strtoupper(date("D"));
             </div>
         </div>
     </div>
-<?php endif; ?>
 
+<?php endif; ?>
 
 
 

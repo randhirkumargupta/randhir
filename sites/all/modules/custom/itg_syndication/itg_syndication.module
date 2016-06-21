@@ -95,7 +95,7 @@ function itg_syndication_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-service-fetch-link").hide();
               jQuery("#edit-field-syndication-ftp-details-und-0-remove-button").hide();
-              jQuery("#edit-field-story-expiry-date-und-0-value-datepicker-popup-1").keydown(false);
+              jQuery(".date-clear").keydown(false);
             });', array('type' => 'inline', 'scope' => 'footer'));
     
     
@@ -269,7 +269,7 @@ function itg_syndication_get_mode($client_name) {
   $itg_result = $itg_query->execute()->fetchField();
 
   $node = node_load($itg_result);
-  $data[] = '- None -';
+  $data['_none'] = '- None -';
   
   //Code for FTP
   foreach($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {   
@@ -631,12 +631,15 @@ function get_weburl_for_syndication($dir, $node) {
  */
 function itg_syndication_node_presave($node) {
   if ($node->type =='syndication_client') {
-    if ($node->field_syndication_delivery_mode[LANGUAGE_NONE][0]['value'] == 'Web URL') {
+    foreach($node->field_syndication_delivery_mode[LANGUAGE_NONE] as $key => $val) {
+       $mode_array[] = $val['value'];
+    }
+    if (in_array('Web URL', $mode_array)) {
       $web_url = get_weburl_for_syndication('syndication/feed', $node);
       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
-    } else {
-       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = '';
-    }
+    }else {
+      $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = NULL;
+    }    
   }
 }
 
