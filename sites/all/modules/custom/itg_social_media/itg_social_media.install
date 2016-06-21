@@ -47,12 +47,12 @@ function itg_social_media_schema() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-      ),
+      ),      
       'created' => array(
         'description' => t('The created date for the single record'),
-        'type' => 'varchar',
-        'mysql_type' => 'datetime',
-        'not null' => FALSE,
+        'type' => 'int', 
+        'not null' => TRUE, 
+        'default' => 0
       ),
     ),
     'indexes' => array(
