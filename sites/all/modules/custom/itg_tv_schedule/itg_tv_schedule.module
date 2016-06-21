@@ -68,6 +68,7 @@ function itg_tv_schedule_search_form($form, &$form_state) {
       '#type' => 'textfield',
       '#size' => 60,
       '#maxlength' => 128,
+      
     );
     
    
@@ -203,6 +204,21 @@ function itg_tv_schedule_form_submit($form, &$form_state) {
     itg_tv_schedule_uploadmongo($file_id);
 }
 
+
+/**
+ * Custom validation for searching popup.
+ */
+function itg_tv_schedule_search_form_validate($form, &$form_state) {
+   
+    $options = $form_state['input']['title'];
+    if (empty($options)){
+        form_set_error('title', t('Search field is empty.'));
+    }
+    
+   
+}
+
+
 /**
  * Custom submit callback for searching popup.
  */
@@ -233,7 +249,7 @@ function itg_tv_schedule_theme() {
         'variables' => array('output' => NULL),
         'variables' => array('search' => NULL),
         'variables' => array('total' => NULL),
-
+        'variables' => array('noresult' => NULL),
         'path' => drupal_get_path('module', 'itg_tv_schedule') . '/templates',
         'template' => 'itg-tv-schedule',
       ),);
@@ -252,7 +268,7 @@ function time_zone_conversion($date, $time_zone) {
     //$time_zone = 'PST';
     
     if ($time_zone == 'GMT') {
-        $time->setTimezone(new DateTimeZone($timezone['GMT+01:00']));
+        $time->setTimezone(new DateTimeZone($timezone['GMT']));
     } else if ($time_zone == 'PST') {
          $time->setTimezone(new DateTimeZone($timezone['GMT-07:00'])); 
          
