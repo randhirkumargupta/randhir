@@ -83,6 +83,13 @@ function itg_social_media_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_social_media.admin.inc'
   );
+  $items['itg-social_media/title-autocomplete/%'] = array(
+    'page callback' => '_smi_title_autocomplete',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'page arguments' => array(2),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.settings.inc',
+  );
 
   return $items;
 }
@@ -91,22 +98,47 @@ function itg_social_media_menu() {
  * Implements hook_form_alter()
  * {@inheritdoc}
  */
-function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  if (isset($form['created']['min'])) {
-    $form['created']['min'] = array(
-      '#title' => t('Start Date'),
-      '#type' => 'date_popup',
-      '#date_format' => 'd/m/Y',
-      '#date_year_range' => '-3:+3',
-      '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
-    );
-    $form['created']['max'] = array(
-      '#title' => t('End Date'),
-      '#type' => 'date_popup',
-      '#date_format' => 'd/m/Y',
-      '#date_year_range' => '-3:+3',
-      '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
-    );
+function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {  
+  switch ($form['#id']) {
+    case 'views-exposed-form-social-media-logs-page':      
+      $form['created']['min'] = array(
+        '#title' => t('Start Date'),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+      );
+      $form['created']['max'] = array(
+        '#title' => t('End Date'),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+      );
+      // Autocomplete node title
+      $form['node_title']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/node_title';
+      $form['social_media']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/social_media';
+      $form['username']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/username';
+      
+      break;
+
+    case 'views-exposed-form-browse-content-page':
+      $form['created']['min'] = array(
+        '#title' => t('Start Date'),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+      );
+      $form['created']['max'] = array(
+        '#title' => t('End Date'),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+      );
+      
+      break;
   }
 }
 
@@ -520,9 +552,18 @@ function itg_social_media_views_query_alter(&$view, &$query) {
  * Implement hook_views_pre_render
  * @param stdObject $view
  */
-function itg_social_media_views_pre_render(&$view) {
-  if ($view->name === 'browse_content') {
-    $header_content_smi = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';      
-    $view->attachment_before = $header_content_smi;        
-  }
+function itg_social_media_views_pre_render(&$view) {  
+  switch ($view->name) {
+    case 'browse_content':
+      $header_content_smi = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';      
+      $view->attachment_before = $header_content_smi;        
+
+      break;
+    
+    case 'social_media_logs':
+      $header_content_smi = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';      
+      $view->attachment_before = $header_content_smi; 
+      
+      break;    
+  }  
 }
