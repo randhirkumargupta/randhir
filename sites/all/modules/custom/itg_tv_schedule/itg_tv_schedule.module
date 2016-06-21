@@ -61,7 +61,11 @@ function itg_tv_schedule_form($form, &$form_state) {
 
     return $form;
 }
-
+/**
+ * Implementation of hook_form
+ * @param array $form
+ * @param array $form_state
+ */
 function itg_tv_schedule_search_form($form, &$form_state) {
 
     $form['title'] = array(
@@ -79,7 +83,11 @@ function itg_tv_schedule_search_form($form, &$form_state) {
 
     return $form;
 }
-
+/**
+ * Implementation of hook_form
+ * @param array $form
+ * @param array $form_state
+ */
 function itg_tv_schedule_time_form($form, &$form_state) {
 
     $form['time_zone'] = array(
@@ -255,18 +263,16 @@ function itg_tv_schedule_theme() {
       ),);
 }
 
-
+/**
+ * Custom method for time conversion.
+ */
 function time_zone_conversion($date, $time_zone) {
-   //18:30
-    //6
+   
     $date = explode('-', $date);
     date_default_timezone_set('Asia/Kolkata');
-   // $date = date("Y-m-d H:i:s");
-    // $date = '18:30';
     $time = new DateTime($date[0]);
     $timezone = timezone_list();
-    //$time_zone = 'PST';
-    
+     
     if ($time_zone == 'GMT') {
         $time->setTimezone(new DateTimeZone($timezone['GMT']));
     } else if ($time_zone == 'PST') {
@@ -278,7 +284,9 @@ function time_zone_conversion($date, $time_zone) {
     
     return $time->format('H:i');
 }
-
+/**
+ * Custom method for different timezones.
+ */
 function timezone_list() {
     static $timezones = null;
 
@@ -298,7 +306,9 @@ function timezone_list() {
 
     return $timezones;
 }
-
+/**
+ * Custom method for time formatting.
+ */
 function format_GMT_offset($offset) {
     $hours = intval($offset / 3600);
     $minutes = abs(intval($offset % 3600 / 60));

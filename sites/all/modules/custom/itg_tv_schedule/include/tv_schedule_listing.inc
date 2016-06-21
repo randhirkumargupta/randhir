@@ -4,10 +4,6 @@ module_load_include('module', 'itg_tv_schedule', 'itg_tv_schedule.module');
 /*
  * Inc file contains the functions
  */
-
-/**
- * ugc comment details callback
- */
 function tv_schedule_listing() {
     //time_zone_conversion();
     if ($_GET['time_zone'] == 'PST'){
@@ -73,7 +69,7 @@ function tv_schedule_listing() {
         $out[$keys]['day'] = $document["day"];
         $out[$keys]['program'] = $document["program"];
         $keys++;
-       
+       //counter required for current time slot display.
         if($curent_time >= $s_time){
           $counter++;
         }
