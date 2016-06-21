@@ -20,12 +20,12 @@
       <?php endif; // end of view mode full condition ?></div>
   <?php
   // code for comment hide and show based on condition
- 
+
   if ($node->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'comment') {
     ?>
-        
-<div class="node comm-ques"> <?php print render($content['field_story_comment_question']); ?></div>
-        
+    <?php if (!empty($node->field_story_comment_question[LANGUAGE_NONE][0]['value'])) { ?>
+      <div class="node comm-ques"> <?php print render($content['field_story_comment_question']); ?></div>
+    <?php } ?>
     <?php
     print render($content['comment_form']);
     print render($content['comments']);
