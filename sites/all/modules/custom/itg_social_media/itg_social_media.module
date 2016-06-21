@@ -98,12 +98,14 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       '#type' => 'date_popup',
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-3:+3',
+      '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
     );
     $form['created']['max'] = array(
       '#title' => t('End Date'),
       '#type' => 'date_popup',
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-3:+3',
+      '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
     );
   }
 }
@@ -496,4 +498,31 @@ function itg_social_media_views_api() {
     'api' => 3,
     'path' => drupal_get_path('module', 'itg_social_media') . '/includes/views',    
   );
+}
+
+/**
+ * Implements hook_views_query_alter()
+ * @param stdObject $view
+ * @param stdObject $query
+ */
+function itg_social_media_views_query_alter(&$view, &$query) {
+  if ($view->name === 'browse_content') {    
+    $type = check_plain($_GET['type']);
+    foreach ($query->where[1]['conditions'] as $key => $condition) {
+      if (isset($condition['value'][':field_data_field_story_schedule_date_time_field_story_schedule_date_time_value']) && $type !== 'story') {        
+        unset($query->where[1]['conditions'][$key]);                
+      }
+    }    
+  }   
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param stdObject $view
+ */
+function itg_social_media_views_pre_render(&$view) {
+  if ($view->name === 'browse_content') {
+    $header_content_smi = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';      
+    $view->attachment_before = $header_content_smi;        
+  }
 }
