@@ -269,18 +269,18 @@ function save_cron_details_of_mobile_services($node) {
 
   // Load itg_mobile_services.inc from the node module.
   module_load_include('inc', 'itg_mobile_services', 'includes/itg_mobile_services');
-
-  $node_nid = $node->nid;
-  $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
-
-  $frequency = $node->field_service_frequency[LANGUAGE_NONE][0]['value'];
-  $frequency_date_start = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value'];
-  $frequency_date_end = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value2'];
-  $current_date = date('Y-m-d');
-  $frequency_date_start_array = explode(' ', $frequency_date_start);
-
-  $service_details = node_load($association_nid);
-  $delivery_mode = $service_details->field_service_delivery_mode[LANGUAGE_NONE][0]['value'];
+//
+//  $node_nid = $node->nid;
+//  $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
+//
+//  $frequency = $node->field_service_frequency[LANGUAGE_NONE][0]['value'];
+//  $frequency_date_start = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value'];
+//  $frequency_date_end = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value2'];
+//  $current_date = date('Y-m-d');
+//  $frequency_date_start_array = explode(' ', $frequency_date_start);
+//
+//  $service_details = node_load($association_nid);
+//  $delivery_mode = $service_details->field_service_delivery_mode[LANGUAGE_NONE][0]['value'];
   itg_mobile_services_feed_generator_of_contents($node);
 
 }
@@ -376,6 +376,12 @@ function itg_mobile_association_validator(&$form, &$form_state) {
   $validate = FALSE;
   $node_nid = isset($form_state['node']->nid) ? $form_state['node']->nid : '';
   $target_id = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id']);
+  
+  $service_expiry_date = itg_mobile_get_service_expiry_date($target_id);
+  
+  if (!empty($service_expiry_date) && $service_expiry_date < date('Y-m-d H:i:s')) {
+    //form_set_error('field_service_association_title', 'Sorry. Your Service has been expired.');
+  }
 
   $frequency = $form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value'];
 
@@ -903,21 +909,14 @@ function itg_mobile_services_menu() {
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
-
-  $items['mobile_services/token/%'] = array(
-    'page callback' => 'mobile_services_generator_data',
+  
+  $items['mobile_services/feed/%'] = array(      
+    'page callback' => 'itg_mobile_get_feed_byurl',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_mobile_services.inc',
   );
-
-  $items['mobile_services/token/list'] = array(
-    'page callback' => 'mobile_services_token_list',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_mobile_services.inc',
-  );
-
+    
   return $items;
 }
 
@@ -1266,11 +1265,28 @@ function itg_mobile_services_node_presave($node) {
   if ($node->type == 'clients_creation') {
     if ($node->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] == '1') {
       $client_name = $node->title;
-      $web_url = get_weburl_for_mobile_services('mobile_services', $client_name);
+      $web_url = get_weburl_for_mobile_services('mobile_services/feed', $client_name);
       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
     }
     else {
       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = '';
     } 
   }
+}
+
+
+/**
+ * Get service expiry date for itg_mobile_get_service_expiry_date
+ * @return string $field_story_expiry_date_value
+ *   
+ */
+function itg_mobile_get_service_expiry_date($entity_id) {
+  $query = db_select('field_data_field_story_expiry_date', 'e');
+  $query->fields('e', array('field_story_expiry_date_value'));
+  $query->condition('e.bundle', 'service_creation', '=');
+  $query->condition('e.entity_id', $entity_id, '=');
+  $query->range(0, 1);
+  $result = $query->execute();
+  $record = $result->fetchAssoc();
+  return $record['field_story_expiry_date_value'];
 }
