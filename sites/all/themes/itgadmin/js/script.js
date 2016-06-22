@@ -137,14 +137,15 @@
       }
     });
     $('body').on('click', '.target-link', function (e) {
-      var abc = $('body').find('.block-itg-story');
       var offSet = 120;
-      if($('.block-itg-story').hasClass('fixed')){
+      if($('.region-form-tab .block').hasClass('fixed')){
         offSet = 57;
       }
       
       
       var dti = $(this).attr('data-target-id');
+      var dataOffset = $('#' + dti).offset().top;
+      console.log(dti + '=' + dataOffset);
       var targetOffset = $('#' + dti).offset().top - offSet;
       if (dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails") {
         $(this).addClass('active').siblings('.target-link').removeClass('active');
@@ -450,7 +451,7 @@
     $('.field-name-field-quiz-options-answer').on('change', '.form-checkbox', function(){
       var correctVal = $(this).parents('.field-name-field-quiz-options-answer').siblings('.field-name-field-quiz-answer-type').find('.form-radio[value="single_correct"]').is(':checked');
       if(correctVal == true){
-        $(this).parents('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
+        $(this).closest('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
       }
     });
 
@@ -679,6 +680,16 @@
         $(this).parents('#edit-field-syndication-delivery-mode').siblings('.form-field-name-field-email-address').find('table td .form-text').val('');
       }
       
+    });
+    
+    // jQuery code for block-itg-related in second sidebar
+    $('.block-itg-related').on('click', 'a', function(){
+        $('body').find('.sidebars').removeClass('active');
+    });
+    
+    // jQuery code for newsletter-get-content
+    $('#newsletter-add-news').on('click', '.newsletter-get-content', function(){
+        $(this).parent().siblings('.field-name-field-news-thumbnail').find('.form-submit').trigger('click');
     });
 
   };
