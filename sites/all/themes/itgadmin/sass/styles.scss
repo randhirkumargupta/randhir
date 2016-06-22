@@ -3230,6 +3230,7 @@ div.node{
 
 /* UGC comment CSS */
 #comments{
+    padding: 0 20px;
   .messages--warning{
     color: #f6b800;
     margin: 10px 0;
@@ -3254,6 +3255,7 @@ div.node{
   }
   .comment{
     @extend .pos-rel;
+    padding: 0 30px;
     ul.links{
       @extend .no-bullet;
       position: absolute;
@@ -3270,8 +3272,7 @@ div.node{
     .submitted{
       font-size: 12px;
       color: #8d8d8d;
-      padding-top: 5px;
-      @extend .pdb-10;
+      padding: 10px 0 5px;
       .username{
         color: #337ab7;
       }
@@ -3282,6 +3283,12 @@ div.node{
         @extend .hide;
       }
     }
+    mark {
+    position: absolute;
+    right: 30px;
+    top: 5px;
+    padding: 0 5px;
+}
   }
 }
 [id*="field-survey-add-questions-values"]{
