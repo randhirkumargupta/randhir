@@ -177,3 +177,19 @@ function itg_social_media_twitter_login() {
     return $auth_url;
   }
 }
+
+/**
+ * Autocomplete callback for social media log node title.
+ */
+function _smi_title_autocomplete($field, $string) {  
+  $itg_query = db_select('itg_social_media_logs', 'itg');
+  $itg_query->condition($field, '%' . $string . '%', 'LIKE')
+      ->fields('itg', array($field));
+  $itg_result = $itg_query->execute();
+  $result = array();
+  foreach ($itg_result as $value) {
+    $result[$value->$field] = $value->$field;
+  }
+  
+  return drupal_json_output($result);
+}
