@@ -36,6 +36,14 @@ function syndication_feature_node_info() {
       'title_label' => t('Client Description'),
       'help' => '',
     ),
+    'syndication_feed_from_pattern' => array(
+      'name' => t('Syndication feed from pattern'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'syndication_rule' => array(
       'name' => t('Syndication rule'),
       'base' => 'node_content',

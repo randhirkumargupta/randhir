@@ -1,8 +1,10 @@
 <?php
-
+//check file url flow
 module_load_include('inc', 'itg_syndication', 'includes/itg_syndication.manual_feed');
 
 module_load_include('inc', 'itg_syndication', 'includes/itg_syndication');
+
+module_load_include('inc', 'itg_syndication', 'includes/itg_syndication_custom_feed');
 
 /**
  * Implements hook_menu().
@@ -69,8 +71,50 @@ function itg_syndication_form_syndication_client_node_form_alter(&$form, &$form_
  * @return array
  */
 function itg_syndication_after_build($form, &$form_state) {
+  // code for user can not edit this filed
+  if (isset($form['#node']->nid)) { 
+    $tid = $form['#node']->field_syndication_client_title[LANGUAGE_NONE][0]['tid'];
+    $term = taxonomy_term_load_multiple(array($tid), array());
+    $title = $term[$tid]->name;
+    
+    $check_rule = get_rule_by_client_name($title.'-'.$form['#node']->title);
+    
+    // for checkbox
+    if ($check_rule['mode_type']['FTP'] == 'FTP') {
+      drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-syndication-delivery-mode-und-ftp").on("click", false);              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    }
+    if ($check_rule['mode_type']['Email'] == 'Email') {
+      drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-syndication-delivery-mode-und-email").on("click", false);              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    }
+    if ($check_rule['mode_type']['web_url'] == 'web_url') {
+      drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-syndication-delivery-mode-und-web-url").on("click", false);              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    }
+    // for email id
+    foreach($form['field_email_address'][LANGUAGE_NONE] as $key1 => $val1) {
+      if (in_array($form['field_email_address'][LANGUAGE_NONE][$key1]['value']['#default_value'], $check_rule['mode_val'])) {
+        $form['field_email_address'][LANGUAGE_NONE][$key1]['value']['#attributes'] = array('readonly' => 'readonly');
+        unset($form['field_email_address'][LANGUAGE_NONE][$key1]['remove_button']);      
+      }    
+    }
+  }
+ 
   foreach ($form['field_syndication_ftp_details'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
+      
+      if (isset($check_rule['mode_val']) && in_array($form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_name'][LANGUAGE_NONE][0]['value']['#value'], $check_rule['mode_val'])) {
+        $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_name'][LANGUAGE_NONE][0]['value']['#attributes'] = array('readonly' => 'readonly');
+        $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value']['#attributes'] = array('readonly' => 'readonly');
+        $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_username'][LANGUAGE_NONE][0]['value']['#attributes'] = array('readonly' => 'readonly');
+        $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_password'][LANGUAGE_NONE][0]['value']['#attributes'] = array('readonly' => 'readonly');
+        unset($form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['remove_button']); 
+      }
+      
       $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_name'][LANGUAGE_NONE][0]['value']['#title'] = '';
       $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_url'][LANGUAGE_NONE][0]['value']['#title'] = '';
       $form['field_syndication_ftp_details'][LANGUAGE_NONE][$key]['field_syndication_ftp_username'][LANGUAGE_NONE][0]['value']['#title'] = '';
@@ -275,17 +319,17 @@ function itg_syndication_get_mode($client_name) {
   foreach($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {   
     $field_collection_item = entity_load('field_collection_item', array($val['value']));
     $ftp_name = $field_collection_item[$val['value']]->field_syndication_ftp_name[LANGUAGE_NONE][0]['value'];
-    $data[$ftp_name] = $ftp_name;
+    $data['FTP: '.$ftp_name] = $ftp_name;
   }
   
   //Code for Email id
   foreach($node->field_email_address[LANGUAGE_NONE] as $key => $val) {
-    $data[$val['value']] = $val['value'];
+    $data['Email: '.$val['value']] = $val['value'];
   }
   
   //Code for Weburl
   if (isset($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
-    $data[$node->field_service_fetch_link[LANGUAGE_NONE][0]['value']] = $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'];
+    $data['Weburl: '.$node->field_service_fetch_link[LANGUAGE_NONE][0]['value']] = 'Web url';
   }
   
   return $data;
@@ -408,6 +452,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
    if (is_numeric($is_dupl_client) && arg(1) != $is_dupl_client) {     
       form_set_error('title', t('client already exists.'));
    }
+   
   } else if ($node->type == 'syndication_rule') {
     foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key_time => $val_time) {
       if (isset($val_time['field_syndication_time'][LANGUAGE_NONE][0]['value'])) {
@@ -634,9 +679,12 @@ function itg_syndication_node_presave($node) {
     foreach($node->field_syndication_delivery_mode[LANGUAGE_NONE] as $key => $val) {
        $mode_array[] = $val['value'];
     }
-    if (in_array('Web URL', $mode_array)) {
+    if (in_array('Web URL', $mode_array) && $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] == '') {
       $web_url = get_weburl_for_syndication('syndication/feed', $node);
       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
+    }else if (in_array('Web URL', $mode_array) && $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] != '') {
+      $web_url = get_weburl_for_syndication('syndication/feed', $node);
+      $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'];
     }else {
       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = NULL;
     }    
@@ -685,10 +733,11 @@ function get_syndication_feed_byurl() {
   $itg_query->condition('feed.client_feed_url', $url);
   $itg_result = $itg_query->execute()->fetchAll();
   
-  foreach ($itg_result as $itg_val) {
+  foreach ($itg_result as $itg_val) {    
+    $realpath = file_create_url($itg_val->xml_name);    
     $xml_date = date('d/m/Y',$itg_val->created_date);
-    $file_url = explode('sites/', $itg_val->xml_name);
-    echo 'Click to Download. <a href="'.$base_url.'/sites/'.$file_url[1].'" download>'.$xml_date.'</a>';
+    //$file_url = $itg_val->xml_name;
+    echo 'Click to Download. <a href="'.$realpath.'" download>'.$xml_date.'</a>';
     echo '</br>';    
   }
   exit;
@@ -805,4 +854,48 @@ function itg_syndication_rule_change_message($form, &$form_state) {
    }
    $title = $form_state['node']->field_syndication_rule_title[LANGUAGE_NONE][0]['value'];
    drupal_set_message(t('Rule for <b>' . $title . '</b> has been ' . $op . '.'));
+}
+
+/**
+ * Custom submit callback function to change message after Syndication rule node save/update.
+ * @param array $form
+ * @param array $form_state
+ */
+function get_rule_by_client_name($client_name) {
+  
+  $itg_query = db_select('field_data_field_syndication_rule_title', 'rule');
+  $itg_query->fields('rule', array('entity_id'));  
+  $itg_query->condition('rule.field_syndication_rule_title_value', $client_name);
+  $itg_result = $itg_query->execute()->fetchField();
+  
+  $node = node_load($itg_result);
+  $delivery_mode_email = array();
+  $delivery_mode_web = array();
+  $delivery_mode_ftp = array();
+  
+  foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key => $val) {   
+    $field_collection_item = entity_load('field_collection_item', array($val['value']));
+    $delivery_mode = $field_collection_item[$val['value']]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
+    if (!empty($delivery_mode)) {
+      
+      $delivery_mode_data = explode(': ', $delivery_mode);
+      
+      if ($delivery_mode_data[0] == 'Email') {
+        $delivery_mode_val['Email'] = 'Email';
+      } else if ($delivery_mode_data[0]== 'FTP') {
+          $delivery_mode_val['FTP'] = 'FTP';
+      } else if ($delivery_mode_data[0] == 'Weburl') {
+          $delivery_mode_val['web_url'] = 'web_url';
+      }
+      $delivery_mode_array[] = $delivery_mode_data[1];
+    }
+    
+    
+    
+  }
+  //p($delivery_mode_array);
+   $delivery['mode_val'] = $delivery_mode_array;
+   $delivery['mode_type'] = $delivery_mode_val;
+  return $delivery;
+  
 }

@@ -27,6 +27,13 @@ function syndication_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create syndication_feed_from_pattern content'.
+  $permissions['create syndication_feed_from_pattern content'] = array(
+    'name' => 'create syndication_feed_from_pattern content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create syndication_rule content'.
   $permissions['create syndication_rule content'] = array(
     'name' => 'create syndication_rule content',
@@ -54,11 +61,17 @@ function syndication_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any syndication_feed_from_pattern content'.
+  $permissions['delete any syndication_feed_from_pattern content'] = array(
+    'name' => 'delete any syndication_feed_from_pattern content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any syndication_rule content'.
   $permissions['delete any syndication_rule content'] = array(
     'name' => 'delete any syndication_rule content',
     'roles' => array(
-      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -81,11 +94,17 @@ function syndication_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own syndication_feed_from_pattern content'.
+  $permissions['delete own syndication_feed_from_pattern content'] = array(
+    'name' => 'delete own syndication_feed_from_pattern content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own syndication_rule content'.
   $permissions['delete own syndication_rule content'] = array(
     'name' => 'delete own syndication_rule content',
     'roles' => array(
-      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -105,6 +124,13 @@ function syndication_feature_user_default_permissions() {
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any syndication_feed_from_pattern content'.
+  $permissions['edit any syndication_feed_from_pattern content'] = array(
+    'name' => 'edit any syndication_feed_from_pattern content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -132,6 +158,13 @@ function syndication_feature_user_default_permissions() {
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own syndication_feed_from_pattern content'.
+  $permissions['edit own syndication_feed_from_pattern content'] = array(
+    'name' => 'edit own syndication_feed_from_pattern content',
+    'roles' => array(),
     'module' => 'node',
   );
 
