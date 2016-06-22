@@ -4102,3 +4102,11 @@ div.node{
     }
     
 }
+.main-cont{
+    @extend .pos-rel;
+    .byline{
+        position: absolute;
+        left: 615px;
+        top: 10px;
+    }
+}
