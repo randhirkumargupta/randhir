@@ -560,6 +560,7 @@ input[type="text"], select, input[type="password"]{
   }
   .comment{
     @extend .pos-rel;
+    @extend .pdb-10;
     ul.links{
       @extend .no-bullet;
       position: absolute;
@@ -568,6 +569,7 @@ input[type="text"], select, input[type="password"]{
       a{
         color: #337ab7;
         text-decoration: none;
+        text-transform: capitalize;
         &:hover{
           text-decoration: underline;
         }
@@ -576,7 +578,7 @@ input[type="text"], select, input[type="password"]{
     .submitted{
       font-size: 12px;
       color: #8d8d8d;
-      @extend .pdb-10;
+      padding-bottom: 5px;
       .username{
         color: #337ab7;
       }

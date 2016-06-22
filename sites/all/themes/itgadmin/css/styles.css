@@ -70,7 +70,7 @@ img {
   padding-bottom: 10px;
 }
 
-.pdb-10, .success-message, .messages--status, #comments .comment .submitted {
+.pdb-10, .success-message, .messages--status {
   padding-bottom: 10px;
 }
 
@@ -3460,6 +3460,9 @@ div.node #comments h2 {
 }
 
 /* UGC comment CSS */
+#comments {
+  padding: 0 20px;
+}
 #comments .messages--warning {
   color: #f6b800;
   margin: 10px 0;
@@ -3472,6 +3475,9 @@ div.node #comments h2 {
   line-height: 28px;
   margin: 15px 0;
   padding: 8px 20px;
+}
+#comments .comment {
+  padding: 0 30px;
 }
 #comments .comment ul.links {
   position: absolute;
@@ -3488,13 +3494,19 @@ div.node #comments h2 {
 #comments .comment .submitted {
   font-size: 12px;
   color: #8d8d8d;
-  padding-top: 5px;
+  padding: 10px 0 5px;
 }
 #comments .comment .submitted .username {
   color: #337ab7;
 }
 #comments .comment.comment-unpublished {
   padding: 10px;
+}
+#comments .comment mark {
+  position: absolute;
+  right: 30px;
+  top: 5px;
+  padding: 0 5px;
 }
 
 [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-type {
