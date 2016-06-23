@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Video gallery module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * @access public
+ * @return array
+ */
+function itg_videogallery_schema() {
+  $schema = array();      
+  $schema['dailymotion_response_details'] = array(
+    'description' => 'Save the dailymotion response.',
+    'fields' => array(
+      'eid' => array(
+        'description' => 'Video entry id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'title' => array(
+        'description' => 'Video title',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+     'channel' => array(
+        'description' => 'Video category on dailymotion',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => 'file id from file manage table',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'tags' => array(
+        'description' => 'Tags of video',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'video_id' => array(
+        'description' => 'Video id which return by dailymotion',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('eid'),
+  );
+  return $schema;
+}
+
+/**
+ * Implemens hook_uninstall().
+ */
+function itg_videogallery_uninstall() {
+  variable_del('dailymotion_username');
+  variable_del('dailymotion_password');
+  variable_del('dailymotion_apikey');
+  variable_del('dailymotion_secretkey');
+  drupal_set_message(t('Video Gallery module was successfully uninstalled.'));
+}
