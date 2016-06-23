@@ -524,6 +524,8 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
  *
  * This tells drupal that there is Views integration file named
  * itg_social_media.views.inc
+ * 
+ * {@inheritdoc}
  */
 function itg_social_media_views_api() {
   return array(

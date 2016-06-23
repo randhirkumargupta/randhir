@@ -1,0 +1,30 @@
+<?php
+function itg_autosave_schema() {
+  $schema['itg_autosave_forms'] = array(    
+    'description' => t('Table for it_autosave module settings.'),
+    'fields' => array(
+      'id' => array(
+        'description' => t('The primary identifier for a table.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),      
+      'form_name' => array(
+        'description' => t('Form ID of the form who is going to autosave.'),
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'autosave_time' => array(
+        'description' => t('Time interval for autosave.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,      
+      ),
+    ),    
+    'primary key' => array('id'),
+  );
+  return $schema;
+}
