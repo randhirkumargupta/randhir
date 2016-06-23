@@ -173,7 +173,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         'event' => 'change', // On change of the selection this action would take place
       );
 
-     
+
       $form['content_enable_button'] = array(
         '#type' => 'button',
         '#weight' => 8,
@@ -243,6 +243,7 @@ function itg_mobile_vas_service_content_submit($form, &$form_state) {
 
 /**
  * Implement hook_node_insert()
+ * {@inheritdoc}
  */
 function itg_mobile_services_node_insert($node) {
 
@@ -253,6 +254,7 @@ function itg_mobile_services_node_insert($node) {
 
 /**
  * Implement hook_node_update()
+ * {@inheritdoc}
  */
 function itg_mobile_services_node_update($node) {
 
@@ -266,23 +268,9 @@ function itg_mobile_services_node_update($node) {
  * @param array $node 
  */
 function save_cron_details_of_mobile_services($node) {
-
   // Load itg_mobile_services.inc from the node module.
   module_load_include('inc', 'itg_mobile_services', 'includes/itg_mobile_services');
-//
-//  $node_nid = $node->nid;
-//  $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
-//
-//  $frequency = $node->field_service_frequency[LANGUAGE_NONE][0]['value'];
-//  $frequency_date_start = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value'];
-//  $frequency_date_end = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value2'];
-//  $current_date = date('Y-m-d');
-//  $frequency_date_start_array = explode(' ', $frequency_date_start);
-//
-//  $service_details = node_load($association_nid);
-//  $delivery_mode = $service_details->field_service_delivery_mode[LANGUAGE_NONE][0]['value'];
   itg_mobile_services_feed_generator_of_contents($node);
-
 }
 
 /**
@@ -376,9 +364,9 @@ function itg_mobile_association_validator(&$form, &$form_state) {
   $validate = FALSE;
   $node_nid = isset($form_state['node']->nid) ? $form_state['node']->nid : '';
   $target_id = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id']);
-  
+
   $service_expiry_date = itg_mobile_get_service_expiry_date($target_id);
-  
+
   if (!empty($service_expiry_date) && $service_expiry_date < date('Y-m-d H:i:s')) {
     //form_set_error('field_service_association_title', 'Sorry. Your Service has been expired.');
   }
@@ -470,10 +458,10 @@ function itg_mobile_clients_validator($form, &$form_state) {
     }
   }
 
-  $valid_email = $form_state['values']['field_email_address'][LANGUAGE_NONE][0]['value'];
+  $valid_email = $form_state['values']['field_contact_business_email'][LANGUAGE_NONE][0]['value'];
   $valid_tech_email_address = $form_state['values']['field_contact_tech_email_address'][LANGUAGE_NONE][0]['value'];
   if (!empty($valid_email) && !valid_email_address($valid_email)) {
-    form_set_error('field_email_address', 'Sorry. Your Business email address,' . $valid_email . ' is not valid.');
+    form_set_error('field_contact_business_email', 'Sorry. Your Business email address,' . $valid_email . ' is not valid.');
   }
 
   if (!empty($valid_tech_email_address) && !valid_email_address($valid_tech_email_address)) {
@@ -528,25 +516,12 @@ function itg_mobile_clients_validator($form, &$form_state) {
     case '3':
       $email_address = trim($form_state['values']['field_service_email_address'][LANGUAGE_NONE][0]['value']);
       if (empty($email_address)) {
-        form_set_error('field_email_address', t('Mail to Required.'));
+        form_set_error('field_service_email_address', t('Mail to Required.'));
       }
       // Validate email                
       if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
-        form_set_error('field_email_address', t('Please enter valid email address.'));
+        form_set_error('field_service_email_address', t('Please enter valid email address.'));
       }
-  }
-}
-
-/**
- * Implement validate function itg_mobile_service_validator().
- * @param array $form
- * @param array $form_state
- */
-function itg_mobile_service_validator($form, &$form_state) {
-
-  $valid_email = $form_state['values']['field_email_address'][LANGUAGE_NONE][0]['value'];
-  if (!empty($valid_email) && !valid_email_address($valid_email)) {
-    form_set_error('field_email_address', 'Sorry. Your email address ' . $valid_email . ', is not valid.');
   }
 }
 
@@ -893,35 +868,24 @@ function itg_mobile_services_views_pre_render(&$view) {
  * @return array $items 
  */
 function itg_mobile_services_menu() {
-  $items['countchar_validation'] = array(
-    'page callback' => 'itg_countchar_validation',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  $items['mobile_services/feed-generator-of-content'] = array(
-    'page callback' => 'mobile_services_generator_of_content',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_mobile_services.inc',
-  );
   $items['mobile_services/%/autocomplete'] = array(
     'page callback' => 'itg_mobile_services_get_content_title',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
-  
-  $items['mobile_services/feed/%'] = array(      
+
+  $items['mobile_services/feed/%'] = array(
     'page callback' => 'itg_mobile_get_feed_byurl',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_mobile_services.inc',
   );
-    
   return $items;
 }
 
 /**
  * Implements ajax callback function for itg_countchar_validation
+ * @param int $nid
  * @print array $result 
  */
 function itg_countchar_validation($nid) {
@@ -942,6 +906,7 @@ function itg_countchar_validation($nid) {
  * Implementation of hook_form_views_exposed_form_alter().
  * @param array $form
  * @param array reference $form_state
+ * @param array $form_id
  */
 function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
@@ -1195,7 +1160,7 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
 
 /**
  * custom callback for check exist content
- * @param int $sid
+ * @param int $node_nid
  * @param string $start_time
  * @param string $end_time
  * @return int entity_id 
@@ -1221,7 +1186,7 @@ function itg_mobile_services_check_exist_content($node_nid, $sid, $start_time, $
  * @param int $sid
  * @param string $start_time
  * @param string $end_time
- * @return int entity_id 
+ * @return type $result
  * */
 function itg_mobile_services_get_exist_content($sid, $start_time, $end_time) {
   $start_time = date_create($start_time);
@@ -1244,9 +1209,9 @@ function itg_mobile_services_get_exist_content($sid, $start_time, $end_time) {
 
 /**
  * Get web url for client
- * @param array $node
- * @param  $dir 
- * @return url
+ * @param  string $dir 
+ * @param string $client_name
+ * @return string
  */
 function get_weburl_for_mobile_services($dir, $client_name) {
   global $base_url;
@@ -1270,10 +1235,9 @@ function itg_mobile_services_node_presave($node) {
     }
     else {
       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = '';
-    } 
+    }
   }
 }
-
 
 /**
  * Get service expiry date for itg_mobile_get_service_expiry_date

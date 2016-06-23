@@ -728,6 +728,49 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-clients_creation-field_contact_business_email'.
+  $field_instances['node-clients_creation-field_contact_business_email'] = array(
+    'bundle' => 'clients_creation',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_contact_business_email',
+    'label' => 'Email address',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 46,
+    ),
+  );
+
   // Exported field_instance: 'node-clients_creation-field_contact_person_name'.
   $field_instances['node-clients_creation-field_contact_person_name'] = array(
     'bundle' => 'clients_creation',
@@ -939,48 +982,6 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-clients_creation-field_email_address'.
-  $field_instances['node-clients_creation-field_email_address'] = array(
-    'bundle' => 'clients_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_email_address',
-    'label' => 'Email address',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 45,
-    ),
-  );
-
   // Exported field_instance: 'node-clients_creation-field_ftp_ip_address'.
   $field_instances['node-clients_creation-field_ftp_ip_address'] = array(
     'bundle' => 'clients_creation',
@@ -1145,7 +1146,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 47,
     ),
   );
 
@@ -1188,7 +1189,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 10,
     ),
   );
 

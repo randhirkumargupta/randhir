@@ -10,15 +10,22 @@
  * @param string $service_title
  * @return string $full_file_path
  */
-function itg_mobile_services_generate_xml($node, $service_title) {
+function itg_mobile_services_generate_xml($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'UTF-8');
   $doc->formatOutput = TRUE;
 
-  $root = $doc->appendChild($doc->createElement('channel'));
+  //$root = $doc->appendChild($doc->createElement('channel'));
+  $root = $doc->createElement('channel');
   $root = $doc->appendChild($root);
   $root->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS'));
   $root->appendChild($doc->createElement('description', 'India Today'));
   $root->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
+  if (!empty($field_header)) {
+    $root->appendChild($doc->createElement('header', $field_header));
+  }
+  if (!empty($field_footer)) {
+    $root->appendChild($doc->createElement('footer', $field_footer));
+  }
   // content field collection data
   $fieldcollect = node_load($node->nid);
   if (is_object($fieldcollect) && count($fieldcollect) > 0) {
@@ -29,9 +36,16 @@ function itg_mobile_services_generate_xml($node, $service_title) {
       $service_conten_image = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'] : '';
       $service_conten_audio = isset($field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['fid'] : '';
       $service_conten_video = isset($field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['fid'] : '';
-      $item = $doc->createElement('content');
-      $item->appendChild($doc->createCDATASection($service_content_text));
+
+      $item = $doc->createElement('item');
       $root->appendChild($item);
+
+      // content text
+      if (!empty($service_content_text)) {
+        $content = $doc->createElement('description');
+        $content->appendChild($doc->createCDATASection($service_content_text));
+        $item->appendChild($content);
+      }
 
       // image
       if (!empty($service_conten_image)) {
@@ -39,7 +53,7 @@ function itg_mobile_services_generate_xml($node, $service_title) {
         $image_url = file_create_url($image_file->uri);
         $image = $doc->createElement('image');
         $image->appendChild($doc->createCDATASection($image_url));
-        $root->appendChild($image);
+        $item->appendChild($image);
       }
 
       // audio
@@ -48,7 +62,7 @@ function itg_mobile_services_generate_xml($node, $service_title) {
         $audio_url = file_create_url($audio_file->uri);
         $audio = $doc->createElement('audio');
         $audio->appendChild($doc->createCDATASection($audio_url));
-        $root->appendChild($audio);
+        $item->appendChild($audio);
       }
 
       // video
@@ -57,7 +71,7 @@ function itg_mobile_services_generate_xml($node, $service_title) {
         $video_url = file_create_url($video_file->uri);
         $video = $doc->createElement('video');
         $video->appendChild($doc->createCDATASection($video_url));
-        $root->appendChild($video);
+        $item->appendChild($video);
       }
     }
   }
@@ -73,28 +87,49 @@ function itg_mobile_services_generate_xml($node, $service_title) {
  * @param string $service_title
  * @return string $full_file_path
  */
-function itg_mobile_services_generate_rss($node, $service_title) {
+function itg_mobile_services_generate_rss($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'UTF-8');
   $doc->formatOutput = TRUE;
-  $root = $doc->appendChild($doc->createElement('rss'));
+  $root = $doc->createElement('rss');
   $root->setAttribute('version', '2.0');
   $root->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
   $root = $doc->appendChild($root);
 
-  $channel = $root->appendChild($doc->createElement('channel'));
+  $channel = $doc->createElement('channel');
   $channel->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS'));
   $channel->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
   $channel->appendChild($doc->createElement('description', 'India Today'));
 
+  if (!empty($field_header)) {
+    $channel->appendChild($doc->createElement('header', $field_header));
+  }
+  if (!empty($field_footer)) {
+    $channel->appendChild($doc->createElement('footer', $field_footer));
+  }
+
+  $root->appendChild($channel);
   // content field collection data
   $fieldcollect = node_load($node->nid);
   if (is_object($fieldcollect) && count($fieldcollect) > 0) {
     foreach ($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {
       $field_collection_item = entity_load('field_collection_item', array($val['value']));
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
-      $item = $doc->createElement('content');
-      $item->appendChild($doc->createCDATASection($service_content_text));
-      $root->appendChild($item);
+      $service_conten_image = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'] : '';
+
+      $item = $doc->createElement('item');
+      $channel->appendChild($item);
+
+      // content text
+      if (!empty($service_content_text)) {
+        $item->appendChild($doc->createElement('description', $service_content_text));
+      }
+
+      // image
+      if (!empty($service_conten_image)) {
+        $image_file = file_load($service_conten_image);
+        $image_url = file_create_url($image_file->uri);
+        $item->appendChild($doc->createElement('image', $image_url));
+      }
     }
   }
 
@@ -109,18 +144,28 @@ function itg_mobile_services_generate_rss($node, $service_title) {
  * @param string $service_title
  * @return string $full_file_path
  */
-function itg_mobile_services_generate_mrss($node, $service_title) {
+function itg_mobile_services_generate_mrss($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'iso-8859-1');
   $doc->formatOutput = TRUE;
-  $root = $doc->appendChild($doc->createElement('mrss'));
+  $root = $doc->createElement('mrss');
   $root->setAttribute('version', '2.0');
   $root->setAttribute('xmlns:media', 'http://search.yahoo.com/mrss/');
   $root = $doc->appendChild($root);
 
-  $channel = $root->appendChild($doc->createElement('channel'));
+  $channel = $doc->createElement('channel');
   $channel->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS'));
   $channel->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
   $channel->appendChild($doc->createElement('description', 'India Today'));
+
+  if (!empty($field_header)) {
+    $channel->appendChild($doc->createElement('header', $field_header));
+  }
+  if (!empty($field_footer)) {
+    $channel->appendChild($doc->createElement('footer', $field_footer));
+  }
+
+  $root->appendChild($channel);
+
   // content field collection data
   $fieldcollect = node_load($node->nid);
   if (is_object($fieldcollect) && count($fieldcollect) > 0) {
@@ -131,35 +176,34 @@ function itg_mobile_services_generate_mrss($node, $service_title) {
       $service_conten_image = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'] : '';
       $service_conten_audio = isset($field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['fid'] : '';
       $service_conten_video = isset($field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['fid'] : '';
-      $item = $doc->createElement('content');
-      $item->appendChild($doc->createCDATASection($service_content_text));
-      $root->appendChild($item);
+
+      $item = $doc->createElement('item');
+      $channel->appendChild($item);
+
+      // content text
+      if (!empty($service_content_text)) {
+        $item->appendChild($doc->createElement('description', $service_content_text));
+      }
 
       // image
       if (!empty($service_conten_image)) {
         $image_file = file_load($service_conten_image);
         $image_url = file_create_url($image_file->uri);
-        $image = $doc->createElement('image');
-        $image->appendChild($doc->createCDATASection($image_url));
-        $root->appendChild($image);
+        $item->appendChild($doc->createElement('image', $image_url));
       }
 
       // audio
       if (!empty($service_conten_audio)) {
         $audio_file = file_load($service_conten_audio);
         $audio_url = file_create_url($audio_file->uri);
-        $audio = $doc->createElement('audio');
-        $audio->appendChild($doc->createCDATASection($audio_url));
-        $root->appendChild($audio);
+        $item->appendChild($doc->createElement('audio', $audio_url));
       }
 
       // video
       if (!empty($service_conten_video)) {
         $video_file = file_load($service_conten_video);
         $video_url = file_create_url($video_file->uri);
-        $video = $doc->createElement('video');
-        $video->appendChild($doc->createCDATASection($video_url));
-        $root->appendChild($video);
+        $item->appendChild($doc->createElement('video', $video_url));
       }
     }
   }
@@ -175,23 +219,40 @@ function itg_mobile_services_generate_mrss($node, $service_title) {
  * @param string $service_title
  * @return string $full_file_path
  */
-function itg_mobile_services_generate_sms($node, $service_title) {
+function itg_mobile_services_generate_sms($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'UTF-8');
   $doc->formatOutput = TRUE;
-  $root = $doc->appendChild($doc->createElement('data'));
+  $root = $doc->createElement('rss');
+  $root->setAttribute('version', '2.0');
+  $root->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
   $root = $doc->appendChild($root);
-  $root->appendChild($doc->createElement('keyword', 'indiatoday'));
-  $root->appendChild($doc->createElement('timestamp', 'en-US'));
 
+  $channel = $doc->createElement('channel');
+  $channel->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS'));
+  $channel->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
+  $channel->appendChild($doc->createElement('description', 'India Today'));
+
+  if (!empty($field_header)) {
+    $channel->appendChild($doc->createElement('header', $field_header));
+  }
+  if (!empty($field_footer)) {
+    $channel->appendChild($doc->createElement('footer', $field_footer));
+  }
+
+  $root->appendChild($channel);
   // content field collection data
   $fieldcollect = node_load($node->nid);
   if (is_object($fieldcollect) && count($fieldcollect) > 0) {
     foreach ($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {
       $field_collection_item = entity_load('field_collection_item', array($val['value']));
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
-      $item = $doc->createElement('content');
-      $item->appendChild($doc->createCDATASection($service_content_text));
-      $root->appendChild($item);
+      $item = $doc->createElement('item');
+      $channel->appendChild($item);
+
+      // content text
+      if (!empty($service_content_text)) {
+        $item->appendChild($doc->createElement('description', $service_content_text));
+      }
     }
   }
 
@@ -201,28 +262,45 @@ function itg_mobile_services_generate_sms($node, $service_title) {
 }
 
 /**
- * Function for generating simple feed files.
+ * Function for generating Simple Text Feed.
  * @param object $node
  * @param string $service_title
  * @return string $full_file_path
  */
-function itg_mobile_services_generate_feed($node, $service_title) {
+function itg_mobile_services_generate_feed($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'UTF-8');
   $doc->formatOutput = TRUE;
-  $root = $doc->appendChild($doc->createElement('channel'));
+  $root = $doc->createElement('rss');
+  $root->setAttribute('version', '2.0');
+  $root->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
   $root = $doc->appendChild($root);
-  $root->appendChild($doc->createElement('title', 'indiatoday'));
-  $root->appendChild($doc->createElement('description', 'en-US'));
 
+  $channel = $doc->createElement('channel');
+  $channel->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS'));
+  $channel->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
+  $channel->appendChild($doc->createElement('description', 'India Today'));
+
+  if (!empty($field_header)) {
+    $channel->appendChild($doc->createElement('header', $field_header));
+  }
+  if (!empty($field_footer)) {
+    $channel->appendChild($doc->createElement('footer', $field_footer));
+  }
+
+  $root->appendChild($channel);
   // content field collection data
   $fieldcollect = node_load($node->nid);
   if (is_object($fieldcollect) && count($fieldcollect) > 0) {
     foreach ($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {
       $field_collection_item = entity_load('field_collection_item', array($val['value']));
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
-      $item = $doc->createElement('content');
-      $item->appendChild($doc->createCDATASection($service_content_text));
-      $root->appendChild($item);
+      $item = $doc->createElement('item');
+      $channel->appendChild($item);
+
+      // content text
+      if (!empty($service_content_text)) {
+        $item->appendChild($doc->createElement('description', $service_content_text));
+      }
     }
   }
 
@@ -237,23 +315,40 @@ function itg_mobile_services_generate_feed($node, $service_title) {
  * @param string $service_title
  * @return string $full_file_path
  */
-function itg_mobile_services_generate_ussd($node, $service_title) {
+function itg_mobile_services_generate_ussd($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'UTF-8');
   $doc->formatOutput = TRUE;
-  $root = $doc->appendChild($doc->createElement('channel'));
+  $root = $doc->createElement('rss');
+  $root->setAttribute('version', '2.0');
+  $root->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
   $root = $doc->appendChild($root);
-  $root->appendChild($doc->createElement('title', 'indiatoday'));
-  $root->appendChild($doc->createElement('description', 'en-US'));
 
+  $channel = $doc->createElement('channel');
+  $channel->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS'));
+  $channel->appendChild($doc->createElement('link', 'http://indiatoday.intoday.in/'));
+  $channel->appendChild($doc->createElement('description', 'India Today'));
+
+  if (!empty($field_header)) {
+    $channel->appendChild($doc->createElement('header', $field_header));
+  }
+  if (!empty($field_footer)) {
+    $channel->appendChild($doc->createElement('footer', $field_footer));
+  }
+
+  $root->appendChild($channel);
   // content field collection data
   $fieldcollect = node_load($node->nid);
   if (is_object($fieldcollect) && count($fieldcollect) > 0) {
     foreach ($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {
       $field_collection_item = entity_load('field_collection_item', array($val['value']));
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
-      $item = $doc->createElement('content');
-      $item->appendChild($doc->createCDATASection($service_content_text));
-      $root->appendChild($item);
+      $item = $doc->createElement('item');
+      $channel->appendChild($item);
+
+      // content text
+      if (!empty($service_content_text)) {
+        $item->appendChild($doc->createElement('description', $service_content_text));
+      }
     }
   }
 
