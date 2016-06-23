@@ -13,14 +13,6 @@ class ItgAutoSave {
   private $settings;
   
   /**
-   * Constructor function to set default values of js file.
-   * @global type $base_url
-   */
-  public function __construct() {    
-    
-  }
-
-  /**
    * Insert form ids to database
    * @param array $pre_save
    */
