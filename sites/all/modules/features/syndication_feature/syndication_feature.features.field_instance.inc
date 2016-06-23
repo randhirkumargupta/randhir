@@ -336,11 +336,7 @@ function syndication_feature_field_default_field_instances() {
   // 'field_collection_item-field_syndication_rule_details-field_syndication_set_day'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_set_day'] = array(
     'bundle' => 'field_syndication_rule_details',
-    'default_value' => array(
-      0 => array(
-        'value' => 'Sunday',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -374,11 +370,7 @@ function syndication_feature_field_default_field_instances() {
   // 'field_collection_item-field_syndication_rule_details-field_syndication_set_day_month'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_set_day_month'] = array(
     'bundle' => 'field_syndication_rule_details',
-    'default_value' => array(
-      0 => array(
-        'value' => 1,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -539,8 +531,15 @@ function syndication_feature_field_default_field_instances() {
       'default' => array(
         'label' => 'above',
         'module' => 'date',
-        'settings' => array(),
-        'type' => 'date_plain',
+        'settings' => array(
+          'format_type' => 'itg_date_formate',
+          'fromto' => '',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
         'weight' => 1,
       ),
       'teaser' => array(
