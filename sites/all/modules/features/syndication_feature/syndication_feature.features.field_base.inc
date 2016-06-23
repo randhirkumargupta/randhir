@@ -99,6 +99,61 @@ function syndication_feature_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_syndication_feed_clients'.
+  $field_bases['field_syndication_feed_clients'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_syndication_feed_clients',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_syndication_feed_content'.
+  $field_bases['field_syndication_feed_content'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_syndication_feed_content',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'story' => 'story',
+        'cooking_tips' => ' Cooking Tips',
+        'photogallery' => 'Photography',
+        'recipe' => 'Recipe',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_syndication_feed_type'.
   $field_bases['field_syndication_feed_type'] = array(
     'active' => 1,

@@ -346,3 +346,16 @@ function itgadmin_preprocess_page(&$vars) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 }
+
+/**
+ * Override the video field
+ */
+function itgadmin_preprocess_field(&$vars) {
+  if($vars['element']['#field_name'] == 'field_upload_video') {
+      $file_id = $vars['element']['#items'][0]['fid'];
+      if(module_exists('itg_videogallery')){
+        $video_id = itg_videogallery_get_video($file_id);
+        $vars['element'][0]['#file']->video_id = $video_id;
+      }
+  }
+}

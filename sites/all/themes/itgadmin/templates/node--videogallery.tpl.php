@@ -1,4 +1,4 @@
-<?php if (!empty($content)): ?>
+  <?php if (!empty($content)): ?>
   <div class='<?php print $classes ?>'>
       <?php if ($view_mode == 'full'): ?>
         <a href="javascript:;" class="close-preview">&nbsp;</a>
@@ -100,7 +100,12 @@
               </div>
           </div>
         <?php endif; ?>
-
+        <div class="Story-details">
+            <h2><?php print t('Video Upload'); ?></h2>
+            <div class="content-details">
+                <?php print render($content['field_videogallery_video_upload']); ?>
+            </div>
+        </div> 
         
 
         <div class="Story-details">
