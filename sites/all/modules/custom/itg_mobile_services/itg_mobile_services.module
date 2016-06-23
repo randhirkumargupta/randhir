@@ -868,6 +868,12 @@ function itg_mobile_services_views_pre_render(&$view) {
  * @return array $items 
  */
 function itg_mobile_services_menu() {
+  $items['countchar_validation'] = array(
+    'page callback' => 'itg_countchar_validation',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['mobile_services/%/autocomplete'] = array(
     'page callback' => 'itg_mobile_services_get_content_title',
     'access arguments' => array('access itg story'),
