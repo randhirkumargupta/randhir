@@ -686,7 +686,7 @@ function itg_syndication_node_presave($node) {
       $web_url = get_weburl_for_syndication('syndication/feed', $node);
       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'];
     }else {
-      $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = NULL;
+      $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = '';
     }    
   }
 }
@@ -825,14 +825,19 @@ function get_syndication_test() {
   
 }
 
-function itg_syndication_node_view($node, $view_mode, $langcode) {
+function itg_syndication_node_view($node, $view_mode, $langcode) { 
   if ($node->type == 'syndication_client') {
+    drupal_set_title($node->field_syndication_client_title[LANGUAGE_NONE][0]['taxonomy_term']->name);
     if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
       $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']));
     }
     if (empty($node->field_syndication_ftp_details)) {
       unset($node->content['field_syndication_ftp_details']);    
-    }    
+    }
+    
+    if (empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
+      unset($node->content['field_service_fetch_link']);    
+    }
   }
 }
 
