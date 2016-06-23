@@ -181,3 +181,16 @@ function itg_preprocess_comment(&$variables) {
   $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['author'], '!datetime' => $variables['created']));
   }
 }
+
+/**
+ * Override the video field
+ */
+function itg_preprocess_field(&$vars) {
+  if($vars['element']['#field_name'] == 'field_upload_video') {
+      $file_id = $vars['element']['#items'][0]['fid'];
+      if(module_exists('itg_videogallery')){
+        $video_id = itg_videogallery_get_video($file_id);
+        $vars['element'][0]['#file']->video_id = $video_id;
+      }
+  }
+}
