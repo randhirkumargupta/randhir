@@ -10,6 +10,16 @@
 function feature_for_video_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'authorized user dailymotion credin'.
+  $permissions['authorized user dailymotion credin'] = array(
+    'name' => 'authorized user dailymotion credin',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+    ),
+    'module' => 'itg_videogallery',
+  );
+
   // Exported permission: 'create videogallery content'.
   $permissions['create videogallery content'] = array(
     'name' => 'create videogallery content',
