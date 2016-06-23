@@ -47,17 +47,69 @@ function itg_social_media_schema() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-      ),
+      ),      
       'created' => array(
         'description' => t('The created date for the single record'),
-        'type' => 'varchar',
-        'mysql_type' => 'datetime',
-        'not null' => FALSE,
+        'type' => 'int', 
+        'not null' => TRUE, 
+        'default' => 0
       ),
     ),
     'indexes' => array(
       'username' => array('username'),
       'log_created' => array('created'),
+    ),
+    'primary key' => array('id'),
+  );
+  // Twitter Scheduling table 
+  $schema['itg_social_media_twitter_schedule'] = array(
+    'description' => 'The base table for twitter scheduling functionality.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a schedule.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => t('Node id of the shared content.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),            
+      'username' => array(
+        'description' => 'Username of the user who have promoted the content.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'social_media' => array(
+        'description' => 'Name of the social media where content has been published.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),      
+      'scheduled_time' => array(
+        'description' => t('The scheduled date for the single record'),
+        'type' => 'int', 
+        'not null' => TRUE, 
+        'default' => 0
+      ),
+      'status' => array(
+        'description' => t('Status of the post 1 for posted and 0 for not posted.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'id' => array('id'),
+      'nid' => array('nid'),      
+      'scheduled_time' => array('scheduled_time'),
     ),
     'primary key' => array('id'),
   );

@@ -345,6 +345,9 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '3';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'node_title' => 'node_title',
@@ -359,30 +362,17 @@ function feature_smi_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Field: Social Media Logs: Node title */
-  $handler->display->display_options['fields']['node_title']['id'] = 'node_title';
-  $handler->display->display_options['fields']['node_title']['table'] = 'itg_social_media_logs';
-  $handler->display->display_options['fields']['node_title']['field'] = 'node_title';
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
-  $handler->display->display_options['fields']['counter']['label'] = 'Sr No.';
-  $handler->display->display_options['fields']['counter']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['counter']['label'] = 'S No.';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Social Media Logs: Created time */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'itg_social_media_logs';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = 'Posted On';
-  $handler->display->display_options['fields']['created']['date_format'] = 'medium';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Social Media Logs: Node title */
-  $handler->display->display_options['fields']['node_title_1']['id'] = 'node_title_1';
-  $handler->display->display_options['fields']['node_title_1']['table'] = 'itg_social_media_logs';
-  $handler->display->display_options['fields']['node_title_1']['field'] = 'node_title';
-  $handler->display->display_options['fields']['node_title_1']['label'] = 'Title';
+  $handler->display->display_options['fields']['node_title']['id'] = 'node_title';
+  $handler->display->display_options['fields']['node_title']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['node_title']['field'] = 'node_title';
   /* Field: Social Media Logs: Social media */
   $handler->display->display_options['fields']['social_media']['id'] = 'social_media';
   $handler->display->display_options['fields']['social_media']['table'] = 'itg_social_media_logs';
@@ -393,12 +383,152 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['fields']['username']['table'] = 'itg_social_media_logs';
   $handler->display->display_options['fields']['username']['field'] = 'username';
   $handler->display->display_options['fields']['username']['label'] = 'Posted By';
+  /* Field: Social Media Logs: Created time */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Posted On';
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg_date_with_time';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Sort criterion: Social Media Logs: Created time */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'itg_social_media_logs';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['sorts']['created']['granularity'] = 'minute';
+  /* Filter criterion: Social Media Logs: Created time */
+  $handler->display->display_options['filters']['created']['id'] = 'created';
+  $handler->display->display_options['filters']['created']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['filters']['created']['field'] = 'created';
+  $handler->display->display_options['filters']['created']['operator'] = 'between';
+  $handler->display->display_options['filters']['created']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['label'] = 'Posted On';
+  $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
+  $handler->display->display_options['filters']['created']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  /* Filter criterion: Social Media Logs: Node title */
+  $handler->display->display_options['filters']['node_title']['id'] = 'node_title';
+  $handler->display->display_options['filters']['node_title']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['filters']['node_title']['field'] = 'node_title';
+  $handler->display->display_options['filters']['node_title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['node_title']['expose']['operator_id'] = 'node_title_op';
+  $handler->display->display_options['filters']['node_title']['expose']['label'] = 'Node Title';
+  $handler->display->display_options['filters']['node_title']['expose']['operator'] = 'node_title_op';
+  $handler->display->display_options['filters']['node_title']['expose']['identifier'] = 'node_title';
+  $handler->display->display_options['filters']['node_title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  /* Filter criterion: Social Media Logs: Social media */
+  $handler->display->display_options['filters']['social_media']['id'] = 'social_media';
+  $handler->display->display_options['filters']['social_media']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['filters']['social_media']['field'] = 'social_media';
+  $handler->display->display_options['filters']['social_media']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['social_media']['expose']['operator_id'] = 'social_media_op';
+  $handler->display->display_options['filters']['social_media']['expose']['label'] = 'Social media';
+  $handler->display->display_options['filters']['social_media']['expose']['operator'] = 'social_media_op';
+  $handler->display->display_options['filters']['social_media']['expose']['identifier'] = 'social_media';
+  $handler->display->display_options['filters']['social_media']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  /* Filter criterion: Social Media Logs: Username */
+  $handler->display->display_options['filters']['username']['id'] = 'username';
+  $handler->display->display_options['filters']['username']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['filters']['username']['field'] = 'username';
+  $handler->display->display_options['filters']['username']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['username']['expose']['operator_id'] = 'username_op';
+  $handler->display->display_options['filters']['username']['expose']['label'] = 'Posted by';
+  $handler->display->display_options['filters']['username']['expose']['operator'] = 'username_op';
+  $handler->display->display_options['filters']['username']['expose']['identifier'] = 'username';
+  $handler->display->display_options['filters']['username']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

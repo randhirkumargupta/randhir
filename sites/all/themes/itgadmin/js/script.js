@@ -635,34 +635,42 @@
         $(this).parents('td').find('.field-name-field-syndication-set-day-month').show();
       }
     });
-    var news_content_el = $('.field-name-field-news-type').find('.form-radio');
-    function newsContent(content_el){
-      var radioCheck = content_el.is(':checked');
-      var radioVal = content_el.val();
+//    var news_content_el = $('.field-name-field-news-type').find('.form-radio');
+    function newsContent(){
+      var radioCheck = $('.field-name-field-news-type').find('.form-radio').is(':checked');
+      var radioVal = $('.field-name-field-news-type').find('.form-radio:checked').val();
       if(radioCheck == true && radioVal == 'internal'){
-        content_el.parents('td').find('.field-name-field-news-external-url').hide();
-        content_el.parents('td').find('.field-name-field-news-cid').show();
-        content_el.parents('td').find('.newsletter-get-content').parent().show();
+        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.field-name-field-news-external-url').hide();
+        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.field-name-field-news-cid').show();
+        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.newsletter-get-content').parent().show();
         
       }
       if(radioCheck == true && radioVal == 'external'){
-        content_el.parents('td').find('.field-name-field-news-cid').hide();
-        content_el.parents('td').find('.field-name-field-news-external-url').show();
-        content_el.parents('td').find('.newsletter-get-content').parent().hide();
+        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.field-name-field-news-cid').hide();
+        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.field-name-field-news-external-url').show();
+        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.newsletter-get-content').parent().hide();
       }
     }
-    newsContent(news_content_el);
+    newsContent();
     
     $('.field-name-field-news-type').on('change', '.form-radio', function(){
       var radioCheck = $(this).is(':checked');
       var radioVal = $(this).val();
       if(radioCheck == true && radioVal == 'internal'){
+        $(this).parents('td').find('.field-name-field-news-cid .form-text').val('');
         $(this).parents('td').find('.field-name-field-news-external-url').hide();
+        $(this).parents('td').find('.field-name-field-news-title').find('.form-text').val('');
+        $(this).parents('td').find('.field-name-field-news-kicker').find('.form-textarea').val('');
+        $(this).parents('td').find('.field-name-field-news-thumbnail .image-widget-data > .form-submit').trigger('mousedown');
         $(this).parents('td').find('.field-name-field-news-cid').show();
         $(this).parents('td').find('.newsletter-get-content').parent().show();
       }
       if(radioCheck == true && radioVal == 'external'){
+        $(this).parents('td').find('.field-name-field-news-external-url .form-text').val('');
         $(this).parents('td').find('.field-name-field-news-cid').hide();
+        $(this).parents('td').find('.field-name-field-news-title').find('.form-text').val('');
+        $(this).parents('td').find('.field-name-field-news-kicker').find('.form-textarea').val('');
+        $(this).parents('td').find('.field-name-field-news-thumbnail .image-widget-data > .form-submit').trigger('mousedown');;
         $(this).parents('td').find('.field-name-field-news-external-url').show();
         $(this).parents('td').find('.newsletter-get-content').parent().hide();
       }
@@ -681,16 +689,5 @@
       }
       
     });
-    
-    // jQuery code for block-itg-related in second sidebar
-    $('.block-itg-related').on('click', 'a', function(){
-        $('body').find('.sidebars').removeClass('active');
-    });
-    
-    // jQuery code for newsletter-get-content
-    $('#newsletter-add-news').on('click', '.newsletter-get-content', function(){
-        $(this).parent().siblings('.field-name-field-news-thumbnail').find('.form-submit').trigger('click');
-    });
-
   };
 })(jQuery);

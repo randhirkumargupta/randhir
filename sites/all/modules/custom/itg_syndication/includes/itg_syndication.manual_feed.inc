@@ -179,15 +179,15 @@ function itg_syndication_feed_download_after_build($form, &$form_state) {
  * @param array $form_state
  */
 function itg_syndication_selector_custom_submit($form, &$form_state) {
-  //p($form_state['values']);
+  
   $client_name = check_plain($form_state['values']['itg_row_selector_client']);
   $web_property = check_plain($form_state['values']['itg_row_selector_web_property']);
   $issue = check_plain($form_state['values']['itg_row_selector_issue']);
   $delivery_mode = check_plain($form_state['values']['client_delivery_mode']);
   $feed_type = check_plain($form_state['values']['feed_type']);
   
-  $syndication_node = $form_state['values']['itg_row_selector'];
-  //p($form_state['values']);
+  $syndication_node = array_filter($form_state['values']['itg_row_selector']);
+  
   $data = array(
     'web_property' => $web_property,
     'client_title' => $client_name,
@@ -195,7 +195,7 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'feed_type' => $feed_type,
     'syndication' => serialize($syndication_node),    
   );
-  //p($data);
+  
   $file_path = feed_generator_of_contents($data); 
   
   // insert records into database table itg_syndication_manual_feed_details.
@@ -215,7 +215,7 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
   // for feed download
   if($form_state['values']['feed_download_value'] == 'yes') {
     global $base_url;    
-    $link_val = 'Click to Download. <a href="'.$base_url.'/sites/default/files/'.$file_path.'" download>Import Feed</a>';
+    $link_val = 'Click to Download. <a href="'.$realpath.'" download>Import Feed</a>';
     drupal_set_message($link_val, 'status');    
   } else {
       drupal_set_message('Successfully feed Generated  and Sent to client.', 'status');
@@ -267,6 +267,10 @@ function syndication_selector_custom_form_validate($form, &$form_state) {
   
   if ($form_state['values']['client_delivery_mode'] == '_none' && $form_state['values']['feed_download_value'] != 'yes') {
     form_set_error('client_delivery_mode', t('Please select Delivery Mode.'));
+  }
+  
+  if (empty($form_state['values']['itg_row_selector_client'])) {
+    form_set_error('client_title', t('Please select Client.'));
   }
   
 }
