@@ -214,8 +214,7 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
                     $required_value = $uid_values->name;
                     break;
                 case 'value':
-                    /* Its very importent to convert text into xml standard so using htmlspecialchars with ENT_XML1*/
-                    $required_value[] = htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8');
+                    $required_value[] = $field_item[0]['value'];
                     break;
             }
         }
