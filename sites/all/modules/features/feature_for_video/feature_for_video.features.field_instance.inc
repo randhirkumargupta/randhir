@@ -102,7 +102,7 @@ function feature_for_video_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_upload_video',
-    'label' => 'Upload',
+    'label' => 'Video',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -1529,7 +1529,7 @@ function feature_for_video_field_default_field_instances() {
   t('Tweet');
   t('Twitter Image');
   t('Twitter narrative');
-  t('Upload');
+  t('Video');
   t('Video Thumbnail');
   t('Video Upload');
 

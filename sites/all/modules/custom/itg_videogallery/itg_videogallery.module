@@ -161,7 +161,6 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         }
      }
   }
-  drupal_set_message('<pre>' . print_r($new_fid_array, 1) . '<pre>');
 
   foreach ($new_fid_array as $key => $value) {
     if (is_numeric($key)) {
@@ -199,6 +198,7 @@ function itg_videogallery_dailymotion($real_path, $key, $uri, $fid) {
 
   // Tell the SDK what kind of authentication you'd like to use.
   // Because the SDK works with lazy authentication, no request is performed at this point.
+  try{
   $api = new Dailymotion();
   $scopes = array(
     'userinfo',
@@ -215,6 +215,19 @@ function itg_videogallery_dailymotion($real_path, $key, $uri, $fid) {
       'password' => $password,
       )
   );
+  }catch (Exception $e) {
+     if ($e->getMessage() == "Missing API key") {
+      if (isset($_GET['destination'])) {
+        unset($_GET['destination']);
+      }
+      drupal_set_message('Please enter API Key.', 'error');
+      drupal_goto('dailymotion/config');
+    }
+    else {
+      drupal_set_message($e->getMessage(), 'error');
+    }
+  }
+  
 
 
 
@@ -258,7 +271,7 @@ function itg_videogallery_dailymotion($real_path, $key, $uri, $fid) {
   $a->logout();
   $result['fid'] = $fid;
   $result['tags'] = $fid;
-  drupal_set_message('<pre>' . print_r($result, 1) . '</pre>', 'status');
+ // drupal_set_message('<pre>' . print_r($result, 1) . '</pre>', 'status');
   }
   catch (Exception $e) {
     if ($e->getMessage() == "This `client_id' doesn't exist.") {
@@ -464,8 +477,8 @@ function itg_videogallery_field_add_more_submit($form, &$form_state) {
   $node = drupal_rebuild_form('videogallery_node_form', $form_state, $old_form = NULL);
   $fids = array();
   $mydir = 'public://dailymotion_video_dir'; 
- // file_prepare_directory($mydir, FILE_CREATE_DIRECTORY);
-   drupal_mkdir('public://' . $mydir , 0777);
+  file_prepare_directory($mydir, FILE_CREATE_DIRECTORY);
+  // drupal_mkdir('public://' . $mydir , 0777);
   foreach ($node['upload']['#value'] as $video) {
     $scheme = variable_get('file_default_scheme', 'public') . '://dailymotion_video_dir/';
     $source = $video['tmppath'];
