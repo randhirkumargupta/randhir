@@ -7,6 +7,6 @@
 
 (function($) {
 	$.fn.feed_pattern = function(data) {
-            $("textarea#edit-body-und-0-value").val(data);
+            $("textarea#edit-body-und-0-value").val(data); 
 	};
 })(jQuery);
