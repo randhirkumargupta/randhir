@@ -1231,7 +1231,9 @@ function itg_mobile_services_node_presave($node) {
     if ($node->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] == '1') {
       $client_name = $node->title;
       $web_url = get_weburl_for_mobile_services('mobile_services/feed', $client_name);
-      $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
+      if (empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
+        $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $web_url;
+      }
     }
     else {
       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = '';
