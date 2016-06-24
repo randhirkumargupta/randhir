@@ -12,7 +12,8 @@
 //             var spt = iframe_url.split("&");
 //             alert(spt.split('&')[0]);
              //var typeval = getParameterByName('type');
-            var typeval = parent.document.getElementById("ntype").value;
+            //var typeval = parent.document.getElementById("ntype").value;
+            var typeval = 'story';
                   //alert(typeval);        
             $(".itg-row-selector-selection-form #edit-submit").hide();
             $('#filter-save', context).click(function (event) {
@@ -134,7 +135,7 @@ jQuery(document).ready(function(){
             item.splice(hasurl, 1);
         }
       
-        //console.log("hasurl index = " + item);
+        console.log("hasurl index = " + item);
     });
     
 //    jQuery('body').on('click', '.insert-url', function(){
