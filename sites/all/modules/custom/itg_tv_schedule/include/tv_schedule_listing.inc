@@ -28,9 +28,9 @@ function tv_schedule_listing() {
     $arg = arg();
     $con = new Mongo();
     // Select Database
-    $db = $con->csvhandling;
+    $db = $con->tv_schedule;
     // Select Collection
-    $people = $db->itgcms_demos;
+    $people = $db->itgcms_tv_schedule;
     // Search result  
     if (isset($_GET['title'])) {
         $title = $_GET['title'];

@@ -138,11 +138,11 @@ function itg_tv_schedule_uploadmongo($file_id) {
     $con = new Mongo();
     if ($con) {
 // Select Database
-        $db = $con->csvhandling;
+        $db = $con->tv_schedule;
 // create collection
-        $db->createCollection("itgcms_demos");
+        $db->createCollection("itgcms_tv_schedule");
 // Select Collection
-        $people = $db->itgcms_demos;
+        $people = $db->itgcms_tv_schedule;
         $upload_date = date("Y/m/d");
     }
 
