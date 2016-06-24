@@ -41,7 +41,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
     //$form['field_basic_email']['#suffix'] = '<a class="colorbox-load" href="http://localhost/itgcms/related-content?width=900&height=700&iframe=true&type=' . $type . '">Add Related content</a>';
     $form['ntype'] = array(
       '#title' => t('Ntype'),
-      '#type' => 'hidden',
+      '#type' => 'textfield',
       '#id' => 'ntype',
       '#description' => t(''),
       '#value' => $type,
