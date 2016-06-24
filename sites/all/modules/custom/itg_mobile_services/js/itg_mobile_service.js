@@ -167,6 +167,12 @@ var maxLen = 0;
 
             if (firstTime == 1) {
                 jQuery('<span id="custom_service_content_0"></span>').insertAfter('textarea[name="field_service_content[und][0][field_story_expert_description][und][0][value]"]');
+                var length_textarea = jQuery("#field-service-content-values > tbody > tr").length;
+
+                for (var ii = 1; ii <= length_textarea; ) {
+                jQuery('<span id="custom_service_content_' + ii + '"></span>').insertAfter('textarea[name="field_service_content[und][' + ii + '][field_story_expert_description][und][0][value]"]');
+                ii++;
+                }
                 jQuery('#field-service-content-add-more-wrapper').hide();
                 jQuery('#edit-field-service-frequency').hide();
                 jQuery('#reset-date-button').hide();

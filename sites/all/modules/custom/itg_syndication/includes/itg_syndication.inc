@@ -10,32 +10,7 @@
  */
 
 function feed_generator_of_contents($data) {
-    
-    switch ($data['feed_type']) {
-      case 'xml':
-        $file_path = itg_syndication_generate_xml($data);
-        break;
-      /*case 'rss':
-        $file_path = itg_syndication_generate_rss($data);
-        break;
-      case 'mrss':
-
-        break;
-      case 'ussd':
-
-        break;
-      case 'sms':
-
-        break;
-      case 'stf':
-        watchdog('syndication_stf', 'I am in queue!');
-        break;
-      case 'html':
-        $file_path = itg_syndication_mail_syndication($data);
-        break;*/
-    }
-      
-
+  $file_path = itg_syndication_generate_xml($data);
   return $file_path;
 }
 
@@ -47,7 +22,7 @@ function feed_generator_of_contents($data) {
 function itg_syndication_generate_xml($data) {
   
   //work start this line
-  $syndication_node = unserialize($data['syndication']);
+ /* $syndication_node = unserialize($data['syndication']);
   
   $file_path = drupal_realpath('public://').'/xml';
   $dom = new DOMDocument('1.0', 'UTF-8');
@@ -64,12 +39,10 @@ function itg_syndication_generate_xml($data) {
       $result->appendChild($dom->createElement('title', $node->title));
       $i++;
     }
-    //$result->appendChild($dom->createElement('body', '<![CDATA['.strip_tags($node->body[LANGUAGE_NONE][0]['value']).']]>'));
-    //$result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
+    $result->appendChild($dom->createElement('body', '<![CDATA['.strip_tags($node->body[LANGUAGE_NONE][0]['value']).']]>'));
+    $result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
     
-    /*$result1 = $dom->createElement('body');
-    $result->appendChild($result1);
-    $result1->appendChild($dom->createElement('CDATA', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));*/
+    
     
   }
   
@@ -85,11 +58,22 @@ function itg_syndication_generate_xml($data) {
   
   $xml_name = $client_title.'_'.$data['section_id'].'_'.$dt.'_'.$token;
   
-  $dom->save($file_path . '/' . $xml_name . '.xml') or die('XML Create Error');  
+  $dom->save($file_path . '/' . $xml_name . '.xml') or die('XML Create Error'); */
+  
+  $file = generate_custom_pattern_feed($data);
   
   $delivery_mode = $data['delivery_mode'];
-
-  if (!filter_var($delivery_mode, FILTER_VALIDATE_EMAIL) === false) {
+  $delivery_mode_array = explode(': ', $delivery_mode);
+  
+  if ($delivery_mode_array[0] == 'Email') {
+    $delivery_mode_type = 'Email';
+  } else if ($delivery_mode_array [0]== 'FTP') {
+      $delivery_mode_type = 'FTP';
+  } else if ($delivery_mode_array[0] == 'Weburl') {
+      $delivery_mode_type = 'web_url';
+  }
+  
+  /*if (!filter_var($delivery_mode, FILTER_VALIDATE_EMAIL) === false) {
     $delivery_mode_type = 'Email';
   } else {
       $check_mode = explode('/syndication/', $delivery_mode);
@@ -98,26 +82,26 @@ function itg_syndication_generate_xml($data) {
       } else {
           $delivery_mode_type = 'FTP';
       }
-  }
+  }*/
   
   // Decide sharing mode
   switch ($delivery_mode_type) {
     // 1. Fetch web URL (our server)
     case 'web_url':
-      itg_syndication_web_url_syndication($data, $file_path . '/' . $xml_name . '.xml');
+      itg_syndication_web_url_syndication($data, $file['file_path'], $delivery_mode_array[1]);
       break;
     // 2. Via FTP location
       
     case 'FTP':
-      itg_syndication_ftp_syndication($data, $file_path . '/' . $xml_name . '.xml', $xml_name.'.xml');
+      itg_syndication_ftp_syndication($data, $file['file_path'], $file['file_name'], $delivery_mode_array[1]);
       break;
     // 3. Via Email
     case 'Email':
-      itg_syndication_mail_syndication($data, $file_path . '/' . $xml_name . '.xml');
+      itg_syndication_mail_syndication($data, $file['file_path'], $delivery_mode_array[1]);
       break;
   }
   
-  return  'xml/'.$xml_name . '.xml';
+  return  $file['file_path'];
 }
 
 /**
@@ -125,13 +109,13 @@ function itg_syndication_generate_xml($data) {
  * @param type $data
  * @param type $syndication_node
  */
-function itg_syndication_mail_syndication($data, $file_path) {
+function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
   $attachment = array(
     'filepath' => $file_path,
   );
   $params = array(
     'key' => 'itg_syndication',
-    'to' => $data['delivery_mode'],
+    'to' => $delivery_mode,
     'from' => 'noreply@indiatoday.com',
     'subject' => 'Test email',
     'body' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -139,7 +123,7 @@ function itg_syndication_mail_syndication($data, $file_path) {
     'headers' => array(
       'MIME-Version: 1.0' . "\r\n",
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
-      'To: '.$data['delivery_mode'] . "\r\n",
+      'To: '.$delivery_mode . "\r\n",
       'From: India Today <noreply@indiatoday.com>' . "\r\n",
     ),
   );
@@ -166,171 +150,14 @@ function itg_syndication_mail($key, &$message, $params) {
   }
 }
 
-/**
- * test funcation
- */
-function feed_test() {
-    generate_custom_feed();
-}
-
-/**
- * 
- */
-function generate_custom_feed($nid=1474) {
-    $node =   node_load($nid);
-    $data_array =   array();
-    $feed_data  = '';
-    $text   =   "
-        <story>
-        <body>{{{body}}}</body>
-        <newtitle>{{{field_story_new_title}}}</newtitle>
-        <issues>{{{field_story_magazine_story_issue}}}</issues>
-        <headline>{{{field_story_magazine_headline}}}</headline>
-        <image>{{{field_story_large_image}}}</image>
-        <city>{{{field_stroy_city}}}</city>
-        <category>{{{field_story_category}}}</category>
-        <expertname>{{{field_story_expert_name}}}</expertname>
-        <facoids>{{{field_story_template_factoids}}}</facoids>
-        <kicker>{{{field_story_kicker_text}}}</kicker>
-        <image>{{{field_story_medium_image}}}</image>
-        <fb>{{{field_story_posted_by_facebook}}}</fb>
-        <issuedate>{{{field_story_issue_date}}}</issuedate>
-        <tags>{{{field_story_itg_tags}}}</tags>
-        <configuration>{{{field_story_configurations}}}</configuration>
-        <quotes>{{{field_story_template_quotes}}}</quotes>
-        </story>
-    ";
-    $isValidXml = isValidXml($text);
-    if($isValidXml) {
-        // extract fields name from text string
-        $var_array  =   get_vars_from_feed_pattern($text);
-        
-        // validate fields w.r.t content type
-        $content_type   =   $node->type;
-        foreach ($var_array[1] as $field_name) {
-            if(!isValidField($field_name,$content_type)) {
-                $message[]  =   $field_name." is not a valid field in ".$content_type;
-            }
-        }
-        
-        //process if there is no message
-        if(empty($message)) {
-            $iteration  =   count($var_array[0]);
-            $new_text   =   '';
-            for($i=0;$i<$iteration;$i++) {        
-                $data_array[] =  get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-            }
-            foreach($var_array[0] as $key=>$pattren) {
-                $replacement    =   implode(", ", $data_array[$key]);
-                $new_text       =   str_replace($pattren, $replacement, $text);
-                $text           =   $new_text;
-            }
-            $xml = new SimpleXMLElement($new_text);
-            echo $xml->asXML();
-            
-        }else {
-            drupal_set_message("not a valid field");
-        }        
-    }else {
-        return drupal_set_message("Not a valid formet");
-    }
-    
-}
-
-/**
- * @param string $content_type
- * @return array which has all the fields name on perticular file type
- */
-
-function fieldsArray($content_type) {
-    $field_info =   array();
-    $content_type_fields = field_info_instances('node', $content_type);
-    foreach($content_type_fields as $field) {
-        $field_info[]   =   $field['field_name'];
-    }
-    return $field_info;
-}
-
-
-/**
- * @param string $text
- * @return array $matches
- */
-
-function get_vars_from_feed_pattern($text) {
-    $matches   =   array();
-    if(isset($text)) {
-        preg_match_all('/{{{(.*?)}}}/', $text, $matches);
-    }
-    return $matches;
-}
-
-/**
- * @param string $fieldName
- * @param blooen $flag
- */
-
-function isValidField($field_name,$content_type) {
-    $flag   =   false;
-    if(isset($field_name) && isset($content_type)) {
-        if(in_array($field_name, fieldsArray($content_type))) {
-            $flag   =   true;
-        }
-    }
-    return $flag;
-}
-
-/**
- * @param string $xml
- * @return boolen $errors
- */
-
-function isValidXml($xml) {
-    libxml_use_internal_errors(true);
-    $doc = new DOMDocument('1.0', 'utf-8');
-    $doc->loadXML($xml);
-    $errors = libxml_get_errors();
-    return empty($errors);
-}
-
-
-function get_required_data_field_get_items($entity_type, $entity, $field_name) {
-    $required_value =   '';
-    $field_item     =   field_get_items($entity_type, $entity, $field_name);
-    if(count($field_item)) {
-        foreach($field_item as $delta=>$values) {
-            $keys   = array_keys($values);
-            $key_delta  =   $keys[0];
-            switch ($key_delta) {
-                case 'tid':
-                    $tid_value          =   taxonomy_term_load($values['tid']);
-                    $required_value[]   =   $tid_value->name;
-                    break;
-                case 'fid':
-                    $fid_value          =   $values['fid'];
-                    $file_load          =   file_load($fid_value);
-                    $required_value[]   =   file_create_url($file_load->uri);
-                    break;
-                case 'uid':
-                    $uid_values         =   entity_load('user',$values['uid']);
-                    $required_value     =   $uid_values->name;
-                    break;
-                case 'value':
-                    $required_value[]   =   $field_item[0]['value'];
-                    break;
-            }
-        }
-    }
-   return $required_value;
-}
 
 /**
  * function to feed for syndication by ftp.
  * @param type $data
  * @param type $file_path
  */
-function itg_syndication_ftp_syndication($data, $file_path, $file_name) {  
-  $ftp_details = get_ftp_details_by_client($data['client_title'], $data['delivery_mode']);
+function itg_syndication_ftp_syndication($data, $file_path, $file_name, $delivery_mode) {  
+  $ftp_details = get_ftp_details_by_client($data['client_title'], $delivery_mode);
   
   $file = $file_path;
   
@@ -362,16 +189,17 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name) {
  * @param type $data
  * @param type $file_path
  */
-function itg_syndication_web_url_syndication($data, $file_path) {
-  
-  $query = db_insert('itg_syndication_feed_url');
-    $query->fields(array(
-      'xml_name' => $file_path,
-      'client_feed_url' => $data['delivery_mode'],      
-      'created_date' => time(),
-      'status' => 1
-    )); 
-    $query->execute();
+function itg_syndication_web_url_syndication($data, $file_path, $delivery_mode) {
+  if (!empty($file_path)) {
+    $query = db_insert('itg_syndication_feed_url');
+      $query->fields(array(
+        'xml_name' => $file_path,
+        'client_feed_url' => $delivery_mode,      
+        'created_date' => time(),
+        'status' => 1
+      )); 
+      $query->execute();
+  }
 }
 
 /**

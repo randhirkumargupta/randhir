@@ -83,6 +83,13 @@ function itg_social_media_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_social_media.admin.inc'
   );
+  $items['itg-social_media/title-autocomplete/%'] = array(
+    'page callback' => '_smi_title_autocomplete',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'page arguments' => array(2),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.settings.inc',
+  );
 
   return $items;
 }
@@ -91,22 +98,47 @@ function itg_social_media_menu() {
  * Implements hook_form_alter()
  * {@inheritdoc}
  */
-function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  if (isset($form['created']['min'])) {
-    $form['created']['min'] = array(
-      '#title' => t('Start Date'),
-      '#type' => 'date_popup',
-      '#date_format' => 'd/m/Y',
-      '#date_year_range' => '-3:+3',
-      '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
-    );
-    $form['created']['max'] = array(
-      '#title' => t('End Date'),
-      '#type' => 'date_popup',
-      '#date_format' => 'd/m/Y',
-      '#date_year_range' => '-3:+3',
-      '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
-    );
+function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {  
+  switch ($form['#id']) {
+    case 'views-exposed-form-social-media-logs-page':      
+      $form['created']['min'] = array(
+        '#title' => t('Start Date'),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+      );
+      $form['created']['max'] = array(
+        '#title' => t('End Date'),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+      );
+      // Autocomplete node title
+      $form['node_title']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/node_title';
+      $form['social_media']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/social_media';
+      $form['username']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/username';
+      
+      break;
+
+    case 'views-exposed-form-browse-content-page':
+      $form['created']['min'] = array(
+        '#title' => t('Start Date'),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+      );
+      $form['created']['max'] = array(
+        '#title' => t('End Date'),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+      );
+      
+      break;
   }
 }
 
@@ -259,7 +291,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'facebook ' . $type,
-      'created' => $stime != NULL ? date('Y-m-d H:i:s', $stime) : date('Y-m-d H:i:s', REQUEST_TIME),
+      'created' => $stime != NULL ? $stime : REQUEST_TIME,
     );
     
     // iNSERT INTO DATABASE
@@ -285,8 +317,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     if ($form_state['values']['itg_fb_img'] > 0) {      
       $desc = $form_state['values']['itg_facebook_narrative'];
       $fid = $form_state['values']['itg_fb_img'];      
-      $stime = $form_state['values']['img_schedule_time'] != NULL ? strtotime($form_state['values']['img_schedule_time']) : NULL;
-      //$stime = $stime + ((5*3600) + 1800);      
+      $stime = $form_state['values']['img_schedule_time'] != NULL ? strtotime($form_state['values']['img_schedule_time']) : NULL;      
       itg_social_media_facebook_post($fid, $desc, 'photos', $node, $stime);
       $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
       $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
@@ -296,8 +327,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     if ($form_state['values']['itg_fb_video']) {      
       $desc = $form_state['values']['itg_facebook_video_text'];
       $fid = $form_state['values']['itg_fb_video'];
-      $stime = $form_state['values']['video_schedule_time'] !== '' ? strtotime($form_state['values']['video_schedule_time']) : '';
-      //$stime = $stime + ((5*3600) + 1800);
+      $stime = $form_state['values']['video_schedule_time'] !== '' ? strtotime($form_state['values']['video_schedule_time']) : '';      
       itg_social_media_facebook_post($fid, $desc, 'videos', $node, $stime);
       // save node field
       $node->field_story_facebook_video['und'][0] = array(
@@ -323,19 +353,23 @@ function itg_social_media_form_submit($form, &$form_state) {
   if ($form_state['values']['itg_smi']['twitter'] === 'twitter') {
     // Twitter image
     if ($form_state['values']['itg_twitter_img'] > 0) {      
-      $stime = $form_state['values']['tw_img_schedule_time'] != NULL ? strtotime($form_state['values']['tw_img_schedule_time']) : NULL;
-      //$stime = $stime + ((5*3600) + 1800);
+      $stime = $form_state['values']['tw_img_schedule_time'] != NULL ? strtotime($form_state['values']['tw_img_schedule_time']) : NULL;      
       $desc = $form_state['values']['itg_twitter_narrative'];
       $fid = $form_state['values']['itg_twitter_img'];
       $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
       $node->field_story_tweet_image['und'][0]['fid'] = $form_state['values']['itg_twitter_img'];
-      itg_social_media_twitter_photo_post($fid, $desc, $node, $stime);
+      if ($stime != NULL) {
+        itg_social_media_save_scheduled_post($node->nid, 'Twitter Image', $stime);
+      }
+      else {
+        itg_social_media_twitter_photo_post($fid, $desc, $node, $stime);
+      }
+      
     }
     
     // Twitter video
     if ($form_state['values']['itg_twit_video'] > 0) { 
-      $stime = $form_state['values']['tw_vid_schedule_time'] != NULL ? strtotime($form_state['values']['tw_vid_schedule_time']) : NULL;
-      //$stime = $stime + ((5*3600) + 1800);
+      $stime = $form_state['values']['tw_vid_schedule_time'] != NULL ? strtotime($form_state['values']['tw_vid_schedule_time']) : NULL;      
       $desc = $form_state['values']['field_story_twitter_video_desc'];
       $fid = $form_state['values']['itg_twit_video'];
       $node->field_story_twitter_video['und'][] = array(
@@ -344,7 +378,13 @@ function itg_social_media_form_submit($form, &$form_state) {
         'description' => ''
       );
       $node->field_story_twitter_video_desc['und'][0]['value'] = $desc;
-      itg_social_media_tvideo_post($fid, $desc, $node, $stime);
+      if ($stime != NULL) {
+        itg_social_media_save_scheduled_post($node->nid, 'Twitter Video', $stime);
+      }
+      else {
+        itg_social_media_tvideo_post($fid, $desc, $node, $stime);
+      }
+      
     }
   }
   node_save($node);
@@ -395,7 +435,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $stime) {
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'Twitter Image',
-      'created' => $stime != NULL ? date('Y-m-d H:i:s', $stime) : date('Y-m-d H:i:s', REQUEST_TIME),
+      'created' => $stime != NULL ? $stime : REQUEST_TIME,
     );
     
     // iNSERT INTO DATABASE
@@ -475,7 +515,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
       'node_title' => $node->title,
       'username' => $user->name,
       'social_media' => 'Twitter Video',
-      'created' => $stime != NULL ? date('Y-m-d H:i:s', $stime) : date('Y-m-d H:i:s', REQUEST_TIME),
+      'created' => $stime != NULL ? $stime : REQUEST_TIME,
     );
     
     // iNSERT INTO DATABASE
@@ -492,6 +532,8 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
  *
  * This tells drupal that there is Views integration file named
  * itg_social_media.views.inc
+ * 
+ * {@inheritdoc}
  */
 function itg_social_media_views_api() {
   return array(
@@ -520,9 +562,46 @@ function itg_social_media_views_query_alter(&$view, &$query) {
  * Implement hook_views_pre_render
  * @param stdObject $view
  */
-function itg_social_media_views_pre_render(&$view) {
-  if ($view->name === 'browse_content') {
-    $header_content_smi = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';      
-    $view->attachment_before = $header_content_smi;        
+function itg_social_media_views_pre_render(&$view) {  
+  switch ($view->name) {
+    case 'browse_content':
+      $header_content_smi = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';      
+      $view->attachment_before = $header_content_smi;        
+
+      break;
+    
+    case 'social_media_logs':
+      $header_content_smi = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';      
+      $view->attachment_before = $header_content_smi; 
+      
+      break;    
+  }  
+}
+
+/**
+ * Save twitter scheduled post.
+ * @global stdObject $user
+ * @param int $nid
+ * @param string $type
+ * @param timestamp $stime
+ */
+function itg_social_media_save_scheduled_post($nid, $type, $stime) {
+  global $user;
+  $presave = array(
+    'nid' => $nid,
+    'username' => $user->name,
+    'social_media' => $type,
+    'scheduled_time' => $stime,
+    'status' => 0,
+  );
+  $itg_query = db_insert('itg_social_media_twitter_schedule');
+  $itg_query->fields($presave)
+      ->execute();
+  if ($itg_query) {
+    drupal_set_message('Post has been saved for scheduling', 'status');
+  }
+  else {
+    drupal_set_message('Unexpected error', 'error');
+    drupal_goto('/browse-content');
   }
 }
