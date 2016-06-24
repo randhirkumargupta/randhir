@@ -5,10 +5,13 @@
  * 
  */
 $type = arg(2);
+global $user, $base_url;
+
 ?>
 
 <div class="rel-link">
-    <a class="colorbox-load" href="http://localhost/itgcms/related-content?width=900&height=700&iframe=true&type=<?php print $type; ?>">Add Related content</a>
+    
+    <a class="colorbox-load" href="<?php print $base_url.'/related-content?width=900&height=700&iframe=true&type='.$type; ?>">Add Related content</a>
     <?php
     itg_related_save_search();
     ?>
