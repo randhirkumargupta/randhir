@@ -1,0 +1,8 @@
+name = ITG Related Content
+description = "ITG Related Content"
+core = 7.x
+package = ITG
+
+files[] = itg_related.module
+
+
