@@ -45,7 +45,7 @@
                           </div>
                           <h2><?php print t('Business Contact'); ?></h2>
                           <?php print render($content['field_contact_person_name']); ?>
-                          <?php print render($content['field_email_address']); ?>
+                          <?php print render($content['field_contact_business_email']); ?>
                           <?php print render($content['field_mobile_number']); ?>
                           <?php if (isset($node->field_contact_tech_person_name)): ?> 
                             <h2><?php print t('Technical Contact'); ?></h2>
