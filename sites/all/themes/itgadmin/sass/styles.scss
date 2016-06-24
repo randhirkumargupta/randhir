@@ -821,6 +821,9 @@ div.form-type-password-confirm{
     margin: 15px 0;
     padding: 15px 30px;
   }
+  #edit-mimemail{
+      @extend .hide;
+  }
 }
 div.filefield-source .form-item{
   @extend .mr-0;
@@ -2483,6 +2486,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
               .fa{
                   font-size: 34px;
                   line-height: 36px;
+                  opacity: .7;
               }
               .form-checkbox{
                   opacity: 0;
@@ -2500,7 +2504,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
                   &:checked{
                       &+label{
                           .fa{
-                              opacity: .7;
+                              opacity: 1;
                           }
                       }
                   }
