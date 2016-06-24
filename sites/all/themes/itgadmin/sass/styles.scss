@@ -821,6 +821,9 @@ div.form-type-password-confirm{
     margin: 15px 0;
     padding: 15px 30px;
   }
+  #edit-mimemail{
+      @extend .hide;
+  }
 }
 div.filefield-source .form-item{
   @extend .mr-0;
@@ -2483,6 +2486,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
               .fa{
                   font-size: 34px;
                   line-height: 36px;
+                  opacity: .7;
               }
               .form-checkbox{
                   opacity: 0;
@@ -2500,7 +2504,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
                   &:checked{
                       &+label{
                           .fa{
-                              opacity: .7;
+                              opacity: 1;
                           }
                       }
                   }
@@ -3145,7 +3149,7 @@ div.node{
       td{
         @extend .fleft;
         @extend .mb-10;
-        padding-bottom: 0;
+        width: 100%;
       }
     }
   }
@@ -3748,7 +3752,7 @@ div.node{
   }
 }
 #SocialMedia{
-  .form-field-type-image{
+  .form-field-type-image, .form-field-type-file{
     a.imce-filefield-opener{
       font-size: 0;
       height: 28px;
@@ -3760,6 +3764,12 @@ div.node{
     .ajax-progress{
       display: none;
     }
+  }
+  .form-field-type-file{
+      @extend .choose-audio-video-file;
+      .form-type-managed-file > label{
+          padding-top: 0;
+      }
   }
 }
 .node-recipe-form{
@@ -3972,6 +3982,12 @@ div.node{
       span.error{padding-left: 0;}
     }
   }
+  .form-field-type-file{
+      @extend .choose-audio-video-file;
+    .form-type-managed-file > label {
+        padding-top: 0;
+    }
+  }
 }
 .node-syndication_client-form [id*="field-email-address-values"]{
   margin-top: 30px !important;
@@ -4078,12 +4094,20 @@ div.node{
   overflow: visible;
 }
 .block-itg-related{
-   padding: 20px;
+    .rel-link{
+        padding: 20px;
+    }
+    .rel-hed{
+        @extend .pdtb-10;
+    }
    a{
        color: #1fb5ad;
    }
    ul{
        @extend .no-bullet;
+       li{
+           padding: 3px 0;
+       }
    }
 }
 .view-manage-users{
