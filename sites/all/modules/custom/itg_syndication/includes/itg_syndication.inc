@@ -6,7 +6,8 @@
 
 /**
  * Feed generator of selected contents
- * @param array $data 
+ * @param array $data
+ * @return string $file_path 
  */
 
 function feed_generator_of_contents($data) {
@@ -17,49 +18,10 @@ function feed_generator_of_contents($data) {
 /**
  * Function for generating xml files.
  * @param array $data
- * @param array $syndication_node
+ * @param string $file_path
  */
 function itg_syndication_generate_xml($data) {
-  
-  //work start this line
- /* $syndication_node = unserialize($data['syndication']);
-  
-  $file_path = drupal_realpath('public://').'/xml';
-  $dom = new DOMDocument('1.0', 'UTF-8');
-  $dom->formatOutput = true;
-  $root = $dom->createElement('syndication');
-  $dom->appendChild($root);
-  $i = 1;
-  foreach ($syndication_node as $key => $val) {
-    if ($val != 0) {
-      $node = node_load($val);
-      $result = $dom->createElement('content');
-      $root->appendChild($result);
-      $result->setAttribute('id', $i);
-      $result->appendChild($dom->createElement('title', $node->title));
-      $i++;
-    }
-    $result->appendChild($dom->createElement('body', '<![CDATA['.strip_tags($node->body[LANGUAGE_NONE][0]['value']).']]>'));
-    $result->appendChild($dom->createElement('headline', strip_tags($node->body[LANGUAGE_NONE][0]['value'])));
     
-    
-    
-  }
-  
-  $timestamp = time();
-  $token = sha1($data['client_title']. $timestamp);
-  $dt = date('d-m-Y');
-  
-  if (!empty($data['client_title'])) {
-    $client_title = $data['client_title'];
-  } else {
-      $client_title = 'syndication';
-  }
-  
-  $xml_name = $client_title.'_'.$data['section_id'].'_'.$dt.'_'.$token;
-  
-  $dom->save($file_path . '/' . $xml_name . '.xml') or die('XML Create Error'); */
-  
   $file = generate_custom_pattern_feed($data);
   
   $delivery_mode = $data['delivery_mode'];
@@ -71,18 +33,7 @@ function itg_syndication_generate_xml($data) {
       $delivery_mode_type = 'FTP';
   } else if ($delivery_mode_array[0] == 'Weburl') {
       $delivery_mode_type = 'web_url';
-  }
-  
-  /*if (!filter_var($delivery_mode, FILTER_VALIDATE_EMAIL) === false) {
-    $delivery_mode_type = 'Email';
-  } else {
-      $check_mode = explode('/syndication/', $delivery_mode);
-      if (isset($check_mode[1])) {
-        $delivery_mode_type = 'web_url';
-      } else {
-          $delivery_mode_type = 'FTP';
-      }
-  }*/
+  } 
   
   // Decide sharing mode
   switch ($delivery_mode_type) {
@@ -106,8 +57,9 @@ function itg_syndication_generate_xml($data) {
 
 /**
  * Callback function to send syndication by mail attachment.
- * @param type $data
- * @param type $syndication_node
+ * @param array $data
+ * @param string $file_path
+ * @param string $delivery_mode
  */
 function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
   $attachment = array(
@@ -118,7 +70,7 @@ function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
     'to' => $delivery_mode,
     'from' => 'noreply@indiatoday.com',
     'subject' => 'Test email',
-    'body' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+    'body' => 'Please check attached xml file.',
     'attachment' => $attachment,
     'headers' => array(
       'MIME-Version: 1.0' . "\r\n",
@@ -153,8 +105,10 @@ function itg_syndication_mail($key, &$message, $params) {
 
 /**
  * function to feed for syndication by ftp.
- * @param type $data
- * @param type $file_path
+ * @param array $data
+ * @param string $file_path
+ * @param string $file_name
+ * @param string $delivery_mode
  */
 function itg_syndication_ftp_syndication($data, $file_path, $file_name, $delivery_mode) {  
   $ftp_details = get_ftp_details_by_client($data['client_title'], $delivery_mode);
@@ -187,7 +141,8 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
 /**
  * function to feed for syndication by ftp.
  * @param type $data
- * @param type $file_path
+ * @param string $file_path
+ * @param string $delivery_mode
  */
 function itg_syndication_web_url_syndication($data, $file_path, $delivery_mode) {
   if (!empty($file_path)) {
@@ -204,8 +159,9 @@ function itg_syndication_web_url_syndication($data, $file_path, $delivery_mode) 
 
 /**
  * Get FTP details of client
- * @param $client_name
- * @param $ftp_name
+ * @param string $client_name
+ * @param string $ftp_name
+ * @return array $itg_result (FTP details)
  */
 function get_ftp_details_by_client($client_name, $ftp_name) {
   
