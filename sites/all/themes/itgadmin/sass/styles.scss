@@ -3145,7 +3145,7 @@ div.node{
       td{
         @extend .fleft;
         @extend .mb-10;
-        padding-bottom: 0;
+        width: 100%;
       }
     }
   }
@@ -3748,7 +3748,7 @@ div.node{
   }
 }
 #SocialMedia{
-  .form-field-type-image{
+  .form-field-type-image, .form-field-type-file{
     a.imce-filefield-opener{
       font-size: 0;
       height: 28px;
@@ -3760,6 +3760,12 @@ div.node{
     .ajax-progress{
       display: none;
     }
+  }
+  .form-field-type-file{
+      @extend .choose-audio-video-file;
+      .form-type-managed-file > label{
+          padding-top: 0;
+      }
   }
 }
 .node-recipe-form{
@@ -3970,6 +3976,12 @@ div.node{
     .form-type-textfield:first-child{
       margin-right: 10px !important;
       span.error{padding-left: 0;}
+    }
+  }
+  .form-field-type-file{
+      @extend .choose-audio-video-file;
+    .form-type-managed-file > label {
+        padding-top: 0;
     }
   }
 }
