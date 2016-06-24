@@ -8,13 +8,13 @@
     attach: function (context, settings) {
              var uid = settings.itg_related.settings.uid;
              var dta = encodeURIComponent(window.location.href);
+             var base_url = settings.itg_related.settings.base_url;
             // alert(window.location.href);
 //             var spt = iframe_url.split("&");
 //             alert(spt.split('&')[0]);
              //var typeval = getParameterByName('type');
-            //var typeval = parent.document.getElementById("ntype").value;
-            var typeval = 'story';
-                  //alert(typeval);        
+            var typeval = parent.top.jQuery("#ntype").val();
+                              
             $(".itg-row-selector-selection-form #edit-submit").hide();
             $('#filter-save', context).click(function (event) {
                 
@@ -36,7 +36,7 @@
                 {
 
                     $.ajax({
-                        'url': '/itgcms/ajaxcallback',
+                        'url': base_url + '/ajaxcallback',
                         'data': post,
                         'type': 'POST',
                         'success': function (data)
