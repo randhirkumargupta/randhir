@@ -13,8 +13,8 @@
 //             var spt = iframe_url.split("&");
 //             alert(spt.split('&')[0]);
              //var typeval = getParameterByName('type');
-            var typeval = parent.top.jQuery("#ntype").val();
-                              
+            var typeval = parent.top.jQuery('[name="ntype"]').val();
+           
             $(".itg-row-selector-selection-form #edit-submit").hide();
             $('#filter-save', context).click(function (event) {
                 
