@@ -148,7 +148,7 @@ function itg_related_views_pre_render(&$view) {
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_related' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1));
-    drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/jquery.cookie.js', array('weight' => 2));
+   // drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/jquery.cookie.js', array('weight' => 2));
 
     foreach ($view->result as $related_result) {
       //dpm($related_result->bs_status);
@@ -314,7 +314,7 @@ function itg_related_save_search() {
       ->execute();
 
   // print '<br/>';
-  print '<h1 class=rel-hed>My Saved Search</h1>';
+  print '<h3 class=rel-hed>My Saved Search</h3>';
   print '<ul>';
   while ($save_search_result_info = $save_search_result->fetchAssoc()) {
 
