@@ -337,7 +337,6 @@ function itgadmin_preprocess_page(&$vars) {
   }
    
   // Add tpl for related content view page
-  print arg(0);
   if (arg(0) == 'related-content') {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
