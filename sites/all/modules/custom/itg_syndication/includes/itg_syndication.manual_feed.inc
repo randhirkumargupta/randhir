@@ -25,7 +25,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {    
-    // $form['#validate'][] = 'syndication_filter_custom_form_validate';
+    
     $form['changed']['min'] = array(
       '#type' => 'date_popup',
       '#title' => t('From'),
@@ -119,12 +119,6 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
        '#submit' => array('itg_syndication_selector_custom_submit'),);
    
    $form['actions']['submit']['#value'] = 'Generate feed and Send it to client';
-   
-   // Add cancel button
-//    $form['actions']['cancel'] = array(
-//      '#markup' => l(t('Cancel'), 'syndication-feed-generator', array('attributes' => array('class' => 'button'))),
-//      '#weight' => 20,
-//    );
     
     // for feed download 
      $form['feed_download_value'] = array(
@@ -179,7 +173,7 @@ function itg_syndication_feed_download_after_build($form, &$form_state) {
  * @param array $form_state
  */
 function itg_syndication_selector_custom_submit($form, &$form_state) {
-  
+  global $base_url;
   $client_name = check_plain($form_state['values']['itg_row_selector_client']);
   $web_property = check_plain($form_state['values']['itg_row_selector_web_property']);
   $issue = check_plain($form_state['values']['itg_row_selector_issue']);
@@ -209,12 +203,13 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'feed_file_path' => $file_path,
     'created' => format_date(time(), 'custom', 'Y-m-d'),
   );
+  
   if (isset($file_path)) {
     $query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
   }
+  
   // for feed download
-  if($form_state['values']['feed_download_value'] == 'yes') {
-    global $base_url;    
+  if($form_state['values']['feed_download_value'] == 'yes') {        
     $link_val = 'Click to Download. <a href="'.$realpath.'" download>Import Feed</a>';
     drupal_set_message($link_val, 'status');    
   } else {
@@ -263,6 +258,11 @@ function itg_syndication_views_query_alter(&$view, &$query) {
   }
 }
 
+/**
+ * syndication selector custom form validate
+ * @param array $form
+ * @param array $form_state
+ */
 function syndication_selector_custom_form_validate($form, &$form_state) {
   
   if ($form_state['values']['client_delivery_mode'] == '_none' && $form_state['values']['feed_download_value'] != 'yes') {
@@ -275,6 +275,11 @@ function syndication_selector_custom_form_validate($form, &$form_state) {
   
 }
 
+/**
+ * syndication filter custom form validate
+ * @param array $form
+ * @param array $form_state
+ */
 function syndication_filter_custom_form_validate($form, &$form_state) {  
   if ($form_state['values']['client_delivery_mode'] == '_none' && $form_state['values']['feed_download_value'] != 'yes') {
     form_set_error('client_delivery_mode', t('Please select Delivery Mode.'));

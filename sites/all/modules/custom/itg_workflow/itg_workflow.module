@@ -19,15 +19,9 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
   
   switch ($form_id) {
     case 'story_node_form':
-      $form['#after_build'][] = 'itg_workflow_after_build';      
-    break;
-  
     case 'photogallery_node_form':
-      $form['#after_build'][] = 'itg_workflow_after_build';      
-    break;
-  
     case 'blog_node_form':
-      $form['#after_build'][] = 'itg_workflow_after_build';      
+      $form['#after_build'][] = 'itg_workflow_after_build';
     break;
     
     case 'views_exposed_form':
