@@ -348,32 +348,33 @@ function itg_mobile_get_feed_byurl() {
   $itg_query->orderBy('created_date', 'DESC'); //ORDER BY created
   $itg_result = $itg_query->execute()->fetchAll();
 
-  $table = '<table cellpadding="0" cellspacing="0" width="100%" style="border: 1px;">';
+  $table = '<table class="views-table">';
   $table .= '<tbody>';
   $table .= '<tr>';
-  $table .= '<th style="width: 96px;">SNo.</th>';
-  $table .= '<th style="width: 96px;">Service Name</th>';
-  $table .= '<th style="width: 96px;">Frequency</th>';
-  $table .= '<th style="width: 96px;">Frequency Date</th>';
-  $table .= '<th style="width: 96px;">Time</th>';
-  $table .= '<th style="width: 96px;">Link</th>';
+  $table .= '<th>SNo.</th>';
+  $table .= '<th>Service Name</th>';
+  $table .= '<th>Frequency</th>';
+  $table .= '<th>Frequency Date</th>';
+  $table .= '<th>Time</th>';
+  $table .= '<th>Link</th>';
   $table .= '</tr>';
   $i = 1;
   foreach ($itg_result as $itg_val) {
     $xml_date = date('d/m/Y', $itg_val->created_date);
     $file_url = explode('sites/', $itg_val->xml_name);
     $file_url_array = explode('_', $file_url[1]);
+    $file_date_array = explode('.', $file_url_array[3]);
     $frequency_type_arr = explode('/', $file_url_array[0]);
     $frequency_type = ($frequency_type_arr[count($frequency_type_arr) - 1]);
     $frequency_date = $file_url_array[2];
-    $date_time = isset($file_url_array[4]) ? date('d/m/Y H:i:s', $file_url_array[4]) : '';
+    $date_time = isset($file_url_array[0]) ? date('d/m/Y H:i:s', $file_date_array[0]) : '';
     $table .= '<tr>';
-    $table .= '<td style="width: 96px;">' . $i . '</td>';
-    $table .= '<td style="width: 96px;">' . $file_url_array[1] . '</td>';
-    $table .= '<td style="width: 96px;">' . $frequency_type . '</td>';
-    $table .= '<td style="width: 96px;">' . $frequency_date . '</td>';
-    $table .= '<td style="width: 96px;">' . $date_time . '</td>';
-    $table .= '<td style="width: 96px;"><a href="' . $base_url . '/sites/' . $file_url[1] . '" download> Click to Download </a>' . '</td>';
+    $table .= '<td>' . $i . '</td>';
+    $table .= '<td>' . $file_url_array[1] . '</td>';
+    $table .= '<td>' . $frequency_type . '</td>';
+    $table .= '<td>' . $frequency_date . '</td>';
+    $table .= '<td>' . $date_time . '</td>';
+    $table .= '<td><a href="' . $base_url . '/sites/' . $file_url[1] . '" download> Click to Download </a>' . '</td>';
     $table .= '</tr>';
     $i++;
   }

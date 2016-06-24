@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for related content feature.
+ */
+
+include_once 'feature_for_related_content.features.inc';

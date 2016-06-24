@@ -31,7 +31,7 @@
                 </div>
 
                 <?php print render($content['field_story_redirection_url']); ?>
-                <?php print render($content['field_story_new_title']); ?>
+               
                 <?php print render($content['field_story_redirection_url_titl']); ?>
                 <?php print render($content['field_story_magazine_headline']); ?>
                 <?php print render($content['field_story_magazine_kicker_text']); ?>
