@@ -4094,12 +4094,20 @@ div.node{
   overflow: visible;
 }
 .block-itg-related{
-   padding: 20px;
+    .rel-link{
+        padding: 20px;
+    }
+    .rel-hed{
+        @extend .pdtb-10;
+    }
    a{
        color: #1fb5ad;
    }
    ul{
        @extend .no-bullet;
+       li{
+           padding: 3px 0;
+       }
    }
 }
 .view-manage-users{

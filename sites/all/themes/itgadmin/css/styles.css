@@ -65,7 +65,7 @@ img {
   padding-right: 30px;
 }
 
-.pdtb-10 {
+.pdtb-10, .block-itg-related .rel-hed {
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -4123,11 +4123,14 @@ div.node #comments h2 {
   overflow: visible;
 }
 
-.block-itg-related {
+.block-itg-related .rel-link {
   padding: 20px;
 }
 .block-itg-related a {
   color: #1fb5ad;
+}
+.block-itg-related ul li {
+  padding: 3px 0;
 }
 
 .view-manage-users .confirmation .item-list ul {
