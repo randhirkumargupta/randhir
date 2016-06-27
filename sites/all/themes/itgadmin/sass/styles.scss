@@ -4154,8 +4154,20 @@ div.node{
                 max-width: 100px;
             }
         }
+        #edit-field-survey-start-date{
+            @extend .fleft;
+            width: 360px;
+        }
+        .date-combo{
+            margin: 0;
+            .form-text{
+                width: 100px;
+            }
+        }
     }
     #edit-field-newsl-date[style="display: block;"] + #edit-field-newsl-day + #edit-field-newsl-time, 
+    #edit-field-survey-start-date[style="display: block;"] + #edit-field-newsl-date + #edit-field-newsl-day + #edit-field-newsl-time, 
+    #edit-field-survey-start-date + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time, 
     #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day + #edit-field-newsl-time, 
     #edit-field-newsl-date + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time, 
     #edit-field-newsl-day[style="display: block;"] + #edit-field-newsl-time{
@@ -4164,11 +4176,25 @@ div.node{
             > label{display: none;}
         }
     }
-    #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time{
+    #edit-field-survey-start-date[style="display: block;"] + #edit-field-newsl-date + #edit-field-newsl-day + #edit-field-newsl-time, 
+    #edit-field-survey-start-date + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time{
+        padding-left: 360px;
+    }
+    #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time, 
+    #edit-field-survey-start-date[style="display: none;"] + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time{
         .form-item{
             padding: 0 30px;
             @extend .full;
             > label{display: block;}
         }
+    }
+    #edit-field-survey-start-date[style="display: none;"] + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time{
+        padding-left: 0;
+        .form-type-select .form-select + div.description{
+            left: 365px;
+        }
+    }
+    #edit-field-newsl-time .form-type-select .form-select + div.description{
+        left: 115px;
     }
 }
