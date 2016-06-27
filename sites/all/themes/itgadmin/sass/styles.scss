@@ -615,6 +615,7 @@ ul.ui-autocomplete{
   input[type="text"], select, .form-textarea-wrapper textarea{
     width: 100%;
     max-width: 332px;
+    font-size: 14px;
   }
   .form-actions{
     background-color: #fefafb;
@@ -4139,4 +4140,35 @@ div.node{
     left: 680px;
     position: absolute;
     top: 90px;
+}
+.node-newsletter-form{
+    #newsletter-date-time-wrapper{
+        @extend .dib;
+        @extend .full;
+        .form-item{
+            @extend .fleft;
+            width: 362px;
+            margin: 0;
+            padding-right: 8px;
+            .form-select{
+                max-width: 100px;
+            }
+        }
+    }
+    #edit-field-newsl-date[style="display: block;"] + #edit-field-newsl-day + #edit-field-newsl-time, 
+    #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day + #edit-field-newsl-time, 
+    #edit-field-newsl-date + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time, 
+    #edit-field-newsl-day[style="display: block;"] + #edit-field-newsl-time{
+        .form-item{
+            padding: 0;
+            > label{display: none;}
+        }
+    }
+    #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time{
+        .form-item{
+            padding: 0 30px;
+            @extend .full;
+            > label{display: block;}
+        }
+    }
 }
