@@ -13,6 +13,8 @@ function itg_mobile_services_feed_generator_of_contents($node) {
   $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
   $service_clients = $node->field_footer[LANGUAGE_NONE][0]['value'];
   $frequency = $node->field_service_frequency[LANGUAGE_NONE][0]['value'];
+  $frequency_date_arr = explode(' ', $node->field_service_frequency_date[LANGUAGE_NONE][0]['value']);
+  $today_date = date('Y-m-d');
 
   // load service node  
   $service_details = node_load($association_nid);
@@ -92,18 +94,30 @@ function itg_mobile_services_feed_generator_of_contents($node) {
           // 1. Fetch web URL (our server)
           case '1':
             $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
-            itg_mobile_web_url_mobile($service_fetch_link, $file_path);
+            if ($frequency_date_arr[0] == $today_date) {
+              itg_mobile_web_url_mobile($service_fetch_link, $file_path, 1);
+            }
+            else {
+              itg_mobile_web_url_mobile($service_fetch_link, $file_path, 0);
+            }
+
             break;
           case 2: // 2. Via FTP location
-            $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
-            $ftp_username = isset($client_info->field_ftp_username[LANGUAGE_NONE]) ? $client_info->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
-            $ftp_password = isset($client_info->field_ftp_password[LANGUAGE_NONE]) ? $client_info->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
-            $data = array('ftp_ip_address' => $ftp_ip_address, 'ftp_username' => $ftp_username, 'ftp_password' => $ftp_password);
-            itg_mobile_services_ftp_feeds($data, $file_path);
+            if ($frequency_date_arr[0] == $today_date) {
+              $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
+              $ftp_username = isset($client_info->field_ftp_username[LANGUAGE_NONE]) ? $client_info->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
+              $ftp_password = isset($client_info->field_ftp_password[LANGUAGE_NONE]) ? $client_info->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
+              $data = array('ftp_ip_address' => $ftp_ip_address, 'ftp_username' => $ftp_username, 'ftp_password' => $ftp_password);
+              itg_mobile_services_ftp_feeds($data, $file_path);
+            }
+
             break;
           case 3: // 3. Via Email
-            $service_email_address = isset($client_info->field_service_email_address[LANGUAGE_NONE]) ? $client_info->field_service_email_address[LANGUAGE_NONE][0]['value'] : '';
-            itg_mobile_services_mail($service_email_address, $file_path);
+            if ($frequency_date_arr[0] == $today_date) {
+              $service_email_address = isset($client_info->field_service_email_address[LANGUAGE_NONE]) ? $client_info->field_service_email_address[LANGUAGE_NONE][0]['value'] : '';
+              itg_mobile_services_mail($service_email_address, $file_path);
+            }
+
             break;
         }
 
@@ -111,8 +125,12 @@ function itg_mobile_services_feed_generator_of_contents($node) {
       }
     }
 
-    itg_mobile_cron_after_feed_generate($node, $client_array, $content_count);
-    //return $file_path . '/' . $data->title . '.xml';
+    if ($frequency_date_arr[0] == $today_date) {
+      itg_mobile_cron_after_feed_generate($node, $client_array, $content_count, $file_path, 1);
+    }
+    else {
+      itg_mobile_cron_after_feed_generate($node, $client_array, $content_count, $file_path, 0);
+    }
   }
 }
 
@@ -241,7 +259,7 @@ function validate_content_count($nid) {
  * @param int $content_count
  * @return type $query
  */
-function itg_mobile_cron_after_feed_generate($node, $client_array, $content_count) {
+function itg_mobile_cron_after_feed_generate($node, $client_array, $content_count, $file_path, $status) {
   // get service id  
   $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
   $frequency_from_date = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value'];
@@ -272,6 +290,7 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
       'file_name' => $file_name,
       'service_content_count' => $content_count,
       'clients' => $client,
+      'file_path' => $file_path
     );
 
     $details = serialize($details_array);
@@ -289,7 +308,7 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
         'last_cron_time' => $scheduler_time,
         'scheduler_time' => $scheduler_time,
         'cron_details' => $details,
-        'status' => true
+        'status' => $status
       ));
       $query->execute();
     }
@@ -302,6 +321,7 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
       'file_name' => $file_name,
       'service_content_count' => $content_count,
       'clients' => $client_array,
+      'file_path' => $file_path
     );
 
     $details = serialize($details_array);
@@ -314,7 +334,7 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
       'last_cron_time' => $scheduler_time,
       'scheduler_time' => $scheduler_time,
       'cron_details' => $details,
-      'status' => true
+      'status' => $status
     ));
     $query->execute();
   }
@@ -326,14 +346,14 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
  * @param string $file_path
  * @return type $query
  */
-function itg_mobile_web_url_mobile($service_fetch_link, $file_path) {
+function itg_mobile_web_url_mobile($service_fetch_link, $file_path, $status) {
 
   $query = db_insert('itg_syndication_feed_url');
   $query->fields(array(
     'xml_name' => $file_path,
     'client_feed_url' => $service_fetch_link,
     'created_date' => time(),
-    'status' => 1
+    'status' => $status
   ));
   $query->execute();
 }
@@ -349,6 +369,7 @@ function itg_mobile_get_feed_byurl() {
   $itg_query = db_select('itg_syndication_feed_url', 'feed');
   $itg_query->fields('feed', array('id', 'xml_name', 'created_date'));
   $itg_query->condition('feed.client_feed_url', $url);
+  $itg_query->condition('feed.status', 1, '=');
   $itg_query->orderBy('created_date', 'DESC'); //ORDER BY created
   $itg_result = $itg_query->execute()->fetchAll();
 
@@ -384,4 +405,74 @@ function itg_mobile_get_feed_byurl() {
   }
   $table .= '</tbody>';
   return $table .= '</table>';
+}
+
+/**
+ * function itg_mobile_services_cron().
+ * @param int $nid
+ * @return type $record
+ */
+function itg_mobile_services_cron() {
+  $query = db_select('itg_cron_time_scheduler', 's');
+  $query->fields('s', array('content_id', 'cron_details', 'scheduler_time'));
+  $query->condition('s.cron_type', 'vas_service_content', '=');
+  $query->condition('s.status', 0, '=');
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $content_id = $record['content_id'];
+    $cron_details = $record['cron_details'];
+    $scheduler_time = $record['scheduler_time'];
+    // service association id
+    $node = node_load($content_id);
+    $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
+    $get_clients_id = get_clients_id($association_nid);
+    // client ids
+    $client_id_array = $get_clients_id['target_id'];
+    $today_date = strtotime("now");
+
+    if ($scheduler_time <= $today_date) {
+      $data = unserialize($cron_details);
+      $file_path = $data['file_path'];
+
+      db_update('itg_cron_time_scheduler')
+          ->fields(array(
+            'status' => 1
+          ))
+          ->condition('content_id', $content_id)
+          ->execute();
+      foreach ($client_id_array as $client_id) {
+        $client_info = node_load($client_id);
+        if (is_object($client_info) && count($client_info) > 0) {
+          $content_sharing_mode = isset($client_info->field_content_sharing_mode[LANGUAGE_NONE]) ? $client_info->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] : '';
+          // Decide sharing mode
+          switch ($content_sharing_mode) {
+            // 1. Fetch web URL (our server)
+            case '1':
+              $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
+
+              db_update('itg_syndication_feed_url')
+                  ->fields(array(
+                    'status' => 1
+                  ))
+                  ->condition('client_feed_url', $service_fetch_link)
+                  ->execute();
+              break;
+            case 2: // 2. Via FTP location
+              $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
+              $ftp_username = isset($client_info->field_ftp_username[LANGUAGE_NONE]) ? $client_info->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
+              $ftp_password = isset($client_info->field_ftp_password[LANGUAGE_NONE]) ? $client_info->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
+              $data = array('ftp_ip_address' => $ftp_ip_address, 'ftp_username' => $ftp_username, 'ftp_password' => $ftp_password);
+              itg_mobile_services_ftp_feeds($data, $file_path);
+              break;
+            case 3: // 3. Via Email
+              $service_email_address = isset($client_info->field_service_email_address[LANGUAGE_NONE]) ? $client_info->field_service_email_address[LANGUAGE_NONE][0]['value'] : '';
+              itg_mobile_services_mail($service_email_address, $file_path);
+              break;
+          }
+        }
+      }
+    }
+  }
+  return true;
 }
