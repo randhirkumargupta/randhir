@@ -337,9 +337,9 @@ function itgadmin_preprocess_page(&$vars) {
   }
    
   // Add tpl for related content view page
-//  if (arg(0) == 'related-content') {
-//    $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
-//  }
+  if (arg(0) == 'related-content') {
+    $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
+  }
   
   //Add tpl for event registration view page
   if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit') {
