@@ -23,13 +23,13 @@ function isValidFeed($feed_type, $body) {
  * @param array $data
  */
 function generate_custom_pattern_feed($data) {
- 
+
     $error = array();
     $nids = isset($data['syndication']) ? unserialize($data['syndication']) : array();
     $client = isset($data['client_title']) ? $data['client_title'] : "";
     $content_type = isset($data['web_property']) ? $data['web_property'] : "";
     $feed_type = isset($data['feed_type']) ? $data['feed_type'] : "";
-    $xml        =   "<root>";
+    $xml = "<root>";
     if (count($data) && (!empty($nids) && !empty($client) && !empty($content_type))) {
         /* get pattern of specific client for specific content_type */
         $pattern = get_client_feed_pattern($client, $content_type, $feed_type);
@@ -39,17 +39,17 @@ function generate_custom_pattern_feed($data) {
         $today = date('Y-M-d-h-m-s');
         /* Iterate for nodes */
         if (!empty($pattern['body_value'])) {
-            foreach ($nids as $nid) {                
+            foreach ($nids as $nid) {
                 $xml .= get_custom_feeds_files($nid, $pattern['body_value']);
                 $filename = uniqid() . "-$content_type-date-$today.xml";
                 watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
             }
-            $xml    .=  "</root>";
-            $file   = file_save_data($xml, "$feed_dir/" . $filename);
-            
-            $file_path['file_path'] =  $feed_dir.'/' . $filename;
-            $file_path['file_name'] =  $filename;
-            
+            $xml .= "</root>";
+            $file = file_save_data($xml, "$feed_dir/" . $filename);
+
+            $file_path['file_path'] = $feed_dir . '/' . $filename;
+            $file_path['file_name'] = $filename;
+
             return $file_path;
         } else {
             drupal_set_message(t('Pattern not found.'), 'error');
@@ -214,9 +214,9 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
                     $required_value = $uid_values->name;
                     break;
                 case 'value':
-                    /* Its very importent to convert text into xml standard so using htmlspecialchars with ENT_XML1*/
+                    /* Its very importent to convert text into xml standard so using htmlspecialchars with ENT_XML1 */
                     $required_value[] = htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8');
-                    break; 
+                    break;
             }
         }
     }
@@ -228,9 +228,11 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
  * @return array
  */
 function itg_syndication_theme() {
+    $theme_path = drupal_get_path('theme', $GLOBALS['theme']);
     return array(
         'syndication_feed_variables' => array(
-            'template' => 'templates/sydication_feed_variables',
+            'template' => 'sydication_feed_variables',
+            'path' => drupal_get_path('theme', $GLOBALS['theme']) . '/templates/',
         ),
     );
 }
@@ -241,21 +243,20 @@ function itg_syndication_theme() {
  * @param type $content_type
  * @return string
  */
-
-function get_default_feed_pattern($feed_type,$content_type) {
-    $feed_assoc_array   =   "";
-    $labelsArray        =   get_lebels_of_content_type_fields($content_type);
+function get_default_feed_pattern($feed_type, $content_type) {
+    $feed_assoc_array = "";
+    $labelsArray = get_lebels_of_content_type_fields($content_type);
     switch ($feed_type) {
         case "xml":
-            foreach($labelsArray as $field_name=>$label) {
-                $label_trim     =   str_replace(' ', '', $label);
-                $label_small    =   strtolower($label_trim);
-                /* Special charcter is replaced for tags*/
-                $feed_assoc_array[preg_replace('/[^a-zA-Z0-9_.]/', '', $label_small)] =   "{{{{$field_name}}}}";
+            foreach ($labelsArray as $field_name => $label) {
+                $label_trim = str_replace(' ', '', $label);
+                $label_small = strtolower($label_trim);
+                /* Special charcter is replaced for tags */
+                $feed_assoc_array[preg_replace('/[^a-zA-Z0-9_.]/', '', $label_small)] = "{{{{$field_name}}}}";
             }
             break;
     }
-    return assocArrayToXML($content_type,$feed_assoc_array);
+    return assocArrayToXML($content_type, $feed_assoc_array);
 }
 
 /**
@@ -264,9 +265,9 @@ function get_default_feed_pattern($feed_type,$content_type) {
  * @param type $ar
  * @return type xml
  */
-function assocArrayToXML($root_element_name,$ar) { 
-    $xml = new SimpleXMLElement("<{$root_element_name}></{$root_element_name}>"); 
-    $f = create_function('$f,$c,$a',' 
+function assocArrayToXML($root_element_name, $ar) {
+    $xml = new SimpleXMLElement("<{$root_element_name}></{$root_element_name}>");
+    $f = create_function('$f,$c,$a', ' 
             foreach($a as $k=>$v) { 
                 if(is_array($v)) { 
                     $ch=$c->addChild($k); 
@@ -274,10 +275,10 @@ function assocArrayToXML($root_element_name,$ar) {
                 } else { 
                     $c->addChild($k,$v); 
                 } 
-            }'); 
-    $f($f,$xml,$ar); 
-    $real_xml   =       $xml->asXML(); 
-    $customXML  =       substr($real_xml, strpos($real_xml, '?'.'>') + 2);
+            }');
+    $f($f, $xml, $ar);
+    $real_xml = $xml->asXML();
+    $customXML = substr($real_xml, strpos($real_xml, '?' . '>') + 2);
     return $customXML;
 }
 
@@ -287,12 +288,12 @@ function assocArrayToXML($root_element_name,$ar) {
  * @return type
  */
 function get_lebels_of_content_type_fields($content_type) {
-    $fieldsArray    =   array();
-    $tags           =   array();
-    if(isset($content_type)) {
-        $fieldsArray  =  fieldsArray($content_type);
+    $fieldsArray = array();
+    $tags = array();
+    if (isset($content_type)) {
+        $fieldsArray = fieldsArray($content_type);
         foreach ($fieldsArray as $key => $field_name) {
-             $tags[$field_name]    =   get_lebel_of_field('node',$content_type, $field_name);
+            $tags[$field_name] = get_lebel_of_field('node', $content_type, $field_name);
         }
     }
     return $tags;
@@ -305,16 +306,15 @@ function get_lebels_of_content_type_fields($content_type) {
  * @param type $field_name
  * @return type
  */
-function get_lebel_of_field($entity_type='node',$bundle_name,$field_name) {
-    if(isset($entity_type) && isset($bundle_name) && isset($field_name)) {
-        $info   = field_info_instance($entity_type, $field_name, $bundle_name);
-        $label  = $info['label'];
-        return  $label;
-    }else{
-        return ;
+function get_lebel_of_field($entity_type = 'node', $bundle_name, $field_name) {
+    if (isset($entity_type) && isset($bundle_name) && isset($field_name)) {
+        $info = field_info_instance($entity_type, $field_name, $bundle_name);
+        $label = $info['label'];
+        return $label;
+    } else {
+        return;
     }
 }
-
 
 /**
  *  hook_form_FORM_ID_alter
@@ -327,30 +327,55 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
            jQuery(".variables-tabs div").css("display","none");
            jQuery(".variables-tabs div#tab-"+selected).css("display","block");
         });
+        jQuery(".vertical-tabs").css("display","none");
+        jQuery("#edit-body-und-0-value").css({"min-width":"900px","height":"400px"});
     });', 'inline');
-    drupal_add_js(drupal_get_path('module', 'itg_syndication') .'/js/itg_syndication_custom_feed.js', 'file');
-    $content_types = array('story', 'cooking_tips', 'recipe', 'photogallery', 'food_news');
-    if (isset($form_state['values'])) {
-        $form_state['body']['#value'] = 'I HATE chickens';
-      }
-    /* Collecting all fields of $content_types in assocative array */
-    foreach ($content_types as $CT) {
-        $data[$CT] = fieldsArray($CT);
-    }
+
+    drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', 'file');
+
     /* Client list */
     $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#options'] = itg_syndication_get_client();
     $form['field_syndication_feed_clients']['#validated'] = TRUE;
-    /* Extra field for displaying all the predefine variables */
-    $form['variables'] = array(
+
+    $form['pre_define_vars'] = array(
         '#type' => 'markup',
-        '#prefix' => '<strong>Pre-define variables</strong><div class="poll-main-wrap">',
-        '#suffix' => '</div><span class="poll-ans-error"></span>',
-        '#markup' => theme("syndication_feed_variables", array("data" => $data)),
+        '#prefix' => '<div id="pre_define_vars_replace_wrapper">',
+        '#suffix' => '</div>',
+        '#markup' => '',
     );
-    
-    $form['field_syndication_feed_type'][LANGUAGE_NONE]['#ajax']=array(
-        'callback'  => 'get_default_feed_pattern_callback',
-        'wrapper'   =>  'body-wrapper',
+
+    $form['actions']['cancle'] = array(
+        '#markup' => l(t('Cancel'), $_GET['destination'], array(
+            'attributes' => array(
+                'class' => 'button'
+            )
+        )),
+        '#weight' => 21,
+        '#value' => t('Cancel')
+    );
+
+    $form['field_syndication_feed_type'][LANGUAGE_NONE]['#ajax'] = array(
+        'callback' => 'get_default_feed_pattern_callback',
+        'wrapper' => 'body-wrapper',
+    );
+
+    $form['field_syndication_feed_content'][LANGUAGE_NONE]['#ajax'] = array(
+        'callback' => '_pre_define_vars_callback',
+        'method' => 'replace', // the data would replace the field
+        'effect' => 'fade',
+        'event' => 'change', // On change of the selection this action would take place
+    );
+    unset($form['actions']['preview']);
+}
+
+function _pre_define_vars_callback($form, &$form_state) {
+    $CT = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
+    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($CT),"content_type"=>$CT));
+    return array(
+        '#type' => 'ajax',
+        '#commands' => array(
+            ajax_command_replace("#pre_define_vars_replace_wrapper", render($form['pre_define_vars'])),
+        )
     );
 }
 
@@ -361,20 +386,19 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
  * @return commands
  */
 function get_default_feed_pattern_callback($form, &$form_state) {
-    $feed_type      =   $form_state['values']['field_syndication_feed_type']['und'][0]['value'];
-    $content_type   =   $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
-    
-    if(!isset($content_type) && empty($content_type)) {
+    $feed_type = $form_state['values']['field_syndication_feed_type']['und'][0]['value'];
+    $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
+
+    if (!isset($content_type) && empty($content_type)) {
         $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Pleaes Select Content Type</span>');
         drupal_get_messages();
         return array('#type' => 'ajax', '#commands' => $commands);
     } else {
-        $myCustomParameters =   get_default_feed_pattern($feed_type,$content_type);
-        $commands[]         =   ajax_command_invoke(NULL, "feed_pattern", array($myCustomParameters) );
+        $myCustomParameters = get_default_feed_pattern($feed_type, $content_type);
+        $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($myCustomParameters));
         return array(
-                '#type' => 'ajax',
-                '#commands' => $commands,
+            '#type' => 'ajax',
+            '#commands' => $commands,
         );
     }
-
 }
