@@ -228,11 +228,10 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
  * @return array
  */
 function itg_syndication_theme() {
-    $theme_path = drupal_get_path('theme', $GLOBALS['theme']);
     return array(
         'syndication_feed_variables' => array(
-            'template' => 'sydication_feed_variables',
-            'path' => drupal_get_path('theme', $GLOBALS['theme']) . '/templates/',
+            'template' => '/templates/sydication_feed_variables',
+            //'path' => ,
         ),
     );
 }
