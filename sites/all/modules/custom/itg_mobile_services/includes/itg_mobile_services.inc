@@ -186,29 +186,33 @@ function get_content_sharing_mode($entity_id) {
  * @param array $file
  */
 function itg_mobile_services_ftp_feeds($data, $file) {
+  try {
+    $file_array = explode('/', $file);
+    $last = count($file_array) - 1;
+    $remote_file = $file_array[$last]; // 'readmefeeds.txt';
 
-  $file_array = explode('/', $file);
-  $last = count($file_array) - 1;
-  $remote_file = $file_array[$last]; // 'readmefeeds.txt';
+    $ftp_server = $data['ftp_ip_address'];
+    $ftp_user_name = $data['ftp_username'];
+    $ftp_user_pass = $data['ftp_password'];
 
-  $ftp_server = $data['ftp_ip_address'];
-  $ftp_user_name = $data['ftp_username'];
-  $ftp_user_pass = $data['ftp_password'];
-
-  // set up basic connection
-  $conn_id = ftp_connect($ftp_server);
-  // login with username and password
-  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
-  // upload a file
-  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
-    echo "successfully uploaded $file\n";
+    // set up basic connection
+    $conn_id = ftp_connect($ftp_server);
+    // login with username and password
+    $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+    // upload a file
+    if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+      echo "successfully uploaded $file\n";
+    }
+    else {
+      echo "There was a problem while uploading $file\n";
+    }
+    // close the connection
+    ftp_close($conn_id);
   }
-  else {
-    echo "There was a problem while uploading $file\n";
+  catch (Exception $ex) {
+    watchdog('mobile_services', 'Message: !message', array('!message' => $e->getMessage()), WATCHDOG_ERROR);
+    drupal_set_message(t("Sorry, that didn't work. The name must be unique."), 'error');
   }
-
-  // close the connection
-  ftp_close($conn_id);
 }
 
 /**
@@ -348,32 +352,33 @@ function itg_mobile_get_feed_byurl() {
   $itg_query->orderBy('created_date', 'DESC'); //ORDER BY created
   $itg_result = $itg_query->execute()->fetchAll();
 
-  $table = '<table cellpadding="0" cellspacing="0" width="100%" style="border: 1px;">';
+  $table = '<table class="views-table">';
   $table .= '<tbody>';
   $table .= '<tr>';
-  $table .= '<th style="width: 96px;">SNo.</th>';
-  $table .= '<th style="width: 96px;">Service Name</th>';
-  $table .= '<th style="width: 96px;">Frequency</th>';
-  $table .= '<th style="width: 96px;">Frequency Date</th>';
-  $table .= '<th style="width: 96px;">Time</th>';
-  $table .= '<th style="width: 96px;">Link</th>';
+  $table .= '<th>SNo.</th>';
+  $table .= '<th>Service Name</th>';
+  $table .= '<th>Frequency</th>';
+  $table .= '<th>Frequency Date</th>';
+  $table .= '<th>Time</th>';
+  $table .= '<th>Link</th>';
   $table .= '</tr>';
   $i = 1;
   foreach ($itg_result as $itg_val) {
     $xml_date = date('d/m/Y', $itg_val->created_date);
     $file_url = explode('sites/', $itg_val->xml_name);
     $file_url_array = explode('_', $file_url[1]);
+    $file_date_array = explode('.', $file_url_array[3]);
     $frequency_type_arr = explode('/', $file_url_array[0]);
     $frequency_type = ($frequency_type_arr[count($frequency_type_arr) - 1]);
     $frequency_date = $file_url_array[2];
-    $date_time = isset($file_url_array[4]) ? date('d/m/Y H:i:s', $file_url_array[4]) : '';
+    $date_time = isset($file_url_array[0]) ? date('d/m/Y H:i:s', $file_date_array[0]) : '';
     $table .= '<tr>';
-    $table .= '<td style="width: 96px;">' . $i . '</td>';
-    $table .= '<td style="width: 96px;">' . $file_url_array[1] . '</td>';
-    $table .= '<td style="width: 96px;">' . $frequency_type . '</td>';
-    $table .= '<td style="width: 96px;">' . $frequency_date . '</td>';
-    $table .= '<td style="width: 96px;">' . $date_time . '</td>';
-    $table .= '<td style="width: 96px;"><a href="' . $base_url . '/sites/' . $file_url[1] . '" download> Click to Download </a>' . '</td>';
+    $table .= '<td>' . $i . '</td>';
+    $table .= '<td>' . $file_url_array[1] . '</td>';
+    $table .= '<td>' . $frequency_type . '</td>';
+    $table .= '<td>' . $frequency_date . '</td>';
+    $table .= '<td>' . $date_time . '</td>';
+    $table .= '<td><a href="' . $base_url . '/sites/' . $file_url[1] . '" download> Click to Download </a>' . '</td>';
     $table .= '</tr>';
     $i++;
   }

@@ -147,6 +147,10 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
     $form['field_newsl_date']['und']['#title'] = 'Date <span class="form-required" title="This field is required.">*</span>';
     $form['field_newsl_schedule']['und']['#title'] = 'Schedule <span class="form-required" title="This field is required.">*</span>';
     
+    $form['field_survey_start_date']['#prefix'] = '<div id="newsletter-date-time-wrapper">';
+    $form['field_newsl_time']['und']['#suffix'] = '</div>';
+
+    
     //Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
     $form['actions']['submit']['#submit'][] ='itg_newsletter_submit_handler_for_redirect';
     
@@ -220,14 +224,9 @@ function itg_newsletter_form_after_build($form, &$form_state){
 
       $form['field_newsl_add_news']['und'][$i]['get_content_btn'] = array(
              '#type' => 'item',
-             '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div>',
+             '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div><span class="dib vtop newsletter-loader"></span>',
              '#weight' => 3,
       );
-//      $form['field_newsl_add_news']['und'][$i]['loader'] = array(
-//             '#type' => 'item',
-//             '#markup' => '<div style="width:200px" id ="newsletter-loader"></div>',
-//             '#weight' => 4,
-//      );
       unset($form['field_newsl_add_news'][LANGUAGE_NONE][$i]['field_news_ctype']);
     }
  }

@@ -32,7 +32,7 @@ function features_for_survey_field_group_info() {
       'label' => 'Basic Settings',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => '',
+        'id' => 'basicdetails',
         'classes' => 'itg-group-field',
         'description' => '',
         'show_label' => '1',

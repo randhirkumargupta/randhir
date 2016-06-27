@@ -635,23 +635,19 @@
         $(this).parents('td').find('.field-name-field-syndication-set-day-month').show();
       }
     });
-//    var news_content_el = $('.field-name-field-news-type').find('.form-radio');
-    function newsContent(){
-      var radioCheck = $('.field-name-field-news-type').find('.form-radio').is(':checked');
-      var radioVal = $('.field-name-field-news-type').find('.form-radio:checked').val();
-      if(radioCheck == true && radioVal == 'internal'){
-        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.field-name-field-news-external-url').hide();
-        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.field-name-field-news-cid').show();
-        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.newsletter-get-content').parent().show();
+    
+    $('.form-field-name-field-newsl-add-news .field-name-field-news-type').each(function(){
+        var radioVal = $(this).find('.form-radio:checked').val();
         
-      }
-      if(radioCheck == true && radioVal == 'external'){
-        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.field-name-field-news-cid').hide();
-        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.field-name-field-news-external-url').show();
-        $('.field-name-field-news-type').find('.form-radio').parents('td').find('.newsletter-get-content').parent().hide();
-      }
-    }
-    newsContent();
+        if (radioVal == 'internal') {
+            $(this).find('.form-radio').parents('td').find('.field-name-field-news-external-url').hide();
+
+        }
+        if (radioVal == 'external') {
+            $(this).find('.form-radio').parents('td').find('.field-name-field-news-cid').hide();
+            $(this).find('.form-radio').parents('td').find('.newsletter-get-content').parent().hide();
+        }
+    });
     
     $('.field-name-field-news-type').on('change', '.form-radio', function(){
       var radioCheck = $(this).is(':checked');

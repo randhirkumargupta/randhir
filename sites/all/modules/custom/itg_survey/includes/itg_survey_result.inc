@@ -41,7 +41,7 @@ function itg_survey_result() {
         }
 
       $output.$num .= '<div><strong>Question-' . $sn.'. ' . $question . '?</strong></div>
-      <table style="width:100%">
+      <table style="width:100%" class="views-table">
         <tr>
         <th>Answers</th>
         <th>Total Vote</th>

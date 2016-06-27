@@ -1,0 +1,61 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Related module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * 
+ * @access public
+ * @return array
+ */
+function itg_related_schema() {
+  $schema = array();      
+  $schema['itg_related_search'] = array(
+    'description' => 'related search unique ID!',
+    'fields' => array(
+      'id' => array(
+        'description' => 'id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'search_title' => array(
+        'description' => 'search title',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+     'search_path' => array(
+        'description' => 'search url path',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'ntype' => array(
+        'description' => 'content type',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'created' => array(
+        'description' => t('Created search date'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'changed' => array(
+        'description' => t('updated search date'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}
