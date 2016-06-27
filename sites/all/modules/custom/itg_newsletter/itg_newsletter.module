@@ -220,14 +220,9 @@ function itg_newsletter_form_after_build($form, &$form_state){
 
       $form['field_newsl_add_news']['und'][$i]['get_content_btn'] = array(
              '#type' => 'item',
-             '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div>',
+             '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div><span class="dib vtop newsletter-loader"></span>',
              '#weight' => 3,
       );
-//      $form['field_newsl_add_news']['und'][$i]['loader'] = array(
-//             '#type' => 'item',
-//             '#markup' => '<div style="width:200px" id ="newsletter-loader"></div>',
-//             '#weight' => 4,
-//      );
       unset($form['field_newsl_add_news'][LANGUAGE_NONE][$i]['field_news_ctype']);
     }
  }

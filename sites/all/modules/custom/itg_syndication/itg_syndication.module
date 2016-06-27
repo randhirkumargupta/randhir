@@ -1,5 +1,6 @@
 <?php
-//check file url flow
+
+
 module_load_include('inc', 'itg_syndication', 'includes/itg_syndication.manual_feed');
 
 module_load_include('inc', 'itg_syndication', 'includes/itg_syndication');
@@ -20,19 +21,6 @@ function itg_syndication_menu() {
       'page callback' => 'get_syndication_feed_byurl',
       'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,      
-  );
-  
-  $items['syndication_test'] = array(      
-      'page callback' => 'get_syndication_test',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,      
-  );
-
-  $items['syndication/feed-test'] = array(
-    'page callback' => 'feed_test',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_syndication.inc',
-    'type' => MENU_CALLBACK,
   );
 
   return $items;
@@ -55,9 +43,9 @@ function itg_syndication_permission() {
 
 /**
  * Implements hook_form_FORMID_alter().
- * @param type $form
- * @param type $form_state
- * @param type $form_id  
+ * @param array $form
+ * @param array $form_state
+ * @param array $form_id  
  */
 function itg_syndication_form_syndication_client_node_form_alter(&$form, &$form_state, $form_id) {
   $form['#after_build'][] = 'itg_syndication_after_build';
@@ -274,8 +262,8 @@ function itg_syndication_rule_after_build($form, &$form_state) {
 
 /**
 * Ajax callback for syndication_mode dropdown
-* @param type $form
-* @param type $form_state
+* @param array $form
+* @param array $form_state
 */
 function itg_syndication_mode_ajax_callback($form, $form_state) {
   return $form['field_syndication_rule_details'];   
@@ -284,8 +272,8 @@ function itg_syndication_mode_ajax_callback($form, $form_state) {
 
 /**
 * Ajax callback for syndication_mode dropdown
-* @param type $form
-* @param type $form_state
+* @param array $form
+* @param array $form_state
 */
 function itg_syndication_delivery_mode_ajax_callback($form, $form_state) {  
   return $form['client_delivery_mode'];   
@@ -294,10 +282,8 @@ function itg_syndication_delivery_mode_ajax_callback($form, $form_state) {
 
 /**
  * Get mode for syndication .
- * @param string $title
- * @param string $sharing_mode
- * @param integer $nid
- * @return integer
+ * @param string $client_name
+ * @return array
  */
 function itg_syndication_get_mode($client_name) {
   
@@ -337,10 +323,9 @@ function itg_syndication_get_mode($client_name) {
 
 /**
  * Check duplicate client name.
- * @param string $title
- * @param string $sharing_mode
- * @param integer $nid
- * @return integer
+ * @param string $client_title
+ * @param string $client_description
+ * @return integer $nid
  */
 function itg_syndication_check_duplicate($client_title, $client_description) { 
   $itg_query = db_select('node', 'n');
@@ -368,9 +353,8 @@ function itg_syndication_check_client_rule($client_title) {
 }
 
 /**
- * Callback function for client list
- * @param string $voc_name Vocabulary name
- * @return array
+ * Get client for syndication 
+ * @return array $data
  */
 function itg_syndication_get_client() {
   
@@ -473,9 +457,8 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
 
 
 /**
- * Callback function for Issue list
- * @param string $voc_name Vocabulary name
- * @return array
+ * function for Issue list
+ * @return array $data
  */
 function itg_syndication_get_issue_list() {
   
@@ -498,7 +481,7 @@ function itg_syndication_get_issue_list() {
 
 /**
  * function for syndication content details
- * @return array
+ * @return array $data
  */
 function get_syndication_content_details() {
   $current_time = time();
@@ -534,7 +517,9 @@ function get_syndication_content_details() {
 
 /**
  * function for syndication content id
- * @return array
+ * @param array $data
+ * @param string $created_date
+ * @return string $file_path
  */
 function get_content_id_for_syndication($data, $created_date) {
   $content_id = array();
@@ -570,6 +555,7 @@ function get_content_id_for_syndication($data, $created_date) {
 
 /**
  * Implement hook_node_insert()
+ * @param Object $node
  */
 function itg_syndication_node_insert($node) {
   
@@ -581,6 +567,7 @@ function itg_syndication_node_insert($node) {
 
 /**
  * Implement hook_node_insert()
+ * @param Object $node
  */
 function itg_syndication_node_update($node) {
   
@@ -598,7 +585,7 @@ function itg_syndication_node_update($node) {
 
 /**
  * save cron details for feed of syndication content
- * @param array $node 
+ * @param Object $node 
  */
 
 function save_cron_details_of_syndication($node) {
@@ -654,9 +641,9 @@ function save_cron_details_of_syndication($node) {
 
 /**
  * Get web url for client
- * @param array $node
- * @param  $dir 
- * @return url
+ * @param Object $node
+ * @param  string $dir 
+ * @return string url
  */
 function get_weburl_for_syndication($dir, $node) {  
   global $base_url;
@@ -672,7 +659,7 @@ function get_weburl_for_syndication($dir, $node) {
 
 /**
  * Implementation of hook_node_presave
- * @param array $node 
+ * @param Object $node 
  */
 function itg_syndication_node_presave($node) {
   if ($node->type =='syndication_client') {
@@ -686,16 +673,16 @@ function itg_syndication_node_presave($node) {
       $web_url = get_weburl_for_syndication('syndication/feed', $node);
       $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'];
     }else {
-      $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = NULL;
+      $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = '';
     }    
   }
 }
 
 /**
  * function for cron time update
- * @param array $node
- * @param array $id
- * @param array $cron_time 
+ * @param array $data
+ * @param integer $id
+ * @param string $cron_time 
  */
 function update_cron_time_after_feed_generate($data, $id, $cron_time) {
   if ($data['frequency'] == 'Daily') {      
@@ -746,6 +733,10 @@ function get_syndication_feed_byurl() {
 
 /**
  * function for gat cron time
+ * @param string $frequency
+ * @param string $time_rule
+ * @param string $day
+ * @param string $dt
  * @return array time
  */
 function get_cron_time($frequency, $time_rule, $day = NULL, $dt = NULL) {
@@ -775,64 +766,26 @@ function get_cron_time($frequency, $time_rule, $day = NULL, $dt = NULL) {
   
 }
 
-//function for test
-function get_syndication_test() {
-  $arg1 = arg(1);
-  $file_path = drupal_realpath('public://').'/xml/syndication__13-06-2016_49c1cf829fc81d0e1c9bde594e74571279c9af5a.xml'; 
-  if ($arg1 == 'ftp') {  
-    $file = $file_path;
-    $remote_file = 'xml/syndication__13-06-2016_49c1cf829fc81d0e1c9bde594e74571279c9af5a.xml';
-    $ftp_server = 'test.kelltontech.net';
-    $ftp_user_name = 'ftptest1';
-    $ftp_user_pass = 'FtpTEst@123';  
-    // set up basic connection
-    $conn_id = ftp_connect($ftp_server);
-    // login with user$file_pathname and password
-    $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
-    // upload a file  
-    if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
-     echo "successfully uploaded $file\n";
-    } else {
-     echo "There was a problem while uploading $file\n";
-    }
+/**
+ * Implements hook_menu().
+ * @param Object $node
+ * @param string $view_mode
+ * @param string $langcode
+ */
 
-    // close the connection
-    ftp_close($conn_id);
-
-    } else if ($arg1 == 'email') {
-         $attachment = array(
-          'filepath' => $file_path,
-        );
-
-    $tomail = 'shravan.kumar@kelltontech.com';
-    $params = array(
-      'key' => 'itg_syndication',
-      'to' => $tomail,
-      'from' => 'noreply@indiatoday.com',
-      'subject' => 'Test email',
-      'body' => 'test.',
-      'attachment' => $attachment,
-      'headers' => array(
-        'MIME-Version: 1.0' . "\r\n",
-        'Content-type: text/html; charset=iso-8859-1' . "\r\n",
-        'To: '.$tomail . "\r\n",
-        'From: India Today <noreply@indiatoday.com>' . "\r\n",
-      ),
-    );
-    $language = language_default();
-    drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);    
-  }
-  
-}
-
-function itg_syndication_node_view($node, $view_mode, $langcode) {
+function itg_syndication_node_view($node, $view_mode, $langcode) { 
   if ($node->type == 'syndication_client') {
+    drupal_set_title($node->field_syndication_client_title[LANGUAGE_NONE][0]['taxonomy_term']->name);
     if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
       $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']));
     }
     if (empty($node->field_syndication_ftp_details)) {
       unset($node->content['field_syndication_ftp_details']);    
-    }    
+    }
+    
+    if (empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
+      unset($node->content['field_service_fetch_link']);    
+    }
   }
 }
 
@@ -857,9 +810,9 @@ function itg_syndication_rule_change_message($form, &$form_state) {
 }
 
 /**
- * Custom submit callback function to change message after Syndication rule node save/update.
- * @param array $form
- * @param array $form_state
+ * Get rule by client name
+ * @param string $client_name 
+ * @return array $delivery
  */
 function get_rule_by_client_name($client_name) {
   
@@ -893,9 +846,10 @@ function get_rule_by_client_name($client_name) {
     
     
   }
-  //p($delivery_mode_array);
+  
    $delivery['mode_val'] = $delivery_mode_array;
    $delivery['mode_type'] = $delivery_mode_val;
+   
   return $delivery;
   
 }

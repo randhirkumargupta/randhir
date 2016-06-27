@@ -6,7 +6,7 @@
 
 /**
  * Feed generator of selected contents
- * @param array $data 
+ * @param objrct $node 
  */
 function itg_mobile_services_feed_generator_of_contents($node) {
   // get service id  
@@ -17,14 +17,13 @@ function itg_mobile_services_feed_generator_of_contents($node) {
   // load service node  
   $service_details = node_load($association_nid);
   // service titile
-  $service_title = str_replace(' ', '', $service_details->title);
+  $service_title = str_replace(' ', '-', $service_details->title);
   // delivery mode
   $delivery_mode = $service_details->field_service_delivery_mode[LANGUAGE_NONE][0]['value'];
   // expiry date
   $expiry_date = $service_details->field_story_expiry_date[LANGUAGE_NONE][0]['value'];
 
   $get_clients_id = get_clients_id($association_nid);
-  //watchdog('content_frequency', '<pre>' . print_r($node, 1) . '</pre>');
   // client ids
   $client_id_array = $get_clients_id['target_id'];
   // service association id
@@ -41,66 +40,86 @@ function itg_mobile_services_feed_generator_of_contents($node) {
 
   // Load itg_mobile_services.inc from the node module.
   module_load_include('inc', 'itg_mobile_services', 'includes/itg_mobile_services.feed_generate');
+  $error = FALSE;
+  $validate_content = validate_content_count($node->nid);
 
-  switch ($delivery_mode) {
-    case 1: // xml
-      $file_path = itg_mobile_services_generate_xml($node, $service_title);
-      break;
-    case 2: // rss
-      $file_path = itg_syndication_generate_rss($data);
-      break;
-    case 3: // mrss
-
-      break;
-    case 4: //ussd
-
-      break;
-    case 5: //sms
-
-      break;
-    case 'html':
-      $file_path = itg_syndication_mail_syndication($data);
-      break;
-  }
-
-
-  foreach ($client_id_array as $client_id) {
-    $client_info = node_load($client_id);
-    if (is_object($client_info) && count($client_info) > 0) {
-      $content_sharing_mode = isset($client_info->field_content_sharing_mode[LANGUAGE_NONE]) ? $client_info->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] : '';
-      // Decide sharing mode
-      switch ($content_sharing_mode) {
-        // 1. Fetch web URL (our server)
-        case '1':
-          // itg_mobile_web_url_mobile('web_url', $file_path);
-          break;
-        case 2: // 2. Via FTP location
-          $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
-          $ftp_username = isset($client_info->field_ftp_username[LANGUAGE_NONE]) ? $client_info->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
-          $ftp_password = isset($client_info->field_ftp_password[LANGUAGE_NONE]) ? $client_info->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
-          $data = array('ftp_ip_address' => $ftp_ip_address, 'ftp_username' => $ftp_username, 'ftp_password' => $ftp_password);
-          itg_mobile_services_ftp_feeds($data, $file_path);
-          break;
-        case 3: // 3. Via Email
-          $service_email_address = isset($client_info->field_service_email_address[LANGUAGE_NONE]) ? $client_info->field_service_email_address[LANGUAGE_NONE][0]['value'] : '';
-          itg_mobile_services_mail($service_email_address, $file_path);
-          break;
+  if (isset($validate_content)) {
+    $data = unserialize($validate_content);
+    if (is_array($data['clients']) && count($data['clients']) > 0) {
+      foreach ($data['clients'] as $key => $val) {
+        if ($content_count < $val) {
+          if (empty($error)) {
+            drupal_set_message('feed not generated, please increase service content count', 'error');
+            $error = TRUE;
+          }
+        }
       }
-
-      $client_array[$client_id] = 1;
     }
   }
 
-  itg_mobile_cron_after_feed_generate($node, $client_array, $content_count);
+  if (!empty($error)) {
+    return '';
+  }
+  else {
+    switch ($delivery_mode) {
+      case 1: // xml
+        $file_path = itg_mobile_services_generate_xml($node, $service_title, $field_header, $field_footer);
+        break;
+      case 2: // rss
+        $file_path = itg_mobile_services_generate_rss($node, $service_title, $field_header, $field_footer);
+        break;
+      case 3: // mrss
+        $file_path = itg_mobile_services_generate_mrss($node, $service_title, $field_header, $field_footer);
+        break;
+      case 4: //ussd
+        $file_path = itg_mobile_services_generate_ussd($node, $service_title, $field_header, $field_footer);
+        break;
+      case 5: //sms
+        $file_path = itg_mobile_services_generate_sms($node, $service_title, $field_header, $field_footer);
+        break;
+      case 6: // Simple Text Feed
+        $file_path = itg_mobile_services_generate_feed($node, $service_title, $field_header, $field_footer);
+        break;
+    }
 
 
-  return $file_path . '/' . $data->title . '.xml';
+    foreach ($client_id_array as $client_id) {
+      $client_info = node_load($client_id);
+      if (is_object($client_info) && count($client_info) > 0) {
+        $content_sharing_mode = isset($client_info->field_content_sharing_mode[LANGUAGE_NONE]) ? $client_info->field_content_sharing_mode[LANGUAGE_NONE][0]['value'] : '';
+        // Decide sharing mode
+        switch ($content_sharing_mode) {
+          // 1. Fetch web URL (our server)
+          case '1':
+            $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
+            itg_mobile_web_url_mobile($service_fetch_link, $file_path);
+            break;
+          case 2: // 2. Via FTP location
+            $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
+            $ftp_username = isset($client_info->field_ftp_username[LANGUAGE_NONE]) ? $client_info->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
+            $ftp_password = isset($client_info->field_ftp_password[LANGUAGE_NONE]) ? $client_info->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
+            $data = array('ftp_ip_address' => $ftp_ip_address, 'ftp_username' => $ftp_username, 'ftp_password' => $ftp_password);
+            itg_mobile_services_ftp_feeds($data, $file_path);
+            break;
+          case 3: // 3. Via Email
+            $service_email_address = isset($client_info->field_service_email_address[LANGUAGE_NONE]) ? $client_info->field_service_email_address[LANGUAGE_NONE][0]['value'] : '';
+            itg_mobile_services_mail($service_email_address, $file_path);
+            break;
+        }
+
+        $client_array[$client_id] = 1;
+      }
+    }
+
+    itg_mobile_cron_after_feed_generate($node, $client_array, $content_count);
+    //return $file_path . '/' . $data->title . '.xml';
+  }
 }
 
 /**
- * Callback function to send syndication by mail attachment.
- * @param type $data
- * @param type $syndication_node
+ * Callback function to send mobile feeds by mail with attachment.
+ * @param string $service_email_address
+ * @param string $file_path
  */
 function itg_mobile_services_mail($service_email_address, $file_path) {
   $attachment = array(
@@ -108,7 +127,7 @@ function itg_mobile_services_mail($service_email_address, $file_path) {
   );
   $params = array(
     'key' => 'itg_syndication',
-    'to' => 'mishrasoft2009@gmail.com',
+    'to' => $service_email_address,
     'from' => 'noreply@indiatoday.com',
     'subject' => 'Test email',
     'body' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -121,10 +140,14 @@ function itg_mobile_services_mail($service_email_address, $file_path) {
     ),
   );
   $language = language_default();
-
   drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);
 }
 
+/**
+ * function get_clients_id().
+ * @param int $association_nid
+ * @return array $result
+ */
 function get_clients_id($association_nid) {
   $query = db_select('node', 'node')->fields('cs', array('field_client_selection_target_id'));
   $query->fields('sat', array('entity_id'));
@@ -132,14 +155,13 @@ function get_clients_id($association_nid) {
   $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id");
   $query->condition('sat.field_service_association_title_target_id', $association_nid, '=');
   $query->condition('node.type', array('client_service_association'), 'IN');
-  $query->range(0, 10);
+  $query->range(0, 20);
   $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
     $target_id[] = $record['field_client_selection_target_id'];
     $service_association_id = $record['entity_id'];
   }
-  $result = array('target_id' => $target_id, 'service_association_id' => $service_association_id);
-  return $result;
+  return $result = array('target_id' => $target_id, 'service_association_id' => $service_association_id);
 }
 
 /**
@@ -159,16 +181,15 @@ function get_content_sharing_mode($entity_id) {
 }
 
 /**
- * function to feed for syndication by ftp.
- * @param type $data
- * @param type $file_path
+ * function to feed for mobile services by ftp.
+ * @param array $data
+ * @param array $file
  */
 function itg_mobile_services_ftp_feeds($data, $file) {
 
   $file_array = explode('/', $file);
   $last = count($file_array) - 1;
-  $remote_file = $file_array[$last];
-  // $remote_file = 'readmefeeds.txt';
+  $remote_file = $file_array[$last]; // 'readmefeeds.txt';
 
   $ftp_server = $data['ftp_ip_address'];
   $ftp_user_name = $data['ftp_username'];
@@ -176,10 +197,8 @@ function itg_mobile_services_ftp_feeds($data, $file) {
 
   // set up basic connection
   $conn_id = ftp_connect($ftp_server);
-
   // login with username and password
   $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
-
   // upload a file
   if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
     echo "successfully uploaded $file\n";
@@ -213,42 +232,41 @@ function validate_content_count($nid) {
 
 /**
  * function for cron time update
- * @param array $node
- * @param array $id
- * @param array $cron_time 
+ * @param object $node
+ * @param array $client_array
+ * @param int $content_count
+ * @return type $query
  */
 function itg_mobile_cron_after_feed_generate($node, $client_array, $content_count) {
-
   // get service id  
   $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
   $frequency_from_date = $node->field_service_frequency_date[LANGUAGE_NONE][0]['value'];
   $frequency = $node->field_service_frequency[LANGUAGE_NONE][0]['value'];
 
   $scheduler_time = strtotime($frequency_from_date);
-  $details_array = array('service_id' => $association_nid,
-    'frequency' => $frequency,
-    'feed_type' => $node->type,
-    'file_name' => $file_name,
-    'clients' => $client_array,
-  );
 
-  $details = serialize($details_array);
   $nid = $node->nid;
   $validate_content = validate_content_count($nid);
 
   if (isset($validate_content)) {
     $data = unserialize($validate_content);
-    foreach ($data['clients'] as $key => $val) {
-      if ($content_count >= $val) {
-        echo $val . "<br>";
-        $client[$key] = $val + 1;
+    if (is_array($data['clients']) && count($data['clients']) > 0) {
+      foreach ($data['clients'] as $key => $val) {
+        if ($content_count >= $val) {
+          $client[$key] = $val + 1;
+        }
       }
     }
+    else {
+      $client = $client_array;
+    }
+
 
     $details_array = array('service_id' => $association_nid,
       'frequency' => $frequency,
       'feed_type' => $node->type,
       'file_name' => $file_name,
+      'service_content_count' => $content_count,
       'clients' => $client,
     );
 
@@ -273,6 +291,17 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
     }
   }
   else {
+
+    $details_array = array('service_id' => $association_nid,
+      'frequency' => $frequency,
+      'feed_type' => $node->type,
+      'file_name' => $file_name,
+      'service_content_count' => $content_count,
+      'clients' => $client_array,
+    );
+
+    $details = serialize($details_array);
+
     $query = db_insert('itg_cron_time_scheduler');
     $query->fields(array(
       'content_id' => $node->nid,
@@ -289,17 +318,66 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
 
 /**
  * function to feed for syndication by ftp.
- * @param type $data
- * @param type $file_path
+ * @param string $service_fetch_link
+ * @param string $file_path
+ * @return type $query
  */
-function itg_mobile_web_url_mobile($data, $file_path) {
+function itg_mobile_web_url_mobile($service_fetch_link, $file_path) {
 
   $query = db_insert('itg_syndication_feed_url');
   $query->fields(array(
     'xml_name' => $file_path,
-    'client_feed_url' => $data['delivery_mode'],
+    'client_feed_url' => $service_fetch_link,
     'created_date' => time(),
     'status' => 1
   ));
   $query->execute();
+}
+
+/**
+ * function for show list of feed by url
+ * @return type $table 
+ */
+function itg_mobile_get_feed_byurl() {
+  global $base_url;
+  $url = $base_url . '/' . arg(0) . '/' . arg(1) . '/' . arg(2);
+
+  $itg_query = db_select('itg_syndication_feed_url', 'feed');
+  $itg_query->fields('feed', array('id', 'xml_name', 'created_date'));
+  $itg_query->condition('feed.client_feed_url', $url);
+  $itg_query->orderBy('created_date', 'DESC'); //ORDER BY created
+  $itg_result = $itg_query->execute()->fetchAll();
+
+  $table = '<table class="views-table">';
+  $table .= '<tbody>';
+  $table .= '<tr>';
+  $table .= '<th>SNo.</th>';
+  $table .= '<th>Service Name</th>';
+  $table .= '<th>Frequency</th>';
+  $table .= '<th>Frequency Date</th>';
+  $table .= '<th>Time</th>';
+  $table .= '<th>Link</th>';
+  $table .= '</tr>';
+  $i = 1;
+  foreach ($itg_result as $itg_val) {
+    $xml_date = date('d/m/Y', $itg_val->created_date);
+    $file_url = explode('sites/', $itg_val->xml_name);
+    $file_url_array = explode('_', $file_url[1]);
+    $file_date_array = explode('.', $file_url_array[3]);
+    $frequency_type_arr = explode('/', $file_url_array[0]);
+    $frequency_type = ($frequency_type_arr[count($frequency_type_arr) - 1]);
+    $frequency_date = $file_url_array[2];
+    $date_time = isset($file_url_array[0]) ? date('d/m/Y H:i:s', $file_date_array[0]) : '';
+    $table .= '<tr>';
+    $table .= '<td>' . $i . '</td>';
+    $table .= '<td>' . $file_url_array[1] . '</td>';
+    $table .= '<td>' . $frequency_type . '</td>';
+    $table .= '<td>' . $frequency_date . '</td>';
+    $table .= '<td>' . $date_time . '</td>';
+    $table .= '<td><a href="' . $base_url . '/sites/' . $file_url[1] . '" download> Click to Download </a>' . '</td>';
+    $table .= '</tr>';
+    $i++;
+  }
+  $table .= '</tbody>';
+  return $table .= '</table>';
 }
