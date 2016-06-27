@@ -400,6 +400,9 @@ function itg_workflow_bulk_opration_related($field1, $field2) {
  */
 function itg_workflow_node_insert($node) {
     if ($node->type == 'story') {
+        
+        global $user;
+        $current = $user->uid;
         //getting mail id's of high level users
         $id = array('5', '6', '20');
         $query = db_select('users', 'u');
@@ -411,8 +414,14 @@ function itg_workflow_node_insert($node) {
             $value .= $val->mail . ',';
         }
         $high_level_user = trim($value, ",");
-
-        workflow_get_mail_content($node, 'create', $high_level_user, $node->name);
+     $query = db_select('users', 'us');
+       $query->fields('us', array('name')); 
+       $query->condition('us.uid', $current, '=');
+       $result = $query->execute();
+       foreach ($result as $vals) {
+         $current_user_name .= $vals->name;
+        }
+        workflow_get_mail_content($node, 'create', $high_level_user, $node->name, $current_user_name);
     }
 }
 
@@ -422,7 +431,7 @@ function itg_workflow_node_insert($node) {
  */
 function itg_workflow_node_update($node) {
     if ($node->type == 'story') {
-
+       
         global $user;
         $current = $user->uid;
 
@@ -452,7 +461,14 @@ function itg_workflow_node_update($node) {
             }
             $high_level_user = $value;
         }
-        workflow_get_mail_content($node, 'update', $high_level_user, $node->name);
+       $query = db_select('users', 'us');
+       $query->fields('us', array('name')); 
+       $query->condition('us.uid', $current, '=');
+       $result = $query->execute();
+       foreach ($result as $vals) {
+         $current_user_name .= $vals->name;
+        }
+        workflow_get_mail_content($node, 'update', $high_level_user, $node->name, $current_user_name);
     }
 }
 
@@ -464,15 +480,19 @@ function itg_workflow_node_update($node) {
  * @param type $to
  * @return 
  */
-function workflow_get_mail_content($node, $event, $to, $user_name) {
-
+function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name) {
+      
     global $base_url;
 
     if ($event == 'create') {
-        $task_subject = 'New Story has been created and submitted for review, please find below details.';
+        $task_subject = 'A new story has been submitted for your review, please find details below.';
+        $submitted_by = 'Submitted By: '.$current_user_name;
+        $subject = 'Story Submitted '. $node->title;
     }
     else if ($event == 'update') {
-        $task_subject = 'New Story has been updated and submitted for review, please find below details.';
+        $task_subject = 'A new story has been updated and submitted for your review, please find details below.';
+        $submitted_by = 'Updated By: '.$current_user_name;
+        $subject = 'Story Updated '. $node->title;
     }
 
     $node_url = $base_url . '/node/' . $node->nid;
@@ -481,17 +501,18 @@ function workflow_get_mail_content($node, $event, $to, $user_name) {
                 <head><title></title></head>
                 <body style="margin:0; padding:0;">';
     $content .= 'Dear Team,';
-    $content .= '<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $task_subject;
-    $content .= '<br /><br />Story Name: ' . $node->title;
+    $content .= '<br /><br />' . $task_subject;
+    $content .= '<br /><br />Story Title: ' . $node->title;
     $content .= '<br />URL: ' . $node_url;
+    $content .= '<br />' .$submitted_by;
     $content .= '<br /><br /><br />Thanks,<br>ITG Team';    
     $content .= '</body>';    
     $content .= '</html>';    
 
-
+   
     $params = array(
       'body' => $content,
-      'subject' => $node->title,
+      'subject' => $subject,
     );
     
     $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);

@@ -134,14 +134,16 @@ function itg_tv_schedule_uploadmongo($file_id) {
     $fileaddress = $filepath . $filename;
 
     $file = fopen($fileaddress, "r");
-//connection with database
-    $con = new Mongo();
-    if ($con) {
-// Select Database
-        $db = $con->tv_schedule;
-// create collection
+    
+    
+        //connection with database
+       $connection = new MongoClient();
+       if ($connection) {
+        // Select Database
+      $db = $connection->itg_tv_schedule;
+        // create collection
         $db->createCollection("itgcms_tv_schedule");
-// Select Collection
+        // Select Collection
         $people = $db->itgcms_tv_schedule;
         $upload_date = date("Y/m/d");
     }

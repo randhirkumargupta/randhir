@@ -5,7 +5,7 @@ module_load_include('module', 'itg_tv_schedule', 'itg_tv_schedule.module');
  * Inc file contains the functions
  */
 function tv_schedule_listing() {
-    //time_zone_conversion();
+    
     if ($_GET['time_zone'] == 'PST') {
         date_default_timezone_set('America/Los_Angeles');
         $date = date("Y-m-d H:i:s");
@@ -26,11 +26,13 @@ function tv_schedule_listing() {
     }
 
     $arg = arg();
-    $con = new Mongo();
+    $con = new MongoClient();
+    if ($con){
     // Select Database
-    $db = $con->tv_schedule;
+    $db = $con->itg_tv_schedule;
     // Select Collection
     $people = $db->itgcms_tv_schedule;
+    }
     // Search result  
     if (isset($_GET['title'])) {
         $title = $_GET['title'];
