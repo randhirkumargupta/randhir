@@ -149,16 +149,16 @@ jQuery(document).ready(function(){
     
      jQuery('body').on('click', '.insert-url', function(){
          // parent.jQuery('#edit-field-s-related-content-und-0-value').val(item); edit-title
-            parent.jQuery('#edit-title').val(item);
+           // parent.jQuery('#edit-title').val(item);
             parent.jQuery.colorbox.close();
             item.length = 0;
         });
         
-        jQuery("body").on('click', '.rset-form', function () {
-            jQuery('input[type="text"], select').val('');
-            jQuery('input:radio, input:checkbox').prop('checked', false);
-        });
-    
+//        jQuery("body").on('click', '.rset-form', function () {
+//            jQuery('input[type="text"], select').val('');
+//            jQuery('input:radio, input:checkbox').prop('checked', false);
+//        });
+//    
 //jQuery(document).ajaxComplete(function() {
 //    jQuery('#views-form-related-content-new-page table tbody tr').each(function(){
 //    var url = jQuery(this).find('.views-field-url').html();
