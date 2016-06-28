@@ -243,9 +243,16 @@ function itgadmin_breadcrumb($vars) {
       else {
         $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $title : decode_entities(check_plain($title));
         $node = node_load(arg(1));
+        
+        //Set issue view page breadcrumb
         if($node->type == 'issue'){
           $title_arr = explode('00:', $node->title);
           $vars['breadcrumb'][1] = date('d/m/Y', strtotime($title_arr[0]));
+        }
+        
+        //Set UGC view page breadcrumb
+        if ($node->type == 'ugc') {
+          $vars['breadcrumb'][1] = $node->title;
         }
         
       }

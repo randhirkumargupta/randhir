@@ -180,13 +180,13 @@ function features_supplement_magazine_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '5',
-        ),
-        'title' => array(
           'weight' => '6',
         ),
+        'title' => array(
+          'weight' => '7',
+        ),
         'path' => array(
-          'weight' => '4',
+          'weight' => '5',
         ),
       ),
       'display' => array(),
@@ -231,7 +231,7 @@ function features_supplement_magazine_strongarm() {
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '2',
+          'weight' => '3',
         ),
       ),
       'display' => array(),
