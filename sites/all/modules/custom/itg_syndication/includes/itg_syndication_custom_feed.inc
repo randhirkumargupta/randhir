@@ -14,7 +14,6 @@ function isValidFeed($feed_type, $body) {
             }
             break;
     }
-
     return $return;
 }
 
@@ -23,7 +22,6 @@ function isValidFeed($feed_type, $body) {
  * @param array $data
  */
 function generate_custom_pattern_feed($data) {
-
     $error = array();
     $nids = isset($data['syndication']) ? unserialize($data['syndication']) : array();
     $client = isset($data['client_title']) ? $data['client_title'] : "";
@@ -46,10 +44,8 @@ function generate_custom_pattern_feed($data) {
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
-
             $file_path['file_path'] = $feed_dir . '/' . $filename;
             $file_path['file_name'] = $filename;
-
             return $file_path;
         } else {
             drupal_set_message(t('Pattern not found.'), 'error');
@@ -228,11 +224,9 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
  * @return array
  */
 function itg_syndication_theme() {
-    $theme_path = drupal_get_path('theme', $GLOBALS['theme']);
     return array(
         'syndication_feed_variables' => array(
-            'template' => 'sydication_feed_variables',
-            'path' => drupal_get_path('theme', $GLOBALS['theme']) . '/templates/',
+            'template' => '/templates/sydication_feed_variables',
         ),
     );
 }
@@ -261,22 +255,22 @@ function get_default_feed_pattern($feed_type, $content_type) {
 
 /**
  * Function to generate arry to xml
- * @param type $root_element_name
- * @param type $ar
- * @return type xml
+ * @param string $root_element_name
+ * @param array $ar
+ * @return xml xml
  */
-function assocArrayToXML($root_element_name, $ar) {
+function assocArrayToXML($root_element_name, $xml_array) {
     $xml = new SimpleXMLElement("<{$root_element_name}></{$root_element_name}>");
-    $f = create_function('$f,$c,$a', ' 
-            foreach($a as $k=>$v) { 
-                if(is_array($v)) { 
-                    $ch=$c->addChild($k); 
-                    $f($f,$ch,$v); 
+    $function = create_function('$function,$xml_child,$xml_array', ' 
+            foreach($xml_array as $tags=>$element) { 
+                if(is_array($element)) { 
+                    $child=$xml_child->addChild($tags); 
+                    $function($function,$child,$element); 
                 } else { 
-                    $c->addChild($k,$v); 
+                    $xml_child->addChild($tags,$element); 
                 } 
             }');
-    $f($f, $xml, $ar);
+    $function($function, $xml, $xml_array);
     $real_xml = $xml->asXML();
     $customXML = substr($real_xml, strpos($real_xml, '?' . '>') + 2);
     return $customXML;
@@ -332,11 +326,14 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
     });', 'inline');
 
     drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', 'file');
-
+    /*check for default value*/
+    $client =   $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#entity']->field_syndication_feed_clients[LANGUAGE_NONE][0]['value'];
+    if(isset($client)) {
+         $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#default_value'] = $client; 
+    }
     /* Client list */
     $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#options'] = itg_syndication_get_client();
     $form['field_syndication_feed_clients']['#validated'] = TRUE;
-
     $form['pre_define_vars'] = array(
         '#type' => 'markup',
         '#prefix' => '<div id="pre_define_vars_replace_wrapper">',
@@ -368,9 +365,14 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
     unset($form['actions']['preview']);
 }
 
+/**
+ * Callback function for displaying the variables 
+ * @param array $form
+ * @param type $form_state
+ */
 function _pre_define_vars_callback($form, &$form_state) {
-    $CT = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
-    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($CT),"content_type"=>$CT));
+    $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
+    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type),"content_type"=>$content_type));
     return array(
         '#type' => 'ajax',
         '#commands' => array(
@@ -388,14 +390,13 @@ function _pre_define_vars_callback($form, &$form_state) {
 function get_default_feed_pattern_callback($form, &$form_state) {
     $feed_type = $form_state['values']['field_syndication_feed_type']['und'][0]['value'];
     $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
-
     if (!isset($content_type) && empty($content_type)) {
         $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Pleaes Select Content Type</span>');
         drupal_get_messages();
         return array('#type' => 'ajax', '#commands' => $commands);
     } else {
-        $myCustomParameters = get_default_feed_pattern($feed_type, $content_type);
-        $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($myCustomParameters));
+        $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
+        $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
         return array(
             '#type' => 'ajax',
             '#commands' => $commands,
