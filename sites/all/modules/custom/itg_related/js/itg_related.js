@@ -8,12 +8,13 @@
     attach: function (context, settings) {
              var uid = settings.itg_related.settings.uid;
              var dta = encodeURIComponent(window.location.href);
+             var base_url = settings.itg_related.settings.base_url;
             // alert(window.location.href);
 //             var spt = iframe_url.split("&");
 //             alert(spt.split('&')[0]);
              //var typeval = getParameterByName('type');
-            var typeval = parent.document.getElementById("ntype").value;
-                  //alert(typeval);        
+            var typeval = parent.top.jQuery('[name="ntype"]').val();
+           
             $(".itg-row-selector-selection-form #edit-submit").hide();
             $('#filter-save', context).click(function (event) {
                 
@@ -35,7 +36,7 @@
                 {
 
                     $.ajax({
-                        'url': '/itgcms/ajaxcallback',
+                        'url': base_url + '/ajaxcallback',
                         'data': post,
                         'type': 'POST',
                         'success': function (data)
@@ -134,7 +135,7 @@ jQuery(document).ready(function(){
             item.splice(hasurl, 1);
         }
       
-        //console.log("hasurl index = " + item);
+        console.log("hasurl index = " + item);
     });
     
 //    jQuery('body').on('click', '.insert-url', function(){
@@ -148,16 +149,16 @@ jQuery(document).ready(function(){
     
      jQuery('body').on('click', '.insert-url', function(){
          // parent.jQuery('#edit-field-s-related-content-und-0-value').val(item); edit-title
-            parent.jQuery('#edit-title').val(item);
+           // parent.jQuery('#edit-title').val(item);
             parent.jQuery.colorbox.close();
             item.length = 0;
         });
         
-        jQuery("body").on('click', '.rset-form', function () {
-            jQuery('input[type="text"], select').val('');
-            jQuery('input:radio, input:checkbox').prop('checked', false);
-        });
-    
+//        jQuery("body").on('click', '.rset-form', function () {
+//            jQuery('input[type="text"], select').val('');
+//            jQuery('input:radio, input:checkbox').prop('checked', false);
+//        });
+//    
 //jQuery(document).ajaxComplete(function() {
 //    jQuery('#views-form-related-content-new-page table tbody tr').each(function(){
 //    var url = jQuery(this).find('.views-field-url').html();

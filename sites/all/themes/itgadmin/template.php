@@ -271,21 +271,21 @@ function itgadmin_breadcrumb($vars) {
      
      //story tab breadcrumb
      if (in_array($content_url, $story_tab)) {
-      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
-      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
     }
     
     //Photogallery tab breadcrumb
      if (in_array($content_url, $photogallery_tab)) {
-      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
-      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
     }
 
     
     //Blog tab breadcrumb
      if (in_array($content_url, $bolg_tab)) {
-      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
-      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
     }
 
 

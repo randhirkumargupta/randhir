@@ -130,7 +130,15 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['#after_build'][] = 'itg_syndication_feed_download_after_build';
    
  }
-
+elseif ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_pattern_listing') {    
+     $form['field_syndication_feed_clients_value'] = array(
+      '#type' => 'select',
+      '#options' => itg_syndication_get_client(),
+      '#default_value' => '_none',
+      '#validated' => true,
+      '#weight' => 1,             
+    );
+}
   // View autocomplete title field.
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_client') {
     $form['title']['#autocomplete_path'] = 'content-title-list/syndication_client/autocomplete';

@@ -249,6 +249,12 @@ a.button{
 }
 .button.published, .form-submit[value="Back"]{
   @extend .btn;
+  padding: 6px 12px;
+  &:hover{
+    background-color: #197e4e;
+    border-color: #197e4e;
+    color: #fff;
+  }
 }
 .form-submit[value="Delete"]{
   @extend .btn-cancel;
@@ -453,6 +459,7 @@ textarea{
   background: #fefafb none repeat scroll 0 0;
   border: 1px solid red;
   padding: 10px 30px;
+  margin: 20px 0;
 }
 .region-help{
   ul{
@@ -491,7 +498,7 @@ body.sidebar-second{
     top: 100px;
     left: 100%;
     width: 330px;
-    z-index: 999999;
+    z-index: 9999;
     transition: all 500ms ease 0s;
     &.active{
       transform: translateX(-330px);
@@ -615,6 +622,7 @@ ul.ui-autocomplete{
   input[type="text"], select, .form-textarea-wrapper textarea{
     width: 100%;
     max-width: 332px;
+    font-size: 14px;
   }
   .form-actions{
     background-color: #fefafb;
@@ -2297,6 +2305,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 .node-category-form{
   fieldset.path-form{
     border: none;
+    margin-top: 30px;
     legend{
       @extend .hide;
     }
@@ -2940,7 +2949,7 @@ fieldset#edit-select{
                 border: medium none;
                 color: #ee4d4d;
                 font-size: 13px;
-                margin-left: 100px;
+                margin-left: 0;
                 margin-top: -2px;
               }
               .tabledrag-handle{display: none;}
@@ -3503,13 +3512,16 @@ div.node{
     @extend .btn-save;
   }
 }
-[id*="field-astro-zodiac-values"]{
+[id*="field-astro-zodiac-values"], 
+[id*="field-astro-numerology-values-values"]{
   > tbody > tr{
     @extend .db;
     > td{
       @extend .fleft;
+      @extend .full;
       padding: 0;
       @extend .mb-10;
+      @extend .choose-audio-video-file;
       .itg-astro-image{
         padding: 30px 30px 0 250px;
         img{
@@ -3518,8 +3530,30 @@ div.node{
           vertical-align: top;
         }
       }
+      .form-managed-file{
+          .filefield-source-imce{
+              white-space: nowrap;
+          }
+          .ajax-progress-throbber{
+              @extend .hide;
+          }
+          .form-type-textfield{
+              padding: 0;
+              margin: 10px 0 0;
+              label{
+                  @extend .hide;
+              }
+              .form-text + div.description{left: 345px;}
+          }
+      }
+      > .form-submit, .ajax-new-content > .form-submit{
+          margin-bottom: 30px;
+      }
     }
   }
+}
+[id*="field-astro-numerology-values-values"] > tbody > tr> td:empty{
+    @extend .hide;
 }
 [id*="field-newsl-add-news-values"]{
   @extend .views-table;
@@ -4139,4 +4173,124 @@ div.node{
     left: 680px;
     position: absolute;
     top: 90px;
+}
+.node-newsletter-form{
+    #newsletter-date-time-wrapper{
+        @extend .dib;
+        @extend .full;
+        .form-item{
+            @extend .fleft;
+            width: 362px;
+            margin: 0;
+            padding-right: 8px;
+            .form-select{
+                max-width: 100px;
+            }
+        }
+        #edit-field-survey-start-date{
+            @extend .fleft;
+            width: 360px;
+        }
+        .date-combo{
+            margin: 0;
+            .form-text{
+                width: 100px;
+            }
+        }
+    }
+    #edit-field-newsl-date[style="display: block;"] + #edit-field-newsl-day + #edit-field-newsl-time, 
+    #edit-field-survey-start-date[style="display: block;"] + #edit-field-newsl-date + #edit-field-newsl-day + #edit-field-newsl-time, 
+    #edit-field-survey-start-date + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time, 
+    #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day + #edit-field-newsl-time, 
+    #edit-field-newsl-date + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time, 
+    #edit-field-newsl-day[style="display: block;"] + #edit-field-newsl-time{
+        .form-item{
+            padding: 0;
+            > label{display: none;}
+        }
+    }
+    #edit-field-survey-start-date[style="display: block;"] + #edit-field-newsl-date + #edit-field-newsl-day + #edit-field-newsl-time, 
+    #edit-field-survey-start-date + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time{
+        padding-left: 360px;
+    }
+    #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time, 
+    #edit-field-survey-start-date[style="display: none;"] + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time{
+        .form-item{
+            padding: 0 30px;
+            @extend .full;
+            > label{display: block;}
+        }
+    }
+    #edit-field-survey-start-date[style="display: none;"] + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time{
+        padding-left: 0;
+        .form-type-select .form-select + div.description{
+            left: 365px;
+        }
+    }
+    #edit-field-newsl-time .form-type-select .form-select + div.description{
+        left: 115px;
+    }
+}
+#colorbox{
+    .view .view-filters .views-exposed-form .views-exposed-widget{
+        width: 170px;
+    }
+}
+[id*="views-form-related-content-new-page"]{
+    table{
+        caption {
+            background-color: #1fb5ad;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px;
+        }
+    }
+}
+#clickme{
+    @extend .add-more;
+}
+.search-criteria{
+    margin-top: 10px;
+    .form-text{
+        width: 300px;
+        margin-right: 10px;
+    }
+}
+.operation-form{
+    @extend .node-form;
+    .form-type-checkboxes{
+        > label{
+            display: block;
+            float: none;
+            padding: 0;
+            width: 100%;
+        }
+    }
+    .form-actions{
+        .form-submit{
+            @extend .btn-save;
+            &+a{
+                @extend .btn;
+                @extend .btn-cancel;
+            }
+        }
+    }
+}
+#views-form-blogs-management-page, 
+#views-form-strory-menegment-page{
+    @extend .operation-form;
+}
+.form-field-name-field-supp-publish, 
+.form-field-name-field-magazine-publish{
+    .form-type-checkboxes .form-checkboxes + div.description{
+        left: 335px;
+    }
+}
+.form-item-field-issue-title-value-value{
+    .form-type-textfield .form-text + div.description{left: 208px;}
+}
+.plupload_filelist_footer{height: 30px;}
+.form-managed-file .filefield-source-plupload div.ajax-progress{
+    @extend .hide;
 }

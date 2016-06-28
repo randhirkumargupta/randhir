@@ -147,6 +147,10 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
     $form['field_newsl_date']['und']['#title'] = 'Date <span class="form-required" title="This field is required.">*</span>';
     $form['field_newsl_schedule']['und']['#title'] = 'Schedule <span class="form-required" title="This field is required.">*</span>';
     
+    $form['field_survey_start_date']['#prefix'] = '<div id="newsletter-date-time-wrapper">';
+    $form['field_newsl_time']['und']['#suffix'] = '</div>';
+
+    
     //Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
     $form['actions']['submit']['#submit'][] ='itg_newsletter_submit_handler_for_redirect';
     

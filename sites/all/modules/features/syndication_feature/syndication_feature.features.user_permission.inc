@@ -30,7 +30,14 @@ function syndication_feature_user_default_permissions() {
   // Exported permission: 'create syndication_feed_from_pattern content'.
   $permissions['create syndication_feed_from_pattern content'] = array(
     'name' => 'create syndication_feed_from_pattern content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
     'module' => 'node',
   );
 
@@ -64,7 +71,11 @@ function syndication_feature_user_default_permissions() {
   // Exported permission: 'delete any syndication_feed_from_pattern content'.
   $permissions['delete any syndication_feed_from_pattern content'] = array(
     'name' => 'delete any syndication_feed_from_pattern content',
-    'roles' => array(),
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+    ),
     'module' => 'node',
   );
 
@@ -97,7 +108,14 @@ function syndication_feature_user_default_permissions() {
   // Exported permission: 'delete own syndication_feed_from_pattern content'.
   $permissions['delete own syndication_feed_from_pattern content'] = array(
     'name' => 'delete own syndication_feed_from_pattern content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
     'module' => 'node',
   );
 
@@ -130,7 +148,11 @@ function syndication_feature_user_default_permissions() {
   // Exported permission: 'edit any syndication_feed_from_pattern content'.
   $permissions['edit any syndication_feed_from_pattern content'] = array(
     'name' => 'edit any syndication_feed_from_pattern content',
-    'roles' => array(),
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+    ),
     'module' => 'node',
   );
 
@@ -164,7 +186,14 @@ function syndication_feature_user_default_permissions() {
   // Exported permission: 'edit own syndication_feed_from_pattern content'.
   $permissions['edit own syndication_feed_from_pattern content'] = array(
     'name' => 'edit own syndication_feed_from_pattern content',
-    'roles' => array(),
+    'roles' => array(
+      'Author/Guest' => 'Author/Guest',
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Intern' => 'Intern',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
+    ),
     'module' => 'node',
   );
 
