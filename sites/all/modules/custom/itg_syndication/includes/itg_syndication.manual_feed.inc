@@ -12,7 +12,7 @@
  */
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
-  if ($form_state['view']->name == 'syndication_rule_listing') {   
+  if (isset($form_state['view']->name) && $form_state['view']->name == 'syndication_rule_listing') {    
     $form['field_syndication_rule_title_value']['#options'] = itg_syndication_get_client();
     unset($form['field_syndication_rule_title_value']['#options']['_none']);
     $form['field_syndication_rule_title_value']['#options']['All'] = '- Any -';
@@ -49,7 +49,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['client_title'] = array(
       '#type' => 'select',
       '#title' => t('Select Client'),
-      '#options' => itg_syndication_get_client(),
+      '#options' => itg_syndication_get_client('yes'),
       '#default_value' => '_none',
       '#validated' => true,
       '#weight' => 1,             
