@@ -7,6 +7,9 @@
 
 (function($) {
 	$.fn.feed_pattern = function(data) {
-            $("textarea#edit-body-und-0-value").val(data); 
+            /* add pattern into textarea*/
+            $("textarea#edit-body-und-0-value").val(data);
+            /*Now do the formatting of textarea value*/
+            $("textarea#edit-body-und-0-value").format({method: 'xml'});
 	};
 })(jQuery);
