@@ -137,7 +137,7 @@ jQuery(document).ready(function(){
             var hasurl = jQuery.inArray(url_site, item);
             item.splice(hasurl, 1);
         }
-        //jQuery('#insvalue').val(item);
+        jQuery('#insvalue').val(item);
         //console.log("hasurl index = " + item);
     });
     
@@ -152,7 +152,7 @@ jQuery(document).ready(function(){
     
      jQuery('body').on('click', '.insert-url', function(){
          // parent.jQuery('#edit-field-s-related-content-und-0-value').val(item); edit-title
-            parent.jQuery('#edit-title').val(item);
+            parent.jQuery('#edit-field-common-related-content-und-0-value').val(item);
             parent.jQuery.colorbox.close();
             item.length = 0;
         });
