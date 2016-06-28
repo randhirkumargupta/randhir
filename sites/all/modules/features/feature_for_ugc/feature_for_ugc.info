@@ -8,7 +8,6 @@ dependencies[] = feature_for_ask_an_expert
 dependencies[] = feature_for_breaking_news
 dependencies[] = feature_for_recipe
 dependencies[] = features
-dependencies[] = field_sql_storage
 dependencies[] = file
 dependencies[] = image
 dependencies[] = itg_ugc
