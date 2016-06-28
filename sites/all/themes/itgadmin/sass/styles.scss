@@ -249,6 +249,12 @@ a.button{
 }
 .button.published, .form-submit[value="Back"]{
   @extend .btn;
+  padding: 6px 12px;
+  &:hover{
+    background-color: #197e4e;
+    border-color: #197e4e;
+    color: #fff;
+  }
 }
 .form-submit[value="Delete"]{
   @extend .btn-cancel;
@@ -2298,6 +2304,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 .node-category-form{
   fieldset.path-form{
     border: none;
+    margin-top: 30px;
     legend{
       @extend .hide;
     }
@@ -3504,13 +3511,16 @@ div.node{
     @extend .btn-save;
   }
 }
-[id*="field-astro-zodiac-values"]{
+[id*="field-astro-zodiac-values"], 
+[id*="field-astro-numerology-values-values"]{
   > tbody > tr{
     @extend .db;
     > td{
       @extend .fleft;
+      @extend .full;
       padding: 0;
       @extend .mb-10;
+      @extend .choose-audio-video-file;
       .itg-astro-image{
         padding: 30px 30px 0 250px;
         img{
@@ -3519,8 +3529,30 @@ div.node{
           vertical-align: top;
         }
       }
+      .form-managed-file{
+          .filefield-source-imce{
+              white-space: nowrap;
+          }
+          .ajax-progress-throbber{
+              @extend .hide;
+          }
+          .form-type-textfield{
+              padding: 0;
+              margin: 10px 0 0;
+              label{
+                  @extend .hide;
+              }
+              .form-text + div.description{left: 345px;}
+          }
+      }
+      > .form-submit, .ajax-new-content > .form-submit{
+          margin-bottom: 30px;
+      }
     }
   }
+}
+[id*="field-astro-numerology-values-values"] > tbody > tr> td:empty{
+    @extend .hide;
 }
 [id*="field-newsl-add-news-values"]{
   @extend .views-table;
