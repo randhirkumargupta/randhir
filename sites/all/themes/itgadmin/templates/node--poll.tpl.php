@@ -76,7 +76,7 @@
                       if (isset($imagecollection['field_poll_answer_image'][LANGUAGE_NONE])) {
                         $imgfid = $imagecollection['field_poll_answer_image'][LANGUAGE_NONE][0]['fid'];
                       }
-                      $output .= '<li>';
+                      $output .= '<div>';
                       if ($imgfid != 0) {
 
                         if (module_exists('itg_photogallery')) {
@@ -91,11 +91,11 @@
                         $output .= '<div class="field"><div class="field-label">Answer ' . $ansnumber . ':</div><div class="field-items"><div class="ans-text"><span>' . $imagecollection['field_poll_answer_text'][LANGUAGE_NONE][0]['value'] . '</span></div></div></div>';
                       }
 
-                      $output .= '</li>';
+                      $output .= '</div>';
                       $ansnumber++;
                     }
                     if (isset($output) && !empty($output)) {
-                      echo '<ul>' . $output . '</ul>';
+                      echo '<div>' . $output . '</div>';
                     }
                   }
                   else {
@@ -107,7 +107,7 @@
                        if (isset($ans_image[LANGUAGE_NONE])) {
                         $imgfid = $ans_image[LANGUAGE_NONE][0]['fid'];
                       }
-                      $output .= '<li>';
+                      $output .= '<div>';
                       if ($imgfid != 0) {
 
                         if (module_exists('itg_photogallery')) {
@@ -122,11 +122,11 @@
                         $output .= '<div class="field"><div class="field-label">Answer ' . $ansnumber . ':</div><div class="field-items"><div class="ans-text"><span>' . $ans_text[LANGUAGE_NONE][0]['value'] . '</span></div></div></div>';
                       }
 
-                      $output .= '</li>';
+                      $output .= '</div>';
                       $ansnumber++;
                     }
                     if (isset($output) && !empty($output)) {
-                      echo '<ul>' . $output . '</ul>';
+                      echo '<div>' . $output . '</div>';
                     }
 //                    $field_poll_answer = render($content['field_poll_answer']);
 //                    if (!empty($field_poll_answer)): print render($content['field_poll_answer']);

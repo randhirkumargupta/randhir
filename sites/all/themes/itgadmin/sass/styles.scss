@@ -1948,21 +1948,21 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           }
         }
         .form-submit{
-          margin: 10px 0 0 !important;
+          margin: 0 !important;
+          position: absolute;
+          right: -90px;
+          top: 0;
+          
         }
       }
       &+tr{
         td{
           margin-top: 10px;
-          .form-submit{
-            margin-left: 142px !important;
-          }
         }
       }
     }
   }
   &+div.clearfix{
-    margin-top: -41px;
     @extend .pos-rel;
     z-index: 99;
     .ajax-progress-throbber{
