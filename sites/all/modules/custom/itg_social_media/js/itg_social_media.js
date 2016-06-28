@@ -92,7 +92,7 @@
       });
       jQuery.validator.addMethod('validateSmi', function (value, element) {
         return FormValidation.validate_smi(value, element);
-      }, 'This field is required.');
+      }, 'Please choose at least one social media platform.');
       jQuery.validator.addMethod("itg_maxlength", function (value, element) {
         return value == "" || value.length <= 126;
       }, 'This field can not exceed 126 character.');
