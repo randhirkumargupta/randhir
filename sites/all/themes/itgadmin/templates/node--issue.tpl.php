@@ -40,7 +40,7 @@
 <?php endif; ?>
 <a class="close-preview" href="javascript:;"> </a>
 <div class="node node-preview">
-  <div class="field"><div class="field-label">Title: </div><div class="field-items"><?php print date('m/d/Y', strtotime($title)); ?></div></div>
+  <div class="field"><div class="field-label">Title: </div><div class="field-items"><?php print date('d/m/Y', strtotime($title)); ?></div></div>
   <div class="field"><div class="field-label">Magazine: </div><div class="field-items"><?php print $node->field_issue_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
   <div class="field"><div class="field-label">Supplement: </div><div class="field-items"><?php print $node->field_issue_supplement[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
   <div class="field"><div class="field-label"><strong>Issue Cover Images:</strong> </div><div class="field-items"></div></div>

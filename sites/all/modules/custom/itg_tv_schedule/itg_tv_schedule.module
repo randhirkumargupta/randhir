@@ -275,20 +275,22 @@ function time_zone_conversion($date, $time_zone) {
 
     $date = explode('-', $date);
     date_default_timezone_set('Asia/Kolkata');
-    $time = new DateTime($date[0]);
-    $timezone = timezone_list();
+    if (isset($date[0])) {
+        $time = new DateTime($date[0]);
+        $timezone = timezone_list();
 
-    if ($time_zone == 'GMT') {
-        $time->setTimezone(new DateTimeZone($timezone['GMT']));
-    }
-    else if ($time_zone == 'PST') {
-        $time->setTimezone(new DateTimeZone($timezone['GMT-07:00']));
-    }
-    else {
+        if ($time_zone == 'GMT') {
+            $time->setTimezone(new DateTimeZone($timezone['GMT']));
+        }
+        else if ($time_zone == 'PST') {
+            $time->setTimezone(new DateTimeZone($timezone['GMT-07:00']));
+        }
+        else {
+            return $time->format('H:i');
+        }
+
         return $time->format('H:i');
     }
-
-    return $time->format('H:i');
 }
 
 /**
