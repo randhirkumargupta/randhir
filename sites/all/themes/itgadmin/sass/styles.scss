@@ -2949,7 +2949,7 @@ fieldset#edit-select{
                 border: medium none;
                 color: #ee4d4d;
                 font-size: 13px;
-                margin-left: 100px;
+                margin-left: 0;
                 margin-top: -2px;
               }
               .tabledrag-handle{display: none;}
@@ -4256,4 +4256,41 @@ div.node{
         width: 300px;
         margin-right: 10px;
     }
+}
+.operation-form{
+    @extend .node-form;
+    .form-type-checkboxes{
+        > label{
+            display: block;
+            float: none;
+            padding: 0;
+            width: 100%;
+        }
+    }
+    .form-actions{
+        .form-submit{
+            @extend .btn-save;
+            &+a{
+                @extend .btn;
+                @extend .btn-cancel;
+            }
+        }
+    }
+}
+#views-form-blogs-management-page, 
+#views-form-strory-menegment-page{
+    @extend .operation-form;
+}
+.form-field-name-field-supp-publish, 
+.form-field-name-field-magazine-publish{
+    .form-type-checkboxes .form-checkboxes + div.description{
+        left: 335px;
+    }
+}
+.form-item-field-issue-title-value-value{
+    .form-type-textfield .form-text + div.description{left: 208px;}
+}
+.plupload_filelist_footer{height: 30px;}
+.form-managed-file .filefield-source-plupload div.ajax-progress{
+    @extend .hide;
 }
