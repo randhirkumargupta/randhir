@@ -49,9 +49,9 @@ function itg_mobile_services_feed_generator_of_contents($node) {
     $data = unserialize($validate_content);
     if (is_array($data['clients']) && count($data['clients']) > 0) {
       foreach ($data['clients'] as $key => $val) {
-        if ($content_count < $val) {
+        if ($content_count <= $val) {
           if (empty($error)) {
-            drupal_set_message('feed not generated, please increase service content count', 'error');
+            drupal_set_message('Feed cannot be generated. You have already exceeded feed count limit. Please increase content count limit from service association page.', 'error');
             $error = TRUE;
           }
         }
