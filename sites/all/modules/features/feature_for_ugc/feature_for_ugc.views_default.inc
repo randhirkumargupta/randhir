@@ -230,10 +230,11 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
   $handler->display->display_options['fields']['field_user_message']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['word_boundary'] = FALSE;
@@ -298,6 +299,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -325,6 +327,7 @@ function feature_for_ugc_views_default_views() {
     19 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
   );
   /* Filter criterion: Content: Content type (field_ugc_ctype) */
   $handler->display->display_options['filters']['field_ugc_ctype_value']['id'] = 'field_ugc_ctype_value';
@@ -553,10 +556,11 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
+  $handler->display->display_options['fields']['field_user_message']['label'] = 'Description';
   $handler->display->display_options['fields']['field_user_message']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['field_user_message']['alter']['word_boundary'] = FALSE;
@@ -628,6 +632,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -655,6 +660,7 @@ function feature_for_ugc_views_default_views() {
     19 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
   );
   /* Filter criterion: Content: Source type (field_story_source_type) */
   $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';

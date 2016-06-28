@@ -38,12 +38,6 @@ function feature_for_ugc_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -68,12 +62,6 @@ function feature_for_ugc_field_default_field_bases() {
     'settings' => array(
       'default_image' => 0,
       'uri_scheme' => 'public',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'image',

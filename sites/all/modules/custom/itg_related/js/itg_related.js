@@ -122,20 +122,23 @@ jQuery(document).ready(function(){
     var item = [];
     jQuery('body').on('change', '.itg-row-selector-select', function () {
         var isCheck = jQuery(this).is(':checked');
-        var url = jQuery(this).parent().parent().parent().find('.views-field-entity-id').html();
+        var url = jQuery(this).parent().parent().parent().find('.views-field-entity-id span').html();
+        var site = jQuery(this).parent().parent().parent().find('.views-field-site').html();
         var urlval = jQuery.trim(url);
+        var siteval = jQuery.trim(site);
+        var url_site = siteval + '_' + urlval;
         if (isCheck) {
-            var hasurl = jQuery.inArray(urlval, item);
+            var hasurl = jQuery.inArray(url_site, item);
             if (hasurl == -1) {
-                item.push(urlval);
+                item.push(url_site);
             }
         }
         else {
-            var hasurl = jQuery.inArray(urlval, item);
+            var hasurl = jQuery.inArray(url_site, item);
             item.splice(hasurl, 1);
         }
-      
-        console.log("hasurl index = " + item);
+        //jQuery('#insvalue').val(item);
+        //console.log("hasurl index = " + item);
     });
     
 //    jQuery('body').on('click', '.insert-url', function(){
@@ -149,7 +152,7 @@ jQuery(document).ready(function(){
     
      jQuery('body').on('click', '.insert-url', function(){
          // parent.jQuery('#edit-field-s-related-content-und-0-value').val(item); edit-title
-           // parent.jQuery('#edit-title').val(item);
+            parent.jQuery('#edit-title').val(item);
             parent.jQuery.colorbox.close();
             item.length = 0;
         });
