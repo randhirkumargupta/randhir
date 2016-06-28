@@ -137,6 +137,14 @@ function itgadmin_preprocess_block(&$variables, $hook) {
 function itgadmin_preprocess_comment(&$vars) {  
   // Remove comment title from display
   $vars['title'] = '';
+  $comment = $vars['elements']['#comment'];
+  $node = $vars['elements']['#node'];
+  if($node->type == 'story' || $node->type == 'blog') {
+  $vars['created']   = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
+  $vars['changed']   = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
+
+  $vars['submitted'] = t('Submitted by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
+  }
 }
 
 /**
@@ -191,7 +199,7 @@ function itgadmin_node_preview($variables) {
 
   // Do we need to preview trimmed version of post as well as full version?
   if ($trimmed != $full) {
-    drupal_set_message(t('The trimmed version of your post shows what your post looks like when promoted to the main page or when exported for syndication.<span class="no-js"> You can insert the delimiter "&lt;!--break--&gt;" (without the quotes) to fine-tune where your post gets split.</span>'));
+    //drupal_set_message(t('The trimmed version of your post shows what your post looks like when promoted to the main page or when exported for syndication.<span class="no-js"> You can insert the delimiter "&lt;!--break--&gt;" (without the quotes) to fine-tune where your post gets split.</span>'));
     $output .= '<h3>' . t('Preview trimmed version') . '</h3>';
     $output .= $trimmed;
     $output .= '<h3>' . t('Preview full version') . '</h3>';
@@ -210,15 +218,107 @@ function itgadmin_date_all_day_label() {
   return '- 00:00';
 }
 
-//breadcome
+/**
+ * Override of theme('breadcrumb').
+ */
+function itgadmin_breadcrumb($vars) {
+  $output = '';
+
+  // Add current page onto the end.
+  if (!drupal_is_front_page()) {
+    $item = menu_get_item();
+    $end = end($vars['breadcrumb']);
+    $title = drupal_get_title();
+    if ($end && strip_tags($end) !== $title) {
+      //$vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
+      if (arg(2) == 'edit') {
+        $node = node_load(arg(1));
+        if($node->type == 'issue'){
+          $title_arr = explode('00:', $node->title);
+          $vars['breadcrumb'][1] = date('d/m/Y', strtotime($title_arr[0]));
+        }
+        
+        $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
+      }
+      else {
+        $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $title : decode_entities(check_plain($title));
+        $node = node_load(arg(1));
+        if($node->type == 'issue'){
+          $title_arr = explode('00:', $node->title);
+          $vars['breadcrumb'][1] = date('d/m/Y', strtotime($title_arr[0]));
+        }
+        
+      }
+    }
+
+    
+    //Story Listing
+    if(arg(0) == 'issue-listing'){
+      $list_story_parent_link = 'manage-'.arg(1).'s';;
+      $list_story_link = 'issue-listing'.'/'.arg(1).'/'.arg(2);
+        $breadcrumb[] = l('Home','cms-user-dashboard').l('List '.  ucfirst(arg(1)).'s', $list_story_parent_link).l('List Stories',$list_story_link);
+        return '<div class="breadcrumb-link">'. implode(' » ', $breadcrumb) .'</div>';
+    }
+    
+    // get first argument from url 
+     $content_url = arg(0);
+     // make title for breadcrumb
+     $content_title = ucfirst(str_replace('-',' ',$content_url));
+     
+     $story_tab = array('in-queue-story','published-story','expired-story', 'unpublished-story', 'archive-story');
+     $photogallery_tab = array('in-queue-photogallery','published-photogallery','unpublished-photogallery', 'archive-photogallery');
+     $bolg_tab = array('published-blogs','unpublished-blogs','in-queue-blogs', 'archive-blogs');
+     
+     //story tab breadcrumb
+     if (in_array($content_url, $story_tab)) {
+      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
+      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+    }
+    
+    //Photogallery tab breadcrumb
+     if (in_array($content_url, $photogallery_tab)) {
+      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
+      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+    }
+
+    
+    //Blog tab breadcrumb
+     if (in_array($content_url, $bolg_tab)) {
+      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
+      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+    }
+
+
+  }
+
+  // Optional: Add the site name to the front of the stack.
+  if (!empty($vars['prepend'])) {
+    $site_name = empty($vars['breadcrumb']) ? "<strong>". check_plain(variable_get('site_name', '')) ."</strong>" : l(variable_get('site_name', ''), '<front>', array('purl' => array('disabled' => TRUE)));
+    array_unshift($vars['breadcrumb'], $site_name);
+  }
+
+  $depth = 0;
+  foreach ($vars['breadcrumb'] as $link) {
+
+    // If the item isn't a link, surround it with a strong tag to format it like
+    // one.
+    if (!preg_match('/^<a/', $link) && !preg_match('/^<strong/', $link)) {
+      $link = '<span>' . $link . '</span>';
+    }
+
+    $output .= "<li class='breadcrumb-link breadcrumb-depth-{$depth}'>{$link}</li>";
+    $depth++;
+  }
+  return ('<div class="breadcrumb"><ol>' . $output . '</ol></div>');
+}
 
 
 /**
  * Preprocessor for theme('page').
  */
 function itgadmin_preprocess_page(&$vars) {  
-  
-  // Change create category page title.
+ // Change create category page title.
+  $arg0 = arg(0);
   if (arg(2) == 'taxonomy' && arg(3) == 'category_management' && arg(4) == 'add') {
     drupal_set_title('Create Category');
   }
@@ -227,13 +327,35 @@ function itgadmin_preprocess_page(&$vars) {
     drupal_set_title('Create Tag');
   }
 
-  if (arg(0) == 'survey-result' && is_numeric(arg(1))) {
+  if ($arg0 == 'survey-result' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
     drupal_set_title('Survey Result: ' . ucwords($node->title));
   }
-
+  
+  if (!empty($vars['node']) && $vars['node']->type == 'ugc') {
+    drupal_set_title('');
+  }
+   
+  // Add tpl for related content view page
+  if (arg(0) == 'related-content') {
+    $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
+  }
+  
   //Add tpl for event registration view page
-  if ($vars['node']->type == 'event_registration' || arg(0) == 'comment_view' || arg(0) == 'event-users-list') {
+  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit') {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
+  }
+}
+
+/**
+ * Override the video field
+ */
+function itgadmin_preprocess_field(&$vars) {
+  if($vars['element']['#field_name'] == 'field_upload_video') {
+      $file_id = $vars['element']['#items'][0]['fid'];
+      if(module_exists('itg_videogallery')){
+        $video_id = itg_videogallery_get_video($file_id);
+        $vars['element'][0]['#file']->video_id = $video_id;
+      }
   }
 }

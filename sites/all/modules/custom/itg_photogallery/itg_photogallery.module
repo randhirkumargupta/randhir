@@ -7,12 +7,17 @@
 
 /**
  * Implements hook_form_alter().
- * @param type $form
- * @param type $form_state
- * @param type $form_id
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
  */
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'photogallery_node_form') {
+    //code for common syndication field hide
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-syndication").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    
     $form['upload'] = array(
       '#type' => 'plupload',
       '#weight' => 21,
@@ -47,10 +52,10 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
           $destination = $destination_array[0];
       }
 
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-        '#weight' => 20,
-      );
+//      $form['actions']['cancel'] = array(
+//        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+//        '#weight' => 20,
+//      );
       
       $form['actions']['submit']['#submit'][] = 'itg_photogallery_form_custom_callback';
       
@@ -66,8 +71,8 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Custom submit callback for redirecting story form.
- * @param type $form
- * @param type $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function itg_photogallery_form_custom_callback($form, &$form_state) {
   
@@ -87,9 +92,19 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
  * After build for story form.
  * @param array $form
  * @param array $form_state
+ * @return array $form
  */
 function itg_photogallery_after_build($form, &$form_state) {
-  //p();
+  if (!isset($_REQUEST['destination'])) {
+    $destination = '';
+      } else {
+          $destination_array = explode('?', $_REQUEST['destination']);
+          $destination = $destination_array[0];
+      }
+  $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+      );
   global $user, $base_url;
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
@@ -105,7 +120,7 @@ function itg_photogallery_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
   }
   drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 3));
-  $form['revision_information']['log']['#prefix'] = '<h2 id="title-metatags" class="story-title">Remark</h2>';
+  $form['additional_settings']['group']['#groups']['additional_settings'][4]['#prefix'] = '<h2 id="title-metatags" class="story-title">Meta Tags</h2>';
 return $form;
 }
 
@@ -126,7 +141,7 @@ function itg_photogallery_custom_validate(&$form, &$form_state){
 
 /**
  * Implements views header link 
- *
+ * {@inheritdoc}
  */
 function itg_photogallery_views_pre_render(&$view) {
     if ($view->name == "manage_photogallery") {
@@ -139,11 +154,7 @@ function itg_photogallery_views_pre_render(&$view) {
 
 /**
  * Implements hook_field_attach_form().
- * @param type $entity_type
- * @param type $entity
- * @param array $form
- * @param array $form_state
- * @param type $langcode
+ * {@inheritdoc}
  */
 function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
   $options = array('language' => field_valid_language($langcode));
@@ -188,9 +199,9 @@ function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$for
 
 /**
  * Implements hook_form_submit().
- * @global type $user
+ * @global object $user
  * @param array $form
- * @param boolean $form_state
+ * @param array $form_state
  */
 function itg_photogallery_field_add_more_submit($form, &$form_state) {
 
@@ -261,6 +272,7 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
 
 /**
  * Implements hook_block_info().
+ * {@inheritdoc}
  */
 function itg_photogallery_block_info() {
   $blocks['photogallery_tab_form_block'] = array(
@@ -273,6 +285,7 @@ function itg_photogallery_block_info() {
 
 /**
  * Implements hook_block_view().
+ * {@inheritdoc}
  */
 function itg_photogallery_block_view($delta = '') {
   global $user;
@@ -289,6 +302,7 @@ function itg_photogallery_block_view($delta = '') {
 
 /**
  * Implements hook_theme().
+ * {@inheritdoc}
  */
 function itg_photogallery_theme($existing, $type, $theme, $path) {
   $themes = array(
@@ -367,4 +381,19 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
 
 function itg_photogallery_form_field_gallery_image_form_alter(&$form, &$form_state, $form_id) {
   pr($form);
+}
+
+/**
+ * Implement hook_node_presave
+ * {@inheritdoc}
+ */
+function itg_photogallery_node_presave($node) {
+  //p($node->field_featured[LANGUAGE_NONE][0]['value']);
+  foreach ($node->field_gallery_image['und']as $delta => $field) {
+    //p($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value']);
+    if($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value'] == 'yes') {
+      $node->field_featured[LANGUAGE_NONE][0]['value'] = 'yes';
+    }
+  }
+  
 }

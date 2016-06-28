@@ -19,15 +19,9 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
   
   switch ($form_id) {
     case 'story_node_form':
-      $form['#after_build'][] = 'itg_workflow_after_build';      
-    break;
-  
     case 'photogallery_node_form':
-      $form['#after_build'][] = 'itg_workflow_after_build';      
-    break;
-  
     case 'blog_node_form':
-      $form['#after_build'][] = 'itg_workflow_after_build';      
+      $form['#after_build'][] = 'itg_workflow_after_build';
     break;
     
     case 'views_exposed_form':
@@ -217,7 +211,7 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
               jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
     
-  } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {     
+  } else if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {     
     $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));    
     
     drupal_add_js('jQuery(document).ready(function() {

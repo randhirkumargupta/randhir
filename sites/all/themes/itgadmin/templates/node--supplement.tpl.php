@@ -36,16 +36,18 @@
  */
 //print_r($node); exit;
 ?>
-<h3>Preview full version</h3>
+<?php if (isset($node->op)): ?>
+<h3 class="show">Preview full version</h3>
+<?php endif; ?>
 <a class="close-preview" href="javascript:;"> </a>
 <div class="node node-preview">
-  <div class="field"><div class="field-label">Supplement Title: </div><div class="field-item"><?php print $title; ?></div></div>
-  <div class="field"><div class="field-label">Magazine: </div><div class="field-item"><?php print $node->field_supp_select_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
-  <div class="field"><div class="field-label">Issue: </div><div class="field-item"><?php print date('m/d/Y', strtotime($node->field_supp_issue[LANGUAGE_NONE][0]['value'])); ?></div></div>
-  <div class="field"><div class="field-label">Status: </div><div class="field-item"><?php print $node->field_supp_publish[LANGUAGE_NONE][0]['value'] ? 'Published' : 'Unpublished'; ?></div></div>
+  <div class="field"><div class="field-label">Supplement Title: </div><div class="field-items"><?php print $title; ?></div></div>
+  <div class="field"><div class="field-label">Magazine: </div><div class="field-items"><?php print $node->field_supp_select_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div></div>
+  <div class="field"><div class="field-label">Issue: </div><div class="field-items"><?php print date('m/d/Y', strtotime($node->field_supp_issue[LANGUAGE_NONE][0]['value'])); ?></div></div>
+  <div class="field"><div class="field-label">Status: </div><div class="field-items"><?php print $node->field_supp_publish[LANGUAGE_NONE][0]['value'] ? 'Published' : 'Unpublished'; ?></div></div>
   <div class="field">
       <div class="field-label">Attached XML Files:</div>
-      <div class="field-item">
+      <div class="field-items">
       <?php 
       $count_file = count($node->field_supp_import_xml[LANGUAGE_NONE]);
       $i = 1;

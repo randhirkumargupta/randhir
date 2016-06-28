@@ -32,7 +32,7 @@ function event_backend_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_choose_sponsor',
     'label' => 'Choose Sponsor',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -66,7 +66,7 @@ function event_backend_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_sponsor_type',
     'label' => 'Sponsor Type',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -76,7 +76,6 @@ function event_backend_field_default_field_instances() {
       'module' => 'autocomplete_deluxe',
       'settings' => array(
         'autocomplete_deluxe_path' => 'autocomplete_deluxe/taxonomy',
-        'autocomplete_path' => 'taxonomy/autocomplete',
         'delimiter' => '',
         'limit' => 10,
         'min_length' => 0,
@@ -604,7 +603,7 @@ function event_backend_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'default_value' => 'now',
-      'default_value2' => 'blank',
+      'default_value2' => 'now',
       'default_value_code' => '',
       'default_value_code2' => '',
       'exclude_cv' => FALSE,
@@ -739,21 +738,15 @@ function event_backend_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_associate_sponsors',
     'label' => 'Associate Sponsors',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
+      'active' => 0,
       'module' => 'field_collection',
-      'settings' => array(
-        'collapsed' => 0,
-        'field_as_label' => '',
-        'last_item_collapsed' => 0,
-        'new_item_open' => 0,
-        'replace_label' => 0,
-      ),
+      'settings' => array(),
       'type' => 'field_collection_embed',
       'weight' => 6,
     ),
@@ -1093,7 +1086,7 @@ function event_backend_field_default_field_instances() {
     'label' => 'Event Close Date',
     'required' => 1,
     'settings' => array(
-      'default_value' => 'strtotime',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '+7days',
       'default_value_code2' => '',
@@ -1105,7 +1098,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
-        'increment' => 15,
+        'increment' => 1,
         'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
@@ -1288,7 +1281,7 @@ function event_backend_field_default_field_instances() {
     'label' => 'Event Start Date',
     'required' => 1,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'strtotime',
       'default_value_code' => '',
       'default_value_code2' => '+7days',
@@ -1300,7 +1293,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
-        'increment' => 15,
+        'increment' => 1,
         'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
@@ -1578,7 +1571,7 @@ function event_backend_field_default_field_instances() {
       'exclude_cv' => FALSE,
       'max' => '',
       'min' => 1,
-      'prefix' => '',
+      'prefix' => '₹',
       'suffix' => '',
       'user_register_form' => FALSE,
     ),
@@ -1672,7 +1665,7 @@ function event_backend_field_default_field_instances() {
     'label' => 'Registration Close Date',
     'required' => 1,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '+7Days',
       'default_value_code2' => '',
@@ -1684,7 +1677,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
-        'increment' => 15,
+        'increment' => 1,
         'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
@@ -1730,7 +1723,7 @@ function event_backend_field_default_field_instances() {
     'label' => 'Registration start date',
     'required' => 1,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -1742,7 +1735,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
-        'increment' => 15,
+        'increment' => 1,
         'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',

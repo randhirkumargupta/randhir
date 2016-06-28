@@ -38,6 +38,12 @@ function feature_for_ugc_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -49,6 +55,9 @@ function feature_for_ugc_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ugc_upload_photo',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -59,6 +68,12 @@ function feature_for_ugc_field_default_field_bases() {
     'settings' => array(
       'default_image' => 0,
       'uri_scheme' => 'public',
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'image',
