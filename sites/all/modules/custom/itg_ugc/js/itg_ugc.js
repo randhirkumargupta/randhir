@@ -56,7 +56,7 @@
             
             
             // restrict user to enter special charecter and number               
-            $('#edit-field-user-name-und-0-value, #edit-title').keyup(function () { 
+            $('#edit-field-user-name-und-0-value').keyup(function () { 
                 this.value = this.value.replace(/[^a-zA-Z\s.,]/g,'');
             });  
             

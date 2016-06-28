@@ -2,6 +2,7 @@
 
 /**
  * Implementation of hook_menu().
+ * {@inheritdoc}
  */
 function itg_term_menu() {
   $items['texonomy/confirm/ajax/%'] = array(
@@ -14,6 +15,11 @@ function itg_term_menu() {
       'administer itg_term settings'
     ),
     'type' => MENU_NORMAL_ITEM
+  );
+  $items['texonomy/%/autocomplete'] = array(
+    'page callback' => 'itg_term_get_term_title',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
   );
   return $items;
 }
@@ -66,7 +72,8 @@ function texonomy_term_ajax_confirm_submit($form, &$form_state) {
 }
 
 /**
- * Implement hook_permissions() to set access permission on ITG Autosave settings form
+ * Implementation of hook_permissions().
+ * {@inheritdoc}
  */
 function itg_term_permission() {
   return array(
@@ -79,20 +86,21 @@ function itg_term_permission() {
 
 /**
  * Implementation of hook_form_alter().
- * @param array $form
- * @param array reference $form_state
- * @param type $form_id
- * @return array $form
+ * {@inheritdoc}
  */
 function itg_term_form_alter(&$form, &$form_state, $form_id) {
   // Load the currently logged in user.
   global $user;
   switch ($form_id) {
     case 'taxonomy_form_term':
+      drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });", 'inline');
       if (isset($_REQUEST['destination']) && $_REQUEST['destination'] == 'tags-management') {
         unset($form['actions']['delete']);
       }
-
+     
+      if($form['#term']['vocabulary_machine_name'] == 'tags') {
+        $form['#submit'][] = 'itg_term_status_message';
+      }
     case 'taxonomy_csv_import_form':
 
       // Check if the user has not the 'administrator' role.
@@ -102,7 +110,6 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
             '#prefix' => "<div class='term-main-wrap'>" . t('Click to Download') . " " . l(t('Import Example'), 'sites/all/modules/custom/itg_term/examples/term.csv') . "</div>"
           );
         }
-
 
         $form['tab']['import_format']['#options']['#access'] = FALSE;
         $form['tab']['import_format']['#options'] = array(
@@ -161,6 +168,31 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
   return $form;
+}
+
+/**
+ * Implements after build function().
+ * @param array $form
+ * @param array $form_state
+ * @return array $form
+ */
+function itg_term_status_message(&$form, &$form_state) {
+  if($form['#term']['vocabulary_machine_name'] == 'tags') {
+    if (isset($_SESSION['messages']['status'])) {
+      unset($_SESSION['messages']['status']);
+    }
+    $arg = arg();
+    if ($arg['2'] == 'taxonomy' && $arg['3'] == 'tags' && $arg['4'] == 'add') {
+      $op = 'created';
+    }
+    elseif ($arg['0'] == 'taxonomy' && $arg['1'] == 'term' && $arg['3'] == 'edit') {
+      $op = 'updated';
+    }
+    $term = $form_state['values']['name'];
+    drupal_set_message(t('Tag <b>' . $term . '</b> has been ' . $op . '.'));
+    $form_state['redirect'] = 'tags-management';
+    return $form;
+  } 
 }
 
 /**
@@ -240,7 +272,6 @@ function itg_term_views_pre_render(&$view) {
         if (preg_match_all("/$regexp/siU", $message_arr['status'][2], $matches, PREG_SET_ORDER)) {
 
           // To unset message
-
           unset($_SESSION['messages']['status']);
           unset($_SESSION['messages']['warning']);
           $filepath = $matches[0][2];
@@ -248,21 +279,22 @@ function itg_term_views_pre_render(&$view) {
           $download_link = l(t($filename), $filepath);
 
           // To override message
-
           drupal_set_message(check_plain(t('Click csv file to download')) . ' ' . $download_link);
         }
       }
     }
 
     // Add "Create Tag" button on listing page of Tags Management
-
-    $header_content_term = l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV'), 'admin/structure/taxonomy/csv_import') . " " . l(t('Export CSV'), 'download-tags');
+    $header_content_term = l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV'), 'admin/structure/taxonomy/csv_import');
+    drupal_add_js("jQuery(document).ready(function(){ jQuery('.feed-icon a').empty(); jQuery('.feed-icon a').html('Export CSV'); });", 'inline');
     $view->attachment_before = $header_content_term;
   }
 }
 
 /**
  * Implements custom _form_validate() for taxonomy_form_term().
+ * @param array $form
+ * @param array $form_state
  */
 function itg_term_validate($form, &$form_state) {
   $term = trim($form_state['values']['name']);
@@ -340,10 +372,12 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
     drupal_add_js(array('itg_term' => array('settings' => $settings)), array('type' => 'setting'));
 
     $form['#info']['filter-created']['label'] = FALSE;
+    $form['name']['#autocomplete_path'] = 'texonomy/13/autocomplete';
     $form['name']['#attributes'] = array(
       'placeholder' => t('Name')
     );
     unset($form['filter-created']['label']);
+
     $form['created']['min'] = array(
       '#type' => 'date_popup',
       '#title' => t('From'),
@@ -367,16 +401,16 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
 
 /**
  * Implementation of hook_views_query_alter
- * @param array reference $view
- * @param array reference $query
+ * @param object reference $view
+ * @param object reference $query
  */
 function itg_term_views_query_alter(&$view, &$query) {
   if (isset($view->name) && $view->name === 'tags_management') {
     if (isset($_GET['created']['max']['date'])) {
       $max_conditions_array = array();
-      $_GET['created']['min']['date'] = str_replace('/','-',$_GET['created']['min']['date']);
-      $_GET['created']['max']['date'] = str_replace('/','-',$_GET['created']['max']['date']);
-      $_GET['created']['min']['date'] = date("Y-m-d",strtotime($_GET['created']['min']['date']));
+      $_GET['created']['min']['date'] = str_replace('/', '-', $_GET['created']['min']['date']);
+      $_GET['created']['max']['date'] = str_replace('/', '-', $_GET['created']['max']['date']);
+      $_GET['created']['min']['date'] = date("Y-m-d", strtotime($_GET['created']['min']['date']));
       $max_date = strtotime(date('d-m-Y', strtotime($_GET['created']['max']['date'] . ' +1 days')));
       $max_date_condition = " AND " . $max_date;
       if (isset($view->query->where[1]['conditions'][1]['field'])) {
@@ -393,7 +427,7 @@ function itg_term_views_query_alter(&$view, &$query) {
 
 /**
  * Implements hook_views_post_execute().
- * @param type $view
+ * @param object reference $view
  */
 function itg_term_views_post_execute(&$view) {
   if (isset($view->name) && $view->name == 'itg_download_taxonomy') {
@@ -406,6 +440,32 @@ function itg_term_views_post_execute(&$view) {
           $result->field_field_tags_display[0]['rendered']['#markup'] = $result->field_field_tags_display[0]['raw']['value'];
         }
       }
+    }
+  }
+}
+
+/**
+ * callback for tags texonomy of title
+ *  
+ */
+function itg_term_get_term_title($title) {
+
+  if (strlen(trim($title)) > 0) {
+    $vid = arg(1);
+    $options = '';
+    $title = strtolower(trim($title));
+    $query = db_select('taxonomy_term_data', 'n');
+    $query->fields('n', array('name'));
+    $query->condition('name', '%' . $title . '%', 'LIKE');
+    $query->condition('n.vid', $vid, '=');
+    $query->range(0, 20);
+
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $options[$record['name']] = $record['name'];
+    }
+    if (isset($options)) {
+      drupal_json_output($options);
     }
   }
 }

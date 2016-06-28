@@ -81,7 +81,7 @@
         rules: {
           'field_survey_add_questions[und][0][field_survey_answer_option_1][und][0][value]': {
             required: {
-              depends: function () {
+              depends: function() {
                 var answerType = $('select[name="field_survey_add_questions[und][0][field_survey_answer_type][und]"]').find('option:selected').val();
                 if (answerType != 'rating') {
                   return true;
@@ -91,12 +91,76 @@
                 }
               }
             },
-            
+          },
+          'field_survey_add_questions[und][1][field_survey_answer_option_1][und][0][value]': {
+            required: {
+              depends: function() {
+                var answerType = $('select[name="field_survey_add_questions[und][1][field_survey_answer_type][und]"]').find('option:selected').val();
+                if (answerType != 'rating') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+          },
+          'field_survey_add_questions[und][2][field_survey_answer_option_1][und][0][value]': {
+            required: {
+              depends: function() {
+                var answerType = $('select[name="field_survey_add_questions[und][2][field_survey_answer_type][und]"]').find('option:selected').val();
+                if (answerType != 'rating') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+          },
+          'field_survey_add_questions[und][3][field_survey_answer_option_1][und][0][value]': {
+            required: {
+              depends: function() {
+                var answerType = $('select[name="field_survey_add_questions[und][3][field_survey_answer_type][und]"]').find('option:selected').val();
+                if (answerType != 'rating') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+          },
+          'field_survey_add_questions[und][4][field_survey_answer_option_1][und][0][value]': {
+            required: {
+              depends: function() {
+                var answerType = $('select[name="field_survey_add_questions[und][4][field_survey_answer_type][und]"]').find('option:selected').val();
+                if (answerType != 'rating') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
           }
-          
+
         },
+                
         messages: {
           'field_survey_add_questions[und][0][field_survey_answer_option_1][und][0][value]': {
+            required: 'Answer choices field is required.'
+          },
+          'field_survey_add_questions[und][1][field_survey_answer_option_1][und][0][value]': {
+            required: 'Answer choices field is required.'
+          },
+          'field_survey_add_questions[und][2][field_survey_answer_option_1][und][0][value]': {
+            required: 'Answer choices field is required.'
+          },
+          'field_survey_add_questions[und][3][field_survey_answer_option_1][und][0][value]': {
+            required: 'Answer choices field is required.'
+          },
+          'field_survey_add_questions[und][4][field_survey_answer_option_1][und][0][value]': {
             required: 'Answer choices field is required.'
           }
         }

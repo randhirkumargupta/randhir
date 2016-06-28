@@ -1345,13 +1345,21 @@ function _form_validate(&$elements, &$form_state, $form_id = NULL) {
   // Also used in the installer, pre-database setup.
   $t = get_t();
 
-  // Recurse through all children.
-  foreach (element_children($elements) as $key) {
-    if (isset($elements[$key]) && $elements[$key]) {
-      _form_validate($elements[$key], $form_state);
-    }
+//  // Recurse through all children.
+//  foreach (element_children($elements) as $key) {
+//    if (isset($elements[$key]) && $elements[$key]) {
+//      _form_validate($elements[$key], $form_state);
+//    }
+//  }
+  // Patch for error message sequence 9 june 2016 by ved
+  $elements_copy = $elements;
+  foreach (element_children($elements_copy, TRUE) as $key) {
+     if (isset($elements[$key]) && $elements[$key]) {
+       _form_validate($elements[$key], $form_state);
+     }
   }
-
+  // endpatch
+  
   // Validate the current input.
   if (!isset($elements['#validated']) || !$elements['#validated']) {
     // The following errors are always shown.

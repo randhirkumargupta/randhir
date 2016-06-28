@@ -11,91 +11,6 @@ function feature_tag_management_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'itg_download_taxonomy';
-  $view->description = '';
-  $view->tag = 'default';
-  $view->base_table = 'itg_category_manager';
-  $view->human_name = 'ITG_download_taxonomy';
-  $view->core = 7;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'ITG_download_taxonomy';
-  $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'none';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'name' => 'name',
-    'field_tags_display' => 'field_tags_display',
-  );
-  $handler->display->display_options['style_options']['default'] = '-1';
-  $handler->display->display_options['style_options']['info'] = array(
-    'name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_tags_display' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-  );
-  /* Relationship: Category Manager: ITG */
-  $handler->display->display_options['relationships']['tid']['id'] = 'tid';
-  $handler->display->display_options['relationships']['tid']['table'] = 'itg_category_manager';
-  $handler->display->display_options['relationships']['tid']['field'] = 'tid';
-  /* Field: Taxonomy term: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'tid';
-  /* Field: Taxonomy term: Feature Tags */
-  $handler->display->display_options['fields']['field_tags_display']['id'] = 'field_tags_display';
-  $handler->display->display_options['fields']['field_tags_display']['table'] = 'field_data_field_tags_display';
-  $handler->display->display_options['fields']['field_tags_display']['field'] = 'field_tags_display';
-  $handler->display->display_options['fields']['field_tags_display']['relationship'] = 'tid';
-  /* Filter criterion: Taxonomy vocabulary: Machine name */
-  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
-  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
-  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
-  $handler->display->display_options['filters']['machine_name']['relationship'] = 'tid';
-  $handler->display->display_options['filters']['machine_name']['value'] = array(
-    'tags' => 'tags',
-  );
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'itg-download-taxonomy';
-
-  /* Display: Data export */
-  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
-  $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['style_options']['quote'] = 1;
-  $handler->display->display_options['style_options']['trim'] = 1;
-  $handler->display->display_options['style_options']['replace_newlines'] = 0;
-  $handler->display->display_options['style_options']['newline_token'] = '1';
-  $handler->display->display_options['style_options']['header'] = 0;
-  $handler->display->display_options['style_options']['keep_html'] = 0;
-  $handler->display->display_options['path'] = 'download-tags';
-  $export['itg_download_taxonomy'] = $view;
-
-  $view = new view();
   $view->name = 'tags_management';
   $view->description = '';
   $view->tag = 'default';
@@ -121,10 +36,15 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'name' => 'name',
+    'field_tags_status' => 'field_tags_status',
     'field_tags_display' => 'field_tags_display',
     'tid' => 'tid',
     'created' => 'created',
@@ -140,6 +60,13 @@ function feature_tag_management_views_default_views() {
       'empty_column' => 0,
     ),
     'name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_tags_status' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -214,6 +141,11 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['field_tags_display']['table'] = 'field_data_field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['field'] = 'field_tags_display';
   $handler->display->display_options['fields']['field_tags_display']['relationship'] = 'tid';
+  /* Field: Taxonomy term: Tag Status */
+  $handler->display->display_options['fields']['field_tags_status']['id'] = 'field_tags_status';
+  $handler->display->display_options['fields']['field_tags_status']['table'] = 'field_data_field_tags_status';
+  $handler->display->display_options['fields']['field_tags_status']['field'] = 'field_tags_status';
+  $handler->display->display_options['fields']['field_tags_status']['relationship'] = 'tid';
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
   $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
@@ -329,6 +261,40 @@ function feature_tag_management_views_default_views() {
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: Taxonomy term: Tag Status (field_tags_status) */
+  $handler->display->display_options['filters']['field_tags_status_value']['id'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['table'] = 'field_data_field_tags_status';
+  $handler->display->display_options['filters']['field_tags_status_value']['field'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['relationship'] = 'tid';
+  $handler->display->display_options['filters']['field_tags_status_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_tags_status_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['operator_id'] = 'field_tags_status_value_op';
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['label'] = 'Tag Status';
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['operator'] = 'field_tags_status_value_op';
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['identifier'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    22 => 0,
+  );
   /* Filter criterion: Taxonomy vocabulary: Machine name */
   $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
   $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
@@ -375,6 +341,46 @@ function feature_tag_management_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'tags-management';
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'ITG_download_taxonomy';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['attach_text'] = 'Exports CSV';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 1;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 0;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'tid';
+  /* Field: Taxonomy term: Feature Tags */
+  $handler->display->display_options['fields']['field_tags_display']['id'] = 'field_tags_display';
+  $handler->display->display_options['fields']['field_tags_display']['table'] = 'field_data_field_tags_display';
+  $handler->display->display_options['fields']['field_tags_display']['field'] = 'field_tags_display';
+  $handler->display->display_options['fields']['field_tags_display']['relationship'] = 'tid';
+  /* Field: Taxonomy term: Tag Status */
+  $handler->display->display_options['fields']['field_tags_status']['id'] = 'field_tags_status';
+  $handler->display->display_options['fields']['field_tags_status']['table'] = 'field_data_field_tags_status';
+  $handler->display->display_options['fields']['field_tags_status']['field'] = 'field_tags_status';
+  $handler->display->display_options['fields']['field_tags_status']['relationship'] = 'tid';
+  $handler->display->display_options['path'] = 'download-tags';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
+  $handler->display->display_options['sitename_title'] = 0;
   $export['tags_management'] = $view;
 
   return $export;

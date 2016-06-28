@@ -169,3 +169,28 @@ function itg_theme(){
 function itg_preprocess_node (&$variables) {
   unset($variables['content']['links']['node']['#links']['node-readmore']);
 }
+
+// change comment date format
+function itg_preprocess_comment(&$variables) {
+  $comment = $variables['elements']['#comment'];
+  $node = $variables['elements']['#node'];
+  if($node->type == 'story' || $node->type == 'blog') {
+  $variables['created']   = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
+  $variables['changed']   = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
+
+  $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['author'], '!datetime' => $variables['created']));
+  }
+}
+
+/**
+ * Override the video field
+ */
+function itg_preprocess_field(&$vars) {
+  if($vars['element']['#field_name'] == 'field_upload_video') {
+      $file_id = $vars['element']['#items'][0]['fid'];
+      if(module_exists('itg_videogallery')){
+        $video_id = itg_videogallery_get_video($file_id);
+        $vars['element'][0]['#file']->video_id = $video_id;
+      }
+  }
+}
