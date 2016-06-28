@@ -93,7 +93,7 @@ function features_for_survey_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_survey_answer_option_1',
     'label' => 'Answer choices',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -130,7 +130,7 @@ function features_for_survey_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_survey_answer_option_2',
     'label' => 'Answer Option 2',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -389,7 +389,7 @@ function features_for_survey_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 2,
     ),
   );
 

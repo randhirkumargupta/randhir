@@ -84,7 +84,6 @@ function itg_story_block_view($delta = '') {
 }
 
 
-
 /**
  * Implements hook_theme().
  * @param type $existing
@@ -109,7 +108,6 @@ function itg_story_theme($existing, $type, $theme, $path) {
 
   return $themes;
 }
-
 
 
 /**
@@ -138,20 +136,17 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * @param type $form_state
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-    if (isset($_SESSION['messages']['status'])) {
-        unset($_SESSION['messages']['status']);
-    }
-    if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'story') {
-        $op = 'created';
-        $story_title = $form_state['node']->title;
-        drupal_set_message(t('Story <b>' . $story_title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
-        $_GET['destination'] = $_REQUEST['destination'];
-    } else {
-        $op = 'updated';
-        $story_title = $form_state['node']->title;
-        drupal_set_message(t('Story <b>' . $story_title . '</b> has been ' . $op . '.'));
-        $_GET['destination'] = $_REQUEST['destination'];
-    }
+  
+  $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
+  $node_type = ucfirst($form_state['node']->type);
+  $node_type = str_replace("_", " ", $node_type);
+  $title = ucfirst($form_state['node']->title);
+
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+
+  $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
 }
 
 /**
@@ -199,6 +194,13 @@ function itg_story_node_validate($node, $form, &$form_state) {
   // Code for redirection url validation
   if ($node->type == 'story') {
     
+     // code to validation magazine field when issue based story is checked
+    if (!empty($issue_based)) {
+      if (empty($magazine)) {
+        form_set_error('field_story_select_magazine', t("Please select Magazine"));
+      }
+    }
+    
     // code to check if issue based is check fill magazine kicker text
     if (!empty($issue_based)) {
       if (empty($magazine_kicker)) {
@@ -206,14 +208,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
       }
     }
     
-    // code to validation magazine field when issue based story is checked
-    if (!empty($issue_based)) {
-      if (empty($magazine)) {
-        form_set_error('field_story_select_magazine', t("Please select Magazine"));
-      }
-    }
-
-    $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
+   $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
     
     if (!empty($redirection_url)) { 
       if (filter_var($redirection_url, FILTER_VALIDATE_URL) === false) {
@@ -530,7 +525,10 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $form['field_story_magazine_kicker_text']['#states'] = array(
       'visible' => array(
         ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-      )
+      ),
+    'required' => array(
+      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+    )
     );
     
     // code for Magazine Headline * field show and hide

@@ -53,6 +53,55 @@
         });
         $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, #edit-field-survey-end-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-2, #edit-field-survey-end-date-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
+      
+//      $('#edit-field-survey-add-questions-und-add-more').mousedown(function(){
+//
+//      });
+      
+      $("#survey-node-form").validate({ 
+        submitHandler: function (form) {
+          $('input:submit').attr('disabled', 'disabled');
+          form.submit();
+        },
+        onfocusout: function (element) {
+          $(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          var elementName = element.attr('name');
+          var errorPlaceHolder = '';
+          switch (elementName) {
+            
+            default:
+              errorPlaceHolder = element.parent();
+          }
+          error.appendTo(errorPlaceHolder);
+        },
+        rules: {
+          'field_survey_add_questions[und][0][field_survey_answer_option_1][und][0][value]': {
+            required: {
+              depends: function () {
+                var answerType = $('select[name="field_survey_add_questions[und][0][field_survey_answer_type][und]"]').find('option:selected').val();
+                if (answerType != 'rating') {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              }
+            },
+            
+          }
+          
+        },
+        messages: {
+          'field_survey_add_questions[und][0][field_survey_answer_option_1][und][0][value]': {
+            required: 'Answer choices field is required.'
+          }
+        }
+      });
+      
     }
   };
 })(jQuery, Drupal, this, this.document);

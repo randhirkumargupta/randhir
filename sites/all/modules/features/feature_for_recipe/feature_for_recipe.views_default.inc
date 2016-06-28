@@ -267,6 +267,11 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['fields']['field_recipe_content_type']['id'] = 'field_recipe_content_type';
   $handler->display->display_options['fields']['field_recipe_content_type']['table'] = 'field_data_field_recipe_content_type';
   $handler->display->display_options['fields']['field_recipe_content_type']['field'] = 'field_recipe_content_type';
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';

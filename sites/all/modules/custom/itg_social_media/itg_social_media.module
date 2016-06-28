@@ -1,96 +1,78 @@
 <?php
 
-/* 
- * Author: ITG
- * Date: 14-04-2016
+/**
+ * @file
+ *
  * Purpose: ITG social media integration module.
  */
+require 'vendor/autoload.php';
+use TwitterOAuth\Auth\SingleUserAuth;
 
 /**
- * Implements hook_form_alter() 
- * @param type $form
- * @param type $form_state
- * @param type $form_id
+ * Serializer Namespace
+ */
+use TwitterOAuth\Serializer\ArraySerializer;
+
+// Load form.inc file
+module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
+
+/**
+ * Implement hook_permissions()
+ */
+function itg_social_media_permission() {
+  return array(
+    'administer itg_social_media edit_content settings' => array(
+      'title' => t('Edit social media section'),
+      'description' => t('Using this permission user can edit social media part of any node.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_form_alter()
+ * {@inheritdoc}
  */
 function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  if(isset($form['created']['min'])) {
+  if (isset($form['created']['min'])) {
     $form['created']['min'] = array(
+      '#title' => t('Start Date'),
       '#type' => 'date_popup',
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-3:+3',
     );
     $form['created']['max'] = array(
+      '#title' => t('End Date'),
       '#type' => 'date_popup',
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-3:+3',
     );
-  }  
+  }
 }
 
 /**
- * Create custom form for social media integration.
+ * Login function for twitter integration.
  */
-function itg_social_media_form($form, &$form_state) {
-  $form = array();
-  $form['itg_smi'] = array(
-    '#type' => 'checkboxes',
-    '#title' => t('Social media integration '),
-    '#options' => array(
-      'facebook' => 'Facebook', 
-      'facebook_instant_article' => 'Facebook Instant Article',
-      'twitter'  => 'Twitter',
-    ),
-  );
-  $form['itg_facebook_narrative'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Facebook Narrative'),
-    '#maxlength' => 255,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
-    ),
-  );  
-  $form['itg_fb_img'] = array(
-    '#title' => t('Facebook Image'),
-    '#type' => 'managed_file',
-    '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
-    '#default_value' => variable_get('image_example_image_fid', ''),
-    '#upload_location' => 'public://itg_fb_img/',
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  $form['itg_twitter_narrative'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Twitter Narrative'),
-    '#maxlength' => 255,
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
-  $form['itg_twitter_img'] = array(
-    '#title' => t('Twitter Image'),
-    '#type' => 'managed_file',
-    '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
-    '#default_value' => variable_get('image_example_image_fid', ''),
-    '#upload_location' => 'public://itg_twitter_img/',
-    '#states' => array(
-      'visible' => array(
-        ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      )
-    ),
-  );
+function itg_social_media_twitter_login() {
+  // Include common helper file to get constant values
+  module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
   
-  return $form;
+  $credentials = array(
+    'consumer_key' => CONSUMER_KEY,
+    'consumer_secret' => CONSUMER_SECRET,
+    'oauth_token' => OAUTH_TOKEN,
+    'oauth_token_secret' => OAUTH_TOKEN_SECRET,
+  );
+  $serializer = new ArraySerializer();
+
+  $auth = new SingleUserAuth($credentials, $serializer);
+  
+  return $auth;
 }
 
 /**
  * Implements hook_block_info()
+ *
+ * {@inheritdoc}
  */
 function itg_social_media_block_info() {
   $block = array();
@@ -98,27 +80,43 @@ function itg_social_media_block_info() {
     'info' => t('Social Media Integration'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+
   return $block;
 }
 
 /**
  * Implements hook_block_view()
- * @param type $delta
+ * {@inheritdoc}
  */
-function itg_social_media_block_view($delta = '') {
+function itg_social_media_block_view($delta = '') {  
   $block = array();
-  $data = '';
-  
+  $arg = arg();
+  $c_type = itg_social_media_node_type(check_plain($arg[1]));
+  $nid = check_plain($arg[1]);
   switch ($delta) {
     case 'social_media_form':
       $block = array(
         'subject' => t('Social media Integration'),
-        'content' => drupal_get_form('itg_social_media_form'),
+        'content' => drupal_get_form('itg_social_media_form', $c_type, $nid),
       );
-      
+
       break;
   }
-  
+
   return $block;
+}
+
+/**
+ * get type of the node from nid.
+ *
+ * @param int $nid
+ * @return string
+ */
+function itg_social_media_node_type($nid) {
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('type'))
+      ->condition('nid', $nid);
+  $itg_result = $itg_query->execute()->fetchField();
+
+  return $itg_result;
 }

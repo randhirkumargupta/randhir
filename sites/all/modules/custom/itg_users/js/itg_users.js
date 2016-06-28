@@ -13,6 +13,7 @@
                 var EDITOR = '6';
                 var SECTIONEDITORANCHOR = '20';
                 var COPYEDITOR = '5';
+                var SITE_ADMIN = '10';
                 $('#edit-field-user-section > .form-type-select > label').html('Section<span class="form-required"> *</span>');
                
                 $('.form-item-roles').hide();
@@ -44,7 +45,7 @@
                     var markexpert = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
                     if (value == EXPERT) {
                         $('.field-name-field-user-section').show();
-                    } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR) {
+                    } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR || value == SITE_ADMIN) {
                         $('.field-name-field-mark-as-expert').show();
                         if (markexpert == true) {
                             $('.field-name-field-user-section').show();
@@ -56,23 +57,45 @@
                 }
 
                 userRegisterEdit(userSelect);
-
+                
+                var roleSelected = $('#user-register-form, #user-profile-form').find('select[name="selected"]').val();
+                var expertCheck = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
+                if (roleSelected == EXPERT) {
+                  $('#edit-field-user-section > .form-type-select > label').html('Section');
+                  $('.user-configurations').show();
+                  if(!expertCheck){
+                    $('.field-name-field-mark-as-expert').hide();
+                  }
+                } else if (roleSelected == COPYEDITOR || roleSelected == EDITOR || roleSelected == SECTIONEDITORANCHOR || roleSelected == SITE_ADMIN) {
+                  $('.user-configurations').show();
+                  if(!expertCheck){
+                    $('.field-name-field-user-section').hide();
+                  }
+                }
+                
                 $('#user-register-form, #user-profile-form').on('change', 'select[name="selected"]', function () {
+                  
                     var value = $(this).val();
                     $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
+                    
                     if (value == EXPERT) {
-                        $('.field-name-field-user-section').show();
-                        $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
-                        $('.field-name-field-mark-as-expert').hide();
-                    } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR) {
-                        $('.field-name-field-user-section').hide();
-                        $('.field-name-field-user-section').find('select').val("_none");
-                        $('.field-name-field-mark-as-expert').show();
+                      
+                      $('#edit-field-user-section > .form-type-select > label').html('Section');
+                      $('.user-configurations').show().find('.field-name-field-user-section').show().prev().hide();
+                      $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
+                        
+                    } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR || value == SITE_ADMIN) {
+                      
+                      $('#edit-field-user-section > .form-type-select > label').html('Section<span class="form-required"> *</span>');
+                      $('.field-name-field-user-section').find('select').val("_none");
+                      $('.user-configurations').show().find('.field-name-field-user-section').hide().prev().show();
+                      
                     } else {
-                        $('.field-name-field-user-section').find('select').val("_none");
-                        $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
-                        $('.field-name-field-user-section').hide();
-                        $('.field-name-field-mark-as-expert').hide();
+                      
+                      $('.field-name-field-user-section').find('select').val("_none");
+                      $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
+                      $('.user-configurations').hide();
+                      
                     }
                 });
 
@@ -94,7 +117,7 @@
 
 // code for moderation value change on click of dropdown and save story 
 jQuery(document).ready(function() {
-    jQuery('.button-yes').click(function() {                 
+    jQuery('#edit-submit').click(function() {                 
         var status_val = jQuery("input[name='status']:checked").val();
         if (status_val == 0) {                   
            var msg = confirm("Are you sure you want to Blocked this User?");

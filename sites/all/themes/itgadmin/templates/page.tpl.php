@@ -8,12 +8,39 @@
  */
 ?>
 
+<?php
+/**
+ * Rename "Add Term" to "Add Category"
+ * Remove primary local task link (Edit and manage fields links from right top side)
+ */
+global $base_url, $user;
+if(!in_array('administrator', $user->roles)){
+  if(arg(3) == 'category_management'){
+      //$action_links = '<li><a href="'.$base_url.'/admin/structure/taxonomy/category_management/add">Add Category</a></li>';
+      $primary_local_tasks = '';
+  }
+  
+  //Tag Management
+  if( arg(3) == 'tags'){
+    $primary_local_tasks = '';
+    $title = 'Create Tag';
+  }
+  
+  //Hide primary local task for others user(except )
+  if(arg(1) == 'people' && arg(2) == 'create'){
+     $primary_local_tasks = '';
+  }
+}
+?>
+
 <div id="page">
 
   <header class="header" id="header" role="banner">
     <section class="container">
-    <?php if ($logo): ?>
-      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+        <?php
+        if ($logo): global $base_url; ?>
+       
+      <a href="<?php  print $base_url.'/cms-user-dashboard'; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
     <?php endif; ?>
 
     <?php if ($site_name || $site_slogan): ?>
@@ -45,14 +72,31 @@
         )); ?>
       </nav>
     <?php endif; ?>
-
+    <div class="user-role">
+      <a href="assigned-task-list">
+        <i class="fa fa-bell-o"></i>
+        <dfn><?php if (function_exists('get_task_count_of_user')) { print get_task_count_of_user(); }?></dfn>
+      </a> 
+      <span>
+        User role - 
+        <?php 
+          // get role array
+          $role_display = $user->roles;
+          // skip key for authenticated user
+          $role_display = array_slice($role_display,1);
+          // get value in comma seprated
+          $role_display = implode(',', $role_display);      
+          print $role_display;  
+        ?>
+      </span>
+    </div>
     <?php print render($page['header']); ?>
   </section>
   </header>
 
   <main id="main">
     <section class="container">
-      <?php print $breadcrumb; ?>
+      
       <div id="navigation">
         <?php if ($main_menu): ?>
           <nav id="main-menu" role="navigation" tabindex="-1">
@@ -78,6 +122,7 @@
 <?php print render($page['navigation']); ?>
 
       </div>
+      <?php print $breadcrumb; ?>
     </section>
     <section id="content" class="container" role="main">
       <?php print render($page['highlighted']); ?>
@@ -87,6 +132,7 @@
         <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
+      <?php print render($page['form_tab']); ?>
       <?php print $messages; ?>
       <?php print render($tabs); ?>
       <?php print render($page['help']); ?>

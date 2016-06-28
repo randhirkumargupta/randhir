@@ -5,6 +5,7 @@
  * The ITG Users module.
  * Provides Users functionality and customizations.
  */
+
 /**
  * Implement hook_user_presave
  * @param array $edit
@@ -31,7 +32,7 @@ function itg_users_menu() {
     'page callback' => 'itg_users_cms_user_dashboard',
     'access callback' => 'user_is_logged_in',
     'type' => MENU_CALLBACK,
-      // 'file' => 'includes/itg_common.inc',
+    'file' => 'includes/itg_users.inc',
   );
 
   $items['user-block'] = array(
@@ -39,44 +40,12 @@ function itg_users_menu() {
     'page callback' => 'itg_users_block_user',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
-     
+    'file' => 'includes/itg_users.inc',     
   );
 
   return $items;
 }
 
-/**
- * callback for cms user dashboard
- *  
- */
-function itg_users_cms_user_dashboard() {
-
-  $data = '';
-
-  // Code for User menu on dashboard
-
-  // $remove_menu_link = array('manage-poll' => 'Poll', 'manage-survey' => 'Survey');
-  $remove_menu_link = array();
-
-  $user_menu_tree = menu_tree_all_data('menu-admin-left-menu');
-
-  foreach ($user_menu_tree as $key_tree => $val_tree) {
-    if (empty($val_tree['below'])) {
-      $menu_link[$val_tree['link']['link_path']] = t($val_tree['link']['link_title']);
-    }
-    else {
-      foreach ($val_tree['below'] as $key => $val) {
-        $menu_link[$val['link']['link_path']] = t($val['link']['link_title']);
-      }
-    }
-  }
-
-  $menu_link = array_diff($menu_link, $remove_menu_link);
-
-  $data['user_link'] = $menu_link;
-
-  return theme('cms_user_dashboard', array('data' => $data));
-}
 
 /**
  * Implements hook_form_alter().
@@ -143,6 +112,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_register_form') {
     $form['#validate'][] = 'itg_users_validate_user_register_validate';
     $form['#after_build'][] = 'itg_users_after_user_register_validate';
+    $form['account']['status']['#access'] = FALSE;
   }
 
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
@@ -176,7 +146,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
             '#required' => TRUE,
           );
         }
-      }
+      }           
 
       //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
       $form['account']['notify']['#default_value'] = TRUE;
@@ -306,7 +276,7 @@ function itg_users_validate_user_profile_validate(&$form, &$form_state) {
     }
   }
 
-  if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR) {
+  if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR || $form_state['values']['selected'] == SITE_ADMIN) {
     $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
 
 //    if (empty($mark_expert)) {
@@ -345,8 +315,7 @@ function itg_users_views_pre_render(&$view) {
     global $user; // Get user information
 
     $header_content = '';
-    if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {
-      // $header_content = '<a href ="./admin/people/create?destination=manage-users">Create User</a>';
+    if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {      
       $header_content = l(t('Create User'), 'admin/people/create', array('query' => array('destination' => 'manage-users')));
     }
 
@@ -414,8 +383,10 @@ function itg_users_role_delegation_uid() {
 
   return $user_array;
 }
-
-// after build for user management form
+ 
+/*
+ * after build for user management form
+ */
 function itg_user_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_users') . '/js/itg_users.js', array('weight' => 1));
   return $form;
@@ -512,33 +483,12 @@ function itg_users_tokens($type, $tokens, array $data = array(), array $options 
   return $replacements;
 }
 
-// query to block user on expirt date
-function itg_users_block_user() {
-
-  $query = db_select('users', 'u');
-  $query->join('field_data_field_story_expiry_date', 'de', 'u.uid = de.entity_id');
-  $query->fields('u', array('uid'));
-  $query->fields('de', array('field_story_expiry_date_value'));
-  $result = $query->execute();
-
-  while ($user_record = $result->fetchAssoc()) {
-    $user_id = $user_record['uid'];
-    $user_exp_date = strtotime($user_record['field_story_expiry_date_value']);
-    $user_exp_date = date('Y-m-d', $user_exp_date);
-    $current_date = date('Y-m-d');
-
-    if ($user_exp_date == $current_date) {
-      // block user
-      db_update('users')
-          ->fields(array(
-            'status' => 0
-          ))
-          ->condition('uid', $user_id)
-          ->execute();
-    }
-  }
-}
-
+/**
+ * Implements hook_user_update().
+ * @param type $edit
+ * @param type $account
+ * @param type $category
+ */
 function itg_users_user_update(&$edit, $account, $category) {
 
   // send mail when password is changed
@@ -626,7 +576,9 @@ function itg_users_user_update(&$edit, $account, $category) {
 
 /**
  * Implements hook_node_insert
- * @param type $node
+ * @param type $edit
+ * @param type $account
+ * @param type $category
  */
 function itg_users_user_insert(&$edit, $account, $category) { 
   if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
@@ -736,9 +688,12 @@ function itg_users_get_mail_content($role) {
 }
 
 
-// query to get last node published by user
-function itg_users_role_name($rid) {
-  
+ 
+/**
+ * Get last node published by user
+ * @param type $rid
+ */
+function itg_users_role_name($rid) {  
   $role_result = db_select('role', 'r')
     ->fields('r')
     ->condition('rid', $rid)

@@ -56,6 +56,18 @@ function feature_for_mobile_services_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create vas_service_content content'.
+  $permissions['create vas_service_content content'] = array(
+    'name' => 'create vas_service_content content',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any client_service_association content'.
   $permissions['delete any client_service_association content'] = array(
     'name' => 'delete any client_service_association content',
@@ -92,6 +104,17 @@ function feature_for_mobile_services_user_default_permissions() {
   // Exported permission: 'delete any service_creation content'.
   $permissions['delete any service_creation content'] = array(
     'name' => 'delete any service_creation content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any vas_service_content content'.
+  $permissions['delete any vas_service_content content'] = array(
+    'name' => 'delete any vas_service_content content',
     'roles' => array(
       'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
@@ -146,6 +169,18 @@ function feature_for_mobile_services_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own vas_service_content content'.
+  $permissions['delete own vas_service_content content'] = array(
+    'name' => 'delete own vas_service_content content',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any client_service_association content'.
   $permissions['edit any client_service_association content'] = array(
     'name' => 'edit any client_service_association content',
@@ -182,6 +217,17 @@ function feature_for_mobile_services_user_default_permissions() {
   // Exported permission: 'edit any service_creation content'.
   $permissions['edit any service_creation content'] = array(
     'name' => 'edit any service_creation content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any vas_service_content content'.
+  $permissions['edit any vas_service_content content'] = array(
+    'name' => 'edit any vas_service_content content',
     'roles' => array(
       'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
@@ -229,6 +275,18 @@ function feature_for_mobile_services_user_default_permissions() {
   $permissions['edit own service_creation content'] = array(
     'name' => 'edit own service_creation content',
     'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own vas_service_content content'.
+  $permissions['edit own vas_service_content content'] = array(
+    'name' => 'edit own vas_service_content content',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',

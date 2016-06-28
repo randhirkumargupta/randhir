@@ -11,6 +11,9 @@ function feature_for_mobile_services_ctools_plugin_api($module = NULL, $api = NU
   if ($module == "field_group" && $api == "field_group") {
     return array("version" => "1");
   }
+  if ($module == "msnf" && $api == "msnf") {
+    return array("version" => "1");
+  }
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -44,20 +47,20 @@ function feature_for_mobile_services_node_info() {
       'title_label' => t('Title'),
       'help' => '',
     ),
-    'create_content' => array(
-      'name' => t('Content'),
-      'base' => 'node_content',
-      'description' => t('ITG CMS users should be able to create content for a service which have been associated with a client and shall be able to share it with client for mobile service.'),
-      'has_title' => '1',
-      'title_label' => t('Client'),
-      'help' => '',
-    ),
     'service_creation' => array(
       'name' => t('Service'),
       'base' => 'node_content',
       'description' => t('ITG CMS users should be able to create a service in my system to share the mobile service with clients.'),
       'has_title' => '1',
       'title_label' => t('Service Title'),
+      'help' => '',
+    ),
+    'vas_service_content' => array(
+      'name' => t('Vas Service Content'),
+      'base' => 'node_content',
+      'description' => t('ITG CMS users should be able to create content for a service which have been associated with a client and shall be able to share it with client for mobile service.'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
       'help' => '',
     ),
   );

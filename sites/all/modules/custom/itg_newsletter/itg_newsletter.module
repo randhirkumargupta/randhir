@@ -148,6 +148,8 @@ function itg_newsletter_form_after_build($form, &$form_state){
   //Add JS for itg_newsletter
    drupal_add_js(drupal_get_path('module', 'itg_newsletter') . '/js/itg_newsletter.js', array('weight' => 1));
     
+  $form['path']['#access'] = FALSE;
+  
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);

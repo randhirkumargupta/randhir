@@ -209,11 +209,11 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = 'User Name';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -234,14 +234,14 @@ function user_management_views_default_views() {
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'users';
   $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['date_format'] = 'itg_date_with_time';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: User: Last access */
   $handler->display->display_options['fields']['access']['id'] = 'access';
   $handler->display->display_options['fields']['access']['table'] = 'users';
   $handler->display->display_options['fields']['access']['field'] = 'access';
-  $handler->display->display_options['fields']['access']['date_format'] = 'itg_date_with_time';
+  $handler->display->display_options['fields']['access']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['access']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['access']['second_date_format'] = 'long';
   /* Field: User: Active */
@@ -340,7 +340,7 @@ function user_management_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: User: First name (field_first_name) */
+  /* Filter criterion: Field: First name (field_first_name) */
   $handler->display->display_options['filters']['field_first_name_value']['id'] = 'field_first_name_value';
   $handler->display->display_options['filters']['field_first_name_value']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['filters']['field_first_name_value']['field'] = 'field_first_name_value';

@@ -1,0 +1,52 @@
+[
+    {
+        "name": "ricardoper/twitteroauth",
+        "version": "v2.1.5",
+        "version_normalized": "2.1.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ricardoper/TwitterOAuth.git",
+            "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/98cc0cbc58dc662c06a951456967ae0602fd3af4",
+            "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "lib-curl": "*",
+            "lib-openssl": "*",
+            "php": ">=5.3"
+        },
+        "time": "2016-03-30 12:11:38",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "TwitterOAuth\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ricardo Pereira",
+                "email": "github@ricardopereira.es",
+                "homepage": "http://ricardopereira.es"
+            }
+        ],
+        "description": "PHP library to communicate with Twitter OAuth API version 1.1",
+        "homepage": "https://github.com/ricardoper",
+        "keywords": [
+            "API v1.1",
+            "oauth",
+            "php",
+            "twitter"
+        ]
+    }
+]
