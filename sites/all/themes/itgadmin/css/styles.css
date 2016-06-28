@@ -4338,3 +4338,9 @@ div.node #comments h2 {
 .form-field-name-field-mega-review-video .form-type-managed-file > label {
   padding-top: 0;
 }
+
+#views-form-manage-users-page .views-table th, #views-form-manage-users-page [id*="field-newsl-add-news-values"] th,
+#views-form-manage-users-page .views-table td,
+#views-form-manage-users-page [id*="field-newsl-add-news-values"] td {
+  max-width: 170px;
+}
