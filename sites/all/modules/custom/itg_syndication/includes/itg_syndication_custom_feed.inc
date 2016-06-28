@@ -365,9 +365,14 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
     unset($form['actions']['preview']);
 }
 
+/**
+ * Callback function for displaying the variables 
+ * @param array $form
+ * @param type $form_state
+ */
 function _pre_define_vars_callback($form, &$form_state) {
-    $CT = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
-    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($CT),"content_type"=>$CT));
+    $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
+    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type),"content_type"=>$content_type));
     return array(
         '#type' => 'ajax',
         '#commands' => array(
@@ -390,8 +395,8 @@ function get_default_feed_pattern_callback($form, &$form_state) {
         drupal_get_messages();
         return array('#type' => 'ajax', '#commands' => $commands);
     } else {
-        $myCustomParameters = get_default_feed_pattern($feed_type, $content_type);
-        $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($myCustomParameters));
+        $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
+        $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
         return array(
             '#type' => 'ajax',
             '#commands' => $commands,
