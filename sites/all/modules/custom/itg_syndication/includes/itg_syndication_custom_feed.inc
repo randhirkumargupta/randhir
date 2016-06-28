@@ -255,22 +255,22 @@ function get_default_feed_pattern($feed_type, $content_type) {
 
 /**
  * Function to generate arry to xml
- * @param type $root_element_name
- * @param type $ar
- * @return type xml
+ * @param string $root_element_name
+ * @param array $ar
+ * @return xml xml
  */
-function assocArrayToXML($root_element_name, $ar) {
+function assocArrayToXML($root_element_name, $xml_array) {
     $xml = new SimpleXMLElement("<{$root_element_name}></{$root_element_name}>");
-    $f = create_function('$f,$c,$a', ' 
-            foreach($a as $k=>$v) { 
-                if(is_array($v)) { 
-                    $ch=$c->addChild($k); 
-                    $f($f,$ch,$v); 
+    $function = create_function('$function,$xml_child,$xml_array', ' 
+            foreach($xml_array as $tags=>$element) { 
+                if(is_array($element)) { 
+                    $child=$xml_child->addChild($tags); 
+                    $function($function,$child,$element); 
                 } else { 
-                    $c->addChild($k,$v); 
+                    $xml_child->addChild($tags,$element); 
                 } 
             }');
-    $f($f, $xml, $ar);
+    $function($function, $xml, $xml_array);
     $real_xml = $xml->asXML();
     $customXML = substr($real_xml, strpos($real_xml, '?' . '>') + 2);
     return $customXML;
