@@ -599,7 +599,9 @@ function itg_videogallery_permission() {
 }
 
 /**
- * Get dailymotion video id by fid
+ * Implement function get dailymotion video id by fid
+ * @param int $fid
+ * @return type string
  */
 function itg_videogallery_get_video($fid){
   $query = db_select('dailymotion_response_details', 'dm')
