@@ -459,6 +459,7 @@ textarea{
   background: #fefafb none repeat scroll 0 0;
   border: 1px solid red;
   padding: 10px 30px;
+  margin: 20px 0;
 }
 .region-help{
   ul{
@@ -497,7 +498,7 @@ body.sidebar-second{
     top: 100px;
     left: 100%;
     width: 330px;
-    z-index: 999999;
+    z-index: 9999;
     transition: all 500ms ease 0s;
     &.active{
       transform: translateX(-330px);
@@ -4228,5 +4229,31 @@ div.node{
     }
     #edit-field-newsl-time .form-type-select .form-select + div.description{
         left: 115px;
+    }
+}
+#colorbox{
+    .view .view-filters .views-exposed-form .views-exposed-widget{
+        width: 170px;
+    }
+}
+[id*="views-form-related-content-new-page"]{
+    table{
+        caption {
+            background-color: #1fb5ad;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px;
+        }
+    }
+}
+#clickme{
+    @extend .add-more;
+}
+.search-criteria{
+    margin-top: 10px;
+    .form-text{
+        width: 300px;
+        margin-right: 10px;
     }
 }
