@@ -28,6 +28,7 @@
         if (this.value == 'Live Blog') {
 
           $(".field-name-field-mark-as-breaking-band").hide();
+          $(".field-name-field-breaking-publish-time").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
 
 
@@ -37,6 +38,7 @@
         {
 
           $(".field-name-field-mark-as-breaking-band").show();
+          $(".field-name-field-breaking-publish-time").show();
 
         }
       });
@@ -44,6 +46,7 @@
       // type check for edit form
       if (type == 'Live Blog') {
         $(".field-name-field-mark-as-breaking-band").hide();
+        $(".field-name-field-breaking-publish-time").hide();
       }
 
 

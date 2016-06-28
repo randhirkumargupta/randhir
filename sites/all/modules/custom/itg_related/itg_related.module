@@ -154,7 +154,9 @@ function itg_related_views_pre_render(&$view) {
       //dpm($related_result->bs_status);
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
-        // dpm($related_result->bs_status);
+        
+        $splittedsite=explode("/",$related_result->site);
+          $related_result->site = strtoupper($splittedsite[3]);
       }
     }
   }
@@ -166,7 +168,7 @@ function itg_related_views_pre_render(&$view) {
  * @param Array $form_state
  */
 function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
+//p($form);
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-related-content-new-page') {
 
@@ -219,14 +221,16 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if ($i > 1) {
       $and = ' AND ';
     }
-    if (!empty($val) && $val != 'related-content' && $key != 'page' && $key != 'width' && $key != 'height' && $key != 'iframe' && $key != 'type') {
+    $remove_key = array('related-content','page','width', 'height', 'iframe', 'type', 'items_per_page');
+    //if (!empty($val) && $val != 'related-content' && $key != 'page' && $key != 'width' && $key != 'height' && $key != 'iframe' && $key != 'type' && $key != 'items_per_page') {
+    if (!empty($val) &&  $val != 'related-content' && !in_array($key, $remove_key)) {
       //print $val;
       if (is_array($val)) {
         $val_str = implode(' OR ', $val);
       }
       else {
         if ($key == 'label' || $key == 'sm_field_story_kicker_text') {
-          $val_str = trim($val) . '*';
+          $val_str = trim(strtolower($val)) . '*';
           $val_str = str_replace(" ", "* OR ", $val_str);
         }
         else if ($key == 'sm_vid_Tags') {

@@ -5,35 +5,40 @@ module_load_include('module', 'itg_tv_schedule', 'itg_tv_schedule.module');
  * Inc file contains the functions
  */
 function tv_schedule_listing() {
-    //time_zone_conversion();
+    //getting value from Url 
+    $arg = arg();
+    $search_title = $_GET['title'];
+        
     if ($_GET['time_zone'] == 'PST') {
         date_default_timezone_set('America/Los_Angeles');
-        $date = date("Y-m-d H:i:s");
-        $time = new DateTime($date);
-        $curent_time = $time->format('H:i');
     }
     elseif ($_GET['time_zone'] == 'GMT') {
         date_default_timezone_set('Africa/Lome');
-        $date = date("Y-m-d H:i:s");
-        $time = new DateTime($date);
-        $curent_time = $time->format('H:i');
+        
     }
     else {
         date_default_timezone_set('Asia/Kolkata');
+        
+    }
         $date = date("Y-m-d H:i:s");
         $time = new DateTime($date);
         $curent_time = $time->format('H:i');
-    }
 
-    $arg = arg();
-    $con = new Mongo();
+  /** 
+    $con = new MongoClient();
+    if ($con){
     // Select Database
-    $db = $con->csvhandling;
+    $db = $con->itg_tv_schedule;
     // Select Collection
-    $people = $db->itgcms_demos;
+    $people = $db->itgcms_tv_schedule;
+    }
+   **/
+    
+    $db = mongodb();
+    $people = $db->tv_schedule;
     // Search result  
-    if (isset($_GET['title'])) {
-        $title = $_GET['title'];
+    if (isset($search_title)) {
+        $title = $search_title;
         $regex = new MongoRegex("/^$title/i");
         $cond = array('program' => $regex);
         $cursor_popup = $people->find($cond);

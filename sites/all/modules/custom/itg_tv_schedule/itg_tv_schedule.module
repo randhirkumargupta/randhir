@@ -52,7 +52,7 @@ function itg_tv_schedule_form($form, &$form_state) {
       '#type' => 'managed_file',
       '#title' => t('Tv Schedule Upload'),
       '#description' => t('Allowed extensions: csv'),
-      '#upload_location' => 'public://',
+      '#upload_location' => 'public://tv_schedule',
       '#upload_validators' => array(
         'file_validate_extensions' => array('csv'),
       ),
@@ -130,28 +130,38 @@ function itg_tv_schedule_uploadmongo($file_id) {
         ->fields('f', array('uri'));
     $itg_result = $itg_query->execute()->fetchField();
     $filename = substr($itg_result, 9);
-    $filepath = "/var/www/html/itgcms/sites/default/files/";
-    $fileaddress = $filepath . $filename;
+    $file_url  = file_create_url($itg_result);
+   
 
-    $file = fopen($fileaddress, "r");
-//connection with database
-    $con = new Mongo();
-    if ($con) {
-// Select Database
-        $db = $con->csvhandling;
-// create collection
-        $db->createCollection("itgcms_demos");
-// Select Collection
-        $people = $db->itgcms_demos;
+    $file = fopen($file_url, "r");
+    
+    
+    
+        //connection with database
+       $db = mongodb();
+       if ($db) {
+       
+          $check = check_collection();
+          $people = $db->tv_schedule;
+         if (isset($check)){
+             $people->drop();
+         } 
+           
+        // create collection
+        $db->createCollection("tv_schedule");
+        // Select Collection
+        $people = $db->tv_schedule;
         $upload_date = date("Y/m/d");
     }
-
+    
     $i = 1;
     while (($data = fgetcsv($file)) !== FALSE) {
+        //var_dump($data); die;
         if ($i > 1) {
             //monday corresponding value insertion
             if ($data[1]) {
                 $qry = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date);
+                //var_dump($people); die;
                 $result = $people->insert($qry);
             }
 
@@ -311,4 +321,22 @@ function format_GMT_offset($offset) {
     $hours = intval($offset / 3600);
     $minutes = abs(intval($offset % 3600 / 60));
     return 'GMT' . ($offset ? sprintf('%+03d:%02d', $hours, $minutes) : '');
+}
+/**
+ * Custom method to check collection is empty or not
+ */
+function check_collection(){
+     $db = mongodb();
+     $people = $db->tv_schedules;
+     $cursor = $people->find();
+     $counter = 0;
+     $keys = 0;
+
+    // iterate cursor to get value of documents
+    foreach ($cursor as $document) {
+        $out[$keys]['time'] = $s_time;
+        $out[$keys]['day'] = $document["day"];
+        $out[$keys]['program'] = $document["program"];
+    }
+    return $out;
 }
