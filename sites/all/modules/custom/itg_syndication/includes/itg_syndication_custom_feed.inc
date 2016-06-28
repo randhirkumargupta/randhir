@@ -14,7 +14,6 @@ function isValidFeed($feed_type, $body) {
             }
             break;
     }
-
     return $return;
 }
 
@@ -23,7 +22,6 @@ function isValidFeed($feed_type, $body) {
  * @param array $data
  */
 function generate_custom_pattern_feed($data) {
-
     $error = array();
     $nids = isset($data['syndication']) ? unserialize($data['syndication']) : array();
     $client = isset($data['client_title']) ? $data['client_title'] : "";
@@ -46,10 +44,8 @@ function generate_custom_pattern_feed($data) {
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
-
             $file_path['file_path'] = $feed_dir . '/' . $filename;
             $file_path['file_name'] = $filename;
-
             return $file_path;
         } else {
             drupal_set_message(t('Pattern not found.'), 'error');
@@ -231,7 +227,6 @@ function itg_syndication_theme() {
     return array(
         'syndication_feed_variables' => array(
             'template' => '/templates/sydication_feed_variables',
-            //'path' => ,
         ),
     );
 }
@@ -331,11 +326,14 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
     });', 'inline');
 
     drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', 'file');
-
+    /*check for default value*/
+    $client =   $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#entity']->field_syndication_feed_clients[LANGUAGE_NONE][0]['value'];
+    if(isset($client)) {
+         $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#default_value'] = $client; 
+    }
     /* Client list */
     $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#options'] = itg_syndication_get_client();
     $form['field_syndication_feed_clients']['#validated'] = TRUE;
-
     $form['pre_define_vars'] = array(
         '#type' => 'markup',
         '#prefix' => '<div id="pre_define_vars_replace_wrapper">',
@@ -387,7 +385,6 @@ function _pre_define_vars_callback($form, &$form_state) {
 function get_default_feed_pattern_callback($form, &$form_state) {
     $feed_type = $form_state['values']['field_syndication_feed_type']['und'][0]['value'];
     $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
-
     if (!isset($content_type) && empty($content_type)) {
         $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Pleaes Select Content Type</span>');
         drupal_get_messages();
