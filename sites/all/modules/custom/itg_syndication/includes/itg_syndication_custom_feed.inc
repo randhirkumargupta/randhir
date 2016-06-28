@@ -326,6 +326,8 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
     });', 'inline');
 
     drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', 'file');
+    /*JS library  added to beutify xml pattern*/
+    drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', 'file');
     /*check for default value*/
     $client =   $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#entity']->field_syndication_feed_clients[LANGUAGE_NONE][0]['value'];
     if(isset($client)) {
