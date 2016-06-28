@@ -65,7 +65,6 @@ function tv_schedule_listing() {
     $keys = 0;
     // iterate cursor to get value of documents
     foreach ($cursor as $document) {
-        echo $document["time"].'</br>';
         $s_time = time_zone_conversion($document["time"], $_GET['time_zone']);
         $out[$keys]['time'] = $s_time;
         $out[$keys]['day'] = $document["day"];
