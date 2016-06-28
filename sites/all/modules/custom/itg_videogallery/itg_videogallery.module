@@ -310,7 +310,11 @@ function itg_videogallery_custom_validate($form, &$form_state) {
   //comment question validation
   $comment_checkbox = $form_state['values']['field_video_configurations'][LANGUAGE_NONE][0]['value'];
   if (isset($comment_checkbox) && $form_state['values']['field_story_comment_question'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_story_comment_question', t("Please enter the comment question."));
+    foreach ($form_state['values']['field_video_configurations'][LANGUAGE_NONE] as $key => $val) {
+      if($val['value'] == 'comment'){
+        form_set_error('field_story_comment_question', t("Please enter the comment question."));
+      }
+    }
   }
   
   // field collection validation

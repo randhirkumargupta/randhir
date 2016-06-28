@@ -873,7 +873,7 @@ function itg_mobile_services_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['mobile_services/%/autocomplete'] = array(
     'page callback' => 'itg_mobile_services_get_content_title',
     'access arguments' => array('access itg story'),
@@ -886,6 +886,14 @@ function itg_mobile_services_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_mobile_services.inc',
   );
+
+  $items['mobile-services-cron'] = array(
+    'page callback' => 'itg_mobile_services_cron',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_mobile_services.inc',
+  );
+
   return $items;
 }
 
