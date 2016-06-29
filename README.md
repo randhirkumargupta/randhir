@@ -1,2 +1,2 @@
 # India Today CMS (Drupal)
-~ Kellton Tech Team
+~ with love from Kellton
