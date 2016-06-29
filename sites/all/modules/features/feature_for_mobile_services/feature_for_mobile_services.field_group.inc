@@ -55,9 +55,8 @@ function feature_for_mobile_services_field_group_info() {
     'weight' => '3',
     'children' => array(
       0 => 'field_contact_person_name',
-      1 => 'field_email_address',
-      2 => 'field_mobile_number',
-      3 => 'field_contact_business_email',
+      1 => 'field_mobile_number',
+      2 => 'field_contact_business_email',
     ),
     'format_type' => 'div',
     'format_settings' => array(

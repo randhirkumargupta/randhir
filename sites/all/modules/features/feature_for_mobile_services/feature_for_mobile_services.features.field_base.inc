@@ -240,7 +240,7 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        1 => 'Fetch web URL (our server)',
+        1 => 'Fetch web URL',
         2 => 'Via FTP location',
         3 => 'Via Email',
       ),

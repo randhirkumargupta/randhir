@@ -1217,7 +1217,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_service_fetch_link',
-    'label' => 'Fetch link (our server)',
+    'label' => 'Fetch link',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1751,7 +1751,7 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('FTP Password');
   t('FTP URL');
   t('FTP Username');
-  t('Fetch link (our server)');
+  t('Fetch link');
   t('Field Title');
   t('Field char limit');
   t('Footer');
