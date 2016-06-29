@@ -48,6 +48,17 @@ function generate_custom_pattern_feed($data) {
             $file_path['file_name'] = $filename;
             return $file_path;
         } else {
+            $default_pattern    = get_default_feed_pattern($feed_type, $content_type);
+            foreach ($nids as $nid) {
+                $xml .= get_custom_feeds_files($nid, $default_pattern);
+                $filename = uniqid() . "-$content_type-date-$today.xml";
+                watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
+            }
+            $xml .= "</root>";
+            $file = file_save_data($xml, "$feed_dir/" . $filename);
+            $file_path['file_path'] = $feed_dir . '/' . $filename;
+            $file_path['file_name'] = $filename;
+            return $file_path;
             drupal_set_message(t('Pattern not found.'), 'error');
         }
     }
@@ -211,7 +222,20 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
                     break;
                 case 'value':
                     /* Its very importent to convert text into xml standard so using htmlspecialchars with ENT_XML1 */
-                    $required_value[] = htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8');
+                    if($field_name=='field_gallery_image') {
+                        //p($entity->field_gallery_image['und']);
+                        foreach($entity->field_gallery_image['und'] as $key=>$fid) {
+                            /*Loop Only once*/
+                            if($key==0) {
+                                $value   =  $entity->field_gallery_image['und'][$key]['value'] ;
+                                $field_collection_item = entity_load('field_collection_item', array($value));
+                                $field_collection_item_uri  =  $field_collection_item[$value]->field_images[LANGUAGE_NONE][0]['uri'];
+                                $required_value[]   =   file_create_url($field_collection_item_uri);
+                            }
+                        }
+                    }else {
+                        $required_value[] = htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8');
+                    }
                     break;
             }
         }
