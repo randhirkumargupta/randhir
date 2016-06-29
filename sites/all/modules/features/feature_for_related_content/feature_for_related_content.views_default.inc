@@ -140,16 +140,11 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="insert" value="Insert" /> &nbsp; <input type="text" name="insvalue" id="insvalue" class="form-text valid">
-<!--<input class="rset-form add-more form-submit" type="button" name="reset" value="reset filter" />--></div>';
+</div>
+<div id="clickme">save search</div>
+<div class="search-criteria" style="display:none"><input class="form-text valid" type="text" name="search-title" id="search-title"><input class="insert-save add-more form-submit" id="filter-save" type="button" name="save" value="save" /></div><div class="success" style="display:none">search saved successfully</div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Footer: Global: Text area */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '<div id="clickme">save search</div>
-<div class="search-criteria" style="display:none"><input class="form-text valid" type="text" name="search-title" id="search-title"><input class="insert-save add-more form-submit" id="filter-save" type="button" name="save" value="save" /></div><div class="success" style="display:none">search saved successfully</div>';
-  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';

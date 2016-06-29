@@ -136,10 +136,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         'event' => 'change', // On change of the selection this action would take place
       );
 
-      $form['field_client_selection'][LANGUAGE_NONE]['#ajax'] = array(
-        'callback' => 'itg_mobile_content_selection_callback',
-        'event' => 'change', // On change of the selection this action would take place
-      );
 
       $form['#validate'][] = 'itg_mobile_client_association_validator';
       $form['#after_build'][] = 'itg_service_association_after_build';
@@ -755,62 +751,6 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
 }
 
 /**
- * ajax service callback for itg_mobile_content_selection_callback
- * @param array $form
- * @param array reference $form_state
- * @return array $form
- */
-function itg_mobile_content_selection_callback(&$form, &$form_state) {
-  $form_state['redirect'] = 'service-association-listing';
-  $node_nid = $form['nid']['#value'];
-  $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-  $field_client_selection = $form_state['values']['field_client_selection'][LANGUAGE_NONE];
-
-  foreach ($field_client_selection as $key => $value) {
-    $target_id = $value['target_id'];
-    $query = db_select('node', 'node')->fields('cs', array('field_client_selection_target_id'));
-    $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id");
-    $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id");
-    $query->condition('sat.field_service_association_title_target_id', $association_nid, '=');
-    $query->condition('cs.field_client_selection_target_id', $target_id, '=');
-    if (!empty($node_nid)) {
-      $query->condition('node.nid', $node_nid, '<>');
-    }
-
-    $query->condition('node.type', array('client_service_association'), 'IN');
-    $query->range(0, 1);
-    $result = $query->execute();
-    $record = $result->fetchAssoc();
-    $target_id = ($record['field_client_selection_target_id']) ? $record['field_client_selection_target_id'] : '';
-    if ($target_id) {
-      $node = node_load($target_id);
-      if ($node->title) {
-        $client_name .= $node->title . ",";
-      }
-    }
-    $client_name = rtrim($client_name, ',');
-  }
-
-  if ($client_name) {
-    return array(
-      '#type' => 'ajax',
-      '#commands' => array(
-        ajax_command_remove("#edit-field-service-association-title .error", "<span class='error'>" . $client_name . " is already associated this service</span>"),
-        ajax_command_append("#edit-field-service-association-title", "<span class='error'>" . $client_name . " is already associated this service</span>")
-      )
-    );
-  }
-  else {
-    return array(
-      '#type' => 'ajax',
-      '#commands' => array(
-        ajax_command_remove("#edit-field-service-association-title .error", "<span class='error'></span>")
-      )
-    );
-  }
-}
-
-/**
  * ajax service callback for itg_mobile_services_custom_callback
  * @param array $form
  * @param array reference $form_state
@@ -844,7 +784,7 @@ function itg_mobile_services_views_pre_render(&$view) {
     if (isset($view->current_display) && $view->current_display == "page") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
       $header_content_client .= l(t('Create Client'), 'node/add/clients-creation', array('query' => array('destination' => 'clients-listing')));
-     // $header_content_client .= '<span class="client-services">&nbsp;' . l(t('Associate Client & Services'), 'node/add/client-service-association', array('query' => array('destination' => 'clients-listing'))) . '&nbsp;</span>';
+      // $header_content_client .= '<span class="client-services">&nbsp;' . l(t('Associate Client & Services'), 'node/add/client-service-association', array('query' => array('destination' => 'clients-listing'))) . '&nbsp;</span>';
     }
     elseif (isset($view->current_display) && $view->current_display == "page_1") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
