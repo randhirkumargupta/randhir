@@ -314,7 +314,7 @@ function itg_syndication_get_mode($client_name) {
   }
   
   //Code for Weburl
-  if (isset($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
+  if (!empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
     $data['Weburl: '.$node->field_service_fetch_link[LANGUAGE_NONE][0]['value']] = 'Web url';
   }
   
