@@ -338,6 +338,12 @@ function itg_related_block_info() {
     'info' => t('Related Form Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  
+  $blocks['related_form_reorder_block'] = array(
+    'info' => t('Related Form Reorder Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -353,6 +359,9 @@ function itg_related_block_view($delta = '') {
   switch ($delta) {
     case 'related_form_block':
       $block['content'] = theme('related_form_display_block', array('data' => $data));
+      break;
+    case 'related_form_reorder_block':
+      $block['content'] = theme('related_form_reorder_block', array('data' => $data));
       break;
   }
 
@@ -370,6 +379,12 @@ function itg_related_theme($existing, $type, $theme, $path) {
   $themes = array(
     'related_form_display_block' => array(
       'template' => 'related-formtemplate',
+      'path' => drupal_get_path('module', 'itg_related') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    
+    'related_form_reorder_block' => array(
+      'template' => 'related-formreorder',
       'path' => drupal_get_path('module', 'itg_related') . '/templates',
       'variables' => array('data' => NULL),
     ),
