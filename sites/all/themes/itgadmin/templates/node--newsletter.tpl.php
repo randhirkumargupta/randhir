@@ -44,7 +44,7 @@
  
         <div class="field">
           <div class="field-label">Template:</div>
-          <div class="field-items"><?php echo l(ucwords($title), 'node/'.$node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'], array('attributes' => array('target'=>'_blank'))) ; ?></div>
+          <div class="field-items"><?php echo ucfirst(itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'])); ?></div>
         </div>
       <?php
       if (isset($node->op) && $node->op == 'Preview'){
