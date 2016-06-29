@@ -5,9 +5,11 @@ module_load_include('module', 'itg_tv_schedule', 'itg_tv_schedule.module');
  * Inc file contains the functions
  */
 function tv_schedule_listing() {
+    
     //getting value from Url 
     $arg = arg();
     $search_title = $_GET['title'];
+    //print $_GET['timezone'];
         
     if ($_GET['time_zone'] == 'PST') {
         date_default_timezone_set('America/Los_Angeles');
@@ -36,8 +38,10 @@ function tv_schedule_listing() {
     
     $db = mongodb();
     $people = $db->tv_schedule;
+    
     // Search result  
     if (isset($search_title)) {
+        $search_counter = 0;
         $title = $search_title;
         $regex = new MongoRegex("/^$title/i");
         $cond = array('program' => $regex);
@@ -48,7 +52,9 @@ function tv_schedule_listing() {
             $search[$key]['day'] = $document["day"];
             $search[$key]['program'] = $document["program"];
             $key++;
+            $search_counter++;
         }
+        $search_count = $search_counter;
     }
 
     // Particular day selection and current day selection 
@@ -63,8 +69,10 @@ function tv_schedule_listing() {
     $cursor = $people->find($cond);
     $counter = 0;
     $keys = 0;
+    
     // iterate cursor to get value of documents
     foreach ($cursor as $document) {
+        
         $s_time = time_zone_conversion($document["time"], $_GET['time_zone']);
         $out[$keys]['time'] = $s_time;
         $out[$keys]['day'] = $document["day"];
@@ -75,11 +83,12 @@ function tv_schedule_listing() {
             $counter++;
         }
     }
+   
     if ($counter > 0) {
         $count = $counter - 1;
     }
 
-    return theme('itg_tv_schedule', array('output' => $out, 'search' => $search, 'total' => $count));
+    return theme('itg_tv_schedule', array('output' => $out, 'search' => $search, 'total' => $count, 'search_count' => $search_count, 'title' => $title));
 }
 
 ?>

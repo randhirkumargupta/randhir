@@ -25,6 +25,7 @@ if($clicked_day == "")
    $clicked_day= $day;
 }
 ?>
+<div>  <h1>TV Schedule</h1> </div>
 <!-- Listing shows and days option -->
 <div class="tv-schedule-parent">
     <ul class="no-bullet schedule-days">
@@ -83,7 +84,8 @@ if($clicked_day == "")
     <div  id="tv-search-popup" class="itg-popup" style="display: block;">
         <div class="popup-data">
             <div class="popup-header">
-                <h2>Search Result</h2>
+                <h2>Search Results</h2><br/>
+                <h3><?php print $search_count.' results for '.$title; ?></h3>
                 <a class="itg-close-popup" href="javascript:;"> Close </a>
             </div>
             <div class="popup-body">
@@ -92,9 +94,9 @@ if($clicked_day == "")
                         <?php foreach ($search as $val1): ?>  
 
                             <tr>
-                                <td><?php print $val1['time']; ?></td>
-                                <td><?php print $val1['program']; ?></td>
+                                <td><?php print $val1['time'].' (IST)'; ?></td>
                                 <td><?php print $val1['day']; ?></td>
+                                <td><?php print $val1['program']; ?></td>
                             </tr>
 
                         <?php endforeach; ?>

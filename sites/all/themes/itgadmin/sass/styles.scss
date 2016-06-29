@@ -4294,3 +4294,58 @@ div.node{
 .form-managed-file .filefield-source-plupload div.ajax-progress{
     @extend .hide;
 }
+[id*="field-videogallery-video-upload-values"]{
+    @extend .itg-add-another-item;
+    margin-top: 30px;
+    tbody tr{
+        @extend .db;
+        td{
+            @extend .fleft;
+            @extend .full;
+            margin-bottom: 10px;
+            .field-name-field-upload-video{
+                @extend .Browse-upload;
+                .form-type-managed-file{
+                    @extend .choose-audio-video-file;
+                    > label{padding-top: 0;}
+                }
+            }
+        }
+    }
+}
+.node-videogallery-form{
+    #videoupload{
+        .form-type-plupload{margin-top: 75px;}
+    }
+    .form-field-name-field-story-schedule-date-time{
+        .date-padding{
+            .form-type-textfield:last-child{
+                margin-left: 10px;
+            }
+        }
+    } 
+}
+.form-item-htmlmail-plaintext{
+    @extend .hide;
+}
+.field-name-field-cm-no-follow{
+    .form-type-checkboxes{
+        margin-top: -20px;
+        padding-left: 60px;
+    }
+}
+.form-field-name-field-mega-review-video{
+    @extend .Browse-upload;
+    .form-type-managed-file{
+        > label{
+            padding-top: 0;
+        }
+        @extend .choose-audio-video-file;
+    }
+}
+#views-form-manage-users-page{
+    .views-table th, 
+    .views-table td{
+        max-width: 170px;
+    }
+}
