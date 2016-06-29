@@ -109,7 +109,7 @@
           $thumbnail = image_style_url("thumbnail", $file->uri); 
           }
           else {
-            $thumbnail = $base_url.'/'.drupal_get_path('module', 'itg_newsletter').'/image/no-image-box.png';
+            $thumbnail = $base_url.'/'.drupal_get_path('module', 'itg_newsletter').'/image/no-image.png';
           }
 
           
@@ -124,7 +124,7 @@
           if($content_id) {
           ?>
           <div class="newsletter-list">
-            <div class="newsletter-thumbnail"><img style="width:100px; height: 56px" src="<?php echo $thumbnail; ?>" /></div>  
+            <div class="newsletter-thumbnail"><img style="width:100px; height: 100px" src="<?php echo $thumbnail; ?>" /></div>  
             <div class="title-kicker">
               <div class="newsletter-title"><?php echo $title; ?></div>
               <div class="newsletter-kicker"><?php echo $kicker; ?></div>
