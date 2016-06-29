@@ -44,7 +44,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'title' => 'title',
-    'field_client_selection' => 'field_client_selection',
+    'field_service_delivery_mode' => 'field_service_delivery_mode',
     'created' => 'created',
     'changed' => 'changed',
     'view_node' => 'nothing',
@@ -66,7 +66,9 @@ function feature_for_mobile_services_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_client_selection' => array(
+    'field_service_delivery_mode' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -478,6 +480,10 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Service Title';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Delivery Mode */
+  $handler->display->display_options['fields']['field_service_delivery_mode']['id'] = 'field_service_delivery_mode';
+  $handler->display->display_options['fields']['field_service_delivery_mode']['table'] = 'field_data_field_service_delivery_mode';
+  $handler->display->display_options['fields']['field_service_delivery_mode']['field'] = 'field_service_delivery_mode';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';

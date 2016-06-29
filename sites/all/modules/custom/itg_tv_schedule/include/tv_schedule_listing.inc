@@ -41,6 +41,7 @@ function tv_schedule_listing() {
     
     // Search result  
     if (isset($search_title)) {
+        $search_counter = 0;
         $title = $search_title;
         $regex = new MongoRegex("/^$title/i");
         $cond = array('program' => $regex);
@@ -51,7 +52,9 @@ function tv_schedule_listing() {
             $search[$key]['day'] = $document["day"];
             $search[$key]['program'] = $document["program"];
             $key++;
+            $search_counter++;
         }
+        $search_count = $search_counter;
     }
 
     // Particular day selection and current day selection 
@@ -85,7 +88,7 @@ function tv_schedule_listing() {
         $count = $counter - 1;
     }
 
-    return theme('itg_tv_schedule', array('output' => $out, 'search' => $search, 'total' => $count));
+    return theme('itg_tv_schedule', array('output' => $out, 'search' => $search, 'total' => $count, 'search_count' => $search_count, 'title' => $title));
 }
 
 ?>
