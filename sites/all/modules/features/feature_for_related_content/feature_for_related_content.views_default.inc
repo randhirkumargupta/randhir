@@ -44,13 +44,9 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '10, 20, 40, 60';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -179,6 +175,11 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['label']['field'] = 'label';
   $handler->display->display_options['fields']['label']['label'] = 'Title';
+  /* Field: Apache Solr: sm_field_story_kicker_text */
+  $handler->display->display_options['fields']['sm_field_story_kicker_text']['id'] = 'sm_field_story_kicker_text';
+  $handler->display->display_options['fields']['sm_field_story_kicker_text']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_story_kicker_text']['field'] = 'sm_field_story_kicker_text';
+  $handler->display->display_options['fields']['sm_field_story_kicker_text']['label'] = 'Kicker text';
   /* Field: Apache Solr: bundle_name */
   $handler->display->display_options['fields']['bundle_name']['id'] = 'bundle_name';
   $handler->display->display_options['fields']['bundle_name']['table'] = 'apachesolr__solr';
@@ -216,11 +217,6 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['im_vid_4']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['im_vid_4']['field'] = 'im_vid_4';
   $handler->display->display_options['fields']['im_vid_4']['exclude'] = TRUE;
-  /* Field: Apache Solr: sm_field_story_kicker_text */
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['id'] = 'sm_field_story_kicker_text';
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['field'] = 'sm_field_story_kicker_text';
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['label'] = 'Kicker text';
   /* Field: Apache Solr: im_field_story_itg_tags */
   $handler->display->display_options['fields']['im_field_story_itg_tags']['id'] = 'im_field_story_itg_tags';
   $handler->display->display_options['fields']['im_field_story_itg_tags']['table'] = 'apachesolr__solr';

@@ -118,12 +118,6 @@
         if (!empty($field_story_category)): ?>
       <?php print render($content['field_story_category']); ?>
         <?php endif; ?>
-        
-        
-        
-        
-        
-
         <div class="Story-details">
             <div class="content-details">
                 <?php print render($content['field_story_schedule_date_time']); ?>
@@ -135,6 +129,18 @@
                 ?>
 
             </div>
-        </div>     
+        </div> 
+            
  <?php endif; // end of view mode full condition ?></div>
+            <?php
+            $comment_checkbox = $node->field_video_configurations[LANGUAGE_NONE];
+            if(isset($comment_checkbox)){
+              foreach ($node->field_video_configurations[LANGUAGE_NONE] as $key => $val) {
+              if($val['value'] == 'comment'){
+                  print render($content['comment_form']);
+                  print render($content['comments']);
+              }
+             }
+            }
+            ?>
 <?php endif; ?>

@@ -70,7 +70,14 @@ foreach($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
   $news_detail = entity_load('field_collection_item', array($news_arr['value']));
   $title = $news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value'];
   $kicker = $news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value'];
-  $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
+  
+  if($news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']){
+    $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
+  }
+  else{
+    $thumbnail = $base_url.'/'.drupal_get_path('module', 'itg_newsletter').'/image/no-image.png';
+  }
+  
   
   //Set flag for empty records
   if(empty($title) && empty($kicker)){
@@ -88,7 +95,7 @@ foreach($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
   
   if($flag){
   $news_content .= '<tr>
-               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img src="'.$thumbnail.'" alt="" /></td>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="'.$thumbnail.'" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">'.l($title, $link, array('attributes' => array('target'=>'_blank'))).'</h2>
                 <p style="margin: 0; font-size: 14px;">'.$kicker.'.</p>
@@ -142,11 +149,18 @@ foreach($story_nodes as $news_arr) {
   
   $title = $news_detail->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
   $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-  $thumbnail = image_style_url("thumbnail", $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+  
+  if($news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']){
+    $thumbnail = image_style_url("thumbnail", $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+  }
+  else{
+    $thumbnail = $base_url.'/'.drupal_get_path('module', 'itg_newsletter').'/image/no-image.png';
+  }
+
   $link = $base_url.'/node/'.$news_detail->nid;
 
   $news_content .= '<tr>
-               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img src="'.$thumbnail.'" alt="" /></td>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="'.$thumbnail.'" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">'.l($title, $link, array('attributes' => array('target'=>'_blank'))).'</h2>
                 <p style="margin: 0; font-size: 14px;">'.$kicker.'.</p>
