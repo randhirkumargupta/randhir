@@ -500,7 +500,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $stime) {
   ]);
 
   if ($reply->httpstatus < 200 || $reply->httpstatus > 299) {
-    drupal_set_message(t('Http status:' . $reply->httpstatus, 'error'));
+    drupal_set_message(t('Http status:' . $reply->httpstatus), 'error');
   }
 
   // Now use the media_id in a Tweet
