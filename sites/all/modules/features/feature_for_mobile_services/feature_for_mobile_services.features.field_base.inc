@@ -573,7 +573,7 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        1 => 'XMLs',
+        1 => 'XML',
         2 => 'RSS',
         3 => 'MRSS',
         4 => 'USSD',

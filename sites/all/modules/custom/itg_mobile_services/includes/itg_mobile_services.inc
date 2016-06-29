@@ -94,7 +94,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
           // 1. Fetch web URL (our server)
           case '1':
             $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
-            if ($frequency_date_arr[0] == $today_date) {
+            if ($frequency_date_arr[0] <= $today_date) {
               itg_mobile_web_url_mobile($service_fetch_link, $file_path, 1);
             }
             else {
@@ -103,7 +103,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
 
             break;
           case 2: // 2. Via FTP location
-            if ($frequency_date_arr[0] == $today_date) {
+            if ($frequency_date_arr[0] <= $today_date) {
               $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
               $ftp_username = isset($client_info->field_ftp_username[LANGUAGE_NONE]) ? $client_info->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
               $ftp_password = isset($client_info->field_ftp_password[LANGUAGE_NONE]) ? $client_info->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
@@ -113,7 +113,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
 
             break;
           case 3: // 3. Via Email
-            if ($frequency_date_arr[0] == $today_date) {
+            if ($frequency_date_arr[0] <= $today_date) {
               $service_email_address = isset($client_info->field_service_email_address[LANGUAGE_NONE]) ? $client_info->field_service_email_address[LANGUAGE_NONE][0]['value'] : '';
               itg_mobile_services_mail($service_email_address, $file_path);
             }
@@ -125,7 +125,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
       }
     }
 
-    if ($frequency_date_arr[0] == $today_date) {
+    if ($frequency_date_arr[0] <= $today_date) {
       itg_mobile_cron_after_feed_generate($node, $client_array, $content_count, $file_path, 1);
     }
     else {
