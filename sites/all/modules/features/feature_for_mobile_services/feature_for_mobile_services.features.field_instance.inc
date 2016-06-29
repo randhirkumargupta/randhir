@@ -250,7 +250,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'label' => 'Content image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -258,7 +258,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1006,7 +1006,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ftp_ip_address',
-    'label' => 'FTP IP Address',
+    'label' => 'FTP URL',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1217,7 +1217,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_service_fetch_link',
-    'label' => 'Fetch link (our server)',
+    'label' => 'Fetch link',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1748,10 +1748,10 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('Delivery Mode');
   t('Email address');
   t('Expiry Date');
-  t('FTP IP Address');
   t('FTP Password');
+  t('FTP URL');
   t('FTP Username');
-  t('Fetch link (our server)');
+  t('Fetch link');
   t('Field Title');
   t('Field char limit');
   t('Footer');
