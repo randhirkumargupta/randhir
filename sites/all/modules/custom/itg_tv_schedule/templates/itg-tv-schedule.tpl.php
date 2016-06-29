@@ -25,7 +25,7 @@ if($clicked_day == "")
    $clicked_day= $day;
 }
 ?>
-<div>  <h1>TV Schedule</h1> </div>
+<div class = "tv_schedule">  <h1>TV Schedule</h1> </div>
 <!-- Listing shows and days option -->
 <div class="tv-schedule-parent">
     <ul class="no-bullet schedule-days">
@@ -38,12 +38,16 @@ if($clicked_day == "")
         <li><a <?php if(arg(1) == 'SUN'){ print $class; }elseif($day == 'SUN' && $clicked_day == 'SUN'){ print $class; } ?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
     </ul>
     <!-- Showing Search box and time zone drop down list -->
+     
     <div class="tv-schedule-form-wrapper">
+       <div class="tv-schedule-date-text"><?php print render(drupal_get_form('itg_tv_schedule_date_form')); ?></div>
         <div class="fleft"><?php print render(drupal_get_form('itg_tv_schedule_time_form')); ?></div>
     <?php print render(drupal_get_form('itg_tv_schedule_search_form')); ?>
     </div>
+    
+    <div class="tv-schedule-slide-wrapper">
     <!-- Shows time in slider upper part -->
-    <div class="tv-schedule tv-schedule-time slider">
+    <div class="tv-schedule tv-schedule-time slider" style="margin-bottom: 30px;">
         <?php foreach ($output as $val): ?>
 
             <div>
@@ -58,23 +62,24 @@ if($clicked_day == "")
             <div class="tv-schedule-task"> 
                 <span><?php
                     if ($total == $counter && $day == $val['day']) {
-                        echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . $val['program'] . '</a>';
+                        echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . ucfirst($val['program']) . '</a>';
                         //print $val['program'];
                     }
                     else {
-                        print $val['program'];
+                        print ucfirst($val['program']);
                     } $counter++;
                     ?></span>   
             </div>    
         <?php endforeach; ?>
     </div>
     <!-- Shows time in slider lower part -->
-    <div class="tv-schedule tv-schedule-time slider">
+    <div class="tv-schedule tv-schedule-time slider" style="margin-top: 30px;">
         <?php foreach ($output as $val): ?>
             <div>
                 <span><?php print $val['time']; ?></span>    
             </div>    
         <?php endforeach; ?>
+    </div>
     </div>
 </div>
 
@@ -84,8 +89,7 @@ if($clicked_day == "")
     <div  id="tv-search-popup" class="itg-popup" style="display: block;">
         <div class="popup-data">
             <div class="popup-header">
-                <h2>Search Results</h2><br/>
-                <h3><?php print $search_count.' results for '.$title; ?></h3>
+                <h2>Search Results <span style='font-size: 14px;'>(<?php print $search_count.' results for '.$title; ?>)</span></h2>
                 <a class="itg-close-popup" href="javascript:;"> Close </a>
             </div>
             <div class="popup-body">
@@ -113,31 +117,47 @@ if($clicked_day == "")
 
 
 <style type="text/css">
-    .slider{width: 1000px;margin: 20px auto;}
-    .slider{width: 820px;margin: 0 auto;}
+    .slider{width: 820px;margin: 0  35px 0 auto;}
+    .tv-schedule-parent {
+        background-color: #3e4651;
+        border-radius: 10px;
+        margin: 0 auto;
+        max-width: 1000px;
+        padding: 10px;
+    }
     .tv-schedule{max-width: 820px;}
     .tv-schedule .slick-list{display: inline-block; width: 100%; vertical-align: top;}
-    .tv-schedule-time .slick-slide span{display: block; padding: 10px; text-align: center;border-left: 1px solid #d9d9d9;}
-    .tv-schedule-time .slick-slide:first-child span{border-left: none;}
-    .tv-schedule-time{border: 1px solid #d9d9d9;}
+    .tv-schedule-time{background-color: #008eb1; color: #fff; font-size: 14px; height: 34px; line-height: 12px; border: none;}
+    .tv-schedule-time .slick-slide span{display: block; padding: 10px; text-align: center; border: none;}
     .tv-schedule .slick-arrow{position: absolute; top: 0; bottom: 0; margin: auto 10px; width: 0; height: 0; border: 10px solid; background: none; font-size: 0; cursor: pointer;}
     .tv-schedule .slick-prev{right: 100%; border-color: transparent #d9d9d9 transparent transparent;}
     .tv-schedule .slick-next{left: 100%; border-color: transparent transparent transparent #d9d9d9;}
     .tv-schedule-news .slick-slide span{display: block;}
-    .tv-schedule-news{border: 1px solid #d9d9d9;}
-    .tv-schedule-news .tv-schedule-task span{padding: 10px; border: 1px solid #d9d9d9; overflow: hidden; height: 100px;}
-    .schedule-days{text-align: center;}
+    .tv-schedule-news{border: none; border-radius: 0 10px 10px 0; background: linear-gradient(#414D57, #293137);box-shadow: 0 0 3px #2f2f2f;}
+    .tv-schedule-news .tv-schedule-task span{color: #fff; padding: 10px; border: none; overflow: hidden; height: 100px; font-size: 16px; font-weight: 500; position: relative;}
+    .tv-schedule-news .tv-schedule-task{position: relative;}
+    .tv-schedule-news .tv-schedule-task:after{content: ''; background-color: rgba(37,42,50,1); width: 1px; height: 100%; left: 100%; top: 0; bottom: 0; margin: auto; position: absolute;}
+    .tv-schedule-news .tv-schedule-task span a{color: #008eb1; text-decoration: none;}
+    .schedule-days{text-align: center; background-color: #37414f; border-radius: 10px; box-shadow: 0 0 3px #2f2f2f;}
     .schedule-days li{display: inline-block; vertical-align: top; color: #008eb1;}
-    .schedule-days li a{background-color: #d9d9d9; display: block; color: #008eb1; text-decoration: none; padding: 5px 30px;}
-    .schedule-days li a:hover, .schedule-days li a.active{color: #fff;background-color: #008eb1;}
-    .tv-schedule-form-wrapper{max-width: 810px; margin: 0 auto;}
+    .schedule-days li a{display: block; color: #008eb1; text-decoration: none; padding: 10px 30px;}
+    .schedule-days li a:hover, .schedule-days li a.active{color: #fff;}
     #itg-tv-schedule-search-form{padding: 20px 0;}
     #itg-tv-schedule-time-form .form-type-select{float: left;padding: 20px 0;}
     #itg-tv-schedule-time-form .form-submit{display: none;}
-    #itg-tv-schedule-time-form .form-select{width: 200px;}
-    #itg-tv-schedule-search-form > div{max-width: 820px; margin: 0 auto; text-align: right;}
+    #itg-tv-schedule-time-form .form-select{width: 200px;background-color: #252a32; border: 1px solid #252a32; color: #fff; border-radius: 5px;}
+    #itg-tv-schedule-search-form > div{text-align: right;}
     #itg-tv-schedule-search-form .form-submit{display: none;}
-    #itg-tv-schedule-search-form .form-text{max-width: 332px;}
+    #itg-tv-schedule-search-form .form-text{max-width: 332px; background-color: #252a32; border: 1px solid #252a32; color: #fff; border-radius: 5px;}
+    .tv-schedule-time .slick-slide{position: relative; height: 34px;}
+    .tv-schedule-time .slick-slide:after{content: ''; background-color: rgba(37,42,50,.5); width: 1px; height: 100%; left: 100%; top: 0; bottom: 0; margin: auto; position: absolute;}
+    .tv_schedule {
+    max-width: 1000px;
+    margin: 0 auto 10px;
+    }
+    #edit-title{
+        background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/search.png') center right no-repeat #252a32;
+    }
     .itg-popup{
         display: none;
         background-color: rgba(0, 0, 0, 0.5);
@@ -199,6 +219,64 @@ if($clicked_day == "")
     .views-table th{font-weight: 500;}
     .views-table th a, .views-table td a{
         color: #0c8bb1;
+    }
+    .tv-schedule-news button{display: none !important;}
+    .tv-schedule .slick-next, .tv-schedule .slick-prev{z-index: 9999;}
+    .tv-schedule-slide-wrapper{
+        padding: 10px;
+        background-color: #2B333A;
+        border-radius: 7px;
+        box-shadow: 0 1px 0 1px #1e1e1e inset;
+    }
+    .tv-schedule-time{position: relative;}
+    .tv-schedule-time:before{
+        content: '';
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        top: 0;
+        left: -34px;
+        background-color: #008eb1;
+        border-radius: 5px 0 0 5px;
+    }
+    .tv-schedule-time:after{
+        content: '';
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        top: 0;
+        right: -34px;
+        background-color: #008eb1;
+        border-radius: 0 5px 5px 0;
+        border-left: 1px solid rgba(37,42,50,.5);
+    }
+    .tv-schedule-news:before{
+        content:'';
+        background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/itg_group.jpg') 0 0 / 100% auto no-repeat;
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: -100px;
+        top: 0;
+        z-index: 9999;
+        box-shadow: 0 0 3px #000;
+        border-radius: 5px 0 0 5px;
+    }
+    .tv-schedule-date-text{
+        float: left;
+        width: 200px;
+    }
+    .tv-schedule-date-text .form-item{
+        margin: 20px 20px 0 0;
+    }
+    .tv-schedule-date-text .form-text{
+            width: 180px;
+            background-color: #252a32;
+            border: 1px solid #252a32;
+            color: #fff;
+            border-radius: 5px;
+            padding-left: 42px;
+            background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/date-icon.png') left 10px top 2px / 24px auto no-repeat;
     }
 </style>
 <script type="text/javascript">
