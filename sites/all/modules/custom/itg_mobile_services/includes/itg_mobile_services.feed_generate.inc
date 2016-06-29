@@ -39,7 +39,13 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header, 
 
       $item = $doc->createElement('item');
       $root->appendChild($item);
-
+      
+      // content date
+      if (!empty($service_content_date)) {
+        $service_content_date_arr = explode(' ',$service_content_date);
+        $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
+      }
+      
       // content text
       if (!empty($service_content_text)) {
         $content = $doc->createElement('description');
@@ -118,7 +124,13 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header, 
 
       $item = $doc->createElement('item');
       $channel->appendChild($item);
-
+      
+      // content date
+      if (!empty($service_content_date)) {
+        $service_content_date_arr = explode(' ',$service_content_date);
+        $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
+      }
+      
       // content text
       if (!empty($service_content_text)) {
         $item->appendChild($doc->createElement('description', $service_content_text));
@@ -179,7 +191,13 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header,
 
       $item = $doc->createElement('item');
       $channel->appendChild($item);
-
+      
+      // content date
+      if (!empty($service_content_date)) {
+        $service_content_date_arr = explode(' ',$service_content_date);
+        $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
+      }
+      
       // content text
       if (!empty($service_content_text)) {
         $item->appendChild($doc->createElement('description', $service_content_text));
@@ -248,7 +266,11 @@ function itg_mobile_services_generate_sms($node, $service_title, $field_header, 
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $item = $doc->createElement('item');
       $channel->appendChild($item);
-
+      // content date
+      if (!empty($service_content_date)) {
+        $service_content_date_arr = explode(' ',$service_content_date);
+        $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
+      }
       // content text
       if (!empty($service_content_text)) {
         $item->appendChild($doc->createElement('description', $service_content_text));
@@ -296,7 +318,11 @@ function itg_mobile_services_generate_feed($node, $service_title, $field_header,
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $item = $doc->createElement('item');
       $channel->appendChild($item);
-
+       // content date
+      if (!empty($service_content_date)) {
+        $service_content_date_arr = explode(' ',$service_content_date);
+        $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
+      }
       // content text
       if (!empty($service_content_text)) {
         $item->appendChild($doc->createElement('description', $service_content_text));
@@ -344,7 +370,11 @@ function itg_mobile_services_generate_ussd($node, $service_title, $field_header,
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $item = $doc->createElement('item');
       $channel->appendChild($item);
-
+       // content date
+      if (!empty($service_content_date)) {
+        $service_content_date_arr = explode(' ',$service_content_date);
+        $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
+      }
       // content text
       if (!empty($service_content_text)) {
         $item->appendChild($doc->createElement('description', $service_content_text));

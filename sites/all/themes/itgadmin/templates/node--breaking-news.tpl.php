@@ -37,14 +37,14 @@
             endif;
             ?>
             <?php
-            $keywords = render($content['field_story_itg_tags']);
+            //$keywords = render($content['field_story_itg_tags']);
 
-            if (!empty($keywords)):
+            //if (!empty($keywords)):
               ?>
-              <div class="display content-box">
+              <!--<div class="display content-box">
               <?php print render($content['field_story_itg_tags']); ?>
-              </div>
-    <?php endif; ?>
+              </div>-->
+    <?php //endif; ?>
           </div>
         </div>
       </div>

@@ -19,17 +19,23 @@ $sat = $base_url . "/tv-show/SAT";
 $sun = $base_url . "/tv-show/SUN";
 $class = 'class="active"';
 $day = strtoupper(date("D"));
+$clicked_day = arg(1);
+if($clicked_day == "")
+{
+   $clicked_day= $day;
+}
 ?>
+<div>  <h1>TV Schedule</h1> </div>
 <!-- Listing shows and days option -->
 <div class="tv-schedule-parent">
     <ul class="no-bullet schedule-days">
-        <li><a <?php if(arg(1) == 'MON'){ print $class; }elseif($day == 'MON'){ print $class; } ?> href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'TUE'){ print $class; }elseif($day == 'TUE'){ print $class; } ?> href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'WED'){ print $class; }elseif($day == 'WED'){ print $class; } ?>href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'THU'){ print $class; }elseif($day == 'THU'){ print $class; } ?>href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'FRI'){ print $class; }elseif($day == 'FRI'){ print $class; } ?>href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'SAT'){ print $class; }elseif($day == 'SAT'){ print $class; } ?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'SUN'){ print $class; }elseif($day == 'SUN'){ print $class; } ?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'MON'){ print $class; }elseif($day == 'MON' && $clicked_day == 'MON'){ print $class; } ?> href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'TUE'){ print $class; }elseif($day == 'TUE' && $clicked_day == 'TUE'){ print $class; } ?> href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'WED'){ print $class; }elseif($day == 'WED' && $clicked_day == 'WED'){ print $class; } ?>href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'THU'){ print $class; }elseif($day == 'THU' && $clicked_day == 'THU'){ print $class; } ?>href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'FRI'){ print $class; }elseif($day == 'FRI' && $clicked_day == 'FRI'){ print $class; } ?>href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'SAT'){ print $class; }elseif($day == 'SAT' && $clicked_day == 'SAT'){ print $class; } ?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
+        <li><a <?php if(arg(1) == 'SUN'){ print $class; }elseif($day == 'SUN' && $clicked_day == 'SUN'){ print $class; } ?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
     </ul>
     <!-- Showing Search box and time zone drop down list -->
     <div class="tv-schedule-form-wrapper">
@@ -78,7 +84,8 @@ $day = strtoupper(date("D"));
     <div  id="tv-search-popup" class="itg-popup" style="display: block;">
         <div class="popup-data">
             <div class="popup-header">
-                <h2>Search Result</h2>
+                <h2>Search Results</h2><br/>
+                <h3><?php print $search_count.' results for '.$title; ?></h3>
                 <a class="itg-close-popup" href="javascript:;"> Close </a>
             </div>
             <div class="popup-body">
@@ -87,9 +94,9 @@ $day = strtoupper(date("D"));
                         <?php foreach ($search as $val1): ?>  
 
                             <tr>
-                                <td><?php print $val1['time']; ?></td>
-                                <td><?php print $val1['program']; ?></td>
+                                <td><?php print $val1['time'].' (IST)'; ?></td>
                                 <td><?php print $val1['day']; ?></td>
+                                <td><?php print $val1['program']; ?></td>
                             </tr>
 
                         <?php endforeach; ?>

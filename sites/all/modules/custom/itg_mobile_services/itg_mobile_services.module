@@ -136,10 +136,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
         'event' => 'change', // On change of the selection this action would take place
       );
 
-      $form['field_client_selection'][LANGUAGE_NONE]['#ajax'] = array(
-        'callback' => 'itg_mobile_content_selection_callback',
-        'event' => 'change', // On change of the selection this action would take place
-      );
 
       $form['#validate'][] = 'itg_mobile_client_association_validator';
       $form['#after_build'][] = 'itg_service_association_after_build';
@@ -246,7 +242,6 @@ function itg_mobile_vas_service_content_submit($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_mobile_services_node_insert($node) {
-
   if ($node->type == 'vas_service_content') {
     save_cron_details_of_mobile_services($node);
   }
@@ -257,9 +252,11 @@ function itg_mobile_services_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_mobile_services_node_update($node) {
-
   if ($node->type == 'vas_service_content') {
-    save_cron_details_of_mobile_services($node);
+    $arg = arg(2);
+    if (isset($arg) && $arg != 'delete') {
+      save_cron_details_of_mobile_services($node);
+    }
   }
 }
 
@@ -703,7 +700,7 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
       $entity_id = $record['entity_id'];
       $client_node = node_load($record['field_client_selection_target_id']);
       $client_selection_val = str_replace(' ', '', trim($client_node->title));
-      $name .= $client_selection_val . ",";
+      $name .= $client_selection_val . ", ";
     }
     if (empty($entity_id)) {
       $form['title']['#description'] = 'service not associated.';
@@ -754,62 +751,6 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
 }
 
 /**
- * ajax service callback for itg_mobile_content_selection_callback
- * @param array $form
- * @param array reference $form_state
- * @return array $form
- */
-function itg_mobile_content_selection_callback(&$form, &$form_state) {
-  $form_state['redirect'] = 'service-association-listing';
-  $node_nid = $form['nid']['#value'];
-  $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-  $field_client_selection = $form_state['values']['field_client_selection'][LANGUAGE_NONE];
-
-  foreach ($field_client_selection as $key => $value) {
-    $target_id = $value['target_id'];
-    $query = db_select('node', 'node')->fields('cs', array('field_client_selection_target_id'));
-    $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id");
-    $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id");
-    $query->condition('sat.field_service_association_title_target_id', $association_nid, '=');
-    $query->condition('cs.field_client_selection_target_id', $target_id, '=');
-    if (!empty($node_nid)) {
-      $query->condition('node.nid', $node_nid, '<>');
-    }
-
-    $query->condition('node.type', array('client_service_association'), 'IN');
-    $query->range(0, 1);
-    $result = $query->execute();
-    $record = $result->fetchAssoc();
-    $target_id = ($record['field_client_selection_target_id']) ? $record['field_client_selection_target_id'] : '';
-    if ($target_id) {
-      $node = node_load($target_id);
-      if ($node->title) {
-        $client_name .= $node->title . ",";
-      }
-    }
-    $client_name = rtrim($client_name, ',');
-  }
-
-  if ($client_name) {
-    return array(
-      '#type' => 'ajax',
-      '#commands' => array(
-        ajax_command_remove("#edit-field-service-association-title .error", "<span class='error'>" . $client_name . " is already associated this service</span>"),
-        ajax_command_append("#edit-field-service-association-title", "<span class='error'>" . $client_name . " is already associated this service</span>")
-      )
-    );
-  }
-  else {
-    return array(
-      '#type' => 'ajax',
-      '#commands' => array(
-        ajax_command_remove("#edit-field-service-association-title .error", "<span class='error'></span>")
-      )
-    );
-  }
-}
-
-/**
  * ajax service callback for itg_mobile_services_custom_callback
  * @param array $form
  * @param array reference $form_state
@@ -843,7 +784,7 @@ function itg_mobile_services_views_pre_render(&$view) {
     if (isset($view->current_display) && $view->current_display == "page") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
       $header_content_client .= l(t('Create Client'), 'node/add/clients-creation', array('query' => array('destination' => 'clients-listing')));
-      $header_content_client .= '<span class="client-services">&nbsp;' . l(t('Associate Client & Services'), 'node/add/client-service-association', array('query' => array('destination' => 'clients-listing'))) . '&nbsp;</span>';
+      // $header_content_client .= '<span class="client-services">&nbsp;' . l(t('Associate Client & Services'), 'node/add/client-service-association', array('query' => array('destination' => 'clients-listing'))) . '&nbsp;</span>';
     }
     elseif (isset($view->current_display) && $view->current_display == "page_1") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -873,7 +814,7 @@ function itg_mobile_services_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['mobile_services/%/autocomplete'] = array(
     'page callback' => 'itg_mobile_services_get_content_title',
     'access arguments' => array('access itg story'),
@@ -886,6 +827,14 @@ function itg_mobile_services_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_mobile_services.inc',
   );
+
+  $items['mobile-services-cron'] = array(
+    'page callback' => 'itg_mobile_services_cron',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_mobile_services.inc',
+  );
+
   return $items;
 }
 
@@ -1034,6 +983,7 @@ function itg_mobile_service_check_token($cid, $association_nid) {
  */
 function itg_mobile_services_get_assoc_service() {
   $arg = arg();
+  $node_nid = '';
   if (isset($arg['1']) && $arg['2'] == 'edit') {
     $node_nid = $arg['1'];
   }
@@ -1042,8 +992,8 @@ function itg_mobile_services_get_assoc_service() {
   $query->fields('node', array('nid', 'title'));
   $query->join('field_data_field_service_association_title', 'sat', "node.nid = sat.field_service_association_title_target_id");
   $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
-  if (!$node_nid) {
-    $query->where("expiry_date.field_story_expiry_date_value >= now()");
+  if (empty($node_nid)) {
+    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
   }
   $query->condition('node.type', 'service_creation', '=');
   $result = $query->execute();
