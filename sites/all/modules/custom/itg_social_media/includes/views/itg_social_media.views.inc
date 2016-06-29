@@ -29,7 +29,7 @@ function itg_social_media_views_data() {
       'title' => t('relate a node to social media post'),
       'help' => t('Social Media custom table'),
     ),
-  );
+  );  
   
   // Example plain text field.
   $data['itg_social_media_logs']['node_title'] = array(

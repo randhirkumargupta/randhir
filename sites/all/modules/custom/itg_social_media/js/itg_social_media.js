@@ -40,7 +40,6 @@
         onfocusout: function (element) {
           $(element).valid();
         },
-        ignore: '',
         errorElement: 'span',
         errorPlacement: function (error, element) {
           var elementName = element.attr('name');
@@ -82,12 +81,38 @@
                 }
               } 
             }
+          },
+          'itg_facebook_narrative': {
+            required: {
+              depends: function () {
+                var fid = jQuery('body').find('input[name="itg_fb_img[fid]"]').val();                
+                if (fid > 0) {
+                  return true;                  
+                }                
+              }
+            }
+          },
+          'itg_facebook_video_text': {
+            required: {
+              depends: function () {
+                var fid = jQuery('body').find('input[name="itg_fb_video[fid]"]').val();                
+                if (fid > 0) {
+                  return true;                  
+                }                
+              }
+            }
           }
         },
         messages: {
           'itg_smi[facebook]': {
             required: 'This field is required.'
-          }          
+          },
+          'itg_facebook_video_text': {
+            required: 'This field is required.'
+          },
+          'itg_facebook_narrative': {
+            required: 'This field is required.'
+          }
         }
       });
       jQuery.validator.addMethod('validateSmi', function (value, element) {
@@ -95,7 +120,7 @@
       }, 'Please choose at least one social media platform.');
       jQuery.validator.addMethod("itg_maxlength", function (value, element) {
         return value == "" || value.length <= 126;
-      }, 'This field can not exceed 126 character.');
+      }, 'This field can not exceed 126 characters.');
       // custom validator function end here.
        
       // Clear fb fields based on checkbox.
@@ -116,7 +141,22 @@
         } 
       });
       // clear form end here.
-     
+      
+      // Add placeholder to scheduler fields
+      var date_holder = moment().format('DD/MM/YYYY');
+      var time_holder = moment().format('H:mm');
+      jQuery('input[name="img_schedule_time[date]"]').attr('placeholder', date_holder);
+      jQuery('input[name="img_schedule_time[time]"]').attr('placeholder', time_holder);
+      
+      jQuery('input[name="video_schedule_time[date]"]').attr('placeholder', date_holder);
+      jQuery('input[name="video_schedule_time[time]"]').attr('placeholder', time_holder);
+      
+      jQuery('input[name="tw_img_schedule_time[date]"]').attr('placeholder', date_holder);
+      jQuery('input[name="tw_img_schedule_time[time]"]').attr('placeholder', time_holder);
+      
+      jQuery('input[name="tw_vid_schedule_time[date]"]').attr('placeholder', date_holder);
+      jQuery('input[name="tw_vid_schedule_time[time]"]').attr('placeholder', time_holder);
+      
       // Moduel code end.      
     }
   };
