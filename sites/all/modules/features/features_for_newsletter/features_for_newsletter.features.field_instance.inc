@@ -987,7 +987,7 @@ function features_for_newsletter_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_newst_logo',
     'label' => 'Logo',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
