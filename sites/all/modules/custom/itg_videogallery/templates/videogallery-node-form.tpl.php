@@ -8,13 +8,18 @@
     <?php print drupal_render($form['field_story_courtesy']); ?>
     <?php print drupal_render($form['field_video_anchor']); ?>
 </div>
-<div id="Configuration">
-    <h2 class="story-title"><?php print t('Configuration'); ?></h2>
-    <?php print drupal_render($form['field_video_configurations']); ?>
-    <?php print drupal_render($form['field_story_syndication']); ?>
-    <?php print drupal_render($form['field_story_comment_question']); ?>
-    <?php print drupal_render($form['field_story_itg_tags']); ?>
-    <?php print drupal_render($form['field_story_category']); ?>
+<div id="videoupload">
+  <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
+  <?php print drupal_render($form['upload']); ?>
+  <?php print drupal_render($form['field_videogallery_video_upload']); ?>
+</div>
+<div id="Imageupload">
+  <h2 class="story-title"><?php print t('Image'); ?></h2>
+    <?php print drupal_render($form['field_story_extra_large_image']); ?> 
+    <?php print drupal_render($form['field_story_large_image']); ?>
+    <?php print drupal_render($form['field_story_medium_image']); ?>
+    <?php print drupal_render($form['field_story_small_image']); ?>
+    <?php print drupal_render($form['field_story_extra_small_image']); ?>
 </div>
 <div id="SocialMedia">
   <h2 class="story-title"><?php print t('Social Media'); ?></h2>
@@ -35,24 +40,13 @@
   <?php print drupal_render($form['field_story_twitter_video']); ?>
   <?php print drupal_render($form['field_story_twitter_video_desc']); ?>
 </div>
-
-<div id="videoupload">
-  <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
-  <?php print drupal_render($form['upload']); ?>
-  <?php print drupal_render($form['field_videogallery_video_upload']); ?>
-</div>
-<div id="Imageupload">
-  <h2 class="story-title"><?php print t('Image'); ?></h2>
-    <?php print drupal_render($form['field_story_extra_large_image']); ?> 
-    <?php print drupal_render($form['field_story_large_image']); ?>
-    <?php print drupal_render($form['field_story_medium_image']); ?>
-    <?php print drupal_render($form['field_story_small_image']); ?>
-    <?php print drupal_render($form['field_story_extra_small_image']); ?>
-</div>
-  
-
-<div id="DateTime">
-    <h2 class="story-title"><?php print t('Date & Time'); ?></h2>
+<div id="Configuration">
+    <h2 class="story-title"><?php print t('Configuration'); ?></h2>
+    <?php print drupal_render($form['field_video_configurations']); ?>
+    <?php print drupal_render($form['field_story_comment_question']); ?>
+    <?php print drupal_render($form['field_story_syndication']); ?>
+    <?php print drupal_render($form['field_story_itg_tags']); ?>
+    <?php print drupal_render($form['field_story_category']); ?>
     <?php print drupal_render($form['field_story_schedule_date_time']); ?>
     <?php print drupal_render($form['field_story_expires']); ?> 
     <?php print drupal_render($form['field_story_expiry_date']); ?> 

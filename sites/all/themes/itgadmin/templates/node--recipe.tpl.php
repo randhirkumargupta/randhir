@@ -39,8 +39,7 @@
               <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
                   <?php //print render($content)  ?>            
                   <?php if ($view_mode == 'full'): ?>
-                    <div class="content-node-view">
-                        <h2><?php print t('Basic Details'); ?></h2>              
+                    <div class="content-node-view">                                      
                         <?php
                         // Load custom block for social media integration
                         global $user;
@@ -57,6 +56,7 @@
                               </div>
                           </div>
                         <?php endif; ?>
+                        <h2><?php print t('Basic Details'); ?></h2>
                         <div class="content-details">
                             <div class="field">
                                 <div class="field-label"><?php print t('Strap headline (Short Headline)'); ?></div>
