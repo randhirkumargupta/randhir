@@ -459,6 +459,7 @@ textarea{
   background: #fefafb none repeat scroll 0 0;
   border: 1px solid red;
   padding: 10px 30px;
+  margin: 20px 0;
 }
 .region-help{
   ul{
@@ -497,7 +498,7 @@ body.sidebar-second{
     top: 100px;
     left: 100%;
     width: 330px;
-    z-index: 999999;
+    z-index: 9999;
     transition: all 500ms ease 0s;
     &.active{
       transform: translateX(-330px);
@@ -1947,21 +1948,21 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           }
         }
         .form-submit{
-          margin: 10px 0 0 !important;
+          margin: 0 !important;
+          position: absolute;
+          right: -90px;
+          top: 0;
+          
         }
       }
       &+tr{
         td{
           margin-top: 10px;
-          .form-submit{
-            margin-left: 142px !important;
-          }
         }
       }
     }
   }
   &+div.clearfix{
-    margin-top: -41px;
     @extend .pos-rel;
     z-index: 99;
     .ajax-progress-throbber{
@@ -2948,7 +2949,7 @@ fieldset#edit-select{
                 border: medium none;
                 color: #ee4d4d;
                 font-size: 13px;
-                margin-left: 100px;
+                margin-left: 0;
                 margin-top: -2px;
               }
               .tabledrag-handle{display: none;}
@@ -4229,4 +4230,67 @@ div.node{
     #edit-field-newsl-time .form-type-select .form-select + div.description{
         left: 115px;
     }
+}
+#colorbox{
+    .view .view-filters .views-exposed-form .views-exposed-widget{
+        width: 170px;
+    }
+}
+[id*="views-form-related-content-new-page"]{
+    table{
+        caption {
+            background-color: #1fb5ad;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px;
+        }
+    }
+}
+#clickme{
+    @extend .add-more;
+}
+.search-criteria{
+    margin-top: 10px;
+    .form-text{
+        width: 300px;
+        margin-right: 10px;
+    }
+}
+.operation-form{
+    @extend .node-form;
+    .form-type-checkboxes{
+        > label{
+            display: block;
+            float: none;
+            padding: 0;
+            width: 100%;
+        }
+    }
+    .form-actions{
+        .form-submit{
+            @extend .btn-save;
+            &+a{
+                @extend .btn;
+                @extend .btn-cancel;
+            }
+        }
+    }
+}
+#views-form-blogs-management-page, 
+#views-form-strory-menegment-page{
+    @extend .operation-form;
+}
+.form-field-name-field-supp-publish, 
+.form-field-name-field-magazine-publish{
+    .form-type-checkboxes .form-checkboxes + div.description{
+        left: 335px;
+    }
+}
+.form-item-field-issue-title-value-value{
+    .form-type-textfield .form-text + div.description{left: 208px;}
+}
+.plupload_filelist_footer{height: 30px;}
+.form-managed-file .filefield-source-plupload div.ajax-progress{
+    @extend .hide;
 }

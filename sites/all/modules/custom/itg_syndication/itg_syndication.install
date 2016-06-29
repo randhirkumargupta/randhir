@@ -45,6 +45,12 @@ function itg_syndication_schema() {
         'length' => '250',
         'not null' => TRUE,
       ),
+      'expiry_date' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
       'cron_details' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'blob',
@@ -171,4 +177,4 @@ function itg_syndication_schema() {
   
   return $schema;
 }
-
+//ALTER TABLE `itg_cron_time_scheduler` ADD `expiry_date` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `scheduler_time` ;
