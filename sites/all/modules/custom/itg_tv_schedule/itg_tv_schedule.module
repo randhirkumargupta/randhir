@@ -76,6 +76,7 @@ function itg_tv_schedule_search_form($form, &$form_state) {
     $form['title'] = array(
       '#type' => 'textfield',
       '#size' => 60,
+      '#attributes' =>array('placeholder' => t('Search')),
       '#maxlength' => 128,
     );
 
@@ -263,6 +264,8 @@ function itg_tv_schedule_theme() {
         'variables' => array('search' => NULL),
         'variables' => array('total' => NULL),
         'variables' => array('noresult' => NULL),
+        'variables' => array('search_count' => NULL),
+        'variables' => array('title' => NULL),
         'path' => drupal_get_path('module', 'itg_tv_schedule') . '/templates',
         'template' => 'itg-tv-schedule',
       ),);
