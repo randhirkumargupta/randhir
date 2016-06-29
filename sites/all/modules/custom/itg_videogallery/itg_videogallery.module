@@ -83,8 +83,8 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 21,
         '#upload_validators' => array(
           'file_validate_extensions' => array("mp4"),
+          'file_validate_size' => array(format_size(file_upload_max_size())),
         ),
-//      '#description' => t('88x66 smallest size of image.'),
       );
       $form['#submit'][] = 'itg_videogallery_custom_submit';
       foreach ($form['field_videogallery_video_upload'][LANGUAGE_NONE] as $key => $fieldcollection) {
@@ -93,6 +93,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       $form['actions']['submit']['#submit'][] = 'itg_videogallery_submit_status_message';
+      $form['field_videogallery_video_upload'][LANGUAGE_NONE]['#title'] = '';
       break;
   }
 }
@@ -330,10 +331,11 @@ function itg_videogallery_custom_validate($form, &$form_state) {
   foreach($validate_thumbs as $key => $valu){
     $count = $key + 1;
     if($form_state['field']['field_videogallery_video_upload'][LANGUAGE_NONE]['entity'][$key]->field_video_thumbnail[LANGUAGE_NONE][0]['fid'] == ''){
-      form_set_error('field_video_thumbnail',t('Thumbnail image is required.'));
-    }elseif ($form_state['field']['field_videogallery_video_upload'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] == ''){
-      form_set_error('field_story_expert_description',t('Long description of video is required.'));
+      form_set_error('field_video_thumbnail',t('Video Thumbnail image is required.'));
     }
+//    }elseif ($form_state['field']['field_videogallery_video_upload'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] == ''){
+//      form_set_error('field_story_expert_description',t('Long description of video is required.'));
+//    }TODO
   }
   // end of fieldcollection validation
 }
@@ -405,7 +407,7 @@ function itg_videogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
 function itg_videogallery_views_pre_render(&$view) {
   if ($view->name == "manage_videogallery") {
     $header_content_video = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_video .= l(t('Create Video'), 'node/add/videogallery', array('query' => array('destination' => 'manage-videogallery')));
+    $header_content_video .= l(t('Upload Video'), 'node/add/videogallery', array('query' => array('destination' => 'manage-videogallery')));
     $view->attachment_before = $header_content_video;
   }
 }
@@ -442,7 +444,6 @@ function itg_videogallery_field_attach_form($entity_type, $entity, &$form, &$for
           // add a simple select list, this defaults to numb 3
           $form[$field['field_name']]['add_more_number'] = array(
             '#type' => 'select',
-            '#title' => t('Add more no.'),
             '#options' => drupal_map_assoc(range(0, 20)),
             '#default_value' => 1,
             '#attributes' => array('style' => 'display:none;'),
