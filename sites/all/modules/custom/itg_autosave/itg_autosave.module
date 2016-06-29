@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * Impplement hook_help($path, $arg)
+ * {@inheridoc}
+ */
+function it_autosave_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#it_autosave':
+
+      return 'Hello Auto save';
+      break;
+
+    default:
+      break;
+  }
+}
+
+/**
+ * Implement hook_permissions() to set access permission on ITG Autosave settings form
+ * {@inheridoc}
+ */
+function itg_autosave_permission() {
+  return array(
+    'administer itg_autosave settings' => array(
+      'title' => t('Administer ITG Autosave Settings'),
+      'description' => t('Perform administration tasks for ITG Autosave.'),
+    ),
+  );
+}
+
+/**
+ * Implement hook_menu()
+ * {@inheridoc}
+ */
+function itg_autosave_menu() { 
+  //settings form menu  
+  $items['admin/config/administration/itg_autosave'] = array(
+    'title' => 'ITG Autosave Setting',
+    'description' => 'Autosave settings form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_autosave_form'),
+    'access arguments' => array('administer itg_autosave settings'),        
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_autosave.admin.inc'
+  );
+  // Delete saved form id menu
+  $items['itg-autosave-formid-delete/%'] = array(
+    'page callback' => 'itg_autosave_form_delete',
+    'page arguments' => array(1),
+    'access arguments' => array('administer itg_autosave settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_autosave.admin.inc',
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_views_api().
+ *
+ * This tells drupal that there is Views integration file named
+ * itg_social_media.views.inc
+ * 
+ * {@inheritdoc}
+ */
+function itg_autosave_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'itg_autosave') . '/includes/views',    
+  );
+}
+
+/**
+ * Implements hook_form_alter()
+ * 
+ * {@inheritdoc}
+ */
+function itg_autosave_form_alter(&$form, &$form_state, $form_id) {  
+  // Add js into form
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',       
+  );
+  
+  $itg_autosave_form = new ItgAutoSave();
+  $itg_autosave_form->itg_save_set_form_ids();
+  
+  
+}

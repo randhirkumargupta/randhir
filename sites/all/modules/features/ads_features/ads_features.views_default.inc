@@ -139,7 +139,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Created on';
-  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg_date_with_time';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Updated date */
@@ -147,7 +147,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified on';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'itg_date_with_time';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Start Date */
@@ -155,7 +155,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['field_ads_start_date']['table'] = 'field_data_field_ads_start_date';
   $handler->display->display_options['fields']['field_ads_start_date']['field'] = 'field_ads_start_date';
   $handler->display->display_options['fields']['field_ads_start_date']['settings'] = array(
-    'format_type' => 'custom_date',
+    'format_type' => 'itg_date_with_time',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -167,7 +167,7 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['field_ads_end_date']['table'] = 'field_data_field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['field'] = 'field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['settings'] = array(
-    'format_type' => 'custom_date',
+    'format_type' => 'itg_date_with_time',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -179,16 +179,22 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span>';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node] </span>';
   /* Field: Content: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
+  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">[delete_node]</span>';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';

@@ -7,6 +7,17 @@
 (function($) {
     Drupal.behaviors.itg_recipe = {
         attach: function(context, settings) {
+             $('#edit-field-recipe-content-type-und').change(function() {
+                var queVal = $('#edit-field-recipe-content-type-und').val();
+                if (queVal == 'Audio') { // Image question
+                     $('#edit-field-recipe-video-und-0-remove-button').mousedown();
+                } else if (queVal == 'Video') { // Text Question
+                    $('#edit-field-recipe-audio-und-0-remove-button').mousedown();
+                } else if(queVal == 'Text'){
+                    $('#edit-field-recipe-audio-und-0-remove-button').mousedown();
+                    $('#edit-field-recipe-video-und-0-remove-button').mousedown();
+                }
+            });
             $('.tabledrag-toggle-weight-wrapper a.tabledrag-toggle-weight').hide();
             var uid = settings.itg_recipe.settings.uid;
             if (uid != 1) {
@@ -72,7 +83,7 @@
         onclick: function (element) {
           $(element).valid();
         },
-        ignore: '',
+        //ignore: '',
         errorElement: 'span',
         errorPlacement: function (error, element) {
           var elementName = element.attr('name');

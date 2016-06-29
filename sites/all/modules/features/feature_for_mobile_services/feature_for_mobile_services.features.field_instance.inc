@@ -65,7 +65,7 @@ function feature_for_mobile_services_field_default_field_instances() {
             'search_all_fields' => 0,
           ),
         ),
-        'imce_filefield_on' => 1,
+        'imce_filefield_on' => 0,
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
@@ -101,7 +101,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'label' => 'Service Content Date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -114,7 +114,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -219,7 +219,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 5,
+        'rows' => 1,
       ),
       'type' => 'text_textarea',
       'weight' => 1,
@@ -245,9 +245,10 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_large_image',
     'label' => 'Content image',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -261,20 +262,30 @@ function feature_for_mobile_services_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'image',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
         'imce_filefield_on' => 0,
@@ -537,7 +548,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => 5000,
+      'max' => 255,
       'min' => 1,
       'prefix' => '',
       'suffix' => '',
@@ -717,6 +728,49 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-clients_creation-field_contact_business_email'.
+  $field_instances['node-clients_creation-field_contact_business_email'] = array(
+    'bundle' => 'clients_creation',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_contact_business_email',
+    'label' => 'Email address',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 46,
+    ),
+  );
+
   // Exported field_instance: 'node-clients_creation-field_contact_person_name'.
   $field_instances['node-clients_creation-field_contact_person_name'] = array(
     'bundle' => 'clients_creation',
@@ -888,8 +942,9 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-clients_creation-field_email_address'.
-  $field_instances['node-clients_creation-field_email_address'] = array(
+  // Exported field_instance:
+  // 'node-clients_creation-field_content_sharing_mode'.
+  $field_instances['node-clients_creation-field_content_sharing_mode'] = array(
     'bundle' => 'clients_creation',
     'default_value' => NULL,
     'deleted' => 0,
@@ -897,10 +952,10 @@ function feature_for_mobile_services_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
+        'type' => 'list_default',
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -911,9 +966,48 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_email_address',
-    'label' => 'Email address',
+    'field_name' => 'field_content_sharing_mode',
+    'label' => 'Content Sharing mode',
     'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-clients_creation-field_ftp_ip_address'.
+  $field_instances['node-clients_creation-field_ftp_ip_address'] = array(
+    'bundle' => 'clients_creation',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ftp_ip_address',
+    'label' => 'FTP IP Address',
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -926,7 +1020,91 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 45,
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance: 'node-clients_creation-field_ftp_password'.
+  $field_instances['node-clients_creation-field_ftp_password'] = array(
+    'bundle' => 'clients_creation',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ftp_password',
+    'label' => 'FTP Password',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-clients_creation-field_ftp_username'.
+  $field_instances['node-clients_creation-field_ftp_username'] = array(
+    'bundle' => 'clients_creation',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ftp_username',
+    'label' => 'FTP Username',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 11,
     ),
   );
 
@@ -968,70 +1146,23 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 47,
     ),
   );
 
   // Exported field_instance:
-  // 'node-create_content-field_service_association_title'.
-  $field_instances['node-create_content-field_service_association_title'] = array(
-    'bundle' => 'create_content',
+  // 'node-clients_creation-field_service_email_address'.
+  $field_instances['node-clients_creation-field_service_email_address'] = array(
+    'bundle' => 'clients_creation',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_association_title',
-    'label' => 'Service Title',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-create_content-field_service_content'.
-  $field_instances['node-create_content-field_service_content'] = array(
-    'bundle' => 'create_content',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'field_collection',
-        'settings' => array(
-          'add' => 'Add',
-          'delete' => 'Delete',
-          'description' => TRUE,
-          'edit' => 'Edit',
-          'view_mode' => 'full',
-        ),
-        'type' => 'field_collection_view',
+        'type' => 'text_default',
         'weight' => 14,
       ),
       'teaser' => array(
@@ -1043,184 +1174,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_service_content',
-    'label' => 'Service Content',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-create_content-field_service_frequency'.
-  $field_instances['node-create_content-field_service_frequency'] = array(
-    'bundle' => 'create_content',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 15,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_frequency',
-    'label' => 'Frequency',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-create_content-field_service_frequency_date'.
-  $field_instances['node-create_content-field_service_frequency_date'] = array(
-    'bundle' => 'create_content',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 16,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_frequency_date',
-    'label' => 'Service Frequency Date',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-service_creation-field_content_sharing_mode'.
-  $field_instances['node-service_creation-field_content_sharing_mode'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_content_sharing_mode',
-    'label' => 'Content Sharing mode',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance: 'node-service_creation-field_email_address'.
-  $field_instances['node-service_creation-field_email_address'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 13,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_email_address',
+    'field_name' => 'field_service_email_address',
     'label' => 'Mail to',
     'required' => 0,
     'settings' => array(
@@ -1235,13 +1189,13 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 10,
     ),
   );
 
-  // Exported field_instance: 'node-service_creation-field_ftp_ip_address'.
-  $field_instances['node-service_creation-field_ftp_ip_address'] = array(
-    'bundle' => 'service_creation',
+  // Exported field_instance: 'node-clients_creation-field_service_fetch_link'.
+  $field_instances['node-clients_creation-field_service_fetch_link'] = array(
+    'bundle' => 'clients_creation',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -1251,7 +1205,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 15,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1262,8 +1216,8 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_ftp_ip_address',
-    'label' => 'FTP IP Address',
+    'field_name' => 'field_service_fetch_link',
+    'label' => 'Fetch link (our server)',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1277,91 +1231,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
-    ),
-  );
-
-  // Exported field_instance: 'node-service_creation-field_ftp_password'.
-  $field_instances['node-service_creation-field_ftp_password'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_ftp_password',
-    'label' => 'FTP Password',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 16,
-    ),
-  );
-
-  // Exported field_instance: 'node-service_creation-field_ftp_username'.
-  $field_instances['node-service_creation-field_ftp_username'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 11,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_ftp_username',
-    'label' => 'FTP Username',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 8,
     ),
   );
 
@@ -1398,7 +1268,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => 5000,
+      'max' => 255,
       'min' => 1,
       'prefix' => '',
       'suffix' => '',
@@ -1453,48 +1323,6 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-service_creation-field_service_fetch_link'.
-  $field_instances['node-service_creation-field_service_fetch_link'] = array(
-    'bundle' => 'service_creation',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'http://indiatoday.com',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 9,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_service_fetch_link',
-    'label' => 'Fetch link (our server)',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 11,
-    ),
-  );
-
   // Exported field_instance: 'node-service_creation-field_service_regional'.
   $field_instances['node-service_creation-field_service_regional'] = array(
     'bundle' => 'service_creation',
@@ -1519,7 +1347,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_service_regional',
-    'label' => 'Regional service',
+    'label' => 'Service Type (Regional)',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1651,7 +1479,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'label' => 'Expiry Date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -1663,8 +1491,8 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'increment' => 1,
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -1673,6 +1501,48 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
       'type' => 'date_popup',
       'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-vas_service_content-field_footer'.
+  $field_instances['node-vas_service_content-field_footer'] = array(
+    'bundle' => 'vas_service_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_footer',
+    'label' => 'Client title',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 2,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 4,
     ),
   );
 
@@ -1714,7 +1584,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -1759,7 +1629,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 9,
+      'weight' => 7,
     ),
   );
 
@@ -1799,7 +1669,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -1832,12 +1702,12 @@ function feature_for_mobile_services_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_service_frequency_date',
     'label' => 'Service Frequency Date',
     'required' => 1,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -1850,7 +1720,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -1858,50 +1728,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-vas_service_content-field_story_client_title'.
-  $field_instances['node-vas_service_content-field_story_client_title'] = array(
-    'bundle' => 'vas_service_content',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_client_title',
-    'label' => 'Client title',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -1932,13 +1759,12 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('Header');
   t('Mail to');
   t('Mobile Number');
-  t('Regional service');
   t('Service Content');
   t('Service Content Date');
   t('Service Frequency Date');
   t('Service Title');
+  t('Service Type (Regional)');
   t('Short Description');
-  t('http://indiatoday.com');
 
   return $field_instances;
 }

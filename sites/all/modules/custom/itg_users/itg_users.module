@@ -42,6 +42,11 @@ function itg_users_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_users.inc',     
   );
+  
+  $items['access-denied'] = array(
+    'page callback' => 'itg_users_access_denied',
+    'access callback' => TRUE,   
+  );
 
   return $items;
 }
@@ -51,8 +56,15 @@ function itg_users_menu() {
  * Implements hook_form_alter().
  */
 function itg_users_form_alter(&$form, &$form_state, $form_id) {
-
   global $user;
+  
+  if (isset($form['confirm']['#value'])) {
+   // hide remove button of first field on add form 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery(".confirm-user").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer')); 
+  }
+  
   if ($form_id == "user_pass") {
     drupal_add_js("jQuery('#edit-name').blur(function(){
       jQuery('#user-pass .login-wrapper span.error').text('');
@@ -227,7 +239,7 @@ function itg_users_validate_user_register_validate(&$form, &$form_state) {
 function itg_users_after_user_register_validate(&$form, &$form_state) {
   global $user, $base_url;
   $form['account']['pass']['#attached']['js'][1]['data']['password']['tooShort'] = t('Make it at least 8 characters');
-  $form['account']['mail']['#description'] = t('Please provide a valid format ex:(someusername@domainname.co.in)');
+  $form['account']['mail']['#description'] = t('Please provide a valid format ex:(username@domainname.co.in, username@domainname.in, username@domainname.com.in, username@domainname.com)');
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -297,7 +309,7 @@ function itg_users_validate_user_profile_validate(&$form, &$form_state) {
 function itg_users_after_user_profile_validate(&$form, &$form_state) {
   global $user, $base_url;
   $form['account']['pass']['#attached']['js'][1]['data']['password']['tooShort'] = t('Make it at least 8 characters');
-  $form['account']['mail']['#description'] = t('Please provide a valid format ex:(someusername@domainname.co.in)');
+  $form['account']['mail']['#description'] = t('Please provide a valid format ex:(username@domainname.co.in, username@domainname.in, username@domainname.com.in, username@domainname.com)');
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -316,7 +328,7 @@ function itg_users_views_pre_render(&$view) {
 
     $header_content = '';
     if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {      
-      $header_content = l(t('Create User'), 'admin/people/create', array('query' => array('destination' => 'manage-users')));
+      $header_content = l(t('Create User'), 'admin/people/create', array('query' => array('destination' => 'manage-users'), 'attributes' => array('class' => 'confirm-user')));
     }
 
     $view->attachment_before = $header_content;
@@ -432,6 +444,9 @@ function itg_users_theme($existing, $type, $theme, $path) {
 function itg_users_user_login(&$edit, $account) {
   $role_count = count($account->roles);
   //p($account->roles);
+  if (isset($_GET['destination'])) {
+        unset($_GET['destination']);
+    }
    if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
     if (!isset($_GET['destination']) && arg(1) != "reset") {
       $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
@@ -704,4 +719,23 @@ function itg_users_role_name($rid) {
     return $role_result['name'];
 }
 
+/**
+ * Page callback for the access denied page. Does a redirect to login page (Taken from r4032login.module)
+ */
+function itg_users_access_denied() {
+  global $user;
+  if ($user->uid) {
+    return MENU_ACCESS_DENIED;
+  }
 
+  // The code in drupal_get_destination() doesn't preserve any query string
+  // on 403 pages, so reproduce the part we want here.
+  $path = $_GET['destination'];
+  $query = drupal_http_build_query(drupal_get_query_parameters(NULL, array('q', 'destination')));
+  if ($query != '') {
+    $path .= '?' . $query;
+  }
+  $destination = array('destination' => $path);
+  header('Location: ' . url('user/login', array('query' => $destination, 'absolute' => TRUE)), TRUE, 302);
+  drupal_exit();
+}

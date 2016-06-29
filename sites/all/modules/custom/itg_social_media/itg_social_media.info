@@ -2,5 +2,10 @@ name = ITG Social Media
 description = ITG integration with social media like Facebook, Twitter and Instagram.
 core = 7.x
 
+files[] = includes/itg_social_media.settings.inc
+files[] = includes/itg_social_media.admin.inc
 files[] = includes/itg_social_media.form.inc
+
+configure = admin/config/administration/itg_social_media
+
 package = ITG

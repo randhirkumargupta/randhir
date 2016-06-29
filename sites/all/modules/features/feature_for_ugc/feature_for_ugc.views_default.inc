@@ -66,6 +66,8 @@ function feature_for_ugc_views_default_views() {
 
   /* Display: Ugc management */
   $handler = $view->new_display('page', 'Ugc management', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Manage UGC';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -297,6 +299,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -324,6 +327,7 @@ function feature_for_ugc_views_default_views() {
     19 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
   );
   /* Filter criterion: Content: Content type (field_ugc_ctype) */
   $handler->display->display_options['filters']['field_ugc_ctype_value']['id'] = 'field_ugc_ctype_value';
@@ -362,7 +366,7 @@ function feature_for_ugc_views_default_views() {
   /* Display: Ugc reject list */
   $handler = $view->new_display('page', 'Ugc reject list', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Rejected ugc content';
+  $handler->display->display_options['title'] = 'Rejected UGC content';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -583,7 +587,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Rejected date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: source */
+  /* Field: Field: Kicker Text */
   $handler->display->display_options['fields']['field_source']['id'] = 'field_source';
   $handler->display->display_options['fields']['field_source']['table'] = 'field_data_field_source';
   $handler->display->display_options['fields']['field_source']['field'] = 'field_source';
@@ -628,6 +632,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -655,6 +660,7 @@ function feature_for_ugc_views_default_views() {
     19 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
   );
   /* Filter criterion: Content: Source type (field_story_source_type) */
   $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';

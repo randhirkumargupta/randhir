@@ -76,12 +76,7 @@ function theme_views_row_selector_select_all($variables) {
  * @return
  */
 function itg_row_selector_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'views_form_syndication_feed_generator_page') {
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication.js',
-    );
-    $form['actions']['submit']['#submit'][] = 'itg_row_selector_custom_submit';
-  }
+  
   if (strpos($form_id, 'views_form_') === 0) {
     $field = _views_row_selector_get_field($form_state['build_info']['args'][0]);
   }
@@ -131,31 +126,6 @@ function itg_row_selector_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-/**
- * Submit callback for row selector form
- * @param array $form
- * @param array $form_state
- */
-function itg_row_selector_custom_submit($form, &$form_state) {
-  //dpm($form_state['values']);
-  $client_name = check_plain($form_state['values']['itg_row_selector_client']);
-  $web_property = check_plain($form_state['values']['itg_row_selector_web_property']);
-  $issue = check_plain($form_state['values']['itg_row_selector_issue']);
-  $syndication_node = check_plain($form_state['values']['selected_rows']);  
-  $syndication_node = strpos($syndication_node, ',') !== FALSE ? explode(',', $syndication_node) : array($syndication_node);  
-
-  $pre_save = array(
-    'web_property' => $web_property,
-    'client_title' => $client_name,
-    'syndication' => serialize($syndication_node),
-    'created' => format_date(time(), 'custom', 'Y-m-d'),
-  );
-
-  // insert records into database table itg_row_selector.
-  drupal_write_record('itg_row_selector', $pre_save);
-  watchdog('Syndication', 'Node has been inserted for syndication.');
-  drupal_set_message('Content has been saved for syndication.', 'status');
-}
 
 /**
  * Implements hook_permission().

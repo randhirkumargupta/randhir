@@ -67,9 +67,12 @@
                     $("#edit-field-display-result-und-1").prop("checked", true);
                     $("#edit-field-display-result-und-2").prop("disabled", true);
                 }else{
-                    var myDate = new Date($('#edit-field-poll-start-date-und-0-value-datepicker-popup-2').val());
-                    myDate.setDate(myDate.getDate()+7);
-                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val($.datepicker.formatDate('mm/dd/yy', myDate));
+                    var dval = $('#edit-field-poll-start-date-und-0-value-datepicker-popup-2').val().split('/');
+                    
+                    var ndval = dval[1]+'/'+dval[0]+'/'+dval[2];
+                    var myDate = new Date(ndval);
+                    myDate.setDate(myDate.getDate()+parseInt(7));
+                    $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val($.datepicker.formatDate('dd/mm/yy', myDate));
                     
                     $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val($.datepicker.formatDate('23:00', myDate));
                     if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
@@ -89,6 +92,7 @@
                 }
                 jQuery("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").datepicker({
                     minDate: 0,
+                    dateFormat: 'dd/mm/yy',
                     onClose: function() {
                         if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
                             $("#edit-field-display-result-und-2").prop("disabled", false);

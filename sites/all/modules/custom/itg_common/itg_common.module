@@ -51,7 +51,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     
     //Add JS to hide Advance seeting from all content type forms
     drupal_add_js('jQuery(document).ready(function() {                  
-           jQuery("#edit-metatags-und-advanced").hide();         
+           jQuery("#edit-metatags-und-advanced").hide();
+           jQuery(".form-item-metatags-und-abstract-value").hide();
     });', array('type' => 'inline', 'scope' => 'footer'));
   
   }
@@ -99,7 +100,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   //Auto Generate image according photogallery
 
-   if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form') {
+   if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form') {
      // $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<a class="img-crt button" href="javascript:;">Generate Image</a>');
      $form['field_story_extra_large_image']['#suffix'] = '<a class="img-crt button" href="javascript:;">Generate Image</a><span class="generate-image-error error"></span>';
      if(isset($form_state['build_info']['args'][0]->field_story_extra_large_image)){
@@ -125,7 +126,33 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
     $form['#after_build'][] = 'itg_common_image_generate';
   }
+  if($form_id == "itg_celebrity_profile_node_form"){
+      $form['#validate'][] = 'itg_common_managesite_validate';
+      $form['actions']['submit']['#submit'][] = 'itg_site_setting_form_custom_callback';
+
+  }
 }
+
+/**
+ * After submit Cooking Tips
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_site_setting_form_custom_callback($form, &$form_state) {
+
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if (arg(2) == 'edit') {
+    $op = 'updated';
+  }
+  else {
+    $op = 'created';
+  }
+ $celeberity_title = $form_state['node']->title;
+  drupal_set_message(t('Celebrity profile <b>' . $celeberity_title . '</b> has been ' . $op .'.'));
+  
+  }
 
 /**
  * Implement after build for image generate according large image. 
@@ -308,7 +335,7 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
                  searchIDs.push(jQuery(this).val());
               });
                  if (searchIDs.length != 0 && operation == "action::user_block_user_action") {
-                  var msg = confirm("Are you sure you want to Blocked User?");
+                  var msg = confirm("Are you sure, you want to block user?");
                      if (msg == true) {
                        return true;
                      }
@@ -647,3 +674,29 @@ function itg_common_check_duplicate_title($title, $type, $nid) {
     return $results->execute()->rowCount();
   }
 }
+
+/**
+ * Implements hook_node_view()
+ *
+ * {@inheritdoc}
+ */
+function itg_common_node_view($node, $view_mode, $langcode) {
+
+  if ($node->type == 'ask_an_expert') {
+    $node_title = "Question : " . $node->title; // regression issue
+    drupal_set_title(t($node_title));
+  }
+}
+
+/**
+ * Implement validation for email in manage site 
+ * @param array $form
+ * @param array $form_state
+ */
+  function itg_common_managesite_validate($form, &$form_state){
+    if(isset($form_state['values']['field_reporter_email_id']) && $form_state['values']['field_reporter_email_id'][LANGUAGE_NONE][0]['value'] != ''){
+       if (!filter_var($form_state['values']['field_reporter_email_id'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_EMAIL)) {
+                    form_set_error('field_reporter_email_id', t('Please enter valid email address.'));
+              }
+    }
+  }
