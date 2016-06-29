@@ -29,7 +29,7 @@ function feature_for_video_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_story_expert_description',
-    'label' => 'Long Description / Story ',
+    'label' => 'Long Description',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -363,7 +363,7 @@ function feature_for_video_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_expires',
-    'label' => 'Story expires',
+    'label' => 'Video expires',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1515,7 +1515,7 @@ function feature_for_video_field_default_field_instances() {
   t('Image Size (650 x 445)');
   t('Image Size (88 x 66)');
   t('Large image');
-  t('Long Description / Story ');
+  t('Long Description');
   t('Medium image');
   t('Schedule date & time');
   t('Section');
@@ -1523,7 +1523,6 @@ function feature_for_video_field_default_field_instances() {
   t('Short headline');
   t('Small image');
   t('Social media integration');
-  t('Story expires');
   t('Syndication');
   t('Tags');
   t('Tweet');
@@ -1532,6 +1531,7 @@ function feature_for_video_field_default_field_instances() {
   t('Video');
   t('Video Thumbnail');
   t('Video Upload');
+  t('Video expires');
 
   return $field_instances;
 }
