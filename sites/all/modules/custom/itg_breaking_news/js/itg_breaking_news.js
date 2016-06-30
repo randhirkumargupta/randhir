@@ -3,7 +3,7 @@
  */
 
 /*
- * @file itg_story.js
+ * @file itg_breaking_news.js
  * Contains all functionality related to story
  */
 
@@ -49,7 +49,13 @@
         $(".field-name-field-breaking-publish-time").hide();
       }
 
+      $('#edit-field-type-und').change(function() {
+                var typevalue = $('#edit-field-type-und').val();
+                if (typevalue == 'Breaking News') {
+                    $('#edit-field-story-expires-und-yes').attr('checked', false);
 
+                }
+            }); 
 
       $('body').on('change', '.field-name-field-mobile-subscribers .form-checkbox', function () {
         var el_value = $(this).attr('value');
