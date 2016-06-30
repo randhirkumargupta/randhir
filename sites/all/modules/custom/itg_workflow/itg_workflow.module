@@ -388,7 +388,6 @@ function itg_workflow_bulk_opration_related($field1, $field2) {
              });', array('type' => 'inline', 'scope' => 'footer'));
 }
 
-///////////////
 
 /**
  * Implements hook_node_insert
@@ -427,10 +426,8 @@ function itg_workflow_node_insert($node) {
  */
 function itg_workflow_node_update($node) {
     if ($node->type == 'story') {
-       
         global $user;
         $current = $user->uid;
-
         $node_id = $node->nid;
         $user_id = $node->uid;
 
@@ -479,16 +476,27 @@ function itg_workflow_node_update($node) {
 function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name) {
       
     global $base_url;
-
+    $review = $node->workbench_moderation_state_new;
     if ($event == 'create') {
         $task_subject = 'A new story has been submitted for your review, please find details below.';
         $submitted_by = 'Submitted By: '.$current_user_name;
         $subject = 'Story Submitted '. $node->title;
     }
     else if ($event == 'update') {
+        if ($review == 'needs_review'){
         $task_subject = 'A new story has been updated and submitted for your review, please find details below.';
+        }
+        else if ($review == 'rejected'){
+          $task_subject = 'Your story has been rejected, please find details below.';  
+        }
+        else if ($review == 'needs_modification'){
+          $task_subject = 'Your story has been required some modification, please find details below.';  
+        }
+        else if ($review == 'published'){
+          $task_subject = 'Your story has been published, please find details below.';  
+        }
         $submitted_by = 'Updated By: '.$current_user_name;
-        $subject = 'Story Updated '. $node->title;
+        $subject = 'Story Updation '. $node->title;
     }
 
     $node_url = $base_url . '/node/' . $node->nid;
