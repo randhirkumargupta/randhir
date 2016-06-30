@@ -54,44 +54,6 @@ function itg_social_media_schema() {
         'not null' => TRUE, 
         'default' => 0
       ),
-    ),
-    'indexes' => array(
-      'username' => array('username'),
-      'log_created' => array('created'),
-    ),
-    'primary key' => array('id'),
-  );
-  // Twitter Scheduling table 
-  $schema['itg_social_media_twitter_schedule'] = array(
-    'description' => 'The base table for twitter scheduling functionality.',
-    'fields' => array(
-      'id' => array(
-        'description' => 'The primary identifier for a schedule.',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => t('Node id of the shared content.'),
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),            
-      'username' => array(
-        'description' => 'Username of the user who have promoted the content.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ),
-      'social_media' => array(
-        'description' => 'Name of the social media where content has been published.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ),      
       'scheduled_time' => array(
         'description' => t('The scheduled date for the single record'),
         'type' => 'int', 
@@ -107,12 +69,12 @@ function itg_social_media_schema() {
       ),
     ),
     'indexes' => array(
-      'id' => array('id'),
-      'nid' => array('nid'),      
+      'username' => array('username'),
+      'log_created' => array('created'),
       'scheduled_time' => array('scheduled_time'),
     ),
     'primary key' => array('id'),
-  );
+  );  
 
   return $schema;
 }

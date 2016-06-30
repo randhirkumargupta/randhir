@@ -2496,6 +2496,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
                   font-size: 34px;
                   line-height: 36px;
                   opacity: .7;
+                  cursor: pointer;
               }
               .form-checkbox{
                   opacity: 0;
@@ -4347,5 +4348,19 @@ div.node{
     .views-table th, 
     .views-table td{
         max-width: 170px;
+    }
+}
+.top-actions{
+    text-align: right;
+    &.fixed {
+        background: #fff none repeat scroll 0 0;
+        left: 0;
+        margin: 0 auto;
+        padding: 10px;
+        position: fixed;
+        right: 0;
+        top: 37px;
+        width: 1170px;
+        z-index: 9999;
     }
 }

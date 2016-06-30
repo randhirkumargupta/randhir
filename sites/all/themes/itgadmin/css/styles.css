@@ -2662,6 +2662,7 @@ div.image-widget-data .ajax-progress-throbber {
   font-size: 34px;
   line-height: 36px;
   opacity: .7;
+  cursor: pointer;
 }
 [id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox {
   opacity: 0;
@@ -4343,4 +4344,19 @@ div.node #comments h2 {
 #views-form-manage-users-page .views-table td,
 #views-form-manage-users-page [id*="field-newsl-add-news-values"] td {
   max-width: 170px;
+}
+
+.top-actions {
+  text-align: right;
+}
+.top-actions.fixed {
+  background: #fff none repeat scroll 0 0;
+  left: 0;
+  margin: 0 auto;
+  padding: 10px;
+  position: fixed;
+  right: 0;
+  top: 37px;
+  width: 1170px;
+  z-index: 9999;
 }
