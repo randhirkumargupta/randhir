@@ -94,6 +94,24 @@ function itg_tv_schedule_search_form($form, &$form_state) {
  * @param array $form
  * @param array $form_state
  */
+function itg_tv_schedule_date_form($form, &$form_state) {
+
+    $form['date'] = array(
+      '#type' => 'textfield',
+      '#size' => 60,
+      '#default_value' => t('June 30, 2016 (IST)'),
+      '#maxlength' => 128,
+      '#attributes' => array('readonly' => 'readonly'),
+    );
+
+    return $form;
+}
+
+/**
+ * Implementation of hook_form
+ * @param array $form
+ * @param array $form_state
+ */
 function itg_tv_schedule_time_form($form, &$form_state) {
 
     $form['time_zone'] = array(
