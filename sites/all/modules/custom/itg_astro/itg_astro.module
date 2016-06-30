@@ -163,7 +163,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_astro_type[und]"]' => array('value' => '225'),
       ),
     );  
-    
+    $form['field_astro_type']['und']['#title'] = t('Astro Type') . '<span class="form-required" title="This field is required."> *</span>';
 
     $form['#action'] = '?destination=manage-astro';
     $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';
@@ -182,7 +182,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
  * @return array
  */
  
-function itg_astro_after_build($form, &$form_state) {    
+function itg_astro_after_build($form, &$form_state) {  
   // Add description of audi/video field to their placeholder
   $desc = $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description'];
   $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#attributes'] = array('placeholder' => $desc);
@@ -220,7 +220,7 @@ function itg_astro_after_build($form, &$form_state) {
   }
   $form['field_buzz_description']['#prefix'] = '<div class="collective-wrapper">';
   $form['field_common_audio_file']['#suffix'] = '</div>';
-  $form['field_astro_type']['und']['#title'] = t('Astro Type') . '<span class="form-required" title="This field is required."> *</span>';
+  
   $form['field_buzz_description']['und'][0]['value']['#title'] = t('Collective Text for all zodiac signs ').'<span class="form-required" title="This field is required."> *</span>';
   
 
