@@ -296,6 +296,7 @@ function time_zone_conversion($date, $time_zone) {
 
     $date = explode('-', $date);
     date_default_timezone_set('Asia/Kolkata');
+   
     if (isset($date[0])) {
         $time = new DateTime($date[0]);
         $timezone = timezone_list();

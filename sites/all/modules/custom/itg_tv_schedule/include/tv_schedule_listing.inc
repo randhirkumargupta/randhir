@@ -1,11 +1,10 @@
 <?php
-module_load_include('module', 'itg_tv_schedule', 'itg_tv_schedule.module');
 
 /*
  * Inc file contains the functions
  */
 function tv_schedule_listing() {
-    
+   
     //getting value from Url 
     $arg = arg();
     $search_title = $_GET['title'];
@@ -73,27 +72,34 @@ function tv_schedule_listing() {
         $cond = array('day' => $day);
     }
     $cursor = $people->find($cond);
+      $results = $cursor->count();
+      
     $counter = 0;
     $keys = 0;
-    
-    // iterate cursor to get value of documents
-    foreach ($cursor as $document) {
-        
-        $s_time = time_zone_conversion($document["time"], $_GET['time_zone']);
-        $out[$keys]['time'] = $s_time;
-        $out[$keys]['day'] = $document["day"];
-        $out[$keys]['program'] = $document["program"];
-        $keys++;
-        //counter required for current time slot display.
-        if ($curent_time >= $s_time) {
-            $counter++;
+
+    if ($results > 0) {
+        // iterate cursor to get value of documents
+        foreach ($cursor as $document) {
+            $s_time = time_zone_conversion($document['time'], $_GET['time_zone']);
+            $out[$keys]['time'] = $s_time;
+            //$out[$keys]['time'] = $document["time"];
+            $out[$keys]['day'] = $document["day"];
+            $out[$keys]['program'] = $document["program"];
+            $keys++;
+            
+            //counter required for current time slot display.
+            if ($curent_time >= $s_time) {
+                $counter++;
+            }
         }
-    }
-   
-    if ($counter > 0) {
-        $count = $counter - 1;
+        
     }
 
+    if ($counter > 0) {
+       
+      $count = $counter - 1;
+    }
+ 
     return theme('itg_tv_schedule', array('output' => $out, 'search' => $search, 'total' => $count, 'search_count' => $search_count, 'title' => $title));
 }
 
