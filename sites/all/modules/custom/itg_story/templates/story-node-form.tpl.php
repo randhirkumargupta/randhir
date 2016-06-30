@@ -1,11 +1,3 @@
-<div class="top-actions">
-    <label class="btn btn-save" for="edit-submit">Save</label>
-    <label class="btn btn-preview" for="edit-preview">Preview</label>
-    <label class="btn btn-cancel" for="edit-delete">Delete</label>
-    <a class="btn btn-cancel" href="/itgcms/mydraft-story">Cancel</a>
-</div>
-
-
 <div id="BasicDetails">
     <h2 class="story-title"><?php print t('Quick File'); ?></h2>
     <?php print drupal_render($form['field_story_magazine_story_issue']); ?>
