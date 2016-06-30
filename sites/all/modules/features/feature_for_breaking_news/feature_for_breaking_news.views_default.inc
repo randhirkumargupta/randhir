@@ -307,6 +307,13 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_type']['table'] = 'field_data_field_type';
   $handler->display->display_options['fields']['field_type']['field'] = 'field_type';
   $handler->display->display_options['fields']['field_type']['element_label_colon'] = FALSE;
+  /* Field: Content: Story expires */
+  $handler->display->display_options['fields']['field_story_expires']['id'] = 'field_story_expires';
+  $handler->display->display_options['fields']['field_story_expires']['table'] = 'field_data_field_story_expires';
+  $handler->display->display_options['fields']['field_story_expires']['field'] = 'field_story_expires';
+  $handler->display->display_options['fields']['field_story_expires']['label'] = 'Activate Live TV';
+  $handler->display->display_options['fields']['field_story_expires']['type'] = 'list_key';
+  $handler->display->display_options['fields']['field_story_expires']['delta_offset'] = '0';
   /* Field: Content: Display on */
   $handler->display->display_options['fields']['field_display_on']['id'] = 'field_display_on';
   $handler->display->display_options['fields']['field_display_on']['table'] = 'field_data_field_display_on';

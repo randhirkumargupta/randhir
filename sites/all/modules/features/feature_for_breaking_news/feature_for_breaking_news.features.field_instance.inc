@@ -560,7 +560,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_expires',
-    'label' => 'Live TV',
+    'label' => 'Activate Live TV',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1048,6 +1048,7 @@ function feature_for_breaking_news_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Activate Live TV');
   t('Breaking Band should be in text only format');
   t('Comment');
   t('Content Type');
@@ -1061,7 +1062,6 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Image Size (650 x 445)');
   t('Image Size (88 x 66)');
   t('Large image');
-  t('Live TV');
   t('Mark as Breaking band');
   t('Medium image');
   t('Mobile Subscribers');

@@ -119,12 +119,12 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
     // code to add taxonomy parent terms with no child
     //$vid = taxonomy_vocabulary_machine_name_load('category_management')->vid;
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-    $op = array("_none" => "Select Category");
+    //$op = array("_none" => "Select Category");
     foreach ($tax as $key => $val) {
       $op[$val->tid] = $val->name;
     }
     // assign array value to taxonomy field
-    $form['field_section']['#title'] = array('All' => '- Any -');
+    //$form['field_section']['#title'] = array('All' => '- Any -');
     $form['field_section']['und']['#options'] = $op;
 
     //Add destination and cancel button in add Breaking News form page
