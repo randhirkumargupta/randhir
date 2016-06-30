@@ -494,7 +494,7 @@ span.error{
 }
 body.sidebar-second{
   .sidebars{
-    position: absolute;
+    position: fixed;
     top: 100px;
     left: 100%;
     width: 330px;
