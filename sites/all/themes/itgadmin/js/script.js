@@ -591,11 +591,6 @@
         jQuery('.form-field-name-field-story-tweet-image .ajax-processed').mousedown();
       }
     });
-    // reset form data end.
-    // jQuery show n hide code for sidebar second 
-    $('body').on('click', '.sidebar-trigger', function () {
-      $(this).parent().toggleClass('active');
-    });
     
     // jQuery code for syndication rule details
     var srd_freq_el = $('.field-name-field-syndication-frequency').find('.form-radio');
@@ -696,3 +691,13 @@
     
   };
 })(jQuery);
+
+
+jQuery(document).ready(function(){
+    jQuery('.sidebar-trigger').click(function () {
+      jQuery(this).parent().toggleClass('active');
+    });
+    jQuery('.saved-search-link').click(function () {
+      jQuery(this).parent().next('.my-saved-search').slideToggle();
+    });
+});
