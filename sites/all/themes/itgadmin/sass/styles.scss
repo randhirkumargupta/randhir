@@ -3462,6 +3462,7 @@ div.node{
 .region-sidebar-second{
   background-color: #2f2f2f;
   color: #fff;
+  min-height: 400px;
   padding: 0 0 10px;
   .block{
     .block-title{
@@ -4427,4 +4428,23 @@ div.node{
     .block-itg-story-list{
         margin: 10px 0 0;
     }
+}
+
+#itg-tv-schedule-form{
+    @extend .node-form;
+    @extend .Browse-upload;
+    @extend .choose-audio-video-file;
+    .form-managed-file{
+        position: relative;
+        #edit-file-upload-button{
+            @extend .add-more-wbg;
+        }
+    }
+    .form-actions{
+        .form-submit{
+            @extend .btn;
+            @extend .btn-save;
+        }
+    }
+    
 }
