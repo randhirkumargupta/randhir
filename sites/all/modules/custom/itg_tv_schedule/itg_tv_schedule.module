@@ -125,11 +125,10 @@ function itg_tv_schedule_time_form($form, &$form_state) {
   );
 
   drupal_add_js('jQuery("#edit-time-zone").change(function()
- {
-     jQuery("#itg-tv-schedule-time-form").submit();
- });', array('type' => 'inline', 'scope' => 'footer'));
-
-
+                 {
+                     jQuery("#itg-tv-schedule-time-form").submit();
+                 });', array('type' => 'inline', 'scope' => 'footer'));
+  
   return $form;
 }
 
