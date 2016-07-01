@@ -143,7 +143,7 @@ function itg_tv_schedule_uploadmongo($file_id) {
 
   if (!is_int($file_id)) {
     // TODO: check on this later for exception handling.
-    return false;
+    return FALSE;
   }
 
   // connection with database
@@ -157,7 +157,7 @@ function itg_tv_schedule_uploadmongo($file_id) {
     $people = $db->tv_schedule;
   }
   else {
-    return false;
+    return FALSE;
   }
 
   $i = 1;
@@ -277,7 +277,8 @@ function itg_tv_schedule_theme() {
       'variables' => array('title' => NULL),
       'path' => drupal_get_path('module', 'itg_tv_schedule') . '/templates',
       'template' => 'itg-tv-schedule',
-    ),);
+    ),
+  );
 }
 
 /**
@@ -298,7 +299,7 @@ function time_zone_conversion($date, $time_zone) {
     if ($time_zone == 'GMT') {
       $time->setTimezone(new DateTimeZone($timezone['GMT']));
     }
-    else if ($time_zone == 'PST') {
+    elseif ($time_zone == 'PST') {
       $time->setTimezone(new DateTimeZone($timezone['GMT-07:00']));
     }
     else {
@@ -315,9 +316,9 @@ function time_zone_conversion($date, $time_zone) {
  * @return string
  */
 function timezone_list() {
-  static $timezones = null;
+  static $timezones = NULL;
 
-  if ($timezones === null) {
+  if ($timezones === NULL) {
     $timezones = [];
     $offsets = [];
     $now = new DateTime();
@@ -325,7 +326,7 @@ function timezone_list() {
     foreach (DateTimeZone::listIdentifiers() as $timezone) {
       $now->setTimezone(new DateTimeZone($timezone));
       $offsets[] = $offset = $now->getOffset();
-      $timezones[format_GMT_offset($offset)] = $timezone;
+      $timezones[format_gmt_offset($offset)] = $timezone;
     }
 
     array_multisort($offsets, $timezones);
@@ -339,7 +340,7 @@ function timezone_list() {
  * @param integer $offset
  * @return string
  */
-function format_GMT_offset($offset) {
+function format_gmt_offset($offset) {
   $hours = intval($offset / 3600);
   $minutes = abs(intval($offset % 3600 / 60));
   return 'GMT' . ($offset ? sprintf('%+03d:%02d', $hours, $minutes) : '');
