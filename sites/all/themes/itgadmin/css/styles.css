@@ -104,7 +104,7 @@ img {
 .field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, .node-category-form #edit-term-state-wrap legend, .node-category-form .metatags-form, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, [id*="itg-social-media-form"] > div fieldset .container-inline-date .date-padding .form-type-textfield label, [id*="itg-social-media-form"] > div .form-type-managed-file input[type="file"], [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-img-upload .file .file-icon, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-img-upload .file .file-icon, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-img-upload .file .file-icon, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-img-upload .file .file-icon, .taxonomy-form-term-tags .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links, [id*="taxonomy-csv-import-form"] .vertical-tabs-list, [id*="field-astro-zodiac-values"] > tbody > tr > td .form-managed-file .ajax-progress-throbber,
 [id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file .ajax-progress-throbber, [id*="field-astro-zodiac-values"] > tbody > tr > td .form-managed-file .form-type-textfield label,
-[id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file .form-type-textfield label, [id*="field-astro-numerology-values-values"] > tbody > tr > td:empty, [id*="field-newsl-add-news-values"] th.field-label, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select label, .form-item-path-pathauto .description a, [id*="field-service-content-values"] .field-name-field-service-content-date legend, [id*="field-service-content-values"] .field-name-field-story-expert-description label, .node-vas_service_content-form .form-field-name-field-service-content .ajax-progress-throbber, .node-type-task-idea-allocation-tracking .title.comment-form, .node-clients_creation-form .form-item-field-email-address-und-0-value > label, .form-managed-file .filefield-source-plupload div.ajax-progress, .form-item-htmlmail-plaintext, .grippie {
+[id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file .form-type-textfield label, [id*="field-astro-numerology-values-values"] > tbody > tr > td:empty, [id*="field-newsl-add-news-values"] th.field-label, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select label, .form-item-path-pathauto .description a, [id*="field-service-content-values"] .field-name-field-service-content-date legend, [id*="field-service-content-values"] .field-name-field-story-expert-description label, .node-vas_service_content-form .form-field-name-field-service-content .ajax-progress-throbber, .node-type-task-idea-allocation-tracking .title.comment-form, .node-clients_creation-form .form-item-field-email-address-und-0-value > label, .block-itg-related .my-saved-search, .form-managed-file .filefield-source-plupload div.ajax-progress, .form-item-htmlmail-plaintext, .grippie {
   display: none;
 }
 
@@ -214,7 +214,7 @@ img {
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element, .view-popup .field, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-question, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, .edit-link,
 .view-link,
 .delete-link,
-.edit-cm a, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-item-title + .form-type-item, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .node-newsletter-form #newsletter-date-time-wrapper {
+.edit-cm a, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-item-title + .form-type-item, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .node-newsletter-form #newsletter-date-time-wrapper, .view-related-content-new .view-filters {
   display: inline-block;
 }
 
@@ -301,7 +301,7 @@ img {
 #block-menu-menu-ugc-content-menu > .menu > li,
 #block-menu-menu-task-allocation-menu > .menu > li,
 #block-menu-menu-ugc-comment-menu > .menu > li,
-#block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .view .attachment .count, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file img, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file a, .confirmation a#edit-cancel, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file a {
+#block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .view .attachment .count, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file img, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file a, .confirmation a#edit-cancel, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file a, .view-related-content-new .view-filters {
   vertical-align: top;
 }
 
@@ -318,7 +318,7 @@ img {
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element, [id*="field-poll-answer-values"] tbody tr, .view-popup .field, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-question, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, [id*="field-astro-zodiac-values"] > tbody > tr > td,
 [id*="field-astro-numerology-values-values"] > tbody > tr > td, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] tbody tr td, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .node-newsletter-form #newsletter-date-time-wrapper, .node-newsletter-form #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time .form-item,
-.node-newsletter-form #edit-field-survey-start-date[style="display: none;"] + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time .form-item, [id*="field-videogallery-video-upload-values"] tbody tr td {
+.node-newsletter-form #edit-field-survey-start-date[style="display: none;"] + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time .form-item, .view-related-content-new .view-filters, [id*="field-videogallery-video-upload-values"] tbody tr td {
   width: 100%;
 }
 
@@ -342,12 +342,12 @@ img {
 .manage_cooking_tips_view_menu, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper legend,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper legend, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td, [id*="field-poll-answer-values"] tbody tr, [id*="field-poll-answer-values"] tbody tr td, .view-popup .field .field-label, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-type, [id*="field-survey-add-questions-values"] > tbody table thead, [id*="field-survey-add-questions-values"] > tbody table tbody, [id*="field-astro-zodiac-values"] > tbody > tr > td,
-[id*="field-astro-numerology-values-values"] > tbody > tr > td, [id*="field-newsl-add-news-values"] fieldset legend, .node-syndication_rule-form tbody td, .node-syndication_rule-form tbody td .field-name-field-syndication-time, .node-syndication_rule-form tbody td .field-name-field-syndication-time .form-type-textfield .form-text, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select .form-text, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file-size, .newsletter-templates .newsletter-list .newsletter-thumbnail, [id*="field-service-content-values"] tbody tr td, [id*="field-service-content-values"] .field-name-field-service-content-date, [id*="field-syndication-ftp-details-values"] tbody tr td, [id*="field-syndication-ftp-details-values"] tbody tr td .field-type-text, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td .form-type-textfield, .view-view-moderation-history .views-row .views-label, .node-newsletter-form #newsletter-date-time-wrapper .form-item, .node-newsletter-form #newsletter-date-time-wrapper #edit-field-survey-start-date, [id*="field-videogallery-video-upload-values"] tbody tr td {
+[id*="field-astro-numerology-values-values"] > tbody > tr > td, [id*="field-newsl-add-news-values"] fieldset legend, .node-syndication_rule-form tbody td, .node-syndication_rule-form tbody td .field-name-field-syndication-time, .node-syndication_rule-form tbody td .field-name-field-syndication-time .form-type-textfield .form-text, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select .form-text, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file-size, .newsletter-templates .newsletter-list .newsletter-thumbnail, [id*="field-service-content-values"] tbody tr td, [id*="field-service-content-values"] .field-name-field-service-content-date, [id*="field-syndication-ftp-details-values"] tbody tr td, [id*="field-syndication-ftp-details-values"] tbody tr td .field-type-text, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td .form-type-textfield, .view-view-moderation-history .views-row .views-label, .node-newsletter-form #newsletter-date-time-wrapper .form-item, .node-newsletter-form #newsletter-date-time-wrapper #edit-field-survey-start-date, #head-val, [id*="field-videogallery-video-upload-values"] tbody tr td, .action-with-title #page-title {
   float: left;
 }
 
 .fright, .header__secondary-menu, .user-role, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label,
-[id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label {
+[id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label, #clickme {
   float: right;
 }
 
@@ -1049,8 +1049,8 @@ textarea {
 }
 
 body.sidebar-second .sidebars {
-  position: absolute;
-  top: 100px;
+  position: fixed;
+  top: 199px;
   left: 100%;
   width: 330px;
   z-index: 9999;
@@ -1755,8 +1755,8 @@ div.image-widget-data .ajax-progress-throbber {
 }
 
 #block-menu-menu-admin-left-menu {
-  margin: 20px 0 5px;
-  z-index: 99999;
+  margin: 10px 0 20px;
+  z-index: 999;
 }
 #block-menu-menu-admin-left-menu h2 {
   display: none;
@@ -3213,7 +3213,7 @@ fieldset#edit-select .form-submit {
 .field-name-field-quiz-answer-image .image-widget-data .ajax-progress-throbber, .field-name-field-quiz-answer-video .file-widget .ajax-progress-throbber, .node-category-form fieldset.path-form legend, .node-category-form #edit-term-state-wrap legend, .node-category-form .metatags-form, [id*="itg-survey-survey-form"] .question-container, [id*="itg-quiz-quiz-form"] .question-container, .itg-popup, [id*="itg-social-media-form"] > div fieldset .container-inline-date .date-padding .form-type-textfield label, [id*="itg-social-media-form"] > div .form-type-managed-file input[type="file"], [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-img-upload .file .file-icon, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-img-upload .file .file-icon, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-img-upload .file .file-icon, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-img-upload .file .file-icon, .taxonomy-form-term-tags .path-form legend, .user-configurations, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table thead, .workbench-info-block, #comments .comment.comment-unpublished ul.links, [id*="taxonomy-csv-import-form"] .vertical-tabs-list, [id*="field-astro-zodiac-values"] > tbody > tr > td .form-managed-file .ajax-progress-throbber,
 [id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file .ajax-progress-throbber, [id*="field-astro-zodiac-values"] > tbody > tr > td .form-managed-file .form-type-textfield label,
-[id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file .form-type-textfield label, [id*="field-astro-numerology-values-values"] > tbody > tr > td:empty, [id*="field-newsl-add-news-values"] th.field-label, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select label, .form-item-path-pathauto .description a, [id*="field-service-content-values"] .field-name-field-service-content-date legend, [id*="field-service-content-values"] .field-name-field-story-expert-description label, .node-vas_service_content-form .form-field-name-field-service-content .ajax-progress-throbber, .node-type-task-idea-allocation-tracking .title.comment-form, .node-clients_creation-form .form-item-field-email-address-und-0-value > label, .form-managed-file .filefield-source-plupload div.ajax-progress, .form-item-htmlmail-plaintext {
+[id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file .form-type-textfield label, [id*="field-astro-numerology-values-values"] > tbody > tr > td:empty, [id*="field-newsl-add-news-values"] th.field-label, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select label, .form-item-path-pathauto .description a, [id*="field-service-content-values"] .field-name-field-service-content-date legend, [id*="field-service-content-values"] .field-name-field-story-expert-description label, .node-vas_service_content-form .form-field-name-field-service-content .ajax-progress-throbber, .node-type-task-idea-allocation-tracking .title.comment-form, .node-clients_creation-form .form-item-field-email-address-und-0-value > label, .block-itg-related .my-saved-search, .form-managed-file .filefield-source-plupload div.ajax-progress, .form-item-htmlmail-plaintext {
   display: none;
 }
 
@@ -4191,12 +4191,22 @@ div.node #comments h2 {
 
 .block-itg-related .rel-link {
   padding: 20px;
-}
-.block-itg-related a {
-  color: #1fb5ad;
+  text-align: right;
 }
 .block-itg-related ul li {
   padding: 3px 0;
+}
+.block-itg-related ul li a {
+  color: #1fb5ad;
+}
+.block-itg-related .add-related-content-link {
+  font-size: 34px;
+  height: 32px;
+  line-height: 24px;
+  padding: 0 5px;
+}
+.block-itg-related .my-saved-search {
+  padding: 0 20px;
 }
 
 .view-manage-users .confirmation .item-list ul {
@@ -4285,8 +4295,26 @@ div.node #comments h2 {
   padding: 10px;
 }
 
+.view-related-content-new .view-filters {
+  margin-top: 20px;
+}
+.view-related-content-new .view-filters .views-exposed-form .views-exposed-widget {
+  max-width: 154px;
+  width: auto;
+}
+.view-related-content-new .scroll-wrap {
+  max-height: 438px;
+  width: 885px;
+  overflow: auto;
+}
+
 .search-criteria {
-  margin-top: 10px;
+  position: absolute;
+  right: 129px;
+  text-align: right;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
 }
 .search-criteria .form-text {
   width: 300px;
@@ -4349,14 +4377,100 @@ div.node #comments h2 {
 .top-actions {
   text-align: right;
 }
-.top-actions.fixed {
+.top-actions .btn:last-child, .top-actions .form-submit[value="Preview"]:last-child, .top-actions .btn-save:last-child, .top-actions .node-ugc-form .form-actions .form-submit:last-child, .node-ugc-form .form-actions .top-actions .form-submit:last-child, .top-actions .ugc-action .approve-ugc:last-child, .ugc-action .top-actions .approve-ugc:last-child, .top-actions [id*="itg-survey-survey-form"] .question-container .form-submit:last-child, [id*="itg-survey-survey-form"] .question-container .top-actions .form-submit:last-child, .top-actions [id*="itg-quiz-quiz-form"] .question-container .form-submit:last-child, [id*="itg-quiz-quiz-form"] .question-container .top-actions .form-submit:last-child, .top-actions [id*="taxonomy-csv-import-form"] .form-submit:last-child, [id*="taxonomy-csv-import-form"] .top-actions .form-submit:last-child, .top-actions #views-form-syndication-feed-generator-page .form-actions .form-submit:last-child, #views-form-syndication-feed-generator-page .form-actions .top-actions .form-submit:last-child, .top-actions .node-ask_an_expert-form .form-actions .form-submit:last-child, .node-ask_an_expert-form .form-actions .top-actions .form-submit:last-child, .top-actions .view-manage-users .confirmation .form-actions .form-submit:last-child, .view-manage-users .confirmation .form-actions .top-actions .form-submit:last-child, .top-actions .operation-form .form-actions .form-submit:last-child, .operation-form .form-actions .top-actions .form-submit:last-child, .top-actions #views-form-blogs-management-page .form-actions .form-submit:last-child, #views-form-blogs-management-page .form-actions .top-actions .form-submit:last-child,
+.top-actions #views-form-strory-menegment-page .form-actions .form-submit:last-child,
+#views-form-strory-menegment-page .form-actions .top-actions .form-submit:last-child, .top-actions .form-submit[value="Save as Draft"]:last-child,
+.top-actions .form-submit[value="Save"]:last-child,
+.top-actions .form-submit[value="Create"]:last-child,
+.top-actions .form-submit[value="Update"]:last-child,
+.top-actions .form-submit[value="Proceed to Payment"]:last-child,
+.top-actions .form-submit[value="Make Payment"]:last-child,
+.top-actions .form-submit[value="Create new account"]:last-child,
+.top-actions .form-submit[value="Next"]:last-child, .top-actions .form-submit[value="Publish"]:last-child, .top-actions .button:last-child, .top-actions .form-submit[value="Back"]:last-child, .top-actions .form-submit[value="Delete"]:last-child, .top-actions .itg-add-another-item tbody tr td > .form-submit[value="Remove"]:last-child, .itg-add-another-item tbody tr .top-actions td > .form-submit[value="Remove"]:last-child, .top-actions [id*="field-breaking-content-details-values"] tbody tr td > .form-submit[value="Remove"]:last-child, [id*="field-breaking-content-details-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-program-schedule-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-program-schedule-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-associate-sponsors-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-associate-sponsors-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-event-highlights-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-event-highlights-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-event-media-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-event-media-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-quiz-add-questions-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-quiz-add-questions-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-task-task-idea-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-task-task-idea-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-astro-numerology-values-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-astro-numerology-values-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-astro-zodiac-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-astro-zodiac-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-poll-answer-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-poll-answer-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-syndication-rule-details-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-syndication-rule-details-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-story-template-buzz-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-erf-registration-fee-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-erf-registration-fee-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-service-content-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-service-content-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-syndication-ftp-details-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-syndication-ftp-details-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-email-address-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-email-address-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-mega-review-review-values"] tbody tr td > .form-submit[value="Remove"]:last-child,
+[id*="field-mega-review-review-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child, .top-actions [id*="field-videogallery-video-upload-values"] tbody tr td > .form-submit[value="Remove"]:last-child, [id*="field-videogallery-video-upload-values"] tbody tr .top-actions td > .form-submit[value="Remove"]:last-child, .top-actions .itg-add-another-item tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child, .itg-add-another-item tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child, .top-actions [id*="field-breaking-content-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child, [id*="field-breaking-content-details-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-program-schedule-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-program-schedule-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-associate-sponsors-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-associate-sponsors-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-event-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-event-highlights-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-event-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-event-media-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-quiz-add-questions-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-quiz-add-questions-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-task-task-idea-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-task-task-idea-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-astro-numerology-values-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-astro-numerology-values-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-astro-zodiac-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-astro-zodiac-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-poll-answer-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-poll-answer-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-syndication-rule-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-syndication-rule-details-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-story-template-buzz-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-erf-registration-fee-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-erf-registration-fee-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-service-content-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-service-content-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-syndication-ftp-details-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-syndication-ftp-details-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-email-address-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-email-address-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child,
+.top-actions [id*="field-mega-review-review-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child,
+[id*="field-mega-review-review-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child, .top-actions [id*="field-videogallery-video-upload-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:last-child, [id*="field-videogallery-video-upload-values"] tbody tr td .top-actions .ajax-new-content > .form-submit[value="Remove"]:last-child, .top-actions .view .attachment a:last-child, .view .attachment .top-actions a:last-child, .top-actions .ugc-action .reject-ugc:last-child, .ugc-action .top-actions .reject-ugc:last-child, .top-actions .ugc-action .manage-ugc:last-child, .ugc-action .top-actions .manage-ugc:last-child, .top-actions [id*="itg-social-media-form"] > div > a:last-child, .top-actions #comments .comment-form .form-actions .form-submit[value="Cancel"]:last-child, #comments .comment-form .form-actions .top-actions .form-submit[value="Cancel"]:last-child, .top-actions [id*="field-survey-add-questions-values"] > tbody > tr > td > .form-submit:last-child, .top-actions [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit:last-child, .top-actions [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit:last-child, [id*="field-newsl-add-news-values"] fieldset .top-actions legend + .fieldset-wrapper > .form-submit:last-child, .top-actions .node-vas_service_content-form #reset-date-button:last-child, .node-vas_service_content-form .top-actions #reset-date-button:last-child, .top-actions .operation-form .form-actions .form-submit + a:last-child, .operation-form .form-actions .top-actions .form-submit + a:last-child, .top-actions #views-form-blogs-management-page .form-actions .form-submit + a:last-child, #views-form-blogs-management-page .form-actions .top-actions .form-submit + a:last-child,
+.top-actions #views-form-strory-menegment-page .form-actions .form-submit + a:last-child,
+#views-form-strory-menegment-page .form-actions .top-actions .form-submit + a:last-child {
+  margin-right: 0;
+}
+
+.action-with-title.fixed {
   background: #fff none repeat scroll 0 0;
   left: 0;
   margin: 0 auto;
-  padding: 10px;
+  padding: 10px 0 0;
   position: fixed;
   right: 0;
-  top: 37px;
+  top: 0;
   width: 1170px;
-  z-index: 9999;
+  z-index: 99999;
+}
+.action-with-title #page-title {
+  line-height: 32px;
+  margin-bottom: 0;
+}
+.action-with-title .block-itg-story-list {
+  margin: 10px 0 0;
 }

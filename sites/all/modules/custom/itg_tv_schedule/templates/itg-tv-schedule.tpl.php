@@ -85,11 +85,11 @@ if($clicked_day == "")
 
 <!-- Search result pop -->
 
-<?php if (isset($search)): ?>
+<?php if (isset($title)): ?>
     <div  id="tv-search-popup" class="itg-popup" style="display: block;">
         <div class="popup-data">
             <div class="popup-header">
-                <h2>Search Results <span style='font-size: 14px;'>(<?php print $search_count.' results for '.$title; ?>)</span></h2>
+                <h2>Search Results <span style='font-size: 14px;'>(<?php  print $search_count.' results for '.$title; ?>)</span></h2>
                 <a class="itg-close-popup" href="javascript:;"> Close </a>
             </div>
             <div class="popup-body">
