@@ -47,17 +47,29 @@ function generate_custom_pattern_feed($data) {
             $file_path['file_path'] = $feed_dir . '/' . $filename;
             $file_path['file_name'] = $filename;
             return $file_path;
-        } else {
-            drupal_set_message(t('Pattern not found.'), 'error');
+        }
+        else {
+            $default_pattern    = get_default_feed_pattern($feed_type, $content_type);
+            foreach ($nids as $nid) {
+                $xml .= get_custom_feeds_files($nid, $default_pattern);
+                $filename = uniqid() . "-$content_type-date-$today.xml";
+                watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
+            }
+            $xml .= "</root>";
+            $file = file_save_data($xml, "$feed_dir/" . $filename);
+            $file_path['file_path'] = $feed_dir . '/' . $filename;
+            $file_path['file_name'] = $filename;
+            return $file_path;
         }
     }
 }
 
 /**
  * This gives latest pattern w.r.t client & cotent type 
- * @param type $client
- * @param type $content_type
- * @param type $feed_type
+ * @param string $client
+ * @param string $content_type
+ * @param string $feed_type
+ * @param string $pattern
  */
 function get_client_feed_pattern($client, $content_type, $feed_type) {
     $pattern = "";
@@ -80,8 +92,8 @@ function get_client_feed_pattern($client, $content_type, $feed_type) {
 
 /**
  * Function for returing the feed file text
- * @param type $nid
- * @param type $pattren
+ * @param int $nid
+ * @param string $pattren
  */
 function get_custom_feeds_files($nid = NULL, $text = NULL) {
     $data_array = array();
@@ -115,21 +127,24 @@ function get_custom_feeds_files($nid = NULL, $text = NULL) {
                     }
                 }
                 return $new_text;
-            } else {
-                drupal_set_message("not a valid field");
             }
-        } else {
-            drupal_set_message("Not a valid formet");
+            else {
+                drupal_set_message(t("not a valid field"));
+            }
         }
-    } else {
-        drupal_set_message("Either node ids not found or pattrens not found");
+        else {
+            drupal_set_message(t("Not a valid formet"));
+        }
+    }
+    else {
+        drupal_set_message(t("Either node ids not found or pattrens not found"));
     }
 }
 
 /**
  * Funtion provides field list w.r.t. content type
  * @param string $content_type
- * @return array which has all the fields name on perticular file type
+ * @return array $field_info which has all the fields name on perticular file type
  */
 function fieldsArray($content_type) {
     $field_info = array();
@@ -156,20 +171,20 @@ function get_vars_from_feed_pattern($text) {
 /**
  * Check for field existance w.r.t content type
  * @param string $fieldName
- * @param blooen $flag
+ * @param boolen $flag
  */
 function isValidField($field_name, $content_type) {
-    $flag = false;
+    $flag = FALSE;
     if (isset($field_name) && isset($content_type)) {
         if (in_array($field_name, fieldsArray($content_type))) {
-            $flag = true;
+            $flag = TRUE;
         }
     }
     return $flag;
 }
 
 /**
- * validate xml
+ * Function is uses fot validating the xml standrad
  * @param string $xml
  * @return boolen $errors
  */
@@ -183,10 +198,10 @@ function isValidXml($xml) {
 
 /**
  * Function gives values w.r.t field name & entity type
- * @param type $entity_type
- * @param type $entity
- * @param type $field_name
- * @return type $required_value
+ * @param string $entity_type
+ * @param obj $entity
+ * @param string $field_name
+ * @return array $required_value
  */
 function get_required_data_field_get_items($entity_type, $entity, $field_name) {
     $required_value = '';
@@ -211,7 +226,20 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
                     break;
                 case 'value':
                     /* Its very importent to convert text into xml standard so using htmlspecialchars with ENT_XML1 */
-                    $required_value[] = htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8');
+                    if ($field_name=='field_gallery_image') {
+                        foreach ( $entity->field_gallery_image['und'] as $key=>$fid ) {
+                            /*Loop Only once*/
+                            if ($key!=0)  
+                            break;
+                            $value = $entity->field_gallery_image['und'][$key]['value'] ;
+                            $field_collection_item = entity_load('field_collection_item', array($value));
+                            $field_collection_item_uri = $field_collection_item[$value]->field_images[LANGUAGE_NONE][0]['uri'];
+                            $required_value[] = file_create_url($field_collection_item_uri);
+                        }
+                    }
+                    else {
+                        $required_value[] = htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8');
+                    }
                     break;
             }
         }
@@ -232,10 +260,10 @@ function itg_syndication_theme() {
 }
 
 /**
- * 
- * @param type $feed_type
- * @param type $content_type
- * @return string
+ * Function used for getting default feed pattern 
+ * @param string $feed_type
+ * @param string $content_type
+ * @return string in feed format
  */
 function get_default_feed_pattern($feed_type, $content_type) {
     $feed_assoc_array = "";
@@ -257,7 +285,7 @@ function get_default_feed_pattern($feed_type, $content_type) {
  * Function to generate arry to xml
  * @param string $root_element_name
  * @param array $ar
- * @return xml xml
+ * @return xml $customXML
  */
 function assocArrayToXML($root_element_name, $xml_array) {
     $xml = new SimpleXMLElement("<{$root_element_name}></{$root_element_name}>");
@@ -277,9 +305,9 @@ function assocArrayToXML($root_element_name, $xml_array) {
 }
 
 /**
- * 
- * @param type $content_type
- * @return type
+ * Function got getting lebels of perticular content type into tag format
+ * @param string $content_type
+ * @return string $tags
  */
 function get_lebels_of_content_type_fields($content_type) {
     $fieldsArray = array();
@@ -294,24 +322,28 @@ function get_lebels_of_content_type_fields($content_type) {
 }
 
 /**
- *
- * @param type $entity_type
- * @param type $bundle_name
- * @param type $field_name
- * @return type
+ * Function for getting lebel for field
+ * @param string $entity_type
+ * @param string $bundle_name
+ * @param string $field_name
+ * @return string $label
  */
 function get_lebel_of_field($entity_type = 'node', $bundle_name, $field_name) {
     if (isset($entity_type) && isset($bundle_name) && isset($field_name)) {
         $info = field_info_instance($entity_type, $field_name, $bundle_name);
         $label = $info['label'];
         return $label;
-    } else {
+    }
+    else {
         return;
     }
 }
 
 /**
- *  hook_form_FORM_ID_alter
+ * Hook_FORM_ID_from_alter
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
  */
 function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$form, &$form_state, $form_id) {
     $data = array();
@@ -330,7 +362,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
     drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', 'file');
     /*check for default value*/
     $client =   $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#entity']->field_syndication_feed_clients[LANGUAGE_NONE][0]['value'];
-    if(isset($client)) {
+    if (isset($client)) {
          $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#default_value'] = $client; 
     }
     /* Client list */
@@ -370,7 +402,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
 /**
  * Callback function for displaying the variables 
  * @param array $form
- * @param type $form_state
+ * @param array $form_state
  */
 function _pre_define_vars_callback($form, &$form_state) {
     $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
@@ -385,8 +417,8 @@ function _pre_define_vars_callback($form, &$form_state) {
 
 /**
  * Function which is used to replaced dynamic body feed pattern
- * @param type $form
- * @param type $form_state
+ * @param array $form
+ * @param array $form_state
  * @return commands
  */
 function get_default_feed_pattern_callback($form, &$form_state) {
@@ -396,7 +428,8 @@ function get_default_feed_pattern_callback($form, &$form_state) {
         $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Pleaes Select Content Type</span>');
         drupal_get_messages();
         return array('#type' => 'ajax', '#commands' => $commands);
-    } else {
+    }
+    else {
         $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
         $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
         return array(

@@ -49,9 +49,9 @@ function itg_mobile_services_feed_generator_of_contents($node) {
     $data = unserialize($validate_content);
     if (is_array($data['clients']) && count($data['clients']) > 0) {
       foreach ($data['clients'] as $key => $val) {
-        if ($content_count < $val) {
+        if ($content_count <= $val) {
           if (empty($error)) {
-            drupal_set_message('feed not generated, please increase service content count', 'error');
+            drupal_set_message('Feed cannot be generated. You have already exceeded feed count limit. Please increase content count limit from service association page.', 'error');
             $error = TRUE;
           }
         }
@@ -94,7 +94,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
           // 1. Fetch web URL (our server)
           case '1':
             $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
-            if ($frequency_date_arr[0] == $today_date) {
+            if ($frequency_date_arr[0] <= $today_date) {
               itg_mobile_web_url_mobile($service_fetch_link, $file_path, 1);
             }
             else {
@@ -103,7 +103,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
 
             break;
           case 2: // 2. Via FTP location
-            if ($frequency_date_arr[0] == $today_date) {
+            if ($frequency_date_arr[0] <= $today_date) {
               $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
               $ftp_username = isset($client_info->field_ftp_username[LANGUAGE_NONE]) ? $client_info->field_ftp_username[LANGUAGE_NONE][0]['value'] : '';
               $ftp_password = isset($client_info->field_ftp_password[LANGUAGE_NONE]) ? $client_info->field_ftp_password[LANGUAGE_NONE][0]['value'] : '';
@@ -113,7 +113,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
 
             break;
           case 3: // 3. Via Email
-            if ($frequency_date_arr[0] == $today_date) {
+            if ($frequency_date_arr[0] <= $today_date) {
               $service_email_address = isset($client_info->field_service_email_address[LANGUAGE_NONE]) ? $client_info->field_service_email_address[LANGUAGE_NONE][0]['value'] : '';
               itg_mobile_services_mail($service_email_address, $file_path);
             }
@@ -125,7 +125,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
       }
     }
 
-    if ($frequency_date_arr[0] == $today_date) {
+    if ($frequency_date_arr[0] <= $today_date) {
       itg_mobile_cron_after_feed_generate($node, $client_array, $content_count, $file_path, 1);
     }
     else {
@@ -204,33 +204,33 @@ function get_content_sharing_mode($entity_id) {
  * @param array $file
  */
 function itg_mobile_services_ftp_feeds($data, $file) {
-  try {
-    $file_array = explode('/', $file);
-    $last = count($file_array) - 1;
-    $remote_file = $file_array[$last]; // 'readmefeeds.txt';
+  $file_array = explode('/', $file);
+  $last = count($file_array) - 1;
+  $remote_file = $file_array[$last]; // 'readmefeeds.txt';
 
-    $ftp_server = $data['ftp_ip_address'];
-    $ftp_user_name = $data['ftp_username'];
-    $ftp_user_pass = $data['ftp_password'];
+  $ftp_server = $data['ftp_ip_address'];
+  $ftp_user_name = $data['ftp_username'];
+  $ftp_user_pass = $data['ftp_password'];
 
-    // set up basic connection
-    $conn_id = ftp_connect($ftp_server);
-    // login with username and password
-    $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
-    // upload a file
-    if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
-      echo "successfully uploaded $file\n";
-    }
-    else {
-      echo "There was a problem while uploading $file\n";
-    }
-    // close the connection
-    ftp_close($conn_id);
+  // set up basic connection
+  $conn_id = ftp_connect($ftp_server) or die("Couldn't connect to $ftp_server");
+  // login with username and password
+  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass) or die("You do not have access to this ftp server!");
+  if ((!$conn_id) || (!$login_result)) {
+    echo "FTP connection has failed";
+    exit;
   }
-  catch (Exception $ex) {
-    watchdog('mobile_services', 'Message: !message', array('!message' => $e->getMessage()), WATCHDOG_ERROR);
-    drupal_set_message(t("Sorry, that didn't work. The name must be unique."), 'error');
+  //turn passive mode on
+  ftp_pasv($conn_id, true);
+  $upload = ftp_put($conn_id, $remote_file, $file, FTP_BINARY);
+  if (!$upload) {
+    echo "There was a problem while uploading $file\n";
   }
+  else {
+    echo "successfully uploaded $file\n";
+  }
+  // close the connection
+  ftp_close($conn_id);
 }
 
 /**

@@ -76,6 +76,7 @@ function itg_tv_schedule_search_form($form, &$form_state) {
     $form['title'] = array(
       '#type' => 'textfield',
       '#size' => 60,
+      '#attributes' =>array('placeholder' => t('Search')),
       '#maxlength' => 128,
     );
 
@@ -83,6 +84,24 @@ function itg_tv_schedule_search_form($form, &$form_state) {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Submit'),
+    );
+
+    return $form;
+}
+
+/**
+ * Implementation of hook_form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_tv_schedule_date_form($form, &$form_state) {
+
+    $form['date'] = array(
+      '#type' => 'textfield',
+      '#size' => 60,
+      '#default_value' => t('June 30, 2016 (IST)'),
+      '#maxlength' => 128,
+      '#attributes' => array('readonly' => 'readonly'),
     );
 
     return $form;
@@ -263,6 +282,8 @@ function itg_tv_schedule_theme() {
         'variables' => array('search' => NULL),
         'variables' => array('total' => NULL),
         'variables' => array('noresult' => NULL),
+        'variables' => array('search_count' => NULL),
+        'variables' => array('title' => NULL),
         'path' => drupal_get_path('module', 'itg_tv_schedule') . '/templates',
         'template' => 'itg-tv-schedule',
       ),);

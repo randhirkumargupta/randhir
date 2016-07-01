@@ -10,9 +10,11 @@ global $user, $base_url;
 ?>
 
 <div class="rel-link">
-    
-    <a class="colorbox-load" href="<?php print $base_url.'/related-content?width=900&height=700&iframe=true&type='.$type; ?>">Add Related content</a>
-    <?php
-    itg_related_save_search();
-    ?>
+    <span class="add-more saved-search-link">Saved Search</span> 
+    <a class="colorbox-load add-more add-related-content-link" href="<?php print $base_url.'/related-content?width=900&height=700&iframe=true&type='.$type; ?>">+</a>
+</div>
+<div class="my-saved-search">
+<?php
+itg_related_save_search();
+?>
 </div>
