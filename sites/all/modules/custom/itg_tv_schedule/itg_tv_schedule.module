@@ -48,6 +48,7 @@ function itg_tv_schedule_form($form, &$form_state) {
 
   $form['file'] = array(
     '#type' => 'managed_file',
+    '#required' => TRUE,
     '#title' => t('Tv Schedule Upload'),
     '#description' => t('Allowed extensions: csv'),
     '#upload_location' => 'public://tv_schedule',
