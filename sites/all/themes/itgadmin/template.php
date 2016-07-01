@@ -365,4 +365,13 @@ function itgadmin_preprocess_field(&$vars) {
         $vars['element'][0]['#file']->video_id = $video_id;
       }
   }
+  
+  // For Audio field
+   if($vars['element']['#field_name'] == 'field_podcast_upload_audio_file') {
+      $file_id = $vars['element']['#items'][0]['fid'];
+      if(module_exists('itg_podcast')){
+        $audio_id = itg_videogallery_get_video($file_id);
+        $vars['element'][0]['#file']->audio_id = $audio_id;
+      }
+  }
 }
