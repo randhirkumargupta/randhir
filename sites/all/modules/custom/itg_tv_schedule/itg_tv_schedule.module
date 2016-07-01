@@ -128,7 +128,7 @@ function itg_tv_schedule_time_form($form, &$form_state) {
                  {
                      jQuery("#itg-tv-schedule-time-form").submit();
                  });', array('type' => 'inline', 'scope' => 'footer'));
-  
+
   return $form;
 }
 
@@ -149,10 +149,7 @@ function itg_tv_schedule_uploadmongo($file_id) {
   $db = mongodb();
   if ($db) {
     $people = $db->tv_schedule;
-    if (check_collection()) {
-      $people->drop();
-    }
-
+    $people->drop();
     // create collection
     $db->createCollection("tv_schedule");
     // Select Collection
@@ -345,20 +342,4 @@ function format_GMT_offset($offset) {
   $hours = intval($offset / 3600);
   $minutes = abs(intval($offset % 3600 / 60));
   return 'GMT' . ($offset ? sprintf('%+03d:%02d', $hours, $minutes) : '');
-}
-
-/**
- * Custom method to check collection is empty or not
- */
-function check_collection() {
-  $db = mongodb();
-  $schedule = $db->tv_schedules;
-
-  // iterate cursor to get value of documents
-  foreach ($schedule->find() as $document) {
-    $output[]['time'] = $document["time"];
-    $output[]['day'] = $document["day"];
-    $output[]['program'] = $document["program"];
-  }
-  return $output;
 }
