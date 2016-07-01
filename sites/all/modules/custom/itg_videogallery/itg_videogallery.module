@@ -123,23 +123,28 @@ function itg_video_check_exist_file($filename) {
   $query->orderBy('fm.fid', 'DESC');
   $query->range(0, 1);
   $results = $query->execute()->fetchAll();
-  if (!isset($results) && empty($results[0])) {
-    $value = '';
+ 
+  if (!isset($results[0])) {
+    $res = 'public://dailymotion_video_dir/'.$filename;
+    return $res;
   }
   else {
-    //public://dailymotion_video_dir/filename_165.mp4
     $result = explode('public://dailymotion_video_dir/', $results[0]->uri);
-    //$results[0]->filename = filename_165.mp4
-    $file_name = explode('.', $results[0]->filename);
-    $result_num = explode($file_name[0] . '_', $result[1]);
-    //$result_num = [1] => 165.mp4
-    $num_file_id = explode('.', $result_num[1]);
-    $value = $num_file_id[0] + 1;
-    $value = '_' . $value;
+    $path_info = pathinfo($results[0]->filename);
+    $extension = $path_info['extension'];
+    $file_name = $path_info['filename'];
+    $result_num = explode($file_name. '_', $result[1]); 
+    $num_file_id = explode('.'.$extension, $result_num[1]);
+    if(is_numeric($num_file_id[0]) && isset($num_file_id[0])){
+      $value = $num_file_id[0] + 1;
+      $value = '_' . $value;
+    }else{
+      $value = '_0';
+    }
+    $file_info = pathinfo($filename);
+    $res = 'public://dailymotion_video_dir/' . $file_info['filename'] . $value . '.' . $extension;
+    return $res;
   }
-  $file_name = explode('.', $filename);
-  $res = 'public://dailymotion_video_dir/' . $file_name[0] . $value . '.' . $file_name[1];
-  return $res;
 }
 
 /**
