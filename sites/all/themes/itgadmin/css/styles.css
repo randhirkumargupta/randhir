@@ -4190,7 +4190,7 @@ div.node #comments h2 {
 }
 
 .block-itg-related .rel-link {
-  padding: 20px;
+  padding: 10px;
   text-align: right;
 }
 .block-itg-related ul li {
@@ -4206,7 +4206,7 @@ div.node #comments h2 {
   padding: 0 5px;
 }
 .block-itg-related .my-saved-search {
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 .view-manage-users .confirmation .item-list ul {
@@ -4473,4 +4473,8 @@ div.node #comments h2 {
 }
 .action-with-title .block-itg-story-list {
   margin: 10px 0 0;
+}
+
+.checked-list {
+  padding: 0 20px;
 }

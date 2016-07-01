@@ -4130,7 +4130,7 @@ div.node{
 }
 .block-itg-related{
     .rel-link{
-        padding: 20px;
+        padding: 10px;
         text-align: right;
     }
     .rel-hed{
@@ -4153,7 +4153,7 @@ div.node{
    }
    .my-saved-search{
        @extend .hide;
-       padding: 0 20px;
+       padding: 0 10px;
    }
 }
 .view-manage-users{
@@ -4414,4 +4414,7 @@ div.node{
     .block-itg-story-list{
         margin: 10px 0 0;
     }
+}
+.checked-list {
+    padding: 0 20px;
 }
