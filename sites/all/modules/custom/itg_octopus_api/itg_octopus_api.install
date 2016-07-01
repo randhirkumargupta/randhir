@@ -1,0 +1,267 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Octopus Api module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * @access public
+ * @return array
+ */
+
+/**
+ * Implements hook_schema()
+ * @return array
+ */
+function itg_octopus_api_schema() {
+  $schema['itg_octopus_slug'] = array(
+    'description' => 'TODO: please describe this table!',
+    'fields' => array(
+      'id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'storyid' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'slug_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'story_title' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_status' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'story_duration' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_created' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_created_by' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'story_modified' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'story_modified_by' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'location' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'category' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'archive' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'test' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'type' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'ingest' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'source' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'input' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'tour' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'ingest' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'prio' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'ts_off' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'usage' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+  
+  //schema for itg_syndication_feed_url
+  
+  $schema['itg_element_clip'] = array(
+    'description' => 'TODO: please describe this table!',
+    'fields' => array(
+      'id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'element_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'element_type' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'element_dur' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  
+  //schema for itg_syndication_manual_feed_details
+  
+  $schema['itg_syndication_manual_feed_details'] = array(
+    'description' => 'The base table for syndication.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a node.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'web_property' => array(
+        'description' => 'The node type for syndication.',
+        'type' => 'varchar',
+        'length' => '128',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'client_title' => array(
+        'description' => 'Client title.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'delivery_mode' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'feed_type' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'feed_file_path' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'syndication' => array(
+        'description' => 'A blob field that contains list of node which are ready to syndicate with client.',
+        'type' => 'blob',
+        'not null' => FALSE,
+      ),
+      'status' => array(
+        'description' => 'File status: 0 means file not been created and 1 for file successful created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The created date for the single record',
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+       ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'node_created' => array('created'),
+      'web_property' => array('web_property'),
+    ),
+  );
+  
+  return $schema;
+}
