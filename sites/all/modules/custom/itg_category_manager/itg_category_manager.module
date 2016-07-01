@@ -945,7 +945,7 @@ function itg_category_manager_views_data() {
  * @param array $form_state array contains submitted form values
  * @param string $form_id name of the form id
  */
-function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
+function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {  
   if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
     drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js', 'file');
     $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';

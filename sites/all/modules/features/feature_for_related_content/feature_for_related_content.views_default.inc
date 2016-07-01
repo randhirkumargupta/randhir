@@ -140,16 +140,11 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="insert" value="Insert" /> &nbsp; <input type="text" name="insvalue" id="insvalue" class="form-text valid">
-<!--<input class="rset-form add-more form-submit" type="button" name="reset" value="reset filter" />--></div>';
+</div>
+<div id="clickme">save search</div>
+<div class="search-criteria" style="display:none"><input class="form-text valid" type="text" name="search-title" id="search-title"><input class="insert-save add-more form-submit" id="filter-save" type="button" name="save" value="save" /></div><div class="success" style="display:none">search saved successfully</div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Footer: Global: Text area */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '<div id="clickme">save search</div>
-<div class="search-criteria" style="display:none"><input class="form-text valid" type="text" name="search-title" id="search-title"><input class="insert-save add-more form-submit" id="filter-save" type="button" name="save" value="save" /></div><div class="success" style="display:none">search saved successfully</div>';
-  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -249,86 +244,17 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Apache Solr: label */
-  $handler->display->display_options['filters']['label']['id'] = 'label';
-  $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['label']['field'] = 'label';
-  $handler->display->display_options['filters']['label']['operator'] = 'word';
-  $handler->display->display_options['filters']['label']['group'] = 1;
-  $handler->display->display_options['filters']['label']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['label']['expose']['operator_id'] = 'label_op';
-  $handler->display->display_options['filters']['label']['expose']['label'] = 'Title';
-  $handler->display->display_options['filters']['label']['expose']['operator'] = 'label_op';
-  $handler->display->display_options['filters']['label']['expose']['identifier'] = 'label';
-  $handler->display->display_options['filters']['label']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    19 => 0,
-    15 => 0,
-    18 => 0,
-    23 => 0,
-  );
-  /* Filter criterion: Apache Solr: sm_field_story_kicker_text */
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['id'] = 'sm_field_story_kicker_text';
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['field'] = 'sm_field_story_kicker_text';
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['operator'] = 'word';
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['group'] = 1;
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['expose']['operator_id'] = 'sm_field_story_kicker_text_op';
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['expose']['label'] = 'Kicker ';
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['expose']['operator'] = 'sm_field_story_kicker_text_op';
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['expose']['identifier'] = 'sm_field_story_kicker_text';
-  $handler->display->display_options['filters']['sm_field_story_kicker_text']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    19 => 0,
-    15 => 0,
-    18 => 0,
-    23 => 0,
-  );
-  /* Filter criterion: Apache Solr: sm_vid_Tags */
-  $handler->display->display_options['filters']['sm_vid_Tags']['id'] = 'sm_vid_Tags';
-  $handler->display->display_options['filters']['sm_vid_Tags']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['sm_vid_Tags']['field'] = 'sm_vid_Tags';
-  $handler->display->display_options['filters']['sm_vid_Tags']['operator'] = 'word';
-  $handler->display->display_options['filters']['sm_vid_Tags']['group'] = 1;
-  $handler->display->display_options['filters']['sm_vid_Tags']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['sm_vid_Tags']['expose']['operator_id'] = 'sm_vid_Tags_op';
-  $handler->display->display_options['filters']['sm_vid_Tags']['expose']['label'] = 'Tags';
-  $handler->display->display_options['filters']['sm_vid_Tags']['expose']['operator'] = 'sm_vid_Tags_op';
-  $handler->display->display_options['filters']['sm_vid_Tags']['expose']['identifier'] = 'sm_vid_Tags';
-  $handler->display->display_options['filters']['sm_vid_Tags']['expose']['remember_roles'] = array(
+  /* Filter criterion: Apache Solr: Search */
+  $handler->display->display_options['filters']['keyword']['id'] = 'keyword';
+  $handler->display->display_options['filters']['keyword']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['keyword']['field'] = 'keyword';
+  $handler->display->display_options['filters']['keyword']['group'] = 1;
+  $handler->display->display_options['filters']['keyword']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['keyword']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['keyword']['expose']['label'] = 'Search by keywords';
+  $handler->display->display_options['filters']['keyword']['expose']['operator'] = 'keyword_op';
+  $handler->display->display_options['filters']['keyword']['expose']['identifier'] = 'keyword';
+  $handler->display->display_options['filters']['keyword']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
