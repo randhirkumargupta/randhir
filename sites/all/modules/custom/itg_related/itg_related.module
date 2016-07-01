@@ -64,7 +64,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
 //    $form['tm_vid_4_names']['#options'] = $op;
 //    $form['tm_vid_4_names']['#size'] = 5;
 //    $form['tm_vid_4_names']['#multiple'] = TRUE;
-
+    $form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title / Kicker / Tag name')));
 
     // $bundle_name = array("All" => "Select type", 'Story' => 'Story', 'Blog' => 'Blog');
     $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'photogallery', 'Videogallery' => 'videogallery');
@@ -86,6 +86,16 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
     $form['bs_status']['#options'] = $related_status;
     $form['bs_status']['#size'] = 5;
     $form['bs_status']['#multiple'] = TRUE;
+    
+//    $form['select-value'] = array(
+//    '#type' => 'textfield', //you can find a list of available types in the form api
+//    '#title' => t(''),
+//    '#size' => 20,
+//    '#id'   => 'select-value',
+//    '#prefix' => '<div id="selval">',
+//    '#suffix' => '</div>',
+//    );
+  
   }
 }
 
@@ -154,8 +164,11 @@ function itg_related_views_pre_render(&$view) {
       //dpm($related_result->bs_status);
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
-        // dpm($related_result->bs_status);
-      }
+        
+        }
+        
+      $splittedsite=explode("/",$related_result->site);
+      $related_result->site = strtoupper($splittedsite[3]);
     }
   }
 }
@@ -166,7 +179,7 @@ function itg_related_views_pre_render(&$view) {
  * @param Array $form_state
  */
 function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
+//p($form);
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-related-content-new-page') {
 
@@ -219,7 +232,9 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if ($i > 1) {
       $and = ' AND ';
     }
-    if (!empty($val) && $val != 'related-content' && $key != 'page' && $key != 'width' && $key != 'height' && $key != 'iframe' && $key != 'type') {
+    $remove_key = array('related-content','page','width', 'height', 'iframe', 'type', 'items_per_page', 'keyword');
+    //if (!empty($val) && $val != 'related-content' && $key != 'page' && $key != 'width' && $key != 'height' && $key != 'iframe' && $key != 'type' && $key != 'items_per_page') {
+    if (!empty($val) &&  $val != 'related-content' && !in_array($key, $remove_key)) {
       //print $val;
       if (is_array($val)) {
         $val_str = implode(' OR ', $val);
@@ -334,6 +349,12 @@ function itg_related_block_info() {
     'info' => t('Related Form Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+//  
+//  
+//  $blocks['related_form_reorder_block'] = array(
+//    'info' => t('Related Form Reorder Block'),
+//    'cache' => DRUPAL_CACHE_GLOBAL,
+//  );
 
   return $blocks;
 }
@@ -350,6 +371,9 @@ function itg_related_block_view($delta = '') {
     case 'related_form_block':
       $block['content'] = theme('related_form_display_block', array('data' => $data));
       break;
+//    case 'related_form_reorder_block':
+//      $block['content'] = theme('related_form_reorder_block', array('data' => $data));
+//      break;
   }
 
   return $block;
@@ -369,6 +393,12 @@ function itg_related_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_related') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    
+//    'related_form_reorder_block' => array(
+//      'template' => 'related-formreorder',
+//      'path' => drupal_get_path('module', 'itg_related') . '/templates',
+//      'variables' => array('data' => NULL),
+//    ),
   );
 
   return $themes;

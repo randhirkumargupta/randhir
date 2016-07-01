@@ -243,9 +243,16 @@ function itgadmin_breadcrumb($vars) {
       else {
         $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $title : decode_entities(check_plain($title));
         $node = node_load(arg(1));
+        
+        //Set issue view page breadcrumb
         if($node->type == 'issue'){
           $title_arr = explode('00:', $node->title);
           $vars['breadcrumb'][1] = date('d/m/Y', strtotime($title_arr[0]));
+        }
+        
+        //Set UGC view page breadcrumb
+        if ($node->type == 'ugc') {
+          $vars['breadcrumb'][1] = $node->title;
         }
         
       }
@@ -271,21 +278,21 @@ function itgadmin_breadcrumb($vars) {
      
      //story tab breadcrumb
      if (in_array($content_url, $story_tab)) {
-      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
-      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
     }
     
     //Photogallery tab breadcrumb
      if (in_array($content_url, $photogallery_tab)) {
-      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
-      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
     }
 
     
     //Blog tab breadcrumb
      if (in_array($content_url, $bolg_tab)) {
-      $breadcrumb[] = l('Home', 'cms-user-dashboard') . l('Content Management ', $content_url) . l($content_title, $content_url);
-      return '<div class="breadcrumb-link">' . implode('  ', $breadcrumb) . '</div>';
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
     }
 
 

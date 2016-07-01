@@ -3,7 +3,7 @@
  */
 
 /*
- * @file itg_story.js
+ * @file itg_breaking_news.js
  * Contains all functionality related to story
  */
 
@@ -28,6 +28,7 @@
         if (this.value == 'Live Blog') {
 
           $(".field-name-field-mark-as-breaking-band").hide();
+          $(".field-name-field-breaking-publish-time").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
 
 
@@ -37,6 +38,7 @@
         {
 
           $(".field-name-field-mark-as-breaking-band").show();
+          $(".field-name-field-breaking-publish-time").show();
 
         }
       });
@@ -44,9 +46,16 @@
       // type check for edit form
       if (type == 'Live Blog') {
         $(".field-name-field-mark-as-breaking-band").hide();
+        $(".field-name-field-breaking-publish-time").hide();
       }
 
+      $('#edit-field-type-und').change(function() {
+                var typevalue = $('#edit-field-type-und').val();
+                if (typevalue == 'Breaking News') {
+                    $('#edit-field-story-expires-und-yes').attr('checked', false);
 
+                }
+            }); 
 
       $('body').on('change', '.field-name-field-mobile-subscribers .form-checkbox', function () {
         var el_value = $(this).attr('value');
