@@ -66,7 +66,7 @@ img {
   padding-right: 30px;
 }
 
-.pdtb-10, .block-itg-related .rel-hed {
+.pdtb-10 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -125,7 +125,7 @@ img {
 [id*="field-syndication-ftp-details-values"] tbody,
 [id*="field-email-address-values"] tbody,
 [id*="field-mega-review-review-values"] tbody, [id*="field-videogallery-video-upload-values"] tbody, span.error, .dashboard-tab li a span, .node-category-form fieldset#edit-relations legend, [id*="itg-survey-survey-form"] .question-container#question-container-0, [id*="itg-quiz-quiz-form"] .question-container#question-container-0, [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item, [id*="itg-survey-survey-form"] .answer-container div.rating, [id*="itg-quiz-quiz-form"] .answer-container div.rating, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-img-upload .file, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-img-upload .file, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-img-upload .file, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-img-upload .file, .photogallery-list.flexslider .flex-nav-prev a, .photogallery-list.flexslider .flex-nav-next a, [id*="field-story-template-buzz-values"] tbody tr, [id*="field-story-template-buzz-values"] tbody tr td, [id*="field-astro-zodiac-values"] > tbody > tr,
-[id*="field-astro-numerology-values-values"] > tbody > tr, [id*="field-service-content-values"] tbody tr, .view-view-moderation-history .views-row .field-content, [id*="field-videogallery-video-upload-values"] tbody tr {
+[id*="field-astro-numerology-values-values"] > tbody > tr, [id*="field-service-content-values"] tbody tr, .view-view-moderation-history .views-row .field-content, .block-itg-related .my-saved-search ul li a, [id*="field-videogallery-video-upload-values"] tbody tr {
   display: block;
 }
 
@@ -375,7 +375,7 @@ img {
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, .photogallery-list.flexslider, .photogallery-list.flexslider .slides li, #comments .comment, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2, [id*="field-survey-add-questions-values"] > tbody > tr > td, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, .edit-link,
 .view-link,
 .delete-link,
-.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .main-cont {
+.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .block-itg-related .rel-link, .main-cont {
   position: relative;
 }
 
@@ -4194,11 +4194,8 @@ div.node #comments h2 {
   padding: 10px;
   text-align: right;
 }
-.block-itg-related ul li {
-  padding: 3px 0;
-}
-.block-itg-related ul li a {
-  color: #1fb5ad;
+.block-itg-related .rel-hed {
+  display: none;
 }
 .block-itg-related .add-related-content-link {
   font-size: 34px;
@@ -4207,7 +4204,39 @@ div.node #comments h2 {
   padding: 0 5px;
 }
 .block-itg-related .my-saved-search {
-  padding: 0 10px;
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #595959;
+  position: absolute;
+  right: 50px;
+  top: 55px;
+  width: 150px;
+}
+.block-itg-related .my-saved-search ul li {
+  text-align: left;
+}
+.block-itg-related .my-saved-search ul li a {
+  color: #2f2f2f;
+  padding: 5px 10px;
+  font-size: 13px;
+}
+.block-itg-related .my-saved-search ul li a:hover {
+  background-color: #f0f0f0;
+}
+.block-itg-related .my-saved-search ul li + li {
+  border-top: 1px solid #d9d9d9;
+}
+.block-itg-related .my-saved-search:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-width: 12px 8px;
+  border-style: solid;
+  border-color: transparent transparent #fff;
+  position: absolute;
+  right: 10px;
+  top: -24px;
 }
 .block-itg-related .checked-list {
   padding: 5px 10px;

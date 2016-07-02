@@ -697,8 +697,12 @@ jQuery(document).ready(function(){
     jQuery('.sidebar-trigger').click(function () {
       jQuery(this).parent().toggleClass('active');
     });
-    jQuery('.saved-search-link').click(function () {
-      jQuery(this).parent().parent().find('.my-saved-search').slideToggle();
+    jQuery('.saved-search-link').click(function (e) {
+        e.stopPropagation();
+        jQuery(this).parent().parent().find('.my-saved-search').slideToggle();
+    });
+    jQuery('body').click(function () {
+        jQuery(this).find('.my-saved-search').slideUp();
     });
         
     jQuery( ".checked-list" ).sortable();
