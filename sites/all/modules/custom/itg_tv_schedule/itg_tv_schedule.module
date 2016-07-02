@@ -57,10 +57,12 @@ function itg_tv_schedule_form($form, &$form_state) {
     ),
   );
 
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit'),
-  );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#prefix' => '<div class="form-actions">',
+      '#suffix' => '</div>',
+      '#value' => t('Submit'),
+    );
 
   return $form;
 }
