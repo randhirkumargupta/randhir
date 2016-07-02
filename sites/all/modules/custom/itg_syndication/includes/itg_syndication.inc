@@ -161,7 +161,7 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   }
   // close the connection
   ftp_close($conn_id);
-  
+  exit;
   
   
 }
