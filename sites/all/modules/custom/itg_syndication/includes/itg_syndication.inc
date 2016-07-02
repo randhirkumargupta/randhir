@@ -120,7 +120,8 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   $ftp_server = $ftp_details[0]->field_syndication_ftp_url_value;
   $ftp_user_name = $ftp_details[0]->field_syndication_ftp_username_value;
   $ftp_user_pass = $ftp_details[0]->field_syndication_ftp_password_value;
-  
+  echo $remote_file;
+  p($ftp_details);
   // set up basic connection
   $conn_id = ftp_connect($ftp_server);
 
