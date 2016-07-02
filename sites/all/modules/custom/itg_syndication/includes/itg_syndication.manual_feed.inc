@@ -70,7 +70,11 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     
     $form['type']['#weight'] = 2;
     $form['submit']['#weight'] = 4;
+   
     
+    views_syndication_insert_field($form, 'client_title', 0);
+    views_syndication_insert_field($form, 'filter-type', 3);
+      
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-issue-date-value-wrapper").hide();
               jQuery("#edit-issue").change(function() {                
@@ -324,4 +328,27 @@ function itg_syndication_views_pre_render(&$view) {
     $header_content .= l(t('Create Syndication Pattern'), 'node/add/syndication-feed-from-pattern', array('query' => array('destination' => 'syndication-feed-pattern-listing')));
     $view->attachment_before = $header_content;
   }   
+}
+
+/**
+ * Insert the given field into a particular position in the form.
+ * 
+ * @param $form
+ *   The form which is going to have the field inserted. Passed by reference.
+ * @param string $file_key
+ *   The key in the form where the field is to be found. e.g. if $form['foo']
+ *   contains the field, then use 'foo' as this parameter.
+ * @param int $insert_index
+ *   Index of where in the form the field should be placed.
+ */
+function views_syndication_insert_field(&$form, $field_key, $insert_index) {
+	// this value determines the position of the new element.
+  $element_to_insert = array();
+  $element_to_insert[$field_key] = array(
+      'value' => $field_key,
+  );
+  $form_info_top = array_slice($form['#info'], 0, $insert_index);
+  $form_info_bottom = array_slice($form['#info'], $insert_index);
+  $new_form_info = $form_info_top + $element_to_insert + $form_info_bottom;
+  $form['#info'] = $new_form_info;
 }
