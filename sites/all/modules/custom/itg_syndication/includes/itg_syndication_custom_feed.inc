@@ -33,6 +33,7 @@ function generate_custom_pattern_feed($data) {
         $pattern = get_client_feed_pattern($client, $content_type, $feed_type);
         /* Create Directory if does not exists */
         $feed_dir = "public://$feed_type/$client/$content_type";
+        $feed_dir = str_replace(" ","-",$feed_dir);// code by shravan
         file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
         $today = date('Y-M-d-h-m-s');
         /* Iterate for nodes */
