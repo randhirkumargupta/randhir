@@ -3462,6 +3462,7 @@ div.node{
 .region-sidebar-second{
   background-color: #2f2f2f;
   color: #fff;
+  min-height: 400px;
   padding: 0 0 10px;
   .block{
     .block-title{
@@ -4130,7 +4131,7 @@ div.node{
 }
 .block-itg-related{
     .rel-link{
-        padding: 20px;
+        padding: 10px;
         text-align: right;
     }
     .rel-hed{
@@ -4153,8 +4154,21 @@ div.node{
    }
    .my-saved-search{
        @extend .hide;
-       padding: 0 20px;
+       padding: 0 10px;
    }
+   .checked-list {
+    padding: 5px 10px;
+        li {
+            background-color: #f0f0f0;
+            color: #2f2f2f;
+            padding: 5px;
+            .ui-icon{
+                @extend .dib;
+                @extend .vtop;
+                margin: 0 5px;
+            }
+        }
+    }
 }
 .view-manage-users{
     .confirmation{
@@ -4414,4 +4428,23 @@ div.node{
     .block-itg-story-list{
         margin: 10px 0 0;
     }
+}
+
+#itg-tv-schedule-form{
+    @extend .node-form;
+    @extend .Browse-upload;
+    @extend .choose-audio-video-file;
+    .form-managed-file{
+        position: relative;
+        #edit-file-upload-button{
+            @extend .add-more-wbg;
+        }
+    }
+    .form-actions{
+        .form-submit{
+            @extend .btn;
+            @extend .btn-save;
+        }
+    }
+    
 }
