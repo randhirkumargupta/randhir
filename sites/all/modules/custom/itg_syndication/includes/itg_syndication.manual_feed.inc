@@ -25,6 +25,15 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {    
+   // p($form);
+    $form['client_title'] = array(
+      '#type' => 'select',
+      '#title' => t('Select Client'),
+      '#options' => itg_syndication_get_client('yes'),
+      '#default_value' => '_none',
+      '#validated' => true,
+      '#weight' => 10,             
+    );
     
     $form['changed']['min'] = array(
       '#type' => 'date_popup',
@@ -44,16 +53,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
       '#attributes' => array(
         'readonly' => 'readonly'
       ),
-    );
-    
-    $form['client_title'] = array(
-      '#type' => 'select',
-      '#title' => t('Select Client'),
-      '#options' => itg_syndication_get_client('yes'),
-      '#default_value' => '_none',
-      '#validated' => true,
-      '#weight' => 1,             
-    );
+    );    
        
     $form['issue'] = array(
       '#type' => 'select',
@@ -198,7 +198,10 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'syndication' => serialize($syndication_node),    
   );
   
-  $file_path = feed_generator_of_contents($data); 
+  $file_path = feed_generator_of_contents($data);
+  $realpath = $file_path['file_path'];
+  //$file_name = 'shsh.xml';
+  //$realpath = 'http://localhost/itgcms/sites/default/files/Idea-JNP.xml';
   
   // insert records into database table itg_syndication_manual_feed_details.
   
@@ -208,18 +211,30 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'delivery_mode' => $delivery_mode,
     'feed_type' => $feed_type,
     'syndication' => serialize($syndication_node),
-    'feed_file_path' => $file_path,
+    'feed_file_path' => $realpath,
     'created' => format_date(time(), 'custom', 'Y-m-d'),
   );
   
-  if (isset($file_path)) {
+  if (isset($realpath)) {
     $query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
   }
   
   // for feed download
   if($form_state['values']['feed_download_value'] == 'yes') {        
-    $link_val = 'Click to Download. <a href="'.$realpath.'" download>Import Feed</a>';
-    drupal_set_message($link_val, 'status');    
+    // $link_val = 'Click to Download. <a href="'.$realpath.'" download>Import Feed</a>';
+    // drupal_set_message($link_val, 'status');
+   
+    // send file to browser as a download dialog
+    // no content can be output prior to these header() calls
+    header('Content-type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="'.$file_name.'"');
+    header('Content-Length: ' . filesize($realpath));
+    header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+    //header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+    echo file_get_contents($file);
+    exit; // terminate script
+    
   } else {
       drupal_set_message('Successfully feed Generated  and Sent to client.', 'status');
   }
