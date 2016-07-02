@@ -58,6 +58,7 @@ function generate_custom_pattern_feed($data) {
                 $xml .= get_custom_feeds_files($nid, $default_pattern);
                 //Client Name_Date/Day_Time
                 $filename = "$client-$today.xml";
+                $filename = str_replace(" ","-",$filename);// code by shravan
                 watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
             }
             $xml .= "</root>";
