@@ -112,15 +112,14 @@ function itg_syndication_mail($key, &$message, $params) {
  */
 function itg_syndication_ftp_syndication($data, $file_path, $file_name, $delivery_mode) {  
   $ftp_details = get_ftp_details_by_client($data['client_title'], $delivery_mode);
-  
   $file = $file_path;
-  
-  $remote_file = 'xml/'.$file_name;
-  
+ 
+  $remote_file = $file_name;
   $ftp_server = $ftp_details[0]->field_syndication_ftp_url_value;
   $ftp_user_name = $ftp_details[0]->field_syndication_ftp_username_value;
   $ftp_user_pass = $ftp_details[0]->field_syndication_ftp_password_value;
-  
+  //echo $remote_file;
+  //p($ftp_details);
   // set up basic connection
   $conn_id = ftp_connect($ftp_server);
 

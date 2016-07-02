@@ -700,4 +700,8 @@ jQuery(document).ready(function(){
     jQuery('.saved-search-link').click(function () {
       jQuery(this).parent().next('.my-saved-search').slideToggle();
     });
+        
+    jQuery( ".checked-list" ).sortable();
+    jQuery( ".checked-list" ).disableSelection();
+    
 });
