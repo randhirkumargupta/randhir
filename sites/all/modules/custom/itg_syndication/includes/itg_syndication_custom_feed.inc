@@ -36,29 +36,35 @@ function generate_custom_pattern_feed($data) {
         file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
         $today = date('Y-M-d-h-m-s');
         /* Iterate for nodes */
-        if (!empty($pattern['body_value'])) {
+        if (!empty($pattern['field_syndication_xml_formate_xml'])) {
             foreach ($nids as $nid) {
-                $xml .= get_custom_feeds_files($nid, $pattern['body_value']);
-                $filename = uniqid() . "-$content_type-date-$today.xml";
+                $xml .= get_custom_feeds_files($nid, $pattern['field_syndication_xml_formate_xml']);
+                $filename = "$client-$today.xml";
                 watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
-            $file_path['file_path'] = $feed_dir . '/' . $filename;
+            //$uri = 'public://';
+            $path = file_create_url($feed_dir);
+            $file_path['file_path'] = $path . '/' . $filename;
             $file_path['file_name'] = $filename;
             return $file_path;
         }
         else {
-            $default_pattern    = get_default_feed_pattern($feed_type, $content_type);
+            $default_pattern = get_default_feed_pattern($feed_type, $content_type);
             foreach ($nids as $nid) {
                 $xml .= get_custom_feeds_files($nid, $default_pattern);
-                $filename = uniqid() . "-$content_type-date-$today.xml";
+                //Client Name_Date/Day_Time
+                $filename = "$client-$today.xml";
                 watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
-            $file_path['file_path'] = $feed_dir . '/' . $filename;
+            $path = file_create_url($feed_dir);
+            $file_path['file_path'] = $path . '/' . $filename;
             $file_path['file_name'] = $filename;
+            
+            //$file_path['file_directory'] = $path;
             return $file_path;
         }
     }
@@ -75,11 +81,11 @@ function get_client_feed_pattern($client, $content_type, $feed_type) {
     $pattern = "";
     if (isset($client) && isset($content_type) && isset($feed_type)) {
         $query = db_select('node', 'n');
-        $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id=n.nid');
+        $query->leftJoin('field_data_field_syndication_xml_formate', 'fdb', 'fdb.entity_id=n.nid');
         $query->leftJoin('field_data_field_syndication_feed_content', 'sfc', 'sfc.entity_id=n.nid');
         $query->leftJoin('field_data_field_syndication_feed_clients', 'fsfc', 'fsfc.entity_id=n.nid');
         $query->leftJoin('field_data_field_syndication_feed_type', 'fsft', 'fsft.entity_id=n.nid');
-        $query->fields('fdb', array('body_value'));
+        $query->fields('fdb', array('field_syndication_xml_formate_xml'));
         $query->condition('fsfc.field_syndication_feed_clients_value', $client);
         $query->condition('sfc.field_syndication_feed_content_value', $content_type);
         $query->condition('fsft.field_syndication_feed_type_value', $feed_type);
@@ -127,15 +133,15 @@ function get_custom_feeds_files($nid = NULL, $text = NULL) {
                     }
                 }
                 return $new_text;
-            }
+            } 
             else {
                 drupal_set_message(t("not a valid field"));
             }
-        }
+        } 
         else {
             drupal_set_message(t("Not a valid formet"));
         }
-    }
+    } 
     else {
         drupal_set_message(t("Either node ids not found or pattrens not found"));
     }
@@ -226,12 +232,12 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
                     break;
                 case 'value':
                     /* Its very importent to convert text into xml standard so using htmlspecialchars with ENT_XML1 */
-                    if ($field_name=='field_gallery_image') {
-                        foreach ( $entity->field_gallery_image['und'] as $key=>$fid ) {
-                            /*Loop Only once*/
-                            if ($key!=0)  
-                            break;
-                            $value = $entity->field_gallery_image['und'][$key]['value'] ;
+                    if ($field_name == 'field_gallery_image') {
+                        foreach ($entity->field_gallery_image['und'] as $key => $fid) {
+                            /* Loop Only once */
+                            if ($key != 0)
+                                break;
+                            $value = $entity->field_gallery_image['und'][$key]['value'];
                             $field_collection_item = entity_load('field_collection_item', array($value));
                             $field_collection_item_uri = $field_collection_item[$value]->field_images[LANGUAGE_NONE][0]['uri'];
                             $required_value[] = file_create_url($field_collection_item_uri);
@@ -255,6 +261,10 @@ function itg_syndication_theme() {
     return array(
         'syndication_feed_variables' => array(
             'template' => '/templates/sydication_feed_variables',
+        ),
+        'syndication_feed_from_pattern_node_form' => array(
+            'render element' => 'form',
+            'template' => 'templates/syndication_feed_from_pattern_node_form',
         ),
     );
 }
@@ -333,7 +343,7 @@ function get_lebel_of_field($entity_type = 'node', $bundle_name, $field_name) {
         $info = field_info_instance($entity_type, $field_name, $bundle_name);
         $label = $info['label'];
         return $label;
-    }
+    } 
     else {
         return;
     }
@@ -347,6 +357,7 @@ function get_lebel_of_field($entity_type = 'node', $bundle_name, $field_name) {
  */
 function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$form, &$form_state, $form_id) {
     $data = array();
+    $predefine_variables_markup = '';
     drupal_add_js('jQuery(document).ready(function(){
         jQuery("select#edit-field-syndication-feed-content-und").on(\'change\',function(){
            var selected =   jQuery(this).val();
@@ -358,22 +369,30 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
     });', 'inline');
 
     drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', 'file');
-    /*JS library  added to beutify xml pattern*/
+    /* JS library  added to beutify xml pattern */
     drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', 'file');
-    /*check for default value*/
-    $client =   $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#entity']->field_syndication_feed_clients[LANGUAGE_NONE][0]['value'];
+    /* check for default value */
+    $client = $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#entity']->field_syndication_feed_clients[LANGUAGE_NONE][0]['value'];
     if (isset($client)) {
-         $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#default_value'] = $client; 
+        $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#default_value'] = $client;
     }
     /* Client list */
     $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#options'] = itg_syndication_get_client();
     $form['field_syndication_feed_clients']['#validated'] = TRUE;
+
+    /* Check if nid exists then set predefine variables */
+    if (isset($form_state['build_info']['args'][0]->nid)) {
+        $content_type = $form_state['build_info']['args'][0]->field_syndication_feed_content['und'][0]['value'];
+        $predefine_variables_markup = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
+    }
+
     $form['pre_define_vars'] = array(
         '#type' => 'markup',
         '#prefix' => '<div id="pre_define_vars_replace_wrapper">',
         '#suffix' => '</div>',
-        '#markup' => '',
+        '#markup' => $predefine_variables_markup,
     );
+
 
     $form['actions']['cancle'] = array(
         '#markup' => l(t('Cancel'), $_GET['destination'], array(
@@ -396,7 +415,56 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
         'effect' => 'fade',
         'event' => 'change', // On change of the selection this action would take place
     );
+    // Add a new submit function for redirecting after submit
+    $form['actions']['submit']['#submit'][] = 'node_save_redirect_submit';
+    // Add extra validation
+    $form['#validate'][] = 'itg_syndication_form_syndication_feed_from_pattern_node_form_validate';
     unset($form['actions']['preview']);
+}
+
+/**
+ * This function checkes weather the same pattern exist or not
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_syndication_form_syndication_feed_from_pattern_node_form_validate($form, &$form_state) {
+    $arg = arg();
+    /* Check only if new node is bening craeted */
+    if (isset($arg[0]) && isset($arg[1]) && $arg[0] == 'node' && $arg[1] == 'add') {
+        drupal_add_js('jQuery(document).ready(function(){
+            jQuery(".vertical-tabs").css("display","none");
+        });', 'inline');
+        $node = (object) $form_state['values'];
+        $content_type = $node->field_syndication_feed_content['und'][0]['value'];
+        $feed_type = $node->field_syndication_feed_type['und'][0]['value'];
+        $client_title = $node->field_syndication_feed_clients['und'][0]['value'];
+
+        $query = db_select('field_data_field_syndication_feed_clients', 'client');
+        $query->leftJoin('field_data_field_syndication_feed_content', 'content_type', 'content_type.entity_id=client.entity_id');
+        $query->leftJoin('field_data_field_syndication_feed_type', 'feed_type', 'feed_type.entity_id=client.entity_id');
+        $query->condition('client.field_syndication_feed_clients_value', $client_title);
+        $query->condition('content_type.field_syndication_feed_content_value', $content_type);
+        $query->condition('feed_type.field_syndication_feed_type_value', $feed_type);
+        $query->fields('client', array('entity_id'));
+        $result = $query->execute()->fetchAll();
+
+        if (count($result) >= 1) {
+            form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Pattern already exists for this client");
+        }
+        watchdog('debug', "Total " . count($result) . " results founds for combination");
+    }
+}
+    
+/**
+ * Function to used redirect the form after node save
+ * @param array $form
+ * @param array $form_state
+ */
+function node_save_redirect_submit($form, &$form_state) {
+    $arg = arg();
+    if (!isset($_GET['destination'])) {
+        drupal_goto("syndication-feed-pattern-listing");
+    }
 }
 
 /**
@@ -406,7 +474,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
  */
 function _pre_define_vars_callback($form, &$form_state) {
     $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
-    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type),"content_type"=>$content_type));
+    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
     return array(
         '#type' => 'ajax',
         '#commands' => array(
@@ -428,7 +496,7 @@ function get_default_feed_pattern_callback($form, &$form_state) {
         $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Pleaes Select Content Type</span>');
         drupal_get_messages();
         return array('#type' => 'ajax', '#commands' => $commands);
-    }
+    } 
     else {
         $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
         $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
