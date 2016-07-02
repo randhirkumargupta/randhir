@@ -97,43 +97,50 @@ function itg_breaking_news_form_node_delete_confirm_alter(&$form, &$form_state, 
  * @param Array $form_state
  * @param string $form_id
  */
-function itg_breaking_news_form_alter(&$form, &$form_state, $form_id)
-{
-    global $user;
+function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
 
-    if ($form_id == 'breaking_news_node_form') {
-        //code to hide source field
-        if ($user->uid != '1') {
-            $form['field_source']['#access'] = FALSE;
-        }
-
-        if (isset($form['#node']->nid)) {
-            $form['field_type']['#disabled'] = TRUE;
-        }
-        // code to add taxonomy parent terms with no child
-        //$vid = taxonomy_vocabulary_machine_name_load('category_management')->vid;
-        $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-
-        foreach ($tax as $key => $val) {
-            $op[$val->tid] = $val->name;
-        }
-        // assign array value to taxonomy field
-        $form['field_section']['und']['#options'] = $op;
-
-        //Add destination and cancel button in add Breaking News form page
-
-        $form['field_publish_time'][LANGUAGE_NONE][0]['value']['date']['#disabled'] = TRUE;
-        $destination = 'breaking-news';
-        $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-            '#weight' => 21,
-            '#value' => t('Cancel'),
-        );
-
-
-        $form['#after_build'][] = 'itg_breaking_news_after_build';
-        $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
+  if ($form_id == 'breaking_news_node_form') {
+    //code to hide source field
+    if ($user->uid != '1') {
+      $form['field_source']['#access'] = FALSE;
     }
+
+    if (isset($form['#node']->nid)) {
+      $form['field_type']['#disabled'] = TRUE;
+    }
+    
+    // Hide/show Live TV field
+  $form['field_story_expires']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
+    )
+  );
+    // code to add taxonomy parent terms with no child
+    //$vid = taxonomy_vocabulary_machine_name_load('category_management')->vid;
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+    //$op = array("_none" => "Select Category");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+    // assign array value to taxonomy field
+    //$form['field_section']['#title'] = array('All' => '- Any -');
+    $form['field_section']['und']['#options'] = $op;
+
+    //Add destination and cancel button in add Breaking News form page
+
+    $form['field_publish_time'][LANGUAGE_NONE][0]['value']['date']['#disabled'] = TRUE;
+    $destination = 'breaking-news';
+    $form['actions']['cancel'] = array(
+      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+      '#weight' => 21,
+      '#value' => t('Cancel'),
+    );
+
+
+    $form['#after_build'][] = 'itg_breaking_news_after_build';
+    $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
+  }
 }
 
 /**

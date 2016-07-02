@@ -380,14 +380,10 @@ var maxLen = 0;
                 var string = id.split("-");
                 var tlength = jQuery(this).val().length;
                 console.log(maxLen);
-                console.log(tlength);
                 jQuery(this).val(jQuery(this).val().substring(0, maxLen));
                 remain = maxLen - parseInt(tlength);
-                jQuery('#custom_service_content_' + string[5]).text(remain + ' characters remaining from ' + maxLen);
+                jQuery('#custom_service_content_' + string[5]).text(remain + ' characters remaining out of ' + maxLen);
             });
-
-
-
         }
     }
 })(jQuery);

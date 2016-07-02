@@ -8,6 +8,16 @@
         <div class="content-details">
           <?php print render($content['field_type']); ?>
           <?php print render($content['field_content_type']); ?>
+          <?php
+          if($node->field_story_expires[LANGUAGE_NONE][0]['value'] == 'Yes') {
+          ?>
+            <div class="field">
+            <div class="field-label"><?php print t('Live TV:'); ?></div>
+            <div class="field-items"><?php print 'Yes'; ?></div>
+          </div>
+          <?php  
+          }
+          ?>
           <div class="field">
             <div class="field-label"><?php print t('Breaking Text:'); ?></div>
             <div class="field-items"><h1><?php print $title; ?></h1></div>
@@ -37,14 +47,14 @@
             endif;
             ?>
             <?php
-            $keywords = render($content['field_story_itg_tags']);
+            //$keywords = render($content['field_story_itg_tags']);
 
-            if (!empty($keywords)):
+            //if (!empty($keywords)):
               ?>
-              <div class="display content-box">
+              <!--<div class="display content-box">
               <?php print render($content['field_story_itg_tags']); ?>
-              </div>
-    <?php endif; ?>
+              </div>-->
+    <?php //endif; ?>
           </div>
         </div>
       </div>
@@ -84,9 +94,52 @@
     <?php endif; ?>
 
       <div class="content-node-view">
-        <h2><?php print t('Content Details'); ?></h2>
+       
         <div class="content-details">
-    <?php print render($content['field_breaking_content_details']); ?>
+    <?php  //print render($content['field_breaking_content_details']); 
+    
+    $num = 0;
+        foreach ($node->field_breaking_content_details[LANGUAGE_NONE] as $news_arr) {
+          $sn = $num + 1;
+          echo '<h2>Content ' . $sn . ' Details:</h2>';
+          //p($news_arr);
+          ?>
+          <div class="field">
+            <div class="field-label">Title:</div>
+            <div class="field-items"><?php echo $news_arr['field_breaking_tile'][LANGUAGE_NONE][0]['value']; ?></div>
+            <?php if($node->field_type[LANGUAGE_NONE][0]['value'] == 'Breaking News') { ?>
+            <?php if(!empty($news_arr['field_mark_as_breaking_band'][LANGUAGE_NONE][0]['value'])) { ?>
+            <div class ="field-label">Mark as Breaking band : </div>
+            <div class="field-items"><?php echo 'Yes'; ?></div>
+            <?php } ?>
+            <?php } ?>
+            <?php if(!empty($news_arr['field_notification_'][LANGUAGE_NONE][0]['value'])) { ?>
+            <div class ="field-label">Notification : </div>
+            <div class="field-items"><?php echo 'Yes'; ?></div>
+            <?php } ?>
+            <?php if(!empty($news_arr['field_mobile_subscribers'][LANGUAGE_NONE][0]['value'])) { ?>
+            <div class ="field-label">Mobile subscribers : </div>
+            <div class="field-items"><?php
+                      foreach ($news_arr['field_mobile_subscribers'][LANGUAGE_NONE] as $subs) {
+                        print $subs['value'].'<br/>';
+            } 
+                      ?></div>
+            <?php } ?>
+            <?php if($node->field_type[LANGUAGE_NONE][0]['value'] == 'Breaking News') { ?>
+            <div class ="field-label">Publish Time : </div>
+            <div class="field-items"><?php echo $news_arr['field_breaking_publish_time'][LANGUAGE_NONE][0]['value']; ?></div>
+            <?php } ?>
+            <?php if($news_arr['field_breaking_redirection_url'][LANGUAGE_NONE][0]['value'] != '') { ?>
+            <div class ="field-label">Redirection url : </div>
+            <div class="field-items"><?php echo $news_arr['field_breaking_redirection_url'][LANGUAGE_NONE][0]['value']; ?></div>
+          <?php } ?>  
+          </div>
+            
+    <?php
+    $num++;
+        }
+    ?>
+            
         </div>
       </div>
 
