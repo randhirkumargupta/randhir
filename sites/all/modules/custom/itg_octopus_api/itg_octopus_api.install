@@ -15,6 +15,8 @@
  * @return array
  */
 function itg_octopus_api_schema() {
+  $schema = array();
+  // Schema for rundown xml slug
   $schema['itg_octopus_slug'] = array(
     'description' => 'TODO: please describe this table!',
     'fields' => array(
@@ -24,6 +26,11 @@ function itg_octopus_api_schema() {
         'not null' => TRUE,
       ),
       'storyid' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'rundown_id' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'int',
         'not null' => TRUE,
@@ -60,19 +67,19 @@ function itg_octopus_api_schema() {
         'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
         'length' => '250',
-        'not null' => FALSE,
+        'not null' => TRUE,
       ),
       'story_modified' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
         'length' => '250',
-        'not null' => FALSE,
+        'not null' => TRUE,
       ),
       'story_modified_by' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
         'length' => '250',
-        'not null' => FALSE,
+        'not null' => TRUE,
       ),
       'location' => array(
         'description' => 'TODO: please describe this field!',
@@ -159,7 +166,7 @@ function itg_octopus_api_schema() {
     ),
   );
   
-  //schema for itg_syndication_feed_url
+  //schema for rundown xml clip
   
   $schema['itg_element_clip'] = array(
     'description' => 'TODO: please describe this table!',
@@ -174,30 +181,76 @@ function itg_octopus_api_schema() {
         'type' => 'int',
         'not null' => TRUE,
       ),
+      'slug_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'story_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
       'element_type' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => TRUE,
       ),
       'element_dur' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
         'length' => '250',
-        'not null' => TRUE,
       ),
-      'status' => array(
+      'clipname' => array(
         'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipmosid' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipobj_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipjobid' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipfilepath' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipin' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipout' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'text' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'text',
+        'size' => 'big',
       ),
     ),
     'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
   );
   
-  //schema for itg_syndication_manual_feed_details
+  //schema for rundown xml rundown
   
-  $schema['itg_syndication_manual_feed_details'] = array(
+  $schema['itg_rundown'] = array(
     'description' => 'The base table for syndication.',
     'fields' => array(
       'id' => array(
@@ -206,60 +259,39 @@ function itg_octopus_api_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'web_property' => array(
-        'description' => 'The node type for syndication.',
+      'exported' => array(
+        'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
         'length' => '128',
         'not null' => TRUE,
-        'default' => '',
       ),
-      'client_title' => array(
-        'description' => 'Client title.',
+      'exported_by' => array(
+        'description' => 'Octopus xml exporter',
         'type' => 'varchar',
         'length' => '255',
         'not null' => TRUE,
-        'default' => '',
       ),
-      'delivery_mode' => array(
+      'rundown_id' => array(
         'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-      'feed_type' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-      'feed_file_path' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-      'syndication' => array(
-        'description' => 'A blob field that contains list of node which are ready to syndicate with client.',
-        'type' => 'blob',
-        'not null' => FALSE,
-      ),
-      'status' => array(
-        'description' => 'File status: 0 means file not been created and 1 for file successful created.',
         'type' => 'int',
         'not null' => TRUE,
-        'default' => 0,
       ),
-      'created' => array(
-        'description' => 'The created date for the single record',
+      'rundown_title' => array(
+        'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
-        'mysql_type' => 'datetime',
-        'not null' => FALSE,
-       ),
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'rundown_start' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
     ),
     'primary key' => array('id'),
     'indexes' => array(
-      'node_created' => array('created'),
-      'web_property' => array('web_property'),
+      'id' => array('id'),
     ),
   );
   

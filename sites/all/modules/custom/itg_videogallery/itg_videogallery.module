@@ -294,9 +294,13 @@ function itg_videogallery_dailymotion($real_path, $key, $uri, $fid) {
       drupal_set_message('Secret Key is wrong.', 'error');
       drupal_goto('dailymotion/config');
     }
+    elseif ($e->getCode() == 6) {
+         drupal_set_message('There is some issue with internet connection.', 'error');
+         drupal_goto();
+    }
     else {
       drupal_set_message($e->getMessage(), 'error');
-    }
+      }
   }
   return $result;
 }
@@ -580,7 +584,6 @@ function itg_videogallery_configuration_form($form) {
  * Implements hook_menu().
  * {@inheritdoc}
  */
-
 function itg_videogallery_menu(){
    $items['dailymotion/config'] = array(
     'title' => 'Dailymotion Configuration',
