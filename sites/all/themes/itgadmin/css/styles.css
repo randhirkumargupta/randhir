@@ -4490,3 +4490,7 @@ div.node #comments h2 {
 #itg-tv-schedule-form .form-managed-file {
   position: relative;
 }
+
+.save-checklist-ordre {
+  text-align: right;
+}
