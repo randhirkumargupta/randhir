@@ -158,6 +158,7 @@ jQuery(document).ready(function(){
                 checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + item[i] + '</li>';
             }
             parent.jQuery('.checked-list').html(checkedlist);
+            parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
             parent.jQuery.colorbox.close();
             item.length = 0;
         });

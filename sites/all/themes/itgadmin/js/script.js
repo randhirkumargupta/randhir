@@ -698,7 +698,7 @@ jQuery(document).ready(function(){
       jQuery(this).parent().toggleClass('active');
     });
     jQuery('.saved-search-link').click(function () {
-      jQuery(this).parent().next('.my-saved-search').slideToggle();
+      jQuery(this).parent().parent().find('.my-saved-search').slideToggle();
     });
         
     jQuery( ".checked-list" ).sortable();
