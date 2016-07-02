@@ -155,7 +155,7 @@ jQuery(document).ready(function(){
             parent.jQuery('#edit-field-s-related-content-und-0-value').val(item);
             var checkedlist = '';
             for ( var i = 0, l = item.length; i < l; i++ ) {
-                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + item[i] + '</li>';
+                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span></li>';
             }
             parent.jQuery('.checked-list').html(checkedlist);
             parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');

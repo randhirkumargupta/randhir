@@ -4337,6 +4337,12 @@ div.node{
         width: 300px;
         margin-right: 10px;
     }
+    + .success{
+        @extend .dib;
+        @extend .full;
+        margin: 20px 0 0;
+        @extend .success-message;
+    }
 }
 .operation-form{
     @extend .node-form;
@@ -4464,9 +4470,21 @@ div.node{
     @extend .choose-audio-video-file;
     .form-managed-file{
         position: relative;
-        #edit-file-upload-button{
+        .form-submit[value="Upload"]{
             @extend .add-more-wbg;
+            position: absolute;
+            top: 0;
+            left: 475px;
         }
+        #edit-file-remove-button{
+            left: 475px !important;
+        }
+        .ajax-progress-throbber{
+            @extend .hide;
+        }
+    }
+    .form-type-managed-file > label{
+        padding-top: 0;
     }
     .form-actions{
         .form-submit{
@@ -4478,4 +4496,26 @@ div.node{
 .save-checklist-ordre{
     text-align: right;
     padding: 0 10px;
+}
+.variables-and-field-container{
+    .variables{
+        padding: 0 30px;
+        strong{font-weight: normal;}
+        table{
+            @extend .views-table;
+            th, td{
+                max-width: 180px;
+            }
+        }
+        
+    }
+    .form-type-xml-codemirror{
+        margin-top: 30px;
+        > label{
+            padding: 0 30px;
+        }
+    }
+    .form-type-textarea{
+        margin-top: 0;
+    }
 }

@@ -704,8 +704,18 @@ jQuery(document).ready(function(){
     jQuery('body').click(function () {
         jQuery(this).find('.my-saved-search').slideUp();
     });
+    jQuery('body').click(function () {
+        jQuery(this).find('.my-saved-search').slideUp();
+    });
         
     jQuery( ".checked-list" ).sortable();
     jQuery( ".checked-list" ).disableSelection();
-    
+    jQuery('body').on('click', '.save-checklist', function () {
+        var item = [];
+        jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i){
+            item.push(jQuery(this).find('.item-value').text());
+        });
+        var itemvalue = item.join(",");
+        console.log(itemvalue);
+    });
 });
