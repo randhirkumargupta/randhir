@@ -146,17 +146,26 @@ if($clicked_day == "")
     #itg-tv-schedule-time-form .form-type-select{float: left;padding: 20px 0;}
     #itg-tv-schedule-time-form .form-submit{display: none;}
     #itg-tv-schedule-time-form .form-select{width: 200px;background-color: #252a32; border: 1px solid #252a32; color: #fff; border-radius: 5px;}
-    #itg-tv-schedule-search-form > div{text-align: right;}
-    #itg-tv-schedule-search-form .form-submit{display: none;}
+    #itg-tv-schedule-search-form > div{text-align: right; position: relative;}
+    #itg-tv-schedule-search-form .form-submit{
+        background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/search.png') center center no-repeat #252a32; 
+        border: medium none;
+        border-radius: 0 5px 5px 0;
+        box-shadow: 0 0 3px #000 inset;
+        height: 32px;
+        position: absolute;
+        right: 0;
+        text-indent: -9999px;
+        top: 0;
+        width: 40px;
+        cursor: pointer;
+    }
     #itg-tv-schedule-search-form .form-text{max-width: 332px; background-color: #252a32; border: 1px solid #252a32; color: #fff; border-radius: 5px;}
     .tv-schedule-time .slick-slide{position: relative; height: 34px;}
     .tv-schedule-time .slick-slide:after{content: ''; background-color: rgba(37,42,50,.5); width: 1px; height: 100%; left: 100%; top: 0; bottom: 0; margin: auto; position: absolute;}
     .tv_schedule {
     max-width: 1000px;
     margin: 0 auto 10px;
-    }
-    #edit-title{
-        background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/search.png') center right no-repeat #252a32;
     }
     .itg-popup{
         display: none;
@@ -278,13 +287,21 @@ if($clicked_day == "")
             padding-left: 42px;
             background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/date-icon.png') left 10px top 2px / 24px auto no-repeat;
     }
+    .messages--error{
+        background: #fefafb none repeat scroll 0 0;
+        border: 1px solid red;
+        padding: 10px 30px;
+        margin: 20px auto;
+        max-width: 1000px;
+    }
+    .messages__list{padding-left: 13px;}
 </style>
 <script type="text/javascript">
     var current_time_slot = <?php print $total; ?>;
     jQuery(document).on('ready', function() {
         jQuery(".tv-schedule").slick({
             dots: false,
-            infinite: true,
+            infinite: false,
             slidesToShow: 7,
             slidesToScroll: 1,
             initialSlide: current_time_slot,
