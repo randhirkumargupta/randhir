@@ -40,6 +40,7 @@ function generate_custom_pattern_feed($data) {
             foreach ($nids as $nid) {
                 $xml .= get_custom_feeds_files($nid, $pattern['field_syndication_xml_formate_xml']);
                 $filename = "$client-$today.xml";
+                $filename = str_replace(" ","-",$filename);// code by shravan
                 watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
             }
             $xml .= "</root>";
