@@ -319,4 +319,9 @@ function itg_syndication_views_pre_render(&$view) {
     $header_content = '<span class="count">Count ('.$view->total_rows.') </span>';    
     $view->attachment_before = $header_content;
   }   
+  else if ($view->name == "syndication_feed_pattern_listing") {
+    $header_content = '<span class="count">Count ('.$view->total_rows.') </span>';    
+    $header_content .= l(t('Create Syndication Pattern'), 'node/add/syndication-feed-from-pattern', array('query' => array('destination' => 'syndication-feed-pattern-listing')));
+    $view->attachment_before = $header_content;
+  }   
 }

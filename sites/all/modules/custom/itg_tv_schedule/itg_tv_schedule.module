@@ -48,6 +48,7 @@ function itg_tv_schedule_form($form, &$form_state) {
 
   $form['file'] = array(
     '#type' => 'managed_file',
+    '#required' => TRUE,
     '#title' => t('Tv Schedule Upload'),
     '#description' => t('Allowed extensions: csv'),
     '#upload_location' => 'public://tv_schedule',
@@ -56,10 +57,12 @@ function itg_tv_schedule_form($form, &$form_state) {
     ),
   );
 
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit'),
-  );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#prefix' => '<div class="form-actions">',
+      '#suffix' => '</div>',
+      '#value' => t('Submit'),
+    );
 
   return $form;
 }
@@ -128,7 +131,7 @@ function itg_tv_schedule_time_form($form, &$form_state) {
                  {
                      jQuery("#itg-tv-schedule-time-form").submit();
                  });', array('type' => 'inline', 'scope' => 'footer'));
-  
+
   return $form;
 }
 
@@ -140,26 +143,23 @@ function itg_tv_schedule_time_form($form, &$form_state) {
  */
 function itg_tv_schedule_uploadmongo($file_id) {
 
-  if (!is_int($file_id)) {
+  if (!isset($file_id)) {
     // TODO: check on this later for exception handling.
-    return false;
+    return FALSE;
   }
 
   // connection with database
   $db = mongodb();
   if ($db) {
     $people = $db->tv_schedule;
-    if (check_collection()) {
-      $people->drop();
-    }
-
+    $people->drop();
     // create collection
     $db->createCollection("tv_schedule");
     // Select Collection
     $people = $db->tv_schedule;
   }
   else {
-    return false;
+    return FALSE;
   }
 
   $i = 1;
@@ -279,7 +279,8 @@ function itg_tv_schedule_theme() {
       'variables' => array('title' => NULL),
       'path' => drupal_get_path('module', 'itg_tv_schedule') . '/templates',
       'template' => 'itg-tv-schedule',
-    ),);
+    ),
+  );
 }
 
 /**
@@ -300,7 +301,7 @@ function time_zone_conversion($date, $time_zone) {
     if ($time_zone == 'GMT') {
       $time->setTimezone(new DateTimeZone($timezone['GMT']));
     }
-    else if ($time_zone == 'PST') {
+    elseif ($time_zone == 'PST') {
       $time->setTimezone(new DateTimeZone($timezone['GMT-07:00']));
     }
     else {
@@ -317,9 +318,9 @@ function time_zone_conversion($date, $time_zone) {
  * @return string
  */
 function timezone_list() {
-  static $timezones = null;
+  static $timezones = NULL;
 
-  if ($timezones === null) {
+  if ($timezones === NULL) {
     $timezones = [];
     $offsets = [];
     $now = new DateTime();
@@ -327,7 +328,7 @@ function timezone_list() {
     foreach (DateTimeZone::listIdentifiers() as $timezone) {
       $now->setTimezone(new DateTimeZone($timezone));
       $offsets[] = $offset = $now->getOffset();
-      $timezones[format_GMT_offset($offset)] = $timezone;
+      $timezones[format_gmt_offset($offset)] = $timezone;
     }
 
     array_multisort($offsets, $timezones);
@@ -341,24 +342,8 @@ function timezone_list() {
  * @param integer $offset
  * @return string
  */
-function format_GMT_offset($offset) {
+function format_gmt_offset($offset) {
   $hours = intval($offset / 3600);
   $minutes = abs(intval($offset % 3600 / 60));
   return 'GMT' . ($offset ? sprintf('%+03d:%02d', $hours, $minutes) : '');
-}
-
-/**
- * Custom method to check collection is empty or not
- */
-function check_collection() {
-  $db = mongodb();
-  $schedule = $db->tv_schedules;
-
-  // iterate cursor to get value of documents
-  foreach ($schedule->find() as $document) {
-    $output[]['time'] = $document["time"];
-    $output[]['day'] = $document["day"];
-    $output[]['program'] = $document["program"];
-  }
-  return $output;
 }
