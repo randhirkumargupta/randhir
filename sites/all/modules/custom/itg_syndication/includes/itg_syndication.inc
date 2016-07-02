@@ -112,10 +112,10 @@ function itg_syndication_mail($key, &$message, $params) {
  */
 function itg_syndication_ftp_syndication($data, $file_path, $file_name, $delivery_mode) {  
   $ftp_details = get_ftp_details_by_client($data['client_title'], $delivery_mode);
-  echo $file = $file_path;
+  $file = $file_path;
  
   //$remote_file = str_replace(" ","-",$file_name);
-  echo $remote_file = $file_name;
+  $remote_file = $file_name;
   $ftp_server = $ftp_details[0]->field_syndication_ftp_url_value;
   $ftp_user_name = $ftp_details[0]->field_syndication_ftp_username_value;
   $ftp_user_pass = $ftp_details[0]->field_syndication_ftp_password_value;
@@ -140,7 +140,7 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   else {
     echo "successfully uploaded $file\n";
   }
-  p($ftp_details);
+  //p($ftp_details);
   // close the connection
   ftp_close($conn_id);
   
