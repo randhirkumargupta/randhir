@@ -262,6 +262,10 @@ function itg_syndication_theme() {
         'syndication_feed_variables' => array(
             'template' => '/templates/sydication_feed_variables',
         ),
+        'syndication_feed_from_pattern_node_form' => array(
+            'render element' => 'form',
+            'template' => 'templates/syndication_feed_from_pattern_node_form',
+        ),
     );
 }
 
