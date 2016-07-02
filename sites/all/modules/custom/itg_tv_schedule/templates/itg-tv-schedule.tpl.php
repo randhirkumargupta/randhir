@@ -94,6 +94,11 @@ if($clicked_day == "")
             </div>
             <div class="popup-body">
                 <table class="views-table">
+                     <tr>
+                         <td><b><?php print 'Schedule Time'; ?></b></td>
+                         <td><b><?php print 'Days'; ?></b></td>
+                         <td><b><?php print 'Program Name'; ?></b></td>
+                       </tr>
                     <tbody>
                         <?php foreach ($search as $val1): ?>  
 
