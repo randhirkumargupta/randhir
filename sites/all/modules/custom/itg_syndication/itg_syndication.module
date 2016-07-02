@@ -890,6 +890,34 @@ function get_client_expiry_date($client_name) {
   return $expiry_date;
 }
 
+function itg_for_test() {
+  $ftp_server = 'test.kelltontech.net';
+  $ftp_user_name = 'ftptest1';
+  $ftp_user_pass = 'FtpTEst@123';
+  $file = 'http://localhost/itgcms/sites/default/files/Idea-JNP.xml';
+  $remote_file = 'xml/shravan.xml';
+  
+  // set up basic connection
+  $conn_id = ftp_connect($ftp_server);
+
+  // login with username and password
+  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+  
+  //turn passive mode on
+  ftp_pasv($conn_id, true);
+  
+  // upload a file
+  if (ftp_put($conn_id, $remote_file, $file, FTP_BINARY)) {
+   echo "successfully uploaded $file\n";
+  } else {
+   echo "There was a problem while uploading $file\n";
+  }
+
+  // close the connection
+  ftp_close($conn_id);
+}
+
+
 function itg_syndication_rule_after_build_validate($form, &$form_state) {
   //p($form_state['values']);
     $lang = isset($form_state['values']['language'])?$form_state['values']['language']:LANGUAGE_NONE;
@@ -910,5 +938,4 @@ function itg_syndication_rule_after_build_validate($form, &$form_state) {
             }  
             }
        }
-    
-}
+} 

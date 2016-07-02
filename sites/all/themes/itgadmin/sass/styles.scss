@@ -4133,18 +4133,13 @@ div.node{
     .rel-link{
         padding: 10px;
         text-align: right;
+        @extend .pos-rel;
     }
     .rel-hed{
-        @extend .pdtb-10;
+        display: none;
     }
    ul{
        @extend .no-bullet;
-       li{
-           padding: 3px 0;
-           a{
-               color: #1fb5ad;
-           }
-       }
    }
    .add-related-content-link{
        font-size: 34px;
@@ -4153,8 +4148,41 @@ div.node{
        padding: 0 5px;
    }
    .my-saved-search{
-       @extend .hide;
-       padding: 0 10px;
+        @extend .hide;
+        background: #fff none repeat scroll 0 0;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        box-shadow: 0 0 3px #595959;
+        position: absolute;
+        right: 50px;
+        top: 55px;
+        width: 150px;
+        ul li{
+            text-align: left;
+            a{
+                @extend .db;
+                color: #2f2f2f;
+                padding: 5px 10px;
+                font-size: 13px;
+                &:hover{
+                    background-color: #f0f0f0;
+                }
+            }
+            &+li{
+                border-top: 1px solid #d9d9d9;
+            }
+        }
+        &:before{
+            content: '';
+            width: 0;
+            height: 0;
+            border-width: 12px 8px;
+            border-style: solid;
+            border-color: transparent transparent #fff;
+            position: absolute;
+            right: 10px;
+            top: -24px;
+        }
    }
    .checked-list {
     padding: 5px 10px;
@@ -4309,6 +4337,12 @@ div.node{
         width: 300px;
         margin-right: 10px;
     }
+    + .success{
+        @extend .dib;
+        @extend .full;
+        margin: 20px 0 0;
+        @extend .success-message;
+    }
 }
 .operation-form{
     @extend .node-form;
@@ -4436,9 +4470,21 @@ div.node{
     @extend .choose-audio-video-file;
     .form-managed-file{
         position: relative;
-        #edit-file-upload-button{
+        .form-submit[value="Upload"]{
             @extend .add-more-wbg;
+            position: absolute;
+            top: 0;
+            left: 475px;
         }
+        #edit-file-remove-button{
+            left: 475px !important;
+        }
+        .ajax-progress-throbber{
+            @extend .hide;
+        }
+    }
+    .form-type-managed-file > label{
+        padding-top: 0;
     }
     .form-actions{
         .form-submit{
@@ -4446,5 +4492,30 @@ div.node{
             @extend .btn-save;
         }
     }
-    
+}
+.save-checklist-ordre{
+    text-align: right;
+    padding: 0 10px;
+}
+.variables-and-field-container{
+    .variables{
+        padding: 0 30px;
+        strong{font-weight: normal;}
+        table{
+            @extend .views-table;
+            th, td{
+                max-width: 180px;
+            }
+        }
+        
+    }
+    .form-type-xml-codemirror{
+        margin-top: 30px;
+        > label{
+            padding: 0 30px;
+        }
+    }
+    .form-type-textarea{
+        margin-top: 0;
+    }
 }
