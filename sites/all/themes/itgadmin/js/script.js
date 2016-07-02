@@ -697,7 +697,25 @@ jQuery(document).ready(function(){
     jQuery('.sidebar-trigger').click(function () {
       jQuery(this).parent().toggleClass('active');
     });
-    jQuery('.saved-search-link').click(function () {
-      jQuery(this).parent().next('.my-saved-search').slideToggle();
+    jQuery('.saved-search-link').click(function (e) {
+        e.stopPropagation();
+        jQuery(this).parent().parent().find('.my-saved-search').slideToggle();
+    });
+    jQuery('body').click(function () {
+        jQuery(this).find('.my-saved-search').slideUp();
+    });
+    jQuery('body').click(function () {
+        jQuery(this).find('.my-saved-search').slideUp();
+    });
+        
+    jQuery( ".checked-list" ).sortable();
+    jQuery( ".checked-list" ).disableSelection();
+    jQuery('body').on('click', '.save-checklist', function () {
+        var item = [];
+        jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i){
+            item.push(jQuery(this).find('.item-value').text());
+        });
+        var itemvalue = item.join(",");
+        console.log(itemvalue);
     });
 });
