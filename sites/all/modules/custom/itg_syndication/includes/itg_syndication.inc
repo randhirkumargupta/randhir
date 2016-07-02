@@ -118,8 +118,10 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   $ftp_server = $ftp_details[0]->field_syndication_ftp_url_value;
   $ftp_user_name = $ftp_details[0]->field_syndication_ftp_username_value;
   $ftp_user_pass = $ftp_details[0]->field_syndication_ftp_password_value;
-  //echo $remote_file;
-  //p($ftp_details);
+  
+  //$file = 'http://localhost/itgcms/sites/default/files/Idea-JNP.xml';
+  //$remote_file = 'shravan.xml';
+  
   // set up basic connection
   $conn_id = ftp_connect($ftp_server);
 
@@ -130,7 +132,7 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   ftp_pasv($conn_id, true);
   
   // upload a file
-  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+  if (ftp_put($conn_id, $remote_file, $file, FTP_BINARY)) {
    echo "successfully uploaded $file\n";
   } else {
    echo "There was a problem while uploading $file\n";
