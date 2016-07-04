@@ -118,8 +118,12 @@ jQuery(document).ready(function(){
         jQuery("body").on('click', '#clickme', function () {
              jQuery( ".search-criteria" ).slideToggle();
             });
-
+    var itemString = parent.jQuery('#edit-field-story-kicker-text-und-0-value').val();
+    var insvalue = '';
+    jQuery('#insvalue').val(itemString);  
+    var insvalue = jQuery('#insvalue').val();
     var item = [];
+    item = insvalue.split(",");
     jQuery('body').on('change', '.itg-row-selector-select', function () {
         var isCheck = jQuery(this).is(':checked');
         var url = jQuery(this).parent().parent().parent().find('.views-field-entity-id span').html();
@@ -152,15 +156,15 @@ jQuery(document).ready(function(){
     
      jQuery('body').on('click', '.insert-url', function(){
          // parent.jQuery('#edit-field-s-related-content-und-0-value').val(item); edit-title
-            parent.jQuery('#edit-field-common-related-content-und-0-value').val(item);
+            parent.jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
             var checkedlist = '';
             for ( var i = 0, l = item.length; i < l; i++ ) {
-                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span></li>';
+                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><i class="fa fa-times fright" aria-hidden="true"></i></li>';
             }
             parent.jQuery('.checked-list').html(checkedlist);
             parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
             parent.jQuery.colorbox.close();
-            item.length = 0;
+//            item.length = 0;
         });
         
 //        jQuery("body").on('click', '.rset-form', function () {

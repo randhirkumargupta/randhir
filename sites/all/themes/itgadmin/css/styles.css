@@ -4249,6 +4249,10 @@ div.node #comments h2 {
 .block-itg-related .checked-list li .ui-icon {
   margin: 0 5px;
 }
+.block-itg-related .checked-list li .fa-times {
+  cursor: pointer;
+  color: red;
+}
 
 .view-manage-users .confirmation .item-list ul {
   padding: 10px 10px 10px 25px;
@@ -4538,7 +4542,7 @@ div.node #comments h2 {
 
 .save-checklist-ordre {
   text-align: right;
-  padding: 0 10px;
+  padding: 0 10px 15px;
 }
 
 .variables-and-field-container .variables {

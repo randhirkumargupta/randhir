@@ -4195,6 +4195,7 @@ div.node{
                 @extend .vtop;
                 margin: 0 5px;
             }
+            .fa-times{cursor: pointer; color: red;}
         }
     }
 }
@@ -4495,7 +4496,7 @@ div.node{
 }
 .save-checklist-ordre{
     text-align: right;
-    padding: 0 10px;
+    padding: 0 10px 15px;
 }
 .variables-and-field-container{
     .variables{
