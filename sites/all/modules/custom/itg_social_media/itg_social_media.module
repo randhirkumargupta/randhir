@@ -300,9 +300,10 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     );
     
     // iNSERT INTO DATABASE
-    $query = db_insert('itg_social_media_logs');
-    $query->fields($pre_save)
-        ->execute();
+    //$query = db_insert('itg_social_media_logs');
+    //$query->fields($pre_save)
+    //    ->execute();
+    drupal_write_record('itg_social_media_logs', $pre_save);
     // Set message
     drupal_set_message(t($type . ' has been posted on social media - Facebook'), 'status');
   }
