@@ -46,10 +46,12 @@ function generate_custom_pattern_feed($data) {
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
+            $file_server_path = getcwd().'/'.str_replace('public:/', variable_get('file_public_path', 'sites/default/files'),$file->uri);
             //$uri = 'public://';
             $path = file_create_url($feed_dir);
             $file_path['file_path'] = $path . '/' . $filename;
             $file_path['file_name'] = $filename;
+            $file_path['real_path'] = $file_server_path;
             return $file_path;
         } else {
             $default_pattern = get_default_feed_pattern($feed_type, $content_type);
@@ -62,9 +64,11 @@ function generate_custom_pattern_feed($data) {
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
+            $file_server_path = getcwd().'/'.str_replace('public:/', variable_get('file_public_path', 'sites/default/files'),$file->uri);
             $path = file_create_url($feed_dir);
             $file_path['file_path'] = $path . '/' . $filename;
             $file_path['file_name'] = $filename;
+            $file_path['real_path'] = $file_server_path;
 
             //$file_path['file_directory'] = $path;
             return $file_path;

@@ -68,24 +68,28 @@ function tv_schedule_listing() {
   $keys = 0;
 
   if ($results > 0) {
-    // iterate cursor to get value of documents
-    foreach ($cursor as $document) {
-      $s_time = time_zone_conversion($document['time'], $_GET['time_zone']);
-      $out[$keys]['time'] = $s_time;
-      //$out[$keys]['time'] = $document["time"];
-      $out[$keys]['day'] = $document["day"];
-      $out[$keys]['program'] = $document["program"];
-      $keys++;
+        // iterate cursor to get value of documents
+        foreach ($cursor as $document) {
+            $s_time = time_zone_conversion($document['time'], $_GET['time_zone']);
+            if ($s_time == $curent_time) {
+                $out[$keys]['time'] = '';
+            }
+            else {
+                $out[$keys]['time'] = $s_time;
+            }
+            //$out[$keys]['time'] = $document["time"];
+            $out[$keys]['day'] = $document["day"];
+            $out[$keys]['program'] = $document["program"];
+            $keys++;
 
-      //counter required for current time slot display.
-      if ($curent_time >= $s_time) {
-        $counter++;
-      }
+            //counter required for current time slot display.
+            if ($curent_time >= $s_time) {
+                $counter++;
+            }
+        }
     }
 
-  }
-
-  if ($counter > 0) {
+    if ($counter > 0) {
     $count = $counter - 1;
   }
  
