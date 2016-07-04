@@ -61,6 +61,7 @@
     <?php print drupal_render($form['field_story_comment_question']); ?>
     <?php print drupal_render($form['field_story_client_title']); ?>
     <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
+    <?php print drupal_render($form['field_common_related_content']); ?>
 
 </div>
 <div id="DateTime">
