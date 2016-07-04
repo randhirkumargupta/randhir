@@ -310,6 +310,7 @@ if($clicked_day == "")
             infinite: false,
             slidesToShow: 7,
             slidesToScroll: 1,
+            draggable: false,
             initialSlide: current_time_slot,
             asNavFor: '.tv-schedule'
         });
