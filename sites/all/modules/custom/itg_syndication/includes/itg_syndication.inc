@@ -34,7 +34,7 @@ function itg_syndication_generate_xml($data) {
   } else if ($delivery_mode_array[0] == 'Weburl') {
       $delivery_mode_type = 'web_url';
   } 
-  
+  watchdog("Syndication", "delivery_mode_type : $delivery_mode_type");
   // Decide sharing mode
   switch ($delivery_mode_type) {
     // 1. Fetch web URL (our server)
@@ -124,12 +124,16 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   //$remote_file = 'shravan.xml';
   
   // set up basic connection
-  $conn_id = ftp_connect($ftp_server) or die("Couldn't connect to $ftp_server");
+  //$conn_id = ftp_connect($ftp_server) or die("Couldn't connect to $ftp_server");
+  $conn_id = ftp_connect($ftp_server);
+  
   // login with username and password
-  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass) or die("You do not have access to this ftp server!");
+  //$login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass) or die("You do not have access to this ftp server!");
+  
+  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
   if ((!$conn_id) || (!$login_result)) {
-    echo "FTP connection has failed";
-    exit;
+    //echo "FTP connection has failed";
+    watchdog("WATCHDOG_INFO_XML", "FTP connection has failed");
   }
   //turn passive mode on
   ftp_pasv($conn_id, true);
