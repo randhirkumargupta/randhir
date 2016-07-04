@@ -716,7 +716,7 @@ jQuery(document).ready(function(){
     
     // jQuery code for related content on edit page
     var item = [];
-    // var itemString = jQuery('#edit-field-story-kicker-text-und-0-value').val();
+//     var itemString = jQuery('#edit-field-story-kicker-text-und-0-value').val();
     var itemString = jQuery('#edit-field-common-related-content-und-0-value').val();
     if(itemString){
         item = itemString.split(",");
@@ -759,10 +759,13 @@ jQuery(document).ready(function(){
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {
         var item = [];
+        var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
+        if(!listLength){
+            jQuery(this).hide();
+        }
         jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i){
             item.push(jQuery(this).find('.item-value').text());
         });
-        var itemvalue = item.join(",");
        jQuery('#edit-field-common-related-content-und-0-value').val(item);
       // jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
         //console.log(itemvalue);
