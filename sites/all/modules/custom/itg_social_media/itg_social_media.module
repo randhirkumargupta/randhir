@@ -672,3 +672,4 @@ function itg_social_media_publish_on_twitter() {
     }    
   }
 }
+
