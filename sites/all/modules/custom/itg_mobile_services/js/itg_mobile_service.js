@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var session = 1;
 var firstTime = 1;
 var genrateFlag = 1;
 var rowCount = 1;
@@ -20,13 +21,7 @@ var maxLen = 0;
                 }
             }
 
-            jQuery.fn.content_create_custom_js = function () {
-                jQuery('#edit-field-service-frequency-und-1').prop('checked', true);
-                var today_date = custom_today_date();
-                jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
-                $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val(today_date).removeAttr('disabled');
-                $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(today_date).removeAttr('disabled');
-            };
+
 
             jQuery('.form-field-name-field-service-content .cancel').hide();
             jQuery('.form-field-name-field-service-content .form-type-date-popup input').addClass('itg-disabled');
@@ -57,9 +52,39 @@ var maxLen = 0;
             $('#edit-actions').css('display', 'block');
             $('.form-layout-default .column-main .column-wrapper > .form-actions').show();
 
+            // session
+            if (Drupal.settings.itg_mobile_services.settings.session_service_title) {
+                if (session == 1) {
+                    var session_service_title = Drupal.settings.itg_mobile_services.settings.session_service_title;
+                    var session_content_format = Drupal.settings.itg_mobile_services.settings.session_content_format;
+                    var session_client_name = Drupal.settings.itg_mobile_services.settings.session_client_name;
+                    var session_service_frequency_id = Drupal.settings.itg_mobile_services.settings.session_service_frequency_id;
+                    jQuery('#edit-title').val(session_service_title);
+                    jQuery('#content-format-hidden').val(session_content_format);
+                    jQuery('#edit-field-footer-und-0-value').val(session_client_name);
+                    jQuery('#edit-field-service-frequency-und-' + session_service_frequency_id).prop('checked', true);
+                    jQuery('#edit-field-service-frequency').show();
+                    jQuery('#edit-field-service-frequency-date').show();
+                    jQuery('#content-enable-button').show();
+                    session++;
+                } else {
+                    jQuery('#edit-field-service-frequency-date').hide();
+                }
+
+            } else {
+                // hide defaut 
+                jQuery("#edit-field-service-frequency-date-und-0-show-todate").prop('checked', true);
+                jQuery('#edit-field-service-frequency-date').hide();
+            }
+
+            jQuery.fn.content_create_custom_js = function () {
+                jQuery('#edit-field-service-frequency-und-1').prop('checked', true);
+                var today_date = custom_today_date();
+                jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val(today_date).removeAttr('disabled');
+                $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(today_date).removeAttr('disabled');
+            };
             // hide defaut service-frequency-date
-            jQuery('#edit-field-service-frequency-date').hide();
-            jQuery("#edit-field-service-frequency-date-und-0-show-todate").prop('checked', true);
             jQuery('#edit-field-service-frequency-date-und-0-show-todate').hide();
             jQuery('.form-item-field-service-frequency-date-und-0-value2').show();
 
@@ -170,18 +195,23 @@ var maxLen = 0;
                 var length_textarea = jQuery("#field-service-content-values > tbody > tr").length;
 
                 for (var ii = 1; ii <= length_textarea; ) {
-                jQuery('<span id="custom_service_content_' + ii + '"></span>').insertAfter('textarea[name="field_service_content[und][' + ii + '][field_story_expert_description][und][0][value]"]');
-                ii++;
+                    jQuery('<span id="custom_service_content_' + ii + '"></span>').insertAfter('textarea[name="field_service_content[und][' + ii + '][field_story_expert_description][und][0][value]"]');
+                    ii++;
                 }
                 jQuery('#field-service-content-add-more-wrapper').hide();
-                jQuery('#edit-field-service-frequency').hide();
+                if (Drupal.settings.itg_mobile_services.settings.session_service_title == 'undefined' || Drupal.settings.itg_mobile_services.settings.session_service_title == null || Drupal.settings.itg_mobile_services.settings.session_service_title == '') {
+                    jQuery('#edit-field-service-frequency').hide();
+                }
+
                 jQuery('#reset-date-button').hide();
                 if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode == false) {
-                    jQuery('#edit-field-service-frequency-und-1').prop('checked', true);
-                    var today_date = custom_today_date();
-                    jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
-                    $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val(today_date).removeAttr('disabled');
-                    $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(today_date).removeAttr('disabled');
+                    if (Drupal.settings.itg_mobile_services.settings.session_service_title == 'undefined' || Drupal.settings.itg_mobile_services.settings.session_service_title == null || Drupal.settings.itg_mobile_services.settings.session_service_title == '') {
+                        jQuery('#edit-field-service-frequency-und-1').prop('checked', true);
+                        var today_date = custom_today_date();
+                        jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                        $('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val(today_date).removeAttr('disabled');
+                        $('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val(today_date).removeAttr('disabled');
+                    }
                 }
                 firstTime++;
             }
