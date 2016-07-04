@@ -64,7 +64,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
 //    $form['tm_vid_4_names']['#options'] = $op;
 //    $form['tm_vid_4_names']['#size'] = 5;
 //    $form['tm_vid_4_names']['#multiple'] = TRUE;
-
+    $form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title / Kicker / Tag name')));
 
     // $bundle_name = array("All" => "Select type", 'Story' => 'Story', 'Blog' => 'Blog');
     $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'photogallery', 'Videogallery' => 'videogallery');
@@ -232,7 +232,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if ($i > 1) {
       $and = ' AND ';
     }
-    $remove_key = array('related-content','page','width', 'height', 'iframe', 'type', 'items_per_page', 'select-value');
+    $remove_key = array('related-content','page','width', 'height', 'iframe', 'type', 'items_per_page', 'keyword');
     //if (!empty($val) && $val != 'related-content' && $key != 'page' && $key != 'width' && $key != 'height' && $key != 'iframe' && $key != 'type' && $key != 'items_per_page') {
     if (!empty($val) &&  $val != 'related-content' && !in_array($key, $remove_key)) {
       //print $val;
@@ -241,7 +241,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       }
       else {
         if ($key == 'label' || $key == 'sm_field_story_kicker_text') {
-          $val_str = trim(strtolower($val)) . '*';
+          $val_str = trim($val) . '*';
           $val_str = str_replace(" ", "* OR ", $val_str);
         }
         else if ($key == 'sm_vid_Tags') {
