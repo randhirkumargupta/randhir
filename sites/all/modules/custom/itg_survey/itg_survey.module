@@ -615,12 +615,15 @@ function itg_survey_expiry_notification_callback(){
  */
 function itg_survey_send_mail_for_notification($nid) {
   
-  $mail_content = itg_survey_get_mail_content($nid);
+  $node = node_load($nid);
+  $user = user_load($node->uid);
+  
+  $mail_content = itg_survey_get_mail_content($node, $user);
   $params = array(
       'body' => $mail_content,
       'subject' => 'India Today | Survey Expired',
     );
-  $user_email_str = 'haripal.rao@kelltontech.com, haripalrao@gmail.com';
+  $user_email_str = $user->mail;
   drupal_mail('itg_survey_send_notification', 'send_survey_noti', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
 }
 
@@ -653,11 +656,11 @@ function itg_survey_send_notification_mail($key, &$message, $params){
  * @param int $nid
  * @return string
  */
-function itg_survey_get_mail_content($nid){
-  $node = node_load($nid);
+function itg_survey_get_mail_content($node, $user){
+  
   $expiry_date = date('d/m/Y',strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']));
    
-  $content = '<p>Dear ITG Team, </p><p>Survey <strong>'.$node->title.' will be expired soon.</strong></p><p>Expiry Date: '.$expiry_date.'</p>';
+  $content = '<p>Dear '.$user->name.', </p><p>Survey <strong>'.$node->title.'</strong> will be expired soon.</p><p>Expiry Date: '.$expiry_date.'</p>';
   
   $content .='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
     
