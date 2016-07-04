@@ -150,6 +150,45 @@ function itg_survey_schema() {
       ),
       'primary key' => array('id'),
   );
+  
+  $schema['itg_survey_ntf'] = array(
+      'description' => 'Table for survey.',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The primary key.',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'nid' => array(
+              'description' => 'Node id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'survey_expiry' => array(
+              'description' => 'Survey Expiry Date',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'status' => array(
+              'description' => 'Survey Unique key.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
 
   return $schema;
 }

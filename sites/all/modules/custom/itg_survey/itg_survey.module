@@ -44,6 +44,13 @@ function itg_survey_menu() {
       'access arguments' => array('survey admin users'),
       'file' => 'includes/itg_survey_result.inc',
   );
+  
+  $items['survey-test'] = array(
+      'page callback' => 'itg_survey_expiry_notification_callback',
+      'access callback' => TRUE,
+  );
+  
+  
   return $items;
 }
 
@@ -223,10 +230,41 @@ function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 /*******************************Node Related hooks*****************************/
 
 /**
- * 
- * @param Object $node
- * @param Array $form
- * @param Array $form_state
+ * Implement hook_node_insert 
+ * @param object $node
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_survey_node_insert($node) {
+  
+  if($node->type == 'survey'){
+    
+    //Insert in to survey notification table
+    itg_survey_insert_notification_details($node->nid, strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']), 'insert');
+  }
+}
+
+/**
+ * Implement hook_node_update 
+ * @param object $node
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_survey_node_update($node) {
+  
+  if($node->type == 'survey'){
+    
+    //Update date in survey notification table, if updated
+    itg_survey_insert_notification_details($node->nid, strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']), 'update');
+  }
+}
+
+
+/**
+ * Implement hook_node_validate 
+ * @param object $node
+ * @param array $form
+ * @param array $form_state
  */
 function itg_survey_node_validate($node, $form, &$form_state) {
   
@@ -344,10 +382,10 @@ function itg_survey_vote_percentage($nid, $ques_id, $answer){
 
 /**
  * 
- * @param Int $nid
- * @param Int $ques_id
- * @param String $answer
- * @param String $user_type
+ * @param int $nid
+ * @param int $ques_id
+ * @param string $answer
+ * @param string $user_type
  * @return string
  */
 function itg_survey_vote_percentage_user($nid, $ques_id, $answer, $user_type){
@@ -373,8 +411,8 @@ function itg_survey_vote_percentage_user($nid, $ques_id, $answer, $user_type){
 
 /**
  * Get total vote for a question
- * @param Int $nid
- * @param Int $ques_id
+ * @param int $nid
+ * @param int $ques_id
  * @return int
  */
 function itg_survey_get_total_vote_question($nid, $ques_id, $answer, $user_type){
@@ -433,7 +471,7 @@ function itg_survey_block_view($delta = '') {
 }
 
 /**
- * View survey result link in listing.
+ * View survey result link on survey listing page.
  * @param type $nid
  * @return string
  */
@@ -446,8 +484,9 @@ function itg_survey_show_survey_result($nid){
 }
 
 /**
- * Return name as per dropdown
- * @param type $name
+ * Return name as per dropdown used on view template file
+ * 
+ * @param string $name
  */
 function itg_survey_get_answer_type_name($name){
   switch ($name) {
@@ -468,10 +507,10 @@ function itg_survey_get_answer_type_name($name){
 }
 
 /**
- * Access denied for expired node
- * @param Object $node
- * @param String $op
- * @param Array $account
+ * Access denied for expired survey
+ * @param object $node
+ * @param string $op
+ * @param array $account
  * @return string
  */
 function itg_survey_node_access($node, $op, $account) {
@@ -500,4 +539,127 @@ function itg_survey_node_access($node, $op, $account) {
     }
     return NODE_ACCESS_IGNORE;
   }
+}
+
+/**
+ * Insert survey expiry date in to notification table 
+ * 
+ * Send mail before 24 hours of survey expiration
+ * 
+ * @param int $nid
+ * @param string $expiry_date
+ */
+function itg_survey_insert_notification_details($nid, $expiry_date, $op) {
+  
+  if ($op == 'insert') {
+    db_insert('itg_survey_ntf')
+            ->fields(array(
+                'nid' => $nid,
+                'survey_expiry' => $expiry_date,
+                'status' => 'N',
+                'created' => time()
+            ))
+            ->execute();
+  } else {
+    db_update('itg_survey_ntf')
+            ->fields(array(
+                'survey_expiry' => $expiry_date,
+            ))
+            ->condition('nid', $nid, '=')
+            ->execute();
+  }
+}
+
+/**
+ * Implements hook_cronapi().
+ */
+function itg_survey_cronapi($op, $job = NULL) {
+  $items['itg_survey_expiry_notification'] = array(
+    'description' => 'Send mail before 24 hours for survey expiration',
+    'callback' => 'itg_survey_expiry_notification_callback', 
+  );
+  return $items;
+}
+
+/**
+ * Send notification mail before 24 hours of survey expiration
+ */
+function itg_survey_expiry_notification_callback(){
+  
+  //Include survey notification mail inc file
+  module_load_include('inc', 'itg_survey', 'includes/survey_notification_mail');
+  
+  $current_time = time();
+  
+  $query = db_select('itg_survey_ntf', 's');
+  $query->fields('s')
+          ->condition('s.status', 'N', '=');
+  $result = $query->execute();
+  
+  //Fetch node to send notification
+  while($record = $result->fetchAssoc()){
+    $end_date = $record['survey_expiry'];
+    $diff = $end_date - $current_time;
+    $diff_in_hours = round($diff / ( 60 * 60 ));
+    if($diff_in_hours > 0){
+      if($diff_in_hours <= 24){
+        itg_survey_send_mail_for_notification($record['nid']);
+      }
+    }
+  }
+}
+
+/**
+ * Callback to send notification mail
+ * @param type $nid
+ */
+function itg_survey_send_mail_for_notification($nid) {
+  
+  $mail_content = itg_survey_get_mail_content($nid);
+  $params = array(
+      'body' => $mail_content,
+      'subject' => 'India Today | Survey Expired',
+    );
+  $user_email_str = 'haripal.rao@kelltontech.com, haripalrao@gmail.com';
+  drupal_mail('itg_survey_send_notification', 'send_survey_noti', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+}
+
+/**
+ * Mail function to send notification
+ * @param string $key
+ * @param string $message
+ * @param array $params
+ */
+function itg_survey_send_notification_mail($key, &$message, $params){
+  switch ($key) {
+    case 'send_survey_noti':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
+}
+
+/**
+ * Get survey notification mail body
+ * @param int $nid
+ * @return string
+ */
+function itg_survey_get_mail_content($nid){
+  $node = node_load($nid);
+  $expiry_date = date('d/m/Y',strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']));
+   
+  $content = '<p>Dear ITG Team, </p><p>Survey <strong>'.$node->title.' will be expired soon.</strong></p><p>Expiry Date: '.$expiry_date.'</p>';
+  
+  $content .='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
+    
+  return $content;
 }
