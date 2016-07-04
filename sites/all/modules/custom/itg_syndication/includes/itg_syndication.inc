@@ -48,7 +48,7 @@ function itg_syndication_generate_xml($data) {
       break;
     // 3. Via Email
     case 'Email':
-      itg_syndication_mail_syndication($data, $file['file_path'], $delivery_mode_array[1]);
+      itg_syndication_mail_syndication($data, $file['real_path'], $delivery_mode_array[1]);
       break;
   }
   
@@ -62,6 +62,7 @@ function itg_syndication_generate_xml($data) {
  * @param string $delivery_mode
  */
 function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
+  
   $attachment = array(
     'filepath' => $file_path,
   );
