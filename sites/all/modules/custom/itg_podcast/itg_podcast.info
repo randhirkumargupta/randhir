@@ -1,0 +1,6 @@
+name = ITG Podcast
+description = "ITG Pod Cast/ Audio Module"
+core = 7.x
+package = ITG
+dependencies[] = itg_videogallery
+files[] = itg_podcast.module

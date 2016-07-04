@@ -716,6 +716,8 @@ jQuery(document).ready(function(){
             item.push(jQuery(this).find('.item-value').text());
         });
         var itemvalue = item.join(",");
-        console.log(itemvalue);
+       jQuery('#edit-field-common-related-content-und-0-value').val(item);
+        //console.log(itemvalue);
+        
     });
 });

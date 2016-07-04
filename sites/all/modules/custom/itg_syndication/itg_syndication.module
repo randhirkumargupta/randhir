@@ -220,6 +220,8 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
     
     $form['#after_build'][] = 'itg_syndication_rule_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_syndication_rule_change_message'; 
+    $form['#validate'][] = 'itg_syndication_rule_after_build_validate';  // Validate
+
 }
 
 /**
@@ -887,3 +889,53 @@ function get_client_expiry_date($client_name) {
   
   return $expiry_date;
 }
+
+function itg_for_test() {
+  $ftp_server = 'test.kelltontech.net';
+  $ftp_user_name = 'ftptest1';
+  $ftp_user_pass = 'FtpTEst@123';
+  $file = 'http://localhost/itgcms/sites/default/files/Idea-JNP.xml';
+  $remote_file = 'xml/shravan.xml';
+  
+  // set up basic connection
+  $conn_id = ftp_connect($ftp_server);
+
+  // login with username and password
+  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+  
+  //turn passive mode on
+  ftp_pasv($conn_id, true);
+  
+  // upload a file
+  if (ftp_put($conn_id, $remote_file, $file, FTP_BINARY)) {
+   echo "successfully uploaded $file\n";
+  } else {
+   echo "There was a problem while uploading $file\n";
+  }
+
+  // close the connection
+  ftp_close($conn_id);
+}
+
+
+function itg_syndication_rule_after_build_validate($form, &$form_state) {
+  //p($form_state['values']);
+    $lang = isset($form_state['values']['language'])?$form_state['values']['language']:LANGUAGE_NONE;
+  foreach($form_state['values']['field_syndication_rule_details'][$lang] as $k => $item) {
+
+        if($k === 'add_more') continue; // skip loop if key is add_more
+
+        $syndication_frequency = $item['field_syndication_frequency'][$lang][0]['value'];
+            if($syndication_frequency == 'Weekly')  {
+           if(isset($item['field_syndication_set_day'][$lang][0]['value']) && !empty($item['field_syndication_set_day'][$lang][0]['value'])) {  } else {    
+              form_set_error('field_syndication_rule_details]['.$lang.']['.$k.'][field_syndication_set_day', t('Set Day field is required for row['.($k+1).']'));
+            }
+            }
+            
+            if($syndication_frequency == 'Monthly')  {
+            if(isset($item['field_syndication_set_day_month'][$lang][0]['value']) && !empty($item['field_syndication_set_day_month'][$lang][0]['value'])) {  } else {    
+              form_set_error('field_syndication_rule_details]['.$lang.']['.$k.'][field_syndication_set_day_month', t('Set Date field is required for row['.($k+1).']'));
+            }  
+            }
+       }
+} 
