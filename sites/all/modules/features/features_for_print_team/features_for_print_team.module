@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Features for Print Team feature.
+ */
+
+include_once 'features_for_print_team.features.inc';
