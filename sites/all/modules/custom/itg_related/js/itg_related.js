@@ -152,7 +152,7 @@ jQuery(document).ready(function(){
     
      jQuery('body').on('click', '.insert-url', function(){
          // parent.jQuery('#edit-field-s-related-content-und-0-value').val(item); edit-title
-            parent.jQuery('#edit-field-s-related-content-und-0-value').val(item);
+            parent.jQuery('#edit-field-common-related-content-und-0-value').val(item);
             var checkedlist = '';
             for ( var i = 0, l = item.length; i < l; i++ ) {
                 checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span></li>';
