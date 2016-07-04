@@ -229,10 +229,7 @@ function itg_tv_schedule_uploadmongo($file_id) {
         fclose($file);
         return TRUE;
     }
-    elseif ($flag == 0) {
-       //execute when inappropriate file upload
         return FALSE;
-    }
 }
 
 /**
@@ -240,19 +237,20 @@ function itg_tv_schedule_uploadmongo($file_id) {
  * {@inheritdoc}
  */
 function itg_tv_schedule_form_submit($form, &$form_state) {
-  global $user;
-  $file_id = $form_state['input']['file']['fid'];
-  $file = file_load($form_state['values']['file']);
-  $file->status = FILE_STATUS_PERMANENT;
-  file_save($file);
-  file_usage_add($file, 'user', 'user', $user->uid);
-  $value = itg_tv_schedule_uploadmongo($file_id);
-  if ($value == TRUE){
-  drupal_set_message(t('The file has been submitted successfully, filename: @filename.', array('@filename' => $file->filename)));
-  }else{
+    global $user;
+    $file_id = $form_state['input']['file']['fid'];
+    $file = file_load($form_state['values']['file']);
+    $file->status = FILE_STATUS_PERMANENT;
+    file_save($file);
+    file_usage_add($file, 'user', 'user', $user->uid);
+    $value = itg_tv_schedule_uploadmongo($file_id);
+    if ($value == TRUE) {
+        drupal_set_message(t('The file has been submitted successfully, filename: @filename.', array('@filename' => $file->filename)));
+    }
+    else {
         drupal_set_message(t('Inappropriate csv file'));
-  }
-  }
+    }
+}
 
 /**
  * Custom validation for searching popup.
