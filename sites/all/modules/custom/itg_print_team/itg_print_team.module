@@ -11,7 +11,7 @@
  * @return array
  */
 function itg_print_team_permission() {
-    return array(
+  return array(
     'submit idea for story' => array(
       'title' => t('Submit Ideas For Stories'),
     )
@@ -24,19 +24,19 @@ function itg_print_team_permission() {
  */
 function itg_print_team_menu() {
   $items['submit-idea'] = array(
-      'title' => 'Submit Idea',
-      'page callback' => 'itg_print_team_submit_idea',
-      'access callback' => 'user_access',
-      'access arguments' => array('submit idea for story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/print_team_submit_idea.inc',
+    'title' => 'Submit Idea',
+    'page callback' => 'itg_print_team_submit_idea',
+    'access callback' => 'user_access',
+    'access arguments' => array('submit idea for story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/print_team_submit_idea.inc',
   );
   $items['idea-status/%/%'] = array(
-      'page callback' => 'itg_print_team_idea_status',
-      'access callback' => 'user_access',
-      'access arguments' => array('submit idea for story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/print_team_submit_idea.inc',
+    'page callback' => 'itg_print_team_idea_status',
+    'access callback' => 'user_access',
+    'access arguments' => array('submit idea for story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/print_team_submit_idea.inc',
   );
 
   return $items;
@@ -46,19 +46,20 @@ function itg_print_team_menu() {
  * Implements hook_theme().
  */
 function itg_print_team_theme($existing, $type, $theme, $path) {
-    $themes = array(
-      'print_team_integration_node_form' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'print-team-integration-node-form',
-          'path' => drupal_get_path('module', 'itg_print_team') . '/templates',
-          'render element' => 'form',
-      ),
+  $themes = array(
+    'print_team_integration_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'print-team-integration-node-form',
+      'path' => drupal_get_path('module', 'itg_print_team') . '/templates',
+      'render element' => 'form',
+    ),
   );
 
   return $themes;
 }
 
-/***************************Form Related hooks*********************************/
+/* * *************************Form Related hooks******************************** */
+
 /**
  * Implement hook_form_alter
  * @param Array $form
@@ -66,27 +67,27 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
  * @param String $form_id
  */
 function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
-global $user;
+  global $user;
 
   if ($form_id == 'print_team_integration_node_form') {
-    
+
     //Change page title
     drupal_set_title(t('Submit Your Idea'));
-    
+
     //Add cancel button
     $destination = 'manage-print-team';
     $form['title']['#description'] = '<p>' . t('Please enter idea headline .') . '</p>';
     $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-        '#weight' => 21,
-        '#value' => t('Cancel'),
+      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+      '#weight' => 21,
+      '#value' => t('Cancel'),
     );
-    
+
     //Unset meta tags
     unset($form['#metatags']);
     unset($form['actions']['preview']);
     unset($form['field_pti_idea_status']['und']['#options']['_none']);
-    
+
     //If role is anchor, editor and co-ordinator, display field to set rule and change status
     $idea_review_flag = FALSE;
     foreach ($user->roles as $roles) {
@@ -94,16 +95,16 @@ global $user;
         $idea_review_flag = TRUE;
       }
     }
-    
-    if(!$idea_review_flag){
+
+    if (!$idea_review_flag) {
       unset($form['field_pti_idea_status']);
       unset($form['field_pti_words_limit']);
       unset($form['field_survey_end_date']);
     }
-    
+
     $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
     $form['field_quiz_answer_video'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Video';
-    
+
     //Submit Handler
     $form['actions']['submit']['#submit'][] = 'itg_print_team_submit_handler_for_redirect';
 
@@ -112,23 +113,23 @@ global $user;
   }
 }
 
- /**
+/**
  * Custom submit callback for alter message after operation.
  */
 function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-  
+
   unset($_GET['destination']); // Unset destination
-  
+
   if (arg(2) == 'edit') {
     $op = 'updated.';
-  } 
-  else {
-     $op = 'created.';
   }
-  
+  else {
+    $op = 'created.';
+  }
+
   $form_state['redirect'] = 'manage-print-team'; //submit-idea
   drupal_set_message(t('Your idea has been has been @operation', array('@operation' => $op)));
 }
@@ -141,13 +142,13 @@ function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
  */
 function itg_print_team_form_after_build($form, &$form_state) {
   global $user, $base_url;
- 
+
   //Extract type of node
   if (arg(0) == 'node') {
     if (arg(1) == 'add') {
-        $type = arg(2);
-        $nid = '';
-    } 
+      $type = arg(2);
+      $nid = '';
+    }
     else {
       $node = node_load(arg(1));
       $type = $node->type;
@@ -161,35 +162,37 @@ function itg_print_team_form_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   $settings['type'] = ucfirst($type);
   $settings['nid'] = $nid;
-  
+
   drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
-  
+
   //Add JS for itg_print_team
-   drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
-  
+  drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
+
   //Unset SEF URL field
   $form['path']['#access'] = FALSE;
-  
+
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
-  
+
   return $form;
 }
 
-/*******************************View Related hooks*****************************/
+/* * *****************************View Related hooks**************************** */
 
 /**
  * Implement hook_views_pre_render
  * @param Object $view
  */
 function itg_print_team_views_pre_render(&$view) {
-  
+
   //Add "Submit Idea" button on listing page of ideas
   if ($view->name == "manage_print_team") {
-    $header_content_print_team = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_print_team = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_print_team .= '<a href="./submit-idea">Submit Idea</a>';
     $view->attachment_before = $header_content_print_team;
+    $print_attach_form = drupal_get_form('print_attach_form', (object) array('nid' => ''));
+    $view->attachment_after = drupal_render($print_attach_form);
   }
 }
 
@@ -200,13 +203,13 @@ function itg_print_team_views_pre_render(&$view) {
  * @param String $form_id
  */
 function itg_print_team_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  
-   if ($form['#id'] == 'views-exposed-form-manage-print-team-page') {
-     
-     //Call function autocomplete to show matching titles
-     $form['title']['#autocomplete_path'] = 'content-title-list/print_team_integration/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Idea Headline'));     
-   }
+
+  if ($form['#id'] == 'views-exposed-form-manage-print-team-page') {
+
+    //Call function autocomplete to show matching titles
+    $form['title']['#autocomplete_path'] = 'content-title-list/print_team_integration/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Idea Headline'));
+  }
 }
 
 /**
@@ -217,9 +220,9 @@ function itg_print_team_node_insert($node) {
   switch ($node->type) {
     case 'print_team_integration':
       module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
-      
+
       break;
-    
+
     default:
       break;
   }
@@ -233,9 +236,9 @@ function itg_print_team_node_update($node) {
   switch ($node->type) {
     case 'print_team_integration':
       module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
-      
+
       break;
-    
+
     default:
       break;
   }
@@ -250,7 +253,7 @@ function itg_print_team_node_update($node) {
 function itg_print_team_node_validate($node, $form, &$form_state) {
 
   if ($node->type == 'print_team_integration') {
-
+    
   }
 }
 
@@ -261,7 +264,7 @@ function itg_print_team_node_validate($node, $form, &$form_state) {
  * @param array $params
  */
 function itg_print_team_mail($key, &$message, $params) {
-    switch ($key) {
+  switch ($key) {
     case 'send_print_team':
       $headers = array(
         'MIME-Version' => '1.0',
@@ -283,23 +286,23 @@ function itg_print_team_mail($key, &$message, $params) {
  * @param int $nid
  * @return string
  */
-function itg_print_team_idea_actions($nid){
-  
+function itg_print_team_idea_actions($nid) {
+
   $node = node_load($nid);
   $status = $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'];
-  $accept = l('Accept', 'idea-status/approved/'.$nid);
-  $reject = l('Reject', 'idea-status/rejected/'.$nid);
-  $need_modification = l('Need Modification', 'idea-status/need_modification/'.$nid);
-  
+  $accept = l('Accept', 'idea-status/approved/' . $nid);
+  $reject = l('Reject', 'idea-status/rejected/' . $nid);
+  $need_modification = l('Need Modification', 'idea-status/need_modification/' . $nid);
+
   switch ($status) {
     case 'Accepted':
       return '<span style="padding-left:30px">-</span>';
       break;
-    
+
     case 'Rejected':
       return '<span style="padding-left:30px">-</span>';
       break;
-    
+
     case 'Need modification':
       return $accept . ' | ' . $reject;
       break;
@@ -308,4 +311,68 @@ function itg_print_team_idea_actions($nid){
       return $accept . ' | ' . $reject . ' | ' . $need_modification;
       break;
   }
+}
+
+/**
+ * callback for print_attach_form
+ * @param array $form
+ * @param array reference $form_state
+ * @return array $form
+ */
+function print_attach_form($form, &$form_state) {
+  // issue form
+  $form['issue'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('From'),
+    '#date_format' => 'd/m/Y',
+    '#date_year_range' => '-1:+1',
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ),
+  );
+  $form['magazine'] = array(
+    '#type' => 'select',
+    '#title' => 'Magazine',
+    '#options' => get_magazine_title(),
+    '#default_value' => isset($values['issue']) ? $values['issue'] : NULL,
+    '#attributes' => array('class' => array('custom-issue')),
+  );
+  $form['print_id'] = array(
+    '#type' => 'hidden',
+    '#value' => $nid
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+  return $form;
+}
+
+/**
+ * callback submit for print_attach_form_submit
+ * @param array $form
+ * @param array reference $form_state
+ * @return array $form
+ */
+function print_attach_form_submit($form, &$form_state) {
+  p($form_state);
+}
+
+/**
+ * Get magazine title for get_magazine_title
+ * @return type $options
+ */
+function get_magazine_title() {
+  $query = db_select('node', 'node');
+  $query->distinct();
+  $query->fields('node', array('nid', 'title'));
+  $query->condition('node.status', 1, '=');
+  $query->condition('node.type', 'magazine', '=');
+  $result = $query->execute();
+  $record = $result->fetchAll();
+  $options['_none'] = '- Select a value -';
+  foreach ($record as $val) {
+    $options[$val->nid] = $val->title;
+  }
+  return $options;
 }
