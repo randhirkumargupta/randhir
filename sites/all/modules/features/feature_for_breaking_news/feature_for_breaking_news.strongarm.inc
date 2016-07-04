@@ -90,13 +90,13 @@ function feature_for_breaking_news_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '9',
+          'weight' => '10',
         ),
         'title' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'path' => array(
-          'weight' => '7',
+          'weight' => '8',
         ),
       ),
       'display' => array(),

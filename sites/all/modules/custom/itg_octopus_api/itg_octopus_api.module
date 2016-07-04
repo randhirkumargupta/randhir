@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * ITG Octopus Api module.
+ *
+ * Fetch the xml value in database from octopus api.
+ *
+ */
+
+/**
+ * Implements hook_menu().
+ * {@inheritdoc}
+ */
+function itg_octopus_api_menu(){
+   $items['itg-octopus-rundown'] = array(
+    'title' => 'api callback menu',
+    'page callback' => 'itg_octopus_api_rundown',
+    'access callback' => TRUE,
+    //'access arguments' => array('access rundown content'),
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+   return $items;
+}

@@ -183,7 +183,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm-d-Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Field: Expiry On */
+  /* Field: Field: Expiry Date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -315,7 +315,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Field: Expiry On */
+  /* Field: Field: Expiry Date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -818,13 +818,88 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Header: Global: Result summary */
-  $handler->display->display_options['header']['result']['id'] = 'result';
-  $handler->display->display_options['header']['result']['table'] = 'views';
-  $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['empty'] = TRUE;
-  $handler->display->display_options['header']['result']['content'] = 'Count (@total) <a href="node/add/syndication-feed-from-pattern">Create New Pattern</a>';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'nid' => 'nid',
+    'title' => 'title',
+    'field_syndication_feed_clients' => 'field_syndication_feed_clients',
+    'field_syndication_feed_content' => 'field_syndication_feed_content',
+    'field_first_name' => 'field_first_name',
+    'changed' => 'changed',
+    'edit_node' => 'nothing',
+    'nothing' => 'nothing',
+    'view_node' => 'nothing',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_syndication_feed_clients' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_syndication_feed_content' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_first_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'view_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -885,6 +960,40 @@ function syndication_feature_views_default_views() {
     'syndication_feed_from_pattern' => 'syndication_feed_from_pattern',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client Title (field_syndication_feed_clients) */
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['id'] = 'field_syndication_feed_clients_value';
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['table'] = 'field_data_field_syndication_feed_clients';
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['field'] = 'field_syndication_feed_clients_value';
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['operator_id'] = 'field_syndication_feed_clients_value_op';
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['label'] = 'Client Title';
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['operator'] = 'field_syndication_feed_clients_value_op';
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['identifier'] = 'field_syndication_feed_clients_value';
+  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
   /* Filter criterion: Content: Syndication feed content (field_syndication_feed_content) */
   $handler->display->display_options['filters']['field_syndication_feed_content_value']['id'] = 'field_syndication_feed_content_value';
   $handler->display->display_options['filters']['field_syndication_feed_content_value']['table'] = 'field_data_field_syndication_feed_content';
@@ -953,42 +1062,10 @@ function syndication_feature_views_default_views() {
     23 => 0,
     22 => 0,
   );
-  /* Filter criterion: Content: Syndication feed clients (field_syndication_feed_clients) */
-  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['id'] = 'field_syndication_feed_clients_value';
-  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['table'] = 'field_data_field_syndication_feed_clients';
-  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['field'] = 'field_syndication_feed_clients_value';
-  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['operator_id'] = 'field_syndication_feed_clients_value_op';
-  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['label'] = 'Syndication Feed Client';
-  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['operator'] = 'field_syndication_feed_clients_value_op';
-  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['identifier'] = 'field_syndication_feed_clients_value';
-  $handler->display->display_options['filters']['field_syndication_feed_clients_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    19 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-    23 => 0,
-    22 => 0,
-  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
@@ -1020,45 +1097,66 @@ function syndication_feature_views_default_views() {
       'label' => '',
     ),
   );
-  /* Field: Content: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['label'] = 'Node Id';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Syndication feed clients */
-  $handler->display->display_options['fields']['field_syndication_feed_clients']['id'] = 'field_syndication_feed_clients';
-  $handler->display->display_options['fields']['field_syndication_feed_clients']['table'] = 'field_data_field_syndication_feed_clients';
-  $handler->display->display_options['fields']['field_syndication_feed_clients']['field'] = 'field_syndication_feed_clients';
-  $handler->display->display_options['fields']['field_syndication_feed_clients']['label'] = 'Syndication Clients';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Node Id';
   /* Field: Content: Syndication feed content */
   $handler->display->display_options['fields']['field_syndication_feed_content']['id'] = 'field_syndication_feed_content';
   $handler->display->display_options['fields']['field_syndication_feed_content']['table'] = 'field_data_field_syndication_feed_content';
   $handler->display->display_options['fields']['field_syndication_feed_content']['field'] = 'field_syndication_feed_content';
   $handler->display->display_options['fields']['field_syndication_feed_content']['label'] = 'Content Type';
+  /* Field: Content: Client Title */
+  $handler->display->display_options['fields']['field_syndication_feed_clients']['id'] = 'field_syndication_feed_clients';
+  $handler->display->display_options['fields']['field_syndication_feed_clients']['table'] = 'field_data_field_syndication_feed_clients';
+  $handler->display->display_options['fields']['field_syndication_feed_clients']['field'] = 'field_syndication_feed_clients';
+  $handler->display->display_options['fields']['field_syndication_feed_clients']['label'] = 'Syndication Clients';
   /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['field_first_name']['label'] = 'Auther';
+  $handler->display->display_options['fields']['field_first_name']['label'] = 'Posted By';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom_date_d_m_y_';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = 'Modified';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'itg_date_with_time';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified on';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -1086,7 +1184,77 @@ function syndication_feature_views_default_views() {
     7 => '7',
     9 => '9',
   );
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'title' => 'title',
+    'field_syndication_feed_clients' => 'field_syndication_feed_clients',
+    'field_syndication_feed_content' => 'field_syndication_feed_content',
+    'changed' => 'changed',
+    'edit_node' => 'nothing',
+    'nothing' => 'nothing',
+    'view_node' => 'nothing',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_syndication_feed_clients' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_syndication_feed_content' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'view_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -1119,27 +1287,59 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Syndication feed clients */
-  $handler->display->display_options['fields']['field_syndication_feed_clients']['id'] = 'field_syndication_feed_clients';
-  $handler->display->display_options['fields']['field_syndication_feed_clients']['table'] = 'field_data_field_syndication_feed_clients';
-  $handler->display->display_options['fields']['field_syndication_feed_clients']['field'] = 'field_syndication_feed_clients';
-  $handler->display->display_options['fields']['field_syndication_feed_clients']['label'] = 'Syndication Clients';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Node Id';
   /* Field: Content: Syndication feed content */
   $handler->display->display_options['fields']['field_syndication_feed_content']['id'] = 'field_syndication_feed_content';
   $handler->display->display_options['fields']['field_syndication_feed_content']['table'] = 'field_data_field_syndication_feed_content';
   $handler->display->display_options['fields']['field_syndication_feed_content']['field'] = 'field_syndication_feed_content';
   $handler->display->display_options['fields']['field_syndication_feed_content']['label'] = 'Content Type';
+  /* Field: Content: Client Title */
+  $handler->display->display_options['fields']['field_syndication_feed_clients']['id'] = 'field_syndication_feed_clients';
+  $handler->display->display_options['fields']['field_syndication_feed_clients']['table'] = 'field_data_field_syndication_feed_clients';
+  $handler->display->display_options['fields']['field_syndication_feed_clients']['field'] = 'field_syndication_feed_clients';
+  $handler->display->display_options['fields']['field_syndication_feed_clients']['label'] = 'Syndication Clients';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom_date_d_m_y_';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['date_format'] = 'itg_date_with_time';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'Posted By';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = 'view';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Author uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';

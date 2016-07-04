@@ -1,0 +1,299 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Octopus Api module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * @access public
+ * @return array
+ */
+
+/**
+ * Implements hook_schema()
+ * @return array
+ */
+function itg_octopus_api_schema() {
+  $schema = array();
+  // Schema for rundown xml slug
+  $schema['itg_octopus_slug'] = array(
+    'description' => 'TODO: please describe this table!',
+    'fields' => array(
+      'id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'storyid' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'rundown_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'slug_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'story_title' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_status' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'story_duration' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_created' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_created_by' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_modified' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_modified_by' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'location' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'category' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'archive' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'test' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'type' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'ingest' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'source' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'input' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'tour' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'ingest' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'prio' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'ts_off' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+      'usage' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+  
+  //schema for rundown xml clip
+  
+  $schema['itg_element_clip'] = array(
+    'description' => 'TODO: please describe this table!',
+    'fields' => array(
+      'id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'element_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'slug_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'story_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'element_type' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '255',
+      ),
+      'element_dur' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipname' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipmosid' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipobj_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipjobid' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipfilepath' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipin' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipout' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'text' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'text',
+        'size' => 'big',
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+  
+  //schema for rundown xml rundown
+  
+  $schema['itg_rundown'] = array(
+    'description' => 'The base table for syndication.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a node.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'exported' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '128',
+        'not null' => TRUE,
+      ),
+      'exported_by' => array(
+        'description' => 'Octopus xml exporter',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'rundown_id' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'rundown_title' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'rundown_start' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+  
+  return $schema;
+}

@@ -112,33 +112,38 @@ function itg_syndication_mail($key, &$message, $params) {
  */
 function itg_syndication_ftp_syndication($data, $file_path, $file_name, $delivery_mode) {  
   $ftp_details = get_ftp_details_by_client($data['client_title'], $delivery_mode);
-  
   $file = $file_path;
-  
-  $remote_file = 'xml/'.$file_name;
-  
+ 
+  //$remote_file = str_replace(" ","-",$file_name);
+  $remote_file = $file_name;
   $ftp_server = $ftp_details[0]->field_syndication_ftp_url_value;
   $ftp_user_name = $ftp_details[0]->field_syndication_ftp_username_value;
   $ftp_user_pass = $ftp_details[0]->field_syndication_ftp_password_value;
   
-  // set up basic connection
-  $conn_id = ftp_connect($ftp_server);
-
-  // login with username and password
-  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+  //$file = 'http://localhost/itgcms/sites/default/files/Idea-JNP.xml';
+  //$remote_file = 'shravan.xml';
   
+  // set up basic connection
+  $conn_id = ftp_connect($ftp_server) or die("Couldn't connect to $ftp_server");
+  // login with username and password
+  $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass) or die("You do not have access to this ftp server!");
+  if ((!$conn_id) || (!$login_result)) {
+    echo "FTP connection has failed";
+    exit;
+  }
   //turn passive mode on
   ftp_pasv($conn_id, true);
-  
-  // upload a file
-  if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
-   echo "successfully uploaded $file\n";
-  } else {
-   echo "There was a problem while uploading $file\n";
+  $upload = ftp_put($conn_id, $remote_file, $file, FTP_BINARY);
+  if (!$upload) {
+    echo "There was a problem while uploading $file\n";
   }
-
+  else {
+    echo "successfully uploaded $file\n";
+  }
+  //p($ftp_details);
   // close the connection
   ftp_close($conn_id);
+  
 }
 
 /**

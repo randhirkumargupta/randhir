@@ -131,21 +131,20 @@
     // scroll-to-top animate
     $(window).scroll(function () {
       if ($(this).scrollTop() > 90) {
-        $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter, .top-actions').addClass('fixed');
+        $('.action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').addClass('fixed');
       } else {
-        $('.block-itg-story, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter, .top-actions').removeClass('fixed');
+        $('.action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').removeClass('fixed');
       }
     });
     $('body').on('click', '.target-link', function (e) {
-      var offSet = 120;
-      if($('.region-form-tab .block').hasClass('fixed')){
-        offSet = 57;
+      var offSet = 194;
+      if($('.region-form-tab .block').hasClass('fixed') || $('.action-with-title').hasClass('fixed')){
+        offSet = 100;
       }
       
       
       var dti = $(this).attr('data-target-id');
       var dataOffset = $('#' + dti).offset().top;
-      console.log(dti + '=' + dataOffset);
       var targetOffset = $('#' + dti).offset().top - offSet;
       if (dti == "BasicDetails" || dti == "BreakingNewsBasicDetails" || dti == "Element" || dti == "basicdetails") {
         $(this).addClass('active').siblings('.target-link').removeClass('active');
@@ -592,11 +591,6 @@
         jQuery('.form-field-name-field-story-tweet-image .ajax-processed').mousedown();
       }
     });
-    // reset form data end.
-    // jQuery show n hide code for sidebar second 
-    $('body').on('click', '.sidebar-trigger', function () {
-      $(this).parent().toggleClass('active');
-    });
     
     // jQuery code for syndication rule details
     var srd_freq_el = $('.field-name-field-syndication-frequency').find('.form-radio');
@@ -688,12 +682,40 @@
     
     // jQuery code for Top Actions
     var labelID;
-    $('.top-actions').on('click', 'label', function(e){
+    $('.top-actions').on('click', 'span', function(e){
         e.preventDefault();
-        labelID = $(this).attr('for');
+        labelID = $(this).attr('data-id');
        $('#'+labelID).trigger('click');
     });
     
     
   };
 })(jQuery);
+
+
+jQuery(document).ready(function(){
+    jQuery('.sidebar-trigger').click(function () {
+      jQuery(this).parent().toggleClass('active');
+    });
+    jQuery('.saved-search-link').click(function (e) {
+        e.stopPropagation();
+        jQuery(this).parent().parent().find('.my-saved-search').slideToggle();
+    });
+    jQuery('body').click(function () {
+        jQuery(this).find('.my-saved-search').slideUp();
+    });
+    jQuery('body').click(function () {
+        jQuery(this).find('.my-saved-search').slideUp();
+    });
+        
+    jQuery( ".checked-list" ).sortable();
+    jQuery( ".checked-list" ).disableSelection();
+    jQuery('body').on('click', '.save-checklist', function () {
+        var item = [];
+        jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i){
+            item.push(jQuery(this).find('.item-value').text());
+        });
+        var itemvalue = item.join(",");
+        console.log(itemvalue);
+    });
+});
