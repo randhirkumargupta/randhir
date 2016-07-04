@@ -518,6 +518,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $is_scheduled = 'No')
   }
   else {
     drupal_set_message(t('Please upload valid video file. ') . $file->name , 'error');
+    drupal_goto('/browse-content');
   }
 
   // Now use the media_id in a Tweet
