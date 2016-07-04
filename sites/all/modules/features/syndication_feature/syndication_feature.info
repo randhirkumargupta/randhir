@@ -9,6 +9,7 @@ dependencies[] = field_group
 dependencies[] = node
 dependencies[] = text
 dependencies[] = views
+dependencies[] = xml_field
 dependencies[] = xml_field_codemirror
 features[ctools][] = field_group:field_group:1
 features[ctools][] = strongarm:strongarm:1
