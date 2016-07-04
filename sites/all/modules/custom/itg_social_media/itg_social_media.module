@@ -290,22 +290,20 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
   }
   // get response
   $graphNode = $response->isError();
-  watchdog('Facebook Graphnode', '<pre>' . print_r($graphNode, TRUE) . '</pre>');
+  
   if (!$graphNode) {
     $pre_save = array(
       'nid' => $node->nid,
       'node_title' => $node->title,
       'username' => $user->name,
-      'social_media' => 'facebook ' . $type,      
+      'social_media' => 'facebook ' . $type,
+      'status' => 1,
     );
-    
-    // iNSERT INTO DATABASE
-    //$query = db_insert('itg_social_media_logs');
-    //$query->fields($pre_save)
-    //    ->execute();
+ watchdog('Facebook pre', '<pre>' . print_r($pre_save, TRUE) . '</pre>');   
+    // INSERT INTO DATABASE    
     drupal_write_record('itg_social_media_logs', $pre_save);
-    // Set message
-    drupal_set_message(t($type . ' has been posted on social media - Facebook'), 'status');
+    
+    drupal_set_message(t(ucfirst($type) . ' has been posted on social media - Facebook'), 'status');
   }
 }
 
