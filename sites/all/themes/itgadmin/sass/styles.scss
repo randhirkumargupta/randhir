@@ -2446,11 +2446,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   top: 0;
   @extend .full;
   z-index: 99999;
-  .popup-body{
-    padding: 20px;
+  .popup-content{
     width: 800px;
-    max-height: 400px;
-    overflow-y: auto;
     border-radius: 5px;
     box-shadow: 0 0 10px #000;
     background-color: #fff;
@@ -2460,6 +2457,17 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     right: 0;
     bottom: 0;
     margin: auto;
+    max-height: 500px;
+  }
+  .popup-head{
+    @extend .pos-rel;
+    padding: 20px;
+    border-bottom: 1px solid #d9d9d9;
+  }
+  .popup-body{
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
   }
   .itg-close-popup{
     position: absolute;
@@ -2476,6 +2484,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="itg-social-media-form"]{
   > div{
       .form-item-itg-smi{
+          margin-top: 0;
           @extend .full;
           @extend .dib;
           span.error{
@@ -2643,7 +2652,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         input[type="file"]{
             @extend .hide;
         }
-        @each $social in #edit-itg-fb, #edit-itg-twitter, #edit-itg-instagram, #edit-itg-instant {
+        @each $social in #edit-itg-fb, #edit-itg-twit, #edit-itg-twitter, #edit-itg-instagram, #edit-itg-instant {
             #{$social}-img-upload {
                 @extend .pos-rel;
                 .file{
@@ -2666,11 +2675,18 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
                     position: absolute;
                     top: 0;
                     left: 200px;
+                    &+.ajax-progress-throbber{
+                        display: none;
+                    }
                 }
+            }
+            #{$social}-video-upload {
+                @extend .pos-rel;
                 #{$social}-video-remove-button {
-                    position: absolute;
-                    top: 0;
-                    left: 300px;
+                    margin-left: 30px;
+                    &+.ajax-progress-throbber{
+                        display: none;
+                    }
                 }
             }
         }
@@ -3126,6 +3142,18 @@ div.node{
   #comments{
     .comment-form{
       @extend .node-form;
+      .form-type-item{
+          margin: 30px 0;
+          padding: 0 30px;
+          > label{
+            width: 220px;
+            padding-right: 20px;
+            @extend .fleft;
+          }
+          .username{
+              color: #008eb1;
+          }
+      }
     }
     h2{
       background-color: #fefafb;
@@ -3137,6 +3165,20 @@ div.node{
       margin: 15px 0;
     }
   }
+}
+.comment-form{
+    .form-type-item{
+        margin: 30px 0;
+        padding: 0 30px;
+        > label{
+            width: 220px;
+            padding-right: 20px;
+            @extend .fleft;
+        }
+        .username{
+            color: #008eb1;
+        }
+    }
 }
 .generate-image-error{
   padding-left: 250px;
@@ -4108,6 +4150,8 @@ div.node{
 }
 .view-view-moderation-history{
   padding: 0 10px;
+  max-height: 400px;
+  overflow-y: auto;
   .views-row{
     padding: 10px 0;
     &+.views-row{
@@ -4195,6 +4239,7 @@ div.node{
                 @extend .vtop;
                 margin: 0 5px;
             }
+            .fa-times{cursor: pointer; color: red;}
         }
     }
 }
@@ -4331,7 +4376,7 @@ div.node{
     right: 129px;
     text-align: right;
     top: 0;
-    width: 100%;
+    width: 50%;
     z-index: 9999;
     .form-text{
         width: 300px;
@@ -4495,7 +4540,7 @@ div.node{
 }
 .save-checklist-ordre{
     text-align: right;
-    padding: 0 10px;
+    padding: 0 10px 15px;
 }
 .variables-and-field-container{
     .variables{
@@ -4517,5 +4562,10 @@ div.node{
     }
     .form-type-textarea{
         margin-top: 0;
+    }
+}
+.form-managed-file{
+    .messages.error{
+        margin-bottom: 10px;
     }
 }
