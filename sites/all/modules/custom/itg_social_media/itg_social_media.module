@@ -292,13 +292,12 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
   $graphNode = $response->isError();
   
   if (!$graphNode) {
-    $pre_save = array(
-      'nid' => $node->nid,
-      'node_title' => $node->title,
-      'username' => $user->name,
-      'social_media' => 'facebook ' . $type,
-      'status' => 1,
-    );
+    $pre_save['nid'] = $node->nid;
+    $pre_save['node_title'] = $node->title;
+    $pre_save['username'] = $user->name;
+    $pre_save['social_media'] = 'facebook ' . $type;
+    $pre_save['status'] = 1;
+    
  watchdog('Facebook pre', '<pre>' . print_r($pre_save, TRUE) . '</pre>');   
     // INSERT INTO DATABASE    
     drupal_write_record('itg_social_media_logs', $pre_save);
