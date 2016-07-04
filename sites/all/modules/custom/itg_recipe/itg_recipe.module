@@ -100,8 +100,22 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_recipe_smi_hideshow(&$form) {
   global $user;
-  // Code for Comment Question field hide and show
+  // Code for Social Media Question field hide and show
   $form['field_story_facebook_narrative']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // facebook video narrative
+  $form['field_story_facebook_vdescripti']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+    )
+  );
+  
+  // Facebook video field
+  $form['field_story_facebook_video']['#states'] = array(
     'visible' => array(
       ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
     )
@@ -114,29 +128,22 @@ function itg_recipe_smi_hideshow(&$form) {
     )
   );
   
-  // Make facebook posted by field hidden
-  $form['field_story_posted_by_facebook']['und'][0]['value']['#type'] = 'hidden';
-  
-  // Set default value to posted by facebook value.
-  $form['field_story_posted_by_facebook']['und'][0]['value']['#default_value'] = $user->mail;
-  
-  // Make posted by field visible when someone check facebook checkbox
-  $form['field_story_posted_by_facebook']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
-    )
-  );
-  
-  // Code for facebook time 
-  $form['field_story_time_facebook']['#type'] = 'hidden';
-  $form['field_story_time_facebook']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
-    )
-  );
-
   // code for tweet field show and hide 
   $form['field_story_tweet']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+    ),
+  );
+  
+  // Twitter video narrative
+  $form['field_story_twitter_video_desc']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+    ),
+  );
+  
+  // Facebook video
+  $form['field_story_twitter_video']['#states'] = array(
     'visible' => array(
       ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
     ),
@@ -148,26 +155,6 @@ function itg_recipe_smi_hideshow(&$form) {
       ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
     )
   );
-  
-  // Code for posted by twitter and time field
-  $form['field_story_posted_by_twitter']['und'][0]['value']['#default_value'] = $user->mail;
-  $form['field_story_posted_by_twitter']['und'][0]['value']['#type'] = 'hidden';
-  $form['field_story_posted_by_twitter']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
-    ),
-  );
-  $form['field_story_time_twitter']['#type'] = 'hidden';
-  $form['field_story_time_twitter']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
-    ),
-  );
-
-  // Code for instagram fields show hide
-  $form['field_story_posted_by_instagram']['und'][0]['value']['#type'] = 'hidden';
-  $form['field_story_posted_by_twitter']['und'][0]['value']['#default_value'] = $user->mail;
-  $form['field_story_time_instagram']['#type'] = 'hidden';
 }
 
 /**
