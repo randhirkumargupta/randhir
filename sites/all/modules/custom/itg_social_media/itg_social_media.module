@@ -290,7 +290,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
   }
   // get response
   $graphNode = $response->isError();
-  
+  watchdog('Facebook Graphnode', '<pre>' . print_r($graphNode, TRUE) . '</pre>');
   if (!$graphNode) {
     $pre_save = array(
       'nid' => $node->nid,
@@ -304,7 +304,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     $query->fields($pre_save)
         ->execute();
     // Set message
-    drupal_set_message(t('Content has been posted on social media - Facebook'), 'status');
+    drupal_set_message(t($type . ' has been posted on social media - Facebook'), 'status');
   }
 }
 
@@ -672,4 +672,3 @@ function itg_social_media_publish_on_twitter() {
     }    
   }
 }
-
