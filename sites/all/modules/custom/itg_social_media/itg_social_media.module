@@ -445,7 +445,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled =
     // iNSERT INTO DATABASE
     $query = drupal_write_record ('itg_social_media_logs', $pre_save);    
     // Set message
-    drupal_set_message(t('Content has been posted on social media - Twitter'), 'status');
+    drupal_set_message(t('Image has been posted on social media - Twitter'), 'status');
   }
   else {
     $pre_save = array(      
@@ -456,7 +456,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled =
         ->condition('status', 0)
         ->fields($pre_save)
         ->execute();
-    drupal_set_message(t('Content has been posted on social media - Twitter'), 'status');
+    drupal_set_message(t('Image has been posted on social media - Twitter'), 'status');
   }
 }
 
@@ -537,7 +537,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $is_scheduled = 'No')
     // iNSERT INTO DATABASE
     $query = drupal_write_record ('itg_social_media_logs', $pre_save);    
     // Set message
-    drupal_set_message(t('Content has been posted on social media - Twitter'), 'status');
+    drupal_set_message(t('Video has been posted on social media - Twitter'), 'status');
   }
   else {
     $pre_save = array(      
@@ -548,7 +548,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $is_scheduled = 'No')
         ->condition('status', 0)
         ->fields($pre_save)
         ->execute();
-    drupal_set_message(t('Content has been posted on social media - Twitter'), 'status');
+    drupal_set_message(t('Video has been posted on social media - Twitter'), 'status');
   }
 }
 
