@@ -936,7 +936,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  /* Field: Nodequeue: All queues */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['nodequeue_all_queues']['id'] = 'nodequeue_all_queues';
   $handler->display->display_options['fields']['nodequeue_all_queues']['table'] = 'node';
   $handler->display->display_options['fields']['nodequeue_all_queues']['field'] = 'nodequeue_all_queues';

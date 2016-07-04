@@ -12,6 +12,15 @@
  * Implements hook_init().
  */
 function itg_story_init() {
+//  $itg_query = db_select('itg_cron_time_scheduler', 'feed');
+//  $itg_query->fields('feed', array('cron_details'));   
+//  $itg_result = $itg_query->execute()->fetchAll();
+//  
+//  foreach ($itg_result as $itg_val) {
+//    pr(unserialize($itg_val->cron_details));
+//  }
+//  
+//  exit;
   //get_syndication_content_details();
 }
 
