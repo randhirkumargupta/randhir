@@ -135,9 +135,9 @@ function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
 
 /**
  * After build function for print team
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function itg_print_team_form_after_build($form, &$form_state) {
   global $user, $base_url;
@@ -181,7 +181,7 @@ function itg_print_team_form_after_build($form, &$form_state) {
 
 /**
  * Implement hook_views_pre_render
- * @param Object $view
+ * @param object $view
  */
 function itg_print_team_views_pre_render(&$view) {
   
@@ -195,9 +195,9 @@ function itg_print_team_views_pre_render(&$view) {
 
 /**
  * Implement hook_form_views_exposed_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
  */
 function itg_print_team_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   
@@ -233,7 +233,6 @@ function itg_print_team_node_update($node) {
   switch ($node->type) {
     case 'print_team_integration':
       module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
-      
       break;
     
     default:
@@ -243,9 +242,9 @@ function itg_print_team_node_update($node) {
 
 /**
  * Implementation of hook_node_validate
- * @param Object $node
- * @param Array $form
- * @param Array $form_state
+ * @param object $node
+ * @param array $form
+ * @param array $form_state
  */
 function itg_print_team_node_validate($node, $form, &$form_state) {
 
@@ -287,12 +286,12 @@ function itg_print_team_idea_actions($nid){
   
   $node = node_load($nid);
   $status = $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'];
-  $accept = l('Accept', 'idea-status/approved/'.$nid);
+  $accept = l('Approve', 'idea-status/approved/'.$nid);
   $reject = l('Reject', 'idea-status/rejected/'.$nid);
-  $need_modification = l('Need Modification', 'idea-status/need_modification/'.$nid);
+  $need_modification = l('Needs Modification', 'idea-status/needs_modification/'.$nid);
   
   switch ($status) {
-    case 'Accepted':
+    case 'Approved':
       return '<span style="padding-left:30px">-</span>';
       break;
     
@@ -300,7 +299,7 @@ function itg_print_team_idea_actions($nid){
       return '<span style="padding-left:30px">-</span>';
       break;
     
-    case 'Need modification':
+    case 'Needs Modification':
       return $accept . ' | ' . $reject;
       break;
 
