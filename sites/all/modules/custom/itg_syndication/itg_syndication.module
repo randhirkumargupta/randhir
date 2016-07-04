@@ -513,8 +513,11 @@ function get_syndication_content_details() {
     if (!empty($itg_val->cron_details)) {
       $data = unserialize($itg_val->cron_details);
       $data['fid'] = $itg_val->fid;
+      
+      watchdog("Syndication", "Rule id : $itg_val->id");
      
       $content_value = get_content_id_for_syndication($data, $itg_val->last_cron_time);
+      
       //code for update cron time
       update_cron_time_after_feed_generate($data, $itg_val->id, $itg_val->scheduler_time);
       
@@ -543,9 +546,15 @@ function get_content_id_for_syndication($data, $created_date) {
   $itg_query->condition('cat.field_story_category_tid',$data['section_id']);
   
   $itg_result = $itg_query->execute()->fetchAll();
+  
   foreach ($itg_result as $itg_val) {
     $content_id[] = $itg_val->nid;
+    $contentid .= $itg_val->nid.',';
   }
+  
+  watchdog("Syndication", "content_id : $contentid");  
+  
+  //watchdog("Syndication", '<pre>'. print_r($contentid, TRUE) .'</pre>');
   
   $data_array = array(
     'web_property' => $data['content_type'],
@@ -558,6 +567,7 @@ function get_content_id_for_syndication($data, $created_date) {
   );
   
   $file_path = feed_generator_of_contents($data_array);
+  watchdog("Syndication", "File url : $file_path");
   
   return $file_path;
 }
