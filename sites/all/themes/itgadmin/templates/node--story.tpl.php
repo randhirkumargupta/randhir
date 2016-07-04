@@ -12,9 +12,14 @@
               <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
           </div>
           <div id="smi-popup" class="itg-popup">
-              <div class="popup-body">
-                  <a class="itg-close-popup" href="javascript:;"> Close </a>
-                  <?php print render($block['content']); ?>
+              <div class="popup-content">
+                <div class="popup-head">
+                    <div class="popup-title">&nbsp;</div>
+                    <a class="itg-close-popup" href="javascript:;"> Close </a>
+                </div>
+                <div class="popup-body">
+                    <?php print render($block['content']); ?>
+                </div>
               </div>
           </div>
         <?php endif; ?>
