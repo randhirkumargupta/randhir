@@ -82,11 +82,11 @@ function syndication_feature_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'Cooking Tips' => 'Cooking Tips',
-        'Food News' => 'Food News',
-        'Recipe' => 'Recipe',
-        'Story' => 'Story',
-        'Photogallery' => 'Photogallery',
+        'cooking_tips' => 'Cooking Tips',
+        'food_news' => 'Food News',
+        'recipe' => 'Recipe',
+        'story' => 'Story',
+        'photogallery' => 'Photogallery',
       ),
       'allowed_values_function' => '',
     ),
