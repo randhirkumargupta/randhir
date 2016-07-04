@@ -127,7 +127,9 @@
             <?php } ?>
             <?php if($node->field_type[LANGUAGE_NONE][0]['value'] == 'Breaking News') { ?>
             <div class ="field-label">Publish Time : </div>
-            <div class="field-items"><?php echo $news_arr['field_breaking_publish_time'][LANGUAGE_NONE][0]['value']; ?></div>
+            <div class="field-items"><?php 
+            echo date("H:i", strtotime($news_arr['field_breaking_publish_time'][LANGUAGE_NONE][0]['value']) + 19800 );
+            ?></div>
             <?php } ?>
             <?php if($news_arr['field_breaking_redirection_url'][LANGUAGE_NONE][0]['value'] != '') { ?>
             <div class ="field-label">Redirection url : </div>

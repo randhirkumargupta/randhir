@@ -1,0 +1,6 @@
+name = ITG Print Team Integration
+description = "Contains functionality print team integration."
+package = "ITG"
+core = 7.x
+
+files[] = itg_print_team.module

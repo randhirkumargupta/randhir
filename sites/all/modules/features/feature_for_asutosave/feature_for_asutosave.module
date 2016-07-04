@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Feature for Asutosave feature.
- */
-
-include_once 'feature_for_asutosave.features.inc';

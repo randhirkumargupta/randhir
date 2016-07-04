@@ -236,6 +236,48 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_common_related_content'.
+  $field_instances['node-story-field_common_related_content'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 68,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_common_related_content',
+    'label' => 'Related Content',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 58,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_archive'.
   $field_instances['node-story-field_story_archive'] = array(
     'bundle' => 'story',
@@ -3124,6 +3166,7 @@ function features_for_story_field_default_field_instances() {
   t('Posted by facebook');
   t('Quotes');
   t('Redirection URL');
+  t('Related Content');
   t('Resize extra large ');
   t('Schedule date & time');
   t('Section');

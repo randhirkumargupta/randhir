@@ -33,6 +33,7 @@ function generate_custom_pattern_feed($data) {
         $pattern = get_client_feed_pattern($client, $content_type, $feed_type);
         /* Create Directory if does not exists */
         $feed_dir = "public://$feed_type/$client/$content_type";
+        $feed_dir = str_replace(" ","-",$feed_dir);// code by shravan
         file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
         $today = date('Y-M-d-h-m-s');
         /* Iterate for nodes */
@@ -40,14 +41,18 @@ function generate_custom_pattern_feed($data) {
             foreach ($nids as $nid) {
                 $xml .= get_custom_feeds_files($nid, $pattern['field_syndication_xml_formate_xml']);
                 $filename = "$client-$today.xml";
+                $filename = str_replace(" ","-",$filename);// code by shravan
                 watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
+            $file_server_path = getcwd().'/'.str_replace('public:/', variable_get('file_public_path', 'sites/default/files'),$file->uri);
             //$uri = 'public://';
             $path = file_create_url($feed_dir);
             $file_path['file_path'] = $path . '/' . $filename;
             $file_path['file_name'] = $filename;
+            $file_path['real_path'] = $file_server_path;
+            
             return $file_path;
         }
         else {
@@ -56,13 +61,19 @@ function generate_custom_pattern_feed($data) {
                 $xml .= get_custom_feeds_files($nid, $default_pattern);
                 //Client Name_Date/Day_Time
                 $filename = "$client-$today.xml";
+                $filename = str_replace(" ","-",$filename);// code by shravan
                 watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
+            
+            $file_server_path = getcwd().'/'.str_replace('public:/', variable_get('file_public_path', 'sites/default/files'),$file->uri);
+            
             $path = file_create_url($feed_dir);
+            
             $file_path['file_path'] = $path . '/' . $filename;
             $file_path['file_name'] = $filename;
+            $file_path['real_path'] = $file_server_path;
             
             //$file_path['file_directory'] = $path;
             return $file_path;
