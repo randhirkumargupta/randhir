@@ -98,7 +98,7 @@ function itg_tv_schedule_date_form($form, &$form_state) {
   $form['date'] = array(
     '#type' => 'textfield',
     '#size' => 60,
-    '#default_value' => t('June 30, 2016 (IST)'),
+    '#default_value' => t('July 05, 2016 (IST)'),
     '#maxlength' => 128,
     '#attributes' => array('readonly' => 'readonly'),
   );
@@ -143,80 +143,96 @@ function itg_tv_schedule_time_form($form, &$form_state) {
  */
 function itg_tv_schedule_uploadmongo($file_id) {
 
-  if (!isset($file_id)) {
-    // TODO: check on this later for exception handling.
-    return FALSE;
-  }
-
-  // connection with database
-  $db = mongodb();
-  if ($db) {
-    $people = $db->tv_schedule;
-    $people->drop();
-    // create collection
-    $db->createCollection("tv_schedule");
-    // Select Collection
-    $people = $db->tv_schedule;
-  }
-  else {
-    return FALSE;
-  }
-
-  $i = 1;
-  $upload_date = date("Y/m/d");
-  $itg_query = db_select('file_managed', 'f');
-  $itg_result = $itg_query->condition('fid', $file_id, '=')
-    ->fields('f', array('uri'))->execute()->fetchField();
-  $file_url = file_create_url($itg_result);
-  $file = fopen($file_url, "r");
-  while (($data = fgetcsv($file)) !== FALSE) {
-    if ($i > 1) {
-      // monday corresponding value insertion
-      if ($data[1]) {
-        $query = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date);
-        $people->insert($query);
-      }
-
-      //tuesday corresponding value insertion
-      if ($data[2]) {
-        $query = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date);
-        $people->insert($query);
-      }
-
-      //wednesday corresponding value insertion
-      if ($data[3]) {
-        $query = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date);
-        $people->insert($query);
-      }
-
-      //thursday corresponding value insertion
-      if ($data[4]) {
-        $query = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date);
-        $people->insert($query);
-      }
-
-      //friday corresponding value insertion
-      if ($data[5]) {
-        $query = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date);
-        $people->insert($query);
-      }
-
-      //saturday corresponding value insertion
-      if ($data[6]) {
-        $query = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date);
-        $people->insert($query);
-      }
-
-      //sunday corresponding value insertion
-      if ($data[7]) {
-        $query = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date);
-        $people->insert($query);
-      }
+    if (!isset($file_id)) {
+        // TODO: check on this later for exception handling.
+        return FALSE;
     }
-    $i++;
-  }
+    $i = 1;
+    $flag = 0;
+    $upload_date = date("Y/m/d");
+    $itg_query = db_select('file_managed', 'f');
+    $itg_result = $itg_query->condition('fid', $file_id, '=')
+            ->fields('f', array('uri'))->execute()->fetchField();
+    $file_url = file_create_url($itg_result);
+    $file = fopen($file_url, "r");
+    while (($data = fgetcsv($file)) !== FALSE) {
+        if ($i == 1) {
+            if ($data[1] === 'MON' && $data[2] === 'TUE' && $data[3] === 'WED' && $data[4] === 'THU' && $data[5] === 'FRI' && $data[6] === 'SAT' && $data[7] === 'SUN') {
+                $flag = 1;
+                break;
+            }
+        }
+    }
+    if ($flag == 1) {
+       // execute when appropriate file uploaded 
+       // connection with database
+        $db = mongodb();
+        if ($db) {
+            $people = $db->tv_schedule;
+            $people->drop();
+            // create collection
+            $db->createCollection("tv_schedule");
+            // Select Collection
+            $people = $db->tv_schedule;
+        }
+        else {
+            return FALSE;
+        }
 
-  fclose($file);
+        while (($data = fgetcsv($file)) !== FALSE) {
+
+            if ($i > 1) {
+                // monday corresponding value insertion
+                if ($data[1]) {
+                    $query = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date);
+                    $people->insert($query);
+                }
+
+                //tuesday corresponding value insertion
+                if ($data[2]) {
+                    $query = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date);
+                    $people->insert($query);
+                }
+
+                //wednesday corresponding value insertion
+                if ($data[3]) {
+                    $query = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date);
+                    $people->insert($query);
+                }
+
+                //thursday corresponding value insertion
+                if ($data[4]) {
+                    $query = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date);
+                    $people->insert($query);
+                }
+
+                //friday corresponding value insertion
+                if ($data[5]) {
+                    $query = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date);
+                    $people->insert($query);
+                }
+
+                //saturday corresponding value insertion
+                if ($data[6]) {
+                    $query = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date);
+                    $people->insert($query);
+                }
+
+                //sunday corresponding value insertion
+                if ($data[7]) {
+                    $query = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date);
+                    $people->insert($query);
+                }
+            }
+            $i++;
+        }
+        fclose($file);
+        return TRUE;
+    }
+    elseif ($flag == 0) {
+       //execute when inappropriate file upload
+        return FALSE;
+    }
 }
 
 /**
@@ -230,9 +246,13 @@ function itg_tv_schedule_form_submit($form, &$form_state) {
   $file->status = FILE_STATUS_PERMANENT;
   file_save($file);
   file_usage_add($file, 'user', 'user', $user->uid);
+  $value = itg_tv_schedule_uploadmongo($file_id);
+  if ($value == TRUE){
   drupal_set_message(t('The file has been submitted successfully, filename: @filename.', array('@filename' => $file->filename)));
-  itg_tv_schedule_uploadmongo($file_id);
-}
+  }else{
+        drupal_set_message(t('Inappropriate csv file'));
+  }
+  }
 
 /**
  * Custom validation for searching popup.
