@@ -516,6 +516,9 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $is_scheduled = 'No')
   if ($reply->httpstatus < 200 || $reply->httpstatus > 299) {
     drupal_set_message(t('Http status:' . $reply->httpstatus), 'error');
   }
+  else {
+    drupal_set_message(t('Please upload valid video file. ') . $file->name , 'error');
+  }
 
   // Now use the media_id in a Tweet
   $reply = $cb->statuses_update([
@@ -652,6 +655,7 @@ function itg_social_media_publish_on_twitter() {
   $itg_query = db_select('itg_social_media_logs', 'itg');
   $itg_query->fields('itg', array('nid', 'scheduled_time', 'social_media'))
       ->condition('status', 0)
+      ->condition('social_media', 'Twitter%', 'LIKE')
       ->condition('scheduled_time', REQUEST_TIME, '<=');
   $itg_result = $itg_query->execute()->fetchAll();
   foreach ($itg_result as $value) {        
