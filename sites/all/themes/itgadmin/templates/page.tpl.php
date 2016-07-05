@@ -136,7 +136,7 @@ if (!in_array('administrator', $user->roles)) {
                 $node = node_load(arg(1));
             }
 
-            if ((arg == 'node') && ((arg(1) == 'add' && arg(2) == 'story')  || $node->type == 'story')) {
+            if ((arg == 'node') && (arg(1) == 'add' && arg(2) == 'story')) {
                 ?>
                 <div class="action-with-title">
                     <?php print render($title_prefix); ?>
