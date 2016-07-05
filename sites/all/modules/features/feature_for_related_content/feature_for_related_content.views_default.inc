@@ -139,7 +139,7 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="insert" value="Insert" /> &nbsp; <input type="text" name="insvalue" id="insvalue" class="form-text valid">
+  $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="insert" value="Insert" /> &nbsp; <input type="text" name="insvalue" id="insvalue" size="50" class="form-text valid">
 </div>
 <div id="clickme">save search</div>
 <div class="search-criteria" style="display:none"><input class="form-text valid" type="text" name="search-title" id="search-title"><input class="insert-save add-more form-submit" id="filter-save" type="button" name="save" value="save" /></div><div class="success" style="display:none">search saved successfully</div>';
