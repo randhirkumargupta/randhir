@@ -127,7 +127,7 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
  $getimageoptions=explode(')',$getimageoptions[1]);
  $getimagehightwidth=explode('x',$getimageoptions[0]);
   $itg_image_repository_function = 'window.open(\'' . url('file/itg_image_repository/' . $element['#entity_type']  . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id,'field_name'=>$element['#field_name'],'height'=>$getimagehightwidth[1],'width'=>$getimagehightwidth[0]))) . '\', \'\', \'width=900,height=700,resizable=1\'); return false;';
-  $element['filefield_imce']['display_path'] = array(
+  $element['filefield_itg_image_repository']['display_path'] = array(
     '#type' => 'markup',
     '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="#" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
   );
