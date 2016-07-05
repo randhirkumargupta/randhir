@@ -1,0 +1,208 @@
+<?php
+
+/**
+ * @file
+ * Implements the necessary hooks for the file browser to work properly.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function itg_image_repository_menu() {
+  $items = array();
+  $access = array('administer itg_image_repository');
+  $items['itg_image_repository'] = array(
+    'title' => 'File browser',
+    'page callback' => 'itg_image_repository',
+    'access callback' => 'itg_image_repository_access',
+    'access arguments' => array(FALSE, 1),
+    'file' => 'inc/itg_image_repository.page.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['user/%user/itg_image_repository'] = array(
+    'title' => 'File browser',
+    'page callback' => 'itg_image_repository_user_page',
+    'page arguments' => array(1),
+    'access callback' => 'itg_image_repository_user_page_access',
+    'access arguments' => array(1),
+    'file' => 'inc/itg_image_repository.page.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 10,
+  );
+  $items['admin/config/media/itg_image_repository'] = array(
+    'title' => 'itg_image_repository',
+    'description' => 'Control how your image/file browser works.',
+    'page callback' => 'itg_image_repository_admin',
+    'access arguments' => $access,
+    'file' => 'inc/itg_image_repository.admin.inc',
+  );
+  $items['admin/config/media/itg_image_repository/profile'] = array(
+    'title' => 'Add new profile',
+    'page callback' => 'itg_image_repository_profile_operations',
+    'access arguments' => $access,
+    'type' => MENU_VISIBLE_IN_BREADCRUMB,
+    'file' => 'inc/itg_image_repository.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function itg_image_repository_permission() {
+  //print 'asdas';die;
+  return array(
+    'administer itg_image_repository' => array(
+      'title' => t('Administer itg_image_repository'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function itg_image_repository_theme() {
+  $path = drupal_get_path('module', 'itg_image_repository') . '/tpl';
+  $theme['itg_image_repository_admin'] = array('function' => 'itg_image_repository_admin_theme', 'render element' => 'form');
+  $theme['itg_image_repository_directories'] = array('function' => 'itg_image_repository_directories_theme', 'render element' => 'form');
+  $theme['itg_image_repository_thumbnails'] = array('function' => 'itg_image_repository_thumbnails_theme', 'render element' => 'form');
+  $theme['itg_image_repository_root_text'] = array(
+    'variables' => array('itg_image_repository_ref' => NULL),
+  );
+  $theme['itg_image_repository_user_page'] = array(
+    'variables' => array('account' => NULL),
+  );
+  $theme['itg_image_repository_file_list'] = array(
+    'template' => 'itg_image_repository-file-list',
+    'variables' => array('itg_image_repository_ref' => NULL),
+    'path' => $path,
+  );
+  $theme['itg_image_repository_content'] = array(
+    'template' => 'itg_image_repository-content',
+    'variables' => array('tree' => NULL, 'forms' => NULL, 'itg_image_repository_ref' => NULL),
+    'path' => $path,
+  );
+  $theme['itg_image_repository_page'] = array(
+    'template' => 'itg_image_repository-page',
+    'variables' => array('content' => NULL),
+    'path' => $path,
+  );
+  return $theme;
+}
+
+/**
+ * Implements hook_file_download().
+ * Support private downloads if not disabled.
+ */
+function itg_image_repository_file_download($uri) {
+  $serve = file_uri_scheme($uri) == 'private' && !variable_get('itg_image_repository_settings_disable_private', 1) &&  file_exists($uri) && strpos(basename($uri), '.');
+  if ($serve) {
+    return array(
+      'Content-type' => file_get_mimetype($uri),
+      'Content-Length' => filesize($uri),
+    );
+  }
+}
+
+/**
+ * Implements hook_element_info().
+ */
+function itg_image_repository_element_info() {
+  return array('textarea' => array('#process' => array('itg_image_repository_textarea')));
+}
+
+/**
+ * Inline image/link insertion to textareas.
+ */
+function itg_image_repository_textarea($element) {
+  static $regexp;
+  if (!isset($regexp)) {
+    $regexp = FALSE;
+    if (itg_image_repository_access() && $regexp = str_replace(' ', '', variable_get('itg_image_repository_settings_textarea', ''))) {
+      $regexp = '@^(' . str_replace(',', '|', implode('.*', array_map('preg_quote', explode('*', $regexp)))) . ')$@';
+    }
+  }
+  if ($regexp && preg_match($regexp, $element['#id'])) {
+    drupal_add_js(drupal_get_path('module', 'itg_image_repository') . '/js/itg_image_repository_set_inline.js');
+    $element['#description'] = (isset($element['#description']) ? $element['#description'] : '') . '<div class="itg_image_repository-inline-wrapper" style="display:none">' . t('Insert !image or !link.', array('!image' => l(t('image'), 'itg_image_repository', array('attributes' => array('name' => $element['#id'] . '-itg_image_repository-image', 'class' => array('itg_image_repository-inline-image')))), '!link' => l(t('link'), 'itg_image_repository', array('attributes' => array('name' => $element['#id'] . '-itg_image_repository-link', 'class' => array('itg_image_repository-inline-link')))))) . '</div>';
+  }
+  return $element;
+}
+
+/**
+ * Returns the configuration profile assigned to a user for a specific file scheme.
+ */
+function itg_image_repository_user_profile($user, $scheme = NULL) {
+  static $ups = array();
+
+  // Set scheme
+  if (empty($scheme)) {
+    $scheme = variable_get('file_default_scheme', 'public');
+  }
+
+  // Return from cache.
+  if (isset($ups[$scheme][$user->uid])) {
+    return $ups[$scheme][$user->uid];
+  }
+  $ups[$scheme][$user->uid] = FALSE;
+
+  // Check scheme
+  $swrappers = file_get_stream_wrappers();
+  //print_r($swrappers);die;
+  if (!isset($swrappers[$scheme])) {
+    return FALSE;
+  }
+
+  $profiles = variable_get('imce_profiles', array());
+   //print_r($profiles);die;
+  $scinfo = array('scheme' => $scheme);
+
+  // Handle user#1 separately
+  if ($user->uid == 1) {
+    return $ups[$scheme][$user->uid] = isset($profiles[1]) ? $profiles[1] + $scinfo : FALSE;
+  }
+
+  // Handle regular users.
+  $roles_profiles = variable_get('imce_roles_profiles', array());
+
+  $sckey = $scheme . '_pid';
+  foreach ($roles_profiles as $rid => $conf) {
+    if (isset($user->roles[$rid]) && isset($conf[$sckey]) && isset($profiles[$conf[$sckey]])) {
+      return $ups[$scheme][$user->uid] = $profiles[$conf[$sckey]] + $scinfo;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Checks if the user is assigned an itg_image_repository profile.
+ * A more detailed assignment check is performed before itg_image_repository loads.
+ */
+function itg_image_repository_access($user = FALSE, $scheme = NULL) {
+
+  if ($user === FALSE) {
+    global $user;
+  }
+ //p(itg_image_repository_user_profile($user, $scheme));die;
+  return itg_image_repository_user_profile($user, $scheme) ? TRUE : FALSE;
+}
+
+/**
+ * Checks access to user/{$account->uid}/itg_image_repository for the $user.
+ */
+function itg_image_repository_user_page_access($account, $user = FALSE) {
+  if ($user === FALSE) {
+    global $user;
+  }
+  return ($user->uid == 1 || $account->uid == $user->uid) && ($profile = itg_image_repository_user_profile($account)) && $profile['usertab'];
+}
+
+/**
+ * Check if the directory name is regular.
+ */
+function itg_image_repository_reg_dir($dirname) {
+  return $dirname == '.' || is_int($dirname) || (is_string($dirname) && $dirname != '' && !preg_match('@(^\s)|(^/)|(^\./)|(\s$)|(/$)|(/\.$)|(\.\.)|(//)|(\\\\)|(/\./)@', $dirname));
+}
