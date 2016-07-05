@@ -58,7 +58,7 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
   return $themes;
 }
 
-/* * *************************Form Related hooks******************************** */
+/***************************Form Related hooks******************************** */
 
 /**
  * Implement hook_form_alter
@@ -77,10 +77,21 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     //Add cancel button
     $destination = 'manage-print-team';
     $form['title']['#description'] = '<p>' . t('Please enter idea headline .') . '</p>';
+    
+    //Display Rule to user
+    if ($form['#node']->nid && $form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {
+      $form['brief_idea_limit'] = array(
+          '#type' => 'item',
+          '#markup' => '<div class="ticket-avaible-text">Idea Brief Limit: <strong>' . $form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value'] . '</strong> words</div><div>Last Day of submission: <strong>' . date('d/m/Y', strtotime($form['#node']->field_survey_end_date[LANGUAGE_NONE][0]['value'])) . '</strong></div>',
+          '#weight' => -1,
+      );
+    }
+    
+    
     $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-      '#weight' => 21,
-      '#value' => t('Cancel'),
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
     );
 
     //Unset meta tags
@@ -88,7 +99,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     unset($form['actions']['preview']);
     unset($form['field_pti_idea_status']['und']['#options']['_none']);
 
-    //If role is anchor, editor and co-ordinator, display field to set rule and change status
+    //If role is anchor, editor and co-ordinator, display fields to set rule and change status
     $idea_review_flag = FALSE;
     foreach ($user->roles as $roles) {
       if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
@@ -96,10 +107,21 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
-    if (!$idea_review_flag) {
-      unset($form['field_pti_idea_status']);
-      unset($form['field_pti_words_limit']);
-      unset($form['field_survey_end_date']);
+    //Check for approval status
+    if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
+
+      $form['field_story_category']['#access'] = FALSE;
+      $form['field_quiz_answer_image']['#access'] = FALSE;
+      $form['field_quiz_answer_video']['#access'] = FALSE;
+      $form['field_pti_idea_status']['#access'] = FALSE;
+      $form['field_pti_words_limit']['#access'] = FALSE;
+      $form['field_survey_end_date']['#access'] = FALSE;
+    } else {
+      if (!$idea_review_flag) {
+        $form['field_pti_idea_status']['#access'] = FALSE;
+        $form['field_pti_words_limit']['#access'] = FALSE;
+        $form['field_survey_end_date']['#access'] = FALSE;
+      }
     }
 
     $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
@@ -117,28 +139,47 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
  * Custom submit callback for alter message after operation.
  */
 function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
+  global $user;
+  
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-
-  unset($_GET['destination']); // Unset destination
-
+  
+  // Unset destination
+  unset($_GET['destination']); 
+  
+  //Chck for edit and add node
   if (arg(2) == 'edit') {
-    $op = 'updated.';
+    
+    //Set redirection URL according to user role
+    $idea_review_flag_user = FALSE;
+    foreach ($user->roles as $roles) {
+      if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
+        $idea_review_flag_user = TRUE;
+      }
+    }
+    if($idea_review_flag_user){
+      $form_state['redirect'] = 'manage-print-team';
+    }
+    else {
+      $form_state['redirect'] = 'submit-idea';
+      
+    }
+    $op = 'updated successfully';
   }
   else {
-    $op = 'created.';
+    $op = 'submit successfully';
+    $form_state['redirect'] = 'submit-idea';
   }
 
-  $form_state['redirect'] = 'manage-print-team'; //submit-idea
-  drupal_set_message(t('Your idea has been has been @operation', array('@operation' => $op)));
-}
+  drupal_set_message(t('Your idea <strong>@ideatitle</strong> has been @operation.', array('@ideatitle' => $form_state['node']->title, '@operation' => $op)));
+} 
 
 /**
  * After build function for print team
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function itg_print_team_form_after_build($form, &$form_state) {
   global $user, $base_url;
@@ -182,7 +223,7 @@ function itg_print_team_form_after_build($form, &$form_state) {
 
 /**
  * Implement hook_views_pre_render
- * @param Object $view
+ * @param object $view
  */
 function itg_print_team_views_pre_render(&$view) {
 
@@ -198,9 +239,9 @@ function itg_print_team_views_pre_render(&$view) {
 
 /**
  * Implement hook_form_views_exposed_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
  */
 function itg_print_team_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
@@ -235,8 +276,10 @@ function itg_print_team_node_insert($node) {
 function itg_print_team_node_update($node) {
   switch ($node->type) {
     case 'print_team_integration':
-      module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
-
+      if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs Modification') {
+        $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] = 'Not Decided';
+        field_attach_update('node', $node);
+      }
       break;
 
     default:
@@ -246,14 +289,25 @@ function itg_print_team_node_update($node) {
 
 /**
  * Implementation of hook_node_validate
- * @param Object $node
- * @param Array $form
- * @param Array $form_state
+ * @param object $node
+ * @param array $form
+ * @param array $form_state
  */
 function itg_print_team_node_validate($node, $form, &$form_state) {
 
   if ($node->type == 'print_team_integration') {
-    
+    if($node->field_pti_words_limit[LANGUAGE_NONE][0]['value'] && ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'approved')){
+      if(strlen(strip_tags($node->body[LANGUAGE_NONE][0]['value'])) > $node->field_pti_words_limit[LANGUAGE_NONE][0]['value']){
+        form_set_error('body',t('Limit exceeded! Your idea brief limit is: @idealimit characters.', array('@idealimit' => $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'])));
+      }
+      
+      //Validation for time
+      $current_date = time();
+      $timeline = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'].' + 23 hours');
+      if($current_date > $timeline){
+        form_set_error('field_survey_end_date', t('Sorry you can not submit your idea now. You have exceeded your last date of idea submission.'));
+      }
+    }
   }
 }
 
@@ -290,20 +344,21 @@ function itg_print_team_idea_actions($nid) {
 
   $node = node_load($nid);
   $status = $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'];
-  $accept = l('Accept', 'idea-status/approved/' . $nid);
-  $reject = l('Reject', 'idea-status/rejected/' . $nid);
-  $need_modification = l('Need Modification', 'idea-status/need_modification/' . $nid);
-
+    
+  $accept = l('Approve', 'idea-status/approved/'.$nid);
+  $reject = l('Reject', 'idea-status/rejected/'.$nid);
+  $need_modification = l('Needs Modification', 'idea-status/needs_modification/'.$nid);
+ 
   switch ($status) {
-    case 'Accepted':
+    case 'Approved':
       return '<span style="padding-left:30px">-</span>';
       break;
 
     case 'Rejected':
       return '<span style="padding-left:30px">-</span>';
       break;
-
-    case 'Need modification':
+    
+    case 'Needs Modification':
       return $accept . ' | ' . $reject;
       break;
 
