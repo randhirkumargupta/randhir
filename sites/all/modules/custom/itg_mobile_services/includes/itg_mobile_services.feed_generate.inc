@@ -39,13 +39,13 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header, 
 
       $item = $doc->createElement('item');
       $root->appendChild($item);
-      
+
       // content date
       if (!empty($service_content_date)) {
-        $service_content_date_arr = explode(' ',$service_content_date);
+        $service_content_date_arr = explode(' ', $service_content_date);
         $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
       }
-      
+
       // content text
       if (!empty($service_content_text)) {
         $content = $doc->createElement('description');
@@ -124,13 +124,13 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header, 
 
       $item = $doc->createElement('item');
       $channel->appendChild($item);
-      
+
       // content date
       if (!empty($service_content_date)) {
-        $service_content_date_arr = explode(' ',$service_content_date);
+        $service_content_date_arr = explode(' ', $service_content_date);
         $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
       }
-      
+
       // content text
       if (!empty($service_content_text)) {
         $item->appendChild($doc->createElement('description', $service_content_text));
@@ -191,13 +191,13 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header,
 
       $item = $doc->createElement('item');
       $channel->appendChild($item);
-      
+
       // content date
       if (!empty($service_content_date)) {
-        $service_content_date_arr = explode(' ',$service_content_date);
+        $service_content_date_arr = explode(' ', $service_content_date);
         $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
       }
-      
+
       // content text
       if (!empty($service_content_text)) {
         $item->appendChild($doc->createElement('description', $service_content_text));
@@ -268,7 +268,7 @@ function itg_mobile_services_generate_sms($node, $service_title, $field_header, 
       $channel->appendChild($item);
       // content date
       if (!empty($service_content_date)) {
-        $service_content_date_arr = explode(' ',$service_content_date);
+        $service_content_date_arr = explode(' ', $service_content_date);
         $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
       }
       // content text
@@ -318,9 +318,9 @@ function itg_mobile_services_generate_feed($node, $service_title, $field_header,
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $item = $doc->createElement('item');
       $channel->appendChild($item);
-       // content date
+      // content date
       if (!empty($service_content_date)) {
-        $service_content_date_arr = explode(' ',$service_content_date);
+        $service_content_date_arr = explode(' ', $service_content_date);
         $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
       }
       // content text
@@ -370,9 +370,9 @@ function itg_mobile_services_generate_ussd($node, $service_title, $field_header,
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $item = $doc->createElement('item');
       $channel->appendChild($item);
-       // content date
+      // content date
       if (!empty($service_content_date)) {
-        $service_content_date_arr = explode(' ',$service_content_date);
+        $service_content_date_arr = explode(' ', $service_content_date);
         $item->appendChild($doc->createElement('date', $service_content_date_arr[0]));
       }
       // content text
@@ -418,7 +418,7 @@ function generate_file_name($node, $service_title, $feeds_type, $ext) {
   $full_file_path = $file_path . '/mobile/' . $service_title . '/' . $feeds_type . $file_name;
   $files_path = $file_path . '/mobile/' . $service_title . '/' . $feeds_type;
   if (!file_exists($files_path)) {
-    mkdir($files_path, 0777, true);
+    mkdir($files_path, 0777, TRUE);
   }
   return $full_file_path;
 }
