@@ -93,7 +93,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       $form['actions']['submit']['#submit'][] = 'itg_videogallery_submit_status_message';
-      $form['field_videogallery_video_upload'][LANGUAGE_NONE]['#title'] = '';
+     // $form['field_videogallery_video_upload'][LANGUAGE_NONE]['#title'] = '';
       break;
   }
 }

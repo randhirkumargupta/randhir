@@ -5,6 +5,8 @@
  * The ITG Print Team Integration module.
  *
  */
+// Load print_team_story_xml.inc from the itg_print_team module.
+module_load_include('inc', 'itg_print_team', 'includes/print_team_story_xml');
 
 /**
  * Implementation of hook_permission
@@ -47,14 +49,14 @@ function itg_print_team_menu() {
  */
 function itg_print_team_theme($existing, $type, $theme, $path) {
   $themes = array(
-      'itg_print_team_idea_approval_mail' => array(
-          'variables' => array('node' => NULL),
-          'template' => 'templates/print-team-idea-approval-mail',
-      ),
-      'itg_print_team_idea_status_mail' => array(
-          'variables' => array('node' => NULL),
-          'template' => 'templates/print-team-idea-status-mail',
-      )
+    'itg_print_team_idea_approval_mail' => array(
+      'variables' => array('node' => NULL),
+      'template' => 'templates/print-team-idea-approval-mail',
+    ),
+    'itg_print_team_idea_status_mail' => array(
+      'variables' => array('node' => NULL),
+      'template' => 'templates/print-team-idea-status-mail',
+    )
   );
 
   return $themes;
@@ -70,100 +72,111 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
  */
 function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+  switch ($form_id) {
+    case 'print_team_integration_node_form':
+      //Change page title
+      drupal_set_title(t('Submit Your Idea'));
 
-  if ($form_id == 'print_team_integration_node_form') {
+      //Add cancel button
+      $destination = 'manage-print-team';
+      $form['title']['#description'] = '<p>' . t('Please enter idea headline .') . '</p>';
 
-    //Change page title
-    drupal_set_title(t('Submit Your Idea'));
-
-    //Add cancel button
-    $destination = 'manage-print-team';
-    $form['title']['#description'] = '<p>' . t('Please enter idea headline .') . '</p>';
-
-    //Display Rule to user
-    if ($form['#node']->nid && $form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {
-      $form['brief_idea_limit'] = array(
-        '#type' => 'item',
-        '#markup' => '<div class="ticket-avaible-text">Idea Brief Limit: <strong>' . $form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value'] . '</strong> words</div><div>Last Day of submission: <strong>' . date('d/m/Y', strtotime($form['#node']->field_survey_end_date[LANGUAGE_NONE][0]['value'])) . '</strong></div>',
-        '#weight' => -1,
-      );
-    }
-
-
-    $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-      '#weight' => 21,
-      '#value' => t('Cancel'),
-    );
-
-    //Unset meta tags
-    unset($form['#metatags']);
-    unset($form['actions']['preview']);
-    unset($form['field_pti_idea_status']['und']['#options']['_none']);
-
-    //If role is anchor, editor and co-ordinator, display fields to set rule and change status
-    $idea_review_flag = FALSE;
-    foreach ($user->roles as $roles) {
-      if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
-        $idea_review_flag = TRUE;
+      //Display Rule to user
+      if ($form['#node']->nid && $form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {
+        $form['brief_idea_limit'] = array(
+          '#type' => 'item',
+          '#markup' => '<div class="ticket-avaible-text">Idea Brief Limit: <strong>' . $form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value'] . '</strong> words</div><div>Last Day of submission: <strong>' . date('d/m/Y', strtotime($form['#node']->field_survey_end_date[LANGUAGE_NONE][0]['value'])) . '</strong></div>',
+          '#weight' => -1,
+        );
       }
-    }
 
-    //Check for approval status
-    if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
 
-      $form['field_story_category']['#access'] = FALSE;
-      $form['field_quiz_answer_image']['#access'] = FALSE;
-      $form['field_quiz_answer_video']['#access'] = FALSE;
-      $form['field_pti_idea_status']['#access'] = FALSE;
-      $form['field_pti_words_limit']['#access'] = FALSE;
-      $form['field_survey_end_date']['#access'] = FALSE;
-    }
-    else {
-      if (!$idea_review_flag) {
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+      );
+
+      //Unset meta tags
+      unset($form['#metatags']);
+      unset($form['actions']['preview']);
+      unset($form['field_pti_idea_status']['und']['#options']['_none']);
+
+      //If role is anchor, editor and co-ordinator, display fields to set rule and change status
+      $idea_review_flag = FALSE;
+      foreach ($user->roles as $roles) {
+        if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
+          $idea_review_flag = TRUE;
+        }
+      }
+
+      //Check for approval status
+      if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
+
+        $form['field_story_category']['#access'] = FALSE;
+        $form['field_quiz_answer_image']['#access'] = FALSE;
+        $form['field_quiz_answer_video']['#access'] = FALSE;
         $form['field_pti_idea_status']['#access'] = FALSE;
         $form['field_pti_words_limit']['#access'] = FALSE;
         $form['field_survey_end_date']['#access'] = FALSE;
       }
-    }
+      else {
+        if (!$idea_review_flag) {
+          $form['field_pti_idea_status']['#access'] = FALSE;
+          $form['field_pti_words_limit']['#access'] = FALSE;
+          $form['field_survey_end_date']['#access'] = FALSE;
+        }
+      }
 
-    $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
-    $form['field_quiz_answer_video'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Video';
+      $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
+      $form['field_quiz_answer_video'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Video';
 
-    //Submit Handler
-    $form['actions']['submit']['#submit'][] = 'itg_print_team_submit_handler_for_redirect';
+      //Submit Handler
+      $form['actions']['submit']['#submit'][] = 'itg_print_team_submit_handler_for_redirect';
 
-    //Call function after build
-    $form['#after_build'][] = 'itg_print_team_form_after_build';
-  }
+      //Call function after build
+      $form['#after_build'][] = 'itg_print_team_form_after_build';
 
-  //Add form to associate story with issue and magazine
-  if ($form_id == 'views_form_manage_print_team_page') {
-    $form['pti_issue'] = array(
-      '#type' => 'date_popup',
-      '#title' => t('Issue'),
-      '#date_format' => 'd/m/Y',
-      '#attributes' => array(
-       // 'readonly' => 'readonly'
-      ),
-      '#weight' => 98,
-    );
-    $form['pti_magazine'] = array(
-      '#type' => 'select',
-      '#title' => 'Magazine',
-      '#options' => itg_print_team_get_magazine_title(),
-      '#default_value' => '_none',
-      '#weight' => 99,
-      '#attributes' => array('class' => array('custom-issue')),
-    );
+      break;
+      
+    //Add form to associate story with issue and magazine
+    case 'views_form_manage_print_team_page':
+      $form['pti_issue'] = array(
+        '#type' => 'date_popup',
+        '#title' => t('Issue'),
+        '#date_format' => 'd/m/Y',
+        '#attributes' => array(
+        // 'readonly' => 'readonly'
+        ),
+        '#weight' => 98,
+      );
+      $form['pti_magazine'] = array(
+        '#type' => 'select',
+        '#title' => 'Magazine',
+        '#options' => itg_print_team_get_magazine_title(),
+        '#default_value' => '_none',
+        '#weight' => 99,
+        '#attributes' => array('class' => array('custom-issue')),
+      );
 
-    $form['submit'] = array(
-      '#type' => 'submit',
-      '#value' => t('Submit'),
-      '#weight' => 100,
-    );
-    $form['#validate'][] = 'itg_print_team_association_validate';
-    $form['submit']['#submit'][] = 'itg_print_team_association_submit';
+      $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Submit'),
+        '#weight' => 100,
+      );
+      $form['#validate'][] = 'itg_print_team_association_validate';
+      $form['submit']['#submit'][] = 'itg_print_team_association_submit';
+      break;
+    
+    case 'views_form_strory_menegment_page_1':
+      $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Generate XML.'),
+        '#weight' => 100,
+      );
+      $form['#validate'][] = 'itg_story_xml_validate';
+      $form['submit']['#submit'][] = 'itg_story_xml_submit';
+      break;
   }
 }
 
@@ -307,18 +320,18 @@ function itg_print_team_node_update($node) {
     case 'print_team_integration':
       
        module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
-      
+ 
       //Set status "Not Decided" for "Needs Modification" case
       if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs Modification') {
         $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] = 'Not Decided';
         field_attach_update('node', $node);
       }
-      
+
       //Send status mail to user
-      if(in_array($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'], array('Approved', 'Rejected', 'Needs Modification'))){
+      if (in_array($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'], array('Approved', 'Rejected', 'Needs Modification'))) {
         itg_print_team_send_idea_status_mail($node, 'update');
       }
-      
+
       break;
 
     default:

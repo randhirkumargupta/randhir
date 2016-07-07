@@ -149,7 +149,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
     '#rules' => array(
         array(
-          'rule' => 'length[126]', 
+          'rule' => 'length[10, 126]', 
           'error' => '%field field can not exceed 126 characters.'
         ),        
     ),    
@@ -196,7 +196,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     ),
     '#rules' => array(
         array(
-          'rule' => 'length[126]', 
+          'rule' => 'length[10, 126]', 
           'error' => '%field field can not exceed 126 characters.'
         ),
     ),

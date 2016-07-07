@@ -561,6 +561,7 @@ input[type="text"], select, input[type="password"]{
   .comment{
     @extend .pos-rel;
     @extend .pdb-10;
+    margin-top: 10px;
     ul.links{
       @extend .no-bullet;
       position: absolute;
@@ -588,6 +589,15 @@ input[type="text"], select, input[type="password"]{
       ul.links{
         @extend .hide;
       }
+    }
+    mark {
+        position: absolute;
+        right: 30px;
+        top: 5px;
+        padding: 0 5px;
+    }
+    .comment-reply{
+        text-transform: capitalize;
     }
   }
 }
