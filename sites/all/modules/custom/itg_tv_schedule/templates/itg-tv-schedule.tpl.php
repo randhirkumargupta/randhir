@@ -41,7 +41,7 @@ if($clicked_day == "")
      
     <div class="tv-schedule-form-wrapper">
        <div class="tv-schedule-date-text"><?php print render(drupal_get_form('itg_tv_schedule_date_form')); ?></div>
-        <div class="fleft"><?php print render(drupal_get_form('itg_tv_schedule_time_form')); ?></div>
+        <div class="fleft choose-time"><?php print render(drupal_get_form('itg_tv_schedule_time_form')); ?></div>
     <?php print render(drupal_get_form('itg_tv_schedule_search_form')); ?>
     </div>
     
@@ -94,6 +94,11 @@ if($clicked_day == "")
             </div>
             <div class="popup-body">
                 <table class="views-table">
+                     <tr>
+                         <td><b><?php print 'Schedule Time'; ?></b></td>
+                         <td><b><?php print 'Days'; ?></b></td>
+                         <td><b><?php print 'Program Name'; ?></b></td>
+                       </tr>
                     <tbody>
                         <?php foreach ($search as $val1): ?>  
 
@@ -125,6 +130,7 @@ if($clicked_day == "")
         max-width: 1000px;
         padding: 10px;
     }
+    .choose-time{position: relative; z-index: 999;}
     .tv-schedule{max-width: 820px;}
     .tv-schedule .slick-list{display: inline-block; width: 100%; vertical-align: top;}
     .tv-schedule-time{background-color: #008eb1; color: #fff; font-size: 14px; height: 34px; line-height: 12px; border: none;}
@@ -304,6 +310,7 @@ if($clicked_day == "")
             infinite: false,
             slidesToShow: 7,
             slidesToScroll: 1,
+            draggable: false,
             initialSlide: current_time_slot,
             asNavFor: '.tv-schedule'
         });

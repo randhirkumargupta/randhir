@@ -349,7 +349,7 @@ function itgadmin_preprocess_page(&$vars) {
   }
   
   //Add tpl for event registration view page
-  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit') {
+  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs') {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 }
@@ -363,6 +363,15 @@ function itgadmin_preprocess_field(&$vars) {
       if(module_exists('itg_videogallery')){
         $video_id = itg_videogallery_get_video($file_id);
         $vars['element'][0]['#file']->video_id = $video_id;
+      }
+  }
+  
+  // For Audio field
+   if($vars['element']['#field_name'] == 'field_podcast_upload_audio_file') {
+      $file_id = $vars['element']['#items'][0]['fid'];
+      if(module_exists('itg_podcast')){
+        $audio_id = itg_videogallery_get_video($file_id);
+        $vars['element'][0]['#file']->audio_id = $audio_id;
       }
   }
 }

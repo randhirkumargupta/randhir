@@ -14,7 +14,7 @@ function syndication_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_syndication_client';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['comment_anonymous_syndication_client'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -375,7 +375,7 @@ function syndication_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_syndication_feed_from_pattern';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_syndication_feed_from_pattern'] = $strongarm;
 
   $strongarm = new stdClass();

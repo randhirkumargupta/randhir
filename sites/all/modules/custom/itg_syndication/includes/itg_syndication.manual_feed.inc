@@ -25,6 +25,15 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {    
+   // p($form);
+    $form['client_title'] = array(
+      '#type' => 'select',
+      '#title' => t('Select Client'),
+      '#options' => itg_syndication_get_client('yes'),
+      '#default_value' => '_none',
+      '#validated' => true,
+      '#weight' => 10,             
+    );
     
     $form['changed']['min'] = array(
       '#type' => 'date_popup',
@@ -44,16 +53,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
       '#attributes' => array(
         'readonly' => 'readonly'
       ),
-    );
-    
-    $form['client_title'] = array(
-      '#type' => 'select',
-      '#title' => t('Select Client'),
-      '#options' => itg_syndication_get_client('yes'),
-      '#default_value' => '_none',
-      '#validated' => true,
-      '#weight' => 1,             
-    );
+    );    
        
     $form['issue'] = array(
       '#type' => 'select',
@@ -70,7 +70,11 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     
     $form['type']['#weight'] = 2;
     $form['submit']['#weight'] = 4;
+   
     
+    views_syndication_insert_field($form, 'client_title', 0);
+    views_syndication_insert_field($form, 'filter-type', 3);
+      
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-issue-date-value-wrapper").hide();
               jQuery("#edit-issue").change(function() {                
@@ -198,7 +202,10 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'syndication' => serialize($syndication_node),    
   );
   
-  $file_path = feed_generator_of_contents($data); 
+  $file_path = feed_generator_of_contents($data);
+  $realpath = $file_path['file_path'];
+  //$file_name = 'shsh.xml';
+  //$realpath = 'http://localhost/itgcms/sites/default/files/Idea-JNP.xml';
   
   // insert records into database table itg_syndication_manual_feed_details.
   
@@ -208,18 +215,30 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'delivery_mode' => $delivery_mode,
     'feed_type' => $feed_type,
     'syndication' => serialize($syndication_node),
-    'feed_file_path' => $file_path,
+    'feed_file_path' => $realpath,
     'created' => format_date(time(), 'custom', 'Y-m-d'),
   );
   
-  if (isset($file_path)) {
+  if (isset($realpath)) {
     $query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
   }
   
   // for feed download
   if($form_state['values']['feed_download_value'] == 'yes') {        
-    $link_val = 'Click to Download. <a href="'.$realpath.'" download>Import Feed</a>';
-    drupal_set_message($link_val, 'status');    
+    // $link_val = 'Click to Download. <a href="'.$realpath.'" download>Import Feed</a>';
+    // drupal_set_message($link_val, 'status');
+   
+    // send file to browser as a download dialog
+    // no content can be output prior to these header() calls
+    header('Content-type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="'.$file_name.'"');
+    header('Content-Length: ' . filesize($realpath));
+    header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+    //header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+    echo file_get_contents($file);
+    exit; // terminate script
+    
   } else {
       drupal_set_message('Successfully feed Generated  and Sent to client.', 'status');
   }
@@ -304,4 +323,32 @@ function itg_syndication_views_pre_render(&$view) {
     $header_content = '<span class="count">Count ('.$view->total_rows.') </span>';    
     $view->attachment_before = $header_content;
   }   
+  else if ($view->name == "syndication_feed_pattern_listing") {
+    $header_content = '<span class="count">Count ('.$view->total_rows.') </span>';    
+    $header_content .= l(t('Create Syndication Pattern'), 'node/add/syndication-feed-from-pattern', array('query' => array('destination' => 'syndication-feed-pattern-listing')));
+    $view->attachment_before = $header_content;
+  }   
+}
+
+/**
+ * Insert the given field into a particular position in the form.
+ * 
+ * @param $form
+ *   The form which is going to have the field inserted. Passed by reference.
+ * @param string $file_key
+ *   The key in the form where the field is to be found. e.g. if $form['foo']
+ *   contains the field, then use 'foo' as this parameter.
+ * @param int $insert_index
+ *   Index of where in the form the field should be placed.
+ */
+function views_syndication_insert_field(&$form, $field_key, $insert_index) {
+	// this value determines the position of the new element.
+  $element_to_insert = array();
+  $element_to_insert[$field_key] = array(
+      'value' => $field_key,
+  );
+  $form_info_top = array_slice($form['#info'], 0, $insert_index);
+  $form_info_bottom = array_slice($form['#info'], $insert_index);
+  $new_form_info = $form_info_top + $element_to_insert + $form_info_bottom;
+  $form['#info'] = $new_form_info;
 }

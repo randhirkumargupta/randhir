@@ -37,29 +37,26 @@
 <div id="SocialMedia">
   <h2 class="story-title"><?php print t('Social Media'); ?></h2>
   <?php print drupal_render($form['field_story_social_media_integ']); ?>
+  <!-- Facebook fields -->
   <?php print drupal_render($form['field_story_facebook_narrative']); ?>
   <?php print drupal_render($form['field_story_facebook_image']); ?>
-  <?php print drupal_render($form['field_story_facebook_video']); ?>
-  <?php print drupal_render($form['field_story_tweet']); ?>
-  <?php print drupal_render($form['field_story_tweet_image']); ?>
-  <?php print drupal_render($form['field_story_posted_by_facebook']); ?>
-  <?php print drupal_render($form['field_story_time_facebook']); ?>
-  <?php print drupal_render($form['field_story_posted_by_twitter']); ?>
-  <?php print drupal_render($form['field_story_time_twitter']); ?>
-  <?php print drupal_render($form['field_story_posted_by_instagram']); ?>
-  <?php print drupal_render($form['field_story_time_instagram']); ?>
-  <?php print drupal_render($form['field_story_facebook_video']); ?>
   <?php print drupal_render($form['field_story_facebook_vdescripti']); ?>
-  <?php print drupal_render($form['field_story_twitter_video']); ?>
-  <?php print drupal_render($form['field_story_twitter_video_desc']); ?>
+  <?php print drupal_render($form['field_story_facebook_video']); ?>
+  <!-- Twitter fields -->
+  <?php print drupal_render($form['field_story_tweet']); ?>
+  <?php print drupal_render($form['field_story_tweet_image']); ?>  
+  <?php print drupal_render($form['field_story_twitter_video_desc']); ?>  
+  <?php print drupal_render($form['field_story_twitter_video']); ?>  
 </div>
 <div id="Configuration">
     <h2 class="story-title"><?php print t('Configuration'); ?></h2>
     <?php print drupal_render($form['field_story_configurations']); ?>
+     <?php print drupal_render($form['field_story_featured_name']); ?>
     <?php print drupal_render($form['field_story_syndication']); ?>
     <?php print drupal_render($form['field_story_comment_question']); ?>
     <?php print drupal_render($form['field_story_client_title']); ?>
     <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
+    <?php print drupal_render($form['field_common_related_content']); ?>
 
 </div>
 <div id="DateTime">

@@ -12,7 +12,7 @@
  * Implements hook_init().
  */
 function itg_story_init() {
-  //get_syndication_content_details();
+
 }
 
 
@@ -445,6 +445,13 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $form['field_story_comment_question']['#states'] = array(
       'visible' => array(
         ':input[name="field_story_configurations[und][comment]"]' => array('checked' => TRUE),
+      )
+    );
+    
+    // code for featured field hide and show
+    $form['field_story_featured_name']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_story_configurations[und][set_as_featured]"]' => array('checked' => TRUE),
       )
     );
 
