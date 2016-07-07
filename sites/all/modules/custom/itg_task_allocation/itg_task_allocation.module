@@ -6,6 +6,22 @@
  * Provides Task Allocation functionality and customizations.
  */
 
+
+/**
+ * Implements hook_menu().
+ */
+function itg_task_allocation_menu() {
+  
+  $items['content-task-list/%/autocomplete'] = array(
+    'page callback' => 'itg_task_allocation_autocomplete',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+    'file' => 'includes/itg_task_allocation.inc',
+  );
+ 
+  return $items;
+}
+
 /**
  * Implements views header link 
  * @param type $view Description
@@ -88,8 +104,9 @@ function itg_task_allocation_form_after_build($form, &$form_state) {
  * @param type $form_id  
  */
 function itg_task_allocation_form_views_exposed_form_alter(&$form, &$form_state, $form_id) { 
-   if ($form['#id'] == 'views-exposed-form-task-page' || $form['#id'] == 'views-exposed-form-task-page-1') {     
+   if ($form['#id'] == 'views-exposed-form-task-page' || $form['#id'] == 'views-exposed-form-task-page-1') {  
      $form['title']['#autocomplete_path'] = 'content-title-list/task_idea_allocation_tracking/autocomplete';
+     $form['field_task_team_member_target_id']['#autocomplete_path'] = 'content-task-list/task_idea_allocation_tracking/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Task Name'));     
      $form['#info']['filter-created']['label'] = '';     
      $form['created']['min'] = array(
@@ -185,26 +202,40 @@ function itg_task_allocation_node_access($node, $op, $account) {
  * @param array reference $view
  * @param array reference $query
  */
-function itg_task_allocation_views_query_alter(&$view, &$query) {  
-  if (isset($view->name) && $view->name === 'task') {
-    if (isset($_GET['created']['max']['date'])) {
-      $max_conditions_array = array();
-      $_GET['created']['min']['date'] = str_replace('/','-',$_GET['created']['min']['date']);
-      $_GET['created']['max']['date'] = str_replace('/','-',$_GET['created']['max']['date']);
-      $_GET['created']['min']['date'] = date("Y-m-d",strtotime($_GET['created']['min']['date']));
-      
-      $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
-      $max_date_condition = " AND " . $max_date;
-      if (isset($view->query->where[1]['conditions'][1]['field'])) {
-        foreach ($query->where[1]['conditions'] as $idx => $condition) {
-          if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
-            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
-            $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
-          }
+function itg_task_allocation_views_query_alter(&$view, &$query) {
+
+    if (isset($view->name) && $view->name === 'task') {
+        if (isset($_GET['field_task_team_member_target_id']) && $_GET['field_task_team_member_target_id'] !== '') {
+            $search_id = check_plain($query->where[1]['conditions'][2]['value']);
+            $queries = db_select('users', 'u');
+            $queries->fields('u', array('uid'));
+            $queries->condition('u.mail', $search_id, '=');
+            $queries->range(0, 20);
+            $result = $queries->execute();
+            while ($record = $result->fetchAssoc()) {
+                $name = $record['uid'];
+            }
+            $query->where[1]['conditions'][2]['value'] = $name;
         }
-      }
+
+        if (isset($_GET['created']['max']['date'])) {
+            $max_conditions_array = array();
+            $_GET['created']['min']['date'] = str_replace('/', '-', $_GET['created']['min']['date']);
+            $_GET['created']['max']['date'] = str_replace('/', '-', $_GET['created']['max']['date']);
+            $_GET['created']['min']['date'] = date("Y-m-d", strtotime($_GET['created']['min']['date']));
+
+            $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
+            $max_date_condition = " AND " . $max_date;
+            if (isset($view->query->where[1]['conditions'][1]['field'])) {
+                foreach ($query->where[1]['conditions'] as $idx => $condition) {
+                    if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
+                        $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
+                        $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
+                    }
+                }
+            }
+        }
     }
-  }
 }
 
 /**
@@ -364,3 +395,4 @@ function get_task_count_of_user() {
   
   return $result->rowCount();  
 }
+

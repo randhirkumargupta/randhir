@@ -548,6 +548,48 @@ function task_allocation_views_default_views() {
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: User: E-mail */
+  $handler->display->display_options['filters']['mail']['id'] = 'mail';
+  $handler->display->display_options['filters']['mail']['table'] = 'users';
+  $handler->display->display_options['filters']['mail']['field'] = 'mail';
+  $handler->display->display_options['filters']['mail']['relationship'] = 'uid';
+  $handler->display->display_options['filters']['mail']['operator'] = 'contains';
+  $handler->display->display_options['filters']['mail']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['mail']['expose']['operator_id'] = 'mail_op';
+  $handler->display->display_options['filters']['mail']['expose']['label'] = 'Reported by';
+  $handler->display->display_options['filters']['mail']['expose']['operator'] = 'mail_op';
+  $handler->display->display_options['filters']['mail']['expose']['identifier'] = 'mail';
+  $handler->display->display_options['filters']['mail']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['mail']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['mail']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['mail']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['mail']['expose']['autocomplete_field'] = 'mail';
+  $handler->display->display_options['filters']['mail']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['mail']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['mail']['expose']['autocomplete_dependent'] = 0;
   $handler->display->display_options['path'] = 'assigned-task-list';
 
   /* Display: Page */
@@ -677,6 +719,7 @@ function task_allocation_views_default_views() {
   $handler->display->display_options['relationships']['field_task_team_member_target_id']['id'] = 'field_task_team_member_target_id';
   $handler->display->display_options['relationships']['field_task_team_member_target_id']['table'] = 'field_data_field_task_team_member';
   $handler->display->display_options['relationships']['field_task_team_member_target_id']['field'] = 'field_task_team_member_target_id';
+  $handler->display->display_options['relationships']['field_task_team_member_target_id']['required'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
@@ -919,6 +962,39 @@ print $user->mail;
     12 => 0,
     15 => 0,
     18 => 0,
+  );
+  /* Filter criterion: Content: Select team member (field_task_team_member) */
+  $handler->display->display_options['filters']['field_task_team_member_target_id']['id'] = 'field_task_team_member_target_id';
+  $handler->display->display_options['filters']['field_task_team_member_target_id']['table'] = 'field_data_field_task_team_member';
+  $handler->display->display_options['filters']['field_task_team_member_target_id']['field'] = 'field_task_team_member_target_id';
+  $handler->display->display_options['filters']['field_task_team_member_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_task_team_member_target_id']['expose']['operator_id'] = 'field_task_team_member_target_id_op';
+  $handler->display->display_options['filters']['field_task_team_member_target_id']['expose']['label'] = 'Reported to';
+  $handler->display->display_options['filters']['field_task_team_member_target_id']['expose']['operator'] = 'field_task_team_member_target_id_op';
+  $handler->display->display_options['filters']['field_task_team_member_target_id']['expose']['identifier'] = 'field_task_team_member_target_id';
+  $handler->display->display_options['filters']['field_task_team_member_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
   );
   $handler->display->display_options['path'] = 'created-task-list';
   $export['task'] = $view;
