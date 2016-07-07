@@ -4374,6 +4374,9 @@ div.node{
 }
 #head-val{
     @extend .fleft;
+    #insvalue{
+        width: 200px;
+    }
 }
 .search-criteria{
     position: absolute;
