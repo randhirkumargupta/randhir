@@ -489,7 +489,6 @@ span.error{
 #main{
   padding-bottom: 30px;
   @extend .pos-rel;
-  @extend .of-hide;
   @extend .full;
 }
 body.sidebar-second{
@@ -1899,7 +1898,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-event-highlights-values"], 
 [id*="field-event-media-values"], 
 [id*="field-quiz-add-questions-values"],
-/*[id*="field-newsl-add-news-values"],*/ 
+[id*="field-podcast-audio-upload-values"], 
 [id*="field-task-task-idea-values"], 
 [id*="field-astro-numerology-values-values"], 
 [id*="field-astro-zodiac-values"], 
@@ -4784,4 +4783,25 @@ div.node{
       }
     }
   }
+}
+#ui-datepicker-div{
+    z-index: 9999 !important;
+}
+.node-podcast-form{
+    #audioupload{
+        .form-type-plupload{
+            margin-top: 80px;
+        }
+    }
+    .form-field-name-field-podcast-audio-upload{
+        margin-top: 30px;
+    }
+    .field-name-field-podcast-upload-audio-file{
+        @extend .Browse-upload;
+        @extend .choose-audio-video-file;
+        .file-widget input.form-file{
+            width: 255px;
+            margin-right: 5px;
+        }
+    }
 }
