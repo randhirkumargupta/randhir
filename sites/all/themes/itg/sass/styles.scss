@@ -589,6 +589,15 @@ input[type="text"], select, input[type="password"]{
         @extend .hide;
       }
     }
+    mark {
+        position: absolute;
+        right: 30px;
+        top: 5px;
+        padding: 0 5px;
+    }
+    .comment-reply{
+        text-transform: capitalize;
+    }
   }
 }
 [class*="node-type-"]{
