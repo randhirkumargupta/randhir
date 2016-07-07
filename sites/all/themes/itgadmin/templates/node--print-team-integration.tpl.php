@@ -51,7 +51,7 @@
       </div>
       <div class="field">
         <div class="field-label">Section:</div>
-        <div class="field-items"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
+        <div class="field-items"><?php echo $node->field_story_category[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
       </div>
       <?php if($node->field_quiz_answer_image[LANGUAGE_NONE][0]['uri']) {?>
        <div class="field">
