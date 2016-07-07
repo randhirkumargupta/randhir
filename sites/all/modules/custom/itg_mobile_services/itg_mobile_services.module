@@ -239,7 +239,7 @@ function itg_mobile_vas_service_content_submit($form, &$form_state) {
     $op = 'updated';
   }
   $node_title = isset($form_state['node']->title) ? $form_state['node']->title : $node->title;
-  drupal_set_message(check_plain(t('Vas Service Content <b> ' . $node_title . ' </b> has been ' . $op . '.')));
+  drupal_set_message(t('Vas Service Content <b> ' . $node_title . ' </b> has been ' . $op . '.'));
 
   $form_state['redirect'] = 'service-content-listing';
   return $form;

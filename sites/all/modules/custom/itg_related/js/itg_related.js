@@ -12,6 +12,7 @@
              var typeval = parent.top.jQuery('[name="ntype"]').val();
            
             $(".itg-row-selector-selection-form #edit-submit").hide();
+            $(".itg-row-selector-table-select-all").hide();
             $("#insvalue").attr('readonly','readonly');
             $('#filter-save', context).click(function (event) {
                 
@@ -110,5 +111,13 @@ jQuery(document).ready(function(){
             parent.jQuery.colorbox.close();
 //            item.length = 0;
         });
+        
+        
+        jQuery('.insert-url').click(function () {
+        if (jQuery('#insvalue').val() == '') {
+            alert('Input value can not be left blank, please select value by click on checkbox');
+            return false;
+        }
+    });
 
 });
