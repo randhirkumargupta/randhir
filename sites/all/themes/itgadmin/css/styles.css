@@ -4468,6 +4468,10 @@ div.node #comments h2 {
   overflow: auto;
 }
 
+#head-val #insvalue {
+  width: 200px;
+}
+
 .search-criteria {
   position: absolute;
   right: 129px;
