@@ -78,11 +78,11 @@ function itg_autosave_views_api() {
  */
 function itg_autosave_form_alter(&$form, &$form_state, $form_id) {  
   // Add js into form
-  $form['#attached']['js'] = array(
-    drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',       
-  );
+  //$form['#attached']['js'] = array(
+  //  drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',       
+  //);
   
   // Fetch form ids saved into databse for auto save feature.
-  $itg_autosave_form = new ItgAutoSave();
-  $itg_autosave_form->itg_save_set_form_ids();  
+  //$itg_autosave_form = new ItgAutoSave();
+  //$itg_autosave_form->itg_save_set_form_ids();  
 }
