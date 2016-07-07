@@ -33,6 +33,7 @@ function generate_custom_pattern_feed($data) {
         $pattern = get_client_feed_pattern($client, $content_type, $feed_type);
         /* Create Directory if does not exists */
         $feed_dir = "public://$feed_type/$client/$content_type";
+        $feed_dir = str_replace(" ", "-", $feed_dir); // code by shravan
         file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
         $today = date('Y-M-d-h-m-s');
         /* Iterate for nodes */
@@ -40,30 +41,35 @@ function generate_custom_pattern_feed($data) {
             foreach ($nids as $nid) {
                 $xml .= get_custom_feeds_files($nid, $pattern['field_syndication_xml_formate_xml']);
                 $filename = "$client-$today.xml";
+                $filename = str_replace(" ", "-", $filename); // code by shravan
                 watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
+            $file_server_path = getcwd().'/'.str_replace('public:/', variable_get('file_public_path', 'sites/default/files'),$file->uri);
             //$uri = 'public://';
             $path = file_create_url($feed_dir);
             $file_path['file_path'] = $path . '/' . $filename;
             $file_path['file_name'] = $filename;
+            $file_path['real_path'] = $file_server_path;
             return $file_path;
-        }
-        else {
+        } else {
             $default_pattern = get_default_feed_pattern($feed_type, $content_type);
             foreach ($nids as $nid) {
                 $xml .= get_custom_feeds_files($nid, $default_pattern);
                 //Client Name_Date/Day_Time
                 $filename = "$client-$today.xml";
+                $filename = str_replace(" ", "-", $filename); // code by shravan
                 watchdog("WATCHDOG_INFO", "XML $feed_dir/$filename (Y-M-d-h-m-s) is generated ");
             }
             $xml .= "</root>";
             $file = file_save_data($xml, "$feed_dir/" . $filename);
+            $file_server_path = getcwd().'/'.str_replace('public:/', variable_get('file_public_path', 'sites/default/files'),$file->uri);
             $path = file_create_url($feed_dir);
             $file_path['file_path'] = $path . '/' . $filename;
             $file_path['file_name'] = $filename;
-            
+            $file_path['real_path'] = $file_server_path;
+
             //$file_path['file_directory'] = $path;
             return $file_path;
         }
@@ -133,16 +139,13 @@ function get_custom_feeds_files($nid = NULL, $text = NULL) {
                     }
                 }
                 return $new_text;
-            } 
-            else {
+            } else {
                 drupal_set_message(t("not a valid field"));
             }
-        } 
-        else {
+        } else {
             drupal_set_message(t("Not a valid formet"));
         }
-    } 
-    else {
+    } else {
         drupal_set_message(t("Either node ids not found or pattrens not found"));
     }
 }
@@ -343,8 +346,7 @@ function get_lebel_of_field($entity_type = 'node', $bundle_name, $field_name) {
         $info = field_info_instance($entity_type, $field_name, $bundle_name);
         $label = $info['label'];
         return $label;
-    } 
-    else {
+    } else {
         return;
     }
 }
@@ -429,16 +431,14 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
  */
 function itg_syndication_form_syndication_feed_from_pattern_node_form_validate($form, &$form_state) {
     $arg = arg();
+    $invalid_vars = array();
+    $node = (object) $form_state['values'];
+    $content_type = $node->field_syndication_feed_content['und'][0]['value'];
+    $feed_type = $node->field_syndication_feed_type['und'][0]['value'];
+    $client_title = $node->field_syndication_feed_clients['und'][0]['value'];
+    $xml_pattern = $node->field_syndication_xml_formate['und'][0]['xml'];
     /* Check only if new node is bening craeted */
     if (isset($arg[0]) && isset($arg[1]) && $arg[0] == 'node' && $arg[1] == 'add') {
-        drupal_add_js('jQuery(document).ready(function(){
-            jQuery(".vertical-tabs").css("display","none");
-        });', 'inline');
-        $node = (object) $form_state['values'];
-        $content_type = $node->field_syndication_feed_content['und'][0]['value'];
-        $feed_type = $node->field_syndication_feed_type['und'][0]['value'];
-        $client_title = $node->field_syndication_feed_clients['und'][0]['value'];
-
         $query = db_select('field_data_field_syndication_feed_clients', 'client');
         $query->leftJoin('field_data_field_syndication_feed_content', 'content_type', 'content_type.entity_id=client.entity_id');
         $query->leftJoin('field_data_field_syndication_feed_type', 'feed_type', 'feed_type.entity_id=client.entity_id');
@@ -453,8 +453,34 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_validate($
         }
         watchdog('debug', "Total " . count($result) . " results founds for combination");
     }
+    #check for all valid variables
+    is_all_vars_valid($xml_pattern, $content_type);
 }
-    
+
+/**
+ * Function checks xml pattern .w.r.t content type for variables validation
+ * @param type $xml_pattern
+ * @param type $content_type
+ */
+function is_all_vars_valid($xml_pattern, $content_type) {
+    drupal_add_js('jQuery(document).ready(function(){
+            jQuery(".vertical-tabs").css("display","none");
+        });', 'inline');
+    // extract fields name from text string
+    $var_array = get_vars_from_feed_pattern($xml_pattern);
+    foreach ($var_array[1] as $field_name) {
+        if (!isValidField($field_name, $content_type)) {
+            $invalid_vars[] = $field_name;
+            watchdog('syndication', "invalid variables found");
+        }
+    }
+    if (!empty($invalid_vars)) {
+        $invalid_vars_str = implode("<b>, </b>", $invalid_vars);
+        form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Invalid variables are $invalid_vars_str");
+    }
+    watchdog('syndication', "Variable validation pass");
+}
+
 /**
  * Function to used redirect the form after node save
  * @param array $form
@@ -496,8 +522,7 @@ function get_default_feed_pattern_callback($form, &$form_state) {
         $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Pleaes Select Content Type</span>');
         drupal_get_messages();
         return array('#type' => 'ajax', '#commands' => $commands);
-    } 
-    else {
+    } else {
         $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
         $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
         return array(

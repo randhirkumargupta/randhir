@@ -44,7 +44,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   if ($user->uid != '1') {
     // hide source relation and type field from other users 
-    if ($form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form') {
+    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form') {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
     }
@@ -100,7 +100,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   //Auto Generate image according photogallery
 
-   if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form') {
+   if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'podcast_node_form') {
      // $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<a class="img-crt button" href="javascript:;">Generate Image</a>');
      $form['field_story_extra_large_image']['#suffix'] = '<a class="img-crt button" href="javascript:;">Generate Image</a><span class="generate-image-error error"></span>';
      if(isset($form_state['build_info']['args'][0]->field_story_extra_large_image)){
@@ -379,15 +379,19 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
  * Implementation of hook_node_presave().
  * @param Array $node
  */
-function itg_common_node_presave($node) {
-  if ($node->type == 'mega_review_critic') {
-    if ($node->op == 'Save as Draft') {
-      $node->status = 0;
-    }
-    else {
-      $node->status = 1;
-    }
-  }
+function itg_common_node_presave($node) {    
+  switch ($node->type) {        
+    case 'astro':
+    case 'recipe':      
+    case 'poll':    
+    case 'mega_review_critic':    
+      if ($node->op == 'Save as Draft') {
+        $node->status = 0;            
+      }
+      else {
+        $node->status = 1;              
+      }
+  }  
 }
 
 /**

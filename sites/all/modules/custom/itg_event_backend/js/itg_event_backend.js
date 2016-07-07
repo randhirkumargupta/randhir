@@ -49,6 +49,8 @@
             
             $('#edit-field-event-media-und-0-remove-button').hide();
             $('#edit-field-event-highlights-und-0-remove-button').hide();
+            $('#edit-field-program-schedule-und-0-remove-button').hide();
+            $('#edit-field-associate-sponsors-und-0-remove-button').hide();
          
         }
     }

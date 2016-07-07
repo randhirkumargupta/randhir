@@ -1,4 +1,4 @@
-name = Feature for Asutosave
+name = Feature for Autosave
 description = Autosave node content into given time interval.
 core = 7.x
 package = Features

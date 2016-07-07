@@ -476,17 +476,25 @@
       $(this).prev('label').hide();
     });
 
-    /* jQuery code for photogallery */
+    /* jQuery code for photo Gallery and Video Gallery */
+    
+//    $('.form-field-name-field-videogallery-video-upload .file-widget').each(function () {
+//      if ($(this).children().hasClass('form-file')) {
+//        $(this).find('.image-preview').append('<div class="image-fullname">' + fullname + '</div>');
+//      }
+//      $(this).find('.image-widget-data .file, .image-widget-data .file-size').remove();
+//    });
+    
     $('.form-field-name-field-credit-name .form-item .form-text').attr('placeholder', 'Credit Name');
-    $('.form-field-name-field-gallery-image').find('.form-text').each(function () {
+    $('.form-field-name-field-gallery-image, .field-name-field-story-expert-name').find('.form-text').each(function () {
       var plaholderText = $(this).prev().text();
       $(this).attr('placeholder', plaholderText);
     });
-    $('.form-field-name-field-gallery-image').find('.form-textarea').each(function () {
+    $('.form-field-name-field-gallery-image, .field-name-field-story-expert-description, .field-name-field-podcast-description').find('.form-textarea').each(function () {
       var plaholderText = $(this).parent().prev().text();
       $(this).attr('placeholder', plaholderText);
     });
-    $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function () {
+    $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file, .form-field-name-field-podcast-audio-upload .field-widget-image-image .form-managed-file, .form-field-name-field-videogallery-video-upload .field-widget-image-image .form-managed-file').each(function () {
       if ($(this).children().hasClass('image-preview')) {
         $(this).addClass('has-preview');
 
@@ -495,6 +503,7 @@
         $(this).removeClass('has-preview');
       }
     });
+    
     $('.form-field-name-field-gallery-image .has-preview').each(function (i) {
       var altName = "field_gallery_image[und][" + i + "][field_images][und][0][alt]";
       var titleName = "field_gallery_image[und][" + i + "][field_images][und][0][title]";
@@ -503,6 +512,33 @@
         $(this).parent().next().find('.form-text').val(altVal);
       });
     });
+    
+    $('.form-field-name-field-videogallery-video-upload .has-preview').each(function (i) {
+      var altName = "field_videogallery_video_upload[und][" + i + "][field_video_thumbnail][und][0][alt]";
+      var titleName = "field_videogallery_video_upload[und][" + i + "][field_video_thumbnail][und][0][title]";
+      $("input[name='" + altName + "']").keyup(function () {
+        var altVal = $(this).val();
+        $(this).parent().next().find('.form-text').val(altVal);
+      });
+    });
+    
+    $('.form-field-name-field-podcast-audio-upload .has-preview').each(function (i) {
+      var altName = "field_podcast_audio_upload[und][" + i + "][field_podcast_audio_image_upload][und][0][alt]";
+      var titleName = "field_podcast_audio_upload[und][" + i + "][field_podcast_audio_image_upload][und][0][title]";
+      $("input[name='" + altName + "']").keyup(function () {
+        var altVal = $(this).val();
+        $(this).parent().next().find('.form-text').val(altVal);
+      });
+    });
+    $('.form-field-name-field-podcast-audio-upload .file-widget, .form-field-name-field-videogallery-video-upload .file-widget').each(function (i) {
+        var hasFile = $(this).find('span').hasClass('file');
+        if(hasFile){
+            $(this).addClass('has-file');
+        } else{
+            $(this).removeClass('has-file');
+        }
+    });
+    
     $('.form-field-name-field-gallery-image .messages--error').each(function () {
       if (!$(this).children().hasClass('hide-message')) {
         $(this).append('<a class="hide-message" href="javascript:;">Close</a>');
@@ -694,14 +730,65 @@
 
 
 jQuery(document).ready(function(){
+    
+    // jQuery code for related content on edit page
+    var item = [];
+//     var itemString = jQuery('#edit-field-story-kicker-text-und-0-value').val();
+    var itemString = jQuery('#edit-field-common-related-content-und-0-value').val();
+    if(itemString){
+        item = itemString.split(",");
+    }
+    var checkedlist = '';
+    for ( var i = 0, l = item.length; i < l; i++ ) {
+        checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><i class="fa fa-times fright" aria-hidden="true"></i></li>';
+    }
+    // end of code
+    
+    
+    jQuery('.checked-list').html(checkedlist);
+    if(checkedlist){
+        jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+    }
+    
     jQuery('.sidebar-trigger').click(function () {
       jQuery(this).parent().toggleClass('active');
     });
-    jQuery('.saved-search-link').click(function () {
-      jQuery(this).parent().next('.my-saved-search').slideToggle();
+    jQuery('.saved-search-link').click(function (e) {
+        e.stopPropagation();
+        jQuery(this).parent().parent().find('.my-saved-search').slideToggle();
+    });
+    jQuery('body').click(function () {
+        jQuery(this).find('.my-saved-search').slideUp();
+    });
+    jQuery('body').click(function () {
+        jQuery(this).find('.my-saved-search').slideUp();
     });
         
     jQuery( ".checked-list" ).sortable();
     jQuery( ".checked-list" ).disableSelection();
+    
+    // jQuery code to remove checked list item
+    jQuery('.checked-list').on('click', '.fa-times', function () {
+        jQuery(this).parent().remove();
+    });
+    // end of code
+    
+    // jQuery code to save check list after re-order
+    jQuery('body').on('click', '.save-checklist', function () {
+        var item = [];
+        var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
+        if(!listLength){
+            jQuery(this).hide();
+        }
+        jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i){
+            item.push(jQuery(this).find('.item-value').text());
+        });
+       jQuery('#edit-field-common-related-content-und-0-value').val(item);
+      // jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
+        //console.log(itemvalue);
+        
+    });
+    // end of code
+    
     
 });

@@ -221,7 +221,7 @@ function itg_mobile_services_ftp_feeds($data, $file) {
     exit;
   }
   //turn passive mode on
-  ftp_pasv($conn_id, true);
+  ftp_pasv($conn_id, TRUE);
   $upload = ftp_put($conn_id, $remote_file, $file, FTP_BINARY);
   if (!$upload) {
     echo "There was a problem while uploading $file\n";
@@ -474,5 +474,5 @@ function itg_mobile_services_cron() {
       }
     }
   }
-  return true;
+  return TRUE;
 }

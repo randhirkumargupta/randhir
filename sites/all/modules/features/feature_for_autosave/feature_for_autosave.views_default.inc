@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * feature_for_asutosave.views_default.inc
+ * feature_for_autosave.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function feature_for_asutosave_views_default_views() {
+function feature_for_autosave_views_default_views() {
   $export = array();
 
   $view = new view();

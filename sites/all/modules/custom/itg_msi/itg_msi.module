@@ -271,11 +271,16 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
    
    //Add aotocomplete on issue title
    if ($form['#id'] == 'views-exposed-form-manage-issues-page'){
+    drupal_add_js('jQuery(document).ready(function() {                  
+        jQuery("#edit-field-issue-title-value-value-datepicker-popup-0").prop("readonly", true);
+    });', array('type' => 'inline', 'scope' => 'footer'));
+     
       if($form_state['view']->name == 'manage_issues'){
        $type = 'issue';
      }
      $form['title']['#autocomplete_path'] = 'content/'.$type.'/autocomplete';
-     $form['field_issue_title_value']['value']['#attributes'] = array('placeholder' => t('Title')); 
+     $form['field_issue_title_value']['value']['#attributes'] = array('placeholder' => t('Title'));
+
    }
    if ($form['#id'] == 'views-exposed-form-issue-listing-page-1'){
      $form['title']['#attributes'] = array('placeholder' => t('Title')); 

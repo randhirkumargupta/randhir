@@ -20,5 +20,12 @@ function itg_octopus_api_menu(){
     //'access arguments' => array('access rundown content'),
     'file' => 'includes/itg_octopus_api.inc',
   );
+   $items['rundown/listing'] = array(
+    'title' => 'Rundown Listing',
+    'page callback' => 'itg_octopus_api_rundown_listing',
+    'access callback' => TRUE,
+    //'access arguments' => array('access rundown content'),
+    'file' => 'includes/itg_octopus_api.inc',
+  );
    return $items;
 }
