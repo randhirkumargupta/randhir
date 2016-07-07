@@ -3312,6 +3312,7 @@ div.node{
   .comment{
     @extend .pos-rel;
     padding: 0 30px;
+    margin-top: 10px;
     ul.links{
       @extend .no-bullet;
       position: absolute;
@@ -3328,7 +3329,7 @@ div.node{
     .submitted{
       font-size: 12px;
       color: #8d8d8d;
-      padding: 10px 0 5px;
+      padding: 0 0 5px;
       .username{
         color: #337ab7;
       }
@@ -4714,7 +4715,9 @@ div.node{
                 left: 0;
                 top: 1px;
                 z-index: 1;
-                  
+              }
+              &.has-file:before{
+                  display: none;
               }
             .file{
               font-size: 12px;
@@ -4743,8 +4746,8 @@ div.node{
               width: 12px;
               height: 12px;
               text-indent: -9999px;
-              margin: 12px 0 4px 10px;
-              left: 178px !important;
+              margin: 12px 0 4px 5px;
+              left: 175px !important;
             }
             .form-file{
                 height: 32px;
@@ -4771,6 +4774,221 @@ div.node{
         }
         &:before{
           content: 'Video Gallery';
+          background-color: #f6f6f6;
+          padding: 7px;
+          font-size: 12px;
+          display: block;
+        }
+        .field-name-field-audio{
+          .filefield-source{
+            @extend .pos-rel;
+            .form-type-textfield{
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+[id*="field-podcast-audio-upload-values"]{
+  float: left;
+  @extend .full;
+  thead{
+    @extend .fleft;
+    padding-right: 20px;
+    padding-left: 30px;
+    width: 250px;
+    th{
+      font-weight: 400;
+      padding-left: 30px;
+    }
+  }
+  tbody{
+    @extend .fleft;
+    width: 720px;
+    margin: 0 -15px;
+    .field-multiple-drag{
+      display: none;
+    }
+    tr{
+      @extend .fleft;
+      width: 33.33%;
+      padding: 0 15px 15px;
+      td:nth-child(2){
+        @extend .pos-rel;
+        @extend .fleft;
+        min-height: 260px;
+        padding: 0;
+        @extend .full;
+        border: 1px solid #d9d9d9;
+        .messages--error{
+          background: #fff none repeat scroll 0 0;
+          border: 1px solid #d9d9d9;
+          border-radius: 5px;
+          font-size: 12px;
+          margin: 0 7px;
+          min-height: 124px;
+          padding: 10px;
+          position: absolute;
+          top: 42px;
+          z-index: 99;
+          .hide-message{
+            background: url('../images/cross_small.png') 5px center no-repeat #fff;
+            bottom: 2px;
+            height: 20px;
+            position: absolute;
+            right: 2px;
+            text-indent: -9999px;
+            width: 20px;
+          }
+        }
+        input[type="text"], select, textarea{
+          height: 28px;
+          line-height: 18px;
+          font-size: 12px;
+        }
+        .form-type-textfield, .form-type-checkboxes, .form-type-textarea, .form-type-managed-file{
+          margin: 10px 0;
+          padding: 0 7px;
+          > label{
+            display: none;
+            & + div{
+              padding: 0;
+            }
+          } 
+        } 
+        .form-type-managed-file{
+          .has-preview{
+            height: 124px;
+            @extend .pos-rel;
+            .image-widget-data{
+              position: absolute;
+              bottom: 0;
+              .form-type-textfield:nth-child(3){
+                display: none;
+              }
+              .form-submit[value="Remove"]{
+                left: auto;
+                background: url('../images/cross_small.png') 3px center no-repeat #fff;
+                width: 16px;
+                height: 16px;
+                border-radius: 2px;
+                right: 3px;
+                top: -73px;
+                text-indent: -9999px;
+              }
+            }
+            .image-preview{
+              padding: 0;
+              @extend .full;
+              max-width: none;
+              img{
+                max-height: 124px;
+              }
+              .image-fullname{
+                @extend .desc-popup;
+              }
+              &:hover{
+                .image-fullname{
+                  display: block;
+                  left: 108%;
+                  width: auto;
+                  overflow: visible;
+                }
+              }
+            }
+          }
+          .image-widget-data{
+            float: none;
+            .filefield-source{
+              width: 100%;
+              height: 124px;
+              .filefield-sources-imce-browse{
+                border-radius: 0;
+                &:after{
+                  content: '\f03e';
+                  font-family: 'FontAwesome';
+                  font-size: 50px;
+                  line-height: 120px;
+                  color: #e5e5e5;
+                }
+              }
+            }
+          }
+          .form-managed-file + div.description {
+            left: 220px;
+            min-width: 230px;
+          }
+          .file-widget{
+              height: 34px;
+              @extend .pos-rel;
+              &:before{
+                content: 'Browse';
+                @extend .add-more;
+                position: absolute;
+                left: 0;
+                top: 1px;
+                z-index: 1;
+              }
+              &.has-file:before{
+                  display: none;
+              }
+            .file{
+              font-size: 12px;
+              @extend .dib;
+              @extend .vtop;
+              margin-top: 8px;
+              a{
+                color: #2f2f2f;
+                @extend .dib;
+                @extend .of-hide;
+                text-overflow: ellipsis;
+                @extend .vtop;
+                white-space: nowrap;
+                width: 82px;
+              }
+            }
+            .file-size{
+              @extend .dib;
+              font-size: 12px;
+              @extend .vtop;
+              margin-top: 8px;
+            }
+            > input[value="Remove"]{
+              border: none;
+              background: url('../images/cross_small.png') center center no-repeat !important;
+              width: 12px;
+              height: 12px;
+              text-indent: -9999px;
+              margin: 12px 0 4px 5px;
+              left: 175px !important;
+            }
+            .form-file{
+                height: 32px;
+                margin: 0 43px 0 0;
+                position: relative;
+                width: 75px;
+                z-index: 99;
+                opacity: 0;
+                cursor: pointer;
+            }
+          }
+        }
+        > input[value="Remove"], > .ajax-new-content > input[value="Remove"]{
+          position: absolute;
+          border: none !important;
+          background: url('../images/cross_small.png') center center no-repeat;
+          width: 12px;
+          height: 12px;
+          text-indent: -9999px;
+          top: 9px;
+          right: 7px;
+          padding: 0;
+          margin: 0;
+        }
+        &:before{
+          content: 'Audio Gallery';
           background-color: #f6f6f6;
           padding: 7px;
           font-size: 12px;
