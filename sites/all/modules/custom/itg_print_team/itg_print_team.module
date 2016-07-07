@@ -437,7 +437,9 @@ function itg_print_team_association_submit($form, &$form_state) {
   $magazine = check_plain($form_state['values']['pti_magazine']);
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     foreach ($views_bulk_operations as $source_id) {
-      itg_print_team_association_save($source_id, $issue, $magazine);
+      if (!empty($source_id)) {
+        itg_print_team_association_save($source_id, $issue, $magazine);
+      }
     }
   }
 }
