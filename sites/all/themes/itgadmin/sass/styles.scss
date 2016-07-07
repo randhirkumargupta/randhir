@@ -1483,6 +1483,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-ugc-content-menu,
 #block-menu-menu-task-allocation-menu,
 #block-menu-menu-ugc-comment-menu,
+#block-menu-menu-astro-content-admin-menu,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -3339,11 +3340,14 @@ div.node{
       }
     }
     mark {
-    position: absolute;
-    right: 30px;
-    top: 5px;
-    padding: 0 5px;
-}
+        position: absolute;
+        right: 30px;
+        top: 5px;
+        padding: 0 5px;
+    }
+    .comment-reply{
+        text-transform: capitalize;
+    }
   }
 }
 [id*="field-survey-add-questions-values"]{
