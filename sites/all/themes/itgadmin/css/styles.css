@@ -3633,6 +3633,7 @@ div.node #comments h2 {
 }
 #comments .comment {
   padding: 0 30px;
+  margin-top: 10px;
 }
 #comments .comment ul.links {
   position: absolute;
@@ -3649,7 +3650,7 @@ div.node #comments h2 {
 #comments .comment .submitted {
   font-size: 12px;
   color: #8d8d8d;
-  padding: 10px 0 5px;
+  padding: 0 0 5px;
 }
 #comments .comment .submitted .username {
   color: #337ab7;

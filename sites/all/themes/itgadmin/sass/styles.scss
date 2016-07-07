@@ -3312,6 +3312,7 @@ div.node{
   .comment{
     @extend .pos-rel;
     padding: 0 30px;
+    margin-top: 10px;
     ul.links{
       @extend .no-bullet;
       position: absolute;
@@ -3328,7 +3329,7 @@ div.node{
     .submitted{
       font-size: 12px;
       color: #8d8d8d;
-      padding: 10px 0 5px;
+      padding: 0 0 5px;
       .username{
         color: #337ab7;
       }
