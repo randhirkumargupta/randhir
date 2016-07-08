@@ -24,6 +24,7 @@
             $('input[name="field_survey_end_date[und][0][value][date]"]').attr('readonly', true);
             $('#views-form-manage-print-team-page div .container-inline').hide();
             $('.form-item-pti-issue-date label').hide();
+            
         }
     };
 
