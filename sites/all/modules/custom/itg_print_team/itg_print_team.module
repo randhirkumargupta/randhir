@@ -46,6 +46,8 @@ function itg_print_team_menu() {
 
 /**
  * Implements hook_theme().
+ * 
+ * {@inheritdoc}
  */
 function itg_print_team_theme($existing, $type, $theme, $path) {
   $themes = array(
