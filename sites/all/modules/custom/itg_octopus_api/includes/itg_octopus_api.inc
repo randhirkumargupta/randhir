@@ -7,7 +7,7 @@ function itg_octopus_api_rundown() {
   $file_path = drupal_realpath('public://');
   global $base_url, $user;
   header('Content-Type: text/html; charset=UTF-8');
-  $direc = getDirContents($file_path . '/octopus/rundown/');
+  $direc = get_dir_content($file_path . '/octopus/rundown/');
   foreach ($direc as $xm_file) {
     $xml_file_path = $xm_file;
     $xml_filename = basename($xml_file_path);
