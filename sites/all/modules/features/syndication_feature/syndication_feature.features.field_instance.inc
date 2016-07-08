@@ -851,7 +851,7 @@ function syndication_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_syndication_xml_formate',
-    'label' => 'Xml formate',
+    'label' => 'Xml format',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -982,7 +982,7 @@ function syndication_feature_field_default_field_instances() {
   t('Via FTP');
   t('Via Mail');
   t('Via Web URL');
-  t('Xml formate');
+  t('Xml format');
 
   return $field_instances;
 }

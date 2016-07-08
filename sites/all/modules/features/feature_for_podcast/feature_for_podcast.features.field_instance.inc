@@ -487,7 +487,7 @@ function feature_for_podcast_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_kicker_text',
-    'label' => 'Story kicker',
+    'label' => 'Kicker Message',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -873,13 +873,13 @@ function feature_for_podcast_field_default_field_instances() {
   t('Description');
   t('Extra large image');
   t('Extra small image');
+  t('Kicker Message');
   t('Large image');
   t('Medium image');
   t('Short headline');
   t('Small image');
   t('Source id');
   t('Source type');
-  t('Story kicker');
   t('Tags');
   t('Upload Audio');
 
