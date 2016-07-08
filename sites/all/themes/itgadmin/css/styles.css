@@ -4461,6 +4461,10 @@ div.node #comments h2 {
 .view-related-content-new .view-filters .views-exposed-form .views-exposed-widget {
   max-width: 154px;
   width: auto;
+  vertical-align: top;
+}
+.view-related-content-new .view-filters .views-exposed-form .views-exposed-widget.views-submit-button, .view-related-content-new .view-filters .views-exposed-form .views-exposed-widget.views-reset-button {
+  margin-top: 18px;
 }
 .view-related-content-new .scroll-wrap {
   max-height: 438px;
@@ -4472,6 +4476,11 @@ div.node #comments h2 {
   width: 200px;
 }
 
+.empty-checklist {
+  display: block;
+  text-align: center;
+}
+
 .search-criteria {
   position: absolute;
   right: 129px;
@@ -4481,7 +4490,7 @@ div.node #comments h2 {
   z-index: 9999;
 }
 .search-criteria .form-text {
-  width: 300px;
+  width: 280px;
   margin-right: 10px;
 }
 .search-criteria + .success {
