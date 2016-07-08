@@ -9,9 +9,9 @@
  * Send mail to user, when idea status is updated by admin
  * @param object $node
  */
-function itg_print_team_send_idea_status_mail($node, $source){
+function itg_print_team_send_idea_status_mail($node, $source) {
   
-  if($source == 'insert'){
+  if ($source == 'insert') {
     $mail_content = itg_print_team_approval_mail_content($node);
     $user_emails = itg_print_team_get_approval_user_emails();
     $user_email_ids = implode(",", $user_emails);
@@ -25,11 +25,11 @@ function itg_print_team_send_idea_status_mail($node, $source){
   //Array of email subject and body 
   $params = array(
     'body' => $mail_content,
-    'subject' => 'India Today | '.$node->title .' status!',
+    'subject' => 'India Today | ' . $node->title . ' status!',
   );
 
   $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-  if($mail['result']){
+  if ($mail['result']) {
     drupal_set_message(t('Mail has been sent successfully!'));
   }
 }
@@ -63,7 +63,7 @@ function itg_print_team_status_mail($key, &$message, $params) {
  * @param object $node
  * @return type
  */
-function itg_print_team_status_mail_content($node){
+function itg_print_team_status_mail_content($node) {
   return theme('itg_print_team_idea_status_mail', array('node' => $node));
 }
 
@@ -72,7 +72,7 @@ function itg_print_team_status_mail_content($node){
  * @param object $node
  * @return type
  */
-function itg_print_team_approval_mail_content($node){
+function itg_print_team_approval_mail_content($node) {
   return theme('itg_print_team_idea_approval_mail', array('node' => $node));
 }
 
@@ -82,7 +82,7 @@ function itg_print_team_approval_mail_content($node){
  * @return array
  *    an array of users uid, email and name
  */
-function itg_print_team_get_approval_user_emails(){
+function itg_print_team_get_approval_user_emails() {
   $user_list = array();
   $roles = array('Site Admin', 'Co-ordinator', 'Editor', 'Section Editor/Anchor');
  
