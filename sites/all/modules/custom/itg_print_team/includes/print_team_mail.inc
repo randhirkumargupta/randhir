@@ -92,7 +92,7 @@ function itg_print_team_get_approval_user_emails(){
           ->fields('u', array('name'))
           ->condition('r.name', $roles, 'IN');
 
-  $result = $query->execute();
+  $result = $query->execute()->fetchObject();
 
   if ($result) {
     foreach ($result as $row) {
