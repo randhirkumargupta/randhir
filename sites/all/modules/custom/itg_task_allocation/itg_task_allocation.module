@@ -396,6 +396,9 @@ function get_task_count_of_user() {
   return $result->rowCount();  
 }
 
+/**
+ * Custom method for expired task.
+ */
 function expiredmail() {
     $current_time = date('Y-m-d H:i:s');
     $query = db_select('field_data_field_task_finish_date_and_time', 'f');
@@ -414,12 +417,14 @@ function expiredmail() {
     expiredmail_mail_content($high_level_user);
 }
 
+/**
+ * Get Mail content
+ * @return 
+ */
 function expiredmail_mail_content($to) {
-    
-        $task_subject = 'A task has been expired that was created by you';
-        $subject = 'Task Expired';
-    
 
+    $task_subject = 'A task has been expired that was created by you';
+    $subject = 'Task Expired';
     $node_url = $base_url . '/node/' . $node->nid;
     $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
@@ -427,15 +432,13 @@ function expiredmail_mail_content($to) {
                 <body style="margin:0; padding:0;">';
     $content .= 'Dear Team,';
     $content .= '<br /><br />' . $task_subject;
-    $content .= '</body>';    
-    $content .= '</html>';    
-
-   
+    $content .= '</body>';
+    $content .= '</html>';
     $params = array(
       'body' => $content,
       'subject' => $subject,
     );
-    
+
     $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
         return TRUE;
