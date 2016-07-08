@@ -4360,6 +4360,10 @@ div.node{
         .views-exposed-form .views-exposed-widget{
             max-width: 154px;
             width: auto;
+            vertical-align: top;
+            &.views-submit-button, &.views-reset-button{
+                margin-top: 18px;
+            }
         }
     }
     .scroll-wrap{
@@ -4378,6 +4382,10 @@ div.node{
         width: 200px;
     }
 }
+.empty-checklist {
+    display: block;
+    text-align: center;
+}
 .search-criteria{
     position: absolute;
     right: 129px;
@@ -4386,7 +4394,7 @@ div.node{
     width: 50%;
     z-index: 9999;
     .form-text{
-        width: 300px;
+        width: 280px;
         margin-right: 10px;
     }
     + .success{

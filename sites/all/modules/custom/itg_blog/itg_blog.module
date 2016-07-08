@@ -24,8 +24,15 @@ function itg_blog_node_presave($node) {
  */
 function itg_blog_views_pre_render(&$view) {
   //Add "Post new Blog" button on listing page of Blog
+  
   if ($view->name == "manage_blogs") {
-    $header_content_blog =  l('Post new Blog', 'node/add/blog', array('query' => array('destination' => 'manage-blogs')));
+    $header_content_blog = '<span class="count">Count ('.$view->total_rows.') </span>';
+    $header_content_blog .=  l('Post new Blog', 'node/add/blog', array('query' => array('destination' => 'manage-blogs')));
+    $view->attachment_before = $header_content_blog;
+  }
+  if ($view->name == "blogs_management") {
+    $header_content_blog = '<span class="count">Count ('.$view->total_rows.') </span>';
+    //$header_content_blog .=  l('Post new Blog', 'node/add/blog', array('query' => array('destination' => 'manage-blogs')));
     $view->attachment_before = $header_content_blog;
   }
 }
