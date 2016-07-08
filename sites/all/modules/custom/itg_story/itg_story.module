@@ -12,7 +12,8 @@
  * Implements hook_init().
  */
 function itg_story_init() {
-
+  //get_template_name();
+//echo drupal_get_path('theme', FRONT_THEME_NAME); exit;
 }
 
 
