@@ -1,3 +1,13 @@
+/*
+ * @file imce.js
+ */
+
+/*
+ * @file imce.js
+ * Contains all IMCE
+ */
+
+
 (function($) {
 //Global container.
 window.imce = {tree: {}, findex: [], fids: {}, selected: {}, selcount: 0, ops: {}, cache: {}, urlId: {},
@@ -753,12 +763,12 @@ newEl: function(name) {
 },
 
 //scroll syncronization for section headers
-syncScroll: function(scrlEl, fixEl, bottom) {
-  var $fixEl = $(fixEl);
+syncScroll: function(scrlEl, fixel, bottom) {
+  var $fixel = $(fixel);
   var prop = bottom ? 'bottom' : 'top';
   var factor = bottom ? -1 : 1;
   var syncScrl = function(el) {
-    $fixEl.css(prop, factor * el.scrollTop);
+    $fixel.css(prop, factor * el.scrollTop);
   }
   $(scrlEl).scroll(function() {
     var el = this;

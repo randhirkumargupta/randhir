@@ -344,7 +344,7 @@ function itg_image_repository_profile_submit($form, &$form_state) {
   //save profile.
   $pid = itg_image_repository_update_profiles($pid, $profile);
 
-  drupal_set_message($message);
+  @drupal_set_message($message);
   $form_state['redirect'] = 'admin/config/media/itg_image_repository/profile/edit/' . $pid;
 }
 

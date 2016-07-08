@@ -1,3 +1,12 @@
+
+/*
+ * @file itg_image_repository_set_app.js
+ */
+
+/*
+ * @file itg_image_repository_set_app.js
+ * Contains all itg image repository
+ */
 /*
  * itg_image_repository Integration by URL
  * Ex-1: http://example.com/itg_image_repository?app=XEditor|url@urlFieldId|width@widthFieldId|height@heightFieldId
