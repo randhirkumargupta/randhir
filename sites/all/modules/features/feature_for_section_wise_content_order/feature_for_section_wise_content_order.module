@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for section wise content order feature.
+ */
+
+include_once 'feature_for_section_wise_content_order.features.inc';
