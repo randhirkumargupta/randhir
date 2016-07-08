@@ -46,7 +46,7 @@
                             if (tmp[0])
                             {
                                 $('.success').fadeIn(200).show();
-                                $("#search-title").val('');
+                                //$("#search-title").val('');
                             }
                             else
                             {
@@ -107,7 +107,13 @@ jQuery(document).ready(function(){
                 checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><i class="fa fa-times fright" aria-hidden="true"></i></li>';
             }
             parent.jQuery('.checked-list').html(checkedlist);
-            parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+            if(item.length){
+                parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+            }
+            else{
+                parent.jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
+            }
+            
             parent.jQuery.colorbox.close();
 //            item.length = 0;
         });
@@ -115,7 +121,7 @@ jQuery(document).ready(function(){
         
         jQuery('.insert-url').click(function () {
         if (jQuery('#insvalue').val() == '') {
-            alert('Input value can not be left blank, please select value by click on checkbox');
+            alert('Input value can not be blank, please select at least one item');
             return false;
         }
     });

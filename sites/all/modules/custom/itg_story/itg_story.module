@@ -8,23 +8,17 @@
  *
  */
 
-/**
- * Implements hook_init().
- */
-function itg_story_init() {
-
-}
-
 
 /**
  * Implements hook_menu().
+ * @return array
  */
 function itg_story_menu() {
-  $items['reporter-details-ajax'] = array(      
-      'page callback' => 'itg_story_reporter_details',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_story.inc',
+  $items['reporter-details-ajax'] = array(
+    'page callback' => 'itg_story_reporter_details',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
   );
   $items['content-title-list/%/autocomplete'] = array(
     'page callback' => 'itg_story_get_content_title',
@@ -38,58 +32,56 @@ function itg_story_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
-  $items['supplement-list-ajax'] = array(      
-      'page callback' => 'itg_story_supplement_details',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_story.inc',
+  $items['supplement-list-ajax'] = array(
+    'page callback' => 'itg_story_supplement_details',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
   );
-  $items['issue-date-check-ajax'] = array(      
-      'page callback' => 'itg_story_issue_date_checked',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_story.inc',
+  $items['issue-date-check-ajax'] = array(
+    'page callback' => 'itg_story_issue_date_checked',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
   );
+
   return $items;
 }
 
 
 /**
  * Implements hook_block_info().
+ * @return array
  */
 function itg_story_block_info() {
   $blocks['story_tab_form_block'] = array(
     'info' => t('Story Form Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+
   return $blocks;
 }
 
 /**
  * Implements hook_block_view()
- * @param type $delta
+ * {@inheritdoc}
  */
 function itg_story_block_view($delta = '') {
-  global $user;
   $block = array();
-  $data = '';
+
   switch ($delta) {
-    case 'story_tab_form_block':                       
-      $block['content'] = theme('story_tab_form_display_block', array('data' => $data));
-    break;        
+    case 'story_tab_form_block':
+      $block['content'] = theme('story_tab_form_display_block', array('data' => ''));
+      break;
   }
-  
+
   return $block;
 }
 
 
 /**
  * Implements hook_theme().
- * @param type $existing
- * @param type $type
- * @param type $theme
- * @param type $path
+ * {@inheritdoc}
  */
 function itg_story_theme($existing, $type, $theme, $path) {
   $themes = array(
@@ -111,32 +103,27 @@ function itg_story_theme($existing, $type, $theme, $path) {
 
 
 /**
- * Implemets hook_form_alter().
- * @param type $form
- * @param type $form_state
- * @param type $form_id
+ * Implements hook_form_alter().
+ * {@inheritdoc}
  */
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
-  global $user, $base_url;  
-
-    switch ($form_id) {
-    case 'story_node_form':      
+  switch ($form_id) {
+    case 'story_node_form':
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
-      unset($form['actions']['preview_changes']);      
+      unset($form['actions']['preview_changes']);
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['#after_build'][] = 'itg_story_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
-    break;      
+      break;
   }
 }
 
 /**
  * Custom submit callback for redirecting story form.
- * @param type $form
- * @param type $form_state
+ * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-  
+
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
   $node_type = str_replace("_", " ", $node_type);
@@ -146,167 +133,134 @@ function itg_story_form_custom_callback($form, &$form_state) {
     unset($_SESSION['messages']['status']);
   }
 
-  $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
 }
 
 /**
  * Implements hook_form_FORMID_alter().
- * @param type $form
- * @param type $form_state
- * @param type $form_id  
+ * {@inheritdoc}
  */
-function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) { 
-  
-   if ($form['#id'] == 'views-exposed-form-strory-menegment-page' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' 
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-12'
-           || $form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
-     $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Title'));     
-     $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
-     $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
-   }
-  
+function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-1'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-3'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-8'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-6'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-5'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-2'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-9'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-7'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-12'
+    || $form['#id'] == 'views-exposed-form-strory-menegment-page-1'
+  ) {
+    $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+    $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
+    $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
+  }
+
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
     $form['field_story_configurations_value']['#options'] = array('All' => '- All -', 'display_lock' => 'Locked Story');
   }
- 
+
 }
 
 /**
  * Implements hook_node_validate().
- * @param type $form
- * @param type $form
- * @param type $form   
+ * {@inheritdoc}
  */
 function itg_story_node_validate($node, $form, &$form_state) {
-  
+
   // Code for redirection url validation
   if ($node->type == 'story') {
-    
+
     $issue_based = $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'];
     $magazine_kicker = $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'];
     $magazine = $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
-    
-     // code to validation magazine field when issue based story is checked
-    if (!empty($issue_based)) {
-      if (empty($magazine)) {
-        form_set_error('field_story_select_magazine', t("Please select Magazine"));
-      }
+
+    // code to validation magazine field when issue based story is checked
+    if (!empty($issue_based) && empty($magazine)) {
+      form_set_error('field_story_select_magazine', t("Please select Magazine"));
     }
-    
+
     // code to check if issue based is check fill magazine kicker text
-    if (!empty($issue_based)) {
-      if (empty($magazine_kicker)) {
-        form_set_error('field_story_magazine_kicker_text', t("Magazine kicker text is required"));
-      }
+    if (!empty($issue_based) && empty($magazine_kicker)) {
+      form_set_error('field_story_magazine_kicker_text', t("Magazine kicker text is required"));
     }
-    
-   $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
-    
-    if (!empty($redirection_url)) { 
-      if (filter_var($redirection_url, FILTER_VALIDATE_URL) === false) {
-         form_set_error('field_story_redirection_url_titl', t("$redirection_url is not a valid URL"));
-      }
+
+    $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
+
+    if (!empty($redirection_url) && filter_var($redirection_url, FILTER_VALIDATE_URL) === FALSE) {
+      form_set_error('field_story_redirection_url_titl', t("$redirection_url is not a valid URL"));
     }
-    
+
     // code for check expiry date is greater then schedule date
     $schedule_date = $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'];
-    $schedule_date=strtotime($schedule_date);
-    $schedule_date=date('Y-m-d',$schedule_date);
+    $schedule_date = strtotime($schedule_date);
+    $schedule_date = date('Y-m-d', $schedule_date);
     $expiry_date = $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'];
-    
-    if (isset($expiry_date) && $schedule_date > $expiry_date) { 
+
+    if (isset($expiry_date) && $schedule_date > $expiry_date) {
       form_set_error('field_story_expiry_date', t("Expiry date should be greater then schedule start date"));
-    }    
-    
-    // Code for configurations validation
-    if (isset($node->field_story_configurations[LANGUAGE_NONE])) {
-      foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
-//        if ($val['value'] == 'comment') {
-//          // Code for comment question validation
-//          if (empty($node->field_story_comment_question[LANGUAGE_NONE][0]['value'])) {
-//            form_set_error('field_story_comment_question', t("Comment Question field is required."));
-//          }
-//        }
-        
-        // Code for client title validation
-//        if ($val['value'] == 'syndication') {
-//          if (empty($node->field_story_client_title[LANGUAGE_NONE][0]['value'])) {
-//            form_set_error('field_story_client_title', t("Client title field is required."));
-//          }
-//        }
-      }      
     }
-    
+
+
     // Code for social media validation
     if (isset($node->field_story_social_media_integ[LANGUAGE_NONE])) {
       foreach ($node->field_story_social_media_integ[LANGUAGE_NONE] as $key_media => $val_media) {
         // Code for facebook narrative validation
-        if ($val_media['value'] == 'facebook') {
-          if (empty($node->field_story_facebook_narrative[LANGUAGE_NONE][0]['value'])) {
-            form_set_error('field_story_facebook_narrative', t("Facebook Narrative field is required."));
-          }
+        if ($val_media['value'] == 'facebook' && empty($node->field_story_facebook_narrative[LANGUAGE_NONE][0]['value'])) {
+          form_set_error('field_story_facebook_narrative', t("Facebook Narrative field is required."));
         }
-        
+
         // Code for Twitter validation
-        if ($val_media['value'] == 'twitter') {
-          if (empty($node->field_story_tweet[LANGUAGE_NONE][0]['value'])) {
-            form_set_error('field_story_tweet', t("Twitter field is required."));
-          }
+        if ($val_media['value'] == 'twitter' && empty($node->field_story_tweet[LANGUAGE_NONE][0]['value'])) {
+          form_set_error('field_story_tweet', t("Twitter field is required."));
         }
       }
-      
     }
-    
+
     // Code for issue exit or not.
     if (!empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
       $issue = itg_story_checked_issue($node->field_story_issue_date[LANGUAGE_NONE][0]['value']);
-      if (!$issue) {        
+      if (!$issue) {
         form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue dose not exit."));
       }
     }
-   
+
     // Code for category validation.
-    if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid'])) {             
-      form_set_error('edit-field-story-category-und-hierarchical-select-selects-0', t("Section field is required."));      
+    if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid'])) {
+      form_set_error('edit-field-story-category-und-hierarchical-select-selects-0', t("Section field is required."));
     }
   }
 }
 
 /**
  * After build for story form.
- * @param type $form
- * @param type $form_state
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function itg_story_after_build($form, &$form_state) {
-  
+
   global $user, $base_url;
   if (!isset($form['#node']->nid)) {
-    
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }  
-  
+  }
+
   $form['field_story_select_magazine']['und']['#title'] = t('Select magazine') . '<span class="form-required" title="This field is required."> *</span>';
-  //$form['field_story_select_supplement']['und']['#title'] = t('Select supplement') . '<span class="form-required" title="This field is required."> *</span>';
   $form['field_story_magazine_kicker_text']['und']['#title'] = t('Magazine kicker') . '<span class="form-required" title="This field is required."> *</span>';
-  
-  $settings = array();
+
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
-  
+
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
+
   return $form;
 }
 
@@ -318,49 +272,47 @@ function itg_story_permission() {
     'access itg story' => array(
       'title' => t('story permission'),
       'description' => t('story permission.'),
-    ),    
+    ),
   );
 }
 
 /**
- * Abreaking news create after story create.
- * @param type $story_node 
+ * Breaking news create after story create.
+ * @param string $story_node
  */
-function itg_story_create_breaking_news($story_node) {  
-  global $user; 
- 
+function itg_story_create_breaking_news($story_node) {
+  global $user;
+
   $node = new stdClass();
   $node->title = $story_node->title;
   $node->type = "breaking_news";
-  
+
   node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
-  
+
   $node->language = LANGUAGE_NONE;
-  $node->field_content_type[LANGUAGE_NONE][0]['value']  = 'Story';
-  $node->field_type[LANGUAGE_NONE][0]['value']  = 'Breaking News';
-  $node->field_source[LANGUAGE_NONE][0]['value']  = $story_node->nid;
-  $node->field_stroy_city[LANGUAGE_NONE][0]['tid']= $story_node->field_stroy_city[LANGUAGE_NONE][0]['tid'];
-  $node->field_display_on[LANGUAGE_NONE][0]['value']  = 'Section';
-  
+  $node->field_content_type[LANGUAGE_NONE][0]['value'] = 'Story';
+  $node->field_type[LANGUAGE_NONE][0]['value'] = 'Breaking News';
+  $node->field_source[LANGUAGE_NONE][0]['value'] = $story_node->nid;
+  $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = $story_node->field_stroy_city[LANGUAGE_NONE][0]['tid'];
+  $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
+
   // get selected taxonomy of node
-  $story_taxonomy=$story_node->field_story_category[LANGUAGE_NONE];
-   
+  $story_taxonomy = $story_node->field_story_category[LANGUAGE_NONE];
+
   foreach ($story_taxonomy as $value1) {
     $story_array[] = $value1['tid'];
   }
 
   //get all parent category
-  $taxonomy_parent=taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  $taxonomy_parent = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
   foreach ($taxonomy_parent as $key => $value) {
     $taxonomy_parent_array[] = $value->tid;
   }
-  
-  // after intersect
-  $taxonomy_result=  array_intersect($taxonomy_parent_array, $story_array);
-  
-  
-  foreach ($taxonomy_result as $key1 => $tax_id) {
 
+  // after intersect
+  $taxonomy_result = array_intersect($taxonomy_parent_array, $story_array);
+
+  foreach ($taxonomy_result as $key1 => $tax_id) {
     $node->field_section[LANGUAGE_NONE][]['tid'] = $tax_id;
   }
 
@@ -368,30 +320,16 @@ function itg_story_create_breaking_news($story_node) {
   $node->status = 1; //(1 or 0): Published or not
   $node->promote = 0; //(1 or 0): Promoted to front page
   $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-  //$node = node_submit($node); // Prepare node for saving
+
   node_save($node);
-  
+
 }
 
 /**
  * Implements hook_node_insert
- * @param type $node
+ * {@inheritdoc}
  */
-function itg_story_node_insert($node) { 
-  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
-   foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
-     if ($val['value'] == 'breaking_news') {
-       itg_story_create_breaking_news($node);
-     }
-   }
-  }    
-}
-
-/**
- * Implements hook_node_update
- * @param type $node
- */
-function itg_story_node_update($node) { 
+function itg_story_node_insert($node) {
   if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
     foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
       if ($val['value'] == 'breaking_news') {
@@ -400,128 +338,143 @@ function itg_story_node_update($node) {
     }
   }
 }
-/**
- * Implements hook_form_FORMID_alter().
- * @param type $form
- * @param type $form_state
- * @param type $form_id  
- */
-function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
-  global $base_url, $user;   
-    $magazine_field = 'field_story_select_magazine';
-    $supplement_field = 'field_story_select_supplement';
-    
-    // set magazine on edit and trigger action
-    if (isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
-      $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
-    } else {
-      $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
-    }
-    
-    // add ajax on magazine field 
-    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
-                    'event' => 'change',
-                    'callback' => 'itg_story_magazine_ajax_callback',
-                    'wrapper' => $supplement_field.'_replace',
-            ); 
-    
-    // Setup supplement select
-    $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="'.$supplement_field.'_replace">';
-    $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
-    if (function_exists('itg_common_dropdown_supplement')) {
-      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
-    }
-    
-    // code for conditanal field
-    
-    // code for story expiry date field show and hide
-    $form['field_story_expiry_date']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_expires[und][Yes]"]' => array('checked' => TRUE),
-      )
-    );
-      
-    // code for Comment Question field hide and show
-    $form['field_story_comment_question']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_configurations[und][comment]"]' => array('checked' => TRUE),
-      )
-    );
-    
-    // code for featured field hide and show
-    $form['field_story_featured_name']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_configurations[und][set_as_featured]"]' => array('checked' => TRUE),
-      )
-    );
 
-    // code for magazine field hide and show
-    $form['field_story_select_magazine']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-      )
-    );
-    
-    // code for supplement field hide and show
-    $form['field_story_select_supplement']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-      ),
-        
-    );
-    
-    // code for issue date field hide and show
-    $form['field_story_issue_date']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-      )
-    );
-    
-    // code for client Title field show and hide
-    $form['field_story_client_title']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
-      )
-    );
-    
-    // code for media field show and hide
-    $form['field_story_media_files_syndicat']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
-      )
-    );
-    
-    // code for Magazine kicker * field show and hide
-    $form['field_story_magazine_kicker_text']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-      ),
-    'required' => array(
-      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-    )
-    );
-    
-    // code for Magazine Headline * field show and hide
-    $form['field_story_magazine_headline']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-      )
-    );
-    // Set form default value for social media fields
-  
-  $form['field_story_posted_by_twitter']['#default_value'] = $user->mail;
-  $form['field_story_posted_by_instagram']['#default_value'] = $user->mail;
-    
-  
+/**
+ * Implements hook_node_update
+ * {@inheritdoc}
+ */
+function itg_story_node_update($node) {
+  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
+    foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+      if ($val['value'] == 'breaking_news') {
+        itg_story_create_breaking_news($node);
+      }
+    }
+  }
 }
 
 /**
-* Ajax callback for Event roles dropdown
-* @param type $form
-* @param type $form_state
-*/
+ * Implements hook_form_FORMID_alter().
+ * {@inheritdoc}
+ */
+function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  $magazine_field = 'field_story_select_magazine';
+  $supplement_field = 'field_story_select_supplement';
+
+  // set magazine on edit and trigger action
+  if (isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
+    $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
+  }
+  else {
+    $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
+  }
+
+  // add ajax on magazine field
+  $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+    'event' => 'change',
+    'callback' => 'itg_story_magazine_ajax_callback',
+    'wrapper' => $supplement_field . '_replace',
+  );
+
+  // Setup supplement select
+  $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $supplement_field . '_replace">';
+  $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+
+  if (function_exists('itg_common_dropdown_supplement')) {
+    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+  }
+
+  // code for story expiry date field show and hide
+  $form['field_story_expiry_date']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_expires[und][Yes]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // code for Comment Question field hide and show
+  $form['field_story_comment_question']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_configurations[und][comment]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // code for featured field hide and show
+  $form['field_story_featured_name']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_configurations[und][set_as_featured]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // code for magazine field hide and show
+  $form['field_story_select_magazine']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // code for supplement field hide and show
+  $form['field_story_select_supplement']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+    ),
+
+  );
+
+  // code for issue date field hide and show
+  $form['field_story_issue_date']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // code for client Title field show and hide
+  $form['field_story_client_title']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // code for media field show and hide
+  $form['field_story_media_files_syndicat']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // code for Magazine kicker * field show and hide
+  $form['field_story_magazine_kicker_text']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+    ),
+    'required' => array(
+      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+    )
+  );
+
+  // code for Magazine Headline * field show and hide
+  $form['field_story_magazine_headline']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
+    )
+  );
+  // Set form default value for social media fields
+
+  $form['field_story_posted_by_twitter']['#default_value'] = $user->mail;
+  $form['field_story_posted_by_instagram']['#default_value'] = $user->mail;
+
+
+}
+
+/**
+ * Ajax callback for Event roles dropdown
+ * @param array $form
+ * @param array $form_state
+ * @return int
+ */
 function itg_story_magazine_ajax_callback($form, $form_state) {
-    return $form['field_story_select_supplement'];
+  return $form['field_story_select_supplement'];
 }
 
 
@@ -529,6 +482,8 @@ function itg_story_magazine_ajax_callback($form, $form_state) {
  * Implements hook_library_alter().
  *
  * Attach our own JS library whenever drupal.autocomplete is loaded.
+ *
+ * {@inheritdoc}
  */
 function itg_story_library_alter(&$libraries, $module) {
   $limit = 2;
@@ -544,20 +499,19 @@ function itg_story_library_alter(&$libraries, $module) {
 
 /**
  * Implements function for issue exit or not
- * @param $issue_date
- * $return 
+ * @param string $issue_date
+ * @return bool
  */
-function itg_story_checked_issue($issue_date){
+function itg_story_checked_issue($issue_date) {
   $result = db_select('node', 'node')
-            ->fields('node', array('title'))
-            ->condition('title', $issue_date, '=')
-            ->condition('type', 'issue', '=')
-            ->execute()->fetchAssoc();
-  
+    ->fields('node', array('title'))
+    ->condition('title', $issue_date, '=')
+    ->condition('type', 'issue', '=')
+    ->execute()->fetchAssoc();
+
   if (empty($result['title'])) {
-    return false;
+    return FALSE;
   }
-  
-  return true;
-  
+
+  return TRUE;
 }

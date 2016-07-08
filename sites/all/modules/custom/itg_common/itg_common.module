@@ -7,17 +7,18 @@
  * Provides common functionality and customizations.
  *
  */
+
 module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 
 /**
  * Helper function to populate the second dropdown.
- * @param type $id
- * @return $data
+ * @param int $id
+ * @return array $data
  */
 function itg_common_dropdown_supplement($id = '') {
 
   // Fetch query for supplements 
-  // $data = '';
+  
   $select = t('- None -');
   $data = array('_none' => $select);
 
@@ -25,10 +26,10 @@ function itg_common_dropdown_supplement($id = '') {
   $query->join('node', 'n', 'm.entity_id = n.nid');
   $query->fields('m', array('entity_id'));
   $query->fields('n', array('title'));
-  $query->condition('field_supp_select_magazine_target_id', $id, '=');
-  // $query->condition('n.type', $content_type, '=');  
+  $query->condition('field_supp_select_magazine_target_id', $id, '='); 
 
   $result = $query->execute();
+  
   while ($record = $result->fetchAssoc()) {
     $data[$record['entity_id']] = $record['title'];
   }
@@ -38,13 +39,19 @@ function itg_common_dropdown_supplement($id = '') {
 
 /**
  * Implements hook_form_alter().
+ * {@inheritdoc}
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
   if ($user->uid != '1') {
     // hide source relation and type field from other users 
-    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form') {
+    if ($form_id == 'podcast_node_form' 
+            || $form_id == 'videogallery_node_form' 
+            || $form_id == 'recipe_node_form' 
+            || $form_id == 'photogallery_node_form' 
+            || $form_id == 'blog_node_form' 
+            || $form_id == 'story_node_form') {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
     }
@@ -64,8 +71,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // code to change page title on node edit
-  if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
-    /* @var $node_type string */
+  
+  if (!empty($form['nid']['#value']) && arg(2) == 'edit') {    
     $node_type = $form['#node']->type;
     $node_type = str_replace("_", " ", $node_type);
     $node_type = ucfirst($node_type);
@@ -82,7 +89,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Button name change some content
-  if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
+  if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) 
+          || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
 
     $form['actions']['itg_custom_button'] = array('#type' => 'submit',
       '#value' => t('Save as Draft'),
@@ -91,7 +99,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Extra meta tags element hide from form
-  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form') {
+  if ($form_id == 'mega_review_critic_node_form' 
+          || $form_id == 'story_node_form' 
+          || $form_id == 'itg_celebrity_profile_node_form' 
+          || $form_id == 'blog_node_form') {
     if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
       $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
     }
@@ -100,12 +111,19 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   //Auto Generate image according photogallery
 
-   if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'podcast_node_form') {
-     // $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<a class="img-crt button" href="javascript:;">Generate Image</a>');
+   if ($form_id == 'photogallery_node_form' 
+           || $form_id == 'story_node_form' 
+           || $form_id == 'recipe_node_form' 
+           || $form_id == 'breaking_news_node_form' 
+           || $form_id == 'mega_review_critic_node_form' 
+           || $form_id == 'cooking_tips_node_form' 
+           || $form_id == 'food_news_node_form' 
+           || $form_id == 'videogallery_node_form' 
+           || $form_id == 'podcast_node_form') {
+     
      $form['field_story_extra_large_image']['#suffix'] = '<a class="img-crt button" href="javascript:;">Generate Image</a><span class="generate-image-error error"></span>';
-     if(isset($form_state['build_info']['args'][0]->field_story_extra_large_image)){
-       $cover_id = $form_state['build_info']['args'][0]->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
-       $settings = array();
+     if (isset($form_state['build_info']['args'][0]->field_story_extra_large_image)) {
+       $cover_id = $form_state['build_info']['args'][0]->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];       
        $file = file_load($cover_id);
        $settings['large_node_uri'] = $file->uri;
        drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
@@ -113,12 +131,18 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
      $form['#after_build'][] = 'itg_common_image_generate';
    }
-  if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form') {
-    // $form['imagecreate'] = array('#type' => 'markup', '#markup' => '<a class="img-crt button" href="javascript:;">Generate Image</a>');
+  if ($form_id == 'photogallery_node_form' 
+          || $form_id == 'story_node_form' 
+          || $form_id == 'recipe_node_form' 
+          || $form_id == 'breaking_news_node_form' 
+          || $form_id == 'mega_review_critic_node_form' 
+          || $form_id == 'cooking_tips_node_form' 
+          || $form_id == 'food_news_node_form') {
+    
     $form['field_story_extra_large_image']['#suffix'] = '<a class="img-crt button" href="javascript:;">Generate Image</a><span class="generate-image-error error"></span>';
+    
     if (isset($form_state['build_info']['args'][0]->field_story_extra_large_image)) {
-      $cover_id = $form_state['build_info']['args'][0]->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
-      $settings = array();
+      $cover_id = $form_state['build_info']['args'][0]->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];     
       $file = file_load($cover_id);
       $settings['large_node_uri'] = $file->uri;
       drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
@@ -127,16 +151,15 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $form['#after_build'][] = 'itg_common_image_generate';
   }
   if($form_id == "itg_celebrity_profile_node_form"){
-      $form['#validate'][] = 'itg_common_managesite_validate';
-      $form['actions']['submit']['#submit'][] = 'itg_site_setting_form_custom_callback';
-
+    $form['#validate'][] = 'itg_common_managesite_validate';
+    $form['actions']['submit']['#submit'][] = 'itg_site_setting_form_custom_callback';
   }
 }
 
 /**
  * After submit Cooking Tips
- * @param Array $form
- * @param Array $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function itg_site_setting_form_custom_callback($form, &$form_state) {
 
@@ -149,21 +172,21 @@ function itg_site_setting_form_custom_callback($form, &$form_state) {
   else {
     $op = 'created';
   }
- $celeberity_title = $form_state['node']->title;
+  $celeberity_title = $form_state['node']->title;
+  
   drupal_set_message(t('Celebrity profile <b>' . $celeberity_title . '</b> has been ' . $op .'.'));
   
-  }
+ }
 
 /**
  * Implement after build for image generate according large image. 
- * @param Array $form
- * @param Array $form_state
- * @return 
+ * @param array $form
+ * @param array $form_state
+ * @return array $form
  */
 function itg_common_image_generate($form, &$form_state) {
   $coverid = $form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'];
-  if (isset($coverid) && !empty($coverid)) {
-    $settings = array();
+  if (isset($coverid) && !empty($coverid)) {    
     $file = file_load($coverid);
     $settings['large_uri'] = $file->uri;
   }
@@ -172,19 +195,20 @@ function itg_common_image_generate($form, &$form_state) {
   }
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_image.js', array('weight' => 3));
+  
   return $form;
 }
 
 /**
- * Implements hook__form_field_ui_field_edit_form_alter
- * @param array $form array of form elements
- * @param arra $form_state array of submitted values
- * @param string $$form_id id of the current form
+ * Implements hook_form_field_ui_field_edit_form_alter
+ * {@inheritdoc}
  */
 function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'field_ui_field_edit_form') {
+    
     // Increase the max cardinality to 12
     $range = drupal_map_assoc(range(1, 12));
+    
     $new_options = array(FIELD_CARDINALITY_UNLIMITED => t('Unlimited')) + $range;
 
     // Change the options
@@ -196,10 +220,9 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
  * Extra meta tags element hide from form 
  * @param Array $form
  * @param Array $form_state
- * @return 
+ * @return Array $form
  */
-function itg_meta_tags_extra_element_hide($form, &$form_state) {
-  global $user, $base_url;
+function itg_meta_tags_extra_element_hide($form, &$form_state) {  
 
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
@@ -220,13 +243,12 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
 
 /**
  * Extra meta tags element hide from form 
- * @param Array $form
- * @param Array $form_state
- * @return 
+ * @param array $form
+ * @param array $form_state
+ * @return array $form
  */
 function itg_common_cancel_button($form, &$form_state) {
-  global $user, $base_url;
-
+ 
   if (!isset($_REQUEST['destination'])) {
     $destination = '';
   }
@@ -244,12 +266,11 @@ function itg_common_cancel_button($form, &$form_state) {
 }
 
 /**
- * Implements views header link 
- * @param type $view Description
+ * Implements hook_views_pre_render 
+ * {@inheritdoc}
  */
 function itg_common_views_pre_render(&$view) {
-  if ($view->name == "byline_list") {
-    global $user; // Get user information    
+  if ($view->name == "byline_list") {      
     $header_content = l(t('Create Byline'), 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
     $view->attachment_before = $header_content;
   }
@@ -257,9 +278,7 @@ function itg_common_views_pre_render(&$view) {
 
 /**
  * Implements hook_form_FORMID_alter().
- * @param type $form
- * @param type $form_state
- * @param type $form_id  
+ * {@inheritdoc} 
  */
 function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   if (isset($form['title'])) {
@@ -268,7 +287,8 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     // remove space from title search field.
     drupal_add_js('jQuery(document).ready(function() {                  
                  jQuery(".form-submit").click(function() {            
-                 var title = jQuery.trim(jQuery("#edit-title").val());       
+                 var title = jQuery.trim(jQuery("#edit-title").val());
+                 
                  if (title == "") {
                    jQuery("#edit-title").val("");
                  }
@@ -281,22 +301,31 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
                });              
           });', array('type' => 'inline', 'scope' => 'footer'));
 
-    if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-movie-review-list-page' || $form['#id'] == 'views-exposed-form-blogs-management-page-1' || $form['#id'] == 'views-exposed-form-manage-quiz-page') {
+    if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' 
+            || $form['#id'] == 'views-exposed-form-movie-review-list-page' 
+            || $form['#id'] == 'views-exposed-form-blogs-management-page-1' 
+            || $form['#id'] == 'views-exposed-form-manage-quiz-page') {
 
       // remove space from title search field.
-      drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery(".tabledrag-toggle-weight-wrapper").hide();
-          });', array('type' => 'inline', 'scope' => 'footer'));
+    drupal_add_js('jQuery(document).ready(function() {                  
+               jQuery(".tabledrag-toggle-weight-wrapper").hide();
+        });', array('type' => 'inline', 'scope' => 'footer'));
     }
   }
-  if ($form['#id'] == 'views-exposed-form-category-manager-dev-page' || $form['#id'] == 'views-exposed-form-tags-management-page') {
+  if ($form['#id'] == 'views-exposed-form-category-manager-dev-page' 
+          || $form['#id'] == 'views-exposed-form-tags-management-page') {
+    
     drupal_add_js('jQuery(document).ready(function() {                  
                  jQuery(".form-submit").click(function() {
                  jQuery("#edit-name").val(jQuery.trim(jQuery("#edit-name").val()));
                });              
           });', array('type' => 'inline', 'scope' => 'footer'));
   }
-  if ($form['#id'] == 'views-exposed-form-recipe-management-page' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
+  
+  if ($form['#id'] == 'views-exposed-form-recipe-management-page' 
+          || $form['#id'] == 'views-exposed-form-recipe-management-page-1' 
+          || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
+    
     drupal_add_js('jQuery(document).ready(function() {                  
                  jQuery(".form-submit").click(function() {
                  jQuery("#edit-title").val(jQuery.trim(jQuery("#edit-title").val()));
@@ -314,7 +343,9 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
           });', array('type' => 'inline', 'scope' => 'footer'));
   }
 
-  if ($form['#id'] == 'views-exposed-form-ask-an-expert-page' || $form['#id'] == 'views-exposed-form-ask-an-expert-page-2') {
+  if ($form['#id'] == 'views-exposed-form-ask-an-expert-page' 
+          || $form['#id'] == 'views-exposed-form-ask-an-expert-page-2') {
+    
     drupal_add_js('jQuery(document).ready(function() {                  
                  jQuery(".form-submit").click(function() {
                  jQuery("#edit-field-user-email-value").val(jQuery.trim(jQuery("#edit-field-user-email-value").val()));
@@ -347,12 +378,11 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
   }
   
   // code to reset breaking news listing when user click on back button
-        drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery("form").each(function() {            
-                 this.reset();
-                 
-               });              
-          });', array('type' => 'inline', 'scope' => 'footer'));
+  drupal_add_js('jQuery(document).ready(function() {                  
+           jQuery("form").each(function() {            
+           this.reset();
+         });              
+    });', array('type' => 'inline', 'scope' => 'footer'));
         
         
   // code to restrict user to enter only numeric value
@@ -365,9 +395,10 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 
 /**
  * Implement hook_date_popup_process_alter().
+ * {@inheritdoc}
  */
 function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-  if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'astro_node_form') {
+  if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page') {
     $element['#datepicker_options'] = array(
       'minDate' => "+0D",
     );
@@ -377,7 +408,7 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
 
 /**
  * Implementation of hook_node_presave().
- * @param Array $node
+ * @param object $node
  */
 function itg_common_node_presave($node) {    
   switch ($node->type) {        
@@ -396,9 +427,7 @@ function itg_common_node_presave($node) {
 
 /**
  * Implements hook_form_FORMID_alter().
- * @param type $form
- * @param type $form_state
- * @param type $form_id  
+ * {@inheritdoc} 
  */
 function itg_common_form_node_delete_confirm_alter(&$form, &$form_state, $form_id) {
   // redirect node after delete
@@ -413,9 +442,10 @@ function itg_common_form_node_delete_confirm_alter(&$form, &$form_state, $form_i
 
 /**
  * Get survey count.
- * @param type $nid
- * @param type $tbl_name
- *   
+ * @param int $nid
+ * @param string $tbl_name
+ * @param string $field_name
+ * @return int
  */
 
 function itg_common_check_record_existance($nid, $tbl_name, $field_name){
@@ -439,7 +469,7 @@ function itg_common_check_record_existance($nid, $tbl_name, $field_name){
  * @param string $tbl_name
  * @param string $cid_name
  * @param string $cid_val
- * @return array
+ * @return array $records
  */
 function itg_common_select_field_value($field_name, $tbl_name, $cid_name, $cid_val){
     $query = db_select($tbl_name, 'tbl')
@@ -447,33 +477,32 @@ function itg_common_select_field_value($field_name, $tbl_name, $cid_name, $cid_v
           ->condition('tbl.' . $cid_name, $cid_val, '=');
 
   $result = $query->execute();
+  
   while ($record = $result->fetchAssoc()) {
     $records[] = $record[$field_name];
   }
+  
   return $records;
 }
 
 /**
  * Get content type name by content type machine name.
- * @param type $type
- *   
+ * @param string $type
+ * @return string $content_type_name  
  */
 function get_content_type_name($type) {
   $content_type_name = db_select('node_type', 'n')
           ->fields('n', array('name'))
           ->condition('type', $type)
           ->execute()->fetchField();
+  
   return $content_type_name;
 }
 
 /**
- * Get node title using nid
- * 
+ * Get node title using nid 
  * @param int $nid
- *   unique id of current node
- * 
  * @return string
- *   current node title
  */
 function itg_common_get_node_title($nid) {
   $query = db_select('node', 'n')
@@ -483,12 +512,11 @@ function itg_common_get_node_title($nid) {
   return $query->execute()->fetchField();
 }
 
-/* functions for user role and permission display on my accountpage */
-
 /**
  * Get node count.
- * @param type $content_type
- * @param type $uid  
+ * @param string $content_type
+ * @param int $uid
+ * @return int  
  */
 function itg_get_all_node($content_type, $uid) {
 
@@ -501,11 +529,11 @@ function itg_get_all_node($content_type, $uid) {
 
 /**
  * Get node publish count.
- * @param type $content_type
- * @param type $uid  
+ * @param string $content_type
+ * @param int $uid
+ * @return int 
  */
 function itg_get_all_publish_node($content_type, $uid) {
-
   $query = "SELECT COUNT(*) amount FROM {node} n " .
       "WHERE n.type = :type AND n.uid = :uid AND n.status = '1'";
   $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
@@ -515,10 +543,10 @@ function itg_get_all_publish_node($content_type, $uid) {
 
 /**
  * Get node type.
- * @param type $uid  
+ * @param int $uid
+ * @return array $type
  */
 function itg_get_all_node_type($uid) {
-
   $result = db_select('node', 'n')
       ->fields('n', array('type'))
       ->condition('uid', $uid, '=')
@@ -534,7 +562,8 @@ function itg_get_all_node_type($uid) {
 
 /**
  * Get Last node created by user.
- * @param type $uid  
+ * @param int $uid
+ * @return array $last_record_info
  */
 function itg_last_node_user($uid) {
 
@@ -555,8 +584,9 @@ function itg_last_node_user($uid) {
 
 /**
  * Get Last node published by user.
- * @param type $uid 
- * @param type $publish_id   
+ * @param int $uid 
+ * @param int $publish_id
+ * @return array $last_record_info_user  
  */
 function itg_last_publish_user_node($uid, $publish_id) {
   $last_result_user = db_select('node', 'n')
@@ -577,8 +607,9 @@ function itg_last_publish_user_node($uid, $publish_id) {
 
 /**
  * Get Last node published by user using workflow.
- * @param type $uid 
- * @param type $publish_id   
+ * @param int $uid 
+ * @param int $publish_id
+ * @return array $last_publish_record_info  
  */
 function itg_last_node_published_user($uid, $publish_id) {
   $last_publish_result = db_select('workbench_moderation_node_history', 'w')
@@ -599,8 +630,8 @@ function itg_last_node_published_user($uid, $publish_id) {
 
 /**
  * Get Role create permission.
- * @param type $uid 
- * @param type $publish_id   
+ * @param int $uid 
+ * @return   
  */
 function itg_common_check_role_access($rid) {
   $role_not_create_per = array(AUTHOR_GUEST, INTERN, EXPERT);
@@ -614,7 +645,8 @@ function itg_common_check_role_access($rid) {
 
 /**
  * Implements itg_ugc_bad_words
- * @param type $description
+ * @param type string
+ * @return string
  */
 function itg_ugc_bad_words($description) {
   $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
@@ -633,11 +665,11 @@ function itg_ugc_bad_words($description) {
 
 /**
  * Implements itg_custom_message
- * @param type $type
- * @param type $workbench_current_state
- * @param type $case
- * @param type $title
- * @param type $destination
+ * @param string $type
+ * @param string $workbench_current_state
+ * @param string $case
+ * @param string $title
+ * @param string $destination
  */
 function itg_custom_message($type, $workbench_current_state, $case, $title, $destination) {
 
@@ -662,9 +694,10 @@ function itg_custom_message($type, $workbench_current_state, $case, $title, $des
 
 /**
  * Helper function to check for duplicate node titles
- * @param type $title
- * @param type $type
- * @param type $nid
+ * @param string $title
+ * @param string $type
+ * @param int $nid
+ * @return int
  */
 function itg_common_check_duplicate_title($title, $type, $nid) {
   if (trim($type)) { // Validate duplicate title for content type
@@ -681,13 +714,11 @@ function itg_common_check_duplicate_title($title, $type, $nid) {
 
 /**
  * Implements hook_node_view()
- *
  * {@inheritdoc}
  */
 function itg_common_node_view($node, $view_mode, $langcode) {
-
   if ($node->type == 'ask_an_expert') {
-    $node_title = "Question : " . $node->title; // regression issue
+    $node_title = "Question : " . $node->title;
     drupal_set_title(t($node_title));
   }
 }
@@ -700,7 +731,7 @@ function itg_common_node_view($node, $view_mode, $langcode) {
   function itg_common_managesite_validate($form, &$form_state){
     if(isset($form_state['values']['field_reporter_email_id']) && $form_state['values']['field_reporter_email_id'][LANGUAGE_NONE][0]['value'] != ''){
        if (!filter_var($form_state['values']['field_reporter_email_id'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_EMAIL)) {
-                    form_set_error('field_reporter_email_id', t('Please enter valid email address.'));
-              }
+         form_set_error('field_reporter_email_id', t('Please enter valid email address.'));
+       }
     }
   }

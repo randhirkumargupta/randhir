@@ -12,9 +12,11 @@
                    if (uid != 1) {
                      $('.field-edit-link').hide();
                      var magazine = $('#edit-field-story-select-magazine-und').val();
+                     
                      if (magazine == '_none') {
                        $('.form-item-field-story-configurations-und-display-lock').hide();
                      }
+                     
                      $('#edit-body-und-0-format').hide();                     
                      $('#edit-field-story-archive').hide();
                      $('#edit-path').show();

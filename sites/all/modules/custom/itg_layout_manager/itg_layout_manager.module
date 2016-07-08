@@ -1,0 +1,245 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function itg_layout_manager_menu() {
+  $items['itg-layout-manager'] = array(      
+      'page callback' => 'itg_layout_admin',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,      
+  );
+  
+  $items['insert-layout-setting-ajax'] = array(      
+      'page callback' => 'insert_layout_setting_ajax',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,      
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function itg_layout_manager_block_info() {
+  $blocks['layout_manager_form_block'] = array(
+    'info' => t('Layout manager form Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  $blocks['layout_widget_list_block'] = array(
+    'info' => t('Layout widget list block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  $blocks['layout_button_block'] = array(
+    'info' => t('Layout button block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @param type $delta
+ */
+function itg_layout_manager_block_view($delta = '') {
+  
+  $block = array();
+  
+  switch ($delta) {
+    case 'layout_manager_form_block':
+      $layout_form = drupal_get_form('itg_layout_manager_page_setting_form');
+      $data['layout_form'] = drupal_render($layout_form); 
+      $block['content'] = theme('layout_manager_block', array('data' => $data));
+    break;
+    
+    case 'layout_widget_list_block':
+      $data = '';
+      $block['content'] = theme('layout_widgets_list_block', array('data' => $data));
+    break;
+    
+    case 'layout_button_block':
+      $data = '';
+      $block['content'] = theme('layout_buttons_block', array('data' => $data));
+    break;
+  }
+  
+  return $block;
+}
+
+/**
+ * Implements page callback.
+ */
+
+function itg_layout_admin() { 
+   $data = '';
+   return theme('itg_layout_admin_page', array('data' => $data));  
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_layout_manager_theme($existing, $type, $theme, $path) {
+  
+  $template_name =  isset($_GET['template_name']) ? $_GET['template_name'] : "";
+  
+  if (!empty($template_name)) {
+    $layout =  array(
+      'arguments' => array('form' => NULL),
+      'template' => $template_name,
+      'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts/'.  arg(1)      
+    );
+  } else {
+      $layout = array();
+  }
+  
+  $themes = array(
+    'layout_manager_block' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-manager-form-block',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
+    'itg_layout_admin_page' => $layout,
+    'layout_widgets_list_block' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-widgets-list-block',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
+    'layout_buttons_block' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-buttons-block',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
+  );
+  
+  return $themes;
+}
+
+/**
+ * Get template name list 
+ * @return array $data
+ */
+function get_template_name($tpl_dir) {
+  
+  $dir = getcwd().'/'.drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts/'.$tpl_dir;
+  
+  $scanned_directory = array_diff(scandir($dir, 1), array('..', '.'));
+  
+  $data = array("_none" => "--template--");
+  
+  foreach ($scanned_directory as $key => $val) {
+    $tpl = substr($val,0,-8);
+    $data[$tpl] = $tpl;    
+  }
+  
+  return $data;
+}
+
+/**
+ * Implementation of hook_form for itg_layout_manager_form
+ * {@inheritdoc}
+ */
+function itg_layout_manager_page_setting_form($form, &$form_state) {
+  $settings = array();
+  global $base_url;
+  $settings['base_url'] = $base_url;  
+  
+  drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
+  
+  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1));
+  
+  $arg1 = arg(1);
+  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  
+  if ($arg1 == 'section') {
+    $op = array("_none" => "--Section--");
+    foreach ($tax as $key => $val) {
+      $op[$val->name] = $val->name;
+    }
+  } else if ($arg1 == 'home') {
+      $op = array('home_page' => 'Home Page');
+  }
+  
+  $template = get_template_name($arg1);
+    
+  $form['section'] = array(
+       '#type' => 'select',
+       '#title' => t('Select Section'),
+       '#options' => $op,
+       '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
+   );
+  
+  $form['template_name'] = array(
+       '#type' => 'select',
+       '#title' => t('Select template'),
+       '#options' => $template,
+       '#default_value' => isset($_GET['template_name']) ? $_GET['template_name'] : "",       
+   );
+   
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Go'),
+  );
+
+  return $form;
+}
+
+/**
+ * Custom submit callback for itg_layout_manager_form_submit.
+ * {@inheritdoc}
+ */
+function itg_layout_manager_page_setting_form_submit($form, &$form_state) { 
+  $options = array('query' => array('section' => $form_state['input']['section'], 'template_name' => $form_state['input']['template_name']));
+  drupal_goto('itg-layout-manager/' . arg(1), $options);  
+}
+
+function insert_layout_setting_ajax() {
+  global $user;
+  
+  //watchdog("test shravan", '<pre>'. print_r($_REQUEST['val_data'], TRUE) .'</pre>');
+  
+ /* $input_data = explode('@', $_GET['input_data']);
+  
+  $itg_query = db_select('itg_layout_manager', 'layout');
+  $itg_query->fields('layout', array('id'));  
+  $itg_query->condition('section_name', $_GET['section_name'])
+            ->condition('block_name', $_GET['block_name']);
+  $itg_result = $itg_query->execute()->fetchField();
+  
+  if (!empty($itg_result)) {
+    $hh = db_update('itg_layout_manager')
+              ->fields(array('template_name' => $_GET['template_name'], 
+                  'widget_name' => $input_data[1],
+                  'block_title' => $input_data[0],
+                  'filter_url' => $input_data[2],                
+                  ))
+              ->condition('section_name', $_GET['section_name'])
+             ->condition('block_name', $_GET['block_name'])
+              ->execute();
+  } else {
+      $query = db_insert('itg_layout_manager');
+      $query->fields(array(
+        'section_name' => $_GET['section_name'],
+        'template_name' => $_GET['template_name'],
+        'widget_name' => $input_data[1],
+        'block_name' => $_GET['block_name'],
+        'block_title' => $input_data[0],
+        'filter_url' => $input_data[2],
+        'created_by' => $user->uid,
+        'created_date' => time(),
+        'status' => true
+      )); 
+      $query->execute();
+  }*/
+  
+  //print views_embed_view('test_views','block', $node->nid);
+  $widget_name = 'test_views';
+  print views_embed_view($widget_name,'block');
+    
+    //echo 'save';exit;
+  
+}
