@@ -402,9 +402,9 @@ function itg_print_team_idea_actions($nid) {
   $node = node_load($nid);
   $status = $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'];
 
-  $accept = l('Approve', 'idea-status/approved/' . $nid);
-  $reject = l('Reject', 'idea-status/rejected/' . $nid);
-  $need_modification = l('Needs Modification', 'idea-status/needs_modification/' . $nid);
+  $accept = l(t('Approve'), 'idea-status/approved/' . $nid);
+  $reject = l(t('Reject'), 'idea-status/rejected/' . $nid);
+  $need_modification = l(t('Needs Modification'), 'idea-status/needs_modification/' . $nid);
 
   switch ($status) {
     case 'Approved':
