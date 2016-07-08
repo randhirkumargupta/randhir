@@ -1,3 +1,7 @@
+/*
+ * @file
+ * Contains all functionality related to autocomplete
+ */
 (function($) {
 
   /**
