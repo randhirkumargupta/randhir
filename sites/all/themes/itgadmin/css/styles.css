@@ -2184,6 +2184,9 @@ div.image-widget-data .ajax-progress-throbber {
 .node-story-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story {
   padding-left: 220px;
 }
+.node-story-form .form-field-name-field-common-related-content .form-type-textfield .form-text {
+  max-width: 840px;
+}
 
 .close-preview {
   position: absolute;
@@ -4461,11 +4464,24 @@ div.node #comments h2 {
 .view-related-content-new .view-filters .views-exposed-form .views-exposed-widget {
   max-width: 154px;
   width: auto;
+  vertical-align: top;
+}
+.view-related-content-new .view-filters .views-exposed-form .views-exposed-widget.views-submit-button, .view-related-content-new .view-filters .views-exposed-form .views-exposed-widget.views-reset-button {
+  margin-top: 18px;
 }
 .view-related-content-new .scroll-wrap {
   max-height: 438px;
   width: 885px;
   overflow: auto;
+}
+
+#head-val #insvalue {
+  width: 200px;
+}
+
+.empty-checklist {
+  display: block;
+  text-align: center;
 }
 
 .search-criteria {
@@ -4477,7 +4493,7 @@ div.node #comments h2 {
   z-index: 9999;
 }
 .search-criteria .form-text {
-  width: 300px;
+  width: 280px;
   margin-right: 10px;
 }
 .search-criteria + .success {

@@ -1803,7 +1803,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
     padding-left: 220px;
   }
-  
+  .form-field-name-field-common-related-content{
+      .form-type-textfield .form-text{max-width: 840px;}
+  }
 }
 .form-field-name-field-astro-date-range{
   @extend .itg-date-range;
@@ -4360,6 +4362,10 @@ div.node{
         .views-exposed-form .views-exposed-widget{
             max-width: 154px;
             width: auto;
+            vertical-align: top;
+            &.views-submit-button, &.views-reset-button{
+                margin-top: 18px;
+            }
         }
     }
     .scroll-wrap{
@@ -4374,6 +4380,13 @@ div.node{
 }
 #head-val{
     @extend .fleft;
+    #insvalue{
+        width: 200px;
+    }
+}
+.empty-checklist {
+    display: block;
+    text-align: center;
 }
 .search-criteria{
     position: absolute;
@@ -4383,7 +4396,7 @@ div.node{
     width: 50%;
     z-index: 9999;
     .form-text{
-        width: 300px;
+        width: 280px;
         margin-right: 10px;
     }
     + .success{
