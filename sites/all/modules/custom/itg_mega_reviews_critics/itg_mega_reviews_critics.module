@@ -7,17 +7,18 @@
  */
 
 /**
- * Implements views header link 
- * @param type $view Description
+ * Implements hook_views_pre_render 
+ * {@inheritdoc}
  */
 function itg_mega_reviews_critics_views_pre_render(&$view) {
   
   if ($view->name == "movie_review_list") {
-    $header_content = '<span class="count">Count ('.$view->total_rows.') </span>';
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Create Mega Review & Critic'), 'node/add/mega-review-critic', array('query' => array('destination' => arg(0))));    
     $view->attachment_before = $header_content;
-  } else if ($view->name == "celebrity_profile_list") {
-    $header_content = '<span class="count">Count ('.$view->total_rows.') </span>';
+  } 
+  elseif ($view->name == "celebrity_profile_list") {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Create profile'), 'node/add/itg-celebrity-profile', array('query' => array('destination' => 'celebrity-profile-list')));    
     $view->attachment_before = $header_content;
   }   
@@ -25,9 +26,7 @@ function itg_mega_reviews_critics_views_pre_render(&$view) {
 
 /**
  * Implements hook_form_FORMID_alter().
- * @param type $form
- * @param type $form_state
- * @param type $form_id  
+ * {@inheritdoc} 
  */
 function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form, &$form_state, $form_id) {  
   $form['#after_build'][] = 'itg_mega_reviews_critics_form_after_build';
@@ -36,11 +35,12 @@ function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form
 
 /**
  * After build for mega_review_critic_node_form form.
- * @param type $form
- * @param type $form_state
+ * @param array $form
+ * @param array $form_state
+ * @return array $form
  */
 function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
- //p($form);
+ 
   if (!isset($form['#node']->nid)) {
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
@@ -48,9 +48,9 @@ function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
             });', array('type' => 'inline', 'scope' => 'footer'));
   }
   
-  for($i = 0; $i <= $form['field_mega_review_review']['und']['#max_delta']; $i++) {
+  for ($i = 0; $i <= $form['field_mega_review_review']['und']['#max_delta']; $i++) {
     $count = $i+1;
-    $form['field_mega_review_review']['und'][$i]['#title'] = t('Review ').$count;  
+    $form['field_mega_review_review']['und'][$i]['#title'] = t('Review ') . $count;  
   }
  
   drupal_add_js(drupal_get_path('module', 'itg_mega_reviews_critics') . '/js/itg_mega_reviews_critics.js', array('weight' => 1));
@@ -61,9 +61,7 @@ function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
 
 /**
  * Implements hook_form_FORMID_alter().
- * @param type $form
- * @param type $form_state
- * @param type $form_id  
+ * {@inheritdoc}  
  */
 function itg_mega_reviews_critics_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   
@@ -72,7 +70,8 @@ function itg_mega_reviews_critics_form_views_exposed_form_alter(&$form, &$form_s
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
      $form['nid']['#autocomplete_path'] = 'content-nid-list/mega_review_critic/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Review ID'));
-   } else if ($form['#id'] == 'views-exposed-form-celebrity-profile-list-page') {
+   } 
+   elseif ($form['#id'] == 'views-exposed-form-celebrity-profile-list-page') {
      $form['title']['#autocomplete_path'] = 'content-title-list/itg_celebrity_profile/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Name'));     
      $form['nid']['#autocomplete_path'] = 'content-nid-list/itg_celebrity_profile/autocomplete';
@@ -83,8 +82,8 @@ function itg_mega_reviews_critics_form_views_exposed_form_alter(&$form, &$form_s
 
 /**
  * Custom submit callback for Mega reviews form.
- * @param type $form
- * @param type $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {  
   if (isset($_SESSION['messages'])) {
@@ -93,11 +92,15 @@ function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {
   
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'mega-review-critic') {
     $op = 'created';  
-  } else {
+  } 
+  else {
       $op = 'updated';
   }
-    $mega_title = $form_state['node']->title;
-  drupal_set_message(t('Mega review <b>' . $mega_title . '</b> has been ' . $op.'.' ));
+  
+  $mega_title = $form_state['node']->title;
+  
+  drupal_set_message(t('Mega review <b>' . $mega_title . '</b> has been ' . $op . '.' ));
+  
   $_GET['destination'] = $_REQUEST['destination'];
    
 }
@@ -105,6 +108,7 @@ function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {
 
 /**
  * Implements hook_block_info().
+ * @return array $blocks
  */
 function itg_mega_reviews_critics_block_info() {
   $blocks['mega_reviews_tab_form_block'] = array(
@@ -117,15 +121,15 @@ function itg_mega_reviews_critics_block_info() {
 
 /**
  * Implements hook_block_view()
- * @param type $delta
+ * {@inheritdoc}
  */
 function itg_mega_reviews_critics_block_view($delta = '') {
-  global $user;
+  
   $block = array();
-  $data = '';
+  
   switch ($delta) {
     case 'mega_reviews_tab_form_block':                       
-      $block['content'] = theme('mega_reviews_tab_form_display_block', array('data' => $data));
+      $block['content'] = theme('mega_reviews_tab_form_display_block', array('data' => ''));
     break;        
   }
   
@@ -134,10 +138,7 @@ function itg_mega_reviews_critics_block_view($delta = '') {
 
 /**
  * Implements hook_theme().
- * @param type $existing
- * @param type $type
- * @param type $theme
- * @param type $path
+ * {@inheritdoc}
  */
 function itg_mega_reviews_critics_theme($existing, $type, $theme, $path) {
   $themes = array(
