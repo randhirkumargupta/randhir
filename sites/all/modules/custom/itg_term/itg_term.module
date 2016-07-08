@@ -285,7 +285,8 @@ function itg_term_views_pre_render(&$view) {
     }
 
     // Add "Create Tag" button on listing page of Tags Management
-    $header_content_term = l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV'), 'admin/structure/taxonomy/csv_import');
+    $header_content_term = '<span class="count">Count ('.$view->total_rows.') </span>';
+    $header_content_term .= l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV'), 'admin/structure/taxonomy/csv_import');
     drupal_add_js("jQuery(document).ready(function(){ jQuery('.feed-icon a').empty(); jQuery('.feed-icon a').html('Export CSV'); });", 'inline');
     $view->attachment_before = $header_content_term;
   }
