@@ -170,8 +170,9 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         '#type' => 'date_popup',
         '#title' => t('Issue'),
         '#date_format' => 'd/m/Y',
+        '#date_label_position' => 'none',
         '#attributes' => array(
-        // 'readonly' => 'readonly'
+          'readonly' => 'readonly'
         ),
         '#weight' => 98,
         '#attributes' => array('class' => array('associate-pti-issue')),  

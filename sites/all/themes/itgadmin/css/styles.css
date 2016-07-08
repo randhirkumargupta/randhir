@@ -2184,6 +2184,9 @@ div.image-widget-data .ajax-progress-throbber {
 .node-story-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story {
   padding-left: 220px;
 }
+.node-story-form .form-field-name-field-common-related-content .form-type-textfield .form-text {
+  max-width: 840px;
+}
 
 .close-preview {
   position: absolute;

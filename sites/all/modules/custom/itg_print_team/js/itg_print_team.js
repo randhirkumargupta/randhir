@@ -31,7 +31,7 @@
             $('input[name="field_survey_end_date[und][0][value][date]"]').attr('readonly', true);
             $('#views-form-manage-print-team-page div .container-inline').hide();
             $('.form-item-pti-issue-date label').hide();
-            
+
             if ($("input[name='field_pti_idea_status[und]']:checked").val() === 'Approved') {
               $('#edit-field-pti-words-limit').show();
               $('#edit-field-survey-end-date').show();

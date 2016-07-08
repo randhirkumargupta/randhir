@@ -137,29 +137,29 @@ if ($theme != 'itgadmin') { ?>
 <!--------------------------------Code for Admin tpl---------------------------------------->
 Admin home Tamplate
 <div id="<?php print $_GET['template_name']?>-block">
-  <div id="front-block-1">
-    <div id="front-block-1-display"></div>
+  <div id="<?php print $_GET['template_name']?>-block-1">
+    <div id="<?php print $_GET['template_name']?>-block-1-display"></div>
     Block 1
     <input type="text" maxlength="255" size="30" value="" name="block_title" class="block_title_id">
     <input type="text" maxlength="255" size="30" value="" name="widget_name" class="widget_name">
     <input type="text" maxlength="255" size="30" value="" name="filter_url" class="filter_url">
   </div>
-  <div id="front-block-2">
-    <div id="front-block-2-display"></div>
+  <div id="<?php print $_GET['template_name']?>-block-2">
+    <div id="<?php print $_GET['template_name']?>-block-2-display"></div>
     Block 2
     <input type="text" maxlength="255" size="30" value="" name="block_title" class="block_title_id">
     <input type="text" maxlength="255" size="30" value="" name="widget_name" class="widget_name">
     <input type="text" maxlength="255" size="30" value="" name="filter_url" class="filter_url">
   </div>
-  <div id="front-block-3">
-    <div id="front-block-3-display"></div>
+  <div id="<?php print $_GET['template_name']?>-block-3">
+    <div id="<?php print $_GET['template_name']?>-block-3-display"></div>
     Block 3
     <input type="text" maxlength="255" size="30" value="" name="block_title" class="block_title_id">
     <input type="text" maxlength="255" size="30" value="" name="widget_name" class="widget_name">
     <input type="text" maxlength="255" size="30" value="" name="filter_url" class="filter_url">
   </div>
-  <div id="front-block-4">
-    <div id="front-block-4-display"></div>
+  <div id="<?php print $_GET['template_name']?>-block-4">
+    <div id="<?php print $_GET['template_name']?>-block-4-display"></div>
     Block 4
     <input type="text" maxlength="255" size="30" value="" name="block_title" class="block_title_id">
     <input type="text" maxlength="255" size="30" value="" name="widget_name" class="widget_name">

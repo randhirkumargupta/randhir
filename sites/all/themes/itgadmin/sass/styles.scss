@@ -1803,7 +1803,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
     padding-left: 220px;
   }
-  
+  .form-field-name-field-common-related-content{
+      .form-type-textfield .form-text{max-width: 840px;}
+  }
 }
 .form-field-name-field-astro-date-range{
   @extend .itg-date-range;
