@@ -167,5 +167,35 @@ Admin home Tamplate
   </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+    Big News
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+    Top and Most popular stories
+    </div>
+    <div class="col-md-5">
+    mid section
+    </div>
+    <div class="col-md-4">
+    right section
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+    left section
+    </div>
+    <div class="col-md-4">
+    mid section
+    </div>
+    <div class="col-md-4">
+    right section
+    </div>
+</div>
+
+
+
 <?php }
 
