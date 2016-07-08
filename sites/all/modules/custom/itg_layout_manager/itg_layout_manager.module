@@ -34,7 +34,7 @@ function itg_layout_manager_block_info() {
   );
   
   $blocks['layout_button_block'] = array(
-    'info' => t('Layout widget list block'),
+    'info' => t('Layout button block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
