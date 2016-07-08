@@ -57,7 +57,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     }
 
     if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
-      /* @var $node_type string */
+      //* @var $node_type string *//
       $node_type = 'Event';
       $node_type = str_replace("_", " ", $node_type);
       $node_type = ucfirst($node_type);
