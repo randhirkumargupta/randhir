@@ -26,12 +26,12 @@ function itg_podcast_block_info() {
  * {@inheritdoc}
  */
 function itg_podcast_block_view($delta = '') {
-  global $user;
+
   $block = array();
-  $data = '';
+
   switch ($delta) {
     case 'podcast_tab_form_block':
-      $block['content'] = theme('podcast_tab_form_block', array('data' => $data));
+      $block['content'] = theme('podcast_tab_form_block', array('data' => ''));
       break;
   }
 
@@ -237,12 +237,10 @@ function itg_podcast_dailymotion($real_path, $key, $uri, $fid) {
     }
   }
   
-
-  $filepath = $real_path;
   // Temporarily upload a file on Dailymotion' servers
   // This does not create a audio, it only offers you a public URL to work with.
   try {
-  $url = $api->uploadFile($filepath);
+  $url = $api->uploadFile($real_path);
   $result = $api->post(
       '/me/videos', array(
     'url' => $url,
@@ -372,11 +370,8 @@ function itg_podcast_field_attach_form($entity_type, $entity, &$form, &$form_sta
   // Iterate through the instances.
   $return = array();
   foreach ($instances as $instance) {
-    // field_info_field() is not available for deleted fields, so use
-    // field_info_field_by_id().
     $field = field_info_field_by_id($instance['field_id']);
     $field_name = $field['field_name'];
-
     //If we are looking at our field type and specific widget type, and we are multiple entries
     if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
       if ($field['bundles']['node'][0] == "podcast") {
