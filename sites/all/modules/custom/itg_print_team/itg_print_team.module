@@ -71,7 +71,8 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
  * @param string $form_id
  */
 function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
-  global $user;
+  global $user, $base_url;
+  
   switch ($form_id) {
 
     case 'print_team_integration_node_form':
@@ -117,8 +118,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         if ($idea_review_flag) {
           if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
             $form['field_story_category']['#access'] = FALSE;
-            $form['field_quiz_answer_image']['#access'] = FALSE;
-            $form['field_quiz_answer_video']['#access'] = FALSE;
+            unset($form['field_pti_print_media']);
             $form['field_pti_issue']['#access'] = FALSE;
             $form['field_pti_magazine']['#access'] = FALSE;
           }
@@ -126,8 +126,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         else {
           if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
             $form['field_story_category']['#access'] = FALSE;
-            $form['field_quiz_answer_image']['#access'] = FALSE;
-            $form['field_quiz_answer_video']['#access'] = FALSE;
+            unset($form['field_pti_print_media']);
           }
 
           $form['field_pti_idea_status']['#access'] = FALSE;
@@ -139,13 +138,12 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       }
       else {
         $form['field_story_category']['#access'] = FALSE;
-        $form['field_quiz_answer_image']['#access'] = FALSE;
-        $form['field_quiz_answer_video']['#access'] = FALSE;
         $form['field_pti_words_limit']['#access'] = FALSE;
         $form['field_survey_end_date']['#access'] = FALSE;
         $form['field_pti_idea_status']['#access'] = FALSE;
         $form['field_pti_issue']['#access'] = FALSE;
         $form['field_pti_magazine']['#access'] = FALSE;
+        unset($form['field_pti_print_media']);
       }
 
       $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
@@ -177,6 +175,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           'readonly' => 'readonly'
         ),
         '#weight' => 98,
+        '#attributes' => array('class' => array('associate-pti-issue')),  
       );
       $form['pti_magazine'] = array(
         '#type' => 'select',
@@ -184,7 +183,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         '#options' => itg_print_team_get_magazine_title(),
         '#default_value' => '_none',
         '#weight' => 99,
-        '#attributes' => array('class' => array('custom-issue')),
+        '#attributes' => array('class' => array('associate-pti-magazine')),
       );
 
       $form['submit'] = array(
