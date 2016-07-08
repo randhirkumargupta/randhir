@@ -9,4 +9,5 @@ dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[user_permission][] = administer itg_autosave settings
+features[views_view][] = autosave_settings
 features_exclude[dependencies][ctools] = ctools

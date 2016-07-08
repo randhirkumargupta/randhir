@@ -94,7 +94,7 @@ function itg_podcast_form_alter(&$form, &$form_state, $form_id) {
       }
       $form['actions']['submit']['#submit'][] = 'itg_podcast_submit_status_message';
       $form['actions']['submit']['#submit'][] = 'itg_podcast_custom_submit';
-      $form['field_podcast_audio_upload'][LANGUAGE_NONE]['#title'] = '';
+    //  $form['field_podcast_audio_upload'][LANGUAGE_NONE]['#title'] = '';
       break;
   }
 }
@@ -280,7 +280,7 @@ function itg_podcast_dailymotion($real_path, $key, $uri, $fid) {
          drupal_goto();
     }
     else {
-      drupal_set_message($e->getMessage(), 'error');
+      drupal_set_message($e->getMessage().$e->getCode(), 'error');
       }
   }
   return $result;

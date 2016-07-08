@@ -239,7 +239,8 @@ function itg_mobile_vas_service_content_submit($form, &$form_state) {
     $op = 'updated';
   }
   $node_title = isset($form_state['node']->title) ? $form_state['node']->title : $node->title;
-  drupal_set_message(t('Vas Service Content <b>' . $node_title . '</b> has been ' . $op . '.'));
+  drupal_set_message(t('Vas Service Content <b> ' . $node_title . ' </b> has been ' . $op . '.'));
+
   $form_state['redirect'] = 'service-content-listing';
   return $form;
 }
@@ -371,10 +372,6 @@ function itg_mobile_association_validator(&$form, &$form_state) {
 
   $service_expiry_date = itg_mobile_get_service_expiry_date($target_id);
 
-  if (!empty($service_expiry_date) && $service_expiry_date < date('Y-m-d H:i:s')) {
-    //form_set_error('field_service_association_title', 'Sorry. Your Service has been expired.');
-  }
-
   $frequency = $form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value'];
 
   $start_date = $form_state['values']['field_service_frequency_date'][LANGUAGE_NONE][0]['value'];
@@ -385,7 +382,7 @@ function itg_mobile_association_validator(&$form, &$form_state) {
   if ($frequency == 1) {
     drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-service-frequency').show(); });", 'inline');
   }
-  else if ($frequency > 1) {
+  elseif ($frequency > 1) {
     if (empty($start_date) && empty($end_date)) {
       $validate = TRUE;
       drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-field-service-frequency').show(); jQuery('#field-service-content-values').hide();});", 'inline');
@@ -702,7 +699,6 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
     $result = get_service_association($association_nid);
     $name = '';
     $entity_id = '';
-    $name = '';
     while ($record = $result->fetchAssoc()) {
       $service_title = $record['title'];
       $entity_id = $record['entity_id'];
@@ -775,7 +771,6 @@ function itg_mobile_services_custom_callback($form, &$form_state) {
   $service_char_limit = $node->field_service_char_limit[LANGUAGE_NONE][0]['value'];
   $form['field_service_title'][LANGUAGE_NONE][0]['value']['#value'] = ($service_title) ? $service_title : '';
   $form['field_service_char_limit'][LANGUAGE_NONE][0]['value']['#value'] = ($service_char_limit) ? $service_char_limit : '';
-  //watchdog('service_char_limit', $service_char_limit);
   return array(
     '#type' => 'ajax',
     '#commands' => array(
@@ -838,14 +833,6 @@ function itg_mobile_services_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_mobile_services.inc',
   );
-
-  $items['mobile-services-cron'] = array(
-    'page callback' => 'itg_mobile_services_cron',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_mobile_services.inc',
-  );
-
   return $items;
 }
 
@@ -1091,7 +1078,6 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
   $node_nid = isset($form_state['node']->nid) ? $form_state['node']->nid : '';
   $sid = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE]);
   $service_frequency_id = trim($form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value']);
-  watchdog('arun', '<pre>' . print_r($service_frequency_id, 1) . '</pre>');
   session_start();
   $_SESSION['service_title_id'] = $sid;
   $_SESSION['service_frequency_id'] = $service_frequency_id;
@@ -1240,7 +1226,6 @@ function itg_mobile_content_reset_callback($association_nid, $service_frequency_
     $result = get_service_association($association_nid);
     $name = '';
     $entity_id = '';
-    $name = '';
     while ($record = $result->fetchAssoc()) {
 
       $service_title = $record['title'];
@@ -1272,4 +1257,18 @@ function itg_mobile_content_reset_callback($association_nid, $service_frequency_
       drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_service.js', array('weight' => 3, 'scope' => 'footer'));
     }
   }
+}
+
+/**
+ * Implements hook__cronapi().
+ * {@inheritdoc}
+ */
+function itg_mobile_services_cronapi($op, $job = NULL) {
+  $items['mobile_services_feeds'] = array(
+    'description' => 'send fedds to Mail, ftp, url.',
+    'weight' => 5,
+    'callback' => 'itg_mobile_services_cron',
+    'file' => 'includes/itg_mobile_services.inc',
+  );
+  return $items;
 }

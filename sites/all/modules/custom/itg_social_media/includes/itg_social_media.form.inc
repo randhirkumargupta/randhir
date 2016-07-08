@@ -15,14 +15,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       $data[] = $option['value'];
     }
   }
-
-  // Add js file to form.
-  $form['#attached']['js'] = array(
-    drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js',
-    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
-    drupal_get_path('module', 'itg_astro') . '/js/moment.js',
-  );
-  
+  drupal_add_js(drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js');
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
+   
   // Prepare form array.
   $form['itg_smi'] = array(
     '#type' => 'checkboxes',
@@ -34,6 +29,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       'facebook_instant_article' => t('<i title="Facebook Instant Article" class="fa fa-facebook-square" aria-hidden="true"></i>'),      
     ),
     '#default_value' => $data,
+    '#required' => TRUE,
   );
   
   $form['fb_wrap'] = array(
@@ -66,9 +62,11 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#upload_location' => 'public://itg_fb_img/',
     '#default_value' => isset($node->field_story_facebook_image['und'][0]['fid']) ? $node->field_story_facebook_image['und'][0]['fid'] : 0,
     '#widget' => 'imce',
+    '#description' => 'Files must be less than<strong>5 MB</strong>.<br>Allowed file types:<strong>gif jpeg </strong>',
     '#preview' => TRUE,
     "#upload_validators" => array(
-      "file_validate_extensions" => array("gif jpg")
+      "file_validate_extensions" => array("gif jpeg"),
+      "file_validate_size" => array(5*1024 * 1024),
     ),
     '#states' => array(
       'visible' => array(
@@ -103,9 +101,11 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#upload_location' => 'public://facebook_video/',
     '#default_value' => isset($node->field_story_facebook_video['und'][0]['fid']) ? $node->field_story_facebook_video['und'][0]['fid'] : 0,
     '#widget' => 'imce',
+    '#description' => 'Files must be less than<strong>512 MB</strong>.<br>Allowed file types:<strong>mp4 mov </strong>',
     '#preview' => TRUE,
     "#upload_validators" => array(
-      "file_validate_extensions" => array("mp4 mov")
+      "file_validate_extensions" => array("mp4 mov"),
+      "file_validate_size" => array(500*1024 * 1024),
     ),
     '#states' => array(
       'visible' => array(
@@ -142,8 +142,17 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#states' => array(
       'visible' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
-      ),      
+      ),
+      'required' => array(
+        ':input[name="itg_twitter_img[fid]"]' => array('!value' => 0),
+      ),
     ),
+    '#rules' => array(
+        array(
+          'rule' => 'length[10, 126]', 
+          'error' => '%field field can not exceed 126 characters.'
+        ),        
+    ),    
   );
   
   $form['twit_wrap']['itg_twitter_img'] = array(
@@ -153,9 +162,11 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#default_value' => isset($node->field_story_tweet_image['und'][0]['fid']) ? $node->field_story_tweet_image['und'][0]['fid'] : 0,
     '#upload_location' => 'public://itg_twitter_img/',
     '#widget' => 'imce',
+    '#description' => 'Files must be less than<strong>5 MB</strong>.<br>Allowed file types:<strong>gif jpeg</strong>',
     '#preview' => TRUE,
     "#upload_validators" => array(
-      "file_validate_extensions" => array("gif jpg")
+      "file_validate_extensions" => array("gif jepg"),
+      "file_validate_size" => array(5*1024 * 1024),
     ),
     '#states' => array(
       'visible' => array(
@@ -183,6 +194,12 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),
       ),      
     ),
+    '#rules' => array(
+        array(
+          'rule' => 'length[10, 126]', 
+          'error' => '%field field can not exceed 126 characters.'
+        ),
+    ),
   );
   $form['twit_wrap']['itg_twit_video'] = array(
     '#title' => t('Video'),
@@ -191,8 +208,10 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#default_value' => isset($node->field_story_twitter_video['und'][0]['fid']) ? $node->field_story_twitter_video['und'][0]['fid'] : 0,
     '#widget' => 'imce',
     '#preview' => TRUE,
+    '#description' => 'Files must be less than<strong>512 MB</strong>.<br>Allowed file types:<strong>mp4 mov </strong>' . l(t('Please visit'), 'https://support.twitter.com/articles/20172128#import-web'),
     "#upload_validators" => array(
-      "file_validate_extensions" => array("mp4 mov")
+      "file_validate_extensions" => array("mp4 mov"),
+      "file_validate_size" => array(512*1024 * 1024),
     ),
     '#states' => array(
       'visible' => array(
@@ -221,7 +240,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   
   $form['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Share Content'),
+    '#value' => t('Share Content'),    
   );
 
   return $form;
