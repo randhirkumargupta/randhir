@@ -775,16 +775,7 @@ jQuery(document).ready(function(){
         jQuery(this).parent().remove();
     });
     // end of code
-    
-//    function emptyCheckList(){
-//        var item = [];
-//        var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
-//        if(!listLength){
-//            console.log('No content associated for this story yet !');
-//        }
-//    }
-//    
-//    emptyCheckList();
+   
     
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {
@@ -798,6 +789,7 @@ jQuery(document).ready(function(){
             item.push(jQuery(this).find('.item-value').text());
         });
        jQuery('#edit-field-common-related-content-und-0-value').val(item);
+       alert('Changes made successfully');
     });
     // end of code
     
