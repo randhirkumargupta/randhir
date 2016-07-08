@@ -73,7 +73,9 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
 function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
+    
     case 'print_team_integration_node_form':
+      
       //Change page title
       drupal_set_title(t('Submit Your Idea'));
 
@@ -109,23 +111,39 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $idea_review_flag = TRUE;
         }
       }
-
-      //Check for approval status
-      if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
-
-        $form['field_story_category']['#access'] = FALSE;
-        $form['field_quiz_answer_image']['#access'] = FALSE;
-        $form['field_quiz_answer_video']['#access'] = FALSE;
-        $form['field_pti_idea_status']['#access'] = FALSE;
-        $form['field_pti_words_limit']['#access'] = FALSE;
-        $form['field_survey_end_date']['#access'] = FALSE;
-      }
-      else {
-        if (!$idea_review_flag) {
+      
+      //Enable/Disable fields according to satus and role
+      if ($form['#node']->nid) {
+        if ($idea_review_flag) {
+          if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
+            $form['field_story_category']['#access'] = FALSE;
+            $form['field_quiz_answer_image']['#access'] = FALSE;
+            $form['field_quiz_answer_video']['#access'] = FALSE;
+            $form['field_pti_issue']['#access'] = FALSE;
+            $form['field_pti_magazine']['#access'] = FALSE;
+          }
+        } else {
+          if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
+            $form['field_story_category']['#access'] = FALSE;
+            $form['field_quiz_answer_image']['#access'] = FALSE;
+            $form['field_quiz_answer_video']['#access'] = FALSE;
+          }
+          
           $form['field_pti_idea_status']['#access'] = FALSE;
           $form['field_pti_words_limit']['#access'] = FALSE;
           $form['field_survey_end_date']['#access'] = FALSE;
+          $form['field_pti_issue']['#access'] = FALSE;
+          $form['field_pti_magazine']['#access'] = FALSE;
         }
+      } else {
+        $form['field_story_category']['#access'] = FALSE;
+        $form['field_quiz_answer_image']['#access'] = FALSE;
+        $form['field_quiz_answer_video']['#access'] = FALSE;
+        $form['field_pti_words_limit']['#access'] = FALSE;
+        $form['field_survey_end_date']['#access'] = FALSE;
+        $form['field_pti_idea_status']['#access'] = FALSE;
+        $form['field_pti_issue']['#access'] = FALSE;
+        $form['field_pti_magazine']['#access'] = FALSE;
       }
 
       $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
@@ -171,9 +189,11 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     case 'views_form_strory_menegment_page_1':
       $form['submit'] = array(
         '#type' => 'submit',
-        '#value' => t('Generate XML.'),
+        '#value' => t('Generate XML'),
         '#weight' => 100,
+        '#attributes' => array('class' => array('button'), 'style' => 'float:left; margin: 0px 10px 0px 0px')  
       );
+      
       $form['#validate'][] = 'itg_story_xml_validate';
       $form['submit']['#submit'][] = 'itg_story_xml_submit';
       break;
@@ -519,3 +539,4 @@ function itg_print_team_check_issue($issue_date) {
           ->condition('title', $issue_date, '=')
           ->range(0, 1)->execute()->rowCount();
 }
+
