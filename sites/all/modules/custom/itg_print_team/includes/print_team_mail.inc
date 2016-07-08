@@ -13,11 +13,12 @@ function itg_print_team_send_idea_status_mail($node, $source){
   
   if($source == 'insert'){
     $mail_content = itg_print_team_approval_mail_content($node);
-    $user_email_ids = 'haripalrao@gmail.com';
+    $user_email_ids = itg_print_team_get_approval_user_emails();
   }
-  else{
+  else {
     $mail_content = itg_print_team_status_mail_content($node);
-    $user_email_ids = 'haripal.rao@kelltontech.com';
+    $user = user_load($node->uid);
+    $user_email_ids = $user->mail;
   }
 
   //Array of email subject and body 
@@ -72,4 +73,35 @@ function itg_print_team_status_mail_content($node){
  */
 function itg_print_team_approval_mail_content($node){
   return theme('itg_print_team_idea_approval_mail', array('node' => $node));
+}
+
+/**
+ * Get user email of idea approval team
+ * 
+ * @return array
+ *    an array of users uid, email and name
+ */
+function itg_print_team_get_approval_user_emails(){
+  $user_list = array();
+  $roles = array('Co-ordinator', 'Editor', 'Section Editor/Anchor');
+  $query = db_select('users_roles', 'ur')
+          ->join('users', 'u', 'u.uid = ur.uid')
+          ->join('role', 'r', 'r.rid = ur.rid')
+          ->fields('u', array('uid'))
+          ->fields('u', array('mail'))
+          ->fields('u', array('name'))
+          ->condition('r.name', $roles, 'IN');
+
+  $result = $query->execute()->fetchObject();
+
+  if ($result) {
+    foreach ($result as $row) {
+      $uid = $row->uid;
+      $user_list[$uid]['mail'] = $row->mail;
+      $user_list[$uid]['name'] = $row->name;
+      $user_list[$uid]['uid'] = $uid;
+    }
+  }
+
+  return $user_list;
 }
