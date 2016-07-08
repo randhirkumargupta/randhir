@@ -136,7 +136,7 @@ function itg_poll_after_build($form, &$form_state) {
 
 /**
  * Implements custom validate of node add form for poll.
- * @param array $form 
+ * @param array $form
  * @param array reference $form_state
  */
 function itg_poll_node_form_validate($form, &$form_state) {
@@ -185,15 +185,15 @@ function itg_poll_node_form_validate($form, &$form_state) {
 
 /**
  * Validate poll answer form (option)
- * @param int $cnt: The total rows from poll answer option.  
+ * @param int $cnt : The total rows from poll answer option.
  * @param array reference $form_state
- * @param int $type: 1=> text, 2=> image, 3=> video
- * @param string $field: validate fields
- * @param string $err_msg: show error message with fields
+ * @param int $type : 1=> text, 2=> image, 3=> video
+ * @param string $field : validate fields
+ * @param string $err_msg : show error message with fields
  */
 function itg_poll_validate_answer($cnt, $form_state, $type, $field, $err_msg) {
-  $count = ($cnt <= 2 ) ? $cnt : $cnt - 1;
-  $err_msg = ($count == 2 ) ? 'Required Minimum Two Poll Answer' : $err_msg;
+  $count = ($cnt <= 2) ? $cnt : $cnt - 1;
+  $err_msg = ($count == 2) ? 'Required Minimum Two Poll Answer' : $err_msg;
 
   for ($i = 0; $i < 2; $i++) {
     $poll_answer = isset($form_state['values']['field_poll_answer'][LANGUAGE_NONE]) ? $form_state['values']['field_poll_answer'][LANGUAGE_NONE][$i] : '';
@@ -219,9 +219,9 @@ function itg_poll_isCookies($nid) {
   // get poll cookie
   if (isset($_COOKIE['visitedPoll'])) {
 
-    $pollArr = explode('_', $_COOKIE['visitedPoll']);
+    $poll_array = explode('_', $_COOKIE['visitedPoll']);
 
-    if ($nid === $pollArr[1]) {
+    if ($nid === $poll_array[1]) {
       $is_cookies = 'yes';
     }
   }
@@ -240,9 +240,9 @@ function itg_poll_getPollResult($this_nid) {
   }
 
   $query = db_select('itg_polls', 'p')
-      ->fields('p', array('ansId', 'uid'))
-      ->condition('p.nid', $this_nid)
-      ->groupBy('p.ansId');
+    ->fields('p', array('ansId', 'uid'))
+    ->condition('p.nid', $this_nid)
+    ->groupBy('p.ansId');
 
 
   // Add the COUNT expression
@@ -250,9 +250,9 @@ function itg_poll_getPollResult($this_nid) {
   $results = $query->execute()->fetchAll();
 
   foreach ($results as $row) {
-    $optionArr[$row->ansId] = $row;
+    $option_array[$row->ansId] = $row;
   }
-  return $optionArr;
+  return $option_array;
 }
 
 /**
@@ -266,8 +266,8 @@ function itg_poll_getTotalPoll($this_nid) {
     return FALSE;
   }
   return $total = db_select('itg_polls', 'p')
-          ->fields('p', array('Id'))
-          ->condition('p.nid', $this_nid)->execute()->rowCount();
+    ->fields('p', array('Id'))
+    ->condition('p.nid', $this_nid)->execute()->rowCount();
 }
 
 /**
@@ -278,9 +278,9 @@ function itg_poll_getTotalPoll($this_nid) {
  */
 function itg_poll_getcurrent_userpoll($nid, $uid) {
   return $total = db_select('itg_polls', 'p')
-          ->fields('p', array('uid'))
-          ->condition('p.nid', $nid)
-          ->condition('p.uId', $uid, '=')->execute()->fetchField();
+    ->fields('p', array('uid'))
+    ->condition('p.nid', $nid)
+    ->condition('p.uId', $uid, '=')->execute()->fetchField();
 }
 
 /**
@@ -289,17 +289,17 @@ function itg_poll_getcurrent_userpoll($nid, $uid) {
  */
 function itg_poll_poll_data() {
   return $total = db_select('itg_polls', 'p')
-          ->fields('p')
-          ->condition('p.mail_flag', '1', '!=')
-          ->condition('p.display_result', '2', '=')
-          ->condition('p.uId', '0', '!=')->execute()->fetchAll();
+    ->fields('p')
+    ->condition('p.mail_flag', '1', '!=')
+    ->condition('p.display_result', '2', '=')
+    ->condition('p.uId', '0', '!=')->execute()->fetchAll();
 }
 
 /**
  * Implementation of hook_form().
- * @param array $form 
+ * @param array $form
  * @param array reference $form_state
- * @param array $parms 
+ * @param array $parms
  * @return array
  */
 function itg_poll_form($form, &$form_state, $parms) {
@@ -326,18 +326,17 @@ function itg_poll_form($form, &$form_state, $parms) {
         $poll_caption_text = isset($temp_ent->field_ans_caption[LANGUAGE_NONE]) ? $temp_ent->field_ans_caption[LANGUAGE_NONE][0]['value'] : '';
         if (isset($poll_answer_image) && $poll_answer_image > 0) {
           $poll_image = theme('image_style', array('style_name' => 'thumbnail', 'path' => file_load($poll_answer_image)->uri)) . '<br /><span class="poll-ans-caption">' . $poll_caption_text . '</span>';
-          $pollAnswer[$key] = isset($poll_image) ? $poll_image : '';
+          $poll_answer[$key] = isset($poll_image) ? $poll_image : '';
         }
         else {
-          $pollAnswer[$key] = isset($poll_answer_text) ? $poll_answer_text . '<br /><span class="poll-ans-caption">' . $poll_caption_text . '</span>' : '';
+          $poll_answer[$key] = isset($poll_answer_text) ? $poll_answer_text . '<br /><span class="poll-ans-caption">' . $poll_caption_text . '</span>' : '';
         }
       }
     }
   endforeach;
-  $val = array_keys($pollAnswer);
   $form['pole_answer'] = array(
     '#type' => 'radios',
-    '#options' => $pollAnswer,
+    '#options' => $poll_answer,
     '#prefix' => '<div class="poll-main-wrap">',
     '#suffix' => '</div><span class="poll-ans-error"></span>',
   );
@@ -394,20 +393,19 @@ function itg_poll_form_ajax_submit($form, &$form_state) {
     return array('#type' => 'ajax', '#commands' => $commands);
   }
   global $user;
-  $nId = $form_state['values']['nid'];
-  $display_result = $form_state['values']['display_result'];
+  $node_id = $form_state['values']['nid'];
   $pole_answer = $form_state['values']['pole_answer'];
   // Get display result
-  $dsp_result = itg_poll_get_display_result($nId);
+  $dsp_result = itg_poll_get_display_result($node_id);
   $created = date('Y-m-d H:i:s');
   db_insert('itg_polls')->fields(array(
-    'nId' => $nId,
+    'node_id' => $node_id,
     'ansId' => $pole_answer,
     'uId' => $user->uid,
     'display_result' => $dsp_result,
     'created' => $created))->execute();
   $expire = time() + 60 * 60 * 24 * 30; // expires in one month
-  $value = 'yes_' . $nId;
+  $value = 'yes_' . $node_id;
   setcookie('visitedPoll', $value, $expire, '/');
   $_SESSION['first_submit_anomoyous'] = 'yes';
   $poll_answer = views_embed_view('poll_listing', 'block_2', $form_state['values']['argument_current_nid']);
@@ -422,9 +420,9 @@ function itg_poll_form_ajax_submit($form, &$form_state) {
  */
 function itg_poll_get_display_result($nid) {
   $result = db_select('field_data_field_display_result', 'fdr')
-          ->fields('fdr', array('field_display_result_value'))
-          ->condition('fdr.entity_id', $nid, '=')
-          ->condition('fdr.bundle', 'poll', '=')->execute()->fetchField();
+    ->fields('fdr', array('field_display_result_value'))
+    ->condition('fdr.entity_id', $nid, '=')
+    ->condition('fdr.bundle', 'poll', '=')->execute()->fetchField();
   return $result;
 }
 
@@ -446,7 +444,6 @@ function itg_poll_block_info() {
  * {@inheritdoc}
  */
 function itg_poll_block_view($delta = '') {
-  global $user;
   $block = array();
   $data = '';
   switch ($delta) {
@@ -480,12 +477,11 @@ function itg_poll_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * Implements views header link 
+ * Implements views header link
  * {@inheritdoc}
  */
 function itg_poll_views_pre_render(&$view) {
   if ($view->name == "poll_listing" && $view->current_display == 'page') {
-    global $user; // Get user information
     $poll_content = '';
     $poll_content .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $poll_content .= '<a href ="./node/add/poll?destination=manage-poll">Create Poll</a>';
@@ -498,7 +494,6 @@ function itg_poll_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_poll_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-poll-listing-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/poll/autocomplete';
@@ -604,12 +599,12 @@ function itg_poll_complete_time_mail() {
           $mail = drupal_mail('itg_poll', 'send_mail_to_poll_submit_user', $user->mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
           if ($mail['result']) {
             db_update('itg_polls')
-                ->fields(array(
-                  'mail_flag' => 1,
-                ))
-                ->condition('nId', $poll_nid, '=')
-                ->condition('uId', $poll_user_id, '=')
-                ->execute();
+              ->fields(array(
+                'mail_flag' => 1,
+              ))
+              ->condition('nId', $poll_nid, '=')
+              ->condition('uId', $poll_user_id, '=')
+              ->execute();
             return TRUE;
           }
           else {
@@ -659,6 +654,7 @@ function itg_poll_node_presave($node) {
       $node->field_poll_question_text = '';
     }
     elseif ($poll_question == 3) { // video
+      // TODO: Update code here
     }
 
     if ($node->field_poll_question[LANGUAGE_NONE][0]['value'] == 1) { //1 = text
