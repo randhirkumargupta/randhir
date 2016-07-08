@@ -71,7 +71,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
     $form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title / Kicker / Tag name')));
 
     // $bundle_name = array("All" => "Select type", 'Story' => 'Story', 'Blog' => 'Blog');
-    $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'photogallery', 'Videogallery' => 'videogallery', 'Podcast' => 'Podcast');
+    $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast');
     $form['bundle_name']['#type'] = 'select';
     $form['bundle_name']['#options'] = $bundle_name;
     $form['bundle_name']['#size'] = 5;
