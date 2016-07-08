@@ -367,7 +367,7 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * Implement hook_date_popup_process_alter().
  */
 function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-  if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'astro_node_form') {
+  if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page') {
     $element['#datepicker_options'] = array(
       'minDate' => "+0D",
     );

@@ -749,6 +749,9 @@ jQuery(document).ready(function(){
     if(checkedlist){
         jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
     }
+    else{
+        jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
+    }
     
     jQuery('.sidebar-trigger').click(function () {
       jQuery(this).parent().toggleClass('active');
@@ -772,21 +775,21 @@ jQuery(document).ready(function(){
         jQuery(this).parent().remove();
     });
     // end of code
+   
     
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {
         var item = [];
         var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
         if(!listLength){
-            jQuery(this).hide();
+            alert('Changes made successfully');
+            jQuery(this).parent().html('<span class="empty-checklist">No content associated for this story yet !</span>');
         }
         jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i){
             item.push(jQuery(this).find('.item-value').text());
         });
        jQuery('#edit-field-common-related-content-und-0-value').val(item);
-      // jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
-        //console.log(itemvalue);
-        
+       alert('Changes made successfully');
     });
     // end of code
     
