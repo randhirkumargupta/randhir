@@ -1,3 +1,11 @@
+/*
+ * @file jquery.form.js
+ */
+
+/*
+ * @file jquery.form.js
+ * Contains all itg ajex form submit
+ */
 /*!
  * jQuery Form Plugin
  * version: 3.17 (25-SEP-2012)

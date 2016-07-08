@@ -1,3 +1,13 @@
+
+/*
+ * @file imce_set_inline.js
+ */
+
+/*
+ * @file imce_set_inline.js
+ * Contains all IMCE 
+ */
+
 (function($) {
 
 var ii = window.imceInline = {};

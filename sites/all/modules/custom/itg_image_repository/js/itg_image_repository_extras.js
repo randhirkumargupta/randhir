@@ -1,3 +1,12 @@
+
+/*
+ * @file itg_image_repository_extras.js
+ */
+
+/*
+ * @file itg_image_repository_extras.js
+ * Contains all itg image repository
+ */
 //This pack implemets: keyboard shortcuts, file sorting, resize bars, and inline thumbnail preview.
 
 (function($) {

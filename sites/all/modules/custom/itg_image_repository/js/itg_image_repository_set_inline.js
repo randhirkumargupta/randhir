@@ -1,3 +1,11 @@
+/*
+ * @file itg_image_repository_set_inline.js
+ */
+
+/*
+ * @file itg_image_repository_set_inline.js
+ * Contains all itg image repository
+ */
 (function($) {
 
 var ii = window.itg_image_repositoryInline = {};

@@ -1,3 +1,13 @@
+
+/*
+ * @file imce_extra.js
+ */
+
+/*
+ * @file imce.js
+ * Contains all IMCE 
+ */
+
 /*
  * IMCE Integration by URL
  * Ex-1: http://example.com/imce?app=XEditor|url@urlFieldId|width@widthFieldId|height@heightFieldId

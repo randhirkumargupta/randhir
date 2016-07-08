@@ -1,3 +1,12 @@
+
+/*
+ * @file jquery.cropit.js
+ */
+
+/*
+ * @file jquery.cropit.js
+ * Contains all itg use for crop the image
+ */
 /*! cropit - v0.5.1 <https://github.com/scottcheng/cropit> */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')

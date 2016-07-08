@@ -9,7 +9,7 @@
  * q = itg_image_repository.
  */
 function itg_image_repository($scheme = NULL) {
-    //print_r($_GET);
+ 
   module_invoke('admin_menu', 'suppress');//suppress admin_menu
   $jsop = isset($_GET['jsop']) ? $_GET['jsop'] : NULL;
   drupal_add_http_header('Content-Type', 'text/html; charset=utf-8');
@@ -119,7 +119,6 @@ function itg_image_repository_js($user, $scheme, $jsop = '') {
   }
   //messages
   $response['messages'] = drupal_get_messages();
-  //print_r($response);die;
 
   //disable devel log.
   $GLOBALS['devel_shutdown'] = FALSE;
@@ -145,7 +144,7 @@ function itg_image_repository_upload_form($form, &$form_state, $ref) {
   $form['html_response'] = array('#type' => 'hidden', '#default_value' => '1');
   $form['#attributes']['enctype'] = 'multipart/form-data';
   $form['#attributes']['class'] = 'dropzone';
-  $form['#action'] = $itg_image_repository['url'].'?jsop=upload&dir=gallery';
+  $form['#action'] = $itg_image_repository['url'] . '?jsop=upload&dir=gallery';
   return $form;
 }
 
@@ -179,10 +178,10 @@ function itg_image_repository_upload_submit($form, &$form_state) {
   $diruri = itg_image_repository_dir_uri($itg_image_repository);
 
   //save uploaded file.
-  //print_r($validators);die;
+
    $replace = variable_get('imce_settings_replace', FILE_EXISTS_RENAME);
   $file = file_save_upload('imce', $validators, $diruri, $replace);
- //print_r($file);die;
+
   if ($file = file_save_upload('imce', $validators, $diruri, $replace)) {
 
     //core bug #54223.
@@ -199,7 +198,7 @@ function itg_image_repository_upload_submit($form, &$form_state) {
     file_save($file);
     itg_image_repository_file_register($file);
     drupal_set_message(t('%filename has been uploaded.', array('%filename' => $file->filename)));
-      // print_r($file->filename);
+
     //update file list
     $img = itg_image_repository_image_info($file->uri);
     $file->width = $img ? $img['width'] : 0;
@@ -473,7 +472,7 @@ function itg_image_repository_process_directories(&$itg_image_repository, $user)
 
   foreach ($directories as $directory) {
     if (substr($directory['name'], 0, 4) == 'php:') {
-      $directory['name'] = eval(substr($directory['name'], 4));
+      $directory['name'] = @eval(substr($directory['name'], 4));
      //php may return an array of directories
       if (is_array($directory['name'])) {
         foreach ($directory['name'] as $name) {

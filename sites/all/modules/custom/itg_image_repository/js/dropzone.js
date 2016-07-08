@@ -1,6 +1,9 @@
 
 /*
  *
+
+ @file Dropzone.js
+ * Contains all Dropzone
  * More info at [www.dropzonejs.com](http://www.dropzonejs.com)
  *
  * Copyright (c) 2012, Matias Meno
