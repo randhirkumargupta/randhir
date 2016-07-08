@@ -14,7 +14,6 @@ Drupal.behaviors.itg_widget = {
                 var newOption = jQuery('<option value="1" selected="selected">Top Stories</option>');
                 jQuery('#edit-qids').append(newOption);
                 jQuery('#edit-qids').trigger("chosen:updated");
-                jQuery("#edit-actionnodequeue-add-action").val("Add To Top Story");
             }
             //jQuery("#edit-submit").attr("value", "Yes");
         }

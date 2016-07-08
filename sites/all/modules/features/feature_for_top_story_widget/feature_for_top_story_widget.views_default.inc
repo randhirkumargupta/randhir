@@ -421,8 +421,8 @@ function feature_for_top_story_widget_views_default_views() {
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 1,
-      'override_label' => 0,
-      'label' => '',
+      'override_label' => 1,
+      'label' => 'Add To  Top Story Widget',
     ),
   );
   /* Field: Content: Title */
