@@ -73,9 +73,9 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
 function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
-    
+
     case 'print_team_integration_node_form':
-      
+
       //Change page title
       drupal_set_title(t('Submit Your Idea'));
 
@@ -111,7 +111,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $idea_review_flag = TRUE;
         }
       }
-      
+
       //Enable/Disable fields according to satus and role
       if ($form['#node']->nid) {
         if ($idea_review_flag) {
@@ -122,20 +122,22 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
             $form['field_pti_issue']['#access'] = FALSE;
             $form['field_pti_magazine']['#access'] = FALSE;
           }
-        } else {
+        }
+        else {
           if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
             $form['field_story_category']['#access'] = FALSE;
             $form['field_quiz_answer_image']['#access'] = FALSE;
             $form['field_quiz_answer_video']['#access'] = FALSE;
           }
-          
+
           $form['field_pti_idea_status']['#access'] = FALSE;
           $form['field_pti_words_limit']['#access'] = FALSE;
           $form['field_survey_end_date']['#access'] = FALSE;
           $form['field_pti_issue']['#access'] = FALSE;
           $form['field_pti_magazine']['#access'] = FALSE;
         }
-      } else {
+      }
+      else {
         $form['field_story_category']['#access'] = FALSE;
         $form['field_quiz_answer_image']['#access'] = FALSE;
         $form['field_quiz_answer_video']['#access'] = FALSE;
@@ -156,9 +158,16 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'][] = 'itg_print_team_form_after_build';
 
       break;
-      
+
     //Add form to associate story with issue and magazine
     case 'views_form_manage_print_team_page':
+      //Array used in itg_print_team.js
+      $settings = array();
+      $settings['base_url'] = $base_url;
+
+      drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
+      //Add JS for itg_print_team
+      drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
       $form['pti_issue'] = array(
         '#type' => 'date_popup',
         '#title' => t('Issue'),
@@ -185,15 +194,15 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       $form['#validate'][] = 'itg_print_team_association_validate';
       $form['submit']['#submit'][] = 'itg_print_team_association_submit';
       break;
-    
+
     case 'views_form_strory_menegment_page_1':
       $form['submit'] = array(
         '#type' => 'submit',
         '#value' => t('Generate XML'),
         '#weight' => 100,
-        '#attributes' => array('class' => array('button'), 'style' => 'float:left; margin: 0px 10px 0px 0px')  
+        '#attributes' => array('class' => array('button'), 'style' => 'float:left; margin: 0px 10px 0px 0px')
       );
-      
+
       $form['#validate'][] = 'itg_story_xml_validate';
       $form['submit']['#submit'][] = 'itg_story_xml_submit';
       break;
@@ -338,9 +347,9 @@ function itg_print_team_node_insert($node) {
 function itg_print_team_node_update($node) {
   switch ($node->type) {
     case 'print_team_integration':
-      
-       module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
- 
+
+      module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
+
       //Set status "Not Decided" for "Needs Modification" case
       if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs Modification') {
         $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] = 'Not Decided';
@@ -422,6 +431,14 @@ function itg_print_team_idea_actions($nid) {
  * @param array $form_state
  */
 function itg_print_team_association_validate($form, &$form_state) {
+  //Array used in itg_print_team.js
+  $settings = array();
+  $settings['base_url'] = $base_url;
+
+  drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
+  //Add JS for itg_print_team
+  drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
+
   $views_bulk_operations = $form_state['values']['views_bulk_operations'];
   $issue = check_plain($form_state['values']['pti_issue']);
   $magazine = check_plain($form_state['values']['pti_magazine']);
@@ -476,6 +493,12 @@ function itg_print_team_association_submit($form, &$form_state) {
 function itg_print_team_association_save($nid, $issue, $magazine) {
   global $user;
   $node = node_load($nid);
+  $issue_date = $issue . ' 00:00:00';
+  $issue_nid = itg_print_team_issue_date($issue_date);
+  $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue_nid;
+  $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
+  field_attach_update('node', $node);
+
   $headline = $node->title;
   $body = $node->body[LANGUAGE_NONE][0]['value'];
   $node = new stdClass();
@@ -490,7 +513,7 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->comment = 0;
   $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
   $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
-  $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = $issue ? $issue : date('Y-m-d h:i:s', time());
+  $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue) ? $issue : date('Y-m-d h:i:s', time());
   //Issue, magazine and supplement
   $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
   if ($magazine) {
@@ -502,11 +525,31 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
 
   $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date;
   $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
+  $node->field_story_source_type = 'print_team_integration';
+  $node->field_story_source_id = $nid;
+
   $node->revision = 1;
   $node->log = 'State Changed to published';
   $node->workbench_moderation_state_new = workbench_moderation_state_published();
   $node = node_submit($node); // Prepare node for saving
   node_save($node); // Finally save node
+}
+
+/**
+ * Get issues nid from node table
+ * @param string $issue_date
+ * @return string
+ */
+function itg_print_team_issue_date($issue_date) {
+  $record = array();
+  if ($issue_date) {
+    $record = db_select('node', 'n')
+            ->fields('n', array('nid'))
+            ->condition('type', 'issue', '=')
+            ->condition('title', $issue_date, '=')
+            ->range(0, 1)->execute()->fetchAssoc();
+  }
+  return isset($record['nid']) ? $record['nid'] : '';
 }
 
 /**
@@ -539,4 +582,3 @@ function itg_print_team_check_issue($issue_date) {
           ->condition('title', $issue_date, '=')
           ->range(0, 1)->execute()->rowCount();
 }
-
