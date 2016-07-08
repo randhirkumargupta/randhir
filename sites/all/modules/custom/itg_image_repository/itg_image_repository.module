@@ -7,6 +7,7 @@
 
 /**
  * Implements hook_menu().
+ * {@inheritdoc}
  */
 function itg_image_repository_menu() {
   $items = array();
@@ -48,12 +49,15 @@ function itg_image_repository_menu() {
     'page arguments' => array(2, 3, 4),
     'access callback' => '_filefield_sources_field_access',
     'access arguments' => array(2, 3, 4),
-    //'file' => 'sources/itg_image_repository.inc',
     'type' => MENU_CALLBACK,
   );
   return $items;
 }
 
+/**
+ * Implements hook_info().
+ * {@inheritdoc}
+ */
 function itg_image_repository_filefield_sources_info() {
     $source = array();
     
@@ -74,12 +78,16 @@ function itg_image_repository_filefield_sources_info() {
 
 
 /**
- * Implements hook_filefield_source_settings().
+ * Implements hook_filefield_source_settings()
+ * {@inheritdoc}
+ * @param string $option
+ * @param array $instance
+ * @return array $return
  */
-function filefield_source_itg_image_repository_settings($op, $instance) {
+function filefield_source_itg_image_repository_settings($option, $instance) {
   $return = array();
 
-  if ($op == 'form') {
+  if ($option == 'form') {
     $settings = $instance['widget']['settings']['filefield_sources'];
 
     $return['source_itg_image_repository'] = array(
@@ -100,7 +108,7 @@ function filefield_source_itg_image_repository_settings($op, $instance) {
       '#default_value' => isset($settings['source_itg_image_repository']['itg_image_repository_mode']) ? $settings['source_itg_image_repository']['itg_image_repository_mode'] : 0,
     );
   }
-  elseif ($op == 'save') {
+  elseif ($option == 'save') {
     $return['source_itg_image_repository']['itg_image_repository_mode'] = 0;
   }
 
@@ -110,6 +118,10 @@ function filefield_source_itg_image_repository_settings($op, $instance) {
 
 /**
  * A #process callback to extend the filefield_widget element type.
+ * @param array $element
+ * @param reference $form_state
+ * @return array $element
+ * 
  */
 function filefield_source_itg_image_repository_process($element, &$form_state, $form) {
   $instance = field_widget_instance($element, $form_state);
@@ -170,6 +182,8 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
 
 /**
  * A #filefield_value_callback function.
+ * @param array $element
+ * @param reference array $item
  */
 function filefield_source_itg_image_repository_value($element, &$item) {
   if (isset($item['filefield_itg_image_repository']['file_path']) && $item['filefield_itg_image_repository']['file_path'] != '') {
@@ -202,6 +216,8 @@ function filefield_source_itg_image_repository_value($element, &$item) {
 
 /**
  * Theme the output of the autocomplete field.
+ *   @param array $variables
+ *   @return string 
  */
 function theme_filefield_source_itg_image_repository_element($variables) {
   $element = $variables['element'];
@@ -212,6 +228,10 @@ function theme_filefield_source_itg_image_repository_element($variables) {
 
 /**
  * Outputs the itg_image_repository browser for FileField.
+ * @param array $entity_type
+ * @param string $bundle_name
+ * @param string $field_name
+ * @return array
  */
 function filefield_source_itg_image_repository_page($entity_type, $bundle_name, $field_name) {
   global $conf;
@@ -241,6 +261,9 @@ function filefield_source_itg_image_repository_page($entity_type, $bundle_name, 
 
 /**
  * Scan and return files, subdirectories, and total size for "full" mode.
+ * @param string $dirname
+ * @param reference array $itg_image_repository
+ * @return array $directory
  */
 function filefield_source_itg_image_repository_custom_scan_full($dirname, &$itg_image_repository) {
   // Get a list of files in the database for this directory.
@@ -272,7 +295,10 @@ function filefield_source_itg_image_repository_custom_scan_full($dirname, &$itg_
 
 /**
  * Scan directory and return file list, subdirectories, and total size for Restricted Mode.
- */
+ * @param string $dirname
+ * @param reference array $itg_image_repository
+ * @return array $directory
+  */
 function filefield_source_itg_image_repository_custom_scan_restricted($dirname, &$itg_image_repository) {
   $field = $GLOBALS['conf']['itg_image_repository_custom_field'];
   $root = $itg_image_repository['scheme'] . '://';
@@ -326,6 +352,8 @@ function filefield_source_itg_image_repository_custom_scan_restricted($dirname, 
 
 /**
  * Disable itg_image_repository profile permissions.
+ * @param reference array $itg_image_repository
+ * @param array $exceptions
  */
 function filefield_source_itg_image_repository_disable_perms(&$itg_image_repository, $exceptions = array()) {
   $disable_all = empty($exceptions);
@@ -339,10 +367,11 @@ function filefield_source_itg_image_repository_disable_perms(&$itg_image_reposit
 
 
 /**
- * Implements hook_permission().
+ * Implements hook_permission()
+ * {@inheritdoc}
  */
 function itg_image_repository_permission() {
-  //print 'asdas';die;
+
   return array(
     'administer itg_image_repository' => array(
       'title' => t('Administer itg_image_repository'),
@@ -354,6 +383,7 @@ function itg_image_repository_permission() {
 
 /**
  * Implements hook_theme().
+ * {@inheritdoc}
  */
 function itg_image_repository_theme() {
   $path = drupal_get_path('module', 'itg_image_repository') . '/tpl';
@@ -385,7 +415,8 @@ function itg_image_repository_theme() {
 }
 
 /**
- * Implements hook_file_download().
+ * Implements hook_file_download()\
+ * {@inheritdoc}
  * Support private downloads if not disabled.
  */
 function itg_image_repository_file_download($uri) {
@@ -399,14 +430,17 @@ function itg_image_repository_file_download($uri) {
 }
 
 /**
- * Implements hook_element_info().
+ * Implements hook_element_info()
+ * {@inheritdoc}
  */
 function itg_image_repository_element_info() {
   return array('textarea' => array('#process' => array('itg_image_repository_textarea')));
 }
 
 /**
- * Inline image/link insertion to textareas.
+ * Inline image/link insertion to textareas
+ * @param  array $element
+ * @return array $element
  */
 function itg_image_repository_textarea($element) {
   static $regexp;
@@ -425,7 +459,10 @@ function itg_image_repository_textarea($element) {
 
 /**
  * Returns the configuration profile assigned to a user for a specific file scheme.
- */
+ * @param array $user
+ * @param string $scheme
+ * @return  boolean
+  */
 function itg_image_repository_user_profile($user, $scheme = NULL) {
   static $ups = array();
 
@@ -442,13 +479,12 @@ function itg_image_repository_user_profile($user, $scheme = NULL) {
 
   // Check scheme
   $swrappers = file_get_stream_wrappers();
-  //print_r($swrappers);die;
   if (!isset($swrappers[$scheme])) {
     return FALSE;
   }
 
   $profiles = variable_get('imce_profiles', array());
-   //print_r($profiles);die;
+
   $scinfo = array('scheme' => $scheme);
 
   // Handle user#1 separately
@@ -472,13 +508,16 @@ function itg_image_repository_user_profile($user, $scheme = NULL) {
 /**
  * Checks if the user is assigned an itg_image_repository profile.
  * A more detailed assignment check is performed before itg_image_repository loads.
+ * @param string $user
+ * @param string $scheme
+ * @return array
  */
 function itg_image_repository_access($user = FALSE, $scheme = NULL) {
 
   if ($user === FALSE) {
     global $user;
   }
- //p(itg_image_repository_user_profile($user, $scheme));die;
+
   return itg_image_repository_user_profile($user, $scheme) ? TRUE : FALSE;
 }
 
@@ -486,6 +525,9 @@ function itg_image_repository_access($user = FALSE, $scheme = NULL) {
 
 /**
  * Checks access to user/{$account->uid}/itg_image_repository for the $user.
+ * @param string $account
+ * @param string $user
+ * @return string
  */
 function itg_image_repository_user_page_access($account, $user = FALSE) {
   if ($user === FALSE) {
@@ -496,6 +538,8 @@ function itg_image_repository_user_page_access($account, $user = FALSE) {
 
 /**
  * Check if the directory name is regular.
+ * @param string $dirname
+ * return boolean
  */
 function itg_image_repository_reg_dir($dirname) {
   return $dirname == '.' || is_int($dirname) || (is_string($dirname) && $dirname != '' && !preg_match('@(^\s)|(^/)|(^\./)|(\s$)|(/$)|(/\.$)|(\.\.)|(//)|(\\\\)|(/\./)@', $dirname));
