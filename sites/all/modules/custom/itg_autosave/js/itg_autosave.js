@@ -13,7 +13,7 @@
           return Drupal.settings.itg_autosave.base_url;
         },
         autosave_for_settings: function() {          
-          console.log(Drupal.settings.itg_autosave.auto_settings);
+          var form_ids = Drupal.settings.itg_autosave.auto_settings;
         } 
       };
       
@@ -61,6 +61,4 @@
       // Custom code ends here
     }
   };
-
-
 })(jQuery, Drupal, this, this.document);

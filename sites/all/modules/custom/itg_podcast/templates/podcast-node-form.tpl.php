@@ -2,7 +2,9 @@
     <h2 class="story-title"><?php print t('Basic Details'); ?></h2>
     <?php print drupal_render($form['title']); ?>
     <?php print drupal_render($form['field_story_short_headline']); ?>
-    <?php print drupal_render($form['field_podcast_kicker_message']); ?>
+    <?php print drupal_render($form['field_story_kicker_text']); ?>
+    <?php print drupal_render($form['field_story_source_id']); ?>
+    <?php print drupal_render($form['field_story_source_type']); ?>
 </div>
 <div id="audioupload">
   <h2 class="story-title"><?php print t('Audio Upload'); ?></h2>
@@ -22,6 +24,7 @@
     <h2 class="story-title"><?php print t('Configuration'); ?></h2>
     <?php print drupal_render($form['field_story_itg_tags']); ?>
     <?php print drupal_render($form['field_story_category']); ?>
+
 </div>
 <h2 id="title-metatags" class="story-title"><?php print t('Meta Tags'); ?></h2>
 <?php print drupal_render_children($form); ?>
