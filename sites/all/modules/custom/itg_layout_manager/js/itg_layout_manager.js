@@ -57,8 +57,20 @@
                     });
                  });
                                  
-                 
-             }
-
+                $("#templates-widgets li").draggable({
+                    appendTo: "body",
+                    helper: "clone"
+                });
+                
+                $(".droppable").droppable({
+                    drop: function (event, ui) {
+                        $(this)
+                        .addClass("dropped")
+                        .find("p")
+                        .hide();
+                    }
+                });
+            }   
+            
  };
 })(jQuery, Drupal, this, this.document);
