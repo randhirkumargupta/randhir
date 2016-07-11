@@ -46,7 +46,7 @@
                             if (tmp[0])
                             {
                                 $('.success').fadeIn(200).show();
-                                $("#search-title").val('');
+                                //$("#search-title").val('');
                             }
                             else
                             {

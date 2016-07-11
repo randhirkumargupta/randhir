@@ -147,7 +147,7 @@ if (!in_array('administrator', $user->roles)) {
                     <div class="top-actions">
                         <span class="btn btn-save" data-id="edit-submit">Save</span>
                         <span class="btn btn-preview" data-id="edit-preview">Preview</span>
-                        <a class="btn btn-cancel mr-0" href="/itgcms/mydraft-story">Cancel</a>
+                        <a class="btn btn-cancel mr-0" href="<?php print $base_url;  ?>/mydraft-story">Cancel</a>
                     </div>
                     <?php print render($page['form_tab']); ?>
                 </div>

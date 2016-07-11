@@ -57,8 +57,12 @@
                     </div>
                     <h2>Channel</h2>
                     <div class="content-view">
+                        <div class="field">
                         <?php print '<div class="field-label">Program: </div>'; ?>
+                            <div class="field-items">
                         <?php print render($content['field_story_category']); ?>
+                            </div>
+                        </div>
                     </div>
               </div>
               
@@ -147,16 +151,18 @@
                         
                         <?php if (isset($node->op) && $node->op == 'Preview') { ?>
                           
-                          
+                            <div class="field">
+                                <div class="field-label">Numerology values: </div>
+                                <div class="field-items">
+                          <?php foreach ($node->field_astro_numerology_values['und'] as $num_item) { ?>   
+                        
+                            <div class="field-item">
                           <?php
-                          foreach ($node->field_astro_numerology_values['und'] as $num_item) {                           
                             // Print number field                                                        
                             $output = '';
-                            $output .= '<div class="field">';
-                              $output .= '<div class="field-label">Number: '.itg_astro_get_term_name($num_item['field_astro_select_number']['und'][0]['tid']).'</div>';
-                              $output .= '<div class="field-items">';                              
-                              $output .= '<div class="inner-label">Text: </div>';
-                              $output .= '<div class="inner-item">'.$num_item['field_buzz_description']['und'][0]['value'].'</div>';
+                              $output .= '<div class="field"><div class="field-label">Number: </div><div class="field-items">'.itg_astro_get_term_name($num_item['field_astro_select_number']['und'][0]['tid']).'</div></div>';
+                              $output .= '<div class="field"><div class="field-label">Text: </div>';
+                              $output .= '<div class="field-items">'.$num_item['field_buzz_description']['und'][0]['value'].'</div></div>';
                               echo $output;
                               
                               // Print video field
@@ -164,12 +170,12 @@
                               if ($video_fid != '') {
                                 $url_video = _itg_photogallery_fid($video_fid);
                                 $video = '';
-                                $video .= '<div class="inner-label">Video: </div>';                                                      
-                                $video .= '<span class="file">';                        
+                                $video .= '<div class="field-label">Video: </div>';                                                      
+                                $video .= '<div class="field-items"><span class="file">';                        
                                 $video .= '<img class="file-icon" alt="File" src="'.$base_url.'/modules/file/icons/video-x-generic.png"> ';
                                 $video .= '<a href="'.$url_video.'">'.itg_astro_file_name($video_fid).'</a>';
-                                $video .= '</span>';
-                                print '<div class="inner-item">'.$video.'</div>';
+                                $video .= '</span></div>';
+                                print '<div class="field">'.$video.'</div>';
                               }
                               
                               // Print audio field 
@@ -177,18 +183,23 @@
                               if ($audio_fid != '') {
                                 $audio_uri = _itg_photogallery_fid($audio_fid);                          
                                 $audio = '';
-                                $audio .= '<div class="inner-label">Audio: </div>';                                                      
-                                $audio .= '<span class="file">';                        
+                                $audio .= '<div class="field-label">Audio: </div>';                                                      
+                                $audio .= '<div class="field-items"><span class="file">';                        
                                 $audio .= '<img class="file-icon" alt="Audio icon" src="'.$base_url.'/modules/file/icons/audio-x-generic.png"> ';
                                 $audio .= '<a href="'.$audio_uri.'">'.itg_astro_file_name($audio_fid).'</a>';
-                                $audio .= '</span>';
-                                print '<div class="inner-item">'.$audio.'</div>';
+                                $audio .= '</span></div>';
+                                print '<div class="field">'.$audio.'</div>';
                               }
-
-                              
-                            print '</div></div>';
-                          }                           
-                         }
+                              ?>
+                                  
+                            </div>
+                                
+                           <?php } ?> 
+                                    
+                                </div>
+                            </div>
+                                    
+                         <?php }
                          
                          if (!isset($node->op)) {
                            print render($content['field_astro_numerology_values']);

@@ -782,7 +782,7 @@ jQuery(document).ready(function(){
         var item = [];
         var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
         if(!listLength){
-            alert('Changes made successfully');
+            //alert('Changes made successfully');
             jQuery(this).parent().html('<span class="empty-checklist">No content associated for this story yet !</span>');
         }
         jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i){

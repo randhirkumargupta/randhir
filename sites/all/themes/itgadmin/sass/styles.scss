@@ -5040,3 +5040,123 @@ div.node{
         }
     }
 }
+
+/*itg_image_repository start*/ 
+
+.itg_image_repository{
+    font-family: "Lucida Grande", Verdana, sans-serif;
+    .image_repository{
+        width: 100%;
+        display: inline-block;
+        margin: 20px 0;
+        text-align: center;
+        div{
+            display: inline-block;
+            padding:6px 40px;
+        } 
+    }
+    .dropzone{
+        border: 1px solid #ccc;
+        margin: 0 20px 20px 20px;
+        .dz-preview{
+            .dz-image{
+                width: 200px;
+                height: 200px;
+                border: 2px solid #f7f7f7;
+                border-radius: 0;
+            }
+            &:hover .dz-image img {
+                -webkit-transform: none;
+                -moz-transform:none;
+                -ms-transform: none;
+                -o-transform: none;
+                transform: none;
+                -webkit-filter: none;
+                filter: none;
+             }
+             .dz-progress {
+                width: 150px;
+                margin-left: -75px;
+                height:10px;
+                .dz-upload{
+                    background: #c7c7c7;
+                }
+            }
+            .dz-details{
+                height: 100%;
+            }
+            .dz-success-mark svg{
+                background: #1fb5ad;
+                border-radius: 50%;
+            }
+        }
+    }
+    #loader-data {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.38);
+        height: 100%;
+        z-index: 9999;
+        text-align: center;
+        color: #fff;
+        padding-top: 150px;
+        font-size: 18px;
+    }
+}
+
+/*itg_image_repository end*/
+
+[id*="field-pti-print-media-values"]{
+    @extend .itg-add-another-item;
+    tbody{
+        @extend .fleft;
+        width: 919px;
+        overflow: visible;
+        tr{
+            @extend .db;
+            td{
+                @extend .fleft;
+                @extend .full;
+                .field-name-field-pti-upload-video{
+                    .form-type-managed-file{
+                        @extend .choose-audio-video-file;
+                        .ajax-progress-throbber{
+                            @extend .hide;
+                        }
+                    }
+                }
+            }
+            &+ tr{
+                td{margin-top: 10px;}
+            }
+        }
+    } 
+}
+[id*="views-form-manage-print-team-page"]{
+    .container-inline-date{
+        @extend .fleft;
+        width: 250px;
+        .form-item-pti-issue{
+            margin: 30px 0;
+            > label{
+                @extend .fleft;
+                padding: 8px 20px 0 0;
+            }
+            div.description{
+                left: 165px;
+            }
+        }
+    }
+    .form-item-pti-magazine{
+        @extend .fleft;
+        > label{
+            width: auto;
+        }
+        &+.form-submit{
+            margin: 30px;
+            @extend .add-more;
+        }
+    }
+}
