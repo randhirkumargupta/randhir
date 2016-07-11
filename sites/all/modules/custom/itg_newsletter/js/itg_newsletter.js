@@ -165,23 +165,26 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function () {
+  
     //Get Newsletter data using AJAX
     jQuery('body').on('click', '.newsletter-get-content', function () {
         var contentId = jQuery(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
         var relval = jQuery(this).attr('rel');
 
         var loaderImg = base_url + '/misc/throbber-active.gif';
-//        jQuery(".newsletter-loader").html('<img src="' + loaderImg + '" alt="" />');
         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('<img src="' + loaderImg + '" alt="" />');
+        
         if (contentId === '') {
-            alert('Please select Content ID.');
+            alert(Drupal.t('Please select Content ID.'));
             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
             jQuery(this).parent().siblings('.field-name-field-news-cid').find('.form-text').focus();
-        } else {
+        }
+        else {
             if (jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div').hasClass('image-preview')) {
                 jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
-                alert('Please remove existing thumbnail');
-            } else {
+                alert(Drupal.t('Please remove existing thumbnail'));
+            }
+            else {
                 var contentIdArr = contentId.split(' (');
                 jQuery.ajax({
                     url: Drupal.settings.basePath + 'newsletter_data',
