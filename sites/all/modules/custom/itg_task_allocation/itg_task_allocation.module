@@ -407,18 +407,31 @@ function expiredmail() {
     $query->leftjoin('task_allocation', 'tm', 'n.nid = tm.node_id');
     $query->join('users', 'u', 'u.uid = n.uid');
     $query->fields('u', array('mail'));
+    $query->fields('n', array('nid'));
+    $query->fields('tm', array('node_id'));
     $result = $query->execute();
     foreach ($result as $val) {
         if ($val->node_id == '') {
             $value .= $val->mail . ',';
         }
+        if ($val->node_id != $val->nid) {
+            $value_id .= $val->nid . ',';
+        }
     }
+    $node_ids = trim($value_id, ",");
+    $node_id = explode(",", $node_ids);
+    foreach ($node_id as $value) {
+        $query1 = db_insert('task_allocation');
+        $query1->fields(array('node_id' => $value))->execute();
+    }
+
     $high_level_user = trim($value, ",");
     expiredmail_mail_content($high_level_user);
 }
 
 /**
  * Get Mail content
+ * @param type $to
  * @return 
  */
 function expiredmail_mail_content($to) {
@@ -449,5 +462,3 @@ function expiredmail_mail_content($to) {
         return FALSE;
     }
 }
-
-?>
