@@ -1,3 +1,8 @@
+/*
+ * @file upload.js
+ * Contains all functionality related to podcast
+ */
+
 (function($) {
 
     Drupal.behaviors.itg_podcast_upload = {
@@ -39,13 +44,7 @@
                     .click();
             setTimeout(function() {
                 var uploader = jQuery(".plupload-element").pluploadQueue();
-                //  var uploader = $('.plupload-element').plupload('getUploader');
-                //uploader.destroy();
-
                 uploader.splice();
-                //uploader.clearQueue();
-                //uploader.init();
-
                 uploader.refresh();
                 
                 $('#edit-field-podcast-audio-upload-add-more-number').val(1);
