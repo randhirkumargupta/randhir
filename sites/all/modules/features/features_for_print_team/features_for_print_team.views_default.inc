@@ -169,10 +169,26 @@ function features_for_print_team_views_default_views() {
   $handler->display->display_options['fields']['field_pti_issue']['id'] = 'field_pti_issue';
   $handler->display->display_options['fields']['field_pti_issue']['table'] = 'field_data_field_pti_issue';
   $handler->display->display_options['fields']['field_pti_issue']['field'] = 'field_pti_issue';
+  $handler->display->display_options['fields']['field_pti_issue']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_pti_issue']['empty'] = 'NA';
   $handler->display->display_options['fields']['field_pti_issue']['settings'] = array(
     'link' => 0,
   );
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+  $handler->display->display_options['fields']['php_1']['table'] = 'views';
+  $handler->display->display_options['fields']['php_1']['field'] = 'php';
+  $handler->display->display_options['fields']['php_1']['label'] = 'Issue';
+  $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_1']['php_output'] = '<?php 
+if($data->field_field_pti_issue[0][\'raw\'][\'entity\']->title) {
+echo date(\'d/m/Y\', strtotime($data->field_field_pti_issue[0][\'raw\'][\'entity\']->title)) ;
+} else {
+echo \'N/A\';
+}
+?>';
+  $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
   /* Field: Content: Magazine */
   $handler->display->display_options['fields']['field_pti_magazine']['id'] = 'field_pti_magazine';
   $handler->display->display_options['fields']['field_pti_magazine']['table'] = 'field_data_field_pti_magazine';
