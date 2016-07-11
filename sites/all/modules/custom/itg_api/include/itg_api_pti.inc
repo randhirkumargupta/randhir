@@ -1,13 +1,13 @@
 <?php
-  
+
 /**
  * Implement itg_pti_content
  */
 function itg_pti_content() {
- $file_path = drupal_realpath('public://');
-  global $base_url, $user;
+  $file_path = drupal_realpath('public://');
+  global $user;
   module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
-  
+
   $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
   $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
@@ -15,15 +15,13 @@ function itg_pti_content() {
     $op[$val->tid] = $val->name;
   }
 
-  $direc = getDirContents($file_path.'/gallery/pti/');
+  $direc = get_dir_content($file_path . '/gallery/pti/');
 
   foreach ($direc as $xm_file) {
 
     $xml_file_path = $xm_file;
     $xml_filename = basename($xml_file_path);
     $pti_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
-
-    //p($mail_today_xml);
     if (!empty($pti_xml)) {
       $pti = 0;
       $pti_body = $pti_xml->channel->item;
@@ -35,17 +33,12 @@ function itg_pti_content() {
         $category_name = trim($pti_value->category);
 
         if (!empty($category_name)) {
-
           $category_name = $category_name;
         }
         else {
           $category_name = 'PTI';
         }
 
-        // get taxonomy term id by name
-        //$terms_array = taxonomy_get_term_by_name($category_name);
-        // get first element of array
-        //$term = reset($terms_array); 
         $term_id = itg_api_get_term_id($category_name);
 
         if (empty($term_id)) {
@@ -54,19 +47,12 @@ function itg_pti_content() {
 
         $title = itg_api_check_title($headline);
 
-
         if (!$title) {
-
           $alchemyapi[$pti] = new AlchemyAPI('cd95bc47470dedf7e5002748636e78848cd0a9f4');
-          //print $headline;
           $response[$pti] = $alchemyapi[$pti]->keywords('text', $headline, array('sentiment' => 1));
-          //pr($response['keywords']);
           $final_keyword = '';
           if ($response[$pti]['status'] == 'OK') {
-
-            //print_r($response[$i]['keywords']);
             foreach ($response[$pti]['keywords'] as $keyword) {
-
               $final_keyword[] = $keyword['text'];
             }
           }
@@ -74,9 +60,6 @@ function itg_pti_content() {
             echo 'Error in the keyword extraction call: ', $response['statusInfo'];
           }
           $meta_keyword = implode(", ", $final_keyword);
-
-          // description
-          // get description value
           $description = $pti_value->description;
           $description = strip_tags($description, '<p>');
           $description = trim($description);
@@ -88,11 +71,9 @@ function itg_pti_content() {
           $pre_final_kicker = preg_split('/(?<!\d)\.(?!\d)/', $kicker1);
           $final_kicker = $kicker . ' ' . $pre_final_kicker[0];
           $final_kicker = str_replace(array('\'', '"'), '', $final_kicker);
-          $final_kicker_length = strlen($final_kicker);
           $final_kicker = substr($final_kicker, 0, 250);
           $final_kicker = $final_kicker . '..';
           $final_kicker = trim(preg_replace('/[\s\t\n\r\s]+/', ' ', $final_kicker));
-
 
           // get pubdate
           $publish_date_raw = $pti_value->pubdate;
@@ -121,7 +102,6 @@ function itg_pti_content() {
           $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $final_kicker;
           $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline);
           $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
-          //$node->field_story_comment_question[LANGUAGE_NONE][0]['value'] = 'NA';
           $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'PTI';
           $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $by_line; //54
           $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $term_id;
@@ -132,7 +112,7 @@ function itg_pti_content() {
 
           if (array_intersect($op, $exp_description)) {
             $node->log = 'State Changed to Review';
-            $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+            $node->workbench_moderation_state_new = workbench_moderation_state_review();
           }
           else {
             if ($title_length > 15) {
@@ -142,7 +122,7 @@ function itg_pti_content() {
 
             if ($title_length < 15) {
               $node->log = 'State Changed to Review';
-              $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+              $node->workbench_moderation_state_new = workbench_moderation_state_review();
             }
           }
           $node = node_submit($node); // Prepare node for saving

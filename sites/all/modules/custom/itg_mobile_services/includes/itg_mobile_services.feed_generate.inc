@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Inc file contains the functions
  */
 
@@ -8,13 +8,14 @@
  * Function for generating xml files.
  * @param object $node
  * @param string $service_title
- * @return string $full_file_path
+ * @param string $field_header
+ * @param string $field_footer
+ * @return string
  */
 function itg_mobile_services_generate_xml($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'UTF-8');
   $doc->formatOutput = TRUE;
 
-  //$root = $doc->appendChild($doc->createElement('channel'));
   $root = $doc->createElement('channel');
   $root = $doc->appendChild($root);
   $root->appendChild($doc->createElement('title', 'India Today | KARNATAKA NEWS'));
@@ -27,15 +28,15 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header, 
     $root->appendChild($doc->createElement('footer', $field_footer));
   }
   // content field collection data
-  $fieldcollect = node_load($node->nid);
-  if (is_object($fieldcollect) && count($fieldcollect) > 0) {
-    foreach ($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {
+  $field_collect = node_load($node->nid);
+  if (is_object($field_collect) && count($field_collect) > 0) {
+    foreach ($field_collect->field_service_content[LANGUAGE_NONE] as $key => $val) {
       $field_collection_item = entity_load('field_collection_item', array($val['value']));
       $service_content_date = isset($field_collection_item[$val['value']]->field_service_content_date[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_content_date[LANGUAGE_NONE][0]['value'] : '';
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
-      $service_conten_image = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'] : '';
-      $service_conten_audio = isset($field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['fid'] : '';
-      $service_conten_video = isset($field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['fid'] : '';
+      $service_content_image = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'] : '';
+      $service_content_audio = isset($field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['fid'] : '';
+      $service_content_video = isset($field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['fid'] : '';
 
       $item = $doc->createElement('item');
       $root->appendChild($item);
@@ -54,8 +55,8 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header, 
       }
 
       // image
-      if (!empty($service_conten_image)) {
-        $image_file = file_load($service_conten_image);
+      if (!empty($service_content_image)) {
+        $image_file = file_load($service_content_image);
         $image_url = file_create_url($image_file->uri);
         $image = $doc->createElement('image');
         $image->appendChild($doc->createCDATASection($image_url));
@@ -63,8 +64,8 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header, 
       }
 
       // audio
-      if (!empty($service_conten_audio)) {
-        $audio_file = file_load($service_conten_audio);
+      if (!empty($service_content_audio)) {
+        $audio_file = file_load($service_content_audio);
         $audio_url = file_create_url($audio_file->uri);
         $audio = $doc->createElement('audio');
         $audio->appendChild($doc->createCDATASection($audio_url));
@@ -72,8 +73,8 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header, 
       }
 
       // video
-      if (!empty($service_conten_video)) {
-        $video_file = file_load($service_conten_video);
+      if (!empty($service_content_video)) {
+        $video_file = file_load($service_content_video);
         $video_url = file_create_url($video_file->uri);
         $video = $doc->createElement('video');
         $video->appendChild($doc->createCDATASection($video_url));
@@ -91,7 +92,9 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header, 
  * Function for generating rss files.
  * @param object $node
  * @param string $service_title
- * @return string $full_file_path
+ * @param string $field_header
+ * @param string $field_footer
+ * @return string
  */
 function itg_mobile_services_generate_rss($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'UTF-8');
@@ -109,15 +112,16 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header, 
   if (!empty($field_header)) {
     $channel->appendChild($doc->createElement('header', $field_header));
   }
+
   if (!empty($field_footer)) {
     $channel->appendChild($doc->createElement('footer', $field_footer));
   }
 
   $root->appendChild($channel);
   // content field collection data
-  $fieldcollect = node_load($node->nid);
-  if (is_object($fieldcollect) && count($fieldcollect) > 0) {
-    foreach ($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {
+  $field_collect = node_load($node->nid);
+  if (is_object($field_collect) && count($field_collect) > 0) {
+    foreach ($field_collect->field_service_content[LANGUAGE_NONE] as $key => $val) {
       $field_collection_item = entity_load('field_collection_item', array($val['value']));
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $service_conten_image = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'] : '';
@@ -154,7 +158,9 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header, 
  * Function for generating mrss files.
  * @param object $node
  * @param string $service_title
- * @return string $full_file_path
+ * @param string $field_header
+ * @param string $field_footer
+ * @return string
  */
 function itg_mobile_services_generate_mrss($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'iso-8859-1');
@@ -235,6 +241,8 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header,
  * Function for generating sms files.
  * @param object $node
  * @param string $service_title
+ * @param string $field_header
+ * @param string $field_footer
  * @return string $full_file_path
  */
 function itg_mobile_services_generate_sms($node, $service_title, $field_header, $field_footer) {
@@ -259,9 +267,9 @@ function itg_mobile_services_generate_sms($node, $service_title, $field_header, 
 
   $root->appendChild($channel);
   // content field collection data
-  $fieldcollect = node_load($node->nid);
-  if (is_object($fieldcollect) && count($fieldcollect) > 0) {
-    foreach ($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {
+  $field_collect = node_load($node->nid);
+  if (is_object($field_collect) && count($field_collect) > 0) {
+    foreach ($field_collect->field_service_content[LANGUAGE_NONE] as $key => $val) {
       $field_collection_item = entity_load('field_collection_item', array($val['value']));
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $item = $doc->createElement('item');
@@ -287,6 +295,8 @@ function itg_mobile_services_generate_sms($node, $service_title, $field_header, 
  * Function for generating Simple Text Feed.
  * @param object $node
  * @param string $service_title
+ * @param string $field_header
+ * @param string $field_footer
  * @return string $full_file_path
  */
 function itg_mobile_services_generate_feed($node, $service_title, $field_header, $field_footer) {
@@ -311,9 +321,9 @@ function itg_mobile_services_generate_feed($node, $service_title, $field_header,
 
   $root->appendChild($channel);
   // content field collection data
-  $fieldcollect = node_load($node->nid);
-  if (is_object($fieldcollect) && count($fieldcollect) > 0) {
-    foreach ($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {
+  $field_collect = node_load($node->nid);
+  if (is_object($field_collect) && count($field_collect) > 0) {
+    foreach ($field_collect->field_service_content[LANGUAGE_NONE] as $key => $val) {
       $field_collection_item = entity_load('field_collection_item', array($val['value']));
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $item = $doc->createElement('item');
@@ -339,7 +349,9 @@ function itg_mobile_services_generate_feed($node, $service_title, $field_header,
  * Function for generating ussd files.
  * @param object $node
  * @param string $service_title
- * @return string $full_file_path
+ * @param string $field_header
+ * @param string $field_footer
+ * @return string
  */
 function itg_mobile_services_generate_ussd($node, $service_title, $field_header, $field_footer) {
   $doc = new DOMDocument('1.0', 'UTF-8');
@@ -363,9 +375,9 @@ function itg_mobile_services_generate_ussd($node, $service_title, $field_header,
 
   $root->appendChild($channel);
   // content field collection data
-  $fieldcollect = node_load($node->nid);
-  if (is_object($fieldcollect) && count($fieldcollect) > 0) {
-    foreach ($fieldcollect->field_service_content[LANGUAGE_NONE] as $key => $val) {
+  $field_collect = node_load($node->nid);
+  if (is_object($field_collect) && count($field_collect) > 0) {
+    foreach ($field_collect->field_service_content[LANGUAGE_NONE] as $key => $val) {
       $field_collection_item = entity_load('field_collection_item', array($val['value']));
       $service_content_text = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $item = $doc->createElement('item');
@@ -390,7 +402,10 @@ function itg_mobile_services_generate_ussd($node, $service_title, $field_header,
 /**
  * function to generate_file_name.
  * @param object $node
- * @param type $file_name
+ * @param string $service_title
+ * @param string $feeds_type
+ * @param string $ext
+ * @return string
  */
 function generate_file_name($node, $service_title, $feeds_type, $ext) {
   $service_frequency = $node->field_service_frequency[LANGUAGE_NONE][0]['value'];

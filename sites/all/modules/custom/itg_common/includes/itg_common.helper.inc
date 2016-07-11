@@ -25,7 +25,9 @@ define('ADMINISTRATOR', 3);
 define('UGC_MODERATOR', 22); //
 define('CATEGORY_MANAGMENT', 4);
 define('EXPERT', 21);
-define('ITGDATE', 'd/m/Y');        
+define('ITGDATE', 'd/m/Y');
+define('FRONT_THEME_NAME', 'itg');
+
 
 /**
  * Function for debugging arrays and objects.
