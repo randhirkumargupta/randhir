@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for home page feature widget feature.
+ */
+
+include_once 'feature_for_home_page_feature_widget.features.inc';

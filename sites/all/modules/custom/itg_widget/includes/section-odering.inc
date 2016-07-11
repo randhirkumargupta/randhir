@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Section and top stories widegt ordering and reordering
+ */
+
+/**
  * function to get data of nodes in sequence which is saved in draggableviews_structure table
  * @param array info (section is tid of category and content type machine name will be use)
  * @return array data
@@ -64,14 +69,4 @@ function itg_widget_top_stories_ordering_data($info) {
         watchdog('Top Stories ordering', 'view_name and page name is empty');
     }
     return $data;
-}
-
-/**
- * Function to get entity load form entity id
- * @param int $entity_id
- * @return array
- */
-function get_required_data_from_entity_id($entity_id) {
-    $entity = entity_load('node', array($entity_id));
-    return $entity;
 }
