@@ -59,7 +59,7 @@ HTML comment.
     <?php $video_id = $item['#file']->video_id; ?>
      <div class="field-item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
      <iframe frameborder="0" width="480" height="270"
-src="https://www.dailymotion.com/embed/video/<?php print $video_id; ?>?autoplay=0&mute=1"
+src="https://www.dailymotion.com/embed/video/<?php print $video_id; ?>?autoplay=0&mute=1&ui-start-screen-info"
 allowfullscreen></iframe>
      
      </div>

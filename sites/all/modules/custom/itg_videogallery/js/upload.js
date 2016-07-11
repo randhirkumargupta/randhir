@@ -1,13 +1,18 @@
+/*
+ * @file itg_story.js
+ * Contains all functionality related to videogallery
+ */
+
 (function($) {
 
     Drupal.behaviors.itg_videogallery_upload = {
         context: null,
         attach: function(context) {
             var that = this,
-            uploader = $('.plupload-element', context).pluploadQueue();
-            
+                    uploader = $('.plupload-element', context).pluploadQueue();
+
             this.context = context;
-            
+
             if (!uploader) {
                 return false;
             }
@@ -47,7 +52,7 @@
                 //uploader.init();
 
                 uploader.refresh();
-                
+
                 $('#edit-field-videogallery-video-upload-add-more-number').val(1);
 
             }, 500);
