@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Theme implementation for story form in tab display.
+ * Theme implementation for podcast form in tab display.
  * 
  */
 
