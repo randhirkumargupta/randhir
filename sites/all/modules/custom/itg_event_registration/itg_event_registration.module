@@ -31,7 +31,7 @@ function itg_event_registration_menu() {
   $items = array();
 
   $items['event-registration'] = array(
-      'title' => t('Event Registration'),
+      'title' => 'Event Registration',
       'page callback' => 'itg_event_registration_form',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
@@ -39,7 +39,7 @@ function itg_event_registration_menu() {
   );
   
   $items['event-registration/users-list/%'] = array(
-      'title' => t('Registered Users List'),
+      'title' => 'Registered Users List',
       'page callback' => 'itg_event_registration_users_list',
       'access callback' => 'user_access',
       'access arguments' => array('event registered users'),
@@ -89,27 +89,31 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
    $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
    $tickes_available = $no_of_tickets-$total_registered_users;
    $group_tickets_available = $tickes_available-1;
-   if($group_tickets_available > 0){
+   
+   if ($group_tickets_available > 0) {
     $_SESSION['total_ava_ticket'] = $group_tickets_available;
    }
 
-   if($tickes_available == 1){
+   if ($tickes_available == 1) {
+     
      drupal_add_js('jQuery(document).ready(function() {                  
           jQuery("#field-erf-registration-fee-values").hide();
           jQuery("#edit-field-erf-type").append("<p><strong>No more tickets available for this event.</strong></p>");
           jQuery("p").css("padding-left", "200px");
      });', array('type' => 'inline', 'scope' => 'footer'));
+     
      unset($form['field_erf_registration_fee']['und']['add_more']);
    }
    
   //Hide add more button, if ticket are not available
-  if(isset($max_delta) && $max_delta >= $_SESSION['total_ava_ticket']) {
+  if (isset($max_delta) && $max_delta >= $_SESSION['total_ava_ticket']) {
     unset($form['field_erf_registration_fee']['und']['add_more']);
   }
     
-  //Fields treatment
+  //Hide metatags and priview button
   unset($form['#metatags']);
   unset($form['actions']['preview']);
+  
   $form['title']['#description'] = t('Please enter first name.');
 
   $destination = array('event-registration', array('query' => array('event_id' => $current_event_nid)));
@@ -119,8 +123,9 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       '#value' => t('Cancel'),
   );
   
-    
+  //Check for oreder summary tab "step_erf_order_summary"  
   if ($form_state['storage']['step'] == 'step_erf_order_summary') {
+    
     if (isset($current_event_nid)) {
       $event_node = node_load($current_event_nid);
       $registration_type = $event_node->field_event_type[LANGUAGE_NONE][0]['value'];
@@ -136,8 +141,8 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         //$form['actions']['submit']['#attributes'] = array('class' => array('form-submit'));
 
         $count_people = 0;
-        foreach($form['#node']->field_erf_registration_fee[LANGUAGE_NONE] as $registered_people){
-          if(!empty($registered_people['field_first_name'])){
+        foreach ($form['#node']->field_erf_registration_fee[LANGUAGE_NONE] as $registered_people) {
+          if (!empty($registered_people['field_first_name'])) {
             $count_people = $count_people + 1;
           }
         }
@@ -149,8 +154,8 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         $no_of_registration = $count_people+1;
 
         //Logic for fee calculation of total fee
-        if($no_of_registration < 10){
-          if($no_of_registration < 5){
+        if ($no_of_registration < 10) {
+          if ($no_of_registration < 5) {
             $total_fee = $no_of_registration * $individual_fee;
           }
           else {
@@ -159,17 +164,17 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           }
         }
         else {
-          if($no_of_registration < 15) {
+          if ($no_of_registration < 15) {
             $extract = $no_of_registration % 10;
             $total_fee = $group_fee_ten + ($extract * $individual_fee);
           }
           else {
-            if($no_of_registration < 20){
+            if ($no_of_registration < 20) {
               $extract = $no_of_registration % 15;
               $total_fee = $group_fee_ten + $group_fee_five + ($extract * $individual_fee);
             }
             else {
-              if($no_of_registration < 25) {
+              if ($no_of_registration < 25) {
                 $divide = (int) ($no_of_registration / 10);
                 $extract = $no_of_registration % 10;
                 $total_fee = ($divide * $group_fee_ten) + ($extract * $individual_fee);
@@ -227,7 +232,8 @@ function itg_event_registration_form_after_build($form, &$form_state) {
     if (arg(1) == 'add') {
       $type = arg(2);
       $nid = '';
-    } else {
+    }
+    else {
       $node = node_load(arg(1));
       $type = $node->type;
       $nid = arg(1);
@@ -247,7 +253,7 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
 
   //Hide submit button for all steps except last one
-  if($form_state['storage']['step'] == 'step_erf_company_details'){
+  if ($form_state['storage']['step'] == 'step_erf_company_details') {
     unset($form['actions']['submit']);
   }
   
@@ -259,8 +265,8 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
   $tickes_available = $no_of_tickets - $total_registered_users;
 
-  if($tickes_available < 10){
-   if($form_state['storage']['step'] == 'step_erf_basic_details'){
+  if ($tickes_available < 10) {
+   if ($form_state['storage']['step'] == 'step_erf_basic_details') {
     $form['ticket_avaible_text'] = array(
            '#type' => 'item',
            '#markup' => '<div class="ticket-avaible-text">Tickets available for this event: <strong>' . ($tickes_available) . '</strong></div>',
@@ -270,15 +276,17 @@ function itg_event_registration_form_after_build($form, &$form_state) {
    
   $registration_type = $event_node->field_event_type[LANGUAGE_NONE][0]['value'];
   
-  if($form_state['storage']['step'] == 'step_erf_registration_fee'){
+  if ($form_state['storage']['step'] == 'step_erf_registration_fee') {
     $form['ticket_avaible_text'] = array(
            '#type' => 'item',
            '#markup' => '<div class="ticket-avaible-text">Tickets available for this event: <strong>' . ($tickes_available-1) . '</strong></div>',
            '#weight' => 1,
     );
-    if($registration_type == 'paid'){
+    
+    if ($registration_type == 'paid') {
       unset($form['actions']['submit']);
-    } else {
+    }
+    else {
        unset($form['actions']['next']);
     }
    }
@@ -321,7 +329,8 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
   //Set Redirection after completion of event registration form
   if (!empty($_GET['event_id'])) {
     $form_state['redirect'] = array('event-registration', array('query' => array('event_id' => $_GET['event_id'])));
-  } else {
+  } 
+  else {
     $form_state['redirect'] = 'event-registration';
   }
   $event_name = itg_common_get_node_title($_GET['event_id']);
@@ -335,10 +344,9 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
  */
 function itg_event_registration_views_pre_render(&$view) {
 
-  //Add "Event Registration" button on listing page of event registered user
+  //Add count on listing page of event registered user
   if ($view->name == "manage_event_registration") {
     $header_content_event = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-//    $header_content_event .= l(t('Registration for Event'), 'event-registration');
     $view->attachment_before = $header_content_event;
   }
 }
@@ -354,6 +362,25 @@ function itg_event_registration_views_pre_render(&$view) {
  * 
  * @param string $form_id
  *    the form ID of the form we are currently processing
+ */
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+
+/**
+ * skdgs g sdkgsdkg skd gsid gsid gsdg sdds gsdkg kds gk
+ * 
+ * @param array $form
+ *    an array for current form
+ * 
+ * @param type $form_state
+ *    dfsdfsdf sdfd
+ * 
+ * @param type $form_id
  */
 function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
@@ -371,7 +398,7 @@ function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_sta
  * @param object $node
  *   Contains whole information of current node
  */
-function itg_event_registration_node_validate($node){
+function itg_event_registration_node_validate($node) {
   
   if ($node->type == 'event_registration') {
 
@@ -395,7 +422,7 @@ function itg_event_registration_node_validate($node){
     foreach ($node->field_erf_registration_fee[LANGUAGE_NONE] as $emails) {
       if (!empty($emails['field_email_address'][LANGUAGE_NONE][0]['value'])) {
         if (!valid_email_address($emails['field_email_address'][LANGUAGE_NONE][0]['value'])) {
-          form_set_error('field_email_address', t('Email "'.$emails['field_email_address'][LANGUAGE_NONE][0]['value'].'" is not a valid email.'));
+          form_set_error('field_email_address', t('Email @emailaddress is not a valid email.', array('@emailaddress' => $emails['field_email_address'][LANGUAGE_NONE][0]['value'])));
         }
       }
     }
@@ -403,39 +430,28 @@ function itg_event_registration_node_validate($node){
 }
 
 /**
- * Get total no. of registerd user for a event by a parent user.
+ * Get total no. of registerd user for an event by a parent user.
  * 
  * @param int $nid
  *   unique id of current node.
  * 
  * @return string
- *   returning link to view user's list registered for an event.
+ *   a string with count of total registerd users
  */
-function itg_event_registration_get_registered_user($nid){
-  global $base_url;
-  $icon = $base_url.'/sites/default/files/plus.png';
+function itg_event_registration_get_registered_user($nid) {
   $node = node_load($nid);
   $count_people = count($node->field_erf_registration_fee[LANGUAGE_NONE]);
-
-  //Prepare text and link to view registered users
   $text = 'List Users(' . $count_people . ')';
-  $path = 'event-users-list/' . $node->nid;
-  
-  if ($count_people < 1) {
-    return $text;
-  } else {
-    return $text;
-    //return l($text, $path, array('attributes' => array('target' => '_blank', 'class' => 'grouped-users')));
-  }
+  return $text;
 }
 
 /**
  * Get ID type value
  * @param string $val
  * @return string
- *   ID type
+ *   id type
  */
-function itg_event_registration_get_id_type($val){
+function itg_event_registration_get_id_type($val) {
   switch ($val) {
     case 'aadhar_card':
       $id_type = 'Aadhar Card';
@@ -463,7 +479,8 @@ function itg_event_registration_get_id_type($val){
  * @param int $nid
  * @return int
  */
-function itg_event_registration_registered_user_detail($nid){
+function itg_event_registration_registered_user_detail($nid) {
+  
   if (isset($nid)) {
     $total_registration_users = itg_event_registration_get_total_registration($nid);
     $total_registration_for_event = $total_registration_users ? $total_registration_users : 0;
@@ -474,23 +491,25 @@ function itg_event_registration_registered_user_detail($nid){
 
   if ($total_registration_for_event < 1) {
     return 0;
-  } else {
+  }
+  else {
     return l($text, $path, array('attributes' => array('target' => '_blank')));
   }
 }
 
 /**
- * Get total no. of registered users for an event
+ * Get total no. of registered users for a event
  * @param int $nid
  * @return int $total_registration_users
  */
-function itg_event_registration_get_total_registration($nid){
+function itg_event_registration_get_total_registration($nid) {
   
  $registration_main_users = itg_common_check_record_existance($nid, 'field_data_field_story_source_id', 'field_story_source_id_value');
 
   //Count group users registration for an event
   $main_user_nid_arr = itg_common_select_field_value('entity_id', 'field_data_field_story_source_id', 'field_story_source_id_value', $nid);
   $registration_group_users = 0;
+  
   foreach ($main_user_nid_arr as $main_user_nid) {
     $registration_group_users = $registration_group_users + itg_common_check_record_existance($main_user_nid, 'field_data_field_erf_registration_fee', 'entity_id');
   }
@@ -499,4 +518,3 @@ function itg_event_registration_get_total_registration($nid){
   $total_registration_users = $registration_main_users + $registration_group_users;
   return (int) $total_registration_users;
 }
-
