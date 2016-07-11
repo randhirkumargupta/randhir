@@ -303,7 +303,8 @@ if($clicked_day == "")
     .messages__list{padding-left: 13px;}
 </style>
 <script type="text/javascript">
-    var current_time_slot = <?php print $total; ?>;
+    
+    var current_time_slot = <?php if($total > 0){print $total;} else{ print 0;} ?>;
     jQuery(document).on('ready', function() {
         jQuery(".tv-schedule").slick({
             dots: false,
