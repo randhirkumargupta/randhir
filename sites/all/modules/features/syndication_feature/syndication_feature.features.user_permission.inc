@@ -207,5 +207,18 @@ function syndication_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'execute node_unpublish_action'.
+  $permissions['execute node_unpublish_action'] = array(
+    'name' => 'execute node_unpublish_action',
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'actions_permissions',
+  );
+
   return $permissions;
 }

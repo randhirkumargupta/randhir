@@ -490,11 +490,11 @@
       var plaholderText = $(this).prev().text();
       $(this).attr('placeholder', plaholderText);
     });
-    $('.form-field-name-field-gallery-image, .field-name-field-story-expert-description').find('.form-textarea').each(function () {
+    $('.form-field-name-field-gallery-image, .field-name-field-story-expert-description, .field-name-field-podcast-description').find('.form-textarea').each(function () {
       var plaholderText = $(this).parent().prev().text();
       $(this).attr('placeholder', plaholderText);
     });
-    $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file, .form-field-name-field-videogallery-video-upload .field-widget-image-image .form-managed-file').each(function () {
+    $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file, .form-field-name-field-podcast-audio-upload .field-widget-image-image .form-managed-file, .form-field-name-field-videogallery-video-upload .field-widget-image-image .form-managed-file').each(function () {
       if ($(this).children().hasClass('image-preview')) {
         $(this).addClass('has-preview');
 
@@ -520,6 +520,23 @@
         var altVal = $(this).val();
         $(this).parent().next().find('.form-text').val(altVal);
       });
+    });
+    
+    $('.form-field-name-field-podcast-audio-upload .has-preview').each(function (i) {
+      var altName = "field_podcast_audio_upload[und][" + i + "][field_podcast_audio_image_upload][und][0][alt]";
+      var titleName = "field_podcast_audio_upload[und][" + i + "][field_podcast_audio_image_upload][und][0][title]";
+      $("input[name='" + altName + "']").keyup(function () {
+        var altVal = $(this).val();
+        $(this).parent().next().find('.form-text').val(altVal);
+      });
+    });
+    $('.form-field-name-field-podcast-audio-upload .file-widget, .form-field-name-field-videogallery-video-upload .file-widget').each(function (i) {
+        var hasFile = $(this).find('span').hasClass('file');
+        if(hasFile){
+            $(this).addClass('has-file');
+        } else{
+            $(this).removeClass('has-file');
+        }
     });
     
     $('.form-field-name-field-gallery-image .messages--error').each(function () {
@@ -732,6 +749,9 @@ jQuery(document).ready(function(){
     if(checkedlist){
         jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
     }
+    else{
+        jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
+    }
     
     jQuery('.sidebar-trigger').click(function () {
       jQuery(this).parent().toggleClass('active');
@@ -755,21 +775,21 @@ jQuery(document).ready(function(){
         jQuery(this).parent().remove();
     });
     // end of code
+   
     
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {
         var item = [];
         var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
         if(!listLength){
-            jQuery(this).hide();
+            //alert('Changes made successfully');
+            jQuery(this).parent().html('<span class="empty-checklist">No content associated for this story yet !</span>');
         }
         jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i){
             item.push(jQuery(this).find('.item-value').text());
         });
        jQuery('#edit-field-common-related-content-und-0-value').val(item);
-      // jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
-        //console.log(itemvalue);
-        
+       alert('Changes made successfully');
     });
     // end of code
     

@@ -625,6 +625,15 @@ function itg_survey_send_mail_for_notification($nid) {
     );
   $user_email_str = $user->mail;
   drupal_mail('itg_survey_send_notification', 'send_survey_noti', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  
+  //Update mail status after sending notification      
+  db_update('itg_survey_ntf')
+          ->fields(array(
+              'status' => 'Y',
+          ))
+          ->condition('nid', $nid, '=')
+          ->execute();
+ 
 }
 
 /**

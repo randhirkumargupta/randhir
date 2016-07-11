@@ -61,6 +61,4 @@
       // Custom code ends here
     }
   };
-
-
 })(jQuery, Drupal, this, this.document);
