@@ -947,5 +947,15 @@ function itg_syndication_rule_after_build_validate($form, &$form_state) {
               form_set_error('field_syndication_rule_details]['.$lang.']['.$k.'][field_syndication_set_day_month', t('Set Date field is required for row['.($k+1).']'));
             }  
             }
+            
+             if(isset($item['field_syndication_time'][$lang][0]['value']) && !empty($item['field_syndication_time'][$lang][0]['value'])) {  } else {    
+              
+                if(preg_match("/(2[0-4]|[01][1-9]|10):([0-5][0-9])/", $item['field_syndication_time'][$lang][0]['value'])){ 
+                 form_set_error('field_syndication_rule_details]['.$lang.']['.$k.'][field_syndication_time', t('Set Date field format should be “HH:MM” for row['.($k+1).']'));
+                }
+              
+             }  
+            
+
        }
 } 

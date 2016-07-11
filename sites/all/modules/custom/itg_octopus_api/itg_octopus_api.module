@@ -23,15 +23,13 @@ function itg_octopus_api_menu() {
   $items['rundown/listing'] = array(
     'title' => 'Rundown Listing',
     'page callback' => 'itg_octopus_api_rundown_listing',
-    'access callback' => TRUE,
-    //'access arguments' => array('access rundown content'),
+    'access arguments' => array('access content'),
     'file' => 'includes/itg_octopus_api.inc',
   );
   $items['slug/detail/%'] = array(
     'title' => 'Rundown Slug Detail',
     'page callback' => 'itg_octopus_api_rundown_detail',
     'access callback' => TRUE,
-    //'access arguments' => array('access rundown content'),
     'file' => 'includes/itg_octopus_api.inc',
   );
   $items['slug_title/autocomplete'] = array(
@@ -44,6 +42,23 @@ function itg_octopus_api_menu() {
 }
 
 /**
+ * Implements hook_permission.
+ * {@inheritdoc}
+ */
+function itg_octopus_api_permission() {
+  return array(
+    'authorized user rundown detail' => array(
+      'title' => t('Rundown detail page'),
+      'description' => t('Octopus rundown detail page permission'),
+    ),
+    'authorized user rundown listing' => array(
+      'title' => t('Rundown listing page'),
+      'description' => t('Octopus rundown listing page permission'),
+    ),
+  );
+}
+
+/**
  * Implements hook_theme()
  * {@inheritdoc}
  */
@@ -52,7 +67,6 @@ function itg_octopus_api_theme($existing, $type, $theme, $path) {
     'rundown_slug_detail' => array(
       'template' => 'rundown-slug-detial',
       'path' => drupal_get_path('module', 'itg_octopus_api') . '/templates',
-    //'variables' => array('data' => NULL),
     ),
   );
   return $themes;
@@ -60,9 +74,7 @@ function itg_octopus_api_theme($existing, $type, $theme, $path) {
 
 /**
  * Implements hook_form().
- * @param array $form
- * @param array $form_state
- * @return array
+ * {@inheritdoc}
  */
 function itg_octopus_api_form($form, &$form_state) {
   $form = array();
@@ -76,8 +88,8 @@ function itg_octopus_api_form($form, &$form_state) {
   );
   $form['items_per_page'] = array(
     '#type' => 'select',
-    '#options' => array(5 => 5 ,10 => 10 ,20 => 20 ,40 => 40 ,60 => 60),
-    '#default_value' => ($_GET['items_per_page'])?$_GET['items_per_page']:20,
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
   );
   $form['submit'] = array(
     '#value' => 'Search',
@@ -88,8 +100,11 @@ function itg_octopus_api_form($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Implements hook_submit()
+ * {@inheritdoc}
+ */
 function itg_octopus_api_form_submit($form, &$form_state) {
-  //drupal_goto('rundown/listing?title='.$form_state['values']['title']);
   $form_state['redirect'] = array(
     'rundown/listing',
     array(

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Install, update and uninstall functions for the ITG Video gallery module.
@@ -10,7 +11,7 @@
  * @return array
  */
 function itg_videogallery_schema() {
-  $schema = array();      
+  $schema = array();
   $schema['dailymotion_response_details'] = array(
     'description' => 'Save the dailymotion response.',
     'fields' => array(
@@ -25,7 +26,7 @@ function itg_videogallery_schema() {
         'length' => '255',
         'not null' => TRUE,
       ),
-     'channel' => array(
+      'channel' => array(
         'description' => 'Video category on dailymotion',
         'type' => 'varchar',
         'length' => '255',
