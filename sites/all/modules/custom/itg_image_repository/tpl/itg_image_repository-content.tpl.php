@@ -29,9 +29,9 @@ $itg_image_repository =& $itg_image_repository_ref['itg_image_repository'];//kee
 <div id="itg_image_repository-content">
 
 <div id="message-box"></div>
-<div class="list-head">
-  <div class="div-upload-img">Upload</div>
-    <div class="div-search-img">Search</div>
+<div class="list-head image_repository">
+  <div class="div-upload-img add-more">Upload</div>
+    <div class="div-search-img add-more-wbg">Search</div>
 
 </div>
 
