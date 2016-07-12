@@ -89,7 +89,9 @@ function itg_image_croping_crop_image() {
     $image_data_url = str_replace('data:image/png;base64,', '', $image_data_url);
 
     $imagedata = base64_decode($image_data_url);
-   
+   if (!file_exists(file_default_scheme() . '://crop_image')) {
+    mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
+}
     $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' . $image_name . '.png');
    
     (array)$file;

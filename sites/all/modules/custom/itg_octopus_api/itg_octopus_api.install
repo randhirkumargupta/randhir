@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @file
  * Install, update and uninstall functions for the ITG Octopus Api module.
  */
-
 /**
  * Implementation of hook_schema
  * @access public
@@ -106,19 +106,19 @@ function itg_octopus_api_schema() {
         'not null' => TRUE,
       ),
       'story_custom_data' => array(
-      'description' => 'A blob field that contains list story custom.',
+        'description' => 'A blob field that contains list story custom.',
         'type' => 'blob',
         'not null' => FALSE,
-        ),
+      ),
     ),
     'primary key' => array('id'),
     'indexes' => array(
       'id' => array('id'),
     ),
   );
-  
+
   //schema for rundown xml clip
-  
+
   $schema['itg_element_clip'] = array(
     'description' => 'TODO: please describe this table!',
     'fields' => array(
@@ -198,9 +198,9 @@ function itg_octopus_api_schema() {
       'id' => array('id'),
     ),
   );
-  
+
   //schema for rundown xml rundown
-  
+
   $schema['itg_rundown'] = array(
     'description' => 'The base table for syndication.',
     'fields' => array(
@@ -245,6 +245,6 @@ function itg_octopus_api_schema() {
       'id' => array('id'),
     ),
   );
-  
+
   return $schema;
 }

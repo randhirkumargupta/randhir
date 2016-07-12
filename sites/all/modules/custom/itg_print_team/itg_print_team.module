@@ -102,6 +102,19 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         '#value' => t('Cancel'),
       );
 
+      //Hide issue and magazine form edit page
+      $form['field_pti_issue']['#access'] = FALSE;
+      $form['field_pti_magazine']['#access'] = FALSE;
+      /*
+      $issue_options = itg_print_team_issue_options();
+      $form['field_pti_issue'] = array(
+          '#type' => 'select',
+          '#title' => t('Issue'),
+          '#options' => $issue_options,
+          '#default_value' => $form['field_pti_issue'][LANGUAGE_NONE]['#entity']->field_pti_issue[LANGUAGE_NONE][0]['target_id'] ? $form['field_pti_issue'][LANGUAGE_NONE]['#entity']->field_pti_issue[LANGUAGE_NONE][0]['target_id'] : '',
+          '#weight' => 10,
+      ); */
+      
       //Unset meta tags
       unset($form['#metatags']);
       unset($form['actions']['preview']);
@@ -148,6 +161,8 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         unset($form['field_pti_print_media']);
       }
 
+      
+      
       $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
       $form['field_quiz_answer_video'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Video';
 
@@ -168,17 +183,17 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
       //Add JS for itg_print_team
       drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
+      
+      $issue_options = itg_print_team_issue_options();
+
       $form['pti_issue'] = array(
-        '#type' => 'date_popup',
-        '#title' => t('Issue'),
-        '#date_format' => 'd/m/Y',
-        '#date_label_position' => 'none',
-        '#attributes' => array(
-          'readonly' => 'readonly'
-        ),
-        '#weight' => 98,
-        '#attributes' => array('class' => array('associate-pti-issue')),  
+          '#type' => 'select',
+          '#title' => t('Issue'),
+          '#options' => $issue_options,
+          '#default_value' => '_none',
+          '#weight' => 98,
       );
+      
       $form['pti_magazine'] = array(
         '#type' => 'select',
         '#title' => 'Magazine',
@@ -226,6 +241,12 @@ function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
 
   //Chck for edit and add node
   if (arg(2) == 'edit') {
+    
+    /*
+    //Update issue fields with custom issue field in form_alter
+    $node = node_load($form_state['values']['nid']);
+    $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $form_state['values']['field_pti_issue'];
+    field_attach_update('node', $node); */
 
     //Set redirection URL according to user role
     $idea_review_flag_user = FALSE;
@@ -290,7 +311,6 @@ function itg_print_team_form_after_build($form, &$form_state) {
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
-
   return $form;
 }
 
@@ -352,12 +372,6 @@ function itg_print_team_node_update($node) {
 
       module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
 
-      //Set status "Not Decided" for "Needs Modification" case
-      if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs Modification') {
-        $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] = 'Not Decided';
-        field_attach_update('node', $node);
-      }
-
       //Send status mail to user
       if (in_array($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'], array('Approved', 'Rejected', 'Needs Modification'))) {
         itg_print_team_send_idea_status_mail($node, 'update');
@@ -379,12 +393,22 @@ function itg_print_team_node_update($node) {
 function itg_print_team_node_validate($node, $form, &$form_state) {
 
   if ($node->type == 'print_team_integration') {
-    if ($node->field_pti_words_limit[LANGUAGE_NONE][0]['value'] && ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'approved')) {
-      if (strlen(strip_tags($node->body[LANGUAGE_NONE][0]['value'])) > $node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {
-        form_set_error('body', t('Limit exceeded! Your idea brief limit is: @idealimit characters.', array('@idealimit' => $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'])));
+    if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
+      
+      //Validation of word limit for valid number
+      $words_limit = (int) $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'];
+      if (empty($words_limit) || !is_numeric($words_limit)) {
+        form_set_error('field_pti_words_limit', t('Words limit must be numeric and greater than zero.'));
+      } 
+      else {
+        
+        //Validate word limit to restrict user for story body
+        if (str_word_count(strip_tags($node->body[LANGUAGE_NONE][0]['value'])) > $node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {
+          form_set_error('body', t('Limit exceeded! Your idea brief limit is: @idealimit words.', array('@idealimit' => $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'])));
+        }
       }
-
-      //Validation for time
+    
+      //Validation for time limit
       $current_date = time();
       $timeline = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours');
       if ($current_date > $timeline) {
@@ -434,6 +458,7 @@ function itg_print_team_idea_actions($nid) {
  */
 function itg_print_team_association_validate($form, &$form_state) {
   //Array used in itg_print_team.js
+  global $base_url;
   $settings = array();
   $settings['base_url'] = $base_url;
 
@@ -442,8 +467,9 @@ function itg_print_team_association_validate($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
 
   $views_bulk_operations = $form_state['values']['views_bulk_operations'];
-  $issue = check_plain($form_state['values']['pti_issue']);
+  $issue = $form_state['values']['pti_issue'];
   $magazine = check_plain($form_state['values']['pti_magazine']);
+  
 
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     if (!max($views_bulk_operations) > 0) {
@@ -455,15 +481,8 @@ function itg_print_team_association_validate($form, &$form_state) {
     form_set_error('magazine', t('Please select Magazine.'));
   }
 
-  if (empty($issue)) {
-    form_set_error('issue', t('Please enter issue.'));
-  }
-  else {
-    $issue_date = $issue . ' 00:00:00';
-    $check_issue = itg_print_team_check_issue($issue_date);
-    if (empty($check_issue)) {
-      form_set_error('issue', t('Selected issue does not exist.'));
-    }
+  if ($issue == '_none') {
+    form_set_error('issue', t('Please select Issue.'));
   }
 }
 
@@ -479,7 +498,13 @@ function itg_print_team_association_submit($form, &$form_state) {
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     foreach ($views_bulk_operations as $source_id) {
       if (!empty($source_id)) {
-        itg_print_team_association_save($source_id, $issue, $magazine);
+        $associated_source_id = itg_print_team_check_association_print_to_story($source_id);
+        if (!empty($associated_source_id)) {
+          itg_print_team_association_update($source_id, $issue, $magazine, $associated_source_id, TRUE);
+        }
+        else {
+          itg_print_team_association_save($source_id, $issue, $magazine);
+        }
       }
     }
   }
@@ -495,14 +520,15 @@ function itg_print_team_association_submit($form, &$form_state) {
 function itg_print_team_association_save($nid, $issue, $magazine) {
   global $user;
   $node = node_load($nid);
-  $issue_date = $issue . ' 00:00:00';
-  $issue_nid = itg_print_team_issue_date($issue_date);
-  $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue_nid;
+  
+  $issue_title = itg_common_get_node_title($issue);
+  $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue;
   $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
   field_attach_update('node', $node);
 
   $headline = $node->title;
   $body = $node->body[LANGUAGE_NONE][0]['value'];
+  $fid = $node->field_quiz_answer_image[LANGUAGE_NONE][0]['fid'];
   $node = new stdClass();
   $node->title = trim($headline);
   $node->type = "story";
@@ -515,11 +541,17 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->comment = 0;
   $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
   $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
-  $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue) ? $issue : date('Y-m-d h:i:s', time());
-  //Issue, magazine and supplement
+  
+  //Association of issue with story
+  $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue_title) ? $issue_title : date('Y-m-d h:i:s', time());
+  
+  //Association of magazine with story
   $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
   if ($magazine) {
     $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
+  }
+  if($fid){
+    $story_node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid;
   }
   $publish_date = date('Y-m-d', time());
   $exp_date = strtotime('+90 years', strtotime($publish_date));
@@ -535,23 +567,8 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->workbench_moderation_state_new = workbench_moderation_state_published();
   $node = node_submit($node); // Prepare node for saving
   node_save($node); // Finally save node
-}
-
-/**
- * Get issues nid from node table
- * @param string $issue_date
- * @return string
- */
-function itg_print_team_issue_date($issue_date) {
-  $record = array();
-  if ($issue_date) {
-    $record = db_select('node', 'n')
-            ->fields('n', array('nid'))
-            ->condition('type', 'issue', '=')
-            ->condition('title', $issue_date, '=')
-            ->range(0, 1)->execute()->fetchAssoc();
-  }
-  return isset($record['nid']) ? $record['nid'] : '';
+  
+  drupal_set_message('Selected stories have been associated to selected issue and magazine successfully.');
 }
 
 /**
@@ -565,7 +582,7 @@ function itg_print_team_get_magazine_title() {
   $query->condition('node.type', 'magazine', '=');
   $result = $query->execute();
   $record = $result->fetchAll();
-  $options['_none'] = '- Select a value -';
+  $options['_none'] = '- Select Magazine -';
   foreach ($record as $val) {
     $options[$val->nid] = $val->title;
   }
@@ -573,14 +590,24 @@ function itg_print_team_get_magazine_title() {
 }
 
 /**
- * Get check issues from our database.
- * @param string $issue_date
- * @return int $entity_id
+ * Get issue option value
+ * @return array
  */
-function itg_print_team_check_issue($issue_date) {
-  return $entity_id = db_select('node', 'n')
-          ->fields('n', array('nid'))
-          ->condition('type', 'issue', '=')
-          ->condition('title', $issue_date, '=')
-          ->range(0, 1)->execute()->rowCount();
+function itg_print_team_issue_options(){
+  $query = db_select('node', 'node');
+  $query->fields('node', array('nid', 'title'));
+  $query->condition('node.status', 1, '=');
+  $query->condition('node.type', 'issue', '=');
+  $result = $query->execute();
+  $record = $result->fetchAll();
+  $options['_none'] = '-Select Issue-';
+  foreach ($record as $val) {
+    $issue_month = explode('-', $val->title);
+    $month_before_curr = date('m')-1;
+    
+    if($issue_month[1] >= $month_before_curr){
+      $options[$val->nid] = date('d/m/Y', strtotime($val->title));
+    }
+  }
+  return $options;
 }
