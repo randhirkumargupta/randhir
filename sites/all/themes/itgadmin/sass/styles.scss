@@ -5201,3 +5201,28 @@ div.node{
         }
     }
 }
+
+[id*="itg-octopus-api-form"]{
+    .form-type-textfield, .form-type-select{
+        padding-left: 0;
+        @extend .fleft;
+        > label{
+            display: block;
+            float: none;
+            padding: 0;
+        }
+    }
+    .octopus-filter-btn {
+        margin: 48px 0 0;
+        @extend .fleft;
+        .octopus-apply{
+            @extend .add-more;
+            height: 36px;
+            margin-right: 10px;
+        }
+        .octopus-reset{
+            @extend .add-more-wbg;
+            height: 36px;
+        }
+    }
+}
