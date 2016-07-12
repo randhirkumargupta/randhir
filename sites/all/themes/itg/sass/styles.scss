@@ -1,11 +1,15 @@
 /*---------------------------- ITG CSS -----------------------------------*/
-
+@import "itg-variables";
+@import "itg-mixins";
 /* Global CSS */
 body{
   font: 400 14px/18px 'Roboto';
   color: #333;
 }
 h1, h2, h3, h4{font-weight: 500;}
+a{
+    text-decoration: none;
+}
 .mr-0{
   margin: 0;
 }
@@ -33,6 +37,10 @@ h1, h2, h3, h4{font-weight: 500;}
 .pdlr-30{
   padding-left: 30px;
   padding-right: 30px;
+}
+.pdlr-10{
+  padding-left: 10px;
+  padding-right: 10px;    
 }
 .pdtb-10{
   padding-top: 10px;
@@ -68,6 +76,9 @@ h1, h2, h3, h4{font-weight: 500;}
 .full{
   width: 100%;
 }
+.max-wdt{
+    max-width: 100%;
+}
 .fleft{
   float: left;
 }
@@ -76,6 +87,9 @@ h1, h2, h3, h4{font-weight: 500;}
 }
 .pos-rel{
   position: relative;
+}
+.mhide{
+    display: none;
 }
 .btn {
     background-color: #337ab7;
@@ -130,9 +144,61 @@ input[type="text"], select, input[type="password"]{
 }
 #page{padding-bottom: 30px; @extend .full; @extend .dib;}
 .header{
-  @extend .pdtb-10;
+  padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
+  background:#1a3c8d  url(../images/mobile-header-bg.png) no-repeat center center;
+  height: 73px;
+  position:relative;
+  a{
+      color: $white-color; 
+  }
+  .header-ads{
+    text-align: center;
+  }
+  .lgn{
+      text-align: right;
+      a{
+        font-weight: 700;
+        margin-right: 10px;
+      }
+  }
+  .logo{
+    width: 20%;
+    max-width: 85px;
+    position: absolute;
+    left: 12px;
+    bottom: 0px;
+    img{
+       @extend .max-wdt;
+    }
+  }
+  nav{
+    @extend .full;
+    background: $red-color;
+    @extend .fleft;
+    margin-top: 6px;
+    text-align: right;
+    height: 28px;
+    line-height: 28px;
+    ul{
+       @extend .no-bullet;
+       li{
+          @extend .dib;
+          a{
+            text-decoration: none;
+            text-transform: uppercase;
+            font: 700 15px 'Roboto';
+            @extend .pdlr-10;
+            .fa{
+              font-size: 20px;
+              line-height: 28px;
+              vertical-align: top;
+            }
+          } 
+       }
+    }
+  }
 }
 .tabs-primary{
   @extend .no-bullet;

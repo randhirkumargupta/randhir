@@ -16,13 +16,39 @@ if ($theme != 'itgadmin') {
     <!--------------------------------Code for Front tpl---------------------------------------->
 
     <div id="page">
-
         <header class="header" id="header" role="banner">
-            <section class="container">
+            <section class="">
+                <div class="header-ads mhide">
+                    <img src="<?php print base_path() . path_to_theme() ?>/images/header-ads.png" alt="ads">
+                </div>
+                
                 <?php if ($logo): ?>
+                <div class="logo">
                     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+                </div>
                 <?php endif; ?>
-                <div class="fright login"><a href="user">Login</a></div>
+                <div class="lgn">
+                    <a href="/user">Login</a>
+                </div> 
+                
+                <nav class="nav">
+                        <ul class="social-nav mhide">
+                            <li><a href="#" title="">facebook</a></li>
+                            <li><a href="#" title="">twitter</a></li>
+                            <li><a href="#" title="">google+</a></li>
+                            <li><a href="#" title="">bloger</a></li>
+                            <li><a href="#" title="">mobile</a></li>
+                            <li><a href="#" title="">sound</a></li>
+                            <li><a href="#" title="">search</a></li>
+                            <li><a href="user" title="">Login</a></li>
+                        </ul>
+                        <ul class="main-nav">
+                            <li><a href="#" title=""><i class="fa fa-bars" ></i></a></li>
+                            <li><a href="#" title="">News</a></li>
+                            <li><a href="#" title="">tv</a></li>
+                            <li><a href="#" title="">MAGAZINE</a></li>
+                        </ul>
+                </nav>
                 <?php if ($site_name || $site_slogan): ?>
                     <div class="header__name-and-slogan" id="name-and-slogan">
                         <?php if ($site_name): ?>
