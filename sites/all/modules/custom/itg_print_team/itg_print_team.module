@@ -58,7 +58,11 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
     'itg_print_team_idea_status_mail' => array(
       'variables' => array('node' => NULL),
       'template' => 'templates/print-team-idea-status-mail',
-    )
+    ),
+    'itg_print_team_idea_association_mail' => array(
+      'variables' => array('node' => NULL),
+      'template' => 'templates/print-team-idea-association-mail',
+    )  
   );
 
   return $themes;
