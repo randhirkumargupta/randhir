@@ -132,6 +132,8 @@ function _facebook_pages_list() {
 
 /**
  * Function to get page list
+ * 
+ * @return array
  */
 function itg_social_media_fb_paglist() {
   $fb = itg_social_media_fb_connection();

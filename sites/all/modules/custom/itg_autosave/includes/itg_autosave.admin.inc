@@ -6,6 +6,7 @@
 
 /**
  * Implement module setting form 
+ * {@inheritdoc}
  */
 function itg_autosave_form() { 
   // Add js into form
@@ -85,6 +86,9 @@ function itg_autosave_form_delete($form_id) {
 
 /**
  * Autosave ajax callback function
+ * 
+ * @param int $nid
+ * @param string $ctype
  */
 function itg_autosave_nodeform($nid, $ctype) {
   $itg_auto_save = new ItgAutoSave();
@@ -142,6 +146,9 @@ function itg_autosave_nodeform($nid, $ctype) {
 
 /**
  * Remove empty elements from an array
+ * 
+ * @param string $field_name_type
+ * @return boolean
  */
 function itg_autosave_remove_empty($field_name_type) {
   if (empty($field_name_type['fieldName'])) {

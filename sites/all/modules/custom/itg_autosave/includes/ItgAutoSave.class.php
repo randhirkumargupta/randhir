@@ -101,7 +101,10 @@ class ItgAutoSave {
   
   /**
    * Extract field type available on any content type
-   */  
+   * 
+   * @param array $inputs
+   * @return array
+   */
   public function itg_save_extract_fieldtype($inputs) {
     $this->itgResult = array();
     foreach ($inputs as $key => $value) {
@@ -118,7 +121,7 @@ class ItgAutoSave {
   /**
    * Prepare presave array for file field.
    * 
-   * @param array $field
+   * @param string $op
    * @param array $value
    * @return array 
    */
@@ -136,9 +139,9 @@ class ItgAutoSave {
   /**
    * Prepare presave arrave for text field
    * 
-   * @param array $field
+   * @param string $op
    * @param array $value
-   * @return array
+   * @return string
    */
   public function itg_save_field_text($op, $value) {
     if ($op == 'insert') {
@@ -152,9 +155,9 @@ class ItgAutoSave {
   /**
    * Prepare presave array for term reference field.
    * 
-   * @param array $field
+   * @param string $op
    * @param array $value
-   * @return array
+   * @return string
    */
   public function itg_save_field_taxonomy_term_reference($op, $value) {
     if ($op == 'insert') {
@@ -168,7 +171,7 @@ class ItgAutoSave {
   /**
    * Prepare presave array for datestamp field.
    * 
-   * @param array $field
+   * @param string $op
    * @param array $value
    * @return array
    */
@@ -185,9 +188,9 @@ class ItgAutoSave {
   /**
    * Prepare presave array for datetime field.
    * 
-   * @param array $field
+   * @param string $op
    * @param array $value
-   * @return array
+   * @return string
    */
   public function itg_save_field_datetime($op, $value) {
     if ($op == 'insert') {
@@ -203,9 +206,9 @@ class ItgAutoSave {
   /**
    * Prepare presave array for long text field.
    * 
-   * @param array $field
+   * @param string $op
    * @param array $value
-   * @return array
+   * @return string
    */
   public function itg_save_field_text_long($op, $value) {
     if ($op == 'insert') {
@@ -219,7 +222,7 @@ class ItgAutoSave {
   /**
    * Prepare presave array for image field.
    * 
-   * @param array $field
+   * @param string $op
    * @param array $value
    * @return array
    */
@@ -237,9 +240,9 @@ class ItgAutoSave {
   /**
    * Prepare presave array for image field.
    * 
-   * @param array $field
+   * @param string $op
    * @param array $value
-   * @return array
+   * @return string
    */
   public function itg_save_field_text_with_summary($op, $value) {   
     if ($op == 'insert') {
@@ -253,9 +256,9 @@ class ItgAutoSave {
   /**
    * Prepare presave array for list text field.
    * 
-   * @param array $field
+   * @param string $op
    * @param array $value
-   * @return array
+   * @return string
    */
   public function itg_save_field_list_text($op, $value) {   
     if ($op == 'insert') {
@@ -267,9 +270,14 @@ class ItgAutoSave {
   }
   
   /**
-   * Save form data into database to fullfill need of autosave.
-   * @param type $pre_save
+   * Save form data into database to fullfill need of autosave.   
+   * 
+   * @global stdObject $user
+   * @param array $pre_save
+   * @param int $nid
+   * @param string $ctype
    */
+   
   public function itg_save_form_data($pre_save, $nid, $ctype) {
     global $user;        
     $this->itg_query = array(
@@ -282,6 +290,13 @@ class ItgAutoSave {
     drupal_write_record('itg_autosave_node_data', $this->itg_query);
   }
   
+  /**
+   * Retrieve data from database.
+   * 
+   * @param int $nid
+   * @param string $ctype
+   * @return array
+   */
   public function itg_save_retrieve_form_data($nid, $ctype) {
     $this->itg_query = db_select('itg_autosave_node_data', 'itg');
     $this->itg_query->fields('itg')
