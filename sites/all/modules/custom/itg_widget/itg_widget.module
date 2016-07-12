@@ -38,31 +38,31 @@ function itg_widget_block_info() {
 function itg_widget_block_view($delta = '') {
     $block = array();
     switch ($delta) {
-        //section ordering reordering widget case
+        // section ordering reordering widget case
         case 'section_ordering':
             module_load_include('inc', 'itg_widget', 'includes/section-odering');
-            //value is hardcoded need to be change for dyanamic functionality
-            $info['section'] = '240'; //tid of section
-            $info['content_type'] = 'story'; //content type machine name
-            //view name which is stored in draggableviews_structure table
+            // value is hardcoded need to be change for dyanamic functionality
+            $info['section'] = '240'; // tid of section
+            $info['content_type'] = 'story'; // content type machine name
+            // view name which is stored in draggableviews_structure table
             $info['view_name'] = 'section_wise_content_ordering';
             $block['subject'] = t('Section Ordering');
             $data = itg_widget_section_ordering_data($info);
             $block['content'] = theme("section_ordering", array("data" => $data));
             break;
-        //Top story ordering reordering widget case
+        // Top story ordering reordering widget case
         case 'top_stories_ordering':
             module_load_include('inc', 'itg_widget', 'includes/section-odering');
-            $info['view_name'] = 'story_widget'; //view name
-            $info['page'] = 'page_2'; //page name
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'page_2'; // page name
             $data = itg_widget_top_stories_ordering_data($info);
             $block['content'] = theme("top_stories_ordering", array("data" => $data));
             break;
-        //home page feature ordering reordering widget case
+        // home page feature ordering reordering widget case
         case 'home_page_feature':
             module_load_include('inc', 'itg_widget', 'includes/home-page-feature');
-            $info['view_name'] = 'home_page_feature_widget'; //view name
-            $info['page'] = 'page_2'; //page name
+            $info['view_name'] = 'home_page_feature_widget'; // view name
+            $info['page'] = 'page_2'; // page name
             $data = itg_widget_home_page_feature_data($info);
             $block['content'] = theme("home_page_feature", array("data" => $data));
             break;
@@ -80,28 +80,28 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     /* Load all nodes queues */
     $queues = nodequeue_load_queues(nodequeue_get_all_qids());
     switch ($view_name) {
-        //top story
+        // top story
         case 'story_widget':
             watchdog("Widget", "setting for top story found");
-            $queue_flag = 1; //top story widget qid
+            $queue_flag = 1; // top story widget qid
             break;
-        //home page feature
+        // home page feature
         case 'home_page_feature_widget':
             watchdog("Widget", "setting for home page feature found");
-            $queue_flag = 2; //home page feature qid
+            $queue_flag = 2; // home page feature qid
             break;
     }
     if (!empty($queues[$queue_flag])) {
         watchdog("Widget", "setting sent to js");
-        //name of nodequeue
+        // name of nodequeue
         $setting['name'] = $queues[$queue_flag]->name;
-        //qid of nodeduque
+        // qid of nodeduque
         $setting['qid'] = $queues[$queue_flag]->qid;
-        //title of nodequeue
+        // title of nodequeue
         $setting['title'] = $queues[$queue_flag]->title;
-        //add js for setting
+        // add js for setting
         drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
-        //pass setting to js for bulk operation
+        // pass setting to js for bulk operation
         drupal_add_js(array('itg_widget' => array('data' => $setting)), 'setting');
     }
 }
