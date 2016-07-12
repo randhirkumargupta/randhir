@@ -5,7 +5,7 @@
         $entity = $entity_info[$entity_data['entity_id']];
         ?>
         <li class="<?php print $entity->type ?>">
-            <a href="node/<?php print $entity->nid ?>"><?php print $entity->title; ?></a>
+            <a href="<?php print drupal_get_path_alias("node/$entity->nid"); ?>"><?php print $entity->title; ?></a>
         </li>
     <?php } ?>
 </ul>
