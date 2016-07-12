@@ -451,6 +451,11 @@ function itg_poll_block_view($delta = '') {
       $block['content'] = theme('itg_poll_tab_form_display_block', array('data' => $data));
       break;
   }
+  
+  // Disable form tab from delete page
+  if (arg(0) == 'node' && arg(2) == 'delete') {
+    return array();
+  }
 
   return $block;
 }
@@ -484,7 +489,7 @@ function itg_poll_views_pre_render(&$view) {
   if ($view->name == "poll_listing" && ($view->current_display == 'page' || $view->current_display == 'page_1')) {
     $poll_content = '';
     $poll_content .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $poll_content .= '<a href ="./node/add/poll?destination=manage-poll">Create Poll</a>';
+    $poll_content .= l(t('Create Poll'), 'node/add/poll', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));    
     $view->attachment_before = $poll_content;
   }
 }
