@@ -13,13 +13,18 @@ function itg_print_team_send_idea_status_mail($node, $source) {
   
   if ($source == 'insert') {
     $mail_content = itg_print_team_approval_mail_content($node);
-    $user_emails = itg_print_team_get_approval_user_emails();
+    $user_emails = itg_print_team_get_approval_user_emails('approval');
     $user_email_ids = implode(",", $user_emails);
   }
-  else {
+  elseif($source == 'update') {
     $mail_content = itg_print_team_status_mail_content($node);
     $user = user_load($node->uid);
     $user_email_ids = $user->mail;
+  }
+  else {
+    $mail_content = itg_print_team_association_mail_content($node);
+    $user_emails = itg_print_team_get_approval_user_emails('association');
+    $user_email_ids = implode(",", $user_emails);
   }
 
   //Array of email subject and body 
@@ -77,15 +82,30 @@ function itg_print_team_approval_mail_content($node) {
 }
 
 /**
+ * Get mail content after association from issue and magazine
+ * @param object $node
+ * @return type
+ */
+function itg_print_team_association_mail_content($node) {
+  return theme('itg_print_team_idea_association_mail', array('node' => $node));
+}
+
+/**
  * Get user email of idea approval team
  * 
  * @return array
  *    an array of users uid, email and name
  */
-function itg_print_team_get_approval_user_emails() {
+function itg_print_team_get_approval_user_emails($user_type) {
   $user_list = array();
-  $roles = array('Site Admin', 'Co-ordinator', 'Editor', 'Section Editor/Anchor');
- 
+  
+  if ($user_type == 'approval') {
+    $roles = array('Site Admin', 'Co-ordinator', 'Editor', 'Section Editor/Anchor');
+  }
+  else {
+    $roles = array('Photo Coordinator', 'Photo Head', 'Design Head', 'Copy Desk');
+  }
+   
   //Fetch name, mail and uid of all users having role Coordinator, editor and Anchor
   $query = db_select('users_roles', 'ur');
   $query->join('users', 'u', 'u.uid = ur.uid');
