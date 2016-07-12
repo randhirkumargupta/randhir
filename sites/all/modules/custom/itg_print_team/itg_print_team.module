@@ -508,6 +508,7 @@ function itg_print_team_association_submit($form, &$form_state) {
         }
         else {
           itg_print_team_association_save($source_id, $issue, $magazine);
+
         }
       }
     }
@@ -524,6 +525,7 @@ function itg_print_team_association_submit($form, &$form_state) {
 function itg_print_team_association_save($nid, $issue, $magazine) {
   global $user;
   $node = node_load($nid);
+  itg_print_team_send_idea_status_mail($node, 'association');
   
   $issue_title = itg_common_get_node_title($issue);
   $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue;
