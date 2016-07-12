@@ -42,14 +42,14 @@ function itg_category_manager_menu() {
 
   $items = array();
   $items['admin/config/itg_category_manager'] = array(
-    'title' => t('ITG Category Manager'),
-    'description' => t('Configuration for ITG Category Manager module.'),
+    'title' => 'ITG Category Manager',
+    'description' => 'Configuration for ITG Category Manager module.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_category_manager_form'),
     'access arguments' => array('administer taxonomy'),
   );
   $items['test'] = array(
-    'title' => t('ITG Category Manager'),
+    'title' => 'ITG Category Manager',
     'page callback' => 'notify_insert_statuspost',
     'access callback' => TRUE
   );
@@ -60,7 +60,7 @@ function itg_category_manager_menu() {
   );
   // SEF Url log menu
   $items['sef-log/%'] = array(
-    'title' => t('SEF URL Log'),
+    'title' => 'SEF URL Log',
     'page callback' => 'itg_category_manager_seflogpage',
     'access callback' => TRUE,
     'page arguments' => array(1),
@@ -439,7 +439,7 @@ function itg_category_manager_term_validate($form, &$form_state) {
         if (isset($value->tid) && $value->tid == $new_rparent) {
           form_set_error('name', t('Category name already exists.'));
         }
-        else if ($new_rparent == 0 && $value->name == $form_state['values']['name']) {
+        elseif ($new_rparent == 0 && $value->name == $form_state['values']['name']) {
           form_set_error('name', t('Category name already exists.'));
         }
         else {
@@ -982,7 +982,7 @@ function itg_category_manager_block_view($delta = '') {
       $arg = arg();
       $term = taxonomy_term_load($arg[2]);
       if ($term->vid == 4) {
-        $ass_node = taxonomy_select_nodes($arg[2], $pager = false, $limit = 1, $order = array('t.created' => 'DESC'));
+        $ass_node = taxonomy_select_nodes($arg[2], $pager = FALSE, $limit = 1, $order = array('t.created' => 'DESC'));
         if (count($ass_node)) {
           global $language;
           $data .= '<div class="content-associated">';
@@ -1275,5 +1275,5 @@ function itg_category_manager_custom_submit($form, &$form_state) {
     $op = 'updated';
   }
   $category_title = $form_state['node']->title;
-  drupal_set_message(t('Category <b>' . $form_state['term']->name . '</b> has been ' . $op . '.'));  
+  drupal_set_message(t('Category <b>@tname</b> has been @op.', array('@tname' => $form_state['term']->name, '@op' => $op)), 'status');  
 }

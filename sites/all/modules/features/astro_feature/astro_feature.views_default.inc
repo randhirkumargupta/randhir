@@ -702,6 +702,12 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['filters']['field_astro_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_astro_type_tid']['vocabulary'] = 'astro_type';
   $handler->display->display_options['filters']['field_astro_type_tid']['error_message'] = FALSE;
+  /* Filter criterion: User: Current */
+  $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
+  $handler->display->display_options['filters']['uid_current']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
+  $handler->display->display_options['filters']['uid_current']['relationship'] = 'uid';
+  $handler->display->display_options['filters']['uid_current']['value'] = '1';
   $handler->display->display_options['path'] = 'draft-manage-astro';
   $export['manage_astro'] = $view;
 

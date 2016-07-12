@@ -76,7 +76,7 @@ function itg_astro_get_term_name($tid) {
 /**
  * Pass sign name to js file. 
  */
-function itg_astro_set_sign_name(){
+function itg_astro_set_sign_name() {
   $sign_name = itg_astro_zodiac_thumbnail();  
   foreach ($sign_name as $value) {
     $data[] = array('name' => $value->name, 'tid' => $value->tid);
@@ -106,14 +106,12 @@ function itg_astro_set_sign_name(){
  */
 function itg_astro_form_alter(&$form, &$form_state, $form_id) {  
   if ($form_id == 'astro_node_form') {
-    // Pass sign name to js file
-    itg_astro_set_sign_name();
+    // Pass sign name to js file      
+    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js');
+    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
+    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
     
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js',
-      drupal_get_path('module', 'itg_astro') . '/js/moment.js',
-      drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
-    );    
+    itg_astro_set_sign_name();
     
     if ($form['nid']['#value'] == NULL) {
       $form['title']['#default_value'] = date('M d, Y');
@@ -121,15 +119,15 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
     // Create navigation label
     $form['itg_collective'] = array(
       '#type' => 'markup',
-      '#markup' => '<h2 class="story-title story-title-coll">'. t('Collective Content').'</h2>',      
+      '#markup' => '<h2 class="story-title story-title-coll">' . t('Collective Content') . '</h2>',      
     );
     $form['itg_zodiac'] = array(
       '#type' => 'markup',
-      '#markup' => '<h2 class="story-title story-title-zod">'. t('Zodiac Sign').'</h2>',      
+      '#markup' => '<h2 class="story-title story-title-zod">' . t('Zodiac Sign') . '</h2>',      
     );
     $form['itg_numerology'] = array(
       '#type' => 'markup',
-      '#markup' => '<h2 class="story-title story-title-num">'. t('Numerology').'</h2>',      
+      '#markup' => '<h2 class="story-title story-title-num">' . t('Numerology') . '</h2>',      
     );    
 
     // Set field visibility for zodiac sign field
@@ -164,8 +162,14 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
       ),
     );  
     $form['field_astro_type']['und']['#title'] = t('Astro Type') . '<span class="form-required" title="This field is required."> *</span>';
-
-    $form['#action'] = '?destination=manage-astro';
+    
+    if (!empty($_REQUEST['destination'])) {
+      $destination = $_REQUEST['destination'];
+    }
+    else {
+      $destination = 'manage-astro';
+    }
+    
     $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';
     $form['#after_build'][] = 'itg_astro_after_build';
     unset($form['field_numerology']['und']['#options']['_none']);
@@ -221,7 +225,7 @@ function itg_astro_after_build($form, &$form_state) {
   $form['field_buzz_description']['#prefix'] = '<div class="collective-wrapper">';
   $form['field_common_audio_file']['#suffix'] = '</div>';
   
-  $form['field_buzz_description']['und'][0]['value']['#title'] = t('Collective Text for all zodiac signs ').'<span class="form-required" title="This field is required."> *</span>';
+  $form['field_buzz_description']['und'][0]['value']['#title'] = t('Collective Text for all zodiac signs') . '<span class="form-required" title="This field is required."> *</span>';
   
 
   // Add cancel button to create/edit astro page
@@ -258,7 +262,7 @@ function itg_astro_change_message($form, &$form_state) {
   else {
     $op = 'updated';}
   $astro_title = $form_state['node']->title;
-  drupal_set_message(t('Astro <b>' . $astro_title . '</b> has been ' . $op.'.' ));
+  drupal_set_message(t('Astro @astro_title has been @op.', array('@astro_title' =>  $astro_title, '@op' => $op)), 'status');
   $_GET['destination'] = $_REQUEST['destination'];
 }
 
@@ -289,7 +293,12 @@ function itg_astro_block_view($delta = '') {
       $block['content'] = theme('astro_tab_form_display_block', array('data' => $data));
       break;
   }
-
+  
+  // Hide form tab on delete page of astro.
+  if (arg(0) == 'node' && arg(2) == 'delete') {
+    return array();
+  }
+  
   return $block;
 }
 
