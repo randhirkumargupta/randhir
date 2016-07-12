@@ -88,14 +88,16 @@ function itg_octopus_api_form($form, &$form_state) {
   );
   $form['items_per_page'] = array(
     '#type' => 'select',
+    '#title' => 'Items per page',
     '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
     '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
   );
   $form['submit'] = array(
-    '#value' => 'Search',
+    '#value' => 'Apply',
     '#type' => 'submit',
-    '#attributes' => array('class' => array('button')),
-    '#suffix' => '<a class="button" href="' . base_path() . 'rundown/listing">Reset</a>',
+    '#attributes' => array('class' => array('octopus-apply')),
+    '#prefix' => '<div class = "octopus-filter-btn">',
+    '#suffix' => '<a class="octopus-reset" href="' . base_path() . 'rundown/listing">Reset</a></div>',
   );
   return $form;
 }
