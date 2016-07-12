@@ -28,7 +28,7 @@ function itg_widget_section_ordering_data($info) {
             $query->condition('dv_s.view_name', $view_name);
             $query->condition('dv_s.args', '%' . db_like($args_like) . '%', 'LIKE');
             $query->orderBy('dv_s.weight', 'ASC');
-            #only top 15 nodes are required as per requirement
+            //only top 3 nodes are required as per requirement
             $query->range(0, 3);
             $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
             $data = $result;
@@ -56,9 +56,9 @@ function itg_widget_top_stories_ordering_data($info) {
         watchdog('Top Stories ordering', 'inside top stories ordering');
         $view_name = isset($info['view_name']) ? $info['view_name'] : "";
         $page = isset($info['page']) ? $info['page'] : "";
-        #condition to validate
+        //condition to validate
         if (!empty($view_name) && !empty($page)) {
-            $arg_like = '{"nid":"","title":""}'; #this is for only top story widget
+            $arg_like = '{"nid":"","title":""}'; //this is for only top story widget
             $query = db_select('draggableviews_structure', 'dv_s');
             $query->fields('dv_s', array('entity_id'));
             $query->condition('dv_s.view_name', $view_name);
@@ -66,7 +66,7 @@ function itg_widget_top_stories_ordering_data($info) {
             $query->condition('dv_s.view_display', $page);
             $query->orderBy('dv_s.weight', 'ASC');
             $query->groupBy('dv_s.entity_id');
-            #only top 15 nodes are required as per requirement
+            //only top 15 nodes are required as per requirement
             $query->range(0, 15);
             $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
             $data = $result;
