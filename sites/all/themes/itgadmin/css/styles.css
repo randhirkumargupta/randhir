@@ -4530,9 +4530,28 @@ div.node #comments h2 {
 [id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .form-type-managed-file > label {
   padding-top: 0;
 }
+[id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .form-type-managed-file .messages {
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid;
+  font-size: 12px;
+  padding: 10px;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 99;
+}
+[id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .form-type-managed-file .messages ul {
+  padding-left: 10px;
+}
 
 .node-videogallery-form #videoupload .form-type-plupload {
   margin-top: 75px;
+}
+.node-videogallery-form .form-field-name-field-story-schedule-date-time .date-padding .form-type-textfield span.error {
+  padding-left: 0;
 }
 .node-videogallery-form .form-field-name-field-story-schedule-date-time .date-padding .form-type-textfield:last-child {
   margin-left: 10px;
@@ -4745,6 +4764,9 @@ div.node #comments h2 {
   position: absolute;
   top: 42px;
   z-index: 99;
+}
+[id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .messages--error ul {
+  padding-left: 10px;
 }
 [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .messages--error .hide-message {
   background: url("../images/cross_small.png") 5px center no-repeat #fff;
