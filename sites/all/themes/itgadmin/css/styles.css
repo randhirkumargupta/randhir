@@ -4341,7 +4341,11 @@ div.node #comments h2 {
   position: absolute;
   right: 50px;
   top: 55px;
-  width: 150px;
+  width: 250px;
+}
+.block-itg-related .my-saved-search ul {
+  overflow-y: auto;
+  max-height: 270px;
 }
 .block-itg-related .my-saved-search ul li {
   text-align: left;
