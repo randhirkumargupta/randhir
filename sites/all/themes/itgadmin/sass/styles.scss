@@ -1484,6 +1484,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-task-allocation-menu,
 #block-menu-menu-ugc-comment-menu,
 #block-menu-menu-astro-content-admin-menu,
+#block-menu-menu-recipe-content-admin-menu,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -4627,6 +4628,7 @@ div.node{
     @extend .fleft;
     width: 720px;
     margin: 0 -15px;
+    overflow: visible;
     .field-multiple-drag{
       display: none;
     }
@@ -4737,6 +4739,9 @@ div.node{
                 }
               }
             }
+            .form-type-textfield .form-text + div.description{
+                left: 215px;
+            }
           }
           .form-managed-file + div.description {
             left: 220px;
@@ -4745,14 +4750,14 @@ div.node{
           .file-widget{
               height: 34px;
               @extend .pos-rel;
-              &:before{
+/*              &:before{
                 content: 'Browse';
                 @extend .add-more;
                 position: absolute;
                 left: 0;
                 top: 1px;
                 z-index: 1;
-              }
+              }*/
               &.has-file:before{
                   display: none;
               }
@@ -4787,13 +4792,16 @@ div.node{
               left: 175px !important;
             }
             .form-file{
-                height: 32px;
+/*                height: 32px;
                 margin: 0 43px 0 0;
                 position: relative;
                 width: 75px;
                 z-index: 99;
                 opacity: 0;
-                cursor: pointer;
+                cursor: pointer;*/
+                
+                margin: 6px 0 0;
+                width: 118px;
             }
           }
         }
@@ -4844,6 +4852,7 @@ div.node{
   tbody{
     @extend .fleft;
     width: 720px;
+    overflow: visible;
     margin: 0 -15px;
     .field-multiple-drag{
       display: none;
@@ -4870,6 +4879,9 @@ div.node{
           position: absolute;
           top: 42px;
           z-index: 99;
+          ul{
+              padding-left: 10px;
+          }
           .hide-message{
             background: url('../images/cross_small.png') 5px center no-repeat #fff;
             bottom: 2px;
@@ -4952,6 +4964,9 @@ div.node{
                 }
               }
             }
+            .form-type-textfield .form-text + div.description{
+                left: 215px;
+            }
           }
           .form-managed-file + div.description {
             left: 220px;
@@ -4960,14 +4975,14 @@ div.node{
           .file-widget{
               height: 34px;
               @extend .pos-rel;
-              &:before{
+/*              &:before{
                 content: 'Browse';
                 @extend .add-more;
                 position: absolute;
                 left: 0;
                 top: 1px;
                 z-index: 1;
-              }
+              }*/
               &.has-file:before{
                   display: none;
               }
@@ -5002,13 +5017,16 @@ div.node{
               left: 175px !important;
             }
             .form-file{
-                height: 32px;
+/*                height: 32px;
                 margin: 0 43px 0 0;
                 position: relative;
                 width: 75px;
                 z-index: 99;
                 opacity: 0;
-                cursor: pointer;
+                cursor: pointer;*/
+                
+                margin: 6px 0 0;
+                width: 118px;
             }
           }
         }
@@ -5181,6 +5199,31 @@ div.node{
         &+.form-submit{
             margin: 30px;
             @extend .add-more;
+        }
+    }
+}
+
+[id*="itg-octopus-api-form"]{
+    .form-type-textfield, .form-type-select{
+        padding-left: 0;
+        @extend .fleft;
+        > label{
+            display: block;
+            float: none;
+            padding: 0;
+        }
+    }
+    .octopus-filter-btn {
+        margin: 48px 0 0;
+        @extend .fleft;
+        .octopus-apply{
+            @extend .add-more;
+            height: 36px;
+            margin-right: 10px;
+        }
+        .octopus-reset{
+            @extend .add-more-wbg;
+            height: 36px;
         }
     }
 }
