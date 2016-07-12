@@ -104,7 +104,8 @@ function filefield_source_itg_image_repository_settings($option, $instance) {
             ),
             '#default_value' => isset($settings['source_itg_image_repository']['itg_image_repository_mode']) ? $settings['source_itg_image_repository']['itg_image_repository_mode'] : 0,
         );
-    } elseif ($option == 'save') {
+    } 
+    elseif ($option == 'save') {
         $return['source_itg_image_repository']['itg_image_repository_mode'] = 0;
     }
 
@@ -146,7 +147,7 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
     $getimageoptions = explode('(', $element['#description']);
     $getimageoptions = explode(')', $getimageoptions[1]);
     $getimagehightwidth = explode('x', $getimageoptions[0]);
-    $itg_image_repository_function = 'window.open(\'' . url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => $getimagehightwidth[1], 'width' => $getimagehightwidth[0]))) . '\', \''.$element['#field_name'].'\', \'width=900,height=800,resizable=1\'); return false;';
+    $itg_image_repository_function = 'window.open(\'' . url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => $getimagehightwidth[1], 'width' => $getimagehightwidth[0]))) . '\', \' ' . $element['#field_name'] . ' \', \'width=900,height=800,resizable=1\'); return false;';
     $element['filefield_itg_image_repository']['display_path'] = array(
         '#type' => 'markup',
         '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="#" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
@@ -199,7 +200,8 @@ function filefield_source_itg_image_repository_value($element, &$item) {
             if (filefield_sources_element_validate($element, $file)) {
                 $item = array_merge($item, (array) $file);
             }
-        } else {
+        } 
+        else {
             form_error($element, t('The selected file could not be used because the file does not exist in the database.'));
         }
         // No matter what happens, clear the value from the file path field.

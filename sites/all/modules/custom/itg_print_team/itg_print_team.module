@@ -352,12 +352,6 @@ function itg_print_team_node_update($node) {
 
       module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
 
-      //Set status "Not Decided" for "Needs Modification" case
-      if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs Modification') {
-        $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] = 'Not Decided';
-        field_attach_update('node', $node);
-      }
-
       //Send status mail to user
       if (in_array($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'], array('Approved', 'Rejected', 'Needs Modification'))) {
         itg_print_team_send_idea_status_mail($node, 'update');

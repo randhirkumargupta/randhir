@@ -539,12 +539,12 @@
         }
     });
     
-    $('.form-field-name-field-gallery-image .messages--error').each(function () {
+    $('.form-field-name-field-gallery-image .messages--error, .field-name-field-upload-video .messages--status, .field-name-field-upload-video .messages.error, .field-name-field-video-thumbnail .messages--error').each(function () {
       if (!$(this).children().hasClass('hide-message')) {
         $(this).append('<a class="hide-message" href="javascript:;">Close</a>');
       }
     });
-    $('.form-field-name-field-gallery-image').on('click', '.hide-message', function () {
+    $('.form-field-name-field-gallery-image, .field-name-field-upload-video, .field-name-field-video-thumbnail').on('click', '.hide-message', function () {
       $(this).parent().remove();
     });
 
