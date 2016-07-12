@@ -52,6 +52,15 @@ function itg_autosave_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_autosave.admin.inc',
   );
+  // Autosave ajax callback function
+  $items['itg-autosave/nodeform'] = array(
+    'page callback' => 'itg_autosave_nodeform',
+    'page arguments' => array(2, 3),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_autosave.admin.inc',
+  );
+  
   
   return $items;
 }
@@ -76,13 +85,25 @@ function itg_autosave_views_api() {
  * 
  * {@inheritdoc}
  */
-function itg_autosave_form_alter(&$form, &$form_state, $form_id) {  
-  // Add js into form
-  //$form['#attached']['js'] = array(
-  //  drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',       
-  //);
-  
+function itg_autosave_form_alter(&$form, &$form_state, $form_id) {          
   // Fetch form ids saved into databse for auto save feature.
-  //$itg_autosave_form = new ItgAutoSave();
-  //$itg_autosave_form->itg_save_set_form_ids();  
+  $itg_autosave_form = new ItgAutoSave();
+    
+  if ($form_id == 'astro_node_form') {  
+    // Add js file for autosave ajax
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',       
+    );
+    // Set form ids to js file.
+    $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);
+    
+    // Retrive data is it is already set.
+    $data = $itg_autosave_form->itg_save_retrieve_form_data($form['nid']['#value'], $form['type']['#value']);        
+    $form_data = unserialize($data->form_data);        
+    $field_detail = $itg_autosave_form->itg_save_extract_fieldtype($form_data);    
+    $form['title']['#default_value'] = isset($form_data['title']) ? $form_data['title'] : date('M d, Y');
+    foreach ($field_detail as $value) {            
+      $itg_autosave_form->itg_save_prepare_retrieve_array($form, $value['fieldName'], $form_data[$value['fieldName']], $value['fieldType']);            
+    }    
+  }
 }
