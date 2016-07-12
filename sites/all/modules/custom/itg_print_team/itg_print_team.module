@@ -458,6 +458,7 @@ function itg_print_team_idea_actions($nid) {
  */
 function itg_print_team_association_validate($form, &$form_state) {
   //Array used in itg_print_team.js
+  global $base_url;
   $settings = array();
   $settings['base_url'] = $base_url;
 
@@ -497,7 +498,13 @@ function itg_print_team_association_submit($form, &$form_state) {
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     foreach ($views_bulk_operations as $source_id) {
       if (!empty($source_id)) {
-        itg_print_team_association_save($source_id, $issue, $magazine);
+        $associated_source_id = itg_print_team_check_association_print_to_story($source_id);
+        if (!empty($associated_source_id)) {
+          itg_print_team_association_update($source_id, $issue, $magazine, $associated_source_id, TRUE);
+        }
+        else {
+          itg_print_team_association_save($source_id, $issue, $magazine);
+        }
       }
     }
   }
@@ -521,6 +528,7 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
 
   $headline = $node->title;
   $body = $node->body[LANGUAGE_NONE][0]['value'];
+  $fid = $node->field_quiz_answer_image[LANGUAGE_NONE][0]['fid'];
   $node = new stdClass();
   $node->title = trim($headline);
   $node->type = "story";
@@ -542,6 +550,9 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   if ($magazine) {
     $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
   }
+  if($fid){
+    $story_node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid;
+  }
   $publish_date = date('Y-m-d', time());
   $exp_date = strtotime('+90 years', strtotime($publish_date));
   $exp_date = date('Y-m-d', $exp_date);
@@ -561,23 +572,6 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
 }
 
 /**
- * Get issues nid from node table
- * @param string $issue_date
- * @return string
- */
-function itg_print_team_issue_date($issue_date) {
-  $record = array();
-  if ($issue_date) {
-    $record = db_select('node', 'n')
-            ->fields('n', array('nid'))
-            ->condition('type', 'issue', '=')
-            ->condition('title', $issue_date, '=')
-            ->range(0, 1)->execute()->fetchAssoc();
-  }
-  return isset($record['nid']) ? $record['nid'] : '';
-}
-
-/**
  * Get magazine title to associate with story
  * @return array $options
  */
@@ -593,19 +587,6 @@ function itg_print_team_get_magazine_title() {
     $options[$val->nid] = $val->title;
   }
   return $options;
-}
-
-/**
- * Get check issues from our database.
- * @param string $issue_date
- * @return int $entity_id
- */
-function itg_print_team_check_issue($issue) {
-  return $entity_id = db_select('node', 'n')
-          ->fields('n', array('nid'))
-          ->condition('type', 'issue', '=')
-          ->condition('nid', $issue, '=')
-          ->range(0, 1)->execute()->rowCount();
 }
 
 /**
