@@ -45,10 +45,6 @@ function itg_tv_schedule_menu() {
  * {@inheritdoc}
  */
 function itg_tv_schedule_form($form, &$form_state) {
-//    $form['#attached']['js'] = array(
-//      drupal_get_path('module', 'itg_tv_schedule') . '/js/itg_tv_schedule.js',      
-//      drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
-//    );
 
   $form['file'] = array(
     '#type' => 'managed_file',
@@ -370,16 +366,3 @@ function format_gmt_offset($offset) {
   $minutes = abs(intval($offset % 3600 / 60));
   return 'GMT' . ($offset ? sprintf('%+03d:%02d', $hours, $minutes) : '');
 }
-
-/**
- * Custom validation for searching popup.
- * {@inheritdoc}
- */
-//function itg_tv_schedule_form_validate($form, &$form_state) {
-//    
-//    p($form_state); die;
-////  $options = $form_state['input']['title'];
-////  if (empty($options)) {
-////    form_set_error('title', t('Search field is empty.'));
-////  }
-//}
