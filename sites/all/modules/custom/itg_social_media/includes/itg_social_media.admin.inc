@@ -1,5 +1,9 @@
 <?php
 /**
+ * @file
+ * Admin forms and form settings
+ */
+/**
  * Admin setting form for social media settings keys.
  * 
  * {@inheritdoc}
@@ -123,23 +127,23 @@ function itg_social_media_login_form() {
 function _facebook_pages_list() {
   global $base_url;
   variable_set('is_fb_logged_in', 1);
-  drupal_goto($base_url.'/admin/config/administration/social_media_login');
+  drupal_goto($base_url . '/admin/config/administration/social_media_login');
 }
 
 /**
  * Function to get page list
  */
-function itg_social_media_fb_paglist(){
+function itg_social_media_fb_paglist() {
   $fb = itg_social_media_fb_connection();
   try {
     // Returns a `Facebook\FacebookResponse` object
     $response = $fb->get('/me?fields=accounts', variable_get('fb_access_token'));
   }
   catch (Facebook\Exceptions\FacebookResponseException $e) {
-    drupal_set_message('Graph returned an error: ' . $e->getMessage(), 'error');    
+    drupal_set_message(t('Graph returned an error: @emessage', array('@emessage' => $e->getMessage())), 'error');    
   }
   catch (Facebook\Exceptions\FacebookSDKException $e) {
-    drupal_set_message('Facebook SDK returned an error: ' . $e->getMessage(), 'error');    
+    drupal_set_message(t('Facebook SDK returned an error: @emessage', array('@emessage' => $e->getMessage())), 'error');    
   }
   $pages = $response->getGraphPage();
   $accounts = $pages->asArray();
@@ -178,7 +182,7 @@ function itg_social_media_facebook_logout() {
   global $base_url;
   $fb = itg_social_media_fb_connection();
   $helper = $fb->getRedirectLoginHelper();
-  $token = $token = variable_get('access_token_one', '').variable_get('access_token_two', '');
+  $token = $token = variable_get('access_token_one', '') . variable_get('access_token_two', '');
   $logout = $helper->getLogoutUrl($token, $base_url . '/admin/config/administration/social_media_login');
   variable_set('access_token_one', '');
   variable_set('access_token_two', '');

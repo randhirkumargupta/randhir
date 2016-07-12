@@ -474,7 +474,7 @@ function astro_feature_field_default_field_instances() {
     'description' => 'Based on any selection(Daily, Weekly, Monthly and Yearly), system will automatically calculate the date range.',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
