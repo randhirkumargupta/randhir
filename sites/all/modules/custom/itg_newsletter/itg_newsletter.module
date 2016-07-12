@@ -10,11 +10,12 @@
 
 /**
  * Implementation of hook_init
+ * {@inheritdoc} 
  */
-function itg_newsletter_init(){
+function itg_newsletter_init() {
   
   //Hide Abstract area which appears in metatags from all content type forms
-  if((arg(0) == 'node' && arg(1) == 'add') || (arg(0) == 'node' && arg(2) == 'edit')) {
+  if ((arg(0) == 'node' && arg(1) == 'add') || (arg(0) == 'node' && arg(2) == 'edit')) {
   drupal_add_js('jQuery(document).ready(function() {            
            jQuery("#edit-metatags-und-advanced").hide();
            jQuery(".form-item-metatags-und-abstract-value").hide();
@@ -26,7 +27,7 @@ function itg_newsletter_init(){
  * Implementation of hook_menu
  * @return string
  */
-function itg_newsletter_menu(){
+function itg_newsletter_menu() {
     $items['newsletter_data'] = array(
       'title' => 'Autocomplete for Newsletter',
       'page callback' => 'itg_newsletter_content_data',
@@ -62,7 +63,7 @@ function itg_newsletter_block_info() {
  * @param type $delta
  */
 function itg_newsletter_block_view($delta = '') {
-  global $user;
+  
   $block = array();
   $data = '';
   switch ($delta) {
@@ -76,10 +77,10 @@ function itg_newsletter_block_view($delta = '') {
 
 /**
  * Implements hook_theme().
- * @param String $existing
- * @param String $type
- * @param Array $theme
- * @param String $path
+ * @param string $existing
+ * @param string $type
+ * @param array $theme
+ * @param string $path
  */
 function itg_newsletter_theme($existing, $type, $theme, $path) {
   $themes = array(
@@ -96,14 +97,12 @@ function itg_newsletter_theme($existing, $type, $theme, $path) {
 /***************************Form Related hooks*********************************/
 /**
  * Implement hook_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
  */
-function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
-  
-  global $user;
-  
+function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
+
   //Set destination for newsletter form
   if ($form_id == 'newsletter_node_form') {
 
@@ -111,6 +110,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
     if (arg(0) == 'node' && arg(2) == 'edit') {
       for ($delta_counter = 0; $delta_counter <= $form['field_newsl_add_news']['und']['#max_delta']; $delta_counter++) {
         $content_title_arr[$delta_counter] = explode('(', $form['field_newsl_add_news'][LANGUAGE_NONE][$delta_counter]['field_news_cid']['und'][0]['target_id']['#default_value']);
+        
         if (!empty($content_title_arr[$delta_counter][1])) {
           $form['field_newsl_add_news'][LANGUAGE_NONE][$delta_counter]['field_news_cid']['und'][0]['target_id']['#default_value'] = str_replace(')', "", $content_title_arr[$delta_counter][1]) . ' (' . $content_title_arr[$delta_counter][1];
         }
@@ -175,68 +175,76 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id){
   }
 }
 
- /**
+/**
  * Custom submit callback for alter message after operation.
+ * @param array $form
+ * @param array $form_state
  */
 function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
+  
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
   
   unset($_GET['destination']); // Unset destination
   
-  if(arg(2) == 'edit'){
+  if (arg(2) == 'edit') {
     $op = 'updated.';
-  } else {
+  }
+  else {
      $op = 'created.';
   }
+  
   $title = $form_state['node']->title;
   
-  
-  
-  
-  if($form_state['node']->type == 'newsletter_templates'){
+  if ($form_state['node']->type == 'newsletter_templates') {
     $form_state['redirect'] = 'manage-newsletter-templates';
     $content_type = ucwords('Newsletter Template');
-  } else {
+  }
+  else {
     $form_state['redirect'] = 'manage-newsletter';
     $content_type = ucwords($form_state['node']->type);
   }
   
-  drupal_set_message(t($content_type.' <strong>'.$title.'</strong> has been '.$op));
+  drupal_set_message(t('@contenttype <strong>@title</strong> has been @operation', array('@contenttype' => $content_type, '@title' => $title, '@operation' => $op)));
 }
 
 /**
  * After build function for newsletter
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
-function itg_newsletter_form_after_build($form, &$form_state){
+function itg_newsletter_form_after_build($form, &$form_state) {
+  
   global $user, $base_url;
   
   //Hide default lavel and add dynamic label
-  if($form_state['node']->type == 'newsletter') {
+  if ($form_state['node']->type == 'newsletter') {
+    
     $form['field_newsl_add_news'][LANGUAGE_NONE]['#title'] = '';
-    for($i = 0; $i <= $form['field_newsl_add_news']['und']['#max_delta']; $i++) {
-      $count = $i+1;
-      $form['field_newsl_add_news']['und'][$i]['#title'] = t('Add News ').$count;
+    
+    for ($news = 0; $news <= $form['field_newsl_add_news']['und']['#max_delta']; $news++) {
+      
+      $count = $news+1;
+      $form['field_newsl_add_news']['und'][$news]['#title'] = t('Add News') . $count;
 
-      $form['field_newsl_add_news']['und'][$i]['get_content_btn'] = array(
+      $form['field_newsl_add_news']['und'][$news]['get_content_btn'] = array(
              '#type' => 'item',
-             '#markup' => '<div class = "add-more newsletter-get-content" rel= "'.$i.'">Get Data</div><span class="dib vtop newsletter-loader"></span>',
+             '#markup' => '<div class = "add-more newsletter-get-content" rel= "' . $news . '">Get Data</div><span class="dib vtop newsletter-loader"></span>',
              '#weight' => 3,
       );
-      unset($form['field_newsl_add_news'][LANGUAGE_NONE][$i]['field_news_ctype']);
+      unset($form['field_newsl_add_news'][LANGUAGE_NONE][$news]['field_news_ctype']);
     }
  }
  
   //Extract type of node
-  if(arg(0) == 'node'){
-    if(arg(1) == 'add'){
+  if (arg(0) == 'node') {
+    if (arg(1) == 'add') {
         $type = arg(2);
         $nid = '';
-    } else {
+    }
+    else {
       $node = node_load(arg(1));
       $type = $node->type;
       $nid = arg(1);
@@ -278,14 +286,14 @@ function itg_newsletter_views_pre_render(&$view) {
   
   //Add "Create Newsletter" button on listing page of Newsletter
   if ($view->name == "manage_newsletter") {
-    $header_content_newsletter = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_newsletter = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_newsletter .= '<a href="./node/add/newsletter">Create Newsletter</a>';
     $view->attachment_before = $header_content_newsletter;
   }
   
   //Add create button for Newsletter Template
   if ($view->name == "manage_newsletter_templates") {
-    $header_content_newsletter = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_newsletter = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_newsletter .= '<a href="./node/add/newsletter-templates">Create Newsletter Template</a>';
     $view->attachment_before = $header_content_newsletter;
   }
@@ -293,9 +301,9 @@ function itg_newsletter_views_pre_render(&$view) {
 
 /**
  * Implement hook_form_views_exposed_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * @param array $form
+ * @param array $form_state
+ * @param array $form_id
  */
 function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   
@@ -319,8 +327,8 @@ function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $for
  * @param type $node
  *    array of current node
  */
-function itg_newsletter_node_presave($node){
-  if($node->type == 'newsletter'){
+function itg_newsletter_node_presave($node) {
+  if ($node->type == 'newsletter') {
     $template_title = itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
     $node->title = $template_title;
   }
@@ -328,43 +336,45 @@ function itg_newsletter_node_presave($node){
 
 /**
  * Implementation of hook_node_insert
- * @param Object $node
+ * @param object $node
  */
-function itg_newsletter_node_insert($node){
+function itg_newsletter_node_insert($node) {
   switch ($node->type) {
     case 'newsletter':
       module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
       $newsletter_type = $node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'];
       
       //Send mail in case of manual process and schedule is "now"
-      if($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now'){
+      if ($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now') {
         _send_mail_newsletter($node, 'manually');
       }
       else {
-        if($newsletter_type == 'manual'){
+        if ($newsletter_type == 'manual') {
           
           $frequency = '';
+          
           //Format :Y-m-d 00:00:00
           $date_arr = explode(' ', $node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
-          $scheduled_time = strtotime($date_arr[0]. ' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00'); // concatenation of date and time
+          $scheduled_time = strtotime($date_arr[0] . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00'); // concatenation of date and time
         }
         else {
+          
           $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
           
           if ($frequency == 'daily') {
-            $date_time = date('Y-m-d').' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            $date_time = date('Y-m-d') . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
             $scheduled_time = strtotime($date_time);
           }
           
          if ($frequency == 'weekly') {
             $current_day = date('l');
             
-            if(strtolower($current_day) == strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value'])){
-              $date_time = date('Y-m-d').' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            if (strtolower($current_day) == strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value'])) {
+              $date_time = date('Y-m-d') . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
               $scheduled_time = strtotime($date_time);
             }
             else {
-              $date_time = date('Y-m-d', strtotime('next '.strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value']))). ' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+              $date_time = date('Y-m-d', strtotime('next ' . strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value']))) . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
               $scheduled_time = strtotime($date_time);
             }
 
@@ -372,8 +382,8 @@ function itg_newsletter_node_insert($node){
           
          if ($frequency == 'monthly') {
             $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
-            $date = date('Y').'-'.date('m').'-'.$node->field_newsl_date[LANGUAGE_NONE][0]['value'];
-            $date_time = $date.' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            $date = date('Y') . '-' . date('m') . '-' . $node->field_newsl_date[LANGUAGE_NONE][0]['value'];
+            $date_time = $date . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
             $scheduled_time = strtotime($date_time);
           }
         }
@@ -400,43 +410,45 @@ function itg_newsletter_node_insert($node){
 
 /**
  * Implementation of hook_node_update
- * @param Object $node
+ * @param object $node
  */
-function itg_newsletter_node_update($node){
+function itg_newsletter_node_update($node) {
+  
   switch ($node->type) {
     case 'newsletter':
       module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
       $newsletter_type = $node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'];
       
       //Send mail in case of manual process and schedule is "now"
-      if($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now'){
+      if ($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now') {
         //_send_mail_newsletter($node);
       }
       else {
-        if($newsletter_type == 'manual'){
+        if ($newsletter_type == 'manual') {
           
           $frequency = '';
+          
           //Format :Y-m-d 00:00:00
           $date_arr = explode(' ', $node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
-          $scheduled_time = strtotime($date_arr[0]. ' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00'); // concatenation of date and time
+          $scheduled_time = strtotime($date_arr[0] . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00'); // concatenation of date and time
         }
         else {
           $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
           
           if ($frequency == 'daily') {
-            $date_time = date('Y-m-d').' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            $date_time = date('Y-m-d') . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
             $scheduled_time = strtotime($date_time);
           }
           
          if ($frequency == 'weekly') {
             $current_day = date('l');
             
-            if(strtolower($current_day) == strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value'])){
-              $date_time = date('Y-m-d').' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            if (strtolower($current_day) == strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value'])) {
+              $date_time = date('Y-m-d') . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
               $scheduled_time = strtotime($date_time);
             }
             else {
-              $date_time = date('Y-m-d', strtotime('next '.strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value']))). ' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+              $date_time = date('Y-m-d', strtotime('next ' . strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value']))) . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
               $scheduled_time = strtotime($date_time);
             }
 
@@ -444,8 +456,8 @@ function itg_newsletter_node_update($node){
           
          if ($frequency == 'monthly') {
             $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
-            $date = date('Y').'-'.date('m').'-'.$node->field_newsl_date[LANGUAGE_NONE][0]['value'];
-            $date_time = $date.' '.$node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00:00';
+            $date = date('Y') . '-' . date('m') . '-' . $node->field_newsl_date[LANGUAGE_NONE][0]['value'];
+            $date_time = $date . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
             $scheduled_time = strtotime($date_time);
           }
         }
@@ -471,14 +483,15 @@ function itg_newsletter_node_update($node){
 
 /**
  * Implementation of hook_node_validate
- * @param Object $node
- * @param Array $form
- * @param Array $form_state
+ * @param object $node
+ * @param array $form
+ * @param array $form_state
  */
 function itg_newsletter_node_validate($node, $form, &$form_state) {
   
   //Validation for automatic type newsletter
   if ($node->type == 'newsletter') {
+    
     if ($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') {
       $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
       $newsletter_content = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
@@ -486,16 +499,17 @@ function itg_newsletter_node_validate($node, $form, &$form_state) {
 
       //If record already exist for this frequency through an error
       if (isset($check_existance) && arg(1) != $check_existance) {
-        form_set_error('field_newsl_newsletter_content', t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> ' . l('Click here', 'node/' . $check_existance . '/edit', array('attributes' => array('target' => '_blank'))) . ' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)) . ' news', '@frequency' => $frequency)));
+        form_set_error('field_newsl_newsletter_content', t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> ' . l(t('Click here'), 'node/' . $check_existance . '/edit', array('attributes' => array('target' => '_blank'))) . ' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)) . ' news', '@frequency' => $frequency)));
       }
-    } else {
+    }
+    else {
       if ($node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'later') {
         $scheduled_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
         $scheduled_time = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
         $current_date = strtotime(date('Y-m-d'));
         $current_time = date('H');
 
-        if($scheduled_date <= $current_date && $scheduled_time <= $current_time) {
+        if ($scheduled_date <= $current_date && $scheduled_time <= $current_time) {
           form_set_error('field_newsl_time', t('Time should be greater than current time for current date.'));
         }
       }
@@ -510,7 +524,7 @@ function itg_newsletter_node_validate($node, $form, &$form_state) {
  * @return int
  *    return node id(nid)
  */
-function itg_newsletter_check_existance_frequency($frequency, $newsletter_content){
+function itg_newsletter_check_existance_frequency($frequency, $newsletter_content) {
   $query = db_select('node', 'n');
   $query->join('field_data_field_newsl_newsletter_type', 'nt', 'nt.entity_id = n.nid');
   $query->join('field_data_field_newsl_frequency', 'nf', 'nf.entity_id = n.nid');
@@ -521,11 +535,12 @@ function itg_newsletter_check_existance_frequency($frequency, $newsletter_conten
           ->condition('nc.field_newsl_newsletter_content_value', $newsletter_content, '=');
   $result = $query->execute();
   $nid = $result->fetchObject()->nid;
-  if($nid){
+  
+  if ($nid) {
     return $nid;
   }
   else {
-    false;
+    FALSE;
   }
 }
 
@@ -533,12 +548,13 @@ function itg_newsletter_check_existance_frequency($frequency, $newsletter_conten
  * Get Newsletter content using nid
  * Used on newsletter form
  */
-function itg_newsletter_content_data(){
+function itg_newsletter_content_data() {
    $node = node_load($_POST['content_id']);
    
-   if($node->type == 'story'){
+   if ($node->type == 'story') {
      $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-   } else {
+   }
+   else {
      $kicker = '';
    }
    
@@ -552,7 +568,7 @@ function itg_newsletter_content_data(){
  * @param string $message
  * @param array $params
  */
-function itg_newsletter_mail($key, &$message, $params){
+function itg_newsletter_mail($key, &$message, $params) {
     switch ($key) {
     case 'send_newsletter':
       $headers = array(
@@ -572,6 +588,9 @@ function itg_newsletter_mail($key, &$message, $params){
 
 /**
  * Implements hook_cronapi().
+ * @param string $op
+ * @param string $job
+ * @return string
  */
 function itg_newsletter_cronapi($op, $job = NULL) {
   $items['itg_automatic_newsletter'] = array(
@@ -584,7 +603,7 @@ function itg_newsletter_cronapi($op, $job = NULL) {
 /**
  * Automation: Send newsletter in case of manual and automatic
  */
-function itg_newsletter_send_automatic_newsletter(){
+function itg_newsletter_send_automatic_newsletter() {
   
   //Include newsletter mail file to send mail
   module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
@@ -596,13 +615,14 @@ function itg_newsletter_send_automatic_newsletter(){
           ->condition('cn.type', 'manual', '=')
           ->condition('cn.scheduled_time', time(), '<=');
   $result = $query->execute();
-  while($record = $result->fetchAssoc()){
+  
+  while ($record = $result->fetchAssoc()) {
     $manual_nids[] = $record['nid'];
   }
   
   //Send manual mail in case of later
-  if(!empty($manual_nids)){
-    foreach($manual_nids as $nids){
+  if (!empty($manual_nids)) {
+    foreach ($manual_nids as $nids) {
       $node = node_load($nids);
       _send_mail_newsletter($node, 'automatically');
     }
@@ -615,13 +635,14 @@ function itg_newsletter_send_automatic_newsletter(){
           ->condition('cn.type', 'automatic', '=')
           ->condition('cn.scheduled_time', time(), '<=');
   $result_auto = $query_auto->execute();
-  while($record_auto = $result_auto->fetchAssoc()){
+  
+  while ($record_auto = $result_auto->fetchAssoc()) {
     $automatic_nids[] = $record_auto['nid'];
   }
   
   //Send automatic mail
-  if(!empty($automatic_nids)){
-    foreach($automatic_nids as $auto_nids){
+  if (!empty($automatic_nids)) {
+    foreach ($automatic_nids as $auto_nids) {
       $node_auto = node_load($auto_nids);
       _send_mail_newsletter($node_auto, 'automatically' , 'stories');
     }
@@ -633,7 +654,7 @@ function itg_newsletter_send_automatic_newsletter(){
  * @param int $nid
  * @return int
  */
-function itg_newsletter_get_top_stories($nid){
+function itg_newsletter_get_top_stories($nid) {
   $query = db_select('node', 'n');
   $query->fields('n')
           ->condition('n.status', 1, '=')
@@ -642,7 +663,8 @@ function itg_newsletter_get_top_stories($nid){
           ->range(0, 20);
 
   $result = $query->execute();
-  while($records = $result->fetchAssoc()){
+  
+  while ($records = $result->fetchAssoc()) {
     $nids[] = $records['nid'];
   }
   return $nids;

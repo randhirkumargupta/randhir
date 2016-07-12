@@ -4457,6 +4457,22 @@ div.node{
                 .form-type-managed-file{
                     @extend .choose-audio-video-file;
                     > label{padding-top: 0;}
+                    .messages{
+                        background-color: #fff;
+                        border-radius: 5px;
+                        border: 1px solid;
+                        font-size: 12px;
+                        padding: 10px;
+                        position: absolute;
+                        top: 40px;
+                        left: 0;
+                        right: 0;
+                        margin: 0 auto;
+                        z-index: 99;
+                        ul{
+                            padding-left: 10px;
+                        }
+                    }
                 }
             }
         }
@@ -4468,8 +4484,13 @@ div.node{
     }
     .form-field-name-field-story-schedule-date-time{
         .date-padding{
-            .form-type-textfield:last-child{
-                margin-left: 10px;
+            .form-type-textfield{
+                span.error{
+                    padding-left: 0;
+                }
+                &:last-child{
+                    margin-left: 10px;
+                }
             }
         }
     } 
@@ -4631,6 +4652,9 @@ div.node{
           position: absolute;
           top: 42px;
           z-index: 99;
+          ul{
+              padding-left: 10px;
+          }
           .hide-message{
             background: url('../images/cross_small.png') 5px center no-repeat #fff;
             bottom: 2px;

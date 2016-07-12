@@ -57,9 +57,6 @@
 
                 }
             });
-$('.filefield-sources-imce-browse').click(function(){
-    $(this).addClass('disabled-btn');
-})
 
         }
     }
