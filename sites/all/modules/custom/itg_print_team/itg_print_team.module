@@ -62,7 +62,12 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
     'itg_print_team_idea_association_mail' => array(
       'variables' => array('node' => NULL, 'op_type' => NULL),
       'template' => 'templates/print-team-idea-association-mail',
-    )  
+    ), 
+    'itg_print_team_notification_mail' => array(
+      'variables' => array('node' => NULL),
+      'template' => 'templates/print-team-notification-mail',
+    ),
+      
   );
 
   return $themes;
@@ -368,7 +373,7 @@ function itg_print_team_node_insert($node) {
 
 /**
  * Implementation of hook_node_update
- * @param Object $node
+ * {@inheritdoc}
  */
 function itg_print_team_node_update($node) {
   switch ($node->type) {
@@ -388,6 +393,22 @@ function itg_print_team_node_update($node) {
         itg_print_team_association_update($node->nid, NULL, NULL, $associated_source_id, FALSE);
       }
       
+      //Insert in to print team cron table to send mail
+      if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
+        $check_for_nid = itg_print_team_check_cron_nid($node->nid);
+        if (!$check_for_nid) {
+          $query = db_insert('itg_cron_print_team');
+          $query->fields(array(
+              'nid' => $node->nid,
+              'type' => $node->type,
+              'scheduled_time' => strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']),
+              'status' => 0,
+              'created' => time()
+          ));
+          $query->execute();
+        }
+      }
+      
       break;
 
     default:
@@ -403,29 +424,26 @@ function itg_print_team_node_update($node) {
  */
 function itg_print_team_node_validate($node, $form, &$form_state) {
 
-  if ($node->type == 'print_team_integration') {
-    if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
+  if ($node->type == 'print_team_integration' && $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
       
-      //Validation of word limit for valid number
+      // Validation of word limit for valid number
       $words_limit = (int) $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'];
       if (empty($words_limit) || !is_numeric($words_limit)) {
         form_set_error('field_pti_words_limit', t('Words limit must be numeric and greater than zero.'));
       } 
       else {
-        
-        //Validate word limit to restrict user for story body
+        // Validate word limit to restrict user for story body
         if (str_word_count(strip_tags($node->body[LANGUAGE_NONE][0]['value'])) > $node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {
           form_set_error('body', t('Limit exceeded! Your idea brief limit is: @idealimit words.', array('@idealimit' => $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'])));
         }
       }
     
-      //Validation for time limit
+      // Validation for time limit
       $current_date = time();
       $timeline = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours');
       if ($current_date > $timeline) {
         form_set_error('field_survey_end_date', t('Sorry! You can not submit your idea now. You have exceeded your last date of idea submission.'));
       }
-    }
   }
 }
 
@@ -628,4 +646,59 @@ function itg_print_team_issue_options(){
     }
   }
   return $options;
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_print_team_cronapi($op, $job = NULL) {
+  $items['itg_print_team_expiry_notification'] = array(
+    'description' => 'Send mail before 24 hours for story expiration ',
+    'callback' => 'itg_print_team_expiry_notification_callback', 
+  );
+  return $items;
+}
+
+/**
+ * Send mail to user before 24 hours of story expiration
+ */
+function itg_print_team_expiry_notification_callback() {
+  
+  // Include print team mail file to send mail
+  module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
+
+  $current_time = time();
+
+  $query = db_select('itg_cron_print_team', 'c');
+  $query->fields('c')
+          ->condition('c.status', 0, '=');
+  $result = $query->execute();
+
+  //Fetch node to send notification
+  while ($record = $result->fetchAssoc()) {
+    $end_date = $record['scheduled_time'];
+    $diff = $end_date - $current_time;
+    $diff_in_hours = round($diff / ( 60 * 60 ));
+    if ($diff_in_hours > 0) {
+      if ($diff_in_hours <= 24) {
+        itg_print_team_send_mail_for_notification($record['nid']);
+      }
+    }
+  }
+}
+
+/**
+ * Check for nid in to cron table
+ * @param int $nid
+ * @return int
+ */
+function itg_print_team_check_cron_nid($nid) {
+  if ($nid) {
+    $record = db_select('itg_cron_print_team', 'c')
+            ->fields('c', array('nid'))
+            ->condition('c.nid', $nid, '=')
+            ->range(0, 1)->execute()->fetchAssoc();
+  }
+  return isset($record['nid']) ? $record['nid'] : FALSE;
 }

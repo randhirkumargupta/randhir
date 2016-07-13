@@ -41,6 +41,34 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
 }
 
 /**
+ * Send mail to notify user for expiration of his story
+ * @param int $nid
+ */
+function itg_print_team_send_mail_for_notification($nid){
+  $node = node_load($nid);
+  $mail_content = itg_print_team_notification_mail_content($node);
+  $user = user_load($node->uid);
+  $user_email_ids = $user->mail;
+
+  // Array of email subject and body 
+  $params = array(
+      'body' => $mail_content,
+      'subject' => 'India Today | ' . $node->title . ' status!',
+  );
+
+  // Send notification mail
+  drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  
+  //Update mail status after sending notification      
+  db_update('itg_cron_print_team')
+          ->fields(array(
+              'status' => 1,
+          ))
+          ->condition('nid', $nid, '=')
+          ->execute();
+}
+
+/**
  * Implements hook_mail
  * @param string $key
  * @param string $message
@@ -89,6 +117,15 @@ function itg_print_team_approval_mail_content($node) {
  */
 function itg_print_team_association_mail_content($node, $op_type = FALSE) {
   return theme('itg_print_team_idea_association_mail', array('node' => $node, 'op_type' => $op_type));
+}
+
+/**
+ * Get notification mail content
+ * @param object $node
+ * @return type
+ */
+function itg_print_team_notification_mail_content($node) {
+  return theme('itg_print_team_notification_mail', array('node' => $node));
 }
 
 /**
