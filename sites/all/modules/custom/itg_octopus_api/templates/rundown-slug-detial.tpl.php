@@ -9,7 +9,7 @@
   </div>
   <div class="field">
     <div class="field-label"><?php print t('Story Created'); ?>:</div>
-    <div class="field-items"><?php print date('d-m-Y H:i:s', $result['story_created']); ?></div>
+    <div class="field-items"><?php print format_date($result['story_created'], $type = 'itg_date_with_time', $format = '', $timezone = NULL, $langcode = NULL); ?></div>
   </div>
   <div class="field">
     <div class="field-label"><?php print t('Story Created By'); ?>:</div>
@@ -17,17 +17,12 @@
   </div>
   <div class="field">
     <div class="field-label"><?php print t('Story Modified'); ?>:</div>
-    <div class="field-items"><?php print date('d-m-Y H:i:s', $result['story_modified']); ?></div>
+    <div class="field-items"><?php print format_date($result['story_modified'], $type = 'itg_date_with_time', $format = '', $timezone = NULL, $langcode = NULL); ?></div>
   </div>
   <div class="field">
     <div class="field-label"><?php print t('Story Modified By'); ?>:</div>
     <div class="field-items"><?php print $result['story_modified_by']; ?></div>
   </div>
-  <div class="field">
-    <div class="field-label"><?php print t('Story Title'); ?>:</div>
-    <div class="field-items"><?php print $result['story_title']; ?></div>
-  </div>
-
   <?php foreach ($result['story_custom_data'] as $label => $story_custom_data): ?>
     <?php if ($story_custom_data != ''): ?>
       <div class="field">

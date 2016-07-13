@@ -74,15 +74,15 @@ function itg_octopus_api_rundown() {
         db_insert('itg_octopus_slug')
             ->fields(array(
               'storyid' => $story_id,
-               'rundown_id' => $rundown_id,
-               'slug_id' => $slug_id,
-               'story_title' => $story_title,
-               'story_status' => $story_status,
-               'story_duration' => $story_duration,
-               'story_created' => $story_created,
-               'story_created_by' => $story_created_by,
-               'story_modified' => $story_modified,
-               'story_modified_by' => $story_modified_by,
+              'rundown_id' => $rundown_id,
+              'slug_id' => $slug_id,
+              'story_title' => $story_title,
+              'story_status' => $story_status,
+              'story_duration' => $story_duration,
+              'story_created' => $story_created,
+              'story_created_by' => $story_created_by,
+              'story_modified' => $story_modified,
+              'story_modified_by' => $story_modified_by,
             ))->execute();
         db_insert('itg_element_clip')
             ->fields(array(
@@ -268,7 +268,7 @@ function itg_octopus_api_rundown_listing() {
       array('data' => $row->id),
       array('data' => $row->slug_id),
       array('data' => $row->story_title),
-      array('data' => date('d-m-Y h:i', $row->story_modified)),
+      array('data' => format_date($row->story_modified, $type = 'itg_date_with_time', $format = '', $timezone = NULL, $langcode = NULL)),
       array('data' => l(t('Slug Details'), 'slug/detail/' . $row->id)),
     );
   }
