@@ -5181,20 +5181,17 @@ div.node{
     } 
 }
 [id*="views-form-manage-print-team-page"]{
-    .container-inline-date{
-        @extend .fleft;
-        width: 250px;
-        .form-item-pti-issue{
-            margin: 30px 0;
+    .form-item-pti-issue{
+            @extend .fleft;
+            padding: 0;
             > label{
                 @extend .fleft;
-                padding: 8px 20px 0 0;
+                width: auto;
             }
             div.description{
                 left: 165px;
             }
         }
-    }
     .form-item-pti-magazine{
         @extend .fleft;
         > label{
