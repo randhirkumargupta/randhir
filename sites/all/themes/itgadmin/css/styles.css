@@ -747,7 +747,7 @@ a.ckeditor_links:hover {
   text-decoration: underline;
 }
 
-.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after {
+.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after {
   content: '*';
   color: red;
 }
@@ -5220,7 +5220,7 @@ div.node #comments h2 {
 }
 
 [id*="views-form-manage-print-team-page"] .form-item-pti-issue {
-  padding: 0;
+  padding: 0 30px 0 0;
 }
 [id*="views-form-manage-print-team-page"] .form-item-pti-issue > label {
   width: auto;

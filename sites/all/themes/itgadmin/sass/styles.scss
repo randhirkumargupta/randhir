@@ -5183,7 +5183,7 @@ div.node{
 [id*="views-form-manage-print-team-page"]{
     .form-item-pti-issue{
             @extend .fleft;
-            padding: 0;
+            padding: 0 30px 0 0;
             > label{
                 @extend .fleft;
                 width: auto;
@@ -5225,6 +5225,22 @@ div.node{
         .octopus-reset{
             @extend .add-more-wbg;
             height: 36px;
+        }
+    }
+}
+.node-print_team_integration-form{
+    .form-field-name-field-pti-words-limit{
+        .form-type-textfield{
+            > label:after{
+                @extend .astrick;
+            }
+        }
+    }
+    .form-field-name-field-survey-end-date{
+        fieldset{
+            > legend:after{
+                @extend .astrick;
+            }
         }
     }
 }
