@@ -49,7 +49,12 @@
                             <div class="field-label">Astro Title: </div>
                             <div class="field-items"><?php print $title; ?></div>
                         </div>
-                        <?php print render($content['field_astro_frequency']); ?>
+                        <div class="field">
+                          <?php print '<div class="field-label">'. t('Frequency') . ': </div>'; ?>                        
+                          <div class="field-items">
+                            <?php print render($content['field_astro_frequency']); ?>
+                          </div>
+                        </div>
                         <?php print render($content['field_astro_date_range']); ?>
                         <?php print render($content['field_story_expiry_date']); ?>
                         <?php print render($content['field_astro_type']); ?>

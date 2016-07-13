@@ -25,7 +25,9 @@ function feature_category_management_field_group_info() {
     'children' => array(
       0 => 'field_cm_display_title',
       1 => 'field_cm_redirection_url',
-      2 => 'name',
+      2 => 'field_sponser_logo',
+      3 => 'field_user_city',
+      4 => 'name',
     ),
     'format_type' => 'div',
     'format_settings' => array(
