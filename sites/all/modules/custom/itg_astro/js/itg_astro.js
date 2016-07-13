@@ -71,7 +71,10 @@
           switch (elementName) {
             case 'field_astro_frequency[und]':
               errorPlaceHolder = $('#edit-title').parent();
-              break;            
+              break;
+            case 'field_astro_date_range[und][0][value2][date]':
+              errorPlaceHolder = element.parent().parent();
+              break;
             default:
               errorPlaceHolder = element.parent();
           }
@@ -709,7 +712,7 @@
       });
       jQuery.validator.addMethod("validateRange", function (value, element) {
         return validate_date_range(value, element);
-      }, "* Please enter valid date.");
+      }, "Please enter valid date.");
       jQuery.validator.addMethod("validateSignName", function (value, element) {
         return validate_sign_name_value(value, element);
       }, "This field is required.");
@@ -724,6 +727,9 @@
         var startDate = $('input[name="field_astro_date_range[und][0][value][date]"]').val();
         var endDate = $('input[name="field_astro_date_range[und][0][value2][date]"]').val();
         
+        if (moment(startDate) > moment(endDate)) {
+          return false;
+        }
         if (frequency === 'daily') {
           $('input[name="title"').val(startDate);          
         }
@@ -855,7 +861,7 @@
       $('input[name="field_astro_date_range[und][0][value2][date]"]').keydown(false);
       $('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
       
-
+      
     }
   };
 })(jQuery, Drupal, this, this.document);

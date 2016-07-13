@@ -665,3 +665,57 @@
     margin-left: 0;
   }
 }
+
+
+
+/*=== SCSS for Home page template ===*/
+.itg-row{
+    display: inline-block;
+    width: 100%;
+    margin: 25px 0;
+}
+.big-news{
+    height: 383px;
+    background-color: #d9d9d9;
+    > p{
+        padding: 20px;
+    }
+    img{
+        display: none;
+    }
+    &.dropped{
+        img{
+            display: block;
+        }
+    }
+}
+.top-n-most-popular-stories, .top-news, .video-n-magazine{
+    height: 677px;
+    background-color: #d9d9d9;
+    > p{
+        padding: 20px;
+    }
+    img{
+        display: none;
+    }
+    &.dropped{
+        img{
+            display: block;
+        }
+    }
+}
+.common-news{
+    height: 379px;
+    background-color: #d9d9d9;
+    > p{
+        padding: 20px;
+    }
+    img{
+        display: none;
+    }
+    &.dropped{
+        img{
+            display: block;
+        }
+    }
+}

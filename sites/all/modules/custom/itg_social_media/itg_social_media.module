@@ -105,13 +105,13 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
         '#type' => 'date_popup',
         '#date_format' => 'd/m/Y',
         '#date_year_range' => '-3:+3',
-        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly', 'placeholder' => t('Start Date')),
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
       );
       $form['created']['max'] = array(        
         '#type' => 'date_popup',
         '#date_format' => 'd/m/Y',
         '#date_year_range' => '-3:+3',
-        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly', 'placeholder' => t('End Date')),
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
       );
       // Autocomplete node title
       $form['node_title']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/node_title';
@@ -127,13 +127,13 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
         '#type' => 'date_popup',
         '#date_format' => 'd/m/Y',
         '#date_year_range' => '-3:+3',
-        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly', 'placeholder' => t('Start Date')),        
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),        
       );
       $form['created']['max'] = array(        
         '#type' => 'date_popup',
         '#date_format' => 'd/m/Y',
         '#date_year_range' => '-3:+3',
-        '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly', 'placeholder' => t('End Date')),        
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),        
       );      
       
       break;
@@ -221,7 +221,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     drupal_goto('browse-content');
   }
   
-  $token = variable_get('access_token_one').variable_get('access_token_two');
+  $token = variable_get('access_token_one') . variable_get('access_token_two');
 
   // Get short url
   $short_url = shorten_url($base_url . '/' . $node->path['alias'], 'goo.gl');
@@ -280,12 +280,12 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
   }
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
-    drupal_set_message(t('Graph returned an error: ' . $e->getMessage()), 'error');
+    drupal_set_message(t('Graph returned an error: @egetMessage' , array('@egetMessage' => $e->getMessage())), 'error');
     drupal_goto('/browse-content');
   }
   catch (Facebook\Exceptions\FacebookSDKException $e) {
     // When validation fails or other local issues
-    drupal_set_message(t('Facebook SDK returned an error: ' . $e->getMessage()), 'error');
+    drupal_set_message(t('Facebook SDK returned an error: @egetMessage' , array('@egetMessage' => $e->getMessage())), 'error');
     drupal_goto('/browse-content');
   }
   // get response
@@ -302,7 +302,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     // INSERT INTO DATABASE    
     drupal_write_record('itg_social_media_logs', $pre_save);
     
-    drupal_set_message(t($mtype . ' has been posted on social media - Facebook'), 'status');
+    drupal_set_message(t('@mtype has been posted on social media - Facebook', array('@mtype' => $mtype)), 'status');
   }
 }
 
@@ -430,7 +430,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
     'status' => $desc . ' ' . $short_url,
     'media_ids' => $media_id
   ]);
-  watchdog('twitter image', '<pre>' . print_r($reply, true) . '</pre>');
+  watchdog('twitter image', '<pre>' . print_r($reply, TRUE) . '</pre>');
   if (isset($reply->id) && $is_scheduled_id === NULL) {    
     $pre_save = array(
       'nid' => $node->nid,
@@ -443,7 +443,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
     );
     
     // iNSERT INTO DATABASE
-    $query = drupal_write_record ('itg_social_media_logs', $pre_save);    
+    $query = drupal_write_record('itg_social_media_logs', $pre_save);    
     // Set message
     drupal_set_message(t('Image has been posted on social media - Twitter'), 'status');
   }
@@ -514,8 +514,8 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $is_scheduled_id = NU
   ]);
 
   if ($reply->httpstatus < 200 || $reply->httpstatus > 299) {
-    drupal_set_message(t('Http status:' . $reply->httpstatus), 'error');
-    drupal_set_message(t('Please upload valid video file. ') . $file->name , 'error');
+    drupal_set_message(t('Http status: @reply' , array('@reply' => $reply->httpstatus)), 'error');
+    drupal_set_message(t('Please upload valid video file. @filename', array('@filename' => $file->name)), 'error');
     drupal_goto('/browse-content');
   }  
 
@@ -524,7 +524,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $is_scheduled_id = NU
     'status' => $desc . ' ' . $short_url ,
     'media_ids' => $media_id
   ]);
-  watchdog('twitter video', '<pre>' . print_r($reply, true) . '</pre>');
+  watchdog('twitter video', '<pre>' . print_r($reply, TRUE) . '</pre>');
   if (isset($reply->id) && $is_scheduled === NULL) {
     $pre_save = array(
       'nid' => $node->nid,
@@ -537,7 +537,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node , $is_scheduled_id = NU
     );
     
     // iNSERT INTO DATABASE
-    $query = drupal_write_record ('itg_social_media_logs', $pre_save);    
+    $query = drupal_write_record('itg_social_media_logs', $pre_save);    
     // Set message
     drupal_set_message(t('Video has been posted on social media - Twitter'), 'status');
   }
@@ -629,7 +629,7 @@ function itg_social_media_save_scheduled_post($node, $type, $stime) {
     drupal_set_message($type . ' Post has been saved for scheduling', 'status');
   }
   else {
-    drupal_set_message('Unexpected error', 'error');
+    drupal_set_message(t('Unexpected error'), 'error');
     drupal_goto('/browse-content');
   }
 }

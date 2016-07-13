@@ -75,13 +75,17 @@
                  });
                 
                 // code to copy story longheadline to story title
-                $('#edit-title').blur(function() {
+                $('#edit-title').on('keyup keypress blur change', function(e) {
                   $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
                 });
                 
-                $('#edit-title').blur(function() {
+                $('#edit-title').on('keyup keypress blur change', function(e) {
                   $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
                 });
+                
+                  $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
+                  $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
+
 
                 // Display Byline details
                 $('#edit-field-story-reporter-und-0-target-id').blur(function() {                       

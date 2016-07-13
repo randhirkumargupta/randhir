@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Social media popup form
+ */
+
+/**
  * Create custom form for social media integration.
  *
  * {@inheritdoc}
@@ -78,7 +83,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'date_popup',
     '#title' => t("Schedule Time"),    
     '#date_format' => 'd/m/Y H:i',
-    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
     '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),        
     '#date_timezone' => date_default_timezone(),
   );
@@ -117,7 +122,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'date_popup',
     '#title' => t("Schedule Time"),    
     '#date_format' => 'd/m/Y H:i',
-    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
     '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),        
     '#date_timezone' => date_default_timezone(),
   );
@@ -179,7 +184,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'date_popup',
     '#title' => t("Schedule Time"),    
     '#date_format' => 'd/m/Y H:i',
-    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
     '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),    
     '#date_timezone' => date_default_timezone(),
   );
@@ -224,7 +229,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'date_popup',
     '#title' => t("Schedule Time"),    
     '#date_format' => 'd/m/Y H:i',
-    '#attributes' => array('autocomplete' =>'off','readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
     '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),    
     '#date_timezone' => date_default_timezone(),
   );  

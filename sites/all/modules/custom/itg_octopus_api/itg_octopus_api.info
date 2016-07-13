@@ -1,8 +1,7 @@
-name = ITG Octopus Api
+name = ITG Octopus api
 description = "ITG Octopus Api Module"
 core = 7.x
 package = ITG
-
 files[] = itg_octopus_api.module
 
 

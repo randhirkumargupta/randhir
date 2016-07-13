@@ -4,6 +4,18 @@
  * Implementation of hook_menu().
  * {@inheritdoc}
  */
+//
+//function itg_term_init() {
+//    include_once('itg_image_repository.inc'); 
+//     $params = array();
+//  $theme = filefield_sources_invoke_all('theme', $params);
+//  $theme['filefield_source_itg_image_repository_element'] =Array ( 'render element' => 'element', 'file' => 'sources/itg_image_repository.inc');
+////print_r( $theme);die;
+//
+//}
+
+
+
 function itg_term_menu() {
   $items['texonomy/confirm/ajax/%'] = array(
     'title' => 'Texonomy Term',
