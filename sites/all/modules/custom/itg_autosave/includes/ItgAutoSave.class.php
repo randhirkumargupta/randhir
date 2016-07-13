@@ -7,11 +7,13 @@
  * @author ITG
  */
 class ItgAutoSave {
+
   private $itg_query;
   public $itg_result;
   public $data;
   private $settings;
-  
+  private $temp;
+
   /**
    * Insert form ids to database
    * @param array $pre_save
@@ -19,15 +21,15 @@ class ItgAutoSave {
   public function itg_save_form_id($pre_save) {
     $is_duplicate = $this->itg_save_is_duplicate($pre_save);
     if ($is_duplicate) {
-      $this->itg_save_form_id_update($pre_save);      
+      $this->itg_save_form_id_update($pre_save);
       drupal_set_message('Form id has been updated.', 'status');
     }
     else {
-      $this->itg_save_form_id_insert($pre_save);      
+      $this->itg_save_form_id_insert($pre_save);
       drupal_set_message('Form id has been inserted.', 'status');
-    }    
+    }
   }
-  
+
   /**
    * Check duplicate form id
    * @param array $pre_save
@@ -38,15 +40,15 @@ class ItgAutoSave {
     $this->itg_query->condition('form_name', $pre_save['form_name']);
     $this->itg_query->fields('itg', array('form_name'));
     $this->itg_result = $this->itg_query->execute()->fetchField();
-    
+
     if ($pre_save['form_name'] == $this->itg_result) {
       return TRUE;
     }
     else {
       return FALSE;
     }
-  } 
-  
+  }
+
   /**
    * Insert form data
    * @param array $pre_save
@@ -54,9 +56,9 @@ class ItgAutoSave {
   private function itg_save_form_id_insert($pre_save) {
     $this->itg_query = db_insert('itg_autosave_forms')
         ->fields($pre_save)
-        ->execute();        
+        ->execute();
   }
-  
+
   /**
    * Update form data
    * @param array $pre_save
@@ -65,9 +67,9 @@ class ItgAutoSave {
     $this->itg_query = db_update('itg_autosave_forms')
         ->fields($pre_save)
         ->condition('form_name', $pre_save['form_name'])
-        ->execute();    
+        ->execute();
   }
-  
+
   /**
    * Pass form ids to js file
    * @param int $nid 
@@ -88,17 +90,16 @@ class ItgAutoSave {
     // Pass data to js file
     drupal_add_js(array(
       'itg_autosave' => array(
-        'auto_settings' => $this->data, 
-        'base_url' => $base_url, 
+        'auto_settings' => $this->data,
+        'base_url' => $base_url,
         'nid' => $nid,
         'c_type' => $c_type
       )
-    ), 
-    array(
+        ), array(
       'type' => 'setting'
     ));
   }
-  
+
   /**
    * Extract field type available on any content type
    * 
@@ -114,10 +115,10 @@ class ItgAutoSave {
         'fieldType' => $this->itgQuery['type'],
       );
     }
-    
+
     return $this->itgResult;
   }
-  
+
   /**
    * Prepare presave array for file field.
    * 
@@ -131,11 +132,11 @@ class ItgAutoSave {
       $this->data['fid'] = $value['und'][0]['fid'];
       $this->data['display'] = $value['und'][0]['display'];
       $this->data['description'] = $value['und'][0]['description'];
-    }    
-    
+    }
+
     return $this->data;
   }
-  
+
   /**
    * Prepare presave arrave for text field
    * 
@@ -147,11 +148,11 @@ class ItgAutoSave {
     if ($op == 'insert') {
       $this->data = '';
       $this->data = $value['und'][0]['value'];
-    }    
-    
+    }
+
     return $this->data;
   }
-  
+
   /**
    * Prepare presave array for term reference field.
    * 
@@ -163,11 +164,28 @@ class ItgAutoSave {
     if ($op == 'insert') {
       $this->data = '';
       $this->data = $value['und'];
-    }    
-    
+    }
+
     return $this->data;
   }
-  
+
+  /**
+   * Prepare presave array for field collection type field.
+   * 
+   * @param type $value
+   * @return array
+   */
+  public function itg_save_field_field_collection($value) {
+    $this->itg_result = array();
+    $this->data = array();
+    foreach ($value['und'] as $fc_value) {
+      $this->data = $this->itg_save_extract_fieldtype($fc_value);
+      $this->itg_result = $this->itg_autosave_prepare_presave($this->data, $fc_value);
+    }
+    
+    return $this->itg_result;
+  }
+
   /**
    * Prepare presave array for datestamp field.
    * 
@@ -178,13 +196,14 @@ class ItgAutoSave {
   public function itg_save_field_datestamp($op, $value) {
     if ($op = 'insert') {
       $this->data = array();
-      $this->data['value'] = strtotime($value['und'][0]['value']['date']);;
+      $this->data['value'] = strtotime($value['und'][0]['value']['date']);
+      ;
       $this->data['value2'] = strtotime($value['und'][0]['value2']['date']);
     }
-        
+
     return $this->data;
   }
-  
+
   /**
    * Prepare presave array for datetime field.
    * 
@@ -193,16 +212,16 @@ class ItgAutoSave {
    * @return string
    */
   public function itg_save_field_datetime($op, $value) {
-    if ($op == 'insert') {
-      $this->data = '';
+    $this->data = '';
+    if ($op == 'insert' && $value['und'][0]['value']['date'] != '') {      
       $this->itg_query = $value['und'][0]['value']['date'];
       $this->itg_result = date("Y-m-d H:i:s", strtotime($this->itg_query));
       $this->data = $this->itg_result;
-    }    
-    
+    }
+
     return $this->data;
   }
-  
+
   /**
    * Prepare presave array for long text field.
    * 
@@ -214,11 +233,11 @@ class ItgAutoSave {
     if ($op == 'insert') {
       $this->data = '';
       $this->data = $value['und'][0]['value'];
-    }    
-    
+    }
+
     return $this->data;
   }
-  
+
   /**
    * Prepare presave array for image field.
    * 
@@ -226,17 +245,17 @@ class ItgAutoSave {
    * @param array $value
    * @return array
    */
-  public function itg_save_field_image($op, $value) {    
-    if ($op == 'insert') { 
+  public function itg_save_field_image($op, $value) {
+    if ($op == 'insert') {
       $this->data = array();
       $this->data['fid'] = $value['und'][0]['fid'];
       $this->data['alt'] = $value['und'][0]['alt'];
       $this->data['title'] = $value['und'][0]['title'];
-    }    
-    
+    }
+
     return $this->data;
   }
-  
+
   /**
    * Prepare presave array for image field.
    * 
@@ -244,15 +263,15 @@ class ItgAutoSave {
    * @param array $value
    * @return string
    */
-  public function itg_save_field_text_with_summary($op, $value) {   
+  public function itg_save_field_text_with_summary($op, $value) {
     if ($op == 'insert') {
       $this->data = '';
       $this->data = $value['und'][0]['value'];
-    }    
-    
+    }
+
     return $this->data;
   }
-  
+
   /**
    * Prepare presave array for list text field.
    * 
@@ -260,15 +279,15 @@ class ItgAutoSave {
    * @param array $value
    * @return string
    */
-  public function itg_save_field_list_text($op, $value) {   
+  public function itg_save_field_list_text($op, $value) {
     if ($op == 'insert') {
       $this->data = '';
       $this->data = $value['und'];
-    }    
-    
+    }
+
     return $this->data;
   }
-  
+
   /**
    * Save form data into database to fullfill need of autosave.   
    * 
@@ -277,9 +296,8 @@ class ItgAutoSave {
    * @param int $nid
    * @param string $ctype
    */
-   
   public function itg_save_form_data($pre_save, $nid, $ctype) {
-    global $user;        
+    global $user;
     $this->itg_query = array(
       'nid' => $nid,
       'username' => $user->name,
@@ -289,28 +307,34 @@ class ItgAutoSave {
     );
     drupal_write_record('itg_autosave_node_data', $this->itg_query);
   }
-  
+
   /**
    * Retrieve data from database.
    * 
+   * @global stdObject $user
    * @param int $nid
    * @param string $ctype
    * @return array
    */
   public function itg_save_retrieve_form_data($nid, $ctype) {
+    global $user;
     $this->itg_query = db_select('itg_autosave_node_data', 'itg');
     $this->itg_query->fields('itg')
         ->condition('node_type', $ctype);
     if ($nid > 0) {
       $this->itg_query->condition('nid', $nid);
     }
+    else {
+      $this->itg_query->condition('nid', 0);
+    }
+    $this->itg_query->condition('username', $user->name);
     $this->itg_query->orderBy('id', 'DESC')
         ->range(0, 1);
     $this->itg_result = $this->itg_query->execute()->fetchObject();
-    
+
     return $this->itg_result;
   }
-  
+
   /**
    * Prepare retrieve data arrar for node.
    * 
@@ -325,16 +349,16 @@ class ItgAutoSave {
         $form[$field_name]['und'][0]['#default_value']['value'] = $field_value['value'];
         $form[$field_name]['und'][0]['#default_value']['value2'] = $field_value['value2'];
         break;
-      
+
       case 'datetime':
         $form[$field_name]['und'][0]['#default_value']['value'] = $field_value;
         break;
-      
+
       case 'text':
         $form[$field_name]['und'][0]['value']['#default_value'] = $field_value;
         break;
-      
-      case 'taxonomy_term_reference':        
+
+      case 'taxonomy_term_reference':
         if (is_array($field_value)) {
           $form[$field_name]['und']['#default_value'] = $field_value;
         }
@@ -342,27 +366,27 @@ class ItgAutoSave {
           $form[$field_name]['und']['#default_value'][0] = $field_value;
         }
         break;
-      
+
       case 'field_collection':
         //$pre_save[] = $itg_auto_save->itg_save_field_field_collection($field);
         break;
-      
+
       case 'text_long':
         $form[$field_name]['und'][0]['value']['#default_value'] = strip_tags($field_value);
         break;
-      
-      case 'image':       
+
+      case 'image':
         $form[$field_name]['und'][0]['#default_value']['fid'] = $field_value['fid'];
         $form[$field_name]['und'][0]['#default_value']['alt'] = $field_value['alt'];
         $form[$field_name]['und'][0]['#default_value']['title'] = $field_value['title'];
         break;
-      
-      case 'file':        
+
+      case 'file':
         $form[$field_name]['und'][0]['#default_value']['fid'] = $field_value['fid'];
         $form[$field_name]['und'][0]['#default_value']['description'] = $field_value['description'];
         $form[$field_name]['und'][0]['#default_value']['display'] = $field_value['display'];
         break;
-      
+
       case 'text_with_summary':
         //$pre_save[$field['fieldName']] = $itg_auto_save->itg_save_field_text_with_summary('insert', $_POST[$field['fieldName']]);
         break;
@@ -370,4 +394,60 @@ class ItgAutoSave {
         $form['field_astro_frequency']['und']['#default_value'] = $field_value;
     }
   }
+  
+  /**
+   * Prepare presave array for all fields.
+   * 
+   * @param array $data
+   * @param array $inputs
+   * @return array
+   */
+  public function itg_autosave_prepare_presave($data, $inputs) {
+    $this->itg_result = array();
+    foreach ($data as $field) {
+      switch ($field['fieldType']) {
+        case 'datestamp':
+          $this->itg_result[$field['fieldName']] = $this->itg_save_field_datestamp('insert', $inputs[$field['fieldName']]);
+          break;
+
+        case 'datetime':
+          $this->itg_result[$field['fieldName']] = $this->itg_save_field_datetime('insert', $inputs[$field['fieldName']]);
+          break;
+
+        case 'text':
+          //$this->itg_result[$field['fieldName']] = $this->itg_save_field_text('insert', $inputs[$field['fieldName']]);
+          break;
+
+        case 'taxonomy_term_reference':
+          //$this->itg_result[$field['fieldName']] = $this->itg_save_field_taxonomy_term_reference('insert', $inputs[$field['fieldName']]);
+          break;
+
+        case 'field_collection':
+          //$this->itg_result[$field['fieldName']] = $this->itg_save_field_field_collection($inputs[$field['fieldName']]);
+          break;
+
+        case 'text_long':
+          //$this->itg_result[$field['fieldName']] = $this->itg_save_field_text_long('insert', $inputs[$field['fieldName']]);
+          break;
+
+        case 'image':
+          //$this->itg_result[$field['fieldName']] = $this->itg_save_field_image('insert', $inputs[$field['fieldName']]);
+          break;
+
+        case 'file':
+          //$this->itg_result[$field['fieldName']] = $this->itg_save_field_file('insert', $inputs[$field['fieldName']]);
+          break;
+
+        case 'text_with_summary':
+          //$this->itg_result[$field['fieldName']] = $this->itg_save_field_text_with_summary('insert', $inputs[$field['fieldName']]);
+          break;
+        case 'list_text':
+          //$this->itg_result[$field['fieldName']] = $this->itg_save_field_list_text('insert', $inputs[$field['fieldName']]);
+          break;
+      }
+    }
+
+    return $this->itg_result;
+  }
+
 }
