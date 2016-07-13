@@ -9,8 +9,9 @@
  * Send mail to user, when idea status is updated by admin
  * @param object $node
  */
-function itg_print_team_send_idea_status_mail($node, $source) {
+function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) {
   
+  //Mail content: In case of "insert", "update" and "association"
   if ($source == 'insert') {
     $mail_content = itg_print_team_approval_mail_content($node);
     $user_emails = itg_print_team_get_approval_user_emails('approval');
@@ -22,7 +23,7 @@ function itg_print_team_send_idea_status_mail($node, $source) {
     $user_email_ids = $user->mail;
   }
   else {
-    $mail_content = itg_print_team_association_mail_content($node);
+    $mail_content = itg_print_team_association_mail_content($node, $op_type);
     $user_emails = itg_print_team_get_approval_user_emails('association');
     $user_email_ids = implode(",", $user_emails);
   }
@@ -86,8 +87,8 @@ function itg_print_team_approval_mail_content($node) {
  * @param object $node
  * @return type
  */
-function itg_print_team_association_mail_content($node) {
-  return theme('itg_print_team_idea_association_mail', array('node' => $node));
+function itg_print_team_association_mail_content($node, $op_type = FALSE) {
+  return theme('itg_print_team_idea_association_mail', array('node' => $node, 'op_type' => $op_type));
 }
 
 /**
