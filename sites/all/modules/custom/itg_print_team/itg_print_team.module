@@ -523,7 +523,9 @@ function itg_print_team_association_submit($form, &$form_state) {
  * @param string $magazine
  */
 function itg_print_team_association_save($nid, $issue, $magazine) {
+  
   global $user;
+  module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
   $node = node_load($nid);
   itg_print_team_send_idea_status_mail($node, 'association');
   
