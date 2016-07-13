@@ -17,7 +17,8 @@ if ($theme != 'itgadmin') {
 
     <div id="page">
         <header class="header" id="header" role="banner">
-            <section class="">
+            <section class="header-top">
+                <div class="container">
                 <div class="header-ads mhide">
                     <img src="<?php print base_path() . path_to_theme() ?>/images/header-ads.png" alt="ads">
                 </div>
@@ -27,24 +28,24 @@ if ($theme != 'itgadmin') {
                     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
                 </div>
                 <?php endif; ?>
-                <div class="lgn">
+                <div class="lgn desktop-hide">
                     <a href="/user">Login</a>
                 </div> 
                 
                 <nav class="nav">
                         <ul class="social-nav mhide">
-                            <li><a href="#" title="">facebook</a></li>
-                            <li><a href="#" title="">twitter</a></li>
-                            <li><a href="#" title="">google+</a></li>
-                            <li><a href="#" title="">bloger</a></li>
-                            <li><a href="#" title="">mobile</a></li>
-                            <li><a href="#" title="">sound</a></li>
-                            <li><a href="#" title="">search</a></li>
+                            <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-volume-up"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-search"></i></a></li>
                             <li><a href="user" title="">Login</a></li>
                         </ul>
                         <ul class="main-nav">
-                            <li><a href="#" title=""><i class="fa fa-bars" ></i></a></li>
-                            <li><a href="#" title="">News</a></li>
+                            <li class="desktop-hide"><a href="#" title=""><i class="fa fa-bars" ></i></a></li>
+                            <li><a href="#" class="active" title="">News</a></li>
                             <li><a href="#" title="">tv</a></li>
                             <li><a href="#" title="">MAGAZINE</a></li>
                         </ul>
@@ -82,7 +83,25 @@ if ($theme != 'itgadmin') {
                 <?php endif; ?>
 
                 <?php print render($page['header']); ?>
+                    </div>
             </section>
+            
+            <section class="navigation">
+                <div class="container">
+                    <ul class="menu no-bullet">
+                        <li><a href="#">Make In India</a></li>
+                        <li><a href="#">Make In India</a></li>
+                        <li><a href="#">Make In India</a></li>
+                        <li><a href="#">Make In India</a></li>
+                        <li><a href="#">Make In India</a></li>
+                    </ul>
+                </div>   
+            </section>
+            
+            
+            
+            
+            
         </header>
         <?php
         // Render the sidebars to see if there's anything in them.

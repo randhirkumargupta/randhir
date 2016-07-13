@@ -1,3 +1,57 @@
-@mixin abc{
-    color:$tab-primary-color;
+/*font family an font weight mixins*/
+@mixin itg-font($font:null, $weight:null) {
+  font-weight: $weight;
+  font-family: $font;   
+}
+/*clear fix mixins*/
+@mixin clearfix {
+    zoom:1;
+    &:before, &:after {
+        content: "";
+        display: block;       
+        height: 0; 
+        overflow: hidden; 
+    }
+    &:after {
+        clear: both;
+    }
+}
+/*Box sizeing mixins*/
+@mixin box-sizing($border-box) {
+  @each $vendor in -webkit-, -moz-,-o-,-ms-,'' {
+    #{$vendor}box-sizing: $border-box;
+  }
+}
+/*Center Block mixins*/
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*Float mixins*/
+@mixin fleft{
+    float:left;
+}
+@mixin fright{
+    float:right;
+}
+/* Positional mixins */
+@mixin pos($pos:static,$top:null,$right:null,$bottom:null,$left:null,$z-index:null) {  
+  @if (($pos == relative) or ($pos == re)) {
+   position: relative;
+  }
+  @else if (($pos == absolute) or ($pos == ab)) {
+   position: absolute;
+  }
+  @else if (($pos == fixed) or ($pos == fi)) {
+   position: fixed;
+  }
+  @else if ($pos == static) {
+   position:static;
+  }   
+  top:$top;
+  right:$right;
+  bottom:$bottom;
+  left:$left;
+  z-index:$z-index;
 }
