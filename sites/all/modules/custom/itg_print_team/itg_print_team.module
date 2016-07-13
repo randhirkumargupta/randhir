@@ -221,7 +221,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         '#type' => 'submit',
         '#value' => t('Generate XML'),
         '#weight' => 100,
-        '#attributes' => array('class' => array('button'), 'style' => 'float:left; margin: 0px 10px 0px 0px')
+        '#attributes' => array('class' => array('btn-generate-xml'))
       );
 
       $form['#validate'][] = 'itg_story_xml_validate';
@@ -523,9 +523,10 @@ function itg_print_team_association_submit($form, &$form_state) {
  * @param string $magazine
  */
 function itg_print_team_association_save($nid, $issue, $magazine) {
+  
   global $user;
+  module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
   $node = node_load($nid);
-  itg_print_team_send_idea_status_mail($node, 'association');
   
   $issue_title = itg_common_get_node_title($issue);
   $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue;
@@ -573,6 +574,9 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->workbench_moderation_state_new = workbench_moderation_state_published();
   $node = node_submit($node); // Prepare node for saving
   node_save($node); // Finally save node
+  
+  //Send mail to required print team users after association
+  itg_print_team_send_idea_status_mail($node, 'association');
   
   drupal_set_message('Selected stories have been associated to selected issue and magazine successfully.');
 }

@@ -11,6 +11,7 @@
  */
 function itg_print_team_send_idea_status_mail($node, $source) {
   
+  //Mail content: In case of "insert", "update" and "association"
   if ($source == 'insert') {
     $mail_content = itg_print_team_approval_mail_content($node);
     $user_emails = itg_print_team_get_approval_user_emails('approval');
