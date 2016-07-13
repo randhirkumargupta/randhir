@@ -4,7 +4,6 @@
  * @file: print-team-idea-association-mail.tpl.php
  */
 global $base_url;
-p($node);
 
 ?> 
 
@@ -52,5 +51,3 @@ p($node);
     </table>
   </body>
 </html>
-
-<?php exit; ?>
