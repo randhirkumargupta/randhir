@@ -301,7 +301,7 @@ class ItgAutoSave {
     $this->itg_query = db_select('itg_autosave_node_data', 'itg');
     $this->itg_query->fields('itg')
         ->condition('node_type', $ctype);
-    if ($node > 0) {
+    if ($nid > 0) {
       $this->itg_query->condition('nid', $nid);
     }
     $this->itg_query->orderBy('id', 'DESC')
