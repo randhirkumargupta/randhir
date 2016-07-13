@@ -73,7 +73,7 @@ function itg_print_team_check_association_print_to_story($source_id) {
 function itg_print_team_association_update($nid, $issue_nid, $magazine, $associated_source_id, $print_update = FALSE) {
   global $user;
   $node = node_load($nid);
-  $issue_node = $node;
+  $idea_node = $node;
   $headline = $node->title;
   $body = $node->body[LANGUAGE_NONE][0]['value'];
   $fid = $node->field_quiz_answer_image[LANGUAGE_NONE][0]['fid'];
@@ -104,5 +104,5 @@ function itg_print_team_association_update($nid, $issue_nid, $magazine, $associa
   
   //Send mail after idea updation
   module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
-  itg_print_team_send_idea_status_mail($issue_node, 'association', 'idea_update');
+  itg_print_team_send_idea_status_mail($idea_node, 'association', 'idea_update');
 }
