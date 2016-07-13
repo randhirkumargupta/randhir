@@ -24,10 +24,13 @@ function itg_widget_block_info() {
         'info' => t('Widget: Section Ordering'),
     );
     $blocks['top_stories_ordering'] = array(
-        'info' => t('Widget: Top Stories ordering'),
+        'info' => t('Widget: Top Stories Ordering'),
     );
     $blocks['home_page_feature'] = array(
-        'info' => t('Widget: home page feature'),
+        'info' => t('Widget: Home Page Feature'),
+    );
+    $blocks['we_may_suggest'] = array(
+        'info' => t('Widget: We May Suggest'),
     );
     return $blocks;
 }
@@ -49,6 +52,15 @@ function itg_widget_block_view($delta = '') {
             $block['subject'] = t('Section Ordering');
             $data = itg_widget_section_ordering_data($info);
             $block['content'] = theme("section_ordering", array("data" => $data));
+            break;
+        case 'we_may_suggest':
+            module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
+            $info['section'] = '240'; // tid of section
+            $info['content_type'] = 'story'; // content type machine name
+            $info['view_name'] = 'we_may_suggest';
+            $block['subject'] = t('We may suggest');
+            $data = itg_widget_we_may_suggest_data($info);
+            $block['content'] = theme("we_may_suggest", array("data" => $data));
             break;
         // Top story ordering reordering widget case
         case 'top_stories_ordering':
@@ -82,13 +94,18 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     switch ($view_name) {
         // top story
         case 'story_widget':
-            watchdog("Widget", "setting for top story found");
+            watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
             $queue_flag = 1; // top story widget qid
             break;
         // home page feature
         case 'home_page_feature_widget':
-            watchdog("Widget", "setting for home page feature found");
+            watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
             $queue_flag = 2; // home page feature qid
+            break;
+        // We may suggest
+        case 'we_may_suggest':
+            watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+            $queue_flag = 3; // home page feature qid
             break;
     }
     if (!empty($queues[$queue_flag])) {
@@ -127,6 +144,11 @@ function itg_widget_views_pre_render(&$view) {
         $header_content .= l(t('Search Content'), 'home-page-feature-widget-listing', array('query' => array('destination' => arg(0))));
         $view->attachment_before = $header_content;
     }
+    elseif ($view->name == "we_may_suggest" && $view->current_display == 'page_2') {
+        $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content .= l(t('Search Content'), 'we-may-suggest-widget', array('query' => array('destination' => arg(0))));
+        $view->attachment_before = $header_content;
+    }
 }
 
 /**
@@ -142,6 +164,9 @@ function itg_widget_theme() {
         ),
         'home_page_feature' => array(
             'template' => 'templates/home-page-feature',
+        ),
+        'we_may_suggest' => array(
+            'template' => 'templates/we-may-suggest',
         ),
     );
     return $themes;
