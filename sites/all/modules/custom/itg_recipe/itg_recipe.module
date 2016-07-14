@@ -34,18 +34,19 @@ function itg_recipe_node_presave($node) {
 }
 
 /**
- * Implemets hook_form_alter().
- * @global stdObject $$user
+ * Implemets hook_form_alter(). 
  * @param Array $form
  * @param Array $form_state
  * @param string $form_id
  */
-function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
-  global $user, $base_url;  
+function itg_recipe_form_alter(&$form, &$form_state, $form_id) {    
   switch ($form_id) {
     case 'recipe_node_form':
       // Social Media Integration field show hide
-      itg_recipe_smi_hideshow($form);
+      itg_recipe_smi_hideshow($form);      
+      // Save as draft button
+      itg_recepi_save_draft_button($form);
+      
       $form['#attached']['js'] = array(
         drupal_get_path('module', 'itg_recipe') . '/js/jquery.validate.min.js',
       );
@@ -63,15 +64,19 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'][] = 'itg_recipe_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_recipe_form_custom_callback';
       //$form['#validate'][] = 'itg_recipe_fields_validate';
+      
       break;
-    case 'cooking_tips_node_form':
+    
+      case 'cooking_tips_node_form':
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'manage-cooking-tips', array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
       );
       $form['#after_build'][] = 'itg_cooking_tips_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_cooking_tips_form_custom_callback';
+      
       break;
+    
     case 'food_news_node_form':
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'manage-food-news', array('attributes' => array('class' => 'button'))),
@@ -79,19 +84,41 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       );
       $form['#after_build'][] = 'itg_food_news_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_food_news_form_custom_callback';
-      break;
-    case 'story_node_form':
-      itg_recipe_smi_hideshow($form);
+      
       break;
     
-    case 'photogallery_node_form':
-      itg_recipe_smi_hideshow($form);
-      break;
+    case 'story_node_form':        
+    case 'photogallery_node_form':    
     case 'videogallery_node_form':
       itg_recipe_smi_hideshow($form);
-  
+      break;
+    case 'astro_node_form':           
+    case 'poll_node_form': 
+      // Save as draft button
+      itg_recepi_save_draft_button($form);      
   }
 }
+
+/**
+ * Add save as draft button to form
+ * 
+ * @param array $form
+ */
+function itg_recepi_save_draft_button(&$form) {   
+  if ($form['#node']->status == 0 || $form['nid']['#value'] == NULL) {
+    // Add Save as draft button
+    $form['actions']['itg_custom_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save as Draft'),
+      '#submit' => array(
+        'node_form_submit'
+      ),
+    );
+    
+    // Change submit button name as Publish
+    $form['actions']['submit']['#value'] = t('Publish');
+  }  
+} 
 
 /**
  * Social Media Integration fields show hide logic

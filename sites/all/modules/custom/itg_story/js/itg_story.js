@@ -12,9 +12,11 @@
                    if (uid != 1) {
                      $('.field-edit-link').hide();
                      var magazine = $('#edit-field-story-select-magazine-und').val();
+                     
                      if (magazine == '_none') {
                        $('.form-item-field-story-configurations-und-display-lock').hide();
                      }
+                     
                      $('#edit-body-und-0-format').hide();                     
                      $('#edit-field-story-archive').hide();
                      $('#edit-path').show();
@@ -73,13 +75,17 @@
                  });
                 
                 // code to copy story longheadline to story title
-                $('#edit-title').blur(function() {
+                $('#edit-title').on('keyup keypress blur change', function(e) {
                   $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
                 });
                 
-                $('#edit-title').blur(function() {
+                $('#edit-title').on('keyup keypress blur change', function(e) {
                   $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
                 });
+                
+                  $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
+                  $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
+
 
                 // Display Byline details
                 $('#edit-field-story-reporter-und-0-target-id').blur(function() {                       

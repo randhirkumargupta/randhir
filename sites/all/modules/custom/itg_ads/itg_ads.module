@@ -11,17 +11,15 @@
 
 /**
  * Implementation of hook_menu
- * @return string
+ * @return array
  */
 function itg_ads_menu() {
-  
   $items = array();
-  
   $items['itg-ads/%'] = array(
-      'title' => t('Ads'),
-      'page callback' => 'itg_ads_show_addsimage',
-      'access callback' => TRUE,
-      'type' => MENU_CALLBACK,
+    'title' => t('Ads'),
+    'page callback' => 'itg_ads_show_ad_image',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
   );
   return $items;
 }
@@ -31,80 +29,78 @@ function itg_ads_menu() {
  * @return array
  */
 function itg_ads_theme() {
-  return array(    
+  return array(
     'itg_ads' => array(
       'variables' => array('data' => NULL),
       'template' => 'templates/itg-ads',
     ),
- );
+  );
 }
 
 /**
  * Implementation of hook_form_FORM_ID_alter()
- * @param array $form
- * @param array $form_state
- * @param string $form_id
+ * {@inheritdoc}
  */
 function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form_id) {
 
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js',
-    );
-    $form['#after_build'][] = 'itg_common_cancel_button';
-    //custom callback on submit button
-    $form['actions']['submit']['#submit'][] = 'alter_ad_submit_status_message';
-    // code to check if section is selected then section selection field show
-    $form['field_ads_section_selection']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
-      )
-    );
-   
-    // code to check if section is selected then template variant field show
-    $form['field_ads_template_variants']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Home'),
-      )
-    );
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js',
+  );
+  $form['#after_build'][] = 'itg_common_cancel_button';
+  // custom callback on submit button
+  $form['actions']['submit']['#submit'][] = 'alter_ad_submit_status_message';
+  // code to check if section is selected then section selection field show
+  $form['field_ads_section_selection']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
+    )
+  );
 
-    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-    $op = array();
-    foreach ($tax as $key => $val) {
-        $op[$val->tid] = $val->name;
-    }
+  // code to check if section is selected then template variant field show
+  $form['field_ads_template_variants']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Home'),
+    )
+  );
 
-    // assign array value to taxonomy field
-    $form['field_ads_section_selection']['und']['#options'] = $op;
+  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  $op = array();
+  foreach ($tax as $key => $val) {
+    $op[$val->tid] = $val->name;
+  }
+
+  // assign array value to taxonomy field
+  $form['field_ads_section_selection']['und']['#options'] = $op;
 }
 
 /**
  * Implementation of hook_form_views_exposed_form_alter
- * @param array $form
- * @param array $form_state
- * @param string $form_id
+ * {@inheritdoc}
  */
 function itg_ads_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-    if ($form["#id"] == 'views-exposed-form-manage-ads-page') {
-        $form['title']['#autocomplete_path'] = 'content-title-list/ads_management/autocomplete';
-        $form['title']['#attributes'] = array('placeholder' => t('Placeholder Title'));
-    }
+  if ($form["#id"] == 'views-exposed-form-manage-ads-page') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/ads_management/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Placeholder Title'));
+  }
 }
 
 /**
- * Implementation of hook_views_pre_render 
- * @param object $view
+ * Implementation of hook_views_pre_render
+ * {@inheritdoc}
  */
 function itg_ads_views_pre_render(&$view) {
-    if ($view->name == "manage_ads") {
-        global $user; // Get user information
-        $header_content = '';
-        if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles) && !in_array('Subeditor/Sr.Sub', $user->roles)) {
-            $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-            $header_content .= l(t('Create Ads Placeholder'), 'node/add/ads-management', array('query' => array('destination' => arg(0))));
-        }
+  if ($view->name == "manage_ads") {
+    // Get user information
+    global $user;
 
-        $view->attachment_before = $header_content;
+    $header_content = '';
+    if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles) && !in_array('Subeditor/Sr.Sub', $user->roles)) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Create Ads Placeholder'), 'node/add/ads-management', array('query' => array('destination' => arg(0))));
     }
+
+    $view->attachment_before = $header_content;
+  }
 }
 
 /**
@@ -113,62 +109,58 @@ function itg_ads_views_pre_render(&$view) {
  * @param array $form_state
  */
 function alter_ad_submit_status_message(&$form, $form_state) {
-    if (isset($_SESSION['messages']['status'])) {
-        unset($_SESSION['messages']['status']);
-    }
-    if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'ads-management') {
-        $op = 'created';
-    }
-    else {
-        $op = 'updated';
-    }
-    $ads_title = $form_state['node']->title;
-    drupal_set_message(t('Ad <b>' . $ads_title . '</b> has been ' . $op . '.'));
-    $_GET['destination'] = $_REQUEST['destination'];
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'ads-management') {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';
+  }
+  $ads_title = $form_state['node']->title;
+  drupal_set_message(t('Ad <b>' . $ads_title . '</b> has been ' . $op . '.'));
+
+  // TODO: check logic for this assignment.
+  $_GET['destination'] = $_REQUEST['destination'];
 }
 
 /**
  * Implements hook_node_validate().
- * @param object $node
- * @param array $form
- * @param array $form_state   
+ * {@inheritdoc}
  */
 function itg_ads_node_validate($node, $form, &$form_state) {
 
-    if ($node->type == 'ads_management') {
+  if ($node->type == 'ads_management') {
 
-        $template = $node->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
-        //$content_selection = $node->field_ads_content_selection[LANGUAGE_NONE][0]['tid'];
-        $section_selection = $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'];
-        $template_variants = $node->field_ads_template_variants[LANGUAGE_NONE][0]['tid'];
-        
-        // field validation on content selection
-        if ($template == 'Section') {
-            if (empty($section_selection)) {
-                form_set_error('field_ads_section_selection', t("Section selection is required"));
-            }
-        }
+    $template = $node->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
+    $section_selection = $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'];
+    $template_variants = $node->field_ads_template_variants[LANGUAGE_NONE][0]['tid'];
 
-        // field validation on template variant
-        if ($template == 'Home') {
-            if (empty($template_variants)) {
-                form_set_error('field_ads_template_variants', t("Template variant is required"));
-            }
-        }
-        //check on date values
-        $startdate = strtotime($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value']);
-        $enddate = strtotime($form_state['values']['field_ads_end_date'][LANGUAGE_NONE][0]['value']);
-        if ($enddate < $startdate) {
-            form_set_error('field_ads_end_date', 'End date must be greater than or equal to Start date.');
-        }
+    // field validation on content selection
+    if ($template == 'Section' && empty($section_selection)) {
+      form_set_error('field_ads_section_selection', t("Section selection is required"));
     }
+
+    // field validation on template variant
+    if ($template == 'Home' && empty($template_variants)) {
+      form_set_error('field_ads_template_variants', t("Template variant is required"));
+    }
+
+    //check on date values
+    $start_date = strtotime($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value']);
+    $end_date = strtotime($form_state['values']['field_ads_end_date'][LANGUAGE_NONE][0]['value']);
+    if ($end_date < $start_date) {
+      form_set_error('field_ads_end_date', 'End date must be greater than or equal to Start date.');
+    }
+  }
 }
 
 /**
- * Show adds image using nid
- * @return theme
+ * Show ad image using nid
+ * @return string
  */
-function itg_ads_show_addsimage(){
+function itg_ads_show_ad_image() {
   $node = node_load(arg(1));
   return theme('itg_ads', array('data' => $node));
 }

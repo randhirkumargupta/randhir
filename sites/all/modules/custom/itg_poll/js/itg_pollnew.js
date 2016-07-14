@@ -1,7 +1,6 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*
+ * @file itg_event_backend.js
+ * Contains functionality related Poll form
  */
 
 (function($) {
@@ -20,8 +19,8 @@
             } else if (getOptionAnswerValnew == '_none') {
                 $('#edit-field-poll-answer').hide();
             }
-            
-            
+
+
             var getOptionAnswerVal;
             $('#edit-field-poll-answer-option-und').on('change', function() {
                 $('.field-name-field-ans-caption input').val(''); // caption value reset
@@ -66,21 +65,21 @@
                     $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val('');
                     $("#edit-field-display-result-und-1").prop("checked", true);
                     $("#edit-field-display-result-und-2").prop("disabled", true);
-                }else{
+                } else {
                     var dval = $('#edit-field-poll-start-date-und-0-value-datepicker-popup-2').val().split('/');
-                    
-                    var ndval = dval[1]+'/'+dval[0]+'/'+dval[2];
+
+                    var ndval = dval[1] + '/' + dval[0] + '/' + dval[2];
                     var myDate = new Date(ndval);
-                    myDate.setDate(myDate.getDate()+parseInt(7));
+                    myDate.setDate(myDate.getDate() + parseInt(7));
                     $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val($.datepicker.formatDate('dd/mm/yy', myDate));
-                    
+
                     $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val($.datepicker.formatDate('23:00', myDate));
                     if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
-                    $("#edit-field-display-result-und-2").prop("disabled", false);
-                } else {
-                    $("#edit-field-display-result-und-1").prop("checked", true);
-                    $("#edit-field-display-result-und-2").prop("disabled", true);
-                }
+                        $("#edit-field-display-result-und-2").prop("disabled", false);
+                    } else {
+                        $("#edit-field-display-result-und-1").prop("checked", true);
+                        $("#edit-field-display-result-und-2").prop("disabled", true);
+                    }
                 }
             });
             $('document').ready(function() {
@@ -103,7 +102,7 @@
                     }
                 });
             });
-            
+
             $('#edit-field-poll-question-und').change(function() {
                 var queVal = $('#edit-field-poll-question-und').val();
                 if (queVal == 2) { // Image question
@@ -116,8 +115,8 @@
                     $('#edit-field-poll-question-image-und-0-remove-button').mousedown();
                     $('#edit-field-poll-question-text-und-0-value').val('');
                 }
-            });  
-            
+            });
+
         }
     }
 })(jQuery);

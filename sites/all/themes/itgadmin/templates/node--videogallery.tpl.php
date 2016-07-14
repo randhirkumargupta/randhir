@@ -31,14 +31,14 @@
                 <?php print render($content['field_video_anchor']); ?>
             </div>
         </div>
-        
+        <?php if(!isset($node->op) && $node->op != 'Preview'){ ?>
         <div class="Story-details">
             <h2><?php print t('Video Upload'); ?></h2>
             <div class="content-details">
                 <?php print render($content['field_videogallery_video_upload']); ?>
             </div>
         </div> 
-        
+        <?php } ?>
          <?php
     $browsemedia = render($content['field_story_extra_large_image']);
     if (!empty($browsemedia)):

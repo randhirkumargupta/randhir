@@ -20,35 +20,35 @@ function itg_api_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'include/itg_api_mail_today.inc',
   );
-  
+
   $items['itg-ani-content'] = array(
     'title' => 'api callback menu',
     'page callback' => 'itg_ani_content',
     'access arguments' => array('access Api content'),
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['itg-ians-content'] = array(
     'title' => 'api callback menu',
     'page callback' => 'itg_ians_content',
     'access arguments' => array('access Api content'),
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['itg-ap-content'] = array(
     'title' => 'api callback menu',
     'page callback' => 'itg_ap_content',
     'access arguments' => array('access Api content'),
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['itg-nifty-feed'] = array(
     'title' => 'api callback menu',
     'page callback' => 'itg_nifty_feed',
     'access arguments' => array('access Api content'),
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['itg-pti-content'] = array(
     'title' => 'api callback menu',
     'page callback' => 'itg_pti_content',
@@ -56,19 +56,21 @@ function itg_api_menu() {
     'access arguments' => array('access Api content'),
     'file' => 'include/itg_api_pti.inc',
   );
-  
+
   return $items;
 }
 
 /**
  * Implements hook_permission.
+ *
+ * {@inheritdoc}
  */
 function itg_api_permission() {
   return array(
     'access Api content' => array(
       'title' => t('API permission'),
       'description' => t('API permission.'),
-    ),    
+    ),
   );
 }
 
@@ -77,7 +79,7 @@ function itg_api_permission() {
  *
  * @TODO: make this configurable.
  */
-function workbench_moderation_state_Review() {
+function workbench_moderation_state_review() {
   return 'needs_review';
 }
 
@@ -86,8 +88,8 @@ function workbench_moderation_state_Review() {
  * Implement itg_ani_content
  */
 function itg_ani_content() {
-  $file_path = drupal_realpath('public://');      
-  global $base_url, $user;
+  global $user;
+  $file_path = drupal_realpath('public://');
   module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
   $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
   $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
@@ -96,7 +98,7 @@ function itg_ani_content() {
     $op[$val->tid] = $val->name;
   }
 
-  $direc = getDirContents($file_path.'/gallery/ani/');
+  $direc = get_dir_content($file_path . '/gallery/ani/');
 
   foreach ($direc as $xm_file) {
 
@@ -104,7 +106,6 @@ function itg_ani_content() {
     $xml_filename = basename($xml_file_path);
     $ani_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-    //p($mail_today_xml);
     if (!empty($ani_xml)) {
       $ani = 0;
 
@@ -137,15 +138,10 @@ function itg_ani_content() {
 
         if (!$title) {
           $alchemyapi[$ani] = new AlchemyAPI('cd95bc47470dedf7e5002748636e78848cd0a9f4');
-          //print $headline;
           $response[$ani] = $alchemyapi[$ani]->keywords('text', $headline, array('sentiment' => 1));
-          //pr($response['keywords']);
           $final_keyword = '';
           if ($response[$ani]['status'] == 'OK') {
-
-            //print_r($response[$i]['keywords']);
             foreach ($response[$ani]['keywords'] as $keyword) {
-
               $final_keyword[] = $keyword['text'];
             }
           }
@@ -156,8 +152,8 @@ function itg_ani_content() {
           // description
           // get description value
           $description = '';
-          foreach ($ani_value->content->p as $bodyTxt) {
-            $description .= '<p>' . ucfirst(htmlentities($bodyTxt)) . '</p>';
+          foreach ($ani_value->content->p as $body_text) {
+            $description .= '<p>' . ucfirst(htmlentities($body_text)) . '</p>';
           }
 
           $description = strip_tags($description, '<p>');
@@ -167,7 +163,6 @@ function itg_ani_content() {
           $final_kicker = $final_kicker . '..';
           $final_kicker = trim(preg_replace('/[\s\t\n\r\s]+/', ' ', $final_kicker));
 
-          // get pubdate
           $publish_date_raw = $ani_value->Publishdate;
 
           if (empty($publish_date_raw)) {
@@ -187,7 +182,7 @@ function itg_ani_content() {
           $exp_description = strtolower($description);
           $exp_description = explode(" ", $exp_description);
 
-          //Set values to node l54,s130
+          // Set values to node l54,s130
           $node = new stdClass();
           $node->title = trim($headline);
           $node->type = "story";
@@ -202,7 +197,6 @@ function itg_ani_content() {
           $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $final_kicker;
           $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline);
           $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
-          //$node->field_story_comment_question[LANGUAGE_NONE][0]['value'] = 'NA';
           $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'ANI';
           $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $by_line; //54
           foreach ($combine_cat as $key => $tax_id) {
@@ -212,7 +206,7 @@ function itg_ani_content() {
           $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
           if (array_intersect($op, $exp_description)) {
             $node->log = 'State Changed to Review';
-            $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+            $node->workbench_moderation_state_new = workbench_moderation_state_review();
           }
           else {
             $node->workbench_moderation_state_new = workbench_moderation_state_published();
@@ -240,8 +234,8 @@ function itg_ani_content() {
  * Implement itg_ans_content
  */
 function itg_ians_content() {
-  $file_path = drupal_realpath('public://');      
-  global $base_url, $user;
+  $file_path = drupal_realpath('public://');
+  global $user;
   module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
   $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
   $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
@@ -250,7 +244,7 @@ function itg_ians_content() {
     $op[$val->tid] = $val->name;
   }
 
-  $direc = getDirContents($file_path.'/gallery/ians/');
+  $direc = get_dir_content($file_path . '/gallery/ians/');
 
   foreach ($direc as $xm_file) {
 
@@ -258,7 +252,6 @@ function itg_ians_content() {
     $xml_filename = basename($xml_file_path);
     $ans_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-    //p($mail_today_xml);
     if (!empty($ans_xml)) {
       $ians = 0;
 
@@ -280,15 +273,10 @@ function itg_ians_content() {
 
         if (!$title) {
           $alchemyapi[$ians] = new AlchemyAPI('cd95bc47470dedf7e5002748636e78848cd0a9f4');
-          //print $headline;
           $response[$ians] = $alchemyapi[$ians]->keywords('text', $headline, array('sentiment' => 1));
-          //pr($response['keywords']);
           $final_keyword = '';
           if ($response[$ians]['status'] == 'OK') {
-
-            //print_r($response[$i]['keywords']);
             foreach ($response[$ians]['keywords'] as $keyword) {
-
               $final_keyword[] = $keyword['text'];
             }
           }
@@ -298,8 +286,8 @@ function itg_ians_content() {
           $meta_keyword = implode(", ", $final_keyword);
           // description
           $description = '';
-          foreach ($ans_value->content->p as $bodyTxt) {
-            $description .= '<p>' . ucfirst(htmlentities($bodyTxt)) . '</p>';
+          foreach ($ans_value->content->p as $body_text) {
+            $description .= '<p>' . ucfirst(htmlentities($body_text)) . '</p>';
           }
           $description = strip_tags($description, '<p>');
           $description = trim($description);
@@ -350,7 +338,7 @@ function itg_ians_content() {
           $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
           if (array_intersect($op, $exp_description)) {
             $node->log = 'State Changed to Review';
-            $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+            $node->workbench_moderation_state_new = workbench_moderation_state_review();
           }
           else {
             $node->workbench_moderation_state_new = workbench_moderation_state_published();
@@ -378,8 +366,8 @@ function itg_ians_content() {
  * Implement itg_ap_content
  */
 function itg_ap_content() {
-  $file_path = drupal_realpath('public://');      
-  global $base_url, $user;
+  $file_path = drupal_realpath('public://');
+  global $user;
   module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
   $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
   $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
@@ -389,7 +377,7 @@ function itg_ap_content() {
   }
 
 
-  $direc = getDirContents($file_path.'/gallery/ap/');
+  $direc = get_dir_content($file_path . '/gallery/ap/');
 
   foreach ($direc as $xm_file) {
 
@@ -397,7 +385,6 @@ function itg_ap_content() {
     $xml_filename = basename($xml_file_path);
     $ap_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-    //p($mail_today_xml);
     if (!empty($ap_xml)) {
       $ap = 0;
 
@@ -411,30 +398,22 @@ function itg_ap_content() {
 
         $by_line = itg_api_get_nid($ap_value->{'body.head'}->byline, 'reporter');
 
-        if (!empty($by_line)) {
-          $by_line = $by_line;
-        }
-        else {
-
+        if (empty($by_line)) {
           $by_line = itg_api_get_nid('AP', 'reporter');
         }
 
         $description = '';
-        foreach ($ap_value->{'body.content'}->block->p as $bodyTxt) {
-          $description .= '<p>' . ucfirst(htmlentities($bodyTxt)) . '</p>';
+        foreach ($ap_value->{'body.content'}->block->p as $body_text) {
+          $description .= '<p>' . ucfirst(htmlentities($body_text)) . '</p>';
         }
 
         $title = itg_api_check_title($headline);
 
         if (!$title) {
           $alchemyapi[$ap] = new AlchemyAPI('cd95bc47470dedf7e5002748636e78848cd0a9f4');
-          //print $headline;
           $response[$ap] = $alchemyapi[$ap]->keywords('text', $headline, array('sentiment' => 1));
-          //pr($response['keywords']);
           $final_keyword = '';
           if ($response[$ap]['status'] == 'OK') {
-
-            //print_r($response[$i]['keywords']);
             foreach ($response[$ap]['keywords'] as $keyword) {
 
               $final_keyword[] = $keyword['text'];
@@ -454,11 +433,9 @@ function itg_ap_content() {
           $pre_final_kicker = preg_split('/(?<!\d)\.(?!\d)/', $kicker1);
           $final_kicker = $kicker . ' ' . $pre_final_kicker[0];
           $final_kicker = str_replace(array('\'', '"'), '', $final_kicker);
-          $final_kicker_length = strlen($final_kicker);
           $final_kicker = substr($final_kicker, 0, 250);
           $final_kicker = $final_kicker . '..';
           $final_kicker = trim(preg_replace('/[\s\t\n\r\s]+/', ' ', $final_kicker));
-          $publish_date_raw = date('Y-m-d', time());
           $publish_date_raw = date('Y-m-d', time());
           $publish_date_timestamp = strtotime($publish_date_raw);
           $publish_date = date('Y-m-d', $publish_date_timestamp);
@@ -482,15 +459,14 @@ function itg_ap_content() {
           $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $final_kicker;
           $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline);
           $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
-          //$node->field_story_comment_question[LANGUAGE_NONE][0]['value'] = 'NA';
           $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'AP';
-          $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $by_line; //54
+          $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $by_line;
           $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $category_name;
           $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date;
           $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
           if (array_intersect($op, $exp_description)) {
             $node->log = 'State Changed to Review';
-            $node->workbench_moderation_state_new = workbench_moderation_state_Review();
+            $node->workbench_moderation_state_new = workbench_moderation_state_review();
           }
           else {
             $node->workbench_moderation_state_new = workbench_moderation_state_published();
@@ -517,31 +493,25 @@ function itg_ap_content() {
  * Implement itg_nifty_feed
  */
 function itg_nifty_feed() {
-
-  global $base_url, $user;
   $base_path_set = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
   $base_path_set = explode('/', $base_path_set);
   $path_instance = $base_path_set[1];
   $direc = $_SERVER['DOCUMENT_ROOT'] . '/' . $path_instance . '/sites/default/files/gallery/nifty/';
-  $newFileName = $direc . 'SensexNiftyFeed.txt';
+  $new_file_name = $direc . 'SensexNiftyFeed.txt';
   $response_xml_data = get_content_from_xml_loc('http://businesstoday.accordhostings.com/SensexNiftyFeed.aspx');
 
   if ($response_xml_data) {
-
     $nifty_xml = simplexml_load_string($response_xml_data);
-
+    $final_output = '';
     foreach ($nifty_xml as $nifty_value) {
-
-      $final_output.= $nifty_name = $nifty_value->name . ',';
-      $final_output.='Current Value : ' . $current_value = $nifty_value->current_value . ',';
-
-      $final_output.='Value Change : ' . $value_change = $nifty_value->value_change . ',';
-
-      $final_output.='Percentage Change : ' . $percentage_change = $nifty_value->percentage_change . '@';
+      $final_output .= $nifty_name = $nifty_value->name . ',';
+      $final_output .= 'Current Value : ' . $current_value = $nifty_value->current_value . ',';
+      $final_output .= 'Value Change : ' . $value_change = $nifty_value->value_change . ',';
+      $final_output .= 'Percentage Change : ' . $percentage_change = $nifty_value->percentage_change . '@';
     }
-    unlink($newFileName);
-    if (!file_exists($newFileName)) {
-      $file = fopen($newFileName, "w+");
+    unlink($new_file_name);
+    if (!file_exists($new_file_name)) {
+      $file = fopen($new_file_name, "w+");
       fwrite($file, $final_output);
       fclose($file);
       chmod($file, 777);
@@ -551,30 +521,30 @@ function itg_nifty_feed() {
 
 /**
  * Implements function for node exit or not
- * @param $title
- * $return 
+ * @param string $title
+ * @return bool
  */
 
 function itg_api_check_title($title) {
   $result = db_select('node', 'node')
-          ->fields('node', array('title'))
-          ->condition('title', $title, '=')
-          ->condition('type', 'story', '=')
-          ->execute()->fetchAssoc();
+    ->fields('node', array('title'))
+    ->condition('title', $title, '=')
+    ->condition('type', 'story', '=')
+    ->execute()->fetchAssoc();
 
   if (!empty($result['title'])) {
-    return true;
+    return TRUE;
   }
 
-  return false;
+  return FALSE;
 }
 
 /**
  * Implements function for getting node id
- * @param $title,$type
- * $return 
+ * @param string $title
+ * @param string $type
+ * @return int
  */
-
 function itg_api_get_nid($title, $type) {
   $result = db_query("SELECT n.nid FROM {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => $type));
   $nid = $result->fetchField();
@@ -584,10 +554,9 @@ function itg_api_get_nid($title, $type) {
 
 /**
  * Implements function for getting term id by name
- * @param $name
- * $return 
+ * @param string $name
+ * @return int
  */
-
 function itg_api_get_term_id($name) {
   $result = db_query("SELECT t.tid FROM {taxonomy_term_data} t WHERE t.name = :name", array(":name" => $name));
   $tid = $result->fetchField();
@@ -597,31 +566,35 @@ function itg_api_get_term_id($name) {
 
 /**
  * Implements function for save xml file info in table (itg_api_xml_info)
- * @param $node,$file,$user,$type
- * $return 
+ * @param int $nid
+ * @param string $file
+ * @param string $type
+ * @param string $source
  */
-
-function itg_api_insert_xml_info($nid,$file,$type,$source) {
-   global $user;
-   $created = date('Y-m-d H:i:s');
-  db_insert('itg_api_xml_info') // Table to store file and node info
-                ->fields(array(
-                    'nid' => $nid,
-                    'uid' => $user->uid,
-                    'filename' => $file,
-                    'type' => $type,
-                    'source' => $source,
-                    'created' => $created
-                ))
-                ->execute();
+function itg_api_insert_xml_info($nid, $file, $type, $source) {
+  global $user;
+  $created = date('Y-m-d H:i:s');
+  db_insert('itg_api_xml_info')// Table to store file and node info
+  ->fields(array(
+    'nid' => $nid,
+    'uid' => $user->uid,
+    'filename' => $file,
+    'type' => $type,
+    'source' => $source,
+    'created' => $created
+  ))
+    ->execute();
 }
 
 /**
  * Implements function for get all files from directory
- * $dir
+ * @param string $dir
+ * @param array $results
+ *
+ * @return array
  */
 
-function getDirContents($dir, &$results = array()) {
+function get_dir_content($dir, &$results = array()) {
   $files = scandir($dir);
 
   foreach ($files as $key => $value) {
@@ -629,8 +602,8 @@ function getDirContents($dir, &$results = array()) {
     if (!is_dir($path)) {
       $results[] = $path;
     }
-    else if ($value != "." && $value != "..") {
-      getDirContents($path, $results);
+    elseif ($value != "." && $value != "..") {
+      get_dir_content($path, $results);
       $results[] = $path;
     }
   }
@@ -640,15 +613,16 @@ function getDirContents($dir, &$results = array()) {
 
 /**
  * Implements hook_block_info().
+ *
+ * {@inheritdoc}
  */
-function itg_api_block_info()
-{
-    $blocks['api_form_block'] = array(
-        'info' => t('APi Form  Block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+function itg_api_block_info() {
+  $blocks['api_form_block'] = array(
+    'info' => t('APi Form  Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    return $blocks;
+  return $blocks;
 }
 
 /**
@@ -656,44 +630,41 @@ function itg_api_block_info()
  *
  * @param string $delta
  * @return array
- * @throws Exception
  */
-function itg_api_block_view($delta = '')
-{
-    global $user;
-    $block = array();
-    $data = '';
-    switch ($delta) {
-        case 'api_form_block':
-            $block['content'] = theme('api_form_display_block', array('data' => $data));
-            break;
-    }
+function itg_api_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'api_form_block':
+      $block['content'] = theme('api_form_display_block', array('data' => ''));
+      break;
+  }
 
-    return $block;
+  return $block;
 }
 
 
 /**
- * Implements hook_theme().
+ * Implements hook_theme()
+ *
+ * {@inheritdoc}
  */
-function itg_api_theme($existing, $type, $theme, $path)
-{
-    $themes = array(
-        'api_form_display_block' => array(
-            'template' => 'api-form-template',
-            'path' => drupal_get_path('module', 'itg_api') . '/templates',
-            'variables' => array('data' => NULL),
-        ),
-        
-    );
+function itg_api_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'api_form_display_block' => array(
+      'template' => 'api-form-template',
+      'path' => drupal_get_path('module', 'itg_api') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
 
-    return $themes;
+  );
+
+  return $themes;
 }
 
 /**
  * Get html data from url using curl.
- * @param $url.
- * @return $data.
+ * @param string $url
+ * @return string
  */
 function get_content_from_xml_loc($url) {
   $ch = curl_init();

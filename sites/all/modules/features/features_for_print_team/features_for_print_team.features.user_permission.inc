@@ -28,6 +28,7 @@ function features_for_print_team_user_default_permissions() {
   $permissions['edit any print_team_integration content'] = array(
     'name' => 'edit any print_team_integration content',
     'roles' => array(
+      'Co-ordinator' => 'Co-ordinator',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',

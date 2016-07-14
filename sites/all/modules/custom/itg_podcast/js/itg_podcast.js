@@ -1,6 +1,6 @@
 /*
- * @file itg_story.js
- * Contains all functionality related to story
+ * @file itg_podcast.js
+ * Contains all functionality related to podcast
  */
 
 (function($) {
@@ -14,8 +14,6 @@
                         $('.fieldset-description').hide();
                         $('#edit-metatags p').hide();
                    }
-                              
-                
              }
 
  };

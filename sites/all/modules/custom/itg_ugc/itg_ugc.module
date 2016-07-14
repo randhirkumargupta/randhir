@@ -71,8 +71,53 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
-      $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
-      $form['field_story_reporter']['#suffix'] = '<span class="byline">'.$ugc_user_name.' (UGC User)</span></div>';
+       if (!empty($ugc_user_name)) {
+        $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
+        $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
+      }
+    }
+    
+    // prefill input value in videogallery form
+    if ($form_id == 'videogallery_node_form' && !empty($url_nid)) {
+      // get node values 
+      $node = node_load($url_nid);
+      $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
+      $form['title']['#default_value'] = $node->title;
+      $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
+      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
+      $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
+      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
+       if (!empty($ugc_user_name)) {
+        $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
+        $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
+      }
+      foreach ($form['field_videogallery_video_upload']['und'] as $delta => $field) {
+        if (is_numeric($delta)) {
+          // assign value in first field collection item
+          $form['field_videogallery_video_upload'][LANGUAGE_NONE][$delta]['field_upload_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];
+        }
+      }
+    }
+    
+    // prefill input value in podcast form
+    if ($form_id == 'podcast_node_form' && !empty($url_nid)) {
+      // get node values 
+      $node = node_load($url_nid);
+      $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
+      $form['title']['#default_value'] = $node->title;
+      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;
+      $form['field_story_kicker_text'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
+      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
+      foreach ($form['field_podcast_audio_upload']['und'] as $delta => $field) {
+        if (is_numeric($delta)) {
+          // assign value in first field collection item
+          $form['field_podcast_audio_upload'][LANGUAGE_NONE][$delta]['field_podcast_upload_audio_file'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_recipe_audio[LANGUAGE_NONE][0]['fid'];
+        }
+      }
     }
 
     // prefill input value in recipe form
@@ -92,8 +137,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
-      $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
-      $form['field_story_reporter']['#suffix'] = '<span class="byline">'.$ugc_user_name.' (UGC User)</span></div>';
+      if (!empty($ugc_user_name)) {
+        $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
+        $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
+      }
     }
 
     // prefill input value in photogallery form
@@ -193,20 +240,20 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   $form['field_astro_video']['#states'] = array(
     'visible' => array(
       array(
-        array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'video')),
+        array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'videogallery')),
         'or',
         array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'recipe')),
       ),
     ),
     'required' => array(
-      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'video'),
+      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'videogallery'),
     )
   );
 
   // Hide/show Audio field
   $form['field_recipe_audio']['#states'] = array(
     'visible' => array(
-      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'audio'),
+      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'podcast'),
     )
   );
 }
@@ -471,7 +518,7 @@ function itg_ugc_node_view($node, $view_mode, $langcode) {
  * @param type $node
  */
 function itg_ugc_node_insert($node) {  
-    if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery') {
+    if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast') {
       $title = $node->title;
       $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
       $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];

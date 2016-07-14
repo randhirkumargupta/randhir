@@ -1,4 +1,4 @@
-name = ITG ADS
+name = ITG Ads
 description = "ITG Ads Management Module"
 core = 7.x
 package = ITG

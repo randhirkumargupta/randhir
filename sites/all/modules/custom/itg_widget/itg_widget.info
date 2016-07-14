@@ -1,0 +1,7 @@
+name = ITG Widget
+description = "ITG Widget Module"
+core = 7.x
+package = ITG
+
+dependencies[] = nodequeue
+dependencies[] = draggableviews

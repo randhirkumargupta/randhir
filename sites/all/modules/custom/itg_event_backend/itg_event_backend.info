@@ -1,4 +1,4 @@
-name = ITG EVENT BACKEND
+name = ITG event backend
 description = "itg_event_backend Module for event backend functionality"
 core = 7.x
 package = ITG

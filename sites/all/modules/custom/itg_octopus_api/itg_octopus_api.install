@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @file
  * Install, update and uninstall functions for the ITG Octopus Api module.
  */
-
 /**
  * Implementation of hook_schema
  * @access public
@@ -81,82 +81,33 @@ function itg_octopus_api_schema() {
         'length' => '250',
         'not null' => TRUE,
       ),
-      'location' => array(
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+  $schema['itg_octopus_slug_storycustom'] = array(
+    'description' => 'TODO: please describe this table!',
+    'fields' => array(
+      'id' => array(
         'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
+        'type' => 'serial',
+        'not null' => TRUE,
       ),
-      'category' => array(
+      'slug_id' => array(
         'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
+        'type' => 'int',
+        'not null' => TRUE,
       ),
-      'archive' => array(
+      'rundown_id' => array(
         'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
+        'type' => 'int',
+        'not null' => TRUE,
       ),
-      'test' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
-      ),
-      'type' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
-      ),
-      'ingest' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
-      ),
-      'source' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
-      ),
-      'input' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
-      ),
-      'tour' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
-      ),
-      'ingest' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
-      ),
-      'prio' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
-      ),
-      'ts_off' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => FALSE,
-      ),
-      'usage' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
+      'story_custom_data' => array(
+        'description' => 'A blob field that contains list story custom.',
+        'type' => 'blob',
         'not null' => FALSE,
       ),
     ),
@@ -165,9 +116,9 @@ function itg_octopus_api_schema() {
       'id' => array('id'),
     ),
   );
-  
+
   //schema for rundown xml clip
-  
+
   $schema['itg_element_clip'] = array(
     'description' => 'TODO: please describe this table!',
     'fields' => array(
@@ -186,7 +137,7 @@ function itg_octopus_api_schema() {
         'type' => 'int',
         'not null' => TRUE,
       ),
-      'story_id' => array(
+      'rundown_id' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'int',
         'not null' => TRUE,
@@ -247,9 +198,9 @@ function itg_octopus_api_schema() {
       'id' => array('id'),
     ),
   );
-  
+
   //schema for rundown xml rundown
-  
+
   $schema['itg_rundown'] = array(
     'description' => 'The base table for syndication.',
     'fields' => array(
@@ -294,6 +245,6 @@ function itg_octopus_api_schema() {
       'id' => array('id'),
     ),
   );
-  
+
   return $schema;
 }

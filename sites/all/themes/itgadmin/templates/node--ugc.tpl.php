@@ -50,12 +50,20 @@
                   <div class="field-items"><?php print $title; ?></div>
                  </div>
                     <?php
-                 if($content_type == 'story' || $content_type == 'recipe' || $content_type == 'blog') { 
+                 if($content_type == 'story' || $content_type == 'recipe' || $content_type == 'blog' || $content_type == 'videogallery') { 
                    print  render($content['field_user_message']);
                   }
                   
                  if($content_type == 'photogallery') {
                    print  render($content['field_ugc_upload_photo']);
+                 }
+                 
+                  if($content_type == 'videogallery') {
+                   print  render($content['field_astro_video']);
+                 }
+                 
+                 if($content_type == 'podcast') {
+                   print  render($content['field_recipe_audio']);
                  }
                  
                  if($content_type == 'recipe') {

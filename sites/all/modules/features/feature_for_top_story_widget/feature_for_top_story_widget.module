@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for top story widget feature.
+ */
+
+include_once 'feature_for_top_story_widget.features.inc';

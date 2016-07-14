@@ -1,0 +1,12 @@
+name = "ITG IMAGE REPOSITORY"
+description = "This is use for upload the images and with drag and drop."
+core = "7.x"
+package = "Media"
+configure = "admin/config/media/imce"
+
+; Information added by Drupal.org packaging script on 2014-05-16
+version = "7.x-1.9"
+core = "7.x"
+project = "itg_image_repository"
+datestamp = "1400275428"
+

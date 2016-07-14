@@ -139,10 +139,10 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="insert" value="Insert" /> &nbsp; <input type="text" name="insvalue" id="insvalue" class="form-text valid">
+  $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="Insert" value="Add Selected Content" /> &nbsp; <input type="text" name="insvalue" id="insvalue" size="40" class="form-text valid">
 </div>
-<div id="clickme">save search</div>
-<div class="search-criteria" style="display:none"><input class="form-text valid" type="text" name="search-title" id="search-title"><input class="insert-save add-more form-submit" id="filter-save" type="button" name="save" value="save" /></div><div class="success" style="display:none">search saved successfully</div>';
+<div id="clickme">Save Search</div>
+<div class="search-criteria" style="display:none"><input class="form-text valid" type="text" name="search-title" id="search-title"><input class="insert-save add-more form-submit" id="filter-save" type="button" name="save" value="save" /></div><div class="success" style="display:none">Search saved successfully</div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -179,7 +179,7 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['bundle_name']['id'] = 'bundle_name';
   $handler->display->display_options['fields']['bundle_name']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['bundle_name']['field'] = 'bundle_name';
-  $handler->display->display_options['fields']['bundle_name']['label'] = 'Type';
+  $handler->display->display_options['fields']['bundle_name']['label'] = 'Content Type';
   /* Field: Apache Solr: entity_id */
   $handler->display->display_options['fields']['entity_id']['id'] = 'entity_id';
   $handler->display->display_options['fields']['entity_id']['table'] = 'apachesolr__solr';
@@ -405,7 +405,7 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['filters']['bs_status']['group'] = 1;
   $handler->display->display_options['filters']['bs_status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['bs_status']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['bs_status']['expose']['label'] = 'status';
+  $handler->display->display_options['filters']['bs_status']['expose']['label'] = 'Status';
   $handler->display->display_options['filters']['bs_status']['expose']['operator'] = 'bs_status_op';
   $handler->display->display_options['filters']['bs_status']['expose']['identifier'] = 'bs_status';
   $handler->display->display_options['filters']['bs_status']['expose']['remember_roles'] = array(

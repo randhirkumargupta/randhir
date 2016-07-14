@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ * Helper file for category manager module.
+ */
 /**
  * Implements hook_hierarchical_select_root_level()
  * @param array $params
@@ -16,7 +21,7 @@ function itg_category_manager_hierarchical_select_root_level($params, $dropbox =
   
   // If the root_term parameter is enabled, then prepend a fake "<root>" term.
   if (isset($params['root_term']) && $params['root_term'] === TRUE) {
-    $root_term = new StdClass();
+    $root_term = new stdClass();
     $root_term->tid = 0;
     $root_term->name = '<' . t('root') . '>';
     $terms = array_merge(array($root_term), $terms);

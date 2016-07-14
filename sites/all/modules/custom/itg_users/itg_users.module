@@ -327,8 +327,9 @@ function itg_users_views_pre_render(&$view) {
     global $user; // Get user information
 
     $header_content = '';
-    if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {      
-      $header_content = l(t('Create User'), 'admin/people/create', array('query' => array('destination' => 'manage-users'), 'attributes' => array('class' => 'confirm-user')));
+    if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {
+      $header_content = '<span class="count">Count ('.$view->total_rows.') </span>';
+      $header_content .= l(t('Create User'), 'admin/people/create', array('query' => array('destination' => 'manage-users'), 'attributes' => array('class' => 'confirm-user')));
     }
 
     $view->attachment_before = $header_content;
@@ -738,4 +739,12 @@ function itg_users_access_denied() {
   $destination = array('destination' => $path);
   header('Location: ' . url('user/login', array('query' => $destination, 'absolute' => TRUE)), TRUE, 302);
   drupal_exit();
+}
+
+/**
+ * Implements hook_js_alter().
+ * {@inheritdoc}
+ */
+function itg_users_js_alter(&$javascript) {
+ $javascript['modules/user/user.js']['data'] =  drupal_get_path('module', 'itg_users') . '/js/custom_user.js';
 }

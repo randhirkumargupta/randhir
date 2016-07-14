@@ -12,13 +12,108 @@
  * Implements hook_menu().
  * {@inheritdoc}
  */
-function itg_octopus_api_menu(){
-   $items['itg-octopus-rundown'] = array(
+function itg_octopus_api_menu() {
+  $items['itg-octopus-rundown'] = array(
     'title' => 'api callback menu',
     'page callback' => 'itg_octopus_api_rundown',
     'access callback' => TRUE,
     //'access arguments' => array('access rundown content'),
     'file' => 'includes/itg_octopus_api.inc',
   );
-   return $items;
+  $items['rundown/listing'] = array(
+    'title' => 'Rundown Listing',
+    'page callback' => 'itg_octopus_api_rundown_listing',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+  $items['slug/detail/%'] = array(
+    'title' => 'Rundown Slug Detail',
+    'page callback' => 'itg_octopus_api_rundown_detail',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+  $items['slug_title/autocomplete'] = array(
+    'page callback' => 'demo_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_permission.
+ * {@inheritdoc}
+ */
+function itg_octopus_api_permission() {
+  return array(
+    'authorized user rundown detail' => array(
+      'title' => t('Rundown detail page'),
+      'description' => t('Octopus rundown detail page permission'),
+    ),
+    'authorized user rundown listing' => array(
+      'title' => t('Rundown listing page'),
+      'description' => t('Octopus rundown listing page permission'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme()
+ * {@inheritdoc}
+ */
+function itg_octopus_api_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'rundown_slug_detail' => array(
+      'template' => 'rundown-slug-detial',
+      'path' => drupal_get_path('module', 'itg_octopus_api') . '/templates',
+    ),
+  );
+  return $themes;
+}
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
+function itg_octopus_api_form($form, &$form_state) {
+  $form = array();
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Slug Title'),
+    '#maxlength' => 255,
+    '#size' => 30,
+    '#autocomplete_path' => 'slug_title/autocomplete',
+    '#default_value' => $_GET['title'],
+  );
+  $form['items_per_page'] = array(
+    '#type' => 'select',
+    '#title' => 'Items per page',
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+  );
+  $form['submit'] = array(
+    '#value' => 'Apply',
+    '#type' => 'submit',
+    '#attributes' => array('class' => array('octopus-apply')),
+    '#prefix' => '<div class = "octopus-filter-btn">',
+    '#suffix' => '<a class="octopus-reset" href="' . base_path() . 'rundown/listing">Reset</a></div>',
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_submit()
+ * {@inheritdoc}
+ */
+function itg_octopus_api_form_submit($form, &$form_state) {
+  $form_state['redirect'] = array(
+    'rundown/listing',
+    array(
+      'query' => array(
+        'title' => $form_state['values']['title'],
+        'items_per_page' => $form_state['values']['items_per_page'],
+      ),
+    ),
+  );
 }

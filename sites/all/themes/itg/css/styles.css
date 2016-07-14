@@ -64,7 +64,7 @@ h1, h2, h3, h4 {
 }
 
 /* line 41, ../sass/styles.scss */
-.pdb-10, .success-message, .messages--status, #block-formblock-ask-an-expert h2, #comments .comment .submitted {
+.pdb-10, .success-message, .messages--status, #block-formblock-ask-an-expert h2, #comments .comment {
   padding-bottom: 10px;
 }
 
@@ -142,7 +142,7 @@ h1, h2, h3, h4 {
   white-space: nowrap;
 }
 /* line 93, ../sass/styles.scss */
-.btn:hover, .page-user form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover, .question-container .form-submit:hover, #content .node-form .form-actions .form-submit:hover, #content #comments .comment-form .form-actions .form-submit:hover, #comments #content .comment-form .form-actions .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover {
+.btn:hover, .page-user form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover, .question-container .form-submit:hover, #content .node-form .form-actions .form-submit:hover, #content #comments .comment-form .form-actions .form-submit:hover, #comments #content .comment-form .form-actions .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit:hover {
   background-color: #286090;
   border-color: #204d74;
   color: #fff;
@@ -520,7 +520,7 @@ input[type="text"], select, input[type="password"] {
   color: #ee4d4d;
 }
 /* line 428, ../sass/styles.scss */
-.btn-cancel:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover {
+.btn-cancel:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit:hover {
   background-color: #fff;
   border: 1px solid #ee4d4d;
   color: #ee4d4d;
@@ -689,44 +689,61 @@ input[type="text"], select, input[type="password"] {
   margin: 15px 0;
   padding: 8px 20px;
 }
-/* line 563, ../sass/styles.scss */
+/* line 561, ../sass/styles.scss */
+#comments .comment {
+  margin-top: 10px;
+}
+/* line 565, ../sass/styles.scss */
 #comments .comment ul.links {
   position: absolute;
   right: 0;
   top: 0;
 }
-/* line 568, ../sass/styles.scss */
+/* line 570, ../sass/styles.scss */
 #comments .comment ul.links a {
   color: #337ab7;
   text-decoration: none;
+  text-transform: capitalize;
 }
-/* line 571, ../sass/styles.scss */
+/* line 574, ../sass/styles.scss */
 #comments .comment ul.links a:hover {
   text-decoration: underline;
 }
-/* line 576, ../sass/styles.scss */
+/* line 579, ../sass/styles.scss */
 #comments .comment .submitted {
   font-size: 12px;
   color: #8d8d8d;
+  padding-bottom: 5px;
 }
-/* line 580, ../sass/styles.scss */
+/* line 583, ../sass/styles.scss */
 #comments .comment .submitted .username {
   color: #337ab7;
 }
-/* line 584, ../sass/styles.scss */
+/* line 587, ../sass/styles.scss */
 #comments .comment.comment-unpublished {
   padding: 10px;
 }
-
 /* line 593, ../sass/styles.scss */
+#comments .comment mark {
+  position: absolute;
+  right: 30px;
+  top: 5px;
+  padding: 0 5px;
+}
+/* line 599, ../sass/styles.scss */
+#comments .comment .comment-reply {
+  text-transform: capitalize;
+}
+
+/* line 605, ../sass/styles.scss */
 [class*="node-type-"] .tabs-primary {
   display: none;
 }
-/* line 594, ../sass/styles.scss */
+/* line 606, ../sass/styles.scss */
 [class*="node-type-"] .node {
   padding: 20px;
 }
-/* line 596, ../sass/styles.scss */
+/* line 608, ../sass/styles.scss */
 [class*="node-type-"] .node h2 {
   background-color: #fefafb;
   border-top: 1px solid #d9d9d9;
@@ -736,38 +753,38 @@ input[type="text"], select, input[type="password"] {
   font-size: 18px;
   margin: 15px 0;
 }
-/* line 605, ../sass/styles.scss */
+/* line 617, ../sass/styles.scss */
 [class*="node-type-"] .node .field {
   padding: 5px 30px;
 }
-/* line 609, ../sass/styles.scss */
+/* line 621, ../sass/styles.scss */
 [class*="node-type-"] .node .field .field {
   padding: 0;
 }
-/* line 612, ../sass/styles.scss */
+/* line 624, ../sass/styles.scss */
 [class*="node-type-"] .node .field .field-label {
   width: 220px;
   padding-right: 20px;
 }
-/* line 617, ../sass/styles.scss */
+/* line 629, ../sass/styles.scss */
 [class*="node-type-"] .node .field .field-items {
   overflow: hidden;
 }
-/* line 620, ../sass/styles.scss */
+/* line 632, ../sass/styles.scss */
 [class*="node-type-"] .node .field .field-items .file a {
   color: #1fb5ad;
 }
 
-/* line 627, ../sass/styles.scss */
+/* line 639, ../sass/styles.scss */
 .comm-ques {
   background-color: #fffddf;
 }
 
-/* line 632, ../sass/styles.scss */
+/* line 644, ../sass/styles.scss */
 .file-widget span.file img {
   vertical-align: top;
 }
-/* line 635, ../sass/styles.scss */
+/* line 647, ../sass/styles.scss */
 .file-widget span.file a {
   display: inline-block;
   max-width: 170px;
@@ -777,11 +794,11 @@ input[type="text"], select, input[type="password"] {
   white-space: nowrap;
   color: #2f2f2f;
 }
-/* line 645, ../sass/styles.scss */
+/* line 657, ../sass/styles.scss */
 .file-widget span.file-size {
   vertical-align: top;
 }
-/* line 648, ../sass/styles.scss */
+/* line 660, ../sass/styles.scss */
 .file-widget .form-submit[value="Remove"] {
   background: transparent none repeat scroll 0 0;
   border: medium none;
@@ -792,21 +809,21 @@ input[type="text"], select, input[type="password"] {
   top: 0;
 }
 
-/* line 661, ../sass/styles.scss */
+/* line 673, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-type-textfield {
   padding: 0;
   margin: 0;
   max-width: 350px;
 }
-/* line 662, ../sass/styles.scss */
+/* line 674, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-type-textfield label {
   display: none;
 }
-/* line 666, ../sass/styles.scss */
+/* line 678, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-type-textfield + .form-type-textfield {
   margin-top: 10px !important;
 }
-/* line 670, ../sass/styles.scss */
+/* line 682, ../sass/styles.scss */
 .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   border: none;
   background: none;
@@ -816,15 +833,15 @@ input[type="text"], select, input[type="password"] {
   left: 775px;
   top: 7px;
 }
-/* line 679, ../sass/styles.scss */
+/* line 691, ../sass/styles.scss */
 .form-managed-file .image-widget-data div.description {
   padding-left: 0 !important;
 }
-/* line 683, ../sass/styles.scss */
+/* line 695, ../sass/styles.scss */
 .form-managed-file .image-preview {
   max-width: 150px;
 }
-/* line 686, ../sass/styles.scss */
+/* line 698, ../sass/styles.scss */
 .form-managed-file .image-preview .image-fullname {
   font-size: 12px;
   width: 150px;
@@ -833,35 +850,35 @@ input[type="text"], select, input[type="password"] {
   overflow: hidden;
   margin-top: 5px;
 }
-/* line 693, ../sass/styles.scss */
+/* line 705, ../sass/styles.scss */
 .form-managed-file .image-preview .image-fullname .file-icon {
   display: none;
 }
-/* line 696, ../sass/styles.scss */
+/* line 708, ../sass/styles.scss */
 .form-managed-file .image-preview .image-fullname a {
   color: #2f2f2f;
   text-decoration: none;
 }
 
-/* line 703, ../sass/styles.scss */
+/* line 715, ../sass/styles.scss */
 .slider {
   width: 820px;
   margin: 20px auto;
 }
 
-/* line 704, ../sass/styles.scss */
+/* line 716, ../sass/styles.scss */
 .tv-schedule {
   max-width: 820px;
 }
 
-/* line 705, ../sass/styles.scss */
+/* line 717, ../sass/styles.scss */
 .tv-schedule .slick-list {
   display: inline-block;
   width: 100%;
   vertical-align: top;
 }
 
-/* line 706, ../sass/styles.scss */
+/* line 718, ../sass/styles.scss */
 .tv-schedule-time .slick-slide span {
   display: block;
   padding: 10px;
@@ -869,17 +886,17 @@ input[type="text"], select, input[type="password"] {
   border-left: 1px solid #d9d9d9;
 }
 
-/* line 707, ../sass/styles.scss */
+/* line 719, ../sass/styles.scss */
 .tv-schedule-time .slick-slide:first-child span {
   border-left: none;
 }
 
-/* line 708, ../sass/styles.scss */
+/* line 720, ../sass/styles.scss */
 .tv-schedule-time {
   border: 1px solid #d9d9d9;
 }
 
-/* line 709, ../sass/styles.scss */
+/* line 721, ../sass/styles.scss */
 .tv-schedule .slick-arrow {
   position: absolute;
   top: 0;
@@ -893,29 +910,29 @@ input[type="text"], select, input[type="password"] {
   cursor: pointer;
 }
 
-/* line 710, ../sass/styles.scss */
+/* line 722, ../sass/styles.scss */
 .tv-schedule .slick-prev {
   right: 100%;
   border-color: transparent #d9d9d9 transparent transparent;
 }
 
-/* line 711, ../sass/styles.scss */
+/* line 723, ../sass/styles.scss */
 .tv-schedule .slick-next {
   left: 100%;
   border-color: transparent transparent transparent #d9d9d9;
 }
 
-/* line 712, ../sass/styles.scss */
+/* line 724, ../sass/styles.scss */
 .tv-schedule-news .slick-slide span {
   display: block;
 }
 
-/* line 713, ../sass/styles.scss */
+/* line 725, ../sass/styles.scss */
 .tv-schedule-news {
   border: 1px solid #d9d9d9;
 }
 
-/* line 714, ../sass/styles.scss */
+/* line 726, ../sass/styles.scss */
 .tv-schedule-news .tv-schedule-task span {
   padding: 10px;
   border: 1px solid #d9d9d9;

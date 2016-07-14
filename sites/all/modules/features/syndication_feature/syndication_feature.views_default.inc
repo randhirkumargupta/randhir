@@ -812,10 +812,12 @@ function syndication_feature_views_default_views() {
     5 => '5',
     6 => '6',
     20 => '20',
+    10 => '10',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -936,7 +938,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  /* Field: Broken/missing handler */
+  /* Field: Nodequeue: All queues */
   $handler->display->display_options['fields']['nodequeue_all_queues']['id'] = 'nodequeue_all_queues';
   $handler->display->display_options['fields']['nodequeue_all_queues']['table'] = 'node';
   $handler->display->display_options['fields']['nodequeue_all_queues']['field'] = 'nodequeue_all_queues';
@@ -1072,6 +1074,13 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No.';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -1107,7 +1116,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['label'] = 'Node Id';
+  $handler->display->display_options['fields']['nid']['label'] = 'Pattern Id';
   /* Field: Content: Syndication feed content */
   $handler->display->display_options['fields']['field_syndication_feed_content']['id'] = 'field_syndication_feed_content';
   $handler->display->display_options['fields']['field_syndication_feed_content']['table'] = 'field_data_field_syndication_feed_content';
@@ -1182,6 +1191,7 @@ function syndication_feature_views_default_views() {
     3 => '3',
     4 => '4',
     7 => '7',
+    10 => '10',
     9 => '9',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
@@ -1256,6 +1266,13 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No.';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';

@@ -38,7 +38,7 @@ function feature_for_ugc_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'exclude_cv' => FALSE,
-      'file_directory' => '',
+      'file_directory' => 'dailymotion_video_dir',
       'file_extensions' => 'mp4',
       'max_filesize' => '200 MB',
       'user_register_form' => FALSE,
@@ -106,7 +106,7 @@ function feature_for_ugc_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'exclude_cv' => FALSE,
-      'file_directory' => '',
+      'file_directory' => 'dailymotion_video_dir',
       'file_extensions' => 'mp4',
       'max_filesize' => '200 MB',
       'user_register_form' => FALSE,

@@ -476,17 +476,25 @@
       $(this).prev('label').hide();
     });
 
-    /* jQuery code for photogallery */
+    /* jQuery code for photo Gallery and Video Gallery */
+    
+//    $('.form-field-name-field-videogallery-video-upload .file-widget').each(function () {
+//      if ($(this).children().hasClass('form-file')) {
+//        $(this).find('.image-preview').append('<div class="image-fullname">' + fullname + '</div>');
+//      }
+//      $(this).find('.image-widget-data .file, .image-widget-data .file-size').remove();
+//    });
+    
     $('.form-field-name-field-credit-name .form-item .form-text').attr('placeholder', 'Credit Name');
-    $('.form-field-name-field-gallery-image').find('.form-text').each(function () {
+    $('.form-field-name-field-gallery-image, .field-name-field-story-expert-name').find('.form-text').each(function () {
       var plaholderText = $(this).prev().text();
       $(this).attr('placeholder', plaholderText);
     });
-    $('.form-field-name-field-gallery-image').find('.form-textarea').each(function () {
+    $('.form-field-name-field-gallery-image, .field-name-field-story-expert-description, .field-name-field-podcast-description').find('.form-textarea').each(function () {
       var plaholderText = $(this).parent().prev().text();
       $(this).attr('placeholder', plaholderText);
     });
-    $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file').each(function () {
+    $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file, .form-field-name-field-podcast-audio-upload .field-widget-image-image .form-managed-file, .form-field-name-field-videogallery-video-upload .field-widget-image-image .form-managed-file').each(function () {
       if ($(this).children().hasClass('image-preview')) {
         $(this).addClass('has-preview');
 
@@ -495,6 +503,7 @@
         $(this).removeClass('has-preview');
       }
     });
+    
     $('.form-field-name-field-gallery-image .has-preview').each(function (i) {
       var altName = "field_gallery_image[und][" + i + "][field_images][und][0][alt]";
       var titleName = "field_gallery_image[und][" + i + "][field_images][und][0][title]";
@@ -503,12 +512,39 @@
         $(this).parent().next().find('.form-text').val(altVal);
       });
     });
-    $('.form-field-name-field-gallery-image .messages--error').each(function () {
+    
+    $('.form-field-name-field-videogallery-video-upload .has-preview').each(function (i) {
+      var altName = "field_videogallery_video_upload[und][" + i + "][field_video_thumbnail][und][0][alt]";
+      var titleName = "field_videogallery_video_upload[und][" + i + "][field_video_thumbnail][und][0][title]";
+      $("input[name='" + altName + "']").keyup(function () {
+        var altVal = $(this).val();
+        $(this).parent().next().find('.form-text').val(altVal);
+      });
+    });
+    
+    $('.form-field-name-field-podcast-audio-upload .has-preview').each(function (i) {
+      var altName = "field_podcast_audio_upload[und][" + i + "][field_podcast_audio_image_upload][und][0][alt]";
+      var titleName = "field_podcast_audio_upload[und][" + i + "][field_podcast_audio_image_upload][und][0][title]";
+      $("input[name='" + altName + "']").keyup(function () {
+        var altVal = $(this).val();
+        $(this).parent().next().find('.form-text').val(altVal);
+      });
+    });
+    $('.form-field-name-field-podcast-audio-upload .file-widget, .form-field-name-field-videogallery-video-upload .file-widget').each(function (i) {
+        var hasFile = $(this).find('span').hasClass('file');
+        if(hasFile){
+            $(this).addClass('has-file');
+        } else{
+            $(this).removeClass('has-file');
+        }
+    });
+    
+    $('.form-field-name-field-gallery-image .messages--error, .field-name-field-podcast-audio-image-upload .messages--error, .field-name-field-podcast-upload-audio-file .messages--error, .field-name-field-upload-video .messages--status, .field-name-field-upload-video .messages.error, .field-name-field-video-thumbnail .messages--error').each(function () {
       if (!$(this).children().hasClass('hide-message')) {
         $(this).append('<a class="hide-message" href="javascript:;">Close</a>');
       }
     });
-    $('.form-field-name-field-gallery-image').on('click', '.hide-message', function () {
+    $('.form-field-name-field-gallery-image, .field-name-field-upload-video, .field-name-field-video-thumbnail, .field-name-field-podcast-upload-audio-file, .field-name-field-podcast-audio-image-upload').on('click', '.hide-message', function () {
       $(this).parent().remove();
     });
 
@@ -697,7 +733,7 @@ jQuery(document).ready(function(){
     
     // jQuery code for related content on edit page
     var item = [];
-    // var itemString = jQuery('#edit-field-story-kicker-text-und-0-value').val();
+//     var itemString = jQuery('#edit-field-story-kicker-text-und-0-value').val();
     var itemString = jQuery('#edit-field-common-related-content-und-0-value').val();
     if(itemString){
         item = itemString.split(",");
@@ -712,6 +748,9 @@ jQuery(document).ready(function(){
     jQuery('.checked-list').html(checkedlist);
     if(checkedlist){
         jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+    }
+    else{
+        jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
     }
     
     jQuery('.sidebar-trigger').click(function () {
@@ -736,18 +775,21 @@ jQuery(document).ready(function(){
         jQuery(this).parent().remove();
     });
     // end of code
+   
     
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {
         var item = [];
+        var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
+        if(!listLength){
+            //alert('Changes made successfully');
+            jQuery(this).parent().html('<span class="empty-checklist">No content associated for this story yet !</span>');
+        }
         jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i){
             item.push(jQuery(this).find('.item-value').text());
         });
-        var itemvalue = item.join(",");
        jQuery('#edit-field-common-related-content-und-0-value').val(item);
-      // jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
-        //console.log(itemvalue);
-        
+       alert('Changes made successfully');
     });
     // end of code
     

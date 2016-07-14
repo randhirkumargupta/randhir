@@ -15,7 +15,7 @@
                     <div class="field-items"><?php print $title; ?></div>
                 </div>
                 <?php print render($content['field_story_short_headline']); ?>
-                <?php print render($content['field_podcast_kicker_message']); ?>
+                <?php print render($content['field_story_kicker_text']); ?>
             </div>
         </div>
         

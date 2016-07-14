@@ -8,11 +8,7 @@ function it_autosave_help($path, $arg) {
   switch ($path) {
     case 'admin/help#it_autosave':
 
-      return 'Hello Auto save';
-      break;
-
-    default:
-      break;
+      return 'Hello Auto save';   
   }
 }
 
@@ -33,14 +29,14 @@ function itg_autosave_permission() {
  * Implement hook_menu()
  * {@inheridoc}
  */
-function itg_autosave_menu() { 
+function itg_autosave_menu() {
   //settings form menu  
   $items['admin/config/administration/itg_autosave'] = array(
     'title' => 'ITG Autosave Setting',
     'description' => 'Autosave settings form',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_autosave_form'),
-    'access arguments' => array('administer itg_autosave settings'),        
+    'access arguments' => array('administer itg_autosave settings'),
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_autosave.admin.inc'
   );
@@ -52,7 +48,16 @@ function itg_autosave_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_autosave.admin.inc',
   );
-  
+  // Autosave ajax callback function
+  $items['itg-autosave/nodeform'] = array(
+    'page callback' => 'itg_autosave_nodeform',
+    'page arguments' => array(2, 3),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_autosave.admin.inc',
+  );
+
+
   return $items;
 }
 
@@ -67,7 +72,7 @@ function itg_autosave_menu() {
 function itg_autosave_views_api() {
   return array(
     'api' => 3,
-    'path' => drupal_get_path('module', 'itg_autosave') . '/includes/views',    
+    'path' => drupal_get_path('module', 'itg_autosave') . '/includes/views',
   );
 }
 
@@ -76,13 +81,40 @@ function itg_autosave_views_api() {
  * 
  * {@inheritdoc}
  */
-function itg_autosave_form_alter(&$form, &$form_state, $form_id) {  
-  // Add js into form
-  $form['#attached']['js'] = array(
-    drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',       
-  );
-  
+function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
+  dpm($form);
   // Fetch form ids saved into databse for auto save feature.
   $itg_autosave_form = new ItgAutoSave();
-  $itg_autosave_form->itg_save_set_form_ids();  
+
+  // Restore data if it is available on auto saved data
+  switch ($form_id) {
+    case 'astro_node_form':
+      // Add js file for autosave ajax
+      $form['#attached']['js'] = array(
+        drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',
+      );
+      // Set form ids to js file.
+      $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);
+
+      // Retrive data is it is already set.
+      $data = $itg_autosave_form->itg_save_retrieve_form_data($form['nid']['#value'], $form['type']['#value']);      
+      $form_data = unserialize($data->form_data);      
+      //dpm($form_data);
+      $field_detail = $itg_autosave_form->itg_save_extract_fieldtype($form_data);
+      
+      $form['title']['#default_value'] = isset($form_data['title']) ? $form_data['title'] : date('M d, Y');      
+      foreach ($field_detail as $value) {
+        if ($value['fieldType'] == 'field_collection') {          
+          foreach ($form_data[$value['fieldName']]['und'] as $fcollection) {
+            //dpm($fcollection);
+          }
+        }
+        else {
+          $itg_autosave_form->itg_save_prepare_retrieve_array($form, $value['fieldName'], $form_data[$value['fieldName']], $value['fieldType']);
+        }        
+      }
+
+      break;    
+    
+  }
 }
