@@ -19,6 +19,55 @@ function itg_widget_init() {
 /**
  * {@inheritdoc}
  */
+function itg_widget_menu() {
+    $items = array();
+    $items['remove_from_widgets/%/%/%/%'] = array(
+        'page callback' => 'remove_from_widgets',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
+    return $items;
+}
+
+/**
+ * Function used for delete node from draggableviews_structure and nodequeue
+ * @param int $nid
+ * @param int $qid
+ * @param string $view_name
+ * @param string $page_name
+ */
+function remove_from_widgets($nid, $qid, $view_name, $page_name) {
+    $draggable_delete = draggable_view_node_delete($view_name, $page_name, $nid);
+    if ($draggable_delete) {
+        nodequeue_subqueue_remove_node($qid, $nid);
+        print "deleted";
+    }
+    else {
+        print "notdeleted";
+    }
+}
+
+/**
+ * Function used to delete form draggableviews_structure table
+ * @param string $view_name
+ * @param string $page_name
+ * @param int $nid
+ * @return int
+ */
+function draggable_view_node_delete($view_name, $page_name, $nid) {
+    if (!empty($view_name) && !empty($page_name) && !empty($nid)) {
+        $num_deleted = db_delete('draggableviews_structure')
+                ->condition('view_name', $view_name)
+                ->condition('view_display', $page_name)
+                ->condition('entity_id', $nid)
+                ->execute();
+        return $num_deleted;
+    }
+}
+
+/**
+ * {@inheritdoc}
+ */
 function itg_widget_block_info() {
     $blocks['section_ordering'] = array(
         'info' => t('Widget: Section Ordering'),
@@ -45,7 +94,7 @@ function itg_widget_block_view($delta = '') {
         case 'section_ordering':
             module_load_include('inc', 'itg_widget', 'includes/section-odering');
             // value is hardcoded need to be change for dyanamic functionality
-            $info['section'] = '240'; // tid of section
+            $info['section'] = '301'; // tid of section
             $info['content_type'] = 'story'; // content type machine name
             // view name which is stored in draggableviews_structure table
             $info['view_name'] = 'section_wise_content_ordering';
@@ -124,19 +173,24 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- *{@inheritdoc}
+ * {@inheritdoc}
  */
 function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo) {
     
 }
 
 /**
- *{@inheritdoc}
+ * {@inheritdoc}
  */
 function itg_widget_views_pre_render(&$view) {
     if ($view->name == "story_widget" && $view->current_display == 'page_2') {
         $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
         $header_content .= l(t('Search Content'), 'story-list-widget', array('query' => array('destination' => arg(0))));
+        $view->attachment_before = $header_content;
+    }
+    elseif ($view->name == "story_widget" && $view->current_display == 'page_1') {
+        $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content .= l(t('Back To Top Stories'), 'story-list-widget-listing', array('query' => array('destination' => arg(0))));
         $view->attachment_before = $header_content;
     }
     elseif ($view->name == "home_page_feature_widget" && $view->current_display == 'page_2') {
@@ -152,7 +206,7 @@ function itg_widget_views_pre_render(&$view) {
 }
 
 /**
- *{@inheritdoc}
+ * {@inheritdoc}
  */
 function itg_widget_theme() {
     $themes = array(
@@ -173,7 +227,7 @@ function itg_widget_theme() {
 }
 
 /**
- *{@inheritdoc}
+ * {@inheritdoc}
  */
 function get_required_data_from_entity_id($entity_id) {
     return entity_load('node', array($entity_id));
