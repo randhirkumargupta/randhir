@@ -92,6 +92,7 @@ function itg_image_croping_getimagetotag() {
 
 /**
  * This function use for remove the tags on image
+ * used in ajax request and print use for return responce to ajax request
  */
 
 function itg_image_croping_remove_image_tag() {
@@ -101,7 +102,7 @@ function itg_image_croping_remove_image_tag() {
     ->condition('id' , $tag_id , '=')
     ->execute();
      print $data;
-    die;
+    exit();
 
 }
 
@@ -124,7 +125,7 @@ function itg_image_croping_get_image_tags() {
 	$data['lists'] .= ' <li id=" ' . $record['id'] . '"><a>' . $record['tag_title'] . '</a> (<a class="remove">Remove</a>)</li>';
     }
 echo json_encode( $data );
-    die;
+    exit();
 
 }
 

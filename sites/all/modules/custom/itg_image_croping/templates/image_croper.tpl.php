@@ -217,4 +217,3 @@ $url = file_create_url($data->uri);
     
     
 </script>
-<?php die; ?>

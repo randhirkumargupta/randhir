@@ -344,7 +344,7 @@ function itgadmin_preprocess_page(&$vars) {
   }
    
   // Add tpl for related content view page
-  if (arg(0) == 'related-content') {
+  if (arg(0) == 'related-content' || arg(0) == 'getimagetocroper' || arg(0) == 'imagetotag') {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
   
