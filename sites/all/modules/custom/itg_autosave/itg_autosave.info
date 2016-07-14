@@ -1,0 +1,8 @@
+name = ITG Autosave
+description = Module will autosave content of given content type to draft state.
+core = 7.x
+
+package = ITG
+files[] = includes/itg_auto_save.inc
+files[] = includes/itg_autosave.admin.inc
+configure = admin/config/administration/itg_autosave
