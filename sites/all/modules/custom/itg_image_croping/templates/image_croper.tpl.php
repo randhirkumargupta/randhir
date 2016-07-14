@@ -110,26 +110,29 @@ $imagedata = base64_encode(file_get_contents($data->uri));
 $url = file_create_url($data->uri);
 ?>
 
-
-
-
 <div class="croper">
     <div class="first-resize">
         <?php echo $form; ?>
     </div>
 
     <button class="crop-image add-more">Crop</button>
+     <button class="original-image add-more">Use Original</button>
 </div>
 
 <!--   -->
 
 <script>
     jQuery(function() {
-        // alert(1)
         jQuery('.image-editor').cropit({
             imageState: {
                 src: '<?php echo $url; ?>',
+               
             },
+            mageBackgroundBorderWidth: 10,
+              initialZoom: 'image',
+              maxZoom: 10,
+              quality: 1,
+              minZoom: 'fill',
             imageBackground: true
 
         });
@@ -162,11 +165,25 @@ $url = file_create_url($data->uri);
 
                 var objdata = jQuery.parseJSON(data);
                 var image_fiedlid = objdata.fid;
-                var htmls = jQuery(window.opener.document).find('[name="' + field_name + '[und][0][fid]"]').val(image_fiedlid);
+               if(image_fiedlid!="")
+               {
+                   // get the image tagging page
+                    jQuery.ajax({
+                    url: Drupal.settings.basePath + 'imagetotag',
+                    type: 'post',
+                    data: {'fid': image_fiedlid, 'field_name': field_name},
+                    success: function(data) {
+                    jQuery('#file-preview').html(data);
+                    hideloader();
+                    
+                    },
+                    error: function(xhr, desc, err) {
+                    console.log(xhr);
+                    console.log("Details: " + desc + "\nError:" + err);
+                    }
+                    }); 
+               }
 
-                window.opener.jQuery("body").find("input[name='" + field_name + "[und][0][filefield_itg_image_repository][button]").addClass('progress-disabled');
-                window.opener.jQuery("body").find("input[name='" + field_name + "[und][0][filefield_itg_image_repository][button]").trigger('mousedown');
-                window.close();
 
             },
             error: function(xhr, desc, err) {
@@ -176,5 +193,28 @@ $url = file_create_url($data->uri);
         }); // end ajax call
 
     });
+    
+    
+      jQuery('.original-image').click(function() {
+        showloader();
+        var field_name = jQuery('#data_field_name').val();
+        var image_fiedlid='<?php echo $data->fid?>';
+         jQuery.ajax({
+                    url: Drupal.settings.basePath + 'imagetotag',
+                    type: 'post',
+                    data: {'fid': image_fiedlid, 'field_name': field_name},
+                    success: function(data) {
+                    jQuery('#file-preview').html(data);
+                    hideloader();
+                    
+                    },
+                    error: function(xhr, desc, err) {
+                    console.log(xhr);
+                    console.log("Details: " + desc + "\nError:" + err);
+                    }
+                    }); 
+    });
+    
+    
 </script>
 <?php die; ?>
