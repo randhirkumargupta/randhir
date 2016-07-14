@@ -130,12 +130,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       unset($form['field_pti_idea_status']['und']['#options']['_none']);
 
       //If role is anchor, editor and co-ordinator, display fields to set rule and change status
-      $idea_review_flag = FALSE;
-      foreach ($user->roles as $roles) {
-        if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
-          $idea_review_flag = TRUE;
-        }
-      }
+      $idea_review_flag = itg_print_team_check_approval_users();
 
       //Enable/Disable fields according to satus and role
       if ($form['#node']->nid) {
@@ -158,6 +153,11 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $form['field_survey_end_date']['#access'] = FALSE;
           $form['field_pti_issue']['#access'] = FALSE;
           $form['field_pti_magazine']['#access'] = FALSE;
+        }
+        
+        //Disable change status radio button if status is "Approved" OR "Rejected"
+        if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Rejected') {
+          $form['field_pti_idea_status']['#disabled'] = TRUE;
         }
       }
       else {
@@ -185,40 +185,49 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
 
     //Add form to associate story with issue and magazine
     case 'views_form_manage_print_team_page':
-      //Array used in itg_print_team.js
-      $settings = array();
-      $settings['base_url'] = $base_url;
-
-      drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
-      //Add JS for itg_print_team
-      drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
       
-      $issue_options = itg_print_team_issue_options();
-
-      $form['pti_issue'] = array(
-          '#type' => 'select',
-          '#title' => t('Issue'),
-          '#options' => $issue_options,
-          '#default_value' => '_none',
-          '#weight' => 98,
-      );
+      $filtered_result =  count($form['#substitutions']['#value']);
       
-      $form['pti_magazine'] = array(
-        '#type' => 'select',
-        '#title' => 'Magazine',
-        '#options' => itg_print_team_get_magazine_title(),
-        '#default_value' => '_none',
-        '#weight' => 99,
-        '#attributes' => array('class' => array('associate-pti-magazine')),
-      );
+      //Check for story approval users
+      $idea_review_flag = itg_print_team_check_approval_users();
+      
+      if ($idea_review_flag && $filtered_result) {
+        //Array used in itg_print_team.js
+        $settings = array();
+        $settings['base_url'] = $base_url;
 
-      $form['submit'] = array(
-        '#type' => 'submit',
-        '#value' => t('Submit'),
-        '#weight' => 100,
-      );
-      $form['#validate'][] = 'itg_print_team_association_validate';
-      $form['submit']['#submit'][] = 'itg_print_team_association_submit';
+        drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
+
+        //Add JS for itg_print_team
+        drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
+
+        $issue_options = itg_print_team_issue_options();
+
+        $form['pti_issue'] = array(
+            '#type' => 'select',
+            '#title' => t('Issue'),
+            '#options' => $issue_options,
+            '#default_value' => '_none',
+            '#weight' => 98,
+        );
+
+        $form['pti_magazine'] = array(
+            '#type' => 'select',
+            '#title' => 'Magazine',
+            '#options' => itg_print_team_get_magazine_title(),
+            '#default_value' => '_none',
+            '#weight' => 99,
+            '#attributes' => array('class' => array('associate-pti-magazine')),
+        );
+
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => t('Submit'),
+            '#weight' => 100,
+        );
+        $form['#validate'][] = 'itg_print_team_association_validate';
+        $form['submit']['#submit'][] = 'itg_print_team_association_submit';
+      }
       break;
 
     case 'views_form_strory_menegment_page_1':
@@ -239,8 +248,8 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
  * Custom submit callback for alter message after operation.
  */
 function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
-  global $user;
-
+  
+  // Unset drupal default messages
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
@@ -248,43 +257,21 @@ function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
   // Unset destination
   unset($_GET['destination']);
 
-  //Chck for edit and add node
+  // Check for edit and add node
   if (arg(2) == 'edit') {
-    
-    /*
-    //Update issue fields with custom issue field in form_alter
-    $node = node_load($form_state['values']['nid']);
-    $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $form_state['values']['field_pti_issue'];
-    field_attach_update('node', $node); */
-
-    //Set redirection URL according to user role
-    $idea_review_flag_user = FALSE;
-    foreach ($user->roles as $roles) {
-      if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
-        $idea_review_flag_user = TRUE;
-      }
-    }
-    if ($idea_review_flag_user) {
-      $form_state['redirect'] = 'manage-print-team';
-    }
-    else {
-      $form_state['redirect'] = 'submit-idea';
-    }
     $op = 'updated successfully';
   }
   else {
     $op = 'submit successfully';
-    $form_state['redirect'] = 'submit-idea';
   }
-
+  
+  $form_state['redirect'] = 'manage-print-team';
   drupal_set_message(t('Your idea <strong>@ideatitle</strong> has been @operation.', array('@ideatitle' => $form_state['node']->title, '@operation' => $op)));
 }
 
 /**
- * After build function for print team
- * @param array $form
- * @param array $form_state
- * @return array
+ * Implements hook_form_after_build
+ * {@inheritdoc}
  */
 function itg_print_team_form_after_build($form, &$form_state) {
   global $user, $base_url;
@@ -352,6 +339,23 @@ function itg_print_team_form_views_exposed_form_alter(&$form, &$form_state, $for
     //Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/print_team_integration/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Idea Headline'));
+    $form['uid']['#attributes'] = array('placeholder' => t('Posted By'));
+  }
+}
+
+/**
+ * Implements hook_views_query_alter
+ * {@inheritdoc}
+ */
+function itg_print_team_views_query_alter(&$view, &$query) {
+  global $user;
+  
+  // Unset Contextual filter for story approval users
+  if ($view->name == 'manage_print_team') {
+    $idea_review_flag_user = itg_print_team_check_approval_users();
+    if ($idea_review_flag_user) {
+      unset($query->where[0]['conditions']);
+    }
   }
 }
 
@@ -396,12 +400,13 @@ function itg_print_team_node_update($node) {
       //Insert in to print team cron table to send mail
       if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
         $check_for_nid = itg_print_team_check_cron_nid($node->nid);
+        
         if (!$check_for_nid) {
           $query = db_insert('itg_cron_print_team');
           $query->fields(array(
               'nid' => $node->nid,
               'type' => $node->type,
-              'scheduled_time' => strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']),
+              'scheduled_time' => strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours'),
               'status' => 0,
               'created' => time()
           ));
@@ -675,7 +680,7 @@ function itg_print_team_expiry_notification_callback() {
           ->condition('c.status', 0, '=');
   $result = $query->execute();
 
-  //Fetch node to send notification
+  // Fetch node to send notification
   while ($record = $result->fetchAssoc()) {
     $end_date = $record['scheduled_time'];
     $diff = $end_date - $current_time;
@@ -701,4 +706,21 @@ function itg_print_team_check_cron_nid($nid) {
             ->range(0, 1)->execute()->fetchAssoc();
   }
   return isset($record['nid']) ? $record['nid'] : FALSE;
+}
+
+/**
+ * Check for approval users
+ * @global array $user
+ * @return boolean
+ */
+function itg_print_team_check_approval_users(){
+  
+  global $user;
+  $idea_review_flag_user = FALSE;
+  foreach ($user->roles as $roles) {
+    if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
+      $idea_review_flag_user = TRUE;
+    }
+  }
+  return $idea_review_flag_user;
 }
