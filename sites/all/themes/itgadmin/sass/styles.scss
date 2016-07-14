@@ -4643,7 +4643,7 @@ div.node{
       td:nth-child(2){
         @extend .pos-rel;
         @extend .fleft;
-        min-height: 300px;
+        min-height: 338px;
         padding: 0;
         @extend .full;
         border: 1px solid #d9d9d9;
@@ -4675,6 +4675,9 @@ div.node{
           height: 28px;
           line-height: 18px;
           font-size: 12px;
+        }
+        textarea{
+            height: 48px;
         }
         .form-type-textfield, .form-type-checkboxes, .form-type-textarea, .form-type-managed-file{
           margin: 10px 0;
@@ -4868,7 +4871,7 @@ div.node{
       td:nth-child(2){
         @extend .pos-rel;
         @extend .fleft;
-        min-height: 260px;
+        min-height: 280px;
         padding: 0;
         @extend .full;
         border: 1px solid #d9d9d9;
@@ -4900,6 +4903,9 @@ div.node{
           height: 28px;
           line-height: 18px;
           font-size: 12px;
+        }
+        textarea{
+            height: 48px;
         }
         .form-type-textfield, .form-type-checkboxes, .form-type-textarea, .form-type-managed-file{
           margin: 10px 0;
@@ -5241,6 +5247,25 @@ div.node{
             > legend:after{
                 @extend .astrick;
             }
+        }
+    }
+}
+
+[id*="views-form-strory-menegment-page"]{
+    .btn-generate-xml{
+        @extend .add-more;
+        @extend .fleft;
+        margin: 10px 10px 0 0;
+        height: 32px;
+        .form-actions{
+            margin-top: 10px;
+        }
+    }
+}
+[id*="views-exposed-form-section-wise-content-ordering-page"]{
+    .form-item-field-story-category-tid .form-select + div.description{
+        div.description{
+            left: 210px;
         }
     }
 }
