@@ -88,6 +88,7 @@ function itg_image_croping_getimagetotag() {
     return theme('image_tagging', array('data' => $file,
         'field_name' => $_POST['field_name']
     ));
+   
 }
 
 /**

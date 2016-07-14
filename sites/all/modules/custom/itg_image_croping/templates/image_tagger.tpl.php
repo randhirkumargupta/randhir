@@ -132,6 +132,7 @@
     </div> 
      <button class="add-more maptofield">Next</button>
 </div>
+<script type="text/javascript" src="<?php echo base_path() . 'sites/all/modules/custom/itg_image_croping/js/jquery.min.js'; ?>"></script>
 
 <script type="text/javascript">
     jQuery(document).ready(function() {
@@ -228,9 +229,6 @@
             });
         });
 
-//        // load the tags for the image when page loads.
-//        var img = jQuery('#imgtag').find('img');
-//        var id = jQuery(img).attr('id');
 
         viewtag(image_fiedlid); // view all tags available on page load
 //
