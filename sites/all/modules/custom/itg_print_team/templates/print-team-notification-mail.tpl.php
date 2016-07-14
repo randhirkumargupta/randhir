@@ -1,9 +1,11 @@
 <?php 
 /**
  * Template file to send mail on idea submission
- * @file: print-team-idea-association-mail.tpl.php
+ * @file: print-team-idea-status-mail.tpl.php
  */
+
 global $base_url;
+$idea_link = $base_url.'/node/'.$node->nid.'/edit';
 
 ?> 
 
@@ -19,24 +21,24 @@ global $base_url;
       <tr>
         <td style="padding: 10px 20px;">Dear User,</td>
       </tr>
-      <?php if ($op_type == 'idea_update') { ?>
+      
       <tr>
-        <td style="padding: 10px 20px;">An idea "<strong><?php echo $node->title; ?></strong>" has been update.</td>
+        <td style="padding: 10px 20px;">Your idea is about to expire.</td>
       </tr>
-      <?php } else { ?>
+      
       <tr>
-        <td style="padding: 10px 20px;">An idea "<strong><?php echo $node->title; ?></strong>" has been converted to story.</td>
+        <td style="padding: 10px 20px;">Current status: <strong><?php echo $node->field_pti_idea_status[LANGUAGE_NONE][0]['value']; ?></strong></td>
       </tr>
-      <?php } ?>
 
       <tr>
-        <td style="padding: 10px 20px;">Associated Issue and Magazine:</td>
+        <td style="padding: 10px 20px;">Words limit to write story: <?php echo $node->field_pti_words_limit[LANGUAGE_NONE][0]['value']; ?></td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Issue: <strong><?php echo date('d/m/Y', strtotime(itg_common_get_node_title($node->field_pti_issue[LANGUAGE_NONE][0]['target_id']))); ?></strong></td>
+        <td style="padding: 10px 20px;">Last Date of submission: <?php echo date('d/m/Y', strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])); ?></td>
       </tr>
+      
       <tr>
-        <td style="padding: 10px 20px;">Magazine: <strong><?php echo itg_common_get_node_title($node->field_pti_magazine[LANGUAGE_NONE][0]['target_id']); ?></strong></td>
+        <td style="padding: 10px 20px;"><?php echo l('Click here to update', $idea_link, array('attributes' => array('target' => '_blank'))); ?></td>
       </tr>
 
       <tr>
