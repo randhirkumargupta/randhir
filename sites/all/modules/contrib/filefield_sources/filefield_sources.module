@@ -37,7 +37,7 @@ function filefield_sources_theme() {
   $theme['filefield_sources_list'] = array(
     'arguments' => array('sources' => NULL),
   );
-//print_r($theme);die;
+
   return $theme;
 }
 
