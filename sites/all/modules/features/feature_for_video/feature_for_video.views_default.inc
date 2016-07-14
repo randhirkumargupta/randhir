@@ -55,6 +55,7 @@ function feature_for_video_views_default_views() {
     'field_story_category' => 'field_story_category',
     'nothing' => 'nothing',
     'changed' => 'changed',
+    'status' => 'status',
     'view_node' => 'nothing_1',
     'edit_node' => 'nothing_1',
     'delete_node' => 'nothing_1',
@@ -68,7 +69,7 @@ function feature_for_video_views_default_views() {
       'empty_column' => 0,
     ),
     'title' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -112,6 +113,13 @@ function feature_for_video_views_default_views() {
     ),
     'changed' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'status' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
