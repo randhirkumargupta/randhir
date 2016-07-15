@@ -16,13 +16,14 @@ $itg-font-medium:500;
 $itg-font-blod:700;
 
 /*Colors used in Indiatoday site*/
-
 $tab-primary-color: #818181 !default;
 $tab-active-color: #b70c09 !default;
+$tab-list-color: #565555 !default;
 
 /*Background Colors used in Indiatoday site*/
 $tab-primary-bg: #e4e4e4 !default;
 $tab-active-bg: #fff !default;
+$tab-icon-bg: #959595 !default;
 
 /*Border Colors used in Indiatoday site*/
 $tab-primary-border-color: #e4e4e4 !default;
@@ -45,9 +46,12 @@ $black-bg: #000000 !default;
 $red-bg: #a00606 !default;
 $yellow-bg: #ffc106 !default;
 $gray-bg: #f2f2f2 !default;
-$off-white-bg: #f2f2f2 !default;
+$off-white-bg: #f8f8f8 !default;
 
 /*navigation font in Indiatoday site*/
 $itg-nav-fontsize: 14px;
 $itg-nav-fontcolor: #e0e0e0;
 $itg-nav-bordercolor: #680101;
+
+/*Full radius in Indiatoday site*/
+$full-radius:50%;

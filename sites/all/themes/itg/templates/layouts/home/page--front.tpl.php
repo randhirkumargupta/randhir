@@ -139,7 +139,7 @@ if ($theme != 'itgadmin') {
         <div class="row">
             <div class="col-md-12">
                 <div class="droppable big-news" id="itg-block-1">
-                  <span><?php print $widget_data['itg-block-1']['block_title']; ?></span>
+                        <span><?php print $widget_data['itg-block-1']['block_title']; ?></span>
                     <?php print $widget_data['itg-block-1']['widget']; ?>
                 </div>                
             </div>
@@ -149,7 +149,9 @@ if ($theme != 'itgadmin') {
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="droppable top-n-most-popular-stories" id="itg-block-2">
-                    <span><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                    <div class="tab-buttons">
+                        <span class="active"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                    </div>
                     <?php print $widget_data['itg-block-2']['widget']; ?>
                 </div>            
             </div>

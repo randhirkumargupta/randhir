@@ -55,3 +55,55 @@
   left:$left;
   z-index:$z-index;
 }
+/* Calculate-width function */
+@function calculate-width ($col-span) {
+    @return 100% / $col-span;
+}
+
+/* Tab Button mixins */
+@mixin tab-buttons {
+     span{
+        @include itg-font($itg-roboto, $itg-font-medium);
+        background: $tab-primary-bg;
+        text-transform: uppercase;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+        color: $tab-primary-color;
+        width: calculate-width(2);
+        display: block;
+        @include fleft;
+        &.active{
+            background: $white-color;
+            color: $red-color;
+            border-left: 1px solid $tab-primary-border-color;
+            border-right: 1px solid $tab-primary-border-color;
+            border-top: 3px solid $red-color;
+        }
+    }
+}
+/* Tab Listing mixins */
+@mixin tab-listing {
+    @include pos(relative);
+        a{
+            color: $tab-list-color;
+            padding: 15px 15px 15px 20px;
+            display: block;
+            border-bottom: 1px solid $tab-primary-border-color;
+            &:hover{
+                background: $off-white-bg;
+            }
+        }
+        &:last-child a{
+            border-bottom: none;
+        }
+        &:before{
+           @include pos(absolute,22px,null,null,9px);
+           content: '';
+           border-radius: $full-radius;
+           background: $tab-icon-bg;
+           height: 5px;
+           width: 5px;
+        }
+}
