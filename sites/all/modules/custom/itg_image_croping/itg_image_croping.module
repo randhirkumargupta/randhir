@@ -32,6 +32,13 @@ function itg_image_croping_menu() {
         'access arguments' => array('access content'),
     );
     
+    $items['imagetagedit'] = array(
+        'page callback' => 'itg_image_croping_imagetagedit', // make image tags edit
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+    
+    
      $items['savetags'] = array(
         'page callback' => 'itg_image_croping_save_tags', // save the tags on images.
         'type' => MENU_CALLBACK,
@@ -92,6 +99,21 @@ function itg_image_croping_getimagetotag() {
 }
 
 /**
+ * This function use for make image tags edit or append
+ * @return type
+ */
+function itg_image_croping_imagetagedit() {
+    $image_id = $_POST['fid'];
+    $file = file_load($image_id);
+    return theme('image_taggingedit', array('data' => $file,
+        'field_name' => $_POST['field_name']
+    ));
+   
+}
+
+
+
+/**
  * This function use for remove the tags on image
  * used in ajax request and print use for return responce to ajax request
  */
@@ -122,8 +144,8 @@ function itg_image_croping_get_image_tags() {
        $result = $query->execute();
 
     while ($record = $result->fetchAssoc()) {
-        $data['boxes'] .= ' <div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record[ 'tag_title' ] . '</div></div>';
-	$data['lists'] .= ' <li id=" ' . $record['id'] . '"><a>' . $record['tag_title'] . '</a> (<a class="remove">Remove</a>)</li>';
+        $data['boxes'] .= ' <div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record[ 'tag_title' ] . '</div><a  class="remove">Remove</a>)</div>';
+	$data['lists'] .= ' <li id=" rem_' . $record['id'] . '"><a>' . $record['tag_title'] . '</a> (<a class="remove">Remove</a>)</li>';
     }
 echo json_encode( $data );
     exit();
@@ -183,6 +205,9 @@ function itg_image_croping_theme($existing, $type, $theme, $path) {
         ),
         'image_tagging' => array(
             'template' => 'templates/image_tagger',
+        ),
+        'image_taggingedit'=> array(
+            'template' => 'templates/image_taggeredit',
         ),
         
     );

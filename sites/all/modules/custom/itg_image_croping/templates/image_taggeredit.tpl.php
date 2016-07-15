@@ -115,10 +115,27 @@
         width: 100%;
         float: left;
     }
+    .light-box{
+ position: fixed;
+ top: 0;
+ left: 0;
+ height: 100%;
+ width: 100%;
+ background: rgba(0, 0, 0, 0.7);
+ color: #fff;
+ }
+ .light-box-content{
+ top: 50%;
+ position: absolute;
+ left: 50%;
+ }
+    
 
 </style>	
 
 <?php $url = file_create_url($data->uri);?>
+ <div class="light-box">
+ <div class="light-box-content">
 <div id="container">
     <div id="imgtag"> 
 
@@ -130,8 +147,11 @@
         <ol> 
         </ol> 
     </div> 
-     <button class="add-more maptofield">Next</button>
+    
 </div>
+     </div>
+
+ </div>
 <script type="text/javascript" src="<?php echo base_path() . 'sites/all/modules/custom/itg_image_croping/js/jquery.min.js'; ?>"></script>
 
 <script type="text/javascript">
@@ -153,7 +173,7 @@
         });
 
         // Save button click - save tags
-    jQuery('#file-preview').on('click', '#btnsavetag', function() {
+     jQuery(document).on('click', '#tagit #btnsavetag', function() {
             name = jQuery('#tagname').val();
              tagurl = jQuery('#tagurl').val();
            
@@ -211,7 +231,7 @@
 
         // Remove tags.
         jQuery('#taglist').on('click', '.remove', function() {
-           id = jQuery(this).parent().attr("id");
+            id = jQuery(this).parent().attr("id");
             id=id.split('_');
             id=id[1];
             // Remove the tag
