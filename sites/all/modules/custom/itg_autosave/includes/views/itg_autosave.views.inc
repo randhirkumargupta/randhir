@@ -2,17 +2,23 @@
 
 /**
  * @file
- * itg_social_media.views.inc file for adding custom table to views.
+ * Itg_social_media.views.inc file for adding custom table to views.
  */
-function itg_autosave_views_data() {  
-  $data['itg_autosave_forms']['table']['group'] = t('Autosave Forms Id');  
+
+/**
+ * Implements hook_views_data().
+ *
+ * {@inheritdoc}.
+ */
+function itg_autosave_views_data() {
+  $data['itg_autosave_forms']['table']['group'] = t('Autosave Forms Id');
   $data['itg_autosave_forms']['table']['base'] = array(
     'field' => 'id',
     'title' => t('Autosave Forms Id'),
     'help' => t('Node form ids are saved into database.'),
     'weight' => -10,
-  );  
-  
+  );
+
   // Plain text field.
   $data['itg_autosave_forms']['form_name'] = array(
     'title' => t('Form Id'),
@@ -31,7 +37,7 @@ function itg_autosave_views_data() {
       'handler' => 'views_handler_argument_string',
     ),
   );
-  
+
   // Example timestamp field.
   $data['itg_autosave_forms']['autosave_time'] = array(
     'title' => t('Time interval'),
