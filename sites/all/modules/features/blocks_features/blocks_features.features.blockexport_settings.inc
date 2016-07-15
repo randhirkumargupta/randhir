@@ -7249,8 +7249,9 @@ node/*/edit',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'node/add/podcast
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -7263,8 +7264,9 @@ node/*/edit',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'node/add/videogallery
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -7443,12 +7445,13 @@ draft-manage-poll',
   'module' => 'itg_podcast',
   'delta' => 'podcast_tab_form_block',
   'theme' => 'itgadmin',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'form_tab',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'node/add/podcast
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -7457,12 +7460,13 @@ draft-manage-poll',
   'module' => 'itg_videogallery',
   'delta' => 'videogallery_tab_form_block',
   'theme' => 'itgadmin',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'form_tab',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'node/add/videogallery
+node/*/edit',
   'title' => '',
   'cache' => 8,
 );
@@ -7758,6 +7762,156 @@ draft-manage-astro',
   'title' => '',
   'cache' => 1,
 );
+  $export['block'][] = array(
+  'bid' => 546,
+  'module' => 'itg_videogallery',
+  'delta' => 'videogallery_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/videogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 547,
+  'module' => 'itg_videogallery',
+  'delta' => 'videogallery_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/videogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 548,
+  'module' => 'itg_videogallery',
+  'delta' => 'videogallery_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/videogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 549,
+  'module' => 'itg_videogallery',
+  'delta' => 'videogallery_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/videogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 550,
+  'module' => 'itg_videogallery',
+  'delta' => 'videogallery_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/videogallery
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 551,
+  'module' => 'itg_podcast',
+  'delta' => 'podcast_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/podcast
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 552,
+  'module' => 'itg_podcast',
+  'delta' => 'podcast_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/podcast
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 553,
+  'module' => 'itg_podcast',
+  'delta' => 'podcast_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/podcast
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 554,
+  'module' => 'itg_podcast',
+  'delta' => 'podcast_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/podcast
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 555,
+  'module' => 'itg_podcast',
+  'delta' => 'podcast_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'node/add/podcast
+node/*/edit',
+  'title' => '',
+  'cache' => 1,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
   'delta' => 'astro_tab_form_block',
@@ -7797,6 +7951,11 @@ draft-manage-astro',
   'module' => 'views',
   'delta' => 'view_moderation_history-block_1',
   'type' => 'photogallery',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_podcast',
+  'delta' => 'podcast_tab_form_block',
+  'type' => 'podcast',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_poll',
@@ -7842,6 +8001,11 @@ draft-manage-astro',
   'module' => 'itg_survey',
   'delta' => 'survey_tab_form_block',
   'type' => 'survey',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_videogallery',
+  'delta' => 'videogallery_tab_form_block',
+  'type' => 'videogallery',
 );
   $export['block_role'][] = array(
   'module' => 'itg_mega_reviews_critics',
