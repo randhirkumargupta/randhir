@@ -30,12 +30,11 @@ function feature_for_podcast_image_default_styles() {
   $styles['podcast_audio_image_preview'] = array(
     'label' => 'Podcast Audio Image Preview',
     'effects' => array(
-      2 => array(
-        'name' => 'image_scale',
+      3 => array(
+        'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 194,
           'height' => 124,
-          'upscale' => 1,
         ),
         'weight' => 1,
       ),
