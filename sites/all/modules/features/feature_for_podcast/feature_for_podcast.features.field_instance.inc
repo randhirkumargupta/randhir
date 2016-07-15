@@ -31,7 +31,7 @@ function feature_for_podcast_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_podcast_audio_image_upload',
-    'label' => 'Audio Image',
+    'label' => 'Audio Image Upload',
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
@@ -73,7 +73,7 @@ function feature_for_podcast_field_default_field_instances() {
           ),
         ),
         'imce_filefield_on' => 0,
-        'preview_image_style' => 'thumbnail',
+        'preview_image_style' => 'podcast_audio_image_preview',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
@@ -222,7 +222,49 @@ function feature_for_podcast_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 6,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-podcast-field_podcast_kicker_message'.
+  $field_instances['node-podcast-field_podcast_kicker_message'] = array(
+    'bundle' => 'podcast',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_podcast_kicker_message',
+    'label' => 'Kicker Message',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 4,
     ),
   );
 
@@ -261,7 +303,7 @@ function feature_for_podcast_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -337,7 +379,7 @@ function feature_for_podcast_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -413,7 +455,7 @@ function feature_for_podcast_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -459,49 +501,7 @@ function feature_for_podcast_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'autocomplete_deluxe_taxonomy',
-      'weight' => 13,
-    ),
-  );
-
-  // Exported field_instance: 'node-podcast-field_story_kicker_text'.
-  $field_instances['node-podcast-field_story_kicker_text'] = array(
-    'bundle' => 'podcast',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 14,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_kicker_text',
-    'label' => 'Kicker Message',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 12,
     ),
   );
 
@@ -577,7 +577,7 @@ function feature_for_podcast_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -653,7 +653,7 @@ function feature_for_podcast_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -771,7 +771,7 @@ function feature_for_podcast_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -819,7 +819,7 @@ function feature_for_podcast_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -861,13 +861,13 @@ function feature_for_podcast_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Audio Image');
+  t('Audio Image Upload');
   t('Audio Upload');
   t('Category');
   t('Description');
