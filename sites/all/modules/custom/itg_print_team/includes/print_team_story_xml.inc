@@ -26,6 +26,7 @@ function itg_story_xml_validate($form, &$form_state) {
  */
 function itg_story_xml_submit($form, &$form_state) {
   // Load itg_syndication.inc from the node module.
+  global $base_url;
   module_load_include('inc', 'itg_syndication', 'includes/itg_syndication_custom_feed');
   $feed_pattern = get_default_feed_pattern('xml', 'story');
   $timestamp = time();
@@ -35,15 +36,20 @@ function itg_story_xml_submit($form, &$form_state) {
     if (!file_exists($feed_dir)) {
       mkdir($feed_dir, 0777, TRUE);
     }
+    $xml = "<root>";
     foreach ($views_bulk_operations as $nid) {
       if (!empty($nid)) {
-        $xml = get_custom_feeds_files($nid, $feed_pattern);
-        $filename = 'story_' . $nid . $timestamp . '.xml';
-        $file = file_save_data($xml, "$feed_dir/" . $filename);
+        $xml .= get_custom_feeds_files($nid, $feed_pattern);
       }
     }
-    drupal_set_message(t('Your selected story has been generated'));
+    $xml .= "</root>";
+    $filename = 'story_' . $timestamp . '.xml';
+    file_save_data($xml, "$feed_dir/" . $filename);
+    $realpath = $base_url . "/sites/default/files/story/" . $filename;
   }
+  $options_download['attributes']['download'] = '';
+  $link_val = t('Your selected story has been generated, Click to Download ') . l(t('Feeds'), $realpath, $options_download);
+  drupal_set_message($link_val, 'status');
 }
 
 /**
