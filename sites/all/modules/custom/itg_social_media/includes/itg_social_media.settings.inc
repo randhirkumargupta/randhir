@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file
+ * 
+ * Admin settings logic for api form.
+ */
 
 /**
  * Callback function for social media settings form.
@@ -13,9 +18,9 @@ function itg_social_media_fb_login() {
   
   $helper = $fb->getRedirectLoginHelper();
   $permissions = ['manage_pages', 'publish_pages', 'pages_show_list'];
-  $loginUrl = $helper->getLoginUrl($base_url . '/itg-social-media-settings-callback', $permissions);  
+  $login_url = $helper->getLoginUrl($base_url . '/itg-social-media-settings-callback', $permissions);  
  
-  return $loginUrl;
+  return $login_url;
 }
 
 /**
@@ -64,22 +69,22 @@ function itg_social_media_settings_callback() {
 
   $helper = $fb->getRedirectLoginHelper();
   try {
-    $accessToken = $helper->getAccessToken();
+    $access_token = $helper->getAccessToken();
   }
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
-    drupal_set_message(t('Graph returned an error: ' . $e->getMessage()), 'error');
+    drupal_set_message(t('Graph returned an error: @emessage', array('@emessage' => $e->getMessage())), 'error');
     drupal_goto('/browse-content');
   }
   catch (Facebook\Exceptions\FacebookSDKException $e) {
     // When validation fails or other local issues
-    drupal_set_message(t('Facebook SDK returned an error: ' . $e->getMessage()), 'error');
+    drupal_set_message(t('Facebook SDK returned an error: @emessage', array('@emessage' => $e->getMessage())), 'error');
     drupal_goto('/browse-content');
   }
 
-  if (isset($accessToken)) {
+  if (isset($access_token)) {
     // Logged in!
-    $_SESSION['facebook_access_token'] = (string) $accessToken;
+    $_SESSION['facebook_access_token'] = (string) $access_token;
     drupal_set_message(t('Facebook connection has been made successfully'), 'status');
   }
   elseif ($helper->getError()) {
@@ -91,30 +96,30 @@ function itg_social_media_settings_callback() {
   }
 
   // The OAuth 2.0 client handler helps us manage access tokens
-  $oAuth2Client = $fb->getOAuth2Client();
+  $oauth2client = $fb->getOAuth2Client();
 
   // Get the access token metadata from /debug_token
-  $tokenMetadata = $oAuth2Client->debugToken($accessToken);
+  $token_metadata = $oauth2client->debugToken($access_token);
   
   // Validation (these will throw FacebookSDKException's when they fail)
-  $tokenMetadata->validateAppId(variable_get('facebook_app_key'));
+  $token_metadata->validateAppId(variable_get('facebook_app_key'));
   
-  $tokenMetadata->validateExpiration();
+  $token_metadata->validateExpiration();
 
-  if (!$accessToken->isLongLived()) {
+  if (!$access_token->isLongLived()) {
     // Exchanges a short-lived access token for a long-lived one
     try {
-      $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+      $access_token = $oauth2client->getLongLivedAccessToken($access_token);
     }
     catch (Facebook\Exceptions\FacebookSDKException $e) {
-      drupal_set_message(t('Error getting long-lived access token' . $helper->getMessage()), 'error');      
+      drupal_set_message(t('Error getting long-lived access token @gmessage', array('@gmessage' =>  $helper->getMessage())), 'error');      
     }
   }
   // Long lived access token
-  $_SESSION['fb_access_token'] = (string) $accessToken;
+  $_SESSION['fb_access_token'] = (string) $access_token;
   variable_set('fb_access_token', $_SESSION['fb_access_token']);
 
-  drupal_goto($base_url.'/admin/itg-social-media/facebook-pages');
+  drupal_goto($base_url . '/admin/itg-social-media/facebook-pages');
 }
 
 /**
@@ -169,7 +174,7 @@ function itg_social_media_twitter_login() {
     $cb->setToken($reply->oauth_token, $reply->oauth_token_secret);
     $_SESSION['oauth_token'] = $reply->oauth_token;
     $_SESSION['oauth_token_secret'] = $reply->oauth_token_secret;
-    $_SESSION['oauth_verify'] = true;
+    $_SESSION['oauth_verify'] = TRUE;
 
     // redirect to auth website
     $auth_url = $cb->oauth_authorize();

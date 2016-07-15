@@ -30,13 +30,10 @@ function astro_feature_user_default_permissions() {
   $permissions['delete any astro content'] = array(
     'name' => 'delete any astro content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -46,13 +43,10 @@ function astro_feature_user_default_permissions() {
   $permissions['delete own astro content'] = array(
     'name' => 'delete own astro content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -62,13 +56,10 @@ function astro_feature_user_default_permissions() {
   $permissions['edit any astro content'] = array(
     'name' => 'edit any astro content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
