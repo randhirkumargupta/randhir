@@ -315,6 +315,7 @@ class itg_auto_save {
    */
   public function itg_save_form_data($pre_save, $nid, $c_type) {
     global $user;
+    $this->data = FALSE;
     $this->pre_save_form = array(
       'nid' => $nid,
       'username' => $user->name,
@@ -322,7 +323,8 @@ class itg_auto_save {
       'created' => REQUEST_TIME,
       'form_data' => $pre_save,
     );
-    drupal_write_record('itg_autosave_node_data', $this->pre_save_form);
+    $this->data = drupal_write_record('itg_autosave_node_data', $this->pre_save_form);
+    print $this->data;
   }
 
   /**
@@ -511,6 +513,11 @@ class itg_auto_save {
       }
       ++$this->temp;
     }
+    $this->data = str_replace('_', '-', $field_name);
+    $_SESSION['fc_delta'] = $this->temp - 1;
+    // Pass data to js file.   
+    drupal_add_js("jQuery(document).ready(function() {               
+      jQuery('#edit-".$this->data."-und-add-more').mousedown();  
+    });", 'inline');    
   }
-
 }
