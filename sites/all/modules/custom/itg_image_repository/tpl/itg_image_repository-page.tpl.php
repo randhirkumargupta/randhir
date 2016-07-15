@@ -21,7 +21,7 @@
 			<script type="text/javascript">
            
 jQuery('body').on('click','.dz-details',function(){
-   
+    jQuery('#file-preview').html('');
        var fieldname='<?php echo $_GET['field_name'];?>';
        var height='<?php echo $_GET['height'];?>';
        var width='<?php echo $_GET['width'];?>';
