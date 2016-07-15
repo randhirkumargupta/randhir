@@ -17,6 +17,7 @@ function feature_for_podcast_user_default_permissions() {
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Expert' => 'Expert',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
@@ -29,13 +30,7 @@ function feature_for_podcast_user_default_permissions() {
   $permissions['delete any podcast content'] = array(
     'name' => 'delete any podcast content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
@@ -44,13 +39,7 @@ function feature_for_podcast_user_default_permissions() {
   $permissions['delete own podcast content'] = array(
     'name' => 'delete own podcast content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Intern' => 'Intern',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
@@ -62,6 +51,7 @@ function feature_for_podcast_user_default_permissions() {
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Expert' => 'Expert',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
@@ -77,6 +67,7 @@ function feature_for_podcast_user_default_permissions() {
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Expert' => 'Expert',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
