@@ -48,7 +48,7 @@ function itg_story_xml_submit($form, &$form_state) {
     $realpath = $base_url . "/sites/default/files/story/" . $filename;
   }
   $options_download['attributes']['download'] = '';
-  $link_val = t('Your selected story has been generated, Click to Download ') . l(t('Feeds'), $realpath, $options_download);
+  $link_val = t('Your selected story has been generated, Click to Download&nbsp;') . l(t('Feeds'), $realpath, $options_download);
   drupal_set_message($link_val, 'status');
 }
 
