@@ -58,7 +58,7 @@ HTML comment.
     <?php foreach ($items as $delta => $item): ?>
     <?php $audio_id = $item['#file']->audio_id; ?>
      <div class="field-item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
-     <iframe frameborder="0" width="480" height="30"
+     <iframe frameborder="0" width="480" height="70"
 src="https://www.dailymotion.com/embed/video/<?php print $audio_id; ?>?autoplay=0&mute=1"
 allowfullscreen></iframe>
      
