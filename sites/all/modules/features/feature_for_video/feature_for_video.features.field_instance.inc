@@ -210,7 +210,7 @@ function feature_for_video_field_default_field_instances() {
           ),
         ),
         'imce_filefield_on' => 0,
-        'preview_image_style' => 'thumbnail',
+        'preview_image_style' => 'podcast_audio_image_preview',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
@@ -463,7 +463,7 @@ function feature_for_video_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
     'label' => 'Extra large image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
