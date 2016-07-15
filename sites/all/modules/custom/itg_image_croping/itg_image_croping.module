@@ -2,9 +2,9 @@
 
 /**
  * @file
- * The ITG Image Repository module.
+ * The ITG Image Croping module.
  *
- * Contains functionality related to Image Repository.
+ * Contains functionality related to Image Croping and tagging.
  *
  */
 /**
