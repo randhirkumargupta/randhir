@@ -131,7 +131,67 @@ if ($theme != 'itgadmin') {
                     <?php if ($action_links): ?>
                         <ul class="action-links"><?php print render($action_links); ?></ul>
                     <?php endif; ?>
-                    <?php print render($page['content']); ?>
+                    <?php //print render($page['content']); ?>
+<!--                        ####################################################-->
+
+<div id="front-contener">
+    <div class="itg-row">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="droppable big-news" id="itg-block-1">
+                  <span><?php print $widget_data['itg-block-1']['block_title']; ?></span>
+                    <?php print $widget_data['itg-block-1']['widget']; ?>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="itg-row">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="droppable top-n-most-popular-stories" id="itg-block-2">
+                    <span><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                    <?php print $widget_data['itg-block-2']['widget']; ?>
+                </div>            
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="droppable top-news" id="itg-block-3">
+                    <span><?php print $widget_data['itg-block-3']['block_title']; ?></span>
+                    <?php print $widget_data['itg-block-3']['widget']; ?>
+                </div>            
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="droppable video-n-magazine" id="itg-block-4">
+                    <span><?php print $widget_data['itg-block-4']['block_title']; ?></span>
+                    <?php print $widget_data['itg-block-4']['widget']; ?>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <div class="itg-row">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="droppable common-news" id="itg-block-5">
+                   <span><?php print $widget_data['itg-block-5']['block_title']; ?></span>
+                   <?php print $widget_data['itg-block-5']['widget']; ?>
+                </div>            
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="droppable common-news" id="itg-block-6">
+                    <span><?php print $widget_data['itg-block-6']['block_title']; ?></span>
+                    <?php print $widget_data['itg-block-6']['widget']; ?>
+                </div>            
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="droppable common-news" id="itg-block-7">
+                   <span><?php print $widget_data['itg-block-7']['block_title']; ?></span>
+                   <?php print $widget_data['itg-block-7']['widget']; ?>
+                </div>            
+            </div>
+        </div>
+    </div>
+</div>                        
+<!--                        #####################################################-->
+                        
                     <?php //print $feed_icons;  ?>
                 </section>
 
@@ -182,99 +242,64 @@ if ($theme != 'itgadmin') {
 
 <?php } else { ?>
     <!--------------------------------Code for Admin tpl---------------------------------------->
-    Admin home Tamplate
-    <div id="<?php print $_GET['template_name'] ?>-block">
-        <div id="<?php print $_GET['template_name'] ?>-block-1">
-            <div id="<?php print $_GET['template_name'] ?>-block-1-display"></div>
-            Block 1
-            <input type="text" maxlength="255" size="30" value="" name="block_title" class="block_title_id">
-            <input type="text" maxlength="255" size="30" value="" name="widget_name" class="widget_name">
-            <input type="text" maxlength="255" size="30" value="" name="filter_url" class="filter_url">
-        </div>
-        <div id="<?php print $_GET['template_name'] ?>-block-2">
-            <div id="<?php print $_GET['template_name'] ?>-block-2-display"></div>
-            Block 2
-            <input type="text" maxlength="255" size="30" value="" name="block_title" class="block_title_id">
-            <input type="text" maxlength="255" size="30" value="" name="widget_name" class="widget_name">
-            <input type="text" maxlength="255" size="30" value="" name="filter_url" class="filter_url">
-        </div>
-        <div id="<?php print $_GET['template_name'] ?>-block-3">
-            <div id="<?php print $_GET['template_name'] ?>-block-3-display"></div>
-            Block 3
-            <input type="text" maxlength="255" size="30" value="" name="block_title" class="block_title_id">
-            <input type="text" maxlength="255" size="30" value="" name="widget_name" class="widget_name">
-            <input type="text" maxlength="255" size="30" value="" name="filter_url" class="filter_url">
-        </div>
-        <div id="<?php print $_GET['template_name'] ?>-block-4">
-            <div id="<?php print $_GET['template_name'] ?>-block-4-display"></div>
-            Block 4
-            <input type="text" maxlength="255" size="30" value="" name="block_title" class="block_title_id">
-            <input type="text" maxlength="255" size="30" value="" name="widget_name" class="widget_name">
-            <input type="text" maxlength="255" size="30" value="" name="filter_url" class="filter_url">
-        </div>
-    </div>
 
-
-
-
-
+<div id="<?php print $_GET['template_name'] ?>-contener">
     <div class="itg-row">
         <div class="row">
             <div class="col-md-12">
-                <div class="droppable big-news">
-                    <p>Drag template widgets here !</p>
-                    <img src="<?php print base_path() ?>/sites/all/themes/itgadmin/images/big_news.png" alt="Big News"/>
+                <div class="droppable big-news" id="itg-block-1">
+                    <?php print $widget_data['itg-block-1']['widget']; ?>
                 </div>
+                <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id">            
             </div>
         </div>
     </div>
     <div class="itg-row">
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <div class="droppable top-n-most-popular-stories">
-                    <p>Drag template widgets here !</p>
-                    <img src="<?php print base_path() ?>/sites/all/themes/itgadmin/images/top_left.png" alt="Big News"/>
+                <div class="droppable top-n-most-popular-stories" id="itg-block-2">
+                    <?php print $widget_data['itg-block-2']['widget']; ?>
                 </div>
+            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id">            
             </div>
             <div class="col-md-5 col-sm-5 col-xs-12">
-                <div class="droppable top-news">
-                    <p>Drag template widgets here !</p>
-                    <img src="<?php print base_path() ?>/sites/all/themes/itgadmin/images/top_mid.png" alt="Big News"/>
+                <div class="droppable top-news" id="itg-block-3">
+                    <?php print $widget_data['itg-block-3']['widget']; ?>
                 </div>
+            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id">            
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="droppable video-n-magazine">
-                    <p>Drag template widgets here !</p>
-                    <img src="<?php print base_path() ?>/sites/all/themes/itgadmin/images/top_right.png" alt="Big News"/>
+                <div class="droppable video-n-magazine" id="itg-block-4">
+                    <?php print $widget_data['itg-block-4']['widget']; ?>
                 </div>
+            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-4']['block_title']; ?>" name="itg-block-4" class="block_title_id">            
             </div>
         </div>
     </div>
     <div class="itg-row">
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="droppable common-news">
-                    <p>Drag template widgets here !</p>
-                    <img src="<?php print base_path() ?>/sites/all/themes/itgadmin/images/common.png" alt="Big News"/>
+                <div class="droppable common-news" id="itg-block-5">
+                   <?php print $widget_data['itg-block-5']['widget']; ?>
                 </div>
+            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id">            
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="droppable common-news">
-                    <p>Drag template widgets here !</p>
-                    <img src="<?php print base_path() ?>/sites/all/themes/itgadmin/images/common.png" alt="Big News"/>
+                <div class="droppable common-news" id="itg-block-6">
+                    <?php print $widget_data['itg-block-6']['widget']; ?>
                 </div>
+            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id">            
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="droppable common-news">
-                    <p>Drag template widgets here !</p>
-                    <img src="<?php print base_path() ?>/sites/all/themes/itgadmin/images/common.png" alt="Big News"/>
+                <div class="droppable common-news" id="itg-block-7">
+                   <?php print $widget_data['itg-block-7']['widget']; ?>
                 </div>
+            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-7']['block_title']; ?>" name="itg-block-7" class="block_title_id">            
             </div>
         </div>
     </div>
+</div>
 
-
-
-    <?php
+<?php 
 }
 

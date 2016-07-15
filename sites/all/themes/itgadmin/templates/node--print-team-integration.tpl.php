@@ -1,13 +1,8 @@
 <?php
- global $base_url, $user;
 
 //Check for idea approval users 
-$idea_review_flag_user = FALSE;
-foreach ($user->roles as $roles) {
-  if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
-    $idea_review_flag_user = TRUE;
-  }
-}
+$idea_review_flag_user = itg_print_team_check_approval_users();
+
 ?>
 
 <a href="javascript:;" class="close-preview">&nbsp;</a>
@@ -74,7 +69,10 @@ foreach ($user->roles as $roles) {
       </div>
       <?php } ?>
       
-      <?php if($node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {?>
+      <?php 
+      if($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
+        
+      if($node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) { ?>
       <div class="field">
         <div class="field-label">Words Limit:</div>
         <div class="field-items"><?php echo $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'] . ' words'; ?></div>
@@ -86,7 +84,7 @@ foreach ($user->roles as $roles) {
         <div class="field-label">Timeline:</div>
         <div class="field-items"><?php echo date('d/m/Y', strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])); ?></div>
       </div>
-      <?php } ?>
+      <?php } } ?>
       
      <?php
       //Render image and video
