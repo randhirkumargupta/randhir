@@ -623,7 +623,6 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   
   //Send mail to print team users after association
   itg_print_team_send_idea_status_mail($issue_node, 'association');
-  
   drupal_set_message('Selected ideas have been associated to selected issue and magazine successfully.');
 }
 
