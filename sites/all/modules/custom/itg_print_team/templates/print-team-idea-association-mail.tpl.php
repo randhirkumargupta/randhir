@@ -1,10 +1,8 @@
 <?php 
 /**
- * Template file to send mail on idea submission
+ * Template file to send mail on idea association
  * @file: print-team-idea-association-mail.tpl.php
  */
-global $base_url;
-
 ?> 
 
 <!DOCTYPE html> 
@@ -17,7 +15,7 @@ global $base_url;
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <tr>
-        <td style="padding: 10px 20px;">Dear User,</td>
+        <td style="padding: 10px 20px;">Dear Team,</td>
       </tr>
       <?php if ($op_type == 'idea_update') { ?>
       <tr>
