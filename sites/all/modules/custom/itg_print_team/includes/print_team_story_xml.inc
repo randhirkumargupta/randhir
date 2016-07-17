@@ -117,4 +117,5 @@ function itg_print_team_association_update($nid, $issue_nid, $magazine, $associa
   //Send mail after idea updation
   module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
   itg_print_team_send_idea_status_mail($idea_node, 'association', 'idea_update');
+  drupal_set_message('Selected ideas have been associated to selected issue and magazine successfully.');
 }
