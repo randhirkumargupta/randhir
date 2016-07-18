@@ -8,8 +8,8 @@ $h3-font-size: 20px;
 $h4-font-size: 12px;
 
 /*Fonts used in Indiatoday site*/
-$itg-roboto:Roboto;
-$itg-robotoslab:RobotoSlab;
+$itg-roboto: 'Roboto', sans-serif;
+$itg-robotoslab:'Roboto Slab', sans-serif;
 
 $itg-font-regular:400;
 $itg-font-medium:500;
@@ -43,6 +43,7 @@ $skyblue-color: #048cb9 !default;
 /*Background color in Indiatoday site*/
 $header-bg: #193c8d !default;
 $black-bg: #000000 !default;
+$second-black-bg: #111111 !default;
 $red-bg: #a00606 !default;
 $yellow-bg: #ffc106 !default;
 $gray-bg: #f2f2f2 !default;
@@ -55,3 +56,6 @@ $itg-nav-bordercolor: #680101;
 
 /*Full radius in Indiatoday site*/
 $full-radius:50%;
+
+/*footer color in Indiatoday site*/
+$footer-text-clr:#a6a6a6;
