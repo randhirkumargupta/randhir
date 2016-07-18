@@ -10,6 +10,7 @@
 /*Background color in Indiatoday site*/
 /*navigation font in Indiatoday site*/
 /*Full radius in Indiatoday site*/
+/*footer color in Indiatoday site*/
 /*font family an font weight mixins*/
 /*clear fix mixins*/
 /*Box sizeing mixins*/
@@ -20,37 +21,37 @@
 /* Tab Button mixins */
 /* Tab Listing mixins */
 /*Fonts used in Indiatoday site*/
-@font-face {
-  font-family: 'Roboto';
-  src: url("../fonts/Roboto-Regular.eot");
-  src: local("/"), url("../fonts/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto-Regular.ttf") format("truetype"), url("../fonts/Roboto-Regular.svg") format("svg");
-  font-weight: 400;
-  font-style: normal;
+/*@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Regular.eot');
+	src: local('/'), url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.ttf') format('truetype'), url('../fonts/Roboto-Regular.svg') format('svg');
+	font-weight: 400;
+	font-style: normal;
 }
 @font-face {
-  font-family: 'Roboto';
-  src: url("../fonts/Roboto-Medium.eot");
-  src: local("/"), url("../fonts/Roboto-Medium.woff") format("woff"), url("../fonts/Roboto-Medium.ttf") format("truetype"), url("../fonts/Roboto-Medium.svg") format("svg");
-  font-weight: 500;
-  font-style: normal;
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Medium.eot');
+	src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
+	font-weight: 500;
+	font-style: normal;
 }
 @font-face {
-  font-family: 'Roboto';
-  src: url("../fonts/Roboto-Bold.eot");
-  src: local("/"), url("../fonts/Roboto-Bold.woff") format("woff"), url("../fonts/Roboto-Bold.ttf") format("truetype"), url("../fonts/Roboto-Bold.svg") format("svg");
-  font-weight: 700;
-  font-style: normal;
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Bold.eot');
+	src: local('/'), url('../fonts/Roboto-Bold.woff') format('woff'), url('../fonts/Roboto-Bold.ttf') format('truetype'), url('../fonts/Roboto-Bold.svg') format('svg');
+	font-weight: 700;
+	font-style: normal;
 }
 @font-face {
-  font-family: 'RobotoSlab';
-  src: url("../fonts/RobotoSlab-Regular.eot");
-  src: local("/"), url("../fonts/RobotoSlab-Regular.woff") format("woff"), url("../fonts/RobotoSlab-Regular.ttf") format("truetype"), url("../fonts/RobotoSlab-Regular.svg") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
+	font-family: 'RobotoSlab';
+	src: url('../fonts/RobotoSlab-Regular.eot');
+	src: local('/'), url('../fonts/RobotoSlab-Regular.woff') format('woff'), url('../fonts/RobotoSlab-Regular.ttf') format('truetype'), url('../fonts/RobotoSlab-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}*/
 /* Global CSS */
 body {
-  font: 400 14px/18px 'RobotoSlab';
+  font: 400 14px/18px "Roboto Slab", sans-serif;
   color: #333;
 }
 
@@ -103,7 +104,7 @@ a {
   padding-right: 30px;
 }
 
-.pdlr-10, .header nav ul li a {
+.pdlr-10, .header .top-nav ul li a {
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -121,7 +122,7 @@ a {
   padding-right: 10px;
 }
 
-.no-bullet, .header nav ul, .tabs-primary, #comments .comment ul.links {
+.no-bullet, .header .top-nav ul, .tabs-primary, #comments .comment ul.links {
   list-style: none;
 }
 
@@ -137,7 +138,7 @@ a {
   display: block;
 }
 
-.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .header nav ul li, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field {
+.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .header .top-nav ul li, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field {
   display: inline-block;
 }
 
@@ -149,7 +150,7 @@ a {
   vertical-align: top;
 }
 
-.full, #page, .header nav, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes div.rating, .form-field-type-field-collection .field-multiple-table, [class*="node-type-"] .node .field {
+.full, #page, .header .top-nav, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes div.rating, .form-field-type-field-collection .field-multiple-table, [class*="node-type-"] .node .field {
   width: 100%;
 }
 
@@ -157,7 +158,7 @@ a {
   max-width: 100%;
 }
 
-.fleft, .header nav, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container > .form-item .form-item.form-type-radio .form-radio, .answer-container .form-type-checkboxes div.rating, .answer-container div.rating .form-type-checkbox input[type="checkbox"], [class*="node-type-"] .node .field .field-label {
+.fleft, .header .top-nav, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container > .form-item .form-item.form-type-radio .form-radio, .answer-container .form-type-checkboxes div.rating, .answer-container div.rating .form-type-checkbox input[type="checkbox"], [class*="node-type-"] .node .field .field-label {
   float: left;
 }
 
@@ -224,6 +225,19 @@ input[type="text"], select, input[type="password"] {
   box-sizing: border-box;
 }
 
+.row {
+  zoom: 1;
+}
+.row:before, .row:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.row:after {
+  clear: both;
+}
+
 #page {
   padding-bottom: 30px;
 }
@@ -234,42 +248,47 @@ input[type="text"], select, input[type="password"] {
   margin-bottom: 30px;
   background: #193c8d url(../images/mobile-header-bg.png) no-repeat center center;
   height: 73px;
-  position: relative;
 }
 .header a {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
+}
+.header .header-logo {
+  position: relative;
 }
 .header .header-ads {
   text-align: center;
 }
-.header .lgn {
+.header .login-link {
   text-align: right;
 }
-.header .lgn a {
+.header .login-link a {
   font-weight: 400;
   margin-right: 10px;
 }
 .header .logo {
   width: 67px;
   position: absolute;
-  bottom: 0px;
+  top: -10px;
   left: 10px;
 }
-.header nav {
+.header .top-nav {
+  padding: 0;
+}
+.header .top-nav {
   background: #a00606;
   margin-top: 7px;
   text-align: right;
   height: 28px;
   line-height: 28px;
 }
-.header nav ul li a {
+.header .top-nav ul li a {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 15px;
   font-weight: 500;
 }
-.header nav ul li a .fa {
+.header .top-nav ul li a .fa {
   font-size: 20px;
   line-height: 28px;
   vertical-align: top;
@@ -893,22 +912,76 @@ input[type="text"], select, input[type="password"] {
   height: 100px;
 }
 
-/*Start CSS Top Story*/
-.tab-buttons {
-  zoom: 1;
+/*Start CSS footer section*/
+footer {
+  margin-top: 40px;
 }
-.tab-buttons:before, .tab-buttons:after {
+footer a {
+  color: #a6a6a6;
+  font-family: "Roboto", sans-serif;
+}
+footer .footer-top {
+  zoom: 1;
+  background: #000000;
+}
+footer .footer-top:before, footer .footer-top:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.tab-buttons:after {
+footer .footer-top:after {
   clear: both;
 }
-.tab-buttons span {
+footer .footer-top a {
+  color: #fff;
+}
+footer .footer-top .footer-top-link {
+  float: left;
+}
+footer .footer-top .footer-social-link {
+  float: right;
+}
+footer .footer-top ul {
+  zoom: 1;
+}
+footer .footer-top ul:before, footer .footer-top ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+footer .footer-top ul:after {
+  clear: both;
+}
+footer .footer-top ul li {
+  float: left;
+}
+footer .footer-top ul li a {
+  color: #fff;
+  padding: 12px 15px;
+  border-left: 1px solid #111;
+  font-size: 17px;
+  display: block;
+}
+
+/*End CSS footer section*/
+/*Start CSS Top Story*/
+.top-n-most-popular-stories .tab-buttons {
+  zoom: 1;
+}
+.top-n-most-popular-stories .tab-buttons:before, .top-n-most-popular-stories .tab-buttons:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.top-n-most-popular-stories .tab-buttons:after {
+  clear: both;
+}
+.top-n-most-popular-stories .tab-buttons span {
   font-weight: 500;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   background: #e4e4e4;
   text-transform: uppercase;
   height: 36px;
@@ -920,33 +993,32 @@ input[type="text"], select, input[type="password"] {
   display: block;
   float: left;
 }
-.tab-buttons span.active {
+.top-n-most-popular-stories .tab-buttons span.active {
   background: #fff;
   color: #d12019;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
   border-top: 3px solid #d12019;
 }
-
-.top-stories-ordering {
+.top-n-most-popular-stories ul {
   border: 1px solid #e4e4e4;
 }
-.top-stories-ordering li {
+.top-n-most-popular-stories ul li {
   position: relative;
 }
-.top-stories-ordering li a {
+.top-n-most-popular-stories ul li a {
   color: #565555;
   padding: 15px 15px 15px 20px;
   display: block;
   border-bottom: 1px solid #e4e4e4;
 }
-.top-stories-ordering li a:hover {
+.top-n-most-popular-stories ul li a:hover {
   background: #f8f8f8;
 }
-.top-stories-ordering li:last-child a {
+.top-n-most-popular-stories ul li:last-child a {
   border-bottom: none;
 }
-.top-stories-ordering li:before {
+.top-n-most-popular-stories ul li:before {
   position: absolute;
   top: 22px;
   left: 9px;
@@ -959,6 +1031,7 @@ input[type="text"], select, input[type="password"] {
 
 /*End CSS Top Story*/
 /*Start CSS Desktop version*/
+/*Start header CSS Desktop version*/
 @media only screen and (min-width: 768px) {
   .mhide {
     display: block;
@@ -969,18 +1042,15 @@ input[type="text"], select, input[type="password"] {
   }
 
   .header {
-    height: 100%;
+    height: 220px;
   }
   .header .header-top {
     background: #193c8d url(../images/header-bg.png) no-repeat center center;
     height: 163px;
   }
-  .header .header-top .container {
-    position: relative;
-  }
   .header .logo {
     width: auto;
-    bottom: -42px;
+    top: 95px;
   }
   .header .logo img {
     background: #193c8d;
@@ -988,28 +1058,29 @@ input[type="text"], select, input[type="password"] {
     padding-right: 2px;
     vertical-align: top;
   }
-  .header .nav {
-    margin-top: 25px;
+  .header .top-nav {
+    padding: 0 15px 0 15px;
+    margin: 25px auto 15px auto;
     float: none;
     zoom: 1;
     background: transparent;
   }
-  .header .nav:before, .header .nav:after {
+  .header .top-nav:before, .header .top-nav:after {
     content: "";
     display: block;
     height: 0;
     overflow: hidden;
   }
-  .header .nav:after {
+  .header .top-nav:after {
     clear: both;
   }
-  .header .nav ul {
+  .header .top-nav .main-nav {
     float: right;
   }
-  .header .nav ul.main-nav li:nth-child(3) {
+  .header .top-nav .main-nav li:nth-child(2) {
     position: relative;
   }
-  .header .nav ul.main-nav li:nth-child(3) a:before {
+  .header .top-nav .main-nav li:nth-child(2) a:before {
     content: '';
     background: url(../images/live-icon.png) no-repeat;
     position: absolute;
@@ -1018,49 +1089,41 @@ input[type="text"], select, input[type="password"] {
     width: 28px;
     height: 19px;
   }
-  .header .nav ul.main-nav li a {
+  .header .top-nav .main-nav li a {
     padding: 0 35px;
     font-size: 27px;
   }
-  .header .nav ul.main-nav li a.active, .header .nav ul.main-nav li a:hover {
+  .header .top-nav .main-nav li a.active, .header .top-nav .main-nav li a:hover {
     color: #ffc106;
   }
-  .header .nav ul.social-nav a .fa {
+  .header .top-nav .social-nav {
+    float: right;
+  }
+  .header .top-nav .social-nav a .fa {
     font-size: 23px;
   }
-  .header .nav ul.social-nav a .fa.fa-mobile {
+  .header .top-nav .social-nav a .fa.fa-mobile {
     font-size: 27px;
   }
   .header .navigation {
-    background: #a00606;
-  }
-  .header .navigation .container {
     zoom: 1;
+    background: #a00606;
+    margin-top: 16px;
   }
-  .header .navigation .container:before, .header .navigation .container:after {
+  .header .navigation:before, .header .navigation:after {
     content: "";
     display: block;
     height: 0;
     overflow: hidden;
   }
-  .header .navigation .container:after {
+  .header .navigation:after {
     clear: both;
   }
   .header .navigation .menu {
-    zoom: 1;
     float: right;
-  }
-  .header .navigation .menu:before, .header .navigation .menu:after {
-    content: "";
-    display: block;
-    height: 0;
-    overflow: hidden;
-  }
-  .header .navigation .menu:after {
-    clear: both;
   }
   .header .navigation .menu li {
-    float: right;
+    float: left;
   }
   .header .navigation .menu li a {
     font-size: 14px;
@@ -1077,4 +1140,5 @@ input[type="text"], select, input[type="password"] {
     color: #ffc106;
   }
 }
-/*Start CSS Desktop version*/
+/*End header CSS Desktop version*/
+/*End CSS Desktop version*/
