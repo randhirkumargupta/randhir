@@ -7,7 +7,6 @@
  * Contains functionality for Related Content.
  *
  */
-
 function itg_related_menu() {
   $items = array();
 
@@ -46,31 +45,17 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
       '#description' => t(''),
       '#value' => $type,
     );
-    //$form['#after_build'][] = 'itg_related_after_build';
   }
-  
+
   if ($form_id == 'story_node_form') {
-   $form['field_common_related_content'][LANGUAGE_NONE][0]['value']['#attributes']['readonly'] = 'readonly';
+    $form['field_common_related_content'][LANGUAGE_NONE][0]['value']['#attributes']['readonly'] = 'readonly';
   }
 
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'related_content_new') {
 
-    //$_GET['q'];
-
-//    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-//    //$op = array("All" => "Select Category");
-//    foreach ($tax as $key => $val) {
-//      $op[$val->name] = $val->name;
-//    }
-//
-//    $form['tm_vid_4_names']['#type'] = 'select';
-//    $form['tm_vid_4_names']['#options'] = $op;
-//    $form['tm_vid_4_names']['#size'] = 5;
-//    $form['tm_vid_4_names']['#multiple'] = TRUE;
     $form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title / Kicker / Tag name')));
 
-    // $bundle_name = array("All" => "Select type", 'Story' => 'Story', 'Blog' => 'Blog');
     $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast');
     $form['bundle_name']['#type'] = 'select';
     $form['bundle_name']['#options'] = $bundle_name;
@@ -90,36 +75,8 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
     $form['bs_status']['#options'] = $related_status;
     $form['bs_status']['#size'] = 5;
     $form['bs_status']['#multiple'] = TRUE;
-    
-//    $form['select-value'] = array(
-//    '#type' => 'textfield', //you can find a list of available types in the form api
-//    '#title' => t(''),
-//    '#size' => 20,
-//    '#id'   => 'select-value',
-//    '#prefix' => '<div id="selval">',
-//    '#suffix' => '</div>',
-//    );
-  
   }
 }
-
-/**
- * After build for related form.
- * @param type $form
- * @param type $form_state
- */
-//function itg_related_after_build($form, &$form_state) {
-//
-//  global $user, $base_url;
-//  
-//  $settings = array();
-//  $settings['base_url'] = $base_url;
-//  $settings['uid'] = $user->uid;
-//  $settings['node_type'] = $form['type']['#value'];
-//  drupal_add_js(array('itg_related' => array('settings' => $settings)), array('type' => 'setting'));
-//  drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1));
-//  return $form;
-//}
 
 function my_custom_ajax_callback() {
 
@@ -162,21 +119,17 @@ function itg_related_views_pre_render(&$view) {
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_related' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1));
-   // drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/jquery.cookie.js', array('weight' => 2));
+
 
     foreach ($view->result as $related_result) {
-      //dpm($related_result->bs_status);
+
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
-        
-        }
-        
-      $splittedsite=explode("/",$related_result->site);
+      }
+
+      $splittedsite = explode("/", $related_result->site);
       $related_result->site = strtoupper($splittedsite[3]);
     }
-    
-//    $related_content_breaking = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-//    $view->attachment_before = $related_content_breaking;
   }
 }
 
@@ -186,7 +139,7 @@ function itg_related_views_pre_render(&$view) {
  * @param Array $form_state
  */
 function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-//p($form);
+
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-related-content-new-page') {
 
@@ -239,10 +192,10 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if ($i > 1) {
       $and = ' AND ';
     }
-    $remove_key = array('related-content','page','width', 'height', 'iframe', 'type', 'items_per_page', 'keyword');
-    //if (!empty($val) && $val != 'related-content' && $key != 'page' && $key != 'width' && $key != 'height' && $key != 'iframe' && $key != 'type' && $key != 'items_per_page') {
-    if (!empty($val) &&  $val != 'related-content' && !in_array($key, $remove_key)) {
-      //print $val;
+    $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search');
+
+    if (!empty($val) && $val != 'related-content' && $val != 'site-search' && !in_array($key, $remove_key)) {
+
       if (is_array($val)) {
         $val_str = implode(' OR ', $val);
       }
@@ -252,25 +205,20 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $val_str = str_replace(" ", "* OR ", $val_str);
         }
         else if ($key == 'sm_vid_Tags') {
-//          $pattern = '/[:,]/';
-//          $pattern_split = preg_split($pattern, $val);
-//          $filtered = array_filter($pattern_split, 'is_numeric');
-//          $filtered_comma = implode(',', $filtered);
-        $get_value = preg_split('/[\s,]/', $val);
-        $get_value = array_filter($get_value);
-        $get_comma_value = implode(',', $get_value);
-        $val_str = str_replace(",", "* OR ", $get_comma_value);
-        //$val_str = str_replace('"', "", $val_str);
-        //$val_str = str_replace("'", "", $val_str);
-        $val_str = $val_str.'*';
+
+          $get_value = preg_split('/[\s,]/', $val);
+          $get_value = array_filter($get_value);
+          $get_comma_value = implode(',', $get_value);
+          $val_str = str_replace(",", "* OR ", $get_comma_value);
+
+          $val_str = $val_str . '*';
         }
         else if ($key == 'tm_vid_4_names') {
 
-        $get_value = preg_split('/[\s,]/', $val);
-        $get_value = array_filter($get_value);
-        $get_comma_value = implode(',', $get_value);
-        $val_str = str_replace(",", " OR ", $get_comma_value);
-        
+          $get_value = preg_split('/[\s,]/', $val);
+          $get_value = array_filter($get_value);
+          $get_comma_value = implode(',', $get_value);
+          $val_str = str_replace(",", " OR ", $get_comma_value);
         }
         else {
           $val_str = $val;
@@ -288,8 +236,6 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
   }
 
   // p($query->getSolrParams());
-  //$query->addParam("fq", '(hash:bw8w8n OR access__all:0)');
-  //$query->addParam("fq", '(hash:bw8w8n OR hash:iibckc)');
 }
 
 /**
@@ -313,7 +259,6 @@ function itg_related_views_query_alter(&$view, &$query) {
  * Implement itg_reporter_details
  * @param int $val
  */
-
 function itg_reporter_details($val) {
   $query = db_select('field_data_field_reporter_twitter_handle', 'th')
       ->fields('th', array('entity_id'))
@@ -335,7 +280,7 @@ function itg_related_save_search() {
       ->range(0, 5)
       ->execute();
 
-  // print '<br/>';
+
   print '<h3 class=rel-hed>My Saved Search</h3>';
   print '<ul>';
   while ($save_search_result_info = $save_search_result->fetchAssoc()) {
@@ -356,12 +301,7 @@ function itg_related_block_info() {
     'info' => t('Related Form Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-//  
-//  
-//  $blocks['related_form_reorder_block'] = array(
-//    'info' => t('Related Form Reorder Block'),
-//    'cache' => DRUPAL_CACHE_GLOBAL,
-//  );
+
 
   return $blocks;
 }
@@ -378,9 +318,6 @@ function itg_related_block_view($delta = '') {
     case 'related_form_block':
       $block['content'] = theme('related_form_display_block', array('data' => $data));
       break;
-//    case 'related_form_reorder_block':
-//      $block['content'] = theme('related_form_reorder_block', array('data' => $data));
-//      break;
   }
 
   return $block;
@@ -400,12 +337,6 @@ function itg_related_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_related') . '/templates',
       'variables' => array('data' => NULL),
     ),
-    
-//    'related_form_reorder_block' => array(
-//      'template' => 'related-formreorder',
-//      'path' => drupal_get_path('module', 'itg_related') . '/templates',
-//      'variables' => array('data' => NULL),
-//    ),
   );
 
   return $themes;
@@ -415,7 +346,6 @@ function itg_related_theme($existing, $type, $theme, $path) {
  * Implements itg_get_tag()
  * @param string $title
  */
-
 function itg_get_tag($title) {
 
   if (strlen(trim($title)) > 0) {
