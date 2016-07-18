@@ -63,7 +63,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
     $form['bundle_name']['#multiple'] = TRUE;
 
     //'iibckc' => 'Dev'
-    $hash = array('bw8w8n' => 'Ankush-localhost', '5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'iibckc' => 'Stage Server');
+    $hash = array('bw8w8n' => 'Ankush-localhost', '5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
@@ -127,8 +127,8 @@ function itg_related_views_pre_render(&$view) {
         $related_result->bs_status = 'Published';
       }
 
-      $splittedsite = explode("/", $related_result->site);
-      $related_result->site = strtoupper($splittedsite[3]);
+//      $splittedsite = explode("/", $related_result->site);
+//      $related_result->site = strtoupper($splittedsite[3]);
     }
   }
 }
