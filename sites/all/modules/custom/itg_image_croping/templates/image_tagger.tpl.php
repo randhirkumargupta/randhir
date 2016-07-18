@@ -1,22 +1,5 @@
 <style>
-    #logo
-    {
-        width: 505px;
-        margin: 0 auto;
-        text-align: center;
-    }
-    #pgtitle
-    {
-        margin: 0px 0px 20px;
-        font-size: 18pt;
-    }
-    #container
-    {
-        display: block;
-        width: 850px;
-        height: 300px;
-        margin: 0 auto;
-    }
+    
     #imgtag
     {
         position: relative;
@@ -53,60 +36,67 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 240px;
-        border: 1px solid #D7C7C7;
     }
     #tagit .box
     {
-        border: 1px solid #F10303;
         width: 100px;
         height: 100px;
         float: left;
+        background-color: rgba(0,0,0,.5);
+        margin-right: 1px;
     }
     #tagit .name
     {
         float: left;
-        background-color: #FFF;
-        width: 127px;
-        height: 92px;
-        padding: 5px;
-        font-size: 10pt;
+        width: 200px;
+        position: relative;
     }
-    #tagit DIV.text
-    {
-        margin-bottom: 5px;
+    #tagit .name div.text{display: none;}
+    #tagit .name span.error{
+        top: 100px;
+        position: absolute;
+        left: 0;
     }
-    #tagit INPUT[type=text]
-    {
-        margin-bottom: 5px;
+    #tagit input[type="text"]{
+        width: 100%;
+        background-color: rgba(0,0,0,.5);
+        color: #fff;
+        height: 33px;
+        border: none;
     }
-    #tagit #tagname
-    {
-        width: 110px;
+    #tagit #tagname{
+        margin-bottom: 1px;
     }
-    #taglist
-    {
-        width: 300px;
-        min-height: 200px;
-        height: auto !important;
-        height: 200px;
-        float: left;
-        padding: 10px;
-        margin-left: 20px;
-        color: #000;
-    }
-    #taglist OL
-    {
-        padding: 0 20px;
-        float: left;
+    #btnsavetag{
+        background-color: rgba(31,181,173,.9);
+        border: 1px solid rgba(31,181,173,.9);
+        border-radius: 0;
+        color: #fff;
         cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        height: 33px;
+        width: 50%;
+        
     }
-    #taglist OL A
-    {
-    }
-    #taglist OL A:hover
-    {
-        text-decoration: underline;
+    #btncancel{
+        background-color: rgba(208,11,38,.9);
+        border: 1px solid rgba(208,11,38,.9);
+        border-radius: 0;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        height: 33px;
+        width: 50%;
     }
     .tagtitle
     {
