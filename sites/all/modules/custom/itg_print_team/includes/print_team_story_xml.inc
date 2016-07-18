@@ -26,6 +26,7 @@ function itg_story_xml_validate($form, &$form_state) {
  */
 function itg_story_xml_submit($form, &$form_state) {
   // Load itg_syndication.inc from the node module.
+  global $base_url;
   module_load_include('inc', 'itg_syndication', 'includes/itg_syndication_custom_feed');
   $feed_pattern = get_default_feed_pattern('xml', 'story');
   $timestamp = time();
@@ -35,15 +36,20 @@ function itg_story_xml_submit($form, &$form_state) {
     if (!file_exists($feed_dir)) {
       mkdir($feed_dir, 0777, TRUE);
     }
+    $xml = "<root>";
     foreach ($views_bulk_operations as $nid) {
       if (!empty($nid)) {
-        $xml = get_custom_feeds_files($nid, $feed_pattern);
-        $filename = 'story_' . $nid . $timestamp . '.xml';
-        $file = file_save_data($xml, "$feed_dir/" . $filename);
+        $xml .= get_custom_feeds_files($nid, $feed_pattern);
       }
     }
-    drupal_set_message(t('Your selected story has been generated'));
+    $xml .= "</root>";
+    $filename = 'story_' . $timestamp . '.xml';
+    file_save_data($xml, "$feed_dir/" . $filename);
+    $realpath = $base_url . "/sites/default/files/story/" . $filename;
   }
+  $options_download['attributes']['download'] = '';
+  $link_val = t('Your selected story has been generated, Click to Download&nbsp;') . l(t('Feeds'), $realpath, $options_download);
+  drupal_set_message($link_val, 'status');
 }
 
 /**
@@ -77,7 +83,9 @@ function itg_print_team_association_update($nid, $issue_nid, $magazine, $associa
   $headline = $node->title;
   $body = $node->body[LANGUAGE_NONE][0]['value'];
   $fid = $node->field_quiz_answer_image[LANGUAGE_NONE][0]['fid'];
-  $issue_title = itg_common_get_node_title($issue_nid);  
+  $issue_title = itg_common_get_node_title($issue_nid);
+  
+  // Update print team node
   $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue_nid;
   $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
   if ($print_update) {
@@ -91,18 +99,23 @@ function itg_print_team_association_update($nid, $issue_nid, $magazine, $associa
   $story_node->uid = $user->uid;
   $story_node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
   $story_node->body[$node->language][0]['value'] = $body ? $body : 'NA';
-  $story_node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue) ? $issue : date('Y-m-d h:i:s', time());
+  $story_node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue_title) ? $issue_title : date('Y-m-d h:i:s', time());
+  
   //Issue, magazine and supplement
   $story_node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
   if ($magazine) {
     $story_node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
   }
+  
   if ($fid) {
     $story_node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid;
   }
+  
+  // Update story node
   field_attach_update('node', $story_node);
   
   //Send mail after idea updation
   module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
   itg_print_team_send_idea_status_mail($idea_node, 'association', 'idea_update');
+  drupal_set_message('Selected ideas have been associated to selected issue and magazine successfully.');
 }
