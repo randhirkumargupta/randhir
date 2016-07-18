@@ -5272,3 +5272,7 @@ div.node #comments h2 {
 [id*="views-exposed-form-section-wise-content-ordering-page"] .form-item-field-story-category-tid .form-select + div.description div.description {
   left: 210px;
 }
+
+[id*="views-form-story-widget-page"] .form-actions {
+  margin-top: 10px;
+}
