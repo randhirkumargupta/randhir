@@ -25,6 +25,7 @@ function itg_story_xml_validate($form, &$form_state) {
  * @param array $form_state
  */
 function itg_story_xml_submit($form, &$form_state) {
+  
   // Load itg_syndication.inc from the node module.
   global $base_url;
   module_load_include('inc', 'itg_syndication', 'includes/itg_syndication_custom_feed');
@@ -47,8 +48,9 @@ function itg_story_xml_submit($form, &$form_state) {
     file_save_data($xml, "$feed_dir/" . $filename);
     $realpath = $base_url . "/sites/default/files/story/" . $filename;
   }
+  
   $options_download['attributes']['download'] = '';
-  $link_val = t('Your selected story has been generated, Click to Download&nbsp;') . l(t('Feeds'), $realpath, $options_download);
+  $link_val = t('XML have been generated for selected stories. ') . l(t('Click here to download'), $realpath, $options_download);
   drupal_set_message($link_val, 'status');
 }
 
