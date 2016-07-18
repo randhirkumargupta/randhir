@@ -16,13 +16,40 @@ if ($theme != 'itgadmin') {
     <!--------------------------------Code for Front tpl---------------------------------------->
 
     <div id="page">
-
         <header class="header" id="header" role="banner">
-            <section class="container">
+            <section class="header-top">
+                <div class="container">
+                <div class="header-ads mhide">
+                    <img src="<?php print base_path() . path_to_theme() ?>/images/header-ads.png" alt="ads">
+                </div>
+                
                 <?php if ($logo): ?>
+                <div class="logo">
                     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+                </div>
                 <?php endif; ?>
-                <div class="fright login"><a href="user">Login</a></div>
+                <div class="lgn desktop-hide">
+                    <a href="/user">Login</a>
+                </div> 
+                
+                <nav class="nav">
+                        <ul class="social-nav mhide">
+                            <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-volume-up"></i></a></li>
+                            <li><a href="#" title=""><i class="fa fa-search"></i></a></li>
+                            <li><a href="user" title="">Login</a></li>
+                        </ul>
+                        <ul class="main-nav">
+                            <li class="desktop-hide"><a href="#" title=""><i class="fa fa-bars" ></i></a></li>
+                            <li><a href="#" class="active" title="">News</a></li>
+                            <li><a href="#" title="">tv</a></li>
+                            <li><a href="#" title="">MAGAZINE</a></li>
+                        </ul>
+                </nav>
                 <?php if ($site_name || $site_slogan): ?>
                     <div class="header__name-and-slogan" id="name-and-slogan">
                         <?php if ($site_name): ?>
@@ -56,7 +83,25 @@ if ($theme != 'itgadmin') {
                 <?php endif; ?>
 
                 <?php print render($page['header']); ?>
+                    </div>
             </section>
+            
+            <section class="navigation">
+                <div class="container">
+                    <ul class="menu no-bullet">
+                        <li><a href="#">Make In India</a></li>
+                        <li><a href="#">Make In India</a></li>
+                        <li><a href="#">Make In India</a></li>
+                        <li><a href="#">Make In India</a></li>
+                        <li><a href="#">Make In India</a></li>
+                    </ul>
+                </div>   
+            </section>
+            
+            
+            
+            
+            
         </header>
         <?php
         // Render the sidebars to see if there's anything in them.
@@ -94,7 +139,7 @@ if ($theme != 'itgadmin') {
         <div class="row">
             <div class="col-md-12">
                 <div class="droppable big-news" id="itg-block-1">
-                  <span><?php print $widget_data['itg-block-1']['block_title']; ?></span>
+                        <span><?php print $widget_data['itg-block-1']['block_title']; ?></span>
                     <?php print $widget_data['itg-block-1']['widget']; ?>
                 </div>                
             </div>
@@ -104,7 +149,9 @@ if ($theme != 'itgadmin') {
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="droppable top-n-most-popular-stories" id="itg-block-2">
-                    <span><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                    <div class="tab-buttons">
+                        <span class="active"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                    </div>
                     <?php print $widget_data['itg-block-2']['widget']; ?>
                 </div>            
             </div>

@@ -109,6 +109,8 @@ function itg_story_theme($existing, $type, $theme, $path) {
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
+      
+      //unset($form['#validate']);
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       unset($form['actions']['preview_changes']);
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
@@ -171,7 +173,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
  * {@inheritdoc}
  */
 function itg_story_node_validate($node, $form, &$form_state) {
-
+//return TRUE;
   // Code for redirection url validation
   if ($node->type == 'story') {
 
@@ -515,3 +517,8 @@ function itg_story_checked_issue($issue_date) {
 
   return TRUE;
 }
+
+//function itg_story_bypass_form_validations($form, $form_id) {
+//  //exit;
+//  //return TRUE;
+//}
