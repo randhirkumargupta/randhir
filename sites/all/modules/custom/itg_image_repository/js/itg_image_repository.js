@@ -838,7 +838,7 @@ updateUI: function() {
 (function($) {
   $(window).bind('load', function() {
 
-
+jQuery('.div-upload-img').addClass('active');
  jQuery('#forms-wrapper').show();
  jQuery('#imce-search-form').remove();
   });
@@ -850,6 +850,7 @@ updateUI: function() {
   
   jQuery('#itg_image_repository-content').live('click','.div-upload-img',function()
   {
+    jQuery('.div-upload-img').addClass('active');
     jQuery('#forms-wrapper').show();
     jQuery('#imce-search-form').hide();
     jQuery('#itg-image-repository-upload-form').show();

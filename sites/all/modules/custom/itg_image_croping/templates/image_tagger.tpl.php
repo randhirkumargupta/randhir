@@ -1,3 +1,4 @@
+
 <style>
     
     #imgtag
@@ -220,6 +221,30 @@
                 }
             });
         });
+        jQuery('#imgtag').on('click', '.remove', function() {
+           id = jQuery(this).parent().attr("id");
+            id=id.split('_');
+            id=id[1];
+            // Remove the tag
+            $.ajax({
+                type: "POST",
+                url: Drupal.settings.basePath + 'removetags',
+                data: "tag_id=" + id + "&type=remove",
+                success: function(data) {
+                    var img = jQuery('#imgtag').find('img');
+                    var id = jQuery(img).attr('id');
+                    //get tags if present
+                     jQuery('#tagit').fadeOut();
+                     viewtag(image_fiedlid);
+                   
+                    
+                }
+            });
+        });
+        
+        
+        
+        
 
 
         viewtag(image_fiedlid); // view all tags available on page load
@@ -254,3 +279,4 @@
 
     });
 </script> 
+
