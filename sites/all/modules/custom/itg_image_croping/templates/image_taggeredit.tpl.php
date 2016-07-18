@@ -69,21 +69,22 @@
         });
 
         // mouseover the tagboxes that is already there but opacity is 0.
-        jQuery('#tagbox').on('mouseover', '.tagview', function( ) {
+        jQuery('.tagview').live('mouseover', function( ) {
         
             var pos = jQuery(this).position();
+           
             jQuery(this).css({opacity: 1.0}); // div appears when opacity is set to 1.
-        }).on('mouseout', '.tagview', function( ) {
+        }).live('mouseout', '.tagview', function( ) {
             jQuery(this).css({opacity: 0.0}); // hide the div by setting opacity to 0.
         });
 
         // Remove tags.
-        jQuery('#taglist').on('click', '.remove', function() {
+        jQuery('.remove').live('click', function() {
             id = jQuery(this).parent().attr("id");
             id=id.split('_');
             id=id[1];
             // Remove the tag
-            $.ajax({
+            jQuery.ajax({
                 type: "POST",
                 url: Drupal.settings.basePath + 'removetags',
                 data: "tag_id=" + id + "&type=remove",
