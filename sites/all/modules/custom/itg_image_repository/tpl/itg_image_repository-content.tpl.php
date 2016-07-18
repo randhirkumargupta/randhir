@@ -30,8 +30,8 @@ $itg_image_repository = & $itg_image_repository_ref['itg_image_repository']; //k
 
     <div id="message-box"></div>
     <div class="list-head image_repository">
-        <div class="div-upload-img add-more">Upload</div>
-        <div class="div-search-img add-more-wbg">Search</div>
+        <div class="div-upload-img">Upload</div>
+        <div class="div-search-img">Search</div>
 
     </div>
 
