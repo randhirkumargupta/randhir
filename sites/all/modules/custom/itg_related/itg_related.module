@@ -127,8 +127,8 @@ function itg_related_views_pre_render(&$view) {
         $related_result->bs_status = 'Published';
       }
 
-//      $splittedsite = explode("/", $related_result->site);
-//      $related_result->site = strtoupper($splittedsite[3]);
+      $splittedsite = explode("/", $related_result->site);
+      $related_result->site = strtoupper($splittedsite[3]);
     }
   }
 }
