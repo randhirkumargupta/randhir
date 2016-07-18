@@ -20,37 +20,37 @@
 /* Tab Button mixins */
 /* Tab Listing mixins */
 /*Fonts used in Indiatoday site*/
-@font-face {
-  font-family: 'Roboto';
-  src: url("../fonts/Roboto-Regular.eot");
-  src: local("/"), url("../fonts/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto-Regular.ttf") format("truetype"), url("../fonts/Roboto-Regular.svg") format("svg");
-  font-weight: 400;
-  font-style: normal;
+/*@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Regular.eot');
+	src: local('/'), url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.ttf') format('truetype'), url('../fonts/Roboto-Regular.svg') format('svg');
+	font-weight: 400;
+	font-style: normal;
 }
 @font-face {
-  font-family: 'Roboto';
-  src: url("../fonts/Roboto-Medium.eot");
-  src: local("/"), url("../fonts/Roboto-Medium.woff") format("woff"), url("../fonts/Roboto-Medium.ttf") format("truetype"), url("../fonts/Roboto-Medium.svg") format("svg");
-  font-weight: 500;
-  font-style: normal;
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Medium.eot');
+	src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
+	font-weight: 500;
+	font-style: normal;
 }
 @font-face {
-  font-family: 'Roboto';
-  src: url("../fonts/Roboto-Bold.eot");
-  src: local("/"), url("../fonts/Roboto-Bold.woff") format("woff"), url("../fonts/Roboto-Bold.ttf") format("truetype"), url("../fonts/Roboto-Bold.svg") format("svg");
-  font-weight: 700;
-  font-style: normal;
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Bold.eot');
+	src: local('/'), url('../fonts/Roboto-Bold.woff') format('woff'), url('../fonts/Roboto-Bold.ttf') format('truetype'), url('../fonts/Roboto-Bold.svg') format('svg');
+	font-weight: 700;
+	font-style: normal;
 }
 @font-face {
-  font-family: 'RobotoSlab';
-  src: url("../fonts/RobotoSlab-Regular.eot");
-  src: local("/"), url("../fonts/RobotoSlab-Regular.woff") format("woff"), url("../fonts/RobotoSlab-Regular.ttf") format("truetype"), url("../fonts/RobotoSlab-Regular.svg") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
+	font-family: 'RobotoSlab';
+	src: url('../fonts/RobotoSlab-Regular.eot');
+	src: local('/'), url('../fonts/RobotoSlab-Regular.woff') format('woff'), url('../fonts/RobotoSlab-Regular.ttf') format('truetype'), url('../fonts/RobotoSlab-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}*/
 /* Global CSS */
 body {
-  font: 400 14px/18px 'RobotoSlab';
+  font: 400 14px/18px "Roboto Slab", sans-serif;
   color: #333;
 }
 
@@ -238,7 +238,7 @@ input[type="text"], select, input[type="password"] {
 }
 .header a {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
 }
 .header .header-ads {
   text-align: center;
@@ -894,21 +894,21 @@ input[type="text"], select, input[type="password"] {
 }
 
 /*Start CSS Top Story*/
-.tab-buttons {
+.top-n-most-popular-stories .tab-buttons {
   zoom: 1;
 }
-.tab-buttons:before, .tab-buttons:after {
+.top-n-most-popular-stories .tab-buttons:before, .top-n-most-popular-stories .tab-buttons:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.tab-buttons:after {
+.top-n-most-popular-stories .tab-buttons:after {
   clear: both;
 }
-.tab-buttons span {
+.top-n-most-popular-stories .tab-buttons span {
   font-weight: 500;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   background: #e4e4e4;
   text-transform: uppercase;
   height: 36px;
@@ -920,33 +920,32 @@ input[type="text"], select, input[type="password"] {
   display: block;
   float: left;
 }
-.tab-buttons span.active {
+.top-n-most-popular-stories .tab-buttons span.active {
   background: #fff;
   color: #d12019;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
   border-top: 3px solid #d12019;
 }
-
-.top-stories-ordering {
+.top-n-most-popular-stories ul {
   border: 1px solid #e4e4e4;
 }
-.top-stories-ordering li {
+.top-n-most-popular-stories ul li {
   position: relative;
 }
-.top-stories-ordering li a {
+.top-n-most-popular-stories ul li a {
   color: #565555;
   padding: 15px 15px 15px 20px;
   display: block;
   border-bottom: 1px solid #e4e4e4;
 }
-.top-stories-ordering li a:hover {
+.top-n-most-popular-stories ul li a:hover {
   background: #f8f8f8;
 }
-.top-stories-ordering li:last-child a {
+.top-n-most-popular-stories ul li:last-child a {
   border-bottom: none;
 }
-.top-stories-ordering li:before {
+.top-n-most-popular-stories ul li:before {
   position: absolute;
   top: 22px;
   left: 9px;
