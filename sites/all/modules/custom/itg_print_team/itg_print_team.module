@@ -168,16 +168,19 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_magazine']['#access'] = FALSE;
         unset($form['field_pti_print_media']);
       }
-
       
+      
+      // Add required title for section
+      $form['field_story_category'][LANGUAGE_NONE]['#title'] = 'Select Section <span class="form-required" title="This field is required.">*</span>';
       
       $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
       $form['field_quiz_answer_video'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Video';
+      $form['field_newsl_frequency']['und']['#title'] = 'Frequency <span class="form-required" title="This field is required.">*</span>';
 
-      //Submit Handler
+      // Submit Handler
       $form['actions']['submit']['#submit'][] = 'itg_print_team_submit_handler_for_redirect';
 
-      //Call function after build
+      // Call function after build
       $form['#after_build'][] = 'itg_print_team_form_after_build';
 
       break;
@@ -325,11 +328,13 @@ function itg_print_team_form_after_build($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_print_team_views_pre_render(&$view) {
+  
+  global $base_url;
 
-  //Add "Submit Idea" button on listing page of ideas
+  // Add "Submit Idea" button on listing page of ideas
   if ($view->name == "manage_print_team") {
     $header_content_print_team = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_print_team .= '<a href="./submit-idea">Submit Idea</a>';
+    $header_content_print_team .= l('Submit Idea', $base_url.'/submit-idea');
     $view->attachment_before = $header_content_print_team;
   }
 }
@@ -387,6 +392,8 @@ function itg_print_team_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_print_team_node_update($node) {
+  
+  global $user;
   switch ($node->type) {
     case 'print_team_integration':
 
@@ -396,12 +403,14 @@ function itg_print_team_node_update($node) {
 
       // Send status mail to user
       if (in_array($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'], array('Approved', 'Rejected', 'Needs Modification'))) {
-        itg_print_team_send_idea_status_mail($node, 'update');
+        if ($user->uid != $node->uid) {
+          itg_print_team_send_idea_status_mail($node, 'update');
+        }
       }
       
       // Update story, if any idea is updated
       $associated_source_id = itg_print_team_check_association_print_to_story($node->nid);
-      if($associated_source_id){
+      if ($associated_source_id) {
         itg_print_team_association_update($node->nid, NULL, NULL, $associated_source_id, FALSE);
       }
       
@@ -451,11 +460,17 @@ function itg_print_team_node_validate($node, $form, &$form_state) {
         }
       }
     
-      // Validation for time limit
+      // Validate time limit
       $current_date = time();
       $timeline = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 47 hours');
       if ($current_date > $timeline) {
         form_set_error('field_survey_end_date', t('Sorry! You can not submit your idea now. You have exceeded your last date of idea submission.'));
+      }
+      
+      // Validate section
+      $check_for_nid = itg_print_team_check_cron_nid($node->nid);
+      if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid']) && $check_for_nid) {
+        form_set_error('field_story_category', t('Section field is required'));
       }
   }
 }
