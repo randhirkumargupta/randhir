@@ -99,13 +99,6 @@ function itg_print_team_association_update($nid, $issue_nid, $magazine, $associa
   $story_node->uid = $user->uid;
   $story_node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
   $story_node->body[$node->language][0]['value'] = $body ? $body : 'NA';
-  $story_node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue_title) ? $issue_title : date('Y-m-d h:i:s', time());
-  
-  //Issue, magazine and supplement
-  $story_node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
-  if ($magazine) {
-    $story_node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
-  }
   
   if ($fid) {
     $story_node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid;
