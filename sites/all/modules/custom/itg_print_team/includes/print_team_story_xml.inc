@@ -25,6 +25,7 @@ function itg_story_xml_validate($form, &$form_state) {
  * @param array $form_state
  */
 function itg_story_xml_submit($form, &$form_state) {
+  
   // Load itg_syndication.inc from the node module.
   global $base_url;
   module_load_include('inc', 'itg_syndication', 'includes/itg_syndication_custom_feed');
@@ -47,8 +48,9 @@ function itg_story_xml_submit($form, &$form_state) {
     file_save_data($xml, "$feed_dir/" . $filename);
     $realpath = $base_url . "/sites/default/files/story/" . $filename;
   }
+  
   $options_download['attributes']['download'] = '';
-  $link_val = t('Your selected story has been generated, Click to Download&nbsp;') . l(t('Feeds'), $realpath, $options_download);
+  $link_val = t('XML have been generated for selected stories. ') . l(t('Click here to download'), $realpath, $options_download);
   drupal_set_message($link_val, 'status');
 }
 
@@ -99,13 +101,6 @@ function itg_print_team_association_update($nid, $issue_nid, $magazine, $associa
   $story_node->uid = $user->uid;
   $story_node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
   $story_node->body[$node->language][0]['value'] = $body ? $body : 'NA';
-  $story_node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue_title) ? $issue_title : date('Y-m-d h:i:s', time());
-  
-  //Issue, magazine and supplement
-  $story_node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
-  if ($magazine) {
-    $story_node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
-  }
   
   if ($fid) {
     $story_node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid;
