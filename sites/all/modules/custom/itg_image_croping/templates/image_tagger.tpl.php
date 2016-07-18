@@ -258,8 +258,9 @@
           
         jQuery(window.opener.document).find('[name="' + field_name + '[und][0][fid]"]').val(image_fiedlid);
 
-           window.opener.jQuery("body").find("input[name='" + field_name + "[und][0][filefield_itg_image_repository][button]").trigger('mousedown');
-       window.close();
+         window.opener.jQuery("body").find('[name="' + field_name + '[und][0][filefield_itg_image_repository][button]"]').trigger('mousedown');
+
+        window.close();
       })
 
     });
