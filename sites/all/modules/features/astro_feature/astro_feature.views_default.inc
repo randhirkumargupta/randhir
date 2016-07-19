@@ -326,13 +326,6 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['fields']['field_astro_frequency']['table'] = 'field_data_field_astro_frequency';
   $handler->display->display_options['fields']['field_astro_frequency']['field'] = 'field_astro_frequency';
   $handler->display->display_options['fields']['field_astro_frequency']['label'] = 'Frequency';
-  /* Field: User: Uid */
-  $handler->display->display_options['fields']['uid']['id'] = 'uid';
-  $handler->display->display_options['fields']['uid']['table'] = 'users';
-  $handler->display->display_options['fields']['uid']['field'] = 'uid';
-  $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -340,7 +333,7 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Posted By';
   $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'manage-users/[uid]';
+  $handler->display->display_options['fields']['name']['alter']['path'] = 'users/[name]';
   $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['path_case'] = 'lower';
   $handler->display->display_options['fields']['name']['alter']['target'] = '_blank';
@@ -540,12 +533,6 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['fields']['field_astro_frequency']['table'] = 'field_data_field_astro_frequency';
   $handler->display->display_options['fields']['field_astro_frequency']['field'] = 'field_astro_frequency';
   $handler->display->display_options['fields']['field_astro_frequency']['label'] = 'Frequency';
-  /* Field: User: Uid */
-  $handler->display->display_options['fields']['uid']['id'] = 'uid';
-  $handler->display->display_options['fields']['uid']['table'] = 'users';
-  $handler->display->display_options['fields']['uid']['field'] = 'uid';
-  $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -553,7 +540,8 @@ function astro_feature_views_default_views() {
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Posted By';
   $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'manage-users/[uid]';
+  $handler->display->display_options['fields']['name']['alter']['path'] = 'users/[name]';
+  $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['path_case'] = 'lower';
   $handler->display->display_options['fields']['name']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
