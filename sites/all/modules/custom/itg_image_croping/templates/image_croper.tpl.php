@@ -115,8 +115,10 @@ $url = file_create_url($data->uri);
         <?php echo $form; ?>
     </div>
 </div>
+<div class="croper-action">
 <button class="crop-image add-more">Crop</button>
 <button class="original-image add-more">Use Original</button>
+</div>
 
 <!--   -->
 
