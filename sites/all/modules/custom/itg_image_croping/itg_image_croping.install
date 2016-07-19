@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG image cropingmodule.
+ */
+
+/**
+ * Implementation of hook_schema
+ * 
+ * @access public
+ * @return array
+ */
+function itg_image_croping_schema() {
+  $schema = array();      
+ $schema['image_tags'] = array(
+  'description' => t('Table for image_tags .'),
+  'fields' => array(
+    'id' => array(
+      'description' => t('id'),
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'image_id' => array(
+      'description' => t('fid of image'),
+      'type' => 'int',
+      'not null' => TRUE,
+    ),
+    'tag_title' => array(
+      'description' => t('image tag'),
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => FALSE,
+    ),
+    'tag_url' => array(
+      'description' => t('redirection url of tag'),
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => FALSE,
+    ),
+    'x_coordinate' => array(
+      'description' => t('tag x coordinate of on image'),
+      'type' => 'float',
+      'not null' => TRUE,
+    ),
+    'y_coordinate' => array(
+      'description' => t('tag y coordinate of on image'),
+      'type' => 'float',
+      'not null' => TRUE,
+    ),
+  ),
+  'primary key' => array('id'),
+);
+
+  return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_image_croping_uninstall() {
+  drupal_uninstall_schema('image_tags');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_image_croping_update_7001() {
+  cache_clear_all(NULL, 'cache_menu');
+}

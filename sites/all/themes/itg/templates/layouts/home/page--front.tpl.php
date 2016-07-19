@@ -16,13 +16,21 @@ if ($theme != 'itgadmin') {
     <!--------------------------------Code for Front tpl---------------------------------------->
 
     <div id="page">
-
         <header class="header" id="header" role="banner">
-            <section class="container">
+            <section class="header-top">
+                <div class="container header-logo">
+             
                 <?php if ($logo): ?>
+                <div class="logo">
                     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+                </div>
                 <?php endif; ?>
-                <div class="fright login"><a href="user">Login</a></div>
+                <div class="login-link desktop-hide">
+                    <a href="/user">Login</a>
+                </div> 
+                    </div>
+                
+               
                 <?php if ($site_name || $site_slogan): ?>
                     <div class="header__name-and-slogan" id="name-and-slogan">
                         <?php if ($site_name): ?>
@@ -56,8 +64,10 @@ if ($theme != 'itgadmin') {
                 <?php endif; ?>
 
                 <?php print render($page['header']); ?>
+             
             </section>
-        </header>
+            
+            </header>
         <?php
         // Render the sidebars to see if there's anything in them.
         $sidebar_first = render($page['sidebar_first']);
@@ -70,8 +80,7 @@ if ($theme != 'itgadmin') {
         endif;
         ?>
         <main id="main" class="container">
-            <div class="row">
-                <section id="content" class="<?php echo $cls; ?>" role="main">
+                <section id="content" role="main">
                     <?php print render($page['highlighted']); ?>
                     <?php print $breadcrumb; ?>
                     <a id="main-content"></a>
@@ -94,7 +103,7 @@ if ($theme != 'itgadmin') {
         <div class="row">
             <div class="col-md-12">
                 <div class="droppable big-news" id="itg-block-1">
-                  <span><?php print $widget_data['itg-block-1']['block_title']; ?></span>
+                        <span><?php print $widget_data['itg-block-1']['block_title']; ?></span>
                     <?php print $widget_data['itg-block-1']['widget']; ?>
                 </div>                
             </div>
@@ -104,7 +113,9 @@ if ($theme != 'itgadmin') {
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="droppable top-n-most-popular-stories" id="itg-block-2">
-                    <span><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                    <div class="tab-buttons">
+                        <span class="active"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                    </div>
                     <?php print $widget_data['itg-block-2']['widget']; ?>
                 </div>            
             </div>
@@ -186,10 +197,11 @@ if ($theme != 'itgadmin') {
                         <?php print $sidebar_second; ?>
                     </aside>
                 <?php endif; ?>
-            </div>
         </main>
 
-        <?php print render($page['footer']); ?>
+       
+            <?php print render($page['footer']); ?>
+     
 
     </div>
 

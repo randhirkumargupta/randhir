@@ -28,16 +28,14 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
     $user_email_ids = implode(",", $user_emails);
   }
 
-  //Array of email subject and body 
+  // Array of email subject and body 
   $params = array(
     'body' => $mail_content,
     'subject' => 'India Today | ' . $node->title . ' status!',
   );
 
-  $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-  if ($mail['result']) {
-    drupal_set_message(t('Mail has been sent successfully!'));
-  }
+  // Send mail function
+  drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
 }
 
 /**
@@ -57,15 +55,17 @@ function itg_print_team_send_mail_for_notification($nid){
   );
 
   // Send notification mail
-  drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   
-  //Update mail status after sending notification      
-  db_update('itg_cron_print_team')
-          ->fields(array(
-              'status' => 1,
-          ))
-          ->condition('nid', $nid, '=')
-          ->execute();
+  //Update mail status after sending notification 
+  if ($mail['result']) {
+    db_update('itg_cron_print_team')
+            ->fields(array(
+                'status' => 1,
+            ))
+            ->condition('nid', $nid, '=')
+            ->execute();
+  }
 }
 
 /**
