@@ -864,9 +864,9 @@ jQuery('.div-upload-img').addClass('active');
     jQuery('.div-upload-img').removeClass('active');
     jQuery('.div-search-img').addClass('active');
     jQuery('#forms-wrapper').show();
-    jQuery('#imce-search-form').hide();
-    jQuery('#itg-image-repository-upload-form').show();
-    jQuery('#itg-image-repository-filesearch-form').hide();
+    jQuery('#imce-search-form').show();
+    jQuery('#itg-image-repository-upload-form').hide();
+    jQuery('#itg-image-repository-filesearch-form').show();
   })
  
   
