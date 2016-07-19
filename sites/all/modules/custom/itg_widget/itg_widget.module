@@ -31,7 +31,34 @@ function itg_widget_menu() {
         'page arguments' => array(1, 2, 3, 4, 5, 6),
         'access arguments' => array('administer nodequeue'),
     );
+    $items['move-widget-node/%/%/%/%'] = array(
+        'page callback' => 'move_node_from_widget',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
     return $items;
+}
+
+/**
+ * Funtion used to delete node combination form itg_widget_order table.
+ * 
+ * @param string $widget_name
+ * @param string $content_type
+ * @param int $cat_tid
+ * @param int $nid
+ */
+function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
+    if (!empty($widget_name) && !empty($content_type) && !empty($cat_tid) && !empty($nid)) {
+        $num = db_delete('itg_widget_order')
+                ->condition('nid', $nid)
+                ->condition('content_type', $content_type)
+                ->condition('cat_id', $cat_tid)
+                ->condition('widget', $widget_name)
+                ->execute();
+        if ($num) {
+            drupal_set_message("Node has been moved");
+        }
+    }
 }
 
 /**
