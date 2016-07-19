@@ -69,13 +69,15 @@ function itg_layout_manager_block_view($delta = '') {
   $block = array();
   
   switch ($delta) {
-    case 'header_block':      
-      $block['content'] = theme('header_block', array('data' => ''));
+    case 'header_block':
+      $data['itg_main_manu_header'] = menu_tree('menu-itg-main-manu-header');
+      $data['itg_top_manu_header'] = menu_tree('menu-itg-top-manu-header');
+      $block['content'] = theme('header_block', array('data' => $data));
       break;
     
     case 'footer_block':            
-      //$data['follow'] = menu_tree('menu-follow-us');            
-      $block['content'] = theme('footer_block', array('data' => ''));
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');            
+      $block['content'] = theme('footer_block', array('data' => $data));
       break;
           
     case 'layout_manager_form_block':
