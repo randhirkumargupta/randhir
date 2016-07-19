@@ -6,9 +6,7 @@
 
 /**
  * Implements hook_form_alter()
- * @param array $form
- * @param array $form_state
- * @param string $form_id
+ * {@inheritdoc}
  */
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
@@ -25,7 +23,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {    
-   // p($form);
+   
     $form['client_title'] = array(
       '#type' => 'select',
       '#title' => t('Select Client'),
@@ -83,11 +81,13 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
             });', array('type' => 'inline', 'scope' => 'footer'));   
    
     
- } else if ($form_id == 'views_form_syndication_feed_generator_page') {
+ } 
+ else if ($form_id == 'views_form_syndication_feed_generator_page') {
    if (isset($_GET['client_title'])) {
-    $op = itg_syndication_get_mode($_GET['client_title']);
-   } else {
-      $op = array('_none' => '- None -');
+     $op = itg_syndication_get_mode($_GET['client_title']);
+   } 
+   else {
+     $op = array('_none' => '- None -');
    }
   
    $form['client_delivery_mode'] = array(
@@ -134,15 +134,15 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['#after_build'][] = 'itg_syndication_feed_download_after_build';
    
  }
-elseif ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_pattern_listing') {    
-     $form['field_syndication_feed_clients_value'] = array(
-      '#type' => 'select',
-      '#options' => itg_syndication_get_client(),
-      '#default_value' => '_none',
-      '#validated' => true,
-      '#weight' => 1,             
-    );
-}
+  elseif ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_pattern_listing') {    
+       $form['field_syndication_feed_clients_value'] = array(
+        '#type' => 'select',
+        '#options' => itg_syndication_get_client(),
+        '#default_value' => '_none',
+        '#validated' => true,
+        '#weight' => 1,             
+      );
+  }
   // View autocomplete title field.
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_client') {
     $form['title']['#autocomplete_path'] = 'content-title-list/syndication_client/autocomplete';
@@ -154,7 +154,7 @@ elseif ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndic
  * After build callback function.
  * @param array $form
  * @param array $form_state
- * @return array
+ * @return array $form
  */
 function itg_syndication_feed_download_after_build($form, &$form_state) {  
   
@@ -203,9 +203,7 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
   );
   
   $file_path = feed_generator_of_contents($data);
-  $realpath = $file_path['file_path'];
-  //$file_name = 'shsh.xml';
-  //$realpath = 'http://localhost/itgcms/sites/default/files/Idea-JNP.xml';
+  $realpath = $file_path['file_path'];  
   
   // insert records into database table itg_syndication_manual_feed_details.
   
@@ -247,14 +245,13 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
 
 /**
  * Implementation of hook_views_query_alter
- * @param array reference $view
- * @param array reference $query
+ * {@inheritdoc}
  */
 function itg_syndication_views_query_alter(&$view, &$query) {
   
   if (isset($view->name) && $view->name === 'syndication_feed_generator') {
-    foreach($query->where[1]['conditions'] as $key => $val) {
-      if(isset($val['field']) && $val['field'] == 'node.type' && $val['value'][0] == 'magazine') {
+    foreach ($query->where[1]['conditions'] as $key => $val) {
+      if (isset($val['field']) && $val['field'] == 'node.type' && $val['value'][0] == 'magazine') {
         $query->where[1]['conditions'][$key]['value'][0] = 'story';
       }
     }
@@ -287,8 +284,7 @@ function itg_syndication_views_query_alter(&$view, &$query) {
 
 /**
  * syndication selector custom form validate
- * @param array $form
- * @param array $form_state
+ * {@inheritdoc}
  */
 function syndication_selector_custom_form_validate($form, &$form_state) {
   
@@ -304,8 +300,7 @@ function syndication_selector_custom_form_validate($form, &$form_state) {
 
 /**
  * syndication filter custom form validate
- * @param array $form
- * @param array $form_state
+ * {@inheritdoc}
  */
 function syndication_filter_custom_form_validate($form, &$form_state) {  
   if ($form_state['values']['client_delivery_mode'] == '_none' && $form_state['values']['feed_download_value'] != 'yes') {
@@ -316,7 +311,7 @@ function syndication_filter_custom_form_validate($form, &$form_state) {
 
 /**
  * Implements views header link 
- * @param type $view Description
+ * {@inheritdoc}
  */
 function itg_syndication_views_pre_render(&$view) { 
   if ($view->name == "syndication_feed_generator") {

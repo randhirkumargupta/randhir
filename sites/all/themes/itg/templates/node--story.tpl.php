@@ -1,23 +1,13 @@
 <?php if (!empty($content)): ?>
   <div class='<?php print $classes ?>'>
       <?php if ($view_mode == 'full'): ?>
-               
-        <div class="basic-details content-box">
-            
-            <div class="content-details">
-                
-                <?php print render($content['field_story_long_head_line']); ?>
-                <div class="field field-name-field-story-body">
-                    <div class="field-label">Story Body:&nbsp;</div>
-                    <div class="field-items">
-                        <div class="field-item even"><?php print render($content['body']); ?></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+                <?php //pr(); die; ?>
+                <h1><?php print $content['field_story_long_head_line']['#object']->title;?></h1>
+                <?php print render($content['field_story_reporter']); ?>
+                <div class="story-body"><?php print $content['body']['#object']->body['und'][0]['value']; ?></div>
        
-      <?php endif; // end of view mode full condition ?></div>
+      <?php endif; // end of view mode full condition ?>
+  </div>
   <?php
   // code for comment hide and show based on condition
 

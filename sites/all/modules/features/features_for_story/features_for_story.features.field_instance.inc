@@ -1158,6 +1158,48 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_featured_name'.
+  $field_instances['node-story-field_story_featured_name'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 68,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_featured_name',
+    'label' => 'Featured Name',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 24,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_issue_date'.
   $field_instances['node-story-field_story_issue_date'] = array(
     'bundle' => 'story',
@@ -3144,6 +3186,7 @@ function features_for_story_field_default_field_instances() {
   t('Facebook image');
   t('Facebook narrative');
   t('Factoids');
+  t('Featured Name');
   t('HeadLine');
   t('Image');
   t('Image Size (210 x 145)');

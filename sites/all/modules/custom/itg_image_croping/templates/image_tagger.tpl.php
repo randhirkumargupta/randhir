@@ -42,7 +42,7 @@
         width: 100px;
         height: 100px;
         float: left;
-        background-color: rgba(0,0,0,.5);
+        border: 2px solid rgba(0, 0, 0, 0.5);
         margin-right: 1px;
     }
     #tagit .name
@@ -220,6 +220,30 @@
                 }
             });
         });
+        jQuery('#imgtag').on('click', '.remove', function() {
+           id = jQuery(this).parent().attr("id");
+            id=id.split('_');
+            id=id[1];
+            // Remove the tag
+            $.ajax({
+                type: "POST",
+                url: Drupal.settings.basePath + 'removetags',
+                data: "tag_id=" + id + "&type=remove",
+                success: function(data) {
+                    var img = jQuery('#imgtag').find('img');
+                    var id = jQuery(img).attr('id');
+                    //get tags if present
+                     jQuery('#tagit').fadeOut();
+                     viewtag(image_fiedlid);
+                   
+                    
+                }
+            });
+        });
+        
+        
+        
+        
 
 
         viewtag(image_fiedlid); // view all tags available on page load

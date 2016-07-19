@@ -64,7 +64,7 @@
         text-overflow: ellipsis;
         word-wrap: break-word;
     }
-    .first-resize,.second-resize{
+    .first-resize, .second-resize{
         width: <?php echo $image_width; ?>px;
         margin-left:100px;
     }
@@ -114,9 +114,10 @@ $url = file_create_url($data->uri);
     <div class="first-resize">
         <?php echo $form; ?>
     </div>
-
-    <button class="crop-image add-more">Crop</button>
-     <button class="original-image add-more">Use Original</button>
+</div>
+<div class="croper-action">
+<button class="crop-image add-more">Crop</button>
+<button class="original-image add-more">Use Original</button>
 </div>
 
 <!--   -->
