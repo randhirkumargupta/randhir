@@ -29,11 +29,14 @@ function itg_syndication_generate_xml($data) {
   
   if ($delivery_mode_array[0] == 'Email') {
     $delivery_mode_type = 'Email';
-  } else if ($delivery_mode_array [0]== 'FTP') {
-      $delivery_mode_type = 'FTP';
-  } else if ($delivery_mode_array[0] == 'Weburl') {
-      $delivery_mode_type = 'web_url';
   } 
+  else if ($delivery_mode_array [0]== 'FTP') {
+    $delivery_mode_type = 'FTP';
+  } 
+  else if ($delivery_mode_array[0] == 'Weburl') {
+    $delivery_mode_type = 'web_url';
+  }
+  
   watchdog("Syndication", "delivery_mode_type : $delivery_mode_type");
   // Decide sharing mode
   switch ($delivery_mode_type) {
@@ -115,14 +118,10 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   $ftp_details = get_ftp_details_by_client($data['client_title'], $delivery_mode);
   $file = $file_path;
  
-  //$remote_file = str_replace(" ","-",$file_name);
   $remote_file = $file_name;
   $ftp_server = $ftp_details[0]->field_syndication_ftp_url_value;
   $ftp_user_name = $ftp_details[0]->field_syndication_ftp_username_value;
-  $ftp_user_pass = $ftp_details[0]->field_syndication_ftp_password_value;
-  
-  //$file = 'http://localhost/itgcms/sites/default/files/Idea-JNP.xml';
-  //$remote_file = 'shravan.xml';
+  $ftp_user_pass = $ftp_details[0]->field_syndication_ftp_password_value;  
   
   // set up basic connection
   //$conn_id = ftp_connect($ftp_server) or die("Couldn't connect to $ftp_server");
@@ -132,10 +131,10 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   //$login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass) or die("You do not have access to this ftp server!");
   
   $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
-  if ((!$conn_id) || (!$login_result)) {
-    //echo "FTP connection has failed";
+  if ((!$conn_id) || (!$login_result)) {    
     watchdog("WATCHDOG_INFO_XML", "FTP connection has failed");
   }
+  
   //turn passive mode on
   ftp_pasv($conn_id, true);
   $upload = ftp_put($conn_id, $remote_file, $file, FTP_BINARY);
@@ -145,7 +144,7 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   else {
     echo "successfully uploaded $file\n";
   }
-  //p($ftp_details);
+  
   // close the connection
   ftp_close($conn_id);
   
