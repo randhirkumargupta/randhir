@@ -69,20 +69,22 @@
         });
 
         // mouseover the tagboxes that is already there but opacity is 0.
-        jQuery('#tagbox').on('mouseover', '.tagview', function( ) {
+        jQuery('.tagview').live('mouseover', function( ) {
+        
             var pos = jQuery(this).position();
+           
             jQuery(this).css({opacity: 1.0}); // div appears when opacity is set to 1.
-        }).on('mouseout', '.tagview', function( ) {
+        }).live('mouseout', '.tagview', function( ) {
             jQuery(this).css({opacity: 0.0}); // hide the div by setting opacity to 0.
         });
 
         // Remove tags.
-        jQuery('#taglist').on('click', '.remove', function() {
+        jQuery('.remove').live('click', function() {
             id = jQuery(this).parent().attr("id");
             id=id.split('_');
             id=id[1];
             // Remove the tag
-            $.ajax({
+            jQuery.ajax({
                 type: "POST",
                 url: Drupal.settings.basePath + 'removetags',
                 data: "tag_id=" + id + "&type=remove",
@@ -148,25 +150,7 @@
 
 
 <style>
-    #logo
-    {
-        width: 505px;
-        margin: 0 auto;
-        text-align: center;
-    }
-    #pgtitle
-    {
-        margin: 0px 0px 20px;
-        font-size: 18pt;
-    }
-    #container
-    {
-        display: block;
-        width: 850px;
-        height: 300px;
-        margin: 0 auto;
-    }
-    #imgtag
+ #imgtag
     {
         position: relative;
         min-width: 300px;
@@ -202,60 +186,67 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 240px;
-        border: 1px solid #D7C7C7;
     }
     #tagit .box
     {
-        border: 1px solid #F10303;
         width: 100px;
         height: 100px;
         float: left;
+        background-color: rgba(0,0,0,.5);
+        margin-right: 1px;
     }
     #tagit .name
     {
         float: left;
-        background-color: #FFF;
-        width: 127px;
-        height: 92px;
-        padding: 5px;
-        font-size: 10pt;
+        width: 200px;
+        position: relative;
     }
-    #tagit DIV.text
-    {
-        margin-bottom: 5px;
+    #tagit .name div.text{display: none;}
+    #tagit .name span.error{
+        top: 100px;
+        position: absolute;
+        left: 0;
     }
-    #tagit INPUT[type=text]
-    {
-        margin-bottom: 5px;
+    #tagit input[type="text"]{
+        width: 100%;
+        background-color: rgba(0,0,0,.5);
+        color: #fff;
+        height: 33px;
+        border: none;
     }
-    #tagit #tagname
-    {
-        width: 110px;
+    #tagit #tagname{
+        margin-bottom: 1px;
     }
-    #taglist
-    {
-        width: 300px;
-        min-height: 200px;
-        height: auto !important;
-        height: 200px;
-        float: left;
-        padding: 10px;
-        margin-left: 20px;
-        color: #000;
-    }
-    #taglist OL
-    {
-        padding: 0 20px;
-        float: left;
+    #btnsavetag{
+        background-color: rgba(31,181,173,.9);
+        border: 1px solid rgba(31,181,173,.9);
+        border-radius: 0;
+        color: #fff;
         cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        height: 33px;
+        width: 50%;
+        
     }
-    #taglist OL A
-    {
-    }
-    #taglist OL A:hover
-    {
-        text-decoration: underline;
+    #btncancel{
+        background-color: rgba(208,11,38,.9);
+        border: 1px solid rgba(208,11,38,.9);
+        border-radius: 0;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        height: 33px;
+        width: 50%;
     }
     .tagtitle
     {
@@ -264,21 +255,15 @@
         width: 100%;
         float: left;
     }
-    .light-box{
- position: fixed;
- top: 0;
- left: 0;
- height: 100%;
- width: 100%;
- background: rgba(0, 0, 0, 0.7);
- color: #fff;
- }
- .light-box-content{
- top: 50%;
- position: absolute;
- left: 50%;
- }
+
     
+     #container
+    {
+        display: block;
+        width: 850px;
+        height: 300px;
+        margin: 0 auto;
+    }
 
 </style>	
 
