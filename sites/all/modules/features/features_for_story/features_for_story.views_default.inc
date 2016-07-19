@@ -809,7 +809,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -822,6 +822,43 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'unpublished-story';
 
   /* Display: Published Story */
@@ -1107,7 +1144,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -1187,6 +1224,43 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['id'] = 'field_story_configurations_value_1';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['operator_id'] = 'field_story_configurations_value_1_op';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['operator'] = 'field_story_configurations_value_1_op';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['identifier'] = 'field_story_configurations_value_1';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'published-story';
 
   /* Display: My Un Published Story */
@@ -1468,7 +1542,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -1481,6 +1555,43 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'my-unpublished-story';
 
   /* Display: My Draft Of Story */
@@ -1854,7 +1965,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -1867,6 +1978,43 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'mydraft-story';
 
   /* Display: My Published Story */
@@ -2128,7 +2276,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2185,6 +2333,43 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
     'display_lock' => 'display_lock',
   );
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['id'] = 'field_story_configurations_value_1';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['operator_id'] = 'field_story_configurations_value_1_op';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['operator'] = 'field_story_configurations_value_1_op';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['identifier'] = 'field_story_configurations_value_1';
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'my-published-story';
 
   /* Display: My queue */
@@ -2560,7 +2745,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2573,6 +2758,43 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'my-queue-story';
 
   /* Display: In queue */
@@ -2919,7 +3141,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state_1']['value'] = array(
     'needs_review' => 'needs_review',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -2932,6 +3154,43 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'in-queue-story';
 
   /* Display: My expired Story */
@@ -3018,7 +3277,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Field: Expiry On */
+  /* Field: Field: Expiry Date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -3212,7 +3471,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -3225,6 +3484,43 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'my-expired-story';
 
   /* Display: Expired Story */
@@ -3403,7 +3699,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Field: Expiry On */
+  /* Field: Field: Expiry Date */
   $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
@@ -3592,7 +3888,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -3605,6 +3901,43 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'expired-story';
 
   /* Display: Archive Story */
@@ -3851,6 +4184,43 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value_1']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value_1']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value_1']['operator'] = 'not empty';
+  /* Filter criterion: Content: Configurations (field_story_configurations) */
+  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
+  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
+    'set_as_featured' => 'set_as_featured',
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator_id'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['label'] = 'Featured Story';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['operator'] = 'field_story_configurations_value_op';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['identifier'] = 'field_story_configurations_value';
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_configurations_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'archive-story';
 
   /* Display: My Rejected */
@@ -4218,7 +4588,7 @@ function features_for_story_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -4518,7 +4888,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
@@ -4852,7 +5222,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Field: Expiry On (field_story_expiry_date) */
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';

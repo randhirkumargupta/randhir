@@ -1,4 +1,3 @@
-
 <style>
     
     #imgtag
@@ -43,7 +42,7 @@
         width: 100px;
         height: 100px;
         float: left;
-        background-color: rgba(0,0,0,.5);
+        border: 2px solid rgba(0, 0, 0, 0.5);
         margin-right: 1px;
     }
     #tagit .name
@@ -279,4 +278,3 @@
 
     });
 </script> 
-

@@ -519,6 +519,6 @@ function itg_story_checked_issue($issue_date) {
 }
 
 //function itg_story_bypass_form_validations($form, $form_id) {
-//  //exit;
-//  //return TRUE;
+// 
+//  return TRUE;
 //}

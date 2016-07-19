@@ -80,7 +80,7 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
-  global $user, $base_url;
+  global $base_url;
   
   switch ($form_id) {
 
@@ -139,6 +139,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
             unset($form['field_pti_print_media']);
             $form['field_pti_issue']['#access'] = FALSE;
             $form['field_pti_magazine']['#access'] = FALSE;
+            $form['field_story_rating']['#access'] = FALSE;
           }
         }
         else {
@@ -152,7 +153,10 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $form['field_survey_end_date']['#access'] = FALSE;
           $form['field_pti_issue']['#access'] = FALSE;
           $form['field_pti_magazine']['#access'] = FALSE;
+          $form['field_story_rating']['#access'] = FALSE;
         }
+        
+        
         
         // Disable change status radio button if status is "Approved" OR "Rejected"
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Rejected') {
@@ -166,6 +170,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_idea_status']['#access'] = FALSE;
         $form['field_pti_issue']['#access'] = FALSE;
         $form['field_pti_magazine']['#access'] = FALSE;
+        $form['field_story_rating']['#access'] = FALSE;
         unset($form['field_pti_print_media']);
       }
       
