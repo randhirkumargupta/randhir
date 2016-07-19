@@ -3835,9 +3835,12 @@ div.node{
             left: 280px;
         }
     }
-    .form-field-name-field-story-extra-large-image{
+    #BrowseMedia .form-field-type-image{
         .image-widget-data{
             @extend .pos-rel;
+            .form-submit[value="Remove"]{
+                left: 400px;
+            }
         }
         a.filefield-sources-imce-browse{
             height: 100%;
