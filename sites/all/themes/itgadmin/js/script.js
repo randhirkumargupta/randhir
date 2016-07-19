@@ -793,5 +793,12 @@ jQuery(document).ready(function(){
     });
     // end of code
     
+    // jQuery code for Loader
+    jQuery(document).ajaxStart(function () {
+        jQuery(".ajax-loader").show();
+    }).ajaxStop(function () {
+        jQuery(".ajax-loader").hide();
+    });
+    
     
 });
