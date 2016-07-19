@@ -35,6 +35,26 @@
 @mixin fright{
     float:right;
 }
+/*Display inline block mixins*/
+@mixin display-inline{
+    display: inline-block;
+    vertical-align: top;
+}
+/*Text align block mixins*/
+@mixin text-align($align) {  
+  @if ($align == center) {
+   text-align:center;
+  }
+  @else if ($align == left) {
+   position: left;
+  }
+  @else if ($align == right) {
+   position: right;
+  }
+}
+
+
+
 /* Positional mixins */
 @mixin pos($pos:static,$top:null,$right:null,$bottom:null,$left:null,$z-index:null) {  
   @if (($pos == relative) or ($pos == re)) {
