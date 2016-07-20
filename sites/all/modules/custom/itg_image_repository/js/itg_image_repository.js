@@ -852,6 +852,7 @@ jQuery('.div-upload-img').addClass('active');
   {
       
     jQuery('.div-upload-img').addClass('active');
+     jQuery('#search-preview').hide();
      jQuery('.div-search-img').removeClass('active');
     jQuery('#forms-wrapper').show();
     jQuery('#imce-search-form').hide();
@@ -865,6 +866,8 @@ jQuery('.div-upload-img').addClass('active');
     jQuery('.div-search-img').addClass('active');
     jQuery('#forms-wrapper').show();
     jQuery('#imce-search-form').show();
+    
+     jQuery('#search-preview').show();
     jQuery('#itg-image-repository-upload-form').hide();
     jQuery('#itg-image-repository-filesearch-form').show();
   })
