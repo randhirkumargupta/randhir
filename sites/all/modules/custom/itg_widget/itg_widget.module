@@ -57,6 +57,7 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
                 ->execute();
         if ($num) {
             drupal_set_message("Node has been moved");
+            drupal_goto($_SERVER['HTTP_REFERER']);
         }
     }
 }
@@ -151,6 +152,9 @@ function itg_widget_block_info() {
     $blocks['we_may_suggest'] = array(
         'info' => t('Widget: We May Suggest'),
     );
+    $blocks['section_wise_order'] = array(
+        'info' => t('Widget: Section wise ordering form custom table'),
+    );
     return $blocks;
 }
 
@@ -160,6 +164,18 @@ function itg_widget_block_info() {
 function itg_widget_block_view($delta = '') {
     $block = array();
     switch ($delta) {
+        // section ordering reordering widget case
+        case 'section_wise_order':
+            module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
+            // value is hardcoded need to be change for dyanamic functionality
+            $info['section'] = '301'; // tid of section
+            $info['content_type'] = 'story'; // content type machine name
+            // view name which is stored in draggableviews_structure table
+            $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
+            $block['subject'] = t('Section wise ordering from custom table');
+            $data = itg_widget_section_wise_ordering_from_custom_table($info);
+            $block['content'] = theme("section_wise_ordering", array("data" => $data));
+            break;
         // section ordering reordering widget case
         case 'section_ordering':
             module_load_include('inc', 'itg_widget', 'includes/section-odering');
@@ -295,6 +311,9 @@ function itg_widget_views_pre_render(&$view) {
  */
 function itg_widget_theme() {
     $themes = array(
+        'section_wise_ordering' => array(
+            'template' => 'templates/section-wise-ordering',
+        ),
         'section_ordering' => array(
             'template' => 'templates/section-ordering-data',
         ),
@@ -518,12 +537,13 @@ function update_itg_widget_order_table_data($form, &$form_state) {
                         ->execute();
                 if ($is_inserted) {
                     watchdog("widget", "Insert action has been performed");
+                    drupal_set_message("Ordering has been saved.");
                 }
             }
         }
     }
     // If there is not chnages found in draggable view order then simply give an message.
     else {
-        drupal_set_message("Please change order to save data");
+        drupal_set_message("This ordering is already saved.");
     }
 }
