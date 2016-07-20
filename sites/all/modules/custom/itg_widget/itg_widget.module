@@ -56,7 +56,7 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
                 ->condition('widget', $widget_name)
                 ->execute();
         if ($num) {
-            drupal_set_message("Node has been moved");
+            drupal_set_message(t("Node has been moved"));
             drupal_goto($_SERVER['HTTP_REFERER']);
         }
     }
@@ -386,7 +386,7 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
     $widget = _get_widget_name("views_form_" . $view_name . "_page");
     $form['widget_name'] = array(
         '#type' => 'select',
-        '#title' => t("Widget ($widget)"),
+        '#title' => t("Widget"),
         '#options' => array("$widget" => "widget"),
         '#weight' => -1,
     );
@@ -436,10 +436,10 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
                     ))
                     ->execute();
         }
-        drupal_set_message("Nodes has been saved");
+        drupal_set_message(t("Nodes has been saved"));
     }
     else {
-        drupal_set_message("Selected nodes allready in ordering section");
+        drupal_set_message(t("Selected nodes allready in ordering section"));
     }
 }
 
@@ -537,13 +537,13 @@ function update_itg_widget_order_table_data($form, &$form_state) {
                         ->execute();
                 if ($is_inserted) {
                     watchdog("widget", "Insert action has been performed");
-                    drupal_set_message("Ordering has been saved.");
+                    drupal_set_message(t("Ordering has been saved."));
                 }
             }
         }
     }
     // If there is not chnages found in draggable view order then simply give an message.
     else {
-        drupal_set_message("This ordering is already saved.");
+        drupal_set_message(t("This ordering is already saved."));
     }
 }
