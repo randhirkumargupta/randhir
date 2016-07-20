@@ -2,136 +2,262 @@
 
 /**
  * @file
- * The ITG Image Repository module.
+ * The ITG Image Croping module.
  *
- * Contains functionality related to Image Repository.
+ * Contains functionality related to Image Croping and tagging.
  *
  */
 
 /**
- * Implements hook_block_info().
+ * Implements hook_menu().
+ * {@inheritdoc}
  */
-/**
-* Implements hook_menu().
-*/
-
-
 function itg_image_croping_menu() {
 
-$items=array();
-  $items['getimagetocroper'] = array(
-    'page callback' => 'itg_image_croping_ajax_make_ajax', // Render HTML.
-    'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
- 
-  );
+    $items = array();
+    $items['getimagetocroper'] = array(
+        'page callback' => 'itg_image_croping_ajax_make_ajax', // load the croper according to size!.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
-  $items['savecropedimage'] = array(
-    'page callback' => 'itg_image_croping_crop_image', // Render HTML.
-    'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
- 
-  );
-  return $items;
+    $items['savecropedimage'] = array(
+        'page callback' => 'itg_image_croping_crop_image', // save croped image by form the image dataurl (base64).
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+
+    $items['imagetotag'] = array(
+        'page callback' => 'itg_image_croping_getimagetotag', // make image to tagging
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+
+    $items['imagetagedit'] = array(
+        'page callback' => 'itg_image_croping_imagetagedit', // make image tags edit
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+
+
+    $items['savetags'] = array(
+        'page callback' => 'itg_image_croping_save_tags', // save the tags on images.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+    $items['gettaglist'] = array(
+        'page callback' => 'itg_image_croping_get_image_tags', // use for get the all tags on image.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+
+    $items['removetags'] = array(
+        'page callback' => 'itg_image_croping_remove_image_tag', // se for remove the tags on image.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+
+    return $items;
 }
 
-
 /**
-* This function use for load the croper according to size!
-*/
+ * This function use for load the croper according to size!
+ */
 function itg_image_croping_ajax_make_ajax() {
-     //print_r($drupal_form);die;
-    $image_height=350;  //set the inital height of croper
-    $image_width=500;    //set the inital width of croper 
+    $image_height = 350;  //set the inital height of croper
+    $image_width = 500;    //set the inital width of croper 
 
-    $image_id=$_POST['imageId'];
-    $field_name=$_POST['field_id'];
-    $image_height=trim($_POST['img_height']);
-    $image_width=trim($_POST['img_width']);
-    $file = file_load($image_id); 
-    if ( empty ( $file ) ) {
-      drupal_set_message(t('This image is not valid!'));
+    $image_id = $_POST['imageId'];
+    $field_name = $_POST['field_id'];
+    $image_height = trim($_POST['img_height']);
+    $image_width = trim($_POST['img_width']);
+    $file = file_load($image_id);
+    if (empty($file)) {
+        drupal_set_message(t('This image is not valid!'));
     }
-    $imagedata= base64_encode(file_get_contents($file->uri));
-       $drupal_form=drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata));
+    $imagedata = base64_encode(file_get_contents($file->uri));
+    $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata));
 
- 
-  return theme('image_repository', 
-      array('data' => $file, 
-      'field_name' => $field_name,
-      'image_height' => $image_height, 
-      'image_width' => $image_width, 
-      'form' => $drupal_form));
+
+    return theme('image_repository', array('data' => $file,
+        'field_name' => $field_name,
+        'image_height' => $image_height,
+        'image_width' => $image_width,
+        'form' => $drupal_form));
 }
 
 /**
-* Implements hook_theme().
-*/
+ * This function use for make image to tagging
+ *
+ */
+function itg_image_croping_getimagetotag() {
+    $image_id = $_POST['fid'];
+    $file = file_load($image_id);
+    return theme('image_tagging', array('data' => $file,
+        'field_name' => $_POST['field_name']
+    ));
+}
 
+/**
+ * This function use for make image tags edit or append
+ * 
+ */
+function itg_image_croping_imagetagedit() {
+    $image_id = $_POST['fid'];
+    $file = file_load($image_id);
+    print theme('image_taggingedit', array('data' => $file,
+        'field_name' => $_POST['field_name']
+    ));
+}
+
+/**
+ * This function use for remove the tags on image
+ * used in ajax request and print use for return responce to ajax request
+ */
+function itg_image_croping_remove_image_tag() {
+
+    $tag_id = $_POST['tag_id'];
+    $data = db_delete('image_tags')
+            ->condition('id', $tag_id, '=')
+            ->execute();
+    print $data;
+    exit();
+}
+
+/**
+ * This function use for get the all tags on image
+ */
+function itg_image_croping_get_image_tags() {
+
+    $image_id = $_POST['fid'];
+    $data['boxes'] = '';
+    $data['lists'] = '';
+    $query = db_select('image_tags', 'tags')
+            ->fields('tags')
+            ->condition('image_id', $image_id, '=');
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+        $data['boxes'] .= ' <div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record['tag_title'] . '</div><a  class="remove">Remove</a>)</div>';
+        $data['lists'] .= ' <li id=" rem_' . $record['id'] . '"><a>' . $record['tag_title'] . '</a> (<a class="remove">Remove</a>)</li>';
+    }
+    echo json_encode($data);
+    exit();
+}
+
+/**
+ * This function use for save the tags on images
+ * @return $return type Json
+ */
+function itg_image_croping_save_tags() {
+
+    $fid = $_POST['pic_id'];
+    $tag = $_POST['name'];
+    $tag_url = $_POST['url'];
+    $x_coordinate = $_POST['pic_x'];
+    $y_coordinate = $_POST['pic_y'];
+    $type = $_POST['type'];
+    $result = db_select('image_tags', 'tags')
+                    ->fields('tags')
+                    ->condition('image_id', $fid, '=')
+                    ->condition('x_coordinate', $x_coordinate, '=')
+                    ->condition('y_coordinate', $y_coordinate, '=')
+                    ->execute()->fetchAssoc();
+    if (empty($result)) {
+
+        $inserted_data = db_insert('image_tags')->fields(array(
+                    'image_id' => $fid,
+                    'tag_title' => $tag,
+                    'tag_url' => $tag_url,
+                    'x_coordinate' => $x_coordinate,
+                    'y_coordinate' => $y_coordinate,
+                ))->execute();
+    }
+    if ($inserted_data) {
+
+        $return = array('status' => '1', 'id' => $inserted_data);
+        print json_encode($return);
+    } 
+    else {
+        $return = array('status' => '0', 'id' => '');
+        print json_encode($return);
+    }
+    exit();
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
 function itg_image_croping_theme($existing, $type, $theme, $path) {
 
     return array(
         'image_repository' => array(
-        'template' => 'templates/image_croper',
+            'template' => 'templates/image_croper',
+        ),
+        'image_tagging' => array(
+            'template' => 'templates/image_tagger',
+        ),
+        'image_taggingedit' => array(
+            'template' => 'templates/image_taggeredit',
         ),
     );
 }
 
 /**
-* This function use for save croped image by form the image dataurl (base64)!
-*/
+ * This function use for save croped image by form the image dataurl (base64)!
+ */
 function itg_image_croping_crop_image() {
 
-    $image_data_url=$_POST['image_data'];
-   // print_r( $image_data_url);die;
-    $image_name=$_POST['field_name'];
+    $image_data_url = $_POST['image_data'];
+    $image_name = $_POST['field_name'];
 
     $image_data_url = str_replace('data:image/png;base64,', '', $image_data_url);
 
     $imagedata = base64_decode($image_data_url);
-   if (!file_exists(file_default_scheme() . '://crop_image')) {
-    mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
-}
+    if (!file_exists(file_default_scheme() . '://crop_image')) {
+        mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
+    }
     $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' . $image_name . '.png');
-   
-    (array)$file;
-    print json_encode($file);exit();
-  
-}
+    file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
 
+    (array) $file;
+    print json_encode($file);
+    exit();
+}
 
 /**
-*/
-
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
 function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata) {
-  
-     $form['cropit_image_zoom_input'] = array(
-      '#type' => 'markup',
-       '#markup' => '<div class="image-editor">
+
+    $form['cropit_image_zoom_input'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="image-editor">
         <div class="cropit-preview"></div>
         <div class="cropit-image-zoom">
         <input type="range" class="cropit-image-zoom-input">
         </div>',
     );
 
-   $form['image_data'] = array(
-      '#type' => 'hidden',
-      '#value' => '',
-     '#attributes' => array('class' => 'hidden-image-data' , 'id' => 'data_first_image' , 'name' => 'image-data'),
+    $form['image_data'] = array(
+        '#type' => 'hidden',
+        '#value' => '',
+        '#attributes' => array('class' => 'hidden-image-data', 'id' => 'data_first_image', 'name' => 'image-data'),
     );
 
-      $form['data_field_name'] = array(
-      '#type' => 'hidden',
-      '#value' =>  ($field_name)?$field_name:'',
-     '#attributes' => array('id' => 'data_field_name' , 'name' => 'data_field_name'),
+    $form['data_field_name'] = array(
+        '#type' => 'hidden',
+        '#value' => ($field_name) ? $field_name : '',
+        '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
     );
-      $form['image_enc_data'] = array(
-      '#type' => 'hidden',
-      '#value' =>  'data:image/png;base64,' . $imagedata ,
-     '#attributes' => array('id' => 'image-enc-data' , 'name' => 'image_enc_data'),
+    $form['image_enc_data'] = array(
+        '#type' => 'hidden',
+        '#value' => 'data:image/png;base64,' . $imagedata,
+        '#attributes' => array('id' => 'image-enc-data', 'name' => 'image_enc_data'),
     );
 
-  
-   return $form;
 
+    return $form;
 }

@@ -1,10 +1,7 @@
   <?php if (!empty($content)): ?>
   <div class='<?php print $classes ?>'>
       <?php if ($view_mode == 'full'): ?>
-      
-        <?php  if ($node->op = 'Preview'):?>
         <a href="javascript:;" class="close-preview">&nbsp;</a>
-        <?php endif; ?>
       
        
         <div class="basic-details content-box">
@@ -15,18 +12,19 @@
                     <div class="field-items"><?php print $title; ?></div>
                 </div>
                 <?php print render($content['field_story_short_headline']); ?>
-                <?php print render($content['field_story_kicker_text']); ?>
+                <?php print render($content['field_podcast_kicker_message']); ?>
             </div>
         </div>
         
-            <?php // if ($node->op != 'Preview'):?>
+           <?php if(!isset($node->op) && $node->op != 'Preview'){ 
+?>
         <div class="Story-details">
             <h2><?php print t('Audio Upload'); ?></h2>
             <div class="content-details">
                 <?php print render($content['field_podcast_audio_upload']); ?>
             </div>
         </div> 
-        <?php // endif;   ?>
+        <?php  }  ?>
         
          <?php
     $browsemedia = render($content['field_story_extra_large_image']);

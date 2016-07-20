@@ -1,11 +1,51 @@
 /*---------------------------- ITG CSS -----------------------------------*/
+@import "itg-variables";
+@import "itg-mixins";
+/*Fonts used in Indiatoday site*/
+/*@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Regular.eot');
+	src: local('/'), url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.ttf') format('truetype'), url('../fonts/Roboto-Regular.svg') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Medium.eot');
+	src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Bold.eot');
+	src: local('/'), url('../fonts/Roboto-Bold.woff') format('woff'), url('../fonts/Roboto-Bold.ttf') format('truetype'), url('../fonts/Roboto-Bold.svg') format('svg');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'RobotoSlab';
+	src: url('../fonts/RobotoSlab-Regular.eot');
+	src: local('/'), url('../fonts/RobotoSlab-Regular.woff') format('woff'), url('../fonts/RobotoSlab-Regular.ttf') format('truetype'), url('../fonts/RobotoSlab-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}*/
 
 /* Global CSS */
 body{
-  font: 400 14px/18px 'Roboto';
+  font: 400 14px/18px $itg-robotoslab;
   color: #333;
 }
-h1, h2, h3, h4{font-weight: 500;}
+h1, h2, h3, h4{font-weight: $itg-font-medium;}
+ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+}
+img{
+    vertical-align: top;
+}
 .mr-0{
   margin: 0;
 }
@@ -33,6 +73,10 @@ h1, h2, h3, h4{font-weight: 500;}
 .pdlr-30{
   padding-left: 30px;
   padding-right: 30px;
+}
+.pdlr-10{
+  padding-left: 10px;
+  padding-right: 10px;    
 }
 .pdtb-10{
   padding-top: 10px;
@@ -68,6 +112,9 @@ h1, h2, h3, h4{font-weight: 500;}
 .full{
   width: 100%;
 }
+.max-wdt{
+    max-width: 100%;
+}
 .fleft{
   float: left;
 }
@@ -76,6 +123,9 @@ h1, h2, h3, h4{font-weight: 500;}
 }
 .pos-rel{
   position: relative;
+}
+.mhide{
+    display: none;
 }
 .btn {
     background-color: #337ab7;
@@ -128,11 +178,70 @@ input[type="text"], select, input[type="password"]{
   @extend .pd-0;
   box-sizing: border-box;
 }
-#page{padding-bottom: 30px; @extend .full; @extend .dib;}
+.row{
+    @include clearfix;
+}
+#page{@extend .vtop; @extend .full; @extend .dib;}
 .header{
-  @extend .pdtb-10;
+  padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
+  background: $header-bg  url(../images/mobile-header-bg.png) no-repeat center center;
+  height: 73px;
+  a{
+      color: $white-color; 
+      font-family: $itg-roboto;
+  }
+  .header-logo{
+      @include pos(relative);
+  }
+  .header-ads{
+    text-align: center;
+  }
+  .login-link{
+      text-align: right;
+      a{
+       @include itg-font(null,$itg-font-regular);
+        margin-right: 10px;
+      }
+  }
+  .logo{
+    width:67px;
+    @include pos(absolute,-10px,null,null,10px);
+    img{
+       @extend .max-wdt;
+    }
+  }
+  .top-nav{
+      padding: 0;
+  }
+  .top-nav{
+    @extend .full;
+    background: $red-bg;
+    @extend .fleft;
+    margin-top: 7px;
+    text-align: right;
+    height: 28px;
+    line-height: 28px;
+    ul{
+       @extend .no-bullet;
+       li{
+          @extend .dib;
+          a{
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 15px;
+            @include itg-font(null,$itg-font-medium);
+            @extend .pdlr-10;
+            .fa{
+              font-size: 20px;
+              line-height: 28px;
+              vertical-align: top;
+            }
+          } 
+       }
+    }
+  }
 }
 .tabs-primary{
   @extend .no-bullet;
@@ -724,3 +833,264 @@ input[type="text"], select, input[type="password"]{
 .tv-schedule-news .slick-slide span{display: block;}
 .tv-schedule-news{border: 1px solid #d9d9d9;}
 .tv-schedule-news .tv-schedule-task span{padding: 10px; border: 1px solid #d9d9d9; overflow: hidden; height: 100px;}
+
+/*Start CSS footer section*/
+footer{
+    margin-top:40px;
+    background: $black-bg;
+    @include itg-font($itg-roboto);
+    a{
+        color:$footer-text-color;
+        @include itg-font($itg-roboto);
+    }
+    .footer-top{
+        .container{
+            @include clearfix;
+            @include pos(relative);
+        }
+        a{
+          color:$white-color;  
+        }
+        .footer-top-link{           
+            white-space: nowrap;
+            overflow-x: auto;
+            margin-right: 50px;
+        }
+        .footer-social-link{
+            @include fright;
+            padding-right: 50px;
+        }
+        ul{
+            li{
+                @include display-inline;
+                &:nth-child(1){
+                    a{
+                      padding-left:0;  
+                    }
+                } 
+               a{
+                color: $white-color;
+                padding: 0 15px;
+                height: 37px;
+                line-height: 37px;
+                border-right: 1px solid $footer-border-color;
+                font-size: 17px;
+                display: block;
+               }
+            }
+        }
+        .footer-expand-icon{
+            @include pos(absolute,0,0,null,null);
+            width: 50px;
+            @include text-align(center);            
+            height: 37px;
+            cursor: pointer;
+            background:$black-bg url(../images/footer-close-icon.png) no-repeat center center;
+        }
+        .footer-open-icon{
+            background:$black-bg url(../images/footer-open-icon.png) no-repeat center center;
+        }
+    }
+    .footer-mid{
+        background: $second-black-bg;
+        padding: 12px 0;
+    }
+    .footer-bottom{
+        padding:20px 0;
+        a{
+            font-size: 12px;
+            &:hover{
+                color: $yellow-color;
+            }
+        }
+        h4{
+            @include itg-font($itg-roboto,$itg-font-medium);
+            color: $white-color;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        ul{
+            li{
+                padding: 2px 0;
+            }
+        }
+        .cell{
+            padding: 0 15px;
+            width: calculate-width(1);  
+            margin-bottom: 20px;
+            ul{
+              margin-bottom: 20px;  
+              &:last-child{
+                  margin-bottom:0px;
+              }
+            }
+        }
+        .first-cell{
+            width: calculate-width(1);
+            h4{                
+                margin-bottom: 5px;
+            }
+            ul{
+                li{
+                    @include display-inline;
+                    width: 49%;
+                }
+            }
+        }
+    }
+    .footer-copyright{
+        color: $footer-text-color;
+        padding: 10px 0;
+        @include text-align(center);
+        font-size: 12px;
+        border-top: 1px solid $footer-border-color;
+    }
+}
+/*End CSS footer section*/
+/*Start CSS Top Story*/
+.top-n-most-popular-stories{
+    .tab-buttons {
+        @include clearfix;
+        @include tab-buttons;
+    }
+    ul{
+        border: 1px solid $tab-primary-border-color;
+        li{
+            @include tab-listing;
+        }
+    }
+}
+/*End CSS Top Story*/
+
+
+/*Start CSS Desktop version*/
+/*Start header CSS Desktop version*/
+@media only screen and (min-width:768px){
+.mhide{
+    display: block;
+}
+.desktop-hide{
+    display: none;   
+}
+.header{
+    height:220px;
+    .header-top{
+        background: $header-bg url(../images/header-bg.png) no-repeat center center;
+        height: 163px;
+    }
+    .logo{
+        width: auto;
+        top: 95px;
+        img{
+            background: $header-bg;
+            padding-left: 5px;
+            padding-right: 2px;
+            vertical-align: top;
+        }
+    }
+    .top-nav{
+        padding: 0 15px 0 15px;
+        margin:25px auto 15px auto; 
+        float: none;
+        @include clearfix;
+        background:transparent;
+        .main-nav{
+            @include fright;
+                li{
+                    &:nth-child(2){
+                        @include pos(relative);
+                        a{
+                            &:before{
+                                content:'';
+                                background: url(../images/live-icon.png) no-repeat;
+                                @include pos(absolute,-8px,null,null,15px);
+                                width: 28px;
+                                height: 19px;
+                            } 
+                        }
+                    }
+                    a{
+                       padding: 0 35px;
+                       font-size: 27px;
+                       &.active, &:hover{
+                           color:$yellow-color;
+                       }
+                    }
+                }
+            }
+        .social-nav{
+            @include fright;
+                a{
+                   .fa{
+                       font-size: 23px;
+                       &.fa-mobile{
+                           font-size: 27px;
+                       }
+                   }
+                }
+            }
+        
+    }
+    .navigation{
+        @include clearfix;
+        background: $red-bg;
+        margin-top: 16px;
+        .menu{
+        @include fright;
+        li{
+            @include fleft;
+            a{
+                font-size: $itg-nav-fontsize;
+                color: $itg-nav-fontcolor;
+                text-transform: uppercase;
+                @include itg-font(null, $itg-font-medium);
+                padding: 0 10px;
+                border-left: 1px solid $itg-nav-bordercolor;
+                height: 37px;
+                line-height: 37px;
+                display:block;
+                    &.active, &:hover{
+                        color: $yellow-color;
+                    }
+                }
+            }
+        }
+    }
+}
+/*End header CSS Desktop version*/
+/*Start Footer CSS Desktop version*/
+footer{
+    .footer-top{
+        .footer-top-link{
+            @include fleft;
+        }
+        .footer-social-link{
+            .fa{
+                font-size: 24px;
+                vertical-align: middle;
+            }
+        }
+        .footer-expand-icon{
+            right: 15px;
+        }
+    } 
+    .footer-bottom{
+        .cell{
+            width: calculate-width(7);
+            @include fleft;
+            margin-bottom: 0;
+        }
+        .first-cell{
+            width: 30%;
+            h4{
+                @include fleft;
+                width: calculate-width(2);
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+/*End Footer CSS Desktop version*/
+}
+/*End CSS Desktop version*/
+

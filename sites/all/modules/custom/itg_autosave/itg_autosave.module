@@ -1,20 +1,33 @@
 <?php
 
 /**
- * Impplement hook_help($path, $arg)
- * {@inheridoc}
+ * @file
+ * Autosave module file contains hooks to extends core functionality.
+ */
+
+module_load_include('inc', 'itg_autosave', 'includes/itg_auto_save');
+
+/**
+ * Impplements hook_help().
+ *
+ * {@inheridoc}.
  */
 function it_autosave_help($path, $arg) {
   switch ($path) {
-    case 'admin/help#it_autosave':
-
-      return 'Hello Auto save';   
+    case 'admin/help#itg_autosave':
+      $output = '';
+      $output .= t('Please enter form id and the time for autosave interval of the node form inwhich you want to give autosave dunctionality.');  
+      
+      return $output;
   }
 }
 
 /**
- * Implement hook_permissions() to set access permission on ITG Autosave settings form
- * {@inheridoc}
+ * Implements hook_permissions().
+ *
+ * Set access permission on ITG Autosave settings form.
+ *
+ * {@inheridoc}.
  */
 function itg_autosave_permission() {
   return array(
@@ -26,11 +39,12 @@ function itg_autosave_permission() {
 }
 
 /**
- * Implement hook_menu()
- * {@inheridoc}
+ * Implements hook_menu().
+ *
+ * {@inheridoc}.
  */
 function itg_autosave_menu() {
-  //settings form menu  
+  // Settings form menu.
   $items['admin/config/administration/itg_autosave'] = array(
     'title' => 'ITG Autosave Setting',
     'description' => 'Autosave settings form',
@@ -38,9 +52,9 @@ function itg_autosave_menu() {
     'page arguments' => array('itg_autosave_form'),
     'access arguments' => array('administer itg_autosave settings'),
     'type' => MENU_NORMAL_ITEM,
-    'file' => 'includes/itg_autosave.admin.inc'
+    'file' => 'includes/itg_autosave.admin.inc',
   );
-  // Delete saved form id menu
+  // Delete saved form id menu.
   $items['itg-autosave-formid-delete/%'] = array(
     'page callback' => 'itg_autosave_form_delete',
     'page arguments' => array(1),
@@ -48,7 +62,7 @@ function itg_autosave_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_autosave.admin.inc',
   );
-  // Autosave ajax callback function
+  // Autosave ajax callback function.
   $items['itg-autosave/nodeform'] = array(
     'page callback' => 'itg_autosave_nodeform',
     'page arguments' => array(2, 3),
@@ -57,7 +71,6 @@ function itg_autosave_menu() {
     'file' => 'includes/itg_autosave.admin.inc',
   );
 
-
   return $items;
 }
 
@@ -65,8 +78,8 @@ function itg_autosave_menu() {
  * Implements hook_views_api().
  *
  * This tells drupal that there is Views integration file named
- * itg_social_media.views.inc
- * 
+ * itg_social_media.views.inc.
+ *
  * {@inheritdoc}
  */
 function itg_autosave_views_api() {
@@ -77,44 +90,101 @@ function itg_autosave_views_api() {
 }
 
 /**
- * Implements hook_form_alter()
- * 
- * {@inheritdoc}
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
  */
 function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
-  dpm($form);
   // Fetch form ids saved into databse for auto save feature.
-  $itg_autosave_form = new ItgAutoSave();
-
-  // Restore data if it is available on auto saved data
+  $itg_autosave_form = new itg_auto_save();  
+  // Restore data if it is available on auto saved data.
   switch ($form_id) {
     case 'astro_node_form':
-      // Add js file for autosave ajax
+      // Add js file for autosave ajax.
       $form['#attached']['js'] = array(
         drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',
       );
       // Set form ids to js file.
       $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);
-
       // Retrive data is it is already set.
-      $data = $itg_autosave_form->itg_save_retrieve_form_data($form['nid']['#value'], $form['type']['#value']);      
-      $form_data = unserialize($data->form_data);      
-      //dpm($form_data);
-      $field_detail = $itg_autosave_form->itg_save_extract_fieldtype($form_data);
-      
-      $form['title']['#default_value'] = isset($form_data['title']) ? $form_data['title'] : date('M d, Y');      
+      $data = $itg_autosave_form->itg_save_retrieve_form_data($form['nid']['#value'], $form['type']['#value']);
+      $form_data = unserialize($data->form_data);
+      $field_detail = $itg_autosave_form->itg_save_extract_fieldtype($form_data);      
+      $form['title']['#default_value'] = isset($form_data['title']) ? $form_data['title'] : date('M d, Y');
       foreach ($field_detail as $value) {
-        if ($value['fieldType'] == 'field_collection') {          
-          foreach ($form_data[$value['fieldName']]['und'] as $fcollection) {
-            //dpm($fcollection);
-          }
+        if ($value['fieldType'] == 'field_collection') {
+          $itg_autosave_form->itg_save_retrieve_fcollection($form, $value['fieldName'], $form_data[$value['fieldName']]);
         }
         else {
           $itg_autosave_form->itg_save_prepare_retrieve_array($form, $value['fieldName'], $form_data[$value['fieldName']], $value['fieldType']);
-        }        
+        }
       }
 
-      break;    
-    
+      break;
   }
+}
+
+
+/**
+ * Implements hook_field_attach_form().
+ *
+ * {@inheritdoc}.
+ */ 
+function itg_autosave_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {  
+  $options = array('language' => field_valid_language($langcode));
+  // Merge default options.
+  $default_options = array(
+    'default' => FALSE,
+    'deleted' => FALSE,
+    'language' => NULL,
+  );
+  $options += $default_options;
+  list(,, $bundle) = entity_extract_ids($entity_type, $entity);
+  $instances = _field_invoke_get_instances($entity_type, $bundle, $options);
+  // Iterate through the instances.  
+  foreach ($instances as $instance) {    
+    $field = field_info_field_by_id($instance['field_id']);
+    //If we are looking at our field type and specific widget type, and we are multiple entries
+    if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
+      if ($field['bundles']['node'][0] == "astro") {      
+        if (isset($form[$field['field_name']]['und']['add_more'])) {
+          // add a simple select list, this defaults to numb 3
+          $form[$field['field_name']]['add_more_number'] = array(
+            '#type' => 'select',
+            '#title' => t('Add more no.'),
+            '#options' => drupal_map_assoc(range(0, 100)),
+            '#default_value' => isset($_SESSION['fc_delta']) ? $_SESSION['fc_delta'] : 1,
+            //'#attributes' => array('style' => 'display:none;'),
+          );
+          $form[$field['field_name']]['und']['add_more']['#submit'][] = 'itg_autosave_field_add_more_submit';
+          $form[$field['field_name']]['und']['add_more']['#value'] = 'Add more rows';
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_submit().
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+ 
+function itg_autosave_field_add_more_submit($form, &$form_state) {
+  $button = $form_state['triggering_element'];
+  // Go one level up in the form, to the widgets container.
+  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
+  $field_name = $element['#field_name'];
+  $langcode = $element['#language'];
+  $parents = $element['#field_parents'];
+  // Alter the number of widgets to show. items_count = 0 means 1.
+  $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
+  //get the number from the select
+  $numbtoadd = $form[$field_name]['add_more_number']['#value'];
+  if ($numbtoadd) {
+    $field_state['items_count'] += $numbtoadd - 1;
+    field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
+    $form_state['rebuild'] = TRUE;
+  }  
 }

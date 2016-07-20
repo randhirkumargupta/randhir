@@ -724,6 +724,8 @@
        $('#'+labelID).trigger('click');
     });
     
+    // Code for open link in new tab
+    $(".views-field-name").find('a').attr('target', '_blank');
     
   };
 })(jQuery);
@@ -792,6 +794,13 @@ jQuery(document).ready(function(){
        alert('Changes made successfully');
     });
     // end of code
+    
+    // jQuery code for Loader
+    jQuery(document).ajaxStart(function () {
+        jQuery(".ajax-loader").show();
+    }).ajaxStop(function () {
+        jQuery(".ajax-loader").hide();
+    });
     
     
 });
