@@ -13,7 +13,7 @@ function itg_layout_admin() {
   if (isset($_GET['section']) && isset($_GET['template_name'])) {    
     $data = get_layout_details($_GET['section'], $_GET['template_name'], 'admin'); 
   }
-  
+  drupal_add_css(drupal_get_path('theme', FRONT_THEME_NAME) . '/css/layout-manager.css');
   return theme('itg_layout_admin_page', array('widget_data' => $data));  
 }
 
