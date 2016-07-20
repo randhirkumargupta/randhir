@@ -76,7 +76,16 @@ function itg_layout_manager_block_view($delta = '') {
       break;
     
     case 'footer_block':            
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');            
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
       $block['content'] = theme('footer_block', array('data' => $data));
       break;
           
@@ -249,23 +258,6 @@ function itg_layout_manager_page_setting_form_validate($form, &$form_state) {
    
 }
 
-
-/**
- * Get layout tpl id
- * @param string $section_name
- * @param string $template_name 
- * @return int $id
- */
-function get_template_id($section_name, $template_name) {  
-  $query = db_select('itg_layout_tpl', 'tpl');
-  $query->fields('tpl', array('id'));  
-  $query->condition('section_name', $section_name)
-        ->condition('template_name', $template_name);  
-  $id = $query->execute()->fetchField();
-  
-  return $id;
-}
-
 /**
  * Get layout manager id
  * @param int $layout_id
@@ -288,12 +280,31 @@ function get_layout_manager_id($layout_id, $block_name) {
  * @param string $template_name 
  * @return array $data
  */
-function get_layout_details($section_name, $template_name) {
+function get_layout_details($section_name, $template_name, $status) {
+  
+  if ($status == 'admin') {
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('id', 'status'));  
+    $query->condition('section_name', $section_name)
+          ->condition('template_name', $template_name);
+    $query->orderBy('tpl.id', 'DESC')->range(0,1);//LIMIT to 1 records
+
+    $last_tpl = $query->execute()->fetchField();
+  }
+  
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
   $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title'));  
   $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
   $itg_query->condition('layout_tpl.section_name', $section_name);    
-  $itg_query->condition('layout_tpl.template_name', $template_name);  
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  
+  if ($status == 'front') {
+    $itg_query->condition('layout_tpl.status', 1);
+  } 
+  elseif ($status == 'admin') {
+     $itg_query->condition('layout_tpl.id', $last_tpl);     
+  }
+  
   $itg_result = $itg_query->execute()->fetchAll();
   
   foreach ($itg_result as $itg_val) {
@@ -336,7 +347,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
   if (!empty($is_fron_page) && $theme == FRONT_THEME_NAME) {
     $section = 'home_page';
     $template_name = 'page--front';
-    $data = get_layout_details($section, $template_name);    
+    $data = get_layout_details($section, $template_name, 'front');    
     $vars['widget_data'] = $data;
   }
 }
