@@ -17,41 +17,35 @@ function itg_widget_schema() {
         'description' => 'Table to save custom order of nodes',
         'fields' => array(
             'nid' => array(
-                'description' => 'node id',
+                'description' => t('node id'),
                 'type' => 'int',
                 'not null' => FALSE,
             ),
             'cat_id' => array(
-                'description' => 'catgegory tid',
+                'description' => t('catgegory tid'),
                 'type' => 'int',
                 'not null' => FALSE,
             ),
             'content_type' => array(
-                'description' => 'content type',
+                'description' => t('content type'),
                 'type' => 'varchar',
                 'length' => '100',
                 'not null' => FALSE,
             ),
             'widget' => array(
-                'description' => 'widget name',
+                'description' => t('widget name'),
                 'type' => 'varchar',
                 'length' => '100',
                 'not null' => TRUE,
             ),
             'weight' => array(
-                'description' => 'weight',
+                'description' => t('weight'),
                 'type' => 'int',
                 'not null' => FALSE,
                 'default' => 0,
             ),
-            'created' => array(
-                'description' => 'updated date',
-                'type' => 'timestamp',
-                'not null' => TRUE,
-                'default' => 'CURRENT_TIMESTAMP',
-            ),
             'extra' => array(
-                'description' => 'Extra content if required',
+                'description' => t('Extra content if required'),
                 'type' => 'varchar',
                 'length' => '255',
                 'not null' => FALSE,
