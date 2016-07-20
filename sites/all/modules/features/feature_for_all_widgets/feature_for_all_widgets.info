@@ -1,0 +1,16 @@
+name = Feature for All Widgets
+description = Feature for all widgets which are biased on category biased ordering and reordering
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = actions_permissions
+dependencies[] = draggableviews
+dependencies[] = features
+dependencies[] = nodequeue
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[user_permission][] = execute itg_widget_categories_wise_node_group
+features[views_view][] = section_wise_content_ordering_list
+features[views_view][] = section_wise_draggable_content_order
+features_exclude[dependencies][ctools] = ctools
