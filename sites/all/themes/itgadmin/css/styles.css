@@ -5210,7 +5210,7 @@ div.node #comments h2 {
   color: #fff;
 }
 .itg_image_repository .dropzone {
-  border: 1px solid #d8d8d8;
+  border: 2px solid #d8d8d8;
   margin: 20px;
   min-height: 0;
   padding: 0;
@@ -5365,9 +5365,6 @@ div.node #comments h2 {
   bottom: 0;
 }
 
-.croper .cropit-preview-background-container img {
-  /*display: none;*/
-}
 .croper .cropit-preview {
   background: url(../images/pattern.png) repeat;
   border: 50px solid rgba(0, 0, 0, 0.7);
