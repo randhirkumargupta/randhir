@@ -240,62 +240,70 @@ if ($theme != 'itgadmin') {
 <?php } else { ?>
     <!--------------------------------Code for Admin tpl---------------------------------------->
 
-<div id="<?php print $_GET['template_name'] ?>-contener">
-    <div class="itg-row">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="droppable big-news" id="itg-block-1">
-                    <?php print $widget_data['itg-block-1']['widget']; ?>
-                </div>
-                <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id">            
-            </div>
+<div id="<?php print $_GET['template_name'] ?>-container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="itg-block-front">
+          <div class="droppable" id="itg-block-1">
+            <?php print $widget_data['itg-block-1']['widget']; ?>
+          </div>
+          <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id" placeholder="Enter Title" />      
         </div>
+      </div>
     </div>
-    <div class="itg-row">
-        <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-12">
-                <div class="droppable top-n-most-popular-stories" id="itg-block-2">
-                    <?php print $widget_data['itg-block-2']['widget']; ?>
-                </div>
-            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id">            
-            </div>
-            <div class="col-md-5 col-sm-5 col-xs-12">
-                <div class="droppable top-news" id="itg-block-3">
-                    <?php print $widget_data['itg-block-3']['widget']; ?>
-                </div>
-            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id">            
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="droppable video-n-magazine" id="itg-block-4">
-                    <?php print $widget_data['itg-block-4']['widget']; ?>
-                </div>
-            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-4']['block_title']; ?>" name="itg-block-4" class="block_title_id">            
-            </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-12">
+          <div class="itg-block-front">
+          <div class="droppable" id="itg-block-2">
+            <?php print $widget_data['itg-block-2']['widget']; ?>
+          </div>
+          <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" /> 
         </div>
-    </div>
-    <div class="itg-row">
-        <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="droppable common-news" id="itg-block-5">
-                   <?php print $widget_data['itg-block-5']['widget']; ?>
-                </div>
-            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id">            
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="droppable common-news" id="itg-block-6">
-                    <?php print $widget_data['itg-block-6']['widget']; ?>
-                </div>
-            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id">            
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="droppable common-news" id="itg-block-7">
-                   <?php print $widget_data['itg-block-7']['widget']; ?>
-                </div>
-            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-7']['block_title']; ?>" name="itg-block-7" class="block_title_id">            
-            </div>
+      </div>
+      <div class="col-md-5 col-sm-5 col-xs-12">
+        <div class="itg-block-front">
+          <div class="droppable" id="itg-block-3">
+            <?php print $widget_data['itg-block-3']['widget']; ?>
+          </div>
+          <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />   
         </div>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="itg-block-front">
+          <div class="droppable" id="itg-block-4">
+            <?php print $widget_data['itg-block-4']['widget']; ?>
+          </div>
+          <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-4']['block_title']; ?>" name="itg-block-4" class="block_title_id" placeholder="Enter Title" />            
+        </div>
+      </div>
     </div>
-</div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="itg-block-front">
+          <div class="droppable" id="itg-block-5">
+            <?php print $widget_data['itg-block-5']['widget']; ?>
+          </div>
+          <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id" placeholder="Enter Title" />  
+        </div>  
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="itg-block-front">
+          <div class="droppable" id="itg-block-6">
+            <?php print $widget_data['itg-block-6']['widget']; ?>
+          </div>
+          <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />     
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="itg-block-front">
+          <div class="droppable" id="itg-block-7">
+            <?php print $widget_data['itg-block-7']['widget']; ?>
+          </div>
+          <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-7']['block_title']; ?>" name="itg-block-7" class="block_title_id" placeholder="Enter Title" />  
+        </div>          
+      </div>
+    </div>
+  </div>
 
 <?php 
 }

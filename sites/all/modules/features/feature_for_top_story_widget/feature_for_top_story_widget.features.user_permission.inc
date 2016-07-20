@@ -14,6 +14,7 @@ function feature_for_top_story_widget_user_default_permissions() {
   $permissions['administer nodequeue'] = array(
     'name' => 'administer nodequeue',
     'roles' => array(
+      'Editor' => 'Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'nodequeue',
@@ -45,6 +46,7 @@ function feature_for_top_story_widget_user_default_permissions() {
   $permissions['manipulate all queues'] = array(
     'name' => 'manipulate all queues',
     'roles' => array(
+      'Editor' => 'Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'nodequeue',
@@ -54,6 +56,7 @@ function feature_for_top_story_widget_user_default_permissions() {
   $permissions['manipulate queues'] = array(
     'name' => 'manipulate queues',
     'roles' => array(
+      'Editor' => 'Editor',
       'administrator' => 'administrator',
     ),
     'module' => 'nodequeue',

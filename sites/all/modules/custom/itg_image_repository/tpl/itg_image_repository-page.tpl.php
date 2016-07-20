@@ -19,12 +19,11 @@
 <?php print $content; ?>
 
 			<script type="text/javascript">
-           
-jQuery('body').on('click','.dz-details',function(){
-    jQuery('#file-preview').html('');
-       var fieldname='<?php echo $_GET['field_name'];?>';
+            var fieldname='<?php echo $_GET['field_name'];?>';
        var height='<?php echo $_GET['height'];?>';
        var width='<?php echo $_GET['width'];?>';
+jQuery('body').on('click','.dz-details',function(){
+    jQuery('#file-preview').html('');
         jQuery('#file-preview').html('');
      var imageId=jQuery(this).siblings('.dz-image').children('img').attr('imageid');
      if(imageId!="")
@@ -46,10 +45,36 @@ jQuery('body').on('click','.dz-details',function(){
       }
     }); 
     }
-  
-
-   
+ 
       })
+      
+      
+    // This code use for image search and crop
+    
+    jQuery('.searched-image').live('click',function(){
+       var imageId=jQuery(this).attr('imageid');
+         jQuery('#file-preview').html('');
+     if(imageId!="")
+     {
+        showloader(); 
+        var imageName=jQuery(this).siblings('.dz-image').children('img').attr('imgname');
+        jQuery.ajax({
+      url: Drupal.settings.basePath+'getimagetocroper',
+      type: 'post',
+      data: {'imageId': imageId,'field_id':fieldname,'img_height':height,'img_width':width},
+      success: function(data) {
+      //  itg_image_repository.processResponse
+      hideloader();
+        jQuery('#file-preview').html(data);
+      },
+      error: function(xhr, desc, err) {
+        console.log(xhr);
+        console.log("Details: " + desc + "\nError:" + err);
+      }
+    }); 
+    }
+    })
+    
 	function showloader()
         {
             jQuery('#loader-data').show();
