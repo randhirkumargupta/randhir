@@ -1,50 +1,36 @@
 /*---------------------------- ITG CSS -----------------------------------*/
 @import "itg-variables";
 @import "itg-mixins";
-/*Fonts used in Indiatoday site*/
-/*@font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Regular.eot');
-	src: local('/'), url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.ttf') format('truetype'), url('../fonts/Roboto-Regular.svg') format('svg');
-	font-weight: 400;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Medium.eot');
-	src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
-	font-weight: 500;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Bold.eot');
-	src: local('/'), url('../fonts/Roboto-Bold.woff') format('woff'), url('../fonts/Roboto-Bold.ttf') format('truetype'), url('../fonts/Roboto-Bold.svg') format('svg');
-	font-weight: 700;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'RobotoSlab';
-	src: url('../fonts/RobotoSlab-Regular.eot');
-	src: local('/'), url('../fonts/RobotoSlab-Regular.woff') format('woff'), url('../fonts/RobotoSlab-Regular.ttf') format('truetype'), url('../fonts/RobotoSlab-Regular.svg') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}*/
-
 /* Global CSS */
 body{
   font: 400 14px/18px $itg-robotoslab;
   color: #333;
 }
-h1, h2, h3, h4{font-weight: $itg-font-medium;}
+h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
+h1{    
+    font-size: $h1-font-size;
+    line-height: $h1-line-height;
+    font-weight: $itg-font-bold;
+}
+h2{
+    font-size: $h2-font-size;
+    line-height: $h2-line-height;
+    font-weight: $itg-font-bold;
+}
+h3{
+    font-size: $h3-font-size;
+    line-height: $h3-line-height;
+}
 ul{
     list-style-type: none;
 }
 a{
+    color:$black-color;
     text-decoration: none;
 }
 img{
     vertical-align: top;
+    max-width: 100%;
 }
 .mr-0{
   margin: 0;
@@ -236,7 +222,7 @@ input[type="text"], select, input[type="password"]{
             .fa{
               font-size: 20px;
               line-height: 28px;
-              vertical-align: top;
+              @extend .vtop;
             }
           } 
        }
@@ -857,7 +843,7 @@ footer{
             margin-right: 50px;
         }
         .footer-social-link{
-            @include fright;
+            @include float(right);
             padding-right: 50px;
         }
         ul{
@@ -947,7 +933,81 @@ footer{
     }
 }
 /*End CSS footer section*/
-/*Start CSS Top Story*/
+/*Start CSS Top Block Grid Home Page*/
+.top-block{
+    .top-colum-1, .top-colum-2, .top-colum-3{
+       padding: 0 15px;
+       width: 100%;
+       margin-bottom: 50px;
+    }
+}
+/*End CSS Top Block Grid Home Page*/
+/*Start CSS Big New Home page*/
+.big-news{
+    @include pos(relative);
+    color: $white-color;
+    padding:10px;
+    background: $black-bg;
+    @include itg-font($itg-roboto);
+    .big-story-col-1, .big-story-col-2{        
+        padding:0 15px;
+    } 
+    h1{
+        margin-bottom: 10px;
+    }
+    a{
+        color: $white-color;
+    }
+    p{
+        font-size: 16px;
+        color: #adacac;
+        line-height: 20px;
+        margin-bottom: 15px;
+    }
+    .share-new{
+        margin-bottom: 15px;
+        ul{
+            li{
+                &:first-child{
+                    a{
+                        padding-left: 0;
+                    }
+                }
+                @include display-inline;
+                a{                    
+                    padding: 0 10px;
+                    font-size: 16px;
+                    border-right: 1px solid #606060;
+                    line-height: 15px;
+                    @include display-inline;
+                }
+                &:last-child{
+                    a{
+                        color: $yellow-color; 
+                        border-right: none;
+                     }
+                }
+            }
+        }
+    }
+    .big-story-detail{
+        li{
+            @include before-icon-list(6px, 6px, 5px, 0, #ffffff, 50%);
+            padding-left: 15px;
+            margin-bottom: 15px;
+            a{
+                font-weight: $itg-font-bold;
+                font-size: 16px;
+            }
+        }
+    }
+    .story-tag{
+        @include story-tag(26px,26px);
+        margin: 10px 0 0 10px;
+    }
+}
+/*End CSS Big New Home page*/
+/*Start CSS Top Story Home Page*/
 .top-n-most-popular-stories{
     .tab-buttons {
         @include clearfix;
@@ -960,137 +1020,208 @@ footer{
         }
     }
 }
-/*End CSS Top Story*/
+/*End CSS Top Story Home page*/
+/*Start CSS Featured New Home page*/
+.featured-news{
+    @include clearfix;
+    padding-bottom: 10px;
+    .featured-post {
+        @include float(left);
+        @include calculate-width(2);
+        &:hover a{
+            color:$blue-color;
+        }
+        img{
+            padding-bottom: 10px;
+            @include calculate-width(1);
+        }
+        &.featured-post-first{
+            @include float(none);
+            @include calculate-width(1);
+            margin-bottom: 10px;
+        }
+    }
+}
+.video-n-magazine{
+    border: 1px solid #e4dfdf;
+    height: 800px;
+}
+/*End CSS Featured New Home page*/
+
 
 
 /*Start CSS Desktop version*/
 /*Start header CSS Desktop version*/
 @media only screen and (min-width:768px){
-.mhide{
-    display: block;
-}
-.desktop-hide{
-    display: none;   
-}
-.header{
-    height:220px;
-    .header-top{
-        background: $header-bg url(../images/header-bg.png) no-repeat center center;
-        height: 163px;
+    .mhide{
+        display: block;
     }
-    .logo{
-        width: auto;
-        top: 95px;
-        img{
-            background: $header-bg;
-            padding-left: 5px;
-            padding-right: 2px;
-            vertical-align: top;
+    .desktop-hide{
+        display: none;   
+    }
+    .header{
+        height:220px;
+        .header-top{
+            background: $header-bg url(../images/header-bg.png) no-repeat center center;
+            height: 163px;
         }
-    }
-    .top-nav{
-        padding: 0 15px 0 15px;
-        margin:25px auto 15px auto; 
-        float: none;
-        @include clearfix;
-        background:transparent;
-        .main-nav{
-            @include fright;
-                li{
-                    &:nth-child(2){
-                        @include pos(relative);
+        .logo{
+            width: auto;
+            top: 95px;
+            img{
+                background: $header-bg;
+                padding-left: 5px;
+                padding-right: 2px;
+                vertical-align: top;
+            }
+        }
+        .top-nav{
+            padding: 0 15px 0 15px;
+            margin:25px auto 15px auto; 
+            float: none;
+            @include clearfix;
+            background:transparent;
+            .main-nav{
+                @include float(right);
+                    li{
+                        &:nth-child(2){
+                            @include pos(relative);
+                            a{
+                                &:before{
+                                    content:'';
+                                    background: url(../images/live-icon.png) no-repeat;
+                                    @include pos(absolute,-8px,null,null,15px);
+                                    width: 28px;
+                                    height: 19px;
+                                } 
+                            }
+                        }
                         a{
-                            &:before{
-                                content:'';
-                                background: url(../images/live-icon.png) no-repeat;
-                                @include pos(absolute,-8px,null,null,15px);
-                                width: 28px;
-                                height: 19px;
-                            } 
+                           padding: 0 35px;
+                           font-size: 27px;
+                           &.active, &:hover{
+                               color:$yellow-color;
+                           }
                         }
                     }
+                }
+            .social-nav{
+                @include float(right);
                     a{
-                       padding: 0 35px;
-                       font-size: 27px;
-                       &.active, &:hover{
-                           color:$yellow-color;
+                       .fa{
+                           font-size: 23px;
+                           &.fa-mobile{
+                               font-size: 27px;
+                           }
                        }
                     }
                 }
-            }
-        .social-nav{
-            @include fright;
+
+        }
+        .navigation{
+            @include clearfix;
+            background: $red-bg;
+            margin-top: 16px;
+            .menu{
+            @include float(right);
+            li{
+                @include float(left);
                 a{
-                   .fa{
-                       font-size: 23px;
-                       &.fa-mobile{
-                           font-size: 27px;
-                       }
-                   }
-                }
-            }
-        
-    }
-    .navigation{
-        @include clearfix;
-        background: $red-bg;
-        margin-top: 16px;
-        .menu{
-        @include fright;
-        li{
-            @include fleft;
-            a{
-                font-size: $itg-nav-fontsize;
-                color: $itg-nav-fontcolor;
-                text-transform: uppercase;
-                @include itg-font(null, $itg-font-medium);
-                padding: 0 10px;
-                border-left: 1px solid $itg-nav-bordercolor;
-                height: 37px;
-                line-height: 37px;
-                display:block;
-                    &.active, &:hover{
-                        color: $yellow-color;
+                    font-size: $itg-nav-fontsize;
+                    color: $itg-nav-fontcolor;
+                    text-transform: uppercase;
+                    @include itg-font(null, $itg-font-medium);
+                    padding: 0 10px;
+                    border-left: 1px solid $itg-nav-bordercolor;
+                    height: 37px;
+                    line-height: 37px;
+                    display:block;
+                        &.active, &:hover{
+                            color: $yellow-color;
+                        }
                     }
                 }
             }
         }
     }
-}
-/*End header CSS Desktop version*/
-/*Start Footer CSS Desktop version*/
-footer{
-    .footer-top{
-        .footer-top-link{
-            @include fleft;
-        }
-        .footer-social-link{
-            .fa{
-                font-size: 24px;
-                vertical-align: middle;
+    /*End header CSS Desktop version*/
+    /*Start Footer CSS Desktop version*/
+    footer{
+        .footer-top{
+            .footer-top-link{
+                @include float(left);
             }
-        }
-        .footer-expand-icon{
-            right: 15px;
-        }
-    } 
-    .footer-bottom{
-        .cell{
-            width: calculate-width(7);
-            @include fleft;
-            margin-bottom: 0;
-        }
-        .first-cell{
-            width: 30%;
-            h4{
-                @include fleft;
-                width: calculate-width(2);
+            .footer-social-link{
+                .fa{
+                    font-size: 24px;
+                    vertical-align: middle;
+                }
+            }
+            .footer-expand-icon{
+                right: 15px;
+            }
+        } 
+        .footer-bottom{
+            .cell{
+                @include calculate-width(6);
+                @include float(left);
                 margin-bottom: 0;
             }
+            .first-cell{
+                width: 30%;
+                h4{
+                    @include float(left);
+                    @include calculate-width(2);
+                    margin-bottom: 0;
+                }
+            }
         }
     }
-}
-/*End Footer CSS Desktop version*/
+    /*End Footer CSS Desktop version*/
+    
+/*Start CSS Top Block Grid Home Page*/    
+    .top-block{
+        .top-colum-1, .top-colum-2, .top-colum-3{
+           padding: 0 15px;
+        }
+        .top-colum-1{
+           @include float(left);
+           width: 22%; 
+        }
+        .top-colum-2{
+           width: 44.8%;
+           @include display-inline;
+        }
+        .top-colum-3{
+           width: 33.2%;
+           @include float(right);
+        }
+    }
+/*End CSS Top Block Grid Home Page*/  
+/*Start CSS Big New Home page*/
+    .big-news{
+        background: url(../images/bignews-bg.jpg) no-repeat center center;
+        .big-story-col-1, .big-story-col-2{
+            @include float(left);
+            padding:0 15px;
+        } 
+        .big-story-col-1{
+            width: 56.4%;
+        }
+        .big-story-col-2{
+            width: 43.6%;
+            padding-left: 0;
+        }
+    }
+/*End CSS Big New Home page*/
+/*Start CSS Featured-news Home Page*/ 
+    .featured-news{
+        border:1px solid $border-color;
+        .featured-post {
+            padding: 10px;
+        }
+    }
+/*End CSS Featured-news Home Page*/     
 }
 /*End CSS Desktop version*/
 

@@ -22,35 +22,8 @@
 /* Calculate-width function */
 /* Tab Button mixins */
 /* Tab Listing mixins */
-/*Fonts used in Indiatoday site*/
-/*@font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Regular.eot');
-	src: local('/'), url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.ttf') format('truetype'), url('../fonts/Roboto-Regular.svg') format('svg');
-	font-weight: 400;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Medium.eot');
-	src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
-	font-weight: 500;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Bold.eot');
-	src: local('/'), url('../fonts/Roboto-Bold.woff') format('woff'), url('../fonts/Roboto-Bold.ttf') format('truetype'), url('../fonts/Roboto-Bold.svg') format('svg');
-	font-weight: 700;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'RobotoSlab';
-	src: url('../fonts/RobotoSlab-Regular.eot');
-	src: local('/'), url('../fonts/RobotoSlab-Regular.woff') format('woff'), url('../fonts/RobotoSlab-Regular.ttf') format('truetype'), url('../fonts/RobotoSlab-Regular.svg') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}*/
+/* Story Tag mixins */
+/* List before icon */
 /* Global CSS */
 body {
   font: 400 14px/18px "Roboto Slab", sans-serif;
@@ -59,6 +32,24 @@ body {
 
 h1, h2, h3, h4 {
   font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-size: 40px;
+  line-height: 46px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 29px;
+  line-height: 34px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 24px;
 }
 
 ul {
@@ -66,11 +57,13 @@ ul {
 }
 
 a {
+  color: #323232;
   text-decoration: none;
 }
 
 img {
   vertical-align: top;
+  max-width: 100%;
 }
 
 .mr-0, *, #block-formblock-ask-an-expert .form-item .form-item {
@@ -152,7 +145,7 @@ img {
   vertical-align: middle;
 }
 
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field .field-items .file img {
+.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .header .top-nav ul li a .fa, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field .field-items .file img {
   vertical-align: top;
 }
 
@@ -293,7 +286,6 @@ input[type="text"], select, input[type="password"] {
 .header .top-nav ul li a .fa {
   font-size: 20px;
   line-height: 28px;
-  vertical-align: top;
 }
 
 .tabs-primary li {
@@ -1003,7 +995,7 @@ footer .footer-bottom ul li {
 }
 footer .footer-bottom .cell {
   padding: 0 15px;
-  width: 100%;
+  width: calculate-width(1);
   margin-bottom: 20px;
 }
 footer .footer-bottom .cell ul {
@@ -1013,7 +1005,7 @@ footer .footer-bottom .cell ul:last-child {
   margin-bottom: 0px;
 }
 footer .footer-bottom .first-cell {
-  width: 100%;
+  width: calculate-width(1);
 }
 footer .footer-bottom .first-cell h4 {
   margin-bottom: 5px;
@@ -1032,7 +1024,92 @@ footer .footer-copyright {
 }
 
 /*End CSS footer section*/
-/*Start CSS Top Story*/
+/*Start CSS Top Block Grid Home Page*/
+.top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
+  padding: 0 15px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+/*End CSS Top Block Grid Home Page*/
+/*Start CSS Big New Home page*/
+.big-news {
+  position: relative;
+  color: #fff;
+  padding: 10px;
+  background: #000000;
+  font-family: "Roboto", sans-serif;
+}
+.big-news .big-story-col-1, .big-news .big-story-col-2 {
+  padding: 0 15px;
+}
+.big-news h1 {
+  margin-bottom: 10px;
+}
+.big-news a {
+  color: #fff;
+}
+.big-news p {
+  font-size: 16px;
+  color: #adacac;
+  line-height: 20px;
+  margin-bottom: 15px;
+}
+.big-news .share-new {
+  margin-bottom: 15px;
+}
+.big-news .share-new ul li {
+  display: inline-block;
+  vertical-align: top;
+}
+.big-news .share-new ul li:first-child a {
+  padding-left: 0;
+}
+.big-news .share-new ul li a {
+  padding: 0 10px;
+  font-size: 16px;
+  border-right: 1px solid #606060;
+  line-height: 15px;
+  display: inline-block;
+  vertical-align: top;
+}
+.big-news .share-new ul li:last-child a {
+  color: #ffc106;
+  border-right: none;
+}
+.big-news .big-story-detail li {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 15px;
+}
+.big-news .big-story-detail li:before {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  content: '';
+  border-radius: 50%;
+  background: #ffffff;
+  height: 6px;
+  width: 6px;
+}
+.big-news .big-story-detail li a {
+  font-weight: 700;
+  font-size: 16px;
+}
+.big-news .story-tag {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: #a00606;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 7px;
+  text-transform: uppercase;
+  margin: 10px 0 0 10px;
+}
+
+/*End CSS Big New Home page*/
+/*Start CSS Top Story Home Page*/
 .top-n-most-popular-stories .tab-buttons {
   zoom: 1;
 }
@@ -1095,7 +1172,44 @@ footer .footer-copyright {
   width: 5px;
 }
 
-/*End CSS Top Story*/
+/*End CSS Top Story Home page*/
+/*Start CSS Featured New Home page*/
+.featured-news {
+  zoom: 1;
+  padding-bottom: 10px;
+}
+.featured-news:before, .featured-news:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.featured-news:after {
+  clear: both;
+}
+.featured-news .featured-post {
+  float: left;
+  width: 50%;
+}
+.featured-news .featured-post:hover a {
+  color: #193984;
+}
+.featured-news .featured-post img {
+  padding-bottom: 10px;
+  width: 100%;
+}
+.featured-news .featured-post.featured-post-first {
+  float: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.video-n-magazine {
+  border: 1px solid #e4dfdf;
+  height: 800px;
+}
+
+/*End CSS Featured New Home page*/
 /*Start CSS Desktop version*/
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 768px) {
@@ -1219,7 +1333,7 @@ footer .footer-copyright {
     right: 15px;
   }
   footer .footer-bottom .cell {
-    width: 14.28571%;
+    width: 16.66667%;
     float: left;
     margin-bottom: 0;
   }
@@ -1233,5 +1347,50 @@ footer .footer-copyright {
   }
 
   /*End Footer CSS Desktop version*/
+  /*Start CSS Top Block Grid Home Page*/
+  .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
+    padding: 0 15px;
+  }
+  .top-block .top-colum-1 {
+    float: left;
+    width: 22%;
+  }
+  .top-block .top-colum-2 {
+    width: 44.8%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .top-block .top-colum-3 {
+    width: 33.2%;
+    float: right;
+  }
+
+  /*End CSS Top Block Grid Home Page*/
+  /*Start CSS Big New Home page*/
+  .big-news {
+    background: url(../images/bignews-bg.jpg) no-repeat center center;
+  }
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    float: left;
+    padding: 0 15px;
+  }
+  .big-news .big-story-col-1 {
+    width: 56.4%;
+  }
+  .big-news .big-story-col-2 {
+    width: 43.6%;
+    padding-left: 0;
+  }
+
+  /*End CSS Big New Home page*/
+  /*Start CSS Featured-news Home Page*/
+  .featured-news {
+    border: 1px solid #dddddd;
+  }
+  .featured-news .featured-post {
+    padding: 10px;
+  }
+
+  /*End CSS Featured-news Home Page*/
 }
 /*End CSS Desktop version*/

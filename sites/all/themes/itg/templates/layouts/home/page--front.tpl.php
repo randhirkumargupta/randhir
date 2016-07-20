@@ -98,35 +98,65 @@ if ($theme != 'itgadmin') {
                     <?php //print render($page['content']); ?>
 <!--                        ####################################################-->
 
-<div id="front-contener">
+<div id="front-container">
     <div class="itg-row">
         <div class="row">
             <div class="col-md-12">
-                <div class="droppable big-news" id="itg-block-1">
-                        <span><?php print $widget_data['itg-block-1']['block_title']; ?></span>
-                    <?php print $widget_data['itg-block-1']['widget']; ?>
+                <div class="droppable" id="itg-block-1">
+                    <!-- Big news Block -->
+                    <div class="big-news">
+                        <span><?php //print $widget_data['itg-block-1']['block_title']; ?></span>
+                        <?php //print $widget_data['itg-block-1']['widget']; ?>
+                        <div class="row">
+                        <div class="big-story-col-1">
+                            <img src="<?php print base_path() ?>sites/all/themes/itg/images/bignews.jpg" alt="ads">
+                            <div class="story-tag">Big Story</div>
+                        </div>
+                        <div class="big-story-col-2">
+                            <h1>Kolkata Flyover Collapse: 26 Dead As One More Body Recovered From Debris</h1>
+                            <p>Three more bodies were recovered from under the debris of the  the toll to 24 even as five officials of the firm that was building the structure have been detained.</p>
+                            <div class="share-new">
+                                <ul>
+                                    <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" title="">Follow the Story</a></li>
+                                </ul>
+                            </div>
+                            <div class="big-story-detail">                                
+                                <ul>
+                                    <li><a href="#" title="">Kolkata flyover collapse: Death toll reaches 26, one more arrested</a></li>
+                                    <li><a href="#" title="">From the dust of the Kolkata flyover collapse,  hopes to rise from the ashes and its done </a></li>                                    
+                                </ul>                         
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Big news Block End -->
                 </div>                
             </div>
         </div>
     </div>
-    <div class="itg-row">
+    <div class="itg-row top-block">
         <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-12">
-                <div class="droppable top-n-most-popular-stories" id="itg-block-2">
-                    <div class="tab-buttons">
-                        <span class="active"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
-                    </div>
-                    <?php print $widget_data['itg-block-2']['widget']; ?>
-                </div>            
-            </div>
-            <div class="col-md-5 col-sm-5 col-xs-12">
-                <div class="droppable top-news" id="itg-block-3">
+            <div class="top-colum-2">
+                <div class="droppable" id="itg-block-3">
                     <span><?php print $widget_data['itg-block-3']['block_title']; ?></span>
-                    <?php print $widget_data['itg-block-3']['widget']; ?>
+                    <?php print $widget_data['itg-block-3']['widget']; ?>                    
                 </div>            
             </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="top-colum-1">
+                <div class="droppable" id="itg-block-2">
+                    <div class="top-n-most-popular-stories">
+                        <div class="tab-buttons">
+                            <span class="active"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                        </div>
+                        <?php print $widget_data['itg-block-2']['widget']; ?>
+                    </div>
+                </div>            
+            </div>
+            <div class="top-colum-3">
                 <div class="droppable video-n-magazine" id="itg-block-4">
+                    trending videos 
                     <span><?php print $widget_data['itg-block-4']['block_title']; ?></span>
                     <?php print $widget_data['itg-block-4']['widget']; ?>
                 </div>            
