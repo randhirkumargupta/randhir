@@ -25,7 +25,7 @@ function itg_layout_manager_schema() {
         'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => TRUE,
+        'not null' => FALSE,
       ),
       'block_name' => array(
         'description' => 'TODO: please describe this field!',
