@@ -724,6 +724,8 @@
        $('#'+labelID).trigger('click');
     });
     
+    // Code for open link in new tab
+    $(".views-field-name").find('a').attr('target', '_blank');
     
   };
 })(jQuery);
