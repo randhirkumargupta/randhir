@@ -149,6 +149,13 @@ Drupal.behaviors.my_custom_behavior = {
       $(this).attr('placeholder', plaholderText);
       $(this).prev('label').hide();
     });
+    
+    //footer toggal script
+    $('.footer-expand-icon').click(function(){
+        $('.footer-toggle').slideToggle();
+        $("html, body").animate({ scrollTop: $(document).height() }, 800);
+        $('.footer-expand-icon').toggleClass('footer-open-icon');
+    });
 
   }
 };

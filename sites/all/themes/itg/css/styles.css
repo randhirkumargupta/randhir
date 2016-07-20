@@ -16,6 +16,8 @@
 /*Box sizeing mixins*/
 /*Center Block mixins*/
 /*Float mixins*/
+/*Display inline block mixins*/
+/*Text align block mixins*/
 /* Positional mixins */
 /* Calculate-width function */
 /* Tab Button mixins */
@@ -65,6 +67,10 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+img {
+  vertical-align: top;
 }
 
 .mr-0, *, #block-formblock-ask-an-expert .form-item .form-item {
@@ -146,7 +152,7 @@ a {
   vertical-align: middle;
 }
 
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field .field-items .file img {
+.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field .field-items .file img {
   vertical-align: top;
 }
 
@@ -236,10 +242,6 @@ input[type="text"], select, input[type="password"] {
 }
 .row:after {
   clear: both;
-}
-
-#page {
-  padding-bottom: 30px;
 }
 
 .header {
@@ -915,54 +917,118 @@ input[type="text"], select, input[type="password"] {
 /*Start CSS footer section*/
 footer {
   margin-top: 40px;
+  background: #000000;
+  font-family: "Roboto", sans-serif;
 }
 footer a {
   color: #a6a6a6;
   font-family: "Roboto", sans-serif;
 }
-footer .footer-top {
+footer .footer-top .container {
   zoom: 1;
-  background: #000000;
+  position: relative;
 }
-footer .footer-top:before, footer .footer-top:after {
+footer .footer-top .container:before, footer .footer-top .container:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-footer .footer-top:after {
+footer .footer-top .container:after {
   clear: both;
 }
 footer .footer-top a {
   color: #fff;
 }
 footer .footer-top .footer-top-link {
-  float: left;
+  white-space: nowrap;
+  overflow-x: auto;
+  margin-right: 50px;
 }
 footer .footer-top .footer-social-link {
   float: right;
-}
-footer .footer-top ul {
-  zoom: 1;
-}
-footer .footer-top ul:before, footer .footer-top ul:after {
-  content: "";
-  display: block;
-  height: 0;
-  overflow: hidden;
-}
-footer .footer-top ul:after {
-  clear: both;
+  padding-right: 50px;
 }
 footer .footer-top ul li {
-  float: left;
+  display: inline-block;
+  vertical-align: top;
+}
+footer .footer-top ul li:nth-child(1) a {
+  padding-left: 0;
 }
 footer .footer-top ul li a {
   color: #fff;
-  padding: 12px 15px;
-  border-left: 1px solid #111;
+  padding: 0 15px;
+  height: 37px;
+  line-height: 37px;
+  border-right: 1px solid #111111;
   font-size: 17px;
   display: block;
+}
+footer .footer-top .footer-expand-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  text-align: center;
+  height: 37px;
+  cursor: pointer;
+  background: #000000 url(../images/footer-close-icon.png) no-repeat center center;
+}
+footer .footer-top .footer-open-icon {
+  background: #000000 url(../images/footer-open-icon.png) no-repeat center center;
+}
+footer .footer-mid {
+  background: #111111;
+  padding: 12px 0;
+}
+footer .footer-bottom {
+  padding: 20px 0;
+}
+footer .footer-bottom a {
+  font-size: 12px;
+}
+footer .footer-bottom a:hover {
+  color: #ffc106;
+}
+footer .footer-bottom h4 {
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+footer .footer-bottom ul li {
+  padding: 2px 0;
+}
+footer .footer-bottom .cell {
+  padding: 0 15px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+footer .footer-bottom .cell ul {
+  margin-bottom: 20px;
+}
+footer .footer-bottom .cell ul:last-child {
+  margin-bottom: 0px;
+}
+footer .footer-bottom .first-cell {
+  width: 100%;
+}
+footer .footer-bottom .first-cell h4 {
+  margin-bottom: 5px;
+}
+footer .footer-bottom .first-cell ul li {
+  display: inline-block;
+  vertical-align: top;
+  width: 49%;
+}
+footer .footer-copyright {
+  color: #a6a6a6;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 12px;
+  border-top: 1px solid #111111;
 }
 
 /*End CSS footer section*/
@@ -1139,6 +1205,33 @@ footer .footer-top ul li a {
   .header .navigation .menu li a.active, .header .navigation .menu li a:hover {
     color: #ffc106;
   }
+
+  /*End header CSS Desktop version*/
+  /*Start Footer CSS Desktop version*/
+  footer .footer-top .footer-top-link {
+    float: left;
+  }
+  footer .footer-top .footer-social-link .fa {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+  footer .footer-top .footer-expand-icon {
+    right: 15px;
+  }
+  footer .footer-bottom .cell {
+    width: 14.28571%;
+    float: left;
+    margin-bottom: 0;
+  }
+  footer .footer-bottom .first-cell {
+    width: 30%;
+  }
+  footer .footer-bottom .first-cell h4 {
+    float: left;
+    width: 50%;
+    margin-bottom: 0;
+  }
+
+  /*End Footer CSS Desktop version*/
 }
-/*End header CSS Desktop version*/
 /*End CSS Desktop version*/
