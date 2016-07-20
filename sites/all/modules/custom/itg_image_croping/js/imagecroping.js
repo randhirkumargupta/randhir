@@ -9,9 +9,9 @@
 
 
 (function($) {
-   jQuery('.image-preview').live('click',function(){
-     var imageid=jQuery(this).next().find('input[type=hidden]').val();
-    var fieldname=jQuery(this).next().find('input[type=hidden]').attr('name');
+   jQuery('.image-preview img').live('click',function(){
+     var imageid=jQuery(this).parent().next().find('input[type=hidden]').val();
+    var fieldname=jQuery(this).parent().next().find('input[type=hidden]').attr('name');
     
      var fieldname=fieldname.split('[');
    
@@ -31,4 +31,6 @@
                     }
                     }); 
    })
-})(jQuery)
+})(jQuery);
+
+
