@@ -33,7 +33,10 @@
                               url: base_url + "/insert-layout-setting-ajax/layout",
                               method: 'post',
                               data: {block_name:block_name, widget_name:widget_name, section_name:section_name, template_name:template_name},
-                              success: function(data) {                              
+                              beforeSend:function(){                                
+                                $('#'+block_name).html('<img align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                              },
+                              success: function(data) {
                                  $('#'+block_name).html(data);  
                               }
                         });
@@ -48,6 +51,9 @@
                           url: base_url + "/insert-layout-setting-ajax/publish",
                           method: 'post',
                           data: {status_val:1, section_name:section_name, template_name:template_name},
+                          /*beforeSend:function(){                                
+                            $('#'+block_name).html('<img align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                          },*/
                           success: function(data) {                              
                              
                           }
@@ -73,6 +79,10 @@
                           url: base_url + "/insert-layout-setting-ajax/title",
                           method: 'post',
                           data: {block_name:block_id,section_name:section_name,template_name:template_name, block_title:block_title},
+                          beforeSend:function(){
+                             // alert(block_id);
+                            //$('#'+block_id).html('<img align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                          },
                           success: function(data) {                              
                               
                           }
