@@ -1,0 +1,38 @@
+@import "itg-variables";
+@import "itg-mixins";
+/*Start CSS Top Story Home Page*/
+.top-n-most-popular-stories{
+    .tab-buttons {
+        @include clearfix;
+        @include tab-buttons;
+    }
+    ul{
+        border: 1px solid $tab-primary-border-color;
+        li{
+            @include tab-listing;
+        }
+    }
+}
+/*End CSS Top Story Home page*/
+/*Start CSS Featured New Home page*/
+.featured-news{
+    @include clearfix;
+    padding-bottom: 10px;
+    .featured-post {
+        @include float(left);
+        @include calculate-width(2);
+        &:hover a{
+            color:$blue-color;
+        }
+        img{
+            padding-bottom: 10px;
+            @include calculate-width(1);
+        }
+        &.featured-post-first{
+            @include float(none);
+            @include calculate-width(1);
+            margin-bottom: 10px;
+        }
+    }
+}
+/*End CSS Featured New Home page*/
