@@ -163,17 +163,19 @@
   footer .footer-top .footer-expand-icon {
     right: 15px;
   }
+  footer .footer-bottom {
+    /*.first-cell{
+        width: 30%;
+        h4{
+            @include float(left);
+            @include calculate-width(2);
+            margin-bottom: 0;
+        }
+    }*/
+  }
   footer .footer-bottom .cell {
     width: 16.66667%;
     float: left;
-    margin-bottom: 0;
-  }
-  footer .footer-bottom .first-cell {
-    width: 30%;
-  }
-  footer .footer-bottom .first-cell h4 {
-    float: left;
-    width: 50%;
     margin-bottom: 0;
   }
 
