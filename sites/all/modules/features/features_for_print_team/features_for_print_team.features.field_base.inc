@@ -29,8 +29,8 @@ function features_for_print_team_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'Approved' => ' Approve',
-        'Rejected' => ' Reject',
+        'Approved' => ' Approved',
+        'Rejected' => ' Rejected',
         'Needs Modification' => ' Needs Modification',
         'Not Decided' => ' Not Decided (On Hold)',
       ),
@@ -114,6 +114,33 @@ function features_for_print_team_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_pti_mark_as_complete'.
+  $field_bases['field_pti_mark_as_complete'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pti_mark_as_complete',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'completed' => ' Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_pti_print_media'.
