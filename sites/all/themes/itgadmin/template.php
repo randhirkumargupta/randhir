@@ -349,7 +349,7 @@ function itgadmin_preprocess_page(&$vars) {
   }
   
   //Add tpl for event registration view page
-  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs') {
+  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs' || ($vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 }
