@@ -2,6 +2,7 @@
 /*====================== IndiaToday Variables =========================*/
 /*=======================================================================*/
 /*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
 /*Fonts used in Indiatoday site*/
 /*Colors used in Indiatoday site*/
 /*Background Colors used in Indiatoday site*/
@@ -36,19 +37,19 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 40px;
-  line-height: 46px;
+  font-size: 26px;
+  line-height: 32px;
   font-weight: 700;
 }
 
 h2 {
-  font-size: 29px;
-  line-height: 34px;
+  font-size: 22px;
+  line-height: 26px;
   font-weight: 700;
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 24px;
 }
 
@@ -1174,6 +1175,38 @@ footer .footer-copyright {
 
 /*End CSS Top Story Home page*/
 /*Start CSS Featured New Home page*/
+.featured-news {
+  zoom: 1;
+  padding-bottom: 10px;
+  margin: 0 -5px;
+}
+.featured-news:before, .featured-news:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.featured-news:after {
+  clear: both;
+}
+.featured-news .featured-post {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+.featured-news .featured-post:hover a {
+  color: #193984;
+}
+.featured-news .featured-post img {
+  padding-bottom: 10px;
+  width: 100%;
+}
+.featured-news .featured-post.featured-post-first {
+  float: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .video-n-magazine {
   border: 1px solid #e4dfdf;
   height: 800px;

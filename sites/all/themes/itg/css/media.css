@@ -2,6 +2,7 @@
 /*====================== IndiaToday Variables =========================*/
 /*=======================================================================*/
 /*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
 /*Fonts used in Indiatoday site*/
 /*Colors used in Indiatoday site*/
 /*Background Colors used in Indiatoday site*/
@@ -26,6 +27,23 @@
 /* List before icon */
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 40px;
+    line-height: 46px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 29px;
+    line-height: 34px;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
   .mhide {
     display: block;
   }
@@ -195,10 +213,12 @@
   /*End CSS Big New Home page*/
   /*Start CSS Featured-news Home Page*/
   .featured-news {
+    padding: 5px;
     border: 1px solid #dddddd;
+    margin: 0;
   }
   .featured-news .featured-post {
-    padding: 10px;
+    padding: 5px;
   }
 
   /*End CSS Featured-news Home Page*/

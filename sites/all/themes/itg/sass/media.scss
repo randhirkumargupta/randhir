@@ -3,6 +3,20 @@
 @import "itg-mixins";
 /*Start header CSS Desktop version*/
 @media only screen and (min-width:768px){
+    h1{    
+        font-size: $h1-font-size;
+        line-height: $h1-line-height;
+        font-weight: $itg-font-bold;
+    }
+    h2{
+        font-size: $h2-font-size;
+        line-height: $h2-line-height;
+        font-weight: $itg-font-bold;
+    }
+    h3{
+        font-size: $h3-font-size;
+        line-height: $h3-line-height;
+    }
     .mhide{
         display: block;
     }
@@ -165,9 +179,11 @@
 /*End CSS Big New Home page*/
 /*Start CSS Featured-news Home Page*/ 
     .featured-news{
+        padding: 5px;
         border:1px solid $border-color;
+        margin:0;
         .featured-post {
-            padding: 10px;
+            padding: 5px;
         }
     }
 /*End CSS Featured-news Home Page*/     
