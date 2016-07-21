@@ -712,12 +712,6 @@ function itg_videogallery_menu() {
     'access arguments' => array('authorized user dailymotion credin'),
     'type' => MENU_CALLBACK,
   );
-  $items['del/file'] = array(
-    'title' => 'Dailymotion Configuration',
-    'page callback' => 'itg_videogallery_remove_video',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
   return $items;
 }
 
