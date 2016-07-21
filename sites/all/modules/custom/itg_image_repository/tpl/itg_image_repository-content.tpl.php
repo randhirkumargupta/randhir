@@ -88,4 +88,4 @@ $itg_image_repository = & $itg_image_repository_ref['itg_image_repository']; //k
 </div><!-- itg_image_repository-content -->
 <div id="browse-resizer" class="y-resizer"></div>
 <div id="loader-data" style="display: none">Loading....</div>
-<div id="preview-wrapper"><div id="file-preview"></div></div>
+<div id="preview-wrapper"><div id="search-preview"></div><div id="file-preview"></div></div>

@@ -134,6 +134,7 @@ $url = file_create_url($data->uri);
               maxZoom: 10,
               quality: 1,
               minZoom: 'fill',
+              smallImage: 'stretch',
             imageBackground: true
 
         });

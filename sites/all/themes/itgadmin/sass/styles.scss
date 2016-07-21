@@ -5155,10 +5155,14 @@ div.node{
     } 
   }
   .dropzone{
-    border: 1px solid #ccc;
+    border: 2px solid #d8d8d8;
     margin: 20px;
     min-height: 0;
     padding: 0;
+    &.dz-clickable .dz-message{
+      color: #d00b26;
+      font-size: 24px;
+    }
     .dz-preview{
       min-height: 0;
       .dz-image{
@@ -5349,9 +5353,6 @@ div.node{
 }
 
 .croper{
-  .cropit-preview-background-container img{
-    /*display: none;*/
-  }
   .cropit-preview{
     background: url(../images/pattern.png) repeat;
     border: 50px solid rgba(0, 0, 0, 0.7);

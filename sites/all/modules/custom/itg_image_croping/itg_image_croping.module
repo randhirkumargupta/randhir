@@ -138,8 +138,8 @@ function itg_image_croping_get_image_tags() {
     $result = $query->execute();
 
     while ($record = $result->fetchAssoc()) {
-        $data['boxes'] .= ' <div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record['tag_title'] . '</div><a  class="remove">Remove</a>)</div>';
-        $data['lists'] .= ' <li id=" rem_' . $record['id'] . '"><a>' . $record['tag_title'] . '</a> (<a class="remove">Remove</a>)</li>';
+        $data['boxes'] .= ' <div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record['tag_title'] . '</div><a  class="remove">X</a></div>';
+        $data['lists'] .= ' ';
     }
     echo json_encode($data);
     exit();
