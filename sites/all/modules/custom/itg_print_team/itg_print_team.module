@@ -101,6 +101,14 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           '#weight' => -1,
         );
       }
+      
+      if($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed') {
+        $form['idea_completed'] = array(
+          '#type' => 'item',
+          '#markup' => '<div class="ticket-avaible-text"><strong>Note: </strong> This task has been completed, so you can not edit contents.</div>',
+          '#weight' => -2,
+        );
+      }
 
 
       $form['actions']['cancel'] = array(
@@ -112,6 +120,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       // Hide issue and magazine form edit page
       $form['field_pti_issue']['#access'] = FALSE;
       $form['field_pti_magazine']['#access'] = FALSE;
+      $form['actions']['submit']['#value'] = 'Submit';
       
       /*
       $issue_options = itg_print_team_issue_options();
@@ -133,6 +142,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
 
       // Enable/Disable fields according to satus and role
       if ($form['#node']->nid) {
+          
         if ($idea_review_flag) {
           if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
             $form['field_story_category']['#access'] = FALSE;
@@ -140,6 +150,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
             $form['field_pti_issue']['#access'] = FALSE;
             $form['field_pti_magazine']['#access'] = FALSE;
             $form['field_story_rating']['#access'] = FALSE;
+            $form['field_pti_mark_as_complete']['#access'] = FALSE;
           }
         }
         else {
@@ -154,6 +165,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $form['field_pti_issue']['#access'] = FALSE;
           $form['field_pti_magazine']['#access'] = FALSE;
           $form['field_story_rating']['#access'] = FALSE;
+          $form['field_pti_mark_as_complete']['#access'] = FALSE;
         }
         
         
@@ -161,6 +173,17 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         // Disable change status radio button if status is "Approved" OR "Rejected"
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Rejected') {
           $form['field_pti_idea_status']['#disabled'] = TRUE;
+        }
+       
+       // If idea is completed, restrict user to update his/her idea 
+       if($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed') {
+          $form['title']['#disabled']= TRUE;
+          $form['body']['#disabled']= TRUE;
+          $form['field_pti_words_limit']['#disabled']= TRUE;
+          $form['field_survey_end_date']['#disabled']= TRUE;
+          $form['field_pti_mark_as_complete']['#disabled']= TRUE;
+          //TO DO: Make Section, print medea readonly
+          
         }
       }
       else {
@@ -171,6 +194,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_issue']['#access'] = FALSE;
         $form['field_pti_magazine']['#access'] = FALSE;
         $form['field_story_rating']['#access'] = FALSE;
+        $form['field_pti_mark_as_complete']['#access'] = FALSE;
         unset($form['field_pti_print_media']);
       }
       
@@ -200,10 +224,10 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       
       if ($idea_review_flag && $filtered_result) {
 
-        //Disable idea's association option for all except "Approved"
+        // Disable idea's association option for all except "Approved"
         for ($bulk_op = 0; $bulk_op < $filtered_result; $bulk_op++) {
           $node_idea = node_load($form['views_bulk_operations'][$bulk_op]['#return_value']);
-          if($node_idea->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved'){
+          if($node_idea->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] !== 'completed'){
             $form['views_bulk_operations'][$bulk_op]['#disabled'] = TRUE;
           }
         }
@@ -219,23 +243,23 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
 
         $issue_options = itg_print_team_issue_options();
 
-        $form['pti_issue'] = array(
-            '#type' => 'select',
-            '#title' => t('Issue'),
-            '#options' => $issue_options,
-            '#default_value' => '_none',
-            '#weight' => 98,
-        );
-
         $form['pti_magazine'] = array(
             '#type' => 'select',
             '#title' => 'Magazine',
             '#options' => itg_print_team_get_magazine_title(),
             '#default_value' => '_none',
+            '#weight' => 98,
+        );
+
+       $form['pti_issue'] = array(
+            '#type' => 'select',
+            '#title' => t('Issue'),
+            '#options' => $issue_options,
+            '#default_value' => '_none',
             '#weight' => 99,
             '#attributes' => array('class' => array('associate-pti-magazine')),
         );
-
+                
         $form['submit'] = array(
             '#type' => 'submit',
             '#value' => t('Submit'),
@@ -278,7 +302,7 @@ function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
     $op = 'updated successfully';
   }
   else {
-    $op = 'submit successfully';
+    $op = 'submitted successfully';
   }
   
   $form_state['redirect'] = 'manage-print-team';
@@ -413,11 +437,12 @@ function itg_print_team_node_update($node) {
         }
       }
       
+      /*
       // Update story, if any idea is updated
       $associated_source_id = itg_print_team_check_association_print_to_story($node->nid);
       if ($associated_source_id) {
-        itg_print_team_association_update($node->nid, NULL, NULL, $associated_source_id, FALSE);
-      }
+        itg_print_team_association_update($node, NULL, NULL, $associated_source_id, FALSE);
+      } */
       
       // Insert in to print team cron table to send mail
       if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
@@ -592,6 +617,7 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $issue_node = $node;
   
   $issue_title = itg_common_get_node_title($issue);
+  $rating = $node->field_story_rating[LANGUAGE_NONE][0]['value'];
   $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue;
   $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
   field_attach_update('node', $node);
@@ -611,6 +637,10 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->comment = 0;
   $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
   $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
+  
+  if(!empty($rating)) {
+   $node->field_story_rating[LANGUAGE_NONE][0]['value'] = $rating;
+  }
   
   //Association of issue with story
   $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue_title) ? $issue_title : date('Y-m-d h:i:s', time());
@@ -636,8 +666,12 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = $nid;
 
   $node->revision = 1;
-  $node->log = 'State Changed to published';
-  $node->workbench_moderation_state_new = workbench_moderation_state_published();
+//  $node->log = 'State Changed to published';
+//  $node->workbench_moderation_state_new = workbench_moderation_state_published();
+  
+  $node->log = 'State Changed to Review';
+  $node->workbench_moderation_state_new = workbench_moderation_state_review();
+            
   $node = node_submit($node); // Prepare node for saving
   node_save($node); // Finally save node
   
@@ -752,7 +786,17 @@ function itg_print_team_check_approval_users(){
   global $user;
   $idea_review_flag_user = FALSE;
   foreach ($user->roles as $roles) {
-    if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
+    if ($roles == 'Site Admin'
+          || $roles == 'Co-ordinator' 
+          || $roles == 'Section Editor/Anchor'
+          || $roles == 'Editor'
+          || $roles == 'Photo Coordinator'
+          || $roles == 'Photo Head'
+          || $roles == 'Design Head'
+          || $roles == 'Copy Desk'
+          || $roles == 'Designer'
+          || $roles == 'Photographer'    
+     ) {
       $idea_review_flag_user = TRUE;
     }
   }
