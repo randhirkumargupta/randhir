@@ -153,7 +153,7 @@ function itg_image_repository_upload_form($form, &$form_state, $ref) {
  */
 function itg_image_repository_filesearch_form($form, &$form_state, $ref) {
   $itg_image_repository =& $ref['itg_image_repository'];
-  $form['filenames'] = array(
+  $form['terms'] = array(
     '#type' => 'textfield',
     '#title' => t('Selected files'),
     '#maxlength' => $itg_image_repository['filenum'] ? $itg_image_repository['filenum']*255 : NULL,
