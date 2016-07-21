@@ -98,22 +98,40 @@ function itg_autosave_form_delete($form_id) {
  *   Name of the content type.
  */
 function itg_autosave_nodeform($nid, $ctype) {
+  global $user;
   $inputs = $_POST;
+  //p($inputs);
   $itg_auto_save = new itg_auto_save();
   $data = $itg_auto_save->itg_save_extract_fieldtype($inputs);
-  $data = array_filter($data, 'itg_autosave_remove_empty');
+  $data = array_filter($data, 'itg_autosave_remove_empty');  
+  //p($data);
+  // Prepare values for new node
+  $node = new stdClass();
+  // Set title value
+  $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : '' : '';  
+  $node->title = $title;
+  $node->type = $ctype;
+  // Prepare node object
+  node_object_prepare($node); 
+  $node->language = LANGUAGE_NONE;
+  $node->uid = $user->uid;
+  $node->status = 0;
+  $node->promote = 0;
+  $node->comment = 1;  
   // Find field type and prepare array for foelds.
-  $pre_save = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs);
-  $pre_save['title'] = check_plain($inputs['title']);
-  if (isset($pre_save['fieldCollection'])) {
-    foreach ($pre_save['fieldCollection'] as $field) {
-      $field_collection[$field] = $itg_auto_save->itg_save_field_field_collection($inputs[$field]);
-    }
-    $pre_save = array_merge($pre_save, $field_collection);
+  $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);
+  if (count($f_collection) > 0) {
+    foreach ($f_collection as $field) {      
+      $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field);      
+    }    
   }
-  pr($pre_save);
+    
+  p($node['field_numerology_values']);
+  $node = node_submit($node); 
+  node_save($node);
+  
   // Save data into database.
-  $itg_auto_save->itg_save_form_data($pre_save, $nid, $ctype);
+  //$itg_auto_save->itg_save_form_data($pre_save, $nid, $ctype);
 }
 
 /**

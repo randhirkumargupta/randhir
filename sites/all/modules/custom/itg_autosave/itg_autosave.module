@@ -95,6 +95,7 @@ function itg_autosave_views_api() {
  * {@inheritdoc}.
  */
 function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
+  //dpm($form);
   // Fetch form ids saved into databse for auto save feature.
   $itg_autosave_form = new itg_auto_save();  
   // Restore data if it is available on auto saved data.
@@ -106,7 +107,7 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
       );
       // Set form ids to js file.
       $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);
-      // Retrive data is it is already set.
+      /* Retrive data is it is already set.
       $data = $itg_autosave_form->itg_save_retrieve_form_data($form['nid']['#value'], $form['type']['#value']);
       $form_data = unserialize($data->form_data);
       $field_detail = $itg_autosave_form->itg_save_extract_fieldtype($form_data);      
@@ -119,7 +120,7 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
           $itg_autosave_form->itg_save_prepare_retrieve_array($form, $value['fieldName'], $form_data[$value['fieldName']], $value['fieldType']);
         }
       }
-
+      */
       break;
   }
 }

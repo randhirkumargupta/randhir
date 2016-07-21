@@ -128,108 +128,84 @@ class itg_auto_save {
   /**
    * Prepare presave array for file field.
    *
-   * @param string $op
    * @param array $value
    *
    * @return array
    */
-  public function itg_save_field_file($op, $value) {
-    if ($op == 'insert') {
-      $this->file_arr = array();
-      $this->file_arr['fid'] = $value['und'][0]['fid'];
-      $this->file_arr['display'] = $value['und'][0]['display'];
-      $this->file_arr['description'] = $value['und'][0]['description'];
-    }
-
+  public function itg_save_field_file($value) {
+    $this->file_arr = array();
+    $this->file_arr['fid'] = $value['und'][0]['fid'];
+    $this->file_arr['display'] = $value['und'][0]['display'];
+    $this->file_arr['description'] = $value['und'][0]['description'];
+    
     return $this->file_arr;
   }
 
   /**
    * Prepare presave arrave for text field.
    *
-   * @param string $op
    * @param array $value
    *
    * @return string
    */
-  public function itg_save_field_text($op, $value) {
-    if ($op == 'insert') {
-      $this->text_arr = '';
-      $this->text_arr = $value['und'][0]['value'];
-    }
-
+  public function itg_save_field_text($value) {
+    $this->text_arr = '';
+    $this->text_arr = $value['und'][0]['value'];
+    
     return $this->text_arr;
-  }
-
-  /**
-   * Prepare presave array for term reference field.
-   *
-   * @param string $op
-   * @param array $value
-   *
-   * @return string
-   */
-  public function itg_save_field_taxonomy_term_reference($op, $value) {
-    if ($op == 'insert') {
-      $this->term_reference = '';
-      $this->term_reference = $value['und'];
-    }
-
-    return $this->term_reference;
   }
 
   /**
    * Prepare presave array for field collection type field.
    *
    * @param array $value
+   * @param stdObject $node
+   * @param string $field_name
    *
    * @return array
    */
-  public function itg_save_field_field_collection($value) {
+  public function itg_save_field_field_collection($value, &$node, $field_name) {        
     $this->field_collection = array();
-    $this->field_collection_data = array();
+    $this->field_collection_data = array();    
     foreach ($value['und'] as $key => $fc_value) {
-      if ($key >= 0) {
-        $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);
-        $this->field_collection[$key] = $this->itg_autosave_prepare_presave($this->field_collection_data, $fc_value, 'fc');
-      }
-    }
+      $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);      
+      $this->itg_autosave_prepare_presave($this->field_collection_data, $fc_value, $node, 'fc', $field_name, $key);      
+    }   
 
     return $this->field_collection;
   }
 
   /**
    * Prepare presave array for datestamp field.
-   *
-   * @param string $op
+   *   
    * @param array $value
    *
    * @return array
    */
-  public function itg_save_field_datestamp($op, $value) {
-    if ($op = 'insert') {
-      $this->datestamp_arr = array();
-      $this->datestamp_arr['value'] = strtotime($value['und'][0]['value']['date']);
-      ;
-      $this->datestamp_arr['value2'] = strtotime($value['und'][0]['value2']['date']);
-    }
-
+  public function itg_save_field_datestamp($value) {
+    $this->datestamp_arr = array();
+    $this->datestamp_arr['value'] = strtotime($value['und'][0]['value']['date']);
+    $this->datestamp_arr['value2'] = strtotime($value['und'][0]['value2']['date']);
+    
     return $this->datestamp_arr;
   }
 
   /**
    * Prepare presave array for datetime field.
    *
-   * @param string $op
    * @param array $value
    *
    * @return string
    */
-  public function itg_save_field_datetime($op, $value) {
+  public function itg_save_field_datetime($value) {
     $this->datetime_result = '';
-    if ($op == 'insert' && $value['und'][0]['value']['date'] != '') {
+    if ($value['und'][0]['value']['date'] != '') {      
       $this->datetime_value = $value['und'][0]['value']['date'];
-      $this->datetime_result = date("Y-m-d H:i:s", strtotime($this->datetime_value));
+      $this->datetime_result = array(
+        'value' => date("Y-m-d H:i:s", strtotime($this->datetime_value)),
+        'timezone' => date_default_timezone(),
+        'timezone_db' => date_default_timezone(),
+      );
     }
 
     return $this->datetime_result;
@@ -237,18 +213,16 @@ class itg_auto_save {
 
   /**
    * Prepare presave array for long text field.
-   *
-   * @param string $op
+   * 
    * @param array $value
    *
    * @return string
    */
-  public function itg_save_field_text_long($op, $value) {
-    $this->text_long = '';
-    if ($op == 'insert') {
-      $this->text_long = $value['und'][0]['value'];
-    }
-
+  public function itg_save_field_text_long($value) {
+    $this->text_long = array();    
+    $this->text_long['value'] = $value['und'][0]['value'];
+    $this->text_long['#format'] = 'plain_text';
+    
     return $this->text_long;
   }
 
@@ -274,17 +248,14 @@ class itg_auto_save {
   /**
    * Prepare presave array for image field.
    *
-   * @param string $op
    * @param array $value
    *
    * @return string
    */
-  public function itg_save_field_text_with_summary($op, $value) {
-    if ($op == 'insert') {
-      $this->text_with_summary = '';
-      $this->text_with_summary = $value['und'][0]['value'];
-    }
-
+  public function itg_save_field_text_with_summary($value) {
+    $this->text_with_summary = '';
+    $this->text_with_summary = $value['und'][0]['value'];
+    
     return $this->text_with_summary;
   }
 
@@ -296,12 +267,10 @@ class itg_auto_save {
    *
    * @return string
    */
-  public function itg_save_field_list_text($op, $value) {
-    if ($op == 'insert') {
-      $this->list_text = '';
-      $this->list_text = $value['und'];
-    }
-
+  public function itg_save_field_list_text($value) {
+    $this->list_text = '';
+    $this->list_text = $value['und'];
+    
     return $this->list_text;
   }
 
@@ -443,55 +412,90 @@ class itg_auto_save {
    *
    * @param array $data
    * @param array $inputs
+   * @param stdObject $node
+   * @param string $fc
+   *   This is a flag for field collection field.
+   * @param string $field_name
+   *   Name of the field collection field.
+   * @param int $delta
+   *   Delta value of field collection field.
    *
    * @return array
    */
-  public function itg_autosave_prepare_presave($data, $inputs) {
+  public function itg_autosave_prepare_presave($data, $inputs, &$node, $fc = NULL, $field_name = NULL, $delta = NULL) {
     $this->temp = array();
-    foreach ($data as $field) {
+    foreach ($data as $field) {      
       switch ($field['fieldType']) {
         case 'datestamp':
-          $this->temp[$field['fieldName']] = $this->itg_save_field_datestamp('insert', $inputs[$field['fieldName']]);
+          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datestamp($inputs[$field['fieldName']]);          
           break;
 
         case 'datetime':
-          $this->temp[$field['fieldName']] = $this->itg_save_field_datetime('insert', $inputs[$field['fieldName']]);
+          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']]);          
           break;
 
         case 'text':
-          $this->temp[$field['fieldName']] = $this->itg_save_field_text('insert', $inputs[$field['fieldName']]);
+          $node->{$field['fieldName']}['und'][0]['value'] = $this->itg_save_field_text($inputs[$field['fieldName']]);
           break;
 
         case 'taxonomy_term_reference':
-          $this->temp[$field['fieldName']] = $this->itg_save_field_taxonomy_term_reference('insert', $inputs[$field['fieldName']]);
+          $this->value = $inputs[$field['fieldName']]['und'];
+          if ($fc === 'fc') {            
+            if (is_array($this->value)) {
+              foreach ($this->value as $key => $tid) {                
+                $node->{$field_name}[$node->language][$delta][$field['fieldName']][$node->language][$key]['tid'] = $tid;
+              }
+            }
+            else {
+              $node->{$field_name}[$node->language][$delta][$field['fieldName']][$node->language][0]['tid'] = $this->value;
+            }
+          }
+          else {
+            
+            if (is_array($this->value)) {
+              foreach ($this->value as $key => $tid) {
+                $node->{$field['fieldName']}[$node->language][$key]['tid'] = $tid;
+              }
+            }
+            else {
+              $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
+            }
+          }
+          
+          
           break;
 
         case 'field_collection':
-          $this->temp['fieldCollection'][] = $field['fieldName'];
+          $this->temp[] = $field['fieldName'];
           break;
 
         case 'text_long':
-          $this->temp[$field['fieldName']] = $this->itg_save_field_text_long('insert', $inputs[$field['fieldName']]);
+          if ($fc === 'fc') {
+            $node->{$field_name}[$node->language][$delta][$field['fieldName']][$node->language][0] = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
+          }
+          else {
+            $node->{$field['fieldName']}[$node->language][0] = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
+          }          
           break;
 
         case 'image':
-          $this->temp[$field['fieldName']] = $this->itg_save_field_image('insert', $inputs[$field['fieldName']]);
+          //$this->temp[$field['fieldName']] = $this->itg_save_field_image('insert', $inputs[$field['fieldName']]);
           break;
 
-        case 'file':
-          $this->temp[$field['fieldName']] = $this->itg_save_field_file('insert', $inputs[$field['fieldName']]);
+        case 'file':          
+          //$node->$field['fieldName'][$node->language][0] = $this->itg_save_field_file($inputs[$field['fieldName']]);
           break;
 
         case 'text_with_summary':
-          $this->temp[$field['fieldName']] = $this->itg_save_field_text_with_summary('insert', $inputs[$field['fieldName']]);
+          //$node->$field['fieldName'] = $this->itg_save_field_text_with_summary($inputs[$field['fieldName']]);
           break;
 
         case 'list_text':
-          $this->temp[$field['fieldName']] = $this->itg_save_field_list_text('insert', $inputs[$field['fieldName']]);
+          $node->{$field['fieldName']}['und'][0]['value'] = $this->itg_save_field_list_text($inputs[$field['fieldName']]);
           break;
       }
-    }
-
+    }   
+    
     return $this->temp;
   }
 
