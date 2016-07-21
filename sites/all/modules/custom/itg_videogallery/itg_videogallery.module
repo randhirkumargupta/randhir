@@ -554,7 +554,7 @@ function itg_videogallery_field_attach_form($entity_type, $entity, &$form, &$for
     'language' => NULL,
   );
   $options += $default_options;
-  list(, , $bundle) = entity_extract_ids($entity_type, $entity);
+  list(,, $bundle) = entity_extract_ids($entity_type, $entity);
   $instances = _field_invoke_get_instances($entity_type, $bundle, $options);
   // Iterate through the instances.
   $return = array();
@@ -712,6 +712,12 @@ function itg_videogallery_menu() {
     'access arguments' => array('authorized user dailymotion credin'),
     'type' => MENU_CALLBACK,
   );
+  $items['del/file'] = array(
+    'title' => 'Dailymotion Configuration',
+    'page callback' => 'itg_videogallery_remove_video',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -831,4 +837,27 @@ function itg_videogallery_get_tname($tid) {
   $query->condition('tid', $tid, '=');
   $result = $query->execute()->fetchField();
   return $result;
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_videogallery_cronapi($op, $job = NULL) {
+  $items['video_file_delete'] = array(
+    'description' => 'video file delete in files folder.',
+    'callback' => 'itg_videogallery_remove_video',
+  );
+  return $items;
+}
+
+/**
+ * Implement function for remove files
+ */
+function itg_videogallery_remove_video() {
+  $files = glob('sites/default/files/dailymotion_video_dir/*');
+  foreach ($files as $file) {
+    if (is_file($file))
+      unlink($file);
+  }
 }
