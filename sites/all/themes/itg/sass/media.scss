@@ -1,0 +1,191 @@
+/*Start CSS Desktop version*/
+@import "itg-variables";
+@import "itg-mixins";
+/*Start header CSS Desktop version*/
+@media only screen and (min-width:768px){
+    h1{    
+        font-size: $h1-font-size;
+        line-height: $h1-line-height;
+        font-weight: $itg-font-bold;
+    }
+    h2{
+        font-size: $h2-font-size;
+        line-height: $h2-line-height;
+        font-weight: $itg-font-bold;
+    }
+    h3{
+        font-size: $h3-font-size;
+        line-height: $h3-line-height;
+    }
+    .mhide{
+        display: block;
+    }
+    .desktop-hide{
+        display: none;   
+    }
+    .header{
+        height:220px;
+        .header-top{
+            background: $header-bg url(../images/header-bg.png) no-repeat center center;
+            height: 163px;
+        }
+        .logo{
+            width: auto;
+            top: 95px;
+            img{
+                background: $header-bg;
+                padding-left: 5px;
+                padding-right: 2px;
+                vertical-align: top;
+            }
+        }
+        .top-nav{
+            padding: 0 15px 0 15px;
+            margin:25px auto 15px auto; 
+            float: none;
+            @include clearfix;
+            background:transparent;
+            .main-nav{
+                @include float(right);
+                    li{
+                        &:nth-child(2){
+                            @include pos(relative);
+                            a{
+                                &:before{
+                                    content:'';
+                                    background: url(../images/live-icon.png) no-repeat;
+                                    @include pos(absolute,-8px,null,null,15px);
+                                    width: 28px;
+                                    height: 19px;
+                                } 
+                            }
+                        }
+                        a{
+                           padding: 0 35px;
+                           font-size: 27px;
+                           &.active, &:hover{
+                               color:$yellow-color;
+                           }
+                        }
+                    }
+                }
+            .social-nav{
+                @include float(right);
+                    a{
+                       .fa{
+                           font-size: 23px;
+                           &.fa-mobile{
+                               font-size: 27px;
+                           }
+                       }
+                    }
+                }
+
+        }
+        .navigation{
+            @include clearfix;
+            background: $red-bg;
+            margin-top: 16px;
+            .menu{
+            @include float(right);
+            li{
+                @include float(left);
+                a{
+                    font-size: $itg-nav-fontsize;
+                    color: $itg-nav-fontcolor;
+                    text-transform: uppercase;
+                    @include itg-font(null, $itg-font-medium);
+                    padding: 0 10px;
+                    border-left: 1px solid $itg-nav-bordercolor;
+                    height: 37px;
+                    line-height: 37px;
+                    display:block;
+                        &.active, &:hover{
+                            color: $yellow-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /*End header CSS Desktop version*/
+    /*Start Footer CSS Desktop version*/
+    footer{
+        .footer-top{
+            .footer-top-link{
+                @include float(left);
+            }
+            .footer-social-link{
+                .fa{
+                    font-size: 24px;
+                    vertical-align: middle;
+                }
+            }
+            .footer-expand-icon{
+                right: 15px;
+            }
+        } 
+        .footer-bottom{
+            .cell{
+                @include calculate-width(6);
+                @include float(left);
+                margin-bottom: 0;
+            }
+            .first-cell{
+                width: 30%;
+                h4{
+                    @include float(left);
+                    @include calculate-width(2);
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    /*End Footer CSS Desktop version*/
+    
+/*Start CSS Top Block Grid Home Page*/    
+    .top-block{
+        .top-colum-1, .top-colum-2, .top-colum-3{
+           padding: 0 15px;
+        }
+        .top-colum-1{
+           @include float(left);
+           width: 22%; 
+        }
+        .top-colum-2{
+           width: 44.8%;
+           @include display-inline;
+        }
+        .top-colum-3{
+           width: 33.2%;
+           @include float(right);
+        }
+    }
+/*End CSS Top Block Grid Home Page*/  
+/*Start CSS Big New Home page*/
+    .big-news{        
+        .big-story-col-1, .big-story-col-2{
+            @include float(left);
+            padding:0 15px;
+        } 
+        .big-story-col-1{
+            width: 56.4%;
+        }
+        .big-story-col-2{
+            width: 43.6%;
+            padding-left: 0;
+        }
+    }
+/*End CSS Big New Home page*/
+/*Start CSS Featured-news Home Page*/ 
+    .featured-news{
+        padding: 5px;
+        border:1px solid $border-color;
+        margin:0;
+        .featured-post {
+            padding: 5px;
+        }
+    }
+/*End CSS Featured-news Home Page*/     
+}
+/*End CSS Desktop version*/

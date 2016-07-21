@@ -2,6 +2,7 @@
 /*====================== IndiaToday Variables =========================*/
 /*=======================================================================*/
 /*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
 /*Fonts used in Indiatoday site*/
 /*Colors used in Indiatoday site*/
 /*Background Colors used in Indiatoday site*/
@@ -22,35 +23,8 @@
 /* Calculate-width function */
 /* Tab Button mixins */
 /* Tab Listing mixins */
-/*Fonts used in Indiatoday site*/
-/*@font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Regular.eot');
-	src: local('/'), url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.ttf') format('truetype'), url('../fonts/Roboto-Regular.svg') format('svg');
-	font-weight: 400;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Medium.eot');
-	src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
-	font-weight: 500;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Bold.eot');
-	src: local('/'), url('../fonts/Roboto-Bold.woff') format('woff'), url('../fonts/Roboto-Bold.ttf') format('truetype'), url('../fonts/Roboto-Bold.svg') format('svg');
-	font-weight: 700;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'RobotoSlab';
-	src: url('../fonts/RobotoSlab-Regular.eot');
-	src: local('/'), url('../fonts/RobotoSlab-Regular.woff') format('woff'), url('../fonts/RobotoSlab-Regular.ttf') format('truetype'), url('../fonts/RobotoSlab-Regular.svg') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}*/
+/* Story Tag mixins */
+/* List before icon */
 /* Global CSS */
 body {
   font: 400 14px/18px "Roboto Slab", sans-serif;
@@ -59,6 +33,24 @@ body {
 
 h1, h2, h3, h4 {
   font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 16px;
+  line-height: 24px;
 }
 
 ul {
@@ -66,11 +58,13 @@ ul {
 }
 
 a {
+  color: #323232;
   text-decoration: none;
 }
 
 img {
   vertical-align: top;
+  max-width: 100%;
 }
 
 .mr-0, *, #block-formblock-ask-an-expert .form-item .form-item {
@@ -152,7 +146,7 @@ img {
   vertical-align: middle;
 }
 
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field .field-items .file img {
+.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .header .top-nav ul li a .fa, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field .field-items .file img {
   vertical-align: top;
 }
 
@@ -293,7 +287,6 @@ input[type="text"], select, input[type="password"] {
 .header .top-nav ul li a .fa {
   font-size: 20px;
   line-height: 28px;
-  vertical-align: top;
 }
 
 .tabs-primary li {
@@ -1003,7 +996,7 @@ footer .footer-bottom ul li {
 }
 footer .footer-bottom .cell {
   padding: 0 15px;
-  width: 100%;
+  width: calculate-width(1);
   margin-bottom: 20px;
 }
 footer .footer-bottom .cell ul {
@@ -1013,7 +1006,7 @@ footer .footer-bottom .cell ul:last-child {
   margin-bottom: 0px;
 }
 footer .footer-bottom .first-cell {
-  width: 100%;
+  width: calculate-width(1);
 }
 footer .footer-bottom .first-cell h4 {
   margin-bottom: 5px;
@@ -1032,7 +1025,92 @@ footer .footer-copyright {
 }
 
 /*End CSS footer section*/
-/*Start CSS Top Story*/
+/*Start CSS Top Block Grid Home Page*/
+.top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
+  padding: 0 15px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+/*End CSS Top Block Grid Home Page*/
+/*Start CSS Big New Home page*/
+.big-news {
+  position: relative;
+  color: #fff;
+  padding: 10px;
+  background: #000000;
+  font-family: "Roboto", sans-serif;
+}
+.big-news .big-story-col-1, .big-news .big-story-col-2 {
+  padding: 0 15px;
+}
+.big-news h1 {
+  margin-bottom: 10px;
+}
+.big-news a {
+  color: #fff;
+}
+.big-news p {
+  font-size: 16px;
+  color: #adacac;
+  line-height: 20px;
+  margin-bottom: 15px;
+}
+.big-news .share-new {
+  margin-bottom: 15px;
+}
+.big-news .share-new ul li {
+  display: inline-block;
+  vertical-align: top;
+}
+.big-news .share-new ul li:first-child a {
+  padding-left: 0;
+}
+.big-news .share-new ul li a {
+  padding: 0 10px;
+  font-size: 16px;
+  border-right: 1px solid #606060;
+  line-height: 15px;
+  display: inline-block;
+  vertical-align: top;
+}
+.big-news .share-new ul li:last-child a {
+  color: #ffc106;
+  border-right: none;
+}
+.big-news .big-story-detail li {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 15px;
+}
+.big-news .big-story-detail li:before {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  content: '';
+  border-radius: 50%;
+  background: #ffffff;
+  height: 6px;
+  width: 6px;
+}
+.big-news .big-story-detail li a {
+  font-weight: 700;
+  font-size: 16px;
+}
+.big-news .story-tag {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: #a00606;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 7px;
+  text-transform: uppercase;
+  margin: 10px 0 0 10px;
+}
+
+/*End CSS Big New Home page*/
+/*Start CSS Top Story Home Page*/
 .top-n-most-popular-stories .tab-buttons {
   zoom: 1;
 }
@@ -1095,143 +1173,43 @@ footer .footer-copyright {
   width: 5px;
 }
 
-/*End CSS Top Story*/
-/*Start CSS Desktop version*/
-/*Start header CSS Desktop version*/
-@media only screen and (min-width: 768px) {
-  .mhide {
-    display: block;
-  }
-
-  .desktop-hide {
-    display: none;
-  }
-
-  .header {
-    height: 220px;
-  }
-  .header .header-top {
-    background: #193c8d url(../images/header-bg.png) no-repeat center center;
-    height: 163px;
-  }
-  .header .logo {
-    width: auto;
-    top: 95px;
-  }
-  .header .logo img {
-    background: #193c8d;
-    padding-left: 5px;
-    padding-right: 2px;
-    vertical-align: top;
-  }
-  .header .top-nav {
-    padding: 0 15px 0 15px;
-    margin: 25px auto 15px auto;
-    float: none;
-    zoom: 1;
-    background: transparent;
-  }
-  .header .top-nav:before, .header .top-nav:after {
-    content: "";
-    display: block;
-    height: 0;
-    overflow: hidden;
-  }
-  .header .top-nav:after {
-    clear: both;
-  }
-  .header .top-nav .main-nav {
-    float: right;
-  }
-  .header .top-nav .main-nav li:nth-child(2) {
-    position: relative;
-  }
-  .header .top-nav .main-nav li:nth-child(2) a:before {
-    content: '';
-    background: url(../images/live-icon.png) no-repeat;
-    position: absolute;
-    top: -8px;
-    left: 15px;
-    width: 28px;
-    height: 19px;
-  }
-  .header .top-nav .main-nav li a {
-    padding: 0 35px;
-    font-size: 27px;
-  }
-  .header .top-nav .main-nav li a.active, .header .top-nav .main-nav li a:hover {
-    color: #ffc106;
-  }
-  .header .top-nav .social-nav {
-    float: right;
-  }
-  .header .top-nav .social-nav a .fa {
-    font-size: 23px;
-  }
-  .header .top-nav .social-nav a .fa.fa-mobile {
-    font-size: 27px;
-  }
-  .header .navigation {
-    zoom: 1;
-    background: #a00606;
-    margin-top: 16px;
-  }
-  .header .navigation:before, .header .navigation:after {
-    content: "";
-    display: block;
-    height: 0;
-    overflow: hidden;
-  }
-  .header .navigation:after {
-    clear: both;
-  }
-  .header .navigation .menu {
-    float: right;
-  }
-  .header .navigation .menu li {
-    float: left;
-  }
-  .header .navigation .menu li a {
-    font-size: 14px;
-    color: #e0e0e0;
-    text-transform: uppercase;
-    font-weight: 500;
-    padding: 0 10px;
-    border-left: 1px solid #680101;
-    height: 37px;
-    line-height: 37px;
-    display: block;
-  }
-  .header .navigation .menu li a.active, .header .navigation .menu li a:hover {
-    color: #ffc106;
-  }
-
-  /*End header CSS Desktop version*/
-  /*Start Footer CSS Desktop version*/
-  footer .footer-top .footer-top-link {
-    float: left;
-  }
-  footer .footer-top .footer-social-link .fa {
-    font-size: 24px;
-    vertical-align: middle;
-  }
-  footer .footer-top .footer-expand-icon {
-    right: 15px;
-  }
-  footer .footer-bottom .cell {
-    width: 14.28571%;
-    float: left;
-    margin-bottom: 0;
-  }
-  footer .footer-bottom .first-cell {
-    width: 30%;
-  }
-  footer .footer-bottom .first-cell h4 {
-    float: left;
-    width: 50%;
-    margin-bottom: 0;
-  }
-
-  /*End Footer CSS Desktop version*/
+/*End CSS Top Story Home page*/
+/*Start CSS Featured New Home page*/
+.featured-news {
+  zoom: 1;
+  padding-bottom: 10px;
+  margin: 0 -5px;
 }
-/*End CSS Desktop version*/
+.featured-news:before, .featured-news:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.featured-news:after {
+  clear: both;
+}
+.featured-news .featured-post {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+.featured-news .featured-post:hover a {
+  color: #193984;
+}
+.featured-news .featured-post img {
+  padding-bottom: 10px;
+  width: 100%;
+}
+.featured-news .featured-post.featured-post-first {
+  float: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.video-n-magazine {
+  border: 1px solid #e4dfdf;
+  height: 800px;
+}
+
+/*End CSS Featured New Home page*/
