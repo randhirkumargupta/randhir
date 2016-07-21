@@ -178,11 +178,17 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
        // If idea is completed, restrict user to update his/her idea 
        if($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed') {
           $form['title']['#disabled']= TRUE;
-          $form['body']['#disabled']= TRUE;
           $form['field_pti_words_limit']['#disabled']= TRUE;
           $form['field_survey_end_date']['#disabled']= TRUE;
           $form['field_pti_mark_as_complete']['#disabled']= TRUE;
-          //TO DO: Make Section, print medea readonly
+          $form['body']['#attributes'] = array('class' => array('itg-disabled-radio'));
+          $form['field_story_category']['#attributes'] = array('class' => array('itg-disabled-radio'));
+          $form['field_pti_print_media']['#attributes'] = array('class' => array('itg-disabled-radio'));
+          
+          // Hide extra body field
+          drupal_add_js('jQuery(document).ready(function() {                  
+           jQuery(".text-summary-wrapper").hide();
+          });', array('type' => 'inline', 'scope' => 'footer'));
           
         }
       }
