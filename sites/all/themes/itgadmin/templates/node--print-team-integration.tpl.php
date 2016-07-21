@@ -2,26 +2,11 @@
 
 //Check for idea approval users 
 $idea_review_flag_user = itg_print_team_check_approval_users();
-
+if ($_GET['type'] == 'commentform') {
+  print render($content['comment_form']);
+  print render($content['comments']);
+}  else { 
 ?>
-
-<a href="javascript:;" class="close-preview">&nbsp;</a>
-<?php if (!empty($pre_object)) print render($pre_object) ?>
-
-<div class='<?php print $classes ?> clearfix' <?php print ($attributes) ?>>
-  <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
-    <div class='column-side'><div class='column-wrapper'>
-  <?php endif; ?>
-
-  <?php if (!empty($submitted)): ?>
-    <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
-  <?php endif; ?>
-
-  <?php if (!empty($links)): ?>
-    <div class='<?php print $hook ?>-links clearfix'>
-      <?php print render($links) ?>
-    </div>
-  <?php endif; ?>
 
   <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
     </div></div>
@@ -129,10 +114,11 @@ $idea_review_flag_user = itg_print_team_check_approval_users();
       <?php } ?>
  </div>   
   <?php endif; ?>
-
   <?php if ($layout): ?>
     </div></div>
   <?php endif; ?>
 </div>
 
 <?php if (!empty($post_object)) print render($post_object) ?>
+<?php } ?>
+

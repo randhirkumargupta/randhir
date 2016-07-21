@@ -14,7 +14,7 @@ function features_for_print_team_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_print_team_integration';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['comment_anonymous_print_team_integration'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -42,21 +42,21 @@ function features_for_print_team_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_print_team_integration';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['comment_preview_print_team_integration'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_print_team_integration';
-  $strongarm->value = '0';
+  $strongarm->value = '2';
   $export['comment_print_team_integration'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_subject_field_print_team_integration';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['comment_subject_field_print_team_integration'] = $strongarm;
 
   $strongarm = new stdClass();
