@@ -5263,15 +5263,15 @@ div.node{
     div.description{
       left: 165px;
     }
+    &+.form-submit{
+      margin: 30px;
+      @extend .add-more;
+    }
   }
   .form-item-pti-magazine{
     @extend .fleft;
     > label{
       width: auto;
-    }
-    &+.form-submit{
-      margin: 30px;
-      @extend .add-more;
     }
   }
 }
@@ -5314,6 +5314,10 @@ div.node{
         @extend .astrick;
       }
     }
+  }
+  #edit-submit{
+    @extend .btn;
+    @extend .btn-save;
   }
 }
 
@@ -5395,6 +5399,7 @@ div.node{
   @extend .dib;
   .form-type-select{
     float: left;
+    width: 420px;
     &:first-child{
       padding-left: 0;
     }
@@ -5403,6 +5408,16 @@ div.node{
     }
     select{
       width: 200px;
+    }
+    &.form-item-section{
+      > label + .form-select + span.error{
+        padding-left: 124px;
+      }
+    }
+    &.form-item-template-name{
+      > label + .form-select + span.error{
+        padding-left: 135px;
+      }
     }
   }
   .form-submit{
