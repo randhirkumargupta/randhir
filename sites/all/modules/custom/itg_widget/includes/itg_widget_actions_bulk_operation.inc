@@ -7,6 +7,7 @@
  * This file provide an extra action bulk operation to add nodes into our custom table.
  *
  */
+
 /**
  * {@inheritdoc}
  */
@@ -88,4 +89,7 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     else {
         drupal_set_message(t("Selected nodes allready in ordering section"));
     }
+    return array(
+        'form_values' => $form_state['values'],
+    );
 }
