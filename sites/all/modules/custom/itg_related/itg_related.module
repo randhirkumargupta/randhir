@@ -197,7 +197,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if ($i > 1) {
       $and = ' AND ';
     }
-    $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match');
+    $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp');
 
     if (!empty($val) && $val != 'related-content' && $val != 'site-search' && !in_array($key, $remove_key)) {
 
