@@ -145,20 +145,11 @@ a {
 
 /*End CSS Top Story Home page*/
 /*Start CSS Featured New Home page*/
-.featured-news {
-  min-height: 672px;
-  zoom: 1;
-  padding-bottom: 10px;
+.itg-featured-news {
+  border: 1px solid #e4e4e4;
+  height: 672px;
 }
-.featured-news:before, .featured-news:after {
-  content: "";
-  display: block;
-  height: 0;
-  overflow: hidden;
-}
-.featured-news:after {
-  clear: both;
-}
+
 .featured-news .featured-post {
   float: left;
   width: 50%;
@@ -295,7 +286,6 @@ a {
   /*Start CSS Featured-news Home Page*/
   .featured-news {
     padding: 5px;
-    border: 1px solid #dddddd;
     margin: 0;
   }
   .featured-news .featured-post {
