@@ -16,7 +16,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info) {
         $content_type = $info['content_type'];
         $cat_id = $info['section'];
         $view_name = $info['view_name'];
-        $widget_name = _get_widget_name($view_name);
+        $widget_name = _get_widget_name($view_name,'page');
         $result = db_select('itg_widget_order', 'iwo')
                         ->fields('iwo', array('nid'))
                         ->condition('iwo.cat_id', $cat_id)
