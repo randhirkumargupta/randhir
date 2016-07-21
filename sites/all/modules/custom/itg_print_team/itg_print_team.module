@@ -41,7 +41,7 @@ function itg_print_team_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/print_team_submit_idea.inc',
   );
-
+  
   return $items;
 }
 
@@ -66,6 +66,13 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
     'itg_print_team_notification_mail' => array(
       'variables' => array('node' => NULL),
       'template' => 'templates/print-team-notification-mail',
+    ),
+      
+   'print_team_integration_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'print-team-integration-node-form',
+      'path' => drupal_get_path('module', 'itg_print_team') . '/templates',
+      'render element' => 'form',
     ),
       
   );
@@ -191,6 +198,14 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           });', array('type' => 'inline', 'scope' => 'footer'));
           
         }
+        
+       // Rednder comment section
+        $node_view_url = $base_url.'/node/'.$form['#node']->nid;
+        $form['print_team_comment_form'] = array(
+          '#type' => 'item',
+          '#markup' => '<iframe src="'.$node_view_url.'?type=commentform" width="100%" height="400px" class="print-team-iframe-comment-form" frameBorder="0"></iframe>',
+          '#weight' => 100,
+        );
       }
       else {
         $form['field_story_category']['#access'] = FALSE;
@@ -218,6 +233,9 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       // Call function after build
       $form['#after_build'][] = 'itg_print_team_form_after_build';
 
+      
+
+      
       break;
 
     // Add form to associate story with issue and magazine
@@ -509,6 +527,18 @@ function itg_print_team_node_validate($node, $form, &$form_state) {
         form_set_error('field_story_category', t('Section field is required'));
       }
   }
+}
+
+/**
+ * Implements hook_node_view
+ * {@inheritdoc}
+ */
+function itg_print_team_node_view($node, $view_mode) {
+    if ($node->type=="print_team_integration") {
+     drupal_add_js('jQuery(document).ready(function() {                  
+       jQuery("#page-title").hide();
+     });', array('type' => 'inline', 'scope' => 'footer'));
+    }    
 }
 
 /**
