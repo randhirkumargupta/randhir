@@ -181,12 +181,11 @@ function itg_breaking_news_views_pre_render(&$view) {
 
         $breaking_value->field_field_story_expires[0]['rendered']['#markup'] = 'Yes';
       }
-      
+
       if ($breaking_value->field_field_type[0]['raw']['value'] == 'Live Blog' && empty($breaking_value->field_field_story_expires[0]['raw']['value'])) {
 
         $breaking_value->field_field_story_expires[0]['rendered']['#markup'] = 'No';
       }
-      //dpm($breaking_value);
     }
   }
 }
