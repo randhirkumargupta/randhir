@@ -291,14 +291,14 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
                 
         $form['submit'] = array(
             '#type' => 'submit',
-            '#value' => t('Associate with Story'),
+            '#value' => t('Submit'),
             '#weight' => 100,
         );
-        $form['download_csv'] = array(
-            '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'button', 'style'=> 'margin-top:30px'))),
-            '#weight' => 101,
-            '#value' => t('Download CSV'),
-        );
+//        $form['download_csv'] = array(
+//            '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'button', 'style'=> 'margin-top:30px'))),
+//            '#weight' => 101,
+//            '#value' => t('Download CSV'),
+//        );
         
         $form['#validate'][] = 'itg_print_team_association_custom_validate';
         $form['submit']['#submit'][] = 'itg_print_team_association_custom_submit';
