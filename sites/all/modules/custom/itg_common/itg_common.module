@@ -411,8 +411,7 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
  * Implementation of hook_node_presave().
  * @param object $node
  */
-function itg_common_node_presave($node) {
-  //p($node);
+function itg_common_node_presave($node) {  
   switch ($node->type) {
     case 'astro':
     case 'recipe':
