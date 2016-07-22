@@ -336,8 +336,11 @@ function _get_widget_name($view_name, $page_name) {
     if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
         $widget = 'section_wise_widget';
     }
-    else if($page_name == 'we_may_suggest_widget') {
+    else if ($page_name == 'we_may_suggest_widget') {
         $widget = 'we_may_suggest_widget';
+    }
+    else if ($page_name == 'big_story_format') {
+        $widget = 'big_story_format_widget';
     }
     return $widget;
 }
@@ -355,4 +358,17 @@ function itg_widget_views_api() {
         'api' => 3,
         'path' => drupal_get_path('module', 'itg_widget') . '/includes/views',
     );
+}
+
+/**
+ * Implementation of hook_views_query_alter
+ * @param type $view
+ * @param type $query 
+ */
+function itg_widget_views_query_alter(&$view, &$query) {
+    if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
+      unset($query->table_queue['field_data_field_type']);
+      unset($query->tables['node']['field_data_field_type']);
+      unset($query->where[1]['conditions'][2]);
+    }
 }

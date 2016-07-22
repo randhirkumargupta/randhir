@@ -1,0 +1,44 @@
+<?php
+
+function save_big_story_widget_data($big_story_data) {
+    $widget = 'big_story_format_widget';
+    $content_type = isset($_GET['type']) ? $_GET['type'] : "";
+    $selected_node = $big_story_data['selection'][0];
+    $related_nodes_json = '[]';
+    // Delete entry frist.
+    $num_deleted = db_delete('itg_widget_order')
+            ->condition('widget', $widget)
+            ->execute();
+    if ($num_deleted) {
+        watchdog("widget", "Delete action has been performed");
+    }
+    // Get related nodes then convert into json.
+    if ($_GET['type'] == 'story') {
+        $select_node_load = node_load($selected_node);
+        $related_content_string = $select_node_load->field_common_related_content['und'][0]['value'];
+        $relates_content_array_with_prefix = explode(",", $related_content_string);
+        $temp_related_content_array = array();
+        foreach ($relates_content_array_with_prefix as $key => $value) {
+            $temp_related_exploded_array = explode('_', $value);
+            $temp_related_content_array[] = $temp_related_exploded_array[1];
+        }
+        $related_nodes_json = json_encode($temp_related_content_array);
+    }
+    // Get related nodes then convert into json.
+    if ($_GET['type'] == 'breaking_news') {
+        $related_content = $big_story_data['values']['related_content'];
+        $related_nodes = explode(',', $related_content);
+        $related_nodes_json = json_encode($related_nodes);
+    }
+    // Insert into table.
+    $query = db_insert('itg_widget_order')
+            ->fields(array(
+                'nid' => $selected_node,
+                'widget' => $widget,
+                'content_type' => $content_type,
+                'cat_id' => 0,
+                'weight' => 0,
+                'extra' => $related_nodes_json,
+            ))
+            ->execute();
+}
