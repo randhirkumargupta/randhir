@@ -246,20 +246,6 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     // Add form to associate story with issue and magazine
     case 'views_form_manage_print_team_page':
       
-      // Add count and submit button
- 
-      if (arg(0) == 'manage-print-team') {
-        $form['idea_count'] = array(
-            '#markup' => '<span style = "float:right; padding-top: 8px;"> Count(' . $_SESSION['idea_count_rows'] . ')</span>',
-            '#weight' => -4,
-        );
-        $form['submit_idea'] = array(
-            '#markup' => l(t('Submit Idea'), 'submit-idea', array('attributes' => array('class' => 'btn', 'style' => 'float:right; margin: 0px 0px 10px 10px'))),
-            '#weight' => -5,
-            '#value' => t('Submit Idea'),
-        );
-      }
-      
       $filtered_result =  count($form['#substitutions']['#value']);
       
       // Check for story approval users
@@ -409,16 +395,13 @@ function itg_print_team_form_after_build($form, &$form_state) {
 function itg_print_team_views_pre_render(&$view) {
   
   global $base_url;
+  
   // Add "Submit Idea" button on listing page of ideas
   if ($view->name == "manage_print_team") {
-    
-    $_SESSION['idea_count_rows'] = $view->total_rows;
-    
-    /*
     $header_content_print_team = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_print_team .= l('Submit Idea', $base_url.'/submit-idea');
     $view->attachment_before = $header_content_print_team;
-     * */
+
   }
 }
 
