@@ -395,16 +395,13 @@ function itg_print_team_form_after_build($form, &$form_state) {
 function itg_print_team_views_pre_render(&$view) {
   
   global $base_url;
+  
   // Add "Submit Idea" button on listing page of ideas
   if ($view->name == "manage_print_team") {
-    
-    $_SESSION['idea_count_rows'] = $view->total_rows;
-    
-    /*
     $header_content_print_team = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_print_team .= l('Submit Idea', $base_url.'/submit-idea');
     $view->attachment_before = $header_content_print_team;
-     * */
+
   }
 }
 
