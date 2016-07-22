@@ -5425,3 +5425,37 @@ div.node{
     @extend .add-more;
   }
 }
+.tagview{
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(0, 0, 0, 0.5) !important;
+  height: 100px;
+  opacity: 0;
+  position: absolute;
+  width: 100px;
+  .person {
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    left: -50px !important;
+    padding: 10px;
+    position: absolute !important;
+    right: 0 !important;
+    top: 110% !important;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .remove{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url('../images/cross_small.png') center center no-repeat;
+    text-indent: -9999px;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+}
