@@ -153,12 +153,18 @@ Drupal.behaviors.my_custom_behavior = {
     headerMain();
     function headerMain(){
         $('.search-icon').click(function(){
-            $('.globle-search').css('right','40px');
+            $('.globle-search').css('width','255px');
         });
         $('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
         $('.mobile-nav').click(function(){
             $('.navigation').stop().slideToggle();
-        });        
+        });
+        $(document).on('click', function(){            
+            $('.globle-search').css('width','0px');
+        });
+        $('.search-icon').click(function(e){
+            e.stopPropagation();
+        });
     }
     
     footerMain();
@@ -179,8 +185,13 @@ Drupal.behaviors.my_custom_behavior = {
     });
     $('.more-link').click(function(){
         $(this).parents('ul').find('li.hidelist').slideToggle();
+        $(this).toggleClass('active');
         $("html, body").animate({ scrollTop: $(document).height() }, 800);
-        $('.more-link').text('Less');
+        if($(this).hasClass('active')){
+            $('.more-link').text('Less');
+        } else{
+            $('.more-link').text('More');
+        }
     });
     }
   }

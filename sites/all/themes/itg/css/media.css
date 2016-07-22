@@ -114,8 +114,6 @@
   .header .top-nav .social-nav {
     position: relative;
     float: right;
-    overflow: hidden;
-    z-index: 1;
   }
   .header .top-nav .social-nav a .fa {
     font-size: 23px;
@@ -125,12 +123,17 @@
   }
   .header .top-nav .social-nav .globle-search {
     position: absolute;
-    right: -182px;
+    right: 40px;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
+    width: 0px;
+    overflow: hidden;
+  }
+  .header .top-nav .social-nav .globle-search .search-text {
+    width: 100%;
   }
   .header .navigation {
     zoom: 1;
