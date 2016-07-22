@@ -26,7 +26,7 @@
     .header{
         height:220px;
         .header-top{
-            background: $header-bg url(../images/header-bg.png) no-repeat center center;
+            background: $header-bg url(../images/header-bg.png) no-repeat top center;
             height: 163px;
         }
         .logo{
@@ -45,10 +45,13 @@
             float: none;
             @include clearfix;
             background:transparent;
+            ul li.desktop-hide{
+                display: none;
+            }
             .main-nav{
                 @include float(right);
                     li{
-                        &:nth-child(2){
+                        &:nth-child(3){
                             @include pos(relative);
                             a{
                                 &:before{
@@ -70,24 +73,31 @@
                     }
                 }
             .social-nav{
+                @include pos(relative);
                 @include float(right);
-                    a{
-                       .fa{
-                           font-size: 23px;
-                           &.fa-mobile{
-                               font-size: 27px;
-                           }
+                overflow:hidden;
+                z-index:1;
+                a{
+                   .fa{
+                       font-size: 23px;
+                       &.fa-mobile{
+                           font-size: 27px;
                        }
-                    }
+                   }
+                }  
+                .globle-search{
+                    @include pos(absolute,null,-182px,null,null);
+                    @include transition(all 0.5s ease-in-out );
                 }
+            }
 
         }
         .navigation{
             @include clearfix;
-            background: $red-bg;
-            margin-top: 16px;
+            margin-top: 20px;
+            display:block !important;
             .menu{
-            @include float(right);
+                padding-left:145px;
             li{
                 @include float(left);
                 a{
@@ -96,13 +106,10 @@
                     text-transform: uppercase;
                     @include itg-font(null, $itg-font-medium);
                     padding: 0 10px;
-                    border-left: 1px solid $itg-nav-bordercolor;
+                    border-right: 1px solid $itg-nav-bordercolor;
+                    border-top:none;
                     height: 37px;
-                    line-height: 37px;
-                    display:block;
-                        &.active, &:hover{
-                            color: $yellow-color;
-                        }
+                    line-height: 37px;                       
                     }
                 }
             }

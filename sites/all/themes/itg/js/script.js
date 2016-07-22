@@ -150,6 +150,19 @@ Drupal.behaviors.my_custom_behavior = {
       $(this).prev('label').hide();
     });
     
+    headerMain();
+    function headerMain(){
+        $('.search-icon').click(function(){
+            $('.globle-search').css('right','40px');
+        });
+        $('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+        $('.mobile-nav').click(function(){
+            $('.navigation').stop().slideToggle();
+        });        
+    }
+    
+    footerMain();
+    function footerMain(){
     //footer toggal script
     $('.footer-expand-icon').click(function(){
         $('.footer-toggle').slideToggle();
@@ -169,10 +182,7 @@ Drupal.behaviors.my_custom_behavior = {
         $("html, body").animate({ scrollTop: $(document).height() }, 800);
         $('.more-link').text('Less');
     });
-    /*
-    $('.footer-bottom .cell ul li:gt(6)').hide();
-    $('.footer-bottom .cell ul').append('<li><span class="more-link">more</span></li>');
-   */
+    }
   }
 };
 
