@@ -855,3 +855,16 @@ function itg_videogallery_remove_video() {
       unlink($file);
   }
 }
+
+/**
+ * Implements function for get videoid by file id
+ * @param int $fid
+ */
+function itg_videogallery_get_videoid($fid){
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd', array('video_id'));
+  $query->condition('fid', $fid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
