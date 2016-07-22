@@ -1,0 +1,228 @@
+/*Start CSS Desktop version*/
+/*====================== IndiaToday Variables =========================*/
+/*=======================================================================*/
+/*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
+/*Fonts used in Indiatoday site*/
+/*Colors used in Indiatoday site*/
+/*Background Colors used in Indiatoday site*/
+/*Border Colors used in Indiatoday site*/
+/*Text color in Indiatoday site*/
+/*Background color in Indiatoday site*/
+/*navigation font in Indiatoday site*/
+/*Full radius in Indiatoday site*/
+/*footer color in Indiatoday site*/
+/*font family an font weight mixins*/
+/*clear fix mixins*/
+/*Box sizeing mixins*/
+/*Center Block mixins*/
+/*Float mixins*/
+/*Display inline block mixins*/
+/*Text align block mixins*/
+/* Positional mixins */
+/* Calculate-width function */
+/* Tab Button mixins */
+/* Tab Listing mixins */
+/* Story Tag mixins */
+/* List before icon */
+/*Start header CSS Desktop version*/
+@media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 40px;
+    line-height: 46px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 29px;
+    line-height: 34px;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .mhide {
+    display: block;
+  }
+
+  .desktop-hide {
+    display: none;
+  }
+
+  .header {
+    height: 220px;
+  }
+  .header .header-top {
+    background: #193c8d url(../images/header-bg.png) no-repeat center center;
+    height: 163px;
+  }
+  .header .logo {
+    width: auto;
+    top: 95px;
+  }
+  .header .logo img {
+    background: #193c8d;
+    padding-left: 5px;
+    padding-right: 2px;
+    vertical-align: top;
+  }
+  .header .top-nav {
+    padding: 0 15px 0 15px;
+    margin: 25px auto 15px auto;
+    float: none;
+    zoom: 1;
+    background: transparent;
+  }
+  .header .top-nav:before, .header .top-nav:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  .header .top-nav:after {
+    clear: both;
+  }
+  .header .top-nav .main-nav {
+    float: right;
+  }
+  .header .top-nav .main-nav li:nth-child(2) {
+    position: relative;
+  }
+  .header .top-nav .main-nav li:nth-child(2) a:before {
+    content: '';
+    background: url(../images/live-icon.png) no-repeat;
+    position: absolute;
+    top: -8px;
+    left: 15px;
+    width: 28px;
+    height: 19px;
+  }
+  .header .top-nav .main-nav li a {
+    padding: 0 35px;
+    font-size: 27px;
+  }
+  .header .top-nav .main-nav li a.active, .header .top-nav .main-nav li a:hover {
+    color: #ffc106;
+  }
+  .header .top-nav .social-nav {
+    float: right;
+  }
+  .header .top-nav .social-nav a .fa {
+    font-size: 23px;
+  }
+  .header .top-nav .social-nav a .fa.fa-mobile {
+    font-size: 27px;
+  }
+  .header .navigation {
+    zoom: 1;
+    background: #a00606;
+    margin-top: 16px;
+  }
+  .header .navigation:before, .header .navigation:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  .header .navigation:after {
+    clear: both;
+  }
+  .header .navigation .menu {
+    float: right;
+  }
+  .header .navigation .menu li {
+    float: left;
+  }
+  .header .navigation .menu li a {
+    font-size: 14px;
+    color: #e0e0e0;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0 10px;
+    border-left: 1px solid #680101;
+    height: 37px;
+    line-height: 37px;
+    display: block;
+  }
+  .header .navigation .menu li a.active, .header .navigation .menu li a:hover {
+    color: #ffc106;
+  }
+
+  /*End header CSS Desktop version*/
+  /*Start Footer CSS Desktop version*/
+  footer .footer-top .footer-top-link {
+    float: left;
+  }
+  footer .footer-top .footer-social-link .fa {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+  footer .footer-top .footer-expand-icon {
+    right: 15px;
+  }
+  footer .footer-bottom {
+    /*.first-cell{
+        width: 30%;
+        h4{
+            @include float(left);
+            @include calculate-width(2);
+            margin-bottom: 0;
+        }
+    }*/
+  }
+  footer .footer-bottom .cell {
+    width: 16.66667%;
+    float: left;
+    margin-bottom: 0;
+  }
+
+  /*End Footer CSS Desktop version*/
+  /*Start CSS Top Block Grid Home Page*/
+  .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
+    padding: 0 15px;
+  }
+  .top-block .top-colum-1 {
+    float: left;
+    width: 22%;
+  }
+  .top-block .top-colum-2 {
+    width: 44.8%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .top-block .top-colum-3 {
+    width: 33.2%;
+    float: right;
+  }
+
+  /*End CSS Top Block Grid Home Page*/
+  /*Start CSS Big New Home page*/
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    float: left;
+    padding: 0 15px;
+  }
+  .big-news .big-story-col-1 {
+    width: 56.4%;
+  }
+  .big-news .big-story-col-2 {
+    width: 43.6%;
+    padding-left: 0;
+  }
+
+  /*End CSS Big New Home page*/
+  /*Start CSS Featured-news Home Page*/
+  .featured-news {
+    padding: 5px;
+    border: 1px solid #dddddd;
+    margin: 0;
+  }
+  .featured-news .featured-post {
+    padding: 5px;
+  }
+
+  /*End CSS Featured-news Home Page*/
+}
+/*End CSS Desktop version*/

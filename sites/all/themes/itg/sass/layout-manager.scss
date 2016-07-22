@@ -1,0 +1,158 @@
+@import "itg-variables";
+@import "itg-mixins";
+
+
+
+h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
+h1{    
+    font-size: $mobile-h1-font-size;
+    line-height: $mobile-h1-line-height;
+    font-weight: $itg-font-bold;
+}
+h2{
+    font-size: $mobile-h2-font-size;
+    line-height: $mobile-h2-line-height;
+    font-weight: $itg-font-bold;
+}
+h3{
+    font-size: $mobile-h3-font-size;
+    line-height: $h3-line-height;
+}
+ul{
+    list-style-type: none;
+}
+a{
+    color:$black-color;
+    text-decoration: none;
+}
+.row{
+    @include clearfix;
+}
+.mt-50{
+  margin-top: 50px;
+}
+
+/*Start CSS Top Story Home Page*/
+.top-n-most-popular-stories{
+    .tab-buttons {
+        @include clearfix;
+        @include tab-buttons;
+    }
+    .tab-data{
+      border: 1px solid $tab-primary-border-color;
+      height: 635px;
+      overflow-y: auto;
+      &.tab-data-2{
+        display: none;
+      }
+    }
+    ul{
+        list-style: none;
+        li{
+            @include tab-listing;
+        }
+    }
+}
+/*End CSS Top Story Home page*/
+
+/*Start CSS Featured New Home page*/
+.itg-featured-news{
+  border: 1px solid $tab-primary-border-color;
+  height: 672px;
+}
+.featured-news{
+  .featured-post {
+    @include float(left);
+    @include calculate-width(2);
+    &:hover a{
+      color:$blue-color;
+    }
+    img{
+      padding-bottom: 10px;
+      @include calculate-width(1);
+    }
+    &.featured-post-first{
+      @include float(none);
+      @include calculate-width(1);
+      margin-bottom: 10px;
+    }
+  }
+}
+/*End CSS*/
+
+/*Start CSS Top AD*/
+.top-ad{
+  border: 1px solid $tab-primary-border-color;
+  .pic{
+    background-color: #f3f3f3;
+    width: 300px; 
+    height: 250px;
+    margin: 35px auto;
+  }
+}
+/*End CSS*/
+
+/*Start CSS Trending Videos and Magazine*/
+.trending-video-magazine{
+  margin-top: 40px;
+  .tab-buttons {
+    @include clearfix;
+    @include tab-buttons;
+  }
+  .tab-data-1, .tab-data-2{
+    border: 1px solid $tab-primary-border-color;
+    height: 274px;
+    overflow-y: auto;
+  }
+  .tab-data-2{
+    display: none;
+  }
+  ul{
+    list-style: none;
+    li{
+      @include tab-listing;
+    }
+  }
+}
+/*End CSS*/
+
+/*Start CSS Common News*/
+.common-news{
+  border: 1px solid $tab-primary-border-color;
+  height: 375px;
+}
+/*End CSS*/
+
+
+@media only screen and (min-width:768px){
+  /*Start CSS Top Block Grid Home Page*/    
+    .top-block{
+        .top-colum-1, .top-colum-2, .top-colum-3{
+           padding: 0 15px;
+           min-height: 672px;
+        }
+        .top-colum-1{
+           @include float(left);
+           width: 22%; 
+        }
+        .top-colum-2{
+           width: 44.8%;
+           @include display-inline;
+        }
+        .top-colum-3{
+           width: 33.2%;
+           @include float(right);
+        }
+    }
+/*End CSS Top Block Grid Home Page*/
+
+/*Start CSS Featured-news Home Page*/ 
+    .featured-news{
+        padding: 5px;
+        margin:0;
+        .featured-post {
+            padding: 5px;
+        }
+    }
+/*End CSS Featured-news Home Page*/
+}
