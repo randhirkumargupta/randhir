@@ -5389,17 +5389,16 @@ div.node #comments h2 {
 }
 
 .itg-block-front {
-  margin: 25px 0;
-  background-color: #d8d8d8;
   position: relative;
 }
 .itg-block-front .droppable {
-  min-height: 383px;
+  min-height: 270px;
 }
 .itg-block-front input[type="text"] {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 100px;
+  width: 200px;
 }
 
 .block-itg-layout-manager .form-type-select {
