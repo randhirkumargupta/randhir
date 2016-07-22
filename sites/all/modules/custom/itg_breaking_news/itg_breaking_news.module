@@ -165,15 +165,30 @@ function itg_breaking_news_form_custom_callback($form, &$form_state) {
  * Implement hook_views_pre_render
  * @param Array $view
  */
-function itg_breaking_news_views_pre_render(&$view)
-{
+function itg_breaking_news_views_pre_render(&$view) {
 
-    //Add "Create Breaking news" on listing page of Breaking news
-    if ($view->name == "breaking_news") {
-        $header_content_breaking = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-        $header_content_breaking .= l('Create Breaking News live blog', 'node/add/breaking-news', array('query' => array('destination' => 'breaking-news')));
-        $view->attachment_before = $header_content_breaking;
+  //Add "Create Breaking news" on listing page of Breaking news
+  if ($view->name == "breaking_news") {
+    $header_content_breaking = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_breaking .= l('Create Breaking News live blog', 'node/add/breaking-news', array('query' => array('destination' => 'breaking-news')));
+    $view->attachment_before = $header_content_breaking;
+
+
+    foreach ($view->result as $breaking_value) {
+
+
+      if ($breaking_value->field_field_type[0]['raw']['value'] == 'Live Blog' && !empty($breaking_value->field_field_story_expires[0]['raw']['value'])) {
+
+        $breaking_value->field_field_story_expires[0]['rendered']['#markup'] = 'Yes';
+      }
+      
+      if ($breaking_value->field_field_type[0]['raw']['value'] == 'Live Blog' && empty($breaking_value->field_field_story_expires[0]['raw']['value'])) {
+
+        $breaking_value->field_field_story_expires[0]['rendered']['#markup'] = 'No';
+      }
+      //dpm($breaking_value);
     }
+  }
 }
 
 /**
