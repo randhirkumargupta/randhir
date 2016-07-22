@@ -391,15 +391,17 @@ function itg_print_team_form_after_build($form, &$form_state) {
  * Implement hook_views_pre_render
  * {@inheritdoc}
  */
+
 function itg_print_team_views_pre_render(&$view) {
   
   global $base_url;
-
+  
   // Add "Submit Idea" button on listing page of ideas
   if ($view->name == "manage_print_team") {
     $header_content_print_team = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_print_team .= l('Submit Idea', $base_url.'/submit-idea');
     $view->attachment_before = $header_content_print_team;
+
   }
 }
 
@@ -863,7 +865,6 @@ function itg_print_team_check_approval_users(){
 
 /**
  * Get uids of users having role "correspondent"
- * @return array
  */
 function itg_print_team_ideas_csv(){
   
