@@ -977,6 +977,18 @@ footer .footer-mid {
 }
 footer .footer-bottom {
   padding: 20px 0;
+  /*.first-cell{
+      @include calculate-width(1);
+      h4{                
+          margin-bottom: 5px;
+      }
+      ul{
+          li{
+              @include display-inline;
+              width: 49%;
+          }
+      }
+  }*/
 }
 footer .footer-bottom a {
   font-size: 12px;
@@ -996,7 +1008,7 @@ footer .footer-bottom ul li {
 }
 footer .footer-bottom .cell {
   padding: 0 15px;
-  width: calculate-width(1);
+  width: 50%;
   margin-bottom: 20px;
 }
 footer .footer-bottom .cell ul {
@@ -1005,16 +1017,10 @@ footer .footer-bottom .cell ul {
 footer .footer-bottom .cell ul:last-child {
   margin-bottom: 0px;
 }
-footer .footer-bottom .first-cell {
-  width: calculate-width(1);
-}
-footer .footer-bottom .first-cell h4 {
-  margin-bottom: 5px;
-}
-footer .footer-bottom .first-cell ul li {
-  display: inline-block;
-  vertical-align: top;
-  width: 49%;
+footer .footer-bottom .cell ul .more-link {
+  color: #ffc106;
+  font-size: 12px;
+  cursor: pointer;
 }
 footer .footer-copyright {
   color: #a6a6a6;
@@ -1136,6 +1142,7 @@ footer .footer-copyright {
   width: 50%;
   display: block;
   float: left;
+  cursor: pointer;
 }
 .top-n-most-popular-stories .tab-buttons span.active {
   background: #fff;

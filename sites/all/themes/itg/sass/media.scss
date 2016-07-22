@@ -131,14 +131,14 @@
                 @include float(left);
                 margin-bottom: 0;
             }
-            .first-cell{
+            /*.first-cell{
                 width: 30%;
                 h4{
                     @include float(left);
                     @include calculate-width(2);
                     margin-bottom: 0;
                 }
-            }
+            }*/
         }
     }
     /*End Footer CSS Desktop version*/

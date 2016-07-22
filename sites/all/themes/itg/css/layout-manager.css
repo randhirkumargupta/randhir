@@ -98,6 +98,7 @@ a {
   width: 50%;
   display: block;
   float: left;
+  cursor: pointer;
 }
 .top-n-most-popular-stories .tab-buttons span.active {
   background: #fff;
@@ -209,6 +210,7 @@ a {
   width: 50%;
   display: block;
   float: left;
+  cursor: pointer;
 }
 .trending-video-magazine .tab-buttons span.active {
   background: #fff;

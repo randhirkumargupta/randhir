@@ -46,6 +46,7 @@
     <?php print drupal_render($form['field_story_comment_question']); ?>
     <?php print drupal_render($form['field_story_syndication']); ?>
     <?php print drupal_render($form['field_story_itg_tags']); ?>
+    <?php print drupal_render($form['field_dailymotion_playlist']); ?>
     <?php print drupal_render($form['field_story_category']); ?>
     <?php print drupal_render($form['field_story_schedule_date_time']); ?>
     <?php print drupal_render($form['field_story_expires']); ?> 

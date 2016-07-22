@@ -156,7 +156,23 @@ Drupal.behaviors.my_custom_behavior = {
         $("html, body").animate({ scrollTop: $(document).height() }, 800);
         $('.footer-expand-icon').toggleClass('footer-open-icon');
     });
-
+    //footer add more link
+    $('.footer-bottom .cell ul').each( function(){
+        var countList = $(this).children('li').length;        
+        if(countList > 8){
+           $(this).find('li:gt(7)').hide().addClass('hidelist');
+           $(this).append("<li><span class='more-link'>More</span></li>");
+        }
+    });
+    $('.more-link').click(function(){
+        $(this).parents('ul').find('li.hidelist').slideToggle();
+        $("html, body").animate({ scrollTop: $(document).height() }, 800);
+        $('.more-link').text('Less');
+    });
+    /*
+    $('.footer-bottom .cell ul li:gt(6)').hide();
+    $('.footer-bottom .cell ul').append('<li><span class="more-link">more</span></li>');
+   */
   }
 };
 
