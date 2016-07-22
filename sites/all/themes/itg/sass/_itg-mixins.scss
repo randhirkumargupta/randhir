@@ -98,6 +98,7 @@
         @include calculate-width(2);
         display: block;
         @include float(left);
+        cursor: pointer;
         &.active{
             background: $white-color;
             color: $red-color;
