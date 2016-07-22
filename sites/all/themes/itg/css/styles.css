@@ -25,6 +25,7 @@
 /* Tab Listing mixins */
 /* Story Tag mixins */
 /* List before icon */
+/*mixin for transition animation*/
 /* Global CSS */
 body {
   font: 400 14px/18px "Roboto Slab", sans-serif;
@@ -158,7 +159,7 @@ img {
   max-width: 100%;
 }
 
-.fleft, .header .top-nav, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container > .form-item .form-item.form-type-radio .form-radio, .answer-container .form-type-checkboxes div.rating, .answer-container div.rating .form-type-checkbox input[type="checkbox"], [class*="node-type-"] .node .field .field-label {
+.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container > .form-item .form-item.form-type-radio .form-radio, .answer-container .form-type-checkboxes div.rating, .answer-container div.rating .form-type-checkbox input[type="checkbox"], [class*="node-type-"] .node .field .field-label {
   float: left;
 }
 
@@ -242,8 +243,7 @@ input[type="text"], select, input[type="password"] {
   padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
-  background: #193c8d url(../images/mobile-header-bg.png) no-repeat center center;
-  height: 73px;
+  background: #193c8d url(../images/mobile-header-bg.png) no-repeat top center;
 }
 .header a {
   color: #fff;
@@ -270,8 +270,6 @@ input[type="text"], select, input[type="password"] {
 }
 .header .top-nav {
   padding: 0;
-}
-.header .top-nav {
   background: #a00606;
   margin-top: 7px;
   text-align: right;
@@ -287,6 +285,19 @@ input[type="text"], select, input[type="password"] {
 .header .top-nav ul li a .fa {
   font-size: 20px;
   line-height: 28px;
+}
+.header .navigation {
+  background: #a00606;
+  display: none;
+}
+.header .navigation ul li a {
+  border-top: 1px solid #900505;
+  display: block;
+  line-height: 30px;
+  padding: 0 15px;
+}
+.header .navigation ul li a.active, .header .navigation ul li a:hover {
+  color: #ffc106;
 }
 
 .tabs-primary li {
