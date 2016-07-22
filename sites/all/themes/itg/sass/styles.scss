@@ -172,8 +172,7 @@ input[type="text"], select, input[type="password"]{
   padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
-  background: $header-bg  url(../images/mobile-header-bg.png) no-repeat center center;
-  height: 73px;
+  background: $header-bg  url(../images/mobile-header-bg.png) no-repeat top center;
   a{
       color: $white-color; 
       font-family: $itg-roboto;
@@ -199,12 +198,9 @@ input[type="text"], select, input[type="password"]{
     }
   }
   .top-nav{
-      padding: 0;
-  }
-  .top-nav{
+     padding: 0;  
     @extend .full;
-    background: $red-bg;
-    @extend .fleft;
+    background: $red-bg;    
     margin-top: 7px;
     text-align: right;
     height: 28px;
@@ -226,6 +222,21 @@ input[type="text"], select, input[type="password"]{
             }
           } 
        }
+    }
+  }
+  .navigation{    
+    background: $red-bg;
+    display:none;
+    ul{
+        li a {
+        border-top: 1px solid #900505;
+        display: block;
+        line-height: 30px;
+        padding: 0 15px;
+         &.active, &:hover{
+                            color: $yellow-color;
+                        }
+      }  
     }
   }
 }
