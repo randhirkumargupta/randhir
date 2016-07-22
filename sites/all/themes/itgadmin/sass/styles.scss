@@ -5382,16 +5382,15 @@ div.node{
 }
 
 .itg-block-front{
-  margin: 25px 0;
   .droppable{
-    min-height: 383px;
+    min-height: 270px;
   }
-  background-color: #d8d8d8;
   position: relative;
   input[type="text"]{
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 100px;
+    width: 200px;
   }
 }
 .block-itg-layout-manager{
