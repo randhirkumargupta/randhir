@@ -226,13 +226,20 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $setting = array();
     $queue_flag = "";
     $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
+    $current_display = isset($form_state['view']->current_display) ? $form_state['view']->current_display : "";
     /* Load all nodes queues */
     $queues = nodequeue_load_queues(nodequeue_get_all_qids());
     switch ($view_name) {
         // top story
         case 'story_widget':
-            watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
-            $queue_flag = 1; // top story widget qid
+            if ($current_display != 'trending_videos') {
+                watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
+                $queue_flag = 1; // top story widget qid
+            }
+            else {
+                watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
+                $queue_flag = 4; // trending_videos widget qid
+            }
             break;
         // home page feature
         case 'home_page_feature_widget':
@@ -363,8 +370,8 @@ function itg_widget_views_api() {
  */
 function itg_widget_views_query_alter(&$view, &$query) {
     if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
-      unset($query->table_queue['field_data_field_type']);
-      unset($query->tables['node']['field_data_field_type']);
-      unset($query->where[1]['conditions'][2]);
+        unset($query->table_queue['field_data_field_type']);
+        unset($query->tables['node']['field_data_field_type']);
+        unset($query->where[1]['conditions'][2]);
     }
 }
