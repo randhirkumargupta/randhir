@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * File provide big sotry funtionality.
+ * 
+ * @param array $big_story_data
+ */
 function save_big_story_widget_data($big_story_data) {
     $widget = 'big_story_format_widget';
     $content_type = isset($_GET['type']) ? $_GET['type'] : "";
@@ -41,4 +46,22 @@ function save_big_story_widget_data($big_story_data) {
                 'extra' => $related_nodes_json,
             ))
             ->execute();
+}
+
+/**
+ * Function to get block data into array.
+ * @param array $info
+ * @return array
+ */
+function itg_widget_big_story_block_data($info) {
+    $widget_name = isset($info['widget']) ? $info['widget'] : "";
+    $data = array();
+    if(!empty($widget_name)) {
+        $query = db_select('itg_widget_order','iwo')
+                ->condition('iwo.widget',$widget_name)
+                ->fields('iwo',array('nid','extra'))
+                ->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $data = $query;
+    }
+    return $data;
 }
