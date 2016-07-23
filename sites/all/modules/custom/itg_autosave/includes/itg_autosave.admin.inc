@@ -98,15 +98,18 @@ function itg_autosave_form_delete($form_id) {
  *   Name of the content type.
  */
 function itg_autosave_nodeform($nid, $ctype) {
-  global $user;  
-  $inputs = $_POST;   
+  global $user;
+  // Store submitted values into variable.
+  $inputs = $_POST;
+  // Create object for itg_auto_save class.
   $itg_auto_save = new itg_auto_save();
+  // Remove empty field collections fields from submitted array.
   $itg_auto_save->itg_save_remove_fcollection($ctype, $inputs);
+  // Extract field type from submited values array.
   $data = $itg_auto_save->itg_save_extract_fieldtype($inputs);
-  $data = array_filter($data, 'itg_autosave_remove_empty');    
+  $data = array_filter($data, 'itg_autosave_remove_empty');
   //Get unique id for node from database.
-  $itg_nid = itg_autosave_get_unique_id($ctype, $inputs['unique_id']);   
-  
+  $itg_nid = itg_autosave_get_unique_id($ctype, $inputs['unique_id']);
   // Prepare values for new node.
   if ($itg_nid->nid == '') {     
     $node = new stdClass();
@@ -121,28 +124,45 @@ function itg_autosave_nodeform($nid, $ctype) {
     $node->comment = 1;
   }
   else {      
+    // Load node if it case of node edit.
     $node = node_load($itg_nid->nid);  
   }    
   $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : '' : '';  
+  // If title is empty then exit the process.
+  if (empty($title)) {
+    exit();
+  }
+  // Assign title to tile field.
   $node->title = $title;
   // Find field type and prepare array for foelds.
-  $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);    
+  $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);
+  // Check if field collection is available.
   if (count($f_collection) > 0) {
+    // Find how many field collection are present.
     foreach ($f_collection as $field) {      
+      // Delete old field collection fields and create fresh collections.
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
   }     
+  // Submit the node before save.
   $node = node_submit($node); 
+  // Save node to save all values into node.
   node_save($node);
+  // Store unique id associated with node in array.
   $pre_save['unique_id'] = $inputs['unique_id'];
-  $pre_save['field_collection'] = itg_autosave_prepare_autosave_value($f_collection, $node);
-  
+  // Store all field collections ids into array.
+  $pre_save['field_collection'] = itg_autosave_get_fcollection_ids($f_collection, $node);  
   // Save data into database.
-  $itg_auto_save->itg_save_form_data($pre_save, $node->nid, $ctype);
-  
+  $itg_auto_save->itg_save_form_data($pre_save, $node->nid, $ctype);  
 }
 
-function itg_autosave_prepare_autosave_value($f_collection, $node) {
+/**
+ * 
+ * @param type $f_collection
+ * @param type $node
+ * @return type
+ */
+function itg_autosave_get_fcollection_ids($f_collection, $node) {
   $itg_result = array();
   if (count($f_collection) > 0) {    
     foreach ($f_collection as $value) {
@@ -172,25 +192,7 @@ function itg_autosave_prepare_autosave_value($f_collection, $node) {
     $itg_query->fields('itg', array('nid', 'field_collection'))
       ->condition('node_type', $c_type)
       ->condition('itg_identity', $unique_id);
-    $itg_result = $itg_query->execute()->fetchObject();
-    
-    $fcoll_ids = unserialize($itg_result->field_collection);
-    
-    if (isset($itg_result->nid)) {
-      $node = node_load($itg_result->nid);
-      $index = 0;
-      foreach ($fcoll_ids as $field_name_key => $value) {
-        foreach($value as $fc_fid) {
-          $field_collection_item_values[] = $fc_fid;
-        }         
-        // Unset them.  
-        unset($node->{$field_name_key}[LANGUAGE_NONE][$index]);
-        ++$index;
-      }      
-      // Delete field collection items.
-      entity_delete_multiple('field_collection_item', $field_collection_item_values);
-      node_save($node);
-    }   
+    $itg_result = $itg_query->execute()->fetchObject();    
     
     return $itg_result;
   }

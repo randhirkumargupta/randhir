@@ -131,6 +131,5 @@ function itg_autosave_retrieve_uniqueid($nid, $c_type) {
       ->fields('itg', array('itg_identity'));
   $itg_result = $itg_query->execute()->fetchField();
   
-  return $itg_result;
-      
+  return $itg_result;      
 }

@@ -9,7 +9,7 @@
  */
 
 /**
- * Class have logic to save and retrieve autosave data.
+ * Class have logic to autosave node data.
  */
 class itg_auto_save {
 
@@ -17,9 +17,12 @@ class itg_auto_save {
    * Insert form ids to database.
    *
    * @param array $pre_save
+   *   Preapared array for saving into database.
    */
   public function itg_save_form_id($pre_save) {
+    // Check value if form id is already in database.
     $this->is_duplicate = $this->itg_save_is_duplicate($pre_save);
+    // If form id is duplicate then update form id else insert into database.
     if ($this->is_duplicate) {
       $this->itg_save_form_id_update($pre_save);
       drupal_set_message('Form id has been updated.', 'status');
@@ -34,15 +37,17 @@ class itg_auto_save {
    * Check duplicate form id.
    *
    * @param array $pre_save
+   *   Form id information which is going to be save.
    *
    * @return bool
+   *   If form id already in database then return true else return false.
    */
   private function itg_save_is_duplicate($pre_save) {
     $this->dup_query = db_select('itg_autosave_forms', 'itg');
     $this->dup_query->condition('form_name', $pre_save['form_name']);
     $this->dup_query->fields('itg', array('form_name'));
     $this->dup_result = $this->dup_query->execute()->fetchField();
-
+    // Compare new value from existing value.
     if ($pre_save['form_name'] == $this->dup_result) {
       return TRUE;
     }
@@ -55,6 +60,7 @@ class itg_auto_save {
    * Insert form data.
    *
    * @param array $pre_save
+   *   Form id information.
    */
   private function itg_save_form_id_insert($pre_save) {
     $this->itg_query = db_insert('itg_autosave_forms')
@@ -66,6 +72,7 @@ class itg_auto_save {
    * Update form data.
    *
    * @param array $pre_save
+   *   Form id information.
    */
   private function itg_save_form_id_update($pre_save) {
     $this->itg_query = db_update('itg_autosave_forms')
@@ -78,7 +85,9 @@ class itg_auto_save {
    * Pass form ids to js file.
    *
    * @param int $nid
+   *   Node id of the node.
    * @param string $c_type
+   *   Name of the content type.
    */
   public function itg_save_set_form_ids($nid, $c_type) {
     global $base_url;
@@ -100,7 +109,7 @@ class itg_auto_save {
         'nid' => $nid,
         'c_type' => $c_type,
       ),
-    ), array(
+        ), array(
       'type' => 'setting',
     ));
   }
@@ -109,12 +118,15 @@ class itg_auto_save {
    * Extract field type available on any content type.
    *
    * @param array $inputs
+   *   Submitted form data.
    *
    * @return array
+   *   Return array containing field name with field type.
    */
   public function itg_save_extract_fieldtype($inputs) {
     $this->field_type_result = array();
     foreach ($inputs as $key => $value) {
+      // Get field information.
       $this->field_type_query = field_info_field($key);
       $this->field_type_result[] = array(
         'fieldName' => $this->field_type_query['field_name'],
@@ -129,15 +141,17 @@ class itg_auto_save {
    * Prepare presave array for file field.
    *
    * @param array $value
+   *   File field value/
    *
    * @return array
+   *   Extracted file values.
    */
   public function itg_save_field_file($value) {
     $this->file_arr = array();
     $this->file_arr['fid'] = $value['und'][0]['fid'];
     $this->file_arr['display'] = $value['und'][0]['display'];
     $this->file_arr['description'] = $value['und'][0]['description'];
-    
+
     return $this->file_arr;
   }
 
@@ -145,13 +159,15 @@ class itg_auto_save {
    * Prepare presave arrave for text field.
    *
    * @param array $value
+   *   Field Value
    *
    * @return string
+   *   Extracted value.
    */
   public function itg_save_field_text($value) {
     $this->text_arr = '';
     $this->text_arr = $value['und'][0]['value'];
-    
+
     return $this->text_arr;
   }
 
@@ -159,87 +175,91 @@ class itg_auto_save {
    * Prepare presave array for field collection type field.
    *
    * @param array $value
+   *   All values of current field collection field.
    * @param stdObject $node
+   *   Standard node object.
    * @param string $field_name
+   *   Field name of the current field collection field.
    * @param array $fc_ids
    *   Serialized array contaning field collections ids.
-   *
-   * @return array
    */
   public function itg_save_field_field_collection($value, &$node, $field_name, $fc_ids) {    
     $this->field_collection = array();
-    $this->field_collection_data = array();   
-
-    foreach ($value['und'] as $key => $fc_value) {      
-      $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);      
-      //if (!isset($node->nid)) {
-        // Create entity of type field collection        
+    $this->field_collection_data = array();
+    // Unserialize fields collections ids for deletion of field collection.
+    $fc_ids = unserialize($fc_ids);    
+    if (isset($node->nid)) {
+      // Unset field collection field .
+      unset($node->{$field_name}[LANGUAGE_NONE]);
+      // Delete field collection items.      
+      entity_delete_multiple('field_collection_item', $fc_ids[$field_name]);          
+    }
+    // Create new field collection for node field.
+    foreach ($value['und'] as $key => $fc_value) {
+      // Get field type for field collection values.
+      $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);
+      // Filter empty array from list.
+      $this->field_collection_data = array_filter($this->field_collection_data, 'itg_autosave_remove_empty');
+      // Validate empty field collection
+      $this->validation = $this->itg_save_validate_field_collection($this->field_collection_data, $fc_value);      
+      // Create entity of type field collection
+      if ($this->validation) {
+        watchdog('Field Collection Validation', $this->validation . ' Auto Save' . $key);
         $this->fc_item = entity_create('field_collection_item', array('field_name' => $field_name));
         $this->fc_item->setHostEntity('node', $node);
-        $this->itg_autosave_prepare_presave($this->field_collection_data, $fc_value, $node, 'fc', $field_name, $key, $this->fc_item);            
+        $this->itg_autosave_prepare_presave($this->field_collection_data, $fc_value, $node, 'fc', $field_name, $key, $this->fc_item);
         $this->fc_item->save(TRUE);
         $node->{$field_name}[$node->language][$key]['value'] = $this->fc_item->item_id;
-//      }
-//      else {                         
-//        $this->arr = $this->itg_autosave_update_field_collection($fc_value, $this->field_collection_data);        
-//        $this->itg_save_update_field_collection($node, $field_name, $this->arr, $key);
-//      }
-   }    
+      }      
+    }
   }
   
-  
-function itg_save_update_field_collection($node, $collection, $fields = Array(), $index = 0) {
+  /**
+   * Update field collection values.
+   *
+   * @param stdObject $node
+   *   Standard node object.
+   * @param array $collection
+   *   Name of the collection object.
+   * @param array $fields
+   *   Fields of a single collections.
+   * @param int $index
+   *   Delta value of field collections.
+   */
+  function itg_save_update_field_collection($node, $collection, $fields = Array(), $index = 0) {
     if ($node && $collection && !empty($fields)) {
-        // Get the field collection ID
-        $eid = $node->{$collection}[LANGUAGE_NONE][$index]['value'];
-
-        // Load the field collection with the ID from above
-        $entity = entity_load_single('field_collection_item', array($eid));
-
-        // Wrap the loaded field collection which makes setting/getting much easier
-        $node_wrapper = entity_metadata_wrapper('field_collection_item', $entity);
-
-        // Loop through our fields and set the values
-        foreach ($fields as $field => $data) {
-            $node_wrapper->{$field}->set($data);
-        }
-
-        // Once we have added all the values we wish to change then we need to 
-        // save. This will modify the node and does not require node_save() so
-        // at this point be sure it is all correct as this will save directly
-        // to a published node 
-        $node_wrapper->save(true);
-    }
-}
-
-  public function itg_autosave_update_field_collection($fc_value, $data) {    
-    $this->arr = array();
-    foreach ($data as $value) {
-      switch ($value['fieldType']) {
-        case 'taxonomy_term_reference':          
-          $this->arr[$value['fieldName']] = $fc_value[$value['fieldName']]['und'];
-          
-          break;
-        case 'text_long':          
-          $this->arr[$value['fieldName']] = $fc_value[$value['fieldName']]['und'][0]['value'];
+      // Get the field collection ID
+      $eid = $node->{$collection}[LANGUAGE_NONE][$index]['value'];
+      // Load the field collection with the ID from above.
+      $entity = entity_load_single('field_collection_item', array($eid));
+      // Wrap the loaded field collection which makes setting/getting much easier.
+      $node_wrapper = entity_metadata_wrapper('field_collection_item', $entity);
+      // Loop through our fields and set the values.
+      foreach ($fields as $field => $data) {
+        $node_wrapper->{$field}->set($data);
       }
+      // Once we have added all the values we wish to change then we need to 
+      // save. This will modify the node and does not require node_save() so
+      // at this point be sure it is all correct as this will save directly
+      // to a published node.
+      $node_wrapper->save(true);
     }
-    
-    return $this->arr;
   }
 
   /**
    * Prepare presave array for datestamp field.
    *   
    * @param array $value
+   *   Field value.
    *
    * @return array
+   *   return extracted value.
    */
   public function itg_save_field_datestamp($value) {
     $this->datestamp_arr = array();
     $this->datestamp_arr['value'] = strtotime($value['und'][0]['value']['date']);
     $this->datestamp_arr['value2'] = strtotime($value['und'][0]['value2']['date']);
-    
+
     return $this->datestamp_arr;
   }
 
@@ -247,12 +267,14 @@ function itg_save_update_field_collection($node, $collection, $fields = Array(),
    * Prepare presave array for datetime field.
    *
    * @param array $value
+   *   Field value
    *
    * @return string
+   *   Extracted value.
    */
   public function itg_save_field_datetime($value) {
     $this->datetime_result = '';
-    if ($value['und'][0]['value']['date'] != '') {      
+    if ($value['und'][0]['value']['date'] != '') {
       $this->datetime_value = $value['und'][0]['value']['date'];
       $this->datetime_result = array(
         'value' => date("Y-m-d H:i:s", strtotime($this->datetime_value)),
@@ -268,86 +290,73 @@ function itg_save_update_field_collection($node, $collection, $fields = Array(),
    * Prepare presave array for long text field.
    * 
    * @param array $value
+   *   Field Value.
    *
    * @return string
+   *   Extracted value.
    */
   public function itg_save_field_text_long($value) {
-    $this->text_long = '';    
-    $this->text_long = $value['und'][0]['value'];           
-    
+    $this->text_long = '';
+    $this->text_long = $value['und'][0]['value'];
+
     return $this->text_long;
   }
 
   /**
    * Prepare presave array for image field.
    *
-   * @param string $op
    * @param array $value
-   *
-   * @return array
-   */
-  public function itg_save_field_image($op, $value) {
-    if ($op == 'insert') {
-      $this->image_arr = array();
-      $this->image_arr['fid'] = $value['und'][0]['fid'];
-      $this->image_arr['alt'] = $value['und'][0]['alt'];
-      $this->image_arr['title'] = $value['und'][0]['title'];
-    }
-
-    return $this->image_arr;
-  }
-
-  /**
-   * Prepare presave array for image field.
-   *
-   * @param array $value
+   *   Array of field value.
    *
    * @return string
+   *   Extracted value.
    */
   public function itg_save_field_text_with_summary($value) {
     $this->text_with_summary = '';
     $this->text_with_summary = $value['und'][0]['value'];
-    
+
     return $this->text_with_summary;
   }
 
   /**
    * Prepare presave array for list text field.
    *
-   * @param string $op
    * @param array $value
+   *   Field value.
    *
    * @return string
+   *   Extracted value.
    */
   public function itg_save_field_list_text($value) {
     $this->list_text = '';
     $this->list_text = $value['und'];
-    
+
     return $this->list_text;
   }
 
   /**
-   * Save form data into database to fullfill need of autosave.
+   * Save unique id associated with node id.
    *
    * @global stdObject $user
+   *   Global user variable for user information.
    * @param array $pre_save
+   *   Array of unique key and all field collections ids.
    * @param int $nid
+   *   Mode id of the node.
    * @param string $c_type
+   *   name of the content type.
    */
-  public function itg_save_form_data($pre_save, $nid, $c_type) { 
-    //pr($pre_save);
-    //pr($nid);
-    //p($c_type);
+  public function itg_save_form_data($pre_save, $nid, $c_type) {    
     global $user;
     $this->data = 0;
     // Check if unique id is already in database
     $this->dup_query = db_select('itg_autosave_node_data', 'itg');
     $this->dup_query->condition('itg_identity', $pre_save['unique_id']);
     $this->dup_query->fields('itg', array('itg_identity'));
-    $this->dup_result = $this->dup_query->execute()->fetchField(); 
-   
+    $this->dup_result = $this->dup_query->execute()->fetchField();
+
     // If unique id is not exist then insert. 
-    if ($this->dup_result !== $pre_save['unique_id']) {      
+    if ($this->dup_result !== $pre_save['unique_id']) {
       $this->pre_save_form = array(
         'nid' => $nid,
         'username' => $user->name,
@@ -355,130 +364,49 @@ function itg_save_update_field_collection($node, $collection, $fields = Array(),
         'created' => REQUEST_TIME,
         'itg_identity' => $pre_save['unique_id'],
         'field_collection' => isset($pre_save['field_collection']) ? $pre_save['field_collection'] : '',
-      );      
+      );
       $this->data = drupal_write_record('itg_autosave_node_data', $this->pre_save_form);
     }
-    else {            
-      $this->pre_save_form['field_collection'] = isset($pre_save['field_collection']) ? count($pre_save['field_collection']) > 0 ? serialize($pre_save['field_collection']) : array('empty') : array('empty');            
-      //pr($this->pre_save_form['field_collection']);
-      //p($this->pre_save_form);
+    else {
+      $this->pre_save_form['field_collection'] = isset($pre_save['field_collection']) ? count($pre_save['field_collection']) > 0 ? serialize($pre_save['field_collection']) : array('empty') : array('empty');      
       $this->data = db_update('itg_autosave_node_data');
       $this->data->fields($this->pre_save_form);
       $this->data->condition('itg_identity', $pre_save['unique_id']);
-      $this->data->execute();      
+      $this->data->execute();
+      $this->data = 0;
     }
-    //print $this->data;
+    // Print status of the insert or update. 1 means insert and 0 means update.
+    print $this->data;
   }
 
   /**
-   * Retrieve data from database.
+   * Validate field collection values before entity create.
    *
-   * @global stdObject $user
-   * @param int $nid
-   * @param string $c_type
-   * @return array
-   */
-  public function itg_save_retrieve_form_data($nid, $c_type) {
-    global $user;
-    $this->retrieve_query = db_select('itg_autosave_node_data', 'itg');
-    $this->retrieve_query->fields('itg')
-        ->condition('node_type', $c_type);
-    if ($nid > 0) {
-      $this->retrieve_query->condition('nid', $nid);
-    }
-    else {
-      $this->retrieve_query->condition('nid', 0);
-    }
-    $this->retrieve_query->condition('username', $user->name);
-    $this->retrieve_query->orderBy('id', 'DESC')
-        ->range(0, 1);
-    $this->retrieve_result = $this->retrieve_query->execute()->fetchObject();
-
-    return $this->retrieve_result;
-  }
-
-  /**
-   * Prepare retrieve data arrar for node.
+   * @param array $data
+   *   Array of collection fields with name and field type.   
+   * @param array $field_value
+   *   Values of collections fields
    *
-   * @param array $form
-   * @param string $field_name
-   * @param string $field_value
-   * @param string $type
-   * @param string $fc
-   * @param string $fc_name
-   * @param int $delta
+   * @return bool
+   *   Return true if filed is not empty else return false.
    */
-  public function itg_save_prepare_retrieve_array(&$form, $field_name, $field_value, $type, $fc = NULL, $fc_name = NULL, $delta = NULL) {
-    switch ($type) {
-      case 'datestamp':
-        $form[$field_name]['und'][0]['#default_value']['value'] = $field_value['value'];
-        $form[$field_name]['und'][0]['#default_value']['value2'] = $field_value['value2'];
-        break;
-
-      case 'datetime':
-        $form[$field_name]['und'][0]['#default_value']['value'] = $field_value;
-        break;
-
-      case 'text':
-        $form[$field_name]['und'][0]['value']['#default_value'] = $field_value;
-        break;
-
-      case 'taxonomy_term_reference':
-        if ($fc == 'fc') {
-          if (is_array($field_value)) {
-            $form[$fc_name]['und'][$delta][$field_name]['und']['#default_value'] = $field_value;
+  public function itg_save_validate_field_collection($data, $field_values) {        
+    foreach ($data as $value) {       
+      switch ($value['fieldType']) {
+        case 'taxonomy_term_reference':          
+          if (is_int($field_values[$value['fieldName']]['und'])) {
+            return TRUE;
           }
-          else {
-            $form[$fc_name]['und'][$delta][$field_name]['und']['#default_value'][0] = $field_value;
+          break;
+
+        case 'text_long':
+          if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
+            return TRUE;
           }
-        }
-        else {
-          if (is_array($field_value)) {
-            $form[$field_name]['und']['#default_value'] = $field_value;
-          }
-          else {
-            $form[$field_name]['und']['#default_value'][0] = $field_value;
-          }
-        }
-
-        break;
-
-      case 'text_long':
-        if ($fc == 'fc') {
-          $form[$fc_name]['und'][$delta][$field_name]['und'][0]['value']['#default_value'] = strip_tags($field_value);
-        }
-        else {
-          $form[$field_name]['und'][0]['value']['#default_value'] = strip_tags($field_value);
-        }
-        break;
-
-      case 'image':
-        $form[$field_name]['und'][0]['#default_value']['fid'] = $field_value['fid'];
-        $form[$field_name]['und'][0]['#default_value']['alt'] = $field_value['alt'];
-        $form[$field_name]['und'][0]['#default_value']['title'] = $field_value['title'];
-        break;
-
-      case 'file':
-        if ($fc == 'fc') {
-          $form[$fc_name]['und'][$delta][$field_name]['und'][0]['#default_value']['fid'] = $field_value['fid'];
-          $form[$fc_name]['und'][$delta][$field_name]['und'][0]['#default_value']['description'] = $field_value['description'];
-          $form[$fc_name]['und'][$delta][$field_name]['und'][0]['#default_value']['display'] = $field_value['display'];
-        }
-        else {
-          $form[$field_name]['und'][0]['#default_value']['fid'] = $field_value['fid'];
-          $form[$field_name]['und'][0]['#default_value']['description'] = $field_value['description'];
-          $form[$field_name]['und'][0]['#default_value']['display'] = $field_value['display'];
-        }
-
-        break;
-
-      case 'text_with_summary':
-        // $pre_save[$field['fieldName']] = $itg_auto_save->itg_save_field_text_with_summary('insert', $_POST[$field['fieldName']]);.
-        break;
-
-      case 'list_text':
-        $form['field_astro_frequency']['und']['#default_value'] = $field_value;
+          break;
+      }
     }
+    return FALSE;
   }
 
   /**
@@ -501,14 +429,14 @@ function itg_save_update_field_collection($node, $collection, $fields = Array(),
    */
   public function itg_autosave_prepare_presave($data, $inputs, &$node, $fc = NULL, $field_name = NULL, $delta = NULL, &$fc_item = NULL) {
     $this->temp = array();
-    foreach ($data as $field) {      
+    foreach ($data as $field) {
       switch ($field['fieldType']) {
         case 'datestamp':
-          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datestamp($inputs[$field['fieldName']]);          
+          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datestamp($inputs[$field['fieldName']]);
           break;
 
         case 'datetime':
-          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']]);          
+          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']]);
           break;
 
         case 'text':
@@ -517,10 +445,10 @@ function itg_save_update_field_collection($node, $collection, $fields = Array(),
 
         case 'taxonomy_term_reference':
           $this->value = $inputs[$field['fieldName']]['und'];
-          if ($fc === 'fc') {
+          if ($fc === 'fc' && $this->value != '_none' && !empty($this->value) && $this->value != 0) {
             $fc_item->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
           }
-          else {            
+          else {
             if (is_array($this->value)) {
               foreach ($this->value as $key => $tid) {
                 $node->{$field['fieldName']}[$node->language][$key]['tid'] = $tid;
@@ -529,28 +457,22 @@ function itg_save_update_field_collection($node, $collection, $fields = Array(),
             else {
               $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
             }
-          }          
+          }
           break;
 
         case 'field_collection':
+          // Save field name of field collection to array.
           $this->temp[] = $field['fieldName'];
           break;
 
         case 'text_long':
-          if ($fc === 'fc') {            
-            $fc_item->{$field['fieldName']}[$node->language][0]['value'] = $this->itg_save_field_text_long($inputs[$field['fieldName']]);            
+          $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
+          if ($fc === 'fc' && !empty($this->value) && $this->value != '') {
+            $fc_item->{$field['fieldName']}[$node->language][0]['value'] = $this->value;
           }
           else {
-            $node->{$field['fieldName']}[$node->language][0] = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
-          }          
-          break;
-
-        case 'image':
-          //$this->temp[$field['fieldName']] = $this->itg_save_field_image('insert', $inputs[$field['fieldName']]);
-          break;
-
-        case 'file':          
-          //$node->$field['fieldName'][$node->language][0] = $this->itg_save_field_file($inputs[$field['fieldName']]);
+            $node->{$field['fieldName']}[$node->language][0] = $this->value;
+          }
           break;
 
         case 'text_with_summary':
@@ -561,31 +483,11 @@ function itg_save_update_field_collection($node, $collection, $fields = Array(),
           $node->{$field['fieldName']}['und'][0]['value'] = $this->itg_save_field_list_text($inputs[$field['fieldName']]);
           break;
       }
-    }   
-    
+    }
+
     return $this->temp;
   }
 
-  /**
-   * Retrieve form data for field collection fields.
-   *
-   * @param array $form
-   * @param string $field_name
-   * @param array $field_values
-   */
-  public function itg_save_retrieve_fcollection(&$form, $field_name, $field_values) {
-    $this->temp = 0;
-    foreach ($field_values as $key => $field) {
-      $this->field_collection = $this->itg_save_extract_fieldtype($field);
-      $this->flag = 0;
-      foreach ($field as $key => $main_field) {
-        $this->itg_save_prepare_retrieve_array($form, $key, $main_field, $this->field_collection[$this->flag]['fieldType'], 'fc', $field_name, $this->temp);
-        ++$this->flag;
-      }
-      ++$this->temp;
-    }    
-  }
-  
   /**
    * Remove field collection values based on other input.
    *
@@ -610,8 +512,8 @@ function itg_save_update_field_collection($node, $collection, $fields = Array(),
         else {
           unset($inputs['field_astro_numerology_values']);
           unset($inputs['field_astro_zodiac']);
-        }        
-        break;      
+        }
+        break;
     }
   }
 }
