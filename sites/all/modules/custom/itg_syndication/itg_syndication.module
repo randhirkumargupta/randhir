@@ -208,6 +208,10 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
     
     foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
       if (is_numeric($key)) {
+          
+        if($key==0) {
+            unset($form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['remove_button']);
+        }  
         $syndication_mode_value = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['#entity']->field_syndication_mode[LANGUAGE_NONE][0]['value'];
         
         $form['field_syndication_rule_details'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#options'] = $op;
