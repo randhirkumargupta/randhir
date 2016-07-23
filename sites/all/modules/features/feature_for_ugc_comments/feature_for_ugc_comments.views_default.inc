@@ -372,6 +372,7 @@ function feature_for_ugc_comments_views_default_views() {
   $handler->display->display_options['filters']['type_1']['relationship'] = 'nid';
   $handler->display->display_options['filters']['type_1']['operator'] = 'not in';
   $handler->display->display_options['filters']['type_1']['value'] = array(
+    'print_team_integration' => 'print_team_integration',
     'task_idea_allocation_tracking' => 'task_idea_allocation_tracking',
   );
   $handler->display->display_options['path'] = 'in-queue-ugc-comments';
@@ -659,6 +660,7 @@ function feature_for_ugc_comments_views_default_views() {
   $handler->display->display_options['filters']['type_1']['relationship'] = 'nid';
   $handler->display->display_options['filters']['type_1']['operator'] = 'not in';
   $handler->display->display_options['filters']['type_1']['value'] = array(
+    'print_team_integration' => 'print_team_integration',
     'task_idea_allocation_tracking' => 'task_idea_allocation_tracking',
   );
   $handler->display->display_options['path'] = 'publish-ugc-comments';

@@ -112,6 +112,11 @@
         if (!empty($field_story_itg_tags)): ?>
       <?php print render($content['field_story_itg_tags']); ?>
         <?php endif; ?>
+        <?php
+        $playlist = render($content['field_dailymotion_playlist']);
+        if (!empty($playlist)): ?>
+      <?php print render($content['field_dailymotion_playlist']); ?>
+        <?php endif; ?>
         
         <?php
         $field_story_category = render($content['field_story_category']);
