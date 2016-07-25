@@ -5393,7 +5393,7 @@ div.node{
     width: 200px;
   }
 }
-.block-itg-layout-manager{
+.block-itg-layout-manager, #itg-layout-manager-filter-form{
   @extend .full;
   @extend .dib;
   .form-type-select{
@@ -5458,4 +5458,10 @@ div.node{
     top: 0;
     cursor: pointer;
   }
+}
+.layout-reset{
+  @extend .button;
+  height: 34px;
+  margin: 31px 0 0 10px;
+  padding: 8px 12px;
 }
