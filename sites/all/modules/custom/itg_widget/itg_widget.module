@@ -243,8 +243,12 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     switch ($view_name) {
         // top story
         case 'story_widget':
-            if ($current_display != 'trending_videos') {
-                watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
+            if ($current_display == 'most_popular') {
+                watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
+                $queue_flag = 5; // most popular
+            }
+            elseif ($current_display == 'trending_videos') {
+                watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
                 $queue_flag = 1; // top story widget qid
             }
             else {
@@ -354,6 +358,9 @@ function _get_widget_name($view_name, $page_name) {
         $widget = 'section_wise_widget';
     }
     else if ($page_name == 'we_may_suggest_widget') {
+        $widget = 'we_may_suggest_widget';
+    }
+    else if ($page_name == 'most_popular_widget') {
         $widget = 'we_may_suggest_widget';
     }
     else if ($page_name == 'big_story_format') {
