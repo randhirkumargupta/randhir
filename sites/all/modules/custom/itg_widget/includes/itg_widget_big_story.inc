@@ -7,7 +7,7 @@
  */
 function save_big_story_widget_data($big_story_data) {
     $widget = 'big_story_format_widget';
-    $content_type = isset($_GET['type']) ? $_GET['type'] : "";
+    $content_type = isset($_GET['type']) ? $_GET['type'] : "breaking_news";
     $selected_node = $big_story_data['selection'][0];
     $related_nodes_json = '[]';
     // Delete entry frist.
