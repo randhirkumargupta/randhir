@@ -12,10 +12,9 @@
  * 
  * @return array
  */
-function itg_widget_top_stories_ordering_data($info) {
+function itg_widget_trending_videos_widget_ordering_data($info) {
     $data = '';
     if (!empty($info)) {
-        watchdog('Top Stories ordering', 'inside top stories ordering');
         $view_name = isset($info['view_name']) ? $info['view_name'] : "";
         $page = isset($info['page']) ? $info['page'] : "";
         // condition to validate

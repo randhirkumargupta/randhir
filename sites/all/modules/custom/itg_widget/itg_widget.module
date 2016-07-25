@@ -146,11 +146,11 @@ function draggable_view_node_delete($view_name, $page_name, $nid) {
  * {@inheritdoc}
  */
 function itg_widget_block_info() {
-    $blocks['section_ordering'] = array(
-        'info' => t('Widget: Section Ordering'),
-    );
     $blocks['top_stories_ordering'] = array(
         'info' => t('Widget: Top Stories Ordering'),
+    );
+    $blocks['trending_videos_widget'] = array(
+        'info' => t('Widget: Trending videos widgets'),
     );
     $blocks['home_page_feature'] = array(
         'info' => t('Widget: Home Page Feature'),
@@ -161,6 +161,9 @@ function itg_widget_block_info() {
     $blocks['section_wise_order'] = array(
         'info' => t('Widget: Section wise ordering form custom table'),
     );
+    $blocks['big_story_format'] = array(
+        'info' => t('Widget: Big story form custom table'),
+    );
     return $blocks;
 }
 
@@ -170,6 +173,14 @@ function itg_widget_block_info() {
 function itg_widget_block_view($delta = '') {
     $block = array();
     switch ($delta) {
+        // Big Story Content.
+        case 'big_story_format':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
+            $block['subject'] = t('Big Story Formet');
+            $info['widget'] = 'big_story_format_widget';
+            $data = itg_widget_big_story_block_data($info);
+            $block['content'] = theme("widget_big_story_format", array("data" => $data));
+            break;
         // section ordering reordering widget case
         case 'section_wise_order':
             module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
@@ -181,18 +192,6 @@ function itg_widget_block_view($delta = '') {
             $block['subject'] = t('Section wise ordering from custom table');
             $data = itg_widget_section_wise_ordering_from_custom_table($info);
             $block['content'] = theme("section_wise_ordering", array("data" => $data));
-            break;
-        // section ordering reordering widget case
-        case 'section_ordering':
-            module_load_include('inc', 'itg_widget', 'includes/section-odering');
-            // value is hardcoded need to be change for dyanamic functionality
-            $info['section'] = '301'; // tid of section
-            $info['content_type'] = 'story'; // content type machine name
-            // view name which is stored in draggableviews_structure table
-            $info['view_name'] = 'section_wise_content_ordering';
-            $block['subject'] = t('Section Ordering');
-            $data = itg_widget_section_ordering_data($info);
-            $block['content'] = theme("section_ordering", array("data" => $data));
             break;
         case 'we_may_suggest':
             module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
@@ -210,6 +209,14 @@ function itg_widget_block_view($delta = '') {
             $info['page'] = 'page_2'; // page name
             $data = itg_widget_top_stories_ordering_data($info);
             $block['content'] = theme("top_stories_ordering", array("data" => $data));
+            break;
+        // Trending videos ordering reordering widget case
+        case 'trending_videos_widget':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'trending_videos_widget'; // page name
+            $data = itg_widget_trending_videos_widget_ordering_data($info);
+            $block['content'] = theme("trending_videos_widget", array("data" => $data));
             break;
         // home page feature ordering reordering widget case
         case 'home_page_feature':
@@ -230,13 +237,20 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $setting = array();
     $queue_flag = "";
     $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
+    $current_display = isset($form_state['view']->current_display) ? $form_state['view']->current_display : "";
     /* Load all nodes queues */
     $queues = nodequeue_load_queues(nodequeue_get_all_qids());
     switch ($view_name) {
         // top story
         case 'story_widget':
-            watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
-            $queue_flag = 1; // top story widget qid
+            if ($current_display != 'trending_videos') {
+                watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
+                $queue_flag = 1; // top story widget qid
+            }
+            else {
+                watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
+                $queue_flag = 4; // trending_videos widget qid
+            }
             break;
         // home page feature
         case 'home_page_feature_widget':
@@ -277,9 +291,6 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
 function itg_widget_theme() {
     $themes = array(
         'section_wise_ordering' => array(
-            'template' => 'templates/section-wise-ordering',
-        ),
-        'section_ordering' => array(
             'template' => 'templates/section-ordering-data',
         ),
         'top_stories_ordering' => array(
@@ -290,6 +301,12 @@ function itg_widget_theme() {
         ),
         'we_may_suggest' => array(
             'template' => 'templates/we-may-suggest',
+        ),
+        'widget_big_story_format' => array(
+            'template' => 'templates/big-story-format',
+        ),
+        'trending_videos_widget' => array(
+            'template' => 'templates/trending-videos-widget',
         ),
     );
     return $themes;
@@ -336,8 +353,11 @@ function _get_widget_name($view_name, $page_name) {
     if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
         $widget = 'section_wise_widget';
     }
-    else if($page_name == 'we_may_suggest_widget') {
+    else if ($page_name == 'we_may_suggest_widget') {
         $widget = 'we_may_suggest_widget';
+    }
+    else if ($page_name == 'big_story_format') {
+        $widget = 'big_story_format_widget';
     }
     return $widget;
 }
@@ -355,4 +375,17 @@ function itg_widget_views_api() {
         'api' => 3,
         'path' => drupal_get_path('module', 'itg_widget') . '/includes/views',
     );
+}
+
+/**
+ * Implementation of hook_views_query_alter
+ * @param type $view
+ * @param type $query 
+ */
+function itg_widget_views_query_alter(&$view, &$query) {
+    if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
+        unset($query->table_queue['field_data_field_type']);
+        unset($query->tables['node']['field_data_field_type']);
+        unset($query->where[1]['conditions'][2]);
+    }
 }
