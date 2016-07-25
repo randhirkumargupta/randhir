@@ -108,10 +108,13 @@ function itg_autosave_nodeform($nid, $ctype) {
   // Extract field type from submited values array.
   $data = $itg_auto_save->itg_save_extract_fieldtype($inputs);
   $data = array_filter($data, 'itg_autosave_remove_empty');
-  //Get unique id for node from database.
-  $itg_nid = itg_autosave_get_unique_id($ctype, $inputs['unique_id']);
+  //Get unique id for node from inputs.  
+  $node_identity = $inputs['field_story_node_identity']['und'][0]['value'];
+  // Fetch node id and field collections ids from database.
+  $itg_nid = itg_autosave_get_unique_id($ctype, $node_identity);
+ 
   // Prepare values for new node.
-  if ($itg_nid->nid == '') {     
+  if ($itg_nid->nid == '') {      
     $node = new stdClass();
     // Set title value 
     $node->type = $ctype;
@@ -147,9 +150,9 @@ function itg_autosave_nodeform($nid, $ctype) {
   // Submit the node before save.
   $node = node_submit($node); 
   // Save node to save all values into node.
-  node_save($node);
+  node_save($node);  
   // Store unique id associated with node in array.
-  $pre_save['unique_id'] = $inputs['unique_id'];
+  $pre_save['unique_id'] = $node_identity;
   // Store all field collections ids into array.
   $pre_save['field_collection'] = itg_autosave_get_fcollection_ids($f_collection, $node);  
   // Save data into database.

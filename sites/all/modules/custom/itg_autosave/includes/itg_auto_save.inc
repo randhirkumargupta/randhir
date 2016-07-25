@@ -516,4 +516,24 @@ class itg_auto_save {
         break;
     }
   }
+  
+  /**
+   * Get saved form ids from database.
+   *
+   * @return array
+   *   Array of form ids for autosave.
+   */
+  public function itg_save_get_form_ids() {
+    $this->data = array();
+    $this->itg_query = db_select('itg_autosave_forms', 'itg');
+    $this->itg_query->fields('itg', array('form_name'));
+    $this->itg_result = $this->itg_query->execute()->fetchAll();
+    
+    // Make array of form ids from result object
+    foreach ($this->itg_result as $ids) {
+      $this->data[] = $ids->form_name; 
+    }
+    
+    return $this->data;
+  }
 }

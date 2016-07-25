@@ -95,23 +95,33 @@ function itg_autosave_views_api() {
  * {@inheritdoc}.
  */
 function itg_autosave_form_alter(&$form, &$form_state, $form_id) {  
-  // Fetch form ids saved into databse for auto save feature.
-  $itg_autosave_form = new itg_auto_save();  
-  // Restore data if it is available on auto saved data.
-  switch ($form_id) {
-    case 'astro_node_form':
+  // Create object of itg_auto_save class.
+  $itg_autosave_form = new itg_auto_save();
+  
+  // Fetch form ids saved into database for autosave.
+  $form_ids = $itg_autosave_form->itg_save_get_form_ids();  
+  // match form_id with saved id for autosave.
+  if (in_array($form_id, $form_ids)) {
+    $flag = FALSE;
+    if ($form['nid']['#value'] == NULL) {
+      $form['#node']->status = 0;
+    }
+    elseif ($form['nid']['#value'] > 0 && $form['#node']->status == 0) {
+      $form['#node']->status = 0;
+    } 
+    else {
+      $flag = TRUE;
+    }    
+    if (!$flag) {
       // Add js file for autosave ajax.
       $form['#attached']['js'] = array(
-        drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',
+        drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',    
       );
-      $unique_id = itg_autosave_retrieve_uniqueid($form['nid']['#value'], $form['type']['#value']);
-      $form['unique_id'] = array(
-        '#type' => 'hidden',
-        '#default_value' => $unique_id != '' ? $unique_id: uniqid(),
-      );
+      $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];
+      $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();    
       // Set form ids to js file.
-      $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);      
-      break;
+      $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);          
+    }    
   }
 }
 
@@ -132,4 +142,24 @@ function itg_autosave_retrieve_uniqueid($nid, $c_type) {
   $itg_result = $itg_query->execute()->fetchField();
   
   return $itg_result;      
+}
+
+/**
+ * Implements hook_node_insert(),
+ *
+ * {@inheridoc}.
+ */
+function itg_autosave_node_insert($node) {  
+  // Get Node identity field value.
+  $node_identity = $node->field_story_node_identity['und'][0]['value'];
+  // Fetch another node id with same node identity
+  $itg_query = db_select('itg_autosave_node_data', 'itg');
+  $itg_query->fields('itg', array('nid'))
+      ->condition('itg_identity', $node_identity)
+      ->condition('nid', $node->nid, '!=');
+  $itg_result = $itg_query->execute()->fetchObject();
+  // Delete node if found duplicate node identity node id.
+  if ($itg_result->nid > 0) {
+    node_delete($itg_result->nid);
+  }  
 }
