@@ -76,7 +76,7 @@ function feature_for_ugc_views_default_views() {
     20 => '20',
     10 => '10',
     9 => '9',
-    23 => '23',
+    22 => '22',
   );
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
@@ -230,7 +230,7 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
@@ -374,7 +374,7 @@ function feature_for_ugc_views_default_views() {
     20 => '20',
     10 => '10',
     9 => '9',
-    23 => '23',
+    22 => '22',
   );
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
@@ -555,7 +555,7 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
@@ -585,7 +585,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Rejected date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Field: Updated by */
+  /* Field: Field: Kicker Text */
   $handler->display->display_options['fields']['field_source']['id'] = 'field_source';
   $handler->display->display_options['fields']['field_source']['table'] = 'field_data_field_source';
   $handler->display->display_options['fields']['field_source']['field'] = 'field_source';
