@@ -18,6 +18,26 @@ function itg_widget_views_pre_render(&$view) {
         $header_content .= l(t('Back To Top Stories'), 'story-list-widget-listing');
         $view->attachment_before = $header_content;
     }
+    elseif ($view->name == "story_widget" && $view->current_display == 'trending_videos_widget') {
+        $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content .= l(t('Back To Trending Videos Widget'), 'trending-video-widget-list');
+        $view->attachment_before = $header_content;
+    }
+    elseif ($view->name == "story_widget" && $view->current_display == 'trending_videos_widget') {
+        $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content .= l(t('Back To Trending Videos'), 'trending-video-widget-order-reorder', array('query' => array('destination' => arg(0))));
+        $view->attachment_before = $header_content;        
+    }
+    elseif ($view->name == "story_widget" && $view->current_display == 'most_popular') {
+        $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content .= l(t('Back To Most Popular Story Widget'), 'most-popular-widget-order-reorder');
+        $view->attachment_before = $header_content;
+    }
+    elseif ($view->name == "story_widget" && $view->current_display == 'most_popular_widget') {
+        $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content .= l(t('Back To Most Popular Stories'), 'most-popular-story', array('query' => array('destination' => arg(0))));
+        $view->attachment_before = $header_content;        
+    }
     elseif ($view->name == "home_page_feature_widget" && $view->current_display == 'page_2') {
         $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
         $header_content .= l(t('Search Content'), 'home-page-feature-widget-listing', array('query' => array('destination' => arg(0))));

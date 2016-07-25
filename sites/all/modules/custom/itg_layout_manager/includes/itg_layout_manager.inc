@@ -160,8 +160,8 @@ function itg_layout_list() {
   }
   
   $output = render(drupal_get_form('itg_layout_manager_filter_form'));
-  $output .= '<span class="count">Count (' . $count . ') </span>';
-  $output .= l(t('Add New Template'), 'itg-layout-manager/section');  
+  $output .= '<div class="view"><div class="attachment"><span class="count">Count (' . $count . ') </span>';
+  $output .= l(t('Add New Template'), 'itg-layout-manager/section').'</div></div>';  
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 
   # add the pager

@@ -13,6 +13,7 @@
 /*Full radius in Indiatoday site*/
 /*footer color in Indiatoday site*/
 /*font family an font weight mixins*/
+/*font size an font weight mixins*/
 /*clear fix mixins*/
 /*Box sizeing mixins*/
 /*Center Block mixins*/
@@ -1068,8 +1069,9 @@ footer .footer-copyright {
   color: #fff;
 }
 .big-news p {
-  font-size: 16px;
   color: #adacac;
+  font-size: 16px;
+  font-size: 1rem;
   line-height: 20px;
   margin-bottom: 15px;
 }
@@ -1085,8 +1087,9 @@ footer .footer-copyright {
 }
 .big-news .share-new ul li a {
   padding: 0 10px;
-  font-size: 16px;
   border-right: 1px solid #606060;
+  font-size: 16px;
+  font-size: 1rem;
   line-height: 15px;
   display: inline-block;
   vertical-align: top;
@@ -1128,19 +1131,19 @@ footer .footer-copyright {
 
 /*End CSS Big New Home page*/
 /*Start CSS Top Story Home Page*/
-.top-n-most-popular-stories .tab-buttons {
+.tab-buttons {
   zoom: 1;
 }
-.top-n-most-popular-stories .tab-buttons:before, .top-n-most-popular-stories .tab-buttons:after {
+.tab-buttons:before, .tab-buttons:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.top-n-most-popular-stories .tab-buttons:after {
+.tab-buttons:after {
   clear: both;
 }
-.top-n-most-popular-stories .tab-buttons span {
+.tab-buttons span {
   font-weight: 500;
   font-family: "Roboto", sans-serif;
   background: #e4e4e4;
@@ -1155,32 +1158,34 @@ footer .footer-copyright {
   float: left;
   cursor: pointer;
 }
-.top-n-most-popular-stories .tab-buttons span.active {
+.tab-buttons span.active {
   background: #fff;
   color: #d12019;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
   border-top: 3px solid #d12019;
 }
-.top-n-most-popular-stories ul {
-  border: 1px solid #e4e4e4;
+
+.itg-listing {
+  list-style: none;
+  border: 1px solid #ddd;
 }
-.top-n-most-popular-stories ul li {
+.itg-listing li {
   position: relative;
 }
-.top-n-most-popular-stories ul li a {
+.itg-listing li a {
   color: #565555;
   padding: 15px 15px 15px 20px;
   display: block;
   border-bottom: 1px solid #e4e4e4;
 }
-.top-n-most-popular-stories ul li a:hover {
+.itg-listing li a:hover {
   background: #f8f8f8;
 }
-.top-n-most-popular-stories ul li:last-child a {
+.itg-listing li:last-child a {
   border-bottom: none;
 }
-.top-n-most-popular-stories ul li:before {
+.itg-listing li:before {
   position: absolute;
   top: 22px;
   left: 9px;
@@ -1231,3 +1236,28 @@ footer .footer-copyright {
 }
 
 /*End CSS Featured New Home page*/
+/*Start CSS section story Home page*/
+.section-ordering h3 {
+  font-family: "Roboto Slab", sans-serif;
+  padding: 15px 0;
+}
+.section-ordering p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  position: relative;
+  border-top: 1px solid #ddd;
+  padding: 12px 0 12px 12px;
+}
+.section-ordering p:before {
+  position: absolute;
+  top: 18px;
+  left: 0px;
+  content: '';
+  border-radius: 100%;
+  background: #a00606;
+  height: 5px;
+  width: 5px;
+}
+
+/*End CSS section story Home page*/

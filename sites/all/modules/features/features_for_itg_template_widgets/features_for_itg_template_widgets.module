@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the features for Itg template widgets feature.
+ */
+
+include_once 'features_for_itg_template_widgets.features.inc';
