@@ -263,8 +263,8 @@ function itgadmin_breadcrumb($vars) {
     if(arg(0) == 'issue-listing'){
       $list_story_parent_link = 'manage-'.arg(1).'s';;
       $list_story_link = 'issue-listing'.'/'.arg(1).'/'.arg(2);
-        $breadcrumb[] = l('Home','cms-user-dashboard').l('List '.  ucfirst(arg(1)).'s', $list_story_parent_link).l('List Stories',$list_story_link);
-        return '<div class="breadcrumb-link">'. implode(' » ', $breadcrumb) .'</div>';
+        $breadcrumb[] = '<li>'.l('Home','cms-user-dashboard').'</li><li>'.l('List '.  ucfirst(arg(1)).'s', $list_story_parent_link).'</li><li>'.l('List Stories',$list_story_link). '</li>';
+        return '<div class="breadcrumb"><ol>'. implode(' » ', $breadcrumb) .'</ol></div>';
     }
     
     // get first argument from url 
