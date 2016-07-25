@@ -98,7 +98,7 @@ function insert_layout_setting_ajax() {
     //delete code
     
     if (!empty($publish_tpl_id)) {
-      db_delete('itg_layout_manager')->condition('layout_id', 10)->execute();
+      db_delete('itg_layout_manager')->condition('layout_id', $publish_tpl_id)->execute();
       db_delete('itg_layout_tpl')->condition('id', $publish_tpl_id)->execute();
     }
     
@@ -220,4 +220,36 @@ function get_layout_block_details($layout_id, $id) {
   
   
   return $data_array;
+}
+
+/**
+ * Implements page callback.
+ * @return
+ */
+function section_widgets_ajax() {
+  global $user;  
+  $arg = arg();
+  if($arg[1] == 'insert') {
+    // insert query
+    if ((isset($_GET['section_name']) && ($_GET['section_name'] != '_none')) && (isset($_GET['template_name']) && ($_GET['template_name'] != '_none'))) {
+      $query_layout_tpl = db_insert('itg_section_widgets_list');
+          $query_layout_tpl->fields(array(
+            'template_section_name' => $_GET['section_name'],
+            'template_name' => $_GET['template_name'],
+            'category_name' => $_GET['category_name'],
+            'category_id' => $_GET['cid'],
+            'created_date' => time()        
+          ));
+
+          $unpublish_tpl_id = $query_layout_tpl->execute();
+    }
+  }
+  elseif ($arg[1] == 'delete') {
+    db_delete('itg_section_widgets_list')->condition('id', $_GET['id'])->execute();
+  }
+  
+  $content = display_section_widgets_list($_GET['section_name'], $_GET['template_name']); 
+  echo $content;
+  exit;
+  
 }
