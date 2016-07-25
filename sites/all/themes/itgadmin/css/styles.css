@@ -3839,6 +3839,13 @@ div.node #comments h2 {
   padding: 4px 12px 6px 12px;
   vertical-align: middle;
 }
+.region-sidebar-second .form-item {
+  margin: 10px;
+  padding: 0;
+}
+.region-sidebar-second .form-item input[type="text"], .region-sidebar-second .form-item select {
+  width: 100%;
+}
 
 [id*="taxonomy-csv-import-form"] .form-type-file .description {
   left: 275px;
@@ -5465,4 +5472,40 @@ div.node #comments h2 {
   right: 0;
   top: 0;
   cursor: pointer;
+}
+
+#templates-widgets li {
+  padding: 10px;
+  background-color: #fff;
+  color: #2f2f2f;
+  position: relative;
+  cursor: all-scroll;
+}
+#templates-widgets li + li {
+  margin-top: 1px;
+}
+#templates-widgets .layout-section-delete {
+  bottom: 0;
+  color: red;
+  height: 20px;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 20px;
+}
+
+#layout-section-widgets-search-form .form-item .form-text {
+  float: left;
+  margin-right: 10px;
+  max-width: 263px;
+}
+#layout-section-widgets-search-form #layout-section-save {
+  font-size: 34px;
+  height: 37px;
+  line-height: 32px;
+  padding: 0;
+  text-align: center;
+  width: 37px;
 }
