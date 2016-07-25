@@ -12,6 +12,7 @@
 /*Full radius in Indiatoday site*/
 /*footer color in Indiatoday site*/
 /*font family an font weight mixins*/
+/*font size an font weight mixins*/
 /*clear fix mixins*/
 /*Box sizeing mixins*/
 /*Center Block mixins*/
@@ -74,19 +75,19 @@ a {
 }
 
 /*Start CSS Top Story Home Page*/
-.top-n-most-popular-stories .tab-buttons {
+.tab-buttons {
   zoom: 1;
 }
-.top-n-most-popular-stories .tab-buttons:before, .top-n-most-popular-stories .tab-buttons:after {
+.tab-buttons:before, .tab-buttons:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.top-n-most-popular-stories .tab-buttons:after {
+.tab-buttons:after {
   clear: both;
 }
-.top-n-most-popular-stories .tab-buttons span {
+.tab-buttons span {
   font-weight: 500;
   font-family: "Roboto", sans-serif;
   background: #e4e4e4;
@@ -101,40 +102,42 @@ a {
   float: left;
   cursor: pointer;
 }
-.top-n-most-popular-stories .tab-buttons span.active {
+.tab-buttons span.active {
   background: #fff;
   color: #d12019;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
   border-top: 3px solid #d12019;
 }
-.top-n-most-popular-stories .tab-data {
+
+.tab-data {
   border: 1px solid #e4e4e4;
   height: 635px;
   overflow-y: auto;
 }
-.top-n-most-popular-stories .tab-data.tab-data-2 {
+.tab-data.tab-data-2 {
   display: none;
 }
-.top-n-most-popular-stories ul {
+
+.itg-listing {
   list-style: none;
 }
-.top-n-most-popular-stories ul li {
+.itg-listing li {
   position: relative;
 }
-.top-n-most-popular-stories ul li a {
+.itg-listing li a {
   color: #565555;
   padding: 15px 15px 15px 20px;
   display: block;
   border-bottom: 1px solid #e4e4e4;
 }
-.top-n-most-popular-stories ul li a:hover {
+.itg-listing li a:hover {
   background: #f8f8f8;
 }
-.top-n-most-popular-stories ul li:last-child a {
+.itg-listing li:last-child a {
   border-bottom: none;
 }
-.top-n-most-popular-stories ul li:before {
+.itg-listing li:before {
   position: absolute;
   top: 22px;
   left: 9px;
@@ -182,90 +185,36 @@ a {
 }
 
 /*End CSS*/
-/*Start CSS Trending Videos and Magazine*/
-.trending-video-magazine {
-  margin-top: 40px;
-}
-.trending-video-magazine .tab-buttons {
-  zoom: 1;
-}
-.trending-video-magazine .tab-buttons:before, .trending-video-magazine .tab-buttons:after {
-  content: "";
-  display: block;
-  height: 0;
-  overflow: hidden;
-}
-.trending-video-magazine .tab-buttons:after {
-  clear: both;
-}
-.trending-video-magazine .tab-buttons span {
-  font-weight: 500;
-  font-family: "Roboto", sans-serif;
-  background: #e4e4e4;
-  text-transform: uppercase;
-  height: 36px;
-  line-height: 36px;
-  text-align: center;
-  border-radius: 10px 10px 0 0;
-  color: #818181;
-  width: 50%;
-  display: block;
-  float: left;
-  cursor: pointer;
-}
-.trending-video-magazine .tab-buttons span.active {
-  background: #fff;
-  color: #d12019;
-  border-left: 1px solid #e4e4e4;
-  border-right: 1px solid #e4e4e4;
-  border-top: 3px solid #d12019;
-}
-.trending-video-magazine .tab-data-1, .trending-video-magazine .tab-data-2 {
-  border: 1px solid #e4e4e4;
-  height: 274px;
-  overflow-y: auto;
-}
-.trending-video-magazine .tab-data-2 {
-  display: none;
-}
-.trending-video-magazine ul {
-  list-style: none;
-}
-.trending-video-magazine ul li {
-  position: relative;
-}
-.trending-video-magazine ul li a {
-  color: #565555;
-  padding: 15px 15px 15px 20px;
-  display: block;
-  border-bottom: 1px solid #e4e4e4;
-}
-.trending-video-magazine ul li a:hover {
-  background: #f8f8f8;
-}
-.trending-video-magazine ul li:last-child a {
-  border-bottom: none;
-}
-.trending-video-magazine ul li:before {
-  position: absolute;
-  top: 22px;
-  left: 9px;
-  content: '';
-  border-radius: 50%;
-  background: #959595;
-  height: 5px;
-  width: 5px;
-}
-
-/*End CSS*/
-/*Start CSS Common News*/
-.common-news {
-  border: 1px solid #e4e4e4;
-  height: 375px;
-}
-
-/*End CSS*/
 @media only screen and (min-width: 768px) {
+  /*Start CSS itg-layout-container */
+  .itg-layout-container .itg-widget, .itg-layout-container .itg-widget-child {
+    position: relative;
+  }
+  .itg-layout-container .itg-widget input[type="text"], .itg-layout-container .itg-widget-child input[type="text"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 214px;
+  }
+  .itg-layout-container .top-colum-1 .droppable {
+    height: 635px;
+  }
+  .itg-layout-container .top-colum-2 .droppable {
+    height: 671px;
+  }
+  .itg-layout-container .top-colum-3 .droppable {
+    height: 308px;
+  }
+  .itg-layout-container .top-colum-3 .itg-widget:first-child {
+    margin-bottom: 20px;
+  }
+  .itg-layout-container.itg-admin .itg-widget {
+    background-color: #f1f1f1;
+  }
+  .itg-layout-container .itg-common-section .droppable {
+    height: 382px;
+  }
+
   /*Start CSS Top Block Grid Home Page*/
   .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
     padding: 0 15px;

@@ -26,7 +26,7 @@ function itg_widget_views_pre_render(&$view) {
     elseif ($view->name == "story_widget" && $view->current_display == 'trending_videos') {
         $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
         $header_content .= l(t('Back To Trending Videos'), 'trending-video-widget-order-reorder', array('query' => array('destination' => arg(0))));
-        $view->attachment_before = $header_content;
+        $view->attachment_before = $header_content;        
     }
     elseif ($view->name == "home_page_feature_widget" && $view->current_display == 'page_2') {
         $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';

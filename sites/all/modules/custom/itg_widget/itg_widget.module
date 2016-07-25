@@ -291,7 +291,7 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
 function itg_widget_theme() {
     $themes = array(
         'section_wise_ordering' => array(
-            'template' => 'templates/section-wise-ordering',
+            'template' => 'templates/section-ordering-data',
         ),
         'top_stories_ordering' => array(
             'template' => 'templates/top-stories-ordering-data',
