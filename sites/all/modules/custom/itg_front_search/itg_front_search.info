@@ -1,0 +1,8 @@
+name = ITG Front Search
+description = "ITG Front Search"
+core = 7.x
+package = ITG
+
+files[] = itg_front_search.module
+
+

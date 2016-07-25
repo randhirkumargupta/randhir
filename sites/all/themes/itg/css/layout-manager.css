@@ -1,0 +1,299 @@
+/*====================== IndiaToday Variables =========================*/
+/*=======================================================================*/
+/*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
+/*Fonts used in Indiatoday site*/
+/*Colors used in Indiatoday site*/
+/*Background Colors used in Indiatoday site*/
+/*Border Colors used in Indiatoday site*/
+/*Text color in Indiatoday site*/
+/*Background color in Indiatoday site*/
+/*navigation font in Indiatoday site*/
+/*Full radius in Indiatoday site*/
+/*footer color in Indiatoday site*/
+/*font family an font weight mixins*/
+/*clear fix mixins*/
+/*Box sizeing mixins*/
+/*Center Block mixins*/
+/*Float mixins*/
+/*Display inline block mixins*/
+/*Text align block mixins*/
+/* Positional mixins */
+/* Calculate-width function */
+/* Tab Button mixins */
+/* Tab Listing mixins */
+/* Story Tag mixins */
+/* List before icon */
+/*mixin for transition animation*/
+h1, h2, h3, h4 {
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: #323232;
+  text-decoration: none;
+}
+
+.row {
+  zoom: 1;
+}
+.row:before, .row:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.row:after {
+  clear: both;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+/*Start CSS Top Story Home Page*/
+.top-n-most-popular-stories .tab-buttons {
+  zoom: 1;
+}
+.top-n-most-popular-stories .tab-buttons:before, .top-n-most-popular-stories .tab-buttons:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.top-n-most-popular-stories .tab-buttons:after {
+  clear: both;
+}
+.top-n-most-popular-stories .tab-buttons span {
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  background: #e4e4e4;
+  text-transform: uppercase;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  color: #818181;
+  width: 50%;
+  display: block;
+  float: left;
+  cursor: pointer;
+}
+.top-n-most-popular-stories .tab-buttons span.active {
+  background: #fff;
+  color: #d12019;
+  border-left: 1px solid #e4e4e4;
+  border-right: 1px solid #e4e4e4;
+  border-top: 3px solid #d12019;
+}
+.top-n-most-popular-stories .tab-data {
+  border: 1px solid #e4e4e4;
+  height: 635px;
+  overflow-y: auto;
+}
+.top-n-most-popular-stories .tab-data.tab-data-2 {
+  display: none;
+}
+.top-n-most-popular-stories ul {
+  list-style: none;
+}
+.top-n-most-popular-stories ul li {
+  position: relative;
+}
+.top-n-most-popular-stories ul li a {
+  color: #565555;
+  padding: 15px 15px 15px 20px;
+  display: block;
+  border-bottom: 1px solid #e4e4e4;
+}
+.top-n-most-popular-stories ul li a:hover {
+  background: #f8f8f8;
+}
+.top-n-most-popular-stories ul li:last-child a {
+  border-bottom: none;
+}
+.top-n-most-popular-stories ul li:before {
+  position: absolute;
+  top: 22px;
+  left: 9px;
+  content: '';
+  border-radius: 50%;
+  background: #959595;
+  height: 5px;
+  width: 5px;
+}
+
+/*End CSS Top Story Home page*/
+/*Start CSS Featured New Home page*/
+.itg-featured-news {
+  border: 1px solid #e4e4e4;
+  height: 672px;
+}
+
+.featured-news .featured-post {
+  float: left;
+  width: 50%;
+}
+.featured-news .featured-post:hover a {
+  color: #193984;
+}
+.featured-news .featured-post img {
+  padding-bottom: 10px;
+  width: 100%;
+}
+.featured-news .featured-post.featured-post-first {
+  float: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/*End CSS*/
+/*Start CSS Top AD*/
+.top-ad {
+  border: 1px solid #e4e4e4;
+}
+.top-ad .pic {
+  background-color: #f3f3f3;
+  width: 300px;
+  height: 250px;
+  margin: 35px auto;
+}
+
+/*End CSS*/
+/*Start CSS Trending Videos and Magazine*/
+.trending-video-magazine {
+  margin-top: 40px;
+}
+.trending-video-magazine .tab-buttons {
+  zoom: 1;
+}
+.trending-video-magazine .tab-buttons:before, .trending-video-magazine .tab-buttons:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.trending-video-magazine .tab-buttons:after {
+  clear: both;
+}
+.trending-video-magazine .tab-buttons span {
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  background: #e4e4e4;
+  text-transform: uppercase;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  color: #818181;
+  width: 50%;
+  display: block;
+  float: left;
+  cursor: pointer;
+}
+.trending-video-magazine .tab-buttons span.active {
+  background: #fff;
+  color: #d12019;
+  border-left: 1px solid #e4e4e4;
+  border-right: 1px solid #e4e4e4;
+  border-top: 3px solid #d12019;
+}
+.trending-video-magazine .tab-data-1, .trending-video-magazine .tab-data-2 {
+  border: 1px solid #e4e4e4;
+  height: 274px;
+  overflow-y: auto;
+}
+.trending-video-magazine .tab-data-2 {
+  display: none;
+}
+.trending-video-magazine ul {
+  list-style: none;
+}
+.trending-video-magazine ul li {
+  position: relative;
+}
+.trending-video-magazine ul li a {
+  color: #565555;
+  padding: 15px 15px 15px 20px;
+  display: block;
+  border-bottom: 1px solid #e4e4e4;
+}
+.trending-video-magazine ul li a:hover {
+  background: #f8f8f8;
+}
+.trending-video-magazine ul li:last-child a {
+  border-bottom: none;
+}
+.trending-video-magazine ul li:before {
+  position: absolute;
+  top: 22px;
+  left: 9px;
+  content: '';
+  border-radius: 50%;
+  background: #959595;
+  height: 5px;
+  width: 5px;
+}
+
+/*End CSS*/
+/*Start CSS Common News*/
+.common-news {
+  border: 1px solid #e4e4e4;
+  height: 375px;
+}
+
+/*End CSS*/
+@media only screen and (min-width: 768px) {
+  /*Start CSS Top Block Grid Home Page*/
+  .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
+    padding: 0 15px;
+    min-height: 672px;
+  }
+  .top-block .top-colum-1 {
+    float: left;
+    width: 22%;
+  }
+  .top-block .top-colum-2 {
+    width: 44.8%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .top-block .top-colum-3 {
+    width: 33.2%;
+    float: right;
+  }
+
+  /*End CSS Top Block Grid Home Page*/
+  /*Start CSS Featured-news Home Page*/
+  .featured-news {
+    padding: 5px;
+    margin: 0;
+  }
+  .featured-news .featured-post {
+    padding: 5px;
+  }
+
+  /*End CSS Featured-news Home Page*/
+}

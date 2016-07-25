@@ -29,12 +29,18 @@
   margin-right: auto;
 }
 /*Float mixins*/
-@mixin fleft{
-    float:left;
+@mixin float($pos) {  
+  @if ($pos == left) {
+   float:left;
+  }
+  @else if ($pos == right) {
+   float:right;
+  }
+  @else if ($pos == none) {
+   float: none;
+  }
 }
-@mixin fright{
-    float:right;
-}
+
 /*Display inline block mixins*/
 @mixin display-inline{
     display: inline-block;
@@ -52,8 +58,6 @@
    position: right;
   }
 }
-
-
 
 /* Positional mixins */
 @mixin pos($pos:static,$top:null,$right:null,$bottom:null,$left:null,$z-index:null) {  
@@ -76,8 +80,8 @@
   z-index:$z-index;
 }
 /* Calculate-width function */
-@function calculate-width ($col-span) {
-    @return 100% / $col-span;
+@mixin calculate-width ($col-span) {
+    width: 100% / $col-span;
 }
 
 /* Tab Button mixins */
@@ -91,9 +95,10 @@
         text-align: center;
         border-radius: 10px 10px 0 0;
         color: $tab-primary-color;
-        width: calculate-width(2);
+        @include calculate-width(2);
         display: block;
-        @include fleft;
+        @include float(left);
+        cursor: pointer;
         &.active{
             background: $white-color;
             color: $red-color;
@@ -126,4 +131,39 @@
            height: 5px;
            width: 5px;
         }
+}
+
+/* Story Tag mixins */
+@mixin story-tag($height, $line-height){
+    @include pos(absolute,0px,null,null,0px);
+    background: $red-bg;
+    height: $height;
+    line-height: $line-height;
+    padding: 0 7px;
+    text-transform: uppercase;
+}
+
+/* List before icon */
+@mixin before-icon-list($width, $height, $top, $left, $background-color, $border-radius) {
+    @include pos(relative);
+
+  &:before {
+    @include pos(absolute);
+    top: $top;
+    left: $left;
+    content: '';
+    border-radius: $border-radius;
+    background: $background-color;
+    height: $width;
+    width: $height;
+  }
+}
+
+/*mixin for transition animation*/
+@mixin transition($args) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
 }
