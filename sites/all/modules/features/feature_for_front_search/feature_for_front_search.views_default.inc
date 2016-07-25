@@ -191,6 +191,40 @@ function feature_for_front_search_views_default_views() {
     18 => 0,
     23 => 0,
   );
+  /* Filter criterion: Apache Solr: sm_field_itg_common_by_line_name */
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['id'] = 'sm_field_itg_common_by_line_name';
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['field'] = 'sm_field_itg_common_by_line_name';
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['operator'] = 'word';
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['group'] = 1;
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['expose']['operator_id'] = 'sm_field_itg_common_by_line_name_op';
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['expose']['label'] = 'Author';
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['expose']['operator'] = 'sm_field_itg_common_by_line_name_op';
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['expose']['identifier'] = 'sm_field_itg_common_by_line_name';
+  $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+  );
   /* Filter criterion: Apache Solr: bundle_name */
   $handler->display->display_options['filters']['bundle_name']['id'] = 'bundle_name';
   $handler->display->display_options['filters']['bundle_name']['table'] = 'apachesolr__solr';
@@ -282,6 +316,7 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['filters']['ds_changed']['id'] = 'ds_changed';
   $handler->display->display_options['filters']['ds_changed']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['ds_changed']['field'] = 'ds_changed';
+  $handler->display->display_options['filters']['ds_changed']['group'] = 1;
   $handler->display->display_options['filters']['ds_changed']['exposed'] = TRUE;
   $handler->display->display_options['filters']['ds_changed']['expose']['operator_id'] = 'ds_changed_op';
   $handler->display->display_options['filters']['ds_changed']['expose']['operator'] = 'ds_changed_op';
