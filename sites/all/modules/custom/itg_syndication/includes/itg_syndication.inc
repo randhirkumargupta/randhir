@@ -42,20 +42,26 @@ function itg_syndication_generate_xml($data) {
   switch ($delivery_mode_type) {
     // 1. Fetch web URL (our server)
     case 'web_url':
-      itg_syndication_web_url_syndication($data, $file['file_path'], $delivery_mode_array[1]);
+      if (isset($file['file_name'])) {
+        itg_syndication_web_url_syndication($data, $file['file_path'], $delivery_mode_array[1]);
+      }
       break;
     // 2. Via FTP location
       
     case 'FTP':
-      itg_syndication_ftp_syndication($data, $file['file_path'], $file['file_name'], $delivery_mode_array[1]);
+      if (isset($file['file_name'])) {
+        itg_syndication_ftp_syndication($data, $file['file_path'], $file['file_name'], $delivery_mode_array[1]);
+      }
       break;
     // 3. Via Email
     case 'Email':
-      itg_syndication_mail_syndication($data, $file['real_path'], $delivery_mode_array[1]);
+      if (isset($file['file_name'])) {
+        itg_syndication_mail_syndication($data, $file['real_path'], $delivery_mode_array[1]);
+      }
       break;
   }
   
-  return  $file['file_path'];
+  return  $file;
 }
 
 /**
@@ -138,6 +144,7 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
   //turn passive mode on
   ftp_pasv($conn_id, true);
   $upload = ftp_put($conn_id, $remote_file, $file, FTP_BINARY);
+  
   if (!$upload) {
     echo "There was a problem while uploading $file\n";
   }
