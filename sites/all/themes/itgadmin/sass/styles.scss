@@ -3541,6 +3541,13 @@ div.node{
       }
     }
   }
+  .form-item{
+    margin: 10px;
+    padding: 0;
+    input[type="text"], select{
+      width: 100%;
+    }
+  }
 }
 [id*="taxonomy-csv-import-form"]{
   @extend .node-form;
@@ -5463,5 +5470,44 @@ div.node{
     right: 0;
     top: 0;
     cursor: pointer;
+  }
+}
+
+#templates-widgets{
+  li{
+    padding: 10px;
+    background-color: #fff;
+    color: #2f2f2f;
+    position: relative;
+    cursor: all-scroll;
+    &+li{margin-top: 1px;}
+  }
+  .layout-section-delete{
+    bottom: 0;
+    color: red;
+    height: 20px;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 20px;
+  }
+}
+#layout-section-widgets-search-form{
+  .form-item{
+    .form-text{
+      float: left;
+      margin-right: 10px;
+      max-width: 263px;
+    }
+  }
+  #layout-section-save{
+    font-size: 34px;
+    height: 37px;
+    line-height: 32px;
+    padding: 0;
+    text-align: center;
+    width: 37px;
   }
 }
