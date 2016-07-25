@@ -65,7 +65,7 @@
                         }
                         a{
                            padding: 0 35px;
-                           font-size: 27px;
+                           @include font(27px,null,null);
                            &.active, &:hover{
                                color:$yellow-color;
                            }
@@ -77,9 +77,9 @@
                 @include float(right);
                 a{
                    .fa{
-                       font-size: 23px;
+                       @include font(23px,null,null);
                        &.fa-mobile{
-                           font-size: 27px;
+                           @include font(27px,null,null);
                        }
                    }
                 }  
@@ -104,7 +104,6 @@
             li{
                 @include float(left);
                 a{
-                    font-size: $itg-nav-fontsize;
                     color: $itg-nav-fontcolor;
                     text-transform: uppercase;
                     @include itg-font(null, $itg-font-medium);
@@ -112,7 +111,7 @@
                     border-right: 1px solid $itg-nav-bordercolor;
                     border-top:none;
                     height: 37px;
-                    line-height: 37px;                       
+                    @include font($itg-nav-fontsize,37px,null);                    
                     }
                 }
             }
@@ -127,7 +126,7 @@
             }
             .footer-social-link{
                 .fa{
-                    font-size: 24px;
+                    @include font(24px,null,null);
                     vertical-align: middle;
                 }
             }
@@ -153,6 +152,7 @@
     }
     /*End Footer CSS Desktop version*/
     
+
 /*Start CSS Top Block Grid Home Page*/    
     .top-block{
         .top-colum-1, .top-colum-2, .top-colum-3{

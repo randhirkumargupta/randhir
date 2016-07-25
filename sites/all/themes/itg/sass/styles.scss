@@ -975,9 +975,8 @@ footer{
         color: $white-color;
     }
     p{
-        font-size: 16px;
         color: #adacac;
-        line-height: 20px;
+        @include font(16px,20px,null);
         margin-bottom: 15px;
     }
     .share-new{
@@ -991,10 +990,9 @@ footer{
                 }
                 @include display-inline;
                 a{                    
-                    padding: 0 10px;
-                    font-size: 16px;
+                    padding: 0 10px;                    
                     border-right: 1px solid #606060;
-                    line-height: 15px;
+                    @include font(16px,15px,null);
                     @include display-inline;
                 }
                 &:last-child{
@@ -1024,18 +1022,17 @@ footer{
 }
 /*End CSS Big New Home page*/
 /*Start CSS Top Story Home Page*/
-.top-n-most-popular-stories{
     .tab-buttons {
         @include clearfix;
         @include tab-buttons;
     }
-    ul{
-        border: 1px solid $tab-primary-border-color;
+    .itg-listing{
+        list-style: none;
+        border: 1px solid #ddd;
         li{
-            @include tab-listing;
+            @include tab-listing;        
         }
     }
-}
 /*End CSS Top Story Home page*/
 /*Start CSS Featured New Home page*/
 .featured-news{
@@ -1065,3 +1062,17 @@ footer{
     height: 800px;
 }
 /*End CSS Featured New Home page*/
+/*Start CSS section story Home page*/
+.section-ordering{
+    h3{
+        @include itg-font($itg-robotoslab);
+        padding: 15px 0;
+    }
+    p{
+        @include font(14px,18px);
+        @include before-icon-list(5px,5px,18px,0px,$red-bg,100%);
+        border-top:1px solid #ddd;
+        padding: 12px 0 12px 12px;
+    }
+}
+/*End CSS section story Home page*/

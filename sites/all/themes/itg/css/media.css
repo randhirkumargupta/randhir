@@ -13,6 +13,7 @@
 /*Full radius in Indiatoday site*/
 /*footer color in Indiatoday site*/
 /*font family an font weight mixins*/
+/*font size an font weight mixins*/
 /*clear fix mixins*/
 /*Box sizeing mixins*/
 /*Center Block mixins*/
@@ -107,6 +108,7 @@
   .header .top-nav .main-nav li a {
     padding: 0 35px;
     font-size: 27px;
+    font-size: 1.6875rem;
   }
   .header .top-nav .main-nav li a.active, .header .top-nav .main-nav li a:hover {
     color: #ffc106;
@@ -117,9 +119,11 @@
   }
   .header .top-nav .social-nav a .fa {
     font-size: 23px;
+    font-size: 1.4375rem;
   }
   .header .top-nav .social-nav a .fa.fa-mobile {
     font-size: 27px;
+    font-size: 1.6875rem;
   }
   .header .top-nav .social-nav .globle-search {
     position: absolute;
@@ -156,7 +160,6 @@
     float: left;
   }
   .header .navigation .menu li a {
-    font-size: 14px;
     color: #e0e0e0;
     text-transform: uppercase;
     font-weight: 500;
@@ -164,6 +167,8 @@
     border-right: 1px solid #680101;
     border-top: none;
     height: 37px;
+    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 37px;
   }
 
@@ -174,6 +179,7 @@
   }
   footer .footer-top .footer-social-link .fa {
     font-size: 24px;
+    font-size: 1.5rem;
     vertical-align: middle;
   }
   footer .footer-top .footer-expand-icon {
