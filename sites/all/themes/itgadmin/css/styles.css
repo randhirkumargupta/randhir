@@ -5509,3 +5509,7 @@ div.node #comments h2 {
   text-align: center;
   width: 37px;
 }
+
+#itg-layout-manager-page-setting-form #edit-submit {
+  margin-top: 38px;
+}
