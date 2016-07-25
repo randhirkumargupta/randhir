@@ -16,14 +16,22 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['field_syndication_rule_title_value']['#options']['All'] = '- Any -';
   }
   
-  if ($form_id == 'views_form_syndication_feed_generator_page') {
+  if ($form_id == 'views_form_syndication_feed_generator_page') {    
     $form['actions']['submit']['#submit'][] = 'itg_syndication_selector_custom_submit';
     $form['#validate'][] = 'syndication_selector_custom_form_validate';
   }
   
   // Add client dropdown to view
-  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {    
-   
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {
+    // hide save button
+    if(!(isset($_GET['type']) && $_GET['type'] != 'article')) {
+      drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-actions").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer')); 
+    }
+    
+    $form['type']['#options']['article'] = '- Select -';
+    
     $form['client_title'] = array(
       '#type' => 'select',
       '#title' => t('Select Client'),
@@ -82,7 +90,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
    
     
  } 
- else if ($form_id == 'views_form_syndication_feed_generator_page') {
+ else if ($form_id == 'views_form_syndication_feed_generator_page' && (isset($_GET['type']) && $_GET['type'] != 'article')) {   
    if (isset($_GET['client_title'])) {
      $op = itg_syndication_get_mode($_GET['client_title']);
    } 
@@ -203,8 +211,9 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
   );
   
   $file_path = feed_generator_of_contents($data);
-  $realpath = $file_path['file_path'];  
   
+  $file_url = $file_path['file_path'];
+  $real_path = $file_path['real_path'];
   // insert records into database table itg_syndication_manual_feed_details.
   
   $syndication_data = array(
@@ -213,11 +222,11 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     'delivery_mode' => $delivery_mode,
     'feed_type' => $feed_type,
     'syndication' => serialize($syndication_node),
-    'feed_file_path' => $realpath,
+    'feed_file_path' => $file_url,
     'created' => format_date(time(), 'custom', 'Y-m-d'),
   );
   
-  if (isset($realpath)) {
+  if (isset($file_url)) {
     $query = db_insert('itg_syndication_manual_feed_details')->fields($syndication_data)->execute();
   }
   
@@ -229,12 +238,12 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
     // send file to browser as a download dialog
     // no content can be output prior to these header() calls
     header('Content-type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="'.$file_name.'"');
-    header('Content-Length: ' . filesize($realpath));
+    header('Content-Disposition: attachment; filename="'.basename($real_path).'"');
+    header('Content-Length: ' . filesize($real_path));
     header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
     //header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-    echo file_get_contents($file);
+    echo file_get_contents($real_path);
     exit; // terminate script
     
   } else {
@@ -249,10 +258,13 @@ function itg_syndication_selector_custom_submit($form, &$form_state) {
  */
 function itg_syndication_views_query_alter(&$view, &$query) {
   
-  if (isset($view->name) && $view->name === 'syndication_feed_generator') {
+  if (isset($view->name) && $view->name === 'syndication_feed_generator') {    
     foreach ($query->where[1]['conditions'] as $key => $val) {
       if (isset($val['field']) && $val['field'] == 'node.type' && $val['value'][0] == 'magazine') {
         $query->where[1]['conditions'][$key]['value'][0] = 'story';
+      } 
+      else if (isset($val['field']) && $val['field'] == 'node.type' && $val['value'][0] == 'All') {
+        $query->where[1]['conditions'][$key]['value'][0] = '_none';
       }
     }
    

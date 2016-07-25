@@ -220,7 +220,7 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
     
     $form['#after_build'][] = 'itg_syndication_rule_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_syndication_rule_change_message'; 
-    $form['#validate'][] = 'itg_syndication_rule_after_build_validate';  // Validate
+    $form['#validate'][] = 'itg_syndication_rule_after_build_validate';
 
 }
 
@@ -378,8 +378,7 @@ function itg_syndication_get_client($cond = NULL) {
     $current_time = date('Y-m-d');
     $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');        
     $itg_query->condition(db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>='));        
-  }
-      
+  }      
       
   $itg_result = $itg_query->execute()->fetchAll();
   
@@ -539,7 +538,7 @@ function get_syndication_content_details() {
  * function for syndication content id
  * @param array $data
  * @param string $created_date
- * @return string $file_path
+ * @return string $file_url
  */
 function get_content_id_for_syndication($data, $created_date) {
   $content_id = array();
@@ -560,9 +559,7 @@ function get_content_id_for_syndication($data, $created_date) {
     $contentid .= $itg_val->nid.',';
   }
   
-  watchdog("Syndication", "content_id : $contentid");  
-  
-  //watchdog("Syndication", '<pre>'. print_r($contentid, TRUE) .'</pre>');
+  watchdog("Syndication", '<pre>'. print_r($contentid, TRUE) .'</pre>');
   
   $data_array = array(
     'web_property' => $data['content_type'],
@@ -575,9 +572,10 @@ function get_content_id_for_syndication($data, $created_date) {
   );
   
   $file_path = feed_generator_of_contents($data_array);
-  watchdog("Syndication", "File url : $file_path");
+  $file_url = $file_path['file_path'];
+  watchdog("Syndication", "File url : $file_url");
   
-  return $file_path;
+  return $file_url;
 }
 
 /**
@@ -733,7 +731,7 @@ function update_cron_time_after_feed_generate($data, $id, $cron_time) {
 
 /**
  * function for gat feed by url
- * @return xml 
+ *  
  */
 
 function get_syndication_feed_byurl() {
@@ -887,6 +885,7 @@ function get_rule_by_client_name($client_name) {
  * @return string $expiry_date
  */
 function get_client_expiry_date($client_name) {
+  
   $client = explode('-', $client_name);
   $client_description = $client[1];
   $client_title = $client[0];
