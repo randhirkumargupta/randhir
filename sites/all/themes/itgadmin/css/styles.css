@@ -5525,5 +5525,5 @@ div.node #comments h2 {
   position: absolute;
   right: 0;
   top: 0;
-  max-width: 50%;
+  max-width: 50px;
 }
