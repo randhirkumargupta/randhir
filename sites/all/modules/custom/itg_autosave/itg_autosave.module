@@ -120,6 +120,8 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
       );
       $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];
       $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();    
+      $form['field_story_node_identity']['und'][0]['value']['#prefix'] = '<div style="display:none;">';
+      $form['field_story_node_identity']['und'][0]['value']['#suffix'] = '</div>';
       // Set form ids to js file.
       $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);          
     }    
