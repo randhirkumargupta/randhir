@@ -62,13 +62,30 @@
                     });
                });
                
+               $('#layout-button-cancel').click(function() {
+                    var base_url = settings.itg_story.settings.base_url;
+                    var section_name = $('#edit-section').val();
+                    var template_name = $('#edit-template-name').val();
+                    $.ajax({
+                          url: base_url + "/insert-layout-setting-ajax/delete",
+                          method: 'post',
+                          data: {status_val:1, section_name:section_name, template_name:template_name},
+                          /*beforeSend:function(){                                
+                            $('#'+block_name).html('<img align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                          },*/
+                          success: function(data) {                              
+                             
+                          }
+                    });
+               });
+               
                
                $('.block_title_id').blur(function() {
                     var block_id = $(this).attr("name");                    
                     var section_name = $('#edit-section').val();
                     var template_name = $('#edit-template-name').val();
                     var block_title = $(this).val();
-                    
+                    // alert(block_id);
                     var base_url = settings.itg_story.settings.base_url;
                     
                    /* var input_val = '';
@@ -81,7 +98,7 @@
                           url: base_url + "/insert-layout-setting-ajax/title",
                           method: 'post',
                           data: {block_name:block_id,section_name:section_name,template_name:template_name, block_title:block_title},
-                          beforeSend:function(){                            
+                          beforeSend:function(){                             
                             //$('#'+block_id).html('<img align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                           },
                           success: function(data) {                              
