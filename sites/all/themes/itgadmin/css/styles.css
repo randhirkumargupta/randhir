@@ -5353,7 +5353,7 @@ div.node #comments h2 {
   width: 156px;
 }
 
-.ajax-loader {
+.itg-ajax-loader {
   background: rgba(0, 0, 0, 0.7);
   position: fixed;
   left: 0;
@@ -5363,7 +5363,7 @@ div.node #comments h2 {
   z-index: 999999999;
   display: none;
 }
-.ajax-loader img {
+.itg-ajax-loader img {
   position: absolute;
   margin: auto;
   left: 0;
