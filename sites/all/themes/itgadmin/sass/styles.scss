@@ -5473,7 +5473,7 @@ div.node{
   }
 }
 
-#templates-widgets{
+.templates-widgets{
   max-height: 127px;
   overflow-y: auto;
   li{
@@ -5515,4 +5515,13 @@ div.node{
 }
 #itg-layout-manager-page-setting-form{
   #edit-submit{margin-top: 38px;}
+}
+.widget-loader{
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  max-width: 50%;
 }
