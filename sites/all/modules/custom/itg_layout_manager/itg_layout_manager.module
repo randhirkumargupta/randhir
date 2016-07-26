@@ -508,7 +508,7 @@ function display_section_widgets_list($section_name, $template_name) {
 function get_nid_of_widgets_list() {
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'));  
-  $query->condition('type', $section_name);        
+  $query->condition('type', 'itg_template_widgets');        
   $query->orderBy('n.nid', 'DESC')->range(0,1);//LIMIT to 1 records
 
   $nid = $query->execute()->fetchField();
