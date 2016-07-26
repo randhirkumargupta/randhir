@@ -111,6 +111,7 @@ function itg_fields_remove_button_field_widget_form_alter(&$element, &$form_stat
           $delta
         ));
 
+        if ($delta != 0) {
         $element['remove_button'] = array(
           '#delta' => $delta,
           '#name' => implode('_', $parents) . '_remove_button',
@@ -126,6 +127,7 @@ function itg_fields_remove_button_field_widget_form_alter(&$element, &$form_stat
           ),
           '#weight' => 1000,
         );
+        }
     }
 }
 

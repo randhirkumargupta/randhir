@@ -417,12 +417,12 @@ function itg_common_node_presave($node) {
     case 'recipe':
     case 'poll':
     case 'mega_review_critic':
-      if ($node->op == 'Save as Draft') {        
-        $node->status = 0;
-      }
-      else {        
+      if ($node->op == 'Publish') {        
         $node->status = 1;
-      }
+      }      
+      elseif ($node->op == 'Save as Draft' || $node->status == 0) {        
+        $node->status = 0;        
+      }      
   }
 }
 
