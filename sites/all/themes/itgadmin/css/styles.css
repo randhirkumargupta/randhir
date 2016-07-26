@@ -5474,21 +5474,21 @@ div.node #comments h2 {
   cursor: pointer;
 }
 
-#templates-widgets {
+[id*="templates-widgets"] {
   max-height: 127px;
   overflow-y: auto;
 }
-#templates-widgets li {
+[id*="templates-widgets"] li {
   padding: 10px;
   background-color: #fff;
   color: #2f2f2f;
   position: relative;
   cursor: all-scroll;
 }
-#templates-widgets li + li {
+[id*="templates-widgets"] li + li {
   margin-top: 1px;
 }
-#templates-widgets .layout-section-delete {
+[id*="templates-widgets"] .layout-section-delete {
   bottom: 0;
   color: red;
   height: 20px;
