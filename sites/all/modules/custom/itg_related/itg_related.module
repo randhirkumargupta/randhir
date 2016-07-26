@@ -7,19 +7,16 @@
  * Contains functionality for Related Content.
  *
  */
+
+/**
+ * Implements hook_menu().
+ */
 function itg_related_menu() {
   $items = array();
 
   $items['ajaxcallback'] = array(
     'title' => 'Test form',
     'page callback' => 'my_custom_ajax_callback',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['reporter/%'] = array(
-    'title' => 'Reporter Details',
-    'page callback' => 'itg_reporter_details',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -33,11 +30,16 @@ function itg_related_menu() {
   return $items;
 }
 
+/**
+ * Implement hook_form_alter
+ * {@inheritdoc}
+ */
 function itg_related_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'story_node_form') {
+
     $type = $form['type']['#value'];
-    //$form['field_basic_email']['#suffix'] = '<a class="colorbox-load" href="http://localhost/itgcms/related-content?width=900&height=700&iframe=true&type=' . $type . '">Add Related content</a>';
+
     $form['ntype'] = array(
       '#title' => t('Ntype'),
       '#type' => 'hidden',
@@ -78,6 +80,9 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Implement my_custom_ajax_callback
+ */
 function my_custom_ajax_callback() {
 
   $data = array('######1', '######2');
@@ -87,7 +92,6 @@ function my_custom_ajax_callback() {
   $check_title = check_search_title(trim($_POST['search_name']));
 
   if ($check_title) {
-
     $result = update_search_title(trim($_POST['search_name']), $_POST['dta'], $_POST['uid'], $_POST['ntype']);
   }
   else {
@@ -99,7 +103,6 @@ function my_custom_ajax_callback() {
 
 
   if ($result !== FALSE) {
-
     return $data;
   }
 }
@@ -122,7 +125,6 @@ function itg_related_views_pre_render(&$view) {
 
 
     foreach ($view->result as $related_result) {
-
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
       }
@@ -142,7 +144,6 @@ function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_i
 
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-related-content-new-page') {
-
     $form['sm_vid_Tags']['#autocomplete_path'] = 'tag-list/1/autocomplete';
     $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/4/autocomplete';
   }
@@ -183,6 +184,10 @@ function update_search_title($title, $combined_data, $uid, $type) {
       ->execute();
 }
 
+/**
+ * Implement hook_apachesolr_query_alter
+ * {@inheritdoc}
+ */
 function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
   //p($_GET);
   //p($query->getSolrParams());
@@ -192,12 +197,40 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if ($i > 1) {
       $and = ' AND ';
     }
-    $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search');
+    $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match');
 
     if (!empty($val) && $val != 'related-content' && $val != 'site-search' && !in_array($key, $remove_key)) {
 
       if (is_array($val)) {
-        $val_str = implode(' OR ', $val);
+
+        // condition if array is not empty and date field selected
+        if ($key == 'ds_changed' && $_GET['custom_drp'] != '_none') {
+          // && array_filter($_GET['ds_changed'])
+          // all values are empty (where "empty" means == false)
+          if ($_GET['custom_drp'] == 'calender') {
+            $min_date = implode(" ", $_GET['ds_changed']);
+            $max_date = implode(" ", $_GET['ds_changed_max']);
+
+            // if min date is blank
+            if (empty($min_date)) {
+              $min_date = date('Y-m-d');
+            }
+
+            //condition if user not select max date
+            if (!empty($max_date)) {
+              $val_str = '[' . $min_date . 'T00:00:00Z/DAY TO ' . $max_date . 'T00:00:00Z/DAY+1DAY]';
+            }
+            else {
+              $val_str = '[' . $min_date . 'T00:00:00Z/DAY TO ' . $min_date . 'T00:00:00Z/DAY+1DAY]';
+            }
+          }
+          else if ($_GET['custom_drp'] != 'calender' && $_GET['custom_drp'] != '_none') {
+            $val_str = '[' . $_GET['custom_drp'] . 'T00:00:00Z/DAY TO ' . date('Y-m-d') . 'T00:00:00Z/DAY+1DAY]';
+          }
+        }
+        else {
+          $val_str = implode(' OR ', $val);
+        }
       }
       else {
         if ($key == 'label' || $key == 'sm_field_story_kicker_text') {
@@ -205,7 +238,6 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $val_str = str_replace(" ", "* OR ", $val_str);
         }
         else if ($key == 'sm_vid_Tags') {
-
           $get_value = preg_split('/[\s,]/', $val);
           $get_value = array_filter($get_value);
           $get_comma_value = implode(',', $get_value);
@@ -214,7 +246,6 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $val_str = $val_str . '*';
         }
         else if ($key == 'tm_vid_4_names') {
-
           $get_value = preg_split('/[\s,]/', $val);
           $get_value = array_filter($get_value);
           $get_comma_value = implode(',', $get_value);
@@ -225,7 +256,9 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         }
       }
 
-      $str .= $and . $key . ':(' . $val_str . ')';
+      if (!empty($val_str)) {
+        $str .= $and . $key . ':(' . $val_str . ')';
+      }
 
       $i++;
     }
@@ -235,7 +268,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     $query->replaceParam("fq", '(' . $str . ')');
   }
 
-  // p($query->getSolrParams());
+  //p($query->getSolrParams());
 }
 
 /**
@@ -246,26 +279,12 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 function itg_related_views_query_alter(&$view, &$query) {
 
   if (isset($view->name) && $view->name == 'related_content_new') {
-
     foreach ($view->exposed_raw_input['hash'] as $k => $v) {
       if ($v == 0) {
         unset($view->exposed_raw_input['hash'][$k]);
       }
     }
   }
-}
-
-/**
- * Implement itg_reporter_details
- * @param int $val
- */
-function itg_reporter_details($val) {
-  $query = db_select('field_data_field_reporter_twitter_handle', 'th')
-      ->fields('th', array('entity_id'))
-      ->condition('th.field_reporter_twitter_handle_value', $val, '=');
-
-  $result = $query->execute()->fetchField();
-  return $result;
 }
 
 /**
@@ -301,7 +320,6 @@ function itg_related_block_info() {
     'info' => t('Related Form Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-
 
   return $blocks;
 }

@@ -27,8 +27,14 @@ function features_for_print_team_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     11 => '11',
+    12 => '12',
     13 => '13',
+    14 => '14',
+    15 => '15',
     6 => '6',
+    16 => '16',
+    17 => '17',
+    18 => '18',
     20 => '20',
     10 => '10',
   );
@@ -228,37 +234,6 @@ function features_for_print_team_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Idea Status */
-  $handler->display->display_options['fields']['field_pti_idea_status']['id'] = 'field_pti_idea_status';
-  $handler->display->display_options['fields']['field_pti_idea_status']['table'] = 'field_data_field_pti_idea_status';
-  $handler->display->display_options['fields']['field_pti_idea_status']['field'] = 'field_pti_idea_status';
-  $handler->display->display_options['fields']['field_pti_idea_status']['label'] = 'Status';
-  $handler->display->display_options['fields']['field_pti_idea_status']['empty'] = 'In Progress';
-  $handler->display->display_options['fields']['field_pti_idea_status']['type'] = 'text_default';
-  /* Field: Content: Issue */
-  $handler->display->display_options['fields']['field_pti_issue']['id'] = 'field_pti_issue';
-  $handler->display->display_options['fields']['field_pti_issue']['table'] = 'field_data_field_pti_issue';
-  $handler->display->display_options['fields']['field_pti_issue']['field'] = 'field_pti_issue';
-  $handler->display->display_options['fields']['field_pti_issue']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_pti_issue']['empty'] = 'NA';
-  $handler->display->display_options['fields']['field_pti_issue']['settings'] = array(
-    'link' => 0,
-  );
-  /* Field: Global: PHP */
-  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
-  $handler->display->display_options['fields']['php_1']['table'] = 'views';
-  $handler->display->display_options['fields']['php_1']['field'] = 'php';
-  $handler->display->display_options['fields']['php_1']['label'] = 'Issue';
-  $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php_1']['php_output'] = '<?php 
-if($data->field_field_pti_issue[0][\'raw\'][\'entity\']->title) {
-echo date(\'d/m/Y\', strtotime($data->field_field_pti_issue[0][\'raw\'][\'entity\']->title)) ;
-} else {
-echo \'N/A\';
-}
-?>';
-  $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
-  $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
   /* Field: Content: Magazine */
   $handler->display->display_options['fields']['field_pti_magazine']['id'] = 'field_pti_magazine';
   $handler->display->display_options['fields']['field_pti_magazine']['table'] = 'field_data_field_pti_magazine';
@@ -267,6 +242,26 @@ echo \'N/A\';
   $handler->display->display_options['fields']['field_pti_magazine']['settings'] = array(
     'link' => 0,
   );
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+  $handler->display->display_options['fields']['php_1']['table'] = 'views';
+  $handler->display->display_options['fields']['php_1']['field'] = 'php';
+  $handler->display->display_options['fields']['php_1']['label'] = 'Issue';
+  $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_1']['php_output'] = '<?php
+if (module_exists(\'itg_common\')) {
+ $title  = itg_common_get_node_title($data->_field_data[\'nid\'][\'entity\']->field_pti_issue[\'und\'][0][\'target_id\']);
+if($title) {
+echo  date(\'d/m/Y\', strtotime($title));
+} else {
+echo \'NA\';
+}
+} else {
+echo \'NA\';
+}
+?>';
+  $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
   /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -284,6 +279,20 @@ echo \'N/A\';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_first_name] [field_last_name]';
+  /* Field: Content: Idea Status */
+  $handler->display->display_options['fields']['field_pti_idea_status']['id'] = 'field_pti_idea_status';
+  $handler->display->display_options['fields']['field_pti_idea_status']['table'] = 'field_data_field_pti_idea_status';
+  $handler->display->display_options['fields']['field_pti_idea_status']['field'] = 'field_pti_idea_status';
+  $handler->display->display_options['fields']['field_pti_idea_status']['label'] = 'Status';
+  $handler->display->display_options['fields']['field_pti_idea_status']['empty'] = 'In Progress';
+  $handler->display->display_options['fields']['field_pti_idea_status']['type'] = 'text_default';
+  /* Field: Content: Mark as Complete */
+  $handler->display->display_options['fields']['field_pti_mark_as_complete']['id'] = 'field_pti_mark_as_complete';
+  $handler->display->display_options['fields']['field_pti_mark_as_complete']['table'] = 'field_data_field_pti_mark_as_complete';
+  $handler->display->display_options['fields']['field_pti_mark_as_complete']['field'] = 'field_pti_mark_as_complete';
+  $handler->display->display_options['fields']['field_pti_mark_as_complete']['label'] = 'Task Completed';
+  $handler->display->display_options['fields']['field_pti_mark_as_complete']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_pti_mark_as_complete']['delta_offset'] = '0';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';

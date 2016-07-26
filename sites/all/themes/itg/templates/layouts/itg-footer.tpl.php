@@ -25,13 +25,41 @@
    <section class="footer-bottom">
        <div class="container">
            <div class="row">
-               <div class="cell first-cell">
+               <div class="cell">
                    <h4>Publications:</h4>
-                   <?php print drupal_render($data['footer-publications-menu']); ?>
+                   <?php print drupal_render($data['publications_footer']); ?>
                </div>
                <div class="cell">
                    <h4>Television:</h4>
-                   <?php print drupal_render($data['footer-television-menu']); ?>
+                   <?php print drupal_render($data['television_footer']); ?>
+                   <h4>Radio:</h4>
+                   <?php print drupal_render($data['radio_footer']); ?>
+               </div>
+               <div class="cell">
+                   <h4>Education:</h4>
+                   <?php print drupal_render($data['education_footer']); ?>
+                   <h4>Online Shopping:</h4>
+                   <?php print drupal_render($data['shopping_footer']); ?>
+               </div>
+               <div class="cell">
+                   <h4>Events:</h4>
+                   <?php print drupal_render($data['events_footer']); ?>
+               </div>
+               <div class="cell">
+                   <h4>Printing:</h4>
+                   <?php print drupal_render($data['printing_footer']); ?>
+                   <h4>Welfare</h4>
+                   <?php print drupal_render($data['welfare_footer']); ?>
+                   <h4>Music:</h4>
+                   <?php print drupal_render($data['music_footer']); ?>
+               </div>              
+                <div class="cell">
+                   <h4>Syndications:</h4>
+                   <?php print drupal_render($data['syndication_footer']); ?>
+                   <h4>Distribution:</h4>
+                   <?php print drupal_render($data['distribution_footer']); ?>
+                   <h4>Useful Links :</h4>
+                   <?php print drupal_render($data['useful_footer']); ?>
                </div>
            </div>
        </div>

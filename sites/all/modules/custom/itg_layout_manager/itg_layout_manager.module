@@ -24,6 +24,21 @@ function itg_layout_manager_menu() {
       'file' => 'includes/itg_layout_manager.inc',
   );
   
+  $items['section-widgets-ajax/%'] = array(      
+      'page callback' => 'section_widgets_ajax',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_manager.inc',
+  );
+  
+  // Autocomplete callback for category name
+  $items['itg_category_autocomplete_list'] = array(
+    'page callback' => 'itg_category_autocomplete_list',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_manager.inc',
+  );
+  
   return $items;
 }
 
@@ -57,6 +72,11 @@ function itg_layout_manager_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['layout_section_widgets'] = array(
+    'info' => t('Layout section widget block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -70,22 +90,24 @@ function itg_layout_manager_block_view($delta = '') {
   
   switch ($delta) {
     case 'header_block':
-      $data['itg_main_manu_header'] = menu_tree('menu-itg-main-manu-header');
-      $data['itg_top_manu_header'] = menu_tree('menu-itg-top-manu-header');
+      $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
+      $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
       $block['content'] = theme('header_block', array('data' => $data));
       break;
     
     case 'footer_block':            
       $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+      $data['distribution_footer'] = menu_tree('menu-itg-distribution-menu-foote');
+      $data['education_footer'] = menu_tree('menu-itg-education-menu-footer');
+      $data['events_footer'] = menu_tree('menu-itg-events-menu-footer');
+      $data['music_footer'] = menu_tree('menu-itg-music-menu-footer');
+      $data['printing_footer'] = menu_tree('menu-itg-printing-menu-footer');
+      $data['radio_footer'] = menu_tree(' menu-itg-radio-menu-footer');
+      $data['shopping_footer'] = menu_tree('menu-itg-shopping-menu-footer');
+      $data['syndication_footer'] = menu_tree('menu-itg-syndication-menu-footer');
+      $data['television_footer'] = menu_tree('menu-itg-television-menu-footer');
+      $data['useful_footer'] = menu_tree('menu-itg-useful-menu-footer');
+      $data['welfare_footer'] = menu_tree('menu-itg-welfare-menu-footer');
       $block['content'] = theme('footer_block', array('data' => $data));
       break;
           
@@ -95,14 +117,20 @@ function itg_layout_manager_block_view($delta = '') {
       $block['content'] = theme('layout_manager_block', array('data' => $data));
     break;
     
-    case 'layout_widget_list_block':
-      $data = '';
-      $block['content'] = theme('layout_widgets_list_block', array('data' => $data));
+    case 'layout_widget_list_block':      
+      $widget_array = get_nid_of_widgets_list();
+      $block['content'] = theme('layout_widgets_list_block', array('data' => $widget_array));
     break;
     
-    case 'layout_button_block':
-      $data = '';
-      $block['content'] = theme('layout_buttons_block', array('data' => $data));
+    case 'layout_button_block':      
+      $block['content'] = theme('layout_buttons_block', array('data' => ''));
+    break;
+  
+    case 'layout_section_widgets':
+      $section_widgets_form = drupal_get_form('layout_section_widgets_search_form');
+      $data['section_widgets_form'] = drupal_render($section_widgets_form);
+      $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name']); 
+      $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
     break;
   }
   
@@ -153,6 +181,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
     'layout_buttons_block' => array(
       'arguments' => array('form' => NULL),
       'template' => 'layout-buttons-block',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
+    'layout_section_widgets_block' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-section-widgets-block',      
       'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
     ),
   );
@@ -423,3 +456,72 @@ function itg_layout_manager_filter_form_submit($form, &$form_state) {
   );
 }
 
+/**
+ * Implementation of hook_form
+ * {@inheritdoc}
+ */
+function layout_section_widgets_search_form($form, &$form_state) {
+
+  $form['section_name'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'itg_category_autocomplete_list',
+    '#maxlength' => 128,
+  );  
+  
+  $form['section_save'] = array(
+    '#markup' => '<a class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',
+    '#weight' => 20,
+  );  
+  
+  return $form;
+}
+
+/**
+ * Display section widgets list
+ * @param string $section_name
+ * @param string $template_name 
+ * @return string 
+ */
+function display_section_widgets_list($section_name, $template_name) {
+  // select query    
+  $itg_query = db_select('itg_section_widgets_list', 'layout_tpl');
+  $itg_query->fields('layout_tpl', array('id','category_name', 'category_id'));
+  $itg_query->condition('layout_tpl.template_section_name', $section_name);
+  $itg_query->condition('layout_tpl.template_name', $template_name);  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  $widget_name = 'section_wise_order';
+  
+  $content = '<ul id="templates-widgets" class="no-bullet pd-10">';
+  
+  foreach ($itg_result as $row) {    
+    $content .= '<li data-widget="'.$widget_name.'#'.$row->category_id.'">'
+            . '<span>'.$row->category_name.' ('.$row->category_id.')</span>'
+            . '<span><a class="layout-section-delete" href="javascript:void(0)" data-widget="'.$row->id.'">X</a></span>'
+            . '</li>';
+  }
+  
+  $content .= '</ul>';
+  return $content;
+}
+
+/**
+ * Get nid of widgets list
+ * @param string $section_name
+ * @param string $template_name 
+ * @return array
+ */
+function get_nid_of_widgets_list() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));  
+  $query->condition('type', 'itg_template_widgets');        
+  $query->orderBy('n.nid', 'DESC')->range(0,1);//LIMIT to 1 records
+
+  $nid = $query->execute()->fetchField();
+  
+  $node = node_load($nid);
+  $widget_array = $node->field_itg_widget_name[LANGUAGE_NONE];
+  return $widget_array;
+}

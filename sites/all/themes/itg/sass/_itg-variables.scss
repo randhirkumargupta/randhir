@@ -2,10 +2,27 @@
 /*=======================================================================*/
 
 /*heading used in Indiatoday site*/
-$h1-font-size: 34px;
+$mobile-h1-font-size: 26px;
+$mobile-h2-font-size: 22px;
+$mobile-h3-font-size: 16px;
+$mobile-h4-font-size: 12px;
+
+$mobile-h1-line-height: 32px;
+$mobile-h2-line-height: 26px;
+$mobile-h3-line-height: 22px;
+$mobile-h4-line-height: 16px;
+
+/*Heading used in Indiatoday site Mobile version*/
+$h1-font-size: 40px;
 $h2-font-size: 29px;
 $h3-font-size: 20px;
-$h4-font-size: 12px;
+$h4-font-size: 15px;
+
+$h1-line-height: 46px;
+$h2-line-height: 34px;
+$h3-line-height: 24px;
+$h4-line-height: 18px;
+
 
 /*Fonts used in Indiatoday site*/
 $itg-roboto: 'Roboto', sans-serif;
@@ -13,7 +30,7 @@ $itg-robotoslab:'Roboto Slab', sans-serif;
 
 $itg-font-regular:400;
 $itg-font-medium:500;
-$itg-font-blod:700;
+$itg-font-bold:700;
 
 /*Colors used in Indiatoday site*/
 $tab-primary-color: #818181 !default;
@@ -28,7 +45,7 @@ $tab-icon-bg: #959595 !default;
 /*Border Colors used in Indiatoday site*/
 $tab-primary-border-color: #e4e4e4 !default;
 $tab-active-border-color: #fff !default;
-$border-color:#dddddd !default;
+$border-color: #dddddd !default;
 
 /*Text color in Indiatoday site*/
 $white-color: #fff !default;
