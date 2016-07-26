@@ -11,6 +11,7 @@
 <?php
 global $theme;
 ?>
+
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') {?>
   <div id="page">
@@ -273,4 +274,9 @@ global $theme;
 
   <?php print render($page['bottom']); ?>
 
+<?php } ?>
+<?php if ($theme == 'itgadmin') {?>
+<div class="itg-ajax-loader">
+  <img src="<?php  echo base_path().drupal_get_path('theme', $theme);?>/images/loader.svg" alt=""/>
+</div>
 <?php } ?>
