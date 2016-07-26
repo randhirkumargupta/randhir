@@ -57,7 +57,7 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
     if (!empty($widget_name) && !empty($content_type) && !empty($cat_tid) && !empty($nid)) {
         $num = db_delete('itg_widget_order')
                 ->condition('nid', $nid)
-                ->condition('content_type', $content_type)
+                //->condition('content_type', $content_type)
                 ->condition('cat_id', $cat_tid)
                 ->condition('widget', $widget_name)
                 ->execute();
@@ -164,6 +164,9 @@ function itg_widget_block_info() {
     $blocks['big_story_format'] = array(
         'info' => t('Widget: Big story form custom table'),
     );
+    $blocks['most_popular'] = array(
+        'info' => t('Widget: Most popular form custom table'),
+    );
     return $blocks;
 }
 
@@ -186,7 +189,7 @@ function itg_widget_block_view($delta = '') {
             module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
             // value is hardcoded need to be change for dyanamic functionality
             $info['section'] = '301'; // tid of section
-            $info['content_type'] = 'story'; // content type machine name
+            $info['content_type'] = ''; // content type machine name
             // view name which is stored in draggableviews_structure table
             $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
             $block['subject'] = t('Section wise ordering from custom table');
@@ -209,6 +212,14 @@ function itg_widget_block_view($delta = '') {
             $info['page'] = 'page_2'; // page name
             $data = itg_widget_top_stories_ordering_data($info);
             $block['content'] = theme("top_stories_ordering", array("data" => $data));
+            break;
+        // Top story ordering reordering widget case
+        case 'most_popular':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'most_popular_widget'; // page name
+            $data = itg_widget_most_popular_ordering_data($info);
+            $block['content'] = theme("most_popular_widget", array("data" => $data));
             break;
         // Trending videos ordering reordering widget case
         case 'trending_videos_widget':
@@ -311,6 +322,9 @@ function itg_widget_theme() {
         ),
         'trending_videos_widget' => array(
             'template' => 'templates/trending-videos-widget',
+        ),
+        'most_popular_widget' => array(
+            'template' => 'templates/most-popular-widget',
         ),
     );
     return $themes;
