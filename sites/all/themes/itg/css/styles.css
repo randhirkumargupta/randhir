@@ -1135,6 +1135,8 @@ footer .footer-copyright {
 /*Start CSS Top Story Home Page*/
 .tab-buttons {
   zoom: 1;
+  background: #e4e4e4;
+  border-radius: 10px 10px 0 0;
 }
 .tab-buttons:before, .tab-buttons:after {
   content: "";
@@ -1154,6 +1156,7 @@ footer .footer-copyright {
   line-height: 36px;
   text-align: center;
   border-radius: 10px 10px 0 0;
+  border-top: 3px solid transparent;
   color: #818181;
   width: 50%;
   display: block;
@@ -1266,17 +1269,25 @@ footer .footer-copyright {
 }
 
 /*End CSS section story Home page*/
+.trending-videos {
+  border: 1px solid #dddddd;
+  padding-top: 10px;
+}
 .trending-videos li {
+  overflow: hidden;
   padding: 10px;
 }
 .trending-videos li + li {
   border-top: 1px solid #dddddd;
 }
-.trending-videos li .trending-pic {
+.trending-videos li .pic {
   float: left;
   margin-right: 10px;
 }
-.trending-videos li .trending-title {
+.trending-videos li .pic else {
+  margin-left: 10px;
+}
+.trending-videos li .title {
   display: block;
   overflow: hidden;
   font-size: 14px;

@@ -1,6 +1,6 @@
 /*
- * @file itg_mega_reviews_critics.js
- * Contains all functionality related to Mega Reviews & Critics
+ * @file itg_ads.js
+ * Contains all functionality related to Ads Management
  */
 
 (function($) {

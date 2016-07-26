@@ -1076,20 +1076,7 @@ footer{
 }
 /*End CSS section story Home page*/
 .trending-videos{
-    li{
-        padding: 10px;
-        &+li{
-            border-top: 1px solid $border-color;
-        }
-        .trending-pic{
-            @include float(left);
-            margin-right: 10px;
-        }
-        .trending-title{
-            display: block;
-            overflow: hidden;
-            @include font(14px,19px);
-            color: $black-color;
-        }
-    }
+    border: 1px solid $border-color;
+    padding-top: 10px;
+    @include listing-with-image(left);
 }

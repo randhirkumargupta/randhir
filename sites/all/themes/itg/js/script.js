@@ -194,6 +194,13 @@ Drupal.behaviors.my_custom_behavior = {
         }
     });
     }
+    // jQuery Code for tabbing
+    $('.tab-buttons').on('click', 'span', function(){
+      var dataID = '.' + $(this).attr('data-id');
+      $(this).addClass('active').siblings().removeClass('active');
+      $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
+    });
+    // jQuery Code for tabbing End
   }
 };
 

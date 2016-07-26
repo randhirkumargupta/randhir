@@ -77,6 +77,8 @@ a {
 /*Start CSS Top Story Home Page*/
 .tab-buttons {
   zoom: 1;
+  background: #e4e4e4;
+  border-radius: 10px 10px 0 0;
 }
 .tab-buttons:before, .tab-buttons:after {
   content: "";
@@ -96,6 +98,7 @@ a {
   line-height: 36px;
   text-align: center;
   border-radius: 10px 10px 0 0;
+  border-top: 3px solid transparent;
   color: #818181;
   width: 50%;
   display: block;
@@ -188,6 +191,31 @@ a {
 }
 
 /*End CSS*/
+/*Start CSS section story Home page*/
+.section-ordering h3 {
+  font-family: "Roboto Slab", sans-serif;
+  padding: 15px 0;
+}
+.section-ordering p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  position: relative;
+  border-top: 1px solid #dddddd;
+  padding: 12px 0 12px 12px;
+}
+.section-ordering p:before {
+  position: absolute;
+  top: 18px;
+  left: 0px;
+  content: '';
+  border-radius: 100%;
+  background: #a00606;
+  height: 5px;
+  width: 5px;
+}
+
+/*End CSS section story Home page*/
 @media only screen and (min-width: 768px) {
   /*Start CSS itg-layout-container */
   .itg-layout-container .itg-widget, .itg-layout-container .itg-widget-child {

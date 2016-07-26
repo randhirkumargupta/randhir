@@ -96,6 +96,8 @@ $root-font-size: 16px;
 
 /* Tab Button mixins */
 @mixin tab-buttons {
+    background: $tab-primary-bg;
+    border-radius: 10px 10px 0 0;
      span{
         @include itg-font($itg-roboto, $itg-font-medium);
         background: $tab-primary-bg;
@@ -104,6 +106,7 @@ $root-font-size: 16px;
         line-height: 36px;
         text-align: center;
         border-radius: 10px 10px 0 0;
+        border-top: 3px solid transparent;
         color: $tab-primary-color;
         @include calculate-width(2);
         display: block;
@@ -179,4 +182,28 @@ $root-font-size: 16px;
   -ms-transition: $args;
   -o-transition: $args;
   transition: $args;
+}
+
+@mixin listing-with-image($img-position){   
+    li{ 
+        overflow: hidden;
+        padding: 10px;
+        &+li{
+            border-top: 1px solid $border-color;
+        }
+        .pic{
+            @include float($img-position);
+            @if (($img-position == left)) {
+                margin-right:10px;
+            }else{
+                margin-left:10px;
+            }
+        }
+        .title{
+            display: block;
+            overflow: hidden;
+            @include font(14px,19px);
+            color: $black-color;
+        }
+    }
 }

@@ -20,7 +20,8 @@ function itg_widget_section_wise_ordering_from_custom_table($info) {
         $result = db_select('itg_widget_order', 'iwo')
                         ->fields('iwo', array('nid'))
                         ->condition('iwo.cat_id', $cat_id)
-                        ->condition('iwo.content_type', $content_type)
+                        // fix for getting all content type
+                        //->condition('iwo.content_type', $content_type)
                         ->condition('iwo.widget', $widget_name)
                         ->orderBy('iwo.weight')
                         ->range(0, 3)
