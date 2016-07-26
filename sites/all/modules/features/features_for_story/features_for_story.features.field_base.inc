@@ -30,12 +30,6 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text_with_summary',
   );
@@ -60,12 +54,6 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text_long',
   );
@@ -88,12 +76,6 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text_long',
   );
@@ -117,12 +99,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -149,12 +125,6 @@ function features_for_story_field_default_field_bases() {
       'default_image' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'image',
   );
@@ -178,12 +148,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -218,12 +182,6 @@ function features_for_story_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -235,6 +193,54 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_common_related_content',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_itg_common_by_line_name'.
+  $field_bases['field_itg_common_by_line_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_itg_common_by_line_name',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_itg_common_by_line_twitter'.
+  $field_bases['field_itg_common_by_line_twitter'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_itg_common_by_line_twitter',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -275,12 +281,6 @@ function features_for_story_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -310,12 +310,6 @@ function features_for_story_field_default_field_bases() {
         ),
       ),
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
   );
@@ -340,12 +334,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -366,12 +354,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -405,12 +387,6 @@ function features_for_story_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -431,12 +407,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -460,12 +430,6 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text_long',
   );
@@ -491,12 +455,6 @@ function features_for_story_field_default_field_bases() {
       'default_image' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'image',
   );
@@ -520,12 +478,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -553,12 +505,6 @@ function features_for_story_field_default_field_bases() {
         'Yes' => '',
       ),
       'allowed_values_function' => '',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'list_text',
@@ -592,12 +538,6 @@ function features_for_story_field_default_field_bases() {
       'todate' => '',
       'tz_handling' => 'none',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'datetime',
   );
@@ -622,12 +562,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'default_image' => 0,
       'uri_scheme' => 'public',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'image',
@@ -654,12 +588,6 @@ function features_for_story_field_default_field_bases() {
       'default_image' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'image',
   );
@@ -685,12 +613,6 @@ function features_for_story_field_default_field_bases() {
       'default_image' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'image',
   );
@@ -714,12 +636,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -832,12 +748,6 @@ function features_for_story_field_default_field_bases() {
       'todate' => '',
       'tz_handling' => 'none',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'datetime',
   );
@@ -867,12 +777,6 @@ function features_for_story_field_default_field_bases() {
         ),
       ),
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
   );
@@ -896,12 +800,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -928,12 +826,6 @@ function features_for_story_field_default_field_bases() {
       'default_image' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'image',
   );
@@ -958,12 +850,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -984,12 +870,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1014,12 +894,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1048,12 +922,6 @@ function features_for_story_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -1081,12 +949,6 @@ function features_for_story_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -1112,12 +974,6 @@ function features_for_story_field_default_field_bases() {
       'default_image' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'image',
   );
@@ -1141,12 +997,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1256,12 +1106,6 @@ function features_for_story_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_float',
   );
@@ -1285,12 +1129,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1329,12 +1167,6 @@ function features_for_story_field_default_field_bases() {
         ),
       ),
       'target_type' => 'node',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'entityreference',
@@ -1395,12 +1227,6 @@ function features_for_story_field_default_field_bases() {
       'todate' => '',
       'tz_handling' => 'site',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'datetime',
   );
@@ -1433,12 +1259,6 @@ function features_for_story_field_default_field_bases() {
         ),
       ),
       'target_type' => 'node',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'entityreference',
@@ -1473,12 +1293,6 @@ function features_for_story_field_default_field_bases() {
       ),
       'target_type' => 'node',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'entityreference',
   );
@@ -1502,12 +1316,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1534,12 +1342,6 @@ function features_for_story_field_default_field_bases() {
       'default_image' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'image',
   );
@@ -1563,12 +1365,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1599,12 +1395,6 @@ function features_for_story_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -1623,12 +1413,6 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'number',
     'settings' => array(),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'number_integer',
   );
@@ -1652,12 +1436,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1711,12 +1489,6 @@ function features_for_story_field_default_field_bases() {
       'hide_blank_items' => 1,
       'path' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'field_collection',
   );
@@ -1740,12 +1512,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1771,12 +1537,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -1800,12 +1560,6 @@ function features_for_story_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1834,12 +1588,6 @@ function features_for_story_field_default_field_bases() {
         'number_list' => 'Number List',
       ),
       'allowed_values_function' => '',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'list_text',
@@ -1961,12 +1709,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'max_length' => 140,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -1991,12 +1733,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'default_image' => 0,
       'uri_scheme' => 'public',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'image',
@@ -2076,12 +1812,6 @@ function features_for_story_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
