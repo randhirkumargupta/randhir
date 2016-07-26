@@ -1154,6 +1154,7 @@ footer .footer-copyright {
   line-height: 36px;
   text-align: center;
   border-radius: 10px 10px 0 0;
+  border-top: 3px solid transparent;
   color: #818181;
   width: 50%;
   display: block;
