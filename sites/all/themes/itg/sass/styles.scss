@@ -944,7 +944,7 @@ footer{
         color: $footer-text-color;
         padding: 10px 0;
         @include text-align(center);
-        font-size: 12px;
+        @include font(12px);        
         border-top: 1px solid $footer-border-color;
     }
 }
@@ -1010,8 +1010,7 @@ footer{
             padding-left: 15px;
             margin-bottom: 15px;
             a{
-                font-weight: $itg-font-bold;
-                font-size: 16px;
+                @include font(16px,null,$itg-font-bold);
             }
         }
     }
@@ -1028,7 +1027,7 @@ footer{
     }
     .itg-listing{
         list-style: none;
-        border: 1px solid #ddd;
+        border: 1px solid $border-color;
         li{
             @include tab-listing;        
         }
@@ -1071,8 +1070,26 @@ footer{
     p{
         @include font(14px,18px);
         @include before-icon-list(5px,5px,18px,0px,$red-bg,100%);
-        border-top:1px solid #ddd;
+        border-top:1px solid $border-color;
         padding: 12px 0 12px 12px;
     }
 }
 /*End CSS section story Home page*/
+.trending-videos{
+    li{
+        padding: 10px;
+        &+li{
+            border-top: 1px solid $border-color;
+        }
+        .trending-pic{
+            @include float(left);
+            margin-right: 10px;
+        }
+        .trending-title{
+            display: block;
+            overflow: hidden;
+            @include font(14px,19px);
+            color: $black-color;
+        }
+    }
+}

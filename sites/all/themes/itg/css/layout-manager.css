@@ -134,6 +134,9 @@ a {
 .itg-listing li a:hover {
   background: #f8f8f8;
 }
+.itg-listing li a:first-letter {
+  text-transform: capitalize;
+}
 .itg-listing li:last-child a {
   border-bottom: none;
 }

@@ -1039,6 +1039,7 @@ footer .footer-copyright {
   padding: 10px 0;
   text-align: center;
   font-size: 12px;
+  font-size: 0.75rem;
   border-top: 1px solid #111111;
 }
 
@@ -1114,8 +1115,9 @@ footer .footer-copyright {
   width: 6px;
 }
 .big-news .big-story-detail li a {
-  font-weight: 700;
   font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
 }
 .big-news .story-tag {
   position: absolute;
@@ -1168,7 +1170,7 @@ footer .footer-copyright {
 
 .itg-listing {
   list-style: none;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
 }
 .itg-listing li {
   position: relative;
@@ -1181,6 +1183,9 @@ footer .footer-copyright {
 }
 .itg-listing li a:hover {
   background: #f8f8f8;
+}
+.itg-listing li a:first-letter {
+  text-transform: capitalize;
 }
 .itg-listing li:last-child a {
   border-bottom: none;
@@ -1246,7 +1251,7 @@ footer .footer-copyright {
   font-size: 0.875rem;
   line-height: 18px;
   position: relative;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #dddddd;
   padding: 12px 0 12px 12px;
 }
 .section-ordering p:before {
@@ -1261,3 +1266,21 @@ footer .footer-copyright {
 }
 
 /*End CSS section story Home page*/
+.trending-videos li {
+  padding: 10px;
+}
+.trending-videos li + li {
+  border-top: 1px solid #dddddd;
+}
+.trending-videos li .trending-pic {
+  float: left;
+  margin-right: 10px;
+}
+.trending-videos li .trending-title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}

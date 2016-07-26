@@ -3541,6 +3541,13 @@ div.node{
       }
     }
   }
+  .form-item{
+    margin: 10px;
+    padding: 0;
+    input[type="text"], select{
+      width: 100%;
+    }
+  }
 }
 [id*="taxonomy-csv-import-form"]{
   @extend .node-form;
@@ -5393,36 +5400,42 @@ div.node{
     width: 200px;
   }
 }
-.block-itg-layout-manager{
+.block-itg-layout-manager, #itg-layout-manager-filter-form{
   @extend .full;
   @extend .dib;
   .form-type-select{
     float: left;
-    width: 420px;
-    &:first-child{
-      padding-left: 0;
-    }
+    padding: 0 10px 0 0;
+    margin: 20px 0;
     > label{
+      float: none; 
+      display: block;
+      padding: 0;
       width: auto;
     }
     select{
       width: 200px;
     }
-    &.form-item-section{
+    &.form-item{
       > label + .form-select + span.error{
-        padding-left: 124px;
-      }
-    }
-    &.form-item-template-name{
-      > label + .form-select + span.error{
-        padding-left: 135px;
+        padding-left: 0;
       }
     }
   }
+  .layout-filter-btn{
+    display: inline-block;
+    padding-top: 38px;
+    vertical-align: top;
+  }
   .form-submit{
-    margin-top: 31px;
-    width: 100px;
+    height: 36px;
     @extend .add-more;
+  }
+  .layout-reset{
+    @extend .add-more-wbg;
+    height: 36px;
+    margin-left: 10px;
+    padding: 9px 12px;
   }
 }
 .tagview{
@@ -5458,4 +5471,46 @@ div.node{
     top: 0;
     cursor: pointer;
   }
+}
+
+#templates-widgets{
+  li{
+    padding: 10px;
+    background-color: #fff;
+    color: #2f2f2f;
+    position: relative;
+    cursor: all-scroll;
+    &+li{margin-top: 1px;}
+  }
+  .layout-section-delete{
+    bottom: 0;
+    color: red;
+    height: 20px;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 20px;
+  }
+}
+#layout-section-widgets-search-form{
+  .form-item{
+    .form-text{
+      float: left;
+      margin-right: 10px;
+      max-width: 263px;
+    }
+  }
+  #layout-section-save{
+    font-size: 34px;
+    height: 37px;
+    line-height: 32px;
+    padding: 0;
+    text-align: center;
+    width: 37px;
+  }
+}
+#itg-layout-manager-page-setting-form{
+  #edit-submit{margin-top: 38px;}
 }
