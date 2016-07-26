@@ -5474,6 +5474,8 @@ div.node{
 }
 
 #templates-widgets{
+  max-height: 127px;
+  overflow-y: auto;
   li{
     padding: 10px;
     background-color: #fff;
