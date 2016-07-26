@@ -109,9 +109,8 @@ function itg_layout_manager_block_view($delta = '') {
       $block['content'] = theme('layout_manager_block', array('data' => $data));
     break;
     
-    case 'layout_widget_list_block':
-      $node = node_load(1151);
-      $widget_array = $node->field_itg_widget_name[LANGUAGE_NONE];
+    case 'layout_widget_list_block':      
+      $widget_array = get_nid_of_widgets_list();
       $block['content'] = theme('layout_widgets_list_block', array('data' => $widget_array));
     break;
     
@@ -471,6 +470,12 @@ function layout_section_widgets_search_form($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Display section widgets list
+ * @param string $section_name
+ * @param string $template_name 
+ * @return string 
+ */
 function display_section_widgets_list($section_name, $template_name) {
   // select query    
   $itg_query = db_select('itg_section_widgets_list', 'layout_tpl');
@@ -492,6 +497,25 @@ function display_section_widgets_list($section_name, $template_name) {
   //
   $content .= '</ul>';
   return $content;
+}
+
+/**
+ * Get nid of widgets list
+ * @param string $section_name
+ * @param string $template_name 
+ * @return array
+ */
+function get_nid_of_widgets_list() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));  
+  $query->condition('type', 'itg_template_widgets');        
+  $query->orderBy('n.nid', 'DESC')->range(0,1);//LIMIT to 1 records
+
+  $nid = $query->execute()->fetchField();
+  
+  $node = node_load($nid);
+  $widget_array = $node->field_itg_widget_name[LANGUAGE_NONE];
+  return $widget_array;
 }
 
   

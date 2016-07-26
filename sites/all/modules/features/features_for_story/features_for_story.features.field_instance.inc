@@ -278,6 +278,90 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_itg_common_by_line_name'.
+  $field_instances['node-story-field_itg_common_by_line_name'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 69,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_itg_common_by_line_name',
+    'label' => 'Common by line',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 59,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_itg_common_by_line_twitter'.
+  $field_instances['node-story-field_itg_common_by_line_twitter'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 70,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_itg_common_by_line_twitter',
+    'label' => 'common by line twitter',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 60,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_archive'.
   $field_instances['node-story-field_story_archive'] = array(
     'bundle' => 'story',
@@ -3172,6 +3256,7 @@ function features_for_story_field_default_field_instances() {
   t('Comment');
   t('Comment Question');
   t('Comment question');
+  t('Common by line');
   t('Configurations');
   t('Courtesy');
   t('Expert Name');
@@ -3244,6 +3329,7 @@ function features_for_story_field_default_field_instances() {
   t('Twitter Video');
   t('Twitter Video Description');
   t('Twitter narrative');
+  t('common by line twitter');
 
   return $field_instances;
 }
