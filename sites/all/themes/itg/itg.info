@@ -55,6 +55,7 @@ stylesheets[all][] = css/font-awesome.css
 stylesheets[all][] = css/slick.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/styles.css
+stylesheets[all][] = css/styles-new.css
 stylesheets[all][] = css/media.css
 
 ; Built-in conditional stylesheet support has been removed from Zen 7.x-5.x.
