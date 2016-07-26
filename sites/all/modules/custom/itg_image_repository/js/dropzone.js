@@ -298,15 +298,7 @@
           return _results;
         }
       },
-      removedfile: function(file) {
-        var _ref;
-        if (file.previewElement) {
-          if ((_ref = file.previewElement) != null) {
-            _ref.parentNode.removeChild(file.previewElement);
-          }
-        }
-        return this._updateMaxFilesReachedClass();
-      },
+     
       thumbnail: function(file, dataUrl,filename) {
         var thumbnailElement, _i, _len, _ref;
         if (file.previewElement) {
