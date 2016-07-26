@@ -9,6 +9,7 @@
           <?php print render($content['field_type']); ?>
           <?php print render($content['field_content_type']); ?>
           <?php
+          if($node->field_type[LANGUAGE_NONE][0]['value'] == 'Live Blog') {
           if($node->field_story_expires[LANGUAGE_NONE][0]['value'] == 'Yes') {
           ?>
             <div class="field">
@@ -17,7 +18,17 @@
           </div>
           <?php  
           }
+          else {
           ?>
+            <div class="field">
+            <div class="field-label"><?php print t('Live TV:'); ?></div>
+            <div class="field-items"><?php print 'No'; ?></div>
+          </div>
+          <?php  
+          }
+          }
+          ?>
+            
           <div class="field">
             <div class="field-label"><?php print t('Breaking Text:'); ?></div>
             <div class="field-items"><h1><?php print $title; ?></h1></div>
