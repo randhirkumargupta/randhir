@@ -5474,6 +5474,10 @@ div.node #comments h2 {
   cursor: pointer;
 }
 
+#templates-widgets {
+  max-height: 127px;
+  overflow-y: auto;
+}
 #templates-widgets li {
   padding: 10px;
   background-color: #fff;
