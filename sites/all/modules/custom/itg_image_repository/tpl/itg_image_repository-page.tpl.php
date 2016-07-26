@@ -11,13 +11,13 @@
         ?>
         <?php print drupal_get_html_head(); ?>
         <?php print drupal_get_css(); ?>
-<?php print drupal_get_js('header'); ?>
+        <?php print drupal_get_js('header'); ?>
         <style media="all" type="text/css">/*Quick-override*/</style>
     </head>
 
     <body class="itg_image_repository">
         <div id="itg_image_repository-messages"><?php print theme('status_messages'); ?></div>
-<?php print $content; ?>
+        <?php print $content; ?>
         <input type="hidden" id="field_name" value="<?php echo $_GET['field_name']; ?>" >
             <input type="hidden" id="image_height" value="<?php echo $_GET['height']; ?>" >
                 <input type="hidden" id="image_width" value="<?php echo $_GET['width']; ?>" >
@@ -87,14 +87,40 @@
                         {
                             jQuery('#loader-data').hide();
                         }
-                        
+
                         Dropzone.autoDiscover = false;
                         jQuery("#itg-image-repository-upload-form").dropzone({
-                           addRemoveLinks: true,
+                            addRemoveLinks: true, maxFiles: 1,
+                            init: function() {
+                                this.on("success", function(file, responseText) {
+                                    var obj = jQuery.parseJSON(responseText);
+                                    imageId = obj.data.added[0].id;
+                                    if (imageId != "")
+                                    {
+                                        showloader();
+                                        var imageName = jQuery(this).siblings('.dz-image').children('img').attr('imgname');
+                                        jQuery.ajax({
+                                            url: Drupal.settings.basePath + 'getimagetocroper',
+                                            type: 'post',
+                                            data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width},
+                                            success: function(data) {
+                                                //  itg_image_repository.processResponse
+                                                hideloader();
+                                                jQuery('#file-preview').html(data);
+                                            },
+                                            error: function(xhr, desc, err) {
+                                                console.log(xhr);
+                                                console.log("Details: " + desc + "\nError:" + err);
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+
                         });
                     </script>
 
-<?php print drupal_get_js('footer'); ?>
+                    <?php print drupal_get_js('footer'); ?>
                     </body>
 
                     </html>

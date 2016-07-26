@@ -116,8 +116,8 @@ $url = file_create_url($data->uri);
     </div>
 </div>
 <div class="croper-action">
-<button class="crop-image add-more">Crop</button>
-<button class="original-image add-more">Use Original</button>
+    <button class="crop-image add-more">Crop</button>
+    <button class="original-image add-more">Use Original</button>
 </div>
 
 <!--   -->
@@ -127,15 +127,13 @@ $url = file_create_url($data->uri);
         jQuery('.image-editor').cropit({
             imageState: {
                 src: '<?php echo $url; ?>',
-               
             },
             mageBackgroundBorderWidth: 10,
-              initialZoom: 'image',
-              maxZoom: 10,
-              quality: 1,
-              minZoom: 'fill',
-               exportZoom: 1.25,
-              smallImage: 'stretch',
+            initialZoom: 'image',
+            maxZoom: 7,
+            quality: 1,
+            minZoom: 'fill',
+            smallImage: 'stretch',
             imageBackground: true
 
         });
@@ -168,24 +166,24 @@ $url = file_create_url($data->uri);
 
                 var objdata = jQuery.parseJSON(data);
                 var image_fiedlid = objdata.fid;
-               if(image_fiedlid!="")
-               {
-                   // get the image tagging page
+                if (image_fiedlid != "")
+                {
+                    // get the image tagging page
                     jQuery.ajax({
-                    url: Drupal.settings.basePath + 'imagetotag',
-                    type: 'post',
-                    data: {'fid': image_fiedlid, 'field_name': field_name},
-                    success: function(data) {
-                    jQuery('#file-preview').html(data);
-                    hideloader();
-                    
-                    },
-                    error: function(xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
-                    }
-                    }); 
-               }
+                        url: Drupal.settings.basePath + 'imagetotag',
+                        type: 'post',
+                        data: {'fid': image_fiedlid, 'field_name': field_name},
+                        success: function(data) {
+                            jQuery('#file-preview').html(data);
+                            hideloader();
+
+                        },
+                        error: function(xhr, desc, err) {
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError:" + err);
+                        }
+                    });
+                }
 
 
             },
@@ -196,27 +194,27 @@ $url = file_create_url($data->uri);
         }); // end ajax call
 
     });
-    
-    
-      jQuery('.original-image').click(function() {
+
+
+    jQuery('.original-image').click(function() {
         showloader();
         var field_name = jQuery('#data_field_name').val();
-        var image_fiedlid='<?php echo $data->fid?>';
-         jQuery.ajax({
-                    url: Drupal.settings.basePath + 'imagetotag',
-                    type: 'post',
-                    data: {'fid': image_fiedlid, 'field_name': field_name},
-                    success: function(data) {
-                    jQuery('#file-preview').html(data);
-                    hideloader();
-                    
-                    },
-                    error: function(xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
-                    }
-                    }); 
+        var image_fiedlid = '<?php echo $data->fid ?>';
+        jQuery.ajax({
+            url: Drupal.settings.basePath + 'imagetotag',
+            type: 'post',
+            data: {'fid': image_fiedlid, 'field_name': field_name},
+            success: function(data) {
+                jQuery('#file-preview').html(data);
+                hideloader();
+
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
     });
-    
-    
+
+
 </script>
