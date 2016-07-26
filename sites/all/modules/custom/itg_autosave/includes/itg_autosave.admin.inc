@@ -104,17 +104,18 @@ function itg_autosave_nodeform($nid, $ctype) {
   // Create object for itg_auto_save class.
   $itg_auto_save = new itg_auto_save();
   // Remove empty field collections fields from submitted array.
-  $itg_auto_save->itg_save_remove_fcollection($ctype, $inputs);
+  if ($ctype == 'astro') {
+    $itg_auto_save->itg_save_remove_fcollection($ctype, $inputs);
+  }  
   // Extract field type from submited values array.
   $data = $itg_auto_save->itg_save_extract_fieldtype($inputs);
-  $data = array_filter($data, 'itg_autosave_remove_empty');
+  $data = array_filter($data, 'itg_autosave_remove_empty');  
   //Get unique id for node from inputs.  
   $node_identity = $inputs['field_story_node_identity']['und'][0]['value'];
   // Fetch node id and field collections ids from database.
-  $itg_nid = itg_autosave_get_unique_id($ctype, $node_identity);
- 
+  $itg_nid = itg_autosave_get_unique_id($ctype, $node_identity); 
   // Prepare values for new node.
-  if ($itg_nid->nid == '') {      
+  if ($itg_nid->nid == '') {    
     $node = new stdClass();
     // Set title value 
     $node->type = $ctype;
@@ -126,19 +127,23 @@ function itg_autosave_nodeform($nid, $ctype) {
     $node->promote = 0;
     $node->comment = 1;
   }
-  else {      
+  else {       
     // Load node if it case of node edit.
     $node = node_load($itg_nid->nid);  
   }    
   $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : '' : '';  
   // If title is empty then exit the process.
+  
   if (empty($title)) {
+    print t('Title is empty');
     exit();
   }
+  
   // Assign title to tile field.
   $node->title = $title;
   // Find field type and prepare array for foelds.
   $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);
+  
   // Check if field collection is available.
   if (count($f_collection) > 0) {
     // Find how many field collection are present.
@@ -146,10 +151,11 @@ function itg_autosave_nodeform($nid, $ctype) {
       // Delete old field collection fields and create fresh collections.
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
-  }     
+  }
+  
   // Submit the node before save.
   $node = node_submit($node); 
-  // Save node to save all values into node.
+  // Save node to save all values into node.  
   node_save($node);  
   // Store unique id associated with node in array.
   $pre_save['unique_id'] = $node_identity;

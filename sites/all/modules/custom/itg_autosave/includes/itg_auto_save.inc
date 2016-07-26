@@ -127,7 +127,7 @@ class itg_auto_save {
     $this->field_type_result = array();
     foreach ($inputs as $key => $value) {
       // Get field information.
-      $this->field_type_query = field_info_field($key);
+      $this->field_type_query = field_info_field($key);      
       $this->field_type_result[] = array(
         'fieldName' => $this->field_type_query['field_name'],
         'fieldType' => $this->field_type_query['type'],
@@ -206,8 +206,8 @@ class itg_auto_save {
       if ($this->validation) {
         watchdog('Field Collection Validation', $this->validation . ' Auto Save' . $key);
         $this->fc_item = entity_create('field_collection_item', array('field_name' => $field_name));
-        $this->fc_item->setHostEntity('node', $node);
-        $this->itg_autosave_prepare_presave($this->field_collection_data, $fc_value, $node, 'fc', $field_name, $key, $this->fc_item);
+        $this->fc_item->setHostEntity('node', $node);        
+        $this->itg_save_field_collection($this->field_collection_data, $fc_value, $this->fc_item);
         $this->fc_item->save(TRUE);
         $node->{$field_name}[$node->language][$key]['value'] = $this->fc_item->item_id;
       }      
@@ -312,8 +312,9 @@ class itg_auto_save {
    *   Extracted value.
    */
   public function itg_save_field_text_with_summary($value) {
-    $this->text_with_summary = '';
-    $this->text_with_summary = $value['und'][0]['value'];
+    $this->text_with_summary = array();
+    $this->text_with_summary['value'] = $value['und'][0]['value'];
+    $this->text_with_summary['format'] = $value['und'][0]['format'];
 
     return $this->text_with_summary;
   }
@@ -417,19 +418,13 @@ class itg_auto_save {
    * @param array $inputs
    *   Submitted form data in aarray format.
    * @param stdObject $node
-   *   Node object which will be saved.
-   * @param string $fc
-   *   This is a flag for field collection field.
-   * @param string $field_name
-   *   Name of the field collection field.
-   * @param int $delta
-   *   Delta value of field collection field.
+   *   Node object which will be saved.   
    *
    * @return array
    */
-  public function itg_autosave_prepare_presave($data, $inputs, &$node, $fc = NULL, $field_name = NULL, $delta = NULL, &$fc_item = NULL) {
+  public function itg_autosave_prepare_presave($data, $inputs, &$node) {
     $this->temp = array();
-    foreach ($data as $field) {
+    foreach ($data as $field) {      
       switch ($field['fieldType']) {
         case 'datestamp':
           $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datestamp($inputs[$field['fieldName']]);
@@ -440,24 +435,31 @@ class itg_auto_save {
           break;
 
         case 'text':
-          $node->{$field['fieldName']}['und'][0]['value'] = $this->itg_save_field_text($inputs[$field['fieldName']]);
+          if (is_array($inputs[$field['fieldName']]['und']) && count($inputs[$field['fieldName']]['und']) > 0) {
+            foreach ($inputs[$field['fieldName']]['und'] as $key => $value) {
+              if ($value['value'] != '') {
+                $node->{$field['fieldName']}['und'][$key]['value'] = $value['value'];
+              }              
+            }
+          }
+          else {
+            $node->{$field['fieldName']}['und'][0]['value'] = $this->itg_save_field_text($inputs[$field['fieldName']]);
+          }          
           break;
 
         case 'taxonomy_term_reference':
-          $this->value = $inputs[$field['fieldName']]['und'];
-          if ($fc === 'fc' && $this->value != '_none' && !empty($this->value) && $this->value != 0) {
-            $fc_item->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
+          if ($node->type == 'story') {
+            continue;
           }
-          else {
-            if (is_array($this->value)) {
-              foreach ($this->value as $key => $tid) {
-                $node->{$field['fieldName']}[$node->language][$key]['tid'] = $tid;
-              }
-            }
-            else {
-              $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
+          $this->value = $inputs[$field['fieldName']]['und'];          
+          if (!empty($this->value) && is_array($this->value)) {
+            foreach ($this->value as $key => $tid) {
+              $node->{$field['fieldName']}[$node->language][$key]['tid'] = $tid;
             }
           }
+          elseif (!empty($this->value) && is_in($this->value)) {
+            $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
+          }          
           break;
 
         case 'field_collection':
@@ -467,25 +469,86 @@ class itg_auto_save {
 
         case 'text_long':
           $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
-          if ($fc === 'fc' && !empty($this->value) && $this->value != '') {
-            $fc_item->{$field['fieldName']}[$node->language][0]['value'] = $this->value;
-          }
-          else {
-            $node->{$field['fieldName']}[$node->language][0] = $this->value;
-          }
+          $node->{$field['fieldName']}[$node->language][0] = $this->value;          
           break;
 
         case 'text_with_summary':
-          //$node->$field['fieldName'] = $this->itg_save_field_text_with_summary($inputs[$field['fieldName']]);
+          $node->{$field['fieldName']}[$node->language][0] = $this->itg_save_field_text_with_summary($inputs[$field['fieldName']]);
           break;
 
         case 'list_text':
           $node->{$field['fieldName']}['und'][0]['value'] = $this->itg_save_field_list_text($inputs[$field['fieldName']]);
           break;
+        
+        case 'list_float':
+          $node->{$field['fieldName']}['und'][0]['value'] = $inputs[$field['fieldName']]['und'];
+          break;
+        case 'number_integer':
+          //$node->{$field['fieldName']}['und'][0]['value'] = 
+          break;
+        case 'entityreference':          
+          if (is_array($inputs[$field['fieldName']]['und']) && $inputs[$field['fieldName']]['und'][0]['target_id'] != '') {            
+            $node->{$field['fieldName']}['und'][0]['target_id'] = $inputs[$field['fieldName']]['und'][0]['target_id'];
+          }
+          elseif (!is_array($inputs[$field['fieldName']]['und']) && $inputs[$field['fieldName']]['und'] > 0) {            
+            $node->{$field['fieldName']}['und'][0]['target_id'] = $inputs[$field['fieldName']]['und'];
+          }          
       }
     }
 
     return $this->temp;
+  }
+  
+  /**
+   * Create field collection items.
+   *
+   * @param array $data
+   *   Array of fields with name and type.
+   * @param array $inputs
+   *   Array of submitted form values.   
+   * @param type $fc_item
+   *   Field collection entity object.
+   */
+  public function itg_save_field_collection($data, $inputs, &$fc_item) {
+    foreach ($data as $field) {
+      switch ($field['fieldType']) {
+        case 'datestamp':
+          
+          break;
+
+        case 'datetime':
+          
+          break;
+
+        case 'text':          
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+          break;
+
+        case 'taxonomy_term_reference':
+          $this->value = $inputs[$field['fieldName']]['und'];
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['tid'] = $this->value;          
+          
+          break;
+
+        case 'field_collection':
+          // Save field name of field collection to array.
+          $this->temp[] = $field['fieldName'];
+          break;
+
+        case 'text_long':
+          $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $this->value;                    
+          break;
+
+        case 'text_with_summary':
+          
+          break;
+
+        case 'list_text':
+          
+          break;
+      }
+    }
   }
 
   /**

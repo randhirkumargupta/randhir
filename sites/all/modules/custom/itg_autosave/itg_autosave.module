@@ -94,7 +94,8 @@ function itg_autosave_views_api() {
  *
  * {@inheritdoc}.
  */
-function itg_autosave_form_alter(&$form, &$form_state, $form_id) {  
+function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
+  
   // Create object of itg_auto_save class.
   $itg_autosave_form = new itg_auto_save();
   
@@ -112,7 +113,7 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
     else {
       $flag = TRUE;
     }    
-    if (!$flag) {
+    if (!$flag) {      
       // Add js file for autosave ajax.
       $form['#attached']['js'] = array(
         drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',    
