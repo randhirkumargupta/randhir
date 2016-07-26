@@ -137,7 +137,7 @@ global $theme;
                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
                                 <?php } ?>
                         </div>
-                        <div class="itg-widget-child tab-data tab-data-2">
+                        <div class="itg-widget-child tab-data tab-data-2 hide">
                             <div class="droppable" id="itg-block-3">
                             <?php print $widget_data['itg-block-2']['widget']; ?>
                             </div>

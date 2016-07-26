@@ -77,6 +77,8 @@ a {
 /*Start CSS Top Story Home Page*/
 .tab-buttons {
   zoom: 1;
+  background: #e4e4e4;
+  border-radius: 10px 10px 0 0;
 }
 .tab-buttons:before, .tab-buttons:after {
   content: "";
