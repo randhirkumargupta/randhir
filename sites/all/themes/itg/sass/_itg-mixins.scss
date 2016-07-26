@@ -129,6 +129,9 @@ $root-font-size: 16px;
             &:hover{
                 background: $off-white-bg;
             }
+            &:first-letter{
+                text-transform: capitalize;
+            }
         }
         &:last-child a{
             border-bottom: none;
