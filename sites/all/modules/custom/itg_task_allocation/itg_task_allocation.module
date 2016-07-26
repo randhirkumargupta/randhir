@@ -6,6 +6,22 @@
  * Provides Task Allocation functionality and customizations.
  */
 
+
+/**
+ * Implements hook_menu().
+ */
+function itg_task_allocation_menu() {
+  
+  $items['content-task-list/%/autocomplete'] = array(
+    'page callback' => 'itg_task_allocation_autocomplete',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+    'file' => 'includes/itg_task_allocation.inc',
+  );
+ 
+  return $items;
+}
+
 /**
  * Implements views header link 
  * @param type $view Description
@@ -88,8 +104,9 @@ function itg_task_allocation_form_after_build($form, &$form_state) {
  * @param type $form_id  
  */
 function itg_task_allocation_form_views_exposed_form_alter(&$form, &$form_state, $form_id) { 
-   if ($form['#id'] == 'views-exposed-form-task-page' || $form['#id'] == 'views-exposed-form-task-page-1') {     
+   if ($form['#id'] == 'views-exposed-form-task-page' || $form['#id'] == 'views-exposed-form-task-page-1') {  
      $form['title']['#autocomplete_path'] = 'content-title-list/task_idea_allocation_tracking/autocomplete';
+     $form['field_task_team_member_target_id']['#autocomplete_path'] = 'content-task-list/task_idea_allocation_tracking/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Task Name'));     
      $form['#info']['filter-created']['label'] = '';     
      $form['created']['min'] = array(
@@ -127,8 +144,8 @@ function itg_task_allocation_form_custom_callback($form, &$form_state) {
   
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'task-idea-allocation-tracking') {
    $task_title = $form_state['node']->title; 
-   drupal_set_message(t('Task <b>'. $task_title .'</b> has been submitted successfully.'));
-  } else {
+   drupal_set_message(t('Task <b>'. $task_title .'</b> has been submitted successfully.')); expiredmail();
+    } else {
       $task_title = $form_state['node']->title;
       drupal_set_message(t('Task <b>'. $task_title .'</b> has been updated successfully.'));
   }
@@ -185,26 +202,40 @@ function itg_task_allocation_node_access($node, $op, $account) {
  * @param array reference $view
  * @param array reference $query
  */
-function itg_task_allocation_views_query_alter(&$view, &$query) {  
-  if (isset($view->name) && $view->name === 'task') {
-    if (isset($_GET['created']['max']['date'])) {
-      $max_conditions_array = array();
-      $_GET['created']['min']['date'] = str_replace('/','-',$_GET['created']['min']['date']);
-      $_GET['created']['max']['date'] = str_replace('/','-',$_GET['created']['max']['date']);
-      $_GET['created']['min']['date'] = date("Y-m-d",strtotime($_GET['created']['min']['date']));
-      
-      $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
-      $max_date_condition = " AND " . $max_date;
-      if (isset($view->query->where[1]['conditions'][1]['field'])) {
-        foreach ($query->where[1]['conditions'] as $idx => $condition) {
-          if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
-            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
-            $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
-          }
+function itg_task_allocation_views_query_alter(&$view, &$query) {
+
+    if (isset($view->name) && $view->name === 'task') {
+        if (isset($_GET['field_task_team_member_target_id']) && $_GET['field_task_team_member_target_id'] !== '') {
+            $search_id = check_plain($query->where[1]['conditions'][2]['value']);
+            $queries = db_select('users', 'u');
+            $queries->fields('u', array('uid'));
+            $queries->condition('u.mail', $search_id, '=');
+            $queries->range(0, 20);
+            $result = $queries->execute();
+            while ($record = $result->fetchAssoc()) {
+                $name = $record['uid'];
+            }
+            $query->where[1]['conditions'][2]['value'] = $name;
         }
-      }
+
+        if (isset($_GET['created']['max']['date'])) {
+            $max_conditions_array = array();
+            $_GET['created']['min']['date'] = str_replace('/', '-', $_GET['created']['min']['date']);
+            $_GET['created']['max']['date'] = str_replace('/', '-', $_GET['created']['max']['date']);
+            $_GET['created']['min']['date'] = date("Y-m-d", strtotime($_GET['created']['min']['date']));
+
+            $max_date = strtotime(date('Y-m-d', strtotime($_GET['created']['max']['date'] . ' +1 days')));
+            $max_date_condition = " AND " . $max_date;
+            if (isset($view->query->where[1]['conditions'][1]['field'])) {
+                foreach ($query->where[1]['conditions'] as $idx => $condition) {
+                    if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
+                        $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
+                        $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
+                    }
+                }
+            }
+        }
     }
-  }
 }
 
 /**
@@ -363,4 +394,71 @@ function get_task_count_of_user() {
   $result = $query->execute();
   
   return $result->rowCount();  
+}
+
+/**
+ * Custom method for expired task.
+ */
+function expiredmail() {
+    $current_time = date('Y-m-d H:i:s');
+    $query = db_select('field_data_field_task_finish_date_and_time', 'f');
+    $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
+    $query->join('node', 'n', 'n.nid = f.entity_id');
+    $query->leftjoin('task_allocation', 'tm', 'n.nid = tm.node_id');
+    $query->join('users', 'u', 'u.uid = n.uid');
+    $query->fields('u', array('mail'));
+    $query->fields('n', array('nid'));
+    $query->fields('tm', array('node_id'));
+    $result = $query->execute();
+    foreach ($result as $val) {
+        if ($val->node_id == '') {
+            $value .= $val->mail . ',';
+        }
+        if ($val->node_id != $val->nid) {
+            $value_id .= $val->nid . ',';
+        }
+    }
+    $node_ids = trim($value_id, ",");
+    $node_id = explode(",", $node_ids);
+    foreach ($node_id as $value) {
+        $query1 = db_insert('task_allocation');
+        $query1->fields(array('node_id' => $value))->execute();
+    }
+
+    $high_level_user = trim($value, ",");
+    expiredmail_mail_content($high_level_user);
+}
+
+/**
+ * Get Mail content
+ * @param type $to
+ * @return 
+ */
+function expiredmail_mail_content($to) {
+
+    $task_subject = 'A task has been expired that was created by you';
+    $subject = 'Task Expired';
+    $node_url = $base_url . '/node/' . $node->nid;
+    $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+              <html xmlns:v="urn:schemas-microsoft-com:vml">
+                <head><title></title></head>
+                <body style="margin:0; padding:0;">';
+    $content .= 'Dear Team,';
+    $content .= '<br /><br />' . $task_subject;
+    $content .= '</body>';
+    $content .= '</html>';
+    $params = array(
+      'body' => $content,
+      'subject' => $subject,
+    );
+
+    $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    if ($mail['result']) {
+        return TRUE;
+    }
+    else {
+        $error_msg = 'Failed to send the email!';
+        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+        return FALSE;
+    }
 }
