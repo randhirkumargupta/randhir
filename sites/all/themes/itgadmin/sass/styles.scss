@@ -5473,7 +5473,7 @@ div.node{
   }
 }
 
-#templates-widgets{
+[id*="templates-widgets"]{
   max-height: 127px;
   overflow-y: auto;
   li{
