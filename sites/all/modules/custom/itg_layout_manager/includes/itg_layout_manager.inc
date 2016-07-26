@@ -13,7 +13,9 @@ function itg_layout_admin() {
   if (isset($_GET['section']) && isset($_GET['template_name'])) {    
     $data = get_layout_details($_GET['section'], $_GET['template_name'], 'admin'); 
   }
+  
   drupal_add_css(drupal_get_path('theme', FRONT_THEME_NAME) . '/css/layout-manager.css');
+  
   return theme('itg_layout_admin_page', array('widget_data' => $data));  
 }
 
@@ -67,12 +69,14 @@ function insert_layout_setting_ajax() {
 
     // Insert and update layout widget setting details
     if (empty($layout_id)) {
+      $widget = explode('#', $_GET['widget_name']);
       $query_layout_manager = db_insert('itg_layout_manager');
       $query_layout_manager->fields(array(
         'layout_id' => $unpublish_tpl_id,        
-        'widget_name' => $_GET['widget_name'],
+        'widget_name' => $widget[0],
         'block_name' => $_GET['block_name'],
         'block_title' => $_GET['block_title'],
+        'filter_url' => $widget[1],
         'status' => true
       ));
       $query_layout_manager->execute();
@@ -83,8 +87,10 @@ function insert_layout_setting_ajax() {
             ->fields(array('block_title' => $_GET['block_title']))
             ->condition('id', $layout_id)->execute();
       } else {
+        $widget = explode('#', $_GET['widget_name']);
         db_update('itg_layout_manager')
-              ->fields(array('widget_name' => $_GET['widget_name']))
+              ->fields(array('widget_name' => $widget[0]))
+              ->fields(array('filter_url' => $widget[1]))
               ->condition('id', $layout_id)->execute();
       }
     }
@@ -106,6 +112,16 @@ function insert_layout_setting_ajax() {
     db_update('itg_layout_tpl')
            ->fields(array('status' => $_GET['status_val']))
            ->condition('id', $unpublish_tpl_id)->execute();
+    exit;
+  }
+  elseif ($arg[1] == 'delete') {
+    //delete code
+    
+    if (!empty($unpublish_tpl_id)) {
+      db_delete('itg_layout_manager')->condition('layout_id', $unpublish_tpl_id)->execute();
+      db_delete('itg_layout_tpl')->condition('id', $unpublish_tpl_id)->execute();
+    }
+    
     exit;
   }
   
@@ -147,7 +163,9 @@ function itg_layout_list() {
   $itg_result = $itg_query->execute()->fetchAll();
   
   $rows = array();
+  
   $count = 0;
+  
   foreach ($itg_result as $row) {
     $rows[] = array(
       array('data' => $row->id),
@@ -216,8 +234,7 @@ function get_layout_block_details($layout_id, $id) {
     $data['filter_url'] = $row->filter_url;
     $data['status'] = $row->status;
     $data_array[] = $data;
-  }
-  
+  }  
   
   return $data_array;
 }
@@ -229,19 +246,25 @@ function get_layout_block_details($layout_id, $id) {
 function section_widgets_ajax() {
   global $user;  
   $arg = arg();
+  
   if($arg[1] == 'insert') {
     // insert query
     if ((isset($_GET['section_name']) && ($_GET['section_name'] != '_none')) && (isset($_GET['template_name']) && ($_GET['template_name'] != '_none'))) {
-      $query_layout_tpl = db_insert('itg_section_widgets_list');
-          $query_layout_tpl->fields(array(
-            'template_section_name' => $_GET['section_name'],
-            'template_name' => $_GET['template_name'],
-            'category_name' => $_GET['category_name'],
-            'category_id' => $_GET['cid'],
-            'created_date' => time()        
-          ));
+      $category_array = explode('(', $_GET['category_name']);
+      $cid = substr($category_array[1], 0,-1);
+      $check_cid = get_section_widgets_id($cid);
+      if (empty($check_cid)) {
+        $query_layout_tpl = db_insert('itg_section_widgets_list');
+            $query_layout_tpl->fields(array(
+              'template_section_name' => $_GET['section_name'],
+              'template_name' => $_GET['template_name'],
+              'category_name' => $category_array[0],
+              'category_id' => $cid,
+              'created_date' => time()        
+            ));
 
-          $unpublish_tpl_id = $query_layout_tpl->execute();
+            $unpublish_tpl_id = $query_layout_tpl->execute();
+      }
     }
   }
   elseif ($arg[1] == 'delete') {
@@ -252,4 +275,36 @@ function section_widgets_ajax() {
   echo $content;
   exit;
   
+}
+
+/**
+ * Get section widgets id
+ * @return int
+ */
+function get_section_widgets_id($cid) {
+  $query = db_select('itg_section_widgets_list', 'section');
+  $query->fields('section', array('id'));  
+  $query->condition('category_id', $cid);
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Callback function for category name autocomplete.
+ * 
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category filter view
+ */
+function itg_category_autocomplete_list($string) {
+  $itg_query = db_select('taxonomy_term_data', 'itg');
+  $itg_query->condition('vid', CATEGORY_MANAGMENT, '=');
+  $itg_query->condition('name', '%' . $string . '%', 'LIKE')
+      ->fields('itg', array('tid', 'name'));
+  $itg_result = $itg_query->execute();
+  $result = array();
+  foreach ($itg_result as $value) {
+    $name = $value->name.'('.$value->tid.')';
+    $result[$name] = $value->name.'('.$value->tid.')';
+  }
+  
+  return drupal_json_output($result);
 }
