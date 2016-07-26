@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file : itg_loyalty_reward
+ * 
+ * Contains functionality for loyalty and rewards point.
+ *
+ */
+
+/**
+ * Implement hook_permission
+ * @return type
+ */
+function itg_loyalty_reward_permission() {
+    return array(
+    'loyalty points configuration form' => array(
+      'title' => t('Loyalty Points configuration Form'),
+    )
+  );
+}
+
+/**
+ * Implement hook_menu
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_menu() {
+  
+  $items = array();
+  
+  $items['loyalty-points-configuration'] = array(
+      'title' => t('Loyalty Points Configuration Form'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('loyalty_points_configuration_form'),
+      'access callback' => 'user_access',
+      'access arguments' => array('loyalty points configuration form'),
+      'file' => 'includes/itg_loyalty_points_form.inc',
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_form_alter
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_form_alter(&$form, &$form_state, $form_id) {
+
+  // Alter for "loyalty_points_setting_form"
+  if ($form_id == 'loyalty_points_configuration_form') {
+    
+   // Set title of this form 
+   drupal_set_title(t('Loyalty Points Configuration Form:')); 
+   
+   $form['actions']['submit']['#value'] = 'Save';
+  }
+}
