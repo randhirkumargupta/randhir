@@ -1,0 +1,89 @@
+<?php
+/**
+ * @file : itg_loyalty_reward.install
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store loyalty and rewards point information
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_schema() {
+  $schema['itg_lrp_loyalty_points'] = array(
+      'description' => 'Table for Loyalty Points.',
+      'fields' => array(
+          'id' => array(
+              'description' => 'Primary id.',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'uid' => array(
+              'description' => 'User id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'loyalty_type' => array(
+              'description' => 'Loyalty Type.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'loyalty_points' => array(
+              'description' => 'Loyalty points.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'expiry' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  $schema['itg_lrp_redeemed_points'] = array(
+      'description' => 'Table for Redeemed Points.',
+      'fields' => array(
+          'id' => array(
+              'description' => 'Primary id.',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'uid' => array(
+              'description' => 'User id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'redeemed_points' => array(
+              'description' => 'Redeemed points.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  return $schema;
+}

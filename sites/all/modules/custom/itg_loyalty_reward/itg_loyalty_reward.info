@@ -1,0 +1,6 @@
+name = ITG Loyalty and Rewards
+description = "Contains functionality related to loyalty and rewards."
+package = "ITG"
+core = 7.x
+
+files[] = itg_loyalty_reward.module
