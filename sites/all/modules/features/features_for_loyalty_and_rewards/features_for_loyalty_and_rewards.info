@@ -1,0 +1,8 @@
+name = Features for Loyalty and Rewards
+core = 7.x
+package = Features
+dependencies[] = features
+dependencies[] = itg_loyalty_reward
+features[features_api][] = api:2
+features[user_permission][] = loyalty points configuration form
+features[user_role][] = Marketing Manager
