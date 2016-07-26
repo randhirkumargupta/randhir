@@ -104,6 +104,7 @@ $root-font-size: 16px;
         line-height: 36px;
         text-align: center;
         border-radius: 10px 10px 0 0;
+        border-top: 3px solid transparent;
         color: $tab-primary-color;
         @include calculate-width(2);
         display: block;
