@@ -287,8 +287,6 @@
             id = jQuery(this).parent().attr("id");
             id = id.split('_');
             id = id[1];
-
-
             $.ajax({
                 type: "POST",
                 url: Drupal.settings.basePath + 'gettags',
