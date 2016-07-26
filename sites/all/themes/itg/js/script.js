@@ -216,19 +216,6 @@ Drupal.behaviors.my_custom_behavior = {
     }
     placeHolder('#edit-keyword-wrapper > label', '#edit-keyword-wrapper');
     
-//    $("label").each(function () {
-//        //make a variable for this label
-//        el = $(this);
-//        //get the value of the label
-//        label_value = el.html();
-//        //hide the label
-//        el.hide();
-//        //target the next sibling input and
-//        //fill it with the label's value
-//        el.next('input').val(label_value).addClass("not-filled-in");
-//    });
-    
-    
   }
 };
 
