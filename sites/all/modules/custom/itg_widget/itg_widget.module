@@ -260,11 +260,11 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
             }
             elseif ($current_display == 'trending_videos') {
                 watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-                $queue_flag = 1; // top story widget qid
+                $queue_flag = 4; // top story widget qid
             }
             else {
                 watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
-                $queue_flag = 4; // trending_videos widget qid
+                $queue_flag = 1; // trending_videos widget qid
             }
             break;
         // home page feature
