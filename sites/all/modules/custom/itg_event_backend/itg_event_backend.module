@@ -38,7 +38,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         '#name' => 'second_submit',
         '#value' => t('Save'),
         '#access' => TRUE,
-        '#submit' => array('node_form_submit', 'itg_event_backend_second_submit'),
+        '#submit' => array('node_form_submit', 'itg_event_backend_second_submit', 'itg_event_alter_submit_status_message'),
         '#weight' => -9,
       );
     }
@@ -78,6 +78,26 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form
  * @param array $form_state
  */
+function itg_event_alter_submit_status_message(&$form, $form_state) {
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend') {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';
+  }
+  $sponsor_title = $form_state['node']->title;
+  drupal_set_message(t('Event <b>' . $sponsor_title . '</b> has been ' . $op . '.'));
+  $_GET['destination'] = $_REQUEST['destination'];
+}
+
+/**
+ * Implements alter message function().
+ * @param array $form
+ * @param array $form_state
+ */
 function itg_sponsor_alter_submit_status_message(&$form, $form_state) {
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
@@ -99,6 +119,16 @@ function itg_sponsor_alter_submit_status_message(&$form, $form_state) {
  * @param array $form_state
  */
 function itg_event_backend_node_form_validate($form, &$form_state) {
+  foreach ($form_state['values']['field_event_highlights'][LANGUAGE_NONE] as $key => $event_highlights) {
+    if (is_numeric($key)) {
+      $event_high_value[$key] = $form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'];
+      if (count(array_unique($event_high_value)) < count($event_high_value)) {
+        form_set_error('field_event_highlights][' . LANGUAGE_NONE . '][' . $key . '][field_associate_story_event_high', 'You have already selected this story');
+      }
+    }
+  }
+
+
   $start_date = strtotime($form_state['values']['field_event_start_date'][LANGUAGE_NONE][0]['value']);
   $end_date = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
@@ -115,6 +145,9 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   }
 
   $event_type = $form_state['values']['field_event_type'][LANGUAGE_NONE][0]['value'];
+  if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
+    form_set_error('field_individual_registration_fe', t('Individual Registration Fee is required.'));
+  }
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
     form_set_error('field_group_registration_fee_5', t('Group Registration Fee (upto 5) is required.'));
   }
@@ -122,11 +155,6 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
     form_set_error('field_group_registration_fee_10', t('Group Registration Fee (upto 10) is required.'));
   }
-
-  if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_individual_registration_fe', t('Individual Registration Fee is required.'));
-  }
-
   // Fees validation for registration
   if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
     form_set_error('field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (upto 5)'));
@@ -136,7 +164,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     form_set_error('field_group_registration_fee_5', t('Group Registration Fee (upto 5) should be less then Group Registration Fee (upto 10).'));
   }
 
-  if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '') {
+  if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second")) {
     form_set_error('field_no_of_tickets', t('Please enter No. of Tickets'));
   }
 
@@ -147,12 +175,6 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     if ($start_time > $end_time) {
       drupal_get_messages();
       form_set_error('field_start_time', t('Start time must be less than end time.'));
-    }
-  }
-  // URL validation
-  if (isset($form_state['values']['field_story_url'][LANGUAGE_NONE]) && $form_state['values']['field_story_url'][LANGUAGE_NONE][0]['value'] != '') {
-    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $form_state['values']['field_story_url'][LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_story_url', t('Invalid event URL .'));
     }
   }
   // media validation
@@ -202,6 +224,7 @@ function itg_event_backend_sponsor($form, &$form_state) {
  */
 function itg_event_backend_after_build($form, &$form_state) {
   // add extra save button
+  global $base_url;
   if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
     $form['actions']['submit2'] = array(
       '#type' => 'submit',
@@ -521,9 +544,11 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
 function itg_event_backend_node_access($node, $op, $account) {
   $node_edit = FALSE;
   $current_time = time();
-  $registration_close = strtotime($node->field_event_close_date[LANGUAGE_NONE][0]['value']);
-  if ($current_time > $registration_close) {
-    $node_edit = TRUE;
+  if (isset($node->type) && ($node->type == 'event_backend')) {
+    $registration_close = strtotime($node->field_event_close_date[LANGUAGE_NONE][0]['value']);
+    if ($current_time > $registration_close) {
+      $node_edit = TRUE;
+    }
   }
 
   if (isset($node->type) && ($node->type == 'event_backend') && $node_edit) {

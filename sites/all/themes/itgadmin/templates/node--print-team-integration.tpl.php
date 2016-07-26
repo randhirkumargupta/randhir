@@ -1,32 +1,12 @@
 <?php
- global $base_url, $user;
 
 //Check for idea approval users 
-$idea_review_flag_user = FALSE;
-foreach ($user->roles as $roles) {
-  if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor') {
-    $idea_review_flag_user = TRUE;
-  }
-}
+$idea_review_flag_user = itg_print_team_check_approval_users();
+if ($_GET['type'] == 'commentform') {
+  print render($content['comment_form']);
+  print render($content['comments']);
+}  else { 
 ?>
-
-<a href="javascript:;" class="close-preview">&nbsp;</a>
-<?php if (!empty($pre_object)) print render($pre_object) ?>
-
-<div class='<?php print $classes ?> clearfix' <?php print ($attributes) ?>>
-  <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
-    <div class='column-side'><div class='column-wrapper'>
-  <?php endif; ?>
-
-  <?php if (!empty($submitted)): ?>
-    <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
-  <?php endif; ?>
-
-  <?php if (!empty($links)): ?>
-    <div class='<?php print $hook ?>-links clearfix'>
-      <?php print render($links) ?>
-    </div>
-  <?php endif; ?>
 
   <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
     </div></div>
@@ -74,7 +54,10 @@ foreach ($user->roles as $roles) {
       </div>
       <?php } ?>
       
-      <?php if($node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {?>
+      <?php 
+      if($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
+        
+      if($node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) { ?>
       <div class="field">
         <div class="field-label">Words Limit:</div>
         <div class="field-items"><?php echo $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'] . ' words'; ?></div>
@@ -86,7 +69,7 @@ foreach ($user->roles as $roles) {
         <div class="field-label">Timeline:</div>
         <div class="field-items"><?php echo date('d/m/Y', strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])); ?></div>
       </div>
-      <?php } ?>
+      <?php } } ?>
       
      <?php
       //Render image and video
@@ -131,10 +114,11 @@ foreach ($user->roles as $roles) {
       <?php } ?>
  </div>   
   <?php endif; ?>
-
   <?php if ($layout): ?>
     </div></div>
   <?php endif; ?>
 </div>
 
 <?php if (!empty($post_object)) print render($post_object) ?>
+<?php } ?>
+

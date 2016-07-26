@@ -706,6 +706,53 @@ function syndication_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-syndication_feed_from_pattern-body'.
+  $field_instances['node-syndication_feed_from_pattern-body'] = array(
+    'bundle' => 'syndication_feed_from_pattern',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'body',
+    'label' => 'Body',
+    'required' => 0,
+    'settings' => array(
+      'display_summary' => 0,
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-syndication_feed_from_pattern-field_syndication_feed_clients'.
   $field_instances['node-syndication_feed_from_pattern-field_syndication_feed_clients'] = array(
@@ -961,6 +1008,7 @@ function syndication_feature_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Body');
   t('Client Title');
   t('Expiry On');
   t('FTP Name');

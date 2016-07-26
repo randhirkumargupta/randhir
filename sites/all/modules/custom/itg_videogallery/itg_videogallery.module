@@ -159,26 +159,47 @@ function itg_videogallery_custom_submit($form, &$form_state) {
   }
   $tag_value = implode(', ', $tag);
   $tags_value = trim($tag_value, ",");
+  $node_id = $form_state['values']['nid'];
+  foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
+    $playlist_name[] = $playlist_term['name'];
+  }
+//  $node = node_load($node_id);
+//  foreach ($node->field_dailymotion_playlist[LANGUAGE_NONE] as $playlist_term) {
+//    $playlist_name[$playlist_term['tid']] = itg_videogallery_get_tname($playlist_term['tid']);
+//  }
   foreach ($form_state['values']['field_videogallery_video_upload'][LANGUAGE_NONE] as $key => $fieldcollection) {
     if (is_numeric($key)) {
       $fid = $form_state['values']['field_videogallery_video_upload'][LANGUAGE_NONE][$key]['field_upload_video'][LANGUAGE_NONE][0]['fid'];
       if ($fid != '' && is_numeric($fid)) {
         $query = db_select('dailymotion_response_details', 'drd');
-        $query->fields('drd', array('fid'));
+        $query->fields('drd', array('fid', 'video_id'));
         $query->condition('fid', $fid, '=');
-        $result_fid = $query->execute()->fetchCol();
-        if ($result_fid[0] == '') {
+        $result_fid = $query->execute()->fetchAssoc();
+        if ($result_fid['fid'] == '') {
           $new_fid_array[$key] = $fid;
+        }
+        else {
+          // perform edit operation when node edit
+          $result_video_fid .= $result_fid['video_id'] . ', ';
+          //$playlist_response = itg_videogallery_edit_dailymotion($result_fid, $playlist_name, $tags_value, $node_id);
+          itg_videogallery_unlink_video_playlist($result_fid, $playlist_name, $tags_value);
         }
       }
     }
   }
-
+  if ($result_video_fid != '') {
+    $final_exist_video = trim($result_video_fid, ", ");
+    itg_videogallery_edit_dailymotion($final_exist_video, $playlist_name, $node_id);
+  }
+  $response_result = array();
   foreach ($new_fid_array as $key => $value) {
     if (is_numeric($key)) {
       $file_details = file_load($value);
       $real_path = drupal_realpath($file_details->uri);
       $response = itg_videogallery_dailymotion($real_path, $key, $file_details->uri, $value, $tags_value);
+      // Perform playlist and tags when new video create.
+      $response_result['video_id'] = $response['id'];
+      $response_result['fid'] = $response['fid'];
 
       $nid = db_insert('dailymotion_response_details')
           ->fields(array(
@@ -189,19 +210,17 @@ function itg_videogallery_custom_submit($form, &$form_state) {
             'video_id' => $response['id'],
           ))
           ->execute();
+      itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
+      $playlist_response = itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
     }
   }
 }
 
 /**
- * Implement dailymotion api call
- * @param string $real_path
- * @param int $key
- * @param string $uri
- * @param int $fid
- * @return array
+ * Implements function for dailymotion api
+ * @return object
  */
-function itg_videogallery_dailymotion($real_path, $key, $uri, $fid, $tags_value) {
+function itg_videogallery_dailymotion_api() {
   require_once 'includes/Dailymotion.php';
   $user_name = variable_get('dailymotion_username', '');
   $password = variable_get('dailymotion_password', '');
@@ -240,10 +259,108 @@ function itg_videogallery_dailymotion($real_path, $key, $uri, $fid, $tags_value)
       drupal_set_message($e->getMessage(), 'error');
     }
   }
+  return $api;
+}
 
+/**
+ * Implements function for remove video from playlist
+ */
+function itg_videogallery_unlink_video_playlist($vid_res_result, $playlist_name, $tags_value) {
+  $video_id = $vid_res_result['video_id'];
+  $api = itg_videogallery_dailymotion_api();
+  // Tags assign to node
+  $api->post('/video/' . $video_id . '?tags=' . $tags_value);
+  $old_playlist = array_diff($_SESSION['old_playlist'], $playlist_name);
+  // Delete playlist with video
+  if (isset($old_playlist)) {
+    foreach ($old_playlist as $old_play) {
+      $del_play_id = itg_videogallery_get_playlist_id($old_play);
+      if ($del_play_id[0]->pid != '') {
+        $api->delete('/playlist/' . $del_play_id[0]->pid . '/videos/' . $video_id);
+      }
+    }
+  }
+}
 
+/**
+ * Implements dailymotion video edit function
+ * @param array $vid_res_result
+ * @param array $playlist_name
+ * @param array $tags_value
+ * @param int $node_id
+ */
+function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $node_id) {
+  if (is_array($vid_res_result)) {
+    $video_id = $vid_res_result['video_id'];
+    $fid = $vid_res_result['fid'];
+  }
+  else {
+    $video_id = $vid_res_result;
+  }
+  $api = itg_videogallery_dailymotion_api();
+  // create playlist
+  foreach ($playlist_name as $name) {
+    // local saved playlist check
+    $exist_playlist = itg_videogallery_get_playlist_id($name);
+    if ($exist_playlist[0]->pid == '') {
+      try {
+        $result = $api->post(
+            '/me/playlists', array(
+          'name' => $name,
+            )
+        );
+        // Insert data in dailymotion_playlist_details table
+        $query = db_insert('dailymotion_playlist_details')
+            ->fields(array(
+          'pid' => $result['id'],
+          'playlist_name' => $result['name'],
+          'node_id' => $node_id,
+          'video_id' => $video_id,
+        ));
+        $query->execute();
+        if (is_array($vid_res_result)) {
+          $api->post('/playlist/' . $result["id"] . '/videos/' . $video_id);
+        }
+        else {
+          $api->post('/playlist/' . $result["id"] . '/videos?ids=' . $video_id);
+        }
+      }
+      catch (Exception $e) {
+        if ($e->getCode() == 500) {
+          $playlist_id = itg_videogallery_get_playlist_id($name);
+          $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
+          if (is_array($vid_res_result)) {
+            $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
+          }
+          else {
+            $api->post('/playlist/' . $playlist_id[0]->pid . '/videos?ids=' . $video_id);
+          }
+        }
+      }
+    }
+    else {
+      $playlist_id = itg_videogallery_get_playlist_id($name);
+      if (is_array($vid_res_result)) {
+        $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
+      }
+      else {
+        $api->post('/playlist/' . $playlist_id[0]->pid . '/videos?ids=' . $video_id);
+      }
+    }
+  }
+}
 
-
+/**
+ * Implement dailymotion api call
+ * @param string $real_path
+ * @param int $key
+ * @param string $uri
+ * @param int $fid
+ * @return array
+ */
+function itg_videogallery_dailymotion($real_path, $key, $uri, $fid, $tags_value) {
+  $api = itg_videogallery_dailymotion_api();
+// TODO: status get work  
 //  try {
 //    // The following line will actually try to authenticate before making the API call.
 //    // * The SDK takes care of retrying if the access token has expired.
@@ -280,11 +397,11 @@ function itg_videogallery_dailymotion($real_path, $key, $uri, $fid, $tags_value)
       'published' => TRUE,
         )
     );
+
     $a = new Dailymotion();
     $a->logout();
     $result['fid'] = $fid;
     $result['tags'] = $fid;
-    // drupal_set_message('<pre>' . print_r($result, 1) . '</pre>', 'status');
   }
   catch (Exception $e) {
     if ($e->getMessage() == "This `client_id' doesn't exist.") {
@@ -373,9 +490,7 @@ function itg_videogallery_after_build($form, &$form_state) {
 
 /**
  * Implements hook_form_FORMID_alter().
- * @param array $form
- * @param array $form_state
- * @param array $form_id  
+ * {@inheritdoc}
  */
 function itg_videogallery_form_videogallery_node_form_alter(&$form, &$form_state, $form_id) {
   global $base_url, $user;
@@ -403,9 +518,7 @@ function itg_videogallery_form_videogallery_node_form_alter(&$form, &$form_state
 
 /**
  * Implement hook_form_FORM_ID_alter().
- * @param array $form
- * @param array $form_state
- * @param string $form_id
+ * {@inheritdoc}
  */
 function itg_videogallery_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   if ($form["#id"] == 'views-exposed-form-manage-videogallery-page') {
@@ -473,9 +586,7 @@ function itg_videogallery_field_attach_form($entity_type, $entity, &$form, &$for
 
 /**
  * Implements hook_form_submit().
- * @global object $user
- * @param array $form
- * @param array $form_state
+ * {@inheritdoc}
  */
 function itg_videogallery_field_add_more_submit($form, &$form_state) {
   global $user;
@@ -647,3 +758,113 @@ function itg_videogallery_node_access($node, $op, $account) {
   }
   return NODE_ACCESS_IGNORE;
 }
+
+/**
+ * Implements hook_node_validate().
+ * {@inheritdoc}
+ */
+function itg_videogallery_node_validate($node, $form, &$form_state) {
+
+  // Code for redirection url validation
+  if ($node->type == 'videogallery') {
+    // Code for category validation.
+    if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid'])) {
+      form_set_error('edit-field-story-category-und-hierarchical-select-selects-0', t("Section field is required."));
+    }
+  }
+}
+
+/**
+ * Implements function return playlist id
+ * @param string $tname
+ * @return array
+ */
+function itg_videogallery_get_playlist_id($tname) {
+  $query = db_select('dailymotion_playlist_details', 'dpt');
+  $query->fields('dpt', array('pid', 'playlist_name'));
+  $query->condition('dpt.playlist_name', $tname, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implements function for get old playlist for remove video
+ * @param int $nid
+ * @return array
+ */
+function itg_videogallery_get_old_playlist($nid) {
+  $query = db_select('field_data_field_dailymotion_playlist', 'fdp');
+  $query->fields('fdp', array('field_dailymotion_playlist_tid', 'entity_id'));
+  $query->join('taxonomy_term_data', 'ttd', 'fdp.field_dailymotion_playlist_tid = ttd.tid');
+  $query->fields('ttd', array('name', 'tid'));
+  $query->condition('fdp.bundle', 'videogallery', '=');
+  $query->condition('fdp.entity_id', $nid, '=');
+  $result = $query->execute();
+  foreach ($result as $value) {
+    $output[$value->field_dailymotion_playlist_tid] = $value->name;
+  }
+  return $output;
+}
+
+/**
+ * Implements hook_node_presave()
+ * {@inheritdoc}
+ */
+function itg_videogallery_node_presave($node) {
+  if ($node->type == 'videogallery') {
+    foreach ($node->field_dailymotion_playlist[LANGUAGE_NONE] as $playlist_val) {
+      $playlist[$playlist_val['tid']] = $playlist_val['name'];
+    }
+    $node->field_story_source_id = $playlist;
+    $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
+  }
+}
+
+/**
+ * Implements function for get term name by tid
+ * @param int $tid
+ * @return string
+ */
+function itg_videogallery_get_tname($tid) {
+  $query = db_select('taxonomy_term_data', 'ttd');
+  $query->fields('ttd', array('name'));
+  $query->condition('tid', $tid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_videogallery_cronapi($op, $job = NULL) {
+  $items['video_file_delete'] = array(
+    'description' => 'video file delete in files folder.',
+    'callback' => 'itg_videogallery_remove_video',
+  );
+  return $items;
+}
+
+/**
+ * Implement function for remove files
+ */
+function itg_videogallery_remove_video() {
+  $files = glob('sites/default/files/dailymotion_video_dir/*');
+  foreach ($files as $file) {
+    if (is_file($file))
+      unlink($file);
+  }
+}
+
+/**
+ * Implements function for get videoid by file id
+ * @param int $fid
+ */
+function itg_videogallery_get_videoid($fid){
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd', array('video_id'));
+  $query->condition('fid', $fid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+

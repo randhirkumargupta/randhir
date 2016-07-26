@@ -724,6 +724,16 @@
        $('#'+labelID).trigger('click');
     });
     
+    // Code for open link in new tab
+    $(".views-field-name").find('a').attr('target', '_blank');
+    
+    
+    // jQuery Code for tabbing
+    $('.tab-buttons').on('click', 'span', function(){
+      var dataID = '.' + $(this).attr('data-id');
+      $(this).addClass('active').siblings().removeClass('active');
+      $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
+    });
     
   };
 })(jQuery);
@@ -792,6 +802,13 @@ jQuery(document).ready(function(){
        alert('Changes made successfully');
     });
     // end of code
+    
+    // jQuery code for Loader
+    jQuery(document).ajaxStart(function () {
+        jQuery(".ajax-loader").show();
+    }).ajaxStop(function () {
+        jQuery(".ajax-loader").hide();
+    });
     
     
 });

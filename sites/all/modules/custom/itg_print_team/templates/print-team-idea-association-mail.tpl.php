@@ -1,11 +1,8 @@
 <?php 
 /**
- * Template file to send mail on idea submission
+ * Template file to send mail on idea association
  * @file: print-team-idea-association-mail.tpl.php
  */
-
-global $base_url;
-
 ?> 
 
 <!DOCTYPE html> 
@@ -18,19 +15,26 @@ global $base_url;
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <tr>
-        <td style="padding: 10px 20px;">Dear User,</td>
+        <td style="padding: 10px 20px;">Dear Team,</td>
       </tr>
+      <?php if ($op_type == 'idea_update') { ?>
       <tr>
-        <td style="padding: 10px 20px;">A story has been created with name "<strong><?php echo $node->title; ?></strong>"</td>
+        <td style="padding: 10px 20px;">An idea "<strong><?php echo $node->title; ?></strong>" has been update.</td>
       </tr>
+      <?php } else { ?>
+      <tr>
+        <td style="padding: 10px 20px;">An idea "<strong><?php echo $node->title; ?></strong>" has been converted to story.</td>
+      </tr>
+      <?php } ?>
+
       <tr>
         <td style="padding: 10px 20px;">Associated Issue and Magazine:</td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Issue: <?php echo date('d/m/Y', strtotime(itg_common_get_node_title($node->field_pti_issue[LANGUAGE_NONE][0]['target_id']))); ?></td>
+        <td style="padding: 10px 20px;">Issue: <strong><?php echo date('d/m/Y', strtotime(itg_common_get_node_title($node->field_pti_issue[LANGUAGE_NONE][0]['target_id']))); ?></strong></td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Magazine: <strong><?php echo $node->title; ?></strong></td>
+        <td style="padding: 10px 20px;">Magazine: <strong><?php echo itg_common_get_node_title($node->field_pti_magazine[LANGUAGE_NONE][0]['target_id']); ?></strong></td>
       </tr>
 
       <tr>

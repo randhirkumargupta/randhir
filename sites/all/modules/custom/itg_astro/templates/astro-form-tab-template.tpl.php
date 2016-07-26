@@ -1,10 +1,9 @@
 <?php
+
 /**
  * @file
  * Theme implementation for story form in tab display.
- * 
  */
-
 ?>
 <div class="block-itg-story-list">
   <span class="target-link" data-target-id="BasicDetails"><?php echo t('Basic Details'); ?></span>  
