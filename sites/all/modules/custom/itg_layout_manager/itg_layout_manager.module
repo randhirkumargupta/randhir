@@ -502,7 +502,7 @@ function display_section_widgets_list($section_name, $template_name) {
             . '<span><a class="layout-section-delete" href="javascript:void(0)" data-widget="'.$row->id.'">X</a></span>'
             . '</li>';
   }
-  //
+  
   $content .= '</ul>';
   return $content;
 }
@@ -516,7 +516,7 @@ function display_section_widgets_list($section_name, $template_name) {
 function get_nid_of_widgets_list() {
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'));  
-  $query->condition('type', $section_name);        
+  $query->condition('type', 'itg_template_widgets');        
   $query->orderBy('n.nid', 'DESC')->range(0,1);//LIMIT to 1 records
 
   $nid = $query->execute()->fetchField();
@@ -525,6 +525,3 @@ function get_nid_of_widgets_list() {
   $widget_array = $node->field_itg_widget_name[LANGUAGE_NONE];
   return $widget_array;
 }
-
-  
-
