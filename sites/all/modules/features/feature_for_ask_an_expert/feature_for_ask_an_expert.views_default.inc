@@ -168,6 +168,7 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    21 => '21',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -290,7 +291,7 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['fields']['field_user_email']['table'] = 'field_data_field_user_email';
   $handler->display->display_options['fields']['field_user_email']['field'] = 'field_user_email';
   $handler->display->display_options['fields']['field_user_email']['element_label_colon'] = FALSE;
-  /* Field: Content: Answer */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
@@ -368,7 +369,7 @@ else
   $handler->display->display_options['filters']['type']['value'] = array(
     'ask_an_expert' => 'ask_an_expert',
   );
-  /* Filter criterion: Content: Answer (field_user_message) */
+  /* Filter criterion: Content: Description (field_user_message) */
   $handler->display->display_options['filters']['field_user_message_value']['id'] = 'field_user_message_value';
   $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';
@@ -481,7 +482,7 @@ else
   $handler->display->display_options['fields']['field_user_email']['table'] = 'field_data_field_user_email';
   $handler->display->display_options['fields']['field_user_email']['field'] = 'field_user_email';
   $handler->display->display_options['fields']['field_user_email']['hide_empty'] = TRUE;
-  /* Field: Content: City */
+  /* Field: Field: City */
   $handler->display->display_options['fields']['field_user_city']['id'] = 'field_user_city';
   $handler->display->display_options['fields']['field_user_city']['table'] = 'field_data_field_user_city';
   $handler->display->display_options['fields']['field_user_city']['field'] = 'field_user_city';
@@ -503,7 +504,7 @@ else
   $handler->display->display_options['fields']['field_disclose_your_identity']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_disclose_your_identity']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_disclose_your_identity']['delta_offset'] = '0';
-  /* Field: Content: Answer */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
@@ -525,7 +526,7 @@ else
   $handler->display->display_options['filters']['type']['value'] = array(
     'ask_an_expert' => 'ask_an_expert',
   );
-  /* Filter criterion: Content: Answer (field_user_message) */
+  /* Filter criterion: Content: Description (field_user_message) */
   $handler->display->display_options['filters']['field_user_message_value']['id'] = 'field_user_message_value';
   $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';
@@ -540,6 +541,7 @@ else
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    21 => '21',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -595,11 +597,11 @@ else
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'medium';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: Content: Answer */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
-  /* Field: Content: Updated by */
+  /* Field: Content: Source type */
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
@@ -631,7 +633,7 @@ else
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['limit'] = '0';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['break_phrase'] = TRUE;
-  /* Contextual filter: Content: Updated by (field_story_source_type) */
+  /* Contextual filter: Content: Source type (field_story_source_type) */
   $handler->display->display_options['arguments']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
   $handler->display->display_options['arguments']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['arguments']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
@@ -657,7 +659,7 @@ else
   $handler->display->display_options['filters']['type']['value'] = array(
     'ask_an_expert' => 'ask_an_expert',
   );
-  /* Filter criterion: Content: Answer (field_user_message) */
+  /* Filter criterion: Content: Description (field_user_message) */
   $handler->display->display_options['filters']['field_user_message_value']['id'] = 'field_user_message_value';
   $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';

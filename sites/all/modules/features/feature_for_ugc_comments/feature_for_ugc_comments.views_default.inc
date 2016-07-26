@@ -79,7 +79,7 @@ function feature_for_ugc_comments_views_default_views() {
     5 => '5',
     6 => '6',
     20 => '20',
-    23 => '23',
+    22 => '22',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -388,7 +388,7 @@ function feature_for_ugc_comments_views_default_views() {
     5 => '5',
     6 => '6',
     20 => '20',
-    23 => '23',
+    22 => '22',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
