@@ -55,14 +55,6 @@ function feature_for_recipe_node_info() {
       'title_label' => t('Strap headline (Short headline)'),
       'help' => '',
     ),
-    'reporter' => array(
-      'name' => t('Reporter'),
-      'base' => 'node_content',
-      'description' => '',
-      'has_title' => '1',
-      'title_label' => t('Reporter name'),
-      'help' => '',
-    ),
   );
   drupal_alter('node_info', $items);
   return $items;

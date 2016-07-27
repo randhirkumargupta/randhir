@@ -27,6 +27,8 @@
 /* Story Tag mixins */
 /* List before icon */
 /*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 768px) {
   h1 {
@@ -63,7 +65,7 @@
   }
   .header .logo {
     width: auto;
-    top: 95px;
+    top: 100px;
   }
   .header .logo img {
     background: #193c8d;

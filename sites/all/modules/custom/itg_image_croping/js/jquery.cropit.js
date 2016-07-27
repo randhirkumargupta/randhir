@@ -400,7 +400,7 @@ var imgdata=$('#image-enc-data').val();
 	        previewSize: this.previewSize,
 	        maxZoom: this.options.maxZoom,
 	        exportZoom: this.options.exportZoom,
-	        //smallImage: this.options.smallImage
+	        smallImage: this.options.smallImage
 	      })) {
 	        this.onImageError(_constants.ERRORS.SMALL_IMAGE);
 	        if (this.image.src) {

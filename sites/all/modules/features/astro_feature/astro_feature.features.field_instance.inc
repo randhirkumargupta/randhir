@@ -1035,6 +1035,48 @@ function astro_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-astro-field_story_node_identity'.
+  $field_instances['node-astro-field_story_node_identity'] = array(
+    'bundle' => 'astro',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 15,
+    ),
+  );
+
   // Exported field_instance:
   // 'taxonomy_term-zodiac_sign-field_astro_thumb_icon'.
   $field_instances['taxonomy_term-zodiac_sign-field_astro_thumb_icon'] = array(
@@ -1118,6 +1160,7 @@ function astro_feature_field_default_field_instances() {
   t('Day');
   t('Enter Text');
   t('Maximum allowed character for this field is 500.');
+  t('Node Identity');
   t('Numerology Values');
   t('Panchaang-Calendar');
   t('Select Frequency');

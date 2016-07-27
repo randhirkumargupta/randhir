@@ -89,6 +89,20 @@ a{
   }
 }
 /*End CSS*/
+/*Start CSS section story Home page*/
+.section-ordering{
+    h3{
+        @include itg-font($itg-robotoslab);
+        padding: 15px 0;
+    }
+    p{
+        @include font(14px,18px);
+        @include before-icon-list(5px,5px,18px,0px,$red-bg,100%);
+        border-top:1px solid $border-color;
+        padding: 12px 0 12px 12px;
+    }
+}
+/*End CSS section story Home page*/
 
 @media only screen and (min-width:768px){
     
