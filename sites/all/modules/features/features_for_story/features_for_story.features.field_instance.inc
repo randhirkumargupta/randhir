@@ -286,10 +286,9 @@ function features_for_story_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 69,
       ),
       'teaser' => array(
@@ -328,10 +327,9 @@ function features_for_story_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 70,
       ),
       'teaser' => array(
@@ -1281,6 +1279,48 @@ function features_for_story_field_default_field_instances() {
       ),
       'type' => 'taxonomy_autocomplete',
       'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_story_highlights'.
+  $field_instances['node-story-field_story_highlights'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 71,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_highlights',
+    'label' => 'Brief case',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 61,
     ),
   );
 
@@ -2990,6 +3030,7 @@ function features_for_story_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Are you sure you want to Archive?');
+  t('Brief case');
   t('Buzz');
   t('Buzz Description');
   t('Byline');

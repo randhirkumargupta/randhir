@@ -67,7 +67,7 @@
     #tagit #tagname{
         margin-bottom: 1px;
     }
-    #btnsavetag{
+    #btnsavetag, #btnsavetagedit{
         background-color: rgba(31,181,173,.9);
         border: 1px solid rgba(31,181,173,.9);
         border-radius: 0;

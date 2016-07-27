@@ -56,7 +56,9 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['style_options']['wrapper_class'] = 'itg-search-list';
+  $handler->display->display_options['style_options']['row_class'] = 'itg-search-list';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['wrapper_class'] = '';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -133,7 +135,10 @@ function feature_for_front_search_views_default_views() {
 <p>[content]</p>
 <div class="other-info">[ds_changed]</div>
 </div>';
+  $handler->display->display_options['fields']['nothing']['element_type'] = '0';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Apache Solr: ds_changed */
   $handler->display->display_options['sorts']['ds_changed']['id'] = 'ds_changed';
