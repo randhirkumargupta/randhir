@@ -27,6 +27,8 @@
 /* Story Tag mixins */
 /* List before icon */
 /*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
 /* Global CSS */
 body {
   font: 400 14px/18px "Roboto Slab", sans-serif;
@@ -1039,6 +1041,7 @@ footer .footer-copyright {
   padding: 10px 0;
   text-align: center;
   font-size: 12px;
+  font-size: 0.75rem;
   border-top: 1px solid #111111;
 }
 
@@ -1114,8 +1117,9 @@ footer .footer-copyright {
   width: 6px;
 }
 .big-news .big-story-detail li a {
-  font-weight: 700;
   font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
 }
 .big-news .story-tag {
   position: absolute;
@@ -1133,6 +1137,8 @@ footer .footer-copyright {
 /*Start CSS Top Story Home Page*/
 .tab-buttons {
   zoom: 1;
+  background: #e4e4e4;
+  border-radius: 10px 10px 0 0;
 }
 .tab-buttons:before, .tab-buttons:after {
   content: "";
@@ -1152,6 +1158,7 @@ footer .footer-copyright {
   line-height: 36px;
   text-align: center;
   border-radius: 10px 10px 0 0;
+  border-top: 3px solid transparent;
   color: #818181;
   width: 50%;
   display: block;
@@ -1160,15 +1167,15 @@ footer .footer-copyright {
 }
 .tab-buttons span.active {
   background: #fff;
-  color: #d12019;
+  color: #a00606;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
-  border-top: 3px solid #d12019;
+  border-top: 3px solid #a00606;
 }
 
 .itg-listing {
   list-style: none;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
 }
 .itg-listing li {
   position: relative;
@@ -1181,6 +1188,9 @@ footer .footer-copyright {
 }
 .itg-listing li a:hover {
   background: #f8f8f8;
+}
+.itg-listing li a:first-letter {
+  text-transform: capitalize;
 }
 .itg-listing li:last-child a {
   border-bottom: none;
@@ -1246,7 +1256,7 @@ footer .footer-copyright {
   font-size: 0.875rem;
   line-height: 18px;
   position: relative;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #dddddd;
   padding: 12px 0 12px 12px;
 }
 .section-ordering p:before {
@@ -1261,3 +1271,118 @@ footer .footer-copyright {
 }
 
 /*End CSS section story Home page*/
+/*Start CSS trending-videos Home  page*/
+.trending-videos {
+  border: 1px solid #dddddd;
+  padding-top: 10px;
+}
+.trending-videos li {
+  overflow: hidden;
+  padding: 10px;
+}
+.trending-videos li + li {
+  border-top: 1px solid #dddddd;
+}
+.trending-videos li .pic {
+  float: right;
+  margin-left: 10px;
+}
+.trending-videos li .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+
+/*End CSS trending-videos Home  page*/
+/*Start Search page css*/
+.view-front-end-global-search .view-content li {
+  overflow: hidden;
+  padding: 10px;
+}
+.view-front-end-global-search .view-content li + li {
+  border-top: 1px solid #dddddd;
+}
+.view-front-end-global-search .view-content li .search-pic {
+  float: left;
+  margin-right: 10px;
+}
+.view-front-end-global-search .view-content li .search-detail {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.view-front-end-global-search .view-content li {
+  padding: 25px 0;
+}
+.view-front-end-global-search .view-content .search-detail h2 {
+  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 22px;
+  margin-bottom: 10px;
+}
+.view-front-end-global-search .view-content .search-detail h2 a {
+  font-size: 20px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.view-front-end-global-search .view-content .other-info {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-size: 0.75rem;
+  color: #8f8f8f;
+  margin-top: 15px;
+}
+.view-front-end-global-search .item-list ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-front-end-global-search .item-list ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 5px;
+}
+.view-front-end-global-search .item-list ul.pager li.pager-current {
+  height: 20px;
+  width: 20px;
+  border: 1px solid #323232;
+  background-color: #323232;
+  color: #fff;
+}
+.view-front-end-global-search .item-list ul.pager li.pager-item a {
+  border: 1px solid #565555;
+  display: block;
+  height: 20px;
+  width: 20px;
+  color: #323232;
+}
+.view-front-end-global-search .item-list ul.pager li.pager-item a:hover {
+  background-color: #323232;
+  color: #fff;
+  border: 1px solid #323232;
+}
+.view-front-end-global-search .item-list ul.pager li.pager-next a, .view-front-end-global-search .item-list ul.pager li.pager-last a, .view-front-end-global-search .item-list ul.pager li.pager-first a, .view-front-end-global-search .item-list ul.pager li.pager-previous a {
+  color: #323232;
+}
+.view-front-end-global-search .attachment .count {
+  font-size: 30px;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 22px;
+  color: #737373;
+  font-family: "Roboto", sans-serif;
+  padding-bottom: 20px;
+  display: block;
+  border-bottom: 1px solid #dddddd;
+}
+.view-front-end-global-search .attachment .count span {
+  color: #a00606;
+}
+
+/*End Search page css*/

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for reporter feature.
+ */
+
+include_once 'feature_for_reporter.features.inc';

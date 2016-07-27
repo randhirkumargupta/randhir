@@ -99,7 +99,7 @@ img {
 .hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .image-widget-data .ajax-progress-throbber, .node-newsletter_templates-form .form-field-name-field-newst-logo .image-widget-data .ajax-progress-throbber,
 .node-newsletter_templates-form .form-field-name-field-newst-banner .image-widget-data .ajax-progress-throbber, [id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .image-widget-data .ajax-progress-throbber, .form-field-name-field-mega-review-video .image-widget-data .ajax-progress-throbber, #itg-tv-schedule-form .image-widget-data .ajax-progress-throbber, .node-podcast-form .field-name-field-podcast-upload-audio-file .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .file-widget .ajax-progress-throbber, .node-newsletter_templates-form .form-field-name-field-newst-logo .file-widget .ajax-progress-throbber,
 .node-newsletter_templates-form .form-field-name-field-newst-banner .file-widget .ajax-progress-throbber, [id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .file-widget .ajax-progress-throbber, .form-field-name-field-mega-review-video .file-widget .ajax-progress-throbber, #itg-tv-schedule-form .file-widget .ajax-progress-throbber, .node-podcast-form .field-name-field-podcast-upload-audio-file .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .taxonomy-form-term-tags .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, [id*="taxonomy-csv-import-form"] .filter-wrapper, #views-form-syndication-feed-generator-page .filter-wrapper, .operation-form .filter-wrapper, #views-form-blogs-management-page .filter-wrapper,
-#views-form-strory-menegment-page .filter-wrapper, #itg-tv-schedule-form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, [id*="user-register-form"] #edit-mimemail, [id*="user-profile-form"] #edit-mimemail, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, .node-quiz-form div.clearfix .ajax-progress-throbber, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
+#views-form-strory-menegment-page .filter-wrapper, #itg-tv-schedule-form .filter-wrapper, [id*="loyalty-points-configuration-form"] .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, [id*="user-register-form"] #edit-mimemail, [id*="user-profile-form"] #edit-mimemail, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, .node-quiz-form div.clearfix .ajax-progress-throbber, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, [id*="field-event-media-values"] .field-name-field-poll-question-video .ajax-progress-throbber,
 [id*="field-event-media-values"] .field-name-field-audio .ajax-progress-throbber, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
@@ -1200,7 +1200,7 @@ ul.ui-autocomplete .autocomplete-deluxe-highlight-char {
 }
 
 .node-form h2, .taxonomy-form-term-tags h2, .confirmation h2, div.node #comments .comment-form h2, #comments .comment-form h2, [id*="taxonomy-csv-import-form"] h2, #views-form-syndication-feed-generator-page h2, .operation-form h2, #views-form-blogs-management-page h2,
-#views-form-strory-menegment-page h2, #itg-tv-schedule-form h2 {
+#views-form-strory-menegment-page h2, #itg-tv-schedule-form h2, [id*="loyalty-points-configuration-form"] h2 {
   background-color: #fefafb;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
@@ -1210,15 +1210,15 @@ ul.ui-autocomplete .autocomplete-deluxe-highlight-char {
   margin: 15px 0;
 }
 .node-form input[type="text"], .taxonomy-form-term-tags input[type="text"], .confirmation input[type="text"], #comments .comment-form input[type="text"], [id*="taxonomy-csv-import-form"] input[type="text"], #views-form-syndication-feed-generator-page input[type="text"], .operation-form input[type="text"], #views-form-blogs-management-page input[type="text"],
-#views-form-strory-menegment-page input[type="text"], #itg-tv-schedule-form input[type="text"], .node-form select, .taxonomy-form-term-tags select, .confirmation select, div.node #comments .comment-form select, #comments .comment-form select, [id*="taxonomy-csv-import-form"] select, #views-form-syndication-feed-generator-page select, .operation-form select, #views-form-blogs-management-page select,
-#views-form-strory-menegment-page select, #itg-tv-schedule-form select, .node-form .form-textarea-wrapper textarea, .taxonomy-form-term-tags .form-textarea-wrapper textarea, .confirmation .form-textarea-wrapper textarea, #comments .comment-form .form-textarea-wrapper textarea, [id*="taxonomy-csv-import-form"] .form-textarea-wrapper textarea, #views-form-syndication-feed-generator-page .form-textarea-wrapper textarea, .operation-form .form-textarea-wrapper textarea, #views-form-blogs-management-page .form-textarea-wrapper textarea,
-#views-form-strory-menegment-page .form-textarea-wrapper textarea, #itg-tv-schedule-form .form-textarea-wrapper textarea {
+#views-form-strory-menegment-page input[type="text"], #itg-tv-schedule-form input[type="text"], [id*="loyalty-points-configuration-form"] input[type="text"], .node-form select, .taxonomy-form-term-tags select, .confirmation select, div.node #comments .comment-form select, #comments .comment-form select, [id*="taxonomy-csv-import-form"] select, #views-form-syndication-feed-generator-page select, .operation-form select, #views-form-blogs-management-page select,
+#views-form-strory-menegment-page select, #itg-tv-schedule-form select, [id*="loyalty-points-configuration-form"] select, .node-form .form-textarea-wrapper textarea, .taxonomy-form-term-tags .form-textarea-wrapper textarea, .confirmation .form-textarea-wrapper textarea, #comments .comment-form .form-textarea-wrapper textarea, [id*="taxonomy-csv-import-form"] .form-textarea-wrapper textarea, #views-form-syndication-feed-generator-page .form-textarea-wrapper textarea, .operation-form .form-textarea-wrapper textarea, #views-form-blogs-management-page .form-textarea-wrapper textarea,
+#views-form-strory-menegment-page .form-textarea-wrapper textarea, #itg-tv-schedule-form .form-textarea-wrapper textarea, [id*="loyalty-points-configuration-form"] .form-textarea-wrapper textarea {
   width: 100%;
   max-width: 332px;
   font-size: 14px;
 }
 .node-form .form-actions, .taxonomy-form-term-tags .form-actions, .confirmation .form-actions, div.node #comments .comment-form .form-actions, #comments .comment-form .form-actions, [id*="taxonomy-csv-import-form"] .form-actions, #views-form-syndication-feed-generator-page .form-actions, .operation-form .form-actions, #views-form-blogs-management-page .form-actions,
-#views-form-strory-menegment-page .form-actions, #itg-tv-schedule-form .form-actions {
+#views-form-strory-menegment-page .form-actions, #itg-tv-schedule-form .form-actions, [id*="loyalty-points-configuration-form"] .form-actions {
   background-color: #fefafb;
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #d9d9d9;
@@ -1226,7 +1226,7 @@ ul.ui-autocomplete .autocomplete-deluxe-highlight-char {
   padding: 15px 30px;
 }
 .node-form .form-radios + div.description + span.error, .taxonomy-form-term-tags .form-radios + div.description + span.error, .confirmation .form-radios + div.description + span.error, #comments .comment-form .form-radios + div.description + span.error, [id*="taxonomy-csv-import-form"] .form-radios + div.description + span.error, #views-form-syndication-feed-generator-page .form-radios + div.description + span.error, .operation-form .form-radios + div.description + span.error, #views-form-blogs-management-page .form-radios + div.description + span.error,
-#views-form-strory-menegment-page .form-radios + div.description + span.error, #itg-tv-schedule-form .form-radios + div.description + span.error {
+#views-form-strory-menegment-page .form-radios + div.description + span.error, #itg-tv-schedule-form .form-radios + div.description + span.error, [id*="loyalty-points-configuration-form"] .form-radios + div.description + span.error {
   padding-left: 220px;
 }
 
@@ -3307,7 +3307,7 @@ fieldset#edit-select .form-submit {
 .hide, .Browse-upload .image-widget-data .ajax-progress-throbber, [id*="ugc-node-form"] .image-widget-data .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .image-widget-data .ajax-progress-throbber, .node-newsletter_templates-form .form-field-name-field-newst-logo .image-widget-data .ajax-progress-throbber,
 .node-newsletter_templates-form .form-field-name-field-newst-banner .image-widget-data .ajax-progress-throbber, [id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .image-widget-data .ajax-progress-throbber, .form-field-name-field-mega-review-video .image-widget-data .ajax-progress-throbber, #itg-tv-schedule-form .image-widget-data .ajax-progress-throbber, .node-podcast-form .field-name-field-podcast-upload-audio-file .image-widget-data .ajax-progress-throbber, .Browse-upload .file-widget .ajax-progress-throbber, [id*="ugc-node-form"] .file-widget .ajax-progress-throbber, [id*="field-newsl-add-news-values"] .field-name-field-news-thumbnail .file-widget .ajax-progress-throbber, .node-newsletter_templates-form .form-field-name-field-newst-logo .file-widget .ajax-progress-throbber,
 .node-newsletter_templates-form .form-field-name-field-newst-banner .file-widget .ajax-progress-throbber, [id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .file-widget .ajax-progress-throbber, .form-field-name-field-mega-review-video .file-widget .ajax-progress-throbber, #itg-tv-schedule-form .file-widget .ajax-progress-throbber, .node-podcast-form .field-name-field-podcast-upload-audio-file .file-widget .ajax-progress-throbber, .field-multiple-drag, .tabledrag-toggle-weight-wrapper, .tabledrag-hide, .node-form .filter-wrapper, .taxonomy-form-term-tags .filter-wrapper, .confirmation .filter-wrapper, div.node #comments .comment-form .filter-wrapper, #comments .comment-form .filter-wrapper, [id*="taxonomy-csv-import-form"] .filter-wrapper, #views-form-syndication-feed-generator-page .filter-wrapper, .operation-form .filter-wrapper, #views-form-blogs-management-page .filter-wrapper,
-#views-form-strory-menegment-page .filter-wrapper, #itg-tv-schedule-form .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, [id*="user-register-form"] #edit-mimemail, [id*="user-profile-form"] #edit-mimemail, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, .node-quiz-form div.clearfix .ajax-progress-throbber, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
+#views-form-strory-menegment-page .filter-wrapper, #itg-tv-schedule-form .filter-wrapper, [id*="loyalty-points-configuration-form"] .filter-wrapper, .form-type-textarea .field-edit-link, [id*="user-register-form"] .image-widget-data .ajax-progress-throbber, [id*="user-profile-form"] .image-widget-data .ajax-progress-throbber, [id*="user-register-form"] #edit-mimemail, [id*="user-profile-form"] #edit-mimemail, .node-quiz-form .field-name-field-quiz-answer-image, .node-quiz-form .field-name-field-quiz-answer-video, .node-quiz-form .field-name-field-quiz-answer-text, .node-quiz-form div.clearfix .ajax-progress-throbber, [id*="field-quiz-add-questions-values"] thead, .field-name-field-breaking-publish-time .date-padding .form-type-textfield:first-child, .preview-wrapper > .preview > .node-teaser, .preview-wrapper > .preview > h3:first-child, .field-collection-view ul.field-collection-view-links,
 .field-collection-container ul.action-links, [id*="field-erf-registration-fee-values"] thead,
 [id*="field-mega-review-review-values"] thead, [id*="field-task-task-idea-values"] tbody tr td .form-type-textarea > label, [id*="field-event-media-values"] .field-type-file, [id*="field-event-media-values"] .field-name-field-poll-question-video .ajax-progress-throbber,
 [id*="field-event-media-values"] .field-name-field-audio .ajax-progress-throbber, .field-name-field-mobile-subscribers, .node-itg_celebrity_profile-form .image-widget-data .ajax-progress-throbber,
@@ -5271,6 +5271,16 @@ div.node #comments h2 {
   background: #1fb5ad;
   border-radius: 50%;
 }
+.itg_image_repository .dropzone .dz-preview .dz-remove {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: url("../images/cross_small.png") center center no-repeat;
+  text-indent: -9999px;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
 .itg_image_repository #loader-data {
   position: fixed;
   top: 0;
@@ -5353,7 +5363,7 @@ div.node #comments h2 {
   width: 156px;
 }
 
-.ajax-loader {
+.itg-ajax-loader {
   background: rgba(0, 0, 0, 0.7);
   position: fixed;
   left: 0;
@@ -5363,7 +5373,7 @@ div.node #comments h2 {
   z-index: 999999999;
   display: none;
 }
-.ajax-loader img {
+.itg-ajax-loader img {
   position: absolute;
   margin: auto;
   left: 0;
@@ -5473,18 +5483,32 @@ div.node #comments h2 {
   top: 0;
   cursor: pointer;
 }
+.tagview .edit {
+  background: url("../images/edit-icon.png") center center no-repeat;
+  height: 20px;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  width: 20px;
+  z-index: 999;
+  text-indent: -9999px;
+}
 
-#templates-widgets li {
+.templates-widgets {
+  max-height: 127px;
+  overflow-y: auto;
+}
+.templates-widgets li {
   padding: 10px;
   background-color: #fff;
   color: #2f2f2f;
   position: relative;
   cursor: all-scroll;
 }
-#templates-widgets li + li {
+.templates-widgets li + li {
   margin-top: 1px;
 }
-#templates-widgets .layout-section-delete {
+.templates-widgets .layout-section-delete {
   bottom: 0;
   color: red;
   height: 20px;
@@ -5512,4 +5536,18 @@ div.node #comments h2 {
 
 #itg-layout-manager-page-setting-form #edit-submit {
   margin-top: 38px;
+}
+
+.widget-loader {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  max-width: 50px;
+}
+
+[id*="loyalty-points-configuration-form"] .form-item > label {
+  width: 250px;
 }
