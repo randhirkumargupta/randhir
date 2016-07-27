@@ -15,6 +15,7 @@
   <span class="target-link" data-target-id="DateTime"><?php print t('Date & Time'); ?></span>
   <span class="target-link" data-target-id="Templates"><?php print t('Templates'); ?></span>
   <span class="target-link" data-target-id="ExpertChunk"><?php print t('Expert Chunk'); ?></span>
+  <span class="target-link" data-target-id="Highlights"><?php print t('Highlights'); ?></span>
   <span class="target-link" data-target-id="title-metatags"><?php print t('Remarks'); ?></span>
   <span class="target-link" data-target-id="edit-revision-information"><?php print t('Meta Details'); ?></span>  
 </div>

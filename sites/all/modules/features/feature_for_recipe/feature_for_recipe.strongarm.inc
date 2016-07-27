@@ -35,7 +35,7 @@ function feature_for_recipe_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_reporter';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['comment_anonymous_reporter'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -346,17 +346,39 @@ function feature_for_recipe_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__reporter';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '4',
+          'weight' => '8',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '7',
         ),
       ),
       'display' => array(),
@@ -473,13 +495,6 @@ function feature_for_recipe_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_reporter';
-  $strongarm->value = '1';
-  $export['node_preview_reporter'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_cooking_tips';
   $strongarm->value = 0;
   $export['node_submitted_cooking_tips'] = $strongarm;
@@ -497,13 +512,6 @@ function feature_for_recipe_strongarm() {
   $strongarm->name = 'node_submitted_recipe';
   $strongarm->value = 0;
   $export['node_submitted_recipe'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_reporter';
-  $strongarm->value = 1;
-  $export['node_submitted_reporter'] = $strongarm;
 
   return $export;
 }
