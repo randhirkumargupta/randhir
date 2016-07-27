@@ -5563,3 +5563,17 @@ div.node{
 #edit-preview-changes{
     @extend .btn;
 }
+#edit-field-story-extra-large-image{
+  .image-widget-data{
+      input[type="submit"]{
+        @extend .add-more-wbg;
+        }
+    }  
+} 
+#page-title{
+    span.autosave{
+        display: inline-block;
+        padding-left: 20px;
+        font-size: 14px;
+    }
+}
