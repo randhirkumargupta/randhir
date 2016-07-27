@@ -1913,7 +1913,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-service-content-values"], 
 [id*="field-syndication-ftp-details-values"], 
 [id*="field-email-address-values"], 
-[id*="field-mega-review-review-values"]{
+[id*="field-mega-review-review-values"],
+[id*="field-task-task-idea-values"]{
   @extend .itg-add-another-item;
 }
 [id*="field-erf-registration-fee-values"], 
@@ -5552,4 +5553,12 @@ div.node{
       width: 250px;
     }
   }
+}
+#field-story-highlights-values {
+    thead{
+        display: none;
+    }
+    .cancel {
+        
+    }
 }

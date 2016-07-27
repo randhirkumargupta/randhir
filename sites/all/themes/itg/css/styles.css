@@ -1346,29 +1346,34 @@ footer .footer-copyright {
 .view-front-end-global-search .item-list ul.pager li {
   display: inline-block;
   vertical-align: top;
-  margin: 0 5px;
 }
 .view-front-end-global-search .item-list ul.pager li.pager-current {
-  height: 20px;
-  width: 20px;
-  border: 1px solid #323232;
-  background-color: #323232;
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
   color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
 }
 .view-front-end-global-search .item-list ul.pager li.pager-item a {
-  border: 1px solid #565555;
   display: block;
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
   color: #323232;
+  font-family: "Roboto", sans-serif;
 }
 .view-front-end-global-search .item-list ul.pager li.pager-item a:hover {
-  background-color: #323232;
+  background-color: #337ab7;
   color: #fff;
-  border: 1px solid #323232;
+  border-radius: 50%;
 }
 .view-front-end-global-search .item-list ul.pager li.pager-next a, .view-front-end-global-search .item-list ul.pager li.pager-last a, .view-front-end-global-search .item-list ul.pager li.pager-first a, .view-front-end-global-search .item-list ul.pager li.pager-previous a {
   color: #323232;
+  line-height: 25px;
 }
 .view-front-end-global-search .attachment .count {
   font-size: 30px;
