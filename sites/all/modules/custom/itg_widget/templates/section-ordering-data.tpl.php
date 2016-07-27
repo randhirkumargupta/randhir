@@ -1,4 +1,4 @@
-<ul class="section-ordering">
+<div class="section-ordering">
     <?php
     $extra_large_image_url = "";
     foreach ($data as $count => $entity_data) {
@@ -10,6 +10,12 @@
         ?>
         <?php if (!empty($extra_large_image_url) && $count == 0) : ?>
             <img src="<?php print $extra_large_image_url; ?>">
+            <h3><a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a></h3>
+        <?php endif; ?>
+        <?php if ($count != 0) : ?>
+            <p class="<?php print $entity->type ?>">
+                <a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a>
+            </p>
         <?php endif; ?>
         <?php if (!empty($entity->title)) : ?>
             <li class="<?php print $entity->type ?>">
@@ -17,4 +23,4 @@
             </li>
         <?php endif; ?>
     <?php } ?>
-</ul>
+</div>
