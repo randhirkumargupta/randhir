@@ -11,8 +11,10 @@
         <?php if (!empty($extra_large_image_url) && $count == 0) : ?>
             <img src="<?php print $extra_large_image_url; ?>">
         <?php endif; ?>
-        <li class="<?php print $entity->type ?>">
-            <a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a>
-        </li>
+        <?php if (!empty($entity->title)) : ?>
+            <li class="<?php print $entity->type ?>">
+                <a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a>
+            </li>
+        <?php endif; ?>
     <?php } ?>
 </ul>
