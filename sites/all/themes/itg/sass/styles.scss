@@ -944,7 +944,7 @@ footer{
         color: $footer-text-color;
         padding: 10px 0;
         @include text-align(center);
-        font-size: 12px;
+        @include font(12px);        
         border-top: 1px solid $footer-border-color;
     }
 }
@@ -975,9 +975,8 @@ footer{
         color: $white-color;
     }
     p{
-        font-size: 16px;
         color: #adacac;
-        line-height: 20px;
+        @include font(16px,20px,null);
         margin-bottom: 15px;
     }
     .share-new{
@@ -991,10 +990,9 @@ footer{
                 }
                 @include display-inline;
                 a{                    
-                    padding: 0 10px;
-                    font-size: 16px;
+                    padding: 0 10px;                    
                     border-right: 1px solid #606060;
-                    line-height: 15px;
+                    @include font(16px,15px,null);
                     @include display-inline;
                 }
                 &:last-child{
@@ -1012,8 +1010,7 @@ footer{
             padding-left: 15px;
             margin-bottom: 15px;
             a{
-                font-weight: $itg-font-bold;
-                font-size: 16px;
+                @include font(16px,null,$itg-font-bold);
             }
         }
     }
@@ -1024,18 +1021,17 @@ footer{
 }
 /*End CSS Big New Home page*/
 /*Start CSS Top Story Home Page*/
-.top-n-most-popular-stories{
     .tab-buttons {
         @include clearfix;
         @include tab-buttons;
     }
-    ul{
-        border: 1px solid $tab-primary-border-color;
+    .itg-listing{
+        list-style: none;
+        border: 1px solid $border-color;
         li{
-            @include tab-listing;
+            @include tab-listing;        
         }
     }
-}
 /*End CSS Top Story Home page*/
 /*Start CSS Featured New Home page*/
 .featured-news{
@@ -1065,3 +1061,65 @@ footer{
     height: 800px;
 }
 /*End CSS Featured New Home page*/
+/*Start CSS section story Home page*/
+.section-ordering{
+    h3{
+        @include itg-font($itg-robotoslab);
+        padding: 15px 0;
+    }
+    p{
+        @include font(14px,18px);
+        @include before-icon-list(5px,5px,18px,0px,$red-bg,100%);
+        border-top:1px solid $border-color;
+        padding: 12px 0 12px 12px;
+    }
+}
+/*End CSS section story Home page*/
+/*Start CSS trending-videos Home  page*/
+.trending-videos{
+    border: 1px solid $border-color;
+    padding-top: 10px;
+    @include listing-with-image(right,10px,pic,title);
+}
+/*End CSS trending-videos Home  page*/
+/*Start Search page css*/
+.view-front-end-global-search{
+    .view-content{        
+        @include listing-with-image(left,10px,search-pic,search-detail);
+        li{
+            padding: 25px 0;
+        }
+        .search-detail{
+            h2{
+                @include font(20px,22px);
+                margin-bottom:10px;
+                a{
+                  @include font(20px,null,$itg-font-medium);   
+                }
+            }            
+        }
+        .other-info{
+            @include itg-font($itg-roboto);
+            @include font(12px);
+            color: #8f8f8f;
+            margin-top: 15px;
+        }
+    }
+    .item-list{
+        @include pager;
+    }
+    .attachment {
+        .count{
+            @include font(30px,22px,$itg-font-medium);            
+            color: #737373;
+            @include itg-font($itg-roboto);            
+            padding-bottom: 20px;
+            display: block;
+            border-bottom: 1px solid $border-color;
+            span{
+                color: $red-color;
+            }
+        }
+    }
+}
+/*End Search page css*/

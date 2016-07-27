@@ -153,12 +153,18 @@ Drupal.behaviors.my_custom_behavior = {
     headerMain();
     function headerMain(){
         $('.search-icon').click(function(){
-            $('.globle-search').css('right','40px');
+            $('.globle-search').css('width','255px');
         });
         $('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
         $('.mobile-nav').click(function(){
             $('.navigation').stop().slideToggle();
-        });        
+        });
+        $(document).on('click', function(){            
+            $('.globle-search').css('width','0px');
+        });
+        $('.search-icon').click(function(e){
+            e.stopPropagation();
+        });
     }
     
     footerMain();
@@ -179,10 +185,37 @@ Drupal.behaviors.my_custom_behavior = {
     });
     $('.more-link').click(function(){
         $(this).parents('ul').find('li.hidelist').slideToggle();
+        $(this).toggleClass('active');
         $("html, body").animate({ scrollTop: $(document).height() }, 800);
-        $('.more-link').text('Less');
+        if($(this).hasClass('active')){
+            $('.more-link').text('Less');
+        } else{
+            $('.more-link').text('More');
+        }
     });
     }
+    // jQuery Code for tabbing
+    $('.tab-buttons').on('click', 'span', function(){
+      var dataID = '.' + $(this).attr('data-id');
+      $(this).addClass('active').siblings().removeClass('active');
+      $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
+    });
+    // jQuery Code for tabbing End
+    
+    
+    // Global function to set lable as input placeholder
+    function placeHolder(element, parent){
+      $(element).each(function(){
+        el = $(this);                                                                     //make a variable for this label
+        el_for = el.attr('for');                                                          //get the value of the label attr for
+        label_value = el.text();                                                          //get the value of the label
+        el.hide();                                                                        //hide the label
+        el_input = 'input[id='+el_for+']';                                                //get input element
+        $(parent).find(el_input).attr('placeholder', $.trim(label_value));                //fill it with the label's value
+      });
+    }
+    placeHolder('#edit-keyword-wrapper > label', '#edit-keyword-wrapper');
+    
   }
 };
 

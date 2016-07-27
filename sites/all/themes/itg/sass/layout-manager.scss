@@ -33,7 +33,6 @@ a{
 }
 
 /*Start CSS Top Story Home Page*/
-.top-n-most-popular-stories{
     .tab-buttons {
         @include clearfix;
         @include tab-buttons;
@@ -46,13 +45,12 @@ a{
         display: none;
       }
     }
-    ul{
+    .itg-listing{
         list-style: none;
         li{
-            @include tab-listing;
+            @include tab-listing;        
         }
     }
-}
 /*End CSS Top Story Home page*/
 
 /*Start CSS Featured New Home page*/
@@ -91,40 +89,64 @@ a{
   }
 }
 /*End CSS*/
-
-/*Start CSS Trending Videos and Magazine*/
-.trending-video-magazine{
-  margin-top: 40px;
-  .tab-buttons {
-    @include clearfix;
-    @include tab-buttons;
-  }
-  .tab-data-1, .tab-data-2{
-    border: 1px solid $tab-primary-border-color;
-    height: 274px;
-    overflow-y: auto;
-  }
-  .tab-data-2{
-    display: none;
-  }
-  ul{
-    list-style: none;
-    li{
-      @include tab-listing;
+/*Start CSS section story Home page*/
+.section-ordering{
+    h3{
+        @include itg-font($itg-robotoslab);
+        padding: 15px 0;
     }
-  }
+    p{
+        @include font(14px,18px);
+        @include before-icon-list(5px,5px,18px,0px,$red-bg,100%);
+        border-top:1px solid $border-color;
+        padding: 12px 0 12px 12px;
+    }
 }
-/*End CSS*/
-
-/*Start CSS Common News*/
-.common-news{
-  border: 1px solid $tab-primary-border-color;
-  height: 375px;
-}
-/*End CSS*/
-
+/*End CSS section story Home page*/
 
 @media only screen and (min-width:768px){
+    
+    /*Start CSS itg-layout-container */   
+    .itg-layout-container{
+        .itg-widget, .itg-widget-child{
+            position: relative;
+            input[type="text"]{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 214px;
+            }
+        }
+        .top-colum-1{
+            .droppable{
+                height: 635px;
+            }
+        }
+        .top-colum-2{
+            .droppable{
+                height: 671px;
+            }
+        }
+        .top-colum-3{
+            .droppable{
+                height: 308px;
+            }
+            .itg-widget:first-child{
+                margin-bottom: 20px;
+            }
+        }
+        &.itg-admin{
+            .itg-widget{
+                background-color: #f1f1f1;
+            }
+        }
+        .itg-common-section{
+            .droppable{
+                height: 382px;
+            }
+        }
+    }  
+    
   /*Start CSS Top Block Grid Home Page*/    
     .top-block{
         .top-colum-1, .top-colum-2, .top-colum-3{

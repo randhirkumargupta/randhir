@@ -13,6 +13,7 @@
 /*Full radius in Indiatoday site*/
 /*footer color in Indiatoday site*/
 /*font family an font weight mixins*/
+/*font size an font weight mixins*/
 /*clear fix mixins*/
 /*Box sizeing mixins*/
 /*Center Block mixins*/
@@ -26,6 +27,8 @@
 /* Story Tag mixins */
 /* List before icon */
 /*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 768px) {
   h1 {
@@ -62,7 +65,7 @@
   }
   .header .logo {
     width: auto;
-    top: 95px;
+    top: 100px;
   }
   .header .logo img {
     background: #193c8d;
@@ -107,6 +110,7 @@
   .header .top-nav .main-nav li a {
     padding: 0 35px;
     font-size: 27px;
+    font-size: 1.6875rem;
   }
   .header .top-nav .main-nav li a.active, .header .top-nav .main-nav li a:hover {
     color: #ffc106;
@@ -114,23 +118,28 @@
   .header .top-nav .social-nav {
     position: relative;
     float: right;
-    overflow: hidden;
-    z-index: 1;
   }
   .header .top-nav .social-nav a .fa {
     font-size: 23px;
+    font-size: 1.4375rem;
   }
   .header .top-nav .social-nav a .fa.fa-mobile {
     font-size: 27px;
+    font-size: 1.6875rem;
   }
   .header .top-nav .social-nav .globle-search {
     position: absolute;
-    right: -182px;
+    right: 40px;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
+    width: 0px;
+    overflow: hidden;
+  }
+  .header .top-nav .social-nav .globle-search .search-text {
+    width: 100%;
   }
   .header .navigation {
     zoom: 1;
@@ -153,7 +162,6 @@
     float: left;
   }
   .header .navigation .menu li a {
-    font-size: 14px;
     color: #e0e0e0;
     text-transform: uppercase;
     font-weight: 500;
@@ -161,6 +169,8 @@
     border-right: 1px solid #680101;
     border-top: none;
     height: 37px;
+    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 37px;
   }
 
@@ -171,6 +181,7 @@
   }
   footer .footer-top .footer-social-link .fa {
     font-size: 24px;
+    font-size: 1.5rem;
     vertical-align: middle;
   }
   footer .footer-top .footer-expand-icon {
