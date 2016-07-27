@@ -5560,3 +5560,6 @@ div.node{
         left: 600px;
     }
 }
+#edit-preview-changes{
+    @extend .btn;
+}
