@@ -265,17 +265,6 @@ function itg_common_cancel_button($form, &$form_state) {
 }
 
 /**
- * Implements hook_views_pre_render
- * {@inheritdoc}
- */
-function itg_common_views_pre_render(&$view) {
-  if ($view->name == "byline_list") {
-    $header_content = l(t('Create Byline'), 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
-    $view->attachment_before = $header_content;
-  }
-}
-
-/**
  * Implements hook_form_FORMID_alter().
  * {@inheritdoc}
  */

@@ -1,0 +1,8 @@
+name = ITG Reporter
+description = "ITG Reporter Module"
+core = 7.x
+package = ITG
+
+files[] = itg_reporter.module
+
+
