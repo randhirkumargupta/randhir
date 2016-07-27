@@ -1075,8 +1075,38 @@ footer{
     }
 }
 /*End CSS section story Home page*/
+/*Start CSS trending-videos Home  page*/
 .trending-videos{
     border: 1px solid $border-color;
     padding-top: 10px;
-    @include listing-with-image(left);
+    @include listing-with-image(right,10px,pic,title);
 }
+/*End CSS trending-videos Home  page*/
+/*Start Search page css*/
+.view-front-end-global-search{
+    .view-content{        
+        @include listing-with-image(left,10px,search-pic,search-detail);
+        li{
+            padding: 25px 0;
+        }
+        .search-detail{
+            h2{
+                @include font(20px,22px);
+                margin-bottom:10px;
+                a{
+                  @include font(20px,null,$itg-font-medium);   
+                }
+            }            
+        }
+        .other-info{
+            @include itg-font($itg-roboto);
+            @include font(12px);
+            color: #8f8f8f;
+            margin-top: 15px;
+        }
+    }
+    .item-list{
+        @include pager;
+    }
+}
+/*End Search page css*/
