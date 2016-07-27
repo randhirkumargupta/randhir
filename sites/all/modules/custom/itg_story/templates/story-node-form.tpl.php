@@ -74,6 +74,11 @@
     <?php print drupal_render($form['field_story_template_factoids']); ?>
     <?php print drupal_render($form['field_story_template_buzz']); ?>
 </div>
+<div id="Highlights">
+    <h2 class="story-title"><?php print t('Highlights'); ?></h2>
+    <?php print drupal_render($form['field_story_highlights']); ?>
+</div>
+
 <div id="ExpertChunk">
     <h2 class="story-title"><?php print t('Expert Chunk'); ?></h2>  
 
