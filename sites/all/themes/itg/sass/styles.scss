@@ -1108,5 +1108,18 @@ footer{
     .item-list{
         @include pager;
     }
+    .attachment {
+        .count{
+            @include font(30px,22px,$itg-font-medium);            
+            color: #737373;
+            @include itg-font($itg-roboto);            
+            padding-bottom: 20px;
+            display: block;
+            border-bottom: 1px solid $border-color;
+            span{
+                color: $red-color;
+            }
+        }
+    }
 }
 /*End Search page css*/
