@@ -55,7 +55,8 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['wrapper_class'] = 'itg-search-list';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -81,12 +82,17 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['field'] = 'sm_thumb_medium_field_story_extra_large_image';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_type'] = '0';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_class'] = 'search-pic';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_default_classes'] = FALSE;
   /* Field: Apache Solr: label */
   $handler->display->display_options['fields']['label']['id'] = 'label';
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['label']['field'] = 'label';
   $handler->display->display_options['fields']['label']['label'] = '';
+  $handler->display->display_options['fields']['label']['exclude'] = TRUE;
   $handler->display->display_options['fields']['label']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['label']['alter']['text'] = '<a href="[url] " target="_blank">[label]</a>';
   $handler->display->display_options['fields']['label']['element_label_colon'] = FALSE;
@@ -97,6 +103,7 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['content']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['content']['field'] = 'content';
   $handler->display->display_options['fields']['content']['label'] = '';
+  $handler->display->display_options['fields']['content']['exclude'] = TRUE;
   $handler->display->display_options['fields']['content']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['content']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['content']['element_wrapper_type'] = 'div';
@@ -106,6 +113,7 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['ds_changed']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['ds_changed']['field'] = 'ds_changed';
   $handler->display->display_options['fields']['ds_changed']['label'] = '';
+  $handler->display->display_options['fields']['ds_changed']['exclude'] = TRUE;
   $handler->display->display_options['fields']['ds_changed']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['ds_changed']['date_format'] = 'long';
   $handler->display->display_options['fields']['ds_changed']['second_date_format'] = 'long';
@@ -115,6 +123,17 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['hash']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['hash']['field'] = 'hash';
   $handler->display->display_options['fields']['hash']['exclude'] = TRUE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="search-detail">
+<h2>[label]</h2>
+<p>[content]</p>
+<div class="other-info">[ds_changed]</div>
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Apache Solr: ds_changed */
   $handler->display->display_options['sorts']['ds_changed']['id'] = 'ds_changed';
