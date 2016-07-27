@@ -1918,7 +1918,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   @extend .itg-add-another-item;
 }
 [id*="field-erf-registration-fee-values"], 
-[id*="field-mega-review-review-values"]{
+[id*="field-mega-review-review-values"],
+[id*="field-task-task-idea-values"]{
   thead{
     @extend .hide;
   }
@@ -5554,11 +5555,8 @@ div.node{
     }
   }
 }
-#field-story-highlights-values {
-    thead{
-        display: none;
-    }
-    .cancel {
-        
+.form-type-managed-file{
+    .form-managed-file + div.description{
+        left: 600px;
     }
 }
