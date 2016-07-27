@@ -552,13 +552,13 @@ function create_setion_widgets($section_id) {
  */
 function get_itg_footer_menu() {
   
-  $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+  $data['publications_footer'] = menu_tree('menu-itg-publications-menu-foote');
   $data['distribution_footer'] = menu_tree('menu-itg-distribution-menu-foote');
   $data['education_footer'] = menu_tree('menu-itg-education-menu-footer');
   $data['events_footer'] = menu_tree('menu-itg-events-menu-footer');
   $data['music_footer'] = menu_tree('menu-itg-music-menu-footer');
   $data['printing_footer'] = menu_tree('menu-itg-printing-menu-footer');
-  $data['radio_footer'] = menu_tree(' menu-itg-radio-menu-footer');
+  $data['radio_footer'] = menu_tree('menu-itg-radio-menu-footer');
   $data['shopping_footer'] = menu_tree('menu-itg-shopping-menu-footer');
   $data['syndication_footer'] = menu_tree('menu-itg-syndication-menu-footer');
   $data['television_footer'] = menu_tree('menu-itg-television-menu-footer');
