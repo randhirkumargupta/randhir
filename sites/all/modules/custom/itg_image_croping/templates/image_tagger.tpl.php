@@ -336,7 +336,8 @@
             parent.jQuery('[name="' + field_name + '[und][0][fid]"]').val(image_fiedlid);
 
             parent.jQuery("body").find("input[name='" + field_name + "[und][0][filefield_itg_image_repository][button]").trigger('mousedown');
-            parent.jQuery.colorbox.close()
+            parent.jQuery.colorbox.remove();
+            jQuery.colorbox.close();
         })
 
     });
