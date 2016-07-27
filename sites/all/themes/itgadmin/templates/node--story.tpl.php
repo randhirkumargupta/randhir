@@ -233,7 +233,7 @@
             if (!empty($highlight)):
               ?>
               <div class="expert-details content-box">
-                  <h2><?php print t('Highlights'); ?></h2>
+                  <h2><?php print t('Brief case'); ?></h2>
                   <div class="content-details">
                       <?php
                       $h_count = 1;
