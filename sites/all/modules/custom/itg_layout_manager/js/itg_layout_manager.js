@@ -60,7 +60,7 @@
                             $('.itg-ajax-loader').show();
                           },
                           success: function(data) {
-                            window.location.href = base_url + "/itg-layout-manager/home";                            
+                            window.location.href = base_url + "/itg-layout-manager/home?section=home_page&template_name=page--front";                            
                           }
                     });
                });
@@ -77,7 +77,7 @@
                             $('.itg-ajax-loader').show();
                           },
                           success: function(data) {                              
-                            window.location.href = base_url + "/itg-layout-manager/home"; 
+                            window.location.href = base_url + "/itg-layout-manager/home?section=home_page&template_name=page--front"; 
                           }
                     });
                });

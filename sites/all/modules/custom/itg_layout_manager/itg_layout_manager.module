@@ -10,13 +10,15 @@ function itg_layout_manager_menu() {
       'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_layout_manager.inc',
-  );  
+  );
+  
   $items['insert-layout-setting-ajax'] = array(      
       'page callback' => 'insert_layout_setting_ajax',
       'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_manager.inc',
+      'file' => 'includes/itg_layout_ajax.inc',
   );
+  
   $items['itg-layout-list'] = array(      
       'page callback' => 'itg_layout_list',
       'access arguments' => array('access itg story'),
@@ -28,7 +30,7 @@ function itg_layout_manager_menu() {
       'page callback' => 'section_widgets_ajax',
       'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_manager.inc',
+      'file' => 'includes/itg_layout_ajax.inc',
   );
   
   // Autocomplete callback for category name
@@ -36,7 +38,7 @@ function itg_layout_manager_menu() {
     'page callback' => 'itg_category_autocomplete_list',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_manager.inc',
+    'file' => 'includes/itg_layout_autocomplete.inc',
   );
   
   return $items;
@@ -96,18 +98,7 @@ function itg_layout_manager_block_view($delta = '') {
       break;
     
     case 'footer_block':            
-      $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
-      $data['distribution_footer'] = menu_tree('menu-itg-distribution-menu-foote');
-      $data['education_footer'] = menu_tree('menu-itg-education-menu-footer');
-      $data['events_footer'] = menu_tree('menu-itg-events-menu-footer');
-      $data['music_footer'] = menu_tree('menu-itg-music-menu-footer');
-      $data['printing_footer'] = menu_tree('menu-itg-printing-menu-footer');
-      $data['radio_footer'] = menu_tree(' menu-itg-radio-menu-footer');
-      $data['shopping_footer'] = menu_tree('menu-itg-shopping-menu-footer');
-      $data['syndication_footer'] = menu_tree('menu-itg-syndication-menu-footer');
-      $data['television_footer'] = menu_tree('menu-itg-television-menu-footer');
-      $data['useful_footer'] = menu_tree('menu-itg-useful-menu-footer');
-      $data['welfare_footer'] = menu_tree('menu-itg-welfare-menu-footer');
+      $data = get_itg_footer_menu();
       $block['content'] = theme('footer_block', array('data' => $data));
       break;
           
@@ -204,7 +195,7 @@ function get_template_name($tpl_dir) {
   
   $scanned_directory = array_diff(scandir($dir, 1), array('..', '.'));
   
-  $data = array("_none" => "-- Template --");
+  $data = array("" => "-- Template --");
   
   foreach ($scanned_directory as $key => $val) {
     $tpl = substr($val,0,-8);
@@ -234,7 +225,7 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
   
   if ($arg1 == 'section') {
-    $op = array("_none" => "-- Section --");
+    $op = array("" => "-- Section --");
     foreach ($tax as $key => $val) {
       $op[$val->name] = $val->name;
     }
@@ -428,12 +419,14 @@ function itg_layout_manager_filter_form($form, &$form_state) {
        '#required' => TRUE,
        '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
   );
+  
   $form['items_per_page'] = array(
     '#type' => 'select',
     '#title' => 'Items per page',
     '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
     '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
   );
+  
   $form['submit'] = array(
     '#value' => 'Apply',
     '#type' => 'submit',
@@ -441,6 +434,7 @@ function itg_layout_manager_filter_form($form, &$form_state) {
     '#prefix' => '<div class = "layout-filter-btn">',
     '#suffix' => '<a class="layout-reset" href="' . base_path() . 'itg-layout-list">Reset</a></div>',
   );
+  
   return $form;
 }
 
@@ -451,12 +445,12 @@ function itg_layout_manager_filter_form($form, &$form_state) {
 function itg_layout_manager_filter_form_submit($form, &$form_state) {
   $form_state['redirect'] = array(
     'itg-layout-list',
-    array(
-      'query' => array(
-        'title' => $form_state['values']['section'],
-        'items_per_page' => $form_state['values']['items_per_page'],
+      array(
+        'query' => array(
+          'title' => $form_state['values']['section'],
+          'items_per_page' => $form_state['values']['items_per_page'],
+        ),
       ),
-    ),
   );
 }
 
@@ -490,15 +484,7 @@ function layout_section_widgets_search_form($form, &$form_state) {
  */
 function display_section_widgets_list($section_name, $template_name) {
   
-  global $base_url;
-  
-  $settings['base_url'] = $base_url;  
-  
-  drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
-  
-  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1));
-  
-  
+  global $base_url;  
   
   // select query    
   $itg_query = db_select('itg_section_widgets_list', 'layout_tpl');
@@ -519,6 +505,7 @@ function display_section_widgets_list($section_name, $template_name) {
   }
   
   $content .= '</ul>';
+  
   return $content;
 }
 
@@ -533,14 +520,18 @@ function get_nid_of_widgets_list() {
   $query->fields('n', array('nid'));  
   $query->condition('type', 'itg_template_widgets');        
   $query->orderBy('n.nid', 'DESC')->range(0,1);//LIMIT to 1 records
-
   $nid = $query->execute()->fetchField();
   
   $node = node_load($nid);
   $widget_array = $node->field_itg_widget_name[LANGUAGE_NONE];
+  
   return $widget_array;
 }
 
+/**
+ * Get itg setion widgets 
+ * @return array
+ */
 function create_setion_widgets($section_id) {
   module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
   // value is hardcoded need to be change for dyanamic functionality
@@ -549,6 +540,30 @@ function create_setion_widgets($section_id) {
   // view name which is stored in draggableviews_structure table
   $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
   $block['subject'] = t('Section wise ordering from custom table');
+  
   $data = itg_widget_section_wise_ordering_from_custom_table($info);
+  
   return theme("section_wise_ordering", array("data" => $data));
+}
+
+/**
+ * Get itg footer menu 
+ * @return array
+ */
+function get_itg_footer_menu() {
+  
+  $data['publications_footer'] = menu_tree('menu-itg-publications-manu-foote');
+  $data['distribution_footer'] = menu_tree('menu-itg-distribution-menu-foote');
+  $data['education_footer'] = menu_tree('menu-itg-education-menu-footer');
+  $data['events_footer'] = menu_tree('menu-itg-events-menu-footer');
+  $data['music_footer'] = menu_tree('menu-itg-music-menu-footer');
+  $data['printing_footer'] = menu_tree('menu-itg-printing-menu-footer');
+  $data['radio_footer'] = menu_tree(' menu-itg-radio-menu-footer');
+  $data['shopping_footer'] = menu_tree('menu-itg-shopping-menu-footer');
+  $data['syndication_footer'] = menu_tree('menu-itg-syndication-menu-footer');
+  $data['television_footer'] = menu_tree('menu-itg-television-menu-footer');
+  $data['useful_footer'] = menu_tree('menu-itg-useful-menu-footer');
+  $data['welfare_footer'] = menu_tree('menu-itg-welfare-menu-footer');
+  $data['footer-top-menu'] = menu_tree('menu-itg-main-menu-footer');
+  return $data;
 }
