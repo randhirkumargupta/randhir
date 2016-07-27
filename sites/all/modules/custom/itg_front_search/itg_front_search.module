@@ -136,7 +136,7 @@ function itg_front_search_views_pre_render(&$view) {
     }
 
     if (!empty($_GET['keyword'])) {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp" ' . $_GET['keyword'] . ' "</span>';
+      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $_GET['keyword'] . ' "</span></span>';
       $view->attachment_before = $front_search;
     }
     else {
