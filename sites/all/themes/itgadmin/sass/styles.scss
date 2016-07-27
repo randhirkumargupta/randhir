@@ -5214,6 +5214,16 @@ div.node{
         background: #1fb5ad;
         border-radius: 50%;
       }
+      .dz-remove{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: url('../images/cross_small.png') center center no-repeat;
+        text-indent: -9999px;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+      }
     }
   }
   #loader-data {
@@ -5471,6 +5481,16 @@ div.node{
     top: 0;
     cursor: pointer;
   }
+  .edit{
+    background: url('../images/edit-icon.png') center center no-repeat;;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    width: 20px;
+    z-index: 999;
+    text-indent: -9999px;
+  }
 }
 
 .templates-widgets{
@@ -5524,4 +5544,12 @@ div.node{
   right: 0;
   top: 0;
   max-width: 50px;
+}
+[id*="loyalty-points-configuration-form"]{
+  @extend .node-form;
+  .form-item{
+    > label{
+      width: 250px;
+    }
+  }
 }
