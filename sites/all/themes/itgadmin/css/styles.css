@@ -5353,7 +5353,7 @@ div.node #comments h2 {
   width: 156px;
 }
 
-.ajax-loader {
+.itg-ajax-loader {
   background: rgba(0, 0, 0, 0.7);
   position: fixed;
   left: 0;
@@ -5363,7 +5363,7 @@ div.node #comments h2 {
   z-index: 999999999;
   display: none;
 }
-.ajax-loader img {
+.itg-ajax-loader img {
   position: absolute;
   margin: auto;
   left: 0;
@@ -5474,21 +5474,21 @@ div.node #comments h2 {
   cursor: pointer;
 }
 
-#templates-widgets {
+.templates-widgets {
   max-height: 127px;
   overflow-y: auto;
 }
-#templates-widgets li {
+.templates-widgets li {
   padding: 10px;
   background-color: #fff;
   color: #2f2f2f;
   position: relative;
   cursor: all-scroll;
 }
-#templates-widgets li + li {
+.templates-widgets li + li {
   margin-top: 1px;
 }
-#templates-widgets .layout-section-delete {
+.templates-widgets .layout-section-delete {
   bottom: 0;
   color: red;
   height: 20px;
@@ -5516,4 +5516,14 @@ div.node #comments h2 {
 
 #itg-layout-manager-page-setting-form #edit-submit {
   margin-top: 38px;
+}
+
+.widget-loader {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  max-width: 50px;
 }
