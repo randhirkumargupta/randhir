@@ -195,7 +195,7 @@ $root-font-size: 16px;
             @include float($img-position);
             @if (($img-position == left)) {
                 margin-right:10px;
-            }else{
+            } else{
                 margin-left:10px;
             }
         }
