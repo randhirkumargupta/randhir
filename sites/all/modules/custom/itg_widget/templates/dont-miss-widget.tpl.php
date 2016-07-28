@@ -11,7 +11,7 @@
                 <?php }
                 else {
                     ?>
-                    <div class="dm-pic">  <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" /> </div>
+                    <div class="dm-pic">  <img width="100" height="75" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" /> </div>
                     <?php } ?>
                 <div class="dm-detail">
                     <?php if (!empty($node_data->title)) : ?>    
