@@ -21,6 +21,7 @@
         <input type="hidden" id="field_name" value="<?php echo $_GET['field_name']; ?>" >
             <input type="hidden" id="image_height" value="<?php echo $_GET['height']; ?>" >
                 <input type="hidden" id="image_width" value="<?php echo $_GET['width']; ?>" >
+                  <input type="hidden" id="btn_name" value="<?php echo $_GET['btn_name']; ?>" >
 
                     <script type="text/javascript">
                         var fieldname = '<?php echo $_GET['field_name']; ?>';
@@ -99,7 +100,8 @@
 
                         Dropzone.autoDiscover = false;
                         jQuery("#itg-image-repository-upload-form").dropzone({
-                            addRemoveLinks: true, maxFiles: 1, removedfile: function(file) {
+                           // addRemoveLinks: true,
+                            maxFiles: 1, removedfile: function(file) {
                                 var _ref;
                                 if (file.previewElement.classList.contains('dz-success'))
                                 {

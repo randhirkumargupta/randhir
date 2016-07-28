@@ -6,7 +6,3 @@ core = 7.x
 files[] = itg_image_repository.module
 scripts[]=js/jquery.cropit.js
 scripts[]=js/imagecroping.js
-scripts[]=js/jquery.colorbox.js
-stylesheets[all][] = css/colorbox.css
-
-
