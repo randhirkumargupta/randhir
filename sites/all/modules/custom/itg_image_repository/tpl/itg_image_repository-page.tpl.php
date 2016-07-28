@@ -51,15 +51,15 @@
                             }
 
                         })
-                        
-                         jQuery('body').on('click', '.dz-remove', function() {
+
+                        jQuery('body').on('click', '.dz-remove', function() {
                             jQuery('#file-preview').html('');
 
                             var imageId = jQuery(this).siblings('.dz-image').children('img').attr('imageid');
-                           alert(imageId);
+                            alert(imageId);
 
                         })
-                        
+
 
 
                         // This code use for image search and crop
@@ -100,19 +100,22 @@
                         Dropzone.autoDiscover = false;
                         jQuery("#itg-image-repository-upload-form").dropzone({
                             addRemoveLinks: true, maxFiles: 1, removedfile: function(file) {
-        var _ref;
-        if(file.previewElement.classList.contains('dz-success'))
-        {
-                   jQuery('#file-preview').html('');
-        }
-        if (file.previewElement) {
-          if ((_ref = file.previewElement) != null) {
-            _ref.parentNode.removeChild(file.previewElement);
+                                var _ref;
+                                if (file.previewElement.classList.contains('dz-success'))
+                                {
+                                    jQuery('#file-preview').html('');
+                                }
+                                if (file.previewElement) {
+                                    if ((_ref = file.previewElement) != null) {
+                                        _ref.parentNode.removeChild(file.previewElement);
 
-          }
-        }
-        return this._updateMaxFilesReachedClass();
-      },
+                                    }
+                                }
+                                return this._updateMaxFilesReachedClass();
+                            }, maxfilesexceeded: function(file) {
+                                this.removeAllFiles();
+                                this.addFile(file);
+                            },
                             init: function() {
                                 this.on("success", function(file, responseText) {
                                     var obj = jQuery.parseJSON(responseText);
