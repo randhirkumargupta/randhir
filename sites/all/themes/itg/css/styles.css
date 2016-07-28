@@ -1024,6 +1024,7 @@ footer .footer-bottom .cell {
   padding: 0 15px;
   width: 50%;
   margin-bottom: 20px;
+  float: left;
 }
 footer .footer-bottom .cell ul {
   margin-bottom: 20px;
@@ -1035,6 +1036,9 @@ footer .footer-bottom .cell ul .more-link {
   color: #ffc106;
   font-size: 12px;
   cursor: pointer;
+}
+footer .footer-bottom .cell:nth-child(2n+1) {
+  clear: left;
 }
 footer .footer-copyright {
   color: #a6a6a6;
