@@ -137,8 +137,10 @@
         .footer-bottom{
             .cell{
                 @include calculate-width(6);
-                @include float(left);
                 margin-bottom: 0;
+                &:nth-child(2n+1) {
+                    clear: none;
+                }
             }
             /*.first-cell{
                 width: 30%;
