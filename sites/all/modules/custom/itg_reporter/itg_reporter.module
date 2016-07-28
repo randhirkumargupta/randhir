@@ -37,6 +37,12 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
   if ($form_id == 'reporter_node_form') {
+    
+    $form['field_story_category']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_celebrity_pro_occupation[und]"]' => array('value' => '400'),
+      )
+    );
 
     $form['#after_build'][] = 'itg_reporter_after_build';
 
@@ -58,6 +64,12 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
 function itg_reporter_after_build($form, &$form_state) {
 
   global $user, $base_url;
+
+  // get anchor id based on category name
+
+  $tem_tid = taxonomy_get_term_by_name('anchor', NULL);
+  $tid = array_pop($tem_tid)->tid;
+  
   // alter label name
   $form['title']['#title'] = t('Name');
   // update automatic alias name
@@ -68,6 +80,7 @@ function itg_reporter_after_build($form, &$form_state) {
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
+  $settings['anchor'] = $tid;
   $settings['ntype'] = $form['type']['#value'];
   drupal_add_js(array('itg_reporter' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js');

@@ -15,6 +15,7 @@ features[field_instance][] = node-reporter-body
 features[field_instance][] = node-reporter-field_celebrity_pro_occupation
 features[field_instance][] = node-reporter-field_reporter_email_id
 features[field_instance][] = node-reporter-field_reporter_twitter_handle
+features[field_instance][] = node-reporter-field_story_category
 features[field_instance][] = node-reporter-field_story_expert_name
 features[field_instance][] = node-reporter-field_story_extra_large_image
 features[node][] = reporter
