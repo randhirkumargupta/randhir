@@ -45,12 +45,120 @@ function itg_loyalty_reward_menu() {
  */
 function itg_loyalty_reward_form_alter(&$form, &$form_state, $form_id) {
 
-  // Alter for "loyalty_points_setting_form"
+  // Alter for "loyalty_points_configuration_form"
   if ($form_id == 'loyalty_points_configuration_form') {
-    
-   // Set title of this form 
    drupal_set_title(t('Loyalty Points Configuration Form:')); 
-   
    $form['actions']['submit']['#value'] = 'Save';
   }
+
+  // Alter for "loyalty_and_rewards_node_form"
+  if ($form_id == 'loyalty_and_rewards_node_form') {
+    
+    drupal_set_title(t('Add New Item:'));
+    unset($form['#metatags']);
+    unset($form['actions']['preview']);
+    
+    // Add cancel button
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'lrp-manage-items', array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+    );
+    $form['actions']['submit']['#submit'][] = 'itg_loyalty_reward_submit_handler_for_redirect';
+    $form['#after_build'][] = 'itg_loyalty_reward_form_after_build';
+  }
+}
+
+/**
+ * Custom submit callback for alter message after operation.
+ */
+function itg_loyalty_reward_submit_handler_for_redirect($form, &$form_state) {
+  
+  // Unset drupal default messages
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+
+  // Unset destination
+  unset($_GET['destination']);
+
+  // Check for edit and add node
+  if (arg(2) == 'edit') {
+    $op = 'updated successfully';
+  }
+  else {
+    $op = 'added successfully';
+  }
+  
+  $form_state['redirect'] = 'lrp-manage-items';
+  drupal_set_message(t('Item <strong>@ideatitle</strong> has been @operation.', array('@ideatitle' => $form_state['node']->title, '@operation' => $op)));
+}
+
+/**
+ * Implements hook_form_after_build
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_form_after_build($form, &$form_state) {
+  global $user, $base_url;
+
+  //Extract type of node
+  if (arg(0) == 'node') {
+    if (arg(1) == 'add') {
+      $type = arg(2);
+      $nid = '';
+    }
+    else {
+      $node = node_load(arg(1));
+      $type = $node->type;
+      $nid = arg(1);
+    }
+  }
+
+  //Array used in itg_print_team.js
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  $settings['type'] = ucfirst($type);
+  $settings['nid'] = $nid;
+
+  drupal_add_js(array('itg_loyalty_reward' => array('settings' => $settings)), array('type' => 'setting'));
+
+  //Add JS for itg_print_team
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward.js', array('weight' => 1));
+
+  //Unset SEF URL field
+  $form['path']['#access'] = FALSE;
+
+  //Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+  return $form;
+}
+
+/**
+ * Implements hook_views_pre_render
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_views_pre_render(&$view) {
+  
+  // Add "Add new Item" button on listing page of items
+  if ($view->name == "lrp_manage_items") {
+    $header_content_loyalty = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_loyalty .= l(t('Add new Item'), 'node/add/loyalty-and-rewards');
+    $view->attachment_before = $header_content_loyalty;
+  }
+}
+
+/**
+ * Implements hook_views_exposed_form_alter
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
+   if ($form['#id'] == 'views-exposed-form-lrp-manage-items-page') {
+     
+     // Call function autocomplete to show matching titles
+     $form['title']['#autocomplete_path'] = 'content-title-list/loyalty_and_rewards/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Product Title'));     
+   }
 }
