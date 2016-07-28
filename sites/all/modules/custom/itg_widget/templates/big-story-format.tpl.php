@@ -5,11 +5,13 @@
         <div class="big-story-col-1">
             <?php if (!empty($node->field_story_extra_large_image['und'][0]['uri'])) { ?>
                 <img src="<?php print image_style_url("home_page_feature_large", $node->field_story_extra_large_image['und'][0]['uri']); ?>" />
+                <div class="story-tag">Big Story</div>
             <?php
             }
             else {
                 ?>
                 <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                <div class="story-tag">Big Story</div>
 <?php } ?>
         </div>
         <div class="big-story-col-2">

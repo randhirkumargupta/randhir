@@ -102,6 +102,13 @@ global $theme;
     }
 ?>
 <div class="itg-layout-container <?php echo $itg_class; ?>">
+    <?php if(isset($widget_data['big_story'])) : ?>
+    <div class="row">
+        <div class="col-md-12">
+            <?php print $widget_data['big_story']; ?>
+        </div>    
+    </div>
+    <?php endif; ?>
 
     <div class="row">
         <div class="top-block mt-50">
@@ -158,7 +165,7 @@ global $theme;
             </div>
 
             <div class="top-colum-3">
-                <div class="itg-widget-parent">
+                <div class="itg-widget-parent m-bottom40">
                     <div class="itg-widget">
                         <div class="droppable" id="itg-block-4">                          
                             <?php print $widget_data['itg-block-4']['widget']; ?>

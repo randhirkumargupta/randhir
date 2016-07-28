@@ -14,7 +14,7 @@
                 <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
             <?php } ?>
             <?php if (!empty($entity->title)) : ?>
-                <a href="<?php print drupal_get_path_alias("node/$entity->nid"); ?>"><?php print $entity->title; ?></a>
+                <a class="title" href="<?php print drupal_get_path_alias("node/$entity->nid"); ?>"><?php print $entity->title; ?></a>
         <?php endif; ?>
         </li>
 <?php } ?>

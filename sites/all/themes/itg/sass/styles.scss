@@ -116,6 +116,9 @@ img{
 .m-top{
     margin-top: 50px;
 }
+.m-bottom40{
+    margin-bottom: 40px;
+}
 .btn {
     background-color: #337ab7;
     border: 1px solid #2e6da4;
@@ -976,6 +979,7 @@ footer{
     color: $white-color;
     padding:10px;
     background: $black-bg;
+    margin-bottom: 50px;
     @include itg-font($itg-roboto);
     .big-story-col-1, .big-story-col-2{        
         padding:0 15px;
@@ -1090,7 +1094,7 @@ footer{
 .trending-videos{
     border: 1px solid $border-color;
     padding-top: 10px;
-    @include listing-with-image(right,10px,pic,title);
+    @include listing-with-image(left,10px,pic,title);
 }
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
