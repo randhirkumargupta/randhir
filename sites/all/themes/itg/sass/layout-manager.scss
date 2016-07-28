@@ -103,6 +103,32 @@ a{
     }
 }
 /*End CSS section story Home page*/
+/*Start Dont miss Home page css*/
+.dont-miss{
+    background: #f3f3f3;
+    padding: 30px 10px 0px 10px;
+    ul{
+        @include clearfix;
+        @include listing-with-image(left,15px,dm-pic,dm-detail);
+        .dont-miss-listing{            
+            @include calculate-width(1);
+            padding: 0 0px 20px 0;
+            border:none;
+            .dm-detail{
+                h4{
+                    color: #048cb9;
+                    margin-bottom: 5px;
+                    text-transform: uppercase;
+                }
+                p{
+                    @include font(14px,18px);
+                    color: #333;
+                }
+            }
+        }
+    }
+}
+/*End Dont miss Home page css*/
 
 @media only screen and (min-width:768px){
     
@@ -177,4 +203,19 @@ a{
         }
     }
 /*End CSS Featured-news Home Page*/
+/*Start Dont miss Home page css*/
+.dont-miss{    
+    padding: 30px 0px 0px 20px;
+    ul{
+        .dont-miss-listing{
+            @include float(left);
+            @include calculate-width(2);
+            padding: 0 20px 25px 0;
+            &:nth-child(2n+1){
+                clear:left;
+            }
+        }
+    }
+}
+/*End Dont miss Home page css*/
 }

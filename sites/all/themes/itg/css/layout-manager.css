@@ -117,6 +117,7 @@ a {
 
 .tab-data {
   border: 1px solid #e4e4e4;
+  height: 635px;
   overflow-y: auto;
 }
 .tab-data.tab-data-2 {
@@ -217,6 +218,60 @@ a {
 }
 
 /*End CSS section story Home page*/
+/*Start Dont miss Home page css*/
+.dont-miss {
+  background: #f3f3f3;
+  padding: 30px 10px 0px 10px;
+}
+.dont-miss ul {
+  zoom: 1;
+}
+.dont-miss ul:before, .dont-miss ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.dont-miss ul:after {
+  clear: both;
+}
+.dont-miss ul li {
+  overflow: hidden;
+  padding: 10px;
+}
+.dont-miss ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.dont-miss ul li .dm-pic {
+  float: left;
+  margin-right: 15px;
+}
+.dont-miss ul li .dm-detail {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.dont-miss ul .dont-miss-listing {
+  width: 100%;
+  padding: 0 0px 20px 0;
+  border: none;
+}
+.dont-miss ul .dont-miss-listing .dm-detail h4 {
+  color: #048cb9;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.dont-miss ul .dont-miss-listing .dm-detail p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  color: #333;
+}
+
+/*End Dont miss Home page css*/
 @media only screen and (min-width: 768px) {
   /*Start CSS itg-layout-container */
   .itg-layout-container .itg-widget, .itg-layout-container .itg-widget-child {
@@ -229,13 +284,13 @@ a {
     width: 214px;
   }
   .itg-layout-container .top-colum-1 .droppable {
-    min-height: 635px;
+    height: 635px;
   }
   .itg-layout-container .top-colum-2 .droppable {
-    min-height: 671px;
+    height: 671px;
   }
   .itg-layout-container .top-colum-3 .droppable {
-    min-height: 308px;
+    height: 308px;
   }
   .itg-layout-container .top-colum-3 .itg-widget:first-child {
     margin-bottom: 20px;
@@ -244,12 +299,13 @@ a {
     background-color: #f1f1f1;
   }
   .itg-layout-container .itg-common-section .droppable {
-    min-height: 382px;
+    height: 382px;
   }
 
   /*Start CSS Top Block Grid Home Page*/
   .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
     padding: 0 15px;
+    min-height: 672px;
   }
   .top-block .top-colum-1 {
     float: left;
@@ -276,4 +332,18 @@ a {
   }
 
   /*End CSS Featured-news Home Page*/
+  /*Start Dont miss Home page css*/
+  .dont-miss {
+    padding: 30px 0px 0px 20px;
+  }
+  .dont-miss ul .dont-miss-listing {
+    float: left;
+    width: 50%;
+    padding: 0 20px 25px 0;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*End Dont miss Home page css*/
 }

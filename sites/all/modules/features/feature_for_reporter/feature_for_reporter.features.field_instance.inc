@@ -180,6 +180,43 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-reporter-field_story_category'.
+  $field_instances['node-reporter-field_story_category'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_story_category',
+    'label' => 'Section',
+    'required' => FALSE,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'hs_taxonomy',
+      'settings' => array(),
+      'type' => 'taxonomy_hs',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-reporter-field_story_expert_name'.
   $field_instances['node-reporter-field_story_expert_name'] = array(
     'bundle' => 'reporter',
@@ -305,6 +342,7 @@ function feature_for_reporter_field_default_field_instances() {
   t('Facebook page');
   t('Occupation');
   t('Picture');
+  t('Section');
   t('Twitter Handle');
 
   return $field_instances;

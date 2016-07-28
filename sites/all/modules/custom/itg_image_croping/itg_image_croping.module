@@ -81,8 +81,11 @@ function itg_image_croping_ajax_make_ajax() {
 
     $image_id = $_POST['imageId'];
     $field_name = $_POST['field_id'];
+    if($_POST['img_height'] && $_POST['img_width'])
+    {
     $image_height = trim($_POST['img_height']);
     $image_width = trim($_POST['img_width']);
+    }
     $file = file_load($image_id);
     if (empty($file)) {
         drupal_set_message(t('This image is not valid!'));
