@@ -7,35 +7,45 @@
     Drupal.behaviors.itg_related = {
         attach: function (context, settings) {
 
-   var custom_field_val = getParameterByName('custom_drp');
-      
-   
-   $('#edit-custom-drp').change(function() {
+            var custom_field_val = getParameterByName('custom_drp');
+            $("#edit-submit-front-end-global-search").hide();
+            $("#edit-reset").hide();
+
+            $('#edit-custom-drp').change(function () {
                 var datetypevalue = $('#edit-custom-drp').val();
-                // alert(contenttypevalue);
+
                 if (datetypevalue == 'calender') { // Image question
-                    $(".ds_min").show();
-                    $(".ds_max").show();
+                    $(".caln").show();
+                    $(".caln").show();
                 }
                 else
                 {
-                    $(".ds_min").hide();
-                    $(".ds_max").hide();
+                    $(".caln").hide();
+                    $(".caln").hide();
                     $('#edit-ds-changed-datepicker-popup-0').val("");
                     $('#edit-ds-changed-max-datepicker-popup-0').val("");
-                    
+
                 }
-                
-               
+
+
             });
-            
-            if(custom_field_val != 'calender') {
-                    $(".ds_min").hide();
-                    $(".ds_max").hide();
-                    $('#edit-ds-changed-datepicker-popup-0').val("");
-                    $('#edit-ds-changed-max-datepicker-popup-0').val("");
+
+            if (custom_field_val != 'calender') {
+                $(".caln").hide();
+                $(".caln").hide();
+                $('#edit-ds-changed-datepicker-popup-0').val("");
+                $('#edit-ds-changed-max-datepicker-popup-0').val("");
             }
-            
+
+            // trigger submit button
+            $('#search_button').click(function () {
+                $('#edit-submit-front-end-global-search').trigger('click');
+            });
+
+            // trigger reset button
+            $('#reset_button').click(function () {
+                $('#edit-reset').trigger('click');
+            });
         }
 
     };
@@ -43,11 +53,14 @@
 
 
 function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
+    if (!url)
+        url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
+            results = regex.exec(url);
+    if (!results)
+        return null;
+    if (!results[2])
+        return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
