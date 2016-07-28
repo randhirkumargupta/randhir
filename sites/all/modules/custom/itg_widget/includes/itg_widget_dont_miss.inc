@@ -17,7 +17,7 @@ function save_dont_miss_widget_data($dont_miss_content) {
     $widget_name = _get_widget_name(' ', "dont_miss_content");
     if (count($selected_node)) {
         foreach ($selected_node as $node) {
-            $node_load_data = node_load($node);
+            $node_load_data = node_load($node);       
             $nid = db_insert('itg_widget_order')
                     ->fields(array(
                         'nid' => $node,
@@ -43,9 +43,9 @@ function itg_widget_dont_miss_ordering_data($info) {
     if (!empty($info)) {
         $widget_name = $info['widget_name'];
         $result = db_select('itg_widget_order', 'iwo')
-                        ->fields('iwo', array('nid','extra','weight'))
+                        ->fields('iwo', array('nid', 'extra', 'weight'))
                         ->condition('iwo.widget', $widget_name)
-                        ->orderBy('iwo.weight','ASC')
+                        ->orderBy('iwo.weight', 'ASC')
                         ->range(0, 4)
                         ->execute()->fetchAll(PDO::FETCH_ASSOC);
         $data = $result;

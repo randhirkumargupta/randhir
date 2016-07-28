@@ -12,7 +12,10 @@ if (!empty($data)) {
                 <a href="#" title="">
                     <img src="<?php print image_style_url("home_page_feature_large", $entity_data[0]->field_story_extra_large_image['und'][0]['uri']); ?>" />
                 </a>
+            <?php else : ?>
+                <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
             <?php endif; ?>
+
             <?php if (!empty($entity_data[0]->title)) : ?>
                 <h2><a href="#" title=""><?php echo $entity_data[0]->title ?></a></h2>   
             <?php endif; ?>
@@ -22,6 +25,8 @@ if (!empty($data)) {
                 <a href="#" title="">
                     <img src="<?php print image_style_url("home_page_feature_small", $entity_data[1]->field_story_extra_large_image['und'][0]['uri']); ?>" />
                 </a>
+            <?php else : ?>
+                <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
             <?php endif; ?>
             <?php if (!empty($entity_data[1]->title)) : ?>
                 <h3><a href="#" title=""><?php echo $entity_data[1]->title ?></a></h3>   
@@ -32,6 +37,8 @@ if (!empty($data)) {
                 <a href="#" title="">
                     <img src="<?php print image_style_url("home_page_feature_small", $entity_data[2]->field_story_extra_large_image['und'][0]['uri']); ?>" />
                 </a>
+            <?php else : ?>
+                <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
             <?php endif; ?>
             <?php if (!empty($entity_data[2]->title)) : ?>
                 <h3><a href="#" title=""><?php echo $entity_data[2]->title ?></a></h3>   
