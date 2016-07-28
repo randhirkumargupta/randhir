@@ -111,8 +111,8 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
                         ->fields(array(
                             'nid' => $node,
                             'widget' => $widget_name,
-                            'content_type' => $content_type,
-                            'cat_id' => $cat_id,
+                            'content_type' => ($content_type) ? $content_type : " ",
+                            'cat_id' => ($cat_id) ? $cat_id : "0",
                             'weight' => 0,
                         ))
                         ->execute();
