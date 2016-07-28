@@ -448,18 +448,18 @@ class itg_auto_save {
           }          
           break;
 
-        case 'taxonomy_term_reference':
+        case 'taxonomy_term_reference':          
           if ($node->type == 'story') {
             continue;
-          }
-          $this->value = $inputs[$field['fieldName']]['und'];          
-          if (!empty($this->value) && is_array($this->value)) {
-            foreach ($this->value as $key => $tid) {
+          }          
+          $this->value = $inputs[$field['fieldName']]['und'];                    
+          if (!empty($this->value) && is_array($this->value)) {            
+            foreach ($this->value as $key => $tid) {              
               $node->{$field['fieldName']}[$node->language][$key]['tid'] = $tid;
             }
-          }
-          elseif (!empty($this->value) && is_int($this->value)) {
-            $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
+          }          
+          if (!empty($this->value) && $this->value != '_none') {
+            $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;            
           }          
           break;
 
