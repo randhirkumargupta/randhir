@@ -140,7 +140,7 @@ global $theme;
                         </div>
                         <div class="itg-widget-child tab-data tab-data-2 hide">
                             <div class="droppable" id="itg-block-3">
-                            <?php print $widget_data['itg-block-2']['widget']; ?>
+                            <?php print $widget_data['itg-block-3']['widget']; ?>
                             </div>
                             <?php if ($theme == 'itgadmin') { ?>
                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />
