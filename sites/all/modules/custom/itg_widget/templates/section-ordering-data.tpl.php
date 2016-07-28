@@ -12,10 +12,15 @@
             <img src="<?php print $extra_large_image_url; ?>">
             <h3><a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a></h3>
         <?php endif; ?>
-        <?php if ($count!=0) : ?>
-        <p class="<?php print $entity->type ?>">
-            <a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a>
-        </p>
-    <?php endif; ?>
+        <?php if ($count != 0) : ?>
+            <p class="<?php print $entity->type ?>">
+                <a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a>
+            </p>
+        <?php endif; ?>
+        <?php if (!empty($entity->title)) : ?>
+            <li class="<?php print $entity->type ?>">
+                <a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a>
+            </li>
+        <?php endif; ?>
     <?php } ?>
 </div>
