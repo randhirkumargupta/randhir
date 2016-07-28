@@ -178,6 +178,10 @@ img {
   display: none;
 }
 
+.m-top {
+  margin-top: 50px;
+}
+
 .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
@@ -1051,6 +1055,10 @@ footer .footer-copyright {
 
 /*End CSS footer section*/
 /*Start CSS Top Block Grid Home Page*/
+.itg-front .droppable {
+  position: relative;
+}
+
 .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
   padding: 0 15px;
   width: 100%;
@@ -1134,6 +1142,8 @@ footer .footer-copyright {
   line-height: 26px;
   padding: 0 7px;
   text-transform: uppercase;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
   margin: 10px 0 0 10px;
 }
 
@@ -1252,7 +1262,6 @@ footer .footer-copyright {
 /*End CSS Featured New Home page*/
 /*Start CSS section story Home page*/
 .section-ordering h3 {
-  font-family: "Roboto Slab", sans-serif;
   padding: 15px 0;
 }
 .section-ordering p {
@@ -1302,6 +1311,11 @@ footer .footer-copyright {
 
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
+.view-front-end-global-search .view-filters {
+  font-family: "Roboto", sans-serif;
+  color: #b3b3b3;
+  margin-bottom: 40px;
+}
 .view-front-end-global-search .view-content li {
   overflow: hidden;
   padding: 10px;
@@ -1379,19 +1393,108 @@ footer .footer-copyright {
   color: #323232;
   line-height: 25px;
 }
+.view-front-end-global-search .attachment {
+  font-family: "Roboto", sans-serif;
+  border-bottom: 1px solid #dddddd;
+}
 .view-front-end-global-search .attachment .count {
   font-size: 30px;
   font-size: 1.875rem;
   font-weight: 500;
   line-height: 22px;
   color: #737373;
-  font-family: "Roboto", sans-serif;
   padding-bottom: 20px;
   display: block;
-  border-bottom: 1px solid #dddddd;
 }
 .view-front-end-global-search .attachment .count span {
   color: #a00606;
 }
+.view-front-end-global-search .attachment .search-menu {
+  padding-bottom: 20px;
+}
+.view-front-end-global-search .attachment .search-menu a {
+  padding: 0 10px;
+  border-left: 2px solid #737373;
+  line-height: 12px;
+  display: inline-block;
+  vertical-align: top;
+  color: #747474;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.view-front-end-global-search .attachment .search-menu a:nth-child(1) {
+  padding-left: 0;
+  border-left: 0;
+}
+.view-front-end-global-search .attachment .search-menu a:hover {
+  color: #a00606;
+}
 
 /*End Search page css*/
+/*Start Dont miss Home page css*/
+.widget-title {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: #a00606;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 7px;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+
+.dont-miss {
+  background: #f3f3f3;
+  padding: 30px 10px 0px 10px;
+}
+.dont-miss ul {
+  zoom: 1;
+}
+.dont-miss ul:before, .dont-miss ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.dont-miss ul:after {
+  clear: both;
+}
+.dont-miss ul li {
+  overflow: hidden;
+  padding: 10px;
+}
+.dont-miss ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.dont-miss ul li .dm-pic {
+  float: left;
+  margin-right: 15px;
+}
+.dont-miss ul li .dm-detail {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.dont-miss ul .dont-miss-listing {
+  width: 100%;
+  padding: 0 0px 20px 0;
+  border: none;
+}
+.dont-miss ul .dont-miss-listing .dm-detail h4 {
+  color: #048cb9;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.dont-miss ul .dont-miss-listing .dm-detail p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  color: #333;
+}
+
+/*End Dont miss Home page css*/

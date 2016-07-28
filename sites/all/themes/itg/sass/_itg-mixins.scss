@@ -157,6 +157,8 @@ $root-font-size: 16px;
     line-height: $line-height;
     padding: 0 7px;
     text-transform: uppercase;
+    color:$white-color;
+    @include itg-font($itg-roboto);
 }
 
 /* List before icon */
