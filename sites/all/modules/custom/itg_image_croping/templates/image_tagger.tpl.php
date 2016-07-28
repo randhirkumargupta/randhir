@@ -105,11 +105,30 @@
         width: 100%;
         float: left;
     }
+    .square-tag{
+       left: 473px;
+		top: 71px;
+		opacity: 1;
+		color: #000000;
+		width: inherit;
+		height: initial;
+		border: none !important;
+		position: absolute;
+		text-align: center;
+		font-size: 18px;
+    }
+	.tag-image{
+		padding: 10px;
+		background: #e4e3e5;
+		font-weight: 700;
+		margin: 0 3px;
+	}
 
 </style>	
 
 <?php $url = file_create_url($data->uri); ?>
 <div id="container">
+<h4 class="tag-image"><i class="fa fa-tags"></i> Tagging</h4>
     <div id="imgtag"> 
 
         <img id="" src="<?php echo $url; ?>" /> 
@@ -339,6 +358,6 @@
             parent.jQuery.colorbox.remove();
             jQuery.colorbox.close();
         })
-
+		
     });
 </script> 

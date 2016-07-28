@@ -5606,3 +5606,7 @@ div.node #comments h2 {
 [id*="field-story-highlights-values"] tbody tr td .form-submit[value="Remove"] {
   margin-left: 0 !important;
 }
+
+#edit-field-story-extra-large-image img {
+  cursor: pointer;
+}
