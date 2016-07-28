@@ -10,7 +10,9 @@
                     <img src="<?php print image_style_url("thumbnail", $entity->field_story_extra_large_image['und'][0]['uri']); ?>" />
                 </a>
             <?php endif; ?>
-            <a class="title" href="<?php print drupal_get_path_alias("node/$entity->nid"); ?>"><?php print $entity->title; ?></a>
+            <?php if (!empty($entity->title)) : ?>
+                <a href="<?php print drupal_get_path_alias("node/$entity->nid"); ?>"><?php print $entity->title; ?></a>
+            <?php endif; ?>
         </li>
     <?php } ?>
 </ul>

@@ -177,7 +177,7 @@
 
 
         });
-        
+
         // Save button click - save tags
         jQuery('#file-preview').on('click', '#btnsavetagedit', function() {
             name = jQuery('#tagname').val();
@@ -215,9 +215,9 @@
 
 
         });
-        
-        
-        
+
+
+
 
         // Cancel the tag box.
         jQuery(document).on('click', '#tagit #btncancel', function() {
@@ -333,11 +333,11 @@
 
         }
         jQuery('.maptofield').click(function() {
+            parent.jQuery('[name="' + field_name + '[und][0][fid]"]').val(image_fiedlid);
 
-            jQuery(window.opener.document).find('[name="' + field_name + '[und][0][fid]"]').val(image_fiedlid);
-
-            window.opener.jQuery("body").find("input[name='" + field_name + "[und][0][filefield_itg_image_repository][button]").trigger('mousedown');
-            window.close();
+            parent.jQuery("body").find("input[name='" + field_name + "[und][0][filefield_itg_image_repository][button]").trigger('mousedown');
+            parent.jQuery.colorbox.remove();
+            jQuery.colorbox.close();
         })
 
     });

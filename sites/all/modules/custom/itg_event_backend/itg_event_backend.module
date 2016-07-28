@@ -21,6 +21,9 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => -10,
     );
 
+     if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')){
+      $form['actions']['submit']['#submit'][] = 'itg_event_alter_submit_status_message';
+    }
     // Node redirection code
     if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
       $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect';
@@ -31,6 +34,8 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     else {
       $form['actions']['submit']['#weight'] = 10;
     }
+    
+   
     //add extra save button
     if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
       $form['actions']['submit2'] = array(

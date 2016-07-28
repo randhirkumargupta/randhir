@@ -1913,11 +1913,13 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-service-content-values"], 
 [id*="field-syndication-ftp-details-values"], 
 [id*="field-email-address-values"], 
-[id*="field-mega-review-review-values"]{
+[id*="field-mega-review-review-values"],
+[id*="field-story-highlights-values"]{
   @extend .itg-add-another-item;
 }
 [id*="field-erf-registration-fee-values"], 
-[id*="field-mega-review-review-values"]{
+[id*="field-mega-review-review-values"],
+[id*="field-story-highlights-values"]{
   thead{
     @extend .hide;
   }
@@ -5552,4 +5554,42 @@ div.node{
       width: 250px;
     }
   }
+}
+.form-type-managed-file{
+    .form-managed-file + div.description{
+        left: 600px;
+    }
+}
+#edit-preview-changes{
+    @extend .btn;
+}
+#edit-field-story-extra-large-image{
+  .image-widget-data{
+      input[type="submit"]{
+        @extend .add-more-wbg;
+        }
+    }  
+} 
+#page-title{
+    span.autosave{
+        display: inline-block;
+        padding-left: 20px;
+        font-size: 14px;
+    }
+}
+[id*="field-story-highlights-values"]{
+    .form-item{
+        float: left;
+        margin: 0 15px 20px 0;
+    }
+    .form-submit[value="Add another item"]{
+        margin-left: 30px;
+    }
+    tbody{
+        tr{
+            td .form-submit[value="Remove"]{
+                margin-left: 0 !important;  
+            }
+        }  
+    }  
 }

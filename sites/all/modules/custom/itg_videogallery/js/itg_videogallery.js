@@ -61,7 +61,7 @@
             $('#edit-title').blur(function() {
                 $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
             });
-
+            $('.plupload_container').removeAttr("title"); 
             // Display Byline details
             $('#edit-field-story-reporter-und-0-target-id').blur(function() {
                 var base_url = Drupal.settings.basePath;
