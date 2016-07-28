@@ -23,7 +23,7 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_page_alte
  * {@inheritdoc}
  */
 function itg_widget_form_views_form_section_wise_content_ordering_list_we_may_suggest_widget_alter(&$form, &$form_state, $form_id) {
-    $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data";
+    $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_we_may_suggest";
 }
 
 /**
@@ -39,16 +39,22 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_dont_miss
         // Escape #tree as draggable view proview 1st option tree
         if (is_integer($form_key)) {
             $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
-                $form['draggableviews'][$form_key]['custom_text'] = array(
+            $form['draggableviews'][$form_key]['custom_text'] = array(
                 "#type" => "textfield",
+                "#size" => '',
                 // get value which is saved into custom_table.
                 '#default_value' => _get_custom_text_value_from_nid($default_value),
-                '#attributes' => array("placeholder" => array(t("Please Enter Custom Text"))),
+                '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
             );
         }
     }
+    // Js added for alter colum name.
+    drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("#draggableviews-table-section-wise-content-ordering-list-dont-miss-content").find("th.tabledrag-hide").html("Label");
+          });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+
     drupal_add_css('#draggableviews-table-section-wise-content-ordering-list-dont-miss-content .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
-        $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_dont_miss";
+    $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_dont_miss";
 }
 
 /**
@@ -67,35 +73,36 @@ function update_itg_widget_order_table_data_for_dont_miss($form, &$form_state) {
 
     $widget = 'dont_miss_content_widget';
 
-    
+
     $extra_values = array();
-    
+
     // Get extra , nid , content type from custom_table because it will further use to insert again.
     foreach ($draggable_view_data as $key => $value) {
         $result = db_select('itg_widget_order')
-                        ->fields('itg_widget_order', array('extra', 'nid','content_type'))
+                        ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
                         ->condition('widget', $widget)
                         ->execute()->fetchAll(PDO::FETCH_ASSOC);
         $extra_values = $result;
     }
-    
+
     // Make draggable array with extra and content type , which is recived above.
-    foreach($extra_values as $key=>$value) {
-        foreach($draggable_view_data as $draggable_node_key=>$draggable_nodes) {
-            if($draggable_nodes['id'] == $value['nid']) {
+    foreach ($extra_values as $key => $value) {
+        foreach ($draggable_view_data as $draggable_node_key => $draggable_nodes) {
+            if ($draggable_nodes['id'] == $value['nid']) {
                 $draggable_view_data[$key]['extra'] = $value['custom_text'];
                 $draggable_view_data[$key]['content_type'] = $value['content_type'];
             }
         }
     }
-    
+
     // Delete all entry of widget dont_miss_content_widget as we have all the array of already inserted data.
     $num_deleted = db_delete('itg_widget_order')
-            ->condition('widget','dont_miss_content_widget')
+            ->condition('widget', 'dont_miss_content_widget')
             ->execute();
-    
+
     // Now insert again with updated values.
     foreach ($draggable_view_data as $key => $node_data) {
+        
         $inserted = db_insert('itg_widget_order')
                 ->fields(array(
                     'nid' => $node_data['id'],
@@ -104,6 +111,61 @@ function update_itg_widget_order_table_data_for_dont_miss($form, &$form_state) {
                     'cat_id' => '0',
                     'weight' => $node_data['weight'],
                     'extra' => $node_data['custom_text'],
+                ))
+                ->execute();
+    }
+}
+/**
+ * Function for save new order in custom table itg_widget_order for we may suggest widget.
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
+function update_itg_widget_order_table_data_for_we_may_suggest($form, &$form_state) {
+    // Current display for indentifing the view page (Widget name).
+    $current_display = $form_state['build_info']['args'][0]->current_display;
+    // Below view_name will use to get widget name.
+    $view_name = $form['form_id']['#value'];
+    // Take draggable view input value after submit the form.
+    $draggable_view_data = $form_state['input']['draggableviews'];
+
+    $widget = 'we_may_suggest_widget';
+
+
+    $extra_values = array();
+
+    // Get extra , nid , content type from custom_table because it will further use to insert again.
+    foreach ($draggable_view_data as $key => $value) {
+        $result = db_select('itg_widget_order')
+                        ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
+                        ->condition('widget', $widget)
+                        ->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $extra_values = $result;
+    }
+    // Make draggable array with extra and content type , which is recived above.
+    foreach ($extra_values as $key => $value) {
+        foreach ($draggable_view_data as $draggable_node_key => $draggable_nodes) {
+            if ($draggable_nodes['id'] == $value['nid']) {
+                $draggable_view_data[$key]['content_type'] =  ($value['content_type']) ? $value['content_type'] : "";
+            }
+        }
+    }
+
+    // Delete all entry of widget dont_miss_content_widget as we have all the array of already inserted data.
+    $num_deleted = db_delete('itg_widget_order')
+            ->condition('widget', $widget)
+            ->execute();
+
+    // Now insert again with updated values.
+    foreach ($draggable_view_data as $key => $node_data) {
+        
+        $inserted = db_insert('itg_widget_order')
+                ->fields(array(
+                    'nid' => $node_data['id'],
+                    'widget' => $widget,
+                    'content_type' => ( $node_data['content_type']) ? $node_data['content_type'] : "",
+                    'cat_id' => '0',
+                    'weight' => $node_data['weight'],
                 ))
                 ->execute();
     }
@@ -179,8 +241,6 @@ function update_itg_widget_order_table_data($form, &$form_state) {
     }
 }
 
-
-
 /**
  * Funtion to get extra value if already saved used for dont miss widget.
  * 
@@ -188,10 +248,10 @@ function update_itg_widget_order_table_data($form, &$form_state) {
  * @return extra field value
  */
 function _get_custom_text_value_from_nid($nid) {
-    $result = db_select('itg_widget_order','iwo')
-            ->fields('iwo', array('extra'))
-            ->condition('iwo.nid',$nid)
-            ->condition('iwo.widget','dont_miss_content_widget')
-            ->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $result = db_select('itg_widget_order', 'iwo')
+                    ->fields('iwo', array('extra'))
+                    ->condition('iwo.nid', $nid)
+                    ->condition('iwo.widget', 'dont_miss_content_widget')
+                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result[0]['extra'];
 }
