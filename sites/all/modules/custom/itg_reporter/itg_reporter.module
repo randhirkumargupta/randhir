@@ -37,13 +37,7 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
   if ($form_id == 'reporter_node_form') {
-    
-    $form['field_story_category']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_celebrity_pro_occupation[und]"]' => array('value' => '400'),
-      )
-    );
-
+  
     $form['#after_build'][] = 'itg_reporter_after_build';
 
     $destination = 'byline-list';
