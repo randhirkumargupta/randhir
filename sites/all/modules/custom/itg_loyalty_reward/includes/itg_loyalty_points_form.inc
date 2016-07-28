@@ -5,7 +5,7 @@
  */
 
 /**
- * Loyalty point setting form
+ * Loyalty points configuration form
  * @return array
  */
 function loyalty_points_configuration_form() {
@@ -71,7 +71,7 @@ function loyalty_points_configuration_form() {
 }
 
 /**
- * Implements hook_validate function for loyalty point setting form
+ * Implements hook_validate function for loyalty points configuration form
  * @param array $form
  * @param array $form_state
  */
