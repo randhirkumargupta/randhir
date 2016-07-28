@@ -16,8 +16,9 @@
         $('#edit-body-und-0-format').hide();
         $('.vertical-tabs-list').hide();
         $('#edit-metatags').show();
-        
       }
+      
+      $('input[name="field_story_expiry_date[und][0][value][date]"]').prop("readonly", true);
     }
   };
 })(jQuery, Drupal, this, this.document);
