@@ -199,8 +199,10 @@
   }
   footer .footer-bottom .cell {
     width: 16.66667%;
-    float: left;
     margin-bottom: 0;
+  }
+  footer .footer-bottom .cell:nth-child(2n+1) {
+    clear: none;
   }
 
   /*End Footer CSS Desktop version*/

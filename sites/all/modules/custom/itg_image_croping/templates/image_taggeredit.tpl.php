@@ -326,6 +326,18 @@
         height: 300px;
         margin: 0 auto;
     }
+	.square-tag{
+		left: 473px;
+		top: 71px;
+		opacity: 1;
+		color: #000000;
+		width: inherit;
+		height: initial;
+		border: none !important;
+		position: absolute;
+		text-align: center;
+		font-size: 18px;
+    }
 
 </style>	
 

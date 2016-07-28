@@ -164,5 +164,10 @@ function itg_autosave_node_insert($node) {
   // Delete node if found duplicate node identity node id.
   if ($itg_result->nid > 0) {
     node_delete($itg_result->nid);
-  }  
+    // Update nid referenced to old node id
+    $itg_query = db_update('itg_autosave_node_data');
+    $itg_query->condition('nid', $itg_result->nid)
+      ->fields(array('nid' => $node->nid))
+      ->execute();
+  } 
 }

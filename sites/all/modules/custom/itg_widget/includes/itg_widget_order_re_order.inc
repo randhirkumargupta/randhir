@@ -27,6 +27,89 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_we_may_su
 }
 
 /**
+ * Function to alter dont miss widget form.
+ * 
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+function itg_widget_form_views_form_section_wise_content_ordering_list_dont_miss_content_alter(&$form, &$form_state, $form_id) {
+    $draggable_form = $form['draggableviews'];
+    foreach ($draggable_form as $form_key => $from_node) {
+        // Escape #tree as draggable view proview 1st option tree
+        if (is_integer($form_key)) {
+            $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
+                $form['draggableviews'][$form_key]['custom_text'] = array(
+                "#type" => "textfield",
+                // get value which is saved into custom_table.
+                '#default_value' => _get_custom_text_value_from_nid($default_value),
+                '#attributes' => array("placeholder" => array(t("Please Enter Custom Text"))),
+            );
+        }
+    }
+    drupal_add_css('#draggableviews-table-section-wise-content-ordering-list-dont-miss-content .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
+        $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_dont_miss";
+}
+
+/**
+ * Function for save new order in custom table itg_widget_order for dont miss widget.
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
+function update_itg_widget_order_table_data_for_dont_miss($form, &$form_state) {
+    // Current display for indentifing the view page (Widget name).
+    $current_display = $form_state['build_info']['args'][0]->current_display;
+    // Below view_name will use to get widget name.
+    $view_name = $form['form_id']['#value'];
+    // Take draggable view input value after submit the form.
+    $draggable_view_data = $form_state['input']['draggableviews'];
+
+    $widget = 'dont_miss_content_widget';
+
+    
+    $extra_values = array();
+    
+    // Get extra , nid , content type from custom_table because it will further use to insert again.
+    foreach ($draggable_view_data as $key => $value) {
+        $result = db_select('itg_widget_order')
+                        ->fields('itg_widget_order', array('extra', 'nid','content_type'))
+                        ->condition('widget', $widget)
+                        ->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $extra_values = $result;
+    }
+    
+    // Make draggable array with extra and content type , which is recived above.
+    foreach($extra_values as $key=>$value) {
+        foreach($draggable_view_data as $draggable_node_key=>$draggable_nodes) {
+            if($draggable_nodes['id'] == $value['nid']) {
+                $draggable_view_data[$key]['extra'] = $value['custom_text'];
+                $draggable_view_data[$key]['content_type'] = $value['content_type'];
+            }
+        }
+    }
+    
+    // Delete all entry of widget dont_miss_content_widget as we have all the array of already inserted data.
+    $num_deleted = db_delete('itg_widget_order')
+            ->condition('widget','dont_miss_content_widget')
+            ->execute();
+    
+    // Now insert again with updated values.
+    foreach ($draggable_view_data as $key => $node_data) {
+        $inserted = db_insert('itg_widget_order')
+                ->fields(array(
+                    'nid' => $node_data['id'],
+                    'widget' => $widget,
+                    'content_type' => $node_data['content_type'],
+                    'cat_id' => '0',
+                    'weight' => $node_data['weight'],
+                    'extra' => $node_data['custom_text'],
+                ))
+                ->execute();
+    }
+}
+
+/**
  * Function for save new order in custom table itg_widget_order
  * 
  * @param array $form
@@ -94,4 +177,21 @@ function update_itg_widget_order_table_data($form, &$form_state) {
     else {
         drupal_set_message(t("This ordering is already saved."));
     }
+}
+
+
+
+/**
+ * Funtion to get extra value if already saved used for dont miss widget.
+ * 
+ * @param int $nid
+ * @return extra field value
+ */
+function _get_custom_text_value_from_nid($nid) {
+    $result = db_select('itg_widget_order','iwo')
+            ->fields('iwo', array('extra'))
+            ->condition('iwo.nid',$nid)
+            ->condition('iwo.widget','dont_miss_content_widget')
+            ->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result[0]['extra'];
 }

@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the Features for Loyalty and Rewards feature.
  */
+
+include_once 'features_for_loyalty_and_rewards.features.inc';

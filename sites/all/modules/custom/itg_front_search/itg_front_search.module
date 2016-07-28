@@ -40,6 +40,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'front_end_global_search') {
 
+    $form['keyword']['#suffix'] = '<div class="s-link"><a id="search_button">Search</a> | <a id="reset_button">Reset</a></div>';
     //$form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title / Kicker / Tag name')));
     $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast');
     $form['bundle_name']['#type'] = 'select';
@@ -59,20 +60,20 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $dat_45_day_ago = date('Y-m-d', strtotime('-30 days'));
 
     $day_cal = array('_none' => 'Any', $dat_15_day_ago => '10 days ago', $dat_30_day_ago => '20 days ago', $dat_45_day_ago => '30 days ago', 'calender' => 'calender');
-    $form['custom_drp']['#title'] = 'Date';
-    $form['custom_drp']['#type'] = 'select';
-    $form['custom_drp']['#options'] = $day_cal;
-    $form['custom_drp']['#size'] = 5;
-    $form['custom_drp']['#default_value'] = '_none';
-    $form['custom_drp']['#validated'] = true;
+
+    $form['custom_drp'] = array(
+      '#type' => 'select',
+      '#title' => t('Date'),
+      '#options' => $day_cal,
+      '#default_value' => '_none'
+    );
 
     $form['ds_changed'] = array(
       '#type' => 'date_popup',
       '#title' => t('From'),
       '#date_format' => 'Y-m-d',
       '#date_year_range' => '-1:+1',
-      '#prefix' => '<div class="ds_min">',
-      '#suffix' => '</div>',
+      '#prefix' => '<div class="caln">',
       '#attributes' => array(
       //'readonly' => 'readonly'
       ),
@@ -83,7 +84,6 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       '#title' => t('To'),
       '#date_format' => 'Y-m-d',
       '#date_year_range' => '-1:+1',
-      '#prefix' => '<div class="ds_max">',
       '#suffix' => '</div>',
       '#attributes' => array(
       //'readonly' => 'readonly'
@@ -136,28 +136,11 @@ function itg_front_search_views_pre_render(&$view) {
     }
 
     if (!empty($_GET['keyword'])) {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp" ' . $_GET['keyword'] . ' "</span>';
-      $view->attachment_before = $front_search;
+      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $_GET['keyword'] . ' "</span></span>';
     }
     else {
       $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
-      $view->attachment_before = $front_search;
     }
-  }
-}
-
-/**
- * Implement hook_form_views_exposed_form_alter
- * @param Array $form
- * @param Array $form_state
- */
-function itg_front_search_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
-  //Get the Form Id
-  if ($form["#id"] == 'views-exposed-form-front-end-global-search-page') {
-
-    $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
-    $form['sm_field_itg_common_by_line_name']['#autocomplete_path'] = 'reporter-list/autocomplete';
 
     $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast');
 
@@ -177,7 +160,25 @@ function itg_front_search_form_views_exposed_form_alter(&$form, &$form_state, $f
       '#suffix' => '</div>',
     );
 
+    $front_search .=$url;
+    $view->attachment_before = $front_search;
+
     $_GET = $get_var;
+  }
+}
+
+/**
+ * Implement hook_form_views_exposed_form_alter
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_front_search_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
+  //Get the Form Id
+  if ($form["#id"] == 'views-exposed-form-front-end-global-search-page') {
+
+    $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
+    $form['sm_field_itg_common_by_line_name']['#autocomplete_path'] = 'reporter-list/autocomplete';
   }
 }
 
