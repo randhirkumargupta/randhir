@@ -42,7 +42,37 @@ function itg_widget_menu() {
         'page arguments' => array(1, 2, 3, 4),
         'access arguments' => array('administer nodequeue'),
     );
+    $items['move-dont-miss-widget-node/%/%/%/%'] = array(
+        'page callback' => 'move_node_from_dont_miss_widget',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
     return $items;
+}
+
+/**
+ * Funtion used to delete node combination form itg_widget_order table.
+ * 
+ * @param string $widget_name
+ * @param string $content_type
+ * @param int $cat_tid
+ * @param int $nid
+ */
+function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, $nid) {
+    if (!empty($widget_name) && !empty($nid)) {
+        $num = db_delete('itg_widget_order')
+                ->condition('nid', $nid)
+                ->condition('widget', $widget_name)
+                ->execute();
+        if ($num) {
+            drupal_set_message(t("Node has been moved"));
+            drupal_goto($_SERVER['HTTP_REFERER']);
+        }
+        else {
+            drupal_set_message(t("Node id or widget name not found"));
+            drupal_goto($_SERVER['HTTP_REFERER']);
+        }
+    }
 }
 
 /**
@@ -57,7 +87,7 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
     if (!empty($widget_name) && !empty($content_type) && !empty($cat_tid) && !empty($nid)) {
         $num = db_delete('itg_widget_order')
                 ->condition('nid', $nid)
-                //->condition('content_type', $content_type)
+                ->condition('content_type', $content_type)
                 ->condition('cat_id', $cat_tid)
                 ->condition('widget', $widget_name)
                 ->execute();
@@ -167,6 +197,9 @@ function itg_widget_block_info() {
     $blocks['most_popular'] = array(
         'info' => t('Widget: Most popular form custom table'),
     );
+    $blocks['dont_miss'] = array(
+        'info' => t('Widget: Dont Miss form custom table'),
+    );
     return $blocks;
 }
 
@@ -188,7 +221,7 @@ function itg_widget_block_view($delta = '') {
         case 'section_wise_order':
             module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
             // value is hardcoded need to be change for dyanamic functionality
-            $info['section'] = '301'; // tid of section
+            $info['section'] = '240'; // tid of section
             $info['content_type'] = ''; // content type machine name
             // view name which is stored in draggableviews_structure table
             $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
@@ -220,6 +253,13 @@ function itg_widget_block_view($delta = '') {
             $info['page'] = 'most_popular_widget'; // page name
             $data = itg_widget_most_popular_ordering_data($info);
             $block['content'] = theme("most_popular_widget", array("data" => $data));
+            break;
+        // Top story ordering reordering widget case
+        case 'dont_miss':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
+            $info['widget_name'] = 'dont_miss_content_widget';
+            $data = itg_widget_dont_miss_ordering_data($info);
+            $block['content'] = theme("dont_miss_widget", array("data" => $data));
             break;
         // Trending videos ordering reordering widget case
         case 'trending_videos_widget':
@@ -326,6 +366,9 @@ function itg_widget_theme() {
         'most_popular_widget' => array(
             'template' => 'templates/most-popular-widget',
         ),
+        'dont_miss_widget' => array(
+            'template' => 'templates/dont-miss-widget',
+        ),
     );
     return $themes;
 }
@@ -379,6 +422,9 @@ function _get_widget_name($view_name, $page_name) {
     }
     else if ($page_name == 'big_story_format') {
         $widget = 'big_story_format_widget';
+    }
+    else if ($page_name == 'dont_miss_content') {
+        $widget = 'dont_miss_content_widget';
     }
     return $widget;
 }

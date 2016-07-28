@@ -97,7 +97,7 @@ function itg_autosave_form_delete($form_id) {
  * @param string $ctype
  *   Name of the content type.
  */
-function itg_autosave_nodeform($nid, $ctype) {
+function itg_autosave_nodeform($nid, $ctype) {  
   global $user;
   // Store submitted values into variable.
   $inputs = $_POST;
@@ -114,6 +114,7 @@ function itg_autosave_nodeform($nid, $ctype) {
   $node_identity = $inputs['field_story_node_identity']['und'][0]['value'];
   // Fetch node id and field collections ids from database.
   $itg_nid = itg_autosave_get_unique_id($ctype, $node_identity); 
+  
   // Prepare values for new node.
   if ($itg_nid->nid == '') {    
     $node = new stdClass();
@@ -128,9 +129,9 @@ function itg_autosave_nodeform($nid, $ctype) {
     $node->comment = 1;
   }
   else {       
-    // Load node if it case of node edit.
+    // Load node if it case of node edit.  
     $node = node_load($itg_nid->nid);  
-  }    
+  }      
   $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : '' : '';  
   // If title is empty then exit the process.
   
@@ -151,12 +152,13 @@ function itg_autosave_nodeform($nid, $ctype) {
       // Delete old field collection fields and create fresh collections.
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
-  }
-  
+  }  
   // Submit the node before save.
   $node = node_submit($node); 
   // Save node to save all values into node.  
+  
   node_save($node);  
+  
   // Store unique id associated with node in array.
   $pre_save['unique_id'] = $node_identity;
   // Store all field collections ids into array.

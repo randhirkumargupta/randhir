@@ -336,46 +336,6 @@ function feature_for_front_search_views_default_views() {
       'value' => '',
     ),
   );
-  /* Filter criterion: Apache Solr: ds_changed */
-  $handler->display->display_options['filters']['ds_changed']['id'] = 'ds_changed';
-  $handler->display->display_options['filters']['ds_changed']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['ds_changed']['field'] = 'ds_changed';
-  $handler->display->display_options['filters']['ds_changed']['group'] = 1;
-  $handler->display->display_options['filters']['ds_changed']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['ds_changed']['expose']['operator_id'] = 'ds_changed_op';
-  $handler->display->display_options['filters']['ds_changed']['expose']['operator'] = 'ds_changed_op';
-  $handler->display->display_options['filters']['ds_changed']['expose']['identifier'] = 'ds_changed';
-  $handler->display->display_options['filters']['ds_changed']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    19 => 0,
-    15 => 0,
-    18 => 0,
-    23 => 0,
-  );
-  $handler->display->display_options['filters']['ds_changed']['group_info']['label'] = 'ds_changed';
-  $handler->display->display_options['filters']['ds_changed']['group_info']['identifier'] = 'ds_changed';
-  $handler->display->display_options['filters']['ds_changed']['group_info']['remember'] = FALSE;
-  $handler->display->display_options['filters']['ds_changed']['group_info']['group_items'] = array(
-    1 => array(),
-    2 => array(),
-    3 => array(),
-  );
   $handler->display->display_options['path'] = 'site-search';
   $export['front_end_global_search'] = $view;
 

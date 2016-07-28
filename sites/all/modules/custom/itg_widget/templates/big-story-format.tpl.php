@@ -9,7 +9,9 @@
             <div class="story-tag">Big Story</div>
         </div>
         <div class="big-story-col-2">
-            <h1><?php print $node->title; ?></h1>
+            <?php if (!empty($node->title)) : ?>
+                <h1><?php print $node->title; ?></h1>
+            <?php endif; ?>
             <p>
                 <?php if (!empty($node->field_story_kicker_text['und'][0]['value'])) : ?>
                     <?php print $node->field_story_kicker_text['und'][0]['value']; ?>
@@ -28,7 +30,9 @@
                     $extra = $data[0]['extra'];
                     $realted_nodes = json_decode($extra);
                     foreach ($realted_nodes as $related_node) {
-                        print "<li><a href='#' title=''>" . node_load($related_node)->title . "</a></li>";
+                        if (!empty(node_load($related_node)->title)) :
+                            print "<li><a href='#' title=''>" . node_load($related_node)->title . "</a></li>";
+                        endif;
                     }
                     ?>
                 </ul>                         
