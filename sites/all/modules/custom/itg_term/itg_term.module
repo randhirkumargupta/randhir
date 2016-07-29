@@ -106,6 +106,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'taxonomy_form_term':
       drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });", 'inline');
+      $form['#after_build'][] = 'itg_term_after_build';
       if (isset($_REQUEST['destination']) && $_REQUEST['destination'] == 'tags-management') {
         unset($form['actions']['delete']);
       }
@@ -182,6 +183,15 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
   return $form;
 }
 
+/**
+ * Implements after build function
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_term_after_build($form, &$form_state){
+  drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });", 'inline');
+  return $form;
+}
 /**
  * Implements after build function().
  * @param array $form
