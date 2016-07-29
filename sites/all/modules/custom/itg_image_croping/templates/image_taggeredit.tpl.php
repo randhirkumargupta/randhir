@@ -70,12 +70,11 @@
 
         // mouseover the tagboxes that is already there but opacity is 0.
         jQuery('.tagview').live('mouseover', function( ) {
-        
-            var pos = jQuery(this).position();
-           
-            jQuery(this).css({opacity: 1.0}); // div appears when opacity is set to 1.
+            var pos = jQuery(this).position();           
+            jQuery(this).css({opacity: 1.0}); 
+            jQuery(this).siblings('.square-tag').hide();// div appears when opacity is set to 1.
         }).live('mouseout', '.tagview', function( ) {
-            jQuery(this).css({opacity: 0.0}); // hide the div by setting opacity to 0.
+            jQuery(this).css({opacity: 0.0}); jQuery(this).siblings('.square-tag').show(); // hide the div by setting opacity to 0.
         });
         // Save button click - save tags
      jQuery('#btnsavetagedit').live('click',  function() {
@@ -254,7 +253,7 @@
         width: 100px;
         height: 100px;
         float: left;
-        background-color: rgba(0,0,0,.5);
+        border: 2px solid rgba(0, 0, 0, 0.5);
         margin-right: 1px;
     }
     #tagit .name
@@ -279,7 +278,7 @@
     #tagit #tagname{
         margin-bottom: 1px;
     }
-    #btnsavetag{
+    #btnsavetag, #btnsavetagedit{
         background-color: rgba(31,181,173,.9);
         border: 1px solid rgba(31,181,173,.9);
         border-radius: 0;
@@ -293,7 +292,7 @@
         white-space: nowrap;
         height: 33px;
         width: 50%;
-        
+
     }
     #btncancel{
         background-color: rgba(208,11,38,.9);
@@ -317,17 +316,8 @@
         width: 100%;
         float: left;
     }
-
-    
-     #container
-    {
-        display: block;
-        width: 850px;
-        height: 300px;
-        margin: 0 auto;
-    }
-	.square-tag{
-		left: 473px;
+    .square-tag{
+       left: 473px;
 		top: 71px;
 		opacity: 1;
 		color: #000000;
@@ -338,7 +328,12 @@
 		text-align: center;
 		font-size: 18px;
     }
-
+	.tag-image{
+		padding: 10px;
+		background: #e4e3e5;
+		font-weight: 700;
+		margin: 0 3px;
+	}
 </style>	
 
 <?php $url = file_create_url($data->uri);?>

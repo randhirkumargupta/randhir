@@ -377,7 +377,8 @@ function itg_layout_manager_preprocess_page(&$vars) {
   if (!empty($is_fron_page) && $theme == FRONT_THEME_NAME) {
     $section = 'home_page';
     $template_name = 'page--front';
-    $data = get_layout_details($section, $template_name, 'front');    
+    $data = get_layout_details($section, $template_name, 'front'); 
+    $data['big_story'] = get_itg_widget('big_story_format');
     $vars['widget_data'] = $data;
   }
   

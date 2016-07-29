@@ -2485,7 +2485,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<span><a data-view="story_widget" data-page="most_popular_widget" data-nid="[nid]" data-queueid=\'4\' class="remove_from_nodequeue_draggable_view" href="#"><span class="delete-link">Move</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<span><a data-view="story_widget" data-page="most_popular_widget" data-nid="[nid]" data-queueid=\'5\' class="remove_from_nodequeue_draggable_view" href="#"><span class="delete-link">Move</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
