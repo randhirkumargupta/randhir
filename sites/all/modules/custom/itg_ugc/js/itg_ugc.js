@@ -143,6 +143,16 @@
         }
       }
     
+    // Written code for handling relication of same error string
+     $('.field-name-field-ugc-upload-photo').find('.form-submit').on('mousedown', function(e) {
+      $('.field-name-field-ugc-upload-photo').find('.messages.error').remove();  
+     });
+     
+    $('.field-name-field-astro-video').find('.form-submit').on('mousedown', function(e) {
+     $('.field-name-field-astro-video').find('.messages.error').remove();  
+    });
+    
+     
             
     }
 
