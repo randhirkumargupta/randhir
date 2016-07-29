@@ -278,7 +278,7 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
 function itg_photogallery_block_info() {
   $blocks['photogallery_tab_form_block'] = array(
     'info' => t('Photogallery Form Tab Block'),
-    //'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
   return $blocks;
