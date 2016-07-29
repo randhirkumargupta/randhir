@@ -550,6 +550,11 @@ function itg_print_team_node_validate($node, $form, &$form_state) {
       if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid']) && $check_for_nid) {
         form_set_error('field_story_category', t('Section field is required'));
       }
+      
+      // Validate timeline
+      if(empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_survey_end_date', t('Timeline field is required.'));
+      }
   }
 }
 
