@@ -41,10 +41,6 @@
                     }                    
                  });
             $("#cooking-tips-node-form").validate({
-        submitHandler: function (form) {
-          $('input:submit').attr('disabled', 'disabled');
-          form.submit();
-        },
         onfocusout: function (element) {
           $(element).valid();
         },
@@ -57,10 +53,6 @@
     });  
     
       $("#food-news-node-form").validate({
-        submitHandler: function (form) {
-          $('input:submit').attr('disabled', 'disabled');
-          form.submit();
-        },
         onfocusout: function (element) {
           $(element).valid();
         },
@@ -73,10 +65,6 @@
     });  
     
             $("#recipe-node-form").validate({
-        submitHandler: function (form) {
-          $('input:submit').attr('disabled', 'disabled');
-          form.submit();
-        },
         onfocusout: function (element) {
           $(element).valid();
         },
