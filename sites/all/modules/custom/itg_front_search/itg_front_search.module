@@ -40,7 +40,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'front_end_global_search') {
 
-    $form['keyword']['#suffix'] = '<div class="s-link"><a id="search_button">Search</a> | <a id="reset_button">Reset</a></div>';
+    $form['keyword']['#suffix'] = '<div class="s-link"><a id="search_button"><i class="fa fa-search"></i></a><a id="reset_button"><i class="fa fa-times"></i></a></div>';
     //$form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title / Kicker / Tag name')));
     $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast');
     $form['bundle_name']['#type'] = 'select';
@@ -160,7 +160,7 @@ function itg_front_search_views_pre_render(&$view) {
       '#suffix' => '</div>',
     );
 
-    $front_search .=$url;
+    $front_search .='<div class="search-menu">'.$url.'<div>';
     $view->attachment_before = $front_search;
 
     $_GET = $get_var;

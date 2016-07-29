@@ -21,7 +21,9 @@
             type: 'post',
             data: {'fid': imageid, 'field_name': fieldname},
             success: function(data) {
-                $.colorbox({html: "" + data + "", width: "auto", height: "auto"});
+                $.colorbox({html: "" + data + "",onComplete : function() { 
+       $(this).colorbox.resize(); 
+    }  });
 
 
             },
