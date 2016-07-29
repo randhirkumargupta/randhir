@@ -1326,20 +1326,82 @@ footer .footer-copyright {
 }
 .view-front-end-global-search .views-widget .s-link {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 0px;
+  right: 0px;
 }
 .view-front-end-global-search .views-widget .s-link a {
   width: 50px;
   height: 46px;
-  background: #323232;
+  background: #2c323d;
   display: inline-block;
   vertical-align: top;
   color: #fff;
   text-align: center;
-  font-size: 25px;
-  font-size: 1.5625rem;
+  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 40px;
+  cursor: pointer;
+}
+.view-front-end-global-search .views-widget .s-link a#search_button {
+  margin-right: 1px;
+}
+.view-front-end-global-search .views-widget .s-link a:hover {
+  color: #ffc106;
+}
+.view-front-end-global-search .views-exposed-widget {
+  position: relative;
+}
+.view-front-end-global-search .views-exposed-widget .caln {
+  display: block;
+  background: #f5f5f5;
+  position: absolute;
+  padding: 15px;
+  width: 400px;
+  padding-bottom: 0;
+  box-shadow: 2px 2px 2px #f1f1f1;
+  color: #323232;
+}
+.view-front-end-global-search .views-exposed-widget .caln label {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 9px;
+}
+.view-front-end-global-search .views-exposed-widget .caln .container-inline-date {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-front-end-global-search .views-exposed-widget .caln .container-inline-date + .container-inline-date {
+  margin-left: 10px;
+}
+.view-front-end-global-search .views-exposed-widget .caln .date-padding {
+  display: inline-block;
+  vertical-align: top;
+  float: none;
+  width: 150px;
+}
+.view-front-end-global-search .views-exposed-widget .caln .date-padding label {
+  display: none;
+}
+.view-front-end-global-search .views-exposed-widget .caln .date-padding input[type="text"] {
+  width: 100%;
+  background: #fff url(../images/calender-icon.png) no-repeat center right;
+  margin-right: 0;
+}
+.view-front-end-global-search .views-exposed-widget .caln .date-padding .description {
+  font-size: 12px;
+  font-size: 0.75rem;
+  color: #a5a5a5;
+}
+.view-front-end-global-search .views-exposed-widget .caln:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid whitesmoke;
+  top: -11px;
+  position: absolute;
+  left: 9px;
 }
 .view-front-end-global-search .view-content li {
   overflow: hidden;
