@@ -50,25 +50,31 @@ function features_for_print_team_views_default_views() {
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
     'nid' => 'nid',
     'uid' => 'uid',
-    'views_bulk_operations' => 'views_bulk_operations',
+    'counter' => 'counter',
     'title' => 'title',
     'created' => 'created',
     'changed' => 'changed',
-    'field_pti_idea_status' => 'field_pti_idea_status',
-    'field_pti_issue' => 'field_pti_issue',
-    'php_1' => 'php_1',
     'field_pti_magazine' => 'field_pti_magazine',
+    'php_1' => 'php_1',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'nothing_1' => 'nothing_1',
+    'field_pti_idea_status' => 'field_pti_idea_status',
+    'field_pti_mark_as_complete' => 'field_pti_mark_as_complete',
     'view_node' => 'php',
     'edit_node' => 'php',
     'php' => 'php',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'nid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
@@ -81,7 +87,7 @@ function features_for_print_team_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'views_bulk_operations' => array(
+    'counter' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -94,34 +100,15 @@ function features_for_print_team_views_default_views() {
       'empty_column' => 0,
     ),
     'created' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'changed' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_pti_idea_status' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_pti_issue' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'php_1' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -129,6 +116,11 @@ function features_for_print_team_views_default_views() {
     'field_pti_magazine' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php_1' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -148,6 +140,18 @@ function features_for_print_team_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_pti_idea_status' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_pti_mark_as_complete' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -179,22 +183,11 @@ function features_for_print_team_views_default_views() {
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Field: Content: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Content: Author uid */
-  $handler->display->display_options['fields']['uid']['id'] = 'uid';
-  $handler->display->display_options['fields']['uid']['table'] = 'node';
-  $handler->display->display_options['fields']['uid']['field'] = 'uid';
-  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
-  $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
@@ -209,6 +202,23 @@ function features_for_print_team_views_default_views() {
       'label' => '',
     ),
   );
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Content: Author uid */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'node';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S.No';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -278,7 +288,15 @@ echo \'NA\';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Posted By';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_first_name] [field_last_name]';
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'Posted By';
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   /* Field: Content: Idea Status */
   $handler->display->display_options['fields']['field_pti_idea_status']['id'] = 'field_pti_idea_status';
   $handler->display->display_options['fields']['field_pti_idea_status']['table'] = 'field_data_field_pti_idea_status';
@@ -431,6 +449,7 @@ echo \'NA\';
     20 => 0,
     6 => 0,
     21 => 0,
+    19 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
@@ -438,11 +457,11 @@ echo \'NA\';
     17 => 0,
     14 => 0,
     12 => 0,
-    19 => 0,
     15 => 0,
     18 => 0,
     23 => 0,
     22 => 0,
+    24 => 0,
   );
 
   /* Display: Page */
