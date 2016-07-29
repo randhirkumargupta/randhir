@@ -382,13 +382,15 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $vars['widget_data'] = $data;
   }
   
-  if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))&& $theme == FRONT_THEME_NAME) {
-    $tid = $arg[2];
-    
-    //$vid = db_query("SELECT vid FROM {taxonomy_term_data} WHERE tid = :tid", array(':tid' => $tid))->fetchField();
-
-    $vars['theme_hook_suggestions'][] = 'page__sectionphoto';
+  //section template display on front
+  if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))&& $theme == FRONT_THEME_NAME) {   
+    $tpl_name = get_template_name_by_section_name($section_name);
+    if (isset($tpl_name)) {
+     $tpl_name = str_replace('--', '__', $tpl_name);  
+     $vars['theme_hook_suggestions'][] = $tpl_name;
+    }
   }
+  
 }
 
 
@@ -577,4 +579,17 @@ function get_itg_footer_menu() {
   $data['welfare_footer'] = menu_tree('menu-itg-welfare-menu-footer');
   $data['footer-top-menu'] = menu_tree('menu-itg-main-menu-footer');
   return $data;
+}
+/**
+ * Get template name by section name
+ * @return string
+ */
+function get_template_name_by_section_name($section_name) {
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('template_name'));  
+    $query->condition('section_name', $section_name)
+          ->condition('status', 1);
+    $query->orderBy('tpl.id', 'DESC')->range(0,1);//LIMIT to 1 records
+
+    return $query->execute()->fetchField();
 }
