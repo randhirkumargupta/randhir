@@ -5,7 +5,6 @@
  * The ITG Breaking News module.
  *
  * Contains functionality related to Breaking News.
- *
  */
 
 /**
@@ -256,8 +255,7 @@ function itg_breaking_news_node_validate($node, $form, &$form_state) {
 
 /**
  * Implement hook_menu_breadcrumb_alter
- * @param array $active_trail
- * @param object $item
+ * {@inheritdoc}
  */
 function itg_breaking_news_menu_breadcrumb_alter(&$active_trail, $item) {
   global $user, $base_url;
