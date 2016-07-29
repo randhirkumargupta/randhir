@@ -1,0 +1,14 @@
+name = Feature for Photo Carousel
+description = Feature for Photo Carousel
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = image
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[image][] = photo_carousel_flexslider
+features[image][] = photo_carousel_rollingslider
+features[views_view][] = photo_carousel_widget
+features_exclude[dependencies][ctools] = ctools
+project path = sites/default/files
