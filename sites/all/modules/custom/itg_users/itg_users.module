@@ -79,8 +79,8 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_profile_form') {
     // access denied code for direct hit 
     if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit') {
-      $arg = arg(1);
-      $user_child_roles = itg_users_role_delegation();
+      $arg = arg(1);            
+      $user_child_roles = itg_users_role_delegation($user->roles);
       $user_role = user_load($arg);
       $user_intersec = array_intersect($user_role->roles, $user_child_roles);
       if (empty($user_intersec) && (!in_array('administrator', $user->roles))) {
