@@ -6,13 +6,14 @@
     Drupal.behaviors.itg_print_team = {
         attach: function (context, settings) {
 
-            //Collect required variables
+            // Collect required variables
             var uid = settings.itg_print_team.settings.uid;
             var base_url = settings.itg_print_team.settings.base_url;
             var type = settings.itg_print_team.settings.type;
             var nid = settings.itg_print_team.settings.nid;
-            
-            //Hide left side vertical tabs in case of simple users
+            var print_media = settings.itg_print_team.settings.print_media;
+         
+            // Hide left side vertical tabs in case of simple users
             if (uid != 1) {
                 $('.field-edit-link').hide();
                 $('#edit-body-und-0-format').hide();
@@ -21,11 +22,17 @@
                 $("#edit-metatags-und-advanced").hide();
                 $(".form-item-metatags-und-abstract-value").hide();
             }
-
-            if (nid) {
+            
+            // Make posted by filter field empty on click of reset button
+            $('#edit-reset').click(function(){
+              $('.views-widget-filter-uid #edit-uid').val('');
+            });
+            
+            // If print media content exists
+            if (print_media) {
                 $('input[name="field_pti_print_media_und_0_remove_button"]').show();
             } else {
-                $('#edit-field-print-media-und-0-remove-button').hide();
+                $('input[name="field_pti_print_media_und_0_remove_button"]').hide();
             }
             
             $('input[name="field_survey_end_date[und][0][value][date]"]').attr('readonly', true);
