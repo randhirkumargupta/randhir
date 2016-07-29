@@ -37,7 +37,22 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
   if ($form_id == 'reporter_node_form') {
-  
+    $node_type = $form['#node']->type;
+    // code to change page title on node edit
+    if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
+      if ($node_type == 'reporter') {
+        $node_type = ucfirst('Byline');
+        $node_title = $form['#node']->title;
+        $edit_title = t('Edit ') . $node_type . ' - ' . $node_title;
+        drupal_set_title($edit_title);
+      }
+    }
+    else {
+      $node_type = ucfirst('Byline');
+      $add_title = t('Create ') . $node_type;
+      drupal_set_title($add_title);
+    }
+
     $form['#after_build'][] = 'itg_reporter_after_build';
 
     $destination = 'byline-list';
