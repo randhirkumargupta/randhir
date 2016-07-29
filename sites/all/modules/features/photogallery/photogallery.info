@@ -73,6 +73,7 @@ features[field_instance][] = node-photogallery-field_story_facebook_video
 features[field_instance][] = node-photogallery-field_story_itg_tags
 features[field_instance][] = node-photogallery-field_story_large_image
 features[field_instance][] = node-photogallery-field_story_medium_image
+features[field_instance][] = node-photogallery-field_story_node_identity
 features[field_instance][] = node-photogallery-field_story_posted_by_facebook
 features[field_instance][] = node-photogallery-field_story_posted_by_instagram
 features[field_instance][] = node-photogallery-field_story_posted_by_twitter

@@ -476,7 +476,7 @@ function itg_astro_frequency_map($title, $freq, $astro_type, $nid = 0) {
  *
  * @param stdObject $node
  */
-function itg_astro_node_validate($node) {
+function itg_astro_node_validate($node) {  
   $result = '';
   $title = $node->title;
   $freq = $node->field_astro_frequency['und'][0]['value'];

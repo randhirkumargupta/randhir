@@ -2770,6 +2770,48 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-recipe-field_story_node_identity'.
+  $field_instances['node-recipe-field_story_node_identity'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 49,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 48,
+    ),
+  );
+
   // Exported field_instance: 'node-recipe-field_story_reporter'.
   $field_instances['node-recipe-field_story_reporter'] = array(
     'bundle' => 'recipe',
@@ -3359,6 +3401,7 @@ function feature_for_recipe_field_default_field_instances() {
   t('Meal for');
   t('Meal type');
   t('Medium image');
+  t('Node Identity');
   t('Please enter Byline.');
   t('Please enter Calorie Count, Numeric value will be entered.
 ');
