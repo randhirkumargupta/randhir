@@ -21,6 +21,7 @@
     }
     #edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper{
       position: relative;
+      padding-top:13px;
       > label{
         display: block;
         font-size: 12px;
@@ -34,7 +35,7 @@
           height: 0;
           border-style: solid;
           border: 5px 4px;
-          border-color: #323232 transparent transparent transparent;
+          border-color: #b3b3b3 transparent transparent transparent;
           position: absolute;
           right: 8px;
           top: 8px;
@@ -44,7 +45,7 @@
         display: none;
         position: absolute;
         left: 0;
-        top: 25px;
+        top: 31px;
       }
       &:hover{
         .views-widget{display: block;}
@@ -53,7 +54,21 @@
     .form-select{
       height: 95px;
     }
+    .views-exposed-widget{
+        label{
+            font-weight: normal;
+            + select{
+            height: auto;
+            margin-bottom: 10px;
+            }
+        }
+        .caln{
+            .form-item{
+                margin-bottom: 5px;
+                margin-right: 0;
+            }
+        }
+    }
   }
-  
 }
 

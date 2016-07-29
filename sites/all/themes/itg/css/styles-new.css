@@ -21,6 +21,7 @@
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
   position: relative;
+  padding-top: 13px;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label {
   display: block;
@@ -36,7 +37,7 @@
   height: 0;
   border-style: solid;
   border: 5px 4px;
-  border-color: #323232 transparent transparent transparent;
+  border-color: #b3b3b3 transparent transparent transparent;
   position: absolute;
   right: 8px;
   top: 8px;
@@ -45,11 +46,22 @@
   display: none;
   position: absolute;
   left: 0;
-  top: 25px;
+  top: 31px;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper:hover .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper:hover .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper:hover .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper:hover .views-widget {
   display: block;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .form-select {
   height: 95px;
+}
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget label {
+  font-weight: normal;
+}
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget label + select {
+  height: auto;
+  margin-bottom: 10px;
+}
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget .caln .form-item {
+  margin-bottom: 5px;
+  margin-right: 0;
 }

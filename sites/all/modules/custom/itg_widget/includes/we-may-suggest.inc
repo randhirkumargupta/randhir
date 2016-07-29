@@ -11,24 +11,16 @@
  * @return array
  */
 function itg_widget_we_may_suggest_ordering_from_custom_table($info) {
-    $data = '';
-    if (!empty($info)) {
-        $content_type = $info['content_type'];
-        $cat_id = $info['section'];
-        $view_name = $info['view_name'];
-        $widget_name = _get_widget_name(NULL, 'we_may_suggest_widget');
-        $result = db_select('itg_widget_order', 'iwo')
-                        ->fields('iwo', array('nid'))
-                        ->condition('iwo.cat_id', $cat_id)
-                        ->condition('iwo.content_type', $content_type)
-                        ->condition('iwo.widget', $widget_name)
-                        ->orderBy('iwo.weight')
-                        ->range(0, 4)
-                        ->execute()->fetchAll(PDO::FETCH_ASSOC);
-        $data = $result;
-    }
-    else {
-        watchdog("Widget", "Data array is not in proper format");
-    }
-    return $data;
+  if (is_array($info)) {
+    $widget_name = _get_widget_name(NULL, 'we_may_suggest_widget');
+    return db_select('itg_widget_order', 'iwo')
+      ->fields('iwo', array('nid'))
+      ->condition('iwo.widget', $widget_name)
+      ->orderBy('iwo.weight')
+      ->range(0, 4)
+      ->execute()->fetchAll(PDO::FETCH_ASSOC);
+  }
+  else {
+    watchdog("Widget", "Data array is not in proper format");
+  }
 }

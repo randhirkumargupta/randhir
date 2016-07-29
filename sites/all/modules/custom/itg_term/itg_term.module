@@ -420,12 +420,13 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
 function itg_term_views_query_alter(&$view, &$query) {
   if (isset($view->name) && $view->name === 'tags_management') {
     if (isset($_GET['created']['max']['date'])) {
+      
+      $mx_date = str_replace('/', '-', $_GET['created']['max']['date']);
+      $mx_date = strtotime($mx_date . ' +1 days');
       $max_conditions_array = array();
-      $_GET['created']['min']['date'] = str_replace('/', '-', $_GET['created']['min']['date']);
-      $_GET['created']['max']['date'] = str_replace('/', '-', $_GET['created']['max']['date']);
-      $_GET['created']['min']['date'] = date("Y-m-d", strtotime($_GET['created']['min']['date']));
-      $max_date = strtotime(date('d-m-Y', strtotime($_GET['created']['max']['date'] . ' +1 days')));
+      $max_date = strtotime(date('d-m-Y', $mx_date));
       $max_date_condition = " AND " . $max_date;
+      
       if (isset($view->query->where[1]['conditions'][1]['field'])) {
         foreach ($query->where[1]['conditions'] as $idx => $condition) {
           if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
