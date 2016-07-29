@@ -43,47 +43,42 @@
           
           ?></div>
       
-          <div class="vukkul-comment">
-              <input type="hidden" name="nid" id="nid" value=<?php print $node->nid; ?>>
-              <input type="hidden" name="tags" id="tags" value=<?php print implode(',', $comma_sep_tag); ?>>
-                <input type="hidden" name="title" id="title" value="<?php print $title." - India Today"; ?>">
-              <div id="vuukle_div"></div><script src="http://vuukle.com/js/vuukle.js" type="text/javascript"></script><script type="text/javascript">
+      
+      <!-- condition for buzz  -->
+      <h3>BUZZ Detail</h3>
+      <?php
+          if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
+          $buzz_output.= '';
+          foreach ($node->field_story_template_buzz['und'] as $buzz_item) {
 
-               var UNIQUE_ARTICLE_ID = jQuery('#nid').val();
+            $buzz_output.= '<div class="buzz-section">';
 
-               var SECTION_TAGS =  jQuery('#tags').val();
+            $field_collection_id = $buzz_item['value'];
+            $entity = entity_load('field_collection_item', array($field_collection_id));
+            $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+            $img = '<img src="' . image_style_url("thumbnail", $buzz_imguri) . '">';
+            $buzz_output.= '<div class="field"><div class="field-label">Headline:</div><div class="field-items">' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</div></div>';
+            $buzz_output.= '<div class="field"><div class="field-label">Image:</div><div class="field-items">' . $img . '</div></div>';
+            $buzz_output.= '<div class="field"><div class="field-label">Description:</div><div class="field-items">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div></div>';
+            $buzz_output.= '</div>';
+          }
 
-               var ARTICLE_TITLE = jQuery('#title').val();
+          print $buzz_output;
+        }
+        ?>
+      
+      <!-- condition for buzz end -->
+      
+      <div class="vukkul-comment">
 
-               var GA_CODE = "UA-795349-17";
-
-               var VUUKLE_API_KEY = "dc34b5cc-453d-468a-96ae-075a66cd9eb7";
-
-               var TRANSLITERATE_LANGUAGE_CODE = ""; //"en" for English, "hi" for hindi
-
-               var VUUKLE_COL_CODE = "d00b26";
-
-               var ARTICLE_AUTHORS = 'JTVCJTdCJTIwJTIybmFtZSUyMjolMjAlMjJJbmRpYVRvZGF5LmluJTIwJTIyLCUyMCUyMCUyMCUyMmVtYWlsJTIyOiUyMCUyMmRlc2staXRnZEBpbnRvZGF5LmNvbSUyMCUyMiwlMjAlMjAlMjAlMjJ0eXBlJTIyOiUyMCUyMkFnZW5jeSUyMCUyMiU3RCU1RA==';
-
-               create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
-
-               </script>
-
- 
-      </div>
+            <div id="vuukle_div"></div>
+            <?php
+            if (array_key_exists("vukkul",$content)){
+        print drupal_render($content["vukkul"]);
+}
+?>
+        </div>
 
   </div>
-  <?php
-  // code for comment hide and show based on condition
-
-  //if ($node->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'comment') {
-    ?>
-    <?php //if (!empty($node->field_story_comment_question[LANGUAGE_NONE][0]['value'])) { ?>
-     <!-- <div class="node comm-ques"> <?php print render($content['field_story_comment_question']); ?></div> -->
-    <?php //} ?>
-    <?php
-   // print render($content['comment_form']);
-    //print render($content['comments']);
- // }
-  ?>
+  
 <?php endif; ?>
