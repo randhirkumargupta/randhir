@@ -96,6 +96,7 @@ features[field_instance][] = node-recipe-field_story_facebook_video
 features[field_instance][] = node-recipe-field_story_kicker_text
 features[field_instance][] = node-recipe-field_story_large_image
 features[field_instance][] = node-recipe-field_story_medium_image
+features[field_instance][] = node-recipe-field_story_node_identity
 features[field_instance][] = node-recipe-field_story_reporter
 features[field_instance][] = node-recipe-field_story_short_headline
 features[field_instance][] = node-recipe-field_story_small_image
