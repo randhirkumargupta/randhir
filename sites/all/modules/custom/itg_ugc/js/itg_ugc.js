@@ -143,7 +143,7 @@
         }
       }
     
-    // Written code for handling relication of same error string
+    // Written code for handling repeating error message
      $('.field-name-field-ugc-upload-photo').find('.form-submit').on('mousedown', function(e) {
       $('.field-name-field-ugc-upload-photo').find('.messages.error').remove();  
      });
