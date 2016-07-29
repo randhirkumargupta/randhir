@@ -55,6 +55,7 @@ function feature_for_video_views_default_views() {
     'field_story_category' => 'field_story_category',
     'nothing' => 'nothing',
     'changed' => 'changed',
+    'status' => 'status',
     'view_node' => 'nothing_1',
     'edit_node' => 'nothing_1',
     'delete_node' => 'nothing_1',
@@ -68,7 +69,7 @@ function feature_for_video_views_default_views() {
       'empty_column' => 0,
     ),
     'title' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -112,6 +113,13 @@ function feature_for_video_views_default_views() {
     ),
     'changed' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'status' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -174,7 +182,7 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -381,7 +389,7 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -424,6 +432,15 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['status']['type_custom_true'] = 'Published';
   $handler->display->display_options['fields']['status']['type_custom_false'] = 'Un published';
   $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = 'Video formats';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = 'View Formats';
+  $handler->display->display_options['fields']['nothing_2']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_2']['alter']['path'] = 'video-status/[nid]?width=600';
+  $handler->display->display_options['fields']['nothing_2']['alter']['link_class'] = 'colorbox-load';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -455,6 +472,134 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
   $handler->display->display_options['path'] = 'manage-videogallery';
   $export['manage_videogallery'] = $view;
+
+  $view = new view();
+  $view->name = 'video_status';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'video status';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'video status';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_upload_video' => 'field_upload_video',
+    'fid' => 'fid',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_upload_video' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'fid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Relationship: Content: Video Upload (field_videogallery_video_upload) */
+  $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['id'] = 'field_videogallery_video_upload_value';
+  $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['table'] = 'field_data_field_videogallery_video_upload';
+  $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['field'] = 'field_videogallery_video_upload_value';
+  $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['delta'] = '-1';
+  /* Relationship: Field collection item: Video (field_upload_video:fid) */
+  $handler->display->display_options['relationships']['field_upload_video_fid']['id'] = 'field_upload_video_fid';
+  $handler->display->display_options['relationships']['field_upload_video_fid']['table'] = 'field_data_field_upload_video';
+  $handler->display->display_options['relationships']['field_upload_video_fid']['field'] = 'field_upload_video_fid';
+  $handler->display->display_options['relationships']['field_upload_video_fid']['relationship'] = 'field_videogallery_video_upload_value';
+  /* Field: File: Name */
+  $handler->display->display_options['fields']['filename']['id'] = 'filename';
+  $handler->display->display_options['fields']['filename']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['filename']['field'] = 'filename';
+  $handler->display->display_options['fields']['filename']['relationship'] = 'field_upload_video_fid';
+  $handler->display->display_options['fields']['filename']['label'] = 'Video Name';
+  /* Field: File: File ID */
+  $handler->display->display_options['fields']['fid']['id'] = 'fid';
+  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['fid']['field'] = 'fid';
+  $handler->display->display_options['fields']['fid']['relationship'] = 'field_upload_video_fid';
+  $handler->display->display_options['fields']['fid']['exclude'] = TRUE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = 'VIdeo Formats';
+  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+$video_id = itg_videogallery_get_videoid($row->fid);
+if($video_id != \'\'){
+ $api = itg_podcast_dailymotion_api();
+ $value = $api->get(
+        \'/video/\'.$video_id,
+        array(\'fields\' => array(\'available_formats\'))
+    );
+print implode(\', \', $value[\'available_formats\']);
+}else{
+print \'Status not found.\';
+}
+?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'videogallery' => 'videogallery',
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'video-status';
+  $export['video_status'] = $view;
 
   return $export;
 }

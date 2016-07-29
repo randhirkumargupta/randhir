@@ -265,17 +265,6 @@ function itg_common_cancel_button($form, &$form_state) {
 }
 
 /**
- * Implements hook_views_pre_render
- * {@inheritdoc}
- */
-function itg_common_views_pre_render(&$view) {
-  if ($view->name == "byline_list") {
-    $header_content = l(t('Create Byline'), 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
-    $view->attachment_before = $header_content;
-  }
-}
-
-/**
  * Implements hook_form_FORMID_alter().
  * {@inheritdoc}
  */
@@ -411,18 +400,18 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
  * Implementation of hook_node_presave().
  * @param object $node
  */
-function itg_common_node_presave($node) {
+function itg_common_node_presave($node) {  
   switch ($node->type) {
     case 'astro':
     case 'recipe':
     case 'poll':
     case 'mega_review_critic':
-      if ($node->op == 'Save as Draft') {
-        $node->status = 0;
-      }
-      else {
+      if ($node->op == 'Publish') {        
         $node->status = 1;
-      }
+      }      
+      elseif ($node->op == 'Save as Draft' || $node->status == 0) {        
+        $node->status = 0;        
+      }      
   }
 }
 

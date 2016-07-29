@@ -210,11 +210,136 @@ function feature_for_video_field_default_field_instances() {
           ),
         ),
         'imce_filefield_on' => 0,
-        'preview_image_style' => 'thumbnail',
+        'preview_image_style' => 'podcast_audio_image_preview',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
       'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'node-videogallery-field_dailymotion_playlist'.
+  $field_instances['node-videogallery-field_dailymotion_playlist'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 27,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_dailymotion_playlist',
+    'label' => 'Dailymotion playlist',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 29,
+    ),
+  );
+
+  // Exported field_instance: 'node-videogallery-field_itg_common_by_line_name'.
+  $field_instances['node-videogallery-field_itg_common_by_line_name'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 28,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_itg_common_by_line_name',
+    'label' => 'Common by line',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-videogallery-field_itg_common_by_line_twitter'.
+  $field_instances['node-videogallery-field_itg_common_by_line_twitter'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 29,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_itg_common_by_line_twitter',
+    'label' => 'common by line twitter',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 33,
     ),
   );
 
@@ -463,7 +588,7 @@ function feature_for_video_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
     'label' => 'Extra large image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -1592,8 +1717,10 @@ function feature_for_video_field_default_field_instances() {
   t('Byline');
   t('City');
   t('Comment question');
+  t('Common by line');
   t('Configurations');
   t('Courtesy');
+  t('Dailymotion playlist');
   t('Expiry Date');
   t('Extra large image');
   t('Extra small image');
@@ -1624,6 +1751,7 @@ function feature_for_video_field_default_field_instances() {
   t('Video Thumbnail');
   t('Video Upload');
   t('Video expires');
+  t('common by line twitter');
 
   return $field_instances;
 }

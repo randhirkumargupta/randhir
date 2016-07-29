@@ -1,0 +1,253 @@
+/*font family an font weight mixins*/
+@mixin itg-font($font:null, $weight:null) {
+  font-weight: $weight;
+  font-family: $font;   
+}
+/*font size an font weight mixins*/
+$root-font-size: 16px;
+@mixin font($size:null, $line-height:null, $weight: null) {
+  font-size: $size; // IE fix
+  font-size: ($size / $root-font-size) * 1rem;
+  @if $weight != null {
+    font-weight: $weight;
+  }
+  line-height: $line-height;
+}
+/*clear fix mixins*/
+@mixin clearfix {
+    zoom:1;
+    &:before, &:after {
+        content: "";
+        display: block;       
+        height: 0; 
+        overflow: hidden; 
+    }
+    &:after {
+        clear: both;
+    }
+}
+/*Box sizeing mixins*/
+@mixin box-sizing($border-box) {
+  @each $vendor in -webkit-, -moz-,-o-,-ms-,'' {
+    #{$vendor}box-sizing: $border-box;
+  }
+}
+/*Center Block mixins*/
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*Float mixins*/
+@mixin float($pos) {  
+  @if ($pos == left) {
+   float:left;
+  }
+  @else if ($pos == right) {
+   float:right;
+  }
+  @else if ($pos == none) {
+   float: none;
+  }
+}
+
+/*Display inline block mixins*/
+@mixin display-inline{
+    display: inline-block;
+    vertical-align: top;
+}
+/*Text align block mixins*/
+@mixin text-align($align) {  
+  @if ($align == center) {
+   text-align:center;
+  }
+  @else if ($align == left) {
+   position: left;
+  }
+  @else if ($align == right) {
+   position: right;
+  }
+}
+
+/* Positional mixins */
+@mixin pos($pos:static,$top:null,$right:null,$bottom:null,$left:null,$z-index:null) {  
+  @if (($pos == relative) or ($pos == re)) {
+   position: relative;
+  }
+  @else if (($pos == absolute) or ($pos == ab)) {
+   position: absolute;
+  }
+  @else if (($pos == fixed) or ($pos == fi)) {
+   position: fixed;
+  }
+  @else if ($pos == static) {
+   position:static;
+  }   
+  top:$top;
+  right:$right;
+  bottom:$bottom;
+  left:$left;
+  z-index:$z-index;
+}
+/* Calculate-width function */
+@mixin calculate-width ($col-span) {
+    width: 100% / $col-span;
+}
+
+/* Tab Button mixins */
+@mixin tab-buttons {
+    background: $tab-primary-bg;
+    border-radius: 10px 10px 0 0;
+     span{
+        @include itg-font($itg-roboto, $itg-font-medium);
+        background: $tab-primary-bg;
+        text-transform: uppercase;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+        border-top: 3px solid transparent;
+        color: $tab-primary-color;
+        @include calculate-width(2);
+        display: block;
+        @include float(left);
+        cursor: pointer;
+        &.active{
+            background: $white-color;
+            color: $red-color;
+            border-left: 1px solid $tab-primary-border-color;
+            border-right: 1px solid $tab-primary-border-color;
+            border-top: 3px solid $red-color;
+        }
+    }
+}
+/* Tab Listing mixins */
+@mixin tab-listing {
+    @include pos(relative);
+        a{
+            color: $tab-list-color;
+            padding: 15px 15px 15px 20px;
+            display: block;
+            border-bottom: 1px solid $tab-primary-border-color;
+            &:hover{
+                background: $off-white-bg;
+            }
+            &:first-letter{
+                text-transform: capitalize;
+            }
+        }
+        &:last-child a{
+            border-bottom: none;
+        }
+        &:before{
+           @include pos(absolute,22px,null,null,9px);
+           content: '';
+           border-radius: $full-radius;
+           background: $tab-icon-bg;
+           height: 5px;
+           width: 5px;
+        }
+}
+
+/* Story Tag mixins */
+@mixin story-tag($height, $line-height){
+    @include pos(absolute,0px,null,null,0px);
+    background: $red-bg;
+    height: $height;
+    line-height: $line-height;
+    padding: 0 7px;
+    text-transform: uppercase;
+    color:$white-color;
+    @include itg-font($itg-roboto);
+}
+
+/* List before icon */
+@mixin before-icon-list($width, $height, $top, $left, $background-color, $border-radius) {
+    @include pos(relative);
+
+  &:before {
+    @include pos(absolute);
+    top: $top;
+    left: $left;
+    content: '';
+    border-radius: $border-radius;
+    background: $background-color;
+    height: $width;
+    width: $height;
+  }
+}
+
+/*mixin for transition animation*/
+@mixin transition($args) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+/*mixin for listing with image*/
+@mixin listing-with-image($img-position,$image-space,$class-image,$class-title){   
+    li{ 
+        overflow: hidden;
+        padding: 10px;
+        &+li{
+            border-top: 1px solid $border-color;
+        }
+        .#{$class-image} {
+            @include float($img-position);
+            @if (($img-position == left)) {
+                margin-right:$image-space;
+            }
+            @else{
+                margin-left:$image-space;
+            }
+        }
+        .#{$class-title}{
+            display: block;
+            overflow: hidden;
+            @include font(14px,19px);
+            color: $black-color;
+        }
+    }
+}
+/*mixin for pager*/
+@mixin pager {
+    ul.pager{
+    margin:10px 0;
+    list-style-type: none;
+    @include text-align(center);
+  li{
+    @include display-inline;
+    &.pager-current{
+        height: 25px;
+        width: 25px;
+        line-height: 25px;      
+        background-color: #337ab7;
+        color: $white-color;
+        border-radius: 50%;
+        @include itg-font($itg-roboto);
+    }
+    &.pager-item{
+      a{       
+        display: block;
+        height: 25px;
+        width: 25px;
+        @include font(16px,25px);        
+        color: $black-color;
+        @include itg-font($itg-roboto);
+        &:hover{
+          background-color: #337ab7;
+          color: $white-color;
+          border-radius: 50%;
+        }
+      }
+    }
+    &.pager-next, &.pager-last, &.pager-first, &.pager-previous{
+      a{
+        color: $black-color;
+        line-height: 25px;
+      }
+    }
+  }
+}
+}

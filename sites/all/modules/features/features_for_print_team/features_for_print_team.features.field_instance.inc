@@ -11,6 +11,43 @@ function features_for_print_team_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'comment-comment_node_print_team_integration-comment_body'.
+  $field_instances['comment-comment_node_print_team_integration-comment_body'] = array(
+    'bundle' => 'comment_node_print_team_integration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'comment',
+    'exclude_cv' => 0,
+    'field_name' => 'comment_body',
+    'label' => 'Comment',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_pti_print_media-field_pti_upload_image'.
   $field_instances['field_collection_item-field_pti_print_media-field_pti_upload_image'] = array(
     'bundle' => 'field_pti_print_media',
@@ -318,6 +355,46 @@ function features_for_print_team_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-print_team_integration-field_pti_mark_as_complete'.
+  $field_instances['node-print_team_integration-field_pti_mark_as_complete'] = array(
+    'bundle' => 'print_team_integration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please mark as complete, if item has been sold out.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_pti_mark_as_complete',
+    'label' => 'Mark as Complete',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-print_team_integration-field_pti_print_media'.
   $field_instances['node-print_team_integration-field_pti_print_media'] = array(
     'bundle' => 'print_team_integration',
@@ -444,6 +521,45 @@ function features_for_print_team_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-print_team_integration-field_story_rating'.
+  $field_instances['node-print_team_integration-field_story_rating'] = array(
+    'bundle' => 'print_team_integration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_rating',
+    'label' => 'Rating',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-print_team_integration-field_survey_end_date'.
   $field_instances['node-print_team_integration-field_survey_end_date'] = array(
@@ -478,7 +594,7 @@ function features_for_print_team_field_default_field_instances() {
     'label' => 'Timeline',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -491,7 +607,7 @@ function features_for_print_team_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 1,
-        'input_format' => 'Y-m-d H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -505,12 +621,16 @@ function features_for_print_team_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Comment');
   t('Idea Brief');
   t('Idea Status');
   t('Image');
   t('Issue');
   t('Magazine');
+  t('Mark as Complete');
+  t('Please mark as complete, if item has been sold out.');
   t('Print Media');
+  t('Rating');
   t('Select Section');
   t('Timeline');
   t('Timeline to submit the final story.');

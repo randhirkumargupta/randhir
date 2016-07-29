@@ -1,11 +1,37 @@
 /*---------------------------- ITG CSS -----------------------------------*/
-
+@import "itg-variables";
+@import "itg-mixins";
 /* Global CSS */
 body{
-  font: 400 14px/18px 'Roboto';
+  font: 400 14px/18px $itg-robotoslab;
   color: #333;
 }
-h1, h2, h3, h4{font-weight: 500;}
+h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
+h1{    
+    font-size: $mobile-h1-font-size;
+    line-height: $mobile-h1-line-height;
+    font-weight: $itg-font-bold;
+}
+h2{
+    font-size: $mobile-h2-font-size;
+    line-height: $mobile-h2-line-height;
+    font-weight: $itg-font-bold;
+}
+h3{
+    font-size: $mobile-h3-font-size;
+    line-height: $h3-line-height;
+}
+ul{
+    list-style-type: none;
+}
+a{
+    color:$black-color;
+    text-decoration: none;
+}
+img{
+    vertical-align: top;
+    max-width: 100%;
+}
 .mr-0{
   margin: 0;
 }
@@ -33,6 +59,10 @@ h1, h2, h3, h4{font-weight: 500;}
 .pdlr-30{
   padding-left: 30px;
   padding-right: 30px;
+}
+.pdlr-10{
+  padding-left: 10px;
+  padding-right: 10px;    
 }
 .pdtb-10{
   padding-top: 10px;
@@ -68,6 +98,9 @@ h1, h2, h3, h4{font-weight: 500;}
 .full{
   width: 100%;
 }
+.max-wdt{
+    max-width: 100%;
+}
 .fleft{
   float: left;
 }
@@ -76,6 +109,15 @@ h1, h2, h3, h4{font-weight: 500;}
 }
 .pos-rel{
   position: relative;
+}
+.mhide{
+    display: none;
+}
+.m-top{
+    margin-top: 50px;
+}
+.m-bottom40{
+    margin-bottom: 40px;
 }
 .btn {
     background-color: #337ab7;
@@ -128,11 +170,81 @@ input[type="text"], select, input[type="password"]{
   @extend .pd-0;
   box-sizing: border-box;
 }
-#page{padding-bottom: 30px; @extend .full; @extend .dib;}
+.row{
+    @include clearfix;
+}
+#page{@extend .vtop; @extend .full; @extend .dib;}
 .header{
-  @extend .pdtb-10;
+  padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
+  background: $header-bg  url(../images/mobile-header-bg.png) no-repeat top center;
+  a{
+      color: $white-color; 
+      font-family: $itg-roboto;
+  }
+  .header-logo{
+      @include pos(relative);
+  }
+  .header-ads{
+    text-align: center;
+  }
+  .login-link{
+      text-align: right;
+      a{
+       @include itg-font(null,$itg-font-regular);
+        margin-right: 10px;
+      }
+  }
+  .logo{
+    width:67px;
+    @include pos(absolute,-10px,null,null,10px);
+    img{
+       @extend .max-wdt;
+    }
+  }
+  .top-nav{
+     padding: 0;  
+    @extend .full;
+    background: $red-bg;    
+    margin-top: 7px;
+    text-align: right;
+    height: 28px;
+    line-height: 28px;
+    ul{
+       @extend .no-bullet;
+       li{
+          @extend .dib;
+          a{
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 15px;
+            @include itg-font(null,$itg-font-medium);
+            @extend .pdlr-10;
+            .fa{
+              font-size: 20px;
+              line-height: 28px;
+              @extend .vtop;
+            }
+          } 
+       }
+    }
+  }
+  .navigation{    
+    background: $red-bg;
+    display:none;
+    ul{
+        li a {
+        border-top: 1px solid #900505;
+        display: block;
+        line-height: 30px;
+        padding: 0 15px;
+         &.active, &:hover{
+                            color: $yellow-color;
+                        }
+      }  
+    }
+  }
 }
 .tabs-primary{
   @extend .no-bullet;
@@ -724,3 +836,431 @@ input[type="text"], select, input[type="password"]{
 .tv-schedule-news .slick-slide span{display: block;}
 .tv-schedule-news{border: 1px solid #d9d9d9;}
 .tv-schedule-news .tv-schedule-task span{padding: 10px; border: 1px solid #d9d9d9; overflow: hidden; height: 100px;}
+
+/*Start CSS footer section*/
+footer{
+    margin-top:40px;
+    background: $black-bg;
+    @include itg-font($itg-roboto);
+    a{
+        color:$footer-text-color;
+        @include itg-font($itg-roboto);
+    }
+    .footer-top{
+        .container{
+            @include clearfix;
+            @include pos(relative);
+        }
+        a{
+          color:$white-color;  
+        }
+        .footer-top-link{           
+            white-space: nowrap;
+            overflow-x: auto;
+            margin-right: 50px;
+        }
+        .footer-social-link{
+            @include float(right);
+            padding-right: 50px;
+        }
+        ul{
+            li{
+                @include display-inline;
+                &:nth-child(1){
+                    a{
+                      padding-left:0;  
+                    }
+                } 
+               a{
+                color: $white-color;
+                padding: 0 15px;
+                height: 37px;
+                line-height: 37px;
+                border-right: 1px solid $footer-border-color;
+                font-size: 17px;
+                display: block;
+               }
+            }
+        }
+        .footer-expand-icon{
+            @include pos(absolute,0,0,null,null);
+            width: 50px;
+            @include text-align(center);            
+            height: 37px;
+            cursor: pointer;
+            background:$black-bg url(../images/footer-close-icon.png) no-repeat center center;
+        }
+        .footer-open-icon{
+            background:$black-bg url(../images/footer-open-icon.png) no-repeat center center;
+        }
+    }
+    .footer-mid{
+        background: $second-black-bg;
+        padding: 12px 0;
+    }
+    .footer-bottom{
+        padding:20px 0;
+        a{
+            font-size: 12px;
+            &:hover{
+                color: $yellow-color;
+            }
+        }
+        h4{
+            @include itg-font($itg-roboto,$itg-font-medium);
+            color: $white-color;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        ul{
+            li{
+                padding: 2px 0;
+            }
+        }
+        .cell{
+            padding: 0 15px;
+            @include calculate-width(2);  
+            margin-bottom: 20px;
+            @include float(left);
+            ul{
+              margin-bottom: 20px;  
+              &:last-child{
+                  margin-bottom:0px;
+              }
+              .more-link{
+                  color:$yellow-color;
+                  font-size: 12px;
+                  cursor:pointer; 
+              }
+            }
+            &:nth-child(2n+1) {
+                clear: left;
+            }
+        }
+        /*.first-cell{
+            @include calculate-width(1);
+            h4{                
+                margin-bottom: 5px;
+            }
+            ul{
+                li{
+                    @include display-inline;
+                    width: 49%;
+                }
+            }
+        }*/
+    }
+    .footer-copyright{
+        color: $footer-text-color;
+        padding: 10px 0;
+        @include text-align(center);
+        @include font(12px);        
+        border-top: 1px solid $footer-border-color;
+    }
+}
+/*End CSS footer section*/
+/*Start CSS Top Block Grid Home Page*/
+.itg-front{
+    .droppable{
+        position: relative;
+    }
+}
+.top-block{
+    .top-colum-1, .top-colum-2, .top-colum-3{
+       padding: 0 15px;
+       width: 100%;
+       margin-bottom: 50px;
+    }
+}
+/*End CSS Top Block Grid Home Page*/
+/*Start CSS Big New Home page*/
+.big-news{
+    @include pos(relative);
+    color: $white-color;
+    padding:10px;
+    background: $black-bg;
+    margin-bottom: 50px;
+    @include itg-font($itg-roboto);
+    .big-story-col-1, .big-story-col-2{        
+        padding:0 15px;
+    } 
+    h1{
+        margin-bottom: 10px;
+    }
+    a{
+        color: $white-color;
+    }
+    p{
+        color: #adacac;
+        @include font(16px,20px,null);
+        margin-bottom: 15px;
+    }
+    .share-new{
+        margin-bottom: 15px;
+        ul{
+            li{
+                &:first-child{
+                    a{
+                        padding-left: 0;
+                    }
+                }
+                @include display-inline;
+                a{                    
+                    padding: 0 10px;                    
+                    border-right: 1px solid #606060;
+                    @include font(16px,15px,null);
+                    @include display-inline;
+                }
+                &:last-child{
+                    a{
+                        color: $yellow-color; 
+                        border-right: none;
+                     }
+                }
+            }
+        }
+    }
+    .big-story-detail{
+        li{
+            @include before-icon-list(6px, 6px, 5px, 0, #ffffff, 50%);
+            padding-left: 15px;
+            margin-bottom: 15px;
+            a{
+                @include font(16px,null,$itg-font-bold);
+            }
+        }
+    }
+    .story-tag{
+        @include story-tag(26px,26px);
+        margin: 10px 0 0 10px;
+    }
+}
+/*End CSS Big New Home page*/
+/*Start CSS Top Story Home Page*/
+    .tab-buttons {
+        @include clearfix;
+        @include tab-buttons;
+    }
+    .itg-listing{
+        list-style: none;
+        border: 1px solid $border-color;
+        li{
+            @include tab-listing;        
+        }
+    }
+/*End CSS Top Story Home page*/
+/*Start CSS Featured New Home page*/
+.featured-news{
+    @include clearfix;
+    padding-bottom:10px;
+    margin: 0 -5px;
+    .featured-post {
+        @include float(left);
+        @include calculate-width(2);
+        padding:5px;
+        &:hover a{
+            color:$blue-color;
+        }
+        img{
+            padding-bottom: 10px;
+            @include calculate-width(1);
+        }
+        &.featured-post-first{
+            @include float(none);
+            @include calculate-width(1);
+            margin-bottom: 10px;
+        }
+    }
+}
+.video-n-magazine{
+    border: 1px solid #e4dfdf;
+    height: 800px;
+}
+/*End CSS Featured New Home page*/
+/*Start CSS section story Home page*/
+.section-ordering{
+    h3{
+         padding: 15px 0;
+    }
+    p{
+        @include font(14px,18px);
+        @include before-icon-list(5px,5px,18px,0px,$red-bg,100%);
+        border-top:1px solid $border-color;
+        padding: 12px 0 12px 12px;
+    }
+}
+/*End CSS section story Home page*/
+/*Start CSS trending-videos Home  page*/
+.trending-videos{
+    border: 1px solid $border-color;
+    padding-top: 10px;
+    @include listing-with-image(left,10px,pic,title);
+}
+/*End CSS trending-videos Home  page*/
+/*Start Search page css*/
+.view-front-end-global-search{
+    .view-filters{
+        @include itg-font($itg-roboto);
+        color: #b3b3b3;
+        margin-bottom: 40px;
+    }
+    .views-widget{
+        @include pos(relative);
+        .s-link{
+            @include pos(absolute,0px,0px,null,null);
+            a{
+                width: 50px;
+                height: 46px;
+                background: #2c323d;
+                @include display-inline;
+                color: $white-color;
+                @include text-align(center);
+                @include font(20px,40px);
+                cursor: pointer;
+                &#search_button{
+                    margin-right: 1px;
+                }
+                &:hover{
+                    color: $yellow-color;
+                }
+            }
+        }
+    }
+    .views-exposed-widget{
+        position: relative;
+        .caln{
+            display: block;
+            background: #f5f5f5;
+            @include pos(absolute);            
+            padding: 15px;
+            width: 400px;
+            padding-bottom: 0;
+            box-shadow: 2px 2px 2px #f1f1f1;
+            color:$black-color;            
+            label{
+                @include display-inline;
+                padding-top: 9px;
+            }
+            .container-inline-date {
+                @include display-inline;
+                +.container-inline-date{
+                    margin-left: 10px;
+                }
+            }
+            .date-padding{                
+                @include display-inline;
+                @include float(none);
+                width: 150px;
+                label{
+                    display: none;
+                }
+                input[type="text"]{
+                    @include calculate-width(1);
+                    background: #fff url(../images/calender-icon.png) no-repeat center right;                    
+                    margin-right: 0;
+                }
+                .description{
+                    @include font(12px);
+                    color: #a5a5a5;
+                }                
+            }
+            &:before{
+                content: '';
+                width: 0;
+                height: 0;
+                border-left: 12px solid transparent;
+                border-right: 12px solid transparent;
+                border-bottom: 12px solid whitesmoke;
+                top: -11px;
+                position: absolute;
+                left: 9px; 
+            }
+        }
+    }
+    .view-content{        
+        @include listing-with-image(left,10px,search-pic,search-detail);
+        li{
+            padding: 25px 0;
+        }
+        .search-detail{
+            h2{
+                @include font(20px,22px);
+                margin-bottom:10px;
+                a{
+                  @include font(20px,null,$itg-font-medium);   
+                }
+            }            
+        }
+        .other-info{
+            @include itg-font($itg-roboto);
+            @include font(12px);
+            color: #8f8f8f;
+            margin-top: 15px;
+        }
+    }
+    .item-list{
+        @include pager;
+    }
+    .attachment {
+        @include itg-font($itg-roboto); 
+        border-bottom: 1px solid $border-color;
+        .count{
+            @include font(30px,22px,$itg-font-medium);            
+            color: #737373;                     
+            padding-bottom: 20px;
+            display: block;
+            span{
+                color: $red-color;
+            }
+        }
+        .search-menu{
+            padding-bottom: 20px;
+            a{
+                padding: 0 10px;
+                border-left: 2px solid #737373;
+                line-height: 12px;
+                @include display-inline;
+                color: #747474;
+                font-weight: 500;
+                text-transform: uppercase;
+                &:nth-child(1){
+                    padding-left: 0;
+                    border-left: 0;
+                }
+                &:hover{
+                    color: $red-color;
+                }
+            }
+        }
+    }
+}
+/*End Search page css*/
+/*Start Dont miss Home page css*/
+.widget-title{
+  @include story-tag(22px,22px);   
+}
+.dont-miss{
+    background: #f3f3f3;
+    padding: 30px 10px 0px 10px;
+    ul{
+        @include clearfix;
+        @include listing-with-image(left,15px,dm-pic,dm-detail);
+        .dont-miss-listing{            
+            @include calculate-width(1);
+            padding: 0 0px 20px 0;
+            border:none;
+            .dm-detail{
+                h4{
+                    color: #048cb9;
+                    margin-bottom: 5px;
+                    text-transform: uppercase;
+                }
+                p{
+                    @include font(14px,18px);
+                    color: #333;
+                }
+            }
+        }
+    }
+}
+/*End Dont miss Home page css*/

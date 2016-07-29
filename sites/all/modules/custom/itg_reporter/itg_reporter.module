@@ -1,0 +1,162 @@
+<?php
+
+/**
+ * @file
+ * The ITG Reporter module.
+ *
+ * Contains functionality for Reporter.
+ *
+ */
+
+/**
+ * Implements hook_menu().
+ * @return array
+ */
+function itg_reporter_menu() {
+
+  $items['content-email-list/%/autocomplete'] = array(
+    'page callback' => 'itg_reporter_get_content_email',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['content-twitter-list/%/autocomplete'] = array(
+    'page callback' => 'itg_reporter_get_twitter_handle',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_form_alter().
+ * {@inheritdoc}
+ */
+function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($form_id == 'reporter_node_form') {
+  
+    $form['#after_build'][] = 'itg_reporter_after_build';
+
+    $destination = 'byline-list';
+    $form['actions']['cancel'] = array(
+      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+      '#weight' => 21,
+      '#value' => t('Cancel'),
+    );
+  }
+}
+
+/**
+ * Implement hook_after_build
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_reporter_after_build($form, &$form_state) {
+
+  global $user, $base_url;
+
+  // get anchor id based on category name
+
+  $tem_tid = taxonomy_get_term_by_name('anchor', NULL);
+  $tid = array_pop($tem_tid)->tid;
+  
+  // alter label name
+  $form['title']['#title'] = t('Name');
+  // update automatic alias name
+  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
+  //Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  $settings['anchor'] = $tid;
+  $settings['ntype'] = $form['type']['#value'];
+  drupal_add_js(array('itg_reporter' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js');
+
+  return $form;
+}
+
+/**
+ * Implements hook_views_pre_render
+ * {@inheritdoc}
+ */
+function itg_reporter_views_pre_render(&$view) {
+  if ($view->name == "byline_list") {
+    $header_content = l(t('Create Byline'), 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
+    $view->attachment_before = $header_content;
+  }
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ * {@inheritdoc}
+ */
+function itg_reporter_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
+  if ($form['#id'] == 'views-exposed-form-byline-list-page') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/reporter/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Name'));
+    $form['field_reporter_email_id_value']['#autocomplete_path'] = 'content-email-list/reporter/autocomplete';
+    $form['field_reporter_email_id_value']['#attributes'] = array('placeholder' => t('Email id'));
+    $form['field_reporter_twitter_handle_value']['#autocomplete_path'] = 'content-twitter-list/reporter/autocomplete';
+    $form['field_reporter_twitter_handle_value']['#attributes'] = array('placeholder' => t('Twitter Handle'));
+  }
+}
+
+/**
+ * callback for all the reporter email id
+ * @param $email
+ */
+function itg_reporter_get_content_email($email) {
+
+  if (strlen(trim($email)) > 0) {
+    $content_type = arg(1);
+    $options = '';
+    $email = strtolower(trim($email));
+    $query = db_select('field_data_field_reporter_email_id', 'fe');
+    $query->fields('fe', array('field_reporter_email_id_value'));
+    $query->condition('field_reporter_email_id_value', '%' . $email . '%', 'LIKE');
+    $query->condition('fe.bundle', $content_type, '=');
+    $query->range(0, 20);
+
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $options[$record['field_reporter_email_id_value']] = $record['field_reporter_email_id_value'];
+    }
+
+    drupal_json_output($options);
+  }
+}
+
+/**
+ * callback for all the reporter twitter handle
+ * @param $twitter
+ */
+function itg_reporter_get_twitter_handle($twitter) {
+
+  if (strlen(trim($twitter)) > 0) {
+    $content_type = arg(1);
+    $options = '';
+    $twitter = strtolower(trim($twitter));
+    $query = db_select('field_data_field_reporter_twitter_handle', 'ft');
+    $query->fields('ft', array('field_reporter_twitter_handle_value'));
+    $query->condition('field_reporter_twitter_handle_value', '%' . $twitter . '%', 'LIKE');
+    $query->condition('ft.bundle', $content_type, '=');
+    $query->range(0, 20);
+
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $options[$record['field_reporter_twitter_handle_value']] = $record['field_reporter_twitter_handle_value'];
+    }
+
+    drupal_json_output($options);
+  }
+}

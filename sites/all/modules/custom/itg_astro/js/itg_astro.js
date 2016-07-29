@@ -1,5 +1,5 @@
-/*
- * @file itg_astro.js
+/**
+ * @file
  * Contains all functionality related to astro module.
  */
 
@@ -7,7 +7,7 @@
   Drupal.behaviors.itg_astro = {
     attach: function (context, settings) {
 
-      // Hide Zodiac sign name field      
+      // Hide Zodiac sign name field.
       $('.field-name-field-astro-zodiac-sign-name').css('display', 'none');
 
       // Code for astro node form to expand sef url and meta fields.
@@ -18,7 +18,7 @@
         $('#edit-metatags-und-advanced').hide();
       }
 
-      // Map date with frequency
+      // Map date with frequency.
       $('input[name="field_astro_frequency[und]"]').on('change', function () {
 
         var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
@@ -30,15 +30,17 @@
             $("#edit-title").val(startDay);
 
             break;
+
           case 'weekly':
             var startDay = moment().day(0); // Sun
-            var endDay = moment().day(6); // Sat          
+            var endDay = moment().day(6); // Sat.
             $('input[name="field_astro_date_range[und][0][value][date]"]').val(startDay.format('MMM DD, YYYY'));
             $('input[name="field_astro_date_range[und][0][value2][date]"]').val(endDay.format('MMM DD, YYYY'));
             var titleText = startDay.format('MMM DD, YYYY') + " - " + endDay.format('MMM DD, YYYY');
             $("#edit-title").val(titleText);
 
             break;
+
           case 'monthly':
             var firstDay = moment().date(1);
             var lastDay = moment().endOf('month');
@@ -48,6 +50,7 @@
             $("#edit-title").val(titleText);
 
             break;
+
           case 'yearly':
             var firstDay = moment().dayOfYear(1).format('MMM DD, YYYY');
             $('input[name="field_astro_date_range[und][0][value][date]"]').val(firstDay);
@@ -58,11 +61,11 @@
         }
       });
 
-      // validateJobSearch validation function            
+      // validateJobSearch validation function.
       $("#astro-node-form").validate({
         onfocusout: function (element) {
           $(element).valid();
-        },        
+        },
         ignore: '',
         errorElement: 'span',
         errorPlacement: function (error, element) {
@@ -71,7 +74,12 @@
           switch (elementName) {
             case 'field_astro_frequency[und]':
               errorPlaceHolder = $('#edit-title').parent();
-              break;            
+              break;
+
+            case 'field_astro_date_range[und][0][value2][date]':
+              errorPlaceHolder = element.parent().parent();
+              break;
+
             default:
               errorPlaceHolder = element.parent();
           }
@@ -585,7 +593,7 @@
                 }
               }
             }
-          },          
+          },
           'field_astro_type[und]': {
             required: true,
             validateSignName: true
@@ -624,9 +632,9 @@
           'field_astro_date_range[und][0][value][date]': {
             required: true,
             date: true
-          }          
+          }
         },
-        messages: {          
+        messages: {
           'field_buzz_description[und][0][value]': {
             required: 'This field is required.'
           },
@@ -709,32 +717,34 @@
       });
       jQuery.validator.addMethod("validateRange", function (value, element) {
         return validate_date_range(value, element);
-      }, "* Please enter valid date.");
+      }, "Please enter valid date.");
       jQuery.validator.addMethod("validateSignName", function (value, element) {
         return validate_sign_name_value(value, element);
       }, "This field is required.");
       jQuery.validator.addMethod("dupliNumero", function (value, element) {
         return dupli_numero_value(value, element);
       }, "This is duplicate value.");
-      
 
-      // validate date difference
+      // Validate date difference.
       function validate_date_range(value, element) {
         var frequency = $('input[name="field_astro_frequency[und]"]:checked').val();
         var startDate = $('input[name="field_astro_date_range[und][0][value][date]"]').val();
         var endDate = $('input[name="field_astro_date_range[und][0][value2][date]"]').val();
-        
+
+        if (moment(startDate) > moment(endDate)) {
+          return false;
+        }
         if (frequency === 'daily') {
-          $('input[name="title"').val(startDate);          
+          $('input[name="title"').val(startDate);
         }
         else {
-          $('input[name="title"').val(startDate + ' - ' + endDate);          
+          $('input[name="title"').val(startDate + ' - ' + endDate);
         }
-        
+
         return true;
       }
 
-      // validate sign name drop down
+      // Validate sign name drop down.
       function validate_sign_name_value(event, element) {
         if ($(element).val() == '_none') {
           return false;
@@ -743,24 +753,24 @@
           return true;
         }
       }
-      
+
       // Check duplicate numerology field value.
       function dupli_numero_value(value, element) {
         var counter = 0;
-        jQuery('.form-field-name-field-astro-numerology-values').find('.form-select').each(function () {           
+        jQuery('.form-field-name-field-astro-numerology-values').find('.form-select').each(function () {
           if ($(this).val() == value) {
             ++counter;
           }
-        });        
+        });
         if (counter >= 2) {
           return false;
         }
         else {
           return true;
-        }        
+        }
       }
 
-      // Common function to reset all values
+      // Common function to reset all values.
       function clear_form_elements(class_name) {
         jQuery("." + class_name).find(':input').each(function () {
           switch (this.type) {
@@ -768,6 +778,7 @@
             case 'textarea':
               $(this).val('');
               break;
+
             case 'select-one':
               $(this).val('_none');
               break;
@@ -775,17 +786,17 @@
         });
       }
 
-      // Hide navigation label
+      // Hide navigation label.
       $('.node-astro-form .story-title-coll').css('display', 'none');
       $('.node-astro-form .story-title-zod').css('display', 'none');
       $('.node-astro-form .story-title-num').css('display', 'none');
 
-      // Reset form if someone change astro type
+      // Reset form if someone change astro type.
       $("select[name='field_astro_type[und]']").on('change', function () {
         var astroType = $(this).val();
         var astroText = $(this).find('option:selected').text();
         switch (astroText) {
-          // Collective Content
+          // Collective Content.
           case 'Collective Content':
             clear_form_elements('field-name-field-astro-zodiac');
             jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
@@ -797,7 +808,8 @@
             $('.node-astro-form .story-title-num').css('display', 'none');
             $('.node-astro-form .story-title-coll').css('display', 'block');
             break;
-            // Numerology  
+
+            // Numerology.
           case 'Numerology':
             clear_form_elements('field-name-field-astro-zodiac');
             jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
@@ -807,7 +819,8 @@
             $('.node-astro-form .story-title-coll').css('display', 'none');
             $('.node-astro-form .story-title-num').css('display', 'block');
             break;
-            // Zodiac  
+
+            // Zodiac.
           case 'Zodiac':
             clear_form_elements('collective-wrapper');
             jQuery('.collective-wrapper .button-remove').mousedown();
@@ -815,7 +828,7 @@
             jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
               $(this).mousedown();
             });
-            var sign_name = Drupal.settings.sign;            
+            var sign_name = Drupal.settings.sign;
             var i = 0;
             for (var key in sign_name) {
               $('select[name="field_astro_zodiac[und][' + i + '][field_zodiac_sign][und]"]').val(sign_name[key]);
@@ -826,6 +839,7 @@
             $('.node-astro-form .story-title-num').css('display', 'none');
             $('.node-astro-form .story-title-zod').css('display', 'block');
             break;
+
           case 'Tarrot':
             $('.node-astro-form .story-title-coll').css('display', 'none');
             $('.node-astro-form .story-title-num').css('display', 'none');
@@ -850,14 +864,11 @@
       if ($('select[name="field_astro_type[und]"').find('option:selected').text() == 'Zodiac') {
         $('.node-astro-form .story-title-zod').css('display', 'block');
       }
-      
+
       $('input[name="field_astro_date_range[und][0][value][date]"]').keydown(false);
       $('input[name="field_astro_date_range[und][0][value2][date]"]').keydown(false);
       $('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
-      
 
     }
   };
 })(jQuery, Drupal, this, this.document);
-
-

@@ -4,19 +4,26 @@
  */
 
 Drupal.behaviors.itg_widget = {
-    attach: function(context, settings) {
-        console.log(settings.itg_widget.data);
+    attach: function (context, settings) {
+        //console.log(settings.itg_widget.data);
+        // settings for entire widgets which is using nodequeue module as bulk operation
         if (settings.itg_widget.data) {
-            var node_queue_id = settings.itg_widget.data;
-            // for top stories widget
-            if (node_queue_id == 1) {
-                jQuery('#edit-qids').empty(); //remove all child nodes
-                var newOption = jQuery('<option value="1" selected="selected">Top Stories</option>');
-                jQuery('#edit-qids').append(newOption);
-                jQuery('#edit-qids').trigger("chosen:updated");
-            }
-            //jQuery("#edit-submit").attr("value", "Yes");
+            var select_option = settings.itg_widget.data;
+            jQuery('#edit-qids').empty(); // remove all child nodes
+            var newOption = jQuery('<option value="' + select_option.qid + '" selected="selected">' + select_option.title + '</option>');
+            jQuery('#edit-qids').append(newOption);
+            jQuery('#edit-qids').trigger("chosen:updated");
+
+            // Added code that hide node queue multiple select and add text next to this div
+            jQuery('<p>Are you sure you want add this content</p>').insertAfter(jQuery('#views-form-photo-carousel-widget-photo-carousel-list').find('.form-item-qids'));
+            jQuery('#views-form-photo-carousel-widget-photo-carousel-list').find('#edit-submit').val('Confirm');
+            jQuery('#views-form-photo-carousel-widget-photo-carousel-list').find('.form-item-qids').hide();
+
+            // End code that hide node queue multiple select and add text next to this div
+
         }
+
+
     }
 
 };

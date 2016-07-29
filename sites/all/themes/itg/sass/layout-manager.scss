@@ -1,0 +1,221 @@
+@import "itg-variables";
+@import "itg-mixins";
+
+
+
+h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
+h1{    
+    font-size: $mobile-h1-font-size;
+    line-height: $mobile-h1-line-height;
+    font-weight: $itg-font-bold;
+}
+h2{
+    font-size: $mobile-h2-font-size;
+    line-height: $mobile-h2-line-height;
+    font-weight: $itg-font-bold;
+}
+h3{
+    font-size: $mobile-h3-font-size;
+    line-height: $h3-line-height;
+}
+ul{
+    list-style-type: none;
+}
+a{
+    color:$black-color;
+    text-decoration: none;
+}
+.row{
+    @include clearfix;
+}
+.mt-50{
+  margin-top: 50px;
+}
+
+/*Start CSS Top Story Home Page*/
+    .tab-buttons {
+        @include clearfix;
+        @include tab-buttons;
+    }
+    .tab-data{
+      border: 1px solid $tab-primary-border-color;
+      height: 635px;
+      overflow-y: auto;
+      &.tab-data-2{
+        display: none;
+      }
+    }
+    .itg-listing{
+        list-style: none;
+        li{
+            @include tab-listing;        
+        }
+    }
+/*End CSS Top Story Home page*/
+
+/*Start CSS Featured New Home page*/
+.itg-featured-news{
+  border: 1px solid $tab-primary-border-color;
+  height: 672px;
+}
+.featured-news{
+  .featured-post {
+    @include float(left);
+    @include calculate-width(2);
+    &:hover a{
+      color:$blue-color;
+    }
+    img{
+      padding-bottom: 10px;
+      @include calculate-width(1);
+    }
+    &.featured-post-first{
+      @include float(none);
+      @include calculate-width(1);
+      margin-bottom: 10px;
+    }
+  }
+}
+/*End CSS*/
+
+/*Start CSS Top AD*/
+.top-ad{
+  border: 1px solid $tab-primary-border-color;
+  .pic{
+    background-color: #f3f3f3;
+    width: 300px; 
+    height: 250px;
+    margin: 35px auto;
+  }
+}
+/*End CSS*/
+/*Start CSS section story Home page*/
+.section-ordering{
+    h3{
+        @include itg-font($itg-robotoslab);
+        padding: 15px 0;
+    }
+    p{
+        @include font(14px,18px);
+        @include before-icon-list(5px,5px,18px,0px,$red-bg,100%);
+        border-top:1px solid $border-color;
+        padding: 12px 0 12px 12px;
+    }
+}
+/*End CSS section story Home page*/
+/*Start Dont miss Home page css*/
+.dont-miss{
+    background: #f3f3f3;
+    padding: 30px 10px 0px 10px;
+    ul{
+        @include clearfix;
+        @include listing-with-image(left,15px,dm-pic,dm-detail);
+        .dont-miss-listing{            
+            @include calculate-width(1);
+            padding: 0 0px 20px 0;
+            border:none;
+            .dm-detail{
+                h4{
+                    color: #048cb9;
+                    margin-bottom: 5px;
+                    text-transform: uppercase;
+                }
+                p{
+                    @include font(14px,18px);
+                    color: #333;
+                }
+            }
+        }
+    }
+}
+/*End Dont miss Home page css*/
+
+@media only screen and (min-width:768px){
+    
+    /*Start CSS itg-layout-container */   
+    .itg-layout-container{
+        .itg-widget, .itg-widget-child{
+            position: relative;
+            input[type="text"]{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 214px;
+            }
+        }
+        .top-colum-1{
+            .droppable{
+                height: 635px;
+            }
+        }
+        .top-colum-2{
+            .droppable{
+                height: 671px;
+            }
+        }
+        .top-colum-3{
+            .droppable{
+                height: 308px;
+            }
+            .itg-widget:first-child{
+                margin-bottom: 20px;
+            }
+        }
+        &.itg-admin{
+            .itg-widget{
+                background-color: #f1f1f1;
+            }
+        }
+        .itg-common-section{
+            .droppable{
+                height: 382px;
+            }
+        }
+    }  
+    
+  /*Start CSS Top Block Grid Home Page*/    
+    .top-block{
+        .top-colum-1, .top-colum-2, .top-colum-3{
+           padding: 0 15px;
+           min-height: 672px;
+        }
+        .top-colum-1{
+           @include float(left);
+           width: 22%; 
+        }
+        .top-colum-2{
+           width: 44.8%;
+           @include display-inline;
+        }
+        .top-colum-3{
+           width: 33.2%;
+           @include float(right);
+        }
+    }
+/*End CSS Top Block Grid Home Page*/
+
+/*Start CSS Featured-news Home Page*/ 
+    .featured-news{
+        padding: 5px;
+        margin:0;
+        .featured-post {
+            padding: 5px;
+        }
+    }
+/*End CSS Featured-news Home Page*/
+/*Start Dont miss Home page css*/
+.dont-miss{    
+    padding: 30px 0px 0px 20px;
+    ul{
+        .dont-miss-listing{
+            @include float(left);
+            @include calculate-width(2);
+            padding: 0 20px 25px 0;
+            &:nth-child(2n+1){
+                clear:left;
+            }
+        }
+    }
+}
+/*End Dont miss Home page css*/
+}

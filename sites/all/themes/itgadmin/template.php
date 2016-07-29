@@ -263,8 +263,8 @@ function itgadmin_breadcrumb($vars) {
     if(arg(0) == 'issue-listing'){
       $list_story_parent_link = 'manage-'.arg(1).'s';;
       $list_story_link = 'issue-listing'.'/'.arg(1).'/'.arg(2);
-        $breadcrumb[] = l('Home','cms-user-dashboard').l('List '.  ucfirst(arg(1)).'s', $list_story_parent_link).l('List Stories',$list_story_link);
-        return '<div class="breadcrumb-link">'. implode(' » ', $breadcrumb) .'</div>';
+        $breadcrumb[] = '<li>'.l('Home','cms-user-dashboard').'</li><li>'.l('List '.  ucfirst(arg(1)).'s', $list_story_parent_link).'</li><li>'.l('List Stories',$list_story_link). '</li>';
+        return '<div class="breadcrumb"><ol>'. implode(' » ', $breadcrumb) .'</ol></div>';
     }
     
     // get first argument from url 
@@ -344,12 +344,13 @@ function itgadmin_preprocess_page(&$vars) {
   }
    
   // Add tpl for related content view page
-  if (arg(0) == 'related-content') {
+
+  if (arg(0) == 'related-content' || arg(0) == 'getimagetocroper' || arg(0) == 'searchimage' || arg(0) == 'imagetotag' || arg(0) == 'imagetagedit' || arg(0) == 'video-status' || (arg(0)== 'itg-layout-manager' && arg(2)=='preview')) {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
   
   //Add tpl for event registration view page
-  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs') {
+  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs' || ($vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 }

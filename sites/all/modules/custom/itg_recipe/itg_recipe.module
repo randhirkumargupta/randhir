@@ -104,14 +104,20 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
  * 
  * @param array $form
  */
-function itg_recepi_save_draft_button(&$form) {
-  $form['actions']['itg_custom_button'] = array(
-    '#type' => 'submit',
-    '#value' => t('Save as Draft'),
-    '#submit' => array(
-      'node_form_submit'
-    ),
-  );
+function itg_recepi_save_draft_button(&$form) {   
+  if ($form['#node']->status == 0 || $form['nid']['#value'] == NULL) {
+    // Add Save as draft button
+    $form['actions']['itg_custom_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save as Draft'),
+      '#submit' => array(
+        'node_form_submit'
+      ),
+    );
+    
+    // Change submit button name as Publish
+    $form['actions']['submit']['#value'] = t('Publish');
+  }  
 } 
 
 /**
@@ -265,7 +271,6 @@ function itg_food_news_after_build($form, &$form_state) {
  * @param Array $form_state
  */
 function itg_recipe_form_custom_callback($form, &$form_state) {
-
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }

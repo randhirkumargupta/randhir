@@ -1,24 +1,33 @@
 <?php
 
 /**
- * Impplement hook_help($path, $arg)
- * {@inheridoc}
+ * @file
+ * Autosave module file contains hooks to extends core functionality.
+ */
+
+module_load_include('inc', 'itg_autosave', 'includes/itg_auto_save');
+
+/**
+ * Impplements hook_help().
+ *
+ * {@inheridoc}.
  */
 function it_autosave_help($path, $arg) {
   switch ($path) {
-    case 'admin/help#it_autosave':
-
-      return 'Hello Auto save';
-      break;
-
-    default:
-      break;
+    case 'admin/help#itg_autosave':
+      $output = '';
+      $output .= t('Please enter form id and the time for autosave interval of the node form inwhich you want to give autosave dunctionality.');  
+      
+      return $output;
   }
 }
 
 /**
- * Implement hook_permissions() to set access permission on ITG Autosave settings form
- * {@inheridoc}
+ * Implements hook_permissions().
+ *
+ * Set access permission on ITG Autosave settings form.
+ *
+ * {@inheridoc}.
  */
 function itg_autosave_permission() {
   return array(
@@ -30,21 +39,22 @@ function itg_autosave_permission() {
 }
 
 /**
- * Implement hook_menu()
- * {@inheridoc}
+ * Implements hook_menu().
+ *
+ * {@inheridoc}.
  */
-function itg_autosave_menu() { 
-  //settings form menu  
+function itg_autosave_menu() {
+  // Settings form menu.
   $items['admin/config/administration/itg_autosave'] = array(
     'title' => 'ITG Autosave Setting',
     'description' => 'Autosave settings form',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_autosave_form'),
-    'access arguments' => array('administer itg_autosave settings'),        
+    'access arguments' => array('administer itg_autosave settings'),
     'type' => MENU_NORMAL_ITEM,
-    'file' => 'includes/itg_autosave.admin.inc'
+    'file' => 'includes/itg_autosave.admin.inc',
   );
-  // Delete saved form id menu
+  // Delete saved form id menu.
   $items['itg-autosave-formid-delete/%'] = array(
     'page callback' => 'itg_autosave_form_delete',
     'page arguments' => array(1),
@@ -52,7 +62,15 @@ function itg_autosave_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_autosave.admin.inc',
   );
-  
+  // Autosave ajax callback function.
+  $items['itg-autosave/nodeform'] = array(
+    'page callback' => 'itg_autosave_nodeform',
+    'page arguments' => array(2, 3),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_autosave.admin.inc',
+  );
+
   return $items;
 }
 
@@ -60,29 +78,94 @@ function itg_autosave_menu() {
  * Implements hook_views_api().
  *
  * This tells drupal that there is Views integration file named
- * itg_social_media.views.inc
- * 
+ * itg_social_media.views.inc.
+ *
  * {@inheritdoc}
  */
 function itg_autosave_views_api() {
   return array(
     'api' => 3,
-    'path' => drupal_get_path('module', 'itg_autosave') . '/includes/views',    
+    'path' => drupal_get_path('module', 'itg_autosave') . '/includes/views',
   );
 }
 
 /**
- * Implements hook_form_alter()
- * 
- * {@inheritdoc}
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
  */
 function itg_autosave_form_alter(&$form, &$form_state, $form_id) {  
-  // Add js into form
-  //$form['#attached']['js'] = array(
-  //  drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',       
-  //);
+  // Create object of itg_auto_save class.
+  $itg_autosave_form = new itg_auto_save();
   
-  // Fetch form ids saved into databse for auto save feature.
-  //$itg_autosave_form = new ItgAutoSave();
-  //$itg_autosave_form->itg_save_set_form_ids();  
+  // Fetch form ids saved into database for autosave.
+  $form_ids = $itg_autosave_form->itg_save_get_form_ids();  
+  // match form_id with saved id for autosave.
+  if (in_array($form_id, $form_ids)) {
+    $flag = FALSE;
+    if ($form['nid']['#value'] == NULL) {
+      $form['#node']->status = 0;
+    }
+    elseif ($form['nid']['#value'] > 0 && $form['#node']->status == 0) {
+      $form['#node']->status = 0;
+    } 
+    else {
+      $flag = TRUE;
+    }    
+    if (!$flag) {            
+      // Add js file for autosave ajax.      
+      drupal_add_js(drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js');
+      $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];      
+      $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();     
+      // Set form ids to js file.
+      $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);          
+    }
+    $form['field_story_node_identity']['und'][0]['value']['#prefix'] = '<div style="display:none;">';
+    $form['field_story_node_identity']['und'][0]['value']['#suffix'] = '</div>';
+  }
 }
+
+/**
+ * Retrieve unique id associated with node
+ *
+ * @param int $nid
+ *   Node id of the node.
+ *
+ * @return string
+ *   Unique id
+ */
+function itg_autosave_retrieve_uniqueid($nid, $c_type) {
+  $itg_query = db_select('itg_autosave_node_data', 'itg');
+  $itg_query->condition('nid', $nid)
+      ->condition('node_type', $c_type)
+      ->fields('itg', array('itg_identity'));
+  $itg_result = $itg_query->execute()->fetchField();
+  
+  return $itg_result;      
+}
+
+/**
+ * Implements hook_node_insert(),
+ *
+ * {@inheridoc}.
+ */
+function itg_autosave_node_insert($node) {  
+  // Get Node identity field value.
+  $node_identity = $node->field_story_node_identity['und'][0]['value'];
+  // Fetch another node id with same node identity
+  $itg_query = db_select('itg_autosave_node_data', 'itg');
+  $itg_query->fields('itg', array('nid'))
+      ->condition('itg_identity', $node_identity)
+      ->condition('nid', $node->nid, '!=');
+  $itg_result = $itg_query->execute()->fetchObject();
+  // Delete node if found duplicate node identity node id.
+  if ($itg_result->nid > 0) {
+    node_delete($itg_result->nid);
+    // Update nid referenced to old node id
+    $itg_query = db_update('itg_autosave_node_data');
+    $itg_query->condition('nid', $itg_result->nid)
+      ->fields(array('nid' => $node->nid))
+      ->execute();
+  } 
+}
+

@@ -539,12 +539,12 @@
         }
     });
     
-    $('.form-field-name-field-gallery-image .messages--error, .field-name-field-upload-video .messages--status, .field-name-field-upload-video .messages.error, .field-name-field-video-thumbnail .messages--error').each(function () {
+    $('.form-field-name-field-gallery-image .messages--error, .field-name-field-podcast-audio-image-upload .messages--error, .field-name-field-podcast-upload-audio-file .messages--error, .field-name-field-upload-video .messages--status, .field-name-field-upload-video .messages.error, .field-name-field-video-thumbnail .messages--error').each(function () {
       if (!$(this).children().hasClass('hide-message')) {
         $(this).append('<a class="hide-message" href="javascript:;">Close</a>');
       }
     });
-    $('.form-field-name-field-gallery-image, .field-name-field-upload-video, .field-name-field-video-thumbnail').on('click', '.hide-message', function () {
+    $('.form-field-name-field-gallery-image, .field-name-field-upload-video, .field-name-field-video-thumbnail, .field-name-field-podcast-upload-audio-file, .field-name-field-podcast-audio-image-upload').on('click', '.hide-message', function () {
       $(this).parent().remove();
     });
 
@@ -724,6 +724,16 @@
        $('#'+labelID).trigger('click');
     });
     
+    // Code for open link in new tab
+    $(".views-field-name").find('a').attr('target', '_blank');
+    
+    
+    // jQuery Code for tabbing
+    $('.tab-buttons').on('click', 'span', function(){
+      var dataID = '.' + $(this).attr('data-id');
+      $(this).addClass('active').siblings().removeClass('active');
+      $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
+    });
     
   };
 })(jQuery);
@@ -792,6 +802,13 @@ jQuery(document).ready(function(){
        alert('Changes made successfully');
     });
     // end of code
+    
+    // jQuery code for Loader
+    jQuery(document).ajaxStart(function () {
+        jQuery(".ajax-loader").show();
+    }).ajaxStop(function () {
+        jQuery(".ajax-loader").hide();
+    });
     
     
 });

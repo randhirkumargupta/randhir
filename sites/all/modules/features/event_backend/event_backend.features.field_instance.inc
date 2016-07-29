@@ -383,7 +383,7 @@ function event_backend_field_default_field_instances() {
     'label' => 'Photo',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -391,7 +391,7 @@ function event_backend_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1309,7 +1309,11 @@ function event_backend_field_default_field_instances() {
   // Exported field_instance: 'node-event_backend-field_event_type'.
   $field_instances['node-event_backend-field_event_type'] = array(
     'bundle' => 'event_backend',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'free',
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Values – Paid, Free and Invite',
     'display' => array(
@@ -1748,48 +1752,6 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event_backend-field_story_url'.
-  $field_instances['node-event_backend-field_story_url'] = array(
-    'bundle' => 'event_backend',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_url',
-    'label' => 'Event URL',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'node-sponsor-body'.
   $field_instances['node-sponsor-body'] = array(
     'bundle' => 'sponsor',
@@ -1928,7 +1890,6 @@ function event_backend_field_default_field_instances() {
   t('Event Media');
   t('Event Start Date');
   t('Event Type');
-  t('Event URL');
   t('Flashback');
   t('Force Registration Open');
   t('Group Registration Fee (upto 10)');
