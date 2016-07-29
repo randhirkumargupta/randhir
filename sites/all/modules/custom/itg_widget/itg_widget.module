@@ -27,6 +27,10 @@ function itg_widget_init() {
  */
 function itg_widget_menu() {
     $items = array();
+    $items['delete-extra-entry'] = array(
+        'page callback' => 'delete_extra_entry',
+        'access arguments' => array('administer nodequeue'),
+    );
     $items['remove_from_widgets/%/%/%/%'] = array(
         'page callback' => 'remove_from_widgets',
         'page arguments' => array(1, 2, 3, 4),
@@ -48,6 +52,17 @@ function itg_widget_menu() {
         'access arguments' => array('administer nodequeue'),
     );
     return $items;
+}
+
+function delete_extra_entry() {
+    $query = db_delete('draggableviews_structure')
+            ->condition('view_name', 'home_page_feature_widget')
+            ->execute();
+    
+    $and = db_and()->condition('view_name', 'story_widget')->condition('view_display', 'page_2');
+    $query = db_delete('draggableviews_structure')
+            ->condition($and)
+            ->execute();
 }
 
 /**
