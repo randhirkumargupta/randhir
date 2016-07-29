@@ -194,6 +194,28 @@ Drupal.behaviors.my_custom_behavior = {
         }
     });
     }
+    // jQuery Code for tabbing
+    $('.tab-buttons').on('click', 'span', function(){
+      var dataID = '.' + $(this).attr('data-id');
+      $(this).addClass('active').siblings().removeClass('active');
+      $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
+    });
+    // jQuery Code for tabbing End
+    
+    
+    // Global function to set lable as input placeholder
+    function placeHolder(element, parent){
+      $(element).each(function(){
+        el = $(this);                                                                     //make a variable for this label
+        el_for = el.attr('for');                                                          //get the value of the label attr for
+        label_value = el.text();                                                          //get the value of the label
+        el.hide();                                                                        //hide the label
+        el_input = 'input[id='+el_for+']';                                                //get input element
+        $(parent).find(el_input).attr('placeholder', $.trim(label_value));                //fill it with the label's value
+      });
+    }
+    placeHolder('#edit-keyword-wrapper > label', '#edit-keyword-wrapper');
+    
   }
 };
 

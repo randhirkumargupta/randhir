@@ -70,13 +70,50 @@
 
         // mouseover the tagboxes that is already there but opacity is 0.
         jQuery('.tagview').live('mouseover', function( ) {
-        
-            var pos = jQuery(this).position();
-           
-            jQuery(this).css({opacity: 1.0}); // div appears when opacity is set to 1.
+            var pos = jQuery(this).position();           
+            jQuery(this).css({opacity: 1.0}); 
+            jQuery(this).siblings('.square-tag').hide();// div appears when opacity is set to 1.
         }).live('mouseout', '.tagview', function( ) {
-            jQuery(this).css({opacity: 0.0}); // hide the div by setting opacity to 0.
+            jQuery(this).css({opacity: 0.0}); jQuery(this).siblings('.square-tag').show(); // hide the div by setting opacity to 0.
         });
+        // Save button click - save tags
+     jQuery('#btnsavetagedit').live('click',  function() {
+            name = jQuery('#tagname').val();
+            tagurl = jQuery('#tagurl').val();
+            tagid = jQuery('#tagid').val();
+
+
+
+            var img = jQuery('#imgtag').find('img');
+            if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
+                jQuery('.web-error').hide();
+                jQuery.ajax({
+                    url: Drupal.settings.basePath + 'edittags',
+                    type: 'post',
+                    data: {'tagid': tagid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
+                    success: function(data) {
+                        var objdata = jQuery.parseJSON(data);
+                        if (objdata.status == 1)
+                        {
+                            jQuery('#tagit').fadeOut();
+                            viewtag(image_fiedlid);
+
+                        }
+
+                    },
+                    error: function(xhr, desc, err) {
+                        console.log(xhr);
+                        console.log("Details: " + desc + "\nError:" + err);
+                    }
+                });
+            } else {
+                jQuery('.web-error').show();
+                return false;
+            }
+
+
+        });
+        
 
         // Remove tags.
         jQuery('.remove').live('click', function() {
@@ -96,6 +133,27 @@
                      viewtag(image_fiedlid);
                    
                     
+                }
+            });
+        });
+         jQuery('.edit').live('click', function() {
+            id = jQuery(this).parent().attr("id");
+            id = id.split('_');
+            id = id[1];
+            jQuery.ajax({
+                type: "POST",
+                url: Drupal.settings.basePath + 'gettags',
+                data: "tag_id=" + id,
+                success: function(data) {
+                    var objdata = jQuery.parseJSON(data);
+                    var tags = objdata.tag_title;
+                    var url = objdata.tag_url;
+                    var xcord = objdata.x_coordinate;
+                    var ycord = objdata.y_coordinate;
+                    jQuery('#tagit').remove( ); // remove any tagit div first
+                    jQuery('#imgtag').append('<div id="tagit"  style="top: ' + ycord + 'px; left: ' + xcord + 'px;"><div class="box"></div><div class="name"><div class="text">Tag</div><input type="text" name="tagname" id="tagname" placeholder="Title" value="' + tags + '"/><input type="hidden" name="tagid" id="tagid" value="' + id + '"/><input type="text" value="' + url + '" name="tagurl" class="error" id="tagurl" placeholder="Tag Url" /><span style="display:none" class="error web-error" for="edit-title" generated="true">Enter currect url .</span><input type="button" name="btnsave" value="Save" id="btnsavetagedit" /><input type="button" name="btncancel" value="Cancel" id="btncancel" /></div></div>');
+                    jQuery('#tagname').focus();
+
                 }
             });
         });
@@ -119,8 +177,11 @@
                 }
             });
         });
+       
 
    });
+   
+
         viewtag(image_fiedlid); // view all tags available on page load
 //
         function viewtag(pic_id)
@@ -192,7 +253,7 @@
         width: 100px;
         height: 100px;
         float: left;
-        background-color: rgba(0,0,0,.5);
+        border: 2px solid rgba(0, 0, 0, 0.5);
         margin-right: 1px;
     }
     #tagit .name
@@ -217,7 +278,7 @@
     #tagit #tagname{
         margin-bottom: 1px;
     }
-    #btnsavetag{
+    #btnsavetag, #btnsavetagedit{
         background-color: rgba(31,181,173,.9);
         border: 1px solid rgba(31,181,173,.9);
         border-radius: 0;
@@ -231,7 +292,7 @@
         white-space: nowrap;
         height: 33px;
         width: 50%;
-        
+
     }
     #btncancel{
         background-color: rgba(208,11,38,.9);
@@ -255,16 +316,24 @@
         width: 100%;
         float: left;
     }
-
-    
-     #container
-    {
-        display: block;
-        width: 850px;
-        height: 300px;
-        margin: 0 auto;
+    .square-tag{
+       left: 473px;
+		top: 71px;
+		opacity: 1;
+		color: #000000;
+		width: inherit;
+		height: initial;
+		border: none !important;
+		position: absolute;
+		text-align: center;
+		font-size: 18px;
     }
-
+	.tag-image{
+		padding: 10px;
+		background: #e4e3e5;
+		font-weight: 700;
+		margin: 0 3px;
+	}
 </style>	
 
 <?php $url = file_create_url($data->uri);?>

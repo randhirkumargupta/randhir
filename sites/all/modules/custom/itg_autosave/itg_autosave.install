@@ -77,12 +77,19 @@ function itg_autosave_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
-      'form_data' => array(
+      'itg_identity' => array(
+        'type' => 'varchar',
+        'length' => 15,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique id associalted with each node.',
+      ),
+      'field_collection' => array(
         'type' => 'blob',
         'size' => 'big',
         'not null' => TRUE,
         'serialize' => TRUE,
-        'description' => 'Serialized data containing the form properties.',
+        'description' => 'Serialized data containing the field collection ids.',
       ),
     ),
     'primary key' => array('id'),

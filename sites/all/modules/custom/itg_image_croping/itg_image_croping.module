@@ -45,6 +45,12 @@ function itg_image_croping_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
+    
+    $items['edittags'] = array(
+        'page callback' => 'itg_image_croping_edit_tags', // save the tags on images.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
     $items['gettaglist'] = array(
         'page callback' => 'itg_image_croping_get_image_tags', // use for get the all tags on image.
         'type' => MENU_CALLBACK,
@@ -53,6 +59,12 @@ function itg_image_croping_menu() {
 
     $items['removetags'] = array(
         'page callback' => 'itg_image_croping_remove_image_tag', // se for remove the tags on image.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+    
+      $items['gettags'] = array(
+        'page callback' => 'itg_image_croping_get_image_tag', // se for get the tags by tagid on image.
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
@@ -69,8 +81,11 @@ function itg_image_croping_ajax_make_ajax() {
 
     $image_id = $_POST['imageId'];
     $field_name = $_POST['field_id'];
+    if($_POST['img_height'] && $_POST['img_width'])
+    {
     $image_height = trim($_POST['img_height']);
     $image_width = trim($_POST['img_width']);
+    }
     $file = file_load($image_id);
     if (empty($file)) {
         drupal_set_message(t('This image is not valid!'));
@@ -125,6 +140,21 @@ function itg_image_croping_remove_image_tag() {
 }
 
 /**
+ * This function use for get the tags on image
+ * used in ajax request and print use for return responce to ajax request
+ */
+function itg_image_croping_get_image_tag() {
+
+    $tag_id = $_POST['tag_id'];
+    $data = db_select('image_tags','c')
+                ->fields('c')
+            ->condition('id', $tag_id, '=')
+            ->execute()->fetchAssoc();
+    print json_encode($data);
+    exit();
+}
+
+/**
  * This function use for get the all tags on image
  */
 function itg_image_croping_get_image_tags() {
@@ -138,7 +168,7 @@ function itg_image_croping_get_image_tags() {
     $result = $query->execute();
 
     while ($record = $result->fetchAssoc()) {
-        $data['boxes'] .= ' <div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record['tag_title'] . '</div><a  class="remove">X</a></div>';
+        $data['boxes'] .= '<div class="square-tag" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record['tag_title'] . '</div><a  class="edit">Edit</a><a  class="remove">X</a></div>';
         $data['lists'] .= ' ';
     }
     echo json_encode($data);
@@ -184,6 +214,41 @@ function itg_image_croping_save_tags() {
     }
     exit();
 }
+
+/**
+ * This function use for save the tags on images
+ * @return $return type Json
+ */
+function itg_image_croping_edit_tags() {
+
+    $fid = $_POST['tagid'];
+    $tag = $_POST['name'];
+    $tag_url = $_POST['url'];
+    $x_coordinate = $_POST['pic_x'];
+    $y_coordinate = $_POST['pic_y'];
+    $type = $_POST['type'];
+   
+
+        $inserted_data = db_update('image_tags')->fields(array(
+                    'tag_title' => $tag,
+                    'tag_url' => $tag_url,
+                    'x_coordinate' => $x_coordinate,
+                    'y_coordinate' => $y_coordinate,
+                )) ->condition('id', $fid, '=')
+->execute();
+    if ($inserted_data) {
+
+        $return = array('status' => '1', 'id' => $inserted_data);
+        print json_encode($return);
+    } 
+    else {
+        $return = array('status' => '0', 'id' => '');
+        print json_encode($return);
+    }
+    exit();
+}
+
+
 
 /**
  * Implements hook_theme().

@@ -27,6 +27,8 @@
 /* Story Tag mixins */
 /* List before icon */
 /*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 768px) {
   h1 {
@@ -63,7 +65,7 @@
   }
   .header .logo {
     width: auto;
-    top: 95px;
+    top: 100px;
   }
   .header .logo img {
     background: #193c8d;
@@ -197,8 +199,10 @@
   }
   footer .footer-bottom .cell {
     width: 16.66667%;
-    float: left;
     margin-bottom: 0;
+  }
+  footer .footer-bottom .cell:nth-child(2n+1) {
+    clear: none;
   }
 
   /*End Footer CSS Desktop version*/
@@ -246,5 +250,19 @@
   }
 
   /*End CSS Featured-news Home Page*/
+  /*Start Dont miss Home page css*/
+  .dont-miss {
+    padding: 30px 0px 0px 20px;
+  }
+  .dont-miss ul .dont-miss-listing {
+    float: left;
+    width: 50%;
+    padding: 0 20px 25px 0;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*End Dont miss Home page css*/
 }
 /*End CSS Desktop version*/

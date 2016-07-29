@@ -96,6 +96,8 @@ $root-font-size: 16px;
 
 /* Tab Button mixins */
 @mixin tab-buttons {
+    background: $tab-primary-bg;
+    border-radius: 10px 10px 0 0;
      span{
         @include itg-font($itg-roboto, $itg-font-medium);
         background: $tab-primary-bg;
@@ -104,6 +106,7 @@ $root-font-size: 16px;
         line-height: 36px;
         text-align: center;
         border-radius: 10px 10px 0 0;
+        border-top: 3px solid transparent;
         color: $tab-primary-color;
         @include calculate-width(2);
         display: block;
@@ -129,6 +132,9 @@ $root-font-size: 16px;
             &:hover{
                 background: $off-white-bg;
             }
+            &:first-letter{
+                text-transform: capitalize;
+            }
         }
         &:last-child a{
             border-bottom: none;
@@ -151,6 +157,8 @@ $root-font-size: 16px;
     line-height: $line-height;
     padding: 0 7px;
     text-transform: uppercase;
+    color:$white-color;
+    @include itg-font($itg-roboto);
 }
 
 /* List before icon */
@@ -176,4 +184,70 @@ $root-font-size: 16px;
   -ms-transition: $args;
   -o-transition: $args;
   transition: $args;
+}
+/*mixin for listing with image*/
+@mixin listing-with-image($img-position,$image-space,$class-image,$class-title){   
+    li{ 
+        overflow: hidden;
+        padding: 10px;
+        &+li{
+            border-top: 1px solid $border-color;
+        }
+        .#{$class-image} {
+            @include float($img-position);
+            @if (($img-position == left)) {
+                margin-right:$image-space;
+            }
+            @else{
+                margin-left:$image-space;
+            }
+        }
+        .#{$class-title}{
+            display: block;
+            overflow: hidden;
+            @include font(14px,19px);
+            color: $black-color;
+        }
+    }
+}
+/*mixin for pager*/
+@mixin pager {
+    ul.pager{
+    margin:10px 0;
+    list-style-type: none;
+    @include text-align(center);
+  li{
+    @include display-inline;
+    &.pager-current{
+        height: 25px;
+        width: 25px;
+        line-height: 25px;      
+        background-color: #337ab7;
+        color: $white-color;
+        border-radius: 50%;
+        @include itg-font($itg-roboto);
+    }
+    &.pager-item{
+      a{       
+        display: block;
+        height: 25px;
+        width: 25px;
+        @include font(16px,25px);        
+        color: $black-color;
+        @include itg-font($itg-roboto);
+        &:hover{
+          background-color: #337ab7;
+          color: $white-color;
+          border-radius: 50%;
+        }
+      }
+    }
+    &.pager-next, &.pager-last, &.pager-first, &.pager-previous{
+      a{
+        color: $black-color;
+        line-height: 25px;
+      }
+    }
+  }
+}
 }

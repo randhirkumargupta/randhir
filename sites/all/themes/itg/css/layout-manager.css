@@ -26,6 +26,8 @@
 /* Story Tag mixins */
 /* List before icon */
 /*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
 h1, h2, h3, h4 {
   font-weight: 500;
   font-family: "Roboto", sans-serif;
@@ -77,6 +79,8 @@ a {
 /*Start CSS Top Story Home Page*/
 .tab-buttons {
   zoom: 1;
+  background: #e4e4e4;
+  border-radius: 10px 10px 0 0;
 }
 .tab-buttons:before, .tab-buttons:after {
   content: "";
@@ -96,6 +100,7 @@ a {
   line-height: 36px;
   text-align: center;
   border-radius: 10px 10px 0 0;
+  border-top: 3px solid transparent;
   color: #818181;
   width: 50%;
   display: block;
@@ -104,10 +109,10 @@ a {
 }
 .tab-buttons span.active {
   background: #fff;
-  color: #d12019;
+  color: #a00606;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
-  border-top: 3px solid #d12019;
+  border-top: 3px solid #a00606;
 }
 
 .tab-data {
@@ -133,6 +138,9 @@ a {
 }
 .itg-listing li a:hover {
   background: #f8f8f8;
+}
+.itg-listing li a:first-letter {
+  text-transform: capitalize;
 }
 .itg-listing li:last-child a {
   border-bottom: none;
@@ -185,6 +193,85 @@ a {
 }
 
 /*End CSS*/
+/*Start CSS section story Home page*/
+.section-ordering h3 {
+  font-family: "Roboto Slab", sans-serif;
+  padding: 15px 0;
+}
+.section-ordering p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  position: relative;
+  border-top: 1px solid #dddddd;
+  padding: 12px 0 12px 12px;
+}
+.section-ordering p:before {
+  position: absolute;
+  top: 18px;
+  left: 0px;
+  content: '';
+  border-radius: 100%;
+  background: #a00606;
+  height: 5px;
+  width: 5px;
+}
+
+/*End CSS section story Home page*/
+/*Start Dont miss Home page css*/
+.dont-miss {
+  background: #f3f3f3;
+  padding: 30px 10px 0px 10px;
+}
+.dont-miss ul {
+  zoom: 1;
+}
+.dont-miss ul:before, .dont-miss ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.dont-miss ul:after {
+  clear: both;
+}
+.dont-miss ul li {
+  overflow: hidden;
+  padding: 10px;
+}
+.dont-miss ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.dont-miss ul li .dm-pic {
+  float: left;
+  margin-right: 15px;
+}
+.dont-miss ul li .dm-detail {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.dont-miss ul .dont-miss-listing {
+  width: 100%;
+  padding: 0 0px 20px 0;
+  border: none;
+}
+.dont-miss ul .dont-miss-listing .dm-detail h4 {
+  color: #048cb9;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.dont-miss ul .dont-miss-listing .dm-detail p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  color: #333;
+}
+
+/*End Dont miss Home page css*/
 @media only screen and (min-width: 768px) {
   /*Start CSS itg-layout-container */
   .itg-layout-container .itg-widget, .itg-layout-container .itg-widget-child {
@@ -245,4 +332,18 @@ a {
   }
 
   /*End CSS Featured-news Home Page*/
+  /*Start Dont miss Home page css*/
+  .dont-miss {
+    padding: 30px 0px 0px 20px;
+  }
+  .dont-miss ul .dont-miss-listing {
+    float: left;
+    width: 50%;
+    padding: 0 20px 25px 0;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*End Dont miss Home page css*/
 }

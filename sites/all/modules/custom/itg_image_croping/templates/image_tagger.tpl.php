@@ -1,5 +1,5 @@
 <style>
-    
+
     #imgtag
     {
         position: relative;
@@ -67,7 +67,7 @@
     #tagit #tagname{
         margin-bottom: 1px;
     }
-    #btnsavetag{
+    #btnsavetag, #btnsavetagedit{
         background-color: rgba(31,181,173,.9);
         border: 1px solid rgba(31,181,173,.9);
         border-radius: 0;
@@ -81,7 +81,7 @@
         white-space: nowrap;
         height: 33px;
         width: 50%;
-        
+
     }
     #btncancel{
         background-color: rgba(208,11,38,.9);
@@ -105,14 +105,33 @@
         width: 100%;
         float: left;
     }
+    .square-tag{
+       left: 473px;
+		top: 71px;
+		opacity: 1;
+		color: #000000;
+		width: inherit;
+		height: initial;
+		border: none !important;
+		position: absolute;
+		text-align: center;
+		font-size: 18px;
+    }
+	.tag-image{
+		padding: 10px;
+		background: #e4e3e5;
+		font-weight: 700;
+		margin: 0 3px;
+	}
 
 </style>	
 
-<?php $url = file_create_url($data->uri);?>
+<?php $url = file_create_url($data->uri); ?>
 <div id="container">
+<h4 class="tag-image"><i class="fa fa-tags"></i> Tagging</h4>
     <div id="imgtag"> 
 
-        <img id="" src="<?php echo $url;?>" /> 
+        <img id="" src="<?php echo $url; ?>" /> 
         <div id="tagbox">
         </div>
     </div> 
@@ -120,7 +139,7 @@
         <ol> 
         </ol> 
     </div> 
-     <button class="add-more maptofield">Next</button>
+    <button class="add-more maptofield">Upload</button>
 </div>
 <script type="text/javascript" src="<?php echo base_path() . 'sites/all/modules/custom/itg_image_croping/js/jquery.min.js'; ?>"></script>
 
@@ -129,8 +148,8 @@
         var counter = 0;
         var mouseX = 0;
         var mouseY = 0;
-        var field_name='<?php echo $field_name;?>';
-        var image_fiedlid='<?php echo $data->fid;?>';
+        var field_name = '<?php echo $field_name; ?>';
+        var image_fiedlid = '<?php echo $data->fid; ?>';
 
         jQuery("#imgtag img").click(function(e) { // make sure the image is click
             var imgtag = jQuery(this).parent(); // get the div to append the tagging list
@@ -143,40 +162,81 @@
         });
 
         // Save button click - save tags
-    jQuery('#file-preview').on('click', '#btnsavetag', function() {
+        jQuery('#file-preview').on('click', '#btnsavetag', function() {
             name = jQuery('#tagname').val();
-             tagurl = jQuery('#tagurl').val();
-           
-    
+            tagurl = jQuery('#tagurl').val();
+
+
             var img = jQuery('#imgtag').find('img');
-            if(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)){
-       jQuery('.web-error').hide();
-         jQuery.ajax({
+            if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
+                jQuery('.web-error').hide();
+                jQuery.ajax({
                     url: Drupal.settings.basePath + 'savetags',
                     type: 'post',
-                    data: {'pic_id': image_fiedlid, 'name': name , 'url':tagurl , 'pic_x':mouseX , 'pic_y':mouseY , 'type':'insert'},
+                    data: {'pic_id': image_fiedlid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
                     success: function(data) {
                         var objdata = jQuery.parseJSON(data);
-                        if(objdata.status==1)
-                            {
-                                jQuery('#tagit').fadeOut();
-                                viewtag(image_fiedlid);
-                                
-                            }
-                    
+                        if (objdata.status == 1)
+                        {
+                            jQuery('#tagit').fadeOut();
+                            viewtag(image_fiedlid);
+
+                        }
+
                     },
                     error: function(xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
+                        console.log(xhr);
+                        console.log("Details: " + desc + "\nError:" + err);
                     }
-                    }); 
-    } else {
-       jQuery('.web-error').show();
-       return false;
-    }
-           
+                });
+            } else {
+                jQuery('.web-error').show();
+                return false;
+            }
+
 
         });
+
+        // Save button click - save tags
+        jQuery('#file-preview').on('click', '#btnsavetagedit', function() {
+            name = jQuery('#tagname').val();
+            tagurl = jQuery('#tagurl').val();
+            tagid = jQuery('#tagid').val();
+
+
+
+            var img = jQuery('#imgtag').find('img');
+            if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
+                jQuery('.web-error').hide();
+                jQuery.ajax({
+                    url: Drupal.settings.basePath + 'edittags',
+                    type: 'post',
+                    data: {'tagid': tagid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
+                    success: function(data) {
+                        var objdata = jQuery.parseJSON(data);
+                        if (objdata.status == 1)
+                        {
+                            jQuery('#tagit').fadeOut();
+                            viewtag(image_fiedlid);
+
+                        }
+
+                    },
+                    error: function(xhr, desc, err) {
+                        console.log(xhr);
+                        console.log("Details: " + desc + "\nError:" + err);
+                    }
+                });
+            } else {
+                jQuery('.web-error').show();
+                return false;
+            }
+
+
+        });
+
+
+
 
         // Cancel the tag box.
         jQuery(document).on('click', '#tagit #btncancel', function() {
@@ -201,9 +261,9 @@
 
         // Remove tags.
         jQuery('#taglist').on('click', '.remove', function() {
-           id = jQuery(this).parent().attr("id");
-            id=id.split('_');
-            id=id[1];
+            id = jQuery(this).parent().attr("id");
+            id = id.split('_');
+            id = id[1];
             // Remove the tag
             $.ajax({
                 type: "POST",
@@ -213,17 +273,19 @@
                     var img = jQuery('#imgtag').find('img');
                     var id = jQuery(img).attr('id');
                     //get tags if present
-                     jQuery('#tagit').fadeOut();
-                     viewtag(image_fiedlid);
-                   
-                    
+                    jQuery('#tagit').fadeOut();
+                    viewtag(image_fiedlid);
+
+
                 }
             });
         });
-        jQuery('#imgtag').on('click', '.remove', function() {
-           id = jQuery(this).parent().attr("id");
-            id=id.split('_');
-            id=id[1];
+
+        // Remove tags.
+        jQuery('#taglist').on('click', '.remove', function() {
+            id = jQuery(this).parent().attr("id");
+            id = id.split('_');
+            id = id[1];
             // Remove the tag
             $.ajax({
                 type: "POST",
@@ -233,48 +295,69 @@
                     var img = jQuery('#imgtag').find('img');
                     var id = jQuery(img).attr('id');
                     //get tags if present
-                     jQuery('#tagit').fadeOut();
-                     viewtag(image_fiedlid);
-                   
-                    
+                    jQuery('#tagit').fadeOut();
+                    viewtag(image_fiedlid);
+
+
                 }
             });
         });
-        
-        
-        
-        
+        jQuery('#imgtag').on('click', '.edit', function() {
+            id = jQuery(this).parent().attr("id");
+            id = id.split('_');
+            id = id[1];
+            $.ajax({
+                type: "POST",
+                url: Drupal.settings.basePath + 'gettags',
+                data: "tag_id=" + id,
+                success: function(data) {
+                    var objdata = jQuery.parseJSON(data);
+                    var tags = objdata.tag_title;
+                    var url = objdata.tag_url;
+                    var xcord = objdata.x_coordinate;
+                    var ycord = objdata.y_coordinate;
+                    jQuery('#tagit').remove( ); // remove any tagit div first
+                    jQuery('#imgtag').append('<div id="tagit"  style="top: ' + ycord + 'px; left: ' + xcord + 'px;"><div class="box"></div><div class="name"><div class="text">Tag</div><input type="text" name="tagname" id="tagname" placeholder="Title" value="' + tags + '"/><input type="hidden" name="tagid" id="tagid" value="' + id + '"/><input type="text" value="' + url + '" name="tagurl" class="error" id="tagurl" placeholder="Tag Url" /><span style="display:none" class="error web-error" for="edit-title" generated="true">Enter currect url .</span><input type="button" name="btnsave" value="Save" id="btnsavetagedit" /><input type="button" name="btncancel" value="Cancel" id="btncancel" /></div></div>');
+                    jQuery('#tagname').focus();
+
+                }
+            });
+        });
+
+
+
+
 
 
         viewtag(image_fiedlid); // view all tags available on page load
 //
         function viewtag(pic_id)
         {
-            
-             jQuery.ajax({
-                    url: Drupal.settings.basePath + 'gettaglist',
-                    type: 'post',
-                    data: {'fid': pic_id},
-                    success: function(data) {
-                         var objdata = jQuery.parseJSON(data);
-                     jQuery('#taglist ol').html(objdata.lists);
-                     jQuery('#tagbox').html(objdata.boxes);
-                    },
-                    error: function(xhr, desc, err) {
+
+            jQuery.ajax({
+                url: Drupal.settings.basePath + 'gettaglist',
+                type: 'post',
+                data: {'fid': pic_id},
+                success: function(data) {
+                    var objdata = jQuery.parseJSON(data);
+                    jQuery('#taglist ol').html(objdata.lists);
+                    jQuery('#tagbox').html(objdata.boxes);
+                },
+                error: function(xhr, desc, err) {
                     console.log(xhr);
                     console.log("Details: " + desc + "\nError:" + err);
-                    }
-                    }); 
-          
+                }
+            });
+
 
         }
-      jQuery('.maptofield').click(function(){
-          
-        jQuery(window.opener.document).find('[name="' + field_name + '[und][0][fid]"]').val(image_fiedlid);
-
-           window.opener.jQuery("body").find("input[name='" + field_name + "[und][0][filefield_itg_image_repository][button]").trigger('mousedown');
-       window.close();
-      })
-
+        jQuery('.maptofield').click(function() {
+            var getbame=jQuery('#btn_name').val();
+            parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
+            parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
+            parent.jQuery.colorbox.remove();
+            jQuery.colorbox.close();
+        })
+		
     });
 </script> 

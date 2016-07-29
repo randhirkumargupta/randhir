@@ -73,7 +73,21 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     $selected_node_data = $form_state['selection'];
     $cat_id = $_GET['category_tid'];
     $content_type = $_GET['type'];
-    if ($current_display != 'big_story_format') {
+    if ($current_display == 'big_story_format') {
+        // All Code for big sotry.
+        module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
+        $big_story_data = array();
+        $big_story_data = $form_state;
+        save_big_story_widget_data($big_story_data);
+    }
+    elseif ($current_display == 'dont_miss_content') {
+        module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
+        $dont_miss_content = array();
+        $dont_miss_content = $form_state;
+        save_dont_miss_widget_data($dont_miss_content);
+
+    }
+    else {
         // Logic to skip nodes which are already in itg_widget_order table
         $nodes_already = db_select('itg_widget_order', 'iwo')
                 ->condition('iwo.content_type', $content_type)
@@ -97,8 +111,8 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
                         ->fields(array(
                             'nid' => $node,
                             'widget' => $widget_name,
-                            'content_type' => $content_type,
-                            'cat_id' => $cat_id,
+                            'content_type' => ($content_type) ? $content_type : " ",
+                            'cat_id' => ($cat_id) ? $cat_id : "0",
                             'weight' => 0,
                         ))
                         ->execute();
@@ -108,13 +122,6 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
         else {
             drupal_set_message(t("Selected nodes allready in ordering section"));
         }
-    }
-    else {
-        // All Code for big sotry.
-        module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
-        $big_story_data = array();
-        $big_story_data = $form_state;
-        save_big_story_widget_data($big_story_data);
     }
     return array(
         'form_values' => $form_state['values'],

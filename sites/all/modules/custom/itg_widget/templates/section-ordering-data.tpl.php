@@ -8,14 +8,19 @@
             $extra_large_image_url = file_create_url($entity->field_story_extra_large_image['und'][0]['uri']);
         }
         ?>
-        <?php if (!empty($extra_large_image_url) && $count == 0) : ?>
-            <img src="<?php print $extra_large_image_url; ?>">
+        <?php if ($count == 0) : ?>
+            <?php if (!empty($extra_large_image_url)) { ?>
+                <img src="<?php print $extra_large_image_url; ?>">
+            <?php }
+            else { ?>
+                <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+            <?php } ?>
             <h3><a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a></h3>
         <?php endif; ?>
-        <?php if ($count!=0) : ?>
-        <p class="<?php print $entity->type ?>">
-            <a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a>
-        </p>
-    <?php endif; ?>
-    <?php } ?>
+    <?php if ($count != 0) : ?>
+            <p class="<?php print $entity->type ?>">
+                <a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a>
+            </p>
+        <?php endif; ?>
+<?php } ?>
 </div>

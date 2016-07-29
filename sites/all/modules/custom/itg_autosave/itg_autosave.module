@@ -95,96 +95,79 @@ function itg_autosave_views_api() {
  * {@inheritdoc}.
  */
 function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
-  // Fetch form ids saved into databse for auto save feature.
-  $itg_autosave_form = new itg_auto_save();  
-  // Restore data if it is available on auto saved data.
-  switch ($form_id) {
-    case 'astro_node_form':
+  
+  // Create object of itg_auto_save class.
+  $itg_autosave_form = new itg_auto_save();
+  
+  // Fetch form ids saved into database for autosave.
+  $form_ids = $itg_autosave_form->itg_save_get_form_ids();  
+  // match form_id with saved id for autosave.
+  if (in_array($form_id, $form_ids)) {
+    $flag = FALSE;
+    if ($form['nid']['#value'] == NULL) {
+      $form['#node']->status = 0;
+    }
+    elseif ($form['nid']['#value'] > 0 && $form['#node']->status == 0) {
+      $form['#node']->status = 0;
+    } 
+    else {
+      $flag = TRUE;
+    }    
+    if (!$flag) {      
       // Add js file for autosave ajax.
       $form['#attached']['js'] = array(
-        drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',
+        drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js',    
       );
+      $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];
+      $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();    
+      $form['field_story_node_identity']['und'][0]['value']['#prefix'] = '<div style="display:none;">';
+      $form['field_story_node_identity']['und'][0]['value']['#suffix'] = '</div>';
       // Set form ids to js file.
-      $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);
-      // Retrive data is it is already set.
-      $data = $itg_autosave_form->itg_save_retrieve_form_data($form['nid']['#value'], $form['type']['#value']);
-      $form_data = unserialize($data->form_data);
-      $field_detail = $itg_autosave_form->itg_save_extract_fieldtype($form_data);      
-      $form['title']['#default_value'] = isset($form_data['title']) ? $form_data['title'] : date('M d, Y');
-      foreach ($field_detail as $value) {
-        if ($value['fieldType'] == 'field_collection') {
-          $itg_autosave_form->itg_save_retrieve_fcollection($form, $value['fieldName'], $form_data[$value['fieldName']]);
-        }
-        else {
-          $itg_autosave_form->itg_save_prepare_retrieve_array($form, $value['fieldName'], $form_data[$value['fieldName']], $value['fieldType']);
-        }
-      }
-
-      break;
-  }
-}
-
-
-/**
- * Implements hook_field_attach_form().
- *
- * {@inheritdoc}.
- */ 
-function itg_autosave_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {  
-  $options = array('language' => field_valid_language($langcode));
-  // Merge default options.
-  $default_options = array(
-    'default' => FALSE,
-    'deleted' => FALSE,
-    'language' => NULL,
-  );
-  $options += $default_options;
-  list(,, $bundle) = entity_extract_ids($entity_type, $entity);
-  $instances = _field_invoke_get_instances($entity_type, $bundle, $options);
-  // Iterate through the instances.  
-  foreach ($instances as $instance) {    
-    $field = field_info_field_by_id($instance['field_id']);
-    //If we are looking at our field type and specific widget type, and we are multiple entries
-    if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
-      if ($field['bundles']['node'][0] == "astro") {      
-        if (isset($form[$field['field_name']]['und']['add_more'])) {
-          // add a simple select list, this defaults to numb 3
-          $form[$field['field_name']]['add_more_number'] = array(
-            '#type' => 'select',
-            '#title' => t('Add more no.'),
-            '#options' => drupal_map_assoc(range(0, 100)),
-            '#default_value' => isset($_SESSION['fc_delta']) ? $_SESSION['fc_delta'] : 1,
-            //'#attributes' => array('style' => 'display:none;'),
-          );
-          $form[$field['field_name']]['und']['add_more']['#submit'][] = 'itg_autosave_field_add_more_submit';
-          $form[$field['field_name']]['und']['add_more']['#value'] = 'Add more rows';
-        }
-      }
-    }
+      $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);          
+    }    
   }
 }
 
 /**
- * Implements hook_form_submit().
+ * Retrieve unique id associated with node
  *
- * @param array $form
- * @param array $form_state
+ * @param int $nid
+ *   Node id of the node.
+ *
+ * @return string
+ *   Unique id
  */
- 
-function itg_autosave_field_add_more_submit($form, &$form_state) {
-  $button = $form_state['triggering_element'];
-  // Go one level up in the form, to the widgets container.
-  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
-  $field_name = $element['#field_name'];
-  $langcode = $element['#language'];
-  $parents = $element['#field_parents'];
-  // Alter the number of widgets to show. items_count = 0 means 1.
-  $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
-  //get the number from the select
-  $numbtoadd = $form[$field_name]['add_more_number']['#value'];
-  if ($numbtoadd) {
-    $field_state['items_count'] += $numbtoadd - 1;
-    field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
-    $form_state['rebuild'] = TRUE;
-  }  
+function itg_autosave_retrieve_uniqueid($nid, $c_type) {
+  $itg_query = db_select('itg_autosave_node_data', 'itg');
+  $itg_query->condition('nid', $nid)
+      ->condition('node_type', $c_type)
+      ->fields('itg', array('itg_identity'));
+  $itg_result = $itg_query->execute()->fetchField();
+  
+  return $itg_result;      
+}
+
+/**
+ * Implements hook_node_insert(),
+ *
+ * {@inheridoc}.
+ */
+function itg_autosave_node_insert($node) {  
+  // Get Node identity field value.
+  $node_identity = $node->field_story_node_identity['und'][0]['value'];
+  // Fetch another node id with same node identity
+  $itg_query = db_select('itg_autosave_node_data', 'itg');
+  $itg_query->fields('itg', array('nid'))
+      ->condition('itg_identity', $node_identity)
+      ->condition('nid', $node->nid, '!=');
+  $itg_result = $itg_query->execute()->fetchObject();
+  // Delete node if found duplicate node identity node id.
+  if ($itg_result->nid > 0) {
+    node_delete($itg_result->nid);
+    // Update nid referenced to old node id
+    $itg_query = db_update('itg_autosave_node_data');
+    $itg_query->condition('nid', $itg_result->nid)
+      ->fields(array('nid' => $node->nid))
+      ->execute();
+  } 
 }

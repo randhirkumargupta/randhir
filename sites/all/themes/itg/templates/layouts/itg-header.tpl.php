@@ -10,7 +10,7 @@
             <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
             <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
             <li><a href="#" title=""><i class="fa fa-volume-up"></i></a></li>
-            <li><a href="#" class="search-icon" title=""><i class="fa fa-search"></i></a></li>                            
+            <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>                            
         </ul>
         <div class="globle-search">
             <input class="search-text" placeholder="Search.." type="text" value=""></div>
