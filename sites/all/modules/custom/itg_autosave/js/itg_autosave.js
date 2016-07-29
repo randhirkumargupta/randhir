@@ -42,7 +42,7 @@ jQuery(document).ready(function () {
           success: function (d) {
             if (d == 0 || d == 1) {
               jQuery('#content').find('.autosave').remove();
-              var cus_message = '<div class="messages--status messages status autosave">Form data have been successfully auto saved</div>';
+              var cus_message = '<div class="messages--status messages status autosave">Form data has been successfully auto saved</div>';
               jQuery('#content').prepend(cus_message);
               jQuery('#content').find('.autosave').fadeOut(10000);
             }

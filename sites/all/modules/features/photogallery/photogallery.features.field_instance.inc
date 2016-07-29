@@ -1484,6 +1484,48 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-photogallery-field_story_node_identity'.
+  $field_instances['node-photogallery-field_story_node_identity'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 51,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 48,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-photogallery-field_story_posted_by_facebook'.
   $field_instances['node-photogallery-field_story_posted_by_facebook'] = array(
@@ -2289,6 +2331,7 @@ function photogallery_field_default_field_instances() {
   t('Image Size (88 x 66)');
   t('Large image');
   t('Medium image');
+  t('Node Identity');
   t('Photo by');
   t('Posted By Instagram');
   t('Posted by Twitter');

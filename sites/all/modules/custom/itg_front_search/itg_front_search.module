@@ -160,7 +160,7 @@ function itg_front_search_views_pre_render(&$view) {
       '#suffix' => '</div>',
     );
 
-    $front_search .='<div class="search-menu">'.$url.'<div>';
+    $front_search .='<div class="search-menu">'.$url.'</div>';
     $view->attachment_before = $front_search;
 
     $_GET = $get_var;

@@ -400,6 +400,8 @@ function feature_for_all_widgets_views_default_views() {
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['relationship'] = 'nid';
   $handler->display->display_options['fields']['view_node']['label'] = 'view';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]  </span>';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
@@ -407,8 +409,8 @@ function feature_for_all_widgets_views_default_views() {
   $handler->display->display_options['fields']['php']['label'] = '';
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php
-print \'<a href="move-widget-node/section_wise_widget/\'.$_GET[\'type\'].\'/\'.$_GET[\'category_tid\'].\'/\'.$data->node_itg_widget_order_nid.\'"> <span class="edit-link">Move</spa></a>\';
+  $handler->display->display_options['fields']['php']['php_output'] = ' | <?php
+print \'<a href="move-widget-node/section_wise_widget/\'.$_GET[\'type\'].\'/\'.$_GET[\'category_tid\'].\'/\'.$data->node_itg_widget_order_nid.\'"> <span class="move-link">Move</spa></a>\';
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
@@ -427,7 +429,7 @@ print \'<a href="move-widget-node/section_wise_widget/\'.$_GET[\'type\'].\'/\'.$
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['value'] = 'All';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
-  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Categories';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Category';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'category_tid';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['required'] = TRUE;
@@ -454,6 +456,7 @@ print \'<a href="move-widget-node/section_wise_widget/\'.$_GET[\'type\'].\'/\'.$
     18 => 0,
     23 => 0,
     22 => 0,
+    24 => 0,
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
@@ -1503,7 +1506,7 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['group'] = 1;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
-  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Categories';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Category';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'category_tid';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['required'] = TRUE;
@@ -1530,6 +1533,7 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
     18 => 0,
     23 => 0,
     22 => 0,
+    24 => 0,
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
