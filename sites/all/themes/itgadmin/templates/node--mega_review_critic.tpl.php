@@ -24,14 +24,6 @@
     <div class='column-main'><div class='column-wrapper'>
   <?php endif; ?>
 
-  <?php if (!empty($title_prefix)) print render($title_prefix); ?>
-
-  <?php if (!empty($title) && !$page): ?>
-    <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
-      <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-      <a href="<?php print $node_url ?>"><?php print $title ?></a>
-    </h2>
-  <?php endif; ?>
 
   <?php if (!empty($title_suffix)) print render($title_suffix); ?>
 
@@ -54,7 +46,30 @@
         <?php print render($content['field_story_extra_large_image']); ?>
         
         <?php print render($content['field_mega_review_video']); ?>
-        <?php print render($content['field_mega_review_review']); ?>
+        <?php
+        $mega_output.= '';
+        foreach ($node->field_mega_review_review['und'] as $mega_item):
+          $byline_id = $mega_item['field_story_reporter']['und'][0]['target_id'];
+          $reporter_node = node_load($byline_id);
+          $mega_output.= '<div class="buzz-section">';
+          $mega_output.= '<div class="field"><div class="field-label">Headline:</div><div class="field-items">' . $mega_item['field_buzz_headline']['und'][0]['value'] . '</div></div>';
+          $mega_output.= '<div class="field"><div class="field-label">Reviewer:</div><div class="field-items">' . $reporter_node->title . '</div></div>';
+          $mega_output.= '<div class="field"><div class="field-label">Review URL Link:</div><div class="field-items">' . $mega_item['field_mega_review_url_link']['und'][0]['value'] . '</div></div>';
+          $mega_output.= '<div class="field"><div class="field-label">Description:</div><div class="field-items">' . $mega_item['field_mega_review_description']['und'][0]['value'] . '</div></div>';
+          $mega_output.= '<div class="field"><div class="field-label">Rating:</div><div class="field-items">' . $mega_item['field_story_rating']['und'][0]['value'] . '</div></div>';
+          $mega_output.= '</div>';
+          $mega_output.= '<hr/>';
+        endforeach;
+        ?>
+        <?php if (!empty($mega_item['field_buzz_headline']['und'][0]['value'])): ?>
+          <div class="Templates-buzz">
+              <h2><?php print t('Movie Review'); ?></h2>
+
+              <div class="content-details">
+                  <?php print $mega_output; ?>
+              </div>
+          </div>
+        <?php endif; ?>
         
       <?php } else { ?>
       <?php print render($content) ?>
