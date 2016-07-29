@@ -323,7 +323,7 @@ function features_for_print_team_field_default_field_instances() {
     'bundle' => 'print_team_integration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please mark as complete, if task has been completed.',
+    'description' => 'Please mark as complete, if item has been sold out.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -590,7 +590,7 @@ function features_for_print_team_field_default_field_instances() {
   t('Issue');
   t('Magazine');
   t('Mark as Complete');
-  t('Please mark as complete, if task has been completed.');
+  t('Please mark as complete, if item has been sold out.');
   t('Print Media');
   t('Rating');
   t('Select Section');
