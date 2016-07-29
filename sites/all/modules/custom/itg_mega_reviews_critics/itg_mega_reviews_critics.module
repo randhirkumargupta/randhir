@@ -31,6 +31,7 @@ function itg_mega_reviews_critics_views_pre_render(&$view) {
 function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form, &$form_state, $form_id) {
   $form['#after_build'][] = 'itg_mega_reviews_critics_form_after_build';
   $form['actions']['submit']['#submit'][] = 'itg_mega_reviews_critics_form_custom_callback';
+  $form['actions']['itg_custom_button']['#submit'][] = 'itg_mega_reviews_critics_form_draft_callback';
 }
 
 /**
@@ -89,6 +90,9 @@ function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
+  if (isset($_GET['destination'])) {
+    unset($_GET['destination']);
+  }
 
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'mega-review-critic') {
     $op = 'created';
@@ -101,10 +105,22 @@ function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {
 
   drupal_set_message(t('Mega review <b>' . $mega_title . '</b> has been ' . $op . '.'));
 
-  $_GET['destination'] = $_REQUEST['destination'];
+    if ($form_state['node']->status == 0) {
+     $form_state['redirect'] = 'movie-review-draft-list';
+    }
+     if ($form_state['node']->status == 1) {
+      $form_state['redirect'] = 'movie-review-list';
+    }
+  
 
 }
+function itg_mega_reviews_critics_form_draft_callback($form, &$form_state){
+   if (isset($_GET['destination'])) {
+    unset($_GET['destination']);
+  }
 
+  $form_state['redirect'] = 'movie-review-draft-list';
+}
 
 /**
  * Implements hook_block_info().
@@ -151,3 +167,20 @@ function itg_mega_reviews_critics_theme($existing, $type, $theme, $path) {
 
   return $themes;
 }
+
+/**
+ * Implements hook_node_insert()
+ * {@inheritdoc}
+ */
+//function itg_mega_reviews_critics_node_insert($node) {
+//  if ($node->type == 'mega_review_critic') {
+//    if ($node->status == 0) {
+//     drupal_goto('movie-review-draft-list');
+//    }
+//    else if ($node->status == 1) {
+//      drupal_goto('movie-review-list');
+//    }
+//  }
+//}
+//
+//
