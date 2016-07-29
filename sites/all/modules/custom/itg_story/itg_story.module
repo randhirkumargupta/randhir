@@ -115,9 +115,11 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['#after_build'][] = 'itg_story_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
-      $form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
       break;
+  
   }
+        $form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
+
 }
 
 /**
