@@ -370,7 +370,9 @@ function get_itg_widget($widget_name) {
  * {@inheritdoc}
  */
 function itg_layout_manager_preprocess_page(&$vars) {
-  global $theme;  
+  global $theme;
+  $arg = arg();
+  
   $is_fron_page = drupal_is_front_page(); 
   if (!empty($is_fron_page) && $theme == FRONT_THEME_NAME) {
     $section = 'home_page';
@@ -378,6 +380,14 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $data = get_layout_details($section, $template_name, 'front'); 
     $data['big_story'] = get_itg_widget('big_story_format');
     $vars['widget_data'] = $data;
+  }
+  
+  if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))&& $theme == FRONT_THEME_NAME) {
+    $tid = $arg[2];
+    
+    //$vid = db_query("SELECT vid FROM {taxonomy_term_data} WHERE tid = :tid", array(':tid' => $tid))->fetchField();
+
+    $vars['theme_hook_suggestions'][] = 'page__sectionphoto';
   }
 }
 
