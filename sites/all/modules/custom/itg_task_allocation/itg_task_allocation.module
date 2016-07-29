@@ -48,6 +48,7 @@ function itg_task_allocation_form_task_idea_allocation_tracking_node_form_alter(
   }
   $form['#after_build'][] = 'itg_task_allocation_form_after_build';
   $form['#after_build'][] = 'itg_common_cancel_button';
+  $form['#validate'][] = 'itg_task_allocation_node_form_validate';
   $form['actions']['submit']['#submit'][] = 'itg_task_allocation_form_custom_callback';
 }
 
@@ -144,7 +145,7 @@ function itg_task_allocation_form_custom_callback($form, &$form_state) {
   
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'task-idea-allocation-tracking') {
    $task_title = $form_state['node']->title; 
-   drupal_set_message(t('Task <b>'. $task_title .'</b> has been submitted successfully.')); expiredmail();
+   drupal_set_message(t('Task <b>'. $task_title .'</b> has been submitted successfully.')); 
     } else {
       $task_title = $form_state['node']->title;
       drupal_set_message(t('Task <b>'. $task_title .'</b> has been updated successfully.'));
@@ -280,39 +281,30 @@ function task_get_mail_content($node, $event, $to, $user_name) {
       $task_subject = 'New Comment has been added, please find below detail.';
   }
   
-  $node_url = $base_url.'/node/'.$node->nid;
-  $finish_date = date("d/m/Y H:i:s", strtotime($node->field_task_finish_date_and_time[LANGUAGE_NONE][0]['value']));
-  
-  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-              <html xmlns:v="urn:schemas-microsoft-com:vml">
-              <head><title></title></head>
-              <body style="margin:0; padding:0;">
-                    <table cellpadding="0" cellspacing="0" width="760" align="center"><tr><td>Hi,</td></tr>
-                    <tr><td></td></tr>
-                    <tr><td>'.$task_subject.'</td></tr>
-                    <tr><td></td></tr>
-                    <tr><td>Task Name: ' . $node->title . '</td></tr>
-                    <tr><td>URL: ' . $node_url . '</td></tr>
-                      
-                    <tr><td></td></tr>';
-                    if ($event != 'comment') {
-                      $content .='<tr><td>Assigned By: ' . $user_name . '</td></tr>
-                                  <tr><td></td></tr>
-                                  <tr><td>Task / idea: ' . $node->field_task_task_idea[LANGUAGE_NONE][0]['value'] . '</td></tr>
-                                  <tr><td></td></tr>
-                                  <tr><td>Finish Date and time: ' . $finish_date . '</td></tr>';
-                    }else {
-                      $content .= '<tr><td>Comment: ' . $node->comment_value . '</td></tr>';        
-                    }
+  $node_url = $base_url . '/node/' . $node->nid;
+    $finish_date = date("d/m/Y H:i:s", strtotime($node->field_task_finish_date_and_time[LANGUAGE_NONE][0]['value']));
 
-                    $content .='<tr><td></td></tr>
-                    <tr><td></td></tr>
-                    <tr><td>Thanks,</td></tr>
-                    <tr><td>India Today Team</td></tr></table>
-              </body></html>';
-  
-  
-   $params = array(
+    $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+              <html xmlns:v="urn:schemas-microsoft-com:vml">
+                <head><title></title></head>
+                <body style="margin:0; padding:0;">';
+    $content .= 'Hi,';
+    $content .= '<br /><br />   ' . $task_subject;
+    $content .= '<br />Task Name: ' . $node->title;
+    $content .= '<br />URL: ' . $node_url;
+    if ($event != 'comment') {
+        $content .= '<br />Assigned By: ' . $user_name;
+        $content .= '<br />Task / idea: ' . $node->field_task_task_idea[LANGUAGE_NONE][0]['value'];
+        $content .= '<br />Finish Date and time: ' . $finish_date;
+    }
+    else {
+        $content .= '<br /><br />Comment: ' . $node->comment_value;
+    }
+    $content .= '<br /><br />Thanks,<br>ITG Team';
+    $content .= '</body>';
+    $content .= '</html>';
+
+    $params = array(
       'body' => $content,
       'subject' => $node->title,
     );
@@ -339,11 +331,11 @@ function itg_task_allocation_mail($key, &$message, $params) {
   switch ($key) {
     case 'send_mail_to_task':
       $headers = array(
-        'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
-        'Content-Transfer-Encoding' => '8Bit',
-        'X-Mailer' => 'Drupal'
-      );
+              'MIME-Version' => '1.0',
+              'Content-Type' => 'text/html; charset=iso-8859-1;',
+              'Content-Transfer-Encoding' => '8Bit',
+              'X-Mailer' => 'Drupal'
+            );
       
       $message['subject'] = $params['subject'];
       $message['body'][] = $params['body'];
@@ -399,7 +391,7 @@ function get_task_count_of_user() {
 /**
  * Custom method for expired task.
  */
-function expiredmail() {
+function itg_task_allocation_expiredmail() {
     $current_time = date('Y-m-d H:i:s');
     $query = db_select('field_data_field_task_finish_date_and_time', 'f');
     $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
@@ -460,5 +452,34 @@ function expiredmail_mail_content($to) {
         $error_msg = 'Failed to send the email!';
         watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
         return FALSE;
+    }
+}
+
+/**
+ * Implements hook__cronapi().
+ * {@inheritdoc}
+ */
+function itg_task_allocation_cronapi($op, $job = NULL) {
+  $items['task_complete_mail'] = array(
+    'description' => 'Mail shoot after task completion date.',
+    'weight' => 5,
+    'callback' => 'itg_task_allocation_expiredmail',
+  );
+  return $items;
+}
+
+/**
+ * Implements custom validate of node add form for poll.
+ * @param array $form
+ * @param array reference $form_state
+ */
+function itg_task_allocation_node_form_validate($form, &$form_state) {
+   
+  $user_id = $form_state['values']['field_task_team_member']['und']['0']['target_id'];
+    $total = db_select('users', 'u')
+            ->fields('u', array('uid'))
+            ->condition('u.uid', $user_id)->execute()->rowCount();
+    if ($total == 0) {
+        form_set_error('field_task_team_member', 'Please select valid team member.');
     }
 }
