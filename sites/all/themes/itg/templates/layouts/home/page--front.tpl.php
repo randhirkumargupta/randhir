@@ -142,7 +142,13 @@ global $theme;
                                     print $widget_data['itg-block-2']['block_title'];
                                 } ?>
                             </span>
-                            <span data-id="tab-data-2"><?php print 'Tab 2'; ?></span>
+                            <span data-id="tab-data-2">
+                              <?php if (!$widget_data['itg-block-3']['block_title']) { 
+                                    print 'Tab 2';
+                                } else {
+                                    print $widget_data['itg-block-3']['block_title'];
+                                } ?>
+                            </span>
                         </div>
                         <div class="itg-widget-child tab-data tab-data-1">
                             <div class="droppable" id="itg-block-2">
@@ -177,8 +183,20 @@ global $theme;
                 </div>
                     <div class="itg-widget">
                         <div class="tab-buttons">
-                            <span data-id="tab-data-1" class="active"><?php print 'Tab 1'; ?></span>
-                            <span data-id="tab-data-2"><?php print 'Tab 2'; ?></span>
+                            <span data-id="tab-data-1" class="active">
+                              <?php if (!$widget_data['itg-block-5']['block_title']) { 
+                                    print 'Tab 1';
+                                } else {
+                                    print $widget_data['itg-block-5']['block_title'];
+                                } ?>
+                            </span>
+                            <span data-id="tab-data-2">
+                              <?php if (!$widget_data['itg-block-6']['block_title']) { 
+                                    print 'Tab 1';
+                                } else {
+                                    print $widget_data['itg-block-6']['block_title'];
+                                } ?>
+                            </span>
                         </div>
                         <div class="itg-widget-child">
                             <div class="droppable tab-data tab-data-1" id="itg-block-5">                               
@@ -190,11 +208,11 @@ global $theme;
                         </div>
                         <div class="itg-widget-child hide">
                             <div class="droppable tab-data tab-data-2" id="itg-block-6">
-                                <?php if ($theme != 'itgadmin') { ?>
-                                    <span class="widget-title">
-                                        <?php print $widget_data['itg-block-6']['block_title'];?>
-                                    </span>
-                                <?php } ?>
+                                <?php //if ($theme != 'itgadmin') { ?>
+<!--                                    <span class="widget-title">
+                                        <?php //print $widget_data['itg-block-6']['block_title'];?>
+                                    </span>-->
+                                <?php //} ?>
                                 <?php print $widget_data['itg-block-6']['widget']; ?>
                             </div>
                             <?php if ($theme == 'itgadmin') { ?>
