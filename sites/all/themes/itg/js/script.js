@@ -162,7 +162,7 @@ Drupal.behaviors.my_custom_behavior = {
         $(document).on('click', function(){            
             $('.globle-search').css('width','0px');
         });
-        $('.search-icon').click(function(e){
+        $('.search-icon, .globle-search').click(function(e){
             e.stopPropagation();
         });
     }
