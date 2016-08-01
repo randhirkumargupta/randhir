@@ -5610,3 +5610,11 @@ div.node #comments h2 {
 #edit-field-story-extra-large-image img {
   cursor: pointer;
 }
+
+.sidebar-section-photo .itg-widget {
+  margin: 20px 0;
+  position: relative;
+}
+.sidebar-section-photo .itg-widget .droppable {
+  min-height: 400px;
+}
