@@ -1174,7 +1174,7 @@ div.vertical-tabs {
                 height: 16px;
                 border-radius: 2px;
                 right: 3px;
-                top: -73px;
+                top: 3px;
                 text-indent: -9999px;
               }
             }
@@ -1200,10 +1200,21 @@ div.vertical-tabs {
           }
           .image-widget-data{
             float: none;
-            .filefield-source{
-              width: 100%;
-              height: 124px;
+            width: 100%;
+            height: 124px;
+            @extend .pos-rel;
               .filefield-sources-imce-browse{
+                background: #fff none repeat scroll 0 0;
+                border: 1px solid #d9d9d9;
+                border-radius: 0;
+                height: 124px;
+                left: 0;
+                color: #5f5f5f;
+                padding: 90px 0 0;
+                position: absolute;
+                text-align: center;
+                top: 0;
+                width: 100%;
                 border-radius: 0;
                 &:after{
                   content: '\f03e';
@@ -1211,9 +1222,21 @@ div.vertical-tabs {
                   font-size: 50px;
                   line-height: 120px;
                   color: #e5e5e5;
+                  position: absolute;
+                  left: 0;
+                  right: 0;
+                  top: 0;
+                  bottom: 0;
                 }
               }
-            }
+              .form-type-textfield{
+                position: absolute;
+                bottom: 0;
+                left: 0;
+              }
+              div.description{
+                left: 213px;
+              }
           }
           .form-managed-file + div.description {
             left: 220px;
