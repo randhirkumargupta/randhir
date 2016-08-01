@@ -111,10 +111,10 @@ function remove_from_widgets_with_section($nid, $qid, $view_name, $page_name, $s
     $draggable_delete = draggable_view_node_delete_section($view_name, $page_name, $nid, $section_tid, $type);
     if ($draggable_delete) {
         nodequeue_subqueue_remove_node($qid, $nid);
-        print "$draggable_delete deleted";
+        print "deleted";
     }
     else {
-        print "$draggable_delete notdeleted";
+        print "notdeleted";
     }
 }
 
