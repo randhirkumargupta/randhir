@@ -5598,3 +5598,12 @@ div.node{
         cursor: pointer;
     }
 }
+.sidebar-section-photo{
+  .itg-widget{
+    margin: 20px 0;
+    position: relative;
+    .droppable{
+      min-height: 400px;
+    }
+  }
+}
