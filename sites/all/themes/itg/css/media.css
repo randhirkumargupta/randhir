@@ -269,5 +269,87 @@
   }
 
   /*End Dont miss Home page css*/
+  /*Start Story page css*/
+  .story-section h1 {
+    font-size: 34px;
+    font-size: 2.125rem;
+    font-weight: 700;
+    line-height: 42px;
+  }
+  .story-section .story-left, .story-section .story-right {
+    float: left;
+  }
+  .story-section .story-left {
+    width: 21%;
+  }
+  .story-section .story-left .byline {
+    text-align: center;
+  }
+  .story-section .story-left .byline .profile-pic, .story-section .story-left .byline .profile-detail {
+    float: none;
+  }
+  .story-section .story-left .byline .profile-detail ul li {
+    float: none;
+    padding: 5px 0;
+    border-bottom: 1px solid #eaeaea;
+  }
+  .story-section .story-left .byline .profile-detail ul li + li {
+    border-left: none;
+  }
+  .story-section .story-left .briefcase {
+    margin-top: 50px;
+  }
+  .story-section .story-left .briefcase h4 {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .story-section .story-left .briefcase ul li {
+    background: #f9f9f9;
+    color: #575757;
+    padding: 12px 8px 20px 8px;
+    line-height: 18px;
+  }
+  .story-section .story-left .briefcase ul li + li {
+    border-top: 1px solid #eaeaea;
+    padding: 20px 8px;
+  }
+  .story-section .story-left .briefcase ul li:before {
+    display: none;
+  }
+  .story-section .story-right {
+    width: 79%;
+  }
+  .story-section .snap-post {
+    padding: 20px 20px 20px 100px;
+    background-size: inherit;
+  }
+  .story-section .snap-post .discription {
+    font-size: 22px;
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 30px;
+    text-align: center;
+  }
+  .story-section .snap-post .agbutton {
+    margin: 20px 0;
+    text-align: center;
+  }
+  .story-section .snap-post .agbutton a {
+    display: inline-block;
+    margin-top: 0;
+  }
+  .story-section .snap-post button {
+    margin: 0 15px;
+    width: 113px;
+    font-size: 17px;
+    font-size: 1.0625rem;
+  }
+
+  .buzz-feedback .story-right {
+    width: 100%;
+  }
+
+  /*End Story page css*/
 }
 /*End CSS Desktop version*/
