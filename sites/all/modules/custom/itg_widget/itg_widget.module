@@ -147,8 +147,9 @@ function draggable_view_node_delete_section($view_name, $page_name, $nid, $secti
  */
 function remove_from_widgets($nid, $qid, $view_name, $page_name) {
     $draggable_delete = draggable_view_node_delete($view_name, $page_name, $nid);
+    nodequeue_subqueue_remove_node($qid, $nid);
     if ($draggable_delete) {
-        nodequeue_subqueue_remove_node($qid, $nid);
+        //nodequeue_subqueue_remove_node($qid, $nid);
         print "deleted";
     }
     else {
