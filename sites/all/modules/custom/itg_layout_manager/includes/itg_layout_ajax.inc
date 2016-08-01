@@ -51,7 +51,7 @@ function insert_layout_setting_ajax() {
     
     // get layout id by tpl id and block name    
     $layout_id = get_layout_manager_id($unpublish_tpl_id, $_GET['block_name']);    
-//p($layout_id);
+
     // Insert and update layout widget setting details
     if (empty($layout_id)) {
       $widget = explode('#', $_GET['widget_name']);
@@ -74,8 +74,7 @@ function insert_layout_setting_ajax() {
       } else {
         
         $widget = explode('#', $_GET['widget_name']);
-        
-        //watchdog("test shravan", '<pre>'. print_r($layout_id, TRUE) .'</pre>'); 
+         
         db_update('itg_layout_manager')
               ->fields(array('widget_name' => $widget[0], 'filter_url' => $widget[1]))              
               ->condition('id', $layout_id)->execute();
@@ -93,8 +92,7 @@ function insert_layout_setting_ajax() {
     }
     else {
       $output = get_itg_widget($_GET['widget_name']); 
-    } 
-    
+    }    
     
     print $output;
   }
@@ -187,7 +185,7 @@ function section_widgets_ajax() {
     if ((isset($_GET['section_name']) && ($_GET['section_name'] != '_none')) && (isset($_GET['template_name']) && ($_GET['template_name'] != '_none'))) {
       $category_array = explode('(', $_GET['category_name']);
       $cid = substr($category_array[1], 0,-1);
-      $check_cid = get_section_widgets_id($cid);
+      $check_cid = get_section_widgets_id($cid, $_GET['section_name']);
       if (empty($check_cid)) {
         $query_layout_tpl = db_insert('itg_section_widgets_list');
             $query_layout_tpl->fields(array(
@@ -216,9 +214,10 @@ function section_widgets_ajax() {
  * Get section widgets id
  * @return int
  */
-function get_section_widgets_id($cid) {
+function get_section_widgets_id($cid, $section) {
   $query = db_select('itg_section_widgets_list', 'section');
   $query->fields('section', array('id'));  
   $query->condition('category_id', $cid);
+  $query->condition('template_section_name', $section);
   return $query->execute()->fetchField();
 }
