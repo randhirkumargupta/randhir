@@ -36,7 +36,7 @@
 })(jQuery);
 function showimagerepopopu(iframeurl)
 {
-    jQuery.colorbox({href: iframeurl, iframe: true, width: "80%", height: "80%"});
+    jQuery.colorbox({href: iframeurl, iframe: true, width: "80%", height: "80%",fixed: true});
 
 }
 

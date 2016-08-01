@@ -91,6 +91,7 @@ class itg_auto_save {
    */
   public function itg_save_set_form_ids($nid, $c_type) {
     global $base_url;
+    $this->data = '';
     $this->fid_query = db_select('itg_autosave_forms', 'itg');
     $this->fid_query->fields('itg', array('form_name', 'autosave_time'));
     $this->fid_result = $this->fid_query->execute()->fetchAll();
@@ -100,7 +101,7 @@ class itg_auto_save {
         $row->form_name,
         $row->autosave_time,
       );
-    }
+    }    
     // Pass data to js file.
     drupal_add_js(array(
       'itg_autosave' => array(
@@ -195,7 +196,7 @@ class itg_auto_save {
       entity_delete_multiple('field_collection_item', $fc_ids[$field_name]);          
     }
     // Create new field collection for node field.
-    foreach ($value['und'] as $key => $fc_value) {
+    foreach ($value['und'] as $key => $fc_value) {      
       // Get field type for field collection values.
       $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);
       // Filter empty array from list.
@@ -296,9 +297,14 @@ class itg_auto_save {
    * @return string
    *   Extracted value.
    */
-  public function itg_save_field_text_long($value) {
-    $this->text_long = '';
-    $this->text_long = $value['und'][0]['value'];
+  public function itg_save_field_text_long($value) {    
+    if ($value['und'][0]['value'] != '' && isset($value['und'][0]['format'])) {
+      $this->text_long['value'] = $value['und'][0]['value'];
+      $this->text_long['format'] = $value['und'][0]['format'];      
+    }
+    else {      
+      $this->text_long = $value['und'][0]['value'];
+    }
 
     return $this->text_long;
   }
@@ -393,7 +399,7 @@ class itg_auto_save {
    *   Return true if filed is not empty else return false.
    */
   public function itg_save_validate_field_collection($data, $field_values) {        
-    foreach ($data as $value) {       
+    foreach ($data as $value) {             
       switch ($value['fieldType']) {
         case 'taxonomy_term_reference':          
           if (is_int($field_values[$value['fieldName']]['und'])) {
@@ -406,8 +412,20 @@ class itg_auto_save {
             return TRUE;
           }
           break;
+          
+        case 'list_text':          
+          if(is_array($field_values[$value['fieldName']]['und'])) {
+            return TRUE;
+          }
+          break;
+          
+        case 'text':
+          if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
+            return TRUE;
+          }
       }
     }
+    
     return FALSE;
   }
 
@@ -451,41 +469,54 @@ class itg_auto_save {
         case 'taxonomy_term_reference':          
           if ($node->type == 'story') {
             continue;
-          }          
-          $this->value = $inputs[$field['fieldName']]['und'];                    
+          }
+          $this->value = $inputs[$field['fieldName']]['und'];
+          $this->var_type = gettype($this->value);
+          if ($this->var_type == 'string') {
+            $this->value = (int) $this->value;
+          }         
           if (!empty($this->value) && is_array($this->value)) {            
-            foreach ($this->value as $key => $tid) {              
-              $node->{$field['fieldName']}[$node->language][$key]['tid'] = $tid;
+            foreach ($this->value as $key => $tid) {
+              $key = (int) $key;
+              $tid = (int) $tid;
+              if ($tid > 0) {
+                $node->{$field['fieldName']}[$node->language][$key]['tid'] = $tid;
+              }              
             }
           }          
-          if (!empty($this->value) && $this->value != '_none') {
+          elseif (!empty($this->value) && $this->value > 0) {            
             $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;            
           }          
+          
           break;
-
+          
         case 'field_collection':
           // Save field name of field collection to array.
           $this->temp[] = $field['fieldName'];
           break;
 
-        case 'text_long':
+        case 'text_long':          
           $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
-          $node->{$field['fieldName']}[$node->language][0] = $this->value;          
+          if (count($this->value) > 0) {
+            $node->{$field['fieldName']}[$node->language][0] = $this->value;          
+          }          
           break;
 
-        case 'text_with_summary':
+        case 'text_with_summary':          
           $node->{$field['fieldName']}[$node->language][0] = $this->itg_save_field_text_with_summary($inputs[$field['fieldName']]);
           break;
 
-        case 'list_text':          
+        case 'list_text': 
+          $this->flag = 0;
           if (count($inputs[$field['fieldName']]['und']) >= 2) {
-            foreach ($inputs[$field['fieldName']]['und'] as $value) {              
-              $node->{$field['fieldName']}['und'][]['value'] = $value;
+            foreach ($inputs[$field['fieldName']]['und'] as $list_value) {              
+              $node->{$field['fieldName']}['und'][$this->flag]['value'] = $list_value;
+              ++$this->flag;
             }
           }
-          else {
+          else {            
             $node->{$field['fieldName']}['und'][0]['value'] = $this->itg_save_field_list_text($inputs[$field['fieldName']]);
-          }          
+          }           
           break;
         
         case 'list_float':
@@ -497,13 +528,16 @@ class itg_auto_save {
         case 'number_integer':
           //$node->{$field['fieldName']}['und'][0]['value'] = 
           break;
-        case 'entityreference':          
-          if (is_array($inputs[$field['fieldName']]['und']) && $inputs[$field['fieldName']]['und'][0]['target_id'] != '') {            
-            $node->{$field['fieldName']}['und'][0]['target_id'] = $inputs[$field['fieldName']]['und'][0]['target_id'];
+        case 'entityreference':
+          $this->value = $inputs[$field['fieldName']]['und'];          
+          if (is_array($this->value) && $this->value[0]['target_id'] != '') {
+            $this->target_id = (int) $this->value[0]['target_id'];
+            $node->{$field['fieldName']}['und'][0]['target_id'] = $this->target_id;
           }
-          elseif (!is_array($inputs[$field['fieldName']]['und']) && $inputs[$field['fieldName']]['und'] > 0) {            
-            $node->{$field['fieldName']}['und'][0]['target_id'] = $inputs[$field['fieldName']]['und'];
-          }          
+          elseif (!is_array($this->value) && $this->value != '') {
+            $this->target_id = (int) $inputs[$field['fieldName']]['und'];
+            $node->{$field['fieldName']}['und'][0]['target_id'] = $this->target_id;
+          }
       }
     }
 
@@ -520,8 +554,8 @@ class itg_auto_save {
    * @param type $fc_item
    *   Field collection entity object.
    */
-  public function itg_save_field_collection($data, $inputs, &$fc_item) {
-    foreach ($data as $field) {
+  public function itg_save_field_collection($data, $inputs, &$fc_item) {   
+    foreach ($data as $field) {      
       switch ($field['fieldType']) {
         case 'datestamp':
           
@@ -539,12 +573,7 @@ class itg_auto_save {
           $this->value = $inputs[$field['fieldName']]['und'];
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['tid'] = $this->value;          
           
-          break;
-
-        case 'field_collection':
-          // Save field name of field collection to array.
-          $this->temp[] = $field['fieldName'];
-          break;
+          break;       
 
         case 'text_long':
           $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
@@ -555,11 +584,15 @@ class itg_auto_save {
           
           break;
 
-        case 'list_text':
+        case 'list_text':          
+          $this->value = $inputs[$field['fieldName']]['und'];
+          foreach ($this->value as $f_value) {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $f_value;
+          }          
           
           break;
       }
-    }
+    }    
   }
 
   /**

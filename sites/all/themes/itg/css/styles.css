@@ -57,6 +57,11 @@ h3 {
   line-height: 24px;
 }
 
+h4 {
+  font-size: 12px;
+  line-height: 18px;
+}
+
 ul {
   list-style-type: none;
 }
@@ -142,7 +147,7 @@ img {
   display: block;
 }
 
-.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .header .top-nav ul li, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field {
+.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .header .top-nav ul li, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
   display: inline-block;
 }
 
@@ -150,11 +155,11 @@ img {
   vertical-align: middle;
 }
 
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .header .top-nav ul li a .fa, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"], [class*="node-type-"] .node .field .field-items .file img {
+.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .header .top-nav ul li a .fa, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
   vertical-align: top;
 }
 
-.full, #page, .header .top-nav, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes div.rating, .form-field-type-field-collection .field-multiple-table, [class*="node-type-"] .node .field {
+.full, #page, .header .top-nav, #block-formblock-ask-an-expert .form-text, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes div.rating, .form-field-type-field-collection .field-multiple-table {
   width: 100%;
 }
 
@@ -162,7 +167,7 @@ img {
   max-width: 100%;
 }
 
-.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container > .form-item .form-item.form-type-radio .form-radio, .answer-container .form-type-checkboxes div.rating, .answer-container div.rating .form-type-checkbox input[type="checkbox"], [class*="node-type-"] .node .field .field-label {
+.fleft, .tabs-primary li, .node-ask-an-expert .field-label, .view-ask-an-expert .views-label, .answer-container > .form-item .form-item.form-type-radio .form-radio, .answer-container .form-type-checkboxes div.rating, .answer-container div.rating .form-type-checkbox input[type="checkbox"] {
   float: left;
 }
 
@@ -758,38 +763,41 @@ input[type="text"], select, input[type="password"] {
   text-transform: capitalize;
 }
 
-[class*="node-type-"] .tabs-primary {
-  display: none;
-}
-[class*="node-type-"] .node {
-  padding: 20px;
-}
-[class*="node-type-"] .node h2 {
-  background-color: #fefafb;
-  border-top: 1px solid #d9d9d9;
-  border-bottom: 1px solid #d9d9d9;
-  padding: 8px 20px;
-  line-height: 28px;
-  font-size: 18px;
-  margin: 15px 0;
-}
-[class*="node-type-"] .node .field {
-  padding: 5px 30px;
-}
-[class*="node-type-"] .node .field .field {
-  padding: 0;
-}
-[class*="node-type-"] .node .field .field-label {
-  width: 220px;
-  padding-right: 20px;
-}
-[class*="node-type-"] .node .field .field-items {
-  overflow: hidden;
-}
-[class*="node-type-"] .node .field .field-items .file a {
-  color: #1fb5ad;
-}
-
+/*[class*="node-type-"]{
+  .tabs-primary{display: none;}
+  .node{
+    padding: 20px;
+    h2{
+      background-color: #fefafb;
+      border-top: 1px solid #d9d9d9;
+      border-bottom: 1px solid #d9d9d9;
+      padding: 8px 20px;
+      line-height: 28px;
+      font-size: 18px;
+      margin: 15px 0;
+    }
+    .field{
+      padding: 5px 30px;
+      @extend .dib;
+      @extend .full;
+      .field{
+        padding: 0;
+      }
+      .field-label{
+        @extend .fleft;
+        width: 220px;
+        padding-right: 20px;
+      }
+      .field-items{
+        overflow: hidden;
+        .file{
+          a{color: #1fb5ad;}
+          img{@extend .vtop;}
+        }
+      }
+    }
+  }
+}*/
 .comm-ques {
   background-color: #fffddf;
 }
@@ -1321,6 +1329,88 @@ footer .footer-copyright {
   color: #b3b3b3;
   margin-bottom: 40px;
 }
+.view-front-end-global-search .views-widget {
+  position: relative;
+}
+.view-front-end-global-search .views-widget .s-link {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.view-front-end-global-search .views-widget .s-link a {
+  width: 50px;
+  height: 46px;
+  background: #2c323d;
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 40px;
+  cursor: pointer;
+}
+.view-front-end-global-search .views-widget .s-link a#search_button {
+  margin-right: 1px;
+}
+.view-front-end-global-search .views-widget .s-link a:hover {
+  color: #ffc106;
+}
+.view-front-end-global-search .views-exposed-widget {
+  position: relative;
+}
+.view-front-end-global-search .views-exposed-widget .caln {
+  display: block;
+  background: #f5f5f5;
+  position: absolute;
+  padding: 15px;
+  width: 400px;
+  padding-bottom: 0;
+  box-shadow: 2px 2px 2px #f1f1f1;
+  color: #323232;
+}
+.view-front-end-global-search .views-exposed-widget .caln label {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 9px;
+}
+.view-front-end-global-search .views-exposed-widget .caln .container-inline-date {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-front-end-global-search .views-exposed-widget .caln .container-inline-date + .container-inline-date {
+  margin-left: 10px;
+}
+.view-front-end-global-search .views-exposed-widget .caln .date-padding {
+  display: inline-block;
+  vertical-align: top;
+  float: none;
+  width: 150px;
+}
+.view-front-end-global-search .views-exposed-widget .caln .date-padding label {
+  display: none;
+}
+.view-front-end-global-search .views-exposed-widget .caln .date-padding input[type="text"] {
+  width: 100%;
+  background: #fff url(../images/calender-icon.png) no-repeat center right;
+  margin-right: 0;
+}
+.view-front-end-global-search .views-exposed-widget .caln .date-padding .description {
+  font-size: 12px;
+  font-size: 0.75rem;
+  color: #a5a5a5;
+}
+.view-front-end-global-search .views-exposed-widget .caln:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid whitesmoke;
+  top: -11px;
+  position: absolute;
+  left: 9px;
+}
 .view-front-end-global-search .view-content li {
   overflow: hidden;
   padding: 10px;
@@ -1494,6 +1584,8 @@ footer .footer-copyright {
   color: #048cb9;
   margin-bottom: 5px;
   text-transform: uppercase;
+  font-size: 14px;
+  font-size: 0.875rem;
 }
 .dont-miss ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
@@ -1503,3 +1595,237 @@ footer .footer-copyright {
 }
 
 /*End Dont miss Home page css*/
+/*Start Story page css*/
+.story-section h1 {
+  font-size: 34px;
+  font-size: 2.125rem;
+  font-weight: 700;
+  line-height: 42px;
+}
+.story-section .story-left-section {
+  margin: 0 -15px;
+  zoom: 1;
+  margin-top: 20px;
+}
+.story-section .story-left-section:before, .story-section .story-left-section:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.story-section .story-left-section:after {
+  clear: both;
+}
+.story-section .story-left, .story-section .story-right {
+  float: left;
+  padding: 0 15px;
+}
+.story-section .story-left {
+  width: 21%;
+}
+.story-section .story-left .byline {
+  text-align: center;
+  color: #989898;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+.story-section .story-left .byline a {
+  color: #989898;
+}
+.story-section .story-left .byline ul li span.share-count {
+  display: block;
+  font-size: 44px;
+  font-size: 2.75rem;
+  font-weight: 500;
+  line-height: 44px;
+}
+.story-section .story-left .byline ul li + li {
+  border-bottom: 1px solid #eaeaea;
+  padding: 5px 0;
+}
+.story-section .story-left .byline ul li img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #e4e4e4;
+}
+.story-section .story-left .byline ul li.twitter {
+  color: #0783ec;
+}
+.story-section .story-left .byline ul li.title {
+  color: #6b6b6b;
+  font-weight: 500;
+}
+.story-section .story-left .byline ul li.mailto {
+  text-transform: uppercase;
+}
+.story-section .story-left .briefcase {
+  margin-top: 50px;
+}
+.story-section .story-left .briefcase h4 {
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.story-section .story-left .briefcase ul li {
+  background: #f9f9f9;
+  color: #575757;
+  padding: 12px 8px 20px 8px;
+  line-height: 18px;
+}
+.story-section .story-left .briefcase ul li + li {
+  border-top: 1px solid #eaeaea;
+  padding: 20px 8px;
+}
+.story-section .story-right {
+  width: 79%;
+}
+.story-section .story-right .stryimg {
+  position: relative;
+}
+.story-section .story-right .stryimg .field-label {
+  display: none;
+}
+.story-section .story-right .stryimg .photoby {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #222222;
+  color: #aeaeae;
+  font-size: 13px;
+  font-family: "Roboto", sans-serif;
+  padding: 3px 10px;
+}
+.story-section .story-right .image-alt {
+  color: #929292;
+  font-size: 13px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.story-section .story-right .description {
+  padding-top: 25px;
+  font-size: 15px;
+  line-height: 27px;
+}
+.story-section .story-right .description:first-letter {
+  font-size: 58px;
+  color: #777879;
+}
+.story-section .snap-post {
+  padding: 20px 20px 20px 100px;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  background: url(../images/snap-post-icon.png) no-repeat 15px 20px #f5f5f5;
+}
+.story-section .snap-post .discription {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+}
+.story-section .snap-post .agbutton {
+  margin: 20px 0;
+  text-align: center;
+}
+.story-section .snap-post .agbutton a {
+  color: #026bc5;
+  font-size: 12px;
+}
+.story-section .snap-post .agbutton button {
+  background: #363636;
+  border: none;
+  color: #fff;
+  width: 113px;
+  height: 30px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 0px #aeaeae;
+  text-transform: uppercase;
+  font-family: roboto-slab;
+  font-size: 17px;
+  font-family: "Roboto Slab", sans-serif;
+  margin: 0 15px;
+  cursor: pointer;
+}
+.story-section .tags ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding: 25px 12px;
+  color: #c0c0c0;
+  font-size: 12px;
+}
+.story-section .tags ul li a {
+  color: #c0c0c0;
+  font-size: 12px;
+}
+.story-section .buzz-section > * {
+  margin-bottom: 15px;
+}
+.story-section .buzz-section h1 span {
+  background: #a00606;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  line-height: 34px;
+  text-align: center;
+  border-radius: 100%;
+  font-size: 24px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+.story-section .buzz-section .buzz-discription {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 22px;
+}
+
+/*End Story page css*/
+section.sidebar {
+  border: 1px solid #ddd;
+  min-height: 600px;
+}
+
+.may-be-suggest-container ul li {
+  overflow: hidden;
+  padding: 10px;
+}
+.may-be-suggest-container ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.may-be-suggest-container ul li .pic {
+  float: right;
+  margin-left: 10px;
+}
+.may-be-suggest-container ul li .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.may-be-suggest-container h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  position: relative;
+}
+.may-be-suggest-container h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+.may-be-suggest-container h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}

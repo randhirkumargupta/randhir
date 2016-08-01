@@ -97,7 +97,7 @@ function itg_autosave_form_delete($form_id) {
  * @param string $ctype
  *   Name of the content type.
  */
-function itg_autosave_nodeform($nid, $ctype) {  
+function itg_autosave_nodeform($nid, $ctype) {    
   global $user;
   // Store submitted values into variable.
   $inputs = $_POST;
@@ -153,18 +153,16 @@ function itg_autosave_nodeform($nid, $ctype) {
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
   }  
-  // Submit the node before save.
+  // Submit the node before save.  
   $node = node_submit($node); 
-  // Save node to save all values into node.  
-  
+  // Save node to save all values into node.    
   node_save($node);  
-  
   // Store unique id associated with node in array.
   $pre_save['unique_id'] = $node_identity;
   // Store all field collections ids into array.
-  $pre_save['field_collection'] = itg_autosave_get_fcollection_ids($f_collection, $node);  
+  $pre_save['field_collection'] = itg_autosave_get_fcollection_ids($f_collection, $node);
   // Save data into database.
-  $itg_auto_save->itg_save_form_data($pre_save, $node->nid, $ctype);  
+  $itg_auto_save->itg_save_form_data($pre_save, $node->nid, $ctype);
 }
 
 /**

@@ -151,7 +151,7 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
     $itg_image_repository_function="showimagerepopopu('".$url."')";
     $element['filefield_itg_image_repository']['display_path'] = array(
         '#type' => 'markup',
-        '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="#" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
+        '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="javascript:void(0)" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
     );
 
 

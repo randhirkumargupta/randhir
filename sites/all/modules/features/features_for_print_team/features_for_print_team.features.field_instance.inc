@@ -11,6 +11,43 @@ function features_for_print_team_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'comment-comment_node_print_team_integration-comment_body'.
+  $field_instances['comment-comment_node_print_team_integration-comment_body'] = array(
+    'bundle' => 'comment_node_print_team_integration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'comment',
+    'exclude_cv' => 0,
+    'field_name' => 'comment_body',
+    'label' => 'Comment',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_pti_print_media-field_pti_upload_image'.
   $field_instances['field_collection_item-field_pti_print_media-field_pti_upload_image'] = array(
     'bundle' => 'field_pti_print_media',
@@ -323,7 +360,7 @@ function features_for_print_team_field_default_field_instances() {
     'bundle' => 'print_team_integration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please mark as complete, if task has been completed.',
+    'description' => 'Please mark as complete, if item has been sold out.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -557,7 +594,7 @@ function features_for_print_team_field_default_field_instances() {
     'label' => 'Timeline',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -584,13 +621,14 @@ function features_for_print_team_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Comment');
   t('Idea Brief');
   t('Idea Status');
   t('Image');
   t('Issue');
   t('Magazine');
   t('Mark as Complete');
-  t('Please mark as complete, if task has been completed.');
+  t('Please mark as complete, if item has been sold out.');
   t('Print Media');
   t('Rating');
   t('Select Section');
