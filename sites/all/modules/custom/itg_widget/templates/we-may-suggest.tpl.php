@@ -9,7 +9,7 @@ if (!empty($data)) {
 ?>
 <?php if (!empty($entity_data)) { ?>
     <div class="may-be-suggest-container">
-        <h3><span>May We Suggest</span></h3>
+        <h3><span><?php print t('May We Suggest');?></span></h3>
         <ul>
         <?php foreach ($entity_data as $key => $entity_info) { ?>
             <li class="may-be-suggest" id="may-be-suggest-<?php print $key ?>">
