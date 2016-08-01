@@ -2223,12 +2223,17 @@ function feature_for_top_story_widget_views_default_views() {
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'most-popular-story';
 
-  /* Display: Most Popular Story Order Reorder */
-  $handler = $view->new_display('page', 'Most Popular Story Order Reorder', 'most_popular_widget');
+  /* Display: Most Popular Order Reorder */
+  $handler = $view->new_display('page', 'Most Popular Order Reorder', 'most_popular_widget');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Most Popular Order Reorder';
+  $handler->display->display_options['title'] = 'Most Popular Order reoder';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -2485,7 +2490,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<span><a data-view="story_widget" data-page="most_popular_widget" data-nid="[nid]" data-queueid=\'5\' class="remove_from_nodequeue_draggable_view" href="#"><span class="delete-link">Move</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="most_popular_widget" data-nid="[nid]" data-queueid=\'5\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Move</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -2514,11 +2519,6 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['filters']['name']['expose']['label'] = 'Queue machine name';
   $handler->display->display_options['filters']['name']['expose']['operator'] = 'name_op';
   $handler->display->display_options['filters']['name']['expose']['identifier'] = 'name';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'most-popular-widget-order-reorder';
   $export['story_widget'] = $view;
 
