@@ -86,10 +86,10 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
  * @param int $nid
  */
 function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
-    if (!empty($widget_name) && !empty($content_type) && !empty($cat_tid) && !empty($nid)) {
+    if (!empty($widget_name)  && !empty($cat_tid) && !empty($nid)) {
         $num = db_delete('itg_widget_order')
                 ->condition('nid', $nid)
-                ->condition('content_type', $content_type)
+                //->condition('content_type', $content_type)
                 ->condition('cat_id', $cat_tid)
                 ->condition('widget', $widget_name)
                 ->execute();
@@ -402,9 +402,9 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
   switch ($form['#id']) {
     case 'views-exposed-form-home-page-feature-widget-page-1':
       $form['title']['#attributes']['placeholder'] = t('Story Title');
-      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+      //$form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
       $form['nid']['#attributes']['placeholder'] = t('Story ID');
-      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
+      //$form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
       break;
     case 'views-exposed-form-story-widget-most-popular':
       $form['title']['#attributes']['placeholder'] = t('Story Title');
@@ -425,6 +425,18 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     case 'views-exposed-form-story-widget-trending-videos':
       $form['title']['#attributes']['placeholder'] = t('Video Title');
       $form['nid']['#attributes']['placeholder'] = t('Video ID');
+      break;
+    case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      break;
+    case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      break;
+    case 'views-exposed-form-section-wise-draggable-content-order-page':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
       break;
   }
 }

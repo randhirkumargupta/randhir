@@ -434,16 +434,16 @@ function feature_for_home_page_feature_widget_views_default_views() {
     'title' => 'title',
     'nid' => 'nid',
     'type' => 'type',
+    'field_story_category_1' => 'field_story_category_1',
+    'field_story_source_type' => 'field_story_source_type',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
-    'field_story_category' => 'field_story_category',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'status' => 'status',
     'edit_node' => 'nothing_1',
-    'delete_node' => 'nothing_1',
     'nothing_1' => 'nothing_1',
+    'view_node' => 'nothing_1',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -478,6 +478,18 @@ function feature_for_home_page_feature_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_story_category_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_source_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'uid' => array(
       'align' => '',
       'separator' => '',
@@ -497,11 +509,6 @@ function feature_for_home_page_feature_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_category' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'nothing' => array(
       'align' => '',
       'separator' => '',
@@ -514,24 +521,17 @@ function feature_for_home_page_feature_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'status' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'delete_node' => array(
+    'nothing_1' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing_1' => array(
+    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -644,19 +644,12 @@ function feature_for_home_page_feature_widget_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Workbench Moderation: State */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['label'] = 'Status';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span> ';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -824,35 +817,12 @@ function feature_for_home_page_feature_widget_views_default_views() {
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  $handler->display->display_options['filters']['is_current']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['granularity'] = 'minute';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
-  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
-  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['path'] = 'home-page-feature-widget-listing';
 
   /* Display: Home page feature widget */
@@ -1016,6 +986,14 @@ function feature_for_home_page_feature_widget_views_default_views() {
 ';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['header']['area']['tokenize'] = TRUE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Content Found.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
@@ -1130,12 +1108,6 @@ function feature_for_home_page_feature_widget_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Workbench Moderation: State */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['label'] = 'Status';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -1158,35 +1130,6 @@ function feature_for_home_page_feature_widget_views_default_views() {
   $handler->display->display_options['sorts']['weight']['draggableviews_setting_new_items_bottom_list'] = 1;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  $handler->display->display_options['filters']['is_current']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['granularity'] = 'minute';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
-  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
-  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
   /* Filter criterion: Nodequeue: Queue machine name */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'nodequeue_queue';
@@ -1198,6 +1141,11 @@ function feature_for_home_page_feature_widget_views_default_views() {
   $handler->display->display_options['filters']['name']['expose']['label'] = 'Queue machine name';
   $handler->display->display_options['filters']['name']['expose']['operator'] = 'name_op';
   $handler->display->display_options['filters']['name']['expose']['identifier'] = 'name';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'home-page-feature-widget';
   $export['home_page_feature_widget'] = $view;
 
