@@ -59,7 +59,7 @@
     <?php 
       $cls = 'col-md-12';
       if ($sidebar_first || $sidebar_second):
-        $cls = 'col-md-9';
+        $cls = 'col-md-8';
     endif; ?>
   
   <main id="main" class="container">
@@ -114,7 +114,7 @@
     <?php endif; ?>
       
     <?php if ($sidebar_first || $sidebar_second): ?>
-      <aside class="sidebars col-md-3">
+      <aside class="sidebars col-md-4">
         <?php print $sidebar_first; ?>
         <?php print $sidebar_second; ?>
       </aside>
