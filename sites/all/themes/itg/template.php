@@ -194,3 +194,11 @@ function itg_preprocess_field(&$vars) {
       }
   }
 }
+
+/**
+ * Preprocessor for theme('page').
+ */
+//function itg_preprocess_page(&$vars) {
+// //page__section-photo.tpl
+// $vars['theme_hook_suggestions'][] = 'page__section_photo';
+//}

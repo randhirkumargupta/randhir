@@ -15,14 +15,16 @@ function itg_category_manager_hierarchical_select_root_level($params, $dropbox =
   $destination=$_GET['destination'];
   $destination=explode('-',$destination);
   $destination=$destination[1];
+  
   $terms = _hs_taxonomy_hierarchical_select_get_tree($params['vid'], 0, -1, 1);
   foreach ($terms as $key => $term) {    
     if (!itg_category_manager_term_state($term->tid)) {
       unset($terms[$key]);
     }
-    if(!itg_category_manager_term_state_content($destination,$term->tid))
-    {
+    if($destination!=""){
+    if(!itg_category_manager_term_state_content($destination,$term->tid)) {
          unset($terms[$key]);
+    }
     }
   }
   
