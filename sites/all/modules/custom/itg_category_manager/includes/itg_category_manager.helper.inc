@@ -10,14 +10,17 @@
  * @param boolean $dropbox
  * @return array
  */
-function itg_category_manager_hierarchical_select_root_level($params, $dropbox = FALSE) {  
+function itg_category_manager_hierarchical_select_root_level($params,&$form_state,$dropbox = FALSE) {  
   $vocabulary = taxonomy_vocabulary_load($params['vid']);
-  
   if(arg(0) == 'node' && arg(1) == 'add'){
       $type = arg(2);
   }elseif(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit'){
       $node = node_load(arg(1));
       $type = $node->type;
+  }
+  elseif($_POST['form_node']!="")
+  {
+     $type = $_POST['form_node']; 
   }
 
   $terms = _hs_taxonomy_hierarchical_select_get_tree($params['vid'], 0, -1, 1);
