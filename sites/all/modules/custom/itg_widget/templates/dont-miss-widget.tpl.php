@@ -14,12 +14,13 @@
                     <div class="dm-pic">  <img width="100" height="75" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" /> </div>
                     <?php } ?>
                 <div class="dm-detail">
-                    <?php if (!empty($node_data->title)) : ?>    
-                        <h4><?php print $node_data->title ?></h4>
-                    <?php endif; ?>
+                    
                     <?php if (!empty($dont_miss_data['extra'])) : ?>
-                        <p><?php print $dont_miss_data['extra']; ?></p>
-    <?php endif; ?>
+                        <h4><?php print $dont_miss_data['extra']; ?></h4>
+                    <?php endif; ?>
+                        <?php if (!empty($node_data->title)) : ?>    
+                        <p><?php print $node_data->title ?></p>
+                    <?php endif; ?>
                 </div>
             </li>
 <?php } ?>

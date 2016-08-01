@@ -50,9 +50,11 @@ function itg_widget_views_pre_render(&$view) {
   }
   // Add back to we may suggest on content search page.
   elseif ($view->name == "section_wise_draggable_content_order" && $view->current_display == 'we_may_suggest_widget') {
-    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Back to we may suggest'), 'we-may-suggest-content-ordering-list');
-    $view->attachment_before = $header_content;
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Back to we may suggest'), 'we-may-suggest-content-ordering-list');
+      $view->attachment_before = $header_content;
+    }
   }
   // Added search content on widget page.
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'we_may_suggest_widget') {
@@ -75,7 +77,6 @@ function itg_widget_views_pre_render(&$view) {
     $header_content .= l(t('Search Content'), 'photo-list-widget', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
   }
-
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'big_story_format') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'big-story-format-conent');
@@ -85,6 +86,9 @@ function itg_widget_views_pre_render(&$view) {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Back to big story widget'), 'big-story-widget-list');
     $view->attachment_before = $header_content;
+    if (!isset($_GET['type'])) {
+      unset($view->result);
+    }
   }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'dont_miss_content') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';

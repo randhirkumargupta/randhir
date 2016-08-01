@@ -20,28 +20,6 @@ function feature_for_top_story_widget_user_default_permissions() {
     'module' => 'nodequeue',
   );
 
-  // Exported permission: 'execute nodequeue_add_action'.
-  $permissions['execute nodequeue_add_action'] = array(
-    'name' => 'execute nodequeue_add_action',
-    'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-    ),
-    'module' => 'actions_permissions',
-  );
-
-  // Exported permission: 'execute nodequeue_remove_action'.
-  $permissions['execute nodequeue_remove_action'] = array(
-    'name' => 'execute nodequeue_remove_action',
-    'roles' => array(
-      'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Section Editor/Anchor' => 'Section Editor/Anchor',
-    ),
-    'module' => 'actions_permissions',
-  );
-
   // Exported permission: 'manipulate all queues'.
   $permissions['manipulate all queues'] = array(
     'name' => 'manipulate all queues',
