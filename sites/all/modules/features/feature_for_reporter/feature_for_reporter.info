@@ -5,6 +5,7 @@ package = Features
 version = 7.x-1.0
 dependencies[] = entityreference
 dependencies[] = feature_for_recipe
+dependencies[] = hs_taxonomy
 dependencies[] = strongarm
 dependencies[] = text
 dependencies[] = views

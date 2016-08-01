@@ -461,7 +461,7 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
     foreach ($node->field_syndication_rule_details[LANGUAGE_NONE] as $key_time => $val_time) {
       if (isset($val_time['field_syndication_time'][LANGUAGE_NONE][0]['value'])) {
         if (!preg_match('/(2[0-3]|[01][0-9]):([0-5][0-9])/',$val_time['field_syndication_time'][LANGUAGE_NONE][0]['value'])) {
-          form_set_error('field_email_address', t('Please enter valid time.'));
+          form_set_error('field_email_address', t('Please enter valid time format(HH:MM) 24 hrs format to Set Day field for row['.($key_time+1).'].'));
         }
       }
     }
