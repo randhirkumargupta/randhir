@@ -26,6 +26,7 @@ Drupal.behaviors.itg_widgets = {
             } else {
                 if (confirm('Are you sure ?')) {
                     jQuery.get("remove_from_widgets/" + nid + "/" + qid + "/" + view_name + "/" + view_page, function (data, status) {
+                        
                         if (data == 'deleted') {
                             window.location.reload();
 

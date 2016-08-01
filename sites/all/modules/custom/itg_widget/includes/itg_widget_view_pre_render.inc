@@ -19,9 +19,11 @@ function itg_widget_views_pre_render(&$view) {
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "story_widget" && $view->current_display == 'trending_videos') {
-    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Back To Trending Videos Widget'), 'trending-video-widget-order-reorder');
-    $view->attachment_before = $header_content;
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Back To Trending Videos Widget'), 'trending-video-widget-order-reorder');
+      $view->attachment_before = $header_content;
+    }
   }
   elseif ($view->name == "story_widget" && $view->current_display == 'trending_videos_widget') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
