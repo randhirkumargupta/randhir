@@ -19,6 +19,9 @@ module_load_include('inc', 'itg_widget', 'includes/itg_widget_actions_bulk_opera
  * {@inheritdoc}
  */
 function itg_widget_init() {
+  // Js for move funtionality.
+  // This is use in case of nodequeue in case of custom table we calls a callback funtion.
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
 }
 
 /**
