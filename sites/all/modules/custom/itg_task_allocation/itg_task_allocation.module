@@ -117,7 +117,10 @@ function itg_task_allocation_form_views_exposed_form_alter(&$form, &$form_state,
       '#type' => 'date_popup',
       '#title' => t('From'),
       '#date_format' => 'd/m/Y',
-      '#date_year_range' => '-1:+1',
+      '#date_year_range' => '-1:'.(date('Y')),
+      '#datepicker_options' => array(
+      'maxDate' => 0,
+      ), 
       '#attributes' => array(
         'readonly' => 'readonly'
       ),
@@ -127,7 +130,10 @@ function itg_task_allocation_form_views_exposed_form_alter(&$form, &$form_state,
       '#type' => 'date_popup',
       '#title' => t('To'),
       '#date_format' => 'd/m/Y',
-      '#date_year_range' => '-1:+1',
+      '#date_year_range' => '-1:'.(date('Y')),
+      '#datepicker_options' => array(
+      'maxDate' => 0,
+      ), 
       '#attributes' => array(
         'readonly' => 'readonly'
       ),
