@@ -20,8 +20,7 @@ function itg_category_manager_hierarchical_select_root_level($params, $dropbox =
     if (!itg_category_manager_term_state($term->tid)) {
       unset($terms[$key]);
     }
-    if(!itg_category_manager_term_state_content($destination,$term->tid))
-    {
+    if(!itg_category_manager_term_state_content($destination,$term->tid)) {
          unset($terms[$key]);
     }
   }
