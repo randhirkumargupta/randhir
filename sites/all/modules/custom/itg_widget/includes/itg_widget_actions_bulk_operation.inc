@@ -40,7 +40,7 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
       '#type' => 'select',
       '#options' => array("$widget" => "widget"),
       '#weight' => -1,
-      '#attributes' => array("style"=>array("display:none")),
+      '#attributes' => array("style" => array("display:none")),
   );
   // Adding extra field for related content.
   if ($current_display == 'big_story_format' && $_GET['type'] == 'breaking_news') {
@@ -72,12 +72,13 @@ function itg_widget_categories_wise_node_group_validate($form, &$form_state) {
  */
 function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
   $current_display = $form_state['build_info']['args'][0]->current_display;
+  //p($current_display);
   $vals = array();
   // Unique combination using below four.
   $widget_name = $form_state['input']['widget_name'];
   // Get selected nodes ids
   $selected_node_data = $form_state['selection'];
-  $cat_id = $_GET['category_tid'];
+  $cat_id = ($_GET['category_tid'] == "All") ? 0 : $_GET['category_tid'];
   $content_type = $_GET['type'];
   if ($current_display == 'big_story_format') {
     // All Code for big sotry.
@@ -90,14 +91,20 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     $dont_miss_content = $form_state;
     save_dont_miss_widget_data($dont_miss_content);
   }
+  elseif ($current_display == 'we_may_suggest_widget') {
+    module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
+    $we_may_suggest_content = $form_state;
+    save_we_may_suggest_widget_data($we_may_suggest_content);
+  }
   else {
+    //p($form_state);
     // Logic to skip nodes which are already in itg_widget_order table
     $nodes_already = db_select('itg_widget_order', 'iwo')
-            ->condition('iwo.content_type', $content_type)
-            ->condition('iwo.widget', $widget_name)
-            ->condition('iwo.cat_id', $cat_id)
-            ->fields('iwo', array('nid'))
-            ->execute();
+                    ->condition('iwo.content_type', $content_type)
+                    ->condition('iwo.widget', $widget_name)
+                    ->condition('iwo.cat_id', $cat_id)
+                    ->fields('iwo', array('nid'))
+                    ->execute()->fetchAll();
     foreach ($nodes_already as $val) {
       $vals[] = $val->nid;
     }
@@ -115,7 +122,7 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
                     'nid' => $node,
                     'widget' => $widget_name,
                     'content_type' => ($content_type) ? $content_type : " ",
-                    'cat_id' => ($cat_id) ? $cat_id : "0",
+                    'cat_id' => ($cat_id) ? $cat_id : 0,
                     'weight' => 0,
                 ))
                 ->execute();
