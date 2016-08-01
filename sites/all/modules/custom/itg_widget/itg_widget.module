@@ -19,7 +19,9 @@ module_load_include('inc', 'itg_widget', 'includes/itg_widget_actions_bulk_opera
  * {@inheritdoc}
  */
 function itg_widget_init() {
-    
+  // Js for move funtionality.
+  // This is use in case of nodequeue in case of custom table we calls a callback funtion.
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
 }
 
 /**
@@ -330,6 +332,18 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
         // pass setting to js for bulk operation
         drupal_add_js(array('itg_widget' => array('data' => $setting)), 'setting');
+    }
+    // Alter form for confirm message during bulk operation.
+    // Below forms are thoese which are not doing action for nodequeue.
+    // Nodequeue from are being altered form itg_widget.main.js.
+    $form_id_array_to_alter = array(
+        'views_form_section_wise_draggable_content_order_big_story_format',
+        'views_form_section_wise_draggable_content_order_dont_miss_content',
+        'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
+        'views_form_section_wise_draggable_content_order_page',
+    );
+    if(in_array($form_id, $form_id_array_to_alter)) {
+      $form['actions']['submit']['#value'] = t('Confirm');
     }
 }
 
