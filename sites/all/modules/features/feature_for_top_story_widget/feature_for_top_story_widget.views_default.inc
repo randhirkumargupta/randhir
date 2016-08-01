@@ -629,13 +629,13 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span>';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -1085,7 +1085,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<span><a data-view="story_widget" data-page="page_2" data-nid="[nid]" data-queueid=\'1\' class="remove_from_nodequeue_draggable_view" href="#"><span class="delete-link">delete</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="page_2" data-nid="[nid]" data-queueid=\'1\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Move</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -1410,12 +1410,12 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
   $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="delete-link">[delete_node]</span>';
-  /* Field: Content statistics: Views today */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['daycount']['id'] = 'daycount';
   $handler->display->display_options['fields']['daycount']['table'] = 'node_counter';
   $handler->display->display_options['fields']['daycount']['field'] = 'daycount';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content statistics: Views today */
+  /* Sort criterion: Broken/missing handler */
   $handler->display->display_options['sorts']['daycount']['id'] = 'daycount';
   $handler->display->display_options['sorts']['daycount']['table'] = 'node_counter';
   $handler->display->display_options['sorts']['daycount']['field'] = 'daycount';
