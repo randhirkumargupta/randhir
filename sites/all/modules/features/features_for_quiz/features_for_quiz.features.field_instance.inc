@@ -331,6 +331,44 @@ function features_for_quiz_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_quiz_options_answer-field_quiz_answer_type'.
+  $field_instances['field_collection_item-field_quiz_options_answer-field_quiz_answer_type'] = array(
+    'bundle' => 'field_quiz_options_answer',
+    'default_value' => array(
+      0 => array(
+        'value' => 'Single Correct',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_quiz_answer_type',
+    'label' => 'Answer Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_quiz_options_answer-field_quiz_answer_video'.
   $field_instances['field_collection_item-field_quiz_options_answer-field_quiz_answer_video'] = array(
     'bundle' => 'field_quiz_options_answer',
@@ -555,6 +593,49 @@ function features_for_quiz_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-quiz-field_quiz_answer_type'.
+  $field_instances['node-quiz-field_quiz_answer_type'] = array(
+    'bundle' => 'quiz',
+    'default_value' => array(
+      0 => array(
+        'value' => 'single_correct',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => ' If user selects ‘Single Correct’, Radio button will appear and if user selects ‘Multiple Correct’, checkbox should appear on front end.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_quiz_answer_type',
+    'label' => 'Answer Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 49,
+    ),
+  );
+
   // Exported field_instance: 'node-quiz-field_quiz_display_sequence'.
   $field_instances['node-quiz-field_quiz_display_sequence'] = array(
     'bundle' => 'quiz',
@@ -638,6 +719,49 @@ function features_for_quiz_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_quiz_options'.
+  $field_instances['node-quiz-field_quiz_options'] = array(
+    'bundle' => 'quiz',
+    'default_value' => array(
+      0 => array(
+        'value' => 2,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'It will define the maximum number of options available for each question.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_quiz_options',
+    'label' => 'Options',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 48,
     ),
   );
 
@@ -798,10 +922,58 @@ function features_for_quiz_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
+      'module' => 'hs_taxonomy',
       'settings' => array(),
-      'type' => 'options_select',
+      'type' => 'taxonomy_hs',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_story_source_id'.
+  $field_instances['node-quiz-field_story_source_id'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'It is the count of winners which will be declared for the quiz and this feature is only available for contest type quiz ',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_source_id',
+    'label' => 'Winners',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 5,
     ),
   );
 
@@ -970,7 +1142,9 @@ function features_for_quiz_field_default_field_instances() {
   t('Correct Answer');
   t('If user selects, normal; first added questions will appear on top for front end user. And if user selects ‘Random’ quiz questions will appear on random basis.');
   t('Immediate Result');
+  t('It is the count of winners which will be declared for the quiz and this feature is only available for contest type quiz ');
   t('It will be like guidelines to quiz and will be displayed to front end user.');
+  t('It will define the maximum number of options available for each question.');
   t('It will define whether all the questions are of equal score or have different weight.');
   t('Option');
   t('Options');
@@ -987,6 +1161,7 @@ function features_for_quiz_field_default_field_instances() {
   t('Validity Start Date');
   t('Weightage');
   t('Winners');
+  t(' If user selects ‘Single Correct’, Radio button will appear and if user selects ‘Multiple Correct’, checkbox should appear on front end.');
 
   return $field_instances;
 }
