@@ -2222,7 +2222,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-[class*="node-type-"]{
+[class*="node-type-"], [class*="page-node-"]{
   .tabs-primary{display: none;}
   .node{
     padding: 20px;
@@ -5627,6 +5627,13 @@ div.node{
     position: relative;
     .droppable{
       min-height: 400px;
+    }
+  }
+}
+[id*="views-exposed-form-byline-list-page"]{
+  .views-widget-filter-field_celebrity_pro_occupation_tid{
+    .form-type-select .form-select + div.description{
+      left: 148px;
     }
   }
 }
