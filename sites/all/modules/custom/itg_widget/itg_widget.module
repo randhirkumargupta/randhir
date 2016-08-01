@@ -212,7 +212,7 @@ function itg_widget_block_view($delta = '') {
         // Big Story Content.
         case 'big_story_format':
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
-            $block['subject'] = t('');
+            $block['subject'] = t('Big Story Formet');
             $info['widget'] = 'big_story_format_widget';
             $data = itg_widget_big_story_block_data($info);
             $block['content'] = theme("widget_big_story_format", array("data" => $data));
