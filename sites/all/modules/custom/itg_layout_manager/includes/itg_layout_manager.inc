@@ -9,7 +9,8 @@
  * @return
  */
 
-function itg_layout_admin() {  
+function itg_layout_admin() {
+  
   if (isset($_GET['section']) && isset($_GET['template_name'])) {    
     $data = get_layout_details($_GET['section'], $_GET['template_name'], 'admin'); 
   }
@@ -25,12 +26,12 @@ function itg_layout_admin() {
  * @return array $output
  */
 function itg_layout_list() {
-  # configure the table header columns
+  // configure the table header columns
   $header = array(
-    array('data' => t('ID'), 'field' => 'layout_tpl.id', 'sort' => 'ASC'),
+    array('data' => t('ID')),
     array('data' => t('Section name')),
     array('data' => t('Template name')),
-    array('data' => t('Created Date'), 'field' => 'layout_tpl.story_modified', 'sort' => 'ASC'),
+    array('data' => t('Created Date')),
     array('data' => t('Action')),
   );
   
@@ -42,14 +43,18 @@ function itg_layout_list() {
   }
   
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-  $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'status'));
+  $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'status', 'created_date'));  
+  $itg_query->join('taxonomy_term_data', 'ttd', 'ttd.tid = layout_tpl.section_name');
+  $itg_query->fields('ttd', array('name'));
+  $itg_query->groupBy('layout_tpl.section_name');
   $itg_query->extend('PagerDefault')->limit($items_per_page);
   
   if (!empty($_GET['section'])) {
     $itg_query->condition('layout_tpl.section_name', $_GET['section']);
   }
-  
- // $itg_query->condition('layout_tpl.section_name', 'home_page', '!=');
+  else {
+    $itg_query->condition('layout_tpl.section_name', 'home_page', '!=');
+  } 
   
   $itg_result = $itg_query->execute()->fetchAll();
   
@@ -60,7 +65,7 @@ function itg_layout_list() {
   foreach ($itg_result as $row) {
     $rows[] = array(
       array('data' => $row->id),
-      array('data' => $row->section_name),
+      array('data' => $row->name),
       array('data' => $row->template_name),
       array('data' => date('d/m/Y', $row->created_date)),
       array('data' => l(t('Edit'), 'itg-layout-manager/section', array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
@@ -73,7 +78,7 @@ function itg_layout_list() {
   $output .= l(t('Add New Template'), 'itg-layout-manager/section').'</div></div>';  
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 
-  # add the pager
+  // add the pager
   $output .= theme('pager');
 
   return $output;
