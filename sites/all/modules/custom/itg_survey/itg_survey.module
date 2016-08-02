@@ -88,7 +88,8 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
   
   //Set destination for survey form
   if ($form_id == 'survey_node_form') {
-    
+         $form['field_survey_category']['und']['#config']['module'] = 'itg_category_manager';
+
       //Set Destination
       $destination = 'manage-survey';
      

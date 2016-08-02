@@ -14,7 +14,17 @@ function itg_category_manager_init() {
     variable_set('taxonomy_terms_per_page_admin', 20);
     global $base_url;
     $settings['baseUrl'] = $base_url;
+    if(arg(0) == 'node' && arg(1) == 'add'){
+      $type = arg(2);
+  }elseif(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit'){
+      $node = node_load(arg(1));
+      $type = $node->type;
+  }
     drupal_add_js(array('baseUrl' => $settings), 'setting');
+    drupal_add_js('jQuery(document).ready(function() {
+        jQuery(".node-form").append("<input type=hidden name=form_node value='.$type.' >");
+              
+           });', array('type' => 'inline', 'scope' => 'footer'));
 }
 
 /**
