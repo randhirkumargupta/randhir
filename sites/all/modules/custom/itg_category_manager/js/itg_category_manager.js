@@ -54,6 +54,15 @@
           }
         });
       });
+      $('.hierarchical-select select').on('change',function(){
+          if($(this).val()!=0)
+          {
+              $('#edit-field-cm-select-type-und').attr('disabled',true);
+          }else{
+            $('#edit-field-cm-select-type-und').attr('disabled',false);
+
+          }
+      })
       
       // Pager settings
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

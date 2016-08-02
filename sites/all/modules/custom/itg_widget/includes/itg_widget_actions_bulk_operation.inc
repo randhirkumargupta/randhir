@@ -13,37 +13,43 @@
  */
 function itg_widget_action_info() {
   return array(
-    'itg_widget_categories_wise_node_group' => array(
-      'type' => 'entity',
-      'label' => t('Add nodes by category wise'),
-      'configurable' => TRUE,
-      'vbo_configurable' => FALSE,
-      'triggers' => array('any'),
-    ),
+      'itg_widget_categories_wise_node_group' => array(
+          'type' => 'entity',
+          'label' => t('Add nodes by category wise'),
+          'configurable' => TRUE,
+          'vbo_configurable' => FALSE,
+          'triggers' => array('any'),
+      ),
   );
 }
 
 /**
  * {@inheritdoc}
  */
-function itg_widget_categories_wise_node_group_form($form, &$form_state) { 
+
+function itg_widget_categories_wise_node_group_form($form, &$form_state) {
   $form = array();
   $view_name = $form_state['build_info']['args'][0]->name;
   $current_display = $form_state['build_info']['args'][0]->current_display;
   $widget = _get_widget_name("views_form_" . $view_name . "_page", $current_display);
+  // Confirm message is added for altered form.
+  // For nodequeue bulk operation message is added from itg_widget.main.js.
+  $form['confirm_message'] = array(
+      '#markup' => t("<p class='widget-confirm-message'>Are you sure you want add this content ?</p>"),
+  );
   $form['widget_name'] = array(
-    '#type' => 'select',
-    '#title' => t("Widget"),
-    '#options' => array("$widget" => "widget"),
-    '#weight' => -1,
+      '#type' => 'select',
+      '#options' => array("$widget" => "widget"),
+      '#weight' => -1,
+      '#attributes' => array("style" => array("display:none")),
   );
   // Adding extra field for related content.
   if ($current_display == 'big_story_format' && $_GET['type'] == 'breaking_news') {
     $form['related_content'] = array(
-      '#type' => 'textfield',
-      '#title' => t("Related content."),
-      '#attributes' => array("placeholder" => t("Enter node id 123,1024,777")),
-      '#description' => t("Node ids must be comma seperated values ex 123,1024,777."),
+        '#type' => 'textfield',
+        '#title' => t("Related content."),
+        '#attributes' => array("placeholder" => t("Enter node id 123,1024,777")),
+        '#description' => t("Node ids must be comma seperated values ex 123,1024,777."),
     );
   }
   return $form;
@@ -67,12 +73,13 @@ function itg_widget_categories_wise_node_group_validate($form, &$form_state) {
  */
 function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
   $current_display = $form_state['build_info']['args'][0]->current_display;
+  //p($current_display);
   $vals = array();
   // Unique combination using below four.
   $widget_name = $form_state['input']['widget_name'];
   // Get selected nodes ids
   $selected_node_data = $form_state['selection'];
-  $cat_id = $_GET['category_tid'];
+  $cat_id = ($_GET['category_tid'] == "All") ? 0 : $_GET['category_tid'];
   $content_type = $_GET['type'];
   if ($current_display == 'big_story_format') {
     // All Code for big sotry.
@@ -85,14 +92,20 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     $dont_miss_content = $form_state;
     save_dont_miss_widget_data($dont_miss_content);
   }
+  elseif ($current_display == 'we_may_suggest_widget') {
+    module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
+    $we_may_suggest_content = $form_state;
+    save_we_may_suggest_widget_data($we_may_suggest_content);
+  }
   else {
+    //p($form_state);
     // Logic to skip nodes which are already in itg_widget_order table
     $nodes_already = db_select('itg_widget_order', 'iwo')
-      ->condition('iwo.content_type', $content_type)
-      ->condition('iwo.widget', $widget_name)
-      ->condition('iwo.cat_id', $cat_id)
-      ->fields('iwo', array('nid'))
-      ->execute();
+                    ->condition('iwo.content_type', $content_type)
+                    ->condition('iwo.widget', $widget_name)
+                    ->condition('iwo.cat_id', $cat_id)
+                    ->fields('iwo', array('nid'))
+                    ->execute()->fetchAll();
     foreach ($nodes_already as $val) {
       $vals[] = $val->nid;
     }
@@ -106,14 +119,14 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     if (count($selected_node_data)) {
       foreach ($selected_node_data as $node) {
         $nid = db_insert('itg_widget_order')
-          ->fields(array(
-            'nid' => $node,
-            'widget' => $widget_name,
-            'content_type' => ($content_type) ? $content_type : " ",
-            'cat_id' => ($cat_id) ? $cat_id : "0",
-            'weight' => 0,
-          ))
-          ->execute();
+                ->fields(array(
+                    'nid' => $node,
+                    'widget' => $widget_name,
+                    'content_type' => ($content_type) ? $content_type : " ",
+                    'cat_id' => ($cat_id) ? $cat_id : 0,
+                    'weight' => 0,
+                ))
+                ->execute();
       }
       drupal_set_message(t("Nodes has been saved"));
     }
@@ -122,6 +135,6 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     }
   }
   return array(
-    'form_values' => $form_state['values'],
+      'form_values' => $form_state['values'],
   );
 }

@@ -116,11 +116,7 @@ function itg_astro_set_sign_name() {
  */
 function itg_astro_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'astro_node_form') {
-    // Pass sign name to js file.
-    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js');
-    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
-    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
-
+    $form['#after_build'][] = 'itg_astro_after_build';
     itg_astro_set_sign_name();
 
     if ($form['nid']['#value'] == NULL) {
@@ -180,8 +176,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
       $destination = 'manage-astro';
     }
 
-    $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';
-    $form['#after_build'][] = 'itg_astro_after_build';
+    $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';    
     unset($form['field_numerology']['und']['#options']['_none']);
     unset($form['field_astro_frequency2']['und']['#options']['_none']);
   }
@@ -203,6 +198,11 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
  *   Return new altered form array.
  */
 function itg_astro_after_build($form, &$form_state) {
+  // Pass sign name to js file.
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js');
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
+  
   // Add description of audi/video field to their placeholder.
   $desc = $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description'];
   $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#attributes'] = array('placeholder' => $desc);

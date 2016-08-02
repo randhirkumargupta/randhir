@@ -23,18 +23,6 @@
     <?php if ($layout): ?>
       <div class='column-main'><div class='column-wrapper'>
             <?php endif; ?>
-
-            <?php if (!empty($title_prefix)) print render($title_prefix); ?>
-
-            <?php if (!empty($title) && !$page): ?>
-              <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
-                  <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-                  <a href="<?php print $node_url ?>"><?php print $title ?></a>
-              </h2>
-            <?php endif; ?>
-
-            <?php if (!empty($title_suffix)) print render($title_suffix); ?>
-
             <?php if (!empty($content)): ?>
               <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
                   <?php //print render($content)  ?>            
@@ -199,25 +187,37 @@
                         </div>
                     </div>
 
-                    <?php
-                    $browsemediaextralarge = render($content['field_story_extra_large_image']);
-                    $browsemedialarge = render($content['field_story_large_image']);
-                    $browsemediamedium = render($content['field_story_medium_image']);
-                    $browsemediasmall = render($content['field_story_small_image']);
-                    $browsemediawriter = render($content['field_recipe_writer_image']);
-                    if (!empty($browsemediaextralarge) || !empty($browsemedialarge) || !empty($browsemediamedium) || !empty($browsemediasmall) || !empty($browsemediawriter)):
-                      ?>
-                      <div class="content-node-view">
-                          <h2><?php print t('Recipe Images'); ?></h2>
-                          <div class="content-details">
-                              <?php print render($content['field_story_extra_large_image']); ?>
-                              <?php print render($content['field_story_large_image']); ?>
-                              <?php print render($content['field_story_medium_image']); ?>
-                              <?php print render($content['field_story_small_image']); ?>
-                              <?php print render($content['field_recipe_writer_image']); ?>
-                          </div>
-                      </div>
-                    <?php endif; ?>
+                 <?php
+            if (isset($node->op) && $node->op == 'Preview') {
+              $browsemediaextralarg = render($content['field_story_extra_large_image']);
+              if (!empty($browsemediaextralarg)): ?> 
+                <div class="content-node-view">
+                <h2><?php print t('Browse Media'); ?></h2>
+                <div class="content-details">
+                  <?php print render($content['field_story_extra_large_image']); ?>
+                </div>
+              </div>
+          <?php 
+            endif;  
+            }else{
+            $browsemediaextralarg = render($content['field_story_extra_large_image']);
+            $browsemedialarg = render($content['field_story_large_image']);
+            $browsemediamediu = render($content['field_story_medium_image']);
+            $browsemediasmal = render($content['field_story_small_image']);
+            $browsemediawriter = render($content['field_recipe_writer_image']);
+            if (!empty($browsemediaextralarg) || !empty($browsemedialarg) || !empty($browsemediamediu) || !empty($browsemediasmal)|| !empty($browsemediawriter)):
+              ?>
+              <div class="content-node-view">
+                <h2><?php print t('Browse Media'); ?></h2>
+                <div class="content-details">
+                  <?php print render($content['field_story_extra_large_image']); ?>
+                  <?php print render($content['field_story_large_image']); ?>
+                  <?php print render($content['field_story_medium_image']); ?>
+                  <?php print render($content['field_story_small_image']); ?>
+                  <?php print render($content['field_recipe_writer_image']); ?>
+                </div>
+              </div>
+            <?php endif; }?>
 
                     <?php
                     $social_media = render($content['field_story_social_media_integ']);
@@ -263,27 +263,27 @@
                       <?php endif; ?>
                     <?php endif; ?>
 
-                    <div class="content-node-view">
-                        <h2><?php print t('Syndication'); ?></h2>
-                        <div class="content-details">      
-                            <?php
-                            $syndication = render($content['field_recipe_syndication']);
-                            ?>
+                     <?php
+                $syndication = render($content['field_story_syndication']);
+                ?>
 
-                            <div class="description-details content-box">
-                                <?php if (!empty($syndication)): ?>
-                                  <div class="breaking-content-details">
-                                      <div class="field">
-                                          <div class="field-label">Syndication: </div>
-                                          <div class="field-items"><?php print ('yes'); ?></div>
-                                      </div>
-                                  </div>
-
-                                <?php endif; ?>
-                            </div>
-                        </div>
-
-                    </div>
+                <?php if (!empty($syndication)): ?>
+             <div class="content-node-view">
+              <h2><?php print t('Syndication'); ?></h2>
+              <div class="content-details"> 
+                  <div class="description-details content-box">
+                    <?php if (!empty($syndication)): ?>
+                      <div class="breaking-content-details">
+                       <div class="field">
+                         <div class="field-label">Syndication: </div>
+                         <div class="field-items"><?php print ('yes'); ?></div>
+                       </div>
+                     </div>
+                    <?php endif; ?>
+                  </div>
+                   </div>
+            </div>
+                <?php endif; ?>
                     <div class="content-node-view">
                         <h2><?php print t('Recipe Section'); ?></h2>
                         <div class="content-details">
