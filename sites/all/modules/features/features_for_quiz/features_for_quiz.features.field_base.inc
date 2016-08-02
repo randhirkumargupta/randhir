@@ -250,6 +250,36 @@ function features_for_quiz_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_quiz_options'.
+  $field_bases['field_quiz_options'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_quiz_options',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        2 => '  2',
+        3 => '  3',
+        4 => '  4',
+        5 => '  5',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
+  );
+
   // Exported field_base: 'field_quiz_options_answer'.
   $field_bases['field_quiz_options_answer'] = array(
     'active' => 1,
