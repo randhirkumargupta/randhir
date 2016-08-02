@@ -47,6 +47,7 @@ features[field_instance][] = node-videogallery-field_story_facebook_narrative
 features[field_instance][] = node-videogallery-field_story_itg_tags
 features[field_instance][] = node-videogallery-field_story_large_image
 features[field_instance][] = node-videogallery-field_story_medium_image
+features[field_instance][] = node-videogallery-field_story_node_identity
 features[field_instance][] = node-videogallery-field_story_reporter
 features[field_instance][] = node-videogallery-field_story_schedule_date_time
 features[field_instance][] = node-videogallery-field_story_short_headline
