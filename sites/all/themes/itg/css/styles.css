@@ -1852,6 +1852,7 @@ footer .footer-copyright {
 }
 
 /*End Story page css*/
+/*Start May we suggest css*/
 section.sidebar {
   border: 1px solid #ddd;
   min-height: 600px;
@@ -1901,9 +1902,13 @@ section.sidebar {
   background: #ddd;
 }
 
+/*End May we suggest End*/
 .page-node-add-ugc .messages.error.file-upload-js-error {
   margin-bottom: 20px;
 }
 .page-node-add-ugc .messages--error.messages.error {
   margin: 0 30px;
 }
+
+/*Start snap post css*/
+/*End snap post css*/

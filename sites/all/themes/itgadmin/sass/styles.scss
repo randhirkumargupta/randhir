@@ -3498,6 +3498,7 @@ div.node{
 .edit-link, 
 .view-link, 
 .delete-link, 
+.move-link,
 .edit-cm a{
   @extend .pos-rel;
   @extend .dib;
@@ -3519,6 +3520,7 @@ div.node{
 .edit-link:after, .edit-cm a:after{content: '\f044';}
 .view-link:after{content: '\f06e';}
 .delete-link:after{content: '\f1f8';}
+.move-link:after{content:'\f191';}
 
 .sidebar-trigger{
   cursor: pointer;
@@ -5636,4 +5638,26 @@ div.node{
       left: 148px;
     }
   }
+}
+#views-form-section-wise-draggable-content-order-page, #views-form-home-page-feature-widget-page-1, #views-form-section-wise-draggable-content-order-dont-miss-content, #views-form-section-wise-draggable-content-order-big-story-format, #views-form-section-wise-draggable-content-order-we-may-suggest-widget, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular{
+    .form-item{
+        display: none;
+    }    
+    p, .form-wrapper{
+        margin-top: 40px;
+    }
+    .form-submit{
+        @extend .add-more;
+        +a.active{
+            @extend .btn-cancel;
+            border-radius: 5px;
+            display: inline-block;
+            height: 34px;
+            line-height: 34px;
+            margin-left: 10px;
+            text-align: center;
+            width: 80px;
+        }
+    }
+    
 }

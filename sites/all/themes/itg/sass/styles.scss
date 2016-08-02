@@ -1469,6 +1469,7 @@ footer{
 }
 
 /*End Story page css*/
+/*Start May we suggest css*/
 section.sidebar{
     border: 1px solid #ddd;
     min-height: 600px;
@@ -1479,7 +1480,7 @@ section.sidebar{
     }
     @include sidebar-heading;
 }
-
+/*End May we suggest End*/
 .page-node-add-ugc{
     .messages.error.file-upload-js-error{
         margin-bottom: 20px;
@@ -1489,6 +1490,8 @@ section.sidebar{
         margin: 0 30px;
     }
 }
+/*Start snap post css*/
 .page-snappost .container{
     
 }
+/*End snap post css*/
