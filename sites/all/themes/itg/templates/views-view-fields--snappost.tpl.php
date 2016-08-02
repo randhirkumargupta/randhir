@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default simple view template to all the fields as a row.
@@ -34,5 +33,7 @@
     <?php print $field->content; ?>
   <?php print $field->wrapper_suffix; ?>
 <?php endforeach; ?>
+<div class="snap-button">
 <div class="agree"><a href="#">AGREE</a></div>
 <div class="agree"><a href="#">DISAGREE</a></div>
+</div>
