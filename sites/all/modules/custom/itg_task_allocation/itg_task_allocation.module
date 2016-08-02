@@ -93,10 +93,11 @@ function itg_task_allocation_form_after_build($form, &$form_state) {
   } 
   
   drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js', array('weight' => 1));
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'task-idea-allocation-tracking'){
   drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-task-task-idea-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  
+  }
   return $form;
   
 }
