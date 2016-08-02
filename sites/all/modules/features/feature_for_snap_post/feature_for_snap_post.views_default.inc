@@ -95,7 +95,7 @@ function feature_for_snap_post_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="snap-date">[created]</div>
-<div class="snap-title"><h1>[title]</h1><span>[view_node]</span></div>';
+<div class="snap-title"><h1>[title] <span>[view_node]</span></h1></div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
