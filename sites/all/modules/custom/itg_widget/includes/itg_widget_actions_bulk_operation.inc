@@ -26,6 +26,7 @@ function itg_widget_action_info() {
 /**
  * {@inheritdoc}
  */
+
 function itg_widget_categories_wise_node_group_form($form, &$form_state) {
   $form = array();
   $view_name = $form_state['build_info']['args'][0]->name;
