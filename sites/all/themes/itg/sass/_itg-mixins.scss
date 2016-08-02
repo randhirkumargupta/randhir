@@ -279,11 +279,25 @@ $root-font-size: 16px;
 }
 @mixin background-snappost{
     $class-title:'views-row';
-    $colors: #e3bc95, #ff7755, #ff5a72, #727ec8, #1fd0e2;
+    $colors: #96704c, #c94d2b, #bf273c, #29337b, #058392;
+    $bg-colors: #e3bc95, #ff7755, #ff5a72, #727ec8, #1fd0e2;
 
 @for $i from 1 through length($colors) {
     .#{$class-title}:nth-child(#{length($colors)}n+#{$i}) {
-        background: nth($colors, $i)
+        background: nth($bg-colors, $i);
+        .snap-date{
+            color:nth($colors, $i);
+        }
+        .snap-title{
+            h1{
+                span a{
+                    color:nth($colors, $i);
+                }
+            }            
+        }
+        .snap-button i{
+            color:nth($colors, $i);
+        }
     }
 }    
 }

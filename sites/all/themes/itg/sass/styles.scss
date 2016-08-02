@@ -1499,12 +1499,49 @@ section.sidebar{
         padding:0;
         > .row{
             margin: 0;
+            > section{
+                padding: 0;
+            }
         }
     }
     .view-content{        
        @include background-snappost;
+       .snap-date{
+            font-size: 16px;
+            margin-bottom: 10px;   
+       }       
        .views-row{
-           padding: 30px 0 35px 0;
+           padding: 25px 0 40px 0;
+           .snap-title{
+               a{
+                   color:#000;
+               }
+               h1{
+                span{
+                    a{
+                     @include font(30px,null,400);   
+                    }                    
+                }
+            }
+           }        
+           .snap-button{
+               margin-top:60px;
+            a{
+                 width: 180px;
+                 height: 60px;
+                 border: 2px solid #fff;
+                 border-radius: 5px;
+                 display: inline-block;
+                 line-height: 60px;
+                 text-align: center;
+                 font-size: 22px;
+                 color: #000;
+                 box-shadow: 1px 7px 15px #2f2f2f;
+                 &.disagree{
+                     margin-left: 30px;
+                 }
+            }
+           }
        }
     }
 } 

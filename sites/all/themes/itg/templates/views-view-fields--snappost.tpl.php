@@ -35,7 +35,7 @@
       <?php print $field->wrapper_suffix; ?>
     <?php endforeach; ?>
     <div class="snap-button">
-        <div class="agree"><a href="#">AGREE</a></div>
-        <div class="agree"><a href="#">DISAGREE</a></div>
+        <a href="#" class="agree"><i class="fa fa-thumbs-o-up"></i> AGREE</a>
+        <a href="#" class="disagree"><i class="fa fa-thumbs-o-down"></i> DISAGREE</a>
     </div>
 </div>
