@@ -303,7 +303,7 @@ class itg_auto_save {
       $this->text_long['format'] = $value['und'][0]['format'];      
     }
     else {      
-      $this->text_long = $value['und'][0]['value'];
+      $this->text_long['value'] = $value['und'][0]['value'];
     }
 
     return $this->text_long;
