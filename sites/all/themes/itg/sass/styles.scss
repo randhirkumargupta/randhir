@@ -1491,7 +1491,21 @@ section.sidebar{
     }
 }
 /*Start snap post css*/
-.page-snappost .container{
-    
-}
+.page-snappost{
+    @include itg-font($itg-roboto);
+    #main.container{
+        max-width: 100%;
+        width: 100%;
+        padding:0;
+        > .row{
+            margin: 0;
+        }
+    }
+    .view-content{        
+       @include background-snappost;
+       .views-row{
+           padding: 30px 0 35px 0;
+       }
+    }
+} 
 /*End snap post css*/

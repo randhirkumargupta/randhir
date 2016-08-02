@@ -5669,3 +5669,33 @@ div.node #comments h2 {
   text-align: center;
   width: 80px;
 }
+
+.page-node-add-magazine .form-type-managed-file .image-widget-data, .page-node-add-breaking-news .form-type-managed-file .image-widget-data {
+  position: relative;
+  float: none;
+}
+.page-node-add-magazine .form-type-managed-file a.filefield-sources-imce-browse, .page-node-add-breaking-news .form-type-managed-file a.filefield-sources-imce-browse {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.page-node-add-magazine .form-type-managed-file a.filefield-sources-imce-browse:after, .page-node-add-breaking-news .form-type-managed-file a.filefield-sources-imce-browse:after {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #2f2f2f;
+  content: "Choose Your File";
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 300;
+  height: 28px;
+  left: 0;
+  line-height: 26px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 134px;
+}

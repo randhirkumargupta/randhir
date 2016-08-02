@@ -277,3 +277,13 @@ $root-font-size: 16px;
         }
     }
 }
+@mixin background-snappost{
+    $class-title:'views-row';
+    $colors: #e3bc95, #ff7755, #ff5a72, #727ec8, #1fd0e2;
+
+@for $i from 1 through length($colors) {
+    .#{$class-title}:nth-child(#{length($colors)}n+#{$i}) {
+        background: nth($colors, $i)
+    }
+}    
+}
