@@ -91,38 +91,12 @@
           
     </div>
       
-      <div class="section-left-bototm">
-              
-              <div class="snap-post">
-              <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
-                  
-          <div class="agbutton"><button>Agree</button> <button>DisAgree</button> <a href="#">More from Snap post</a></div>
-      </div>
-
-      <div class="tags">
-       <ul>
-        <li><i class="fa fa-tags"></i> Tags :</li>        
-        <?php
-          foreach ($node->field_story_itg_tags['und'] as $tags) {
-            $term = taxonomy_term_load($tags['tid']);
-            $t_name = $term->name;
-            $comma_sep_tag[] = $t_name;
-            print '<li>#' . $t_name . '</li>';
-          }
-         ?>
-      </ul>
-      </div>
-              
-              
-          </div>  
-      
-      
-      
       <!-- condition for buzz  -->
      
       <?php
           if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
           $buzz_output.= '';
+          $buzz = 1;
           foreach ($node->field_story_template_buzz['und'] as $buzz_item) {
 
             $buzz_output.= '<div class="buzz-section">';
@@ -131,17 +105,43 @@
             $entity = entity_load('field_collection_item', array($field_collection_id));
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
             $img = '<img src="' . image_style_url("thumbnail", $buzz_imguri) . '">';
-            $buzz_output.= '<h1><span>1</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
+            $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
             $buzz_output.= '<div class="buzz-img">' . $img . '</div>';
             $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
             $buzz_output.= '</div>';
+             $buzz++;
           }
-
+         
           print $buzz_output;
         }
         ?>
       
       <!-- condition for buzz end -->
+      
+      
+      <div class="section-left-bototm">
+
+              <div class="snap-post">
+                  <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
+
+                  <div class="agbutton"><button>Agree</button> <button>DisAgree</button> <a href="#">More from Snap post</a></div>
+              </div>
+
+              <div class="tags">
+                  <ul>
+                      <li><i class="fa fa-tags"></i> Tags :</li>        
+                      <?php
+                      foreach ($node->field_story_itg_tags['und'] as $tags) {
+                          $term = taxonomy_term_load($tags['tid']);
+                          $t_name = $term->name;
+                          $comma_sep_tag[] = $t_name;
+                          print '<li>#' . $t_name . '</li>';
+                      }
+                      ?>
+                  </ul>
+              </div>
+      </div>
+      
       
       <div class="vukkul-comment">
 
