@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature_for_searchimage feature.
+ */
+
+include_once 'feature_for_searchimage.features.inc';
