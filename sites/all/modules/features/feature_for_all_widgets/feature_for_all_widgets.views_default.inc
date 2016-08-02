@@ -382,13 +382,6 @@ function feature_for_all_widgets_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Workbench Moderation: State */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['state']['label'] = 'Status';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -427,6 +420,7 @@ print \'<a href="move-widget-node/section_wise_widget/\'.$_GET[\'type\'].\'/\'.$
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['field'] = 'shs_term_node_tid_depth';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['relationship'] = 'nid';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['value'] = 'All';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['group'] = 1;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Category';
@@ -470,6 +464,7 @@ print \'<a href="move-widget-node/section_wise_widget/\'.$_GET[\'type\'].\'/\'.$
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Content Type';
@@ -505,20 +500,13 @@ print \'<a href="move-widget-node/section_wise_widget/\'.$_GET[\'type\'].\'/\'.$
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'section-wise-content-ordering-list';
 
   /* Display: We may suggest widget ordering */
@@ -943,13 +931,6 @@ print \'<a href="move-dont-miss-widget-node/we_may_suggest_widget/\'.$_GET[\'typ
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Workbench Moderation: State */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['state']['label'] = 'Status';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -986,22 +967,12 @@ print \'<a href="move-dont-miss-widget-node/dont_miss_content_widget/0/0/\'.$dat
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'dont_miss_content_widget';
   $handler->display->display_options['filters']['widget']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'dont-miss-widget-list';
 
   /* Display: Widget: Big Sotry */
@@ -1188,6 +1159,8 @@ print \'<a href="move-dont-miss-widget-node/dont_miss_content_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['relationship'] = 'nid';
   $handler->display->display_options['fields']['view_node']['label'] = 'view';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span> ';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
@@ -1195,8 +1168,8 @@ print \'<a href="move-dont-miss-widget-node/dont_miss_content_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['php']['label'] = '';
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php
-print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$data->node_itg_widget_order_nid.\'"> <span class="edit-link">Move</spa></a>\';
+  $handler->display->display_options['fields']['php']['php_output'] = ' | <?php
+print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$data->node_itg_widget_order_nid.\'"> <span class="move-link">Move</spa></a>\';
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
@@ -1355,11 +1328,6 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Workbench Moderation: State */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Title */
@@ -1517,20 +1485,6 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  $handler->display->display_options['filters']['is_current']['group'] = 1;
   $handler->display->display_options['path'] = 'section-wise-draggable-content-order';
 
   /* Display: Content for : We may suggest order reoder */
@@ -2110,11 +2064,6 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Workbench Moderation: State */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Title */
@@ -2270,20 +2219,12 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status_1']['id'] = 'status_1';
+  $handler->display->display_options['filters']['status_1']['table'] = 'node';
+  $handler->display->display_options['filters']['status_1']['field'] = 'status';
+  $handler->display->display_options['filters']['status_1']['value'] = '1';
+  $handler->display->display_options['filters']['status_1']['group'] = 1;
   $handler->display->display_options['path'] = 'dont-miss-widget-contents';
   $export['section_wise_draggable_content_order'] = $view;
 

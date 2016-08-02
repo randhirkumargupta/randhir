@@ -1032,6 +1032,8 @@ footer .footer-bottom h4 {
   color: #fff;
   text-transform: uppercase;
   margin-bottom: 5px;
+  font-size: 14px;
+  font-size: 0.875rem;
 }
 footer .footer-bottom ul li {
   padding: 2px 0;
@@ -1407,8 +1409,8 @@ footer .footer-copyright {
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-bottom: 12px solid whitesmoke;
-  top: -11px;
   position: absolute;
+  top: -11px;
   left: 9px;
 }
 .view-front-end-global-search .view-content li {
@@ -1597,10 +1599,10 @@ footer .footer-copyright {
 /*End Dont miss Home page css*/
 /*Start Story page css*/
 .story-section h1 {
-  font-size: 34px;
-  font-size: 2.125rem;
+  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
-  line-height: 42px;
+  line-height: 30px;
 }
 .story-section .story-left-section {
   margin: 0 -15px;
@@ -1617,69 +1619,106 @@ footer .footer-copyright {
   clear: both;
 }
 .story-section .story-left, .story-section .story-right {
-  float: left;
   padding: 0 15px;
 }
-.story-section .story-left {
-  width: 21%;
-}
-.story-section .story-left .byline {
-  text-align: center;
+.story-section .byline {
   color: #989898;
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-size: 0.75rem;
+  zoom: 1;
 }
-.story-section .story-left .byline a {
+.story-section .byline:before, .story-section .byline:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.story-section .byline:after {
+  clear: both;
+}
+.story-section .byline a {
   color: #989898;
 }
-.story-section .story-left .byline ul li span.share-count {
+.story-section .byline .profile-pic, .story-section .byline .profile-detail {
+  float: left;
+}
+.story-section .byline .profile-pic img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #e4e4e4;
+}
+.story-section .byline .profile-detail {
+  margin: 5px 0 0 10px;
+}
+.story-section .byline .profile-detail ul {
+  margin-top: 5px;
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 12px;
+  zoom: 1;
+}
+.story-section .byline .profile-detail ul:before, .story-section .byline .profile-detail ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.story-section .byline .profile-detail ul:after {
+  clear: both;
+}
+.story-section .byline .profile-detail ul li {
+  float: left;
+  padding: 0 5px;
+}
+.story-section .byline .profile-detail ul li span.share-count {
   display: block;
   font-size: 44px;
   font-size: 2.75rem;
   font-weight: 500;
   line-height: 44px;
 }
-.story-section .story-left .byline ul li + li {
-  border-bottom: 1px solid #eaeaea;
-  padding: 5px 0;
-}
-.story-section .story-left .byline ul li img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px solid #e4e4e4;
-}
-.story-section .story-left .byline ul li.twitter {
+.story-section .byline .profile-detail ul li.twitter {
   color: #0783ec;
 }
-.story-section .story-left .byline ul li.title {
+.story-section .byline .profile-detail ul li.title {
   color: #6b6b6b;
-  font-weight: 500;
+  font-weight: 700;
 }
-.story-section .story-left .byline ul li.mailto {
+.story-section .byline .profile-detail ul li.mailto {
   text-transform: uppercase;
+}
+.story-section .byline .profile-detail ul li + li {
+  border-left: 1px solid #a6a6a6;
 }
 .story-section .story-left .briefcase {
-  margin-top: 50px;
+  margin: 20px 0;
 }
 .story-section .story-left .briefcase h4 {
-  font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 8px;
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-weight: 700;
 }
 .story-section .story-left .briefcase ul li {
-  background: #f9f9f9;
+  position: relative;
   color: #575757;
-  padding: 12px 8px 20px 8px;
+  padding: 5px 0px 5px 12px;
+  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 18px;
 }
-.story-section .story-left .briefcase ul li + li {
-  border-top: 1px solid #eaeaea;
-  padding: 20px 8px;
-}
-.story-section .story-right {
-  width: 79%;
+.story-section .story-left .briefcase ul li:before {
+  position: absolute;
+  top: 13px;
+  left: 0px;
+  content: '';
+  border-radius: 50%;
+  background: #a00606;
+  height: 5px;
+  width: 5px;
 }
 .story-section .story-right .stryimg {
   position: relative;
@@ -1695,89 +1734,121 @@ footer .footer-copyright {
   background: #222222;
   color: #aeaeae;
   font-size: 13px;
+  font-size: 0.8125rem;
   font-family: "Roboto", sans-serif;
   padding: 3px 10px;
 }
 .story-section .story-right .image-alt {
   color: #929292;
   font-size: 13px;
+  font-size: 0.8125rem;
   padding: 10px 0;
   border-bottom: 1px solid #e5e5e5;
 }
 .story-section .story-right .description {
   padding-top: 25px;
   font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 27px;
 }
-.story-section .story-right .description:first-letter {
-  font-size: 58px;
-  color: #777879;
-}
 .story-section .snap-post {
-  padding: 20px 20px 20px 100px;
+  padding: 20px 20px 20px 70px;
   border-top: 1px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
   background: url(../images/snap-post-icon.png) no-repeat 15px 20px #f5f5f5;
+  background-size: 40px;
 }
 .story-section .snap-post .discription {
-  font-size: 22px;
+  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 700;
-  line-height: 30px;
+  line-height: 22px;
 }
 .story-section .snap-post .agbutton {
-  margin: 20px 0;
-  text-align: center;
+  margin-top: 20px;
 }
 .story-section .snap-post .agbutton a {
   color: #026bc5;
   font-size: 12px;
+  font-size: 0.75rem;
+  display: block;
+  margin-top: 10px;
 }
 .story-section .snap-post .agbutton button {
   background: #363636;
   border: none;
   color: #fff;
-  width: 113px;
+  width: 75px;
   height: 30px;
   border-radius: 5px;
   box-shadow: 2px 2px 0px #aeaeae;
   text-transform: uppercase;
-  font-family: roboto-slab;
-  font-size: 17px;
+  font-size: 12px;
+  font-size: 0.75rem;
   font-family: "Roboto Slab", sans-serif;
-  margin: 0 15px;
+  margin-right: 10px;
   cursor: pointer;
+}
+.story-section .tags {
+  padding: 25px 0px;
 }
 .story-section .tags ul li {
   display: inline-block;
   vertical-align: top;
-  padding: 25px 12px;
+  padding: 0px 12px;
   color: #c0c0c0;
   font-size: 12px;
+  font-size: 0.75rem;
 }
 .story-section .tags ul li a {
   color: #c0c0c0;
   font-size: 12px;
+  font-size: 0.75rem;
 }
-.story-section .buzz-section > * {
+.story-section .tags ul li:nth-child(1) {
+  padding-left: 0;
+}
+
+.buzz-feedback {
+  width: 100%;
+}
+.buzz-feedback .story-right {
+  width: 100%;
+}
+.buzz-feedback .byline {
+  font-family: "Roboto", sans-serif;
+  color: #989898;
+  font-size: 12px;
+  font-size: 0.75rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #cdcdcd;
+  margin-bottom: 35px;
+}
+.buzz-feedback .buzz-section {
+  margin-bottom: 60px;
+}
+.buzz-feedback .buzz-section > * {
   margin-bottom: 15px;
 }
-.story-section .buzz-section h1 span {
+.buzz-feedback .buzz-section h1 span {
   background: #a00606;
   color: #fff;
   width: 32px;
   height: 32px;
   display: inline-block;
+  vertical-align: top;
+  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 34px;
   text-align: center;
   border-radius: 100%;
-  font-size: 24px;
-  margin-right: 12px;
-  vertical-align: middle;
+  margin: 5px 12px 0 0;
 }
-.story-section .buzz-section .buzz-discription {
+.buzz-feedback .buzz-section .buzz-discription {
   font-size: 16px;
   font-size: 1rem;
   line-height: 22px;
+  font-family: "Roboto", sans-serif;
 }
 
 /*End Story page css*/

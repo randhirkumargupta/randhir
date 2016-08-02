@@ -1,50 +1,87 @@
 <?php if (!empty($content)): ?>
-<div class="story-section">
+<?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { 
+            $class_buzz = 'buzz-feedback';
+        }
+?>
+<div class="story-section <?php print $class_buzz;?>">
   <div class='<?php print $classes ?>'>
-      <?php //pr($node); ?>
+      <?php //pr($node); ?>      
       <h1><?php print $node->title; ?></h1>
       <div class="story-left-section">
-      <div class="story-left">
-              <div class="byline"><?php
-                  $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-                  $reporter_node = node_load($byline_id);
-                  ?>
-                  
-                  <ul>
-                      <li><?php
+        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
+              <div class="story-left">
+                  <div class="byline"><?php
+                      $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+                      $reporter_node = node_load($byline_id);
+                      ?>                      
+                      <div class="profile-pic">
+                      <?php
                       $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                       print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                      ?></li>
+                      ?>
+                  </div>
+              <div class="profile-detail">
+                  <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
-                      <li class="twitter"><?php print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>
-                      <li class="mailto"><i class="fa fa-envelope-o"></i> &nbsp;<?php
-                  $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
-                  print "<a href='mailto:$email'>Mail To Author</a>";
-                  ?></li>
-                      <li><span class="share-count">4.5K</span>SHARES</li>
+                      <li class="twitter"><?php print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
+                  </ul>
+                  <ul>
+                      <li class="mailto mhide"><i class="fa fa-envelope-o"></i> &nbsp;<?php
+                              $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
+                              print "<a href='mailto:$email'>Mail To Author</a>";
+                              ?></li>
+                      <li class="mhide"><span class="share-count">4.5K</span>SHARES</li>
                       <li>Nov 13, 2014  </li>
                       <li>UPDATED 11:04 IST</li>
                       <li>New Delhi</li>
                   </ul>
-                  
-              </div>
-          <div class="briefcase">
-                  <h4><?php print t('Briefcase');?></h4>
-                  <ul>
-                      <?php
-                      foreach ($node->field_story_highlights['und'] as $high) {
-                          print '<li>' . $high['value'] . '</li>';
-                      }
-                      ?>
-                  </ul>
-              </div>
-              </div>
-              
-               
+                  </div>
+                  </div>
+                  <div class="briefcase">
+                      <h4><?php print t('Briefcase'); ?></h4>
+                      <ul>
+                          <?php
+                          foreach ($node->field_story_highlights['und'] as $high) {
+                              print '<li>' . $high['value'] . '</li>';
+                          }
+                          ?>
+                      </ul>
+                  </div>
+              </div>  
+          <?php  } ?>
+          
+          
 
       <div class="story-right">
+          <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
+          <!-- For buzzfeed section start -->
+          <div class="byline"><?php
+                  $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+                  $reporter_node = node_load($byline_id);
+                  ?>
+                  <div class="profile-pic">
+                      <?php
+                      $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                      ?>
+                  </div>
+              <div class="profile-detail">
+                  <ul>
+                      <li class="title"><?php print $reporter_node->title; ?></li>
+                      <li class="twitter"><?php print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
+                  </ul>
+                  <ul>
+                      <li>Nov 13, 2014  </li>
+                      <li>UPDATED 11:04 IST</li>
+                      <li>New Delhi</li>
+                  </ul>
+                  </div>
+              </div>
+          <!-- For buzzfeed section end -->
+         <?php } ?>
+          
       <div class="stryimg"><?php print render($content['field_story_extra_large_image']); ?>
-        <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
+      <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
       </div>
       
       <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
@@ -82,7 +119,7 @@
       
       
       <!-- condition for buzz  -->
-      <h1><?php print t('BUZZ Detail');?></h1>
+     
       <?php
           if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
           $buzz_output.= '';
