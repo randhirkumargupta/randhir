@@ -14,7 +14,7 @@
  */
 function itg_widget_top_stories_ordering_data($info) {
   if (is_array($info)) {
-    watchdog('Top Stories ordering', 'inside top stories ordering');
+   // watchdog('Top Stories ordering', 'inside top stories ordering');
     $view_name = isset($info['view_name']) ? $info['view_name'] : "";
     $page = isset($info['page']) ? $info['page'] : "";
     // condition to validate
@@ -32,10 +32,10 @@ function itg_widget_top_stories_ordering_data($info) {
       return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     }
     else {
-      watchdog('Top Stories ordering', 'Either section or content type is empty');
+     // watchdog('Top Stories ordering', 'Either section or content type is empty');
     }
   }
   else {
-    watchdog('Top Stories ordering', 'view_name and page name is empty');
+   // watchdog('Top Stories ordering', 'view_name and page name is empty');
   }
 }

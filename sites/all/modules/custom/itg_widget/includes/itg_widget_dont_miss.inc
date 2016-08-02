@@ -50,7 +50,7 @@ function itg_widget_dont_miss_ordering_data($info) {
     $data = $result;
   }
   else {
-    watchdog("Widget", "Data array is not in proper format");
+    // watchdog("Widget", "Data array is not in proper format");
   }
   return $data;
 }
