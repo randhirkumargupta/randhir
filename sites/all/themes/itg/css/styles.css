@@ -1900,3 +1900,10 @@ section.sidebar {
   margin-top: -2px;
   background: #ddd;
 }
+
+.page-node-add-ugc .messages.error.file-upload-js-error {
+  margin-bottom: 20px;
+}
+.page-node-add-ugc .messages--error.messages.error {
+  margin: 0 30px;
+}

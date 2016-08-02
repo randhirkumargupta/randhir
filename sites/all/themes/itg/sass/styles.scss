@@ -1480,3 +1480,15 @@ section.sidebar{
     @include sidebar-heading;
 }
 
+.page-node-add-ugc{
+    .messages.error.file-upload-js-error{
+        margin-bottom: 20px;
+
+    }
+    .messages--error.messages.error{
+        margin: 0 30px;
+    }
+}
+.page-snappost .container{
+    
+}
