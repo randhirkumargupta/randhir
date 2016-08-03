@@ -391,6 +391,7 @@ function itg_widget_block_view($delta = '') {
       );
       drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
       );
+      
       drupal_add_js("jQuery('#featuredvideo').RollingSlider({
 				showArea:'#example',
 				prev:'#jprev',

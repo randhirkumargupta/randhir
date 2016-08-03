@@ -1,7 +1,8 @@
 <?php 
 if (!empty($data)) {
     ?>
-<div class="featuredvideo-wrap">
+<div class="featuredvideo-wrap">  
+    
 			<div id="featuredvideo" class="featuredvideo">
 				<ul class="slide-wrap" id="example">
                                     
