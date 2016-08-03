@@ -23,17 +23,19 @@
  * @ingroup views_templates
  */
 ?>
-<?php foreach ($fields as $id => $field): ?>
-  <?php if (!empty($field->separator)): ?>
-    <?php print $field->separator; ?>
-  <?php endif; ?>
+<div class="container">
+    <?php foreach ($fields as $id => $field): ?>
+      <?php if (!empty($field->separator)): ?>
+        <?php print $field->separator; ?>
+      <?php endif; ?>
 
-  <?php print $field->wrapper_prefix; ?>
-    <?php print $field->label_html; ?>
-    <?php print $field->content; ?>
-  <?php print $field->wrapper_suffix; ?>
-<?php endforeach; ?>
-<div class="snap-button">
-<div class="agree"><a href="#">AGREE</a></div>
-<div class="agree"><a href="#">DISAGREE</a></div>
+      <?php print $field->wrapper_prefix; ?>
+        <?php print $field->label_html; ?>
+        <?php print $field->content; ?>
+      <?php print $field->wrapper_suffix; ?>
+    <?php endforeach; ?>
+    <div class="snap-button">
+        <a href="#" class="agree"><i class="fa fa-thumbs-o-up"></i> AGREE</a>
+        <a href="#" class="disagree"><i class="fa fa-thumbs-o-down"></i> DISAGREE</a>
+    </div>
 </div>

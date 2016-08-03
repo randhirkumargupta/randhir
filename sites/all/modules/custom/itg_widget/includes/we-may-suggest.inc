@@ -22,7 +22,7 @@ function itg_widget_we_may_suggest_ordering_from_custom_table($info) {
     return $result;
   }
   else {
-    watchdog("Widget", "Data array is not in proper format");
+   // watchdog("Widget", "Data array is not in proper format");
   }
 }
 
@@ -70,7 +70,7 @@ function save_we_may_suggest_widget_data($we_may_suggest_content) {
   else {
     foreach ($selected_node as $nodes) {
       $node_data = node_load($nodes);
-      watchdog('widget', $nodes);
+     // watchdog('widget', $nodes);
       db_insert('itg_widget_order')
               ->fields(array(
                   'nid' => $nodes,
