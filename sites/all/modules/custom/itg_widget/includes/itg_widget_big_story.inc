@@ -15,7 +15,7 @@ function save_big_story_widget_data($big_story_data) {
     ->condition('widget', $widget)
     ->execute();
   if ($num_deleted) {
-    watchdog("widget", "Delete action has been performed");
+    // watchdog("widget", "Delete action has been performed");
   }
   // Get related nodes then convert into json.
   if ($_GET['type'] == 'story') {
