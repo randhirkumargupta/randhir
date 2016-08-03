@@ -5716,3 +5716,7 @@ div.node #comments h2 {
 .region-content {
   margin: 20px 0;
 }
+
+.views-form .form-actions {
+  margin-top: 20px;
+}
