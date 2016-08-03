@@ -306,6 +306,18 @@ input[type="text"], select, input[type="password"] {
   background: #a00606;
   display: none;
 }
+.header .navigation .menu {
+  zoom: 1;
+}
+.header .navigation .menu:before, .header .navigation .menu:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.header .navigation .menu:after {
+  clear: both;
+}
 .header .navigation ul li a {
   border-top: 1px solid #900505;
   display: block;
@@ -937,6 +949,11 @@ input[type="text"], select, input[type="password"] {
   height: 100px;
 }
 
+section.sidebar {
+  border: 1px solid #ddd;
+  min-height: 600px;
+}
+
 /*Start CSS footer section*/
 footer {
   margin-top: 40px;
@@ -1269,11 +1286,6 @@ footer .footer-copyright {
   margin-bottom: 10px;
 }
 
-.video-n-magazine {
-  border: 1px solid #e4dfdf;
-  height: 800px;
-}
-
 /*End CSS Featured New Home page*/
 /*Start CSS section story Home page*/
 .section-ordering h3 {
@@ -1586,8 +1598,9 @@ footer .footer-copyright {
   color: #048cb9;
   margin-bottom: 5px;
   text-transform: uppercase;
-  font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 .dont-miss ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
@@ -1853,11 +1866,6 @@ footer .footer-copyright {
 
 /*End Story page css*/
 /*Start May we suggest css*/
-section.sidebar {
-  border: 1px solid #ddd;
-  min-height: 600px;
-}
-
 .may-be-suggest-container ul li {
   overflow: hidden;
   padding: 10px;
