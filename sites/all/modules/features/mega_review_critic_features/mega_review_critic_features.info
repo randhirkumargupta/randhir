@@ -60,6 +60,7 @@ features[field_instance][] = node-mega_review_critic-field_story_extra_large_ima
 features[field_instance][] = node-mega_review_critic-field_story_extra_small_image
 features[field_instance][] = node-mega_review_critic-field_story_large_image
 features[field_instance][] = node-mega_review_critic-field_story_medium_image
+features[field_instance][] = node-mega_review_critic-field_story_node_identity
 features[field_instance][] = node-mega_review_critic-field_story_small_image
 features[node][] = itg_celebrity_profile
 features[node][] = mega_review_critic
