@@ -191,7 +191,7 @@ function update_itg_widget_order_table_data($form, &$form_state) {
   }
   // IF we got there is changes made in draggable view order.
   if ($weight_track_flag) {
-    watchdog("widget", "Change made in order");
+   // watchdog("widget", "Change made in order");
     // First delete all the data from itg_widget_order table of combination
     foreach ($draggable_view_data as $key => $node_data) {
       //if (!empty($node_data['id']) && !empty($content_type) && !empty($widget) && !empty($cat_id)) {
@@ -203,7 +203,7 @@ function update_itg_widget_order_table_data($form, &$form_state) {
           ->condition('cat_id', $cat_id)
           ->execute();
         if ($num_deleted) {
-          watchdog("widget", "Delete action has been performed");
+         // watchdog("widget", "Delete action has been performed");
         }
       //}
     }
@@ -221,7 +221,7 @@ function update_itg_widget_order_table_data($form, &$form_state) {
           ))
           ->execute();
         if ($is_inserted) {
-          watchdog("widget", "Insert action has been performed");
+         // watchdog("widget", "Insert action has been performed");
           drupal_set_message(t("Ordering has been saved."));
         }
       }
