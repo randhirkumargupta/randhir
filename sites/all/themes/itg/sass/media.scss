@@ -17,6 +17,10 @@
         font-size: $h3-font-size;
         line-height: $h3-line-height;
     }
+    h4{
+        font-size: $h4-font-size;
+        line-height: $h4-line-height;
+    }
     .mhide{
         display: block;
     }
@@ -214,6 +218,90 @@
     }
 }
 /*End Dont miss Home page css*/
+
+/*Start Story page css*/
+.story-section{
+    h1{
+        @include font(34px,42px,700);
+    }
+    .story-left, .story-right{
+        @include float(left);
+    }
+    .story-left{
+        width: 21%;
+        .byline{            
+            @include text-align(center);
+            .profile-pic, .profile-detail{
+                @include float(none);
+            } 
+            .profile-detail {
+                ul {
+                    li{ 
+                        @include float(none);
+                        padding:5px 0;                        
+                        border-bottom: 1px solid #eaeaea;
+                        +li{
+                            border-left: none; 
+                        }
+                    }
+                }    
+            }   
+        }
+        .briefcase{
+            margin-top: 50px;
+            h4{
+                font-weight: 700;
+                text-transform: uppercase;
+                margin-bottom: 8px;
+            }
+            ul{
+                li{
+                    background: #f9f9f9;
+                    color: #575757;
+                    padding:12px 8px 20px 8px;
+                    line-height: 18px;
+                    +li{
+                        border-top: 1px solid #eaeaea;
+                        padding:20px 8px;
+                    }
+                    &:before{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    .story-right{
+        width: 79%;        
+    }
+    .snap-post{ 
+        padding: 20px 20px 20px 100px;
+         background-size: inherit;
+         .discription{            
+            @include font(22px,30px,700);            
+            @include text-align(center);
+        }
+        .agbutton{
+            a{
+             display: inline-block;
+             margin-top: 0;
+            }
+             margin:20px 0;
+            @include text-align(center);
+        }
+        button{
+            margin: 0 15px;
+             width: 113px;
+             @include font(17px);
+        }
+    }
+}
+.buzz-feedback{
+    .story-right{
+        width: 100%
+    }
+}
+/*End Story page css*/
 
 }
 /*End CSS Desktop version*/

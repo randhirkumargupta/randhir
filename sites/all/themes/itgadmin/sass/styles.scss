@@ -1174,7 +1174,7 @@ div.vertical-tabs {
                 height: 16px;
                 border-radius: 2px;
                 right: 3px;
-                top: -73px;
+                top: 3px;
                 text-indent: -9999px;
               }
             }
@@ -1200,10 +1200,21 @@ div.vertical-tabs {
           }
           .image-widget-data{
             float: none;
-            .filefield-source{
-              width: 100%;
-              height: 124px;
+            width: 100%;
+            height: 124px;
+            @extend .pos-rel;
               .filefield-sources-imce-browse{
+                background: #fff none repeat scroll 0 0;
+                border: 1px solid #d9d9d9;
+                border-radius: 0;
+                height: 124px;
+                left: 0;
+                color: #5f5f5f;
+                padding: 90px 0 0;
+                position: absolute;
+                text-align: center;
+                top: 0;
+                width: 100%;
                 border-radius: 0;
                 &:after{
                   content: '\f03e';
@@ -1211,9 +1222,21 @@ div.vertical-tabs {
                   font-size: 50px;
                   line-height: 120px;
                   color: #e5e5e5;
+                  position: absolute;
+                  left: 0;
+                  right: 0;
+                  top: 0;
+                  bottom: 0;
                 }
               }
-            }
+              .form-type-textfield{
+                position: absolute;
+                bottom: 0;
+                left: 0;
+              }
+              div.description{
+                left: 213px;
+              }
           }
           .form-managed-file + div.description {
             left: 220px;
@@ -2199,7 +2222,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-[class*="node-type-"]{
+[class*="node-type-"], [class*="page-node-"]{
   .tabs-primary{display: none;}
   .node{
     padding: 20px;
@@ -3475,6 +3498,7 @@ div.node{
 .edit-link, 
 .view-link, 
 .delete-link, 
+.move-link,
 .edit-cm a{
   @extend .pos-rel;
   @extend .dib;
@@ -3496,6 +3520,7 @@ div.node{
 .edit-link:after, .edit-cm a:after{content: '\f044';}
 .view-link:after{content: '\f06e';}
 .delete-link:after{content: '\f1f8';}
+.move-link:after{content:'\f191';}
 
 .sidebar-trigger{
   cursor: pointer;
@@ -5598,3 +5623,98 @@ div.node{
         cursor: pointer;
     }
 }
+.sidebar-section-photo{
+  .itg-widget{
+    margin: 20px 0;
+    position: relative;
+    .droppable{
+      min-height: 400px;
+    }
+  }
+}
+[id*="views-exposed-form-byline-list-page"]{
+  .views-widget-filter-field_celebrity_pro_occupation_tid{
+    .form-type-select .form-select + div.description{
+      left: 148px;
+    }
+  }
+}
+#views-form-section-wise-draggable-content-order-page, #views-form-home-page-feature-widget-page-1, #views-form-section-wise-draggable-content-order-dont-miss-content, #views-form-section-wise-draggable-content-order-big-story-format, #views-form-section-wise-draggable-content-order-we-may-suggest-widget, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular{
+       
+    p, .form-wrapper{
+        margin-top: 40px;
+    }
+    .form-submit{
+        @extend .add-more;
+        +a.active{
+            @extend .btn-cancel;
+            border-radius: 5px;
+            display: inline-block;
+            height: 34px;
+            line-height: 34px;
+            margin-left: 10px;
+            text-align: center;
+            width: 80px;
+        }
+    }
+    
+}
+.page-node-add-magazine, .page-node-add-breaking-news{
+    .form-type-managed-file{
+      .image-widget-data{
+          position: relative;  
+          float: none;
+    }
+    a.filefield-sources-imce-browse{
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      &:after{
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #2f2f2f;
+        content: "Choose Your File";
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 300;
+        height: 28px;
+        left: 0;
+        line-height: 26px;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 134px;
+      }
+    }
+    }
+  }
+  
+  .itg-region{
+    ul{
+      @extend .no-bullet;
+      border-bottom: 1px solid #d9d9d9;
+      @extend .dib;
+      @extend .full;
+      li{
+        @extend .fleft;
+        margin-right: 10px;
+        text-transform: uppercase;
+        a{
+          @extend .db;
+          padding: 10px 5px 7px;
+          border-bottom: 3px solid #d9d9d9;
+          background-color: #d9d9d9;
+          &:hover{
+            border-bottom: 3px solid #d00b26;
+          }
+        }
+      }
+    }
+  }
+  .region-content{
+    margin: 20px 0;
+  }

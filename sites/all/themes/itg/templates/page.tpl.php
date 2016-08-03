@@ -16,8 +16,12 @@
                 <div class="logo">
                     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
                 </div>
+                    <?php endif; ?>
+                    <div class="login-link desktop-hide">
+            <a href="/user">Login</a>
+          </div> 
                     </div>
-                <?php endif; ?>
+                
                 <?php if ($site_name || $site_slogan): ?>
                     <div class="header__name-and-slogan" id="name-and-slogan">
                         <?php if ($site_name): ?>
@@ -59,7 +63,7 @@
     <?php 
       $cls = 'col-md-12';
       if ($sidebar_first || $sidebar_second):
-        $cls = 'col-md-9';
+        $cls = 'col-md-8';
     endif; ?>
   
   <main id="main" class="container">
@@ -114,7 +118,7 @@
     <?php endif; ?>
       
     <?php if ($sidebar_first || $sidebar_second): ?>
-      <aside class="sidebars col-md-3">
+      <aside class="sidebars col-md-4">
         <?php print $sidebar_first; ?>
         <?php print $sidebar_second; ?>
       </aside>

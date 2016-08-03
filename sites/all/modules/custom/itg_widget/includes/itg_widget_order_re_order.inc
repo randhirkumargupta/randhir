@@ -67,7 +67,6 @@ function update_itg_widget_order_table_data_for_dont_miss($form, &$form_state) {
   // Take draggable view input value after submit the form.
   $draggable_view_data = $form_state['input']['draggableviews'];
   $widget = 'dont_miss_content_widget';
-
   $extra_values = array();
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
@@ -192,20 +191,21 @@ function update_itg_widget_order_table_data($form, &$form_state) {
   }
   // IF we got there is changes made in draggable view order.
   if ($weight_track_flag) {
-    watchdog("widget", "Change made in order");
+   // watchdog("widget", "Change made in order");
     // First delete all the data from itg_widget_order table of combination
     foreach ($draggable_view_data as $key => $node_data) {
-      if (!empty($node_data['id']) && !empty($content_type) && !empty($widget) && !empty($cat_id)) {
-        $num_deleted = db_delete('itg_widget_order')
+      //if (!empty($node_data['id']) && !empty($content_type) && !empty($widget) && !empty($cat_id)) {
+      //$node_type = node_load($node_data['id']);  
+      $num_deleted = db_delete('itg_widget_order')
           ->condition('nid', $node_data['id'])
-          ->condition('content_type', $content_type)
+          //->condition('content_type', $node_type->type)
           ->condition('widget', $widget)
           ->condition('cat_id', $cat_id)
           ->execute();
         if ($num_deleted) {
-          watchdog("widget", "Delete action has been performed");
+         // watchdog("widget", "Delete action has been performed");
         }
-      }
+      //}
     }
 
     // Now insert new entry in itg_widget_order table of combination
@@ -221,7 +221,7 @@ function update_itg_widget_order_table_data($form, &$form_state) {
           ))
           ->execute();
         if ($is_inserted) {
-          watchdog("widget", "Insert action has been performed");
+         // watchdog("widget", "Insert action has been performed");
           drupal_set_message(t("Ordering has been saved."));
         }
       }

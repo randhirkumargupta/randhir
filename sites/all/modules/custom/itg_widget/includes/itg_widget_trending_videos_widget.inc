@@ -28,13 +28,14 @@ function itg_widget_trending_videos_widget_ordering_data($info) {
       $query->groupBy('dv_s.entity_id');
       // only top 15 nodes are required as per requirement
       $query->range(0, 15);
-      return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
     }
     else {
-      watchdog('Top Stories ordering', 'Either section or content type is empty');
+     // watchdog('Top Stories ordering', 'Either section or content type is empty');
     }
   }
   else {
-    watchdog('Top Stories ordering', 'view_name and page name is empty');
+   //  watchdog('Top Stories ordering', 'view_name and page name is empty');
   }
 }

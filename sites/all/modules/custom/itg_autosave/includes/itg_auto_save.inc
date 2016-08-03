@@ -298,12 +298,12 @@ class itg_auto_save {
    *   Extracted value.
    */
   public function itg_save_field_text_long($value) {    
-    if ($value['und'][0]['value'] != '' && isset($value['und'][0]['format'])) {
+    if ($value['und'][0]['value'] != '' && isset($value['und'][0]['format'])) {      
       $this->text_long['value'] = $value['und'][0]['value'];
       $this->text_long['format'] = $value['und'][0]['format'];      
     }
     else {      
-      $this->text_long = $value['und'][0]['value'];
+      $this->text_long['value'] = $value['und'][0]['value'];      
     }
 
     return $this->text_long;
@@ -577,7 +577,7 @@ class itg_auto_save {
 
         case 'text_long':
           $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
-          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $this->value;                    
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0] = $this->value;                    
           break;
 
         case 'text_with_summary':
