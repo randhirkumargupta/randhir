@@ -388,7 +388,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     case 'photo_carousel_widget':
       if ($current_display == 'photo_carousel_list') {
         watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
-        $queue_flag = 6; // photo carousel list widget qid
+        $queue_flag = 7; // photo carousel list widget qid
     }
       break;
   }
