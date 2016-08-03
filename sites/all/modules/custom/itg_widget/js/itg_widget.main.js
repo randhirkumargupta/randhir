@@ -14,9 +14,9 @@ Drupal.behaviors.itg_widget = {
             jQuery('#edit-qids').append(newOption);
             jQuery('#edit-qids').trigger("chosen:updated");
             // Added code that hide node queue multiple select and add text next to this div
-            jQuery('<p>Are you sure you want add this content</p>').insertAfter(jQuery('#views-form-photo-carousel-widget-photo-carousel-list , #views-form-story-widget-page-1, #views-form-home-page-feature-widget-page-1, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular').find('.form-item-qids'));
-            jQuery('#views-form-photo-carousel-widget-photo-carousel-list,#views-form-story-widget-page-1, #views-form-home-page-feature-widget-page-1,  #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular').find('#edit-submit').val('Confirm');
-            jQuery('#views-form-photo-carousel-widget-photo-carousel-list, #views-form-story-widget-page-1, #views-form-home-page-feature-widget-page-1, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular').find('.form-item-qids').hide();
+            jQuery('<p>Are you sure you want add this content</p>').insertAfter(jQuery('#views-form-photo-carousel-widget-photo-carousel-list , #views-form-story-widget-page-1, #views-form-home-page-feature-widget-page-1, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular, #views-form-photo-carousel-widget-video-carousel-list').find('.form-item-qids'));
+            jQuery('#views-form-photo-carousel-widget-photo-carousel-list,#views-form-story-widget-page-1, #views-form-home-page-feature-widget-page-1,  #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular, #views-form-photo-carousel-widget-video-carousel-list').find('#edit-submit').val('Confirm');
+            jQuery('#views-form-photo-carousel-widget-photo-carousel-list, #views-form-story-widget-page-1, #views-form-home-page-feature-widget-page-1, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular, #views-form-photo-carousel-widget-video-carousel-list').find('.form-item-qids').hide();
 
             // End code that hide node queue multiple select and add text next to this div
 
