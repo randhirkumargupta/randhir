@@ -112,13 +112,10 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
     else {
       $flag = TRUE;
     }    
-    if (!$flag) {            
-      // Add js file for autosave ajax.      
-      drupal_add_js(drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js');
+    if (!$flag) {
+      $form['#after_build'][] = 'itg_autosave_after_build';      
       $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];      
-      $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();     
-      // Set form ids to js file.
-      $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);          
+      $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();      
     }
     $form['field_story_node_identity']['und'][0]['value']['#prefix'] = '<div style="display:none;">';
     $form['field_story_node_identity']['und'][0]['value']['#suffix'] = '</div>';
@@ -167,5 +164,21 @@ function itg_autosave_node_insert($node) {
       ->fields(array('nid' => $node->nid))
       ->execute();
   } 
+}
+
+/**
+ * Custom after build function.
+ *
+ * @param array $form
+ * @param array $form_alter
+ */
+function itg_autosave_after_build($form, &$form_alter) {
+  // Add js file for autosave ajax.      
+  drupal_add_js(drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js');
+  // Set form ids to js file.
+  $itg_autosave_form = new itg_auto_save();
+  $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);          
+  
+  return $form;
 }
 

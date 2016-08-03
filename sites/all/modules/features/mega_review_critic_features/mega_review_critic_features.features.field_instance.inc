@@ -1227,6 +1227,49 @@ function mega_review_critic_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-mega_review_critic-field_story_node_identity'.
+  $field_instances['node-mega_review_critic-field_story_node_identity'] = array(
+    'bundle' => 'mega_review_critic',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'node-mega_review_critic-field_story_small_image'.
   $field_instances['node-mega_review_critic-field_story_small_image'] = array(
     'bundle' => 'mega_review_critic',
@@ -1321,6 +1364,7 @@ function mega_review_critic_features_field_default_field_instances() {
   t('Medium image');
   t('Mega Review Type');
   t('Movie Plot');
+  t('Node Identity');
   t('Occupation');
   t('Picture');
   t('Please Enter Description');

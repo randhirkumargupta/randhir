@@ -78,7 +78,7 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
 }
 
 /**
- * Funtion used to delete node combination form itg_widget_order table.
+ * Function used to delete node combination form itg_widget_order table.
  * 
  * @param string $widget_name
  * @param string $content_type
@@ -111,10 +111,10 @@ function remove_from_widgets_with_section($nid, $qid, $view_name, $page_name, $s
     $draggable_delete = draggable_view_node_delete_section($view_name, $page_name, $nid, $section_tid, $type);
     if ($draggable_delete) {
         nodequeue_subqueue_remove_node($qid, $nid);
-        print "deleted";
+        echo "deleted";
     }
     else {
-        print "notdeleted";
+        echo "not-deleted";
     }
 }
 
@@ -200,6 +200,16 @@ function itg_widget_block_info() {
     $blocks['most_popular'] = array(
         'info' => t('Widget: Most popular form custom table'),
     );
+
+    $blocks['featured_photo_carousel'] = array(
+        'info' => t('Widget: Featured Photo Carousel - Flexslider'),
+    );
+
+    $blocks['featured_photo_carousel_r'] = array(
+        'info' => t('Widget: Featured Photo Carousel - Rolling Slider'),
+    );
+
+
     $blocks['dont_miss'] = array(
         'info' => t('Widget: Dont Miss form custom table'),
     );
@@ -215,7 +225,7 @@ function itg_widget_block_view($delta = '') {
         // Big Story Content.
         case 'big_story_format':
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
-            $block['subject'] = t('Big Story Formet');
+      $block['subject'] = t('');
             $info['widget'] = 'big_story_format_widget';
             $data = itg_widget_big_story_block_data($info);
             $block['content'] = theme("widget_big_story_format", array("data" => $data));
@@ -280,6 +290,60 @@ function itg_widget_block_view($delta = '') {
             $data = itg_widget_home_page_feature_data($info);
             $block['content'] = theme("home_page_feature", array("data" => $data));
             break;
+    // featured photo carousel reordering widget case
+        case 'featured_photo_carousel':
+            drupal_add_library('flexslider', 'flexslider');
+            libraries_load('flexslider');
+            module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
+
+            drupal_add_js('jQuery(window).load(function() {
+            jQuery(".flexslider").flexslider({
+            animation: "slide"
+            });
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
+
+            drupal_add_css('.flex-caption {
+              width: 96%;
+              padding: 2%;
+              left: 0;
+              bottom: 0;
+              background: rgba(0,0,0,.5);
+              color: #fff;
+              text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+              font-size: 14px;
+              line-height: 18px;
+            }', 'inline');
+
+
+      $info['view_name'] = 'photo_carousel_widget'; // view name
+      $info['page'] = 'photo_carousel'; // page name
+      $data = itg_widget_featured_photo_carousel_data($info, 'flexslider');
+      $block['content'] = theme("featured_photo_carousel", array("data" => $data));
+      break;
+
+    case 'featured_photo_carousel_r':
+      global $base_url;
+
+      drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+      );
+      drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+      );
+      drupal_add_js("jQuery('#featuredphoto').RollingSlider({
+				showArea:'#example',
+				prev:'#jprev',
+				next:'#jnext',
+				moveSpeed:300,
+				autoPlay:false
+			});", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+      );
+      drupal_add_js('misc/jquery.js');
+      module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
+      $info['view_name'] = 'photo_carousel_widget'; // view name
+      $info['page'] = 'photo_carousel'; // page name
+      $data = itg_widget_featured_photo_carousel_data($info, 'rolling');
+      $block['content'] = theme("featured_photo_carousel_rollingslider", array("data" => $data));
+      break;
     }
     return $block;
 }
@@ -298,36 +362,39 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         // top story
         case 'story_widget':
             if ($current_display == 'most_popular') {
-                watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
+              //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
                 $queue_flag = 5; // most popular
             }
             elseif ($current_display == 'trending_videos') {
-                watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+              //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
                 $queue_flag = 4; // top story widget qid
             }
             else {
-                watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
+              //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
                 $queue_flag = 1; // trending_videos widget qid
             }
             break;
         // home page feature
         case 'home_page_feature_widget':
-            watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
+           // watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
             $queue_flag = 2; // home page feature qid
             break;
         // We may suggest
         case 'we_may_suggest':
-            watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+           // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
             $queue_flag = 3; // home page feature qid
             break;
+
+    case 'photo_carousel_widget':
+      if ($current_display == 'photo_carousel_list') {
+        watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
+        $queue_flag = 7; // photo carousel list widget qid
     }
+      break;
+  }
     if (!empty($queues[$queue_flag])) {
-        watchdog("Widget", "setting sent to js");
-        // name of nodequeue
         $setting['name'] = $queues[$queue_flag]->name;
-        // qid of nodeduque
         $setting['qid'] = $queues[$queue_flag]->qid;
-        // title of nodequeue
         $setting['title'] = $queues[$queue_flag]->title;
         // add js for setting
         drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
@@ -352,7 +419,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo) {
-    
+  // TODO: Implement this.
 }
 
 /**
@@ -380,6 +447,12 @@ function itg_widget_theme() {
         ),
         'most_popular_widget' => array(
             'template' => 'templates/most-popular-widget',
+        ),
+       'featured_photo_carousel' => array(
+           'template' => 'templates/featured-photo-carousel',
+        ),
+       'featured_photo_carousel_rollingslider' => array(
+           'template' => 'templates/featured-photo-carousel-rollingslider',
         ),
         'dont_miss_widget' => array(
             'template' => 'templates/dont-miss-widget',
@@ -437,10 +510,19 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     case 'views-exposed-form-section-wise-draggable-content-order-page':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $form['#validate'][] = 'custom_section_wise_validate';
+      break;
+    case 'views-exposed-form-section-wise-content-ordering-list-page':
+      $form['#validate'][] = 'custom_section_wise_validate';
       break;
   }
 }
 
+function custom_section_wise_validate($form, &$form_state) {
+ if($form_state['values']['category_tid'] == 'All' && isset($_GET['category_tid'])) {
+   form_set_error('category_tid', 'Category is required');
+ } 
+}
 /**
  * Function used to get widget name
  * 
@@ -448,6 +530,7 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  */
 function _get_widget_name($view_name, $page_name) {
     $widget = "";
+  // TODO: Use switch-case
     if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
         $widget = 'section_wise_widget';
     }
@@ -460,6 +543,9 @@ function _get_widget_name($view_name, $page_name) {
     else if ($page_name == 'big_story_format') {
         $widget = 'big_story_format_widget';
     }
+  else if ($page_name == 'photo_carousel_list') {
+    $widget = 'photo_carousel_list_widget';
+  }
     else if ($page_name == 'dont_miss_content') {
         $widget = 'dont_miss_content_widget';
     }
@@ -483,8 +569,7 @@ function itg_widget_views_api() {
 
 /**
  * Implementation of hook_views_query_alter
- * @param type $view
- * @param type $query 
+ * {@inheritdoc}
  */
 function itg_widget_views_query_alter(&$view, &$query) {
     if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
