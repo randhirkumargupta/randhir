@@ -25,6 +25,6 @@ function itg_widget_section_wise_ordering_from_custom_table($info) {
       ->execute()->fetchAll(PDO::FETCH_ASSOC);
   }
   else {
-    watchdog("Widget", "Data array is not in proper format");
+   // watchdog("Widget", "Data array is not in proper format");
   }
 }
