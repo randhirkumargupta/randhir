@@ -138,7 +138,7 @@ global $theme;
         </div>
         <div class="row">
           <div class="col-md-8">
-            <div class="region-content">You can't drag any widget in main content area!</div>
+            <div id="region-section-content" class="region-content">You can't drag any widget in main content area!</div>
           </div>
           <div class="col-md-4">
               <div class="sidebar-section-photo">
