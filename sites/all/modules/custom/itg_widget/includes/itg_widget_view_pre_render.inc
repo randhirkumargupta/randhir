@@ -93,6 +93,11 @@ function itg_widget_views_pre_render(&$view) {
     $header_content .= l(t('Search Content'), 'photo-list-widget', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
   }
+  elseif ($view->name == "photo_carousel_widget" && $view->current_display == 'video_carousel') {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= l(t('Search Content'), 'video-list-widget', array('query' => array('destination' => arg(0))));
+    $view->attachment_before = $header_content;
+  }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'big_story_format') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'big-story-format-conent');
