@@ -362,26 +362,26 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         // top story
         case 'story_widget':
             if ($current_display == 'most_popular') {
-                watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
+              //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
                 $queue_flag = 5; // most popular
             }
             elseif ($current_display == 'trending_videos') {
-                watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+              //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
                 $queue_flag = 4; // top story widget qid
             }
             else {
-                watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
+              //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
                 $queue_flag = 1; // trending_videos widget qid
             }
             break;
         // home page feature
         case 'home_page_feature_widget':
-            watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
+           // watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
             $queue_flag = 2; // home page feature qid
             break;
         // We may suggest
         case 'we_may_suggest':
-            watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+           // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
             $queue_flag = 3; // home page feature qid
             break;
 
@@ -393,7 +393,6 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
     if (!empty($queues[$queue_flag])) {
-        watchdog("Widget", "setting sent to js");
         $setting['name'] = $queues[$queue_flag]->name;
         $setting['qid'] = $queues[$queue_flag]->qid;
         $setting['title'] = $queues[$queue_flag]->title;
@@ -511,10 +510,19 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     case 'views-exposed-form-section-wise-draggable-content-order-page':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $form['#validate'][] = 'custom_section_wise_validate';
+      break;
+    case 'views-exposed-form-section-wise-content-ordering-list-page':
+      $form['#validate'][] = 'custom_section_wise_validate';
       break;
   }
 }
 
+function custom_section_wise_validate($form, &$form_state) {
+ if($form_state['values']['category_tid'] == 'All' && isset($_GET['category_tid'])) {
+   form_set_error('category_tid', 'Category is required');
+ } 
+}
 /**
  * Function used to get widget name
  * 
