@@ -5640,9 +5640,7 @@ div.node{
   }
 }
 #views-form-section-wise-draggable-content-order-page, #views-form-home-page-feature-widget-page-1, #views-form-section-wise-draggable-content-order-dont-miss-content, #views-form-section-wise-draggable-content-order-big-story-format, #views-form-section-wise-draggable-content-order-we-may-suggest-widget, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular{
-    .form-item{
-        display: none;
-    }    
+       
     p, .form-wrapper{
         margin-top: 40px;
     }
@@ -5693,4 +5691,30 @@ div.node{
       }
     }
     }
+  }
+  
+  .itg-region{
+    ul{
+      @extend .no-bullet;
+      border-bottom: 1px solid #d9d9d9;
+      @extend .dib;
+      @extend .full;
+      li{
+        @extend .fleft;
+        margin-right: 10px;
+        text-transform: uppercase;
+        a{
+          @extend .db;
+          padding: 10px 5px 7px;
+          border-bottom: 3px solid #d9d9d9;
+          background-color: #d9d9d9;
+          &:hover{
+            border-bottom: 3px solid #d00b26;
+          }
+        }
+      }
+    }
+  }
+  .region-content{
+    margin: 20px 0;
   }

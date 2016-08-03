@@ -208,6 +208,14 @@ function itg_widget_block_info() {
     $blocks['featured_photo_carousel_r'] = array(
         'info' => t('Widget: Featured Photo Carousel - Rolling Slider'),
     );
+    
+    $blocks['featured_video_carousel'] = array(
+        'info' => t('Widget: Featured Video Carousel - Flexslider'),
+    );
+
+    $blocks['featured_video_carousel_r'] = array(
+        'info' => t('Widget: Featured Video Carousel - Rolling Slider'),
+    );
 
 
     $blocks['dont_miss'] = array(
@@ -344,6 +352,63 @@ function itg_widget_block_view($delta = '') {
       $data = itg_widget_featured_photo_carousel_data($info, 'rolling');
       $block['content'] = theme("featured_photo_carousel_rollingslider", array("data" => $data));
       break;
+  
+         case 'featured_video_carousel':
+            drupal_add_library('flexslider', 'flexslider');
+            libraries_load('flexslider');
+            module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
+
+            drupal_add_js('jQuery(window).load(function() {
+            jQuery(".flexslider-video").flexslider({
+            animation: "slide"
+            });
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
+
+            drupal_add_css('.flex-caption {
+              width: 96%;
+              padding: 2%;
+              left: 0;
+              bottom: 0;
+              background: rgba(0,0,0,.5);
+              color: #fff;
+              text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+              font-size: 14px;
+              line-height: 18px;
+            }', 'inline');
+
+
+      $info['view_name'] = 'photo_carousel_widget'; // view name
+      $info['page'] = 'video_carousel'; // page name
+      $data = itg_widget_featured_video_carousel_data($info, 'flexslider'); 
+      $block['content'] = theme("featured_video_carousel", array("data" => $data));
+      break;
+
+    case 'featured_video_carousel_r':
+     global $base_url;
+
+      drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+      );
+      drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+      );
+      
+      drupal_add_js("jQuery('#featuredvideo').RollingSlider({
+				showArea:'#example',
+				prev:'#jprev',
+				next:'#jnext',
+				moveSpeed:300,
+				autoPlay:false
+			});", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+      );
+      drupal_add_js('misc/jquery.js');
+      module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
+      $info['view_name'] = 'photo_carousel_widget'; // view name
+      $info['page'] = 'video_carousel'; // page name
+      $data = itg_widget_featured_video_carousel_data($info, 'rolling');
+      $block['content'] = theme("featured_video_carousel_rollingslider", array("data" => $data));
+      break;  
+  
+  
     }
     return $block;
 }
@@ -387,9 +452,14 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
     case 'photo_carousel_widget':
       if ($current_display == 'photo_carousel_list') {
-        watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
-        $queue_flag = 7; // photo carousel list widget qid
+        //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
+        $queue_flag = get_nodequeue_load_queue_by_name('photo_carousel');; // photo carousel list widget qid
+    }   
+    if ($current_display == 'video_carousel_list') {
+        //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Video Carousel video");
+        $queue_flag = get_nodequeue_load_queue_by_name('video_carousel'); // video carousel list widget qid
     }
+    
       break;
   }
     if (!empty($queues[$queue_flag])) {
@@ -410,6 +480,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
         'views_form_section_wise_draggable_content_order_page',
     );
+    
+ 
     if(in_array($form_id, $form_id_array_to_alter)) {
       $form['actions']['submit']['#value'] = t('Confirm');
     }
@@ -453,6 +525,13 @@ function itg_widget_theme() {
         ),
        'featured_photo_carousel_rollingslider' => array(
            'template' => 'templates/featured-photo-carousel-rollingslider',
+        ),
+        
+        'featured_video_carousel' => array(
+           'template' => 'templates/featured-video-carousel',
+        ),
+       'featured_video_carousel_rollingslider' => array(
+           'template' => 'templates/featured-video-carousel-rollingslider',
         ),
         'dont_miss_widget' => array(
             'template' => 'templates/dont-miss-widget',
@@ -531,6 +610,7 @@ function custom_section_wise_validate($form, &$form_state) {
 function _get_widget_name($view_name, $page_name) {
     $widget = "";
   // TODO: Use switch-case
+    
     if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
         $widget = 'section_wise_widget';
     }
@@ -545,6 +625,9 @@ function _get_widget_name($view_name, $page_name) {
     }
   else if ($page_name == 'photo_carousel_list') {
     $widget = 'photo_carousel_list_widget';
+  }
+  else if ($page_name == 'video_carousel_list') {
+    $widget = 'video_carousel_list_widget';
   }
     else if ($page_name == 'dont_miss_content') {
         $widget = 'dont_miss_content_widget';
@@ -578,3 +661,19 @@ function itg_widget_views_query_alter(&$view, &$query) {
         unset($query->where[1]['conditions'][2]);
     }
 }
+
+/**
+ * Function for returning node queue id by node queue machine name.
+ *
+ * @param string $form
+ */
+    
+function get_nodequeue_load_queue_by_name($qname){
+    try{
+       $node_queue_object  = nodequeue_load_queue_by_name($qname);
+        return isset($node_queue_object->qid)?$node_queue_object->qid:null;   
+
+    } catch(Exception $e){
+        watchdog('Node Queue Error/Warning','There is some error while accessing node queue');
+    }
+ }
