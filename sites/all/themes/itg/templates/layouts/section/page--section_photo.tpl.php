@@ -109,10 +109,36 @@ global $theme;
             </div>    
           </div>
         <?php endif; ?>
-
+        <div class="row">
+          <div class="col-md-12 itg-region">
+            <ul>
+              <li>
+                <a class="droppable" href="javascript:;">Drag Category</a>
+              </li>
+              <li>
+                <a class="droppable" href="javascript:;">Drag Category</a>
+              </li>
+              <li>
+                <a class="droppable" href="javascript:;">Drag Category</a>
+              </li>
+              <li>
+                <a class="droppable" href="javascript:;">Drag Category</a>
+              </li>
+              <li>
+                <a class="droppable" href="javascript:;">Drag Category</a>
+              </li>
+              <li>
+                <a class="droppable" href="javascript:;">Drag Category</a>
+              </li>
+              <li>
+                <a class="droppable" href="javascript:;">Drag Category</a>
+              </li>
+            </ul>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-8">
-            You can't drag any widget in main content area!
+            <div id="region-section-content" class="region-content">You can't drag any widget in main content area!</div>
           </div>
           <div class="col-md-4">
               <div class="sidebar-section-photo">
