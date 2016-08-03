@@ -28,7 +28,7 @@ function itg_widget_action_info() {
  */
 
 function itg_widget_categories_wise_node_group_form($form, &$form_state) {
-  
+  $form = array();
   $view_name = $form_state['build_info']['args'][0]->name;
   $current_display = $form_state['build_info']['args'][0]->current_display;
   $widget = _get_widget_name("views_form_" . $view_name . "_page", $current_display);
