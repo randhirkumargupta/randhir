@@ -130,6 +130,7 @@ a{
                     color: #048cb9;
                     margin-bottom: 5px;
                     text-transform: uppercase;
+                    @include font(12px);
                 }
                 p{
                     @include font(14px,18px);

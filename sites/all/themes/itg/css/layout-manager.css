@@ -294,6 +294,8 @@ a {
   color: #048cb9;
   margin-bottom: 5px;
   text-transform: uppercase;
+  font-size: 12px;
+  font-size: 0.75rem;
 }
 .dont-miss ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
