@@ -191,6 +191,6 @@ function itg_autosave_after_build($form, &$form_alter) {
  * @param array $form_state
  *   Array of submitted form data.
  */
-function itg_autosave_custom_validation($form, &$form_state) {
-  $form_state['values']['changed'] = REQUEST_TIME;
+function itg_autosave_custom_validation($form, &$form_state) {    
+  $form_state['values']['changed'] = REQUEST_TIME;  
 }

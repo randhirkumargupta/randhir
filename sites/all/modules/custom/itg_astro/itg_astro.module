@@ -176,7 +176,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
       $destination = 'manage-astro';
     }
 
-    $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';    
+    $form['actions']['submit']['#submit'][] = 'itg_astro_change_message';
     unset($form['field_numerology']['und']['#options']['_none']);
     unset($form['field_astro_frequency2']['und']['#options']['_none']);
   }
@@ -202,7 +202,7 @@ function itg_astro_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js');
   drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
   drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
-  
+
   // Add description of audi/video field to their placeholder.
   $desc = $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description'];
   $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#attributes'] = array('placeholder' => $desc);
@@ -476,7 +476,7 @@ function itg_astro_frequency_map($title, $freq, $astro_type, $nid = 0) {
  *
  * @param stdObject $node
  */
-function itg_astro_node_validate(&$node, $form, &$form_state) {  
+function itg_astro_node_validate(&$node, $form, &$form_state) {
   $result = '';
   $title = $node->title;
   $freq = $node->field_astro_frequency['und'][0]['value'];
@@ -489,5 +489,60 @@ function itg_astro_node_validate(&$node, $form, &$form_state) {
   }
   if ($result != '') {
     form_set_error('title', 'Astro for selected frequency is already filled.');
-  }  
+  }
+
+  // Validate category field
+  if (count($form_state['values']['field_story_category']['und']) == 0) {
+    form_set_error('field_story_category', 'Select Program field is required.');
+  }
+}
+
+/**
+ * Implements hook_node_presave().
+ *
+ * {@inheritdoc}. 
+ */
+function itg_astro_node_presave($node) {
+  if ($node->type == 'astro') {
+    // Remove other field data based on astro type    
+    switch ($node->field_astro_type['und'][0]['tid']) {
+
+      case '224':
+        // Collective Content.
+        unset($node->field_astro_zodiac['und']);
+        unset($node->field_astro_numerology_values['und']);
+
+        break;
+
+      case '225':
+        // Numerology Content.
+        unset($node->field_astro_zodiac['und']);
+        unset($node->field_buzz_description['und']);
+        unset($node->field_astro_video_thumbnail['und']);
+        unset($node->field_astro_video['und']);
+        unset($node->field_common_audio_file['und']);
+
+        break;
+
+      case '227':
+        // Zodiac Content
+
+        unset($node->field_buzz_description['und']);
+        unset($node->field_astro_video_thumbnail['und']);
+        unset($node->field_astro_video['und']);
+        unset($node->field_common_audio_file['und']);
+        unset($node->field_astro_numerology_values['und']);
+
+        break;
+
+      case '226':
+        // Tarot
+        unset($node->field_buzz_description['und']);
+        unset($node->field_astro_video_thumbnail['und']);
+        unset($node->field_astro_video['und']);
+        unset($node->field_common_audio_file['und']);
+        unset($node->field_astro_numerology_values['und']);
+        unset($node->field_astro_zodiac['und']);
+    }
+  }
 }

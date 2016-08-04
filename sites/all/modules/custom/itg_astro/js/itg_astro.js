@@ -792,42 +792,25 @@
       $('.node-astro-form .story-title-num').css('display', 'none');
 
       // Reset form if someone change astro type.
-      $("select[name='field_astro_type[und]']").on('change', function () {
-        var astroType = $(this).val();
+      $("select[name='field_astro_type[und]']").on('change', function () {        
         var astroText = $(this).find('option:selected').text();
         switch (astroText) {
           // Collective Content.
-          case 'Collective Content':
-            clear_form_elements('field-name-field-astro-zodiac');
-            jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
-            clear_form_elements('field-name-field-astro-numerology-values');
-            jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
-              $(this).mousedown();
-            });
+          case 'Collective Content':            
             $('.node-astro-form .story-title-zod').css('display', 'none');
             $('.node-astro-form .story-title-num').css('display', 'none');
             $('.node-astro-form .story-title-coll').css('display', 'block');
             break;
 
             // Numerology.
-          case 'Numerology':
-            clear_form_elements('field-name-field-astro-zodiac');
-            jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
-            clear_form_elements('collective-wrapper');
-            jQuery('.collective-wrapper .button-remove').mousedown();
+          case 'Numerology':            
             $('.node-astro-form .story-title-zod').css('display', 'none');
             $('.node-astro-form .story-title-coll').css('display', 'none');
             $('.node-astro-form .story-title-num').css('display', 'block');
             break;
 
             // Zodiac.
-          case 'Zodiac':
-            clear_form_elements('collective-wrapper');
-            jQuery('.collective-wrapper .button-remove').mousedown();
-            clear_form_elements('field-name-field-astro-numerology-values');
-            jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
-              $(this).mousedown();
-            });
+          case 'Zodiac':            
             var sign_name = Drupal.settings.sign;
             var i = 0;
             for (var key in sign_name) {
@@ -843,15 +826,7 @@
           case 'Tarrot':
             $('.node-astro-form .story-title-coll').css('display', 'none');
             $('.node-astro-form .story-title-num').css('display', 'none');
-            $('.node-astro-form .story-title-zod').css('display', 'none');
-            clear_form_elements('collective-wrapper');
-            jQuery('.collective-wrapper .button-remove').mousedown();
-            clear_form_elements('field-name-field-astro-numerology-values');
-            jQuery('.field-name-field-astro-numerology-values .button-remove').each(function () {
-              $(this).mousedown();
-            });
-            clear_form_elements('field-name-field-astro-zodiac');
-            jQuery('.field-name-field-astro-zodiac .button-remove').mousedown();
+            $('.node-astro-form .story-title-zod').css('display', 'none');            
         }
       });
 

@@ -100,7 +100,7 @@ function itg_autosave_form_delete($form_id) {
 function itg_autosave_nodeform($nid, $ctype) {    
   global $user;
   // Store submitted values into variable.
-  $inputs = $_POST;  
+  $inputs = $_POST;    
   // Create object for itg_auto_save class.
   $itg_auto_save = new itg_auto_save();
   // Remove empty field collections fields from submitted array.
@@ -153,7 +153,7 @@ function itg_autosave_nodeform($nid, $ctype) {
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
   }  
-  // Submit the node before save.      
+  // Submit the node before save.        
   $node = node_submit($node); 
   // Save node to save all values into node.    
   node_save($node);  
