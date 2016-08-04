@@ -120,7 +120,7 @@ a{
     padding: 30px 10px 0px 10px;
     ul{
         @include clearfix;
-        @include listing-with-image(left,15px,dm-pic,dm-detail);
+        @include listing-with-image(dont-miss-listing,left,15px,dm-pic,dm-detail);
         .dont-miss-listing{            
             @include calculate-width(1);
             padding: 0 0px 20px 0;
@@ -144,11 +144,28 @@ a{
 /*Start May we suggest css*/
 .may-be-suggest-container{
     ul{
-        @include listing-with-image(right,10px,pic,title);   
+        @include listing-with-image(may-we-suggest,right,10px,pic,title);
+        li{
+            &+li{
+                border-top: 1px solid $border-color;
+            }
+        }
     }
     @include sidebar-heading;
 }
 /*End May we suggest End*/
+/*Start CSS trending-videos Home  page*/
+.trending-videos{
+    border: 1px solid $border-color;
+    padding-top: 10px;
+    @include listing-with-image(trending-videos-list,left,10px,pic,title);
+    li{
+        &+li{
+            border-top: 1px solid $border-color;
+        }
+    }
+}
+/*End CSS trending-videos Home  page*/
 
 @media only screen and (min-width:768px){
     h1{    

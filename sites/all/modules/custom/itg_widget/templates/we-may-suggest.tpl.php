@@ -12,7 +12,7 @@ if (!empty($data)) {
     <h3><span><?php print t("May We Suggest") ?></span></h3>
     <ul>
       <?php foreach ($entity_data as $key => $entity_info) { ?>
-        <li class="may-be-suggest" id="may-be-suggest-<?php print $key ?>">
+        <li class="may-we-suggest" id="may-be-suggest-<?php print $key ?>">
           <?php if (!empty($entity_info->field_story_extra_large_image['und'][0]['uri'])) { ?>
             <a href="#" class="pic">
               <img width="88" height="66" src="<?php print image_style_url("thumbnail", $entity_info->field_story_extra_large_image['und'][0]['uri']); ?>" />
