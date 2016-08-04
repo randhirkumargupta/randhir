@@ -1104,7 +1104,12 @@ footer{
 .trending-videos{
     border: 1px solid $border-color;
     padding-top: 10px;
-    @include listing-with-image(left,10px,pic,title);
+    @include listing-with-image(trending-videos-list,left,10px,pic,title);
+    li{
+        &+li{
+            border-top: 1px solid $border-color;
+        }
+    }
 }
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
@@ -1186,7 +1191,7 @@ footer{
         }
     }
     .view-content{        
-        @include listing-with-image(left,10px,search-pic,search-detail);
+        @include listing-with-image(itg-search-list,left,10px,search-pic,search-detail);
         li{
             padding: 25px 0;
         }
@@ -1252,11 +1257,11 @@ footer{
     padding: 30px 10px 0px 10px;
     ul{
         @include clearfix;
-        @include listing-with-image(left,15px,dm-pic,dm-detail);
+        @include listing-with-image(dont-miss-listing,left,15px,dm-pic,dm-detail);
         .dont-miss-listing{            
             @include calculate-width(1);
             padding: 0 0px 20px 0;
-            border:none;
+            border:none;            
             .dm-detail{
                 h4{
                     color: #048cb9;
@@ -1477,7 +1482,12 @@ footer{
 /*Start May we suggest css*/
 .may-be-suggest-container{
     ul{
-        @include listing-with-image(right,10px,pic,title);   
+        @include listing-with-image(may-we-suggest,right,10px,pic,title);
+        li{
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+        }
     }
     @include sidebar-heading;
 }
@@ -1547,3 +1557,24 @@ footer{
     }
 } 
 /*End snap post css*/
+/*Start category wise content list css*/
+.page-category-wise-content-list{
+    @include listing-with-image(catagory-listing,left,25px,pic,detail);
+    .catagory-listing{
+        padding: 20px 0;
+        .detail{
+            h3{
+                margin-bottom: 10px;
+                font-weight: $itg-font-bold;
+            }
+            p{
+                @include font(14px,19px);
+                color: #696969;
+            }
+        }
+    }
+    .item-list{
+        @include pager;
+    }    
+}
+/*End category wise content list css*/
