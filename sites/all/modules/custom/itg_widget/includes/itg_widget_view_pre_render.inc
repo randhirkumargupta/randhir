@@ -46,6 +46,18 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  elseif ($view->name == "story_widget" && $view->current_display == 'watch_right_now') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Back To Watch Right Now Widget'), 'watch-right-now-video-widget-order-reorder');
+      $view->attachment_before = $header_content;
+    }
+  }
+  elseif ($view->name == "story_widget" && $view->current_display == 'watch_right_now_widget') {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Search Content'), 'watch-right-now-videos-list');
+      $view->attachment_before = $header_content;
+  }
   elseif ($view->name == "story_widget" && $view->current_display == 'most_popular_widget') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'most-popular-story', array('query' => array('destination' => arg(0))));
