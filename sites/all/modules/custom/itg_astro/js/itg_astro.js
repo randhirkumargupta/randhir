@@ -259,7 +259,7 @@
           },
           'field_story_category[und][hierarchical_select][selects][0]': {
             required: true,
-            validateSignName: true
+            validate_astro_category: true
           },
           'field_astro_numerology_values[und][0][field_buzz_description][und][0][value]': {
             required: {
@@ -721,6 +721,9 @@
       jQuery.validator.addMethod("validateSignName", function (value, element) {
         return validate_sign_name_value(value, element);
       }, "This field is required.");
+      jQuery.validator.addMethod("validate_astro_category", function (value, element) {
+        return validate_astro_category_name(value, element);
+      }, "This field is required.");
       jQuery.validator.addMethod("dupliNumero", function (value, element) {
         return dupli_numero_value(value, element);
       }, "This is duplicate value.");
@@ -743,10 +746,21 @@
 
         return true;
       }
-
+      
+      // Validate select program field. 
+      function validate_astro_category_name(value, element) {
+        var selected_term = $('.form-item-field-story-category-und .dropbox').find('.dropbox-selected-item').text();
+        if (selected_term.length !== 'undefined' && selected_term.length > 0) {
+          return true;
+        }
+        else {
+          return false;
+        }        
+      }
       // Validate sign name drop down.
-      function validate_sign_name_value(event, element) {
+      function validate_sign_name_value(event, element) {        
         if ($(element).val() == '_none' || $(element).val() == 'label_0') {
+          
           return false;
         }
         else {
