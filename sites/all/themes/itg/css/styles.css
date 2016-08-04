@@ -2081,6 +2081,13 @@ footer .footer-copyright {
 
 /*End snap post css*/
 /*Start category wise content list css*/
+.view-category-wise-content-list h1 {
+  font-size: 32px;
+  font-size: 2rem;
+  font-weight: 400;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
 .view-category-wise-content-list .catagory-listing {
   overflow: hidden;
   padding: 10px;

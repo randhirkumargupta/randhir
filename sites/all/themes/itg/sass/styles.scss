@@ -1581,6 +1581,11 @@ footer{
 /*End snap post css*/
 /*Start category wise content list css*/
 .view-category-wise-content-list{
+    h1{
+        @include font(32px,null,400);        
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+    }
     @include listing-with-image(catagory-listing,left,25px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
