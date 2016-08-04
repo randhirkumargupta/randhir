@@ -9,8 +9,8 @@
  * Implementation of hook_form for itg_layout_manager_form
  * {@inheritdoc}
  */
-function itg_layout_manager_page_setting_form($form, &$form_state) {
-  
+function itg_layout_manager_page_setting_form($form, &$form_state) {  
+
   $arg1 = arg(1);
   
   global $base_url;
@@ -145,7 +145,7 @@ function itg_layout_manager_filter_form_submit($form, &$form_state) {
  */
 function layout_section_widgets_search_form($form, &$form_state) {
   
-  if ($_GET['template_name'] == 'page--section_default') {
+  if ($_GET['template_name'] != 'page--front' ) {
     $arg = $_GET['section'];
   }
   

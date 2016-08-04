@@ -84,6 +84,10 @@ img {
   margin-top: 10px;
 }
 
+.mt-50 {
+  margin-top: 50px;
+}
+
 .ml-10, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes {
   margin-left: 10px;
 }
@@ -1093,7 +1097,6 @@ footer .footer-copyright {
 .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
   padding: 0 15px;
   width: 100%;
-  margin-bottom: 50px;
 }
 
 /*End CSS Top Block Grid Home Page*/
@@ -1176,6 +1179,7 @@ footer .footer-copyright {
   text-transform: uppercase;
   color: #fff;
   font-family: "Roboto", sans-serif;
+  z-index: 1;
   margin: 10px 0 0 10px;
 }
 
@@ -1231,6 +1235,7 @@ footer .footer-copyright {
   padding: 15px 15px 15px 20px;
   display: block;
   border-bottom: 1px solid #e4e4e4;
+  line-height: 19px;
 }
 .itg-listing li a:hover {
   background: #f8f8f8;
@@ -1316,24 +1321,24 @@ footer .footer-copyright {
   border: 1px solid #dddddd;
   padding-top: 10px;
 }
-.trending-videos li {
+.trending-videos .trending-videos-list {
   overflow: hidden;
   padding: 10px;
 }
-.trending-videos li + li {
-  border-top: 1px solid #dddddd;
-}
-.trending-videos li .pic {
+.trending-videos .trending-videos-list .pic {
   float: left;
   margin-right: 10px;
 }
-.trending-videos li .title {
+.trending-videos .trending-videos-list .title {
   display: block;
   overflow: hidden;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
   color: #323232;
+}
+.trending-videos li + li {
+  border-top: 1px solid #dddddd;
 }
 
 /*End CSS trending-videos Home  page*/
@@ -1425,18 +1430,15 @@ footer .footer-copyright {
   top: -11px;
   left: 9px;
 }
-.view-front-end-global-search .view-content li {
+.view-front-end-global-search .view-content .itg-search-list {
   overflow: hidden;
   padding: 10px;
 }
-.view-front-end-global-search .view-content li + li {
-  border-top: 1px solid #dddddd;
-}
-.view-front-end-global-search .view-content li .search-pic {
+.view-front-end-global-search .view-content .itg-search-list .search-pic {
   float: left;
   margin-right: 10px;
 }
-.view-front-end-global-search .view-content li .search-detail {
+.view-front-end-global-search .view-content .itg-search-list .search-detail {
   display: block;
   overflow: hidden;
   font-size: 14px;
@@ -1552,6 +1554,7 @@ footer .footer-copyright {
   text-transform: uppercase;
   color: #fff;
   font-family: "Roboto", sans-serif;
+  z-index: 1;
 }
 
 .dont-miss {
@@ -1570,18 +1573,15 @@ footer .footer-copyright {
 .dont-miss ul:after {
   clear: both;
 }
-.dont-miss ul li {
+.dont-miss ul .dont-miss-listing {
   overflow: hidden;
   padding: 10px;
 }
-.dont-miss ul li + li {
-  border-top: 1px solid #dddddd;
-}
-.dont-miss ul li .dm-pic {
+.dont-miss ul .dont-miss-listing .dm-pic {
   float: left;
   margin-right: 15px;
 }
-.dont-miss ul li .dm-detail {
+.dont-miss ul .dont-miss-listing .dm-detail {
   display: block;
   overflow: hidden;
   font-size: 14px;
@@ -1866,24 +1866,24 @@ footer .footer-copyright {
 
 /*End Story page css*/
 /*Start May we suggest css*/
-.may-be-suggest-container ul li {
+.may-be-suggest-container ul .may-we-suggest {
   overflow: hidden;
   padding: 10px;
 }
-.may-be-suggest-container ul li + li {
-  border-top: 1px solid #dddddd;
-}
-.may-be-suggest-container ul li .pic {
+.may-be-suggest-container ul .may-we-suggest .pic {
   float: right;
   margin-left: 10px;
 }
-.may-be-suggest-container ul li .title {
+.may-be-suggest-container ul .may-we-suggest .title {
   display: block;
   overflow: hidden;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
   color: #323232;
+}
+.may-be-suggest-container ul li + li {
+  border-top: 1px solid #dddddd;
 }
 .may-be-suggest-container h3 {
   text-transform: uppercase;
@@ -2028,3 +2028,72 @@ footer .footer-copyright {
 }
 
 /*End snap post css*/
+/*Start category wise content list css*/
+.page-category-wise-content-list .catagory-listing {
+  overflow: hidden;
+  padding: 10px;
+}
+.page-category-wise-content-list .catagory-listing .pic {
+  float: left;
+  margin-right: 25px;
+}
+.page-category-wise-content-list .catagory-listing .detail {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.page-category-wise-content-list .catagory-listing {
+  padding: 20px 0;
+}
+.page-category-wise-content-list .catagory-listing .detail h3 {
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.page-category-wise-content-list .catagory-listing .detail p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #696969;
+}
+.page-category-wise-content-list .item-list ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.page-category-wise-content-list .item-list ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.page-category-wise-content-list .item-list ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.page-category-wise-content-list .item-list ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.page-category-wise-content-list .item-list ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.page-category-wise-content-list .item-list ul.pager li.pager-next a, .page-category-wise-content-list .item-list ul.pager li.pager-last a, .page-category-wise-content-list .item-list ul.pager li.pager-first a, .page-category-wise-content-list .item-list ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+
+/*End category wise content list css*/

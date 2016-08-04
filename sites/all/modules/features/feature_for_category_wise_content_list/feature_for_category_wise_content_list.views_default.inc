@@ -39,7 +39,10 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '<img src="http://52.76.214.186/qa/sites/all/themes/itg/images/default_for_all.png" class=\'image-no-result\'>';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'medium',
@@ -59,7 +62,20 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_short_headline']['table'] = 'field_data_field_story_short_headline';
   $handler->display->display_options['fields']['field_story_short_headline']['field'] = 'field_story_short_headline';
   $handler->display->display_options['fields']['field_story_short_headline']['label'] = '';
+  $handler->display->display_options['fields']['field_story_short_headline']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_short_headline']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="catagory-listing">
+<div class="pic">[field_story_extra_large_image] </div>
+<div class="detail"><h3>[title]</h3>
+<p>[field_story_short_headline]</p>
+</div>
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
