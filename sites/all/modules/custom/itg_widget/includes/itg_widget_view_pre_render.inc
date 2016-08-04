@@ -151,4 +151,10 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  elseif ($view->name == "category_wise_content_list" && $view->current_display == 'page') {
+      $arg = arg();
+      $term = taxonomy_term_load($arg[1]);
+      $header_content = '<h3 class="category-heading">'.$term->name.'</h3>';
+      $view->attachment_before = $header_content;
+  }
 }
