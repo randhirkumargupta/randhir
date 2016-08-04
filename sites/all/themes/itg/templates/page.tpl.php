@@ -65,7 +65,7 @@
       if ($sidebar_first || $sidebar_second):
         $cls = 'col-md-8';
     endif; ?>
-  
+  <?php print render($page['top']); ?>
   <main id="main" class="container">
     <div class="row">
     <section id="content" class="<?php echo $cls;?>" role="main">
