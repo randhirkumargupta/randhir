@@ -759,7 +759,7 @@
       }
       // Validate sign name drop down.
       function validate_sign_name_value(event, element) {        
-        if ($(element).val() == '_none' || $(element).val() == 'label_0') {
+        if ($(element).val() == '_none') {
           
           return false;
         }
