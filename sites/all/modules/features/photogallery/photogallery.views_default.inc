@@ -3557,9 +3557,8 @@ function photogallery_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'photo landing slider';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -3577,6 +3576,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Field collection item: Image */
@@ -3585,10 +3585,11 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_images']['field'] = 'field_images';
   $handler->display->display_options['fields']['field_images']['relationship'] = 'field_gallery_image_value';
   $handler->display->display_options['fields']['field_images']['label'] = '';
+  $handler->display->display_options['fields']['field_images']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_images']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_images']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_images']['settings'] = array(
-    'image_style' => 'podcast_audio_image_preview',
+    'image_style' => 'photgallery_landing_slider_753x543',
     'image_link' => '',
   );
   /* Field: Field collection item: Caption */
@@ -3597,6 +3598,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_image_caption']['field'] = 'field_image_caption';
   $handler->display->display_options['fields']['field_image_caption']['relationship'] = 'field_gallery_image_value';
   $handler->display->display_options['fields']['field_image_caption']['label'] = '';
+  $handler->display->display_options['fields']['field_image_caption']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_image_caption']['element_label_colon'] = FALSE;
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
@@ -3616,11 +3618,48 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
   $handler->display->display_options['fields']['counter']['label'] = '';
+  $handler->display->display_options['fields']['counter']['exclude'] = TRUE;
   $handler->display->display_options['fields']['counter']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['counter']['alter']['text'] = '[counter] of [php] ';
   $handler->display->display_options['fields']['counter']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Field: Photo by */
+  $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
+  $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
+  $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
+  $handler->display->display_options['fields']['field_photo_by']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['field_photo_by']['label'] = 'Photo';
+  $handler->display->display_options['fields']['field_photo_by']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_photo_by']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<h2>[title]</h2>
+<div class="col-md-8">
+<figure>
+[field_images]
+<figcaption>[field_photo_by]</figcaption>
+</figure>
+</div>
+<div class="col-md-4">
+<div class="other-details">
+<div class="counter">
+<i class="fa fa-camera" aria-hidden="true"></i>
+[counter]
+</div>
+<div class="caption">[field_image_caption]</div>
+</div>
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'row';
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
