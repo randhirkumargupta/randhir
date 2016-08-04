@@ -294,6 +294,8 @@ a {
   color: #048cb9;
   margin-bottom: 5px;
   text-transform: uppercase;
+  font-size: 12px;
+  font-size: 0.75rem;
 }
 .dont-miss ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
@@ -384,6 +386,7 @@ a {
     top: 0;
     left: 0;
     width: 214px;
+    z-index: 1;
   }
   .itg-layout-container .top-colum-1 .droppable {
     height: 633px;
@@ -411,6 +414,10 @@ a {
   }
   .itg-layout-container .itg-common-section .droppable {
     height: 382px;
+    overflow: hidden;
+  }
+  .itg-layout-container .itg-common-section.row-3 .droppable {
+    height: 320px;
     overflow: hidden;
   }
 
