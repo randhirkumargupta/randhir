@@ -46,6 +46,29 @@
             $('#reset_button').click(function () {
                 $('#edit-reset').trigger('click');
             });
+            
+            $(function () {
+                $("#edit-ds-changed-datepicker-popup-0").datepicker({
+                   dateFormat : 'yy-mm-dd',
+                   changeMonth: true,
+                   changeYear : true,
+                    onSelect: function (selected) {
+                        var dt = new Date(selected);
+                        dt.setDate(dt.getDate() + 1);
+                        $("#edit-ds-changed-max-datepicker-popup-0").datepicker("option", "minDate", dt);
+                    }
+                });
+                $("#edit-ds-changed-max-datepicker-popup-0").datepicker({
+                    dateFormat : 'yy-mm-dd',
+                    changeMonth: true,
+                    changeYear : true,
+                    onSelect: function (selected) {
+                        var dt = new Date(selected);
+                        dt.setDate(dt.getDate() - 1);
+                        $("#edit-ds-changed-datepicker-popup-0").datepicker("option", "maxDate", dt);
+                    }
+                });
+            });
         }
 
     };
