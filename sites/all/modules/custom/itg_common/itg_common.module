@@ -405,7 +405,7 @@ function itg_common_node_presave($node) {
     case 'astro':
     case 'recipe':
     case 'poll':
-    case 'mega_review_critic':
+    case 'mega_review_critic':      
       if ($node->op == 'Publish') {        
         $node->status = 1;
       }      
