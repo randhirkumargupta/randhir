@@ -1487,11 +1487,33 @@ footer{
             &+li{
                border-top: 1px solid $border-color;
            }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            } 
         }
     }
     @include sidebar-heading;
 }
 /*End May we suggest End*/
+
+/*Start top-takes-video suggest css*/
+.top-takes-video-container{
+    ul{
+        @include listing-with-image(top-takes-video,right,10px,pic,title);
+        li{
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            } 
+        }
+    }
+    @include sidebar-heading;
+}
+/*End top-takes-video suggest End*/
+
+
 .page-node-add-ugc{
     .messages.error.file-upload-js-error{
         margin-bottom: 20px;
@@ -1558,7 +1580,12 @@ footer{
 } 
 /*End snap post css*/
 /*Start category wise content list css*/
-.page-category-wise-content-list{
+.view-category-wise-content-list{
+    h1{
+        @include font(32px,null,400);        
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+    }
     @include listing-with-image(catagory-listing,left,25px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
@@ -1578,3 +1605,28 @@ footer{
     }    
 }
 /*End category wise content list css*/
+/*Start anchors listing css*/
+.view-widget-anchors-listing{
+    @include listing-with-image(anchor-listing,left,22px,pic,detail);
+    .anchor-listing{
+        padding:20px 0;
+        border-bottom:1px solid $border-color;
+    .detail{
+            h3{
+                margin-bottom: 10px;
+                font-weight: $itg-font-bold;
+            }
+            p{
+                @include font(14px,19px);
+                color: #323232;
+                @include itg-font($itg-roboto);
+            }
+        }
+    }
+    .anchor-list:last-child{
+        .anchor-listing{
+            border-bottom:none;
+        }
+    }
+}
+/*End anchors listing css*/
