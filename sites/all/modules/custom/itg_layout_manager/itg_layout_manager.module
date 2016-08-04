@@ -123,27 +123,31 @@ function itg_layout_manager_block_view($delta = '') {
       $data['layout_form'] = drupal_render($layout_form); 
       $block['content'] = theme('layout_manager_block', array('data' => $data));
     break;
-    
-    case 'layout_widget_list_block':
-      
-      $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);
-      
+    // for admin widgets list in side bar
+    case 'layout_widget_list_block':      
+      $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);      
       if (empty($template_id)) {
         $widget_array = get_all_widgets_list_by_setting_page();
-      }
-      
+      }      
       $block['content'] = theme('layout_widgets_list_block', array('data' => $widget_array));
     break;
     
     case 'layout_button_block':
-     $block['content'] = theme('layout_buttons_block', array('data' => ''));
-      
+     $block['content'] = theme('layout_buttons_block', array('data' => ''));      
     break;
-  
+    // for section list in admin side bar
     case 'layout_section_widgets':
       $section_widgets_form = drupal_get_form('layout_section_widgets_search_form');
       $data['section_widgets_form'] = drupal_render($section_widgets_form);
-      $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name']);
+      //condition base change widget
+      if ($_GET["template_name"] == 'page--section_photo' || $_GET["template_name"] == 'page--section_photo') {
+        $widgets_type = 'photo_list_of_category';
+      }
+      else {
+       $widgets_type = 'section_wise_order';
+      }
+      
+      $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
         
       $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
     break;

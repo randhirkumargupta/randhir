@@ -13,4 +13,5 @@ features[features_api][] = api:2
 features[user_permission][] = execute itg_widget_categories_wise_node_group
 features[views_view][] = section_wise_content_ordering_list
 features[views_view][] = section_wise_draggable_content_order
+features[views_view][] = widget_anchors_listing
 features_exclude[dependencies][ctools] = ctools

@@ -76,6 +76,10 @@ a {
   margin-top: 50px;
 }
 
+.dropped {
+  background: #fff;
+}
+
 /*Start CSS Top Story Home Page*/
 .tab-buttons {
   zoom: 1;
@@ -115,16 +119,12 @@ a {
   border-top: 3px solid #a00606;
 }
 
-.tab-data {
-  border: 1px solid #e4e4e4;
-  height: 635px;
-  overflow-y: auto;
-}
 .tab-data.tab-data-2 {
   display: none;
 }
 
 .itg-listing {
+  border: 1px solid #dddddd;
   list-style: none;
 }
 .itg-listing li {
@@ -161,11 +161,28 @@ a {
 .itg-featured-news {
   border: 1px solid #e4e4e4;
   height: 672px;
+  overflow: hidden;
 }
 
+/*Start CSS Featured New Home page*/
+.featured-news {
+  zoom: 1;
+  padding-bottom: 10px;
+  margin: 0 -5px;
+}
+.featured-news:before, .featured-news:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.featured-news:after {
+  clear: both;
+}
 .featured-news .featured-post {
   float: left;
   width: 50%;
+  padding: 5px;
 }
 .featured-news .featured-post:hover a {
   color: #193984;
@@ -180,6 +197,7 @@ a {
   margin-bottom: 10px;
 }
 
+/*End CSS Featured New Home page*/
 /*End CSS*/
 /*Start CSS Top AD*/
 .top-ad {
@@ -218,6 +236,19 @@ a {
 }
 
 /*End CSS section story Home page*/
+.widget-title {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: #a00606;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 7px;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+
 /*Start Dont miss Home page css*/
 .dont-miss {
   background: #f3f3f3;
@@ -263,6 +294,8 @@ a {
   color: #048cb9;
   margin-bottom: 5px;
   text-transform: uppercase;
+  font-size: 12px;
+  font-size: 0.75rem;
 }
 .dont-miss ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
@@ -272,8 +305,79 @@ a {
 }
 
 /*End Dont miss Home page css*/
+/*Start May we suggest css*/
+.may-be-suggest-container ul li {
+  overflow: hidden;
+  padding: 10px;
+}
+.may-be-suggest-container ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.may-be-suggest-container ul li .pic {
+  float: right;
+  margin-left: 10px;
+}
+.may-be-suggest-container ul li .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.may-be-suggest-container h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  position: relative;
+}
+.may-be-suggest-container h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+.may-be-suggest-container h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
+
+/*End May we suggest End*/
 @media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 40px;
+    line-height: 46px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 29px;
+    line-height: 34px;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  h4 {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
   /*Start CSS itg-layout-container */
+  .itg-layout-container {
+    min-width: 1170px;
+  }
   .itg-layout-container .itg-widget, .itg-layout-container .itg-widget-child {
     position: relative;
   }
@@ -282,24 +386,39 @@ a {
     top: 0;
     left: 0;
     width: 214px;
+    z-index: 1;
   }
   .itg-layout-container .top-colum-1 .droppable {
-    height: 635px;
+    height: 633px;
+    overflow: hidden;
   }
   .itg-layout-container .top-colum-2 .droppable {
     height: 671px;
+    overflow: hidden;
+  }
+  .itg-layout-container .top-colum-3 .itg-widget-parent .droppable {
+    height: 320px;
   }
   .itg-layout-container .top-colum-3 .droppable {
-    height: 308px;
+    height: 272px;
+    overflow: hidden;
   }
   .itg-layout-container .top-colum-3 .itg-widget:first-child {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  .itg-layout-container.itg-admin .gray-bg-layout {
+    background-color: #f1f1f1;
   }
   .itg-layout-container.itg-admin .itg-widget {
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
   }
   .itg-layout-container .itg-common-section .droppable {
     height: 382px;
+    overflow: hidden;
+  }
+  .itg-layout-container .itg-common-section.row-3 .droppable {
+    height: 320px;
+    overflow: hidden;
   }
 
   /*Start CSS Top Block Grid Home Page*/
@@ -325,6 +444,7 @@ a {
   /*Start CSS Featured-news Home Page*/
   .featured-news {
     padding: 5px;
+    border: 1px solid #dddddd;
     margin: 0;
   }
   .featured-news .featured-post {

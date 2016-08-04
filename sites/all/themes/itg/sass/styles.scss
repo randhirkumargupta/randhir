@@ -42,6 +42,9 @@ img{
 .mt-10{
     margin-top: 10px;
 }
+.mt-50{
+  margin-top: 50px;
+}
 .ml-10{
     margin-left: 10px;
 }
@@ -237,6 +240,9 @@ input[type="text"], select, input[type="password"]{
     .navigation{    
         background: $red-bg;
         display:none;
+        .menu{
+         @include clearfix;   
+        }
         ul{
             li a {
                 border-top: 1px solid #900505;
@@ -841,6 +847,10 @@ input[type="text"], select, input[type="password"]{
 .tv-schedule-news{border: 1px solid #d9d9d9;}
 .tv-schedule-news .tv-schedule-task span{padding: 10px; border: 1px solid #d9d9d9; overflow: hidden; height: 100px;}
 
+section.sidebar{
+    border: 1px solid #ddd;
+    min-height: 600px;
+}
 /*Start CSS footer section*/
 footer{
     margin-top:40px;
@@ -973,8 +983,7 @@ footer{
 .top-block{
     .top-colum-1, .top-colum-2, .top-colum-3{
         padding: 0 15px;
-        width: 100%;
-        margin-bottom: 50px;
+        @include calculate-width(1);        
     }
 }
 /*End CSS Top Block Grid Home Page*/
@@ -1076,10 +1085,6 @@ footer{
             margin-bottom: 10px;
         }
     }
-}
-.video-n-magazine{
-    border: 1px solid #e4dfdf;
-    height: 800px;
 }
 /*End CSS Featured New Home page*/
 /*Start CSS section story Home page*/
@@ -1257,7 +1262,7 @@ footer{
                     color: #048cb9;
                     margin-bottom: 5px;
                     text-transform: uppercase;
-                    @include font(14px);
+                    @include font(12px,null,700);
                 }
                 p{
                     @include font(14px,18px);
@@ -1470,10 +1475,6 @@ footer{
 
 /*End Story page css*/
 /*Start May we suggest css*/
-section.sidebar{
-    border: 1px solid #ddd;
-    min-height: 600px;
-}
 .may-be-suggest-container{
     ul{
         @include listing-with-image(right,10px,pic,title);   
