@@ -84,6 +84,10 @@ img {
   margin-top: 10px;
 }
 
+.mt-50 {
+  margin-top: 50px;
+}
+
 .ml-10, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes {
   margin-left: 10px;
 }
@@ -305,6 +309,18 @@ input[type="text"], select, input[type="password"] {
 .header .navigation {
   background: #a00606;
   display: none;
+}
+.header .navigation .menu {
+  zoom: 1;
+}
+.header .navigation .menu:before, .header .navigation .menu:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.header .navigation .menu:after {
+  clear: both;
 }
 .header .navigation ul li a {
   border-top: 1px solid #900505;
@@ -937,6 +953,11 @@ input[type="text"], select, input[type="password"] {
   height: 100px;
 }
 
+section.sidebar {
+  border: 1px solid #ddd;
+  min-height: 600px;
+}
+
 /*Start CSS footer section*/
 footer {
   margin-top: 40px;
@@ -1076,7 +1097,6 @@ footer .footer-copyright {
 .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
   padding: 0 15px;
   width: 100%;
-  margin-bottom: 50px;
 }
 
 /*End CSS Top Block Grid Home Page*/
@@ -1267,11 +1287,6 @@ footer .footer-copyright {
   float: none;
   width: 100%;
   margin-bottom: 10px;
-}
-
-.video-n-magazine {
-  border: 1px solid #e4dfdf;
-  height: 800px;
 }
 
 /*End CSS Featured New Home page*/
@@ -1586,8 +1601,9 @@ footer .footer-copyright {
   color: #048cb9;
   margin-bottom: 5px;
   text-transform: uppercase;
-  font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 .dont-miss ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
@@ -1853,11 +1869,6 @@ footer .footer-copyright {
 
 /*End Story page css*/
 /*Start May we suggest css*/
-section.sidebar {
-  border: 1px solid #ddd;
-  min-height: 600px;
-}
-
 .may-be-suggest-container ul li {
   overflow: hidden;
   padding: 10px;

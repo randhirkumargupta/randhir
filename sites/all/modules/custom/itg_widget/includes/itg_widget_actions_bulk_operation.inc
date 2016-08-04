@@ -43,6 +43,8 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
       '#weight' => -1,
       '#attributes' => array("style" => array("display:none")),
   );
+  
+  
   // Adding extra field for related content.
   if ($current_display == 'big_story_format' && $_GET['type'] == 'breaking_news') {
     $form['related_content'] = array(

@@ -10,10 +10,10 @@
         ?>
         <?php if ($count == 0) : ?>
             <?php if (!empty($extra_large_image_url)) { ?>
-                <img src="<?php print $extra_large_image_url; ?>">
+                <img style="height:208px; width:370px" src="<?php print $extra_large_image_url; ?>">
             <?php }
             else { ?>
-                <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                <img style="height:208px; width:370px" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
             <?php } ?>
             <h3><a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>"><?php print $entity->title; ?></a></h3>
         <?php endif; ?>

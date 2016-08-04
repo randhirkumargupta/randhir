@@ -153,7 +153,7 @@ function itg_autosave_nodeform($nid, $ctype) {
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
   }  
-  // Submit the node before save.    
+  // Submit the node before save.      
   $node = node_submit($node); 
   // Save node to save all values into node.    
   node_save($node);  
