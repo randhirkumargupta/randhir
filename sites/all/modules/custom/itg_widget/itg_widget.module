@@ -449,6 +449,10 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
             $queue_flag = 3; // home page feature qid
             break;
+        case 'widget_anchors_listing':
+           // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+            $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('widget_anchor'); // anchor widget nodequeue
+            break;
 
     case 'photo_carousel_widget':
       if ($current_display == 'photo_carousel_list') {
@@ -553,9 +557,9 @@ function get_required_data_from_entity_id($entity_id) {
 function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   switch ($form['#id']) {
     case 'views-exposed-form-home-page-feature-widget-page-1':
-      $form['title']['#attributes']['placeholder'] = t('Story Title');
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
       //$form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Story ID');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
       //$form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
       break;
     case 'views-exposed-form-story-widget-most-popular':
@@ -585,6 +589,10 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      break;
+    case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
+      $form['title']['#attributes']['placeholder'] = t('Anchor name');
+      $form['nid']['#attributes']['placeholder'] = t('Anchor ID');
       break;
     case 'views-exposed-form-section-wise-draggable-content-order-page':
       $form['title']['#attributes']['placeholder'] = t('Content Title');

@@ -76,7 +76,7 @@ function itg_widget_views_pre_render(&$view) {
       $header_content .= l(t('Back to Section Ordering Widget'), 'section-wise-content-ordering-list', array('query' => array('destination' => arg(0))));
       $view->attachment_before = $header_content;
     }
-    if(isset($_GET['category_tid']) && $_GET['category_tid'] == 'All') {
+    if (isset($_GET['category_tid']) && $_GET['category_tid'] == 'All') {
       unset($view->result);
     }
   }
@@ -84,7 +84,7 @@ function itg_widget_views_pre_render(&$view) {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'section-wise-draggable-content-order');
     $view->attachment_before = $header_content;
-    if(!isset($_GET['category_tid'])) {
+    if (!isset($_GET['category_tid'])) {
       unset($view->result);
     }
   }
@@ -122,6 +122,20 @@ function itg_widget_views_pre_render(&$view) {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Back to dont miss widget'), 'dont-miss-widget-list');
+      $view->attachment_before = $header_content;
+    }
+  }
+  elseif ($view->name == "widget_anchors_listing" && $view->current_display == 'anchors_listing_page') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Back To Anchor List Widget'), 'anchor-list-order-reorder');
+      $view->attachment_before = $header_content;
+    }
+  }
+  elseif ($view->name == "widget_anchors_listing" && $view->current_display == 'anchors_listing_widget') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Search Content'), 'anchor-list');
       $view->attachment_before = $header_content;
     }
   }
