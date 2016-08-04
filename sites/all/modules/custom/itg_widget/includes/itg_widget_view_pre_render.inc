@@ -39,9 +39,21 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  elseif ($view->name == "story_widget" && $view->current_display == 'top_takes_video') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Back To Top Takes Videos Widget'), 'top-takes-video-widget-order-reorder');
+      $view->attachment_before = $header_content;
+    }
+  }
   elseif ($view->name == "story_widget" && $view->current_display == 'most_popular_widget') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'most-popular-story', array('query' => array('destination' => arg(0))));
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "story_widget" && $view->current_display == 'top_takes_video_widget') {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= l(t('Search Content'), 'top-takes-videos-list');
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "home_page_feature_widget" && $view->current_display == 'page_2') {
