@@ -4,7 +4,7 @@
         $entity_info = get_required_data_from_entity_id($entity_data['entity_id']);
         $entity = $entity_info[$entity_data['entity_id']];
         ?>
-        <li class="<?php print $entity->type ?>">
+        <li class="<?php print $entity->type ?> trending-videos-list">
             <?php if (!empty($entity->field_story_extra_large_image['und'][0]['uri'])) { ?>            
                 <a class="pic" href="#" title="<?php (!empty($entity->field_story_extra_large_image['und'][0]['title'])) ? print $entity->field_story_extra_large_image['und'][0]['title']  : print $entity->field_story_extra_large_image['und'][0]['filename']  ?>">
                     <img src="<?php print image_style_url("thumbnail", $entity->field_story_extra_large_image['und'][0]['uri']); ?>" />

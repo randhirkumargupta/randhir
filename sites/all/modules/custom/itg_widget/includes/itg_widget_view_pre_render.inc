@@ -39,9 +39,21 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  elseif ($view->name == "story_widget" && $view->current_display == 'top_takes_video') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Back To Top Takes Videos Widget'), 'top-takes-video-widget-order-reorder');
+      $view->attachment_before = $header_content;
+    }
+  }
   elseif ($view->name == "story_widget" && $view->current_display == 'most_popular_widget') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'most-popular-story', array('query' => array('destination' => arg(0))));
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "story_widget" && $view->current_display == 'top_takes_video_widget') {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= l(t('Search Content'), 'top-takes-videos-list');
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "home_page_feature_widget" && $view->current_display == 'page_2') {
@@ -76,7 +88,7 @@ function itg_widget_views_pre_render(&$view) {
       $header_content .= l(t('Back to Section Ordering Widget'), 'section-wise-content-ordering-list', array('query' => array('destination' => arg(0))));
       $view->attachment_before = $header_content;
     }
-    if(isset($_GET['category_tid']) && $_GET['category_tid'] == 'All') {
+    if (isset($_GET['category_tid']) && $_GET['category_tid'] == 'All') {
       unset($view->result);
     }
   }
@@ -84,7 +96,7 @@ function itg_widget_views_pre_render(&$view) {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'section-wise-draggable-content-order');
     $view->attachment_before = $header_content;
-    if(!isset($_GET['category_tid'])) {
+    if (!isset($_GET['category_tid'])) {
       unset($view->result);
     }
   }
@@ -124,5 +136,25 @@ function itg_widget_views_pre_render(&$view) {
       $header_content .= l(t('Back to dont miss widget'), 'dont-miss-widget-list');
       $view->attachment_before = $header_content;
     }
+  }
+  elseif ($view->name == "widget_anchors_listing" && $view->current_display == 'anchors_listing_page') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Back To Anchor List Widget'), 'anchor-list-order-reorder');
+      $view->attachment_before = $header_content;
+    }
+  }
+  elseif ($view->name == "widget_anchors_listing" && $view->current_display == 'anchors_listing_widget') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Search Content'), 'anchor-list');
+      $view->attachment_before = $header_content;
+    }
+  }
+  elseif ($view->name == "category_wise_content_list" && $view->current_display == 'page') {
+      $arg = arg();
+      $term = taxonomy_term_load($arg[1]);
+      $header_content = '<h3 class="category-heading">'.$term->name.'</h3>';
+      $view->attachment_before = $header_content;
   }
 }
