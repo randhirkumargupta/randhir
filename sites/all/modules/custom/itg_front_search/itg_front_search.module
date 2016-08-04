@@ -28,7 +28,7 @@ function itg_front_search_menu() {
  * {@inheritdoc}
  */
 function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
-
+  global $user;
   if ($user->uid != '1') {
     // hide source relation and type field from other users 
     $form_id_arr = array('videogallery_node_form', 'story_node_form', 'photogallery_node_form', 'recipe_node_form');
@@ -75,7 +75,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       '#date_year_range' => '-1:+1',
       '#prefix' => '<div class="caln">',
       '#attributes' => array(
-      //'readonly' => 'readonly'
+      'readonly' => 'readonly'
       ),
     );
 
@@ -86,7 +86,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       '#date_year_range' => '-1:+1',
       '#suffix' => '</div>',
       '#attributes' => array(
-      //'readonly' => 'readonly'
+      'readonly' => 'readonly'
       ),
     );
   }
