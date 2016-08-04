@@ -3852,7 +3852,7 @@ div.node #comments h2 {
 }
 
 .move-link:after {
-  content: '\f191';
+  content: '\f056';
 }
 
 .sidebar-trigger {
@@ -5715,4 +5715,8 @@ div.node #comments h2 {
 
 .region-content {
   margin: 20px 0;
+}
+
+.views-form .form-actions {
+  margin-top: 20px;
 }

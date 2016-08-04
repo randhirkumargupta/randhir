@@ -10,9 +10,13 @@
 </div>
 <div id="videoupload">
   <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
+  <div class="browse-ftp">
+  <?php print drupal_render($form['video_browse_select']); ?>
+</div>
   <?php print drupal_render($form['upload']); ?>
   <?php print drupal_render($form['field_videogallery_video_upload']); ?>
 </div>
+
 <div id="Imageupload">
   <h2 class="story-title"><?php print t('Image'); ?></h2>
     <?php print drupal_render($form['field_story_extra_large_image']); ?> 
