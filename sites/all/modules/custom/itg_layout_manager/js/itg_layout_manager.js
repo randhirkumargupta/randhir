@@ -23,7 +23,9 @@
                     appendTo: "body",
                     helper: "clone",
                     drag: function (event, ui) {                       
-                        widget_name = $(this).attr('data-widget');                    
+                        widget_name = $(this).attr('data-widget');
+                        // for category tab
+                        category_name_tab = $(this).attr('id');
                     }
                 });
                 
@@ -31,11 +33,23 @@
                     drop: function (event, ui) {
                         
                         $(this).addClass("dropped").find("p").hide();
-                
+                        // content block id for display content widget
                         var block_name = $(this).attr('id');
+                        // tamplate section value
                         var section_name = $('#edit-section').val();
+                        // template name
                         var template_name = $('#edit-template-name').val();
-
+                        
+                        //if content place is define
+                        var display_area = $(this).attr('data-tabwidget_display');
+                        
+                        if (display_area) {
+                          var content_place = display_area;  
+                        }
+                        else {
+                          var content_place = block_name;  
+                        }
+                        
                         var base_url = settings.itg_story.settings.base_url;
 
                         $.ajax({
@@ -43,10 +57,16 @@
                               method: 'post',
                               data: {block_name:block_name, widget_name:widget_name, section_name:section_name, template_name:template_name}, 
                               beforeSend:function(){
-                                $('#'+block_name).html('<img class="widget-loader" align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');                                
+                                
+                                $('#'+content_place).html('<img class="widget-loader" align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');                                
                               },
                               success: function(data) {
-                                 $('#'+block_name).html(data);  
+                                 // for category tab widget 
+                                 if (display_area) {                                     
+                                    $('#'+block_name).html(category_name_tab);
+                                 }
+                                 
+                                 $('#'+content_place).html(data);  
                               }
                         });
                     }
@@ -129,18 +149,25 @@
                  
                  $('#layout-section-save').click(function() {
                     var base_url = settings.itg_story.settings.base_url;
+                    // category value
                     var category_name = $('#edit-section-name').val();
+                    // tamplate section value
                     var section_name = $('#edit-section').val();
+                    // tamplate name
                     var template_name = $('#edit-template-name').val();
+                    // widget name for content display
+                    var widgets_type = $(this).attr('data-tabwidget');
+                    
                     if (category_name) {
                         $.ajax({
                               url: base_url + "/section-widgets-ajax/insert",
                               method: 'post',
-                              data: {cid:1, section_name:section_name, template_name:template_name, category_name:category_name},
+                              data: {cid:1, section_name:section_name, template_name:template_name, category_name:category_name, widgets_type:widgets_type},
                               beforeSend:function(){                                
                                 $('#section_widgets_list').html('<img class="widget-loader" align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                               },
                               success: function(data) {
+                                 // display category list in block
                                  $('#section_widgets_list').html(data);
                                  draggable_widgets();
                               }
