@@ -750,7 +750,7 @@
       // Validate select program field. 
       function validate_astro_category_name(value, element) {
         var selected_term = $('.form-item-field-story-category-und .dropbox').find('.dropbox-selected-item').text();
-        if (selected_term.length !== 'undefined' && selected_term.length > 0) {
+        if (selected_term !== 'undefined' && selected_term.length > 0) {
           return true;
         }
         else {
