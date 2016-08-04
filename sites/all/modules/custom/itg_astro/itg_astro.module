@@ -115,7 +115,7 @@ function itg_astro_set_sign_name() {
  * {@inheritdoc}.
  */
 function itg_astro_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'astro_node_form') {
+  if ($form_id == 'astro_node_form') {    
     $form['#after_build'][] = 'itg_astro_after_build';
     itg_astro_set_sign_name();
 
@@ -168,6 +168,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
       ),
     );
     $form['field_astro_type']['und']['#title'] = t('Astro Type <span class="form-required" title="This field is required."> *</span>');
+    $form['field_story_category']['und']['#title'] = t('Select Program <span class="form-required" title="This field is required."> *</span>');
 
     if (!empty($_REQUEST['destination'])) {
       $destination = $_REQUEST['destination'];

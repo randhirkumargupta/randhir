@@ -257,7 +257,7 @@
             },
             maxlength: 500
           },
-          'field_story_category[und][]': {
+          'field_story_category[und][hierarchical_select][selects][0]': {
             required: true,
             validateSignName: true
           },
@@ -746,7 +746,7 @@
 
       // Validate sign name drop down.
       function validate_sign_name_value(event, element) {
-        if ($(element).val() == '_none') {
+        if ($(element).val() == '_none' || $(element).val() == 'label_0') {
           return false;
         }
         else {
