@@ -735,6 +735,10 @@
       $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
     });
     
+    jQuery('body').on('click','.sidebar-trigger',function(){
+      jQuery(this).parent().toggleClass('active');
+    });
+    
   };
 })(jQuery);
 
@@ -763,9 +767,7 @@ jQuery(document).ready(function(){
         jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
     }
     
-    jQuery('.sidebar-trigger').click(function () {
-      jQuery(this).parent().toggleClass('active');
-    });
+    
     jQuery('.saved-search-link').click(function (e) {
         e.stopPropagation();
         jQuery(this).parent().parent().find('.my-saved-search').slideToggle();
@@ -785,7 +787,10 @@ jQuery(document).ready(function(){
         jQuery(this).parent().remove();
     });
     // end of code
-   
+    
+    //if(jQuery('.block-itg-widget').children().length > 0){
+       // jQuery('.itg-widget').removeClass('gray-bg-layout');
+    //}
     
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {

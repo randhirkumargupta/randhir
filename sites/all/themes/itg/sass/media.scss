@@ -305,3 +305,36 @@
 
 }
 /*End CSS Desktop version*/
+
+
+@media only screen and (min-width:768px) and (max-width:1199px){
+    .header{ 
+        .top-nav{ 
+            .main-nav {
+                li {
+                    a{
+                        padding: 0 15px;
+                        @include font(20px);
+                    }
+                    &:nth-child(3) a:before{
+                        top: -6px;
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
+    .top-block .top-colum-2{
+       @include calculate-width(1);
+    }
+    .top-block .top-colum-1, .top-block .top-colum-3{
+       @include calculate-width(2);
+    }
+    .big-news .big-story-col-1, .big-news .big-story-col-2{
+        @include calculate-width(1);
+    }
+    .big-news .big-story-col-2{
+        padding-top: 20px;
+        padding-left: 15px;   
+    }
+}
