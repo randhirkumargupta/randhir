@@ -274,7 +274,8 @@ function itgadmin_breadcrumb($vars) {
      
      $story_tab = array('in-queue-story','published-story','expired-story', 'unpublished-story', 'archive-story');
      $photogallery_tab = array('in-queue-photogallery','published-photogallery','unpublished-photogallery', 'archive-photogallery');
-     $bolg_tab = array('published-blogs','unpublished-blogs','in-queue-blogs', 'archive-blogs');
+     $bolg_tab = array('published-blogs','unpublished-blogs', 'my-queue-blogs', 'in-queue-blogs', 'archive-blogs');
+     $podcast_tab = array('published-podcast','unpublished-podcast', 'my-unpublished-podcast', 'mydraft-podcast', 'my-published-podcast', 'my-queue-podcast', 'my-queue-podcast', 'in-queue-podcast', 'archive-podcast', 'my-rejected-podcast');
      
      //story tab breadcrumb
      if (in_array($content_url, $story_tab)) {
@@ -295,6 +296,11 @@ function itgadmin_breadcrumb($vars) {
       return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
     }
 
+     //podcast tab breadcrumb
+     if (in_array($content_url, $podcast_tab)) {
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
+    }
 
   }
 

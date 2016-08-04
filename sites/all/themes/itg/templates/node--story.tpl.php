@@ -1,4 +1,6 @@
-<?php if (!empty($content)): ?>
+<?php if (!empty($content)):
+   global $base_url;
+  ?>
 <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { 
             $class_buzz = 'buzz-feedback';
         }
@@ -124,7 +126,7 @@
               <div class="snap-post">
                   <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
 
-                  <div class="agbutton"><button>Agree</button> <button>DisAgree</button> <a href="#">More from Snap post</a></div>
+                  <div class="agbutton"><button>Agree</button> <button>DisAgree</button> <a href="<?php echo $base_url;?>/snappost">More from Snap post</a></div>
               </div>
 
               <div class="tags">
