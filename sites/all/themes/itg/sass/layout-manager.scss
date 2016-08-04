@@ -130,6 +130,7 @@ a{
                     color: #048cb9;
                     margin-bottom: 5px;
                     text-transform: uppercase;
+                    @include font(12px);
                 }
                 p{
                     @include font(14px,18px);
@@ -178,6 +179,7 @@ a{
                 top: 0;
                 left: 0;
                 width: 214px;
+                 z-index: 1;
             }
         }
         .top-colum-1{
@@ -218,6 +220,12 @@ a{
             .droppable{
                 height: 382px;
                 overflow: hidden;
+            }
+            &.row-3{
+                .droppable{
+                    height: 320px;
+                    overflow: hidden;
+                }
             }
         }
     }  

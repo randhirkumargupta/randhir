@@ -788,9 +788,9 @@ jQuery(document).ready(function(){
     });
     // end of code
     
-    //if(jQuery('.block-itg-widget').children().length > 0){
-       // jQuery('.itg-widget').removeClass('gray-bg-layout');
-    //}
+    if(jQuery('.block-itg-widget').children().length > 0){
+        jQuery('.itg-widget').removeClass('gray-bg-layout');
+    }
     
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {

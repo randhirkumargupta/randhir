@@ -42,6 +42,9 @@ img{
 .mt-10{
     margin-top: 10px;
 }
+.mt-50{
+  margin-top: 50px;
+}
 .ml-10{
     margin-left: 10px;
 }
@@ -980,8 +983,7 @@ footer{
 .top-block{
     .top-colum-1, .top-colum-2, .top-colum-3{
         padding: 0 15px;
-        width: 100%;
-        margin-bottom: 50px;
+        @include calculate-width(1);        
     }
 }
 /*End CSS Top Block Grid Home Page*/
