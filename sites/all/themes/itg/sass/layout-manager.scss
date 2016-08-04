@@ -149,11 +149,27 @@ a{
             &+li{
                 border-top: 1px solid $border-color;
             }
+            &:last-child{
+                border-bottom: 1px solid $border-color;
+            }            
         }
     }
     @include sidebar-heading;
 }
 /*End May we suggest End*/
+/*Start top-takes-video suggest css*/
+.top-takes-video-container{
+    ul{
+        @include listing-with-image(top-takes-video,right,10px,pic,title);
+        li{
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+        }
+    }
+    @include sidebar-heading;
+}
+/*End top-takes-video suggest End*/
 /*Start CSS trending-videos Home  page*/
 .trending-videos{
     border: 1px solid $border-color;

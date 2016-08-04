@@ -8,8 +8,14 @@
     Drupal.behaviors.itg_podcast_upload = {
         context: null,
         attach: function(context) {
-            var that = this,
-            uploader = $('.plupload-element', context).pluploadQueue();
+            var that = this;
+            try {
+                var uploader = $('.plupload-element', context).pluploadQueue();
+            }
+            catch (err) {
+                
+            }
+                    
             
             this.context = context;
             
