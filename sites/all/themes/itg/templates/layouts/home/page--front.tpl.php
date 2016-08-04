@@ -119,7 +119,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     </div>
     <?php endif; ?>
 
-    <div class="row">
+    <div class="row row-1">
         <div class="top-block mt-50">
 
             <div class="top-colum-2">
@@ -232,10 +232,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 </div>
             </div>
         </div>
-    <div class="row itg-common-section">
+    <div class="row row-2 itg-common-section mt-50">
 
         <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="itg-widget <?php print $gray_bg_layout;?> mt-50">
+            <div class="itg-widget <?php print $gray_bg_layout;?>">
                 <div class="droppable common-news" id="itg-block-7">
                    <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
                     <?php if (isset($widget_data['itg-block-7']['block_title'])) {?>
@@ -253,7 +253,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="itg-widget <?php print $gray_bg_layout;?> mt-50">
+            <div class="itg-widget <?php print $gray_bg_layout;?>">
                 <div class="droppable" id="itg-block-8">
                     <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
                     <?php if (isset($widget_data['itg-block-8']['block_title'])) {?>
@@ -271,7 +271,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="itg-widget <?php print $gray_bg_layout;?> mt-50">
+            <div class="itg-widget <?php print $gray_bg_layout;?>">
                 <div class="droppable" id="itg-block-9">
                     <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
                     <?php if (isset($widget_data['itg-block-9']['block_title'])) {?>
@@ -290,9 +290,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
     </div>
     
-     <div class="row itg-common-section m-top">
+     <div class="row itg-common-section row-3 mt-50">
         <div class="col-md-8 col-sm-8 col-xs-12">
-            <div class="itg-widget <?php print $gray_bg_layout;?> mt-50">
+            <div class="itg-widget <?php print $gray_bg_layout;?>">
                 <div class="droppable" id="itg-block-10">
                     <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
                     <?php if (isset($widget_data['itg-block-10']['block_title'])) {?>
@@ -309,7 +309,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             </div>  
         </div>
          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="itg-widget <?php print $gray_bg_layout;?> mt-50">
+            <div class="itg-widget <?php print $gray_bg_layout;?>">
                 <div class="droppable" id="itg-block-11">
                     <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
                     <?php if (isset($widget_data['itg-block-11']['block_title'])) {?>

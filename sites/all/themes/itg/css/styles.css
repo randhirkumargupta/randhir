@@ -84,6 +84,10 @@ img {
   margin-top: 10px;
 }
 
+.mt-50 {
+  margin-top: 50px;
+}
+
 .ml-10, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes {
   margin-left: 10px;
 }
@@ -1093,7 +1097,6 @@ footer .footer-copyright {
 .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
   padding: 0 15px;
   width: 100%;
-  margin-bottom: 50px;
 }
 
 /*End CSS Top Block Grid Home Page*/

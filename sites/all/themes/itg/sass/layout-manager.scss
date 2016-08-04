@@ -179,6 +179,7 @@ a{
                 top: 0;
                 left: 0;
                 width: 214px;
+                 z-index: 1;
             }
         }
         .top-colum-1{
@@ -219,6 +220,12 @@ a{
             .droppable{
                 height: 382px;
                 overflow: hidden;
+            }
+            &.row-3{
+                .droppable{
+                    height: 320px;
+                    overflow: hidden;
+                }
             }
         }
     }  

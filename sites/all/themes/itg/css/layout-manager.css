@@ -386,6 +386,7 @@ a {
     top: 0;
     left: 0;
     width: 214px;
+    z-index: 1;
   }
   .itg-layout-container .top-colum-1 .droppable {
     height: 633px;
@@ -413,6 +414,10 @@ a {
   }
   .itg-layout-container .itg-common-section .droppable {
     height: 382px;
+    overflow: hidden;
+  }
+  .itg-layout-container .itg-common-section.row-3 .droppable {
+    height: 320px;
     overflow: hidden;
   }
 
