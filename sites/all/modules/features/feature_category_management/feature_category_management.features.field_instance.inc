@@ -256,59 +256,6 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'taxonomy_term-category_management-field_publish_time'.
-  $field_instances['taxonomy_term-category_management-field_publish_time'] = array(
-    'bundle' => 'category_management',
-    'deleted' => 0,
-    'description' => 'Do not edit this field',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 7,
-      ),
-    ),
-    'entity_type' => 'taxonomy_term',
-    'exclude_cv' => 0,
-    'field_name' => 'field_publish_time',
-    'label' => 'Publish Time',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 16,
-    ),
-  );
-
-  // Exported field_instance:
   // 'taxonomy_term-category_management-field_sponser_logo'.
   $field_instances['taxonomy_term-category_management-field_sponser_logo'] = array(
     'bundle' => 'category_management',
@@ -422,7 +369,6 @@ function feature_category_management_field_default_field_instances() {
   t('Category Icon');
   t('Content Type');
   t('Display Title');
-  t('Do not edit this field');
   t('Hide Category form home');
   t('Hide Category from search');
   t('If you checked this option, "No Follow" link will be embedded in category URL. ');
@@ -434,7 +380,6 @@ function feature_category_management_field_default_field_instances() {
   t('Please enter the redirection URL (http://example.com). Reader will be redirected to the respective URL by clicking on the category name.
 ');
   t('Please select content type, this category will be associated to selected content types. You can associate one category with multiple content types.');
-  t('Publish Time');
   t('Redirection URL');
   t('Sponsored Category');
 
