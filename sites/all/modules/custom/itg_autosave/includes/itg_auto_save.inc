@@ -473,11 +473,15 @@ class itg_auto_save {
           $this->value = $inputs[$field['fieldName']]['und'];
           $this->var_type = gettype($this->value);
           if ($this->var_type == 'string') {
-            $this->value = (int) $this->value;
-          }         
+            
+            $this->value = (int) $this->value;            
+          }                   
           if (!empty($this->value) && is_array($this->value)) {            
             foreach ($this->value as $key => $tid) {
-              $key = (int) $key;
+              if ($key == 'hierarchical_select' || $key == 'hsid') {
+                break;
+              }              
+              $key = (int) $key;              
               $tid = (int) $tid;
               if ($tid > 0) {
                 $node->{$field['fieldName']}[$node->language][$key]['tid'] = $tid;

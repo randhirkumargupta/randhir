@@ -208,49 +208,6 @@ function astro_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_astro_numerology_values-field_story_source_id'.
-  $field_instances['field_collection_item-field_astro_numerology_values-field_story_source_id'] = array(
-    'bundle' => 'field_astro_numerology_values',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 2,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_source_id',
-    'label' => 'Enter Number',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_astro_zodiac-field_astro_thumb_icon'.
   $field_instances['field_collection_item-field_astro_zodiac-field_astro_thumb_icon'] = array(
     'bundle' => 'field_astro_zodiac',
@@ -1306,7 +1263,6 @@ function astro_feature_field_default_field_instances() {
   t('Collective Video for all zodiac signs');
   t('Date Range');
   t('Day');
-  t('Enter Number');
   t('Enter Text');
   t('Maximum allowed character for this field is 500.');
   t('Node Identity');
