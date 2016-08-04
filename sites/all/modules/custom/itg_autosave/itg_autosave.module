@@ -94,7 +94,7 @@ function itg_autosave_views_api() {
  *
  * {@inheritdoc}.
  */
-function itg_autosave_form_alter(&$form, &$form_state, $form_id) {  
+function itg_autosave_form_alter(&$form, &$form_state, $form_id) {    
   // Create object of itg_auto_save class.
   $itg_autosave_form = new itg_auto_save();
   
@@ -113,6 +113,7 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
       $flag = TRUE;
     }    
     if (!$flag) {
+      array_unshift($form['#validate'], 'itg_autosave_custom_validation');
       $form['#after_build'][] = 'itg_autosave_after_build';      
       $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];      
       $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();      
@@ -182,3 +183,14 @@ function itg_autosave_after_build($form, &$form_alter) {
   return $form;
 }
 
+/**
+ * Custom node validation function.
+ *
+ * @param array $form
+ *   Array containing form element.
+ * @param array $form_state
+ *   Array of submitted form data.
+ */
+function itg_autosave_custom_validation($form, &$form_state) {
+  $form_state['values']['changed'] = REQUEST_TIME;
+}

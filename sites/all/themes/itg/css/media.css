@@ -353,3 +353,31 @@
   /*End Story page css*/
 }
 /*End CSS Desktop version*/
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  .header .top-nav .main-nav li a {
+    padding: 0 15px;
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
+  .header .top-nav .main-nav li:nth-child(3) a:before {
+    top: -6px;
+    left: 0;
+  }
+
+  .top-block .top-colum-2 {
+    width: 100%;
+  }
+
+  .top-block .top-colum-1, .top-block .top-colum-3 {
+    width: 50%;
+  }
+
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    width: 100%;
+  }
+
+  .big-news .big-story-col-2 {
+    padding-top: 20px;
+    padding-left: 15px;
+  }
+}

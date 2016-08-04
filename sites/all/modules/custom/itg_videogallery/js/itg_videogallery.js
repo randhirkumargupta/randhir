@@ -61,7 +61,7 @@
             $('#edit-title').blur(function() {
                 $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
             });
-            $('.plupload_container').removeAttr("title"); 
+            $('.plupload_container').removeAttr("title");
             // Display Byline details
             $('#edit-field-story-reporter-und-0-target-id').blur(function() {
                 var base_url = Drupal.settings.basePath;
@@ -75,6 +75,25 @@
                 });
             });
 
+            //
+            $('.browse-ftp a').click(function() {
+                var ids = [];
+                $('#edit-video-browse-select .form-checkbox').each(function() {
+                    if ($(this).is(':checked'))
+                    {
+                        ids.push($(this).val());
+                    }
+                })
+                var count = ids.length;
+                $('#edit-field-videogallery-video-upload-add-more-number').val(count);
+                $('input[name=field_videogallery_video_upload_add_more]').mousedown();
+                setTimeout(function() {
+                    $('#edit-field-videogallery-video-upload-add-more-number').val(1);
+                    $('#edit-video-browse-select .form-checkbox').prop('checked', false);
+                }, 1000);
+            });
+
+            //
         }
 
     };

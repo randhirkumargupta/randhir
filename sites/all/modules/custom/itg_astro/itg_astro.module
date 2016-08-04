@@ -476,7 +476,7 @@ function itg_astro_frequency_map($title, $freq, $astro_type, $nid = 0) {
  *
  * @param stdObject $node
  */
-function itg_astro_node_validate($node) {  
+function itg_astro_node_validate(&$node, $form, &$form_state) {  
   $result = '';
   $title = $node->title;
   $freq = $node->field_astro_frequency['und'][0]['value'];
@@ -487,8 +487,7 @@ function itg_astro_node_validate($node) {
   else {
     $result = itg_astro_frequency_map($title, $freq, $astro_type);
   }
-
   if ($result != '') {
     form_set_error('title', 'Astro for selected frequency is already filled.');
-  }
+  }  
 }
