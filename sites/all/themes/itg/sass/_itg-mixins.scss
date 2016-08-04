@@ -129,6 +129,7 @@ $root-font-size: 16px;
             padding: 15px 15px 15px 20px;
             display: block;
             border-bottom: 1px solid $tab-primary-border-color;
+            line-height: 19px;
             &:hover{
                 background: $off-white-bg;
             }
@@ -159,6 +160,7 @@ $root-font-size: 16px;
     text-transform: uppercase;
     color:$white-color;
     @include itg-font($itg-roboto);
+    z-index: 1;
 }
 
 /* List before icon */
@@ -186,13 +188,10 @@ $root-font-size: 16px;
   transition: $args;
 }
 /*mixin for listing with image*/
-@mixin listing-with-image($img-position,$image-space,$class-image,$class-title){   
-    li{ 
+@mixin listing-with-image($perent-class,$img-position,$image-space,$class-image,$class-title){   
+    .#{$perent-class}{ 
         overflow: hidden;
-        padding: 10px;
-        &+li{
-            border-top: 1px solid $border-color;
-        }
+        padding: 10px;        
         .#{$class-image} {
             @include float($img-position);
             @if (($img-position == left)) {

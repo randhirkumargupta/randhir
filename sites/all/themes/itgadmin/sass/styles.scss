@@ -3520,7 +3520,7 @@ div.node{
 .edit-link:after, .edit-cm a:after{content: '\f044';}
 .view-link:after{content: '\f06e';}
 .delete-link:after{content: '\f1f8';}
-.move-link:after{content:'\f191';}
+.move-link:after{content:'\f056';}
 
 .sidebar-trigger{
   cursor: pointer;
@@ -5659,7 +5659,7 @@ div.node{
     }
     
 }
-.page-node-add-magazine, .page-node-add-breaking-news{
+.page-node-add-magazine, .page-node-add-breaking-news, .page-node-add-story{
     .form-type-managed-file{
       .image-widget-data{
           position: relative;  
@@ -5717,4 +5717,7 @@ div.node{
   }
   .region-content{
     margin: 20px 0;
+  }
+  .views-form{
+    .form-actions{margin-top: 20px;}
   }

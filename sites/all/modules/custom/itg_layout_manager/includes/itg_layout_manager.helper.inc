@@ -82,10 +82,22 @@ function check_template_of_section($section_name, $template_name) {
  * @param string $widget_name 
  * @return array $render_array
  */
-function get_itg_widget($widget_name) {  
-  $block = block_load('itg_widget', $widget_name);
-  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  return render($render_array);
+function get_itg_widget($widget_name, $widget_url = NULL) {
+  
+  if (isset($widget_name) && $widget_name == 'section_wise_order') {
+    return create_setion_widgets($widget_url);
+  }
+  elseif (isset($widget_name) && $widget_name == 'photo_list_of_category') {    
+    //return 'shravan kumar'; //'photo_list_of_category'; //code views rander
+    
+    return views_embed_view('photo_list_of_category', 'block', $widget_url);
+  }
+  else {      
+    $block = block_load('itg_widget', $widget_name);
+    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+    return render($render_array);
+  }
+  
 }
 
 /**
@@ -126,7 +138,7 @@ function get_template_name($tpl_dir) {
 }
 
 /**
- * Get layout details by section_name and template_name
+ * Get layout details by section_name and template_name for front and admin
  * @param string $section_name
  * @param string $template_name 
  * @return array $data
@@ -134,24 +146,26 @@ function get_template_name($tpl_dir) {
 function get_layout_details($section_name, $template_name, $status) {
   
   if ($status == 'admin') {
+    //Get last layout setting
     $query = db_select('itg_layout_tpl', 'tpl');
     $query->fields('tpl', array('id', 'status'));  
     $query->condition('section_name', $section_name)
           ->condition('template_name', $template_name);
-    $query->orderBy('tpl.id', 'DESC')->range(0,1);//LIMIT to 1 records
+    $query->orderBy('tpl.id', 'DESC')->range(0,1);
 
     $last_tpl = $query->execute()->fetchField();
   }
   
+  //Get layout setting details info
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
   $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', '	filter_url'));  
   $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
   $itg_query->condition('layout_tpl.section_name', $section_name);    
   $itg_query->condition('layout_tpl.template_name', $template_name);
-  
+  //condition for front
   if ($status == 'front') {
     $itg_query->condition('layout_tpl.status', 1);
-  } 
+  } //condition for admin
   elseif ($status == 'admin') {
      $itg_query->condition('layout_tpl.id', $last_tpl);     
   }
@@ -162,11 +176,8 @@ function get_layout_details($section_name, $template_name, $status) {
     $result['widget_name'] = $itg_val->widget_name;
     $result['block_title'] = $itg_val->block_title;
     
-    if (isset($itg_val->widget_name) && $itg_val->widget_name == 'section_wise_order') {
-      $widget = create_setion_widgets($itg_val->filter_url);      
-    } 
-    elseif (isset($itg_val->widget_name)) {
-      $widget = get_itg_widget($itg_val->widget_name);
+    if (isset($itg_val->widget_name)) {
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->filter_url);
     } 
     else {
       $widget = '<p>Drag template widgets here !</p>';
@@ -187,7 +198,7 @@ function get_layout_details($section_name, $template_name, $status) {
  * @param string $template_name 
  * @return string 
  */
-function display_section_widgets_list($section_name, $template_name) {
+function display_section_widgets_list($section_name, $template_name, $widget_type) {
   
   global $base_url;  
   
@@ -198,12 +209,12 @@ function display_section_widgets_list($section_name, $template_name) {
   $itg_query->condition('layout_tpl.template_name', $template_name);  
   $itg_result = $itg_query->execute()->fetchAll();
   
-  $widget_name = 'section_wise_order';
+  $widget_name = $widget_type;
   
   $content = '<ul id="templates-widgets-section" class="no-bullet pd-10 templates-widgets">';
   
   foreach ($itg_result as $row) {    
-    $content .= '<li data-widget="'.$widget_name.'#'.$row->category_id.'">'
+    $content .= '<li id="'.$row->category_name.'" data-widget="'.$widget_name.'#'.$row->category_id.'">'
             . '<span>'.$row->category_name.' ('.$row->category_id.')</span>'
             . '<span><a class="layout-section-delete" href="javascript:void(0)" data-widget="'.$row->id.'">X</a></span>'
             . '</li>';

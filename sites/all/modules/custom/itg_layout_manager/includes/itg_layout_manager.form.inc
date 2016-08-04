@@ -9,8 +9,8 @@
  * Implementation of hook_form for itg_layout_manager_form
  * {@inheritdoc}
  */
-function itg_layout_manager_page_setting_form($form, &$form_state) {
-  
+function itg_layout_manager_page_setting_form($form, &$form_state) {  
+
   $arg1 = arg(1);
   
   global $base_url;
@@ -144,19 +144,35 @@ function itg_layout_manager_filter_form_submit($form, &$form_state) {
  * {@inheritdoc}
  */
 function layout_section_widgets_search_form($form, &$form_state) {
-
+  
+  if ($_GET['template_name'] != 'page--front' ) {
+    $arg = $_GET['section'];
+  }
+  
+  // condition base widget
+  if ($_GET["template_name"] == 'page--section_photo') {
+    $widgets_type = 'photo_list_of_category';
+  }
+  else if ($_GET["template_name"] == 'page--section_video') {
+    $widgets_type = 'video_list_of_category';
+  }
+  else {
+    $widgets_type = 'section_wise_order';
+  }
+  
   $form['section_name'] = array(
     '#type' => 'textfield',
     '#size' => 60,
     '#attributes' => array('placeholder' => t('Search')),
-    '#autocomplete_path' => 'itg_category_autocomplete_list/'.$_GET['section'],
+    '#autocomplete_path' => 'itg_category_autocomplete_list/'.$arg,
     '#maxlength' => 128,
-  );  
+  );
+  
   
   $form['section_save'] = array(
-    '#markup' => '<a class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',
+    '#markup' => '<a data-tabwidget='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',
     '#weight' => 20,
   );  
-  
+
   return $form;
 }
