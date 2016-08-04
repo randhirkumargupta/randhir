@@ -17,6 +17,7 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
     case 'story_node_form':
     case 'photogallery_node_form':
     case 'blog_node_form':
+    case 'podcast_node_form':
       $form['#after_build'][] = 'itg_workflow_after_build';
     break;
     
@@ -157,8 +158,9 @@ function itg_workflow_after_build($form, &$form_state) {
     
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
+    $settings['ntype'] = $form['type']['#value'];
 
-    drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
     
     drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
 
@@ -179,7 +181,7 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param object $node
  */
 function itg_workflow_node_presave($node) {
-  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
     if ($node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
        $node->workbench_moderation_state_new = 'published';
     }
@@ -263,6 +265,20 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
                jQuery("#edit-bundle-blog-field-story-archive-und").hide();               
              });', array('type' => 'inline', 'scope' => 'footer'));
     }
+    elseif ($form['#id'] == 'views-exposed-form-podcast-management-page') {
+        
+        // Code for Bulk opration related work for podcast
+        drupal_add_js('jQuery(document).ready(function() {
+               jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
+               var myInputBoxID = "edit-bundle-podcast-appendfield-story-archive";
+               jQuery("label[for=" + myInputBoxID + "]").hide();
+               jQuery("#edit-bundle-podcast-appendfield-story-archive").hide();
+               jQuery("#edit-tokens").hide();
+               jQuery("#edit-actions-submit").val("Archive");
+               jQuery("#edit-bundle-podcast-field-story-archive-und-yes").attr("checked", true);
+               jQuery("#edit-bundle-podcast-field-story-archive-und").hide();               
+             });', array('type' => 'inline', 'scope' => 'footer'));
+    }
 
     return $form;
 }
@@ -316,7 +332,7 @@ function itg_workflow_node_access($node, $op, $account) {
             return NODE_ACCESS_DENY;
         elseif (($story_expiry_date < $current_time) && (arg(0) != 'issue-listing'))
             return NODE_ACCESS_DENY;
-    } elseif (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog')) {
+    } elseif (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast')) {
         if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
             return NODE_ACCESS_DENY;
         }
@@ -341,7 +357,7 @@ function itg_workflow_node_access($node, $op, $account) {
  * {@inheritdoc}
  */
 function itg_workflow_node_view($node, $view_mode, $langcode) {
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
+    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
         $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
     }
 }
@@ -352,7 +368,7 @@ function itg_workflow_node_view($node, $view_mode, $langcode) {
  */
 function itg_workflow_node_validate($node, $form, &$form_state) {
     // Code for check remarks field is empty or not
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
+    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
         if (empty($node->log) && (($node->workbench_moderation_state_new == 'needs_modification') || ($node->workbench_moderation_state_new == 'rejected'))) {
             form_set_error('log', t("Remarks field is required."));
         }
@@ -384,7 +400,7 @@ function itg_workflow_bulk_opration_related($field1, $field2) {
  * @param object $node
  */
 function itg_workflow_node_insert($node) {
-  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
 
     global $user;
     
@@ -420,7 +436,7 @@ function itg_workflow_node_insert($node) {
  * @param object $node
  */
 function itg_workflow_node_update($node) {
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog') {
+    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
       global $user;
       $current = $user->uid;
       $node_id = $node->nid;

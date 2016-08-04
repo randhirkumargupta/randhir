@@ -8,11 +8,7 @@
              attach: function(context, settings) {
                    var uid = settings.itg_podcast.settings.uid;
                    if (uid != 1) {
-                        $('.vertical-tabs-list').hide();
-                        $('#edit-metatags').show();
-                        $('#edit-metatags-und-advanced').hide();
-                        $('.fieldset-description').hide();
-                        $('#edit-metatags p').hide();
+
                    }
              }
 
