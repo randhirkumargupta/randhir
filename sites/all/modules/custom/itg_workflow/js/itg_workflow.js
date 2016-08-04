@@ -38,10 +38,15 @@ jQuery(document).ready(function() {
        jQuery("#edit-workbench-moderation-state-new").val(story_state);
        jQuery("#edit-submit").click();*/
        
-       var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];                   
+       var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];
+       var ntype = jQuery('[name="ntype"]').val();
        
-       if (story_state == 'published' || story_state == 'needs_review') {                   
-           var msg = confirm("Hope you have Previewed the story before submitting. Do you want to continue to submit?");
+       if (story_state == 'published' || story_state == 'needs_review') {
+           
+           if(ntype) {
+           var msg = confirm("Hope you have Previewed the " + ntype + " before submitting. Do you want to continue to submit?");
+       }
+       
            if (msg == true) {
                 jQuery("#edit-workbench-moderation-state-new").val(story_state);
                 jQuery("#edit-submit").click();
@@ -54,8 +59,10 @@ jQuery(document).ready(function() {
 
     jQuery('.edit-submit-class').click(function() {                 
         var moderation_state = jQuery("#edit-workbench-moderation-state-new").val();
-        if (moderation_state == 'published') {                   
-           var msg = confirm("Hope you have Previewed the story before submitting. Do you want to continue to submit?");
+        if (moderation_state == 'published') { 
+            if(ntype) {
+           var msg = confirm("Hope you have Previewed the " + ntype + "before submitting. Do you want to continue to submit?");
+            }
            if (msg == true) {
                return true;
            }
