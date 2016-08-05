@@ -34,12 +34,6 @@ function task_allocation_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -72,12 +66,6 @@ function task_allocation_field_default_field_bases() {
       'todate' => '',
       'tz_handling' => 'none',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'datetime',
   );
@@ -100,12 +88,6 @@ function task_allocation_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text_with_summary',
   );
@@ -142,12 +124,6 @@ function task_allocation_field_default_field_bases() {
         ),
       ),
       'target_type' => 'user',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'entityreference',
