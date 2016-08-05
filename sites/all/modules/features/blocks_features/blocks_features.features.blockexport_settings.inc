@@ -5120,7 +5120,7 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5165,7 +5165,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5180,7 +5180,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5195,7 +5195,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5680,9 +5680,10 @@ assigned-task-list',
   'weight' => -36,
   'region' => 'form_tab',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'node/add/mega-review-critic
+node/*/edit',
+  'title' => '<none>',
   'cache' => 8,
 );
   $export['block'][] = array(
@@ -11195,11 +11196,19 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'unpublished-podcast
+published-podcast
+my-unpublished-podcast
+mydraft-podcast
+my-published-podcast
+my-queue-podcast
+in-queue-podcast
+archive-podcast
+my-rejected-podcast',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -11519,9 +11528,17 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'unpublished-podcast
+published-podcast
+my-unpublished-podcast
+mydraft-podcast
+my-published-podcast
+my-queue-podcast
+in-queue-podcast
+archive-podcast
+my-rejected-podcast',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -11865,13 +11882,21 @@ itg-layout-manager/section',
   'module' => 'menu',
   'delta' => 'menu-podcast-admin-menu',
   'theme' => 'itgadmin',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'form_tab',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'unpublished-podcast
+published-podcast
+my-unpublished-podcast
+mydraft-podcast
+my-published-podcast
+my-queue-podcast
+in-queue-podcast
+archive-podcast
+my-rejected-podcast',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -12217,11 +12242,19 @@ itg-layout-manager/section',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'unpublished-podcast
+published-podcast
+my-unpublished-podcast
+mydraft-podcast
+my-published-podcast
+my-queue-podcast
+in-queue-podcast
+archive-podcast
+my-rejected-podcast',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -12567,11 +12600,19 @@ itg-layout-manager/section',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'unpublished-podcast
+published-podcast
+my-unpublished-podcast
+mydraft-podcast
+my-published-podcast
+my-queue-podcast
+in-queue-podcast
+archive-podcast
+my-rejected-podcast',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -12917,11 +12958,19 @@ itg-layout-manager/section',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'unpublished-podcast
+published-podcast
+my-unpublished-podcast
+mydraft-podcast
+my-published-podcast
+my-queue-podcast
+in-queue-podcast
+archive-podcast
+my-rejected-podcast',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -13267,11 +13316,19 @@ itg-layout-manager/section',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'unpublished-podcast
+published-podcast
+my-unpublished-podcast
+mydraft-podcast
+my-published-podcast
+my-queue-podcast
+in-queue-podcast
+archive-podcast
+my-rejected-podcast',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
