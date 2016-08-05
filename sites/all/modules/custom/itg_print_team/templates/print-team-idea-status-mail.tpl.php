@@ -37,14 +37,14 @@ $idea_link = $base_url . '/user/login?destination=node/' . $node->nid.'/edit';
       </tr>
       <?php } ?>
       
-      <?php if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs Modification') {?>
+      <?php if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs-Modification') {?>
       <tr>
         <td style="padding: 10px 20px;">You need to describe more about your idea.</td>
       </tr>
       <?php } ?>
       
       
-      <?php if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs Modification') {?>
+      <?php if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs-Modification') {?>
       <tr>
         <td style="padding: 10px 20px;"><?php echo l('Click here to view idea', $idea_link, array('attributes' => array('target' => '_blank'))); ?></td>
       </tr>
