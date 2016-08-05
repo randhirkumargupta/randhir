@@ -583,13 +583,6 @@ function task_allocation_views_default_views() {
     23 => 0,
     22 => 0,
   );
-  $handler->display->display_options['filters']['mail']['expose']['autocomplete_filter'] = 1;
-  $handler->display->display_options['filters']['mail']['expose']['autocomplete_items'] = '10';
-  $handler->display->display_options['filters']['mail']['expose']['autocomplete_min_chars'] = '0';
-  $handler->display->display_options['filters']['mail']['expose']['autocomplete_field'] = 'mail';
-  $handler->display->display_options['filters']['mail']['expose']['autocomplete_raw_suggestion'] = 1;
-  $handler->display->display_options['filters']['mail']['expose']['autocomplete_raw_dropdown'] = 1;
-  $handler->display->display_options['filters']['mail']['expose']['autocomplete_dependent'] = 0;
   $handler->display->display_options['path'] = 'assigned-task-list';
 
   /* Display: Page */

@@ -111,7 +111,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
         unset($form['actions']['delete']);
       }
      
-      if($form['#term']['vocabulary_machine_name'] == 'tags') {
+      if(!is_object($form['#term']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
         $form['#submit'][] = 'itg_term_status_message';
       }
     case 'taxonomy_csv_import_form':
