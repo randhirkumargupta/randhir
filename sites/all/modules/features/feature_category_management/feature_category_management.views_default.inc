@@ -324,15 +324,19 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'itg_category_manager';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Broken/missing handler */
+  /* Contextual filter: : field_publish_time (field_publish_time) */
   $handler->display->display_options['arguments']['field_publish_time_value']['id'] = 'field_publish_time_value';
   $handler->display->display_options['arguments']['field_publish_time_value']['table'] = 'field_data_field_publish_time';
   $handler->display->display_options['arguments']['field_publish_time_value']['field'] = 'field_publish_time_value';
   $handler->display->display_options['arguments']['field_publish_time_value']['relationship'] = 'tid';
   $handler->display->display_options['arguments']['field_publish_time_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_publish_time_value']['default_argument_type'] = 'date';
   $handler->display->display_options['arguments']['field_publish_time_value']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_publish_time_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_publish_time_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_publish_time_value']['year_range'] = '2016:2016';
+  $handler->display->display_options['arguments']['field_publish_time_value']['granularity_reset'] = 0;
+  $handler->display->display_options['arguments']['field_publish_time_value']['use_fromto'] = 'no';
   /* Filter criterion: Taxonomy term: Name */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
