@@ -1630,3 +1630,24 @@ footer{
     }
 }
 /*End anchors listing css*/
+
+/*Start anchors listing css*/
+.live-block{
+    h1{
+        margin-bottom:5px;
+        span{
+            color:$red-color;
+        }
+    }
+    .short-discription{
+        margin-bottom: 10px;
+        line-height: 22px;
+    }
+    .breaking-section{
+        padding: 10px 0;
+        + .breaking-section{
+            border-top: 1px solid $border-color;
+        }        
+    }
+}
+/*End anchors listing css*/

@@ -10,7 +10,9 @@ if (!empty($data)) {
 					<li class="pos<?php print $countd++; ?>">
 						<div class="inner">
 							<a href="#">
-								<?php print $entity_data_node['file_url']; ?>
+								<?php //print $entity_data_node['file_url']; ?>
+                                                            <img src="/itgcms/sites/all/themes/itg/images/demo-photo.jpg">
+                                                            
 								<span class="pic-tit"><span class="flex-count"><?php echo  $entity_data_node['count']; ?> Images </span><?php print $entity_data_node['caption']; ?></span>
 							</a>
 						</div>

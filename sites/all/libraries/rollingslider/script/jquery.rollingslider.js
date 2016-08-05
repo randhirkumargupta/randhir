@@ -15,7 +15,7 @@
     var _instance = new argFn(this, arg);
     // 参数, 函数声明
     var $showArea = $(_instance.args.showArea),
-        $showArea_li = $(_instance.args.showArea+">li"),
+        $showArea_li = $(_instance.args.showArea+">li"),        
         $prev =  $(_instance.args.prev),
         $next =  $(_instance.args.next),
         show_len = $showArea_li.length,
@@ -26,9 +26,10 @@
         item_arr = [],  // 存起所有的li
         flag = 1;
     // 存储样式和li
-    function slider() {
+    function slider() {      
       for (var i = 0; i < show_len; i++) {
         var $cur_li = $showArea_li.eq(i); //当前展示的图片
+        console.log('current li' + $cur_li.width());
         if (i < column) { //记录 5 张图片的初始状态信息
           init_arr[i] = {
             left: $cur_li.position().left,
