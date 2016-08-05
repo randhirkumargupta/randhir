@@ -27,7 +27,7 @@
               data: {'tid': tid},
               dataType: "JSON",
               success: function (data) {                
-                window.location = setting.baseUrl + "/category-manager";                
+                window.location = setting.baseUrl + "/category-manager-listing";                
               },
               complete: function () {
                 hideLoadingImage();
