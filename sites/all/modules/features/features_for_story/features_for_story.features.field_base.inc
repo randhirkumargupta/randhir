@@ -182,6 +182,7 @@ function features_for_story_field_default_field_bases() {
         'videogallery' => 'videogallery',
         'podcast' => 'podcast',
         'reporter' => 'reporter',
+        'print_team_integration' => 'print Team',
       ),
       'allowed_values_function' => '',
     ),
@@ -1124,33 +1125,6 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
-  );
-
-  // Exported field_base: 'field_story_resize_extra_large'.
-  $field_bases['field_story_resize_extra_large'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_story_resize_extra_large',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'yes' => '',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_story_schedule_date_time'.

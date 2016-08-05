@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the features for photo list of category feature.
+ */
+
+include_once 'features_for_photo_list_of_category.features.inc';
