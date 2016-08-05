@@ -2193,3 +2193,22 @@ footer .footer-copyright {
 }
 
 /*End anchors listing css*/
+/*Start anchors listing css*/
+.live-block h1 {
+  margin-bottom: 5px;
+}
+.live-block h1 span {
+  color: #a00606;
+}
+.live-block .short-discription {
+  margin-bottom: 10px;
+  line-height: 22px;
+}
+.live-block .breaking-section {
+  padding: 10px 0;
+}
+.live-block .breaking-section + .breaking-section {
+  border-top: 1px solid #dddddd;
+}
+
+/*End anchors listing css*/
