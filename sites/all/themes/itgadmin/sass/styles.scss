@@ -1307,7 +1307,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #Categorization{
   select{
     max-width: 180px;
-    min-height: 200px;
+    /*min-height: 200px;*/
   }
 } 
 .path-form{
@@ -5684,7 +5684,7 @@ div.node{
     }
     
 }
-.page-node-add-magazine, .node-type-story, .node-type-magazine, .node-type-breaking-news, .page-node-add-breaking-news, .page-node-add-story{
+.page-node-add-magazine, .node-type-story, .node-type-magazine, .node-type-breaking-news, .page-node-add-breaking-news, .page-node-add-story, .page-node-add-blog, .page-node-add-podcast, .page-node-add-recipe, .page-node-add-poll{
     .form-type-managed-file{
       .image-widget-data{
           position: relative;  
