@@ -824,7 +824,6 @@ jQuery(document).ready(function() {
         e = jQuery(".itg-region ul li").outerWidth(true),
         o = e * t;
     jQuery(".itg-region ul").css("width", o + 100);
-    //8 >= t ? jQuery(".scroll-arrow-right").css("opacity", "0") : jQuery(".scroll-arrow-right").css("opacity", "1");
     var s = 0;
     jQuery(".scroll-arrow-left").click(function() {
         if (0 == s) jQuery(this).show();
