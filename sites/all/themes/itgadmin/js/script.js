@@ -817,3 +817,36 @@ jQuery(document).ready(function(){
     
     
 });
+
+
+jQuery(document).ready(function() {
+    var t = jQuery(".itg-region ul li").length,
+        e = jQuery(".itg-region ul li").outerWidth(true),
+        o = e * t;
+    jQuery(".itg-region ul").css("width", o + 100);
+    //8 >= t ? jQuery(".scroll-arrow-right").css("opacity", "0") : jQuery(".scroll-arrow-right").css("opacity", "1");
+    var s = 0;
+    jQuery(".scroll-arrow-left").click(function() {
+        if (0 == s) jQuery(this).show();
+        else {
+            var t = jQuery(".itg-region ul li").eq(s - 1).outerWidth(true);
+            jQuery(".itg-region ul").animate({
+                left: "+=" + t
+            }), s -= 1, jQuery(".scroll-arrow-right").fadeIn()
+        }
+    }), jQuery(".scroll-arrow-right").click(function() {
+        if (t - 7 >= s) {
+            var e = jQuery(".itg-region ul li").eq(s).outerWidth();
+            jQuery(".itg-region ul").animate({
+                left: "-=" + e
+            }), s += 1
+        } else jQuery(".scroll-arrow-right").fadeOut()
+    })
+});
+
+
+
+
+
+
+
