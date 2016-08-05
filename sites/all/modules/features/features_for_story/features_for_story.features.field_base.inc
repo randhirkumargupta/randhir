@@ -182,6 +182,7 @@ function features_for_story_field_default_field_bases() {
         'videogallery' => 'videogallery',
         'podcast' => 'podcast',
         'reporter' => 'reporter',
+        'print_team_integration' => 'print Team',
       ),
       'allowed_values_function' => '',
     ),
