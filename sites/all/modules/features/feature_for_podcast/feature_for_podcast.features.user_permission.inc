@@ -53,7 +53,6 @@ function feature_for_podcast_user_default_permissions() {
       'Expert' => 'Expert',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
