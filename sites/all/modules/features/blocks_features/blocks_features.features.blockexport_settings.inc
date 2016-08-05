@@ -11181,11 +11181,11 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'manage-print-team',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -11505,9 +11505,9 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'manage-print-team',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -11851,13 +11851,13 @@ itg-layout-manager/section',
   'module' => 'menu',
   'delta' => 'menu-print-team-menu',
   'theme' => 'itgadmin',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'form_tab',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'manage-print-team',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -12203,11 +12203,11 @@ itg-layout-manager/section',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'manage-print-team',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -12553,11 +12553,11 @@ itg-layout-manager/section',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'manage-print-team',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -12903,11 +12903,11 @@ itg-layout-manager/section',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'manage-print-team',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -13253,11 +13253,11 @@ itg-layout-manager/section',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'visibility' => 1,
+  'pages' => 'manage-print-team',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -13669,6 +13669,11 @@ itg-layout-manager/section',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-print-team-menu',
+  'rid' => 6,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-story-content-admin-menu',
   'rid' => 6,
 );
@@ -13889,6 +13894,11 @@ itg-layout-manager/section',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-print-team-menu',
+  'rid' => 10,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-story-content-admin-menu',
   'rid' => 10,
 );
@@ -13919,8 +13929,18 @@ itg-layout-manager/section',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-print-team-menu',
+  'rid' => 11,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
   'rid' => 11,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-print-team-menu',
+  'rid' => 12,
 );
   $export['block_role'][] = array(
   'module' => 'menu',
@@ -13929,8 +13949,18 @@ itg-layout-manager/section',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-print-team-menu',
+  'rid' => 13,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
   'rid' => 13,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-print-team-menu',
+  'rid' => 14,
 );
   $export['block_role'][] = array(
   'module' => 'menu',
@@ -13939,13 +13969,28 @@ itg-layout-manager/section',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
-  'delta' => 'menu-task-allocation-menu',
+  'delta' => 'menu-print-team-menu',
   'rid' => 15,
 );
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
+  'rid' => 15,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-print-team-menu',
   'rid' => 16,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-task-allocation-menu',
+  'rid' => 16,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-print-team-menu',
+  'rid' => 17,
 );
   $export['block_role'][] = array(
   'module' => 'menu',
@@ -14015,6 +14060,11 @@ itg-layout-manager/section',
   $export['block_role'][] = array(
   'module' => 'menu',
   'delta' => 'menu-photogallery-admin-menu',
+  'rid' => 20,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-print-team-menu',
   'rid' => 20,
 );
   $export['block_role'][] = array(
