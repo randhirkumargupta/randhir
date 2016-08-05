@@ -234,7 +234,7 @@ function features_for_print_team_field_default_field_instances() {
     'bundle' => 'print_team_integration',
     'default_value' => array(
       0 => array(
-        'value' => 'Not Decided',
+        'value' => 'Not-Decided',
       ),
     ),
     'deleted' => 0,
