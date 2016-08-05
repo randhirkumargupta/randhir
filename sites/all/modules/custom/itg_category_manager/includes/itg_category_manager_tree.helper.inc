@@ -55,14 +55,14 @@ function itg_autosave_construct_nested_taxonomy_array(&$tree) {
 function itg_autosave_construct_nested_taxonomy_item_list(&$tree, &$item_list) {
   foreach (array_reverse($tree) as $term) {
     $other_details = itg_autosave_tree_detail($term->tid);
-    $output = '<div class="term-detail">' . $term->name . '</div>';
+    $output = '<div class="term-wrapper"><div class="term-detail">' . $term->name . '</div>';
     $output .= '<div class="term-detail">' . format_date($other_details->created, 'custom_date_d_m_y_') . '</div>';
     $output .= '<div class="term-detail">' . format_date($other_details->changed, 'custom_date_d_m_y_') . '</div>';
     $term_status = $other_details->status == 1 ? t('Active') : t('Inactive');
     $output .= '<div class="term-detail">' . $term_status  . '</div>';    
     $output .= '<div class="term-detail">';
     $output .= l(t('Edit'), 'taxonomy/term/' . $term->tid . '/edit', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
-    $output .= '</div>';
+    $output .= '</div></div>';
     $item_list[$term->tid] = array('data' => $output);
     if ($term->children) {
       itg_autosave_construct_nested_taxonomy_item_list($term->children, $item_list[$term->tid]['children']);

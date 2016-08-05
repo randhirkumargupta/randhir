@@ -2895,11 +2895,34 @@ fieldset#edit-select{
     }
   }
   .view-content{
-    > .item-list{
-      border: 1px solid #d9d9d9;
+    .item-list{
       @extend .dib; 
       @extend .full;
-      @extend .mt-10;
+      ul{
+        li{
+          .term-wrapper{
+            border-bottom: 1px solid #d9d9d9;
+            .term-detail{
+              padding: 5px;
+              width: 10%;
+              float: left;
+              &:first-child{
+                width: 60%;
+              }
+            }
+          }
+        }
+      }
+      .item-list{
+        .term-detail:first-child{
+          padding-left: 20px;
+        }
+        .item-list{
+          .term-detail:first-child{
+            padding-left: 40px;
+          }
+        }
+      }
     }
     .item-list{
       ul{@extend .no-bullet;}
@@ -2933,7 +2956,7 @@ fieldset#edit-select{
 .cmt-details span{border-right: 1px solid #ddd;}
 .cmt-details > span:last-child {border-right: medium none;}
 .category-manager-details,
-.view-category-manager .view-content ul li{float: left; width: 100%; box-sizing: border-box;}
+/*.view-category-manager .view-content ul li{float: left; width: 100%; box-sizing: border-box;}*/
 .view-category-manager .view-content ul li{padding: 0;}
 .cmd-detail span, .cmd-detail .edit-cm{
   position: absolute; top: 0; height: 100%; padding: 5px 10px; width: 25%; box-sizing: border-box;
