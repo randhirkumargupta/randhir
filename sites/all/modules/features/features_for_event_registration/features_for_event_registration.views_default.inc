@@ -298,11 +298,10 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['field_erf_mobile']['table'] = 'field_data_field_erf_mobile';
   $handler->display->display_options['fields']['field_erf_mobile']['field'] = 'field_erf_mobile';
   $handler->display->display_options['fields']['field_erf_mobile']['label'] = 'Mobile No.';
-  /* Field: Field: Mail to */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_email_address']['id'] = 'field_email_address';
   $handler->display->display_options['fields']['field_email_address']['table'] = 'field_data_field_email_address';
   $handler->display->display_options['fields']['field_email_address']['field'] = 'field_email_address';
-  $handler->display->display_options['fields']['field_email_address']['label'] = 'Email';
   $handler->display->display_options['fields']['field_email_address']['empty'] = '-';
   /* Field: Field: Company/Organization Name */
   $handler->display->display_options['fields']['field_erf_company_name']['id'] = 'field_erf_company_name';
@@ -341,7 +340,7 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: Content: Source id */
+  /* Field: Field: Source id */
   $handler->display->display_options['fields']['field_story_source_id']['id'] = 'field_story_source_id';
   $handler->display->display_options['fields']['field_story_source_id']['table'] = 'field_data_field_story_source_id';
   $handler->display->display_options['fields']['field_story_source_id']['field'] = 'field_story_source_id';
