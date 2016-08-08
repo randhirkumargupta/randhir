@@ -88,18 +88,11 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['field'] = 'sm_thumb_thumbnail_field_story_small_image';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['label'] = '';
-  /* Field: Apache Solr: sm_field_associate_photo_gallery */
-  $handler->display->display_options['fields']['sm_field_associate_photo_gallery']['id'] = 'sm_field_associate_photo_gallery';
-  $handler->display->display_options['fields']['sm_field_associate_photo_gallery']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_field_associate_photo_gallery']['field'] = 'sm_field_associate_photo_gallery';
-  $handler->display->display_options['fields']['sm_field_associate_photo_gallery']['label'] = '';
-  $handler->display->display_options['fields']['sm_field_associate_photo_gallery']['element_label_colon'] = FALSE;
-  /* Field: Apache Solr: sm_field_mega_review_photo_galle */
-  $handler->display->display_options['fields']['sm_field_mega_review_photo_galle']['id'] = 'sm_field_mega_review_photo_galle';
-  $handler->display->display_options['fields']['sm_field_mega_review_photo_galle']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_field_mega_review_photo_galle']['field'] = 'sm_field_mega_review_photo_galle';
-  $handler->display->display_options['fields']['sm_field_mega_review_photo_galle']['label'] = '';
-  $handler->display->display_options['fields']['sm_field_mega_review_photo_galle']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_thumb_thumbnail_field_images */
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_images']['id'] = 'sm_thumb_thumbnail_field_images';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_images']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_images']['field'] = 'sm_thumb_thumbnail_field_images';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_images']['label'] = '';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: Search */

@@ -15,12 +15,9 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   
   global $base_url;
   
-  $settings['base_url'] = $base_url;  
-  
-  drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
-  
-  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1));
-  
+  $settings['base_url'] = $base_url;
+  drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));  
+  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1));  
   
   $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
   
@@ -166,8 +163,7 @@ function layout_section_widgets_search_form($form, &$form_state) {
     '#attributes' => array('placeholder' => t('Search')),
     '#autocomplete_path' => 'itg_category_autocomplete_list/'.$arg,
     '#maxlength' => 128,
-  );
-  
+  );  
   
   $form['section_save'] = array(
     '#markup' => '<a data-tabwidget='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',
