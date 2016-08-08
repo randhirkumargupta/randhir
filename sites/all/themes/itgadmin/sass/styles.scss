@@ -5650,8 +5650,9 @@ div.node{
 }
 .sidebar-section-photo{
   .itg-widget{
-    margin: 20px 0;
+    margin: 35px 0;
     position: relative;
+    background-color: #efefef;
     .droppable{
       min-height: 400px;
     }
@@ -5723,16 +5724,16 @@ div.node{
     overflow: hidden;    
     padding:0 25px;
     position: relative;
+    border-bottom: 1px solid #d9d9d9;
     ul{
       @extend .no-bullet;
-      border-bottom: 1px solid #d9d9d9;
       white-space: nowrap;
       @extend .dib;
       @extend .full;
       @extend .pos-rel;
       li{
-        @extend .fleft;
-        border-right: 5px solid #fff;
+        @extend .dib;
+        border-right: 0;
         text-transform: uppercase;
         a{
           @extend .db;
@@ -5771,4 +5772,46 @@ div.node{
   }
   .views-form{
     .form-actions{margin-top: 20px;}
+  }
+  
+  .view-photo-list-of-category{
+    .view-content{
+      margin: 0 -15px;
+      .photo-list{
+        li{
+          padding: 15px;
+          @extend .fleft;
+          .tile{
+            figure{
+              width: 170px;
+              height: 128px;
+              @extend .pos-rel;
+              figcaption{
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                padding: 5px;
+                background-color: rgba(0,0,0,.5);
+                color: #fff;
+                font-size: 12px;
+                .fa{
+                  font-size: 14px;
+                  margin-right: 5px;
+                }
+              }
+            }
+            .posted-on{
+              @extend .db;
+              font-size: 12px;
+              color: #b1b1b1;
+              padding: 8px 0 5px;
+            }
+            a{
+              color: #494949;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
   }
