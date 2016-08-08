@@ -60,6 +60,9 @@ img{
 .pd-10{
     padding: 10px;
 }
+.pdt-20{
+    padding-top: 20px;
+}
 .pd-30{
     padding: 30px;
 }
@@ -1058,6 +1061,7 @@ footer{
 .itg-listing{
     list-style: none;
     border: 1px solid $border-color;
+    padding-top:20px;
     li{
         @include tab-listing;        
     }
@@ -1261,13 +1265,20 @@ footer{
         .dont-miss-listing{            
             @include calculate-width(1);
             padding: 0 0px 20px 0;
-            border:none;            
+            border:none; 
+            .dm-pic{
+                width: 48%;
+            }            
             .dm-detail{
                 h4{
                     color: #048cb9;
                     margin-bottom: 5px;
                     text-transform: uppercase;
                     @include font(12px,null,700);
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 100%;
                 }
                 p{
                     @include font(14px,18px);
@@ -1589,6 +1600,9 @@ footer{
     @include listing-with-image(catagory-listing,left,25px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
+        .pic{
+            width: 170px;
+        }
         .detail{
             h3{
                 margin-bottom: 10px;
@@ -1601,7 +1615,7 @@ footer{
         }
     }
     .item-list{
-        @include pager;
+        @include pager;        
     }    
 }
 /*End category wise content list css*/
@@ -1611,6 +1625,9 @@ footer{
     .anchor-listing{
         padding:20px 0;
         border-bottom:1px solid $border-color;
+        .pic{
+            width: 170px;
+        }
     .detail{
             h3{
                 margin-bottom: 10px;

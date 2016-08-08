@@ -110,6 +110,10 @@ a {
   display: block;
   float: left;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 7px;
 }
 .tab-buttons span.active {
   background: #fff;
@@ -249,6 +253,10 @@ a {
   color: #fff;
   font-family: "Roboto", sans-serif;
   z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /*Start Dont miss Home page css*/
@@ -289,12 +297,20 @@ a {
   padding: 0 0px 20px 0;
   border: none;
 }
+.dont-miss ul .dont-miss-listing .dm-pic {
+  width: 48%;
+}
 .dont-miss ul .dont-miss-listing .dm-detail h4 {
   color: #048cb9;
   margin-bottom: 5px;
   text-transform: uppercase;
   font-size: 12px;
   font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 .dont-miss ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
