@@ -55,13 +55,13 @@ function itg_autosave_construct_nested_taxonomy_array(&$tree) {
 function itg_autosave_construct_nested_taxonomy_item_list(&$tree, &$item_list) {
   foreach (array_reverse($tree) as $term) {
     $other_details = itg_autosave_tree_detail($term->tid);
-    $output = '<div class="term-wrapper"><div class="term-detail">' . $term->name . '</div>';
+    $output = '<div class="term-wrapper"><div class="term-detail cmd-heading"><i class="fa fa-minus-square-o" aria-hidden="true"></i><i class="fa fa-plus-square-o" aria-hidden="true"></i>' . $term->name . '</div>';
     $output .= '<div class="term-detail">' . format_date($other_details->created, 'custom_date_d_m_y_') . '</div>';
     $output .= '<div class="term-detail">' . format_date($other_details->changed, 'custom_date_d_m_y_') . '</div>';
     $term_status = $other_details->status == 1 ? t('Active') : t('Inactive');
     $output .= '<div class="term-detail">' . $term_status  . '</div>';    
-    $output .= '<div class="term-detail">';
-    $output .= l(t('Edit'), 'taxonomy/term/' . $term->tid . '/edit', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
+    $output .= '<div class="term-detail action">';
+    $output .= l(t('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'), 'taxonomy/term/' . $term->tid . '/edit', array('attributes' => array('class' => ''), 'html' => TRUE, 'query' => array('destination' => arg(0))));
     $output .= '</div></div>';
     $item_list[$term->tid] = array('data' => $output);
     if ($term->children) {
