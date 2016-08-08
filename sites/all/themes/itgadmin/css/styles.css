@@ -5684,3 +5684,13 @@ div.node #comments h2 {
 #block-itg-layout-manager-layout-button-block {
   padding-top: 20px;
 }
+
+[id*="loyality-reward-points-configuration-form"] .form-type-textfield > label {
+  width: 300px;
+}
+[id*="loyality-reward-points-configuration-form"] .form-type-textfield > label + .form-text + span.error {
+  padding-left: 300px;
+}
+[id*="loyality-reward-points-configuration-form"] .form-type-textfield .form-text {
+  max-width: 110px;
+}
