@@ -50,12 +50,6 @@ function itg_loyalty_reward_form_alter(&$form, &$form_state, $form_id) {
    $form['#attributes']['class'] = array('node-form');
    $form['actions']['submit']['#value'] = 'Save';
   }
-  
-  // Alter for "loyalty_points_configuration_form"
-  if ($form_id == 'loyality_reward_gold_start_configuration_form') {
-   drupal_set_title(t('Gold Star Configuration Form')); 
-   $form['actions']['submit']['#value'] = 'Save';
-  }
 
   // Alter for "loyalty_and_rewards_node_form"
   if ($form_id == 'loyalty_and_rewards_node_form') {

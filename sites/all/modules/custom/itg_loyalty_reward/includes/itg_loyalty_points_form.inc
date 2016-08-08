@@ -208,19 +208,19 @@ function loyality_reward_points_configuration_form_validate($form, &$form_state)
   }
   
   // Validation for gold star greater values
-  if ($gold_start_two <= $gold_start_one) {
+  if (!empty($gold_start_two) && ($gold_start_two <= $gold_start_one)) {
      form_set_error('lrp_gold_star_two', t('Gold star two value must be greater than gold star one.'));
   }
   
-  if (($gold_start_three <= $gold_start_one) || ($gold_start_three <= $gold_start_two)) {
+  if (!empty($gold_start_three) && (($gold_start_three <= $gold_start_one) || ($gold_start_three <= $gold_start_two))) {
      form_set_error('lrp_gold_star_two', t('Gold star three value must be greater than gold star one and two.'));
   }
   
-  if (($gold_start_four <= $gold_start_one) || ($gold_start_four <= $gold_start_two) || ($gold_start_four <= $gold_start_three)) {
+  if (!empty($gold_start_four) && (($gold_start_four <= $gold_start_one) || ($gold_start_four <= $gold_start_two) || ($gold_start_four <= $gold_start_three))) {
      form_set_error('lrp_gold_star_two', t('Gold star four value must be greater than gold star one, two and three.'));
   }
   
-  if (($gold_start_five <= $gold_start_one) || ($gold_start_five <= $gold_start_two) || ($gold_start_five <= $gold_start_three) || ($gold_start_five <= $gold_start_four)) {
+  if (!empty($gold_start_five) && (($gold_start_five <= $gold_start_one) || ($gold_start_five <= $gold_start_two) || ($gold_start_five <= $gold_start_three) || ($gold_start_five <= $gold_start_four))) {
      form_set_error('lrp_gold_star_two', t('Gold star five value must be greater than gold star one, two, three and four.'));
   }
 }
