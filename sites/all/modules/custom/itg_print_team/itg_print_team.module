@@ -479,7 +479,7 @@ function itg_print_team_node_update($node) {
       module_load_include('inc', 'itg_print_team', 'includes/print_team_story_xml');
 
       // Send status mail to user
-      if (in_array($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'], array('Approved', 'Rejected', 'Needs Modification'))) {
+      if (in_array($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'], array('Approved', 'Rejected', 'Needs-Modification'))) {
         if ($user->uid != $node->uid) {
           itg_print_team_send_idea_status_mail($node, 'update');
         }
@@ -582,7 +582,7 @@ function itg_print_team_idea_actions($nid) {
 
   $accept = l(t('Approve'), 'idea-status/approved/' . $nid);
   $reject = l(t('Reject'), 'idea-status/rejected/' . $nid);
-  $need_modification = l(t('Needs Modification'), 'idea-status/needs_modification/' . $nid);
+  $need_modification = l(t('Needs-Modification'), 'idea-status/needs_modification/' . $nid);
 
   switch ($status) {
     case 'Approved':
@@ -593,7 +593,7 @@ function itg_print_team_idea_actions($nid) {
       return '<span style="padding-left:30px">-</span>';
       break;
 
-    case 'Needs Modification':
+    case 'Needs-Modification':
       return $accept . ' | ' . $reject;
       break;
 

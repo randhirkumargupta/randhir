@@ -302,8 +302,9 @@ echo \'NA\';
   $handler->display->display_options['fields']['field_pti_idea_status']['table'] = 'field_data_field_pti_idea_status';
   $handler->display->display_options['fields']['field_pti_idea_status']['field'] = 'field_pti_idea_status';
   $handler->display->display_options['fields']['field_pti_idea_status']['label'] = 'Status';
+  $handler->display->display_options['fields']['field_pti_idea_status']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_pti_idea_status']['alter']['text'] = '[field_pti_idea_status]';
   $handler->display->display_options['fields']['field_pti_idea_status']['empty'] = 'In Progress';
-  $handler->display->display_options['fields']['field_pti_idea_status']['type'] = 'text_default';
   /* Field: Content: Mark as Complete */
   $handler->display->display_options['fields']['field_pti_mark_as_complete']['id'] = 'field_pti_mark_as_complete';
   $handler->display->display_options['fields']['field_pti_mark_as_complete']['table'] = 'field_data_field_pti_mark_as_complete';

@@ -110,7 +110,9 @@ global $theme;
           </div>
         <?php endif; ?>
         <div class="row">
-          <div class="col-md-12 itg-region">
+          <div class="col-md-12">
+            <div class="itg-region">
+            <div class="slide-icon scroll-arrow-right"><i class="fa fa-angle-left ll"></i></div>
             <ul>
               <?php for ($count=1; $count < 21; $count++) { ?>
                 <li>
@@ -129,6 +131,8 @@ global $theme;
                 </li>
               <?php } ?>              
             </ul>
+            <div class="slide-icon scroll-arrow-left"><i class="fa fa-angle-right ll"></i></div>
+            </div>
           </div>
         </div>
         <div class="row">

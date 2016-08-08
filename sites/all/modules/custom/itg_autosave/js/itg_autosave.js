@@ -45,13 +45,7 @@ jQuery(document).ready(function () {
               var cus_message = '<div class="messages--status messages status autosave">Form data has been successfully auto saved</div>';
               jQuery('#content').prepend(cus_message);
               jQuery('#content').find('.autosave').fadeOut(10000);
-            }
-            else {
-              jQuery('#content').find('.autosave').remove();
-              var cus_message = '<div class="messages--error messages error autosave">Getting error on autosave.</div>';
-              jQuery('#content').prepend(cus_message);
-              jQuery('#content').find('.autosave').fadeOut(10000);
-            }
+            }            
           }
         });
       }, time_int * 1000);

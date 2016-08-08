@@ -496,7 +496,7 @@ class itg_auto_save {
           
         case 'field_collection':
           // Save field name of field collection to array.
-          $this->temp[] = $field['fieldName'];
+          //$this->temp[] = $field['fieldName'];
           break;
 
         case 'text_long':          
