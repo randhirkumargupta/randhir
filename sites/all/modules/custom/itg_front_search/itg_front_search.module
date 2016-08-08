@@ -28,6 +28,7 @@ function itg_front_search_menu() {
  * {@inheritdoc}
  */
 function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
+  
   global $user;
   if ($user->uid != '1') {
     // hide source relation and type field from other users 
@@ -89,6 +90,18 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       'readonly' => 'readonly'
       ),
     );
+  }
+  
+  // code for search image filter
+  
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'searchimage') {
+
+    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    $form['hash']['#type'] = 'select';
+    $form['hash']['#options'] = $hash;
+    $form['hash']['#size'] = 5;
+    $form['hash']['#multiple'] = TRUE;
+
   }
 }
 

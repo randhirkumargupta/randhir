@@ -419,7 +419,7 @@ function itg_widget_block_view($delta = '') {
 				showArea:'#example',
 				prev:'#jprev',
 				next:'#jnext',
-				moveSpeed:300,
+				moveSpeed:500,
 				autoPlay:false
 			});", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
       );

@@ -15,17 +15,8 @@ function itg_category_manager_init() {
     variable_set('taxonomy_terms_per_page_admin', 20);
     global $base_url;
     $settings['baseUrl'] = $base_url;
-    if(arg(0) == 'node' && arg(1) == 'add'){
-      $type = arg(2);
-  }elseif(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit'){
-      $node = node_load(arg(1));
-      $type = $node->type;
-  }
+
     drupal_add_js(array('baseUrl' => $settings), 'setting');
-    drupal_add_js('jQuery(document).ready(function() {
-        jQuery(".node-form").append("<input type=hidden name=form_node value='.$type.' >");
-              
-           });', array('type' => 'inline', 'scope' => 'footer'));
 }
 
 /**
@@ -58,7 +49,7 @@ function itg_category_manager_menu() {
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_category_manager_form'),
         'access arguments' => array('administer taxonomy'),
-    );    
+    );
     // Menu for associated content counting
     $items['content-associated'] = array(
         'page callback' => 'itg_category_manager_nodecount',
@@ -210,9 +201,9 @@ function itg_category_manager_term_state($tid) {
  */
 function itg_category_manager_term_state_content($nodeid, $key) {
     $itg_query = db_select('field_data_field_cm_select_type', 'itg')
-    ->fields('itg')
-    ->condition('field_cm_select_type_value', $nodeid, '=')
-    ->condition('entity_id', $key, '=');
+            ->fields('itg')
+            ->condition('field_cm_select_type_value', $nodeid, '=')
+            ->condition('entity_id', $key, '=');
     $itg_result = $itg_query->execute()->fetchField();
     $flag = FALSE;
     if (isset($itg_result) && !empty($itg_result)) {
@@ -302,7 +293,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
             }
         }
     } else {
-        if ($form['#term']['vocabulary_machine_name'] == 'category_management') {            
+        if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
             $form['name']['#title'] = t('Category Title');
             $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
             unset($form['description']);
@@ -364,7 +355,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
                 } else {
                     $form['term-state-wrap']['term_state']['#suffix'] = '<div class="status-message">' . t('This category is currently in inactive mode.') . '</div>';
                 }
-            }            
+            }
             // Add id attribute to tid field      
             $form['term_tid'] = array(
                 '#type' => 'hidden',
@@ -957,6 +948,28 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
         $form['status']['#options'][0] = t('Inactive');
         $form['field_cm_select_type_value']['#options']['All'] = t('All');
     }
+    
+    // code use for append field for primary category and category list by contant type
+    $code_append_array = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form','quiz_node_form','videogallery_node_form','blog_node_form','recipe_node_form');
+    if (in_array($form_id, $code_append_array)) {
+        if (arg(0) == 'node' && arg(1) == 'add') {
+            $type = arg(2);
+        } elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+            $node = node_load(arg(1));
+            $type = $node->type;
+        }
+        drupal_add_js('jQuery(document).ready(function() {
+        jQuery(".node-form").append("<input type=hidden name=form_node value=' . $type . ' >");
+            jQuery("#edit-submit").click(function(){
+                var gethtml = jQuery("#primary-category-data").html();
+                jQuery("#edit-field-primary-category-html-und-0-value").val(gethtml);
+                jQuery("#edit-field-primary-category-und-0-value").val(jQuery("#primary-category-data").val());
+            })   
+           });', array('type' => 'inline', 'scope' => 'footer'));
+        $form['field_primary_cat_data'] = array('#title' => t('Select Primary'), '#type' => 'select', '#validated' => TRUE, '#attributes' => array('id' => 'primary-category-data'), '#options' => array('' => t('Select')));
+        $form['#attached']['js'] = array(
+        drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js');
+    }
 }
 
 /**
@@ -1259,7 +1272,7 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
             drupal_set_message(t('Category has been disabled.'));
         }
     }
-    drupal_goto('category-manager');
+    drupal_goto('category-manager-listing');
 }
 
 function itg_category_manager_custom_submit($form, &$form_state) {

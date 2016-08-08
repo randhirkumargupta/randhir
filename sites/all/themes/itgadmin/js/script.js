@@ -182,7 +182,7 @@
 
 
     // jQuery Code for category manager page
-    $('.item-list ul li:not(:has(".item-list"))').find('.cmd-heading .fa').remove();
+    $('.item-list ul li:not(:has(".item-list"))').find('.term-wrapper .cmd-heading .fa').remove();
     $('.cmd-heading').click(function () {
       $(this).toggleClass('active');
       if ($(this).parent().next().is(':visible')) {
@@ -739,6 +739,9 @@
       jQuery(this).parent().toggleClass('active');
     });
     
+    //ITG Listing top spacing          
+    $('.tab-data').find('ul.itg-listing').css('padding-top','0');
+    
   };
 })(jQuery);
 
@@ -779,8 +782,8 @@ jQuery(document).ready(function(){
         jQuery(this).find('.my-saved-search').slideUp();
     });
         
-    jQuery( ".checked-list" ).sortable();
-    jQuery( ".checked-list" ).disableSelection();
+    jQuery('body').find( ".checked-list" ).sortable();
+    jQuery('body').find( ".checked-list" ).disableSelection();
     
     // jQuery code to remove checked list item
     jQuery('.checked-list').on('click', '.fa-times', function () {
@@ -817,3 +820,35 @@ jQuery(document).ready(function(){
     
     
 });
+
+
+jQuery(document).ready(function() {
+    var t = jQuery(".itg-region ul li").length,
+        e = jQuery(".itg-region ul li").outerWidth(true),
+        o = e * t;
+    jQuery(".itg-region ul").css("width", o + 100);
+    var s = 0;
+    jQuery(".scroll-arrow-left").click(function() {
+        if (0 == s) jQuery(this).show();
+        else {
+            var t = jQuery(".itg-region ul li").eq(s - 1).outerWidth(true);
+            jQuery(".itg-region ul").animate({
+                left: "+=" + t
+            }), s -= 1, jQuery(".scroll-arrow-right").fadeIn()
+        }
+    }), jQuery(".scroll-arrow-right").click(function() {
+        if (t - 7 >= s) {
+            var e = jQuery(".itg-region ul li").eq(s).outerWidth();
+            jQuery(".itg-region ul").animate({
+                left: "-=" + e
+            }), s += 1
+        } else jQuery(".scroll-arrow-right").fadeOut()
+    })
+});
+
+
+
+
+
+
+
