@@ -124,9 +124,9 @@ function loyality_reward_points_configuration_form() {
  * @param array $form_state
  */
 function loyality_reward_points_configuration_form_validate($form, &$form_state) {
-  $form_values = $form_state['values'];
-  
+ 
   // Collect form variables
+  $form_values = $form_state['values'];
   $content_share = $form_values['lrp_content_share'];
   $content_like = $form_values['lrp_content_like'];
   $content_visit = $form_values['lrp_content_visit'];
