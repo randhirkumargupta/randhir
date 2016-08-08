@@ -75,8 +75,8 @@
                 });
             });
 
-            //
-            $('.browse-ftp a').click(function() {
+            // - multi checkbox ftp 
+            /*$('.browse-ftp a').click(function() {
                 var ids = [];
                 $('#edit-video-browse-select .form-checkbox').each(function() {
                     if ($(this).is(':checked'))
@@ -91,9 +91,51 @@
                     $('#edit-field-videogallery-video-upload-add-more-number').val(1);
                     $('#edit-video-browse-select .form-checkbox').prop('checked', false);
                 }, 1000);
-            });
+            });*/
 
-            //
+            // end code
+            $('document').ready(function(){
+                var old_vid = $("input[name='field_upload_video[und][0][fid]']").val();
+                if(old_vid != 0){
+                    $("input['files[field_upload_video_und_0]']").hide();
+                    $("#edit-field-upload-video-und-0-upload-button").hide();
+      
+                   //window.alert('Please remove exist video file.');
+                   $('.vid-error').text('Please remove exist video file.');
+                   setTimeout(function() {
+                    $('.vid-error').fedout('');
+                }, 6000);
+            }
+            });
+            $("input[name='field_upload_video[und][0][fid]']").val();
+            
+            
+            
+            $('.browse-ftp').hide();
+            $('.browse-ftp-click').click(function() {
+               var old_vid = $("input[name='field_upload_video[und][0][fid]']").val(); 
+               if(old_vid != 0){
+                   //window.alert('Please remove exist video file.');
+                   $('.vid-error').text('Please remove exist video file.');
+                   setTimeout(function() {
+                    $('.vid-error').fedout('');
+                }, 6000);    
+               }else{
+                  var data = $('.browse-ftp').html();
+                    $.colorbox({html: "" + data + "",onComplete : function() { 
+                        $(this).colorbox.resize(); 
+                     }  });
+               }
+            });
+            $('.browse-ftp a').click(function() {
+                var vid = $('#edit-video-browse-select .form-radio').val();
+                $("input[name='input[name='field_upload_video[und][0][fid]']").val(vid); 
+                $("#edit-field-upload-video-und-0-upload-button").mousedown();
+                
+                setTimeout(function() {
+                    $('#edit-video-browse-select .form-radio').prop('checked', false);
+                }, 1000);
+            });
         }
 
     };
