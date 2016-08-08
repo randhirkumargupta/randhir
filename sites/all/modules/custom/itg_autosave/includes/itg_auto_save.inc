@@ -141,11 +141,12 @@ class itg_auto_save {
   /**
    * Prepare presave array for file field.
    *
-   * @param array $value
-   *   File field value/
-   *
-   * @return array
-   *   Extracted file values.
+   * @param string $field_name
+   *   Machine name of the current field.
+   * @param array $inputs
+   *   File field submitted value.
+   * @param stdObject
+   *   Node object.
    */
   public function itg_save_field_file($field_name, $inputs, &$node) {
     $this->file = $inputs[$node->language][0];
