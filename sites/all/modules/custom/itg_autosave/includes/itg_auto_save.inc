@@ -147,13 +147,17 @@ class itg_auto_save {
    * @return array
    *   Extracted file values.
    */
-  public function itg_save_field_file($value) {
-    $this->file_arr = array();
-    $this->file_arr['fid'] = $value['und'][0]['fid'];
-    $this->file_arr['display'] = $value['und'][0]['display'];
-    $this->file_arr['description'] = $value['und'][0]['description'];
-
-    return $this->file_arr;
+  public function itg_save_field_file($field_name, $inputs, &$node) {
+    $this->file = $inputs[$node->language][0];
+    if ($this->file['fid'] > 0) {
+      $node->{$field_name}[$node->language][0]['fid'] = $this->file['fid'];
+    }
+    if ($this->file['description'] != '') {
+      $node->{$field_name}[$node->language][0]['description'] = $this->file['description'];
+    }
+    if ($this->file['display'] != '') {
+      $node->{$field_name}[$node->language][0]['display'] = $this->file['display'];
+    }
   }
 
   /**
@@ -542,12 +546,49 @@ class itg_auto_save {
             $this->target_id = (int) $inputs[$field['fieldName']]['und'];
             $node->{$field['fieldName']}['und'][0]['target_id'] = $this->target_id;
           }
+          
+          break;
+        case 'image':
+          $this->itg_save_field_image($field['fieldName'], $inputs[$field['fieldName']], $node);
+          
+          break;
+        case 'file':
+          $this->itg_save_field_file($field['fieldName'], $inputs[$field['fieldName']], $node);
       }
     }
 
     return $this->temp;
   }
   
+  /**
+   * Prepare node object for image field.
+   *
+   * @param string $field_name
+   *   Machine name of the field.
+   * @param array $inputs
+   *   Form submitted data for current field.
+   * @param type $node
+   *   Node object.
+   */
+  public function itg_save_field_image($field_name, $inputs, &$node) {
+    // Assign fid to field.
+    if ($inputs[$node->language][0]['fid'] > 0) {
+      $node->{$field_name}[$node->language][0]['fid'] = $inputs[$node->language][0]['fid'];
+    }
+    // Assign alternative text.
+    if ($inputs[$node->language][0]['alt'] != '') {
+      $node->{$field_name}[$node->language][0]['alt'] = $inputs[$node->language][0]['alt'];
+    }
+    // Assign title text.
+    if ($inputs[$node->language][0]['title'] != '') {
+      $node->{$field_name}[$node->language][0]['title'] = $inputs[$node->language][0]['title'];
+    }
+    // Assign display mode.
+    if ($inputs[$node->language][0]['display'] != '') {
+      $node->{$field_name}[$node->language][0]['display'] = $inputs[$node->language][0]['display'];
+    }    
+  }
+
   /**
    * Create field collection items.
    *

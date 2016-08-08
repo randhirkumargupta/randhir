@@ -640,8 +640,8 @@ function itg_category_manager_is_dupe_vocabulary($vocab, $vid = 0) {
 function itg_category_manager_get_term_from_name($term_name, $vid) {
     $tree = taxonomy_get_tree($vid);
     foreach ($tree as $term) {
-        if (strtolower($term->name) == strtolower($term_name)) {
-            return $term->tid;
+        if (strtolower($term->name) == strtolower($term_name)) {          
+          return $term->tid;
         }
     }
     return FALSE;
@@ -944,12 +944,11 @@ function itg_category_manager_views_data() {
 }
 
 /**
- * Implements hook_form_alter()
- * @param array $form array of form elements.
- * @param array $form_state array contains submitted form values
- * @param string $form_id name of the form id
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc} 
  */
-function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
+function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {    
     if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
         drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js', 'file');
         $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
@@ -1184,7 +1183,7 @@ function itg_category_manager_disable_manually_form() {
         '#title' => t('Choose categories'),
         '#type' => 'hierarchical_select',
         '#config' => array(
-            'module' => 'hs_taxonomy',
+            'module' => 'itg_category_manager',
             'params' => array(
                 'vid' => (int) $vocabulary->vid,
                 'exclude_tid' => NULL,
@@ -1262,6 +1261,12 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
     drupal_goto('category-manager-listing');
 }
 
+/**
+ * Custom submit callback for message.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
 function itg_category_manager_custom_submit($form, &$form_state) {
     if (isset($_SESSION['messages']['status'])) {
         unset($_SESSION['messages']['status']);
@@ -1273,4 +1278,20 @@ function itg_category_manager_custom_submit($form, &$form_state) {
     }
     $category_title = $form_state['node']->title;
     drupal_set_message(t('Category <b>@tname</b> has been @op.', array('@tname' => $form_state['term']->name, '@op' => $op)), 'status');
+}
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * {@inheritdoc}. 
+ */
+function itg_category_manager_views_query_alter(&$view, &$query) {      
+  if (isset($_GET['name']) && $_GET['name'] !== '' && $view->name == 'category_manager') {
+    $vocabulary = taxonomy_vocabulary_machine_name_load('category_management');
+    $term_name = check_plain($_GET['name']);
+    $term = itg_category_manager_get_term_from_name($term_name, $vocabulary->vid);
+    $super_parent = taxonomy_get_parents_all($term);
+    $super_parent_name = $super_parent[count($super_parent) - 1]->name;        
+    $query->where[1]['conditions'][0]['value'] = '%' . $super_parent_name . '%';
+  }   
 }
