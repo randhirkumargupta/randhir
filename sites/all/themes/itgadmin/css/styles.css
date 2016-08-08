@@ -5813,3 +5813,7 @@ div.node #comments h2 {
   color: #494949;
   font-size: 14px;
 }
+
+#block-itg-layout-manager-layout-button-block {
+  padding-top: 20px;
+}
