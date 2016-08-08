@@ -31,8 +31,8 @@ function features_for_print_team_field_default_field_bases() {
       'allowed_values' => array(
         'Approved' => ' Approved',
         'Rejected' => ' Rejected',
-        'Needs Modification' => ' Needs Modification',
-        'Not Decided' => ' Not Decided (On Hold)',
+        'Needs-Modification' => ' Needs Modification',
+        'Not-Decided' => ' Not Decided (On Hold)',
       ),
       'allowed_values_function' => '',
     ),

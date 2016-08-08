@@ -120,7 +120,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     <?php endif; ?>
 
     <div class="row row-1">
-        <div class="top-block mt-50">
+        <div class="top-block">
 
             <div class="top-colum-2">
                 <div class="itg-widget <?php print $gray_bg_layout;?>">

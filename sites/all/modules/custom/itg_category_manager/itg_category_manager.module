@@ -1272,7 +1272,7 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
             drupal_set_message(t('Category has been disabled.'));
         }
     }
-    drupal_goto('category-manager');
+    drupal_goto('category-manager-listing');
 }
 
 function itg_category_manager_custom_submit($form, &$form_state) {

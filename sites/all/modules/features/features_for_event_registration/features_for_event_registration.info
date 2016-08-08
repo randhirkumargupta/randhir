@@ -6,6 +6,7 @@ dependencies[] = field_collection
 dependencies[] = msnf
 dependencies[] = node
 dependencies[] = number
+dependencies[] = syndication_feature
 dependencies[] = text
 dependencies[] = user_management
 dependencies[] = views

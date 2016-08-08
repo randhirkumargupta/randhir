@@ -135,6 +135,7 @@ a {
   padding: 15px 15px 15px 20px;
   display: block;
   border-bottom: 1px solid #e4e4e4;
+  line-height: 19px;
 }
 .itg-listing li a:hover {
   background: #f8f8f8;
@@ -247,6 +248,7 @@ a {
   text-transform: uppercase;
   color: #fff;
   font-family: "Roboto", sans-serif;
+  z-index: 1;
 }
 
 /*Start Dont miss Home page css*/
@@ -266,18 +268,15 @@ a {
 .dont-miss ul:after {
   clear: both;
 }
-.dont-miss ul li {
+.dont-miss ul .dont-miss-listing {
   overflow: hidden;
   padding: 10px;
 }
-.dont-miss ul li + li {
-  border-top: 1px solid #dddddd;
-}
-.dont-miss ul li .dm-pic {
+.dont-miss ul .dont-miss-listing .dm-pic {
   float: left;
   margin-right: 15px;
 }
-.dont-miss ul li .dm-detail {
+.dont-miss ul .dont-miss-listing .dm-detail {
   display: block;
   overflow: hidden;
   font-size: 14px;
@@ -306,24 +305,27 @@ a {
 
 /*End Dont miss Home page css*/
 /*Start May we suggest css*/
-.may-be-suggest-container ul li {
+.may-be-suggest-container ul .may-we-suggest {
   overflow: hidden;
   padding: 10px;
 }
-.may-be-suggest-container ul li + li {
-  border-top: 1px solid #dddddd;
-}
-.may-be-suggest-container ul li .pic {
+.may-be-suggest-container ul .may-we-suggest .pic {
   float: right;
   margin-left: 10px;
 }
-.may-be-suggest-container ul li .title {
+.may-be-suggest-container ul .may-we-suggest .title {
   display: block;
   overflow: hidden;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
   color: #323232;
+}
+.may-be-suggest-container ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.may-be-suggest-container ul li:last-child {
+  border-bottom: 1px solid #dddddd;
 }
 .may-be-suggest-container h3 {
   text-transform: uppercase;
@@ -351,6 +353,78 @@ a {
 }
 
 /*End May we suggest End*/
+/*Start top-takes-video suggest css*/
+.top-takes-video-container ul .top-takes-video {
+  overflow: hidden;
+  padding: 10px;
+}
+.top-takes-video-container ul .top-takes-video .pic {
+  float: right;
+  margin-left: 10px;
+}
+.top-takes-video-container ul .top-takes-video .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.top-takes-video-container ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.top-takes-video-container h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  position: relative;
+}
+.top-takes-video-container h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+.top-takes-video-container h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
+
+/*End top-takes-video suggest End*/
+/*Start CSS trending-videos Home  page*/
+.trending-videos {
+  border: 1px solid #dddddd;
+  padding-top: 10px;
+}
+.trending-videos .trending-videos-list {
+  overflow: hidden;
+  padding: 10px;
+}
+.trending-videos .trending-videos-list .pic {
+  float: left;
+  margin-right: 10px;
+}
+.trending-videos .trending-videos-list .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.trending-videos li + li {
+  border-top: 1px solid #dddddd;
+}
+
+/*End CSS trending-videos Home  page*/
 @media only screen and (min-width: 768px) {
   h1 {
     font-size: 40px;

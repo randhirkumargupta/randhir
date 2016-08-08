@@ -2043,45 +2043,6 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-story-field_story_resize_extra_large'.
-  $field_instances['node-story-field_story_resize_extra_large'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 32,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_resize_extra_large',
-    'label' => 'Resize extra large ',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 31,
-    ),
-  );
-
   // Exported field_instance: 'node-story-field_story_schedule_date_time'.
   $field_instances['node-story-field_story_schedule_date_time'] = array(
     'bundle' => 'story',
@@ -3085,7 +3046,6 @@ function features_for_story_field_default_field_instances() {
   t('Quotes');
   t('Redirection URL');
   t('Related Content');
-  t('Resize extra large ');
   t('Schedule date & time');
   t('Section');
   t('Select listicle templates');

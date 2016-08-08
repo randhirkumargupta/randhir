@@ -56,6 +56,17 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
     }
 
+    // add common hidden type field
+    $type = $form['type']['#value'];
+
+    $form['ntype'] = array(
+      '#title' => t('Ntype'),
+      '#type' => 'hidden',
+      '#id' => 'ntype',
+      '#description' => t(''),
+      '#value' => $type,
+    );
+    
     // Add JS to hide Advance seeting from all content type forms
     drupal_add_js('jQuery(document).ready(function() {                  
            jQuery("#edit-metatags-und-advanced").hide();
@@ -102,6 +113,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     || $form_id == 'story_node_form'
     || $form_id == 'itg_celebrity_profile_node_form'
     || $form_id == 'blog_node_form'
+    || $form_id == 'podcast_node_form'
   ) {
     if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
       $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';

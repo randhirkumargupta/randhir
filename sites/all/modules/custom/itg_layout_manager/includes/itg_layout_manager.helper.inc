@@ -88,7 +88,9 @@ function get_itg_widget($widget_name, $widget_url = NULL) {
     return create_setion_widgets($widget_url);
   }
   elseif (isset($widget_name) && $widget_name == 'photo_list_of_category') {    
-    return 'shravan kumar'; //'photo_list_of_category'; //code views rander
+    //return 'shravan kumar'; //'photo_list_of_category'; //code views rander
+    
+    return views_embed_view('photo_list_of_category', 'block', $widget_url);
   }
   else {      
     $block = block_load('itg_widget', $widget_name);

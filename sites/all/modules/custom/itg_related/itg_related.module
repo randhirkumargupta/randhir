@@ -197,9 +197,9 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if ($i > 1) {
       $and = ' AND ';
     }
-    $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match');
+    $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage');
 
-    if (!empty($val) && $val != 'related-content' && $val != 'site-search' && !in_array($key, $remove_key)) {
+    if (!empty($val) && $val != 'related-content' && $val != 'site-search' && $val != 'searchimage'  && !in_array($key, $remove_key)) {
 
       if (is_array($val)) {
 
@@ -251,6 +251,10 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $get_comma_value = implode(',', $get_value);
           $val_str = str_replace(",", " OR ", $get_comma_value);
         }
+        else if ($key == 'sm_field_itg_common_by_line_name') {
+          $quotes_string = '"'.$val.'"';
+          $val_str = $quotes_string;
+        }
         else {
           $val_str = $val;
         }
@@ -268,7 +272,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     $query->replaceParam("fq", '(' . $str . ')');
   }
 
-  //p($query->getSolrParams());
+ // p($query->getSolrParams());
 }
 
 /**

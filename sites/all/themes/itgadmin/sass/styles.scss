@@ -1307,7 +1307,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #Categorization{
   select{
     max-width: 180px;
-    min-height: 200px;
+    /*min-height: 200px;*/
   }
 } 
 .path-form{
@@ -1508,6 +1508,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-ugc-comment-menu,
 #block-menu-menu-astro-content-admin-menu,
 #block-menu-menu-recipe-content-admin-menu,
+#block-menu-menu-podcast-admin-menu,
+#block-menu-menu-print-team-menu,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -2895,11 +2897,34 @@ fieldset#edit-select{
     }
   }
   .view-content{
-    > .item-list{
-      border: 1px solid #d9d9d9;
+    .item-list{
       @extend .dib; 
       @extend .full;
-      @extend .mt-10;
+      ul{
+        li{
+          .term-wrapper{
+            border-bottom: 1px solid #d9d9d9;
+            .term-detail{
+              padding: 5px;
+              width: 10%;
+              float: left;
+              &:first-child{
+                width: 60%;
+              }
+            }
+          }
+        }
+      }
+      .item-list{
+        .term-detail:first-child{
+          padding-left: 20px;
+        }
+        .item-list{
+          .term-detail:first-child{
+            padding-left: 40px;
+          }
+        }
+      }
     }
     .item-list{
       ul{@extend .no-bullet;}
@@ -2933,7 +2958,7 @@ fieldset#edit-select{
 .cmt-details span{border-right: 1px solid #ddd;}
 .cmt-details > span:last-child {border-right: medium none;}
 .category-manager-details,
-.view-category-manager .view-content ul li{float: left; width: 100%; box-sizing: border-box;}
+/*.view-category-manager .view-content ul li{float: left; width: 100%; box-sizing: border-box;}*/
 .view-category-manager .view-content ul li{padding: 0;}
 .cmd-detail span, .cmd-detail .edit-cm{
   position: absolute; top: 0; height: 100%; padding: 5px 10px; width: 25%; box-sizing: border-box;
@@ -5659,7 +5684,7 @@ div.node{
     }
     
 }
-.page-node-add-magazine, .page-node-add-breaking-news, .page-node-add-story{
+.page-node-add-magazine, .node-type-story, .node-type-magazine, .node-type-breaking-news, .page-node-add-breaking-news, .page-node-add-story, .page-node-add-blog, .page-node-add-podcast, .page-node-add-recipe, .page-node-add-poll{
     .form-type-managed-file{
       .image-widget-data{
           position: relative;  
@@ -5694,17 +5719,24 @@ div.node{
   }
   
   .itg-region{
+    margin: 0 auto;    
+    overflow: hidden;    
+    padding:0 25px;
+    position: relative;
     ul{
       @extend .no-bullet;
       border-bottom: 1px solid #d9d9d9;
+      white-space: nowrap;
       @extend .dib;
       @extend .full;
+      @extend .pos-rel;
       li{
         @extend .fleft;
-        margin-right: 10px;
+        border-right: 5px solid #fff;
         text-transform: uppercase;
         a{
           @extend .db;
+          margin: 0;
           padding: 10px 5px 7px;
           border-bottom: 3px solid #d9d9d9;
           background-color: #d9d9d9;
@@ -5713,6 +5745,25 @@ div.node{
           }
         }
       }
+    }
+    .slide-icon{
+      position: absolute;
+      top: 0;
+      background: #fff;
+      line-height: 40px;
+      width: 25px;
+      height: 40px;      
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      z-index: 9;
+      display: block !important;
+    }
+    .slide-icon.scroll-arrow-right{
+      left:0;
+    }
+    .slide-icon.scroll-arrow-left{
+      right: 0;
     }
   }
   .region-content{

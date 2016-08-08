@@ -225,6 +225,9 @@ function itg_widget_block_info() {
   $blocks['dont_miss'] = array(
       'info' => t('Widget: Dont Miss form custom table'),
   );
+  $blocks['watch_right_now_videos_widget'] = array(
+      'info' => t('Widget: Watch right now videos'),
+  );
   return $blocks;
 }
 
@@ -293,6 +296,14 @@ function itg_widget_block_view($delta = '') {
       $info['page'] = 'trending_videos_widget'; // page name
       $data = itg_widget_trending_videos_widget_ordering_data($info);
       $block['content'] = theme("trending_videos_widget", array("data" => $data));
+      break;
+    // Watch Right Now ordering reordering widget case
+    case 'watch_right_now_videos_widget':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
+      $info['view_name'] = 'story_widget'; // view name
+      $info['page'] = 'watch_right_now_widget'; // page name
+      $data = itg_widget_watch_right_now_videos_widget_ordering_data($info);
+      $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
       break;
     // Top takes videos ordering reordering widget case
     case 'top_takes_videos_widget':
@@ -408,7 +419,7 @@ function itg_widget_block_view($delta = '') {
 				showArea:'#example',
 				prev:'#jprev',
 				next:'#jnext',
-				moveSpeed:300,
+				moveSpeed:500,
 				autoPlay:false
 			});", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
       );
@@ -447,6 +458,10 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
       elseif ($current_display == 'top_takes_video') {
         //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
         $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('top_takes_videos'); // top story widget qid
+      }
+      elseif ($current_display == 'watch_right_now') {
+        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+        $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('watch_right_now'); // top story widget qid
       }
       else {
         //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
@@ -557,6 +572,9 @@ function itg_widget_theme() {
       'top_takes_videos_widget' => array(
           'template' => 'templates/top-takes-videos-widget',
       ),
+      'itg_widget_watch_right_now_videos_widget' => array(
+          'template' => 'templates/watch-right-now-videos-widget',
+      ),
   );
   return $themes;
 }
@@ -596,6 +614,10 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
       break;
     case 'views-exposed-form-story-widget-trending-videos':
+      $form['title']['#attributes']['placeholder'] = t('Video Title');
+      $form['nid']['#attributes']['placeholder'] = t('Video ID');
+      break;
+    case 'views-exposed-form-story-widget-watch-right-now':
       $form['title']['#attributes']['placeholder'] = t('Video Title');
       $form['nid']['#attributes']['placeholder'] = t('Video ID');
       break;

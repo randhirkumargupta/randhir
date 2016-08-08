@@ -50,7 +50,7 @@ if ($_GET['type'] == 'commentform') {
       <?php if($node->field_pti_idea_status[LANGUAGE_NONE][0]['value']) {?>
       <div class="field">
         <div class="field-label">Status:</div>
-        <div class="field-items"><?php echo $node->field_pti_idea_status[LANGUAGE_NONE][0]['value']; ?></div>
+        <div class="field-items"><?php echo str_replace('-', ' ', $node->field_pti_idea_status[LANGUAGE_NONE][0]['value']); ?></div>
       </div>
       <?php } ?>
       

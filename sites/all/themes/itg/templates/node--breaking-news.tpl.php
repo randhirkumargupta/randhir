@@ -9,6 +9,9 @@
  */
 global $base_url;
 ?>
+
+<div class="live-block">
+
 <?php
 
 if (!empty($content)):
@@ -16,11 +19,13 @@ if (!empty($content)):
     $type = $node->field_type['und']['0']['value'];
     if ($type === 'Live Blog') {
         $title = $node->title;
-        print ($type . ': ' . $title) . '<br/>';
-        print ($node->field_label['und']['0']['value']) . '<br/>';
-    }
+        ?>
+    <h1><span><?php print ($type) ?></span>: <?php print ($title) ?></h1>
+    <p class="short-discription"> <?php print ($node->field_label['und']['0']['value'])?></p>
+    <?php
+        }
     ?>
-    <iframe width="640" height="360" frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="http://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;autoPlay=true&amp;mute=false"></iframe>
+    <iframe width="100%" height="360" frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="http://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;autoPlay=true&amp;mute=false"></iframe>
     <?php
 
     if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
@@ -41,3 +46,4 @@ if (!empty($content)):
 
 endif;
 ?>
+</div>

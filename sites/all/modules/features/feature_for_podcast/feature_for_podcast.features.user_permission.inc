@@ -48,14 +48,11 @@ function feature_for_podcast_user_default_permissions() {
   $permissions['edit any podcast content'] = array(
     'name' => 'edit any podcast content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Expert' => 'Expert',
-      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );
