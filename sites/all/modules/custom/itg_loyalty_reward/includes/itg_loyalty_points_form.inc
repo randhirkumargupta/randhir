@@ -8,66 +8,114 @@
  * Loyalty points configuration form
  * @return array
  */
-function loyalty_points_configuration_form() {
- 
+function loyality_reward_points_configuration_form() {
+
+  $form['lrp_layality_points_heading'] = array(
+      '#type' => 'item',
+      '#markup' => '<div class="itg-group-field"><h2>' . t('Point Configuration for Loyalty') . '</h2></div>',
+  );
   $form['lrp_content_share'] = array(
       '#type' => 'textfield',
-      '#title' => 'Content Share',
+      '#title' => t('Content Share'),
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_content_share'),
   );
   $form['lrp_content_like'] = array(
       '#type' => 'textfield',
-      '#title' => 'Content Like',
+      '#title' => t('Content Like'),
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_content_like'),
   );
   $form['lrp_content_visit'] = array(
       '#type' => 'textfield',
-      '#title' => 'Content Visit',
+      '#title' => t('Content Visit'),
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_content_visit'),
   );
   $form['lrp_follow_itg_on_social_sites'] = array(
       '#type' => 'textfield',
-      '#title' => 'Follow ITG on Social Sites ',
+      '#title' => t('Follow ITG on Social Sites'),
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_follow_itg_on_social_sites'),
   );
   $form['lrp_newsletter_subscription'] = array(
       '#type' => 'textfield',
-      '#title' => 'Newsletter Subscription ',
+      '#title' => t('Newsletter Subscription'),
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_newsletter_subscription'),
   );
   $form['lrp_ugc_contribution'] = array(
       '#type' => 'textfield',
-      '#title' => 'UGC Contribution',
+      '#title' => t('UGC Contribution'),
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_ugc_contribution'),
   );
   $form['lrp_online_registration_for_any_events'] = array(
       '#type' => 'textfield',
-      '#title' => 'Online Registration for Any Events',
+      '#title' => t('Online Registration for Any Events'),
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_online_registration_for_any_events'),
   );
   $form['lrp_participation_in_poll_campaign_survey'] = array(
       '#type' => 'textfield',
-      '#title' => 'Participation in Poll/Campaign/Survey',
+      '#title' => t('Participation in Poll/Campaign/Survey'),
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_participation_in_poll_campaign_survey'),
   );
   $form['lrp_refer_a_friend'] = array(
       '#type' => 'textfield',
-      '#title' => 'Refer a Friend',
+      '#title' => t('Refer a Friend'),
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_refer_a_friend'),
   );
-  $form['lrp_points_required_for_one_gold_star'] = array(
+
+  $form['lrp_gold_start_heading'] = array(
+      '#type' => 'item',
+      '#markup' => '<div class="itg-group-field"><h2>' . t('Point configuration for Badges') . '</h2></div>',
+  );
+  $form['lrp_gold_star_one'] = array(
       '#type' => 'textfield',
-      '#title' => 'Points Required for One Gold Star',
-      '#default_value' => variable_get('lrp_points_required_for_one_gold_star'),
+      '#title' => t('Points required for one Gold Star'),
+      '#maxlength' => 6,
+      '#default_value' => variable_get('lrp_gold_star_one'),
+  );
+  $form['lrp_gold_star_two'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Points required for two Gold Star'),
+      '#maxlength' => 6,
+      '#default_value' => variable_get('lrp_gold_star_two'),
+  );
+  $form['lrp_gold_star_three'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Points required for three Gold Star'),
+      '#maxlength' => 6,
+      '#default_value' => variable_get('lrp_gold_star_three'),
+  );
+  $form['lrp_gold_star_four'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Points required for four Gold Star'),
+      '#maxlength' => 6,
+      '#default_value' => variable_get('lrp_gold_star_four'),
+  );
+  $form['lrp_gold_star_five'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Points required for five Gold Star'),
+      '#maxlength' => 6,
+      '#default_value' => variable_get('lrp_gold_star_five'),
+  );
+
+  $form['lrp_expiry_heading'] = array(
+      '#type' => 'item',
+      '#markup' => '<div class="itg-group-field"><h2>' . t('Expiry Settings') . '</h2></div>',
   );
   $form['lrp_loyality_points_expiry'] = array(
       '#type' => 'textfield',
-      '#title' => 'Loyality Points Expiry(in days)',
+      '#title' => t('Loyality Points Expiry(in days)'),
       '#required' => TRUE,
+      '#maxlength' => 6,
       '#default_value' => variable_get('lrp_loyality_points_expiry'),
   );
-
-  return system_settings_form($form); 
+  return system_settings_form($form);
 }
 
 /**
@@ -75,7 +123,7 @@ function loyalty_points_configuration_form() {
  * @param array $form
  * @param array $form_state
  */
-function loyalty_points_configuration_form_validate($form, &$form_state) {
+function loyality_reward_points_configuration_form_validate($form, &$form_state) {
   $form_values = $form_state['values'];
   
   // Collect form variables
@@ -88,10 +136,16 @@ function loyalty_points_configuration_form_validate($form, &$form_state) {
   $online_reg = $form_values['lrp_online_registration_for_any_events'];
   $participate = $form_values['lrp_participation_in_poll_campaign_survey'];
   $refer_friend = $form_values['lrp_refer_a_friend'];
-  $points_gold_star = $form_values['lrp_points_required_for_one_gold_star'];
   $loyality_points_expiry = $form_values['lrp_loyality_points_expiry'];
+  
+  // Gold star variables
+  $gold_start_one = $form_values['lrp_gold_star_one'];
+  $gold_start_two = $form_values['lrp_gold_star_two'];
+  $gold_start_three = $form_values['lrp_gold_star_three'];
+  $gold_start_four = $form_values['lrp_gold_star_four'];
+  $gold_start_five = $form_values['lrp_gold_star_five'];
 
-  // Add validation for form fileds
+  // Validation of loyalty points for form fileds
   if ($content_share !== '' && (!is_numeric($content_share) || $content_share < 1)) {
     form_set_error('lrp_content_share', t('Content share field value must be numeric and greater than zero.'));
   }
@@ -128,11 +182,45 @@ function loyalty_points_configuration_form_validate($form, &$form_state) {
     form_set_error('lrp_refer_a_friend', t('Refer a friend field value must be numeric and greater than zero.'));
   }
   
-  if ($points_gold_star !== '' && (!is_numeric($points_gold_star) || $points_gold_star < 1)) {
-    form_set_error('lrp_points_required_for_one_gold_star', t('Points required for one gold star field value must be numeric and greater than zero.'));
-  }
-  
   if ($loyality_points_expiry !== '' && (!is_numeric($loyality_points_expiry) || $loyality_points_expiry < 1)) {
     form_set_error('lrp_loyality_points_expiry', t('Loyality points expiry field value must be numeric and greater than zero.'));
+  }
+  
+  // Validation of gold star fields for zero and negative value
+  if ($gold_start_one !== '' && (!is_numeric($gold_start_one) || $gold_start_one < 1)) {
+    form_set_error('lrp_gold_star_one', t('Gold star one value must be numeric and greater than zero.'));
+  }
+  
+  if ($gold_start_two !== '' && (!is_numeric($gold_start_two) || $gold_start_two < 1)) {
+    form_set_error('lrp_gold_star_two', t('Gold star two value must be numeric and greater than zero.'));
+  }
+  
+  if ($gold_start_three !== '' && (!is_numeric($gold_start_three) || $gold_start_three < 1)) {
+    form_set_error('lrp_gold_star_three', t('Gold star three value must be numeric and greater than zero.'));
+  }
+  
+  if ($gold_start_four !== '' && (!is_numeric($gold_start_four) || $gold_start_four < 1)) {
+    form_set_error('lrp_gold_star_four', t('Gold star four value must be numeric and greater than zero.'));
+  }
+  
+  if ($gold_start_five !== '' && (!is_numeric($gold_start_five) || $gold_start_five < 1)) {
+    form_set_error('lrp_gold_star_five', t('Gold star five value must be numeric and greater than zero.'));
+  }
+  
+  // Validation for gold star greater values
+  if ($gold_start_two <= $gold_start_one) {
+     form_set_error('lrp_gold_star_two', t('Gold star two value must be greater than gold star one.'));
+  }
+  
+  if (($gold_start_three <= $gold_start_one) || ($gold_start_three <= $gold_start_two)) {
+     form_set_error('lrp_gold_star_two', t('Gold star three value must be greater than gold star one and two.'));
+  }
+  
+  if (($gold_start_four <= $gold_start_one) || ($gold_start_four <= $gold_start_two) || ($gold_start_four <= $gold_start_three)) {
+     form_set_error('lrp_gold_star_two', t('Gold star four value must be greater than gold star one, two and three.'));
+  }
+  
+  if (($gold_start_five <= $gold_start_one) || ($gold_start_five <= $gold_start_two) || ($gold_start_five <= $gold_start_three) || ($gold_start_five <= $gold_start_four)) {
+     form_set_error('lrp_gold_star_two', t('Gold star five value must be greater than gold star one, two, three and four.'));
   }
 }
