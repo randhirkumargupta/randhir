@@ -5820,3 +5820,15 @@ div.node{
   #block-itg-layout-manager-layout-button-block{
     padding-top: 20px;
   }
+  [id*="loyality-reward-points-configuration-form"]{
+    .form-type-textfield{
+      > label{
+        width: 300px;
+        & + .form-text + span.error{
+          padding-left: 300px;
+        }
+      }
+      .form-text{max-width: 110px;}
+    }
+    
+  }
