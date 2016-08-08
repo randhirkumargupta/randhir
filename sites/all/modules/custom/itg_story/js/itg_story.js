@@ -99,6 +99,8 @@
                     }
                 });
             });
+
+            // code use for make primary category
             jQuery('.add-to-dropbox').mousedown(function()
             {
                 var selectvalue = jQuery('.selects > .form-select:last option:selected').val();
@@ -119,7 +121,7 @@
 
                     })
                     comptext = comptext.slice(0, -1);
-                    jQuery('.primary_cat').each(function()
+                    jQuery('#primary-cat-data option').each(function()
                     {
                         var existvalue = jQuery(this).val();
                         if (selectvalue == existvalue)
@@ -130,24 +132,34 @@
                     })
                     if (comptext != "" && flag == 0)
                     {
-                        makeradio = '<input type="radio" name="primary_category" class="primary_cat" value="' + selectvalue + '">' + comptext;
-                        jQuery('.append_primary').append(makeradio);
-                        jQuery('.primary_cat').each(function() {
-                            if(jQuery(this).is(':checked'))
-                            {
-                                jQuery(this).trigger('click');
-                            }
-                        })
+                        makeradio = '<option value="' + selectvalue + '">' + comptext + '</option>';
+                        jQuery('#primary-cat-data').append(makeradio);
 
+                        var gethtml = jQuery('#primary-cat-data').html();
+                        jQuery('#edit-field-primary-cat-html-und-0-value').val(gethtml);
                     }
                 }
 
             })
-            jQuery('.primary_cat').click(function()
-            {
-                var gethtml = jQuery('.append_primary').html();
-                jQuery('#primary_cat_html').val(gethtml);
+            jQuery('.dropbox-remove a').click(function() {
+                var getdattext = jQuery(this).parent().siblings('td').find('.dropbox-selected-item').text();
+                $('#primary-cat-data option').each(function() {
+                    if (jQuery(this).text().indexOf(getdattext) >= 0) {
+                        jQuery(this).remove();
 
+
+                    }
+                });
+
+            })
+
+            jQuery('#primary-cat-data').change(function() {
+                var getval = jQuery(this).val();
+                jQuery('#edit-field-primary-cat-und-0-value').val(getval);
+                jQuery('#primary-cat-data option').attr('selected', false);
+                jQuery('#primary-cat-data option[value=' + getval + ']').attr('selected', 'selected');
+                var gethtml = jQuery('#primary-cat-data').html();
+                jQuery('#edit-field-primary-cat-html-und-0-value').val(gethtml);
             })
 
             // Code issue date exit or not.
@@ -169,8 +181,17 @@
 
     };
 
-    function filterhtml()
-    {
-        
-    }
+
 })(jQuery, Drupal, this, this.document);
+
+//   code load the selectd option and add to select box
+jQuery(window).load(function() {
+    //jQuery('#edit-field-primary-cat-html-und-0-value').hide();
+    // executes when complete page is fully loaded, including all frames, objects and images
+    var getvaluehtml = jQuery('#edit-field-primary-cat-html-und-0-value').val();
+
+    if (getvaluehtml != "")
+    {
+        jQuery('#primary-cat-data').html(getvaluehtml);
+    }
+});
