@@ -29,7 +29,7 @@
 
                     })
                     comptext = comptext.slice(0, -1);
-                    jQuery('#primary-cat-data option').each(function()
+                    jQuery('#primary-category-data option').each(function()
                     {
                         var existvalue = jQuery(this).val();
                         if (selectvalue == existvalue)
@@ -41,17 +41,17 @@
                     if (comptext != "" && flag == 0)
                     {
                         makeradio = '<option value="' + selectvalue + '">' + comptext + '</option>';
-                        jQuery('#primary-cat-data').append(makeradio);
+                        jQuery('#primary-category-data').append(makeradio);
 
-                        var gethtml = jQuery('#primary-cat-data').html();
-                        jQuery('#edit-field-primary-cat-html-und-0-value').val(gethtml);
+                        var gethtml = jQuery('#primary-category-data').html();
+                        jQuery('#edit-field-primary-category-html-und-0-value').val(gethtml);
                     }
                 }
 
             })
             jQuery('.dropbox-remove a').click(function() {
                 var getdattext = jQuery(this).parent().siblings('td').find('.dropbox-selected-item').text();
-                $('#primary-cat-data option').each(function() {
+                $('#primary-category-data option').each(function() {
                     if (jQuery(this).text().indexOf(getdattext) >= 0) {
                         jQuery(this).remove();
 
@@ -61,13 +61,13 @@
 
             })
 
-            jQuery('#primary-cat-data').change(function() {
+            jQuery('#primary-category-data').change(function() {
                 var getval = jQuery(this).val();
-                jQuery('#edit-field-primary-cat-und-0-value').val(getval);
-                jQuery('#primary-cat-data option').attr('selected', false);
-                jQuery('#primary-cat-data option[value=' + getval + ']').attr('selected', 'selected');
-                var gethtml = jQuery('#primary-cat-data').html();
-                jQuery('#edit-field-primary-cat-html-und-0-value').val(gethtml);
+                jQuery('#edit-field-primary-category-und-0-value').val(getval);
+                jQuery('#primary-category-data option').attr('selected', false);
+                jQuery('#primary-category-data option[value=' + getval + ']').attr('selected', 'selected');
+                var gethtml = jQuery('#primary-category-data').html();
+                jQuery('#edit-field-primary-category-html-und-0-value').val(gethtml);
             })
 
         
@@ -82,12 +82,12 @@
 
 //   code load the selectd option and add to select box
 jQuery(window).load(function() {
-    //jQuery('#edit-field-primary-cat-html-und-0-value').hide();
+    //jQuery('#edit-field-primary-category-html-und-0-value').hide();
     // executes when complete page is fully loaded, including all frames, objects and images
-    var getvaluehtml = jQuery('#edit-field-primary-cat-html-und-0-value').val();
+    var getvaluehtml = jQuery('#edit-field-primary-category-html-und-0-value').val();
 
     if (getvaluehtml != "")
     {
-        jQuery('#primary-cat-data').html(getvaluehtml);
+        jQuery('#primary-category-data').html(getvaluehtml);
     }
 });
