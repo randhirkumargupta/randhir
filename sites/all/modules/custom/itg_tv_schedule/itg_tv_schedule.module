@@ -94,15 +94,30 @@ function itg_tv_schedule_search_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_tv_schedule_date_form($form, &$form_state) {
-
+  $date = format_date(REQUEST_TIME, 'custom', 'Y-m-d');  
+  if (isset($_GET['date_zone'])){
+    $date = $_GET['date_zone'];  
+  }
   $form['date'] = array(
-    '#type' => 'textfield',
-    '#size' => 60,
-    '#default_value' => t('July 05, 2016 (IST)'),
-    '#maxlength' => 128,
-    '#attributes' => array('readonly' => 'readonly'),
+//      '#default_value' => (isset($_GET['date_zone']) ? $_GET['date_zone'] : $date),
+      '#default_value' => $date,
+      '#date_format' => 'Y/m/d',
+      '#date_year_range' => '-1:+0',
+      '#type' => 'date_popup',
+      '#datepicker_options' => array('maxDate' => 0),
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t(''),
   );
 
+  drupal_add_js('jQuery("#edit-date-datepicker-popup-1").datepicker({dateFormat: "yy/mm/dd",
+    onSelect: function(dateText, inst) {
+        jQuery("#itg-tv-schedule-date-form").submit();
+       }
+});', array('type' => 'inline', 'scope' => 'footer'));
+  
   return $form;
 }
 
@@ -153,10 +168,17 @@ function itg_tv_schedule_uploadmongo($file_id) {
     $file = fopen($file_url, "r");
     while (($data = fgetcsv($file)) !== FALSE) {
         if ($i == 1) {
-            if ($data[1] === 'MON' && $data[2] === 'TUE' && $data[3] === 'WED' && $data[4] === 'THU' && $data[5] === 'FRI' && $data[6] === 'SAT' && $data[7] === 'SUN') {
-                $flag = 1;
+         //   if ($data[1] === 'MON' && $data[2] === 'TUE' && $data[3] === 'WED' && $data[4] === 'THU' && $data[5] === 'FRI' && $data[6] === 'SAT' && $data[7] === 'SUN') {
+            $mondate = $data[1];
+            $tuedate = $data[2];
+            $weddate = $data[3];
+            $thudate = $data[4];
+            $fridate = $data[5];
+            $satdate = $data[6];
+            $sundate = $data[7];
+            $flag = 1;
                 break;
-            }
+           // }
         }
     }
     if ($flag == 1) {
@@ -177,46 +199,46 @@ function itg_tv_schedule_uploadmongo($file_id) {
 
         while (($data = fgetcsv($file)) !== FALSE) {
 
-            if ($i > 1) {
+            if ($i > 3) {
                 // monday corresponding value insertion
                 if ($data[1]) {
-                    $query = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date);
+                    $query = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date, "program date" => $mondate);
                     $people->insert($query);
                 }
 
                 //tuesday corresponding value insertion
                 if ($data[2]) {
-                    $query = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date);
+                    $query = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date, "program date" => $tuedate);
                     $people->insert($query);
                 }
 
                 //wednesday corresponding value insertion
                 if ($data[3]) {
-                    $query = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date);
+                    $query = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date, "program date" => $weddate);
                     $people->insert($query);
                 }
 
                 //thursday corresponding value insertion
                 if ($data[4]) {
-                    $query = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date);
+                    $query = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date, "program date" => $thudate);
                     $people->insert($query);
                 }
 
                 //friday corresponding value insertion
                 if ($data[5]) {
-                    $query = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date);
+                    $query = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date, "program date" => $fridate);
                     $people->insert($query);
                 }
 
                 //saturday corresponding value insertion
                 if ($data[6]) {
-                    $query = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date);
+                    $query = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date, "program date" => $satdate);
                     $people->insert($query);
                 }
 
                 //sunday corresponding value insertion
                 if ($data[7]) {
-                    $query = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date);
+                    $query = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date, "program date" => $sundate);
                     $people->insert($query);
                 }
             }
@@ -282,6 +304,16 @@ function itg_tv_schedule_time_form_submit($form, &$form_state) {
 
   $options = array('query' => array('time_zone' => $form_state['input']['time_zone']));
   drupal_goto('tv-show/' . arg(1), $options);
+}
+
+/**
+ * Custom submit callback for searching popup.
+ * {@inheritdoc}
+ */
+function itg_tv_schedule_date_form_submit($form, &$form_state) {
+   
+   $options = array('query' => array('date_zone' => $form_state['input']['date']['date']));
+   drupal_goto('tv-show/' . arg(1), $options); 
 }
 
 /**

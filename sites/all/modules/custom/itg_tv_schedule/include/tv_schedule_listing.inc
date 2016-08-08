@@ -8,8 +8,8 @@ function tv_schedule_listing() {
   //getting value from Url
   $arg = arg();
   $search_title = $_GET['title'];
-  //print $_GET['timezone'];
-
+  $search_date = $_GET['date_zone'];
+ 
   if ($_GET['time_zone'] == 'PST') {
     date_default_timezone_set('America/Los_Angeles');
   }
@@ -31,7 +31,7 @@ function tv_schedule_listing() {
   if (isset($search_title)) {
     $search_counter = 0;
     $title = $search_title;
-    $regex = new MongoRegex("/^$title/i");
+    $regex = new MongoRegex("/$title/i");
     $cond = array('program' => $regex);
     $cursor_popup = $people->find($cond);
     $result = $cursor_popup->count();
@@ -57,6 +57,10 @@ function tv_schedule_listing() {
     $day = $arg[1];
     $cond = array('day' => $day);
   }
+  elseif (isset($search_date)) {
+    $date = $search_date;
+    $cond = array('program date' => $date);
+   }
   else {
     $day = strtoupper(date("D"));
     $cond = array('day' => $day);
