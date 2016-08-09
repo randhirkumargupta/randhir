@@ -361,6 +361,88 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_primary_category'.
+  $field_instances['node-story-field_primary_category'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 72,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category',
+    'label' => 'primary category',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 63,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_primary_category_html'.
+  $field_instances['node-story-field_primary_category_html'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 73,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html',
+    'label' => 'Primary category html',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 64,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_archive'.
   $field_instances['node-story-field_story_archive'] = array(
     'bundle' => 'story',
@@ -1066,7 +1148,6 @@ function features_for_story_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1084,7 +1165,7 @@ function features_for_story_field_default_field_instances() {
             'search_all_fields' => 1,
           ),
         ),
-        'imce_filefield_on' => 1,
+        'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -2818,7 +2899,6 @@ function features_for_story_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -2836,7 +2916,7 @@ function features_for_story_field_default_field_instances() {
             'search_all_fields' => 1,
           ),
         ),
-        'imce_filefield_on' => 1,
+        'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -3043,6 +3123,7 @@ function features_for_story_field_default_field_instances() {
   t('Medium image');
   t('New title');
   t('Node Identity');
+  t('Primary category html');
   t('Quotes');
   t('Redirection URL');
   t('Related Content');
@@ -3077,6 +3158,7 @@ function features_for_story_field_default_field_instances() {
   t('Twitter Video Description');
   t('Twitter narrative');
   t('common by line twitter');
+  t('primary category');
 
   return $field_instances;
 }
