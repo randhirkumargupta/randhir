@@ -985,7 +985,7 @@ footer{
 /*End CSS footer section*/
 /*Start CSS Top Block Grid Home Page*/
 .itg-front{
-    .droppable{
+    .itg-widget{
         position: relative;
     }
     .itg-block-10{
@@ -1270,6 +1270,13 @@ footer{
 }
 /*End Search page css*/
 /*Start Dont miss Home page css*/
+.dont_miss{
+    .widget-title{
+        @include pos(relative);
+        @include display-inline;
+        margin-bottom: 5px;
+    }    
+}
 .dont-miss{    
     /*padding: 30px 10px 0px 10px;*/
     ul{

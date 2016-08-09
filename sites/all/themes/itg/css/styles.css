@@ -1117,7 +1117,7 @@ footer .footer-copyright {
 
 /*End CSS footer section*/
 /*Start CSS Top Block Grid Home Page*/
-.itg-front .droppable {
+.itg-front .itg-widget {
   position: relative;
 }
 .itg-front .itg-block-10 {
@@ -1593,6 +1593,13 @@ footer .footer-copyright {
 
 /*End Search page css*/
 /*Start Dont miss Home page css*/
+.dont_miss .widget-title {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 5px;
+}
+
 .dont-miss {
   /*padding: 30px 10px 0px 10px;*/
 }
