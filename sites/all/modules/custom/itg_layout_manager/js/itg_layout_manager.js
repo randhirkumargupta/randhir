@@ -65,7 +65,8 @@
                               success: function(data) {
                                  // for category tab widget
                                  $('input[name = '+block_name+']').val(category_name_tab);
-                                 
+                                 $('.widget-title[data-id="'+block_name+'"]').html(category_name_tab);
+                                 //$('#block_name').html(category_name_tab);
                                  if (display_area) {                                     
                                     $('#'+block_name).html(category_name_tab);
                                  }
