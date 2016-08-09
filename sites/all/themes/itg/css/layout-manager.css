@@ -113,7 +113,7 @@ a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 7px;
+  padding: 0 5px;
 }
 .tab-buttons span.active {
   background: #fff;

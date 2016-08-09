@@ -1535,8 +1535,31 @@ footer{
     }
 }
 /*Start snap post css*/
-.page-snappost{
+.page-snappost{    
     @include itg-font($itg-roboto);
+    .spanpost-header{
+        background: #151515;
+        .container{
+            @include clearfix;
+        }
+        .spost-left{
+            @include float(left);
+        }
+        .spost-right{
+            @include float(right);
+            ul{
+                li{
+                    @include display-inline;
+                    color: #fff;
+                    @include font(30px,94px);                    
+                    padding-left: 25px;
+                    i{
+                        color: #777777;
+                    }
+                }
+            }
+        }
+    }
     #main.container{
         max-width: 100%;
         width: 100%;

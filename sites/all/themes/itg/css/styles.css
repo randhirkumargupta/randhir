@@ -1225,7 +1225,7 @@ footer .footer-copyright {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 7px;
+  padding: 0 5px;
 }
 .tab-buttons span.active {
   background: #fff;
@@ -2000,6 +2000,39 @@ footer .footer-copyright {
 /*Start snap post css*/
 .page-snappost {
   font-family: "Roboto", sans-serif;
+}
+.page-snappost .spanpost-header {
+  background: #151515;
+}
+.page-snappost .spanpost-header .container {
+  zoom: 1;
+}
+.page-snappost .spanpost-header .container:before, .page-snappost .spanpost-header .container:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.page-snappost .spanpost-header .container:after {
+  clear: both;
+}
+.page-snappost .spanpost-header .spost-left {
+  float: left;
+}
+.page-snappost .spanpost-header .spost-right {
+  float: right;
+}
+.page-snappost .spanpost-header .spost-right ul li {
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+  font-size: 30px;
+  font-size: 1.875rem;
+  line-height: 94px;
+  padding-left: 25px;
+}
+.page-snappost .spanpost-header .spost-right ul li i {
+  color: #777777;
 }
 .page-snappost #main.container {
   max-width: 100%;
