@@ -310,6 +310,90 @@ function feature_for_podcast_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-podcast-field_primary_category'.
+  $field_instances['node-podcast-field_primary_category'] = array(
+    'bundle' => 'podcast',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category',
+    'label' => 'primary category',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 22,
+    ),
+  );
+
+  // Exported field_instance: 'node-podcast-field_primary_category_html'.
+  $field_instances['node-podcast-field_primary_category_html'] = array(
+    'bundle' => 'podcast',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 20,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html',
+    'label' => 'Primary category html',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 24,
+    ),
+  );
+
   // Exported field_instance: 'node-podcast-field_story_archive'.
   $field_instances['node-podcast-field_story_archive'] = array(
     'bundle' => 'podcast',
@@ -1002,12 +1086,14 @@ function feature_for_podcast_field_default_field_instances() {
   t('Medium image');
   t('Node Identity');
   t('Playlist');
+  t('Primary category html');
   t('Short headline');
   t('Small image');
   t('Source id');
   t('Source type');
   t('Tags');
   t('Upload Audio');
+  t('primary category');
 
   return $field_instances;
 }
