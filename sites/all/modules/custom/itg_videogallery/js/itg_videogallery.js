@@ -74,69 +74,85 @@
                     }
                 });
             });
-
-            // - multi checkbox ftp 
-            /*$('.browse-ftp a').click(function() {
-                var ids = [];
-                $('#edit-video-browse-select .form-checkbox').each(function() {
-                    if ($(this).is(':checked'))
-                    {
-                        ids.push($(this).val());
-                    }
-                })
-                var count = ids.length;
-                $('#edit-field-videogallery-video-upload-add-more-number').val(count);
-                $('input[name=field_videogallery_video_upload_add_more]').mousedown();
-                setTimeout(function() {
-                    $('#edit-field-videogallery-video-upload-add-more-number').val(1);
-                    $('#edit-video-browse-select .form-checkbox').prop('checked', false);
-                }, 1000);
-            });*/
-
-            // end code
+            // FTP browse js
             $('document').ready(function(){
                 var old_vid = $("input[name='field_upload_video[und][0][fid]']").val();
-                if(old_vid != 0){
-                    $("input['files[field_upload_video_und_0]']").hide();
+                if(old_vid == 0){
+                    $("#edit-field-upload-video-und-0-upload").hide();
                     $("#edit-field-upload-video-und-0-upload-button").hide();
-      
-                   //window.alert('Please remove exist video file.');
-                   $('.vid-error').text('Please remove exist video file.');
-                   setTimeout(function() {
-                    $('.vid-error').fedout('');
-                }, 6000);
-            }
-            });
-            $("input[name='field_upload_video[und][0][fid]']").val();
-            
+                }else{
+                    $(".browse-ftp-click").hide();
+                }
+            });           
             
             
             $('.browse-ftp').hide();
-            $('.browse-ftp-click').click(function() {
-               var old_vid = $("input[name='field_upload_video[und][0][fid]']").val(); 
-               if(old_vid != 0){
-                   //window.alert('Please remove exist video file.');
-                   $('.vid-error').text('Please remove exist video file.');
-                   setTimeout(function() {
-                    $('.vid-error').fedout('');
-                }, 6000);    
-               }else{
-                  var data = $('.browse-ftp').html();
-                    $.colorbox({html: "" + data + "",onComplete : function() { 
-                        $(this).colorbox.resize(); 
-                     }  });
-               }
-            });
-            $('.browse-ftp a').click(function() {
-                var vid = $('#edit-video-browse-select .form-radio').val();
-                $("input[name='input[name='field_upload_video[und][0][fid]']").val(vid); 
+           
+            $('.ftp-server a').click(function() {
+                var vid = $('#edit-video-browse-select .form-radio:checked').val();
+                if(vid !== "" && !$.isNumeric(vid)){
+                    alert('Please select video file.');
+                } else {
+                $("input[name='field_upload_video[und][0][fid]']").val(vid);
                 $("#edit-field-upload-video-und-0-upload-button").mousedown();
-                
+                $.colorbox.close();
                 setTimeout(function() {
                     $('#edit-video-browse-select .form-radio').prop('checked', false);
                 }, 1000);
+            }
             });
+            // popup show hide
+            $(".video-local").click(function(){
+                $(".local_browse").show();
+                $(".ftp-server").hide();
+            });
+            $(".video-ftp").click(function(){
+                $(".local_browse").hide();
+                $(".ftp-server").show();
+
+            });
+            $(".browse-local").click(function(){
+                $("#edit-field-upload-video-und-0-upload").show();
+                $("#edit-field-upload-video-und-0-upload-button").show();
+                $("#edit-field-upload-video-und-0-upload").trigger('click');
+                $("#edit-field-upload-video-und-0-upload").change(function(){
+                    $("#edit-field-upload-video-und-0-upload-button").mousedown();
+                    $.colorbox.close();
+                }); 
+            });
+            
+            // check ajax upload button
+
+            $('#videogallery-node-form').ajaxComplete(function(event,request, settings) {
+                if (form_build_id = settings.url.match(/file\/ajax\/field_upload_video\d*\/(.*)$/)) {
+                 
+                    if($('#videogallery-node-form').find("input[name='field_upload_video_und_0_remove_button']").val()=='Remove') {
+                        $(".browse-ftp-click").hide(); 
+                       
+                    }else {
+                       
+                      $(".browse-ftp-click").show();
+                    }
+                }
+               
+           });           
         }
 
     };
 })(jQuery, Drupal, this, this.document);
+
+jQuery('document').ready(function(){
+     jQuery('.browse-ftp-click').click(function() {
+               var old_vid = jQuery("input[name='field_upload_video[und][0][fid]']").val(); 
+               if(old_vid != 0){
+  
+               }else{
+                   
+                  var data = jQuery('.browse-ftp').html();
+                //  jQuery.colorbox({width: "80%", height: "80%",fixed: true});
+                    jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%",fixed: true, onComplete : function() { 
+                        
+                     }  });
+               }
+            });
+});
