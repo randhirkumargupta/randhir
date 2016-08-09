@@ -4,7 +4,7 @@
     foreach($data['default_widget'] as $key => $val) {
      $widget = explode('|', $val['value']); 
   ?>
-  <li data-widget="<?php print $widget[1];?>"><span><?php print $widget[0];?></span></li>
+  <li id="<?php print $widget[0];?>" data-widget="<?php print $widget[1];?>"><span><?php print $widget[0];?></span></li>
   <?php } ?>
 <!--    <li data-widget="section_wise_order"><span>Section Wise order</span></li>-->
 </ul>

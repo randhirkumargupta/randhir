@@ -13,6 +13,9 @@ module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.he
 //All form releted function of layout manager.
 module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.form');
 
+function itg_layout_manager_init() {
+  //get_widgets_poll_list();
+}
 
 /**
  * Implements hook_menu().
