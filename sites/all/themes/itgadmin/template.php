@@ -274,8 +274,9 @@ function itgadmin_breadcrumb($vars) {
      
      $story_tab = array('in-queue-story','published-story','expired-story', 'unpublished-story', 'archive-story');
      $photogallery_tab = array('in-queue-photogallery','published-photogallery','unpublished-photogallery', 'archive-photogallery');
-     $bolg_tab = array('published-blogs','unpublished-blogs', 'my-queue-blogs', 'in-queue-blogs', 'archive-blogs');
-     $podcast_tab = array('published-podcast','unpublished-podcast', 'my-unpublished-podcast', 'mydraft-podcast', 'my-published-podcast', 'my-queue-podcast', 'my-queue-podcast', 'in-queue-podcast', 'archive-podcast', 'my-rejected-podcast');
+     $bolg_tab = array('published-blogs','unpublished-blogs', 'my-queue-blogs', 'in-queue-blogs', 'archive-blogs', 'my-unpublished-blogs', 'mydraft-blogs', 'my-rejected-blogs', 'my-published-blogs');
+     $podcast_tab = array('published-podcast','unpublished-podcast', 'my-unpublished-podcast', 'mydraft-podcast', 'my-published-podcast', 'my-queue-podcast', 'in-queue-podcast', 'archive-podcast', 'my-rejected-podcast');
+     $videogallery_tab = array('published-video','unpublished-video', 'my-unpublished-video', 'mydraft-video', 'my-published-video', 'my-queue-video', 'in-queue-video', 'archive-video', 'my-rejected-video');
      
      //story tab breadcrumb
      if (in_array($content_url, $story_tab)) {
@@ -298,6 +299,12 @@ function itgadmin_breadcrumb($vars) {
 
      //podcast tab breadcrumb
      if (in_array($content_url, $podcast_tab)) {
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
+    }
+    
+    //videogallery tab breadcrumb
+     if (in_array($content_url, $videogallery_tab)) {
       $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
       return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
     }
