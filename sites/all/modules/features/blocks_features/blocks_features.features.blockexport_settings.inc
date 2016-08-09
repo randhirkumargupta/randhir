@@ -5120,7 +5120,7 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5165,7 +5165,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5180,7 +5180,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5195,7 +5195,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -11182,10 +11182,14 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11196,7 +11200,7 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -11515,7 +11519,11 @@ my-rejected-podcast',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11873,7 +11881,11 @@ my-rejected-podcast',
   'region' => 'form_tab',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12228,10 +12240,14 @@ my-rejected-podcast',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12242,7 +12258,7 @@ my-rejected-podcast',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -12586,10 +12602,14 @@ my-rejected-podcast',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12600,7 +12620,7 @@ my-rejected-podcast',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -12944,10 +12964,14 @@ my-rejected-podcast',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12958,7 +12982,7 @@ my-rejected-podcast',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -13302,10 +13326,14 @@ my-rejected-podcast',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13316,7 +13344,7 @@ my-rejected-podcast',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -13428,6 +13456,104 @@ my-rejected-podcast',
   'pages' => '',
   'title' => '',
   'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 944,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 945,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 946,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 947,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 948,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 949,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 950,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
@@ -13986,6 +14112,11 @@ my-rejected-podcast',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 11,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-print-team-menu',
   'rid' => 11,
 );
@@ -13993,6 +14124,11 @@ my-rejected-podcast',
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
   'rid' => 11,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 12,
 );
   $export['block_role'][] = array(
   'module' => 'menu',
@@ -14006,6 +14142,11 @@ my-rejected-podcast',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 13,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-print-team-menu',
   'rid' => 13,
 );
@@ -14013,6 +14154,11 @@ my-rejected-podcast',
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
   'rid' => 13,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 14,
 );
   $export['block_role'][] = array(
   'module' => 'menu',
@@ -14026,6 +14172,11 @@ my-rejected-podcast',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 15,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-print-team-menu',
   'rid' => 15,
 );
@@ -14036,6 +14187,11 @@ my-rejected-podcast',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 16,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-print-team-menu',
   'rid' => 16,
 );
@@ -14043,6 +14199,11 @@ my-rejected-podcast',
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
   'rid' => 16,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 17,
 );
   $export['block_role'][] = array(
   'module' => 'menu',
