@@ -37,8 +37,19 @@ function itg_videogallery_schema() {
         'type' => 'int',
         'not null' => TRUE,
       ),
+      'nid' => array(
+        'description' => 'video_nid',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
       'tags' => array(
         'description' => 'Tags of video',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'upload_time' => array(
+        'description' => 'Video upload time',
         'type' => 'varchar',
         'length' => '255',
         'not null' => TRUE,

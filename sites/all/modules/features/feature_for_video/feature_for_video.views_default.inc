@@ -182,7 +182,7 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -390,7 +390,7 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -502,7 +502,7 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -756,12 +756,11 @@ function feature_for_video_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Relationship: Content: Video Upload (field_videogallery_video_upload) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['id'] = 'field_videogallery_video_upload_value';
   $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['table'] = 'field_data_field_videogallery_video_upload';
   $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['field'] = 'field_videogallery_video_upload_value';
-  $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['delta'] = '-1';
-  /* Relationship: Field collection item: Video (field_upload_video:fid) */
+  /* Relationship: Content: Video (field_upload_video:fid) */
   $handler->display->display_options['relationships']['field_upload_video_fid']['id'] = 'field_upload_video_fid';
   $handler->display->display_options['relationships']['field_upload_video_fid']['table'] = 'field_data_field_upload_video';
   $handler->display->display_options['relationships']['field_upload_video_fid']['field'] = 'field_upload_video_fid';
