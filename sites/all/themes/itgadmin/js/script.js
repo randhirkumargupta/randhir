@@ -182,7 +182,7 @@
 
 
     // jQuery Code for category manager page
-    $('.item-list ul li:not(:has(".item-list"))').find('.cmd-heading .fa').remove();
+    $('.item-list ul li:not(:has(".item-list"))').find('.term-wrapper .cmd-heading .fa').remove();
     $('.cmd-heading').click(function () {
       $(this).toggleClass('active');
       if ($(this).parent().next().is(':visible')) {
@@ -739,6 +739,9 @@
       jQuery(this).parent().toggleClass('active');
     });
     
+    //ITG Listing top spacing          
+    $('.tab-data').find('ul.itg-listing').css('padding-top','0');
+    
   };
 })(jQuery);
 
@@ -779,8 +782,8 @@ jQuery(document).ready(function(){
         jQuery(this).find('.my-saved-search').slideUp();
     });
         
-    jQuery( ".checked-list" ).sortable();
-    jQuery( ".checked-list" ).disableSelection();
+    jQuery('body').find( ".checked-list" ).sortable();
+    jQuery('body').find( ".checked-list" ).disableSelection();
     
     // jQuery code to remove checked list item
     jQuery('.checked-list').on('click', '.fa-times', function () {

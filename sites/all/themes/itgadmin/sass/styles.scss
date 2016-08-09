@@ -2896,6 +2896,18 @@ fieldset#edit-select{
       }
     }
   }
+  .cmd-heading{
+    @extend .pos-rel;
+    .fa{
+      position: absolute; 
+      left: 10px; 
+      top: 0; 
+      bottom: 0; 
+      width: 14px; 
+      height: 14px; 
+      margin: auto 0;
+    }
+  }
   .view-content{
     .item-list{
       @extend .dib; 
@@ -2903,6 +2915,8 @@ fieldset#edit-select{
       ul{
         li{
           .term-wrapper{
+            @extend .dib;
+            @extend .full;
             border-bottom: 1px solid #d9d9d9;
             .term-detail{
               padding: 5px;
@@ -2910,80 +2924,68 @@ fieldset#edit-select{
               float: left;
               &:first-child{
                 width: 60%;
+                padding-left: 30px;
+                .fa{
+                  margin-right: 10px;
+                }
               }
+              a{color: #1fb5ad;}
             }
           }
         }
       }
-      .item-list{
+      .item-list ul li{
         .term-detail:first-child{
-          padding-left: 20px;
+          padding-left: 40px;
         }
-        .item-list{
+        .cmd-heading .fa{left: 20px;}
+        .item-list ul li{
           .term-detail:first-child{
-            padding-left: 40px;
+            padding-left: 50px;
           }
+          .cmd-heading .fa{left: 30px;}
         }
       }
     }
     .item-list{
       ul{@extend .no-bullet;}
     }
+    .item-list.hide{
+      @extend .hide;
+    }
   }
 } 
-.category-manager-details{
-  .cmd-heading{
-    @extend .pos-rel;
-    cursor: pointer;
-  }
-}
 
-.category-manager-details .cmd-heading .fa{position: absolute; left: 10px; top: 0; bottom: 0; width: 14px; height: 14px; margin: auto 0;}
-.category-manager-details .cmd-heading .fa-plus-square-o{display: none;}
-.category-manager-details .cmd-heading.active .fa-minus-square-o{display: none;}
-.category-manager-details .cmd-heading.active .fa-plus-square-o{display: block;}
-.view-category-manager .view-content .item-list ul li{padding: 0; border:none;}
-.view-category-manager .view-content ul li.lavel-1{float: left;}
-.view-category-manager .view-content ul li.lavel-1 .item-list{height: auto !important;}
-.category-manager-thead{float: left; width: 100.1%; box-sizing: border-box; border: 1px solid #ddd; border-bottom: none; position: relative; background-color: #ccc; font-weight: bold;}
-.category-manager-thead .cmt-title, 
-.category-manager-thead .cmt-details{float: left; width: 50.05%; box-sizing: border-box; line-height: 18px; height: 34px;}
-.category-manager-thead .cmt-title{padding: 8px 10px;}
-.category-manager-thead .cmt-details{text-align: center; position: absolute; left: 50%; height: 100%;}
-.cmt-details span{position: absolute; top: 0; height: 100%; padding: 8px 10px; width: 25%; box-sizing: border-box;}
-.cmt-details span:nth-child(1){left: 0;}
-.cmt-details span:nth-child(2){left: 25%;}
-.cmt-details span:nth-child(3){left: 50%;}
-.cmt-details span:nth-child(4){left: 75%;}
-.cmt-details span{border-right: 1px solid #ddd;}
-.cmt-details > span:last-child {border-right: medium none;}
-.category-manager-details,
-/*.view-category-manager .view-content ul li{float: left; width: 100%; box-sizing: border-box;}*/
-.view-category-manager .view-content ul li{padding: 0;}
-.cmd-detail span, .cmd-detail .edit-cm{
-  position: absolute; top: 0; height: 100%; padding: 5px 10px; width: 25%; box-sizing: border-box;
-  a{color: #1fb5ad;}
+.view-category-manager .cmd-heading .fa-plus-square-o{display: none;}
+.view-category-manager .cmd-heading.active .fa-minus-square-o{display: none;}
+.view-category-manager .cmd-heading.active .fa-plus-square-o{display: block;}
+.category-manager-thead{
+  float: left; width: 100%; 
+  box-sizing: border-box; 
+  border: 1px solid #ddd; 
+  border-bottom: none; 
+  position: relative; 
+  background-color: #ccc; 
+  font-weight: bold;
+  div{
+    @extend .fleft;
+    line-height: 18px; 
+    height: 34px;
+    padding: 8px 5px;
+    &.cmt-title{
+      width: 60%;
+    }
+    &.cmt-other{
+      width: 10%;
+      
+    }
+  }
+  
 }
-.cmd-detail span:nth-child(1){left: 0;}
-.cmd-detail span:nth-child(2){left: 25%;}
-.cmd-detail span:nth-child(3){left: 50%;}
-.cmd-detail .edit-cm{left: 75%;}
-.cmd-detail span{border-right: 1px solid #ddd;}
 .details-parent{position: absolute; bottom: 0; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
 .details-parent .photo-title{font-size: 16px;}
 .details-parent .photo-title, .details-parent .image-description, .details-parent .photo-credit{overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 .audio-div{position: relative;}
-.category-manager-details{border-bottom: 1px solid #ddd; position: relative;}
-.category-manager-details .cmd-heading, 
-.category-manager-details .cmd-detail{float: left; width: 50%; box-sizing: border-box; line-height: 28px;}
-.category-manager-details .cmd-detail{text-align: center; position: absolute; left: 50%; height: 100%;}
-.category-manager-details .cmd-heading{padding: 5px 10px 5px 30px; border-right: 1px solid #ddd;}
-.view-category-manager .view-content .item-list .item-list .category-manager-details .cmd-heading{padding-left: 40px;}
-.view-category-manager .view-content .item-list .item-list .category-manager-details .cmd-heading .fa{left: 20px;}
-.view-category-manager .view-content .item-list .item-list .item-list .category-manager-details .cmd-heading{padding-left: 50px;}
-.view-category-manager .view-content .item-list .item-list .item-list .category-manager-details .cmd-heading .fa{left: 30px;}
-.view-category-manager .view-content .item-list .item-list .item-list .item-list .category-manager-details .cmd-heading{padding-left: 60px;}
-.view-category-manager .view-content .item-list .item-list .item-list .item-list .category-manager-details .cmd-heading .fa{left: 40px;}
 .view-content > .item-list > ul > li > .category-manager-details{background-color: #efefef;}
 .show{display: block;}
 .hide{display: none;}
@@ -5650,8 +5652,9 @@ div.node{
 }
 .sidebar-section-photo{
   .itg-widget{
-    margin: 20px 0;
+    margin: 35px 0;
     position: relative;
+    background-color: #efefef;
     .droppable{
       min-height: 400px;
     }
@@ -5723,16 +5726,16 @@ div.node{
     overflow: hidden;    
     padding:0 25px;
     position: relative;
+    border-bottom: 1px solid #d9d9d9;
     ul{
       @extend .no-bullet;
-      border-bottom: 1px solid #d9d9d9;
       white-space: nowrap;
       @extend .dib;
       @extend .full;
       @extend .pos-rel;
       li{
-        @extend .fleft;
-        border-right: 5px solid #fff;
+        @extend .dib;
+        border-right: 0;
         text-transform: uppercase;
         a{
           @extend .db;
@@ -5771,4 +5774,61 @@ div.node{
   }
   .views-form{
     .form-actions{margin-top: 20px;}
+  }
+  
+  .view-photo-list-of-category{
+    .view-content{
+      margin: 0 -15px;
+      .photo-list{
+        li{
+          padding: 15px;
+          @extend .fleft;
+          .tile{
+            figure{
+              width: 170px;
+              height: 128px;
+              @extend .pos-rel;
+              figcaption{
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                padding: 5px;
+                background-color: rgba(0,0,0,.5);
+                color: #fff;
+                font-size: 12px;
+                .fa{
+                  font-size: 14px;
+                  margin-right: 5px;
+                }
+              }
+            }
+            .posted-on{
+              @extend .db;
+              font-size: 12px;
+              color: #b1b1b1;
+              padding: 8px 0 5px;
+            }
+            a{
+              color: #494949;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+  #block-itg-layout-manager-layout-button-block{
+    padding-top: 20px;
+  }
+  [id*="loyality-reward-points-configuration-form"]{
+    .form-type-textfield{
+      > label{
+        width: 300px;
+        & + .form-text + span.error{
+          padding-left: 300px;
+        }
+      }
+      .form-text{max-width: 110px;}
+    }
+    
   }
