@@ -742,6 +742,11 @@
     //ITG Listing top spacing          
     $('.tab-data').find('ul.itg-listing').css('padding-top','0');
     
+    // jQuery code for widget-trigger
+    $('body').on('click', '.widget-trigger', function(){
+      $(this).prev().toggleClass('active');
+    });
+    
   };
 })(jQuery);
 
@@ -791,9 +796,12 @@ jQuery(document).ready(function(){
     });
     // end of code
     
-    if(jQuery('.block-itg-widget').children().length > 0){
-        jQuery('.itg-widget').removeClass('gray-bg-layout');
-    }
+    jQuery('.page-itg-layout-manager .droppable').each(function(){
+      if(jQuery(this).children().length > 0){
+        jQuery(this).closest('.itg-widget').removeClass('gray-bg-layout');
+      }
+    });
+    
     
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {
