@@ -25,6 +25,7 @@
     <?php print drupal_render($form['field_story_itg_tags']); ?>
     <?php print drupal_render($form['field_dailymotion_playlist']); ?>
     <?php print drupal_render($form['field_story_category']); ?>
+    <?php print drupal_render($form['field_primary_cat_data']); ?>
 
 </div>
 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
