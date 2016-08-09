@@ -152,6 +152,8 @@ Drupal.behaviors.my_custom_behavior = {
     
     headerMain();
     function headerMain(){
+        //var logotxt = $('.container.header-logo').html();
+        $('.container.header-logo').prependTo('#block-itg-layout-manager-header-block');
         $('.search-icon').click(function(){
             $('.globle-search').css('width','255px');
         });

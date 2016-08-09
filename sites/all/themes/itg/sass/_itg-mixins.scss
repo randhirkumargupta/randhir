@@ -305,8 +305,13 @@ $root-font-size: 16px;
                 }
             }            
         }
-        .snap-button i{
+        .snap-button i, .snap-social i, .snap-social span{
             color:nth($colors, $i);
+        }
+        .snap-social{
+            ul{
+                border-color:($colors, $i);
+            }
         }
     }
 }    
