@@ -148,7 +148,13 @@ img{
         color: #fff;
     }
 }
-
+.gray-bg-widgets{
+    background:#f3f3f3;
+    padding:10px;
+}
+.widget-title{
+    @include story-tag(22px,22px);   
+}
 .success-message, .messages--status{
     color:#009c00;
     font-size: 13px;
@@ -184,7 +190,7 @@ input[type="text"], select, input[type="password"]{
     @include clearfix;
 }
 #page{@extend .vtop; @extend .full; @extend .dib;}
-.header{
+#block-itg-layout-manager-header-block{
     padding-top: 20px;
     box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
@@ -982,6 +988,17 @@ footer{
     .droppable{
         position: relative;
     }
+    .itg-block-10{
+        padding-top: 30px;
+        padding-left: 20px;
+        .widget-title{
+            top: 10px;
+            left: 20px;
+        }        
+    }
+    .itg-block-11{
+        padding-top: 25px;
+    }
 }
 .top-block{
     .top-colum-1, .top-colum-2, .top-colum-3{
@@ -1043,7 +1060,7 @@ footer{
             padding-left: 15px;
             margin-bottom: 15px;
             a{
-                @include font(16px,null,$itg-font-bold);
+                @include font(16px,null,$itg-font-medium);
             }
         }
     }
@@ -1253,12 +1270,8 @@ footer{
 }
 /*End Search page css*/
 /*Start Dont miss Home page css*/
-.widget-title{
-    @include story-tag(22px,22px);   
-}
-.dont-miss{
-    background: #f3f3f3;
-    padding: 30px 10px 0px 10px;
+.dont-miss{    
+    /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
         @include listing-with-image(dont-miss-listing,left,15px,dm-pic,dm-detail);
@@ -1524,6 +1537,24 @@ footer{
 }
 /*End top-takes-video suggest End*/
 
+/*Start Watch right Now suggest css*/
+.watch-right-now-video{
+    ul{
+        @include listing-with-image(watch-right-now-list,left,5px,pic,title);
+        li{
+            padding:0 10px;
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            }
+        }
+    }   
+}
+/*End Watch right Now suggest End*/
+
+
 
 .page-node-add-ugc{
     .messages.error.file-upload-js-error{
@@ -1537,24 +1568,34 @@ footer{
 /*Start snap post css*/
 .page-snappost{    
     @include itg-font($itg-roboto);
+    h1#page-title, .container.header-logo{
+        @extend .hide;
+    }
     .spanpost-header{
         background: #151515;
+        padding-top:10px;
         .container{
             @include clearfix;
         }
         .spost-left{
             @include float(left);
+            @include calculate-width(1);            
         }
         .spost-right{
             @include float(right);
+            @include calculate-width(1);
             ul{
+                @include float(right);
                 li{
                     @include display-inline;
                     color: #fff;
-                    @include font(30px,94px);                    
-                    padding-left: 25px;
+                    @include font(18px,54px);                    
+                    padding-left: 10px;
                     i{
                         color: #777777;
+                    }
+                    img{
+                        width: 50px;
                     }
                 }
             }
@@ -1572,44 +1613,91 @@ footer{
         }
     }
     .view-content{        
-       @include background-snappost;
-       .snap-date{
-            font-size: 16px;
+        @include background-snappost;
+        .snap-date{
+            @include font(16px);            
             margin-bottom: 10px;   
-       }       
-       .views-row{
-           padding: 25px 0 40px 0;
-           .snap-title{
-               a{
-                   color:#000;
-               }
-               h1{
-                span{
+        }       
+        .views-row{
+            padding: 25px 0 40px 0;
+            
+                @include clearfix;
+                .snap-title{
                     a{
-                     @include font(30px,null,400);   
-                    }                    
+                        color:#000;
+                    }
+                    h1{
+                        span{
+                            a{
+                                @include font(22px,null,400);   
+                            }                    
+                        }
+                    }
+                }
+                .snap-post-btm{
+                    @include clearfix;
+                .snap-button{
+                    margin-top:30px;
+                    @include float(left);
+                    @include calculate-width(2);
+                    a{
+                        width: 120px;
+                        height: 40px;
+                        border: 2px solid $white-color;
+                        border-radius: 5px;
+                        @include display-inline;
+                        @include text-align(center);                 
+                        @include font(16px,40px);                 
+                        color: #000;
+                        box-shadow: 1px 7px 15px #2f2f2f;
+                        &.disagree{
+                            margin-left: 20px;
+                        }
+                    }
+                }
+                .snap-social{
+                    @include float(right);
+                    @include calculate-width(2);
+                    @include text-align(center);
+                    margin-top: 50px;
+                    ul{
+                        width: 285px;
+                        border-top: 1px dotted;
+                        border-bottom: 1px dotted;                        
+                        @include float(right);
+                        padding: 10px 0px;
+                        li{                            
+                            @include display-inline;
+                            a{
+                                display: block;
+                                padding: 0px 15px;
+                            }
+                            i{
+                                @include font(32px);
+                            }
+                            span{
+                                display: block;
+                                @include text-align(center);
+                                font-weight: 700;
+                                text-transform: uppercase;
+                                margin-top: 5px;
+                                &.twt-count{
+                                    @include font(30px);
+                                    color:$white-color;
+                                }
+                            }
+                            &:nth-child(2) a{
+                                border-left: 1px solid #e6e6e6;
+                                border-right: 1px solid #e6e6e6;
+                            }
+                        }
+                    }
                 }
             }
-           }        
-           .snap-button{
-               margin-top:60px;
-            a{
-                 width: 180px;
-                 height: 60px;
-                 border: 2px solid #fff;
-                 border-radius: 5px;
-                 display: inline-block;
-                 line-height: 60px;
-                 text-align: center;
-                 font-size: 22px;
-                 color: #000;
-                 box-shadow: 1px 7px 15px #2f2f2f;
-                 &.disagree{
-                     margin-left: 30px;
-                 }
-            }
-           }
-       }
+        }
+    }
+    footer{
+        margin-top: 0;
     }
 } 
 /*End snap post css*/
@@ -1653,11 +1741,11 @@ footer{
         }
     .detail{
             h3{
-                margin-bottom: 10px;
-                font-weight: $itg-font-bold;
+                margin-bottom: 10px;                
+                @include font(24px,null,$itg-font-bold);
             }
             p{
-                @include font(14px,19px);
+                @include font(14px,22px);
                 color: #323232;
                 @include itg-font($itg-roboto);
             }

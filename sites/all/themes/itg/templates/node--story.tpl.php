@@ -33,9 +33,9 @@
                               print "<a href='mailto:$email'>Mail To Author</a>";
                               ?></li>
                       <li class="mhide"><span class="share-count">4.5K</span>SHARES</li>
-                      <li>Nov 13, 2014  </li>
-                      <li>UPDATED 11:04 IST</li>
-                      <li>New Delhi</li>
+                      <li><?php print  date('F j, Y', $node->created); ?>   </li>
+                      <li>UPDATED <?php print  date('H:i', $node->changed); ?> IST</li>
+                      <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
                   </ul>
                   </div>
                   </div>

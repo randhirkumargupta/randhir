@@ -27,7 +27,7 @@
     .desktop-hide{
         display: none;   
     }
-    .header{
+    #block-itg-layout-manager-header-block{
         height:220px;
         .header-top{
             background: $header-bg url(../images/header-bg.png) no-repeat top center;
@@ -205,12 +205,12 @@
 /*End CSS Featured-news Home Page*/   
 /*Start Dont miss Home page css*/
 .dont-miss{    
-    padding: 30px 0px 0px 20px;
+   /*padding: 20px 0px 0px 10px;*/
     ul{
         .dont-miss-listing{
             @include float(left);
             @include calculate-width(2);
-            padding: 0 20px 25px 0;
+            padding: 12px 20px 12px 0;
             &:nth-child(2n+1){
                 clear:left;
             }
@@ -303,12 +303,60 @@
 }
 /*End Story page css*/
 
+/*Start CSS Snap Post*/
+.page-snappost{
+    .spanpost-header{               
+        .spost-left{            
+            @include calculate-width(2);            
+        }
+        .spost-right{            
+            @include calculate-width(2);
+            ul{
+                li{                    
+                    @include font(30px,94px);                    
+                    padding-left: 25px;
+                    img{
+                        width: auto;
+                    }
+                }
+            }
+        }
+    }
+    .view-content{
+        .views-row{
+            .snap-title{
+                h1{
+                    span{
+                        a{
+                            @include font(30px);
+                        }
+                    }
+                }
+            }
+            .snap-post-btm{
+            .snap-button{
+                margin-top:60px;
+                a{
+                    width: 180px;
+                    height: 60px;
+                    @include font(22px,60px);                                                 
+                    &.disagree{
+                         margin-left: 30px; 
+                    }  
+                }
+            }
+            }
+        }
+    }
+}
+/*End CSS Snap Post*/
+
 }
 /*End CSS Desktop version*/
 
 
 @media only screen and (min-width:768px) and (max-width:1199px){
-    .header{ 
+    #block-itg-layout-manager-header-block{ 
         .top-nav{ 
             .main-nav {
                 li {
