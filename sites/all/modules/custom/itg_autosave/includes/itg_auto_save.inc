@@ -428,6 +428,11 @@ class itg_auto_save {
           if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
             return TRUE;
           }
+          break;
+        case 'file':
+          if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
+            return TRUE;
+          } 
       }
     }
     
@@ -477,8 +482,7 @@ class itg_auto_save {
           }
           $this->value = $inputs[$field['fieldName']]['und'];
           $this->var_type = gettype($this->value);
-          if ($this->var_type == 'string') {
-            
+          if ($this->var_type == 'string') {            
             $this->value = (int) $this->value;            
           }                   
           if (!empty($this->value) && is_array($this->value)) {            
@@ -501,7 +505,7 @@ class itg_auto_save {
           
         case 'field_collection':
           // Save field name of field collection to array.
-          //$this->temp[] = $field['fieldName'];
+          $this->temp[] = $field['fieldName'];
           break;
 
         case 'text_long':          
@@ -616,8 +620,11 @@ class itg_auto_save {
           break;
 
         case 'taxonomy_term_reference':
-          $this->value = $inputs[$field['fieldName']]['und'];
-          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['tid'] = $this->value;          
+          $this->value = $inputs[$field['fieldName']]['und'];          
+          $this->value = (int) $this->value;          
+          if ($this->value > 0) {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['tid'] = $this->value;
+          }
           
           break;       
 
@@ -637,8 +644,34 @@ class itg_auto_save {
           }          
           
           break;
+          
+        case 'file':
+          $this->value = $inputs[$field['fieldName']]['und'][0];
+          $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
       }
     }    
+  }
+ 
+  /**
+   * Prepare file field for field collection.
+   * 
+   * @param stdObject $fc_item
+   *   Field collection item object.
+   * @param array $field_value
+   *   Value of file field.
+   * @param string $field_name
+   *   Machine name of the current field.
+   */
+  public function itg_save_file_field_collection(&$fc_item, $field_value, $field_name) {    
+    if ($field_value['fid'] > 0) {
+      $fc_item->{$field_name}[LANGUAGE_NONE][0]['fid'] = $field_value['fid'];
+    }
+    if ($field_value['description'] != '') {
+      $fc_item->{$field_name}[LANGUAGE_NONE][0]['description'] = $field_value['description'];
+    }
+    if ($field_value['display'] != '') {
+      $fc_item->{$field_name}[LANGUAGE_NONE][0]['display'] = $field_value['display'];
+    }
   }
 
   /**
