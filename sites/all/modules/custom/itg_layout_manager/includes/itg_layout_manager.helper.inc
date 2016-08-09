@@ -249,9 +249,7 @@ function get_widgets_poll_list() {
   $query = db_select('node', 'n');
   $query->join('field_data_field_poll_start_date', 'start_date', 'start_date.entity_id = n.nid');
   $query->leftJoin('field_data_field_poll_end_date', 'end_date', 'end_date.entity_id = n.nid');
-  $query->fields('n', array('title', 'nid'));
-  //$query->fields('start_date', array('field_poll_start_date_value'));
-  //$query->fields('end_date', array('field_poll_end_date_value'));
+  $query->fields('n', array('title', 'nid'));  
   $query->condition('type', 'poll');
   $query->condition('start_date.field_poll_start_date_value', $date, '<=');
   $query->condition(db_or()->isNull('end_date.field_poll_end_date_value')->condition('end_date.field_poll_end_date_value', $date, '>='));
