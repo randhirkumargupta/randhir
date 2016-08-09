@@ -108,6 +108,10 @@ img {
   padding: 10px;
 }
 
+.pdt-20 {
+  padding-top: 20px;
+}
+
 .pd-30, .page-user .login-wrapper {
   padding: 30px;
 }
@@ -1180,6 +1184,10 @@ footer .footer-copyright {
   color: #fff;
   font-family: "Roboto", sans-serif;
   z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
   margin: 10px 0 0 10px;
 }
 
@@ -1214,6 +1222,10 @@ footer .footer-copyright {
   display: block;
   float: left;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
 }
 .tab-buttons span.active {
   background: #fff;
@@ -1226,6 +1238,7 @@ footer .footer-copyright {
 .itg-listing {
   list-style: none;
   border: 1px solid #dddddd;
+  padding-top: 20px;
 }
 .itg-listing li {
   position: relative;
@@ -1504,6 +1517,9 @@ footer .footer-copyright {
   color: #323232;
   line-height: 25px;
 }
+.view-front-end-global-search .item-list ul.pager li.pager-next.pager-first.first, .view-front-end-global-search .item-list ul.pager li.pager-next.pager-last.last, .view-front-end-global-search .item-list ul.pager li.pager-last.pager-first.first, .view-front-end-global-search .item-list ul.pager li.pager-last.pager-last.last, .view-front-end-global-search .item-list ul.pager li.pager-first.pager-first.first, .view-front-end-global-search .item-list ul.pager li.pager-first.pager-last.last, .view-front-end-global-search .item-list ul.pager li.pager-previous.pager-first.first, .view-front-end-global-search .item-list ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
 .view-front-end-global-search .attachment {
   font-family: "Roboto", sans-serif;
   border-bottom: 1px solid #dddddd;
@@ -1555,6 +1571,10 @@ footer .footer-copyright {
   color: #fff;
   font-family: "Roboto", sans-serif;
   z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .dont-miss {
@@ -1594,6 +1614,9 @@ footer .footer-copyright {
   padding: 0 0px 20px 0;
   border: none;
 }
+.dont-miss ul .dont-miss-listing .dm-pic {
+  width: 48%;
+}
 .dont-miss ul .dont-miss-listing .dm-detail h4 {
   color: #048cb9;
   margin-bottom: 5px;
@@ -1601,6 +1624,10 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
   font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 .dont-miss ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
@@ -1974,6 +2001,39 @@ footer .footer-copyright {
 .page-snappost {
   font-family: "Roboto", sans-serif;
 }
+.page-snappost .spanpost-header {
+  background: #151515;
+}
+.page-snappost .spanpost-header .container {
+  zoom: 1;
+}
+.page-snappost .spanpost-header .container:before, .page-snappost .spanpost-header .container:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.page-snappost .spanpost-header .container:after {
+  clear: both;
+}
+.page-snappost .spanpost-header .spost-left {
+  float: left;
+}
+.page-snappost .spanpost-header .spost-right {
+  float: right;
+}
+.page-snappost .spanpost-header .spost-right ul li {
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+  font-size: 30px;
+  font-size: 1.875rem;
+  line-height: 94px;
+  padding-left: 25px;
+}
+.page-snappost .spanpost-header .spost-right ul li i {
+  color: #777777;
+}
 .page-snappost #main.container {
   max-width: 100%;
   width: 100%;
@@ -2107,6 +2167,9 @@ footer .footer-copyright {
 .view-category-wise-content-list .catagory-listing {
   padding: 20px 0;
 }
+.view-category-wise-content-list .catagory-listing .pic {
+  width: 170px;
+}
 .view-category-wise-content-list .catagory-listing .detail h3 {
   margin-bottom: 10px;
   font-weight: 700;
@@ -2154,6 +2217,9 @@ footer .footer-copyright {
   color: #323232;
   line-height: 25px;
 }
+.view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
 
 /*End category wise content list css*/
 /*Start anchors listing css*/
@@ -2176,6 +2242,9 @@ footer .footer-copyright {
 .view-widget-anchors-listing .anchor-listing {
   padding: 20px 0;
   border-bottom: 1px solid #dddddd;
+}
+.view-widget-anchors-listing .anchor-listing .pic {
+  width: 170px;
 }
 .view-widget-anchors-listing .anchor-listing .detail h3 {
   margin-bottom: 10px;

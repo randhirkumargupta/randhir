@@ -13,8 +13,11 @@
   <div class="browse-ftp">
   <?php print drupal_render($form['video_browse_select']); ?>
 </div>
-  <?php print drupal_render($form['upload']); ?>
-  <?php print drupal_render($form['field_videogallery_video_upload']); ?>
+  <span class="browse-ftp-click button">Browse FTP</span>
+  <span class="error vid-error"></span>
+  <?php print drupal_render($form['field_upload_video']); ?>
+  <?php print drupal_render($form['field_story_expert_name']); ?>
+  <?php print drupal_render($form['field_story_expert_description']); ?>
 </div>
 
 <div id="Imageupload">

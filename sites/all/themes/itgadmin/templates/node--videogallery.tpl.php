@@ -35,7 +35,16 @@
         <div class="Story-details">
             <h2><?php print t('Video Upload'); ?></h2>
             <div class="content-details">
-                <?php print render($content['field_videogallery_video_upload']); ?>
+                <?php print render($content['field_upload_video']); ?>
+              <?php $short_des = render($content['field_story_expert_name']); 
+                if(!empty($short_des)): ?>
+                <?php print render($content['field_story_expert_name']);  ?>
+              <?php endif; 
+                $short_des = render($content['field_story_expert_description']);
+                if(!empty($short_des)):
+              ?>
+                <?php print render($content['field_story_expert_description']); ?>
+              <?php endif; ?>
             </div>
         </div> 
         <?php } ?>

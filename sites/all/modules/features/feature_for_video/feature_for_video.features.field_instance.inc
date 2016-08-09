@@ -10,214 +10,6 @@
 function feature_for_video_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance:
-  // 'field_collection_item-field_videogallery_video_upload-field_story_expert_description'.
-  $field_instances['field_collection_item-field_videogallery_video_upload-field_story_expert_description'] = array(
-    'bundle' => 'field_videogallery_video_upload',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_expert_description',
-    'label' => 'Long Description',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_videogallery_video_upload-field_story_expert_name'.
-  $field_instances['field_collection_item-field_videogallery_video_upload-field_story_expert_name'] = array(
-    'bundle' => 'field_videogallery_video_upload',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_expert_name',
-    'label' => 'Short Description',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_videogallery_video_upload-field_upload_video'.
-  $field_instances['field_collection_item-field_videogallery_video_upload-field_upload_video'] = array(
-    'bundle' => 'field_videogallery_video_upload',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_upload_video',
-    'label' => 'Video',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'exclude_cv' => FALSE,
-      'file_directory' => 'dailymotion_video_dir',
-      'file_extensions' => 'mp4',
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 0,
-            'plupload' => 0,
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 'upload',
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 0,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-            'search_all_fields' => 0,
-          ),
-        ),
-        'imce_filefield_on' => 0,
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'file_generic',
-      'weight' => 0,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_videogallery_video_upload-field_video_thumbnail'.
-  $field_instances['field_collection_item-field_videogallery_video_upload-field_video_thumbnail'] = array(
-    'bundle' => 'field_videogallery_video_upload',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => 'thumbnail',
-        ),
-        'type' => 'image',
-        'weight' => 3,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_video_thumbnail',
-    'label' => 'Video Thumbnail',
-    'required' => 0,
-    'settings' => array(
-      'alt_field' => 1,
-      'default_image' => 0,
-      'exclude_cv' => FALSE,
-      'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'image',
-      'settings' => array(
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 0,
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 1,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-            'search_all_fields' => 0,
-          ),
-        ),
-        'imce_filefield_on' => 0,
-        'preview_image_style' => 'podcast_audio_image_preview',
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'image_image',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-videogallery-field_dailymotion_playlist'.
   $field_instances['node-videogallery-field_dailymotion_playlist'] = array(
     'bundle' => 'videogallery',
@@ -256,7 +48,7 @@ function feature_for_video_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 29,
+      'weight' => 32,
     ),
   );
 
@@ -297,7 +89,7 @@ function feature_for_video_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 31,
+      'weight' => 33,
     ),
   );
 
@@ -339,7 +131,7 @@ function feature_for_video_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 33,
+      'weight' => 34,
     ),
   );
 
@@ -376,7 +168,7 @@ function feature_for_video_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 25,
+      'weight' => 28,
     ),
   );
 
@@ -461,6 +253,91 @@ function feature_for_video_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-videogallery-field_story_expert_description'.
+  $field_instances['node-videogallery-field_story_expert_description'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 33,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_expert_description',
+    'label' => 'Long Description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 27,
+    ),
+  );
+
+  // Exported field_instance: 'node-videogallery-field_story_expert_name'.
+  $field_instances['node-videogallery-field_story_expert_name'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 32,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_expert_name',
+    'label' => 'Short Description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 26,
     ),
   );
 
@@ -588,7 +465,7 @@ function feature_for_video_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
     'label' => 'Extra large image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -610,6 +487,7 @@ function feature_for_video_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 'imce',
+            'itg_image_repository' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -1378,7 +1256,7 @@ function feature_for_video_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 27,
+      'weight' => 30,
     ),
   );
 
@@ -1420,7 +1298,7 @@ function feature_for_video_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 28,
+      'weight' => 31,
     ),
   );
 
@@ -1459,7 +1337,7 @@ function feature_for_video_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 26,
+      'weight' => 29,
     ),
   );
 
@@ -1623,6 +1501,75 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_upload_video'.
+  $field_instances['node-videogallery-field_upload_video'] = array(
+    'bundle' => 'videogallery',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 31,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_upload_video',
+    'label' => 'Video',
+    'required' => 1,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => 'dailymotion_video_dir',
+      'file_extensions' => 'mp4',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 25,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_video_anchor'.
   $field_instances['node-videogallery-field_video_anchor'] = array(
     'bundle' => 'videogallery',
@@ -1707,52 +1654,6 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'node-videogallery-field_videogallery_video_upload'.
-  $field_instances['node-videogallery-field_videogallery_video_upload'] = array(
-    'bundle' => 'videogallery',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'field_collection',
-        'settings' => array(
-          'add' => 'Add',
-          'delete' => 'Delete',
-          'description' => TRUE,
-          'edit' => 'Edit',
-          'view_mode' => 'full',
-        ),
-        'type' => 'field_collection_view',
-        'weight' => 22,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_videogallery_video_upload',
-    'label' => 'Video Upload',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 24,
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
   t('Anchor');
@@ -1791,8 +1692,6 @@ function feature_for_video_field_default_field_instances() {
   t('Twitter Image');
   t('Twitter narrative');
   t('Video');
-  t('Video Thumbnail');
-  t('Video Upload');
   t('Video expires');
   t('common by line twitter');
 
