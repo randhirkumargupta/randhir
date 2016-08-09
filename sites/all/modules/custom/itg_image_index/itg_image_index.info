@@ -1,0 +1,6 @@
+name = itg Apache Solr index alt
+description = Add image field to the solr index so we can display images in search results
+package = Apache Solr
+core = 7.x
+
+dependencies[] = apachesolr_search
