@@ -205,7 +205,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 12,
     ),
   );
 
@@ -246,7 +246,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -287,7 +287,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 6,
     ),
   );
 
@@ -370,7 +370,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 16,
     ),
   );
 
@@ -416,7 +416,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 4,
+      'weight' => 12,
     ),
   );
 
@@ -459,7 +459,7 @@ function features_for_print_team_field_default_field_instances() {
         'size' => 40,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 13,
     ),
   );
 
@@ -497,7 +497,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 4,
+      'weight' => 2,
     ),
   );
 
@@ -536,7 +536,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 15,
     ),
   );
 
@@ -595,7 +595,7 @@ function features_for_print_team_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 7,
+      'weight' => 14,
     ),
   );
 

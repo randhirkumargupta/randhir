@@ -168,15 +168,6 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_rating']['#access'] = FALSE;
       }
 
-      // Add category heading for section field
-      if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
-        $form['idea_categorization'] = array(
-            '#type' => 'item',
-            '#markup' => '<div class=""><h2>Categorization</h2></div>',
-            '#weight' => 2,
-        );
-      }
-
       // Disable change status radio button if status is "Approved" OR "Rejected"
       if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Rejected') {
         $form['field_pti_idea_status']['#disabled'] = TRUE;
