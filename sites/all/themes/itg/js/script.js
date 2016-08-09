@@ -202,6 +202,12 @@ Drupal.behaviors.my_custom_behavior = {
     });
     // jQuery Code for tabbing End
     
+    //ITG Listing top spacing          
+    $('.tab-data').find('ul.itg-listing').css('padding-top','0');
+    
+    //pagination
+    $('.pager .pager-previous a').html('<i class="fa fa-chevron-left"></i>');
+    $('.pager .pager-next a').html('<i class="fa fa-chevron-right"></i>');
     
     // Global function to set lable as input placeholder
     function placeHolder(element, parent){
