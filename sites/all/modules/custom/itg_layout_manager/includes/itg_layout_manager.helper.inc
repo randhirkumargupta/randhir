@@ -245,14 +245,16 @@ function get_section_widgets_id($cid, $section) {
 function get_widgets_poll_list() {
   
   $date = date('Y-m-d H:i:s');
-  
+  //echo $date;
   $query = db_select('node', 'n');
   $query->join('field_data_field_poll_start_date', 'start_date', 'start_date.entity_id = n.nid');
-  $query->join('field_data_field_poll_end_date', 'end_date', 'end_date.entity_id = n.nid');
-  $query->fields('n', array('title', 'nid'));  
+  $query->leftJoin('field_data_field_poll_end_date', 'end_date', 'end_date.entity_id = n.nid');
+  $query->fields('n', array('title', 'nid'));
+  //$query->fields('start_date', array('field_poll_start_date_value'));
+  //$query->fields('end_date', array('field_poll_end_date_value'));
   $query->condition('type', 'poll');
-  $query->condition(db_or()->isNull('start_date.field_poll_start_date_value')->condition('start_date.field_poll_start_date_value', $date, '>='));
-  $query->condition(db_or()->isNull('end_date.field_poll_end_date_value')->condition('end_date.field_poll_end_date_value', $date, '<='));
+  $query->condition('start_date.field_poll_start_date_value', $date, '<=');
+  $query->condition(db_or()->isNull('end_date.field_poll_end_date_value')->condition('end_date.field_poll_end_date_value', $date, '>='));
   
   $itg_result = $query->execute()->fetchAll();
   
@@ -261,7 +263,7 @@ function get_widgets_poll_list() {
   $content = '<ul id="poll-widgets" class="no-bullet pd-10 templates-widgets">';
   
   foreach ($itg_result as $row) {    
-    $content .= '<li data-widget="'.$widget_name.'#'.$row->nid.'">'
+    $content .= '<li id="'.$row->title.'" data-widget="'.$widget_name.'#'.$row->nid.'">'
             . '<span>'.$row->title.'</span>'            
             . '</li>';
   }

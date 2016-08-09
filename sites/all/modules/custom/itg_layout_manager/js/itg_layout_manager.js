@@ -35,6 +35,7 @@
                         $(this).addClass("dropped").find("p").hide();
                         // content block id for display content widget
                         var block_name = $(this).attr('id');
+                        //alert(block_name);
                         // tamplate section value
                         var section_name = $('#edit-section').val();
                         // template name
@@ -55,13 +56,15 @@
                         $.ajax({
                               url: base_url + "/insert-layout-setting-ajax/layout",
                               method: 'post',
-                              data: {block_name:block_name, widget_name:widget_name, section_name:section_name, template_name:template_name}, 
+                              data: {block_name:block_name, widget_name:widget_name, section_name:section_name, template_name:template_name, block_title:category_name_tab}, 
                               beforeSend:function(){
                                 
                                 $('#'+content_place).html('<img class="widget-loader" align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');                                
                               },
                               success: function(data) {
-                                 // for category tab widget 
+                                 // for category tab widget
+                                 $('input[name = '+block_name+']').val(category_name_tab);
+                                 
                                  if (display_area) {                                     
                                     $('#'+block_name).html(category_name_tab);
                                  }
