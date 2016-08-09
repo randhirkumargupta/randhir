@@ -9,7 +9,7 @@
  * {@inheritdoc}
  */
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
-  
+ $magazine_id = $form_state['input']['magazine-name'];
   if (isset($form_state['view']->name) && $form_state['view']->name == 'syndication_rule_listing') {    
     $form['field_syndication_rule_title_value']['#options'] = itg_syndication_get_client();
     unset($form['field_syndication_rule_title_value']['#options']['_none']);
@@ -23,6 +23,14 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {
+    global $user, $base_url;
+    // add js for issue dropdown ajax
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    $settings['uid'] = $user->uid;
+    drupal_add_js(array('itg_syndication' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication.js', array('weight' => 1));
+    
     // hide save button
     if(!(isset($_GET['type']) && $_GET['type'] != 'article')) {
       drupal_add_js('jQuery(document).ready(function() {
@@ -61,11 +69,27 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
       ),
     );    
        
+     $form['magazine-name'] = array(
+      '#type' => 'select',
+      '#title' => t('Select magazine'),      
+      '#options' => itg_syndication_get_issue_list('magazine'),
+      '#default_value' => '_none',
+      '#weight' => 3,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="type"]' => array('value' => 'magazine'),
+        ),
+      ),
+    );
+    
+     if(isset($magazine_id)) {
+       $mag_option = itg_magazine_custom_callback($magazine_id);
+     }
+     
     $form['issue'] = array(
       '#type' => 'select',
-      '#title' => t('Select Issue'),      
-      '#options' => itg_syndication_get_issue_list(),
-      '#default_value' => '_none',
+      '#title' => t('Select Issue'),
+      '#options' => $mag_option,
       '#weight' => 3,
       '#states' => array(
         'visible' => array(
@@ -155,7 +179,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_client') {
     $form['title']['#autocomplete_path'] = 'content-title-list/syndication_client/autocomplete';
   }
-  
+   
 }
 
 /**

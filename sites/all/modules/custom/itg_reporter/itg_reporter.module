@@ -30,6 +30,58 @@ function itg_reporter_menu() {
 }
 
 /**
+ * Implements hook_block_info().
+ * @return array
+ */
+function itg_reporter_block_info() {
+  $blocks['reporter_tab_form_block'] = array(
+    'info' => t('Reporter Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * {@inheritdoc}
+ */
+function itg_reporter_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'reporter_tab_form_block':
+      $block['content'] = theme('reporter_tab_form_display_block', array('data' => ''));
+      break;
+  }
+
+  return $block;
+}
+
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_reporter_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'reporter_tab_form_display_block' => array(
+      'template' => 'reporter-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_reporter') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'reporter_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'reporter-node-form',
+      'path' => drupal_get_path('module', 'itg_reporter') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+
+  return $themes;
+}
+
+/**
  * Implements hook_form_alter().
  * {@inheritdoc}
  */

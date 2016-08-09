@@ -84,26 +84,15 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => l(t('Cancel'), 'manage-videogallery', array('attributes' => array('class' => 'button'))),
         '#weight' => 20,
       );
-      $form['upload'] = array(
-        '#type' => 'plupload',
-        '#weight' => 21,
-        '#upload_validators' => array(
-          'file_validate_extensions' => array("mp4"),
-          'file_validate_size' => array(format_size(file_upload_max_size())),
-        ),
-      );
 
       // FTP browse
-//      $form['video_browse_select'] = array(
-//      '#type' => 'checkboxes',
-//      '#options' => itg_videogallery_select_options(),
-//      '#suffix' => '<a href="javascript:void(0)" class = "button">Attach Video</a>',
-//     );
-      foreach ($form['field_videogallery_video_upload'][LANGUAGE_NONE] as $key => $fieldcollection) {
-        if (is_numeric($key)) {
-          $form['field_videogallery_video_upload'][LANGUAGE_NONE][$key]['field_upload_video'][LANGUAGE_NONE][0]['#upload_validators']['itg_custom_field_validate'] = array(1, 2);
-        }
-      }
+
+      $form['video_browse_select'] = array(
+        '#type' => 'radios',
+        '#options' => itg_videogallery_select_options(),
+        '#suffix' => '<a href="javascript:void(0)" class = "button">Attach Video</a>',
+      );
+      $form['field_upload_video'][LANGUAGE_NONE][0]['#upload_validators']['itg_custom_field_validate'] = array(1, 2);
       $form['actions']['submit']['#submit'][] = 'itg_videogallery_submit_status_message';
       $form['actions']['submit']['#submit'][] = 'itg_videogallery_custom_submit';
       break;
@@ -175,40 +164,27 @@ function itg_videogallery_custom_submit($form, &$form_state) {
   foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
     $playlist_name[] = $playlist_term['name'];
   }
-  foreach ($form_state['values']['field_videogallery_video_upload'][LANGUAGE_NONE] as $key => $fieldcollection) {
-    if (is_numeric($key)) {
-      $fid = $form_state['values']['field_videogallery_video_upload'][LANGUAGE_NONE][$key]['field_upload_video'][LANGUAGE_NONE][0]['fid'];
-      $thumb_fid = $form_state['values']['field_videogallery_video_upload'][LANGUAGE_NONE][$key]['field_video_thumbnail'][LANGUAGE_NONE][0]['fid'];
-      if ($fid != '' && is_numeric($fid)) {
-        $query = db_select('dailymotion_response_details', 'drd');
-        $query->fields('drd', array('fid', 'video_id'));
-        $query->condition('fid', $fid, '=');
-        $result_fid = $query->execute()->fetchAssoc();
-        if ($result_fid['fid'] == '') {
-          $new_fid_array[$key]['vid_fid'] = $fid;
-          $new_fid_array[$key]['thumb_fid'] = $thumb_fid;
-        }
-        else {
-          // perform edit operation when node edit
-          $result_video_fid .= $result_fid['video_id'] . ', ';
-          itg_videogallery_unlink_video_playlist($result_fid, $playlist_name, $tags_value, $thumb_fid);
-        }
-      }
-    }
-  }
-  if ($result_video_fid != '') {
-    $final_exist_video = trim($result_video_fid, ", ");
-    itg_videogallery_edit_dailymotion($final_exist_video, $playlist_name, $node_id);
-  }
-  $response_result = array();
-  foreach ($new_fid_array as $key => $value) {
-    if (is_numeric($key)) {
-      $file_details = file_load($value['vid_fid']);
+  /* $thumb_flag = FALSE;
+    if($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0){
+    $thumb_flag = TRUE;
+    } */
+
+  $video_fid = $form_state['values']['field_upload_video'][LANGUAGE_NONE][0]['fid'];
+  if ($video_fid != '' && is_numeric($video_fid)) {
+    $query = db_select('dailymotion_response_details', 'drd');
+    $query->fields('drd', array('fid', 'video_id'));
+    $query->condition('fid', $video_fid, '=');
+    $dailymotion_video_result = $query->execute()->fetchAssoc();
+    if (empty($dailymotion_video_result['fid'])) {
+      // Video not uploaded on dailymotion
+      $file_details = file_load($video_fid);
       $real_path = drupal_realpath($file_details->uri);
-      $response = itg_videogallery_dailymotion($real_path, $key, $file_details->uri, $value['vid_fid'], $tags_value);
+      $response = itg_videogallery_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value);
       // Perform playlist and tags when new video create.
       $response_result['video_id'] = $response['id'];
       $response_result['fid'] = $response['fid'];
+
+
 
       $nid = db_insert('dailymotion_response_details')
           ->fields(array(
@@ -217,12 +193,24 @@ function itg_videogallery_custom_submit($form, &$form_state) {
             'fid' => $response['fid'],
             'tags' => $response['tags'],
             'video_id' => $response['id'],
+            'nid' => $node_id,
+            'upload_time' => REQUEST_TIME,
+            'video_duration' => $response['duration'],
           ))
           ->execute();
-      $thumbnail_fid = $value['thumb_fid'];
-      itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value, $thumbnail_fid);
-      $playlist_response = itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
+      itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
+      $thumb_file = itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id, $thumb_flag);
     }
+    else {
+      // Video uploaded on dailymotion
+      itg_videogallery_unlink_video_playlist($dailymotion_video_result, $playlist_name, $tags_value);
+      $thumb_file = itg_videogallery_edit_dailymotion($dailymotion_video_result, $playlist_name, $node_id, $thumb_flag);
+    }
+  }
+  if ($thumb_flag == TRUE) {
+//    $node = node_load($form_state['node']->nid);
+//    $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $thumb_file->fid;
+//    field_attach_update('node', $node);
   }
 }
 
@@ -237,8 +225,6 @@ function itg_videogallery_dailymotion_api() {
   $api_key = variable_get('dailymotion_apikey', '');
   $api_secret = variable_get('dailymotion_secretkey', '');
 
-  // Tell the SDK what kind of authentication you'd like to use.
-  // Because the SDK works with lazy authentication, no request is performed at this point.
   try {
     $api = new Dailymotion();
     $scopes = array(
@@ -275,7 +261,7 @@ function itg_videogallery_dailymotion_api() {
 /**
  * Implements function for remove video from playlist
  */
-function itg_videogallery_unlink_video_playlist($vid_res_result, $playlist_name, $tags_value, $thumbnail_fid) {
+function itg_videogallery_unlink_video_playlist($vid_res_result, $playlist_name, $tags_value) {
   $thumbnail = file_load($thumbnail_fid);
   $thumb_real_path = drupal_realpath($thumbnail->uri);
   $video_id = $vid_res_result['video_id'];
@@ -303,14 +289,9 @@ function itg_videogallery_unlink_video_playlist($vid_res_result, $playlist_name,
  * @param array $tags_value
  * @param int $node_id
  */
-function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $node_id) {
-  if (is_array($vid_res_result)) {
-    $video_id = $vid_res_result['video_id'];
-    $fid = $vid_res_result['fid'];
-  }
-  else {
-    $video_id = $vid_res_result;
-  }
+function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $node_id, $thumb_flag) {
+  $video_id = $vid_res_result['video_id'];
+  $fid = $vid_res_result['fid'];
   $api = itg_videogallery_dailymotion_api();
   // create playlist
   foreach ($playlist_name as $name) {
@@ -331,36 +312,45 @@ function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $nod
               'node_id' => $node_id,
               'video_id' => $video_id,
             ))->execute();
-
-        if (is_array($vid_res_result)) {
-          $api->post('/playlist/' . $result['id'] . '/videos/' . $video_id);
-        }
-        else {
-          $api->post('/playlist/' . $result['id'] . '/videos?ids=' . $video_id);
-        }
+        $api->post('/playlist/' . $result['id'] . '/videos/' . $video_id);
       }
       catch (Exception $e) {
         if ($e->getCode() == 500) {
+          $playlists = $api->get(
+              '/me/playlists', array('limit' => 100, 'fields' => array('id', 'name'))
+          );
+          foreach ($playlists['list'] as $p_value) {
+            $play[$p_value['name']] = $p_value['id'];
+          }
+          db_insert('dailymotion_playlist_details')
+              ->fields(array(
+                'pid' => $play[$name],
+                'playlist_name' => $name,
+                'node_id' => $node_id,
+                'video_id' => $video_id,
+              ))->execute();
           $playlist_id = itg_videogallery_get_playlist_id($name);
-          if (is_array($vid_res_result)) {
-            $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
-          }
-          else {
-            $api->post('/playlist/' . $playlist_id[0]->pid . '/videos?ids=' . $video_id);
-          }
+          $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
         }
       }
     }
     else {
       $playlist_id = itg_videogallery_get_playlist_id($name);
-      if (is_array($vid_res_result)) {
-        $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
-      }
-      else {
-        $api->post('/playlist/' . $playlist_id[0]->pid . '/videos?ids=' . $video_id);
-      }
+      $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
     }
   }
+  // Dailymotion Thumbnail image assign on run time when video save
+  /* if($thumb_flag == TRUE){
+    $thumb_url = $api->get(
+    '/video/'.$video_id,
+    array('fields' => array('thumbnail_url'))
+    );
+    $image_url = $thumb_url['thumbnail_url'];
+    $imagedata=file_get_contents($image_url);
+    $file = file_save_data($imagedata, file_default_scheme() . '://' . end(explode('/',$image_url)));
+    file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+    return $file;
+    } */
 }
 
 /**
@@ -371,7 +361,7 @@ function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $nod
  * @param int $fid
  * @return array
  */
-function itg_videogallery_dailymotion($real_path, $key, $uri, $fid, $tags_value) {
+function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value) {
   $api = itg_videogallery_dailymotion_api();
 // TODO: status get work  
 //  try {
@@ -401,7 +391,7 @@ function itg_videogallery_dailymotion($real_path, $key, $uri, $fid, $tags_value)
   // This does not create a video, it only offers you a public URL to work with.
   try {
     /*
-    if (itg_videogallery_check_ftp_video($fid)) {
+      if (itg_videogallery_check_ftp_video($fid)) {
       $connection_id = itg_videogallery_ftp_video_list();
       $ftp_files = ftp_nlist($connection_id, "/videos/");
       $ftp_file = explode('/dailymotion_video_dir/', $real_path);
@@ -411,7 +401,7 @@ function itg_videogallery_dailymotion($real_path, $key, $uri, $fid, $tags_value)
       // $real_path = 'ftp://'.$ftp_user_name.':'.$ftp_user_pass.'@'.$ftp_server.'/home/ftptest1/videos/videos/'.$ftp_file[1];
       $uri = 'public://dailymotion-ftp/' . $ftp_file[1];
       //$url = 'ftp://'.$ftp_user_name.':'.$ftp_user_pass.'@'.$ftp_server.'/videos/'.$ftp_file[1];
-    }*/// TODO FTP code
+      } */// TODO FTP code
     $url = $api->uploadFile($real_path);
     $result = $api->post(
         '/me/videos', array(
@@ -422,11 +412,15 @@ function itg_videogallery_dailymotion($real_path, $key, $uri, $fid, $tags_value)
       'published' => TRUE,
         )
     );
+    $dur = $api->get(
+        '/video/' . $result['id'], array('fields' => array('duration'))
+    );
     ftp_close($connection_id);
     $a = new Dailymotion();
     $a->logout();
     $result['fid'] = $fid;
-    $result['tags'] = $fid;
+    $result['tags'] = $tags_value;
+    $result['duration'] = $dur['duration'];
   }
   catch (Exception $e) {
     if ($e->getMessage() == "This `client_id' doesn't exist.") {
@@ -475,27 +469,6 @@ function itg_videogallery_custom_validate($form, &$form_state) {
       }
     }
   }
-
-  // field collection validation
-  foreach ($form_state['field']['field_videogallery_video_upload'][LANGUAGE_NONE]['entity'] as $key => $filed_collection) {
-    $fids[] = $form_state['field']['field_videogallery_video_upload'][LANGUAGE_NONE]['entity'][$key]->field_upload_video[LANGUAGE_NONE][0]['fid'];
-    $validate_thumb[$key] = $form_state['field']['field_videogallery_video_upload'][LANGUAGE_NONE]['entity'][$key]->field_upload_video[LANGUAGE_NONE][0]['fid'];
-  }
-  $newfid = array_filter($fids);
-  $validate_thumbs = array_filter($validate_thumb);
-  if (empty($newfid)) {
-    form_set_error('field_upload_video', t('Upload video is required.'));
-  }
-  foreach ($validate_thumbs as $key => $valu) {
-    $count = $key + 1;
-    if ($form_state['field']['field_videogallery_video_upload'][LANGUAGE_NONE]['entity'][$key]->field_video_thumbnail[LANGUAGE_NONE][0]['fid'] == '') {
-      form_set_error('field_video_thumbnail', t('Video Thumbnail image is required.'));
-    }
-//    }elseif ($form_state['field']['field_videogallery_video_upload'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] == ''){
-//      form_set_error('field_story_expert_description',t('Long description of video is required.'));
-//    }TODO
-  }
-  // end of fieldcollection validation
 }
 
 /**
@@ -546,7 +519,8 @@ function itg_videogallery_form_videogallery_node_form_alter(&$form, &$form_state
  * {@inheritdoc}
  */
 function itg_videogallery_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  if ($form["#id"] == 'views-exposed-form-manage-videogallery-page') {
+  $form_id_arr = array('views-exposed-form-manage-videogallery-page', 'views-exposed-form-videogallery-management-page', 'views-exposed-form-videogallery-management-page-1', 'views-exposed-form-videogallery-management-page-2', 'views-exposed-form-videogallery-management-page-3', 'views-exposed-form-videogallery-management-page-5', 'views-exposed-form-videogallery-management-page-6', 'views-exposed-form-videogallery-management-page-7', 'views-exposed-form-videogallery-management-page-4', 'views-exposed-form-videogallery-management-page-10');
+  if (in_array($form['#id'], $form_id_arr)) {
     $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
     $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
@@ -559,136 +533,10 @@ function itg_videogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
  * {@inheritdoc}
  */
 function itg_videogallery_views_pre_render(&$view) {
-  if ($view->name == "manage_videogallery") {
+  if ($view->name == "manage_videogallery" || $view->name == "videogallery_management") {
     $header_content_video = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_video .= l(t('Upload Video'), 'node/add/videogallery', array('query' => array('destination' => 'manage-videogallery')));
+    $header_content_video .= l(t('Upload Video'), 'node/add/videogallery', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content_video;
-  }
-}
-
-/**
- * Implements hook_field_attach_form().
- * {@inheritdoc}
- */
-function itg_videogallery_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
-  $options = array('language' => field_valid_language($langcode));
-  // Merge default options.
-  $default_options = array(
-    'default' => FALSE,
-    'deleted' => FALSE,
-    'language' => NULL,
-  );
-  $options += $default_options;
-  list(,, $bundle) = entity_extract_ids($entity_type, $entity);
-  $instances = _field_invoke_get_instances($entity_type, $bundle, $options);
-  // Iterate through the instances.
-  $return = array();
-  foreach ($instances as $instance) {
-    // field_info_field() is not available for deleted fields, so use
-    // field_info_field_by_id().
-    $field = field_info_field_by_id($instance['field_id']);
-    $field_name = $field['field_name'];
-
-    //If we are looking at our field type and specific widget type, and we are multiple entries
-    if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
-      if ($field['bundles']['node'][0] == "videogallery") {
-        drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/upload.js', array('weight' => 2));
-        //Check just in case the button is here, and add another #submit function
-        if (isset($form[$field['field_name']]['und']['add_more'])) {
-          // add a simple select list, this defaults to numb 3
-          $form[$field['field_name']]['add_more_number'] = array(
-            '#type' => 'select',
-            '#options' => drupal_map_assoc(range(0, 20)),
-            '#default_value' => 1,
-            '#attributes' => array('style' => 'display:none;'),
-          );
-          $form[$field['field_name']]['und']['add_more']['#submit'][] = 'itg_videogallery_field_add_more_submit';
-        }
-      }
-    }
-  }
-}
-
-/**
- * Implements hook_form_submit().
- * {@inheritdoc}
- */
-function itg_videogallery_field_add_more_submit($form, &$form_state) {
-  global $user;
-  $button = $form_state['triggering_element'];
-  // Go one level up in the form, to the widgets container.
-  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
-  $field_name = $element['#field_name'];
-  $langcode = $element['#language'];
-  $parents = $element['#field_parents'];
-
-  // Alter the number of widgets to show. items_count = 0 means 1.
-  $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
-  //get the number from the select
-  $numbtoadd = $form[$field_name]['add_more_number']['#value'];
-  if ($numbtoadd) {
-    $field_state['items_count'] += $numbtoadd - 1;
-    field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
-    $form_state['rebuild'] = TRUE;
-  }
-  $node = drupal_rebuild_form('videogallery_node_form', $form_state, $old_form = NULL);
-  $ftp_fids = array_filter($form_state['input']['video_browse_select']);
-  if (!empty($ftp_fids)) {
-    $key_val = 0;
-    foreach ($ftp_fids as $file_id) {
-      $file_ids[$key_val]['fid'] = $file_id;
-      $key_val++;
-    }
-
-    $i = 0;
-    foreach ($form_state['field']['field_videogallery_video_upload']['und']['entity'] as $key => $filed_collection) {
-      if (!isset($filed_collection->field_upload_video['und'])) {
-        $form_state['field']['field_videogallery_video_upload']['und']['entity'][$key]->field_upload_video['und'][0]['fid'] = $file_ids[$i]['fid'];
-        $i++;
-      }
-    }
-  }
-  else {
-
-
-    $fids = array();
-    $mydir = 'public://dailymotion_video_dir';
-    file_prepare_directory($mydir, FILE_CREATE_DIRECTORY);
-    // drupal_mkdir('public://' . $mydir , 0777);
-    foreach ($node['upload']['#value'] as $video) {
-      $scheme = variable_get('file_default_scheme', 'public') . '://dailymotion_video_dir/';
-      $source = $video['tmppath'];
-      $uri = itg_video_check_exist_file($video['name']);
-      $newuri = explode('//dailymotion_video_dir/', $uri);
-      $directory = '';
-      $destination = file_stream_wrapper_uri_normalize($scheme . $directory . $newuri[1]);
-      $destination = file_unmanaged_move($source, $destination);
-      $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-      $file = new StdClass;
-      $file->uid = $user->uid;
-      $file->filename = $video['name'];
-      $file->uri = $uri;
-      $file->filemime = file_get_mimetype($uri);
-      $file->filesize = @filesize($uri);
-      $file->timestamp = REQUEST_TIME;
-      $file->is_new = TRUE;
-      $file->status = 0;
-      $fids[] = file_save($file);
-    }
-    $key_val = 0;
-    foreach ($fids as $file_id) {
-      $file_ids[$key_val]['fid'] = $file_id->fid;
-      $file_ids[$key_val]['filename'] = $file_id->filename;
-      $key_val++;
-    }
-
-    $i = 0;
-    foreach ($form_state['field']['field_videogallery_video_upload']['und']['entity'] as $key => $filed_collection) {
-      if (!isset($filed_collection->field_upload_video['und'])) {
-        $form_state['field']['field_videogallery_video_upload']['und']['entity'][$key]->field_upload_video['und'][0]['fid'] = $file_ids[$i]['fid'];
-        $i++;
-      }
-    }
   }
 }
 
@@ -698,18 +546,17 @@ function itg_videogallery_field_add_more_submit($form, &$form_state) {
  * @param array $form_state
  */
 function itg_videogallery_submit_status_message(&$form, $form_state) {
+
+  $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
+  $node_type = ucfirst($form_state['node']->type);
+  $node_type = str_replace("_", " ", $node_type);
+  $title = ucfirst($form_state['node']->title);
+
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'poll') {
-    $op = 'created';
-  }
-  else {
-    $op = 'updated';
-  }
-  $video_title = $form_state['node']->title;
-  drupal_set_message(t('Video Gallery <b>' . $video_title . '</b> has been ' . $op . '.'));
-  $_GET['destination'] = $_REQUEST['destination'];
+
+  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
 }
 
 /**
@@ -765,7 +612,8 @@ function itg_videogallery_menu() {
     'file' => 'includes/itg_videogallery.inc',
   );
   $items['dailymotion-ftp-videos-post'] = array(
-    'page callback' => 'itg_videogallery_ftp_video_post',
+    // 'page callback' => 'itg_videogallery_ftp_video_post',
+    'page callback' => 'itg_videogallery_thumb_assign',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
@@ -903,6 +751,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'video file delete in files folder.',
     'callback' => 'itg_videogallery_remove_video',
   );
+  $items['video_thumb_assign'] = array(
+    'description' => 'Thumbnail image assign to node from dailymotion.',
+    'callback' => 'itg_videogallery_thumb_assign',
+  );
   return $items;
 }
 
@@ -914,6 +766,40 @@ function itg_videogallery_remove_video() {
   foreach ($files as $file) {
     if (is_file($file))
       unlink($file);
+  }
+}
+
+function itg_videogallery_thumb_assign() {
+  $subquery = db_select('field_data_field_upload_video', 'upload_video');
+  $subquery->fields('upload_video', array('entity_id'));
+  $subquery->join('field_data_field_story_extra_large_image', 'large_image', 'large_image.entity_id = upload_video.entity_id');
+  //$subquery->condition('large_image.bundle', 'videogallery', '=')->execute()->fetchAll();
+  $subt = $subquery->execute()->fetchAll();
+  foreach ($subt as $sub) {
+    $subquery_data[] = $sub->entity_id;
+  }
+  $query = db_select('field_data_field_upload_video', 'up_video');
+  $query->fields('up_video', array('entity_id'));
+  if (isset($subquery_data) && !empty($subquery_data)) {
+    $subcondition = $query->condition('up_video.entity_id', $subquery_data, 'NOT IN');
+  }
+  $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_upload_video_fid');
+  $query->fields('drd', array('fid', 'video_id'));
+  $result = $query->execute()->fetchAll();
+  if (isset($result) && !empty($result)) {
+    $api = itg_videogallery_dailymotion_api();
+    foreach ($result as $val) {
+      $thumb_url = $api->get(
+          '/video/' . $val->video_id, array('fields' => array('thumbnail_url'))
+      );
+      $image_url = $thumb_url['thumbnail_url'];
+      $imagedata = file_get_contents($image_url);
+      $file = file_save_data($imagedata, file_default_scheme() . '://' . end(explode('/', $image_url)));
+      file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+      $node = node_load($val->entity_id);
+      $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
+      field_attach_update('node', $node);
+    }
   }
 }
 
@@ -1000,6 +886,9 @@ function itg_video_check_exist_file_browse($filename) {
             'timestamp' => REQUEST_TIME,
           ))
           ->execute();
+      $file = file_load($fid);
+      file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+
       // Entry for FTP Video
       db_insert('itg_dailymotion_ftp_video')
           ->fields(array(
@@ -1052,7 +941,7 @@ function itg_videogallery_ftp_video_list() {
   $conn_id = ftp_connect($ftp_server);
   $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
   if ((!$conn_id) || (!$login_result)) {
-    watchdog("WATCHDOG_INFO_XML", "FTP connection has failed");
+    watchdog("WATCHDOG_INFO_video", "FTP connection has failed");
   }
   return $conn_id;
 }
