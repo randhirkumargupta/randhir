@@ -112,6 +112,10 @@ $root-font-size: 16px;
         display: block;
         @include float(left);
         cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 5px;
         &.active{
             background: $white-color;
             color: $red-color;
@@ -161,6 +165,10 @@ $root-font-size: 16px;
     color:$white-color;
     @include itg-font($itg-roboto);
     z-index: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 /* List before icon */
@@ -202,10 +210,10 @@ $root-font-size: 16px;
             }
         }
         .#{$class-title}{
-            display: block;
+            display: block;     
             overflow: hidden;
             @include font(14px,19px);
-            color: $black-color;
+            color: $black-color;            
         }    
     }
 }
@@ -245,6 +253,9 @@ $root-font-size: 16px;
       a{
         color: $black-color;
         line-height: 25px;
+      }
+      &.pager-first.first, &.pager-last.last{
+          display: none;
       }
     }
   }

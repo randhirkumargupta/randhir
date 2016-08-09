@@ -1,8 +1,5 @@
 @import "itg-variables";
 @import "itg-mixins";
-
-
-
 h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
 h1{    
     font-size: $mobile-h1-font-size;
@@ -124,13 +121,20 @@ a{
         .dont-miss-listing{            
             @include calculate-width(1);
             padding: 0 0px 20px 0;
-            border:none;
+            border:none; 
+            .dm-pic{
+                width: 48%;
+            }            
             .dm-detail{
                 h4{
                     color: #048cb9;
                     margin-bottom: 5px;
                     text-transform: uppercase;
-                    @include font(12px);
+                    @include font(12px,null,700);
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 100%;
                 }
                 p{
                     @include font(14px,18px);

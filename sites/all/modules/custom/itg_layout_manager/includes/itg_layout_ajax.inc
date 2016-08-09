@@ -20,6 +20,7 @@ function insert_layout_setting_ajax() {
   
   // code for layout setting
   if ($arg[1] == 'layout' || $arg[1] == 'title') {
+    
     // insert layout tpl details
     if (empty($unpublish_tpl_id)) {        
       $query_layout_tpl = db_insert('itg_layout_tpl');
@@ -57,7 +58,7 @@ function insert_layout_setting_ajax() {
       // for widget name
       $widget = explode('#', $_GET['widget_name']);
       
-      if ($widget[0] == 'photo_list_of_category' || $widget[0] == 'video_list_of_category') {
+     /* if ($widget[0] == 'photo_list_of_category' || $widget[0] == 'video_list_of_category') {
         $query = db_select('taxonomy_term_data', 'ttd');
         $query->fields('ttd', array('name'));  
         $query->condition('tid', $widget[1], '=');
@@ -65,9 +66,10 @@ function insert_layout_setting_ajax() {
         
         $block_title = $cat_name;
       }
-      else {
+      else {        
         $block_title = $_GET['block_title'];
-      }
+      }*/
+      $block_title = $_GET['block_title'];
       $query_layout_manager = db_insert('itg_layout_manager');
       $query_layout_manager->fields(array(
         'layout_id' => $unpublish_tpl_id,        
@@ -85,11 +87,11 @@ function insert_layout_setting_ajax() {
             ->fields(array('block_title' => $_GET['block_title']))
             ->condition('id', $layout_id)->execute();
       } else {
-        
+        $block_title = $_GET['block_title'];
         $widget = explode('#', $_GET['widget_name']);
          
         db_update('itg_layout_manager')
-              ->fields(array('widget_name' => $widget[0], 'filter_url' => $widget[1]))              
+              ->fields(array('widget_name' => $widget[0], 'block_title' => $block_title, 'filter_url' => $widget[1]))              
               ->condition('id', $layout_id)->execute();
         
       }
