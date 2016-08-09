@@ -106,12 +106,14 @@ function itg_print_team_association_update($node_info, $issue_nid, $magazine, $a
     $body = $node_info->body[LANGUAGE_NONE][0]['value'];
     $fid = $node_info->field_quiz_answer_image[LANGUAGE_NONE][0]['fid'];
     $rating = $node_info->field_story_rating[LANGUAGE_NONE][0]['value'];
+    $magazine_kicker = $node_info->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
 
     // Update story node
     $node = node_load($associated_source_id);
     $node->title = trim($headline);
     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
     $node->body[LANGUAGE_NONE][0]['value'] = $body ? $body : 'NA';
+    $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $magazine_kicker ? $magazine_kicker : 'NA';
     
     // Update rating field
     if (!empty($rating)) {
