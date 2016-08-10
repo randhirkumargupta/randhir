@@ -44,6 +44,16 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
   if ($user->uid != '1') {
+    if ($form_id == 'menu_edit_item') {
+      // Add JS to hide extra element of menu forms
+      drupal_add_js('jQuery(document).ready(function() {                  
+             jQuery(".form-item-description").hide();
+             jQuery(".form-type-checkbox").hide();
+             jQuery(".form-item-expanded").hide();
+             jQuery(".form-item-parent").hide();
+             jQuery(".form-item-weight").hide();             
+      });', array('type' => 'inline', 'scope' => 'footer'));
+    }
     // hide source relation and type field from other users 
     if ($form_id == 'podcast_node_form'
       || $form_id == 'videogallery_node_form'
