@@ -18,14 +18,14 @@ function save_dont_miss_widget_data($dont_miss_content) {
     foreach ($selected_node as $node) {
       $node_load_data = node_load($node);
       db_insert('itg_widget_order')
-        ->fields(array(
-          'nid' => $node,
-          'widget' => $widget_name,
-          'content_type' => $node_load_data->type,
-          //'extra' => $field_names[$node],
-          'weight' => 0,
-        ))
-        ->execute();
+              ->fields(array(
+                  'nid' => $node,
+                  'widget' => $widget_name,
+                  'content_type' => $node_load_data->type,
+                  //'extra' => $field_names[$node],
+                  'weight' => 0,
+              ))
+              ->execute();
     }
     drupal_set_message(t("Nodes has been saved"));
   }
@@ -42,15 +42,15 @@ function itg_widget_dont_miss_ordering_data($info) {
   if (!empty($info)) {
     $widget_name = $info['widget_name'];
     $result = db_select('itg_widget_order', 'iwo')
-      ->fields('iwo', array('nid', 'extra', 'weight'))
-      ->condition('iwo.widget', $widget_name)
-      ->orderBy('iwo.weight', 'ASC')
-      ->range(0, 4)
-      ->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $data = $result;
+                    ->fields('iwo', array('nid', 'extra', 'weight'))
+                    ->condition('iwo.widget', $widget_name)
+                    ->orderBy('iwo.weight', 'ASC')
+                    ->range(0, 4)
+                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $entity_data = array();
+    foreach ($result as $entity_data_node) {
+      $entity_data[] = array("node_load_data" => node_load($entity_data_node['nid']), "custom_label" => $entity_data_node['extra']);
+    }
+    return $entity_data;
   }
-  else {
-    // watchdog("Widget", "Data array is not in proper format");
-  }
-  return $data;
 }

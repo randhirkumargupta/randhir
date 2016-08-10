@@ -13,16 +13,20 @@
 function itg_widget_we_may_suggest_ordering_from_custom_table($info) {
   if (is_array($info)) {
     $widget_name = _get_widget_name(NULL, 'we_may_suggest_widget');
-    $result = db_select('itg_widget_order', 'iwo')
-                    ->fields('iwo', array('nid'))
-                    ->condition('iwo.widget', $widget_name)
-                    ->orderBy('iwo.weight')
-                    ->range(0, 4)
-                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
-  }
-  else {
-   // watchdog("Widget", "Data array is not in proper format");
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->fields('iwo', array('nid'));
+    $query->condition('iwo.widget', $widget_name);
+    $query->condition('n.status', '1');
+    $query->orderBy('iwo.weight');
+    $query->range(0, 4);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $entity_data = array();
+    foreach ($result as $entity_data_node) {
+      $entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
+      $entity_data[] = $entity_info[$entity_data_node['nid']];
+    }
+    return $entity_data;
   }
 }
 
@@ -55,7 +59,7 @@ function save_we_may_suggest_widget_data($we_may_suggest_content) {
             ->condition('widget', 'we_may_suggest_widget')
             ->execute();
 
-    foreach ($new_data_to_insert as $key=>$nodes) {
+    foreach ($new_data_to_insert as $key => $nodes) {
       $node_data = node_load($nodes);
       db_insert('itg_widget_order')
               ->fields(array(
@@ -70,7 +74,7 @@ function save_we_may_suggest_widget_data($we_may_suggest_content) {
   else {
     foreach ($selected_node as $nodes) {
       $node_data = node_load($nodes);
-     // watchdog('widget', $nodes);
+      // watchdog('widget', $nodes);
       db_insert('itg_widget_order')
               ->fields(array(
                   'nid' => $nodes,
