@@ -156,7 +156,7 @@ $root-font-size: 16px;
 
 /* Story Tag mixins */
 @mixin story-tag($height, $line-height){
-    @include pos(absolute,0px,null,null,0px);
+    @include pos(relative,0px,null,null,0px);
     background: $red-bg;
     height: $height;
     line-height: $line-height;
@@ -169,6 +169,9 @@ $root-font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
+    a{
+        color:#fff;
+    }
 }
 
 /* List before icon */
