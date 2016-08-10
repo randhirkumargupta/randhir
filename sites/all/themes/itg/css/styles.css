@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul {
   list-style-type: none;
 }
 
@@ -1906,7 +1906,7 @@ footer .footer-copyright {
   margin-bottom: 35px;
 }
 .buzz-feedback .buzz-section {
-  margin-bottom: 60px;
+  margin: 60px 0;
 }
 .buzz-feedback .buzz-section > * {
   margin-bottom: 15px;
@@ -1957,6 +1957,9 @@ footer .footer-copyright {
 .may-be-suggest-container ul .pic {
   width: 88px;
 }
+.may-be-suggest-container ul li.may-we-suggest {
+  padding: 0 10px;
+}
 .may-be-suggest-container ul li + li {
   border-top: 1px solid #dddddd;
 }
@@ -1991,6 +1994,9 @@ footer .footer-copyright {
 
 .sidebar-second .may-be-suggest-container h3 {
   display: block;
+}
+.sidebar-second .may-be-suggest-container ul .may-we-suggest {
+  padding: 10px;
 }
 
 /*End May we suggest End*/
