@@ -1923,6 +1923,10 @@ footer .footer-copyright {
 
 /*End Story page css*/
 /*Start May we suggest css*/
+.we_may_suggest span.widget-title {
+  position: relative;
+}
+
 .may-be-suggest-container ul .may-we-suggest {
   overflow: hidden;
   padding: 10px;
@@ -1939,6 +1943,9 @@ footer .footer-copyright {
   line-height: 19px;
   color: #323232;
 }
+.may-be-suggest-container ul .pic {
+  width: 88px;
+}
 .may-be-suggest-container ul li + li {
   border-top: 1px solid #dddddd;
 }
@@ -1949,6 +1956,7 @@ footer .footer-copyright {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
+  display: none;
   position: relative;
 }
 .may-be-suggest-container h3 span {
@@ -1968,6 +1976,10 @@ footer .footer-copyright {
   height: 5px;
   margin-top: -2px;
   background: #ddd;
+}
+
+.sidebar-second .may-be-suggest-container h3 {
+  display: block;
 }
 
 /*End May we suggest End*/
@@ -1998,6 +2010,7 @@ footer .footer-copyright {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
+  display: none;
   position: relative;
 }
 .top-takes-video-container h3 span {
@@ -2017,6 +2030,10 @@ footer .footer-copyright {
   height: 5px;
   margin-top: -2px;
   background: #ddd;
+}
+
+.sidebar-second .top-takes-video-container h3 {
+  display: block;
 }
 
 /*End top-takes-video suggest End*/
@@ -2436,3 +2453,26 @@ footer .footer-copyright {
 }
 
 /*End anchors listing css*/
+/*Start css No result found side bar*/
+.sidebars .block-itg-widget span.no-result-found {
+  background: #f3f3f3;
+  margin: 30px;
+  display: block;
+  height: 205px;
+  width: 305px;
+  text-align: center;
+  line-height: 205px;
+}
+
+.block-itg-widget span.no-result-found {
+  background: #f3f3f3;
+  /* margin: 30px; */
+  display: block;
+  height: 210px;
+  width: 100%;
+  text-align: center;
+  line-height: 205px;
+  border: 1px solid #e6e6e6;
+}
+
+/*End css No result found side bar*/

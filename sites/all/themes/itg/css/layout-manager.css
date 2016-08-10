@@ -351,6 +351,7 @@ a {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
+  display: none;
   position: relative;
 }
 .may-be-suggest-container h3 span {
@@ -397,6 +398,7 @@ a {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
+  display: none;
   position: relative;
 }
 .top-takes-video-container h3 span {

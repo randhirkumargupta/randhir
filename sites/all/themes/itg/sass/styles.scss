@@ -1533,10 +1533,18 @@ footer{
 
 /*End Story page css*/
 /*Start May we suggest css*/
+.we_may_suggest{
+    span.widget-title{
+        @include pos(relative);
+    }
+}
 .may-be-suggest-container{    
     ul{
         @include listing-with-image(may-we-suggest,right,10px,pic,title);
         @extend .list-none;
+        .pic{
+            width: 88px;
+        }
         li{
             &+li{
                border-top: 1px solid $border-color;
@@ -1547,6 +1555,9 @@ footer{
         }
     }
     @include sidebar-heading;
+}
+.sidebar-second .may-be-suggest-container h3{
+    display: block;
 }
 /*End May we suggest End*/
 
@@ -1565,6 +1576,9 @@ footer{
         }
     }
     @include sidebar-heading;
+}
+.sidebar-second .top-takes-video-container h3{
+    display: block;
 }
 /*End top-takes-video suggest End*/
 
@@ -1811,3 +1825,28 @@ footer{
     }
 }
 /*End anchors listing css*/
+/*Start css No result found side bar*/
+.sidebars .block-itg-widget{
+    span.no-result-found{
+        background: #f3f3f3;
+        margin: 30px;
+        display: block;
+        height: 205px;
+        width: 305px;
+        text-align: center;
+        line-height: 205px;
+    }
+}
+.block-itg-widget{
+    span.no-result-found{
+        background: #f3f3f3;
+        /* margin: 30px; */
+        display: block;
+        height: 210px;
+        width: 100%;
+        text-align: center;
+        line-height: 205px;
+        border: 1px solid #e6e6e6;
+    }
+}
+/*End css No result found side bar*/
