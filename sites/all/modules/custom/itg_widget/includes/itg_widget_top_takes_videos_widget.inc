@@ -19,9 +19,11 @@ function itg_widget_top_takes_videos_widget_ordering_data($info) {
     $page = isset($info['page']) ? $info['page'] : "";
     if (!empty($view_name) && !empty($page)) {
       $query = db_select('draggableviews_structure', 'dv_s');
+      $query->leftJoin('node','n','n.nid=dv_s.entity_id');
       $query->fields('dv_s', array('entity_id'));
       $query->condition('dv_s.view_name', $view_name);
       $query->condition('dv_s.view_display', $page);
+      $query->condition('n.status','1');
       $query->orderBy('dv_s.weight', 'ASC');
       $query->groupBy('dv_s.entity_id');
       $query->range(0, 4);

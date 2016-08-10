@@ -160,10 +160,49 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  elseif ($view->name == "widget_anchors_listing" && $view->current_display == 'anchors_display_page') {
+    //dpm($view->result);
+    //$view->result = ordered_anchors($view->result);
+  }
   elseif ($view->name == "category_wise_content_list" && $view->current_display == 'page') {
       $arg = arg();
       $term = taxonomy_term_load($arg[1]);
       $header_content = '<h1 class="category-heading">'.$term->name.'</h1>';
       $view->attachment_before = $header_content;
   }
+}
+
+
+/**
+ * Function used for showing correct order of anchors.
+ * 
+ * @return array
+ */
+function get_anchor_display_page_order() {
+  $query = db_select('draggableviews_structure','ds')
+          ->fields('ds',array('entity_id','weight'))
+          ->condition('ds.args','{"ntype":null}')
+          ->condition('ds.view_name','widget_anchors_listing')
+          ->orderBy('ds.weight');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Make custom order of anchors.
+ * 
+ * @param array $views_data
+ * @return array
+ */
+function ordered_anchors($views_data) {
+  $real_order_of_anchors = get_anchor_display_page_order();
+  $new_order_of_anchors = array();
+  foreach($real_order_of_anchors as $anchor) {
+    foreach($views_data as $view_anchors) {
+      if($view_anchors->nid ==  $anchor->entity_id) {
+         $new_order_of_anchors[] = $view_anchors;
+      }
+    }
+  }
+  return $new_order_of_anchors;
 }
