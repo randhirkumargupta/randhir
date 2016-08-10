@@ -5675,7 +5675,7 @@ div.node{
     }
   }
 }
-#views-form-story-widget-page-1, #views-form-section-wise-draggable-content-order-page, #views-form-home-page-feature-widget-page-1, #views-form-section-wise-draggable-content-order-dont-miss-content, #views-form-section-wise-draggable-content-order-big-story-format, #views-form-section-wise-draggable-content-order-we-may-suggest-widget, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular{
+#views-form-story-widget-watch-right-now, #views-form-story-widget-top-takes-video, #views-form-widget-anchors-listing-anchors-listing-page, #views-form-story-widget-page-1, #views-form-section-wise-draggable-content-order-page, #views-form-home-page-feature-widget-page-1, #views-form-section-wise-draggable-content-order-dont-miss-content, #views-form-section-wise-draggable-content-order-big-story-format, #views-form-section-wise-draggable-content-order-we-may-suggest-widget, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular{
        
     p, .form-wrapper{
         margin-top: 40px;
@@ -5902,20 +5902,24 @@ div.node{
     box-shadow: 0 0 3px 1px #1fb5ad;
   }
   .widget-settings{
-    background-color: #a00606;
-    position: absolute;
+   background-color: #a00606;
+    display: inline-block;
     left: 0;
-    top: 0;
     max-width: 100%;
+    position: relative;
+    top: 0;
+    vertical-align: top;;
     .widget-title-wrapper{
-      float: left;
-      max-width: 90%;
-      @extend .pos-rel;
+      display: inline-block;
+    vertical-align: top;
+    width: auto;
+      
       .widget-title{
         position: static;
         display: block;
         height: 26px;
         line-height: 26px;
+        font-size: 14px;
       }
       input[type="text"]{
         padding: 0 7px;
@@ -5928,6 +5932,7 @@ div.node{
         color: #fff;
         text-transform: uppercase;
         font-family: "Roboto",sans-serif;
+        font-size: 14px;
       }
       &.active{
         width: 200px;
@@ -5939,6 +5944,11 @@ div.node{
         }
       }
     }
+  }
+  .section_wise_order{
+      .widget-settings{
+          position: absolute;
+      }
   }
   
   .widget-trigger {
@@ -5956,7 +5966,9 @@ div.node{
 .top-n-most-popular-stories, .trending-list{
   .widget-settings{
     left: auto;
+    position: absolute;
     right: 0;
+    z-index: 10;
   }
   .itg-widget-child{
     background-color: #fff;
@@ -6007,6 +6019,20 @@ div.node{
     border: 1px solid #d9d9d9;
     width: 100%;
   }
+  .container{
+    max-width: 100%;
+  }
+  .search-img-list{
+    margin: 20px 0;
+  img {
+    display: inline-block;
+    height: 96px;
+    margin: 5px;
+    vertical-align: top;
+    width: 96px;
+  }
+  } 
+  ul.pager{display: none;}
 }
 .edit-field-pti-magazine-kicker{
   .form-type-textfield{
@@ -6035,6 +6061,7 @@ div.node{
     text-align: right;
 }
 #pti-basic-info{
-  @extend .fleft;
+  @extend .dib;
   @extend .full;
+  @extend .vtop;
 }

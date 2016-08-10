@@ -89,6 +89,16 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_class'] = 'search-pic';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_default_classes'] = FALSE;
+  /* Field: Apache Solr: sm_thumb_medium_field_blog_image */
+  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['id'] = 'sm_thumb_medium_field_blog_image';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['field'] = 'sm_thumb_medium_field_blog_image';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_type'] = '0';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_wrapper_class'] = 'search-pic';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_default_classes'] = FALSE;
   /* Field: Apache Solr: label */
   $handler->display->display_options['fields']['label']['id'] = 'label';
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
@@ -117,7 +127,8 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['ds_changed']['label'] = '';
   $handler->display->display_options['fields']['ds_changed']['exclude'] = TRUE;
   $handler->display->display_options['fields']['ds_changed']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['ds_changed']['date_format'] = 'long';
+  $handler->display->display_options['fields']['ds_changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['ds_changed']['custom_date_format'] = 'F j, Y, g:i a';
   $handler->display->display_options['fields']['ds_changed']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['ds_changed']['timezone'] = 'Asia/Kolkata';
   /* Field: Apache Solr: hash */
@@ -133,7 +144,7 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="search-detail">
 <h2>[label]</h2>
 <p>[content]</p>
-<div class="other-info">[ds_changed]</div>
+<div class="other-info">Updated : [ds_changed]</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_type'] = '0';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;

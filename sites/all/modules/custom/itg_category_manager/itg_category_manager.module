@@ -229,7 +229,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     if ($form['#vocabulary']->machine_name == 'category_management') {
         $form['#attributes']['class'][] = 'node-form node-category-form';
         $form['#attached']['js'] = array(
-            drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
+            drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',            
         );
         $form['relations']['parent']['#config']['module'] = 'itg_category_manager';
         $form['#submit'][] = 'itg_category_manager_custom_submit';
@@ -952,6 +952,7 @@ function itg_category_manager_views_data() {
 function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {    
     if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
         drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js', 'file');
+        drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/clipboard.min.js', 'file');        
         $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
         $form['status']['#options'][1] = t('Active');
         $form['status']['#options'][0] = t('Inactive');
@@ -1315,7 +1316,7 @@ function itg_category_manager_views_query_alter(&$view, &$query) {
     $term_name = check_plain($_GET['name']);
     $term = itg_category_manager_get_term_from_name($term_name, $vocabulary->vid);
     $super_parent = taxonomy_get_parents_all($term);
-    $super_parent_name = $super_parent[count($super_parent) - 1]->name;        
+    $super_parent_name = end($super_parent)->name;    
     $query->where[1]['conditions'][0]['value'] = '%' . $super_parent_name . '%';
   }   
 }
