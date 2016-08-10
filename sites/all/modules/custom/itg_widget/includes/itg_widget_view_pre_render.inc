@@ -55,7 +55,7 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "story_widget" && $view->current_display == 'watch_right_now_widget') {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Search Content'), 'watch-right-now-videos-list');
+      $header_content .= l(t('Search Content'), 'watch-right-now-videos-list' , array('query' => array('destination' => arg(0))));
       $view->attachment_before = $header_content;
   }
   elseif ($view->name == "story_widget" && $view->current_display == 'most_popular_widget') {
@@ -65,7 +65,7 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "story_widget" && $view->current_display == 'top_takes_video_widget') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Search Content'), 'top-takes-videos-list');
+    $header_content .= l(t('Search Content'), 'top-takes-videos-list' , array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "home_page_feature_widget" && $view->current_display == 'page_2') {
@@ -106,10 +106,10 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'page') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Search Content'), 'section-wise-draggable-content-order');
+    $header_content .= l(t('Search Content'), 'section-wise-draggable-content-order' , array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
     if (!isset($_GET['category_tid'])) {
-      unset($view->result);
+      //$view = array();
     }
   }
   elseif ($view->name == "photo_carousel_widget" && $view->current_display == 'photo_carousel') {
@@ -124,7 +124,7 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'big_story_format') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Search Content'), 'big-story-format-conent');
+    $header_content .= l(t('Search Content'), 'big-story-format-conent' , array('query' =>  array('destination' => arg(0))));
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "section_wise_draggable_content_order" && $view->current_display == 'big_story_format') {
@@ -133,13 +133,10 @@ function itg_widget_views_pre_render(&$view) {
       $header_content .= l(t('Back to big story widget'), 'big-story-widget-list');
       $view->attachment_before = $header_content;
     }
-    if (!isset($_GET['type'])) {
-      unset($view->result);
-    }
   }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'dont_miss_content') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Search Content'), 'dont-miss-widget-contents');
+    $header_content .= l(t('Search Content'), 'dont-miss-widget-contents' , array('query' =>  array('destination' => arg(0))));
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "section_wise_draggable_content_order" && $view->current_display == 'dont_miss_content') {
@@ -152,14 +149,14 @@ function itg_widget_views_pre_render(&$view) {
   elseif ($view->name == "widget_anchors_listing" && $view->current_display == 'anchors_listing_page') {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Back To Anchor List Widget'), 'anchor-list-order-reorder');
+      $header_content .= l(t('Back To Anchor List Widget'), 'anchor-list-order-reorder' );
       $view->attachment_before = $header_content;
     }
   }
   elseif ($view->name == "widget_anchors_listing" && $view->current_display == 'anchors_listing_widget') {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Search Content'), 'anchor-list');
+      $header_content .= l(t('Search Content'), 'anchor-list' , array('query' => array('destination' => arg(0))));
       $view->attachment_before = $header_content;
     }
   }

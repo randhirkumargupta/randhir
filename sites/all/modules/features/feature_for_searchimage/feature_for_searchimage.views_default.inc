@@ -130,6 +130,76 @@ function feature_for_searchimage_views_default_views() {
     18 => 0,
     22 => 0,
   );
+  /* Filter criterion: Apache Solr: sm_image_title */
+  $handler->display->display_options['filters']['sm_image_title']['id'] = 'sm_image_title';
+  $handler->display->display_options['filters']['sm_image_title']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['sm_image_title']['field'] = 'sm_image_title';
+  $handler->display->display_options['filters']['sm_image_title']['operator'] = 'word';
+  $handler->display->display_options['filters']['sm_image_title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['sm_image_title']['expose']['operator_id'] = 'sm_image_title_op';
+  $handler->display->display_options['filters']['sm_image_title']['expose']['label'] = 'Caption';
+  $handler->display->display_options['filters']['sm_image_title']['expose']['operator'] = 'sm_image_title_op';
+  $handler->display->display_options['filters']['sm_image_title']['expose']['identifier'] = 'sm_image_title';
+  $handler->display->display_options['filters']['sm_image_title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+  );
+  /* Filter criterion: Apache Solr: sm_alttext */
+  $handler->display->display_options['filters']['sm_alttext']['id'] = 'sm_alttext';
+  $handler->display->display_options['filters']['sm_alttext']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['sm_alttext']['field'] = 'sm_alttext';
+  $handler->display->display_options['filters']['sm_alttext']['operator'] = 'word';
+  $handler->display->display_options['filters']['sm_alttext']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['sm_alttext']['expose']['operator_id'] = 'sm_alttext_op';
+  $handler->display->display_options['filters']['sm_alttext']['expose']['label'] = 'Alt Text';
+  $handler->display->display_options['filters']['sm_alttext']['expose']['operator'] = 'sm_alttext_op';
+  $handler->display->display_options['filters']['sm_alttext']['expose']['identifier'] = 'sm_alttext';
+  $handler->display->display_options['filters']['sm_alttext']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+  );
   $handler->display->display_options['path'] = 'searchimage';
   $export['searchimage'] = $view;
 
