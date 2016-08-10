@@ -24,7 +24,7 @@ function feature_for_snap_post_image_default_styles() {
       5 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 750,
+          'width' => 770,
           'height' => 539,
         ),
         'weight' => 1,
