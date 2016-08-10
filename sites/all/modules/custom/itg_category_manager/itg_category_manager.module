@@ -947,9 +947,9 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
         $form['status']['#options'][0] = t('Inactive');
         $form['field_cm_select_type_value']['#options']['All'] = t('All');
     }
-    
+   
     // code use for append field for primary category and category list by contant type
-    $code_append_array = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form','quiz_node_form','videogallery_node_form','blog_node_form','recipe_node_form');
+    $code_append_array = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form','quiz_node_form','videogallery_node_form','blog_node_form','recipe_node_form','cooking_tips_node_form','food_news_node_form');
     if (in_array($form_id, $code_append_array)) {
         if (arg(0) == 'node' && arg(1) == 'add') {
             $type = arg(2);
