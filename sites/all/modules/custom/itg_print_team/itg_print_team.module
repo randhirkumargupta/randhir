@@ -115,13 +115,14 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // After task mark as completed, show help message
+    /*
     if ($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed') {
       $form['idea_completed'] = array(
           '#type' => 'item',
           '#markup' => '<div class="idea-task-completed"><strong>Note: </strong> This task has been completed, so you can not edit contents.</div>',
           '#weight' => -8,
       );
-    }
+    } */
 
     // Add cancel button
     $form['actions']['cancel'] = array(
@@ -192,7 +193,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       $node_view_url = $base_url . '/node/' . $form['#node']->nid;
       $form['print_team_comment_form'] = array(
           '#type' => 'item',
-          '#markup' => '<iframe src="' . $node_view_url . '?type=commentform" width="100%" height="400px" class="print-team-iframe-comment-form" frameBorder="0"></iframe>',
+          '#markup' => '<iframe src="' . $node_view_url . '?type=commentform" width="100%" height="600px" class="print-team-iframe-comment-form" frameBorder="0"></iframe>',
           '#weight' => 100,
       );
 
@@ -217,7 +218,8 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       $form['field_pti_magazine_kicker']['#access'] = FALSE;
       unset($form['field_pti_print_media']);
     }
-
+    
+    $form['field_pti_idea_submit_status']['#access'] = FALSE;
     $form['field_story_category'][LANGUAGE_NONE]['#title'] = 'Select Section <span class="form-required" title="This field is required.">*</span>';
     $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
     $form['field_quiz_answer_video'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Video';
@@ -500,6 +502,12 @@ function itg_print_team_node_update($node) {
           ));
           $query->execute();
         }
+        
+        // Update idea submit field status, if story finally submitted by a user
+        if ($node->field_story_category[LANGUAGE_NONE][0]['tid'] && $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value']) {
+          $node->field_pti_idea_submit_status[LANGUAGE_NONE][0]['value'] = 'submitted';
+          field_attach_update('node', $node);
+        }
       }
       
       break;
@@ -532,11 +540,12 @@ global $user;
       }
     
       // Validate time limit
-      $current_date = time();
+      /*$current_date = time();
       $timeline = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 47 hours');
       if ($current_date > $timeline) {
         form_set_error('field_survey_end_date', t('Sorry! You can not submit your idea now. You have exceeded your last date of idea submission.'));
       }
+       * */
       
       // Validate section
       $check_for_nid = itg_print_team_check_cron_nid($node->nid);

@@ -25,6 +25,7 @@
 </div>
   <span class="browse-ftp-click button">Browse Video</span>
   <span class="error vid-error"></span>
+  <?php print drupal_render($form['field_video_duration']); ?>
   <?php print drupal_render($form['field_upload_video']); ?>
   <?php print drupal_render($form['field_story_expert_name']); ?>
   <?php print drupal_render($form['field_story_expert_description']); ?>
@@ -65,6 +66,7 @@
     <?php print drupal_render($form['field_story_itg_tags']); ?>
     <?php print drupal_render($form['field_dailymotion_playlist']); ?>
     <?php print drupal_render($form['field_story_category']); ?>
+    <?php print drupal_render($form['field_primary_cat_data']); ?>
     <?php print drupal_render($form['field_story_schedule_date_time']); ?>
     <?php print drupal_render($form['field_story_expires']); ?> 
     <?php print drupal_render($form['field_story_expiry_date']); ?> 
