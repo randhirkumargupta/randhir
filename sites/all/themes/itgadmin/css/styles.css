@@ -422,7 +422,7 @@ img {
 .view-link,
 .delete-link,
 .move-link,
-.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .block-itg-related .rel-link, .main-cont, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure, .widget-settings .widget-title-wrapper {
+.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .block-itg-related .rel-link, .main-cont, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure {
   position: relative;
 }
 
@@ -5775,20 +5775,24 @@ div.node #comments h2 {
 
 .widget-settings {
   background-color: #a00606;
-  position: absolute;
+  display: inline-block;
   left: 0;
-  top: 0;
   max-width: 100%;
+  position: relative;
+  top: 0;
+  vertical-align: top;
 }
 .widget-settings .widget-title-wrapper {
-  float: left;
-  max-width: 90%;
+  display: inline-block;
+  vertical-align: top;
+  width: auto;
 }
 .widget-settings .widget-title-wrapper .widget-title {
   position: static;
   display: block;
   height: 26px;
   line-height: 26px;
+  font-size: 14px;
 }
 .widget-settings .widget-title-wrapper input[type="text"] {
   padding: 0 7px;
@@ -5801,6 +5805,7 @@ div.node #comments h2 {
   color: #fff;
   text-transform: uppercase;
   font-family: "Roboto",sans-serif;
+  font-size: 14px;
 }
 .widget-settings .widget-title-wrapper.active {
   width: 200px;
@@ -5810,6 +5815,10 @@ div.node #comments h2 {
 }
 .widget-settings .widget-title-wrapper.active .widget-title {
   display: none;
+}
+
+.section_wise_order .widget-settings {
+  position: absolute;
 }
 
 .widget-trigger {
@@ -5829,7 +5838,9 @@ div.node #comments h2 {
 
 .top-n-most-popular-stories .widget-settings, .trending-list .widget-settings {
   left: auto;
+  position: absolute;
   right: 0;
+  z-index: 10;
 }
 .top-n-most-popular-stories .itg-widget-child, .trending-list .itg-widget-child {
   background-color: #fff;

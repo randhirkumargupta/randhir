@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul {
   list-style-type: none;
 }
 
@@ -289,6 +289,7 @@ input[type="text"], select, input[type="password"] {
   clear: both;
 }
 
+/*start header css*/
 #block-itg-layout-manager-header-block {
   padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
@@ -362,6 +363,7 @@ input[type="text"], select, input[type="password"] {
   color: #ffc106;
 }
 
+/*End header css*/
 .tabs-primary li {
   margin-right: 1px;
 }
@@ -1656,7 +1658,7 @@ footer .footer-copyright {
   border: none;
 }
 .dont-miss ul .dont-miss-listing .dm-pic {
-  width: 48%;
+  width: 46.6%;
 }
 .dont-miss ul .dont-miss-listing .dm-detail h4 {
   color: #048cb9;
@@ -1790,6 +1792,7 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 18px;
+  word-wrap: break-word;
 }
 .story-section .story-left .briefcase ul li:before {
   position: absolute;
@@ -1836,6 +1839,7 @@ footer .footer-copyright {
   padding: 20px 20px 20px 70px;
   border-top: 1px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
+  margin-top: 40px;
   background: url(../images/snap-post-icon.png) no-repeat 15px 20px #f5f5f5;
   background-size: 40px;
 }
@@ -1906,7 +1910,7 @@ footer .footer-copyright {
   margin-bottom: 35px;
 }
 .buzz-feedback .buzz-section {
-  margin-bottom: 60px;
+  margin: 60px 0;
 }
 .buzz-feedback .buzz-section > * {
   margin-bottom: 15px;
@@ -1930,6 +1934,9 @@ footer .footer-copyright {
   font-size: 1rem;
   line-height: 22px;
   font-family: "Roboto", sans-serif;
+}
+.buzz-feedback .snap-post {
+  margin-top: 0;
 }
 
 /*End Story page css*/
@@ -1956,6 +1963,9 @@ footer .footer-copyright {
 }
 .may-be-suggest-container ul .pic {
   width: 88px;
+}
+.may-be-suggest-container ul li.may-we-suggest {
+  padding: 10px 0;
 }
 .may-be-suggest-container ul li + li {
   border-top: 1px solid #dddddd;
@@ -1991,6 +2001,12 @@ footer .footer-copyright {
 
 .sidebar-second .may-be-suggest-container h3 {
   display: block;
+}
+.sidebar-second .may-be-suggest-container h3 span {
+  padding: 45px 20px 10px 30px;
+}
+.sidebar-second .may-be-suggest-container ul .may-we-suggest {
+  padding: 10px 24px 10px 30px;
 }
 
 /*End May we suggest End*/
@@ -2466,9 +2482,16 @@ footer .footer-copyright {
 }
 .live-block .breaking-section {
   padding: 10px 0;
+  line-height: 22px;
 }
 .live-block .breaking-section + .breaking-section {
   border-top: 1px solid #dddddd;
+}
+.live-block .breaking-section .breaking-date {
+  color: #9f9f9f;
+  font-size: 12px;
+  font-size: 0.75rem;
+  margin-bottom: 5px;
 }
 
 /*End anchors listing css*/

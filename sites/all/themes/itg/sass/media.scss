@@ -285,17 +285,17 @@
             @include text-align(center);
         }
         .agbutton{
+            margin:20px 0;
             a{
              display: inline-block;
              margin-top: 0;
-            }
-             margin:20px 0;
+            }             
             @include text-align(center);
-        }
-        button{
-            margin: 0 15px;
-             width: 113px;
-             @include font(17px);
+             button{
+                margin: 0 15px;
+                width: 113px;
+                @include font(17px,null,$itg-font-medium);
+            }
         }
     }
 }

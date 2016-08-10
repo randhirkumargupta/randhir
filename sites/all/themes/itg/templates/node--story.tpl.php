@@ -81,9 +81,14 @@
               </div>
           <!-- For buzzfeed section end -->
          <?php } ?>
-          
+          <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
       <div class="stryimg"><?php $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                       print theme('image_style', array('style_name' => 'story_image', 'path' => $story_image)); ?>
+          
+          <?php } else {?>
+          <div class="stryimg"><?php $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                      print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image)); ?>
+          <?php } ?>
       <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
       </div>
       
