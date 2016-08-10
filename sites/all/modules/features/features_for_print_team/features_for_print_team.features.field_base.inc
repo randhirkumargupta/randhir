@@ -40,6 +40,34 @@ function features_for_print_team_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_pti_idea_submit_status'.
+  $field_bases['field_pti_idea_submit_status'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pti_idea_submit_status',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'pending' => 'Pending',
+        'submitted' => 'Submitted',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_pti_issue'.
   $field_bases['field_pti_issue'] = array(
     'active' => 1,

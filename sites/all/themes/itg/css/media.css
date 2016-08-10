@@ -262,10 +262,13 @@
   .dont-miss ul .dont-miss-listing {
     float: left;
     width: 50%;
-    padding: 12px 20px 12px 0;
+    padding: 0px 10px 25px 0;
   }
   .dont-miss ul .dont-miss-listing:nth-child(2n+1) {
     clear: left;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(3), .dont-miss ul .dont-miss-listing:nth-child(4) {
+    padding-bottom: 0;
   }
 
   /*End Dont miss Home page css*/

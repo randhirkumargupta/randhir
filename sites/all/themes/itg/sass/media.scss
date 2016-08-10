@@ -210,10 +210,13 @@
         .dont-miss-listing{
             @include float(left);
             @include calculate-width(2);
-            padding: 12px 20px 12px 0;
+            padding: 0px 10px 25px 0;
             &:nth-child(2n+1){
                 clear:left;
             }
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 0;
+            }            
         }
     }
 }

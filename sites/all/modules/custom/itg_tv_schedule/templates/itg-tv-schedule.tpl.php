@@ -1,5 +1,5 @@
 <?php
-
+print $no_result;
 /**
  * @file
  * Theme implementation for poll form in tab display.
@@ -105,7 +105,7 @@ if($clicked_day == "")
                             <tr>
                                 <td><?php print $val1['time'].' (IST)'; ?></td>
                                 <td><?php print $val1['day']; ?></td>
-                                <td><?php print $val1['program']; ?></td>
+                                <td><?php print ucfirst($val1['program']); ?></td>
                             </tr>
 
                         <?php endforeach; ?>
@@ -280,12 +280,20 @@ if($clicked_day == "")
     .tv-schedule-date-text{
         float: left;
         width: 200px;
+        position: relative;
+        z-index: 9;
     }
     .tv-schedule-date-text .form-item{
-        margin: 20px 20px 0 0;
+        margin: 0;
+    }
+    .tv-schedule-date-text .form-item label, 
+    .tv-schedule-date-text .form-item .description, 
+    .tv-schedule-date-text #edit-submit{
+        display: none;
     }
     .tv-schedule-date-text .form-text{
-            width: 180px;
+            margin: 20px 20px 0 0;
+            width: 180px !important;
             background-color: #252a32;
             border: 1px solid #252a32;
             color: #fff;
@@ -301,6 +309,7 @@ if($clicked_day == "")
         max-width: 1000px;
     }
     .messages__list{padding-left: 13px;}
+    #ui-datepicker-div{z-index: 99999 !important;}
 </style>
 <script type="text/javascript">
     

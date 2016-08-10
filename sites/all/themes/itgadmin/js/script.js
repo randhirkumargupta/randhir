@@ -745,6 +745,7 @@
     // jQuery code for widget-trigger
     $('body').on('click', '.widget-trigger', function(){
       $(this).prev().toggleClass('active');
+      $(this).prev('.widget-title-wrapper.active').find('input[type="text"]').focus();
     });
     
   };
@@ -798,7 +799,7 @@ jQuery(document).ready(function(){
     
     jQuery('.page-itg-layout-manager .droppable').each(function(){
       if(jQuery(this).children().length > 0){
-        jQuery(this).closest('.itg-widget').removeClass('gray-bg-layout');
+        jQuery(this).closest('.gray-bg-layout').removeClass('gray-bg-layout');
       }
     });
     
