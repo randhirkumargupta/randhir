@@ -31,7 +31,9 @@
     jQuery('.view-content img').live('click', function() {
         var getimageurl = jQuery(this).attr('src');
         var altdata=jQuery(this).attr('alt');
+        var titledata=jQuery(this).attr('title');
         parent.jQuery('#img_alttext').val(altdata);
+         parent.jQuery('#img_title').val(titledata);
         jQuery.ajax({
             url: Drupal.settings.basePath + 'saveimage',
             type: 'post',
