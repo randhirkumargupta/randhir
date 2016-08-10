@@ -30,6 +30,7 @@
                 });
                 
                 $(".droppable").droppable({
+                    hoverClass: "drop-hover",
                     drop: function (event, ui) {
                         
                         $(this).addClass("dropped").find("p").hide();
@@ -59,12 +60,13 @@
                               data: {block_name:block_name, widget_name:widget_name, section_name:section_name, template_name:template_name, block_title:category_name_tab}, 
                               beforeSend:function(){
                                 
-                                $('#'+content_place).html('<img class="widget-loader" align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');                                
+                                $('#'+content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');                                
                               },
                               success: function(data) {
                                  // for category tab widget
                                  $('input[name = '+block_name+']').val(category_name_tab);
-                                 
+                                 $('.widget-title[data-id="'+block_name+'"]').html(category_name_tab);
+                                 //$('#block_name').html(category_name_tab);
                                  if (display_area) {                                     
                                     $('#'+block_name).html(category_name_tab);
                                  }

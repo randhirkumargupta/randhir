@@ -30,7 +30,6 @@ features[field_instance][] = field_collection_item-field_astro_numerology_values
 features[field_instance][] = field_collection_item-field_astro_numerology_values-field_astro_video
 features[field_instance][] = field_collection_item-field_astro_numerology_values-field_buzz_description
 features[field_instance][] = field_collection_item-field_astro_numerology_values-field_common_audio_file
-features[field_instance][] = field_collection_item-field_astro_zodiac-field_astro_thumb_icon
 features[field_instance][] = field_collection_item-field_astro_zodiac-field_astro_video
 features[field_instance][] = field_collection_item-field_astro_zodiac-field_astro_zodiac_sign_name
 features[field_instance][] = field_collection_item-field_astro_zodiac-field_audio

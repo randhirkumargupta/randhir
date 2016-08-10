@@ -31,7 +31,10 @@ a{
 .dropped{
     background: #fff;
 }
-
+.gray-bg-widgets{
+    background:#f3f3f3;
+    padding:10px;
+}
 /*Start CSS Top Story Home Page*/
     .tab-buttons {
         @include clearfix;
@@ -112,9 +115,8 @@ a{
     @include story-tag(22px,22px);   
 }
 /*Start Dont miss Home page css*/
-.dont-miss{
-    background: #f3f3f3;
-    padding: 30px 10px 0px 10px;
+.dont-miss{    
+    /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
         @include listing-with-image(dont-miss-listing,left,15px,dm-pic,dm-detail);

@@ -57,13 +57,10 @@ function feature_for_video_user_default_permissions() {
   $permissions['edit any videogallery content'] = array(
     'name' => 'edit any videogallery content',
     'roles' => array(
-      'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
   );

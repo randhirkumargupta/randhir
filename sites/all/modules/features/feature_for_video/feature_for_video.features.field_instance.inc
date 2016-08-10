@@ -135,6 +135,45 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_story_archive'.
+  $field_instances['node-videogallery-field_story_archive'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 34,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_archive',
+    'label' => 'Are you sure you want to Archive?',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 37,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_story_category'.
   $field_instances['node-videogallery-field_story_category'] = array(
     'bundle' => 'videogallery',
@@ -1657,6 +1696,7 @@ function feature_for_video_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Anchor');
+  t('Are you sure you want to Archive?');
   t('Byline');
   t('City');
   t('Comment question');

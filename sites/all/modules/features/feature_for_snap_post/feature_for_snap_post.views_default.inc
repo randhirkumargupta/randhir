@@ -88,14 +88,19 @@ function feature_for_snap_post_views_default_views() {
   $handler->display->display_options['fields']['view_node']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['view_node']['text'] = 'Read more';
+  $handler->display->display_options['fields']['view_node']['text'] = 'Read Story';
+  /* Field: Content: Snap post */
+  $handler->display->display_options['fields']['field_story_snap_post']['id'] = 'field_story_snap_post';
+  $handler->display->display_options['fields']['field_story_snap_post']['table'] = 'field_data_field_story_snap_post';
+  $handler->display->display_options['fields']['field_story_snap_post']['field'] = 'field_story_snap_post';
+  $handler->display->display_options['fields']['field_story_snap_post']['exclude'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="snap-date">[created]</div>
-<div class="snap-title"><h1>[title] <span>[view_node]</span></h1></div>';
+<div class="snap-title"><h1>[field_story_snap_post] <span>[view_node]</span></h1></div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;

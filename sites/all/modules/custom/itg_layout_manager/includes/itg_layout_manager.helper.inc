@@ -158,7 +158,7 @@ function get_layout_details($section_name, $template_name, $status) {
   
   //Get layout setting details info
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-  $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', '	filter_url'));  
+  $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', 'filter_url'));  
   $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
   $itg_query->condition('layout_tpl.section_name', $section_name);    
   $itg_query->condition('layout_tpl.template_name', $template_name);
@@ -171,10 +171,14 @@ function get_layout_details($section_name, $template_name, $status) {
   }
   
   $itg_result = $itg_query->execute()->fetchAll();
-  //p($itg_result);
+  
   foreach ($itg_result as $itg_val) {
     $result['widget_name'] = $itg_val->widget_name;
-    $result['block_title'] = $itg_val->block_title;
+    if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') {
+      $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$itg_val->filter_url);
+    }else {
+      $result['block_title'] = $itg_val->block_title;
+    }
     
     if (isset($itg_val->widget_name)) {
       $widget = get_itg_widget($itg_val->widget_name, $itg_val->filter_url);
@@ -249,9 +253,7 @@ function get_widgets_poll_list() {
   $query = db_select('node', 'n');
   $query->join('field_data_field_poll_start_date', 'start_date', 'start_date.entity_id = n.nid');
   $query->leftJoin('field_data_field_poll_end_date', 'end_date', 'end_date.entity_id = n.nid');
-  $query->fields('n', array('title', 'nid'));
-  //$query->fields('start_date', array('field_poll_start_date_value'));
-  //$query->fields('end_date', array('field_poll_end_date_value'));
+  $query->fields('n', array('title', 'nid'));  
   $query->condition('type', 'poll');
   $query->condition('start_date.field_poll_start_date_value', $date, '<=');
   $query->condition(db_or()->isNull('end_date.field_poll_end_date_value')->condition('end_date.field_poll_end_date_value', $date, '>='));

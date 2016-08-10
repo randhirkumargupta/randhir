@@ -106,29 +106,29 @@
         float: left;
     }
     .square-tag{
-       left: 473px;
-		top: 71px;
-		opacity: 1;
-		color: #000000;
-		width: inherit;
-		height: initial;
-		border: none !important;
-		position: absolute;
-		text-align: center;
-		font-size: 18px;
+        left: 473px;
+        top: 71px;
+        opacity: 1;
+        color: #000000;
+        width: inherit;
+        height: initial;
+        border: none !important;
+        position: absolute;
+        text-align: center;
+        font-size: 18px;
     }
-	.tag-image{
-		padding: 10px;
-		background: #e4e3e5;
-		font-weight: 700;
-		margin: 0 3px;
-	}
+    .tag-image{
+        padding: 10px;
+        background: #e4e3e5;
+        font-weight: 700;
+        margin: 0 3px;
+    }
 
 </style>	
 
 <?php $url = file_create_url($data->uri); ?>
 <div id="container">
-<h4 class="tag-image"><i class="fa fa-tags"></i> Tagging</h4>
+    <h4 class="tag-image"><i class="fa fa-tags"></i> Tagging</h4>
     <div id="imgtag"> 
 
         <img id="" src="<?php echo $url; ?>" /> 
@@ -352,12 +352,26 @@
 
         }
         jQuery('.maptofield').click(function() {
-            var getbame=jQuery('#btn_name').val();
+            showloader();
+            var getbame = jQuery('#btn_name').val();
             parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
             parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
-            parent.jQuery.colorbox.remove();
-            jQuery.colorbox.close();
+            parent.jQuery(document).ajaxComplete(function(event, request, settings) {
+
+                if (settings.url.indexOf(field_name) >= 0) {
+
+                    parent.jQuery('[name="' + getbame + '[alt]"]').val(jQuery('#img_alttext').val());
+                    parent.jQuery('[name="' + getbame + '[title]"]').val(jQuery('#img_alttext').val());
+                    parent.jQuery('[name="' + getbame + '[field_image_caption][und][0][value]"]').val(jQuery('#img_alttext').val());
+
+                }
+                  hideloader();
+                parent.jQuery.colorbox.remove();
+                 jQuery.colorbox.close();
+
+            });
+            
         })
-		
+
     });
 </script> 

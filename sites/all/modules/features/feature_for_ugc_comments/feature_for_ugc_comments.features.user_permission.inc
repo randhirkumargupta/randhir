@@ -73,7 +73,11 @@ function feature_for_ugc_comments_user_default_permissions() {
   $permissions['post comments'] = array(
     'name' => 'post comments',
     'roles' => array(
+      'Co-ordinator' => 'Co-ordinator',
+      'Correspondent' => 'Correspondent',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
     ),

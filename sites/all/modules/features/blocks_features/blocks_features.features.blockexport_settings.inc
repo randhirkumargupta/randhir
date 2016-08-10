@@ -3066,7 +3066,7 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/*/edit',
@@ -3080,7 +3080,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/*/edit',
@@ -3094,7 +3094,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/*/edit',
@@ -3108,7 +3108,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/*/edit',
@@ -3859,7 +3859,7 @@ node/*/edit',
   'delta' => 'ask_an_expert',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => 0,
+  'weight' => -58,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
@@ -5120,7 +5120,7 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5165,7 +5165,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5180,7 +5180,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -5195,7 +5195,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/mega-review-critic
@@ -7918,12 +7918,16 @@ node/*/edit',
   'module' => 'itg_widget',
   'delta' => 'we_may_suggest',
   'theme' => 'itg',
-  'status' => 0,
-  'weight' => 0,
-  'region' => -1,
+  'status' => 1,
+  'weight' => -57,
+  'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -7951,7 +7955,11 @@ node/*/edit',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8046,10 +8054,14 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8200,10 +8212,14 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8354,10 +8370,14 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8508,10 +8528,14 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8662,10 +8686,14 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8777,7 +8805,7 @@ node/*/edit',
   'region' => 'header',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'snappost',
   'title' => '',
   'cache' => 8,
 );
@@ -9089,7 +9117,7 @@ itg-layout-manager/section',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'snappost',
   'title' => '',
   'cache' => 8,
 );
@@ -9698,10 +9726,10 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'snappost',
   'title' => '',
   'cache' => 8,
 );
@@ -9950,10 +9978,10 @@ itg-layout-manager/section',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'snappost',
   'title' => '',
   'cache' => 8,
 );
@@ -10202,10 +10230,10 @@ itg-layout-manager/section',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'snappost',
   'title' => '',
   'cache' => 8,
 );
@@ -10454,10 +10482,10 @@ itg-layout-manager/section',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'snappost',
   'title' => '',
   'cache' => 8,
 );
@@ -10706,10 +10734,10 @@ itg-layout-manager/section',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'snappost',
   'title' => '',
   'cache' => 8,
 );
@@ -10972,10 +11000,14 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11084,10 +11116,14 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11182,10 +11218,14 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11196,7 +11236,7 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -11328,12 +11368,16 @@ my-rejected-podcast',
   'module' => 'itg_widget',
   'delta' => 'top_takes_videos_widget',
   'theme' => 'itg',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11440,12 +11484,16 @@ my-rejected-podcast',
   'module' => 'itg_widget',
   'delta' => 'watch_right_now_videos_widget',
   'theme' => 'itg',
-  'status' => 0,
-  'weight' => 0,
-  'region' => -1,
+  'status' => 1,
+  'weight' => -56,
+  'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11515,7 +11563,11 @@ my-rejected-podcast',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11663,7 +11715,11 @@ my-rejected-podcast',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11775,7 +11831,11 @@ my-rejected-podcast',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11873,7 +11933,11 @@ my-rejected-podcast',
   'region' => 'form_tab',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12018,10 +12082,14 @@ my-rejected-podcast',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12130,10 +12198,14 @@ my-rejected-podcast',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12228,10 +12300,14 @@ my-rejected-podcast',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12242,7 +12318,7 @@ my-rejected-podcast',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -12376,10 +12452,14 @@ my-rejected-podcast',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12488,10 +12568,14 @@ my-rejected-podcast',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12586,10 +12670,14 @@ my-rejected-podcast',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12600,7 +12688,7 @@ my-rejected-podcast',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -12734,10 +12822,14 @@ my-rejected-podcast',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12846,10 +12938,14 @@ my-rejected-podcast',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12944,10 +13040,14 @@ my-rejected-podcast',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12958,7 +13058,7 @@ my-rejected-podcast',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -13092,10 +13192,14 @@ my-rejected-podcast',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -13204,10 +13308,14 @@ my-rejected-podcast',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -13302,10 +13410,14 @@ my-rejected-podcast',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'manage-print-team',
+  'pages' => 'manage-print-team
+manage-print-team-approved
+manage-print-team-rejected
+manage-print-team-needs-modification
+manage-print-team-not-decided',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13316,7 +13428,7 @@ my-rejected-podcast',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-podcast
@@ -13429,6 +13541,531 @@ my-rejected-podcast',
   'title' => '',
   'cache' => -1,
 );
+  $export['block'][] = array(
+  'bid' => 944,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'snappost',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 945,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'header',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'snappost',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 946,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'snappost',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 947,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'snappost',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 948,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'snappost',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 949,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'snappost',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 950,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_snap_post_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'snappost',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 951,
+  'module' => 'itg_reporter',
+  'delta' => 'reporter_tab_form_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/reporter
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 952,
+  'module' => 'menu',
+  'delta' => 'menu-videogallery-admin-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 953,
+  'module' => 'itg_reporter',
+  'delta' => 'reporter_tab_form_block',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/reporter
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 954,
+  'module' => 'menu',
+  'delta' => 'menu-videogallery-admin-menu',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 955,
+  'module' => 'menu',
+  'delta' => 'menu-left-sidebar',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 956,
+  'module' => 'views',
+  'delta' => 'photo_list_of_category-block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 957,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 958,
+  'module' => 'itg_reporter',
+  'delta' => 'reporter_tab_form_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/reporter
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 959,
+  'module' => 'menu',
+  'delta' => 'menu-left-sidebar',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 960,
+  'module' => 'views',
+  'delta' => 'photo_list_of_category-block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 961,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 962,
+  'module' => 'menu',
+  'delta' => 'menu-left-sidebar',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 963,
+  'module' => 'views',
+  'delta' => 'photo_list_of_category-block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 964,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 965,
+  'module' => 'itg_reporter',
+  'delta' => 'reporter_tab_form_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/reporter
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 966,
+  'module' => 'menu',
+  'delta' => 'menu-left-sidebar',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 967,
+  'module' => 'views',
+  'delta' => 'photo_list_of_category-block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 968,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 969,
+  'module' => 'itg_reporter',
+  'delta' => 'reporter_tab_form_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/reporter
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 970,
+  'module' => 'menu',
+  'delta' => 'menu-left-sidebar',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 971,
+  'module' => 'views',
+  'delta' => 'photo_list_of_category-block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 972,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 973,
+  'module' => 'itg_reporter',
+  'delta' => 'reporter_tab_form_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/reporter
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 974,
+  'module' => 'menu',
+  'delta' => 'menu-left-sidebar',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 975,
+  'module' => 'views',
+  'delta' => 'photo_list_of_category-block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 976,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 977,
+  'module' => 'itg_reporter',
+  'delta' => 'reporter_tab_form_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'node/add/reporter
+node/*/edit',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 978,
+  'module' => 'menu',
+  'delta' => 'menu-left-sidebar',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 979,
+  'module' => 'views',
+  'delta' => 'photo_list_of_category-block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 980,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
   'delta' => 'astro_tab_form_block',
@@ -13475,6 +14112,11 @@ my-rejected-podcast',
   'type' => 'podcast',
 );
   $export['block_node_type'][] = array(
+  'module' => 'views',
+  'delta' => 'view_moderation_history-block_1',
+  'type' => 'podcast',
+);
+  $export['block_node_type'][] = array(
   'module' => 'itg_poll',
   'delta' => 'poll_tab_form_block',
   'type' => 'poll',
@@ -13488,6 +14130,11 @@ my-rejected-podcast',
   'module' => 'itg_recipe',
   'delta' => 'recipe_tab_form_block',
   'type' => 'recipe',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_reporter',
+  'delta' => 'reporter_tab_form_block',
+  'type' => 'reporter',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_event_backend',
@@ -13522,6 +14169,11 @@ my-rejected-podcast',
   $export['block_node_type'][] = array(
   'module' => 'itg_videogallery',
   'delta' => 'videogallery_tab_form_block',
+  'type' => 'videogallery',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'views',
+  'delta' => 'view_moderation_history-block_1',
   'type' => 'videogallery',
 );
   $export['block_role'][] = array(
@@ -13986,6 +14638,11 @@ my-rejected-podcast',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 11,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-print-team-menu',
   'rid' => 11,
 );
@@ -13993,6 +14650,11 @@ my-rejected-podcast',
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
   'rid' => 11,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 12,
 );
   $export['block_role'][] = array(
   'module' => 'menu',
@@ -14006,6 +14668,11 @@ my-rejected-podcast',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 13,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-print-team-menu',
   'rid' => 13,
 );
@@ -14013,6 +14680,11 @@ my-rejected-podcast',
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
   'rid' => 13,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 14,
 );
   $export['block_role'][] = array(
   'module' => 'menu',
@@ -14026,6 +14698,11 @@ my-rejected-podcast',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 15,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-print-team-menu',
   'rid' => 15,
 );
@@ -14036,6 +14713,11 @@ my-rejected-podcast',
 );
   $export['block_role'][] = array(
   'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 16,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
   'delta' => 'menu-print-team-menu',
   'rid' => 16,
 );
@@ -14043,6 +14725,11 @@ my-rejected-podcast',
   'module' => 'menu',
   'delta' => 'menu-task-allocation-menu',
   'rid' => 16,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 17,
 );
   $export['block_role'][] = array(
   'module' => 'menu',

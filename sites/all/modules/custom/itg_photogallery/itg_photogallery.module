@@ -141,6 +141,20 @@ function itg_photogallery_custom_validate(&$form, &$form_state){
  }
 }
 
+ /* Implements hook_node_validate().
+ * {@inheritdoc}
+ */
+function itg_photogallery_node_validate($node, $form, &$form_state) {
+
+  // Code for redirection url validation
+  if ($node->type == 'photogallery') {
+    // Code for category validation.
+    if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid'])) {
+      form_set_error('edit-field-story-category-und-hierarchical-select-selects-0', t("Section field is required."));
+    }
+  }
+}
+
 /**
  * Implements views header link 
  * {@inheritdoc}
