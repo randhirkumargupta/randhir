@@ -1132,12 +1132,10 @@ footer{
 /*End CSS section story Home page*/
 /*Start CSS trending-videos Home  page*/
 .trending-videos{
+    @extend .list-none;
     border: 1px solid $border-color;
     padding-top: 10px;    
     @include listing-with-image(trending-videos-list,left,10px,pic,title);
-    ul{
-        @extend .list-none;
-    }
     li{
         &+li{
             border-top: 1px solid $border-color;
@@ -1562,6 +1560,11 @@ footer{
 /*End May we suggest End*/
 
 /*Start top-takes-video suggest css*/
+.top_takes_videos_widget{
+    .widget-title{
+        position: relative;
+    }    
+}
 .top-takes-video-container{
     ul{
         @extend .list-none;
@@ -1583,10 +1586,15 @@ footer{
 /*End top-takes-video suggest End*/
 
 /*Start Watch right Now suggest css*/
+.watch_right_now_videos_widget{
+    .widget-title{
+        @include pos(relative);
+    }
+}
 .watch-right-now-video{    
     ul{
         @extend .list-none;
-        @include listing-with-image(watch-right-now-list,left,5px,pic,title);
+        @include listing-with-image(watch-right-now-list,right,5px,pic,title);
         li{
             padding:0 10px;
             &+li{

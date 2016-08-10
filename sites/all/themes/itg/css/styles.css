@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos ul, .view-front-end-global-search .view-content ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul {
   list-style-type: none;
 }
 
@@ -1984,6 +1984,10 @@ footer .footer-copyright {
 
 /*End May we suggest End*/
 /*Start top-takes-video suggest css*/
+.top_takes_videos_widget .widget-title {
+  position: relative;
+}
+
 .top-takes-video-container ul .top-takes-video {
   overflow: hidden;
   padding: 10px;
@@ -2038,13 +2042,17 @@ footer .footer-copyright {
 
 /*End top-takes-video suggest End*/
 /*Start Watch right Now suggest css*/
+.watch_right_now_videos_widget .widget-title {
+  position: relative;
+}
+
 .watch-right-now-video ul .watch-right-now-list {
   overflow: hidden;
   padding: 10px;
 }
 .watch-right-now-video ul .watch-right-now-list .pic {
-  float: left;
-  margin-right: 5px;
+  float: right;
+  margin-left: 5px;
 }
 .watch-right-now-video ul .watch-right-now-list .title {
   display: block;
