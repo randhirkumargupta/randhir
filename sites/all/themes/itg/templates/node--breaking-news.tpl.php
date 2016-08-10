@@ -37,7 +37,9 @@ if (!empty($content)):
 
             $field_collection_id = $breaking_item['value'];
             $entity = entity_load('field_collection_item', array($field_collection_id));
+            $pub_time =  date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800 );
             $breaking_output.= '<div class="breaking-discription"><span>' . $breaking . '</span>' . $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'] . '</div>';
+            $breaking_output.= '<div class="breaking-discription">' . $pub_time . ' IST</div>';
             $breaking_output.= '</div>';
             $breaking++;
         }
