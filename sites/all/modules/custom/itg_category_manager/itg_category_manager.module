@@ -966,6 +966,7 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
             })   
            });', array('type' => 'inline', 'scope' => 'footer'));
         $form['field_primary_cat_data'] = array('#title' => t('Select Primary'), '#type' => 'select', '#validated' => TRUE, '#attributes' => array('id' => 'primary-category-data'), '#options' => array('' => t('Select')));
+        drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', 'file');
         $form['#attached']['js'] = array(
         drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js');
     }
