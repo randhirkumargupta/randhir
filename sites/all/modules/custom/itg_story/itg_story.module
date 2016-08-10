@@ -536,6 +536,8 @@ function itg_story_checked_issue($issue_date) {
  */
 function itg_story_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'story') {
+    $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    $reporter_node = node_load($byline_id);
     $n_title = $node->title." - India Today";
     foreach ($node->field_story_itg_tags['und'] as $tags) {
       $term = taxonomy_term_load($tags['tid']);
@@ -543,11 +545,13 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       $comma_sep_tag[] = $t_name;
     }
     $tag = implode(',', $comma_sep_tag);
+    $unique_id = $node->type.'_'.$node->nid;
+    $author = base64_encode($reporter_node->title);
     drupal_add_js('http://vuukle.com/js/vuukle.js', external);
     $node->content['vukkul'] = array(
       '#markup' => '<script type="text/javascript">
 
-               var UNIQUE_ARTICLE_ID = "'.$node->nid.'";
+               var UNIQUE_ARTICLE_ID = "'.$unique_id.'";
 
                var SECTION_TAGS =  "'.$tag.'";
 
@@ -561,7 +565,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
 
                var VUUKLE_COL_CODE = "d00b26";
 
-               var ARTICLE_AUTHORS = "JTVCJTdCJTIwJTIybmFtZSUyMjolMjAlMjJJbmRpYVRvZGF5LmluJTIwJTIyLCUyMCUyMCUyMCUyMmVtYWlsJTIyOiUyMCUyMmRlc2staXRnZEBpbnRvZGF5LmNvbSUyMCUyMiwlMjAlMjAlMjAlMjJ0eXBlJTIyOiUyMCUyMkFnZW5jeSUyMCUyMiU3RCU1RA==";
+               var ARTICLE_AUTHORS = "'.$author.'";
 
                create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
 

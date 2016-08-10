@@ -5675,7 +5675,7 @@ div.node{
     }
   }
 }
-#views-form-story-widget-page-1, #views-form-section-wise-draggable-content-order-page, #views-form-home-page-feature-widget-page-1, #views-form-section-wise-draggable-content-order-dont-miss-content, #views-form-section-wise-draggable-content-order-big-story-format, #views-form-section-wise-draggable-content-order-we-may-suggest-widget, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular{
+#views-form-story-widget-watch-right-now, #views-form-story-widget-top-takes-video, #views-form-widget-anchors-listing-anchors-listing-page, #views-form-story-widget-page-1, #views-form-section-wise-draggable-content-order-page, #views-form-home-page-feature-widget-page-1, #views-form-section-wise-draggable-content-order-dont-miss-content, #views-form-section-wise-draggable-content-order-big-story-format, #views-form-section-wise-draggable-content-order-we-may-suggest-widget, #views-form-story-widget-trending-videos, #views-form-story-widget-most-popular{
        
     p, .form-wrapper{
         margin-top: 40px;
@@ -5857,7 +5857,7 @@ div.node{
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
-    box-shadow: 0 0 3px #000;
+    box-shadow: 0 0 3px 1px #1fb5ad;
   }
   .page-itg-layout-manager{
     .region-sidebar-second{
@@ -5885,9 +5885,7 @@ div.node{
     }
     .dm-pic{
       img{
-        height: 127px;
         vertical-align: top;
-        width: 170px;
       }
     }
   }
@@ -5901,7 +5899,7 @@ div.node{
     min-width: 200px;
   }
   .drop-hover{
-    box-shadow: 0 0 3px #000;
+    box-shadow: 0 0 3px 1px #1fb5ad;
   }
   .widget-settings{
     background-color: #a00606;
@@ -5994,7 +5992,64 @@ div.node{
       li{
         @extend .fleft;
         margin-right: 10px;
+        .ajax-progress{
+          display: none;
+        }
+      }
+    }
+    mark{
+      display: none;
+    }
+  }
+}
+#search-preview{
+  iframe{
+    border: 1px solid #d9d9d9;
+    width: 100%;
+  }
+  .container{
+    max-width: 100%;
+  }
+  .search-img-list{
+    margin: 20px 0;
+  img {
+    display: inline-block;
+    height: 96px;
+    margin: 5px;
+    vertical-align: top;
+    width: 96px;
+  }
+  } 
+  ul.pager{display: none;}
+}
+.edit-field-pti-magazine-kicker{
+  .form-type-textfield{
+    > label:after{
+      @extend .astrick;
+    }
+  }
+}
+.view .view-filters{
+  #views-exposed-form-searchimage-page{
+    .views-exposed-form .views-exposed-widget{
+      vertical-align: top;
+    }
+    .views-submit-button{
+      .form-item{
+        float: left;
+        margin-right: 10px;
       }
     }
   }
+} 
+#edit-brief-idea-limit {
+    color: green;
+    float: right;
+    margin-top: -36px;
+    text-align: right;
+}
+#pti-basic-info{
+  @extend .dib;
+  @extend .full;
+  @extend .vtop;
 }
