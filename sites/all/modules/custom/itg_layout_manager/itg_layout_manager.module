@@ -14,6 +14,7 @@ module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.he
 module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.form');
 
 function itg_layout_manager_init() {
+  //p(arg());
   //get_widgets_poll_list();
 }
 
