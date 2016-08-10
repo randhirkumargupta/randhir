@@ -25,7 +25,7 @@ h4{
     font-size: $mobile-h4-font-size;
     line-height: $h4-line-height;
 }
-ul{
+.list-none{
     list-style-type: none;
 }
 a{
@@ -190,11 +190,14 @@ input[type="text"], select, input[type="password"]{
     @include clearfix;
 }
 #page{@extend .vtop; @extend .full; @extend .dib;}
-#block-itg-layout-manager-header-block{
+#block-itg-layout-manager-header-block{    
     padding-top: 20px;
     box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
     background: $header-bg  url(../images/mobile-header-bg.png) no-repeat top center;
+    ul{
+     @extend .list-none;   
+    }
     a{
         color: $white-color; 
         font-family: $itg-roboto;
@@ -865,6 +868,9 @@ footer{
     margin-top:40px;
     background: $black-bg;
     @include itg-font($itg-roboto);
+    ul{
+        @extend .list-none;
+    }
     a{
         color:$footer-text-color;
         @include itg-font($itg-roboto);
@@ -1014,6 +1020,9 @@ footer{
     padding:10px;
     background: $black-bg;
     margin-bottom: 50px;
+    ul{
+     @extend .list-none;   
+    }
     @include itg-font($itg-roboto);
     .big-story-col-1, .big-story-col-2{        
         padding:0 15px;
@@ -1124,8 +1133,11 @@ footer{
 /*Start CSS trending-videos Home  page*/
 .trending-videos{
     border: 1px solid $border-color;
-    padding-top: 10px;
+    padding-top: 10px;    
     @include listing-with-image(trending-videos-list,left,10px,pic,title);
+    ul{
+        @extend .list-none;
+    }
     li{
         &+li{
             border-top: 1px solid $border-color;
@@ -1213,15 +1225,21 @@ footer{
     }
     .view-content{        
         @include listing-with-image(itg-search-list,left,10px,search-pic,search-detail);
-        li{
+        ul{
+            @extend .list-none;
+        }        
+        li.itg-search-list{
             padding: 25px 0;
+        }
+        .search-pic{
+            width: 170px;
         }
         .search-detail{
             h2{
-                @include font(20px,22px);
+                @include font(22px,28px);
                 margin-bottom:10px;
                 a{
-                    @include font(20px,null,$itg-font-medium);   
+                    @include font(22px,28px,$itg-font-medium);   
                 }
             }            
         }
@@ -1267,6 +1285,10 @@ footer{
             }
         }
     }
+    .view-empty{
+        margin-top: 20px;
+        min-height: 400px;
+    }    
 }
 /*End Search page css*/
 /*Start Dont miss Home page css*/
@@ -1511,9 +1533,10 @@ footer{
 
 /*End Story page css*/
 /*Start May we suggest css*/
-.may-be-suggest-container{
+.may-be-suggest-container{    
     ul{
         @include listing-with-image(may-we-suggest,right,10px,pic,title);
+        @extend .list-none;
         li{
             &+li{
                border-top: 1px solid $border-color;
@@ -1530,6 +1553,7 @@ footer{
 /*Start top-takes-video suggest css*/
 .top-takes-video-container{
     ul{
+        @extend .list-none;
         @include listing-with-image(top-takes-video,right,10px,pic,title);
         li{
             &+li{
@@ -1545,8 +1569,9 @@ footer{
 /*End top-takes-video suggest End*/
 
 /*Start Watch right Now suggest css*/
-.watch-right-now-video{
+.watch-right-now-video{    
     ul{
+        @extend .list-none;
         @include listing-with-image(watch-right-now-list,left,5px,pic,title);
         li{
             padding:0 10px;
@@ -1738,7 +1763,7 @@ footer{
 }
 /*End category wise content list css*/
 /*Start anchors listing css*/
-.view-widget-anchors-listing{
+.view-widget-anchors-listing{    
     @include listing-with-image(anchor-listing,left,22px,pic,detail);
     .anchor-listing{
         padding:20px 0;
