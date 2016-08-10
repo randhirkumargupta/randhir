@@ -247,7 +247,7 @@ a {
 
 /*End CSS section story Home page*/
 .widget-title {
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
   background: #a00606;
@@ -262,6 +262,9 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+}
+.widget-title a {
+  color: #fff;
 }
 
 /*Start Dont miss Home page css*/
@@ -351,6 +354,7 @@ a {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
+  display: none;
   position: relative;
 }
 .may-be-suggest-container h3 span {
@@ -397,6 +401,7 @@ a {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
+  display: none;
   position: relative;
 }
 .top-takes-video-container h3 span {

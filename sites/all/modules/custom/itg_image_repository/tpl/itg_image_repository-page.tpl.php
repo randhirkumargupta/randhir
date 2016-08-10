@@ -23,6 +23,7 @@
                 <input type="hidden" id="image_width" value="<?php echo $_GET['width']; ?>" >
                   <input type="hidden" id="btn_name" value="<?php echo $_GET['btn_name']; ?>" >
                       <input type="hidden" id="img_alttext" value="" >
+                          <input type="hidden" id="img_title" value="" >
                     <script type="text/javascript">
                         var fieldname = '<?php echo $_GET['field_name']; ?>';
                         var height = '<?php echo $_GET['height']; ?>';

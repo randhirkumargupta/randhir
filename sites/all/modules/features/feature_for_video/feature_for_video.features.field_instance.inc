@@ -135,6 +135,88 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_primary_category'.
+  $field_instances['node-videogallery-field_primary_category'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 36,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category',
+    'label' => 'primary category',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 40,
+    ),
+  );
+
+  // Exported field_instance: 'node-videogallery-field_primary_category_html'.
+  $field_instances['node-videogallery-field_primary_category_html'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 37,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html',
+    'label' => 'Primary category html',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 42,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_story_archive'.
   $field_instances['node-videogallery-field_story_archive'] = array(
     'bundle' => 'videogallery',
@@ -525,9 +607,8 @@ function feature_for_video_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'itg_image_repository' => 0,
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -602,8 +683,8 @@ function feature_for_video_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -678,8 +759,8 @@ function feature_for_video_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -843,8 +924,8 @@ function feature_for_video_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -919,8 +1000,8 @@ function feature_for_video_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1183,8 +1264,8 @@ function feature_for_video_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1470,8 +1551,8 @@ function feature_for_video_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1693,6 +1774,47 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_video_duration'.
+  $field_instances['node-videogallery-field_video_duration'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 35,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_video_duration',
+    'label' => 'video_duration',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 38,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Anchor');
@@ -1718,6 +1840,7 @@ function feature_for_video_field_default_field_instances() {
   t('Long Description');
   t('Medium image');
   t('Node Identity');
+  t('Primary category html');
   t('Schedule date & time');
   t('Section');
   t('Short Description');
@@ -1734,6 +1857,8 @@ function feature_for_video_field_default_field_instances() {
   t('Video');
   t('Video expires');
   t('common by line twitter');
+  t('primary category');
+  t('video_duration');
 
   return $field_instances;
 }

@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul {
   list-style-type: none;
 }
 
@@ -223,7 +223,7 @@ img {
 }
 
 .widget-title {
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
   background: #a00606;
@@ -238,6 +238,9 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+}
+.widget-title a {
+  color: #fff;
 }
 
 .success-message, .messages--status {
@@ -424,9 +427,7 @@ input[type="text"], select, input[type="password"] {
 
 #page-title {
   font-size: 24px;
-  line-height: 28px;
   font-weight: 500;
-  margin-bottom: 10px;
 }
 
 #block-formblock-ask-an-expert h2 {
@@ -1117,7 +1118,7 @@ footer .footer-copyright {
 
 /*End CSS footer section*/
 /*Start CSS Top Block Grid Home Page*/
-.itg-front .droppable {
+.itg-front .itg-widget {
   position: relative;
 }
 .itg-front .itg-block-10 {
@@ -1149,6 +1150,9 @@ footer .footer-copyright {
 }
 .big-news .big-story-col-1, .big-news .big-story-col-2 {
   padding: 0 15px;
+}
+.big-news .big-story-col-1 .story-tag {
+  position: absolute;
 }
 .big-news h1 {
   margin-bottom: 10px;
@@ -1207,7 +1211,7 @@ footer .footer-copyright {
   font-weight: 500;
 }
 .big-news .story-tag {
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
   background: #a00606;
@@ -1223,6 +1227,9 @@ footer .footer-copyright {
   text-overflow: ellipsis;
   max-width: 100%;
   margin: 10px 0 0 10px;
+}
+.big-news .story-tag a {
+  color: #fff;
 }
 
 /*End CSS Big New Home page*/
@@ -1340,6 +1347,10 @@ footer .footer-copyright {
 
 /*End CSS Featured New Home page*/
 /*Start CSS section story Home page*/
+.section_wise_order .widget-title {
+  position: absolute;
+}
+
 .section-ordering h3 {
   padding: 15px 0;
 }
@@ -1493,19 +1504,23 @@ footer .footer-copyright {
   line-height: 19px;
   color: #323232;
 }
-.view-front-end-global-search .view-content li {
+.view-front-end-global-search .view-content li.itg-search-list {
   padding: 25px 0;
 }
+.view-front-end-global-search .view-content .search-pic {
+  width: 170px;
+}
 .view-front-end-global-search .view-content .search-detail h2 {
-  font-size: 20px;
-  font-size: 1.25rem;
-  line-height: 22px;
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
   margin-bottom: 10px;
 }
 .view-front-end-global-search .view-content .search-detail h2 a {
-  font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 500;
+  line-height: 28px;
 }
 .view-front-end-global-search .view-content .other-info {
   font-family: "Roboto", sans-serif;
@@ -1590,9 +1605,20 @@ footer .footer-copyright {
 .view-front-end-global-search .attachment .search-menu a:hover {
   color: #a00606;
 }
+.view-front-end-global-search .view-empty {
+  margin-top: 20px;
+  min-height: 400px;
+}
 
 /*End Search page css*/
 /*Start Dont miss Home page css*/
+.dont_miss .widget-title {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 5px;
+}
+
 .dont-miss {
   /*padding: 30px 10px 0px 10px;*/
 }
@@ -1908,6 +1934,10 @@ footer .footer-copyright {
 
 /*End Story page css*/
 /*Start May we suggest css*/
+.we_may_suggest span.widget-title {
+  position: relative;
+}
+
 .may-be-suggest-container ul .may-we-suggest {
   overflow: hidden;
   padding: 10px;
@@ -1924,6 +1954,9 @@ footer .footer-copyright {
   line-height: 19px;
   color: #323232;
 }
+.may-be-suggest-container ul .pic {
+  width: 88px;
+}
 .may-be-suggest-container ul li + li {
   border-top: 1px solid #dddddd;
 }
@@ -1934,6 +1967,7 @@ footer .footer-copyright {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
+  display: none;
   position: relative;
 }
 .may-be-suggest-container h3 span {
@@ -1955,8 +1989,16 @@ footer .footer-copyright {
   background: #ddd;
 }
 
+.sidebar-second .may-be-suggest-container h3 {
+  display: block;
+}
+
 /*End May we suggest End*/
 /*Start top-takes-video suggest css*/
+.top_takes_videos_widget .widget-title {
+  position: relative;
+}
+
 .top-takes-video-container ul .top-takes-video {
   overflow: hidden;
   padding: 10px;
@@ -1983,6 +2025,7 @@ footer .footer-copyright {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
+  display: none;
   position: relative;
 }
 .top-takes-video-container h3 span {
@@ -2004,15 +2047,23 @@ footer .footer-copyright {
   background: #ddd;
 }
 
+.sidebar-second .top-takes-video-container h3 {
+  display: block;
+}
+
 /*End top-takes-video suggest End*/
 /*Start Watch right Now suggest css*/
+.watch_right_now_videos_widget .widget-title {
+  position: relative;
+}
+
 .watch-right-now-video ul .watch-right-now-list {
   overflow: hidden;
   padding: 10px;
 }
 .watch-right-now-video ul .watch-right-now-list .pic {
-  float: left;
-  margin-right: 5px;
+  float: right;
+  margin-left: 5px;
 }
 .watch-right-now-video ul .watch-right-now-list .title {
   display: block;
@@ -2421,3 +2472,26 @@ footer .footer-copyright {
 }
 
 /*End anchors listing css*/
+/*Start css No result found side bar*/
+.sidebars .block-itg-widget span.no-result-found {
+  background: #f3f3f3;
+  margin: 30px;
+  display: block;
+  height: 205px;
+  width: 305px;
+  text-align: center;
+  line-height: 205px;
+}
+
+.block-itg-widget span.no-result-found {
+  background: #f3f3f3;
+  /* margin: 30px; */
+  display: block;
+  height: 210px;
+  width: 100%;
+  text-align: center;
+  line-height: 205px;
+  border: 1px solid #e6e6e6;
+}
+
+/*End css No result found side bar*/

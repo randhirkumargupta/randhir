@@ -1,0 +1,8 @@
+name = ITG Front End Common
+description = "ITG Front End Management Module"
+core = 7.x
+package = ITG
+
+files[] = itg_front_end_common.module
+
+
