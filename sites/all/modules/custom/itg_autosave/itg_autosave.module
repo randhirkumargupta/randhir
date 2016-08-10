@@ -117,10 +117,14 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'][] = 'itg_autosave_after_build';      
       $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];      
       $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();      
-    }
+    }    
+  }
+  // Hide node identity field
+  if (isset($form['field_story_node_identity'])) {
     $form['field_story_node_identity']['und'][0]['value']['#prefix'] = '<div style="display:none;">';
     $form['field_story_node_identity']['und'][0]['value']['#suffix'] = '</div>';
   }
+  
 }
 
 /**

@@ -128,10 +128,12 @@
                  
                     if($('#videogallery-node-form').find("input[name='field_upload_video_und_0_remove_button']").val()=='Remove') {
                         $(".browse-ftp-click").hide(); 
+                        
                        
                     }else {
                        
                       $(".browse-ftp-click").show();
+                      $("input[name='field_video_duration[und][0][value]']").val('');
                     }
                 }
                

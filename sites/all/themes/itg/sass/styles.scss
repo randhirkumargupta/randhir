@@ -25,7 +25,7 @@ h4{
     font-size: $mobile-h4-font-size;
     line-height: $h4-line-height;
 }
-ul{
+.list-none{
     list-style-type: none;
 }
 a{
@@ -190,11 +190,14 @@ input[type="text"], select, input[type="password"]{
     @include clearfix;
 }
 #page{@extend .vtop; @extend .full; @extend .dib;}
-#block-itg-layout-manager-header-block{
+#block-itg-layout-manager-header-block{    
     padding-top: 20px;
     box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
     background: $header-bg  url(../images/mobile-header-bg.png) no-repeat top center;
+    ul{
+     @extend .list-none;   
+    }
     a{
         color: $white-color; 
         font-family: $itg-roboto;
@@ -865,6 +868,9 @@ footer{
     margin-top:40px;
     background: $black-bg;
     @include itg-font($itg-roboto);
+    ul{
+        @extend .list-none;
+    }
     a{
         color:$footer-text-color;
         @include itg-font($itg-roboto);
@@ -985,7 +991,7 @@ footer{
 /*End CSS footer section*/
 /*Start CSS Top Block Grid Home Page*/
 .itg-front{
-    .droppable{
+    .itg-widget{
         position: relative;
     }
     .itg-block-10{
@@ -1014,6 +1020,9 @@ footer{
     padding:10px;
     background: $black-bg;
     margin-bottom: 50px;
+    ul{
+     @extend .list-none;   
+    }
     @include itg-font($itg-roboto);
     .big-story-col-1, .big-story-col-2{        
         padding:0 15px;
@@ -1123,8 +1132,9 @@ footer{
 /*End CSS section story Home page*/
 /*Start CSS trending-videos Home  page*/
 .trending-videos{
+    @extend .list-none;
     border: 1px solid $border-color;
-    padding-top: 10px;
+    padding-top: 10px;    
     @include listing-with-image(trending-videos-list,left,10px,pic,title);
     li{
         &+li{
@@ -1213,15 +1223,21 @@ footer{
     }
     .view-content{        
         @include listing-with-image(itg-search-list,left,10px,search-pic,search-detail);
-        li{
+        ul{
+            @extend .list-none;
+        }        
+        li.itg-search-list{
             padding: 25px 0;
+        }
+        .search-pic{
+            width: 170px;
         }
         .search-detail{
             h2{
-                @include font(20px,22px);
+                @include font(22px,28px);
                 margin-bottom:10px;
                 a{
-                    @include font(20px,null,$itg-font-medium);   
+                    @include font(22px,28px,$itg-font-medium);   
                 }
             }            
         }
@@ -1267,9 +1283,20 @@ footer{
             }
         }
     }
+    .view-empty{
+        margin-top: 20px;
+        min-height: 400px;
+    }    
 }
 /*End Search page css*/
 /*Start Dont miss Home page css*/
+.dont_miss{
+    .widget-title{
+        @include pos(relative);
+        @include display-inline;
+        margin-bottom: 5px;
+    }    
+}
 .dont-miss{    
     /*padding: 30px 10px 0px 10px;*/
     ul{
@@ -1504,9 +1531,18 @@ footer{
 
 /*End Story page css*/
 /*Start May we suggest css*/
-.may-be-suggest-container{
+.we_may_suggest{
+    span.widget-title{
+        @include pos(relative);
+    }
+}
+.may-be-suggest-container{    
     ul{
         @include listing-with-image(may-we-suggest,right,10px,pic,title);
+        @extend .list-none;
+        .pic{
+            width: 88px;
+        }
         li{
             &+li{
                border-top: 1px solid $border-color;
@@ -1518,11 +1554,20 @@ footer{
     }
     @include sidebar-heading;
 }
+.sidebar-second .may-be-suggest-container h3{
+    display: block;
+}
 /*End May we suggest End*/
 
 /*Start top-takes-video suggest css*/
+.top_takes_videos_widget{
+    .widget-title{
+        position: relative;
+    }    
+}
 .top-takes-video-container{
     ul{
+        @extend .list-none;
         @include listing-with-image(top-takes-video,right,10px,pic,title);
         li{
             &+li{
@@ -1535,12 +1580,21 @@ footer{
     }
     @include sidebar-heading;
 }
+.sidebar-second .top-takes-video-container h3{
+    display: block;
+}
 /*End top-takes-video suggest End*/
 
 /*Start Watch right Now suggest css*/
-.watch-right-now-video{
+.watch_right_now_videos_widget{
+    .widget-title{
+        @include pos(relative);
+    }
+}
+.watch-right-now-video{    
     ul{
-        @include listing-with-image(watch-right-now-list,left,5px,pic,title);
+        @extend .list-none;
+        @include listing-with-image(watch-right-now-list,right,5px,pic,title);
         li{
             padding:0 10px;
             &+li{
@@ -1731,7 +1785,7 @@ footer{
 }
 /*End category wise content list css*/
 /*Start anchors listing css*/
-.view-widget-anchors-listing{
+.view-widget-anchors-listing{    
     @include listing-with-image(anchor-listing,left,22px,pic,detail);
     .anchor-listing{
         padding:20px 0;
@@ -1779,3 +1833,28 @@ footer{
     }
 }
 /*End anchors listing css*/
+/*Start css No result found side bar*/
+.sidebars .block-itg-widget{
+    span.no-result-found{
+        background: #f3f3f3;
+        margin: 30px;
+        display: block;
+        height: 205px;
+        width: 305px;
+        text-align: center;
+        line-height: 205px;
+    }
+}
+.block-itg-widget{
+    span.no-result-found{
+        background: #f3f3f3;
+        /* margin: 30px; */
+        display: block;
+        height: 210px;
+        width: 100%;
+        text-align: center;
+        line-height: 205px;
+        border: 1px solid #e6e6e6;
+    }
+}
+/*End css No result found side bar*/

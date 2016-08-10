@@ -631,8 +631,8 @@ function itg_category_manager_is_dupe_vocabulary($vocab, $vid = 0) {
 function itg_category_manager_get_term_from_name($term_name, $vid) {
     $tree = taxonomy_get_tree($vid);
     foreach ($tree as $term) {
-        if (strtolower($term->name) == strtolower($term_name)) {
-            return $term->tid;
+        if (strtolower($term->name) == strtolower($term_name)) {          
+          return $term->tid;
         }
     }
     return FALSE;
@@ -935,12 +935,11 @@ function itg_category_manager_views_data() {
 }
 
 /**
- * Implements hook_form_alter()
- * @param array $form array of form elements.
- * @param array $form_state array contains submitted form values
- * @param string $form_id name of the form id
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc} 
  */
-function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
+function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {    
     if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
         drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js', 'file');
         $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
@@ -948,9 +947,9 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
         $form['status']['#options'][0] = t('Inactive');
         $form['field_cm_select_type_value']['#options']['All'] = t('All');
     }
-    
+   
     // code use for append field for primary category and category list by contant type
-    $code_append_array = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form','quiz_node_form','videogallery_node_form','blog_node_form','recipe_node_form');
+    $code_append_array = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form','quiz_node_form','videogallery_node_form','blog_node_form','recipe_node_form','cooking_tips_node_form','food_news_node_form');
     if (in_array($form_id, $code_append_array)) {
         if (arg(0) == 'node' && arg(1) == 'add') {
             $type = arg(2);
@@ -967,6 +966,7 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
             })   
            });', array('type' => 'inline', 'scope' => 'footer'));
         $form['field_primary_cat_data'] = array('#title' => t('Select Primary'), '#type' => 'select', '#validated' => TRUE, '#attributes' => array('id' => 'primary-category-data'), '#options' => array('' => t('Select')));
+        drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', 'file');
         $form['#attached']['js'] = array(
         drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js');
     }
@@ -1197,7 +1197,7 @@ function itg_category_manager_disable_manually_form() {
         '#title' => t('Choose categories'),
         '#type' => 'hierarchical_select',
         '#config' => array(
-            'module' => 'hs_taxonomy',
+            'module' => 'itg_category_manager',
             'params' => array(
                 'vid' => (int) $vocabulary->vid,
                 'exclude_tid' => NULL,
@@ -1275,6 +1275,12 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
     drupal_goto('category-manager-listing');
 }
 
+/**
+ * Custom submit callback for message.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
 function itg_category_manager_custom_submit($form, &$form_state) {
     if (isset($_SESSION['messages']['status'])) {
         unset($_SESSION['messages']['status']);
@@ -1286,4 +1292,20 @@ function itg_category_manager_custom_submit($form, &$form_state) {
     }
     $category_title = $form_state['node']->title;
     drupal_set_message(t('Category <b>@tname</b> has been @op.', array('@tname' => $form_state['term']->name, '@op' => $op)), 'status');
+}
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * {@inheritdoc}. 
+ */
+function itg_category_manager_views_query_alter(&$view, &$query) {      
+  if (isset($_GET['name']) && $_GET['name'] !== '' && $view->name == 'category_manager') {
+    $vocabulary = taxonomy_vocabulary_machine_name_load('category_management');
+    $term_name = check_plain($_GET['name']);
+    $term = itg_category_manager_get_term_from_name($term_name, $vocabulary->vid);
+    $super_parent = taxonomy_get_parents_all($term);
+    $super_parent_name = $super_parent[count($super_parent) - 1]->name;        
+    $query->where[1]['conditions'][0]['value'] = '%' . $super_parent_name . '%';
+  }   
 }

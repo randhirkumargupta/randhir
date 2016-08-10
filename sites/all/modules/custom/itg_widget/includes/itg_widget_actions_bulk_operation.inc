@@ -62,13 +62,13 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_widget_categories_wise_node_group_validate($form, &$form_state) {
-  if (isset($form_state['values']['related_content']) && !empty($form_state['values']['related_content'])) {
-    $regex = "/^[0-9,]+$/";
-    $related_content = $form_state['values']['related_content'];
-    if (!preg_match($regex, $related_content)) {
-      form_set_error('related_content', "Only numbers and commas are allowed on 'Related content' ");
-    }
-  }
+//  if (isset($form_state['values']['related_content']) && !empty($form_state['values']['related_content'])) {
+//    $regex = "/^[0-9,]+$/";
+//    $related_content = $form_state['values']['related_content'];
+//    if (!preg_match($regex, $related_content)) {
+//      form_set_error('related_content', "Only numbers and commas are allowed on 'Related content' ");
+//    }
+//  }
 }
 
 /**

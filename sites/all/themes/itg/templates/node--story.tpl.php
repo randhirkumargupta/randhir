@@ -25,7 +25,7 @@
               <div class="profile-detail">
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
-                      <li class="twitter"><?php print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
+                      <li class="twitter"><a href="https://twitter.com/TwitterDev" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
                   </ul>
                   <ul>
                       <li class="mailto mhide"><i class="fa fa-envelope-o"></i> &nbsp;<?php
@@ -70,19 +70,20 @@
               <div class="profile-detail">
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
-                      <li class="twitter"><?php print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
+                      <li class="twitter"><a href="https://twitter.com/TwitterDev" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
                   </ul>
                   <ul>
-                      <li>Nov 13, 2014  </li>
-                      <li>UPDATED 11:04 IST</li>
-                      <li>New Delhi</li>
+                     <li><?php print  date('F j, Y', $node->created); ?>   </li>
+                      <li>UPDATED <?php print  date('H:i', $node->changed); ?> IST</li>
+                      <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
                   </ul>
                   </div>
               </div>
           <!-- For buzzfeed section end -->
          <?php } ?>
           
-      <div class="stryimg"><?php print render($content['field_story_extra_large_image']); ?>
+      <div class="stryimg"><?php $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                      print theme('image_style', array('style_name' => 'story_image', 'path' => $story_image)); ?>
       <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
       </div>
       
@@ -106,7 +107,7 @@
             $field_collection_id = $buzz_item['value'];
             $entity = entity_load('field_collection_item', array($field_collection_id));
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
-            $img = '<img src="' . image_style_url("thumbnail", $buzz_imguri) . '">';
+            $img = '<img src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
             $buzz_output.= '<div class="buzz-img">' . $img . '</div>';
             $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
@@ -143,16 +144,24 @@
                   </ul>
               </div>
       </div>
-      
-      
+     <!-- code for taboola widget -->
+     
+             <?php 
+              if(function_exists('taboola_view')) {
+                taboola_view();
+              }
+              ?>
+     
+     <!-- end here -->
+     
       <div class="vukkul-comment">
 
             <div id="vuukle_div"></div>
-            <?php
-            if (array_key_exists("vukkul",$content)){
-        print drupal_render($content["vukkul"]);
-}
-?>
+              <?php
+              if (array_key_exists("vukkul", $content)) {
+                print drupal_render($content["vukkul"]);
+              }
+              ?>
         </div>
 
   </div>
