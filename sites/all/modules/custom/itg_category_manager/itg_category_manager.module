@@ -418,6 +418,16 @@ function itg_category_manager_term_validate($form, &$form_state) {
     if ($form_state['values']['term_state'] == 0 && $form_state['values']['state-mode'] == NULL && $form_state['clicked_button']['#value'] != 'Delete' && $form_state['term']->tid != NULL) {
         form_set_error('state-mode', t('Please select either forcefully or manually disable mode.'));
     }
+   
+    
+     if($form_state['values']['parent'][0] == 0 && $form_state['values']['field_cm_select_type']['und'][0]['value'] == NULL)
+    {
+      
+       form_set_error('field_cm_select_type', t('Content Type field is required for root.'));  
+    }
+      
+    
+    
 
     // Code end for publish time
     $term = $form_state['values']['name'];

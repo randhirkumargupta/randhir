@@ -58,8 +58,10 @@
           if($(this).val()!=0)
           {
               $('#edit-field-cm-select-type-und').attr('disabled',true);
+               $('#edit-field-cm-select-type-und').removeAttr('required');
           }else{
             $('#edit-field-cm-select-type-und').attr('disabled',false);
+             $('#edit-field-cm-select-type-und').attr('required','required');
 
           }
       })
