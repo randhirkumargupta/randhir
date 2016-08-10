@@ -153,10 +153,12 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $form['field_pti_issue']['#access'] = FALSE;
           $form['field_pti_magazine']['#access'] = FALSE;
           $form['field_story_rating']['#access'] = FALSE;
+          $form['field_pti_magazine_kicker']['#access'] = FALSE;
         }
       } else {
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
           $form['field_story_category']['#access'] = FALSE;
+          $form['field_pti_magazine_kicker']['#access'] = FALSE;
           unset($form['field_pti_print_media']);
         }
 
@@ -166,6 +168,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_issue']['#access'] = FALSE;
         $form['field_pti_magazine']['#access'] = FALSE;
         $form['field_story_rating']['#access'] = FALSE;
+        
       }
 
       // Disable change status radio button if status is "Approved" OR "Rejected"
@@ -201,10 +204,8 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
 
       if ($mark_task_as_complted_users && $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
         $form['field_pti_mark_as_complete']['#access'] = TRUE;
-        $form['field_pti_magazine_kicker']['#access'] = TRUE;
       } else {
         $form['field_pti_mark_as_complete']['#access'] = FALSE;
-        $form['field_pti_magazine_kicker']['#access'] = FALSE;
       }
     } else {
       $form['field_story_category']['#access'] = FALSE;
@@ -265,29 +266,38 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         }
       }
 
+      $magazine_options = itg_print_team_get_magazine_title();
       $issue_options = itg_print_team_issue_options();
-
+      $selected = isset($form_state['values']['pti_magazine']) ? $form_state['values']['pti_magazine'] : key($magazine_options);
+    
       $form['pti_magazine'] = array(
           '#type' => 'select',
           '#title' => 'Magazine',
-          '#options' => itg_print_team_get_magazine_title(),
-          '#default_value' => '_none',
+          '#options' => $magazine_options,
+          '#default_value' => $selected,
           '#weight' => 98,
-      );
-
+          '#ajax' => array(
+              'event' => 'change',
+              'callback' => 'itg_print_team_magazine_ajax_callback',
+              'wrapper' => 'pti-issue-replace',
+          )
+       );
+    
       $form['pti_issue'] = array(
-          '#type' => 'select',
-          '#title' => t('Issue'),
-          '#options' => $issue_options,
-          '#default_value' => '_none',
-          '#weight' => 99,
-          '#attributes' => array('class' => array('associate-pti-magazine')),
+        '#type' => 'select',
+        '#title' => t('Issue'),
+        '#prefix' => '<div id="pti-issue-replace">',
+        '#suffix' => '</div>',
+        '#options' => itg_print_team_magazine_issue($selected),
+        '#default_value' => isset($form_state['values']['pti_issue']) ? $form_state['values']['pti_issue'] : '_none',
+        '#weight' => 99,
+        '#attributes' => array('class' => array('associate-pti-magazine')),
       );
-
       $form['submit'] = array(
           '#type' => 'submit',
           '#value' => t('Associate'),
           '#weight' => 100,
+          '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:30px'),
       );
       $form['download_csv'] = array(
           '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'button', 'style' => 'margin-top:30px'))),
@@ -312,6 +322,46 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = 'itg_story_xml_validate';
     $form['submit']['#submit'][] = 'itg_story_xml_submit';
   }
+}
+
+/**
+ * Ajax callback on magazine selection
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_print_team_magazine_ajax_callback($form, $form_state) {
+    return $form['pti_issue'];
+}
+
+/**
+ * Fetch issue list using magazine
+ * @param int $id
+ * @return array
+ */
+function itg_print_team_magazine_issue($id = '') {
+
+  $options['_none'] = '-Select Issue-';
+  $query = db_select('field_data_field_issue_magazine', 'm');
+  $query->join('node', 'n', 'm.entity_id = n.nid');
+  $query->fields('m', array('entity_id'));
+  $query->fields('n', array('title'));
+  $query->condition('field_issue_magazine_target_id', $id, '=');
+  $query->condition('n.status', 1, '=');
+
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    /*
+    $issue_month = explode('-', $val->title);
+    $month_before_curr = date('m') - 1;
+
+    if ($issue_month[1] >= $month_before_curr) {
+      $options[$record['entity_id']] = date('d/m/Y', strtotime($record['title']));
+    } */
+    $options[$record['entity_id']] = date('d/m/Y', strtotime($record['title']));
+  }
+
+  return $options;
 }
 
 /**
@@ -933,3 +983,5 @@ function itg_print_team_form_comment_form_alter(&$form, &$form_state, $form_id) 
       break;
   }
 }
+
+

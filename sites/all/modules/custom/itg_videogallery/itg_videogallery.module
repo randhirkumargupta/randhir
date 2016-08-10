@@ -821,7 +821,9 @@ function itg_videogallery_select_options() {
   $file_path = drupal_realpath('public://');
   //$ftp_files = itg_videogallery_dir_content($file_path. '/dailymotion-ftp');
   $connection_id = itg_videogallery_ftp_video_list();
+  ftp_pasv($connection_id, true);
   $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
+  
   ftp_close($connection_id);
   foreach ($ftp_files as $files) {
     $file_array = explode('/public_html/videos/', $files);
@@ -874,6 +876,7 @@ function itg_videogallery_dir_content($dir, &$results = array()) {
 function itg_video_check_exist_file_browse($filename) {
   global $user;
   $connection_id = itg_videogallery_ftp_video_list();
+  ftp_pasv($connection_id, true);
   $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
   $results = itg_videogallery_getfile_details($filename);
   if ($results == '' && empty($results)) {
