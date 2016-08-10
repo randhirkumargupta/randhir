@@ -176,7 +176,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       // Video not uploaded on dailymotion
       $file_details = file_load($video_fid);
       $real_path = drupal_realpath($file_details->uri);
-      $response = itg_videogallery_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value);
+      $response = itg_videogallery_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id);
       // Perform playlist and tags when new video create.
       $response_result['video_id'] = $response['id'];
       $response_result['fid'] = $response['fid'];
@@ -341,7 +341,7 @@ function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $nod
  * @param int $fid
  * @return array
  */
-function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value) {
+function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node_id) {
   $api = itg_videogallery_dailymotion_api();
   try {
     if (itg_videogallery_check_ftp_video($fid)) {
@@ -387,8 +387,18 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value) {
       drupal_goto('dailymotion/config');
     }
     elseif ($e->getCode() == 6) {
+      if (isset($_GET['destination'])) {
+        unset($_GET['destination']);
+      }
       drupal_set_message(t('There is some issue with internet connection.'), 'error');
-      drupal_goto();
+      drupal_goto('node/'.$node_id.'/edit', array('query' => array('destination' => 'manage-videogallery')));
+    }elseif ($e->getCode() == 400){
+      if (isset($_GET['destination'])) {
+        unset($_GET['destination']);
+      }
+      drupal_get_messages();
+      drupal_set_message(t('Please do not use space in filename.'), 'error');
+      drupal_goto('node/'.$node_id.'/edit', array('query' => array('destination' => 'manage-videogallery')));
     }
     else {
       drupal_set_message($e->getMessage(), 'error');
