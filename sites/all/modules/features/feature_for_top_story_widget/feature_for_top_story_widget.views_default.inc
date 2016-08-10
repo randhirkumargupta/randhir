@@ -364,7 +364,7 @@ function feature_for_top_story_widget_views_default_views() {
   /* Display: Top Story Widget */
   $handler = $view->new_display('page', 'Top Story Widget', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Published Stories';
+  $handler->display->display_options['title'] = 'Stories';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -751,7 +751,7 @@ function feature_for_top_story_widget_views_default_views() {
   /* Display: Top Story Widget Listing */
   $handler = $view->new_display('page', 'Top Story Widget Listing', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Top Stories';
+  $handler->display->display_options['title'] = 'Top Stories Widget Content Order Reorder';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -784,10 +784,8 @@ function feature_for_top_story_widget_views_default_views() {
     'field_story_source_type' => 'field_story_source_type',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
-    'state' => 'state',
-    'nothing_1' => 'nothing_1',
     'view_node' => 'nothing_1',
+    'nothing_1' => 'nothing_1',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -807,7 +805,7 @@ function feature_for_top_story_widget_views_default_views() {
       'empty_column' => 0,
     ),
     'title' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -863,26 +861,12 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_schedule_date_time' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'state' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
+    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1010,7 +994,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="page_2" data-nid="[nid]" data-queueid=\'1\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Move</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="page_2" data-nid="[nid]" data-queueid=\'1\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Remove</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -1046,8 +1030,8 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'story-list-widget-listing';
 
-  /* Display: Trending videos */
-  $handler = $view->new_display('page', 'Trending videos', 'trending_videos');
+  /* Display: Trending Videos */
+  $handler = $view->new_display('page', 'Trending Videos', 'trending_videos');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Trending Videos';
   $handler->display->display_options['defaults']['access'] = FALSE;
@@ -1433,10 +1417,10 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
   $handler->display->display_options['path'] = 'trending-video-widget-list';
 
-  /* Display: Trending videos order reorder */
-  $handler = $view->new_display('page', 'Trending videos order reorder', 'trending_videos_widget');
+  /* Display: Trending Videos Order Reorder */
+  $handler = $view->new_display('page', 'Trending Videos Order Reorder', 'trending_videos_widget');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Trending Videos Order reoder';
+  $handler->display->display_options['title'] = 'Trending Videos Widget Order Reorder';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -1466,13 +1450,10 @@ function feature_for_top_story_widget_views_default_views() {
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'field_story_source_type' => 'field_story_source_type',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
-    'state' => 'state',
-    'nothing_1' => 'nothing_1',
     'view_node' => 'nothing_1',
+    'nothing_1' => 'nothing_1',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -1492,7 +1473,7 @@ function feature_for_top_story_widget_views_default_views() {
       'empty_column' => 0,
     ),
     'title' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -1529,13 +1510,6 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_source_type' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'nothing' => array(
       'align' => '',
       'separator' => '',
@@ -1548,26 +1522,12 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_schedule_date_time' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'state' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
+    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1700,7 +1660,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="trending_videos_widget" data-nid="[nid]" data-queueid=\'4\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Move</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="trending_videos_widget" data-nid="[nid]" data-queueid=\'4\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Remove</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -2124,7 +2084,7 @@ function feature_for_top_story_widget_views_default_views() {
   /* Display: Most Popular Order Reorder */
   $handler = $view->new_display('page', 'Most Popular Order Reorder', 'most_popular_widget');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Most Popular Order reoder';
+  $handler->display->display_options['title'] = 'Most Popular Widget Order Reoder';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -2158,13 +2118,10 @@ function feature_for_top_story_widget_views_default_views() {
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'field_story_source_type' => 'field_story_source_type',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
-    'state' => 'state',
-    'nothing_1' => 'nothing_1',
     'view_node' => 'nothing_1',
+    'nothing_1' => 'nothing_1',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -2184,7 +2141,7 @@ function feature_for_top_story_widget_views_default_views() {
       'empty_column' => 0,
     ),
     'title' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -2221,13 +2178,6 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_source_type' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'nothing' => array(
       'align' => '',
       'separator' => '',
@@ -2240,26 +2190,12 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_schedule_date_time' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'state' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
+    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2385,7 +2321,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="most_popular_widget" data-nid="[nid]" data-queueid=\'5\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Move</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="most_popular_widget" data-nid="[nid]" data-queueid=\'5\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Remove</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -2811,10 +2747,10 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
   $handler->display->display_options['path'] = 'top-takes-videos-list';
 
-  /* Display: Top Takes videos order reorder */
-  $handler = $view->new_display('page', 'Top Takes videos order reorder', 'top_takes_video_widget');
+  /* Display: Top Takes Videos Order Reorder */
+  $handler = $view->new_display('page', 'Top Takes Videos Order Reorder', 'top_takes_video_widget');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Top Takes Videos Order reoder';
+  $handler->display->display_options['title'] = 'Top Takes Videos Widget Order Reoder';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -2837,20 +2773,16 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'draggableviews' => 'draggableviews',
-    'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
     'nid' => 'nid',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'field_story_source_type' => 'field_story_source_type',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
-    'state' => 'state',
-    'nothing_1' => 'nothing_1',
     'view_node' => 'nothing_1',
+    'nothing_1' => 'nothing_1',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -2864,13 +2796,8 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'views_bulk_operations' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'title' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -2907,13 +2834,6 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_source_type' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'nothing' => array(
       'align' => '',
       'separator' => '',
@@ -2926,26 +2846,12 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_schedule_date_time' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'state' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
+    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2970,7 +2876,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'No Trending video Found.';
+  $handler->display->display_options['empty']['area']['content'] = 'No Top Takes Videos Found.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
@@ -3072,7 +2978,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="top_takes_video_widget" data-nid="[nid]" data-queueid=\'7\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Move</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="top_takes_video_widget" data-nid="[nid]" data-queueid=\'7\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Remove</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -3513,10 +3419,10 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
   $handler->display->display_options['path'] = 'watch-right-now-videos-list';
 
-  /* Display: Watch Right Now videos order reorder */
-  $handler = $view->new_display('page', 'Watch Right Now videos order reorder', 'watch_right_now_widget');
+  /* Display: Watch Right Now Videos Order Reorder */
+  $handler = $view->new_display('page', 'Watch Right Now Videos Order Reorder', 'watch_right_now_widget');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Watch Right Now Videos Order reoder';
+  $handler->display->display_options['title'] = 'Watch Right Now Videos Widget Order Reoder';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -3539,20 +3445,16 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'draggableviews' => 'draggableviews',
-    'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
     'nid' => 'nid',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'field_story_source_type' => 'field_story_source_type',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
-    'state' => 'state',
-    'nothing_1' => 'nothing_1',
     'view_node' => 'nothing_1',
+    'nothing_1' => 'nothing_1',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -3566,13 +3468,8 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'views_bulk_operations' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'title' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -3609,13 +3506,6 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_source_type' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'nothing' => array(
       'align' => '',
       'separator' => '',
@@ -3628,26 +3518,12 @@ function feature_for_top_story_widget_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_schedule_date_time' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'state' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
+    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3775,7 +3651,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="watch_right_now_widget" data-nid="[nid]" data-queueid=\'8\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Move</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="watch_right_now_widget" data-nid="[nid]" data-queueid=\'8\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Remove</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
