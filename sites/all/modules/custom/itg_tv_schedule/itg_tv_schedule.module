@@ -94,12 +94,14 @@ function itg_tv_schedule_search_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_tv_schedule_date_form($form, &$form_state) {
-  $date = format_date(REQUEST_TIME, 'custom', 'Y-m-d');  
-  if (isset($_GET['date_zone'])){
-    $date = $_GET['date_zone'];  
+  if (isset($_GET['date_zone'])) {
+    $date = str_replace('/', '-', $_GET['date_zone']);
   }
+  else {
+    $date = format_date(REQUEST_TIME, 'custom', 'Y-m-d'); 
+  }
+ 
   $form['date'] = array(
-//      '#default_value' => (isset($_GET['date_zone']) ? $_GET['date_zone'] : $date),
       '#default_value' => $date,
       '#date_format' => 'Y/m/d',
       '#date_year_range' => '-1:+0',
@@ -328,6 +330,7 @@ function itg_tv_schedule_theme() {
       'variables' => array('noresult' => NULL),
       'variables' => array('search_count' => NULL),
       'variables' => array('title' => NULL),
+      'variables' => array('no_result' => NULL),
       'path' => drupal_get_path('module', 'itg_tv_schedule') . '/templates',
       'template' => 'itg-tv-schedule',
     ),

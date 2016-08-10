@@ -1,5 +1,5 @@
 <?php
-
+print $no_result;
 /**
  * @file
  * Theme implementation for poll form in tab display.
