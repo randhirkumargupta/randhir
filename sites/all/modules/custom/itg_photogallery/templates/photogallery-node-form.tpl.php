@@ -45,6 +45,7 @@
 <div id="Categorization">
   <h2 class="story-title">Categorization</h2>
   <?php print drupal_render($form['field_story_category']); ?>
+  <?php print drupal_render($form['field_primary_cat_data']); ?>
 </div>
 <div id="SocialMedia">
   <h2 class="story-title"><?php print t('Social Media'); ?></h2>
