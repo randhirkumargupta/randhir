@@ -164,7 +164,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 } ?>
                             </span>
                         </div>
-                        <div class="itg-widget-child tab-data tab-data-1">
+                        <div class="itg-widget-child tab-data tab-data-1 <?php print $gray_bg_layout;?>">
                             <div class="droppable" id="itg-block-2">
                             <?php print $widget_data['itg-block-2']['widget']; ?>
                             </div>
@@ -177,7 +177,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>
                                 <?php } ?>
                         </div>
-                        <div class="itg-widget-child tab-data tab-data-2 hide">
+                        <div class="itg-widget-child tab-data tab-data-2 hide <?php print $gray_bg_layout;?>">
                             <div class="droppable" id="itg-block-3">
                             <?php print $widget_data['itg-block-3']['widget']; ?>
                             </div>
@@ -234,7 +234,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 } ?>
                             </span>
                         </div>
-                        <div class="itg-widget-child tab-data tab-data-1">
+                        <div class="itg-widget-child tab-data tab-data-1 <?php print $gray_bg_layout;?>">
                             <div class="droppable" id="itg-block-5">                               
                                 <?php print $widget_data['itg-block-5']['widget']; ?>
                             </div>
@@ -247,7 +247,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>  
                             <?php } ?>    
                         </div>
-                        <div class="itg-widget-child tab-data tab-data-2 hide">
+                        <div class="itg-widget-child tab-data tab-data-2 hide <?php print $gray_bg_layout;?>">
                             <div class="droppable" id="itg-block-6">
                                 <?php //if ($theme != 'itgadmin') { ?>
 <!--                                    <span class="widget-title">
