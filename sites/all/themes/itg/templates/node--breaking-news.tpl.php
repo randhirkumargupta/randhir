@@ -29,8 +29,7 @@ if (!empty($content)):
     <?php
 
     if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
-        $breaking_output.= '';
-        $breaking = 1;
+        $breaking_output.= '';   
         foreach ($node->field_breaking_content_details['und'] as $breaking_item) {
 
             $breaking_output.= '<div class="breaking-section">';
@@ -38,10 +37,9 @@ if (!empty($content)):
             $field_collection_id = $breaking_item['value'];
             $entity = entity_load('field_collection_item', array($field_collection_id));
             $pub_time =  date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800 );
-            $breaking_output.= '<div class="breaking-discription"><span>' . $breaking . '</span>' . $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'] . '</div>';
-            $breaking_output.= '<div class="breaking-discription">' . $pub_time . ' IST</div>';
-            $breaking_output.= '</div>';
-            $breaking++;
+            $breaking_output.= '<div class="breaking-date">' . $pub_time . ' IST</div>';
+            $breaking_output.= '<div class="breaking-discription">'. $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'] . '</div>';            
+            $breaking_output.= '</div>';            
         }
         print $breaking_output;
     }
