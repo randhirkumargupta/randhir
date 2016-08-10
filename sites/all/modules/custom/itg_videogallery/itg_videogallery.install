@@ -60,6 +60,12 @@ function itg_videogallery_schema() {
         'length' => '250',
         'not null' => TRUE,
       ),
+      'video_duration' => array(
+        'description' => 'Video duration',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
     ),
     'primary key' => array('eid'),
   );
