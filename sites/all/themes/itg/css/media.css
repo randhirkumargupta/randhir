@@ -342,11 +342,12 @@
     display: inline-block;
     margin-top: 0;
   }
-  .story-section .snap-post button {
+  .story-section .snap-post .agbutton button {
     margin: 0 15px;
     width: 113px;
     font-size: 17px;
     font-size: 1.0625rem;
+    font-weight: 500;
   }
 
   .buzz-feedback .story-right {

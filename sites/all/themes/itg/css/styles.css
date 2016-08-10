@@ -1792,6 +1792,7 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 18px;
+  word-wrap: break-word;
 }
 .story-section .story-left .briefcase ul li:before {
   position: absolute;
@@ -1838,6 +1839,7 @@ footer .footer-copyright {
   padding: 20px 20px 20px 70px;
   border-top: 1px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
+  margin-top: 40px;
   background: url(../images/snap-post-icon.png) no-repeat 15px 20px #f5f5f5;
   background-size: 40px;
 }
@@ -1932,6 +1934,9 @@ footer .footer-copyright {
   font-size: 1rem;
   line-height: 22px;
   font-family: "Roboto", sans-serif;
+}
+.buzz-feedback .snap-post {
+  margin-top: 0;
 }
 
 /*End Story page css*/
