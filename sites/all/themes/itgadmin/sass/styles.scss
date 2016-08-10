@@ -5992,7 +5992,13 @@ div.node{
       li{
         @extend .fleft;
         margin-right: 10px;
+        .ajax-progress{
+          display: none;
+        }
       }
+    }
+    mark{
+      display: none;
     }
   }
 }
@@ -6008,4 +6014,27 @@ div.node{
       @extend .astrick;
     }
   }
+}
+.view .view-filters{
+  #views-exposed-form-searchimage-page{
+    .views-exposed-form .views-exposed-widget{
+      vertical-align: top;
+    }
+    .views-submit-button{
+      .form-item{
+        float: left;
+        margin-right: 10px;
+      }
+    }
+  }
+} 
+#edit-brief-idea-limit {
+    color: green;
+    float: right;
+    margin-top: -36px;
+    text-align: right;
+}
+#pti-basic-info{
+  @extend .fleft;
+  @extend .full;
 }
