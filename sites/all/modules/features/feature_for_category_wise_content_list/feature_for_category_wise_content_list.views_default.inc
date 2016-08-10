@@ -45,7 +45,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'medium',
+    'image_style' => 'widget_small',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -108,6 +108,10 @@ function feature_for_category_wise_content_list_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['display_description'] = 'Category Wise Stroy';
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['path'] = 'category-wise-content-list';
 
   /* Display: Block */
