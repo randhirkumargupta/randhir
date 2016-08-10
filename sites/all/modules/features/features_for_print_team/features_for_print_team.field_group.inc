@@ -89,7 +89,7 @@ function features_for_print_team_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Image Section',
-    'weight' => '2',
+    'weight' => '3',
     'children' => array(
       0 => 'field_pti_print_media',
     ),
@@ -98,8 +98,8 @@ function features_for_print_team_field_group_info() {
       'label' => 'Image Section',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => 'pti-image-section',
-        'classes' => 'group-pti-images field-group-div',
+        'id' => 'pti-image',
+        'classes' => '',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -122,7 +122,7 @@ function features_for_print_team_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Settings',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_pti_idea_status',
       1 => 'field_pti_words_limit',

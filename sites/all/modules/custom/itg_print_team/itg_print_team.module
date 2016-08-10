@@ -324,9 +324,6 @@ function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
     unset($_SESSION['messages']['status']);
   }
 
-  // Unset destination
-  unset($_GET['destination']);
-
   // Check for edit and add node
   if (arg(2) == 'edit') {
     $op = 'updated successfully';
