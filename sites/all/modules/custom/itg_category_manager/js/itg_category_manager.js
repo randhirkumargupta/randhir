@@ -71,7 +71,11 @@
       var currentMonthPager = $(".date-heading h3").text();
       if (currentMonth === currentMonthPager) {        
         $(".date-next").css("display", "none");
-      }     
+      }
+      
+      // Copy to clipboard code.
+      new Clipboard('.itg-clipboard');
+      // End of Copy to clipboard code.
     }
   };
 })(jQuery, Drupal, this, this.document);
