@@ -33,8 +33,11 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
-  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   /* Field: Apache Solr: _version_ */
   $handler->display->display_options['fields']['_version_']['id'] = '_version_';
   $handler->display->display_options['fields']['_version_']['table'] = 'apachesolr__solr';
@@ -81,6 +84,8 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['field'] = 'sm_thumb_thumbnail_field_story_extra_large_image';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['element_default_classes'] = FALSE;
   /* Field: Apache Solr: sm_thumb_thumbnail_field_story_large_image */
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_large_image']['id'] = 'sm_thumb_thumbnail_field_story_large_image';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_large_image']['table'] = 'apachesolr__solr';
