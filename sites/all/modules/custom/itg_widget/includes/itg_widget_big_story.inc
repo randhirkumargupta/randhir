@@ -12,8 +12,8 @@ function save_big_story_widget_data($big_story_data) {
   $related_nodes_json = '[]';
   // Delete entry first.
   $num_deleted = db_delete('itg_widget_order')
-    ->condition('widget', $widget)
-    ->execute();
+          ->condition('widget', $widget)
+          ->execute();
   if ($num_deleted) {
     // watchdog("widget", "Delete action has been performed");
   }
@@ -21,31 +21,40 @@ function save_big_story_widget_data($big_story_data) {
   if ($_GET['type'] == 'story') {
     $select_node_load = node_load($selected_node);
     $related_content_string = $select_node_load->field_common_related_content['und'][0]['value'];
-    $relates_content_array_with_prefix = explode(",", $related_content_string);
-    $temp_related_content_array = array();
-    foreach ($relates_content_array_with_prefix as $key => $value) {
-      $temp_related_exploded_array = explode('_', $value);
-      $temp_related_content_array[] = $temp_related_exploded_array[1];
-    }
-    $related_nodes_json = json_encode($temp_related_content_array);
+    $related_nodes_json = get_related_content_with_server_prefix($related_content_string);
   }
   // Get related nodes then convert into json.
   if ($_GET['type'] == 'breaking_news') {
-    $related_content = $big_story_data['values']['related_content'];
-    $related_nodes = explode(',', $related_content);
-    $related_nodes_json = json_encode($related_nodes);
+    $related_content_string = $big_story_data['values']['related_content'];
+    $related_nodes_json = get_related_content_with_server_prefix($related_content_string);
   }
   // Insert into table.
   $query = db_insert('itg_widget_order')
-    ->fields(array(
-      'nid' => $selected_node,
-      'widget' => $widget,
-      'content_type' => $content_type,
-      'cat_id' => 0,
-      'weight' => 0,
-      'extra' => $related_nodes_json,
-    ))
-    ->execute();
+          ->fields(array(
+              'nid' => $selected_node,
+              'widget' => $widget,
+              'content_type' => $content_type,
+              'cat_id' => 0,
+              'weight' => 0,
+              'extra' => $related_nodes_json,
+          ))
+          ->execute();
+}
+
+/**
+ * Function to get nodeid's server.
+ * 
+ * @param string $related_content_string
+ * @return json
+ */
+function get_related_content_with_server_prefix($related_content_string) {
+  $relates_content_array_with_prefix = explode(",", $related_content_string);
+  $temp_related_content_array = array();
+  foreach ($relates_content_array_with_prefix as $key => $value) {
+    $temp_related_exploded_array = explode('_', $value);
+    $temp_related_content_array[] = array($temp_related_exploded_array[0] => $temp_related_exploded_array[1]);
+  }
+  return json_encode($temp_related_content_array);
 }
 
 /**
@@ -58,10 +67,14 @@ function itg_widget_big_story_block_data($info) {
   $data = array();
   if (!empty($widget_name)) {
     $query = db_select('itg_widget_order', 'iwo')
-      ->condition('iwo.widget', $widget_name)
-      ->fields('iwo', array('nid', 'extra'))
-      ->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $data = $query;
+            ->condition('iwo.widget', $widget_name)
+            ->fields('iwo', array('nid', 'extra'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $entity_data = array();
+    foreach ($result as $entity_data_node) {
+      $entity_data = array("node_data" => node_load($entity_data_node['nid']), "related" => $entity_data_node['extra']);
+    }
+    return $entity_data;
   }
   return $data;
 }
