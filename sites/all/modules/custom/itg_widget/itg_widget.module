@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 /**
  * @file
@@ -48,6 +48,14 @@ function itg_widget_menu() {
       'page callback' => 'move_node_from_dont_miss_widget',
       'page arguments' => array(1, 2, 3, 4),
       'access arguments' => array('administer nodequeue'),
+  );
+  $items['anchor-list/autocomplete'] = array(
+      'page callback' => 'itg_widget_anchor_autocomplete_name',
+      'access arguments' => array('access content'),
+  );
+  $items['anchor-list-nid/autocomplete'] = array(
+      'page callback' => 'itg_widget_anchor_autocomplete_id',
+      'access arguments' => array('access content'),
   );
   return $items;
 }
@@ -240,7 +248,7 @@ function itg_widget_block_view($delta = '') {
     // Big Story Content.
     case 'big_story_format':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
-      $block['subject'] = t('');
+      //$block['subject'] = t('');
       $info['widget'] = 'big_story_format_widget';
       $data = itg_widget_big_story_block_data($info);
       $block['content'] = theme("widget_big_story_format", array("data" => $data));
@@ -253,7 +261,7 @@ function itg_widget_block_view($delta = '') {
       $info['content_type'] = ''; // content type machine name
       // view name which is stored in draggableviews_structure table
       $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-      $block['subject'] = t('Section wise ordering from custom table');
+      //$block['subject'] = t('Section wise ordering from custom table');
       $data = itg_widget_section_wise_ordering_from_custom_table($info);
       $block['content'] = theme("section_wise_ordering", array("data" => $data));
       break;
@@ -262,7 +270,6 @@ function itg_widget_block_view($delta = '') {
       $info['section'] = '301'; // tid of section
       $info['content_type'] = 'story'; // content type machine name
       $info['view_name'] = 'we_may_suggest_widget';
-      $block['subject'] = t('We may suggest');
       $data = itg_widget_we_may_suggest_ordering_from_custom_table($info);
       $block['content'] = theme("we_may_suggest", array("data" => $data));
       break;
@@ -635,7 +642,9 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       break;
     case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
       $form['title']['#attributes']['placeholder'] = t('Anchor name');
+      $form['title']['#autocomplete_path'] = 'anchor-list/autocomplete';
       $form['nid']['#attributes']['placeholder'] = t('Anchor ID');
+      $form['nid']['#autocomplete_path'] = 'anchor-list-nid/autocomplete';
       break;
     case 'views-exposed-form-section-wise-draggable-content-order-page':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
@@ -725,5 +734,65 @@ function get_nodequeue_load_queue_by_name($qname) {
     return isset($node_queue_object->qid) ? $node_queue_object->qid : null;
   } catch (Exception $e) {
     watchdog('Node Queue Error/Warning', 'There is some error while accessing node queue');
+  }
+}
+
+
+/**
+ * Callback function for anchor name autocomplete.
+ * 
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
+function itg_widget_anchor_autocomplete_name($string) {
+    $itg_query = db_select('node', 'n');
+    $itg_query->leftJoin('field_data_field_celebrity_pro_occupation','occuptoin','occuptoin.entity_id=n.nid');
+    $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid','399');
+    $itg_query->condition('n.title', '%' . $string . '%', 'LIKE')
+            ->fields('n', array('title'));
+    $itg_result = $itg_query->execute();
+    $result = array();
+    foreach ($itg_result as $value) {
+        $result[$value->title] = $value->title;
+    }
+    return drupal_json_output($result);
+}
+
+/**
+ * Callback function for anchor name autocomplete.
+ * 
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
+function itg_widget_anchor_autocomplete_id($string) {
+    $itg_query = db_select('node', 'n');
+    $itg_query->leftJoin('field_data_field_celebrity_pro_occupation','occuptoin','occuptoin.entity_id=n.nid');
+    $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid','399');
+    $itg_query->condition('n.nid', '%' . $string . '%', 'LIKE')
+            ->fields('n', array('nid'));
+    $itg_result = $itg_query->execute();
+    $result = array();
+    foreach ($itg_result as $value) {
+        $result[$value->nid] = $value->nid;
+    }
+    return drupal_json_output($result);
+}
+
+/**
+ * Hook is used to add unique class to only widgets view wrapper.
+ * 
+ * Implementation of hook_preprocess_views_view
+ * {@inheritdoc}
+ */
+function itg_widget_preprocess_views_view(&$vars) {
+  $view_name = $vars['view']->name;
+  $widget_views = array(
+      'widget_anchors_listing',
+      'home_page_feature_widget',
+      'story_widget',
+      'section_wise_content_ordering_list'
+  );
+  if(in_array($view_name, $widget_views)) {
+    $vars['classes_array'][] = 'widgets-view';
   }
 }
