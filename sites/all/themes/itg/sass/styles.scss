@@ -351,10 +351,8 @@ input[type="text"], select, input[type="password"]{
     }
 }
 #page-title{
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 24px;    
     font-weight: 500;
-    margin-bottom: 10px;
 }
 
 
@@ -1026,7 +1024,12 @@ footer{
     @include itg-font($itg-roboto);
     .big-story-col-1, .big-story-col-2{        
         padding:0 15px;
-    } 
+    }
+    .big-story-col-1{
+        .story-tag{
+            @include pos(absolute);
+        }
+    }
     h1{
         margin-bottom: 10px;
     }
@@ -1118,7 +1121,12 @@ footer{
 }
 /*End CSS Featured New Home page*/
 /*Start CSS section story Home page*/
-.section-ordering{
+.section_wise_order{
+    .widget-title{
+     @include pos(absolute);   
+    }    
+}
+.section-ordering{    
     h3{
         padding: 15px 0;
     }
