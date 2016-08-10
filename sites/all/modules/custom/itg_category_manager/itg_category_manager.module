@@ -228,6 +228,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     // Add js to category management form
     if ($form['#vocabulary']->machine_name == 'category_management') {
         $form['#attributes']['class'][] = 'node-form node-category-form';
+        drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/clipboard.min.js', 'file');
         $form['#attached']['js'] = array(
             drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',            
         );
