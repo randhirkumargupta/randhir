@@ -47,7 +47,7 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
 
 
   // Adding extra field for related content.
-  if ($current_display == 'big_story_format' && $_GET['type'] == 'breaking_news') {
+  if ($current_display == 'big_story_format' && ($_GET['type'] != 'story' || !isset($_GET['type']))) {
     $form['related_content'] = array(
       '#type' => 'textfield',
       '#title' => t("Related content."),

@@ -36,11 +36,5 @@ function itg_widget_home_page_feature_data($info) {
       }
       return $entity_data;
     }
-    else {
-      // watchdog('Widget', 'Either section or content type is empty');
-    }
-  }
-  else {
-    //watchdog('Widget', 'view_name and page name is empty');
   }
 }
