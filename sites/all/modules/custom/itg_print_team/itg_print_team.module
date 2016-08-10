@@ -153,10 +153,12 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $form['field_pti_issue']['#access'] = FALSE;
           $form['field_pti_magazine']['#access'] = FALSE;
           $form['field_story_rating']['#access'] = FALSE;
+          $form['field_pti_magazine_kicker']['#access'] = FALSE;
         }
       } else {
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
           $form['field_story_category']['#access'] = FALSE;
+          $form['field_pti_magazine_kicker']['#access'] = FALSE;
           unset($form['field_pti_print_media']);
         }
 
@@ -166,6 +168,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_issue']['#access'] = FALSE;
         $form['field_pti_magazine']['#access'] = FALSE;
         $form['field_story_rating']['#access'] = FALSE;
+        
       }
 
       // Disable change status radio button if status is "Approved" OR "Rejected"
@@ -201,10 +204,8 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
 
       if ($mark_task_as_complted_users && $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
         $form['field_pti_mark_as_complete']['#access'] = TRUE;
-        $form['field_pti_magazine_kicker']['#access'] = TRUE;
       } else {
         $form['field_pti_mark_as_complete']['#access'] = FALSE;
-        $form['field_pti_magazine_kicker']['#access'] = FALSE;
       }
     } else {
       $form['field_story_category']['#access'] = FALSE;
