@@ -80,9 +80,51 @@ a {
   background: #fff;
 }
 
+.list-none, .may-be-suggest-container ul, .top-takes-video-container ul, .trending-videos, .watch-right-now-video ul {
+  list-style-type: none;
+}
+
 .gray-bg-widgets {
   background: #f3f3f3;
   padding: 10px;
+}
+
+.widget-title {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background: #a00606;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 7px;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.widget-title a {
+  color: #fff;
+}
+
+.widget-settings {
+  background-color: #a00606;
+  display: inline-block;
+  left: 0;
+  max-width: 100%;
+  padding-right: 30px;
+  position: relative;
+  top: 0;
+  vertical-align: top;
+}
+
+.widget-settings .widget-title-wrapper {
+  display: inline-block;
+  vertical-align: top;
+  width: auto;
 }
 
 /*Start CSS Top Story Home Page*/
@@ -246,28 +288,14 @@ a {
 }
 
 /*End CSS section story Home page*/
-.widget-title {
+/*Start Dont miss Home page css*/
+.dont_miss .widget-title {
   position: relative;
-  top: 0px;
-  left: 0px;
-  background: #a00606;
-  height: 22px;
-  line-height: 22px;
-  padding: 0 7px;
-  text-transform: uppercase;
-  color: #fff;
-  font-family: "Roboto", sans-serif;
-  z-index: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-.widget-title a {
-  color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 5px;
 }
 
-/*Start Dont miss Home page css*/
 .dont-miss {
   /*padding: 30px 10px 0px 10px;*/
 }
@@ -305,7 +333,7 @@ a {
   border: none;
 }
 .dont-miss ul .dont-miss-listing .dm-pic {
-  width: 48%;
+  width: 170px;
 }
 .dont-miss ul .dont-miss-listing .dm-detail h4 {
   color: #048cb9;
@@ -328,6 +356,10 @@ a {
 
 /*End Dont miss Home page css*/
 /*Start May we suggest css*/
+.we_may_suggest span.widget-title {
+  position: relative;
+}
+
 .may-be-suggest-container ul .may-we-suggest {
   overflow: hidden;
   padding: 10px;
@@ -343,6 +375,12 @@ a {
   font-size: 0.875rem;
   line-height: 19px;
   color: #323232;
+}
+.may-be-suggest-container ul .pic {
+  width: 88px;
+}
+.may-be-suggest-container ul li.may-we-suggest {
+  padding: 0 10px;
 }
 .may-be-suggest-container ul li + li {
   border-top: 1px solid #dddddd;
@@ -378,6 +416,10 @@ a {
 
 /*End May we suggest End*/
 /*Start top-takes-video suggest css*/
+.top_takes_videos_widget .widget-title {
+  position: relative;
+}
+
 .top-takes-video-container ul .top-takes-video {
   overflow: hidden;
   padding: 10px;
@@ -396,6 +438,9 @@ a {
 }
 .top-takes-video-container ul li + li {
   border-top: 1px solid #dddddd;
+}
+.top-takes-video-container ul li:last-child {
+  border-bottom: 1px solid #dddddd;
 }
 .top-takes-video-container h3 {
   text-transform: uppercase;
@@ -450,6 +495,38 @@ a {
 }
 
 /*End CSS trending-videos Home  page*/
+/*Start Watch right Now suggest css*/
+.watch_right_now_videos_widget .widget-title {
+  position: relative;
+}
+
+.watch-right-now-video ul .watch-right-now-list {
+  overflow: hidden;
+  padding: 10px;
+}
+.watch-right-now-video ul .watch-right-now-list .pic {
+  float: right;
+  margin-left: 5px;
+}
+.watch-right-now-video ul .watch-right-now-list .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.watch-right-now-video ul li {
+  padding: 0 10px;
+}
+.watch-right-now-video ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.watch-right-now-video ul li:last-child {
+  border-bottom: 1px solid #dddddd;
+}
+
+/*End Watch right Now suggest End*/
 @media only screen and (min-width: 768px) {
   h1 {
     font-size: 40px;

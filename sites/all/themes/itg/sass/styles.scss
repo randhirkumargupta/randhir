@@ -190,6 +190,8 @@ input[type="text"], select, input[type="password"]{
     @include clearfix;
 }
 #page{@extend .vtop; @extend .full; @extend .dib;}
+
+/*start header css*/
 #block-itg-layout-manager-header-block{    
     padding-top: 20px;
     box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
@@ -268,6 +270,7 @@ input[type="text"], select, input[type="password"]{
         }
     }
 }
+/*End header css*/
 .tabs-primary{
     @extend .no-bullet;
     @extend .dib;
@@ -1315,7 +1318,7 @@ footer{
             padding: 0 0px 20px 0;
             border:none; 
             .dm-pic{
-                width: 48%;
+               width: 170px;
             }            
             .dm-detail{
                 h4{
@@ -1556,7 +1559,7 @@ footer{
         }
         li{
             &.may-we-suggest{
-             padding:0 10px;   
+             padding:10px 0;   
             }            
             &+li{
                border-top: 1px solid $border-color;
@@ -1641,7 +1644,10 @@ footer{
     }
 }
 /*Start snap post css*/
-.page-snappost{    
+.page-snappost{ 
+    ul{
+        @extend .list-none;
+    }
     @include itg-font($itg-roboto);
     h1#page-title, .container.header-logo{
         @extend .hide;
