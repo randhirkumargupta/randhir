@@ -359,7 +359,6 @@
             parent.jQuery(document).ajaxComplete(function(event, request, settings) {
 
                 if (settings.url.indexOf(field_name) >= 0) {
-
                     parent.jQuery('[name="' + getbame + '[alt]"]').val(jQuery('#img_alttext').val());
                     parent.jQuery('[name="' + getbame + '[title]"]').val(jQuery('#img_title').val());
                     parent.jQuery('[name="' + getbame + '[field_image_caption][und][0][value]"]').val(jQuery('#img_title').val());
