@@ -103,7 +103,6 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     drupal_set_title(t('Submit Your Idea'));
 
     // Add cancel button
-    $destination = 'manage-print-team';
     $form['title']['#description'] = '<p>' . t('Please enter idea headline .') . '</p>';
 
     // After approve, show rule to user
@@ -126,7 +125,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
 
     // Add cancel button
     $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#markup' => l(t('Cancel'), 'manage-print-team-not-decided', array('attributes' => array('class' => 'button'))),
         '#weight' => 21,
         '#value' => t('Cancel'),
     );
@@ -166,15 +165,6 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_issue']['#access'] = FALSE;
         $form['field_pti_magazine']['#access'] = FALSE;
         $form['field_story_rating']['#access'] = FALSE;
-      }
-
-      // Add category heading for section field
-      if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
-        $form['idea_categorization'] = array(
-            '#type' => 'item',
-            '#markup' => '<div class=""><h2>Categorization</h2></div>',
-            '#weight' => 2,
-        );
       }
 
       // Disable change status radio button if status is "Approved" OR "Rejected"
@@ -343,7 +333,13 @@ function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
     $op = 'submitted successfully';
   }
   
-  $form_state['redirect'] = 'manage-print-team';
+  if($_GET['destination']) {
+    $destination = $_GET['destination'];
+  }
+  else {
+    $destination = 'manage-print-team-not-decided';
+  }
+  $form_state['redirect'] = $destination;
   drupal_set_message(t('Your idea <strong>@ideatitle</strong> has been @operation.', array('@ideatitle' => $form_state['node']->title, '@operation' => $op)));
 }
 
