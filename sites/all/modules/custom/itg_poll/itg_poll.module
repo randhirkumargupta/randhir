@@ -356,11 +356,11 @@ function itg_poll_form($form, &$form_state, $parms) {
     '#value' => $display_result,
   );
 
-  $form['captcha'] = array(
-    '#type' => 'captcha',
-    '#captcha_type' => 'recaptcha/reCAPTCHA',
-    '#prefix' => '<span class="poll-ajax-error"></span>',
-  );
+//  $form['captcha'] = array(
+//    '#type' => 'captcha',
+//    '#captcha_type' => 'recaptcha/reCAPTCHA',
+//    '#prefix' => '<span class="poll-ajax-error"></span>',
+//  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',
@@ -399,7 +399,7 @@ function itg_poll_form_ajax_submit($form, &$form_state) {
   $dsp_result = itg_poll_get_display_result($node_id);
   $created = date('Y-m-d H:i:s');
   db_insert('itg_polls')->fields(array(
-    'node_id' => $node_id,
+    'nId' => $node_id,
     'ansId' => $pole_answer,
     'uId' => $user->uid,
     'display_result' => $dsp_result,
@@ -435,7 +435,12 @@ function itg_poll_block_info() {
     'info' => t('poll Form Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-
+  
+  $blocks['itg_poll_past_poll'] = array(
+    'info' => t('ITG POLL: past poll'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -450,6 +455,12 @@ function itg_poll_block_view($delta = '') {
     case 'poll_tab_form_block':
       $block['content'] = theme('itg_poll_tab_form_display_block', array('data' => $data));
       break;
+  
+    case 'itg_poll_past_poll':
+      module_load_include('inc', 'itg_poll', 'includes/itg_poll_current_poll');
+      $block['content'] = itg_poll_get_all_past_poll();
+      break;
+  
   }
   
   // Disable form tab from delete page
@@ -476,7 +487,19 @@ function itg_poll_theme($existing, $type, $theme, $path) {
       'template' => 'poll-node-form',
       'path' => drupal_get_path('module', 'itg_poll') . '/templates',
       'render element' => 'form',
-    ),
+     ),
+     'itg_poll_list_all_forms' => array(
+      'template' => 'itg-poll-list-all-forms',
+      'path' => drupal_get_path('module', 'itg_poll') . '/templates',
+      'variables' => array('data' => NULL),
+    ),  
+     'itg_poll_list_all_past_polls' => array(
+      'template' => 'itg-poll-list-all-past-polls',
+      'path' => drupal_get_path('module', 'itg_poll') . '/templates',
+      'variables' => array('data' => NULL),
+    ),   
+      
+      
   );
   return $themes;
 }
@@ -666,4 +689,149 @@ function itg_poll_node_presave($node) {
       $node->field_poll_question_text[LANGUAGE_NONE][0]['value'] = $node->title;
     }
   }
+}
+
+
+
+/**
+ * Implementation of custom function that will be used in front end(View:Past view).
+ * @param int $nid
+ */
+
+function itg_poll_get_past_data($nid) {
+    
+  $node = node_load($nid); 
+  $outputnew = '';
+  $optionarr = itg_poll_getPollResult($nid);
+  $opttotal = itg_poll_getTotalPoll($nid);
+
+  foreach ($node->field_poll_answer[LANGUAGE_NONE] as $row) {
+      $item_id[] = $row['value'];
+     }
+
+    $result_format = $node->field_result_format[LANGUAGE_NONE][0]['value'];
+   
+     
+  $temp_entities = entity_load('field_collection_item', $item_id);
+  if (is_array($optionarr) && count($optionarr) > 0) {
+
+    $finaltotal = $opttotal;
+    $outputnew = '';
+    $poll_manipulate_allval = '';
+    foreach ($temp_entities as $temp_ent_id => $temp_ents) {
+       $poll_manipulate_allval += isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
+    }
+    $finaltotal += $poll_manipulate_allval;
+
+    foreach ($temp_entities as $temp_ent_id => $temp_ents) {
+      $polls_answer_text = isset($temp_ents->field_poll_answer_text[LANGUAGE_NONE]) ? $temp_ents->field_poll_answer_text[LANGUAGE_NONE][0]['value'] : '';
+      $polls_answer_image = isset($temp_ents->field_poll_answer_image[LANGUAGE_NONE]) ? trim($temp_ents->field_poll_answer_image[LANGUAGE_NONE][0]['fid']) : '';
+    
+      // Poll Manipulate value
+      $poll_manipulate_val = isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
+     
+      if (isset($polls_answer_image) && $polls_answer_image > 0) {
+        $poll_image = theme('image_style', array('style_name' => 'thumbnail', 'path' => file_load($polls_answer_image)->uri));
+      }
+      
+      $preoptioncnt = isset($optionarr[$temp_ent_id]->optionCnt) ? $optionarr[$temp_ent_id]->optionCnt : 0;
+      $optioncnt = $preoptioncnt + $poll_manipulate_val;
+      $percentage = number_format(($optioncnt / $finaltotal) * 100);
+      $polls_answer_text_render = ''; 
+      if ($polls_answer_text) {
+          $polls_answer_text_render = $polls_answer_text; 
+      }
+      if (isset($poll_image)) { 
+          $polls_answer_text_render =  $poll_image; 
+      }
+      
+      
+      if ($result_format == 1) { // Percent
+              $outputnew .= '<li><span class="poll-answer-text">'.$polls_answer_text_render.'</span> <span class="percentage">'. $percentage . '%'.'</span> <span id="poll-past-percentage" class="poll-past-percentage-progess" style="width:'.$percentage.'%"></span></li>';
+           }
+      elseif ($result_format == 2) { // Number of votes
+      $outputnew .= '<li><span class="poll-answer-text">'.$polls_answer_text_render.'</span> <span class="noofvotes">'. $optioncnt . '%'.'</span> <span id="poll-past-percentage" class="poll-past-percentage-progess" style="width:'.$percentage.'%"></span></li>';
+      }
+          
+    }
+  }
+  
+  return '<ul class="past-poll">'.$outputnew.'</ul>';
+
+}
+
+
+/**
+ * {@inheritdoc}
+ * Implements hook_menu().
+ */
+function itg_poll_menu() {
+  $items['itg_active_polls'] = array(
+    'title' => 'Active Polls',
+    'page callback' => 'itg_active_polls_page',
+    'access callback' => TRUE,
+  );
+
+  return $items;
+}
+
+
+/**
+ * 
+ * Implements 
+ */
+
+function itg_active_polls_page() {
+   module_load_include('inc', 'itg_poll', 'includes/itg_poll_current_poll');
+   return itg_poll_get_all_current_poll();
+}
+
+/**
+ * Implements function poll ajax submit().
+ * {@inheritdoc}
+ */
+function itg_poll_form_new_ajax_submit($form, &$form_state) {  
+    watchdog('ishwar', '<pre>' . print_r( $form_state['values'], true) . '</pre>');
+    
+   $node_id = $form_state['values']['nid'];
+   $pole_answer = $form_state['values']['pole_answer']; 
+      
+  if (!isset($form_state['values']['pole_answer']) && empty($form_state['values']['pole_answer'])) {
+    $commands[] = ajax_command_replace('.poll-ans-error-'.$node_id, '<span class="poll-ans-error-'.$node_id.' error">Please select at least one option.</span>');
+    drupal_get_messages();
+    return array('#type' => 'ajax', '#commands' => $commands);
+  }
+  if (form_get_errors()) {
+    $error = form_get_errors();
+    $error = '<span class="poll-ajax-error-'.$node_id.' error">' . $error['captcha_response'] . '</span>';
+    $commands[] = ajax_command_replace('.poll-ajax-error-'.$node_id, $error);
+    $commands[] = ajax_command_replace('.poll-ans-error-'.$node_id, '');
+    drupal_get_messages();
+    return array('#type' => 'ajax', '#commands' => $commands);
+  }
+  global $user;
+  
+  // Get display result
+  $dsp_result = itg_poll_get_display_result($node_id);
+  $created = date('Y-m-d H:i:s');
+  
+  try{
+  db_insert('itg_polls')->fields(array(
+    'nId' => $node_id,
+    'ansId' => $pole_answer,
+    'uId' => $user->uid,
+    'display_result' => $dsp_result,
+    'created' => $created))->execute();
+  } catch(Exception $e){
+      watchdog('Error while entry in itg_polls',$e->getMessage());     
+  }
+  
+  
+  $expire = time() + 60 * 60 * 24 * 30; // expires in one month
+  $value = 'yes_' . $node_id;
+  setcookie('visitedPoll', $value, $expire, '/');
+  $_SESSION['first_submit_anomoyous'] = 'yes';
+  $poll_answer = itg_poll_get_past_data($node_id);
+  $commands[] = ajax_command_replace('.poll-replace-id', $poll_answer);
+  return array('#type' => 'ajax', '#commands' => $commands);
 }
