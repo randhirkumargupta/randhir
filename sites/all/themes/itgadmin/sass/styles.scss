@@ -6065,3 +6065,45 @@ div.node{
   @extend .full;
   @extend .vtop;
 }
+#itg_video_content{
+  .video-local{
+    @extend .fleft;
+    width: 50%;
+    cursor: pointer;
+    height: 50px;
+    background-color: #e4e3e5;
+    line-height: 48px;
+    text-transform: uppercase;
+    border-left: 1px solid #d00b26;
+    text-align: center;
+    &:hover, &.active{
+      background-color: #2f2f2f;
+      color: #fff;
+    }
+  }
+  .video-ftp{
+    text-align: center;
+    @extend .fleft;
+    width: 50%;
+    cursor: pointer;
+    height: 50px;
+    background-color: #e4e3e5;
+    line-height: 48px;
+    text-transform: uppercase;
+    border-right: 1px solid #d00b26;
+    &:hover, &.active{
+      background-color: #2f2f2f;
+      color: #fff;
+    }
+  }
+  .ftp-server, .local_browse{
+    @extend .dib;
+    @extend .full;
+    padding: 20px 0;
+  }
+  .attach-video, .browse-local{
+    @extend .add-more;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+}
