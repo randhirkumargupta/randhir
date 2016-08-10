@@ -397,7 +397,7 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
         unset($_GET['destination']);
       }
       drupal_get_messages();
-      drupal_set_message(t('Please do not use space in filename.'), 'error');
+      drupal_set_message(t('Do not use space in FTP filename. Please remove and again upload file without space in file name.'), 'error');
       drupal_goto('node/'.$node_id.'/edit', array('query' => array('destination' => 'manage-videogallery')));
     }
     else {
