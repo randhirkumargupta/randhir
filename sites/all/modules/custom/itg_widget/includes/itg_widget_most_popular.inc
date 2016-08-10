@@ -20,8 +20,10 @@ function itg_widget_most_popular_ordering_data($info) {
     if (!empty($view_name) && !empty($page)) {
       //$args_like = '{"nid":"","title":""}'; // this is for only top story widget
       $query = db_select('draggableviews_structure', 'dv_s');
+      $query->leftJoin('node','n','n.nid=dv_s.entity_id');
       $query->fields('dv_s', array('entity_id'));
       $query->condition('dv_s.view_name', $view_name);
+      $query->condition('n.status','1');
       //$query->condition('dv_s.args', '%' . db_like($args_like) . '%', 'LIKE');
       $query->condition('dv_s.view_display', $page);
       $query->orderBy('dv_s.weight', 'ASC');
