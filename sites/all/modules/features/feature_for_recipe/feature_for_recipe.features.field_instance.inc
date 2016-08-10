@@ -65,10 +65,9 @@ function feature_for_recipe_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 13,
       ),
       'teaser' => array(
@@ -107,10 +106,9 @@ function feature_for_recipe_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 14,
       ),
       'teaser' => array(
@@ -324,7 +322,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_category',
     'label' => 'Section',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -911,10 +909,9 @@ function feature_for_recipe_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 14,
       ),
       'teaser' => array(
@@ -953,10 +950,9 @@ function feature_for_recipe_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 15,
       ),
       'teaser' => array(
@@ -1167,7 +1163,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_category',
     'label' => 'Section',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,

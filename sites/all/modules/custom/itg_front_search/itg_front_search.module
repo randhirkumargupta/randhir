@@ -110,7 +110,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
  * @param Array $view
  */
 function itg_front_search_views_pre_render(&$view) {
-
+global $base_url;
   // Add "Create Breaking news" on listing page of Breaking news
   if ($view->name == "front_end_global_search") {
 
@@ -127,7 +127,22 @@ function itg_front_search_views_pre_render(&$view) {
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
       }
-
+      
+      // image condition when image not exist
+      $image = $related_result->sm_thumb_medium_field_story_extra_large_image[0];
+      $pattern = '/src="([^"]*)"/';
+      if (preg_match($pattern, $image, $matches)) {
+        $src = $matches[1];
+        if (getimagesize($src) !== false) {
+          $related_result->sm_thumb_medium_field_story_extra_large_image[0] = $related_result->sm_thumb_medium_field_story_extra_large_image[0];
+        }
+        else {
+          $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+          $related_result->sm_thumb_medium_field_story_extra_large_image[0] = "<img src='$img_url' width='220' height='165' />";
+        }
+      }
+      
+      
       $words = $_GET['keyword'];
       $description_raw_value = strip_tags($related_result->content);
       $description_message_lenth = strlen($description_raw_value);
