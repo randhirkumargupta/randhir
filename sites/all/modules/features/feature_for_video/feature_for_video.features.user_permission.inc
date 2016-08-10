@@ -20,6 +20,16 @@ function feature_for_video_user_default_permissions() {
     'module' => 'itg_videogallery',
   );
 
+  // Exported permission: 'authorized user ftp credin'.
+  $permissions['authorized user ftp credin'] = array(
+    'name' => 'authorized user ftp credin',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'itg_videogallery',
+  );
+
   // Exported permission: 'create videogallery content'.
   $permissions['create videogallery content'] = array(
     'name' => 'create videogallery content',

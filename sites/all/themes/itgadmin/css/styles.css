@@ -360,7 +360,7 @@ img {
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element, [id*="field-poll-answer-values"] tbody tr, .view-popup .field, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-question, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, [id*="field-astro-zodiac-values"] > tbody > tr > td,
 [id*="field-astro-numerology-values-values"] > tbody > tr > td, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] tbody tr td, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .node-newsletter-form #newsletter-date-time-wrapper, .node-newsletter-form #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time .form-item,
-.node-newsletter-form #edit-field-survey-start-date[style="display: none;"] + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time .form-item, .view-related-content-new .view-filters, .search-criteria + .success, [id*="field-videogallery-video-upload-values"] tbody tr td, [id*="field-videogallery-video-upload-values"], [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview, [id*="field-podcast-audio-upload-values"], [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview, [id*="field-pti-print-media-values"] tbody tr td, .block-itg-layout-manager, #itg-layout-manager-filter-form, .itg-region ul {
+.node-newsletter-form #edit-field-survey-start-date[style="display: none;"] + #edit-field-newsl-date[style="display: none;"] + #edit-field-newsl-day[style="display: none;"] + #edit-field-newsl-time .form-item, .view-related-content-new .view-filters, .search-criteria + .success, [id*="field-videogallery-video-upload-values"] tbody tr td, [id*="field-videogallery-video-upload-values"], [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview, [id*="field-podcast-audio-upload-values"], [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview, [id*="field-pti-print-media-values"] tbody tr td, .block-itg-layout-manager, #itg-layout-manager-filter-form, .itg-region ul, #pti-basic-info {
   width: 100%;
 }
 
@@ -386,7 +386,7 @@ img {
 .manage_cooking_tips_view_menu, .category-manager-thead div, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper legend,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper legend, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td, div.node #comments .comment-form .form-type-item > label, .comment-form .form-type-item > label, [id*="field-poll-answer-values"] tbody tr, [id*="field-poll-answer-values"] tbody tr td, .view-popup .field .field-label, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-type, [id*="field-survey-add-questions-values"] > tbody table thead, [id*="field-survey-add-questions-values"] > tbody table tbody, [id*="field-astro-zodiac-values"] > tbody > tr > td,
-[id*="field-astro-numerology-values-values"] > tbody > tr > td, [id*="field-newsl-add-news-values"] fieldset legend, .node-syndication_rule-form tbody td, .node-syndication_rule-form tbody td .field-name-field-syndication-time, .node-syndication_rule-form tbody td .field-name-field-syndication-time .form-type-textfield .form-text, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select .form-text, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file-size, .newsletter-templates .newsletter-list .newsletter-thumbnail, [id*="field-service-content-values"] tbody tr td, [id*="field-service-content-values"] .field-name-field-service-content-date, [id*="field-syndication-ftp-details-values"] tbody tr td, [id*="field-syndication-ftp-details-values"] tbody tr td .field-type-text, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td .form-type-textfield, .view-view-moderation-history .views-row .views-label, .node-newsletter-form #newsletter-date-time-wrapper .form-item, .node-newsletter-form #newsletter-date-time-wrapper #edit-field-survey-start-date, #head-val, [id*="field-videogallery-video-upload-values"] tbody tr td, .action-with-title #page-title, [id*="field-videogallery-video-upload-values"] tbody, [id*="field-videogallery-video-upload-values"] tbody tr, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody, [id*="field-podcast-audio-upload-values"] tbody tr, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), .itg_image_repository .image_repository div, [id*="field-pti-print-media-values"] tbody, [id*="field-pti-print-media-values"] tbody tr td, [id*="views-form-manage-print-team-page"] .form-item-pti-issue, [id*="views-form-manage-print-team-page"] .form-item-pti-issue > label, [id*="views-form-manage-print-team-page"] .form-item-pti-magazine, [id*="itg-octopus-api-form"] .form-type-textfield, [id*="itg-octopus-api-form"] .form-type-select, [id*="itg-octopus-api-form"] .octopus-filter-btn, [id*="views-form-strory-menegment-page"] .btn-generate-xml, .view-photo-list-of-category .view-content .photo-list li, .node-type-print-team-integration #comments .comment ul.links li {
+[id*="field-astro-numerology-values-values"] > tbody > tr > td, [id*="field-newsl-add-news-values"] fieldset legend, .node-syndication_rule-form tbody td, .node-syndication_rule-form tbody td .field-name-field-syndication-time, .node-syndication_rule-form tbody td .field-name-field-syndication-time .form-type-textfield .form-text, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select .form-text, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file-size, .newsletter-templates .newsletter-list .newsletter-thumbnail, [id*="field-service-content-values"] tbody tr td, [id*="field-service-content-values"] .field-name-field-service-content-date, [id*="field-syndication-ftp-details-values"] tbody tr td, [id*="field-syndication-ftp-details-values"] tbody tr td .field-type-text, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td .form-type-textfield, .view-view-moderation-history .views-row .views-label, .node-newsletter-form #newsletter-date-time-wrapper .form-item, .node-newsletter-form #newsletter-date-time-wrapper #edit-field-survey-start-date, #head-val, [id*="field-videogallery-video-upload-values"] tbody tr td, .action-with-title #page-title, [id*="field-videogallery-video-upload-values"] tbody, [id*="field-videogallery-video-upload-values"] tbody tr, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody, [id*="field-podcast-audio-upload-values"] tbody tr, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), .itg_image_repository .image_repository div, [id*="field-pti-print-media-values"] tbody, [id*="field-pti-print-media-values"] tbody tr td, [id*="views-form-manage-print-team-page"] .form-item-pti-issue, [id*="views-form-manage-print-team-page"] .form-item-pti-issue > label, [id*="views-form-manage-print-team-page"] .form-item-pti-magazine, [id*="itg-octopus-api-form"] .form-type-textfield, [id*="itg-octopus-api-form"] .form-type-select, [id*="itg-octopus-api-form"] .octopus-filter-btn, [id*="views-form-strory-menegment-page"] .btn-generate-xml, .view-photo-list-of-category .view-content .photo-list li, .node-type-print-team-integration #comments .comment ul.links li, #pti-basic-info {
   float: left;
 }
 
@@ -786,7 +786,7 @@ a.ckeditor_links:hover {
   text-decoration: underline;
 }
 
-.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after {
+.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after {
   content: '*';
   color: red;
 }
@@ -5731,7 +5731,7 @@ div.node #comments h2 {
   width: 100%;
   height: 100%;
   background-color: #f0f0f0;
-  box-shadow: 0 0 3px #000;
+  box-shadow: 0 0 3px 1px #1fb5ad;
 }
 
 .page-itg-layout-manager .region-sidebar-second {
@@ -5756,9 +5756,7 @@ div.node #comments h2 {
   height: 100%;
 }
 .page-itg-layout-manager .dm-pic img {
-  height: 127px;
   vertical-align: top;
-  width: 170px;
 }
 
 .ui-draggable {
@@ -5772,7 +5770,7 @@ div.node #comments h2 {
 }
 
 .drop-hover {
-  box-shadow: 0 0 3px #000;
+  box-shadow: 0 0 3px 1px #1fb5ad;
 }
 
 .widget-settings {
@@ -5864,4 +5862,30 @@ div.node #comments h2 {
 }
 .node-type-print-team-integration #comments .comment ul.links li {
   margin-right: 10px;
+}
+.node-type-print-team-integration #comments .comment ul.links li .ajax-progress {
+  display: none;
+}
+.node-type-print-team-integration #comments mark {
+  display: none;
+}
+
+#search-preview iframe {
+  border: 1px solid #d9d9d9;
+  width: 100%;
+}
+
+.view .view-filters #views-exposed-form-searchimage-page .views-exposed-form .views-exposed-widget {
+  vertical-align: top;
+}
+.view .view-filters #views-exposed-form-searchimage-page .views-submit-button .form-item {
+  float: left;
+  margin-right: 10px;
+}
+
+#edit-brief-idea-limit {
+  color: green;
+  float: right;
+  margin-top: -36px;
+  text-align: right;
 }

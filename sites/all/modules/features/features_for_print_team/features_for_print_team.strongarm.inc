@@ -68,13 +68,13 @@ function features_for_print_team_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '8',
+          'weight' => '7',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '7',
+          'weight' => '6',
         ),
       ),
       'display' => array(),

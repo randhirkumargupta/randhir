@@ -1,0 +1,81 @@
+<?php
+/**
+ * @file
+ * The ITG Front End Common module.
+ *
+ * Contains functionality for Front end.
+ *
+ */
+/**
+ * Implements hook_block_info().
+ * @return array
+ */
+function itg_front_end_common_block_info() {
+$blocks['taboola_block'] = array(
+'info' => t('Taboola Block'),
+ 'cache' => DRUPAL_CACHE_GLOBAL,
+);
+
+return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * {@inheritdoc}
+ */
+function itg_front_end_common_block_view($delta = '') {
+$block = array();
+
+switch ($delta) {
+case 'taboola_block':
+$block['content'] = _taboola_block_content();
+break;
+}
+
+return $block;
+}
+
+/**
+ * Implements taboola block content
+ */
+function _taboola_block_content() {
+$output = '<div class="taboola">
+        <script type="text/javascript">
+window._taboola = window._taboola || [];
+_taboola.push({article:"auto"});
+!function (e, f, u) {
+e.async = 1;
+e.src = u;
+f.parentNode.insertBefore(e, f);
+}(document.createElement("script"), document.getElementsByTagName("script")[0], "http://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js");
+</script>
+<div class="divclear"></div>
+<div class="nocontent">
+    <div id="taboola-below-main-column"></div>
+    <script type="text/javascript">
+      window._taboola = window._taboola || [];
+      _taboola.push({mode: "thumbs-2r", container: "taboola-below-main-column", placement: "below-main-column"});
+    </script>
+    <div id="taboola-text-2-columns"></div>
+    <script type="text/javascript">
+      window._taboola = window._taboola || [];
+      _taboola.push({mode: "hybrid-text-links-2c", container: "taboola-text-2-columns", placement: "text-2-columns", target_type: "mix"});
+    </script>
+    <script type="text/javascript">
+      window._taboola = window._taboola || [];
+      _taboola.push({flush: true});
+    </script>
+</div>
+</div>
+';
+return $output;
+}
+
+/**
+ * Implements taboola view
+ */
+function taboola_view() {
+
+  $block = module_invoke('itg_front_end_common', 'block_view', 'taboola_block');
+  print render($block['content']);
+}
