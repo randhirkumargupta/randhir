@@ -110,23 +110,6 @@ a {
   color: #fff;
 }
 
-.widget-settings {
-  background-color: #a00606;
-  display: inline-block;
-  left: 0;
-  max-width: 100%;
-  padding-right: 30px;
-  position: relative;
-  top: 0;
-  vertical-align: top;
-}
-
-.widget-settings .widget-title-wrapper {
-  display: inline-block;
-  vertical-align: top;
-  width: auto;
-}
-
 /*Start CSS Top Story Home Page*/
 .tab-buttons {
   zoom: 1;
@@ -293,6 +276,8 @@ a {
   position: relative;
   display: inline-block;
   vertical-align: top;
+}
+.dont_miss .widget-settings {
   margin-bottom: 5px;
 }
 
@@ -333,7 +318,7 @@ a {
   border: none;
 }
 .dont-miss ul .dont-miss-listing .dm-pic {
-  width: 170px;
+  width: 46.6%;
 }
 .dont-miss ul .dont-miss-listing .dm-detail h4 {
   color: #048cb9;
@@ -380,7 +365,7 @@ a {
   width: 88px;
 }
 .may-be-suggest-container ul li.may-we-suggest {
-  padding: 0 10px;
+  padding: 10px 0;
 }
 .may-be-suggest-container ul li + li {
   border-top: 1px solid #dddddd;
@@ -629,13 +614,9 @@ a {
 
   /*End CSS Featured-news Home Page*/
   /*Start Dont miss Home page css*/
-  .dont-miss {
-    padding: 30px 0px 0px 20px;
-  }
   .dont-miss ul .dont-miss-listing {
     float: left;
     width: 50%;
-    padding: 0 20px 25px 0;
   }
   .dont-miss ul .dont-miss-listing:nth-child(2n+1) {
     clear: left;

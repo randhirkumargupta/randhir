@@ -1318,7 +1318,7 @@ footer{
             padding: 0 0px 20px 0;
             border:none; 
             .dm-pic{
-               width: 170px;
+               width: 46.6%;
             }            
             .dm-detail{
                 h4{
@@ -1574,10 +1574,13 @@ footer{
 .sidebar-second{
     .may-be-suggest-container{
         h3{
-        display: block;
+            display: block;
+            span{
+                padding:45px 20px 10px 30px;   
+            }        
         }
         ul .may-we-suggest{
-            padding:10px;
+            padding:10px 24px 10px 30px;
         }
     }
 }
@@ -1854,9 +1857,15 @@ footer{
     }
     .breaking-section{
         padding: 10px 0;
+        line-height: 22px;
         + .breaking-section{
             border-top: 1px solid $border-color;
-        }        
+        }
+        .breaking-date{
+            color: #9f9f9f;
+            @include font(12px);
+            margin-bottom: 5px;
+        }
     }
 }
 /*End anchors listing css*/

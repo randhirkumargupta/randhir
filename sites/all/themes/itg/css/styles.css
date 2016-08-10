@@ -1658,7 +1658,7 @@ footer .footer-copyright {
   border: none;
 }
 .dont-miss ul .dont-miss-listing .dm-pic {
-  width: 170px;
+  width: 46.6%;
 }
 .dont-miss ul .dont-miss-listing .dm-detail h4 {
   color: #048cb9;
@@ -1997,8 +1997,11 @@ footer .footer-copyright {
 .sidebar-second .may-be-suggest-container h3 {
   display: block;
 }
+.sidebar-second .may-be-suggest-container h3 span {
+  padding: 45px 20px 10px 30px;
+}
 .sidebar-second .may-be-suggest-container ul .may-we-suggest {
-  padding: 10px;
+  padding: 10px 24px 10px 30px;
 }
 
 /*End May we suggest End*/
@@ -2474,9 +2477,16 @@ footer .footer-copyright {
 }
 .live-block .breaking-section {
   padding: 10px 0;
+  line-height: 22px;
 }
 .live-block .breaking-section + .breaking-section {
   border-top: 1px solid #dddddd;
+}
+.live-block .breaking-section .breaking-date {
+  color: #9f9f9f;
+  font-size: 12px;
+  font-size: 0.75rem;
+  margin-bottom: 5px;
 }
 
 /*End anchors listing css*/

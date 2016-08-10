@@ -41,21 +41,6 @@ a{
 .widget-title{
     @include story-tag(22px,22px);   
 }
-.widget-settings {
-    background-color: #a00606;
-    display: inline-block;
-    left: 0;
-    max-width: 100%;
-    padding-right: 30px;
-    position: relative;
-    top: 0;
-    vertical-align: top;
-}
-.widget-settings .widget-title-wrapper {
-    display: inline-block;
-    vertical-align: top;
-    width: auto;
-}
 /*Start CSS Top Story Home Page*/
     .tab-buttons {
         @include clearfix;
@@ -138,8 +123,10 @@ a{
     .widget-title{
         @include pos(relative);
         @include display-inline;
+    }
+    .widget-settings{
         margin-bottom: 5px;
-    }    
+    }
 }
 .dont-miss{    
     /*padding: 30px 10px 0px 10px;*/
@@ -151,7 +138,7 @@ a{
             padding: 0 0px 20px 0;
             border:none; 
             .dm-pic{
-                width: 170px;
+                width: 46.6%;
             }            
             .dm-detail{
                 h4{
@@ -188,7 +175,7 @@ a{
         }
         li{
             &.may-we-suggest{
-             padding:0 10px;   
+             padding:10px 0;   
             }            
             &+li{
                border-top: 1px solid $border-color;
@@ -371,13 +358,11 @@ a{
     }
 /*End CSS Featured-news Home Page*/  
 /*Start Dont miss Home page css*/
-.dont-miss{    
-    padding: 30px 0px 0px 20px;
+.dont-miss{        
     ul{
         .dont-miss-listing{
             @include float(left);
-            @include calculate-width(2);
-            padding: 0 20px 25px 0;
+            @include calculate-width(2);            
             &:nth-child(2n+1){
                 clear:left;
             }
