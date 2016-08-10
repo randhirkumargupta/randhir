@@ -141,19 +141,24 @@ class itg_auto_save {
   /**
    * Prepare presave array for file field.
    *
-   * @param array $value
-   *   File field value/
-   *
-   * @return array
-   *   Extracted file values.
+   * @param string $field_name
+   *   Machine name of the current field.
+   * @param array $inputs
+   *   File field submitted value.
+   * @param stdObject
+   *   Node object.
    */
-  public function itg_save_field_file($value) {
-    $this->file_arr = array();
-    $this->file_arr['fid'] = $value['und'][0]['fid'];
-    $this->file_arr['display'] = $value['und'][0]['display'];
-    $this->file_arr['description'] = $value['und'][0]['description'];
-
-    return $this->file_arr;
+  public function itg_save_field_file($field_name, $inputs, &$node) {
+    $this->file = $inputs[$node->language][0];
+    if ($this->file['fid'] > 0) {
+      $node->{$field_name}[$node->language][0]['fid'] = $this->file['fid'];
+    }
+    if ($this->file['description'] != '') {
+      $node->{$field_name}[$node->language][0]['description'] = $this->file['description'];
+    }
+    if ($this->file['display'] != '') {
+      $node->{$field_name}[$node->language][0]['display'] = $this->file['display'];
+    }
   }
 
   /**
@@ -423,6 +428,11 @@ class itg_auto_save {
           if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
             return TRUE;
           }
+          break;
+        case 'file':
+          if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
+            return TRUE;
+          } 
       }
     }
     
@@ -472,8 +482,7 @@ class itg_auto_save {
           }
           $this->value = $inputs[$field['fieldName']]['und'];
           $this->var_type = gettype($this->value);
-          if ($this->var_type == 'string') {
-            
+          if ($this->var_type == 'string') {            
             $this->value = (int) $this->value;            
           }                   
           if (!empty($this->value) && is_array($this->value)) {            
@@ -496,7 +505,7 @@ class itg_auto_save {
           
         case 'field_collection':
           // Save field name of field collection to array.
-          //$this->temp[] = $field['fieldName'];
+          $this->temp[] = $field['fieldName'];
           break;
 
         case 'text_long':          
@@ -542,12 +551,49 @@ class itg_auto_save {
             $this->target_id = (int) $inputs[$field['fieldName']]['und'];
             $node->{$field['fieldName']}['und'][0]['target_id'] = $this->target_id;
           }
+          
+          break;
+        case 'image':
+          $this->itg_save_field_image($field['fieldName'], $inputs[$field['fieldName']], $node);
+          
+          break;
+        case 'file':
+          $this->itg_save_field_file($field['fieldName'], $inputs[$field['fieldName']], $node);
       }
     }
 
     return $this->temp;
   }
   
+  /**
+   * Prepare node object for image field.
+   *
+   * @param string $field_name
+   *   Machine name of the field.
+   * @param array $inputs
+   *   Form submitted data for current field.
+   * @param type $node
+   *   Node object.
+   */
+  public function itg_save_field_image($field_name, $inputs, &$node) {
+    // Assign fid to field.
+    if ($inputs[$node->language][0]['fid'] > 0) {
+      $node->{$field_name}[$node->language][0]['fid'] = $inputs[$node->language][0]['fid'];
+    }
+    // Assign alternative text.
+    if ($inputs[$node->language][0]['alt'] != '') {
+      $node->{$field_name}[$node->language][0]['alt'] = $inputs[$node->language][0]['alt'];
+    }
+    // Assign title text.
+    if ($inputs[$node->language][0]['title'] != '') {
+      $node->{$field_name}[$node->language][0]['title'] = $inputs[$node->language][0]['title'];
+    }
+    // Assign display mode.
+    if ($inputs[$node->language][0]['display'] != '') {
+      $node->{$field_name}[$node->language][0]['display'] = $inputs[$node->language][0]['display'];
+    }    
+  }
+
   /**
    * Create field collection items.
    *
@@ -574,8 +620,11 @@ class itg_auto_save {
           break;
 
         case 'taxonomy_term_reference':
-          $this->value = $inputs[$field['fieldName']]['und'];
-          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['tid'] = $this->value;          
+          $this->value = $inputs[$field['fieldName']]['und'];          
+          $this->value = (int) $this->value;          
+          if ($this->value > 0) {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['tid'] = $this->value;
+          }
           
           break;       
 
@@ -595,8 +644,34 @@ class itg_auto_save {
           }          
           
           break;
+          
+        case 'file':
+          $this->value = $inputs[$field['fieldName']]['und'][0];
+          $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
       }
     }    
+  }
+ 
+  /**
+   * Prepare file field for field collection.
+   * 
+   * @param stdObject $fc_item
+   *   Field collection item object.
+   * @param array $field_value
+   *   Value of file field.
+   * @param string $field_name
+   *   Machine name of the current field.
+   */
+  public function itg_save_file_field_collection(&$fc_item, $field_value, $field_name) {    
+    if ($field_value['fid'] > 0) {
+      $fc_item->{$field_name}[LANGUAGE_NONE][0]['fid'] = $field_value['fid'];
+    }
+    if ($field_value['description'] != '') {
+      $fc_item->{$field_name}[LANGUAGE_NONE][0]['description'] = $field_value['description'];
+    }
+    if ($field_value['display'] != '') {
+      $fc_item->{$field_name}[LANGUAGE_NONE][0]['display'] = $field_value['display'];
+    }
   }
 
   /**

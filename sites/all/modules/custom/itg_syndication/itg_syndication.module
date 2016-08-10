@@ -23,6 +23,13 @@ function itg_syndication_menu() {
       'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,      
   );
+  
+  
+  $items['magazine-check-ajax'] = array(
+    'page callback' => 'itg_magazine_custom_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -480,24 +487,32 @@ function itg_syndication_node_validate($node, $form, &$form_state) {
  * function for Issue list
  * @return array $data
  */
-function itg_syndication_get_issue_list() {
-  
+function itg_syndication_get_issue_list($magazine = NULL) {
+  $type = 'issue';
+  if (isset($magazine)) {
+    $type = 'magazine';
+  }
   // Create default option for list
   $data[''] = '- Select -';
-  
+
   $itg_query = db_select('node', 'n');
-              $itg_query->fields('n', array('title'));      
-              $itg_query->condition('n.type', 'issue');              
+  $itg_query->fields('n', array('title', 'nid'));
+  $itg_query->condition('n.type', $type);
   $itg_result = $itg_query->execute()->fetchAll();
-  
+
   foreach ($itg_result as $itg_val) {
-    $dt = date('Y-m-d', strtotime($itg_val->title));
-    $data[$dt] = date('d/m/Y', strtotime($itg_val->title));
+    if (isset($magazine)) {
+      $type = 'magazine';
+      $data[$itg_val->nid] = $itg_val->title;
+    }
+    else {
+      $dt = date('Y-m-d', strtotime($itg_val->title));
+      $data[$dt] = date('d/m/Y', strtotime($itg_val->title));
+    }
   }
-  
+
   return $data;
 }
-
 
 /**
  * function for syndication content details
@@ -940,3 +955,43 @@ function itg_syndication_rule_after_build_validate($form, &$form_state) {
 
   }
 } 
+
+/**
+ * Implement itg_magazine_custom_callback
+ */
+function itg_magazine_custom_callback($mag_id = NULL) {
+
+  if (isset($mag_id)) {
+    $mag_id = $mag_id;
+  }
+  else {
+    $mag_id = $_POST['magazine'];
+  }
+
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('nid', 'title'));
+  $itg_query->join('field_data_field_issue_magazine', 'sc', 'n.nid = sc.entity_id');
+  $itg_query->condition('sc.field_issue_magazine_target_id', $mag_id);
+  $itg_query->condition('n.type', 'issue');
+
+  $itg_result = $itg_query->execute()->fetchAll();
+
+
+  if (empty($_POST['magazine'])) {
+    foreach ($itg_result as $itg_val) {
+      $dt = date('Y-m-d', strtotime($itg_val->title));
+      $data[$dt] = date('d/m/Y', strtotime($itg_val->title));
+    }
+    return $data;
+  }
+  else {
+    $drop = '<option value="_none">- Select -</option>';
+    foreach ($itg_result as $itg_val) {
+      $dt = date('Y-m-d', strtotime($itg_val->title));
+      $data[$dt] = date('d/m/Y', strtotime($itg_val->title));
+      $drop .= '<option value="' . $dt . '">' . date('d/m/Y', strtotime($itg_val->title)) . '</option>';
+    }
+
+    echo $drop;
+  }
+}

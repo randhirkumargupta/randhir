@@ -87,10 +87,10 @@ function get_itg_widget($widget_name, $widget_url = NULL) {
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
     return create_setion_widgets($widget_url);
   }
-  elseif (isset($widget_name) && $widget_name == 'photo_list_of_category') {    
+  elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {    
     //return 'shravan kumar'; //'photo_list_of_category'; //code views rander
     
-    return views_embed_view('photo_list_of_category', 'block', $widget_url);
+    return views_embed_view($widget_name, 'block', $widget_url);
   }
   else {      
     $block = block_load('itg_widget', $widget_name);
@@ -171,7 +171,7 @@ function get_layout_details($section_name, $template_name, $status) {
   }
   
   $itg_result = $itg_query->execute()->fetchAll();
-  
+  //p($itg_result);
   foreach ($itg_result as $itg_val) {
     $result['widget_name'] = $itg_val->widget_name;
     $result['block_title'] = $itg_val->block_title;
@@ -187,7 +187,7 @@ function get_layout_details($section_name, $template_name, $status) {
     
     $data[$itg_val->block_name] = $result;
   }
-  
+  //p($data);
   return $data; 
   
 }
@@ -223,4 +223,68 @@ function display_section_widgets_list($section_name, $template_name, $widget_typ
   $content .= '</ul>';
   
   return $content;
+}
+
+/**
+ * Get section widgets id
+ * @return int
+ */
+function get_section_widgets_id($cid, $section) {
+  $query = db_select('itg_section_widgets_list', 'section');
+  $query->fields('section', array('id'));  
+  $query->condition('category_id', $cid);
+  $query->condition('template_section_name', $section);
+  return $query->execute()->fetchField();
+}
+
+
+/**
+ * Get current poll widgets list for layout setting page 
+ * @return array
+ */
+function get_widgets_poll_list() {
+  
+  $date = date('Y-m-d H:i:s');
+  //echo $date;
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_poll_start_date', 'start_date', 'start_date.entity_id = n.nid');
+  $query->leftJoin('field_data_field_poll_end_date', 'end_date', 'end_date.entity_id = n.nid');
+  $query->fields('n', array('title', 'nid'));  
+  $query->condition('type', 'poll');
+  $query->condition('start_date.field_poll_start_date_value', $date, '<=');
+  $query->condition(db_or()->isNull('end_date.field_poll_end_date_value')->condition('end_date.field_poll_end_date_value', $date, '>='));
+  
+  $itg_result = $query->execute()->fetchAll();
+  
+  $widget_name = $widget_type;
+  
+  $content = '<ul id="poll-widgets" class="no-bullet pd-10 templates-widgets">';
+  
+  foreach ($itg_result as $row) {    
+    $content .= '<li id="'.$row->title.'" data-widget="'.$widget_name.'#'.$row->nid.'">'
+            . '<span>'.$row->title.'</span>'            
+            . '</li>';
+  }
+  
+  $content .= '</ul>';
+  
+  return $content;
+}
+
+/**
+ * Get itg setion widgets 
+ * @return array
+ */
+function create_setion_widgets($section_id) {
+  module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
+  // value is hardcoded need to be change for dyanamic functionality
+  $info['section'] = $section_id; // tid of section
+  $info['content_type'] = ''; // content type machine name
+  // view name which is stored in draggableviews_structure table
+  $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
+  $block['subject'] = t('Section wise ordering from custom table');
+  
+  $data = itg_widget_section_wise_ordering_from_custom_table($info);
+  
+  return theme("section_wise_ordering", array("data" => $data));
 }

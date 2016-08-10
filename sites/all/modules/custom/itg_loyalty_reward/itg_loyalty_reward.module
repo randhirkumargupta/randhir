@@ -28,14 +28,13 @@ function itg_loyalty_reward_menu() {
   $items = array();
   
   $items['loyalty-points-configuration'] = array(
-      'title' => t('Loyalty Points Configuration Form'),
+      'title' => 'Loyalty Points Configuration Form',
       'page callback' => 'drupal_get_form',
-      'page arguments' => array('loyalty_points_configuration_form'),
+      'page arguments' => array('loyality_reward_points_configuration_form'),
       'access callback' => 'user_access',
       'access arguments' => array('loyalty points configuration form'),
       'file' => 'includes/itg_loyalty_points_form.inc',
   );
-  
   return $items;
 }
 
@@ -46,8 +45,9 @@ function itg_loyalty_reward_menu() {
 function itg_loyalty_reward_form_alter(&$form, &$form_state, $form_id) {
 
   // Alter for "loyalty_points_configuration_form"
-  if ($form_id == 'loyalty_points_configuration_form') {
-   drupal_set_title(t('Loyalty Points Configuration Form:')); 
+  if ($form_id == 'loyality_reward_points_configuration_form') {
+   drupal_set_title(t('Loyalty Points Configuration Form'));
+   $form['#attributes']['class'] = array('node-form');
    $form['actions']['submit']['#value'] = 'Save';
   }
 

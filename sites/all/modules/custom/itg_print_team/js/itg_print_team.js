@@ -12,7 +12,7 @@
             var type = settings.itg_print_team.settings.type;
             var nid = settings.itg_print_team.settings.nid;
             var print_media = settings.itg_print_team.settings.print_media;
-         
+
             // Hide left side vertical tabs in case of simple users
             if (uid != 1) {
                 $('.field-edit-link').hide();
@@ -27,6 +27,9 @@
             $('#edit-reset').click(function(){
               $('.views-widget-filter-uid #edit-uid').val('');
             });
+            
+            // Hide operation fieldset from view listing page
+            $('.view-manage-print-team #edit-select').hide();
             
             // If print media content exists
             if (print_media) {

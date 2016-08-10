@@ -11,10 +11,23 @@
 <div id="videoupload">
   <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
   <div class="browse-ftp">
-  <?php print drupal_render($form['video_browse_select']); ?>
+    <div id="itg_video_content">
+        <div class="video-ftp">Server</div>
+        <div class="video-local">Local Browse</div>
+        <div class="ftp-server">
+          <?php print drupal_render($form['video_browse_select']); ?>
+        </div>
+        <div class="local_browse" style="display: none">
+          <span class="button browse-local">Local Browse</span>
+        </div>
+
+    </div>
 </div>
-  <?php print drupal_render($form['upload']); ?>
-  <?php print drupal_render($form['field_videogallery_video_upload']); ?>
+  <span class="browse-ftp-click button">Browse Video</span>
+  <span class="error vid-error"></span>
+  <?php print drupal_render($form['field_upload_video']); ?>
+  <?php print drupal_render($form['field_story_expert_name']); ?>
+  <?php print drupal_render($form['field_story_expert_description']); ?>
 </div>
 
 <div id="Imageupload">

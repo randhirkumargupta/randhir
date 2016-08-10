@@ -71,10 +71,10 @@ function features_for_print_team_strongarm() {
           'weight' => '8',
         ),
         'title' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'path' => array(
-          'weight' => '5',
+          'weight' => '7',
         ),
       ),
       'display' => array(),

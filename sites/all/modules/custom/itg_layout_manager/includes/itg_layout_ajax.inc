@@ -20,6 +20,7 @@ function insert_layout_setting_ajax() {
   
   // code for layout setting
   if ($arg[1] == 'layout' || $arg[1] == 'title') {
+    
     // insert layout tpl details
     if (empty($unpublish_tpl_id)) {        
       $query_layout_tpl = db_insert('itg_layout_tpl');
@@ -57,7 +58,7 @@ function insert_layout_setting_ajax() {
       // for widget name
       $widget = explode('#', $_GET['widget_name']);
       
-      if ($widget[0] == 'photo_list_of_category') {
+     /* if ($widget[0] == 'photo_list_of_category' || $widget[0] == 'video_list_of_category') {
         $query = db_select('taxonomy_term_data', 'ttd');
         $query->fields('ttd', array('name'));  
         $query->condition('tid', $widget[1], '=');
@@ -65,9 +66,10 @@ function insert_layout_setting_ajax() {
         
         $block_title = $cat_name;
       }
-      else {
+      else {        
         $block_title = $_GET['block_title'];
-      }
+      }*/
+      $block_title = $_GET['block_title'];
       $query_layout_manager = db_insert('itg_layout_manager');
       $query_layout_manager->fields(array(
         'layout_id' => $unpublish_tpl_id,        
@@ -85,11 +87,11 @@ function insert_layout_setting_ajax() {
             ->fields(array('block_title' => $_GET['block_title']))
             ->condition('id', $layout_id)->execute();
       } else {
-        
+        $block_title = $_GET['block_title'];
         $widget = explode('#', $_GET['widget_name']);
          
         db_update('itg_layout_manager')
-              ->fields(array('widget_name' => $widget[0], 'filter_url' => $widget[1]))              
+              ->fields(array('widget_name' => $widget[0], 'block_title' => $block_title, 'filter_url' => $widget[1]))              
               ->condition('id', $layout_id)->execute();
         
       }
@@ -178,59 +180,4 @@ function get_layout_block_details($layout_id, $id) {
   }  
   
   return $data_array;
-}
-
-
-/**
- * Implements page callback.
- * @return
- */
-function section_widgets_ajax() {
-  global $user;  
-  $arg = arg();
-  
-  if($arg[1] == 'insert') {
-    // insert query
-    if ((isset($_GET['section_name']) && ($_GET['section_name'] != '_none')) && (isset($_GET['template_name']) && ($_GET['template_name'] != '_none'))) {
-      //widgets_type
-      $category_array = explode('(', $_GET['category_name']);
-      $cid = substr($category_array[1], 0,-1);
-      // category exit or not for this section
-      $check_cid = get_section_widgets_id($cid, $_GET['section_name']);
-      
-      if (empty($check_cid)) {
-        $query_layout_tpl = db_insert('itg_section_widgets_list');
-            $query_layout_tpl->fields(array(
-              'template_section_name' => $_GET['section_name'],
-              'template_name' => $_GET['template_name'],
-              'category_name' => $category_array[0],
-              'category_id' => $cid,
-              'widget_type' => $_GET['widgets_type'],
-              'created_date' => time()        
-            ));
-
-            $unpublish_tpl_id = $query_layout_tpl->execute();
-      }
-    }
-  }
-  elseif ($arg[1] == 'delete') {
-    db_delete('itg_section_widgets_list')->condition('id', $_GET['id'])->execute();
-  }
-  
-  $content = display_section_widgets_list($_GET['section_name'], $_GET['template_name'], $_GET['widgets_type']); 
-  echo $content;
-  exit;
-  
-}
-
-/**
- * Get section widgets id
- * @return int
- */
-function get_section_widgets_id($cid, $section) {
-  $query = db_select('itg_section_widgets_list', 'section');
-  $query->fields('section', array('id'));  
-  $query->condition('category_id', $cid);
-  $query->condition('template_section_name', $section);
-  return $query->execute()->fetchField();
 }

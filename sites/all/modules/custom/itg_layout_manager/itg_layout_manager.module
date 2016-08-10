@@ -13,6 +13,9 @@ module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.he
 //All form releted function of layout manager.
 module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.form');
 
+function itg_layout_manager_init() {
+  //get_widgets_poll_list();
+}
 
 /**
  * Implements hook_menu().
@@ -45,7 +48,7 @@ function itg_layout_manager_menu() {
       'page callback' => 'section_widgets_ajax',
       'access arguments' => array('access itg story'),
       'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_ajax.inc',
+      'file' => 'includes/itg_layout_autocomplete.inc',
   );
   
   // Autocomplete callback for category name
@@ -95,6 +98,11 @@ function itg_layout_manager_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['header_snap_post_block'] = array(
+    'info' => t('Snap post Header Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -127,8 +135,10 @@ function itg_layout_manager_block_view($delta = '') {
     case 'layout_widget_list_block':      
       $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);      
       if (empty($template_id)) {
-        $widget_array = get_all_widgets_list_by_setting_page();
-      }      
+        $widget_array['default_widget'] = get_all_widgets_list_by_setting_page();
+      }
+      
+      $widget_array['poll_widget'] = get_widgets_poll_list();
       $block['content'] = theme('layout_widgets_list_block', array('data' => $widget_array));
     break;
     
@@ -140,8 +150,11 @@ function itg_layout_manager_block_view($delta = '') {
       $section_widgets_form = drupal_get_form('layout_section_widgets_search_form');
       $data['section_widgets_form'] = drupal_render($section_widgets_form);
       //condition base change widget
-      if ($_GET["template_name"] == 'page--section_photo' || $_GET["template_name"] == 'page--section_photo') {
+      if ($_GET["template_name"] == 'page--section_photo') {
         $widgets_type = 'photo_list_of_category';
+      }
+      elseif ($_GET["template_name"] == 'page--section_video') {
+        $widgets_type = 'video_list_of_category';
       }
       else {
        $widgets_type = 'section_wise_order';
@@ -151,6 +164,11 @@ function itg_layout_manager_block_view($delta = '') {
         
       $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
     break;
+    
+    case 'header_snap_post_block':      
+      $block['content'] = theme('header_snap_post_block', array('data' => $data));
+      break;
+    
   }
   
   return $block;
@@ -207,6 +225,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
       'template' => 'layout-section-widgets-block',      
       'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
     ),
+    'header_snap_post_block' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'itg-header-snap-post',
+      'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+    ),
   );
   
   return $themes;
@@ -245,23 +268,3 @@ function itg_layout_manager_preprocess_page(&$vars) {
     }
   }
 }
-
-
-/**
- * Get itg setion widgets 
- * @return array
- */
-function create_setion_widgets($section_id) {
-  module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
-  // value is hardcoded need to be change for dyanamic functionality
-  $info['section'] = $section_id; // tid of section
-  $info['content_type'] = ''; // content type machine name
-  // view name which is stored in draggableviews_structure table
-  $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-  $block['subject'] = t('Section wise ordering from custom table');
-  
-  $data = itg_widget_section_wise_ordering_from_custom_table($info);
-  
-  return theme("section_wise_ordering", array("data" => $data));
-}
-

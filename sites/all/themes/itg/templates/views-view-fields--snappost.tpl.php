@@ -34,8 +34,17 @@
         <?php print $field->content; ?>
       <?php print $field->wrapper_suffix; ?>
     <?php endforeach; ?>
-    <div class="snap-button">
-        <a href="#" class="agree"><i class="fa fa-thumbs-o-up"></i> AGREE</a>
-        <a href="#" class="disagree"><i class="fa fa-thumbs-o-down"></i> DISAGREE</a>
+    <div class="snap-post-btm">
+        <div class="snap-button">
+            <a href="#" class="agree"><i class="fa fa-thumbs-o-up"></i> AGREE</a>
+            <a href="#" class="disagree"><i class="fa fa-thumbs-o-down"></i> DISAGREE</a>
+        </div>
+        <div class="snap-social">
+            <ul>
+                <li><a href="#"><i class="fa fa-facebook"></i><span>Share</span></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i><span>Twitter</span></a><span class="twt-count">0</span></li>
+                <li><a href="#"><i class="fa fa-comment-o"></i><span>Comment</span></a></li>
+            </ul>
+        </div>
     </div>
 </div>
