@@ -223,7 +223,7 @@ img {
 }
 
 .widget-title {
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
   background: #a00606;
@@ -238,6 +238,9 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+}
+.widget-title a {
+  color: #fff;
 }
 
 .success-message, .messages--status {
@@ -424,9 +427,7 @@ input[type="text"], select, input[type="password"] {
 
 #page-title {
   font-size: 24px;
-  line-height: 28px;
   font-weight: 500;
-  margin-bottom: 10px;
 }
 
 #block-formblock-ask-an-expert h2 {
@@ -1150,6 +1151,9 @@ footer .footer-copyright {
 .big-news .big-story-col-1, .big-news .big-story-col-2 {
   padding: 0 15px;
 }
+.big-news .big-story-col-1 .story-tag {
+  position: absolute;
+}
 .big-news h1 {
   margin-bottom: 10px;
 }
@@ -1207,7 +1211,7 @@ footer .footer-copyright {
   font-weight: 500;
 }
 .big-news .story-tag {
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
   background: #a00606;
@@ -1223,6 +1227,9 @@ footer .footer-copyright {
   text-overflow: ellipsis;
   max-width: 100%;
   margin: 10px 0 0 10px;
+}
+.big-news .story-tag a {
+  color: #fff;
 }
 
 /*End CSS Big New Home page*/
@@ -1340,6 +1347,10 @@ footer .footer-copyright {
 
 /*End CSS Featured New Home page*/
 /*Start CSS section story Home page*/
+.section_wise_order .widget-title {
+  position: absolute;
+}
+
 .section-ordering h3 {
   padding: 15px 0;
 }

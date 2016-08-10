@@ -247,7 +247,7 @@ a {
 
 /*End CSS section story Home page*/
 .widget-title {
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
   background: #a00606;
@@ -262,6 +262,9 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+}
+.widget-title a {
+  color: #fff;
 }
 
 /*Start Dont miss Home page css*/
