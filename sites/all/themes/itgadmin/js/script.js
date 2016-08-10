@@ -745,6 +745,7 @@
     // jQuery code for widget-trigger
     $('body').on('click', '.widget-trigger', function(){
       $(this).prev().toggleClass('active');
+      $(this).prev('.widget-title-wrapper.active').find('input[type="text"]').focus();
     });
     
   };

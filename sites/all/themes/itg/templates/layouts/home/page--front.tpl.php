@@ -169,7 +169,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             <?php print $widget_data['itg-block-2']['widget']; ?>
                             </div>
                                 <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
-                                <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
+                                <div class="widget-settings">
+                                  <div class="widget-title-wrapper">
+                                    <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
+                                  </div>
+                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                </div>
                                 <?php } ?>
                         </div>
                         <div class="itg-widget-child tab-data tab-data-2 hide">
@@ -177,7 +182,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             <?php print $widget_data['itg-block-3']['widget']; ?>
                             </div>
                             <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                            <div class="widget-settings">
+                              <div class="widget-title-wrapper">
                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />
+                              </div>
+                              <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                            </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -207,7 +217,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 </div>
                     </div>
                 </div>
-                    <div class="itg-widget <?php print $gray_bg_layout;?>">
+                    <div class="itg-widget <?php print $gray_bg_layout;?> trending-list">
                         <div class="tab-buttons">
                             <span data-id="tab-data-1" class="active">
                               <?php if (!$widget_data['itg-block-5']['block_title']) { 
@@ -229,7 +239,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 <?php print $widget_data['itg-block-5']['widget']; ?>
                             </div>
                             <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
-                                <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id" placeholder="Enter Title" />  
+                                <div class="widget-settings">
+                                  <div class="widget-title-wrapper">
+                                    <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id" placeholder="Enter Title" />
+                                  </div>
+                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                </div>  
                             <?php } ?>    
                         </div>
                         <div class="itg-widget-child tab-data tab-data-2 hide">
@@ -242,7 +257,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 <?php print $widget_data['itg-block-6']['widget']; ?>
                             </div>
                             <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
-                                <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />    
+                                <div class="widget-settings">
+                                  <div class="widget-title-wrapper">
+                                    <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />
+                                  </div>
+                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                </div>    
                             <?php } ?>
                         </div>
                     </div>
