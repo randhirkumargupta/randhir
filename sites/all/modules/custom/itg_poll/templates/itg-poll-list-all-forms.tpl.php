@@ -2,16 +2,37 @@
 
 /**
  * @file
- * Theme implementation for poll form in tab display.
- * 
+ * Theme implementation for poll form for front end page.
  */
-//foreach($data as $poll_form){
-//    print drupal_render($poll_form);
-//}
 
 global $user;
 global $base_url;
 $nid = $data['list']->nid;
+
+$related_stories = '';
+
+// Related node
+
+if(isset($data['related_nodes']) && !empty($data['related_nodes'])){
+    $related_stories = '<div>RELATED STORY</div><ul class="related-stories">';
+
+    foreach($data['related_nodes'] as $related_stories_data){
+          $related_stories .= '<li>'.$related_stories_data.'</li>';
+     }
+     $related_stories .= '</ul>';
+
+}
+
+// Banner Image
+
+if(isset($data['poll_banner_image']) && !empty($data['poll_banner_image'])) {
+   $poll_banner_image = '<div class="poll-banner-image">'.$data['poll_banner_image'].'</div>';
+} else {
+   $poll_banner_image = '';
+}
+
+// Getting current index
+
 $current_index = isset($_GET['poll_index']) && !empty($_GET['poll_index']) ? $_GET['poll_index'] : 0;
 $poll_count = $data['count'];
 $pre = '';
@@ -31,12 +52,18 @@ $isCookies = itg_poll_isCookies($nid);
 $poll_uid = itg_poll_getcurrent_userpoll($nid, $user->uid);
 if (($isCookies != 'yes' && user_is_anonymous()) || (user_is_logged_in() && $poll_uid != $user->uid)) {
     if (isset($nid) && !empty($nid)) {
-        print '<div class="poll-replace-id">'.drupal_render(drupal_get_form('itg_poll_form_new', $nid)).'</div>';
+        print $poll_banner_image.'<div class="poll-replace-id">'.drupal_render(drupal_get_form('itg_poll_form_new', $nid)).'</div>'.$related_stories;
     }
 } else {
-    print '<div class="poll-replace-id">'.itg_poll_get_past_data($nid).'</div>';
+    print $poll_banner_image.'<div class="poll-replace-id">'.itg_poll_get_past_data($nid).'</div>'.$related_stories;
 }
 
 print '<div class="poll-wrapper-next-navigator">' . $next . '</div>';
 print '</div>';
+
+
+// Printing past polls
 ?>
+<div class="past-polls">
+<?php print views_embed_view('past_polls','block'); ?>
+</div>
