@@ -756,10 +756,6 @@ function feature_for_video_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['id'] = 'field_videogallery_video_upload_value';
-  $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['table'] = 'field_data_field_videogallery_video_upload';
-  $handler->display->display_options['relationships']['field_videogallery_video_upload_value']['field'] = 'field_videogallery_video_upload_value';
   /* Relationship: Content: Video (field_upload_video:fid) */
   $handler->display->display_options['relationships']['field_upload_video_fid']['id'] = 'field_upload_video_fid';
   $handler->display->display_options['relationships']['field_upload_video_fid']['table'] = 'field_data_field_upload_video';
@@ -813,13 +809,6 @@ print \'Status not found.\';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
