@@ -133,9 +133,6 @@ function itg_widget_views_pre_render(&$view) {
       $header_content .= l(t('Back to big story widget'), 'big-story-widget-list');
       $view->attachment_before = $header_content;
     }
-    if (!isset($_GET['type'])) {
-      unset($view->result);
-    }
   }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'dont_miss_content') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';

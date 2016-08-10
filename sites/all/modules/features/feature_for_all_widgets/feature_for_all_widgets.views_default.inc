@@ -1818,10 +1818,8 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
     10 => '10',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'input_required';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
-  $handler->display->display_options['exposed_form']['options']['text_input_required'] = '';
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
@@ -2199,6 +2197,13 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]  </span> ';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Title */
@@ -2475,7 +2480,7 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['label'] = 'Byline\'s Email id';
-  /* Field: Content: Twitter Handle */
+  /* Field: Content: Reporter Twitter Handle */
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['id'] = 'field_reporter_twitter_handle';
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['table'] = 'field_data_field_reporter_twitter_handle';
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['field'] = 'field_reporter_twitter_handle';

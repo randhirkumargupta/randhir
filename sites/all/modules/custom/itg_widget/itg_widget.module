@@ -790,7 +790,8 @@ function itg_widget_preprocess_views_view(&$vars) {
       'widget_anchors_listing',
       'home_page_feature_widget',
       'story_widget',
-      'section_wise_content_ordering_list'
+      'section_wise_content_ordering_list',
+      'section_wise_draggable_content_order',
   );
   if(in_array($view_name, $widget_views)) {
     $vars['classes_array'][] = 'widgets-view';
