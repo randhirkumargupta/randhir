@@ -61,6 +61,11 @@
                 $('#edit-field-pti-words-limit').hide();
                 $('#edit-field-survey-end-date').hide();
               }
+              
+              // Scroll page to show comment section
+              $('html, body').animate({
+                  scrollTop: $("#edit-field-pti-idea-status").offset().top
+                }, 1000);
             });
         }
     };

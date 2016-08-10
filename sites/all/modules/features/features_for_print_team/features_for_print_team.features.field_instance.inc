@@ -205,7 +205,51 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 15,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-print_team_integration-field_pti_idea_submit_status'.
+  $field_instances['node-print_team_integration-field_pti_idea_submit_status'] = array(
+    'bundle' => 'print_team_integration',
+    'default_value' => array(
+      0 => array(
+        'value' => 'pending',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_pti_idea_submit_status',
+    'label' => 'Idea Submit Status',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 8,
     ),
   );
 
@@ -246,7 +290,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -287,7 +331,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -370,7 +414,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 19,
     ),
   );
 
@@ -416,7 +460,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 12,
+      'weight' => 4,
     ),
   );
 
@@ -459,7 +503,7 @@ function features_for_print_team_field_default_field_instances() {
         'size' => 40,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 16,
     ),
   );
 
@@ -497,7 +541,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
@@ -536,7 +580,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 18,
     ),
   );
 
@@ -595,7 +639,7 @@ function features_for_print_team_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 14,
+      'weight' => 17,
     ),
   );
 
@@ -604,6 +648,7 @@ function features_for_print_team_field_default_field_instances() {
   t('Comment');
   t('Idea Brief');
   t('Idea Status');
+  t('Idea Submit Status');
   t('Image');
   t('Issue');
   t('Magazine');
