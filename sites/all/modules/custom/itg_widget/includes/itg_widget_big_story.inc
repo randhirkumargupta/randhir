@@ -24,7 +24,7 @@ function save_big_story_widget_data($big_story_data) {
     $related_nodes_json = get_related_content_with_server_prefix($related_content_string);
   }
   // Get related nodes then convert into json.
-  if ($_GET['type'] == 'breaking_news') {
+  if ($_GET['type'] == 'breaking_news' || isset($big_story_data['values']['related_content'])) {
     $related_content_string = $big_story_data['values']['related_content'];
     $related_nodes_json = get_related_content_with_server_prefix($related_content_string);
   }
@@ -76,5 +76,4 @@ function itg_widget_big_story_block_data($info) {
     }
     return $entity_data;
   }
-  return $data;
 }
