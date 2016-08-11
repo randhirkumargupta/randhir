@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block .breaking-section .social-share ul {
   list-style-type: none;
 }
 
@@ -1157,7 +1157,16 @@ footer .footer-copyright {
   position: absolute;
 }
 .big-news h1 {
+  position: relative;
   margin-bottom: 10px;
+}
+.big-news h1:after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: #f40000;
+  border-radius: 100%;
+  display: inline-block;
 }
 .big-news a {
   color: #fff;
@@ -2023,6 +2032,9 @@ footer .footer-copyright {
   line-height: 19px;
   color: #323232;
 }
+.top-takes-video-container ul li.top-takes-video {
+  padding: 10px 0;
+}
 .top-takes-video-container ul li + li {
   border-top: 1px solid #dddddd;
 }
@@ -2528,6 +2540,36 @@ footer .footer-copyright {
   font-size: 0.75rem;
   margin-bottom: 5px;
 }
+.live-block .breaking-section .social-share {
+  margin-top: 10px;
+}
+.live-block .breaking-section .social-share ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 15px;
+}
+.live-block .breaking-section .social-share ul li a {
+  background: #000;
+  width: 23px;
+  height: 23px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+}
+.live-block .breaking-section .social-share ul li a.share {
+  color: #d0d0d0;
+}
+.live-block .breaking-section .social-share ul li a.share, .live-block .breaking-section .social-share ul li a.google {
+  background: transparent;
+}
+.live-block .breaking-section .social-share ul li a.facebook {
+  background: #0b4887;
+}
+.live-block .breaking-section .social-share ul li a.twitter {
+  background: #05a3d2;
+}
 
 /*End anchors listing css*/
 /*Start css No result found side bar*/
@@ -2565,3 +2607,92 @@ footer .footer-copyright {
 }
 
 /* End side bar common */
+/*Start photo section slider Homepage*/
+.featured_photo_carousel .widget-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.featured_photo_carousel .flexslider {
+  border: none;
+  margin: 0;
+}
+.featured_photo_carousel .flexslider .slides li {
+  position: relative;
+}
+.featured_photo_carousel .flexslider .slides li .detail {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+}
+.featured_photo_carousel .flexslider .slides li .detail .flex-caption {
+  padding: 15px 10px;
+  background: #000;
+  color: #fff;
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 24px;
+  width: auto;
+}
+.featured_photo_carousel .flexslider .slides li .detail .flex-count {
+  display: inline-block;
+  vertical-align: top;
+  background: #000;
+  opacity: .5;
+  color: #fff;
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 23px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  height: 23px;
+}
+.featured_photo_carousel .flexslider .flex-control-nav {
+  display: none;
+}
+.featured_photo_carousel .flexslider .flex-count {
+  display: inline-block;
+  vertical-align: top;
+  background: #000;
+  opacity: 0.6;
+  color: #fff;
+  font-size: 12px;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+}
+.featured_photo_carousel .flexslider .flex-count i {
+  margin-right: 5px;
+}
+.featured_photo_carousel .flexslider .flex-direction-nav a {
+  display: block;
+  opacity: 1;
+}
+.featured_photo_carousel .flexslider .flex-direction-nav a:before {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 30px;
+  display: inline-block;
+  color: #fff;
+  background: #67aaef;
+  Z-INDEX: 1;
+  WIDTH: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+.featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev {
+  left: 0;
+}
+.featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev:before {
+  content: '\f104';
+}
+.featured_photo_carousel .flexslider .flex-direction-nav a.flex-next {
+  right: 0;
+}
+.featured_photo_carousel .flexslider .flex-direction-nav a.flex-next:before {
+  content: '\f105';
+}
+
+/*End Photo section slider Homepage*/

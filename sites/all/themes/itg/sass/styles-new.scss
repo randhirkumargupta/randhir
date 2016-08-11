@@ -150,3 +150,51 @@
     }
   }
 }
+
+.itg-layout-container .itg-h450-section .droppable{
+  height: 450px;
+}
+.itg-layout-container .itg-h321-section .droppable, 
+.itg-layout-container .top-colum-3 .itg-widget-parent .droppable{
+  height: 321px;
+}
+.itg-layout-container .itg-top-section .top-colum-2 .droppable{
+  height: 673px;
+}
+.itg-layout-container .itg-top-section .top-colum-1 .droppable{
+  height: 637px;
+}
+.itg-layout-container .top-colum-3 .droppable{
+  height: 276px;
+}
+.itg-h450-section{
+  .widget-wrapper{
+    height: 100%;
+    padding: 10px;
+    background-color: #f3f3f3;
+  }
+}
+.itg-h321-section{
+  .dont_miss{
+    height: 100%;
+    padding: 5px 20px 8px;
+    background-color: #f3f3f3;
+  }
+}
+.widget-wrapper{
+  height: 100%; 
+  overflow: hidden;
+  .data-holder{
+    height: 100%;
+    .block-itg-widget{
+      height: 100%;
+      > div, > ul{
+        height: 100%;
+      } 
+  }
+  }
+}
+.widget-title{
+  display: inline-block;
+  vertical-align: top;
+}

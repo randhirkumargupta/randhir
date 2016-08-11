@@ -494,7 +494,7 @@ span.error{
 body.sidebar-second{
   .sidebars{
     position: fixed;
-    top: 199px;
+    top: 50px;
     left: 100%;
     width: 330px;
     z-index: 9999;
@@ -6105,5 +6105,75 @@ div.node{
     @extend .add-more;
     margin-top: 20px;
     cursor: pointer;
+  }
+}
+.view .view-filters .views-exposed-form{
+  #edit-category-tid-wrapper.views-exposed-widget{
+    width: auto;
+    .form-text, .form-select{
+      float: left;
+      margin-right: 10px;
+      position: static !important;
+      width: 140px;
+    }
+    .form-text:last-child, .form-select:last-child{
+      margin-right: 0;
+    }
+  }
+} 
+.itg-layout-container .itg-h450-section .droppable{
+  height: 450px;
+}
+.itg-layout-container .itg-h321-section .droppable{
+  height: 321px;
+}
+.itg-layout-container .itg-top-section .top-colum-2 .droppable{
+  height: 673px;
+}
+.itg-layout-container .itg-top-section .top-colum-1 .droppable{
+  height: 637px;
+}
+.itg-layout-container .top-colum-3 .droppable{
+  height: 277px;
+}
+.itg-h450-section{
+  .widget-wrapper{
+    height: 100%;
+    padding: 10px;
+    background-color: #f3f3f3;
+  }
+}
+.itg-h321-section{
+  .dont_miss{
+    height: 100%;
+    padding: 5px 20px 8px;
+    background-color: #f3f3f3;
+  }
+}
+.droppable .widget-wrapper{height: 100%; overflow: hidden;}
+.page-admin-structure-menu-manage{
+  .action-links{
+    @extend .no-bullet;
+    @extend .dib;
+    @extend .vtop;
+    @extend .full;
+    li{
+      @extend .fright;
+      margin-left: 10px;
+      a{
+        @extend .add-more;
+      }
+    }
+  }
+  #menu-overview{
+    @extend .views-table;
+  }
+  #menu-overview-form{
+    .form-actions{
+      #edit-actions-submit{
+        @extend .btn-save;
+        margin-top: 10px;
+      }
+    }
   }
 }

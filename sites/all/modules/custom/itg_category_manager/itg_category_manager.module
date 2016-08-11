@@ -988,6 +988,7 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Implements hook_block_info()
+ *  {@inheritdoc} 
  */
 function itg_category_manager_block_info() {
     $blocks['sef_url_log'] = array(

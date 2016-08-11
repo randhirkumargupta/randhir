@@ -149,6 +149,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       if ($idea_review_flag) {
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
           $form['field_story_category']['#access'] = FALSE;
+          $form['field_primary_cat_data']['#access'] = FALSE;
           unset($form['field_pti_print_media']);
           $form['field_pti_issue']['#access'] = FALSE;
           $form['field_pti_magazine']['#access'] = FALSE;
@@ -158,6 +159,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       } else {
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] !== 'Approved') {
           $form['field_story_category']['#access'] = FALSE;
+          $form['field_primary_cat_data']['#access'] = FALSE;
           $form['field_pti_magazine_kicker']['#access'] = FALSE;
           unset($form['field_pti_print_media']);
         }
@@ -184,6 +186,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_mark_as_complete']['#disabled'] = TRUE;
         $form['body']['#attributes'] = array('class' => array('itg-disabled-radio'));
         $form['field_story_category']['#attributes'] = array('class' => array('itg-disabled-radio'));
+        $form['field_primary_cat_data']['#attributes'] = array('class' => array('itg-disabled-radio'));
         $form['field_pti_print_media']['#attributes'] = array('class' => array('itg-disabled-radio'));
 
         // Hide extra body field
@@ -209,6 +212,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       }
     } else {
       $form['field_story_category']['#access'] = FALSE;
+      $form['field_primary_cat_data']['#access'] = FALSE;
       $form['field_pti_words_limit']['#access'] = FALSE;
       $form['field_survey_end_date']['#access'] = FALSE;
       $form['field_pti_idea_status']['#access'] = FALSE;
@@ -220,6 +224,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       unset($form['field_pti_print_media']);
     }
     
+    $form['field_primary_cat_data']['#weight'] = 2;
     $form['field_pti_idea_submit_status']['#access'] = FALSE;
     $form['field_story_category'][LANGUAGE_NONE]['#title'] = 'Select Section <span class="form-required" title="This field is required.">*</span>';
     $form['field_quiz_answer_image'][LANGUAGE_NONE]['#file_upload_title'] = 'Upload Image';
@@ -715,6 +720,9 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $headline = $node->title;
   $body = $node->body[LANGUAGE_NONE][0]['value'];
   $magazine_kicker = $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
+  
+  $primary_category = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+  $primary_category_html = $node->field_primary_category_html[LANGUAGE_NONE][0]['value'];
 
   // Print media information
   $print_media_fcollection_id = $node->field_pti_print_media[LANGUAGE_NONE][0]['value'];
@@ -735,6 +743,9 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
   $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
   $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $magazine_kicker ? $magazine_kicker : 'NA';
+  
+  $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $primary_category;
+  $node->field_primary_category_html[LANGUAGE_NONE][0]['value'] = $primary_category_html;
   
   if(!empty($rating)) {
    $node->field_story_rating[LANGUAGE_NONE][0]['value'] = $rating;

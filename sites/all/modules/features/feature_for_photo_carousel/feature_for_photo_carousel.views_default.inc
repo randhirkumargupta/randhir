@@ -633,7 +633,7 @@ function feature_for_photo_carousel_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<span><a data-view="photo_carousel_widget" data-page="photo_carousel" data-nid="[nid]" data-queueid=\'6\' class="remove_from_nodequeue_draggable_view" href="#"><span class="delete-link">delete</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<span><a data-view="photo_carousel_widget" data-page="photo_carousel" data-nid="[nid]" data-queueid=\'9\' class="remove_from_nodequeue_draggable_view" href="#"><span class="delete-link">delete</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -1350,7 +1350,7 @@ function feature_for_photo_carousel_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<span><a data-view="photo_carousel_widget" data-page="photo_carousel" data-nid="[nid]" data-queueid=\'6\' class="remove_from_nodequeue_draggable_view" href="#"><span class="delete-link">delete</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<span><a data-view="photo_carousel_widget" data-page="photo_carousel" data-nid="[nid]" data-queueid=\'10\' class="remove_from_nodequeue_draggable_view" href="#"><span class="delete-link">delete</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';

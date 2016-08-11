@@ -2534,7 +2534,7 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -2576,7 +2576,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -2590,7 +2590,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -2604,7 +2604,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -7115,10 +7115,14 @@ publish-ugc-comments',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/breaking-news
+node/add/blog
+node/add/podcast
+node/add/videogallery
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7134,6 +7138,10 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/breaking-news
+node/add/blog
+node/add/podcast
+node/add/videogallery
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7149,6 +7157,10 @@ node/*/edit',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/breaking-news
+node/add/blog
+node/add/podcast
+node/add/videogallery
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7160,10 +7172,14 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/breaking-news
+node/add/blog
+node/add/podcast
+node/add/videogallery
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7175,10 +7191,14 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/breaking-news
+node/add/blog
+node/add/podcast
+node/add/videogallery
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7190,10 +7210,14 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/breaking-news
+node/add/blog
+node/add/podcast
+node/add/videogallery
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7205,10 +7229,14 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
+node/add/breaking-news
+node/add/blog
+node/add/podcast
+node/add/videogallery
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -14430,6 +14458,62 @@ node/*/edit',
   'title' => '<none>',
   'cache' => 8,
 );
+  $export['block'][] = array(
+  'bid' => 1021,
+  'module' => 'views',
+  'delta' => 'past_polls-block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1022,
+  'module' => 'views',
+  'delta' => '4a62aa197128cf9da87aeef978472f9b',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1023,
+  'module' => 'views',
+  'delta' => 'past_polls-block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1024,
+  'module' => 'views',
+  'delta' => '4a62aa197128cf9da87aeef978472f9b',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
   'delta' => 'astro_tab_form_block',
@@ -15279,6 +15363,11 @@ node/*/edit',
   'module' => 'menu',
   'delta' => 'menu-admin-left-menu',
   'rid' => 23,
+);
+  $export['block_role'][] = array(
+  'module' => 'menu',
+  'delta' => 'menu-admin-left-menu',
+  'rid' => 24,
 );
 return $export;
 }

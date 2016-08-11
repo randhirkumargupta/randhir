@@ -1034,7 +1034,16 @@ footer{
         }
     }
     h1{
+        @include pos(relative);
         margin-bottom: 10px;
+        &:after{
+            content: '';
+            width: 14px;
+            height: 14px;    
+            background: #f40000;
+            border-radius: 100%;
+            display: inline-block;    
+        }
     }
     a{
         color: $white-color;
@@ -1588,6 +1597,9 @@ footer{
         @extend .list-none;
         @include listing-with-image(top-takes-video,right,10px,pic,title);
         li{
+            &.top-takes-video{
+             padding:10px 0;   
+            }            
             &+li{
                border-top: 1px solid $border-color;
            }
@@ -1861,6 +1873,38 @@ footer{
             @include font(12px);
             margin-bottom: 5px;
         }
+        .social-share{
+            margin-top:10px;
+            ul{
+                @extend .list-none;
+                li{
+                    @include display-inline;
+                    padding-right: 15px;
+                    a{
+                        background: #000;
+                        width: 23px;
+                        height: 23px;                        
+                        border-radius: 100%;
+                        display: block;
+                        color: #fff;
+                        text-align: center;
+                        line-height: 23px;
+                        &.share{
+                            color:#d0d0d0;
+                        }
+                        &.share, &.google{
+                            background: transparent;
+                        }
+                        &.facebook{
+                            background: #0b4887;
+                        }
+                        &.twitter{
+                            background: #05a3d2;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 /*End anchors listing css*/
@@ -1906,3 +1950,85 @@ footer{
     }
 }
 /* End side bar common */
+
+/*Start photo section slider Homepage*/
+.featured_photo_carousel{
+    .widget-title{
+        @include pos(absolute,10px,null,null,10px);        
+    }
+    .flexslider{
+        border:none;
+        margin:0;
+        .slides{
+            li{
+                @include pos(relative);
+                .detail{
+                    @include pos(absolute,null,null,0px,0px);
+                    @include calculate-width(1);
+                    font-family: $itg-roboto;
+                    .flex-caption {    
+                        padding: 15px 10px;    
+                        background: #000;
+                        color: $white-color;
+                        @include font(18px,24px,$itg-font-medium);    
+                        width: auto;
+                    }
+                    .flex-count{
+                        @include display-inline;
+                        background: #000;
+                        opacity: .5;
+                        color: $white-color;
+                        @include font(12px,23px);            
+                        margin-bottom: 10px;
+                        padding: 0 10px;  
+                        height: 23px;
+                    }
+                }
+
+            }
+        }
+        .flex-control-nav{
+            display: none;
+        }
+        .flex-count{
+            @include display-inline;
+            background: #000;
+            opacity: 0.6;
+            color: $white-color;
+            @include font(12px);            
+            margin-bottom: 10px;
+            i{
+                margin-right: 5px;
+            }
+        }
+        .flex-direction-nav a{
+            display: block;
+            opacity: 1;
+            &:before{
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: 30px;
+                display: inline-block;                
+                color: #fff;    
+                background: #67aaef;
+                Z-INDEX: 1;
+                WIDTH: 40px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+            }
+            &.flex-prev{
+                left: 0;
+                &:before{
+                    content: '\f104';
+                }
+            }
+            &.flex-next{
+                right: 0;
+                &:before{
+                    content: '\f105';
+                }
+            }
+        }
+    }
+}
+/*End Photo section slider Homepage*/
