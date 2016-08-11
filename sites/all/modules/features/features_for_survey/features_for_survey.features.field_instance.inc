@@ -359,7 +359,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'survey',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please select category.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -378,7 +378,7 @@ function features_for_survey_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_survey_category',
-    'label' => 'Category',
+    'label' => 'Section',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -598,13 +598,12 @@ function features_for_survey_field_default_field_instances() {
   t('Answer Option 2');
   t('Answer Type');
   t('Answer choices');
-  t('Category');
   t('Please add survey question.');
   t('Please check to set expiry date of survey.');
-  t('Please select category.');
   t('Please select end date.');
   t('Please select the start date.');
   t('Question');
+  t('Section');
   t('Skip');
   t('Survey End Date');
   t('Survey Expiry Date');

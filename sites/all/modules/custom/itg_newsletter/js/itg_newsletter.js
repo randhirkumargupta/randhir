@@ -198,8 +198,8 @@ jQuery(document).ready(function () {
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find('.ajax-progress-throbber').hide();
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-title').find('.form-text').val(data.title);
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-kicker').find('.form-textarea').val(data.kicker);
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-imce .form-text').attr('value', data.uri);
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-imce .form-submit').triggerHandler('mousedown');
+                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-itg-image-repository .form-text').attr('value', data.uri);
+                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.filefield-source-itg-image-repository .form-submit').triggerHandler('mousedown');
                     },
                     error: function () {
                         return false;
