@@ -76,10 +76,9 @@ a {
   margin-top: 50px;
 }
 
-.dropped {
-  background: #fff;
-}
-
+/*.dropped{
+    background: #fff;
+}*/
 .list-none, .may-be-suggest-container ul, .top-takes-video-container ul, .trending-videos, .watch-right-now-video ul {
   list-style-type: none;
 }

@@ -1034,7 +1034,16 @@ footer{
         }
     }
     h1{
+        @include pos(relative);
         margin-bottom: 10px;
+        &:after{
+            content: '';
+            width: 14px;
+            height: 14px;    
+            background: #f40000;
+            border-radius: 100%;
+            display: inline-block;    
+        }
     }
     a{
         color: $white-color;
@@ -1092,8 +1101,7 @@ footer{
 }
 .itg-listing{
     list-style: none;
-    border: 1px solid $border-color;
-    padding-top:20px;
+    border: 1px solid $border-color;    
     li{
         @include tab-listing;        
     }
@@ -1396,7 +1404,7 @@ footer{
                         }
                         &.title{
                             color: #6b6b6b;
-                            font-weight: 700;
+                            @include font(12px,20px,$itg-font-bold);
                         }
                         &.mailto{
                             text-transform: uppercase;
@@ -1576,19 +1584,6 @@ footer{
     }
     @include sidebar-heading;
 }
-.sidebar-second{
-    .may-be-suggest-container{
-        h3{
-            display: block;
-            span{
-                padding:45px 20px 10px 30px;   
-            }        
-        }
-        ul .may-we-suggest{
-            padding:10px 24px 10px 30px;
-        }
-    }
-}
 /*End May we suggest End*/
 
 /*Start top-takes-video suggest css*/
@@ -1602,6 +1597,7 @@ footer{
         @extend .list-none;
         @include listing-with-image(top-takes-video,right,10px,pic,title);
         li{
+            padding:0 10px;
             &+li{
                border-top: 1px solid $border-color;
            }
@@ -1623,12 +1619,16 @@ footer{
         @include pos(relative);
     }
 }
-.watch-right-now-video{    
+.watch-right-now-video{
+    @include sidebar-heading;
     ul{
         @extend .list-none;
-        @include listing-with-image(watch-right-now-list,right,5px,pic,title);
-        li{
-            padding:0 10px;
+        @include listing-with-image(watch-right-now-list,right,5px,pic,title);        
+        li.watch-right-now-list{
+            .pic{
+                width: 88px;
+            }
+            padding:10px 0;
             &+li{
                border-top: 1px solid $border-color;
            }
@@ -1871,6 +1871,38 @@ footer{
             @include font(12px);
             margin-bottom: 5px;
         }
+        .social-share{
+            margin-top:10px;
+            ul{
+                @extend .list-none;
+                li{
+                    @include display-inline;
+                    padding-right: 15px;
+                    a{
+                        background: #000;
+                        width: 23px;
+                        height: 23px;                        
+                        border-radius: 100%;
+                        display: block;
+                        color: #fff;
+                        text-align: center;
+                        line-height: 23px;
+                        &.share{
+                            color:#d0d0d0;
+                        }
+                        &.share, &.google{
+                            background: transparent;
+                        }
+                        &.facebook{
+                            background: #0b4887;
+                        }
+                        &.twitter{
+                            background: #05a3d2;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 /*End anchors listing css*/
@@ -1899,3 +1931,20 @@ footer{
     }
 }
 /*End css No result found side bar*/
+/* start side bar common */
+.sidebar-second{
+    .may-be-suggest-container, .top-takes-video-container, .watch-right-now-video{
+        h3{
+            display: block;
+            span{
+                padding:45px 20px 10px 30px;   
+            }        
+        }
+        ul{
+            li{
+                padding:10px 24px 10px 30px;
+            }
+        }
+    }
+}
+/* End side bar common */

@@ -365,8 +365,7 @@
 
                 }
                   hideloader();
-                parent.jQuery.colorbox.remove();
-                 jQuery.colorbox.close();
+                 parent.jQuery.colorbox.close();
 
             });
             

@@ -12,6 +12,7 @@
   <span class="target-link" data-target-id="audioupload"><?php print t('Audio upload'); ?></span>
   <span class="target-link" data-target-id="Imageupload"><?php print t('Image upload'); ?></span>
   <span class="target-link" data-target-id="Configuration"><?php print t('Configuration'); ?></span>
+  <span class="target-link" data-target-id="Relatedcontent"><?php print t('Related content'); ?></span>
   <span class="target-link" data-target-id="title-metatags"><?php print t('Remarks'); ?></span>
   <span class="target-link" data-target-id="edit-revision-information"><?php print t('Meta Details'); ?></span>  
 </div>
