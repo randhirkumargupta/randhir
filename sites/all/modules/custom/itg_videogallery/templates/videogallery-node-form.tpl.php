@@ -71,6 +71,10 @@
     <?php print drupal_render($form['field_story_expires']); ?> 
     <?php print drupal_render($form['field_story_expiry_date']); ?> 
 </div>
+<div id="Relatedcontent">
+  <h2 class="story-title">Related content</h2>
+  <?php print drupal_render($form['field_common_related_content']); ?>
+</div>
 <h2 id="title-metatags" class="story-title"><?php print t('Meta Tags'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

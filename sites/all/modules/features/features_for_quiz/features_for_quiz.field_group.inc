@@ -161,14 +161,14 @@ function features_for_quiz_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Section',
+    'label' => 'Categorization',
     'weight' => '1',
     'children' => array(
-      0 => 'field_story_category',
+      0 => 'field_survey_category',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Section',
+      'label' => 'Categorization',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => 'tab-quiz-section',
@@ -188,9 +188,9 @@ function features_for_quiz_field_group_info() {
   // Included for use with string extractors like potx.
   t('Add Quiz Question');
   t('Basic Settings');
+  t('Categorization');
   t('Date Settings');
   t('Meta Tags');
-  t('Section');
 
   return $field_groups;
 }

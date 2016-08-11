@@ -207,7 +207,7 @@ function feature_category_management_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_cm_select_type',
     'label' => 'Content Type',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,

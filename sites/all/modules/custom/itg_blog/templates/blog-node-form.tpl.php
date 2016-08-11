@@ -24,6 +24,11 @@
 <div id="categorySection">
   <h2 class="story-title"><?php print t('Section'); ?></h2>
   <?php print drupal_render($form['field_story_category']); ?>
+  <?php print drupal_render($form['field_primary_cat_data']); ?>
+</div>
+<div id="Relatedcontent">
+  <h2 class="story-title">Related content</h2>
+  <?php print drupal_render($form['field_common_related_content']); ?>
 </div>
 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
