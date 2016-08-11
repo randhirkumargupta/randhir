@@ -707,6 +707,226 @@ function feature_for_video_views_default_views() {
   $export['manage_videogallery'] = $view;
 
   $view = new view();
+  $view->name = 'video_landing_header';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Video landing  header';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: File Usage: File */
+  $handler->display->display_options['relationships']['node_to_file']['id'] = 'node_to_file';
+  $handler->display->display_options['relationships']['node_to_file']['table'] = 'file_usage';
+  $handler->display->display_options['relationships']['node_to_file']['field'] = 'node_to_file';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: File: File ID */
+  $handler->display->display_options['fields']['fid']['id'] = 'fid';
+  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['fid']['field'] = 'fid';
+  $handler->display->display_options['fields']['fid']['relationship'] = 'node_to_file';
+  $handler->display->display_options['fields']['fid']['label'] = '';
+  $handler->display->display_options['fields']['fid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['fid']['element_label_colon'] = FALSE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+if(module_exists(\'itg_videogallery\')) {
+$vid = itg_videogallery_get_videoid($row->fid);
+}
+?>
+<iframe frameborder="0" width="613" height="448"
+src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mute=1&ui-start-screen-info"
+allowfullscreen></iframe>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Field: Long Description */
+  $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
+  $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
+  $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'videogallery' => 'videogallery',
+  );
+
+  /* Display: Video landing  header block */
+  $handler = $view->new_display('block', 'Video landing  header block', 'block');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: File: File ID */
+  $handler->display->display_options['fields']['fid']['id'] = 'fid';
+  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['fid']['field'] = 'fid';
+  $handler->display->display_options['fields']['fid']['relationship'] = 'node_to_file';
+  $handler->display->display_options['fields']['fid']['label'] = '';
+  $handler->display->display_options['fields']['fid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['fid']['element_label_colon'] = FALSE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+if(module_exists(\'itg_videogallery\')) {
+$vid = itg_videogallery_get_videoid($row->fid);
+}
+?>
+<iframe frameborder="0" width="613" height="448"
+src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mute=1&ui-start-screen-info"
+allowfullscreen></iframe>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Field: Long Description */
+  $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
+  $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
+  $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
+  $handler->display->display_options['fields']['field_story_expert_description']['label'] = '';
+  $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
+  /* Field: File: Upload date */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['relationship'] = 'node_to_file';
+  $handler->display->display_options['fields']['timestamp']['label'] = '';
+  $handler->display->display_options['fields']['timestamp']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['timestamp']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
+
+  /* Display: video landing page header scroll */
+  $handler = $view->new_display('block', 'video landing page header scroll', 'block_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Section wise ordering content: itg_widget_order nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => 'video_landing_page_170_x_127',
+    'image_link' => '',
+  );
+  /* Field: Content: video_duration */
+  $handler->display->display_options['fields']['field_video_duration']['id'] = 'field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['table'] = 'field_data_field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['label'] = '';
+  $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
+  /* Field: Content: Short headline */
+  $handler->display->display_options['fields']['field_story_short_headline']['id'] = 'field_story_short_headline';
+  $handler->display->display_options['fields']['field_story_short_headline']['table'] = 'field_data_field_story_short_headline';
+  $handler->display->display_options['fields']['field_story_short_headline']['field'] = 'field_story_short_headline';
+  $handler->display->display_options['fields']['field_story_short_headline']['label'] = '';
+  $handler->display->display_options['fields']['field_story_short_headline']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['relationship'] = 'nid';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Section (field_story_category) */
+  $handler->display->display_options['arguments']['field_story_category_tid']['id'] = 'field_story_category_tid';
+  $handler->display->display_options['arguments']['field_story_category_tid']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['arguments']['field_story_category_tid']['field'] = 'field_story_category_tid';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['code'] = 'return $_GET[\'category\'];';
+  $handler->display->display_options['arguments']['field_story_category_tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_story_category_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_story_category_tid']['summary_options']['items_per_page'] = '25';
+  $export['video_landing_header'] = $view;
+
+  $view = new view();
   $view->name = 'video_status';
   $view->description = '';
   $view->tag = 'default';
