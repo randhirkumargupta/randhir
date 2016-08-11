@@ -29,6 +29,21 @@ function feature_for_poll_views_api($module = NULL, $api = NULL) {
 function feature_for_poll_image_default_styles() {
   $styles = array();
 
+  // Exported image style: home_page_poll_images_style.
+  $styles['home_page_poll_images_style'] = array(
+    'label' => 'Home Page Poll Images Style',
+    'effects' => array(
+      7 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 370,
+          'height' => 280,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: past_poll_images_style_front_end.
   $styles['past_poll_images_style_front_end'] = array(
     'label' => 'Past Poll Images Style Front End',
