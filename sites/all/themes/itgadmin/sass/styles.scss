@@ -6107,3 +6107,20 @@ div.node{
     cursor: pointer;
   }
 }
+.view .view-filters .views-exposed-form{
+  #edit-category-tid-wrapper.views-exposed-widget{
+    width: auto;
+    .form-text, .form-select{
+      float: left;
+      margin-right: 10px;
+      position: static !important;
+      width: 140px;
+    }
+    .form-text:last-child, .form-select:last-child{
+      margin-right: 0;
+    }
+  }
+} 
+.itg-layout-container .itg-h450-section .droppable{
+  min-height: 450px;
+}
