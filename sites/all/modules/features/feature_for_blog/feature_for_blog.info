@@ -26,6 +26,7 @@ features[field_instance][] = node-blog-field_blog_bloggers
 features[field_instance][] = node-blog-field_blog_image
 features[field_instance][] = node-blog-field_blog_long_description
 features[field_instance][] = node-blog-field_blog_short_description
+features[field_instance][] = node-blog-field_common_related_content
 features[field_instance][] = node-blog-field_story_archive
 features[field_instance][] = node-blog-field_story_category
 features[field_instance][] = node-blog-field_story_node_identity
