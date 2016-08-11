@@ -209,7 +209,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -230,11 +230,10 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Category */
+  /* Field: Content: Section */
   $handler->display->display_options['fields']['field_survey_category']['id'] = 'field_survey_category';
   $handler->display->display_options['fields']['field_survey_category']['table'] = 'field_data_field_survey_category';
   $handler->display->display_options['fields']['field_survey_category']['field'] = 'field_survey_category';
-  $handler->display->display_options['fields']['field_survey_category']['label'] = 'Section';
   $handler->display->display_options['fields']['field_survey_category']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -242,7 +241,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Validity Start Date */
+  /* Field: Content: Survey Start Date  */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -255,7 +254,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Validity End Date */
+  /* Field: Content: Survey End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -378,7 +377,7 @@ function features_for_survey_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Category (field_survey_category) */
+  /* Filter criterion: Content: Section (field_survey_category) */
   $handler->display->display_options['filters']['field_survey_category_tid']['id'] = 'field_survey_category_tid';
   $handler->display->display_options['filters']['field_survey_category_tid']['table'] = 'field_data_field_survey_category';
   $handler->display->display_options['filters']['field_survey_category_tid']['field'] = 'field_survey_category_tid';
