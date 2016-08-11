@@ -266,12 +266,17 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $i++;
     }
   }
+  
+  if ($_GET['q'] == 'site-search') {
+    $str = ltrim(trim($str), "AND");
+  }
+
   if (!empty($str)) {
     $search_array = $query->getSolrParams();
     $query->replaceParam("fq", '(' . $str . ')');
   }
 
- // p($query->getSolrParams());
+  // p($query->getSolrParams());
 }
 
 /**
