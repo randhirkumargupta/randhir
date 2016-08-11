@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-banner ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul {
   list-style-type: none;
 }
 
@@ -2792,6 +2792,27 @@ footer .footer-copyright {
 .poll-wrapper .related-story.relative-active {
   float: right;
   width: 50%;
+}
+
+.poll-navigation {
+  background: #f3f3f3;
+  text-align: center;
+  padding: 10px 0;
+}
+.poll-navigation ul li {
+  background: #f3f3f3;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+}
+.poll-navigation ul li a {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #bebebe;
+  margin: 0 5px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .past-poll-label h3 {

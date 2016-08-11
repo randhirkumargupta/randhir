@@ -53,7 +53,7 @@ if ($current_index < $poll_count && $current_index != $poll_count - 1) {
 }
 
 print '<div class="poll-wrapper">';
-print '<div class="poll-wrapper-pre-navigator">' . $pre . '</div>';
+//print '<div class="poll-wrapper-pre-navigator">' . $pre . '</div>';
 
 $isCookies = itg_poll_isCookies($nid);
 $poll_uid = itg_poll_getcurrent_userpoll($nid, $user->uid);
@@ -66,11 +66,22 @@ else {
   print $title.$poll_banner_image . '<div class="poll-replace-id '.$related_stories_class.'">' . itg_poll_get_past_data($nid) . '</div>' . $related_stories;
 }
 
-print '<div class="poll-wrapper-next-navigator">' . $next . '</div>';
+//print '<div class="poll-wrapper-next-navigator">' . $next . '</div>';
 print '</div>';
 
 // Printing past polls
 ?>
+
+<div class="poll-navigation">
+    <ul>
+       <?php  for($pc=0;$pc<$poll_count;$pc++){ ?> 
+        <li><a href="<?php echo $base_url.'/itg_active_polls?poll_index='.$pc ?>"></a></li>
+       <?php }  ?>
+    
+    
+    </ul>
+</div>
+
 <div class="past-polls">
     <div class="past-poll-label"><h3><span>Past Poll</span></h3></div>
   <?php print views_embed_view('past_polls', 'block'); ?>

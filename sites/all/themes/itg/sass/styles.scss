@@ -2101,6 +2101,27 @@ footer{
         }
     }
 }
+.poll-navigation{
+    background: #f3f3f3;
+            text-align: center;
+                padding:10px 0;
+    ul{
+        @extend .list-none;
+        li{
+           background: #f3f3f3;
+            text-align: center;
+            @include display-inline;
+            a{
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background: #bebebe;
+                margin: 0 5px;
+                @include display-inline;
+            }
+        }
+    }    
+}
 .past-poll-label{    
     @include sidebar-heading;    
     h3{

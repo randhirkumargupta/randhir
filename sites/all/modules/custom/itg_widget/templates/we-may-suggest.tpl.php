@@ -13,7 +13,7 @@
           else {
             ?>
             <a href="#" class="pic">
-              <img  src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
             </a>
           <?php } ?>
           <?php if (!empty($entity_info->title)) : ?>
