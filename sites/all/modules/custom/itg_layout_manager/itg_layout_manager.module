@@ -14,8 +14,7 @@ module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.he
 module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.form');
 
 function itg_layout_manager_init() {
-  //p(arg());
-  //get_widgets_poll_list();
+  //get_default_section_tpl();
 }
 
 /**
@@ -257,15 +256,37 @@ function itg_layout_manager_preprocess_page(&$vars) {
   
   //section template display on front
   if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))&& $theme == FRONT_THEME_NAME) {   
-    $tpl_name = get_template_name_by_section_name($arg[2]);
     
-    if (isset($tpl_name)) {
-      $data = get_layout_details($arg[2], $tpl_name, 'front');      
-      $vars['widget_data'] = $data;
-      
-      $tpl_name = str_replace('--', '__', $tpl_name); 
-           
-      $vars['theme_hook_suggestions'][] = $tpl_name;
+    $query = db_select('taxonomy_term_hierarchy', 'tth');
+    $query->fields('tth', array('parent'));
+    $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = tth.tid');
+    $query->condition('tth.tid', $arg[2]);
+    $query->condition('ttd.vid', 4);
+    $parent_id = $query->execute()->fetchField();
+    if ($parent_id == 0){
+      $tpl_name = get_template_name_by_section_name($arg[2]);
+      $tid_val = $arg[2];
+      /*if (!isset($tpl_name)) {
+        $tid_val = '';
+        $tpl_name = '';
+      }
+      */
+      if (isset($tpl_name)) {
+        $data = get_layout_details($tid_val, $tpl_name, 'front');      
+        $vars['widget_data'] = $data;
+        $tpl_name = str_replace('--', '__', $tpl_name);
+        $vars['theme_hook_suggestions'][] = $tpl_name;
+      }
     }
+    
   }
+}
+
+function get_default_section_tpl(){
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('section_name', 'template_name'));  
+    $query->condition('status', 1);
+          //->condition('default', 1);
+    $last_tpl = $query->execute()->fetchAll();
+    p($last_tpl);
 }
