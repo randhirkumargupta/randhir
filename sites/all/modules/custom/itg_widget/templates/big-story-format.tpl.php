@@ -34,7 +34,7 @@
         <ul>
           <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
           <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-          <li><a href="#" title=""><?php t('Follow the Story');?></a></li>
+          <li><a href="#" title=""><?php echo t('Follow the Story');?></a></li>
         </ul>
       </div>
       <div class="big-story-detail">                                
