@@ -63,5 +63,6 @@ print '</div>';
 // Printing past polls
 ?>
 <div class="past-polls">
+    <div class="past-poll-label">Past Poll</div>
   <?php print views_embed_view('past_polls', 'block'); ?>
 </div>
