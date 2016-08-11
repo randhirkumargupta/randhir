@@ -75,6 +75,7 @@ function remove_extra_data() {
       'dont_miss_content_widget',
       'section_wise_widget',
       'we_may_suggest_widget',
+      'section_wise_content_ordering',
   );
   foreach ($widget as $view_name) {
     $num_deleted = db_delete('draggableviews_structure')
