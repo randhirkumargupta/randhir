@@ -435,12 +435,7 @@ function itg_poll_block_info() {
     'info' => t('poll Form Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
-  $blocks['itg_poll_past_poll'] = array(
-    'info' => t('ITG POLL: past poll'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  
+ 
   return $blocks;
 }
 
@@ -455,12 +450,6 @@ function itg_poll_block_view($delta = '') {
     case 'poll_tab_form_block':
       $block['content'] = theme('itg_poll_tab_form_display_block', array('data' => $data));
       break;
-  
-    case 'itg_poll_past_poll':
-      module_load_include('inc', 'itg_poll', 'includes/itg_poll_current_poll');
-      $block['content'] = itg_poll_get_all_past_poll();
-      break;
-  
   }
   
   // Disable form tab from delete page
@@ -493,11 +482,7 @@ function itg_poll_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_poll') . '/templates',
       'variables' => array('data' => NULL),
     ),  
-     'itg_poll_list_all_past_polls' => array(
-      'template' => 'itg-poll-list-all-past-polls',
-      'path' => drupal_get_path('module', 'itg_poll') . '/templates',
-      'variables' => array('data' => NULL),
-    ),   
+  
       
       
   );
@@ -775,13 +760,20 @@ function itg_poll_menu() {
   return $items;
 }
 
-
 /**
- * 
- * Implements 
+ * Active polls callback
+ * @return array
  */
 
 function itg_active_polls_page() {
+   if(!isset($_GET['poll_index']) && empty($_GET['poll_index'])){
+       drupal_goto('itg_active_polls', array(
+       'query'=>array(
+           'poll_index'=>0,
+       ),
+     ));
+   }
+      
    module_load_include('inc', 'itg_poll', 'includes/itg_poll_current_poll');
    return itg_poll_get_all_current_poll();
 }
@@ -791,7 +783,6 @@ function itg_active_polls_page() {
  * {@inheritdoc}
  */
 function itg_poll_form_new_ajax_submit($form, &$form_state) {  
-    watchdog('ishwar', '<pre>' . print_r( $form_state['values'], true) . '</pre>');
     
    $node_id = $form_state['values']['nid'];
    $pole_answer = $form_state['values']['pole_answer']; 
