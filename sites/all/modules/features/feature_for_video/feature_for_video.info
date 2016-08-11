@@ -29,6 +29,7 @@ features[field_base][] = field_upload_video
 features[field_base][] = field_video_anchor
 features[field_base][] = field_video_configurations
 features[field_base][] = field_video_duration
+features[field_instance][] = node-videogallery-field_common_related_content
 features[field_instance][] = node-videogallery-field_dailymotion_playlist
 features[field_instance][] = node-videogallery-field_itg_common_by_line_name
 features[field_instance][] = node-videogallery-field_itg_common_by_line_twitter

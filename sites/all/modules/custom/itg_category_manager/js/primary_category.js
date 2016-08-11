@@ -50,12 +50,13 @@
 
             })
             jQuery('.dropbox-remove a').click(function() {
-                var getdattext = jQuery(this).parent().siblings('td').find('.dropbox-selected-item').text();
+                var getdattext = jQuery(this).parent().siblings('td').text();
+               
                 $('#primary-category-data option').each(function() {
-                    if (jQuery(this).text().indexOf(getdattext) >= 0) {
+                   
+                    var getdoptiontext=jQuery(this).text();
+                    if (getdoptiontext== getdattext) {
                         jQuery(this).remove();
-
-
                     }
                 });
 
