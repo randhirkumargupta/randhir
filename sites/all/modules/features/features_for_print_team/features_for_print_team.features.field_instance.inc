@@ -166,6 +166,90 @@ function features_for_print_team_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-print_team_integration-field_primary_category'.
+  $field_instances['node-print_team_integration-field_primary_category'] = array(
+    'bundle' => 'print_team_integration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category',
+    'label' => 'primary category',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 21,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-print_team_integration-field_primary_category_html'.
+  $field_instances['node-print_team_integration-field_primary_category_html'] = array(
+    'bundle' => 'print_team_integration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html',
+    'label' => 'Primary category html',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 23,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-print_team_integration-field_pti_idea_status'.
   $field_instances['node-print_team_integration-field_pti_idea_status'] = array(
     'bundle' => 'print_team_integration',
@@ -655,6 +739,7 @@ function features_for_print_team_field_default_field_instances() {
   t('Magazine Kicker');
   t('Mark as Complete');
   t('Please mark as complete, if item has been sold out.');
+  t('Primary category html');
   t('Rating');
   t('Select Section');
   t('Timeline');
@@ -662,6 +747,7 @@ function features_for_print_team_field_default_field_instances() {
   t('Upload Images');
   t('Word limit for final story(Ex- 300, 400 words etc). Please enter limit in numeric only.');
   t('Words limit');
+  t('primary category');
 
   return $field_instances;
 }
