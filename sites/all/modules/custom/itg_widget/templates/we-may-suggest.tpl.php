@@ -1,11 +1,11 @@
-<?php if (!empty($data)) : ?>
+<?php if (!empty($data)) : global $base_url; ?>
   <div class="may-be-suggest-container">
     <h3><span><?php print t("May We Suggest") ?></span></h3>
     <ul>
       <?php foreach ($data as $key => $entity_info) { ?>
         <li class="may-we-suggest" id="may-be-suggest-<?php print $key ?>">
           <?php if (!empty($entity_info->field_story_extra_large_image['und'][0]['uri'])) { ?>
-            <a href="#" class="pic">
+            <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/$entity_info->nid"); ?>" class="pic">
               <img  src="<?php print image_style_url("widget_very_small", $entity_info->field_story_extra_large_image['und'][0]['uri']); ?>" />
             </a>
             <?php
@@ -18,12 +18,9 @@
           <?php } ?>
           <?php if (!empty($entity_info->title)) : ?>
             <p class="title may-be-suggest-<?php echo $entity_info->nid ?>">
-              <a title="<?php echo $entity_info->title; ?>" href="<?php print drupal_get_path_alias("node/$entity_info->nid"); ?>">
-                <?php echo mb_strimwidth($entity_info->title, 0, 90, ".."); ?>
-              </a>  
+              <?php echo l(mb_strimwidth($entity_info->title, 0, 90, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity_info->nid")); ?>
             </p>
           <?php endif; ?>
-
         </li>        
       <?php } ?>
     </ul>
