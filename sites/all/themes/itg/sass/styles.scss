@@ -1034,7 +1034,16 @@ footer{
         }
     }
     h1{
+        @include pos(relative);
         margin-bottom: 10px;
+        &:after{
+            content: '';
+            width: 14px;
+            height: 14px;    
+            background: #f40000;
+            border-radius: 100%;
+            display: inline-block;    
+        }
     }
     a{
         color: $white-color;
@@ -1588,6 +1597,7 @@ footer{
         @extend .list-none;
         @include listing-with-image(top-takes-video,right,10px,pic,title);
         li{
+            padding:0 10px;
             &+li{
                border-top: 1px solid $border-color;
            }
@@ -1860,6 +1870,38 @@ footer{
             color: #9f9f9f;
             @include font(12px);
             margin-bottom: 5px;
+        }
+        .social-share{
+            margin-top:10px;
+            ul{
+                @extend .list-none;
+                li{
+                    @include display-inline;
+                    padding-right: 15px;
+                    a{
+                        background: #000;
+                        width: 23px;
+                        height: 23px;                        
+                        border-radius: 100%;
+                        display: block;
+                        color: #fff;
+                        text-align: center;
+                        line-height: 23px;
+                        &.share{
+                            color:#d0d0d0;
+                        }
+                        &.share, &.google{
+                            background: transparent;
+                        }
+                        &.facebook{
+                            background: #0b4887;
+                        }
+                        &.twitter{
+                            background: #05a3d2;
+                        }
+                    }
+                }
+            }
         }
     }
 }
