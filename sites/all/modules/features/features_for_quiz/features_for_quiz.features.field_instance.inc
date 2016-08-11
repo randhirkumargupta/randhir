@@ -890,45 +890,6 @@ function features_for_quiz_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-quiz-field_story_category'.
-  $field_instances['node-quiz-field_story_category'] = array(
-    'bundle' => 'quiz',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_category',
-    'label' => 'Category section',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'hs_taxonomy',
-      'settings' => array(),
-      'type' => 'taxonomy_hs',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'node-quiz-field_story_source_id'.
   $field_instances['node-quiz-field_story_source_id'] = array(
     'bundle' => 'quiz',
@@ -974,6 +935,45 @@ function features_for_quiz_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_survey_category'.
+  $field_instances['node-quiz-field_survey_category'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_survey_category',
+    'label' => 'Section',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'hs_taxonomy',
+      'settings' => array(),
+      'type' => 'taxonomy_hs',
+      'weight' => 51,
     ),
   );
 
@@ -1031,7 +1031,7 @@ function features_for_quiz_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 9,
+      'weight' => 54,
     ),
   );
 
@@ -1070,7 +1070,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 53,
     ),
   );
 
@@ -1128,7 +1128,7 @@ function features_for_quiz_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 6,
+      'weight' => 52,
     ),
   );
 
@@ -1138,7 +1138,6 @@ function features_for_quiz_field_default_field_instances() {
   t('Add Quiz Question');
   t('Answer');
   t('Answer Type');
-  t('Category section');
   t('Correct Answer');
   t('If user selects, normal; first added questions will appear on top for front end user. And if user selects ‘Random’ quiz questions will appear on random basis.');
   t('Immediate Result');
@@ -1157,6 +1156,7 @@ function features_for_quiz_field_default_field_instances() {
   t('Quiz Instructions');
   t('Quiz Scoring Type');
   t('Quiz Type');
+  t('Section');
   t('Validity End Date');
   t('Validity Start Date');
   t('Weightage');
