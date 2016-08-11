@@ -2540,10 +2540,35 @@ footer .footer-copyright {
   font-size: 0.75rem;
   margin-bottom: 5px;
 }
+.live-block .breaking-section .social-share {
+  margin-top: 10px;
+}
 .live-block .breaking-section .social-share ul li {
   display: inline-block;
   vertical-align: top;
   padding-right: 15px;
+}
+.live-block .breaking-section .social-share ul li a {
+  background: #000;
+  width: 23px;
+  height: 23px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+}
+.live-block .breaking-section .social-share ul li a.share {
+  color: #d0d0d0;
+}
+.live-block .breaking-section .social-share ul li a.share, .live-block .breaking-section .social-share ul li a.google {
+  background: transparent;
+}
+.live-block .breaking-section .social-share ul li a.facebook {
+  background: #0b4887;
+}
+.live-block .breaking-section .social-share ul li a.twitter {
+  background: #05a3d2;
 }
 
 /*End anchors listing css*/

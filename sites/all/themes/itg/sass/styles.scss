@@ -1872,11 +1872,34 @@ footer{
             margin-bottom: 5px;
         }
         .social-share{
+            margin-top:10px;
             ul{
                 @extend .list-none;
                 li{
                     @include display-inline;
                     padding-right: 15px;
+                    a{
+                        background: #000;
+                        width: 23px;
+                        height: 23px;                        
+                        border-radius: 100%;
+                        display: block;
+                        color: #fff;
+                        text-align: center;
+                        line-height: 23px;
+                        &.share{
+                            color:#d0d0d0;
+                        }
+                        &.share, &.google{
+                            background: transparent;
+                        }
+                        &.facebook{
+                            background: #0b4887;
+                        }
+                        &.twitter{
+                            background: #05a3d2;
+                        }
+                    }
                 }
             }
         }
