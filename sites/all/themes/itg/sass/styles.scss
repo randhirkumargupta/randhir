@@ -1092,8 +1092,7 @@ footer{
 }
 .itg-listing{
     list-style: none;
-    border: 1px solid $border-color;
-    padding-top:20px;
+    border: 1px solid $border-color;    
     li{
         @include tab-listing;        
     }
@@ -1576,19 +1575,6 @@ footer{
     }
     @include sidebar-heading;
 }
-.sidebar-second{
-    .may-be-suggest-container{
-        h3{
-            display: block;
-            span{
-                padding:45px 20px 10px 30px;   
-            }        
-        }
-        ul .may-we-suggest{
-            padding:10px 24px 10px 30px;
-        }
-    }
-}
 /*End May we suggest End*/
 
 /*Start top-takes-video suggest css*/
@@ -1623,11 +1609,14 @@ footer{
         @include pos(relative);
     }
 }
-.watch-right-now-video{    
+.watch-right-now-video{
     ul{
         @extend .list-none;
-        @include listing-with-image(watch-right-now-list,right,5px,pic,title);
+        @include listing-with-image(watch-right-now-list,right,5px,pic,title);        
         li{
+            .pic{
+                width: 88px;
+            }
             padding:0 10px;
             &+li{
                border-top: 1px solid $border-color;
@@ -1899,3 +1888,20 @@ footer{
     }
 }
 /*End css No result found side bar*/
+/* start side bar common */
+.sidebar-second{
+    .may-be-suggest-container, .top-takes-video-container, .watch-right-now-video{
+        h3{
+            display: block;
+            span{
+                padding:45px 20px 10px 30px;   
+            }        
+        }
+        ul{
+            li{
+                padding:10px 24px 10px 30px;
+            }
+        }
+    }
+}
+/* End side bar common */
