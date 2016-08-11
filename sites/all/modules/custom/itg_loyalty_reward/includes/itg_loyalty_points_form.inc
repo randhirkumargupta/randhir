@@ -110,7 +110,7 @@ function loyality_reward_points_configuration_form() {
   );
   $form['lrp_loyality_points_expiry'] = array(
       '#type' => 'textfield',
-      '#title' => t('Loyality Points Expiry(in days)'),
+      '#title' => t('Loyality Points Expiry (in days)'),
       '#required' => TRUE,
       '#maxlength' => 6,
       '#default_value' => variable_get('lrp_loyality_points_expiry'),
