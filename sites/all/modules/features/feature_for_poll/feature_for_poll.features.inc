@@ -24,6 +24,60 @@ function feature_for_poll_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function feature_for_poll_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: past_poll_images_style_front_end.
+  $styles['past_poll_images_style_front_end'] = array(
+    'label' => 'Past Poll Images Style Front End',
+    'effects' => array(
+      4 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 170,
+          'height' => 127,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: poll_active_poll_image_option_front_end.
+  $styles['poll_active_poll_image_option_front_end'] = array(
+    'label' => 'Poll Active Poll Image Option Front End',
+    'effects' => array(
+      6 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 244,
+          'height' => 163,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: poll_banner_active_poll_front_end.
+  $styles['poll_banner_active_poll_front_end'] = array(
+    'label' => 'Poll Banner Active Poll Front End',
+    'effects' => array(
+      5 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 368,
+          'height' => 206,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function feature_for_poll_node_info() {

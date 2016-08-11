@@ -213,6 +213,48 @@ function feature_for_blog_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-blog-field_common_related_content'.
+  $field_instances['node-blog-field_common_related_content'] = array(
+    'bundle' => 'blog',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_common_related_content',
+    'label' => 'Related Content',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 14,
+    ),
+  );
+
   // Exported field_instance: 'node-blog-field_story_archive'.
   $field_instances['node-blog-field_story_archive'] = array(
     'bundle' => 'blog',
@@ -343,6 +385,7 @@ function feature_for_blog_field_default_field_instances() {
   t('Please enter Short description.');
   t('Please enter bloggers name (e.g. Ankush, Sumit etc.)');
   t('Please upload image.');
+  t('Related Content');
   t('Section');
   t('Short description');
 

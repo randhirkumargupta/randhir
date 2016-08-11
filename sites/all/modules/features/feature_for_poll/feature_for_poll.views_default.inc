@@ -86,6 +86,111 @@ function feature_for_poll_views_default_views() {
   $export['autocomplete_for_poll'] = $view;
 
   $view = new view();
+  $view->name = 'past_polls';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Past Polls';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Past Polls';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Poll Banner */
+  $handler->display->display_options['fields']['field_poll_banner']['id'] = 'field_poll_banner';
+  $handler->display->display_options['fields']['field_poll_banner']['table'] = 'field_data_field_poll_banner';
+  $handler->display->display_options['fields']['field_poll_banner']['field'] = 'field_poll_banner';
+  $handler->display->display_options['fields']['field_poll_banner']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_poll_banner']['settings'] = array(
+    'image_style' => 'past_poll_images_style_front_end',
+    'image_link' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+  $handler->display->display_options['fields']['php_1']['table'] = 'views';
+  $handler->display->display_options['fields']['php_1']['field'] = 'php';
+  $handler->display->display_options['fields']['php_1']['label'] = '';
+  $handler->display->display_options['fields']['php_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_1']['php_output'] = '<?php  print itg_poll_getTotalPoll($row->nid);  ?> Votes counted';
+  $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Updated';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php  print itg_poll_get_past_data($row->nid);  ?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'poll' => 'poll',
+  );
+  /* Filter criterion: Content: End Date (field_poll_end_date) */
+  $handler->display->display_options['filters']['field_poll_end_date_value']['id'] = 'field_poll_end_date_value';
+  $handler->display->display_options['filters']['field_poll_end_date_value']['table'] = 'field_data_field_poll_end_date';
+  $handler->display->display_options['filters']['field_poll_end_date_value']['field'] = 'field_poll_end_date_value';
+  $handler->display->display_options['filters']['field_poll_end_date_value']['operator'] = '>';
+  $handler->display->display_options['filters']['field_poll_end_date_value']['default_date'] = 'now';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  $export['past_polls'] = $view;
+
+  $view = new view();
   $view->name = 'poll_listing';
   $view->description = '';
   $view->tag = 'default';
@@ -166,7 +271,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['field_poll_question_text']['label'] = '';
   $handler->display->display_options['fields']['field_poll_question_text']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_poll_question_text']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Poll Question Video */
+  /* Field: Field: Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';
@@ -680,7 +785,7 @@ function feature_for_poll_views_default_views() {
     'image_style' => 'medium',
     'image_link' => '',
   );
-  /* Field: Field: Poll Question Video */
+  /* Field: Field: Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';
@@ -772,7 +877,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['field_poll_question_text']['alter']['text'] = '[field_poll_question_text] jhjhjhjh';
   $handler->display->display_options['fields']['field_poll_question_text']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_poll_question_text']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Poll Question Video */
+  /* Field: Field: Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';
