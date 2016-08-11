@@ -1,13 +1,10 @@
 /*
- * @file itg_story.js
- * Contains all functionality related to story
+ * @file primary_category.js
+ * Contains all functionality related to primary category
  */
 
 (function($) {
-    Drupal.behaviors.itg_story = {
-        attach: function(context, settings) {
-           
-
+  
             // code use for make primary category
             jQuery('.add-to-dropbox').mousedown(function()
             {
@@ -70,14 +67,6 @@
                 var gethtml = jQuery('#primary-category-data').html();
                 jQuery('#edit-field-primary-category-html-und-0-value').val(gethtml);
             })
-
-        
-
-
-        }
-
-    };
-
 
 })(jQuery, Drupal, this, this.document);
 
