@@ -43,7 +43,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
 
     $form['keyword']['#suffix'] = '<div class="s-link"><a id="search_button"><i class="fa fa-search"></i></a><a id="reset_button"><i class="fa fa-times"></i></a></div>';
     //$form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title / Kicker / Tag name')));
-    $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast');
+    $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
     $form['bundle_name']['#type'] = 'select';
     $form['bundle_name']['#options'] = $bundle_name;
     $form['bundle_name']['#size'] = 5;
@@ -128,9 +128,13 @@ global $base_url;
         $related_result->bs_status = 'Published';
       }
       
-      // image condition when image not exist
+      // image condition when image not image
       $image = $related_result->sm_thumb_medium_field_story_extra_large_image[0];
+      $blog_image = $related_result->sm_thumb_medium_field_blog_image[0];
+      $magazine_image = $related_result->sm_thumb_medium_field_magazine_cover_photo[0];
+      
       $pattern = '/src="([^"]*)"/';
+      
       if (preg_match($pattern, $image, $matches)) {
         $src = $matches[1];
         if (getimagesize($src) !== false) {
@@ -142,6 +146,10 @@ global $base_url;
         }
       }
       
+      if(empty($image) && empty($blog_image) && empty($magazine_image) ) {
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+        $related_result->sm_thumb_medium_field_story_extra_large_image[0] = "<img src='$img_url' width='220' height='165' />";
+      }
       
       $words = $_GET['keyword'];
       $description_raw_value = strip_tags($related_result->content);
@@ -170,7 +178,7 @@ global $base_url;
       $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
     }
 
-    $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast');
+    $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
 
     $get_var = $_GET;
 
