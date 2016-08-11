@@ -734,7 +734,7 @@ function itg_poll_get_past_data($nid) {
         $outputnew .= '<li><span class="poll-answer-text">' . $polls_answer_text_render . '</span> <span class="percentage">' . $percentage . '%' . '</span> <span id="poll-past-percentage" class="poll-past-percentage-progess" style="width:' . $percentage . '%"></span></li>';
       }
       elseif ($result_format == 2) { // Number of votes
-        $outputnew .= '<li><span class="poll-answer-text">' . $polls_answer_text_render . '</span> <span class="noofvotes">' . $optioncnt . '%' . '</span> <span id="poll-past-percentage" class="poll-past-percentage-progess" style="width:' . $percentage . '%"></span></li>';
+        $outputnew .= '<li><span class="poll-answer-text">' . $polls_answer_text_render . '</span> <span class="precentage-detail"><span class="noofvotes">' . $optioncnt . '%' . '</span> <span id="poll-past-percentage" class="poll-past-percentage-progess" style="width:' . $percentage . '%"></span></span></li>';
       }
     }
   }

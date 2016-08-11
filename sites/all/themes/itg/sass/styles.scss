@@ -2032,3 +2032,129 @@ footer{
     }
 }
 /*End Photo section slider Homepage*/
+
+/*Start Poll Landing page*/
+.poll-wrapper{
+    @include clearfix;
+    border: 1px solid #dddddd;
+    padding: 20px;
+    ul{
+        @extend .list-none;
+    }
+    .active-poll-title{
+        h2{
+            @include font(20px, 26px, null);
+            margin-bottom: 20px;
+        }        
+    }
+    .poll-banner-image{
+        @include float(left);
+        margin-right: 20px;
+    }
+    .poll-replace-id{
+        .form-item-pole-answer{
+            padding: 12px 0;
+        }
+        .form-submit{
+            width: 100px;
+            height: 34px;
+            background: #0e8ae2;
+            border: 1px solid #48a4e5;
+            color: $white-color;
+            text-transform: uppercase;
+            font-weight: 700;
+            box-shadow: 1px 2px 2px #b5b1b1;
+            cursor: pointer;
+        }
+        .error{
+            display: block;
+        }
+        .poll-updated-wrapper{
+            font-size: 12px;
+            color: #8a8a8a;
+            font-family: $itg-roboto;
+        }
+        &.relative-with-img{
+            @include float(left);
+            @include calculate-width(2);
+        }
+    }
+    .related-story{   
+        min-height:280px;
+        border-left: 1px solid #dfdfdf;
+        padding-left:25px;
+        span{
+            @include story-tag(22px,22px);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .related-stories{
+            li{
+                @include before-icon-list(5px,5px,5px,0,#959595,50%);
+                padding-left: 10px;
+                padding-bottom: 25px;
+            }            
+        }
+        &.relative-active{
+            @include float(right);
+            @include calculate-width(2);
+        }
+    }
+}
+.past-poll-label{    
+    @include sidebar-heading;    
+    h3{
+        display: block;
+        span{
+            padding-left: 0;
+        }
+    }
+}
+.poll-banner{ 
+        font-family: $itg-roboto;
+        @include listing-with-image(poll-list,left,20px,pic,detail);
+        ul{
+            @extend .list-none;
+        }
+        .poll-list{
+            padding: 30px 0; 
+        }
+        .detail{
+            @include clearfix;
+            .detail-content{
+                @include float(left);
+                width: 55%;
+                color:#8a8a8a;
+                h4{
+                    @include font(18px,24px,$itg-font-bold);
+                    margin-bottom: 20px;
+                    color: $black-color;
+                }
+                .vota, .time{
+                    @include font(12px);
+                }
+            }
+            .voting-data{
+                @include float(right);
+                width: 45%;
+                .past-poll{
+                    li{
+                        margin-bottom: 20px;
+                        span.poll-answer-text{
+                            width: 40%;
+                            @include display-inline;
+                        }
+                        span.precentage-detail{
+                            width: 59%;
+                            .poll-past-percentage-progess{
+                                @include display-inline;
+                                height: 18px;
+/*                                background: #000;*/
+                            }
+                        }
+                    }
+                }
+            }
+        }
+}
+/*End Poll Landing page*/

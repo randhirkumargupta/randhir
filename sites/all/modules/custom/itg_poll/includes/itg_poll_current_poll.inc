@@ -25,6 +25,7 @@ function itg_poll_get_all_current_poll() {
   $polls_info['count'] = $total_polls;
   $polls_info['related_nodes'] = $related_nodes;
   $polls_info['poll_banner_image'] = $poll_banner_image;
+  $polls_info['title'] = $node->title;
   return theme('itg_poll_list_all_forms', array('data' => $polls_info));
 }
 
@@ -101,11 +102,6 @@ function itg_poll_form_new($form, &$form_state, $nid) {
       }
     }
   }
-
-  $form["poll_title"] = array(
-    "#markup" => "<div class='poll-title-wrapper'><h2>" . t($node->title) . "</h2></div>",
-  );
-
 
   $form["poll_updated"] = array(
     "#markup" => "<div class='poll-updated-wrapper'>Updated " . date('M d Y H:i', $node->changed) . "</div>",
