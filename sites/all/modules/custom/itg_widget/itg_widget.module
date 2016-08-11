@@ -336,7 +336,9 @@ function itg_widget_block_view($delta = '') {
 
       drupal_add_js('jQuery(window).load(function() {
             jQuery(".flexslider").flexslider({
-            animation: "slide"
+            animation: "slide",
+            prevText: "",
+            nextText: "",
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
       );

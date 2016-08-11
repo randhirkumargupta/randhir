@@ -33,9 +33,9 @@
                     hoverClass: "drop-hover",
                     drop: function (event, ui) {
                         
-                        $(this).addClass("dropped").find("p").hide();
+                        $(this).removeClass("gray-bg-layout");
                         // content block id for display content widget
-                        var block_name = $(this).attr('id');
+                        var block_name = $(this).find('.data-holder').attr('id');
                         //alert(block_name);
                         // tamplate section value
                         var section_name = $('#edit-section').val();
@@ -53,7 +53,6 @@
                         }
                         
                         var base_url = settings.itg_story.settings.base_url;
-
                         $.ajax({
                               url: base_url + "/insert-layout-setting-ajax/layout",
                               method: 'post',
@@ -67,6 +66,7 @@
                                  $('input[name = '+block_name+']').val(category_name_tab);
                                  $('.widget-title[data-id="'+block_name+'"]').html(category_name_tab);
                                  $('.tab-buttons span[data-class="'+block_name+'"]').html(category_name_tab);
+                                 $('#'+block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + widget_name);
                                  //$('#block_name').html(category_name_tab);
                                  if (display_area) {                                     
                                     $('#'+block_name).html(category_name_tab);

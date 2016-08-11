@@ -797,7 +797,7 @@ jQuery(document).ready(function(){
     });
     // end of code
     
-    jQuery('.page-itg-layout-manager .droppable').each(function(){
+    jQuery('.data-holder').each(function(){
       if(jQuery(this).children().length > 0){
         jQuery(this).closest('.gray-bg-layout').removeClass('gray-bg-layout');
       }
