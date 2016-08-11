@@ -8,8 +8,10 @@ if (!empty($data)) {
                 ?>
                 <li>
                     <a href="<?php echo  $entity_data_node['node_url']; ?>"><?php print $entity_data_node['file_url']; ?></a>
-                    <p class="flex-count"><?php echo  $entity_data_node['count']; ?> Images</p>
-                    <p class="flex-caption"><?php print $entity_data_node['caption']; ?></p>
+                    <div class="detail">
+                        <p class="flex-count"><i class="fa fa-camera" aria-hidden="true"></i> <?php echo  $entity_data_node['count']; ?> Images</p>
+                        <p class="flex-caption"><?php print $entity_data_node['caption']; ?></p>
+                    </div>
                 </li>
     <?php } ?>
         </ul>
