@@ -33,7 +33,7 @@
                     hoverClass: "drop-hover",
                     drop: function (event, ui) {
                         
-                        $(this).addClass("dropped").find("p").hide();
+                        $(this).removeClass("gray-bg-layout");
                         // content block id for display content widget
                         var block_name = $(this).find('.data-holder').attr('id');
                         //alert(block_name);

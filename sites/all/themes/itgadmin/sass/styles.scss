@@ -6122,5 +6122,32 @@ div.node{
   }
 } 
 .itg-layout-container .itg-h450-section .droppable{
-  min-height: 450px;
+  height: 450px;
 }
+.itg-layout-container .itg-h321-section .droppable{
+  height: 321px;
+}
+.itg-layout-container .itg-top-section .top-colum-2 .droppable{
+  height: 673px;
+}
+.itg-layout-container .itg-top-section .top-colum-1 .droppable{
+  height: 637px;
+}
+.itg-layout-container .top-colum-3 .droppable{
+  height: 277px;
+}
+.itg-h450-section{
+  .widget-wrapper{
+    height: 100%;
+    padding: 10px;
+    background-color: #f3f3f3;
+  }
+}
+.itg-h321-section{
+  .dont_miss{
+    height: 100%;
+    padding: 5px 20px 8px;
+    background-color: #f3f3f3;
+  }
+}
+.droppable .widget-wrapper{height: 100%; overflow: hidden;}
