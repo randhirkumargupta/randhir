@@ -494,7 +494,7 @@ span.error{
 body.sidebar-second{
   .sidebars{
     position: fixed;
-    top: 199px;
+    top: 50px;
     left: 100%;
     width: 330px;
     z-index: 9999;
@@ -6151,3 +6151,29 @@ div.node{
   }
 }
 .droppable .widget-wrapper{height: 100%; overflow: hidden;}
+.page-admin-structure-menu-manage{
+  .action-links{
+    @extend .no-bullet;
+    @extend .dib;
+    @extend .vtop;
+    @extend .full;
+    li{
+      @extend .fright;
+      margin-left: 10px;
+      a{
+        @extend .add-more;
+      }
+    }
+  }
+  #menu-overview{
+    @extend .views-table;
+  }
+  #menu-overview-form{
+    .form-actions{
+      #edit-actions-submit{
+        @extend .btn-save;
+        margin-top: 10px;
+      }
+    }
+  }
+}
