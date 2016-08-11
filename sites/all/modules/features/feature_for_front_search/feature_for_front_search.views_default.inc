@@ -99,6 +99,16 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_wrapper_class'] = 'search-pic';
   $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_default_classes'] = FALSE;
+  /* Field: Apache Solr: sm_thumb_medium_field_magazine_cover_photo */
+  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['id'] = 'sm_thumb_medium_field_magazine_cover_photo';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['field'] = 'sm_thumb_medium_field_magazine_cover_photo';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_type'] = '0';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_wrapper_class'] = 'search-pic';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_default_classes'] = FALSE;
   /* Field: Apache Solr: label */
   $handler->display->display_options['fields']['label']['id'] = 'label';
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
