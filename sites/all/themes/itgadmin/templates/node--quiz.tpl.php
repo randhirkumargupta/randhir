@@ -82,8 +82,8 @@
                   <h2><?php echo t('Section'); ?></h2>
                   <div class="content-details">
                      <?php
-                      $story_category = render($content['field_story_category']);
-                      if (!empty($story_category)): print render($content['field_story_category']);
+                      $story_category = render($content['field_survey_category']);
+                      if (!empty($story_category)): print render($content['field_survey_category']);
                       endif;
                       ?>
                   </div>
