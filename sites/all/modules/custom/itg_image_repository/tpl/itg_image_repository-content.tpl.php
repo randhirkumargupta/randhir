@@ -1,5 +1,6 @@
 <?php
 $itg_image_repository = & $itg_image_repository_ref['itg_image_repository']; //keep this line.
+global $base_url; 
 ?>
 
 <script type="text/javascript">
@@ -30,8 +31,8 @@ $itg_image_repository = & $itg_image_repository_ref['itg_image_repository']; //k
 
     <div id="message-box"></div>
     <div class="list-head image_repository">
-        <div class="div-upload-img add-more">Upload</div>
-        <div class="div-search-img add-more-wbg">Search</div>
+        <div class="div-upload-img">Upload</div>
+        <div class="div-search-img">Search</div>
 
     </div>
 
@@ -87,5 +88,6 @@ $itg_image_repository = & $itg_image_repository_ref['itg_image_repository']; //k
 
 </div><!-- itg_image_repository-content -->
 <div id="browse-resizer" class="y-resizer"></div>
-<div id="loader-data" style="display: none">Loading....</div>
-<div id="preview-wrapper"><div id="file-preview"></div></div>
+<div id="loader-data" style="display: none"><img class="widget-loader" align="center" src="<?php echo $base_url;?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
+<div id="preview-wrapper"><div id="search-preview" style="display:none"><iframe onload="hideloader();" src="<?php echo base_path().'searchimage?keyword='.$term;?>" width="900" height="300"></iframe> 
+</div><div id="file-preview"></div></div>

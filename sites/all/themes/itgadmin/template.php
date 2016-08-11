@@ -263,8 +263,8 @@ function itgadmin_breadcrumb($vars) {
     if(arg(0) == 'issue-listing'){
       $list_story_parent_link = 'manage-'.arg(1).'s';;
       $list_story_link = 'issue-listing'.'/'.arg(1).'/'.arg(2);
-        $breadcrumb[] = l('Home','cms-user-dashboard').l('List '.  ucfirst(arg(1)).'s', $list_story_parent_link).l('List Stories',$list_story_link);
-        return '<div class="breadcrumb-link">'. implode(' » ', $breadcrumb) .'</div>';
+        $breadcrumb[] = '<li>'.l('Home','cms-user-dashboard').'</li><li>'.l('List '.  ucfirst(arg(1)).'s', $list_story_parent_link).'</li><li>'.l('List Stories',$list_story_link). '</li>';
+        return '<div class="breadcrumb"><ol>'. implode(' » ', $breadcrumb) .'</ol></div>';
     }
     
     // get first argument from url 
@@ -274,7 +274,9 @@ function itgadmin_breadcrumb($vars) {
      
      $story_tab = array('in-queue-story','published-story','expired-story', 'unpublished-story', 'archive-story');
      $photogallery_tab = array('in-queue-photogallery','published-photogallery','unpublished-photogallery', 'archive-photogallery');
-     $bolg_tab = array('published-blogs','unpublished-blogs','in-queue-blogs', 'archive-blogs');
+     $bolg_tab = array('published-blogs','unpublished-blogs', 'my-queue-blogs', 'in-queue-blogs', 'archive-blogs', 'my-unpublished-blogs', 'mydraft-blogs', 'my-rejected-blogs', 'my-published-blogs');
+     $podcast_tab = array('published-podcast','unpublished-podcast', 'my-unpublished-podcast', 'mydraft-podcast', 'my-published-podcast', 'my-queue-podcast', 'in-queue-podcast', 'archive-podcast', 'my-rejected-podcast');
+     $videogallery_tab = array('published-video','unpublished-video', 'my-unpublished-video', 'mydraft-video', 'my-published-video', 'my-queue-video', 'in-queue-video', 'archive-video', 'my-rejected-video');
      
      //story tab breadcrumb
      if (in_array($content_url, $story_tab)) {
@@ -295,6 +297,17 @@ function itgadmin_breadcrumb($vars) {
       return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
     }
 
+     //podcast tab breadcrumb
+     if (in_array($content_url, $podcast_tab)) {
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
+    }
+    
+    //videogallery tab breadcrumb
+     if (in_array($content_url, $videogallery_tab)) {
+      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
+    }
 
   }
 
@@ -344,12 +357,13 @@ function itgadmin_preprocess_page(&$vars) {
   }
    
   // Add tpl for related content view page
-  if (arg(0) == 'related-content') {
+
+  if (arg(0) == 'related-content' || arg(0) == 'getimagetocroper' || arg(0) == 'searchimage' || arg(0) == 'imagetotag' || arg(0) == 'imagetagedit' || arg(0) == 'video-status' || (arg(0)== 'itg-layout-manager' && arg(2)=='preview')) {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
   
   //Add tpl for event registration view page
-  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs') {
+  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs' || ($vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 }

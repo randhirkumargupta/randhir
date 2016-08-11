@@ -10,9 +10,27 @@
 </div>
 <div id="videoupload">
   <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
-  <?php print drupal_render($form['upload']); ?>
-  <?php print drupal_render($form['field_videogallery_video_upload']); ?>
+  <div class="browse-ftp">
+    <div id="itg_video_content">
+        <div class="video-ftp">Server</div>
+        <div class="video-local">Local Browse</div>
+        <div class="ftp-server">
+          <?php print drupal_render($form['video_browse_select']); ?>
+        </div>
+        <div class="local_browse" style="display: none">
+          <span class="button browse-local">Local Browse</span>
+        </div>
+
+    </div>
 </div>
+  <span class="browse-ftp-click button">Browse Video</span>
+  <span class="error vid-error"></span>
+  <?php print drupal_render($form['field_video_duration']); ?>
+  <?php print drupal_render($form['field_upload_video']); ?>
+  <?php print drupal_render($form['field_story_expert_name']); ?>
+  <?php print drupal_render($form['field_story_expert_description']); ?>
+</div>
+
 <div id="Imageupload">
   <h2 class="story-title"><?php print t('Image'); ?></h2>
     <?php print drupal_render($form['field_story_extra_large_image']); ?> 
@@ -46,10 +64,16 @@
     <?php print drupal_render($form['field_story_comment_question']); ?>
     <?php print drupal_render($form['field_story_syndication']); ?>
     <?php print drupal_render($form['field_story_itg_tags']); ?>
+    <?php print drupal_render($form['field_dailymotion_playlist']); ?>
     <?php print drupal_render($form['field_story_category']); ?>
+    <?php print drupal_render($form['field_primary_cat_data']); ?>
     <?php print drupal_render($form['field_story_schedule_date_time']); ?>
     <?php print drupal_render($form['field_story_expires']); ?> 
     <?php print drupal_render($form['field_story_expiry_date']); ?> 
+</div>
+<div id="Relatedcontent">
+  <h2 class="story-title">Related content</h2>
+  <?php print drupal_render($form['field_common_related_content']); ?>
 </div>
 <h2 id="title-metatags" class="story-title"><?php print t('Meta Tags'); ?></h2>
 <?php print drupal_render_children($form); ?>

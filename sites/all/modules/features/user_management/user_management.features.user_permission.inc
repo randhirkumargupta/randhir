@@ -35,7 +35,9 @@ function user_management_user_default_permissions() {
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
     'roles' => array(
+      'Co-ordinator' => 'Co-ordinator',
       'Copy Editor' => 'Copy Editor',
+      'Correspondent' => 'Correspondent',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',

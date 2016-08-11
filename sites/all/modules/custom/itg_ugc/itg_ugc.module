@@ -183,8 +183,22 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
         '#value' => t('Cancel'),
       );
     }
+    $type="ugc";
 
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+     foreach ($tax as $key => $term) {  
+        
+    if (!itg_category_manager_term_state($term->tid)) {
+      unset($tax[$key]);
+    }
+     if($type!=""){
+    if(!itg_category_manager_term_state_content($type,$term->tid)) {
+         unset($tax[$key]);
+    }
+    }
+    
+  }
+    
     $op = array("_none" => "Select Category");
         foreach ($tax as $key => $val) {
             $op[$val->tid] = $val->name;

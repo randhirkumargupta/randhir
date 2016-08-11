@@ -21,6 +21,9 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => -10,
     );
 
+     if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')){
+      $form['actions']['submit']['#submit'][] = 'itg_event_alter_submit_status_message';
+    }
     // Node redirection code
     if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
       $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect';
@@ -31,6 +34,8 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     else {
       $form['actions']['submit']['#weight'] = 10;
     }
+    
+   
     //add extra save button
     if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
       $form['actions']['submit2'] = array(
@@ -38,7 +43,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         '#name' => 'second_submit',
         '#value' => t('Save'),
         '#access' => TRUE,
-        '#submit' => array('node_form_submit', 'itg_event_backend_second_submit'),
+        '#submit' => array('node_form_submit', 'itg_event_backend_second_submit', 'itg_event_alter_submit_status_message'),
         '#weight' => -9,
       );
     }
@@ -71,6 +76,26 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 20,
     );
   }
+}
+
+/**
+ * Implements alter message function().
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_event_alter_submit_status_message(&$form, $form_state) {
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend') {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';
+  }
+  $sponsor_title = $form_state['node']->title;
+  drupal_set_message(t('Event <b>' . $sponsor_title . '</b> has been ' . $op . '.'));
+  $_GET['destination'] = $_REQUEST['destination'];
 }
 
 /**
@@ -125,6 +150,9 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   }
 
   $event_type = $form_state['values']['field_event_type'][LANGUAGE_NONE][0]['value'];
+  if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
+    form_set_error('field_individual_registration_fe', t('Individual Registration Fee is required.'));
+  }
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
     form_set_error('field_group_registration_fee_5', t('Group Registration Fee (upto 5) is required.'));
   }
@@ -132,11 +160,6 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
     form_set_error('field_group_registration_fee_10', t('Group Registration Fee (upto 10) is required.'));
   }
-
-  if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_individual_registration_fe', t('Individual Registration Fee is required.'));
-  }
-
   // Fees validation for registration
   if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
     form_set_error('field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (upto 5)'));

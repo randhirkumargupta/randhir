@@ -194,3 +194,6 @@ if (!in_array('administrator', $user->roles)) {
 </div>
 
 <?php print render($page['bottom']); ?>
+<!--<div class="ajax-loader">
+  <img src="<?php  //echo base_path().path_to_theme(); ?>/images/loader.svg" alt=""/>
+</div>-->

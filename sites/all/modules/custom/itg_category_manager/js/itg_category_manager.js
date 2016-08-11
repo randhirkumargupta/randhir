@@ -27,7 +27,7 @@
               data: {'tid': tid},
               dataType: "JSON",
               success: function (data) {                
-                window.location = setting.baseUrl + "/category-manager";                
+                window.location = setting.baseUrl + "/category-manager-listing";                
               },
               complete: function () {
                 hideLoadingImage();
@@ -54,6 +54,17 @@
           }
         });
       });
+      $('.hierarchical-select select').on('change',function(){
+          if($(this).val()!=0)
+          {
+              $('#edit-field-cm-select-type-und').attr('disabled',true);
+               $('#edit-field-cm-select-type-und').removeAttr('required');
+          }else{
+            $('#edit-field-cm-select-type-und').attr('disabled',false);
+             $('#edit-field-cm-select-type-und').attr('required','required');
+
+          }
+      })
       
       // Pager settings
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -62,7 +73,11 @@
       var currentMonthPager = $(".date-heading h3").text();
       if (currentMonth === currentMonthPager) {        
         $(".date-next").css("display", "none");
-      }     
+      }
+      
+      // Copy to clipboard code.
+      new Clipboard('.itg-clipboard');
+      // End of Copy to clipboard code.
     }
   };
 })(jQuery, Drupal, this, this.document);

@@ -1,8 +1,8 @@
 <?php
+
 /**
  * @file
  * Theme implementation for story form in tab display.
- * 
  */
 ?>
 
@@ -36,6 +36,7 @@
 <div id="channel">
   <h2 class="story-title"><?php echo t('Channel'); ?></h2>
   <?php print drupal_render($form['field_story_category']); ?>    
+  <?php print drupal_render($form['field_primary_cat_data']); ?>
 </div>
 
 <h2 id="title-metatags" class="story-title"><?php echo t('Meta Tags'); ?></h2>

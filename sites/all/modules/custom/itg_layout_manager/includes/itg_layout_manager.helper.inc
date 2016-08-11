@@ -1,0 +1,294 @@
+<?php
+/**
+ * @file
+ * Inc file for All common function of layout manager.
+ *
+ */
+
+/**
+ * Get template name by section name
+ * @return string
+ */
+function get_template_name_by_section_name($section_name) {
+  $query = db_select('itg_layout_tpl', 'tpl');
+  $query->fields('tpl', array('template_name'));  
+  $query->condition('section_name', $section_name)
+        ->condition('status', 1);
+  $query->orderBy('tpl.id', 'DESC')->range(0,1);//LIMIT to 1 records
+
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get All itg footer menu 
+ * @return array
+ */
+function get_itg_footer_menu() {  
+  $data['publications_footer'] = menu_tree('menu-itg-publications-menu-foote');
+  $data['distribution_footer'] = menu_tree('menu-itg-distribution-menu-foote');
+  $data['education_footer'] = menu_tree('menu-itg-education-menu-footer');
+  $data['events_footer'] = menu_tree('menu-itg-events-menu-footer');
+  $data['music_footer'] = menu_tree('menu-itg-music-menu-footer');
+  $data['printing_footer'] = menu_tree('menu-itg-printing-menu-footer');
+  $data['radio_footer'] = menu_tree('menu-itg-radio-menu-footer');
+  $data['shopping_footer'] = menu_tree('menu-itg-shopping-menu-footer');
+  $data['syndication_footer'] = menu_tree('menu-itg-syndication-menu-footer');
+  $data['television_footer'] = menu_tree('menu-itg-television-menu-footer');
+  $data['useful_footer'] = menu_tree('menu-itg-useful-menu-footer');
+  $data['welfare_footer'] = menu_tree('menu-itg-welfare-menu-footer');
+  $data['footer-top-menu'] = menu_tree('menu-itg-main-menu-footer');
+  return $data;
+}
+
+/**
+ * Get all widgets list for layout setting page
+ * @param string $section_name
+ * @param string $template_name 
+ * @return array
+ */
+function get_all_widgets_list_by_setting_page() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));  
+  $query->condition('type', 'itg_template_widgets');        
+  $query->orderBy('n.nid', 'DESC')->range(0,1);//LIMIT to 1 records
+  $nid = $query->execute()->fetchField();
+  
+  $node = node_load($nid);
+  $widget_array = $node->field_itg_widget_name[LANGUAGE_NONE];
+  
+  return $widget_array;
+}
+
+/**
+ * check template for section
+ * @param string $section_name
+ * @param string $template_name 
+ * @return int $id
+ */
+function check_template_of_section($section_name, $template_name) {  
+  $query = db_select('itg_layout_tpl', 'tpl');
+  $query->fields('tpl', array('id'));  
+  $query->condition('section_name', $section_name)
+        ->condition('template_name', $template_name, '!=');
+  $query->orderBy('tpl.id', 'DESC')->range(0,1);//LIMIT to 1 records
+  
+  $id = $query->execute()->fetchField();
+  
+  return $id;
+}
+
+/**
+ * render itg widget block by widget name 
+ * @param string $widget_name 
+ * @return array $render_array
+ */
+function get_itg_widget($widget_name, $widget_url = NULL) {
+  
+  if (isset($widget_name) && $widget_name == 'section_wise_order') {
+    return create_setion_widgets($widget_url);
+  }
+  elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {    
+    //return 'shravan kumar'; //'photo_list_of_category'; //code views rander
+    
+    return views_embed_view($widget_name, 'block', $widget_url);
+  }
+  else {      
+    $block = block_load('itg_widget', $widget_name);
+    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+    return render($render_array);
+  }
+  
+}
+
+/**
+ * Get id of itg_layout_manager
+ * @param int $layout_id
+ * @param string $block_name 
+ * @return int $id
+ */
+function get_layout_manager_id($layout_id, $block_name) {
+  $query = db_select('itg_layout_manager', 'layout');
+  $query->fields('layout', array('id'));  
+  $query->condition('layout_id', $layout_id)
+        ->condition('block_name', $block_name);  
+  $id = $query->execute()->fetchField();
+  
+  return $id;
+}
+
+/**
+ * Get template name list of layouts directory
+ * @param string $tpl_dir 
+ * @return array $data
+ */
+function get_template_name($tpl_dir) {
+  
+  $dir = getcwd().'/'.drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts/'.$tpl_dir;
+  
+  $scanned_directory = array_diff(scandir($dir, 1), array('..', '.'));
+  
+  $data = array("" => "-- Template --");
+  
+  foreach ($scanned_directory as $key => $val) {
+    $tpl = substr($val,0,-8);
+    $data[$tpl] = $tpl;    
+  }
+  
+  return $data;
+}
+
+/**
+ * Get layout details by section_name and template_name for front and admin
+ * @param string $section_name
+ * @param string $template_name 
+ * @return array $data
+ */
+function get_layout_details($section_name, $template_name, $status) {
+  
+  if ($status == 'admin') {
+    //Get last layout setting
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('id', 'status'));  
+    $query->condition('section_name', $section_name)
+          ->condition('template_name', $template_name);
+    $query->orderBy('tpl.id', 'DESC')->range(0,1);
+
+    $last_tpl = $query->execute()->fetchField();
+  }
+  
+  //Get layout setting details info
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', 'filter_url'));  
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
+  $itg_query->condition('layout_tpl.section_name', $section_name);    
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  //condition for front
+  if ($status == 'front') {
+    $itg_query->condition('layout_tpl.status', 1);
+  } //condition for admin
+  elseif ($status == 'admin') {
+     $itg_query->condition('layout_tpl.id', $last_tpl);     
+  }
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  foreach ($itg_result as $itg_val) {
+    $result['widget_name'] = $itg_val->widget_name;
+    if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') {
+      $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$itg_val->filter_url);
+    }else {
+      $result['block_title'] = $itg_val->block_title;
+    }
+    
+    if (isset($itg_val->widget_name)) {
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->filter_url);
+    } 
+    else {
+      $widget = '<p>Drag template widgets here !</p>';
+    }
+    
+    $result['widget'] = $widget;
+    
+    $data[$itg_val->block_name] = $result;
+  }
+  //p($data);
+  return $data; 
+  
+}
+
+/**
+ * Display section widgets list
+ * @param string $section_name
+ * @param string $template_name 
+ * @return string 
+ */
+function display_section_widgets_list($section_name, $template_name, $widget_type) {
+  
+  global $base_url;  
+  
+  // select query    
+  $itg_query = db_select('itg_section_widgets_list', 'layout_tpl');
+  $itg_query->fields('layout_tpl', array('id','category_name', 'category_id'));
+  $itg_query->condition('layout_tpl.template_section_name', $section_name);
+  $itg_query->condition('layout_tpl.template_name', $template_name);  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  $widget_name = $widget_type;
+  
+  $content = '<ul id="templates-widgets-section" class="no-bullet pd-10 templates-widgets">';
+  
+  foreach ($itg_result as $row) {    
+    $content .= '<li id="'.$row->category_name.'" data-widget="'.$widget_name.'#'.$row->category_id.'">'
+            . '<span>'.$row->category_name.' ('.$row->category_id.')</span>'
+            . '<span><a class="layout-section-delete" href="javascript:void(0)" data-widget="'.$row->id.'">X</a></span>'
+            . '</li>';
+  }
+  
+  $content .= '</ul>';
+  
+  return $content;
+}
+
+/**
+ * Get section widgets id
+ * @return int
+ */
+function get_section_widgets_id($cid, $section) {
+  $query = db_select('itg_section_widgets_list', 'section');
+  $query->fields('section', array('id'));  
+  $query->condition('category_id', $cid);
+  $query->condition('template_section_name', $section);
+  return $query->execute()->fetchField();
+}
+
+
+/**
+ * Get current poll widgets list for layout setting page 
+ * @return array
+ */
+function get_widgets_poll_list() {
+  
+  $date = date('Y-m-d H:i:s');
+  //echo $date;
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_poll_start_date', 'start_date', 'start_date.entity_id = n.nid');
+  $query->leftJoin('field_data_field_poll_end_date', 'end_date', 'end_date.entity_id = n.nid');
+  $query->fields('n', array('title', 'nid'));  
+  $query->condition('type', 'poll');
+  $query->condition('start_date.field_poll_start_date_value', $date, '<=');
+  $query->condition(db_or()->isNull('end_date.field_poll_end_date_value')->condition('end_date.field_poll_end_date_value', $date, '>='));
+  
+  $itg_result = $query->execute()->fetchAll();
+  
+  $widget_name = $widget_type;
+  
+  $content = '<ul id="poll-widgets" class="no-bullet pd-10 templates-widgets">';
+  
+  foreach ($itg_result as $row) {    
+    $content .= '<li id="'.$row->title.'" data-widget="'.$widget_name.'#'.$row->nid.'">'
+            . '<span>'.$row->title.'</span>'            
+            . '</li>';
+  }
+  
+  $content .= '</ul>';
+  
+  return $content;
+}
+
+/**
+ * Get itg setion widgets 
+ * @return array
+ */
+function create_setion_widgets($section_id) {
+  module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
+  // value is hardcoded need to be change for dyanamic functionality
+  $info['section'] = $section_id; // tid of section
+  $info['content_type'] = ''; // content type machine name
+  // view name which is stored in draggableviews_structure table
+  $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
+  $block['subject'] = t('Section wise ordering from custom table');
+  
+  $data = itg_widget_section_wise_ordering_from_custom_table($info);
+  
+  return theme("section_wise_ordering", array("data" => $data));
+}

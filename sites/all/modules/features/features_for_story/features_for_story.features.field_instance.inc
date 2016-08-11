@@ -161,7 +161,8 @@ function features_for_story_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -275,6 +276,170 @@ function features_for_story_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 58,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_itg_common_by_line_name'.
+  $field_instances['node-story-field_itg_common_by_line_name'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 69,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_itg_common_by_line_name',
+    'label' => 'Common by line',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 59,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_itg_common_by_line_twitter'.
+  $field_instances['node-story-field_itg_common_by_line_twitter'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 70,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_itg_common_by_line_twitter',
+    'label' => 'common by line twitter',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 60,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_primary_category'.
+  $field_instances['node-story-field_primary_category'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 72,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category',
+    'label' => 'primary category',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 63,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_primary_category_html'.
+  $field_instances['node-story-field_primary_category_html'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 73,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html',
+    'label' => 'Primary category html',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 64,
     ),
   );
 
@@ -611,7 +776,8 @@ function features_for_story_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -826,7 +992,8 @@ function features_for_story_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -902,7 +1069,8 @@ function features_for_story_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -978,8 +1146,8 @@ function features_for_story_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -997,7 +1165,7 @@ function features_for_story_field_default_field_instances() {
             'search_all_fields' => 1,
           ),
         ),
-        'imce_filefield_on' => 1,
+        'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -1155,6 +1323,90 @@ function features_for_story_field_default_field_instances() {
       ),
       'type' => 'file_generic',
       'weight' => 53,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_story_featured_name'.
+  $field_instances['node-story-field_story_featured_name'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 68,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_featured_name',
+    'label' => 'Featured Name',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_story_highlights'.
+  $field_instances['node-story-field_story_highlights'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 71,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_highlights',
+    'label' => 'Brief case',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 61,
     ),
   );
 
@@ -1352,7 +1604,8 @@ function features_for_story_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -1632,7 +1885,8 @@ function features_for_story_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -1702,8 +1956,8 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-story-field_story_posted_by_facebook'.
-  $field_instances['node-story-field_story_posted_by_facebook'] = array(
+  // Exported field_instance: 'node-story-field_story_node_identity'.
+  $field_instances['node-story-field_story_node_identity'] = array(
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
@@ -1714,7 +1968,7 @@ function features_for_story_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 58,
+        'weight' => 71,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1725,8 +1979,8 @@ function features_for_story_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_story_posted_by_facebook',
-    'label' => 'Posted by facebook',
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1740,91 +1994,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 52,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_story_posted_by_instagram'.
-  $field_instances['node-story-field_story_posted_by_instagram'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 60,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_posted_by_instagram',
-    'label' => 'Posted By Instagram',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 54,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_story_posted_by_twitter'.
-  $field_instances['node-story-field_story_posted_by_twitter'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 59,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_posted_by_twitter',
-    'label' => 'Posted by Twitter',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 53,
+      'weight' => 62,
     ),
   );
 
@@ -1951,45 +2121,6 @@ function features_for_story_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete',
       'weight' => 14,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_story_resize_extra_large'.
-  $field_instances['node-story-field_story_resize_extra_large'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 32,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_resize_extra_large',
-    'label' => 'Resize extra large ',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 31,
     ),
   );
 
@@ -2223,7 +2354,8 @@ function features_for_story_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -2675,180 +2807,6 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-story-field_story_time_facebook'.
-  $field_instances['node-story-field_story_time_facebook'] = array(
-    'bundle' => 'story',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 61,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_time_facebook',
-    'label' => 'Time Facebook',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'd/m/Y',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 55,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_story_time_instagram'.
-  $field_instances['node-story-field_story_time_instagram'] = array(
-    'bundle' => 'story',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 62,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_time_instagram',
-    'label' => 'Time Instagram',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 56,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_story_time_twitter'.
-  $field_instances['node-story-field_story_time_twitter'] = array(
-    'bundle' => 'story',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 63,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_time_twitter',
-    'label' => 'Time Twitter',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'display_all_day' => 0,
-        'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 57,
-    ),
-  );
-
   // Exported field_instance: 'node-story-field_story_tweet'.
   $field_instances['node-story-field_story_tweet'] = array(
     'bundle' => 'story',
@@ -2939,8 +2897,8 @@ function features_for_story_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -2958,7 +2916,7 @@ function features_for_story_field_default_field_instances() {
             'search_all_fields' => 1,
           ),
         ),
-        'imce_filefield_on' => 1,
+        'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -3122,6 +3080,7 @@ function features_for_story_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Are you sure you want to Archive?');
+  t('Brief case');
   t('Buzz');
   t('Buzz Description');
   t('Byline');
@@ -3130,6 +3089,7 @@ function features_for_story_field_default_field_instances() {
   t('Comment');
   t('Comment Question');
   t('Comment question');
+  t('Common by line');
   t('Configurations');
   t('Courtesy');
   t('Expert Name');
@@ -3144,6 +3104,7 @@ function features_for_story_field_default_field_instances() {
   t('Facebook image');
   t('Facebook narrative');
   t('Factoids');
+  t('Featured Name');
   t('HeadLine');
   t('Image');
   t('Image Size (210 x 145)');
@@ -3161,13 +3122,11 @@ function features_for_story_field_default_field_instances() {
   t('Media Files');
   t('Medium image');
   t('New title');
-  t('Posted By Instagram');
-  t('Posted by Twitter');
-  t('Posted by facebook');
+  t('Node Identity');
+  t('Primary category html');
   t('Quotes');
   t('Redirection URL');
   t('Related Content');
-  t('Resize extra large ');
   t('Schedule date & time');
   t('Section');
   t('Select listicle templates');
@@ -3193,14 +3152,13 @@ function features_for_story_field_default_field_instances() {
   t('This headline shows on the homepage');
   t('This is the redirection URL for the New Title added above (url format: https://www.w3schools.com)');
   t('This title will append after the main Story headline on the homepage');
-  t('Time Facebook');
-  t('Time Instagram');
-  t('Time Twitter');
   t('Tweet');
   t('Twitter Image');
   t('Twitter Video');
   t('Twitter Video Description');
   t('Twitter narrative');
+  t('common by line twitter');
+  t('primary category');
 
   return $field_instances;
 }

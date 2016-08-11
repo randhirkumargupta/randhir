@@ -1,0 +1,422 @@
+/*Start CSS Desktop version*/
+/*====================== IndiaToday Variables =========================*/
+/*=======================================================================*/
+/*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
+/*Fonts used in Indiatoday site*/
+/*Colors used in Indiatoday site*/
+/*Background Colors used in Indiatoday site*/
+/*Border Colors used in Indiatoday site*/
+/*Text color in Indiatoday site*/
+/*Background color in Indiatoday site*/
+/*navigation font in Indiatoday site*/
+/*Full radius in Indiatoday site*/
+/*footer color in Indiatoday site*/
+/*font family an font weight mixins*/
+/*font size an font weight mixins*/
+/*clear fix mixins*/
+/*Box sizeing mixins*/
+/*Center Block mixins*/
+/*Float mixins*/
+/*Display inline block mixins*/
+/*Text align block mixins*/
+/* Positional mixins */
+/* Calculate-width function */
+/* Tab Button mixins */
+/* Tab Listing mixins */
+/* Story Tag mixins */
+/* List before icon */
+/*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
+/*Start header CSS Desktop version*/
+@media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 40px;
+    line-height: 46px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 29px;
+    line-height: 34px;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  h4 {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .mhide {
+    display: block;
+  }
+
+  .desktop-hide {
+    display: none;
+  }
+
+  #block-itg-layout-manager-header-block {
+    height: 220px;
+  }
+  #block-itg-layout-manager-header-block .header-top {
+    background: #193c8d url(../images/header-bg.png) no-repeat top center;
+    height: 163px;
+  }
+  #block-itg-layout-manager-header-block .logo {
+    width: auto;
+    top: 100px;
+  }
+  #block-itg-layout-manager-header-block .logo img {
+    background: #193c8d;
+    padding-left: 5px;
+    padding-right: 2px;
+    vertical-align: top;
+  }
+  #block-itg-layout-manager-header-block .top-nav {
+    padding: 0 15px 0 15px;
+    margin: 25px auto 15px auto;
+    float: none;
+    zoom: 1;
+    background: transparent;
+  }
+  #block-itg-layout-manager-header-block .top-nav:before, #block-itg-layout-manager-header-block .top-nav:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  #block-itg-layout-manager-header-block .top-nav:after {
+    clear: both;
+  }
+  #block-itg-layout-manager-header-block .top-nav ul li.desktop-hide {
+    display: none;
+  }
+  #block-itg-layout-manager-header-block .top-nav .main-nav {
+    float: right;
+  }
+  #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) {
+    position: relative;
+  }
+  #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before {
+    content: '';
+    background: url(../images/live-icon.png) no-repeat;
+    position: absolute;
+    top: -8px;
+    left: 15px;
+    width: 28px;
+    height: 19px;
+  }
+  #block-itg-layout-manager-header-block .top-nav .main-nav li a {
+    padding: 0 35px;
+    font-size: 27px;
+    font-size: 1.6875rem;
+  }
+  #block-itg-layout-manager-header-block .top-nav .main-nav li a.active, #block-itg-layout-manager-header-block .top-nav .main-nav li a:hover {
+    color: #ffc106;
+  }
+  #block-itg-layout-manager-header-block .top-nav .social-nav {
+    position: relative;
+    float: right;
+  }
+  #block-itg-layout-manager-header-block .top-nav .social-nav a .fa {
+    font-size: 23px;
+    font-size: 1.4375rem;
+  }
+  #block-itg-layout-manager-header-block .top-nav .social-nav a .fa.fa-mobile {
+    font-size: 27px;
+    font-size: 1.6875rem;
+  }
+  #block-itg-layout-manager-header-block .top-nav .social-nav .globle-search {
+    position: absolute;
+    right: 40px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    width: 0px;
+    overflow: hidden;
+  }
+  #block-itg-layout-manager-header-block .top-nav .social-nav .globle-search .search-text {
+    width: 100%;
+  }
+  #block-itg-layout-manager-header-block .navigation {
+    zoom: 1;
+    margin-top: 20px;
+    display: block !important;
+  }
+  #block-itg-layout-manager-header-block .navigation:before, #block-itg-layout-manager-header-block .navigation:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  #block-itg-layout-manager-header-block .navigation:after {
+    clear: both;
+  }
+  #block-itg-layout-manager-header-block .navigation .menu {
+    padding-left: 145px;
+  }
+  #block-itg-layout-manager-header-block .navigation .menu li {
+    float: left;
+  }
+  #block-itg-layout-manager-header-block .navigation .menu li a {
+    color: #e0e0e0;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0 10px;
+    border-right: 1px solid #680101;
+    border-top: none;
+    height: 37px;
+    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 37px;
+  }
+
+  /*End header CSS Desktop version*/
+  /*Start Footer CSS Desktop version*/
+  footer .footer-top .footer-top-link {
+    float: left;
+  }
+  footer .footer-top .footer-social-link .fa {
+    font-size: 24px;
+    font-size: 1.5rem;
+    vertical-align: middle;
+  }
+  footer .footer-top .footer-expand-icon {
+    right: 15px;
+  }
+  footer .footer-bottom {
+    /*.first-cell{
+        width: 30%;
+        h4{
+            @include float(left);
+            @include calculate-width(2);
+            margin-bottom: 0;
+        }
+    }*/
+  }
+  footer .footer-bottom .cell {
+    width: 16.66667%;
+    margin-bottom: 0;
+  }
+  footer .footer-bottom .cell:nth-child(2n+1) {
+    clear: none;
+  }
+
+  /*End Footer CSS Desktop version*/
+  /*Start CSS Top Block Grid Home Page*/
+  .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
+    padding: 0 15px;
+  }
+  .top-block .top-colum-1 {
+    float: left;
+    width: 22%;
+  }
+  .top-block .top-colum-2 {
+    width: 44.8%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .top-block .top-colum-3 {
+    width: 33.2%;
+    float: right;
+  }
+
+  /*End CSS Top Block Grid Home Page*/
+  /*Start CSS Big New Home page*/
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    float: left;
+    padding: 0 15px;
+  }
+  .big-news .big-story-col-1 {
+    width: 56.4%;
+  }
+  .big-news .big-story-col-2 {
+    width: 43.6%;
+    padding-left: 0;
+  }
+
+  /*End CSS Big New Home page*/
+  /*Start CSS Featured-news Home Page*/
+  .featured-news {
+    padding: 5px;
+    border: 1px solid #dddddd;
+    margin: 0;
+  }
+  .featured-news .featured-post {
+    padding: 5px;
+  }
+
+  /*End CSS Featured-news Home Page*/
+  /*Start Dont miss Home page css*/
+  .dont-miss {
+    /*padding: 20px 0px 0px 10px;*/
+  }
+  .dont-miss ul .dont-miss-listing {
+    float: left;
+    width: 50%;
+    padding: 0px 10px 25px 0;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(2n+1) {
+    clear: left;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(3), .dont-miss ul .dont-miss-listing:nth-child(4) {
+    padding-bottom: 0;
+  }
+
+  /*End Dont miss Home page css*/
+  /*Start Story page css*/
+  .story-section h1 {
+    font-size: 34px;
+    font-size: 2.125rem;
+    font-weight: 700;
+    line-height: 42px;
+  }
+  .story-section .story-left, .story-section .story-right {
+    float: left;
+  }
+  .story-section .story-left {
+    width: 21%;
+  }
+  .story-section .story-left .byline {
+    text-align: center;
+  }
+  .story-section .story-left .byline .profile-pic, .story-section .story-left .byline .profile-detail {
+    float: none;
+  }
+  .story-section .story-left .byline .profile-detail ul li {
+    float: none;
+    padding: 5px 0;
+    border-bottom: 1px solid #eaeaea;
+  }
+  .story-section .story-left .byline .profile-detail ul li + li {
+    border-left: none;
+  }
+  .story-section .story-left .briefcase {
+    margin-top: 50px;
+  }
+  .story-section .story-left .briefcase h4 {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .story-section .story-left .briefcase ul li {
+    background: #f9f9f9;
+    color: #575757;
+    padding: 12px 8px 20px 8px;
+    line-height: 18px;
+  }
+  .story-section .story-left .briefcase ul li + li {
+    border-top: 1px solid #eaeaea;
+    padding: 20px 8px;
+  }
+  .story-section .story-left .briefcase ul li:before {
+    display: none;
+  }
+  .story-section .story-right {
+    width: 79%;
+  }
+  .story-section .snap-post {
+    padding: 20px 20px 20px 100px;
+    background-size: inherit;
+  }
+  .story-section .snap-post .discription {
+    font-size: 22px;
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 30px;
+    text-align: center;
+  }
+  .story-section .snap-post .agbutton {
+    margin: 20px 0;
+    text-align: center;
+  }
+  .story-section .snap-post .agbutton a {
+    display: inline-block;
+    margin-top: 0;
+  }
+  .story-section .snap-post .agbutton button {
+    margin: 0 15px;
+    width: 113px;
+    font-size: 17px;
+    font-size: 1.0625rem;
+    font-weight: 500;
+  }
+
+  .buzz-feedback .story-right {
+    width: 100%;
+  }
+
+  /*End Story page css*/
+  /*Start CSS Snap Post*/
+  .page-snappost .spanpost-header .spost-left {
+    width: 50%;
+  }
+  .page-snappost .spanpost-header .spost-right {
+    width: 50%;
+  }
+  .page-snappost .spanpost-header .spost-right ul li {
+    font-size: 30px;
+    font-size: 1.875rem;
+    line-height: 94px;
+    padding-left: 25px;
+  }
+  .page-snappost .spanpost-header .spost-right ul li img {
+    width: auto;
+  }
+  .page-snappost .view-content .views-row .snap-title h1 span a {
+    font-size: 30px;
+    font-size: 1.875rem;
+  }
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button {
+    margin-top: 60px;
+  }
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
+    width: 180px;
+    height: 60px;
+    font-size: 22px;
+    font-size: 1.375rem;
+    line-height: 60px;
+  }
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button a.disagree {
+    margin-left: 30px;
+  }
+
+  /*End CSS Snap Post*/
+}
+/*End CSS Desktop version*/
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  #block-itg-layout-manager-header-block .top-nav .main-nav li a {
+    padding: 0 15px;
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
+  #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before {
+    top: -6px;
+    left: 0;
+  }
+
+  .top-block .top-colum-2 {
+    width: 100%;
+  }
+
+  .top-block .top-colum-1, .top-block .top-colum-3 {
+    width: 50%;
+  }
+
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    width: 100%;
+  }
+
+  .big-news .big-story-col-2 {
+    padding-top: 20px;
+    padding-left: 15px;
+  }
+}

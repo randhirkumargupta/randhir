@@ -149,7 +149,81 @@ Drupal.behaviors.my_custom_behavior = {
       $(this).attr('placeholder', plaholderText);
       $(this).prev('label').hide();
     });
-
+    
+    headerMain();
+    function headerMain(){
+        //var logotxt = $('.container.header-logo').html();
+        $('.container.header-logo').prependTo('#block-itg-layout-manager-header-block');
+        $('.search-icon').click(function(){
+            $('.globle-search').css('width','255px');
+        });
+        $('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+        $('.mobile-nav').click(function(){
+            $('.navigation').stop().slideToggle();
+        });
+        $(document).on('click', function(){            
+            $('.globle-search').css('width','0px');
+        });
+        $('.search-icon, .globle-search').click(function(e){
+            e.stopPropagation();
+        });
+    }
+    
+    footerMain();
+    function footerMain(){
+    //footer toggal script
+    $('.footer-expand-icon').click(function(){
+        $('.footer-toggle').slideToggle();
+        $("html, body").animate({ scrollTop: $(document).height() }, 800);
+        $('.footer-expand-icon').toggleClass('footer-open-icon');
+    });
+    //footer add more link
+    $('.footer-bottom .cell ul').each( function(){
+        var countList = $(this).children('li').length;        
+        if(countList > 8){
+           $(this).find('li:gt(7)').hide().addClass('hidelist');
+           $(this).append("<li><span class='more-link'>More</span></li>");
+        }
+    });
+    $('.more-link').click(function(){
+        $(this).parents('ul').find('li.hidelist').slideToggle();
+        $(this).toggleClass('active');
+        $("html, body").animate({ scrollTop: $(document).height() }, 800);
+        if($(this).hasClass('active')){
+            $('.more-link').text('Less');
+        } else{
+            $('.more-link').text('More');
+        }
+    });
+    }
+    // jQuery Code for tabbing
+    $('.tab-buttons').on('click', 'span', function(){
+      var dataID = '.' + $(this).attr('data-id');
+      $(this).addClass('active').siblings().removeClass('active');
+      $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
+    });
+    // jQuery Code for tabbing End
+    
+    //ITG Listing top spacing          
+    $('.tab-data').find('ul.itg-listing').css('padding-top','0');
+    
+    //pagination
+    $('.pager .pager-previous a').html('<i class="fa fa-chevron-left"></i>');
+    $('.pager .pager-next a').html('<i class="fa fa-chevron-right"></i>');
+    
+    // Global function to set lable as input placeholder
+    function placeHolder(element, parent){
+      $(element).each(function(){
+        el = $(this);                                                                     //make a variable for this label
+        el_for = el.attr('for');                                                          //get the value of the label attr for
+        label_value = el.text();                                                          //get the value of the label
+        el.hide();                                                                        //hide the label
+        el_input = 'input[id='+el_for+']';                                                //get input element
+        $(parent).find(el_input).attr('placeholder', $.trim(label_value));                //fill it with the label's value
+      });
+    }
+    placeHolder('#edit-keyword-wrapper > label', '#edit-keyword-wrapper');
+    
   }
 };
 

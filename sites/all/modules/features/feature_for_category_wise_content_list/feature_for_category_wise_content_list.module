@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for Category wise content list feature.
+ */
+
+include_once 'feature_for_category_wise_content_list.features.inc';
