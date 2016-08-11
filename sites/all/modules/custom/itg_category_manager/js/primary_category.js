@@ -1,13 +1,10 @@
 /*
- * @file itg_story.js
- * Contains all functionality related to story
+ * @file primary_category.js
+ * Contains all functionality related to primary category
  */
 
 (function($) {
-    Drupal.behaviors.itg_story = {
-        attach: function(context, settings) {
-           
-
+  
             // code use for make primary category
             jQuery('.add-to-dropbox').mousedown(function()
             {
@@ -27,7 +24,7 @@
                             comptext = comptext + selopttext + '›';
                         }
 
-                    })
+                    });
                     comptext = comptext.slice(0, -1);
                     jQuery('#primary-category-data option').each(function()
                     {
@@ -37,7 +34,7 @@
                             flag = 1;
                         }
 
-                    })
+                    });
                     if (comptext != "" && flag == 0)
                     {
                         makeradio = '<option value="' + selectvalue + '">' + comptext + '</option>';
@@ -48,7 +45,7 @@
                     }
                 }
 
-            })
+            });
             jQuery('.dropbox-remove a').click(function() {
                 var getdattext = jQuery(this).parent().siblings('td').text();
                
@@ -60,7 +57,7 @@
                     }
                 });
 
-            })
+            });
 
             jQuery('#primary-category-data').change(function() {
                 var getval = jQuery(this).val();
@@ -69,24 +66,14 @@
                 jQuery('#primary-category-data option[value=' + getval + ']').attr('selected', 'selected');
                 var gethtml = jQuery('#primary-category-data').html();
                 jQuery('#edit-field-primary-category-html-und-0-value').val(gethtml);
-            })
-
-        
-
-
-        }
-
-    };
-
+            });
 
 })(jQuery, Drupal, this, this.document);
 
 //   code load the selectd option and add to select box
 jQuery(window).load(function() {
-    //jQuery('#edit-field-primary-category-html-und-0-value').hide();
     // executes when complete page is fully loaded, including all frames, objects and images
     var getvaluehtml = jQuery('#edit-field-primary-category-html-und-0-value').val();
-
     if (getvaluehtml != "")
     {
         jQuery('#primary-category-data').html(getvaluehtml);
