@@ -1,7 +1,7 @@
 <?php if (!empty($data)) : ?>
 <div class="watch-right-now-video">
-  <ul class="">
     <h3><span><?php print t("Watch Right Now") ?></span></h3>
+  <ul class="">    
     <?php foreach ($data as $video_key => $video_data) { ?>
       <li id="watch-right-now-<?php echo $video_data->nid ?>" class="watch-right-now-list watch-right-now-<?php echo $video_key ?>"">        
         <?php if (!empty($video_data->field_story_extra_large_image['und'][0]['uri'])) { ?>
