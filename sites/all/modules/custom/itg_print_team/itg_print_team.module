@@ -720,6 +720,9 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $headline = $node->title;
   $body = $node->body[LANGUAGE_NONE][0]['value'];
   $magazine_kicker = $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
+  
+  $primary_category = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+  $primary_category_html = $node->field_primary_category_html[LANGUAGE_NONE][0]['value'];
 
   // Print media information
   $print_media_fcollection_id = $node->field_pti_print_media[LANGUAGE_NONE][0]['value'];
@@ -740,6 +743,9 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
   $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
   $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $magazine_kicker ? $magazine_kicker : 'NA';
+  
+  $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $primary_category;
+  $node->field_primary_category_html[LANGUAGE_NONE][0]['value'] = $primary_category_html;
   
   if(!empty($rating)) {
    $node->field_story_rating[LANGUAGE_NONE][0]['value'] = $rating;
