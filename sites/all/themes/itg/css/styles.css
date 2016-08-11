@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block .breaking-section .social-share ul {
   list-style-type: none;
 }
 
@@ -1157,7 +1157,16 @@ footer .footer-copyright {
   position: absolute;
 }
 .big-news h1 {
+  position: relative;
   margin-bottom: 10px;
+}
+.big-news h1:after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: #f40000;
+  border-radius: 100%;
+  display: inline-block;
 }
 .big-news a {
   color: #fff;
@@ -2023,6 +2032,9 @@ footer .footer-copyright {
   line-height: 19px;
   color: #323232;
 }
+.top-takes-video-container ul li {
+  padding: 0 10px;
+}
 .top-takes-video-container ul li + li {
   border-top: 1px solid #dddddd;
 }
@@ -2527,6 +2539,11 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
   margin-bottom: 5px;
+}
+.live-block .breaking-section .social-share ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 15px;
 }
 
 /*End anchors listing css*/
