@@ -84,6 +84,52 @@ function itg_loyalty_reward_schema() {
       ),
       'primary key' => array('id'),
   );
+  
+  $schema['itg_loyalty_reward_cron'] = array(
+      'description' => 'Table for itg_loyalty_reward module',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The Primary Id',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'nid' => array(
+              'description' => 'Node Id',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'type' => array(
+              'description' => 'Node Type',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'scheduled_time' => array(
+              'description' => 'Cron Scheduled Time',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'status' => array(
+              'description' => 'Status',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
 
   return $schema;
 }
