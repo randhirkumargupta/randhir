@@ -198,3 +198,103 @@
   display: inline-block;
   vertical-align: top;
 }
+.sidebar-section-photo{
+  .itg-widget{
+    margin: 35px 0;
+    position: relative;
+  }
+}
+.itg-region{
+    margin: 0 auto;    
+    overflow: hidden;    
+    padding:0 25px;
+    position: relative;
+    border-bottom: 1px solid #d9d9d9;
+    ul{
+      list-style: none;
+      white-space: nowrap;
+      display: inline-block;
+      width: 100%;
+      position: relative;
+      li{
+        display: inline-block;
+        vertical-align: top;
+        border-right: 0;
+        text-transform: uppercase;
+        a{
+          display: block;
+          margin: 0;
+          padding: 10px 5px 7px;
+          border-bottom: 3px solid #fff;
+          &:hover, .active{
+            border-bottom: 3px solid #d00b26;
+          }
+        }
+      }
+    }
+    .slide-icon{
+      position: absolute;
+      top: 0;
+      background: #fff;
+      line-height: 40px;
+      width: 25px;
+      height: 40px;      
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      z-index: 9;
+      display: block !important;
+    }
+    .slide-icon.scroll-arrow-right{
+      left:0;
+    }
+    .slide-icon.scroll-arrow-left{
+      right: 0;
+    }
+  }
+  
+  .view-photo-list-of-category{
+    .view-content{
+      margin: 0 -15px;
+      .photo-list{
+        list-style: none;
+        li{
+          padding: 15px;
+          float: left;
+          .tile{
+            figure{
+              width: 170px;
+              height: 128px;
+              position: relative;
+              figcaption{
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                padding: 5px;
+                background-color: rgba(0,0,0,.5);
+                color: #fff;
+                font-size: 12px;
+                .fa{
+                  font-size: 14px;
+                  margin-right: 5px;
+                }
+              }
+            }
+            .posted-on{
+              display: block;
+              font-size: 12px;
+              color: #b1b1b1;
+              padding: 8px 0 5px;
+            }
+            a{
+              color: #494949;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .region-content{
+    margin: 20px 0;
+  }
