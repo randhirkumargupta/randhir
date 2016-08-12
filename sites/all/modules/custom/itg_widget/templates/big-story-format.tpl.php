@@ -1,3 +1,4 @@
+<?php global $base_url;?>
 <!-- Big news Block -->
 <div class="big-news">
   <div class="row">
@@ -9,7 +10,7 @@
       }
       else {
         ?>
-        <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+        <img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
         <div class="story-tag"><?php echo t("Big Story") ?></div>
       <?php } ?>
     </div>
