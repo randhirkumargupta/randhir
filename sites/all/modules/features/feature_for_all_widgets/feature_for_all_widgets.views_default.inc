@@ -194,6 +194,8 @@ function feature_for_all_widgets_views_default_views() {
   $handler = $view->new_display('page', 'Widget: Section wise content ordering list', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Section Wise Content Widget Order Reorder';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -367,6 +369,7 @@ function feature_for_all_widgets_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['relationship'] = 'nid';
   $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_story_category']['group_column'] = 'entity_id';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
   /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';

@@ -5567,7 +5567,6 @@ div.node #comments h2 {
 .sidebar-section-photo .itg-widget {
   margin: 35px 0;
   position: relative;
-  background-color: #efefef;
 }
 .sidebar-section-photo .itg-widget .droppable {
   min-height: 400px;
@@ -5664,7 +5663,14 @@ div.node #comments h2 {
 }
 
 .region-content {
-  margin: 20px 0;
+  margin: 35px 0;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  position: relative;
+}
+.region-content .widget-loader-wrapper {
+  height: 400px;
 }
 
 .views-form .form-actions {
