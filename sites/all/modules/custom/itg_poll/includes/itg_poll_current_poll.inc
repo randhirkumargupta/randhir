@@ -50,7 +50,7 @@ function itg_poll_get_all_current_poll() {
   $polls_info['related_nodes'] = $related_nodes;
   $polls_info['poll_banner_image'] = $poll_banner_image;
   $polls_info['title'] = $node->title;
-  $polls_info['updated'] =  date('M d Y H:i', $node->changed);
+  $polls_info['updated'] =  t('Updated: ').date('M d Y H:i', $node->changed);
   $polls_info['poll_image_exist_class'] =  $poll_image_exist_class;
  
   return theme('itg_poll_list_all_forms', array('data' => $polls_info));
