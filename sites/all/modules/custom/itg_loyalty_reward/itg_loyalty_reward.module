@@ -262,9 +262,9 @@ function itg_loyalty_reward_product_expiry_notification_callback() {
     $diff = $end_date - $current_time;
     $diff_in_hours = round($diff / ( 60 * 60 ));
     if ($diff_in_hours > 0) {
-      //if ($diff_in_hours <= 24) {
+      if ($diff_in_hours <= 24) {
         itg_loyalty_reward_send_mail_product_expiration($record['nid']);
-      //}
+      }
     }
   }
 }
