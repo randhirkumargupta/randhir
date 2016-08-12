@@ -12,8 +12,8 @@
           }
           else {
             ?>
-            <a  class="pic">
-              <img  src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+            <a <?php print $base_url . '/' . drupal_get_path_alias("node/$video_data->nid"); ?> class="pic">
+              <img   src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
             </a>
           <?php } ?>
           <?php if (!empty($video_data->title)) : ?>

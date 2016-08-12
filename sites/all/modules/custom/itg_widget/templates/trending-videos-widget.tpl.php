@@ -10,7 +10,9 @@
         }
         else {
           ?>
-          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+          <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
+            <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+          </a>
         <?php } ?>
         <?php if (!empty($entity->title)) : ?>
           <?php echo l(mb_strimwidth($entity->title, 0, 120, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")) ?>

@@ -12,8 +12,8 @@
           }
           else {
             ?>
-            <a href="#" class="pic">
-              <img  src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+            <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/$entity_info->nid"); ?>" class="pic">
+              <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
             </a>
           <?php } ?>
           <?php if (!empty($entity_info->title)) : ?>
