@@ -16,7 +16,7 @@ global $theme_key;
   <?php } ?>
 <!--    <li data-widget="section_wise_order"><span>Section Wise order</span></li>-->
 </ul>
-<h2 class="block-title">Poll widgets</h2>
+<!--<h2 class="block-title">Poll widgets</h2>-->
 <?php
- print $data['poll_widget'];
+ //print $data['poll_widget'];
 ?>

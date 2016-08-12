@@ -115,20 +115,32 @@ global $theme;
             <div class="slide-icon scroll-arrow-right"><i class="fa fa-angle-left ll"></i></div>
             <ul>
               <?php for ($count=1; $count < 21; $count++) { ?>
-                <li>
-                  <?php $blockid = 'itg-block-'.$count;?>
-                  <a class="droppable" data-tabwidget_display="region-section-content" id="<?php print $blockid; ?>" href="javascript:;">
-                    <?php
-                    if (isset($widget_data[$blockid]['block_title'])) {
-                      print $widget_data[$blockid]['block_title'];
-                    }
-                    else {
-                      echo 'Drag Category';
-                    }
-                    ?>
-
-                  </a>
-                </li>
+              <?php $blockid = 'itg-block-'.$count;?>
+                <?php if ($theme == FRONT_THEME_NAME) {?>
+              <?php //pr($widget_data[$blockid]);?>
+                  <?php if (isset($widget_data[$blockid]['block_title'])) { ?>
+                    <li>                      
+<!--                      <a class="droppable" data-tabwidget_display="region-section-content" id="<?php print $blockid; ?>" href="javascript:;">
+                        <?php //print $widget_data[$blockid]['block_title'];?>
+                      </a>-->
+                      <?php echo l($widget_data[$blockid]['block_title'], 'taxonomy/term/'.arg(2), array('query' => array('category' => $widget_data[$blockid]['cat_id'])));?>
+                    </li>
+                  <?php } ?>
+                <?php } else { ?>
+                  <li>
+                    <?php $blockid = 'itg-block-'.$count;?>
+                    <a class="droppable" data-tabwidget_display="region-section-content" id="<?php print $blockid; ?>" href="javascript:;">
+                      <?php
+                      if (isset($widget_data[$blockid]['block_title'])) {
+                        print $widget_data[$blockid]['block_title'];
+                      }
+                      else {
+                        echo 'Drag Category';
+                      }
+                      ?>
+                    </a>
+                  </li>
+                <?php } ?>
               <?php } ?>              
             </ul>
             <div class="slide-icon scroll-arrow-left"><i class="fa fa-angle-right ll"></i></div>
