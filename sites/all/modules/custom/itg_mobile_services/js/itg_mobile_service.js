@@ -14,14 +14,21 @@ var maxLen = 0;
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
+
+            jQuery.fn.mobile_astro_custom_js = function () {
+                jQuery('#edit-field-service-content-und-add-more').mousedown();
+            };
+
+            if (Drupal.settings.itg_mobile_services.settings.astro_service) {
+                jQuery("input[id*='field-service-content-date-und-0-value']").hide();
+                jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
+            }
             if (Drupal.settings.itg_mobile_services.settings.service_content_first_row_hide) {
                 var first_row_hide = Drupal.settings.itg_mobile_services.settings.service_content_first_row_hide;
                 if (first_row_hide) {
                     jQuery("#edit-field-service-content tbody tr:first").css("display", "none");
                 }
             }
-
-
 
             jQuery('.form-field-name-field-service-content .cancel').hide();
             jQuery('.form-field-name-field-service-content .form-type-date-popup input').addClass('itg-disabled');
@@ -93,6 +100,10 @@ var maxLen = 0;
             if (selected.length > 0) {
 
                 if (Drupal.settings.itg_mobile_services.settings.service_content_type) {
+                    // set alt text and title text
+                    jQuery("input[id*='field-story-large-image-und-0-alt']").attr('placeholder', 'description');
+                    jQuery("input[id*='field-story-large-image-und-0-title']").attr('placeholder', 'keywords');
+
                     var content_format_arr = Drupal.settings.itg_mobile_services.settings.service_content_type;
                     jQuery.each(content_format_arr, function (key, value) {
                         // content-format-hidden

@@ -24,6 +24,30 @@ function feature_for_video_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function feature_for_video_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: video_landing_page_170_x_127.
+  $styles['video_landing_page_170_x_127'] = array(
+    'label' => 'video_landing_page_170 X 127',
+    'effects' => array(
+      4 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 170,
+          'height' => 127,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function feature_for_video_node_info() {

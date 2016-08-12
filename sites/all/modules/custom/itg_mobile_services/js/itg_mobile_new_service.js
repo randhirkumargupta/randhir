@@ -8,7 +8,22 @@
 
     Drupal.behaviors.itg_mobile_newservice_form = {
         attach: function (context, settings) {
-            
+            $.fn.feed_pattern = function (data) {
+                /* add pattern into textarea*/
+                content = jQuery("textarea.xml-field-codemirror").val(data);
+                jQuery("textarea.xml-field-codemirror").val(data);
+                jQuery("textarea#edit-field-mobile-xml-format-und-0-xml").val(data);
+                /*Now do the formatting of textarea value*/
+                jQuery("textarea.xml-field-codemirror").format({method: 'xml'});
+                /* Removed dublicacey*/
+                jQuery("div.CodeMirror").remove();
+                // initialize editor
+                CodeMirror.fromTextArea(document.getElementById("edit-field-mobile-xml-format-und-0-xml"), {
+                    mode: "text/xml",
+                    lineNumbers: true
+                });
+            };
+
             // default hide FTP label
             jQuery('#itg-group-service-ftp').hide();
             $('.form-item-field-service-fetch-link-und-0-value').hide();
@@ -75,4 +90,9 @@
 
         }
     }
+})(jQuery);
+
+
+(function ($) {
+
 })(jQuery);
