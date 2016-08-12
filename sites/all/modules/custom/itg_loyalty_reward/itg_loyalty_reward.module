@@ -33,9 +33,24 @@ function itg_loyalty_reward_menu() {
       'page arguments' => array('loyality_reward_points_configuration_form'),
       'access callback' => 'user_access',
       'access arguments' => array('loyalty points configuration form'),
-      'file' => 'includes/itg_loyalty_points_form.inc',
+      'file' => 'includes/itg_loyalty_reward_points_form.inc',
   );
   return $items;
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'itg_loyalty_reward_product_notification_mail' => array(
+      'variables' => array('node' => NULL),
+      'template' => 'templates/loyalty-rewards-product-expiration-mail',
+    ),
+  );
+
+  return $themes;
 }
 
 /**
@@ -114,7 +129,7 @@ function itg_loyalty_reward_form_after_build($form, &$form_state) {
     }
   }
 
-  //Array used in itg_print_team.js
+  //Array used in itg_loyalty_reward.js
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -123,7 +138,7 @@ function itg_loyalty_reward_form_after_build($form, &$form_state) {
 
   drupal_add_js(array('itg_loyalty_reward' => array('settings' => $settings)), array('type' => 'setting'));
 
-  //Add JS for itg_print_team
+  //Add JS for itg_loyalty_reward
   drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward.js', array('weight' => 1));
 
   //Unset SEF URL field
@@ -161,4 +176,95 @@ function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, 
      $form['title']['#autocomplete_path'] = 'content-title-list/loyalty_and_rewards/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Product Title'));     
    }
+}
+
+/**
+ * Implementation of hook_node_insert
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_node_insert($node) {
+  switch ($node->type) {
+    case 'loyalty_and_rewards':
+      $query = db_insert('itg_loyalty_reward_cron');
+      $query->fields(array(
+          'nid' => $node->nid,
+          'type' => $node->type,
+          'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours'),
+          'status' => 0,
+          'created' => time()
+      ));
+      $query->execute();
+      break;
+
+    default:
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_node_update
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_node_update($node) {
+  switch ($node->type) {
+    case 'loyalty_and_rewards':
+      $curr_time = time();
+      $product_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+       
+      // If product expiry date is update and set to future
+      if ($product_expiry_date > $curr_time) {
+        db_update('itg_loyalty_reward_cron')
+                ->fields(array(
+                    'status' => 1,
+                    'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours')
+                ))
+                ->condition('nid', $node->nid, '=')
+                ->execute();
+      }
+      break;
+
+    default:
+      break;
+  }
+}
+
+          
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_loyalty_reward_cronapi($op, $job = NULL) {
+  $items['itg_loyalty_reward_product_expiry_notification'] = array(
+    'description' => 'Send mail before 24 hours for product expiration (Loyalty) ',
+    'callback' => 'itg_loyalty_reward_product_expiry_notification_callback', 
+  );
+  return $items;
+}
+
+/**
+ * Send mail to siteadmin and editor before 24 hours of product expiration
+ */
+function itg_loyalty_reward_product_expiry_notification_callback() {
+  
+ // Include itg_loyalty_reward mail file to send mail
+  module_load_include('inc', 'itg_loyalty_reward', 'includes/itg_loyalty_reward_mail');
+
+  $current_time = time();
+
+  $query = db_select('itg_loyalty_reward_cron', 'c');
+  $query->fields('c')
+          ->condition('c.status', 0, '=');
+  $result = $query->execute();
+
+  // Fetch node to send notification mail
+  while ($record = $result->fetchAssoc()) {
+    $end_date = $record['scheduled_time'];
+    $diff = $end_date - $current_time;
+    $diff_in_hours = round($diff / ( 60 * 60 ));
+    if ($diff_in_hours > 0) {
+      if ($diff_in_hours <= 24) {
+        itg_loyalty_reward_send_mail_product_expiration($record['nid']);
+      }
+    }
+  }
 }
