@@ -10,6 +10,34 @@
 function feature_for_mobile_services_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_astro_service'.
+  $field_bases['field_astro_service'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_astro_service',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        1 => 'Yes',
+        0 => 'No',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
+  );
+
   // Exported field_base: 'field_client_selection'.
   $field_bases['field_client_selection'] = array(
     'active' => 1,
@@ -364,6 +392,24 @@ function feature_for_mobile_services_field_default_field_bases() {
     'settings' => array(),
     'translatable' => 0,
     'type' => 'text_long',
+  );
+
+  // Exported field_base: 'field_mobile_xml_format'.
+  $field_bases['field_mobile_xml_format'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_mobile_xml_format',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'xml_field',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'xml_field_xml',
   );
 
   // Exported field_base: 'field_service_association_title'.
