@@ -63,11 +63,11 @@ function feature_for_poll_image_default_styles() {
   $styles['poll_active_poll_image_option_front_end'] = array(
     'label' => 'Poll Active Poll Image Option Front End',
     'effects' => array(
-      6 => array(
+      8 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 244,
-          'height' => 163,
+          'width' => 120,
+          'height' => 93,
         ),
         'weight' => 1,
       ),
@@ -78,11 +78,11 @@ function feature_for_poll_image_default_styles() {
   $styles['poll_banner_active_poll_front_end'] = array(
     'label' => 'Poll Banner Active Poll Front End',
     'effects' => array(
-      5 => array(
+      9 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 368,
-          'height' => 206,
+          'width' => 170,
+          'height' => 127,
         ),
         'weight' => 1,
       ),
