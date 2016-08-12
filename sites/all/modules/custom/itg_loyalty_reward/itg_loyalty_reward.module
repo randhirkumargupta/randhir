@@ -251,7 +251,7 @@ function itg_loyalty_reward_product_expiry_notification_callback() {
 
   $current_time = time();
 
-  $query = db_select('itg_cron_loyalty_reward', 'c');
+  $query = db_select('itg_loyalty_reward_cron', 'c');
   $query->fields('c')
           ->condition('c.status', 0, '=');
   $result = $query->execute();
