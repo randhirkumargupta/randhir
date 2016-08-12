@@ -731,10 +731,10 @@ function itg_poll_get_past_data($nid) {
 
 
       if ($result_format == 1) { // Percent
-        $outputnew .= '<li><span class="poll-answer-text">' . $polls_answer_text_render . '</span> <span class="percentage">' . $percentage . '%' . '</span> <span id="poll-past-percentage" class="poll-past-percentage-progess" style="width:' . $percentage . '%"></span></li>';
+        $outputnew .= '<li><span class="poll-answer-text">' . $polls_answer_text_render . '</span> <span class="percentage">' . $percentage . '%' . '</span> <span id="poll-past-percentage" class="poll-past-percentage-progess"><span class="poll-progress-bar" style="width:' . $percentage . '%"></span></span></li>';
       }
       elseif ($result_format == 2) { // Number of votes
-        $outputnew .= '<li><span class="poll-answer-text">' . $polls_answer_text_render . '</span> <span class="precentage-detail"><span class="noofvotes">' . $optioncnt . '%' . '</span> <span id="poll-past-percentage" class="poll-past-percentage-progess" style="width:' . $percentage . '%"></span></span></li>';
+        $outputnew .= '<li><span class="poll-answer-text">' . $polls_answer_text_render . '</span> <span class="noofvotes">' . $optioncnt . '</span> <span id="poll-past-percentage" class="poll-past-percentage-progess"><span class="poll-progress-bar" style="width:' . $percentage . '%"></span></span></li>';
       }
     }
   }
@@ -819,7 +819,7 @@ function itg_poll_form_new_ajax_submit($form, &$form_state) {
   setcookie('visitedPoll', $value, $expire, '/');
   $_SESSION['first_submit_anomoyous'] = 'yes';
   $poll_answer = itg_poll_get_past_data($node_id);
-  $commands[] = ajax_command_replace('.poll-replace-id', $poll_answer);
+  $commands[] = ajax_command_html('.poll-replace-id', $poll_answer);
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 

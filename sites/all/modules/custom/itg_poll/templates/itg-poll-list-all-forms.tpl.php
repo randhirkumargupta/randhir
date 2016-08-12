@@ -8,7 +8,8 @@ global $base_url;
 $nid = $data['list']->nid;
 
 $related_stories = '';
-$related_stories_class = '';
+$related_stories_class = ' no-related-content';
+$no_image_class = '';
 
 // Related node
 
@@ -19,8 +20,13 @@ if (isset($data['related_nodes']) && !empty($data['related_nodes'])) {
     $related_stories .= '<li>' . $related_stories_data . '</li>';
   }
   $related_stories .= '</ul></div>';
-  $related_stories_class = 'relative-with-img';
+  $related_stories_class = ' relative-with-img';
 }
+
+if (isset($data['poll_image_exist_class']) && !empty($data['poll_image_exist_class'])) {
+  $poll_image_exist_class = $data['poll_image_exist_class'];
+}
+
 
 
 
@@ -31,12 +37,13 @@ if (isset($data['poll_banner_image']) && !empty($data['poll_banner_image'])) {
 }
 else {
   $poll_banner_image = '';
+  $no_image_class = ' no-poll-image';
 }
 
 // Title
 
-
-$title = '<div class="active-poll-title"><h2>'.t($data['title']).'</h2></div>';
+$updated = $data['updated'];
+$title = '<div class="active-poll-title"><h2>'.t($data['title']).'</h2><div class="updated-msg">'.$updated.'</div></div>';
 
 // Getting current index
 
@@ -59,11 +66,11 @@ $isCookies = itg_poll_isCookies($nid);
 $poll_uid = itg_poll_getcurrent_userpoll($nid, $user->uid);
 if (($isCookies != 'yes' && user_is_anonymous()) || (user_is_logged_in() && $poll_uid != $user->uid)) {
   if (isset($nid) && !empty($nid)) {
-    print $title.$poll_banner_image . '<div class="poll-replace-id '.$related_stories_class.'">' . drupal_render(drupal_get_form('itg_poll_form_new', $nid)) . '</div>' . $related_stories;
+    print '<div class="poll-data'.$related_stories_class. $no_image_class.'">' . $poll_banner_image.$title. '<div class="poll-replace-id '.$poll_image_exist_class.'">' . drupal_render(drupal_get_form('itg_poll_form_new', $nid)) . '</div></div>' . $related_stories;
   }
 }
 else {
-  print $title.$poll_banner_image . '<div class="poll-replace-id '.$related_stories_class.'">' . itg_poll_get_past_data($nid) . '</div>' . $related_stories;
+  print  '<div class="poll-data'.$related_stories_class. $no_image_class.'">' . $poll_banner_image.$title . '<div class="poll-replace-id '.$poll_image_exist_class.'">' . itg_poll_get_past_data($nid) . '</div></div>' . $related_stories;
 }
 
 //print '<div class="poll-wrapper-next-navigator">' . $next . '</div>';
@@ -75,7 +82,7 @@ print '</div>';
 <div class="poll-navigation">
     <ul>
        <?php  for($pc=0;$pc<$poll_count;$pc++){ ?> 
-        <li><a href="<?php echo $base_url.'/itg_active_polls?poll_index='.$pc ?>"></a></li>
+        <li><a class="<?php if(isset($_GET['poll_index']) && $_GET['poll_index']!='' && $_GET['poll_index']==$pc) print 'active';  ?>" href="<?php echo $base_url.'/itg_active_polls?poll_index='.$pc ?>"></a></li>
        <?php }  ?>
     
     
