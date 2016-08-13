@@ -89,9 +89,9 @@ global $theme;
                       <?php
                       
                       $tt =  array(
-                                'attributes' => array(                                  
-                                  'class' => 'active'
-                                ), 
+//                                'attributes' => array(                                  
+//                                  'class' => 'active'
+//                                ), 
                                 'query' => array(
                                   'category' =>$widget_data[$blockid]['cat_id']
                                 )
