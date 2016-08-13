@@ -193,14 +193,16 @@
       } 
     }
   }
-  &.top_stories_ordering .data-holder{
-    .block-itg-widget{
-      height: calc(100% - 22px);
-      overflow: hidden;
-      border: 1px solid #ddd;
-      .itg-listing{
-        border: none;
-        height: auto;
+  &.top_stories_ordering, &.most_popular{
+    border: 1px solid #ddd;
+    .data-holder{
+        .block-itg-widget{
+        height: calc(100% - 22px);
+        overflow: hidden;
+        .itg-listing{
+          border: none;
+          height: auto;
+        }
       }
     }
   }
@@ -316,4 +318,8 @@
   }
   .region-content{
     margin: 20px 0;
+  }
+  .featured-news .featured-post h3{
+    max-height: 96px;
+    overflow: hidden;
   }
