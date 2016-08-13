@@ -6184,3 +6184,12 @@ div.node{
     }
   }
 }
+.ad-widget{
+  border: 1px solid #ddd;
+  height: 321px;
+  padding: 37px;
+  .sidebar-ad{
+    background: #ddd;
+    height: 100%;
+  }
+}
