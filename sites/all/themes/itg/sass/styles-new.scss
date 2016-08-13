@@ -191,9 +191,21 @@
       > div, > ul{
         height: 100%;
       } 
+    }
   }
+  &.top_stories_ordering .data-holder{
+    .block-itg-widget{
+      height: calc(100% - 22px);
+      overflow: hidden;
+      border: 1px solid #ddd;
+      .itg-listing{
+        border: none;
+        height: auto;
+      }
+    }
   }
 }
+
 .widget-title{
   display: inline-block;
   vertical-align: top;

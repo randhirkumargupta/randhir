@@ -187,6 +187,15 @@
 .widget-wrapper .data-holder .block-itg-widget > div, .widget-wrapper .data-holder .block-itg-widget > ul {
   height: 100%;
 }
+.widget-wrapper.top_stories_ordering .data-holder .block-itg-widget {
+  height: calc(100% - 22px);
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+.widget-wrapper.top_stories_ordering .data-holder .block-itg-widget .itg-listing {
+  border: none;
+  height: auto;
+}
 
 .widget-title {
   display: inline-block;
