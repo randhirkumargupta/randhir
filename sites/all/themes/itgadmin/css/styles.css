@@ -5685,7 +5685,8 @@ div.node #comments h2 {
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure {
   width: 170px;
-  height: 128px;
+  height: 127px;
+  overflow: hidden;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure figcaption {
   bottom: 0;
