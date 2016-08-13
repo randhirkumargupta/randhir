@@ -312,3 +312,12 @@
   max-height: 96px;
   overflow: hidden;
 }
+
+.itg-widget .tab-buttons span {
+  font-weight: 700;
+  padding: 0 3px;
+}
+
+.itg-widget.trending-list .tab-buttons span {
+  font-size: 15px;
+}
