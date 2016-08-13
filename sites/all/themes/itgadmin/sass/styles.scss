@@ -5800,7 +5800,8 @@ div.node{
           .tile{
             figure{
               width: 170px;
-              height: 128px;
+              height: 127px;
+              overflow: hidden;
               @extend .pos-rel;
               figcaption{
                 bottom: 0;
