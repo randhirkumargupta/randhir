@@ -272,6 +272,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
       }
       */
       if (isset($tpl_name)) {
+        drupal_set_title('');
         $data = get_layout_details($tid_val, $tpl_name, 'front');      
         $vars['widget_data'] = $data;
         $tpl_name = str_replace('--', '__', $tpl_name);

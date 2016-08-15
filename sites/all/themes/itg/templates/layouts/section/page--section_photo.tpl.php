@@ -88,10 +88,10 @@ global $theme;
                     <li>                     
                       <?php
                       
-                      $tt =  array(
-                                'attributes' => array(                                  
-                                  'class' => 'active'
-                                ), 
+                      $widget_attributes =  array(
+//                                'attributes' => array(                                  
+//                                  'class' => 'active'
+//                                ), 
                                 'query' => array(
                                   'category' =>$widget_data[$blockid]['cat_id']
                                 )
@@ -100,7 +100,7 @@ global $theme;
                       
                      
                       ?>
-                      <?php echo l($widget_data[$blockid]['block_title'], 'taxonomy/term/' . arg(2),$tt); ?>
+                      <?php echo l($widget_data[$blockid]['block_title'], 'taxonomy/term/' . arg(2), $widget_attributes); ?>
                     </li>
                   <?php } ?>
                 <?php } ?>
@@ -187,7 +187,7 @@ global $theme;
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-21']['widget_name']; ?>">
-                      <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                     <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-21']['block_title'])) { ?>
                         <span class="widget-title"><?php print $widget_data['itg-block-21']['block_title']; ?></span>
                       <?php } ?>
                       <!-- for admin  -->
@@ -208,7 +208,7 @@ global $theme;
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-22']['widget_name']; ?>">
-                      <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                      <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-22']['block_title'])) { ?>
                         <span class="widget-title"><?php print $widget_data['itg-block-22']['block_title']; ?></span>
                       <?php } ?>
                       <!-- for admin  -->
@@ -229,7 +229,7 @@ global $theme;
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-23']['widget_name']; ?>">
-                      <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                      <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-23']['block_title'])) { ?>
                         <span class="widget-title"><?php print $widget_data['itg-block-23']['block_title']; ?></span>
                       <?php } ?>
                       <!-- for admin  -->
@@ -250,7 +250,7 @@ global $theme;
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-24']['widget_name']; ?>">
-                      <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                      <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-24']['block_title'])) { ?>
                         <span class="widget-title"><?php print $widget_data['itg-block-24']['block_title']; ?></span>
                       <?php } ?>
                       <!-- for admin  -->
