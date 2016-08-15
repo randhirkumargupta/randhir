@@ -189,7 +189,7 @@ if ($theme != 'itgadmin') {
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad droppable"></div>
+                      <div class="sidebar-ad"></div>
                     </div>
 <!--                    <div class="droppable <?php //print $gray_bg_layout; ?>">
                       <div class="widget-wrapper <?php //print $widget_data['itg-block-4']['widget_name']; ?>">
@@ -448,7 +448,7 @@ if ($theme != 'itgadmin') {
          <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="itg-widget">
               <div class="ad-widget">
-                      <div class="sidebar-ad droppable"></div>
+                      <div class="sidebar-ad"></div>
                     </div>
 <!--              <div class="droppable <?php //print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php //print $widget_data['itg-block-11']['widget_name']; ?>">
