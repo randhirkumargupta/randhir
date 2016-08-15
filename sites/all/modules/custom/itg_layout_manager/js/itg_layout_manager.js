@@ -22,7 +22,7 @@
                 $(".templates-widgets li").draggable({
                     appendTo: "body",
                     helper: "clone",
-                    drag: function (event, ui) {                       
+                    drag: function (event, ui) {                        
                         widget_name = $(this).attr('data-widget');
                         // for category tab
                         category_name_tab = $(this).attr('id');
@@ -32,6 +32,12 @@
                 $(".droppable").droppable({
                     hoverClass: "drop-hover",
                     drop: function (event, ui) {
+                        var ad_class = $(this).attr('class');
+                        
+                        if (ad_class == 'sidebar-ad droppable ui-droppable') {
+                          alert("You can't drag any widget in this content area!");
+                          return false;
+                        }
                         
                         $(this).removeClass("gray-bg-layout");
                         // content block id for display content widget
