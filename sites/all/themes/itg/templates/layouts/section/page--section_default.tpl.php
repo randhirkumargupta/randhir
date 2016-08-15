@@ -190,7 +190,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad"></div>
+                      <div class="sidebar-ad droppable"></div>
                     </div>              
                   </div>
                 </div>
@@ -253,7 +253,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-7']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -277,7 +277,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-8']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-8']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -301,7 +301,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-9']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-9']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -331,7 +331,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-17']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-17']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-17']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -355,7 +355,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-18']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-18']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-18']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -379,7 +379,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-19']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-19']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-19']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -408,7 +408,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-10']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-10']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -430,7 +430,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
          <div class="col-md-4 col-sm-4 col-xs-12">
            <div class="itg-widget">
              <div class="ad-widget">
-               <div class="sidebar-ad"></div>
+               <div class="sidebar-ad droppable"></div>
              </div>               
            </div>  
         </div>
@@ -443,7 +443,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-12']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-12']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-12']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -466,7 +466,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-13']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-13']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-13']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -495,7 +495,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-14']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-14']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-14']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -519,7 +519,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-15']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-15']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-15']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
@@ -543,7 +543,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-16']['widget_name']; ?>">
-                 <?php if ($theme != 'itgadmin' || isset($preview)) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-16']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-16']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
