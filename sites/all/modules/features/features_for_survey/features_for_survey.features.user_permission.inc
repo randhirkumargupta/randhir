@@ -71,5 +71,16 @@ function features_for_survey_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'survey admin users'.
+  $permissions['survey admin users'] = array(
+    'name' => 'survey admin users',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'itg_survey',
+  );
+
   return $permissions;
 }
