@@ -79,4 +79,3 @@ if (!empty($content)):
 endif;
 ?>
 </div>
-    

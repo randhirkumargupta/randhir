@@ -2463,3 +2463,114 @@ footer{
         }
     }
 }
+
+/*CSS Start Video landing Header*/
+#block-views-video-landing-header-block{
+    color:#aaa8a9;
+    background: #171717;     
+    .video-landing-header{
+        background: #000;
+        padding-bottom: 15px;
+    }
+    .video-header-left{
+        @include clearfix;
+        .video{
+            @include float(left);
+            width: 84%;
+            padding: 15px;
+            border:1px solid #242424;
+        }
+        .social-likes{
+            @include float(right);
+            width: 16%;
+            background: #1a1a1a;
+            ul{
+                li{
+                    a{
+                        display: block;
+                        padding: 23px 5px 23px 10px;
+                        color: #aba9aa;
+                        font-family:$itg-roboto;
+                        i{
+                            font-size: 22px;
+                            vertical-align: middle;
+                        }
+                    }
+                    + li a{
+                        border-top:1px solid #000;
+                    }
+                }
+            }
+        }
+    }
+    h2{
+        color: $white-color;
+        font-size: 26px;
+        margin: 10px 0;
+    }
+    ul{
+        @extend .list-none;
+    }   
+    .video-header-right{
+        p.upload-date{
+            font-size: 12px;
+            color: #fff;
+            margin-top: 10px;
+            font-family:$itg-roboto;
+        }
+    }
+
+}
+#block-views-video-landing-header-block-1{
+    color:#aaa8a9;
+    background: #171717;
+    border-top: 5px solid #171717;    
+    ul{
+        @extend .list-none;
+    }
+    .container{
+        background: #000;
+        padding:10px 25px 
+    }
+    .view-content{
+        .item-list{
+            overflow: hidden;
+            overflow-x: scroll;
+        ul{
+            margin:0 -10px;
+            @include clearfix();
+            width:200%;
+            li{
+                width: 170px;
+                padding: 0 10px;
+                @include float(left);
+                @include pos(relative);
+                .views-field-field-story-extra-large-image{
+                    @extend .pos-rel;
+                        &:after{
+                            background: url(../images/video-icon-small.png) no-repeat;
+                            content:"";
+                            width: 18px;
+                            height: 18px;
+                            position: absolute;
+                            left: 5px;
+                            bottom: 5px;
+                        }
+                }
+                .views-field-field-video-duration{
+                    @include pos(absolute,104px,null,null,40px);                    
+                    cursor: pointer;
+                    font-family: $itg-roboto;
+                    @include font(12px);
+                    color: $white-color;
+                }
+                .views-field-field-story-short-headline{
+                    margin-top: 15px;
+                }
+            }
+        }
+        }
+    }
+}
+
+/*CSS End Video landing Header*/
