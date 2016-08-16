@@ -122,7 +122,7 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
       '#value' => t('Cancel'),
     );
     
-    // Hide/show hihglights field based on type
+    // Hide/show highlights field based on type
     $form['field_story_highlights']['#states'] = array(
       'visible' => array(
         ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
