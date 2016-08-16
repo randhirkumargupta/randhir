@@ -50,6 +50,7 @@ features[field_instance][] = node-breaking_news-field_source
 features[field_instance][] = node-breaking_news-field_story_expires
 features[field_instance][] = node-breaking_news-field_story_extra_large_image
 features[field_instance][] = node-breaking_news-field_story_extra_small_image
+features[field_instance][] = node-breaking_news-field_story_highlights
 features[field_instance][] = node-breaking_news-field_story_itg_tags
 features[field_instance][] = node-breaking_news-field_story_large_image
 features[field_instance][] = node-breaking_news-field_story_medium_image
