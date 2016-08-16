@@ -188,7 +188,7 @@ if ($theme != 'itgadmin') {
             <div class="top-colum-3">
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
-                    <div class="ad-widget">
+                    <div class="ad-widget droppable">
                       <div class="sidebar-ad"></div>
                     </div>
 <!--                    <div class="droppable <?php //print $gray_bg_layout; ?>">

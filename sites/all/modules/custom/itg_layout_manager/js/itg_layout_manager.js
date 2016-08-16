@@ -34,7 +34,7 @@
                     drop: function (event, ui) {
                         var ad_class = $(this).attr('class');
                         
-                        if (ad_class == 'sidebar-ad droppable ui-droppable') {
+                        if (ad_class == 'ad-widget droppable ui-droppable') {
                           alert("You can't drag any widget in this content area!");
                           return false;
                         }
