@@ -524,16 +524,3 @@ function itg_story_checked_issue($issue_date) {
 
   return TRUE;
 }
-
-//function itg_story_bypass_form_validations($form, $form_id) {
-// 
-//  return TRUE;
-//}
-
-/**
- * Implements hook_node_view().
- * {@inheritdoc}
- */
-function itg_story_node_view($node, $view_mode, $langcode) {
-
-}
