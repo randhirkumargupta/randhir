@@ -2559,6 +2559,7 @@ footer .footer-copyright {
   color: #c4c4c4;
   margin-bottom: 10px;
   cursor: pointer;
+  display: block;
 }
 .live-block .breaking-section {
   padding: 10px 0;
