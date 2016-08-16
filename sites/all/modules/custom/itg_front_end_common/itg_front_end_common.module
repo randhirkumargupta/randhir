@@ -11,12 +11,16 @@
  * @return array
  */
 function itg_front_end_common_block_info() {
-$blocks['taboola_block'] = array(
-'info' => t('Taboola Block'),
- 'cache' => DRUPAL_CACHE_GLOBAL,
-);
+  $blocks['taboola_block'] = array(
+    'info' => t('Taboola Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['vukkul_block'] = array(
+    'info' => t('vukkul Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-return $blocks;
+  return $blocks;
 }
 
 /**
@@ -24,15 +28,19 @@ return $blocks;
  * {@inheritdoc}
  */
 function itg_front_end_common_block_view($delta = '') {
-$block = array();
+  $block = array();
 
-switch ($delta) {
-case 'taboola_block':
-$block['content'] = _taboola_block_content();
-break;
-}
+  switch ($delta) {
+    case 'taboola_block':
+      $block['content'] = _taboola_block_content();
+      break;
 
-return $block;
+    case 'vukkul_block':
+      $block['content'] = _vukkul_block_content();
+      break;
+  }
+
+  return $block;
 }
 
 /**
@@ -72,6 +80,51 @@ return $output;
 }
 
 /**
+ * Implements vukkul block content
+ */
+function _vukkul_block_content() {
+
+  $page_id = arg(1);
+  $node = node_load($page_id);
+  $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+  if (function_exists(itg_common_get_node_title)) {
+    $reporter_node = itg_common_get_node_title($byline_id);
+  }
+  $n_title = $node->title . " - India Today";
+  foreach ($node->field_story_itg_tags['und'] as $tags) {
+    $term = taxonomy_term_load($tags['tid']);
+    $t_name = $term->name;
+    $comma_sep_tag[] = $t_name;
+  }
+  $tag = implode(',', $comma_sep_tag);
+  $unique_id = $node->type . '_' . $node->nid;
+  $author = base64_encode($reporter_node);
+  drupal_add_js('http://vuukle.com/js/vuukle.js', external);
+  $output = '<script type="text/javascript">
+
+               var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
+
+               var SECTION_TAGS =  "' . $tag . '";
+
+               var ARTICLE_TITLE = "' . $n_title . '";
+
+               var GA_CODE = "UA-795349-17";
+
+               var VUUKLE_API_KEY = "dc34b5cc-453d-468a-96ae-075a66cd9eb7";
+
+               var TRANSLITERATE_LANGUAGE_CODE = ""; //"en" for English, "hi" for hindi
+
+               var VUUKLE_COL_CODE = "d00b26";
+
+               var ARTICLE_AUTHORS = "' . $author . '";
+
+               create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
+
+               </script>';
+  return $output;
+}
+
+/**
  * Implements taboola view
  */
 function taboola_view() {
@@ -79,6 +132,17 @@ function taboola_view() {
   $block = module_invoke('itg_front_end_common', 'block_view', 'taboola_block');
   print render($block['content']);
 }
+
+
+/**
+ * Implements vukkul view
+ */
+function vukkul_view() {
+
+  $block = module_invoke('itg_front_end_common', 'block_view', 'vukkul_block');
+  print render($block['content']);
+}
+
 
 /**
  * Implements hook_node_view().

@@ -9,8 +9,8 @@
  */
 
 /**
- * Implement hook_permission
- * @return type
+ * Implements hook_permission
+ * {@inheritdoc}
  */
 function itg_survey_permission() {
     return array(
@@ -21,8 +21,8 @@ function itg_survey_permission() {
 }
 
 /**
- * Implement hook_menu
- * @return string
+ * Implements hook_menu
+ * {@inheritdoc}
  */
 function itg_survey_menu() {
   
@@ -55,8 +55,8 @@ function itg_survey_menu() {
 }
 
 /**
- * Implement hook_theme
- * @return Array
+ * Implements hook_theme
+ * {@inheritdoc}
  */
 function itg_survey_theme() {
   $path = drupal_get_path('module', 'itg_survey') . '/templates';
@@ -77,16 +77,14 @@ function itg_survey_theme() {
 
 /***************************Form Related hooks*********************************/
 /**
- * Implement hook_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * Implements hook_form_alter
+ * {@inheritdoc}
  */
 function itg_survey_form_alter(&$form, &$form_state, $form_id) {
 
   global $user;
   
-  //Set destination for survey form
+  // Set destination for survey form
   if ($form_id == 'survey_node_form') {
          $form['field_survey_category']['und']['#config']['module'] = 'itg_category_manager';
 
@@ -200,7 +198,7 @@ function itg_survey_form_after_build($form, &$form_state) {
 
 /**
  * Implement hook_views_pre_render
- * @param Object $view
+ * {@inheritdoc}
  */
 function itg_survey_views_pre_render(&$view) {
   
@@ -214,9 +212,7 @@ function itg_survey_views_pre_render(&$view) {
 
 /**
  * Implement hook_form_views_exposed_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * {@inheritdoc}
  */
 function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   
@@ -232,9 +228,7 @@ function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 
 /**
  * Implement hook_node_insert 
- * @param object $node
- * @param array $form
- * @param array $form_state
+ * {@inheritdoc}
  */
 function itg_survey_node_insert($node) {
   
@@ -247,9 +241,7 @@ function itg_survey_node_insert($node) {
 
 /**
  * Implement hook_node_update 
- * @param object $node
- * @param array $form
- * @param array $form_state
+ * {@inheritdoc}
  */
 function itg_survey_node_update($node) {
   
@@ -263,16 +255,28 @@ function itg_survey_node_update($node) {
 
 /**
  * Implement hook_node_validate 
- * @param object $node
- * @param array $form
- * @param array $form_state
+ * {@inheritdoc}
  */
 function itg_survey_node_validate($node, $form, &$form_state) {
   
-  //Date validation for start date and end date
-  if($node->type == 'survey' && !empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
-   if(strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])){
-      form_set_error('field_survey_end_date',t('Survey end date must be greater or equal to start date.'));
+  if ($node->type == 'survey') {
+    $survey_start_date = $node->field_survey_start_date[LANGUAGE_NONE][0]['value'];
+    $survey_end_date = $node->field_survey_end_date[LANGUAGE_NONE][0]['value'];
+    
+    // Validation for survey start and end date
+    if (!empty($survey_end_date) && (strtotime($survey_start_date) > strtotime($survey_end_date))) {
+      form_set_error('field_survey_end_date', t('Survey end date must be greater or equal to start date.'));
+    }
+  }
+
+  // Validation for answer choices
+  foreach ($node->field_survey_add_questions[LANGUAGE_NONE] as $key => $question_arr) {
+    $answer_type = $question_arr['field_survey_answer_type'][LANGUAGE_NONE][0]['value'];
+    if ($answer_type != 'rating') {
+      $ans_op1 = $question_arr['field_survey_answer_option_1'][LANGUAGE_NONE][0]['value'];
+      if(empty($ans_op1)){
+        form_set_error('field_survey_answer_option_1', t('Please add answer choices for question <strong>@question?<strong>', array('@question' => $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'])));
+      }
     }
   }
 }
