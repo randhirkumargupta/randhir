@@ -170,29 +170,26 @@ function itg_tv_schedule_uploadmongo($file_id) {
     $file = fopen($file_url, "r");
     while (($data = fgetcsv($file)) !== FALSE) {
         if ($i == 1) {
-         //   if ($data[1] === 'MON' && $data[2] === 'TUE' && $data[3] === 'WED' && $data[4] === 'THU' && $data[5] === 'FRI' && $data[6] === 'SAT' && $data[7] === 'SUN') {
-            $mondate = $data[1];
-            $tuedate = $data[2];
-            $weddate = $data[3];
-            $thudate = $data[4];
-            $fridate = $data[5];
-            $satdate = $data[6];
-            $sundate = $data[7];
-            $flag = 1;
+
+            if (isItValidDate($data[1]) && isItValidDate($data[2]) && isItValidDate($data[3]) && isItValidDate($data[4]) && isItValidDate($data[5]) && isItValidDate($data[6]) && isItValidDate($data[7])) {
+
+                $mondate = $data[1];
+                $tuedate = $data[2];
+                $weddate = $data[3];
+                $thudate = $data[4];
+                $fridate = $data[5];
+                $satdate = $data[6];
+                $sundate = $data[7];
+                $flag = 1;
                 break;
-           // }
+            }
         }
     }
     if ($flag == 1) {
-       // execute when appropriate file uploaded 
-       // connection with database
+        // execute when appropriate file uploaded 
+        // connection with database
         $db = mongodb();
         if ($db) {
-            $people = $db->tv_schedule;
-            $people->drop();
-            // create collection
-            $db->createCollection("tv_schedule");
-            // Select Collection
             $people = $db->tv_schedule;
         }
         else {
@@ -249,7 +246,7 @@ function itg_tv_schedule_uploadmongo($file_id) {
         fclose($file);
         return TRUE;
     }
-        return FALSE;
+    return FALSE;
 }
 
 /**
@@ -401,3 +398,18 @@ function format_gmt_offset($offset) {
   $minutes = abs(intval($offset % 3600 / 60));
   return 'GMT' . ($offset ? sprintf('%+03d:%02d', $hours, $minutes) : '');
 }
+
+/**
+ * Custom method for date validate.
+ * @param string $date
+ * @return boolean
+ */
+function isItValidDate($date) {
+  if(preg_match("/^(\d{4})\/(\d{2})\/(\d{2})$/", $date, $matches))
+  {
+   if(checkdate($matches[2], $matches[3], $matches[1]))
+    { 
+     return true;
+    }
+  }
+ } 

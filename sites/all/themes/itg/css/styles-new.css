@@ -187,6 +187,17 @@
 .widget-wrapper .data-holder .block-itg-widget > div, .widget-wrapper .data-holder .block-itg-widget > ul {
   height: 100%;
 }
+.widget-wrapper.top_stories_ordering, .widget-wrapper.most_popular {
+  border: 1px solid #ddd;
+}
+.widget-wrapper.top_stories_ordering .data-holder .block-itg-widget, .widget-wrapper.most_popular .data-holder .block-itg-widget {
+  height: calc(100% - 22px);
+  overflow: hidden;
+}
+.widget-wrapper.top_stories_ordering .data-holder .block-itg-widget .itg-listing, .widget-wrapper.most_popular .data-holder .block-itg-widget .itg-listing {
+  border: none;
+  height: auto;
+}
 
 .widget-title {
   display: inline-block;
@@ -221,19 +232,23 @@
 .itg-region ul li a {
   display: block;
   margin: 0;
-  padding: 10px 5px 7px;
+  padding: 10px 5px 3px;
   border-bottom: 3px solid #fff;
+  font-family: Roboto;
+  font-weight: 500;
+  color: #969696;
 }
-.itg-region ul li a:hover, .itg-region ul li a .active {
+.itg-region ul li a:hover, .itg-region ul li a.active {
   border-bottom: 3px solid #d00b26;
+  color: #b50a0a;
 }
 .itg-region .slide-icon {
   position: absolute;
   top: 0;
   background: #fff;
-  line-height: 40px;
-  width: 25px;
-  height: 40px;
+  line-height: 35px;
+  width: 15px;
+  height: 35px;
   cursor: pointer;
   font-size: 16px;
   text-align: center;
@@ -259,7 +274,8 @@
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure {
   width: 170px;
-  height: 128px;
+  height: 127px;
+  overflow: hidden;
   position: relative;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure figcaption {
@@ -270,6 +286,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   font-size: 12px;
+  font-family: Roboto;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa {
   font-size: 14px;
@@ -280,12 +297,37 @@
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
+  font-family: "Roboto Slab";
 }
 .view-photo-list-of-category .view-content .photo-list li .tile a {
   color: #494949;
-  font-size: 14px;
+  font-family: "Roboto Slab";
 }
 
 .region-content {
   margin: 20px 0;
+}
+
+.featured-news .featured-post h3 {
+  max-height: 96px;
+  overflow: hidden;
+}
+
+.itg-widget .tab-buttons span {
+  font-weight: 700;
+  padding: 0 3px;
+}
+
+.itg-widget.trending-list .tab-buttons span {
+  font-size: 15px;
+}
+
+.ad-widget {
+  border: 1px solid #ddd;
+  height: 321px;
+  padding: 37px;
+}
+.ad-widget .sidebar-ad {
+  background: #ddd;
+  height: 100%;
 }

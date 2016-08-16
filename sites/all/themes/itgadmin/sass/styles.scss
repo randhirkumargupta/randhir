@@ -5800,7 +5800,8 @@ div.node{
           .tile{
             figure{
               width: 170px;
-              height: 128px;
+              height: 127px;
+              overflow: hidden;
               @extend .pos-rel;
               figcaption{
                 bottom: 0;
@@ -6181,5 +6182,14 @@ div.node{
         margin-top: 10px;
       }
     }
+  }
+}
+.ad-widget{
+  border: 1px solid #ddd;
+  height: 321px;
+  padding: 37px;
+  .sidebar-ad{
+    background: #ddd;
+    height: 100%;
   }
 }
