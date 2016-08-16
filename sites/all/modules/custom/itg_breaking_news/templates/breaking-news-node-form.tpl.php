@@ -40,6 +40,11 @@
   <?php print drupal_render($form['field_story_extra_small_image']); ?>
 </div>
 
+<div id="Highlights">
+  <h2 class="highlight-title">Highlights</h2>
+  <?php print drupal_render($form['field_story_highlights']); ?>
+</div>
+
 <div id="Relatedcontent">
   <h2 class="story-title">Related content</h2>
   <?php print drupal_render($form['field_common_related_content']); ?>

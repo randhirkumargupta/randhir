@@ -24,23 +24,31 @@
 
       // type check for add form
       $("#edit-field-type-und").change(function () {
-        //alert(this.value);
+        
         if (this.value == 'Live Blog') {
 
           $(".field-name-field-mark-as-breaking-band").hide();
           $(".field-name-field-breaking-publish-time").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
+          $(".highlight-title").show();
 
 
 
         }
         else
         {
-
+          $(".highlight-title").hide();
           $(".field-name-field-mark-as-breaking-band").show();
           $(".field-name-field-breaking-publish-time").show();
 
         }
+        
+        // hide Live tv checkbox if type is breaking news
+        var typevalue = $('#edit-field-type-und').val();
+                if (typevalue == 'Breaking News') {
+                    $('#edit-field-story-expires-und-yes').attr('checked', false);
+
+                }
       });
 
       // type check for edit form
@@ -48,14 +56,11 @@
         $(".field-name-field-mark-as-breaking-band").hide();
         $(".field-name-field-breaking-publish-time").hide();
       }
-
-      $('#edit-field-type-und').change(function() {
-                var typevalue = $('#edit-field-type-und').val();
-                if (typevalue == 'Breaking News') {
-                    $('#edit-field-story-expires-und-yes').attr('checked', false);
-
-                }
-            }); 
+      
+      // type check for edit form
+      if (type == 'Breaking News') {
+        $(".highlight-title").hide();
+      }
 
       $('body').on('change', '.field-name-field-mobile-subscribers .form-checkbox', function () {
         var el_value = $(this).attr('value');

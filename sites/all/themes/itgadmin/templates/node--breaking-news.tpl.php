@@ -103,6 +103,24 @@
           </div>
         </div>
     <?php endif; ?>
+      
+       <?php
+            $highlight = render($content['field_story_highlights']);
+            if (!empty($highlight)):
+              ?>
+              <div class="expert-details content-box">
+                  <h2><?php print t('Highlights'); ?></h2>
+                  <div class="content-details">
+                      <?php
+                      $h_count = 1;
+                      foreach ($node->field_story_highlights['und'] as $high) {
+                        print '<div class="field"><div class="field-label">'.$h_count.':</div><div class="field-items">'.$high['value'].'</div></div>';
+                        $h_count++;
+                      }
+                      ?>
+                  </div>  
+              </div>
+            <?php endif; ?>
 
       <div class="content-node-view">
        

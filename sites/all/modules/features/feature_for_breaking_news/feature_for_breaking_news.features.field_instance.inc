@@ -773,6 +773,48 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-breaking_news-field_story_highlights'.
+  $field_instances['node-breaking_news-field_story_highlights'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 29,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_highlights',
+    'label' => 'Highlights',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 20,
+    ),
+  );
+
   // Exported field_instance: 'node-breaking_news-field_story_itg_tags'.
   $field_instances['node-breaking_news-field_story_itg_tags'] = array(
     'bundle' => 'breaking_news',
@@ -1103,6 +1145,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Display on');
   t('Extra large image');
   t('Extra small image');
+  t('Highlights');
   t('Image Size (210 x 145)');
   t('Image Size (300x225)');
   t('Image Size (300x350)');
