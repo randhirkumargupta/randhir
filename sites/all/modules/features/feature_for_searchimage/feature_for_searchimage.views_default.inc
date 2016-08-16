@@ -96,11 +96,42 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['field'] = 'sm_thumb_thumbnail_field_story_small_image';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['label'] = '';
+  /* Field: Apache Solr: sm_thumb_thumbnail_field_story_expert_image */
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_expert_image']['id'] = 'sm_thumb_thumbnail_field_story_expert_image';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_expert_image']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_expert_image']['field'] = 'sm_thumb_thumbnail_field_story_expert_image';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_expert_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_expert_image']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_thumb_thumbnail_field_story_medium_image */
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_medium_image']['id'] = 'sm_thumb_thumbnail_field_story_medium_image';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_medium_image']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_medium_image']['field'] = 'sm_thumb_thumbnail_field_story_medium_image';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_medium_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_medium_image']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_thumb_thumbnail_field_story_small_image */
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image_1']['id'] = 'sm_thumb_thumbnail_field_story_small_image_1';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image_1']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image_1']['field'] = 'sm_thumb_thumbnail_field_story_small_image';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image_1']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image_1']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_thumb_thumbnail_field_story_extra_small_image */
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_small_image']['id'] = 'sm_thumb_thumbnail_field_story_extra_small_image';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_small_image']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_small_image']['field'] = 'sm_thumb_thumbnail_field_story_extra_small_image';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_small_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_small_image']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_thumb_thumbnail_field_story_tweet_image */
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_tweet_image']['id'] = 'sm_thumb_thumbnail_field_story_tweet_image';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_tweet_image']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_tweet_image']['field'] = 'sm_thumb_thumbnail_field_story_tweet_image';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_tweet_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_tweet_image']['element_label_colon'] = FALSE;
   /* Field: Apache Solr: sm_thumb_thumbnail_field_images */
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_images']['id'] = 'sm_thumb_thumbnail_field_images';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_images']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_images']['field'] = 'sm_thumb_thumbnail_field_images';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_images']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_thumbnail_field_images']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: Search */
