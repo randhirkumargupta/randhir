@@ -191,6 +191,11 @@ function itg_tv_schedule_uploadmongo($file_id) {
         $db = mongodb();
         if ($db) {
             $people = $db->tv_schedule;
+            $people->drop();
+            // create collection
+            $db->createCollection("tv_schedule");
+            // Select Collection
+            $people = $db->tv_schedule;
         }
         else {
             return FALSE;
