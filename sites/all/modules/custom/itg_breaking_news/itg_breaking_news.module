@@ -196,6 +196,14 @@ function itg_breaking_news_form_views_exposed_form_alter(&$form, &$form_state, $
 function itg_breaking_news_after_build($form, &$form_state) {
 
   global $user, $base_url;
+  
+    if (!isset($form['#node']->nid)) {
+    // hide remove button of first field on add form 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-highlights-und-0-remove-button").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+
 
   for ($i = 0; $i <= $form['field_breaking_content_details']['und']['#max_delta']; $i++) {
     $count = $i + 1;
