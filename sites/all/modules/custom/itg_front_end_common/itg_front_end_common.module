@@ -79,3 +79,16 @@ function taboola_view() {
   $block = module_invoke('itg_front_end_common', 'block_view', 'taboola_block');
   print render($block['content']);
 }
+
+/**
+ * Implements hook_node_view().
+ * {@inheritdoc}
+ */
+function itg_front_end_common_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'breaking_news') {
+    drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2));
+    drupal_add_css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/dot-luv/jquery-ui.css', array('type' => 'external'));
+    drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
+    drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
+  }
+}
