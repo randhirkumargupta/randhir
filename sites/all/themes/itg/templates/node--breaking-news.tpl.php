@@ -25,12 +25,25 @@ if (!empty($content)):
         ?>
     <h1><span><?php print ($type) ?></span>: <?php print ($title) ?></h1>
     <p class="short-discription"> <?php print ($node->field_label['und']['0']['value'])?></p>
+    <span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span>
     <?php
         }
     ?>
     <iframe width="100%" height="360" frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="http://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;autoPlay=true&amp;mute=false"></iframe>
+    <div class="live-hightlight">
+    <h3>Highlight</h3>
+    <ul>
+        <li><a href="#">Lorem ipsum door set</a></li>
+        <li><a href="#">Lorem ipsum door set</a></li>
+        <li><a href="#">Lorem ipsum door set</a></li>
+        <li><a href="#">Lorem ipsum door set</a></li>
+    </ul>
+    </div>
+    <div class="timeline">
+    <h3>Timeline</h3>
     <div id="slider-range"></div>
-		<span id="time"></span>
+        <span id="time"></span>
+   </div>
     <?php
         if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
             $breaking_output.= '';
