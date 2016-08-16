@@ -149,24 +149,23 @@
                   </ul>
               </div>
       </div>
-     <!-- code for taboola widget -->
      
              <?php 
               if(function_exists('taboola_view')) {
                 taboola_view();
               }
-              ?>
-     
-     <!-- end here -->
-     
+           ?>
+      
       <div class="vukkul-comment">
 
             <div id="vuukle_div"></div>
-              <?php
-              if (array_key_exists("vukkul", $content)) {
-                print drupal_render($content["vukkul"]);
+            
+             <?php 
+              if(function_exists('vukkul_view')) {
+                vukkul_view();
               }
               ?>
+     
         </div>
 
   </div>

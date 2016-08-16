@@ -121,6 +121,13 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
+    
+    // Hide/show Audio field
+    $form['field_story_highlights']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
+      )
+    );
 
     $form['#after_build'][] = 'itg_breaking_news_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
