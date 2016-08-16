@@ -38,30 +38,30 @@ jQuery("#slider-range").slider({
         var sTimestamp = startTime.replace(":","");
         var sTimestamp1 = jQuery.trim(sTimestamp.replace("AM",""));
           //console.log(sTimestamp1);
-        var flag=1;
+        var flag = 0;
+        var tcount;
         jQuery('.dwrap').each(function(){
-          //console.log(parseInt($(this).attr('timevalue')))
+           tcount = $(this).attr('tcount');
           if(parseInt(sTimestamp1)< parseInt($(this).attr('timevalue')))
           {
             jQuery(this).show().removeClass('hide-div');
             jQuery('.no-record').hide();
 
-          }else{
+          }
+          else {
             jQuery(this).hide().addClass('hide-div');
           }
-          if(!jQuery(this).hasClass('hide-div'))
-          {
-            flag=0;
+          
+            if (jQuery(this).hasClass('hide-div'))
+            {
+                flag = flag + 1;
 
-          }
-          else
-          {
-            flag = 1;
-          }
+            }
+         
 
         })
 
-        if(flag==1)
+        if(tcount <= flag)
         {
           jQuery('.no-record').show();
         }
