@@ -90,7 +90,7 @@ function tv_schedule_listing() {
             $keys++;
 
             //counter required for current time slot display.
-            if ($curent_time >= $s_time && $current_day == $document["program date"]) {
+            if (($curent_time >= $s_time) || ($current_day == $document["program date"])) {
                 $counter++;
             }
         }
