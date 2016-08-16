@@ -1914,7 +1914,7 @@ footer{
                 @extend .list-none;
                 li{
                     @include display-inline;
-                    padding-right: 15px;
+                    padding-right: 8px;
                     a{
                         background: #000;
                         width: 23px;
@@ -2323,7 +2323,7 @@ footer{
                             .poll-past-percentage-progess{
                                 @include display-inline;
                                 height: 18px;
-                                /*                                background: #000;*/
+                                /* background: #000; */
                             }
                         }
                         &:nth-child(1) .poll-progress-bar{
