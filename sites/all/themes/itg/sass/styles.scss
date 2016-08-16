@@ -1887,6 +1887,9 @@ footer{
 
 /*Start anchors listing css*/
 .live-block{
+    ul{
+        @extend .list-none;
+    }
     h1{
         margin-bottom:5px;
         span{
@@ -1936,9 +1939,66 @@ footer{
                         &.twitter{
                             background: #05a3d2;
                         }
+                        &.google{
+                            background: url(../images/google-icon.jpg) no-repeat center center;
+                        }
                     }
                 }
             }
+        }
+    }
+    #slider-range{
+        border:none;
+        margin: 20px 0 10px 0;
+        @include calculate-width(1);
+        &.ui-slider-horizontal{            
+            height: 30px;
+            .ui-slider-handle{
+                width: 80px;
+                height: 38px;
+                background: #e6e5e3;
+                border: 1px solid #c1c1c1;
+                top: -20px;
+                margin-left: 0;
+                line-height: 38px;
+                text-align: center;
+                font-size: 15px;
+                color: #323232;
+                cursor: move;
+            }
+        }
+        &.ui-widget-content{
+            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
+        }
+        .ui-widget-header{
+            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
+            + a + a{
+                display: none;
+            }
+        }   
+    }
+    .live-hightlight{
+        h3{
+            text-transform: uppercase;
+            @include font(16px,null,700);
+            margin-top: 30px;
+            margin-bottom: 7px;
+        }
+        ul{
+            li{
+                @include before-icon-list(5px,5px,6px,0px,#cf0408,50%);
+                padding: 0 0 12px 10px;
+            }
+        }
+    }
+    .timeline{
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 30px;
+        h3{
+            text-transform: uppercase;
+            @include font(16px,null,700);
+            margin-top: 30px;
+            padding-bottom: 10px;
         }
     }
 }
