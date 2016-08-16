@@ -20,14 +20,16 @@ global $base_url;
 if (!empty($content)):
 
     $type = $node->field_type['und']['0']['value'];
-    if ($type == 'Live Blog') {
+    if ($type == 'Live Blog' || $type == 'Breaking News') {
         $title = $node->title;
         ?>
     <h1><span><?php print ($type) ?></span>: <?php print ($title) ?></h1>
     <p class="short-discription"> <?php print ($node->field_label['und']['0']['value'])?></p>
     <span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span>
     
+    <?php if($type == 'Live Blog') { ?>
     <iframe width="100%" height="360" frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="http://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;autoPlay=true&amp;mute=false"></iframe>
+    
     <div class="live-hightlight">
     <h3>Highlights</h3>
     <ul>
@@ -43,7 +45,7 @@ if (!empty($content)):
         
     </ul>
     </div>
-    
+    <?php } ?>
     <div class="timeline">
     <h3>Timeline</h3>
     <div id="slider-range"></div>
@@ -74,10 +76,6 @@ if (!empty($content)):
         }
     }
     
-    if ($type == 'Breaking News') {
-    print '<div class="breaking-title">Breaking News</div>';
-  }
-
 endif;
 ?>
 </div>
