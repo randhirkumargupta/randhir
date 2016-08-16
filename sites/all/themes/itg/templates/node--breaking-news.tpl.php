@@ -25,7 +25,7 @@ if (!empty($content)):
         ?>
     <h1><span><?php print ($type) ?></span>: <?php print ($title) ?></h1>
     <p class="short-discription"> <?php print ($node->field_label['und']['0']['value'])?></p>
-    <span><i class="fa fa-share-alt"></i></span>
+    <span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span>
     <?php
         }
     ?>

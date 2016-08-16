@@ -2554,6 +2554,12 @@ footer .footer-copyright {
   margin-bottom: 10px;
   line-height: 22px;
 }
+.live-block .disc-share a {
+  font-size: 20px;
+  color: #c4c4c4;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
 .live-block .breaking-section {
   padding: 10px 0;
   line-height: 22px;
