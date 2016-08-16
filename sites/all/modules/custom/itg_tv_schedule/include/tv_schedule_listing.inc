@@ -25,6 +25,7 @@ function tv_schedule_listing() {
     $date = date("Y-m-d H:i:s");
     $time = new DateTime($date);
     $curent_time = $time->format('H:i');
+    $current_day = $time->format('Y/m/d');
 
     $db = mongodb();
     $people = $db->tv_schedule;
@@ -89,7 +90,7 @@ function tv_schedule_listing() {
             $keys++;
 
             //counter required for current time slot display.
-            if ($curent_time >= $s_time) {
+            if ($curent_time >= $s_time && $current_day == $document["program date"]) {
                 $counter++;
             }
         }
