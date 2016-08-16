@@ -1,4 +1,4 @@
-<?php if (!empty($data)) : ?>
+<?php if (!empty($data)) : global $base_url; ?>
   <div class="section-ordering">
     <?php
     $extra_large_image_url = "";
@@ -9,26 +9,27 @@
       ?>
       <?php if ($count == 0) : ?>
         <?php if (!empty($extra_large_image_url)) { ?>
-          <img  src="<?php print $extra_large_image_url ?>" />
-        <?php }
+          <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
+            <img  src="<?php print $extra_large_image_url ?>" />
+          </a>
+          <?php
+        }
         else {
           ?>
-          <img  src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
-      <?php } ?>
-        <h3>
-          <a title="<?php echo $entity->title; ?>" href="<?php print drupal_get_path_alias("node/$entity->nid") ?>">
-      <?php print mb_strimwidth($entity->title, 0, 85, ".."); ?>
+          <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
+            <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
           </a>
+        <?php } ?>
+        <h3>
+          <?php echo l(mb_strimwidth($entity->title, 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
         </h3>
       <?php endif; ?>
-    <?php if ($count != 0) : ?>
+      <?php if ($count != 0) : ?>
         <p class="<?php print $entity->type ?> section-order-<?php print $entity->nid ?>">
-          <a href="<?php print drupal_get_path_alias("node/$entity->nid") ?>">
-      <?php print mb_strimwidth($entity->title, 0, 150, ".."); ?>
-          </a>
+          <?php echo l(mb_strimwidth($entity->title, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
         </p>
       <?php endif; ?>
-  <?php } ?>
+    <?php } ?>
   </div>
 <?php else : ?>
   <span class="no-result-found"><?php print t("Content Not Found") ?></span>

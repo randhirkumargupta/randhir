@@ -21,13 +21,8 @@ function feature_for_mobile_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Associate Client & Services',
-    'weight' => '20',
-    'children' => array(
-      0 => 'field_client_selection',
-      1 => 'field_service_content_count',
-      2 => 'field_header',
-      3 => 'field_footer',
-    ),
+    'weight' => '11',
+    'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
@@ -90,8 +85,8 @@ function feature_for_mobile_services_field_group_info() {
     'weight' => '9',
     'children' => array(
       0 => 'field_ftp_ip_address',
-      1 => 'field_ftp_username',
-      2 => 'field_ftp_password',
+      1 => 'field_ftp_password',
+      2 => 'field_ftp_username',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -158,9 +153,9 @@ function feature_for_mobile_services_field_group_info() {
     'label' => 'Technical Contact',
     'weight' => '4',
     'children' => array(
-      0 => 'field_contact_tech_person_name',
-      1 => 'field_contact_tech_email_address',
-      2 => 'field_contact_tech_mobile_number',
+      0 => 'field_contact_tech_email_address',
+      1 => 'field_contact_tech_mobile_number',
+      2 => 'field_contact_tech_person_name',
     ),
     'format_type' => 'div',
     'format_settings' => array(

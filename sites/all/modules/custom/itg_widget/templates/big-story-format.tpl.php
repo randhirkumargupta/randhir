@@ -1,3 +1,4 @@
+<?php global $base_url;?>
 <!-- Big news Block -->
 <div class="big-news">
   <div class="row">
@@ -9,35 +10,35 @@
       }
       else {
         ?>
-        <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+        <img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
         <div class="story-tag"><?php echo t("Big Story") ?></div>
       <?php } ?>
     </div>
     <div class="big-story-col-2">
       <?php if (!empty($data['node_data']->title)) : ?>
-      <?php
-       $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
-      ?>
-      <h1 class="big-story-first big-story-<?php print $data['node_data']->nid . ' '  . $red_dot_class?>">
-          <?php print mb_strimwidth($data['node_data']->title , 0 , 65 , ".."); ?>
+        <?php
+        $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
+        ?>
+        <h1 class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
+          <?php print mb_strimwidth($data['node_data']->title, 0, 65, ".."); ?>
         </h1>
       <?php endif; ?>
       <p>
         <!-- Story -->
         <?php if (!empty($data['node_data']->field_story_kicker_text['und'][0]['value'])) : ?>
-          <?php print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'] , 0 , 165 , '..'); ?>
+          <?php print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..'); ?>
         <?php endif; ?>
         <!-- Live blog -->
         <?php if (!empty($data['node_data']->field_label['und'][0]['value'])) : ?>
-          <?php print mb_strimwidth($data['node_data']->field_label['und'][0]['value'] , 0 , 165 , '..'); ?>
+          <?php print mb_strimwidth($data['node_data']->field_label['und'][0]['value'], 0, 165, '..'); ?>
         <?php endif; ?>
-        
+
       </p>
       <div class="share-new">
         <ul>
           <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
           <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-          <li><a href="#" title=""><?php echo t('Follow the Story');?></a></li>
+          <li><a href="#" title=""><?php echo t('Follow the Story'); ?></a></li>
         </ul>
       </div>
       <div class="big-story-detail">                                
@@ -51,10 +52,10 @@
               $url .= "/$server";
               $data_data = node_load($data_id);
               $alise = drupal_get_path_alias("node/$data_data->nid");
-              $url .=  "/$alise" ;
-              $new_url = strtolower ( $url );
+              $url .= "/$alise";
+              $new_url = strtolower($url);
               if (!empty($data_data->title)) :
-                print "<li><a href='$new_url' title=''>" . mb_strimwidth($data_data->title , 0 , 210 , '..') . "</a></li>";
+                print "<li>" . l(mb_strimwidth($data_data->title, 0, 210, '..'), $new_url) . "</li>";
                 $url = "";
               endif;
             }

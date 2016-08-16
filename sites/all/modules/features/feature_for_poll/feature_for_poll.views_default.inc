@@ -119,6 +119,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['field_poll_banner']['id'] = 'field_poll_banner';
   $handler->display->display_options['fields']['field_poll_banner']['table'] = 'field_data_field_poll_banner';
   $handler->display->display_options['fields']['field_poll_banner']['field'] = 'field_poll_banner';
+  $handler->display->display_options['fields']['field_poll_banner']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_poll_banner']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_poll_banner']['settings'] = array(
     'image_style' => 'past_poll_images_style_front_end',
@@ -129,6 +130,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
@@ -138,6 +140,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['php_1']['table'] = 'views';
   $handler->display->display_options['fields']['php_1']['field'] = 'php';
   $handler->display->display_options['fields']['php_1']['label'] = '';
+  $handler->display->display_options['fields']['php_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php  print itg_poll_getTotalPoll($row->nid);  ?> Votes counted';
@@ -148,6 +151,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Updated';
+  $handler->display->display_options['fields']['changed']['exclude'] = TRUE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'itg';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Global: PHP */
@@ -155,11 +159,35 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php  print itg_poll_get_past_data($row->nid);  ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="poll-banner">
+<div class="poll-list">
+<div class="pic">[field_poll_banner] </div>
+<div class="detail">
+<div class="detail-content">
+<h4>[title]</h4>
+<div class="vota">[php_1]</div>
+<div class="time">Updated: [changed]</div>
+</div>
+<div class="voting-data">
+[php]
+</div>
+
+</div>
+</div>
+
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -271,7 +299,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['field_poll_question_text']['label'] = '';
   $handler->display->display_options['fields']['field_poll_question_text']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_poll_question_text']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Video */
+  /* Field: Field: Poll Question Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';
@@ -785,7 +813,7 @@ function feature_for_poll_views_default_views() {
     'image_style' => 'medium',
     'image_link' => '',
   );
-  /* Field: Field: Video */
+  /* Field: Field: Poll Question Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';
@@ -877,7 +905,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['field_poll_question_text']['alter']['text'] = '[field_poll_question_text] jhjhjhjh';
   $handler->display->display_options['fields']['field_poll_question_text']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_poll_question_text']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Video */
+  /* Field: Field: Poll Question Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['field'] = 'field_poll_question_video';

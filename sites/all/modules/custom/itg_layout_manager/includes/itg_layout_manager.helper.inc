@@ -87,9 +87,12 @@ function get_itg_widget($widget_name, $widget_url = NULL) {
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
     return create_setion_widgets($widget_url);
   }
-  elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {    
-    //return 'shravan kumar'; //'photo_list_of_category'; //code views rander
-    
+  elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {   
+    //for category tab
+    if (isset($_GET['category'])) {
+      $widget_url = $_GET['category'];
+    }
+    //end
     return views_embed_view($widget_name, 'block', $widget_url);
   }
   else {      
@@ -179,7 +182,11 @@ function get_layout_details($section_name, $template_name, $status) {
     }else {
       $result['block_title'] = $itg_val->block_title;
     }
-    
+    // for photo section and video section
+    if ($status == 'front' && ($itg_val->widget_name == 'photo_list_of_category' || $itg_val->widget_name == 'video_list_of_category')) {
+      $result['cat_id'] = $itg_val->filter_url;
+    }
+    // end
     if (isset($itg_val->widget_name)) {
       $widget = get_itg_widget($itg_val->widget_name, $itg_val->filter_url);
     } 
@@ -191,7 +198,7 @@ function get_layout_details($section_name, $template_name, $status) {
     
     $data[$itg_val->block_name] = $result;
   }
-  //p($data);
+  
   return $data; 
   
 }

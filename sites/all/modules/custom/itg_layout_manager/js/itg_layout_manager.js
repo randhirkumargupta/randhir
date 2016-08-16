@@ -22,7 +22,7 @@
                 $(".templates-widgets li").draggable({
                     appendTo: "body",
                     helper: "clone",
-                    drag: function (event, ui) {                       
+                    drag: function (event, ui) {                        
                         widget_name = $(this).attr('data-widget');
                         // for category tab
                         category_name_tab = $(this).attr('id');
@@ -32,10 +32,16 @@
                 $(".droppable").droppable({
                     hoverClass: "drop-hover",
                     drop: function (event, ui) {
+                        var ad_class = $(this).attr('class');
                         
-                        $(this).addClass("dropped").find("p").hide();
+                        if (ad_class == 'ad-widget droppable ui-droppable') {
+                          alert("You can't drag any widget in this content area!");
+                          return false;
+                        }
+                        
+                        $(this).removeClass("gray-bg-layout");
                         // content block id for display content widget
-                        var block_name = $(this).attr('id');
+                        var block_name = $(this).find('.data-holder').attr('id');
                         //alert(block_name);
                         // tamplate section value
                         var section_name = $('#edit-section').val();
@@ -53,7 +59,6 @@
                         }
                         
                         var base_url = settings.itg_story.settings.base_url;
-
                         $.ajax({
                               url: base_url + "/insert-layout-setting-ajax/layout",
                               method: 'post',
@@ -67,6 +72,7 @@
                                  $('input[name = '+block_name+']').val(category_name_tab);
                                  $('.widget-title[data-id="'+block_name+'"]').html(category_name_tab);
                                  $('.tab-buttons span[data-class="'+block_name+'"]').html(category_name_tab);
+                                 $('#'+block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + widget_name);
                                  //$('#block_name').html(category_name_tab);
                                  if (display_area) {                                     
                                     $('#'+block_name).html(category_name_tab);
