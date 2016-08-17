@@ -5662,7 +5662,6 @@ div.node{
   .itg-widget{
     margin: 35px 0;
     position: relative;
-    background-color: #efefef;
     .droppable{
       min-height: 400px;
     }
@@ -5778,7 +5777,14 @@ div.node{
     }
   }
   .region-content{
-    margin: 20px 0;
+    margin: 35px 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    position: relative;
+    .widget-loader-wrapper{
+      height: 400px;
+    }
   }
   .views-form{
     .form-actions{margin-top: 20px;}
@@ -5794,7 +5800,8 @@ div.node{
           .tile{
             figure{
               width: 170px;
-              height: 128px;
+              height: 127px;
+              overflow: hidden;
               @extend .pos-rel;
               figcaption{
                 bottom: 0;
@@ -6175,5 +6182,14 @@ div.node{
         margin-top: 10px;
       }
     }
+  }
+}
+.ad-widget{
+  border: 1px solid #ddd;
+  height: 321px;
+  padding: 37px;
+  .sidebar-ad{
+    background: #ddd;
+    height: 100%;
   }
 }

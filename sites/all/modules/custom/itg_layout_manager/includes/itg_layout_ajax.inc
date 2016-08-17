@@ -69,6 +69,7 @@ function insert_layout_setting_ajax() {
       else {        
         $block_title = $_GET['block_title'];
       }*/
+      
       $block_title = $_GET['block_title'];
       $query_layout_manager = db_insert('itg_layout_manager');
       $query_layout_manager->fields(array(

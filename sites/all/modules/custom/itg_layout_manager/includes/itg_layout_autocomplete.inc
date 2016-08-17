@@ -21,7 +21,7 @@ function itg_category_autocomplete_list($string) {
     $itg_query->condition('name', '%' . $string . '%', 'LIKE')
             ->fields('itg', array('tid', 'name'));
     $result = $itg_query->execute()->fetchAll();
- }*/
+  }*/
  
   $itg_query = db_select('taxonomy_term_data', 'itg');
   $itg_query->condition('vid', CATEGORY_MANAGMENT, '=');

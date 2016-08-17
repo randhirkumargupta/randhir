@@ -1887,6 +1887,9 @@ footer{
 
 /*Start anchors listing css*/
 .live-block{
+    ul{
+        @extend .list-none;
+    }
     h1{
         margin-bottom:5px;
         span{
@@ -1896,6 +1899,15 @@ footer{
     .short-discription{
         margin-bottom: 10px;
         line-height: 22px;
+    }
+    .disc-share{
+        a{
+            font-size: 20px;
+            color: #c4c4c4;
+            margin-bottom: 10px;
+            cursor: pointer;
+                display: block;
+        }
     }
     .breaking-section{
         padding: 10px 0;
@@ -1914,7 +1926,7 @@ footer{
                 @extend .list-none;
                 li{
                     @include display-inline;
-                    padding-right: 15px;
+                    padding-right: 8px;
                     a{
                         background: #000;
                         width: 23px;
@@ -1936,9 +1948,66 @@ footer{
                         &.twitter{
                             background: #05a3d2;
                         }
+                        &.google{
+                            background: url(../images/google-icon.jpg) no-repeat center center;
+                        }
                     }
                 }
             }
+        }
+    }
+    #slider-range{
+        border:none;
+        margin: 20px 0 10px 0;
+        @include calculate-width(1);
+        &.ui-slider-horizontal{            
+            height: 30px;
+            .ui-slider-handle{
+                width: 80px;
+                height: 38px;
+                background: #e6e5e3;
+                border: 1px solid #c1c1c1;
+                top: -20px;
+                margin-left: 0;
+                line-height: 38px;
+                text-align: center;
+                font-size: 15px;
+                color: #323232;
+                cursor: move;
+            }
+        }
+        &.ui-widget-content{
+            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
+        }
+        .ui-widget-header{
+            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
+            + a + a{
+                display: none;
+            }
+        }   
+    }
+    .live-hightlight{
+        h3{
+            text-transform: uppercase;
+            @include font(16px,null,700);
+            margin-top: 30px;
+            margin-bottom: 7px;
+        }
+        ul{
+            li{
+                @include before-icon-list(5px,5px,6px,0px,#cf0408,50%);
+                padding: 0 0 12px 10px;
+            }
+        }
+    }
+    .timeline{
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 30px;
+        h3{
+            text-transform: uppercase;
+            @include font(16px,null,700);
+            margin-top: 30px;
+            padding-bottom: 10px;
         }
     }
 }
@@ -2323,7 +2392,7 @@ footer{
                             .poll-past-percentage-progess{
                                 @include display-inline;
                                 height: 18px;
-                                /*                                background: #000;*/
+                                /* background: #000; */
                             }
                         }
                         &:nth-child(1) .poll-progress-bar{
@@ -2394,3 +2463,114 @@ footer{
         }
     }
 }
+
+/*CSS Start Video landing Header*/
+#block-views-video-landing-header-block{
+    color:#aaa8a9;
+    background: #171717;     
+    .video-landing-header{
+        background: #000;
+        padding-bottom: 15px;
+    }
+    .video-header-left{
+        @include clearfix;
+        .video{
+            @include float(left);
+            width: 84%;
+            padding: 15px;
+            border:1px solid #242424;
+        }
+        .social-likes{
+            @include float(right);
+            width: 16%;
+            background: #1a1a1a;
+            ul{
+                li{
+                    a{
+                        display: block;
+                        padding: 23px 5px 23px 10px;
+                        color: #aba9aa;
+                        font-family:$itg-roboto;
+                        i{
+                            font-size: 22px;
+                            vertical-align: middle;
+                        }
+                    }
+                    + li a{
+                        border-top:1px solid #000;
+                    }
+                }
+            }
+        }
+    }
+    h2{
+        color: $white-color;
+        font-size: 26px;
+        margin: 10px 0;
+    }
+    ul{
+        @extend .list-none;
+    }   
+    .video-header-right{
+        p.upload-date{
+            font-size: 12px;
+            color: #fff;
+            margin-top: 10px;
+            font-family:$itg-roboto;
+        }
+    }
+
+}
+#block-views-video-landing-header-block-1{
+    color:#aaa8a9;
+    background: #171717;
+    border-top: 5px solid #171717;    
+    ul{
+        @extend .list-none;
+    }
+    .container{
+        background: #000;
+        padding:10px 25px 
+    }
+    .view-content{
+        .item-list{
+            overflow: hidden;
+            overflow-x: scroll;
+        ul{
+            margin:0 -10px;
+            @include clearfix();
+            width:200%;
+            li{
+                width: 170px;
+                padding: 0 10px;
+                @include float(left);
+                @include pos(relative);
+                .views-field-field-story-extra-large-image{
+                    @extend .pos-rel;
+                        &:after{
+                            background: url(../images/video-icon-small.png) no-repeat;
+                            content:"";
+                            width: 18px;
+                            height: 18px;
+                            position: absolute;
+                            left: 5px;
+                            bottom: 5px;
+                        }
+                }
+                .views-field-field-video-duration{
+                    @include pos(absolute,104px,null,null,40px);                    
+                    cursor: pointer;
+                    font-family: $itg-roboto;
+                    @include font(12px);
+                    color: $white-color;
+                }
+                .views-field-field-story-short-headline{
+                    margin-top: 15px;
+                }
+            }
+        }
+        }
+    }
+}
+
+/*CSS End Video landing Header*/
