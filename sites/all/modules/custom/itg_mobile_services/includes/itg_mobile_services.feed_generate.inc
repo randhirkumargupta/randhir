@@ -57,10 +57,10 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header =
   }
   $xml .= $footer;
   $xml .= '</channel>';
-  
+
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'xml', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path); 
+  file_save_data($xml, $feed_dir . $full_file_path);
   drupal_set_message(t('Your xml has been generated'));
   return $full_file_path;
 }
@@ -124,7 +124,7 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header =
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'rss', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path); 
+  file_save_data($xml, $feed_dir . $full_file_path);
   drupal_set_message(t('Your RSS has been generated'));
   return $full_file_path;
 }
@@ -188,7 +188,7 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header 
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'mrss', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path); 
+  file_save_data($xml, $feed_dir . $full_file_path);
   drupal_set_message(t('Your MRSS has been generated'));
   return $full_file_path;
 }
@@ -249,7 +249,7 @@ function itg_mobile_services_generate_sms($node, $service_title, $field_header =
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'sms', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path); 
+  file_save_data($xml, $feed_dir . $full_file_path);
   drupal_set_message(t('Your sms has been generated'));
   return $full_file_path;
 }
@@ -270,10 +270,10 @@ function itg_mobile_services_generate_feed($node, $service_title, $field_header 
   foreach ($data_array as $keys => $value) {
     $xml .= get_custom_feeds_mobile($field_collect, $xmlstring, $keys);
   }
-  
+
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'text_feed', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path); 
+  file_save_data($xml, $feed_dir . $full_file_path);
   drupal_set_message(t('Your feed has been generated'));
   return $full_file_path;
 }
@@ -294,10 +294,10 @@ function itg_mobile_services_generate_ussd($node, $service_title, $field_header 
   foreach ($data_array as $keys => $value) {
     $xml .= get_custom_feeds_mobile($field_collect, $xmlstring, $keys);
   }
-  
+
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'ussd', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path); 
+  file_save_data($xml, $feed_dir . $full_file_path);
   drupal_set_message(t('Your ussd has been generated'));
   return $full_file_path;
 }
@@ -358,7 +358,7 @@ function itg_mobile_services_generate_astro_mrss($node, $service_title, $field_h
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'mrss', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path); 
+  file_save_data($xml, $feed_dir . $full_file_path);
   drupal_set_message(t('Your MRSS has been generated'));
   return $full_file_path;
 }
@@ -419,7 +419,7 @@ function itg_mobile_services_generate_astro_sms($node, $service_title, $field_he
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'sms', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path); 
+  file_save_data($xml, $feed_dir . $full_file_path);
   drupal_set_message(t('Your sms has been generated'));
   return $full_file_path;
 }
@@ -459,14 +459,14 @@ function generate_file_name($node, $service_title, $feeds_type, $ext) {
   if (!file_exists($feed_dir)) {
     mkdir($feed_dir, 0777, TRUE);
   }
-  
+
   $full_file_path = $file_path . '/mobile/' . $service_title . '/' . $feeds_type . $file_name;
   $files_path = $file_path . '/mobile/' . $service_title . '/' . $feeds_type;
-  
+
   if (!file_exists($files_path)) {
     mkdir($files_path, 0777, TRUE);
   }
-  
+
   return '/mobile/' . $service_title . '/' . $feeds_type . $file_name;
 }
 
