@@ -563,14 +563,11 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 //      '1988',
 //      '1967'
 //  );
-  
 //  foreach(forms_uses_checked_content_id() as $forms) {
 //    //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
 //  }
   // Assign deafult values in case of checkbox are checked.
   //$form = get_sessions_of_ticked_nodes($form);
-
-  
 }
 
 /**
@@ -578,12 +575,14 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
  *
  */
 function session_dependent_custom_form_validation(&$form, &$form_state) {
-  if(empty($_SESSION[$form['#form_id']])) {
+  if (empty($_SESSION[$form['#form_id']])) {
     form_set_error("Please select at least one item.");
-  }else {
+  }
+  else {
     return true;
   }
 }
+
 /**
  * {@inheritdoc}
  */
@@ -592,7 +591,7 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
   // Session value is set by ajax.
   // Extra funtionality to display nodeid with cross.
   $form_to_used_session_checked = forms_uses_checked_content_id();
-  
+
   if (in_array($form['#form_id'], $form_to_used_session_checked)) {
     // $form_state['selection'] value is set by bulk operation submit.
     // Only selected nodes are come in $form_state['selection'] array.
@@ -623,7 +622,7 @@ function forms_uses_checked_content_id() {
  */
 function get_sessions_of_ticked_nodes(&$form) {
   foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
-      if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
+    if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
       $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
       $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
     }
@@ -909,5 +908,59 @@ function itg_widget_preprocess_views_view(&$vars) {
   );
   if (in_array($view_name, $widget_views)) {
     $vars['classes_array'][] = 'widgets-view';
+  }
+}
+
+/**
+ * Function for theme suggestion.
+ * 
+ * {@inheritdoc}
+ */
+function itg_widget_preprocess_node(&$vars) {
+  if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['tid'] == '399')) {
+
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_anchor_landing');
+    $anchor_id = $vars['nid'];
+    $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
+
+    // Query to get anchor title , image and body filed
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_extra_large_image', 'el_image', 'el_image.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'managed', 'el_image.field_story_extra_large_image_fid=managed.fid');
+    $query->leftJoin('field_data_body', 'body', 'body.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
+    $query->fields('n', array('title'));
+    $query->fields('managed', array('uri'));
+    $query->fields('body', array('body_value'));
+    $query->condition('n.nid', $anchor_id);
+    $query->condition('n.status','1');
+    $anchor_description_block_data = $query->execute()->fetchAssoc();
+    //pr($result);
+    // Query to get category in which anchor is associated.
+    $cat_query = db_select('field_data_field_story_category', 'cat');
+    $cat_query->leftJoin('node', 'n', 'n.nid=cat.entity_id');
+    $cat_query->fields('cat', array('field_story_category_tid'));
+    $cat_query->condition('cat.entity_id', $anchor_id);
+    $categories_of_anchor = $cat_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+    $video_entity_ids = array();
+
+    
+    // Query for getting videos id of perticular anchors
+    foreach ($categories_of_anchor as $category) {
+      $video_query = db_select('node', 'n');
+      $video_query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
+      $video_query->leftJoin('field_data_field_video_anchor', 'anchor', 'anchor.entity_id=n.nid');
+      $video_query->fields('cat', array('entity_id', 'field_story_category_tid'));
+      $video_query->condition('cat.field_story_category_tid', $category);
+      $video_query->condition('anchor.field_video_anchor_target_id', $anchor_id);
+      $video_query->groupBy('field_story_category_tid');
+      $video_query->condition('n.type','videogallery');
+      $video_query->condition('n.status','1');
+      $video_query->orderBy('n.created');
+      $video_entity_ids[] = $video_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    $vars['data'] = $video_entity_ids;
   }
 }

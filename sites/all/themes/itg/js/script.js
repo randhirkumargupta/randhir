@@ -206,7 +206,7 @@ Drupal.behaviors.my_custom_behavior = {
     
     //ITG Listing top spacing          
     $('.tab-data').find('ul.itg-listing').css('padding-top','0');
-    
+        
     //pagination
     $('.pager .pager-previous a').html('<i class="fa fa-chevron-left"></i>');
     $('.pager .pager-next a').html('<i class="fa fa-chevron-right"></i>');

@@ -89,10 +89,11 @@ function get_itg_widget($widget_name, $widget_url = NULL) {
   }
   elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {   
     //for category tab
+    //p($widget_url);
     if (isset($_GET['category'])) {
       $widget_url = $_GET['category'];
     }
-    else {
+    elseif (!isset($widget_url)) {
       // Temp code
       $query = db_select('itg_layout_tpl', 'ilt');
       $query->condition('ilt.status', 1, '=');
@@ -111,6 +112,7 @@ function get_itg_widget($widget_name, $widget_url = NULL) {
       foreach($cat_array as $first) break;
       $widget_url = $first;
     }
+    
     //end
     return views_embed_view($widget_name, 'block', $widget_url);
   }
