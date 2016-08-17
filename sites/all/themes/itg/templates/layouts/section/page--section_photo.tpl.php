@@ -88,12 +88,17 @@ global $theme;
                     <li>                     
                       <?php
                         $category_url = arg();
-
+                        if ($widget_data[$blockid]['cat_id'] == $_GET['category']) {
+                          $class_active = 'menu-active';
+                        }
+                        else {
+                          $class_active = ''; 
+                        }
                         print l($widget_data[$blockid]['block_title'], 
                                 $category_url,
                                    array(
                                      'attributes' => array(                                      
-                                       'class' => 'menu-active'
+                                       'class' => $class_active
                                      ), 
                                      'query' => array(
                                        'category' =>$widget_data[$blockid]['cat_id']
