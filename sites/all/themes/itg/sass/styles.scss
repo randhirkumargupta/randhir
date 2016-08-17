@@ -1270,7 +1270,11 @@ footer{
                 a{
                     @include font(22px,28px,$itg-font-medium);   
                 }
-            }            
+            }
+            .social-share{
+            margin-top:10px;
+            @include social-share;
+        }
         }
         .other-info{
             @include itg-font($itg-roboto);
@@ -1922,38 +1926,7 @@ footer{
         }
         .social-share{
             margin-top:10px;
-            ul{
-                @extend .list-none;
-                li{
-                    @include display-inline;
-                    padding-right: 8px;
-                    a{
-                        background: #000;
-                        width: 23px;
-                        height: 23px;                        
-                        border-radius: 100%;
-                        display: block;
-                        color: #fff;
-                        text-align: center;
-                        line-height: 23px;
-                        &.share{
-                            color:#d0d0d0;
-                        }
-                        &.share, &.google{
-                            background: transparent;
-                        }
-                        &.facebook{
-                            background: #0b4887;
-                        }
-                        &.twitter{
-                            background: #05a3d2;
-                        }
-                        &.google{
-                            background: url(../images/google-icon.jpg) no-repeat center center;
-                        }
-                    }
-                }
-            }
+            @include social-share;
         }
     }
     #slider-range{
@@ -2602,3 +2575,9 @@ footer{
 }
 
 /*CSS End Video landing Header*/
+/*video rolling slider*/
+#block-itg-widget-featured-photo-carousel-r{
+ background: #171717;   
+     padding: 50px 0;
+}
+/*video rolling slider end*/
