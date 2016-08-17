@@ -37,17 +37,15 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['style_options']['class'] = 'photo-list';
   $handler->display->display_options['style_options']['wrapper_class'] = 'photo-wrapper';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Extra small image */
-  $handler->display->display_options['fields']['field_story_extra_small_image']['id'] = 'field_story_extra_small_image';
-  $handler->display->display_options['fields']['field_story_extra_small_image']['table'] = 'field_data_field_story_extra_small_image';
-  $handler->display->display_options['fields']['field_story_extra_small_image']['field'] = 'field_story_extra_small_image';
-  $handler->display->display_options['fields']['field_story_extra_small_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_small_image']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_story_extra_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_small_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_small_image']['settings'] = array(
-    'image_style' => 'medium',
-    'image_link' => '',
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => 'video_landing_page_170_x_127',
+    'image_link' => 'content',
   );
   /* Field: Content: Gallery Image (field_gallery_image:delta) */
   $handler->display->display_options['fields']['delta']['id'] = 'delta';
@@ -76,8 +74,10 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['max_length'] = '60';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Field: Content: Section */
   $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
@@ -91,7 +91,7 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<figure>
-[field_story_extra_small_image]
+[field_story_extra_large_image]
 <figcaption><i class="fa fa-camera" aria-hidden="true"></i> [delta]</figcaption>
 </figure>
 <span class="posted-on">[created]</span>
