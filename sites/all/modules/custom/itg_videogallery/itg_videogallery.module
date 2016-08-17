@@ -18,6 +18,10 @@ function itg_videogallery_block_info() {
     'info' => t('Video Gallery Form Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['videogallery_menu_video_block'] = array(
+    'info' => t('Video landing page menu'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -33,6 +37,9 @@ function itg_videogallery_block_view($delta = '') {
   switch ($delta) {
     case 'videogallery_tab_form_block':
       $block['content'] = theme('videogallery_tab_form_block', array('data' => $data));
+      break;
+    case 'videogallery_menu_video_block':
+      $block['content'] = theme('videogallery_menu_video_block', array('data' => $data));
       break;
   }
 
@@ -62,8 +69,12 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
       'render element' => 'form',
     ),
+    'videogallery_menu_video_block' => array(
+      'template' => 'videogallery-menu-landing-template',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
-
   return $themes;
 }
 
@@ -956,4 +967,45 @@ function itg_videogallery_ftp_video_list() {
     watchdog("WATCHDOG_INFO_video", "FTP connection has failed");
   }
   return $conn_id;
+}
+
+/**
+ * Implement function for tid from layout_tpl_manager
+ */
+function itg_videogallery_ftp_video_post($sid){
+  $query = db_select('itg_layout_tpl', 'ilt');
+  $query->join('itg_layout_manager', 'ilm', 'ilt.id = ilm.layout_id' );
+  $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = ilm.filter_url');
+  $query->fields('ilm', array('filter_url'));
+  $query->fields('ttd', array('name'));
+  $query->condition('ilm.widget_name', 'video_list_of_category', '=');
+  $query->condition('ilt.template_name', 'page--section_video', '=');
+  $query->condition('ilt.section_name', $sid, '=');
+  $query->condition('ilt.status', 1, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_videogallery_node_view($node, $view_mode, $langcode){
+    if($node->type == 'videogallery'){
+        drupal_add_js(drupal_get_path('theme', 'itg').'/js/jquery-1.11.0.min.js', array('scope' => 'footer'));
+        
+       
+        drupal_add_js(drupal_get_path('theme', 'itg').'/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+        drupal_add_css(drupal_get_path('theme', 'itg').'/css/jquery.mCustomScrollbar.min.css');       
+       
+        drupal_add_js('
+            (function($){
+   $(window).on("load",function(){
+    
+    $("#block-views-video-landing-header-block-1 .item-list").mCustomScrollbar({
+    axis:"x" // horizontal scrollbar
+});    
+   });
+  })(jQuery);
+        ' , array('type' => 'inline', 'scope' => 'footer'));
+    }
 }
