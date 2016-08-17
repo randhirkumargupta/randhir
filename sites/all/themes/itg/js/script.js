@@ -253,4 +253,6 @@ jQuery(document).ready(function() {
 //            jQuery(this).stop();
         }
     });
+    
+    jQuery("#coverflow").flipster();
 });
