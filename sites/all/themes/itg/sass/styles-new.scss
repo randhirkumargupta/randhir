@@ -96,7 +96,7 @@
         font-size: 0;
         &:before{
           left: 10px;
-          top: 40px;
+          top: 43px;
           position: absolute;
         }
       }
@@ -105,15 +105,18 @@
         height: 100px;
         background-color: rgba(255, 255, 255, .3);
         border-radius: 90px 0 0 90px;
-        right: 100px;
+        right: 421px;
         font-size: 0;
         &:before{
-          right: 421px;
-          top: 40px;
+          right: 7px;
+          top: 43px;
           position: absolute;
         }
       }
     } 
+    .flex-control-paging{
+      display: none;
+    }
   }
   .slides{
     li{
