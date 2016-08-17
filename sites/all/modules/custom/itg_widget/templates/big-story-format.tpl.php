@@ -1,4 +1,4 @@
-<?php global $base_url;?>
+<?php if(!empty($data)) : global $base_url;?>
 <!-- Big news Block -->
 <div class="big-news">
   <div class="row">
@@ -67,3 +67,4 @@
   </div>
 </div>
 <!-- Big news Block End -->
+<?php endif;?>
