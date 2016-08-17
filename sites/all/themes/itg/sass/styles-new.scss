@@ -24,7 +24,7 @@
       padding-top:13px;
       > label{
         display: block;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: normal;
         padding-right: 20px;
         position: relative;
@@ -55,12 +55,16 @@
       height: 95px;
     }
     .views-exposed-widget{
+        padding-right: 40px;
         label{
             font-weight: normal;
             + select{
             height: auto;
             margin-bottom: 10px;
             }
+        }
+        input[type="text"]{
+            width: 120px;
         }
         .caln{
             .form-item{
