@@ -272,10 +272,11 @@ function itg_survey_node_validate($node, $form, &$form_state) {
   // Validation for answer choices
   foreach ($node->field_survey_add_questions[LANGUAGE_NONE] as $key => $question_arr) {
     $answer_type = $question_arr['field_survey_answer_type'][LANGUAGE_NONE][0]['value'];
-    if ($answer_type != 'rating') {
+    if ($answer_type == 'radios' || $answer_type == 'checkboxes') {
       $ans_op1 = $question_arr['field_survey_answer_option_1'][LANGUAGE_NONE][0]['value'];
-      if(empty($ans_op1)){
-        form_set_error('field_survey_answer_option_1', t('Please add answer choices for question <strong>@question?<strong>', array('@question' => $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'])));
+      $ans_op2 = $question_arr['field_survey_answer_option_2'][LANGUAGE_NONE][0]['value'];
+      if(empty($ans_op1) || empty($ans_op2)){
+        form_set_error('field_survey_answer_option_1', t('Please provide atleast two answer choices for question <strong>@question?<strong>', array('@question' => $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'])));
       }
     }
   }

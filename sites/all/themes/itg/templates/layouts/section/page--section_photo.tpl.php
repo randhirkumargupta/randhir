@@ -83,24 +83,30 @@ global $theme;
               <?php for ($count = 1; $count < 21; $count++) { ?>
                 <?php $blockid = 'itg-block-' . $count; ?>
                 <?php if ($theme == FRONT_THEME_NAME) { ?>
-                  <?php //pr($widget_data[$blockid]);?>
+                  
                   <?php if (isset($widget_data[$blockid]['block_title'])) { ?>
                     <li>                     
                       <?php
-                      
-                      $widget_attributes =  array(
-//                                'attributes' => array(                                  
-//                                  'class' => 'active'
-//                                ), 
-                                'query' => array(
-                                  'category' =>$widget_data[$blockid]['cat_id']
-                                )
-                              );
-                      
-                      
-                     
+                        $category_url = arg();
+                        if ($widget_data[$blockid]['cat_id'] == $_GET['category']) {
+                          $class_active = 'menu-active';
+                        }
+                        else {
+                          $class_active = ''; 
+                        }
+                        print l($widget_data[$blockid]['block_title'], 
+                                $category_url,
+                                   array(
+                                     'attributes' => array(                                      
+                                       'class' => $class_active
+                                     ), 
+                                     'query' => array(
+                                       'category' =>$widget_data[$blockid]['cat_id']
+                                     ),
+                                   )
+                               );
                       ?>
-                      <?php echo l($widget_data[$blockid]['block_title'], 'taxonomy/term/' . arg(2), $widget_attributes); ?>
+                      
                     </li>
                   <?php } ?>
                 <?php } ?>
