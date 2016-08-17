@@ -3259,11 +3259,9 @@ footer .footer-copyright {
   padding: 10px 25px;
 }
 #block-views-video-landing-header-block-1 .view-content .item-list {
-  overflow: hidden;
-  overflow-x: scroll;
+  margin: 0 -10px;
 }
 #block-views-video-landing-header-block-1 .view-content .item-list ul {
-  margin: 0 -10px;
   zoom: 1;
   width: 200%;
 }
@@ -3303,6 +3301,16 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block-1 .view-content .item-list ul li .views-field-field-story-short-headline {
   margin-top: 15px;
+}
+#block-views-video-landing-header-block-1 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
+  height: 20px;
+  background: #3e3e3e;
+  border-radius: 10px 10px 16px 16px;
+}
+#block-views-video-landing-header-block-1 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
+  width: 100px;
+  height: 12px;
+  margin: 2px auto;
 }
 
 /*CSS End Video landing Header*/
