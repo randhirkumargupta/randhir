@@ -76,6 +76,8 @@ function remove_extra_data() {
       'section_wise_widget',
       'we_may_suggest_widget',
       'section_wise_content_ordering',
+      'widget_anchors_listing',
+      'category_wise_content_list',
   );
   foreach ($widget as $view_name) {
     $num_deleted = db_delete('draggableviews_structure')
@@ -556,17 +558,17 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#value'] = t('Confirm');
   }
 
-  $_SESSION['views_form_story_widget_page_1'] = array(
-      '1989',
-      '1988',
-      '1967'
-  );
+//  $_SESSION['views_form_story_widget_page_1'] = array(
+//      '1989',
+//      '1988',
+//      '1967'
+//  );
   
-  foreach(forms_uses_checked_content_id() as $forms) {
-    //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
-  }
+//  foreach(forms_uses_checked_content_id() as $forms) {
+//    //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
+//  }
   // Assign deafult values in case of checkbox are checked.
-  $form = get_sessions_of_ticked_nodes($form);
+  //$form = get_sessions_of_ticked_nodes($form);
 
   
 }
@@ -595,7 +597,7 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     // $form_state['selection'] value is set by bulk operation submit.
     // Only selected nodes are come in $form_state['selection'] array.
     // Here we are forcely chaing the array.
-    $form_state['selection'] = $_SESSION[$form['#form_id']];
+    // $form_state['selection'] = $_SESSION[$form['#form_id']];
     //$form_state['values']['views_bulk_operations'] = $form_state['selection'];
   }
 }
