@@ -63,9 +63,9 @@
 
   #block-itg-layout-manager-header-block {
     height: 220px;
+    background: #193c8d url(../images/header-bg.png) no-repeat top center;
   }
   #block-itg-layout-manager-header-block .header-top {
-    background: #193c8d url(../images/header-bg.png) no-repeat top center;
     height: 163px;
   }
   #block-itg-layout-manager-header-block .logo {

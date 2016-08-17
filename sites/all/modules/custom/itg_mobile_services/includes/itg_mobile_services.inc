@@ -118,10 +118,10 @@ function itg_mobile_services_feed_generator_of_contents($node) {
           case '1':
             $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
             if ($frequency_date_array[0] <= $today_date) {
-              // itg_mobile_web_url_mobile($service_fetch_link, $file_path, 1);
+              itg_mobile_web_url_mobile($service_fetch_link, $file_path, 1);
             }
             else {
-              // itg_mobile_web_url_mobile($service_fetch_link, $file_path, 0);
+              itg_mobile_web_url_mobile($service_fetch_link, $file_path, 0);
             }
 
             break;
@@ -368,12 +368,12 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
  * @param int $status
  */
 function itg_mobile_web_url_mobile($service_fetch_link, $file_path, $status) {
-
+  $timestamp = date("Y-m-d H:i:s");
   $query = db_insert('itg_syndication_feed_url');
   $query->fields(array(
     'xml_name' => $file_path,
     'client_feed_url' => $service_fetch_link,
-    'created_date' => time(),
+    'created_date' => $timestamp,
     'status' => $status
   ));
   $query->execute();
@@ -385,27 +385,38 @@ function itg_mobile_web_url_mobile($service_fetch_link, $file_path, $status) {
  */
 function itg_mobile_get_feed_byurl() {
   global $base_url;
+  $build = array();
   $url = $base_url . '/' . arg(0) . '/' . arg(1) . '/' . arg(2);
-
-  # set the database table
   $query = db_select('itg_syndication_feed_url', 'feed')->extend('PagerDefault');
   # get the desired fields from the database
   $query->condition('feed.client_feed_url', $url)
-      ->condition('feed.status', 1, '=')
-      ->fields('feed', array('id', 'xml_name', 'created_date'))
-      ->orderBy('created_date', 'DESC')
-      ->limit(3);
+      ->condition('feed.status', 1, '=');
 
+  $search_box = drupal_render(drupal_get_form('search_form'));
+  # set the database table
+  if (isset($_POST['max']['date'])) {
+    $mx_date = str_replace('/', '-', $_POST['max']['date']);
+    $min_date = str_replace('/', '-', $_POST['min']['date']);
+
+    $max_date = date('Y-m-d', strtotime($mx_date)) . ' 00:00:00';
+    $min_date = date('Y-m-d', strtotime($min_date)) . ' 00:00:00';
+
+    $query->condition('feed.created_date', $min_date, '>=');
+    $query->condition('feed.created_date', $max_date, '<=');
+  }
+
+  $query->fields('feed', array('id', 'xml_name', 'created_date'))
+      ->orderBy('created_date', 'DESC')
+      ->limit(10);
   # execute the query
   $results = $query->execute();
 
-  // TODO: add php tags and language tags
   $header = array(
     '1' => t('S. No.'),
     '2' => array('data' => t('Service Name'), 'sort' => 'desc'),
     '3' => t('Frequency'),
     '4' => t('Frequency Date'),
-    '5' => t('Time'),
+    '5' => t('Created Date'),
     '6' => t('Link'),
   );
   # build the table fields
@@ -419,12 +430,13 @@ function itg_mobile_get_feed_byurl() {
     $frequency_type = ($frequency_type_arr[count($frequency_type_arr) - 1]);
     $frequency_date = $file_url_array[2];
     $date_time = isset($file_url_array[0]) ? date('d/m/Y H:i:s', $file_date_array[0]) : '';
+    $created_date = $row->created_date;
 
     $rows[] = array($i,
       $file_url_array[1],
       $frequency_type,
       $frequency_date,
-      $date_time,
+      $created_date,
       '<a href="' . $base_url . '/sites/' . $file_url[1] . '" download> Click to Download </a>' . '</td>',
     );
     $i++;
@@ -432,9 +444,58 @@ function itg_mobile_get_feed_byurl() {
   // Format and print out the table.
   $output = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table'))));
 
+  $build['content'] = array(
+    'itg_mobile_services_search' => drupal_get_form('itg_mobile_services_search_form'),
+    'itg_mobile_services_content' => array(
+      '#markup' => $output,
+    ),
+  );
   # add the pager
-  $output .= theme('pager');
-  return $output;
+  $build['pager'] = array(
+    '#theme' => 'pager',
+    '#weight' => 5,
+  );
+
+  return $build;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @return string
+ */
+function itg_mobile_services_search_form($form, &$form_state) {
+  $form['created']['min'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('From'),
+    '#date_format' => 'd/m/Y',
+    '#date_year_range' => '-1:+1',
+  );
+  $form['created']['max'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('To'),
+    '#date_format' => 'd/m/Y',
+    '#date_year_range' => '-1:+1',
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+  return $form;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param array $form_state
+ */
+function itg_mobile_services_search_form_submit($form, &$form_state) {
+  $form_state['rebuild'] = TRUE;
 }
 
 /**
