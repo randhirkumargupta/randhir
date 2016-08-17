@@ -985,3 +985,27 @@ function itg_videogallery_ftp_video_post($sid){
   $result = $query->execute()->fetchAll();
   return $result;
 }
+
+/**
+ * {@inheritdoc}
+ */
+function itg_videogallery_node_view($node, $view_mode, $langcode){
+    if($node->type == 'videogallery'){
+        drupal_add_js(drupal_get_path('theme', 'itg').'/js/jquery-1.11.0.min.js', array('scope' => 'footer'));
+        
+       
+        drupal_add_js(drupal_get_path('theme', 'itg').'/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+        drupal_add_css(drupal_get_path('theme', 'itg').'/css/jquery.mCustomScrollbar.min.css');       
+       
+        drupal_add_js('
+            (function($){
+   $(window).on("load",function(){
+    
+    $("#block-views-video-landing-header-block-1 .item-list").mCustomScrollbar({
+    axis:"x" // horizontal scrollbar
+});    
+   });
+  })(jQuery);
+        ' , array('type' => 'inline', 'scope' => 'footer'));
+    }
+}
