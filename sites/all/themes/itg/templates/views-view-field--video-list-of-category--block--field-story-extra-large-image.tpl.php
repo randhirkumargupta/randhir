@@ -21,7 +21,9 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
+$term = end($row->_field_data['nid']['entity']->field_story_category[LANGUAGE_NONE]);
+$tid = $term['tid'];
 $img = $field->original_value;
-$output = l($img, 'node/'.$row->nid, array('query' => array('category' => $_GET['category']), 'html' => TRUE));
+$output = l($img, 'node/'.$row->nid, array('query' => array('category' => $tid), 'html' => TRUE));
 ?>
 <?php print $output; ?>
