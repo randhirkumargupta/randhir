@@ -190,7 +190,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad"></div>
+                      <div class="sidebar-ad droppable"></div>
                     </div>              
                   </div>
                 </div>
@@ -430,7 +430,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
          <div class="col-md-4 col-sm-4 col-xs-12">
            <div class="itg-widget">
              <div class="ad-widget">
-               <div class="sidebar-ad"></div>
+               <div class="sidebar-ad droppable"></div>
              </div>               
            </div>  
         </div>
