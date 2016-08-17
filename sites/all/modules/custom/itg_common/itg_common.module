@@ -64,18 +64,21 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     ) {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
+      
+      // add common hidden type field
+      $type = $form['type']['#value'];
+
+      $form['ntype'] = array(
+        '#title' => t('Ntype'),
+        '#type' => 'hidden',
+        '#id' => 'ntype',
+        '#description' => t(''),
+        '#value' => $type,
+      );
+      
     }
 
-    // add common hidden type field
-    $type = $form['type']['#value'];
-
-    $form['ntype'] = array(
-      '#title' => t('Ntype'),
-      '#type' => 'hidden',
-      '#id' => 'ntype',
-      '#description' => t(''),
-      '#value' => $type,
-    );
+    
     
     // Add JS to hide Advance seeting from all content type forms
     drupal_add_js('jQuery(document).ready(function() {                  
