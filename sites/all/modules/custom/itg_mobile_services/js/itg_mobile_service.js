@@ -10,6 +10,8 @@ var rowCount = 1;
 var firstDate = 1;
 var fixedDate = '';
 var maxLen = 0;
+var astroLen = 0;
+var astroFlag = 1;
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
@@ -17,6 +19,8 @@ var maxLen = 0;
 
             jQuery.fn.mobile_astro_custom_js = function () {
                 jQuery('#edit-field-service-content-und-add-more').mousedown();
+                jQuery('#reset-date-button').show();
+                jQuery("#edit-field-service-association-title-und").addClass("itg-disabled");
             };
 
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
@@ -409,6 +413,7 @@ var maxLen = 0;
                             maxLen = parseInt(msg);
                         },
                     });
+
                 }
             });
 

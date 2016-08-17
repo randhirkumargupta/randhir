@@ -90,7 +90,7 @@ function insert_layout_setting_ajax() {
       } else {
         $block_title = $_GET['block_title'];
         $widget = explode('#', $_GET['widget_name']);
-         
+        //watchdog("test shravan@", '<pre>'. print_r($_GET, TRUE) .'</pre>'); 
         db_update('itg_layout_manager')
               ->fields(array('widget_name' => $widget[0], 'block_title' => $block_title, 'filter_url' => $widget[1]))              
               ->condition('id', $layout_id)->execute();
