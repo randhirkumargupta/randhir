@@ -66,8 +66,9 @@ if (!empty($content)):
                 $field_collection_id = $breaking_item;
                 $entity = entity_load('field_collection_item', array($field_collection_id));
                 $pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+                $pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
                 $pub_time2 = str_replace(":","",$pub_time);
-                $breaking_output.= '<div class="dwrap" timevalue="'.$pub_time2.'" tcount="'.count($field_collection_ids).'"><div class="breaking-date">' . $pub_time . ' IST</div>';
+                $breaking_output.= '<div class="dwrap" timevalue="'.$pub_time2.'" tcount="'.count($field_collection_ids).'"><div class="breaking-date">' . $pub_display_time . '</div>';
                 $breaking_output.= '<div class="breaking-discription">' . $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'] . '</div><div class="social-share"><ul><li><a class="share" href="#"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>';
                 $breaking_output.= '</div></div>';
             }
