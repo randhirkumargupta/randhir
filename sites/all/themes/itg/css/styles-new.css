@@ -96,7 +96,7 @@
 }
 #block-views-photo-landing-slider-block .flexslider .flex-direction-nav .flex-prev:before {
   left: 10px;
-  top: 40px;
+  top: 43px;
   position: absolute;
 }
 #block-views-photo-landing-slider-block .flexslider .flex-direction-nav .flex-next {
@@ -104,13 +104,16 @@
   height: 100px;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 90px 0 0 90px;
-  right: 100px;
+  right: 421px;
   font-size: 0;
 }
 #block-views-photo-landing-slider-block .flexslider .flex-direction-nav .flex-next:before {
-  right: 421px;
-  top: 40px;
+  right: 7px;
+  top: 43px;
   position: absolute;
+}
+#block-views-photo-landing-slider-block .flexslider .flex-control-paging {
+  display: none;
 }
 #block-views-photo-landing-slider-block .slides li h2 {
   padding: 0 15px;
