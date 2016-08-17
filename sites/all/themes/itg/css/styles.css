@@ -3193,6 +3193,10 @@ footer .footer-copyright {
 }
 
 /*CSS Start Video landing Header*/
+.node-type-videogallery #block-itg-layout-manager-header-block {
+  margin-bottom: 0;
+}
+
 #block-views-video-landing-header-block {
   color: #aaa8a9;
   background: #171717;
@@ -3226,16 +3230,20 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
   display: block;
-  padding: 23px 5px 23px 10px;
+  padding: 25px 5px 24px 10px;
   color: #aba9aa;
   font-family: "Roboto", sans-serif;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
-  font-size: 22px;
+  font-size: 18px;
   vertical-align: middle;
+  margin-right: 5px;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
   border-top: 1px solid #000;
+}
+#block-views-video-landing-header-block .video-header-left .social-likes ul li:last-child a {
+  padding-bottom: 26px;
 }
 #block-views-video-landing-header-block h2 {
   color: #fff;
@@ -3263,7 +3271,6 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block-1 .view-content .item-list ul {
   zoom: 1;
-  width: 200%;
 }
 #block-views-video-landing-header-block-1 .view-content .item-list ul:before, #block-views-video-landing-header-block-1 .view-content .item-list ul:after {
   content: "";
@@ -3304,8 +3311,20 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block-1 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
   height: 20px;
-  background: #3e3e3e;
+  background: #1b1b1b;
+  border-bottom: 1px solid #2c2c2c;
+  /* Safari 4-5, Chrome 1-9 */
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1b1b1b), to(#525252));
+  /* Safari 5.1, Chrome 10+ */
+  background: -webkit-linear-gradient(top, #1b1b1b, #525252);
+  /* Firefox 3.6+ */
+  background: -moz-linear-gradient(top, #1b1b1b, #525252);
+  /* IE 10 */
+  background: -ms-linear-gradient(top, #1b1b1b, #525252);
+  /* Opera 11.10+ */
+  background: -o-linear-gradient(top, #1b1b1b, #525252);
   border-radius: 10px 10px 16px 16px;
+  margin: 0;
 }
 #block-views-video-landing-header-block-1 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
   width: 100px;
