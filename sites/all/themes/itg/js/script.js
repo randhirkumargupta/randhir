@@ -211,6 +211,9 @@ Drupal.behaviors.my_custom_behavior = {
     $('.pager .pager-previous a').html('<i class="fa fa-chevron-left"></i>');
     $('.pager .pager-next a').html('<i class="fa fa-chevron-right"></i>');
     
+    //video landing page UL width
+    var videoNumber = $('#block-views-video-landing-header-block-1 .item-list ul li').length;    
+    $('#block-views-video-landing-header-block-1 .item-list ul').css('width', videoNumber*170+'px');
     // Global function to set lable as input placeholder
     function placeHolder(element, parent){
       $(element).each(function(){
@@ -250,4 +253,6 @@ jQuery(document).ready(function() {
 //            jQuery(this).stop();
         }
     });
+    
+    jQuery("#coverflow").flipster();
 });

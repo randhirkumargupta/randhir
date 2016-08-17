@@ -1,13 +1,14 @@
 <?php 
 if (!empty($data)) {
     ?>
+<div class="container">
 <div class="featuredphoto-wrap">
-			<div id="featuredphoto" class="featuredphoto">
-				<ul class="slide-wrap" id="example">
+			<div id="coverflow" class="">
+				<ul class="flip-items" id="example">
                                     
-                                             <?php  $countd = 1; foreach ($data as $entity_data_node) { ?>
+                                             <?php $i = 1;  $countd = 1; foreach ($data as $entity_data_node) { ?>
 
-					<li class="pos<?php print $countd++; ?>">
+                                    <li>
 						<div class="inner">
 							<a href="#">
 								<?php //print $entity_data_node['file_url']; ?>
@@ -17,15 +18,17 @@ if (!empty($data)) {
 							</a>
 						</div>
 					</li>
-					    <?php } ?>
+                                        
+					    <?php $i++; } ?>
 
 				
 				</ul>
-				<i class="arrow prev" id="jprev">&lt;</i>
-				<i class="arrow next" id="jnext">&gt;</i>
 			</div>
 		</div>
-
+</div>
+<!--<script>
+    var coverflow = jQuery("#coverflow").flipster();
+</script>-->
 
 <?php } else { ?>
     No Feature content found

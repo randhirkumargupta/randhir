@@ -229,6 +229,13 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         }
         else {
           $val_str = implode(' OR ', $val);
+          if ($val_str == 'All') {
+            $bundle_name = array('Story', 'Blog', 'photogallery', 'Videogallery', 'Podcast', 'Magazine');
+            $val_str = implode(' OR ', $bundle_name);
+          }
+          else {
+            $val_str = implode(' OR ', $val);
+          }
         }
       }
       else {

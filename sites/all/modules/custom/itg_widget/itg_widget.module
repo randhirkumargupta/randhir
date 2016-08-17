@@ -76,12 +76,14 @@ function remove_extra_data() {
       'section_wise_widget',
       'we_may_suggest_widget',
       'section_wise_content_ordering',
+      'widget_anchors_listing',
+      'category_wise_content_list',
   );
   foreach ($widget as $view_name) {
     $num_deleted = db_delete('draggableviews_structure')
             ->condition('view_name', $view_name)
             ->execute();
-    
+
     $num_deleted = db_delete('itg_widget_order')
             ->condition('widget', $view_name)
             ->execute();
@@ -501,7 +503,6 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('watch_right_now'); // top story widget qid
       }
       else {
-        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : top story");
         $queue_flag = 1; // trending_videos widget qid
       }
       break;
@@ -556,13 +557,78 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   if (in_array($form_id, $form_id_array_to_alter)) {
     $form['actions']['submit']['#value'] = t('Confirm');
   }
+
+//  $_SESSION['views_form_story_widget_page_1'] = array(
+//      '1989',
+//      '1988',
+//      '1967'
+//  );
+  
+//  foreach(forms_uses_checked_content_id() as $forms) {
+//    //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
+//  }
+  // Assign deafult values in case of checkbox are checked.
+  //$form = get_sessions_of_ticked_nodes($form);
+
+  
 }
 
+/**
+ * TODO:: Implementation
+ *
+ */
+function session_dependent_custom_form_validation(&$form, &$form_state) {
+  if(empty($_SESSION[$form['#form_id']])) {
+    form_set_error("Please select at least one item.");
+  }else {
+    return true;
+  }
+}
 /**
  * {@inheritdoc}
  */
 function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo) {
-  // TODO: Implement this.
+  // Form id which will use session value.
+  // Session value is set by ajax.
+  // Extra funtionality to display nodeid with cross.
+  $form_to_used_session_checked = forms_uses_checked_content_id();
+  
+  if (in_array($form['#form_id'], $form_to_used_session_checked)) {
+    // $form_state['selection'] value is set by bulk operation submit.
+    // Only selected nodes are come in $form_state['selection'] array.
+    // Here we are forcely chaing the array.
+    // $form_state['selection'] = $_SESSION[$form['#form_id']];
+    //$form_state['values']['views_bulk_operations'] = $form_state['selection'];
+  }
+}
+
+/**
+ * Function returns array of all the formid which use checked unchecked
+ * Session dependency.
+ * 
+ * @return array
+ */
+function forms_uses_checked_content_id() {
+  return array(
+      'views_form_story_widget_page_1'
+  );
+}
+
+/**
+ * Funtion is used for get the session values
+ * Which is set for only checkbox on widget search content page.
+ * 
+ * @param array $form
+ * @return array
+ */
+function get_sessions_of_ticked_nodes(&$form) {
+  foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
+      if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
+      $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
+      $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
+    }
+  }
+  return $form;
 }
 
 /**
