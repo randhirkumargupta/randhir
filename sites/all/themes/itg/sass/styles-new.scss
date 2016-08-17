@@ -286,6 +286,8 @@
         li{
           padding: 15px;
           float: left;
+          overflow: hidden;
+          height: 142px;
           .tile{
             figure{
               width: 170px;
