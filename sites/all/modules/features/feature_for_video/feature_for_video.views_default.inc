@@ -812,6 +812,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
@@ -829,6 +830,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
@@ -846,6 +848,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['label'] = '';
+  $handler->display->display_options['fields']['field_story_expert_description']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
   /* Field: File: Upload date */
   $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
@@ -853,12 +856,46 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['fields']['timestamp']['relationship'] = 'node_to_file';
   $handler->display->display_options['fields']['timestamp']['label'] = '';
+  $handler->display->display_options['fields']['timestamp']['exclude'] = TRUE;
   $handler->display->display_options['fields']['timestamp']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['timestamp']['date_format'] = 'itg';
   $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="container">
+    
+<div class="row video-landing-header">
+    <div class="col-md-12">
+    <h2>[title]</h2>
+</div>
+    <div class="col-md-8 video-header-left">
+        <div class="video">[php]</div>
+        <div class="social-likes">
+            <ul>
+                <li><a href="#"><i class="fa fa-heart"></i> 585</a></li>
+                <li><a href="#"><i class="fa fa-clock-o"></i> Watch Later</a></li>
+                <li><a href="#"><i class="fa fa-facebook"></i> Share</a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                <li><a href="#"><i class="fa fa-envelope"></i> Email</a></li>
+                <li><a href="#"><i class="fa fa-link"></i> Embed</a></li>
+                <li><a href="#"><i class="fa fa-comment"></i> Comment</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4 video-header-right"><p>[field_story_expert_description]</p>
+        <p class="upload-date">[timestamp]</p>
+    </div>
+</div>
+    </div>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
 
   /* Display: video landing page header scroll */
   $handler = $view->new_display('block', 'video landing page header scroll', 'block_1');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'container';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
