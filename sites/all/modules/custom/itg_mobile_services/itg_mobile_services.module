@@ -167,9 +167,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'vas_service_content_node_form':
 
-      //unset($_SESSION['service_title_id']);
-      //unset($_SESSION['service_frequency_id']);
-
       $form['metatags']['#type'] = 'hidden';
       // hide preview button
       variable_set('node_preview_vas-service-content', '0');
@@ -555,6 +552,7 @@ function itg_mobile_clients_validator($form, &$form_state) {
  * @return array
  */
 function itg_service_association_after_build($form, &$form_state) {
+  $form['field_service_association_title'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_service_list();
   $form_state['redirect'] = 'service-association-listing';
   $settings['service_association_form'] = TRUE;
   drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
@@ -585,6 +583,8 @@ function itg_service_content_after_build($form, &$form_state) {
     $astro_service = itg_mobile_services_check_astro_service($association_nid);
     if (!empty($astro_service)) {
       $settings['astro_service'] = TRUE;
+      unset($_SESSION['service_title_id']);
+      unset($_SESSION['service_frequency_id']);
     }
     else {
       $settings['astro_service'] = FALSE;
@@ -721,6 +721,8 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
   $form_state['redirect'] = 'service-content-listing';
   $commands = array();
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
+  unset($_SESSION['service_title_id']);
+  unset($_SESSION['service_frequency_id']);
 
   if (is_numeric($association_nid)) {
     $astro_service = itg_mobile_services_check_astro_service($association_nid);
@@ -729,8 +731,9 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
       $commands[] = ajax_command_invoke('#edit-field-service-content-add-more-number', 'val', array('13'));
       $commands[] = ajax_command_invoke(NULL, 'mobile_astro_custom_js', array());
     }
-    else {
+    else if ($_SESSION['field_astro_zodiac']) {
       unset($_SESSION['field_astro_zodiac']);
+      $commands[] = ajax_command_invoke(NULL, 'mobile_astro_delete_js', array());
     }
 
     $result = get_service_association($association_nid);
@@ -1087,6 +1090,33 @@ function itg_mobile_services_get_assoc_service() {
   $query->distinct();
   $query->fields('node', array('nid', 'title'));
   $query->join('field_data_field_service_association_title', 'sat', "node.nid = sat.field_service_association_title_target_id");
+  $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
+  if (empty($node_nid)) {
+    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
+  }
+  $query->condition('node.type', 'service_creation', '=');
+  $result = $query->execute();
+  $record = $result->fetchAll();
+  $options['_none'] = '- Select a value -';
+  foreach ($record as $val) {
+    $options[$val->nid] = $val->title;
+  }
+  return $options;
+}
+
+/**
+ * Get all services association for itg_mobile_services_get_service_list
+ * @return array
+ */
+function itg_mobile_services_get_service_list() {
+  $arg = arg();
+  $node_nid = '';
+  if (isset($arg['1']) && $arg['2'] == 'edit') {
+    $node_nid = $arg['1'];
+  }
+  $query = db_select('node', 'node');
+  $query->distinct();
+  $query->fields('node', array('nid', 'title'));
   $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
   if (empty($node_nid)) {
     $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
