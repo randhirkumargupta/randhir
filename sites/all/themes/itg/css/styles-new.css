@@ -247,7 +247,7 @@
   font-weight: 500;
   color: #969696;
 }
-.itg-region ul li a:hover, .itg-region ul li a.active {
+.itg-region ul li a:hover, .itg-region ul li a.menu-active {
   border-bottom: 3px solid #d00b26;
   color: #b50a0a;
 }
