@@ -41,7 +41,7 @@ function syndication_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Create Syndication Default Configuration'),
       'help' => '',
     ),
     'syndication_rule' => array(
