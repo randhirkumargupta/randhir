@@ -28,19 +28,23 @@
         display: none;   
     }
     #block-itg-layout-manager-header-block{
-        height:220px;
-        background: $header-bg url(../images/header-bg.png) no-repeat top center;
+        height:220px;        
         .header-top{           
             height: 163px;
         }
         .logo{
             width: auto;
             top: 100px;
+            a{
+                display: block;    
+                overflow: hidden;
+            }
             img{
-                background: $header-bg;
-                padding-left: 5px;
-                padding-right: 2px;
+                background: #000;
+                padding-left: 4px;
+                padding-right: 0px;
                 vertical-align: top;
+                margin-bottom: -2px;
             }
         }
         .top-nav{
@@ -53,7 +57,8 @@
                 display: none;
             }
             .main-nav{
-                @include float(right);
+                @include float(left);
+                padding-left: 145px;
                     li{
                         &:nth-child(3){
                             @include pos(relative);
@@ -72,9 +77,13 @@
                            @include font(27px,null,null);
                            &.active, &:hover{
                                color:$yellow-color;
-                           }
+                           }                           
                         }
+                        &:nth-child(2) a{
+                       padding-left: 0;
                     }
+                    }
+                    
                 }
             .social-nav{
                 @include pos(relative);
@@ -115,8 +124,11 @@
                     border-right: 1px solid $itg-nav-bordercolor;
                     border-top:none;
                     height: 37px;
-                    @include font($itg-nav-fontsize,37px,null);                    
+                    @include font($itg-nav-fontsize,37px,null);                                            
                     }
+                    &:first-child a{
+                             padding-left: 0;
+                        }
                 }
             }
         }
@@ -170,7 +182,7 @@
         }
         .top-colum-2{
            width: 44.8%;
-           @include display-inline;
+           @include float(left);
         }
         .top-colum-3{
            width: 33.2%;
