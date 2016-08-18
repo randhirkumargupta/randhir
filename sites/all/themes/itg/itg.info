@@ -53,7 +53,7 @@ stylesheets[all][] = system.theme.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/font-awesome.css
 stylesheets[all][] = css/slick.css
-stylesheets[all][] = css/jquery.flipster.css
+stylesheets[all][] = css/itg-photo-slider.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/styles.css
 stylesheets[all][] = css/styles-new.css
@@ -74,7 +74,7 @@ stylesheets[all][] = css/media.css
 ; Optionally add some JavaScripts to your theme.
 
 scripts[] = js/slick.js
-scripts[] = js/jquery.flipster.js
+scripts[] = js/itg-photo-slider.js
 scripts[] = js/script.js
 
 
