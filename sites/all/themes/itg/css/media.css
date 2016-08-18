@@ -63,7 +63,6 @@
 
   #block-itg-layout-manager-header-block {
     height: 220px;
-    background: #193c8d url(../images/header-bg.png) no-repeat top center;
   }
   #block-itg-layout-manager-header-block .header-top {
     height: 163px;
@@ -72,11 +71,16 @@
     width: auto;
     top: 100px;
   }
+  #block-itg-layout-manager-header-block .logo a {
+    display: block;
+    overflow: hidden;
+  }
   #block-itg-layout-manager-header-block .logo img {
-    background: #193c8d;
-    padding-left: 5px;
-    padding-right: 2px;
+    background: #000;
+    padding-left: 4px;
+    padding-right: 0px;
     vertical-align: top;
+    margin-bottom: -2px;
   }
   #block-itg-layout-manager-header-block .top-nav {
     padding: 0 15px 0 15px;
@@ -98,7 +102,8 @@
     display: none;
   }
   #block-itg-layout-manager-header-block .top-nav .main-nav {
-    float: right;
+    float: left;
+    padding-left: 145px;
   }
   #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) {
     position: relative;
@@ -119,6 +124,9 @@
   }
   #block-itg-layout-manager-header-block .top-nav .main-nav li a.active, #block-itg-layout-manager-header-block .top-nav .main-nav li a:hover {
     color: #ffc106;
+  }
+  #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(2) a {
+    padding-left: 0;
   }
   #block-itg-layout-manager-header-block .top-nav .social-nav {
     position: relative;
@@ -178,6 +186,9 @@
     font-size: 0.875rem;
     line-height: 37px;
   }
+  #block-itg-layout-manager-header-block .navigation .menu li:first-child a {
+    padding-left: 0;
+  }
 
   /*End header CSS Desktop version*/
   /*Start Footer CSS Desktop version*/
@@ -221,8 +232,7 @@
   }
   .top-block .top-colum-2 {
     width: 44.8%;
-    display: inline-block;
-    vertical-align: top;
+    float: left;
   }
   .top-block .top-colum-3 {
     width: 33.2%;

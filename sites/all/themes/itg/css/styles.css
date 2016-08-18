@@ -294,7 +294,7 @@ input[type="text"], select, input[type="password"] {
   padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
-  background: #193c8d url(../images/mobile-header-bg.png) no-repeat top center;
+  background: #000;
 }
 #block-itg-layout-manager-header-block a {
   color: #fff;
@@ -1221,6 +1221,9 @@ footer .footer-copyright {
   font-size: 1rem;
   font-weight: 500;
 }
+.big-news .big-story-detail li a:hover {
+  color: #adacac;
+}
 .big-news .story-tag {
   position: relative;
   top: 0px;
@@ -1319,6 +1322,12 @@ footer .footer-copyright {
   background: #959595;
   height: 5px;
   width: 5px;
+}
+.itg-listing li a {
+  padding: 15px;
+}
+.itg-listing li:before {
+  display: none;
 }
 
 /*End CSS Top Story Home page*/
