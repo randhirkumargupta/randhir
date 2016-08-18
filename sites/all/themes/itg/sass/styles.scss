@@ -1213,7 +1213,8 @@ footer{
             width: 400px;
             padding-bottom: 0;
             box-shadow: 2px 2px 2px #f1f1f1;
-            color:$black-color;            
+            color:$black-color;
+            z-index: 2;
             label{
                 @include display-inline;
                 padding-top: 9px;
@@ -1270,11 +1271,11 @@ footer{
                 a{
                     @include font(22px,28px,$itg-font-medium);   
                 }
-            }
-            .social-share{
-            margin-top:10px;
-            @include social-share;
+            }            
         }
+        .social-share{
+            text-align: right;
+            @include social-share;
         }
         .other-info{
             @include itg-font($itg-roboto);

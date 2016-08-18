@@ -82,37 +82,14 @@ function check_template_of_section($section_name, $template_name) {
  * @param string $widget_name 
  * @return array $render_array
  */
-function get_itg_widget($widget_name, $widget_url = NULL) {
+function get_itg_widget($widget_name, $filter_url = NULL) {
   
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
-    return create_setion_widgets($widget_url);
+    return create_setion_widgets($filter_url);
   }
   elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {   
-    //for category tab
-    if (isset($_GET['category'])) {
-      $widget_url = $_GET['category'];
-    }
-    else {
-      // Temp code
-      $query = db_select('itg_layout_tpl', 'ilt');
-      $query->condition('ilt.status', 1, '=');
-      $query->condition('ilt.template_name', 'page--section_photo', '=');
-      $query->condition('ilt.section_name', arg(2), '=');
-      $query->join('itg_layout_manager', 'ilm', 'ilt.id = ilm.layout_id' );
-      $query->condition('ilm.widget_name', 'photo_list_of_category', '=');
-      $query->fields('ilm', array('filter_url', 'block_name'));
-      
-      $result = $query->execute();
-      foreach($result as $key => $val) {        
-        $cat_array[$val->block_name] = $val->filter_url;
-      }
-      
-      ksort($cat_array);
-      foreach($cat_array as $first) break;
-      $widget_url = $first;
-    }
-    //end
-    return views_embed_view($widget_name, 'block', $widget_url);
+    
+    return views_embed_view($widget_name, 'block', $filter_url);
   }
   else {      
     $block = block_load('itg_widget', $widget_name);
@@ -184,6 +161,7 @@ function get_layout_details($section_name, $template_name, $status) {
   $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
   $itg_query->condition('layout_tpl.section_name', $section_name);    
   $itg_query->condition('layout_tpl.template_name', $template_name);
+  
   //condition for front
   if ($status == 'front') {
     $itg_query->condition('layout_tpl.status', 1);
@@ -195,19 +173,33 @@ function get_layout_details($section_name, $template_name, $status) {
   $itg_result = $itg_query->execute()->fetchAll();
   
   foreach ($itg_result as $itg_val) {
+    $filter_url = $itg_val->filter_url;
     $result['widget_name'] = $itg_val->widget_name;
-    if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') {
-      $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$itg_val->filter_url);
+    if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
+      $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
     }else {
-      $result['block_title'] = $itg_val->block_title;
+      $result['block_title'] = $itg_val->block_title; //for default widgets
     }
+    
     // for photo section and video section
     if ($status == 'front' && ($itg_val->widget_name == 'photo_list_of_category' || $itg_val->widget_name == 'video_list_of_category')) {
-      $result['cat_id'] = $itg_val->filter_url;
+      $result['cat_id'] = $filter_url; // category id
+      
+      if (isset($_GET['category'])) {
+        $filter_url = $_GET['category'];
+      }
+      else {
+        // Temp code
+       $filter_url =  get_first_category_of_media_widget(arg(2), $template_name, $itg_val->widget_name);
+      }
+      
+      
     }
-    // end
+    
     if (isset($itg_val->widget_name)) {
-      $widget = get_itg_widget($itg_val->widget_name, $itg_val->filter_url);
+      // get widget block
+      //p($filter_url);
+      $widget = get_itg_widget($itg_val->widget_name, $filter_url);
     } 
     else {
       $widget = '<p>Drag template widgets here !</p>';
@@ -317,4 +309,23 @@ function create_setion_widgets($section_id) {
   $data = itg_widget_section_wise_ordering_from_custom_table($info);
   
   return theme("section_wise_ordering", array("data" => $data));
+}
+
+function get_first_category_of_media_widget($section, $template, $widget_name) {
+  $query = db_select('itg_layout_tpl', 'ilt');
+  $query->condition('ilt.status', 1, '=');
+  $query->condition('ilt.template_name', $template, '=');
+  $query->condition('ilt.section_name', $section, '=');
+  $query->join('itg_layout_manager', 'ilm', 'ilt.id = ilm.layout_id' );
+  $query->condition('ilm.widget_name', $widget_name, '=');
+  $query->fields('ilm', array('filter_url', 'block_name'));
+
+  $result = $query->execute();
+  foreach($result as $key => $val) {        
+    $cat_array[$val->block_name] = $val->filter_url;
+  }
+
+  ksort($cat_array);
+  foreach($cat_array as $first) break;
+  return $filter_url = $first;
 }

@@ -101,14 +101,20 @@
                 }, 1000);
             }
             });
-            // popup show hide
+              // popup show hide
             $(".video-local").click(function(){
                 $(".local_browse").show();
                 $(".ftp-server").hide();
+                $('.video-ftp').removeClass('active');
+                 $(this).addClass('active');
             });
             $(".video-ftp").click(function(){
                 $(".local_browse").hide();
                 $(".ftp-server").show();
+                $(this).addClass('active');
+                 $('.video-local').removeClass('active');
+                 $('.used-unused-select').val('used');
+                  $('.used-unused-select').trigger('change');
 
             });
             $(".browse-local").click(function(){
@@ -120,7 +126,6 @@
                     $.colorbox.close();
                 }); 
             });
-            
             // check ajax upload button
 
             $('#videogallery-node-form').ajaxComplete(function(event,request, settings) {
@@ -149,7 +154,10 @@ jQuery('document').ready(function(){
                if(old_vid != 0){
   
                }else{
-                   
+                   jQuery('.video-ftp').trigger('click');
+                  jQuery('.video-local').removeClass('active');
+                 jQuery('.used-unused-select').val('used');
+                  jQuery('.used-unused-select').trigger('change');
                   var data = jQuery('.browse-ftp').html();
                 //  jQuery.colorbox({width: "80%", height: "80%",fixed: true});
                     jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%",fixed: true, onComplete : function() { 
@@ -158,3 +166,27 @@ jQuery('document').ready(function(){
                }
             });
 });
+
+// new code
+jQuery('document').ready(function(){
+jQuery('.used-unused-select').live('change',function(){
+   jQuery('#loader-data img').show();
+    var select_value = jQuery(this).val();
+     jQuery.ajax({
+            url: 'http://localhost/itg-new-work/dailymotion-ftp-videos-post',
+            type: 'post',
+            data: {'case': select_value},
+            success: function(data) {
+              jQuery('#loader-data img').hide();
+              jQuery('.video-options-wrapper').html(data);
+              
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+    
+  });
+  });
+ 
