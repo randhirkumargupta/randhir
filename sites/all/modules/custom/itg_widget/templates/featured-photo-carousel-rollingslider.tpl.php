@@ -29,14 +29,4 @@ if (!empty($data)) {  ?>
 <?php } ?>
 
   
-  <script>
-    $(document).ready(function () {
-        $('.carousel').carousel({
-          frontWidth: 645,
-          frontHeight: 365,
-          carouselWidth: 1170,
-          carouselHeight: 450,
-          buttonNav: 'none'
-        });
-      });
-  </script>
+  

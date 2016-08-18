@@ -74,7 +74,6 @@ stylesheets[all][] = css/media.css
 ; Optionally add some JavaScripts to your theme.
 
 scripts[] = js/slick.js
-scripts[] = js/itg-photo-slider.js
 scripts[] = js/script.js
 
 
