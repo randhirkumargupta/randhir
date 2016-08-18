@@ -53,11 +53,18 @@ Version   :  1.0
     /* background: red; */
     position: absolute;
     margin-top: 0;
-    bottom: 10px;
+    bottom: 0;
     font-family: Roboto;
-    left: 10px;
+    left: 0;
+    background: #000;
+    padding: 10px;
+    line-height: 25px;
+    width: 100%;
 }
-
+.carousel .slides .slideItem span.flex-count{
+    bottom: 75px; 
+        background: transparent;
+}
 .carousel .slides .slideItem a {
   display: block;
   text-decoration : none;

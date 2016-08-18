@@ -6,7 +6,7 @@
     <li class="col-md-3">
  <figure>
 <figcaption><i class="fa fa-camera" ></i> <?php print l($img, 'node/'.$row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
-<?php print $row['field_video_duration']; ?></figure>
+<?php print $row['field_video_duration']; ?></figcaption>
 
       </figure>
 

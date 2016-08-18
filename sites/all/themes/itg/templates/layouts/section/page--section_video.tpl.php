@@ -65,7 +65,12 @@ if (arg(2) == 'preview') {
         <?php endif; ?>
 
         <?php print render($page['header']); ?>
-
+        <?php
+          // photo_carousel widget
+          $block = block_load('itg_widget', 'featured_video_carousel_r');
+          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+          print render($render_array);
+        ?>
       </section>
 
     </header>

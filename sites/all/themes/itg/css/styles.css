@@ -3492,7 +3492,7 @@ footer .footer-copyright {
 
 /*CSS End Video landing Header*/
 /*video rolling slider*/
-#block-itg-widget-featured-photo-carousel-r {
+#block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r {
   background: #171717;
   padding: 50px 0 0 0;
 }
