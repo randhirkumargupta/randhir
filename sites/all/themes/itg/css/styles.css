@@ -3315,6 +3315,11 @@ footer .footer-copyright {
   background: #000;
   padding: 10px 25px;
 }
+#block-views-video-landing-header-block-1 .view-header h3 {
+  font-size: 14px;
+  font-size: 0.875rem;
+  color: #fff;
+}
 #block-views-video-landing-header-block-1 .view-content .item-list {
   margin: 0 -10px;
 }
