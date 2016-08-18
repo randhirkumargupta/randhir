@@ -159,12 +159,8 @@
   height: 321px;
 }
 
-.itg-layout-container .itg-top-section .top-colum-2 .droppable {
+.itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable {
   height: 673px;
-}
-
-.itg-layout-container .itg-top-section .top-colum-1 .droppable {
-  height: 637px;
 }
 
 .itg-layout-container .top-colum-3 .droppable {
