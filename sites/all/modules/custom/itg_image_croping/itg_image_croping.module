@@ -94,7 +94,7 @@ function itg_image_croping_ajax_make_ajax() {
     $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata));
 
 
-    return theme('image_repository', array('data' => $file,
+    print theme('image_repository', array('data' => $file,
         'field_name' => $field_name,
         'image_height' => $image_height,
         'image_width' => $image_width,
@@ -108,7 +108,7 @@ function itg_image_croping_ajax_make_ajax() {
 function itg_image_croping_getimagetotag() {
     $image_id = $_POST['fid'];
     $file = file_load($image_id);
-    return theme('image_tagging', array('data' => $file,
+    print theme('image_tagging', array('data' => $file,
         'field_name' => $_POST['field_name']
     ));
 }

@@ -6,7 +6,7 @@
  * 
  */
 if (isset($_GET['sid']) && !empty($_GET['sid'])) {
-  $menus = itg_videogallery_ftp_video_post($_GET['sid']);
+  $menus = itg_videogallery_ftp_video_post($_GET['sid'], 'page--section_video', 'video_list_of_category');
   foreach ($menus as $menu):
     $output .= '<li value="' . $menu->filter_url . '"><a href="javascript:void(0)" class="NULL">' . $menu->name . '</a></li>';
   endforeach;

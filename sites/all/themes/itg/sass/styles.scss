@@ -1322,7 +1322,7 @@ footer{
                     padding-left: 0;
                     border-left: 0;
                 }
-                &:hover{
+                &:hover, &.active{
                     color: $red-color;
                 }
             }
@@ -2226,6 +2226,10 @@ footer{
                         bottom: 0;
                         margin: auto;
                     }
+                    .poll-ans-caption{
+                        padding: 10px 15px;
+                        display: inline-block;
+                    }
                 }
             }
         }
@@ -2374,7 +2378,7 @@ footer{
                             width: 59%;
                             .poll-past-percentage-progess{
                                 @include display-inline;
-                                height: 18px;
+                                height: 18px;                                
                                 /* background: #000; */
                             }
                         }
@@ -2426,10 +2430,12 @@ footer{
                         .noofvotes, .percentage{
                             float: left;
                             width: 80px;
+                            padding-left: 20px;
                         }
                         .poll-past-percentage-progess{
                             width: 100px;
-                            float: left;
+                            float: left;  
+                            padding-left: 20px;
                         }
                     }
                 }

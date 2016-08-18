@@ -165,16 +165,12 @@
 .itg-layout-container .top-colum-3 .itg-widget-parent .droppable{
   height: 321px;
 }
-.itg-layout-container .itg-top-section .top-colum-2 .droppable{
+.itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
   height: 673px;
-}
-.itg-layout-container .itg-top-section .top-colum-1 .droppable{
-  height: 637px;
 }
 .itg-layout-container .top-colum-3 .droppable{
   height: 276px;
-}
-.itg-h450-section{
+}.itg-h450-section{
   .widget-wrapper{
     height: 100%;
     padding: 10px;
@@ -338,12 +334,17 @@
 .itg-widget.trending-list .tab-buttons span{
   font-size: 15px;
 }
-.ad-widget{
-  border: 1px solid #ddd;
-  height: 321px;
-  padding: 37px;
-  .sidebar-ad{
-    background: #ddd;
+.itg-layout-container{
+    .ad-widget{
+        border: 1px solid #ddd;
+        height: 321px;
+        padding: 37px;
+        .sidebar-ad{
+            background: #ddd;
+            height: 100%;
+        }
+    }
+}
+.itg-layout-container .top-colum-3 .itg-widget-parent .droppable.sidebar-ad{
     height: 100%;
-  }
 }
