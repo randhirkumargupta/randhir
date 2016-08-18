@@ -1664,7 +1664,7 @@ footer .footer-copyright {
   padding-left: 0;
   border-left: 0;
 }
-.view-front-end-global-search .attachment .search-menu a:hover {
+.view-front-end-global-search .attachment .search-menu a:hover, .view-front-end-global-search .attachment .search-menu a.active {
   color: #a00606;
 }
 .view-front-end-global-search .view-empty {

@@ -957,14 +957,14 @@ function itg_videogallery_ftp_video_list() {
 /**
  * Implement function for tid from layout_tpl_manager
  */
-function itg_videogallery_ftp_video_post($sid) {
+function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
   $query = db_select('itg_layout_tpl', 'ilt');
   $query->join('itg_layout_manager', 'ilm', 'ilt.id = ilm.layout_id');
   $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = ilm.filter_url');
   $query->fields('ilm', array('filter_url'));
   $query->fields('ttd', array('name'));
-  $query->condition('ilm.widget_name', 'video_list_of_category', '=');
-  $query->condition('ilt.template_name', 'page--section_video', '=');
+  $query->condition('ilm.widget_name', $widget_name, '=');
+  $query->condition('ilt.template_name', $template, '=');
   $query->condition('ilt.section_name', $sid, '=');
   $query->condition('ilt.status', 1, '=');
   $result = $query->execute()->fetchAll();
@@ -979,19 +979,19 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
    // drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery-1.11.0.min.js', array('scope' => 'footer'));
 
 
- //   drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
-    //drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css');
+    drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+    drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css');
 
-//    drupal_add_js('
-//            (function($){
-//   $(window).on("load",function(){
-//    
-//    $("#block-views-video-landing-header-block-1 .item-list").mCustomScrollbar({
-//    axis:"x" // horizontal scrollbar
-//});    
-//   });
-//  })(jQuery);
-//        ', array('type' => 'inline', 'scope' => 'footer'));
+    drupal_add_js('
+            (function($){
+   $(window).on("load",function(){
+    
+    $("#block-views-video-landing-header-block-1 .item-list").mCustomScrollbar({
+    axis:"x" // horizontal scrollbar
+});    
+   });
+  })(jQuery);
+        ', array('type' => 'inline', 'scope' => 'footer'));
     
     // Category view on landing page
     drupal_add_js("jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').click(function(){
@@ -1022,14 +1022,17 @@ function itg_videogallery_ajax_ftp_video() {
   if ($case == 'used') {
     $used_video = itg_videogallery_ftp_used_video();
     foreach ($used_video as $key => $u_video) {
-      $val .= '<input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video . '</input>';
+      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video . '</input></span>';
     }
   }
   elseif ($case == 'unused') {
     $unused_video = itg_videogallery_ftp_unused_video();
     foreach ($unused_video as $key => $un_video) {
-      $val .= '<input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $un_video . '</input>';
+      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $un_video . '</input></span>';
     }
+  }
+  if(empty($val)){
+    $val = "Result not found.";
   }
   echo '<div id="edit-video-browse-select">' . $val . '</div>';
 }
