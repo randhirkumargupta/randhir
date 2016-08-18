@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * Just declaring Views dependancy; nothing much to see here.
+ */
+
+/**
+ * Implementation of hook_views_api().
+ */
+function views_customstyle_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+
+
+/**
+* Theme preprocess function for views-view-custom.tpl.php
+*/
+function template_preprocess_views_view_custom(&$vars) {
+	//dsm($vars);
+	
+  $view = $vars['view'];
+	$vars['rows'] = $view->style_plugin->rendered_fields;
+	
+	$count = count($vars['rows']);
+	for($i = 0; $i < $count; $i++){
+		//initialize classes to be added
+		$class = '';
+		
+		//first and last record
+		if ($vars['options']['custom-class-firstlast']) {
+			if ($i == 0) {
+				$class .= 'first ';
+			}
+			elseif ($i == $count - 1) {
+				$class .= 'last ';
+			}
+		}
+			
+		//column counter
+		if ($vars['options']['custom-class-columncount'] && strlen($vars['options']['custom-class-columncount-prefix'])) {
+			$class .= $vars['options']['custom-class-columncount-prefix'] . (($i % $vars['options']['custom-class-columncount']) + 1) . ' ';
+		}
+		
+		//add the classes
+		$vars['rows'][$i]['classes'] = $class;
+		
+		//add the url towards the node
+		//$vars['rows'][$i]['url'] = url('node/' . $view->result[$i]->nid);
+	}
+}
