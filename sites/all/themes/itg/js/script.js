@@ -254,5 +254,5 @@ jQuery(document).ready(function() {
         }
     });
     
-    jQuery("#coverflow").flipster();
+    
 });
