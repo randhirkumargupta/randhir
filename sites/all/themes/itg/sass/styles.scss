@@ -192,10 +192,12 @@ input[type="text"], select, input[type="password"]{
 #page{@extend .vtop; @extend .full; @extend .dib;}
 
 /*start header css*/
+header{
+    margin-bottom: 30px;
+}
 #block-itg-layout-manager-header-block{    
     padding-top: 20px;
-    box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;    
+    box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);        
     background:#000;
     ul{
      @extend .list-none;   
@@ -2703,6 +2705,12 @@ footer{
 /*video rolling slider*/
 #block-itg-widget-featured-photo-carousel-r{
  background: #171717;   
-     padding: 50px 0;
+     padding: 50px 0 0 0;
 }
 /*video rolling slider end*/
+
+.view-photo-list-of-category{
+    .view-filters{
+        display: none;
+    }
+}
