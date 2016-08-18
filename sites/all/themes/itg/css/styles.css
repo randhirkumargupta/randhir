@@ -2921,6 +2921,7 @@ footer .footer-copyright {
 .poll-wrapper .poll-data .poll-replace-id .noofvotes, .poll-wrapper .poll-data .poll-replace-id .percentage {
   float: left;
   width: 100px;
+  padding-left: 20px;
 }
 .poll-wrapper .poll-data .poll-replace-id .poll-past-percentage-progess {
   width: 180px;
