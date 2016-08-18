@@ -56,7 +56,6 @@ features[field_instance][] = node-syndication_client-field_story_expiry_date
 features[field_instance][] = node-syndication_client-field_syndication_client_title
 features[field_instance][] = node-syndication_client-field_syndication_delivery_mode
 features[field_instance][] = node-syndication_client-field_syndication_ftp_details
-features[field_instance][] = node-syndication_feed_from_pattern-body
 features[field_instance][] = node-syndication_feed_from_pattern-field_syndication_feed_clients
 features[field_instance][] = node-syndication_feed_from_pattern-field_syndication_feed_content
 features[field_instance][] = node-syndication_feed_from_pattern-field_syndication_feed_type

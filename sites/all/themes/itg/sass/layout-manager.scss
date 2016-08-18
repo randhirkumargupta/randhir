@@ -56,7 +56,14 @@ a{
         list-style: none;
         li{
             @include tab-listing;        
+            a{
+            padding:15px;
         }
+        &:before{
+            display: none;
+        }
+        }
+        
     }
 /*End CSS Top Story Home page*/
 
@@ -338,7 +345,7 @@ a{
         }
         .top-colum-2{
            width: 44.8%;
-           @include display-inline;
+          @include float(left);
         }
         .top-colum-3{
            width: 33.2%;

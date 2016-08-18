@@ -53,6 +53,7 @@ stylesheets[all][] = system.theme.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/font-awesome.css
 stylesheets[all][] = css/slick.css
+stylesheets[all][] = css/itg-photo-slider.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/styles.css
 stylesheets[all][] = css/styles-new.css

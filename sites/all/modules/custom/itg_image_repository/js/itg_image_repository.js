@@ -835,16 +835,6 @@ updateUI: function() {
 }
 
 };
-(function($) {
-  $(window).bind('load', function() {
-
-jQuery('.div-upload-img').addClass('active');
- jQuery('#forms-wrapper').show();
- jQuery('#imce-search-form').remove();
-  });
-
-   
-})(jQuery);
 
 (function(){
   

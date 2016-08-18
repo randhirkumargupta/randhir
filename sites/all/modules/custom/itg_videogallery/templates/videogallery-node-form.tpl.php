@@ -12,15 +12,23 @@
   <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
   <div class="browse-ftp">
     <div id="itg_video_content">
-        <div class="video-ftp">Server</div>
+        <div class="video-ftp active">Server</div>
         <div class="video-local">Local Browse</div>
+        <div id="loader-data"><img class="widget-loader" style="display: none" align="center" src="<?php echo base_path();?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
         <div class="ftp-server">
-          <?php print drupal_render($form['video_browse_select']); ?>
+          <label><strong><?php echo  t('Filter') ?>: </strong><select class="used-unused-select">
+            <option value="used">Published</option>
+            <option value="unused">Un Published</option>
+            </select></label>
+          <div class="video-options-wrapper"></div>
+          <a href="javascript:void(0)" class = "button">Attach Video</a>
+          <?php //print drupal_render($form['video_browse_select']); ?>
+                  
+
         </div>
         <div class="local_browse" style="display: none">
           <span class="button browse-local">Local Browse</span>
         </div>
-
     </div>
 </div>
   <span class="browse-ftp-click button">Browse Video</span>

@@ -27,13 +27,18 @@ function itg_survey_result() {
 
       //Collect answer 1 and more oprions
       $answer_op1 = $question_detail[$question_arr['value']]->field_survey_answer_option_1[LANGUAGE_NONE][0]['value'];
-   
+
        foreach ($question_detail[$question_arr['value']]->field_survey_answer_option_2[LANGUAGE_NONE] as $more_ans_arr) {
           $answer_options[] = t($more_ans_arr['value']);
        }
-        //Push first answer option in to second answer option and prepare all answer options 
-        array_unshift($answer_options, $answer_op1);
-
+        //Push first answer option in to second answer option and prepare all answer options
+       if(empty($answer_options)) {
+         $answer_options[] = $answer_op1;
+       } 
+       else {
+         array_unshift($answer_options, $answer_op1);
+       }
+      
         if ($answer_type == 'rating') {
           if(empty($answer_options)){
             $answer_options = array($question);
@@ -44,32 +49,32 @@ function itg_survey_result() {
       <table style="width:100%" class="views-table">
         <tr>
         <th>Answers</th>
-        <th>Total Vote</th>
+        <th>Vote Percentage</th>
         <th>Authenticated User Vote</th>
         <th>Anonymous User Vote</th>
       </tr>';
       
       $answer_op_tbl = '';
+      
       foreach ($answer_options as $key => $value) {
         $vote_percentage = itg_survey_vote_percentage($node->nid, $question_arr['value'], strtolower($value));
         $authenticated_percentage = itg_survey_vote_percentage_user($node->nid, $question_arr['value'], strtolower($value), 'authenticated');
         $anonymous_percentage = itg_survey_vote_percentage_user($node->nid, $question_arr['value'], strtolower($value), 'anonymous');
-        
-        if ($answer_type == 'rating') {
+        if ($answer_type == 'rating' || $answer_type == 'textfield') {
             $answer = $value ? $value : $question;
             $answer_op_tbl .= '<tr>
-        <td style="width:25%">' . $answer . '</td>
-        <td>' . $vote_percentage . '</td>
-          <td>' . $authenticated_percentage . '</td>
-            <td>' . $anonymous_percentage . '</td>
-        </tr>';
+              <td style="width:25%">' . $answer . '</td>
+              <td>' . $vote_percentage . '</td>
+              <td>' . $authenticated_percentage . '</td>
+              <td>' . $anonymous_percentage . '</td>
+            </tr>';
           } else {
             $answer_op_tbl .= '<tr>
-        <td style="width:25%">' . $value . '</td>
-        <td>' . $vote_percentage . '</td>
-          <td>' . $authenticated_percentage . '</td>
-            <td>' . $anonymous_percentage . '</td>
-        </tr>';
+              <td style="width:25%">' . $value . '</td>
+              <td>' . $vote_percentage . '</td>
+              <td>' . $authenticated_percentage . '</td>
+              <td>' . $anonymous_percentage . '</td>
+            </tr>';
           }
       }
  

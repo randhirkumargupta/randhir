@@ -24,7 +24,7 @@
       padding-top:13px;
       > label{
         display: block;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: normal;
         padding-right: 20px;
         position: relative;
@@ -55,12 +55,16 @@
       height: 95px;
     }
     .views-exposed-widget{
+        padding-right: 40px;
         label{
             font-weight: normal;
             + select{
             height: auto;
             margin-bottom: 10px;
             }
+        }
+        input[type="text"]{
+            width: 120px;
         }
         .caln{
             .form-item{
@@ -92,7 +96,7 @@
         font-size: 0;
         &:before{
           left: 10px;
-          top: 40px;
+          top: 43px;
           position: absolute;
         }
       }
@@ -101,15 +105,18 @@
         height: 100px;
         background-color: rgba(255, 255, 255, .3);
         border-radius: 90px 0 0 90px;
-        right: 100px;
+        right: 421px;
         font-size: 0;
         &:before{
-          right: 421px;
-          top: 40px;
+          right: 7px;
+          top: 43px;
           position: absolute;
         }
       }
     } 
+    .flex-control-paging{
+      display: none;
+    }
   }
   .slides{
     li{
@@ -158,16 +165,12 @@
 .itg-layout-container .top-colum-3 .itg-widget-parent .droppable{
   height: 321px;
 }
-.itg-layout-container .itg-top-section .top-colum-2 .droppable{
+.itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
   height: 673px;
-}
-.itg-layout-container .itg-top-section .top-colum-1 .droppable{
-  height: 637px;
 }
 .itg-layout-container .top-colum-3 .droppable{
   height: 276px;
-}
-.itg-h450-section{
+}.itg-h450-section{
   .widget-wrapper{
     height: 100%;
     padding: 10px;
@@ -243,7 +246,7 @@
           font-family: Roboto;
           font-weight: 500;
           color: #969696;
-          &:hover, &.active{
+          &:hover, &.menu-active{
             border-bottom: 3px solid #d00b26;
             color: #b50a0a;
           }
@@ -279,6 +282,8 @@
         li{
           padding: 15px;
           float: left;
+          overflow: hidden;
+          height: 242px;
           .tile{
             figure{
               width: 170px;
@@ -323,19 +328,23 @@
     max-height: 96px;
     overflow: hidden;
   }
-.itg-widget .tab-buttons span{
-  font-weight: 700;
+.itg-widget .tab-buttons span{  
   padding: 0 3px;
 }
 .itg-widget.trending-list .tab-buttons span{
   font-size: 15px;
 }
-.ad-widget{
-  border: 1px solid #ddd;
-  height: 321px;
-  padding: 37px;
-  .sidebar-ad{
-    background: #ddd;
+.itg-layout-container{
+    .ad-widget{
+        border: 1px solid #ddd;
+        height: 321px;
+        padding: 37px;
+        .sidebar-ad{
+            background: #ddd;
+            height: 100%;
+        }
+    }
+}
+.itg-layout-container .top-colum-3 .itg-widget-parent .droppable.sidebar-ad{
     height: 100%;
-  }
 }

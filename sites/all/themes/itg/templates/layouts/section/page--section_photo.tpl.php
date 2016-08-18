@@ -10,6 +10,10 @@
 
 <?php
 global $theme;
+$preview = NULL;
+if (arg(2) == 'preview') {
+  $preview = 'preview';  
+}
 ?>
 
 <!--------------------------------Code for Front tpl---------------------------------------->
@@ -61,7 +65,12 @@ global $theme;
         <?php endif; ?>
 
         <?php print render($page['header']); ?>
-
+        <?php
+          // photo_carousel widget
+          $block = block_load('itg_widget', 'featured_photo_carousel_r');
+          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+          print render($render_array);
+        ?>
       </section>
 
     </header>
@@ -79,34 +88,48 @@ global $theme;
             <div class="container pos-rel">
             <div class="slide-icon scroll-arrow-right"><i class="fa fa-angle-left ll"></i></div>
 
-            <ul>
+            <ul class="video_landing_menu">
               <?php for ($count = 1; $count < 21; $count++) { ?>
                 <?php $blockid = 'itg-block-' . $count; ?>
                 <?php if ($theme == FRONT_THEME_NAME) { ?>
-                  <?php //pr($widget_data[$blockid]);?>
+                  
                   <?php if (isset($widget_data[$blockid]['block_title'])) { ?>
                     <li>                     
                       <?php
-                      
-                      $widget_attributes =  array(
-//                                'attributes' => array(                                  
-//                                  'class' => 'active'
-//                                ), 
-                                'query' => array(
-                                  'category' =>$widget_data[$blockid]['cat_id']
-                                )
-                              );
-                      
-                      
-                     
+                        $category_url = arg();
+                        if ($widget_data[$blockid]['cat_id'] == $_GET['category']) {
+                          $class_active = 'menu-active';
+                        }
+                        else {
+                          $class_active = ''; 
+                        }
+                        print l($widget_data[$blockid]['block_title'], 
+                                $category_url,
+                                   array(
+                                     'attributes' => array(                                      
+                                       'class' => $class_active
+                                     ), 
+                                     'query' => array(
+                                       'category' =>$widget_data[$blockid]['cat_id']
+                                     ),
+                                   )
+                               );
                       ?>
-                      <?php echo l($widget_data[$blockid]['block_title'], 'taxonomy/term/' . arg(2), $widget_attributes); ?>
+                      
                     </li>
+
+<!--                    <li value="<?php //print $widget_data[$blockid]['cat_id'];?>"><?php //echo $widget_data[$blockid]['block_title']; ?></li>-->
                   <?php } ?>
                 <?php } ?>
               <?php } ?>              
             </ul>
-
+            <?php
+//drupal_add_js("jQuery('.video_landing_menu li').click(function(){
+//               var section_id = jQuery(this).val();
+//               jQuery('#edit-field-story-category-tid').val(section_id); 
+//               jQuery('#edit-field-story-category-tid').trigger('change');
+//           });", array('type' => 'inline', 'scope' => 'footer'));
+?>
             <div class="slide-icon scroll-arrow-left"><i class="fa fa-angle-right ll"></i></div>
           </div>
         </div>
@@ -137,7 +160,7 @@ global $theme;
       }
       ?>
       <div class="itg-layout-container <?php echo $itg_class; ?>">
-        <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+        <?php if ($theme == 'itgadmin') { ?>
         <div class="row">
           <div class="col-md-12">
             <div class="itg-region">
