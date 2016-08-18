@@ -165,11 +165,8 @@
 .itg-layout-container .top-colum-3 .itg-widget-parent .droppable{
   height: 321px;
 }
-.itg-layout-container .itg-top-section .top-colum-2 .droppable{
+.itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
   height: 673px;
-}
-.itg-layout-container .itg-top-section .top-colum-1 .droppable{
-  height: 637px;
 }
 .itg-layout-container .top-colum-3 .droppable{
   height: 276px;
@@ -332,8 +329,7 @@
     max-height: 96px;
     overflow: hidden;
   }
-.itg-widget .tab-buttons span{
-  font-weight: 700;
+.itg-widget .tab-buttons span{  
   padding: 0 3px;
 }
 .itg-widget.trending-list .tab-buttons span{

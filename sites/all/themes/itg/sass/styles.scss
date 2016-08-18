@@ -195,8 +195,8 @@ input[type="text"], select, input[type="password"]{
 #block-itg-layout-manager-header-block{    
     padding-top: 20px;
     box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    background: $header-bg  url(../images/mobile-header-bg.png) no-repeat top center;
+    margin-bottom: 30px;    
+    background:#000;
     ul{
      @extend .list-none;   
     }
@@ -1085,6 +1085,9 @@ footer{
             margin-bottom: 15px;
             a{
                 @include font(16px,null,$itg-font-medium);
+                &:hover{
+                    color: #adacac;
+                }
             }
         }
     }
@@ -1103,7 +1106,13 @@ footer{
     list-style: none;
     border: 1px solid $border-color;    
     li{
-        @include tab-listing;        
+        @include tab-listing; 
+        a{
+            padding:15px;
+        }
+        &:before{
+            display: none;
+        }
     }
 }
 /*End CSS Top Story Home page*/
@@ -2217,6 +2226,10 @@ footer{
                         bottom: 0;
                         margin: auto;
                     }
+                    .poll-ans-caption{
+                        padding: 10px 15px;
+                        display: inline-block;
+                    }
                 }
             }
         }
@@ -2365,7 +2378,7 @@ footer{
                             width: 59%;
                             .poll-past-percentage-progess{
                                 @include display-inline;
-                                height: 18px;
+                                height: 18px;                                
                                 /* background: #000; */
                             }
                         }
@@ -2417,10 +2430,12 @@ footer{
                         .noofvotes, .percentage{
                             float: left;
                             width: 80px;
+                            padding-left: 20px;
                         }
                         .poll-past-percentage-progess{
                             width: 100px;
-                            float: left;
+                            float: left;  
+                            padding-left: 20px;
                         }
                     }
                 }
