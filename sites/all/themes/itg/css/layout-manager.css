@@ -189,6 +189,12 @@ a {
   height: 5px;
   width: 5px;
 }
+.itg-listing li a {
+  padding: 15px;
+}
+.itg-listing li:before {
+  display: none;
+}
 
 /*End CSS Top Story Home page*/
 /*Start CSS Featured New Home page*/
@@ -592,8 +598,7 @@ a {
   }
   .top-block .top-colum-2 {
     width: 44.8%;
-    display: inline-block;
-    vertical-align: top;
+    float: left;
   }
   .top-block .top-colum-3 {
     width: 33.2%;

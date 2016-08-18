@@ -2954,6 +2954,10 @@ footer .footer-copyright {
   bottom: 0;
   margin: auto;
 }
+.poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer .poll-ans-caption {
+  padding: 10px 15px;
+  display: inline-block;
+}
 .poll-wrapper .poll-data.relative-with-img {
   width: 56%;
   float: left;
@@ -3223,10 +3227,12 @@ footer .footer-copyright {
 .poll-banner .detail .voting-data .past-poll li .noofvotes, .poll-banner .detail .voting-data .past-poll li .percentage {
   float: left;
   width: 80px;
+  padding-left: 20px;
 }
 .poll-banner .detail .voting-data .past-poll li .poll-past-percentage-progess {
   width: 100px;
   float: left;
+  padding-left: 20px;
 }
 
 /*End Poll Landing page*/
