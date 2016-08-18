@@ -290,10 +290,13 @@ input[type="text"], select, input[type="password"] {
 }
 
 /*start header css*/
+header {
+  margin-bottom: 30px;
+}
+
 #block-itg-layout-manager-header-block {
   padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
   background: #000;
 }
 #block-itg-layout-manager-header-block a {
@@ -2921,6 +2924,7 @@ footer .footer-copyright {
 .poll-wrapper .poll-data .poll-replace-id .noofvotes, .poll-wrapper .poll-data .poll-replace-id .percentage {
   float: left;
   width: 100px;
+  padding-left: 20px;
 }
 .poll-wrapper .poll-data .poll-replace-id .poll-past-percentage-progess {
   width: 180px;
@@ -3315,6 +3319,11 @@ footer .footer-copyright {
   background: #000;
   padding: 10px 25px;
 }
+#block-views-video-landing-header-block-1 .view-header h3 {
+  font-size: 14px;
+  font-size: 0.875rem;
+  color: #fff;
+}
 #block-views-video-landing-header-block-1 .view-content .item-list {
   margin: 0 -10px;
 }
@@ -3483,9 +3492,12 @@ footer .footer-copyright {
 
 /*CSS End Video landing Header*/
 /*video rolling slider*/
-#block-itg-widget-featured-photo-carousel-r {
+#block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r {
   background: #171717;
-  padding: 50px 0;
+  padding: 50px 0 0 0;
 }
 
 /*video rolling slider end*/
+.view-photo-list-of-category .view-filters {
+  display: none;
+}
