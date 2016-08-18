@@ -957,14 +957,14 @@ function itg_videogallery_ftp_video_list() {
 /**
  * Implement function for tid from layout_tpl_manager
  */
-function itg_videogallery_ftp_video_post($sid) {
+function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
   $query = db_select('itg_layout_tpl', 'ilt');
   $query->join('itg_layout_manager', 'ilm', 'ilt.id = ilm.layout_id');
   $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = ilm.filter_url');
   $query->fields('ilm', array('filter_url'));
   $query->fields('ttd', array('name'));
-  $query->condition('ilm.widget_name', 'video_list_of_category', '=');
-  $query->condition('ilt.template_name', 'page--section_video', '=');
+  $query->condition('ilm.widget_name', $widget_name, '=');
+  $query->condition('ilt.template_name', $template, '=');
   $query->condition('ilt.section_name', $sid, '=');
   $query->condition('ilt.status', 1, '=');
   $result = $query->execute()->fetchAll();
