@@ -324,6 +324,7 @@
 }
 .view-photo-list-of-category .view-content .photo-list {
   list-style: none;
+  overflow: hidden;
 }
 .view-photo-list-of-category .view-content .photo-list li {
   padding: 15px;
