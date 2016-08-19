@@ -262,7 +262,7 @@ a{
             &.rhs-section-item-container{
              padding:10px 0; 
              .pic{
-            @extend .pos-rel;
+                position: relative;
             &:after{
                 background: url(../images/video-icon-small.png) no-repeat;
                 content:"";
