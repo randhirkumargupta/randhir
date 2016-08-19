@@ -5294,6 +5294,17 @@ div.node{
     padding-top: 150px;
     font-size: 18px;
   }
+  #preview-wrapper{
+    height: auto !important;
+    #search-preview{
+      margin-bottom: 20px;
+    }
+    #file-preview {
+      max-height: 330px;
+      overflow: auto;
+      text-align: center;
+    }
+  }
 }
 
 /*itg_image_repository end*/
@@ -6035,13 +6046,12 @@ div.node{
     margin: 20px 0;
   img {
     display: inline-block;
-    height: 96px;
+    height: 103px;
     margin: 5px;
     vertical-align: top;
-    width: 96px;
+    width: 103px;
   }
   } 
-  ul.pager{display: none;}
 }
 .edit-field-pti-magazine-kicker{
   .form-type-textfield{
