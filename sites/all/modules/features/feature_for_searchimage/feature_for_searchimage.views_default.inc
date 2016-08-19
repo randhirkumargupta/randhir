@@ -209,7 +209,6 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['filters']['sm_alttext']['exposed'] = TRUE;
   $handler->display->display_options['filters']['sm_alttext']['expose']['operator_id'] = 'sm_alttext_op';
   $handler->display->display_options['filters']['sm_alttext']['expose']['label'] = 'Alt Text';
-  $handler->display->display_options['filters']['sm_alttext']['expose']['description'] = 'Alt Text';
   $handler->display->display_options['filters']['sm_alttext']['expose']['operator'] = 'sm_alttext_op';
   $handler->display->display_options['filters']['sm_alttext']['expose']['identifier'] = 'sm_alttext';
   $handler->display->display_options['filters']['sm_alttext']['expose']['remember_roles'] = array(
