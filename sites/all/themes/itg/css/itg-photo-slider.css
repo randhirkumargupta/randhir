@@ -44,26 +44,24 @@ Version   :  1.0
   padding : 0;
   margin : 0;
   border : none;  
+  overflow: inherit !important;
 }
 .carousel .slides .slideItem span{
     color: #fff;
     font-size: 22px;
-    font-weight: 700;
-    z-index: 9999;
-    /* background: red; */
-    position: absolute;
-    margin-top: 0;
-    bottom: 0;
+    font-weight: 700;    
     font-family: Roboto;
-    left: 0;
-    background: #000;
-    padding: 10px;
     line-height: 25px;
     width: 100%;
 }
-.carousel .slides .slideItem span.flex-count{
-    bottom: 75px; 
-        background: transparent;
+.carousel .slides .slideItem span i{
+    font-size: 40px;
+}
+.carousel .slides .slideItem span.flex-count{    
+    position: absolute;
+    bottom: 10px;    
+    right: 20px;
+    background: transparent;
 }
 .carousel .slides .slideItem a {
   display: block;

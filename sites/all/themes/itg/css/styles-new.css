@@ -75,6 +75,7 @@
 .region-top {
   background-color: #171717;
   padding: 20px 0;
+  margin-top: -30px;
 }
 
 #block-views-photo-landing-slider-block {
