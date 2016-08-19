@@ -74,10 +74,8 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'mini';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Apache Solr: sm_thumb_thumbnail_field_story_extra_large_image */
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['id'] = 'sm_thumb_thumbnail_field_story_extra_large_image';
@@ -209,7 +207,6 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['filters']['sm_alttext']['exposed'] = TRUE;
   $handler->display->display_options['filters']['sm_alttext']['expose']['operator_id'] = 'sm_alttext_op';
   $handler->display->display_options['filters']['sm_alttext']['expose']['label'] = 'Alt Text';
-  $handler->display->display_options['filters']['sm_alttext']['expose']['description'] = 'Alt Text';
   $handler->display->display_options['filters']['sm_alttext']['expose']['operator'] = 'sm_alttext_op';
   $handler->display->display_options['filters']['sm_alttext']['expose']['identifier'] = 'sm_alttext';
   $handler->display->display_options['filters']['sm_alttext']['expose']['remember_roles'] = array(

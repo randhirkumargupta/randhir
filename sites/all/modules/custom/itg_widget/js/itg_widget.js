@@ -39,7 +39,7 @@ Drupal.behaviors.itg_widgets = {
             }
         });
         // This code use form check/uncheck all check box function
-        jQuery('.vbo-table-select-all').click(function() {
+        jQuery('.widgets-view .vbo-table-select-all').click(function() {
 
             var mainids = [];
             var formid = jQuery("input[name='form_id']").val();
@@ -90,7 +90,7 @@ Drupal.behaviors.itg_widgets = {
 
 //This code use remove ids functionality from top 
 
-        jQuery('.removeid').live('click', function() {
+        jQuery('.widgets-view .removeid').live('click', function() {
             var getids = jQuery(this).attr('cid');
             jQuery(this).parent().remove();
             jQuery('.vbo-select').each(function() {
@@ -129,7 +129,7 @@ Drupal.behaviors.itg_widgets = {
 
 //This code use add ids functionality from top 
 
-        jQuery('.vbo-select').click(function() {
+        jQuery('.widgets-view .vbo-select').click(function() {
             var formid = jQuery("input[name='form_id']").val();
             var checkids = jQuery(this).val();
             if (jQuery(this).is(':checked'))

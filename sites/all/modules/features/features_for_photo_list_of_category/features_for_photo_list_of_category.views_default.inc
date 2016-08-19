@@ -333,13 +333,10 @@ function features_for_photo_list_of_category_views_default_views() {
   /* Display: photo list of category for view page */
   $handler = $view->new_display('block', 'photo list of category for view page', 'block_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Other Albums';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
@@ -518,7 +515,7 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'itg';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: Field: Short Description */
+  /* Field: Field: Session Title  */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
