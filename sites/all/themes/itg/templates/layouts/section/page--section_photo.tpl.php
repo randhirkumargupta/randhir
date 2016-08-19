@@ -14,6 +14,10 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';  
 }
+
+if ($theme == 'itgadmin' && !isset($preview)) {
+    $gray_bg_layout = 'gray-bg-layout';
+}
 ?>
 
 <!--------------------------------Code for Front tpl---------------------------------------->

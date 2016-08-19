@@ -50,6 +50,7 @@
                   </ul>
                   </div>
                   </div>
+                  <?php if(!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
                   <div class="briefcase">
                       <h4><?php print t('Briefcase'); ?></h4>
                       <ul>
@@ -60,6 +61,7 @@
                           ?>
                       </ul>
                   </div>
+                  <?php } ?>
               </div>  
           <?php  } ?>
           
@@ -136,8 +138,12 @@
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
             $img = '<img src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
+            if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
             $buzz_output.= '<div class="buzz-img">' . $img . '</div>';
+            }
+            if(!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
             $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
+            }
             $buzz_output.= '</div>';
              $buzz++;
           }
