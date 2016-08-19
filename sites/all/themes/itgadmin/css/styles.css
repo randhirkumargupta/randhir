@@ -5272,6 +5272,17 @@ div.node #comments h2 {
   padding-top: 150px;
   font-size: 18px;
 }
+.itg_image_repository #preview-wrapper {
+  height: auto !important;
+}
+.itg_image_repository #preview-wrapper #search-preview {
+  margin-bottom: 20px;
+}
+.itg_image_repository #preview-wrapper #file-preview {
+  max-height: 330px;
+  overflow: auto;
+  text-align: center;
+}
 
 /*itg_image_repository end*/
 [id*="field-pti-print-media-values"] tbody {
@@ -5903,13 +5914,10 @@ div.node #comments h2 {
 }
 .view-searchimage .search-img-list img {
   display: inline-block;
-  height: 96px;
+  height: 103px;
   margin: 5px;
   vertical-align: top;
-  width: 96px;
-}
-.view-searchimage ul.pager {
-  display: none;
+  width: 103px;
 }
 
 .view .view-filters #views-exposed-form-searchimage-page .views-exposed-form .views-exposed-widget {

@@ -66,7 +66,7 @@
                                 &:before{
                                     content:'';
                                     background: url(../images/live-icon.png) no-repeat;
-                                    @include pos(absolute,-8px,null,null,15px);
+                                    @include pos(absolute,-11px,null,null,20px);
                                     width: 28px;
                                     height: 19px;
                                 } 
