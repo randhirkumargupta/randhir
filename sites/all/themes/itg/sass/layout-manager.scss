@@ -217,6 +217,7 @@ a{
     @include sidebar-heading;
 }
 /*End top-takes-video suggest End*/
+
 /*Start CSS trending-videos Home  page*/
 .trending-videos{
     @extend .list-none;
@@ -252,6 +253,38 @@ a{
     }   
 }
 /*End Watch right Now suggest End*/
+/*CSS Start HOme page widget rhs-section-ordering*/
+.rhs-section-ordering{
+    ul{
+        @extend .list-none;
+        @include listing-with-image(rhs-section-item-container,left,10px,pic,title);
+        li{
+            &.rhs-section-item-container{
+             padding:10px 0; 
+             .pic{
+            @extend .pos-rel;
+            &:after{
+                background: url(../images/video-icon-small.png) no-repeat;
+                content:"";
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                right: 5px;
+                bottom: 5px;
+            }
+        }
+             
+            }            
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            } 
+        }
+    }
+}
+/*CSS End HOme page widget rhs-section-ordering*/
 
 @media only screen and (min-width:768px){
     h1{    

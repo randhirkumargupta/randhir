@@ -2599,13 +2599,11 @@ footer{
     }
 }
 /*video and photo menu*/
-#block-itg-videogallery-videogallery-menu-video-block, #block-itg-photogallery-photo-menu-landing-block{
-    margin: 0 auto;    
-    overflow: hidden;        
-    position: relative;
+#block-itg-videogallery-videogallery-menu-video-block, #block-itg-photogallery-photo-menu-landing-block{    
     border-bottom: 1px solid #d9d9d9;
     padding-top: 30px;
     margin-bottom: 30px;
+    margin-top: 30px;
     ul{
       list-style: none;
       white-space: nowrap;
@@ -2621,7 +2619,7 @@ footer{
           display: block;
           margin: 0;
           padding: 10px 5px 3px;
-          border-bottom: 3px solid #fff;
+          border-bottom: 3px solid transparent;
           font-family: Roboto;
           font-weight: 500;
           color: #969696;
@@ -2722,3 +2720,45 @@ footer{
     }
 }
 /*CCS End Photo landing Page*/
+
+/*CSS Start HOme page widget rhs-section-ordering*/
+.rhs-section-ordering{
+    ul{
+        @extend .list-none;
+        @include listing-with-image(rhs-section-item-container,left,10px,pic,title);
+        li{
+            &.rhs-section-item-container{
+             padding:10px 0; 
+             .pic{
+            @extend .pos-rel;
+            &:after{
+                background: url(../images/video-icon-small.png) no-repeat;
+                content:"";
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                right: 5px;
+                bottom: 5px;
+                display: none;
+            }            
+        }
+             
+            }            
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            }
+             &.rhs-item-videogallery{
+                .pic{
+                &:after{
+                    display: block;
+                }
+                }
+            }
+        }
+       
+    }
+}
+/*CSS End HOme page widget rhs-section-ordering*/
