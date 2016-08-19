@@ -16,6 +16,7 @@ Drupal.behaviors.itg_widgets = {
             var type = get_url_parameter('type');
             if (typeof (c_tid) != "undefined" && c_tid !== null && typeof (type) != "undefined" && type !== null) {
                 if (confirm('Are you sure you want to move this content ?')) {
+                    jQuery("#ajex-loader").css("display", "block");
                     jQuery.get("remove_from_widgets_section/" + nid + "/" + qid + "/" + view_name + "/" + view_page + "/" + c_tid + "/" + type, function(data, status) {
                         if (data == 'deleted') {
                             //window.location.reload();
@@ -25,6 +26,7 @@ Drupal.behaviors.itg_widgets = {
                 console.log("section and type found");
             } else {
                 if (confirm('Are you sure you want to move this content ?')) {
+                    jQuery("#ajex-loader").css("display", "block");
                     jQuery.get("remove_from_widgets/" + nid + "/" + qid + "/" + view_name + "/" + view_page, function(data, status) {
 
                         if (data == 'deleted') {

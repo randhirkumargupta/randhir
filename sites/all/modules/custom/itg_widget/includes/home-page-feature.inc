@@ -29,6 +29,10 @@ function itg_widget_home_page_feature_data($info) {
       // only top 3 nodes are required as per requirement
       $query->range(0, 3);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      if (empty($result)) {
+        $nodequeue_name = isset($info['nodequeue']) ? $info['nodequeue'] : "";
+        $result = itg_widget_nodes_from_nodequeue($nodequeue_name);
+      }
       $entity_data = array();
       foreach ($result as $entity_data_node) {
         $entity_info = get_required_data_from_entity_id($entity_data_node['entity_id']);
