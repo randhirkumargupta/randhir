@@ -2598,7 +2598,8 @@ footer{
         margin: 2px auto;
     }
 }
-#block-itg-videogallery-videogallery-menu-video-block{
+/*video and photo menu*/
+#block-itg-videogallery-videogallery-menu-video-block, #block-itg-photogallery-photo-menu-landing-block{
     margin: 0 auto;    
     overflow: hidden;        
     position: relative;
@@ -2612,8 +2613,7 @@ footer{
       width: 100%;
       position: relative;
       li{
-        display: inline-block;
-        vertical-align: top;
+        @include display-inline;
         border-right: 0;
         text-transform: uppercase;
             padding-right: 30px;
@@ -2709,8 +2709,16 @@ footer{
 }
 /*video rolling slider end*/
 
+/*CCS start Photo landing Page*/
+#block-views-photo-list-of-category-block-2{
+    @include sidebar-heading;
+    h3{
+        display: block;
+    }
+}
 .view-photo-list-of-category{
     .view-filters{
         display: none;
     }
 }
+/*CCS End Photo landing Page*/

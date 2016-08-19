@@ -75,6 +75,7 @@
 .region-top {
   background-color: #171717;
   padding: 20px 0;
+  margin-top: -30px;
 }
 
 #block-views-photo-landing-slider-block {
@@ -177,6 +178,10 @@
   height: 100%;
   padding: 5px 20px 8px;
   background-color: #f3f3f3;
+}
+
+.itg-common-section .droppable {
+  height: 408px;
 }
 
 .widget-wrapper {

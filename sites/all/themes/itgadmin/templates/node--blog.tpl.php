@@ -50,7 +50,7 @@
                 </div>
 
                 <?php
-                $browsemedialarge = render($content['field_blog_image']);
+                $browsemedialarge = render($content['field_story_extra_large_image']);
                 if (!empty($browsemedialarge)) :
                   ?>
                   <?php print render($content['field_story_extra_large_image']); ?>
