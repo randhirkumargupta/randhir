@@ -256,3 +256,22 @@ jQuery(document).ready(function() {
     
     
 });
+
+
+// code to copy serach text into search page
+jQuery(document).ready(function() {
+
+    jQuery('.search-text').keyup(function(e) {
+
+        var code = e.keyCode || e.which;
+       
+        if (code == 13) { //Enter keycode
+            //Do something
+            var urldata=Drupal.settings.basePath + 'site-search?keyword='+jQuery(this).val();
+           window.location.href = urldata;
+        }
+
+    })
+
+
+});
