@@ -57,14 +57,6 @@ function itg_widget_menu() {
       'page callback' => 'itg_widget_anchor_autocomplete_id',
       'access arguments' => array('access content'),
   );
-  $items['video-list-nid/autocomplete'] = array(
-      'page callback' => 'itg_widget_video_autocomplete_id',
-      'access arguments' => array('access content'),
-  );
-  $items['video-list-title/autocomplete'] = array(
-      'page callback' => 'itg_widget_video_autocomplete_title',
-      'access arguments' => array('access content'),
-  );
   $items['remove-extra-data'] = array(
       'page callback' => 'remove_extra_data',
       'access arguments' => array('access administrator'),
