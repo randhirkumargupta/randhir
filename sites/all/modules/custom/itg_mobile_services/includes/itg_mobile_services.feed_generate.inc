@@ -10,6 +10,8 @@
  * @param string $service_title
  * @param string $field_header
  * @param string $field_footer
+ * @param string $xmlstring
+ * @param int $astro
  * @return string
  */
 function itg_mobile_services_generate_xml($node, $service_title, $field_header = NULL, $field_footer = NULL, $xmlstring, $astro = NULL) {
@@ -18,15 +20,14 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header =
   $xml = simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
   $json = json_encode($xml);
   $xmlarray = json_decode($json, TRUE);
-  
+  $root_tag = $xml->getName();
   $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
   $field_collect = node_load($node->nid);
   $tags = array("header", "footer");
   $xml_file = preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $xmlstring);
-  
-  $root_tag = $xml->getName();
-  $xml_file = eregi_replace("<".$root_tag.">", "", $xml_file);
-  $xml_file = eregi_replace("</".$root_tag.">", "", $xml_file);
+
+  $xml_file = eregi_replace("<" . $root_tag . ">", "", $xml_file);
+  $xml_file = eregi_replace("</" . $root_tag . ">", "", $xml_file);
   $data_array = get_required_data_field_get_items_mobile($field_collect, $astro);
 
   // header
@@ -51,13 +52,13 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header =
     $footer .= '<' . $label . '>' . $pattren . '</' . $label . '>';
   }
 
-  $xml .= "<".$root_tag.">";
+  $xml .= "<" . $root_tag . ">";
   $xml .= $header;
   foreach ($data_array as $keys => $value) {
     $xml .= get_custom_feeds_files_mobile($field_collect, $xml_file, $keys, $astro);
   }
   $xml .= $footer;
-  $xml .= "</".$root_tag.">";
+  $xml .= "</" . $root_tag . ">";
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'xml', 'xml');
@@ -72,6 +73,8 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header =
  * @param string $service_title
  * @param string $field_header
  * @param string $field_footer
+ * @param string $xmlstring
+ * @param int $astro
  * @return string
  */
 function itg_mobile_services_generate_rss($node, $service_title, $field_header = NULL, $field_footer = NULL, $xmlstring, $astro = NULL) {
@@ -80,6 +83,7 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header =
   $xml = simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
   $json = json_encode($xml);
   $xmlarray = json_decode($json, TRUE);
+  $root_tag = $xml->getName();
 
   $xml = '<?xml version="1.0"?>';
   $xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
@@ -87,9 +91,8 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header =
   $tags = array("header", "footer");
   $xml_file = preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $xmlstring);
 
-  $root_tag = $xml->getName();
-  $xml_file = eregi_replace("<".$root_tag.">", "", $xml_file);
-  $xml_file = eregi_replace("</".$root_tag.">", "", $xml_file);
+  $xml_file = eregi_replace("<" . $root_tag . ">", "", $xml_file);
+  $xml_file = eregi_replace("</" . $root_tag . ">", "", $xml_file);
   $data_array = get_required_data_field_get_items_mobile($field_collect, $astro);
 
   // header
@@ -114,14 +117,14 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header =
     $footer .= '<' . $label . '>' . $pattren . '</' . $label . '>';
   }
 
-  $xml .= "<".$root_tag.">";
+  $xml .= "<" . $root_tag . ">";
   $xml .= $header;
 
   foreach ($data_array as $keys => $value) {
     $xml .= get_custom_feeds_files_mobile($field_collect, $xml_file, $keys, $astro);
   }
   $xml .= $footer;
-  $xml .= "</".$root_tag.">";
+  $xml .= "</" . $root_tag . ">";
   $xml .= "</rss>";
 
   $feed_dir = "public://";
@@ -137,6 +140,8 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header =
  * @param string $service_title
  * @param string $field_header
  * @param string $field_footer
+ * @param string $xmlstring
+ * @param int $astro
  * @return string
  */
 function itg_mobile_services_generate_mrss($node, $service_title, $field_header = NULL, $field_footer = NULL, $xmlstring, $astro = NULL) {
@@ -145,6 +150,7 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header 
   $xml = simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
   $json = json_encode($xml);
   $xmlarray = json_decode($json, TRUE);
+  $root_tag = $xml->getName();
 
   $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
   $xml .= '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss">';
@@ -152,9 +158,8 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header 
   $tags = array("header", "footer");
   $xml_file = preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $xmlstring);
 
-  $root_tag = $xml->getName();
-  $xml_file = eregi_replace("<".$root_tag.">", "", $xml_file);
-  $xml_file = eregi_replace("</".$root_tag.">", "", $xml_file);
+  $xml_file = eregi_replace("<" . $root_tag . ">", "", $xml_file);
+  $xml_file = eregi_replace("</" . $root_tag . ">", "", $xml_file);
   $data_array = get_required_data_field_get_items_mobile($field_collect, $astro);
 
   // header
@@ -179,13 +184,13 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header 
     $footer .= '<' . $label . '>' . $pattren . '</' . $label . '>';
   }
   $xml .= $header;
-  $xml .= "<".$root_tag.">";
+  $xml .= "<" . $root_tag . ">";
 
   foreach ($data_array as $keys => $value) {
     $xml .= get_custom_feeds_files_mobile($field_collect, $xml_file, $keys, $astro);
   }
 
-  $xml .= "</".$root_tag.">";
+  $xml .= "</" . $root_tag . ">";
   $xml .= $footer;
   $xml .= "</rss>";
 
@@ -202,59 +207,25 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header 
  * @param string $service_title
  * @param string $field_header
  * @param string $field_footer
- * @return string $full_file_path
+ * @param string $xmlstring
+ * @param int $astro
+ * @return string
  */
 function itg_mobile_services_generate_sms($node, $service_title, $field_header = NULL, $field_footer = NULL, $xmlstring, $astro = NULL) {
   // Load itg_syndication.inc from the node module.
   module_load_include('inc', 'itg_syndication', 'includes/itg_syndication_custom_feed');
-  $xml = simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-  $json = json_encode($xml);
-  $xmlarray = json_decode($json, TRUE);
-
-  $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
   $field_collect = node_load($node->nid);
-  $tags = array("header", "footer");
-  $xml_file = preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $xmlstring);
-
-  $root_tag = $xml->getName();
-  $xml_file = eregi_replace("<".$root_tag.">", "", $xml_file);
-  $xml_file = eregi_replace("</".$root_tag.">", "", $xml_file);
+  $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
+  $xml .= '<item>';
   $data_array = get_required_data_field_get_items_mobile($field_collect, $astro);
-
-  // header
-  foreach ($xmlarray['header'] as $label => $pattren) {
-    if ($pattren == '{field_header}') {
-      $pattren = $field_header;
-    }
-    if ($pattren == '{field_footer}') {
-      $pattren = $field_footer;
-    }
-    $header .= '<' . $label . '>' . $pattren . '</' . $label . '>';
-  }
-
-  // footer
-  foreach ($xmlarray['footer'] as $label => $pattren) {
-    if ($pattren == '{field_header}') {
-      $pattren = $field_header;
-    }
-    if ($pattren == '{field_footer}') {
-      $pattren = $field_footer;
-    }
-    $footer .= '<' . $label . '>' . $pattren . '</' . $label . '>';
-  }
-
-  $xml .= "<".$root_tag.">";
-  $xml .= $header;
   foreach ($data_array as $keys => $value) {
-    $xml .= get_custom_feeds_files_mobile($field_collect, $xml_file, $keys, $astro);
+    $xml .= get_custom_feeds_mobile($field_collect, $xmlstring, $keys, $astro);
   }
-  $xml .= $footer;
-  $xml .= "</".$root_tag.">";
-
+  $xml .= '</item>';
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'sms', 'xml');
   file_save_data($xml, $feed_dir . $full_file_path);
-  drupal_set_message(t('Your sms has been generated'));
+  drupal_set_message(t('Your feed has been generated'));
   return $full_file_path;
 }
 
@@ -264,17 +235,21 @@ function itg_mobile_services_generate_sms($node, $service_title, $field_header =
  * @param string $service_title
  * @param string $field_header
  * @param string $field_footer
- * @return string $full_file_path
+ * @param string $xmlstring
+ * @param int $astro
+ * @return string
  */
 function itg_mobile_services_generate_feed($node, $service_title, $field_header = NULL, $field_footer = NULL, $xmlstring, $astro = NULL) {
   // Load itg_syndication.inc from the node module.
   module_load_include('inc', 'itg_syndication', 'includes/itg_syndication_custom_feed');
   $field_collect = node_load($node->nid);
+  $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
+  $xml .= '<item>';
   $data_array = get_required_data_field_get_items_mobile($field_collect, $astro);
   foreach ($data_array as $keys => $value) {
-    $xml .= get_custom_feeds_mobile($field_collect, $xmlstring, $keys);
+    $xml .= get_custom_feeds_mobile($field_collect, $xmlstring, $keys, $astro);
   }
-
+  $xml .= '</item>';
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'text_feed', 'xml');
   file_save_data($xml, $feed_dir . $full_file_path);
@@ -288,17 +263,21 @@ function itg_mobile_services_generate_feed($node, $service_title, $field_header 
  * @param string $service_title
  * @param string $field_header
  * @param string $field_footer
+ * @param string $xmlstring
+ * @param int $astro
  * @return string
  */
 function itg_mobile_services_generate_ussd($node, $service_title, $field_header = NULL, $field_footer = NULL, $xmlstring, $astro = NULL) {
   // Load itg_syndication.inc from the node module.
   module_load_include('inc', 'itg_syndication', 'includes/itg_syndication_custom_feed');
   $field_collect = node_load($node->nid);
+  $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
+  $xml .= '<item>';
   $data_array = get_required_data_field_get_items_mobile($field_collect, $astro);
   foreach ($data_array as $keys => $value) {
-    $xml .= get_custom_feeds_mobile($field_collect, $xmlstring, $keys);
+    $xml .= get_custom_feeds_mobile($field_collect, $xmlstring, $keys, $astro);
   }
-
+  $xml .= '</item>';
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'ussd', 'xml');
   file_save_data($xml, $feed_dir . $full_file_path);
@@ -312,7 +291,9 @@ function itg_mobile_services_generate_ussd($node, $service_title, $field_header 
  * @param string $service_title
  * @param string $field_header
  * @param string $field_footer
- * @return string $full_file_path
+ * @param string $xmlstring
+ * @param int $astro
+ * @return string
  */
 function itg_mobile_services_generate_astro_mrss($node, $service_title, $field_header = NULL, $field_footer = NULL, $xmlstring, $astro = NULL) {
   // Load itg_syndication.inc from the node module.
@@ -320,15 +301,15 @@ function itg_mobile_services_generate_astro_mrss($node, $service_title, $field_h
   $xml = simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
   $json = json_encode($xml);
   $xmlarray = json_decode($json, TRUE);
+  $root_tag = $xml->getName();
 
   $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
   $field_collect = node_load($node->nid);
   $tags = array("header", "footer");
   $xml_file = preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $xmlstring);
 
-  $root_tag = $xml->getName();
-  $xml_file = eregi_replace("<".$root_tag.">", "", $xml_file);
-  $xml_file = eregi_replace("</".$root_tag.">", "", $xml_file);
+  $xml_file = eregi_replace("<" . $root_tag . ">", "", $xml_file);
+  $xml_file = eregi_replace("</" . $root_tag . ">", "", $xml_file);
   $data_array = get_required_data_field_get_items_mobile($field_collect, $astro);
 
   // header
@@ -353,13 +334,13 @@ function itg_mobile_services_generate_astro_mrss($node, $service_title, $field_h
     $footer .= '<' . $label . '>' . $pattren . '</' . $label . '>';
   }
 
-  $xml .= "<".$root_tag.">";
+  $xml .= "<" . $root_tag . ">";
   $xml .= $header;
   foreach ($data_array as $keys => $value) {
     $xml .= get_custom_feeds_files_mobile($field_collect, $xml_file, $keys, $astro);
   }
   $xml .= $footer;
-  $xml .= "</".$root_tag.">";
+  $xml .= "</" . $root_tag . ">";
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'mrss', 'xml');
@@ -369,12 +350,14 @@ function itg_mobile_services_generate_astro_mrss($node, $service_title, $field_h
 }
 
 /**
- * Function for generating sms files.
+ * Function for generating Astro sms files.
  * @param object $node
  * @param string $service_title
  * @param string $field_header
  * @param string $field_footer
- * @return string $full_file_path
+ * @param string $xmlstring
+ * @param int $astro
+ * @return string
  */
 function itg_mobile_services_generate_astro_sms($node, $service_title, $field_header = NULL, $field_footer = NULL, $xmlstring, $astro = NULL) {
   // Load itg_syndication.inc from the node module.
@@ -382,15 +365,15 @@ function itg_mobile_services_generate_astro_sms($node, $service_title, $field_he
   $xml = simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
   $json = json_encode($xml);
   $xmlarray = json_decode($json, TRUE);
+  $root_tag = $xml->getName();
 
   $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
   $field_collect = node_load($node->nid);
   $tags = array("header", "footer");
   $xml_file = preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $xmlstring);
 
-  $root_tag = $xml->getName();
-  $xml_file = eregi_replace("<".$root_tag.">", "", $xml_file);
-  $xml_file = eregi_replace("</".$root_tag.">", "", $xml_file);
+  $xml_file = eregi_replace("<" . $root_tag . ">", "", $xml_file);
+  $xml_file = eregi_replace("</" . $root_tag . ">", "", $xml_file);
   $data_array = get_required_data_field_get_items_mobile($field_collect, $astro);
 
   // header
@@ -415,13 +398,13 @@ function itg_mobile_services_generate_astro_sms($node, $service_title, $field_he
     $footer .= '<' . $label . '>' . $pattren . '</' . $label . '>';
   }
 
-  $xml .= "<".$root_tag.">";
+  $xml .= "<" . $root_tag . ">";
   $xml .= $header;
   foreach ($data_array as $keys => $value) {
     $xml .= get_custom_feeds_files_mobile($field_collect, $xml_file, $keys, $astro);
   }
   $xml .= $footer;
-  $xml .= "</".$root_tag.">";
+  $xml .= "</" . $root_tag . ">";
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'sms', 'xml');
@@ -483,9 +466,9 @@ function generate_file_name($node, $service_title, $feeds_type, $ext) {
  * @param type $keys
  * @return type string
  */
-function get_custom_feeds_mobile($field_collect = NULL, $text = NULL, $keys) {
-  $text = str_replace("<p>", "", $text);
-  $text = str_replace("</p>", "", $text);
+function get_custom_feeds_mobile($field_collect = NULL, $text = NULL, $keys, $astro) {
+  //$text = str_replace("<p>", "", $text);
+  //$text = str_replace("</p>", "", $text);
   $var_array = get_vars_from_mobile_feed_pattern($text);
   $data_array = get_required_data_field_get_items_mobile($field_collect, $astro);
   foreach ($var_array[1] as $key => $pattren) {
