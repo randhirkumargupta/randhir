@@ -19,13 +19,24 @@
                       <div class="profile-pic">
                       <?php
                       $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                      if(!empty($file)) {
                       print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                      }
+                      else {
+                       $file = 'default_images/user-default.png';
+                       print theme('image_style', array('style_name' => 'user_picture', 'path' => $file)); 
+                      }
                       ?>
                   </div>
               <div class="profile-detail">
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
-                      <li class="twitter"><a href="https://twitter.com/TwitterDev" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
+                      <?php  $twitter_handle = $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
+                      $twitter_handle = str_replace('@', '', $twitter_handle);
+                      if(!empty($twitter_handle)) {
+                      ?>
+                      <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle;?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
+                      <?php } ?>
                   </ul>
                   <ul>
                       <li class="mailto mhide"><i class="fa fa-envelope-o"></i> &nbsp;<?php
@@ -64,13 +75,24 @@
                   <div class="profile-pic">
                       <?php
                       $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                      if(!empty($file)) {
                       print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                      }
+                      else {
+                       $file = 'default_images/user-default.png';
+                       print theme('image_style', array('style_name' => 'user_picture', 'path' => $file)); 
+                      }
                       ?>
                   </div>
               <div class="profile-detail">
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
-                      <li class="twitter"><a href="https://twitter.com/TwitterDev" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
+                      <?php  $twitter_handle = $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
+                      $twitter_handle = str_replace('@', '', $twitter_handle);
+                      if(!empty($twitter_handle)) {
+                      ?>
+                      <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle;?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
+                      <?php } ?>
                   </ul>
                   <ul>
                      <li><?php print  date('F j, Y', $node->created); ?>   </li>
