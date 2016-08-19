@@ -5676,6 +5676,11 @@ div.node{
     .droppable{
       min-height: 400px;
     }
+    .ad-widget{
+      .droppable{
+      min-height: 0;
+    }
+    }
   }
 }
 [id*="views-exposed-form-byline-list-page"]{
@@ -6069,6 +6074,15 @@ div.node{
       .form-item{
         float: left;
         margin-right: 10px;
+        label{padding-top: 0;}
+      }
+      #edit-submit-searchimage{
+        margin-top: 18px;
+      }
+    }
+    .views-reset-button{
+      #edit-reset{
+        margin-top: 18px;
       }
     }
   }
@@ -6283,3 +6297,22 @@ div.node{
     width: 100%;
   }
 }*/
+
+.easyPaginateNav{
+  text-align: center;
+  a{
+    color: #1fb5ad;
+    @extend .dib;
+    @extend .vmid;
+    margin: 0 5px;
+    &.page{
+      border: 1px solid #1fb5ad;
+      height: 20px;
+      width: 20px;
+    }
+    &.current{
+      background-color: #1fb5ad;
+      color: #fff;
+    }
+  }
+}

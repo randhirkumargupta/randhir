@@ -239,7 +239,7 @@ img {
 .view-link,
 .delete-link,
 .move-link,
-.edit-cm a, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-item-title + .form-type-item, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .block-itg-related .checked-list li .ui-icon, .node-newsletter-form #newsletter-date-time-wrapper, .view-related-content-new .view-filters, .search-criteria + .success, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .block-itg-layout-manager, #itg-layout-manager-filter-form, .itg-region ul, .itg-region ul li, #pti-basic-info, #itg_video_content .ftp-server, #itg_video_content .local_browse, .page-admin-structure-menu-manage .action-links, [id*="itg-mobile-services-search-form"], .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click {
+.edit-cm a, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-item-title + .form-type-item, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .block-itg-related .checked-list li .ui-icon, .node-newsletter-form #newsletter-date-time-wrapper, .view-related-content-new .view-filters, .search-criteria + .success, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .block-itg-layout-manager, #itg-layout-manager-filter-form, .itg-region ul, .itg-region ul li, #pti-basic-info, #itg_video_content .ftp-server, #itg_video_content .local_browse, .page-admin-structure-menu-manage .action-links, [id*="itg-mobile-services-search-form"], .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, .easyPaginateNav a {
   display: inline-block;
 }
 
@@ -251,7 +251,7 @@ img {
 .view-link,
 .delete-link,
 .move-link,
-.edit-cm a {
+.edit-cm a, .easyPaginateNav a {
   vertical-align: middle;
 }
 
@@ -5582,6 +5582,9 @@ div.node #comments h2 {
 .sidebar-section-photo .itg-widget .droppable {
   min-height: 400px;
 }
+.sidebar-section-photo .itg-widget .ad-widget .droppable {
+  min-height: 0;
+}
 
 [id*="views-exposed-form-byline-list-page"] .views-widget-filter-field_celebrity_pro_occupation_tid .form-type-select .form-select + div.description {
   left: 148px;
@@ -5927,6 +5930,15 @@ div.node #comments h2 {
   float: left;
   margin-right: 10px;
 }
+.view .view-filters #views-exposed-form-searchimage-page .views-submit-button .form-item label {
+  padding-top: 0;
+}
+.view .view-filters #views-exposed-form-searchimage-page .views-submit-button #edit-submit-searchimage {
+  margin-top: 18px;
+}
+.view .view-filters #views-exposed-form-searchimage-page .views-reset-button #edit-reset {
+  margin-top: 18px;
+}
 
 #edit-brief-idea-limit {
   color: green;
@@ -6104,3 +6116,19 @@ div.node #comments h2 {
     width: 100%;
   }
 }*/
+.easyPaginateNav {
+  text-align: center;
+}
+.easyPaginateNav a {
+  color: #1fb5ad;
+  margin: 0 5px;
+}
+.easyPaginateNav a.page {
+  border: 1px solid #1fb5ad;
+  height: 20px;
+  width: 20px;
+}
+.easyPaginateNav a.current {
+  background-color: #1fb5ad;
+  color: #fff;
+}
