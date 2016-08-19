@@ -75,24 +75,38 @@ function itg_widget_menu() {
  */
 function itg_widget_setids() {
   $datatoset = array();
-
   $datatoset = $_SESSION[$_POST['formid']];
-  if (empty($datatoset)) {
-    $datatoset[] = $_POST['checkid'];
-  }
-  if ($_POST['type'] == 'ADD') {
-    array_push($datatoset, $_POST['checkid']);
-    array_unique($datatoset);
-    $_SESSION[$_POST['formid']] = $datatoset;
-  }
-  else if ($_POST['type'] == 'REMOVE') {
 
-    if (($key = array_search($_POST['checkid'], $datatoset)) !== false) {
-      unset($datatoset[$key]);
+  if (is_array($_POST['checkid'])) {
+    foreach ($_POST['checkid'] as $ids) {
+      if ($_POST['type'] == 'ADD') {
+        $datatoset[] = $ids;
+      }
+      else if ($_POST['type'] == 'REMOVE') {
+        if (($key = array_search($ids, $datatoset)) !== false) {
+
+          unset($datatoset[$key]);
+        }
+      }
     }
-    array_unique($datatoset);
-    $_SESSION[$_POST['formid']] = $datatoset;
   }
+  else {
+
+    if (empty($datatoset)) {
+      $datatoset[] = $_POST['checkid'];
+    }
+    if ($_POST['type'] == 'ADD') {
+      array_push($datatoset, $_POST['checkid']);
+    }
+    else if ($_POST['type'] == 'REMOVE') {
+
+      if (($key = array_search($_POST['checkid'], $datatoset)) !== false) {
+        unset($datatoset[$key]);
+      }
+    }
+  }
+  $datatoset = array_unique($datatoset);
+  $_SESSION[$_POST['formid']] = $datatoset;
 }
 
 function remove_extra_data() {
