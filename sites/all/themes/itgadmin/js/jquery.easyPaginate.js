@@ -4,7 +4,7 @@
 * Version 1.0
 *
 * Licensed under GPL <http://en.wikipedia.org/wiki/GNU_General_Public_License>
-* Copyright (c) 2008, Stéphane Litou <contact@mushtitude.com>
+* Copyright (c) 2008, Stï¿½phane Litou <contact@mushtitude.com>
 * All rights reserved.
 *
     This program is free software: you can redistribute it and/or modify
@@ -30,13 +30,13 @@ $.fn.easyPaginate = function (options) {
         effect: 'default',
         slideOffset: 200,
         firstButton: true,
-        firstButtonText: '<<',
+        firstButtonText: 'First',
         lastButton: true,
-        lastButtonText: '>>',        
+        lastButtonText: 'Last',        
         prevButton: true,
-        prevButtonText: '<',        
+        prevButtonText: 'Prev',        
         nextButton: true,
-        nextButtonText: '>'
+        nextButtonText: 'Next'
     }
         
     return this.each (function (instance) {        
