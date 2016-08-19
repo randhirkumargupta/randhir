@@ -386,10 +386,15 @@ function itg_mobile_web_url_mobile($service_fetch_link, $file_path, $status) {
 function itg_mobile_get_feed_byurl() {
   global $base_url;
   $build = array();
-  $url = $base_url . '/' . arg(0) . '/' . arg(1) . '/' . arg(2);
+  $request_url = explode('/', $_SERVER['REQUEST_URI']);
+  unset($request_url[0]);
+  unset($request_url[1]);
+  $url = $base_url . '/' . $request_url[2] . '/' . $request_url[3] . '/' . $request_url[4];
+  $path = file_create_url('public://');
+
   $query = db_select('itg_syndication_feed_url', 'feed')->extend('PagerDefault');
   # get the desired fields from the database
-  $query->condition('feed.client_feed_url', $url)
+  $query ->condition('feed.client_feed_url', $url)
       ->condition('feed.status', 1, '=');
 
   $search_box = drupal_render(drupal_get_form('search_form'));
@@ -410,7 +415,6 @@ function itg_mobile_get_feed_byurl() {
       ->limit(10);
   # execute the query
   $results = $query->execute();
-
   $header = array(
     '1' => t('S. No.'),
     '2' => array('data' => t('Service Name'), 'sort' => 'desc'),
@@ -423,8 +427,11 @@ function itg_mobile_get_feed_byurl() {
   $rows = array();
   $i = 1;
   foreach ($results as $row) {
-    $file_url = explode('sites/', $row->xml_name);
-    $file_url_array = explode('_', $file_url[1]);
+
+    $real_path = substr($path, 0, -1) . $row->xml_name;
+    $files_url = explode('mobile/', $real_path);
+    $file_url = explode('/', $files_url[1]);
+    $file_url_array = explode('_', $file_url[2]);
     $file_date_array = explode('.', $file_url_array[3]);
     $frequency_type_arr = explode('/', $file_url_array[0]);
     $frequency_type = ($frequency_type_arr[count($frequency_type_arr) - 1]);
@@ -437,7 +444,7 @@ function itg_mobile_get_feed_byurl() {
       $frequency_type,
       $frequency_date,
       $created_date,
-      '<a href="' . $base_url . '/sites/' . $file_url[1] . '" download> Click to Download </a>' . '</td>',
+      '<a href="' . $real_path . '" download> Click to Download </a>' . '</td>',
     );
     $i++;
   }
