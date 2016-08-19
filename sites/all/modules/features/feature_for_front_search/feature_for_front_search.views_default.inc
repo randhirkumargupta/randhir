@@ -50,7 +50,7 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '15';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -89,16 +89,6 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_class'] = 'search-pic';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_default_classes'] = FALSE;
-  /* Field: Apache Solr: sm_thumb_medium_field_blog_image */
-  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['id'] = 'sm_thumb_medium_field_blog_image';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['field'] = 'sm_thumb_medium_field_blog_image';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['label'] = '';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_type'] = '0';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_wrapper_class'] = 'search-pic';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_blog_image']['element_default_classes'] = FALSE;
   /* Field: Apache Solr: sm_thumb_medium_field_magazine_cover_photo */
   $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['id'] = 'sm_thumb_medium_field_magazine_cover_photo';
   $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['table'] = 'apachesolr__solr';

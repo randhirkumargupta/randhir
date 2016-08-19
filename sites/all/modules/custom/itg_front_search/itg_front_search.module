@@ -64,7 +64,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
 
     $form['custom_drp'] = array(
       '#type' => 'select',
-      '#title' => t('Date'),
+      '#title' => t('DATE'),
       '#options' => $day_cal,
       '#default_value' => '_none'
     );

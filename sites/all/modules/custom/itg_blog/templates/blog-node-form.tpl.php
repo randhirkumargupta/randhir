@@ -10,7 +10,7 @@
 <div id="BlogBasicDetails">
   <h2 class="story-title"><?php print t('Basic Details'); ?></h2>
   <?php print drupal_render($form['title']); ?>
-  <?php print drupal_render($form['field_blog_image']); ?>
+  <?php print drupal_render($form['field_story_extra_large_image']); ?>
   <?php print drupal_render($form['field_blog_short_description']); ?>
 </div>
 <div id="BlogDetails">
