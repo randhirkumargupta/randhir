@@ -36,10 +36,92 @@ Drupal.behaviors.itg_widgets = {
                 }
             }
         });
+
+     jQuery('.removeid').live('click',function(){
+         var getids=jQuery(this).attr('cid');
+         jQuery(this).parent().remove();
+         jQuery('.vbo-select').each(function() {
+             
+             if(jQuery(this).val()==getids)
+             {
+                 jQuery(this).attr('checked',false);
+                 
+             }
+             
+         })
+         var formid = jQuery("input[name='form_id']").val();
+            
+            
+                var type = 'REMOVE';
+           
+
+            jQuery.ajax({
+                url: Drupal.settings.basePath + 'setids',
+                type: 'post', beforeSend:
+                        function() {
+                            jQuery('#ajex-loader').show();
+                            jQuery(".vbo-select").attr("disabled", true);
+                        },
+                data: {'checkid': getids, 'formid': formid, 'type': type},
+                success: function(data) {
+                    setTimeout(function() {
+
+                        jQuery('#ajex-loader').hide();
+                        jQuery(".vbo-select").attr("disabled", false);
+                    }, 500);
+
+                },
+                error: function(xhr, desc, err) {
+                    console.log(xhr);
+                    console.log("Details: " + desc + "\nError:" + err);
+                }
+            });
+         
+         
+     })
+
+
+        jQuery('.vbo-select').click(function() {
+            var formid = jQuery("input[name='form_id']").val();
+            var checkids = jQuery(this).val();
+            if (jQuery(this).is(':checked'))
+            {
+                type = 'ADD';
+                jQuery('.fieldset-wrapper').append('<span id="spn_'+checkids+'" class="content-ids">'+checkids+'<a class="removeid" cid="'+checkids+'" href="javascript:void(0)">X</a></span>');
+
+            }
+            else {
+                type = 'REMOVE';
+                jQuery('#spn_'+checkids).remove();
+            }
+
+            jQuery.ajax({
+                url: Drupal.settings.basePath + 'setids',
+                type: 'post', beforeSend:
+                        function() {
+                            jQuery('#ajex-loader').show();
+                            jQuery(".vbo-select").attr("disabled", true);
+                        },
+                data: {'checkid': checkids, 'formid': formid, 'type': type},
+                success: function(data) {
+                    setTimeout(function() {
+
+                        jQuery('#ajex-loader').hide();
+                        jQuery(".vbo-select").attr("disabled", false);
+                    }, 500);
+
+                },
+                error: function(xhr, desc, err) {
+                    console.log(xhr);
+                    console.log("Details: " + desc + "\nError:" + err);
+                }
+            });
+        });
         
-        jQuery(".widgets-view .view-link").parent().attr("target","_blank");
+
+        jQuery(".widgets-view .view-link").parent().attr("target", "_blank");
         //jQuery(".widgets-view .view-link").css("text-transform","capitalize");
-        
+
         jQuery(".view-section-wise-content-ordering-list span.move-link").on('click', function() {
             if (confirm("Are you sure you want to move this content ?")) {
                 return true;
@@ -48,7 +130,7 @@ Drupal.behaviors.itg_widgets = {
                 return false;
             }
         });
-        
+
     }
 
 };

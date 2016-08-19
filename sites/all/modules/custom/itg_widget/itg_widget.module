@@ -19,75 +19,106 @@ module_load_include('inc', 'itg_widget', 'includes/itg_widget_actions_bulk_opera
  * {@inheritdoc}
  */
 function itg_widget_init() {
-  // Js for move funtionality.
-  // This is use in case of nodequeue in case of custom table we calls a callback funtion.
-  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
+    // Js for move funtionality.
+    // This is use in case of nodequeue in case of custom table we calls a callback funtion.
+    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_menu() {
-  $items = array();
-  $items['remove_from_widgets/%/%/%/%'] = array(
-      'page callback' => 'remove_from_widgets',
-      'page arguments' => array(1, 2, 3, 4),
-      'access arguments' => array('administer nodequeue'),
-  );
-  $items['remove_from_widgets_section/%/%/%/%/%/%'] = array(
-      'page callback' => 'remove_from_widgets_with_section',
-      'page arguments' => array(1, 2, 3, 4, 5, 6),
-      'access arguments' => array('administer nodequeue'),
-  );
-  $items['move-widget-node/%/%/%/%'] = array(
-      'page callback' => 'move_node_from_widget',
-      'page arguments' => array(1, 2, 3, 4),
-      'access arguments' => array('administer nodequeue'),
-  );
-  $items['move-dont-miss-widget-node/%/%/%/%'] = array(
-      'page callback' => 'move_node_from_dont_miss_widget',
-      'page arguments' => array(1, 2, 3, 4),
-      'access arguments' => array('administer nodequeue'),
-  );
-  $items['anchor-list/autocomplete'] = array(
-      'page callback' => 'itg_widget_anchor_autocomplete_name',
-      'access arguments' => array('access content'),
-  );
-  $items['anchor-list-nid/autocomplete'] = array(
-      'page callback' => 'itg_widget_anchor_autocomplete_id',
-      'access arguments' => array('access content'),
-  );
-  $items['remove-extra-data'] = array(
-      'page callback' => 'remove_extra_data',
-      'access arguments' => array('access administrator'),
-  );
-  return $items;
+    $items = array();
+    $items['remove_from_widgets/%/%/%/%'] = array(
+        'page callback' => 'remove_from_widgets',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
+    $items['remove_from_widgets_section/%/%/%/%/%/%'] = array(
+        'page callback' => 'remove_from_widgets_with_section',
+        'page arguments' => array(1, 2, 3, 4, 5, 6),
+        'access arguments' => array('administer nodequeue'),
+    );
+    $items['move-widget-node/%/%/%/%'] = array(
+        'page callback' => 'move_node_from_widget',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
+    $items['move-dont-miss-widget-node/%/%/%/%'] = array(
+        'page callback' => 'move_node_from_dont_miss_widget',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
+    $items['anchor-list/autocomplete'] = array(
+        'page callback' => 'itg_widget_anchor_autocomplete_name',
+        'access arguments' => array('access content'),
+    );
+    $items['anchor-list-nid/autocomplete'] = array(
+        'page callback' => 'itg_widget_anchor_autocomplete_id',
+        'access arguments' => array('access content'),
+    );
+    $items['remove-extra-data'] = array(
+        'page callback' => 'remove_extra_data',
+        'access arguments' => array('access administrator'),
+    );
+    $items['setids'] = array(
+        'page callback' => 'itg_widget_setids', // load the croper according to size!.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+    return $items;
+}
+
+/**
+ * Funtion used to add or delete widgit ids into session for Selected content id should be display on top.
+ * 
+ */
+
+function itg_widget_setids() {
+    $datatoset = array();
+
+    $datatoset = $_SESSION[$_POST['formid']];
+    if (empty($datatoset)) {
+        $datatoset[] = $_POST['checkid'];
+    }
+    if ($_POST['type'] == 'ADD') {
+        array_push($datatoset, $_POST['checkid']);
+        array_unique($datatoset);
+        $_SESSION[$_POST['formid']] = $datatoset;
+    } else if ($_POST['type'] == 'REMOVE') {
+
+        if (($key = array_search($_POST['checkid'], $datatoset)) !== false) {
+            unset($datatoset[$key]);
+        }
+        array_unique($datatoset);
+        $_SESSION[$_POST['formid']] = $datatoset;
+    }
 }
 
 function remove_extra_data() {
-  $widget = array(
-      'widget_anchors_listing',
-      'home_page_feature_widget',
-      'story_widget',
-      'section_wise_content_ordering_list',
-      'section_wise_draggable_content_order',
-      'big_story_format_widget',
-      'dont_miss_content_widget',
-      'section_wise_widget',
-      'we_may_suggest_widget',
-      'section_wise_content_ordering',
-      'widget_anchors_listing',
-      'category_wise_content_list',
-  );
-  foreach ($widget as $view_name) {
-    $num_deleted = db_delete('draggableviews_structure')
-            ->condition('view_name', $view_name)
-            ->execute();
+    $widget = array(
+        'widget_anchors_listing',
+        'home_page_feature_widget',
+        'story_widget',
+        'section_wise_content_ordering_list',
+        'section_wise_draggable_content_order',
+        'big_story_format_widget',
+        'dont_miss_content_widget',
+        'section_wise_widget',
+        'we_may_suggest_widget',
+        'section_wise_content_ordering',
+        'widget_anchors_listing',
+        'category_wise_content_list',
+    );
+    foreach ($widget as $view_name) {
+        $num_deleted = db_delete('draggableviews_structure')
+                ->condition('view_name', $view_name)
+                ->execute();
 
-    $num_deleted = db_delete('itg_widget_order')
-            ->condition('widget', $view_name)
-            ->execute();
-  }
+        $num_deleted = db_delete('itg_widget_order')
+                ->condition('widget', $view_name)
+                ->execute();
+    }
 }
 
 /**
@@ -99,20 +130,19 @@ function remove_extra_data() {
  * @param int $nid
  */
 function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, $nid) {
-  if (!empty($widget_name) && !empty($nid)) {
-    $num = db_delete('itg_widget_order')
-            ->condition('nid', $nid)
-            ->condition('widget', $widget_name)
-            ->execute();
-    if ($num) {
-      drupal_set_message(t("Node has been moved"));
-      drupal_goto($_SERVER['HTTP_REFERER']);
+    if (!empty($widget_name) && !empty($nid)) {
+        $num = db_delete('itg_widget_order')
+                ->condition('nid', $nid)
+                ->condition('widget', $widget_name)
+                ->execute();
+        if ($num) {
+            drupal_set_message(t("Node has been moved"));
+            drupal_goto($_SERVER['HTTP_REFERER']);
+        } else {
+            drupal_set_message(t("Node id or widget name not found"));
+            drupal_goto($_SERVER['HTTP_REFERER']);
+        }
     }
-    else {
-      drupal_set_message(t("Node id or widget name not found"));
-      drupal_goto($_SERVER['HTTP_REFERER']);
-    }
-  }
 }
 
 /**
@@ -124,18 +154,18 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
  * @param int $nid
  */
 function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
-  if (!empty($widget_name) && !empty($cat_tid) && !empty($nid)) {
-    $num = db_delete('itg_widget_order')
-            ->condition('nid', $nid)
-            //->condition('content_type', $content_type)
-            ->condition('cat_id', $cat_tid)
-            ->condition('widget', $widget_name)
-            ->execute();
-    if ($num) {
-      drupal_set_message(t("Node has been moved"));
-      drupal_goto($_SERVER['HTTP_REFERER']);
+    if (!empty($widget_name) && !empty($cat_tid) && !empty($nid)) {
+        $num = db_delete('itg_widget_order')
+                ->condition('nid', $nid)
+                //->condition('content_type', $content_type)
+                ->condition('cat_id', $cat_tid)
+                ->condition('widget', $widget_name)
+                ->execute();
+        if ($num) {
+            drupal_set_message(t("Node has been moved"));
+            drupal_goto($_SERVER['HTTP_REFERER']);
+        }
     }
-  }
 }
 
 /**
@@ -146,14 +176,13 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
  * @param string $page_name
  */
 function remove_from_widgets_with_section($nid, $qid, $view_name, $page_name, $section_tid, $type) {
-  $draggable_delete = draggable_view_node_delete_section($view_name, $page_name, $nid, $section_tid, $type);
-  if ($draggable_delete) {
-    nodequeue_subqueue_remove_node($qid, $nid);
-    echo "deleted";
-  }
-  else {
-    echo "not-deleted";
-  }
+    $draggable_delete = draggable_view_node_delete_section($view_name, $page_name, $nid, $section_tid, $type);
+    if ($draggable_delete) {
+        nodequeue_subqueue_remove_node($qid, $nid);
+        echo "deleted";
+    } else {
+        echo "not-deleted";
+    }
 }
 
 /**
@@ -164,16 +193,16 @@ function remove_from_widgets_with_section($nid, $qid, $view_name, $page_name, $s
  * @return int
  */
 function draggable_view_node_delete_section($view_name, $page_name, $nid, $section_tid, $type) {
-  if (!empty($view_name) && !empty($page_name) && !empty($nid) && !empty($section_tid) && !empty($type)) {
-    $args = '{"field_story_category_tid":"' . $section_tid . '","type":"' . $type . '"}';
-    $num_deleted = db_delete('draggableviews_structure')
-            ->condition('view_name', $view_name)
-            ->condition('view_display', $page_name)
-            ->condition('entity_id', $nid)
-            ->condition('args', $args)
-            ->execute();
-    return $num_deleted;
-  }
+    if (!empty($view_name) && !empty($page_name) && !empty($nid) && !empty($section_tid) && !empty($type)) {
+        $args = '{"field_story_category_tid":"' . $section_tid . '","type":"' . $type . '"}';
+        $num_deleted = db_delete('draggableviews_structure')
+                ->condition('view_name', $view_name)
+                ->condition('view_display', $page_name)
+                ->condition('entity_id', $nid)
+                ->condition('args', $args)
+                ->execute();
+        return $num_deleted;
+    }
 }
 
 /**
@@ -184,17 +213,16 @@ function draggable_view_node_delete_section($view_name, $page_name, $nid, $secti
  * @param string $page_name
  */
 function remove_from_widgets($nid, $qid, $view_name, $page_name) {
-  $draggable_delete = draggable_view_node_delete($view_name, $page_name, $nid);
-  nodequeue_subqueue_remove_node($qid, $nid);
-  if ($draggable_delete) {
-    //nodequeue_subqueue_remove_node($qid, $nid);
-    print "deleted";
-  }
-  else {
-    print "notdeleted";
-  }
-  drupal_set_message(t("Node has been moved"));
-  drupal_goto($_SERVER['HTTP_REFERER']);
+    $draggable_delete = draggable_view_node_delete($view_name, $page_name, $nid);
+    nodequeue_subqueue_remove_node($qid, $nid);
+    if ($draggable_delete) {
+        //nodequeue_subqueue_remove_node($qid, $nid);
+        print "deleted";
+    } else {
+        print "notdeleted";
+    }
+    drupal_set_message(t("Node has been moved"));
+    drupal_goto($_SERVER['HTTP_REFERER']);
 }
 
 /**
@@ -205,175 +233,175 @@ function remove_from_widgets($nid, $qid, $view_name, $page_name) {
  * @return int
  */
 function draggable_view_node_delete($view_name, $page_name, $nid) {
-  if (!empty($view_name) && !empty($page_name) && !empty($nid)) {
-    $num_deleted = db_delete('draggableviews_structure')
-            ->condition('view_name', $view_name)
-            ->condition('view_display', $page_name)
-            ->condition('entity_id', $nid)
-            ->execute();
-    return $num_deleted;
-  }
+    if (!empty($view_name) && !empty($page_name) && !empty($nid)) {
+        $num_deleted = db_delete('draggableviews_structure')
+                ->condition('view_name', $view_name)
+                ->condition('view_display', $page_name)
+                ->condition('entity_id', $nid)
+                ->execute();
+        return $num_deleted;
+    }
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_block_info() {
-  $blocks['top_stories_ordering'] = array(
-      'info' => t('Widget: Top Stories Ordering'),
-  );
-  $blocks['trending_videos_widget'] = array(
-      'info' => t('Widget: Trending videos widgets'),
-  );
-  $blocks['top_takes_videos_widget'] = array(
-      'info' => t('Widget: Top Takes videos widgets'),
-  );
-  $blocks['home_page_feature'] = array(
-      'info' => t('Widget: Home Page Feature'),
-  );
-  $blocks['we_may_suggest'] = array(
-      'info' => t('Widget: We May Suggest'),
-  );
-  $blocks['section_wise_order'] = array(
-      'info' => t('Widget: Section wise ordering form custom table'),
-  );
-  $blocks['big_story_format'] = array(
-      'info' => t('Widget: Big story form custom table'),
-  );
-  $blocks['most_popular'] = array(
-      'info' => t('Widget: Most popular form custom table'),
-  );
+    $blocks['top_stories_ordering'] = array(
+        'info' => t('Widget: Top Stories Ordering'),
+    );
+    $blocks['trending_videos_widget'] = array(
+        'info' => t('Widget: Trending videos widgets'),
+    );
+    $blocks['top_takes_videos_widget'] = array(
+        'info' => t('Widget: Top Takes videos widgets'),
+    );
+    $blocks['home_page_feature'] = array(
+        'info' => t('Widget: Home Page Feature'),
+    );
+    $blocks['we_may_suggest'] = array(
+        'info' => t('Widget: We May Suggest'),
+    );
+    $blocks['section_wise_order'] = array(
+        'info' => t('Widget: Section wise ordering form custom table'),
+    );
+    $blocks['big_story_format'] = array(
+        'info' => t('Widget: Big story form custom table'),
+    );
+    $blocks['most_popular'] = array(
+        'info' => t('Widget: Most popular form custom table'),
+    );
 
-  $blocks['featured_photo_carousel'] = array(
-      'info' => t('Widget: Featured Photo Carousel - Flexslider'),
-  );
+    $blocks['featured_photo_carousel'] = array(
+        'info' => t('Widget: Featured Photo Carousel - Flexslider'),
+    );
 
-  $blocks['featured_photo_carousel_r'] = array(
-      'info' => t('Widget: Featured Photo Carousel - Rolling Slider'),
-  );
+    $blocks['featured_photo_carousel_r'] = array(
+        'info' => t('Widget: Featured Photo Carousel - Rolling Slider'),
+    );
 
-  $blocks['featured_video_carousel'] = array(
-      'info' => t('Widget: Featured Video Carousel - Flexslider'),
-  );
+    $blocks['featured_video_carousel'] = array(
+        'info' => t('Widget: Featured Video Carousel - Flexslider'),
+    );
 
-  $blocks['featured_video_carousel_r'] = array(
-      'info' => t('Widget: Featured Video Carousel - Rolling Slider'),
-  );
+    $blocks['featured_video_carousel_r'] = array(
+        'info' => t('Widget: Featured Video Carousel - Rolling Slider'),
+    );
 
-  $blocks['dont_miss'] = array(
-      'info' => t('Widget: Dont Miss form custom table'),
-  );
-  $blocks['watch_right_now_videos_widget'] = array(
-      'info' => t('Widget: Watch right now videos'),
-  );
-  return $blocks;
+    $blocks['dont_miss'] = array(
+        'info' => t('Widget: Dont Miss form custom table'),
+    );
+    $blocks['watch_right_now_videos_widget'] = array(
+        'info' => t('Widget: Watch right now videos'),
+    );
+    return $blocks;
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_block_view($delta = '') {
-  $block = array();
-  switch ($delta) {
-    // Big Story Content.
-    case 'big_story_format':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
-      //$block['subject'] = t('');
-      $info['widget'] = 'big_story_format_widget';
-      $data = itg_widget_big_story_block_data($info);
-      $block['content'] = theme("widget_big_story_format", array("data" => $data));
-      break;
-    // section ordering reordering widget case
-    case 'section_wise_order':
-      module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
-      // value is hardcoded need to be change for dyanamic functionality
-      $info['section'] = '240'; // tid of section
-      $info['content_type'] = ''; // content type machine name
-      // view name which is stored in draggableviews_structure table
-      $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-      //$block['subject'] = t('Section wise ordering from custom table');
-      $data = itg_widget_section_wise_ordering_from_custom_table($info);
-      $block['content'] = theme("section_wise_ordering", array("data" => $data));
-      break;
-    case 'we_may_suggest':
-      module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
-      $info['section'] = '301'; // tid of section
-      $info['content_type'] = 'story'; // content type machine name
-      $info['view_name'] = 'we_may_suggest_widget';
-      $data = itg_widget_we_may_suggest_ordering_from_custom_table($info);
-      $block['content'] = theme("we_may_suggest", array("data" => $data));
-      break;
-    // Top story ordering reordering widget case
-    case 'top_stories_ordering':
-      module_load_include('inc', 'itg_widget', 'includes/section-odering');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'page_2'; // page name
-      $data = itg_widget_top_stories_ordering_data($info);
-      $block['content'] = theme("top_stories_ordering", array("data" => $data));
-      break;
-    // Top story ordering reordering widget case
-    case 'most_popular':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'most_popular_widget'; // page name
-      $data = itg_widget_most_popular_ordering_data($info);
-      $block['content'] = theme("most_popular_widget", array("data" => $data));
-      break;
-    // Top story ordering reordering widget case
-    case 'dont_miss':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
-      $info['widget_name'] = 'dont_miss_content_widget';
-      $data = itg_widget_dont_miss_ordering_data($info);
-      $block['content'] = theme("dont_miss_widget", array("data" => $data));
-      break;
-    // Trending videos ordering reordering widget case
-    case 'trending_videos_widget':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'trending_videos_widget'; // page name
-      $data = itg_widget_trending_videos_widget_ordering_data($info);
-      $block['content'] = theme("trending_videos_widget", array("data" => $data));
-      break;
-    // Watch Right Now ordering reordering widget case
-    case 'watch_right_now_videos_widget':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'watch_right_now_widget'; // page name
-      $data = itg_widget_watch_right_now_videos_widget_ordering_data($info);
-      $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
-      break;
-    // Top takes videos ordering reordering widget case
-    case 'top_takes_videos_widget':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'top_takes_video_widget'; // page name
-      $data = itg_widget_top_takes_videos_widget_ordering_data($info);
-      $block['content'] = theme("top_takes_videos_widget", array("data" => $data));
-      break;
-    // home page feature ordering reordering widget case
-    case 'home_page_feature':
-      module_load_include('inc', 'itg_widget', 'includes/home-page-feature');
-      $info['view_name'] = 'home_page_feature_widget'; // view name
-      $info['page'] = 'page_2'; // page name
-      $data = itg_widget_home_page_feature_data($info);
-      $block['content'] = theme("home_page_feature", array("data" => $data));
-      break;
-    // featured photo carousel reordering widget case
-    case 'featured_photo_carousel':
-      drupal_add_library('flexslider', 'flexslider');
-      libraries_load('flexslider');
-      module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
+    $block = array();
+    switch ($delta) {
+        // Big Story Content.
+        case 'big_story_format':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
+            //$block['subject'] = t('');
+            $info['widget'] = 'big_story_format_widget';
+            $data = itg_widget_big_story_block_data($info);
+            $block['content'] = theme("widget_big_story_format", array("data" => $data));
+            break;
+        // section ordering reordering widget case
+        case 'section_wise_order':
+            module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
+            // value is hardcoded need to be change for dyanamic functionality
+            $info['section'] = '240'; // tid of section
+            $info['content_type'] = ''; // content type machine name
+            // view name which is stored in draggableviews_structure table
+            $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
+            //$block['subject'] = t('Section wise ordering from custom table');
+            $data = itg_widget_section_wise_ordering_from_custom_table($info);
+            $block['content'] = theme("section_wise_ordering", array("data" => $data));
+            break;
+        case 'we_may_suggest':
+            module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
+            $info['section'] = '301'; // tid of section
+            $info['content_type'] = 'story'; // content type machine name
+            $info['view_name'] = 'we_may_suggest_widget';
+            $data = itg_widget_we_may_suggest_ordering_from_custom_table($info);
+            $block['content'] = theme("we_may_suggest", array("data" => $data));
+            break;
+        // Top story ordering reordering widget case
+        case 'top_stories_ordering':
+            module_load_include('inc', 'itg_widget', 'includes/section-odering');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'page_2'; // page name
+            $data = itg_widget_top_stories_ordering_data($info);
+            $block['content'] = theme("top_stories_ordering", array("data" => $data));
+            break;
+        // Top story ordering reordering widget case
+        case 'most_popular':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'most_popular_widget'; // page name
+            $data = itg_widget_most_popular_ordering_data($info);
+            $block['content'] = theme("most_popular_widget", array("data" => $data));
+            break;
+        // Top story ordering reordering widget case
+        case 'dont_miss':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
+            $info['widget_name'] = 'dont_miss_content_widget';
+            $data = itg_widget_dont_miss_ordering_data($info);
+            $block['content'] = theme("dont_miss_widget", array("data" => $data));
+            break;
+        // Trending videos ordering reordering widget case
+        case 'trending_videos_widget':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'trending_videos_widget'; // page name
+            $data = itg_widget_trending_videos_widget_ordering_data($info);
+            $block['content'] = theme("trending_videos_widget", array("data" => $data));
+            break;
+        // Watch Right Now ordering reordering widget case
+        case 'watch_right_now_videos_widget':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'watch_right_now_widget'; // page name
+            $data = itg_widget_watch_right_now_videos_widget_ordering_data($info);
+            $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
+            break;
+        // Top takes videos ordering reordering widget case
+        case 'top_takes_videos_widget':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'top_takes_video_widget'; // page name
+            $data = itg_widget_top_takes_videos_widget_ordering_data($info);
+            $block['content'] = theme("top_takes_videos_widget", array("data" => $data));
+            break;
+        // home page feature ordering reordering widget case
+        case 'home_page_feature':
+            module_load_include('inc', 'itg_widget', 'includes/home-page-feature');
+            $info['view_name'] = 'home_page_feature_widget'; // view name
+            $info['page'] = 'page_2'; // page name
+            $data = itg_widget_home_page_feature_data($info);
+            $block['content'] = theme("home_page_feature", array("data" => $data));
+            break;
+        // featured photo carousel reordering widget case
+        case 'featured_photo_carousel':
+            drupal_add_library('flexslider', 'flexslider');
+            libraries_load('flexslider');
+            module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
 
-      drupal_add_js('jQuery(window).load(function() {
+            drupal_add_js('jQuery(window).load(function() {
             jQuery(".flexslider").flexslider({
             animation: "slide",
             prevText: "",
             nextText: "",
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
+            );
 
-      drupal_add_css('.flex-caption {
+            drupal_add_css('.flex-caption {
               width: 96%;
               padding: 2%;
               left: 0;
@@ -386,18 +414,18 @@ function itg_widget_block_view($delta = '') {
             }', 'inline');
 
 
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'photo_carousel'; // page name
-      $data = itg_widget_featured_photo_carousel_data($info, 'flexslider');
-      $block['content'] = theme("featured_photo_carousel", array("data" => $data));
-      break;
+            $info['view_name'] = 'photo_carousel_widget'; // view name
+            $info['page'] = 'photo_carousel'; // page name
+            $data = itg_widget_featured_photo_carousel_data($info, 'flexslider');
+            $block['content'] = theme("featured_photo_carousel", array("data" => $data));
+            break;
 
-    case 'featured_photo_carousel_r':
-      global $base_url;
-     
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
-      
-      drupal_add_js("jQuery(document).ready(function () {
+        case 'featured_photo_carousel_r':
+            global $base_url;
+
+            drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
+
+            drupal_add_js("jQuery(document).ready(function () {
             jQuery('.carousel').carousel({
               frontWidth: 645,
               frontHeight: 365,
@@ -406,41 +434,41 @@ function itg_widget_block_view($delta = '') {
               buttonNav: 'none'
             });
           });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
-      
-      /*drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_js("jQuery('#featuredphoto').RollingSlider({
-				showArea:'#example',
-				prev:'#jprev',
-				next:'#jnext',
-				moveSpeed:300,
-				autoPlay:false
-			});", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_js('misc/jquery.js');*/
-      module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'photo_carousel'; // page name
-      $data = itg_widget_featured_photo_carousel_data($info, 'rolling');
-      $block['content'] = theme("featured_photo_carousel_rollingslider", array("data" => $data));
-      break;
+            );
 
-    case 'featured_video_carousel':
-      drupal_add_library('flexslider', 'flexslider');
-      libraries_load('flexslider');
-      module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
+            /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_js("jQuery('#featuredphoto').RollingSlider({
+              showArea:'#example',
+              prev:'#jprev',
+              next:'#jnext',
+              moveSpeed:300,
+              autoPlay:false
+              });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_js('misc/jquery.js'); */
+            module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
+            $info['view_name'] = 'photo_carousel_widget'; // view name
+            $info['page'] = 'photo_carousel'; // page name
+            $data = itg_widget_featured_photo_carousel_data($info, 'rolling');
+            $block['content'] = theme("featured_photo_carousel_rollingslider", array("data" => $data));
+            break;
 
-      drupal_add_js('jQuery(window).load(function() {
+        case 'featured_video_carousel':
+            drupal_add_library('flexslider', 'flexslider');
+            libraries_load('flexslider');
+            module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
+
+            drupal_add_js('jQuery(window).load(function() {
             jQuery(".flexslider-video").flexslider({
             animation: "slide"
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
+            );
 
-      drupal_add_css('.flex-caption {
+            drupal_add_css('.flex-caption {
               width: 96%;
               padding: 2%;
               left: 0;
@@ -453,18 +481,18 @@ function itg_widget_block_view($delta = '') {
             }', 'inline');
 
 
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'video_carousel'; // page name
-      $data = itg_widget_featured_video_carousel_data($info, 'flexslider');
-      $block['content'] = theme("featured_video_carousel", array("data" => $data));
-      break;
+            $info['view_name'] = 'photo_carousel_widget'; // view name
+            $info['page'] = 'video_carousel'; // page name
+            $data = itg_widget_featured_video_carousel_data($info, 'flexslider');
+            $block['content'] = theme("featured_video_carousel", array("data" => $data));
+            break;
 
-    case 'featured_video_carousel_r':
-      global $base_url;
-     
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
-      
-      drupal_add_js("jQuery(document).ready(function () {
+        case 'featured_video_carousel_r':
+            global $base_url;
+
+            drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
+
+            drupal_add_js("jQuery(document).ready(function () {
             jQuery('.carousel').carousel({
               frontWidth: 645,
               frontHeight: 365,
@@ -473,126 +501,118 @@ function itg_widget_block_view($delta = '') {
               buttonNav: 'none'
             });
           });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
-      /*drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-      );
+            );
+            /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+              );
 
-      drupal_add_js("jQuery('#featuredvideo').RollingSlider({
-				showArea:'#example',
-				prev:'#jprev',
-				next:'#jnext',
-				moveSpeed:500,
-				autoPlay:false
-			});", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_js('misc/jquery.js');*/
-      module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'video_carousel'; // page name
-      $data = itg_widget_featured_video_carousel_data($info, 'rolling');
-      $block['content'] = theme("featured_video_carousel_rollingslider", array("data" => $data));
-      break;
-  }
-  return $block;
+              drupal_add_js("jQuery('#featuredvideo').RollingSlider({
+              showArea:'#example',
+              prev:'#jprev',
+              next:'#jnext',
+              moveSpeed:500,
+              autoPlay:false
+              });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_js('misc/jquery.js'); */
+            module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
+            $info['view_name'] = 'photo_carousel_widget'; // view name
+            $info['page'] = 'video_carousel'; // page name
+            $data = itg_widget_featured_video_carousel_data($info, 'rolling');
+            $block['content'] = theme("featured_video_carousel_rollingslider", array("data" => $data));
+            break;
+    }
+    return $block;
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
-  $setting = array();
-  $queue_flag = "";
-  $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
-  $current_display = isset($form_state['view']->current_display) ? $form_state['view']->current_display : "";
-  /* Load all nodes queues */
-  $queues = nodequeue_load_queues(nodequeue_get_all_qids());
-  switch ($view_name) {
-    // top story
-    case 'story_widget':
-      if ($current_display == 'most_popular') {
-        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
-        $queue_flag = 5; // most popular
-      }
-      elseif ($current_display == 'trending_videos') {
-        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-        $queue_flag = 4; // top story widget qid
-      }
-      elseif ($current_display == 'top_takes_video') {
-        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-        $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('top_takes_videos'); // top story widget qid
-      }
-      elseif ($current_display == 'watch_right_now') {
-        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-        $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('watch_right_now'); // top story widget qid
-      }
-      else {
-        $queue_flag = 1; // trending_videos widget qid
-      }
-      break;
-    // home page feature
-    case 'home_page_feature_widget':
-      // watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
-      $queue_flag = 2; // home page feature qid
-      break;
-    // We may suggest
-    case 'we_may_suggest':
-      // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
-      $queue_flag = 3; // home page feature qid
-      break;
-    case 'widget_anchors_listing':
-      // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
-      $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('widget_anchor'); // anchor widget nodequeue
-      break;
+    $setting = array();
+    $queue_flag = "";
+    $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
+    $current_display = isset($form_state['view']->current_display) ? $form_state['view']->current_display : "";
+    /* Load all nodes queues */
+    $queues = nodequeue_load_queues(nodequeue_get_all_qids());
+    switch ($view_name) {
+        // top story
+        case 'story_widget':
+            if ($current_display == 'most_popular') {
+                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
+                $queue_flag = 5; // most popular
+            } elseif ($current_display == 'trending_videos') {
+                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+                $queue_flag = 4; // top story widget qid
+            } elseif ($current_display == 'top_takes_video') {
+                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+                $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('top_takes_videos'); // top story widget qid
+            } elseif ($current_display == 'watch_right_now') {
+                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+                $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('watch_right_now'); // top story widget qid
+            } else {
+                $queue_flag = 1; // trending_videos widget qid
+            }
+            break;
+        // home page feature
+        case 'home_page_feature_widget':
+            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
+            $queue_flag = 2; // home page feature qid
+            break;
+        // We may suggest
+        case 'we_may_suggest':
+            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+            $queue_flag = 3; // home page feature qid
+            break;
+        case 'widget_anchors_listing':
+            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+            $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('widget_anchor'); // anchor widget nodequeue
+            break;
 
-    case 'photo_carousel_widget':
-      if ($current_display == 'photo_carousel_list') {
-        //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
-        $queue_flag = get_nodequeue_load_queue_by_name('photo_carousel');
-        ; // photo carousel list widget qid
-      }
-      if ($current_display == 'video_carousel_list') {
-        //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Video Carousel video");
-        $queue_flag = get_nodequeue_load_queue_by_name('video_carousel'); // video carousel list widget qid
-      }
+        case 'photo_carousel_widget':
+            if ($current_display == 'photo_carousel_list') {
+                //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
+                $queue_flag = get_nodequeue_load_queue_by_name('photo_carousel');
+                ; // photo carousel list widget qid
+            }
+            if ($current_display == 'video_carousel_list') {
+                //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Video Carousel video");
+                $queue_flag = get_nodequeue_load_queue_by_name('video_carousel'); // video carousel list widget qid
+            }
 
-      break;
-  }
-  if (!empty($queues[$queue_flag])) {
-    $setting['name'] = $queues[$queue_flag]->name;
-    $setting['qid'] = $queues[$queue_flag]->qid;
-    $setting['title'] = $queues[$queue_flag]->title;
-    // add js for setting
-    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
-    // pass setting to js for bulk operation
-    drupal_add_js(array('itg_widget' => array('data' => $setting)), 'setting');
-  }
-  // Alter form for confirm message during bulk operation.
-  // Below forms are thoese which are not doing action for nodequeue.
-  // Nodequeue from are being altered form itg_widget.main.js.
-  $form_id_array_to_alter = array(
-      'views_form_section_wise_draggable_content_order_big_story_format',
-      'views_form_section_wise_draggable_content_order_dont_miss_content',
-      'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
-      'views_form_section_wise_draggable_content_order_page',
-  );
+            break;
+    }
+    if (!empty($queues[$queue_flag])) {
+        $setting['name'] = $queues[$queue_flag]->name;
+        $setting['qid'] = $queues[$queue_flag]->qid;
+        $setting['title'] = $queues[$queue_flag]->title;
+        // add js for setting
+        drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
+        // pass setting to js for bulk operation
+        drupal_add_js(array('itg_widget' => array('data' => $setting)), 'setting');
+    }
+    // Alter form for confirm message during bulk operation.
+    // Below forms are thoese which are not doing action for nodequeue.
+    // Nodequeue from are being altered form itg_widget.main.js.
+    $form_id_array_to_alter = array(
+        'views_form_section_wise_draggable_content_order_big_story_format',
+        'views_form_section_wise_draggable_content_order_dont_miss_content',
+        'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
+        'views_form_section_wise_draggable_content_order_page',
+    );
 
 
-  if (in_array($form_id, $form_id_array_to_alter)) {
-    $form['actions']['submit']['#value'] = t('Confirm');
-  }
+    if (in_array($form_id, $form_id_array_to_alter)) {
+        $form['actions']['submit']['#value'] = t('Confirm');
+    }
 
-//  $_SESSION['views_form_story_widget_page_1'] = array(
-//      '1989',
-//      '1988',
-//      '1967'
-//  );
-//  foreach(forms_uses_checked_content_id() as $forms) {
-//    //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
-//  }
-  // Assign deafult values in case of checkbox are checked.
-  //$form = get_sessions_of_ticked_nodes($form);
+
+    foreach (forms_uses_checked_content_id() as $forms) {
+        //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
+    }
+    // Assign deafult values in case of checkbox are checked.
+    $form = get_sessions_of_ticked_nodes($form);
 }
 
 /**
@@ -600,30 +620,29 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
  *
  */
 function session_dependent_custom_form_validation(&$form, &$form_state) {
-  if (empty($_SESSION[$form['#form_id']])) {
-    form_set_error("Please select at least one item.");
-  }
-  else {
-    return true;
-  }
+    if (empty($_SESSION[$form['#form_id']])) {
+        form_set_error("Please select at least one item.");
+    } else {
+        return true;
+    }
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo) {
-  // Form id which will use session value.
-  // Session value is set by ajax.
-  // Extra funtionality to display nodeid with cross.
-  $form_to_used_session_checked = forms_uses_checked_content_id();
+    // Form id which will use session value.
+    // Session value is set by ajax.
+    // Extra funtionality to display nodeid with cross.
+    $form_to_used_session_checked = forms_uses_checked_content_id();
 
-  if (in_array($form['#form_id'], $form_to_used_session_checked)) {
-    // $form_state['selection'] value is set by bulk operation submit.
-    // Only selected nodes are come in $form_state['selection'] array.
-    // Here we are forcely chaing the array.
-    // $form_state['selection'] = $_SESSION[$form['#form_id']];
-    //$form_state['values']['views_bulk_operations'] = $form_state['selection'];
-  }
+    if (in_array($form['#form_id'], $form_to_used_session_checked)) {
+        // $form_state['selection'] value is set by bulk operation submit.
+        // Only selected nodes are come in $form_state['selection'] array.
+        // Here we are forcely chaing the array.
+        // $form_state['selection'] = $_SESSION[$form['#form_id']];
+        //$form_state['values']['views_bulk_operations'] = $form_state['selection'];
+    }
 }
 
 /**
@@ -633,9 +652,9 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
  * @return array
  */
 function forms_uses_checked_content_id() {
-  return array(
-      'views_form_story_widget_page_1'
-  );
+    return array(
+        'views_form_story_widget_page_1'
+    );
 }
 
 /**
@@ -646,141 +665,152 @@ function forms_uses_checked_content_id() {
  * @return array
  */
 function get_sessions_of_ticked_nodes(&$form) {
-  foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
-    if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
-      $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
-      $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
+    foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
+        if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
+            $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
+            $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
+        }
     }
-  }
-  return $form;
+    drupal_add_js('jQuery(window).load(function() {
+            var sessionids="' . implode($_SESSION[$form['#form_id']], ',') . '";
+                if(sessionids!="")
+                {
+                sessionids=sessionids.split(",");
+                }
+                jQuery.each(sessionids, function( index, value ) {
+                 jQuery(".fieldset-wrapper").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
+
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+    );
+    return $form;
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_theme() {
-  $themes = array(
-      'section_wise_ordering' => array(
-          'template' => 'templates/section-ordering-data',
-      ),
-      'top_stories_ordering' => array(
-          'template' => 'templates/top-stories-ordering-data',
-      ),
-      'home_page_feature' => array(
-          'template' => 'templates/home-page-feature',
-      ),
-      'we_may_suggest' => array(
-          'template' => 'templates/we-may-suggest',
-      ),
-      'widget_big_story_format' => array(
-          'template' => 'templates/big-story-format',
-      ),
-      'trending_videos_widget' => array(
-          'template' => 'templates/trending-videos-widget',
-      ),
-      'most_popular_widget' => array(
-          'template' => 'templates/most-popular-widget',
-      ),
-      'featured_photo_carousel' => array(
-          'template' => 'templates/featured-photo-carousel',
-      ),
-      'featured_photo_carousel_rollingslider' => array(
-          'template' => 'templates/featured-photo-carousel-rollingslider',
-      ),
-      'featured_video_carousel' => array(
-          'template' => 'templates/featured-video-carousel',
-      ),
-      'featured_video_carousel_rollingslider' => array(
-          'template' => 'templates/featured-video-carousel-rollingslider',
-      ),
-      'dont_miss_widget' => array(
-          'template' => 'templates/dont-miss-widget',
-      ),
-      'top_takes_videos_widget' => array(
-          'template' => 'templates/top-takes-videos-widget',
-      ),
-      'itg_widget_watch_right_now_videos_widget' => array(
-          'template' => 'templates/watch-right-now-videos-widget',
-      ),
-  );
-  return $themes;
+    $themes = array(
+        'section_wise_ordering' => array(
+            'template' => 'templates/section-ordering-data',
+        ),
+        'top_stories_ordering' => array(
+            'template' => 'templates/top-stories-ordering-data',
+        ),
+        'home_page_feature' => array(
+            'template' => 'templates/home-page-feature',
+        ),
+        'we_may_suggest' => array(
+            'template' => 'templates/we-may-suggest',
+        ),
+        'widget_big_story_format' => array(
+            'template' => 'templates/big-story-format',
+        ),
+        'trending_videos_widget' => array(
+            'template' => 'templates/trending-videos-widget',
+        ),
+        'most_popular_widget' => array(
+            'template' => 'templates/most-popular-widget',
+        ),
+        'featured_photo_carousel' => array(
+            'template' => 'templates/featured-photo-carousel',
+        ),
+        'featured_photo_carousel_rollingslider' => array(
+            'template' => 'templates/featured-photo-carousel-rollingslider',
+        ),
+        'featured_video_carousel' => array(
+            'template' => 'templates/featured-video-carousel',
+        ),
+        'featured_video_carousel_rollingslider' => array(
+            'template' => 'templates/featured-video-carousel-rollingslider',
+        ),
+        'dont_miss_widget' => array(
+            'template' => 'templates/dont-miss-widget',
+        ),
+        'top_takes_videos_widget' => array(
+            'template' => 'templates/top-takes-videos-widget',
+        ),
+        'itg_widget_watch_right_now_videos_widget' => array(
+            'template' => 'templates/watch-right-now-videos-widget',
+        ),
+    );
+    return $themes;
 }
 
 /**
  * {@inheritdoc}
  */
 function get_required_data_from_entity_id($entity_id) {
-  return entity_load('node', array($entity_id));
+    return entity_load('node', array($entity_id));
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  switch ($form['#id']) {
-    case 'views-exposed-form-home-page-feature-widget-page-1':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      //$form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      //$form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
-      break;
-    case 'views-exposed-form-story-widget-most-popular':
-      $form['title']['#attributes']['placeholder'] = t('Story Title');
-      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Story ID');
-      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
-      break;
-    case 'views-exposed-form-story-widget-page-1':
-      $form['title']['#attributes']['placeholder'] = t('Story Title');
-      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Story ID');
-      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
-      break;
-    case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      break;
-    case 'views-exposed-form-story-widget-trending-videos':
-      $form['title']['#attributes']['placeholder'] = t('Video Title');
-      $form['nid']['#attributes']['placeholder'] = t('Video ID');
-      break;
-    case 'views-exposed-form-story-widget-watch-right-now':
-      $form['title']['#attributes']['placeholder'] = t('Video Title');
-      $form['nid']['#attributes']['placeholder'] = t('Video ID');
-      break;
-    case 'views-exposed-form-story-widget-top-takes-video':
-      $form['title']['#attributes']['placeholder'] = t('Video Title');
-      $form['nid']['#attributes']['placeholder'] = t('Video ID');
-      break;
-    case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      break;
-    case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      break;
-    case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
-      $form['title']['#attributes']['placeholder'] = t('Anchor name');
-      $form['title']['#autocomplete_path'] = 'anchor-list/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Anchor ID');
-      $form['nid']['#autocomplete_path'] = 'anchor-list-nid/autocomplete';
-      break;
-    case 'views-exposed-form-section-wise-draggable-content-order-page':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $form['#validate'][] = 'custom_section_wise_validate';
-      break;
-    case 'views-exposed-form-section-wise-content-ordering-list-page':
-      $form['#validate'][] = 'custom_section_wise_validate';
-      break;
-  }
+    switch ($form['#id']) {
+        case 'views-exposed-form-home-page-feature-widget-page-1':
+            $form['title']['#attributes']['placeholder'] = t('Content Title');
+            //$form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+            $form['nid']['#attributes']['placeholder'] = t('Content ID');
+            //$form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
+            break;
+        case 'views-exposed-form-story-widget-most-popular':
+            $form['title']['#attributes']['placeholder'] = t('Story Title');
+            $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+            $form['nid']['#attributes']['placeholder'] = t('Story ID');
+            $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
+            break;
+        case 'views-exposed-form-story-widget-page-1':
+            $form['title']['#attributes']['placeholder'] = t('Story Title');
+            $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+            $form['nid']['#attributes']['placeholder'] = t('Story ID');
+            $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
+            break;
+        case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
+            $form['title']['#attributes']['placeholder'] = t('Content Title');
+            $form['nid']['#attributes']['placeholder'] = t('Content ID');
+            break;
+        case 'views-exposed-form-story-widget-trending-videos':
+            $form['title']['#attributes']['placeholder'] = t('Video Title');
+            $form['nid']['#attributes']['placeholder'] = t('Video ID');
+            break;
+        case 'views-exposed-form-story-widget-watch-right-now':
+            $form['title']['#attributes']['placeholder'] = t('Video Title');
+            $form['nid']['#attributes']['placeholder'] = t('Video ID');
+            break;
+        case 'views-exposed-form-story-widget-top-takes-video':
+            $form['title']['#attributes']['placeholder'] = t('Video Title');
+            $form['nid']['#attributes']['placeholder'] = t('Video ID');
+            break;
+        case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
+            $form['title']['#attributes']['placeholder'] = t('Content Title');
+            $form['nid']['#attributes']['placeholder'] = t('Content ID');
+            break;
+        case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
+            $form['title']['#attributes']['placeholder'] = t('Content Title');
+            $form['nid']['#attributes']['placeholder'] = t('Content ID');
+            break;
+        case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
+            $form['title']['#attributes']['placeholder'] = t('Anchor name');
+            $form['title']['#autocomplete_path'] = 'anchor-list/autocomplete';
+            $form['nid']['#attributes']['placeholder'] = t('Anchor ID');
+            $form['nid']['#autocomplete_path'] = 'anchor-list-nid/autocomplete';
+            break;
+        case 'views-exposed-form-section-wise-draggable-content-order-page':
+            $form['title']['#attributes']['placeholder'] = t('Content Title');
+            $form['nid']['#attributes']['placeholder'] = t('Content ID');
+            $form['#validate'][] = 'custom_section_wise_validate';
+            break;
+        case 'views-exposed-form-section-wise-content-ordering-list-page':
+            $form['#validate'][] = 'custom_section_wise_validate';
+            break;
+    }
 }
 
 function custom_section_wise_validate($form, &$form_state) {
-  if ($form_state['values']['category_tid'] == 'All' && isset($_GET['category_tid'])) {
-    form_set_error('category_tid', 'Category is required');
-  }
+    if ($form_state['values']['category_tid'] == 'All' && isset($_GET['category_tid'])) {
+        form_set_error('category_tid', 'Category is required');
+    }
 }
 
 /**
@@ -789,31 +819,25 @@ function custom_section_wise_validate($form, &$form_state) {
  * {@inheritdoc}
  */
 function _get_widget_name($view_name, $page_name) {
-  $widget = "";
-  // TODO: Use switch-case
+    $widget = "";
+    // TODO: Use switch-case
 
-  if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
-    $widget = 'section_wise_widget';
-  }
-  else if ($page_name == 'we_may_suggest_widget') {
-    $widget = 'we_may_suggest_widget';
-  }
-  else if ($page_name == 'most_popular_widget') {
-    $widget = 'we_may_suggest_widget';
-  }
-  else if ($page_name == 'big_story_format') {
-    $widget = 'big_story_format_widget';
-  }
-  else if ($page_name == 'photo_carousel_list') {
-    $widget = 'photo_carousel_list_widget';
-  }
-  else if ($page_name == 'video_carousel_list') {
-    $widget = 'video_carousel_list_widget';
-  }
-  else if ($page_name == 'dont_miss_content') {
-    $widget = 'dont_miss_content_widget';
-  }
-  return $widget;
+    if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
+        $widget = 'section_wise_widget';
+    } else if ($page_name == 'we_may_suggest_widget') {
+        $widget = 'we_may_suggest_widget';
+    } else if ($page_name == 'most_popular_widget') {
+        $widget = 'we_may_suggest_widget';
+    } else if ($page_name == 'big_story_format') {
+        $widget = 'big_story_format_widget';
+    } else if ($page_name == 'photo_carousel_list') {
+        $widget = 'photo_carousel_list_widget';
+    } else if ($page_name == 'video_carousel_list') {
+        $widget = 'video_carousel_list_widget';
+    } else if ($page_name == 'dont_miss_content') {
+        $widget = 'dont_miss_content_widget';
+    }
+    return $widget;
 }
 
 /**
@@ -825,10 +849,10 @@ function _get_widget_name($view_name, $page_name) {
  * {@inheritdoc}
  */
 function itg_widget_views_api() {
-  return array(
-      'api' => 3,
-      'path' => drupal_get_path('module', 'itg_widget') . '/includes/views',
-  );
+    return array(
+        'api' => 3,
+        'path' => drupal_get_path('module', 'itg_widget') . '/includes/views',
+    );
 }
 
 /**
@@ -836,11 +860,11 @@ function itg_widget_views_api() {
  * {@inheritdoc}
  */
 function itg_widget_views_query_alter(&$view, &$query) {
-  if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
-    unset($query->table_queue['field_data_field_type']);
-    unset($query->tables['node']['field_data_field_type']);
-    unset($query->where[1]['conditions'][2]);
-  }
+    if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
+        unset($query->table_queue['field_data_field_type']);
+        unset($query->tables['node']['field_data_field_type']);
+        unset($query->where[1]['conditions'][2]);
+    }
 //  if ($view->name == 'category_wise_content_list' && $view->current_display == 'page') {
 ////    $requested_uri = request_uri();
 ////    $requested_uri_chunk = explode('/', $requested_uri);
@@ -868,12 +892,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
  * @param string $form
  */
 function get_nodequeue_load_queue_by_name($qname) {
-  try {
-    $node_queue_object = nodequeue_load_queue_by_name($qname);
-    return isset($node_queue_object->qid) ? $node_queue_object->qid : null;
-  } catch (Exception $e) {
-    watchdog('Node Queue Error/Warning', 'There is some error while accessing node queue');
-  }
+    try {
+        $node_queue_object = nodequeue_load_queue_by_name($qname);
+        return isset($node_queue_object->qid) ? $node_queue_object->qid : null;
+    } catch (Exception $e) {
+        watchdog('Node Queue Error/Warning', 'There is some error while accessing node queue');
+    }
 }
 
 /**
@@ -883,17 +907,17 @@ function get_nodequeue_load_queue_by_name($qname) {
  * @return json Autocomplete callback for category manager view
  */
 function itg_widget_anchor_autocomplete_name($string) {
-  $itg_query = db_select('node', 'n');
-  $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
-  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
-  $itg_query->condition('n.title', '%' . $string . '%', 'LIKE')
-          ->fields('n', array('title'));
-  $itg_result = $itg_query->execute();
-  $result = array();
-  foreach ($itg_result as $value) {
-    $result[$value->title] = $value->title;
-  }
-  return drupal_json_output($result);
+    $itg_query = db_select('node', 'n');
+    $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
+    $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
+    $itg_query->condition('n.title', '%' . $string . '%', 'LIKE')
+            ->fields('n', array('title'));
+    $itg_result = $itg_query->execute();
+    $result = array();
+    foreach ($itg_result as $value) {
+        $result[$value->title] = $value->title;
+    }
+    return drupal_json_output($result);
 }
 
 /**
@@ -903,17 +927,17 @@ function itg_widget_anchor_autocomplete_name($string) {
  * @return json Autocomplete callback for category manager view
  */
 function itg_widget_anchor_autocomplete_id($string) {
-  $itg_query = db_select('node', 'n');
-  $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
-  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
-  $itg_query->condition('n.nid', '%' . $string . '%', 'LIKE')
-          ->fields('n', array('nid'));
-  $itg_result = $itg_query->execute();
-  $result = array();
-  foreach ($itg_result as $value) {
-    $result[$value->nid] = $value->nid;
-  }
-  return drupal_json_output($result);
+    $itg_query = db_select('node', 'n');
+    $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
+    $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
+    $itg_query->condition('n.nid', '%' . $string . '%', 'LIKE')
+            ->fields('n', array('nid'));
+    $itg_result = $itg_query->execute();
+    $result = array();
+    foreach ($itg_result as $value) {
+        $result[$value->nid] = $value->nid;
+    }
+    return drupal_json_output($result);
 }
 
 /**
@@ -923,17 +947,17 @@ function itg_widget_anchor_autocomplete_id($string) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_views_view(&$vars) {
-  $view_name = $vars['view']->name;
-  $widget_views = array(
-      'widget_anchors_listing',
-      'home_page_feature_widget',
-      'story_widget',
-      'section_wise_content_ordering_list',
-      'section_wise_draggable_content_order',
-  );
-  if (in_array($view_name, $widget_views)) {
-    $vars['classes_array'][] = 'widgets-view';
-  }
+    $view_name = $vars['view']->name;
+    $widget_views = array(
+        'widget_anchors_listing',
+        'home_page_feature_widget',
+        'story_widget',
+        'section_wise_content_ordering_list',
+        'section_wise_draggable_content_order',
+    );
+    if (in_array($view_name, $widget_views)) {
+        $vars['classes_array'][] = 'widgets-view';
+    }
 }
 
 /**
@@ -942,50 +966,50 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
-  if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['tid'] == '399')) {
+    if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['tid'] == '399')) {
 
-    module_load_include('inc', 'itg_widget', 'includes/itg_widget_anchor_landing');
-    $anchor_id = $vars['nid'];
-    $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
+        module_load_include('inc', 'itg_widget', 'includes/itg_widget_anchor_landing');
+        $anchor_id = $vars['nid'];
+        $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
 
-    // Query to get anchor title , image and body filed
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_extra_large_image', 'el_image', 'el_image.entity_id=n.nid');
-    $query->leftJoin('file_managed', 'managed', 'el_image.field_story_extra_large_image_fid=managed.fid');
-    $query->leftJoin('field_data_body', 'body', 'body.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
-    $query->fields('n', array('title'));
-    $query->fields('managed', array('uri'));
-    $query->fields('body', array('body_value'));
-    $query->condition('n.nid', $anchor_id);
-    $query->condition('n.status','1');
-    $anchor_description_block_data = $query->execute()->fetchAssoc();
-    //pr($result);
-    // Query to get category in which anchor is associated.
-    $cat_query = db_select('field_data_field_story_category', 'cat');
-    $cat_query->leftJoin('node', 'n', 'n.nid=cat.entity_id');
-    $cat_query->fields('cat', array('field_story_category_tid'));
-    $cat_query->condition('cat.entity_id', $anchor_id);
-    $categories_of_anchor = $cat_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        // Query to get anchor title , image and body filed
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_story_extra_large_image', 'el_image', 'el_image.entity_id=n.nid');
+        $query->leftJoin('file_managed', 'managed', 'el_image.field_story_extra_large_image_fid=managed.fid');
+        $query->leftJoin('field_data_body', 'body', 'body.entity_id=n.nid');
+        $query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
+        $query->fields('n', array('title'));
+        $query->fields('managed', array('uri'));
+        $query->fields('body', array('body_value'));
+        $query->condition('n.nid', $anchor_id);
+        $query->condition('n.status', '1');
+        $anchor_description_block_data = $query->execute()->fetchAssoc();
+        //pr($result);
+        // Query to get category in which anchor is associated.
+        $cat_query = db_select('field_data_field_story_category', 'cat');
+        $cat_query->leftJoin('node', 'n', 'n.nid=cat.entity_id');
+        $cat_query->fields('cat', array('field_story_category_tid'));
+        $cat_query->condition('cat.entity_id', $anchor_id);
+        $categories_of_anchor = $cat_query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-    $video_entity_ids = array();
+        $video_entity_ids = array();
 
-    
-    // Query for getting videos id of perticular anchors
-    foreach ($categories_of_anchor as $category) {
-      $video_query = db_select('node', 'n');
-      $video_query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
-      $video_query->leftJoin('field_data_field_video_anchor', 'anchor', 'anchor.entity_id=n.nid');
-      $video_query->fields('cat', array('entity_id', 'field_story_category_tid'));
-      $video_query->condition('cat.field_story_category_tid', $category);
-      $video_query->condition('anchor.field_video_anchor_target_id', $anchor_id);
-      $video_query->groupBy('field_story_category_tid');
-      $video_query->condition('n.type','videogallery');
-      $video_query->condition('n.status','1');
-      $video_query->orderBy('n.created');
-      $video_entity_ids[] = $video_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+        // Query for getting videos id of perticular anchors
+        foreach ($categories_of_anchor as $category) {
+            $video_query = db_select('node', 'n');
+            $video_query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
+            $video_query->leftJoin('field_data_field_video_anchor', 'anchor', 'anchor.entity_id=n.nid');
+            $video_query->fields('cat', array('entity_id', 'field_story_category_tid'));
+            $video_query->condition('cat.field_story_category_tid', $category);
+            $video_query->condition('anchor.field_video_anchor_target_id', $anchor_id);
+            $video_query->groupBy('field_story_category_tid');
+            $video_query->condition('n.type', 'videogallery');
+            $video_query->condition('n.status', '1');
+            $video_query->orderBy('n.created');
+            $video_entity_ids[] = $video_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        $vars['data'] = $video_entity_ids;
     }
-
-    $vars['data'] = $video_entity_ids;
-  }
 }
