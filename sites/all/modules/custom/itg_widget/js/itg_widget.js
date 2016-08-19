@@ -36,25 +36,71 @@ Drupal.behaviors.itg_widgets = {
                 }
             }
         });
+        // This code use form check/uncheck all check box function
+        jQuery('.vbo-table-select-all').click(function() {
 
-     jQuery('.removeid').live('click',function(){
-         var getids=jQuery(this).attr('cid');
-         jQuery(this).parent().remove();
-         jQuery('.vbo-select').each(function() {
-             
-             if(jQuery(this).val()==getids)
-             {
-                 jQuery(this).attr('checked',false);
-                 
-             }
-             
-         })
-         var formid = jQuery("input[name='form_id']").val();
-            
-            
-                var type = 'REMOVE';
-           
+            var mainids = [];
+            var formid = jQuery("input[name='form_id']").val();
+            if (jQuery(this).is(':checked'))
+            {
+                type = 'ADD';
 
+            }
+            else {
+                type = 'REMOVE';
+            }
+
+            jQuery('.vbo-select').each(function() {
+                var checkids = jQuery(this).val();
+                mainids.push(jQuery(this).val());
+                if (type == 'ADD')
+                {
+                    if (!jQuery(this).is(':checked'))
+                    {
+                        jQuery('.fieldset-wrapper').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
+                    }
+                } else {
+                    jQuery('#spn_' + checkids).remove();
+                }
+            })
+            jQuery.ajax({
+                url: Drupal.settings.basePath + 'setids',
+                type: 'post', beforeSend:
+                        function() {
+                            jQuery('#ajex-loader').show();
+
+                        },
+                data: {'checkid': mainids, 'formid': formid, 'type': type},
+                success: function(data) {
+                    setTimeout(function() {
+
+                        jQuery('#ajex-loader').hide();
+
+                    }, 500);
+
+                },
+                error: function(xhr, desc, err) {
+                    console.log(xhr);
+                    console.log("Details: " + desc + "\nError:" + err);
+                }
+            });
+        });
+
+//This code use remove ids functionality from top 
+
+        jQuery('.removeid').live('click', function() {
+            var getids = jQuery(this).attr('cid');
+            jQuery(this).parent().remove();
+            jQuery('.vbo-select').each(function() {
+                if (jQuery(this).val() == getids)
+                {
+                    jQuery(this).attr('checked', false);
+
+                }
+
+            })
+            var formid = jQuery("input[name='form_id']").val();
+            var type = 'REMOVE';
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'setids',
                 type: 'post', beforeSend:
@@ -76,10 +122,10 @@ Drupal.behaviors.itg_widgets = {
                     console.log("Details: " + desc + "\nError:" + err);
                 }
             });
-         
-         
-     })
 
+        })
+
+//This code use add ids functionality from top 
 
         jQuery('.vbo-select').click(function() {
             var formid = jQuery("input[name='form_id']").val();
@@ -87,12 +133,12 @@ Drupal.behaviors.itg_widgets = {
             if (jQuery(this).is(':checked'))
             {
                 type = 'ADD';
-                jQuery('.fieldset-wrapper').append('<span id="spn_'+checkids+'" class="content-ids">'+checkids+'<a class="removeid" cid="'+checkids+'" href="javascript:void(0)">X</a></span>');
+                jQuery('.fieldset-wrapper').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
 
             }
             else {
                 type = 'REMOVE';
-                jQuery('#spn_'+checkids).remove();
+                jQuery('#spn_' + checkids).remove();
             }
 
             jQuery.ajax({
@@ -117,7 +163,7 @@ Drupal.behaviors.itg_widgets = {
                 }
             });
         });
-        
+
 
         jQuery(".widgets-view .view-link").parent().attr("target", "_blank");
         //jQuery(".widgets-view .view-link").css("text-transform","capitalize");
