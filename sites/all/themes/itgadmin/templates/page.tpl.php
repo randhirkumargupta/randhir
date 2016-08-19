@@ -32,7 +32,7 @@ if (!in_array('administrator', $user->roles)) {
     }
 }
 ?>
-
+<div id="ajex-loader" style="display: none"><img class="widget-loader" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 <div id="page">
 
     <header class="header" id="header" role="banner">
