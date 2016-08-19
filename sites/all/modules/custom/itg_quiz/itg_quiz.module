@@ -9,8 +9,8 @@
  */
 
 /**
- * Implement hook_permission
- * @return type
+ * Implements hook_permission.
+ * {@inheritdoc}
  */
 function itg_quiz_permission() {
     return array(
@@ -25,8 +25,8 @@ function itg_quiz_permission() {
 }
 
 /**
- * Implement hook_menu
- * @return string
+ * Implements hook_menu.
+ * {@inheritdoc}
  */
 function itg_quiz_menu() {
   
@@ -69,6 +69,7 @@ function itg_quiz_menu() {
 
 /**
  * Implements hook_block_info().
+ * {@inheritdoc}
  */
 function itg_quiz_block_info() {
   $blocks['quiz_tab_form_block'] = array(
@@ -80,8 +81,8 @@ function itg_quiz_block_info() {
 }
 
 /**
- * Implements hook_block_view()
- * @param type $delta
+ * Implements hook_block_view().
+ * {@inheritdoc}
  */
 function itg_quiz_block_view($delta = '') {
   global $user;
@@ -100,10 +101,7 @@ function itg_quiz_block_view($delta = '') {
 
 /**
  * Implements hook_theme().
- * @param type $existing
- * @param type $type
- * @param type $theme
- * @param type $path
+ * {@inheritdoc}
  */
 function itg_quiz_theme() {
   $themes = array(
@@ -119,22 +117,17 @@ function itg_quiz_theme() {
 
 /***************************Form Related hooks*********************************/
 /**
- * Implement hook_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * Implements hook_form_alter.
+ * {@inheritdoc}
  */
 function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 
-  global $user;
-  //$form['field_quiz_add_questions']['#attributes']['class'][] = 'shravan';
-  //Set destination for quiz form
   if ($form_id == 'quiz_node_form') {
     
-      //Set Destination
+      // Set Destination
       $destination = 'manage-quiz';
      
-      //Form fields treatment
+      // Form fields treatment
       $form['title']['#title'] = 'Quiz Title';
       $form['title']['#description'] = '<p>' . t('Please enter quiz title.') . '</p>';
       $form['actions']['cancel'] = array(
@@ -143,8 +136,11 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
         '#value' => t('Cancel'),
       );
       $form['field_quiz_add_questions'][LANGUAGE_NONE]['#title'] = '';
+      $form['field_quiz_answer_type']['#access'] = FALSE;
+      $form['field_quiz_options']['#access'] = FALSE;
       
-      //After build and custom summit callback
+      
+      // After build and custom summit callback
       $form['#after_build'][] = 'itg_quiz_form_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_quiz_form_custom_submit_callback';
     }
@@ -153,7 +149,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
       drupal_set_title('India Today Quiz');
     }
     
-    //Add two answer option default
+    // Add two answer option default
     if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'quiz') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')) {
       drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-quiz-options-answer .field-add-more-submit').mousedown();
         });", 'inline');
@@ -161,19 +157,19 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * Custom function on submit of quiz form
- * @param Array $form
- * @param Array $form_state
+ * Custom callback function on submit of quiz form.
+ * @param array $form
+ * @param array $form_state
  */
  function itg_quiz_form_custom_submit_callback($form, &$form_state) {
   
-  //Unset drupal redirection and add custom redirection URL
+  // Unset drupal redirection and add custom redirection URL.
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
   $form_state['redirect'] = 'manage-quiz';
 
-  //Set custom message on creation and updation of quiz form.
+  // Set custom message on creation and updation of quiz form.
   if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
   }
@@ -187,15 +183,15 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * After build function for quiz
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * Custom callback function after build.
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function itg_quiz_form_after_build($form, &$form_state) {
   global $user, $base_url;
   
-  //Extract type of node
+  // Extract type of node
   if (arg(0) == 'node') {
     if (arg(1) == 'add') {
         $type = arg(2);
@@ -206,8 +202,26 @@ function itg_quiz_form_after_build($form, &$form_state) {
       $nid = arg(1);
     }
   }
+  
+  // Add Question separator(Question1, Question2...)
+  for ($news = 0; $news <= $form['field_quiz_add_questions']['und']['#max_delta']; $news++) {
+    $count = $news + 1;
+    if ($count == 1) {
+      $padding = '0px';
+    }
+    else {
+      $padding = '25px';
+    }
 
-  //Array used in itg_quiz.js
+    $form['field_quiz_add_questions']['und'][$news]['question_separator'] = array(
+        '#type' => 'item',
+        '#markup' => '<div style="padding-top: '.$padding.'"><strong>Question ' . $count . ':</strong></div>',
+        '#weight' => -1,
+    );
+  }
+  
+
+  // Array used in itg_quiz.js.
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -216,10 +230,10 @@ function itg_quiz_form_after_build($form, &$form_state) {
   
   drupal_add_js(array('itg_quiz' => array('settings' => $settings)), array('type' => 'setting'));
   
-  //Add JS for quiz
+  // Add JS for quiz.
    drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz.js', array('weight' => 1));
     
-  //Unset metatag description
+  // Unset metatag description.
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags']['#description']);
  
@@ -230,11 +244,11 @@ function itg_quiz_form_after_build($form, &$form_state) {
 
 /**
  * Implement hook_views_pre_render
- * @param Object $view
+ * {@inheritdoc}
  */
 function itg_quiz_views_pre_render(&$view) {
   
-  //Add "Create Magazine" button on listing page of magazine
+  // Add "Create Quiz" button on listing page of quiz.
   if ($view->name == "manage_quiz") {
     $header_content_quiz = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_quiz .= l(t('Create Quiz'), 'node/add/quiz');
@@ -243,16 +257,14 @@ function itg_quiz_views_pre_render(&$view) {
 }
 
 /**
- * Implement hook_form_views_exposed_form_alter
- * @param Array $form
- * @param Array $form_state
- * @param String $form_id
+ * Implement hook_form_views_exposed_form_alter.
+ * {@inheritdoc}
  */
 function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   
    if ($form['#id'] == 'views-exposed-form-manage-quiz-page') {
      
-     //Call function autocomplete to show matching titles
+     // Call function autocomplete to show matching titles.
      $form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));
      $form['nid']['#autocomplete_path'] = 'content-nid-list/quiz/autocomplete';
@@ -263,29 +275,27 @@ function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
 /*******************************Node Related hooks*****************************/
 
 /**
- * 
- * @param Object $node
- * @param Array $form
- * @param Array $form_state
+ * Implements hook_node_validate.
+ * {@inheritdoc}
  */
 function itg_quiz_node_validate($node, $form, &$form_state) {
-  
-  //Date validation for start date and end date
+
+  // Date validation for start date and end date.
   if ($node->type == 'quiz') {
     if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
       if (strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
         form_set_error('field_quiz_end_date', t('Quiz end date must be greater or equal to start date.'));
+      }
     }
-  }
-    
-    //Add validation for answer options(Every question must have atleast two answer options with one correct answer.)
+
+    // Add validation for answer options(Every question must have atleast two answer options with one correct answer).
     foreach ($node->field_quiz_add_questions[LANGUAGE_NONE] as $key => $question_arr) {
       $question_txt = $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'];
-      
+
       if (is_numeric($key)) {
         if (count($question_arr['field_quiz_options_answer'][LANGUAGE_NONE]) < 3) {
           form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>@question</strong>?', array('@question' => $question_txt)));
-}
+        }
 
         $correct_ans_available = FALSE;
         foreach ($question_arr['field_quiz_options_answer'][LANGUAGE_NONE] as $correct_ans_arr) {
@@ -305,8 +315,8 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
 /*******************************Common Functions*****************************/
 
 /**
- * Get Active node for quiz
- * @return Array
+ * Get active node for quiz.
+ * @return array
  */
 function itg_quiz_get_current_quiz() {
   $curr_time = strtotime(date('Y-m-d').' 00:00:00');
@@ -321,7 +331,6 @@ function itg_quiz_get_current_quiz() {
     $nid = $record['nid'];
   }
 
-  //Load Node
   $node = node_load($nid);
   $quiz_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
 
@@ -337,15 +346,16 @@ function itg_quiz_get_current_quiz() {
 }
 
 /**
- * Get quiz percentage taken by a user type(Anonymous/Authenticated)
- * @param Int $nid
- * @param String $user_type
+ * Get quiz percentage taken by a user(Anonymous/Authenticated).
+ * @param int $nid
+ * @param string $user_type
  * @return string
  */
 function itg_quiz_get_quiz_by_users($nid, $user_type){
   
-  //Get total quiz for a node
+  // Get total quiz for a node.
   $total_quiz = itg_quiz_get_total_quiz($nid);
+  
   if (!$total_quiz) {
     return '0%';
   } else {
@@ -361,9 +371,9 @@ function itg_quiz_get_quiz_by_users($nid, $user_type){
 }
 
 /**
- * Get total number of quiz taken by users for a node
- * @param Int $nid
- * @return Int
+ * Get total number of quiz taken by users for a node.
+ * @param int $nid
+ * @return int
  */
 function itg_quiz_get_total_quiz($nid){
     $result = db_select('itg_quiz_user', 'isu')
@@ -381,9 +391,9 @@ function itg_quiz_get_total_quiz($nid){
 
 
 /**
- * Get Answer detail attempt by users
- * @param Int $nid
- * @return Int
+ * Get answer detail attempt by users.
+ * @param int $nid
+ * @return int
  */
 function itg_quiz_contest_result($nid, $unique_key, $param = NULL){
   if (empty($param)) {
@@ -440,6 +450,12 @@ function itg_quiz_contest_result($nid, $unique_key, $param = NULL){
  
 }
 
+/**
+ * Get total score using unique.
+ * @param int $nid
+ * @param sting $unique_key
+ * @return int
+ */
 function itg_quiz_get_total_score($nid, $unique_key){
     $result = db_select('itg_quiz_detail', 'qd')
           ->fields('qd')
@@ -452,9 +468,9 @@ function itg_quiz_get_total_score($nid, $unique_key){
 }
 
 /**
- * Get winners list
- * @param Int $nid
- * @return Int
+ * Get winners list.
+ * @param int $nid
+ * @return int
  */
 function itg_quiz_winners_list($nid, $range){
     if (!empty($range)) {
@@ -486,9 +502,9 @@ function itg_quiz_winners_list($nid, $range){
 }
 
 /**
- * Get count for unique key
- * @param Int $nid
- * @return Int
+ * Get count for unique key.
+ * @param int $nid
+ * @return int
  */
 function itg_quiz_winners_count_uniquekey($nid, $unique_key) {
   $result = db_select('itg_quiz_detail', 'qd')
@@ -506,9 +522,9 @@ function itg_quiz_winners_count_uniquekey($nid, $unique_key) {
 }
 
 /**
- * Get user name to display winners list
- * @param type $unique_key
- * @return type
+ * Get user name to display winners list.
+ * @param string $unique_key
+ * @return string
  */
 function itg_quiz_winner_user_list($unique_key) {
   $result = db_select('itg_quiz_detail', 'qd')
@@ -528,9 +544,9 @@ function itg_quiz_winner_user_list($unique_key) {
 }
 
 /**
- * Fetch correct Answer
- * @param Int $ques_id
- * @return Array
+ * Fetch correct answer.
+ * @param int $ques_id
+ * @return array
  */
 function itg_quiz_get_correct_answer($ques_id){
   $question_detail = entity_load('field_collection_item', array($ques_id));
@@ -546,7 +562,7 @@ function itg_quiz_get_correct_answer($ques_id){
 }
 
 /**
- * View User List, who have attempted quiz
+ * Prepare users list link using in view listing.
  * @param type $nid
  * @return string
  */

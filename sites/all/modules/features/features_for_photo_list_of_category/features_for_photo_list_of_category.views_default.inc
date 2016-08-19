@@ -333,7 +333,6 @@ function features_for_photo_list_of_category_views_default_views() {
   /* Display: photo list of category for view page */
   $handler = $view->new_display('block', 'photo list of category for view page', 'block_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Other Albums';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';

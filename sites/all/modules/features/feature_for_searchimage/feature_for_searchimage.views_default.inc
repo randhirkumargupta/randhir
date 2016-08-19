@@ -74,10 +74,8 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'mini';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Apache Solr: sm_thumb_thumbnail_field_story_extra_large_image */
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['id'] = 'sm_thumb_thumbnail_field_story_extra_large_image';
