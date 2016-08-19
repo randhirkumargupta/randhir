@@ -20,14 +20,14 @@ function features_for_quiz_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Add Quiz Question',
+    'label' => 'Add Quiz Questions',
     'weight' => '2',
     'children' => array(
       0 => 'field_quiz_add_questions',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Add Quiz Question',
+      'label' => 'Add Quiz Questions',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => 'tab-quiz-add-questions',
@@ -186,7 +186,7 @@ function features_for_quiz_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Add Quiz Question');
+  t('Add Quiz Questions');
   t('Basic Settings');
   t('Categorization');
   t('Date Settings');
