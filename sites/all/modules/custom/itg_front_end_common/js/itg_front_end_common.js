@@ -46,10 +46,12 @@ jQuery("#slider-range").slider({
           {
             jQuery(this).show().removeClass('hide-div');
             jQuery('.no-record').hide();
+            jQuery(this).parent().show();
 
           }
           else {
             jQuery(this).hide().addClass('hide-div');
+            jQuery(this).parent().hide();
           }
           
             if (jQuery(this).hasClass('hide-div'))
