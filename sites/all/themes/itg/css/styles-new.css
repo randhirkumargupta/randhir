@@ -180,6 +180,10 @@
   background-color: #f3f3f3;
 }
 
+.itg-common-section .droppable {
+  height: 408px;
+}
+
 .widget-wrapper {
   height: 100%;
   overflow: hidden;
