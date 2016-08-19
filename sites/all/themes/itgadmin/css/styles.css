@@ -5894,20 +5894,21 @@ div.node #comments h2 {
   border: 1px solid #d9d9d9;
   width: 100%;
 }
-#search-preview .container {
+
+.view-searchimage .container {
   max-width: 100%;
 }
-#search-preview .search-img-list {
+.view-searchimage .search-img-list {
   margin: 20px 0;
 }
-#search-preview .search-img-list img {
+.view-searchimage .search-img-list img {
   display: inline-block;
   height: 96px;
   margin: 5px;
   vertical-align: top;
   width: 96px;
 }
-#search-preview ul.pager {
+.view-searchimage ul.pager {
   display: none;
 }
 
