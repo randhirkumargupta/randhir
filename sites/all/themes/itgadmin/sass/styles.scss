@@ -6193,3 +6193,30 @@ div.node{
     height: 100%;
   }
 }
+
+.views-widget-filter-shs_term_node_tid_depth{
+  #edit-category-tid.form-text{display: none;}
+}
+[id*="itg-mobile-services-search-form"]{
+  @extend .dib;
+  @extend .full;
+  margin-bottom: 20px;
+  .container-inline-date{
+    float: left;
+    width: auto;
+    clear: none;
+    .form-type-date-popup{
+      display: block;
+    }
+    .date-padding{
+      float: none;
+      label{
+        display: none;
+      }
+    }
+  }
+  .form-submit{
+    @extend .add-more;
+    margin-top: 18px;
+  }
+}

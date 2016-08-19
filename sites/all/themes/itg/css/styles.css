@@ -290,11 +290,14 @@ input[type="text"], select, input[type="password"] {
 }
 
 /*start header css*/
+header {
+  margin-bottom: 30px;
+}
+
 #block-itg-layout-manager-header-block {
   padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  background: #193c8d url(../images/mobile-header-bg.png) no-repeat top center;
+  background: #000;
 }
 #block-itg-layout-manager-header-block a {
   color: #fff;
@@ -1221,6 +1224,9 @@ footer .footer-copyright {
   font-size: 1rem;
   font-weight: 500;
 }
+.big-news .big-story-detail li a:hover {
+  color: #adacac;
+}
 .big-news .story-tag {
   position: relative;
   top: 0px;
@@ -1319,6 +1325,12 @@ footer .footer-copyright {
   background: #959595;
   height: 5px;
   width: 5px;
+}
+.itg-listing li a {
+  padding: 15px;
+}
+.itg-listing li:before {
+  display: none;
 }
 
 /*End CSS Top Story Home page*/
@@ -1655,7 +1667,7 @@ footer .footer-copyright {
   padding-left: 0;
   border-left: 0;
 }
-.view-front-end-global-search .attachment .search-menu a:hover {
+.view-front-end-global-search .attachment .search-menu a:hover, .view-front-end-global-search .attachment .search-menu a.active {
   color: #a00606;
 }
 .view-front-end-global-search .view-empty {
@@ -2912,6 +2924,7 @@ footer .footer-copyright {
 .poll-wrapper .poll-data .poll-replace-id .noofvotes, .poll-wrapper .poll-data .poll-replace-id .percentage {
   float: left;
   width: 100px;
+  padding-left: 20px;
 }
 .poll-wrapper .poll-data .poll-replace-id .poll-past-percentage-progess {
   width: 180px;
@@ -2944,6 +2957,10 @@ footer .footer-copyright {
   right: 0;
   bottom: 0;
   margin: auto;
+}
+.poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer .poll-ans-caption {
+  padding: 10px 15px;
+  display: inline-block;
 }
 .poll-wrapper .poll-data.relative-with-img {
   width: 56%;
@@ -3214,10 +3231,12 @@ footer .footer-copyright {
 .poll-banner .detail .voting-data .past-poll li .noofvotes, .poll-banner .detail .voting-data .past-poll li .percentage {
   float: left;
   width: 80px;
+  padding-left: 20px;
 }
 .poll-banner .detail .voting-data .past-poll li .poll-past-percentage-progess {
   width: 100px;
   float: left;
+  padding-left: 20px;
 }
 
 /*End Poll Landing page*/
@@ -3299,6 +3318,11 @@ footer .footer-copyright {
 #block-views-video-landing-header-block-1 .container {
   background: #000;
   padding: 10px 25px;
+}
+#block-views-video-landing-header-block-1 .view-header h3 {
+  font-size: 14px;
+  font-size: 0.875rem;
+  color: #fff;
 }
 #block-views-video-landing-header-block-1 .view-content .item-list {
   margin: 0 -10px;
@@ -3468,9 +3492,12 @@ footer .footer-copyright {
 
 /*CSS End Video landing Header*/
 /*video rolling slider*/
-#block-itg-widget-featured-photo-carousel-r {
+#block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r {
   background: #171717;
-  padding: 50px 0;
+  padding: 50px 0 0 0;
 }
 
 /*video rolling slider end*/
+.view-photo-list-of-category .view-filters {
+  display: none;
+}

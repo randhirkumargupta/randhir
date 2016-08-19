@@ -192,11 +192,13 @@ input[type="text"], select, input[type="password"]{
 #page{@extend .vtop; @extend .full; @extend .dib;}
 
 /*start header css*/
+header{
+    margin-bottom: 30px;
+}
 #block-itg-layout-manager-header-block{    
     padding-top: 20px;
-    box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    background: $header-bg  url(../images/mobile-header-bg.png) no-repeat top center;
+    box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);        
+    background:#000;
     ul{
      @extend .list-none;   
     }
@@ -1085,6 +1087,9 @@ footer{
             margin-bottom: 15px;
             a{
                 @include font(16px,null,$itg-font-medium);
+                &:hover{
+                    color: #adacac;
+                }
             }
         }
     }
@@ -1103,7 +1108,13 @@ footer{
     list-style: none;
     border: 1px solid $border-color;    
     li{
-        @include tab-listing;        
+        @include tab-listing; 
+        a{
+            padding:15px;
+        }
+        &:before{
+            display: none;
+        }
     }
 }
 /*End CSS Top Story Home page*/
@@ -1313,7 +1324,7 @@ footer{
                     padding-left: 0;
                     border-left: 0;
                 }
-                &:hover{
+                &:hover, &.active{
                     color: $red-color;
                 }
             }
@@ -2184,6 +2195,7 @@ footer{
             .noofvotes, .percentage{
                 float: left;
                 width: 100px;
+                padding-left: 20px;
             }
             .poll-past-percentage-progess{
                 width: 180px;
@@ -2216,6 +2228,10 @@ footer{
                         right: 0;
                         bottom: 0;
                         margin: auto;
+                    }
+                    .poll-ans-caption{
+                        padding: 10px 15px;
+                        display: inline-block;
                     }
                 }
             }
@@ -2365,7 +2381,7 @@ footer{
                             width: 59%;
                             .poll-past-percentage-progess{
                                 @include display-inline;
-                                height: 18px;
+                                height: 18px;                                
                                 /* background: #000; */
                             }
                         }
@@ -2417,10 +2433,12 @@ footer{
                         .noofvotes, .percentage{
                             float: left;
                             width: 80px;
+                            padding-left: 20px;
                         }
                         .poll-past-percentage-progess{
                             width: 100px;
-                            float: left;
+                            float: left;  
+                            padding-left: 20px;
                         }
                     }
                 }
@@ -2514,6 +2532,12 @@ footer{
     .container{
         background: #000;
         padding:10px 25px 
+    }
+    .view-header{
+        h3{
+            @include font(14px);
+            color: $white-color;
+        }
     }
     .view-content{
         .item-list{  
@@ -2679,8 +2703,14 @@ footer{
 
 /*CSS End Video landing Header*/
 /*video rolling slider*/
-#block-itg-widget-featured-photo-carousel-r{
+#block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r{
  background: #171717;   
-     padding: 50px 0;
+     padding: 50px 0 0 0;
 }
 /*video rolling slider end*/
+
+.view-photo-list-of-category{
+    .view-filters{
+        display: none;
+    }
+}

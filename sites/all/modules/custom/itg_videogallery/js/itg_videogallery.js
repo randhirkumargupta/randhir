@@ -172,8 +172,9 @@ jQuery('document').ready(function(){
 jQuery('.used-unused-select').live('change',function(){
    jQuery('#loader-data img').show();
     var select_value = jQuery(this).val();
+     var base_url = Drupal.settings.basePath;
      jQuery.ajax({
-            url: 'http://localhost/itg-new-work/dailymotion-ftp-videos-post',
+            url: base_url + '/dailymotion-ftp-videos-post',
             type: 'post',
             data: {'case': select_value},
             success: function(data) {

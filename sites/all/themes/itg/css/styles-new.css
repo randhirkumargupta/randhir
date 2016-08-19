@@ -159,12 +159,8 @@
   height: 321px;
 }
 
-.itg-layout-container .itg-top-section .top-colum-2 .droppable {
+.itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable {
   height: 673px;
-}
-
-.itg-layout-container .itg-top-section .top-colum-1 .droppable {
-  height: 637px;
 }
 
 .itg-layout-container .top-colum-3 .droppable {
@@ -325,7 +321,6 @@
 }
 
 .itg-widget .tab-buttons span {
-  font-weight: 700;
   padding: 0 3px;
 }
 
@@ -333,12 +328,16 @@
   font-size: 15px;
 }
 
-.ad-widget {
+.itg-layout-container .ad-widget {
   border: 1px solid #ddd;
   height: 321px;
   padding: 37px;
 }
-.ad-widget .sidebar-ad {
+.itg-layout-container .ad-widget .sidebar-ad {
   background: #ddd;
+  height: 100%;
+}
+
+.itg-layout-container .top-colum-3 .itg-widget-parent .droppable.sidebar-ad {
   height: 100%;
 }
