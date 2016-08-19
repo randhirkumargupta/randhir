@@ -3644,7 +3644,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_images_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_images_1']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_images_1']['settings'] = array(
-    'image_style' => 'thumbnail',
+    'image_style' => 'photo_landing_slider_thumb_88_86',
     'image_link' => '',
   );
   /* Sort criterion: Content: Post date */

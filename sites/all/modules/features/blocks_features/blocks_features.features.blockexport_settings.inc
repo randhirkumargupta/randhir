@@ -3859,7 +3859,7 @@ node/*/edit',
   'delta' => 'ask_an_expert',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -58,
+  'weight' => -66,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
@@ -7738,7 +7738,7 @@ draft-manage-astro',
   'delta' => 'we_may_suggest',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -57,
+  'weight' => -65,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -11194,7 +11194,7 @@ node/*/edit',
   'delta' => 'top_takes_videos_widget',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => 0,
+  'weight' => -63,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -11310,7 +11310,7 @@ snappost',
   'delta' => 'watch_right_now_videos_widget',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -56,
+  'weight' => -64,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -15481,12 +15481,12 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'node/*/edit',
   'title' => '',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 1093,
@@ -15495,12 +15495,12 @@ node/*/edit',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'node/*/edit',
   'title' => '',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 1094,
@@ -15509,12 +15509,12 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'node/*/edit',
   'title' => '',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 1095,
@@ -15523,12 +15523,12 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'node/*/edit',
   'title' => '',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 1096,
@@ -15537,12 +15537,12 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'node/*/edit',
   'title' => '',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 1097,
@@ -15551,12 +15551,243 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'node/*/edit',
   'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1098,
+  'module' => 'itg_widget',
+  'delta' => 'rhs_section_wise_order',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
   'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1099,
+  'module' => 'block',
+  'delta' => 1,
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1100,
+  'module' => 'block',
+  'delta' => 1,
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => -67,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1101,
+  'module' => 'block',
+  'delta' => 1,
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1102,
+  'module' => 'block',
+  'delta' => 1,
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1103,
+  'module' => 'block',
+  'delta' => 1,
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1104,
+  'module' => 'block',
+  'delta' => 1,
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1105,
+  'module' => 'block',
+  'delta' => 1,
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'user
+user/*
+taxonomy/term/*
+<front>
+snappost',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1106,
+  'module' => 'itg_widget',
+  'delta' => 'rhs_section_wise_order',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1107,
+  'module' => 'itg_widget',
+  'delta' => 'rhs_section_wise_order',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1108,
+  'module' => 'itg_widget',
+  'delta' => 'rhs_section_wise_order',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1109,
+  'module' => 'itg_widget',
+  'delta' => 'rhs_section_wise_order',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1110,
+  'module' => 'itg_widget',
+  'delta' => 'rhs_section_wise_order',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1111,
+  'module' => 'itg_widget',
+  'delta' => 'rhs_section_wise_order',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block_custom'][] = array(
+  'bid' => 1,
+  'body' => '<div class="ad-display-block">Ad</div>
+',
+  'info' => 'Ad display block for second side bar',
+  'format' => 'full_html',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',

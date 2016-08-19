@@ -367,6 +367,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/section-odering');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'page_2'; // page name
+      $info['nodequeue'] = 'top_stories';
       $data = itg_widget_top_stories_ordering_data($info);
       $block['content'] = theme("top_stories_ordering", array("data" => $data));
       break;
@@ -375,6 +376,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'most_popular_widget'; // page name
+      $info['nodequeue'] = 'most_popular';
       $data = itg_widget_most_popular_ordering_data($info);
       $block['content'] = theme("most_popular_widget", array("data" => $data));
       break;
@@ -390,6 +392,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'trending_videos_widget'; // page name
+      $info['nodequeue'] = 'trending_videos';
       $data = itg_widget_trending_videos_widget_ordering_data($info);
       $block['content'] = theme("trending_videos_widget", array("data" => $data));
       break;
@@ -398,6 +401,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'watch_right_now_widget'; // page name
+      $info['nodequeue'] = 'watch_right_now';
       $data = itg_widget_watch_right_now_videos_widget_ordering_data($info);
       $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
       break;
@@ -406,6 +410,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'top_takes_video_widget'; // page name
+      $info['nodequeue'] = 'top_takes_videos';
       $data = itg_widget_top_takes_videos_widget_ordering_data($info);
       $block['content'] = theme("top_takes_videos_widget", array("data" => $data));
       break;
@@ -414,6 +419,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/home-page-feature');
       $info['view_name'] = 'home_page_feature_widget'; // view name
       $info['page'] = 'page_2'; // page name
+      $info['nodequeue'] = 'home_page_feature';
       $data = itg_widget_home_page_feature_data($info);
       $block['content'] = theme("home_page_feature", array("data" => $data));
       break;
@@ -1014,4 +1020,24 @@ function itg_widget_preprocess_node(&$vars) {
     $categories_of_anchor = $cat_query->execute()->fetchAll(PDO::FETCH_ASSOC);
     pr($categories_of_anchor);
   }
+}
+
+/**
+ * Get data from nodequeue, if data doesn't exist in draggable view
+ * 
+ * @param string $nodequeue_name
+ * @return array
+ */
+function itg_widget_nodes_from_nodequeue($nodequeue_name) {
+  $today = date('Y-m-d 00:00:00');
+  $nodequeue_id = get_nodequeue_load_queue_by_name($nodequeue_name);
+  $nq_query = db_select('nodequeue_nodes', 'nq');
+  $nq_query->leftJoin('node','n','n.nid=nq.nid');
+  $nq_query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
+  $nq_query->condition('nq.qid', $nodequeue_id);
+  $nq_query->condition('n.status','1');
+  $nq_query->condition('fsed.field_story_expiry_date_value', $today, '>=');
+  $nq_query->addField('nq', 'nid', 'entity_id');
+  $nq_query->orderBy('n.nid','DESC');
+  return $nq_query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
