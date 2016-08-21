@@ -88,8 +88,15 @@ function get_itg_widget($widget_name, $filter_url = NULL) {
     return create_setion_widgets($filter_url);
   }
   elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {   
+    if (isset($widget_name) && ($widget_name == 'photo_list_of_category')) {
+      $block = 'block';
+    }
     
-    return views_embed_view($widget_name, 'block', $filter_url);
+    if (isset($widget_name) && ($widget_name == 'video_list_of_category')) {
+      $block = 'block_1';
+    }
+    
+    return views_embed_view($widget_name, $block, $filter_url);
   }
   else {      
     $block = block_load('itg_widget', $widget_name);

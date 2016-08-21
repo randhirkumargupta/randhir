@@ -633,7 +633,7 @@ function feature_for_photo_carousel_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<span><a data-view="photo_carousel_widget" data-page="photo_carousel" data-nid="[nid]" data-queueid=\'9\' class="remove_from_nodequeue_draggable_view" href="#"><span class="delete-link">delete</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '| <span><a data-view="photo_carousel_widget" data-page="photo_carousel" data-nid="[nid]" data-queueid=\'9\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Remove</span><a></span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -662,6 +662,11 @@ function feature_for_photo_carousel_views_default_views() {
   $handler->display->display_options['filters']['name']['expose']['label'] = 'Queue machine name';
   $handler->display->display_options['filters']['name']['expose']['operator'] = 'name_op';
   $handler->display->display_options['filters']['name']['expose']['identifier'] = 'name';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'photo-list-widget-listing';
 
   /* Display:  Photo Carousel  Widget */
@@ -868,7 +873,7 @@ function feature_for_photo_carousel_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['title']['label'] = 'PHOTO GALLERY TITLE';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -878,7 +883,7 @@ function feature_for_photo_carousel_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['label'] = 'Story ID';
+  $handler->display->display_options['fields']['nid']['label'] = 'PHOTO GALLERY ID';
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
@@ -922,25 +927,17 @@ function feature_for_photo_carousel_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Modified on';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Action';
-  /* Field: Content: Delete link */
-  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
-  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="delete-link">[delete_node]</span>';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Nid */
   $handler->display->display_options['sorts']['nid']['id'] = 'nid';
@@ -1070,6 +1067,11 @@ function feature_for_photo_carousel_views_default_views() {
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'photo-list-widget';
 
   /* Display: Featured Video Carousel Widget Listing */

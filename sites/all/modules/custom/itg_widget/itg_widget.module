@@ -685,6 +685,11 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     // $form_state['selection'] = $_SESSION[$form['#form_id']];
     //$form_state['values']['views_bulk_operations'] = $form_state['selection'];
   }
+  
+  // Add a node id contianer just below the bulk operation.
+  if (isset($form['select']['action::nodequeue_add_action'])) {
+    $form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container"></div>';
+  }
 }
 
 /**
@@ -1032,12 +1037,12 @@ function itg_widget_nodes_from_nodequeue($nodequeue_name) {
   $today = date('Y-m-d 00:00:00');
   $nodequeue_id = get_nodequeue_load_queue_by_name($nodequeue_name);
   $nq_query = db_select('nodequeue_nodes', 'nq');
-  $nq_query->leftJoin('node','n','n.nid=nq.nid');
+  $nq_query->leftJoin('node', 'n', 'n.nid=nq.nid');
   $nq_query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
   $nq_query->condition('nq.qid', $nodequeue_id);
-  $nq_query->condition('n.status','1');
+  $nq_query->condition('n.status', '1');
   $nq_query->condition('fsed.field_story_expiry_date_value', $today, '>=');
   $nq_query->addField('nq', 'nid', 'entity_id');
-  $nq_query->orderBy('n.nid','DESC');
+  $nq_query->orderBy('n.nid', 'DESC');
   return $nq_query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
