@@ -5567,7 +5567,7 @@ div.node{
   max-height: 127px;
   padding: 0;
   margin: 10px;
-  overflow-y: auto;
+  overflow-y: auto !important;
   li{
     padding: 10px;
     background-color: #fff;
@@ -6357,4 +6357,10 @@ div.node{
     text-indent: -9999px;
     width: 20px;
   }
+}
+.top-colum-1 .widget-settings .widget-title-wrapper{
+    width: 200px;
+    input[type="text"]{
+        display: block;
+    }
 }
