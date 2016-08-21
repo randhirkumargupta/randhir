@@ -1,34 +1,670 @@
-/*
-Sass::SyntaxError: ".rhs-section-ordering ul li.rhs-section-item-container .pic" failed to @extend ".pos-rel".
-The selector ".pos-rel" was not found.
-Use "@extend .pos-rel !optional" if the extend should be able to fail.
+/*====================== IndiaToday Variables =========================*/
+/*=======================================================================*/
+/*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
+/*Fonts used in Indiatoday site*/
+/*Colors used in Indiatoday site*/
+/*Background Colors used in Indiatoday site*/
+/*Border Colors used in Indiatoday site*/
+/*Text color in Indiatoday site*/
+/*Background color in Indiatoday site*/
+/*navigation font in Indiatoday site*/
+/*Full radius in Indiatoday site*/
+/*footer color in Indiatoday site*/
+/*font family an font weight mixins*/
+/*font size an font weight mixins*/
+/*clear fix mixins*/
+/*Box sizeing mixins*/
+/*Center Block mixins*/
+/*Float mixins*/
+/*Display inline block mixins*/
+/*Text align block mixins*/
+/* Positional mixins */
+/* Calculate-width function */
+/* Tab Button mixins */
+/* Tab Listing mixins */
+/* Story Tag mixins */
+/* List before icon */
+/*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
+h1, h2, h3, h4 {
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
 
+h1 {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 700;
+}
 
-Backtrace:
-D:/xampp/htdocs/itgcms/sites/all/themes/itg/sass/layout-manager.scss:265
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/tree/visitors/extend.rb:62:in `block in check_extends_fired!'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/util/subset_map.rb:105:in `block in each_value'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/util/subset_map.rb:105:in `each'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/util/subset_map.rb:105:in `each_value'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/tree/visitors/extend.rb:51:in `check_extends_fired!'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/tree/visitors/extend.rb:16:in `visit'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:39:in `css_tree'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:20:in `render'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/engine.rb:281:in `render'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:494:in `update_stylesheet'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:473:in `on_file_changed'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:331:in `block in watch'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:252:in `call'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapters/polling.rb:48:in `call'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Sass::SyntaxError: \".rhs-section-ordering ul li.rhs-section-item-container .pic\" failed to @extend \".pos-rel\".\A The selector \".pos-rel\" was not found.\A Use \"@extend .pos-rel !optional\" if the extend should be able to fail.\A "; }
+h2 {
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: #323232;
+  text-decoration: none;
+}
+
+.row {
+  zoom: 1;
+}
+.row:before, .row:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.row:after {
+  clear: both;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+/*.dropped{
+    background: #fff;
+}*/
+.list-none, .may-be-suggest-container ul, .top-takes-video-container ul, .trending-videos, .watch-right-now-video ul, .rhs-section-ordering ul {
+  list-style-type: none;
+}
+
+.gray-bg-widgets {
+  background: #f3f3f3;
+  padding: 10px;
+}
+
+.widget-title {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background: #a00606;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 7px;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.widget-title a {
+  color: #fff;
+}
+
+/*Start CSS Top Story Home Page*/
+.tab-buttons {
+  zoom: 1;
+  background: #e4e4e4;
+  border-radius: 10px 10px 0 0;
+}
+.tab-buttons:before, .tab-buttons:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.tab-buttons:after {
+  clear: both;
+}
+.tab-buttons span {
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  background: #e4e4e4;
+  text-transform: uppercase;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  border-top: 3px solid transparent;
+  color: #818181;
+  width: 50%;
+  display: block;
+  float: left;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
+}
+.tab-buttons span.active {
+  background: #fff;
+  color: #a00606;
+  border-left: 1px solid #e4e4e4;
+  border-right: 1px solid #e4e4e4;
+  border-top: 3px solid #a00606;
+}
+
+.tab-data.tab-data-2 {
+  display: none;
+}
+
+.itg-listing {
+  border: 1px solid #dddddd;
+  list-style: none;
+}
+.itg-listing li {
+  position: relative;
+}
+.itg-listing li a {
+  color: #565555;
+  padding: 15px 15px 15px 20px;
+  display: block;
+  border-bottom: 1px solid #e4e4e4;
+  line-height: 19px;
+}
+.itg-listing li a:hover {
+  background: #f8f8f8;
+}
+.itg-listing li a:first-letter {
+  text-transform: capitalize;
+}
+.itg-listing li:last-child a {
+  border-bottom: none;
+}
+.itg-listing li:before {
+  position: absolute;
+  top: 22px;
+  left: 9px;
+  content: '';
+  border-radius: 50%;
+  background: #959595;
+  height: 5px;
+  width: 5px;
+}
+.itg-listing li a {
+  padding: 15px;
+}
+.itg-listing li:before {
+  display: none;
+}
+
+/*End CSS Top Story Home page*/
+/*Start CSS Featured New Home page*/
+.itg-featured-news {
+  border: 1px solid #e4e4e4;
+  height: 672px;
+  overflow: hidden;
+}
+
+/*Start CSS Featured New Home page*/
+.featured-news {
+  zoom: 1;
+  padding-bottom: 10px;
+  margin: 0 -5px;
+}
+.featured-news:before, .featured-news:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.featured-news:after {
+  clear: both;
+}
+.featured-news .featured-post {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+.featured-news .featured-post:hover a {
+  color: #193984;
+}
+.featured-news .featured-post img {
+  padding-bottom: 10px;
+  width: 100%;
+}
+.featured-news .featured-post.featured-post-first {
+  float: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/*End CSS Featured New Home page*/
+/*End CSS*/
+/*Start CSS Top AD*/
+.top-ad {
+  border: 1px solid #e4e4e4;
+}
+.top-ad .pic {
+  background-color: #f3f3f3;
+  width: 300px;
+  height: 250px;
+  margin: 35px auto;
+}
+
+/*End CSS*/
+/*Start CSS section story Home page*/
+.section-ordering h3 {
+  font-family: "Roboto Slab", sans-serif;
+  padding: 15px 0;
+}
+.section-ordering p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  position: relative;
+  border-top: 1px solid #dddddd;
+  padding: 12px 0 12px 12px;
+}
+.section-ordering p:before {
+  position: absolute;
+  top: 18px;
+  left: 0px;
+  content: '';
+  border-radius: 100%;
+  background: #a00606;
+  height: 5px;
+  width: 5px;
+}
+
+/*End CSS section story Home page*/
+/*Start Dont miss Home page css*/
+.dont_miss .widget-title {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+.dont_miss .widget-settings {
+  margin-bottom: 5px;
+}
+
+.dont-miss {
+  /*padding: 30px 10px 0px 10px;*/
+}
+.dont-miss ul {
+  zoom: 1;
+}
+.dont-miss ul:before, .dont-miss ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.dont-miss ul:after {
+  clear: both;
+}
+.dont-miss ul .dont-miss-listing {
+  overflow: hidden;
+  padding: 10px;
+}
+.dont-miss ul .dont-miss-listing .dm-pic {
+  float: left;
+  margin-right: 15px;
+}
+.dont-miss ul .dont-miss-listing .dm-detail {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.dont-miss ul .dont-miss-listing {
+  width: 100%;
+  padding: 0 0px 20px 0;
+  border: none;
+}
+.dont-miss ul .dont-miss-listing .dm-pic {
+  width: 46.6%;
+}
+.dont-miss ul .dont-miss-listing .dm-detail h4 {
+  color: #048cb9;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.dont-miss ul .dont-miss-listing .dm-detail p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  color: #333;
+}
+
+/*End Dont miss Home page css*/
+/*Start May we suggest css*/
+.we_may_suggest span.widget-title {
+  position: relative;
+}
+
+.may-be-suggest-container ul .may-we-suggest {
+  overflow: hidden;
+  padding: 10px;
+}
+.may-be-suggest-container ul .may-we-suggest .pic {
+  float: right;
+  margin-left: 10px;
+}
+.may-be-suggest-container ul .may-we-suggest .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.may-be-suggest-container ul .pic {
+  width: 88px;
+}
+.may-be-suggest-container ul li.may-we-suggest {
+  padding: 10px 0;
+}
+.may-be-suggest-container ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.may-be-suggest-container ul li:last-child {
+  border-bottom: 1px solid #dddddd;
+}
+.may-be-suggest-container h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  display: none;
+  position: relative;
+}
+.may-be-suggest-container h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+.may-be-suggest-container h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
+
+/*End May we suggest End*/
+/*Start top-takes-video suggest css*/
+.top_takes_videos_widget .widget-title {
+  position: relative;
+}
+
+.top-takes-video-container ul .top-takes-video {
+  overflow: hidden;
+  padding: 10px;
+}
+.top-takes-video-container ul .top-takes-video .pic {
+  float: right;
+  margin-left: 10px;
+}
+.top-takes-video-container ul .top-takes-video .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.top-takes-video-container ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.top-takes-video-container ul li:last-child {
+  border-bottom: 1px solid #dddddd;
+}
+.top-takes-video-container h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  display: none;
+  position: relative;
+}
+.top-takes-video-container h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+.top-takes-video-container h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
+
+/*End top-takes-video suggest End*/
+/*Start CSS trending-videos Home  page*/
+.trending-videos {
+  border: 1px solid #dddddd;
+  padding-top: 10px;
+}
+.trending-videos .trending-videos-list {
+  overflow: hidden;
+  padding: 10px;
+}
+.trending-videos .trending-videos-list .pic {
+  float: left;
+  margin-right: 10px;
+}
+.trending-videos .trending-videos-list .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.trending-videos li + li {
+  border-top: 1px solid #dddddd;
+}
+
+/*End CSS trending-videos Home  page*/
+/*Start Watch right Now suggest css*/
+.watch_right_now_videos_widget .widget-title {
+  position: relative;
+}
+
+.watch-right-now-video ul .watch-right-now-list {
+  overflow: hidden;
+  padding: 10px;
+}
+.watch-right-now-video ul .watch-right-now-list .pic {
+  float: right;
+  margin-left: 5px;
+}
+.watch-right-now-video ul .watch-right-now-list .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.watch-right-now-video ul li {
+  padding: 0 10px;
+}
+.watch-right-now-video ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.watch-right-now-video ul li:last-child {
+  border-bottom: 1px solid #dddddd;
+}
+
+/*End Watch right Now suggest End*/
+/*CSS Start HOme page widget rhs-section-ordering*/
+.rhs-section-ordering ul .rhs-section-item-container {
+  overflow: hidden;
+  padding: 10px;
+}
+.rhs-section-ordering ul .rhs-section-item-container .pic {
+  float: left;
+  margin-right: 10px;
+}
+.rhs-section-ordering ul .rhs-section-item-container .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.rhs-section-ordering ul li.rhs-section-item-container {
+  padding: 10px 0;
+}
+.rhs-section-ordering ul li.rhs-section-item-container .pic {
+  position: relative;
+}
+.rhs-section-ordering ul li.rhs-section-item-container .pic:after {
+  background: url(../images/video-icon-small.png) no-repeat;
+  content: "";
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+.rhs-section-ordering ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.rhs-section-ordering ul li:last-child {
+  border-bottom: 1px solid #dddddd;
+}
+
+/*CSS End HOme page widget rhs-section-ordering*/
+@media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 40px;
+    line-height: 46px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 29px;
+    line-height: 34px;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  h4 {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  /*Start CSS itg-layout-container */
+  .itg-layout-container {
+    min-width: 1170px;
+  }
+  .itg-layout-container .itg-widget, .itg-layout-container .itg-widget-child {
+    position: relative;
+  }
+  .itg-layout-container .itg-widget input[type="text"], .itg-layout-container .itg-widget-child input[type="text"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 214px;
+    z-index: 1;
+  }
+  .itg-layout-container .top-colum-1 .droppable {
+    height: 633px;
+    overflow: hidden;
+  }
+  .itg-layout-container .top-colum-2 .droppable {
+    height: 671px;
+    overflow: hidden;
+  }
+  .itg-layout-container .top-colum-3 .itg-widget-parent .droppable {
+    height: 320px;
+  }
+  .itg-layout-container .top-colum-3 .droppable {
+    height: 272px;
+    overflow: hidden;
+  }
+  .itg-layout-container .top-colum-3 .itg-widget:first-child {
+    margin-bottom: 40px;
+  }
+  .itg-layout-container.itg-admin .gray-bg-layout {
+    background-color: #f1f1f1;
+  }
+  .itg-layout-container.itg-admin .itg-widget {
+    /*background-color: #f1f1f1;*/
+  }
+  .itg-layout-container .itg-common-section .droppable {
+    height: 382px;
+    overflow: hidden;
+  }
+  .itg-layout-container .itg-common-section.row-3 .droppable {
+    height: 320px;
+    overflow: hidden;
+  }
+
+  /*Start CSS Top Block Grid Home Page*/
+  .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
+    padding: 0 15px;
+    min-height: 672px;
+  }
+  .top-block .top-colum-1 {
+    float: left;
+    width: 22%;
+  }
+  .top-block .top-colum-2 {
+    width: 44.8%;
+    float: left;
+  }
+  .top-block .top-colum-3 {
+    width: 33.2%;
+    float: right;
+  }
+
+  /*End CSS Top Block Grid Home Page*/
+  /*Start CSS Featured-news Home Page*/
+  .featured-news {
+    padding: 5px;
+    border: 1px solid #dddddd;
+    margin: 0;
+  }
+  .featured-news .featured-post {
+    padding: 5px;
+  }
+
+  /*End CSS Featured-news Home Page*/
+  /*Start Dont miss Home page css*/
+  .dont-miss ul .dont-miss-listing {
+    float: left;
+    width: 50%;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*End Dont miss Home page css*/
+}
