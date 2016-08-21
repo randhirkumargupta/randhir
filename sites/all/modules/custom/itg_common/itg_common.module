@@ -42,8 +42,13 @@ function itg_common_dropdown_supplement($id = '') {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
+  //p($form);  
   if ($user->uid != '1') {
+    // checkbox hide for all user of Provide a menu link on all form
+    drupal_add_js('jQuery(document).ready(function() {                  
+             jQuery(".form-item-menu-enabled").hide();                         
+      });', array('type' => 'inline', 'scope' => 'footer'));
+    
     if ($form_id == 'menu_edit_item') {
       // Add JS to hide extra element of menu forms
       drupal_add_js('jQuery(document).ready(function() {                  
