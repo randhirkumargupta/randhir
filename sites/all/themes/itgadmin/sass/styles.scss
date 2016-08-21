@@ -5888,6 +5888,11 @@ div.node{
       .block .block-title{
         background-color: #000;
         color: #fff;
+        cursor: pointer;
+        span{
+          float: right;
+          font-size: 20px;
+        }
       }
     }
     .sidebar-trigger{
@@ -5902,6 +5907,7 @@ div.node{
     .itg-listing{
       height: 100%;
       max-height: 100%;
+      border: none;
     }
     .featured-news{
       height: 100%;
@@ -5911,6 +5917,15 @@ div.node{
         vertical-align: top;
       }
     }
+  }
+  .top_stories_ordering{
+      border: 1px solid #ddd;
+      .data-holder{
+        height: 100%;
+        .block-itg-widget{
+          height: 100%;
+        }
+      }
   }
   .ui-draggable{
     background-color: rgba(31, 181, 173, .8);
@@ -5986,7 +6001,7 @@ div.node{
     float: right;
     .fa{font-size: 18px;}
 }
-.top-n-most-popular-stories, .trending-list{
+.trending-list{
   .widget-settings{
     left: auto;
     position: absolute;
@@ -6164,7 +6179,7 @@ div.node{
   height: 673px;
 }
 .itg-layout-container .itg-top-section .top-colum-1 .droppable{
-  height: 637px;
+  height: 674px;
 }
 .itg-layout-container .top-colum-3 .droppable{
   height: 277px;
@@ -6183,7 +6198,11 @@ div.node{
     background-color: #f3f3f3;
   }
 }
-.droppable .widget-wrapper{height: 100%; overflow: hidden;}
+.droppable .widget-wrapper,
+.widget-wrapper .data-holder .block-itg-widget > div,
+.widget-wrapper .data-holder .block-itg-widget > ul,
+.widget-wrapper .data-holder,
+.widget-wrapper .data-holder .block-itg-widget{height: 100%; overflow: hidden;}
 .page-admin-structure-menu-manage{
   .action-links{
     @extend .no-bullet;

@@ -5763,6 +5763,11 @@ div.node #comments h2 {
 .page-itg-layout-manager .region-sidebar-second .block .block-title {
   background-color: #000;
   color: #fff;
+  cursor: pointer;
+}
+.page-itg-layout-manager .region-sidebar-second .block .block-title span {
+  float: right;
+  font-size: 20px;
 }
 .page-itg-layout-manager .sidebar-trigger {
   background-color: #3f3f3f;
@@ -5774,12 +5779,23 @@ div.node #comments h2 {
 .page-itg-layout-manager .itg-listing {
   height: 100%;
   max-height: 100%;
+  border: none;
 }
 .page-itg-layout-manager .featured-news {
   height: 100%;
 }
 .page-itg-layout-manager .dm-pic img {
   vertical-align: top;
+}
+
+.top_stories_ordering {
+  border: 1px solid #ddd;
+}
+.top_stories_ordering .data-holder {
+  height: 100%;
+}
+.top_stories_ordering .data-holder .block-itg-widget {
+  height: 100%;
 }
 
 .ui-draggable {
@@ -5859,13 +5875,13 @@ div.node #comments h2 {
   font-size: 18px;
 }
 
-.top-n-most-popular-stories .widget-settings, .trending-list .widget-settings {
+.trending-list .widget-settings {
   left: auto;
   position: absolute;
   right: 0;
   z-index: 10;
 }
-.top-n-most-popular-stories .itg-widget-child, .trending-list .itg-widget-child {
+.trending-list .itg-widget-child {
   background-color: #fff;
 }
 
@@ -6009,7 +6025,7 @@ div.node #comments h2 {
 }
 
 .itg-layout-container .itg-top-section .top-colum-1 .droppable {
-  height: 637px;
+  height: 674px;
 }
 
 .itg-layout-container .top-colum-3 .droppable {
@@ -6028,7 +6044,11 @@ div.node #comments h2 {
   background-color: #f3f3f3;
 }
 
-.droppable .widget-wrapper {
+.droppable .widget-wrapper,
+.widget-wrapper .data-holder .block-itg-widget > div,
+.widget-wrapper .data-holder .block-itg-widget > ul,
+.widget-wrapper .data-holder,
+.widget-wrapper .data-holder .block-itg-widget {
   height: 100%;
   overflow: hidden;
 }
