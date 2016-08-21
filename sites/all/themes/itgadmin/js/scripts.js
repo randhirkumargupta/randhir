@@ -2,7 +2,7 @@ $(function() {
 	
 	$('#easyPaginate').easyPaginate({
 		paginateElement: 'img',
-		elementsPerPage: 7,
+		elementsPerPage: 9,
 		effect: 'climb'
 	});
         
