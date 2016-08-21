@@ -5448,10 +5448,12 @@ div.node{
   }
   .image-editor {
     overflow: hidden;
+    text-align:left;
     .cropit-image-zoom{
       background-color: #fff;
       margin: 0;
       padding: 20px 0;
+      text-align: center;
     }
   }
   .first-resize, .second-resize{
@@ -5557,6 +5559,7 @@ div.node{
     width: 20px;
     z-index: 999;
     text-indent: -9999px;
+    cursor: pointer;
   }
 }
 

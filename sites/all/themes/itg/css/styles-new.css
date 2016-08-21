@@ -344,6 +344,7 @@
   text-align: center;
   z-index: 9;
   display: block !important;
+  display: none;
 }
 .itg-region .slide-icon.scroll-arrow-right {
   left: 0;

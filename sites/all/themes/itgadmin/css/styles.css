@@ -5379,11 +5379,13 @@ div.node #comments h2 {
 }
 .croper .image-editor {
   overflow: hidden;
+  text-align: left;
 }
 .croper .image-editor .cropit-image-zoom {
   background-color: #fff;
   margin: 0;
   padding: 20px 0;
+  text-align: center;
 }
 .croper .first-resize, .croper .second-resize {
   display: inline-block;
@@ -5482,6 +5484,7 @@ div.node #comments h2 {
   width: 20px;
   z-index: 999;
   text-indent: -9999px;
+  cursor: pointer;
 }
 
 .templates-widgets {
