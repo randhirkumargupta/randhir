@@ -433,3 +433,15 @@
 .itg-layout-container .top-colum-3 .itg-widget-parent .droppable.sidebar-ad{
     height: 100%;
 }
+
+#block-block-1{
+    border: 1px solid #ddd;
+    border-top: none;
+    height: 321px;
+    padding: 37px;
+    .ad-display-block{
+      height: 100%;
+      background-color: #ddd;
+      p{display: none;}
+    }
+}
