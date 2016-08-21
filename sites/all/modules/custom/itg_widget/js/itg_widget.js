@@ -16,7 +16,7 @@ Drupal.behaviors.itg_widgets = {
             var type = get_url_parameter('type');
             if (typeof (c_tid) != "undefined" && c_tid !== null && typeof (type) != "undefined" && type !== null) {
                 if (confirm('Are you sure you want to move this content ?')) {
-                    jQuery("#ajex-loader").css("display", "block");
+                    jQuery("#widget-ajex-loader").css("display", "block");
                     jQuery.get("remove_from_widgets_section/" + nid + "/" + qid + "/" + view_name + "/" + view_page + "/" + c_tid + "/" + type, function(data, status) {
                         if (data == 'deleted') {
                             //window.location.reload();
@@ -26,7 +26,7 @@ Drupal.behaviors.itg_widgets = {
                 console.log("section and type found");
             } else {
                 if (confirm('Are you sure you want to move this content ?')) {
-                    jQuery("#ajex-loader").css("display", "block");
+                    jQuery("#widget-ajex-loader").css("display", "block");
                     jQuery.get("remove_from_widgets/" + nid + "/" + qid + "/" + view_name + "/" + view_page, function(data, status) {
 
                         if (data == 'deleted') {
@@ -59,7 +59,7 @@ Drupal.behaviors.itg_widgets = {
                 {
                     if (!jQuery(this).is(':checked'))
                     {
-                        jQuery('.fieldset-wrapper').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
+                        jQuery('.nodes_id_container').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
                     }
                 } else {
                     jQuery('#spn_' + checkids).remove();
@@ -69,14 +69,14 @@ Drupal.behaviors.itg_widgets = {
                 url: Drupal.settings.basePath + 'setids',
                 type: 'post', beforeSend:
                         function() {
-                            jQuery('#ajex-loader').show();
+                            jQuery('#widget-ajex-loader').show();
 
                         },
                 data: {'checkid': mainids, 'formid': formid, 'type': type},
                 success: function(data) {
                     setTimeout(function() {
 
-                        jQuery('#ajex-loader').hide();
+                        jQuery('#widget-ajex-loader').hide();
 
                     }, 500);
 
@@ -107,14 +107,14 @@ Drupal.behaviors.itg_widgets = {
                 url: Drupal.settings.basePath + 'setids',
                 type: 'post', beforeSend:
                         function() {
-                            jQuery('#ajex-loader').show();
+                            jQuery('#widget-ajex-loader').show();
                             jQuery(".vbo-select").attr("disabled", true);
                         },
                 data: {'checkid': getids, 'formid': formid, 'type': type},
                 success: function(data) {
                     setTimeout(function() {
 
-                        jQuery('#ajex-loader').hide();
+                        jQuery('#widget-ajex-loader').hide();
                         jQuery(".vbo-select").attr("disabled", false);
                     }, 500);
 
@@ -135,7 +135,7 @@ Drupal.behaviors.itg_widgets = {
             if (jQuery(this).is(':checked'))
             {
                 type = 'ADD';
-                jQuery('.fieldset-wrapper').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
+                jQuery('.nodes_id_container').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
 
             }
             else {
@@ -147,14 +147,14 @@ Drupal.behaviors.itg_widgets = {
                 url: Drupal.settings.basePath + 'setids',
                 type: 'post', beforeSend:
                         function() {
-                            jQuery('#ajex-loader').show();
+                            jQuery('#widget-ajex-loader').show();
                             jQuery(".vbo-select").attr("disabled", true);
                         },
                 data: {'checkid': checkids, 'formid': formid, 'type': type},
                 success: function(data) {
                     setTimeout(function() {
 
-                        jQuery('#ajex-loader').hide();
+                        jQuery('#widget-ajex-loader').hide();
                         jQuery(".vbo-select").attr("disabled", false);
                     }, 500);
 
