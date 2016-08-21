@@ -3783,8 +3783,8 @@ div.node #comments h2 {
 .region-sidebar-second {
   background-color: #2f2f2f;
   color: #fff;
-  min-height: 400px;
-  padding: 0 0 10px;
+  /*min-height: 400px;
+  padding: 0 0 10px;*/
 }
 .region-sidebar-second .block .block-title {
   padding: 0 10px;
@@ -3794,6 +3794,7 @@ div.node #comments h2 {
   font-weight: 600;
   font-size: 14px;
   text-transform: uppercase;
+  border-bottom: 1px solid #222;
 }
 .region-sidebar-second .block .content-associated {
   padding: 10px;

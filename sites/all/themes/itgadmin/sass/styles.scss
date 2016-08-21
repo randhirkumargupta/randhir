@@ -3566,8 +3566,8 @@ div.node{
 .region-sidebar-second{
   background-color: #2f2f2f;
   color: #fff;
-  min-height: 400px;
-  padding: 0 0 10px;
+  /*min-height: 400px;
+  padding: 0 0 10px;*/
   .block{
     .block-title{
       padding: 0 10px;
@@ -3577,6 +3577,7 @@ div.node{
       font-weight: 600;
       font-size: 14px;
       text-transform: uppercase;
+      border-bottom: 1px solid #222;
     }
     .content-associated{
       padding: 10px;
