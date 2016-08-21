@@ -59,7 +59,7 @@ Drupal.behaviors.itg_widgets = {
                 {
                     if (!jQuery(this).is(':checked'))
                     {
-                        jQuery('.fieldset-wrapper').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
+                        jQuery('.nodes_id_container').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
                     }
                 } else {
                     jQuery('#spn_' + checkids).remove();
@@ -135,7 +135,7 @@ Drupal.behaviors.itg_widgets = {
             if (jQuery(this).is(':checked'))
             {
                 type = 'ADD';
-                jQuery('.fieldset-wrapper').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
+                jQuery('.nodes_id_container').append('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
 
             }
             else {
