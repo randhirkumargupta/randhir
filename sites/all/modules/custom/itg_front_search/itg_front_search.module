@@ -64,7 +64,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
 
     $form['custom_drp'] = array(
       '#type' => 'select',
-      '#title' => t('Date'),
+      '#title' => t('DATE'),
       '#options' => $day_cal,
       '#default_value' => '_none'
     );
@@ -98,6 +98,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
 
     $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $form['hash']['#type'] = 'select';
+    $form['hash']['#title'] = 'Property';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
     $form['hash']['#multiple'] = TRUE;
@@ -142,13 +143,13 @@ global $base_url;
         }
         else {
           $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-          $related_result->sm_thumb_medium_field_story_extra_large_image[0] = "<img src='$img_url' width='220' height='165' />";
+          $related_result->sm_thumb_medium_field_story_extra_large_image[0] = "<img src='$img_url' width='220' height='154' />";
         }
       }
       
-      if(empty($image) && empty($blog_image) && empty($magazine_image) ) {
+      if(empty($image) && empty($magazine_image) ) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-        $related_result->sm_thumb_medium_field_story_extra_large_image[0] = "<img src='$img_url' width='220' height='165' />";
+        $related_result->sm_thumb_medium_field_story_extra_large_image[0] = "<img src='$img_url' width='220' height='154' />";
       }
       
       $words = $_GET['keyword'];

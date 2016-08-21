@@ -61,7 +61,52 @@ function itg_widget_menu() {
       'page callback' => 'remove_extra_data',
       'access arguments' => array('access administrator'),
   );
+  $items['setids'] = array(
+      'page callback' => 'itg_widget_setids', // load the croper according to size!.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
   return $items;
+}
+
+/**
+ * Funtion used to add or delete widgit ids into session for Selected content id should be display on top.
+ * 
+ */
+function itg_widget_setids() {
+  $datatoset = array();
+  $datatoset = $_SESSION[$_POST['formid']];
+
+  if (is_array($_POST['checkid'])) {
+    foreach ($_POST['checkid'] as $ids) {
+      if ($_POST['type'] == 'ADD') {
+        $datatoset[] = $ids;
+      }
+      else if ($_POST['type'] == 'REMOVE') {
+        if (($key = array_search($ids, $datatoset)) !== false) {
+
+          unset($datatoset[$key]);
+        }
+      }
+    }
+  }
+  else {
+
+    if (empty($datatoset)) {
+      $datatoset[] = $_POST['checkid'];
+    }
+    if ($_POST['type'] == 'ADD') {
+      array_push($datatoset, $_POST['checkid']);
+    }
+    else if ($_POST['type'] == 'REMOVE') {
+
+      if (($key = array_search($_POST['checkid'], $datatoset)) !== false) {
+        unset($datatoset[$key]);
+      }
+    }
+  }
+  $datatoset = array_unique($datatoset);
+  $_SESSION[$_POST['formid']] = $datatoset;
 }
 
 function remove_extra_data() {
@@ -237,6 +282,9 @@ function itg_widget_block_info() {
   $blocks['section_wise_order'] = array(
       'info' => t('Widget: Section wise ordering form custom table'),
   );
+  $blocks['rhs_section_wise_order'] = array(
+      'info' => t('Widget: RHS Section wise content ordering from custom table'),
+  );
   $blocks['big_story_format'] = array(
       'info' => t('Widget: Big story form custom table'),
   );
@@ -295,6 +343,17 @@ function itg_widget_block_view($delta = '') {
       $data = itg_widget_section_wise_ordering_from_custom_table($info);
       $block['content'] = theme("section_wise_ordering", array("data" => $data));
       break;
+    case 'rhs_section_wise_order':
+      module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
+      // value is hardcoded need to be change for dyanamic functionality
+      $info['section'] = '437'; // tid of section
+      $info['content_type'] = ''; // content type machine name
+      // view name which is stored in draggableviews_structure table
+      $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
+      //$block['subject'] = t('Section wise ordering from custom table');
+      $data = itg_widget_section_wise_ordering_for_rhs_from_custom_table($info);
+      $block['content'] = theme("rhs_section_wise_ordering", array("data" => $data));
+      break;
     case 'we_may_suggest':
       module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
       $info['section'] = '301'; // tid of section
@@ -308,6 +367,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/section-odering');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'page_2'; // page name
+      $info['nodequeue'] = 'top_stories';
       $data = itg_widget_top_stories_ordering_data($info);
       $block['content'] = theme("top_stories_ordering", array("data" => $data));
       break;
@@ -316,6 +376,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'most_popular_widget'; // page name
+      $info['nodequeue'] = 'most_popular';
       $data = itg_widget_most_popular_ordering_data($info);
       $block['content'] = theme("most_popular_widget", array("data" => $data));
       break;
@@ -331,6 +392,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'trending_videos_widget'; // page name
+      $info['nodequeue'] = 'trending_videos';
       $data = itg_widget_trending_videos_widget_ordering_data($info);
       $block['content'] = theme("trending_videos_widget", array("data" => $data));
       break;
@@ -339,6 +401,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'watch_right_now_widget'; // page name
+      $info['nodequeue'] = 'watch_right_now';
       $data = itg_widget_watch_right_now_videos_widget_ordering_data($info);
       $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
       break;
@@ -347,6 +410,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'top_takes_video_widget'; // page name
+      $info['nodequeue'] = 'top_takes_videos';
       $data = itg_widget_top_takes_videos_widget_ordering_data($info);
       $block['content'] = theme("top_takes_videos_widget", array("data" => $data));
       break;
@@ -355,6 +419,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/home-page-feature');
       $info['view_name'] = 'home_page_feature_widget'; // view name
       $info['page'] = 'page_2'; // page name
+      $info['nodequeue'] = 'home_page_feature';
       $data = itg_widget_home_page_feature_data($info);
       $block['content'] = theme("home_page_feature", array("data" => $data));
       break;
@@ -394,9 +459,9 @@ function itg_widget_block_view($delta = '') {
 
     case 'featured_photo_carousel_r':
       global $base_url;
-     
+
       drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
-      
+
       drupal_add_js("jQuery(document).ready(function () {
             jQuery('.carousel').carousel({
               frontWidth: 645,
@@ -407,20 +472,20 @@ function itg_widget_block_view($delta = '') {
             });
           });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
       );
-      
-      /*drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_js("jQuery('#featuredphoto').RollingSlider({
-				showArea:'#example',
-				prev:'#jprev',
-				next:'#jnext',
-				moveSpeed:300,
-				autoPlay:false
-			});", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_js('misc/jquery.js');*/
+
+      /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+        );
+        drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+        );
+        drupal_add_js("jQuery('#featuredphoto').RollingSlider({
+        showArea:'#example',
+        prev:'#jprev',
+        next:'#jnext',
+        moveSpeed:300,
+        autoPlay:false
+        });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+        );
+        drupal_add_js('misc/jquery.js'); */
       module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
       $info['view_name'] = 'photo_carousel_widget'; // view name
       $info['page'] = 'photo_carousel'; // page name
@@ -461,9 +526,9 @@ function itg_widget_block_view($delta = '') {
 
     case 'featured_video_carousel_r':
       global $base_url;
-     
+
       drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
-      
+
       drupal_add_js("jQuery(document).ready(function () {
             jQuery('.carousel').carousel({
               frontWidth: 645,
@@ -474,20 +539,20 @@ function itg_widget_block_view($delta = '') {
             });
           });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
       );
-      /*drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-      );
+      /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+        );
+        drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+        );
 
-      drupal_add_js("jQuery('#featuredvideo').RollingSlider({
-				showArea:'#example',
-				prev:'#jprev',
-				next:'#jnext',
-				moveSpeed:500,
-				autoPlay:false
-			});", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
-      drupal_add_js('misc/jquery.js');*/
+        drupal_add_js("jQuery('#featuredvideo').RollingSlider({
+        showArea:'#example',
+        prev:'#jprev',
+        next:'#jnext',
+        moveSpeed:500,
+        autoPlay:false
+        });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+        );
+        drupal_add_js('misc/jquery.js'); */
       module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
       $info['view_name'] = 'photo_carousel_widget'; // view name
       $info['page'] = 'video_carousel'; // page name
@@ -583,16 +648,12 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#value'] = t('Confirm');
   }
 
-//  $_SESSION['views_form_story_widget_page_1'] = array(
-//      '1989',
-//      '1988',
-//      '1967'
-//  );
-//  foreach(forms_uses_checked_content_id() as $forms) {
-//    //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
-//  }
+
+  foreach (forms_uses_checked_content_id() as $forms) {
+    //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
+  }
   // Assign deafult values in case of checkbox are checked.
-  //$form = get_sessions_of_ticked_nodes($form);
+  $form = get_sessions_of_ticked_nodes($form);
 }
 
 /**
@@ -652,6 +713,17 @@ function get_sessions_of_ticked_nodes(&$form) {
       $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
     }
   }
+  drupal_add_js('jQuery(window).load(function() {
+            var sessionids="' . implode($_SESSION[$form['#form_id']], ',') . '";
+                if(sessionids!="")
+                {
+                sessionids=sessionids.split(",");
+                }
+                jQuery.each(sessionids, function( index, value ) {
+                 jQuery(".fieldset-wrapper").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
+
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+  );
   return $form;
 }
 
@@ -662,6 +734,9 @@ function itg_widget_theme() {
   $themes = array(
       'section_wise_ordering' => array(
           'template' => 'templates/section-ordering-data',
+      ),
+      'rhs_section_wise_ordering' => array(
+          'template' => 'templates/rhs-section-ordering-data',
       ),
       'top_stories_ordering' => array(
           'template' => 'templates/top-stories-ordering-data',
@@ -719,43 +794,26 @@ function get_required_data_from_entity_id($entity_id) {
 function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   switch ($form['#id']) {
     case 'views-exposed-form-home-page-feature-widget-page-1':
+    case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
-      //$form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      //$form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
       break;
     case 'views-exposed-form-story-widget-most-popular':
-      $form['title']['#attributes']['placeholder'] = t('Story Title');
-      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Story ID');
-      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
-      break;
     case 'views-exposed-form-story-widget-page-1':
       $form['title']['#attributes']['placeholder'] = t('Story Title');
       $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
       $form['nid']['#attributes']['placeholder'] = t('Story ID');
       $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
       break;
-    case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      break;
     case 'views-exposed-form-story-widget-trending-videos':
-      $form['title']['#attributes']['placeholder'] = t('Video Title');
-      $form['nid']['#attributes']['placeholder'] = t('Video ID');
-      break;
+    case 'views-exposed-form-story-widget-top-takes-video':
     case 'views-exposed-form-story-widget-watch-right-now':
       $form['title']['#attributes']['placeholder'] = t('Video Title');
       $form['nid']['#attributes']['placeholder'] = t('Video ID');
-      break;
-    case 'views-exposed-form-story-widget-top-takes-video':
-      $form['title']['#attributes']['placeholder'] = t('Video Title');
-      $form['nid']['#attributes']['placeholder'] = t('Video ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
+      $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
       break;
     case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      break;
     case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
@@ -944,48 +1002,42 @@ function itg_widget_preprocess_views_view(&$vars) {
 function itg_widget_preprocess_node(&$vars) {
   if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['tid'] == '399')) {
 
-    module_load_include('inc', 'itg_widget', 'includes/itg_widget_anchor_landing');
+    drupal_add_js(
+            "jQuery(document).ready(function(){
+              jQuery('.read-more , .full-content').click(function(){
+                jQuery('.less-content').toggle('500');
+                jQuery('.full-content').toggle('500');
+              });
+            })", 'inline'
+    );
     $anchor_id = $vars['nid'];
     $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
-
-    // Query to get anchor title , image and body filed
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_extra_large_image', 'el_image', 'el_image.entity_id=n.nid');
-    $query->leftJoin('file_managed', 'managed', 'el_image.field_story_extra_large_image_fid=managed.fid');
-    $query->leftJoin('field_data_body', 'body', 'body.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
-    $query->fields('n', array('title'));
-    $query->fields('managed', array('uri'));
-    $query->fields('body', array('body_value'));
-    $query->condition('n.nid', $anchor_id);
-    $query->condition('n.status','1');
-    $anchor_description_block_data = $query->execute()->fetchAssoc();
-    //pr($result);
     // Query to get category in which anchor is associated.
     $cat_query = db_select('field_data_field_story_category', 'cat');
     $cat_query->leftJoin('node', 'n', 'n.nid=cat.entity_id');
     $cat_query->fields('cat', array('field_story_category_tid'));
     $cat_query->condition('cat.entity_id', $anchor_id);
     $categories_of_anchor = $cat_query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-    $video_entity_ids = array();
-
-    
-    // Query for getting videos id of perticular anchors
-    foreach ($categories_of_anchor as $category) {
-      $video_query = db_select('node', 'n');
-      $video_query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
-      $video_query->leftJoin('field_data_field_video_anchor', 'anchor', 'anchor.entity_id=n.nid');
-      $video_query->fields('cat', array('entity_id', 'field_story_category_tid'));
-      $video_query->condition('cat.field_story_category_tid', $category);
-      $video_query->condition('anchor.field_video_anchor_target_id', $anchor_id);
-      $video_query->groupBy('field_story_category_tid');
-      $video_query->condition('n.type','videogallery');
-      $video_query->condition('n.status','1');
-      $video_query->orderBy('n.created');
-      $video_entity_ids[] = $video_query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    $vars['data'] = $video_entity_ids;
+    pr($categories_of_anchor);
   }
+}
+
+/**
+ * Get data from nodequeue, if data doesn't exist in draggable view
+ * 
+ * @param string $nodequeue_name
+ * @return array
+ */
+function itg_widget_nodes_from_nodequeue($nodequeue_name) {
+  $today = date('Y-m-d 00:00:00');
+  $nodequeue_id = get_nodequeue_load_queue_by_name($nodequeue_name);
+  $nq_query = db_select('nodequeue_nodes', 'nq');
+  $nq_query->leftJoin('node','n','n.nid=nq.nid');
+  $nq_query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
+  $nq_query->condition('nq.qid', $nodequeue_id);
+  $nq_query->condition('n.status','1');
+  $nq_query->condition('fsed.field_story_expiry_date_value', $today, '>=');
+  $nq_query->addField('nq', 'nid', 'entity_id');
+  $nq_query->orderBy('n.nid','DESC');
+  return $nq_query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }

@@ -5294,6 +5294,17 @@ div.node{
     padding-top: 150px;
     font-size: 18px;
   }
+  #preview-wrapper{
+    height: auto !important;
+    #search-preview{
+      margin-bottom: 20px;
+    }
+    #file-preview {
+      max-height: 430px;
+      overflow: auto;
+      text-align: center;
+    }
+  }
 }
 
 /*itg_image_repository end*/
@@ -5508,36 +5519,36 @@ div.node{
   border: 2px solid rgba(0, 0, 0, 0.5) !important;
   height: 100px;
   opacity: 0;
+  cursor: default;
   position: absolute;
   width: 100px;
   .person {
     background-color: rgba(0, 0, 0, 0.5);
-    text-align: center;
     border: none;
-    border-radius: 10px;
+    border-radius: 0;
     color: #fff;
-    left: -50px !important;
-    padding: 10px;
-    position: absolute !important;
-    right: 0 !important;
-    top: 110% !important;
-    width: 200px;
-    white-space: nowrap;
+    left: -2px !important;
     overflow: hidden;
+    padding: 5px;
+    position: absolute !important;
+    text-align: center;
     text-overflow: ellipsis;
+    top: 100% !important;
+    white-space: nowrap;
+    width: 100px;
   }
   .remove{
     position: absolute;
     width: 20px;
     height: 20px;
-    background: url('../images/cross_small.png') center center no-repeat;
+    background: url('../images/cross_small.png') center center no-repeat #fff;
     text-indent: -9999px;
     right: 0;
     top: 0;
     cursor: pointer;
   }
   .edit{
-    background: url('../images/edit-icon.png') center center no-repeat;;
+    background: url('../images/edit-icon.png') center center no-repeat #fff;
     height: 20px;
     position: absolute;
     right: 20px;
@@ -5664,6 +5675,11 @@ div.node{
     position: relative;
     .droppable{
       min-height: 400px;
+    }
+    .ad-widget{
+      .droppable{
+      min-height: 0;
+    }
     }
   }
 }
@@ -6026,6 +6042,8 @@ div.node{
     border: 1px solid #d9d9d9;
     width: 100%;
   }
+}
+.view-searchimage{ 
   .container{
     max-width: 100%;
   }
@@ -6033,13 +6051,12 @@ div.node{
     margin: 20px 0;
   img {
     display: inline-block;
-    height: 96px;
+    height: 103px;
     margin: 5px;
     vertical-align: top;
-    width: 96px;
+    width: 103px;
   }
   } 
-  ul.pager{display: none;}
 }
 .edit-field-pti-magazine-kicker{
   .form-type-textfield{
@@ -6057,6 +6074,15 @@ div.node{
       .form-item{
         float: left;
         margin-right: 10px;
+        label{padding-top: 0;}
+      }
+      #edit-submit-searchimage{
+        margin-top: 18px;
+      }
+    }
+    .views-reset-button{
+      #edit-reset{
+        margin-top: 18px;
       }
     }
   }
@@ -6218,5 +6244,75 @@ div.node{
   .form-submit{
     @extend .add-more;
     margin-top: 18px;
+  }
+}
+.ftp-server{
+  #edit-video-browse-select{
+    margin: 20px 0 0;
+    .ftp_video_radio{
+      @extend .dib;
+      @extend .vtop;
+      margin: 20px 20px 10px 0;
+    }
+  }
+  > a{
+    @extend .add-more;
+    margin-top: 20px;
+  }
+}
+.browse-video-form{
+  .ftp_browse_field{
+    padding: 0 30px;
+    label{
+      float: left;
+      width: 220px;
+    }
+    .browse-ftp-click{
+      @extend .dib;
+      @extend .vtop;
+      background-color: #fff;
+      border: 1px solid #d9d9d9;
+      border-radius: 5px;
+      color: #2f2f2f;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 300;
+      height: 28px;
+      line-height: 26px;
+      text-align: center;
+      width: 134px;
+    }
+  }
+  #edit-field-upload-video{
+    @extend .choose-audio-video-file;
+  }
+}
+/*#itg_video_content{
+  #loader-data{
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}*/
+
+.easyPaginateNav{
+  text-align: center;
+  a{
+    color: #1fb5ad;
+    @extend .dib;
+    @extend .vmid;
+    margin: 0 5px;
+    &.page{
+      border: 1px solid #1fb5ad;
+      height: 20px;
+      width: 20px;
+    }
+    &.current{
+      background-color: #1fb5ad;
+      color: #fff;
+    }
   }
 }

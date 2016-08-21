@@ -79,7 +79,7 @@ a {
 /*.dropped{
     background: #fff;
 }*/
-.list-none, .may-be-suggest-container ul, .top-takes-video-container ul, .trending-videos, .watch-right-now-video ul {
+.list-none, .may-be-suggest-container ul, .top-takes-video-container ul, .trending-videos, .watch-right-now-video ul, .rhs-section-ordering ul {
   list-style-type: none;
 }
 
@@ -517,6 +517,46 @@ a {
 }
 
 /*End Watch right Now suggest End*/
+/*CSS Start HOme page widget rhs-section-ordering*/
+.rhs-section-ordering ul .rhs-section-item-container {
+  overflow: hidden;
+  padding: 10px;
+}
+.rhs-section-ordering ul .rhs-section-item-container .pic {
+  float: left;
+  margin-right: 10px;
+}
+.rhs-section-ordering ul .rhs-section-item-container .title {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.rhs-section-ordering ul li.rhs-section-item-container {
+  padding: 10px 0;
+}
+.rhs-section-ordering ul li.rhs-section-item-container .pic {
+  position: relative;
+}
+.rhs-section-ordering ul li.rhs-section-item-container .pic:after {
+  background: url(../images/video-icon-small.png) no-repeat;
+  content: "";
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+.rhs-section-ordering ul li + li {
+  border-top: 1px solid #dddddd;
+}
+.rhs-section-ordering ul li:last-child {
+  border-bottom: 1px solid #dddddd;
+}
+
+/*CSS End HOme page widget rhs-section-ordering*/
 @media only screen and (min-width: 768px) {
   h1 {
     font-size: 40px;

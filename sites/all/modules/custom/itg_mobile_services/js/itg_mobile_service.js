@@ -19,13 +19,12 @@ var astroFlag = 1;
 
             jQuery.fn.mobile_astro_custom_js = function () {
                 jQuery('#edit-field-service-content-und-add-more').mousedown();
-                jQuery('#reset-date-button').show();
-                jQuery("#edit-field-service-association-title-und").addClass("itg-disabled");
             };
 
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
-                jQuery("input[id*='field-service-content-date-und-0-value']").hide();
+                jQuery(".field-type-text.field-name-field-client-short-description.field-widget-text-textfield.form-wrapper").hide();
                 jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
+                jQuery("input[id*='field-service-content-date-und-0-value']").hide();
             }
             if (Drupal.settings.itg_mobile_services.settings.service_content_first_row_hide) {
                 var first_row_hide = Drupal.settings.itg_mobile_services.settings.service_content_first_row_hide;

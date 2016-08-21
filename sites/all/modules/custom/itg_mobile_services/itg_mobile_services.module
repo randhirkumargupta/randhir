@@ -224,6 +224,8 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
           'id' => 'content-format-hidden',
         ),
       );
+      // Add the "- Select One -" option to the $form array.
+      $form['field_service_association_title']['#pre_render'] = array('itg_mobile_services_add_option');
 
       $form['#validate'][] = 'itg_mobile_association_validator';
       $form['#after_build'][] = 'itg_service_content_after_build';
@@ -234,6 +236,16 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
   return $form;
+}
+
+/**
+ * Function to be referenced as a callback in a field's #pre_render array key.
+ * @param array $element
+ * @return array
+ */
+function itg_mobile_services_add_option($element) {
+  $element[LANGUAGE_NONE]['#options'] = itg_mobile_services_get_assoc_service();
+  return $element;
 }
 
 /**
@@ -570,7 +582,6 @@ function itg_service_association_after_build($form, &$form_state) {
  * @return array
  */
 function itg_service_content_after_build($form, &$form_state) {
-  $form['field_service_association_title'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_assoc_service();
 
   if (isset($form_state['values']['field_service_association_title'][LANGUAGE_NONE])) {
     if (is_array($form_state['values']['field_service_association_title'][LANGUAGE_NONE])) {
@@ -582,6 +593,13 @@ function itg_service_content_after_build($form, &$form_state) {
 
     $astro_service = itg_mobile_services_check_astro_service($association_nid);
     if (!empty($astro_service)) {
+      // set Zodiac field item label name and image
+      $zodiac_name = itg_astro_zodiac_thumbnail();
+      $cnt = 1;
+      for ($i = 0; $i <= 12; $i++) {
+        $form['field_service_content'][LANGUAGE_NONE][$cnt]['field_story_expert_description']['#prefix'] = '<div class="itg-astro-image"><img src="' . image_style_url("thumbnail", $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';
+        $cnt++;
+      }
       $settings['astro_service'] = TRUE;
       unset($_SESSION['service_title_id']);
       unset($_SESSION['service_frequency_id']);
@@ -728,7 +746,7 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
     $astro_service = itg_mobile_services_check_astro_service($association_nid);
     if (!empty($astro_service)) {
       $_SESSION['field_astro_zodiac'] = TRUE;
-      $commands[] = ajax_command_invoke('#edit-field-service-content-add-more-number', 'val', array('13'));
+      $commands[] = ajax_command_invoke('#edit-field-service-content-add-more-number', 'val', array('11'));
       $commands[] = ajax_command_invoke(NULL, 'mobile_astro_custom_js', array());
     }
     else if ($_SESSION['field_astro_zodiac']) {
@@ -906,6 +924,7 @@ function itg_mobile_services_views_pre_render(&$view) {
     }
     elseif (isset($view->current_display) && $view->current_display == "page_3") {
       $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+      $header_content_client .= l(t('Create Astro'), 'node/add/vas-service-content', array('query' => array('destination' => 'service-content-listing', 'type' => 'astro')));
       $header_content_client .= l(t('Create Content'), 'node/add/vas-service-content', array('query' => array('destination' => 'service-content-listing')));
     }
     if (isset($header_content_client)) {
@@ -1081,6 +1100,10 @@ function itg_mobile_service_check_token($cid, $association_nid) {
  * @return array
  */
 function itg_mobile_services_get_assoc_service() {
+  $astry_type = 0;
+  if (isset($_GET['type']) && $_GET['type'] == 'astro') {
+    $astry_type = 1;
+  }
   $arg = arg();
   $node_nid = '';
   if (isset($arg['1']) && $arg['2'] == 'edit') {
@@ -1091,10 +1114,13 @@ function itg_mobile_services_get_assoc_service() {
   $query->fields('node', array('nid', 'title'));
   $query->join('field_data_field_service_association_title', 'sat', "node.nid = sat.field_service_association_title_target_id");
   $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
+  $query->join('field_data_field_astro_service', 'astro_service', "node.nid= astro_service.entity_id");
   if (empty($node_nid)) {
     $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
+    $query->condition('astro_service.field_astro_service_value', $astry_type, '=');
   }
   $query->condition('node.type', 'service_creation', '=');
+
   $result = $query->execute();
   $record = $result->fetchAll();
   $options['_none'] = '- Select a value -';
@@ -1117,6 +1143,7 @@ function itg_mobile_services_get_service_list() {
   $query = db_select('node', 'node');
   $query->distinct();
   $query->fields('node', array('nid', 'title'));
+  
   $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
   if (empty($node_nid)) {
     $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
@@ -1211,8 +1238,7 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
     $service_content_details[$date_key]['entity_id'] = $entity_id;
   }
   $i = -1;
-
-  $zodiac = array(0 => 'Aries', 1 => 'Taurus', 2 => 'Gemini', 3 => 'Cancer', 4 => 'Leo', 5 => 'Virgo', 6 => 'Libra', 7 => 'Scorpio', 8 => 'Sagittarius', 9 => 'Capricorn', 10 => 'Aquarius', 11 => 'Pisces', 12 => 'NotKnown', 13 => 'Unknown');
+  $zodiac_name = itg_astro_zodiac_thumbnail();
   foreach ($form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'] as $key => $filed_collection) {
     if (is_numeric($key)) {
       $date = date_create($start_date);
@@ -1222,7 +1248,7 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
       $tomorrow_date = isset($service_content_details[$schema_tomorrow]['startdate']) ? $service_content_details[$schema_tomorrow]['startdate'] : $tomorrow;
       $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_content_date[LANGUAGE_NONE][0]['value'] = $tomorrow_date;
       if (!empty($_SESSION['field_astro_zodiac'])) {
-        $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $zodiac[$i] . ' - ' . $service_content_details[$schema_tomorrow]['content'];
+        $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $zodiac_name[$i]->name . ' - ' . $service_content_details[$schema_tomorrow]['content'];
       }
       else {
         $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $service_content_details[$schema_tomorrow]['content'];

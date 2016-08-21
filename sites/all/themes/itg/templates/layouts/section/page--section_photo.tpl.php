@@ -14,6 +14,10 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';  
 }
+
+if ($theme == 'itgadmin' && !isset($preview)) {
+    $gray_bg_layout = 'gray-bg-layout';
+}
 ?>
 
 <!--------------------------------Code for Front tpl---------------------------------------->
@@ -208,6 +212,11 @@ if (arg(2) == 'preview') {
           <div class="col-md-4">
               <div class="sidebar-section-photo">
                 <div class="itg-widget">
+                    <div class="ad-widget">
+                      <div class="sidebar-ad droppable"></div>
+                    </div>              
+                  </div>
+                <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-21']['widget_name']; ?>">
                      <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-21']['block_title'])) { ?>
@@ -291,6 +300,11 @@ if (arg(2) == 'preview') {
                     </div>             
                   </div>               
                 </div>
+                <div class="itg-widget">
+                    <div class="ad-widget">
+                      <div class="sidebar-ad droppable"></div>
+                    </div>              
+                  </div>
               </div>
           </div>
         </div>
