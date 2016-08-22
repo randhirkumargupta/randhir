@@ -53,6 +53,7 @@ Version   :  1.0
     font-family: Roboto;
     line-height: 25px;
     width: 100%;
+    background: #171717;
 }
 .carousel .slides .slideItem span i{
     font-size: 40px;
