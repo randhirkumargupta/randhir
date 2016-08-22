@@ -83,6 +83,8 @@
                     $('#edit-field-upload-video label').hide();
                 } else {
                     $(".browse-ftp-click").hide();
+                    $('.browse-video-form label').hide();
+                    $('#edit-field-upload-video label:first').show();
                 }
             });
 

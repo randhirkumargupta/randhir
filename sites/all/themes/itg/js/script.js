@@ -206,6 +206,20 @@ Drupal.behaviors.my_custom_behavior = {
     
     //ITG Listing top spacing          
     $('.tab-data').find('ul.itg-listing').css('padding-top','0');
+
+     //search page result
+    $('.itg-search-list').each(function(){
+        $(this).find('.search-pic').each(function(){
+            var current = $(this);        
+            if(current.children().length == 0){          
+              $(current).addClass("hide"); 
+            }
+        });        
+        var currentSocial = $(this).children('.social-share');
+        var currentInfo = $(this).children(".search-detail").children(".other-info");
+        console.log(currentSocial);
+        currentSocial.appendTo(currentInfo);        
+    });
         
     //pagination
     $('.pager .pager-previous a').html('<i class="fa fa-chevron-left"></i>');
