@@ -353,7 +353,6 @@ function itg_story_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_story_node_update($node) {
-  //p($node);
   if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft' && $node->op == 'Save') {
     foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
       if ($val['value'] == 'breaking_news') {
