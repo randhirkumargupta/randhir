@@ -2362,6 +2362,7 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-mega-review-review-values"] tbody,
 [id*="field-story-highlights-values"] tbody {
   float: none;
+  margin-left: 50px;
 }
 [id*="field-erf-registration-fee-values"] tbody tr td,
 [id*="field-mega-review-review-values"] tbody tr td,
@@ -5566,6 +5567,7 @@ div.node #comments h2 {
 [id*="field-story-highlights-values"] .form-item {
   float: left;
   margin: 0 15px 20px 0;
+  padding: 0;
 }
 [id*="field-story-highlights-values"] .form-submit[value="Add another item"] {
   margin-left: 30px;
