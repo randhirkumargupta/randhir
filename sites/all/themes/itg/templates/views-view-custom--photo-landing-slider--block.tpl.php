@@ -11,8 +11,8 @@
                 </li>
             <?php endforeach; ?>
         </ul>
-        <div class="slick-thumbs" style="display: none">
-            <ul>
+        <div class="slick-thumbs">
+            <ul class="slick-thumbs-slider">
                 <?php foreach ($rows as $index => $row): ?>
                     <li>
                         <?php print $row['field_images_1']; ?>
@@ -53,57 +53,39 @@
         </div>
         
         
+        <div class="photo-ad">       
+        </div>
+        
+        
     </div>
 </div>
 
 
 <script>
-jQuery(document).ready(function (e) {
+jQuery(document).ready(function (e) {    
     jQuery('.slickslide').slick({
-        dots: true,
-        infinite: true,        
-        fade: false,
-        slide: 'li',
-        cssEase: 'linear',
-        centerMode: true,
         slidesToShow: 1,
-        variableWidth: true,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        responsive: [{
-            breakpoint: 800,
-            settings: {
-                arrows: false,
-                centerMode: false,
-                centerPadding: '40px',
-                variableWidth: false,
-                slidesToShow: 1,
-                dots: true
-            },
-            breakpoint: 1200,
-            settings: {
-                arrows: false,
-                centerMode: false,
-                centerPadding: '40px',
-                variableWidth: false,
-                slidesToShow: 1,
-                dots: true
-
-            }
-        }],
-        customPaging: function (slider, i) {
-            return '<button class="tab">' + jQuery('.slick-thumbs li:nth-child(' + (i + 1) + ')').html() + '</button>';
-        }
+        slidesToScroll: 1,
+        arrows: true,
+        fade: false,
+        asNavFor: '.slick-thumbs-slider, .counterslide'
     });
-    
+    jQuery('.slick-thumbs-slider').slick({
+        slidesToShow: 7,
+        slidesToScroll: 1,
+        asNavFor: '.slickslide, .counterslide',
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true
+    });
+        
     jQuery('.counterslide').slick({
-        dots: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
         fade: true,
-        asNavFor:'.slickslide'
+        asNavFor: '.slick-thumbs-slider, .slickslide'
     });
-
-    //$('.slick-thumbs').html('');
-    //$('.slick-dots').appendTo('.slick-thumbs');
 });
 
 </script>

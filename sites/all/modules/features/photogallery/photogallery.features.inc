@@ -45,11 +45,11 @@ function photogallery_image_default_styles() {
   $styles['photgallery_landing_slider_753x543'] = array(
     'label' => 'photgallery_landing_slider_753x543',
     'effects' => array(
-      5 => array(
+      8 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 753,
-          'height' => 543,
+          'width' => 750,
+          'height' => 539,
         ),
         'weight' => 1,
       ),
