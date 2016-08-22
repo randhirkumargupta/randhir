@@ -88,9 +88,9 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         module_invoke_all('exit');
         drupal_exit();
       }
-      else {
-        return true;
-      }
+//      else {
+//        return true;
+//      }
     }
     $form['field_notify_user_of_update_acco']['und']['#attributes'] = array('checked' => 'checked');
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
