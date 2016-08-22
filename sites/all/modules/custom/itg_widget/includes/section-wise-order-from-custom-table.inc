@@ -26,7 +26,6 @@ function itg_widget_section_wise_ordering_from_custom_table($info) {
             ->groupBy('iwo.nid')
             ->range(0, 3);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    pr($result);
     $weight_sum = 0;
     foreach ($result as $data) {
       $weight_sum += $data['weight'];
