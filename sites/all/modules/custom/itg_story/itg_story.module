@@ -353,10 +353,14 @@ function itg_story_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_story_node_update($node) {
-  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
+  //p($node);
+  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft' && $node->op == 'Save') {
     foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
       if ($val['value'] == 'breaking_news') {
-        itg_story_create_breaking_news($node);
+        $breaking_cond = get_breaking_id($node->nid);
+        if (!$breaking_cond) {
+          itg_story_create_breaking_news($node);
+        }
       }
     }
   }
@@ -523,4 +527,20 @@ function itg_story_checked_issue($issue_date) {
   }
 
   return TRUE;
+}
+
+
+/**
+ * Get breakingnews  id
+ * @param int $breaking_id
+ * @return int $itg_result
+ */
+function get_breaking_id($breaking_id) {  
+  $query = db_select('field_data_field_source', 'fs');
+  $query->fields('fs', array('entity_id'));  
+  $query->condition('fs.bundle', 'breaking_news');
+  $query->condition('fs.field_source_value', $breaking_id);
+  $itg_result = $query->execute()->fetchField();
+  
+  return $itg_result;
 }
