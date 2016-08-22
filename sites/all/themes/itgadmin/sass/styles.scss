@@ -6290,6 +6290,7 @@ div.node{
     label{
       float: left;
       width: 220px;
+      padding-top: 0;
     }
     .browse-ftp-click{
       @extend .dib;
@@ -6309,6 +6310,9 @@ div.node{
   }
   #edit-field-upload-video{
     @extend .choose-audio-video-file;
+  }
+  .ajax-progress{
+    @extend .hide;
   }
 }
 /*#itg_video_content{
