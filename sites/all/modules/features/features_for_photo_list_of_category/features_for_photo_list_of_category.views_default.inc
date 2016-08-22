@@ -328,6 +328,11 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['alter']['text'] = '[field_story_category-tid]';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
 
   /* Display: photo list of category for view page */

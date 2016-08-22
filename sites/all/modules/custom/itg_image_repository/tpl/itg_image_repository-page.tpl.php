@@ -59,7 +59,6 @@
                             jQuery('#file-preview').html('');
 
                             var imageId = jQuery(this).siblings('.dz-image').children('img').attr('imageid');
-                            alert(imageId);
 
                         })
 

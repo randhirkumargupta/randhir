@@ -848,7 +848,7 @@ updateUI: function() {
     jQuery('#imce-search-form').hide();
     jQuery('#itg-image-repository-upload-form').show();
     jQuery('#itg-image-repository-filesearch-form').hide();
-    jQuery('.dz-image').trigger('click')
+    jQuery('.dz-details').trigger('click');
     jQuery('#file-preview').hide();
   })
   
