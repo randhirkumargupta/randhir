@@ -19,10 +19,12 @@ function itg_widget_featured_photo_carousel_data($info, $slider_type) {
     // condition to validate
     if (!empty($view_name) && !empty($page)) {
       $query = db_select('draggableviews_structure', 'dv_s');
+      $query->leftJoin('node', 'n', 'n.nid=dv_s.entity_id');
       $query->fields('dv_s', array('entity_id'));
       $query->condition('dv_s.view_name', $view_name);
       $query->condition('dv_s.view_display', $page);
       $query->orderBy('dv_s.weight', 'ASC');
+      $query->condition('n.status', '1');
       // only top 5 nodes are required as per requirement
       // TODO: Add values to Variables and create config file. Widget settings.
       $query->range(0, 5);
