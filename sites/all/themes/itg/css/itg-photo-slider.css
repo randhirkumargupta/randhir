@@ -48,20 +48,58 @@ Version   :  1.0
 }
 .carousel .slides .slideItem span{
     color: #fff;
-    font-size: 22px;
-    font-weight: 700;    
+    font-size: 14px;
+    font-weight: 400;    
     font-family: Roboto;
     line-height: 25px;
     width: 100%;
+    background: #171717;
+    opacity: 0;
+
 }
 .carousel .slides .slideItem span i{
     font-size: 40px;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 .carousel .slides .slideItem span.flex-count{    
     position: absolute;
     bottom: 10px;    
     right: 20px;
     background: transparent;
+}
+.carousel .slides .slideItem span.pic-tit{
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+.carousel .slides .slideItem span.overlay{
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 99;
+    opacity: .5;
+}
+.carousel .slides .slideItem[style*="width: 645px"] span{
+    opacity: 1;
+      -webkit-transition: all 500ms ease .2s;
+    -moz-transition: all 500ms ease .2s;
+    -o-transition: all 500ms ease .2s;
+    transition: all 500ms ease .2s;
+}
+.carousel .slides .slideItem[style*="width: 645px"] span.overlay{
+    opacity: 0;
+      -webkit-transition: all 500ms ease .2s;
+    -moz-transition: all 500ms ease .2s;
+    -o-transition: all 500ms ease .2s;
+    transition: all 500ms ease .2s;
+}
+#block-itg-widget-featured-photo-carousel-r .carousel .slides .slideItem span.flex-count{    
+     left: 10px;    
 }
 .carousel .slides .slideItem a {
   display: block;

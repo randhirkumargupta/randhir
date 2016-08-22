@@ -16,6 +16,7 @@ if (!empty($data)) {  ?>
               <!--<img src="/itgcms/sites/all/themes/itg/images/demo-photo.jpg">-->
               <span class="flex-count"><i class="fa fa-camera"></i> <?php echo $entity_data_node['count']; ?></span>
               <span class="pic-tit"><?php print $entity_data_node['title']; ?></span>
+              <span class="overlay"></span>
             </a>
             
           </div>  

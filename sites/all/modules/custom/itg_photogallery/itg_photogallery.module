@@ -430,7 +430,8 @@ function itg_photogallery_node_presave($node) {
 /**
  * {@inheritdoc}
  */
-function itg_photogallery_node_view($node, $view_mode, $langcode) {   
+function itg_photogallery_node_view($node, $view_mode, $langcode) {
+  if($node->type == 'photogallery'){
     // Category view on landing page
     drupal_add_js("jQuery('#block-itg-photogallery-photo-menu-landing-block ul li').click(function(){
                var section_id = jQuery(this).val();
@@ -449,5 +450,7 @@ drupal_add_js("jQuery(document).ready(function(){
               });
            });", array('type' => 'inline', 'scope' => 'footer'));
   }
+  
+}
   
 

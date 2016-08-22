@@ -183,7 +183,7 @@ img {
   float: right;
 }
 
-.pos-rel, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox input[type="checkbox"], #comments .comment, .form-managed-file, .trending-videos li .pic, .top-takes-video-container ul li.top-takes-video .pic, .watch-right-now-video ul li.watch-right-now-list .pic, #block-views-video-landing-header-block-1 .view-content .item-list ul li .views-field-field-story-extra-large-image, .rhs-section-ordering ul li.rhs-section-item-container .pic {
+.pos-rel, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox input[type="checkbox"], #comments .comment, .form-managed-file, .trending-videos li .pic, .top-takes-video-container ul li.top-takes-video .pic, .watch-right-now-video ul li.watch-right-now-list .pic, .rhs-section-ordering ul li.rhs-section-item-container .pic {
   position: relative;
 }
 
@@ -1541,6 +1541,11 @@ footer .footer-copyright {
 }
 .view-front-end-global-search .view-content .search-pic {
   width: 170px;
+  height: 127px;
+  overflow: hidden;
+}
+.view-front-end-global-search .view-content .search-pic:empty {
+  display: none;
 }
 .view-front-end-global-search .view-content .search-detail h2 {
   font-size: 22px;
@@ -1555,7 +1560,8 @@ footer .footer-copyright {
   line-height: 28px;
 }
 .view-front-end-global-search .view-content .social-share {
-  text-align: right;
+  display: inline-block;
+  vertical-align: top;
 }
 .view-front-end-global-search .view-content .social-share ul li {
   display: inline-block;
@@ -3324,48 +3330,26 @@ footer .footer-copyright {
   font-size: 0.875rem;
   color: #fff;
 }
-#block-views-video-landing-header-block-1 .view-content .item-list {
+#block-views-video-landing-header-block-1 .view-content {
   margin: 0 -10px;
+  overflow: hidden;
 }
-#block-views-video-landing-header-block-1 .view-content .item-list ul {
+#block-views-video-landing-header-block-1 .view-content ul.photo-list {
   zoom: 1;
 }
-#block-views-video-landing-header-block-1 .view-content .item-list ul:before, #block-views-video-landing-header-block-1 .view-content .item-list ul:after {
+#block-views-video-landing-header-block-1 .view-content ul.photo-list:before, #block-views-video-landing-header-block-1 .view-content ul.photo-list:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-#block-views-video-landing-header-block-1 .view-content .item-list ul:after {
+#block-views-video-landing-header-block-1 .view-content ul.photo-list:after {
   clear: both;
 }
-#block-views-video-landing-header-block-1 .view-content .item-list ul li {
+#block-views-video-landing-header-block-1 .view-content ul.photo-list li {
   width: 170px;
   padding: 0 10px;
   float: left;
-  position: relative;
-}
-#block-views-video-landing-header-block-1 .view-content .item-list ul li .views-field-field-story-extra-large-image:after {
-  background: url(../images/video-icon-small.png) no-repeat;
-  content: "";
-  width: 18px;
-  height: 18px;
-  position: absolute;
-  left: 5px;
-  bottom: 5px;
-}
-#block-views-video-landing-header-block-1 .view-content .item-list ul li .views-field-field-video-duration {
-  position: absolute;
-  top: 104px;
-  left: 40px;
-  cursor: pointer;
-  font-family: "Roboto", sans-serif;
-  font-size: 12px;
-  font-size: 0.75rem;
-  color: #fff;
-}
-#block-views-video-landing-header-block-1 .view-content .item-list ul li .views-field-field-story-short-headline {
-  margin-top: 15px;
 }
 #block-views-video-landing-header-block-1 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
   height: 20px;
@@ -3444,26 +3428,31 @@ footer .footer-copyright {
   right: 0;
 }
 
-.view-video-list-of-category .views-exposed-form {
+#block-itg-videogallery-videogallery-menu-video-block {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.view-video-list-of-category .views-exposed-form, .view-video-landing-header .views-exposed-form {
   display: none;
 }
-.view-video-list-of-category .view-content {
+.view-video-list-of-category .view-content, .view-video-landing-header .view-content {
   margin: 0 -15px;
 }
-.view-video-list-of-category .view-content .photo-list {
+.view-video-list-of-category .view-content .photo-list, .view-video-landing-header .view-content .photo-list {
   list-style: none;
 }
-.view-video-list-of-category .view-content .photo-list li {
+.view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li {
   padding: 15px;
   float: left;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure {
+.view-video-list-of-category .view-content .photo-list li .tile figure, .view-video-landing-header .view-content .photo-list li .tile figure {
   width: 170px;
   height: 127px;
   overflow: hidden;
   position: relative;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure figcaption {
+.view-video-list-of-category .view-content .photo-list li .tile figure figcaption, .view-video-landing-header .view-content .photo-list li .tile figure figcaption {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -3473,30 +3462,30 @@ footer .footer-copyright {
   font-size: 12px;
   font-family: Roboto;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure figcaption .fa {
+.view-video-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-video-landing-header .view-content .photo-list li .tile figure figcaption .fa {
   font-size: 14px;
   margin-right: 5px;
 }
-.view-video-list-of-category .view-content .photo-list li .tile .posted-on {
+.view-video-list-of-category .view-content .photo-list li .tile .posted-on, .view-video-landing-header .view-content .photo-list li .tile .posted-on {
   display: block;
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
   font-family: "Roboto Slab";
 }
-.view-video-list-of-category .view-content .photo-list li .tile a {
+.view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a {
   color: #494949;
   font-family: "Roboto Slab";
 }
 
 /*CSS End Video landing Header*/
-/*video rolling slider*/
+/*video and Photo rolling slider*/
 #block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r {
   background: #171717;
   padding: 50px 0 0 0;
 }
 
-/*video rolling slider end*/
+/*video and photo rolling slider end*/
 /*CCS start Photo landing Page*/
 #block-views-photo-list-of-category-block-2 h3 {
   text-transform: uppercase;
