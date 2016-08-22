@@ -6,7 +6,7 @@ global $theme_key;
 ?>
 
 
-<h2 class="block-title">Template widgets</h2>
+<h2 class="block-title">Template widgets <span><i class="fa fa-plus-circle hide"></i><i class="fa fa-minus-circle"></i></span></h2>
 <ul id="templates-widgets" class="no-bullet pd-10 templates-widgets">
   <?php 
     foreach($data['default_widget'] as $key => $val) {

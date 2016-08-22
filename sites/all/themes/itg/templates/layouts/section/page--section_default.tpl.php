@@ -163,6 +163,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                 <div class="widget-settings">
                                   <div class="widget-title-wrapper">
+                                    <span class="widget-title" data-id="itg-block-7"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
                                     <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
                                   </div>
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
