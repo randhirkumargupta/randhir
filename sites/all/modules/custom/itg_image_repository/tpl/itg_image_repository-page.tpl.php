@@ -43,7 +43,8 @@
                                     success: function(data) {
                                         //  itg_image_repository.processResponse
                                         hideloader();
-                                        jQuery('#file-preview').html(data);
+                                        
+                                        jQuery('#file-preview').show().html(data);
                                     },
                                     error: function(xhr, desc, err) {
                                         console.log(xhr);
@@ -80,7 +81,7 @@
                                     success: function(data) {
                                         //  itg_image_repository.processResponse
                                         hideloader();
-                                        jQuery('#file-preview').html(data);
+                                        jQuery('#file-preview').show().html(data);
                                     },
                                     error: function(xhr, desc, err) {
                                         console.log(xhr);
@@ -134,7 +135,7 @@
                                             success: function(data) {
                                                 //  itg_image_repository.processResponse
                                                 hideloader();
-                                                jQuery('#file-preview').html(data);
+                                                jQuery('#file-preview').show().html(data);
                                             },
                                             error: function(xhr, desc, err) {
                                                 console.log(xhr);
