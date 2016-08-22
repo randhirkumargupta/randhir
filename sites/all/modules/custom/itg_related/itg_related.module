@@ -26,6 +26,12 @@ function itg_related_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['twitter-handle/autocomplete'] = array(
+    'page callback' => 'itg_get_twitter_list',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -150,6 +156,8 @@ function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_i
   if ($form["#id"] == 'views-exposed-form-related-content-new-page') {
     $form['sm_vid_Tags']['#autocomplete_path'] = 'tag-list/1/autocomplete';
     $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/4/autocomplete';
+    $form['sm_field_itg_common_by_line_name']['#autocomplete_path'] = 'reporter-list/autocomplete';
+    $form['sm_field_itg_common_by_line_twit']['#autocomplete_path'] = 'twitter-handle/autocomplete';
   }
 }
 
@@ -408,4 +416,24 @@ function itg_get_tag($title) {
     }
     drupal_json_output($options);
   }
+}
+
+
+/**
+ * Implement itg_get_twitter_list
+ * @param string $name
+ */
+function itg_get_twitter_list($name) {
+  $reporter_name = db_select('field_data_field_itg_common_by_line_twitter', 'rpn')
+      ->distinct()
+      ->fields('rpn', array('field_itg_common_by_line_twitter_value'))
+      ->condition('field_itg_common_by_line_twitter_value', '%' . $name . '%', 'LIKE')
+      ->condition('field_itg_common_by_line_twitter_value', 'NULL' , '!=')
+      ->execute();
+
+  while ($record = $reporter_name->fetchAssoc()) {
+    //$options[$prefix . $record['name'] . ':' . $record['tid']] = $record['name'];
+    $options[$record['field_itg_common_by_line_twitter_value']] = $record['field_itg_common_by_line_twitter_value'];
+  }
+  drupal_json_output($options);
 }
