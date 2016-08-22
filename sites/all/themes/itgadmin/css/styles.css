@@ -5280,8 +5280,8 @@ div.node #comments h2 {
   margin-bottom: 20px;
 }
 .itg_image_repository #preview-wrapper #file-preview {
-  max-height: 430px;
-  overflow: auto;
+  /*max-height: 430px;
+  overflow: auto;*/
   text-align: center;
 }
 
@@ -5379,11 +5379,13 @@ div.node #comments h2 {
 }
 .croper .image-editor {
   overflow: hidden;
+  text-align: left;
 }
 .croper .image-editor .cropit-image-zoom {
   background-color: #fff;
   margin: 0;
   padding: 20px 0;
+  text-align: center;
 }
 .croper .first-resize, .croper .second-resize {
   display: inline-block;
@@ -5482,13 +5484,14 @@ div.node #comments h2 {
   width: 20px;
   z-index: 999;
   text-indent: -9999px;
+  cursor: pointer;
 }
 
 .templates-widgets {
   max-height: 127px;
   padding: 0;
   margin: 10px;
-  overflow-y: auto;
+  overflow-y: auto !important;
 }
 .templates-widgets li {
   padding: 10px;
@@ -6171,4 +6174,11 @@ div.node #comments h2 {
   right: 2px;
   text-indent: -9999px;
   width: 20px;
+}
+
+.top-colum-1 .widget-settings .widget-title-wrapper {
+  width: 200px;
+}
+.top-colum-1 .widget-settings .widget-title-wrapper input[type="text"] {
+  display: block;
 }

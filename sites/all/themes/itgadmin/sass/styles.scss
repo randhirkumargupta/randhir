@@ -5301,8 +5301,8 @@ div.node{
       margin-bottom: 20px;
     }
     #file-preview {
-      max-height: 430px;
-      overflow: auto;
+      /*max-height: 430px;
+      overflow: auto;*/
       text-align: center;
     }
   }
@@ -5448,10 +5448,12 @@ div.node{
   }
   .image-editor {
     overflow: hidden;
+    text-align:left;
     .cropit-image-zoom{
       background-color: #fff;
       margin: 0;
       padding: 20px 0;
+      text-align: center;
     }
   }
   .first-resize, .second-resize{
@@ -5557,6 +5559,7 @@ div.node{
     width: 20px;
     z-index: 999;
     text-indent: -9999px;
+    cursor: pointer;
   }
 }
 
@@ -5564,7 +5567,7 @@ div.node{
   max-height: 127px;
   padding: 0;
   margin: 10px;
-  overflow-y: auto;
+  overflow-y: auto !important;
   li{
     padding: 10px;
     background-color: #fff;
@@ -6354,4 +6357,10 @@ div.node{
     text-indent: -9999px;
     width: 20px;
   }
+}
+.top-colum-1 .widget-settings .widget-title-wrapper{
+    width: 200px;
+    input[type="text"]{
+        display: block;
+    }
 }
