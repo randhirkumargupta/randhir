@@ -278,7 +278,7 @@ function itg_front_search_node_presave($node) {
 }
 
 /**
- * Implement get_content_type_name .
+ * Implement itg_get_reporter_list
  * @param string $name
  */
 function itg_get_reporter_list($name) {

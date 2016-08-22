@@ -1951,6 +1951,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   }
   tbody{
     float: none;
+    margin-left: 50px;
     tr td{
       border: none;
       padding: 0;
@@ -5297,12 +5298,11 @@ div.node{
   }
   #preview-wrapper{
     height: auto !important;
+    margin-top: 40px;
     #search-preview{
       margin-bottom: 20px;
     }
     #file-preview {
-      /*max-height: 430px;
-      overflow: auto;*/
       text-align: center;
     }
   }
@@ -5656,6 +5656,7 @@ div.node{
     .form-item{
         float: left;
         margin: 0 15px 20px 0;
+        padding: 0;
     }
     .form-submit[value="Add another item"]{
         margin-left: 30px;
@@ -6289,6 +6290,7 @@ div.node{
     label{
       float: left;
       width: 220px;
+      padding-top: 0;
     }
     .browse-ftp-click{
       @extend .dib;
@@ -6308,6 +6310,9 @@ div.node{
   }
   #edit-field-upload-video{
     @extend .choose-audio-video-file;
+  }
+  .ajax-progress{
+    @extend .hide;
   }
 }
 /*#itg_video_content{
@@ -6363,4 +6368,20 @@ div.node{
     input[type="text"]{
         display: block;
     }
+}
+#views-form-photo-carousel-widget-photo-carousel-list{
+  @extend .confirmation;
+  .form-actions{
+    #edit-submit{
+      @extend .btn;
+      @extend .btn-save;
+      a{
+        @extend .btn-cancel;
+        @extend .dib;
+        @extend .vtop;
+        padding: 6px 12px;
+        border-radius: 4px;
+      }
+    }
+  }
 }

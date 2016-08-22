@@ -1274,6 +1274,11 @@ footer{
         }
         .search-pic{
             width: 170px;
+            height: 127px;
+            overflow: hidden;
+            &:empty{
+                display: none;
+            }
         }
         .search-detail{
             h2{
@@ -1285,7 +1290,7 @@ footer{
             }            
         }
         .social-share{
-            text-align: right;
+            @include display-inline;
             @include social-share;
         }
         .other-info{
@@ -2704,11 +2709,6 @@ footer{
 #block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r{
     background: #171717;   
     padding: 50px 0 0 0;
-}
-#block-itg-widget-featured-photo-carousel-r{
-    .carousel .slides .slideItem span.flex-count{
-        left: 20px;
-    }
 }
 /*video and photo rolling slider end*/
 

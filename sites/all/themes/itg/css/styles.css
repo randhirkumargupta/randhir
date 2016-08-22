@@ -1541,6 +1541,11 @@ footer .footer-copyright {
 }
 .view-front-end-global-search .view-content .search-pic {
   width: 170px;
+  height: 127px;
+  overflow: hidden;
+}
+.view-front-end-global-search .view-content .search-pic:empty {
+  display: none;
 }
 .view-front-end-global-search .view-content .search-detail h2 {
   font-size: 22px;
@@ -1555,7 +1560,8 @@ footer .footer-copyright {
   line-height: 28px;
 }
 .view-front-end-global-search .view-content .social-share {
-  text-align: right;
+  display: inline-block;
+  vertical-align: top;
 }
 .view-front-end-global-search .view-content .social-share ul li {
   display: inline-block;
@@ -3494,10 +3500,6 @@ footer .footer-copyright {
 #block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r {
   background: #171717;
   padding: 50px 0 0 0;
-}
-
-#block-itg-widget-featured-photo-carousel-r .carousel .slides .slideItem span.flex-count {
-  left: 20px;
 }
 
 /*video and photo rolling slider end*/
