@@ -97,6 +97,8 @@ function my_custom_ajax_callback() {
 
   $data = array('######1', '######2');
 
+  $combined_data = array('label' => $_POST['title'], 'bundle_name' => trim($_POST['bundle_name']), 'im_vid_4' => $_POST['section_id'], 'hash' => $_POST['hash']);
+  //$output = serialize($combined_data);
   $check_title = check_search_title(trim($_POST['search_name']));
 
   if ($check_title) {
