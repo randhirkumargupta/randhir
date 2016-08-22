@@ -753,18 +753,20 @@ function itg_videogallery_duration_time() {
       $node = node_load($value->nid);
       $video_fid = $node->field_upload_video[LANGUAGE_NONE][0]['fid'];
       $video_id = itg_videogallery_get_videoid($video_fid);
-      $dur = $api->get(
-          '/video/' . $video_id, array('fields' => array('duration'))
-      );
-      $duration = '';
-      if ($dur['duration'] < 3600) {
-        $duration = gmdate("i:s", $dur['duration']);
+      if (!empty($video_id)) {
+        $dur = $api->get(
+            '/video/' . $video_id, array('fields' => array('duration'))
+        );
+        $duration = '';
+        if ($dur['duration'] < 3600) {
+          $duration = gmdate("i:s", $dur['duration']);
+        }
+        else {
+          $duration = gmdate("H:i:s", $dur['duration']);
+        }
+        $node->field_video_duration[LANGUAGE_NONE][0]['value'] = $duration;
+        field_attach_update('node', $node);
       }
-      else {
-        $duration = gmdate("H:i:s", $dur['duration']);
-      }
-      $node->field_video_duration[LANGUAGE_NONE][0]['value'] = $duration;
-      field_attach_update('node', $node);
     }
   }
 }
