@@ -50,7 +50,7 @@
 
                 if (imageId != "")
                 {
-
+                   
                     var imageName = jQuery(this).siblings('.dz-image').children('img').attr('imgname');
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'getimagetocroper',
@@ -58,7 +58,8 @@
                         data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width},
                         success: function(data) {
                             //  itg_image_repository.processResponse
-                            parent.jQuery('#file-preview').html(data);
+                            parent.jQuery('#search-preview').hide();
+                            parent.jQuery('#file-preview').show().html(data);
                             parent.jQuery('#loader-data').hide();
                         },
                         error: function(xhr, desc, err) {
