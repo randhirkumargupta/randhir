@@ -343,7 +343,6 @@
   font-size: 16px;
   text-align: center;
   z-index: 9;
-  display: block !important;
   display: none;
 }
 .itg-region .slide-icon.scroll-arrow-right {
@@ -442,3 +441,11 @@
 #block-block-1 .ad-display-block p {
   display: none;
 }
+
+/*$test : 
+$debug: "width:645px"; // TODO: move to _settings.scss
+
+
+    @if ($debug) { // visualizing layout internals
+        display: block;
+    }*/
