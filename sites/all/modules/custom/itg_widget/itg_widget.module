@@ -1005,7 +1005,7 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
-  if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['tid'] == '399')) {
+  if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['taxonomy_term']->name == 'Anchor')) {
 
     drupal_add_js(
             "jQuery(document).ready(function(){
