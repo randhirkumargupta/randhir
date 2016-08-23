@@ -20,8 +20,8 @@
             <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
           </a>
         <?php } ?>
-        <h3>
-          <?php echo l(mb_strimwidth($entity->title, 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
+        <h3 class="frist-heading heading-<?php echo $entity->nid ?> <?php echo $entity->type ?> ">
+          <?php echo l(mb_strimwidth($entity->title, 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
         </h3>
       <?php endif; ?>
       <?php if ($count != 0) : ?>

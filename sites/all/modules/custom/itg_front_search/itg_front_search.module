@@ -182,13 +182,18 @@ global $base_url;
     $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
 
     $get_var = $_GET;
-
+    $all_bundle = $_GET['bundle_name'];
     unset($_GET['q']);
     unset($_GET['bundle_name']);
 
     foreach ($bundle_name as $key => $val) {
       $_GET['bundle_name'][''] = $key;
-      $url .= l($key, 'site-search', array('query' => $_GET)) . ' ';
+      $lnk_class = '';
+      if (in_array($key, $all_bundle)) {
+        $lnk_class = "active";
+      }
+
+      $url .= l($key, 'site-search', array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
     }
 
     $form['suggest_links'] = array(
