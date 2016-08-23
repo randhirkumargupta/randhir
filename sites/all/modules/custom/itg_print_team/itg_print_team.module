@@ -114,16 +114,6 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       );
     }
 
-    // After task mark as completed, show help message
-    /*
-    if ($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed') {
-      $form['idea_completed'] = array(
-          '#type' => 'item',
-          '#markup' => '<div class="idea-task-completed"><strong>Note: </strong> This task has been completed, so you can not edit contents.</div>',
-          '#weight' => -8,
-      );
-    } */
-
     // Add cancel button
     $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'manage-print-team-not-decided', array('attributes' => array('class' => 'button'))),
@@ -977,7 +967,7 @@ function itg_print_team_check_mark_complete_users(){
  * @return array
  */
 function itg_print_team_mark_complete_users_arr() {
-  return array('Co-ordinator', 'Photo Coordinator', 'Photo Head', 'Design Head', 'Copy Desk', 'Designer', 'Photographer');
+  return array('Photo Coordinator', 'Photo Head', 'Design Head', 'Copy Desk', 'Designer', 'Photographer');
 }
 
 /**
