@@ -86,7 +86,7 @@ function itg_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
   $crumbs = '';
   if (!empty($breadcrumb) && arg(0) == 'site-search') {
-    $crumbs = '<div id="breadcrumbs"><ul><li>You are here: </li>';
+    $crumbs = '<div id="breadcrumbs"><ul><li></li>';
     foreach ($breadcrumb as $value) {
       $crumbs .= '<li>' . $value . '</li>';
     }

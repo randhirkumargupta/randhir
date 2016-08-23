@@ -16,8 +16,16 @@ if (!empty($data)) {  ?>
           <div class="slideItem"> 
               <a href="<?php echo $base_url?>/node/<?php print $entity_data_node['nid']; ?>">
               <?php print $entity_data_node['file_url'];  ?>
+                  <?php
+                  $itext = '';
+                  if($entity_data_node['count'] > 1){
+                     $itext = 'Images'; 
+                  }elseif($entity_data_node['count'] == 1){
+                      $itext = 'Image';
+                  }
+                  ?>
               <!--<img src="/itgcms/sites/all/themes/itg/images/demo-photo.jpg">-->
-              <span class="flex-count"><i class="fa fa-camera"></i> <?php echo $entity_data_node['count']; ?></span>
+              <span class="flex-count"><i class="fa fa-camera"></i> <?php echo $entity_data_node['count'].' '.$itext; ?></span>
               <span class="pic-tit"><?php print $entity_data_node['title']; ?></span>
               <span class="overlay"></span>
             </a>
