@@ -157,7 +157,7 @@ Drupal.behaviors.my_custom_behavior = {
         $('.search-icon').click(function(){
             $('.globle-search').css('width','255px');
         });
-        $('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+        
         $('.mobile-nav').click(function(){
             $('.navigation').stop().slideToggle();
         });
@@ -168,34 +168,7 @@ Drupal.behaviors.my_custom_behavior = {
             e.stopPropagation();
         });
     }
-    
-    footerMain();
-    function footerMain(){
-    //footer toggal script
-    $('.footer-expand-icon').click(function(){
-        $('.footer-toggle').slideToggle();
-        $("html, body").animate({ scrollTop: $(document).height() }, 800);
-        $('.footer-expand-icon').toggleClass('footer-open-icon');
-    });
-    //footer add more link
-    $('.footer-bottom .cell ul').each( function(){
-        var countList = $(this).children('li').length;        
-        if(countList > 8){
-           $(this).find('li:gt(7)').hide().addClass('hidelist');
-           $(this).append("<li><span class='more-link'>More</span></li>");
-        }
-    });
-    $('.more-link').click(function(){
-        $(this).parents('ul').find('li.hidelist').slideToggle();
-        $(this).toggleClass('active');
-        $("html, body").animate({ scrollTop: $(document).height() }, 800);
-        if($(this).hasClass('active')){
-            $('.more-link').text('Less');
-        } else{
-            $('.more-link').text('More');
-        }
-    });
-    }
+        
     // jQuery Code for tabbing
     $('.tab-buttons').on('click', 'span', function(){
       var dataID = '.' + $(this).attr('data-id');
@@ -267,7 +240,37 @@ jQuery(document).ready(function () {
 //            jQuery(this).stop();
         }
     });
-
+    
+            //header menu add icon for mobile
+jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+//ITG footer
+footerMain();
+    function footerMain(){
+    //footer toggal script
+    jQuery('.footer-expand-icon').click(function(){
+        jQuery('.footer-toggle').slideToggle();
+        jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
+        jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
+    });
+    //footer add more link
+    jQuery('.footer-bottom .cell ul').each( function(){
+        var countList = jQuery(this).children('li').length;        
+        if(countList > 8){
+           jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
+           jQuery(this).append("<li><span class='more-link'>More</span></li>");
+        }
+    });
+   jQuery('.more-link').click(function(){
+        jQuery(this).parents('ul').find('li.hidelist').slideToggle();
+        jQuery(this).toggleClass('active');
+        jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
+        if(jQuery(this).hasClass('active')){
+            jQuery('.more-link').text('Less');
+        } else{
+            jQuery('.more-link').text('More');
+        }
+    });
+    }
 
 });
 
@@ -286,6 +289,11 @@ jQuery(document).ready(function () {
         }
 
     })
+    // jQuery code to set offset of photo section page
+    var menuOffset = $('.itg-region').offset();
+    if ($('.video_landing_menu li').children().hasClass('set-offset')) {
+        $("body,html").animate({scrollTop: menuOffset.top - 100}, 300);
+    }
 
 
 });
