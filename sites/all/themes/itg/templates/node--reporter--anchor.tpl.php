@@ -24,8 +24,12 @@
   hide($content['comments']);
   hide($content['links']);
   unset($content);
+  $block = module_invoke('itg_widget', 'block_view', 'anchor_langing_page_menu');
+  print $block['content'];
   ?>
-
+<?php 
+print views_embed_view('video_list_of_category', 'block_2');
+?>
   <?php print render($content['links']); ?>
 
   <?php print render($content['comments']); ?>

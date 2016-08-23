@@ -18,19 +18,19 @@
 
       <div class="ftp-server">
         <div class="video_filters">
-          <label><strong><?php echo t('Filter') ?>: </strong><select class="used-unused-select">
+          <label><?php echo t('Filter') ?>:</label><select class="used-unused-select">
               <option value="unused"><?php print t("Un Published"); ?></option>
               <option value="used"><?php print t("Published"); ?></option>
-            </select></label>
+            </select>
           <div class="time-filter">
-            <label><strong><?php echo t('Select Time') ?>: </strong><select class="time-filter-select">
+            <label><?php echo t('Select Time') ?>:</label><select class="time-filter-select">
                 <option value="-all-"><?php print t("All"); ?></option>  
                 <option value="2"><?php print t("2 Hours"); ?></option>
                 <option value="4"><?php print t("4 Hours"); ?></option>
                 <option value="6"><?php print t("6 Hours"); ?></option>
                 <option value="10"><?php print t("10 Hours"); ?></option>
                 <option value="24"><?php print t("24 Hours"); ?></option>
-              </select></label>
+              </select>
           </div>
         </div>
         <div class="video-options-wrapper"></div>
