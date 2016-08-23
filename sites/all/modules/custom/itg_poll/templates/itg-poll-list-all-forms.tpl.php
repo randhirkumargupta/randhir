@@ -59,7 +59,7 @@ if ($current_index < $poll_count && $current_index != $poll_count - 1) {
   $next = l(t('Next'), 'itg_active_polls', array('query' => array('poll_index' => $current_index + 1)));
 }
 
-print '<div class="poll-wrapper">';
+print '<div class="poll-wrapper"><h3><span>CURRENT POLL</span></h3>';
 //print '<div class="poll-wrapper-pre-navigator">' . $pre . '</div>';
 
 $isCookies = itg_poll_isCookies($nid);
