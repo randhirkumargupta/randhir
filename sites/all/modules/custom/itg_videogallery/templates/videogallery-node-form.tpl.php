@@ -15,19 +15,30 @@
       <div class="video-ftp active">Server</div>
       <div class="video-local">Local Browse</div>
       <div id="loader-data"><img class="widget-loader" style="display: none" align="center" src="<?php echo base_path(); ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
+
       <div class="ftp-server">
-        <label><strong><?php echo t('Filter') ?>: </strong><select class="used-unused-select">
-            <option value="used">Published</option>
-            <option value="unused">Un Published</option>
-          </select></label>
+        <div class="video_filters">
+          <label><strong><?php echo t('Filter') ?>: </strong><select class="used-unused-select">
+              <option value="unused">Un Published</option>
+              <option value="used">Published</option>
+            </select></label>
+          <div class="time-filter">
+            <label><strong><?php echo t('Select Time') ?>: </strong><select class="time-filter-select">
+                <option value="-all-">All</option>  
+                <option value="2">2 Hours</option>
+                <option value="4">4 Hours</option>
+                <option value="6">6 Hours</option>
+                <option value="10">10 Hours</option>
+                <option value="24">24 Hours</option>
+              </select></label>
+          </div>
+        </div>
         <div class="video-options-wrapper"></div>
         <a href="javascript:void(0)" class = "button">Attach Video</a>
-        <?php //print drupal_render($form['video_browse_select']); ?>
-
-
-      </div>
+      </div>  
+      <?php //print drupal_render($form['video_browse_select']); ?>
       <div class="local_browse" style="display: none">
-        <span class="button browse-local">Local Browse</span>
+        <span class="button browse-local">Browse Video</span>
       </div>
     </div>
   </div>
