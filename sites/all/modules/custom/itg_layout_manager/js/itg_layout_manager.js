@@ -207,6 +207,13 @@
                     });
                 });
                 
+                
+                // jQuery code to set offset of photo section page
+                var menuOffset = $('.itg-region').offset();
+                if($('.video_landing_menu li').children().hasClass('set-offset')){
+                  $("body,html").animate({scrollTop: menuOffset.top - 100}, 300);
+                }
+                
             }   
             
  };
