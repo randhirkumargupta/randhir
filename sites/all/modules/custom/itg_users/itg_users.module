@@ -78,7 +78,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   }
   if ($form_id == 'user_profile_form') {
     // access denied code for direct hit 
-    if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit') {
+    if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit' && arg(1) != $user->uid) {
       $arg = arg(1);            
       $user_child_roles = itg_users_role_delegation($user->roles);
       $user_role = user_load($arg);
@@ -88,9 +88,9 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         module_invoke_all('exit');
         drupal_exit();
       }
-      else {
-        return true;
-      }
+//      else {
+//        return true;
+//      }
     }
     $form['field_notify_user_of_update_acco']['und']['#attributes'] = array('checked' => 'checked');
     $form['account']['name']['#attributes']['disabled'] = 'disabled';

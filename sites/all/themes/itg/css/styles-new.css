@@ -108,6 +108,9 @@
   z-index: 9;
   border: none;
 }
+#block-views-photo-landing-slider-block .slick-slider .slick-prev:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
 #block-views-photo-landing-slider-block .slick-slider .slick-prev:before {
   content: '\f053';
   font: normal normal normal 14px/1 FontAwesome;
@@ -131,8 +134,11 @@
   z-index: 9;
   border: none;
 }
+#block-views-photo-landing-slider-block .slick-slider .slick-next:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
 #block-views-photo-landing-slider-block .slick-slider .slick-next:before {
-  content: '\f053';
+  content: '\f054';
   font: normal normal normal 14px/1 FontAwesome;
   font-size: 30px;
   padding-left: 0;
@@ -149,8 +155,7 @@
   cursor: pointer;
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider {
-  padding: 0;
-  padding-bottom: 10px;
+  padding: 0 30px 10px;
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li {
   padding: 0 5px;
@@ -191,6 +196,9 @@
   text-transform: uppercase;
   left: auto;
   font-family: 'Roboto', sans-serif;
+}
+#block-views-photo-landing-slider-block .other-details-main .counterslide .slick-prev:hover, #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-next:hover {
+  color: #fff;
 }
 #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-prev:before, #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-next:before {
   display: none;
@@ -429,7 +437,8 @@
 }
 
 #block-block-1 {
-  border: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   border-top: none;
   height: 321px;
   padding: 37px;
@@ -442,7 +451,7 @@
   display: none;
 }
 
-/*$test : 
+/*$test : .carousel .slides .slideItem;
 $debug: "width:645px"; // TODO: move to _settings.scss
 
 

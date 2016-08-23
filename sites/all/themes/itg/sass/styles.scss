@@ -1274,6 +1274,11 @@ footer{
         }
         .search-pic{
             width: 170px;
+            height: 127px;
+            overflow: hidden;
+            &:empty{
+                display: none;
+            }
         }
         .search-detail{
             h2{
@@ -1285,7 +1290,7 @@ footer{
             }            
         }
         .social-share{
-            text-align: right;
+            @include display-inline;
             @include social-share;
         }
         .other-info{
@@ -2539,41 +2544,17 @@ footer{
             color: $white-color;
         }
     }
-    .view-content{
-        .item-list{  
+    .view-content{     
              margin:0 -10px;
-        ul{           
+            overflow: hidden;
+        ul.photo-list{           
             @include clearfix();            
             li{
                 width: 170px;
                 padding: 0 10px;
-                @include float(left);
-                @include pos(relative);
-                .views-field-field-story-extra-large-image{
-                    @extend .pos-rel;
-                        &:after{
-                            background: url(../images/video-icon-small.png) no-repeat;
-                            content:"";
-                            width: 18px;
-                            height: 18px;
-                            position: absolute;
-                            left: 5px;
-                            bottom: 5px;
-                        }
-                }
-                .views-field-field-video-duration{
-                    @include pos(absolute,104px,null,null,40px);                    
-                    cursor: pointer;
-                    font-family: $itg-roboto;
-                    @include font(12px);
-                    color: $white-color;
-                }
-                .views-field-field-story-short-headline{
-                    margin-top: 15px;
-                }
+                @include float(left);                
             }
-        }
-        }
+        }        
     }
     .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {        
         height: 20px;        
@@ -2650,7 +2631,11 @@ footer{
       right: 0;
     }
   }
-.view-video-list-of-category{    
+  #block-itg-videogallery-videogallery-menu-video-block{
+      padding-top: 0;
+      margin-top: 0;
+  }
+.view-video-list-of-category, .view-video-landing-header{    
     .views-exposed-form{
         display: none;
     }
