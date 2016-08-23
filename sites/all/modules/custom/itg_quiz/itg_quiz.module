@@ -85,7 +85,7 @@ function itg_quiz_block_info() {
  * {@inheritdoc}
  */
 function itg_quiz_block_view($delta = '') {
-  global $user;
+
   $block = array();
   $data = '';
   switch ($delta) {
@@ -151,8 +151,8 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
     
     // Add two answer option default
     if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'quiz') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')) {
-      drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-quiz-options-answer .field-add-more-submit').mousedown();
-        });", 'inline');
+        drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-quiz-options-answer .field-add-more-submit').mousedown();
+      });", 'inline');
    }
 }
 
@@ -293,10 +293,16 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
       $question_txt = $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'];
 
       if (is_numeric($key)) {
-        if (count($question_arr['field_quiz_options_answer'][LANGUAGE_NONE]) < 3) {
-          form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>@question</strong>?', array('@question' => $question_txt)));
+   
+        // Validation for answer options
+        $count_ans_text = 0;
+        foreach ($question_arr['field_quiz_options_answer'][LANGUAGE_NONE] as $correct_ans_arr) {
+          if (!empty($correct_ans_arr['field_quiz_answer_text'][LANGUAGE_NONE][0]['value'])) {
+            $count_ans_text++;
+          }
         }
-
+        
+         // Validation for correct answer
         $correct_ans_available = FALSE;
         foreach ($question_arr['field_quiz_options_answer'][LANGUAGE_NONE] as $correct_ans_arr) {
           if (!empty($correct_ans_arr['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'])) {
@@ -304,6 +310,9 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
           }
         }
 
+        if ($count_ans_text < 2) {
+          form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>@question</strong>?', array('@question' => $question_txt)));
+        }
         if (!$correct_ans_available) {
           form_set_error('field_quiz_options_answer', t('Please mark correct answer for question <strong>@question</strong>?', array('@question' => $question_txt)));
         }
