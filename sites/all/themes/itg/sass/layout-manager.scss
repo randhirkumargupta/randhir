@@ -411,3 +411,88 @@ a{
 }
 /*End Dont miss Home page css*/
 }
+
+
+
+/*Start photo section slider Homepage*/
+.featured_photo_carousel{
+    .widget-title{
+        @include pos(absolute,10px,null,null,10px);        
+    }
+    .flexslider{
+        border:none;
+        margin:0;
+        .slides{
+            li{
+                @include pos(relative);
+                .detail{                   
+                    @include calculate-width(1);
+                    font-family: $itg-roboto;
+                    .flex-caption {    
+                        padding: 10px 10px;    
+                        background: #000;
+                        color: $white-color;
+                        @include font(18px,24px,$itg-font-medium);    
+                        width: auto;
+                        height: 66px;
+                    }
+                    .flex-count{
+                        @include pos(absolute,null,null,78px,0px);
+                        @include display-inline;
+                        background: #000;
+                        opacity: .5;
+                        color: $white-color;
+                        @include font(12px,23px);            
+                        margin-bottom:0;
+                        padding: 0 10px;  
+                        height: 23px;
+                    }
+                }
+
+            }
+        }
+        .flex-control-nav{
+            display: none;
+        }
+        .flex-count{
+            @include display-inline;
+            background: #000;
+            opacity: 0.6;
+            color: $white-color;
+            @include font(12px);            
+            margin-bottom: 10px;
+            i{
+                margin-right: 5px;
+            }
+        }
+        .flex-direction-nav a{
+            display: block;
+            opacity: 1;
+            &:before{
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: 30px;
+                display: inline-block;                
+                color: #fff;    
+                background: #67aaef;
+                Z-INDEX: 1;
+                WIDTH: 40px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+            }
+            &.flex-prev{
+                left: 0;
+                &:before{
+                    content: '\f104';
+                }
+            }
+            &.flex-next{
+                right: 0;
+                &:before{
+                    content: '\f105';
+                }
+            }
+        }
+    }
+}
+/*End Photo section slider Homepage*/
