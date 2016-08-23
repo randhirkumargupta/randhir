@@ -7,9 +7,9 @@
 module_load_all_includes('inc', 'includes/itg_personalization.helper');
 
 /**
- * Implements hook_permission(),
+ * Implements hook_permission().
  *
- * {@inheritdoc}
+ * {@inheritdoc}.
  */
 function itg_personalization_permission() {
   return array(
@@ -23,7 +23,7 @@ function itg_personalization_permission() {
 /**
  * Implements hook_menu().
  *
- * {@inheritdoc}
+ * {@inheritdoc}.
  */
 function itg_personalization_menu() {
   $items['personalization'] = array(
@@ -83,7 +83,7 @@ function itg_personalization_home_page() {
 /**
  * Implements hook_theme().
  *
- * {@inheritdoc}
+ * {@inheritdoc}.
  */
 function itg_personalization_theme() {
   $themes = array(
