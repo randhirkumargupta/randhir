@@ -959,11 +959,13 @@ allowfullscreen></iframe>';
                 <li><a href="#"><i class="fa fa-envelope"></i> Email</a></li>
                 <li><a href="#"><i class="fa fa-link"></i> Embed</a></li>
                 <li><a href="#"><i class="fa fa-comment"></i> Comment</a></li>
+<li><a href="#"><i class="fa fa-share"></i>Submit Video</a></li>
             </ul>
         </div>
     </div>
     <div class="col-md-4 video-header-right"><p>[field_story_expert_description]</p>
         <p class="upload-date">[timestamp]</p>
+<div class="ads"></div>
     </div>
 </div>
     </div>';
