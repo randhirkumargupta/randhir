@@ -6133,7 +6133,7 @@ div.node #comments h2 {
 #itg_video_content .ftp-server, #itg_video_content .local_browse {
   padding: 20px 0;
 }
-#itg_video_content .ftp-server .video_filters label strong {
+#itg_video_content .ftp-server .video_filters label {
   margin-right: 5px;
 }
 #itg_video_content .ftp-server .video_filters .time-filter {
@@ -6247,6 +6247,10 @@ div.node #comments h2 {
   padding: 20px 20px 10px 0;
   margin: 0;
   width: 20%;
+}
+.ftp-server #edit-video-browse-select .ftp_video_radio .form-radio {
+  float: left;
+  margin: 2px;
 }
 .ftp-server > a {
   margin-top: 20px;

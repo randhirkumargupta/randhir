@@ -6246,7 +6246,7 @@ div.node{
   }
   .ftp-server{
     .video_filters{
-      label strong{
+      label{
         margin-right: 5px;
       }
       .time-filter{
@@ -6381,6 +6381,10 @@ div.node{
       padding: 20px 20px 10px 0;
       margin: 0;
       width: 20%;
+      .form-radio{
+        float: left;
+        margin: 2px;
+      }
     }
   }
   > a{
