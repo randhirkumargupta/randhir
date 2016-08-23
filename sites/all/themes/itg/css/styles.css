@@ -2973,6 +2973,11 @@ footer .footer-copyright {
   padding: 10px 15px;
   display: inline-block;
 }
+.poll-wrapper .poll-data .poll-replace-id .form-radios .poll-ans-caption {
+  padding: 10px 15px;
+  display: inline-block;
+  vertical-align: top;
+}
 .poll-wrapper .poll-data.relative-with-img {
   width: 56%;
   float: left;
@@ -2997,15 +3002,13 @@ footer .footer-copyright {
   padding: 0 0 12px;
 }
 .poll-wrapper .poll-replace-id .form-submit {
-  width: 100px;
-  height: 34px;
-  background: #0e8ae2;
-  border: 1px solid #48a4e5;
+  background: #1a3c8d;
+  border: 1px solid #1a3c8d;
   color: #fff;
   text-transform: uppercase;
-  font-weight: 700;
-  box-shadow: 1px 2px 2px #b5b1b1;
   cursor: pointer;
+  padding: 6px 5px 5px 5px;
+  font-size: 12px;
 }
 .poll-wrapper .poll-replace-id .error {
   display: block;
@@ -3144,7 +3147,7 @@ footer .footer-copyright {
   color: #323232;
 }
 .poll-banner .poll-list {
-  padding: 30px 0;
+  padding: 0 0 30px 0;
 }
 .poll-banner .detail {
   zoom: 1;
