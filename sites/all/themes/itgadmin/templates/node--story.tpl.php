@@ -1,7 +1,7 @@
 <?php if (!empty($content)): ?>
   <div class='<?php print $classes ?>'>
       <?php if ($view_mode == 'full'): ?>
-      <?php print render($content['links']['flag']); ?>
+      <?php //print render($content['links']['flag']); ?>
         <a href="javascript:;" class="close-preview">&nbsp;</a>
         <?php
         // Load custom block for social media integration 
