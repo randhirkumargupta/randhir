@@ -4215,6 +4215,7 @@ div.node{
   }
 }
 .user-profile-div{
+  @extend .pos-rel;
   .field{display: inline-block; width: 100%; vertical-align: top;}
   .field-name-field-user-picture{
     float: left; width: 200px; margin-right: 30px; border: 1px solid #ddd; height: 200px; position: relative;
@@ -4225,6 +4226,16 @@ div.node{
   .user-details, .field-items{overflow: hidden;}
   .field-label{float: left; width: 150px;}
   .field-items{padding-bottom: 10px;}
+  .user-edit-link{
+    position: absolute;
+    right: 0;
+    a{
+      color: #008eb1;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
 }
 .my-stats{
   @extend .dib;
@@ -5356,6 +5367,9 @@ div.node{
       }
     }
   } 
+  .form-managed-file .image-widget-data .form-submit[value="Remove"]{
+    left: 580px;
+  }
 }
 [id*="views-form-manage-print-team-page"]{
   .form-item-pti-issue{
@@ -5740,7 +5754,17 @@ div.node{
     }
     
 }
-.page-node-add-magazine, .node-type-story, .node-type-magazine, .node-type-breaking-news, .page-node-add-breaking-news, .page-node-add-story, .page-node-add-blog, .page-node-add-podcast, .page-node-add-recipe, .page-node-add-poll{
+.page-node-add-magazine, 
+.node-type-story, 
+.node-type-magazine, 
+.node-type-breaking-news, 
+.page-node-add-breaking-news, 
+.page-node-add-story, 
+.page-node-add-blog, 
+.page-node-add-podcast, 
+.page-node-add-recipe, 
+.node-type-print-team-integration,
+.page-node-add-poll{
     .form-type-managed-file{
       .image-widget-data{
           position: relative;  
@@ -6044,6 +6068,9 @@ div.node{
 }
 
 .node-type-print-team-integration{
+  .messages--error{
+    margin-bottom: 50px;
+  }
   .view-popup{
     max-height: none;
     max-width: none;

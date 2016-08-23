@@ -429,7 +429,7 @@ img {
 .view-link,
 .delete-link,
 .move-link,
-.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .block-itg-related .rel-link, .main-cont, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure {
+.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .user-profile-div, .block-itg-related .rel-link, .main-cont, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure {
   position: relative;
 }
 
@@ -4323,6 +4323,16 @@ div.node #comments h2 {
 .user-profile-div .field-items {
   padding-bottom: 10px;
 }
+.user-profile-div .user-edit-link {
+  position: absolute;
+  right: 0;
+}
+.user-profile-div .user-edit-link a {
+  color: #008eb1;
+}
+.user-profile-div .user-edit-link a:hover {
+  text-decoration: underline;
+}
 
 .my-stats h2 {
   font-size: 18px;
@@ -5341,6 +5351,9 @@ div.node #comments h2 {
 [id*="field-pti-print-media-values"] tbody tr + tr td {
   margin-top: 10px;
 }
+[id*="field-pti-print-media-values"] .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+  left: 580px;
+}
 
 [id*="views-form-manage-print-team-page"] .form-item-pti-issue {
   padding: 0 30px 0 0;
@@ -5660,18 +5673,48 @@ div.node #comments h2 {
   width: 80px;
 }
 
-.page-node-add-magazine .form-type-managed-file .image-widget-data, .node-type-story .form-type-managed-file .image-widget-data, .node-type-magazine .form-type-managed-file .image-widget-data, .node-type-breaking-news .form-type-managed-file .image-widget-data, .page-node-add-breaking-news .form-type-managed-file .image-widget-data, .page-node-add-story .form-type-managed-file .image-widget-data, .page-node-add-blog .form-type-managed-file .image-widget-data, .page-node-add-podcast .form-type-managed-file .image-widget-data, .page-node-add-recipe .form-type-managed-file .image-widget-data, .page-node-add-poll .form-type-managed-file .image-widget-data {
+.page-node-add-magazine .form-type-managed-file .image-widget-data,
+.node-type-story .form-type-managed-file .image-widget-data,
+.node-type-magazine .form-type-managed-file .image-widget-data,
+.node-type-breaking-news .form-type-managed-file .image-widget-data,
+.page-node-add-breaking-news .form-type-managed-file .image-widget-data,
+.page-node-add-story .form-type-managed-file .image-widget-data,
+.page-node-add-blog .form-type-managed-file .image-widget-data,
+.page-node-add-podcast .form-type-managed-file .image-widget-data,
+.page-node-add-recipe .form-type-managed-file .image-widget-data,
+.node-type-print-team-integration .form-type-managed-file .image-widget-data,
+.page-node-add-poll .form-type-managed-file .image-widget-data {
   position: relative;
   float: none;
 }
-.page-node-add-magazine .form-type-managed-file a.filefield-sources-imce-browse, .node-type-story .form-type-managed-file a.filefield-sources-imce-browse, .node-type-magazine .form-type-managed-file a.filefield-sources-imce-browse, .node-type-breaking-news .form-type-managed-file a.filefield-sources-imce-browse, .page-node-add-breaking-news .form-type-managed-file a.filefield-sources-imce-browse, .page-node-add-story .form-type-managed-file a.filefield-sources-imce-browse, .page-node-add-blog .form-type-managed-file a.filefield-sources-imce-browse, .page-node-add-podcast .form-type-managed-file a.filefield-sources-imce-browse, .page-node-add-recipe .form-type-managed-file a.filefield-sources-imce-browse, .page-node-add-poll .form-type-managed-file a.filefield-sources-imce-browse {
+.page-node-add-magazine .form-type-managed-file a.filefield-sources-imce-browse,
+.node-type-story .form-type-managed-file a.filefield-sources-imce-browse,
+.node-type-magazine .form-type-managed-file a.filefield-sources-imce-browse,
+.node-type-breaking-news .form-type-managed-file a.filefield-sources-imce-browse,
+.page-node-add-breaking-news .form-type-managed-file a.filefield-sources-imce-browse,
+.page-node-add-story .form-type-managed-file a.filefield-sources-imce-browse,
+.page-node-add-blog .form-type-managed-file a.filefield-sources-imce-browse,
+.page-node-add-podcast .form-type-managed-file a.filefield-sources-imce-browse,
+.page-node-add-recipe .form-type-managed-file a.filefield-sources-imce-browse,
+.node-type-print-team-integration .form-type-managed-file a.filefield-sources-imce-browse,
+.page-node-add-poll .form-type-managed-file a.filefield-sources-imce-browse {
   height: 100%;
   left: 0;
   position: absolute;
   top: 0;
   width: 100%;
 }
-.page-node-add-magazine .form-type-managed-file a.filefield-sources-imce-browse:after, .node-type-story .form-type-managed-file a.filefield-sources-imce-browse:after, .node-type-magazine .form-type-managed-file a.filefield-sources-imce-browse:after, .node-type-breaking-news .form-type-managed-file a.filefield-sources-imce-browse:after, .page-node-add-breaking-news .form-type-managed-file a.filefield-sources-imce-browse:after, .page-node-add-story .form-type-managed-file a.filefield-sources-imce-browse:after, .page-node-add-blog .form-type-managed-file a.filefield-sources-imce-browse:after, .page-node-add-podcast .form-type-managed-file a.filefield-sources-imce-browse:after, .page-node-add-recipe .form-type-managed-file a.filefield-sources-imce-browse:after, .page-node-add-poll .form-type-managed-file a.filefield-sources-imce-browse:after {
+.page-node-add-magazine .form-type-managed-file a.filefield-sources-imce-browse:after,
+.node-type-story .form-type-managed-file a.filefield-sources-imce-browse:after,
+.node-type-magazine .form-type-managed-file a.filefield-sources-imce-browse:after,
+.node-type-breaking-news .form-type-managed-file a.filefield-sources-imce-browse:after,
+.page-node-add-breaking-news .form-type-managed-file a.filefield-sources-imce-browse:after,
+.page-node-add-story .form-type-managed-file a.filefield-sources-imce-browse:after,
+.page-node-add-blog .form-type-managed-file a.filefield-sources-imce-browse:after,
+.page-node-add-podcast .form-type-managed-file a.filefield-sources-imce-browse:after,
+.page-node-add-recipe .form-type-managed-file a.filefield-sources-imce-browse:after,
+.node-type-print-team-integration .form-type-managed-file a.filefield-sources-imce-browse:after,
+.page-node-add-poll .form-type-managed-file a.filefield-sources-imce-browse:after {
   background-color: #fff;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
@@ -5942,6 +5985,9 @@ div.node #comments h2 {
   background-color: #fff;
 }
 
+.node-type-print-team-integration .messages--error {
+  margin-bottom: 50px;
+}
 .node-type-print-team-integration .view-popup {
   max-height: none;
   max-width: none;
