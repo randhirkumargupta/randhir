@@ -6375,13 +6375,13 @@ div.node{
     #edit-submit{
       @extend .btn;
       @extend .btn-save;
-      a{
-        @extend .btn-cancel;
-        @extend .dib;
-        @extend .vtop;
-        padding: 6px 12px;
-        border-radius: 4px;
-      }
+    }
+    a{
+      @extend .btn-cancel;
+      @extend .dib;
+      @extend .vtop;
+      padding: 6px 12px;
+      border-radius: 4px;
     }
   }
 }
