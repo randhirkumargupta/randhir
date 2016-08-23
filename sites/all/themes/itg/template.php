@@ -78,3 +78,29 @@ function itg_preprocess_page(&$variables) {
     }
   }
 }
+
+/**
+ * {@inheritdoc}
+ */
+function itg_breadcrumb($variables) {
+  $breadcrumb = $variables['breadcrumb'];
+  $crumbs = '';
+  if (!empty($breadcrumb) && arg(0) == 'site-search') {
+    $crumbs = '<div id="breadcrumbs"><ul><li>You are here: </li>';
+    foreach ($breadcrumb as $value) {
+      $crumbs .= '<li>' . $value . '</li>';
+    }
+
+    if (arg(0) == 'site-search') {
+      if (!empty($_GET['keyword'])) {
+        $keyword = '<li>' . $_GET['keyword'] . '</li>';
+      }
+
+      $crumbs .= '<li>Search</li>' . $keyword . '</li></ul></div>';
+    }
+    else {
+      $crumbs .= '<li>' . drupal_get_title() . '</li></ul></div>';
+    }
+  }
+  return $crumbs;
+}
