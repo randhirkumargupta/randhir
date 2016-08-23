@@ -2063,7 +2063,7 @@ footer{
                     @include calculate-width(1);
                     font-family: $itg-roboto;
                     .flex-caption {    
-                        padding: 15px 10px;    
+                        padding: 10px 10px;    
                         background: #000;
                         color: $white-color;
                         @include font(18px,24px,$itg-font-medium);    
@@ -2132,14 +2132,21 @@ footer{
 /*End Photo section slider Homepage*/
 
 /*Start Poll Landing page*/
-.poll-wrapper{
-    @include clearfix;
-    border: 1px solid #dddddd;
-    padding: 20px;
+.poll-wrapper{ 
+    @include sidebar-heading;
+    h3{
+      display: block;  
+      span{
+          padding: 0px 20px 10px 0px;
+      }
+    }
     .related-story.relative-active{
         width: 44% !important;
     }
     .poll-data{
+        @include clearfix;
+        border: 1px solid #dddddd;
+        padding: 20px;
         .poll-replace-id{
             width: 100%;
             display: inline-block;

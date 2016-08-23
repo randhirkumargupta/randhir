@@ -2782,7 +2782,7 @@ footer .footer-copyright {
   font-family: "Roboto", sans-serif;
 }
 .featured_photo_carousel .flexslider .slides li .detail .flex-caption {
-  padding: 15px 10px;
+  padding: 10px 10px;
   background: #000;
   color: #fff;
   font-size: 18px;
@@ -2855,22 +2855,53 @@ footer .footer-copyright {
 
 /*End Photo section slider Homepage*/
 /*Start Poll Landing page*/
-.poll-wrapper {
+.poll-wrapper h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  display: none;
+  position: relative;
+}
+.poll-wrapper h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+.poll-wrapper h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
+.poll-wrapper h3 {
+  display: block;
+}
+.poll-wrapper h3 span {
+  padding: 0px 20px 10px 0px;
+}
+.poll-wrapper .related-story.relative-active {
+  width: 44% !important;
+}
+.poll-wrapper .poll-data {
   zoom: 1;
   border: 1px solid #dddddd;
   padding: 20px;
 }
-.poll-wrapper:before, .poll-wrapper:after {
+.poll-wrapper .poll-data:before, .poll-wrapper .poll-data:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.poll-wrapper:after {
+.poll-wrapper .poll-data:after {
   clear: both;
-}
-.poll-wrapper .related-story.relative-active {
-  width: 44% !important;
 }
 .poll-wrapper .poll-data .poll-replace-id {
   width: 100%;
