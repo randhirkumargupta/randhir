@@ -108,13 +108,22 @@ function itg_layout_list_delete() {
   else {
     $items_per_page = 10;
   }
-  
-  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-  $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'status', 'created_date'));  
-  $itg_query->join('taxonomy_term_data', 'ttd', 'ttd.tid = layout_tpl.section_name');
-  $itg_query->fields('ttd', array('name'));
-  $itg_query->groupBy('layout_tpl.section_name');
-  $itg_query->extend('PagerDefault')->limit($items_per_page);
+  if (arg(1) == 'home') {
+    $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+    $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'status', 'created_date'));  
+    
+    $itg_query->condition('layout_tpl.section_name', 'home_page', '=');
+    
+    $itg_query->extend('PagerDefault')->limit($items_per_page);
+  }
+  else {
+    $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+    $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'status', 'created_date'));  
+    $itg_query->join('taxonomy_term_data', 'ttd', 'ttd.tid = layout_tpl.section_name');
+    $itg_query->fields('ttd', array('name'));
+    $itg_query->groupBy('layout_tpl.section_name');
+    $itg_query->extend('PagerDefault')->limit($items_per_page);
+  }
   
   /*if (!empty($_GET['section'])) {
     $itg_query->condition('layout_tpl.section_name', $_GET['section']);
