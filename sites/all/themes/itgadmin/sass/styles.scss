@@ -4025,10 +4025,14 @@ div.node{
 [id*="field-service-content-values"]{
   tbody tr{@extend .db;}
   tbody tr td{
+    position: relative;
     padding-bottom: 0;
     @extend .fleft;
     @extend .full;
     margin-bottom: 30px;
+    fieldset.date-combo{
+      margin: 0;
+    }
     .ajax-new-content{
       .field-name-field-service-content-date{
         .date-combo{
@@ -4036,10 +4040,27 @@ div.node{
         }
       }
     }
+    .itg-astro-image {
+      height: 96px;
+      overflow: hidden;
+      padding: 6px 30px;
+      position: absolute;
+      width: 144px;
+      img{
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        max-height: 84px;
+        max-width: 84px;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
   }
   .field-name-field-service-content-date{
     @extend .fleft;
-    width: 180px;
+    width: 248px;
     height: 36px;
     z-index: 9;
     @extend .pos-rel;
@@ -6158,6 +6179,18 @@ div.node{
     @extend .full;
     padding: 20px 0;
   }
+  .ftp-server{
+    .video_filters{
+      label strong{
+        margin-right: 5px;
+      }
+      .time-filter{
+        margin-left: 20px;
+        @extend .dib;
+        @extend .vtop;
+      }
+    }
+  }
   .attach-video, .browse-local{
     @extend .add-more;
     margin-top: 20px;
@@ -6280,7 +6313,9 @@ div.node{
     .ftp_video_radio{
       @extend .dib;
       @extend .vtop;
-      margin: 20px 20px 10px 0;
+      padding: 20px 20px 10px 0;
+      margin: 0;
+      width: 20%;
     }
   }
   > a{
