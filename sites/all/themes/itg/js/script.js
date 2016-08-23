@@ -290,9 +290,9 @@ jQuery(document).ready(function () {
 
     })
     // jQuery code to set offset of photo section page
-    var menuOffset = $('.itg-region').offset();
-    if ($('.video_landing_menu li').children().hasClass('set-offset')) {
-        $("body,html").animate({scrollTop: menuOffset.top - 100}, 300);
+    var menuOffset = jQuery('.itg-region').offset();
+    if (jQuery('.video_landing_menu li').children().hasClass('set-offset')) {
+        jQuery("body,html").animate({scrollTop: menuOffset.top - 100}, 300);
     }
 
 
