@@ -15,7 +15,7 @@
                 var COPYEDITOR = '5';
                 var SITE_ADMIN = '10';
                 $('#edit-field-user-section > .form-type-select > label').html('Section<span class="form-required"> *</span>');
-               
+                $('.form-item-current-pass .description').hide();
                 $('.form-item-roles').hide();
                 $('#edit-metatags').hide();
                 $('#edit-timezone').hide();

@@ -1951,7 +1951,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   }
   tbody{
     float: none;
-    margin-left: 50px;
+    margin-left: 250px;
     tr td{
       border: none;
       padding: 0;
@@ -5428,7 +5428,7 @@ div.node{
     margin-top: 10px;
   }
 }
-.original-image, .crop-image {
+.original-image, .crop-image, .cancel-image {
   cursor: pointer;
   padding: 6px 40px;
   position: relative;
@@ -5660,6 +5660,10 @@ div.node{
     }
     .form-submit[value="Add another item"]{
         margin-left: 30px;
+    }
+    thead{
+      display: block;
+      margin-top: 8px;
     }
     tbody{
         tr{
@@ -6375,13 +6379,22 @@ div.node{
     #edit-submit{
       @extend .btn;
       @extend .btn-save;
-      a{
-        @extend .btn-cancel;
-        @extend .dib;
-        @extend .vtop;
-        padding: 6px 12px;
-        border-radius: 4px;
-      }
+    }
+    a{
+      @extend .btn-cancel;
+      @extend .dib;
+      @extend .vtop;
+      padding: 6px 12px;
+      border-radius: 4px;
     }
   }
+}
+#widget-ajex-loader{
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
 }
